@@ -25,7 +25,7 @@
 
 对于发送后回调，每条回调请求发送失败仅重试一次，重试失败后即丢弃。若有特殊需求不能丢失回调消息的情况下，可开通回调异常缓存功能。
 
-服务开通后，你可以使用 [查询回调异常缓存](/document/server-side/callback_postsending.html#查询回调存储详情)和 [补发回调储存信息](/document/server-side/callback_postsending.html#补发回调存储信息) 接口。
+服务开通后，你可以使用 [查询异常缓存数据](/document/server-side/callback_postsending_exception_storage.html#查询异常缓存数据)和 [补发异常回调数据](/document/server-side/callback_postsending_exception_storage.html#补发异常回调数据) 接口。
 
 你可以根据当前的套餐包版本开通该服务：
 

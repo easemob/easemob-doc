@@ -1,49 +1,92 @@
 # 发送后回调
 
-## 概述
+## 功能说明
 
-发送后回调对所有聊天消息有效，包含通过 SDK 和 RESTful API 发送的单聊、群组和聊天室的消息。发送后回调通常用于 app 后台需要实现必要的数据同步的场景，例如：
-- 针对客户消息的内容进行自动回复；
-- 在你的应用服务器端及时保存聊天历史记录或者离线消息。
+发送后回调用于在消息发送成功后，将对应事件实时回调到你的业务服务器。该功能适用于通过 SDK 和 RESTful API 发送的聊天消息，包括单聊、群聊和聊天室消息，以及各类操作事件。
+
+发送后回调通常用于以下场景：
+
+- 将消息实时同步至业务系统，满足数据联动或审计需求；
+- 基于消息内容触发自动回复、机器人处理或业务流程编排；
+- 在应用服务器侧及时归档聊天记录、离线消息或业务事件数据。
 
 :::tip
-1. 如果你对聊天消息没有时效性需求，可以直接通过免费的[聊天记录文件拉取 REST API](message_historical.html#历史消息记录的内容) 获取聊天记录，无需使用发送后回调。
-2. 如果 app 开通了反垃圾/敏感词过滤，被识别的消息会在服务器被拦截并禁止发送，将不会回调。
+1. 如果你的业务对消息同步没有强实时要求，建议优先使用免费的 [聊天记录文件拉取 RESTful API](message_historical.html#历史消息记录的内容) 获取历史消息，无需开通发送后回调。
+2. 如果 App 已开通反垃圾或敏感词过滤，被识别并拦截的消息不会发送成功，因此不会触发发送后回调。
 :::
 
 ![](/images/server-side/im-callback1.png)
 
-## 实现步骤
+## 适用范围
 
-1. 开通回调服务：在[环信控制台](https://console.easemob.com/user/login)[开通回调服务](/product/console/basic_webhook.html)。
-2. 配置发送后回调规则：详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送消息或进行群组、聊天室或联系人相关操作后，环信服务器向你的应用服务器发送回调请求。
+发送后回调适用于单聊、群聊和聊天室中的消息回调，支持通过客户端 SDK 或 RESTful API 发送的消息。除消息回调外，该功能还支持部分服务端和客户端操作事件的回调，例如用户登录与登出、消息相关事件，以及群组和聊天室相关操作事件。实际支持的事件范围以 [控制台回调规则配置项](/product/console/basic_webhook.html#配置消息回调规则) 为准。
 
-## 发送后回调规则
+## 开通与配置
 
-要使用发送后回调，你需要在[环信控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
+使用发送后回调前，请先完成以下配置：
 
-对于同一个 app 可以针对聊天消息、离线消息和通过 REST API 发送的消息配置不同的规则。如果 app 同时需要聊天消息和离线消息两种消息，建议区分回调地址。不过，规则也可以将这两种消息同时回调至一个指定服务器地址，在接收到消息后，可以对 `eventType` 判断，区分消息类型。
+1. 在 [环信控制台](https://console.easemob.com/user/login) [开通回调服务](/product/console/basic_webhook.html)。
+2. 根据业务需求配置回调规则，例如，提供可访问的 HTTP 或 HTTPS 回调地址，用于接收环信服务器发起的回调请求。详见 [规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 
-## 发送后回调延时
+完成上述配置后，当消息发送完成或相关事件发生时，环信服务器会按照已配置规则向你的业务服务器发起回调。
 
-发送后回调接收延时指消息服务器接收到客户端聊天消息、再将消息成功回调至客户指定服务器地址的时间间隔。消息接收延时保障是 99.95% 的消息在 30s 内。
+## 回调规则
 
-## 发送后回调重试
+要使用发送后回调，你需要先在 [环信控制台](https://console.easemob.com/user/login) 中完成回调规则配置，详见 [规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。
 
-发送后回调重试，当环信服务器执行发出回调后，响应状态码非 200，则认为回调失败，然后立即重试。若再次失败，再记录一次失败。针对一条回调仅重试一次，重试失败后即丢弃。若开通了[补发回调存储信息功能](#补发回调存储信息)，则将消息放入异常存储中。
+同一个 App 可分别为聊天消息和离线消息配置不同的回调规则。若你的业务同时需要接收这两类回调，建议为不同类型配置独立的回调地址，便于服务端解耦、日志追踪和异常排查；如果共用同一个回调地址，也可以通过请求体中的 `eventType` 字段区分具体回调类型。
 
-若 30 秒内累计 90 次失败，会封禁该 app 的回调规则。封禁规则为，24 小时内连续封禁计数最大为 5（若封禁次数超过 5 次，仍计为 5），首次封禁默认 5 分钟，后续封禁时间为封禁次数 * 5 分钟，即第一次封禁 5 分钟，第二次封禁 10 分钟，第三次封禁 15 分钟，第四次封禁 20 分钟，第五次封禁 25 分钟，后续封禁时间与第 5 次保持一致为 25 分钟。重试失败以及封禁期间的回调不会自动补录，可以下载历史消息记录自行补充。
+## 回调时延
+
+发送后回调时延指环信消息服务器接收到消息后，到该消息成功回调至你指定业务服务器之间的时间间隔。
+
+服务保障目标为 99.95% 的回调请求在 30 秒内送达。
+
+## 重试与封禁机制
+
+### 重试机制
+
+当环信服务器向你的回调地址发起请求后，如果收到的 HTTP 响应状态码不是 `200`，则判定本次回调失败，并立即触发一次重试。
+
+默认重试策略如下：
+
+- 单条回调消息仅重试 1 次；
+- 首次回调失败后立即重试；
+- 若重试仍失败，则该条回调不再继续自动投递。
+
+如果你已开通 [回调异常存储](callback_postsending_exception_storage.html)，则重试失败的回调消息会进入异常存储，便于后续查询和补发。
+
+### 封禁机制
+
+若 30 秒内累计失败达到 90 次，系统会临时封禁该 App 的回调规则。
+
+封禁规则如下：
+
+- 24 小时内连续封禁次数最多按 5 次计数：若封禁次数超过 5 次，仍计为 5；
+- 第 1 次封禁时长为 5 分钟；
+- 第 2 次至第 5 次封禁时长按“封禁次数 × 5 分钟”递增；
+- 超过第 5 次后，封禁时长固定为 25 分钟。
+
+对应封禁时长如下：
+
+| 封禁次数 | 封禁时长 |
+| :--- | :--- |
+| 第 1 次 | 5 分钟 |
+| 第 2 次 | 10 分钟 |
+| 第 3 次 | 15 分钟 |
+| 第 4 次 | 20 分钟 |
+| 第 5 次及以后 | 25 分钟 |
 
 :::tip
-若有特殊需求不能丢失回调消息的情况下，请联系环信商务经理开通回调异常缓存功能，并使用[查询回调异常缓存](#查询回调存储详情)和[补发回调储存信息](#补发回调存储信息) 接口。
+1. **重试失败后的回调消息** 以及 **回调规则被封禁期间产生的回调消息** 均不会被系统自动补录。你可以通过历史消息记录功能自行恢复。
+2. 如果业务对“回调消息不丢失”有严格要求，请开通 [回调异常存储](callback_postsending_exception_storage.html) 服务，并结合 [查询异常存储数据](callback_postsending_exception_storage.html#查询异常缓存数据) 和 [补发异常回调数据](callback_postsending_exception_storage.html#补发异常回调数据) 接口进行补偿处理。
 :::
 
-## 回调示例
+## 回调请求
 
-消息发送或相关操作发生后，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+消息发送或相关事件发生后，环信服务器会向你的业务服务器发起 `HTTP/HTTPS POST` 请求。请求体为 `UTF-8` 编码的 JSON 字符串。
 
-回调时，环信服务器会对发送的正文进行 MD5 签名，使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
+为便于服务端校验请求合法性，环信服务器会对回调请求进行签名。当前签名算法使用 MD5，对应实现为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
 ### 请求示例
 
@@ -58,191 +101,35 @@
   "to": "user2",
   "msg_id": "8924312242322",
   "payload": {
-    // 具体的消息内容。
+    // 具体的消息内容
   },
   "securityVersion": "1.0.0",
   "security": "2ca02c394bef9e7abc83958bcc3156d3"
 }
 ```
 
-| 参数              | 类型             |
-| :---------------- | :------------------------------ |
-| `callId`          | callId 为 `{appkey}\_{uuid}` 其中 UUID 为随机生成，作为每条回调的唯一标识。 |
-| `eventType`       | - `chat` 聊天消息；<br/> - `chat_offline` 离线消息。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。  |
-| `chat_type`       | - `chat` 单聊回调；<br/> - `groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
-| `group_id`        | 回调消息所在的群组，群聊时才有此参数，即 `chat_type` 为 `groupchat`。       |
-| `from`            | 消息的发送方。         |
-| `to`              | 消息的接收方。    |
-| `msg_id`          | 消息的 ID。         |
-| `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
-| `securityVersion` | 安全校验版本，目前为 1.0.0。请忽略此参数。      | 
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。关于 Secret，详见[规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。   | 
+### 请求参数说明
 
-### 回调响应
+| 参数 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `callId` | String | 回调唯一标识，格式为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成的唯一值。 |
+| `eventType` | String | 回调事件类型：<br/> - `chat` 聊天消息；<br/> - `chat_offline` 离线消息。  |
+| `timestamp` | Long | 环信 IM 服务器接收到该消息时的 Unix 时间戳，单位为毫秒。 |
+| `chat_type` | String | 会话类型：<br/> - `chat` 单聊；<br/> - `groupchat` 群聊，包含群组和聊天室的消息回调，默认全选。|
+| `group_id` | String | 消息所属群组 ID，仅在 `chat_type` 为 `groupchat` 时返回。 |
+| `from` | String | 消息发送方。 |
+| `to` | String | 消息接收方。 |
+| `msg_id` | String | 消息 ID。 |
+| `payload` | Object | 消息内容，与通过 RESTful API 发送时的消息体结构一致，详见 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
+| `securityVersion` | String | 安全校验版本，当前固定为 `1.0.0`。该字段当前可忽略。 |
+| `security` | String | 请求签名，计算方式为 `MD5(callId + Secret + timestamp)`。其中 `Secret` 的配置方式详见 [规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。 |
 
-环信 IM 服务器不会验证响应的内容，只要应用服务器返回的 HTTP 状态码为 200，即视为消息回调成功。
+## 回调响应
 
-应用服务器收到回调消息后，向环信服务器发送的响应内容不能超过 1,000 个字符长度。如果连续发送超长的响应内容（30 秒内累计 90 次），会导致[回调规则封禁](#发送后回调重试)。
+环信 IM 服务器不会校验响应体内容，只要你的业务服务器返回的 HTTP 状态码为 `200`，即视为本次回调处理成功。
 
-## 查询回调存储详情
+你的业务服务器在处理回调请求时，需要满足以下要求：
 
-查询 App Key 下由于异常（例如，连接超时、响应超时、回调规则封禁等）回调失败时存储的消息和事件类型集合，按每十分钟一个 date key 存储，然后用户可以根据消息集合按需拉取。
+- 响应体内容长度不能超过 1,000 个字符；
+- 若持续返回超长响应内容，并在 30 秒内累计达到 90 次，同样可能触发 [回调规则封禁](#封禁机制)。
 
-### 功能限制
-
-- 异常存储过期时间默认 3 天，若有存储需及时补发。
-- 补发重试次数建议控制在 10 次以内。
-
-### 请求 URL
-
-```http
-GET https://{host}/{org_name}/{app_name}/callbacks/storage/info    
-```
-
-关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
-
-### 请求示例
-
-```shell
-curl -X GET 'https://XXXX/XXXX/XXXX/callbacks/storage/info' \
--H 'Authorization: Bearer <YourAppToken>'
-```
-
-### 请求 header 参数
-
-关于 `Accept` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
-
-### 响应示例
-
-```json
-{
-  "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
-  "timestamp": 1631193031254,
-  "organization": "XXXX",
-  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
-  "action": "post",
-  "data": [
-    {
-      "date": "202109091440",
-      "size": 15,
-      "retry": 0
-    },
-    {
-      "date": "202109091450",
-      "size": 103,
-      "retry": 1
-    }
-  ],
-  "duration": 153,
-  "applicationName": "XXXX"
-}
-```
-
-### 响应 body 字段
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中的 `data` 字段如下所示：
-
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :------------------ |
-| `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
-| - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
-| - `size`            | Int    | 该 date key 内的消息数量。                                                               |
-| - `retry`           | Int    | 该 date key 内的数据已经重试补发的次数。未重试时值为 `0`。 |
-
-响应体中的其他参数说明如下表所示：
-
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :------------------ |
-| `path`            | string | 请求路径。              |
-| `uri`             | string | 请求路径的 URI。                                                               |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization`    | string | 你在环信控制台注册的组织唯一标识。                                       |
-| `application`     | string | 你在环信控制台注册的 App 唯一标识。                                      |
-| `action`          | string | 请求方法。   |
-| `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
-| `applicationName` | string | 你在环信控制台注册的 App 名称。                                          |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
-
-## 补发回调存储信息
-
-调用接口根据存储集合进行回调补发。
-
-### 请求 URL
-
-```http
-POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry  
-```
-
-关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
-
-### 请求示例
-
-```shell
-curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
--H 'Authorization: Bearer <YourAppToken>' \
--H 'Content-Type: application/json' \
--d '{
-    "date": "202108272230",
-    "retry": 0,
-    "targetUrl": "https://localhost:8000/test"
-}'
-```
-
-### 请求 header 参数
-
-关于 `Content-Type` 和 `Authorization` 字段的说明，详见 [请求 header 参数说明](overview.html#请求-header)。
-
-### 请求 body 参数
-
-| 参数        | 类型   | 是否必需 | 描述                                                                   |
-| :---------- | :----- | :------- | :--------------------------------------------------------------------- |
-| `date`      | String | 是       | 可以补发的一个十分钟 date key，key 为十分钟的起点。                    |
-| `retry`     | Int    | 否       | 开发已重试的次数。考虑到补发也可能失败，服务器会继续存储。最开始是 0。 |
-| `targetUrl` | String | 否       | 补发消息的回调地址，如果为空，则使用原回调规则的回调地址。             |
-
-### 响应示例
-
-```json
-{
-  "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
-  "timestamp": 1631194031721,
-  "organization": "XXXX",
-  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
-  "action": "post",
-  "data": "success",
-  "duration": 225,
-  "applicationName": "XXXX"
-}
-```
-
-### 响应 body 字段
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应 body 包含如下字段：
-
-| 参数           | 类型   | 描述                                                                           |
-| :------------- | :----- | :----------------------------------------------------------------------------- |
-| `path`         | String | 请求路径。                                                                     |
-| `uri`          | String | 请求路径的 URI。                                                               |
-| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`  | String | 你在环信控制台注册的 app 唯一标识。                                      |
-| `action`       | String | 请求方法。                                                                     |
-| `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                                   |
-| `duration`     | long   | 请求耗时，单位为毫秒。                                                         |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](#响应状态码)了解可能的原因。
-
-### 响应状态码
-
-| 状态码 | 描述                               |
-| :----- | :--------------------------------- |
-| 200    | 请求成功。                         |
-| 400    | 请求参数错误，请根据返回提示检查。 |
-| 401    | 用户权限错误。                     |
-| 403    | 服务未开通或权限不足。             |
-| 429    | 单位时间内请求过多。               |
-| 500    | 服务器内部错误。                   |
