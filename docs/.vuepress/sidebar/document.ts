@@ -846,6 +846,7 @@ const documentSidebar = [
       { text: '回调概述', link: 'callback_overview.html' },
       { text: '发送前回调', link: 'callback_presending.html' },
       { text: '发送后回调', link: 'callback_postsending.html' },
+      { text: '回调异常缓存', link: 'callback_postsending_exception_storage.html' },
       { text: '发送后回调事件',
         collapsible: true,
         children: [
