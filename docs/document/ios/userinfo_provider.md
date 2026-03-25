@@ -112,8 +112,6 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 
 ## 从本地缓存读取用户信息
 
-// TODO：描述是 getUserInfoByIds，代码示例是 getUserInfoWith(byIds:) ，可以吗？
-
 如需直接从本地缓存读取用户信息，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
 
 ```swift

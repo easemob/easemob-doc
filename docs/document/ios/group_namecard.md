@@ -13,7 +13,7 @@
 群成员名片管理功能主要由由 `EMGroupManager` 和 `EMGroupManagerDelegate` 提供。SDK 通过“主动设置或拉取、本地缓存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
 
 1. 当前登录用户可通过 `EMGroupManager#updateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
-2. 当群成员名片发生变更并同步到本地缓存后，SDK 会通过 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件通知业务层。// TODO：`EMGroupManagerDelegate#onUserGroupNamecardChanged` 称为事件？之前咱们都叫事件。
+2. 当群成员名片发生变更并同步到本地缓存后，SDK 会通过 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件通知业务层。
 3. SDK 支持通过 `EMGroupManager#fetchGroupMemberInfoListFromServer` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地缓存。
 4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地缓存读取指定成员在指定群组中的群成员名片。 
 5. 若同时开启 `EMOptions#enableUserInfo`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地缓存时，会自动从服务端拉取最新群成员名片、更新本地缓存，并触发事件通知业务层。本地缓存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
