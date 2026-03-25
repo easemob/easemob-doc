@@ -2,38 +2,38 @@
 
 ## 功能说明
 
-自 V4.20.0 起，环信即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与缓存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+自 V4.20.0 起，环信即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片等信息的场景。
 
 ## 技术原理
 
-用户信息自动管理功能由 `EMOptions#enableUserInfo` 控制。开启后，SDK 按以下流程处理用户信息同步与缓存更新：
+用户信息自动管理功能由 `EMOptions#enableUserInfo` 控制。开启后，SDK 按以下流程处理用户信息同步与内存更新：
 
-1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地缓存。
+1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地内存。
 2. 当用户更新自身用户属性或群成员名片后，后续发送的消息会携带对应信息的更新时间。
 3. 接收方收到消息后，SDK 会解析消息中的发送方信息及更新时间。
-4. SDK 会将消息中的更新时间与本地缓存中的时间戳进行比较。
-5. 如果消息中的更新时间晚于本地缓存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地缓存获取群成员名片)。
-6. 拉取成功后，SDK 会自动更新本地缓存。
-7. 本地缓存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
+4. SDK 会将消息中的更新时间与本地内存中的时间戳进行比较。
+5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
+6. 拉取成功后，SDK 会自动更新本地内存。
+7. 本地内存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
 
-**该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地缓存更新和变更通知。**
+**该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地内存更新和变更通知。**
 
-缓存更新流程如下：
+内存更新流程如下：
 
 ```mermaid
 flowchart TD
     A["开启 EMOptions#enableUserInfo"] --> B["登录成功后自动获取当前登录用户信息"]
-    B --> C["写入本地缓存"]
+    B --> C["写入本地内存"]
     C --> D["发送消息时附带发送方信息和更新时间"]
     D --> E["接收方收到消息"]
     E --> F["SDK 解析消息中的 senderInfo 和更新时间"]
-    F --> G["与本地缓存时间戳比较"]
+    F --> G["与本地内存时间戳比较"]
     G --> H{"是否存在更新"}
-    H -- "否" --> I["继续使用本地缓存"]
+    H -- "否" --> I["继续使用本地内存"]
     H -- "是" --> J["自动从服务端拉取最新用户信息或群成员名片"]
-    J --> K["更新本地缓存"]
+    J --> K["更新本地内存"]
     K --> L["触发事件通知业务层"]
     L --> M["业务层刷新 UI"]
 ```
@@ -62,7 +62,7 @@ EMClient.shared().initializeSDK(with: options)
 
 ## 监听用户信息更新
 
-SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。当前登录用户的信息同步或更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件；其他用户的信息因消息触发更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。**建议在业务初始化阶段完成监听注册**，以便在登录后的初始同步以及消息触发的用户信息更新场景中及时接收事件并刷新界面。
+SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。当前登录用户的信息同步或更新并写入本地内存后，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件；其他用户的信息因消息触发更新并写入本地内存后，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。**建议在业务初始化阶段完成监听注册**，以便在登录后的初始同步以及消息触发的用户信息更新场景中及时接收事件并刷新界面。
 
 - 添加监听：
 
@@ -107,12 +107,12 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 ```
 
 :::tip
-`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地缓存更新后，通过相关事件通知业务层。
+`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地内存更新后，通过相关事件通知业务层。
 :::
 
-## 从本地缓存读取用户信息
+## 从本地内存读取用户信息
 
-如需直接从本地缓存读取用户信息，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
+如需直接从本地内存读取用户信息，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
 
 ```swift
 let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
@@ -124,16 +124,16 @@ if let userInfoMap = result {
 ```
 
 :::tip
-该接口仅返回本地已缓存的数据。如需主动从服务端获取最新用户信息，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#获取用户的所有属性)。
+该接口仅返回本地已内存的数据。如需主动从服务端获取最新用户信息，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#获取用户的所有属性)。
 :::
 
 ## 注意事项
 
 - `EMOptions#enableUserInfo` 必须在 SDK 初始化前设置。
-- 建议优先注册 `EMUserInfoManagerDelegate`，以便在本地缓存更新后及时刷新业务界面。
+- 建议优先注册 `EMUserInfoManagerDelegate`，以便在本地内存更新后及时刷新业务界面。
 - `EMChatMessage#senderInfo` 表示当前本地可用的发送方信息，不保证一定是刚收到消息时的最终最新值。
-- 当消息中的更新时间晚于本地缓存时，SDK 会自动从服务端拉取最新数据并更新本地缓存。
-- `EMUserInfoManager#getUserInfoByIds` 仅查询本地缓存，不会主动从服务端拉取最新数据。
+- 当消息中的更新时间晚于本地内存时，SDK 会自动从服务端拉取最新数据并更新本地内存。
+- `EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会主动从服务端拉取最新数据。
 
 ## 常见问题
 
@@ -143,11 +143,11 @@ if let userInfoMap = result {
 
 ### 开启用户信息自动管理后，SDK 会自动执行哪些操作？
 
-开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地缓存；在检测到数据更新时自动从服务端拉取最新信息并更新本地缓存，同时通过事件通知业务层。
+开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地内存；在检测到数据更新时自动从服务端拉取最新信息并更新本地内存，同时通过事件通知业务层。
 
 ### EMChatMessage#senderInfo 一定是最新数据吗？
 
-不一定。`EMChatMessage#senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地缓存，随后通过相关事件通知业务层刷新界面。
+不一定。`EMChatMessage#senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地内存，随后通过相关事件通知业务层刷新界面。
 
 ### 为何建议尽早注册监听？
 
@@ -155,11 +155,11 @@ if let userInfoMap = result {
 
 ### 本地读取和服务端获取有何区别？
 
-`EMUserInfoManager#getUserInfoByIds` 仅查询本地缓存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户信息，应调用对应的服务端接口主动获取。
+`EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户信息，应调用对应的服务端接口主动获取。
 
-### 用户信息自动管理开启后需自己维护缓存吗？
+### 用户信息自动管理开启后需自己维护内存吗？
 
-通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地缓存更新和事件通知。业务层通常只需从本地缓存读取数据，并在相关事件中刷新界面。
+通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地内存更新和事件通知。业务层通常只需从本地内存读取数据，并在相关事件中刷新界面。
 
 ## 相关功能
 
