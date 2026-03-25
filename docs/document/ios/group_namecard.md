@@ -10,19 +10,15 @@
 
 ## 技术原理
 
-// TODO：第一句还需要写“群成员名片管理功能主要由 `EMGroupManager` 和 `EMGroupManagerDelegate` 提供”吗？
-
-群成员名片管理功能主要由 `EMGroupManager` 提供。SDK 通过“主动设置或拉取、本地缓存存储、回调通知、消息触发自动同步”的机制管理群成员名片，具体如下：
+群成员名片管理功能主要由由 `EMGroupManager` 和 `EMGroupManagerDelegate` 提供。SDK 通过“主动设置或拉取、本地缓存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
 
 1. 当前登录用户可通过 `EMGroupManager#updateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
-2. 当群成员名片发生变更并同步到本地缓存后，SDK 会通过 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 回调通知业务层。// TODO：`EMGroupManagerDelegate#onUserGroupNamecardChanged` 称为事件？之前咱们都叫事件。
+2. 当群成员名片发生变更并同步到本地缓存后，SDK 会通过 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件通知业务层。// TODO：`EMGroupManagerDelegate#onUserGroupNamecardChanged` 称为事件？之前咱们都叫事件。
 3. SDK 支持通过 `EMGroupManager#fetchGroupMemberInfoListFromServer` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地缓存。
 4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地缓存读取指定成员在指定群组中的群成员名片。 
-5. 若同时开启 `EMOptions#enableUserInfo`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地缓存时，会自动从服务端拉取最新群成员名片、更新本地缓存，并触发回调通知业务层。本地缓存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
+5. 若同时开启 `EMOptions#enableUserInfo`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地缓存时，会自动从服务端拉取最新群成员名片、更新本地缓存，并触发事件通知业务层。本地缓存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
 
 缓存更新流程如下图所示：
-
-// TODO：需要添加 “监听群成员名片更新” 作为第一步吗？
 
 ```mermaid
 flowchart TD
@@ -35,7 +31,7 @@ flowchart TD
     G -- "否" --> H["继续使用本地缓存"]
     G -- "是" --> I["自动从服务端拉取最新群成员信息"]
     I --> J["写入本地缓存"]
-    J --> K["触发 onUserGroupNamecardChanged 回调"]
+    J --> K["触发 onUserGroupNamecardChanged 事件"]
     K --> L["业务层刷新 UI"]
 
     M["业务层调用 fetchGroupMemberInfoListFromServer"] --> N["从服务端获取群成员信息"]
@@ -55,10 +51,10 @@ flowchart TD
 
 SDK 提供 `EMGroupManagerDelegate`，用于监听群成员名片更新事件。建议在业务初始化阶段完成监听注册，以便在群成员名片更新后及时刷新界面。
 
-当群成员名片发生变更并同步到本地缓存后，SDK 会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 回调。该回调适用于以下场景：
+当群成员名片发生变更并同步到本地缓存后，SDK 会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。该事件适用于以下场景：
 
-- 当前登录用户更新群成员名片后，其他 **在线成员** 收到变更通知。
-- 调用服务端接口获取到最新群成员信息并更新本地缓存后。// TODO：这个是触发回调的场景吗？
+- 当前登录用户更新群成员名片后，群内其他 **在线成员** 收到变更通知。
+- 调用服务端接口获取到最新群成员信息并更新本地缓存后。
 - 开启 `EMOptions#enableUserInfo` 后，接收方因接收消息触发自动同步并更新本地缓存后。
 
 - 添加监听：
@@ -67,7 +63,7 @@ SDK 提供 `EMGroupManagerDelegate`，用于监听群成员名片更新事件。
 EMClient.shared().groupManager?.add(self, delegateQueue: nil)
 ```
 
-- 实现回调：
+- 实现群成员名片更新事件：
 
 ```swift
 extension YourViewController: EMGroupManagerDelegate {
@@ -79,7 +75,7 @@ extension YourViewController: EMGroupManagerDelegate {
 
 ## 设置群成员名片
 
-调用 `EMGroupManager#updateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发  `EMGroupManagerDelegate#onUserGroupNamecardChanged` 回调。
+调用 `EMGroupManager#updateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发  `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
 
 ```swift
 EMClient.shared().groupManager?.updateGroupNamecard("groupId", namecard: "new_namecard") { error in
@@ -141,7 +137,7 @@ EMClient.shared().initializeSDK(with: options)
 1. 当前登录用户更新群成员名片后，后续发送的消息会自动附带群成员名片更新时间。
 2. 接收方收到消息后，SDK 会将消息中的群成员名片更新时间与本地缓存进行比较。
 3. 如果消息中的更新时间晚于本地缓存，SDK 会自动从服务端拉取最新群成员名片。
-4. 获取成功后，SDK 会更新本地缓存，并触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 回调。
+4. 获取成功后，SDK 会更新本地缓存，并触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
 
 此外，你还可以通过 `EMChatMessage#senderInfo` 获取消息发送方当前可用的群成员名片信息。详见 [用户信息自动管理](userinfo_provider.html#通过消息获取发送方信息)。
 
@@ -156,9 +152,9 @@ EMClient.shared().initializeSDK(with: options)
 
 ## 常见问题
 
-### 设置群成员名片后，未启其他成员未立即收到回调？
+### 设置群成员名片后，为何其他成员未立即收到事件？
 
-调用 `EMGroupManager#updateGroupNamecard` 后，当前登录用户在指定群组中的群成员名片会更新。其他 **在线成员** 在接收到对应的群成员名片变更通知后，才会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 回调。
+调用 `EMGroupManager#updateGroupNamecard` 后，当前登录用户在指定群组中的群成员名片会更新。其他 **在线成员** 在接收到对应的群成员名片变更通知后，才会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
 
 ### 为何调用 getGroupNamecard 获取不到群成员名片？
 

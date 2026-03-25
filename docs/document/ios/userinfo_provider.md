@@ -16,7 +16,7 @@
 4. SDK 会将消息中的更新时间与本地缓存中的时间戳进行比较。
 5. 如果消息中的更新时间晚于本地缓存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地缓存获取群成员名片)。
 6. 拉取成功后，SDK 会自动更新本地缓存。
-7. 本地缓存更新完成后，SDK 会通过回调通知上层应用，业务层可据此刷新 UI。
+7. 本地缓存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
 
 **该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地缓存更新和变更通知。**
 
@@ -34,7 +34,7 @@ flowchart TD
     H -- "否" --> I["继续使用本地缓存"]
     H -- "是" --> J["自动从服务端拉取最新用户信息或群成员名片"]
     J --> K["更新本地缓存"]
-    K --> L["触发回调通知业务层"]
+    K --> L["触发事件通知业务层"]
     L --> M["业务层刷新 UI"]
 ```
 
@@ -62,9 +62,7 @@ EMClient.shared().initializeSDK(with: options)
 
 ## 监听用户信息更新
 
-SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。当前登录用户的信息同步或更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 回调；其他用户的信息因消息触发更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 回调。**建议在业务初始化阶段完成监听注册**，以便在登录后的初始同步以及消息触发的用户信息更新场景中及时接收回调并刷新界面。
-
-// TODO：EMUserInfoManagerDelegate#onUserInfoUpdate 称为回调事件或事件？按照咱们之间的说法是 “事件”。
+SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。当前登录用户的信息同步或更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件；其他用户的信息因消息触发更新并写入本地缓存后，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。**建议在业务初始化阶段完成监听注册**，以便在登录后的初始同步以及消息触发的用户信息更新场景中及时接收事件并刷新界面。
 
 - 添加监听：
 
@@ -72,16 +70,16 @@ SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。
 EMClient.shared().userInfoManager?.add(self, delegateQueue: nil)
 ```
 
-- 实现监听回调：
+- 实现监听用户信息更新事件：
 
 ```swift
 extension YourViewController: EMUserInfoManagerDelegate {
-    /// 当前登录用户信息更新回调
+    /// 当前登录用户信息更新事件
     func onSelfUserInfoUpdate(_ aUserInfo: EMUserInfo) {
         print("当前登录用户信息更新 - nickname:\(aUserInfo.nickname ?? ""), avatarUrl:\(aUserInfo.avatarUrl ?? "")")
     }
 
-    /// 其他用户信息更新回调
+    /// 其他用户信息更新事件
     func onUserInfoUpdate(_ aUserInfos: [String : EMUserInfo]) {
         for (userId, userInfo) in aUserInfos {
             print("用户信息更新 - userId:\(userId), nickname:\(userInfo.nickname ?? ""), avatarUrl:\(userInfo.avatarUrl ?? "")")
@@ -109,7 +107,7 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 ```
 
 :::tip
-`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地缓存更新后，通过相关回调通知业务层。
+`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地缓存更新后，通过相关事件通知业务层。
 :::
 
 ## 从本地缓存读取用户信息
@@ -119,7 +117,7 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 如需直接从本地缓存读取用户信息，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
 
 ```swift
-let result = EMClient.shared().userInfoManager?.getUserInfoWith(byIds: ["userId1", "userId2"])
+let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
 if let userInfoMap = result {
     for (userId, userInfo) in userInfoMap {
         print("用户信息 - userId:\(userId), nickname:\(userInfo.nickname ?? ""), avatarUrl:\(userInfo.avatarUrl ?? "")")
@@ -147,15 +145,15 @@ if let userInfoMap = result {
 
 ### 开启用户信息自动管理后，SDK 会自动执行哪些操作？
 
-开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地缓存；在检测到数据更新时自动从服务端拉取最新信息并更新本地缓存，同时通过回调通知业务层。
+开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地缓存；在检测到数据更新时自动从服务端拉取最新信息并更新本地缓存，同时通过事件通知业务层。
 
 ### EMChatMessage#senderInfo 一定是最新数据吗？
 
-不一定。`EMChatMessage#senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地缓存，随后通过相关回调通知业务层刷新界面。
+不一定。`EMChatMessage#senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地缓存，随后通过相关事件通知业务层刷新界面。
 
 ### 为何建议尽早注册监听？
 
-[开启用户信息自动管理功能]( #开启用户信息自动管理) 后，SDK 可能在登录后的初始同步以及消息触发的用户信息更新场景中通知业务层。建议在业务初始化阶段完成注册监听 `EMUserInfoManagerDelegate`，以便及时接收回调并刷新界面。
+[开启用户信息自动管理功能]( #开启用户信息自动管理) 后，SDK 可能在登录后的初始同步以及消息触发的用户信息更新场景中通知业务层。建议在业务初始化阶段完成注册监听 `EMUserInfoManagerDelegate`，以便及时接收事件并刷新界面。
 
 ### 本地读取和服务端获取有何区别？
 
@@ -163,7 +161,7 @@ if let userInfoMap = result {
 
 ### 用户信息自动管理开启后需自己维护缓存吗？
 
-通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地缓存更新和回调通知。业务层通常只需从本地缓存读取数据，并在相关回调中刷新界面。
+通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地缓存更新和事件通知。业务层通常只需从本地缓存读取数据，并在相关事件中刷新界面。
 
 ## 相关功能
 
