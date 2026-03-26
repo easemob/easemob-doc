@@ -97,7 +97,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 修复更新群组属性时影响群组头像问题。
 - 修复多线程场景下通过 `messagebody` 获取 `content` 时引起的崩溃问题。
 
-## v4.16.1 2025-11-12（开发版）
+## v4.16.1 2025-11-12
 
 #### 新增特性
 
@@ -181,7 +181,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - 修复删除本地会话时缓存中的消息未删除的问题。
 
-## v4.13.0 Dev 2025-3-12
+## v4.13.0 2025-3-12
 
 #### 优化
 
@@ -196,7 +196,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 [IM SDK] 调用 [EMChatManager#asyncFetchConversationsFromServer](conversation_list.html#从服务器分页获取会话列表) 方法从服务端拉取的会话最后一条消息不包含翻译及消息回复 Reaction 的问题。
 
-## v4.12.0 Dev 2025-1-10
+## v4.12.0 2025-1-10
 
 #### 新增特性
 
@@ -217,7 +217,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [IM SDK] 修复退出登录时因为一些在 SDK 回调里嵌套调用 SDK 相关 API 导致的异常。
 
-## v4.11.0 Dev 2024-12-3
+## v4.11.0 2024-12-3
 
 #### 新增特性
 
@@ -328,7 +328,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 [添加声网私有化环境接口，对外暴露 RTCEngine](easecallkit.html#私有化部署)。
 
-## v4.8.1 Dev 2024-07-18
+## v4.8.1 2024-07-18
 
 #### 优化
 
@@ -339,7 +339,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 小米推送更新至 `MiPush_SDK_Client_6_0_1-C_3rd.aar`。
 - 魅族推送更新至 `com.meizu.flyme.internet:push-internal:4.3.0`。
 
-## v4.8.0 Dev 2024-07-01
+## v4.8.0 2024-07-01
 
 #### 新增特性
 
@@ -363,7 +363,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - [IM SDK] 修复多线程场景下重复调用 `EMCustomMessageBody#setParams` 引起的崩溃问题。
 - [EaseIMKIt] 会话列表部分场景下不显示问题。
 
-## v4.7.1 Dev 2024-07-01
+## v4.7.1 2024-07-01
 
 #### 优化
 
