@@ -6,12 +6,14 @@
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片等信息的场景。
 
+**本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html) 和 [群成员名片](group_namecard.html)。**
+
 ## 技术原理
 
 用户信息自动管理功能由 `EMOptions#enableUserInfo` 控制。开启后，SDK 按以下流程处理用户信息同步与内存更新：
 
 1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地内存。
-2. 当用户更新自身 [用户属性](userprofile.html) 或 [群成员名片](group_namecard.html) 后，后续发送的消息会携带对应信息的更新时间。
+2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间。
 3. 接收方收到消息后，SDK 会解析消息中的发送方信息及更新时间。
 4. SDK 会将消息中的更新时间与本地内存中的时间戳进行比较。
 5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
@@ -62,7 +64,14 @@ EMClient.shared().initializeSDK(with: options)
 
 ## 监听用户信息更新
 
-SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件。当前登录用户的信息同步或更新并写入本地内存后，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件；其他用户的信息因消息触发更新并写入本地内存后，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。**建议在业务初始化阶段完成监听注册**，以便在登录后的初始同步以及消息触发的用户信息更新场景中及时接收事件并刷新界面。
+SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件，主要包括：
+- `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`：当前登录用户的信息同步或更新并写入本地内存后触发该事件。
+- `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户信息更新并写入本地内存后触发，包括以下场景：
+  - 收到其他用户的消息。
+  - 主动 [从服务端获取用户属性（昵称/头像变更时）](userprofile.html#获取用户的所有属性)。
+  - 主动 [从服务端获取群成员信息（群名片变更时）](group_namecard.html#从服务端获取群成员名片)。
+
+**建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
 
 - 添加监听：
 
@@ -90,7 +99,7 @@ extension YourViewController: EMUserInfoManagerDelegate {
 
 ## 通过消息获取发送方信息
 
-开启用户信息自动管理后，接收到的消息中会包含发送方相关信息。你可以通过 `EMChatMessage#senderInfo` 获取当前可用的发送方信息，例如昵称、头像、备注和群成员名片。
+开启用户信息自动管理后，接收到的消息中会包含发送方相关信息。你可以通过 `EMChatMessage#senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
 
 ```swift
 func messagesDidReceive(_ aMessages: [EMChatMessage]) {
@@ -169,6 +178,6 @@ if let userInfoMap = result {
 
 ### 用户属性与用户信息
 
-- 用户信息：指用于业务展示的用户相关信息总称，包含昵称、头像以及群成员名片等内容。
+- 用户信息：指用于业务展示的用户相关信息，包括用户的 [昵称、头像](userprofile.html)、[备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 - 用户属性：指用户可设置和管理的资料字段，例如，用户昵称、头像、邮箱、电话号码等。你可通过相关接口对这些字段进行设置、更新和查询。详见 [管理用户属性](userprofile.html)。例如，你可以通过 `EMUserInfoManager#updateOwnUserInfo` 设置当前登录用户的昵称、头像等资料。若用户信息自动管理功能开通（`EMOptions#enableUserInfo` 设置为 `true`），更新后的信息会在后续发送消息时自动参与同步。
 
