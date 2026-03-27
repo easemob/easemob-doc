@@ -4,7 +4,7 @@
 
 环信 MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供环信 IM 相关文档查询和源码检索能力，可用于以下场景：
 
-- 查询 SDK、UIKit、CallKit、ChatroomUIKit 文档。
+- 查询 SDK、单群聊 UIKit、CallKit、聊天室 UIKit 文档。
 - 检索 Demo 或示例工程源码。
 - 辅助集成、功能开发和问题排查。
 
@@ -14,9 +14,9 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的�
 
 ## 支持范围
 
-支持以下平台 SDK、UIKit、CallKit、ChatroomUIKit 的文档查询与源码检索能力：
+支持以下平台 SDK、单群聊 UIKit、CallKit、聊天室 UIKit 的文档查询与源码检索能力：
 
-| 平台         | SDK  | UIKit | CallKit | ChatroomUIKit | Demo 源码 |
+| 平台         | SDK  | 单群聊 UIKit | CallKit | 聊天室 UIKit | Demo 源码 |
 | :----------- | :--- | :---- | :------ | :------------ | :-------- |
 | iOS          | ✓    | ✓     | ✓       | ✓             | ✓         |
 | Android      | ✓    | ✓     | ✓       | ✓             | ✓         |
@@ -27,7 +27,7 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的�
 
 :::tip
 - CallKit 仅 iOS、Android、Web 平台支持。
-- ChatroomUIKit 仅 HarmonyOS 平台不支持，其他平台均支持。
+- 聊天室 UIKit 仅 HarmonyOS 平台不支持，其他平台均支持。
 - Demo 源码仅 HarmonyOS 平台不支持，其他平台均包含。
 :::
 
@@ -109,7 +109,7 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的�
 为了获得更准确的回答，建议在提问时尽量补充以下信息：
 
 - 平台类型，例如 iOS、Android、Web、Flutter、React Native。
-- 产品类型，例如 SDK、UIKit、CallKit、ChatroomUIKit。
+- 产品类型，例如 SDK、单群聊 UIKit、CallKit、聊天室 UIKit。
 - 目标场景，例如集成、登录、消息收发、自定义 UI、问题排查。
 - 当前遇到的问题现象或报错信息。
 
@@ -121,10 +121,10 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的�
      环信 IM iOS SDK 如何收发消息？<br/>
      环信 IM Web SDK 收不到透传消息，应该如何排查？<br/>
      环信 IM Flutter SDK 如何撤回消息？<br/>
-   - **UIKit 集成与自定义**<br/>
-     环信 IM iOS UIKit 如何集成？<br/>
-     环信 IM Android UIKit 如何自定义收发消息的文字大小与颜色？<br/>
-     环信 IM React Native UIKit 如何实现完整的自定义消息收发及布局样式？<br/>
+   - **单群聊 UIKit 集成与自定义**<br/>
+     环信 IM iOS 单群聊 UIKit 如何集成？<br/>
+     环信 IM Android 单群聊 UIKit 如何自定义收发消息的文字大小与颜色？<br/>
+     环信 IM React Native 单群聊 UIKit 如何实现完整的自定义消息收发及布局样式？<br/>
    - **CallKit 集成与自定义**<br/>
      环信 IM iOS CallKit 如何集成？<br/>
      环信 IM Android CallKit 如何修改通话背景？<br/>

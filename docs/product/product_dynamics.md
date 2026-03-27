@@ -2,7 +2,32 @@
 
 ## 2026-03
 
-### SDK 发版
+#### 环信 MCP Server
+
+环信 MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供环信 IM 相关文档查询和源码检索能力，可用于以下场景：
+
+- 查询 SDK、单群聊 UIKit、CallKit、聊天室 UIKit 文档。
+- 检索 Demo 或示例工程源码。
+- 辅助集成、功能开发和问题排查。
+
+环信 MCP Server 支持以下平台 SDK、单群聊 UIKit、CallKit、聊天室 UIKit 的文档查询与源码检索能力：
+
+| 平台         | SDK  | 单群聊 UIKit | CallKit | 聊天室 UIKit | Demo 源码 |
+| :----------- | :--- | :---- | :------ | :------------ | :-------- |
+| iOS          | ✓    | ✓     | ✓       | ✓             | ✓         |
+| Android      | ✓    | ✓     | ✓       | ✓             | ✓         |
+| Web          | ✓    | ✓     | ✓       | ✓             | ✓         |
+| HarmonyOS    | ✓    | ✓     | ✗       | ✗             | ✗         |
+| Flutter      | ✓    | ✓     | ✗       | ✓             | ✓         |
+| React Native | ✓    | ✓     | ✗       | ✓             | ✓         |
+
+环信 MCP Server 支持的工具、安装与配置说明，详见环信 MCP Server 使用指南。例如，以下为 Android 平台文档链接：
+- [SDK](/document/android/easemob_mcp_server.html)
+- [单群聊 UIKit](/uikit/chatuikit/android/easemob_mcp_server.html)
+- [CallKit](/callkit/android/easemob_mcp_server.html)
+- [聊天室 UIKit](/uikit/chatroomuikit/android/easemob_mcp_server.html)
+
+#### SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
