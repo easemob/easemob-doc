@@ -10,7 +10,7 @@
 
 MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的一项开放标准，旨在为 AI 应用与外部数据源及工具之间建立安全、统一的交互方式。通过 MCP，AI 助手可以动态访问知识库、调用 API、操作本地资源，从而拓展能力边界。
 
-更多信息请参考：[MCP 官方文档](https://modelcontextprotocol.io/)
+更多信息请参考：[MCP 官方文档](https://modelcontextprotocol.io/)。
 
 ## 支持范围
 
