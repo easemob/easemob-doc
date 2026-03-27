@@ -7,6 +7,7 @@ const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "AI 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },

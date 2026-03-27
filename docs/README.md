@@ -34,6 +34,18 @@ starter:
       - icon: /guide/callkit.svg
         link: /callkit/android/beginner_guide.html
         text: CallKit
+  - title: "AI 集成"
+    desc: "环信 MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供环信 IM 相关文档查询和源码检索能力。"
+    platform:
+      - icon: /guide/sdk.svg
+        link: /document/android/easemob_mcp_server.html
+        text: SDK
+      - icon: /guide/uikit.svg
+        link: /uikit/chatuikit/android/easemob_mcp_server.html
+        text: UIKit 
+      - icon: /guide/callkit.svg
+        link: /callkit/android/easemob_mcp_server.html
+        text: CallKit      
   - title: "SDK 快速开始"
     desc: "选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。"
     platform:

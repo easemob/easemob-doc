@@ -10,6 +10,7 @@ const callKitPlatformList = getSubDirectories(CALL_DOC_PATH);
 
 const callKitSidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "AI 集成", link: "easemob_mcp_server.html" },
   {
     /*
       text: 分组标题
