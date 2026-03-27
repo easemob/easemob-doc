@@ -2,6 +2,21 @@
 
 <Toc />
 
+## 4.19.0 2026-3-27
+
+#### 新增特性
+
+- 升级依赖的原生 SDK:
+  - iOS SDK 升级至 4.18.1。
+  - Android SDK 升级至 4.18.1。
+- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+  
+目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
+
+#### 修复
+
+修复 [loadConversationMessagesWithKeyword](message_retrieve.html#根据关键字获取会话中的消息) 与 [getAllMessageCount](message_retrieve.html#获取会话在一定时间内的消息数) 方法未暴露在 `EMChatManager` 中的问题。
+
 ## 4.18.1 2026-3-5
 
 修复入群事件 [onMemberJoinedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberJoinedFromGroup.html) 和退群事件 [onMemberExitedFromGroup](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMGroupEventHandler/onMemberExitedFromGroup.html) 触发了错误的回调的问题。
