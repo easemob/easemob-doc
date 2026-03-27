@@ -59,27 +59,27 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
+            link: '/uikit/chatroomuikit/android/easemob_mcp_server.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
+            link: '/uikit/chatroomuikit/ios/easemob_mcp_server.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
+            link: '/uikit/chatroomuikit/web/easemob_mcp_server.html'
           },
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
+            link: '/uikit/chatroomuikit/react-native/easemob_mcp_server.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
+            link: '/uikit/chatroomuikit/flutter/easemob_mcp_server.html'
           }
         ]
       }
