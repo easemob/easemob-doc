@@ -289,8 +289,8 @@ const chatUikitSidebar = [
   },
 ];
 const chatroomUikitSidebar = [
-  { text: "使用 MCP 集成", link: "easemob_mcp_server.html"},
   { text: "产品概述", link: "roomuikit_overview.html" },
+  { text: "使用 MCP 集成", link: "easemob_mcp_server.html"},
   {
     text: "特性",
     collapsible: true,
