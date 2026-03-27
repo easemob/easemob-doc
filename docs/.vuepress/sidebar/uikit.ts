@@ -79,8 +79,8 @@ const chatUikitSidebar = [
   { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
   // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
-  { text: "产品概述", link: "chatuikit_overview.html", only: ["web"]},
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", only: ["web"]},
+  { text: "产品概述", link: "chatuikit_overview.html", only: ["web"]},
   {
     text: "特性",
     collapsible: true,
@@ -141,8 +141,8 @@ const chatUikitSidebar = [
   { text: "主题", link: "chatuikit_theme.html", only: ["web"]},
   { text: "组件文档", link: "chatuikit_storybook.html", only: ["web"]},
   // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["web"] },
-  { text: "产品概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", only: ["android", "harmonyos", "react-native", "flutter"]},
+  { text: "产品概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   {
       text: "特性",
       collapsible: true,
@@ -289,8 +289,8 @@ const chatUikitSidebar = [
   },
 ];
 const chatroomUikitSidebar = [
-  { text: "产品概述", link: "roomuikit_overview.html" },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html"},
+  { text: "产品概述", link: "roomuikit_overview.html" },
   {
     text: "特性",
     collapsible: true,
