@@ -49,7 +49,7 @@ MCP（Model Context Protocol，模型上下文协议）是 Anthropic 推出的�
 
 安装前需满足如下条件：
 
-- 已安装 Node.js 和 npm；
+- 已安装 Node.js 和 npm。
 - AI 编程工具支持 MCP 配置。
 
 安装步骤如下：
