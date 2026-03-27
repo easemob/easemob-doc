@@ -190,7 +190,7 @@ EMConversation? conv =
     );
 ```
 
-### 获取指定会话中一定时间段内的消息
+### 获取一定时间内本地会话的消息
 
 你可以调用 `loadMessagesFromTime` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。
 
@@ -207,21 +207,6 @@ EMConversation? conv =
       // 每次获取的消息数量。取值范围为 [1,400]。
       count: 50,
     );
-```
-
-### 获取会话在一定时间内的消息数
-
-你可以调用 `loadMessagesFromTime` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
-
-```dart
-EMConversation? conversation =
-    await EMClient.getInstance.chatManager.getConversation(conversationId);
-if (conversation != null) {
-    List<EMMessage> messages = await conversation.loadMessagesFromTime(
-    startTime: startMs,
-    endTime: endMs,
-    );
-}
 ```
 
 ### 根据关键字获取会话中的消息
