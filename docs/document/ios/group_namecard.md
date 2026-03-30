@@ -15,7 +15,7 @@
 1. 当前登录用户可通过 `EMGroupManager#updateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
 2. 当群成员名片发生变更并同步到本地内存后，SDK 会通过 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件通知业务层。
 3. SDK 支持通过 `EMGroupManager#fetchGroupMemberInfoListFromServer` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地内存。
-4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。 
+4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。
 5. 若同时开启 `EMOptions#enableUserInfo`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。本地内存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
 
 内存更新流程如下图所示：
@@ -75,7 +75,7 @@ extension YourViewController: EMGroupManagerDelegate {
 
 ## 设置群成员名片
 
-调用 `EMGroupManager#updateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发  `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
+调用 `EMGroupManager#updateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
 
 ```swift
 EMClient.shared().groupManager?.updateGroupNamecard("groupId", namecard: "new_namecard") { error in
@@ -160,7 +160,7 @@ EMClient.shared().initializeSDK(with: options)
 
 `EMGroupManager#getGroupNamecard` 仅从本地内存读取数据，不会主动从服务端获取最新信息。如果本地尚未内存对应成员的群成员名片，返回结果可能为空。此时可先调用 `EMGroupManager#fetchGroupMemberInfoListFromServer` 从服务端获取群成员信息。
 
-### 调用 fetchGroupMemberInfoListFromServer 后，返回的数据是否会写入本地内存？
+### 从服务端获取的群成员信息是否写入内存？
 
 会。调用 `EMGroupManager#fetchGroupMemberInfoListFromServer` 从服务端获取群成员信息成功后，返回结果中的群成员名片等数据会写入本地内存，后续可通过 `EMGroupManager#getGroupNamecard` 直接读取。
 
