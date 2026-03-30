@@ -2,6 +2,32 @@
 
 <Toc />
 
+## v4.20.0 Dev 2026-3-30（开发版）
+
+#### 新增特性
+
+1. 新增 [用户信息自动管理功能](userinfo_provider.html)。
+
+   用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+   
+   开启 `EMOptions#setEnableUserInfo(true)` 后，SDK 支持自动同步、缓存和更新用户信息。主要功能如下：
+   - 用户登录成功后自动同步当前登录用户信息。
+   - 发送消息时自动附带发送方信息及群成员名片更新时间。
+   - 接收消息后根据更新时间自动更新本地内存。
+  
+   为了实现用户信息自动管理功能，新增如下接口：
+   - `EMMessage#getSenderInfo()`：获取消息发送方信息。
+   - `EMUserInfoManagerListener`：监听用户信息更新事件。
+   - `EMUserInfoManager#getUserInfoWithUserIds`：从本地内存查询用户信息。
+
+2. 新增 [群成员名片管理功能](group_namecard.html)。
+   
+   支持群成员名片的设置、本地查询、服务端获取（写入本地内存）、通过消息自动同步以及变更监听。新增如下接口或回调：
+   - 新增 `EMGroupManager#asyncUpdateGroupNamecard`，支持更新当前用户在指定群组中的群名片。
+   - 新增 `EMGroupManager#getGroupNamecard`，支持从本地内存获取群成员名片。
+   - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
+   - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
+
 ## v4.19.1 Dev 2026-2-27（开发版）
 
 #### 优化

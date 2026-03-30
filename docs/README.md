@@ -951,7 +951,16 @@ projects:
                 link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_member_add_single.html   
+                link: /document/server-side/group_member_add_single.html
+          - text: 群成员名片管理
+            desc: 支持设置和获取群成员名片。群成员名片用于区分该用户在不同群组中的身份展示，例如，展示部门、岗位、项目角色等群内身份信息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/group_namecard.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/group_namecard.html          
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -1194,7 +1203,16 @@ projects:
                 link: /document/windows/userprofile.html 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/user_attribute_set.html  
+                link: /document/server-side/user_attribute_set.html
+          - text: 用户信息自动管理
+            desc: 用户信息指用于业务展示的用户相关信息，包括 用户属性、好友备注 和 群成员名片。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/userinfo_provider.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/userinfo_provider.html    
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
