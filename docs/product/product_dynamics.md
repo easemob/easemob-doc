@@ -32,6 +32,7 @@
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.12.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/harmonyos/message_stream_receive.html)。<br/> - WebSocket 连接支持 IPv6 地址。  | 2026-3-18     | [HarmonyOS SDK 1.12.0 更新日志](/document/harmonyos/releasenote.html#v1-12-0-dev-2026-3-18-开发版)        |
+| Flutter SDK 4.19.0 发布   | [支持接收服务端发送的流式消息](/document/flutter/message_stream_receive.html)。 | 2026-3-27     | [Flutter SDK 4.19.0 更新日志](/document/flutter/releasenote.html#v4-19-0-2026-3-27)        |
 
 #### 服务端 API
 
