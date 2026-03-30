@@ -151,7 +151,7 @@ EMClient.getInstance().init(context, options);
 
 `EMGroupManager#getGroupNamecard` 仅从本地内存读取数据，不会主动从服务端获取最新信息。如果本地尚未内存对应成员的群成员名片，返回结果可能为空。此时可先调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端获取群成员信息。
 
-### 从服务端获取的群成员信息是否写入内存？
+### 从服务端获取的群成员信息是否写内存？
 
 会。调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端获取群成员信息成功后，返回结果中的群成员名片等数据会写入本地内存，后续可通过 `EMGroupManager#getGroupNamecard` 直接读取。
 
