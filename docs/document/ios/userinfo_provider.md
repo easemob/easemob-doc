@@ -6,7 +6,7 @@
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片等信息的场景。
 
-**本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html) 和 [群成员名片](group_namecard.html)。**
+**本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
 
 ## 技术原理
 
@@ -180,4 +180,8 @@ if let userInfoMap = result {
 
 - 用户信息：指用于业务展示的用户相关信息，包括用户的 [昵称、头像](userprofile.html)、[备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 - 用户属性：指用户可设置和管理的资料字段，例如，用户昵称、头像、邮箱、电话号码等。你可通过相关接口对这些字段进行设置、更新和查询。详见 [管理用户属性](userprofile.html)。例如，你可以通过 `EMUserInfoManager#updateOwnUserInfo` 设置当前登录用户的昵称、头像等资料。若用户信息自动管理功能开通（`EMOptions#enableUserInfo` 设置为 `true`），更新后的信息会在后续发送消息时自动参与同步。
+  
+### 通过消息同步的发送方信息
+
+开启用户信息自动管理后，接收到的消息中会包含发送方相关信息，包括昵称、头像、备注和群成员名片。
 
