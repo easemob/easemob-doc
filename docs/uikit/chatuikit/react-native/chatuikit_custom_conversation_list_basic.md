@@ -3,7 +3,7 @@
 本文介绍 `ConversationList` 组件的常用配置项，包括标题栏控制、搜索样式、事件监听等基础功能。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationList" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_conversation_list.png" title="会话列表页面 ConversationList" />
 </ImageGallery>
 
 ## 基本设置

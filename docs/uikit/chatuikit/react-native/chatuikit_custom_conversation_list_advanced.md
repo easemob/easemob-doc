@@ -3,7 +3,7 @@
 本文介绍如何通过 `ConversationList` 组件实现会话列表的高级设置，包括自定义排序、自定义菜单、自定义列表项样式、列表控制器以及状态监听等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationList" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_conversation_list.png" title="会话列表页面 ConversationList" />
 </ImageGallery>
 
 ## 概述

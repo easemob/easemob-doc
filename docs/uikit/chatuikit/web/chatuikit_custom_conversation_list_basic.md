@@ -3,7 +3,7 @@
 本文介绍如何通过 `ConversationList` 组件的属性实现会话列表的设置，包括会话列表背景、会话列表空页面和设置会话事件监听。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationList" />
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list.png" title="会话列表页面 ConversationList" />
 </ImageGallery>
 
 ## 基本设置
