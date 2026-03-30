@@ -441,13 +441,13 @@ do {
 // 设置群成员自定义属性。群内其他成员会收到该回调。
 - (void)onAttributesChangedOfGroupMember:(NSString *)groupId userId:(NSString *)userId attributes:(NSDictionary<NSString *,NSString *> *)attributes operatorId:(NSString *)operatorId {
     [self showAlertWithMessage:[NSString stringWithFormat:@"%@ changed %@ attributes %@ in %@",operatorId,userId,attributes,groupId]];
-}
+  }
 
 // 群成员名片变更。群组其他在线成员会收到该回调。
 - (void)onUserGroupNamecardChanged:(NSString *_Nonnull)groupId
                             userId:(NSString *_Nonnull)userId
                           namecard:(NSString *_Nullable)namecard
-{
+  {
 
-}
+  }
 ```
