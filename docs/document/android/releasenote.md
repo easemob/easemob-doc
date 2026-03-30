@@ -20,7 +20,7 @@
    - `EMUserInfoManagerListener`：监听用户信息更新事件。
    - `EMUserInfoManager#getUserInfoWithUserIds`：从本地内存查询用户信息。
 
-2. 新增 [群成员名片管理功能](group_namecard.html)：
+2. 新增 [群成员名片管理功能](group_namecard.html)。
    
    支持群成员名片的设置、本地查询、服务端获取（写入本地内存）、通过消息自动同步以及变更监听。新增如下接口或回调：
    - 新增 `EMGroupManager#asyncUpdateGroupNamecard`，支持更新当前用户在指定群组中的群名片。
