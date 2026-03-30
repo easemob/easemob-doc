@@ -91,7 +91,7 @@ SDKClient.Instance.UserInfoManager.FetchUserInfoByUserId(idList, type, startId, 
 ));
 ```
 
-## 更多功能
+## 相关功能
 
 ### 管理用户头像
 

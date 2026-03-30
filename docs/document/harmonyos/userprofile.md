@@ -118,7 +118,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
 });
 ```
 
-## 更多功能
+## 相关功能
 
 ### 用户头像管理
 
