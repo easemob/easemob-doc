@@ -3,7 +3,7 @@
 消息列表是聊天界面的核心组件，基于 `MessageListView` 实现。本文介绍如何通过 `MessagesViewController` 实现消息列表的高级设置。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageListView" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表和底部输入栏" />
 </ImageGallery>
 
 ## 概述

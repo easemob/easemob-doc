@@ -2,10 +2,10 @@
 
 <Toc />
 
-本文介绍会话列表的高级自定义功能，包括自定义会话列表项组件、ViewModel 扩展等。
+本文介绍会话列表的高级自定义功能，包括自定义会话条目组件、ViewModel 扩展等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyOS/conversation_list_detail.png" title="会话列表组件 ConversationListView" />
 </ImageGallery>
 
 ## 自定义会话最新消息内容

@@ -4,7 +4,7 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="完整会话列表页面 ConversationListPage" />
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list.png" title="会话列表组件 ConversationListView" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyOS/conversation_list_detail.png" title="会话列表组件 ConversationListView" />
 </ImageGallery>
 
 ## 组件选型

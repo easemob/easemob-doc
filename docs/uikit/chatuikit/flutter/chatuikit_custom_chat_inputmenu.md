@@ -6,9 +6,9 @@
 - 消息扩展菜单 `ChatUIKitMessageViewBottomMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 ChatUIKitInputBar" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatUIKitMessageViewBottomMenu" />
+  <ImageItem src="/images/uikit/chatuikit/flutter/message_input_frame.png" title="消息输入区" />
 </ImageGallery>
+
 
 ## 设置底部输入栏背景
 
