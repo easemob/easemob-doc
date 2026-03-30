@@ -20,24 +20,7 @@
 
 内存更新流程如下图所示：
 
-```mermaid
-flowchart TD
-    A["当前登录用户设置群成员名片"] --> B["服务端更新群成员名片"]
-    B --> C["发送消息时附带群成员名片更新时间"]
-    C --> D["接收方收到消息"]
-    D --> E["SDK 解析消息中的群成员名片更新时间"]
-    E --> F["与本地内存时间戳比较"]
-    F --> G{"是否存在更新"}
-    G -- "否" --> H["继续使用本地内存"]
-    G -- "是" --> I["自动从服务端拉取最新群成员信息"]
-    I --> J["写入本地内存"]
-    J --> K["触发 onUserGroupNamecardChanged 事件"]
-    K --> L["业务层刷新 UI"]
-
-    M["业务层调用 fetchGroupMemberInfoListFromServer"] --> N["从服务端获取群成员信息"]
-    N --> J
-
-```
+![img](/images/ios/memory_update_groupcard.png)
 
 ## 前提条件
 

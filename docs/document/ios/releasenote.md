@@ -7,6 +7,8 @@
 #### 新增特性
 
 1. 新增 [用户信息自动管理功能](userinfo_provider.html)。
+
+  用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
    
    开启 `EMOptions#enableUserInfo` 后，SDK 支持自动同步、缓存和更新用户信息与群成员名片信息。主要功能如下：
    - 用户登录成功后自动同步当前登录用户信息。
@@ -18,7 +20,7 @@
    - `EMUserInfoManagerDelegate`：监听用户信息更新事件。
    - `EMUserInfoManager#getUserInfoByIds`：从本地内存查询用户信息。
 
-2. 新增 [群成员名片管理功能](group_namecard.html)：
+1. 新增 [群成员名片管理功能](group_namecard.html)：
    
    支持群成员名片的设置、本地查询、服务端获取（写入本地内存）、通过消息自动同步以及变更监听。新增如下接口或回调：
    - 新增 `EMGroupManager#updateGroupNamecard`，支持更新当前用户在指定群组中的群名片。
