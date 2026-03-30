@@ -5,7 +5,8 @@
 如需通过 `MessagesViewController` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.md)。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/flutter/chat_detail.png" title="完整的聊天页面 MessagesView" />
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_chat.png" title="聊天页面 MessageView
+  " />
 </ImageGallery>
 
 ## 概述

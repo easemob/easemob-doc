@@ -2,6 +2,10 @@
 
 消息列表是聊天界面的核心组件，基于 `MessageListController` 和 `MessageListView` 实现。本文介绍如何对消息列表和消息条目进行基本设置。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/chat_page_no_titlebar.png" title="消息列表和底部输入栏" />
+</ImageGallery>
+
 ## 概述
 
 在 iOS UIKit 中，基本设置主要通过 `Appearance.chat` 全局配置对象完成，也可通过继承 `MessageListController` 并重写相关方法实现交互逻辑的自定义。
