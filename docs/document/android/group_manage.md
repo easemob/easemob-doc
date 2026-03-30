@@ -143,7 +143,7 @@ boolean isMsgBlocked = group.isMsgBlocked();
 
 ### 获取群成员列表
 
-- 自 4.14.0 版本开始，你可调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+- 自 4.14.0 版本开始，你可调用 `asyncFetchGroupMembersInfo` 方法获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。自 4.20.0 版本起，该方法新增支持获取 [群成员名片](group_namecard.html)。
 
 ```java
 EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null, 50, new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
@@ -431,6 +431,10 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
    public void onGroupMemberAttributeChanged(String groupId, String userId, Map<String, String> attribute, String from) {
             
     }
+   // 群成员名片变更。群组其他在线成员会收到该回调。
+   @Override
+   public void onUserGroupNamecardUpdated(String groupId, String userId, String groupNamecard) {
+   }
 };
 
 // 注册群组监听

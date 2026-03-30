@@ -106,7 +106,30 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 }];
 ```
 
-## 更多功能
+### 监听用户属性变更
+
+自 v4.20.0 起， SDK 提供 `EMUserInfoManagerDelegate` 监听 [用户信息](userinfo_provider.html) 更新。用户属性作为用户信息的一部分，其变更也可通过该监听器进行监听。该功能需要开启 [用户信息自动管理说明](userinfo_provider.html)：
+- 当前用户：用户修改自身属性后，SDK 在登录成功时会自动从服务端拉取最新信息写入本地内存，并触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
+- 其他用户：当收到其他用户的消息或从服务端获取其属性（如昵称、头像变更）时，SDK 会将更新写入本地内存，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+
+关于事件详情，请参见 [用户信息自动管理说明](userinfo_provider.html#监听用户信息更新)。
+
+## 常见问题
+
+1. 我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
+
+你可以调用[客户端](#设置当前用户的所有属性) 或[RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#获取用户的所有属性)或[RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
+
+设置用户昵称时，请注意以下两点：
+
+- 调用 RESTful 接口设置用户昵称时，若要确保在客户端能够获取设置，请求中必须传 `nickname` 键名。
+- 调用 RESTful API [获取用户详情](/document/server-side/account_detail_obtain_single.html)和[删除用户账户](/document/server-side/account_delete_single.html)中返回的响应中的 `nickname` 参数表示为推送昵称，即离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称，与用户属性中的用户昵称不同。不过，我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。例如，对于 iOS，更推送昵称的方法为 [updatePushDisplayName](/document/ios/push/push_display.html#设置和获取推送通知的显示属性)，对于 RESTful API，详见 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
+
+2. 调用设置或获取用户属性的接口时，上报错误码 4 的原因是什么？
+
+设置和获取用户属性的接口，包括设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
+
+## 相关功能
 
 ### 用户头像管理
 
@@ -147,18 +170,6 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 - `EMCustomMessageBody`
 - `EMChatMessage`
 
-### 常见问题
+### 用户属性与用户信息
 
-Q：我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
-
-A：你可以调用[客户端](#设置当前用户的所有属性) 或[RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#获取用户的所有属性)或[RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
-
-设置用户昵称时，请注意以下两点：
-
-1. 调用 RESTful 接口设置用户昵称时，若要确保在客户端能够获取设置，请求中必须传 `nickname` 键名。
-
-2. 调用 RESTful API [获取用户详情](/document/server-side/account_detail_obtain_single.html)和[删除用户账户](/document/server-side/account_delete_single.html)中返回的响应中的 `nickname` 参数表示为推送昵称，即离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称，与用户属性中的用户昵称不同。不过，我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。例如，对于 iOS，更推送昵称的方法为 [updatePushDisplayName](/document/ios/push/push_display.html#设置和获取推送通知的显示属性)，对于 RESTful API，详见 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
-
-Q: 调用设置或获取用户属性的接口时，上报错误码 4 的原因是什么？
-
-A：设置和获取用户属性的接口，包括设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
+用户信息指用于业务展示的用户相关信息，包括用户属性、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。关于用户信息详情，请参见 [用户信息自动管理说明](userinfo_provider.html)。

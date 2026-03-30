@@ -144,7 +144,7 @@ NSArray *admins = aGroup.adminList;
 
 ### 获取群成员列表
 
-1. 自 4.14.0 版本开始，获取群成员列表时可包括群成员的用户 ID、群成员角色和入群时间。
+1. 自 4.14.0 版本开始，获取群成员列表时可包括群成员的用户 ID、群成员角色和入群时间。自 4.20.0 版本起，该方法新增支持获取 [群成员名片](group_namecard.html)。
 
 ```objectivec
 // limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
@@ -441,5 +441,13 @@ do {
 // 设置群成员自定义属性。群内其他成员会收到该回调。
 - (void)onAttributesChangedOfGroupMember:(NSString *)groupId userId:(NSString *)userId attributes:(NSDictionary<NSString *,NSString *> *)attributes operatorId:(NSString *)operatorId {
     [self showAlertWithMessage:[NSString stringWithFormat:@"%@ changed %@ attributes %@ in %@",operatorId,userId,attributes,groupId]];
+}
+
+// 群成员名片变更。群组其他在线成员会收到该回调。
+- (void)onUserGroupNamecardChanged:(NSString *_Nonnull)groupId
+                            userId:(NSString *_Nonnull)userId
+                          namecard:(NSString *_Nullable)namecard
+{
+
 }
 ```
