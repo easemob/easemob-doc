@@ -936,7 +936,16 @@ projects:
                 link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_member_add_single.html   
+                link: /document/server-side/group_member_add_single.html
+          - text: 群成员名片管理
+            desc: 支持设置和获取群成员名片。群成员名片用于区分该用户在不同群组中的身份展示，例如，展示部门、岗位、项目角色等群内身份信息。
+            sdks:
+              - icon: /sdk/android.svg
+                text: Android
+                link: /document/android/group_namecard.html
+              - icon: /sdk/iOS.svg
+                text: iOS
+                link: /document/ios/group_namecard.html          
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:

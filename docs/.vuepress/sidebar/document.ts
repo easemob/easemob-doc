@@ -32,6 +32,7 @@ const documentSidebar = [
     children: [
       { text: '用户关系', link: 'user_relationship.html' },
       { text: '用户属性', link: 'userprofile.html' },
+      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios']},
       { text: '在线状态订阅', link: 'presence.html' },
     ],
     except: ['server-side', 'applet']
@@ -86,6 +87,7 @@ const documentSidebar = [
       { text: '群组概述', link: 'group_overview.html' },
       { text: '创建和管理群组', link: 'group_manage.html' },
       { text: '管理群组成员', link: 'group_members.html' },
+      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
       { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
       { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
