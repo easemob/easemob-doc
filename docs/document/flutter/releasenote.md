@@ -7,8 +7,8 @@
 #### 新增特性
 
 - 升级依赖的原生 SDK:
-  - iOS SDK 升级至 4.18.1。
-  - Android SDK 升级至 4.18.1。
+  - iOS SDK 升级至 4.19.1。
+  - Android SDK 升级至 4.19.1。
 - 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
   
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
