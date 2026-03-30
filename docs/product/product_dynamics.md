@@ -6,7 +6,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.20.0 开发版发布   | - [支持用户信息自动管理](/document/android/userinfo_provider.html)。<br/> - [群成员名片](/document/android/group_namecard.html)。  | 2026-3-30     | - [Android SDK 4.20.0 更新日志](/document/android/releasenote.html#v4-20-0-dev-2026-3-30-开发版) <br/> - [iOS SDK 4.20.0 更新日志](/document/ios/releasenote.html#v4-20-0-dev-2026-3-24-开发版)       |
+| Android/iOS SDK 4.20.0 开发版发布   | - [支持用户信息自动管理](/document/android/userinfo_provider.html)。<br/> - [群成员名片](/document/android/group_namecard.html)。  | 2026-3-30     | - [Android SDK 4.20.0 更新日志](/document/android/releasenote.html#v4-20-0-dev-2026-3-30-开发版) <br/> - [iOS SDK 4.20.0 更新日志](/document/ios/releasenote.html#v4-20-0-dev-2026-3-30-开发版)       |
 | HarmonyOS SDK 1.12.0 开发版发布   | - [支持接收服务端发送的流式消息](/document/harmonyos/message_stream_receive.html)。<br/> - WebSocket 连接支持 IPv6 地址。  | 2026-3-18     | [HarmonyOS SDK 1.12.0 更新日志](/document/harmonyos/releasenote.html#v1-12-0-dev-2026-3-18-开发版)        |
 
 ### 服务端 API
