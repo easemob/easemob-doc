@@ -167,5 +167,4 @@ EMClient.getInstance().init(context, options);
 
 - [用户信息自动管理](userinfo_provider.html)
 - [管理用户属性](userprofile.html)
-- [快速开始](quickstart.html)
 - [使用限制](/product/limitation.html)
