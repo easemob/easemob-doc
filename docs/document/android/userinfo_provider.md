@@ -150,11 +150,11 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
 必须在调用 `EMClient.getInstance().init(context, options)` 初始化 SDK 之前调用 `EMOptions#setEnableUserInfo(true)`。若在 SDK 初始化完成后再设置，用户信息自动管理功能不会生效。
 
-### 开启用户信息自动管理后，SDK 会自动执行哪些操作？
+### 功能开启后，SDK 会自动执行哪些操作？
 
 开启用户信息自动管理 `EMOptions#setEnableUserInfo(true)` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地内存；在检测到数据更新时自动从服务端拉取最新信息并更新本地内存，同时通过事件通知业务层。
 
-### EMMessage#getSenderInfo() 一定是最新数据吗？
+### EMMessage#getSenderInfo() 一定最新？
 
 不一定。`EMMessage#getSenderInfo()` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地内存，随后通过相关事件通知业务层刷新界面。
 
@@ -166,7 +166,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
 `EMUserInfoManager#getUserInfoWithUserIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户信息，应调用对应的服务端接口主动获取。
 
-### 用户信息自动管理开启后需自己维护内存吗？
+### 功能开启后需自己维护内存吗？
 
 通常不需要。开启 `EMOptions#setEnableUserInfo(true)` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地内存更新和事件通知。业务层通常只需从本地内存读取数据，并在相关事件中刷新界面。
 
