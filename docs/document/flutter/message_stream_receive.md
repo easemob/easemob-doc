@@ -12,11 +12,11 @@
 
 - **流式消息**：将一条完整消息拆分为多个分片，并按顺序逐步发送和接收的消息传输方式。
 - **消息分片**：流式消息中的单个数据片段。多个分片按顺序组合后构成一条完整消息。
-- **当前分片内容**：当前回调中接收到的单个分片内容，可通过 `StreamChunk.chunk` 获取。
-- **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `ChatTextMessageBody.content` 获取。
-- **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `StreamChunk.status` 获取。
-- **完成原因码**：流式消息结束时的业务原因标识，可通过 `StreamChunk.finishReason` 获取。
-- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 Flutter SDK 中，可通过 `msg.msgId` 获取。
+- **当前分片内容**：当前回调中接收到的单个分片内容，可通过 `EMStreamChunk.chunk` 获取。
+- **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `EMTextMessageBody.content` 获取。
+- **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `EMStreamChunk.status` 获取。
+- **完成原因码**：流式消息结束时的业务原因标识，可通过 `EMStreamChunk.finishReason` 获取。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 Flutter SDK 中，可通过 `EMMessage.msgId` 获取。
 
 ## 支持范围与限制
 
@@ -47,11 +47,11 @@
 
 接收流式消息的基本流程如下：
 
-1. 在 SDK 初始化完成后，注册消息监听器 `ChatEventHandler`。
+1. 在 SDK 初始化完成后，注册消息监听器 `EMChatEventHandler`。
 2. 监听流式消息回调 `onStreamMessagesReceived`。当新分片到达时，SDK 会在排序后触发该回调。
 3. 在回调中遍历收到的消息列表，通过 `msgId` 定位同一条流式消息。
 4. 通过 `msg.streamChunk` 获取当前分片信息。
-5. 通过 `ChatTextMessageBody.content` 获取从首个分片到当前分片的累计合并内容。
+5. 通过 `EMTextMessageBody.content` 获取从首个分片到当前分片的累计合并内容。
 6. 根据 `status` 更新界面展示，并在消息完成或异常结束时结束该条流式消息的渲染。
 
 ### 示例代码
@@ -60,9 +60,9 @@
 
 ```dart
 void addChatListener() {
-  ChatClient.getInstance.chatManager.addEventHandler(
+  EMClient.getInstance.chatManager.addEventHandler(
     'UNIQUE_HANDLER_ID',
-    ChatEventHandler(
+    EMChatEventHandler(
       onMessagesReceived: (messages) {
         // 普通消息回调
       },
@@ -82,7 +82,7 @@ void addChatListener() {
 ```dart
 void handleStreamChunk(ChatMessage msg) {
   final String msgId = msg.msgId;
-  final StreamChunk? chunk = msg.streamChunk;
+  final EMStreamChunk? chunk = msg.streamChunk;
 
   if (chunk == null) {
     return;
@@ -92,12 +92,12 @@ void handleStreamChunk(ChatMessage msg) {
   final String incrementText = chunk.chunk;
 
   // 当前传输状态
-  final StreamStatus status = chunk.status;
+  final EMStreamStatus status = chunk.status;
 
   // 累计合并内容
   String fullText = '';
-  if (msg.body is ChatTextMessageBody) {
-    fullText = (msg.body as ChatTextMessageBody).content;
+  if (msg.body is EMTextMessageBody) {
+    fullText = (msg.body as EMTextMessageBody).content;
   }
 
   // 自定义类型，例如 text / markdown
@@ -130,25 +130,25 @@ void handleStreamChunk(ChatMessage msg) {
 
 | 属性 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `chunk` | String | 获取当前分片的文本内容。 |
-| `status` | StreamStatus | 获取当前分片对应的流式消息传输状态。 |
-| `errorCode` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason` | Int | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
-| `customType` | String? | 获取自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
+| `chunk` | String | 当前分片的文本内容。 |
+| `status` | EMStreamStatus | 当前分片对应的流式消息传输状态。 |
+| `errorCode` | Int | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
+| `finishReason` | Int | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
+| `customType` | String? | 自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
 
 ```dart
-void handleStreamChunk(ChatMessage msg) {
-  final StreamChunk? chunk = msg.streamChunk;
+void handleStreamChunk(EMMessage msg) {
+  final EMStreamChunk? chunk = msg.streamChunk;
   if (chunk != null) {
     final String incrementText = chunk.chunk;
-    final StreamStatus status = chunk.status;
+    final EMStreamStatus status = chunk.status;
   }
 }
 ```
 
 :::tip
-- `chunk` 获取的是当前分片的内容。
-- `ChatTextMessageBody.content` 获取的是从首个分片到当前分片的累计合并内容。
+- `chunk` 为当前分片的内容。
+- `EMTextMessageBody.content` 为从首个分片到当前分片的累计合并内容。
 - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
 :::
 
@@ -156,14 +156,14 @@ void handleStreamChunk(ChatMessage msg) {
 
 SDK 会自动按分片顺序在本地合并流式消息内容，并写入消息体。
 
-`ChatTextMessageBody.content` 用于获取从首个分片到当前分片的累计合并内容。
+`EMTextMessageBody.content` 表示从首个分片到当前分片的累计合并内容。
 
 ```dart
-void handleStreamChunk(ChatMessage msg) {
-  final StreamChunk? chunk = msg.streamChunk;
+void handleStreamChunk(EMMessage msg) {
+  final EMStreamChunk? chunk = msg.streamChunk;
 
-  if (msg.body is ChatTextMessageBody) {
-    final String currentFullText = (msg.body as ChatTextMessageBody).content;
+  if (msg.body is EMTextMessageBody) {
+    final String currentFullText = (msg.body as EMTextMessageBody).content;
   }
 }
 ```
@@ -186,9 +186,9 @@ UI 使用建议如下：
 
 ### 传输状态与错误处理
 
-你可以通过 `StreamChunk.status` 获取当前分片对应的流式消息传输状态。
+你可以通过 `EMStreamChunk.status` 获取当前分片对应的流式消息传输状态。
 
-`StreamStatus` 枚举说明如下：
+`EMStreamStatus` 枚举说明如下：
 
 | 状态 | 说明 | 建议处理 |
 | :--- | :--- | :--- |
