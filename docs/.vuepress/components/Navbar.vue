@@ -82,11 +82,7 @@ const toggleAccountMenu = () => {
         {{ item.text }}
       </el-link>
 
-      <div
-        v-if="isLoggedIn"
-        class="account-wrapper"
-        :class="{ 'is-mobile-open': isMobileAccountMenuOpen }"
-      >
+      <div v-if="isLoggedIn" class="account-wrapper" :class="{ 'is-mobile-open': isMobileAccountMenuOpen }">
         <button type="button" class="account-trigger" @click.stop="toggleAccountMenu">
           <span class="account-name">{{ mockUser.name }}</span>
           <svg class="account-arrow" width="20" height="20" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
@@ -308,7 +304,7 @@ const toggleAccountMenu = () => {
   align-items: flex-start;
   overflow: hidden;
   border-radius: 6px;
-  background: var(--Conditional-pop-over, #fff);
+  background: #fff;
   box-shadow:
     0 3px 6px -4px rgba(0, 106, 172, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.08),
@@ -349,7 +345,7 @@ const toggleAccountMenu = () => {
 }
 
 .account-dropdown-item:hover {
-  background: #f7fbff;
+  background: #f5f5f5;
 }
 
 @media (max-width: 1380px) {
