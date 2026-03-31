@@ -1,13 +1,12 @@
 # 设置消息输入
 
-消息底部输入栏 `MessageInput` 实现各种消息的输入、发送，可扩展至自定义消息类型（如名片消息等）、支持表情添加及常用功能扩展。
+消息输入区 `MessageInput` 实现各种消息的输入、发送，可扩展至自定义消息类型（如名片消息等）、支持表情添加及常用功能扩展。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 MessageInput" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="消息输入区 MessageInput" />
 </ImageGallery>
 
-## 设置底部输入栏背景
+## 设置消息输入区背景
 
 - 通过 `messageInputProps` 设置：
 
@@ -29,11 +28,11 @@
 }
 ```
 
-## 设置底部输入栏功能
+## 设置消息输入区功能
 
 ### 设置功能概述
 
-你可以获取 `MessageInput` 组件，对底部输入栏进行自定义操作：
+你可以获取 `MessageInput` 组件，对消息输入区进行自定义操作：
 
 ```jsx
 import { Chat, MessageInput, Icon } from 'easemob-chat-uikit';
@@ -41,7 +40,7 @@ import { Chat, MessageInput, Icon } from 'easemob-chat-uikit';
 <Chat
   renderMessageInput={() => (
     <MessageInput
-      // 配置底部输入菜单的功能
+      // 配置消息输入区的功能
       actions={[
         {
           name: 'RECORDER', // 发送语音功能
@@ -119,9 +118,9 @@ import { Chat, MessageInput, Icon } from 'easemob-chat-uikit';
 
 ### 添加自定义图标
 
-在底部输入栏中添加自定义图标，实现指定的功能:
+在消息输入区中添加自定义图标，实现指定的功能:
 
-1. 使用 `renderMessageInput` 方法自定义渲染底部输入栏。
+1. 使用 `renderMessageInput` 方法自定义渲染消息输入区。
 2. 使用 `actions` 自定义 `MessageInput` 组件。
 
 ```jsx
@@ -156,7 +155,7 @@ const ChatContainer = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="底部输入栏中添加图标" />
+  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="消息输入区中添加图标" />
 </ImageGallery>
 
 ### 管理表情菜单
@@ -165,7 +164,7 @@ const ChatContainer = () => {
 
 ## 设置扩展菜单
 
-底部输入栏的扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入栏中的扩展图标（默认为加号）会弹出扩展菜单。
+消息输入区的扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击消息输入区中的扩展图标（默认为加号）会弹出扩展菜单。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单" />

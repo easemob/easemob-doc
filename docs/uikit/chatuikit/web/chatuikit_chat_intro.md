@@ -15,7 +15,7 @@
 
 ## 页面组件
 
-聊天页面通过 `Chat` 组件实现，由标题栏 `Header`、消息列表 `MessageList` 和底部输入栏 `MessageInput` 组成。
+聊天页面通过 `Chat` 组件实现，由标题栏 `Header`、消息列表 `MessageList` 和消息输入区 `MessageInput` 组成。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/custom_chat.png" title="聊天页面 Chat" />

@@ -9,6 +9,10 @@
 - **菜单扩展**：支持添加或修改长按菜单项。
 - **样式定制**：支持自定义消息气泡、头像、时间等样式。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_chat.png" title="聊天页面 ConversationDetail" />
+</ImageGallery>
+
 ## 概述
 
 消息列表组件 `MessageList` 支持设置基本属性，如下表所示：

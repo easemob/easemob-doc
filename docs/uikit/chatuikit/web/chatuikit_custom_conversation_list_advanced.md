@@ -1,5 +1,11 @@
 # 会话列表的高级设置
 
+本文介绍如何通过 `ConversationList` 实现会话列表的高级设置，包括会话条目的样式、头像、会话操作以及图标等。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list.png" title="会话列表页面 ConversationList" />
+</ImageGallery>
+
 ## 概述
 
 你可以通过 `ConversationList` 组件的 `itemProps` 属性进行高级设置，包括会话条目的背景、头像、高度、内容、时间等。

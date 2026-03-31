@@ -3,7 +3,7 @@
 本文介绍如何通过 `ConversationListViewController` 和自定义构建器实现会话列表的高级设置，包括会话条目的样式、头像、长按菜单以及图标等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/flutter/conversation_list_detail.png" title= "会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_conversation_list.png" title="会话列表页面 ConversationsView" />
 </ImageGallery>
 
 ## 概述

@@ -1,8 +1,8 @@
 # 设置消息输入
 
-底部消息输入实现各类消息的输入和发送以及消息表情等功能，包括两部分：
+消息输入区实现实现各类消息的输入和发送以及消息表情等功能，包括两部分：
 
-- 底部输入栏 `ChatUIKitInputBar`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
+- 消息输入栏 `ChatUIKitInputBar`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
 - 消息扩展菜单 `ChatUIKitMessageViewBottomMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
 <ImageGallery>
@@ -10,7 +10,7 @@
 </ImageGallery>
 
 
-## 设置底部输入栏背景
+## 设置消息输入栏背景
 
 `ChatUIKitInputBar` 的背景样式可通过 `ChatUIKitInputBarTheme` 主题扩展进行自定义配置。提供以下两种设置方式：
 
@@ -77,7 +77,7 @@ Theme(
 | 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置底部输入栏" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置消息输入栏" />
   <ImageItem src="/images/uikit/chatuikit/android/message_input_extension_top.png" title="顶部扩展区域" />
   <ImageItem src="/images/uikit/chatuikit/android/message_input_top_excluded.png" title="除顶部扩展区域外的区域" />
 </ImageGallery>
@@ -137,7 +137,7 @@ MessagesView(
 
 ### 设置相关操作
 
-#### 获取并操作底部输入栏
+#### 获取并操作消息输入栏
 
 你可以通过 `ChatUIKitKeyboardPanelController` 对象，对底部输入菜单进行自定义操作：
 

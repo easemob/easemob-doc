@@ -18,7 +18,7 @@
 聊天页面通过 `MessagesView` 实现，由标题栏（`AppBar`）、消息列表和消息输入区组成。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat.png" title="聊天页面 MessageView
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_chat.png" title="聊天页面 MessageView
   " />
 </ImageGallery>
 

@@ -1,23 +1,23 @@
 # 设置消息输入
 
-聊天页面的底部输入部分是消息发送的核心区域，支持文本、语音、表情、附件等多种消息类型的输入与发送。本文介绍消息底部输入部分的样式自定义、功能配置及事件监听。
+聊天页面的消息输入区是消息发送的核心区域，支持文本、语音、表情、附件等多种消息类型的输入与发送。本文介绍消息底部输入部分的样式自定义、功能配置及事件监听。
 
-消息底部输入部分实现各类消息的输入和发送以及消息表情等功能，包括以下部分：
+消息输入区实现各类消息的输入和发送以及消息表情等功能，包括以下部分：
 
-- 底部输入栏（`MessageInputBar.swift`）：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展，@提及等交互。
+- 消息输入栏（`MessageInputBar.swift`）：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展，@提及等交互。
 
 - 消息扩展菜单（`MessageInputExtensionView.swift`）：提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息（如名片消息等）的快捷入口。
 
 - 表情菜单（`MessageInputEmojiView.swift`）:负责表情展示、选择与删除。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/message_input_bar_with_button_prompt.png" title="底部输入栏 ChatPrimaryMenu" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_input_frame.png" title="消息输入区" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_input_bar_with_button_prompt.png" title="消息输入栏 ChatPrimaryMenu" />
 </ImageGallery>
 
-## 设置底部输入栏
+## 设置消息输入栏
 
-### 设置底部输入栏背景色
+### 设置消息输入栏背景色
 
 ```Swift
     //在MessageListController.swift及其子类（继承注册后）
@@ -123,11 +123,11 @@
 
 ## 自定义样式与资源
 
-对于底部输入栏，可通过覆盖同名资源文件的方式在 `Bundle.main` 中修改消息输入区的图标、图片和国际化资源。
+对于消息输入栏，可通过覆盖同名资源文件的方式在 `Bundle.main` 中修改消息输入区的图标、图片和国际化资源。
 
 ### 常用图标替换
 
-对于底部输入栏 `MessageInputBar.swift` 中的常用功能图标，可在 App 工程中 `Assets.xcassets` 文件中创建同名图片资源进行替换：
+对于消息输入栏 `MessageInputBar.swift` 中的常用功能图标，可在 App 工程中 `Assets.xcassets` 文件中创建同名图片资源进行替换：
 
 | 功能                 | 资源 ID                                        |
 | :----------------------- | :--------------------------------------------- |

@@ -6,6 +6,7 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/harmonyos/chat_page_no_titlebar.png" title="消息列表组件 ChatView" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat.png" title="聊天页面 ChatPage " />
 </ImageGallery>
 
 ## 概述
@@ -224,7 +225,7 @@ ChatView({
 
 ### 录音按钮点击事件
 
-监听底部输入栏录音按钮的点击，在此处理麦克风权限申请。
+监听消息输入栏录音按钮的点击，在此处理麦克风权限申请。
 
 ```typescript
 import { ChatView, ChatType, PermissionManager } from '@easemob/chatuikit';
@@ -249,7 +250,7 @@ ChatView({
 
 ### 扩展菜单点击事件
 
-监听底部输入栏（"+"按钮）中菜单项的点击事件，用于自定义行为或埋点。
+监听消息输入栏（"+"按钮）中菜单项的点击事件，用于自定义行为或埋点。
 
 ```typescript
 import { ChatView, ChatType, KitConstants } from '@easemob/chatuikit';

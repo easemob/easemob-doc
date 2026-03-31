@@ -3,7 +3,7 @@
 本文介绍如何对 `ConversationListController` 进行基本设置，包括 UI 样式、侧滑操作及事件监听。如需实现复杂自定义，详见 [会话列表高级设置](chatuikit_custom_conversation_list_advanced.html)。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表页面 ConversationListController.swift" />
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表页面 ConversationListController.swift" />
 </ImageGallery>
 
 ## 基本设置
