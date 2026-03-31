@@ -3,7 +3,7 @@
 本文介绍如何通过 `Appearance.conversation` 和 `ComponentsRegister` 实现会话列表的高级设置，包括条目样式、侧滑菜单、更多操作菜单等功能的配置。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_detail.png" title="会话列表 ConversationList.swift" />
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表页面 ConversationListController.swift" />
 </ImageGallery>
 
 ## 概述
