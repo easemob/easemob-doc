@@ -3,8 +3,7 @@
 本文介绍如何通过消息输入组件 `MessageInput` 实现消息输入的自定义设置，包括发送文本、表情、文件、图片、语音等功能。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 MessageInput" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 MessageInputBarMenu" />
+  <ImageItem src="/images/uikit/chatuikit/rn/message_input_frame.png" title="消息输入区 MessageInput" />
 </ImageGallery>
 
 ## 概述

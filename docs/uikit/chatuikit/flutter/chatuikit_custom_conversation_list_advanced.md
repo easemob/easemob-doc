@@ -4,6 +4,7 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/flutter/custom_conversation_list.png" title="会话列表页面 ConversationsView" />
+</ImageGallery>
 
 ## 概述
 

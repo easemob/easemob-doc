@@ -8,8 +8,7 @@
 - **消息扩展菜单 (ChatExtendMenu)**：提供附件类型消息的发送入口，支持图片、视频、文件等，并可扩展自定义消息类型（如名片、位置、红包等）。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_bar.png" title="底部输入栏 ChatPrimaryMenu" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/message_input_frame.png" title="消息输入区 ChatInputMenuView" />
 </ImageGallery>
 
 ## 设置底部输入栏

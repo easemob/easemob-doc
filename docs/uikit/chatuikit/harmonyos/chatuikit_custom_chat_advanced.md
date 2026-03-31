@@ -5,7 +5,7 @@
 本文介绍聊天页面的高级自定义功能，包括自定义消息布局、ViewModel 扩展、会话最后一条消息展示等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageListView" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat.png" title="聊天页面 ChatPage " />
 </ImageGallery>
 
 ## 自定义消息布局

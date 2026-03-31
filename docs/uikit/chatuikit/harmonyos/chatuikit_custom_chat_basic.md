@@ -6,6 +6,7 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/harmonyos/chat_page_no_titlebar.png" title="消息列表组件 ChatView" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat.png" title="聊天页面 ChatPage " />
 </ImageGallery>
 
 ## 概述

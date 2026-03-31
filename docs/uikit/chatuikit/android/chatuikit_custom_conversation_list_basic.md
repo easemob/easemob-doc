@@ -3,7 +3,7 @@
 本文介绍如何通过 `ChatUIKitConversationListFragment` 实现会话列表的基本设置，包括会话列表空页面和设置会话事件监听。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_detail.png" title= "会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表页面 ChatUIKitConversationListFragment" />
 </ImageGallery>
 
 ## 基本设置

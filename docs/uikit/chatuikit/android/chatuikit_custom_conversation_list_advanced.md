@@ -3,7 +3,7 @@
 本文介绍如何通过 `ChatUIKitConversationListLayout` 实现会话列表的高级设置，包括会话条目的样式、头像、长按菜单以及图标等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_detail.png" title= "会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表页面 ChatUIKitConversationListFragment" />
 </ImageGallery>
 
 ## 概述

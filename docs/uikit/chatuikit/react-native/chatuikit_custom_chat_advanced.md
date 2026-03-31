@@ -2,6 +2,10 @@
 
 本文详细介绍 `MessageList` 组件的各项高级配置功能，帮助你实现自定义的消息展示、交互监听和历史消息加载。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_chat.png" title="聊天页面 ConversationDetail" />
+</ImageGallery>
+
 ## 概述
 
 `MessageList` 是聊天界面核心组件，提供如下功能：

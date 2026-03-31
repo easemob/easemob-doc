@@ -5,7 +5,7 @@
 如需通过 `ChatUIKitMessageListLayout` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/chat_page_no_titlebar.png" title="消息列表和底部输入栏" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat.png" title="聊天页面 UIKitChatFragment" />
 </ImageGallery>
 
 ## 概述

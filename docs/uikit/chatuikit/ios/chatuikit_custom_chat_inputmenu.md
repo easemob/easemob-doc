@@ -11,8 +11,8 @@
 - 表情菜单（`MessageInputEmojiView.swift`）:负责表情展示、选择与删除。
 
 <ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_input_frame.png" title="消息输入区" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_input_bar_with_button_prompt.png" title="底部输入栏 ChatPrimaryMenu" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
 </ImageGallery>
 
 ## 设置底部输入栏

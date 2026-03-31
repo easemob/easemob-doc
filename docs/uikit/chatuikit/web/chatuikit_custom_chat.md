@@ -2,10 +2,8 @@
 
 消息列表是聊天界面的核心组件，基于 `MessageList` 组件实现。本文介绍如何通过 `Chat` 组件的 `messageListProps` 实现消息列表和消息条目的设置。
 
-如需通过 `MessageList` 进行高级设置，详见 [消息列表的高级设置说明](chatuikit_custom_chat_advanced.html)。
-
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/message_list.png" title="消息列表组件 MessageList" />
+  <ImageItem src="/images/uikit/chatuikit/web/custom_chat.png" title="聊天页面 Chat" />
 </ImageGallery>
 
 ## 概述
