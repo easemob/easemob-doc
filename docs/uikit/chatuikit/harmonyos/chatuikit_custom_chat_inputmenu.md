@@ -4,21 +4,21 @@
 
 聊天页面的消息输入区 `ChatInputMenuView` 实现各类消息的输入和发送，包括以下部分：
 
-- **底部输入栏 (ChatPrimaryMenu)**：负责文本与语音消息的输入和发送，支持表情添加及常用功能扩展。
+- **消息输入栏 (ChatPrimaryMenu)**：负责文本与语音消息的输入和发送，支持表情添加及常用功能扩展。
 - **消息扩展菜单 (ChatExtendMenu)**：提供附件类型消息的发送入口，支持图片、视频、文件等，并可扩展自定义消息类型（如名片、位置、红包等）。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/harmonyos/message_input_frame.png" title="消息输入区 ChatInputMenuView" />
 </ImageGallery>
 
-## 设置底部输入栏
+## 设置消息输入栏
 
 ### 显示或隐藏输入栏
 
-通过 `ChatPrimaryMenuModel` 控制底部输入栏中各个按钮的启用状态，实现显示或隐藏。
+通过 `ChatPrimaryMenuModel` 控制消息输入栏中各个按钮的启用状态，实现显示或隐藏。
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_input_bar.png" title="设置底部输入栏" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_chat_input_bar.png" title="设置消息输入栏" />
 </ImageGallery>
 
 ```typescript
@@ -106,7 +106,7 @@ ChatView({
 
 ## 设置消息扩展菜单
 
-点击底部输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。
+点击消息输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_input_extension.png" title="消息扩展菜单 ChatExtendMenu" />
@@ -253,7 +253,7 @@ ChatView({
 
 以下图标资源位于 `chatuikit/src/main/resources/base/media/` 目录下，可在 App 模块的 `resources/base/media/` 目录下创建同名 SVG 文件进行覆盖。
 
-**底部输入栏 (PrimaryMenu)**
+**消息输入栏 (PrimaryMenu)**
 
 | 资源名称 | 描述 |
 | :----------- | :------- |
@@ -277,7 +277,7 @@ ChatView({
 
 以下文本资源位于 `chatuikit/src/main/resources/base/element/string.json` 中，可在 App 模块的 `resources/base/element/string.json` 中覆盖同名条目。
 
-**底部输入栏**
+**消息输入栏**
 
 | 资源名称 | 默认值 | 描述 |
 | :------------------------ | :----- | :------------- |

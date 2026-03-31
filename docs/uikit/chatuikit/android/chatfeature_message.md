@@ -46,7 +46,7 @@
 
 目前，单群聊 UIKit 支持引用消息进行回复。消息引用 UI 和逻辑结构如下：
 - `ChatUIKitMessageReplyView`：消息气泡的引用消息自定义 View。
-- `ChatUIKitExtendMessageReplyView`：底部输入栏组件上方展示的引用消息自定义 View。
+- `ChatUIKitExtendMessageReplyView`：消息输入栏组件上方展示的引用消息自定义 View。
 - `ChatUIKitMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
 <ImageGallery>
