@@ -42,7 +42,8 @@
  ![img](/images/applet/push_tip.png)
 
 :::tip
-华为注册厂商推送服务时，包含 `agconnect-services.json` 文件。你需下载该文件，并将其放至你的 uni-app 应用根目录下的 `nativeplugins/EMPushUniPlugin/android/assets` 文件夹下。
+1. 华为注册厂商推送服务时，包含 `agconnect-services.json` 文件。你需下载该文件，并将其放至你的 uni-app 应用根目录下的 `nativeplugins/EMPushUniPlugin/android/assets` 文件夹下。
+2. 针对华为推送，该插件仅支持 Android 平台，不支持 HarmonyOS NEXT 系统。
 :::
 
 2. 配置 uni-app 项目支持推送。选择 **App模块配置**，勾选 **Push（消息推送）**。
