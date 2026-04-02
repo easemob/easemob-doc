@@ -460,7 +460,6 @@ const handleLogout = () => {
     gap: 0.4rem;
     padding: 0 0.625rem;
     border-radius: 999px;
-    background: #f5f9fc;
   }
 
   .account-name {
@@ -493,7 +492,6 @@ const handleLogout = () => {
 
   .account-wrapper.is-mobile-open .account-trigger {
     color: var(--theme-color);
-    background: #ecf8ff;
   }
 
   .account-wrapper.is-mobile-open .account-dropdown {
