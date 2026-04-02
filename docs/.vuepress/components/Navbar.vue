@@ -297,7 +297,7 @@ const handleLogout = () => {
 }
 
 .auth-link-primary:hover {
-  color: #fff;
+  color: #fff !important;
   background: var(--theme-color);
 }
 
