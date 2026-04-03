@@ -26,7 +26,7 @@ const nameMap = {
   product: '产品介绍',
   push: '即时推送',
   moderation: '内容审核',
-  aigc: 'AI 集成',
+  aigc: '使用 MCP 集成',
   solution_common: '常见方案',
 }
 

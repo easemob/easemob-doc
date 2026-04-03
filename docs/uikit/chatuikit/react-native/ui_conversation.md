@@ -113,7 +113,7 @@ export default function ChatScreen(): JSX.Element {
     <ScreenContainer mode="padding" edges={["right", "left", "bottom"]}>
       <ConversationListFragment
         onUpdateReadCount={(unreadCount: number) => {
-          // TODO：显示未读消息数
+          // todo：显示未读消息数
         }}
       />
     </ScreenContainer>
@@ -137,7 +137,7 @@ export default function ChatScreen(): JSX.Element {
     <ScreenContainer mode="padding" edges={["right", "left", "bottom"]}>
       <ConversationListFragment
         onPress={(data?: ItemDataType) => {
-          // TODO：进入聊天页面。
+          // todo：进入聊天页面。
         }}
       />
     </ScreenContainer>
@@ -157,7 +157,7 @@ export default function ChatScreen(): JSX.Element {
     <ScreenContainer mode="padding" edges={["right", "left", "bottom"]}>
       <ConversationListFragment
         onLongPress={(data?: ItemDataType) => {
-          // TODO：显示自定义菜单。
+          // todo：显示自定义菜单。
         }}
       />
     </ScreenContainer>

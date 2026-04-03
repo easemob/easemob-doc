@@ -26,6 +26,8 @@
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
+你可以通过 `ChatUIKitClient.getConfig()?.chatConfig?.timePeriodCanRecallMessage` 设置聊天页面消息撤回的有效时间，默认为 120 秒。
+
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/message/message_recall_android.png" title="消息撤回" />
 </ImageGallery>
@@ -44,7 +46,7 @@
 
 目前，单群聊 UIKit 支持引用消息进行回复。消息引用 UI 和逻辑结构如下：
 - `ChatUIKitMessageReplyView`：消息气泡的引用消息自定义 View。
-- `ChatUIKitExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
+- `ChatUIKitExtendMessageReplyView`：底部输入栏组件上方展示的引用消息自定义 View。
 - `ChatUIKitMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
 <ImageGallery>
@@ -83,7 +85,7 @@
 
 使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
-1. 开启消息翻译特性。
+1. 开启消息翻译。
 
 消息翻译特性在 `ChatUIKitConfig` 中默认关闭，即 `enableTranslationMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
@@ -93,7 +95,7 @@
 
 ```
 
-2. 设置翻译的目标语言。
+2. 设置翻译目标语言。
 
 单群聊 UiKit 的 `UIKitChatFragment.Builder` 对象中提供了 `setTargetTranslation` 方法设置目标翻译语言。
 
@@ -107,6 +109,11 @@
    builder.setTargetTranslation(ChatUIKitTranslationLanguageType.English)
 
 ```
+
+3. 设置翻译文本样式：
+
+  - `<style name="ease_chat_message_received_translation_content_style">`：消息接收方翻译文本样式 可以自行修改文本任意属性。
+  - `<style name="ease_chat_message_sent_translation_content_style">`：消息发送方翻译文本样式 可以自行修改文本任意属性。
 
 ## 表情回复
 

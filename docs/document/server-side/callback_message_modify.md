@@ -1,9 +1,9 @@
 # 修改消息
 
-消息修改后，环信服务器会按照[发送后回调规则](callback_postsending.html#发送后回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
+消息修改后，环信服务器会按照[发送后回调规则](callback_postsending.html#回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
 
 :::tip
-1. 如果需要消息修改事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#发送后回调规则)。
+1. 如果需要消息修改事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#回调规则)。
 2. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
 :::
 
@@ -73,7 +73,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -143,7 +143,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。         |
@@ -222,7 +222,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -296,7 +296,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -372,7 +372,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -444,7 +444,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -521,7 +521,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -599,7 +599,7 @@
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示修改消息。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#发送后回调规则)。 |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |

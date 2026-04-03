@@ -313,6 +313,7 @@ export const zhSidebar = sidebar({
              { text: "消息", link: "console/basic_message.html" },
              { text: "会话/群组/聊天室", link: "console/basic_conversation_group_chatroom.html" },
              { text: "消息回调", link: "console/basic_webhook.html" },
+             { text: "服务端 API 调用", link: "console/basic_restful_api_call.html" },
              { text: "其他", link: "console/basic_other.html" },
              ],
             },

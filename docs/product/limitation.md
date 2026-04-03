@@ -41,8 +41,8 @@
 
 发送 **一条文本类型的流式消息** 时，必须遵守以下规则：
 
-- **发送间隔**：相邻分片的发送间隔不能超过 30 秒，超时则返回 [错误 14033](/document/server-side/message_stream_send_single.html#错误码) 并终止流式消息。
-- **发送时长**：所有分片的发送总时长不能超过 30 分钟，超时再发送分片则返回 [错误 14034](/document/server-side/message_stream_send_single.html#错误码)。
+- **分片发送间隔**：相邻分片的发送间隔不能超过 30 秒，超时则返回 [错误 14033](/document/server-side/message_stream_send_single.html#错误码) 并终止流式消息。
+- **总传输时长**：所有分片的总传输时长不能超过 30 分钟，超时再发送分片则返回 [错误 14034](/document/server-side/message_stream_send_single.html#错误码)。
 - **总长度**：所有分片的文本内容总长度不能超过 128 KB，超限则返回 [错误 14032](/document/server-side/message_stream_send_single.html#错误码) 并终止流式消息。
 
 ### 消息撤回

@@ -3,7 +3,7 @@
 你可以配置群详情页面的导航栏、自定义按钮和群详情列表项等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_group_details.png" title="群详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_group_details.png" title="群详情页面" />
 </ImageGallery>
 
 ## 自定义导航栏

@@ -415,7 +415,7 @@ const productCategoryMap = {
   内容审核: "内容审核",
   常见方案: "常见方案",
   即时推送: "即时推送",
-  "AI 集成": "AI 集成"
+  "使用 MCP 集成": "使用 MCP 集成"
 };
 
 const apiReferenceCategoryMap = {
@@ -436,7 +436,7 @@ const categoryMap = {
 };
 
 const productFilters =
-  "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'常见方案' OR category:'AI 集成'";
+  "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'常见方案' OR category:'使用 MCP 集成'";
 
 const sdkFilters =
   "category:'Andorid 集成文档' OR category:'iOS 集成文档' OR category:'Web 集成文档' OR category:'HarmonyOS 集成文档' OR category:'小程序集成文档' OR category:'Flutter 集成文档' OR category:'React Native 集成文档' OR category:'Windows 集成文档' OR category:'Unity 集成文档' OR category:'REST API'";

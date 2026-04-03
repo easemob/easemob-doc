@@ -5,7 +5,7 @@
 `ContactList` 组件用于展示通讯录，包含联系人列表、群组列表和好友请求列表。昵称在中文或者英文的情况下可以实现按首字母分类。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/web/custom_contact_list.png" title="通讯录页面 ContactList" />
 </ImageGallery>
 
 

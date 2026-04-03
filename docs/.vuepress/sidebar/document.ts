@@ -7,6 +7,7 @@ const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
@@ -846,6 +847,7 @@ const documentSidebar = [
       { text: '回调概述', link: 'callback_overview.html' },
       { text: '发送前回调', link: 'callback_presending.html' },
       { text: '发送后回调', link: 'callback_postsending.html' },
+      { text: '回调异常缓存', link: 'callback_postsending_exception_storage.html' },
       { text: '发送后回调事件',
         collapsible: true,
         children: [
@@ -900,7 +902,7 @@ const documentSidebar = [
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
-      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
+      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },
@@ -910,7 +912,7 @@ const documentSidebar = [
     children: [
       { text: 'Java Server SDK 2.0', link: 'apireference_java_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'apireference_java_1.0.html' },
-      // { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
+      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },

@@ -24,7 +24,7 @@
 **方法一**
 
 1. 登录[环信控制台](https://console.easemob.com/user/login)，在 **应用管理** 页面，选择你的应用，点击 **操作** 栏中的 **管理**。
-2. 在 **应用概览** 页面，在 **服务开通信息** 区域中点击 **调整套餐**
+2. 在 **应用概览** 页面，在 **服务开通信息** 区域中点击 **调整套餐**。
 3. 查看各套餐包的功能详情，根据业务需要选择套餐包，点击 **下一步**，完成支付。
 
 **方法二**
@@ -59,18 +59,18 @@
 **方法二**
 
 1. 登录[环信控制台](https://console.easemob.com/user/login)。在 **应用管理** 页面，选择你的应用，点击 **操作** 栏中的 **管理**。
-2. 在左侧导航栏，选择 **即时通讯** > **基础服务**。
+2. 在左侧导航栏，选择 **即时通讯** > **基础功能**。
 3. 在对应页签中，选择 **立即购买**。
 4. 进入 **开通服务版本** 页面，按需订阅扩展功能。
 
 ## 订阅增值功能
 
-1. 登录[环信控制台](https://console.easemob.com/user/login)。在 **应用管理** 页面，选择你的 应用，点击 **操作** 栏中的 **管理**。
+1. 登录[环信控制台](https://console.easemob.com/user/login)。在 **应用管理** 页面，选择你的应用，点击 **操作** 栏中的 **管理**。
 2. 在左侧导航栏，选择 **增值服务**。
 3. 选择并订阅所需的增值服务：
    - [实时音视频](/callkit/android/product_purchase.html)
    - [内容审核](/value-added/moderation/moderation_billing_domestic.html)
-   - [消息推送](/value-added/push/push_billing.html)
+   - [消息推送](/value-added/push/push_billing_domestic.html)
    - 大模型开发平台：当前服务仅限灰度测试，如需使用请联系环信商务开通。
    - [消息翻译](/value-added/translation/message_translation_android.html)：如需使用请联系环信商务开通。
    

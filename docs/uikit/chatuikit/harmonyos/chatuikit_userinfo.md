@@ -2,7 +2,7 @@
 
 <Toc />
 
-单群聊 UIKit 中的聊天页面、会话列表页面以及通讯录页面等都用到用户信息，这些用户信息需要开发者提供。本节介绍开发者如何向 UIKIt 提供用户信息。
+单群聊 UIKit 中的聊天页面、会话列表页面以及通讯录页面等都用到用户信息，这些用户信息需要开发者提供。本节介绍开发者如何向 UIKit 提供用户信息。
 
 ## 当前登录用户信息
 
@@ -27,9 +27,9 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(currentUserId)
 如果设置了当前登录用户信息，使用 `ChatUIKit` 发送消息时，会将用户昵称和用户头像等信息通过消息扩展的方式携带。具体逻辑可参考 `MessageViewModel#sendMessage` 方法。
 :::
 
-## 用户信息或者群组信息提供
+## 用户信息或群组信息提供
 
-单群聊 UIKit 提供 `ChatUIKitClient.setProfileProvider` 接口提供用户信息或者群组信息，包括联系人或者群组的信息。
+单群聊 UIKit 提供 `ChatUIKitClient.setProfileProvider` 接口，用于提供用户信息或群组信息，包括联系人或群组的信息。
 
 使用方法如下所示：
 
@@ -64,19 +64,25 @@ ChatUIKitClient.setProfileProvider({
   })
 ```
 
+:::tip
+关于头像和昵称的设置说明如下：
+- 对于 **联系人**，其昵称和头像可通过 `ChatUserProfile` 对象的 `name` 及 `avatar` 属性进行配置。
+- 对于 **群组**，其名称和群头像可通过 `ChatGroupProfile` 对象的 `name` 及 `avatar` 属性进行配置。
+:::
+
 ## UIKit 信息处理逻辑
 
-1. 如果信息已经缓存到内存，当页面需要显示信息时，UIKit 会首先从内存中获取缓存数据并进行页面的渲染。
+1. **内存缓存优先**：如果信息已缓存到内存，当页面需要显示信息时，UIKit 会首先从内存中获取缓存数据并进行页面渲染。
 
-2. 如果没有缓存数据，你可以从 app 的本地数据库或内存中获取数据，构建 `ChatUserProfile` 对象，使用 `fetchProfile` 方法返回 `ChatUserProfile` 。这样，UIKit 会利用 `ChatUserProfile` 对象更新 UI 上的信息。
+2. **回调作为数据后备**：如果没有缓存数据，你可以从 app 的本地数据库或内存中获取数据，构建 `ChatUserProfile` 对象，使用 `fetchProfile` 方法返回 `ChatUserProfile` 。UIKit 会利用 `ChatUserProfile` 对象更新 UI 上的信息。
 
 ## 更新 UIKit 缓存信息
 
-因为单群聊 UIKit 会对信息进行缓存。如果用户的信息发生变化，可以通过 UIKit 提供的 `update` 方法对缓存信息进行更新。
+单群聊 UIKit 会对信息进行缓存。如果用户信息发生变化，可以通过 UIKit 提供的 `update` 方法对缓存信息进行更新。
 
 ```typescript
 // 更新当前用户信息
 ChatUIKitClient.setCurrentUser(currentUserProfile);
-// 更新单聊用户/群组信息
+// 更新单聊用户或群组信息
 ChatUIKitClient.updateUserProfiles(usersOrGroupInfo);
 ```

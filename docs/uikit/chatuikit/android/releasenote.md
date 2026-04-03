@@ -40,8 +40,8 @@
 
 #### 新增特性
 
-- [消息长按菜单样式新增微信风格样式](chatuikit_chat.html#设置消息长按后的菜单项)。
-- [发送附件消息菜单新增微信风格样式](chatuikit_chat.html#设置发送附件消息弹窗样式)。
+- [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat_basic.html#设置长按消息菜单)。
+- [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat_inputmenu.html#设置消息扩展菜单)。
 
 #### 优化
 
