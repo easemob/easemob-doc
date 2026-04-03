@@ -41,7 +41,7 @@ ChatView({
 | `viewModel`                    | BaseChatViewModel                                 | 否   | 消息列表 ViewModel，用于自定义消息加载逻辑                      | ChatViewModel        |
 | `messageViewModel`             | BaseMessageViewModel                             | 否   | 消息发送 ViewModel，用于自定义消息发送逻辑                      | MessageViewModel     |
 | `extendMenus`                  | MenuItem[]                                       | 否   | 消息扩展菜单项（底部"+"菜单）   | 默认菜单             |
-| `privateMenuModel`             | ChatPrimaryMenuModel                             | 否   | 底部输入菜单控制模型          | ChatPrimaryMenuModel |
+| `privateMenuModel`             | ChatPrimaryMenuModel                             | 否   | 消息输入栏控制模型          | ChatPrimaryMenuModel |
 | `onItemClick`                  | (message: ChatKitMessage) => boolean             | 否   | 消息点击事件   | 默认处理             |
 | `onErrorIconClick`             | (message: ChatKitMessage) => void                | 否   | 消息发送失败图标的点击事件                                            | 默认弹出消息重发对话框       |
 | `onRecordClick`                | (callback: (isGranted: boolean) => void) => void | 否   | 录音按钮点击事件    | 请求麦克风权限       |

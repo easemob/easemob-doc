@@ -30,7 +30,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | 自定义菜单布局 | 支持替换或扩展输入菜单中的功能模块。 |
 | 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情菜单及扩展功能菜单。 |
 | 定制顶部扩展区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
-| 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
+| 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏消息输入栏与扩展面板部分。 |
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置消息输入栏" />
