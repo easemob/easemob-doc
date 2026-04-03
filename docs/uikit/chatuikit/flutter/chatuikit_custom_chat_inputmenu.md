@@ -74,7 +74,7 @@ Theme(
 | 自定义菜单布局 | 支持替换或扩展输入菜单中的功能模块。 |
 | 管理表情与扩展功能 | 可动态设置、显示或隐藏自定义表情菜单及扩展功能菜单。 |
 | 定制顶部扩展区域 | 支持设置自定义的菜单顶部布局，包括引用回复条与多选消息工具条。 |
-| 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏底部输入与扩展面板部分。 |
+| 界面区域控制 | 可选择仅显示菜单顶部扩展区域，隐藏消息输入栏与扩展面板部分。 |
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置消息输入栏" />
@@ -139,7 +139,7 @@ MessagesView(
 
 #### 获取并操作消息输入栏
 
-你可以通过 `ChatUIKitKeyboardPanelController` 对象，对底部输入菜单进行自定义操作：
+你可以通过 `ChatUIKitKeyboardPanelController` 对象，对消息输入栏进行自定义操作：
 
 ```dart
 // 访问输入框控制器 
@@ -275,7 +275,7 @@ class CustomEmojiPanel extends StatelessWidget {
 
 ## 设置消息扩展菜单
 
-消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击底部输入菜单中的扩展图标（默认为加号）会弹出消息扩展菜单。
+消息扩展菜单提供发送附件类型消息（如图片、视频、文件）、位置消息以及自定义消息的快捷入口。点击消息输入栏中的扩展图标（默认为加号）会弹出消息扩展菜单。
 
 ### 设置菜单样式风格
 
@@ -498,7 +498,7 @@ ChatUIKitInputBar(
 
 ### 常用图标替换
 
-对于底部输入菜单中的常用功能图标，可通过自定义 Widget 替换：
+对于消息输入栏中的常用功能图标，可通过自定义 Widget 替换：
 
 ```dart
 ChatUIKitInputBar(
