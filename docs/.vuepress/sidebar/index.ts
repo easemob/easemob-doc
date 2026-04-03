@@ -283,7 +283,7 @@ export const zhSidebar = sidebar({
     //  ],
     // },
     {
-      text: "Console 指南（新）",
+      text: "Console 指南",
       collapsible: true,
       children: [
         { text: "注册账号", link: "console/account_register.html" },
