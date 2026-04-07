@@ -29,10 +29,10 @@
 | 国内 2 区   | https://ngi-a1.easemob.com    | wss://ngi-im-api-wechat.easemob.com  |
 | 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
 | 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
-| 新加坡 1 区   | https://a1-sgp.easemob.com 或 https://a1-sgp.easecdn.com | - wss://im-api-wechat-sgp.easemob.com  <br/> - wss://im-api-wechat-sgp.easecdn.com  |
-| 新加坡 2 区   | https://a61.easemob.com 或 https://a61.easecdn.com | - wss://im-api-wechat-61.easemob.com <br/> - wss://im-api-wechat-61.easecdn.com |
-| 美东 1 区     | https://a41.easemob.com 或 https://a41.easecdn.com       | - wss://im-api-wechat-41.easemob.com <br/> - wss://im-api-wechat-41.easecdn.com   |
-| 德国 2 区 | https://a71.easemob.com 或 https://a71.easecdn.com       | - wss://im-api-wechat-71.easemob.com <br/> - wss://im-api-wechat-71.easecdn.com   |
+| 新加坡 1 区   | - https://a1-sgp.easemob.com <br/> - https://a1-sgp.easecdn.com | - wss://im-api-wechat-sgp.easemob.com  <br/> - wss://im-api-wechat-sgp.easecdn.com  |
+| 新加坡 2 区   | - https://a61.easemob.com <br/> - https://a61.easecdn.com | - wss://im-api-wechat-61.easemob.com <br/> - wss://im-api-wechat-61.easecdn.com |
+| 美东 1 区     | - https://a41.easemob.com <br/> - https://a41.easecdn.com       | - wss://im-api-wechat-41.easemob.com <br/> - wss://im-api-wechat-41.easecdn.com   |
+| 德国 2 区 | - https://a71.easemob.com <br/> - https://a71.easecdn.com       | - wss://im-api-wechat-71.easemob.com <br/> - wss://im-api-wechat-71.easecdn.com   |
 
 应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
