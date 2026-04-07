@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.16</version>
+    <version>1.0.17</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:V1.0.16'
+implementation 'com.easemob.im:im-sdk-core:V1.0.17'
 ```
 
 ### 使用
@@ -61,20 +61,20 @@ public class Config {
 
 根据业务资源，API 分为：
 
-- ChatFile 用于上传下载附件。
-- Block 用于限制访问(将用户加入黑名单)。
-- Contact 用于管理联系人(添加好友等)。
-- Group 用于管理群组。
-- Thread 用于管理群组子区。
-- Message 用于发送消息。
-- HistoryMessage 用于下载历史消息记录。
-- User 用于管理用户。
-- Metadata 用于管理用户属性、群成员属性。
-- Token 用于获取用户 Token。
-- Room 用于管理聊天室。
-- Push 用于管理推送设置。
-- Presence 用于管理用户在线状态订阅。
-- Reaction 用于管理消息表情回复。
+- [ChatFile](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ChatFileApi.html) 用于上传下载附件。
+- [Block](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html) 用于限制访问(将用户加入黑名单)。
+- [Contact](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html) 用于管理联系人(添加好友等)。
+- [Group](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/GroupApi.html) 用于管理群组。
+- [Thread](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ThreadApi.html) 用于管理群组子区。
+- [Message](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html) 用于发送消息。
+- [HistoryMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/HistoryMessageApi.html) 用于下载历史消息记录。
+- [User](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/UserApi.html) 用于管理用户。
+- [Metadata](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MetadataApi.html) 用于管理用户属性、群成员属性。
+- [Token](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/TokenApi.html) 用于获取用户 Token。
+- [Room](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html) 用于管理聊天室。
+- [Push](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/PushApi.html) 用于管理推送设置。
+- [Presence](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/PresenceApi.html) 用于管理用户在线状态订阅。
+- [Reaction](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ReactionApi.html) 用于管理消息表情回复。
 
 每个业务资源对应一个类，例如，用户相关的 API，都可以在 `UserAPi`中 找到。
 
@@ -186,6 +186,14 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.17 2026-04-03
+
+1. 增加 "校验好友" 功能。
+2. "撤回消息" 增加 `recallMessageExtensionInfo` 请求参数。
+3. "修改聊天室信息" 增加 `newowner` 请求参数，即变更聊天室所有者。
+
+以上更新内容请到 [ContactApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)、[MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html)、[RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) 中查看。
 
 ### V1.0.16 2025-07-25
 
