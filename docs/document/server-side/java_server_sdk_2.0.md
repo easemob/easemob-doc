@@ -189,11 +189,11 @@ try {
 
 ### V1.0.17 2026-04-03
 
-1. 增加 "校验好友" 功能。
-2. "撤回消息" 增加 `recallMessageExtensionInfo` 请求参数。
-3. "修改聊天室信息" 增加 `newowner` 请求参数，即变更聊天室所有者。
-
-以上更新内容请到 [ContactApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)、[MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html)、[RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) 中查看。
+| 新增功能                     | 描述                                                    |
+| :--------------------------- | :----------------------------------------------------------- |
+| 新增校验好友功能             | - **方法**：`userContactCheck` <br/> - **说明**：校验指定用户是否为好友关系<br/> - **文档**：[ContactApi.userContactCheck](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)) |
+| 撤回消息增加扩展参数         | - **参数**：`recallMessageExtensionInfo`<br/> - **说明**：撤回消息时支持传入扩展信息字段<br/> - **文档**：[EMRecallMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html) |
+| 修改聊天室增加所有者变更参数 | - **参数**：`newowner` <br/> - **说明**：支持通过修改聊天室接口直接变更聊天室所有者<br/> - **文档**：[EMModifyRoom](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) |
 
 ### V1.0.16 2025-07-25
 
