@@ -121,18 +121,20 @@ public class UserService {
 
 ```java
 try {
-    Configuration.setDefaultApiClient(ApiClient.builder()
-            .setBasePath("Rest BasePath")
-            .setAppKey("Appkey")
-            .setClientId("Client ID")
-            .setClientSecret("Client Secret")
-            .setMaxIdleConnections(100)
-            .setConnectKeepAliveMilliSeconds(10000)
-            .setConnectTimeoutMilliSeconds(10000)                  
-            .build());
-} catch (ApiException e) {
-    throw new RuntimeException(e);
-}
+        Configuration.setDefaultApiClient(ApiClient.builder()
+                .setBasePath("Rest BasePath")
+                .setAppKey("Appkey")
+                .setClientId("Client ID")
+                .setClientSecret("Client Secret")
+                .setMaxIdleConnections(100)
+                .setConnectKeepAliveMilliSeconds(10000)
+                .setConnectTimeoutMilliSeconds(10000)
+                .setDispatcherMaxRequests(200)   // 该参数在 1.0.15 及以上版本支持，如需使用请升级 SDK 版本。
+                .setDispatcherMaxRequestsPerHost(200) // 该参数在 1.0.15 及以上版本支持，如需使用请升级 SDK 版本。
+                .build());
+        } catch (ApiException e) {
+            throw new RuntimeException(e);
+        }
 ```
 
 ## 注意事项
@@ -191,9 +193,9 @@ try {
 
 | 新增功能                     | 描述                                                    |
 | :--------------------------- | :----------------------------------------------------------- |
-| 新增校验好友功能             | - **方法**：`userContactCheck` <br/> - **说明**：校验指定用户是否为好友关系<br/> - **文档**：[ContactApi.userContactCheck](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)) |
-| 撤回消息增加扩展参数         | - **参数**：`recallMessageExtensionInfo`<br/> - **说明**：撤回消息时支持传入扩展信息字段<br/> - **文档**：[EMRecallMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html) |
-| 修改聊天室增加所有者变更参数 | - **参数**：`newowner` <br/> - **说明**：支持通过修改聊天室接口直接变更聊天室所有者<br/> - **文档**：[EMModifyRoom](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) |
+| 新增校验好友功能             | - `userContactCheck`：该 API 校验指定用户是否为好友关系<br/> - 详见 [ContactApi.userContactCheck](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)) |
+| 撤回消息增加扩展参数         | - `recallMessageExtensionInfo`：该参数指定撤回消息时传入扩展信息<br/> - 详见 [EMRecallMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html) |
+| 修改聊天室增加所有者变更参数 | - `newowner`：该参数为修改聊天室接口新增，用于变更聊天室所有者。<br/> - **文档**：[EMModifyRoom](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) |
 
 ### V1.0.16 2025-07-25
 
@@ -202,6 +204,15 @@ try {
 3. 增加 "获取聊天室成员数量" 功能。
 
 以上更新内容请到 MetadataApi、GroupApi、RoomApi 中查看。
+
+### v1.0.15 2025-07-01
+
+为帮助你在高并发请求场景下优化性能，`ApiClient` 新增以下两个参数，适用于 Server SDK 使用过程中出现请求延迟较大时的调优需求。
+
+| 新增 API                          | 描述                                                         |
+| :-------------------------------- | :----------------------------------------------------------- |
+| `setDispatcherMaxRequests`        | 设置整个 `OkHttpClient` 实例允许同时处理的最大请求数（包含正在执行与排队中的请求）。详见 [API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setDispatcherMaxRequests(int))。 |
+| `setDispatcherMaxRequestsPerHost` | 设置每个主机（host）允许同时处理的最大请求数。详见 [API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setDispatcherMaxRequestsPerHost(int))。 |
 
 ### V1.0.13 2025-04-22
 

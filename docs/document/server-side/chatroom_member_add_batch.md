@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-- 向聊天室添加多位用户，一次性最多可添加 60 位用户。
+- 向聊天室添加多位用户，一次性最多可添加 100 个用户。
 - 添加聊天室成员会触发发送后回调，详见 [聊天室加人事件](callback_group_room_join.html)。
 
 ## 调用频率上限
@@ -44,7 +44,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users'  \
 
 | 参数        | 类型  | 是否必需 | 描述                 |
 | :---------- | :---- | :------- | :------------------- |
-| `usernames` | Array | 是       | 添加的用户 ID 数组，每次最多可传 60 个用户 ID。 |
+| `usernames` | Array | 是       | 添加的用户 ID 数组，每次最多可传 100 个用户 ID。 |
 
 ## 响应示例
 
@@ -98,7 +98,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/66XXXX33/users'  \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | addMembers: addMembers number more than maxSize : 60 | 批量添加数量达到限制（60）。 | 将添加的成员数量调整在限制（60）以下。 |
+| 400     | invalid_parameter | addMembers: addMembers number more than maxSize : 100 | 批量添加数量达到限制（100）。 | 将添加的成员数量调整在限制（100）以下。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | resource_not_found | grpID XX does not exist! | 聊天室 ID 不存在。 | 传入存在的合法的聊天室 ID。 |
 | 404     | resource_not_found | username XXX doesn't exist! | 要添加的用户 ID 不存在。 | 传入存在的用户 ID。 |

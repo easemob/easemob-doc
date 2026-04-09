@@ -1,4 +1,4 @@
-# 将多个用户添加到聊天室黑名单
+# 批量添加用户至聊天室黑名单
 
 ## 功能说明
 
@@ -84,7 +84,7 @@ curl -X POST 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users'  \
 
 ## 响应 body 字段
 
-如果返回的HTTP状态码为 `200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应体中的 `data` 字段包含如下参数。
 
 响应中如果 `result` 参数为 `true` 表示该用户添加成功，为 `false` 表示该用户添加失败，失败原因查请看 `reason` 参数。
 
@@ -109,3 +109,16 @@ curl -X POST 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users'  \
 | `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
 | `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
 | `applicationName` | String | 你在环信控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+
+## 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码 | 错误类型           | 错误提示        | 可能原因                              | 处理建议                     |
+| :---------- | :---------- | :---------------------------------------- | :------------------------------------ | :--------------------------- |
+| 400         | invalid_parameter  | userNames is more than max limit : 100     | 批量添加的用户数超过了上限 100。       | 调整要添加的数量在限制以下。 |
+| 401         | unauthorized       | Unable to authenticate (OAuth)            | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。        |
+| 403         | forbidden_op       | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在聊天室中。    | 使用聊天室成员的用户 ID。      |
+| 404         | resource_not_found | grpID XX does not exist!                  | 聊天室不存在。                          | 使用合法的聊天室 ID。            |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
