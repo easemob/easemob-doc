@@ -2,15 +2,17 @@
 
 ## 2026-04
 
-#### 环信 Server SDK 2.0 的 v1.0.17 发版
+#### 环信 Server SDK 2.0 发版
+
+环信 Server SDK 2.0 的 v1.0.17 于 2026 年 4 月 3 日发版。
 
 本次版本新增以下功能：
 
 | 新增功能                     | 描述                                                    |
 | :--------------------------- | :----------------------------------------------------------- |
-| 新增校验好友功能             | - **方法**：`userContactCheck` <br/> - **说明**：校验指定用户是否为好友关系<br/> - **文档**：[ContactApi.userContactCheck](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)) |
-| 撤回消息增加扩展参数         | - **参数**：`recallMessageExtensionInfo`<br/> - **说明**：撤回消息时支持传入扩展信息字段<br/> - **文档**：[EMRecallMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html) |
-| 修改聊天室增加所有者变更参数 | - **参数**：`newowner` <br/> - **说明**：支持通过修改聊天室接口直接变更聊天室所有者<br/> - **文档**：[EMModifyRoom](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) |
+| 新增校验好友功能             | - `userContactCheck`：该 API 校验指定用户是否为好友关系<br/> - 详见 [ContactApi.userContactCheck](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html#userContactCheck(com.easemob.im.api.model.EMUserContactCheck)) |
+| 撤回消息增加扩展参数         | - `recallMessageExtensionInfo`：该参数指定撤回消息时传入扩展信息<br/> - 详见 [EMRecallMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMRecallMessage.html) |
+| 修改聊天室增加所有者变更参数 | - `newowner`：该参数为修改聊天室接口新增，用于变更聊天室所有者。<br/> - 详见：[EMModifyRoom](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/model/EMModifyRoom.html) |
 
 更多详情，请参见 [V1.0.17 更新日志](/document/server-side/java_server_sdk_2.0.html#v1-0-17-2026-04-03)。
 
@@ -214,6 +216,20 @@
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | 消息翻译 RESTful API   | 消息翻译支持以下三个 RESTful API：<br/> - 翻译消息内容 <br/> - 获取翻译语言列表 <br/> - 检测文本的源语言 | 2025-7-2       | <br/> - [翻译消息内容](/document/server-side/message_translation_text.html) <br/> - [获取翻译语言列表](/document/server-side/message_translation_language_list.html) <br/> - [检测文本的源语言](/document/server-side/message_translation_detect.html) |
+
+#### Server SDK 2.0 发版
+
+环信 Server SDK 2.0 的 v1.0.15 发版。
+
+为帮助你在高并发请求场景下优化性能，`ApiClient` 新增以下两个参数，适用于 Server SDK 使用过程中出现请求延迟较大时的调优需求。
+
+| 新增 API                          | 描述                                                         |
+| :-------------------------------- | :----------------------------------------------------------- |
+| `setDispatcherMaxRequests`        | 设置整个 `OkHttpClient` 实例允许同时处理的最大请求数（包含正在执行与排队中的请求）。详见 [API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setDispatcherMaxRequests(int))。 |
+| `setDispatcherMaxRequestsPerHost` | 设置每个主机（host）允许同时处理的最大请求数。详见 [API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setDispatcherMaxRequestsPerHost(int))。 |
+
+更多详情，请参见 [V1.0.15 更新日志](/document/server-side/java_server_sdk_2.0.html#v1-0-15-2025-07-01)。
+
 
 #### SDK 发版
 

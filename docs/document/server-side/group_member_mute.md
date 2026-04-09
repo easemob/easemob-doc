@@ -5,7 +5,7 @@
 - 将一个或多个群成员加入禁言列表，即禁止群成员在一段时间内发言或永久禁言。
 - 若禁言一段时间，时间到期，自动解除禁言。若设置为永久禁言，只能 [调用 API 解除禁言](#解除成员禁言) 。
 - 被禁言的用户可以接收和查看群组内其他用户发送的消息，但不能发送消息。
-- 一次最多可禁言 60 个群组成员。
+- 一次最多可禁言 100 个群组成员。
 - 群成员被禁言后，将无法在群组中发送消息，也无法在该群组下的子区中发送消息。
 - 群禁言列表上的成员即使其被加入群白名单也不能发言。
 - 被禁言用户退出群组之后再进入同一群组，若禁言时间未到期，禁言仍然有效。
@@ -46,7 +46,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute   \
 
 | 参数            | 类型  | 是否必需 | 描述                                                       |
 | :-------------- | :---- | :------- | :--------------------------------------------------------- |
-| `usernames`     | Array | 是       | 要添加到禁言列表的用户 ID 列表，每次最多可添加 60 个。 |
+| `usernames`     | Array | 是       | 要添加到禁言列表的用户 ID 列表，每次最多可添加 100 个。 |
 | `mute_duration` | Long  | 是       | 禁言时长，单位为毫秒。例如，传入 `1000`，则禁言在 1 秒后到期。<br/>`0` 表示取消禁言，`-1` 表示永久禁言。      |
 
 ## 响应示例
@@ -104,7 +104,7 @@ curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute   \
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | forbidden_op | users [XX] are not members of this group! | 要禁言的用户 ID 不在群组中。 | 传入群组中的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 400     | invalid_parameter | userNames size is more than max limit : 60 | 批量禁言指定群成员数量超过60 | 控制禁言指定群成员数量在 60 以内。 |
+| 400     | invalid_parameter | userNames size is more than max limit : 100 | 批量禁言指定群成员数量超过 100 | 控制禁言指定群成员数量在 100 以内。 |
 | 403    | forbidden_op   | "forbidden operation on group owner!"   | 无法对群主禁言。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

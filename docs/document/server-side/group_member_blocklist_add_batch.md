@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-- 将多个用户添加至群组黑名单，一次最多可以添加 60 个用户。
+- 将多个用户添加至群组黑名单，一次最多可以添加 100 个用户。
 - 群主无法被加入群组的黑名单。
 - 用户进入群组黑名单后，会被移出群组，无法查看该群组的信息，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
 - 用户加入黑名单会触发发送后回调，详见 [成员加入群黑名单事件](callback_group_room_blocklist.html#将成员加入黑名单)。
@@ -47,7 +47,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'   \
 
 | 参数        | 类型  | 是否必需 | 描述                               |
 | :---------- | :---- | :------- | :--------------------------------- |
-| `usernames` | Array | 是       | 要添加至群组黑名单的用户 ID 数组，每次最多可传 60 个用户 ID。 |
+| `usernames` | Array | 是       | 要添加至群组黑名单的用户 ID 数组，每次最多可传 100 个用户 ID。 |
 
 ## 响应示例
 
@@ -113,7 +113,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users'   \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | userNames is more than max limit : 60 | 批量添加的用户数超过了上限 60。 | 调整要移除的数量在限制以下。 |
+| 400     | invalid_parameter | userNames is more than max limit : 100 | 批量添加的用户数超过了上限 100。 | 调整要移除的数量在限制以下。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
 | 403     | forbidden_op | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在群组中。 | 使用群组成员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
