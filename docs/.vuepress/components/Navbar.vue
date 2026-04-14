@@ -106,6 +106,14 @@ const handleLogout = () => {
   clearCookie(SESSION_COOKIE_NAME);
   window.location.reload();
 };
+
+const handleLogin = () => {
+  window.location.href = "https://console.easemob.com/user/login";
+};
+
+const handleRegister = () => {
+  window.location.href = "https://console.easemob.com/user/register";
+};
 </script>
 
 <template>
@@ -152,8 +160,8 @@ const handleLogout = () => {
       </div>
 
       <div v-else class="auth-actions">
-        <button type="button" class="auth-link">登录</button>
-        <button type="button" class="auth-link auth-link-primary">注册</button>
+        <button type="button" @click="handleLogin" class="auth-link">登录</button>
+        <button type="button" @click="handleRegister" class="auth-link auth-link-primary">注册</button>
       </div>
     </template>
   </Navbar>
