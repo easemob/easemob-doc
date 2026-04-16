@@ -13,7 +13,7 @@ const frontmatter = pageData.value.frontmatter
 const redirectUri = frontmatter.pageUri
 
 const nameMap = {
-  android: 'Andorid 集成文档',
+  android: 'Android 集成文档',
   ios: 'iOS 集成文档',
   web: 'Web 集成文档',
   applet: '小程序集成文档',

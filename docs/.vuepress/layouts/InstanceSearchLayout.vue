@@ -388,7 +388,7 @@ import { liteClient as algoliasearch } from "algoliasearch/lite";
 import { useRoute } from "vue-router";
 
 const sdkCategoryMap = {
-  "Andorid 集成文档": "Android",
+  "Android 集成文档": "Android",
   "iOS 集成文档": "iOS",
   "Web 集成文档": "Web",
   "HarmonyOS 集成文档": "HarmonyOS",
@@ -401,7 +401,7 @@ const sdkCategoryMap = {
 };
 
 const uikitCategoryMap = {
-  "UIKit-Andorid 集成文档": "Android",
+  "UIKit-Android 集成文档": "Android",
   "UIKit-iOS 集成文档": "iOS",
   "UIKit-Web 集成文档": "Web",
   "UIKit-HarmonyOS 集成文档": "HarmonyOS",
@@ -439,10 +439,10 @@ const productFilters =
   "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'常见方案' OR category:'使用 MCP 集成'";
 
 const sdkFilters =
-  "category:'Andorid 集成文档' OR category:'iOS 集成文档' OR category:'Web 集成文档' OR category:'HarmonyOS 集成文档' OR category:'小程序集成文档' OR category:'Flutter 集成文档' OR category:'React Native 集成文档' OR category:'Windows 集成文档' OR category:'Unity 集成文档' OR category:'REST API'";
+  "category:'Android 集成文档' OR category:'iOS 集成文档' OR category:'Web 集成文档' OR category:'HarmonyOS 集成文档' OR category:'小程序集成文档' OR category:'Flutter 集成文档' OR category:'React Native 集成文档' OR category:'Windows 集成文档' OR category:'Unity 集成文档' OR category:'REST API'";
 
 const uikitFilters =
-  "category:'UIKit-Andorid 集成文档' OR category:'UIKit-iOS 集成文档' OR category:'UIKit-Web 集成文档' OR category:'UIKit-HarmonyOS 集成文档' OR category:'UIKit-Flutter 集成文档' OR category:'UIKit-React Native 集成文档' OR category:'UIKit-uniapp'";
+  "category:'UIKit-Android 集成文档' OR category:'UIKit-iOS 集成文档' OR category:'UIKit-Web 集成文档' OR category:'UIKit-HarmonyOS 集成文档' OR category:'UIKit-Flutter 集成文档' OR category:'UIKit-React Native 集成文档' OR category:'UIKit-uniapp'";
 
 const apiReferenceFilters =
   "category:'Android API参考' OR category:'IOS API参考' OR category:'Web API参考' OR category:'Harmony API参考' OR category:'Flutter API参考' OR category:'React Native API参考' OR category:'Unity and Windows API参考'";
