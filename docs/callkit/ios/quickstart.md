@@ -44,7 +44,7 @@ Privacy - Camera Usage Description //相机权限
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '15.0'
 
-target 'YourTarget' do
+target 'EaseCallUIKitQuickStart' do
   use_frameworks!
 
   pod 'EaseCallUIKit'
@@ -59,7 +59,7 @@ post_install do |installer|
 end
 ```
 
-2. 在终端使用 cd 命令到 `Example` 目录，执行以下命令：
+2. 在终端使用 cd 命令到 `EaseCallUIKitQuickStart` 目录，执行以下命令：
 
 ```
 pod install
