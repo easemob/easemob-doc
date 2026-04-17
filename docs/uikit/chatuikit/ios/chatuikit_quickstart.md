@@ -25,7 +25,11 @@
 - **User Interface**：选择 **Storyboard**。
 - **Language**：选择你常用的开发语言。
 
-### 第二步 初始化
+### 第二步 添加 UIKit 依赖
+
+请参见[添加 UIKit 依赖](chatuikit_integrated.md)文档完成 UIKit 的集成。
+
+### 第三步 初始化
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
@@ -44,7 +48,7 @@ import EaseChatUIKit
 let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
 ```
 
-### 第三步 登录
+### 第四步 登录
 
 使用用户 ID 和用户 token 登录 EaseChatUIKit。
 
@@ -118,7 +122,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  }
 ```
 
-### 第四步 创建聊天页面
+### 第五步 创建聊天页面
 
 登录成功后，你可以按以下步骤创建聊天页面：
 
@@ -132,7 +136,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
  ControllerStack.toDestination(vc: vc)
 ```
 
-### 第五步 发送第一条消息
+### 第六步 发送第一条消息
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
