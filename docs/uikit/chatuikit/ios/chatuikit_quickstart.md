@@ -27,7 +27,7 @@
 
 ### 第二步 添加 UIKit 依赖
 
-请参见[添加 UIKit 依赖](chatuikit_integrated.md)文档完成 UIKit 的集成。
+请参见[添加 UIKit 依赖](chatuikit_integrated.md)文档。
 
 ### 第三步 初始化
 
