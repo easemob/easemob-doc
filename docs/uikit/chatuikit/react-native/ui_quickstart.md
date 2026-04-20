@@ -22,7 +22,7 @@
 ### 第一步 创建 RN 示例项目
 
 ```sh
-npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_demo # 推荐创建稳定版本示例
+npx @react-native-community/cli@latest init --skip-install --version "0.83.2" simple_demo # 推荐创建稳定版本示例
 ```
 
 ### 第二步 初始化项目

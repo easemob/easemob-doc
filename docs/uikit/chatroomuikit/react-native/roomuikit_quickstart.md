@@ -23,7 +23,7 @@
 1. 创建项目
 
 ```sh
-npx @react-native-community/cli@latest init --skip-install --version 0.76 simple_roomkit_demo # 推荐创建稳定版本示例
+npx @react-native-community/cli@latest init --skip-install --version "0.83.2" simple_roomkit_demo # 推荐创建稳定版本示例
 ```
 
 2. 初始化项目
