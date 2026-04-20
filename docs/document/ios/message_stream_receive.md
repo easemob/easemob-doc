@@ -102,17 +102,6 @@ private func handleStreamChunk(_ message: EMChatMessage) {
     // 错误码与完成原因
     let errorCode = chunk.errorCode
     let finishReason = chunk.finishReason
-
-    // 建议业务侧按 msgId 更新同一条消息的展示内容
-    updateStreamMessage(
-        msgId: msgId,
-        incrementText: incrementText,
-        fullText: fullText,
-        status: status,
-        customType: customType,
-        errorCode: errorCode,
-        finishReason: finishReason
-    )
 }
 ```
 
@@ -224,18 +213,18 @@ UI 使用建议如下：
 
 ## 常见问题
 
-### 1. SDK 能否主动发送流式消息？
+#### 1. SDK 能否主动发送流式消息？
 
 不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，iOS SDK 只负责接收。
 
-### 2. `chunk` 和 `text` 有何区别？
+#### 2. `chunk` 和 `text` 有何区别？
 
 - `chunk`：当前分片内容。
 - `text`：从首个分片到当前分片的累计合并内容。
 
 通常 UI 展示应以 `text` 为准。
 
-### 3. 如何判断消息结束？
+#### 3. 如何判断消息结束？
 
 可通过以下任一方式判断：
 
@@ -243,10 +232,10 @@ UI 使用建议如下：
 - `status` 为 `startAndComplete`
 - `status` 为 `error`
 
-### 4. 为什么后续分片 `ext` 不生效？
+#### 4. 为什么后续分片 `ext` 不生效？
 
 因为最终持久化仅以首个分片中的 `ext` 为准。后续分片不应用于更新最终消息扩展字段。
 
-### 5. 是否需自行合并分片？
+#### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI。在 iOS SDK 中，可使用 `message.messageId` 作为对应标识，避免将同一条流式消息误显示为多条消息。

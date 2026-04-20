@@ -104,9 +104,6 @@ private void handleStreamChunk(EMMessage message) {
     // 错误码与完成原因
     int errorCode = chunk.getErrorCode();
     int finishReason = chunk.getFinishReason();
-
-    // 以下 `updateStreamMessage(...)` 为业务侧自定义的示例方法，用于说明如何按 `msgId` 更新同一条流式消息的展示内容。
-    updateStreamMessage(msgId, incrementText, fullText, status, customType, errorCode, finishReason);
 }
 ```
 
@@ -224,18 +221,18 @@ UI 使用建议如下：
 
 ## 常见问题
 
-### 1. SDK 能否主动发送流式消息？
+#### 1. SDK 能否主动发送流式消息？
 
 不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，Android SDK 只负责接收。
 
-### 2. `getText()` 和 `getMessage()` 有何区别？
+#### 2. `getText()` 和 `getMessage()` 有何区别？
 
 - `getText()`：当前分片内容。
 - `getMessage()`：从首个分片到当前分片的累计合并内容。
 
 通常 UI 展示应以 `getMessage()` 为准。
 
-### 3. 如何判断消息结束？
+#### 3. 如何判断消息结束？
 
 可通过以下任一方式判断：
 
@@ -244,10 +241,10 @@ UI 使用建议如下：
 - `status` 为 `START_AND_COMPLETE`
 - `status` 为 `ERROR`
 
-### 4. 为什么后续分片 `ext` 不生效？
+#### 4. 为什么后续分片 `ext` 不生效？
 
 因为最终持久化仅以首个分片中的 `ext` 为准。后续分片不应用于更新最终消息扩展字段。
 
-### 5. 是否需自行合并分片？
+#### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI，避免将同一条流式消息误显示为多条消息。

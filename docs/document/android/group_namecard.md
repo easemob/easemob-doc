@@ -143,23 +143,23 @@ EMClient.getInstance().init(context, options);
 
 ## 常见问题
 
-### 设置群成员名片后，为何其他成员未立即收到事件？
+#### 设置群成员名片后，为何其他成员未立即收到事件？
 
 调用 `EMGroupManager#asyncUpdateGroupNamecard` 后，当前登录用户在指定群组中的群成员名片会更新。其他 **在线成员** 在接收到对应的群成员名片变更通知后，才会触发 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件。
 
-### 为何调用 getGroupNamecard 获取不到群成员名片？
+#### 为何调用 getGroupNamecard 获取不到群成员名片？
 
 `EMGroupManager#getGroupNamecard` 仅从本地内存读取数据，不会主动从服务端获取最新信息。如果本地尚未内存对应成员的群成员名片，返回结果可能为空。此时可先调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端获取群成员信息。
 
-### 从服务端获取的群成员信息是否写内存？
+#### 从服务端获取的群成员信息是否写内存？
 
 会。调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端获取群成员信息成功后，返回结果中的群成员名片等数据会写入本地内存，后续可通过 `EMGroupManager#getGroupNamecard` 直接读取。
 
-### 开启用户信息自动管理后，群成员名片为何会自动更新？
+#### 开启用户信息自动管理后，群成员名片为何会自动更新？
 
 开启用户信息自动管理 `EMOptions#setEnableUserInfo(true)` 后，发送消息时会自动附带发送方群成员名片更新时间。接收方收到消息后，SDK 会将消息中的更新时间与本地内存进行比较。如果消息中的更新时间晚于本地内存，SDK 会自动从服务端拉取最新群成员名片并更新本地内存。
 
-### 通过消息自动同步群成员名片后，还需主动从服务端获取吗？
+#### 通过消息自动同步群成员名片后，还需主动从服务端获取吗？
 
 视业务场景而定。通过消息自动同步依赖消息触发；如果业务需要立即获取最新群成员名片，或当前没有消息触发同步，仍建议调用 `EMGroupManager#asyncFetchGroupMembersInfo` 主动从服务端获取最新数据。
 
