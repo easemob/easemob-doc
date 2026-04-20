@@ -106,6 +106,7 @@ void handleStreamChunk(ChatMessage msg) {
   // 错误码与完成原因
   final int errorCode = chunk.errorCode;
   final int finishReason = chunk.finishReason;
+  // 建议业务侧按 msgId 更新同一条消息的展示内容
 }
 ```
 

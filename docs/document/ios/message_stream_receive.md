@@ -102,6 +102,7 @@ private func handleStreamChunk(_ message: EMChatMessage) {
     // 错误码与完成原因
     let errorCode = chunk.errorCode
     let finishReason = chunk.finishReason
+    // 建议业务侧按 msgId 更新同一条消息的展示内容
 }
 ```
 

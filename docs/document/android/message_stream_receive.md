@@ -104,6 +104,7 @@ private void handleStreamChunk(EMMessage message) {
     // 错误码与完成原因
     int errorCode = chunk.getErrorCode();
     int finishReason = chunk.getFinishReason();
+    // 建议业务侧按 msgId 更新同一条消息的展示内容
 }
 ```
 

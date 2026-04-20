@@ -101,6 +101,7 @@ function handleStreamChunk(message: ChatMessage): void {
   // 错误码与完成原因
   const errorCode: number = chunk.errorCode();
   const finishReason: number = chunk.finishReason();
+  // 建议业务侧按 msgId 更新同一条消息的展示内容
 }
 ```
 

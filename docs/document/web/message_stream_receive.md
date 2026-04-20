@@ -109,6 +109,7 @@ function handleStreamChunk(message) {
   // 错误码与完成原因
   const errorType = stream.errorType;
   const finishReason = stream.finishReason;
+  // 建议业务侧按 message.id 更新同一条消息的展示内容
 }
 ```
 
