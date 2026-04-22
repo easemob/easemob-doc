@@ -4,13 +4,16 @@
 
 ## v1.15.0 2026-04-22
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.19.1 和`Android` 4.19.2）。
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.19.1
+  - `Android` 升级至 4.19.2
 - 支持 接收服务端发送的流式消息。详见 `ChatMessageEventListener#onStreamMessagesReceived`。
-- 支持 LZ4 协议压缩。
 
 ## v1.14.0 2026-02-04
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.18.1 和`Android` 4.18.1）。
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.18.1
+  - `Android` 升级至 4.18.1
 - 底层支持安全 DNS 解析 DoH，提高连通性。
 - 支持私有部署时设置 IPv6 格式的 REST 地址。
 
@@ -18,7 +21,9 @@
 
 #### 新增特性
 
-- 依赖的原生 SDK 升级到版本（`iOS` 4.17.1 和`Android` 4.17.1）。
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.17.1
+  - `Android` 升级至 4.17.1
 - 长连接支持 WebSocket 协议。
 - `ChatOptions` 新增 API 支持 WebSocket 私有部署:
    - `ChatOptions#webSocketServer`：设置 WebSocket 服务器地址。
@@ -58,7 +63,9 @@
 
 #### 新增特性
 
-依赖的原生 SDK 升级到版本（`iOS` 4.15.1 和 `Android` 4.15.2）。
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.15.1
+  - `Android` 升级至 4.15.2
 
 **消息相关**
 
