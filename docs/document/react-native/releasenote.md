@@ -2,6 +2,12 @@
 
 <Toc />
 
+## v1.15.0 2026-04-22
+
+- 依赖的原生 SDK 升级到版本（`iOS` 4.19.1 和`Android` 4.19.2）。
+- 支持 接收服务端发送的流式消息。详见 `ChatMessageEventListener#onStreamMessagesReceived`。
+- 支持 LZ4 协议压缩。
+
 ## v1.14.0 2026-02-04
 
 - 依赖的原生 SDK 升级到版本（`iOS` 4.18.1 和`Android` 4.18.1）。
