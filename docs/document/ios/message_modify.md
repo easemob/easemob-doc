@@ -55,7 +55,7 @@
     }];
     
     // 自定义消息：可同时修改消息体和消息扩展属性
-    EMCustomMessageBody* newCustomMessageBody = [[EMCustomMessageBody alloc] initWithEvent:@"event" params:@{@"key": @"value"}];
+    EMCustomMessageBody* newCustomMessageBody = [[EMCustomMessageBody alloc] initWithEvent:@"event" customExt:@{@"key": @"value"}];
     NSDictionary* newExt1 = @{@"newKey": @"newValue"};
     // customBody 和 ext 不能同时为 nil
     [EMClient.sharedClient.chatManager modifyMessage:@"messageId" body:newCustomMessageBody ext:newExt1 completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {

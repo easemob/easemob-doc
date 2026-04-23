@@ -206,8 +206,8 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
 2. 发送方调用 `sendMessage` 方法发送自定义消息。
 
 ```objectivec
-// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
-EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" ext:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
+// event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`customExt` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
+EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" customExt:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 message.chatType = EMChatTypeChat;
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
