@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{{ lang }}" data-theme="light">
   <head>
     <meta charset="utf-8" />
@@ -7,13 +7,13 @@
     <meta name="theme" content="VuePress Theme Hope" />
     <script>
       var _hmt = _hmt || [];
-      (function() {
+      (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?32d09c88ead3a1a92427a7fdbe1c60a3";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
-    </script>      
+    </script>
     <!--vuepress-ssr-head-->
     <style>
       :root {
@@ -30,7 +30,7 @@
       }
     </style>
     <script>
-      const userMode = 'light'
+      const userMode = "light";
       // const systemDarkMode =
       //   window.matchMedia &&
       //   window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -41,10 +41,20 @@
     </script>
     <!--vuepress-ssr-styles-->
     <!--vuepress-ssr-resources-->
+    <script src="https://doc.easemob.com/utm_helper.js" defer></script>
+
     <script
-     src="https://doc.easemob.com/utm_helper.js"
-     defer>
-   </script>
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-G10ZH1K58T"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-G10ZH1K58T");
+    </script>
 
     <!-- <script type="text/javascript">window.DocsBotAI=window.DocsBotAI||{},DocsBotAI.init=function(c){return new Promise(function(e,o){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://widget.docsbot.ai/chat.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n),t.addEventListener("load",function(){window.DocsBotAI.mount({id:c.id,supportCallback:c.supportCallback,identify:c.identify});var t;t=function(n){return new Promise(function(e){if(document.querySelector(n))return e(document.querySelector(n));var o=new MutationObserver(function(t){document.querySelector(n)&&(e(document.querySelector(n)),o.disconnect())});o.observe(document.body,{childList:!0,subtree:!0})})},t&&t("#docsbotai-root").then(e).catch(o)}),t.addEventListener("error",function(t){o(t.message)})})};</script>
     <script type="text/javascript">
