@@ -21,20 +21,20 @@
 | 域名类型 | 具体域名   | 
 | :------ | :----- |
 | request 合法域名<br/>uploadFile 合法域名<br/>downloadFile 合法域名  | <br/> - https://a1.easemob.com（国内 1 区）<br/> - https://a1-v2.easemob.com（国内 1 区）<br/> - https://ngi-a1.easemob.com（国内 2 区）<br/> - https://a1-sgp.easemob.com （新加披1 区）<br/> - https://a61.easemob.com （新加坡 2 区）<br/> - https://a41.easemob.com （美东1 区）<br/> - https://a71.easemob.com （德国 2 区）<br/> - https://a1-chatfile.easemob.com （downloadFile）   | 
-| socket 合法域名 | <br/> - wss://im-api-alipay.easemob.com/websocket（国内 1 区） <br/> - wss://im-api-alipay.easecdn.com/websocket（国内 1 区）<br/> - wss://ngi-im-api-wechat.easemob.com（国内 2 区） | 
+| socket 合法域名 | <br/> - wss://im-api-alipay.easemob.com/websocket（国内 1 区） <br/> - wss://im-api-alipay.easecdn.com/websocket（国内 1 区）<br/> - wss://ngi-im-api-wechat.easemob.com/websocket（国内 2 区） | 
 
 环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
 | 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
 | ------------- | ------------------ | -------------------------------- |
-| 国内 1 区   | https://a1.easemob.com    | - wss://im-api-alipay.easemob.com<br/> - wss://im-api-alipay.easecdn.com   |
-| 国内 2 区   | https://ngi-a1.easemob.com    | wss://ngi-im-api-wechat.easemob.com  |
+| 国内 1 区   | https://a1.easemob.com    | - wss://im-api-alipay.easemob.com/websocket<br/> - wss://im-api-alipay.easecdn.com/websocket   |
+| 国内 2 区   | https://ngi-a1.easemob.com    | wss://ngi-im-api-wechat.easemob.com/websocket  |
 | 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
 | 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
-| 新加坡 1 区   | - https://a1-sgp.easemob.com <br/> - https://a1-sgp.easecdn.com | - wss://im-api-alipay-sgp.easemob.com <br/> - wss://im-api-alipay-sgp.easecdn.com  |
-| 新加坡 2 区   | - https://a61.easemob.com <br/> - https://a61.easecdn.com | - wss://im-api-alipay-61.easemob.com <br/> - wss://im-api-alipay-61.easecdn.com |
-| 美东 1 区     | - https://a41.easemob.com <br/> - https://a41.easecdn.com       | - wss://im-api-alipay-41.easemob.com <br/> - wss://im-api-alipay-41.easecdn.com   |
-| 德国 2 区 | - https://a71.easemob.com <br/> - https://a71.easecdn.com       | - wss://im-api-alipay-71.easemob.com <br/> - wss://im-api-alipay-71.easecdn.com   |
+| 新加坡 1 区   | - https://a1-sgp.easemob.com <br/> - https://a1-sgp.easecdn.com | - wss://im-api-alipay-sgp.easemob.com/websocket <br/> - wss://im-api-alipay-sgp.easecdn.com/websocket  |
+| 新加坡 2 区   | - https://a61.easemob.com <br/> - https://a61.easecdn.com | - wss://im-api-alipay-61.easemob.com/websocket <br/> - wss://im-api-alipay-61.easecdn.com/websocket |
+| 美东 1 区     | - https://a41.easemob.com <br/> - https://a41.easecdn.com       | - wss://im-api-alipay-41.easemob.com/websocket <br/> - wss://im-api-alipay-41.easecdn.com/websocket   |
+| 德国 2 区 | - https://a71.easemob.com <br/> - https://a71.easecdn.com       | - wss://im-api-alipay-71.easemob.com/websocket <br/> - wss://im-api-alipay-71.easecdn.com/websocket   |
 
 应用所在数据中心可以在环信控制台的 **应用概览** 页面中查看：
 
