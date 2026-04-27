@@ -1,6 +1,6 @@
 export const STT_SIDEBAR = [
      { text: "计费说明", link: "/value-added/stt/speech_to_text_billing.html" },
-     { text: "开通服务", link: "/value-added/stt/voice_to_text_activate.html" },
+     // { text: "开通服务", link: "/value-added/stt/voice_to_text_activate.html" },
      {
        text: "集成服务",
        collapsible: true,
