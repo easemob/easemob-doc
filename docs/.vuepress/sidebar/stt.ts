@@ -19,7 +19,7 @@ export const STT_SIDEBAR = [
           },
           {
             text: "小程序",
-            link: "/value-added/stt/voice_to_text_miniprogram.html",
+            link: "/value-added/stt/voice_to_text_applet.html",
           },
         ],
       }

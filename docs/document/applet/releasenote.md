@@ -6,7 +6,7 @@
 
 #### 新增特性
 
-新增 [语音转文字功能](/value-added/stt/voice_to_text_miniprogram.html)。
+新增 [语音转文字功能](/value-added/stt/voice_to_text_applet.html)。
 
 #### 修复
 
