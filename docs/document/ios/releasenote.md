@@ -2,6 +2,21 @@
 
 <Toc />
 
+## v4.21.0 Dev 2026-4-28（开发版）
+
+#### 新增特性
+
+新增 [语音转文字功能](/value-added/stt/voice_to_text_android.html)。
+
+#### 优化
+
+发送消息时，若翻译失败，SDK 返回错误码 1113，提示消息翻译失败（`EMErrorTranslateServiceFail`）。 
+
+#### 修复
+
+- 修复加好友时，因用户不存在导致的错误码不正确的问题：由错误码 303 `EMErrorServerUnknownError` 修改为错误码 204 `EMErrorUserNotFound`。
+- 修复群组或聊天室中，因进出事件通知先于接口返回值到达，导致成员人数显示不准确的问题。
+
 ## v4.20.0 Dev 2026-3-30（开发版）
 
 #### 新增特性

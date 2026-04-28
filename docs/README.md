@@ -156,7 +156,10 @@ starter:
         text: 消息翻译
       - icon: /sdk/instant.svg
         link: /value-added/push/push_overview.html
-        text: 即时推送  
+        text: 即时推送
+      - icon: /sdk/instant.svg
+        link: /value-added/stt/speech_to_text_billing.html
+        text: 语音转文字    
 projects:
   - title: SDK/服务端功能
     features:
