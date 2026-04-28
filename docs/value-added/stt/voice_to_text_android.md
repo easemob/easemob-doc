@@ -2,7 +2,7 @@
 
 本文介绍如何使用 Android SDK 将语音转换为文字。
 
-本功能从 4.21.0 版本开始支持。
+本功能从 SDK 4.21.0 版本开始支持。
 
 ## 功能说明
 
@@ -57,7 +57,7 @@
 开始前，请确保满足以下条件：
 
 - 已将 SDK 升级至 v4.21.0 或以上版本。
-- 应用已 [开通语音转文字服务](voice_to_text_activate.html)。
+- 已联系商务开通语音转文字服务。
 - 已完成 [Android SDK 初始化](initialization.html)，并成功 [登录](login.html)。
 - 已具备 [发送](message_send.html#发送语音消息) 和 [接收语音消息](message_receive.html#接收语音消息) 的基础集成能力。
 
