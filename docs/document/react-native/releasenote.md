@@ -7,7 +7,7 @@
 - 依赖的原生 SDK 升级：
   - `iOS` 升级至 4.19.1
   - `Android` 升级至 4.19.2
-- 支持 接收服务端发送的流式消息。详见 `ChatMessageEventListener#onStreamMessagesReceived`。
+- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
 
 ## v1.14.0 2026-02-04
 
