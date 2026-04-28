@@ -6,7 +6,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS/Web/小程序 SDK 4.21.0 开发版发布   | [支持语言转文字](/value-added/stt/voice_to_text_android.html)。  | 2026-4-27     | - [Android SDK 4.21.0 更新日志](/document/android/releasenote.html#v4-21-0-dev-2026-4-27-开发版) <br/> - [iOS SDK 4.21.0 更新日志](/document/ios/releasenote.html#v4-21-0-dev-2026-4-27-开发版) <br/> - [Web SDK 4.21.0 更新日志](/document/web/releasenote.html#v4-21-0-dev-2026-4-27-开发版)<br/> - [小程序 SDK 4.21.0 更新日志](/document/applet/releasenote.html#v4-21-0-dev-2026-4-27-开发版)      |
+| Android/iOS/Web/小程序 SDK 4.21.0 开发版发布   | [支持语言转文字](/value-added/stt/voice_to_text_android.html)。  | 2026-4-28     | - [Android SDK 4.21.0 更新日志](/document/android/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [iOS SDK 4.21.0 更新日志](/document/ios/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [Web SDK 4.21.0 更新日志](/document/web/releasenote.html#v4-21-0-dev-2026-4-28-开发版)<br/> - [小程序 SDK 4.21.0 更新日志](/document/applet/releasenote.html#v4-21-0-dev-2026-4-28-开发版)      |
 
 #### 环信 Server SDK 2.0 发版
 
