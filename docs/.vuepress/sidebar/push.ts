@@ -1,5 +1,5 @@
 export const PUSH_SIDEBAR = [
-    { text: '产品概述', link: 'push_overview.html' },
+    { text: '服务介绍', link: 'push_overview.html' },
     {
       text: '计费说明',
       collapsible: true,
