@@ -1,7 +1,5 @@
 export const PUSH_SIDEBAR = [
-    { text: '产品概述', link: 'push_overview.html' },
-    { text: '产品动态', link: 'push_dynamics.html' },
-    { text: '全球化部署', link: 'push_global_deployment.html' },
+    { text: '服务介绍', link: 'push_overview.html' },
     {
       text: '计费说明',
       collapsible: true,
@@ -14,11 +12,11 @@ export const PUSH_SIDEBAR = [
       text: '快速入门',
       collapsible: true,
       children: [
-        { text: '创建产品及应用', link: 'push_createproduct_app.html' },
+        { text: '开通服务', link: 'push_activate.html' },
+        { text: '证书配置', link: 'push_certificate_config.html' },
         { text: '创建推送', link: 'push_task_create.html' },
         { text: '推送任务', link: 'push_task.html' },
         { text: '标签管理', link: 'push_tag_mgmt.html' },
-        { text: '证书配置', link: 'push_certificate_config.html' },
         { text: '数据统计', link: 'push_statistics.html' },
       ]
     },
