@@ -4,6 +4,7 @@
 
 - 添加关键词。
 - 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。
+- 关键词可以在 [环信控制台](https://console.easemob.com/user/login) 配置和使用，详见 [关键词审核文档](/value-added/moderation/moderation_keyword.html#添加关键词)。
 
 ## 调用频率上限
 

@@ -2,7 +2,8 @@
 
 ## 功能说明
 
-你可以查询单个关键词名单或分页查询关键词名单列表。
+- 你可以查询单个关键词名单或分页查询关键词名单列表。
+- 关键词名单也可在 [环信控制台](https://console.easemob.com/user/login) [查询](/value-added/moderation/moderation_keyword.html#配置关键词名单)。
 
 ## 调用频率上限
 
