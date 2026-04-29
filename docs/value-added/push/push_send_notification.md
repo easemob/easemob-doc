@@ -72,6 +72,7 @@ POST https://{host}/{org_name}/{app_name}/push/sync/{target}
 | :------------ | :--- | :----------------------------------------------------------- | :------- |
 | `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
 | `pushMessage` | JSON | 推送通知。关于通知内容，请查看 [配置推送通知](push_notification_config.html)。 | 是       |
+| `platform` | String | 目标推送平台，支持以下取值：<br/> - `android`：Android 平台<br/> - `ios`：iOS 平台<br/> - `harmonyos`：鸿蒙平台<br/>该过滤条件同时适用于厂商推送通道和环信推送通道。 | 否       |
 
 ### HTTP 响应
 
@@ -105,7 +106,8 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
         "sub_title": "环信"
-      }
+      },
+    "platform": "harmonyos" 
 }'
 ```
 
@@ -197,6 +199,7 @@ POST https://{host}/{org_name}/{app_name}/push/async/{target}
 | :------------ | :--- | :------------------------ | :------- |
 | `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
 | `pushMessage` | JSON | 推送通知。关于通知内容，请查看 [配置推送通知](push_notification_config.html)。 | 是       |
+| `platform` | String | 目标推送平台，支持以下取值：<br/> - `android`：Android 平台<br/> - `ios`：iOS 平台<br/> - `harmonyos`：鸿蒙平台<br/>该过滤条件同时适用于厂商推送通道和环信推送通道。 | 否       |
 
 ### HTTP 响应
 
@@ -230,7 +233,8 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/async/test1' \
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
         "sub_title": "环信"
-     }
+     },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -278,6 +282,7 @@ POST https://{host}/{org_name}/{app_name}/push/single
 | `targets`     | List | 推送的目标用户 ID。最多可传 100 个。      | 是       |
 | `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
 | `pushMessage` | JSON | 推送通知。关于通知内容，请查看 [配置推送通知](push_notification_config.html)。 | 是       |
+| `platform` | String | 目标推送平台，支持以下取值：<br/> - `android`：Android 平台<br/> - `ios`：iOS 平台<br/> - `harmonyos`：鸿蒙平台<br/>该过滤条件同时适用于厂商推送通道和环信推送通道。 | 否       |
 
 ### HTTP 响应
 
@@ -316,7 +321,8 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
         "vivo": {
  
         }
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -365,6 +371,7 @@ POST https://{host}/{org_name}/{app_name}/push/list/label
 | `startDate`     | String | 推送任务开始时间，格式: yyyy-MM-dd HH:mm:ss，例如 2024-01-01 12:00:00。<Container type="tip" title="提示">1. 定时时间只能是 1 小时之后，30 天之内。<br/>2. 定时时间时区判定为服务器所在时区。如果跨服务器时区调用请注意计算准确时间。</Container>   | 否       |
 | `strategy`    | Int  | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。 | 否       |
 | `pushMessage` | JSON | 推送通知。关于通知的内容，请参考[配置推送通知](push_notification_config.html)。 | 是       |
+| `platform` | String | 目标推送平台，支持以下取值：<br/> - `android`：Android 平台<br/> - `ios`：iOS 平台<br/> - `harmonyos`：鸿蒙平台<br/>该过滤条件同时适用于厂商推送通道和环信推送通道。 | 否       |
 
 ### HTTP 响应
 
@@ -399,7 +406,8 @@ curl -X POST 'http://a1.easemob.com/easemob/easeim/push/list/label' \
         "title": "Easemob PUSH",
         "content": "Welcome to Easemob Push Service",
         "sub_title": "Easemob"
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -443,6 +451,7 @@ POST https://{host}/{org_name}/{app_name}/push/task
 | `startDate`     | 否 | String  | 推送任务开始时间，格式: yyyy-MM-dd HH:mm:ss，例如 2024-01-01 12:00:00。<Container type="tip" title="提示">1. 设置的时间必须为当前时间的 1 小时之后，30 天之内。例如，如果当前时间为 2024-09-01 00:00:00，你设置的时间必须是 2024-09-01 01:00:00 及之后的时间，而且不能超过 2024-10-01 01:00:00。<br/>2. 设置的时间的时区默认为服务器所在时区。如果跨服务器时区调用，请注意计算准确时间。</Container>   |       
 | `strategy`    | 否  | integer | 推送策略：<br/> -`0`：第三方厂商通道优先，失败时走环信通道。<br/> - `1`：只走环信通道：若用户在线，则直接推送；若用户离线，消息会保留一段时间（视购买的套餐包而定），等用户上线后向其推送消息。若用户在超过消息存储期限时仍为上线，则丢弃消息。<br/> -（默认）`2`：只走第三方厂商通道：若用户离线，消息保留时间视不同厂商而定。若推送失败，直接丢弃推送消息。<br/> - `3`：在线走环信通道，离线走第三方厂商通道。如果厂商推送失败，则等待用户上线后通过环信通道下发。<br/> - `4`：只走环信通道且只推在线用户。离线用户收不到推送通知。|
 | `pushMessage` | 是     | JSON    | 推送通知。                                                   |
+| `platform` | String | 目标推送平台，支持以下取值：<br/> - `android`：Android 平台<br/> - `ios`：iOS 平台<br/> - `harmonyos`：鸿蒙平台<br/>该过滤条件同时适用于厂商推送通道和环信推送通道。 | 否       |
 
 ### HTTP 响应
 
@@ -473,7 +482,8 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task' \
         "subTitle": "Hello",
         "content": "Hello",
         "vivo": {}
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
