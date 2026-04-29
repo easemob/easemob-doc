@@ -2,7 +2,8 @@
 
 ## 功能说明
 
-批量删除关键词名单中的关键词。
+- 批量删除关键词名单中的关键词。
+- 关键词可以在 [环信控制台](https://console.easemob.com/user/login) [批量删除](/value-added/moderation/moderation_keyword.html#删除关键词)。
 
 ## 调用频率上限
 

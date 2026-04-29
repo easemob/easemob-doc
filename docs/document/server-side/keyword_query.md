@@ -4,6 +4,7 @@
 
 - 在单个关键词名单中查询关键词。
 - 该接口为模糊查询。例如，若传入关键词 `message`，响应中会返回关键词名单中包含该关键词的词条，包括 `message``messageid`、`addmessage` 和 `deletemessage` 等词条。
+- 你可以在 [环信控制台](https://console.easemob.com/user/login) 查询关键词，详见 [关键词审核文档](/value-added/moderation/moderation_keyword.html#配置关键词名单)。
 
 ## 调用频率上限
 
