@@ -106,7 +106,8 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/sync/test1' \
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
         "sub_title": "环信"
-      }
+      },
+    "platform": "harmonyos" 
 }'
 ```
 
@@ -232,7 +233,8 @@ curl -X POST 'http://XXXX/XXXX/XXXX/push/async/test1' \
         "title": "环信推送",
         "content": "你好，欢迎使用环信推送服务",
         "sub_title": "环信"
-     }
+     },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -319,7 +321,8 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
         "vivo": {
  
         }
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -403,7 +406,8 @@ curl -X POST 'http://a1.easemob.com/easemob/easeim/push/list/label' \
         "title": "Easemob PUSH",
         "content": "Welcome to Easemob Push Service",
         "sub_title": "Easemob"
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
@@ -478,7 +482,8 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task' \
         "subTitle": "Hello",
         "content": "Hello",
         "vivo": {}
-    }
+    },
+    "platform": "harmonyos"
 }'
 ```
 
