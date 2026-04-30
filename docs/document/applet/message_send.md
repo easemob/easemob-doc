@@ -50,36 +50,10 @@ function sendTextMessage() {
 - 语音、图片、视频和文件消息本质上是附件消息。
 - 创建和发送附件类型消息。SDK 将附件上传到环信服务器，获取消息的基本信息以及服务器上附件文件的路径。
 - 对于图片消息，环信服务器会自动生成图片缩略图；对于视频消息，视频的首帧为缩略图。
-   
-对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+  
+另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。  
 
-```javascript
-function sendPrivateUrlImg() {
-  let option = {
-    chatType: "singleChat",
-    // 消息类型。
-    type: "img",
-    // 图片文件的 URL 地址。
-    url: "img url",
-    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: "username",
-  };
-  // 创建一条图片消息。
-  let msg = WebIM.message.create(option);
-  // 调用 `send` 方法发送该图片消息。
-  conn.send(msg);
-}
-```
-
-:::tip 
-环信即时通讯 IM 小程序 SDK v4.19.0 及以上版本新增了便捷获取上传地址的方法。通过以下方式，你可以直接获取文件上传的服务器基地址（URL）：
-
-```js
-// WebIM.conn 为您初始化的 SDK 实例
-const uploadUrl = WebIM.conn.getChatFilesUrl();
-```
-:::
-
+消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
 
 ### 发送语音消息
 
@@ -561,6 +535,38 @@ conn.send
 
 ## 更多
 
+### 上传消息附件至自有服务器
+
+发消息时，你可以将消息附件上传至你自己的服务器（而非环信服务器），然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+
+```javascript
+function sendPrivateUrlImg() {
+  let option = {
+    chatType: "singleChat",
+    // 消息类型。
+    type: "img",
+    // 图片文件的 URL 地址。
+    url: "img url",
+    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+    to: "username",
+  };
+  // 创建一条图片消息。
+  let msg = WebIM.message.create(option);
+  // 调用 `send` 方法发送该图片消息。
+  conn.send(msg);
+}
+```
+
+:::tip 
+环信即时通讯 IM 小程序 SDK v4.19.0 及以上版本新增了便捷获取上传地址的方法。通过以下方式，你可以直接获取文件上传的服务器基地址（URL）：
+
+```js
+// WebIM.conn 为您初始化的 SDK 实例
+const uploadUrl = WebIM.conn.getChatFilesUrl();
+```
+:::
+
+
 ### 聊天室消息优先级与消息丢弃逻辑
 
 - **消息优先级**：对于聊天室消息，环信即时通讯提供消息分级功能，支持高、普通和低三种优先级，高优先级的消息会优先送达。你可以在创建消息时对指定消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
@@ -596,3 +602,7 @@ function sendTextMessage() {
 - 设置发送方收到内容审核替换后的内容
 
 若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
+### 消息大小和存储限制
+
+各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
