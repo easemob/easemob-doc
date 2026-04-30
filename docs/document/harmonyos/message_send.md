@@ -61,6 +61,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 
+消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。
@@ -366,4 +368,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 ### 发送消息前的内容审核
 
 [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/value-added/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
+
+### 消息大小和存储限制
+
+各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
 

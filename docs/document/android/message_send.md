@@ -63,6 +63,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 1. 创建和发送附件类型消息。
 2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
+消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。
@@ -369,6 +371,10 @@ public static void sendPrivateUrlImg(String toUserId,
 - 设置发送方收到内容审核替换后的内容
 
 若初始化时打开了 `EMOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+
+### 消息大小和存储限制
+
+各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
 
 
 
