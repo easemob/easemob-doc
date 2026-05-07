@@ -61,21 +61,21 @@ public class Config {
 
 根据业务资源，API 分为：
 
-- [Attachment](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/attachment/AttachmentApi.html) 用于上传下载附件。
-- [Block](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/block/BlockApi.html) 用于限制访问(将用户加入黑名单、群组/聊天室禁言等)。
-- [Contact](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/contact/ContactApi.html) 用于管理联系人(添加好友等)。
-- [Group](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/group/GroupApi.html) 用于管理群组。
-- [Message](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/message/MessageApi.html) 用于发送消息。
-- [User](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/user/UserApi.html) 用于管理用户。
-- [UserMetadata](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/metadata/MetadataApi.html) 用于管理用户属性。
-- [Push](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/push/PushApi.html) 用于管理用户推送(设置推送免打扰等)。
-- [Token](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/token/TokenApi.html) 用于获取用户 Token。
-- [Room](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/room/RoomApi.html) 用于管理聊天室。
-- [Presence](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/server/api/presence/PresenceApi.html) 用于管理在线状态订阅。
+- [Chat File](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ChatFileApi.html) 用于上传下载附件。
+- [Block](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html) 用于限制访问(将用户加入黑名单、群组/聊天室禁言等)。
+- [Contact](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html) 用于管理联系人(添加好友等)。
+- [Group](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/GroupApi.html) 用于管理群组。
+- [Message](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html) 用于发送消息。
+- [User](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/UserApi.html) 用于管理用户。
+- [UserMetadata](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MetadataApi.html) 用于管理用户属性。
+- [Push](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/PushApi.html) 用于管理用户推送(设置推送免打扰等)。
+- [Token](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/TokenApi.html) 用于获取用户 Token。
+- [Room](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html) 用于管理聊天室。
+- [Presence](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/PresenceApi.html) 用于管理在线状态订阅。
 
-每个业务资源对应一个方法，例如，用户相关的 API，都可以在 `.user()` 找到。
+每个业务资源对应一个方法，例如，用户相关 API，都可以在 `.user()` 找到。
 
-举个例子，我们要注册一个用户，就可以这样写：
+例如，要注册一个用户，可以这样写：
 
 ```java
 @Service
