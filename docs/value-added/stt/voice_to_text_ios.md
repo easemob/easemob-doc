@@ -96,13 +96,14 @@ EMChatMessage *voiceMessage = ...;
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMChatMessage` 必须是语音消息，否则会返回 `EMErrorMessageInvalid`。你可以通过判断 `message.body.type == EMMessageBodyTypeVoice` 确认消息体类型。
 - 当前支持 `AMR` 和 `MP3` 格式的语音消息，不支持直接转换 `PCM` 格式的语音消息。
+- 如需转换 PCM 音频，请使用本地语音文件转文字接口 `IEMChatManager#voiceFileToText:voiceParam:completion:`，并传入对应的 `EMVoiceParam`。
 - 转换成功后，可通过 `EMVoiceMessageBody.text` 读取持久化的文本结果。
 
 ## 将本地语音文件转换为文本
 
-调用 `IEMChatManager` 中的 `voiceFileToText:voiceParam:completion:` 将本地语音文件转换为文本，并通过回调返回识别结果。
+调用 `IEMChatManager#voiceFileToText:voiceParam:completion:` 将本地语音文件转换为文本，并通过回调返回识别结果。
 
-SDK 支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。
+该接口支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。其中，`PCM` 文件需要结合 `EMVoiceParam` 指定格式、采样率、采样位深和声道数等参数。
 
 此外，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
 
@@ -183,6 +184,7 @@ if (message.body.type == EMMessageBodyTypeVoice) {
 - 转换本地语音文件前，建议先校验文件是否存在且可读，避免无效调用。
 - 如果本地语音文件来自沙盒外部目录、文件提供器或第三方路径，请确保应用具备读取权限，并且路径可被当前进程访问。
 - 如果本地文件大小（10 MB）或时长（60 秒）超过限制，或音频格式与参数不匹配，可能导致识别失败。
+- `PCM` 音频仅支持通过 [本地文件转文字接口](#将本地语音文件转换为文本) 进行转换，不支持通过 [语音消息转文字接口](#将语音消息转换为文本) 直接转换。
 - 对于 `PCM` 本地语音文件，调用 `voiceFileToText:voiceParam:completion:` 时必须传入 `EMVoiceParam`，语音参数配置错误通常会直接导致转换失败或结果异常。
 
 ## 常见错误与排查

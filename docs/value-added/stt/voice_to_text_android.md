@@ -91,20 +91,21 @@ EMClient.getInstance().chatManager().voiceMessageToText(voiceMessage, new EMValu
 | 参数         | 类型        | 是否必需 | 描述                             |
 | :-------------- | :----- | :------- | :------------- |
 | `message`  | EMMessage | 是    | 待转换的语音消息对象。                    |
-| `callback` | String    | 是    | 结果回调。成功时返回转换的文本；失败时返回错误码和错误描述。 |
+| `callback` | `EMValueCallBack<String>`    | 是    | 结果回调。成功时返回转换的文本；失败时返回错误码和错误描述。 |
 
 #### 注意事项
 
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMMessage` 必须是语音消息，否则会返回 `EMError#MESSAGE_INVALID`。你可以通过 `EMMessage#getType` 判断消息类型。
-- 当前支持 `AMR` 和 `MP3` 格式语音消息，不支持直接转换 `PCM` 格式的语音消息。
+- 当前语音消息转文字仅支持 `AMR` 和 `MP3` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
+- 如需转换 PCM 音频，请使用本地语音文件转文字接口 `EMChatManager#voiceFileToText`，并传入对应的 `EMAudioParams`。
 - 转换成功后，可通过 `EMVoiceMessageBody#getText` 读取持久化的文本结果。
 
 ## 将本地语音文件转换为文本
 
 调用 `EMChatManager#voiceFileToText` 可将本地语音文件转换为文本，并通过回调返回识别结果。
 
-SDK 支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。
+该接口支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。其中，`PCM` 文件需要结合 `EMAudioParams` 指定格式、采样率、采样位深和声道数等参数。
 
 此外，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
 
@@ -142,7 +143,7 @@ EMClient.getInstance().chatManager().voiceFileToText(filePath, audioParams, new 
 
 `EMAudioParams` 类用于描述本地语音文件的基础语音属性，包括语音文件格式、采样率、采样位深和声道数，帮助 SDK 正确解析原始语音数据。
 
-- 对于 `PCM` 文件，由于缺少文件头信息，由于缺少文件头信息，建议提供该参数。
+- 对于 `PCM` 文件，由于缺少文件头信息，建议提供该参数。
 - 对于 `MP3` 和 `AMR` 文件，通常无需显式配置该对象。
 - 如果语音参数与原始文件不匹配，可能导致转换失败或结果异常。
 
@@ -187,6 +188,7 @@ if (message.getType() == EMMessage.Type.VOICE) {
 - 转换本地语音文件前，建议先校验文件是否存在且可读，避免无效调用。
 - 如果本地语音文件来自外部存储、`content://` 或第三方路径，请确保应用具备读取权限，并且 SDK 能够正常将文件复制到私有目录。
 - 如果本地文件大小（10 MB）或时长（60 秒）超过限制，或音频格式与参数不匹配，可能导致识别失败。
+- `PCM` 音频仅支持通过 [本地文件转文字接口](#将本地语音文件转换为文本) 进行转换，不支持通过 [语音消息转文字接口](#将语音消息转换为文本) 直接转换。
 - 对于 `PCM` 本地语音文件，调用 `EMChatManager#voiceFileToText` 时必须传入 `EMAudioParams`，语音参数配置错误通常会直接导致转换失败或结果异常。
 
 ## 常见错误与排查

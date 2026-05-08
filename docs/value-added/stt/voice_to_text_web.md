@@ -101,12 +101,13 @@ try {
 - SDK 会从 `messageBody.url` 中提取 `fileId`；如果 URL 无法解析出有效文件 ID，会返回 `407 FILE_INVALID`。
 - 当前实现不会把识别结果回写到原始消息体中；如需展示文本，请自行使用 `res.data.text`。
 - 该接口为异步接口，结果通过 `Promise` 返回，而不是通过回调返回。
+- 如需转换 PCM 音频，请使用 [本地语音文件转文字接口](#将本地语音文件转换为文本)，并传入对应的 `AudioParams`。
 
 ## 将本地语音文件转换为文本
 
 调用 `connection#voiceFileToText` 将本地语音文件转换为文本。
 
-SDK 支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。
+该接口支持 `PCM`、`MP3` 和 `AMR` 格式的本地语音文件，要求待转换文件的大小不超过 10 MB，且时长不超过 60 秒。其中，`PCM` 文件需要结合 `AudioParams` 指定格式、采样率、采样位深和声道数等参数。
 
 ```typescript
 const fileInput = document.querySelector<HTMLInputElement>("#voice-file");
@@ -187,6 +188,7 @@ try {
 - `voiceMessageToText` 和 `voiceFileToText` 的转换结果通过 `Promise` 返回。
 - `voiceFileToText` 在浏览器环境依赖原生 `File` 对象；纯 Node.js 环境不在当前实现支持范围内。
 - 如果本地文件大小（10 MB）或时长（60 秒）超过限制，或音频格式与参数不匹配，可能导致识别失败。
+- `PCM` 音频仅支持通过 [本地文件转文字接口](#将本地语音文件转换为文本) 进行转换，不支持通过 [语音消息转文字接口](#将语音消息转换为文本) 直接转换。
 
 ## 常见错误与排查
 
