@@ -1,5 +1,52 @@
 # React Native 单群聊 UIKit 更新日志
 
+## v2.5.5
+
+本版本在 2026 年 5 月 13 日发布。
+
+#### 修复
+
+- 修复 Android 平台在不同 API 级别及 `edgeToEdgeEnabled` 模式下会话输入框键盘避让异常的问题。
+- 修复单聊中添加置顶消息功能失效的问题。
+
+## v2.5.4
+
+本版本在 2026 年 3 月 16 日发布。
+
+#### 优化
+
+- 升级 React Native 至 0.83.2（原 0.76.x），React 至 19.2.0（原 18.3.1）。
+- iOS：简化 podspec 配置，通过 `install_modules_dependencies` 仅支持新架构。
+- 将 `getChatService` 改为通过 `chatFactory` 模块懒加载，解决循环依赖问题。
+- 从包入口文件（`index.tsx`）导出示例代码。
+- 更新最低 peer dependency 要求：React ≥ 18.2.0，React Native ≥ 0.76.0。
+
+#### 修复
+
+修复因 React Native API 变更导致的 TypeScript 类型兼容性问题：将 `DefaultSectionT` 替换为 `Record<string, any>`，将 `ViewabilityConfig` / `ViewToken` 替换为 `any`。
+
+## v2.5.2
+
+本版本在 2026 年 1 月 5 日发布。
+
+#### 优化
+
+优化示例项目中 GIF 图片的展示与加载效果。
+
+#### 修复
+
+修复图片预览组件的回调问题。
+
+## v2.5.1
+
+本版本在 2025 年 12 月 10 日发布。
+
+#### 修复
+
+- 修复输入栏展开按钮点击后无法在键盘和扩展栏之间切换的问题。
+- 修复引用消息组件的布局问题。
+- 修复 aosl 动态库的编译和运行时问题。
+
 ## v2.5.0
 
 本版本在 2025 年 11 月 17 日发布。
