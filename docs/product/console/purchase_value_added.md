@@ -29,7 +29,7 @@
 
 大模型开发平台服务当前仅限于灰度测试，如需使用，请联系商务经理开通。
 
-![img](/images/callkit/console/llm_activation.png)
+![img](/images/console/llm_activation.png)
 
 ## 内容审核
 
