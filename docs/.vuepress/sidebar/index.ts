@@ -294,8 +294,8 @@ export const zhSidebar = sidebar({
             children: [
             { text: "创建应用", link: "console/app_create.html" },
             { text: "查看和配置应用", link: "console/app_manage.html" },
-            { text: "应用上线", link: "console/app_launch.html" },
-            { text: "应用备案", link: "console/app_file.html" },
+            { text: "上线应用", link: "console/app_launch.html" },
+            { text: "备案应用", link: "console/app_file.html" },
           ],
         },
         { text: "购买套餐包", link: "console/purchase_package.html" },
