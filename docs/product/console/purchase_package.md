@@ -7,7 +7,7 @@
 
 你可以通过以下两种方式订阅或升级套餐包。
 
-### 方式一
+#### 方式一
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 点击 **应用管理**，在应用列表中单击目标应用的 **App Key**（测试版或正式版）。
@@ -37,7 +37,7 @@
 
 ![img](/images/console/package_pay_finish.png)
 
-### 方式二
+#### 方式二
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 点击 **应用管理**，选择目标应用的 App Key。
