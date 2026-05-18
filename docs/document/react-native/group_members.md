@@ -585,7 +585,7 @@ ChatClient.getInstance()
 
 ### 获取群成员列表
 
-- 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+- 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```typescript
 const groupId = '<YOUR_GROUP_ID>';

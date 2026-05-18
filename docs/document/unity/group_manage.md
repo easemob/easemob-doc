@@ -153,7 +153,7 @@ SDKClient.Instance.GroupManager.GetGroupSpecificationFromServer(groupId, new Val
 
 ### 获取群成员列表
 
-- 自 SDK 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取群成员的信息，包括群成员的用户 ID、加群时间和成员角色。
+- 自 SDK 1.4.0 版本开始，群成员可以调用 `FetchGroupMemberInfoFromServer` 方法从服务器获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
 
 ```csharp
 //pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
