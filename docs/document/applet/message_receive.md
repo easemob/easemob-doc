@@ -37,12 +37,37 @@ conn.addEventHandler("eventName", {
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
-  // 当前用户收到语音消息。
-  onAudioMessage: function (message) {
-    // 语音文件在服务器的地址。
-    console.log(message.url);
-  },
+// 当前用户收到语音消息。
+        onAudioMessage: function (message) {
+                // 语音文件在服务器的地址。
+                console.log(message.url);
+                playAudio(message);
+        },
 });
+
+playAudio(message) {
+        let audioCtx = this.data.audioCtx || wx.createInnerAudioContext();
+        wx.downloadFile({
+                url: message.url,
+                header: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        Accept: "audio/mp3",
+                        Authorization: "Bearer " + conn.token,
+                        "origin-file": "true",
+                },
+                success(res) {
+                        curl = res.tempFilePath;
+                        audioCtx.src = curl;
+                        audioCtx.play();
+                },
+                fail(e) {
+                        wx.showToast({
+                                title: "下载失败",
+                                duration: 1000,
+                        });
+                },
+        });
+}
 
 ```
 

@@ -138,7 +138,7 @@ conn.getGroupInfo(option).then((res) => {
 
 ### 获取群成员列表
 
-自 SDK 4.15.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取群成员信息，包括用户 ID 和用户角色。原方法 `listGroupMembers` 废弃。
+自 SDK 4.15.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取全部群成员（包括群主和群管理员）的信息，包括用户 ID 和用户角色。原方法 `listGroupMembers` 废弃。
 
 ```javascript
 conn
