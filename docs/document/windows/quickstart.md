@@ -25,7 +25,7 @@
 - Visual Studio IDE 2019 或以上；
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信控制台文档](/product/console/app_manage.html#管理应用)。
 
 ## 项目设置
 

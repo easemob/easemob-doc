@@ -32,7 +32,7 @@
 ### 跑通步骤
 
 1. [创建应用](/product/console/app_create.html)。
-2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+2. [获取应用的 App Key](/product/console/app_manage.html#管理应用)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
 4. 从 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee](https://gitee.com/easemob-code/react-native-chat-library) 中下载即时通讯 IM Demo 项目源码。
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。

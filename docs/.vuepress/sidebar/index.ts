@@ -292,10 +292,11 @@ export const zhSidebar = sidebar({
         { text: "应用管理", 
             collapsible: true,
             children: [
+            { text: "应用创建与上线流程", link: "console/app_create_to_launch.html" },
             { text: "创建应用", link: "console/app_create.html" },
-            { text: "查看和配置应用", link: "console/app_manage.html" },
+            { text: "管理和配置应用", link: "console/app_manage.html" },
             { text: "上线应用", link: "console/app_launch.html" },
-            { text: "备案应用", link: "console/app_file.html" },
+            { text: "应用备案", link: "console/app_file.html" },
           ],
         },
         { text: "购买套餐包", link: "console/purchase_package.html" },

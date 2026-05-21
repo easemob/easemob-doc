@@ -13,7 +13,7 @@
 - 使用 Kotlin 语言开发，1.5.21 或以上版本；
 - JDK 1.8 或以上版本；
 - Gradle 8.0 或以上版本；
-- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#查看应用信息)。
+- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#管理应用)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
 ## 创建项目引入 ChatroomUIKit 模块
