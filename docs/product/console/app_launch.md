@@ -15,7 +15,7 @@
 2. 服务上线规则
 
 - **IM 套餐包**：若需上线，测试版须先 [开通 IM 专业版或旗舰版套餐包](/product/pricing_method.html#订阅-升级套餐包)。
-- [**内容审核**](purchase_value_added.html#内容审核)、[**消息翻译**](purchase_value_added.html#消息翻译)：若测试版已订阅，上线后将不再适用免费额度，按正式版付费规则计费。
+- [**内容审核**](purchase_value_added.html#内容审核)/[**消息翻译**](purchase_value_added.html#消息翻译)：若测试版已订阅，上线后将不再适用免费额度，按正式版付费规则计费。
 - [**实时音视频**](purchase_value_added.html#实时音视频服务)/[**即时推送**](purchase_value_added.html#即时推送)：即使测试版已开通，上线后也不会自动保留，若要使用需单独订阅。
 
 ## 上线步骤

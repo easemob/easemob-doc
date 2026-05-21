@@ -10,7 +10,7 @@
 
 上述流程图展示了应用从测试版创建到正式版上线的主要步骤，包括测试、上线和上线后处理三个阶段：
 
-1. **测试阶段**：[创建测试版应用](app_create.html) 后，你可以按需选配 IM 服务（包括选择 IM 套餐包和配置基础功能），并试用 [内容审核](purchase_value_added.html)、[消息翻译](purchase_value_added.html)、[即时推送](purchase_value_added.html) 和 [实时音视频](purchase_value_added.html) 等增值服务。其中，IM 服务、内容审核和消息翻译在测试阶段可自由变更或取消；即时推送和实时音视频仅支持测试版试用，上线后需单独开通正式服务。
+1. **测试阶段**：[创建测试版应用](app_create.html) 后，你可以按需选配 IM 服务（包括选择 IM 套餐包和配置基础功能），并试用 [内容审核](purchase_value_added.html#内容审核)、[消息翻译](purchase_value_added.html#消息翻译)、[即时推送](purchase_value_added.html#即时推送) 和 [实时音视频](purchase_value_added.html#实时音视频服务) 等增值服务。其中，IM 服务、内容审核和消息翻译在测试阶段可自由变更或取消；即时推送和实时音视频仅支持测试版试用，上线后需单独开通正式服务。
 
 2. **上线阶段**：完成测试后，你可以发起 [上线申请](app_launch.html)。上线前，需先确认应用是否已完成 [实名认证](real_name_authentication.html)；若未完成，需先完成认证。认证通过后，支付已选 IM 服务及增值服务费用，应用即可上线成功并成为正式版。
 
