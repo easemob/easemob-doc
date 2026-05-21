@@ -15,9 +15,8 @@
 2. 服务上线规则
 
 - **IM 套餐包**：若需上线，测试版须先 [开通 IM 专业版或旗舰版套餐包](/product/pricing_method.html#订阅-升级套餐包)。
-- [**实时音视频**](purchase_value_added.html#实时音视频服务)：若测试版已开通，上线后自动开通该服务，并享有免费额度。
 - [**内容审核**](purchase_value_added.html#内容审核)、[**消息翻译**](purchase_value_added.html#消息翻译)：若测试版已订阅，上线后将不再适用免费额度，按正式版付费规则计费。
-- [**即时推送**](purchase_value_added.html#即时推送)：即使测试版已开通，上线后也不会自动保留，如需使用需单独订阅。
+- [**实时音视频**](purchase_value_added.html#实时音视频服务)/[**即时推送**](purchase_value_added.html#即时推送)：即使测试版已开通，上线后也不会自动保留，若要使用需单独订阅。
 
 ## 上线步骤
 
@@ -63,6 +62,6 @@
 
 1. 替换客户端 SDK 初始化配置中的正式版 `AppKey`。
 2. 替换服务端请求地址中的 `{app_name}`，例如 `POST https://{host}/{org_name}/{app_name}/users`。
-3. 检查发送前回调地址和发送后回调地址，并按需切换为正式环境地址。
-4. 检查 REST IP 白名单配置，并按需在正式版中重新设置。
+3. 检查 [发送前回调地址](basic_webhook.html#发送前回调) 和 [发送后回调地址](basic_webhook.html#发送后回调)，并按需切换为正式环境地址。
+4. 检查 [REST IP 白名单配置](basic_other.html#rest-ip-白名单)，并按需在正式版中重新设置。
 5. 按正式环境重新准备用户、消息、好友、群组和聊天室等业务数据。原因是为保障数据安全，测试版中的业务数据**不会**同步到正式版。
