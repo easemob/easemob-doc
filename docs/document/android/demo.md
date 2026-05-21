@@ -32,7 +32,7 @@
 ### 跑通步骤
 
 1. [创建应用](/product/console/app_create.html)。 
-2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+2. [获取应用的 App Key](/product/console/app_manage.html#管理应用)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。

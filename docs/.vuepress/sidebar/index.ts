@@ -292,24 +292,17 @@ export const zhSidebar = sidebar({
         { text: "应用管理", 
             collapsible: true,
             children: [
+            { text: "应用创建与上线流程", link: "console/app_create_to_launch.html" },
             { text: "创建应用", link: "console/app_create.html" },
-            { text: "查看和配置应用", link: "console/app_manage.html" },
+            { text: "管理和配置应用", link: "console/app_manage.html" },
+            { text: "上线应用", link: "console/app_launch.html" },
+            { text: "应用备案", link: "console/app_file.html" },
           ],
         },
-        { text: "服务开通", 
+        { text: "购买套餐包", link: "console/purchase_package.html" },
+        { text: "配置基础功能", 
             collapsible: true,
             children: [
-            { text: "购买套餐包", link: "console/purchase_package.html" },
-            { text: "开通增值服务", link: "console/purchase_value_added.html" },
-          ],
-        },
-        { text: "功能配置", 
-            collapsible: true,
-            children: [
-            {
-             text: "配置基础功能",
-             collapsible: true,
-             children: [
              { text: "用户", link: "console/basic_user.html" },
              { text: "消息", link: "console/basic_message.html" },
              { text: "会话/群组/聊天室", link: "console/basic_conversation_group_chatroom.html" },
@@ -317,18 +310,8 @@ export const zhSidebar = sidebar({
              { text: "服务端 API 调用", link: "console/basic_restful_api_call.html" },
              { text: "其他", link: "console/basic_other.html" },
              ],
-            },
-            {
-             text: "配置增值功能",
-             collapsible: true,
-             children: [
-             { text: "内容审核", link: "console/value_added_config_moderation.html" },
-            { text: "即时推送", link: "console/value_added_config_push.html" },
-            { text: "实时音视频", link: "console/value_added_config_rtc.html" },
-             ],
-            },
-          ],
-        },
+        },     
+        { text: "开通增值服务", link: "console/purchase_value_added.html" },
         { text: "账号管理", 
             collapsible: true,
             children: [

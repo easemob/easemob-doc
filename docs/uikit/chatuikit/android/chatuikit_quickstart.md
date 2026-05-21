@@ -11,7 +11,7 @@
 - Android Studio 4.0 或以上
 - Android SDK API 21 或以上
 - JDK 11 或以上
-- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/console/app_manage.html#查看应用信息)。
+- 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/console/app_manage.html#管理应用)。
 
 ## 项目准备
 

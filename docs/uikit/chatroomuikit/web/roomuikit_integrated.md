@@ -8,7 +8,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 有效的 Easemob IM 开发者账号，并[获取 App Key](/product/console/app_manage.html#查看应用信息)。
+- 有效的 Easemob IM 开发者账号，并[获取 App Key](/product/console/app_manage.html#管理应用)。
 
 ## 创建项目
 

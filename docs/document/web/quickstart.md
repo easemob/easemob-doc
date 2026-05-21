@@ -13,7 +13,7 @@
 ## 前提条件
 
 - 有效的 [环信即时通讯 IM 开发者账号](/product/console/account_register.html#注册账号)；
-- 在环信控制台[创建应用](/product/console/app_create.html) 并 [获取 App Key](/product/console/app_manage.html#查看应用信息)；
+- 在环信控制台[创建应用](/product/console/app_create.html) 并 [获取 App Key](/product/console/app_manage.html#管理应用)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 

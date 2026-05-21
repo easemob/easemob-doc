@@ -27,7 +27,7 @@
 ### 跑通步骤
 
 1. [创建应用](/product/console/app_create.html)。 
-2. [获取应用的 App Key](/product/console/app_manage.html#查看应用信息)。
+2. [获取应用的 App Key](/product/console/app_manage.html#管理应用)。
 3. [创建用户](/product/console/operation_user.html#创建用户)。
 4. 下载即时通讯 IM Demo 项目源码。详见 [GitHub](https://github.com/easemob/easemob-demo-react/tree/dev_4.0) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-react/tree/dev_4.0) 上的示例项目。
 5. 下载完毕，在项目根目录打开终端，安装依赖。
