@@ -95,7 +95,7 @@
 
 ## 测试版应用试用说明
 
-测试版应用在正式上线前，可免费试用以下服务，无需支付任何费用。
+[测试版应用](/product/console/app_create.html) 在 [正式上线](/product/console/app_launch.html) 前，可免费试用以下服务，无需支付任何费用。
 
 ### 试用套餐包
 

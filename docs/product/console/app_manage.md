@@ -23,7 +23,7 @@
 | 应用状态 | - **未上线**：仅有测试版应用。<br>- **上线中**：已提交上线申请，暂时无法进入应用详情。<br>- **已上线**：已生成正式版应用。 |
 | 操作 | - **申请上线**：将测试版应用上线为正式版。详见 [应用上线](app_launch.html) 说明。<br>- **应用备案**：对正式版应用进行备案。详见 [应用备案](app_file.html) 说明。 |
 
-1. 在 **应用概览** 页面查看应用详情，包含开发配置信息、应用基本信息、应用备案信息和服务开通信息。
+4. 在 **应用概览** 页面查看应用详情，包含开发配置信息、应用基本信息、应用备案信息和服务开通信息。
 
 ![img](/images/console/app_info.png)
 
@@ -31,7 +31,7 @@
 
 你可以在 **开发配置信息** 栏查看以下应用凭证：
 
-- **AppKey**：应用唯一标识，格式为 `orgname#appname`。创建后不可修改。详见 [创建应用文档](app_create.html#操作步骤)。
+- **AppKey**：应用唯一标识，格式为 `orgname#appname`。应用创建后，App Key 不可修改。详见 [创建应用文档](app_create.html#操作步骤)。
 - **Client ID** 和 **Client Secret**：可用于生成 [App Token](/document/server-side/easemob_app_token.html) 和 [用户 Token](/document/server-side/easemob_user_token.html)。
 
 ![img](/images/console/app_info_develop.png)
