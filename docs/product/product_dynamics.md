@@ -1,5 +1,17 @@
 # 产品动态
 
+## 2026-05
+
+#### 环信 Server SDK 2.0 发版
+
+环信 Server SDK 2.0 的 v1.0.18 于 2026 年 5 月 22 日发版。
+
+| 新增功能                     | 描述                                                    |
+| :--------------------------- | :----------------------------------------------------------- |
+| 批量移除聊天室成员功能             | 详见 [RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html)。 |
+
+更多详情，请参见 [V1.0.18 更新日志](/document/server-side/java_server_sdk_2.0.html#v1-0-18-2026-05-22)。
+
 ## 2026-04
 
 #### 环信 客户端 SDK v4.21.0 发版
