@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:V1.0.17'
+implementation 'com.easemob.im:im-sdk-core:V1.0.18'
 ```
 
 ### 使用
@@ -188,6 +188,12 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.18 2026-05-22
+
+| 新增功能                     | 描述                                                    |
+| :--------------------------- | :----------------------------------------------------------- |
+| 批量移除聊天室成员功能             | 详见 [RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html)。 |
 
 ### V1.0.17 2026-04-03
 
