@@ -421,6 +421,20 @@ FCM 通道推送通知示例如下：
 
 ### 魅族推送说明
 
+标题和跳转：
+
+```json
+{
+    "title":"你好，欢迎使用环信推送",
+    "content":"你好先生",
+    "channelId":"easemob-channel",
+    "clickActionType":2,
+    "clickActionUrl":"http://www.easemob.com"
+}
+```
+
+推送字段说明：
+
 | 字段                  | 类型   | 描述                                                         |
 | :-------------------- | :----- | :----------------------------------------------------------- |
 | `title`               | String | 通知栏中展示的通知的标题。该字段长度不能超过 32 字符（一个汉字等于一个字符）。 |
@@ -443,6 +457,7 @@ FCM 通道推送通知示例如下：
 | `lights`              | Bool   | 通知方式：是否闪光。 <br/> - `true`：是；<br/> - `false`：否。          |
 | `sound`               | Bool   | 通知方式：是否有声音。<br/> - `true`：是；<br/> - `false`：否。        |
 | `notifyKey`           | String | 分组合并推送的 key，凡是带有此 key 的通知栏消息只会显示最后到达的一条。 |
+| `noticeMsgType`       | Int | 用于标识消息分类：<br/> - `0`：公信消息，例如，营销咨询类消息。<br/> - `1`：私信消息，例如，聊天、交易、验证码等消息。|
 | `callback`            | String | 回调 URL， 长度限制 128 字符。                               |
 | `callbackParam`       | String | 回调参数，长度限制 64 字符。                                 |
 | `callbackType`        | String | int(可选字段)，回执类型。<br/> - `1`：送达回执；<br/> - `2`：点击回执； <br/> - （默认）`3`：送达与点击回执。 |
