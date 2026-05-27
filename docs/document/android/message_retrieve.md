@@ -215,7 +215,40 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
 自 4.14.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```java
-asyncSearchMsgFromDB(String keywords, long timeStamp, int maxCount, List<String> senders, EMSearchDirection direction, EMMessageSearchScope searchScope, EMValueCallBack<List<EMMessage>> callback)
+String conversationId = "user_or_group_id";
+EMConversation conversation = EMClient.getInstance()
+        .chatManager()
+        .getConversation(conversationId);
+if (conversation != null) {
+    String keywords = "hello";
+    long timeStamp = -1; // 小于 0 表示从当前时间开始搜索
+    int maxCount = 20;
+    // 限制发送人，最多 10 个；如果不限制发送人，传 null 或空列表
+    List<String> senders = Arrays.asList("user1", "user2");
+    conversation.asyncSearchMsgFromDB(
+            keywords,
+            timeStamp,
+            maxCount,
+            senders,
+            EMConversation.EMSearchDirection.UP,
+            EMConversation.EMMessageSearchScope.CONTENT,
+            new EMValueCallBack<List<EMMessage>>() {
+                @Override
+                public void onSuccess(List<EMMessage> messages) {
+                    for (EMMessage message : messages) {
+                        String msgId = message.getMsgId();
+                        String from = message.getFrom();
+                        long msgTime = message.getMsgTime();
+                        // TODO: 处理搜索结果
+                    }
+                }
+                @Override
+                public void onError(int code, String error) {
+                    // TODO: 处理错误
+                }
+            }
+    );
+}
 ```
 
 ### 从本地读取指定会话的消息
