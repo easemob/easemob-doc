@@ -98,6 +98,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 - 自 Android SDK 4.14.0 开始，支持发送 GIF 图片消息。
 - GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
+- 图片缩略图的生成与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
 发送 GIF 图片消息的过程如下：
 
