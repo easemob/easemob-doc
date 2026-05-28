@@ -25,15 +25,15 @@
 
 ## 集成步骤
 
-### 步骤 1 安装 CallKit 
+### 步骤 1 添加依赖
 
 你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
 
-CocoaPods 是 iOS 和 macOS 项目的依赖管理工具。它允许您轻松地将第三方库集成到您的项目中，并自动处理依赖关系。安装方法请自行询问AI或者搜索引擎。
+CocoaPods 是 iOS 和 macOS 项目的依赖管理工具。它允许你轻松地将第三方库集成到您的项目中，并自动处理依赖关系。安装方法请自行询问 AI 或者搜索引擎。
 
-使用 `pod init` 命令创建 `podfile` 文件,在 `podfile` 中添加如下依赖
+#### 方式一：通过 CocoaPods 远程安装
 
-1. 在 `podfile` 中添加如下依赖：
+1. 使用 `pod init` 命令创建 `podfile` 文件,在 `podfile` 中添加如下依赖：
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
@@ -60,6 +60,33 @@ end
 ```
 pod install
 ```
+
+#### 方式二：本地源码集成
+
+如需基于源码进行调试，可将 CallKit 源码克隆到本地，并修改 `Podfile` 中的依赖路径。
+
+1. 克隆源码：
+
+- GitHub 项目
+  
+```bash
+git clone https://github.com/easemob/easemob-callkit-iOS.git 
+```
+
+- Gitee 项目
+  
+```bash
+git clone https://gitee.com/easemob-code/easemob-callkit-iOS.git
+```
+
+2. 修改 `Podfile` 中的依赖项：
+
+```ruby
+pod 'EaseCallUIKit', :path => '../../easemob-callkit-iOS/'
+```
+
+`../../easemob-callkit-iOS/` 为克隆到本地后的相对路径，需根据实际目录结构调整。
+
 
 ### 步骤 2 初始化 CallKit
 
