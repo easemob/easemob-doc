@@ -67,8 +67,16 @@ pod install
 
 1. 克隆源码：
 
+- GitHub 项目
+  
 ```bash
-git clone https://github.com/easemob/easemob-callkit-iOS.git
+git clone https://github.com/easemob/easemob-callkit-iOS.git 
+```
+
+- Gitee 项目
+  
+```bash
+git clone https://gitee.com/easemob-code/easemob-callkit-iOS.git
 ```
 
 2. 修改 `Podfile` 中的依赖项：
