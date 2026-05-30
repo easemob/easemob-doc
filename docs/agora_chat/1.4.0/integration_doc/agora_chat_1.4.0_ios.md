@@ -213,15 +213,23 @@ NSString* cursor = nil;
 ## 10. Token 即将过期回调触发时机变化
 
 ```swift
+override func viewDidLoad() {
+    ...
+    // 注册连接状态监听，在 SDK 初始化之后调用。
+    EMClient.shared().add(self, delegateQueue: nil)
+    ...
+}
 
-    // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
+extension ViewController: EMClientDelegate {
+    // 自 4.15.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
     func tokenWillExpire(_ aErrorCode: EMErrorCode) {
         // 通过 App Server 获取新的 token,然后调用 sdk 的 renewToken 方法更新 token
         EMClient.shared().renewToken("newToken") { e in
             
         }
     }
-    
+}
+
 ```
 
 ## 11. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态

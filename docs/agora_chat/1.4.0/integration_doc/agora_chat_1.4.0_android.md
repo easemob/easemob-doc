@@ -270,12 +270,15 @@ ChatClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversatio
 ## 10. Token 即将过期回调触发时机变化
 
 ```java
-@Override
-    // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
+EMConnectionListener connectionListener = new EMConnectionListener() {
+    @Override
+    // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
     public void onTokenWillExpire() {
 
     }
-```    
+};
+
+```
 
 ## 11. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态
 
@@ -302,6 +305,60 @@ ChatClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversatio
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `ext`。
   - 命令消息：不支持修改。
 
+```java
+// 文本消息：可同时修改消息体和消息扩展属性
+TextMessageBody textBody = new TextMessageBody("new content");
+Map<String, Object> ext = new HashMap<>();
+ext.put("newkey", "new value");
 
-// 注意：描述中也需要体现支持修改聊天室会话中的消息。
+// textBody 和 ext 不能同时为 null
+ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody, ext, new ValueCallBack<EMMessage>() {
+            @Override
+            public void onSuccess(ChatMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
+
+
+// 自定义消息：可同时修改消息体和消息扩展属性
+CustomMessageBody customBody = new CustomMessageBody("new action");
+Map<String, Object> newExt = new HashMap<>();
+newExt.put("newkey1", "newkey1");
+newExt.put("newkey2", 123);
+
+ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, customBody, newExt, new ValueCallBack<ChatMessage>() {
+            @Override
+            public void onSuccess(ChatMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
+        
+
+// 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+Map<String, Object> newExt = new HashMap<>();
+newExt.put("newkey1", false);
+newExt.put("newkey2", "new value");
+
+ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, null, newExt, new ValueCallBack<ChatMessage>() {
+            @Override
+            public void onSuccess(ChatMessage emMessage) {
+                // 修改成功
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                // 修改失败
+            }
+        });
+```
 

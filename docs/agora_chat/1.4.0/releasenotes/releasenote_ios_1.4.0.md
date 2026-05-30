@@ -7,7 +7,7 @@ v1.4.0 was released on XXXX, 2026.
 - Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:` to provide the mute expiration timestamps via the `(NSDictionary<NSString *,NSNumber*> *)aMutes` parameter, deprecating the old event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`.
 - Added Native Crash reporting capabilities: When a crash occurs in the SDK's native layer, the crash information will be reported upon the next application startup.
-- Allowed users to obtain the following information upon joining a chat room:
+- Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.
   - Chat room creation timestamp: Retrieved via the newly added `ChatRoom#getCreateTimestamp` method.
@@ -35,8 +35,8 @@ v1.4.0 was released on XXXX, 2026.
 - Optimized the reconnection logic to automatically switch reconnection addresses by default.
 - Improved the logic for calling `applicationWillEnterForeground` by sending a ping message to trigger reconnection.
 - Disable the default constructors of `AgoraChatMessage`, `AgoraChatConversation`, and `AgoraChatMessageBody` to prevent crashes caused by null pointers.
-- Added the device timezone offset to log files to facilitate troubleshooting.
-- Changed the return value of `AgoraChatCursorResult#cursor` from `undefined` to an empty string (`""`) when the final page of roaming messages is retrieved via `ChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:`.
+- Added the device timezone offset to log files to facilitate troubleshooting. 
+- Changed `AgoraChatCursorResult#cursor` from `undefined` to an empty string ("") when `ChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` reaches the final page of roaming messages.
 - Upgraded BoringSSL and SQLCipher dependencies to their latest versions to mitigate potential security risks.
 - Adjusted the trigger threshold for the `AgoraChatClientDelegate#onTokenWillExpire` event; the notification is now triggered when 80% of the token's validity period has elapsed (previously 50%).
 - Improved the loading performance of the local conversation list when the latest message is an attachment by eliminating redundant file length checks.
@@ -48,10 +48,10 @@ v1.4.0 was released on XXXX, 2026.
 - The `TYPE` field was empty in the `AgoraChatThreadManagerDelegate#onUserKickOutOfChatThread` event.
 - A crash occurred on certain device models when retrieving the start and end times of conversation Do-Not-Disturb (DND) settings.
 - `AgoraChatManagerDelegate#onMessageContentChanged` failed to return modification details when editing messages other than text and custom messages.
-- Group or chat room members incorrectly requested details from the server after a disbandment event was triggered.
-- The database was incorrectly rebuilt upon encountering a `SQLITE_BUSY` error.
-- The latest message in a conversation retrieved from the server via `AgoraChatManager#getConversationsFromServerWithCursor` did not contain translations or message reactions.
+- Group or chat room members still incorrectly requested details from the server after a disbandment event was triggered.
+- The database was mistakenly rebuilt upon encountering a `SQLITE_BUSY` error.
+- The latest message in a conversation retrieved from the server via `AgoraChatManager#getConversationsFromServerWithCursor` did not contain translations or message Reactions.
 - The completion callbacks of some API requests were not being executed on the main thread, including the following APIs:
   - All APIs under `AgoraChatUserInfoManager` and `AgoraChatPresenceManager`.
   - The `fetchMessagesFromServer`, `fetchSupportedLanguages`, `translateMessage`, and `getMessageCountWithCompletion` APIs under `AgoraChatChatManager`.
-- A crash caused by network anomalies under extreme conditions.
+- A crash caused by extreme network conditions.
