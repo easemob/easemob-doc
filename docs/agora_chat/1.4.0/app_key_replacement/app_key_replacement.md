@@ -49,7 +49,7 @@
 
 | 替换前          | 替换后   |
 | :-------------- | :----- |
-| `private String appKey = "<App key from Agora console>";`          |  `private String appid = "<App ID from Agora console>";`  |
+| `private String appKey = "<App key from Agora console>";`          |  `private String appId = "<App ID from Agora console>";`  |
 | `if (appKey.isEmpty()) {`          |  `if (appId.isEmpty()) {`  |
 | `showLog("You need to set your AppKey");`          | `showLog("You need to set your app ID");`   |
 | `options.setAppKey(appKey); `          | `options.setAppId(appId); `   |
