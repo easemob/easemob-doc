@@ -241,7 +241,7 @@ public void OnMembersExitedFromGroup(string groupId, string member)
 
 ## 8. 根据关键字获取本地会话中的消息
 
-自 SDK 1.4.0 版本开始，你可以调用 `LoadConversationMessagesWithKeyword` 通过设置关键词获取单个会话中的消息 ID 列表。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+自 SDK 1.4.0 版本开始，你可以调用 `LoadConversationMessagesWithKeyword` 通过设置关键词获取本地会话中的某些消息。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
 ```csharp
 SDKClient.Instance.ChatManager.LoadConversationMessagesWithKeyword(keywords, timestamp, from, direction, scope, new ValueCallBack<Dictionary<string, List<string>>>(

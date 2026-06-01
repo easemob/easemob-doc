@@ -4,7 +4,9 @@
 
 ## RESTful API
 
-对于 RESTful API，你需要将如下进行替换
+对于 RESTful API，App Key 的关系 App ID 为： `{org_name}/{app_name}` = `app-id/{app_id}`
+
+你需要将如下进行替换
 
 1. HTTP request URL
 
@@ -41,7 +43,9 @@
 
 ## Secure authentication with tokens
 
-将 [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication) 中的 appkey 替换为 appId
+1. 代码中的替换
+
+将 [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication) 中 [Chat SDK token authentication](https://docs.agora.io/en/agora-chat/develop/authentication#-token-authentication) 的代码中的替换如下：
 
 | 替换前          | 替换后   |
 | :-------------- | :----- |
@@ -49,6 +53,10 @@
 | `if (appKey.isEmpty()) {`          |  `if (appId.isEmpty()) {`  |
 | `showLog("You need to set your AppKey");`          | `showLog("You need to set your app ID");`   |
 | `options.setAppKey(appKey); `          | `options.setAppId(appId); `   |
+
+2. 正文中的替换
+
+在 [Secure authentication with tokens](https://docs.agora.io/en/agora-chat/develop/authentication)文档中的全文查找  app key、appkey、app_key 进行替换。
 
 ## 客户端文档
 

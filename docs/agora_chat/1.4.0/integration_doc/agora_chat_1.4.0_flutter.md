@@ -161,7 +161,7 @@ onMembersExitedFromGroup: (groupId, userIds) {},
 
 ## 8. 根据关键字获取本地会话中的消息
 
-自 SDK 1.4.0 版本开始，你可以通过设置关键字获取单个会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表的 Map，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列出。
+自 SDK 1.4.0 版本开始，你可以通过设置关键词获取本地会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列出。
 
 ```dart
 Map<String, List<String>> result = 

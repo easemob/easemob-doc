@@ -6,7 +6,6 @@ v1.4.0 was released on XXXX, 2026.
 
 - Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `ChatRoomEventListener#onMuteListAddedV2` to provide muted user IDs and their mute expiration timestamps via the `muteInfo` parameter, deprecating the old event `ChatRoomEventListener#onMuteListAdded`.
-- Added Native Crash reporting capabilities: When a crash occurs in the SDK's native layer, the crash information will be reported upon the next application startup.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.
@@ -21,7 +20,7 @@ v1.4.0 was released on XXXX, 2026.
 - Supported retrieving a group member list that includes each member's role and join time.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
 - Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `ChatGroupEventListener#onMembersJoined` and `ChatGroupEventListener#onMembersExited` are introduced to replace the deprecated `ChatGroupEventListener#onMemberJoined` and `ChatGroupEventListener#onMemberExited` events.
-- Supported searching for messages in a local conversation by keyword, returning the conversation ID and a list of matching message IDs.
+- Supported searching for messages across all local conversations by keyword, returning the list of conversation IDs and their matching message IDs.
 - Supported retrieving one or more local messages by message ID.
 - Supported modifying various message types by adding`ChatManager#modifyMsgBody` to replace the deprecated `ChatManager#modifyMessageBody`:
   - Text and custom messages: Modifying both the message body and extensions (`ext`).
@@ -48,7 +47,6 @@ v1.4.0 was released on XXXX, 2026.
 - Removed the reflection-based approach for obtaining absolute file paths from `FileProvider` on Android.
 - Upgraded BoringSSL and SQLCipher dependencies to their latest versions to mitigate potential security risks.
 - Improved the loading performance of the local conversation list when the latest message is an attachment by eliminating redundant file length checks.
-- Upgraded the AOSL library to version 1.3.0.
 - Added static constructors `ChatOptions#withAppId` and `ChatOptions#withAppKey` to initialize the SDK with an app ID or app key, replacing the deprecated `ChatOptions` constructor.
 - Added `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer` to retrieve group information without member information, replacing the deprecated `ChatGroupManager#fetchGroupInfoFromServer`. To retrieve member information, call `ChatGroupManager#fetchMemberInfoListFromServer`.
 - Removed the deprecated `ChatMessageEventListener#onMessagesRecalled` event. Use `ChatMessageEventListener#onMessagesRecalledInfo` instead.

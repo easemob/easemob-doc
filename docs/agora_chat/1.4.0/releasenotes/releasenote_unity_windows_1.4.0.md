@@ -6,7 +6,6 @@ v1.4.0 was released on XXXX, 2026.
 
 - Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `IRoomManagerDelegate#OnMuteListAddedFromRoom(string roomId, Dictionary<string, long> mutes)` to provide muted user IDs and their mute expiration timestamps via the `Dictionary<string, long>` parameter, deprecating the old event `IRoomManagerDelegate#OnMuteListAddedFromRoom(string roomId, List<string> mutes, long expireTime)`.  
-- Added Native Crash reporting capabilities: When a crash occurs in the underlying native layer of the SDK, the crash information will be reported upon the next application startup.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `Room#MemberCount` attribute. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `Room#IsAllMemberMuted` attribute. This status updates upon receiving mute/unmute status change events.
@@ -19,13 +18,12 @@ v1.4.0 was released on XXXX, 2026.
 - Supported retrieving messages sent by specific members within a local group conversation.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
 - Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `IGroupManagerDelegate#OnMembersJoinedFromGroup` and `IGroupManagerDelegate#OnMembersExitedFromGroup` are introduced to replace the deprecated `IGroupManagerDelegate#OnMemberJoinedFromGroup` and `IGroupManagerDelegate#OnMemberExitedFromGroup` events.  
-- Supported searching for messages in a local conversation by keyword, returning the conversation ID and a list of matching message IDs.
+- Supported searching for messages across all local conversations by keyword, returning the list of conversation IDs and their matching message IDs.
 - Supported retrieving one (via `ChatManager#LoadMessage`) or more (`ChatManager#LoadMessages`) local messages by message ID. 
 - Supported modifying various message types via the message modification API `ChatManager#ModifyMessage`:
   - Text and custom messages: Modifying both the message body and extensions (`attributes`).
   - File, video, voice, image, location, and combined messages: Modifying extensions (`attributes`) only.
   - Command messages: Not supported.
-- Supported configuring RESTful addresses (via `Options#RestServer`) in IPv6 format for private deployment scenarios.
 
 ## Improvements
 
@@ -34,7 +32,6 @@ v1.4.0 was released on XXXX, 2026.
 - Optimized specific database operations.
 - Optimized the reconnection logic to automatically switch reconnection addresses by default.
 - Added the device timezone offset to log files to facilitate troubleshooting.
-- Upgraded the AOSL library to version 1.3.0.
 
 ## Issues Fixed
 
