@@ -21,6 +21,7 @@ v1.4.0 was released on XXXX, 2026.
 
 ## Improvements
 
+- Changed the unique app identifier from the app key to app ID.
 - Supported modifying various message types via the message modification API `ChatManager#modifyMessage`:
   - Text and custom messages: Modifying both the message body and extensions (`attributes`).
   - File, video, voice, image, location, and combined messages: Modifying extensions (`attributes`) only.

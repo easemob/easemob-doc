@@ -11,7 +11,7 @@ v1.4.0 was released on XXXX, 2026.
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.
   - Chat room creation timestamp: Retrieved via the newly added `ChatRoom#getCreateTimestamp` method.
-  - Whether the current user is on the chat room allow list: Retrieved via the newly added `ChatRoom#isInWhitelist` method to check if the user is on the chat room allow list.
+  - Whether the current user is on the chat room allowlist: Retrieved via the newly added `ChatRoom#isInWhitelist` method to check if the user is on the chat room allowlist.
   - Mute expiration timestamp of the current user: Retrieved via the `ChatRoom#getMuteExpireTimestamp` method.
 - Added the new chat room mute event `ChatRoomEventListener#onMuteListAddedV2` to provide muted user IDs and their mute expiration timestamps via the `muteInfo` parameter, deprecating the old event `ChatRoomEventListener#onMuteListAdded`.
 - Supported retrieving roaming messages sent by specific group members.
@@ -24,6 +24,7 @@ v1.4.0 was released on XXXX, 2026.
 
 ## Improvements
 
+- Changed the unique app identifier from the app key to app ID.
 - Supported modifying various message types by adding `ChatManager#modifyMsgBody` to replace the deprecated `ChatManager#modifyMessageBody`:
   - Text and custom messages: Modifying both the message body and extensions (`ext`).
   - File, video, voice, image, location, and combined messages: Modifying extensions (`ext`) only.

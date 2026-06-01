@@ -5,11 +5,12 @@ v1.4.0 was released on XXXX, 2026.
 ## New Features
 
 - Supported sending and receiving GIF image messages. The GIF image message is a subtype of the image message and will not be compressed.
+- Supported setting, updating, and retrieving group avatars.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.
   - Chat room creation timestamp: Retrieved via the newly added `ChatRoom#getCreateTimestamp` method.
-  - Whether the current user is on the chat room allow list: Retrieved via the newly added `ChatRoom#isInWhitelist` method to check if the user is on the chat room allow list.
+  - Whether the current user is on the chat room allowlist: Retrieved via the newly added `ChatRoom#isInWhitelist` method to check if the user is on the chat room allowlist.
   - Mute expiration timestamp of the current user: Retrieved via the `ChatRoom#getMuteExpireTimestamp` method.
 - Added the new chat room mute event `ChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.Map<java.lang.String,java.lang.Long>)` to provide muted user IDs and their mute expiration timestamps via the `Map<String,Long> muteInfo` parameter, deprecating the old event `ChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.List<java.lang.String>, long)`.
 - Supported retrieving roaming messages sent by specific group members.
