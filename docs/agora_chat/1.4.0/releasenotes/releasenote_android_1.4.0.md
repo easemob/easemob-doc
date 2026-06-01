@@ -5,7 +5,6 @@ v1.4.0 was released on XXXX, 2026.
 ## New Features
 
 - Supported sending and receiving GIF image messages. The GIF image message is a subtype of the image message and will not be compressed.
-- Supported setting, changing, and retrieving group avatars.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.

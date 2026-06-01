@@ -4,38 +4,38 @@ v1.4.0 was released on XXXX, 2026.
 
 ## New Features
 
-- Added the new chat room mute event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:` to provide the mute expiration timestamps via the `(NSDictionary<NSString *,NSNumber*> *)aMutes` parameter, deprecating the old event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`.
+- Supported sending and receiving GIF image messages. The GIF image message is a subtype of the image message and will not be compressed.
+- Supported setting, updating, and retrieving group avatars.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
   - Chat room-wide mute status: Retrieved via the `ChatRoom#isAllMemberMuted` method. This status updates upon receiving mute/unmute status change events.
   - Chat room creation timestamp: Retrieved via the newly added `ChatRoom#getCreateTimestamp` method.
   - Whether the current user is on the chat room allow list: Retrieved via the newly added `ChatRoom#isInWhitelist` method to check if the user is on the chat room allow list.
   - Mute expiration timestamp of the current user: Retrieved via the `ChatRoom#getMuteExpireTimestamp` method.
-- Supported sending and receiving GIF image messages.
-- Supported setting, updating, and retrieving group avatars.
+- Added the new chat room mute event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:` to provide the mute expiration timestamps via the `(NSDictionary<NSString *,NSNumber*> *)aMutes` parameter, deprecating the old event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`.
 - Supported retrieving roaming messages sent by specific group members.
 - Supported retrieving messages sent by specific members within a local group conversation.
-- Supported retrieving a group member list that includes each member's role and join time.
-- Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
-- Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `AgoraChatGroupManagerDelegate#onMembersJoined` and `AgoraChatGroupManagerDelegate#onMembersExited` are introduced to replace the deprecated `AgoraChatGroupManagerDelegate#onMemberJoined` and `AgoraChatGroupManagerDelegate#onMemberExited` events.
 - Supported searching for messages across all local conversations by keyword, returning the list of conversation IDs and their matching message IDs.
 - Supported retrieving one or more local messages by message ID.
+- Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `AgoraChatGroupManagerDelegate#onMembersJoined` and `AgoraChatGroupManagerDelegate#onMembersExited` are introduced to replace the deprecated `AgoraChatGroupManagerDelegate#onMemberJoined` and `AgoraChatGroupManagerDelegate#onMemberExited` events.
 
 ## Improvements
 
-- Removed APIs that were deprecated prior to Android SDK version 1.1.0.
-- Optimized specific database operations.
 - Supported modifying various message types via the message modification API `AgoraChatManager#modifyMessage`:
   - Text and custom messages: Modifying both the message body and extensions (`ext`).
   - File, video, voice, image, location, and combined messages: Modifying extensions (`ext`) only.
   - Command messages: Not supported.
+- Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
+- Adjusted the trigger threshold for the `AgoraChatClientDelegate#onTokenWillExpire` event; the notification is now triggered when 80% of the token's validity period has elapsed (previously 50%).
+- Supported retrieving a group member list that includes each member's role and join time.
+- Changed `AgoraChatCursorResult#cursor` from `undefined` to an empty string ("") when `ChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` reaches the final page of roaming messages.
+- Removed APIs that were deprecated prior to Android SDK version 1.1.0.
+- Optimized specific database operations.
 - Optimized the reconnection logic to automatically switch reconnection addresses by default.
 - Improved the logic for calling `applicationWillEnterForeground` by sending a ping message to trigger reconnection.
 - Disable the default constructors of `AgoraChatMessage`, `AgoraChatConversation`, and `AgoraChatMessageBody` to prevent crashes caused by null pointers.
-- Added the device timezone offset to log files to facilitate troubleshooting. 
-- Changed `AgoraChatCursorResult#cursor` from `undefined` to an empty string ("") when `ChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` reaches the final page of roaming messages.
+- Added the device timezone offset to log files to facilitate troubleshooting.
 - Upgraded BoringSSL and SQLCipher dependencies to their latest versions to mitigate potential security risks.
-- Adjusted the trigger threshold for the `AgoraChatClientDelegate#onTokenWillExpire` event; the notification is now triggered when 80% of the token's validity period has elapsed (previously 50%).
 - Improved the loading performance of the local conversation list when the latest message is an attachment by eliminating redundant file length checks.
 
 ## Issues Fixed
