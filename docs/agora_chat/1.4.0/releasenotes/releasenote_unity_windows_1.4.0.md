@@ -15,7 +15,7 @@ v1.4.0 was released on XXXX, 2026.
   - Mute expiration timestamp of the current user: Retrieved via the `Room#MuteUntilTimeStamp` attribute.  
 - Supported sending and receiving GIF image messages.
 - Supported setting, updating, and retrieving group avatars.
-- Supported retrieving roaming messages sent by specific group members.
+- Supported retrieving roaming messages sent by specific group members: Added the `FetchServerMessagesOption#FromIds` attribute to replace the original `FetchServerMessagesOption#From` attribute.
 - Supported retrieving messages sent by specific members within a local group conversation.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
 - Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `IGroupManagerDelegate#OnMembersJoinedFromGroup` and `IGroupManagerDelegate#OnMembersExitedFromGroup` are introduced to replace the deprecated `IGroupManagerDelegate#OnMemberJoinedFromGroup` and `IGroupManagerDelegate#OnMemberExitedFromGroup` events.  
@@ -41,7 +41,7 @@ v1.4.0 was released on XXXX, 2026.
 - Memory messages were not deleted when their corresponding local conversations were removed.
 - The `TYPE` field was empty in the `IChatThreadManagerDelegate#OnUserKickOutOfChatThread` event.
 - `IChatManagerDelegate#OnMessageContentChanged` failed to return modification details when editing messages other than text and custom messages.
-- Group or chat room members still incorrectly requested details from the server after a disbandment event was triggered.
+- After a group or chat room was disbanded, the SDK would still fetch group or chat room details from the server after members received the disbandment event.
 - The database was mistakenly rebuilt upon encountering a `SQLITE_BUSY` error.
 - The latest messages in conversations retrieved from the server via `ChatManager#GetConversationsFromServerWithCursor` or `ChatManager#GetConversationsFromServerWithPage` did not contain translations or message Reactions.
 - A crash caused by extreme network conditions.

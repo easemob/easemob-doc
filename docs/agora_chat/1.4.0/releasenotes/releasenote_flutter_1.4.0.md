@@ -42,7 +42,7 @@ v1.4.0 was released on XXXX, 2026.
 - Messages in memory were not deleted when their corresponding local conversation was removed.
 - The `TYPE` field was empty in the `ChatThreadEventHandler#onUserKickOutOfChatThread` event.
 - `ChatEventHandler#onMessageContentChanged` failed to return modification details when editing messages other than text and custom messages.
-- Group or chat room members still incorrectly requested details from the server after a disbandment event was triggered.
+- After a group or chat room was disbanded, the SDK would still fetch group or chat room details from the server after members received the disbandment event.
 - The database was mistakenly rebuilt upon encountering a `SQLITE_BUSY` error.
 - The latest message in a conversation retrieved from the server via `ChatManager#fetchConversationsByOptions` did not contain translations or message Reactions.
 - A crash caused by extreme network conditions.

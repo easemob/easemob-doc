@@ -17,13 +17,13 @@ v1.4.0 was released on XXXX, 2026.
 - Supported setting, updating, and retrieving group avatars.
 - Supported custom group avatars during group creation: Added the `createGroupEx` method and deprecated the original `createGroup` method.
 - Supported retrieving roaming messages sent by specific group members.
-- Supported retrieving messages sent by specific members within a local group conversation.
+- Supported retrieving messages sent by specific members within a local group conversation: Added the `senders` parameter to replace the deprecated the `sender` parameter in `getConvMsgsWithKeyword`.
 - Supported retrieving a group member list that includes each member's role and join time.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
 - Supported batch notifications via group member join/leave events. Previously, the SDK triggered a separate event for each individual member. The new events `ChatGroupEventListener#onMembersJoined` and `ChatGroupEventListener#onMembersExited` are introduced to replace the deprecated `ChatGroupEventListener#onMemberJoined` and `ChatGroupEventListener#onMemberExited` events.
 - Supported searching for messages in a local conversation by keyword, returning the conversation ID and a list of matching message IDs.
 - Supported retrieving one or more local messages by message ID.
-- Supported modifying various message types via the message modification API `ChatManager#modifyMsgBody`:
+- Supported modifying various message types by adding`ChatManager#modifyMsgBody` to replace the deprecated `ChatManager#modifyMessageBody`:
   - Text and custom messages: Modifying both the message body and extensions (`ext`).
   - File, video, voice, image, location, and combined messages: Modifying extensions (`ext`) only.
   - Command messages: Not supported.
@@ -50,9 +50,9 @@ v1.4.0 was released on XXXX, 2026.
 - Improved the loading performance of the local conversation list when the latest message is an attachment by eliminating redundant file length checks.
 - Upgraded the AOSL library to version 1.3.0.
 - Added static constructors `ChatOptions#withAppId` and `ChatOptions#withAppKey` to initialize the SDK with an app ID or app key, replacing the deprecated `ChatOptions` constructor.
-- Added `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer` to retrieve group information without member information, replacing the deprecated `ChatGroupManager#fetchGroupInfoFromServer`. To retrieve member information, call `ChatGroupManager#fetchMemberListFromServer`.
+- Added `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer` to retrieve group information without member information, replacing the deprecated `ChatGroupManager#fetchGroupInfoFromServer`. To retrieve member information, call `ChatGroupManager#fetchMemberInfoListFromServer`.
 - Removed the deprecated `ChatMessageEventListener#onMessagesRecalled` event. Use `ChatMessageEventListener#onMessagesRecalledInfo` instead.
-- Added `modifyMsgBody` to replace the deprecated `modifyMessageBody`.
+- Added `modifyMsgBody` to replace the deprecated `modifyMessageBody`.  // TODO：给一下 fetchGroupInfoWithoutMembersFromServer 的示例代码，环信 IM 还是 fetchGroupInfoFromServer
 - Updated `getConvMsgsWithKeyword` by adding the `senders` parameter to replace the deprecated the `sender` parameter.
 - Added 16KB page alignment support for Android 15+ compatibility.
 
