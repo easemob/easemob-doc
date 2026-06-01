@@ -1,557 +1,58 @@
 <template>
   <navbar />
   <ClientOnly>
-    <ais-instant-search
-      index-name="im-beta-easemob"
-      :search-client="searchClient"
-      :initial-ui-state="initialUiState"
-    >
-      <ais-configure
-        :hitsPerPage="10"
-        :maxValuesPerFacet="22"
-        :filters="filter"
-        :attributesToSnippet="[
-          'hierarchy.lvl1:20',
-          'hierarchy.lvl2:20',
-          'hierarchy.lvl3:20',
-          'hierarchy.lvl4:20',
-          'content:150'
-        ]"
-      />
-      <div class="search-box-container">
-        <div class="search-container">
-          <div class="search-box">
-            <ais-search-box
-              autofocus
-              placeholder="热门搜索: 登录、消息扩展"
-              show-loading-indicator
-            />
-            <ais-powered-by class="powered-by" />
-          </div>
-          <div class="search-category">
-            <ais-refinement-list v-show="false" attribute="type" />
-          </div>
-          <ais-state-results>
-            <template
-              v-slot="{ state: { query }, results: { nbHits }, status }"
-            >
-              <el-tabs class="search-tabs" :model-value="activeCategoryType">
-                <el-tab-pane name="product" lazy="true">
-                  <template #label>
-                    <ais-clear-refinements
-                      :included-attributes="includeAttributes"
-                    >
-                      <template v-slot="{ canRefine, refine, createURL }">
-                        <div
-                          :class="{
-                            'ais-tab-item': true,
-                            'ais-tab-item--active':
-                              activeCategoryType === 'product'
-                          }"
-                          @click="handleClick({ name: 'product', refine })"
-                        >
-                          产品介绍
-                        </div>
-                      </template>
-                    </ais-clear-refinements>
-                  </template>
-                  <ais-refinement-list
-                    attribute="category"
-                    :limit="100"
-                    :transform-items="filterCategories"
-                  >
-                    <template v-slot:item="{ item, refine }">
-                      <div
-                        :class="{
-                          'refinement-list-item': true,
-                          'refinement-list-item--selected': item.isRefined
-                        }"
-                        @click="refine(item.value)"
-                      >
-                        {{ categoryMap[item.label] }}
-                      </div>
-                    </template>
-                  </ais-refinement-list>
-                  <ais-hits v-loading="status === 'stalled'">
-                    <template v-slot:item="{ item }">
-                      <p>
-                        <a :href="item.url" target="_blank">
-                          <ais-highlight
-                            attribute="hierarchy.lvl0"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl1"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl1"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl2"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl2"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl3"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl3"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl4"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl4"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl5"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl5"
-                            :hit="item"
-                          />
-                        </a>
-                      </p>
-                      <div class="content-snippet">
-                        <ais-snippet
-                          style="font-size: 14px"
-                          attribute="content"
-                          :hit="item"
-                        />
-                      </div>
-                    </template>
-                  </ais-hits>
-                </el-tab-pane>
-
-                <el-tab-pane name="sdk">
-                  <template #label>
-                    <ais-clear-refinements
-                      :included-attributes="includeAttributes"
-                    >
-                      <template v-slot="{ canRefine, refine, createURL }">
-                        <div
-                          :class="{
-                            'ais-tab-item': true,
-                            'ais-tab-item--active': activeCategoryType === 'sdk'
-                          }"
-                          @click="handleClick({ name: 'sdk', refine })"
-                        >
-                          SDK & REST 集成
-                        </div>
-                      </template>
-                    </ais-clear-refinements>
-                  </template>
-                  <ais-refinement-list
-                    attribute="category"
-                    :limit="100"
-                    :transform-items="filterCategories"
-                  >
-                    <template v-slot:item="{ item, refine }">
-                      <div
-                        :class="{
-                          'refinement-list-item': true,
-                          'refinement-list-item--selected': item.isRefined
-                        }"
-                        @click="refine(item.value)"
-                      >
-                        {{ categoryMap[item.label] }}
-                      </div>
-                    </template>
-                  </ais-refinement-list>
-                  <ais-hits v-loading="status === 'stalled'">
-                    <template v-slot:item="{ item }">
-                      <p>
-                        <a :href="item.url" target="_blank">
-                          <ais-highlight
-                            attribute="hierarchy.lvl0"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl1"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl1"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl2"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl2"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl3"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl3"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl4"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl4"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl5"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl5"
-                            :hit="item"
-                          />
-                        </a>
-                      </p>
-                      <div class="content-snippet">
-                        <ais-snippet
-                          style="font-size: 14px"
-                          attribute="content"
-                          :hit="item"
-                        />
-                      </div>
-                    </template>
-                  </ais-hits>
-                </el-tab-pane>
-                <el-tab-pane name="uikit">
-                  <template #label>
-                    <ais-clear-refinements
-                      :included-attributes="includeAttributes"
-                    >
-                      <template v-slot="{ canRefine, refine, createURL }">
-                        <div
-                          :class="{
-                            'ais-tab-item': true,
-                            'ais-tab-item--active':
-                              activeCategoryType === 'uikit'
-                          }"
-                          @click="handleClick({ name: 'uikit', refine })"
-                        >
-                          UIKit 集成
-                        </div>
-                      </template>
-                    </ais-clear-refinements>
-                  </template>
-                  <ais-refinement-list
-                    attribute="category"
-                    :limit="100"
-                    :transform-items="filterCategories"
-                  >
-                    <template v-slot:item="{ item, refine }">
-                      <div
-                        :class="{
-                          'refinement-list-item': true,
-                          'refinement-list-item--selected': item.isRefined
-                        }"
-                        @click="refine(item.value)"
-                      >
-                        {{ categoryMap[item.label] }}
-                      </div>
-                    </template>
-                  </ais-refinement-list>
-                  <ais-hits v-loading="status === 'stalled'">
-                    <template v-slot:item="{ item }">
-                      <p>
-                        <a :href="item.url" target="_blank">
-                          <ais-highlight
-                            attribute="hierarchy.lvl0"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl1"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl1"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl2"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl2"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl3"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl3"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl4"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl4"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl5"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl5"
-                            :hit="item"
-                          />
-                        </a>
-                      </p>
-                      <div class="content-snippet">
-                        <ais-snippet
-                          style="font-size: 14px"
-                          attribute="content"
-                          :hit="item"
-                        />
-                      </div>
-                    </template>
-                  </ais-hits>
-                </el-tab-pane>
-                <el-tab-pane name="api-reference">
-                  <template #label>
-                    <ais-clear-refinements
-                      :included-attributes="includeAttributes"
-                    >
-                      <template v-slot="{ canRefine, refine, createURL }">
-                        <div
-                          :class="{
-                            'ais-tab-item': true,
-                            'ais-tab-item--active':
-                              activeCategoryType === 'api-reference'
-                          }"
-                          @click="
-                            handleClick({ name: 'api-reference', refine })
-                          "
-                        >
-                          API参考
-                        </div>
-                      </template>
-                    </ais-clear-refinements>
-                  </template>
-                  <ais-refinement-list
-                    attribute="category"
-                    :limit="100"
-                    :transform-items="filterCategories"
-                  >
-                    <template v-slot:item="{ item, refine }">
-                      <div
-                        :class="{
-                          'refinement-list-item': true,
-                          'refinement-list-item--selected': item.isRefined
-                        }"
-                        @click="refine(item.value)"
-                      >
-                        {{ categoryMap[item.label] }}
-                      </div>
-                    </template>
-                  </ais-refinement-list>
-                  <ais-hits v-loading="status === 'stalled'">
-                    <template v-slot:item="{ item }">
-                      <p>
-                        <a :href="item.url" target="_blank">
-                          <ais-highlight
-                            attribute="hierarchy.lvl0"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl1"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl1"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl2"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl2"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl3"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl3"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl4"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl4"
-                            :hit="item"
-                          />
-                          <span v-if="item.hierarchy.lvl5"> > </span>
-                          <ais-highlight
-                            attribute="hierarchy.lvl5"
-                            :hit="item"
-                          />
-                        </a>
-                      </p>
-                      <div class="content-snippet">
-                        <ais-snippet
-                          style="font-size: 14px"
-                          attribute="content"
-                          :hit="item"
-                        />
-                      </div>
-                    </template>
-                  </ais-hits>
-                </el-tab-pane>
-              </el-tabs>
-
-              <div v-if="nbHits === 0">
-                <div class="no-results">
-                  <p>
-                    抱歉，对于搜索词“{{ query }}”，我们没有找到任何结果。
-                  </p>
-                </div>
-              </div>
-              <div v-else></div>
-            </template>
-          </ais-state-results>
-          <ais-pagination style="margin-top: 1em" />
+    <Suspense>
+      <SearchContent />
+      <template #fallback>
+        <div class="search-loading">
+          <div class="search-loading-spinner"></div>
+          <p>搜索加载中...</p>
         </div>
-      </div>
-    </ais-instant-search>
+      </template>
+    </Suspense>
   </ClientOnly>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
-import { liteClient as algoliasearch } from "algoliasearch/lite";
-
-import { useRoute } from "vue-router";
-
-const sdkCategoryMap = {
-  "Android 集成文档": "Android",
-  "iOS 集成文档": "iOS",
-  "Web 集成文档": "Web",
-  "HarmonyOS 集成文档": "HarmonyOS",
-  小程序集成文档: "小程序",
-  "Flutter 集成文档": "Flutter",
-  "React Native 集成文档": "React Native",
-  "Windows 集成文档": "Windows",
-  "Unity 集成文档": "Unity",
-  "REST API": "REST API"
-};
-
-const uikitCategoryMap = {
-  "UIKit-Android 集成文档": "Android",
-  "UIKit-iOS 集成文档": "iOS",
-  "UIKit-Web 集成文档": "Web",
-  "UIKit-HarmonyOS 集成文档": "HarmonyOS",
-  "UIKit-Flutter 集成文档": "Flutter",
-  "UIKit-React Native 集成文档": "React Native",
-  "UIKit-uniapp": "Uniapp"
-};
-
-const productCategoryMap = {
-  产品介绍: "产品功能",
-  内容审核: "内容审核",
-  常见方案: "常见方案",
-  即时推送: "即时推送",
-  "使用 MCP 集成": "使用 MCP 集成"
-};
-
-const apiReferenceCategoryMap = {
-  "Android API参考": "Android",
-  "IOS API参考": "IOS",
-  "Web API参考": "Web",
-  "Harmony API参考": "Harmony",
-  "Flutter API参考": "Flutter",
-  "React Native API参考": "React Native",
-  "Unity and Windows API参考": "Unity and Windows"
-};
-
-const categoryMap = {
-  ...sdkCategoryMap,
-  ...uikitCategoryMap,
-  ...productCategoryMap,
-  ...apiReferenceCategoryMap
-};
-
-const productFilters =
-  "category:'产品介绍' OR category:'即时推送' OR category:'内容审核' OR category:'常见方案' OR category:'使用 MCP 集成'";
-
-const sdkFilters =
-  "category:'Android 集成文档' OR category:'iOS 集成文档' OR category:'Web 集成文档' OR category:'HarmonyOS 集成文档' OR category:'小程序集成文档' OR category:'Flutter 集成文档' OR category:'React Native 集成文档' OR category:'Windows 集成文档' OR category:'Unity 集成文档' OR category:'REST API'";
-
-const uikitFilters =
-  "category:'UIKit-Android 集成文档' OR category:'UIKit-iOS 集成文档' OR category:'UIKit-Web 集成文档' OR category:'UIKit-HarmonyOS 集成文档' OR category:'UIKit-Flutter 集成文档' OR category:'UIKit-React Native 集成文档' OR category:'UIKit-uniapp'";
-
-const apiReferenceFilters =
-  "category:'Android API参考' OR category:'IOS API参考' OR category:'Web API参考' OR category:'Harmony API参考' OR category:'Flutter API参考' OR category:'React Native API参考' OR category:'Unity and Windows API参考'";
+import { defineAsyncComponent } from "vue";
 
 export default {
   name: "InstanceSearchLayout",
   components: {
-    Navbar
-  },
-  computed: {
-    filter() {
-      if (this.activeCategoryType === "product") {
-        return productFilters;
-      } else if (this.activeCategoryType === "uikit") {
-        return uikitFilters;
-      } else if (this.activeCategoryType === "api-reference") {
-        return apiReferenceFilters;
-      } else {
-        return sdkFilters;
-      }
-    },
-    fixedCategories() {
-      if (this.activeCategoryType === "product") {
-        return this.productCategories;
-      } else if (this.activeCategoryType === "uikit") {
-        return this.uikitCategories;
-      } else if (this.activeCategoryType === "api-reference") {
-        return this.apiReferenceCategories;
-      } else {
-        return this.sdkCategories;
-      }
-    }
-  },
-  data() {
-    return {
-      categoryMap,
-      searchClient: algoliasearch(
-        "5K8UTB3JVE",
-        "df9e938d06f6531ce8dd8de71f907f0d"
-      ),
-      initialUiState: {
-        ["im-beta-easemob"]: {
-          query: useRoute().query.query || "IM",
-          refinementList: {
-            type: ["content"],
-            category: categoryMap[this.$route.query.s]
-              ? [this.$route.query.s]
-              : []
-          }
-        }
-      },
-      includeAttributes: ["category"],
-      activeCategoryType: "product",
-      sdkCategories: Object.keys(sdkCategoryMap),
-      uikitCategories: Object.keys(uikitCategoryMap),
-      productCategories: Object.keys(productCategoryMap),
-      apiReferenceCategories: Object.keys(apiReferenceCategoryMap),
-      snippet: [
-        "hierarchy.lvl1:20",
-        "hierarchy.lvl2:20",
-        "hierarchy.lvl3:20",
-        "hierarchy.lvl4:20",
-        "hierarchy.lvl5:20",
-        "hierarchy.lvl6:20",
-        "content:50"
-      ]
-    };
-  },
-  created() {
-    this.activeCategoryType = this.getCategoryTypeByCategoryItem(
-      this.$route.query.s
-    );
-  },
-  methods: {
-    filterCategories(items) {
-      let filteredItems = items
-        .filter((item) => this.fixedCategories.includes(item.label))
-        .sort(
-          (a, b) =>
-            this.fixedCategories.indexOf(a.label) -
-            this.fixedCategories.indexOf(b.label)
-        );
-      return filteredItems;
-    },
-    handleClick({ name, refine }) {
-      if (this.activeCategoryType === name) {
-        return;
-      }
-      refine();
-      setTimeout(() => {
-        this.activeCategoryType = name;
-      }, 20);
-    },
-    getCategoryTypeByCategoryItem(categoryItem) {
-      if (this.sdkCategories.includes(categoryItem)) {
-        return "sdk";
-      } else if (this.uikitCategories.includes(categoryItem)) {
-        return "uikit";
-      } else if (this.apiReferenceCategories.includes(categoryItem)) {
-        return "api-reference";
-      } else {
-        return "product";
-      }
-    }
+    Navbar,
+    SearchContent: defineAsyncComponent(() =>
+      import("../components/SearchContent.vue")
+    )
   }
 };
 </script>
 
 <style>
+.search-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: #4a5568;
+  font-size: 16px;
+}
+
+.search-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--theme-color, #409eff);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 body {
   height: 100%;
 }
@@ -655,7 +156,6 @@ body {
   height: 100%;
 }
 
-/* 分类项的基础样式 */
 .refinement-list-item {
   padding: 10px 15px;
   border-radius: 8px;
@@ -663,15 +163,14 @@ body {
   transition: background-color 0.3s, color 0.3s;
   font-size: 15px;
   font-weight: 500;
-  color: #242f3d; /* 非active状态的文本颜色 */
-  background-color: #f7fafc; /* 非active状态的背景色 */
+  color: #242f3d;
+  background-color: #f7fafc;
   user-select: none;
   margin: 0 15px 10px 0;
 }
 
-/* 悬停效果 */
 .refinement-list-item:hover {
-  background-color: var(--theme-color); /* 悬停时的背景色 */
+  background-color: var(--theme-color);
   color: #fff;
 }
 
@@ -688,10 +187,10 @@ body {
 .ais-RatingMenu-link {
   color: var(--theme-color) !important;
 }
-/* active状态的样式 */
+
 .refinement-list-item--selected {
-  background-color: var(--theme-color); /* active状态的背景色 */
-  color: #ffffff; /* active状态的文本颜色 */
+  background-color: var(--theme-color);
+  color: #ffffff;
 }
 
 .search-tabs .el-tabs__item {
