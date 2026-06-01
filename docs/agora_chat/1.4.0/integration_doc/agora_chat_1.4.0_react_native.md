@@ -110,8 +110,23 @@ ChatClient.getInstance().groupManager.createGroupEx({
     });
 ```
 
+## 4. 聊天室成员加入禁言列表事件
 
-## 4. 从服务器获取指定群成员发送的消息
+```typescript
+// 有成员被加入禁言列表。被添加的成员收到该事件。
+onMuteListAddedV2(params: {
+  roomId: string;
+  mutes: Record<string, number>;
+}): void {
+  console.log(
+    'onMuteListAddedV2:',
+    params.roomId,
+    params.mutes
+  );
+}
+```
+
+## 5. 从服务器获取指定群成员发送的消息
 
 自 1.4.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
@@ -141,7 +156,7 @@ ChatClient.getInstance()
   });
 ```
 
-## 5. 从本地获取指定群成员发送的消息
+## 6. 从本地获取指定群成员发送的消息
 
 自 SDK 1.4.0 开始，你可以调用 `getConvMsgsWithKeyword` 加载本地会话中指定成员发送的消息。
 
@@ -160,61 +175,7 @@ ChatClient.getInstance()
   .catch((error) => console.error('Error:', error));
 ```
 
-## 6. 群成员列表包含群成员的用户 ID、加群时间和成员角色
-
-自 1.4.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
-
-```typescript
-const groupId = '<YOUR_GROUP_ID>';
-const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
-const limit = 200; // 每页期望返回的群成员数量，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
-ChatClient.getInstance()
-  .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
-  .then((result) => {
-    console.log('Fetch member info list result:', result);
-  })
-  .catch((error) => {
-    console.error('Error fetching member info list:', error);
-  });
-
-```
-
-## 7. 撤回消息
-
-- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
-- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
-
-
-
-你可以设置消息撤回监听，通过 `onMessagesRecalledInfo` 事件监听发送方对已接收的消息的撤回。
-
-- 若用户在线接收了消息，消息撤回时，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recalledMessageId` 属性返回撤回的消息的 ID。
-- 若消息发送和撤回时接收方离线，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为空，`recalledMessageId` 属性返回撤回的消息的 ID。
-
-```typescript
-let listener = new (class implements ChatMessageEventListener {
-  onMessagesRecalledInfo(info: Array<ChatRecalledMessageInfo>): void {
-    // 消息撤回通知，messages 为撤销的消息
-  },
-})();
-ChatClient.getInstance().chatManager.addMessageListener(listener);
-```
-
-## 8. 批量通知群成员进出群
-
-```typescript
-// 有新成员加入群组，所有群成员收到该回调
-onMembersJoined(params: { groupId: string; members: string[] }): void {
-  console.log('onMembersJoined', params);
-}
-
-// 有群成员主动退出群，所有群成员收到该回调
-onMembersExited(params: { groupId: string; members: string[] }): void {
-  console.log('onMembersExited', params);
-}
-```
-
-## 9. 根据关键字获取本地会话中的消息
+## 7. 根据关键字获取本地会话中的消息
 
 自 SDK 1.4.0 版本开始，你可以调用 `getConvsMsgsWithKeyword` 通过设置关键词获取本地会话中的某些消息。消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
@@ -236,7 +197,7 @@ ChatClient.getInstance()
   .catch((error) => console.error('Error:', error));
 ```
 
-## 10. 根据消息 ID 获取本地消息
+## 8. 根据消息 ID 获取本地消息
 
 自 SDK 1.4.0 版本开始，你可以调用 `getMessagesWithIds`，传入单个或多个消息 ID 获取单个本地会话中的消息。
 
@@ -258,43 +219,38 @@ ChatClient.getInstance()
   });
 ```
 
-## 11. Token 即将过期回调触发时机变化
+## 9. 批量通知群成员进出群
 
-你可以通过注册连接监听确认连接状态。自 1.4.0 版本开始，SDK 会在 Token 有效期达到 80% 时触发该回调。
+```typescript
+// 有新成员加入群组，所有群成员收到该回调
+onMembersJoined(params: { groupId: string; members: string[] }): void {
+  console.log('onMembersJoined', params);
+}
+
+// 有群成员主动退出群，所有群成员收到该回调
+onMembersExited(params: { groupId: string; members: string[] }): void {
+  console.log('onMembersExited', params);
+}
+```
+
+## 10. 监控从服务器拉取离线消息的开始和结束
+
+自 SDK 1.4.0 开始，SDK 支持监控从服务器拉取离线消息的开始和结束。
 
 ```typescript
 ChatClient.getInstance().addConnectionListener({
-  // Token 即将过期的通知。
-  // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时触发该回调。
-  onTokenWillExpire(): void {
-    console.log("onTokenWillExpire");
+  // 结束接收离线消息的时候触发。
+  onOfflineMessageSyncFinish(): void {
+    console.log("onOfflineMessageSyncFinish");
+  },
+  // 开始接收离线消息的时候触发。
+  onOfflineMessageSyncStart(): void {
+    console.log("onOfflineMessageSyncStart");
   },
 });
 ```
 
-## 12. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态
-
-在 [Retrieve message history of the specified conversation](https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platform=react-native#retrieve-message-history-of-the-specified-conversation) API 的描述中添加如下说明：
-
-自 SDK v1.4.0 版本开始，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系 [technical support](mailto:support@agora.io) 开通。
-
-## 13. 聊天室成员加入禁言列表事件
-
-```typescript
-// 有成员被加入禁言列表。被添加的成员收到该事件。
-onMuteListAddedV2(params: {
-  roomId: string;
-  mutes: Record<string, number>;
-}): void {
-  console.log(
-    'onMuteListAddedV2:',
-    params.roomId,
-    params.mutes
-  );
-}
-```
-
-## 14. 修改消息
+## 11. 修改消息
 
 对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。若使用该功能，**需联系环信商务开通**。
 
@@ -366,25 +322,61 @@ ChatClient.getInstance().chatManager.addMessageListener({
 } as ChatMessageEventListener);
 ```
 
-## 15. 监控从服务器拉取离线消息的开始和结束
+## 12. 撤回消息
 
-自 SDK 1.4.0 开始，SDK 支持监控从服务器拉取离线消息的开始和结束。
+- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
+- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
+
+
+
+你可以设置消息撤回监听，通过 `onMessagesRecalledInfo` 事件监听发送方对已接收的消息的撤回。
+
+- 若用户在线接收了消息，消息撤回时，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recalledMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `ChatRecalledMessageInfo` 中的 `recallMessage` 为空，`recalledMessageId` 属性返回撤回的消息的 ID。
 
 ```typescript
-ChatClient.getInstance().addConnectionListener({
-  // 结束接收离线消息的时候触发。
-  onOfflineMessageSyncFinish(): void {
-    console.log("onOfflineMessageSyncFinish");
+let listener = new (class implements ChatMessageEventListener {
+  onMessagesRecalledInfo(info: Array<ChatRecalledMessageInfo>): void {
+    // 消息撤回通知，messages 为撤销的消息
   },
-  // 开始接收离线消息的时候触发。
-  onOfflineMessageSyncStart(): void {
-    console.log("onOfflineMessageSyncStart");
-  },
-});
+})();
+ChatClient.getInstance().chatManager.addMessageListener(listener);
 ```
 
-## 16. 消息附件下载鉴权
+## 13. 消息附件下载鉴权
 
 自 1.11.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通，请联系 [technical support](mailto:support@agora.io)。
 。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
+## 14. Token 即将过期回调触发时机变化
+
+你可以通过注册连接监听确认连接状态。自 1.4.0 版本开始，SDK 会在 Token 有效期达到 80% 时触发该回调。
+
+```typescript
+ChatClient.getInstance().addConnectionListener({
+  // Token 即将过期的通知。
+  // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时触发该回调。
+  onTokenWillExpire(): void {
+    console.log("onTokenWillExpire");
+  },
+});
+```
+
+## 15. 群成员列表包含群成员的用户 ID、加群时间和成员角色
+
+自 1.4.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
+
+```typescript
+const groupId = '<YOUR_GROUP_ID>';
+const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
+const limit = 200; // 每页期望返回的群成员数量，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
+ChatClient.getInstance()
+  .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
+  .then((result) => {
+    console.log('Fetch member info list result:', result);
+  })
+  .catch((error) => {
+    console.error('Error fetching member info list:', error);
+  });
+
+```

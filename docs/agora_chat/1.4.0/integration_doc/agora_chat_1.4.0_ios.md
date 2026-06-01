@@ -1,4 +1,4 @@
-﻿# Agora Chat 1.4.0 iOS
+# Agora Chat 1.4.0 iOS
 
 ## 1. 发送和接收 GIF 图片消息
 
@@ -111,7 +111,18 @@ EMGroupOptions *options = [[EMGroupOptions alloc] init];
 }];
 ```
 
-## 3. 从服务器获取指定群成员发送的消息
+## 3. 聊天室成员加入禁言列表事件
+
+请在 iOS 端的 [Manage chat rooms 文档中的 Listen for chat room events 一节中](https://docs.agora.io/en/agora-chat/client-api/chat-room/manage-chatrooms?platform=ios#listen-for-chat-room-events) 更新 `chatroomMuteListDidUpdate` 事件：
+
+```objectivec
+// 有成员被加入禁言列表。被禁言的成员会收到该事件。
+- (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
+                addedMutedMembers:(NSDictionary<NSString *,NSNumber*> *)aMutes {
+}
+```
+
+## 4. 从服务器获取指定群成员发送的消息
 
 自 iOS SDK 1.4.0 开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
@@ -124,7 +135,7 @@ EMFetchServerMessagesOption* option = [[EMFetchServerMessagesOption alloc] init]
 }];
 ```
 
-## 4. 从本地获取指定群成员发送的消息
+## 5. 从本地获取指定群成员发送的消息
 
 自 iOS SDK 1.4.0 开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
@@ -139,28 +150,36 @@ EMConversation *conversation = [EMClient.sharedClient.chatManager getConversatio
     }
 ```
 
-## 5. 获取群成员列表
+## 6. 根据关键字获取本地会话中的消息
 
-自 1.4.0 版本开始，获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、群成员角色和入群时间。
+自 SDK 1.4.0 版本开始，你可以通过设置关键词获取本地会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `aDirection` 参数按照消息时间戳的正序或倒序列明。
 
-```objectivec
-// limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
-NSString* cursor = nil;
-[EMClient.sharedClient.groupManager fetchGroupMemberInfoListFromServerWithGroupId:@"groupId" cursor:cursor limit:20 completion:^(EMCursorResult<EMGroupMemberInfo *> * _Nullable cursorResult, EMError * _Nullable error) {
-        for (EMGroupMemberInfo * memberInfo in cursorResult.list) {
-            NSString* userId = memberInfo.userId;// 成员的用户 ID
-            NSUInteger joinedTs = memberInfo.joinedTimestamp; // 成员入群时间
-            EMGroupPermissionType role = memberInfo.role; //成员角色
+```objective-c
+[EMClient.sharedClient.chatManager loadConversationMessagesWithKeyword:@"keyword" timestamp:-1 fromUser:@"" searchDirection:EMMessageSearchDirectionUp scope:EMMessageSearchScopeAll completion:^(NSDictionary<NSString *,NSArray<NSString *> *> * _Nullable aConversationMessages, EMError * _Nullable aError) {
+        if (aError) {
+            NSLog(@"Error loading messages: %@", aError.errorDescription);
+        } else {
+            // aConversationMessages is the retrieved message
         }
     }];
 ```
 
-## 6. 撤回消息
+## 7. 根据消息 ID 获取本地消息
 
-- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
-- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
+自 SDK 1.4.0 开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
-## 7. 批量通知群成员进出群
+```objective-c
+// messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
+[EMClient.sharedClient.chatManager getMessages:@[@"messageId1", @"messageId2"] withConversationId:@"conversationId" completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
+        if (aError) {
+            NSLog(@"Error getting messages: %@", aError.errorDescription);
+        } else {
+            // aMessages is the retrieved message
+        }
+    }];
+```
+
+## 8. 批量通知群成员进出群
 
 1. 请在 Chat Android 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=ios#listen-for-chat-group-events)  的 "Listen for chat group events" 中添加进出群组的新事件，并移掉旧事件。
 
@@ -181,36 +200,24 @@ NSString* cursor = nil;
 ```
 2. 此外，请在 Chat iOS 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=ios) 中搜索所有的旧事件，用新事件进行替换。
 
-## 8. 根据关键字获取本地会话中的消息
+## 9. 修改消息
 
-自 SDK 1.4.0 版本开始，你可以通过设置关键词获取本地会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `aDirection` 参数按照消息时间戳的正序或倒序列明。
+对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。
 
-```objective-c
-[EMClient.sharedClient.chatManager loadConversationMessagesWithKeyword:@"keyword" timestamp:-1 fromUser:@"" searchDirection:EMMessageSearchDirectionUp scope:EMMessageSearchScopeAll completion:^(NSDictionary<NSString *,NSArray<NSString *> *> * _Nullable aConversationMessages, EMError * _Nullable aError) {
-        if (aError) {
-            NSLog(@"Error loading messages: %@", aError.errorDescription);
-        } else {
-            // aConversationMessages is the retrieved message
-        }
-    }];
-```
+- SDK 1.4.0 之前的版本仅支持对单聊和群组会话中发送后的文本消息进行修改。
+- SDK 1.4.0 及之后版本中支持对单聊、群组和聊天室会话中各类消息进行修改：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展字段 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `ext`。
+  - 命令消息：不支持修改。
 
-## 9. 根据消息 ID 获取本地消息
+// 注意：描述中也需要体现支持修改聊天室会话中的消息。
 
-自 SDK 1.4.0 开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
+## 10. 撤回消息
 
-```objective-c
-// messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
-[EMClient.sharedClient.chatManager getMessages:@[@"messageId1", @"messageId2"] withConversationId:@"conversationId" completion:^(NSArray<EMChatMessage *> * _Nullable aMessages, EMError * _Nullable aError) {
-        if (aError) {
-            NSLog(@"Error getting messages: %@", aError.errorDescription);
-        } else {
-            // aMessages is the retrieved message
-        }
-    }];
-```
+- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
+- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
 
-## 10. Token 即将过期回调触发时机变化
+## 11. Token 即将过期回调触发时机变化
 
 ```swift
 override func viewDidLoad() {
@@ -232,38 +239,25 @@ extension ViewController: EMClientDelegate {
 
 ```
 
-## 11. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态
+## 12. 获取群成员列表
 
-在 [Retrieve message history of the specified conversation](https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platform=ios#retrieve-message-history-of-the-specified-conversation) API 的描述中添加如下说明：
-
-自 SDK v1.4.0 版本开始，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系 [technical support](mailto:support@agora.io) 开通。
-
-## 12.  聊天室成员加入禁言列表事件
-
-请在 ios 端的 [Manage chat rooms 文档中的 Listen for chat room events 一节中](https://docs.agora.io/en/agora-chat/client-api/chat-room/manage-chatrooms?platform=ios#listen-for-chat-room-events) 更新 `chatroomMuteListDidUpdate` 事件：
+自 1.4.0 版本开始，获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、群成员角色和入群时间。
 
 ```objectivec
-// 有成员被加入禁言列表。被禁言的成员会收到该事件。
-- (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
-                addedMutedMembers:(NSDictionary<NSString *,NSNumber*> *)aMutes {
-}
+// limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
+NSString* cursor = nil;
+[EMClient.sharedClient.groupManager fetchGroupMemberInfoListFromServerWithGroupId:@"groupId" cursor:cursor limit:20 completion:^(EMCursorResult<EMGroupMemberInfo *> * _Nullable cursorResult, EMError * _Nullable error) {
+        for (EMGroupMemberInfo * memberInfo in cursorResult.list) {
+            NSString* userId = memberInfo.userId;// 成员的用户 ID
+            NSUInteger joinedTs = memberInfo.joinedTimestamp; // 成员入群时间
+            EMGroupPermissionType role = memberInfo.role; //成员角色
+        }
+    }];
 ```
 
-## 13. 修改消息
+## 13. SDK 依赖的 Crash 上报库冲突
 
-对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。
-
-- SDK 1.4.0 之前的版本仅支持对单聊和群组会话中发送后的文本消息进行修改。
-- SDK 1.4.0 及之后版本中支持对单聊、群组和聊天室会话中各类消息进行修改：
-  - 文本/自定义消息：支持修改消息内容（body）和扩展字段 `ext`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展字段 `ext`。
-  - 命令消息：不支持修改。
-
-// 注意：描述中也需要体现支持修改聊天室会话中的消息。
-
-## 15. SDK 依赖的 Crash 上报库冲突
-
-由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 1.3.2` 和 `AgoraRtcEngine_iOS 4.3.0+` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
 
 ```
 [!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
@@ -301,4 +295,3 @@ end
 
 
 ![img](/images/ios/quickstart_error_solve.png)
-

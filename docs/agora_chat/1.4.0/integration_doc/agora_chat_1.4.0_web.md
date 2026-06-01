@@ -1,3 +1,4 @@
+# Agora Chat 1.4.0 Web
 
 ## 1. 发送和接收 GIF 图片消息
 
@@ -98,46 +99,13 @@ conn.getGroupInfo({
 })
 ```
 
-## 3. 群成员列表和聊天室成员列表包含群成员的加群时间和成员角色
+## 3. 从服务器获取指定群成员发送的消息
 
-自 SDK 1.4.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取全部群成员（包括群主和群管理员）的信息，包括用户 ID、用户角色和加入时间。原方法 `listGroupMembers` 废弃。
+你已经在下面的示例代码中已经添加了 searchOptions。只需要添加一句描述：自 1.4.0 版本开始，对于单个群组会话，你可以从服务器获取单个成员发送的消息。
 
-```javascript
-conn
-// limit：每页期望返回的群成员数量，默认值为 50，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
-// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-  .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
-  .then((res) => {
-    console.log(res);
-  });
-```
+https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platform=web#retrieve-message-history-of-the-specified-conversation
 
-自 SDK 1.4.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID、用户角色和加入时间。服务器不对成员进行排序，因此，返回的成员列表不保证有序。原方法 `listChatRoomMembers` 废弃。
-
-```javascript
-conn
-// limit：每页期望返回的聊天室成员数量，默认值为 50，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chatroom-management/manage-chatroom-members#retrieving--members-with-pagination
-  .getChatRoomMembers({ cursor: "", limit: 50, chatRoomId: "chatRoomId" })
-  .then((res) => {
-    console.log(res);
-  });
-```
-
-// Note: 获取群组成员列表的原方法 listGroupMembers 废弃。使用 getGroupMembers 代替。在相关文档中查找替换。
-// Note: 获取聊天室成员列表的原方法 listChatRoomMembers 废弃。使用 getChatRoomMembers 代替。在相关文档中查找替换。
-
-## 4. 撤回消息
-
-- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
-- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
-
-## 5. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态
-
-请在 [Retrieve message history of the specified conversation](https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platform=web#retrieve-message-history-of-the-specified-conversation) API 的描述中添加如下说明:
-
-自 SDK v1.4.0 版本开始，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系 [technical support](mailto:support@agora.io) 开通。
-
-## 6. 批量通知群成员进出群
+## 4. 批量通知群成员进出群
 
 1. 请在 Chat Web 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=web#listen-for-chat-group-events)  的 "Listen for chat group events" 中添加如下事件。
 
@@ -157,41 +125,8 @@ break;
 ```
 
 2. 此外，请在 Chat Android 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=web) 中搜索 `memberAbsence` 和 `memberPresence` 事件，用新事件 `membersAbsence` 和 `membersPresence` 进行替换。
-
-## 7. 设置登录设备的平台
-
-自 SDK 1.4.0 开始，支持自定义设置登录设备的平台，例如，若要将小程序平台和 Web 浏览器平台进行区分，设置成两个单独的平台，可以更精细的控制每个平台登录设备的数量。
-
-你可以按照以下步骤设置登录设备所属的平台： // TODO：Agora Console 上面可以配置这些吗？
-
-1. 在环信控制台的 **功能配置** > **基础功能** > **用户** 页面，在**多端多设备** 区域，点击 **设置**。在弹出的对话框中点击 **新增自定义平台**，在 **添加自定义平台** 对话框中设置 **设备平台** 和 **设备数量**。
-
-**设备平台** 的取值范围为 [1,100]，**设备数量** 的取值范围为 [0,4]。
-
-![img](/images/common/multidevice_device_platform.png)
-
-2. 初始化 SDK 时，设置 `customOSPlatform` 参数，可选值为 [1,100]，确保该参数的值与环信控制台的 **添加自定义平台** 对话框中设置的设备平台的值相同。
-
-```javascript
-const conn = new WebIM.connection({
-    appKey: 'you appKey',
-    customOSPlatform: 1, // 设置自定义平台
-    customDeviceName: '自定义平台1' // 设置平台名称
-})
-```
-
-## 8. Token 即将过期回调触发时机变化
-
-```javascript
-conn.addEventHandler("connectionListener", {
-  // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
-  onTokenWillExpire: () => {
-    console.log("token 即将过期");
-  },
-});
-```
-
-## 9. 新的创建群组的方法
+3. 
+## 5. 新的创建群组的方法
 
 调用 `createGroupVNext` 方法新建群组，设置群组参数。
 
@@ -235,14 +170,7 @@ conn.createGroupVNext({
 
 // Notes：原创建群组方法 createGroup 方法废弃，使用 createGroupVNext 方法代替。在 Web 端所有文档中搜索createGroup，替换为 createGroupVNext 方法。
 
-## 10. 从服务器获取指定群成员发送的消息
-
-你已经在下面的示例代码中已经添加了 searchOptions。只需要添加一句描述：自 1.4.0 版本开始，对于单个群组会话，你可以从服务器获取单个成员发送的消息。
-
-https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platform=web#retrieve-message-history-of-the-specified-conversation
-
-
-## 11. 修改消息
+## 6. 修改消息
 
 对于单聊、群组和聊天室聊天会话中已经发送成功的消息，SDK 支持对这些消息的内容进行修改。
 
@@ -354,7 +282,47 @@ conn
   })
 ```
 
+## 7. 撤回消息
 
+- 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
+- 对于群组/聊天室会话，普通成员只能撤回自己发送的消息，若消息过期，撤回失败。自 SDK 1.4.0 开始，群主/聊天室所有者和管理员可撤回其他用户发送的消息，即使消息过期也能撤回。
 
+## 8. Token 即将过期回调触发时机变化
 
+```javascript
+conn.addEventHandler("connectionListener", {
+  // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
+  onTokenWillExpire: () => {
+    console.log("token 即将过期");
+  },
+});
+```
+
+## 9. 群成员列表和聊天室成员列表包含群成员的加群时间和成员角色
+
+自 SDK 1.4.0 开始，所有群成员均可调用 `getGroupMembers` 方法获取全部群成员（包括群主和群管理员）的信息，包括用户 ID、用户角色和加入时间。原方法 `listGroupMembers` 废弃。
+
+```javascript
+conn
+// limit：每页期望返回的群成员数量，默认值为 50，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
+// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
+  .getGroupMembers({ cursor: "", limit: 50, groupId: "groupId" })
+  .then((res) => {
+    console.log(res);
+  });
+```
+
+自 SDK 1.4.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID、用户角色和加入时间。服务器不对成员进行排序，因此，返回的成员列表不保证有序。原方法 `listChatRoomMembers` 废弃。
+
+```javascript
+conn
+// limit：每页期望返回的聊天室成员数量，默认值为 50，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chatroom-management/manage-chatroom-members#retrieving--members-with-pagination
+  .getChatRoomMembers({ cursor: "", limit: 50, chatRoomId: "chatRoomId" })
+  .then((res) => {
+    console.log(res);
+  });
+```
+
+// Note: 获取群组成员列表的原方法 listGroupMembers 废弃。使用 getGroupMembers 代替。在相关文档中查找替换。
+// Note: 获取聊天室成员列表的原方法 listChatRoomMembers 废弃。使用 getChatRoomMembers 代替。在相关文档中查找替换。
 
