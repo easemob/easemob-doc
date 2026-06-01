@@ -4,7 +4,6 @@ v1.4.0 was released on XXXX, 2026.
 
 ## New Features
 
-- Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `IRoomManagerDelegate#OnMuteListAddedFromRoom(string roomId, Dictionary<string, long> mutes)` to provide muted user IDs and their mute expiration timestamps via the `Dictionary<string, long>` parameter, deprecating the old event `IRoomManagerDelegate#OnMuteListAddedFromRoom(string roomId, List<string> mutes, long expireTime)`.  
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `Room#MemberCount` attribute. This count updates when users join or leave the chat room.

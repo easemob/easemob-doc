@@ -9,7 +9,6 @@ v1.4.0 was released on XXXX, 2026.
 - Supported retrieving roaming messages sent by a specific group member.
 - Supported retrieving a group member list that includes each member's role and join time.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
-- Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Allowed members in the chat room to receive the new announcement after it is modified: Added the `announcement` field to the chat room announcement update event `updateannouncement`.
 - Included the mute expiration time in the chat room mute event: Added the  `muteTimestamp` parameter to the `muteMember` event.
 - Included the user ID of the muted member in the group/chat room mute event: Added the `userId` parameter to the `muteMember` event.

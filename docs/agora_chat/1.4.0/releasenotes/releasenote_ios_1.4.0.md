@@ -4,7 +4,6 @@ v1.4.0 was released on XXXX, 2026.
 
 ## New Features
 
-- Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:` to provide the mute expiration timestamps via the `(NSDictionary<NSString *,NSNumber*> *)aMutes` parameter, deprecating the old event `AgoraChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
@@ -52,3 +51,7 @@ v1.4.0 was released on XXXX, 2026.
   - All APIs under `AgoraChatUserInfoManager` and `AgoraChatPresenceManager`.
   - The `fetchMessagesFromServer`, `fetchSupportedLanguages`, `translateMessage`, and `getMessageCountWithCompletion` APIs under `AgoraChatChatManager`.
 - A crash caused by extreme network conditions.
+
+## Important Notice
+
+A compilation error may occur when using Agora Chat SDK 1.3.2 with Signaling SDK 2.2.0+ or Video SDK 4.3.0+. See [Integration Issues]() for the fix.

@@ -4,7 +4,6 @@ v1.4.0 was released on XXXX, 2026.
 
 ## New Features
 
-- Supported reading server-side message read and delivery statuses when retrieving roaming messages from the server. This feature applies only to one-to-one chats and is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
 - Added the new chat room mute event `ChatRoomEventListener#onMuteListAddedV2` to provide muted user IDs and their mute expiration timestamps via the `muteInfo` parameter, deprecating the old event `ChatRoomEventListener#onMuteListAdded`.
 - Enabled users to receive the following information upon joining a chat room:
   - Current chat room member count: Retrieved via the `ChatRoom#getMemberCount` method. This count updates when users join or leave the chat room.
@@ -29,7 +28,6 @@ v1.4.0 was released on XXXX, 2026.
 - Supported monitoring the start and end of offline message synchronization from the server: Added the `onOfflineMessageSyncStart` and `onOfflineMessageSyncFinish` events to the server connection status listener `listenerChatConnectEventListener`.
   
 - Added the `ChatManager#getMessageCount` method to retrieve the total number of messages in the local database. 
-- Added `ChatClient.changeAppId` to update the app ID which is the unique identifier to access the chat service. // TODO：其他端没有这个方法吗？
 
 ## Improvements
 
