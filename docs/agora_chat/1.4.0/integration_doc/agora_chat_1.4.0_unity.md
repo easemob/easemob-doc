@@ -274,20 +274,54 @@ public void OnMembersExitedFromGroup(string groupId, string member)
 示例代码如下：
 
 ```csharp
-TextBody tb = new TextBody("new content");
-
- // 创建 attributes 字典
+// 文本消息：可同时修改消息体和消息扩展属性
+TextBody textBody = new TextBody("new content");
 Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
-attributes["Key1"] = AttributeValue.Of("Value1");
-attributes["Key2"] = AttributeValue.Of(100, AttributeValueType.INT32);
+attributes["newkey"] = AttributeValue.Of("new value");
 
-SDKClient.Instance.ChatManager.ModifyMessage("msgId", tb, attributes, new ValueCallBack<Message>(
-onSuccess: (dmsg) =>
-{
-},
-onError: (code, desc) =>
-{
-}
+SDKClient.Instance.ChatManager.ModifyMessage("msgId", textBody, attributes, new ValueCallBack<Message>(
+    onSuccess: (msg) =>
+    {
+        // 修改成功
+    },
+    onError: (code, desc) =>
+    {
+        // 修改失败
+    }
+));
+
+// 自定义消息：可同时修改消息体和消息扩展属性
+CustomMessageBody customBody = new CustomMessageBody("new action");
+Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
+attributes["newkey1"] = AttributeValue.Of("newkey1");
+attributes["newkey2"] = AttributeValue.Of(123, AttributeValueType.INT32);
+
+SDKClient.Instance.ChatManager.ModifyMessage("msgId", customBody, attributes, new ValueCallBack<Message>(
+    onSuccess: (msg) =>
+    {
+        // 修改成功
+    },
+    onError: (code, desc) =>
+    {
+        // 修改失败
+    }
+));
+
+
+// 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
+Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
+attributes["newkey1"] = AttributeValue.Of(false, AttributeValueType.BOOL);
+attributes["newkey2"] = AttributeValue.Of("new value");
+
+SDKClient.Instance.ChatManager.ModifyMessage("msgId", null, attributes, new ValueCallBack<Message>(
+    onSuccess: (msg) =>
+    {
+        // 修改成功
+    },
+    onError: (code, desc) =>
+    {
+        // 修改失败
+    }
 ));
 ```
 
