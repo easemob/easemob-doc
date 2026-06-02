@@ -43,7 +43,7 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 事件。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`，则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 事件。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `true`，则为 GIF 图片消息。
 
 ```typescript
 ChatClient.getInstance().chatManager.addMessageListener({
@@ -92,22 +92,18 @@ ChatClient.getInstance().groupManager.addGroupListener({
 自 SDK 1.4.0 开始，你可以调用 createGroupEx 方法创建群组，设置群组头像，并通过 `ChatGroupOptions` 参数设置群组名称、群组描述、群组成员和建群原因。
 
 ```typescript
-// 群组选项。核心选项为 `style`，用于设置群组类型。详见 `ChatGroupStyle`。
-option.style = PrivateOnlyOwnerInvite;
-// 群组的名称，不能超过 128 个字符
-const groupName = "study";
-// 群组描述，不能超过 512 个字符
-const desc = "this is study group";
-// 成员列表
-const allMembers = ["Tom", "Jason"];
 // 执行操作
 ChatClient.getInstance().groupManager.createGroupEx({
-      options: new ChatGroupOptions({}),
-      groupName: '<GROUP_NAME>',
-      desc: '<GROUP_DESC>',
-      inviteMembers: ['<USER_ID_1>', '<USER_ID_2>'],
-      inviteReason: '<INVITE_REASON>',
-    });
+  // 群组选项。核心选项为 `style`，用于设置群组类型。详见 `ChatGroupStyle`。
+  options: new ChatGroupOptions({ style: ChatGroupStyle.PrivateOnlyOwnerInvite }),
+  // 群组的名称，不能超过 128 个字符
+  groupName: '<GROUP_NAME>',
+  // 群组描述，不能超过 512 个字符
+  desc: '<GROUP_DESC>',
+  // 成员列表
+  inviteMembers: ['<USER_ID_1>', '<USER_ID_2>'],
+  inviteReason: '<INVITE_REASON>',
+});
 ```
 
 ## 4. 聊天室成员加入禁言列表事件
@@ -135,13 +131,13 @@ const conversationId = '<YOUR_CONVERSATION_ID>';
 const conversationType = ChatConversationType.GroupChat;
 const cursor = '';
 const pageSize = 20;
-const options: ChatFetchMessageOptions = {
+const options = new ChatFetchMessageOptions({
   senders: ['user1', 'user2'],
   direction: ChatSearchDirection.UP,
   startTs: 0,
   endTs: Date.now(),
   needSave: false,
-};
+});
 ChatClient.getInstance()
   .chatManager.fetchHistoryMessagesByOptions(
     conversationId,
@@ -193,7 +189,7 @@ ChatClient.getInstance()
     direction,
     searchScope,
   })
-  .then((messages) => console.log('Messages:', messages))
+  .then((result) => console.log('Result:', result))
   .catch((error) => console.error('Error:', error));
 ```
 
@@ -273,8 +269,8 @@ const ext = {
 };
 ChatClient.getInstance()
   .chatManager.modifyMsgBody({ msgId, body, ext })
-  .then(() => {
-    console.log('Message body updated successfully');
+  .then((message) => {
+    console.log('Message body updated successfully', message);
   })
   .catch((error) => {
     console.error('Error updating message body:', error);
@@ -287,8 +283,8 @@ const customBody = new ChatCustomMessageBody({
 });
 ChatClient.getInstance()
   .chatManager.modifyMsgBody({ msgId, body: customBody })
-  .then(() => {
-    console.log('Message body updated successfully');
+  .then((message) => {
+    console.log('Message body updated successfully', message);
   })
   .catch((error) => {
     console.error('Error updating message body:', error);
@@ -297,8 +293,8 @@ ChatClient.getInstance()
 // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
 ChatClient.getInstance()
   .chatManager.modifyMsgBody({ msgId, ext })
-  .then(() => {
-    console.log('Message body updated successfully');
+  .then((message) => {
+    console.log('Message body updated successfully', message);
   })
   .catch((error) => {
     console.error('Error updating message body:', error);
@@ -337,15 +333,15 @@ ChatClient.getInstance().chatManager.addMessageListener({
 ```typescript
 let listener = new (class implements ChatMessageEventListener {
   onMessagesRecalledInfo(info: Array<ChatRecalledMessageInfo>): void {
-    // 消息撤回通知，messages 为撤销的消息
-  },
+    // 消息撤回通知，info 为撤销的消息信息
+  }
 })();
 ChatClient.getInstance().chatManager.addMessageListener(listener);
 ```
 
 ## 13. 消息附件下载鉴权
 
-自 1.11.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通，请联系 [technical support](mailto:support@agora.io)。
+自 1.4.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通，请联系 [technical support](mailto:support@agora.io)。
 。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
 
 ## 14. Token 即将过期回调触发时机变化

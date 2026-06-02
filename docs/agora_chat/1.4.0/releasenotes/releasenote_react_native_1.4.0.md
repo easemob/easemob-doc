@@ -30,7 +30,7 @@ v1.4.0 was released on XXXX, 2026.
   - File, video, voice, image, location, and combined messages: Modifying extensions (`ext`) only.
   - Command messages: Not supported.
 - Allowed group owners, chat room owners, and administrators to recall messages sent by other users.
-- Enhanced security by adding access checks for message attachments. For example, if you receive an image message in a group and forward it to others outside the group, they cannot download the image. This feature is disabled by default. To enable it, please contact [technical support](mailto:support@agora.io).
+- Enhanced security by adding access checks for message attachments. For example, if you receive an image message in a group and forward it to others outside the group, they cannot download the image. 
 - Adjusted the trigger threshold for the `ChatConnectEventListener#onTokenWillExpire` event; the notification is now triggered when 80% of the token's validity period has elapsed (previously 50%).
 - Supported retrieving a group member list that includes each member's role and join time.
 - Changed the cursor value in `ChatManager#fetchHistoryMessagesByOptions` from `undefined` to an empty string ("") when the final page of roaming messages is returned.
