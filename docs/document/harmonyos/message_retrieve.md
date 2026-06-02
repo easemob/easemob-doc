@@ -78,7 +78,7 @@ if (conversation) {
 
 ### 根据关键字获取本地会话中的消息
 
-自 SDK 1.9.0 版本开始，你可以调用 `loadConversationMessagesWithKeyword` 方法通过关键词从本地数据库中获取消息，SDK 返回会话 ID 及消息 ID 列表的映射关系，其中消息 ID 列表按 `direction` 设置的方向排列。
+自 SDK 1.9.0 开始，你可以调用 `loadConversationMessagesWithKeyword` 方法通过关键词从本地数据库中获取会话的消息，SDK 返回会话 ID 及消息 ID 列表的映射关系，其中消息 ID 列表按 `direction` 设置的方向排列。
 
 ```typescript
 // keyword：搜索关键词。设为空字符串表示忽略该参数。

@@ -167,7 +167,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性 
 
-1. [根据关键字从本地数据库中获取单个会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+1. [根据关键字从本地数据库中获取会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
 2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
 
 #### 修复
