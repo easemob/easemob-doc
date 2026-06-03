@@ -133,12 +133,16 @@ ChatClient.getInstance()
 
 获取单个群组详情有以下两种方法：
 
-- `getGroupWithId`：从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群主、公告信息、群成员列表数量、消息屏蔽、是否全体禁言、权限类型等，默认不包含群成员。
-- `fetchGroupInfoFromServer`：从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息和群组是否禁用等信息。若将该方法的 `fetchMembers` 参数设置为 `true`，可获取群成员列表，默认最多包括 200 个成员。
-
+| 方法名称                 | 方法用途   | 使用场景| 返回结果            | 起始版本|
+| :-------- | :----- | :------------ |:---------- |
+|  `getGroupWithId`  | 从内存获取群组详情，不包含群成员列表。   | 需要快速获取已加载的群组信息时使用。    | 返回的结果包括群组 ID、群组名称、群组头像 URL、群组描述、群组创建者/所有者的用户 ID、群组公告内容、群组成员总数、群组消息是否被屏蔽（`true`：屏蔽，`false`：未屏蔽）、是否禁言所有成员（`true`：是，`false`：否）、当前用户在群组中的角色（`Owner`/`Admin`/`Member`/`None`）、群组选项配置、群组允许的最大成员数。          | v1.0.5  |
+| `fetchGroupInfoWithoutMembersFromServer` | 从服务器获取群组详情，不包含群成员列表。  | 需要确保获取最新的群组信息时使用。    | 返回的结果与 `getGroupWithId` 方法相同。        | v1.8.1   |
+  
 :::tip
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
+
+示例代码如下：
 
 ```typescript
 // 从本地获取群组详情。
@@ -153,15 +157,23 @@ ChatClient.getInstance()
 ```
 
 ```typescript
-// 从服务器获取群组详情。
-ChatClient.getInstance()
-  .groupManager.fetchGroupInfoFromServer(groupId)
-  .then((groupInfo) => {
-    console.log("get group info success: ", groupInfo);
-  })
-  .catch((reason) => {
-    console.log("get group info fail.", reason);
-  });
+// 获取群组信息（不包含成员列表）
+const groupId = '207993699368962';
+try {
+  const groupInfo = await ChatClient.getInstance().groupManager.fetchGroupInfoWithoutMembersFromServer(groupId);
+  if (groupInfo) {
+    console.log('群组ID:', groupInfo.groupId);
+    console.log('群组名称:', groupInfo.groupName);
+    console.log('群组描述:', groupInfo.description);
+    console.log('群组成员数:', groupInfo.memberCount);
+    console.log('群组创建者:', groupInfo.owner);
+    console.log('群组头像:', groupInfo.groupAvatar);
+  } else {
+    console.log('群组不存在');
+  }
+} catch (error) {
+  console.error('获取群组信息失败:', error);
+}
 ```
 
 ### 获取群组列表
