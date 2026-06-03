@@ -818,7 +818,7 @@ const documentSidebar = [
     ],
     only: ['server-side']
   },
-  { text: '查询 RTC 当月用量', link: 'rtc_usage_query.html', only: ['server-side'] },
+  { text: 'RTC 用量', link: 'rtc_usage_query.html', only: ['server-side'] },
   { 
     text: '内容审核',
     collapsible: true,
