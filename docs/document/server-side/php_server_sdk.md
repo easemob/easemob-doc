@@ -16,10 +16,10 @@ PHP SDK 提供了用户、消息、群组、聊天室等资源的操作管理能
 
 ## 安装
 
-直接使用 [composer](https://www.phpcomposer.com/) 进行安装
+请直接参考 PHP Server SDK 仓库的 `1.1.0` 版本：
 
 ```shell
-composer require maniac/easemob-php
+https://github.com/easemob/im-php-server-sdk/tree/1.1.0
 ```
 
 ## 目录结构
@@ -111,7 +111,7 @@ $user->create($data);
 ## 参考
 
 - PHP SDK 的 API 文档在 [这里](https://easemob.github.io/im-php-server-sdk/annotated.html)
-- PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk)
+- PHP SDK 开源地址在 [这里](https://github.com/easemob/im-php-server-sdk/tree/1.1.0)
 
 ## 常见问题
 
