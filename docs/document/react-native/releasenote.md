@@ -97,7 +97,7 @@
 
 ## v1.8.1 2025-2-15
 
-- 使用接口 `fetchGroupInfoWithoutMembersFromServer` 替换 `fetchGroupInfoFromServer`。
+- 使用接口 [fetchGroupInfoWithoutMembersFromServer](group_manage.html#获取群组详情) 替换 `fetchGroupInfoFromServer`。
 
 ## v1.8.0 2025-1-17
 
