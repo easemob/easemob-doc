@@ -198,12 +198,12 @@ String keyword="Time";
 ChatClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(keyword, -1, null, Conversation.SearchDirection.UP, Conversation.ChatMessageSearchScope.CONTENT, new ValueCallBack<Map<String, List<String>>>() {
     @Override
     public void onSuccess(Map<String, List<String>> value) {
-        ChatLog.e(TAG, "asyncLoadConversationMessagesWithKeyword onSuccess value:" + value);
+        EMLog.e(TAG, "asyncLoadConversationMessagesWithKeyword onSuccess value:" + value);
     }
 
     @Override
     public void onError(int error, String errorMsg) {
-        ChatLog.e(TAG,"asyncLoadConversationMessagesWithKeyword onError error:" + error + " errorMsg:" + errorMsg);
+        EMLog.e(TAG,"asyncLoadConversationMessagesWithKeyword onError error:" + error + " errorMsg:" + errorMsg);
     }
 });
 
@@ -218,12 +218,12 @@ ChatClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(
 ChatClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationId, new ValueCallBack<List<ChatMessage>>() {
         @Override
         public void onSuccess(List<ChatMessage> value) {
-            ChatLog.e(TAG, "asyncLoadMessages onSuccess value:" + value);
+            EMLog.e(TAG, "asyncLoadMessages onSuccess value:" + value);
         }
 
         @Override
         public void onError(int error, String errorMsg) {
-            ChatLog.e(TAG, "asyncLoadMessages onError error:" + error + " errorMsg:" + errorMsg);
+            EMLog.e(TAG, "asyncLoadMessages onError error:" + error + " errorMsg:" + errorMsg);
         }
     });
 ```

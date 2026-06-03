@@ -293,5 +293,4 @@ end
 
 ![img](/images/ios/quickstart_emulator_error.png)
 
-
 ![img](/images/ios/quickstart_error_solve.png)

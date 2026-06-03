@@ -107,7 +107,7 @@ https://docs.agora.io/en/agora-chat/client-api/messages/retrieve-messages?platfo
 
 ## 4. 批量通知群成员进出群
 
-1. 请在 Chat Web 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=web#listen-for-chat-group-events)  的 "Listen for chat group events" 中添加如下事件。
+1. 请在 Chat Web 端的 [Manage chat group 页面](https://docs.agora.io/en/agora-chat/client-api/chat-group/manage-chat-groups?platform=web#listen-for-chat-group-events)  的 "Listen for chat group events" 中添加如下事件和说明（注意事件说明有变化，明确了单个和多个）。
 
 ```javascript
 // 群成员（单个）退群。除退群成员外，其他群成员会收到该回调。
