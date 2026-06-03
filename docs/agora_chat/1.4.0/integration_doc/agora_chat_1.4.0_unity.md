@@ -277,7 +277,7 @@ public void OnMembersExitedFromGroup(string groupId, string member)
 // 文本消息：可同时修改消息体和消息扩展属性
 TextBody textBody = new TextBody("new content");
 Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
-attributes["newkey"] = AttributeValue.Of("new value");
+attributes["newkey"] = AttributeValue.Of("new value", AttributeValueType.STRING);
 
 SDKClient.Instance.ChatManager.ModifyMessage("msgId", textBody, attributes, new ValueCallBack<Message>(
     onSuccess: (msg) =>
@@ -293,7 +293,7 @@ SDKClient.Instance.ChatManager.ModifyMessage("msgId", textBody, attributes, new 
 // 自定义消息：可同时修改消息体和消息扩展属性
 CustomMessageBody customBody = new CustomMessageBody("new action");
 Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
-attributes["newkey1"] = AttributeValue.Of("newkey1");
+attributes["newkey1"] = AttributeValue.Of("newvalue1", AttributeValueType.STRING);
 attributes["newkey2"] = AttributeValue.Of(123, AttributeValueType.INT32);
 
 SDKClient.Instance.ChatManager.ModifyMessage("msgId", customBody, attributes, new ValueCallBack<Message>(
@@ -311,7 +311,7 @@ SDKClient.Instance.ChatManager.ModifyMessage("msgId", customBody, attributes, ne
 // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
 Dictionary<string, AttributeValue> attributes = new Dictionary<string, AttributeValue>();
 attributes["newkey1"] = AttributeValue.Of(false, AttributeValueType.BOOL);
-attributes["newkey2"] = AttributeValue.Of("new value");
+attributes["newkey2"] = AttributeValue.Of("new value", AttributeValueType.STRING);
 
 SDKClient.Instance.ChatManager.ModifyMessage("msgId", null, attributes, new ValueCallBack<Message>(
     onSuccess: (msg) =>
