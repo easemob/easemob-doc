@@ -198,12 +198,12 @@ String keyword="Time";
 ChatClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(keyword, -1, null, Conversation.SearchDirection.UP, Conversation.ChatMessageSearchScope.CONTENT, new ValueCallBack<Map<String, List<String>>>() {
     @Override
     public void onSuccess(Map<String, List<String>> value) {
-        EMLog.e(TAG, "asyncLoadConversationMessagesWithKeyword onSuccess value:" + value);
+        ChatLog.e(TAG, "asyncLoadConversationMessagesWithKeyword onSuccess value:" + value);
     }
 
     @Override
     public void onError(int error, String errorMsg) {
-        EMLog.e(TAG,"asyncLoadConversationMessagesWithKeyword onError error:" + error + " errorMsg:" + errorMsg);
+        ChatLog.e(TAG,"asyncLoadConversationMessagesWithKeyword onError error:" + error + " errorMsg:" + errorMsg);
     }
 });
 
@@ -218,12 +218,12 @@ ChatClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(
 ChatClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationId, new ValueCallBack<List<ChatMessage>>() {
         @Override
         public void onSuccess(List<ChatMessage> value) {
-            EMLog.e(TAG, "asyncLoadMessages onSuccess value:" + value);
+            ChatLog.e(TAG, "asyncLoadMessages onSuccess value:" + value);
         }
 
         @Override
         public void onError(int error, String errorMsg) {
-            EMLog.e(TAG, "asyncLoadMessages onError error:" + error + " errorMsg:" + errorMsg);
+            ChatLog.e(TAG, "asyncLoadMessages onError error:" + error + " errorMsg:" + errorMsg);
         }
     });
 ```
@@ -263,7 +263,7 @@ Map<String, Object> ext = new HashMap<>();
 ext.put("newkey", "new value");
 
 // textBody 和 ext 不能同时为 null
-ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody, ext, new ValueCallBack<EMMessage>() {
+ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, textBody, ext, new ValueCallBack<ChatMessage>() {
             @Override
             public void onSuccess(ChatMessage emMessage) {
                 // 修改成功
@@ -321,7 +321,7 @@ ChatClient.getInstance().chatManager().asyncModifyMessage(this.messageId, null, 
 ## 11. Token 即将过期回调触发时机变化
 
 ```java
-EMConnectionListener connectionListener = new EMConnectionListener() {
+ConnectionListener connectionListener = new ConnectionListener() {
     @Override
     // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
     public void onTokenWillExpire() {

@@ -41,7 +41,7 @@
 
 在 RESTful API 文档中的全文查找  app key、appkey、app_key 进行替换。
 
-## Secure authentication with tokens
+## Token 认证（Secure authentication with tokens）
 
 1. 代码中的替换
 
