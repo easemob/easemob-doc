@@ -17,7 +17,7 @@
 
 ## 开通服务
 
-调用该接口前，需要先 [开通 RTC 服务](/product/console/purchase_value_added.html#实时音视频服务)。
+调用该接口前，需要先开通 RTC 服务，详见 [RTC 服务的开通](/callkit/android/product_purchase.html)、[订阅](/callkit/android/product_purchase.html) 和 [计费](/product/pricing_policy.html#实时音视频)说明。
 
 ## 调用频率上限
 

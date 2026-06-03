@@ -286,6 +286,12 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 次/秒/App Key  |     | 
 | 接收方配置模板名称   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 次/秒/App Key。 |     | 
 
+## 查询 RTC 当月用量
+
+| RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
+| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
+| 查询 RTC 当月用量 | GET | /{org_name}/{app_name}/billing/rtc/usage-summary?appKey={org_name}%23{app_name}  | 10 次/10 秒/App Key | ——  |
+
 ## 内容审核
 
 ### 主动文本审核
