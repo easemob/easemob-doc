@@ -358,7 +358,9 @@ ChatClient.getInstance().addConnectionListener({
 });
 ```
 
-15. 获取群组信息
+15. 从服务端获取群组信息
+
+自 SDK 1.4.0 开始，你可以调用 `fetchGroupInfoFromServer` 方法从服务器获取群组详情，不包含群成员列表。返回的结果包括群组 ID、群组名称、群组头像 URL、群组描述、群组创建者/所有者的用户 ID、群组公告内容、群组成员总数、群组消息是否被屏蔽（`true`：屏蔽，`false`：未屏蔽）、是否禁言所有成员（`true`：是，`false`：否）、当前用户在群组中的角色（`Owner`/`Admin`/`Member`/`None`）、群组选项配置、群组允许的最大成员数。  
     
 ```typescript  
 const groupId = '<YOUR_GROUP_ID>';
