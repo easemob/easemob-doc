@@ -13,6 +13,10 @@
 3. 在左侧导航栏，选择 **服务开通** > **增值服务** > **实时音视频**。
 4. 点击 **立即开通**。
 
+:::tip
+开通后，你可通过服务端 API [查询 RTC 当月用量](/document/server-side/rtc_usage_query.html)，了解当月资源消耗情况及剩余可用量。
+:::
+
 ![img](/images/callkit/product/rtc_activation.png)
 
 ## 开通微信中集成音视频通话服务

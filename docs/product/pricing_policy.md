@@ -91,7 +91,7 @@
 
 实时音视频服务即 [环信音视频 CallKit](/callkit/android/product_overview.html)，是基于环信即时通讯 IM 和声网实时音视频 RTC 深度整合开发的实时音视频通话框架，实现一对一及群组音视频通话功能。
 
-关于该服务的计费详情，请参见 [RTC 计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy#套餐内订阅费用) 和 [购买指南](/callkit/android/product_purchase.html)。
+关于该服务的计费详情，请参见 [RTC 计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy#套餐内订阅费用) 和 [购买指南](/callkit/android/product_purchase.html)。如需查看当前应用当月的 RTC 用量，以便核对套餐消耗和超量使用情况，请参见 [查询 RTC 当月用量](/document/server-side/rtc_usage_query.html)。
 
 #### 免费试用
 

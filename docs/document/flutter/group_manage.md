@@ -181,19 +181,7 @@ try {
 
 群成员可以调用 `EMGroupManager#fetchMemberListFromServer` 方法从服务器分页获取群成员列表。
 
-示例代码如下：
-
-```dart
-try {
-  EMCursorResult<String> result =
-      await EMClient.getInstance.groupManager.fetchMemberListFromServer(
-    groupId,
-  );
-} on EMError catch (e) {
-}
-```
-
-- 自 4.15.0 版本开始，获取群成员列表时除了成员的用户 ID，还包括成员角色和加入群组的时间。
+- 自 SDK 4.15.0 开始，获取群成员列表时除了成员的用户 ID，还包括成员角色和加入群组的时间。
   
 ```dart
 try {
@@ -205,6 +193,18 @@ try {
     limit: limit,
   );
 } on EMError catch (e) {}
+```
+
+- SDK 4.15.0 之前版本，群成员可以调用 `fetchMemberListFromServer` 方法从服务器分页获取群成员列表，即群成员的用户 ID 列表。
+
+```dart
+try {
+  EMCursorResult<String> result =
+      await EMClient.getInstance.groupManager.fetchMemberListFromServer(
+    groupId,
+  );
+} on EMError catch (e) {
+}
 ```
 
 ### 获取群组列表
