@@ -21,7 +21,7 @@
 
 在左侧导航栏，选择 **增值服务** > **实时音视频** 页签，点击 **立即订阅** 开通实时音视频服务。开通后，你可以订阅 RTC 服务的套餐或加油包。
 
-开通后，你可以对实时音视频服务进行配置，详见 [相关配置文档](/callkit/android/product_activation.html) 。
+开通后，你可以 [对实时音视频服务进行配置](/callkit/android/product_activation.html)，也可以通过服务端 API [查询 RTC 当月用量](/document/server-side/rtc_usage_query.html)，了解当月资源消耗情况及剩余可用量。。
 
 ![img](/images/callkit/product/rtc_activation.png)
 
