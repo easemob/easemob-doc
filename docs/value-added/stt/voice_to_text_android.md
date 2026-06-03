@@ -90,7 +90,7 @@ EMClient.getInstance().chatManager().voiceMessageToText(voiceMessage, new EMValu
 
 | 参数         | 类型        | 是否必需 | 描述                             |
 | :-------------- | :----- | :------- | :------------- |
-| `message`  | EMMessage | 是    | 待转换的语音消息对象。                    |
+| `voiceMessage`  | EMMessage | 是    | 待转换的语音消息对象，消息体类型需为 `EMVoiceMessageBody`。                 |
 | `callback` | `EMValueCallBack<String>`    | 是    | 结果回调。成功时返回转换的文本；失败时返回错误码和错误描述。 |
 
 #### 注意事项
