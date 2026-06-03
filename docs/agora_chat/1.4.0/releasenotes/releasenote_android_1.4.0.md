@@ -53,6 +53,6 @@ v1.4.0 was released on XXXX, 2026.
 
 ## Important Notice
 
-A compilation error may occur when using Agora Chat SDK 1.3.2 with Signaling SDK 2.2.0+ or Video SDK 4.3.0+. See [Integration Issues]() for the fix.
+A compilation error may occur when using Agora Chat SDK 1.3.2 with Signaling SDK 2.2.0+ or Video SDK 4.3.0+. See [Integration Issues](https://docs.agora.io/en/agora-chat/get-started/get-started-sdk?platform=android#integration-issues) for the fix.
 
 

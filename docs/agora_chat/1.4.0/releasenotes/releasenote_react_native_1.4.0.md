@@ -47,7 +47,7 @@ v1.4.0 was released on XXXX, 2026.
 - Added static constructors `ChatOptions#withAppId` and `ChatOptions#withAppKey` to initialize the SDK with an app ID or app key, replacing the deprecated `ChatOptions` constructor.
 - Added `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer` to retrieve group information without member information, replacing the deprecated `ChatGroupManager#fetchGroupInfoFromServer`. To retrieve member information, call `ChatGroupManager#fetchMemberInfoListFromServer`.
 - Removed the deprecated `ChatMessageEventListener#onMessagesRecalled` event. Use `ChatMessageEventListener#onMessagesRecalledInfo` instead.
-- Added `modifyMsgBody` to replace the deprecated `modifyMessageBody`.  // TODO：给一下 fetchGroupInfoWithoutMembersFromServer 的示例代码，环信 IM 还是 fetchGroupInfoFromServer
+- Added `modifyMsgBody` to replace the deprecated `modifyMessageBody`. 
 - Updated `getConvMsgsWithKeyword` by adding the `senders` parameter to replace the deprecated the `sender` parameter.
 - Added 16KB page alignment support for Android 15+ compatibility.
 

@@ -358,7 +358,22 @@ ChatClient.getInstance().addConnectionListener({
 });
 ```
 
-## 15. 群成员列表包含群成员的用户 ID、加群时间和成员角色
+15. 获取群组信息
+    
+```typescript  
+const groupId = '<YOUR_GROUP_ID>';
+try {
+const groupInfo = await ChatClient.getInstance()
+.groupManager.fetchGroupInfoFromServer(groupId, false);
+// false 表示不获取成员列表
+console.log("Group name:", groupInfo.groupName);
+console.log("Group owner:", groupInfo.owner);
+} catch (error) {
+console.error("Fetch group info failed:", error);
+}
+```
+
+## 16. 群成员列表包含群成员的用户 ID、加群时间和成员角色
 
 自 1.4.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
 

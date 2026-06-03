@@ -354,27 +354,3 @@ ChatClient.getInstance().groupManager().asyncFetchGroupMembersInfo(groupId, null
             }
         });
 ```
-
-## 13. SDK 依赖的 Crash 上报库冲突
-
-当同时集成 Chat SDK 1.3.2 和 Signaling SDK 2.2.0 或以上版本或者 Video SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
-
-```java
-com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
-```
-
-可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
-
-```gradle
-android {
-  ...
-  packagingOptions {
-    pickFirst 'lib/x86/libaosl.so'
-    pickFirst 'lib/x86_64/libaosl.so'
-    pickFirst 'lib/armeabi-v7a/libaosl.so'
-    pickFirst 'lib/arm64-v8a/libaosl.so'
-  }
-}
-```
-
-然后 Gradle 文件同步，重新构建项目。如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。

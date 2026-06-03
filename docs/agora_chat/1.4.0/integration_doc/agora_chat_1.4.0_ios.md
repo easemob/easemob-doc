@@ -285,7 +285,7 @@ end
 
 然后重新执行 `pod install`。
 
-如欲了解详情，请参见 [声网官网文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+如欲了解详情，请参见 [Agora 官方文档](https://docs.agora.io/en/help/integration-issues/rtm2_rtc_integration_issue)。
 
 ### 模拟器运行报错
 
