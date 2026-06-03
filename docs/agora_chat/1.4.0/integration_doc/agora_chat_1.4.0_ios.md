@@ -291,6 +291,6 @@ end
 
 当你使用 Xcode 15 创建新工程时，编译时若出现 **Sandbox: rsync.samba(47334) deny(1) file-write-create...** 报错，你需要在 **Target > Build Settings** 中查找 **User Script Sandboxing** 选项，设置为 **NO**。
 
-![img](/images/ios/quickstart_emulator_error.png)
+![img](quickstart_emulator_error.png)
 
-![img](/images/ios/quickstart_error_solve.png)
+![img](quickstart_error_solve.png)
