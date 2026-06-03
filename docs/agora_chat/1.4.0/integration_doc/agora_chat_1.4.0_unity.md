@@ -1,10 +1,10 @@
-# Agora Chat 1.4.0 Unity
+# Agora Chat 1.4.0 Unity/Windows
 
 ## 1. 发送和接收 GIF 图片消息
 
 ### 发送 GIF 图片消息
 
-- 自 Unity SDK 1.4.0 开始，支持发送 GIF 图片消息。
+- 自 SDK 1.4.0 开始，支持发送 GIF 图片消息。
 - GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
 - 图片缩略图的生成与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
@@ -38,7 +38,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 接收 GIF 图片消息
 
-自 Unity SDK 1.4.0 开始，支持接收 GIF 图片消息。
+自 SDK 1.4.0 开始，支持接收 GIF 图片消息。
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
@@ -62,7 +62,7 @@ public void OnMessagesReceived(List<Message> messages)
 
 ## 2. 管理群组头像
 
-自 Unity SDK 1.4.0 开始，支持群组头像功能。
+自 SDK 1.4.0 开始，支持群组头像功能。
 
 ### 设置群组头像
 
