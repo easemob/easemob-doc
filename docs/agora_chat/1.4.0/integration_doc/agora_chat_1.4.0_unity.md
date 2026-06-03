@@ -325,8 +325,6 @@ SDKClient.Instance.ChatManager.ModifyMessage("msgId", null, attributes, new Valu
 ));
 ```
 
-// TODO：请提供修改各类消息的示例代码，参考 Android：https://doc.easemob.com/document/android/message_modify.html#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95
-
 ## 10. 撤回消息
 
 - 对于单聊会话，只支持发送方撤回发送成功的消息。若消息过期，撤回失败。
