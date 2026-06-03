@@ -8,36 +8,40 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 
 图片缩略图的生成和下载与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
-使用 `EMMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
+使用 `ChatMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
 
 ```dart
-final msg = EMMessage.createImageSendMessage(
+final msg = ChatMessage.createImageSendMessage(
   targetId: 'targetId',
   filePath: 'filePath',
   isGif: true,
 );
 
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ### 接收 GIF 图片消息
 
 自 Flutter SDK 1.4.0 开始，支持接收 GIF 图片消息。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`，则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 回调。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值为 `true`，则为 GIF 图片消息。
 
 ```dart
-public void onMessageReceived(List<EMMessage> messages) {
-    for(EMMessage message : messages) {
-        if (message.getType() == Type.IMAGE && ) {
-            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
-            if(body.isGif()) {
-                // 根据业务情况处理 gif message, 例如下载展示该消息
-            }
-        }
+final handler = ChatEventHandler(
+  onMessagesReceived: (messages) {
+    for (final message in messages) {
+      final body = message.body;
+      if (body is ChatImageMessageBody && body.isGif) {
+        // 根据业务情况处理 GIF 消息，例如下载并展示该消息。
+      }
     }
-    
-}
+  },
+);
+
+ChatClient.getInstance.chatManager.addEventHandler(
+  'UNIQUE_HANDLER_ID',
+  handler,
+);
 ```
 
 ## 2. 管理群组头像
@@ -50,35 +54,38 @@ public void onMessageReceived(List<EMMessage> messages) {
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.createGroup(
-    groupName: "groupName",
-    avatarUrl: "avatarUrl",
+  await ChatClient.getInstance.groupManager.createGroup(
+    groupName: 'groupName',
+    avatarUrl: 'avatarUrl',
+    options: ChatGroupOptions(
+      style: ChatGroupStyle.PrivateOnlyOwnerInvite,
+      maxCount: 200,
+    ),
   );
-} on EMError catch (e) {
-}
+} on ChatError catch (e) {}
 ```
 
 - 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
 
 ### 修改群组头像
 
-创建群组完成后，群主或管理员可调用 `EMGroupManager#updateGroupAvatarUrl` 设置或修改群组头像：
+创建群组完成后，群主或管理员可调用 `ChatGroupManager#updateGroupAvatar` 设置或修改群组头像：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupAvatarUrl(
+  await ChatClient.getInstance.groupManager.updateGroupAvatar(
     groupId: 'groupId',
     avatarUrl: 'avatarUrl',
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
-群组头像被修改后，其他群成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调：
+群组头像被修改后，其他群成员会收到 `ChatGroupEventHandler#onSpecificationDidUpdate` 回调：
 
 ```dart
-EMClient.getInstance.groupManager.addEventHandler(
+ChatClient.getInstance.groupManager.addEventHandler(
   'UNIQUE_HANDLER_ID',
-  EMGroupEventHandler(
+  ChatGroupEventHandler(
     onSpecificationDidUpdate: (group) {},
   ),
 );
@@ -86,16 +93,16 @@ EMClient.getInstance.groupManager.addEventHandler(
 
 ### 获取群组头像
 
-群成员可以通过获取群详情的方法 `EMGroupManager#fetchGroupInfoFromServer`，获取群组头像：
+群成员可以通过获取群详情的方法 `ChatGroupManager#fetchGroupInfoFromServer`，获取群组头像：
 
 ```dart
 try {
-  EMGroup group =
-      await EMClient.getInstance.groupManager.fetchGroupInfoFromServer(
+  ChatGroup group =
+      await ChatClient.getInstance.groupManager.fetchGroupInfoFromServer(
     'groupId',
   );
   String? avatarUrl = group.avatarUrl;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ## 3. 聊天室成员加入禁言列表事件
@@ -104,7 +111,7 @@ try {
 
 ```dart
 // 禁言指定成员。被禁言的成员会收到该事件。
-onMuteListAddedFromChatRoom: (roomId, mutes, expireTime) {},
+onMuteListAddedFromChatRoom: (roomId, mutes) {},
 ```
 
 ## 4. 从服务器获取指定群成员发送的消息
@@ -112,10 +119,10 @@ onMuteListAddedFromChatRoom: (roomId, mutes, expireTime) {},
 自 1.4.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```dart
-EMCursorResult<EMMessage> result =
-    await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+ChatCursorResult<ChatMessage> result =
+    await ChatClient.getInstance.chatManager.fetchHistoryMessagesByOption(
   'conversationId',
-  EMConversationType.GroupChat,
+  ChatConversationType.GroupChat,
   options: const FetchMessageOptions(senders: ['senderA', 'senderB']),
 );
 ```
@@ -125,9 +132,9 @@ EMCursorResult<EMMessage> result =
 自 1.4.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```dart
-List<EMMessage> list = conversation.loadMessagesWithKeyword(
-  keywords: keywords,
-  senders: ['senderA, senderB'],
+List<ChatMessage> list = await conversation.loadMessagesWithKeyword(
+  keywords,
+  senders: ['senderA', 'senderB'],
 );
 ```
 
@@ -136,14 +143,14 @@ List<EMMessage> list = conversation.loadMessagesWithKeyword(
 自 SDK 1.4.0 版本开始，你可以通过设置关键词获取本地会话中的某些消息。SDK 返回会话 ID 及消息 ID 列表，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列出。
 
 ```dart
-Map<String, List<String>> result = 
-          await EMClient.getInstance.chatManager.loadConversationMessagesWithKeyword(
-        keyword: "hello",
-        timestamp: -1,
-        sender: null,
-        direction: EMSearchDirection.Up,
-        scope: MessageSearchScope.All,
-      );
+Map<String, List<String>> result =
+    await ChatClient.getInstance.chatManager.loadConversationMessagesWithKeyword(
+  keyword: 'hello',
+  timestamp: -1,
+  sender: null,
+  direction: ChatSearchDirection.Up,
+  scope: MessageSearchScope.All,
+);
 ```
 
 ## 7. 根据消息 ID 获取本地消息
@@ -154,7 +161,11 @@ Map<String, List<String>> result =
 
 ```dart
 // messageIdList：消息 ID 列表。每次最多可传入 20 个消息 ID。
-List<EMMessage> messages = await EMClient.getInstance.chatManager.loadMessagesWithIds(messageIdList, conversationId);
+List<ChatMessage> messages =
+    await ChatClient.getInstance.chatManager.loadMessagesWithIds(
+  messageIdList,
+  conversationId,
+);
 ```
 
 ## 8. 批量通知群成员进出群
@@ -185,50 +196,50 @@ onMembersExitedFromGroup: (groupId, userIds) {},
 
 ```dart
 // 文本消息：可同时修改消息体和消息扩展属性
-final txtBody = EMTextMessageBody(content: 'new content');
+final txtBody = ChatTextMessageBody(content: 'new content');
 final attributes = {
   'newKey': 'new value',
 };
-await EMClient.getInstance.chatManager.modifyMessage(
+await ChatClient.getInstance.chatManager.modifyMessage(
   messageId: messageId,
   msgBody: txtBody,
   attributes: attributes,
 );
 
 // 自定义消息：可同时修改消息体和消息扩展属性
-final customBody = EMCustomMessageBody(event: 'new event');
-final attributes = {
+final customBody = ChatCustomMessageBody(event: 'new event');
+final customAttributes = {
   'newKey': 'new value',
 };
-await EMClient.getInstance.chatManager.modifyMessage(
+await ChatClient.getInstance.chatManager.modifyMessage(
   messageId: messageId,
   msgBody: customBody,
-  attributes: attributes,
+  attributes: customAttributes,
 );
 
 // 文件/视频/音频/图片/位置/合并转发消息：只能修改消息扩展属性
-final attributes = {
+final fileAttributes = {
   'newKey': 'new value',
 };
-await EMClient.getInstance.chatManager.modifyMessage(
+await ChatClient.getInstance.chatManager.modifyMessage(
   messageId: messageId,
-  attributes: attributes,
+  attributes: fileAttributes,
 );
 ```
 
 ```dart
-final handler = EMChatEventHandler(
+final handler = ChatEventHandler(
   onMessageContentChanged: (message, operatorId, operationTime) {},
 );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
   handler,
 );
 
 // 移除消息监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ## 10. 撤回消息
@@ -241,9 +252,9 @@ EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 你可以在登录相关流程中注册连接监听。自 1.4.0 版本开始，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
 
 ```dart
-EMClient.getInstance.addConnectionEventHandler(
+ChatClient.getInstance.addConnectionEventHandler(
   'Identifier',
-  EMConnectionEventHandler(
+  ConnectionEventHandler(
     // 自 1.4.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知（之前版本为 50%）。
     onTokenWillExpire: () {},
   ),
@@ -256,12 +267,12 @@ EMClient.getInstance.addConnectionEventHandler(
 
 ```dart
 try {
-  EMCursorResult<GroupMemberInfo> result =
-      await EMClient.getInstance.groupManager.fetchGroupMembersInfo(
+  ChatCursorResult<GroupMemberInfo> result =
+      await ChatClient.getInstance.groupManager.fetchGroupMembersInfo(
     groupId: groupId,
     cursor: cursor,
     //limit: 每页期望返回的群成员数量，上限取决于服务端，详见 https://docs.agora.io/en/agora-chat/restful-api/chat-group-management/manage-group-members#retrieving-group-members。
     limit: limit,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
