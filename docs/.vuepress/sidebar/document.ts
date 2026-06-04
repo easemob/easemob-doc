@@ -45,7 +45,7 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索消息', link: 'message_search.html', except: ['web']},
@@ -238,6 +238,7 @@ const documentSidebar = [
         children: [
           { text: '会话介绍', link: 'conversation_overview.html' },
           { text: '会话列表', link: 'conversation_list.html' },
+          { text: '会话已读回执', link: 'conversation_receipt.html' },
           { text: '会话未读数', link: 'conversation_unread.html' },
           { text: '置顶会话', link: 'conversation_pin.html' },
           { text: '会话标记', link: 'conversation_mark.html'},
