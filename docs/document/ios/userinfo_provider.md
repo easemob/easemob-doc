@@ -55,7 +55,7 @@ SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件，
 - `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户信息更新并写入本地内存后触发，包括以下场景：
   - 收到其他用户的消息。
   - 主动 [从服务端获取用户属性（昵称/头像变更时）](userprofile.html#获取用户的所有属性)。
-  - 主动 [从服务端获取群成员信息（群名片变更时）](group_namecard.html#从服务端获取群成员名片)。
+  - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
 
@@ -105,9 +105,9 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 `senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地内存更新后，通过相关事件通知业务层。
 :::
 
-## 从本地内存读取用户信息
+## 从本地内存读取用户属性
 
-如需直接从本地内存读取用户信息，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
+如需直接从本地内存读取用户属性，可调用 `EMUserInfoManager#getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
 
 ```swift
 let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
@@ -119,7 +119,7 @@ if let userInfoMap = result {
 ```
 
 :::tip
-该接口仅返回本地已内存的数据。如需主动从服务端获取最新用户信息，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#获取用户的所有属性)。
+该接口仅返回本地内存的数据。如需主动从服务端获取最新用户属性，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#获取用户的所有属性)。
 :::
 
 ## 注意事项
