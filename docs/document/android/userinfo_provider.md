@@ -56,7 +56,7 @@ SDK 提供 `EMUserInfoManagerListener`，用于监听用户信息更新事件，
 - `EMUserInfoManagerListener#onUserInfoUpdate`：其他用户信息更新并写入本地内存后触发，包括以下场景：
   - 收到其他用户的消息。
   - 主动 [从服务端获取用户属性（昵称/头像变更时）](userprofile.html#获取用户的所有属性)。
-  - 主动 [从服务端获取群成员信息（群名片变更时）](group_namecard.html#从服务端获取群成员名片)。
+  - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
 
