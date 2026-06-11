@@ -49,13 +49,13 @@ EMClient.getInstance().init(context, options);
 必须在调用 `EMClient.getInstance().init(context, options)` 初始化 SDK 之前调用 `EMOptions#setEnableUserInfo(true)`，否则该功能不会生效。
 :::
 
-## 监听用户信息更新
+## 监听用户属性更新
 
-SDK 提供 `EMUserInfoManagerListener`，用于监听用户信息更新事件，主要包括：
-- `EMUserInfoManagerListener#onSelfUserInfoUpdate`：当前登录用户的信息同步或更新并写入本地内存后触发该事件。
-- `EMUserInfoManagerListener#onUserInfoUpdate`：其他用户信息更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息。
-  - 主动 [从服务端获取用户属性（昵称/头像变更时）](userprofile.html#获取用户的所有属性)。
+SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，主要包括：
+- `EMUserInfoManagerListener#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
+- `EMUserInfoManagerListener#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
+  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。
+  - 主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
@@ -66,14 +66,14 @@ SDK 提供 `EMUserInfoManagerListener`，用于监听用户信息更新事件，
 EMClient.getInstance().userInfoManager().addUserInfoManagerListener(new EMUserInfoManagerListener() {
     @Override
     public void onSelfUserInfoUpdate(EMUserInfo userInfo) {
-        EMLog.d("UserInfo", "当前登录用户信息更新 - nickname:" + userInfo.getNickname()
+        EMLog.d("UserInfo", "当前登录用户属性更新 - nickname:" + userInfo.getNickname()
                 + ", avatarUrl:" + userInfo.getAvatarUrl());
     }
 
     @Override
     public void onUserInfoUpdate(List<EMUserInfo> userInfoList) {
         for (EMUserInfo userInfo : userInfoList) {
-            EMLog.d("UserInfo", "用户信息更新 - userId:" + userInfo.getUserId()
+            EMLog.d("UserInfo", "用户属性更新 - userId:" + userInfo.getUserId()
                     + ", nickname:" + userInfo.getNickname()
                     + ", avatarUrl:" + userInfo.getAvatarUrl());
         }
@@ -119,7 +119,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
             public void onSuccess(Map<String, EMUserInfo> userInfoMap) {
                 for (Map.Entry<String, EMUserInfo> entry : userInfoMap.entrySet()) {
                     EMUserInfo userInfo = entry.getValue();
-                    EMLog.d("UserInfo", "用户信息 - userId:" + entry.getKey()
+                    EMLog.d("UserInfo", "用户属性 - userId:" + entry.getKey()
                             + ", nickname:" + userInfo.getNickname()
                             + ", avatarUrl:" + userInfo.getAvatarUrl());
                 }
@@ -127,7 +127,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
             @Override
             public void onError(int code, String error) {
-                EMLog.e("UserInfo", "读取本地用户信息失败：" + code + ", " + error);
+                EMLog.e("UserInfo", "读取本地用户属性失败：" + code + ", " + error);
             }
         });
 ```
@@ -164,7 +164,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
 #### 本地读取和服务端获取有何区别？
 
-`EMUserInfoManager#getUserInfoWithUserIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户信息，应调用对应的服务端接口主动获取。
+`EMUserInfoManager#getUserInfoWithUserIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#获取用户的所有属性) 主动获取。
 
 #### 功能开启后需自己维护内存吗？
 
