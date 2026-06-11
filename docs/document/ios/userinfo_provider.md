@@ -4,7 +4,7 @@
 
 **自 V4.20.0 起**，环信即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
-该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片等信息的场景。
+该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片的场景。
 
 **本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
 
@@ -48,13 +48,13 @@ EMClient.shared().initializeSDK(with: options)
 必须在调用 `EMClient.shared().initializeSDK(with: options)` 初始化 SDK 之前设置 `EMOptions#enableUserInfo`，否则该功能不会生效。
 :::
 
-## 监听用户信息更新
+## 监听用户属性更新
 
-SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件，主要包括：
-- `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`：当前登录用户的信息同步或更新并写入本地内存后触发该事件。
-- `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户信息更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息。
-  - 主动 [从服务端获取用户属性（昵称/头像变更时）](userprofile.html#获取用户的所有属性)。
+SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户属性更新事件，主要包括：
+- `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
+- `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
+  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。
+  - 主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
@@ -65,19 +65,19 @@ SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户信息更新事件，
 EMClient.shared().userInfoManager?.add(self, delegateQueue: nil)
 ```
 
-- 实现监听用户信息更新事件：
+- 实现监听用户属性更新事件：
 
 ```swift
 extension YourViewController: EMUserInfoManagerDelegate {
-    /// 当前登录用户信息更新事件
+    /// 当前登录用户属性更新事件
     func onSelfUserInfoUpdate(_ aUserInfo: EMUserInfo) {
-        print("当前登录用户信息更新 - nickname:\(aUserInfo.nickname ?? ""), avatarUrl:\(aUserInfo.avatarUrl ?? "")")
+        print("当前登录用户属性更新 - nickname:\(aUserInfo.nickname ?? ""), avatarUrl:\(aUserInfo.avatarUrl ?? "")")
     }
 
-    /// 其他用户信息更新事件
+    /// 其他用户属性更新事件
     func onUserInfoUpdate(_ aUserInfos: [String : EMUserInfo]) {
         for (userId, userInfo) in aUserInfos {
-            print("用户信息更新 - userId:\(userId), nickname:\(userInfo.nickname ?? ""), avatarUrl:\(userInfo.avatarUrl ?? "")")
+            print("用户属性更新 - userId:\(userId), nickname:\(userInfo.nickname ?? ""), avatarUrl:\(userInfo.avatarUrl ?? "")")
         }
     }
 }
@@ -150,7 +150,7 @@ if let userInfoMap = result {
 
 #### 本地读取和服务端获取有何区别？
 
-`EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户信息，应调用对应的服务端接口主动获取。
+`EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#获取用户的所有属性) 主动获取。
 
 #### 功能开启后需自己维护内存吗？
 
