@@ -83,10 +83,11 @@ EMClient.getInstance().chatManager().sendMessage(message);
 ### 发送图片消息
 
 1. 发送方调用 `EMMessage#createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
+当sendOriginalImage参数设置为true时，SDK 会将原图上传至服务器；当该参数设置为 false 时，SDK 会将图片压缩后上传至服务器。客户端压缩规则为：尺寸等比例压缩后最短边不超过720px，原图质量的85%。
 2. 发送方调用 `EMChatManager#sendMessage` 方法发送该消息。
    
 ```java
-// `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
+// `imageUri` 为图片本地资源标志符，`false` 为不发送原图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
 EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
 // 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 // message.setChatType(ChatType.GroupChat);
@@ -98,7 +99,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 - 自 Android SDK 4.14.0 开始，支持发送 GIF 图片消息。
 - GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
-- 图片缩略图的生成与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
 发送 GIF 图片消息的过程如下：
 

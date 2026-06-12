@@ -35,7 +35,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 附件消息的接收过程如下：
 
-1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
+1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、大图、视频和文件，需调用对应下载接口。
 2. 获取附件的服务器地址和本地路径。
 
 ### 接收语音消息
@@ -56,20 +56,21 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 1. 接收方收到图片消息，自动下载图片缩略图。
 
 - 默认情况下，SDK 自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
-- 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
+- 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message, callback)` 下载。
 
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可根据业务调用 `downloadAttachment(message, callback)` 下载原图，调用 `downloadBigImage(message, callback)` 下载大图。
 
 ```java
 @Override
 public void onMessageReceived(List<EMMessage> messages) {
     for(EMMessage message : messages) {
         if (message.getType() == Type.IMAGE) {
-            message.setMessageStatusCallback(new EMCallBack() {
+            EMCallBack callback = new EMCallBack() {
                @Override
                public void onSuccess() {
                    // 附件下载成功
                }
+
                @Override
                public void onError(int code, String error) {
                    // 附件下载失败
@@ -79,28 +80,36 @@ public void onMessageReceived(List<EMMessage> messages) {
                public void onProgress(int progress, String status) {
                    // 附件下载进度
                }
-
-           });
-           // 下载附件
-           EMClient.getInstance().chatManager().downloadAttachment(message);
+           };
+           // 下载原图
+           EMClient.getInstance().chatManager().downloadAttachment(message, callback);
+           // 下载大图
+           EMClient.getInstance().chatManager().downloadBigImage(message, callback);
         }
     }
 }
 ```
 
-3. 获取图片消息的缩略图和附件。
+3. 获取图片消息的原图、大图和缩略图。
 
 ```java
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-// 从服务器端获取图片文件。
+// 从服务器端获取原图。
 String imgRemoteUrl = imgBody.getRemoteUrl();
+// 从服务器端获取大图。
+String bigImgRemoteUrl = imgBody.getBigImageRemoteUrl();
 // 从服务器端获取图片缩略图。
 String thumbnailUrl = imgBody.getThumbnailUrl();
-// 从本地获取图片文件。
+// 从本地获取原图。
 Uri imgLocalUri = imgBody.getLocalUri();
+// 从本地获取大图。
+Uri bigImgLocalUri = imgBody.getBigImageLocalUri();
 // 从本地获取图片缩略图。
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
+对于接收到的图片消息，大图和缩略图压缩过程发生在服务端：
+大图默认压缩规则：等比例压缩后最短边不超过720px，原图质量的85%。
+缩略图默认压缩规则：等比例压缩后最短边不超过198px，原图质量的35%。
 
 ### 接收 GIF 图片消息
 
@@ -127,14 +136,14 @@ public void onMessageReceived(List<EMMessage> messages) {
 ### 接收视频消息
 
 1. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见 [设置图片缩略图自动下载](#接收图片消息)。
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
+2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message, callback)` 方法下载视频原文件。
 
 ```java
 /**
  * 下载视频文件。
  */
 private void downloadVideo(final EMMessage message) {
-    message.setMessageStatusCallback(new EMCallBack() {
+    EMCallBack callback = new EMCallBack() {
         @Override
         public void onSuccess() {
         }
@@ -146,9 +155,9 @@ private void downloadVideo(final EMMessage message) {
         @Override
         public void onError(final int error, String msg) {
         }
-    });
+    };
     // 下载附件
-    EMClient.getInstance().chatManager().downloadAttachment(message);
+    EMClient.getInstance().chatManager().downloadAttachment(message, callback);
 }
 ```
 
@@ -167,14 +176,14 @@ Uri localThumbUri = ((EMVideoMessageBody) body).thumbnailLocalUri();
 
 ### 接收文件消息
 
-1. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 方法下载文件。
+1. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment(message, callback)` 方法下载文件。
 
 ```java
 /**
  * 下载文件。
  */
 private void downloadFile(final EMMessage message) {
-    message.setMessageStatusCallback(new CallBack() {
+    EMCallBack callback = new EMCallBack() {
         @Override
         public void onSuccess() {
         }
@@ -186,9 +195,9 @@ private void downloadFile(final EMMessage message) {
         @Override
         public void onError(final int error, String msg) {
         }
-    });
+    };
     // 下载附件
-    EMClient.getInstance().chatManager().downloadAttachment(message);
+    EMClient.getInstance().chatManager().downloadAttachment(message, callback);
 }
 ```
 
@@ -278,5 +287,4 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 ### 消息附件下载鉴权
 
-自 4.14.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment` 方法下载消息附件。
-
+自 4.14.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment(message, callback)` 等下载接口下载消息附件。
