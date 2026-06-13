@@ -53,12 +53,21 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 
 ### 接收图片消息
 
-1. 接收方收到图片消息，自动下载图片缩略图。
+收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
 
-- 默认情况下，SDK 自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
-- 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message, callback)` 下载。
+接收图片消息的流程如下：
 
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可根据业务调用 `downloadAttachment(message, callback)` 下载原图，调用 `downloadBigImage(message, callback)` 下载大图。
+1. 接收图片消息时，SDK 会根据配置决定是否自动下载缩略图：
+
+- 默认自动下载，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
+- 如果关闭自动下载，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，则需要调用 `EMClient.getInstance().chatManager().downloadThumbnail(message, callback)` 手动下载。
+
+2. 收到图片消息后，接收方可以在 `onMessageReceived` 回调中处理图片消息，并根据业务需要下载原图或大图。
+
+- 调用 `downloadAttachment(message, callback)` 下载原图。
+- 调用 `downloadBigImage(message, callback)` 下载大图。
+
+3. 如果本地已存在对应资源路径，建议优先复用本地文件，避免重复下载。
 
 ```java
 @Override
@@ -90,26 +99,37 @@ public void onMessageReceived(List<EMMessage> messages) {
 }
 ```
 
-3. 获取图片消息的原图、大图和缩略图。
+一条图片消息通常包含这三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 在非原图发送场景下基于原图压缩后生成的图片资源。压缩规则为最短边不超过 720 像素，压缩质量为 85%，通常用于聊天详情页展示。
+- 缩略图：默认宽高为 170 像素，压缩质量为 35%，缩略图的压缩方式和尺寸可在[控制台进行配置](product/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+其中，大图和缩略图的压缩处理发生在服务端。
+
+你可以通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径：
 
 ```java
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
-// 从服务器端获取原图。
+// 从服务端获取原图
 String imgRemoteUrl = imgBody.getRemoteUrl();
-// 从服务器端获取大图。
+// 从服务端获取大图
 String bigImgRemoteUrl = imgBody.getBigImageRemoteUrl();
-// 从服务器端获取图片缩略图。
+// 从服务端获取图片缩略图
 String thumbnailUrl = imgBody.getThumbnailUrl();
-// 从本地获取原图。
+// 从本地获取原图
 Uri imgLocalUri = imgBody.getLocalUri();
-// 从本地获取大图。
+// 从本地获取大图
 Uri bigImgLocalUri = imgBody.getBigImageLocalUri();
-// 从本地获取图片缩略图。
+// 从本地获取图片缩略图
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
-对于接收到的图片消息，大图和缩略图压缩过程发生在服务端：
-大图默认压缩规则：等比例压缩后最短边不超过720px，原图质量的85%。
-缩略图默认压缩规则：等比例压缩后最短边不超过198px，原图质量的35%。
+
+此外，你还可以通过以下方法判断图片资源状态：
+
+- `isOriginalImage()`：判断当前消息对应的是原图还是发送方压缩后的大图资源。
+- `getBigImageDownloadStatus()`：获取大图的下载状态。
+- `getWidth()` / `getHeight()`：获取图片宽高。
 
 ### 接收 GIF 图片消息
 
