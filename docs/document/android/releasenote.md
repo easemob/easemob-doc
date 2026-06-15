@@ -18,6 +18,10 @@
 #### 优化
 
 获取 DNS 失败时的错误码由 `305` 调整为 `304`。
+- 废弃原有的判断是否发送原图的方法 `EMImageMessageBody#isSendOriginalImage()`，使用 `EMImageMessageBody#isOriginalImage()` 替代。
+- 废弃原有的下载消息附件方法 `EMChatManager#downloadAttachment(EMMessage msg)`，使用带回调的附件下载方法 `EMChatManager#downloadAttachment(EMMessage msg, EMCallBack callback)` 替代。
+- 废弃原有的设置缩略图密钥方法 `EMImageMessageBody#setThumbnailSecret(String)`，使用 `EMFileMessageBody#setSecret(String)` 替代。
+- 废弃原有的获取缩略图密钥方法 `EMImageMessageBody#getThumbnailSecret()`，使用 `EMFileMessageBody#getSecret()` 替代。
 
 #### 修复
 

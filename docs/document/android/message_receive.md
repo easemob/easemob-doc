@@ -99,7 +99,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 }
 ```
 
-一条图片消息通常包含这三类图片资源：
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
 - 大图：SDK 在非原图发送场景下基于原图压缩后生成的图片资源。压缩规则为最短边不超过 720 像素，压缩质量为 85%，通常用于聊天详情页展示。
@@ -125,7 +125,7 @@ Uri bigImgLocalUri = imgBody.getBigImageLocalUri();
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-此外，你还可以通过以下方法判断图片资源状态：
+此外，SDK 4.22.0 及以上版本支持通过以下方法判断图片资源状态：
 
 - `isOriginalImage()`：判断当前消息对应的是原图还是发送方压缩后的大图资源。
 - `getBigImageDownloadStatus()`：获取大图的下载状态。
@@ -155,8 +155,20 @@ public void onMessageReceived(List<EMMessage> messages) {
 
 ### 接收视频消息
 
-1. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见 [设置图片缩略图自动下载](#接收图片消息)。
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message, callback)` 方法下载视频原文件。
+收到视频消息后，通常会先在聊天界面展示视频缩略图；当用户点击消息时，再下载或播放视频原文件。
+
+接收视频消息的流程如下：
+
+1. 接收方收到视频消息时，SDK 会根据配置决定是否自动下载视频缩略图。
+
+   视频缩略图的下载策略与图片缩略图一致。默认情况下，SDK 自动下载缩略图；如果关闭自动下载，则需要在业务侧手动下载。详见 [设置图片缩略图自动下载](#接收图片消息)。
+
+2. SDK 会通过 `onMessageReceived` 回调将视频消息传递给接收方。接收方可根据业务需要选择使用缩略图，或进一步下载视频原文件。
+
+   - 如果只需要在会话列表或聊天界面展示预览图，可优先使用缩略图。
+   - 如果用户需要播放视频，再调用 `EMClient.getInstance().chatManager().downloadAttachment(message, callback)` 下载视频原文件。
+
+3. 为避免重复下载，建议优先检查本地是否已存在对应的视频文件或缩略图；如果本地已有可用资源，可直接复用。
 
 ```java
 /**
@@ -181,7 +193,7 @@ private void downloadVideo(final EMMessage message) {
 }
 ```
 
-3. 获取视频缩略图和视频原文件。
+你可以通过 `EMVideoMessageBody` 获取视频原文件和缩略图的服务端地址或本地路径。其中，缩略图适合用于预览展示，视频原文件适合用于播放或下载保存。
 
 ```java
 // 从服务器端获取视频文件。
