@@ -18,6 +18,9 @@
 - `updateOwnInfoByAttribute`：设置或更新当前用户的单个属性。
 - `fetchUserInfoByUserId`：获取一个或多个用户的全部属性。
 - `fetchUserInfoByAttribute`：获取指定用户的指定属性。
+- `subscribeUsersInfo`：订阅非好友用户属性变更事件。
+- `unsubscribeUsersInfo`：取消订阅非好友用户的属性变更事件。
+- `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。
 
 ## 前提条件
 
