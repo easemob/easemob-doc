@@ -109,7 +109,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 
 ## 从本地内存读取用户属性
 
-如需直接从本地内存读取用户属性，可调用 `EMUserInfoManager#getUserInfoWithUserIds`。该接口不会发起网络请求，适用于本地展示场景。
+如需直接从本地内存读取用户属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId`。该接口返回的是单个用户的 `EMUserInfo`。它适用于直接从本地缓存读取指定用户的资料，不会发起网络请求，因此可以作为好友列表读取能力之外的补充资料读取方式。
 
 ```java
 EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
