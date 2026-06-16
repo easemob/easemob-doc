@@ -58,7 +58,8 @@
 | `content`             | String | 自定义推送内容。                                 |
 | `custom`              | Object | 自定义推送扩展参数(t, f, m, g, e) 中 e 的内容。 |
 | `group_user_nickname` | String | 发送方群组昵称（用于推送显示替换发送方信息）。   |
-| `type` | String | 当前消息为 VOIP 推送通知。注意：仅 APNs 已支持 VOIP 推送通知时使用。   |
+| `type` | String | 当前消息为 VoIP 推送通知。注意：仅 APNS 已支持 VoIP 推送
+通知时使用。<br/> 取值 `call` 指定当前消息为 VoIP 通知消息。若接收方已绑定 APNs VoIP 推送证书（*.voip），则默认通过 VoIP 通道进行推送。  |
 
 `em_apns_ext` 结构如下：
 
