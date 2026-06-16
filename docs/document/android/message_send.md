@@ -101,7 +101,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 3. 调用 `EMChatManager#sendMessage` 发送消息。
    
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图
 
    发送前，SDK 会校验本地文件是否存在，并补充图片宽高等基础信息。对于非原图发送场景，SDK 会优先复用已有的大图文件；如果本地没有可复用的大图文件，则自动生成大图并上传。
 

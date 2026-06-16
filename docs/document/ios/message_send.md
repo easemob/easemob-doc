@@ -1,7 +1,5 @@
 # 发送消息
 
-<Toc />
-
 环信即时通讯 IM iOS SDK 通过 `ChatManager` 类和 `EMChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
 
 - 对于单聊，环信即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。
@@ -66,8 +64,27 @@ message.chatType = EMChatTypeGroupChat;
 
 ### 发送图片消息
 
-1. 发送方调用 `initWithData` 和 `initWithConversationID` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 在非原图发送场景下基于原图压缩后生成的图片资源。压缩规则为最短边不超过 720 像素，最长边不超过 1280 像素，压缩质量为 85%，通常用于聊天详情页展示。
+- 缩略图：默认宽高为 170 像素，压缩质量为 35%，缩略图的压缩方式和尺寸可在[控制台进行配置](product/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取图片的本地 URI。
+
+2. 调用 `initWithData` 和 `initWithConversationID` 创建图片消息。
+   
+   创建消息时，需要传入图片的本地 URI、设置是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+  `isOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+
+3. 调用 `sendMessage` 方法发送消息。
+   
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成图片缩略图。
+
+   发送前，SDK 会校验本地文件是否存在，并补充图片宽高等基础信息。对于非原图发送场景，SDK 会优先复用已有的大图文件；如果本地没有可复用的大图文件，则自动生成大图并上传。
 
 ```objectivec
 // `imageData` 为图片本地资源，`displayName` 为附件的显示名称。
@@ -122,9 +139,14 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
 
 ### 发送视频消息
 
-1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `initWithLocalPath` 方法传入视频文件的本地资源标志符、消息的显示名称和视频时长，构建视频消息体。然后，调用 `initWithConversationID` 方法传入会话 ID 和视频消息体，构建视频消息。最后，
-3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至环信消息服务器，自动将视频的首帧作为视频缩略图。
+发送视频消息前，需要先准备视频文件、本地缩略图路径和视频时长。其中，缩略图和时长主要用于消息展示。
+
+发送视频消息的流程如下：
+
+1. 在应用层完成视频文件的选取或录制，并准备视频文件的本地 URI、视频时长和缩略图路径。
+2. 调用 `initWithLocalPath` 方法传入视频文件的本地 URI、消息的显示名称和视频时长，构建视频消息体。然后，调用 `initWithConversationID` 方法传入会话 ID 和视频消息体，构建视频消息。
+3. 调用 `sendMessage` 方法发送消息。 
+   发送过程中，SDK 会将视频文件上传至环信消息服务器，自动将视频的首帧作为视频缩略图。上传完成后再发送消息。你可以结合消息状态或相关回调感知上传进度以及发送结果。
 
 ```objectivec
 // `localPath` 为本地资源路径，`displayName` 为视频的显示名称。

@@ -2,9 +2,9 @@
 
 环信即时通讯 IM 自 `v3.8.1` 开始支持用户属性管理。
 
-用户属性用于描述消息互动用户的资料信息，例如昵称、头像、邮箱、电话、性别、签名和生日等。
+用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。
 
-本文介绍如何设置、更新、获取和监听用户属性。
+本文介绍如何设置、更新、获取、监听和订阅用户属性。
 
 :::tip
 为保证用户信息安全，SDK 仅支持用户设置或更新自己的用户属性。
@@ -31,8 +31,8 @@
 
 ## 使用限制
 
-- 单个用户的全部属性最大不超过 `2 KB`。
-- 单个 app 的全部用户属性数据最大不超过 `10 GB`。
+- 单个用户的全部属性最大不超过 2 KB。
+- 单个 app 的全部用户属性数据最大不超过 10 GB。
 - 调用设置或获取用户属性的相关接口超过频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
 ## 设置当前用户的属性
@@ -92,7 +92,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 });
 ```
 
-## 查询用户属性
+## 获取用户属性
 
 ### 获取用户的所有属性
 
@@ -124,7 +124,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 自 `4.22.0` 起，SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用户的属性发生变化时，应用可以及时收到通知。
 
-该能力适用于以下场景：
+该功能适用于以下场景：
 
 - 非好友会话中，需要及时更新对方昵称、头像等属性。
 - 临时会话、客服沟通等场景中，需要感知非好友用户的属性变更。
@@ -190,9 +190,9 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 });
 ```
 
-### 缓存说明
+### 内存说明
 
-如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地缓存中的用户信息，并按业务需要决定是否重新拉取服务端数据。
+如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地内存中的用户信息，并按业务需要决定是否重新 [拉取服务端数据](userprofile.html#获取用户的所有属性)。
 
 ## 监听用户属性变更
 
@@ -203,7 +203,7 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 - 当前用户属性变更：用户修改自身属性后，SDK 会在登录成功时自动从服务端拉取最新信息，写入本地内存，并触发 `EMUserInfoManagerListener#onSelfUserInfoUpdate`。
 - 其他用户属性变更：收到其他用户的消息，或从服务端获取其属性更新后，SDK 会将更新写入本地内存，并触发 `EMUserInfoManagerListener#onUserInfoUpdate`。
 
-关于事件详情，详见 [监听用户信息更新](userinfo_provider.html#监听用户信息更新)。
+关于事件详情，详见 [监听用户属性更新](userinfo_provider.html#监听用户属性更新)。
 
 ## 常见问题
 

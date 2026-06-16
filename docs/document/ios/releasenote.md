@@ -1,6 +1,24 @@
 # iOS IM SDK 更新日志
 
-<Toc />
+## v4.22.0 Dev 2026-6-16（开发版）
+
+#### 新增特性
+
+- 支持图片消息分层资源管理及相关处理逻辑优化：
+  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
+  - 优化 [图片](message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](message_receive.html#接收视频消息)。
+-支持好友列表自动同步：
+  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
+  - 新增 [好友列表及联系人信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 新增同步数据 WebSocket 服务地址和端口配置接口。
+
+#### 优化
+
+- 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 `initWithLocalPath:displayName:` 替代。
+- 废弃初始化联系人对象的方法 `EMContact#initWithUserId:remark:`，使用 `EMContact#initWithUserId:remark:createAt:` 替代。
 
 ## v4.21.0 Dev 2026-4-28（开发版）
 

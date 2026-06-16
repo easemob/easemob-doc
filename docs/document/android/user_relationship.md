@@ -31,18 +31,9 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 ## 好友管理
 
-### 添加好友
+### 添加好友事件监听
 
-添加好友用于建立稳定的单聊关系。对方接受申请后，双方成为彼此的好友。当前 SDK 仅支持双向好友关系，不支持单向好友或关注关系。
-
-典型流程如下：
-
-1. 设置好友事件监听。
-2. 调用 `addContact` 发起好友申请。
-3. 对方通过 `onContactInvited` 收到申请，并选择接受或拒绝。
-4. 若对方接受，双方建立好友关系；若对方拒绝，本次申请结束。
-
-设置好友事件监听的示例代码如下：
+为了接收好友添加、删除和好友申请状态的变更事件，你需要添加好友事件监听。
 
 ```java
 EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
@@ -67,6 +58,16 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
     public void onContactAdded(String username) { }
 });
 ```
+
+### 添加好友
+
+添加好友用于建立稳定的单聊关系。对方接受申请后，双方成为彼此的好友。当前 SDK 仅支持双向好友关系，不支持单向好友或关注关系。
+
+典型流程如下：
+
+1. 调用 `addContact` 发起好友申请。
+2. 对方通过 `onContactInvited` 收到申请，并选择接受或拒绝。
+3. 若对方接受，双方建立好友关系；若对方拒绝，本次申请结束。
 
 你可以调用 `addContact` 发起好友申请：
 
@@ -113,7 +114,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 自 4.2.1 版本开始，你可以调用 `asyncSetContactRemark` 设置单个好友的备注。
 
-好友备注长度不能超过 `100` 个字符。
+好友备注长度不能超过 100 个字符。
 
 ```java
 EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new EMCallBack() {
@@ -248,7 +249,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
 ```
 
-#### 从本地内存获取单个用户信息
+#### 从本地内存获取单个用户属性
 
 如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId(String)`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
 
