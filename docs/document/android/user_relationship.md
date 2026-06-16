@@ -35,11 +35,11 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 ```java
 EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
-    // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 同意后，用户 A 收到该事件。
+    // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
     @Override
     public void onFriendRequestAccepted(String username) { }
 
-    // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 拒绝后，用户 A 收到该事件。
+    // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
     @Override
     public void onFriendRequestDeclined(String username) { }
 

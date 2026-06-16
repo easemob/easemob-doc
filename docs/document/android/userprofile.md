@@ -122,7 +122,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 ## 订阅非好友用户的属性变更
 
-自 `4.22.0` 起，SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用户的属性发生变化时，应用可以及时收到通知。
+自 v4.22.0 起，SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用户的属性发生变化时，应用可以及时收到通知。
 
 该功能适用于以下场景：
 
@@ -131,11 +131,11 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
-使用该能力前，请注意以下事项：
+使用该功能前，请注意以下事项：
 
 - 当前功能自 `4.22.0` 起支持。
 - 该功能面向非好友用户；好友和当前用户的信息变更无需通过该接口订阅。
-- 订阅后，属性变更通知依赖用户信息自动管理能力。详见 [用户信息自动管理](userinfo_provider.html)。
+- 订阅后，属性变更通知依赖用户信息自动管理功能。详见 [用户信息自动管理](userinfo_provider.html)。
 :::
 
 ### 订阅非好友用户属性变更事件
@@ -196,7 +196,7 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 
 ## 监听用户属性变更
 
-自 `v4.20.0` 起，SDK 提供 `EMUserInfoManagerListener` 监听 [用户信息](userinfo_provider.html) 更新。用户属性是用户信息的一部分，因此属性变更也会通过该监听器回调。使用该能力前，需要开启 [用户信息自动管理](userinfo_provider.html)。
+自 `v4.20.0` 起，SDK 提供 `EMUserInfoManagerListener` 监听 [用户属性更新](userinfo_provider.html#监听用户属性更新) 。使用该功能前，需要开启 [用户信息自动管理](userinfo_provider.html)。
 
 用户属性变更通知可分为以下两类：
 

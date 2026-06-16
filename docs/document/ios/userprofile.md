@@ -181,7 +181,7 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 ### 监听用户属性变更
 
-自 v4.20.0 起， SDK 提供 `EMUserInfoManagerDelegate` 监听 [用户信息](userinfo_provider.html) 更新。用户属性作为用户信息的一部分，其变更也可通过该监听器进行监听。该功能需要开启 [用户信息自动管理说明](userinfo_provider.html)：
+自 v4.20.0 起， SDK 提供 `EMUserInfoManagerDelegate` 监听 [用户属性变更](userinfo_provider.html#监听用户属性更新)。该功能需要开启 [用户信息自动管理说明](userinfo_provider.html)：
 - 当前用户：用户修改自身属性后，SDK 在登录成功时会自动从服务端拉取最新信息写入本地内存，并触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
 - 其他用户：当收到其他用户的消息或从服务端获取其属性（如昵称、头像变更）时，SDK 会将更新写入本地内存，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
