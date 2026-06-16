@@ -5,15 +5,14 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 - 好友管理：添加好友、处理好友申请、删除好友、设置好友备注、获取好友列表，以及在登录成功后自动同步好友列表和好友信息。
 - 黑名单管理：获取黑名单列表、以及添加和移除黑名单用户。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
-此外，环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`。
-
 ## 技术原理
 
 环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
 
 - 添加、删除好友。
 - 设置好友备注。
-- 获取好友列表。
+- 获取好友列表和好友信息
+- 登录后自动同步好友列表
 - 添加黑名单。
 - 删除黑名单。
 - 从服务器获取黑名单列表。
@@ -73,11 +72,15 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 ### 添加好友
 
-添加好友部分主要功能是发送好友请求、接收好友请求、处理好友请求和好友请求处理结果回调等。
+添加好友用于建立稳定的单聊关系。对方接受申请后，双方成为彼此的好友。当前 SDK 仅支持双向好友关系，不支持单向好友或关注关系。
 
-服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。
+典型流程如下：
 
-1. 请求添加好友。
+1. 调用 `addContact` 发起好友申请。
+2. 对方通过 `friendRequestDidReceiveFromUser` 收到申请，并选择接受或拒绝。
+3. 若对方接受，双方建立好友关系；若对方拒绝，本次申请结束。
+
+你可以调用 `addContact` 发起好友申请：
 
 示例代码如下：
 
@@ -92,9 +95,10 @@ if (!aError) {
 }];
 ```
 
-2. 对端用户通过 `friendRequestDidReceiveFromUser` 事件监听收到好友请求，确认是否成为好友。 
+对端用户通过 `friendRequestDidReceiveFromUser` 事件监听收到好友请求，确认是否成为好友。 
 
 - 调用 `approveFriendRequestFromUser` 接受好友申请。请求方收到 `friendRequestDidApproveByUser` 事件，双方都收到 `friendshipDidAddByUser` 事件。
+- 
 
 ```objectivec
 // 接受好友请求。
@@ -271,7 +275,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 自 4.22.0 版本开始，你可以设置在登录成功后自动同步好友列表及好友信息。开启后，SDK 会在登录完成后自动拉取并更新本地好友数据，便于应用直接读取最新的好友列表和好友信息。
 
-你可以通过 `EMOptions#enableAutoSyncContacts` 配置该能力。该配置需要在初始化 SDK 时设置，示例代码如下：
+你可以通过 `EMOptions#enableAutoSyncContacts` 配置该功能。该配置需要在初始化 SDK 时设置，示例代码如下：
 
 ```objectivec
 EMOptions *options = [EMOptions optionsWithAppkey:@"YourAppKey"];
@@ -312,6 +316,10 @@ options.enableAutoSyncContacts = YES;
     NSUInteger addTimestamp = contact.addTimestamp;
 }
 ```
+
+### 设置仅给好友发消息
+
+环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`。
 
 ## 黑名单管理
 

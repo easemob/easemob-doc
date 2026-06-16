@@ -5,8 +5,6 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 - 好友管理：添加好友、处理好友申请、删除好友、设置好友备注、获取好友列表，以及在登录成功后自动同步好友列表和好友信息。
 - 黑名单管理：获取黑名单列表、以及添加和移除黑名单用户。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
-此外，环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`。
-
 ## 技术原理
 
 环信即时通讯 IM Android SDK 通过 [EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html) 提供好友和黑名单相关能力。
@@ -261,10 +259,10 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 
 自 4.22.0 版本开始，你可以设置在登录成功后自动同步好友列表及好友信息。开启后，SDK 会在登录完成后自动拉取并更新本地好友数据，便于应用直接读取最新的好友列表和好友信息。
 
-你可以通过以下接口配置该能力：
+你可以通过以下接口配置该功能：
 
 - `EMOptions#setEnableAutoSyncContacts(boolean)`：设置是否开启登录后自动同步好友列表。
-- `EMOptions#isEnableAutoSyncContacts()`：获取当前是否开启该能力。
+- `EMOptions#isEnableAutoSyncContacts()`：获取当前是否开启该功能。
 
 ```java
 EMOptions options = new EMOptions();
@@ -295,6 +293,10 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
     }
 });
 ```
+
+### 设置仅给好友发消息
+
+环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`。
 
 ## 黑名单管理
 

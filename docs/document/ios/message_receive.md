@@ -72,7 +72,7 @@ NSString *voiceLocalPath = voiceBody.localPath;
 - 默认自动下载，即 `EMOptions#autoDownloadThumbnail` 为 `YES`。
 - 如果关闭自动下载，即 `EMOptions#autoDownloadThumbnail = NO;`，则需调用 `EMChatManager#downloadMessageThumbnail` 手动下载。
 
-1. 收到图片消息后，接收方可以在 [messagesDidReceive](#接收文本消息) 回调中处理图片消息，并根据业务需要下载原图或大图：
+2. 收到图片消息后，接收方可以在 [messagesDidReceive](#接收文本消息) 回调中处理图片消息，并根据业务需要下载原图或大图：
   
   - 调用 `downloadMessageAttachment` 下载原图。
   - 调用 `downloadBigImageAttachment` 下载大图。
@@ -85,7 +85,7 @@ EMImageMessageBody *imageBody = (EMImageMessageBody *)message.body;
 NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
 ```
 
-1. 获取图片消息的附件。
+4. 获取图片消息的附件。
 
 ```objectivec
 [[EMClient sharedClient].chatManager downloadMessageAttachment:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
