@@ -42,7 +42,7 @@
 ```objectivec
 EMUserInfo *userInfo = [[EMUserInfo alloc] init];
 userInfo.userId = EMClient.sharedClient.currentUsername;
-userInfo.nickName = @"EM";
+userInfo.nickname = @"EM";
 userInfo.avatarUrl = @"https://www.EM.io";
 userInfo.birth = @"2000.10.10";
 userInfo.sign = @"hello world";
@@ -101,15 +101,13 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ```objectivec
 // 获取指定用户的指定用户属性。
-NSString *userIds = @[@"user1",@"user2"];
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTypePhone),@(EMUserInfoTypeMail)];
 // 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, EMError *aError) {
 
 }];
 ```
-
-// TODO：本节为新增章节
 
 ## 订阅非好友用户的属性变更
 
@@ -122,7 +120,7 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
-使用该能力前，请注意以下事项：
+使用该功能前，请注意以下事项：
 
 - 当前功能自 `4.22.0` 起支持。
 - 该功能面向非好友用户；好友和当前用户的信息变更无需通过该接口订阅。
@@ -133,52 +131,46 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 
 你可以调用 `subscribeUsersInfo` 订阅非好友用户属性变更事件。
 
-```java
-String[] userIds = new String[2];
-userIds[0] = "user1";
-userIds[1] = "user2";
+```objectivec
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
-EMClient.getInstance().userInfoManager().subscribeUsersInfo(userIds, new EMCallBack() {
-    @Override
-    public void onSuccess() {
+[[EMClient sharedClient].userInfoManager subscribeUsersInfo:userIds completion:^(EMError *error) {
+    if (!error) {
+        NSLog(@"订阅非好友用户属性变更成功");
+    } else {
+        NSLog(@"订阅非好友用户属性变更失败：%@", error.errorDescription);
     }
-
-    @Override
-    public void onError(int code, String error) {
-    }
-});
+}];
 ```
 
 ### 取消订阅非好友用户属性变更事件
 
 你可以调用 `unsubscribeUsersInfo` 取消订阅非好友用户的属性变更事件。
 
-```java
-EMClient.getInstance().userInfoManager().unsubscribeUsersInfo(userIds, new EMCallBack() {
-    @Override
-    public void onSuccess() {
-    }
+```objectivec
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
-    @Override
-    public void onError(int code, String error) {
+[[EMClient sharedClient].userInfoManager unsubscribeUsersInfo:userIds completion:^(EMError *error) {
+    if (!error) {
+        NSLog(@"取消订阅非好友用户属性变更成功");
+    } else {
+        NSLog(@"取消订阅非好友用户属性变更失败：%@", error.errorDescription);
     }
-});
+}];
 ```
 
 ### 获取已被订阅用户属性变更事件的用户列表
 
 你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。
 
-```java
-EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBack<List<EMUserInfo>>() {
-    @Override
-    public void onSuccess(List<EMUserInfo> value) {
+```objectivec
+[[EMClient sharedClient].userInfoManager fetchSubscribedUsers:^(NSArray<EMUserInfo *> *users, EMError *error) {
+    if (!error) {
+        NSLog(@"已订阅用户属性变更的用户列表：%@", users);
+    } else {
+        NSLog(@"获取已订阅用户列表失败：%@", error.errorDescription);
     }
-
-    @Override
-    public void onError(int error, String errorMsg) {
-    }
-});
+}];
 ```
 
 ### 内存说明
@@ -224,14 +216,12 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 如果你的场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
 ```objectivec
-// 设置自定义消息的 `event` 为 `userCard` ，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
-EMCustomMessageBody *body = [[EMCustomMessageBody alloc] init];
-body.event = @"userCard";
+// 设置自定义消息的 `event` 为 `userCard`，并在 `customExt` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 NSDictionary *messageExt = @{@"userId":EMClient.sharedClient.currentUsername,
                            @"nickname":@"nickname",
                            @"avatar":@"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png"
                         };
-body.ext = messageExt;
+EMCustomMessageBody *body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" customExt:messageExt];
 // 异步方法
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"conversationID"
                                                 from:@"sender"
@@ -242,7 +232,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];
 ```
 
-如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
+如果需要在名片中展示更丰富的信息，可以在 `customExt` 中增加更多字段。
 
 可参考 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 中示例项目中的以下类：
 

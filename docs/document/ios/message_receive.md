@@ -69,10 +69,10 @@ NSString *voiceLocalPath = voiceBody.localPath;
 
 1. 接收图片消息时，SDK 会根据配置决定是否自动下载缩略图：
 
-- 默认自动下载，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
-- 如果关闭自动下载，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，则需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 手动下载。
+- 默认自动下载，即 `EMOptions#autoDownloadThumbnail` 为 `YES`。
+- 如果关闭自动下载，即 `EMOptions#autoDownloadThumbnail = NO;`，则需调用 `EMChatManager#downloadMessageThumbnail` 手动下载。
 
-2. 收到图片消息后，接收方可以在 [messagesDidReceive](#接收文本消息) 回调中处理图片消息，，并根据业务需要下载原图或大图：
+1. 收到图片消息后，接收方可以在 [messagesDidReceive](#接收文本消息) 回调中处理图片消息，并根据业务需要下载原图或大图：
   
   - 调用 `downloadMessageAttachment` 下载原图。
   - 调用 `downloadBigImageAttachment` 下载大图。
@@ -104,21 +104,33 @@ NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
 
 其中，大图和缩略图的压缩处理发生在服务端。
 
-下载完成后，在回调里调用相应消息 `EMImageMessageBody` 的相应方法获取缩略图路径。
+下载完成后，在回调里通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径。此外，SDK 4.22.0 及以上版本支持判断 `remotePath` 指向原图还是大图、获取大图的下载状态和获取图片宽高。
 
-// TODO：给一下示例代码和代码注释，详见 Android：
-  EMImageMessageBody#bigImageLocalPath
-  EMImageMessageBody#bigImageRemotePath
-  EMImageMessageBody#bigImageDownloadStatus
-  EMImageMessageBody#isOriginalImage
-
-
-// TODO：下面是 Android 的，你将方法名替换为 iOS 的吧
-  此外，SDK 4.22.0 及以上版本支持通过以下方法判断图片资源状态：
-
-- `isOriginalImage()`：判断当前消息对应的是原图还是发送方压缩后的大图资源。
-- `getBigImageDownloadStatus()`：获取大图的下载状态。
-- `getWidth()` / `getHeight()`：获取图片宽高。
+```objectivec
+[[EMClient sharedClient].chatManager downloadBigImageAttachment:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
+    if (!error) {
+        EMImageMessageBody *imageBody = (EMImageMessageBody *)message.body;
+       // 从服务器端获取原图。
+        NSString *remotePath = imageBody.remotePath;
+        // 从服务器端获取大图。
+        NSString *bigImageRemotePath = imageBody.bigImageRemotePath;
+        // 从服务器端获取图片缩略图。
+        NSString *thumbnailPath = imageBody.thumbnailRemotePath;
+        // 从本地获取原图。
+        NSString *localPath = imageBody.localPath;
+        // 从本地获取大图。
+        NSString *bigImageLocalPath = imageBody.bigImageLocalPath;
+        // 从本地获取图片缩略图。
+        NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
+        // 获取大图下载状态。
+        EMDownloadStatus bigImageDownloadStatus = imageBody.bigImageDownloadStatus;
+        // 判断 remotePath 指向原图还是压缩后的大图。
+        BOOL isOriginalImage = imageBody.isOriginalImage;
+        // 获取图片宽高。
+        CGSize imageSize = imageBody.size;
+    }
+}];
+```
 
 ### 接收 GIF 图片消息
 

@@ -157,8 +157,6 @@ if (!aError) {
 }];
 ```
 
-// TODO：Android 端是对方会收到这个事件
-
 删除后，双方均会收到 `friendshipDidRemoveByUser` 回调，示例代码如下：
 
 ```objectivec
@@ -269,23 +267,17 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 ### 登录后自动同步好友列表
 
-// TODO：本节为新增，Review 描述 + 添加示例代码
-
 #### 开启自动同步
 
 自 4.22.0 版本开始，你可以设置在登录成功后自动同步好友列表及好友信息。开启后，SDK 会在登录完成后自动拉取并更新本地好友数据，便于应用直接读取最新的好友列表和好友信息。
 
-你可以通过以下接口配置该能力：
+你可以通过 `EMOptions#enableAutoSyncContacts` 配置该能力。该配置需要在初始化 SDK 时设置，示例代码如下：
 
-- `EMOptions#enableAutoSyncContacts`：设置是否开启登录后自动同步好友列表。
-- XXX ：获取当前是否开启该能力。// TODO：如何获取是否开启登录后自动同步好友列表，Android 有这个，iOS 没有就删掉
-
-// TODO：替换示例代码
-
-```java
-EMOptions options = new EMOptions();
-options.setEnableAutoSyncContacts(true);
-boolean enableAutoSyncContacts = options.isEnableAutoSyncContacts();
+```objectivec
+EMOptions *options = [EMOptions optionsWithAppkey:@"YourAppKey"];
+// 开启登录后自动同步好友列表及好友信息。
+options.enableAutoSyncContacts = YES;
+[[EMClient sharedClient] initializeSDKWithOptions:options];
 ```
 
 #### 监听同步状态和好友信息变更
@@ -293,23 +285,32 @@ boolean enableAutoSyncContacts = options.isEnableAutoSyncContacts();
 开启自动同步后，建议通过 `EMContactManagerDelegate` 监听好友同步开始、同步完成以及好友信息变更等事件，以便及时更新 UI 或处理异常情况。
 
 - `onFriendStartSync`：好友列表及好友信息开始同步时触发。
-- `onFriendSyncFinished`：好友列表及好友信息同步完成时触发。若同步失败，可通过 `errorCode` 和 `error` 获取失败原因。
+- `onFriendSyncFinished`：好友列表及好友信息同步完成时触发。若同步失败，可通过 `error` 获取失败原因。
 - `onFriendInfoChanged`：好友信息发生变更时触发。你可以通过 `contact` 获取更新后的好友信息。
 
-```java
-EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
-    @Override
-    public void onContactSyncStart() {
-    }
+```objectivec
+// 添加好友事件监听。
+[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
 
-    @Override
-    public void onContactSyncFinishWithError(int errorCode, String error) {
-    }
+// 好友列表及好友信息开始同步。
+- (void)onFriendStartSync
+{
+}
 
-    @Override
-    public void onContactInfoUpdate(EMContact contact) {
+// 好友列表及好友信息同步完成。
+- (void)onFriendSyncFinished:(EMError *)error
+{
+    if (error) {
+        NSLog(@"好友列表及好友信息同步失败：%@", error.errorDescription);
     }
-});
+}
+
+// 好友信息发生变更。
+- (void)onFriendInfoChanged:(EMContact *)contact
+{
+    EMUserInfo *userInfo = contact.userInfo;
+    NSUInteger addTimestamp = contact.addTimestamp;
+}
 ```
 
 ## 黑名单管理
