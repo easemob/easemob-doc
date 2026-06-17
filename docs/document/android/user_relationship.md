@@ -7,7 +7,7 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 通过 [EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html) 提供好友和黑名单相关能力。
+环信即时通讯 IM Android SDK 通过 [EMContactManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_contact_manager.html) 提供好友和黑名单相关功能。
 
 - `EMContactManager#addContact/deleteContact`：添加和删除好友。
 - `EMContactManager#asyncSetContactRemark`：设置好友备注。
