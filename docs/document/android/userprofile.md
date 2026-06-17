@@ -133,7 +133,6 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 :::tip
 使用该功能前，请注意以下事项：
 
-- 当前功能自 `4.22.0` 起支持。
 - 该功能面向非好友用户；好友和当前用户的信息变更无需通过该接口订阅。
 - 订阅后，属性变更通知依赖用户信息自动管理功能。详见 [用户信息自动管理](userinfo_provider.html)。
 :::
@@ -176,7 +175,7 @@ EMClient.getInstance().userInfoManager().unsubscribeUsersInfo(userIds, new EMCal
 
 ### 获取已被订阅用户属性变更事件的用户列表
 
-你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。
+你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表，该列表包含用户的最新属性信息。
 
 ```java
 EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBack<List<EMUserInfo>>() {

@@ -98,7 +98,6 @@ if (!aError) {
 对端用户通过 `friendRequestDidReceiveFromUser` 事件监听收到好友请求，确认是否成为好友。 
 
 - 调用 `approveFriendRequestFromUser` 接受好友申请。请求方收到 `friendRequestDidApproveByUser` 事件，双方都收到 `friendshipDidAddByUser` 事件。
-- 
 
 ```objectivec
 // 接受好友请求。
