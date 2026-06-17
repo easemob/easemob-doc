@@ -60,10 +60,10 @@ conn.addEventHandler("eventName", {
 conn.addEventHandler("eventName", {
   // 当前用户收到图片消息。
   onImageMessage: function (message) {
-    // 图片文件在服务器的地址。
+    // 图片文件在服务器的地址，可能是原图或者大图。
     console.log(message.url);
-    // 图片缩略图文件在服务器的地址。
-    console.log(message.thumb);
+    // 图片缩略图/原图/大图文件在服务器的地址。
+    console.log(message.thumb, message.originalImageUrl, message.bigImageUrl);
     // 判断图片是原图还是压缩后的大图
     console.log(message.isOriginalImage)
   },
