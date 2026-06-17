@@ -82,8 +82,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 发送图片消息
 
-### 发送图片消息
-
 自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
