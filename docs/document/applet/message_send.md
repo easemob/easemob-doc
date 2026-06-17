@@ -115,87 +115,79 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 ### 发送图片消息
 
-创建和发送图片消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+### 发送图片消息
+
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](product/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取图片的本地路径。
+   
+2. 创建和发送图片消息。 
+  
+  创建消息时，需要传入图片的本地路径、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+  `isOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。服务器自动生成缩略图。
 
 ```javascript
-function sendImage() {
-  var me = this;
-  wx.chooseImage({
-    count: 1,
-    sizeType: ["original", "compressed"],
-    sourceType: ["album"],
-    success(res) {
-      me.sendPrivateImg(res);
-    },
-  });
-}
-
-function sendPrivateImg(res) {
-  var me = this;
-  var tempFilePaths = res.tempFilePaths;
-  var token = WebIM.conn.context.accessToken;
-  wx.getImageInfo({
-    src: res.tempFilePaths[0],
-    success(res) {
-      var allowType = {
-        jpg: true,
-        gif: true,
-        png: true,
-        bmp: true,
-      };
-      var str = WebIM.config.appkey.split("#");
-      var width = res.width;
-      var height = res.height;
-      var index = res.path.lastIndexOf(".");
-      var filetype = (~index && res.path.slice(index + 1)) || "";
-      var domain = wx.WebIM.conn.apiUrl + "/";
-      if (filetype.toLowerCase() in allowType) {
-        wx.uploadFile({
-          url: domain + str[0] + "/" + str[1] + "/chatfiles",
-          filePath: tempFilePaths[0],
-          name: "file",
-          header: {
-            Authorization: "Bearer " + token
-          },
-          success(res) {
-            if (res.statusCode === 400) {
-              // 图片上传阿里云检验不合法
-              var errData = JSON.parse(res.data);
-              if (errData.error === "content improper") {
-                wx.showToast({
-                  title: "图片不合法",
-                });
-                return false;
-              }
-            }
-            var data = res.data;
-            var dataObj = JSON.parse(data);
-            var option = {
-              type: "img",
-              chatType: "singleChat",
-              width: width,
-              height: height,
-              url: dataObj.uri + "/" + dataObj.entities[0].uuid,
-              // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-              to: "username", 
-            };
-            let msg = WebIM.message.create(option);
-            // 调用 `send` 方法发送该图片消息。
-            conn
-              .send(msg)
-              .then((res) => {
-                // 图片消息成功发送。
-                console.log("Success");
-              })
-              .catch((e) => {
-                // 图片消息发送失败。
-                console.log("Fail");
-              });
-          },
-        });
-      }
-    },
-  });
+function sendPrivateImg() {
+  // 选择本地图片文件。
+  let input = document.getElementById("image");
+  let file = WebIM.message.getFileUrl(input);
+  let allowType = {
+    jpg: true,
+    gif: true,
+    png: true,
+    bmp: true,
+  };
+  if (file.filetype.toLowerCase() in allowType) {
+    let option = {
+      // 消息类型。
+      type: "img",
+      file: file,
+      ext: {
+        // 图片文件长度，单位为字节。
+        file_length: file.data.size,
+      },
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+      to: "username",
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+      chatType: "singleChat",
+      // 图片文件上传失败。
+      onFileUploadError: function () {
+        console.log("onFileUploadError");
+      },
+      // 图片文件上传进度。
+      onFileUploadProgress: function (e) {
+        console.log(e);
+      },
+      // 图片文件上传成功。
+      onFileUploadComplete: function () {
+        console.log("onFileUploadComplete");
+      },
+      thumbnailHeight: 200,
+      thumbnailWidth: 200,
+      // 是否发送原图，默认为 false， 会进行压缩， 对方收到的是压缩后的大图。
+			isOriginalImage: true,
+    };
+    // 创建一条图片消息。
+    let msg = WebIM.message.create(option);
+    // 调用 `send` 方法发送该图片消息。
+    conn
+      .send(msg)
+      .then((res) => {
+        // 图片文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 图片文件发送失败。
+        console.log("Fail");
+      });
+  }
 }
 ```
 

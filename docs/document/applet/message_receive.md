@@ -75,11 +75,26 @@ playAudio(message) {
 
 接收方收到 `onImageMessage` 回调，根据消息 `url` 字段获取图片文件的服务器地址，从而获取图片文件。
 
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](product/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
 ```javascript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
-  onImageMessage: function (message) {},
+  // 当前用户收到图片消息。
+  onImageMessage: function (message) {
+    // 图片文件在服务器的地址，可能是原图或者大图。
+    console.log(message.url);
+    // 图片缩略图/原图/大图文件在服务器的地址。
+    console.log(message.thumb, message.originalImageUrl, message.bigImageUrl);
+    // 判断图片是原图还是压缩后的大图
+    console.log(message.isOriginalImage)
+  },
 });
+
 ```
 
 ### 接收 GIF 图片消息
