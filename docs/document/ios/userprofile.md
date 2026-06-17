@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM 自 V3.8.1 开始支持用户属性管理功能。
+环信即时通讯 IM 自 v3.8.1 开始支持用户属性管理功能。
 
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。
 
@@ -88,7 +88,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 获取用户的所有属性
 
-你可以调用 `fetchUserInfoById` 获取一个或多个用户的全部属性。
+你可以调用 `fetchUserInfoById` 从服务端获取一个或多个用户的全部属性。若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
 ```objectivec
 // 每次传入的用户 ID 数量不能超过 100。
@@ -99,7 +99,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 获取用户的指定属性
 
-你可以调用 `fetchUserInfoById` 获取指定用户的一个或多个属性。
+你可以调用 `fetchUserInfoById` 从服务端获取获取指定用户的一个或多个属性。若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
 ```objectivec
 // 获取指定用户的指定用户属性。
@@ -122,16 +122,12 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
-使用该功能前，请注意以下事项：
-
-- 当前功能自 `4.22.0` 起支持。
-- 该功能面向非好友用户；好友和当前用户的信息变更无需通过该接口订阅。
-- 订阅后，属性变更通知依赖用户信息自动管理能力。详见 [用户信息自动管理](userinfo_provider.html)。
+本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知详情，请参见 [用户属性变更事件](#用户属性变更事件)。
 :::
 
 ### 订阅非好友用户属性变更事件
 
-你可以调用 `subscribeUsersInfo` 订阅非好友用户属性变更事件。
+你可以调用 `subscribeUsersInfo` 订阅非好友用户的用户属性变更事件。订阅成功后，当这些用户的属性发生变更时，SDK 会触发 [EMUserInfoManagerDelegate#onUserInfoUpdate](userinfo_provider.html#监听用户属性更新) 事件。
 
 ```objectivec
 NSArray<NSString *> *userIds = @[@"user1", @"user2"];
@@ -163,7 +159,7 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 ### 获取已被订阅用户属性变更事件的用户列表
 
-你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。
+你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。该用户列表中包含被订阅的非好友用户的用户 ID 及其用户属性。
 
 ```objectivec
 [[EMClient sharedClient].userInfoManager fetchSubscribedUsers:^(NSArray<EMUserInfo *> *users, EMError *error) {
@@ -179,13 +175,24 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地内存中的用户信息，并按业务需要决定是否重新 [拉取服务端数据](userprofile.html#获取用户的所有属性)。
 
-### 监听用户属性变更
+## 监听用户属性变更
 
-自 v4.20.0 起， SDK 提供 `EMUserInfoManagerDelegate` 监听 [用户属性变更](userinfo_provider.html#监听用户属性更新)。该功能需要开启 [用户信息自动管理说明](userinfo_provider.html)：
-- 当前用户：用户修改自身属性后，SDK 在登录成功时会自动从服务端拉取最新信息写入本地内存，并触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
-- 其他用户：当收到其他用户的消息或从服务端获取其属性（如昵称、头像变更）时，SDK 会将更新写入本地内存，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+本节从当前用户、好友和非好友用户的角度介绍用户属性变更事件。
 
-关于事件详情，请参见 [用户信息自动管理说明](userinfo_provider.html#监听用户属性更新)。
+#### 当前用户
+
+当前用户的属性发生变更时，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
+
+#### 好友
+
+1. 若主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表)，且返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+2. 若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动从服务端拉取并更新本地好友数据。好友属性发生变更时，SDK 会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。
+3. 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+
+#### 非好友用户
+
+1. 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+2. 若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则在订阅成功后，当这些用户的属性发生变更时，SDK 会触发 [EMUserInfoManagerDelegate#onUserInfoUpdate](userinfo_provider.html#监听用户属性更新) 事件。
 
 ## 常见问题
 

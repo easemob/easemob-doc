@@ -53,7 +53,7 @@ EMClient.shared().initializeSDK(with: options)
 SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户属性更新事件，主要包括：
 - `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
 - `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。
+  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需要将 SDK 升级至 4.20.0 及以上版本，并开启用户信息自动管理。
   - 主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
@@ -85,7 +85,9 @@ extension YourViewController: EMUserInfoManagerDelegate {
 
 ## 通过消息获取发送方信息
 
-开启用户信息自动管理后，接收到的消息中会包含发送方相关信息。你可以通过 `EMChatMessage#senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
+对于 4.20.0，开启用户信息自动管理后，如果发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+
+你可以通过 `EMChatMessage#senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
 
 ```swift
 func messagesDidReceive(_ aMessages: [EMChatMessage]) {
