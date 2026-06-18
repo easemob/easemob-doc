@@ -60,6 +60,7 @@
 - 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信控制台开通](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
 - 调用该接口会触发发送后回调事件，请参见 [回调事件文档](callback_message_send.html#发送单聊消息)。
 - [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/value-added/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
+- 发送消息时，你可以在消息中携带回调环境字段（`env`），环信服务器收到消息后，根据该字段匹配控制台中配置的 [回调路由规则](/product/console/basic_webhook.html#配置消息回调规则)，并将当前消息回调至对应的 [发送前回调](/document/server-side/callback_presending.html) 或 [发送后回调](/document/server-side/callback_postsending.html) 地址。关于该功能的使用，详见本文中的 [发消息时设置回调路由](#发消息时设置回调路由) 一节。
 
 ## 调用频率上限
 
@@ -910,4 +911,72 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+## 可选增强功能
+
+### 发消息时设置回调路由
+
+回调路由允许你在同一个 App Key 下，将不同消息按回调环境维度分别投递到不同的回调地址。发送消息时，你可以在消息中携带回调环境字段（如 `dev`、`test`、`prod`），环信服务器收到消息后，根据该字段匹配控制台中配置的 [回调路由规则](/product/console/basic_webhook.html#配置消息回调规则)，并将当前消息回调至对应的 [发送前回调](/document/server-side/callback_presending.html) 或 [发送后回调](/document/server-side/callback_postsending.html) 地址。
+
+**适用场景**
+
+| 场景               | 说明                                                         |
+| :----------------- | :----------------------------------------------------------- |
+| 多环境隔离     | 同一 App Key 下区分开发、测试、生产环境，消息分别回调至各自的服务地址。 |
+| 灰度发布      | 部分消息回调至新链路验证，其余消息仍走旧链路。               |
+| 多业务线分流   | 不同业务模块的消息回调至各自的审核、风控或同步服务。         |
+| 降低发送前时延 | 避免消息先统一回调至一个入口，再由业务服务器二次转发。       |
+
+**适用范围**
+
+| 回调类型    | 生效范围       | 说明      |
+| :------------- | :------- | :---------------- |
+| [发送前回调](/document/server-side/callback_presending.html) | 仅对 **SDK 发送的消息** 生效（不支持群组/聊天室的定向消息）。 | 消息下发给目标用户前，你的服务器可判断是否拦截或修改消息内容。 |
+| [发送后回调](/document/server-side/callback_postsending.html) | 对 **SDK 和 REST API 发送的消息** 均生效。  | 消息成功发送后，通知你的服务器。   |
+
+**工作流程**
+
+1. 在控制台为发送前回调或发送后回调 [配置回调路由](/product/console/basic_webhook.html#配置消息回调规则)。
+2. 客户端发送消息时，设置回调环境值。
+3. 环信服务器收到消息后，根据消息中的回调环境值匹配当前阶段的回调地址。
+4. 命中有效路由后，服务器将回调请求发送到对应地址。
+
+**示例代码**
+
+发送消息时，可通过 `env` 参数设置回调环境。例如，调用 RESTful 发送单聊的文本消息时设置回调环境字段 `env`：
+
+```shell
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
+  "from": "user1",
+  "to": ["user2"],
+  "type": "txt",
+  "roam_ignore_users": [],
+  "body": {
+    "msg": "testmessages"
+    },
+  "ext": {
+      "em_ignore_notification": true
+    },
+  "env": "dev"  
+  }'
+```
+
+| 参数 |类型 | 是否必需 | 说明 |
+| :--- | :--- |  :--- | :--- |
+| `env` | String | 否 | 回调环境值。回调环境仅支持字母和数字，长度不超过 8 个字符。服务器根据该值匹配控制台中的回调路由。建议与控制台中配置的回调环境保持一致，例如 `dev`、`test`、`prod`。 |
+
+**消息中的回调环境字段命中规则**
+
+| 场景                                     | 路由结果                                                     |
+| :--------------------------------------- | :----------------------------------------------------------- |
+| 携带环境值且命中有效路由           | 按该环境值路由至对应的回调地址。                             |
+| 携带环境值但未命中有效路由           | **不触发回调**，控制台中的 `default` 兜底配置在此场景下 **不生效**。 |
+| 未携带环境值                         | 自动路由至 `default` 环境对应的回调地址。                    |
+| 同一消息需同时触发发送前与发送后回调 | 两个阶段必须使用 **相同的环境值**。例如，发送前配置 `test -> url1`，发送后配置 `test -> url2`，则消息中携带 `test` 即可同时生效于两阶段。 |
 

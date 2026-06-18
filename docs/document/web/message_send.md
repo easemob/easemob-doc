@@ -596,31 +596,31 @@ function sendTextMessage() {
 
 **示例代码**
 
-发消息时调用 `setWebhookEnv` 设置回调环境。
+发送消息时，可通过消息创建参数 `webhookEnv` 设置回调环境。该参数的说明如下：
 
-回调环境参数 `webhookEnv` 的说明如下：
+| 参数 | 类型 | 是否必需 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `webhookEnv` | `string` | 否 | 回调环境值。仅支持字母和数字，长度不能超过 8 个字符。服务器根据该值匹配控制台中配置的回调地址。建议与控制台中设置的回调环境保持一致，例如 `dev`、`test`、`prod`。 |
 
-| 参数 |类型 | 是否必需 | 说明 |
-| :--- | :--- |  :--- | :--- |
-| `webhookEnv` | String | 否 | 回调环境值。回调环境仅支持字母和数字，长度不超过 8 个字符。服务器根据该值匹配控制台中的回调地址。建议与控制台中配置的回调环境保持一致，例如 `dev`、`test`、`prod`。 |
+创建消息时设置回调环境：
 
-调用 `setWebhookEnv` 设置回调环境：
-
-```java
-// 创建消息
-EMMessage message = EMMessage.createTextSendMessage("hello", "toUser");
-
-// 设置回调环境 
-message.setWebhookEnv("test");
+```typescript
+const message = WebIM.message.create({
+  type: "txt",
+  msg: "hello",
+  to: "toUser",
+  chatType: "singleChat",
+  webhookEnv: "test",
+});
 
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+WebIM.conn.send(message);
 ```
 
-调用 `getWebhookEnv` 读取当前消息设置的回调环境值：
+读取当前消息设置的回调环境值：
 
-```java
-String webhookEnv = message.getWebhookEnv();
+```typescript
+const webhookEnv = message.webhookEnv;
 ```
 
 **消息中的回调环境字段命中规则**
