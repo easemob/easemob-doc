@@ -2,13 +2,11 @@
 
 <Toc />
 
-环信即时通讯 IM 自 V3.8.1 开始支持用户属性管理功能。
+环信即时通讯 IM 自 v3.8.1 开始支持用户属性管理功能。
 
-用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
+用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。
 
-例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。查看用户信息时，可以直接查询服务器存储的用户属性信息。
-
-本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
+本文介绍如何设置、更新、获取、监听和订阅用户属性。
 
 :::tip
 为保证用户信息安全，SDK 仅支持用户设置或更新自己的用户属性。
@@ -16,10 +14,13 @@
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供一个 `userInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+环信即时通讯 IM iOS SDK 通过 `userInfoManager` 类，提供用户属性相关功能。
 
 - `updateOwnUserInfo` 设置和修改当前用户自己的属性信息；
 - `fetchUserInfoById` 获取指定用户的所有用户属性信息。
+- `subscribeUsersInfo:completion:`：订阅非好友用户的属性变更事件。
+- `unsubscribeUsersInfo:completion:`：取消订阅非好友用户的属性变更事件。
+- `fetchSubscribedUsers:` 获取已被订阅用户属性变更事件的用户列表。
 
 ## 前提条件
 
@@ -28,20 +29,22 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 使用限制
 
-本节介绍如何在项目中设置及获取用户属性。
+- 单个用户的全部属性最大不超过 2 KB。
+- 单个 app 的全部用户属性数据最大不超过 10 GB。
+- 调用设置或获取用户属性的相关接口超过频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
-单个用户的所有属性最大不超过 2 KB，单个 app 所有用户属性数据最大不超过 10 GB。
+## 设置当前用户的属性
 
 ### 设置当前用户的所有属性
 
-当前用户设置自己的所有属性：
+你可以调用 `updateOwnUserInfo` 设置当前用户的全部属性：
 
 ```objectivec
 EMUserInfo *userInfo = [[EMUserInfo alloc] init];
 userInfo.userId = EMClient.sharedClient.currentUsername;
-userInfo.nickName = @"EM";
+userInfo.nickname = @"EM";
 userInfo.avatarUrl = @"https://www.EM.io";
 userInfo.birth = @"2000.10.10";
 userInfo.sign = @"hello world";
@@ -54,7 +57,7 @@ userInfo.gender = 1;
 }];
 ```
 
-关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/user_attribute_set.html)或[删除用户属性](/document/server-side/user_attribute_delete.html)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
+客户端默认使用以下键名存储用户属性。[调用 RESTful 接口设置](/document/server-side/user_attribute_set.html) 或 [删除用户属性](/document/server-side/user_attribute_delete.html) 时，若希望客户端可正常读取，请保持键名一致。
 
 | 字段        | 类型   | 描述                                                                                              |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------- |
@@ -69,7 +72,7 @@ userInfo.gender = 1;
 
 ### 设置当前用户的单个属性
 
-例如，修改当前用户的头像：
+你可以调用 `updateOwnUserInfo` 设置当前用户的单个属性。例如，修改头像：
 
 ```objectivec
 NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
@@ -81,9 +84,11 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 }];
 ```
 
+## 获取用户属性
+
 ### 获取用户的所有属性
 
-用户可以获取指定一个或多个用户的所有用户属性：
+你可以调用 `fetchUserInfoById` 从服务端获取一个或多个用户的全部属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
 ```objectivec
 // 每次传入的用户 ID 数量不能超过 100。
@@ -94,11 +99,11 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 获取用户的指定属性
 
-用户可以获取单个或多个用户的单个或多个用户属性。
+你可以调用 `fetchUserInfoById` 从服务端获取获取指定用户的一个或多个属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
 ```objectivec
 // 获取指定用户的指定用户属性。
-NSString *userIds = @[@"user1",@"user2"];
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTypePhone),@(EMUserInfoTypeMail)];
 // 异步方法
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, EMError *aError) {
@@ -106,13 +111,88 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 }];
 ```
 
-### 监听用户属性变更
+## 订阅非好友用户的属性变更
 
-自 v4.20.0 起， SDK 提供 `EMUserInfoManagerDelegate` 监听 [用户信息](userinfo_provider.html) 更新。用户属性作为用户信息的一部分，其变更也可通过该监听器进行监听。该功能需要开启 [用户信息自动管理说明](userinfo_provider.html)：
-- 当前用户：用户修改自身属性后，SDK 在登录成功时会自动从服务端拉取最新信息写入本地内存，并触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
-- 其他用户：当收到其他用户的消息或从服务端获取其属性（如昵称、头像变更）时，SDK 会将更新写入本地内存，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+自 v4.22.0 起，SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用户的属性发生变化时，应用可以及时收到通知。
 
-关于事件详情，请参见 [用户信息自动管理说明](userinfo_provider.html#监听用户信息更新)。
+该功能适用于以下场景：
+
+- 非好友会话中，需要及时更新对方昵称、头像等属性。
+- 临时会话、客服沟通等场景中，需要感知非好友用户的属性变更。
+- 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
+
+:::tip
+本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知详情，请参见 [用户属性变更事件](#监听用户属性变更)。
+:::
+
+### 订阅非好友用户属性变更事件
+
+你可以调用 `subscribeUsersInfo` 订阅非好友用户的用户属性变更事件。订阅成功后，当这些用户的属性发生变更时，SDK 会触发 [EMUserInfoManagerDelegate#onUserInfoUpdate](userinfo_provider.html#监听用户属性更新) 事件。
+
+```objectivec
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
+
+[[EMClient sharedClient].userInfoManager subscribeUsersInfo:userIds completion:^(EMError *error) {
+    if (!error) {
+        NSLog(@"订阅非好友用户属性变更成功");
+    } else {
+        NSLog(@"订阅非好友用户属性变更失败：%@", error.errorDescription);
+    }
+}];
+```
+
+### 取消订阅非好友用户属性变更事件
+
+你可以调用 `unsubscribeUsersInfo` 取消订阅非好友用户的属性变更事件。
+
+```objectivec
+NSArray<NSString *> *userIds = @[@"user1", @"user2"];
+
+[[EMClient sharedClient].userInfoManager unsubscribeUsersInfo:userIds completion:^(EMError *error) {
+    if (!error) {
+        NSLog(@"取消订阅非好友用户属性变更成功");
+    } else {
+        NSLog(@"取消订阅非好友用户属性变更失败：%@", error.errorDescription);
+    }
+}];
+```
+
+### 获取已被订阅用户属性变更事件的用户列表
+
+你可以调用 `fetchSubscribedUsers` 获取已被订阅用户属性变更事件的用户列表。该用户列表中包含被订阅的非好友用户的用户 ID 及其用户属性。
+
+```objectivec
+[[EMClient sharedClient].userInfoManager fetchSubscribedUsers:^(NSArray<EMUserInfo *> *users, EMError *error) {
+    if (!error) {
+        NSLog(@"已订阅用户属性变更的用户列表：%@", users);
+    } else {
+        NSLog(@"获取已订阅用户列表失败：%@", error.errorDescription);
+    }
+}];
+```
+
+### 内存说明
+
+如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地内存中的用户信息，并按业务需要决定是否重新 [拉取服务端数据](userprofile.html#获取用户的所有属性)。
+
+## 监听用户属性变更
+
+本节从当前用户、好友和非好友用户的角度介绍不同场景下的用户属性变更事件。
+
+#### 当前用户
+
+当前用户的属性发生变更时，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
+
+#### 好友用户
+
+- 若主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表)，且返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+- 若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动从服务端拉取并更新本地好友数据。好友属性发生变更时，SDK 会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。
+- 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+
+#### 非好友用户
+
+- 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+- 若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则在订阅成功后，当这些用户的属性发生变更时，SDK 会触发 [EMUserInfoManagerDelegate#onUserInfoUpdate](userinfo_provider.html#监听用户属性更新) 事件。
 
 ## 常见问题
 
@@ -145,14 +225,12 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 如果你的场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
 ```objectivec
-// 设置自定义消息的 `event` 为 `userCard` ，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
-EMCustomMessageBody *body = [[EMCustomMessageBody alloc] init];
-body.event = @"userCard";
+// 设置自定义消息的 `event` 为 `userCard`，并在 `customExt` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
 NSDictionary *messageExt = @{@"userId":EMClient.sharedClient.currentUsername,
                            @"nickname":@"nickname",
                            @"avatar":@"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png"
                         };
-body.ext = messageExt;
+EMCustomMessageBody *body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" customExt:messageExt];
 // 异步方法
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"conversationID"
                                                 from:@"sender"
@@ -163,7 +241,7 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];
 ```
 
-如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
+如果需要在名片中展示更丰富的信息，可以在 `customExt` 中增加更多字段。
 
 可参考 [GitHub](https://github.com/easemob/easemob-uikit-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios) 中示例项目中的以下类：
 

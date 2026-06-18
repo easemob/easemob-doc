@@ -1,7 +1,5 @@
 # 发送消息
 
-<Toc />
-
 环信即时通讯 IM iOS SDK 通过 `ChatManager` 类和 `EMChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送。
 
 - 对于单聊，环信即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。
@@ -52,11 +50,12 @@ message.chatType = EMChatTypeChatRoom;
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。  
-2. 发送方调用 `initWithLocalPath` 和 `initWithConversationID` 方法传入语音文件的 URI、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将文件上传至环信服务器。
+2. 发送方调用 `initWithLocalPath` 和 `initWithConversationID` 方法传入语音文件的 本地路径、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将文件上传至环信服务器。
 
 ```objectivec
 // `localPath` 为语音文件本地资源路径，`displayName` 为附件的显示名称。
 EMVoiceMessageBody *body = [[EMVoiceMessageBody alloc] initWithLocalPath:localPath displayName:displayName];
+body.duration = duration;// 语音时长。
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeGroupChat;
@@ -66,31 +65,37 @@ message.chatType = EMChatTypeGroupChat;
 
 ### 发送图片消息
 
-1. 发送方调用 `initWithData` 和 `initWithConversationID` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取图片的本地路径。
+
+2. 调用 `initWithLocalPath:displayName:` 和 `initWithConversationID` 创建图片消息。
+   
+   创建消息时，需要传入图片的本地路径、设置是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+  `isOriginalImage` 属性用于控制实际上传的图片资源：`YES` 表示 SDK 上传原图，`NO` 表示上传大图。
+
+3. 调用 `sendMessage` 方法发送消息。
+   
+   如果开启了 `EMOptions#isAutoTransferMessageAttachments`，SDK 会自动上传图片附件。服务器自动生成图片缩略图。
 
 ```objectivec
-// `imageData` 为图片本地资源，`displayName` 为附件的显示名称。
-EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:imageData displayName:displayName];
+// `localPath` 为图片本地资源路径，`displayName` 为附件的显示名称。
+EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithLocalPath:localPath displayName:displayName];
+// 是否发送原图。`YES` 表示上传原图，`NO` 表示上传大图，默认为 `NO`。
+body.isOriginalImage = NO;
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
-```
-
-```objectivec
-// 发送成功后，获取图片消息缩略图及附件。
-EMImageMessageBody *body = (EMImageMessageBody *)message.body;
-// 从服务器端获取图片文件。
-NSString *remotePath = body.remotePath;
-// 从服务器端获取图片缩略图。
-NSString *thumbnailPath = body.thumbnailRemotePath;
-// 从本地获取图片文件。
-NSString *localPath = body.localPath;
-// 从本地获取图片缩略图。
-NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 ```
 
 ### 发送 GIF 图片消息
@@ -106,14 +111,8 @@ NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 3. 调用 `ChatManager#sendMessage` 方法发送消息。
 
 ```objectivec
-//使用 EMImageMessageBody
-// imageData 为图片本地资源，displayName 为附件的显示名称。
-EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithData:imageData displayName:displayName];
-body.isGif = YES;
-
-// 使用 initWithGifFilePath:displayName
-EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithGifFilePath:@"localGifFilePath" displayName:displayName];
-
+// `localGifFilePath` 为 GIF 图片本地路径，`displayName` 为附件的显示名称。
+EMImageMessageBody *body = [[EMImageMessageBody alloc] initWithGifFilePath:localGifFilePath displayName:displayName];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
 
 // 发送消息。
@@ -122,9 +121,14 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUse
 
 ### 发送视频消息
 
-1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `initWithLocalPath` 方法传入视频文件的本地资源标志符、消息的显示名称和视频时长，构建视频消息体。然后，调用 `initWithConversationID` 方法传入会话 ID 和视频消息体，构建视频消息。最后，
-3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至环信消息服务器，自动将视频的首帧作为视频缩略图。
+发送视频消息前，需要先准备视频文件、本地缩略图路径和视频时长。其中，缩略图和时长主要用于消息展示。
+
+发送视频消息的流程如下：
+
+1. 在应用层完成视频文件的选取或录制，并准备视频文件的本地路径、视频时长和缩略图路径。
+2. 调用 `initWithLocalPath` 方法传入视频文件的本地路径、消息的显示名称和视频时长，构建视频消息体。然后，调用 `initWithConversationID` 方法传入会话 ID 和视频消息体，构建视频消息。
+3. 调用 `sendMessage` 方法发送消息。 
+   发送过程中，SDK 会将视频文件上传至环信消息服务器，自动将视频的首帧作为视频缩略图。上传完成后再发送消息。你可以结合消息状态或相关回调感知上传进度以及发送结果。
 
 ```objectivec
 // `localPath` 为本地资源路径，`displayName` 为视频的显示名称。
@@ -164,7 +168,6 @@ message.chatType = EMChatTypeGroupChat;
 // `latitude` 为纬度，`longitude` 为经度，`address` 为具体位置内容。
 EMLocationMessageBody *body = [[EMLocationMessageBody alloc] initWithLatitude:latitude longitude:longitude address:aAddress];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMChatTypeChat;
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeGroupChat;
 // 发送消息。
@@ -211,7 +214,6 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
 // event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`customExt` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
 EMCustomMessageBody* body = [[EMCustomMessageBody alloc] initWithEvent:@"userCard" customExt:@{@"uid":aUid ,@"nickname":aNickName,@"avatar":aUrl}];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-message.chatType = EMChatTypeChat;
 // 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
 message.chatType = EMChatTypeGroupChat;
 // 发送消息。
@@ -225,7 +227,7 @@ message.chatType = EMChatTypeGroupChat;
 1. 利用原始消息列表创建一条合并消息。
 2. 发送合并消息。
 
-你可以调用 `EMCombineMessageBody#initWithTitle:summary:compatibleText:messageList` 方法构造一条合并消息体，然后创建消息 `EMChatMessage` 并调用 `sendMessage` 方法发送该条消息。
+你可以调用 `EMCombineMessageBody#initWithTitle:summary:compatibleText:messageIdList` 方法构造一条合并消息体，然后创建消息 `EMChatMessage` 并调用 `sendMessage` 方法发送该条消息。
 
 创建合并消息体时，需要设置以下参数：
 

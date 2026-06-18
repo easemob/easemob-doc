@@ -54,11 +54,11 @@ EMClient.getInstance().init(context, options);
 SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，主要包括：
 - `EMUserInfoManagerListener#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
 - `EMUserInfoManagerListener#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。
+  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需要将 SDK 升级至 4.20.0 及以上版本，并开启用户信息自动管理。
   - 主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
-**建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。**
+**建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。** 关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 - 添加监听：
 
@@ -83,7 +83,9 @@ EMClient.getInstance().userInfoManager().addUserInfoManagerListener(new EMUserIn
 
 ## 通过消息获取发送方信息
 
-开启用户信息自动管理后，接收到的消息中会包含发送方相关信息。你可以通过 `EMMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
+对于 4.20.0，开启用户信息自动管理后，如果发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
+
+你可以通过 `EMMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
 
 ```java
 public void onMessageReceived(List<EMMessage> messages) {
@@ -109,7 +111,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 
 ## 从本地内存读取用户属性
 
-如需直接从本地内存读取用户属性，可调用 `EMUserInfoManager#getUserInfoWithUserIds`。该接口不会发起网络请求，适用于本地展示场景。
+如需直接从本地内存读取用户属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId`。该接口返回的是单个用户的 `EMUserInfo`。它适用于直接从本地缓存读取指定用户的资料，不会发起网络请求，因此可以作为好友列表读取能力之外的补充资料读取方式。
 
 ```java
 EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(

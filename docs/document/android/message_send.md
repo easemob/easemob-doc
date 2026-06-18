@@ -82,11 +82,27 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 发送图片消息
 
-1. 发送方调用 `EMMessage#createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `EMChatManager#sendMessage` 方法发送该消息。
+自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取图片的本地 URI。
+2. 调用 `EMMessage#createImageSendMessage` 创建图片消息。
    
+   创建消息时，需要传入图片的本地 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+   `sendOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+
+3. 调用 `EMChatManager#sendMessage` 发送消息。
+   
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+
 ```java
-// `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
+// `imageUri` 为图片本地资源标识符，`false` 为发送大图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
 EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
 // 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 // message.setChatType(ChatType.GroupChat);
@@ -98,7 +114,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 - 自 Android SDK 4.14.0 开始，支持发送 GIF 图片消息。
 - GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，**GIF 图片发送时不能压缩**。
-- 图片缩略图的生成与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
 发送 GIF 图片消息的过程如下：
 
@@ -116,9 +131,21 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 发送视频消息
 
-1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID） 创建视频消息。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `thumbPath` 方法。
-3. 发送方调用 `EMChatManager#sendMessage` 方法发送视频消息。SDK 会将视频文件上传至消息服务器。
+发送视频消息前，需要先准备视频文件、本地缩略图路径和视频时长。其中，缩略图和时长主要用于消息展示。
+
+发送视频消息的流程如下：
+
+1. 在应用层完成视频文件的选取或录制，并准备视频文件的本地 URI、视频时长和缩略图路径。
+
+2. 调用 `EMMessage#createVideoSendMessage` 创建视频消息。
+
+   创建消息时，需要传入视频文件的本地 URI、缩略图的本地路径、视频时长以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+   如果需要显示视频缩略图，你需要在应用层自行获取视频首帧，并将对应路径作为 `thumbPath` 参数传入。
+
+3. 调用 `EMChatManager#sendMessage` 发送消息。
+
+   发送过程中，SDK 会先上传视频附件，上传完成后再发送消息。你可以结合消息状态或相关回调感知上传进度以及发送结果。
 
 ```java
 // 在应用层获取视频首帧，你需要自己实现 getThumbPath 方法。
