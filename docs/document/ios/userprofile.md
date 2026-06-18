@@ -183,7 +183,7 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 当前用户的属性发生变更时，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
 
-#### 好友
+#### 好友用户
 
 - 若主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表)，且返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 - 若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动从服务端拉取并更新本地好友数据。好友属性发生变更时，SDK 会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。
