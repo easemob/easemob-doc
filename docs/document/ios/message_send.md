@@ -323,3 +323,83 @@ message.priority = EMChatRoomMessagePriorityHigh;
 
 各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
 
+### 发消息时设置回调路由
+
+回调路由允许你在同一个 App Key 下，将不同消息按回调环境维度分别投递到不同的回调地址。发送消息时，你可以在消息中携带回调环境字段（如 `dev`、`test`、`prod`），环信服务器收到消息后，根据该字段匹配控制台中配置的 [回调路由规则](/product/console/basic_webhook.html#配置消息回调规则)，并将当前消息回调至对应的 [发送前回调](/document/server-side/callback_presending.html) 或 [发送后回调](/document/server-side/callback_postsending.html) 地址。
+
+**适用场景**
+
+| 场景               | 说明                                                         |
+| :----------------- | :----------------------------------------------------------- |
+| 多环境隔离     | 同一 App Key 下区分开发、测试、生产环境，消息分别回调至各自的服务地址。 |
+| 灰度发布      | 部分消息回调至新链路验证，其余消息仍走旧链路。               |
+| 多业务线分流   | 不同业务模块的消息回调至各自的审核、风控或同步服务。         |
+| 降低发送前时延 | 避免消息先统一回调至一个入口，再由业务服务器二次转发。       |
+
+**适用范围**
+
+| 回调类型    | 生效范围       | 说明      |
+| :------------- | :------- | :---------------- |
+| [发送前回调](/document/server-side/callback_presending.html) | 仅对 **SDK 发送的消息** 生效（不支持群组/聊天室的定向消息）。 | 消息下发给目标用户前，你的服务器可判断是否拦截或修改消息内容。 |
+| [发送后回调](/document/server-side/callback_postsending.html) | 对 **SDK 和 REST API 发送的消息** 均生效。  | 消息成功发送后，通知你的服务器。   |
+
+**工作流程**
+
+1. 在控制台为发送前回调或发送后回调 [配置回调路由](/product/console/basic_webhook.html#配置消息回调规则)。
+2. 客户端发送消息时，设置回调环境值。
+3. 环信服务器收到消息后，根据消息中的回调环境值匹配当前阶段的回调地址。
+4. 命中有效路由后，服务器将回调请求发送到对应地址。
+
+**示例代码**
+
+发消息时你可以调用 `webhookEnv` 设置回调环境。
+
+关于 `webhookEnv`，建议遵循以下规则：
+
+| 参数 |类型 | 是否必需 | 说明 |
+| :--- | :--- |  :--- | :--- |
+| `webhookEnv` | String |否 | 回调环境值。回调环境仅支持字母和数字，长度不超过 8 个字符。服务器根据该值匹配控制台中的回调路由。建议与控制台中配置的回调环境保持一致，例如 `dev`、`test`、`prod`。 |
+
+```swift
+func sendTextMessage(to userId: String, text: String, webhookEnv: String?) {
+      // 创建文本消息体
+      let body = EMTextMessageBody(text: text)
+
+      // 设置回调环境字段。
+      // 建议与控制台中配置的回调环境保持一致，例如 dev、test、prod。
+
+      // 创建消息
+      let message = EMChatMessage(
+          conversationID: userId,
+          body: body,
+          ext: ext
+      )
+
+      // 单聊；群聊/聊天室时改为 .groupChat 或 .chatRoom
+      message.chatType = .chat
+
+      message.webhookEnv = "dev"
+      // 发送消息
+      EMClient.shared().chatManager?.sendMessage(
+          message,
+          progress: nil
+      ) { sentMessage, error in
+          if let error = error {
+              print("发送失败: \(error.errorDescription ?? "")")
+              return
+          }
+
+          print("发送成功, messageId: \(sentMessage?.messageId ?? "")")
+      }
+  }
+```
+
+**消息中的回调环境字段命中规则**
+
+| 场景                                     | 路由结果                                                     |
+| :--------------------------------------- | :----------------------------------------------------------- |
+| 携带环境值且命中有效路由           | 按该环境值路由至对应的回调地址。                             |
+| 携带环境值但未命中有效路由           | **不触发回调**，控制台中的 `default` 兜底配置在此场景下 **不生效**。 |
+| 未携带环境值                         | 自动路由至 `default` 环境对应的回调地址。                    |
+| 同一消息需同时触发发送前与发送后回调 | 两个阶段必须使用 **相同的环境值**。例如，发送前配置 `test -> url1`，发送后配置 `test -> url2`，则消息中携带 `test` 即可同时生效于两阶段。 |
+
