@@ -17,7 +17,7 @@
 
 #### 优化
 
-- 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 `initWithLocalPath:displayName:` 替代。
+- 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 [initWithLocalPath:displayName:](message_send.html#发送图片消息) 替代。
 - 废弃初始化联系人对象的方法 `EMContact#initWithUserId:remark:`，使用 `EMContact#initWithUserId:remark:createAt:` 替代。
 
 ## v4.21.0 Dev 2026-4-28（开发版）
