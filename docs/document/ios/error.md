@@ -54,6 +54,11 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 303    |      EMErrorServerUnknownError      | 服务请求的通用错误码：当请求服务器未成功时的默认错误，该错误发生情况较多，需要根据日志进一步排查。 | 提供日志以及调用的 API，进一步排查。 |
 | 304    |   EMErrorServerGetDNSConfigFailed   | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 | 如果设置了 `EMOptions#enableDnsConfig` 为`No`，可能是没设置访问的 IM/REST 服务器导致，否则一般为登录时的网络问题，导致请求 dnsConfig 失败。 |
 | 305    |    EMErrorServerServingForbidden    | 当前 app 被禁用：app 因为某种原因被禁用。   | app 或账号的 IM 功能被禁用，需要到环信控制台开启或联系商务。 |
+| 350    | EMErrorConnectionTimeout     | 连接服务器超时。 |  |
+| 351    | EMErrorConnectionDNSError     | 连接服务器时发生 DNS 错误。 |  |
+| 352    | EMErrorConnectionIOError     | 连接服务器时发生 IO 错误。 |  |
+| 353    | EMError#CONNECTION_STREAM_CLOSED  | 连接服务器时流被关闭。 |  |
+| 354    | EMErrorConnectionProvisionTimeout  | 连接服务器时认证超时。 |  |
 | 400    |         EMErrorFileNotFound         | 文件未找到：例如，用户获取不到日志文件，或者下载附件失败时提示该错误。 | 如果是获取日志文件的接口，可尝试重新获取；如果是下载附件接口，表示消息的附件已不存在，不能再下载。 |
 | 401    |         EMErrorFileInvalid          | 文件异常：例如，当上传消息附件或者群组共享文件时可能会提示该错误。 | 需要用户重新选择附件文件，并调用相关 API 上传文件。 |
 | 402    |       EMErrorFileUploadFailed       | 上传文件错误：例如，上传消息附件失败时提示该错误。  | 需要结合调用的 API 和日志进一步分析。 |
