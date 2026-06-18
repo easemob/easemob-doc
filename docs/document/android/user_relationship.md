@@ -278,6 +278,8 @@ boolean enableAutoSyncContacts = options.isEnableAutoSyncContacts();
 - `onContactSyncFinishWithError(int errorCode, String error)`：好友列表及好友信息同步完成时触发。若同步失败，可通过 `errorCode` 和 `error` 获取失败原因。
 - `onContactInfoUpdate(EMContact contact)`：好友信息发生变更时触发。你可以通过 `contact` 获取更新后的好友信息。
 
+关于不同场景下好友的用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```java
 EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
     @Override
