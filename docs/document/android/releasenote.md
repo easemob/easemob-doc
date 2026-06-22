@@ -1,5 +1,27 @@
 # Android IM SDK 更新日志
 
+## v4.23.0 Dev 2026-6-18（开发版）
+
+####  新增功能
+
+支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。
+
+#### 优化
+
+- 新增 [登录失败相关错误码](error.html)：
+  - `350`：`EMError#CONNECTION_TIMEOUT`：连接服务器超时。
+  - `351`：`EMError#CONNECTION_DNS_ERROR`：连接服务器时发生 DNS 错误。
+  - `352`：`EMError#CONNECTION_IO_ERROR`：连接服务器时发生 IO 错误。
+  - `353`：`EMError#CONNECTION_STREAM_CLOSED`：连接服务器时流被关闭。
+  - `354`：`EMError#CONNECTION_PROVISION_TIMEOUT`：连接服务器时认证超时。
+- 优化 `EMClient#changeAppkey` 和 `EMClient#changeAppId` 的参数校验逻辑，新增空值校验。
+
+#### 修复
+
+- 修复合并转发消息偶现附件下载失败的问题。
+- 修复客户端无法解析 DoH 配置信息的问题。
+- 修复发送图片或视频消息时，因平台层图片拷贝失败导致消息发送失败后，消息状态未从 `inprogress` 更新为 `fail` 的问题。
+
 ## v4.22.0 Dev 2026-6-17（开发版）
 
 #### 新增特性
