@@ -53,11 +53,11 @@ Android 中错误码的类为 [EMError](https://sdkdocs.easemob.com/apidoc/andro
 | 303    |      SERVER_UNKNOWN_ERROR       | 服务请求的通用错误码：当请求服务器未成功时的默认错误，该错误发生情况较多，需要根据日志进一步排查。 | 提供日志以及调用的 API，进一步排查。 |
 | 304    |    SERVER_GET_DNSLIST_FAILED    | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 | 如果设置了 `EMOptions#enableDNSConfig` 为 `false`，可能是没设置访问的 IM/REST 服务器导致，否则一般为登录时的网络问题，导致请求 dnsConfig 失败。 |
 | 305    |    SERVER_SERVICE_RESTRICTED    | 当前 app 被禁用：若在 app 被禁用时调用 API 会返回该错误。 | app 或账号的 IM 功能被禁用，需要到环信控制台开启或联系商务。 |
-| 350    | CONNECTION_TIMEOUT     | 连接服务器超时。 |  |
-| 351    | CONNECTION_DNS_ERROR     | 连接服务器时发生 DNS 错误。 |  |
-| 352    | CONNECTION_IO_ERROR     | 连接服务器时发生 IO 错误。 |  |
-| 353    | CONNECTION_STREAM_CLOSED     | 连接服务器时流被关闭。 |  |
-| 354    | CONNECTION_PROVISION_TIMEOUT     | 连接服务器时认证超时。 |  |
+| 350    | CONNECTION_TIMEOUT     | 连接服务器超时。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。  |
+| 351    | CONNECTION_DNS_ERROR     | 连接服务器时发生 DNS 错误。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。  |
+| 352    | CONNECTION_IO_ERROR     | 连接服务器时发生 IO 错误。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。  |
+| 353    | CONNECTION_STREAM_CLOSED     | 连接服务器时流被关闭。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
+| 354    | CONNECTION_PROVISION_TIMEOUT     | 连接服务器时认证超时。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
 | 400    |         FILE_NOT_FOUND          | 文件未找到：例如，用户获取不到日志文件，或者下载附件失败时提示该错误。 | 如果是获取日志文件的接口，可尝试重新获取；如果是下载附件接口，表示消息的附件已不存在，不能再下载。 |
 | 401    |          FILE_INVALID           | 文件异常：例如，当上传消息附件或者群组共享文件时可能会提示该错误。 | 需要用户重新选择附件文件，并调用相关 API 上传文件。 |
 | 402    |       FILE_UPLOAD_FAILED        | 上传文件错误：例如，上传消息附件失败时提示该错误。  | 需要结合调用的 API 和日志进一步分析。 |
