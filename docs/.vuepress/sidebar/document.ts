@@ -845,57 +845,86 @@ const documentSidebar = [
   },
   { text: '错误码', link: 'error.html', only: ['server-side']},
   {
-    text: '设置回调',
+    text: '回调',
     collapsible: true,
     children: [
       { text: '回调概述', link: 'callback_overview.html' },
       { text: '发送前回调', link: 'callback_presending.html' },
       { text: '发送后回调', link: 'callback_postsending.html' },
-      { text: '回调异常缓存', link: 'callback_postsending_exception_storage.html' },
-      { text: '发送后回调事件',
+      { text: '回调事件',
         collapsible: true,
         children: [
-          { text: '用户登入/登出', link: 'callback_login_logout.html' },
-          { text: '发送消息', link: 'callback_message_send.html' },
-          { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
-          { text: '发送群聊消息已读回执', link: 'callback_group_read_ack.html' },
-          { text: '发送会话已读回执', link: 'callback_single_conversation_ack.html' },
-          { text: '修改消息', link: 'callback_message_modify.html' },
-          { text: '撤回消息', link: 'callback_message_recall.html' },
-          { text: '群组/聊天室操作（新）', 
-            collapsible: true,
-            children: [
-              { text: '创建群组/聊天室', link: 'callback_group_room_create.html' },
-              { text: '更新群组/聊天室',
+          { text: '在线状态相关回调', link: 'callback_login_logout.html' },
+          { text: '用户关系相关回调', link: 'callback_contact.html' },
+          { text: '消息相关回调',
                 collapsible: true,
                 children: [
-                  { text: '更新群组_聊天室信息', link: 'callback_group_room_info.html' },
-                  { text: '变更群主/聊天室所有者', link: 'callback_group_room_owner.html' },
-                  { text: '设置/更新公告', link: 'callback_group_room_announcement.html' },
-                  { text: '封禁/解禁群组', link: 'callback_group_ban.html' },
-                  { text: '全员禁言', link: 'callback_group_room_muteall.html' }
+                  { text: '消息发送', link: 'callback_message_send.html' },
+                  { text: '单聊消息已读回执', link: 'callback_single_read_ack.html' },
+                  { text: '群聊消息已读回执', link: 'callback_group_read_ack.html' },
+                  { text: '消息编辑', link: 'callback_message_modify.html' },
+                  { text: '消息撤回', link: 'callback_message_recall.html' },
+                  { text: '表情回复变更', link: 'callback_reaction.html' },
+                ]
+         },
+          { text: '会话相关回调',
+                collapsible: true,
+                children: [
+                  { text: '会话已读回执', link: 'callback_single_conversation_ack.html' }
+                ]
+          },
+          { text: '群组/聊天室相关回调', 
+            collapsible: true,
+            children: [
+              {
+                text: '创建与解散',
+                collapsible: true,
+                children: [
+                  { text: '群组/聊天室创建', link: 'callback_group_room_create.html' },
+                  { text: '群组/聊天室解散', link: 'callback_group_room_delete.html' }
+               ]
+             },
+              { text: '信息与状态变更',
+                collapsible: true,
+                children: [
+                  { text: '群组/聊天室信息变更', link: 'callback_group_room_info.html' },
+                  { text: '群主/聊天室所有者变更', link: 'callback_group_room_owner.html' },
+                  { text: '公告变更', link: 'callback_group_room_announcement.html' },
+                  { text: '群共享文件变更', link: 'callback_group_shared_file.html' },
+                  { text: '群组封禁状态变更', link: 'callback_group_ban.html' },
+                  { text: '全员禁言状态变更', link: 'callback_group_room_muteall.html' },
+                  { text: '群组屏蔽状态变更', link: 'callback_group_block.html' },
                 ]
               },
-              { text: '删除群组/聊天室', link: 'callback_group_room_delete.html' },
-              { text: '屏蔽/解除屏蔽群组', link: 'callback_group_block.html' },
-              { text: '上传/删除群共享文件', link: 'callback_group_shared_file.html' },
-              { text: '用户加入', link: 'callback_group_room_join.html' },
-              { text: '成员离开', link: 'callback_group_room_leave.html' },
-              { text: '添加/移除管理员', link: 'callback_group_room_admin.html' },
-              { text: '加入/移出禁言列表', link: 'callback_group_room_mute.html' },
-              { text: '添加/移出白名单', link: 'callback_group_room_allowlist.html' },
-              { text: '加入/移出黑名单', link: 'callback_group_room_blocklist.html' },
-              { text: '添加/移除聊天室超级管理员', link: 'callback_room_superadmin.html' }
+              {
+                text: '成员与权限变更',
+                collapsible: true,
+                children: [
+                  { text: '用户加入', link: 'callback_group_room_join.html' },
+                  { text: '成员离开', link: 'callback_group_room_leave.html' },
+                  { text: '管理员变更', link: 'callback_group_room_admin.html' },
+                  { text: '禁言列表变更', link: 'callback_group_room_mute.html' },
+                  { text: '白名单变更', link: 'callback_group_room_allowlist.html' },
+                  { text: '黑名单变更', link: 'callback_group_room_blocklist.html' },
+                  { text: '聊天室超级管理员变更', link: 'callback_room_superadmin.html' }
+               ]
+             },
+             {
+              text: '内容与资源操作',
+              collapsible: true,
+              children: [
+                { text: '群共享文件变更', link: 'callback_group_shared_file.html' },
+                { text: '话题内消息操作', link: 'callback_thread.html' }
+              ]
+            },
+            { text: '历史版本', link: 'callback_group_room_old.html' }, 
             ]
           },
-          { text: '群组/聊天室操作（旧）', link: 'callback_group_room_old.html' },
-          { text: '用户关系操作', link: 'callback_contact.html' },
-          { text: '离线推送', link: 'callback_offline_push.html' },
-          { text: 'Reaction', link: 'callback_reaction.html' },
-          { text: 'Thread', link: 'callback_thread.html' },
-          { text: '敏感词监测', link: 'callback_sensitive_word.html' }
+          { text: '离线推送相关回调', link: 'callback_offline_push.html' },
+          { text: '敏感词相关回调', link: 'callback_sensitive_word.html' }
         ]
-      }
+      },
+      { text: '回调异常处理', link: 'callback_postsending_exception_storage.html' }
     ],
     only: ['server-side']
   },
