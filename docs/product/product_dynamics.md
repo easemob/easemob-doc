@@ -6,8 +6,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/>       |
-| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-18-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-18-开发版) |
+| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](/document/android/error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/>       |
+| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-18-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-18-开发版) |
 
 #### 服务端支持发消息时设置回调路由
 
