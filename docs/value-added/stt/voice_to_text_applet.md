@@ -101,6 +101,7 @@ try {
 - SDK 会从 `messageBody.url` 中提取 `fileId`；如果 URL 无法解析出有效文件 ID，会返回 `407 FILE_INVALID`。
 - 当前实现不会把识别结果回写到原始消息体中；如需展示文本，请自行使用 `res.data.text`。
 - 该接口为异步接口，结果通过 `Promise` 返回，而不是通过回调返回。
+- 当前语音消息转文字仅支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
 - 如需转换 PCM 音频，请使用 [本地语音文件转文字接口](#将本地语音文件转换为文本)，并传入对应的 `AudioParams`。
 
 ## 将本地语音文件转换为文本
@@ -130,14 +131,15 @@ console.log("voiceFileToText success:", res.data?.text);
 
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `file` | `VoiceSourceFile` | 是 | 本地文件路径对象。 |
-| `audioParams` | `AudioParams` | 否 | 语音参数。PCM 文件缺少头信息，必须传入该参数。 |
+| `file` | `VoiceSourceFile` | 是 | 浏览器中的 `File` 对象。 |
+| `audioParams` | `AudioParams` | 否 | 语音参数。PCM 文件缺少头信息，必须传入该参数。对于 `MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 文件，可传 `null`。  |
 
 ## 配置语音文件识别的语音参数
 
 `AudioParams` 用于描述语音文件的基础属性，包括格式、采样率、位深和声道数，有助于准确地解析语音内容。
 
 - PCM 文件缺少头信息，必须传入 `audioParams`。
+- 对于 `MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 文件，通常无需显式配置该对象。
 - 对于格式信息完整的文件，通常可不传，或仅在需要时补充。
 - 如果 `audioParams` 与真实语音内容不匹配，可能导致识别失败或结果异常。
 
@@ -154,7 +156,7 @@ const audioParams = {
 
 | 成员 | 说明 |
 | :--- | :--- |
-| `format` | 音频格式，例如 `pcm`、`mp3`、`amr`。 |
+| `format` | 音频格式，例如 `pcm`、`mp3`、`amr`、`wav`、`m4a` 和 `aac`。 |
 | `sampleRate` | 采样率，单位为 Hz，例如 `8000`、`16000`。 |
 | `bitsPerSample` | 位深，单位为 bit，例如 `16`。 |
 | `channels` | 声道数，例如 `1` 表示单声道，`2` 表示双声道。 |
