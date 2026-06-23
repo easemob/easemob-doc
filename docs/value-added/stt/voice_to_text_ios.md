@@ -95,7 +95,7 @@ EMChatMessage *voiceMessage = ...;
 
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMChatMessage` 必须是语音消息，否则会返回 `EMErrorMessageInvalid`。你可以通过判断 `message.body.type == EMMessageBodyTypeVoice` 确认消息体类型。
-- 当前语音消息转文字仅支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
+- 当前语音消息转文字支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
 - 如需转换 PCM 音频，请使用本地语音文件转文字接口 `IEMChatManager#voiceFileToText:voiceParam:completion:`，并传入对应的 `EMVoiceParam`。
 - 转换成功后，可通过 `EMVoiceMessageBody.text` 读取持久化的文本结果。
 
@@ -155,9 +155,9 @@ voiceParam.channels = 1;
 
 | 成员 | 说明 |
 | :--- | :--- |
-| `EMVoiceFormat` | 语音格式枚举。当前支持 `EMVoiceFormatPCM`、`EMVoiceFormatMP3`、`EMVoiceFormatAMR`、`EMVoiceFormatWAV`、`EMVoiceFormatM4A` 和 `EMVoiceFormatAAC`。 |
+| `EMVoiceFormat` | 语音格式枚举。仅支持配置 `EMVoiceFormatPCM`、`EMVoiceFormatMP3` 和 `EMVoiceFormatAMR`。对于 `WAV`、`M4A` 和 `AAC` 格式的文件，服务端会进行解析和处理，SDK 仅做透传，不支持通过 `EMVoiceParam` 配置格式参数，传入 `nil` 即可。 |
 | `format` | 语音文件格式。 |
-| `sampleRate` | 采样率，单位为 Hz，例如 `8000` 或 `16000`。 |
+| `sampleRate` | 采样率，单位为 Hz，建议设置为 `8000` 或 `16000`。 |
 | `bitsPerSample` | 采样位深，单位为 bit，例如 `16`。 |
 | `channels` | 声道数，例如 `1` 表示单声道。 |
 
@@ -231,3 +231,7 @@ if (message.body.type == EMMessageBodyTypeVoice) {
 - 未传入 `EMVoiceParam`；
 - `sampleRate`、`bitsPerSample` 或 `channels` 与原始语音不匹配；
 - 实际文件并非 `PCM` 原始流格式。
+
+4. 为什么 `EMVoiceParam.EMVoiceFormat` 不支持 WAV/M4A/AAC 格式，语音转文字功能却支持这些格式？
+
+`WAV`、`M4A` 和 `AAC` 格式由服务端直接识别和处理，iOS SDK 仅负责将文件数据透传至服务端，不进行本地解析或参数校验。因此，在调用 `voiceFileToText:voiceParam:completion:` 时，对于这些格式的文件，`voiceParam` 参数传 `nil` 即可。

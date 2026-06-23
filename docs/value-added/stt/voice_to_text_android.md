@@ -97,7 +97,7 @@ EMClient.getInstance().chatManager().voiceMessageToText(voiceMessage, new EMValu
 
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMMessage` 必须是语音消息，否则会返回 `EMError#MESSAGE_INVALID`。你可以通过 `EMMessage#getType` 判断消息类型。
-- 当前语音消息转文字仅支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
+- 当前语音消息转文字支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
 - 如需转换 `PCM` 音频，请使用本地语音文件转文字接口 `EMChatManager#voiceFileToText`，并传入对应的 `EMAudioParams`。
 - 转换成功后，可通过 `EMVoiceMessageBody#getText` 读取持久化的文本结果。
 
@@ -159,9 +159,9 @@ audioParams.setChannels(1);
 
 | 成员                                      | 说明                           |
 | :-------------- | :----- |
-| `EMAudioParams.AudioFormat`             | 语音格式。当前支持 `PCM`、`MP3`、`AMR`、`WAV`、`M4A` 和 `AAC`。 |
+| `EMAudioParams.AudioFormat`             | 语音格式。仅支持配置 `PCM`、`MP3` 和 `AMR` 格式。对于 `WAV`、`M4A` 和 `AAC` 格式的文件，服务端会进行解析和处理，SDK 仅做透传，不支持通过 `EMAudioParams` 配置格式参数，传入 `null` 即可。 |
 | `getFormat/setFormat`               | 获取/设置语音文件格式。                 |
-| `getSampleRate/setSampleRate`       | 获取/设置采样率，单位为 Hz，例如，`8000` 或 `16000`。             |
+| `getSampleRate/setSampleRate`       | 获取/设置采样率，单位为 Hz，建议设置为 `8000` 或 `16000`。             |
 | `getBitsPerSample/setBitsPerSample` | 获取/置采样位深，单位为 bit，例如，`16`。           |
 | `getChannels/setChannels`           | 获取/设置声道数，例如，`1` 表示单声道。       |
 
@@ -234,3 +234,7 @@ if (message.getType() == EMMessage.Type.VOICE) {
 - 未传入 `EMAudioParams`；
 - `sampleRate`、`bitsPerSample` 或 `channels` 与原始语音不匹配；
 - 实际文件并非 `PCM` 原始流格式。
+
+4. 为什么 `EMAudioParams.AudioFormat` 不支持 WAV/M4A/AAC 格式，语音转文字功能却支持这些格式？
+
+`WAV`、`M4A` 和 `AAC` 格式由服务端直接识别和处理，Android SDK 仅负责将文件数据透传至服务端，不进行本地解析或参数校验。因此，在调用 `voiceFileToText` 时，对于这些格式的文件，`audioParams` 参数传 `null` 即可。

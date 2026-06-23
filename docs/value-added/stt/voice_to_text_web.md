@@ -101,7 +101,7 @@ try {
 - SDK 会从 `messageBody.url` 中提取 `fileId`；如果 URL 无法解析出有效文件 ID，会返回 `407 FILE_INVALID`。
 - 当前实现不会把识别结果回写到原始消息体中；如需展示文本，请自行使用 `res.data.text`。
 - 该接口为异步接口，结果通过 `Promise` 返回，而不是通过回调返回。
-- 当前语音消息转文字仅支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
+- 当前语音消息转文字支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
 - 如需转换 PCM 音频，请使用 [本地语音文件转文字接口](#将本地语音文件转换为文本)，并传入对应的 `AudioParams`。
 
 ## 将本地语音文件转换为文本
@@ -164,8 +164,8 @@ const audioParams = {
 
 | 成员 | 说明 |
 | :--- | :--- |
-| `format` | 音频格式，例如 `pcm`、`mp3`、`amr`、`wav`、`m4a` 和 `aac`。 |
-| `sampleRate` | 采样率，单位为 Hz，例如 `8000`、`16000`。 |
+| `format` | 语音格式。仅支持配置 `pcm`、`mp3` 和 `amr` 格式。对于 `WAV`、`M4A` 和 `AAC` 格式的文件，服务端会进行解析和处理，SDK 仅做透传，不支持通过 `AudioParams` 配置格式参数，传入 `null` 即可。 |
+| `sampleRate` | 采样率，单位为 Hz，建议设置为 `8000` 或 `16000`。 |
 | `bitsPerSample` | 位深，单位为 bit，例如 `16`。 |
 | `channels` | 声道数，例如 `1` 表示单声道，`2` 表示双声道。 |
 
@@ -236,3 +236,7 @@ try {
 - 上传文件字段缺失。
 
 其中，服务端对多个场景复用了同一个错误码 `4001001`。SDK 仅在错误信息包含 `uploaded file exceeds` 时映射为 `411 FILE_TOO_LARGE`，其他场景会映射为 `-3 REQUEST_PARAMETER_ERROR`。
+
+4. 为什么 `AudioParams.format` 不支持 WAV/M4A/AAC 格式，语音转文字功能却支持这些格式？
+
+`WAV`、`M4A` 和 `AAC` 格式由服务端直接识别和处理，小程序 SDK 仅负责将文件数据透传至服务端，不进行本地解析或参数校验。因此，在调用 `voiceFileToText` 时，对于这些格式的文件，`audioParams` 参数传 `null` 即可。
