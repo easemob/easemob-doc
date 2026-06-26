@@ -6,8 +6,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](/document/android/error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/>       |
-| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-18-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-18-开发版) |
+| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](/document/android/error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-10-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-10-开发版) <br/>       |
+| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-10-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-10-开发版) |
 
 #### 服务端支持发消息时设置回调路由
 
@@ -19,8 +19,8 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.22.0 开发版发布   | - 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/android/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/android/message_send.html#发送图片消息)。<br/> - [支持登录成功后自动同步好友列表及好友信息](/document/android/user_relationship.html#开启自动同步) <br/> - 支持 [订阅非好友用户的属性变更功能](/document/android/userprofile.html#订阅非好友用户的属性变更)。<br/> - 新增同步数据 WebSocket 服务地址和端口配置接口。 | 2026-6-17     | - [Android SDK 4.22.0 更新日志](/document/android/releasenote.html#v4-22-0-dev-2026-6-17-开发版) <br/> - [iOS SDK 4.22.0 更新日志](/document/ios/releasenote.html#v4-22-0-dev-2026-6-17-开发版) <br/>       |
-| Web/小程序 SDK 4.22.0 开发版发布   | 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/web/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/web/message_send.html#发送图片消息)。  | 2026-6-17     | - [Web SDK 4.22.0 更新日志](/document/web/releasenote.html#v4-22-0-dev-2026-6-17-开发版)<br/> - [小程序 SDK 4.22.0 更新日志](/document/applet/releasenote.html#v4-22-0-dev-2026-6-17-开发版) |
+| Android/iOS SDK 4.22.0 开发版发布   | - 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/android/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/android/message_send.html#发送图片消息)。<br/> - [支持登录成功后自动同步好友列表及好友信息](/document/android/user_relationship.html#开启自动同步) <br/> - 支持 [订阅非好友用户的属性变更功能](/document/android/userprofile.html#订阅非好友用户的属性变更)。<br/> - 新增同步数据 WebSocket 服务地址和端口配置接口。 | 2026-6-17     | - [Android SDK 4.22.0 更新日志](/document/android/releasenote.html#v4-22-0-dev-2026-6-5-开发版) <br/> - [iOS SDK 4.22.0 更新日志](/document/ios/releasenote.html#v4-22-0-dev-2026-6-5-开发版) <br/>       |
+| Web/小程序 SDK 4.22.0 开发版发布   | 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/web/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/web/message_send.html#发送图片消息)。  | 2026-6-17     | - [Web SDK 4.22.0 更新日志](/document/web/releasenote.html#v4-22-0-dev-2026-6-5-开发版)<br/> - [小程序 SDK 4.22.0 更新日志](/document/applet/releasenote.html#v4-22-0-dev-2026-6-5-开发版) |
 
 #### 即时推送计费变更
 
