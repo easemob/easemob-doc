@@ -148,7 +148,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
 ## 常见问题
 
-#### 何时设置开启用户信息自动管理？
+#### 何时开启用户信息自动管理？
 
 必须在调用 `EMClient.getInstance().init(context, options)` 初始化 SDK 之前调用 `EMOptions#setEnableUserInfo(true)`。若在 SDK 初始化完成后再设置，用户信息自动管理功能不会生效。
 

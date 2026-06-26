@@ -1,7 +1,5 @@
 # 管理用户属性
 
-<Toc />
-
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
 
 例如，在招聘场景下，利用用户属性功能可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。查看用户信息时，可以直接查询服务器存储的用户属性信息。
@@ -26,15 +24,17 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 使用限制
 
-本节介绍如何在项目中设置及获取用户属性。
+- 单个用户的全部属性最大不超过 2 KB。
+- 单个 app 的全部用户属性数据最大不超过 10 GB。
+- 调用设置或获取用户属性的相关接口超过频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
-实现过程中注意单个用户的所有属性最大不超过 2 KB，单个 app 所有用户属性数据最大不超过 10 GB。
+## 设置当前用户的属性
 
 ### 设置当前用户的所有属性
 
-当前用户设置自己的所有属性：
+当前用户设置自己的所有属性，传入完整 `UserInfo` 对象：
 
 ```typescript
 let userInfo: UserInfo = {
@@ -54,7 +54,7 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 });
 ```
 
-关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/user_attribute_set.html)或[删除用户属性](/document/server-side/user_attribute_delete.html)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
+客户端默认使用以下键名存储用户属性。[调用 RESTful 接口设置](/document/server-side/user_attribute_set.html) 或 [删除用户属性](/document/server-side/user_attribute_delete.html) 时，若希望客户端可正常读取，请保持键名一致。
 
 | 字段        | 类型   | 描述    |
 | :---------- | :----- | :------- |
@@ -69,7 +69,7 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 
 ### 设置当前用户的单个属性
 
-例如，修改当前用户的头像：
+你可以调用 `updateUserInfo` 设置当前用户的单个属性，按单个 `UserInfoType` 字段更新。例如，修改头像：
 
 ```typescript
 let userInfo: UserInfo = {
@@ -82,16 +82,16 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 });
 ```
 
-
+## 获取用户属性
 
 ### 获取用户的所有属性
 
-用户可以从服务端获取指定一个或多个用户的全部用户属性。
+你可以调用 `fetchUserInfoById` 从服务端获取指定一个或多个用户的全部用户属性。该接口返回 `Promise<Map<string, UserInfo>>`。
 
-示例代码如下：
+自 v1.13.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `UserInfoListener#onUserInfoUpdate` 事件。
 
 ```typescript
-// 获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
+// 每次传入的用户 ID 数量不超过 100 个。
 let userIds = new Array<string>();
 userIds.push(this.userId);
 ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds).then(result => {
@@ -103,7 +103,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds).then(resu
 
 ###  获取用户的指定属性
 
-用户可以获取单个用户的单个或多个用户属性。
+你可以调用 `fetchUserInfoById` 获取指定用户的一个或多个属性。自 v1.13.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `UserInfoListener#onUserInfoUpdate` 事件。
 
 ```typescript
 let userIds = new Array<string>();
@@ -117,6 +117,21 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
   // failure logic
 });
 ```
+
+## 监听用户属性变更
+
+自 v1.13.0，你可以监听用户属性变更。
+
+当前用户、好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `UserInfoListener#onUserInfoUpdate` 事件：
+
+1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
+2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
+3. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
+
+**特殊说明**
+
+- **当前用户**：当前用户的属性变更，通过 `UserInfoListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
+- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `ContactListener#onContactInfoUpdate(contact: Contact)` 事件。此事件为好友关系特有，与 `UserInfoListener#onUserInfoUpdate` 区分。
 
 ## 相关功能
 
