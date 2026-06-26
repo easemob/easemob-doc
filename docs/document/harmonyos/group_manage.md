@@ -324,6 +324,9 @@ let groupListener: GroupListener = {
   onAnnouncementChanged: (groupId: string, announcement: string): void => {
     // 群组公告更新。群组所有成员会收到该回调。
   },
+  onUserGroupNamecardUpdated: (groupId: string, userId: string, namecard: string): void => {
+    // 群成员名片更新。群成员名片发生变更并同步到本地内存后会触发该回调。群内其他在线成员收到该回调。
+  },  
   onSharedFileAdded: (groupId: string, sharedFile: SharedFile): void => {
     // 有成员新上传群组共享文件。群组所有成员会收到该回调。
   },
