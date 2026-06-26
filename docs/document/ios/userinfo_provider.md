@@ -16,7 +16,7 @@
 2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间。
 3. 接收方收到消息后，SDK 会解析消息中的发送方信息及更新时间。
 4. SDK 会将消息中的更新时间与本地内存中的时间戳进行比较。
-5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
+5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
 6. 拉取成功后，SDK 会自动更新本地内存。
 7. 本地内存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
 
@@ -54,7 +54,7 @@ SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户属性更新事件，
 - `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
 - `EMUserInfoManagerDelegate#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
   - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需要将 SDK 升级至 4.20.0 及以上版本，并开启用户信息自动管理。
-  - 主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性)。
+  - 主动 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。** 关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
@@ -121,7 +121,7 @@ if let userInfoMap = result {
 ```
 
 :::tip
-该接口仅返回本地内存的数据。如需主动从服务端获取最新用户属性，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#获取用户的所有属性)。
+该接口仅返回本地内存的数据。如需主动从服务端获取最新用户属性，请调用 `EMUserInfoManager#fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
 :::
 
 ## 注意事项
@@ -152,7 +152,7 @@ if let userInfoMap = result {
 
 #### 本地读取和服务端获取有何区别？
 
-`EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#获取用户的所有属性) 主动获取。
+`EMUserInfoManager#getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#从服务端获取用户的所有属性) 主动获取。
 
 #### 功能开启后需自己维护内存吗？
 

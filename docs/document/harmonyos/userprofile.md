@@ -122,9 +122,9 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
 
 自 v1.13.0，你可以监听用户属性变更。
 
-当前用户、好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `UserInfoListener#onUserInfoUpdate` 事件：
+好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `UserInfoListener#onUserInfoUpdate` 事件：
 
-1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
+1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
 2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
@@ -148,7 +148,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
 
 Q：我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
 
-A：你可以调用 [客户端](#设置当前用户的所有属性) 或 [RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如，调用 `updateUserInfo`，然后通过 [客户端](#获取用户的所有属性) 或 [RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 SDK 为 `fetchUserInfoById`。
+A：你可以调用 [客户端](#设置当前用户的所有属性) 或 [RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如，调用 `updateUserInfo`，然后通过 [客户端](#从服务端获取用户的所有属性) 或 [RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 SDK 为 `fetchUserInfoById`。
 
 设置用户昵称时，请注意以下：
 
