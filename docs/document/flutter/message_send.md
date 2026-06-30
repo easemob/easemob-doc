@@ -57,9 +57,11 @@ final voiceMsg = EMMessage.createVoiceSendMessage(
   targetId: targetId,
   filePath: filePath,
   duration: 30,
+  // 语音文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
-EMClient.getInstance.chatManager.sendMessage(msg);
+EMClient.getInstance.chatManager.sendMessage(voiceMsg);
 ```
 
 ### 发送图片消息
@@ -71,6 +73,8 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 final imgMsg = EMMessage.createImageSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 图片文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
 EMClient.getInstance.chatManager.sendMessage(imgMsg);
@@ -87,13 +91,15 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 使用 `EMMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
 
 ```dart
-  final msg = EMMessage.createImageSendMessage(
-    targetId: 'targetId',
-    filePath: 'filePath',
-    isGif: true,
-  );
+final gifMsg = EMMessage.createImageSendMessage(
+  targetId: targetId,
+  filePath: filePath,
+  isGif: true,
+  // GIF 图片的显示名称，强烈建议传入该参数。
+  displayName: displayName,
+);
 
-  EMClient.getInstance.chatManager.sendMessage(msg);
+EMClient.getInstance.chatManager.sendMessage(gifMsg);
 ```
 
 ### 发送视频消息
@@ -107,12 +113,13 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 final videoMsg = EMMessage.createVideoSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 视频文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
   thumbnailLocalPath: thumbnailLocalPath,
   duration: 30,
 );
 
 EMClient.getInstance.chatManager.sendMessage(videoMsg);
-
 ```
 
 ### 发送文件消息
@@ -124,6 +131,8 @@ EMClient.getInstance.chatManager.sendMessage(videoMsg);
 final fileMsg = EMMessage.createFileSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
 EMClient.getInstance.chatManager.sendMessage(fileMsg);
