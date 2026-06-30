@@ -1,16 +1,18 @@
 # 修改消息
 
-消息修改后，环信服务器会按照[发送后回调规则](callback_postsending.html#回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 如果需要消息修改事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#回调规则)。
-2. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+消息修改后，环信服务器会按照 [发送后回调规则](callback_postsending.html#回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 回调时机
 
-1. 客户端修改了各类消息。
-2. 调用 RESTful API 修改了消息。
+- [客户端修改了消息](/document/android/message_modify.html)。
+- [调用 RESTful API 修改了消息](/document/server-side/message_modify.html)。
  
 ## 回调请求
 
