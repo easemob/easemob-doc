@@ -67,7 +67,6 @@
 
 - 客户端删除了 [群组](/document/android/group_members.html#移除群组管理员权限)/[聊天室管理员](/document/android/room_members.html#移除聊天室管理员)。
 - 调用 RESTful API 删除了 [群组](/document/server-side/group_delete.html)/[聊天室管理员](/document/server-side/chatroom_delete.html)。
-- 在 [环信控制台](https://console.easemob.com/user/login)上删除了 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理)/[聊天室管理员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理)。 // TODO：要么这个删掉吧，貌似在运营管理 > 运营操作 > 群组数据 页面上点击群组 ID 无法删除管理员。
 
 ### 回调请求
 
