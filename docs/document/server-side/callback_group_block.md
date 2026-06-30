@@ -1,18 +1,19 @@
 # 屏蔽/解除屏蔽群组事件 
 
-成功屏蔽/解除屏蔽群组后，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看群组屏蔽/解除屏蔽的信息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果你需要屏蔽/解除屏蔽群组的事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+成功屏蔽/解除屏蔽群组后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看群组屏蔽/解除屏蔽的信息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 屏蔽群组
 
 ### 回调时机
 
-客户端屏蔽了群组。
+[客户端屏蔽了群组](/document/android/group_manage.html#屏蔽群消息)。
 
 ### 回调请求
 
@@ -55,7 +56,7 @@
 
 ### 回调时机
 
-客户端解除屏蔽了群组。
+[客户端解除屏蔽了群组](/document/android/group_manage.html#解除屏蔽群消息)。
 
 ### 回调请求
 

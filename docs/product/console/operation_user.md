@@ -48,6 +48,12 @@
 
 ![img](/images/console/operation_user_friend.png)
 
+## 删除用户好友
+
+在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户好友** 并点击好友列表中的 **删除好友**。
+
+![img](/images/console/operation_user_friend_delete.png)
+
 ## 查看用户黑名单
 
 在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户黑名单** 查看该用户的黑名单列表。
@@ -55,6 +61,8 @@
 你可以输入用户 ID，点击 **添加黑名单**，将该用户加入黑名单。
 
 ![img](/images/console/operation_user_blocklist.png)
+
+将用户加入黑名单后，你可以点击 **从黑名单中移除** 将用户移出黑名单。
 
 ## 查看用户绑定的推送证书
 

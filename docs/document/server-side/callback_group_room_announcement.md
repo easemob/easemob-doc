@@ -1,18 +1,19 @@
 # 群组/聊天室公告事件
 
-设置或更新群组/聊天室公告后，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看公告信息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要群组/聊天室公告事件的回调事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+设置或更新群组/聊天室公告后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看公告信息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 回调时机
 
-1. 客户端设置或更新了群组/聊天室公告。
-2. 调用 RESTful API 设置/更新了群组/聊天室公告。
-3. 在[环信控制台](https://console.easemob.com/user/login)设置或更新了群组/聊天室公告。
+- 客户端设置或更新了 [群组](/document/android/group_attributes.html#更新群公告)/[聊天室公告](/document/android/room_attributes.html#更新聊天室公告)。
+- 调用 RESTful API 设置/更新了 [群组](/document/server-side/group_announcement_modify.html)/[聊天室公告](/document/server-side/chatroom_announcement_update.html)。
+- 在 [环信控制台](https://console.easemob.com/user/login) 设置或更新了 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理)/[聊天室公告](/value-added/moderation/moderation_manual_review.html#聊天室审核管理)。
 
 ## 回调请求
 
@@ -53,6 +54,6 @@
 | `operator`     | String | 操作人。若 app 管理员设置或更新了公告，该参数的值固定为 `@ppAdmin`。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
 
-:::tip
-群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。
-:::
+## 其他说明
+
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对 `operation` 和 `payload.type` 的强判断。**

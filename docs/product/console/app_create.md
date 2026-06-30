@@ -13,7 +13,7 @@
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)，在首页 **应用概览** 区域点击 **创建应用**。
 
-![img](/images/console/app_overview.png)
+![img](/images/console/app_create_overview.png)
 
 2. 在 **创建应用** 对话框中填写应用的 **产品名称**、**描述**、**Appname**、**所在地**、**数据中心** 和 **注册模式**，然后点击 **创建**。
 

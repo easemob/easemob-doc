@@ -1,19 +1,20 @@
 # 群组/聊天室成员离开事件 
 
+## 功能描述
+
 在群组或聊天室中的成员离开时，包括主动退出、被踢出以及被加入群组/聊天室黑名单时退出，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看离开的成员，进行数据同步。
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见  [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要群组/聊天室成员离开的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见 [回调说明](/document/server-side/callback_postsending.html)。
-:::
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 主动退出
 
 ### 回调时机
 
-1. 通过客户端主动退出了群组/聊天室。
-2. 由于网络等原因，用户离线 2 分钟后退出了聊天室。
+- [通过客户端主动退出了群组](/document/android/group_members.html#退出群组)/[聊天室](/document/android/room_members.html#退出聊天室)。
+- 由于网络等原因，用户离线 2 分钟后退出了聊天室。
 
 ### 回调请求
 
@@ -90,9 +91,9 @@
 
 ### 回调时机 
 
-1. 通过客户端将用户踢出群组/聊天室。
-2. 调用 RESTful API 将用户踢出群组/聊天室。
-3. 在[环信控制台](https://console.easemob.com/user/login)将用户踢出群组/聊天室。
+- [通过客户端将用户踢出群组](/document/android/group_members.html#群成员被移出群组)/[聊天室](/document/android/room_members.html#被移出)。
+- [调用 RESTful API 将用户踢出群组](/document/server-side/group_member_remove_single.html)/[聊天室](/document/server-side/chatroom_member_remove_single.html)。
+- 在 [环信控制台](https://console.easemob.com/user/login) 将用户 [踢出群组](/product/console/operation_group.html#群组审核管理)/[聊天室](/product/console/operation_chatroom.html#聊天室审核管理)。
 
 ### 回调请求
 
@@ -139,14 +140,13 @@
 | `member_count`     | Int | 用户被踢出后，群组/聊天室的总成员数。                     |
 | `timestamp`    | Long   | 操作完成的时间戳。             | 
 
-
 ## 加入黑名单后退出
 
 ### 回调时机 
 
-1. 通过客户端将用户加入群组/聊天室黑名单时退出群组/聊天室。
-2. 调用 RESTful API 将用户加入群组/聊天室黑名单时退出群组/聊天室。
-3. 在[环信控制台](https://console.easemob.com/user/login)将用户加入群组/聊天室黑名单时退出群组/聊天室。
+- 通过客户端 [将用户加入群组](/document/android/group_members.html#将成员加入群组黑名单)/[聊天室黑名单](/document/android/room_members.html#将成员加入聊天室黑名单) 时退出群组/聊天室。
+- 调用 RESTful API [将用户加入群组](/document/server-side/group_member_blocklist_add_single.html)/[聊天室黑名单](/document/server-side/chatroom_member_blocklist_add_single.html) 时退出群组/聊天室。
+- 在[环信控制台](https://console.easemob.com/user/login) [将用户加入群组](/product/console/operation_group.html#群组审核管理)/[聊天室黑名单](/product/console/operation_chatroom.html#聊天室审核管理) 时退出群组/聊天室。
 
 ### 回调请求
 
@@ -197,9 +197,9 @@
 
 ### 回调时机 
 
-1. 通过客户端解散群组/聊天室时用户退出。
-2. 调用 RESTful API 解散群组/聊天室时用户退出。
-3. 在[环信控制台](https://console.easemob.com/user/login)解散群组/聊天室时用户退出。
+- 通过客户端 [解散群组](/document/android/group_manage.html#解散群组)/[聊天室](/document/android/room_manage.html#解散聊天室) 时用户退出。
+- 调用 RESTful API [解散群组](/document/server-side/group_delete.html)/[聊天室](/document/server-side/chatroom_delete.html) 时用户退出。
+- 在[环信控制台](https://console.easemob.com/user/login) [解散群组](/product/console/operation_group.html#删除群组)/[聊天室](/product/console/operation_chatroom.html#删除聊天室) 时用户退出。
 
 ### 回调请求
 
