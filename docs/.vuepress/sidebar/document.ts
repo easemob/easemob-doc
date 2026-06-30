@@ -889,7 +889,7 @@ const documentSidebar = [
                 children: [
                   { text: '群组/聊天室信息变更', link: 'callback_group_room_info.html' },
                   { text: '群主/聊天室所有者变更', link: 'callback_group_room_owner.html' },
-                  { text: '公告变更', link: 'callback_group_room_announcement.html' },
+                  { text: '群主/聊天室公告变更', link: 'callback_group_room_announcement.html' },
                   { text: '群共享文件变更', link: 'callback_group_shared_file.html' },
                   { text: '群组封禁状态变更', link: 'callback_group_ban.html' },
                   { text: '全员禁言状态变更', link: 'callback_group_room_muteall.html' },
@@ -917,7 +917,7 @@ const documentSidebar = [
                 { text: '话题内消息操作', link: 'callback_thread.html' }
               ]
             },
-            { text: '历史版本', link: 'callback_group_room_old.html' }, 
+            { text: '历史版本（群/聊天室操作消息）', link: 'callback_group_room_old.html' }, 
             ]
           },
           { text: '离线推送相关回调', link: 'callback_offline_push.html' },

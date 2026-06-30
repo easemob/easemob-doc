@@ -11,9 +11,9 @@
 
 ## 回调时机
 
-1. 客户端设置或更新了 [群组](/document/android/group_attributes.html#更新群公告)/[聊天室公告](/document/android/room_attributes.html#更新聊天室公告)。
-2. 调用 RESTful API 设置/更新了 [群组](/document/server-side/group_announcement_modify.html)/[聊天室公告](/document/server-side/chatroom_announcement_update.html)。
-3. 在 [环信控制台](https://console.easemob.com/user/login) 设置或更新了 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理)/[聊天室公告](/value-added/moderation/moderation_manual_review.html#聊天室审核管理)。
+- 客户端设置或更新了 [群组](/document/android/group_attributes.html#更新群公告)/[聊天室公告](/document/android/room_attributes.html#更新聊天室公告)。
+- 调用 RESTful API 设置/更新了 [群组](/document/server-side/group_announcement_modify.html)/[聊天室公告](/document/server-side/chatroom_announcement_update.html)。
+- 在 [环信控制台](https://console.easemob.com/user/login) 设置或更新了 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理)/[聊天室公告](/value-added/moderation/moderation_manual_review.html#聊天室审核管理)。
 
 ## 回调请求
 
