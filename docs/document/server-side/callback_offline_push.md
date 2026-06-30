@@ -11,9 +11,9 @@
 
 ## 回调时机
 
-// TODO：还有补充吗？（回调时机只有一种，单聊/群聊发消息接收方当时不在线）
-- [客户端上发送了离线推送通知](https://doc.easemob.com/document/android/push/push_overview.html)。
-- 在控制台上在 [单聊](/product/console/operation_user.html#发送-rest-消息)、[群组聊天](/value-added/moderation/moderation_manual_review.html#群组审核管理) 发送离线通知。
+- 客户端上在单聊或群组聊天中 [发送了消息](/document/android/message_send.html)，而接收方当时不在线。
+- 通过 REST API 在 [单聊](/document/server-side/message_single.html) 或 [群组聊天中发送了消息](/document/server-side/message_group.html)，而接收方当时不在线。
+- 通过控制台在 [单聊](/product/console/operation_user.html#发送-rest-消息)、[群组聊天](/value-added/moderation/moderation_manual_review.html#群组审核管理) 中发送了消息，而接收方当时不在线。
 
 ## 回调请求
 

@@ -53,17 +53,8 @@
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |
 | `msg_id`          | String   | 该撤回事件消息的 ID，与发送消息时的 `msg_id` 一致。          |
-| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。// TODO：这里指 `payload` 还是 `payload.bodies` 中的字段？在 “历史消息记录的内容” 部分没有看到 ack_message_id字段。（不特指原消息payload，主要就是ack_message_id 指向原消息id） |
+| `payload`         | object   | - 对于消息撤回行为，`bodies` 和 `ext` 字段为空。<br/> `ack_message_id` 表示原消息 ID。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                           |
 | `host`            | String   | 服务器名称。                                                 |
-
-`payload` 字段说明如下表所示：
-
-| 参数             | 数据类型 | 描述                                     |
-| :--------------- | :------- | :--------------------------------------- |
-| `ext`            | object   | 消息扩展字段，撤回行为时为空。         |
-| `ack_message_id` | String   | 跟 `recall_id` 一致，为要撤回的消息 ID。 |
-| `bodies`         | object   | 该回调的主体内容，撤回行为时为空。       |
-
