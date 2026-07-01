@@ -1,12 +1,12 @@
 # 单群聊 UIKit 通用特性
 
-本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和联系人等相关功能。
+本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和好友等相关功能。
 
 <Toc />
 
 ## 会话列表
 
-会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
+会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需好友并查看消息进展。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
@@ -44,12 +44,12 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/android/group_admin.png" title="群组管理员" />
 </ImageGallery>
 
-## 联系人列表	
+## 好友列表	
 
-联系人列表显示了用户的所有联系人。
+好友列表显示了用户的所有好友。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="好友列表" />
 </ImageGallery>
 
 ## 文件共享	
@@ -84,12 +84,12 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_read_receipt.png" title="已读回执" />
 </ImageGallery>
 
-## 联系人名片	
+## 好友名片	
 
-联系人名片指包含联系人详细信息的电子卡片，通常包括头像和昵称等信息。通过联系人名片，用户可以快速添加联系人或开始会话。
+好友名片指包含好友详细信息的电子卡片，通常包括头像和昵称等信息。通过好友名片，用户可以快速添加好友或开始会话。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/contact_namecard.png" title="联系人名片" />
+  <ImageItem src="/images/uikit/chatuikit/feature/common/android/contact_namecard.png" title="好友名片" />
 </ImageGallery>
 
 ## 语音消息
@@ -110,7 +110,7 @@
 
 ## 本地搜索
 
-本地搜索功能允许用户快速根据类型搜索，包括搜索联系人（带有或无选择框）、会话、历史消息和黑名单，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
+本地搜索功能允许用户快速根据类型搜索，包括搜索好友（带有或无选择框）、会话、历史消息和黑名单，支持关键词匹配。该功能帮助用户高效找到所需信息，提高工作效率和信息管理的便捷性。
 
 UIKit 提供封装的 `ChatUIKitSearchActivity` 搜索页面，用户根据 `ChatUIKitSearchType` 和输入关键词后，将根据 `ChatUIKitSearchType` 类型搜索数据展示搜索结果。
 

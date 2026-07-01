@@ -128,7 +128,7 @@ export function createStringSetJa(): StringSet {
     _uikit_create_group_title: "グループを作成",
     _uikit_create_group_button: (count) => `作成(${count})`,
 
-    // 联系人相关
+    // 好友相关
     _uikit_contact_new_request: "新しいリクエスト",
     _uikit_contact_group_list: "グループ",
     _uikit_contact_black_list: "ブロックリスト",
@@ -257,18 +257,18 @@ function App() {
 | 键名                        | 中文     | 英文         | 说明         |
 | :--------------------------- | :---------- | :------------ | :------------ |
 | `_uikit_search`             | 搜索     | Search       | 搜索按钮     |
-| `_uikit_contact_title`      | 联系人   | Contacts     | 联系人标题   |
+| `_uikit_contact_title`      | 好友   | Contacts     | 好友标题   |
 | `_uikit_new_conv_title`     | 新会话   | New Chat     | 新会话标题   |
 | `_uikit_create_group_title` | 创建群组 | Create Group | 创建群组标题 |
 
-### 联系人相关
+### 好友相关
 
 | 键名                              | 中文       | 英文         | 说明           |
 | :--------------------------- | :---------- | :------------ | :------------ |
 | `_uikit_contact_new_request`      | 新请求     | New Requests | 新的好友请求   |
 | `_uikit_contact_group_list`       | 群组       | Groups       | 群组列表       |
 | `_uikit_contact_black_list`       | 黑名单     | Blocklist    | 黑名单         |
-| `_uikit_contact_menu_add_contact` | 添加联系人 | Add Contact  | 添加联系人菜单 |
+| `_uikit_contact_menu_add_contact` | 添加好友 | Add Contact  | 添加好友菜单 |
 
 ### 消息相关
 

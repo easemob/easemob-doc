@@ -37,7 +37,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 207    |         EMErrorUserRemoved          | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。| 账号被注销时，会触发 `EMClientDelegate#userAccountDidRemoveFromServer` 事件,收到该事件时，该账号已不可用，需要回到登录页面。 |
 | 208    |      EMErrorUserRegisterFailed      | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/document/server-side/account_register_open.html)等原因。 | 不推荐使用 SDK 注册账号，建议开发者在业务服务器注册账号。 |
 | 209    |   EMErrorUpdateApnsConfigsFailed    | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。 | 检查报错的 API，延迟一段时间后，重新调用。 |
-| 210    |     EMErrorUserPermissionDenied     | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 | 检查用户是否有操作权限。 |
+| 210    |     EMErrorUserPermissionDenied     | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散消息话题（仅消息话题所在群组的群主和群管理员有权解散消息话题）。 | 检查用户是否有操作权限。 |
 | 211    |  EMErrorUserBindDeviceTokenFailed   | 绑定设备 token 失败。      | 检查调用绑定设备推送 token 的接口中传入的 token 是否为空。 |
 | 213    |    EMErrorUserBindAnotherDevice     |用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。| 可修改为多设备登录，或先使用 `EMClient#kickDevice` 踢掉其他设备再登录。 |
 | 214    |   EMErrorUserLoginTooManyDevices    | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 | 可增加同时在线的设备数量，或先使用 `EMClient#kickDevice` 踢掉其他设备再登录。 |
@@ -76,7 +76,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 508    | EMErrorMessageExternalLogicBlocked  | 发送前回调拦截：发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。  | 可在 UI 上做提示，或检查发送前回调记录。 |
 | 509    |    EMErrorMessageCurrentLimiting    | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 | 可在 UI 上进行提示，或检查消息发送频率设置。 |
 | 510    |    EMErrorMessageSizeLimit    | 发送消息时消息体大小超过上限。 | 可在 UI 上进行提示，或减小消息体长度（默认不超过 5 KB）。|
-| 511   | EMErrorEditFailed  | 消息修改失败。  | 需结合日志进一步分析。 |
+| 511   | EMErrorEditFailed  | 消息编辑失败。  | 需结合日志进一步分析。 |
 | 512    | EMErrorStreamIntervalTimeout                 | 流式消息的相邻消息分片的发送间隔超时：该间隔不能超过 30 秒，超时则返回该错误并终止流式消息。| 可在 UI 上进行提示，或检查消息分片发送间隔。 |
 | 513    | EMErrorMessageStreamTimeout                 |流式消息的发送总时长超时：该时长不能超过 30 分钟，超时再发送分片则返回该错误。| 可在 UI 上进行提示，或检查流式消息的发送总时长。 |
 | 600    |        EMErrorGroupInvalidId        | 群组 ID 异常：使用群组相关 API，提供的群组 ID 为空或无效。 | 检查调用的 API，传入的群组 ID 参数是否为空或传入了不存在（已解散）的群组 ID。 |
@@ -103,9 +103,9 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 707    | EMErrorChatroomUserInBlockList        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   | 在环信控制台上检查用户是否在聊天室的黑名单中。|
 | 900    |       EMErrorUserCountExceed        | 获取用户属性的用户个数超过 100。                             | 调用 API 获取用户属性时一次最多可获取 100个用户的属性，可分批获取。 |
 | 901    |   EMErrorUserInfoDataLengthExceed   | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 | 检查调用 API 设置的用户属性是否超过限制。 |
-| 1000   |       EMErrorContactAddFailed       | 添加联系人失败。                                             | 结合调用的 API 和 `EMError#errorDescription` 分析联系人添加失败的原因。 |
-| 1001   |      EMErrorContactReachLimit       | 邀请者的联系人数量已达到上限。       | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
-| 1002   |    EMErrorContactReachLimitPeer     | 受邀请者的联系人数量已达到上限。   | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
+| 1000   |       EMErrorContactAddFailed       | 添加好友失败。                                             | 结合调用的 API 和 `EMError#errorDescription` 分析好友添加失败的原因。 |
+| 1001   |      EMErrorContactReachLimit       | 邀请者的好友数量已达到上限。       | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
+| 1002   |    EMErrorContactReachLimitPeer     | 受邀请者的好友数量已达到上限。   | 可以在 UI 上提示该错误，或在 [环信控制台提升用户的好友数上限](/product/console/basic_user.html#单个用户好友数上限)。 |
 | 1100   |     EMErrorPresenceParamExceed      | - 用户在线状态订阅功能 Presence 未开通。<br/> - 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 | <br/>使用 Presence 功能前需要在环信控制台开通。 <br/> - 调用[发布自定义在线状态 API](presence.html#发布自定义在线状态) 时设置的在线状态详细信息的长度不能超过 64 字节。 |
 | 1101   | EMErrorPresenceCannotSubscribeSelf  | 不能订阅你自己的状态。 | 检查调用 API 时传入的订阅用户 ID 是否是自己的用户 ID。 |
 | 1110   |     EMErrorTranslateParamError      | 翻译参数错误。               | 需结合 Debug 日志，分析翻译方法传入的参数错误原因。 |
@@ -117,5 +117,5 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 1300   |     EMErrorReactionReachLimit      | 该消息的 Reaction 数量已达到限制。         | 可以在 UI 上进行提示，或联系商务增加消息支持的 Reaction 数量上线。 |
 | 1301   |   EMErrorReactionHasBeenOperated    | 用户已添加该 Reaction，不能重复添加。  | 可以按照添加 Reaction 成功的情况处理。 |
 | 1302   |  EMErrorReactionOperationIsIllegal  | 用户对该 Reaction 没有操作权限。例如，未添加过该 Reaction 的用户进行删除操作，或者既非单聊消息的发送方也不是非接收方的用户对消息添加 Reaction。 | 结合日志分析，检查调用的 API 中传入的参数是否正确。 |
-| 1400   |  EMErrorThreadNotExist        | 未找到该子区，该子区不存在。 | 结合日志，检查调用的 API 中传入的子区 ID 是否正确。 |
-| 1401   |        EMErrorThreadAlreadyExist         | 该消息 ID 下子区已存在，重复添加子区。  | 检查调用 API 传入的消息下是否已经创建了子区。 |
+| 1400   |  EMErrorThreadNotExist        | 未找到该消息话题，该消息话题不存在。 | 结合日志，检查调用的 API 中传入的消息话题 ID 是否正确。 |
+| 1401   |        EMErrorThreadAlreadyExist         | 该消息 ID 下消息话题已存在，重复添加消息话题。  | 检查调用 API 传入的消息下是否已经创建了消息话题。 |

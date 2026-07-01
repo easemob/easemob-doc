@@ -63,7 +63,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `setOnMessageSendCallBack`           | 设置消息发送回调。                   |
 | `setOnWillSendMessageListener`     | 设置即将发送消息的监听器。          |
 | `setOnChatRecordTouchListener`   | 设置聊天记录触摸监听器。             |
-| `setOnModifyMessageListener`       | 设置修改消息监听器。                 |
+| `setOnModifyMessageListener`       | 设置编辑消息监听器。                 |
 | `setOnReportMessageListener`       | 设置举报消息监听器。                 |
 | `setMsgTimeTextColor`                     | 设置消息时间文本颜色。               |
 | `setMsgTimeTextSize`                       | 设置消息时间文本大小。               |

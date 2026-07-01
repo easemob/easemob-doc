@@ -71,7 +71,7 @@ const chatUikitSidebar = [
         ], 
       only: ["ios"]
   },
-  { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["ios"]},
+  { text: "好友详情", link: "chatuikit_custom_contact_details.html", only: ["ios"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["ios"]},
   { text: "用户信息提供", link: "chatuikit_userinfo.html", only: ["ios"]},
   { text: "国际化", link: "chatuikit_internationalization.html", only: ["ios"]},
@@ -206,7 +206,7 @@ const chatUikitSidebar = [
     only: ["android", "harmonyos", "react-native", "flutter"],
   },
   { text: "用户信息提供", link: "chatuikit_userinfo.html", only: ["android", "harmonyos", "react-native", "flutter"]},
-  { text: "联系人详情", link: "chatuikit_custom_contact_details.html", only: ["android", "react-native", "flutter"]},
+  { text: "好友详情", link: "chatuikit_custom_contact_details.html", only: ["android", "react-native", "flutter"]},
   { text: "群详情", link: "chatuikit_custom_group_details.html", only: ["android", "react-native", "flutter"] },
   { text: "自定义数据模型", link: "chatuikit_custom_data_model.html", only: ["react-native"] },
   {

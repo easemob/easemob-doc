@@ -127,9 +127,9 @@ dependencies {
       <td>✅</td>
     </tr>
     <tr>
-      <td>修改消息</td>
-      <td>单聊会话中已经发送成功的文本消息进行修改</td>
-      <td><p><a href="https://doc.easemob.com/document/android/message_modify.html">修改消息</a></p></td>
+      <td>编辑消息</td>
+      <td>单聊会话中已经发送成功的文本消息进行编辑</td>
+      <td><p><a href="https://doc.easemob.com/document/android/message_modify.html">编辑消息</a></p></td>
       <td>❌</td>
       <td>✅</td>
     </tr>
@@ -361,9 +361,9 @@ dependencies {
       <td>✅</td>
     </tr>
     <tr>
-      <td>子区管理</td>
-      <td>子区是群组成员的子集</td>
-      <td><a href="https://doc.easemob.com/document/android/thread.html">子区管理</a></td>
+      <td>消息话题管理</td>
+      <td>消息话题是群组成员的子集</td>
+      <td><a href="https://doc.easemob.com/document/android/thread.html">消息话题管理</a></td>
       <td>❌</td>
       <td>✅</td>
     </tr>

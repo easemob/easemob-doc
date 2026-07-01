@@ -75,7 +75,7 @@
 
 **消息相关**
 
-- 更新 [修改消息](message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以修改消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持修改扩展信息。
+- 更新 [编辑消息](message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以编辑消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持编辑扩展信息。
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
@@ -166,7 +166,7 @@
 - 修复服务端获取好友列表（包含好友备注）时，在好友列表无变化时，第二次请求获取不到数据的问题。
 - 修复特殊情况下附件发送失败，消息仍然成功发送的问题。
 - 修复拉取漫游消息时 nextkey 错误的问题。
-- 修复拉黑联系人时缓存未及时更新的问题。
+- 修复拉黑好友时缓存未及时更新的问题。
 - 修复退出登录再登录后推送可能不工作的问题。
 
 ## v1.5.1 2024-7-2
@@ -219,7 +219,7 @@
   - 新增 `ChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `ChatMessageEventListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `ChatMessageEventListener#onMessagesReceived` 回调里增加发送成功的消息。
-- 消息修改回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- 消息编辑回调 `ChatMessageEventListener#onMessageContentChanged` 中支持返回 [通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 
 #### 优化
 
@@ -248,7 +248,7 @@
 
 #### 修复
 
-- 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+- 修复编辑消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 - 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
 - 修复网络恢复时重连 2 次的问题。
 - 修复未登录时调用 `leaveChatroom` 方法返回的错误提示不准确。
@@ -441,8 +441,8 @@
 - 新增 `setConversationExtension` 方法用于设置会话扩展。
 - 新增 `insertMessage` 方法插入消息。
 - 新增 `deleteMessagesBeforeTimestamp` 方法删除指定时间戳之前的消息。
-- 新增 `getThreadConversation` 方法获取或创建子区会话。
-- `ChatConversation` 类中添加 `isChatThread` 属性确认会话是否为子区会话。
+- 新增 `getThreadConversation` 方法获取或创建消息话题会话。
+- `ChatConversation` 类中添加 `isChatThread` 属性确认会话是否为消息话题会话。
 - 新增 `ChatPushManager` 类支持推送通知设置。
 - 新增 `ChatPushConfig` 类支持 FCM 推送配置。
 - 在 `ChatOptions` 类中新增 `pushConfig` 方法支持推送初始化设置。
@@ -504,12 +504,12 @@
 
 这是 React Native SDK 第一个正式发布的版本，包含以下功能：
 
-- 在单聊、群聊、聊天室和子区中发送和接收消息；
+- 在单聊、群聊、聊天室和消息话题中发送和接收消息；
 - 管理会话和消息；
 - 管理群组和聊天室；
 - 用户在线状态订阅；
 - 消息表情回复；
-- 管理子区等。
+- 管理消息话题等。
 
 关于详细功能概述请参见： [产品概述](/product/introduction.html).
 
@@ -522,5 +522,5 @@
 - [聊天室](room_overview.html)
 - [用户在线状态订阅 Presence](presence.html)
 - [消息表情回复](reaction.html)
-- [子区管理](thread.html)
+- [消息话题管理](thread.html)
 - [API Reference](apireference.html)

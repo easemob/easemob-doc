@@ -227,7 +227,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 | [消息置顶（客户端）](/document/android/message_pin.html)         | 是                                |
 | [消息撤回](message_recall_single.html)         | 是                                |
 | [消息单向删除](message_delete_roam_single_msgid.html)     | 是                                |
-| [消息修改](message_modify.html)         | 是                                |
+| [消息编辑](message_modify.html)         | 是                                |
 | [消息搜索（客户端）](/document/android/message_search.html)         | 是                                |
 | [会话未读数（客户端）](/document/android/conversation_unread.html)       | 是                                |
 | 会话最后一条消息 | 是                                |

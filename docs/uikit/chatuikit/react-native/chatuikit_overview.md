@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信聊天 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信聊天 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、好友列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 对于 React Native UIKit/ Demo 的源码，你可以查看 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee 地址](https://gitee.com/easemob-code/react-native-chat-library)。
 
@@ -49,7 +49,7 @@
 
 ## 功能介绍
 
-环信即时通讯 `Chat UIKit SDK` 提供的主要功能包括：主题、国际化、多媒体处理、联系人页面、会话列表、会话详情、错误处理等。
+环信即时通讯 `Chat UIKit SDK` 提供的主要功能包括：主题、国际化、多媒体处理、好友页面、会话列表、会话详情、错误处理等。
 
 ### 核心组件
 
@@ -68,13 +68,13 @@
 | 页面级组件名称       | 描述   |
 | -------------------- | ------------- |
 | ConversationList     | 会话列表组件，提供显示和管理会话列表。    |
-| ContactList          | 联系人列表组件，提供显示和管理联系人列表。在联系人列表、新会话、创建群组、添加群成员、分享名片、转发消息页面中复用。 |
+| ContactList          | 好友列表组件，提供显示和管理好友列表。在好友列表、新会话、创建群组、添加群成员、分享名片、转发消息页面中复用。 |
 | ConversationDetail   | 消息页面组件，可以收发消息、加载历史消息，支持单群聊。在聊天、搜索、话题、创建话题页面中复用。   |
 | GroupList            | 群组列表组件，提供显示和管理群组列表。  |
 | GroupParticipantList | 群成员列表组件，提供显示和管理群成员列表。在添加成员、删除成员、修改群拥有者、多人音视频中复用。    |
 | NewRequests          | 新通知列表组件，接收和处理好友请求处理。     |
 | CreateGroup          | 创建群组组件。       |
-| ContactInfo          | 联系人详情组件。     |
+| ContactInfo          | 好友详情组件。     |
 | GroupInfo            | 群组详情组件。     |
 
 ### 主要功能界面
@@ -112,12 +112,12 @@
 
 ### 通讯录页面功能
 
-`ContactList` 提供联系人、群组及其详情等容器。
+`ContactList` 提供好友、群组及其详情等容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/contact_list.png" title="联系人列表" />
-  <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="联系人详情" />
-  <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_list.png" title="好友列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="好友详情" />
+  <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="好友黑名单" />
   <ImageItem src="/images/uikit/chatuikit/ios/group_list.png" title="群组列表" />
 </ImageGallery>
 
@@ -138,6 +138,6 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/ios/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索好友名称" />
   <ImageItem src="/images/uikit/chatuikit/ios/search_chat_history.png" title="搜索聊天历史" />
 </ImageGallery>

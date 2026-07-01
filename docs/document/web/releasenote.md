@@ -102,11 +102,11 @@
 
 #### 新增特性
 
-- [IM SDK] 发送后修改消息接口 [modifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本消息：支持修改 `msg` 和 `ext` 字段。
-  - 自定义消息：支持修改 `customEvent` 、`customExts` 和 `ext` 字段。
-  - 图片/语音/视频/文件/位置/合并消息：仅支持修改 `ext` 字段。
-  - 命令消息：不支持修改。
+- [IM SDK] 发送后编辑消息接口 [modifyMessage](message_modify.html) 支持编辑各类消息：
+  - 文本消息：支持编辑 `msg` 和 `ext` 字段。
+  - 自定义消息：支持编辑 `customEvent` 、`customExts` 和 `ext` 字段。
+  - 图片/语音/视频/文件/位置/合并消息：仅支持编辑 `ext` 字段。
+  - 命令消息：不支持编辑。
   
 - [IM Demo] 增加反诈提示 UI。
 
@@ -118,7 +118,7 @@
 
 #### 新增特性
 
-- 消息修改事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，修改消息后，接收方会收到发送方修改的扩展信息。
+- 消息编辑事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，编辑消息后，接收方会收到发送方编辑的扩展信息。
 -  加入聊天室 `joinChatRoom` 成功的回调新增 `info` 字段，包含如下信息，即用户加入聊天室后会收到如下信息：
    - 聊天室创建时间：`createTimestamp`。
    - 用户是否开启全员禁言：`isAllMembersMuted`。
@@ -239,7 +239,7 @@
   - `unpinMessage`: 取消置顶消息。
   - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
   - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
-- [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- [IM SDK] 消息编辑回调 `onModifiedMessage` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 
 #### 优化
@@ -338,7 +338,7 @@
 #### 新增特性
 
 - [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)。
-- [IM SDK] 新增[消息修改功能](message_modify.html)。
+- [IM SDK] 新增[消息编辑功能](message_modify.html)。
 
 #### 修复
 
@@ -486,7 +486,7 @@
 
 #### 新增特性:
 
-- [IM SDK] 新增消息子区（message thread）功能；
+- [IM SDK] 新增消息消息话题（message thread）功能；
 - [IM SDK] 新增 [getConversationlist](conversation_list.html#从服务器分页获取会话列表) 方法解析会话中的最新一条消息；
 
 #### 优化：
@@ -997,7 +997,7 @@
 #### 修复
 
 - [demo] 增加 `babel-core/browser-polyfill.js`文件，修复了 IE 不支持 HTML5 elements 的 bug。
-- [demo] 修复了有未读消息时点击联系人不生效的 bug。
+- [demo] 修复了有未读消息时点击好友不生效的 bug。
 - [sdk] 修复了 strophe.js v1.2.8 在 IE9 中使用 BOSH 会报错的 bug。 [https://github.com/strophe/strophejs/issues/213](https://github.com/strophe/strophejs/issues/213)
 - [sdk] 修复了存在大量离线消息时收发消息延迟的 bug。客户端将发送 ack 应答消息的速度限制在 5 个/秒，不影响其他正常消息。
 - [sdk] 将心跳消息从空 body 的 json message 切换为 ping/pong iq。前者会作为离线消息被 XMPP Server 缓存。
@@ -1032,7 +1032,7 @@
 #### 修复
 
 - 修复心跳会创建多个 timer
-- 联系人名称过长导致的样式问题
+- 好友名称过长导致的样式问题
 - IE9 发送附件失效
 - IE9 添加好友报错
 
@@ -1103,9 +1103,9 @@
 
 #### 优化
 
-- 修复 bug。demo 联系人过多时的样式问题。
+- 修复 bug。demo 好友过多时的样式问题。
 - 修复 bug。conn = new Easemob.im.Connection();变量名不为 conn 或者 conn 不是全局变量时接收不到消息。
 - 修复 bug。群组离线消息当作陌生人消息处理。
-- 修复 bug。IE 浏览器接收文本消息以换行符开始时会遮挡联系人名称。
+- 修复 bug。IE 浏览器接收文本消息以换行符开始时会遮挡好友名称。
 - 修复 bug。在线用户被邀请加入群组不能实时显示，必须重新登录。
 - 丰富相关文档内容。

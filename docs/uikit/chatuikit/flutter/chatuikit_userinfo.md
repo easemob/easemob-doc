@@ -7,27 +7,27 @@
 `ChatUIKit` 提供了 `ChatUIKitProfile` 类用于封装头像和昵称信息。
 
 ```dart
-/// Profile 类型，用于区分是联系人还是群组。
+/// Profile 类型，用于区分是好友还是群组。
 enum ChatUIKitProfileType {
-  /// 联系人类型。
+  /// 好友类型。
   contact,
 
   /// 群类型。
   group,
 }
 
-/// ChatUIKitProfile 类，用于存储联系人或群组的信息。
+/// ChatUIKitProfile 类，用于存储好友或群组的信息。
 class ChatUIKitProfile {
-  /// id：如果是联系人，则为用户 ID；如果是群组，则为群组 ID。
+  /// id：如果是好友，则为用户 ID；如果是群组，则为群组 ID。
   final String id;
 
-  /// 名称，如果是联系人，则为用户名称，如果是群组，则为群组名称。
+  /// 名称，如果是好友，则为用户名称，如果是群组，则为群组名称。
   final String? name;
 
-  /// 头像地址, 如果是联系人，则为用户头像地址，如果是群组，则为群组头像地址。
+  /// 头像地址, 如果是好友，则为用户头像地址，如果是群组，则为群组头像地址。
   final String? avatarUrl;
 
-  /// profile 类型，用于区分是联系人还是群组，详见 [ChatUIKitProfileType]。
+  /// profile 类型，用于区分是好友还是群组，详见 [ChatUIKitProfileType]。
   final ChatUIKitProfileType type;
 
   /// 扩展字段，用于存储一些额外的信息。

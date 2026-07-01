@@ -65,7 +65,7 @@ rootStore 包含以下数据模块:
     </tr>
     <tr>
         <td>contacts</td>
-        <td style=font-size:15px>所有的联系人</td>
+        <td style=font-size:15px>所有的好友</td>
     </tr>
     <tr>
         <td>groups</td>
@@ -73,7 +73,7 @@ rootStore 包含以下数据模块:
     </tr>
     <tr>
         <td>searchList</td>
-        <td style=font-size:15px>搜索到的联系人或群组</td>
+        <td style=font-size:15px>搜索到的好友或群组</td>
     </tr>
     <tr>
         <td>requests</td>
@@ -277,7 +277,7 @@ const ChatAPP = () => {
 
 ## useAddressContext
 
-该自定义 hook 可以返回联系人和群组相关的数据以及数据管理方法。
+该自定义 hook 可以返回好友和群组相关的数据以及数据管理方法。
 
 ### 使用示例
 

@@ -59,7 +59,7 @@ $user = new User($auth);
 
 - Attachment 用于上传下载附件
 - Block 用于限制访问(将用户加入黑名单、群组/聊天室禁言等)
-- Contact 用于管理联系人(添加好友等)
+- Contact 用于管理好友(添加好友等)
 - Group 用于管理群组
 - Message 用于发送消息
 - User 用于管理用户

@@ -61,9 +61,9 @@ public class Config {
 
 - [ChatFile](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ChatFileApi.html) 用于上传下载附件。
 - [Block](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html) 用于限制访问(将用户加入黑名单)。
-- [Contact](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html) 用于管理联系人(添加好友等)。
+- [Contact](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ContactApi.html) 用于管理好友(添加好友等)。
 - [Group](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/GroupApi.html) 用于管理群组。
-- [Thread](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ThreadApi.html) 用于管理群组子区。
+- [Thread](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/ThreadApi.html) 用于管理群组消息话题。
 - [Message](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html) 用于发送消息。
 - [HistoryMessage](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/HistoryMessageApi.html) 用于下载历史消息记录。
 - [User](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/UserApi.html) 用于管理用户。

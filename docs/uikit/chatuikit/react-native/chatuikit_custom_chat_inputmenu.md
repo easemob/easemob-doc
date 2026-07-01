@@ -360,7 +360,7 @@ function ChatScreen({ route }) {
 
 ### 编辑消息
 
-通过控制器的 `editMessage` 方法可以实现消息编辑功能，允许用户修改已发送的消息内容。编辑完成后，消息会重新发送，并在列表中更新显示。
+通过控制器的 `editMessage` 方法可以实现消息编辑功能，允许用户编辑已发送的消息内容。编辑完成后，消息会重新发送，并在列表中更新显示。
 
 ```typescript
 import React, { useRef } from 'react';
@@ -470,7 +470,7 @@ function ChatScreen({ route }) {
 | ----------------- | --------------------- | ------ | -------------------------------------------------------- |
 | `close`           | 无                    | `void` | 关闭输入框（收起键盘、表情面板和扩展菜单）。             |
 | `quoteMessage`    | `model: MessageModel` | `void` | 引用（回复）指定消息。输入框上方会显示被引用的消息内容。 |
-| `editMessage`     | `model: MessageModel` | `void` | 编辑指定消息。弹出编辑 UI 供用户修改消息内容。         |
+| `editMessage`     | `model: MessageModel` | `void` | 编辑指定消息。弹出编辑 UI 供用户编辑消息内容。         |
 | `showMultiSelect` | 无                    | `void` | 显示多选模式。输入组件会显示删除和分享按钮。             |
 | `hideMultiSelect` | 无                    | `void` | 隐藏多选模式。恢复正常的输入框。                         |
 | `showMask`        | 无                    | `void` | 显示遮罩层。通常用于置顶消息显示时，防止用户操作输入框。 |

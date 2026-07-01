@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、好友列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 对于 uniapp UIKit/Demo 的源码，你可以查看 [GitHub](https://github.com/easemob/easemob-uikit-uniapp) 或 [Gitee 地址](https://github.com/easemob/easemob-uikit-uniapp)。
 
@@ -23,10 +23,10 @@
     ├── modules                                // UIKit 页面组件
     │   ├── Chat                                  // 聊天功能模块
     │   ├── ChatNew                               // 发起新会话模块
-    │   ├── ContactAdd                            // 添加联系人模块
-    │   ├── ContactList                           // 联系人列表模块      
-    │   ├── ContactRequestList                    // 联系人好友请求列表模块
-    │   ├── ContactSearchList                     // 联系人搜索列表模块
+    │   ├── ContactAdd                            // 添加好友模块
+    │   ├── ContactList                           // 好友列表模块      
+    │   ├── ContactRequestList                    // 好友好友请求列表模块
+    │   ├── ContactSearchList                     // 好友搜索列表模块
     │   ├── Conversation                          // 会话列表模块
     │   ├── ConversationSearchList                // 会话搜索列表模块
     │   ├── GroupCreate                           // 创建群组模块
@@ -37,7 +37,7 @@
     │   ├── chat.ts                               // IM连接状态和事件处理
     │   ├── config.ts                             // UIKit Config
     │   ├── conn.ts                               // 管理 SDK 实例
-    │   ├── contact.ts                            // 联系人相关 store
+    │   ├── contact.ts                            // 好友相关 store
     │   ├── conversation.ts                       // 会话相关 store
     │   ├── group.ts                              // 群组相关 store
     │   ├── message.ts                            // 消息相关 store
@@ -84,10 +84,10 @@
 
 ### 通讯录页面功能
 
-`ChatUIKit/modules/ContactList` 提供联系人列表容器, `ChatUIKit/modules/GroupList` 提供群组列表容器。
+`ChatUIKit/modules/ContactList` 提供好友列表容器, `ChatUIKit/modules/GroupList` 提供群组列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="好友列表" />
   <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
@@ -97,6 +97,6 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索好友名称" />
 </ImageGallery>
 

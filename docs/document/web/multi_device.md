@@ -10,7 +10,7 @@
 
 - 在线消息、离线消息以及对应的回执和已读状态；
 - 好友和群组操作；
-- 子区相关操作；
+- 消息话题相关操作；
 - 会话相关操作。
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的 **功能配置 > 基础功能** > **用户** 页面，在弹出的对话框中设置各端设备的数量：
@@ -127,7 +127,7 @@ const conn = new WebIM.connection({
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
-子区和删除漫游消息事件会触发 `onMultiDeviceEvent` 事件，示例代码如下：
+消息话题和删除漫游消息事件会触发 `onMultiDeviceEvent` 事件，示例代码如下：
 
 ```javascript
 conn.addEventHandler("handlerId", {
@@ -136,19 +136,19 @@ conn.addEventHandler("handlerId", {
   onMultiDeviceEvent: (event) => {
     switch (event.operation) {
       case "chatThreadCreate":
-        //当前用户在其他设备上创建子区。
+        //当前用户在其他设备上创建消息话题。
         break;
       case "chatThreadDestroy":
-        //当前用户在其他设备上销毁子区。
+        //当前用户在其他设备上销毁消息话题。
         break;
       case "chatThreadJoin":
-        //当前用户在其他设备上加入子区。
+        //当前用户在其他设备上加入消息话题。
         break;
       case "chatThreadLeave":
-        //当前用户在其他设备上离开子区。
+        //当前用户在其他设备上离开消息话题。
         break;
       case "chatThreadNameUpdate":
-        //当前用户在其他设备上更新子区。
+        //当前用户在其他设备上更新消息话题。
         break;
       case "deleteRoaming":
         //当前用户在其他设备上删除了服务端的会话。

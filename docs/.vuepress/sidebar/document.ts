@@ -50,7 +50,7 @@ const documentSidebar = [
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索消息', link: 'message_search.html', except: ['web']},
       { text: '消息回执', link: 'message_receipt.html'},
-      { text: '修改消息', link: 'message_modify.html'},
+      { text: '编辑消息', link: 'message_modify.html'},
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '转发消息', link: 'message_forward.html', except: ['web']},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
@@ -90,8 +90,8 @@ const documentSidebar = [
       { text: '管理群组成员', link: 'group_members.html' },
       { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
-      { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
-      { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
+      { text: '管理消息话题', link: 'thread.html', except: ['harmonyos'] },
+      { text: '管理消息话题中的消息', link: 'thread_message.html', except: ['harmonyos'] }
     ],
     except: ['server-side', 'applet']
   },
@@ -221,7 +221,7 @@ const documentSidebar = [
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '消息回执', link: 'message_receipt.html' }, 
           { text: '消息表情回复', link: 'reaction.html' },
-          { text: '修改消息', link: 'message_modify.html' },
+          { text: '编辑消息', link: 'message_modify.html' },
           { text: '删除消息', link: 'message_delete.html' },
           { text: '定向消息', link: 'message_target.html' }, 
           { text: '消息扩展', link: 'message_extension.html' },    
@@ -255,11 +255,11 @@ const documentSidebar = [
           { text: '管理群组成员', link: 'group_members.html' },
           { text: '管理群组属性', link: 'group_attributes.html' },
           {
-            text: '子区管理',
+            text: '消息话题管理',
             collapsible: true,
             children: [
-              { text: '管理子区', link: 'thread.html' },
-              { text: '管理子区消息', link: 'thread_message.html' }
+              { text: '管理消息话题', link: 'thread.html' },
+              { text: '管理消息话题中的消息', link: 'thread_message.html' }
             ]
           },
         ],
@@ -397,7 +397,7 @@ const documentSidebar = [
         { text: '清空群聊一段时间漫游消息', link: 'message_delete_roam_group_room_time.html' },
         ],
       },
-      { text: '修改消息', link: 'message_modify.html' },
+      { text: '编辑消息', link: 'message_modify.html' },
       {
         text: '消息翻译',
         collapsible: true,
@@ -543,18 +543,18 @@ const documentSidebar = [
         ]  
       },
       { 
-            text: '管理子区', 
+            text: '管理消息话题', 
             collapsible: true,
             children: [
-              { text: '创建子区', link: 'group_thread_create.html' },
-              { text: '修改子区', link: 'group_thread_modify.html' },
-              { text: '删除子区', link: 'group_thread_delete.html' },
-              { text: '获取 app 中的子区', link: 'group_thread_obtain.html' },
-              { text: '获取用户加入的所有子区', link: 'group_thread_joined.html' },
-              { text: '获取用户在群组中加入的子区', link: 'group_threads_in_group.html' },
-              { text: '获取子区成员列表', link: 'group_thread_member_get.html' },
-              { text: '批量加入子区', link: 'group_thread_member_add.html' },
-              { text: '批量踢出子区', link: 'group_thread_member_remove.html' },
+              { text: '创建消息话题', link: 'group_thread_create.html' },
+              { text: '修改消息话题', link: 'group_thread_modify.html' },
+              { text: '删除消息话题', link: 'group_thread_delete.html' },
+              { text: '获取 app 中的消息话题', link: 'group_thread_obtain.html' },
+              { text: '获取用户加入的所有消息话题', link: 'group_thread_joined.html' },
+              { text: '获取用户在群组中加入的消息话题', link: 'group_threads_in_group.html' },
+              { text: '获取消息话题成员列表', link: 'group_thread_member_get.html' },
+              { text: '批量加入消息话题', link: 'group_thread_member_add.html' },
+              { text: '批量踢出消息话题', link: 'group_thread_member_remove.html' },
             ]  
           },
     ],
@@ -890,7 +890,6 @@ const documentSidebar = [
                   { text: '群组/聊天室信息变更', link: 'callback_group_room_info.html' },
                   { text: '群主/聊天室所有者变更', link: 'callback_group_room_owner.html' },
                   { text: '群主/聊天室公告变更', link: 'callback_group_room_announcement.html' },
-                  { text: '群共享文件变更', link: 'callback_group_shared_file.html' },
                   { text: '群组封禁状态变更', link: 'callback_group_ban.html' },
                   { text: '全员禁言状态变更', link: 'callback_group_room_muteall.html' },
                   { text: '群组屏蔽状态变更', link: 'callback_group_block.html' },

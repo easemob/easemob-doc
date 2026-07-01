@@ -48,5 +48,5 @@ ChatUIKitClient.init(this, options, config)
 
 | 属性                                   | 描述               |
 |--------------------------------------|-------------------|
-| useDefaultMultiDeviceContactEvent    | 是否启用默认的多设备联系人事件处理。 |
+| useDefaultMultiDeviceContactEvent    | 是否启用默认的多设备好友事件处理。 |
 | useDefaultMultiDeviceGroupEvent      | 是否启用默认的多设备群组事件处理。  |

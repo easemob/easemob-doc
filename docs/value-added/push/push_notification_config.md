@@ -458,7 +458,7 @@ FCM 通道推送通知示例如下：
         "android":{
             "notification":{
                 "title":"wx1994发来新消息3",
-                "body":"联系人发来新消息",
+                "body":"好友发来新消息",
                 "channelId":"hyphenate_offline_push_notification",
                 "defaultSound":false,
                 "sound":"/raw/ring",

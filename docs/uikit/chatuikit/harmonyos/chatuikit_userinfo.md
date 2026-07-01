@@ -29,7 +29,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(currentUserId)
 
 ## 用户信息或群组信息提供
 
-单群聊 UIKit 提供 `ChatUIKitClient.setProfileProvider` 接口，用于提供用户信息或群组信息，包括联系人或群组的信息。
+单群聊 UIKit 提供 `ChatUIKitClient.setProfileProvider` 接口，用于提供用户信息或群组信息，包括好友或群组的信息。
 
 使用方法如下所示：
 
@@ -47,13 +47,13 @@ ChatUIKitClient.setProfileProvider({
             resolve(info);
           }
         } else if (typeof userId === 'string') {
-          // 处理获取单个联系人信息的逻辑
+          // 处理获取单个好友信息的逻辑
           ......
           let user = new ChatUserProfile();
           ......
           resolve(user);
         } else {
-          // 处理获取多个联系人信息的逻辑
+          // 处理获取多个好友信息的逻辑
           ......
           let result: ChatUserProfile[] = [];
           ......
@@ -66,7 +66,7 @@ ChatUIKitClient.setProfileProvider({
 
 :::tip
 关于头像和昵称的设置说明如下：
-- 对于 **联系人**，其昵称和头像可通过 `ChatUserProfile` 对象的 `name` 及 `avatar` 属性进行配置。
+- 对于 **好友**，其昵称和头像可通过 `ChatUserProfile` 对象的 `name` 及 `avatar` 属性进行配置。
 - 对于 **群组**，其名称和群头像可通过 `ChatGroupProfile` 对象的 `name` 及 `avatar` 属性进行配置。
 :::
 

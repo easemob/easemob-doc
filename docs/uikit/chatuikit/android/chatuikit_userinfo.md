@@ -29,7 +29,7 @@ ChatUIKitClient.login(
 
 ## 用户信息提供
 
-单群聊 UIKit 提供 `ChatUIKitClient.setUserProfileProvider` 接口提供用户信息，包括联系人和群组成员的信息。
+单群聊 UIKit 提供 `ChatUIKitClient.setUserProfileProvider` 接口提供用户信息，包括好友和群组成员的信息。
 
 `ChatUIKitUserProfileProvider` 接口如下所示：
 

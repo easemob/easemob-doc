@@ -2,7 +2,7 @@
 
 <Toc />
 
-用户登录后，可进行添加联系人、获取好友列表等操作。
+用户登录后，可进行添加好友、获取好友列表等操作。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
@@ -48,9 +48,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
     EMClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
       EMContactEventHandler(
-        // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
+        // 好友已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
         onContactAdded: (userId) {},
-        // 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+        // 好友被删除。用户 B 将用户 A 从好友列表上删除，用户 A 收到该事件。
         onContactDeleted: (userId) {},
         // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
         onContactInvited: (userId, reason) {},
@@ -69,7 +69,7 @@ EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 2. 请求添加好友。
 
 ```dart
-// 要添加为联系人的用户 ID
+// 要添加为好友的用户 ID
 String userId = "foo";
 // 请求加为好友的理由
 String reason = "Request to add a friend.";
@@ -105,7 +105,7 @@ try{
 
 ### 删除好友
 
-删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+删除好友时会同时删除对方好友列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 可同时选择是否保留聊天会话，示例代码如下：
 

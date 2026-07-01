@@ -157,7 +157,7 @@ npm run start
 2. 输入你的第一条消息并发送。
 
 :::tip
-使用自定义 App Key 时，由于没有联系人，需先添加好友。
+使用自定义 App Key 时，由于没有好友，需先添加好友。
 :::
 
 <ImageGallery>

@@ -1,10 +1,10 @@
-# 批量踢出子区成员
+# 批量踢出消息话题成员
 
 ## 功能说明
 
-- 批量踢出子区成员。
-- 每次最多可踢出 10 个子区成员。
-- 使用该接口前，你需要联系商务开通子区功能。
+- 批量踢出消息话题成员。
+- 每次最多可踢出 10 个消息话题成员。
+- 使用该接口前，你需要联系商务开通消息话题功能。
 
 ## 调用频率上限
 
@@ -18,7 +18,7 @@ DELETE https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 | 参数        | 类型   | 是否必需 | 描述      |
 | :---------- | :----- | :------- | :-------- |
-| `thread_id` | String | 是       | 子区 ID。 |
+| `thread_id` | String | 是       | 消息话题 ID。 |
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
@@ -45,7 +45,7 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7/users \
 
 | 参数        | 类型 | 是否必需 | 备注                                                       |
 | :---------- | :--- | :------- | :--------------------------------------------------------- |
-| `usernames` | List | 是       | 批量踢出子区的用户 ID 列表。每次最多可踢出 10 个子区成员。 |
+| `usernames` | List | 是       | 批量踢出消息话题的用户 ID 列表。每次最多可踢出 10 个消息话题成员。 |
 
 ## 响应示例
 
@@ -78,7 +78,7 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7/users \
 | :------- | :----- | :------------------------------------------------------ |
 | `entities`       | JSON Array | 响应数据。                          |
 | - `result` | Bool   | 操作结果。<br/> - `true`：成功；<br/> - `false`：失败。 |
-| - `user`   | String | 被踢出子区的用户 ID。                                   |
+| - `user`   | String | 被踢出消息话题的用户 ID。                                   |
 
 其他字段的说明如下：
 
@@ -97,9 +97,9 @@ curl -X DELETE https://XXXX/XXXX/XXXX/thread/1XXXX7/users \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多可踢出 10 个子区成员。   |
+| 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多可踢出 10 个消息话题成员。   |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404     | group_error | thread not found. | 子区不存在 | 输入正确的子区 ID。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
+| 404     | group_error | thread not found. | 消息话题不存在 | 输入正确的消息话题 ID。 |
+| 403     | group_error | thread not open. | 消息话题功能未开通。 | 调用该接口前，你需要联系商务开通消息话题功能。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

@@ -11,8 +11,8 @@
 
 ## 回调时机
 
-- 客户端 [发送](/document/android/thread_message.html#发送子区消息)、[撤回](/document/android/thread_message.html#撤回子区消息) 或 [编辑](/document/android/message_modify.html) 子区消息。
-- 调用 RESTful API [发送](/document/server-side/message_group.html)、[撤回](/document/server-side/message_recall_single.html) 或 [编辑](/document/server-side/message_modify.html) 子区消息。
+- 客户端 [发送](/document/android/thread_message.html#发送消息话题中的消息)、[撤回](/document/android/thread_message.html#撤回消息话题中的消息) 或 [编辑](/document/android/message_modify.html) 消息话题中的消息。
+- 调用 RESTful API [发送](/document/server-side/message_group.html)、[撤回](/document/server-side/message_recall_single.html) 或 [编辑](/document/server-side/message_modify.html) 消息话题中的消息。
 
 ## 回调请求
 

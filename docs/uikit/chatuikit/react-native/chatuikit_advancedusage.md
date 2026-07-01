@@ -219,7 +219,7 @@ export function SomeView() {
 - `MessageServiceListener`：监听消息相关的通知。
 - `ConversationListener`：监听会话相关的通知。
 - `GroupServiceListener`：监听群组相关的通知。
-- `ContactServiceListener`：监听联系人相关的通知。
+- `ContactServiceListener`：监听好友相关的通知。
 - `PresenceServiceListener`：监听用户状态订阅的通知。
 - `CustomServiceListener`：监听自定义的通知。
 - `MultiDeviceStateListener`：监听多设备相关的通知。
@@ -228,7 +228,7 @@ export function SomeView() {
 2. UI 事件通知：应用主动行为触发可能导致列表 item 增加、删除和变更、列表刷新和列表重载。例如，在群详情页面修改了群名称，会话列表组件的页面也会更新。很多情况下，单个界面行可能会导致多个 UI 组件发生的变化。详见 [UIListener](#监听器)。
 
 - `UIConversationListListener`：监听会话列表的变更的通知。
-- `UIContactListListener`：监听联系人列表的变更的通知。
+- `UIContactListListener`：监听好友列表的变更的通知。
 - `UIGroupListListener`：监听群组列表的变更的通知。
 - `UIGroupParticipantListListener`：监听群成员列表的变更的通知。
 - `UINewRequestListListener`：监听好友请求列表的变更的通知。

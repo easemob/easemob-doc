@@ -25,7 +25,7 @@
 
 ### 标题栏
 
-标题栏使用统一的  `ChatUIKitTitleBar` 组件，与聊天页面、联系人列表、群详情和联系人详情等页面保持一致。详见 [设置标题栏](chatuikit_custom_titlebar.html)。
+标题栏使用统一的  `ChatUIKitTitleBar` 组件，与聊天页面、好友列表、群详情和好友详情等页面保持一致。详见 [设置标题栏](chatuikit_custom_titlebar.html)。
 
 ### 会话搜索栏
 

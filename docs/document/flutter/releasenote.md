@@ -68,7 +68,7 @@
 
 #### 修复
 
-- 修复 Thread 子区会加入到会话列表的问题。
+- 修复 Thread 消息话题会加入到会话列表的问题。
 - 修复当 [修改文本和自定义消息之外的消息](message_modify.html) 时，`EEMChatEventHandler#onMessageContentChanged` 回调中不返回修改的信息的问题。
 - 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息 `FetchMessageOptions#needSave` 设置为 `false`，也会生成新的本地会话的问题。
 - 修复群组或聊天室解散后，成员收到 [事件](group_manage.html#解散群组) 后，仍然会从服务器获取群组或聊天室详情的问题。
@@ -139,8 +139,8 @@
 #### 新增特性
 
 - [支持修改各类发送成功后的消息](message_modify.html) ：
-  - 文本/自定义消息：支持修改消息内容（body）和扩展 `attributes`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `attributes`。
+  - 文本/自定义消息：支持编辑消息内容（body）和扩展 `attributes`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `attributes`。
   - 命令消息：不支持修改。
 - 支持[控制 iOS 后台的行为和使用方式](initialization.html#初始化)。
 - 支持[鸿蒙平台](integration.html#鸿蒙平台支持)。
@@ -227,7 +227,7 @@
 #### 修复
 
 - 修复 `fetchConversationsByOptions` 偶尔引起的崩溃；
-- 修复拉黑联系人时缓存未及时更新的问题；
+- 修复拉黑好友时缓存未及时更新的问题；
 - 修复退出登录再登录后推送可能不工作的问题。
 
 ## v4.6.1 2024-6-11
@@ -279,7 +279,7 @@
   - 新增 `EMChatMessage#pinInfo` 方法，展示消息的置顶详情。
   - 新增 `EMChatEventHandler#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - 新增 `EMOptions#messagesReceiveCallbackIncludeSend` 开关。开启后，在 `EMChatEventHandler#onMessagesReceived` 回调里增加发送成功的消息。
-- 消息修改回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- 消息编辑回调 `EMChatEventHandler#onMessageContentChanged` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 
 #### 优化
 
@@ -348,7 +348,7 @@
 - 修复 `EMChatRoomEventHandler#onSpecificationChanged` 回调不执行；
 - 修复 `EMChatThreadManager#fetchChatThreadMembers` 崩溃；
 - 修复特殊场景下，安卓平台退出后再登录会丢失聊天室监听事件问题；
-- 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+- 修复编辑消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 
 ## v4.1.0 2023-8-16
 
@@ -359,9 +359,9 @@
 - 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)：
   - 新增 `Combine` 消息类型，用于合并转发消息；
   - 新增 `EMChatManager#fetchCombineMessageDetail` 方法，获取合并消息中的原始消息列表;
-- 新增[消息修改功能](message_modify.html)：
-  - 新增 `EMChatManager#modifyMessage` 方法用户修改已发送的消息，目前只支持文本消息;
-  - 新增 `EMChatEventHandler#onMessageContentChanged` 回调，用户监听消息修改实现；
+- 新增[消息编辑功能](message_modify.html)：
+  - 新增 `EMChatManager#modifyMessage` 方法用户编辑已发送的消息，目前只支持文本消息;
+  - 新增 `EMChatEventHandler#onMessageContentChanged` 回调，用户监听消息编辑实现；
 - 新增[会话置顶功能](conversation_pin.html#置顶-取消置顶会话)：
   - 新增 `EMChatManager#pinConversation` 方法，实现在服务器会话列表中置顶/取消置顶会话；
   - 新增 `EMChatManager#fetchPinnedConversations` 方法，从服务器获取已置顶会话；

@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM React Demo 提供用户登录、单聊、群组、聊天室、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
+环信即时通讯 IM React Demo 提供用户登录、单聊、群组、聊天室、消息话题、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
 
 ## 体验 Demo 
 
@@ -17,9 +17,9 @@
 <ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_chat.png" title="会话列表+聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_group_detail.png" title="会话列表+群组设置" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+联系人设置" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="联系人列表+群组" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="联系人列表+联系人" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+好友设置" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="好友列表+群组" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="好友列表+好友" />
 </ImageGallery>  
 
 ## 快速跑通 Demo 源码
@@ -72,7 +72,7 @@ Demo 中的主要模块如下：
 | :----------- | :--------------------------------------- |
 | `components` | 项目中定义的组件。                       |
 | `config`     | SDK 初始化配置。                         |
-| `containers` | 容器组件，包含联系人、聊天、登录和注册。 |
+| `containers` | 容器组件，包含好友、聊天、登录和注册。 |
 | `layout`     | 聊天部分的布局。                         |
 | `selectors`  | 缓存数据，优化性能。                     |
 | `utils`      | 数据库和工具方法。                       |

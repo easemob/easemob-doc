@@ -53,7 +53,7 @@ export const zhSidebar = sidebar({
                 collapsible: true,
                 children: [
                 { text: "群组概述", link: "product_group_overview.html" },
-                { text: "子区", link: "product_thread_overview.html" },
+                { text: "消息话题", link: "product_thread_overview.html" },
                 ],
               },
               { text: "聊天室", link: "product_chatroom_overview.html" },

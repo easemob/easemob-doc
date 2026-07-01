@@ -8,7 +8,7 @@
 
 EaseIMKit 是什么？
 
-**EaseIMKit** 是 EaseUI 的升级版，是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如‘会话列表’、‘聊天界面’和‘联系人列表’等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
+**EaseIMKit** 是 EaseUI 的升级版，是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如‘会话列表’、‘聊天界面’和‘好友列表’等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
 
 EaseIMKit 源码地址
 
@@ -94,7 +94,7 @@ public class DemoApplication extends Application {
 
 ## 快速搭建
 
-EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及联系人等基本的 fragment，旨在帮助开发者快速集成环信 SDK。
+EaseIMKit 封装了常用 IM 功能，提供了会话，聊天及好友等基本的 fragment，旨在帮助开发者快速集成环信 SDK。
 
 ### 创建会话列表界面
 
@@ -138,9 +138,9 @@ public class ChatActivity extends BaseActivity {
 
 ![img](/images/android/easeim1.jpeg)
 
-### 添加联系人界面
+### 添加好友界面
 
-EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加联系人，删除联系人等）进行处理。
+EaseIMKit 提供了 EaseContactListFragment，添加其及其子类到 Activity 中。开发者需要对刷新事件（添加好友，删除好友等）进行处理。
 
 ![img](/images/android/easeim2.jpeg)
 
@@ -740,7 +740,7 @@ EaseIMKit 也提供了增加自定义表情的接口，开发者可仿照 Emojic
 chatLayout.getChatInputMenu().getEmojiconMenu().addEmojiconGroup(EmojiconExampleGroupData.getData());
 ```
 
-### 设置联系人列表
+### 设置好友列表
 
 通讯录列表界面可以设置如下样式：
 
@@ -884,7 +884,7 @@ EaseIM.getInstance().setUserProvider(new EaseUserProfileProvider() {
 });
 ```
 
-EaseIMKit 中会话列表，聊天列表及联系人列表，内部已经添加 EaseUserProfileProvider 的判断，当展示数据时优先从 EaseUserProfileProvider 获取头像和昵称数据，如果有则展示，如果没有头像采用默认头像，昵称展示为环信 ID。
+EaseIMKit 中会话列表，聊天列表及好友列表，内部已经添加 EaseUserProfileProvider 的判断，当展示数据时优先从 EaseUserProfileProvider 获取头像和昵称数据，如果有则展示，如果没有头像采用默认头像，昵称展示为环信 ID。
 
 :::tip 建议方案
 开发者先将相关用户信息从服务器中获取并存储到数据库中，在 getUser(String username) 方法调用时，从数据库中根据 username（环信 ID）取出相应的用户数据，生成 EaseUser 对象 user，并给 user 赋值 nickname 及 avatar 属性，最后返回这个 user 即可。
@@ -892,7 +892,7 @@ EaseIMKit 中会话列表，聊天列表及联系人列表，内部已经添加 
 
 #### 统一设置头像样式
 
-EaseIMKit 提供了 `EaseAvatarOptions` 这个类用于全局配置头像的样式，包括形状，圆角半径，描边宽度及描边颜色。会话，聊天及联系人中已经增加了对于 EaseAvatarOptions 的支持。
+EaseIMKit 提供了 `EaseAvatarOptions` 这个类用于全局配置头像的样式，包括形状，圆角半径，描边宽度及描边颜色。会话，聊天及好友中已经增加了对于 EaseAvatarOptions 的支持。
 
 示例代码如下：
 

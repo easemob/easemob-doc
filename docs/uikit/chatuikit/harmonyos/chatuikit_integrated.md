@@ -317,7 +317,7 @@ struct Index {
 }
 ```
 
-### 创建联系人列表页面
+### 创建好友列表页面
 
 - 使用 `ContactListPage`
 
@@ -331,7 +331,7 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 - 使用 `ContactListView`
 
-开发者也可以使用单群聊 UIKit 提供的 `ContactListView` 创建联系人列表页面，示例代码如下：
+开发者也可以使用单群聊 UIKit 提供的 `ContactListView` 创建好友列表页面，示例代码如下：
 
 1. 编写包含 NavDestination 子组件的页面。
    
@@ -365,7 +365,7 @@ export struct ContactsPage {
       Column() {
         ComposeTitleBar({
           titlePosition: HorizontalAlign.Center,
-          primaryTitle: '联系人列表',
+          primaryTitle: '好友列表',
           onBackPress: () => {
             this.navPathStack.pop();
           }

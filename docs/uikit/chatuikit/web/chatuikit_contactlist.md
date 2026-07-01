@@ -1,9 +1,9 @@
 
-# 自定义联系人列表
+# 自定义好友列表
 
-## 自定义联系人列表 Header
+## 自定义好友列表 Header
 
-例如，将通讯录页面默认标题名称**联系人列表**修改为**自定义 Header**，示例代码如下。
+例如，将通讯录页面默认标题名称**好友列表**修改为**自定义 Header**，示例代码如下。
 
 ```jsx
 import React, { useEffect, useState } from "react";
@@ -20,12 +20,12 @@ const ContactList = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/contact-header.png" title="自定义联系人列表 Header" />
+  <ImageItem src="/images/uikit/chatuikit/web/contact-header.png" title="自定义好友列表 Header" />
 </ImageGallery>
 
-## 在联系人列表中添加黑名单
+## 在好友列表中添加黑名单
 
-在联系人列表中添加联系人黑名单，示例代码如下：
+在好友列表中添加好友黑名单，示例代码如下：
 
 ```jsx
 import React, { useEffect, useState } from "react";
@@ -63,9 +63,9 @@ const ContactList = () => {
   <ImageItem src="/images/uikit/chatuikit/web/contact-block.png" title="加入黑名单" />
 </ImageGallery>
 
-## 设置成可选择的联系人列表
+## 设置成可选择的好友列表
 
-例如，创建群组时需添加多个用户，可点击联系人对应的复选框进行选择。
+例如，创建群组时需添加多个用户，可点击好友对应的复选框进行选择。
 
 ```jsx
 import React, { useEffect, useState } from "react";
@@ -90,7 +90,7 @@ const ContactListContainer = () => {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/web/contact-select.png" title="可选择的联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/web/contact-select.png" title="可选择的好友列表" />
 </ImageGallery>
 
 ## ContactList 属性总览
@@ -137,12 +137,12 @@ const ContactListContainer = () => {
 	  <tr>
 	    <td style=font-size:15px>checkable</td>
         <td style=font-size:15px>boolean</td>
-		<td style=font-size:15px>是否在联系人后面显示复选框。</td>  
+		<td style=font-size:15px>是否在好友后面显示复选框。</td>  
 	  </tr>
 	   <tr>
 	    <td style=font-size:15px>onCheckboxChange</td>
         <td style=font-size:15px>(checked: boolean, data: UserInfoData) => void; </td>
-		<td style=font-size:15px>点击联系人后面显示复选框的回调。 </td>
+		<td style=font-size:15px>点击好友后面显示复选框的回调。 </td>
 	  </tr>
 	  <tr>
 	    <td style=font-size:15px>header </td>

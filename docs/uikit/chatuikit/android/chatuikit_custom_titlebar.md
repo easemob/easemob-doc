@@ -2,7 +2,7 @@
 
 `ChatUIKitTitleBar` 是可自定义的标题栏组件，基于 Material Toolbar 提供灵活的布局方式，支持显示头像、状态图标、标题、副标题、导航按钮和菜单等多种元素。
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。你可以根据自身需求设置标题栏。
+聊天页面、会话列表页面、好友列表页面、群详情页面和好友详情页面的标题栏均使用 `ChatUIKitTitleBar`。你可以根据自身需求设置标题栏。
 
 ## 概述
 
@@ -55,12 +55,12 @@ val fragment = ChatUIKitConversationListFragment.Builder()
     .build()
 ```
 
-- 设置联系人列表标题栏：
+- 设置好友列表标题栏：
 
 ```kotlin
 val fragment = ChatUIKitContactsListFragment.Builder()
     .useTitleBar(true) // 是否使用标题栏
-    .setTitleBarTitle("联系人")  // 设置标题
+    .setTitleBarTitle("好友")  // 设置标题
     .enableTitleBarPressBack(false)  // 显示返回按钮
     .build()
 ```

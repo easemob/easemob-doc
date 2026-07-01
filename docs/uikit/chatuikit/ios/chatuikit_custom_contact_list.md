@@ -1,8 +1,8 @@
 # 通讯录
 
-通讯录页面提供联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
+通讯录页面提供好友搜索，添加好友，好友申请列表入口，群组列表入口，好友列表。
 
-你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 上的 `ContactViewController`。
+你可以自定义好友列表页面的导航栏、好友列表 Header、好友列表和好友列表项。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller) 上的 `ContactViewController`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录页面 ContactViewController.swift" />
@@ -10,13 +10,13 @@
 
 ## 自定义导航栏
 
-联系人列表页面、聊天页面、会话列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果联系人列表页面（`ContactViewController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义导航栏](chatuikit_custom_titlebar.html)。
+好友列表页面、聊天页面、会话列表页面、群详情页面和好友详情页面的导航栏均使用 `EaseChatNavigationBar`。如果好友列表页面（`ContactViewController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义导航栏](chatuikit_custom_titlebar.html)。
 
-## 自定义联系人列表 Header 
+## 自定义好友列表 Header 
 
-### 设置联系人列表 Header List 数据源
+### 设置好友列表 Header List 数据源
 
-你可以通过 `Appearance.contact.listHeaderExtensionActions = value` 设置联系人列表 Header List 数据源。
+你可以通过 `Appearance.contact.listHeaderExtensionActions = value` 设置好友列表 Header List 数据源。
    
 下面的示例代码展示如何增加或删减数据项：
 
@@ -43,20 +43,20 @@
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_list_header.png" title="自定义联系人列表 Header" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_list_header.png" title="自定义好友列表 Header" />
 </ImageGallery>
 
-### 设置联系人列表 Header Cell 的高度
+### 设置好友列表 Header Cell 的高度
 
-你可以通过 `Appearance.contact.headerRowHeight = value` 设置联系人列表 Header Cell 的高度。
+你可以通过 `Appearance.contact.headerRowHeight = value` 设置好友列表 Header Cell 的高度。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_header_row_height.png" title="设置联系人列表 Header Cell 的高度" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_header_row_height.png" title="设置好友列表 Header Cell 的高度" />
 </ImageGallery>
 
-## 自定义联系人列表
+## 自定义好友列表
 
-自定义联系人列表 TableView，需要重载联系人列表页面中的 `createContactList` 方法后，返回你继承 `EaseChatUIKit` 中 `ContactView` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ContactView.swift` 类。示例代码如下：
+自定义好友列表 TableView，需要重载好友列表页面中的 `createContactList` 方法后，返回你继承 `EaseChatUIKit` 中 `ContactView` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ContactView.swift` 类。示例代码如下：
 
 ```swift
     override open func createContactList() -> ContactView {
@@ -64,9 +64,9 @@
     }
 ```
 
-## 自定义联系人列表项
+## 自定义好友列表项
 
-要自定义联系人列表中列表项 `ContactCell` 的内容，你需要执行以下步骤：
+要自定义好友列表中列表项 `ContactCell` 的内容，你需要执行以下步骤：
 
 1. 继承 `EaseChatUIKit` 中的 `ContactCell` 类创建新的自定义类 `CustomContactCell`，然后进行如下代码设置：
 
@@ -87,31 +87,31 @@
 
 若要修改之前的逻辑，则需复制之前的 `refresh` 方法的代码进行修改，无需调用 `super.xxxx`。初始化方法以及部分 UI 创建的方法均可以重载。
 
-### 设置联系人列表 Cell 的高度
+### 设置好友列表 Cell 的高度
 
-你可以通过 `Appearance.contact.rowHeight = value` 设置联系人列表项（Cell）的高度。
+你可以通过 `Appearance.contact.rowHeight = value` 设置好友列表项（Cell）的高度。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_cell_height.png" title="设置联系人列表 Cell 的高度" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_cell_height.png" title="设置好友列表 Cell 的高度" />
 </ImageGallery>
 
-### 设置联系人头像样式
+### 设置好友头像样式
 
-你可以通过 `Appearance.avatarRadius = value` 设置联系人头像圆角，分为极小、小、中、大等四个等级。
+你可以通过 `Appearance.avatarRadius = value` 设置好友头像圆角，分为极小、小、中、大等四个等级。
 
 ## 拦截原有组件点击事件
 
 拦截后的业务逻辑与 UI 刷新逻辑，你需要自己完全实现，建议使用注册继承即可更快速的实现需求。
 
-联系人列表事件如下所示：
+好友列表事件如下所示：
 
-- `didSelectedContact`：点击联系人。
+- `didSelectedContact`：点击好友。
 
 - `groupWithSelected`：点击添加群成员或者创建群组选择成员。
 
-## 联系人列表页面其他设置
+## 好友列表页面其他设置
 
 1. 其他标记为 open 的方法均为可重载方法。如有需要，可重载对应方法实现自己业务逻辑。
 
-2. 关于联系人列表页面的其他配置，包括按钮、输入框等空间的色调以及弹窗的设置，详见[通用可配项文档](chatuikit_config_item.html)。
+2. 关于好友列表页面的其他配置，包括按钮、输入框等空间的色调以及弹窗的设置，详见[通用可配项文档](chatuikit_config_item.html)。
 

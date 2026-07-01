@@ -251,7 +251,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 修复
 
-- 修复 [EMChatThreadChangeListener#onChatThreadUserRemoved](thread.html#子区成员被移出子区) 事件回调出的 `EMChatThreadEvent` 的 `TYPE` 为 `null` 问题。
+- 修复 [EMChatThreadChangeListener#onChatThreadUserRemoved](thread.html#消息话题成员被移出消息话题) 事件回调出的 `EMChatThreadEvent` 的 `TYPE` 为 `null` 问题。
 - 修复获取会话免打扰开始及结束时间时在部分机型上产生的 crash。
 
 ## v4.14.0 Dev 2025-4-21（开发版）
@@ -280,9 +280,9 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 优化
 
-- [IM SDK] 发送后修改消息接口 [EMChatManager#asyncModifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+- [IM SDK] 发送后编辑消息接口 [EMChatManager#asyncModifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
   - 命令消息：不支持修改。
 - [IM SDK] 优化重连逻辑，默认切换重连的地址。
 - [EaseIM App (Demo)] 增加反诈提示 UI。
@@ -454,7 +454,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 修复
 
-- [IM SDK] 修复拉黑联系人时缓存未及时更新的问题。
+- [IM SDK] 修复拉黑好友时缓存未及时更新的问题。
 - [IM SDK] 修复多线程场景下重复调用 `EMCustomMessageBody#setParams` 引起的崩溃问题。
 - [EaseIMKIt] 会话列表部分场景下不显示问题。
 
@@ -538,7 +538,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
   - 新增 `EMMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `EMChatMessage#pinnedInfo` 方法，展示消息的置顶详情。
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
-- [IM SDK] 消息修改回调 `EMMessageListener#onMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- [IM SDK] 消息编辑回调 `EMMessageListener#onMessageContentChanged` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - [IM SDK] 支持[动态加载 .so 库文件](quickstart.html#方法三-动态加载-so-库文件)。
 
@@ -645,7 +645,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 修复
 
-[IM SDK] 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+[IM SDK] 修复编辑消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 
 ## v4.1.0 Dev 2023-7-27（开发版）
 
@@ -656,9 +656,9 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
     - 新增消息体类 `EMCombineMessageBody`；
     - 新增 `EMMessage#createCombinedSendMessage` 方法用于创建合并消息；
     - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法用于下载并解析合并消息。
-- [IM SDK] 新增[消息修改功能](message_modify.html)：
-    - 新增 `EMChatManager#asyncModifyMessage` 方法，用于修改消息；
-    - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
+- [IM SDK] 新增[消息编辑功能](message_modify.html)：
+    - 新增 `EMChatManager#asyncModifyMessage` 方法，用于编辑消息；
+    - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息编辑后，接收方会收到该回调。
 - [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
     - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
     - 新增 `EMOptions#getCustomOSPlatform` 方法，获取当前设备的自定义设备平台；
@@ -672,7 +672,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
     - `EMClient#kickDeviceWithToken`：将指定账号登录的指定设备踢下线；
     - `EMClient#kickAllDevicesWithToken`：将指定账号登录的所有设备都踢下线。
 - [IM UIKit] 新增消息引用功能。
-- [IM UIKit] 新增修改消息功能。
+- [IM UIKit] 新增编辑消息功能。
 - [IM APP] 新增消息中 URL 的预览功能。
 
 #### 优化
@@ -891,7 +891,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 优化：
 
-- [IM SDK] 优化子区相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中用 `EMChatThread` 对象替换 Chat Thread 相关属性；
+- [IM SDK] 优化消息话题相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中用 `EMChatThread` 对象替换 Chat Thread 相关属性；
 - [IM SDK] 群邀请回调 [EMGroupChangeListener#onInvitationReceived](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html#ab3591c00dc3f5b4138fa57073cc29589) 中新增 群名称（groupName） 参数值；
 - [IM SDK] 移除平台层 CBC 及 ECB 加密算法；
 - [IM SDK] 升级网络链路库；
@@ -906,7 +906,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性:
 
-- [IM SDK] 新增 [消息子区（Message Thread）](thread_message.html)功能；
+- [IM SDK] 新增 [消息消息话题（Message Thread）](thread_message.html)功能；
 
 #### 优化：
 
@@ -1117,7 +1117,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [EaseIMKIt] 修复某些场景下导致发送失败图标和已读标志重叠的问题；
 - [EaseIMKIt] 修复某些场景下长按聊天条目崩溃的问题；
-- [EaseIMKIt] 修复联系人列表不设置头部布局展示空布局的问题；
+- [EaseIMKIt] 修复好友列表不设置头部布局展示空布局的问题；
 - [EaseIMKIt] 修复接收的图片或者视频封面没有设置宽高导致崩溃的问题；
 - [EaseIM] 修复管理员将群成员加入到黑名单后无法再添加好友的问题；
 - [EaseIM] 修复不能在群组和聊天室发送名片的问题；
@@ -1955,7 +1955,7 @@ Bug fix:
 
 - cmd 消息增加“em\_” 和 “easemob::” 开头的 action 为内部保留字段；
 - Fix 个别情况下会话未读消息数显示不准确的 bug；
-- Fix 个别情况下获取联系人不正确的 bug；
+- Fix 个别情况下获取好友不正确的 bug；
 - Fix 登录户马上加入聊天室某些情况下会失败的 bug；
 - 发送语音或者视频时，如果文件内容过小会给出提示；
 - 优化读取数据库的性能；
@@ -1963,7 +1963,7 @@ Bug fix:
 ## v3.1.5 2016-8-26
 
 1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看[3.1.5api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.1.5apichange)
-2. 优化读取联系人的速度；
+2. 优化读取好友的速度；
 3. 修复在 logout 方法的回调里立刻调用 login 方法不能登录的 bug；
 4. 修复 https 安全漏洞，提高安全性；
 5. 修复实时通话时暂停音频不生效的 bug；

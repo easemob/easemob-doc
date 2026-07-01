@@ -2,7 +2,7 @@
 
 <Toc />
 
-用户登录后，可进行添加联系人、获取好友列表等操作。
+用户登录后，可进行添加好友、获取好友列表等操作。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
@@ -42,10 +42,10 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 ```typescript
 let contactListener: ContactListener = {
   onContactAdded : (userId: string) => {
-    // 增加联系人时回调此方法。
+    // 增加好友时回调此方法。
   },
   onContactDeleted : (userId: string) => {
-    // 被删除联系人时回调此方法。
+    // 被删除好友时回调此方法。
   },
   onContactInvited : (userId: string, reason: string) => {
     // 收到好友邀请。
@@ -88,7 +88,7 @@ ChatClient.getInstance().contactManager()?.declineInvitation(userId).then(()=>{
 
 ### 删除好友
 
-删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+删除好友时会同时删除对方好友列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 示例代码如下：
 
