@@ -6,13 +6,13 @@
 
 ## 前提条件
 
+- 已 [开通内容审核服务](/value-added/moderation/moderation_enable.html)，并配置了 [审核规则](/value-added/moderation/moderation_rule_config.html)。
 - 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
 - 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 回调时机
 
-- 消息触发了环信控制台上配置的 [内容审核规则](/value-added/moderation/moderation_overview.html)。
-- 调用 [主动文本审核 REST API](/document/server-side/moderation_text_active.html)。
+消息触发了环信控制台上配置的 [内容审核规则](/value-added/moderation/moderation_overview.html)。
 
 ## 回调请求
 
