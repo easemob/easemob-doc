@@ -337,11 +337,11 @@
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_拉黑好友事件的消息 ID”。 | 
-| `chat_type`       | String | `roster` 表示好友事件。 |
+| `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_拉黑用户事件的消息 ID”。 | 
+| `chat_type`       | String | `roster`：拉黑用户事件。 |
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
-| `payload.operation` | String   | `ban`：拉黑好友。 |
+| `payload.operation` | String   | `ban`：拉黑用户。 |
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
@@ -349,11 +349,11 @@
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
-| `msg_id`    | String   | 拉黑好友事件的消息 ID。 | 
+| `msg_id`    | String   | 拉黑用户事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
 
 
-## 解除拉黑好友
+## 解除拉黑用户
 
 #### 回调时机
 
@@ -388,11 +388,11 @@
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_解除拉黑好友事件的消息 ID”。 | 
-| `chat_type`       | String | `roster` 表示好友事件。 |
+| `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_解除拉黑用户事件的消息 ID”。 | 
+| `chat_type`       | String | `roster`：解除拉黑用户事件。 |
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
-| `payload.operation` | String   | `allow`：解除拉黑好友。 |
+| `payload.operation` | String   | `allow`：解除拉黑用户。 |
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
@@ -400,6 +400,6 @@
 | `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
-| `msg_id`    | String   | 解除拉黑好友事件的消息 ID。 | 
+| `msg_id`    | String   | 解除拉黑用户事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
 
