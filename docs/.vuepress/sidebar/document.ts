@@ -855,8 +855,8 @@ const documentSidebar = [
         collapsible: true,
         children: [
           { text: '用户状态变更回调', link: 'callback_login_logout.html' },
-          { text: '好友/黑名单回调', link: 'callback_contact.html' },
-          { text: '消息相关回调',
+          { text: '好友/黑名单管理回调', link: 'callback_contact.html' },
+          { text: '消息回调',
                 collapsible: true,
                 children: [
                   { text: '消息发送', link: 'callback_message_send.html' },
@@ -867,13 +867,13 @@ const documentSidebar = [
                   { text: '表情回复变更', link: 'callback_reaction.html' },
                 ]
          },
-          { text: '会话相关回调',
+          { text: '会话回调',
                 collapsible: true,
                 children: [
                   { text: '会话已读回执', link: 'callback_single_conversation_ack.html' }
                 ]
           },
-          { text: '群组/聊天室相关回调', 
+          { text: '群组与聊天室回调', 
             collapsible: true,
             children: [
               {
@@ -919,8 +919,8 @@ const documentSidebar = [
             { text: '历史版本（群/聊天室操作消息）', link: 'callback_group_room_old.html' }, 
             ]
           },
-          { text: '离线推送相关回调', link: 'callback_offline_push.html' },
-          { text: '内容审核相关回调', link: 'callback_moderation.html' },
+          { text: '离线推送回调', link: 'callback_offline_push.html' },
+          { text: '内容审核回调', link: 'callback_moderation.html' },
           { text: '敏感词监测回调', link: 'callback_sensitive_word.html' }
         ]
       },
