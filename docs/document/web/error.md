@@ -60,7 +60,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 514    | MESSAGE_STREAM_TIMEOUT                 | 流式消息的发送总时长超时：该时长不能超过 30 分钟，超时再发送分片则返回该错误。| 可在 UI 上进行提示，或检查流式消息的发送总时长。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。 | 确保邀请的⽤户不在群组中，不要重复邀请。|
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息或进行群操作时未加入该群组。 | 确保已经加⼊群组。|
-| 603    | PERMISSION_DENIED                              | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。 | 提示⽤户没有权限。|
+| 603    | PERMISSION_DENIED                              | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散消息话题（仅消息话题所在群组的群主和群管理员有权解散消息话题）。 | 提示⽤户没有权限。|
 | 604    | WEBIM_LOAD_MSG_ERROR                           | 消息回调函数内部错误。 | 消息解析失败，确保消息格式正确。| 
 | 605    | GROUP_NOT_EXIST                                | 群组不存在：发送消息时群组 ID 不正确。  | 检查群组或聊天室 ID 是否正确。| 
 | 606    | GROUP_MEMBERS_FULL                             | 群组已满：群组成员数量已达到创建群组时设置的最大人数。  | 提示群组⼈数已达上限。| 
@@ -79,7 +79,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 1200   | TRANSLATION_NOT_VALID                          | 传入的语言 code 不合法。 | 使⽤翻译功能时，确保传⼊的 code 正确。|
 | 1201   | TRANSLATION_TEXT_TOO_LONG                      | 翻译的文本过长。 | 提示消息⽂本过⻓，翻译失败。 |
 | 1204   | TRANSLATION_FAILED                             | 获取翻译服务失败。 | 提示翻译失败。|
-| 1300   | THREAD_NOT_EXIST                               | 子区不存在：未找到该子区。    | 确保⼦区 ID 正确。 |
-| 1301   | THREAD_ALREADY_EXIST                           | 该消息 ID 下子区已存在，重复添加子区。 | 提示⼦区已存在，不能重复创建。|
+| 1300   | THREAD_NOT_EXIST                               | 消息话题不存在：未找到该消息话题。    | 确保⼦区 ID 正确。 |
+| 1301   | THREAD_ALREADY_EXIST                           | 该消息 ID 下消息话题已存在，重复添加消息话题。 | 提示⼦区已存在，不能重复创建。|
 | 1302   | MODIFY_MESSAGE_NOT_EXIST | 修改的消息不存在。  | 确保消息 ID 正确。 |
-| 1304   | MODIFY_MESSAGE_FAILED | 消息修改失败。  | 提示修改消息失败。 |
+| 1304   | MODIFY_MESSAGE_FAILED | 消息编辑失败。  | 提示编辑消息失败。 |

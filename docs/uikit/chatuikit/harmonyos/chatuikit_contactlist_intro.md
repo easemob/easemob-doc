@@ -4,7 +4,7 @@
 
 环信单群聊 ChatUIKit 提供 `ContactListPage` 和 `ContactListView` 两种方式方便用户快速集成通讯录页面和自定义通讯录页面。
 
-通讯录页面用于展示通讯录列表，包括联系人搜索，添加联系人，群组列表入口，联系人列表。
+通讯录页面用于展示通讯录列表，包括好友搜索，添加好友，群组列表入口，好友列表。
 
 昵称在中文或者英文的情况下可以实现按首字母分类。
 
@@ -26,7 +26,7 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 ### 使用 ContactListView
 
-开发者也可以使用单群聊 UIKit 提供的 `ContactListView` 创建联系人列表页面，示例代码如下：
+开发者也可以使用单群聊 UIKit 提供的 `ContactListView` 创建好友列表页面，示例代码如下：
 
 **步骤一**：编写包含 NavDestination 子组件的页面。
    
@@ -60,7 +60,7 @@ export struct ContactsPage {
       Column() {
         ComposeTitleBar({
           titlePosition: HorizontalAlign.Center,
-          primaryTitle: '联系人列表',
+          primaryTitle: '好友列表',
           onBackPress: () => {
             this.navPathStack.pop();
           }

@@ -28,7 +28,7 @@ HBuilderx ⇒ 工具 ⇒ 插件安装 ⇒ 安装新插件 ⇒ 前往插件市场
 
 ## 快速使用
 
-小程序模版封装了常用 IM 功能，提供了会话，聊天及联系人等基本的 component，旨在帮助开发者快速集成环信 SDK。 同时也集成了第三方 UI 库（Uview-ui），且可按需引入。UI 库详情：[https://www.uviewui.com/components/intro.html](https://www.uviewui.com/components/intro.html)
+小程序模版封装了常用 IM 功能，提供了会话，聊天及好友等基本的 component，旨在帮助开发者快速集成环信 SDK。 同时也集成了第三方 UI 库（Uview-ui），且可按需引入。UI 库详情：[https://www.uviewui.com/components/intro.html](https://www.uviewui.com/components/intro.html)
 
 ## 组件介绍
 
@@ -59,7 +59,7 @@ import chat from "@/components/chat/chat.vue";
 
 #### 参数介绍
 
-- `username` – **必传参数** 由消息列表或联系人通过 URL 传入，包含当前用户 name 以及当前点击用户 name；示例：username: “{“myName”:“xx”,”your“:“xxx”}”
+- `username` – **必传参数** 由消息列表或好友通过 URL 传入，包含当前用户 name 以及当前点击用户 name；示例：username: “{“myName”:“xx”,”your“:“xxx”}”
 - `chatType` – **必传参数** 聊天类型singleChat：单聊 chatRoom：群聊 可自定新增
 
 #### chat 组件依赖

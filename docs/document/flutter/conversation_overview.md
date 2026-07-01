@@ -45,7 +45,7 @@
 | :--------- | :------- |
 | id      | 会话 ID，取决于会话类型。<br/> - 单聊/help desk：会话 ID 为对方的用户 ID；<br/> - 群聊：会话 ID 为群组 ID；<br/> - 聊天室：会话 ID 为聊天室的 ID。|
 | type | 会话类型枚举。<br/> - `Chat`：单聊会话；<br/> - `GroupChat`：群聊会话；<br/> - `ChatRoom`：聊天室会话。 <br/> - `HelpDesk`：客服会话。    |
-| isChatThread      | 是否为子区会话。        | 
+| isChatThread      | 是否为消息话题会话。        | 
 | isPinned     | 是否为置顶会话。       |
 | pinnedTime  | 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0`。   |
 | setExt  | 获取会话扩展属性。    |

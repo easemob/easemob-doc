@@ -708,7 +708,7 @@ class MyConvListViewModel extends ConvListViewModel {
 | `chat_icon_conv_menu_unpin`  | 左滑菜单中的取消置顶图标             |
 | `chat_icon_conv_menu_delete` | 左滑菜单中的删除图标                 |
 | `chat_icon_new_chat`         | 会话列表的标题栏“新聊天”图标       |
-| `chat_icon_add_contact`      | 会话列表的标题栏的“添加联系人”图标 |
+| `chat_icon_add_contact`      | 会话列表的标题栏的“添加好友”图标 |
 | `chat_icon_create_group`     | 会话列表的标题栏的“创建群组”图标   |
 
 **搜索相关图标**

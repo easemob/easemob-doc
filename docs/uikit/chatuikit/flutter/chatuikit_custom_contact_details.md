@@ -1,20 +1,20 @@
-# 设置联系人详情页面
+# 设置好友详情页面
 
 <Toc />
 
-你可以配置联系人详情页面的 AppBar、页面中间的按钮和联系人详情自定义列表项等。
+你可以配置好友详情页面的 AppBar、页面中间的按钮和好友详情自定义列表项等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_details.png" title="联系人详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/flutter/custom_contact_details.png" title="好友详情页面" />
 </ImageGallery> 
 
-联系人详情页提供三处自定义项：
+好友详情页提供三处自定义项：
 
 1. AppBar：可以通过 `appBarModel` 进行自定义。
 2. 中间的按钮，包括发消息、搜索消息、音频通话和视频通话等：可以通过 `actionsBuilder` 进行自定义，默认事件会通过 builder 返回，需要返回要展示的事件。
 3. 页面的列表项，包括消息免打扰、清空聊天记录等：可以通过 `itemsBuilder` 进行自定义，默认列表项会通过 builder 回调，需要返回需要展示的列表项。
 
-你可以通过以下两种方式对联系人详情页进行自定义：
+你可以通过以下两种方式对好友详情页进行自定义：
    
 - 直接在 `ContactDetailsView` 中设置：
 

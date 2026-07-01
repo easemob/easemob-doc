@@ -18,7 +18,7 @@
 #### 优化
 
 - 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 [initWithLocalPath:displayName:](message_send.html#发送图片消息) 替代。
-- 废弃初始化联系人对象的方法 `EMContact#initWithUserId:remark:`，使用 `EMContact#initWithUserId:remark:createAt:` 替代。
+- 废弃初始化好友对象的方法 `EMContact#initWithUserId:remark:`，使用 `EMContact#initWithUserId:remark:createAt:` 替代。
 
 ## v4.21.0 Dev 2026-4-28（开发版）
 
@@ -231,10 +231,10 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 优化
 
-- [IM SDK] 发送后修改消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
-  - 命令消息：不支持修改。
+- [IM SDK] 发送后编辑消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持编辑各类消息：
+  - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
+  - 命令消息：不支持编辑。
 - [IM SDK] 优化重连逻辑，默认切换重连的地址。
 - [IM SDK] 改进调用 `applicationWillEnterForeground` 的逻辑，通过发送 ping 消息触发重连。
 - [IM SDK] 禁用 `EMChatMessage`、`EMConversation`、`EMMessageBody` 的默认构造函数，防止空指针导致的 crash。
@@ -370,7 +370,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 修复
 
-- 修复拉黑联系人时缓存未及时更新的问题。
+- 修复拉黑好友时缓存未及时更新的问题。
 - 修复退出登录再登录后推送可能不工作的问题。
 
 ## v4.7.0 Dev 2024-06-05
@@ -440,7 +440,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。 
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - [IM SDK] 新增 `EMChatManager#markAllConversationsAsRead` 方法[将所有会话的未读消息设为已读](conversation_unread.html#将所有会话的未读消息数清零)。
-- [IM SDK] 消息修改回调 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 中支持[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- [IM SDK] 消息编辑回调 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 中支持[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 
 #### 优化
 
@@ -532,7 +532,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 修复
 
-[IM SDK] 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+[IM SDK] 修复编辑消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 
 ## v4.1.0 Dev 2023-7-27（开发版）
 
@@ -542,9 +542,9 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
     - 新增合并消息类型 `EMMessageBodyTypeCombine`；
     - 新增消息体类 `EMCombineMessageBody` ；
     - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法，用于下载并解析合并消息。
-- [IM SDK] 新增[消息修改功能](message_modify.html)：
-    - 新增 `EMChatManager#modifyMessage` 方法，用于修改消息；
-    - 新增 `EMChatManagerDelegate#onMessageContentChanged` 回调。消息修改后，接收方会收到该回调。
+- [IM SDK] 新增[消息编辑功能](message_modify.html)：
+    - 新增 `EMChatManager#modifyMessage` 方法，用于编辑消息；
+    - 新增 `EMChatManagerDelegate#onMessageContentChanged` 回调。消息编辑后，接收方会收到该回调。
 - [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)。
     - 新增 `EMOptions#customOSType` 属性，用于设置自定义平台代号；
     - 新增 `EMOptions#customDeviceName` 属性，用于设置当前设备的自定义设备名称。
@@ -556,7 +556,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
     - `EMClient#kickDeviceWithUserId`：将指定账号登录的指定设备踢下线：
     - `EMClient#kickAllDevicesWithUserId`：将指定账号登录的所有设备都踢下线。
 - [IM UIKit] 新增消息引用功能。
-- [IM UIKit] 新增消息修改功能。
+- [IM UIKit] 新增消息编辑功能。
 - [IM APP] 新增消息中 URL 的预览功能。
 
 #### 优化
@@ -722,7 +722,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 优化
 
-- [IM SDK] 优化子区相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中的 Chat Thread 相关属性用 `EMChatThread` 对象替换；
+- [IM SDK] 优化消息话题相关接口及属性；对比 3.9.3 版本，用 `EMChatThread` 替换 `EMChatThreadInfo`，`EMChatThreadEvent` 中的 Chat Thread 相关属性用 `EMChatThread` 对象替换；
 - [IM SDK] 群邀请回调 [EMGroupManagerDelegate#groupInvitationDidReceive:](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_e_m_group_manager_delegate-p.html#a7eb4d32b6730b232aad0492cc808f996) 中返回新增 群名称（aGroupName） 参数值；
 - [IM SDK] 升级网络链路库；
 - [IM SDK] 支持设置附件为远程地址的消息。
@@ -735,7 +735,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增消息子区（Message Thread）功能；
+- [IM SDK] 新增消息消息话题（Message Thread）功能；
 
 #### 优化
 
@@ -1168,7 +1168,7 @@ EaseIMKit：
 - 修复语音会议对方断网的回调问题
 - 修复会议中丢包率统计错误问题
 - 修复处于单聊页面，对方转发图片过来不显示问题
-- 修复转发消息选择联系人页面第一条 cell 不可选中问题
+- 修复转发消息选择好友页面第一条 cell 不可选中问题
 - 修复转发图片失败问题
 
 ## v3.6.9 2020-06-23
@@ -1214,7 +1214,7 @@ IM_DEMO 修改：
 - 更改音视频会议只使用普通会议模式
 - 修复聊天页连续接收图片，图片重复问题
 - 修复发送语音时无法调节音量问题
-- 修复联系人页个别汉字不识别，排序错误问题
+- 修复好友页个别汉字不识别，排序错误问题
 - 修复会话列表和 tabbar 未读消息数显示不准确问题
 - 修复转发自己发送的图片消息失败问题
 - 优化无网络状态发消息，消息内容立即上屏且显示发送状态
@@ -1691,7 +1691,7 @@ bug fix:
 - iOS10 进行适配
 - cmd 消息增加“em\_” 和 “easemob::” 开头的 action 为内部保留字段；
 - Fix 个别情况下会话未读消息数显示不准确的 bug；
-- Fix 个别情况下获取联系人不正确的 bug；
+- Fix 个别情况下获取好友不正确的 bug；
 - Fix 登录户马上加入聊天室某些情况下会失败的 bug；
 - 发送语音或者视频时，如果文件内容过小会给出提示；
 - 优化读取数据库的性能；

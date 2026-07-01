@@ -1,10 +1,10 @@
-# 批量用户加入子区
+# 批量用户加入消息话题
 
 ## 功能说明
 
-- 批量用户加入指定的子区。
-- 每次最多支持 10 个用户加入子区。
-- 使用该接口前，你需要联系商务开通子区功能。
+- 批量用户加入指定的消息话题。
+- 每次最多支持 10 个用户加入消息话题。
+- 使用该接口前，你需要联系商务开通消息话题功能。
 
 ## 调用频率上限
 
@@ -16,7 +16,7 @@ POST https://{host}/{org_name}/{app_name}/thread/{thread_id}/users
 
 | 参数        | 类型   | 是否必需 | 描述      |
 | :---------- | :----- | :------- | :-------- |
-| `thread_id` | String | 是       | 要加入的子区 ID。 |
+| `thread_id` | String | 是       | 要加入的消息话题 ID。 |
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
@@ -43,7 +43,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users   \
 
 | 参数        | 类型 | 是否必需 | 备注                                                         |
 | :---------- | :--- | :------- | :---------- |
-| `usernames` | List | 是       | 加入子区的用户 ID 列表。每次最多支持 10 个用户加入子区。 |
+| `usernames` | List | 是       | 加入消息话题的用户 ID 列表。每次最多支持 10 个用户加入消息话题。 |
 
 ## 响应示例
 
@@ -86,10 +86,10 @@ curl -X POST https://XXXX/XXXX/XXXX/thread/1XXXX7/users   \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多支持 10 个用户加入子区。  |
+| 400     | group_error | request body reaches limit. | 请求 body 中的 `usernames` 参数的值已超过上限。 | 请检查请求 body 中的 `usernames` 参数的值是否超过了 10。每次最多支持 10 个用户加入消息话题。  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
-| 403     | group_error | user join thread reach limit. | 用户加入的子区达到上限。 | 退出不用的子区或者联系商务调整上限。 |
-| 404     | group_error | thread not found. | 子区不存在 | 输入正确的子区 ID。 |
+| 403     | group_error | thread not open. | 消息话题功能未开通。 | 调用该接口前，你需要联系商务开通消息话题功能。 |
+| 403     | group_error | user join thread reach limit. | 用户加入的消息话题达到上限。 | 退出不用的消息话题或者联系商务调整上限。 |
+| 404     | group_error | thread not found. | 消息话题不存在 | 输入正确的消息话题 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

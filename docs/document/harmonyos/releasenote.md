@@ -133,9 +133,9 @@
 
 #### 优化
 
-- 发送后修改消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+- 发送后编辑消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
   - 命令消息：不支持修改。
 - [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
@@ -145,7 +145,7 @@
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
+- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个好友的信息。
 
 #### 优化
 
@@ -162,7 +162,7 @@
 #### 修复
 
 - 修复设置 `Conversation#searchMessagesByType` 传入 `ContentType#TXT` 时报错的问题。
-- 修复 `不是 TextMessageBody` 时获取消息修改信息崩溃的问题。
+- 修复 `不是 TextMessageBody` 时获取消息编辑信息崩溃的问题。
 - 修复 `UserInfoManager#updateUserInfo` 传入 `UserInfoType#GENDER` 时，返回类型有误的问题。
 - 修复自动登录时偶现崩溃的问题。
 
@@ -332,7 +332,7 @@
 
 #### 新增特性
 
-- 新增[修改消息](message_modify.html)功能。
+- 新增[编辑消息](message_modify.html)功能。
 - 新增 [发送](message_send.html#发送自定义类型消息) 和 [接收自定义消息](message_receive.html#接收自定义类型消息)功能。
 - 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
 - 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。

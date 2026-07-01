@@ -24,7 +24,7 @@
 
 ### 标题栏
 
-聊天页面与会话列表页面、通讯录页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitAppBar`。详见 [设置标题栏](chatuikit_custom_titlebar.md)。
+聊天页面与会话列表页面、通讯录页面、群详情页面和好友详情页面的标题栏均使用 `ChatUIKitAppBar`。详见 [设置标题栏](chatuikit_custom_titlebar.md)。
 
 ### 消息列表
 

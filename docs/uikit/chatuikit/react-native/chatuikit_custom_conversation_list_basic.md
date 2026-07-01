@@ -47,9 +47,9 @@ function ConversationListScreen() {
         // 跳转到创建群组页面
         navigation.navigate('CreateGroup');
       }}
-      // 点击新联系人按钮
+      // 点击新好友按钮
       onClickedNewContact={() => {
-        // 跳转到添加联系人页面
+        // 跳转到添加好友页面
         navigation.navigate('AddContact');
       }}
       // 过滤空会话
@@ -79,7 +79,7 @@ function ConversationListScreen() {
 | `onLongPressedItem`        | `(data?: ConversationModel) => boolean \| void`        | 长按会话条目的回调。返回 `true` 可阻止默认行为。                                                                                 |
 | `onClickedNewConversation` | `() => void`                                           | 点击"新会话"按钮的回调，通常需要跳转到新会话页面。                                                                               |
 | `onClickedNewGroup`        | `() => void`                                           | 点击"创建群组"按钮的回调，通常需要跳转到创建群组页面。                                                                           |
-| `onClickedNewContact`      | `() => void`                                           | 点击"添加联系人"按钮的回调，通常需要跳转到添加联系人页面。                                                                       |
+| `onClickedNewContact`      | `() => void`                                           | 点击"添加好友"按钮的回调，通常需要跳转到添加好友页面。                                                                       |
 | `filterEmptyConversation`  | `boolean`                                              | 是否过滤空会话（无消息的会话）。                                                                                               |
 | `onChangeUnreadCount`      | `(unreadCount: number) => void`                        | 会话列表总未读数变化时的回调。                                                                                                   |
 | `flatListProps`            | `Omit<FlatListProps, 'ref' \| 'data' \| 'renderItem'>` | 传递给内部 FlatList 的其他属性。                                                                                                 |
@@ -155,12 +155,12 @@ function ConversationListScreen() {
 
 标题栏右侧 "+" 菜单中的选项需自行处理导航：
 
-React Native UIKit 不内置页面跳转功能，创建新会话、群组或添加联系人时的页面跳转需通过回调函数自行实现。
+React Native UIKit 不内置页面跳转功能，创建新会话、群组或添加好友时的页面跳转需通过回调函数自行实现。
 
 ```typescript
 <ConversationList
   onClickedNewConversation={() => {
-    // 跳转到新会话页面（选择联系人）
+    // 跳转到新会话页面（选择好友）
     navigation.navigate('NewConversation');
   }}
   onClickedNewGroup={() => {
@@ -168,7 +168,7 @@ React Native UIKit 不内置页面跳转功能，创建新会话、群组或添�
     navigation.navigate('CreateGroup');
   }}
   onClickedNewContact={() => {
-    // 跳转到添加联系人页面
+    // 跳转到添加好友页面
     navigation.navigate('AddContact');
   }}
 />

@@ -60,7 +60,7 @@ UIKit 不会自动帮你补齐业务页面路由。凡是涉及页面跳转的�
 
 - 点击会话后跳转到聊天页面。
 - 点击搜索栏后跳转到搜索页面。
-- 点击标题栏右侧菜单后跳转到新建会话、添加联系人或创建群组页面。
+- 点击标题栏右侧菜单后跳转到新建会话、添加好友或创建群组页面。
 
 如果你只需要调整列表背景色等样式，建议在外层容器设置；更复杂的页面样式定制可参考高级文档。
 
@@ -79,7 +79,7 @@ UIKit 不会自动帮你补齐业务页面路由。凡是涉及页面跳转的�
 | `hideTitleBar` | Boolean | 否 | 是否隐藏标题栏 | `false` |
 | `hideBackIcon` | Boolean | 否 | 是否隐藏返回按钮 | `true` |
 | `onItemClick` | KitCallback&lt;ChatKitConversation&gt;| 否 | 会话点击事件 | 默认跳转到聊天页面 |
-| `titleOperationMenus` | MenuItem[] | 否 | 标题栏右侧菜单 | 默认菜单（新建会话、添加联系人、创建群组） |
+| `titleOperationMenus` | MenuItem[] | 否 | 标题栏右侧菜单 | 默认菜单（新建会话、添加好友、创建群组） |
 | `onAvatarClick` | () => void | 否 | 点击头像事件 | - |
 | `onBackPress` | () => void | 否 | 点击返回事件 | 默认调用 `pop()` |
 | `onSearchClick` | KitCallback | 否 | 搜索栏点击事件 | 默认跳转到搜索页面 |

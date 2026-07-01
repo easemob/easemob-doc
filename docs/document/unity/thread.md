@@ -1,26 +1,26 @@
-# 管理子区
+# 管理消息话题
 
 <Toc />
 
-子区是群组成员的子集，是支持多人沟通的即时通讯系统。使用子区功能前，你需要联系商务开通。
+消息话题是群组成员的子集，是支持多人沟通的即时通讯系统。使用消息话题功能前，你需要联系商务开通。
 
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
+本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理消息话题，并实现消息话题相关功能。
 
-如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
+如需查看消息相关内容，参见 [消息话题中的消息管理](thread_message.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Unity SDK 提供 `IChatThreadManager`、`ChatThread`、`ChatThreadEvent` 和 `IChatThreadManagerDelegate` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Unity SDK 提供 `IChatThreadManager`、`ChatThread`、`ChatThreadEvent` 和 `IChatThreadManagerDelegate` 类，用于管理消息话题，支持你通过调用 API 在项目中实现如下功能：
 
-- 创建、解散子区
-- 加入、退出子区
-- 子区踢人
-- 修改子区名称
-- 获取子区详情
-- 获取子区成员列表
-- 获取子区列表
-- 批量获取子区中的最新消息
-- 监听子区事件
+- 创建、解散消息话题
+- 加入、退出消息话题
+- 消息话题踢人
+- 修改消息话题名称
+- 获取消息话题详情
+- 获取消息话题成员列表
+- 获取消息话题列表
+- 批量获取消息话题中的最新消息
+- 监听消息话题事件
 
 ## 前提条件
 
@@ -28,18 +28,18 @@
 
 - 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 已联系商务开通子区功能。
+- 了解消息话题和消息话题成员数量限制，详见 [使用限制](/product/limitation.html)。
+- 已联系商务开通消息话题功能。
 
 ## 实现方法
 
 本节介绍如何使用环信即时通讯 IM Unity SDK 提供的 API 实现上述功能。
 
-### 创建子区
+### 创建消息话题
 
-所有群成员均可以调用 `CreateThread` 方法，基于一条群组消息新建子区。
+所有群成员均可以调用 `CreateThread` 方法，基于一条群组消息新建消息话题。
 
-单设备登录时，子区所属群组的所有成员均会收到 `IChatThreadManagerDelegate#OnCreateThread` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_CREATE`。
+单设备登录时，消息话题所属群组的所有成员均会收到 `IChatThreadManagerDelegate#OnCreateThread` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_CREATE`。
 
 示例代码如下：
 
@@ -50,7 +50,7 @@ SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new Va
         DebugLog($"CreateThread success");
         if (null != thread)
         {
-            //处理返回的子区对象
+            //处理返回的消息话题对象
         }
     },
     onError: (code, desc) =>
@@ -60,14 +60,14 @@ SDKClient.Instance.ThreadManager.CreateThread(threadName, msgId, groupid, new Va
 ));
 ```
 
-### 解散子区
+### 解散消息话题
 
-仅子区所在群组的群主和群管理员可以调用 `DestroyThread` 方法解散子区。
+仅消息话题所在群组的群主和群管理员可以调用 `DestroyThread` 方法解散消息话题。
 
-单设备登录时，子区所属群组的所有成员均会收到 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_DESTROY`。
+单设备登录时，消息话题所属群组的所有成员均会收到 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_DESTROY`。
 
 :::tip
-解散子区或解散子区所在的群组后，将删除本地数据库及内存中关于该子区的全部数据，需谨慎操作。
+解散消息话题或解散消息话题所在的群组后，将删除本地数据库及内存中关于该消息话题的全部数据，需谨慎操作。
 :::
 
 示例代码如下：
@@ -85,14 +85,14 @@ SDKClient.Instance.ThreadManager.DestroyThread(tid, new CallBack(
 ));
 ```
 
-### 加入子区
+### 加入消息话题
 
-子区所在群组的所有成员均可以调用 `JoinThread` 方法加入群组。
+消息话题所在群组的所有成员均可以调用 `JoinThread` 方法加入群组。
 
-加入子区的具体步骤如下：
+加入消息话题的具体步骤如下：
 
-1. 收到 `IChatThreadManagerDelegate#OnCreateThread` 回调或 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调，或调用 `FetchThreadListOfGroup` 方法从服务器获取指定群组的子区列表，从中获取到想要加入的子区 ID。
-2. 调用 `JoinThread` 传入子区 ID 加入对应子区。
+1. 收到 `IChatThreadManagerDelegate#OnCreateThread` 回调或 `IChatThreadManagerDelegate#onThreadNotifyChange` 回调，或调用 `FetchThreadListOfGroup` 方法从服务器获取指定群组的消息话题列表，从中获取到想要加入的消息话题 ID。
+2. 调用 `JoinThread` 传入消息话题 ID 加入对应消息话题。
 
 多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_JOIN`。
 
@@ -115,9 +115,9 @@ SDKClient.Instance.ThreadManager.JoinThread(tid, new ValueCallBack<ChatThread>(
 ));
 ```
 
-### 退出子区
+### 退出消息话题
 
-子区成员均可以主动调用 `LeaveThread` 方法退出子区，退出子区后，该成员将不会再收到子区消息。
+消息话题成员均可以主动调用 `LeaveThread` 方法退出消息话题，退出消息话题后，该成员将不会再收到消息话题中的消息。
 
 多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_LEAVE`。
 
@@ -136,11 +136,11 @@ SDKClient.Instance.ThreadManager.LeaveThread(tid, new CallBack(
 ));
 ```
 
-### 从子区移出成员
+### 从消息话题移出成员
 
-仅群主和群管理员可以调用 `RemoveThreadMember` 方法将指定成员 (群管理员或普通成员) 踢出子区，被踢出子区的成员将不再接收到子区消息。
+仅群主和群管理员可以调用 `RemoveThreadMember` 方法将指定成员 (群管理员或普通成员) 踢出消息话题，被踢出消息话题的成员将不再接收到消息话题中的消息。
 
-被踢出子区的成员会收到 `IChatThreadManagerDelegate#OnUserKickOutOfChatThread` 回调。多设备登录时，执行踢人操作的成员的其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_KICK`。
+被踢出消息话题的成员会收到 `IChatThreadManagerDelegate#OnUserKickOutOfChatThread` 回调。多设备登录时，执行踢人操作的成员的其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_KICK`。
 
 示例代码如下：
 
@@ -157,11 +157,11 @@ SDKClient.Instance.ThreadManager.RemoveThreadMember(tid, uname, new CallBack(
 ));
 ```
 
-### 修改子区名称
+### 修改消息话题名称
 
-仅群主和群管理员以及子区的创建者可以调用 `ChangeThreadSubject` 方法修改子区名称。
+仅群主和群管理员以及消息话题的创建者可以调用 `ChangeThreadSubject` 方法修改消息话题名称。
 
-单设备登录时，子区所属群组的所有成员会收到 `IChatThreadManagerDelegate#OnChatThreadUpdate` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_UPDATE`。
+单设备登录时，消息话题所属群组的所有成员会收到 `IChatThreadManagerDelegate#OnChatThreadUpdate` 回调；多设备登录时，其他设备会同时收到 `IMultiDeviceDelegate#onThreadMultiDevicesEvent` 回调，回调事件为 `THREAD_UPDATE`。
 
 示例代码如下：
 
@@ -178,9 +178,9 @@ SDKClient.Instance.ThreadManager.ChangeThreadSubject(tid, subject, new CallBack(
 ));
 ```
 
-### 获取子区详情
+### 获取消息话题详情
 
-子区所属群组的所有成员均可以调用 `GetThreadDetail` 方法从服务器获取子区详情。
+消息话题所属群组的所有成员均可以调用 `GetThreadDetail` 方法从服务器获取消息话题详情。
 
 示例代码如下：
 
@@ -191,7 +191,7 @@ SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThre
         Debug.Log($"GetThreadDetail success");
         if (null != thread)
         {
-            //添加子区处理
+            //添加消息话题处理
         }
     },
     onError: (code, desc) =>
@@ -201,9 +201,9 @@ SDKClient.Instance.ThreadManager.GetThreadDetail(tid, new ValueCallBack<ChatThre
 ));
 ```
 
-### 获取子区成员列表
+### 获取消息话题成员列表
 
-子区所属群组的所有成员均可以调用 `FetchThreadMembers` 方法从服务器分页获取子区成员列表。
+消息话题所属群组的所有成员均可以调用 `FetchThreadMembers` 方法从服务器分页获取消息话题成员列表。
 
 ```csharp
 SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new ValueCallBack<CursorResult<string>>(
@@ -222,9 +222,9 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 ));
 ```
 
-### 获取子区列表
+### 获取消息话题列表
 
-1. 用户可以调用 `FetchMineJoinedThreadList` 方法从服务器分页获取自己加入和创建的子区列表：
+1. 用户可以调用 `FetchMineJoinedThreadList` 方法从服务器分页获取自己加入和创建的消息话题列表：
 
 ```csharp
  SDKClient.Instance.ThreadManager.FetchMineJoinedThreadList(cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
@@ -233,7 +233,7 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
         Debug.Log($"FetchMineJoinedThreadList success");
         if (null != cursor_result)
         {
-            //处理返回的子区列表cursor_result.Data
+            //处理返回的消息话题列表cursor_result.Data
         }
     },
     onError: (code, desc) =>
@@ -243,7 +243,7 @@ SDKClient.Instance.ThreadManager.FetchThreadMembers(tid, cursor, page_size, new 
 ));
 ```
 
-2. 用户还可以调用 `FetchThreadListOfGroup` 方法从服务器分页获取指定群组的子区列表：
+2. 用户还可以调用 `FetchThreadListOfGroup` 方法从服务器分页获取指定群组的消息话题列表：
 
 ```csharp
 SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, page_size, new ValueCallBack<CursorResult<ChatThread>>(
@@ -252,7 +252,7 @@ SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, pag
         Debug.Log($"FetchThreadListOfGroup success");
         if (null != cursor_result)
         {
-            //处理返回的子区列表 cursor_result.Data
+            //处理返回的消息话题列表 cursor_result.Data
         }
     },
     onError: (code, desc) =>
@@ -262,9 +262,9 @@ SDKClient.Instance.ThreadManager.FetchThreadListOfGroup(tid, joined, cursor, pag
 ));
 ```
 
-### 批量获取子区中的最新一条消息
+### 批量获取消息话题中的最新一条消息
 
-用户可以调用 `GetLastMessageAccordingThreads` 方法从服务器批量获取子区中的最新一条消息。
+用户可以调用 `GetLastMessageAccordingThreads` 方法从服务器批量获取消息话题中的最新一条消息。
 
 示例代码如下：
 
@@ -285,9 +285,9 @@ SDKClient.Instance.ThreadManager.GetLastMessageAccordingThreads(threadIds, new V
 ));
 ```
 
-### 监听子区事件
+### 监听消息话题事件
 
-`IChatThreadManagerDelegate` 类中提供子区事件的监听接口。开发者可以通过设置此监听，获取子区中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`IChatThreadManagerDelegate` 类中提供消息话题事件的监听接口。开发者可以通过设置此监听，获取消息话题中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 

@@ -44,7 +44,7 @@
 #### 修复
 
 - 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#CleanAllGroupsFromDB` 方法。
-- 修复拉黑联系人时缓存未及时更新的问题。
+- 修复拉黑好友时缓存未及时更新的问题。
 - 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
 - 修复调用 RESTful API 转让群主后，SDK 上原群主离开群失败的问题。
 - 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
@@ -102,7 +102,7 @@
 - 新增 `Options#IncludeSendMessageInMessageListener` 开关。开启后，在 `MessageListener#onMessageReceived` 回调里增加发送成功的消息。
 - 新增 `SDKClient#LoginWithToken` 方法，用于通过用户 ID 和用户 token 登录。
 - 新增 `SDKClient#RenewToken` 方法，用于更新用户 token。
-- 消息修改回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- 消息编辑回调 `IChatManagerDelegate#OnMessageContentChanged` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
 
 #### 优化
 
@@ -129,7 +129,7 @@
 #### 修复
 
 - 数据库名称加密，但数据库中的内容仍为明文。
-- 修复修改消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
+- 修复编辑消息后，离线用户上线后拉取历史消息，消息体中缺乏 `from` 属性的问题。
 - 特殊场景下，SDK 退出后再登录会丢失聊天室监听事件问题。
 - 修复网络恢复时重连 2 次的问题。
 - 修复未登录时调用 `LeaveRoom` 方法返回的错误提示不准确。
@@ -146,12 +146,12 @@
   - `CombineBody`：消息体类 ；
   - `Message#CreateCombineSendMessage`：创建合并消息；
   - `ChatManager#FetchCombineMessageDetail`：下载并解析合并消息。
-- [IM SDK] 新增[消息修改功能](message_modify.html)：
-  - `ChatManager#ModifyMessage`：修改消息；
-  - `IChatManagerDelegate#OnMessageContentChanged`：消息修改回调，接收方会收到该回调。
-  - `IMessageBody#OperationTime`：修改消息中内容修改的时间。
-  - `IMessageBody#OperatorId`：修改消息中的操作人的用户 ID。
-  - `IMessageBody#OperationCount`：发送后消息修改的次数。
+- [IM SDK] 新增[消息编辑功能](message_modify.html)：
+  - `ChatManager#ModifyMessage`：编辑消息；
+  - `IChatManagerDelegate#OnMessageContentChanged`：消息编辑回调，接收方会收到该回调。
+  - `IMessageBody#OperationTime`：消息内容的编辑时间。
+  - `IMessageBody#OperatorId`：编辑者的用户 ID。
+  - `IMessageBody#OperationCount`：消息编辑次数。
 - [IM SDK] 调整 `IConnectionDelegate#OnLoggedOtherDevice(intString)` 回调，新增当前设备踢下线的设备名称。
 - [IM SDK] 新增 `IConnectionDelegate#OnAppActiveNumberReachLimitation` 回调，App激活数量已达限制值。
 - [IM SDK] 新增 `IMultiDeviceDelegate#OnRoamDeleteMultiDevicesEvent` 回调，多端多设备单个会话删除漫游消息事件。
@@ -318,7 +318,7 @@
 
 - [在线状态订阅](presence.html)
 - [消息表情回复](reaction.html)
-- [管理子区](thread.html)
+- [管理消息话题](thread.html)
 - [内容举报](moderation.html)
 
 ## v1.0.2.1 2022-06-22

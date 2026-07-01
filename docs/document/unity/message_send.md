@@ -311,7 +311,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 | 属性   | 类型        | 描述    |
 | :-------------- | :-------------------- | :-------------------- |
-| `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。|
+| `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 消息话题会话：消息话题 ID；<br/> - 聊天室聊天：聊天室 ID。|
 | `title`  | string | 合并消息的标题。    |
 | `summary` | string       | 合并消息的概要。   |
 | `compatibleText` | string       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |

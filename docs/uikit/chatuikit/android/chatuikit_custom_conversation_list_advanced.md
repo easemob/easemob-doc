@@ -586,7 +586,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_add_contact</p>
 </td>
 <td>
-<p>添加联系人图标（新会话/加好友/建群弹窗中）</p>
+<p>添加好友图标（新会话/加好友/建群弹窗中）</p>
 </td>
 </tr>
 <tr>
@@ -692,7 +692,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_action_add_contact</p>
 </td>
 <td>
-<p>添加联系人操作图标</p>
+<p>添加好友操作图标</p>
 </td>
 </tr>
 <tr>
@@ -708,7 +708,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_dialog_add_contact</p>
 </td>
 <td>
-<p>添加联系人弹窗提示文案</p>
+<p>添加好友弹窗提示文案</p>
 </td>
 </tr>
 <tr>

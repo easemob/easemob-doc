@@ -208,7 +208,7 @@ UI 使用建议如下：
 | [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
 | [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
 | [消息单向删除](message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
-| [消息修改](message_modify.html) | 支持 | 修改已发送消息内容。 |
+| [消息编辑](message_modify.html) | 支持 | 编辑已发送消息内容。 |
 | [消息搜索](message_search.html) | 支持 | 在本地或会话中搜索消息。 |
 | [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |

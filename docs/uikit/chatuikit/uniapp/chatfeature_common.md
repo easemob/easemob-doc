@@ -1,12 +1,12 @@
 # 单群聊 UIKit 通用特性
 
-本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和联系人等相关功能。
+本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和好友等相关功能。
 
 <Toc />
 
 ## 会话列表
 
-会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
+会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需好友并查看消息进展。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
@@ -36,12 +36,12 @@
   <ImageItem src="/images/uikit/chatuikit/uniapp/group_create.png" title="创建群组" />
 </ImageGallery>
 
-## 联系人列表	
+## 好友列表	
 
-联系人列表显示了用户的所有联系人。
+好友列表显示了用户的所有好友。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="好友列表" />
 </ImageGallery>
 
 ## 已发送回执	

@@ -35,7 +35,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 207    |          USER_REMOVED           | 用户已被注销：当前的登录用户 ID 从[环信控制台](https://console.easemob.com/user/login)删除会收到该错误。 |
 | 208    |         USER_REG_FAILED         | 用户注册失败：例如，注册用户之前未开启[开放注册功能](/document/server-side/account_register_open.html)等原因。 |
 | 209    |    USER_UPDATEINFO_FAILED       | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。  |
-| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散子区（仅子区所在群组的群主和群管理员有权解散子区）。|
+| 210    |     USER_PERMISSION_DENIED      | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散消息话题（仅消息话题所在群组的群主和群管理员有权解散消息话题）。|
 | 213    |    USER_BIND_ANOTHER_DEVICE     | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 |
 | 214    |   USER_LOGIN_TOO_MANY_DEVICES   | 用户登录设备数超过限制：该错误在多设备自动登录场景中且打开不踢掉其他设备上的登录的开关时超过登录设备数量的限制才会出现。例如，用户最多可同时登录 4 台设备， A（开启了自动登录）、B、C 和 D。最初，用户在这四个设备上均为登录状态，但由于网络连接原因登出了设备 A，然后手动登录了设备 E。这种情况下，设备 A 的网络恢复正常时会自动登录，这时登录失败且提示该错误。 |
 | 215    |           USER_MUTED            | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 |
@@ -69,7 +69,7 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 508    | MESSAGE_EXTERNAL_LOGIC_BLOCKED  | 发送前回调拦截：发送的消息被用户自己的服务器定义的规则拦截掉时提示该错误。 |
 | 509    |      MESSAGE_CURRENT_LIMITING      | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 |
 | 510    |      MESSAGE_SIZE_LIMIT      | 发送消息时消息体大小超过上限。|
-| 511   | MESSAGE_EDIT_FAILED  | 消息修改失败。  |
+| 511   | MESSAGE_EDIT_FAILED  | 消息编辑失败。  |
 | 512    | MESSAGE_STREAM_INTERVAL_TIMEOUT                 | 流式消息的相邻消息分片的发送间隔超时：该间隔不能超过 30 秒，超时则返回该错误并终止流式消息。| 可在 UI 上进行提示，或检查消息分片发送间隔。 |
 | 513    | MESSAGE_STREAM_TIMEOUT                 |流式消息的发送总时长超时：该时长不能超过 30 分钟，超时再发送分片则返回该错误。| 可在 UI 上进行提示，或检查流式消息的发送总时长。 |
 | 600    |        GROUP_INVALID_ID         | 群组 ID 异常：使用群组相关 API，提供的群组 ID 为空时提示该错误。 |
@@ -96,9 +96,9 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 707   |       ChatError#CHATROOM_USER_IN_BLOCKLIST        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   |
 | 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。               |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |
-| 1000   |       CONTACT_ADD_FAILED        | 添加联系人失败。  |
-| 1001   |       CONTACT_REACH_LIMIT       | 邀请者的联系人数量已达到上限。  |
-| 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的联系人数量已达到上限。                   |
+| 1000   |       CONTACT_ADD_FAILED        | 添加好友失败。  |
+| 1001   |       CONTACT_REACH_LIMIT       | 邀请者的好友数量已达到上限。  |
+| 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的好友数量已达到上限。                   |
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF | 不能订阅你自己的状态。                    |
 | 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。                        |

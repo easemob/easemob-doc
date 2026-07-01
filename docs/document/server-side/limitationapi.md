@@ -48,7 +48,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 根据消息 ID 获取 Reaction     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100 次/秒/App Key  | 25 次/秒    | 
 | 删除 Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 次/秒/App Key  | 50 次/秒    | 
 | 根据消息 ID 和表情 ID 获取 Reaction 信息 | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 次/秒/App Key  | 25 次/秒    | 
-| 修改消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  | 50 条/秒    | 
+| 编辑消息 | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 次/秒/App Key  | 50 条/秒    | 
 | 翻译消息内容 | POST  | /{org_name}/{app_name}/translate | 100 次/秒/App Key  | 50 次/秒    | 
 | 获取翻译语言列表 | GET  | /{org_name}/{app_name}/translate/support/language | 100 次/秒/App Key  | 50 次/秒    | 
 | 检测文本的源语言 | POST  | /{org_name}/{app_name}/translate/detect | 100 次/秒/App Key  | 50 次/秒    | 
@@ -113,19 +113,19 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 解除成员禁言   |    DELETE   | /{org_name}/{app_name}/chatgroups/{group_id}/mute/{member1}(,{member2},…)    | 100 次/秒/App Key    |  100 次/秒   | 
 | 解除全员禁言 |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/ban                | 100 次/秒/App Key     | 100 次/秒    | 
 
-### 子区管理
+### 消息话题管理
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 单个叠加包大小|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
-| 分页获取 app 中的子区  | GET  | /{org_name}/{app_name}/thread | 100 次/秒/App Key   |     | 
-| 分页获取单个用户加入的所有子区  | GET     | /{org_name}/{app_name}/threads/user/{username}    | 100 次/秒/App Key   |     | 
-| 分页获取单个用户在指定群组中加入的所有子区  | GET  | /{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{username}    | 100 次/秒/App Key   |
-| 创建子区  | POST     | /{org_name}/{app_name}/thread    | 100 次/秒/App Key  |     | 
-| 修改子区  | PUT     | /{org_name}/{app_name}/thread/{thread_id}    | 100 次/秒/App Key   |     | 
-| 删除子区  | DELETE     | /{org_name}/{app_name}/thread/{thread_id}    | 100 次/秒/App Key   |     | 
-| 分页获取子区成员列表  | GET     | /{org_name}/{app_name}/thread/{thread_id}/users    | 100 次/秒/App Key   |     | 
-| 用户批量加入子区  | POST     | /{org_name}/{app_name}/thread/{thread_id}/users   | 100 次/秒/App Key   |     | 
-| 批量踢出子区成员  | DELETE     | /{org_name}/{app_name}/threads/{thread_id}/users   | 100 次/秒/App Key  |     | 
+| 分页获取 app 中的消息话题  | GET  | /{org_name}/{app_name}/thread | 100 次/秒/App Key   |     | 
+| 分页获取单个用户加入的所有消息话题  | GET     | /{org_name}/{app_name}/threads/user/{username}    | 100 次/秒/App Key   |     | 
+| 分页获取单个用户在指定群组中加入的所有消息话题  | GET  | /{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{username}    | 100 次/秒/App Key   |
+| 创建消息话题  | POST     | /{org_name}/{app_name}/thread    | 100 次/秒/App Key  |     | 
+| 修改消息话题  | PUT     | /{org_name}/{app_name}/thread/{thread_id}    | 100 次/秒/App Key   |     | 
+| 删除消息话题  | DELETE     | /{org_name}/{app_name}/thread/{thread_id}    | 100 次/秒/App Key   |     | 
+| 分页获取消息话题成员列表  | GET     | /{org_name}/{app_name}/thread/{thread_id}/users    | 100 次/秒/App Key   |     | 
+| 用户批量加入消息话题  | POST     | /{org_name}/{app_name}/thread/{thread_id}/users   | 100 次/秒/App Key   |     | 
+| 批量踢出消息话题成员  | DELETE     | /{org_name}/{app_name}/threads/{thread_id}/users   | 100 次/秒/App Key  |     | 
 
 ## 聊天室
 

@@ -1,12 +1,12 @@
 # 单群聊 UIKit 通用特性
 
-本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和联系人等相关功能。
+本文介绍单群聊 UIKit 通用特性，包括会话列表、聊天、群组和好友等相关功能。
 
 <Toc />
 
 ## 会话列表
 
-会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
+会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需好友并查看消息进展。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/main_conversation_list.png" title="会话列表" />
@@ -44,12 +44,12 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/group_admin.png" title="群组管理员" />
 </ImageGallery> 
 
-## 联系人列表	
+## 好友列表	
 
-联系人列表显示了用户的所有联系人。
+好友列表显示了用户的所有好友。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/main_contact_list.png" title="好友列表" />
 </ImageGallery>
 
 ## 文件共享	
@@ -84,12 +84,12 @@
   <ImageItem src="/images/uikit/chatuikit/feature/common/ios/message_read_receipt.png" title="已读回执" />
 </ImageGallery> 
 
-## 联系人名片	
+## 好友名片	
 
-联系人名片指包含联系人详细信息的电子卡片，通常包括头像和昵称等信息。通过联系人名片，用户可以快速添加联系人或开始会话。
+好友名片指包含好友详细信息的电子卡片，通常包括头像和昵称等信息。通过好友名片，用户可以快速添加好友或开始会话。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/contact_namecard.png" title="联系人名片" />
+  <ImageItem src="/images/uikit/chatuikit/feature/common/ios/contact_namecard.png" title="好友名片" />
 </ImageGallery> 
 
 ## 语音消息

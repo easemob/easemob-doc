@@ -1121,7 +1121,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 
 ### 批量移除频道成员
 
-一次移除多名频道成员。如果所有被移除用户均不是频道成员，则移除失败，并返回错误。移除后，这些成员也会被移除其在该频道中加入的子区。
+一次移除多名频道成员。如果所有被移除用户均不是频道成员，则移除失败，并返回错误。移除后，这些成员也会被移除其在该频道中加入的消息话题。
 
 单个请求最多可移除 20 个频道成员。
 
@@ -1598,11 +1598,11 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-## 管理子区
+## 管理消息话题
 
-### 创建子区
+### 创建消息话题
 
-创建子区。
+创建消息话题。
 
 #### HTTP 请求
 
@@ -1628,7 +1628,7 @@ POST https://{host}/{org_name}/{app_name}/circle/thread
 | :--------- | :----- | :------- | :------------ |
 | `channel_id` | String | 是       | 频道 ID。  |
 | `user_id`    | String | 是       | 用户 ID。     |
-| `name`       | String | 是       | 子区名称。 |
+| `name`       | String | 是       | 消息话题名称。 |
 | `message_id` | String | 是       | 消息 ID。     |
 
 #### HTTP 响应
@@ -1640,7 +1640,7 @@ POST https://{host}/{org_name}/{app_name}/circle/thread
 | 字段      | 类型   | 描述                |
 | :-------- | :----- | :------------------ |
 | `code`      | Int    | 环信超级社区的服务状态码。 |
-| `thread_id` | String | 子区 ID。         |
+| `thread_id` | String | 消息话题 ID。         |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
 
@@ -1667,9 +1667,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 }
 ```
 
-### 修改子区信息
+### 修改消息话题信息
 
-修改指定子区的信息。
+修改指定消息话题的信息。
 
 #### HTTP 请求
 
@@ -1693,7 +1693,7 @@ PUT https://{host}/{org_name}/{app_name}/circle/thread/{thread_id}
 
 | 参数 | 类型   | 是否必需 | 备注          |
 | :--- | :----- | :------- | :------------ |
-| `name` | String | 是       | 子区名称。 |
+| `name` | String | 是       | 消息话题名称。 |
 
 #### HTTP 响应
 
@@ -1726,9 +1726,9 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 }
 ```
 
-### 查询子区的详情
+### 查询消息话题的详情
 
-查询指定子区的详情。
+查询指定消息话题的详情。
 
 #### HTTP 请求
 
@@ -1756,11 +1756,11 @@ GET https://{host}/{org_name}/{app_name}/circle/thread/{thread_id}
 | 字段 | 类型 | 描述                |
 | :--- | :--- | :------------------ |
 | `code` | Int  | 环信超级社区的服务状态码。 |
-| `id` | String | 子区 ID。    |
-| `msgId` | String | 子区的父消息 ID。   |
-| `channelId` | String | 子区所属频道的 ID。|
-| `owner`    | String | 子区创建者的用户 ID。    |
-| `created`    | Long | 子区创建时间，Unix 时间戳，单位为毫秒。   |
+| `id` | String | 消息话题 ID。    |
+| `msgId` | String | 消息话题的父消息 ID。   |
+| `channelId` | String | 消息话题所属频道的 ID。|
+| `owner`    | String | 消息话题创建者的用户 ID。    |
+| `created`    | Long | 消息话题创建时间，Unix 时间戳，单位为毫秒。   |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
 
@@ -1786,9 +1786,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 删除子区
+### 删除消息话题
 
-删除指定的子区。
+删除指定的消息话题。
 
 #### HTTP 请求
 
@@ -1836,9 +1836,9 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 }
 ```
 
-### 加入子区
+### 加入消息话题
 
-加入指定的子区。
+加入指定的消息话题。
 
 #### HTTP 请求
 
@@ -1886,9 +1886,9 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 }
 ```
 
-### 将成员移出子区
+### 将成员移出消息话题
 
-将成员移出指定的子区。
+将成员移出指定的消息话题。
 
 #### HTTP 请求
 
@@ -1904,7 +1904,7 @@ POST https://{host}/{org_name}/{app_name}/circle/thread/{thread_id}/user/remove?
 
 | 参数          | 类型   | 是否必需 | 描述                                                         |
 | :------------ | :----- | :------- | :----------------------------------------------------------- |
-| `user_id`  | String | 是       | 要移出子区的用户 ID。                           |
+| `user_id`  | String | 是       | 要移出消息话题的用户 ID。                           |
 
 ##### 请求 header
 
@@ -1942,9 +1942,9 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 }
 ```
 
-### 用户获取自己创建的子区
+### 用户获取自己创建的消息话题
 
-用户获取自己创建的子区。
+用户获取自己创建的消息话题。
 
 #### HTTP 请求
 
@@ -1961,7 +1961,7 @@ GET https://{host}/{org_name}/{app_name}/circle/thread/created?userId={user_id}&
 | 参数  | 类型 | 是否所需 | 描述                        |
 | :---- | :------- | :------------------| :----------------------- |
 | `user_id` | String | 是       | 用户 ID。     |
-| `channel_id` | String | 是       | 子区所属频道的 ID。     |
+| `channel_id` | String | 是       | 消息话题所属频道的 ID。     |
 | `limit` | Int   | 否   | 每页获取的频道数量。取值范围为 [1,20]，默认值为 `20`。该参数仅在分页查询时设置。 |
 | `cursor` | String   | 否   | 游标，指定查询的开始位置。该参数仅在分页查询时设置。 |
 
@@ -1981,13 +1981,13 @@ GET https://{host}/{org_name}/{app_name}/circle/thread/created?userId={user_id}&
 | 字段    | 类型 | 描述                       |
 | :------ | :--- | :------------------------- |
 | `code`    | Int  | 环信超级社区的服务状态码。        |
-| `threads` | List | 获取到的子区详情列表。 |
-| `count`   | Int  | 获取到的子区数量。     |
-| `threads.id` | String | 子区 ID。   |
-| `threads.msgId` | String | 子区的父消息 ID。   |
-| `threads.channelId` | String | 子区所属频道的 ID。 |
-| `threads.owner`    | String | 子区创建者的用户 ID。    |
-| `threads.created`    | Long | 子区创建时间，Unix 时间戳，单位为毫秒。    |
+| `threads` | List | 获取到的消息话题详情列表。 |
+| `count`   | Int  | 获取到的消息话题数量。     |
+| `threads.id` | String | 消息话题 ID。   |
+| `threads.msgId` | String | 消息话题的父消息 ID。   |
+| `threads.channelId` | String | 消息话题所属频道的 ID。 |
+| `threads.owner`    | String | 消息话题创建者的用户 ID。    |
+| `threads.created`    | Long | 消息话题创建时间，Unix 时间戳，单位为毫秒。    |
 | `cursor` | String  | 游标，指定下次查询的开始位置。|
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](https://docs-im.easemob.com/ccim/rest/errorcode)了解可能的原因。
@@ -2019,9 +2019,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 用户获取频道中的子区
+### 用户获取频道中的消息话题
 
-分页获取频道中的子区。
+分页获取频道中的消息话题。
 
 #### HTTP 请求
 
@@ -2037,8 +2037,8 @@ curl -X GET https://{host}/{org_name}/{app_name}/circle/thread/list?channelId={c
 
 | 参数  | 类型 | 是否所需 | 描述                        |
 | :---- | :------- | :------------------| :----------------------- |
-| `channel_id` | String | 是       | 子区所属频道的 ID。     |
-| `limit` | Int   | 否   | 每页获取的子区数量。取值范围为 [1,20]，默认值为 `20`。该参数仅在分页查询时设置。 |
+| `channel_id` | String | 是       | 消息话题所属频道的 ID。     |
+| `limit` | Int   | 否   | 每页获取的消息话题数量。取值范围为 [1,20]，默认值为 `20`。该参数仅在分页查询时设置。 |
 | `cursor` | String   | 否   | 游标，指定查询的开始位置。该参数仅在分页查询时设置。 |
 
 ##### 请求 header
@@ -2057,12 +2057,12 @@ curl -X GET https://{host}/{org_name}/{app_name}/circle/thread/list?channelId={c
 | 字段    | 类型 | 描述                       |
 | :------ | :--- | :------------------------- |
 | `code`    | Int  | 环信超级社区的服务状态码。        |
-| `threads` | List | 获取到的子区详情列表。 |
-| `threads.id` | String | 子区 ID。   |
-| `threads.msgId` | String | 子区的父消息 ID。   |
-| `threads.channelId` | String | 子区所属频道的 ID。 |
-| `threads.owner`    | String | 子区创建者的用户 ID。    |
-| `threads.created`    | Long | 子区创建时间，Unix 时间戳，单位为毫秒。    |
+| `threads` | List | 获取到的消息话题详情列表。 |
+| `threads.id` | String | 消息话题 ID。   |
+| `threads.msgId` | String | 消息话题的父消息 ID。   |
+| `threads.channelId` | String | 消息话题所属频道的 ID。 |
+| `threads.owner`    | String | 消息话题创建者的用户 ID。    |
+| `threads.created`    | Long | 消息话题创建时间，Unix 时间戳，单位为毫秒。    |
 | `cursor` | String  | 游标，指定下次查询的开始位置。|
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。
@@ -2094,9 +2094,9 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 }
 ```
 
-### 用户获取频道中加入的子区
+### 用户获取频道中加入的消息话题
 
-用户获取频道中加入的子区。
+用户获取频道中加入的消息话题。
 
 #### HTTP 请求
 
@@ -2113,8 +2113,8 @@ GET https://{host}/{org_name}/{app_name}/circle/thread/joined?userId={user_id}&c
 | 参数  | 类型 | 是否所需 | 描述                        |
 | :---- | :------- | :------------------| :----------------------- |
 | `user_id` | String | 是       | 用户 ID。     |
-| `channel_id` | String | 是       | 子区所属频道的 ID。     |
-| `limit` | Int   | 否   | 每页获取的子区数量。取值范围为 [1,20]，默认值为 `20`。该参数仅在分页查询时设置。 |
+| `channel_id` | String | 是       | 消息话题所属频道的 ID。     |
+| `limit` | Int   | 否   | 每页获取的消息话题数量。取值范围为 [1,20]，默认值为 `20`。该参数仅在分页查询时设置。 |
 | `cursor` | String   | 否   | 游标，指定查询的开始位置。该参数仅在分页查询时设置。 |
 
 ##### 请求 header
@@ -2133,12 +2133,12 @@ GET https://{host}/{org_name}/{app_name}/circle/thread/joined?userId={user_id}&c
 | 字段    | 类型 | 描述                       |
 | :------ | :--- | :------------------------- |
 | `code`    | Int  | 环信超级社区的服务状态码。        |
-| `threads` | List | 获取到的子区详情列表。 |
-| `threads.id` | String | 子区 ID。   |
-| `threads.msgId` | String | 子区的父消息 ID。   |
-| `threads.channelId` | String | 子区所属频道的 ID。 |
-| `threads.owner`    | String | 子区创建者的用户 ID。    |
-| `threads.created`    | Long | 子区创建时间，Unix 时间戳，单位为毫秒。    |
+| `threads` | List | 获取到的消息话题详情列表。 |
+| `threads.id` | String | 消息话题 ID。   |
+| `threads.msgId` | String | 消息话题的父消息 ID。   |
+| `threads.channelId` | String | 消息话题所属频道的 ID。 |
+| `threads.owner`    | String | 消息话题创建者的用户 ID。    |
+| `threads.created`    | Long | 消息话题创建时间，Unix 时间戳，单位为毫秒。    |
 | `cursor` | String  | 游标，指定下次查询的开始位置。|
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考[响应状态码](http://doc.easemob.com/document/server-side/error.html)了解可能的原因。

@@ -101,11 +101,11 @@
 
 #### 新增特性
 
-- [IM SDK] 发送后修改消息接口 [modifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本消息：支持修改 `msg` 和 `ext` 字段。
-  - 自定义消息：支持修改 `customEvent` 、`customExts` 和 `ext` 字段。
-  - 图片/语音/视频/文件/位置/合并消息：仅支持修改 `ext` 字段。
-  - 命令消息：不支持修改。
+- [IM SDK] 发送后编辑消息接口 [modifyMessage](message_modify.html) 支持编辑各类消息：
+  - 文本消息：支持编辑 `msg` 和 `ext` 字段。
+  - 自定义消息：支持编辑 `customEvent` 、`customExts` 和 `ext` 字段。
+  - 图片/语音/视频/文件/位置/合并消息：仅支持编辑 `ext` 字段。
+  - 命令消息：不支持编辑。
 
 - [IM SDK] 小程序 SDK 支持运行到微信小游戏平台。
 
@@ -117,7 +117,7 @@
 
 #### 新增特性
 
-- [IM SDK] 消息修改事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，修改发送成功的消息后，消息接收方会收到发送方发送修改后的消息时添加的扩展信息。
+- [IM SDK] 消息编辑事件 `onModifiedMessage` 中增加消息 `ext` 字段。添加该字段后，编辑发送成功的消息后，消息接收方会收到发送方发送编辑后的消息时添加的扩展信息。
 -  加入聊天室 `joinChatRoom` 成功的回调新增 `info` 字段，包含如下信息，即用户加入聊天室后会收到如下信息：
    - 聊天室创建时间：`createTimestamp`。
    - 是否开启全员禁言：`isAllMembersMuted`。
@@ -245,7 +245,7 @@
   - `unpinMessage`: 取消置顶消息。
   - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
   - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
-- [IM SDK] 消息修改回调 `onModifiedMessage` 中支持返回[通过 RESTful API 修改的自定义消息](/document/server-side/message_modify.html)。
+- [IM SDK] 消息编辑回调 `onModifiedMessage` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 - [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
 
 #### 优化
@@ -326,7 +326,7 @@
 #### 新增特性
 
 - [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
-- [IM SDK] 新增[消息修改功能](message_modify.html)。
+- [IM SDK] 新增[消息编辑功能](message_modify.html)。
 - [IM SDK] 新增[在群组或聊天室会话中发送定向消息](message_target.html)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 
 #### 修复
@@ -431,7 +431,7 @@
 
 #### 新增特性:
 
-- [IM SDK] 新增消息子区（message thread）功能；
+- [IM SDK] 新增消息消息话题（message thread）功能；
 - [IM SDK] 新增 [getConversationList](/document/web/conversation_list.html) 方法解析会话中的最新一条消息；
 
 #### 优化：
@@ -654,7 +654,7 @@
 - [demo] 修复聊天页面切后台，再切前台收到的离线消息有重复。
 - [demo] 由 rest1 迁移到 rest2 后开始校验 token,导致附件消息收不到。
 - [demo] 语音发送成功后点击听取后，语音依然闪烁动画。
-- [demo] 联系人分类为#，显示问题。
+- [demo] 好友分类为#，显示问题。
 - [sdk] 增加 onSocketConnected 事件 – socket 连接成功。
 - [sdk] onError 增加 type='sendMsgError' - 发送消息失败。
 - [sdk] sdk 重连时关闭上次创建的的 socket，而不是所有的 socket。
@@ -662,7 +662,7 @@
 ## v1.1.1 2019-04-10
 
 - [sdk] 增加重连机制
-- [demo] 实时更新联系人列表
+- [demo] 实时更新好友列表
 - [bug] 修复进入群组时，群组名称错误
 - [bug] 修复可以同时播放多条语音
 - [bug] 群组聊天页显示问题
@@ -672,7 +672,7 @@
 - [sdk] [demo] 增加 token 登录
 - [demo] 新版 demo，修改 ui
 - [demo] 增加搜索功能
-- [demo] 增加联系人按字母排序
+- [demo] 增加好友按字母排序
 - [demo] 增加最近聊天按时间排序
 - [demo] 增加群组消息提醒
 - [demo] 增加测滑删除功能
@@ -680,7 +680,7 @@
 - [demo] 增加用户名不区分大小写
 - [demo] 增加接收文件消息提示
 - [demo] 适配 iphone X，以及 XS max 等机型
-- [demo] 主页面由联系人页改为聊天页
+- [demo] 主页面由好友页改为聊天页
 - [bug] 修改 A 给好友 B 发语音消息，B 没有显示语音的未读消息数
 - [bug] iOS 聊天界点击输入框进行输入时历史消息展示不合理
 - [bug] iOS 端小程序收到消息时，会话界面来消息的提醒有时会没有提醒，只显示消息数

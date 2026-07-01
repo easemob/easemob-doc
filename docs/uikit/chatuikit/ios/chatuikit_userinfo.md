@@ -1,6 +1,6 @@
 # ChatUIKitContext 中的 Provider
 
-`ChatUIKitContext` 中的 `Provider` **仅用于会话列表以及联系人列表**。若只通过快速开始进入聊天页面，则不需要实现 Provider。
+`ChatUIKitContext` 中的 `Provider` **仅用于会话列表以及好友列表**。若只通过快速开始进入聊天页面，则不需要实现 Provider。
 
 ## 1. 设置 Provider 实现类
 

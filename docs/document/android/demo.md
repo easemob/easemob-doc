@@ -1,6 +1,6 @@
 # 环信即时通讯 IM Android Demo 
 
-环信即时通讯 IM Android Demo 提供用户登录、单聊、群组、子区、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
+环信即时通讯 IM Android Demo 提供用户登录、单聊、群组、消息话题、消息(文字、表情、语音、视频、图片、文件等)发送及管理、会话管理、好友管理、用户属性、用户在线状态（Presence）以及实时音视频通话等功能。
 
 ## 体验 Demo 
 
@@ -152,11 +152,11 @@ HONOR_PUSH_APPID=xxxxxxxxxxxxxxxxxxxxxxx
             │   │   ├── ChatFragment.kt //单群聊聊天页面 fragment
             │   │   └── CustomMessagesAdapter.kt    //自定义消息适配器
             │   ├── contact
-            │   │   ├── ChatContactCheckActivity.kt     //检查是否是联系人页面
-            │   │   ├── ChatContactDetailActivity.kt    //联系人详情页面
-            │   │   ├── ChatContactListFragment.kt      //联系人列表页面
-            │   │   ├── ChatContactRemarkActivity.kt    //联系人(好友)备注页面
-            │   │   └── ChatNewRequestActivity.kt       //联系人页面新请求 item
+            │   │   ├── ChatContactCheckActivity.kt     //检查是否是好友页面
+            │   │   ├── ChatContactDetailActivity.kt    //好友详情页面
+            │   │   ├── ChatContactListFragment.kt      //好友列表页面
+            │   │   ├── ChatContactRemarkActivity.kt    //好友(好友)备注页面
+            │   │   └── ChatNewRequestActivity.kt       //好友页面新请求 item
             │   ├── conversation
             │   │   └── ConversationListFragment.kt //会话列表页面
             │   ├── group
@@ -193,7 +193,7 @@ HONOR_PUSH_APPID=xxxxxxxxxxxxxxxxxxxxxxx
 | DemoHelper               | 环信（Demo）全局帮助类，主要功能为初始化 IM SDK，初始化 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 、[EaseCallKit](easecallkit.html) 相关及注册对话类型等。  | 
 | ConversationListFragment   | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitConversationListFragment`，展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能  | 
 | ChatActivity 及 ChatFragment  | `ChatActivity` 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `UIKitChatActivity`，主要进行了权限的请求，比如相机权限，语音权限等。`ChatFragment` 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `UIKitChatFragment`，该页面提供如下功能：<br/> - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。<br/> - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。<br/> - 清除本地消息。  | 
-| ChatContactListFragment                | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitContactsListFragment`，用于展示通讯录列表，包括联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。 |
+| ChatContactListFragment                | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitContactsListFragment`，用于展示通讯录列表，包括好友搜索，添加好友，好友申请列表入口，群组列表入口，好友列表。 |
 | ChatGroupDetailActivity  | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitGroupDetailActivity`，实现了如下功能：群成员管理，群属性管理，上传共享文件，设置消息免打扰,解散或者退出群组等。   | 
 
 ### 核心模块
@@ -202,7 +202,7 @@ HONOR_PUSH_APPID=xxxxxxxxxxxxxxxxxxxxxxx
 | :------------------- | :----- |
 | 聊天模块    | 展示如何依赖 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 实现聊天页面，如何发送消息、消息管理、扩展消息类型及如何增加扩展菜单等的逻辑。    | 
 | 会话列表模块 | 展示如何依赖 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 实现会话列表的逻辑及实现系统消息的具体逻辑。   | 
-| 联系人模块  | 展示如何依赖 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 实现联系人列表的逻辑。   | 
+| 好友模块  | 展示如何依赖 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 实现好友列表的逻辑。   | 
 | 我的模块  | 账户管理、用户状态管理及 App 的一些功能样式设置。    | 
 | 开发者模块  | 展示 IM SDK 提供的一些常规的开发者可以设置的功能。   | 
 

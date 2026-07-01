@@ -1139,7 +1139,7 @@ UIKit 提供默认的图标和文本资源，可通过资源覆盖方式自定�
 | `chat_msg_label_file`      | [附件]       | 文件消息标签     |
 | `chat_msg_label_custom`    | [自定义消息] | 自定义消息标签   |
 | `chat_msg_label_combine`   | [聊天记录]   | 合并转发消息标签 |
-| `chat_msg_label_user_card` | [联系人] %s  | 名片消息标签     |
+| `chat_msg_label_user_card` | [好友] %s  | 名片消息标签     |
 
 **对话框文本**
 

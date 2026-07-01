@@ -69,7 +69,7 @@ ChatClient.getInstance()
     timestamp, // 搜索消息的时间戳，从该时间戳开始按照搜索方向 `direction` 搜索。
     count: 20, // 请求的消息数量
     senders: "", // 消息发送者 // 从 v1.11.0 支持传入多个发送方
-    isChatThread: false, // 是否是子区消息。子区消息只在子区中使用。
+    isChatThread: false, // 是否是消息话题中的消息。消息话题中的消息只在消息话题中使用。
     searchScope: ChatMessageSearchScope.All, // 搜索范围，详见 `ChatMessageSearchScope` 类型。
   })
   .then((res) => {

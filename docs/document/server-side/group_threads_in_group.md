@@ -1,9 +1,9 @@
-# 获取单个用户在群组中加入的子区
+# 获取单个用户在群组中加入的消息话题
 
 ## 功能说明
 
-- 根据用户 ID 获取该用户在指定群组中加入的所有子区。
-- 使用该接口前，你需要联系商务开通子区功能。
+- 根据用户 ID 获取该用户在指定群组中加入的所有消息话题。
+- 使用该接口前，你需要联系商务开通消息话题功能。
 
 ## 调用频率上限
 
@@ -17,11 +17,11 @@ GET https://{host}/{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{use
 
 | 参数     | 类型   | 是否必需 | 描述           |
 | :------- | :----- | :------- | :---------------- |
-| `group_id` | String | 是       | 群组 ID。获取用户在群组中加入的子区。 |
-| `username` | String | 是       | 用户 ID。获取该用户在指定群组中加入的子区。 |
-| `limit`  | Int    | 否       | 每次期望返回的子区数量，取值范围为 [1,50]，默认值为 `50`。该参数仅在分页获取时为必需。                                               |
+| `group_id` | String | 是       | 群组 ID。获取用户在群组中加入的消息话题。 |
+| `username` | String | 是       | 用户 ID。获取该用户在指定群组中加入的消息话题。 |
+| `limit`  | Int    | 否       | 每次期望返回的消息话题数量，取值范围为 [1,50]，默认值为 `50`。该参数仅在分页获取时为必需。                                               |
 | `cursor` | String | 否       | 数据查询的起始位置。该参数仅在分页获取时为必需。                                                                      |
-| `sort`   | String | 否       | 获取的子区的排序顺序：<br/> - `asc`：按用户加入子区的时间的正序；<br/> - （默认）`desc`：按用户加入子区的时间的倒序。 |
+| `sort`   | String | 否       | 获取的消息话题的排序顺序：<br/> - `asc`：按用户加入消息话题的时间的正序；<br/> - （默认）`desc`：按用户加入消息话题的时间的倒序。 |
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
@@ -68,17 +68,17 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX   \
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段。
 
-若为最后一页数据，响应中仍会返回 `cursor`，而且获取的子区数量小于请求中的 `limit` 的值；若响应中不再返回子区数据，表示你已经获取该群组下的所有子区数据。
+若为最后一页数据，响应中仍会返回 `cursor`，而且获取的消息话题数量小于请求中的 `limit` 的值；若响应中不再返回消息话题数据，表示你已经获取该群组下的所有消息话题数据。
 
 | 字段                | 类型   | 描述                                    | 
 | :------------------ | :----- | :-------------------------------------- |
 | `entities`       | JSON Array | 响应数据。                          |
-| - `name`     | String | 子区名称。                              |
-| - `owner`    | String | 子区的创建者。                          |
-| - `id`       | String | 子区 ID。                               |
-| - `msgId`    | String | 子区的父消息 ID。                       |
-| - `groupId`  | String | 子区所属群组 ID。                       |
-| - `created`  | Long   | 子区创建时间，Unix 时间戳，单位为毫秒。 |
+| - `name`     | String | 消息话题名称。                              |
+| - `owner`    | String | 消息话题的创建者。                          |
+| - `id`       | String | 消息话题 ID。                               |
+| - `msgId`    | String | 消息话题的父消息 ID。                       |
+| - `groupId`  | String | 消息话题所属群组 ID。                       |
+| - `created`  | Long   | 消息话题创建时间，Unix 时间戳，单位为毫秒。 |
 | - `cursor` | String | 查询游标，指定下次查询的起始位置。      |
 
 其他字段的说明如下：
@@ -102,6 +102,6 @@ curl -X GET https://XXXX/XXXX/XXXX/threads/chatgroups/XXXX/user/XXXX   \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | 分页参数 `limit` 的值过大。 | 检查查询参数 `limit` 是否在取值范围（[1,50]）内。  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
+| 403     | group_error | thread not open. | 消息话题功能未开通。 | 调用该接口前，你需要联系商务开通消息话题功能。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

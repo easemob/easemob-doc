@@ -2,9 +2,9 @@
 
 ## 概述
 
-通讯录页面组件 `ContactList` 组件显示和管理联系人列表。默认情况下提供添加联系人、删除联系人、添加联系人备注功能。
+通讯录页面组件 `ContactList` 组件显示和管理好友列表。默认情况下提供添加好友、删除好友、添加好友备注功能。
 
-联系人按照名称首字母分类排序，如果是中文则使用汉字首字母排序，如果没有昵称则使用用户 ID。
+好友按照名称首字母分类排序，如果是中文则使用汉字首字母排序，如果没有昵称则使用用户 ID。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/rn/custom_contact_list.png" title="通讯录页面 ContactList" />
@@ -60,12 +60,12 @@ export function ContactListScreen(props: Props) {
 | --------------------- | --------- | -------- | --------------------- |
 | containerStyle        | object    | 否       | 修改组件样式。      |
 | onSort                | function  | 否       | 自定义列表排序策略。      |
-| onInitListItemActions | function  | 否       | 自定义联系人列表组件中的单独列表项。默认包括联系人申请列表、群组列表。 |
-| groupId               | string    | 否       | 该参数只会用在 `add-group-member` 类型的联系人列表中。    |
-| onClickedNewRequest   | function  | 否       | 点击联系人通知列表的回调。例如，进行路由跳转。   |
+| onInitListItemActions | function  | 否       | 自定义好友列表组件中的单独列表项。默认包括好友申请列表、群组列表。 |
+| groupId               | string    | 否       | 该参数只会用在 `add-group-member` 类型的好友列表中。    |
+| onClickedNewRequest   | function  | 否       | 点击好友通知列表的回调。例如，进行路由跳转。   |
 | onClickedGroupList    | function  | 否       | 点击群列表的回调。   |
-| ListItemRender        | function  | 否       | 自定义联系人列表项的组件。可以实现修改布局、样式、是否可见等。  |
-| ListItemHeaderRender  | function  | 否       | 自定义联系人列表项 header 的组件。可以实现修改布局、样式、是否可见等。 |
+| ListItemRender        | function  | 否       | 自定义好友列表项的组件。可以实现修改布局、样式、是否可见等。  |
+| ListItemHeaderRender  | function  | 否       | 自定义好友列表项 header 的组件。可以实现修改布局、样式、是否可见等。 |
 | onStateChanged        | function  | 否       | 列表组件状态通知。包括：加载失败、列表为空等。     |
 | propsRef              | reference | 否       | 列表组件的引用对象，可以主动添加、修改、删除会话列表项，注意操作条件。 |
 | onForwardMessage      | function  | 否       | 转发的回调通知。例如，进行路由跳转。                                         |

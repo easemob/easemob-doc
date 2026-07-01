@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 React UI 组件库。该组件库提供了聊天相关的组件，包括会话列表、聊天界面、联系人列表和群组设置等组件，组件内部集成了 IM SDK，可以帮助开发者不关心内部实现和数据管理就能根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 React UI 组件库。该组件库提供了聊天相关的组件，包括会话列表、聊天界面、好友列表和群组设置等组件，组件内部集成了 IM SDK，可以帮助开发者不关心内部实现和数据管理就能根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 你可以查看 UIKit 源码和 Web Demo 源码：
 
@@ -30,9 +30,9 @@
 <ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_chat.png" title="会话列表+聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_group_detail.png" title="会话列表+群组设置" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+联系人设置" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="联系人列表+群组" />
-  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="联系人列表+联系人" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_conversation_list_contact_detail.png" title="会话列表+好友设置" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_group.png" title="好友列表+群组" />
+  <ImageItem src="/images/uikit/chatuikit/web/main_contact_list_contact.png" title="好友列表+好友" />
 </ImageGallery>
 
 ### 聊天页面功能
@@ -57,11 +57,11 @@
 
 ### 通讯录页面功能
 
-`ContactList` 提供联系人、群组及其详情等容器。
+`ContactList` 提供好友、群组及其详情等容器。
 
 <ImageGallery :columns="1">
-  <ImageItem src="/images/uikit/chatuikit/web/contact_list_info.png" title="联系人列表及详情" />
-  <ImageItem src="/images/uikit/chatuikit/web/contact_block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/web/contact_list_info.png" title="好友列表及详情" />
+  <ImageItem src="/images/uikit/chatuikit/web/contact_block_list.png" title="好友黑名单" />
 </ImageGallery>
 
 ### 群组管理页面功能
@@ -79,7 +79,7 @@
 
 <ImageGallery :columns="1">
   <ImageItem src="/images/uikit/chatuikit/web/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/web/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/web/search_contact.png" title="搜索好友名称" />
   <ImageItem src="/images/uikit/chatuikit/web/search_chat_history.png" title="搜索聊天历史" />
 </ImageGallery>
 

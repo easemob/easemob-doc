@@ -32,7 +32,7 @@ rootStore.conversationStore.setCurrentCvs({
 | :------ | :---------------- |
 | `useChatContext()`         | 获取消息相关的状态与操作方法                         |
 | `useConversationContext()` | 获取会话相关的状态与操作方法                         |
-| `useAddressContext()`      | 获取通讯录（联系人、群组、聊天室）相关状态与操作方法 |
+| `useAddressContext()`      | 获取通讯录（好友、群组、聊天室）相关状态与操作方法 |
 | `useChatroomContext()`     | 获取聊天室相关状态与操作方法                         |
 | `useThreadContext()`       | 获取话题（Thread）相关状态与操作方法                 |
 
@@ -136,7 +136,7 @@ const MyComponent = () => {
 | :-------------------- | :--------------------------------------------- |
 | `conversationStore`   | 会话管理       |
 | `messageStore`        | 消息管理 |
-| `addressStore`        | 通讯录管理（联系人、群组、聊天室）   |
+| `addressStore`        | 通讯录管理（好友、群组、聊天室）   |
 | `threadStore`         | 话题（Thread）管理                             |
 | `pinnedMessagesStore` | 置顶消息管理                                   |
 | `client`              | SDK 客户端实例                                 |
@@ -223,7 +223,7 @@ rootStore.conversationStore.pinConversation('singleChat', 'userId', true);
 | `recallMessage` | `(cvs: CurrentConversation, messageId: string, isChatThread?: boolean, recallMySelfMsg?: boolean) => Promise<void>` | 撤回消息（调用 SDK API） |
 | `modifyServerMessage` | `(messageId: string, msg: ChatSDK.ModifiedMsg) => Promise<void>` | 修改服务器端消息（调用 SDK API） |
 | `modifyLocalMessage` | `(messageId: string, msg: ChatSDK.ModifiedEventMessage, isReceivedModify?: boolean) => void` | 修改本地消息（仅本地更新） |
-| `modifyMessage` | `(id: string, message: ChatSDK.MessageBody \| NoticeMessageBody) => void` | 修改消息（仅本地更新） |
+| `modifyMessage` | `(id: string, message: ChatSDK.MessageBody \| NoticeMessageBody) => void` | 编辑消息（仅本地更新） |
 | `updateMessageStatus` | `(msgId: string, status: string) => void` | 更新消息状态（仅本地更新） |
 
 - 消息表情回复
@@ -300,14 +300,14 @@ rootStore.messageStore.translateMessage(
 
 ### 通讯录管理
 
-通讯录管理 Store `addressStore` 用于管理联系人、群组、聊天室等信息。
+通讯录管理 Store `addressStore` 用于管理好友、群组、聊天室等信息。
 
 #### 数据属性
 
 | 属性 | 类型 | 描述 |
 | :-- | :-- | :-- |
 | `appUsersInfo` | `Record<string, AppUserInfo>` | 应用用户信息映射 |
-| `contacts` | `{ userId: string; nickname: string; silent?: boolean; remark?: string }[]` | 联系人列表 |
+| `contacts` | `{ userId: string; nickname: string; silent?: boolean; remark?: string }[]` | 好友列表 |
 | `groups` | `GroupItem[]` | 群组列表 |
 | `chatroom` | `ChatroomInfo[]` | 聊天室列表 |
 | `blockList` | `string[]` | 黑名单列表 |
@@ -323,14 +323,14 @@ rootStore.messageStore.translateMessage(
 | `getUserInfo` | `(userId: string, withPresence?: boolean, force?: boolean) => Promise<AppUserInfo \| undefined>` | 获取用户信息（调用 SDK API） |
 | `getUserInfoWithPresence` | `(userIdList: string[]) => Promise<void>` | 批量获取用户信息（含在线状态，调用 SDK API） |
 
-- 联系人管理
+- 好友管理
 
 | 方法 | 类型 | 描述 |
 | :-- | :-- | :-- |
-| `addContact` | `(userId: string) => Promise<void>` | 添加联系人（调用 SDK API） |
-| `deleteContact` | `(userId: string) => Promise<void>` | 删除联系人（调用 SDK API） |
-| `setContactRemark` | `(userId: string, remark: string) => Promise<void>` | 设置联系人备注（调用 SDK API） |
-| `addContactToContactList` | `(userId: string, widthPresence?: boolean) => Promise<void>` | 添加联系人到列表（调用 SDK API 获取用户信息） |
+| `addContact` | `(userId: string) => Promise<void>` | 添加好友（调用 SDK API） |
+| `deleteContact` | `(userId: string) => Promise<void>` | 删除好友（调用 SDK API） |
+| `setContactRemark` | `(userId: string, remark: string) => Promise<void>` | 设置好友备注（调用 SDK API） |
+| `addContactToContactList` | `(userId: string, widthPresence?: boolean) => Promise<void>` | 添加好友到列表（调用 SDK API 获取用户信息） |
 
 - 群组管理
 

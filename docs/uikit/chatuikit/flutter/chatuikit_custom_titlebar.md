@@ -2,7 +2,7 @@
 
 `ChatUIKitAppBar` 是可自定义的标题栏组件，实现了 `PreferredSizeWidget` 接口，可以在 `Scaffold.appBar` 中使用（与 Flutter `AppBar` 的使用方式相同）。它使用 `NavigationToolbar` 组件提供灵活的布局方式（leading、middle、trailing 三个区域），支持显示头像、状态图标、标题、副标题、导航按钮和菜单等多种元素。
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitAppBar`。你可以根据自身需求设置标题栏。
+聊天页面、会话列表页面、好友列表页面、群详情页面和好友详情页面的标题栏均使用 `ChatUIKitAppBar`。你可以根据自身需求设置标题栏。
 
 ## 概述
 
@@ -73,12 +73,12 @@ ConversationsView(
 )
 ```
 
-- 设置联系人列表标题栏：
+- 设置好友列表标题栏：
 
 ```dart
 ContactsView(
   appBarModel: ChatUIKitAppBarModel(
-    title: '联系人', // 设置标题
+    title: '好友', // 设置标题
     showBackButton: false, // 显示返回按钮
   ),
 )

@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、好友列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 你可以查看 [GitHub](https://github.com/easemob/easemob-uikit-harmonyos) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-harmonyos) 上的 UIKit 源码。
 
@@ -17,7 +17,7 @@
     ├── pages                                // UIKit 页面
     │   ├── ChatPage                           // 聊天页面
     │   ├── ConversationListPage               // 会话列表页面
-    │   ├── ContactListPage                    // 联系人列表页面
+    │   ├── ContactListPage                    // 好友列表页面
     │   └── CreateGroupPage                    // 创建群组页面
     ├── components                           // UIKit 组件模块
     │   ├── chat                               // 聊天组件模块
@@ -33,10 +33,10 @@
     │   │   ├── ConversationListView             // 会话列表集成组件
     │   │   ├── ConversationComponents           // 会话相关子组件
     │   │   └── ConversationBuilders             // 会话相关自定义构件函数
-    │   └── contact                            // 联系人组件模块
-    │       ├── ContactListView                  // 联系人列表集成组件
-    │       ├── ContactComponents                // 联系人列表相关子组件
-    │       └── ContactBuilders                  // 联系人相关自定义构件函数
+    │   └── contact                            // 好友组件模块
+    │       ├── ContactListView                  // 好友列表集成组件
+    │       ├── ContactComponents                // 好友列表相关子组件
+    │       └── ContactBuilders                  // 好友相关自定义构件函数
     ├── viewmodels                           // UIKit SDK ViewModel 文件夹
     ├── model                                // UIKit SDK 数据类文件夹
     ├── repositories                         // UIKit SDK 数据仓库类文件夹
@@ -78,10 +78,10 @@
 
 ### 通讯录页面功能
 
-`ContactListPage` 是提供联系人列表的容器。
+`ContactListPage` 是提供好友列表的容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="好友列表" />
   <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
@@ -91,7 +91,7 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索好友名称" />
 </ImageGallery>
 
 

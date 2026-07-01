@@ -543,7 +543,7 @@ export function ConversationListWithAvatarConfig(props: { options: any }) {
 
 ## 设置导航栏菜单
 
-会话列表导航栏右侧的 "+" 按钮点击后弹出操作菜单，默认包含 "新会话"、"创建群组"、"添加联系人"等选项。你可以通过 `onInitNavigationBarMenu` 自定义菜单项。
+会话列表导航栏右侧的 "+" 按钮点击后弹出操作菜单，默认包含 "新会话"、"创建群组"、"添加好友"等选项。你可以通过 `onInitNavigationBarMenu` 自定义菜单项。
 
 #### 菜单项类型定义
 
@@ -597,7 +597,7 @@ type InitMenuItemsType = {
 ```typescript
 <ConversationList
   onInitNavigationBarMenu={(initItems) => {
-    // 移除"添加联系人"菜单项
+    // 移除"添加好友"菜单项
     return initItems.filter(item => item.name !== 'new_contact');
   }}
 />

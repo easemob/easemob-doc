@@ -1,20 +1,20 @@
-# 管理子区消息
+# 管理消息话题中的消息
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用子区消息功能前，你需要联系商务开通。
+消息话题中的消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用消息话题中的消息功能前，你需要联系商务开通。
 
-本文介绍即时通讯 IM React Native SDK 如何发送、接收以及撤回子区消息。
+本文介绍即时通讯 IM React Native SDK 如何发送、接收以及撤回消息话题中的消息。
 
 ## 技术原理
 
-即时通讯 IM React Native SDK 提供 `ChatManager`、`ChatMessage` 和 `ChatMessageThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
+即时通讯 IM React Native SDK 提供 `ChatManager`、`ChatMessage` 和 `ChatMessageThread` 类，用于管理消息话题中的消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取消息话题中的消息。
 
 消息收发流程如下：
 
-客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
+客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于消息话题中的消息，服务器投递给消息话题内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
-子区创建和查看如下图：
+消息话题创建和查看如下图：
 
 ![img](/images/android/threads.png)
 
@@ -24,23 +24,23 @@
 
 - 已集成 `1.0.5 或以上版本` SDK 的基本功能，完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 已联系商务开通子区功能。
+- 已联系商务开通消息话题功能。
 
 ## 实现方法
 
 本节介绍如何使用即时通讯 IM React Native SDK 提供的 API 实现上述功能。
 
-### 发送子区消息
+### 发送消息话题中的消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThread` 为 `true`。
+发送消息话题中的消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送消息话题中的消息需要指定标记 `isChatThread` 为 `true`。
 
 示例代码如下：
 
 ```typescript
-// chatThreadID: 子区 ID。
+// chatThreadID: 消息话题 ID。
 // content: 文本消息内容
 // convType: 会话类型为群组会话，即 ChatConversationType.GroupChat
-// isChatThread: 是否是子区消息，这里设置为 `true`，即是子区消息
+// isChatThread: 是否是消息话题中的消息，这里设置为 `true`，即是消息话题中的消息
 const message = ChatMessage.createTextMessage(chatThreadID, content, convType, {
   isChatThread: true,
 });
@@ -60,11 +60,11 @@ ChatClient.getInstance()
   });
 ```
 
-### 接收子区消息
+### 接收消息话题中的消息
 
-接收消息的具体逻辑，请参考 [接收消息](message_receive.html)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_receive.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-子区有新增消息时，子区所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，子区成员收到 `ChatMessageEventListener#onMessagesReceived` 回调。
+消息话题有新增消息时，消息话题所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，消息话题成员收到 `ChatMessageEventListener#onMessagesReceived` 回调。
 
 示例代码如下：
 
@@ -91,11 +91,11 @@ ChatClient.getInstance().chatManager.removeMessageListener(listener);
 ChatClient.getInstance().chatManager.removeAllMessageListener();
 ```
 
-### 撤回子区消息
+### 撤回消息话题中的消息
 
-接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-子区有消息撤回时，子区所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，子区成员收到 `ChatMessageEventListener#onMessagesRecalledInfo` 回调。
+消息话题有消息撤回时，消息话题所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，消息话题成员收到 `ChatMessageEventListener#onMessagesRecalledInfo` 回调。
 
 示例代码如下：
 
@@ -112,18 +112,18 @@ class ChatMessageEvent implements ChatMessageEventListener {
 }
 ```
 
-### 获取子区消息
+### 获取消息话题中的消息
 
-从服务器还是本地数据库获取子区消息取决于你的生产环境。
+从服务器还是本地数据库获取消息话题中的消息取决于你的生产环境。
 
-你可以通过 `ChatConversation#isChatThread()` 判断当前会话是否是子区会话。
+你可以通过 `ChatConversation#isChatThread()` 判断当前会话是否是消息话题会话。
 
-#### 从服务器获取单个子区的消息（消息漫游）
+#### 从服务器获取单个消息话题的消息（消息漫游）
 
-调用 `fetchHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
+调用 `fetchHistoryMessages` 方法从服务器获取消息话题中的消息。从服务器获取消息话题中的消息与获取群组消息的唯一区别为前者需传入消息话题 ID，后者需传入群组 ID。
 
 ```typescript
-// chatThreadID: 子区 ID。
+// chatThreadID: 消息话题 ID。
 const chatThreadID = "chatThreadID";
 // 会话类型为群聊，即 ChatConversationType.GroupChat。
 const convType = ChatConversationType.GroupChat;
@@ -147,18 +147,18 @@ ChatClient.getInstance()
   });
 ```
 
-#### 获取本地单个子区的消息
+#### 获取本地单个消息话题的消息
 
 调用 `ChatManager#getAllConversations` 方法只能获取单聊或群聊会话。
 
-你可以调用 `getThreadConversation` 方法获取子区会话，然后从本地数据库中读取指定会话的消息：
+你可以调用 `getThreadConversation` 方法获取消息话题会话，然后从本地数据库中读取指定会话的消息：
 
 ```typescript
-// 获取子区会话
+// 获取消息话题会话
 ChatClient.getInstance()
   .chatManager.getThreadConversation(chatThreadID, createIfNeed)
   .then((conv) => {
-    // 从本地数据库获取子区会话消息
+    // 从本地数据库获取消息话题会话消息
     conv
       .getMessages(
         chatThreadID,

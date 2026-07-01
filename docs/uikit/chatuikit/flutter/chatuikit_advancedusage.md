@@ -11,8 +11,8 @@
 | routeName | 对应字符串| 描述 |
 |---|---|---|
 | ChatUIKitRouteNames.changeInfoView |  '/ChangeInfoView' | 修改信息页面。|
-| ChatUIKitRouteNames.contactDetailsView |  '/ContactDetailsView' | 联系人详情页面。|
-| ChatUIKitRouteNames.contactsView |  '/ContactsView' | 联系人列表页面。|
+| ChatUIKitRouteNames.contactDetailsView |  '/ContactDetailsView' | 好友详情页面。|
+| ChatUIKitRouteNames.contactsView |  '/ContactsView' | 好友列表页面。|
 | ChatUIKitRouteNames.conversationsView |  '/ConversationsView' | 会话列表页面。|
 | ChatUIKitRouteNames.createGroupView |  '/CreateGroupView' | 创建群组时选人页面。|
 | ChatUIKitRouteNames.currentUserInfoView |  '/CurrentUserInfoView' | 当前用户详情页面。|
@@ -29,9 +29,9 @@
 | ChatUIKitRouteNames.newRequestDetailsView |  '/NewRequestDetailsView' | 新请求详情页面。|
 | ChatUIKitRouteNames.newRequestsView |  '/NewRequestsView' | 新请求列表页面。|
 | ChatUIKitRouteNames.reportMessageView |  '/ReportMessageView' | 消息举报页面。|
-| ChatUIKitRouteNames.searchUsersView |  '/SearchUsersView' | 搜索联系人页面。|
+| ChatUIKitRouteNames.searchUsersView |  '/SearchUsersView' | 搜索好友页面。|
 | ChatUIKitRouteNames.searchGroupMembersView |  '/SearchGroupMembersView' | 搜索群成员页面。|
-| ChatUIKitRouteNames.selectContactsView |  '/SelectContactsView' | 选择联系人页面 |
+| ChatUIKitRouteNames.selectContactsView |  '/SelectContactsView' | 选择好友页面 |
 | ChatUIKitRouteNames.showImageView |  '/ShowImageView' | 查看图片页面。|
 | ChatUIKitRouteNames.showVideoView |  '/ShowVideoView' | 查看视频页面。|
 | ChatUIKitRouteNames.searchHistoryView |  '/SearchHistoryView' | 搜索历史消息页面|
@@ -105,8 +105,8 @@ Widget build(BuildContext context) {
 | 类型 | 定义 |
 |--|--|
 | ChangeInfoViewArguments | 修改信息页面参数包装类。|
-| ContactDetailsViewArguments | 联系人详情页面参数包装类。|
-| ContactsViewArguments | 联系人列表页面参数包装类。|
+| ContactDetailsViewArguments | 好友详情页面参数包装类。|
+| ContactsViewArguments | 好友列表页面参数包装类。|
 | ConversationsViewArguments | 会话列表页面参数包装类。|
 | CreateGroupViewArguments | 创建群组页面参数包装类。|
 | CurrentUserInfoViewArguments | 当前用户详情页面参数包装类。|
@@ -126,7 +126,7 @@ Widget build(BuildContext context) {
 | SearchGroupMembersViewArguments | 搜索群成员页面包装类。|
 | SearchHistoryViewArguments |搜索消息页面包装类。 |
 | SearchViewArguments | 搜索用户页面参数包装类。|
-| SelectContactViewArguments | 选择联系人页面参数包装类。|
+| SelectContactViewArguments | 选择好友页面参数包装类。|
 | ShowImageViewArguments | 展示图片页面参数包装类。|
 | ShowVideoViewArguments | 展示视频页面参数包装类。|
 | ThreadMembersViewArguments | Thread 成员列表页面参数包装类。|
@@ -146,9 +146,9 @@ ChatUIKitTimeFormatter.instance.formatterHandler = (context, type, time) {
 };
 ```
 
-## 配置联系人首字母排序
+## 配置好友首字母排序
 
-当用户昵称中出现中文时，需要将中文中的姓氏转化为字母才能正确的在联系人列表中索引。此时，可以通过以下方式将 `showName` 的值改为字符返回。
+当用户昵称中出现中文时，需要将中文中的姓氏转化为字母才能正确的在好友列表中索引。此时，可以通过以下方式将 `showName` 的值改为字符返回。
 
 ```dart
 ChatUIKitAlphabetSortHelper.instance.sortHandler = (showName) {
@@ -409,9 +409,9 @@ ChatUIKitSettings.enableMessageMultiSelect = false;
 ChatUIKitSettings.enableMessageForward = false;
 ```
 
-### 联系人首字母索引顺序
+### 好友首字母索引顺序
 
-联系人首字母索引顺序，即通讯录中联系人排序顺序，默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`, 如果需要修改，可以参考一下代码：
+好友首字母索引顺序，即通讯录中好友排序顺序，默认为 `ABCDEFGHIJKLMNOPQRSTUVWXYZ#`, 如果需要修改，可以参考一下代码：
 
 ```dart
 // 将首字母排序中的#号排到最前面

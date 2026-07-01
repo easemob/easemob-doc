@@ -204,14 +204,14 @@ if info.unreadCount > 0 {
 
 ## 自定义导航栏更多菜单
 
-点击导航栏右侧 “+” 按钮显示功能菜单，包括发起新会话、添加联系人、创建群组等菜单项。
+点击导航栏右侧 “+” 按钮显示功能菜单，包括发起新会话、添加好友、创建群组等菜单项。
 
 默认 `listMoreActions` 包含以下菜单项：
 
 | Tag              | 标题国际化 Key                              | 图标资源          | 说明               |
 | :--------------- | :------------------------------------------ | :---------------- | :----------------- |
-| `SelectContacts` | `new_chat_button_click_menu_selectcontacts` | `chatWith`        | 选择联系人发起聊天 |
-| `AddContact`     | `new_chat_button_click_menu_addcontacts`    | `person_add_fill` | 添加新联系人       |
+| `SelectContacts` | `new_chat_button_click_menu_selectcontacts` | `chatWith`        | 选择好友发起聊天 |
+| `AddContact`     | `new_chat_button_click_menu_addcontacts`    | `person_add_fill` | 添加新好友       |
 | `CreateGroup`    | `new_chat_button_click_menu_creategroup`    | `create_group`    | 创建群组           |
 
 自定义菜单项：
@@ -328,8 +328,8 @@ Appearance.secondaryHue = 155/360.0
 | `trash`           | 删除图标       | 左滑菜单            |
 | `more`            | 更多图标       | 右滑菜单            |
 | `read`            | 已读图标       | 右滑菜单            |
-| `chatWith`        | 选择联系人图标 | 列表菜单            |
-| `person_add_fill` | 添加联系人图标 | 列表菜单            |
+| `chatWith`        | 选择好友图标 | 列表菜单            |
+| `person_add_fill` | 添加好友图标 | 列表菜单            |
 | `create_group`    | 创建群组图标   | 列表菜单            |
 | `empty`           | 空列表占位图   | 空状态视图          |
 | `bell_slash`      | 免打扰标识     | 会话条目的昵称旁   |
@@ -347,8 +347,8 @@ Appearance.secondaryHue = 155/360.0
 | `conversation_left_slide_menu_pin`          | Pin             | 置顶按钮       |
 | `conversation_left_slide_menu_unpin`        | Unpin           | 取消置顶按钮   |
 | `conversation_left_slide_menu_unmute`       | Unmute          | 取消免打扰按钮 |
-| `new_chat_button_click_menu_selectcontacts` | Select Contacts | 选择联系人     |
-| `new_chat_button_click_menu_addcontacts`    | Add Contact     | 添加联系人     |
+| `new_chat_button_click_menu_selectcontacts` | Select Contacts | 选择好友     |
+| `new_chat_button_click_menu_addcontacts`    | Add Contact     | 添加好友     |
 | `new_chat_button_click_menu_creategroup`    | Create Group    | 创建群组       |
 | `Mentioned`                                 | Mentioned       | @提醒标识      |
 | `Search`                                    | Search          | 搜索按钮文字   |
@@ -394,17 +394,17 @@ Appearance.secondaryHue = 155/360.0
 | `pop()` | `@objc open func pop()` | Void | 返回上一页<br/>如果有导航控制器则 `pop`，否则 `dismiss` |
 | `toChat(indexPath:info:)` | `@objc open func toChat(indexPath: IndexPath, info: ConversationInfo)` | Void | 进入聊天页面<br/>创建 `MessageViewController` 并跳转 |
 | `searchAction()` | `@objc open func searchAction()` | Void | 执行搜索操作<br/>显示 `SearchConversationsController` |
-| `rightActions(indexPath:)` | `@objc open func rightActions(indexPath: IndexPath)` | Void | 处理右侧 “+” 按钮点击<br/>显示 **选择联系人**、**添加联系人**、**创建群组** 菜单 |
+| `rightActions(indexPath:)` | `@objc open func rightActions(indexPath: IndexPath)` | Void | 处理右侧 “+” 按钮点击<br/>显示 **选择好友**、**添加好友**、**创建群组** 菜单 |
 
-- **联系人和群组操作方法**
+- **好友和群组操作方法**
 
 | 方法名 | 方法签名 | 返回类型 | 描述 |
 | :---------- | :---- | :----- | :----- |
-| `selectContact()` | `@objc open func selectContact()` | Void | 选择联系人<br/>显示联系人列表，选中后跳转聊天页面 |
-| `chatToContact(profile:)` | `@objc open func chatToContact(profile: ChatUserProfileProtocol)` | Void | 与指定联系人聊天<br/>如果会话存在则跳转，否则创建新会话 |
+| `selectContact()` | `@objc open func selectContact()` | Void | 选择好友<br/>显示好友列表，选中后跳转聊天页面 |
+| `chatToContact(profile:)` | `@objc open func chatToContact(profile: ChatUserProfileProtocol)` | Void | 与指定好友聊天<br/>如果会话存在则跳转，否则创建新会话 |
 | `createChat(profile:type:info:)` | `@objc open func createChat(profile: ChatUserProfileProtocol, type: ChatConversationType, info: String)` | Void | 创建会话并跳转<br/>支持单聊和群聊，缓存用户/群组信息 |
-| `addContact()` | `@objc open func addContact()` | Void | 添加联系人<br/>显示对话框输入好友的用户 ID（`contactID`），调用 SDK 添加好友 |
-| `createGroup()` | `@objc open func createGroup()` | Void | 创建群组<br/>显示联系人选择器，选择成员后创建群聊 |
+| `addContact()` | `@objc open func addContact()` | Void | 添加好友<br/>显示对话框输入好友的用户 ID（`contactID`），调用 SDK 添加好友 |
+| `createGroup()` | `@objc open func createGroup()` | Void | 创建群组<br/>显示好友选择器，选择成员后创建群聊 |
 | `create(profiles:)` | `@objc open func create(profiles: [ChatUserProfileProtocol])` | Void | 创建群组会话<br/>拼接群名称（前 3 个成员昵称），调用 SDK 创建群组 |
 
 - **主题切换**

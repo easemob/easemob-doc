@@ -41,9 +41,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 conn.addEventHandler("contactEvent", {
     // 当前用户收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
     onContactInvited: function (msg) {},
-    // 当前用户被其他用户从联系人列表上移除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+    // 当前用户被其他用户从好友列表上移除。用户 B 将用户 A 从好友列表上删除，用户 A 收到该事件。
     onContactDeleted: function (msg) {},
-    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方用户均收到 `onContactAgreed` 事件。
+    // 当前用户新增了好友。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方用户均收到 `onContactAgreed` 事件。
     onContactAdded: function (msg) {},
     // 当前用户发送的好友请求被拒绝。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
     onContactRefuse: function (msg) {},
@@ -78,7 +78,7 @@ conn.addContact("userId", "加个好友呗!");
 
 ### 删除好友
 
-删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+删除好友时会同时删除对方好友列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 你可以调用 `deleteContact` 方法删除好友，示例代码如下：
 
@@ -130,7 +130,7 @@ conn
 ```javascript
 conn
   .getContactsWithCursor({
-    pageSize: 20, // 每页期望获取的联系人数量。取值范围为 [1,50]，默认为 `20`。
+    pageSize: 20, // 每页期望获取的好友数量。取值范围为 [1,50]，默认为 `20`。
     cursor: '' // 开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
   })
   .then((res) => {

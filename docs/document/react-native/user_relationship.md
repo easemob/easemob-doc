@@ -2,7 +2,7 @@
 
 <Toc />
 
-用户登录后，可进行添加联系人、获取好友列表等操作。
+用户登录后，可进行添加好友、获取好友列表等操作。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
@@ -40,10 +40,10 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 ```typescript
       const listener = {
         onContactAdded: (userName: string) => {
-          // 联系人已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 A 收到该事件，而用户 B 收到 `onFriendRequestAccepted` 事件。
+          // 好友已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 A 收到该事件，而用户 B 收到 `onFriendRequestAccepted` 事件。
         },
         onContactDeleted: (userName: string) => {
-          // 联系人被删除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+          // 好友被删除。用户 B 将用户 A 从好友列表上删除，用户 A 收到该事件。
         },
         onContactInvited: (userName: string, reason?: string) => {
           // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
@@ -55,9 +55,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
           // 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
         },
       } as ChatContactEventListener;
-      // 添加联系人监听器
+      // 添加好友监听器
       ChatClient.getInstance().contactManager.removeContactListener(listener);
-      // 移除联系人监听器
+      // 移除好友监听器
       ChatClient.getInstance().contactManager.addContactListener(listener);
 ```
 
@@ -143,7 +143,7 @@ ChatClient.getInstance().contactManager.addContactListener(
 
 ### 删除好友
 
-删除好友时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+删除好友时会同时删除对方好友列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 ```typescript
 // 用户 ID
@@ -185,7 +185,7 @@ ChatClient.getInstance()
 ChatClient.getInstance()
   .contactManager.fetchAllContacts()
   .then((contactList: Contact[]) => {
-    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+    // todo: 从服务器返回所有的好友列表。包括好友备注信息。
   })
   .catch();
 ```
@@ -201,7 +201,7 @@ ChatClient.getInstance()
     pageSize: 20,
   })
   .then((contactList: Contact[]) => {
-    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+    // todo: 从服务器返回所有的好友列表。包括好友备注信息。
   })
   .catch();
 ```
@@ -245,7 +245,7 @@ ChatClient.getInstance()
 ChatClient.getInstance()
   .contactManager.getAllContacts()
   .then((contactList: Contact[]) => {
-    // todo: 从服务器返回所有的联系人列表。包括好友备注信息。
+    // todo: 从服务器返回所有的好友列表。包括好友备注信息。
   })
   .catch();
 ```
