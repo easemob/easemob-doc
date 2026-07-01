@@ -1,5 +1,25 @@
 # iOS IM SDK 更新日志
 
+## v4.23.0 Dev 2026-6-18（开发版）
+
+#### 新增特性
+
+支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。
+
+#### 优化
+
+- 新增 [登录失败相关错误码](error.html)：
+  - `350`：`EMErrorConnectionTimeout`：连接服务器超时。
+  - `351`：`EMErrorConnectionDNSError`：连接服务器时发生 DNS 错误。
+  - `352`：`EMErrorConnectionIOError`：连接服务器时发生 IO 错误。
+  - `353`：`EMError#CONNECTION_STREAM_CLOSED`：连接服务器时流被关闭。
+  - `354`：`EMErrorConnectionProvisionTimeout`：连接服务器时认证超时。
+
+#### 修复
+
+- 修复了合并转发消息中，偶现内部附件下载失败的问题。
+- 修复了发送 HEIF 格式图片时，Exif 信息异常丢失的问题。
+
 ## v4.22.0 Dev 2026-6-17（开发版）
 
 #### 新增特性
