@@ -855,7 +855,7 @@ const documentSidebar = [
         collapsible: true,
         children: [
           { text: '用户状态变更回调', link: 'callback_login_logout.html' },
-          { text: '好友/黑名单管理回调', link: 'callback_contact.html' },
+          { text: '好友与黑名单管理回调', link: 'callback_contact.html' },
           { text: '消息回调',
                 collapsible: true,
                 children: [
