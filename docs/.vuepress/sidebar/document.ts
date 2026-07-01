@@ -854,8 +854,8 @@ const documentSidebar = [
       { text: '回调事件',
         collapsible: true,
         children: [
-          { text: '在线状态相关回调', link: 'callback_login_logout.html' },
-          { text: '用户关系相关回调', link: 'callback_contact.html' },
+          { text: '用户状态变更回调', link: 'callback_login_logout.html' },
+          { text: '好友/黑名单回调', link: 'callback_contact.html' },
           { text: '消息相关回调',
                 collapsible: true,
                 children: [
@@ -877,11 +877,11 @@ const documentSidebar = [
             collapsible: true,
             children: [
               {
-                text: '创建与解散',
+                text: '创建与删除',
                 collapsible: true,
                 children: [
                   { text: '群组/聊天室创建', link: 'callback_group_room_create.html' },
-                  { text: '群组/聊天室解散', link: 'callback_group_room_delete.html' }
+                  { text: '群组/聊天室删除', link: 'callback_group_room_delete.html' }
                ]
              },
               { text: '信息与状态变更',
@@ -899,8 +899,8 @@ const documentSidebar = [
                 text: '成员与权限变更',
                 collapsible: true,
                 children: [
-                  { text: '用户加入', link: 'callback_group_room_join.html' },
-                  { text: '成员离开', link: 'callback_group_room_leave.html' },
+                  { text: '新成员加入', link: 'callback_group_room_join.html' },
+                  { text: '成员退出', link: 'callback_group_room_leave.html' },
                   { text: '管理员变更', link: 'callback_group_room_admin.html' },
                   { text: '禁言列表变更', link: 'callback_group_room_mute.html' },
                   { text: '白名单变更', link: 'callback_group_room_allowlist.html' },
@@ -920,7 +920,8 @@ const documentSidebar = [
             ]
           },
           { text: '离线推送相关回调', link: 'callback_offline_push.html' },
-          { text: '敏感词相关回调', link: 'callback_sensitive_word.html' }
+          { text: '内容审核相关回调', link: 'callback_moderation.html' },
+          { text: '敏感词监测回调', link: 'callback_sensitive_word.html' }
         ]
       },
       { text: '回调异常处理', link: 'callback_postsending_exception_storage.html' }
