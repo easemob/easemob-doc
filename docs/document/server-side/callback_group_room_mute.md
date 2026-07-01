@@ -1,20 +1,21 @@
-# 将群组/聊天室成员添加或移出禁言列表的事件 
+# 群组和聊天室禁言列表回调事件
 
-成功将群组或聊天室成员添加或移出禁言列表后，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看成员禁言/解除禁言的信息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要将群组或聊天室成员添加或移出禁言列表的事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+成功将群组或聊天室成员添加或移出禁言列表后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看成员禁言/解除禁言的信息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 将成员加入禁言列表
 
 ### 回调时机
 
-1. 客户端将群组或聊天室成员加入了禁言列表。
-2. 调用 RESTful API 将群组或聊天室成员加入了禁言列表。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员加入了禁言列表。
+1. 客户端将 [群组](/document/android/group_members.html#将成员加入群组禁言列表)或[聊天室成员](/document/android/room_members.html#添加成员至聊天室禁言列表) 加入了禁言列表。
+2. 调用 RESTful API 将 [群组](/document/server-side/group_member_mute.html) 或 [聊天室成员](/document/server-side/chatroom_member_mute.html) 加入了禁言列表。
+3. 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 加入了禁言列表。
 
 ### 回调请求
 
@@ -63,9 +64,9 @@
 
 ### 回调时机
 
-1. 客户端将群组/聊天室成员移出了禁言列表。
-2. 调用 RESTful API 将群组/聊天室成员移出了禁言列表。
-3. 在 [环信控制台](https://console.easemob.com/user/login) 将群组/聊天室成员移出了禁言列表。
+1. 客户端将 [群组](/document/android/group_members.html#将成员移出群组禁言列表)或[聊天室成员](/document/android/room_members.html#将成员移出聊天室禁言列表) 移出了禁言列表。
+2. 调用 RESTful API 将 [群组](/document/server-side/group_member_unmute.html)或[聊天室成员](/document/server-side/chatroom_member_mute.html) 移出了禁言列表。
+3. 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 移出了禁言列表。
 
 ### 回调请求
 

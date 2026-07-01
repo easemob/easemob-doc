@@ -334,8 +334,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/message_recall_single.html
-          - text: 修改消息
-            desc: 修改单聊或群组聊天会话中已经发送成功的文本消息。
+          - text: 编辑消息
+            desc: 编辑单聊或群组聊天会话中已经发送成功的消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -398,7 +398,7 @@ projects:
                 text: Windows
                 link: /document/windows/message_receipt.html
           - text: 搜索消息
-            desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
+            desc: 支持搜索本地数据库中除透传消息之外的所有类型的消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1108,8 +1108,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/chatroom_announcement_get.html
-          - text: 子区管理
-            desc: 支持创建、解散、加入、退出子区，修改子区名称、获取子区详情和子区成员列表和子区列表，获取子区中最新一条消息以及监听子区事件。
+          - text: 消息话题管理
+            desc: 支持创建、解散、加入、退出消息话题，修改消息话题名称、获取消息话题详情和消息话题成员列表和消息话题列表，获取消息话题中最新一条消息以及监听消息话题事件。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1138,8 +1138,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/group_thread_create.html
-          - text: 子区消息管理
-            desc: 支持发送和接收子区消息、撤回子区消息和获取子区消息。
+          - text: 话题的消息管理
+            desc: 支持发送和接收话题消息、撤回话题消息和获取话题消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1386,7 +1386,7 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_chat_intro
           - text: 通讯录
-            desc: 通讯录页面展示通讯录列表，包括添加联系人，好友申请列表入口，联系人列表等。支持自定义联系人列表和联系人事件监听。
+            desc: 通讯录页面展示通讯录列表，包括添加好友，好友申请列表入口，好友列表等。支持自定义好友列表和好友事件监听。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1406,8 +1406,8 @@ projects:
               - icon: /sdk/react.svg
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_contactlist_intro.html
-          - text: 联系人详情
-            desc: 联系人详情页面展示联系人的详细信息，支持自定义导航栏、联系人条目以及发消息、音频通话、视频通话等按钮。
+          - text: 好友详情
+            desc: 好友详情页面展示好友的详细信息，支持自定义导航栏、好友条目以及发消息、音频通话、视频通话等按钮。
             sdks:
               - icon: /sdk/android.svg
                 text: Android

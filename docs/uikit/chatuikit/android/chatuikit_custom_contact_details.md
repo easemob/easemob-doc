@@ -1,18 +1,18 @@
-# 设置联系人详情页面
+# 设置好友详情页面
 
-你可以配置联系人详情页面的标题栏和中间的按钮等。
+你可以配置好友详情页面的标题栏和中间的按钮等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_details.png" title="联系人详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_details.png" title="好友详情页面" />
 </ImageGallery>
 
 ## 设置标题栏
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果聊天页面的标题栏不满足需求，建议设置标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
+聊天页面、会话列表页面、好友列表页面、群详情页面和好友详情页面的标题栏均使用 `ChatUIKitTitleBar`。如果聊天页面的标题栏不满足需求，建议设置标题栏。关于标题栏中的标题、头像、背景色、标题栏右侧按钮的显示图片和左侧的头像，详见 [设置页面标题栏](chatuikit_custom_titlebar.html)。
 
 ## 自定义按钮
 
-联系人详情页面中按钮数据源可配项以及按钮点击事件，例如，添加音频通话、视频通话按钮。默认情况下，`super.getDetailItem()` 包含聊天和搜索。 
+好友详情页面中按钮数据源可配项以及按钮点击事件，例如，添加音频通话、视频通话按钮。默认情况下，`super.getDetailItem()` 包含聊天和搜索。 
 
 ```kotlin
     // 实现 MyContactDetailActivity 继承 ChatUIKitContactDetailsActivity 并重写以下方法

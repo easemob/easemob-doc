@@ -8,7 +8,7 @@
 
 EaseIMKit 是什么？
 
-EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如 ‘会话列表’、‘聊天界面’ 和 ‘联系人列表’ 等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
+EaseIMKit 是基于环信 IM SDK 的一款 UI 组件库，它提供了一些通用的 UI 组件，例如 ‘会话列表’、‘聊天界面’ 和 ‘好友列表’ 等，开发者可根据实际业务需求通过该组件库快速地搭建自定义 IM 应用。EaseIMKit 中的组件在实现 UI 功能的同时，调用 IM SDK 相应的接口实现 IM 相关逻辑和数据的处理，因而开发者在使用 EaseIMKit 时只需关注自身业务或个性化扩展即可。
 
 EaseIMKit 源码地址
 
@@ -375,7 +375,7 @@ typedef enum {
 @property (nonatomic) int badgeMaxNum;   // 未读数显示上限, 超过上限后会显示 xx+
 ```
 
-会话列表以及联系人列表共用其父类可配置参数如下：
+会话列表以及好友列表共用其父类可配置参数如下：
 
 ```objectivec
 @property (nonatomic) BOOL canRefresh;  // 是否可下拉刷新
@@ -417,7 +417,7 @@ typedef enum {
 
 通讯录添加头部功能区：新的好友，群聊，聊天室示意图：
 
-![头部功能区：新的好友，群聊，聊天室以及联系人列表](/images/ios/easeimkit8.png)
+![头部功能区：新的好友，群聊，聊天室以及好友列表](/images/ios/easeimkit8.png)
 
 ## 自定义功能扩展
 
@@ -930,9 +930,9 @@ return menuArray;
 
 ### 通讯录自定义功能扩展
 
-#### 获取用户联系人资料
+#### 获取用户好友资料
 
-获取用户自己的联系人列表填充到 EaseIMKit 通讯录中
+获取用户自己的好友列表填充到 EaseIMKit 通讯录中
 
 ```objectivec
 - (void)setContacts:(NSArray<EaseUserDelegate> * _Nonnull)contacts;
@@ -952,7 +952,7 @@ EaseConversationsViewControllerDelegate
 
 ```objectivec
 - (void)willBeginRefresh {
-    //从服务器获取当前登录账户的联系人列表
+    //从服务器获取当前登录账户的好友列表
     [EMClient.sharedClient.contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
         if (!aError) {
             self->_contacts = [aList mutableCopy];
@@ -962,7 +962,7 @@ EaseConversationsViewControllerDelegate
                 model.huanXinId = username;
                 [contacts addObject:model];
             }
-            //填充联系人列表集合到 EaseIMKit 通讯录实例中
+            //填充好友列表集合到 EaseIMKit 通讯录实例中
             [self->_contactsVC setContacts:contacts];
         }
         [self->_contactsVC endRefresh];
@@ -1029,7 +1029,7 @@ EaseConversationsViewControllerDelegate
  @method
  @brief 会话列表 cell 侧滑项回调
  @param     tableView 当前消息视图的 tableView
- @param     contact 当前所侧滑 cell 拥有的联系人数据
+ @param     contact 当前所侧滑 cell 拥有的好友数据
  @param     actions 返回侧滑项集合
  */
 - (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView
@@ -1042,7 +1042,7 @@ EaseConversationsViewControllerDelegate
 ```objectivec
 - (NSArray<UIContextualAction *> *)easeTableView:(UITableView *)tableView trailingSwipeActionsForRowAtContactModel:(EaseContactModel *)contact actions:(NSArray<UIContextualAction *> *)actions
 {
-    //通讯录头部非联系人列表禁止侧滑
+    //通讯录头部非好友列表禁止侧滑
     if ([contact.easeId isEqualToString:@"newFriend"] || [contact.easeId isEqualToString:@"groupList"] || [contact.easeId isEqualToString:@"chatroomList"]) {
         return nil;
     }
@@ -1051,7 +1051,7 @@ EaseConversationsViewControllerDelegate
                                                                                title:@"删除"
                                                                              handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL))
     {
-        //删除联系人操作
+        //删除好友操作
     }];
     return @[deleteAction];
 }

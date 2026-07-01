@@ -30,7 +30,7 @@
 以下示例代码展示如何发送输入状态的透传消息。
 
 ```typescript
-// 发送自己在输入状态中的命令消息
+// 发送自己在输入状态中的透传消息
 const action = "inputting";
 const msg = ChatMessage.createCmdMessage(targetId, action, chatType);
 EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
@@ -43,7 +43,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 ```typescript
 let listener = new (class implements ChatMessageEventListener {
   onCmdMessagesReceived(messages: ChatMessage[]): void {
-    // 收到命令消息
+    // 收到透传消息
     for (msg of messages) {
       // 过略消息
       if (msg.body.action === "inputting") {

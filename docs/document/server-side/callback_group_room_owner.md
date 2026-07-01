@@ -1,17 +1,18 @@
-# 变更群主/聊天室所有者事件
+# 群主和聊天室所有者变更回调事件
 
-成功变更群主或聊天室所有者后，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看新群主信息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要变更群主或聊天室所有者的回调事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+成功变更群主或聊天室所有者后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看新群主信息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
  
 ## 回调时机
 
-1. 通过客户端变更了群主/聊天室所有者。
-2. 调用 RESTful API 变更了群主/聊天室所有者。
+- 客户端变更了 [群主](/document/android/group_members.html#变更群主)/[聊天室所有者](/document/android/room_members.html#变更聊天室所有者)。
+- 调用 RESTful API 变更了 [群主](/document/server-side/group_owner_transfer.html)/[聊天室所有者](/document/server-side/chatroom_owner_transfer.html)。
 
 ## 回调请求
 

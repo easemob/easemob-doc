@@ -8,7 +8,7 @@
   <ImageItem src="/images/uikit/chatuikit/flutter/custom_group_details.png" title="群组详情页面" />
 </ImageGallery> 
 
-与联系人详情页面的自定义相似，群详情页提供三处自定义项：
+与好友详情页面的自定义相似，群详情页提供三处自定义项：
 
 1. AppBar：可以通过 `appBarModel` 进行自定义。
 2. 中间的按钮，包括发消息、搜索消息、音频通话和视频通话等：可通过 `actionsBuilder` 进行自定义，默认事件会通过 builder 返回，需要返回要展示的事件。

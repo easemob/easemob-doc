@@ -32,10 +32,10 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 ```typescript
 let contactListener: ContactListener = {
   onContactAdded : (userId: string) => {
-    // 增加联系人时回调此方法。
+    // 增加好友时回调此方法。
   },
   onContactDeleted : (userId: string) => {
-    // 被删除联系人时回调此方法。
+    // 被删除好友时回调此方法。
   },
   onContactInvited : (userId: string, reason: string) => {
     // 收到好友邀请。

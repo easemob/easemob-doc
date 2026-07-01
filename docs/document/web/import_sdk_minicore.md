@@ -15,10 +15,10 @@ miniCore 是一个基座，支持登录登出和发送消息等[基础功能](ht
 
 | 功能        | 导入文件     | 使用方式          |
 | :--------------- | :--------------------------- | :---------------- |
-| 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";     | miniCore.usePlugin(contactPlugin, "contact");         |
+| 好友和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";     | miniCore.usePlugin(contactPlugin, "contact");         |
 | 群组             | import \* as groupPlugin from "easemob-websdk/group/group";    | miniCore.usePlugin(groupPlugin, "group");             |
 | 聊天室           | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";  | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
-| 子区             | import \* as threadPlugin from "easemob-websdk/thread/thread";    | miniCore.usePlugin(threadPlugin, "thread");           |
+| 消息话题             | import \* as threadPlugin from "easemob-websdk/thread/thread";    | miniCore.usePlugin(threadPlugin, "thread");           |
 | 翻译             | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
 | 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";   | miniCore.usePlugin(presencePlugin, "presence");       |
 | 会话免打扰     |  import \* as silentPlugin from "easemob-websdk/silent/silent";          | miniCore.usePlugin(silentPlugin, "silent");       |
@@ -64,7 +64,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 注册所需模块后，即可在项目中使用这些模块提供的功能：
 
 ```javascript
-// 获取联系人列表
+// 获取好友列表
 miniCore.contact.getContacts();
 ```
 

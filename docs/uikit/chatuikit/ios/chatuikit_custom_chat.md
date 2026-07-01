@@ -16,7 +16,7 @@
 
 ## 自定义导航栏
 
-聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果聊天页面（`MessageListController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
+聊天页面、会话列表页面、好友列表页面、群详情页面和好友详情页面的导航栏均使用 `EaseChatNavigationBar`。如果聊天页面（`MessageListController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="导航栏配置" />
@@ -52,7 +52,7 @@
 | `AudioMessageCell`    | 音频消息       | `ComponentsRegister.shared.ChatAudioMessageCell = YourAudioMessageCell.self` |
 | `VideoMessageCell`    | 视频消息       | `ComponentsRegister.shared.ChatVideoMessageCell = YourVideoMessageCell.self` |
 | `FileMessageCell`     | 文件消息       | `ComponentsRegister.shared.ChatFileMessageCell = YourFileMessageCell.self` |
-| `ContactCardCell`     | 联系人卡片消息 | `ComponentsRegister.shared.ChatContactMessageCell = YourContactCardCell.self` |
+| `ContactCardCell`     | 好友卡片消息 | `ComponentsRegister.shared.ChatContactMessageCell = YourContactCardCell.self` |
 | `LocationMessageCell` | 位置消息       | `ComponentsRegister.shared.ChatLocationCell = YourLocationMessageCell.self` |
 | `CombineMessageCell`  | 合并转发消息   | `ComponentsRegister.shared.ChatCombineCell = YourCombineMessageCell.self` |
 | `AlertMessageCell`    | 提示消息       | `ComponentsRegister.shared.ChatAlertCell = YourAlertMessageCell.self` |

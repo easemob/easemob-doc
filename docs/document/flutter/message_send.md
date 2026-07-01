@@ -57,9 +57,11 @@ final voiceMsg = EMMessage.createVoiceSendMessage(
   targetId: targetId,
   filePath: filePath,
   duration: 30,
+  // 语音文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
-EMClient.getInstance.chatManager.sendMessage(msg);
+EMClient.getInstance.chatManager.sendMessage(voiceMsg);
 ```
 
 ### 发送图片消息
@@ -71,6 +73,8 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 final imgMsg = EMMessage.createImageSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 图片文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
 EMClient.getInstance.chatManager.sendMessage(imgMsg);
@@ -87,13 +91,15 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 使用 `EMMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
 
 ```dart
-  final msg = EMMessage.createImageSendMessage(
-    targetId: 'targetId',
-    filePath: 'filePath',
-    isGif: true,
-  );
+final gifMsg = EMMessage.createImageSendMessage(
+  targetId: targetId,
+  filePath: filePath,
+  isGif: true,
+  // GIF 图片的显示名称，强烈建议传入该参数。
+  displayName: displayName,
+);
 
-  EMClient.getInstance.chatManager.sendMessage(msg);
+EMClient.getInstance.chatManager.sendMessage(gifMsg);
 ```
 
 ### 发送视频消息
@@ -107,12 +113,13 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 final videoMsg = EMMessage.createVideoSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 视频文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
   thumbnailLocalPath: thumbnailLocalPath,
   duration: 30,
 );
 
 EMClient.getInstance.chatManager.sendMessage(videoMsg);
-
 ```
 
 ### 发送文件消息
@@ -124,6 +131,8 @@ EMClient.getInstance.chatManager.sendMessage(videoMsg);
 final fileMsg = EMMessage.createFileSendMessage(
   targetId: targetId,
   filePath: filePath,
+  // 文件的显示名称，强烈建议传入该参数。
+  displayName: displayName,
 );
 
 EMClient.getInstance.chatManager.sendMessage(fileMsg);
@@ -206,7 +215,7 @@ EMClient.getInstance.chatManager.sendMessage(customMsg);
 | `summary` | String       | 合并消息的概要。   |
 | `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
 | `msgIds` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
-| `targetId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。|
+| `targetId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 消息话题会话：消息话题 ID；<br/> - 聊天室聊天：聊天室 ID。|
 
 :::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。

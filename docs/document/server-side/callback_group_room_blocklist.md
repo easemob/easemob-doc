@@ -1,22 +1,23 @@
-# 将群组/聊天室成员加入/移出黑名单事件 
+# 群组和聊天室黑名单回调事件
 
-在群组或聊天室中的成员被加入或移出黑名单时，环信服务器会按照[发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看加入/移出的成员，进行数据同步。
+## 功能说明
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要群组/聊天室成员被加入/移出黑名单事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+在群组或聊天室中的成员被加入或移出黑名单时，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看加入/移出的成员，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 将成员加入黑名单
 
-成员被加入群组/聊天室黑名单后，会被移出群组/聊天室。被移出的回调事件，详见[加入黑名单后退出事件](callback_group_room_leave.html#加入黑名单后退出)。
+成员被加入群组/聊天室黑名单后，会被移出群组/聊天室。被移出的回调事件，详见 [加入黑名单后退出事件](callback_group_room_leave.html#加入黑名单后退出)。
 
 ### 回调时机
 
-1. 客户端将群组或聊天室成员加入了黑名单。
-2. 调用 RESTful API 将群组或聊天室成员加入了黑名单。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员添加了黑名单。
+- 客户端将 [群组](/document/android/group_members.html#将成员加入群组白名单)/[聊天室成员](/document/android/room_members.html#将成员加入聊天室白名单) 加入了黑名单。
+- 调用 RESTful API 将 [群组](/document/server-side/group_member_blocklist_add_single.html)/[聊天室成员](/document/server-side/chatroom_allowlist_add_single.html)  加入了黑名单。
+- 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 添加了黑名单。
 
 ### 回调请求
 
@@ -48,7 +49,7 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
+| `callId`       | String   | 回调请求的唯一标识，格式为 `App Key_UUID`。 | 
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `paylod`       | Object | 事件内容。                                                     |
 | `payload.member` | Array | 被加入或移出群组/聊天室黑名单的用户 ID。        | 
@@ -67,7 +68,7 @@
 ### 回调时机 
 
 1. 通过客户端将成员移出群组/聊天室黑名单。
-2. 调用 RESTful API 将成员移出群组/聊天室黑名单。
+2. 调用 RESTful API 将成员移出 [群组](/document/server-side/group_allowlist_remove.html)/聊天室黑名单。
 3. 在[环信控制台](https://console.easemob.com/user/login)将用户移出群组/聊天室黑名单。
 
 ### 回调请求

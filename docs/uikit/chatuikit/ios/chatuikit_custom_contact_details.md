@@ -1,18 +1,18 @@
-# 设置联系人详情页面
+# 设置好友详情页面
 
-你可以配置联系人详情页面的导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 上的 `ContactInfoViewController`。
+你可以配置好友详情页面的导航栏、点击右侧图片显示的好友操作和好友详情自定义列表项等。详见 [GitHub](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller) 上的 `ContactInfoViewController`。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_details.png" title="联系人详情页面 ContactInfoViewController.swift" />
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_details.png" title="好友详情页面 ContactInfoViewController.swift" />
 </ImageGallery>
 
 ## 自定义导航栏
 
-联系人详情页面、聊天页面、会话列表页面、联系人列表页面和群详情页面的导航栏均使用 `EaseChatNavigationBar`。如果联系人详情页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_titlebar.html)。
+好友详情页面、聊天页面、会话列表页面、好友列表页面和群详情页面的导航栏均使用 `EaseChatNavigationBar`。如果好友详情页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_titlebar.html)。
 
-### 设置点击右侧图片显示的联系人操作
+### 设置点击右侧图片显示的好友操作
 
-联系人详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项`Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
+好友详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项`Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
 
 ```swift
      //增加菜单项
@@ -38,7 +38,7 @@
 
 ## 自定义按钮
 
-联系人详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的联系人操作](#设置点击右侧图片显示的联系人操作)。首先继承联系人详情页面，然后将继承后的联系人详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.ContactInfoController = MineContactDetailViewController.self`，增加可配项，示例如下所示： 
+好友详情页面 Header 中按钮 `CollectionView` 中数据源可配项 `Appearance.contact.detailExtensionActionItems`，主要功能包括聊天、音视频通话等。关于事件监听，详见[设置点击右侧图片显示的好友操作](#设置点击右侧图片显示的好友操作)。首先继承好友详情页面，然后将继承后的好友详情页面注册入 `EaseChatUIKit`，即 `ComponentsRegister.shared.ContactInfoController = MineContactDetailViewController.self`，增加可配项，示例如下所示： 
 
 ```swift
 final class MineContactDetailViewController: ContactInfoViewController {

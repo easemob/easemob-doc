@@ -1,22 +1,24 @@
-# 修改消息
+# 消息编辑回调事件
 
-消息修改后，环信服务器会按照[发送后回调规则](callback_postsending.html#回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看修改后的消息，进行数据同步。
+## 功能说明
 
-:::tip
-1. 如果需要消息修改事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#回调规则)。
-2. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
-:::
+编辑消息后，环信服务器会按照 [发送后回调规则](callback_postsending.html#回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看编辑后的消息，进行数据同步。
+
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
 
 ## 回调时机
 
-1. 客户端修改了各类消息。
-2. 调用 RESTful API 修改了消息。
+- [客户端编辑了消息](/document/android/message_modify.html)。
+- [调用 RESTful API 编辑了消息](/document/server-side/message_modify.html)。
  
 ## 回调请求
 
-以下各类消息支持的修改内容如下表所示： 
+以下各类消息支持的编辑内容如下表所示： 
 
-| 消息类型 | 支持的修改内容        |
+| 消息类型 | 支持的编辑内容        |
 | :------- | :-------------------- |
 | 文本     | 文本内容，`ext` 字段        |
 | 图片     | `ext` 字段                   |
@@ -72,28 +74,28 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | Long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `bodies`         | JSON Array   | 修改消息的具体内容。与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容。与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 位置消息
 
@@ -142,30 +144,30 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。         |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`  | JSON   | 消息扩展。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容。<br/> - `lng`：String，经度。<br/> - `addr`：String，位置的文字描述。<br/> - `type` String，消息类型。位置消息为 `loc`。<br/> - `lat`：String，纬度。 |
-| `from`            | String   | 修改消息的发送方。                                               |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容。<br/> - `lng`：String，经度。<br/> - `addr`：String，位置的文字描述。<br/> - `type` String，消息类型。位置消息为 `loc`。<br/> - `lat`：String，纬度。 |
+| `from`            | String   | 编辑消息的发送方。                                               |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg_chat_type`            | String   | 消息所属会话类型，即单聊、群聊或聊天室。         |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。     |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。     |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
-| `type`   | String   | 消息修改事件，值为 `edit`。       |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `type`   | String   | 消息编辑事件，值为 `edit`。       |
 
 
 ### 图片消息
@@ -221,29 +223,29 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 语音消息
 
@@ -295,29 +297,29 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 视频消息
 
@@ -371,29 +373,29 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `thumb_secret`：视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。<br/> - `filename`：String，视频文件名称。<br/> - `thumb`：String，缩略图 URL。<br/> - `length`：视频时长，单位为秒。<br/> - `secret`：String，视频文件的访问密钥，即成功上传视频后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`video` 表示视频消息。 <br/> - `url`: String，视频 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `thumb_secret`：视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。<br/> - `filename`：String，视频文件名称。<br/> - `thumb`：String，缩略图 URL。<br/> - `length`：视频时长，单位为秒。<br/> - `secret`：String，视频文件的访问密钥，即成功上传视频后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`video` 表示视频消息。 <br/> - `url`: String，视频 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 文件消息
 
@@ -443,29 +445,29 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `filename`：String，文件名称。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`file` 表示文件消息。 <br/> - `url`: String，文件 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `filename`：String，文件名称。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `type`：文件类型，`file` 表示文件消息。 <br/> - `url`: String，文件 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 合并消息
 
@@ -520,29 +522,29 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
   
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `combineLevel`：Int，合并消息的嵌套层级数。<br/> - `msg`：String，合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。<br/> - `summary`：String，合并消息的概要。<br/> - `filename`：String，文件名称。<br/> -  `subType`：String，消息类型。合并消息为 `sub_combine`。<br/> - `file_length`：Int，合并消息附件的大小，单位为字节。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `title`：String，合并消息的标题。<br/> - `type`：消息附件类型，`txt` 表示文本文件。 <br/> - `url`: String，合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。 |
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `combineLevel`：Int，合并消息的嵌套层级数。<br/> - `msg`：String，合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。<br/> - `summary`：String，合并消息的概要。<br/> - `filename`：String，文件名称。<br/> -  `subType`：String，消息类型。合并消息为 `sub_combine`。<br/> - `file_length`：Int，合并消息附件的大小，单位为字节。<br/> - `secret`：String，文件的访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `title`：String，合并消息的标题。<br/> - `type`：消息附件类型，`txt` 表示文本文件。 <br/> - `url`: String，合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。 |
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
 ### 自定义消息
 
@@ -598,27 +600,27 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
-| `chat_type`       | String   | `edit`，表示修改消息。 |
+| `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
-| `msg_id`          | String   | 该消息修改事件消息的 ID。                                       |
+| `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
 `payload` 为事件内容，其中的字段如下表所示：
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `edit_message_id`  | String   | 被修改的原消息 ID。                                       |
+| `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 修改消息的具体内容：<br/> - `customEvent`： String 类型，用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。 <br/> - `customExts`/`v2:customExts`: Array/JSON ，用户自定义的事件属性。`customExts` 为旧版参数，数组类型，最多可包含 16 个元素。`v2:customExts` 为新版参数，`Map<String,String>` 类型，最多可以包含 16 个元素。推荐使用该新版参数。<br/> - `type`：消息类型，`custom` 为自定义消息。|
-| `meta.edit_msg`            | JSON   | 消息修改详情。                                               |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `customEvent`： String 类型，用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。 <br/> - `customExts`/`v2:customExts`: Array/JSON ，用户自定义的事件属性。`customExts` 为旧版参数，数组类型，最多可包含 16 个元素。`v2:customExts` 为新版参数，`Map<String,String>` 类型，最多可以包含 16 个元素。推荐使用该新版参数。<br/> - `type`：消息类型，`custom` 为自定义消息。|
+| `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
-| `meta.edit_msg.count`            | JSON   | 消息修改次数。                                               |
-| `meta.edit_msg.edit_time`            | Long   | 消息修改时间。                                               |
-| `meta.edit_msg.operator`          | String   | 修改消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
+| `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
+| `meta.edit_msg.edit_time`            | Long   | 消息编辑时间。                                               |
+| `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
-| `type`            | String   | 消息修改事件，值为 `edit`。       |
+| `type`            | String   | 消息编辑事件，值为 `edit`。       |
 

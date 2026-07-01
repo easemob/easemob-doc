@@ -59,7 +59,7 @@ import * as localCachePlugin from "easemob-websdk/localCache/localCache";
 const miniCore = new MiniCore({
   appKey: "your appKey",
 });
-// 使用联系人插件, "contact" 为固定值。
+// 使用好友插件, "contact" 为固定值。
 miniCore.usePlugin(contactPlugin, "contact");
 // 使用本地存储插件, "localCache" 为固定值。
 miniCore.usePlugin(localCachePlugin, "localCache");

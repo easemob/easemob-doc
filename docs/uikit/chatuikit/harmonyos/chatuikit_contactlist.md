@@ -4,8 +4,8 @@
 
 ## 使用示例
 
-- `ContactListPage`：`ChatUIKit` 提供的默认联系人列表页面。页面包含标题栏和联系人列表。应用程序可以采用组件导航（Navigation）跳转到 `ContactListPage`。
-- `ContactListView`：组件包含联系人区域，开发者可以在应用页面中集成自定义的联系人页面。
+- `ContactListPage`：`ChatUIKit` 提供的默认好友列表页面。页面包含标题栏和好友列表。应用程序可以采用组件导航（Navigation）跳转到 `ContactListPage`。
+- `ContactListView`：组件包含好友区域，开发者可以在应用页面中集成自定义的好友页面。
 
 ### 使用 ContactListPage
 
@@ -17,9 +17,9 @@ this.pathStack.pushPath({ name: 'ContactListPage' });
 
 ### 使用 ContactListView
 
-开发者可以通过添加联系人列表组件 `ContactListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。联系人列表组件不包含标题栏，需要开发者自己实现。
+开发者可以通过添加好友列表组件 `ContactListView` 将其嵌入到自己的页面中，以便进行更多的定制化开发。好友列表组件不包含标题栏，需要开发者自己实现。
 
-`ContactListView` 组件已经封装了联系人列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。
+`ContactListView` 组件已经封装了好友列表的主要逻辑，开发者需要实现列表项的点击事件以及点击搜索框的事件。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/harmonyos/contact_list_view.png" title="使用 ContactListView" />
@@ -59,7 +59,7 @@ export struct ContactsPage {
       Column() {
         ComposeTitleBar({
           titlePosition: HorizontalAlign.Center,
-          primaryTitle: '联系人列表',
+          primaryTitle: '好友列表',
           onBackPress: () => {
             this.navPathStack.pop();
           }
@@ -228,12 +228,12 @@ export struct ContactsPage {
 }
 ```
 
-### 自定义联系人列表更多功能项
+### 自定义好友列表更多功能项
 
-开发者可以在联系人列表的头部增加自定义的功能布局，比如增加群组列表的入口，黑名单的入口等。
+开发者可以在好友列表的头部增加自定义的功能布局，比如增加群组列表的入口，黑名单的入口等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_entry.png" title="自定义联系人列表更多功能项" />
+  <ImageItem src="/images/uikit/chatuikit/harmonyos/custom_contact_entry.png" title="自定义好友列表更多功能项" />
 </ImageGallery>
 
 示例代码如下：

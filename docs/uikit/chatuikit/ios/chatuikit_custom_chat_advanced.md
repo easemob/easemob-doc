@@ -62,7 +62,7 @@
 
 | 配置项 | 类型 | 默认值 | 说明 | 
 | :-------- | :------- | :---------- | :--------------- |
-| `inputExtendActions` | [ActionSheetItemProtocol] | 4 个操作项 | 点击"+"按钮弹出的菜单项：包含照片、相机、文件、联系人 |
+| `inputExtendActions` | [ActionSheetItemProtocol] | 4 个操作项 | 点击"+"按钮弹出的菜单项：包含照片、相机、文件、好友 |
 | `messageAttachmentMenuStyle` | MessageAttachmentMenuStyle | .followInput | 附件菜单样式：跟随输入框(.followInput) 或 ActionSheet(.actionSheet) |
 
 - **消息时间格式**
@@ -650,12 +650,12 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新自定义消息显示 | Void | 包含收发消息 UI 区分 |
 | `switchTheme(style:)` | `open override func switchTheme(style: ThemeStyle)` | 切换主题 | Void | 空实现，可自定义 |
 
-#### 9. ContactCardCell (联系人卡片条目)
+#### 9. ContactCardCell (好友卡片条目)
 
 | 方法名 | 方法签名 | 说明 | 返回类型 | 参数说明 |
 | :-------- | :------- | :----------- | :------------ | :--------- |
-| `createContent()` | `@objc open func createContent() -> UIView` | 创建联系人卡片视图 | UIView | 返回 `ContactCardView` 实例 |
-| `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新联系人卡片显示 | Void | 调用 `ContactCardView` 的 `refresh` |
+| `createContent()` | `@objc open func createContent() -> UIView` | 创建好友卡片视图 | UIView | 返回 `ContactCardView` 实例 |
+| `refresh(entity:)` | `open override func refresh(entity: MessageEntity)` | 刷新好友卡片显示 | Void | 调用 `ContactCardView` 的 `refresh` |
 
 #### 10. CombineMessageCell (合并消息条目)
 
@@ -762,7 +762,7 @@ ComponentsRegister.shared.registerCustomCellClasses(cellType: MyCustomMessageCel
 | `translationSize()` | `open func translationSize() -> CGSize` | CGSize | 无参数 | 计算翻译内容的尺寸<br/>如果显示翻译，计算翻译文本的实际尺寸 |
 | `thumbnailSize(video:)` | `open func thumbnailSize(video: Bool) -> CGSize` | CGSize | video: 是否为视频消息 | 计算图片/视频缩略图尺寸<br/>根据原图宽高比计算适配后的显示尺寸 |
 | `audioSize()` | `open func audioSize() -> CGSize` | CGSize | 无参数 | 计算语音消息气泡尺寸<br/>根据语音时长返回不同宽度（75-limitBubbleWidth） |
-| `customSize()` | `open func customSize() -> CGSize` | CGSize | 无参数 | 计算自定义消息尺寸<br/>支持联系人卡片、提醒消息等自定义类型 |
+| `customSize()` | `open func customSize() -> CGSize` | CGSize | 无参数 | 计算自定义消息尺寸<br/>支持好友卡片、提醒消息等自定义类型 |
 | `updateReplySize()` | `open func updateReplySize() -> CGSize` | CGSize | 无参数 | 计算回复消息气泡的尺寸<br/>包含回复标题和内容的尺寸 |
 
 - **内容转换相关方法** 
@@ -959,7 +959,7 @@ override open func methodName(parameters) -> ReturnType {
 | `setupNavigation()` | 设置导航栏的标题、头像等信息 | 根据用户资料配置导航栏 |
 | `showPinnedMessages()` | 显示置顶消息列表 | 加载并展示置顶消息容器 |
 | `navigationClick(type:indexPath:)` | 处理导航栏点击事件 | `type`: 事件类型, `indexPath`: 索引路径 |
-| `viewDetail()` | 查看聊天详情（联系人/群组信息） | 根据聊天类型跳转到详情页 |
+| `viewDetail()` | 查看聊天详情（好友/群组信息） | 根据聊天类型跳转到详情页 |
 | `rightItemsAction(indexPath:)` | 处理导航栏右侧按钮点击 | `indexPath`: 按钮索引 |
 | `viewTopicList()` | 查看话题列表 | 跳转到话题列表页面 |
 | `pop()` | 返回上一页 | 执行页面返回操作 |
@@ -987,7 +987,7 @@ override open func methodName(parameters) -> ReturnType {
 | `messageBubbleClicked(message:)` | 消息气泡点击事件 | `message`: 消息实体 |
 | `viewHistoryMessages(entity:)` | 查看历史消息 | `entity`: 合并消息实体 |
 | `viewAlertDetail(message:)` | 查看提醒消息详情 | `message`: 提醒消息 |
-| `viewContact(body:)` | 查看联系人名片 | `body`: 自定义消息体 |
+| `viewContact(body:)` | 查看好友名片 | `body`: 自定义消息体 |
 | `messageAvatarClick(user:)` | 消息头像点击 | `user`: 用户资料 |
 | `audioDialog()` | 显示录音对话框 | 弹出录音视图 |
 | `mentionAction()` | @提及功能 | 选择要@的成员 |
@@ -997,7 +997,7 @@ override open func methodName(parameters) -> ReturnType {
 | `selectPhoto()` | 选择照片（旧API） | 使用 `UIImagePickerController` |
 | `openCamera()` | 打开相机 | 拍照或录像 |
 | `selectFile()` | 选择文件 | 打开文件选择器 |
-| `selectContact()` | 选择联系人 | 分享联系人名片 |
+| `selectContact()` | 选择好友 | 分享好友名片 |
 | `openFile()` | 打开文件预览 | 使用 `QuickLook` 预览 |
 | `processImagePickerData(info:)` | 处理图片选择器数据 | `info`: 选择的媒体信息 |
 | `documentPickerOpenFile(controller:urls:)` | 处理文档选择器结果 | `controller`: 选择器, `urls`: 文件 URLs |

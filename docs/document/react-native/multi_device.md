@@ -8,7 +8,7 @@
 
 - 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
 - 好友和群组相关操作；
-- 子区相关操作；
+- 消息话题相关操作；
 - 会话相关操作。
 
 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的 **功能配置 > 基础功能** > **用户** 页面，在弹出的对话框中设置各端设备的数量：
@@ -278,7 +278,7 @@ let listener: ChatMultiDeviceEventListener = new (class
     target?: string,
     ext?: string
   ): void {
-    // 联系人相关多设备通知。
+    // 好友相关多设备通知。
     switch (event) {
       //当前用户在其他设备上删除好友。
       case CONTACT_REMOVE:
@@ -378,25 +378,25 @@ let listener: ChatMultiDeviceEventListener = new (class
     target?: string,
     usernames?: Array<string>
   ): void {
-    // 子区消息多设备通知。
+    // 消息话题中的消息多设备通知。
     switch (event) {
       case THREAD_CREATE:
-        //当前用户在其他设备上创建子区。
+        //当前用户在其他设备上创建消息话题。
         break;
       case THREAD_DESTROY:
-        //当前用户在其他设备上销毁子区。
+        //当前用户在其他设备上销毁消息话题。
         break;
       case THREAD_JOIN:
-        //当前用户在其他设备上加入子区。
+        //当前用户在其他设备上加入消息话题。
         break;
       case THREAD_LEAVE:
-        //当前用户在其他设备上离开子区。
+        //当前用户在其他设备上离开消息话题。
         break;
       case THREAD_UPDATE:
-        //当前用户在其他设备上更新子区。
+        //当前用户在其他设备上更新消息话题。
         break;
       case THREAD_KICK:
-        //当前用户在其他设备上将成员踢出子区。
+        //当前用户在其他设备上将成员踢出消息话题。
         break;
     }
   }

@@ -1,12 +1,13 @@
- # 群组封禁/解禁事件
+# 群组封禁状态变更回调事件
+
+## 回调说明
 
 成功封禁或解禁群组后，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看群组封禁或解禁相关信息，进行数据同步。
 
-:::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见 [增值服务费用)](/product/pricing_policy.html#增值服务费用)。
-2. 如果需要群组封禁或解禁的回调事件，你需要在 [环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
-3. 发送后回调的相关介绍，详见 [回调说明](/document/server-side/callback_postsending.html)。
-:::
+## 前提条件
+
+- 已开通发送后回调服务。详见 [开通消息回调服务](/product/console/basic_webhook.html#开通服务) 和 [回调说明](/document/server-side/callback_postsending.html)。
+- 已在 [环信控制台](https://console.easemob.com/user/login) 设置发送后回调规则。详见 [配置回调规则](/product/console/basic_webhook.html#配置消息回调规则)。
  
 ## 回调时机
 
@@ -51,7 +52,8 @@
 | `operator`     | String | 操作人。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
 
-:::tip
-群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。
-::
+## 其他说明
+
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**
+
 

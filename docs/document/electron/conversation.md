@@ -266,7 +266,7 @@ var msg = conversation.latestMessage();
 
 - 添加消息
 
-- 修改消息
+- 编辑消息
 
 - 加载会话消息
 
@@ -324,7 +324,7 @@ chatManager.appendMessage(message);
 
 ------
 
-### 修改消息
+### 编辑消息
 
 接口 API 如下：
 

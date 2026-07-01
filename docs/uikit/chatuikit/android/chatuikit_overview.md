@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 是基于环信即时通讯 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信单群聊 UIKit 是基于环信即时通讯 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、好友列表及后续界面等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 你可以查看 UIKit 源码和 Android Demo 源码：
 
@@ -32,12 +32,12 @@
     │   │   ├── viewholders                           // 会话列表功能模块的会话类型 ViewHolder
     │   │   ├── widgets                               // 会话列表功能模块的自定义 View
     │   │   └── ChatUIKitConversationListFragment          // UIKit 内提供的会话列表 Fragment
-    │   ├── contact                                // 联系人列表功能模块
-    │   │   ├── adapter                               // 联系人列表功能模块的适配器文件夹
-    │   │   │   └── ChatUIKitContactListAdapter              // 联系人列表功能模块的联系人列表适配器
-    │   │   ├── viewholders                           // 联系人列表功能模块的联系人相关 ViewHolder
-    │   │   ├── widgets                               // 联系人列表功能模块的自定义 View
-    │   │   └── ChatUIKitContactsListFragment              // UIKit 内提供的联系人列表 Fragment
+    │   ├── contact                                // 好友列表功能模块
+    │   │   ├── adapter                               // 好友列表功能模块的适配器文件夹
+    │   │   │   └── ChatUIKitContactListAdapter              // 好友列表功能模块的好友列表适配器
+    │   │   ├── viewholders                           // 好友列表功能模块的好友相关 ViewHolder
+    │   │   ├── widgets                               // 好友列表功能模块的自定义 View
+    │   │   └── ChatUIKitContactsListFragment              // UIKit 内提供的好友列表 Fragment
     │   └── group                                  // 群组功能模块
     ├── repository                               // UIKit SDK 数据仓库
     ├── viewmodel                                // UIKit SDK ViewModel
@@ -82,12 +82,12 @@ Conversation Fragment 提供会话列表容器。
 
 ### 通讯录页面功能
 
-Contact Fragment 提供联系人、群组及其详情等容器。
+Contact Fragment 提供好友、群组及其详情等容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
-  <ImageItem src="/images/uikit/chatuikit/android/contact_detail.png" title="联系人详情" />
-  <ImageItem src="/images/uikit/chatuikit/android/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="好友列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_detail.png" title="好友详情" />
+  <ImageItem src="/images/uikit/chatuikit/android/block_list.png" title="好友黑名单" />
   <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
@@ -108,7 +108,7 @@ Contact Fragment 提供联系人、群组及其详情等容器。
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索好友名称" />
   <ImageItem src="/images/uikit/chatuikit/android/search_chat_history.png" title="搜索聊天历史" />
 </ImageGallery>
 

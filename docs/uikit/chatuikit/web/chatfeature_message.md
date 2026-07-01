@@ -176,7 +176,7 @@ features.chat.message.thread = false;
 features.chat.message.select = false;
 ```
 
-2. 在 Chat 组件中监听 `onSendMessage` 事件，判断如果是合并消息，可以显示联系人组件，选择消息转发的目标用户，然后发送消息。
+2. 在 Chat 组件中监听 `onSendMessage` 事件，判断如果是合并消息，可以显示好友组件，选择消息转发的目标用户，然后发送消息。
 
 示例代码：
 
@@ -187,7 +187,7 @@ features.chat.message.select = false;
     onSendMessage: (message) => {
       if (message.type == "combine") {
         forwardedMessages = message
-        setContactListVisible(true); // 展示联系人组件
+        setContactListVisible(true); // 展示好友组件
       }
     },
   }}
@@ -235,7 +235,7 @@ features.chat.message.select = false;
 features.chat.message.forward = false;
 ```
 
-2. 在 Chat 组件监听 `onForwardMessage` 事件， 显示联系人组件，选择消息转发的目标用户，然后发送消息。
+2. 在 Chat 组件监听 `onForwardMessage` 事件， 显示好友组件，选择消息转发的目标用户，然后发送消息。
 
 示例代码：
 
@@ -248,13 +248,13 @@ features.chat.message.forward = false;
             forwardedMessages = {...msg}
             forwardedMessages.id = Date.now() + ""; // 设置新的消息 ID
             forwardedMessages.from = rootStore.client.user; // 设置为自己的用户 ID
-            setContactListVisible(true); // 显示联系人组件
+            setContactListVisible(true); // 显示好友组件
         }
   }
 }}
 ></Chat>
 
-// 联系人组件与合并转发的相同
+// 好友组件与合并转发的相同
 ```
 
 ## 消息置顶

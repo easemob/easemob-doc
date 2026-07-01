@@ -1,9 +1,9 @@
-# 联系人详情页面
+# 好友详情页面
 
-对于联系人详情页面，你可以自定义联系人导航栏、联系人列表项和自定义发消息、音频通话、视频通话等按钮。
+对于好友详情页面，你可以自定义好友导航栏、好友列表项和自定义发消息、音频通话、视频通话等按钮。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/rn/custom_contact_details.png" title="联系人详情页面" />
+  <ImageItem src="/images/uikit/chatuikit/rn/custom_contact_details.png" title="好友详情页面" />
 </ImageGallery>
 
 ## 自定义导航栏

@@ -6,7 +6,7 @@
 
 - 黑名单处理
 
-- 监听联系人变更
+- 监听好友变更
 
 通过这些操作，可以组合帮助您完成多种场景下的 IM 需求。
 
@@ -289,9 +289,9 @@ contactManager.removeFromBlackList('jwfan2').then((res)=>{},(error) => {});
 
 ------
 
-## 监听联系人变更
+## 监听好友变更
 
-通过注册回调函数，监听联系人的变动，代码如下：
+通过注册回调函数，监听好友的变动，代码如下：
 
 ```
 // 实例化监听对象
@@ -331,7 +331,7 @@ console.log("onContactRefused username: " + username);
 contactManager.registerContactListener(listener);
 <code>
 
-===== 结束联系人监听 =====
+===== 结束好友监听 =====
 <code>
 // 移除回调监听
 contactManager.removeContactListener(listener);

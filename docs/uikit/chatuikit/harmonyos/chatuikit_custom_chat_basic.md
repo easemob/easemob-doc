@@ -37,7 +37,7 @@ ChatView({
 | :------- | :------ | :------- | :------ | :------ |
 | `conversationId`               | String                                           | 是   | 会话 ID。单聊为对方用户 ID，群聊为群组 ID                       | -                    |
 | `chatType`                     | ChatType                                         | 是   | 会话类型：`ChatType.Chat`(单聊)、`ChatType.GroupChat`(群聊) | -                    |
-| `pathStack`                    | NavPathStack                                     | 否   | 导航栈，用于内部页面跳转（如发送名片、选择联系人）                  | undefined            |
+| `pathStack`                    | NavPathStack                                     | 否   | 导航栈，用于内部页面跳转（如发送名片、选择好友）                  | undefined            |
 | `viewModel`                    | BaseChatViewModel                                 | 否   | 消息列表 ViewModel，用于自定义消息加载逻辑                      | ChatViewModel        |
 | `messageViewModel`             | BaseMessageViewModel                             | 否   | 消息发送 ViewModel，用于自定义消息发送逻辑                      | MessageViewModel     |
 | `extendMenus`                  | MenuItem[]                                       | 否   | 消息扩展菜单项（底部"+"菜单）   | 默认菜单             |
@@ -287,7 +287,7 @@ ChatView({
 | 拍照 (`KitConstants.EXTEND_ACTION_CAMERA`)         | 弹出对话框，选择拍照或录像。   |
 | 相册 (`KitConstants.EXTEND_ACTION_IMAGE`)          | 打开系统图片/视频选择器。   |
 | 文件 (`KitConstants.EXTEND_ACTION_FILE`)          | 打开系统文件选择器。   |
-| 名片 (`KitConstants.EXTEND_ACTION_USER`)          | 跳转到联系人选择页面（需传入 `pathStack`）。   |
+| 名片 (`KitConstants.EXTEND_ACTION_USER`)          | 跳转到好友选择页面（需传入 `pathStack`）。   |
 
 :::tip
 如需增删改扩展菜单项，详见 [自定义消息扩展菜单](chatuikit_custom_chat_inputmenu.html#自定义扩展菜单项)。

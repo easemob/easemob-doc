@@ -1,6 +1,6 @@
 # 页面导航栏
 
-`TopNavigationBar` 是一个灵活的导航栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、联系人列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制导航栏。
+`TopNavigationBar` 是一个灵活的导航栏组件，采用左-中-右三段式布局。聊天页面、会话列表页面、好友列表页面等均使用 `TopNavigationBar`。该组件支持完全自定义左侧、中部和右侧的子组件，让你可以根据业务需求灵活定制导航栏。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/titlebar_chat_single_group.png" title="标题栏 TopNavigationBar" />
@@ -61,9 +61,9 @@ import {
 />
 ```
 
-### 联系人列表
+### 好友列表
 
-联系人列表使用头像、标题和添加联系人按钮：
+好友列表使用头像、标题和添加好友按钮：
 
 ```typescript
 <TopNavigationBar
@@ -472,12 +472,12 @@ function ConversationListScreen() {
 />
 ```
 
-### 联系人列表页面
+### 好友列表页面
 
 根据 `contactType` 显示不同导航栏样式：
 
 ```typescript
-// contactType: 'contact-list' - 联系人列表
+// contactType: 'contact-list' - 好友列表
 <TopNavigationBar
   Left={<StatusAvatar url={avatarUrl} size={32} userId={userId} />}
   Title={<TopNavigationBarTitle text="_uikit_navi_title_contact" />}

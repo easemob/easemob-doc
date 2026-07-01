@@ -43,11 +43,11 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 ```csharp
 //继承并实现 IContactManagerDelegate。
 public class ContactManagerDelegate : IContactManagerDelegate {
-    // 当前用户新增了联系人。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方都收到该事件。
+    // 当前用户新增了好友。用户 B 向用户 A 发送好友请求，用户 A 同意该请求，用户 B 收到 `onContactAgreed` 事件，双方都收到该事件。
     public void OnContactAdded(string username)
     {
     }
-    // 当前用户被其他用户从联系人列表上移除。用户 B 将用户 A 从联系人列表上删除，用户 A 收到该事件。
+    // 当前用户被其他用户从好友列表上移除。用户 B 将用户 A 从好友列表上删除，用户 A 收到该事件。
     public void OnContactDeleted(string username)
     {
     }
@@ -121,9 +121,9 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new Call
 
 ### 删除好友
 
-调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。
+调用 `DeleteContact` 删除指定好友。被删除的用户收到 `OnContactDeleted` 回调。
 
-删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
+删除好友时会同时删除对方好友列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
 ```csharp
 SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack(

@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+环信单群聊 UIKit 是基于环信即时通讯 IM  IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、好友列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
 你可以查看 UIKit 源码和 Flutter Demo 源码：
 
@@ -127,8 +127,8 @@
 │   │       └── view_arguments_base.dart
 │   ├── views // view 级别组件
 │   │   ├── change_info_view.dart // 修改数据组件
-│   │   ├── contact_details_view.dart // 联系人详情组件
-│   │   ├── contacts_view.dart // 联系人列表组件
+│   │   ├── contact_details_view.dart // 好友详情组件
+│   │   ├── contacts_view.dart // 好友列表组件
 │   │   ├── conversations_view.dart // 会话列表组件
 │   │   ├── create_group_view.dart // 创建群组组件
 │   │   ├── current_user_info_view.dart // 当前用户详情组件
@@ -145,7 +145,7 @@
 │   │   ├── report_message_view.dart // 消息数据上报组件
 │   │   ├── search_group_members_view.dart // 搜索群成员组件
 │   │   ├── search_users_view.dart // 搜索好友组件
-│   │   ├── select_contact_view.dart  // 联系人多选组件
+│   │   ├── select_contact_view.dart  // 好友多选组件
 │   │   ├── show_image_view.dart // 显示图片组件
 │   │   └── show_video_view.dart // 显示视频组件
 │   └── widgets // widget 级别组件
@@ -171,11 +171,11 @@
 │       ├── chat_uikit_water_ripple.dart // 水波纹组件
 │       └── list_view_items // 列表项
 │           ├── chat_uikit_alphabetical_list_view_item.dart // 首字母组件的 item 组件
-│           ├── chat_uikit_contact_list_view_item.dart // 联系人组件的 item 组件
+│           ├── chat_uikit_contact_list_view_item.dart // 好友组件的 item 组件
 │           ├── chat_uikit_conversation_list_view_item.dart // 会话列表组件的 item 组件
 │           ├── chat_uikit_details_list_view_item.dart // 详情页列表组件的 item 组件
 │           ├── chat_uikit_group_list_view_item.dart // 群列表组件的 item 组件
-│           ├── chat_uikit_list_view_more_item.dart // 列表组件中用于展示列表前面或后面数据（例如，联系人列表中的好友申请和群列表部分）的 item 组件
+│           ├── chat_uikit_list_view_more_item.dart // 列表组件中用于展示列表前面或后面数据（例如，好友列表中的好友申请和群列表部分）的 item 组件
 │           ├── chat_uikit_new_request_list_view_item.dart // 好友请求列表组件的 item 组件
 │           ├── chat_uikit_search_list_view_item.dart // 搜索组件的 item 组件
 │           └── message_list_view_items // 消息列表组件 items
@@ -232,12 +232,12 @@
 
 ### 通讯录页面功能
 
-`ContactsView` 提供联系人、群组及其详情等。
+`ContactsView` 提供好友、群组及其详情等。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/contact_list.png" title="联系人列表" />
-  <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="联系人详情" />
-  <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="联系人黑名单" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_list.png" title="好友列表" />
+  <ImageItem src="/images/uikit/chatuikit/ios/contact_detail.png" title="好友详情" />
+  <ImageItem src="/images/uikit/chatuikit/ios/block_list.png" title="好友黑名单" />
   <ImageItem src="/images/uikit/chatuikit/ios/group_list.png" title="群组列表" />
 </ImageGallery>
 
@@ -258,7 +258,7 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/ios/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/ios/search_contact.png" title="搜索好友名称" />
   <ImageItem src="/images/uikit/chatuikit/ios/search_chat_history.png" title="搜索聊天历史" />
 </ImageGallery>
 

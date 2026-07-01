@@ -121,7 +121,7 @@ class ConversationListActivity: AppCompactActivity() {
 }
 ```
 
-### 创建联系人列表页面
+### 创建好友列表页面
 
 单群聊 UIKit 提供 `ChatUIKitContactsListFragment`，添加到 Activity 中即可使用。
 

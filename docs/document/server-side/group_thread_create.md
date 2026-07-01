@@ -1,11 +1,11 @@
-# 创建子区
+# 创建消息话题
 
 ## 功能说明
 
-- 群成员基于群组中的一条消息创建子区。该消息为子区的父消息。
-- 子区创建者即子区所有者。
-- **单个 app 下的子区总数默认为 10 万，如需调整请联系商务。**
-- 使用该接口前，你需要联系商务开通子区功能。
+- 群成员基于群组中的一条消息创建消息话题。该消息为消息话题的父消息。
+- 消息话题创建者即消息话题所有者。
+- **单个 app 下的消息话题总数默认为 10 万，如需调整请联系商务。**
+- 使用该接口前，你需要联系商务开通消息话题功能。
 
 ## 调用频率上限
 
@@ -43,10 +43,10 @@ curl -X POST https://XXXX/XXXX/XXXX/thread   \
 
 | 参数       | 类型   | 是否必需 | 描述                               |
 | :--------- | :----- | :------- | :--------------------------------- |
-| `group_id` | String | 是       | 子区所在的群组 ID。                |
-| `name`     | String | 是       | 子区名称，不能超过 64 个字符。     |
-| `msg_id`   | String | 是       | 子区的父消息 ID。                  |
-| `owner`    | String | 是       | 子区的所有者，即创建子区的群成员。 |
+| `group_id` | String | 是       | 消息话题所在的群组 ID。                |
+| `name`     | String | 是       | 消息话题名称，不能超过 64 个字符。     |
+| `msg_id`   | String | 是       | 消息话题的父消息 ID。                  |
+| `owner`    | String | 是       | 消息话题的所有者，即创建消息话题的群成员。 |
 
 ## 响应示例
 
@@ -70,7 +70,7 @@ curl -X POST https://XXXX/XXXX/XXXX/thread   \
 
 | 字段             | 类型   | 描述            |
 | :--------------- | :----- | :-------------- |
-| `data.thread_id` | String | 创建的子区 ID。 |
+| `data.thread_id` | String | 创建的消息话题 ID。 |
 
 其他字段的说明如下：
 
@@ -90,18 +90,18 @@ curl -X POST https://XXXX/XXXX/XXXX/thread   \
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | thread must on group message to create. | 消息 ID 不是群消息。 | 输入正确的群消息 ID。 |
-| 400     | group_error | thread name limit reached. | 子区名称过长。 | 请提供长度范围内的子区名称。子区名称长度不能超过 64 个字符。 |
+| 400     | group_error | thread name limit reached. | 消息话题名称过长。 | 请提供长度范围内的消息话题名称。消息话题名称长度不能超过 64 个字符。 |
 | 400     | param_illegal | Failed to read HTTP message | body 参数不合法。 | 检查 body 参数是否合法。 |
 | 400     | group_error | msg not belong to app. | 消息不属于 app。 | 输入合法的消息 ID。 |
 | 400     | group_error | msg not belong to group . | 消息不属于群。 | 输入合法的消息 ID。 |
-| 400     | group_error | thread not nested. | 不允许在子区的消息上创建子区。 | 输入合法的消息 ID。 |
+| 400     | group_error | thread not nested. | 不允许在消息话题的消息上创建消息话题。 | 输入合法的消息 ID。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread number has reached limit. | appKey 创建子区达到上限。 | 删除废弃的子区或者联系商务调整上限。单个 app 下的子区总数默认为 10 万。 |
-| 403     | group_error | user join thread reach limit. | 用户加入的子区达到上限。 | 退出不用的子区或者联系商务调整上限。单个用户默认最多可以加入 100,000 个子区。 |
-| 403     | group_error | msg already create thread.not allow to create. | 消息上已经创建子区。 | 传入其他消息 ID 或者查询该子区后加入。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
-| 404     | group_error | user not in group. | 子区所有者不在群里面。 | 输入已加入群的用户 ID。 |
+| 403     | group_error | thread number has reached limit. | appKey 创建消息话题达到上限。 | 删除废弃的消息话题或者联系商务调整上限。单个 app 下的消息话题总数默认为 10 万。 |
+| 403     | group_error | user join thread reach limit. | 用户加入的消息话题达到上限。 | 退出不用的消息话题或者联系商务调整上限。单个用户默认最多可以加入 100,000 个消息话题。 |
+| 403     | group_error | msg already create thread.not allow to create. | 消息上已经创建消息话题。 | 传入其他消息 ID 或者查询该消息话题后加入。 |
+| 403     | group_error | thread not open. | 消息话题功能未开通。 | 调用该接口前，你需要联系商务开通消息话题功能。 |
+| 404     | group_error | user not in group. | 消息话题所有者不在群里面。 | 输入已加入群的用户 ID。 |
 | 404     | group_error | msg not exist. | 消息不存在。 | 输入存在的消息 ID。 |
-| 404     | group_error | group not found. | 群组不存在。   | 检查创建子区的群组是否存在。 |
+| 404     | group_error | group not found. | 群组不存在。   | 检查创建消息话题的群组是否存在。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

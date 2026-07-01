@@ -1,6 +1,6 @@
 # 自定义导航栏
 
-会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。会话列表页面的导航栏包含左、中、右三个区域，本节介绍如何配置这些区域。
+会话列表页面、聊天页面、好友列表页面、群详情页面和好友详情页面的导航栏均使用 `EaseChatNavigationBar`。会话列表页面的导航栏包含左、中、右三个区域，本节介绍如何配置这些区域。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/titlebar_chat_single_group.png" title="标题栏 EaseChatNavigationBar" />

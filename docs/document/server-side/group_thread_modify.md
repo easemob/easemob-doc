@@ -1,9 +1,9 @@
-# 修改子区
+# 修改消息话题
 
 ## 功能说明
 
-- 修改指定子区的名称。
-- 使用该接口前，你需要联系商务开通子区功能。
+- 修改指定消息话题的名称。
+- 使用该接口前，你需要联系商务开通消息话题功能。
 
 ## 调用频率上限
 
@@ -17,7 +17,7 @@ PUT https://{host}/{org_name}/{app_name}/thread/{thread_id}
 
 | 参数        | 类型   | 是否必需 | 描述      |
 | :---------- | :----- | :------- | :-------- |
-| `thread_id` | String | 是       | 要修改的子区 ID。 |
+| `thread_id` | String | 是       | 要修改的消息话题 ID。 |
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
@@ -39,7 +39,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7   \
 
 | 参数   | 类型   | 是否必需 | 描述           |
 | :----- | :----- | :------- | :----------------- |
-| `name` | String | 是       | 新的子区名称。修改后的子区名称不能超过 64 个字符。 |
+| `name` | String | 是       | 新的消息话题名称。修改后的消息话题名称不能超过 64 个字符。 |
 
 ## 响应示例
 
@@ -82,9 +82,9 @@ curl -X PUT https://XXXX/XXXX/XXXX/thread/1XXXX7   \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | group_error | thread name limit reached. | 子区名称过长。 | 请提供长度范围内的子区名称。子区名称长度不能超过 64 个字符。 |
+| 400     | group_error | thread name limit reached. | 消息话题名称过长。 | 请提供长度范围内的消息话题名称。消息话题名称长度不能超过 64 个字符。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | group_error | thread not open. | 子区功能未开通。 | 调用该接口前，你需要联系商务开通子区功能。 |
-| 404     | group_error | thread not found. | 子区不存在。 | 输入正确的子区 ID。 |
+| 403     | group_error | thread not open. | 消息话题功能未开通。 | 调用该接口前，你需要联系商务开通消息话题功能。 |
+| 404     | group_error | thread not found. | 消息话题不存在。 | 输入正确的消息话题 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

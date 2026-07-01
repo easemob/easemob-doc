@@ -750,7 +750,7 @@ struct CustomChatPageWithMessageViewModel {
 | `sendVideoMessage(videoPath, duration, onError?, onSuccess?, onProgress?)` | 发送视频消息                                         |
 | `sendFileMessage(filePath, onError?, onSuccess?, onProgress?)`       | 发送文件消息                                                 |
 | `sendUserCard(user, onError?, onSuccess?)`                           | 发送名片消息                                                 |
-| `sendCmdMessage(action, onError, onSuccess)`                         | 发送命令消息                                                 |
+| `sendCmdMessage(action, onError, onSuccess)`                         | 发送透传消息                                                 |
 | `editMessage(messageId, modifiedBody, onError?, onSuccess?)`         | 编辑消息                                                     |
 | `resendMessage(message, onError?, onSuccess?, onProgress?)`          | 重新发送失败的消息                                           |
 | `getLatestMessage(conversationId)`                                   | 获取会话最新一条消息                                         |
@@ -1139,7 +1139,7 @@ UIKit 提供默认的图标和文本资源，可通过资源覆盖方式自定�
 | `chat_msg_label_file`      | [附件]       | 文件消息标签     |
 | `chat_msg_label_custom`    | [自定义消息] | 自定义消息标签   |
 | `chat_msg_label_combine`   | [聊天记录]   | 合并转发消息标签 |
-| `chat_msg_label_user_card` | [联系人] %s  | 名片消息标签     |
+| `chat_msg_label_user_card` | [好友] %s  | 名片消息标签     |
 
 **对话框文本**
 

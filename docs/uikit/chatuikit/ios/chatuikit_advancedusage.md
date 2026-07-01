@@ -2,7 +2,7 @@
 
 <Toc />
 
-以下是进阶用法的部分示例。会话列表页面、消息列表页和联系人列表均可单独使用。
+以下是进阶用法的部分示例。会话列表页面、消息列表页和好友列表均可单独使用。
 
 ## 初始化
 
@@ -77,7 +77,7 @@ public final class YourAppUser: NSObject, ChatUserProfileProtocol {
         let vc = EaseChatUIKit.ComponentsRegister.shared.ContactsController.init(headerStyle: .contact)
 ```
 
-2. 监听联系人列表页面事件
+2. 监听好友列表页面事件
 
 ```swift
         vc.viewModel?.registerEventsListener(listener: self)
