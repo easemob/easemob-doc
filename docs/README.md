@@ -398,7 +398,7 @@ projects:
                 text: Windows
                 link: /document/windows/message_receipt.html
           - text: 搜索消息
-            desc: 支持搜索本地数据库中除命令消息之外的所有类型的消息。
+            desc: 支持搜索本地数据库中除透传消息之外的所有类型的消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android

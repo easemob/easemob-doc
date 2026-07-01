@@ -223,7 +223,7 @@ listener.onReceiveMessages((messages) => {
       chatManager.downloadMessageAttachments(msg);
     }
 });
-// 收到命令消息
+// 收到透传消息
 listener.onReceiveCmdMessages ((messages) => {
   for (var index = 0, len = messages.length; index < len; index++) {
   var msg = messages[index];

@@ -17,7 +17,7 @@
 - 发送后编辑消息接口 [ChatManager#ModifyMessage](message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
-  - 命令消息：不支持修改。
+  - 透传消息：不支持修改。
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
 - 支持 [拉取群组中指定的单个或多个成员发送的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`FetchServerMessagesOption#FromIds` 替换原来的 `FetchServerMessagesOption#From` 属性。
