@@ -155,7 +155,7 @@ HONOR_PUSH_APPID=xxxxxxxxxxxxxxxxxxxxxxx
             │   │   ├── ChatContactCheckActivity.kt     //检查是否是好友页面
             │   │   ├── ChatContactDetailActivity.kt    //好友详情页面
             │   │   ├── ChatContactListFragment.kt      //好友列表页面
-            │   │   ├── ChatContactRemarkActivity.kt    //好友(好友)备注页面
+            │   │   ├── ChatContactRemarkActivity.kt    //好友备注页面
             │   │   └── ChatNewRequestActivity.kt       //好友页面新请求 item
             │   ├── conversation
             │   │   └── ConversationListFragment.kt //会话列表页面
