@@ -302,13 +302,13 @@
 | `msg_id`    | String   | 删除好友事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
 
-## 拉黑好友
+## 拉黑用户
 
 #### 回调时机
 
-1. 用户 [通过客户端将好友加入了黑名单](/document/android/user_relationship.html#添加用户到黑名单)。
-2. [调用 RESTful API 将好友加入了黑名单](/document/server-side/user_friend_blocklist_add.html)。
-3. 在 [环信控制台](https://console.easemob.com/user/login) 上 [将好友加入了黑名单](/product/console/operation_user.html#查看用户黑名单)。 
+1. [通过客户端将用户加入了黑名单](/document/android/user_relationship.html#添加用户到黑名单)。
+2. [调用 RESTful API 将用户加入了黑名单](/document/server-side/user_friend_blocklist_add.html)。
+3. 在 [环信控制台](https://console.easemob.com/user/login) 上 [将用户加入了黑名单](/product/console/operation_user.html#查看用户黑名单)。 
 
 #### 请求示例
 
