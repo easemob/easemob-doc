@@ -1,4 +1,4 @@
-# 发送消息
+# 消息发送回调事件
 
 ## 功能说明
 
@@ -40,11 +40,11 @@
 
 ## 发送单聊消息
 
-### 文本和命令消息
+### 文本和透传消息
 
 #### 请求示例
 
-发送文本消息的回调请求中的 `payload` 字段如下所示。命令消息的回调请求结构与文本消息相同，`type` 字段值为 `cmd`。
+发送文本消息的回调请求中的 `payload` 字段如下所示。透传消息的回调请求结构与文本消息相同，`type` 字段值为 `cmd`。
 
 ```json
 "payload":{
@@ -62,7 +62,7 @@
 | `ext`    | object   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含 `msg`，`type` 两个字段。           |
 | `msg`    | String    | 消息内容。                                                   |
-| `type`   | String   | 消息类型：<br/> - 文本消息：`txt` <br/> - 命令消息：`cmd` |
+| `type`   | String   | 消息类型：<br/> - 文本消息：`txt` <br/> - 透传消息：`cmd` |
 
 回调请求的其他参数详见 [公共参数](#公共参数)。
 
@@ -351,7 +351,7 @@
 | `chat:group:location` | `{"bodies":{"type":"loc"}}`                         | 群组中发送位置消息       |
 | `chat:group:video`    | `{"bodies":{"type":"video"}}`                       | 群组中发送视频消息       |
 | `chat:group:file`     | `{"bodies":{"type":"file"}}`                        | 群组中发送文件消息       |
-| `chat:group:command`  | `{"bodies":{"type":"cmd"}}`                         | 群组中发送命令消息       |
+| `chat:group:command`  | `{"bodies":{"type":"cmd"}}`                         | 群组中发送透传消息       |
 | `chat:group:custom`   | `{"bodies":{"type":"custom"}}`                      | 群组中发送自定义消息     |
 | `chat:group:txt`      | `{"bodies":{"type":"txt","subType":"sub_combine"}}` | 群组中发送合并消息       |
 | `chat:group:unknown`  | `{"bodies":{"type":"unknown"}}`                     | 群组中发送未知消息       |
@@ -383,7 +383,7 @@
 | `ext`    | String   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含 `msg` 和 `type` 字段。           |
 | `msg`    | String   | 消息内容。                                                   |
-| `type`   | String   | 消息类型：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
+| `type`   | String   | 消息类型：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 透传消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
 
 回调请求的其他参数详见 [公共参数](#公共参数)。
 
@@ -402,7 +402,7 @@
 | `chat:room:location` | `{"bodies":{"type":"loc"}}`                         | 聊天室中发送位置消息       |
 | `chat:room:video`    | `{"bodies":{"type":"video"}}`                       | 聊天室中发送视频消息       |
 | `chat:room:file`     | `{"bodies":{"type":"file"}}`                        | 聊天室中发送文件消息       |
-| `chat:room:command`  | `{"bodies":{"type":"cmd"}}`                         | 聊天室中发送命令消息       |
+| `chat:room:command`  | `{"bodies":{"type":"cmd"}}`                         | 聊天室中发送透传消息       |
 | `chat:room:custom`   | `{"bodies":{"type":"custom"}}`                      | 聊天室中发送自定义消息     |
 | `chat:room:txt`      | `{"bodies":{"type":"txt","subType":"sub_combine"}}` | 聊天室中发送合并消息       |
 | `chat:room:unknown`  | `{"bodies":{"type":"unknown"}}`                     | 聊天室中发送未知消息       |
@@ -434,7 +434,7 @@
 | `ext`    | object   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含 `msg` 和 `type` 字段。           |
 | `msg`    | String   | 消息内容。                                                   |
-| `type`   | String   | 消息类型：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
+| `type`   | String   | 消息类型：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 透传消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
 
 回调请求的其他参数详见 [公共参数](#公共参数)。
 

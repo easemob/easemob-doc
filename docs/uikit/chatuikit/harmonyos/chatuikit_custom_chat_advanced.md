@@ -750,7 +750,7 @@ struct CustomChatPageWithMessageViewModel {
 | `sendVideoMessage(videoPath, duration, onError?, onSuccess?, onProgress?)` | 发送视频消息                                         |
 | `sendFileMessage(filePath, onError?, onSuccess?, onProgress?)`       | 发送文件消息                                                 |
 | `sendUserCard(user, onError?, onSuccess?)`                           | 发送名片消息                                                 |
-| `sendCmdMessage(action, onError, onSuccess)`                         | 发送命令消息                                                 |
+| `sendCmdMessage(action, onError, onSuccess)`                         | 发送透传消息                                                 |
 | `editMessage(messageId, modifiedBody, onError?, onSuccess?)`         | 编辑消息                                                     |
 | `resendMessage(message, onError?, onSuccess?, onProgress?)`          | 重新发送失败的消息                                           |
 | `getLatestMessage(conversationId)`                                   | 获取会话最新一条消息                                         |

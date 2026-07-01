@@ -254,7 +254,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 - [IM SDK] 发送后编辑消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持编辑各类消息：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
-  - 命令消息：不支持编辑。
+  - 透传消息：不支持编辑。
 - [IM SDK] 优化重连逻辑，默认切换重连的地址。
 - [IM SDK] 改进调用 `applicationWillEnterForeground` 的逻辑，通过发送 ping 消息触发重连。
 - [IM SDK] 禁用 `EMChatMessage`、`EMConversation`、`EMMessageBody` 的默认构造函数，防止空指针导致的 crash。

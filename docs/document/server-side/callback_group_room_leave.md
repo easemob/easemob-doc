@@ -1,8 +1,8 @@
-# 群组/聊天室成员离开事件 
+# 群组/聊天室成员退出回调事件
 
 ## 功能描述
 
-在群组或聊天室中的成员离开时，包括主动退出、被踢出以及被加入群组/聊天室黑名单时退出，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看离开的成员，进行数据同步。
+在群组或聊天室中的成员退出时，包括主动退出、被踢出以及被加入群组/聊天室黑名单时退出，环信服务器会按照 [发送后回调规则](/product/console/basic_webhook.html#配置消息回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看退出的成员，进行数据同步。
 
 ## 前提条件
 
@@ -182,8 +182,8 @@
 | `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
 | `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
-| `payload.member` | JSON | 被加入群组/聊天室黑名单后离开的用户 ID。        | 
-| `payload.type` | Array  | 退群方式：`BLOCK` 表示加入群组/聊天室黑名单后离开群组/聊天室。     |
+| `payload.member` | JSON | 被加入群组/聊天室黑名单后退出的用户 ID。        | 
+| `payload.type` | Array  | 退群方式：`BLOCK` 表示加入群组/聊天室黑名单后退出群组/聊天室。     |
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
@@ -237,8 +237,8 @@
 | `operation`    | String | 操作。用户退出群组/聊天室的操作为 `LEAVE`。 |
 | `operator`     | String | 操作人。                     | 
 | `payload`       | Object | 事件内容。                                                     |
-| `payload.member` | JSON | 群组/聊天室被解散后离开的用户 ID。        | 
-| `payload.type` | Array  | 退群方式：`DELETE` 表示群组/聊天室被解散后，用户离开群组/聊天室。     |
+| `payload.member` | JSON | 群组/聊天室被解散后退出的用户 ID。        | 
+| `payload.type` | Array  | 退群方式：`DELETE` 表示群组/聊天室被解散后，用户退出群组/聊天室。     |
 | `appkey`       | String | 你在环信控制台注册的应用唯一标识。  |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 

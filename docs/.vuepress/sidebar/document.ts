@@ -854,9 +854,9 @@ const documentSidebar = [
       { text: '回调事件',
         collapsible: true,
         children: [
-          { text: '在线状态相关回调', link: 'callback_login_logout.html' },
-          { text: '用户关系相关回调', link: 'callback_contact.html' },
-          { text: '消息相关回调',
+          { text: '用户状态变更回调', link: 'callback_login_logout.html' },
+          { text: '好友与黑名单回调', link: 'callback_contact.html' },
+          { text: '消息回调',
                 collapsible: true,
                 children: [
                   { text: '消息发送', link: 'callback_message_send.html' },
@@ -867,29 +867,29 @@ const documentSidebar = [
                   { text: '表情回复变更', link: 'callback_reaction.html' },
                 ]
          },
-          { text: '会话相关回调',
+          { text: '会话回调',
                 collapsible: true,
                 children: [
                   { text: '会话已读回执', link: 'callback_single_conversation_ack.html' }
                 ]
           },
-          { text: '群组/聊天室相关回调', 
+          { text: '群组与聊天室回调', 
             collapsible: true,
             children: [
               {
-                text: '创建与解散',
+                text: '创建与删除',
                 collapsible: true,
                 children: [
-                  { text: '群组/聊天室创建', link: 'callback_group_room_create.html' },
-                  { text: '群组/聊天室解散', link: 'callback_group_room_delete.html' }
+                  { text: '群组与聊天室创建', link: 'callback_group_room_create.html' },
+                  { text: '群组与聊天室删除', link: 'callback_group_room_delete.html' }
                ]
              },
               { text: '信息与状态变更',
                 collapsible: true,
                 children: [
-                  { text: '群组/聊天室信息变更', link: 'callback_group_room_info.html' },
-                  { text: '群主/聊天室所有者变更', link: 'callback_group_room_owner.html' },
-                  { text: '群主/聊天室公告变更', link: 'callback_group_room_announcement.html' },
+                  { text: '群组与聊天室信息变更', link: 'callback_group_room_info.html' },
+                  { text: '群主与聊天室所有者变更', link: 'callback_group_room_owner.html' },
+                  { text: '群主与聊天室公告变更', link: 'callback_group_room_announcement.html' },
                   { text: '群组封禁状态变更', link: 'callback_group_ban.html' },
                   { text: '全员禁言状态变更', link: 'callback_group_room_muteall.html' },
                   { text: '群组屏蔽状态变更', link: 'callback_group_block.html' },
@@ -899,8 +899,8 @@ const documentSidebar = [
                 text: '成员与权限变更',
                 collapsible: true,
                 children: [
-                  { text: '用户加入', link: 'callback_group_room_join.html' },
-                  { text: '成员离开', link: 'callback_group_room_leave.html' },
+                  { text: '新成员加入', link: 'callback_group_room_join.html' },
+                  { text: '成员退出', link: 'callback_group_room_leave.html' },
                   { text: '管理员变更', link: 'callback_group_room_admin.html' },
                   { text: '禁言列表变更', link: 'callback_group_room_mute.html' },
                   { text: '白名单变更', link: 'callback_group_room_allowlist.html' },
@@ -916,11 +916,12 @@ const documentSidebar = [
                 { text: '话题内消息操作', link: 'callback_thread.html' }
               ]
             },
-            { text: '历史版本（群/聊天室操作消息）', link: 'callback_group_room_old.html' }, 
+            { text: '历史版本（群组与聊天室操作消息）', link: 'callback_group_room_old.html' }, 
             ]
           },
-          { text: '离线推送相关回调', link: 'callback_offline_push.html' },
-          { text: '敏感词相关回调', link: 'callback_sensitive_word.html' }
+          { text: '离线推送回调', link: 'callback_offline_push.html' },
+          { text: '内容审核回调', link: 'callback_moderation.html' },
+          { text: '敏感词监测回调', link: 'callback_sensitive_word.html' }
         ]
       },
       { text: '回调异常处理', link: 'callback_postsending_exception_storage.html' }

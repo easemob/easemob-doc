@@ -108,7 +108,7 @@ SDK 中使用到的对象包括：
 
 - 文件消息体 EMTextMessageBody
 
-- 命令消息体 EMCmdMessageBody
+- 透传消息体 EMCmdMessageBody
 
 具体接口详见 [API 参考](https://downloads.easemob.com/doc/desktop/apidoc/index.html)。
 

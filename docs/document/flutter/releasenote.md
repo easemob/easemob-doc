@@ -141,7 +141,7 @@
 - [支持修改各类发送成功后的消息](message_modify.html) ：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `attributes`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `attributes`。
-  - 命令消息：不支持修改。
+  - 透传消息：不支持修改。
 - 支持[控制 iOS 后台的行为和使用方式](initialization.html#初始化)。
 - 支持[鸿蒙平台](integration.html#鸿蒙平台支持)。
 
