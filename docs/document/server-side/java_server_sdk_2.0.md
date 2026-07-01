@@ -1,7 +1,5 @@
 # Java Server SDK 2.0
 
-<Toc />
-
 ## 功能概述
 
 Server SDK 2.0 是对环信 IM [REST API](overview.html) 的封装，这样做是为了节省服务器端开发者对接环信 API 的时间，只需要配置自己的 App Key 相关信息即可使用。
@@ -23,14 +21,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.18</version>
+    <version>1.0.19</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:V1.0.18'
+implementation 'com.easemob.im:im-sdk-core:V1.0.19'
 ```
 
 ### 使用
@@ -188,6 +186,16 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.19 2026-06-24
+
+| 新增功能                     | 描述                                                    |
+| :--------------------------- | :----------------------------------------------------------- |
+|  批量撤回消息            | `batchRecallMessages`/`batchRecallMessagesAsync`：一次可撤回发送成功的多条消息，每次最多可撤回 30 条。<br/>详见 [MessageApi 中的 API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#batchRecallMessages(com.easemob.im.api.model.EMBatchRecallMessages))。|
+|  校验黑名单            |  `userBlockCheck`/`userBlockCheckAsync`：批量校验用户是否在黑名单中。 <br/>详见 [BlockApi 中的 API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html#userBlockCheck(com.easemob.im.api.model.EMUserBlockCheck))。|
+|  翻译消息内容           | `translateMessage`/`translateMessageAsync`：翻译消息内容 翻译文本消息的内容，只支持文本消息。<br/>详见 [MessageApi 中的 API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#translateMessage(com.easemob.im.api.model.EMMessageTranslate))。 |
+|  获取翻译语言列表            | `getTranslateSupportLanguages`：获取翻译语言列表。<br/>详见 [MessageApi 中的 API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#getTranslateSupportLanguages())。|
+|  检测文本的源语言            | `detectTranslateLanguage`：检测文本的源语言。<br/>详见 [MessageApi 中的 API 介绍](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#detectTranslateLanguage(com.easemob.im.api.model.EMDetectTranslateLanguage))。|
 
 ### V1.0.18 2026-05-22
 
