@@ -916,7 +916,7 @@ const documentSidebar = [
                 { text: '话题内消息操作', link: 'callback_thread.html' }
               ]
             },
-            { text: '历史版本（群/聊天室操作消息）', link: 'callback_group_room_old.html' }, 
+            { text: '历史版本（群组/聊天室操作消息）', link: 'callback_group_room_old.html' }, 
             ]
           },
           { text: '离线推送回调', link: 'callback_offline_push.html' },
