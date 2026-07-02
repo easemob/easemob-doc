@@ -18,6 +18,10 @@ export const STT_SIDEBAR = [
             link: "/value-added/stt/voice_to_text_web.html",
           },
           {
+            text: "Harmonyos",
+            link: "/value-added/stt/voice_to_text_harmonyos.html",
+          },
+          {
             text: "小程序",
             link: "/value-added/stt/voice_to_text_applet.html",
           },

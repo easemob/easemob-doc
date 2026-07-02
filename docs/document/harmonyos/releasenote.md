@@ -4,7 +4,7 @@
 
 #### 新增特性
 
-- 新增 [语音转文字功能](/value-added/stt/voice_to_text_android.html)。
+- 新增 [语音转文字功能](/value-added/stt/voice_to_text_harmonyos.html)。
 - 新增 [群成员名片管理功能](group_namecard.html)。
 - 新增 [用户信息自动管理功能](userinfo_provider.html)。
   用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。  
@@ -15,14 +15,10 @@
    - 接收消息后根据更新时间自动更新本地内存。
 
   为了实现用户信息自动管理功能，新增如下接口：
-     - `ChatMessage#getSenderInfo()`：获取消息发送方信息，包括用户昵称、头像、群名片和好友备注等信息。
-     - `ChatUserInfoManagerListener`：监听用户信息更新事件。
-     - `UserInfoManager#getUserInfoWithUserIds`：从本地内存查询用户信息。
+  - `ChatMessage#getSenderInfo()`：获取消息发送方信息，包括用户昵称、头像、群名片和好友备注等信息。
+  - `UserInfoListener`：监听用户信息更新事件。
 
-#### 优化
-
-- 群成员信息：新增用户 ID、群名片、昵称和头像 URL 等字段。
-- 用户属性：新增扩展信息和更新时间字段。
+- [获取群成员列表](/document/harmonyos/group_manage.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
 
 #### 修复
 
@@ -169,10 +165,10 @@
 
 #### 优化
 
-- 发送后编辑消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
-  - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
-  - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
-  - 透传消息：不支持修改。
+- 发送后修改消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
+  - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
+  - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
+  - 命令消息：不支持修改。
 - [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
@@ -181,7 +177,7 @@
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个好友的信息。
+- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
 
 #### 优化
 
@@ -198,7 +194,7 @@
 #### 修复
 
 - 修复设置 `Conversation#searchMessagesByType` 传入 `ContentType#TXT` 时报错的问题。
-- 修复 `不是 TextMessageBody` 时获取消息编辑信息崩溃的问题。
+- 修复 `不是 TextMessageBody` 时获取消息修改信息崩溃的问题。
 - 修复 `UserInfoManager#updateUserInfo` 传入 `UserInfoType#GENDER` 时，返回类型有误的问题。
 - 修复自动登录时偶现崩溃的问题。
 
@@ -368,7 +364,7 @@
 
 #### 新增特性
 
-- 新增[编辑消息](message_modify.html)功能。
+- 新增[修改消息](message_modify.html)功能。
 - 新增 [发送](message_send.html#发送自定义类型消息) 和 [接收自定义消息](message_receive.html#接收自定义类型消息)功能。
 - 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
 - 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。

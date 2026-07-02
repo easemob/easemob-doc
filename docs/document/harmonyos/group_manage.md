@@ -150,7 +150,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cu
 });
 ```
 
-- 获取群成员信息列表，除了成员的用户 ID，还包括成员角色和加入群组的时间。
+- 获取群成员列表，该方法返回的群成员信息包括用户 ID、加入时间、角色、群名片、昵称、头像 URL。其中，群名片、昵称、头像 URL 需 SDK 1.13.0 及以上版本才支持返回。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {
