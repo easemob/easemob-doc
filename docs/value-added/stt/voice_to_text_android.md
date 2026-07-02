@@ -12,7 +12,18 @@
 - 语音参数配置：为无文件头的本地语音文件补充格式、采样率、采样位深和声道数等参数。
 - 读取转文字结果：转换成功后，可从语音消息体读取已持久化的文本结果。
 
-接入前，建议先阅读 [支持格式与语音参数要求](#支持格式与参数)，确认接口适用范围和 `audioParams` 的传参要求。
+[语音消息转文字](#将语音消息转换为文本) 与 [本地语音文件转文字](#将本地语音文件转换为文本) 支持的音频格式不完全相同。
+
+| 文件格式 | 语音消息转文字 | 本地语音文件转文字  |
+| :------- | :---------------------------------- | :----------------------------------- |
+| PCM  | ❌ 不支持                            | ✅ 支持                               |
+| AMR | ✅ 支持                              | ✅ 支持                               |
+| MP3  | ✅ 支持                              | ✅ 支持                               |
+| WAV  | ✅ 支持                              | ✅ 支持                               |
+| M4A  | ✅ 支持                              | ✅ 支持                               |
+| AAC  | ✅ 支持                              | ✅ 支持                               |
+
+语音参数 `audioParams` 仅用于本地语音文件转文字。对于本地 `PCM` 文件，由于文件本身不包含完整音频头信息，必须传入 `audioParams`，以便 SDK 正确解析原始音频数据；其他格式通常可传 `null`。具体配置方式请参考 [将本地语音文件转换为文本](#将本地语音文件转换为文本)。
 
 ## 开通服务
 
@@ -28,7 +39,7 @@
 语音转文字主要支持以下两种调用方式：
 
 - 语音消息转文字：客户端传入语音消息对象，SDK 校验消息类型后调用底层转换能力。转换成功后，结果通过回调返回，并写入 `EMVoiceMessageBody`。
-- 本地语音文件转文字：客户端传入本地语音文件路径。SDK 校验文件是否存在；若文件为 `PCM` 格式，则结合语音参数解析原始音频数据，再调用底层转换能力。
+- 本地语音文件转文字：客户端传入本地语音文件路径。SDK 校验文件是否存在；若文件为 `PCM` 格式，则结合 [语音参数](#关键参数) 解析原始音频数据，再调用底层转换能力。
 
 时序图如下所示：
 
@@ -63,48 +74,9 @@
 - 已完成 [Android SDK 初始化](initialization.html)，并成功 [登录](login.html)。
 - 已具备 [发送](message_send.html#发送语音消息) 和 [接收语音消息](message_receive.html#接收语音消息) 的基础集成能力。
 
-## 支持格式与参数
-
-[语音消息转文字](#将语音消息转换为文本) 与 [本地语音文件转文字](#将本地语音文件转换为文本) 支持的音频格式不完全相同。对于无文件头的 `PCM` 文件，必须同时传入 `audioParams`，以便 SDK 正确解析原始音频数据。
-
-| 文件格式 | 语音消息转文字 `voiceMessageToText` | 本地语音文件转文字 `voiceFileToText` | `audioParams` 参数 |
-| :------- | :---------------------------------- | :----------------------------------- | :----------------- |
-| PCM  | ❌ 不支持                            | ✅ 支持                               | **必须传入**，需指定格式、采样率、采样位深和声道数。 |
-| AMR | ✅ 支持                              | ✅ 支持                               | 可传入格式参数，通常传 `null` 即可。 |
-| MP3  | ✅ 支持                              | ✅ 支持                               | 可传入格式参数，通常传 `null` 即可。 |
-| WAV  | ✅ 支持                              | ✅ 支持                               | 传 `null` 即可。 |
-| M4A  | ✅ 支持                              | ✅ 支持                               | 传 `null` 即可。 |
-| AAC  | ✅ 支持                              | ✅ 支持                               | 传 `null` 即可。 |
-
-`EMAudioParams` 类用于描述语音文件的基础属性，包括格式、采样率、位深和声道数，有助于准确地解析语音内容。调用本地语音文件转文字接口时，对于格式信息完整的文件，通常可不传，但对于缺少文件头信息的音频文件，需要通过该参数补充语音信息。
-
-- 对于 `PCM` 文件，必须提供该参数。
-- 对于 `MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 文件，通常无需显式配置该对象。
-- 如果语音参数与原始文件不匹配，可能导致转换失败或结果异常。
-
-```java
-EMAudioParams audioParams = new EMAudioParams();
-audioParams.setFormat(EMAudioParams.AudioFormat.PCM);
-audioParams.setSampleRate(16000);
-audioParams.setBitsPerSample(16);
-audioParams.setChannels(1);
-```
-
-`EMAudioParams` 的关键成员如下：
-
-| 成员 | 说明 |
-| :--- | :--- |
-| `EMAudioParams.AudioFormat` | 语音格式。仅支持配置 `PCM`、`MP3` 和 `AMR` 格式。对于 `WAV`、`M4A` 和 `AAC`，服务端会直接解析处理，SDK 仅透传文件数据，因此无需通过 `EMAudioParams` 配置格式参数。 |
-| `getFormat/setFormat` | 获取或设置语音文件格式。 |
-| `getSampleRate/setSampleRate` | 获取或设置采样率，单位为 Hz，建议设置为 `8000` 或 `16000`。 |
-| `getBitsPerSample/setBitsPerSample` | 获取或设置采样位深，单位为 bit，例如 `16`。 |
-| `getChannels/setChannels` | 获取或设置声道数，例如 `1` 表示单声道。 |
-
 ## 将语音消息转换为文本
 
 调用 `EMChatManager#voiceMessageToText` 将单条语音消息转换为文本，并通过回调返回结果。
-
-调用前，建议先查看 [支持格式与参数](#支持格式与参数)，了解该接口支持的文件格式以及 `audioParams` 是否必传。
 
 转换成功后，可通过 `EMVoiceMessageBody#getText()` 获取对应文本。
 
@@ -138,14 +110,15 @@ EMClient.getInstance().chatManager().voiceMessageToText(voiceMessage, new EMValu
 
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMMessage` 必须为语音消息，否则会返回 `EMError#MESSAGE_INVALID`。可通过 `EMMessage#getType` 判断消息类型。
-- 当前支持的语音消息格式和 `PCM` 的处理方式，可参考 [支持格式与语音参数要求](#支持格式与参数)。
 - 转换成功后，可通过 `EMVoiceMessageBody#getText` 读取持久化的文本结果。
+- 该接口支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接转换 `PCM` 格式的语音消息。
+- 如需转换 `PCM` 音频，请使用 [本地语音文件转文字接口](#将本地语音文件转换为文本)，并传入对应的 `audioParams`。
 
 ## 将本地语音文件转换为文本
 
 调用 `EMChatManager#voiceFileToText` 可将本地语音文件转换为文本，并通过回调返回识别结果。
 
-该接口支持的文件格式、`audioParams` 是否必传，以及 `PCM` 的特殊要求，可统一参考 [支持格式与语音参数要求](#支持格式与参数)。此外，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
+调用前，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
 
 ```java
 String filePath = "/sdcard/voice/test.pcm";
@@ -174,8 +147,32 @@ EMClient.getInstance().chatManager().voiceFileToText(filePath, audioParams, new 
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
 | `filePath` | String | 是 | 本地语音文件路径。必须确保应用具备读取该路径的权限。 |
-| `audioParams` | `EMAudioParams` | 否 | 语音参数。`PCM` 文件必须传入；`MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 文件通常可传 `null`。 |
+| `audioParams` | `EMAudioParams` | 否 | 语音参数。仅本地 `PCM` 文件必须传入，`MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 文件通常可传 `null`。 |
 | `callback` | `EMValueCallBack<String>` | 是 | 结果回调。成功时返回转换文本；失败时返回错误码和错误描述。 |
+
+该接口支持 `PCM`、`MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 格式的本地语音文件。
+
+`EMAudioParams` 用于描述语音文件的格式、采样率、采样位深和声道数。对于无文件头的 `PCM` 文件，必须传入该参数；对于 `MP3`、`AMR`、`WAV`、`M4A` 和 `AAC` 等格式信息完整的文件，通常可传 `null`。
+
+如果语音参数与原始文件不匹配，可能导致转换失败或结果异常。
+
+```java
+EMAudioParams audioParams = new EMAudioParams();
+audioParams.setFormat(EMAudioParams.AudioFormat.PCM);
+audioParams.setSampleRate(16000);
+audioParams.setBitsPerSample(16);
+audioParams.setChannels(1);
+```
+
+`EMAudioParams` 的关键成员如下：
+
+| 成员 | 说明 |
+| :--- | :--- |
+| `EMAudioParams.AudioFormat` | 语音格式。仅支持配置 `PCM`、`MP3` 和 `AMR` 格式。对于 `WAV`、`M4A` 和 `AAC`，服务端会直接解析处理，SDK 仅透传文件数据，因此无需通过 `EMAudioParams` 配置格式参数。 |
+| `getFormat/setFormat` | 获取或设置语音文件格式。 |
+| `getSampleRate/setSampleRate` | 获取或设置采样率，单位为 Hz，建议设置为 `8000` 或 `16000`。 |
+| `getBitsPerSample/setBitsPerSample` | 获取或设置采样位深，单位为 bit，例如 `16`。 |
+| `getChannels/setChannels` | 获取或设置声道数，例如 `1` 表示单声道。 |
 
 ## 读取语音消息的转换结果
 
@@ -199,8 +196,9 @@ if (message.getType() == EMMessage.Type.VOICE) {
 - `voiceMessageToText` 和 `voiceFileToText` 均为异步接口，转换结果通过回调返回。
 - 转换本地语音文件前，建议先校验文件是否存在且可读，避免无效调用。
 - 如果本地语音文件来自外部存储、`content://` 或第三方路径，请确保应用具备读取权限，并且 SDK 能够正常将文件复制到私有目录。
+- 当前语音消息转文字支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
+- 如需转换 `PCM` 音频，请使用 [本地文件转文字接口](#将本地语音文件转换为文本)，并且传入 `EMAudioParams` 参数。
 - 如果本地文件大小超过 10 MB、时长超过 60 秒，或语音参数与实际文件不匹配，可能导致识别失败。
-- `PCM` 的接口适用范围和参数要求，可参考 [支持格式与语音参数要求](#支持格式与参数)。
 
 ## 常见错误与排查
 
@@ -249,4 +247,4 @@ if (message.getType() == EMMessage.Type.VOICE) {
 
 4. 为什么 `EMAudioParams.AudioFormat` 不支持 `WAV`、`M4A` 和 `AAC`，但语音转文字功能仍支持这些格式？
 
-`WAV`、`M4A` 和 `AAC` 格式由服务端直接识别和处理，Android SDK 仅负责将文件数据透传至服务端，不进行本地解析或参数校验。因此，在调用 `voiceFileToText` 时，对于这些格式的文件，`audioParams` 参数传 `null` 即可。详见 [支持格式与语音参数要求](#支持格式与参数)。
+`WAV`、`M4A` 和 `AAC` 格式由服务端直接识别和处理，Android SDK 仅负责将文件数据透传至服务端，不进行本地解析或参数校验。因此，在调用 `voiceFileToText` 时，对于这些格式的文件，`audioParams` 参数传 `null` 即可。
