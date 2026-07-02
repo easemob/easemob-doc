@@ -3,7 +3,7 @@ export const STT_SIDEBAR = [
      // { text: "开通服务", link: "/value-added/stt/voice_to_text_activate.html" },
      {
        text: "集成服务",
-       collapsible: true,
+       collapsible: false,
        children: [
           { 
             text: "Android",
