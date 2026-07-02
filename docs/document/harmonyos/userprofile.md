@@ -84,7 +84,7 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo).then(result
 
 ## 获取用户属性
 
-### 获取用户的所有属性
+### 从服务端获取用户的所有属性
 
 你可以调用 `fetchUserInfoById` 从服务端获取指定一个或多个用户的全部用户属性。该接口返回 `Promise<Map<string, UserInfo>>`。
 
@@ -101,7 +101,7 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds).then(resu
 });
 ```
 
-###  获取用户的指定属性
+### 从服务端获取用户的指定属性
 
 你可以调用 `fetchUserInfoById` 获取指定用户的一个或多个属性。自 v1.13.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `UserInfoListener#onUserInfoUpdate` 事件。
 
