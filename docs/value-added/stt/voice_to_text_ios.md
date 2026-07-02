@@ -109,7 +109,7 @@ EMChatMessage *voiceMessage = ...;
 - 该方法仅支持已发送成功的语音消息。
 - 传入的 `EMChatMessage` 必须是语音消息，否则会返回 `EMErrorMessageInvalid`。你可以通过判断 `message.body.type == EMMessageBodyTypeVoice` 确认消息体类型。
 - 当前语音消息转文字支持 `AMR`、`MP3`、`WAV`、`M4A` 和 `AAC` 格式的语音消息，不支持直接对 `PCM` 格式的语音消息进行转换。
-- 如需转换 PCM 音频，请使用 [本地语音文件转文字接口](将本地语音文件转换为文本)，并传入对应的 `EMVoiceParam`。
+- 如需转换 PCM 音频，请使用 [本地语音文件转文字接口](#将本地语音文件转换为文本)，并传入对应的 `EMVoiceParam`。
 - 转换成功后，可通过 `EMVoiceMessageBody.text` 读取持久化的文本结果。
 
 
