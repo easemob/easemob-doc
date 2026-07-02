@@ -72,9 +72,9 @@
 开始前，请确保满足以下条件：
 
 - 已将 SDK 升级至 v4.21.0 或以上版本。
-- 已完成 [SDK 初始化](initialization.html)，并成功 [登录](login.html)。
+- 已完成 [SDK 初始化](/document/web/initialization.html)，并成功 [登录](/document/web/login.html)。
 - 已联系商务开通语音转文字服务。
-- 已具备 [发送](message_send.html#发送语音消息) 和 [接收语音消息](message_receive.html#接收语音消息) 的基础集成能力。
+- 已具备 [发送](/document/web/message_send.html#发送语音消息) 和 [接收语音消息](/document/web/message_receive.html#接收语音消息) 的基础集成能力。
 
 ## 将语音消息转换为文本
 
