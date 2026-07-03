@@ -332,6 +332,10 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 
 ```
 
+### 语聊房麦位管理
+
+基于 [聊天室自定义属性](room_attributes.html)，实现语聊房的麦位状态管理与多端实时同步。将麦位列表（含用户信息、麦位状态、音量等字段）作为房间属性存储，任何麦位变更通过更新属性触发全房间广播，确保所有客户端状态一致。详见 [聊天室自定义属性](room_attributes.html)。
+
 ### 获取发送附件消息的进度
 
 发送附件类型消息时，可以在 `ChatMessageEvent#onProgress` 回调中获取附件上传的进度（百分比），以 int 表示，范围为 [0, 100]，示例代码如下：
