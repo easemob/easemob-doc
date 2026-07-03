@@ -404,6 +404,10 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
+### 语聊房麦位管理
+
+基于 [聊天室自定义属性](room_attributes.html)，实现语聊房的麦位状态管理与多端实时同步。将麦位列表（含用户信息、麦位状态、音量等字段）作为房间属性存储，任何麦位变更通过更新属性触发全房间广播，确保所有客户端状态一致。详见 [聊天室自定义属性](room_attributes.html)。
+
 ### 发送消息前的内容审核
 
 - 内容审核关注消息 body
