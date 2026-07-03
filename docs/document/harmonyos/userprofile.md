@@ -118,6 +118,35 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds, userTypes
 });
 ```
 
+### 从本地内存读取用户属性
+
+自 V4.20.0 起，可以调用 `EMUserInfoManager#getUserInfoWithUserId` 直接从本地内存读取用户属性。该接口返回的是单个用户的 `EMUserInfo`。它适用于直接从本地内存读取指定用户的资料，不会发起网络请求，因此可以作为好友列表读取能力之外的补充资料读取方式。
+
+```java
+EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
+        new String[] {"userId1", "userId2"},
+        new EMValueCallBack<Map<String, EMUserInfo>>() {
+            @Override
+            public void onSuccess(Map<String, EMUserInfo> userInfoMap) {
+                for (Map.Entry<String, EMUserInfo> entry : userInfoMap.entrySet()) {
+                    EMUserInfo userInfo = entry.getValue();
+                    EMLog.d("UserInfo", "用户属性 - userId:" + entry.getKey()
+                            + ", nickname:" + userInfo.getNickname()
+                            + ", avatarUrl:" + userInfo.getAvatarUrl());
+                }
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                EMLog.e("UserInfo", "读取本地用户属性失败：" + code + ", " + error);
+            }
+        });
+```
+
+:::tip
+该接口仅返回本地内存的数据。如需主动从服务端获取最新用户属性，请调用 `EMUserInfoManager#fetchUserInfoByUserId` 方法。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
+:::
+
 ## 监听用户属性变更
 
 自 v1.13.0，你可以监听用户属性变更。
