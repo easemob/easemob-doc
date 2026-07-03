@@ -3,7 +3,7 @@ export const STT_SIDEBAR = [
      // { text: "开通服务", link: "/value-added/stt/voice_to_text_activate.html" },
      {
        text: "集成服务",
-       collapsible: true,
+       collapsible: false,
        children: [
           { 
             text: "Android",
@@ -16,6 +16,10 @@ export const STT_SIDEBAR = [
           {
             text: "Web",
             link: "/value-added/stt/voice_to_text_web.html",
+          },
+          {
+            text: "Harmonyos",
+            link: "/value-added/stt/voice_to_text_harmonyos.html",
           },
           {
             text: "小程序",

@@ -29,15 +29,16 @@
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 使用限制
 
-本节介绍如何在项目中设置及获取用户属性。
+- 单个用户的全部属性最大不超过 2 KB。
+- 单个 app 的全部用户属性数据最大不超过 10 GB。
 
-单个用户的所有属性的长度不超过 2 KB，单个 app 的所有用户属性的数据长度不超过 10 GB。
+## 设置当前用户的属性
 
 ### 设置当前用户的所有属性
 
-当前用户设置自己的所有属性：
+你可以调用 `updateUserInfo` 设置当前用户的全部属性。
 
 ```javascript
 let option = {
@@ -58,7 +59,7 @@ conn.updateUserInfo(option).then((res) => {
 });
 ```
 
-关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/document/server-side/user_attribute_set.html) 或 [删除用户属性](/document/server-side/user_attribute_delete.html)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
+客户端默认使用以下键名存储用户属性。[调用 RESTful 接口设置](/document/server-side/user_attribute_set.html) 或 [删除用户属性](/document/server-side/user_attribute_delete.html) 时，若希望客户端可正常读取，请保持键名一致。
 
 | 字段        | 类型   | 备注                                                                                               |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------- |
@@ -81,7 +82,9 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
 });
 ```
 
-### 获取用户的所有属性
+## 获取用户属性
+
+### 从服务端获取用户的所有属性
 
 你可以调用 `fetchUserInfoById` 方法获取指定一个或多个用户的所有用户属性。每次调用最多可获取 100 个用户的用户属性。
 
@@ -95,7 +98,7 @@ conn.fetchUserInfoById(users).then((res) => {
 });
 ```
 
-### 获取用户的指定属性
+### 从服务端获取用户的指定属性
 
 用户可以获取单个或多个用户的单个或多个用户属性。
 

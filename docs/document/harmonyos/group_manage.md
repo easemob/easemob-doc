@@ -150,7 +150,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cu
 });
 ```
 
-- 获取群成员信息列表，除了成员的用户 ID，还包括成员角色和加入群组的时间。
+- 获取群成员列表，该方法返回的群成员信息包括用户 ID、加入时间、角色、群名片、昵称、头像 URL。其中，群名片、昵称、头像 URL 需 SDK 1.13.0 及以上版本才支持返回。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {
@@ -324,6 +324,9 @@ let groupListener: GroupListener = {
   onAnnouncementChanged: (groupId: string, announcement: string): void => {
     // 群组公告更新。群组所有成员会收到该回调。
   },
+  onUserGroupNamecardUpdated: (groupId: string, userId: string, namecard: string): void => {
+    // 群成员名片更新。群成员名片发生变更并同步到本地内存后会触发该回调。群内其他在线成员收到该回调。
+  },  
   onSharedFileAdded: (groupId: string, sharedFile: SharedFile): void => {
     // 有成员新上传群组共享文件。群组所有成员会收到该回调。
   },

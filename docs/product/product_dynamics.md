@@ -2,12 +2,25 @@
 
 ## 2026-06
 
-#### 环信客户端 SDK v4.23.0 发版
+#### 环信 HarmonyOS SDK v1.13.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](/document/android/error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-18-开发版) <br/>       |
-| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-18-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-18-开发版) |
+| HarmonyOS SDK 1.13.0 开发版发布   | - [支持用户信息自动管理](/document/harmonyos/userinfo_provider.html)。<br/> - [群成员名片](/document/harmonyos/group_namecard.html)。<br/> - [支持语言转文字](/value-added/stt/voice_to_text_harmonyos.html)。   | 2026-6-24     | [HarmonyOS SDK 1.13.0 更新日志](/document/harmonyos/releasenote.html#v1-13-0-dev-2026-6-24-开发版)   |
+
+#### 环信 Android/iOS/Web/小程序 SDK v4.23.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK 4.23.0 开发版发布   | - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。<br/> - 新增 [登录失败相关的连接超时错误码](/document/android/error.html)。 | 2026-6-18     | - [Android SDK 4.23.0 更新日志](/document/android/releasenote.html#v4-23-0-dev-2026-6-10-开发版) <br/> - [iOS SDK 4.23.0 更新日志](/document/ios/releasenote.html#v4-23-0-dev-2026-6-10-开发版) <br/>       |
+| Web/小程序 SDK 4.23.0 开发版发布   | 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/document/android/message_send.html#发消息时设置回调路由)。  | 2026-6-18    | - [Web SDK 4.23.0 更新日志](/document/web/releasenote.html#v4-23-0-dev-2026-6-10-开发版)<br/> - [小程序 SDK 4.23.0 更新日志](/document/applet/releasenote.html#v4-23-0-dev-2026-6-10-开发版) |
+
+#### 环信客户端 SDK v4.22.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK 4.22.0 开发版发布   | - 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/android/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/android/message_send.html#发送图片消息)。<br/> - [支持登录成功后自动同步好友列表及好友信息](/document/android/user_relationship.html#开启自动同步) <br/> - 支持 [订阅非好友用户的属性变更功能](/document/android/userprofile.html#订阅非好友用户的属性变更)。<br/> - 新增同步数据 WebSocket 服务地址和端口配置接口。 | 2026-6-17     | - [Android SDK 4.22.0 更新日志](/document/android/releasenote.html#v4-22-0-dev-2026-6-5-开发版) <br/> - [iOS SDK 4.22.0 更新日志](/document/ios/releasenote.html#v4-22-0-dev-2026-6-5-开发版) <br/>       |
+| Web/小程序 SDK 4.22.0 开发版发布   | 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/web/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/web/message_send.html#发送图片消息)。  | 2026-6-17     | - [Web SDK 4.22.0 更新日志](/document/web/releasenote.html#v4-22-0-dev-2026-6-5-开发版)<br/> - [小程序 SDK 4.22.0 更新日志](/document/applet/releasenote.html#v4-22-0-dev-2026-6-5-开发版) |
 
 #### 服务端支持发消息时设置回调路由
 
@@ -15,12 +28,11 @@
 
 调用发送消息接口时，只需在发消息时在请求体中传入 `env` 参数。单聊、群聊和聊天室的接口均支持该字段，使用方式完全一致，详见 [发送单聊消息时设置回调路由](/document/server-side/message_single.html#发消息时设置回调路由)。
 
-#### 环信客户端 SDK v4.22.0 发版
+#### 服务端支持查询 RTC 当月用量 API
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.22.0 开发版发布   | - 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/android/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/android/message_send.html#发送图片消息)。<br/> - [支持登录成功后自动同步好友列表及好友信息](/document/android/user_relationship.html#开启自动同步) <br/> - 支持 [订阅非好友用户的属性变更功能](/document/android/userprofile.html#订阅非好友用户的属性变更)。<br/> - 新增同步数据 WebSocket 服务地址和端口配置接口。 | 2026-6-17     | - [Android SDK 4.22.0 更新日志](/document/android/releasenote.html#v4-22-0-dev-2026-6-17-开发版) <br/> - [iOS SDK 4.22.0 更新日志](/document/ios/releasenote.html#v4-22-0-dev-2026-6-17-开发版) <br/>       |
-| Web/小程序 SDK 4.22.0 开发版发布   | 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/web/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/web/message_send.html#发送图片消息)。  | 2026-6-17     | - [Web SDK 4.22.0 更新日志](/document/web/releasenote.html#v4-22-0-dev-2026-6-17-开发版)<br/> - [小程序 SDK 4.22.0 更新日志](/document/applet/releasenote.html#v4-22-0-dev-2026-6-17-开发版) |
+| 新增查询 RTC 当月用量的 RESTful API    | 该 API 支持查询指定 App Key 在当前自然月内的实时音视频服务（RTC）用量汇总数据，帮助开发者了解当月资源消耗情况及剩余可用量。  | 2026-6-2       | [查询 RTC 当月用量 API](/document/server-side/rtc_usage_query.html)          |
 
 #### 即时推送计费变更
 
@@ -45,11 +57,18 @@
 - **国内服务**：部署在中国数据中心，相关费用详见 [国内计费说明](/value-added/push/push_billing_domestic.html)。
 - **海外服务**：部署在海外数据中心（如新加坡、美东、德国等），计费规则请参见 [海外计费说明](/value-added/push/push_billing_overseas.html)。
 
-#### 新增服务端查询 RTC 当月用量 API
+#### 控制台应用上线支持 App Key 保持不变
 
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
-| 新增查询 RTC 当月用量的 RESTful API    | 该 API 支持查询指定 App Key 在当前自然月内的实时音视频服务（RTC）用量汇总数据，帮助开发者了解当月资源消耗情况及剩余可用量。  | 2026-6-2       | [查询 RTC 当月用量 API](/document/server-side/rtc_usage_query.html)          |
+环信控制台现为测试版应用提供两种正式上线路径，核心区别在于是否变更 App Key 及是否迁移业务数据。具体说明如下：
+
+| 上线方式    | 核心特点     | 适用建议        |
+| :------- | :------- | :------------ |
+| **创建新的正式版应用** | **新 App Key**，功能配置自动同步，数据独立隔离。      | 适用于希望生产环境保持“干净”，或需与测试环境严格物理隔离的场景。 |
+| **原测试版直接升级为正式版**   | **原 App Key 不变**，完整继承全部配置与存量业务数据。 | 适用于测试期业务数据已具备延续性，希望上线后用户与数据无缝衔接的场景。 |
+
+**注意**：两种方式均需在正式上线前确认套餐计费、推送证书、回调地址及 IP 白名单等生产环境配置。
+
+应用创建及上线详情，详见，详见 [应用创建与上线流程](/product/console/app_create_to_launch.html)、[创建应用](/product/console/app_create.html)、以及 [应用上线](/product/console/app_launch.html) 文档。
 
 ## 2026-05
 
@@ -422,7 +441,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.8.0 开发版发布  | **新增特性**：<br/> - 移动端支持 AUT 协议，优化弱网环境下的服务连接成功率。<br/> - 移动端支持 [本地存储会话的推送通知方式](/document/ios/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)，并支持从服务器获取所有会话的推送通知方式的设置。<br/> - 移动端支持 [本地获取指定会话某个时间段内的消息数](/document/android/message_retrieve.html#获取会话在一定时间内的消息数)。<br/> - 客户端支持 [加入聊天室时携带的扩展信息，并可指定是否退出所有其他聊天室](/document/android/room_manage.html#加入聊天室)。<br/> - Web 端 [设备登录时允许携带自定义扩展消息并传递给被踢的设备](/document/web/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - Web 端支持 [使用固定的设备 ID](/document/web/multi_device.html)，这会影响多端登录互踢的策略。<br/> - Web 端支持 [聊天室所有者解散聊天室](/document/web/room_manage.html#解散聊天室)。<br/>**优化**：<br/> 移动端设置和获取用户属性时，包括 [设置当前用户的属性](/document/android/userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](/document/android/userprofile.html#获取用户的所有属性)和 [获取指定用户的指定用户属性](/document/android/userprofile.html#获取用户的指定属性)时，若超过调用频率限制，会上报错误码 4 `EMErrorExceedServiceLimit`（iOS）或 `EXCEED_SERVICE_LIMIT`（Android）。| 2024-07-01   | <br/> - [Android 4.8.0 更新日志](/document/android/releasenote.html#v4-8-0-2024-07-01-开发版)<br/> - [iOS 4.8.0 更新日志](/document/ios/releasenote.html#v4-8-0-2024-07-01-开发版)。<br/> - [Web 4.8.0 更新日志](/document/web/releasenote.html#v4-8-0-dev-2024-07-01-开发版)。<br/> - [Flutter 4.8.1 更新日志](/document/flutter/releasenote.html#v4-8-1-2024-10-15)。|
+| SDK 4.8.0 开发版发布  | **新增特性**：<br/> - 移动端支持 AUT 协议，优化弱网环境下的服务连接成功率。<br/> - 移动端支持 [本地存储会话的推送通知方式](/document/ios/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)，并支持从服务器获取所有会话的推送通知方式的设置。<br/> - 移动端支持 [本地获取指定会话某个时间段内的消息数](/document/android/message_retrieve.html#获取会话在一定时间内的消息数)。<br/> - 客户端支持 [加入聊天室时携带的扩展信息，并可指定是否退出所有其他聊天室](/document/android/room_manage.html#加入聊天室)。<br/> - Web 端 [设备登录时允许携带自定义扩展消息并传递给被踢的设备](/document/web/multi_device.html#设置登录设备的扩展信息)，应用于被踢设备展示提示信息或进行业务判断。<br/> - Web 端支持 [使用固定的设备 ID](/document/web/multi_device.html)，这会影响多端登录互踢的策略。<br/> - Web 端支持 [聊天室所有者解散聊天室](/document/web/room_manage.html#解散聊天室)。<br/>**优化**：<br/> 移动端设置和获取用户属性时，包括 [设置当前用户的属性](/document/android/userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](/document/android/userprofile.html#从服务端获取用户的所有属性)和 [获取指定用户的指定用户属性](/document/android/userprofile.html#从服务端获取用户的指定属性)时，若超过调用频率限制，会上报错误码 4 `EMErrorExceedServiceLimit`（iOS）或 `EXCEED_SERVICE_LIMIT`（Android）。| 2024-07-01   | <br/> - [Android 4.8.0 更新日志](/document/android/releasenote.html#v4-8-0-2024-07-01-开发版)<br/> - [iOS 4.8.0 更新日志](/document/ios/releasenote.html#v4-8-0-2024-07-01-开发版)。<br/> - [Web 4.8.0 更新日志](/document/web/releasenote.html#v4-8-0-dev-2024-07-01-开发版)。<br/> - [Flutter 4.8.1 更新日志](/document/flutter/releasenote.html#v4-8-1-2024-10-15)。|
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |

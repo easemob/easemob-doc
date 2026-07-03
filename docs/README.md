@@ -963,7 +963,10 @@ projects:
                 link: /document/android/group_namecard.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_namecard.html          
+                link: /document/ios/group_namecard.html    
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/group_namecard.html         
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -1215,7 +1218,10 @@ projects:
                 link: /document/android/userinfo_provider.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/userinfo_provider.html    
+                link: /document/ios/userinfo_provider.html 
+              - icon: /sdk/harmonyos.svg
+                text: HarmonyOS 
+                link: /document/harmonyos/userinfo_provider.html   
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:

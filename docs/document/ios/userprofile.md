@@ -86,7 +86,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ## 获取用户属性
 
-### 获取用户的所有属性
+### 从服务端获取用户的所有属性
 
 你可以调用 `fetchUserInfoById` 从服务端获取一个或多个用户的全部属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
@@ -97,7 +97,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 }];
 ```
 
-### 获取用户的指定属性
+### 从服务端获取用户的指定属性
 
 你可以调用 `fetchUserInfoById` 从服务端获取获取指定用户的一个或多个属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
 
@@ -109,6 +109,19 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 [[EMClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, EMError *aError) {
 
 }];
+```
+
+### 从本地内存读取用户属性
+
+自 V4.20.0 起，你可以调用 `EMUserInfoManager#getUserInfoByIds` 直接从本地内存读取用户属性。该接口不会发起网络请求，适用于本地展示场景。
+
+```swift
+let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
+if let userInfoMap = result {
+    for (userId, userInfo) in userInfoMap {
+        print("用户信息 - userId:\(userId), nickname:\(userInfo.nickname ?? ""), avatarUrl:\(userInfo.avatarUrl ?? "")")
+    }
+}
 ```
 
 ## 订阅非好友用户的属性变更
@@ -173,32 +186,26 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 ### 内存说明
 
-如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地内存中的用户信息，并按业务需要决定是否重新 [拉取服务端数据](userprofile.html#获取用户的所有属性)。
+如果未订阅非好友用户的属性变更，应用通常需要在业务需要时主动调用获取接口拉取资料。为减少不必要的网络请求，建议优先复用本地内存中的用户信息，并按业务需要决定是否重新 [拉取服务端数据](userprofile.html#从服务端获取用户的所有属性)。
 
 ## 监听用户属性变更
 
-本节从当前用户、好友和非好友用户的角度介绍不同场景下的用户属性变更事件。
+好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件：
 
-#### 当前用户
+1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
+2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
+3. **订阅用户变更（仅限非好友）**：若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
-当前用户的属性发生变更时，SDK 会触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件。
+**特殊说明**
 
-#### 好友用户
-
-- 若主动 [从服务端获取用户属性](userprofile.html#获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表)，且返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
-- 若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动从服务端拉取并更新本地好友数据。好友属性发生变更时，SDK 会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。
-- 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
-
-#### 非好友用户
-
-- 若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，且发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
-- 若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则在订阅成功后，当这些用户的属性发生变更时，SDK 会触发 [EMUserInfoManagerDelegate#onUserInfoUpdate](userinfo_provider.html#监听用户属性更新) 事件。
+- **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
+- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。此事件为好友关系特有，与 `EMUserInfoManagerDelegate#onUserInfoUpdate` 区分。
 
 ## 常见问题
 
 1. 我设置了用户昵称（`nickname`），但调用客户端或 RESTful API 获取用户属性时，未返回用户昵称，原因是什么？
 
-你可以调用[客户端](#设置当前用户的所有属性) 或[RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#获取用户的所有属性)或[RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
+你可以调用[客户端](#设置当前用户的所有属性) 或[RESTful API](/document/server-side/user_attribute_set.html) 设置用户昵称，例如 iOS 为 `updateOwnUserInfo`，然后通过[客户端](#从服务端获取用户的所有属性)或[RESTful API](/document/server-side/user_attribute_obtain_single.html) 获取用户属性，例如 iOS 为 `fetchUserInfoById`。
 
 设置用户昵称时，请注意以下两点：
 
