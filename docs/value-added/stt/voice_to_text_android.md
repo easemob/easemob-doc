@@ -23,6 +23,8 @@
 | M4A  | ✅ 支持                              | ✅ 支持                               |
 | AAC  | ✅ 支持                              | ✅ 支持                               |
 
+为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式**。
+
 语音参数 `audioParams` 仅用于本地语音文件转文字。对于本地 `PCM` 文件，由于文件本身不包含完整音频头信息，必须传入 `audioParams`，以便 SDK 正确解析原始音频数据；其他格式通常可传 `null`。具体配置方式请参考 [将本地语音文件转换为文本](#将本地语音文件转换为文本)。
 
 ## 开通服务
@@ -80,6 +82,8 @@
 
 转换成功后，可通过 `EMVoiceMessageBody#getText()` 获取对应文本。
 
+为获得更优性能，**推荐优先使用标准的 `MP3` 格式语音消息**。
+
 ```java
 EMMessage voiceMessage = ...;
 
@@ -118,7 +122,9 @@ EMClient.getInstance().chatManager().voiceMessageToText(voiceMessage, new EMValu
 
 调用 `EMChatManager#voiceFileToText` 可将本地语音文件转换为文本，并通过回调返回识别结果。
 
-调用前，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
+调用前，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式音频文件**。
+
+下面示例以本地 `PCM` 文件为例，展示如何配置 `audioParams` 并发起转换：
 
 ```java
 String filePath = "/sdcard/voice/test.pcm";

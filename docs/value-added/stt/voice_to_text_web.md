@@ -24,6 +24,8 @@
 | M4A  | ✅ 支持                              | ✅ 支持                               |
 | AAC  | ✅ 支持                              | ✅ 支持                               |
 
+为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式**。
+
 语音参数 `audioParams` 仅用于本地语音文件转文字。对于本地 `PCM` 文件，由于文件本身不包含完整音频头信息，必须传入 `audioParams`，以便 SDK 正确解析原始音频数据；其他格式通常可传 `null`。具体配置方式请参考 [将本地语音文件转换为文本](#将本地语音文件转换为文本)。
 
 
@@ -82,6 +84,8 @@
 
 转换成功后，可通过返回值中的 `res.data.text` 获取识别结果。
 
+为获得更优性能，**推荐优先使用标准的 `MP3` 格式语音消息**。
+
 ```typescript
 const audioMessageBody = {
   type: "audio",
@@ -120,6 +124,10 @@ try {
 ## 将本地语音文件转换为文本
 
 调用 `connection#voiceFileToText` 将本地语音文件转换为文本。
+
+为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式音频文件**。
+
+下面示例以本地 `PCM` 文件为例，展示如何配置 `audioParams` 并发起转换：
 
 ```typescript
 const fileInput = document.querySelector<HTMLInputElement>("#voice-file");

@@ -23,6 +23,8 @@
 | M4A  | ✅ 支持                              | ✅ 支持                               |
 | AAC  | ✅ 支持                              | ✅ 支持                               |
 
+为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式**。
+
 语音参数 `audioParams` 仅用于本地语音文件转文字。对于本地 `PCM` 文件，由于文件本身不包含完整音频头信息，必须传入 `audioParams`；其他格式通常可传 `null`。具体配置方式请参考 [将本地语音文件转换为文本](#将本地语音文件转换为文本)。
 
 ## 开通服务
@@ -78,6 +80,8 @@
 
 调用 `ChatManager#voiceMessageToText` 将单条发送成功的语音消息转换为文字。
 
+为获得更优性能，**推荐优先使用标准的 `MP3` 格式语音消息**。
+
 ```ts
   try {
     const text = await ChatClient.getInstance().chatManager()!.voiceMessageToText(voiceMessage);
@@ -85,7 +89,6 @@
   } catch (e) {
     console.error(`voiceMessageToText failed: ${JSON.stringify(e)}`);
   }
-}
 ```
 
 #### 关键参数
@@ -106,7 +109,7 @@
 
 调用 `ChatManager#voiceFileToText` 可将本地语音文件转换为文字。
 
-调用前，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。
+调用前，必须确保应用具备访问目标文件的权限，且文件路径可被当前进程读取。为获得更优性能，**推荐优先使用标准的 `PCM` 和 `MP3` 格式音频文件**。
 
 下面示例以本地 `PCM` 文件为例，展示如何配置 `audioParams` 并发起转换：
 
