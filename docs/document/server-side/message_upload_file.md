@@ -102,7 +102,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 | 参数                    | 类型   | 描述         |
 | :---------------------- | :----- | :------------------ |
 | `entities`       | JSON Array | 响应数据。                          |
-|  - `uuid`         | String | 文件 ID，即时通讯服务分配给该文件的唯一标识符。该参数在发送消息时需用到。  |
+|  - `uuid`         | String | 文件 ID，即时通讯服务分配给该文件的唯一标识符。该参数在以下场景中会用到：<br/> - [发送附件消息](message_single.html#附件消息发送流程)<br/> - [下载消息附件](message_download_file.html)<br/> -  [下载消息的缩略图](message_download_thumbnail.html)。  |
 |  - `type` | String | 文件类型，为固定值 `chatfile`。   |
 |  - `share-secret` | String | 文件访问密钥。你需要自行保存 `share-secret`，以便 [下载文件](message_download_file.html)时使用。 |
 
