@@ -6,6 +6,7 @@
 
 - 支持下载图片、语音、视频或其他类型的文件。
 - 支持文件访问限制：如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
+- [上传文件接口](message_upload_file.html#响应-body-字段) 响应中返回的文件 ID（`file_uuid`）、文件地址（`uri`）和文件访问密钥（`share-secret`）可用于后续构造附件消息及下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程) 和 [下载附件](message_download.file.html)。若文件上传时开启了受限访问，即 `restrict-access=true`，则后续无论下载原文件还是缩略图，都需要传入 `share-secret`。
 
 ## 调用频率上限
 
@@ -19,7 +20,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 
 | 参数        | 类型   | 是否必需 | 描述                      |
 | :---------- | :----- | :------- | :------------------------ |
-| `file_uuid` | String | 是       | 服务器为文件生成的 UUID。 |
+| `file_uuid` | String | 是       | 服务器为文件生成的 UUID。你可以从 [文件上传](message_upload_file.html#响应-body-字段) 接口的响应中获取文件 UUID。 |
 
 关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 
@@ -46,7 +47,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f2
 
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :--------------- |
-| `share-secret`  | String | 否       | 文件访问密钥。若上传文件时限制了访问，下载该文件时则需要该访问密钥。成功上传文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取该密钥。 |
+| `share-secret`  | String | 否       | 文件访问密钥。若上传文件时限制了访问，下载该文件时则需要该访问密钥。成功上传文件后，从 [文件上传](message_upload_file.html#响应-body-字段) 的响应 body 中获取该密钥。 |
 
 ## 响应示例
 

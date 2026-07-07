@@ -4,7 +4,9 @@
 
 ## 功能说明
 
-收到图片或视频消息，你可以先下载图片或视频的缩略图，需要时再下载图片或视频原文件。下载缩略图与下载原文件的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原文件。
+- 收到图片或视频消息，你可以先下载图片或视频的缩略图，需要时再下载图片或视频原文件。
+- 下载缩略图与下载原文件的唯一区别是前者在请求 header 中多了 `thumbnail: true`。当服务器收到包含该字段的请求 header 时，返回缩略图，否则返回原文件。
+- [上传文件接口](message_upload_file.html#响应-body-字段) 响应中返回的文件 ID（`file_uuid`）和文件访问密钥（`share-secret`）可用于下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程)。若文件上传时开启了受限访问，即 `restrict-access=true`，则后续无论下载原文件还是缩略图，都需要传入 `share-secret`。
 
 ## 调用频率上限
 
@@ -18,7 +20,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 
 | 参数        | 类型   | 是否必需 | 描述                            |
 | :---------- | :----- | :------- | :------------------------------ |
-| `file_uuid` | String | 是       | 服务器为缩略图文件生成的 UUID。 |
+| `file_uuid` | String | 是       | 服务器为缩略图文件生成的 UUID。你可以从 [文件上传](message_upload_file.html#响应-body-字段) 接口的响应中获取文件 UUID。 |
 
 关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 

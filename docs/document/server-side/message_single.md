@@ -1,66 +1,46 @@
- # 发送单聊消息
+# 发送单聊消息
 
- ## 功能说明
+## 功能说明
 
-<Toc />
+环信即时通讯 IM 支持在服务端向单聊会话发送文本、图片、语音、视频、文件、位置、透传和自定义消息。
 
-环信即时通讯 IM 支持在服务端实现单聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+### 基本发送方式
 
-### 发送方式
+单聊场景下，各类型消息共用同一 RESTful API，不同消息类型的主要区别在于请求体 `body` 字段的结构。
 
-单聊场景下，发送各类型的消息调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异。
+- 文本、位置、透传和自定义消息：直接构造消息体并调用发送接口。
+- 图片、语音、视频和文件消息：发送附件消息时，不能直接使用业务侧原始附件地址，需先调用 [文件上传](https://doc.easemob.com/document/server-side/message_upload_file.html) 接口上传附件，再使用上传后返回的附件地址及相关字段构造消息体。
+- 与 [导入单聊消息](message_import_single.html) 不同，发送附件消息时，**不能直接使用业务侧原始文件地址**。
 
-<table>
-<tbody>
-<tr>
-<td width="161">
-<p><strong>消息类型</strong></p>
-</td>
-<td width="189">
-<p><strong>发送方式</strong></p>
-</td>
-<td width="279">
-<p><strong>备注</strong></p>
-</td>
-</tr>
-<tr>
-<td width="161">
-<p>文本/透传消息</p>
-</td>
-<td width="189">
-<p>调用发送消息方法，在请求 body 中传入消息内容。</p>
-</td>
-<td rowspan="2" width="279">
-<p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/document/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/document/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
-</td>
-</tr>
-<tr>
-<td width="161">
-<p>图片/语音/视频/文件消息</p>
-</td>
-<td width="189">
-<p>1. 调用<a href="https://doc.easemob.com/document/server-side/message_upload_file.html">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
-<p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
+### 附件消息发送流程
 
-### 特别说明
+图片、语音、视频和文件消息等附件消息的发送流程如下：
+
+![img](/images/server-side/message_send_single_attachment.png)
+
+各步骤的说明如下：
+
+1. 先调用 [上传文件](message_upload_file.html) 接口，将图片、语音、视频或文件上传到环信文件服务。
+2. 从上传结果中获取发送附件消息所需的信息，例如文件地址、`file_uuid` 和 `share-secret`。
+3. 调用 [发送单聊消息](message_single.html) 接口，并在消息体中填入上传后的附件地址和相关字段。
+4. 若上传时将 `restrict-access` 设置为 `true`，则后续下载原件或缩略图时都需要携带上传返回的 `share-secret`；若未开启受限访问，则可直接下载。
+5. 若后续需要下载附件原件，可调用 [下载文件](message_download_file.html) 接口，通过 `GET /chatfiles/{file_uuid}` 获取原文件。
+6. 若后续需要下载缩略图，可调用 [下载文件缩略图](message_download_thumbnail.html) 接口，通过同一下载地址并传入 `thumbnail: true` 获取缩略图。
+
+### 限制与校验
 
 - 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。消息的其他限制，详见 [消息限制说明](limitation.html#消息大小)。
-- 该接口默认不会检查发送方和接收方的好友关系。若你在环信控制台开启了 [好友关系检查](/product/console/basic_user.html#好友关系检查)，该接口会检查发送方和接收方的好友关系。
-- 该接口不会检查接收方是否在黑名单上，同时不会检查发送方是否被禁言。
-- 该接口不校验传入的发送方和接收方的用户 ID。如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。
-- 你可以设置消息发送成功后，是否将消息同步到发送方的所有在线设备（`sync_device` 参数）。
-- 你可以设置哪些用户拉漫游消息时拉不到该消息（`roam_ignore_users` 参数）。
-- 你可以只将消息发送给在线用户，离线用户则无法收到消息（`routetype`）。
-- 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在 [环信控制台开通](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
-- 调用该接口会触发发送后回调事件，请参见 [回调事件文档](callback_message_send.html#发送单聊消息)。
-- [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/value-added/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-- 发送消息时，你可以在消息中携带回调环境字段（`env`），环信服务器收到消息后，根据该字段匹配控制台中配置的 [回调路由规则](/product/console/basic_webhook.html#配置消息回调规则)，并将当前消息回调至对应的 [发送前回调](/document/server-side/callback_presending.html) 或 [发送后回调](/document/server-side/callback_postsending.html) 地址。关于该功能的使用，详见本文中的 [发消息时设置回调路由](#发消息时设置回调路由) 一节。
+- 该接口不校验传入的发送方和接收方用户 ID。即使传入的用户 ID 不存在，服务器也不会报错，仍会照常发送消息。
+- 该接口默认不会检查发送方和接收方的好友关系。若你在环信控制台开启了 [好友关系检查](/product/console/basic_user.html#好友关系检查)，该接口会检查双方的好友关系。
+- 该接口不会检查接收方是否在黑名单中，也不会检查发送方是否被禁言。
+
+### 发送行为与相关说明
+
+- 发送的消息均支持同步给发送方。
+- 通过 RESTful 接口发送的消息默认不写入会话列表。若需要将此类消息写入会话列表，需在 [环信控制台开通](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
+- 调用该接口会触发发送后回调事件，详见 [回调事件文档](callback_message_send.html#发送单聊消息)。
+- 你可以通过消息通用可选参数设置是否将消息同步到发送方的所有在线设备、指定哪些用户在拉取漫游消息时无法获取该消息，以及仅向在线用户投递消息等。详见 [消息通用可选参数](#消息通用可选参数)。
+- [内容审核服务会关注消息 `body` 中指定字段的内容，不同类型的消息审核的字段不同](/value-added/moderation/moderation_mechanism.html)。若在这些字段中传入过多业务信息，可能影响审核效果。因此，建议避免在审核字段中承载业务信息，优先将业务信息放在扩展字段 `ext` 中。
 
 ## 调用频率上限
 
@@ -155,14 +135,11 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "roam_ignore_users": [],
   "body": {
     "msg": "testmessages"
-    },
-  "ext": {
-      "em_ignore_notification": true
     }
   }'
 ```
 
-仅发送给在线用户，消息同步给发送方：
+仅发送给在线用户，消息同步给发送方（设置 `sync_device` 参数）：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -175,14 +152,9 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "from": "user1",
   "to": ["user2"],
   "type": "txt",
-  "roam_ignore_users": [],
   "body": {
     "msg": "testmessages"
     },
-  "ext": {
-      "em_ignore_notification": true
-    },
-  "routetype":"ROUTE_ONLINE", 
   "sync_device":true
 }'
 ```
@@ -201,17 +173,14 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `to`            | List   | 是       | 消息接收方的用户 ID 数组。每次最多可向 600 个用户发送消息。<Container type="tip" title="提示">服务器不校验传入的用户 ID 是否存在，因此，如果你传入的用户 ID 不存在，服务器并不会提示，仍照常发送消息。</Container> |
 | `type`          | String | 是       | 消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `body`          | JSON   | 是       | 消息内容。body 包含的字段见下表说明。     |
-| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的所有在线设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
-| `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
-| `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
-| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
-| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
 
 请求体中的 `body` 字段说明详见下表。
 
 | 参数  | 类型   | 是否必需 | 描述       |
 | :---- | :----- | :------- | :--------- |
 | `msg` | String | 是       | 消息内容。 |
+
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -269,6 +238,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 ## 发送图片消息
 
+发送图片消息前，请先调用 [文件上传](message_upload_file.html) 接口上传图片文件。`body.url` 应为上传后返回的环信文件地址，而不是业务侧原始图片地址。
+
 #### 请求 URL
 
 ```http
@@ -319,6 +290,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
 | `url`      | String | 是       | 图片 URL。格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为图片文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。  |
 
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+
 #### 响应示例
 
 ```json
@@ -361,6 +334,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 发送语音消息
+
+发送语音消息前，请先调用 [文件上传](message_upload_file.html) 接口上传语音文件。`body.url` 应为上传后返回的环信文件地址，而不是业务侧原始语音地址。
 
 #### 请求 URL
 
@@ -409,6 +384,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `Length`   | Int    | 否       | 语音时长，单位为秒。         |
 | `url`      | String | 是       | 语音文件 URL。格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。  |
 
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+
 #### 响应示例
 
 ```json
@@ -451,6 +428,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 发送视频消息
+
+发送视频消息前，请先调用 [文件上传](message_upload_file.html) 接口上传视频文件。`body.url` 应为上传后返回的环信文件地址，而不是业务侧原始视频地址。
 
 #### 请求 URL
 
@@ -505,6 +484,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `thumb_secret` | String | 否       | 视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。    |
 | `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。   |
 
+除上述必填和常规字段外，你还可以传入控制消息同步、是否发送已读回执、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+
 #### 响应示例
 
 ```json
@@ -547,6 +528,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ## 发送文件消息
+
+发送文件消息前，请先调用 [文件上传](message_upload_file.html) 接口上传文件。`body.url` 应为上传后返回的环信文件地址，而不是业务侧原始文件地址。
 
 #### 请求 URL
 
@@ -592,6 +575,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `filename` | String | 否       | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
 | `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
 | `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -680,6 +665,8 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  \
 | `lng`  | String | 是       | 位置的经度，单位为度。 |
 | `addr` | String | 是       | 位置的文字描述。       |
 
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+
 #### 响应示例
 
 ```json
@@ -763,6 +750,8 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | 参数     | 类型   | 是否必需 | 描述       |
 | :------- | :----- | :------- | :--------- |
 | `action` | String | 是       | 命令内容。 |
+
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -852,6 +841,8 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | `customEvent` | String | 否       | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。  |
 | `customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。`customExts` 是可选的，不需要可以不传。 |
 
+除上述必填和常规字段外，你还可以传入控制消息同步、漫游可见性、投递范围以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+
 #### 响应示例
 
 ```json
@@ -911,6 +902,53 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users" \
 | 405       |  |   | 请求方法错误。| 该 REST API 的请求方法为 POST，请勿使用 GET、PUT 或 DELETE 等方法。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+## 消息通用可选参数
+
+消息通用可选参数主要用于控制消息同步、漫游可见性、投递范围以及扩展信息。调用方式与各类消息一致，只需在通用请求体中增加对应字段即可。
+
+以下参数适用于各类消息，可按需与文本、图片、语音、视频、文件、位置、透传和自定义消息组合使用。
+
+#### 请求示例
+
+以下示例以文本消息为例，展示如何在发送消息时组合使用这些通用可选参数：
+
+```bash
+# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+
+curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-d '{
+  "from": "user1",
+  "to": ["user2"],
+  "type": "txt",
+  "body": {
+    "msg": "test message"
+  },
+  "sync_device": true,
+  "roam_ignore_users": ["user3"],
+  "routetype": "ROUTE_ONLINE",
+  "ext": {
+    "em_ignore_notification": true
+  }
+}'
+```
+
+#### 请求参数
+
+| 参数            | 类型   | 是否必需 | 描述            |
+| :-------------- | :----- | :------- | :----------------------------------------------------- |
+| `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的所有在线设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
+| `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
+| `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
+| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
+| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
+
+#### 响应说明
+
+该节中的请求方式与各类型消息一致，响应示例和响应字段说明也相同。详见 [发送文本消息](#发送文本消息) 中的“响应示例”和“响应字段”。
 
 ## 可选增强功能
 
