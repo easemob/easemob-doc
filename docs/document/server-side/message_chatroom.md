@@ -168,7 +168,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | :---- | :----- | :------- | :--------- |
 | `msg` | String | 是       | 消息内容。 |
 
-此外，此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -281,7 +281,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
 | `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。  |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -375,7 +375,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | `Length`   | Int    | 否      | 语音时长，单位为秒。         |
 | `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。  |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -472,7 +472,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | `thumb_secret` | String | 否       | 视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。    |
 | `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。   |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -563,7 +563,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 | `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
 | `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -653,7 +653,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  \
 | `lng`  | String | 是       | 位置的经度，单位为度。 |
 | `addr` | String | 是       | 位置的文字描述。       |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -739,7 +739,9 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 | :------- | :----- | :------- | :--------- |
 | `action` | String | 是       | 命令内容。 |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+#### 消息通用可选参数
+
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -828,7 +830,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 | `customEvent` | String | 否       | 用户自定义的事件类型。该参数的值必须满足正则表达式 `[a-zA-Z0-9-_/\.]{1,32}`，长度为 1-32 个字符。  |
 | `customExts`  | JSON   | 否       | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。`customExts` 是可选的，不需要可以不传。 |
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
@@ -936,7 +938,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms/users' \
 
 对于其他类型的消息，`body` 字段的说明详见发送各类型的普通群聊消息的请求体中的 `body` 字段说明。
 
-此外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
+除上述必填和常规字段外，你还可以传入漫游可见性、消息优先级以及扩展信息等可选参数，详见 [消息通用可选参数](#消息通用可选参数)。
 
 #### 响应示例
 
