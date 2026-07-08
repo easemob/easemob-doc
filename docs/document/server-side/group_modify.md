@@ -54,7 +54,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7'   \
 | `groupname`           | String | 否       | 群组名称，最大长度为 128 字符。 |
 | `avatar`              | String | 否       | 群组头像的 URL，最大长度为 1024 字符。|
 | `description`         | String | 否       | 群组描述，最大长度为 512 字符。 |
-| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。对于普通群，该参数的默认值为 `200`，大型群为 `1000`。不同套餐支持的人数上限不同，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 |
+| `maxusers`            | Int    | 否       | 群组最大成员数（包括群主）。若设置的值超过 `3000`，默认不再支持离线推送，若希望使用该功能，请联系商务开通。 |
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
