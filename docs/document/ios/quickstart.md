@@ -51,10 +51,10 @@ SDK 支持 **CocoaPods 导入**和**手动导入**两种方式。
 
 国内开发者如果遇到网络问题导致 pod 命令无法执行，可使用国内镜像源，例如 [Gitee 镜像源](https://gitee.com/mirrors/CocoaPods-Specs) 或 [TUNA 镜像源](https://mirrors.tuna.tsinghua.edu.cn/help/CocoaPods/)。
 
-### 方法二：手动导入 SDK v3.8.9.1 及以上版本
+### 方法二：手动导入 SDK
 
-1. 下载最新版的 [HyphenateChat iOS SDK](https://www.easemob.com/download/im#IOS) 并解压。
-2. 复制 SDK 包中的 `HyphenateChat.framework` 至项目路径下。
+1. 打开 [SDK 下载页面](https://www.easemob.com/download/im#IOS)，获取最新版的环信即时通讯 IM SDK，然后解压。
+2. 将 SDK 包内的 `HyphenateChat.xcframework`和 `aosl.xcframework` 拖入到你的工程中。
 3. 打开 Xcode，进入 **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**菜单。
 4. 点击 **+ > Add Other… > Add Files** 添加对应动态库，并确保添加的动态库 **Embed** 属性设置为 **Embed & Sign**。
 
