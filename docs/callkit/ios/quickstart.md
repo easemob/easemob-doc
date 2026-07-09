@@ -41,9 +41,6 @@ Privacy - Camera Usage Description //相机权限
 1. 在 `podfile` 中添加如下依赖：
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '15.0'
-
 target 'EaseCallUIKitQuickStart' do
   use_frameworks!
 
