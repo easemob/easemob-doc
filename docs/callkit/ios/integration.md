@@ -36,8 +36,6 @@ CocoaPods 是 iOS 和 macOS 项目的依赖管理工具。它允许你轻松地�
 1. 使用 `pod init` 命令创建 `podfile` 文件,在 `podfile` 中添加如下依赖：
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '14.0'
 
 target 'YourTarget' do
   use_frameworks!
@@ -48,8 +46,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
     end
   end
 end
