@@ -172,9 +172,8 @@ if (!aError) {
 
 自 4.2.0 版本开始，你可以调用 `setContactRemark` 方法设置好友备注。
 
-好友备注的长度不能超过 100 个字符。
-
 ```objectivec
+// 好友备注长度不能超过 100 个字符。传入 nil 清空好友备注。
 [EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
             
     }];

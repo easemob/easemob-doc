@@ -112,9 +112,8 @@ EMClient.getInstance().contactManager().deleteContact(username);
 
 自 4.2.1 版本开始，你可以调用 `asyncSetContactRemark` 设置单个好友的备注。
 
-好友备注长度不能超过 100 个字符。
-
 ```java
+// 好友备注长度不能超过 100 个字符。传入空字符串清空好友备注。
 EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new EMCallBack() {
     @Override
     public void onSuccess() {
