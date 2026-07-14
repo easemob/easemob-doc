@@ -30,6 +30,25 @@ export default defineClientConfig({
     app.use(InstantSearch);
     app.component("DemoCard", DemoCard);
     app.component("Step", Step);
+
+    if (typeof window !== "undefined") {
+      router.afterEach((to, from) => {
+        // 关键点：只有在【路径切换】且【带有 Hash】时才触发
+        // 如果只是同页面滚动导致的 Hash 变化，直接 ignore
+        const isCrossPageNav = from.path !== to.path;
+
+        if (isCrossPageNav && to.hash) {
+          console.log('to.hash', to.hash);
+          setTimeout(() => {
+            const targetElement = document.querySelector(decodeURIComponent(to.hash));
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 350); // 略大于页面动画过度时间
+        }
+      });
+    }
+    
     
     if (typeof window !== "undefined") {
       embedChatbot();
