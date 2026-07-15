@@ -60,6 +60,13 @@ extension YourViewController: EMGroupManagerDelegate {
 
 调用 `EMGroupManager#updateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。
 
+:::tip
+权限说明：
+- 群主：可以设置所有成员的名片。
+- 群管理员：可以设置普通成员的名片（不能设置其他管理员或群主）。
+- 普通成员：只能设置自己的名片。
+:::
+
 ```swift
 EMClient.shared().groupManager?.updateGroupNamecard("groupId", namecard: "new_namecard") { error in
     if let error = error {

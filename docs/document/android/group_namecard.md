@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-群成员名片管理功能主要由由 `EMGroupManager` 和 `EMGroupChangeListener` 提供。SDK 通过“主动设置或拉取、本地内存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
+群成员名片管理功能主要由 `EMGroupManager` 和 `EMGroupChangeListener` 提供。SDK 通过“主动设置或拉取、本地内存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
 
 1. 当前登录用户可通过 `EMGroupManager#asyncUpdateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
 2. 当群成员名片发生变更并同步到本地内存后，SDK 会通过 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件通知业务层。
@@ -27,7 +27,6 @@
 开始接入前，请确保满足以下条件：
 
 - 已将 SDK 升级至 v4.20.0 或以上版本。
-- 已完成 SDK 初始化。详见[快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
 ## 监听群成员名片更新
@@ -56,6 +55,13 @@ EMClient.getInstance().groupManager().addGroupChangeListener(new EMGroupChangeLi
 ## 设置群成员名片
 
 调用 `EMGroupManager#asyncUpdateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件。
+
+:::tip
+权限说明：
+- 群主：可以设置所有成员的名片。
+- 群管理员：可以设置普通成员的名片（不能设置其他管理员或群主）。
+- 普通成员：只能设置自己的名片。
+:::
 
 ```java
 EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_namecard", new EMCallBack() {
