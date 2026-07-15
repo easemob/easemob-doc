@@ -27,7 +27,6 @@
 开始接入前，请确保满足以下条件：
 
 - 已将 SDK 升级至 v4.20.0 或以上版本。
-- 若需要通过消息自动同步群成员名片，还需开启 `EMOptions#setEnableUserInfo(true)`。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
 ## 监听群成员名片更新
