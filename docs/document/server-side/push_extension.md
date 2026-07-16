@@ -66,6 +66,7 @@
 | 字段                | 类型             | 描述   |
 | -------------- | ---------------- | ------ |
 | `em_push_category`           | String           | APNs 推送配置，推送通知类别。                                       |
+| `em_alert_subTitle`           | String           | APNs 推送配置，推送通知的副标题。                                       |
 | `em_push_mutable_content`    | Boolean          | APNs 推送配置，`true` 为富文本推送通知，`false` 则为普通通知。             |
 | `em_push_sound`              | String           | APNs 推送配置，自定义铃声，`Library/Sounds/` 目录下的 `aiff`、`wav` 或 `caf` 文件，例如 `appsound.caf`。 |
 | `em_push_badge`              | Integer          | APNs 推送配置，自定义角标数。      |
