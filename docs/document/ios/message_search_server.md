@@ -12,6 +12,10 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 - 搜索范围仅限于当前用户参与且有权访问的会话。
 - 搜索结果按照相关性排序，支持分页查询和关键词高亮。
 
+:::tip
+默认不支持搜索扩展字段 `ext`；如需支持，请联系环信商务。
+:::
+
 ## 功能开通
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
