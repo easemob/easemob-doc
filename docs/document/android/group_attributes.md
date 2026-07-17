@@ -185,13 +185,39 @@ EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum,
 
 ### 更新群扩展字段
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupExtension` 方法更新群组的扩展字段，群组扩展字段设置 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
+仅群主和群管理员可以更新群组扩展字段。群扩展字段可用于存储 JSON 格式的自定义群组信息，长度不能超过 8 KB。
 
-示例代码如下：
+你可以调用同步方法 `EMGroupManager#updateGroupExtension` 更新群扩展字段。该方法会阻塞当前线程，请勿在主线程中调用。
 
 ```java
-// 同步方法，会阻塞当前线程。
-EMClient.getInstance().groupManager().updateGroupExtension(groupId, extension);
+try {
+    EMGroup group = EMClient.getInstance()
+        .groupManager()
+        .updateGroupExtension(groupId, extension);
+    // 群扩展字段更新成功。
+} catch (HyphenateException e) {
+    // 群扩展字段更新失败。
+}
+```
+
+自 4.24.0 版本开始，SDK 新增异步方法 `EMGroupManager#asyncUpdateGroupExtension`。更新成功时，SDK 通过 `onSuccess` 回调返回更新后的群组对象；更新失败时，通过 `onError` 回调返回错误码和错误信息。
+
+```java
+EMClient.getInstance().groupManager().asyncUpdateGroupExtension(
+    groupId,
+    extension,
+    new EMValueCallBack<EMGroup>() {
+        @Override
+        public void onSuccess(EMGroup group) {
+            // 群扩展字段更新成功。
+        }
+
+        @Override
+        public void onError(int errorCode, String errorMessage) {
+            // 群扩展字段更新失败。
+        }
+    }
+);
 ```
 
 ### 监听群组事件

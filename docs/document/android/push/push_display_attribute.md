@@ -37,12 +37,44 @@ EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 
 ## 获取推送通知的显示属性
 
-你可以调用 `getPushConfigsFromServer` 获取推送通知中的显示属性，如以下代码示例所示：
+你可以调用同步方法 `EMPushManager#getPushConfigsFromServer` 从服务器获取推送通知的显示属性。该方法会阻塞当前线程，请勿在主线程中调用。
 
 ```java
-EMPushConfigs pushConfigs = EMClient.getInstance().pushManager().getPushConfigsFromServer();
-// 获取推送显示昵称。
-String nickname = pushConfigs.getDisplayNickname();
-// 获取推送通知的显示样式。
-EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
+try {
+    EMPushConfigs pushConfigs = EMClient.getInstance()
+        .pushManager()
+        .getPushConfigsFromServer();
+
+    // 获取推送显示昵称。
+    String nickname = pushConfigs.getDisplayNickname();
+
+    // 获取推送通知的显示样式。
+    EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
+} catch (HyphenateException e) {
+    // 获取推送配置失败。
+}
 ```
+
+自 4.24.0 版本开始，SDK 新增异步方法 `EMPushManager#asyncGetPushConfigsFromServer`。该方法不会阻塞当前线程。获取成功时，SDK 通过 `onSuccess` 回调返回推送配置；获取失败时，通过 `onError` 回调返回错误码和错误信息。
+
+```java
+EMClient.getInstance().pushManager().asyncGetPushConfigsFromServer(
+    new EMValueCallBack<EMPushConfigs>() {
+        @Override
+        public void onSuccess(EMPushConfigs pushConfigs) {
+            // 获取推送显示昵称。
+            String nickname = pushConfigs.getDisplayNickname();
+
+            // 获取推送通知的显示样式。
+            EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
+        }
+
+        @Override
+        public void onError(int errorCode, String errorMessage) {
+            // 获取推送配置失败。
+        }
+    }
+);
+```
+
+同步方法会等待服务器返回结果并可能阻塞当前线程；异步方法会立即返回，并通过回调通知调用结果。建议在主线程中使用异步方法。

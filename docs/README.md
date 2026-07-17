@@ -421,6 +421,9 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_search_local.html
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/message_search.html  
           - text: 表情回复
             desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
             sdks:
