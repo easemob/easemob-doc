@@ -52,7 +52,7 @@
 
 #### 新增特性
 
-- 新增 `Conversation#LoadMessagesWithMsgTypeList` 方法，[根据单个或多个消息类型，搜索本地数据库中当前会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+- 新增 `Conversation#LoadMessagesWithMsgTypeList` 方法，[根据单个或多个消息类型，搜索本地数据库中当前会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `RoomManager#JoinRoom`方法，支持[设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室](room_manage.html#加入聊天室)。
 - 新增 `Conversion#MessagesCount` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
 - 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态)：`IConnectionDelegate#OnOfflineMessageSyncStart` 和 `IConnectionDelegate#OnOfflineMessageSyncFinish`。
@@ -123,7 +123,7 @@
 #### 新增特性
 
 - 新增 `ChatManager#DeleteAllMessagesAndConversations` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+- 新增[根据搜索范围搜索消息](message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#SearchMsgFromDB(string, long, in, string, MessageSearchDirection, MessageSearchScope, ValueCallBack<List<Message>>)`：根据搜索范围搜索所有会话中的消息。
   - `Conversation#LoadMessagesWithScope(string, MessageSearchScope, long, int, string, MessageSearchDirection, ValueCallBack<List<Message>>)`：根据搜索范围搜索当前会话中的消息。

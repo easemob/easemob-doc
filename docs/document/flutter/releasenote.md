@@ -215,8 +215,8 @@
   - 新增 `LoginExtensionInfo` 类接收用户设备扩展信息。
   - 新增 `EMOptions.loginExtension` 设置登录时携带的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  - `EMChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
-  - `EMConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+  - `EMChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
 
 #### 优化
 
@@ -257,7 +257,7 @@
 #### 新增特性
 
 - 新增 `EMChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+- 新增[根据搜索范围搜索消息](message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `EMChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `EMConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。

@@ -402,8 +402,8 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
   - `EMOptions#loginExtensionInfo`：设置登录时携带的扩展信息。
   - `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo.EMLoginExtensionInfo`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  - `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
-  - `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` [根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+  - `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` [根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
 - [IM SDK] 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
 
 #### 优化
@@ -488,7 +488,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 新增特性
 
 - [IM SDK] 新增 [EMChatManager#deleteAllMessagesAndConversations:completion:](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 - [IM SDK] 新增 [EMOptions#useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 - [IM SDK] 新增 [EMOptions#includeSendMessageInMessageListener](message_send.html#发送文本消息) 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
 - [IM SDK] 新增 [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import_single.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
