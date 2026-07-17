@@ -113,7 +113,7 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 
 | 设置方法 | 参数类型 | 是否必需 | 描述 |
 | --- | --- | --- | --- |
-| `setKeywordList` | List<String> | 是 | 设置关键词列表。每个关键词长度为 1-512 个字符，所有关键词总长度不超过 1024 个字符，最多设置 5 个关键词。 |
+| `setKeywordList` | List<String> | 是 | 设置关键词列表。每个关键词长度为 1-120 个字符，所有关键词总长度不超过 120 个字符，最多设置 5 个关键词。 |
 | `setKeywordMatchType` | EMKeywordListMatchType | 否 | 设置多关键词匹配关系。`OR` 表示匹配任一关键词，`AND` 表示同时匹配全部关键词。默认值为 `OR`；传入 `null` 时也使用 `OR`。 |
 | `setConversationId` | String | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为空表示搜索所有会话。Android SDK 不需要额外传入会话类型。 |
 | `setMsgTypes` | List<EMMessage.Type> | 否 | 设置消息类型过滤条件。可使用 `TXT`、`IMAGE`、`VIDEO`、`LOCATION`、`FILE`、`CUSTOM` 和 `COMBINE`。不支持 `VOICE` 和 `CMD`。 |
