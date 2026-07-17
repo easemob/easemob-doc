@@ -48,7 +48,14 @@ const documentSidebar = [
       { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
-      { text: '搜索消息', link: 'message_search_local.html', except: ['web']},
+      {
+        text: '搜索消息',
+        collapsible: true,
+        children: [
+          { text: '搜索本地消息', link: 'message_search_local.html', except: ['web']},
+          { text: '搜索服务端消息', link: 'message_search_server.html', only: ['android', 'web', 'ios'] },
+        ],
+      },
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
       { text: '消息表情回复', link: 'reaction.html' },
@@ -219,6 +226,7 @@ const documentSidebar = [
           { text: '接收流式消息', link: 'message_stream_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
+          { text: '搜索消息', link: 'message_search_server.html' },
           { text: '消息回执', link: 'message_receipt.html' }, 
           { text: '消息表情回复', link: 'reaction.html' },
           { text: '编辑消息', link: 'message_modify.html' },
@@ -385,6 +393,7 @@ const documentSidebar = [
         { text: '批量撤回消息', link: 'message_recall_batch.html' },
         ],
       },
+      { text: '搜索消息', link: 'message_search.html' },
       { text: '单向删除会话', link: 'conversation_delete.html' },
       {
         text: '单向删除漫游消息',
