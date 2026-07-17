@@ -22,7 +22,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 开始前，请确保满足以下条件：
 
-- 已完成 iOS SDK v4.24.0 或以上版本的 [初始化](initilization.html) 并 [登录](login.html) 成功。
+- 已完成 iOS SDK v4.24.0 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
