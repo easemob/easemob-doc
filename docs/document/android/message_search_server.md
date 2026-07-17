@@ -16,6 +16,8 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
 
+目前仅国内二区集群支持该功能。
+
 ## 前提条件
 
 开始前，请确保满足以下条件：
@@ -191,6 +193,104 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
     new EMValueCallBack<EMPageResult<EMSearchServerMessageResult>>() {
         @Override
         public void onSuccess(EMPageResult<EMSearchServerMessageResult> result) {
+            List<EMSearchServerMessageResult> messages = result.getData();
+        }
+
+        @Override
+        public void onError(int errorCode, String errorMessage) {
+        }
+    }
+);
+```
+
+#### 按消息类型搜索
+
+若按消息类型搜索，需要调用 `setMsgTypes` 设置消息类型：
+
+```java
+EMMessageSearchOption option = new EMMessageSearchOption();
+option.setKeywordList(Arrays.asList("图片"));
+option.setMsgTypes(Arrays.asList(
+    EMMessage.Type.TXT,
+    EMMessage.Type.IMAGE,
+    EMMessage.Type.FILE
+));
+
+EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
+    option,
+    20,
+    1,
+    new EMValueCallBack<EMPageResult<EMSearchServerMessageResult>>() {
+        @Override
+        public void onSuccess(
+            EMPageResult<EMSearchServerMessageResult> result) {
+            List<EMSearchServerMessageResult> messages = result.getData();
+        }
+
+        @Override
+        public void onError(int errorCode, String errorMessage) {
+        }
+    }
+);
+```
+
+#### 搜索消息扩展字段
+
+若仅搜索消息扩展字段，需要调用 `setSearchScope`，将搜索范围设置为 `EMMessageSearchScope.EXT`：
+
+```java
+EMMessageSearchOption option = new EMMessageSearchOption();
+option.setKeywordList(Arrays.asList("order-10001"));
+
+// EXT 表示仅搜索消息扩展字段。
+option.setSearchScope(EMConversation.EMMessageSearchScope.EXT);
+
+EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
+    option,
+    20,
+    1,
+    new EMValueCallBack<EMPageResult<EMSearchServerMessageResult>>() {
+        @Override
+        public void onSuccess(
+            EMPageResult<EMSearchServerMessageResult> result) {
+            List<EMSearchServerMessageResult> messages = result.getData();
+        }
+
+        @Override
+        public void onError(int errorCode, String errorMessage) {
+        }
+    }
+);
+```
+
+搜索范围还支持以下取值：
+
+- `CONTENT`：仅搜索消息内容，默认值。
+- `EXT`：仅搜索消息扩展字段。
+- `ALL`：同时搜索消息内容和消息扩展字段。
+
+#### 按时间范围搜索
+
+若按时间范围搜索，需要分别调用 `setStartTime` 和 `setEndTime` 设置开始时间和结束时间。
+
+开始时间和结束时间使用 Unix 时间戳，单位为毫秒。两个时间必须同时设置，且结束时间不能早于开始时间。
+
+```java
+EMMessageSearchOption option = new EMMessageSearchOption();
+option.setKeywordList(Arrays.asList("hello"));
+
+// 开始时间和结束时间必须同时设置，单位为毫秒。
+option.setStartTime(1700000000000L);
+option.setEndTime(1700100000000L);
+
+EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
+    option,
+    20,
+    1,
+    new EMValueCallBack<EMPageResult<EMSearchServerMessageResult>>() {
+        @Override
+        public void onSuccess(
+            EMPageResult<EMSearchServerMessageResult> result) {
             List<EMSearchServerMessageResult> messages = result.getData();
         }
 
