@@ -82,7 +82,7 @@ dependencies {
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="https://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="Your Package"
     android:versionCode="100"
     android:versionName="1.0.0">
@@ -160,7 +160,7 @@ EMClient.getInstance().init(context, options);
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-EMClient.getInstance().loginWithToken(mAccount, mPassword, new EMCallBack() {
+EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {

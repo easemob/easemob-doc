@@ -50,7 +50,7 @@ try {
 - 异步方法：
 
 ```java
-EMClient.getInstance().chatManager().asyncRecallMessage(message,ext,new CallBack() {
+EMClient.getInstance().chatManager().asyncRecallMessage(message,ext,new EMCallBack() {
     @Override
     public void onSuccess() {
         EMLog.d("TAG", "撤回消息成功");
