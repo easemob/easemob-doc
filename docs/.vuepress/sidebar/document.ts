@@ -48,7 +48,7 @@ const documentSidebar = [
       { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
-      { text: '搜索消息', link: 'message_search.html', except: ['web']},
+      { text: '搜索消息', link: 'message_search_local.html', except: ['web']},
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
       { text: '消息表情回复', link: 'reaction.html' },

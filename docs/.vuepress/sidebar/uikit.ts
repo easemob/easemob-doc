@@ -183,7 +183,7 @@ const chatUikitSidebar = [
       collapsible: true,
       children: [
         { text: "页面介绍", link: "chatuikit_chat_intro.html" },
-        { text: "自定义搜索栏", link: "chatuikit_custom_chat_message_search.html", only: ["react-native"] },
+        { text: "自定义搜索栏", link: "chatuikit_custom_chat_message_search_local.html", only: ["react-native"] },
         {
           text: "自定义消息列表",
           collapsible: true,

@@ -147,7 +147,7 @@
 
 - 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
 - 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](initialization.html)。
-- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search.html) 增加默认参数，方便用户调用。
+- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search_local.html) 增加默认参数，方便用户调用。
 
 ## v1.7.0 2025-5-15
 
@@ -158,7 +158,7 @@
 - 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [根据搜索范围搜索所有会话中的消息](message_search.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- 支持 [根据搜索范围搜索所有会话中的消息](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 
 #### 优化
 
@@ -282,9 +282,9 @@
 #### 新增特性
 
 - 新增[置顶消息功能](message_pin.html#消息置顶)。
-- 新增根据多个消息类型[搜索本地消息](message_search.html)功能。
-  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search.html#根据消息类型搜索会话消息)。
-  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search.html#根据消息类型搜索会话消息)。
+- 新增根据多个消息类型[搜索本地消息](message_search_local.html)功能。
+  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索会话消息)。
+  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索会话消息)。
 - 新增 `ChatOptions#setEnableTLSConnection` 选项，支持私有部署时设置是否开启 TLS 连接。
 - 支持[会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置):
   - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。

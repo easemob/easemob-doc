@@ -82,7 +82,7 @@
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [根据关键字从本地数据库中获取会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
 - 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
-- 更新 [根据搜索范围搜索当前会话中的消息](message_search.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
+- 更新 [根据搜索范围搜索当前会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
 - [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 
 **群组相关**
@@ -144,8 +144,8 @@
 - 依赖的原生 SDK 升级到版本：
   - iOS 升级至 4.8.1
   - Android 升级至 4.8.2
-- 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search.html#根据消息类型搜索所有会话中的消息)。
-- 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search.html#根据消息类型搜索当前会话中的消息)。
+- 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
+- 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](message_delete.html#单向删除服务器端的聊天室消息)。
 - 新增 `ChatRoomManager.joinChatRoomEx` 方法，支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)。用户加入聊天室后，聊天室内其他成员收到 `ChatRoomEventListener.onMemberJoined` 事件获取到扩展信息。
 - 新增 `ChatManager.getMessageCountWithTimestamp` 方法，支持[从数据库中获取指定会话指定时间段的消息数量](message_retrieve.html#获取本地会话指定时间段的消息数量)。
@@ -196,7 +196,7 @@
 #### 新增特性
 
 - 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message_search.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
+- 新增[根据搜索范围搜索消息](message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
   - `ChatMessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#getMsgsWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `ChatManager#getConvMsgsWithKeyword`：根据搜索范围搜索当前会话中的消息。

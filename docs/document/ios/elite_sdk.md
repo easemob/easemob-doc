@@ -71,7 +71,7 @@
       <td>管理本地消息</td>
       <td>管理本地消息</td>
       <td><p><a href="https://doc.easemob.com/document/ios/message_retrieve.html">获取本地历史消息</a><a href="https://doc.easemob.com/document/ios/message_retrieve.html"></a></p>
-      <p><a href="https://doc.easemob.com/document/ios/message_search.html">搜索消息</a></p>
+      <p><a href="https://doc.easemob.com/document/ios/message_search_local.html">搜索消息</a></p>
       <p><a href="https://doc.easemob.com/document/ios/message_import_insert.html">导入和插入消息</a></p>
       <p><a href="https://doc.easemob.com/document/ios/message_update.html">更新消息</a></p>
       <p><a href="https://doc.easemob.com/document/ios/message_delete.html">删除消息</a></p></td>

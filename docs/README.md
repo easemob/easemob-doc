@@ -398,29 +398,29 @@ projects:
                 text: Windows
                 link: /document/windows/message_receipt.html
           - text: 搜索消息
-            desc: 支持搜索本地数据库中除透传消息之外的所有类型的消息。
+            desc: 支持搜索本地数据库和服务端的消息。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_search.html
+                link: /document/android/message_search_local.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_search.html
+                link: /document/ios/message_search_local.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
-                link: /document/harmonyos/message_search.html   
+                link: /document/harmonyos/message_search_local.html   
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /document/flutter/message_search.html
+                link: /document/flutter/message_search_local.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /document/react-native/message_search.html
+                link: /document/react-native/message_search_local.html
               - icon: /sdk/unity.svg
                 text: Unity
-                link: /document/unity/message_search.html
+                link: /document/unity/message_search_local.html
               - icon: /sdk/windows.svg
                 text: Windows
-                link: /document/windows/message_search.html
+                link: /document/windows/message_search_local.html
           - text: 表情回复
             desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
             sdks:
