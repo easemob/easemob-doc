@@ -12,15 +12,13 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 - 搜索范围仅限于当前用户参与且有权访问的会话。
 - 搜索结果按照相关性排序，支持分页查询和关键词高亮。
 
-:::tip
-默认不支持搜索扩展字段 `ext`；如需支持，请联系环信商务。
-:::
-
 ## 功能开通
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
 
 目前仅国内二区集群支持该功能。
+
+**关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
 ## 前提条件
 
@@ -200,4 +198,4 @@ option.keywordMatchType = EMKeywordListMatchTypeAND;
 
 - 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMErrorServiceNotEnable`（错误码 `505`）。
-- 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。
+- 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。详见 [错误码文档](error.html)。
