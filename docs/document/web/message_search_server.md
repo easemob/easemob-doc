@@ -16,9 +16,11 @@ Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息�
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
 
-目前仅国内二区集群支持该功能。
-
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
+
+:::tip
+目前，仅国内二区集群支持该功能。
+:::
 
 ## 前提条件
 
@@ -42,7 +44,7 @@ Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息�
 | :--- | :--- | :--- |
 | 关键词 | 支持使用一个或多个关键词搜索历史消息，并可设置匹配任一关键词或匹配全部关键词。 | `keywordList`、`keywordListMatchType` |
 | 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。Web SDK 指定会话时必须同时传入会话类型。 | `conversationId`、`conversationType` |
-| 消息类型 | 支持搜索文本、图片、视频、位置、文件、自定义和合并消息，不支持搜索语音消息和透传消息。 | `msgTypes` |
+| 消息类型 | 支持搜索文本、图片、视频、位置、文件和合并消息，不支持搜索自定义消息、语音消息和透传消息。 | `msgTypes` |
 | 时间范围 | 支持按消息发送时间范围搜索。开始时间和结束时间必须同时设置。 | `startTime`、`endTime` |
 | 搜索内容 | 支持仅搜索消息内容、搜索消息内容和消息扩展字段（`ext`），或仅搜索消息扩展字段。消息内容包括文本消息内容以及自动翻译后的文本内容。 | `searchScope` |
 
@@ -117,7 +119,7 @@ try {
 | `keywordListMatchType` | `'or' \| 'and'` | 否 | 设置多关键词匹配关系。`or` 表示匹配任一关键词，`and` 表示同时匹配全部关键词。默认值为 `or`。 |
 | `conversationId` | `string` | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为空表示搜索所有会话。若传入该参数，必须同时传入 `conversationType`。 |
 | `conversationType` | `'singleChat' \| 'groupChat' \| 'chatRoom'` | 否 | 设置会话类型。指定 `conversationId` 时必传。`singleChat` 表示单聊，`groupChat` 表示群聊，`chatRoom` 表示聊天室。 |
-| `msgTypes` | `MessageType[]` | 否 | 设置消息类型过滤条件。可使用 `txt`、`img`、`video`、`loc`、`file`、`custom` 和 `combine`。不支持 `audio`、`cmd`、`read`、`delivery`、`channel` 等类型。 |
+| `msgTypes` | `MessageType[]` | 否 | 设置消息类型过滤条件。可使用 `txt`、`img`、`video`、`loc`、`file` 和 `combine`。不支持 `custom`、`audio`、`cmd`、`read`、`delivery`、`channel` 等类型。 |
 | `startTime` | `number` | 否 | 设置查询开始时间，Unix 时间戳，单位为毫秒。需与 `endTime` 同时设置。 |
 | `endTime` | `number` | 否 | 设置查询结束时间，Unix 时间戳，单位为毫秒。需与 `startTime` 同时设置，而且不能早于 `startTime`。 |
 | `searchScope` | `'none' \| 'with' \| 'only'` | 否 | 设置搜索范围。`none` 表示仅搜索消息内容，`with` 表示搜索消息内容和扩展字段，`only` 表示仅搜索扩展字段。默认值为 `none`。 |
@@ -145,7 +147,7 @@ try {
 | 属性 | 类型 | 描述 |
 | --- | --- | --- |
 | `id` | `string` | 消息 ID。 |
-| `type` | `string` | 消息类型，例如 `txt`、`img`、`video`、`file`、`loc`、`custom` 或 `combine`。 |
+| `type` | `string` | 消息类型，例如 `txt`、`img`、`video`、`file`、`loc` 或 `combine`。 |
 | `chatType` | `string` | 会话类型。可能为 `singleChat`、`groupChat` 或 `chatRoom`。 |
 | `from` | `string` | 消息发送方。 |
 | `to` | `string` | 消息接收方。 |
@@ -156,7 +158,7 @@ try {
 | `text` | `string` | 服务端返回的摘要文本。该字段可能不存在。 |
 | `msg` | `string` | 文本消息内容。仅文本消息通常包含该字段。 |
 
-不同消息类型还会包含对应的消息体字段。例如图片消息包含 `url`、`width`、`height`、`thumb` 等字段，文件消息包含 `url`、`filename`、`file_length` 等字段，自定义消息包含 `customEvent`、`customExts`、`params` 等字段。
+不同消息类型还会包含对应的消息体字段。例如图片消息包含 `url`、`width`、`height`、`thumb` 等字段，文件消息包含 `url`、`filename`、`file_length` 等字段。
 
 ### 常见搜索场景
 
