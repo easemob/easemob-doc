@@ -28,6 +28,7 @@
 - NodeJs 20.18 或以上版本
 - iOS 平台：xcode 15 或以上版本
 - Android 平台：Android Studio 2022.3 或以上版本
+- Yarn 包管理工具
 
 ### 跑通步骤
 
