@@ -16,9 +16,11 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
 
-目前仅国内二区集群支持该功能。
-
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
+
+:::tip
+目前，仅国内二区集群支持该功能。
+:::
 
 ## 前提条件
 
@@ -42,7 +44,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 | :--- | :--- | :--- |
 | 关键词 | 支持使用一个或多个关键词搜索历史消息，并可设置匹配任一关键词或匹配全部关键词。 | `keywordList`、`keywordMatchType` |
 | 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。 | `conversationId` |
-| 消息类型 | 支持搜索文本、图片、视频、位置、文件、自定义和合并消息，不支持搜索语音消息和透传消息。 | `msgTypes` |
+| 消息类型 | 支持搜索文本、图片、视频、位置、文件和合并消息，不支持搜索自定义消息、语音消息和透传消息。 | `msgTypes` |
 | 时间范围 | 支持按消息发送时间范围搜索。开始时间和结束时间必须同时设置。 | `startTime`、`endTime` |
 | 搜索内容 | 支持仅搜索消息内容、仅搜索消息扩展字段（`ext`），或同时搜索两者。消息内容包括文本消息内容以及自动翻译后的文本内容。 | `searchScope` |
 
@@ -115,7 +117,7 @@ NSInteger pageNum = 1;
 | `keywordList` | `NSArray<NSString *> *` | 是 | 设置关键词列表。每个关键词长度为 1–120 个字符，所有关键词总长度不超过 120 个字符，最多设置 5 个关键词。 |
 | `keywordMatchType` | `EMKeywordListMatchType` | 否 | 设置多关键词匹配关系。<br/> - （默认）`EMKeywordListMatchTypeOR` 表示匹配任一关键词。<br/> - `EMKeywordListMatchTypeAND` 表示同时匹配全部关键词。|
 | `conversationId` | `NSString *` | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为 `nil` 或空表示搜索所有会话。注意：iOS SDK 不需要额外传入会话类型。 |
-| `msgTypes` | `NSArray<NSNumber *> *` | 否 | 设置消息类型过滤条件。数组元素为 `EMMessageBodyType` 枚举值，可使用 `EMMessageBodyTypeText`、`EMMessageBodyTypeImage`、`EMMessageBodyTypeVideo`、`EMMessageBodyTypeLocation`、`EMMessageBodyTypeFile`、`EMMessageBodyTypeCustom` 和 `EMMessageBodyTypeCombine`。不支持 `EMMessageBodyTypeVoice` 和 `EMMessageBodyTypeCmd`。 |
+| `msgTypes` | `NSArray<NSNumber *> *` | 否 | 设置消息类型过滤条件。数组元素为 `EMMessageBodyType` 枚举值，可使用 `EMMessageBodyTypeText`、`EMMessageBodyTypeImage`、`EMMessageBodyTypeVideo`、`EMMessageBodyTypeLocation`、`EMMessageBodyTypeFile` 和 `EMMessageBodyTypeCombine`。不支持 `EMMessageBodyTypeCustom`、`EMMessageBodyTypeVoice` 和 `EMMessageBodyTypeCmd`。 |
 | `startTime` | `NSInteger` | 否 | 设置查询开始时间，Unix 时间戳，单位为毫秒。需与结束时间同时设置。 |
 | `endTime` | `NSInteger` | 否 | 设置查询结束时间，Unix 时间戳，单位为毫秒。需与开始时间同时设置，而且不应早于开始时间。 |
 | `searchScope` | `EMMessageSearchScope` | 否 | 设置搜索范围。<br/> - （默认）`EMMessageSearchScopeContent`：仅搜索消息内容。<br/> - `EMMessageSearchScopeExt`：仅搜索消息扩展字段。<br/> - `EMMessageSearchScopeAll`：搜索消息内容和扩展字段。|

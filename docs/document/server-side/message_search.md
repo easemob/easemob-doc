@@ -10,7 +10,7 @@
 | :----------- | :----------------------------------------------------------- |
 | 关键词   | 支持使用一个或多个关键词搜索历史消息，并可设置匹配 **任一关键词** 或 **匹配全部关键词**。 |
 | 会话范围 | 支持搜索全部会话，也可指定单聊、群聊或聊天室会话。**限制**：仅限搜索 **当前用户已参与** 的会话。单聊需传对方用户 ID；群聊/聊天室需传对应 ID，且 **通过成员校验** 后才返回结果。 |
-| 消息类型 | 支持搜索：文本、图片、视频、位置、文件、自定义消息、合并消息。**不支持**：语音消息和透传消息。 |
+| 消息类型 | 支持搜索：文本、图片、视频、位置、文件、合并消息。**不支持**：自定义消息、语音消息和透传消息。 |
 | 时间范围 | 支持按消息发送时间范围筛选。**注意**：开始时间和结束时间必须同时设置（缺一不可）。 |
 | 搜索内容 | 支持 **仅搜索消息内容**、**仅搜索消息扩展字段（`ext`）**，或 **同时搜索两者**。消息内容指 **原始文本消息内容** 及 **自动翻译后的文本内容**。<br/>开通消息搜索后，消息扩展字段搜索默认不开启。如需使用该功能，需联系环信商务单独开通。|
 
@@ -23,11 +23,13 @@
 
 ## 功能开通
 
-消息搜索为增值服务，要使用该功能，你需要 **联系环信商务开通**。开通后，系统会为你的应用创建搜索索引资源并开始同步消息数据。
-
-目前，仅国内二区集群支持该功能。
+要使用消息搜索功能，你需要 **联系环信商务开通**。开通后，系统会为你的应用创建搜索索引资源并开始同步消息数据。
 
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
+
+:::tip
+目前，仅国内二区集群支持该功能。
+:::
 
 ## 调用频率上限
 
@@ -137,7 +139,7 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 | `participantPairs` | Array  | 否       | 单聊会话过滤条件。<br/>数组元素为对象，每个对象固定包含 `userId1` 和 `userId2` 两个字段，二者均为非空字符串，长度为 1-512 个字符，可相同（例如用户与自己建立的单聊会话）。<br/>每个对象表示一组单聊双方用户 ID，可传入多个对象以指定多个单聊会话。 |
 | `groupIds`         | Array  | 否       | 群组 ID 列表，用于按群聊会话过滤。<br/>数组元素为非空字符串，长度为 1-512 个字符。支持传入多个群组 ID。 |
 | `chatroomIds`      | Array  | 否       | 聊天室 ID 列表，用于按聊天室会话过滤。<br/>数组元素为非空字符串，长度为 1-512 个字符。支持传入多个聊天室 ID。 |
-| `contentType`      | String | 否       | 消息类型：<br/> - `text`：文本<br/> - `image`：图片<br/> - `video`：视频<br/> - `file`：文件<br/> - `location`：位置<br/> - `custom`：自定义消息<br/> - `combine`：合并消息<br/>支持传入多个值，多个值之间使用英文逗号分隔，按“或”关系匹配。 |
+| `contentType`      | String | 否       | 消息类型：<br/> - `text`：文本<br/> - `image`：图片<br/> - `video`：视频<br/> - `file`：文件<br/> - `location`：位置<br/> - `combine`：合并消息<br/>支持传入多个值，多个值之间使用英文逗号分隔，按“或”关系匹配。 |
 | `startTime`        | Long   | 否       | 查询起始时间，Unix 毫秒时间戳。<br/>需与 `endTime` 一并传入。     |
 | `endTime`          | Long   | 否       | 查询结束时间，Unix 毫秒时间戳。<br/>需与 `startTime` 一并传入，且必须大于或等于 `startTime`。单次查询的时间范围最长为 90 天。 |
 
@@ -182,10 +184,10 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 
 **扩展字段搜索与白名单**：
 
-`searchExt` 仅控制是否搜索消息扩展字段 `ext`。`ext` 及自定义消息 `custom_exts` 的可搜索字段由白名单决定，未纳入白名单的字段不参与搜索，仅随搜索结果返回。
+`searchExt` 仅控制是否搜索消息扩展字段 `ext`。`ext` 的可搜索字段由白名单决定，未纳入白名单的字段不参与搜索，仅随搜索结果返回。
 
-- **默认白名单**：`custom_exts` 默认支持 `uid`、`nickname`、`giftName`。`ext` 默认不配置白名单，即不搜索任何 `ext` 字段。
-- **扩展白名单**：如需支持 `custom_exts`、`ext` 下的其它字段参与搜索，**请联系环信商务** 增加对应的字段白名单配置。只有被加入白名单的字段，才会被纳入搜索范围。
+- **默认白名单**：`ext` 默认不配置白名单，即不搜索任何 `ext` 字段。
+- **扩展白名单**：如需支持 `ext` 字段参与搜索，**请联系环信商务** 增加对应的字段白名单配置。只有被加入白名单的字段，才会被纳入搜索范围。
 - **生效范围**：白名单变更仅对配置生效后新写入或更新的消息生效。对于已存在的历史消息，即使其字段内容符合新增白名单配置，也不会立即参与搜索；如需让历史消息支持此类搜索，需联系环信商务完成相应同步。
   
 ### 高亮显示参数
@@ -271,7 +273,7 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 | `list[].messageId` | Long | 消息 ID。 |
 | `list[].appKey` | String | 应用标识，格式为 `{org_name}#{app_name}`。 |
 | `list[].conversationType` | String | 会话类型：<br/> - `chat`：单聊。<br/> - `groupchat`：群聊。<br/> - `chatroom`：聊天室。 |
-| `list[].contentType` | String | 消息类型：<br/> - `text`：文本/合并消息（通过 `content.subtype` 为 `sub_combine` 区分）。<br/> - `image`：图片。<br/> - `video`：视频。<br/> - `file`：文件。<br/> - `location`：位置。<br/> - `custom`：自定义消息。|
+| `list[].contentType` | String | 消息类型：<br/> - `text`：文本/合并消息（通过 `content.subtype` 为 `sub_combine` 区分）。<br/> - `image`：图片。<br/> - `video`：视频。<br/> - `file`：文件。<br/> - `location`：位置。|
 | `list[].sentTime` | Long | 消息发送时间，Unix 毫秒级时间戳。 |
 | `list[].senderId` | String | 发送者用户 ID。 |
 | `list[].receiverId` | String | 接收者 ID（单聊为对方用户 ID，群聊为群组 ID，聊天室为聊天室 ID）。 |
@@ -363,20 +365,6 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
   "address": "深圳市南山区高新南一道009号",
   "building_name": "腾讯大厦",
   "coordinates": "22.543096,114.057865"
-}
-```
-
-**`custom`（自定义消息）**
-
-```json
-{
-  "custom_event": "userCard",
-  "custom_exts": {
-    "nickname": "yxd01-nick",
-    "uid": "yxd01",
-    "avatar": "https://example.com/avatar.png",
-    "remark": "用户备注"
-  }
 }
 ```
 
