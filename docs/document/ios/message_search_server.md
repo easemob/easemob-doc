@@ -54,7 +54,6 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
 - 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 
 #### 示例代码
 
@@ -198,6 +197,5 @@ option.keywordMatchType = EMKeywordListMatchTypeAND;
 
 ## 注意事项
 
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMErrorServiceNotEnable`（错误码 `505`）。
 - 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。详见 [错误码文档](error.html)。
