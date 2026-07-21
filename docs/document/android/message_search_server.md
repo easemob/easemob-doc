@@ -54,7 +54,6 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
 - 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 
 #### 示例代码
 
@@ -307,6 +306,5 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 
 ## 注意事项
 
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMError.SERVICE_NOT_ENABLED`（错误码 `505`）。
 - 参数错误可能通过 `EMValueCallBack#onError` 返回 `EMError.INVALID_PARAM`（错误码 `110`）；鉴权失败可能返回 `EMError.USER_AUTHENTICATION_FAILED`（错误码 `202`）；未知服务端错误可能返回 `EMError.SERVER_UNKNOWN_ERROR`（错误码 `303`）。详见 [错误码文档](error.html)。

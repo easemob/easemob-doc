@@ -54,7 +54,6 @@ Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息�
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
 - 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 
 #### 示例代码
 
@@ -248,7 +247,6 @@ console.log(result.messages);
 
 ## 注意事项
 
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回服务未开通错误，Web SDK 会映射为 `Code.SERVICE_NOT_ENABLED`（错误码 `505`）。
 - 调用前需确保 SDK 已初始化并登录成功，否则 `searchMessages` 会直接返回连接状态相关错误。
 - `conversationId` 和 `conversationType` 必须同时设置或同时不设置。仅设置其中一个会返回 `Code.REQUEST_PARAMETER_ERROR`（错误码 `-3`）。
