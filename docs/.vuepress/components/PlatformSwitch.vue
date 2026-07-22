@@ -1,170 +1,344 @@
-
 <script lang="ts" setup>
 import { ref, watch, computed } from 'vue'
-import { useRoute, useRouter} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
-const PLATFORM_ICON_MAP = {
+type PlatformKey =
+  | 'android'
+  | 'ios'
+  | 'web'
+  | 'harmonyos'
+  | 'windows'
+  | 'react-native'
+  | 'flutter'
+  | 'unity'
+  | 'applet'
+  | 'server-side'
+
+type DocVersion = '5.x' | '4.x'
+
+interface PlatformIcon {
+  icon: string
+  activeIcon: string
+}
+
+interface VersionItem {
+  value: DocVersion
+  label: string
+  homePath: Partial<Record<PlatformKey, string>>
+}
+
+interface VersionConfig {
+  switchablePlatforms: PlatformKey[]
+  fixedVersionLabel: DocVersion
+  defaultVersion: DocVersion
+  versions: VersionItem[]
+}
+
+interface PlatformOption {
+  value: PlatformKey
+  label: string
+}
+
+interface PlatformOptionGroup {
+  label: string
+  options: PlatformOption[]
+}
+
+const PLATFORM_ICON_MAP: Record<PlatformKey, PlatformIcon> = {
   android: {
-    icon : '/icon-Android.svg',
+    icon: '/icon-Android.svg',
     activeIcon: '/icon-Android-hover.svg',
   },
   ios: {
-    icon : '/icon-iOS.svg',
+    icon: '/icon-iOS.svg',
     activeIcon: '/icon-iOS-hover.svg',
   },
   web: {
-    icon : '/icon-web.svg',
+    icon: '/icon-web.svg',
     activeIcon: '/icon-web-hover.svg',
   },
   harmonyos: {
-    icon : '/icon-harmonyos.svg',
+    icon: '/icon-harmonyos.svg',
     activeIcon: '/icon-harmonyos-hover.svg',
   },
   windows: {
-    icon : '/icon-windows.svg',
+    icon: '/icon-windows.svg',
     activeIcon: '/icon-windows-hover.svg',
   },
-  ['react-native']: {
-    icon : '/icon-ReactNative.svg',
+  'react-native': {
+    icon: '/icon-ReactNative.svg',
     activeIcon: '/icon-ReactNative-hover.svg',
   },
   flutter: {
-    icon : '/icon-flutter.svg',
+    icon: '/icon-flutter.svg',
     activeIcon: '/icon-flutter-hover.png',
   },
   unity: {
-    icon : '/icon-unity.svg',
+    icon: '/icon-unity.svg',
     activeIcon: '/icon-unity-hover.svg',
   },
   applet: {
-    icon : '/icon-mini-program.svg',
+    icon: '/icon-mini-program.svg',
     activeIcon: '/icon-mini-program-hover.svg',
   },
-  ['server-side']: {
-    icon : '/icon-platform.svg',
+  'server-side': {
+    icon: '/icon-platform.svg',
     activeIcon: '/icon-platform-hover.svg',
   },
 }
 
-const platform = ref('android')
-const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.icon)
+/** 版本切换配置：平台、默认版本、各版本按平台的 homePath 均可在此调整 */
+const VERSION_CONFIG: VersionConfig = {
+  switchablePlatforms: ['android', 'ios'],
+  fixedVersionLabel: '4.x',
+  defaultVersion: '4.x',
+  versions: [
+    {
+      value: '4.x',
+      label: '4.x',
+      homePath: {
+        android: '/document/android/',
+        ios: '/document/ios/',
+      },
+    },
+    {
+      value: '5.x',
+      label: '5.x',
+      homePath: {
+        android: '/v5/document/android/quickstart.html',
+        ios: '/v5/document/ios/quickstart.html',
+      },
+    },
+  ],
+}
+
+const platform = ref<PlatformKey>('android')
+const version = ref<DocVersion>(VERSION_CONFIG.defaultVersion)
+const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value].icon)
+const canSwitchVersion = computed(() => isSwitchablePlatform(platform.value))
+const versionLabel = computed(() =>
+  canSwitchVersion.value ? version.value : VERSION_CONFIG.fixedVersionLabel
+)
 const route = useRoute()
 const router = useRouter()
-watch(()=>route.path, ()=> {
-  if (route.path.indexOf('/document') == 0) {
-    platform.value = route.path.split('/')[2]
+
+const normalizeHomePath = (home: string): string => home.replace(/\/$/, '')
+
+const isPlatformKey = (value: string): value is PlatformKey =>
+  Object.prototype.hasOwnProperty.call(PLATFORM_ICON_MAP, value)
+
+const parsePlatform = (path: string): PlatformKey | null => {
+  const matched = path.match(/^(?:\/v5)?\/document\/([^/]+)/)
+  if (!matched) return null
+  return isPlatformKey(matched[1]) ? matched[1] : null
+}
+
+const isSwitchablePlatform = (platformName: PlatformKey): boolean =>
+  VERSION_CONFIG.switchablePlatforms.includes(platformName)
+
+const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): string => {
+  const ver = VERSION_CONFIG.versions.find((item) => item.value === versionValue)
+  if (!ver) {
+    throw new Error(`[PlatformSwitch] Unknown version: ${versionValue}`)
   }
-}, {immediate:true})
+  const home = ver.homePath[platformName]
+  if (!home) {
+    throw new Error(
+      `[PlatformSwitch] Missing homePath for version=${versionValue}, platform=${platformName}`
+    )
+  }
+  return home
+}
 
+const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
+  // /v5 开头优先判定为 5.x
+  if (path.startsWith('/v5/')) {
+    return '5.x'
+  }
 
-// 切换平台，如果有相同路径的route就直接跳转
-const onChange = (platform) => {
-  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/document/'+platform) == 0).map(item=>item.path)
+  const candidates = VERSION_CONFIG.versions
+    .flatMap((ver) => {
+      const home = ver.homePath[platformName]
+      if (!home) return []
+      return [{ value: ver.value, home: normalizeHomePath(home) }]
+    })
+    .sort((a, b) => b.home.length - a.home.length)
+
+  for (const item of candidates) {
+    if (path === item.home || path.startsWith(`${item.home}/`)) {
+      return item.value
+    }
+  }
+  return VERSION_CONFIG.defaultVersion
+}
+
+const navigateToDefaultPlatformDoc = (platformName: PlatformKey): void => {
+  const nextPlatformDocRouters = router.options.routes
+    .filter(
+      (item) =>
+        Object.prototype.hasOwnProperty.call(item, 'name') &&
+        typeof item.path === 'string' &&
+        item.path.indexOf(`/document/${platformName}`) === 0
+    )
+    .map((item) => item.path)
 
   let newPath = route.path.split('/')
-  newPath[2] = platform
-  const nextPathPath = newPath.join('/')
-  const quickstartPath = `/document/${platform}/quickstart.html`;
-  const overviewPath = `/document/${platform}/overview.html`;
-  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
-    router.push(nextPathPath);
-  } else if (nextPlatformDocRouters.indexOf(quickstartPath) > -1) {
-    router.push(quickstartPath);
-  } else if (nextPlatformDocRouters.indexOf(overviewPath) > -1) {
-    router.push(overviewPath);
+  // /document/{platform}/... or /v5/document/{platform}/...
+  if (route.path.startsWith('/v5/document/')) {
+    newPath = ['', 'document', platformName, ...route.path.split('/').slice(4)]
   } else {
-    router.push(`/document/${platform}`);
+    newPath[2] = platformName
+  }
+  const nextPathPath = newPath.join('/')
+  const quickstartPath = `/document/${platformName}/quickstart.html`
+  const overviewPath = `/document/${platformName}/overview.html`
+  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
+    router.push(nextPathPath)
+  } else if (nextPlatformDocRouters.indexOf(quickstartPath) > -1) {
+    router.push(quickstartPath)
+  } else if (nextPlatformDocRouters.indexOf(overviewPath) > -1) {
+    router.push(overviewPath)
+  } else {
+    router.push(`/document/${platformName}`)
   }
 }
 
-const options = [
+watch(
+  () => route.path,
+  () => {
+    const nextPlatform = parsePlatform(route.path)
+    if (!nextPlatform) return
+
+    platform.value = nextPlatform
+    if (isSwitchablePlatform(nextPlatform)) {
+      version.value = resolveVersion(route.path, nextPlatform)
+    }
+  },
+  { immediate: true }
+)
+
+// 切换平台
+const onChange = (nextPlatform: PlatformKey): void => {
+  if (isSwitchablePlatform(nextPlatform)) {
+    const keepVersion =
+      isSwitchablePlatform(platform.value) &&
+      version.value !== VERSION_CONFIG.defaultVersion
+    if (keepVersion) {
+      router.push(getHomePath(version.value, nextPlatform))
+      return
+    }
+    navigateToDefaultPlatformDoc(nextPlatform)
+    return
+  }
+  navigateToDefaultPlatformDoc(nextPlatform)
+}
+
+// 切换版本：固定跳到配置的平台首页
+const onVersionChange = (nextVersion: DocVersion | string): void => {
+  if (nextVersion !== '5.x' && nextVersion !== '4.x') {
+    throw new Error(`[PlatformSwitch] Unknown version: ${nextVersion}`)
+  }
+  router.push(getHomePath(nextVersion, platform.value))
+}
+
+const options: PlatformOptionGroup[] = [
   {
     label: '平台',
     options: [
-      {
-        value: 'android',
-        label: 'Android',
-      },
-      {
-        value: 'ios',
-        label: 'iOS',
-      },
-      {
-        value: 'web',
-        label: 'Web',
-      },
-      {
-        value: 'harmonyos',
-        label: 'HarmonyOS',
-      },
-      {
-        value: 'windows',
-        label: 'Windows',
-      },
+      { value: 'android', label: 'Android' },
+      { value: 'ios', label: 'iOS' },
+      { value: 'web', label: 'Web' },
+      { value: 'harmonyos', label: 'HarmonyOS' },
+      { value: 'windows', label: 'Windows' },
     ],
   },
   {
     label: '框架',
     options: [
-      {
-        value: 'react-native',
-        label: 'React Native',
-      },
-      {
-        value: 'flutter',
-        label: 'Flutter',
-      },
-      {
-        value: 'unity',
-        label: 'Unity',
-      },
-      {
-        value: 'applet',
-        label: '小程序',
-      },
+      { value: 'react-native', label: 'React Native' },
+      { value: 'flutter', label: 'Flutter' },
+      { value: 'unity', label: 'Unity' },
+      { value: 'applet', label: '小程序' },
     ],
   },
   {
     label: '服务端',
-    options: [
-      {
-        value: 'server-side',
-        label: 'Rest Api',
-      }
-    ],
+    options: [{ value: 'server-side', label: 'Rest Api' }],
   },
 ]
 </script>
 
 
 <template>
-  <el-select v-model="platform" @change="onChange" placeholder="请选择" placement="bottom-end" popper-class="platform-select-dropdown">
-    <template #prefix>
-     <img width="20" height="20" :src="platformIcon">
-    </template>
-    <el-option-group
-      v-for="group in options"
-      :key="group.label"
-      :label="group.label"
+  <div class="platform-version-switch">
+    <el-select
+      v-model="platform"
+      class="platform-select"
+      placeholder="请选择"
+      placement="bottom-end"
+      popper-class="platform-select-dropdown"
+      @change="onChange"
     >
-      <el-option
-        v-for="item in group.options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-        class="option-content"
+      <template #prefix>
+       <img width="20" height="20" :src="platformIcon">
+      </template>
+      <el-option-group
+        v-for="group in options"
+        :key="group.label"
+        :label="group.label"
       >
-        <span class="label-icon">
-          <img class="default" width="20" height="20" :src="PLATFORM_ICON_MAP[item.value]?.icon" />
-          <img class="active" width="20" height="20" :src="PLATFORM_ICON_MAP[item.value]?.activeIcon" />
-        </span>
-        <span>{{ item.label }}</span>
-      </el-option>
-    </el-option-group>
-  </el-select>
+        <el-option
+          v-for="item in group.options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+          class="option-content"
+        >
+          <span class="label-icon">
+            <img class="default" width="20" height="20" :src="PLATFORM_ICON_MAP[item.value]?.icon" />
+            <img class="active" width="20" height="20" :src="PLATFORM_ICON_MAP[item.value]?.activeIcon" />
+          </span>
+          <span>{{ item.label }}</span>
+        </el-option>
+      </el-option-group>
+    </el-select>
+
+    <el-dropdown
+      v-if="canSwitchVersion"
+      class="version-dropdown"
+      trigger="click"
+      popper-class="version-dropdown-menu"
+      @command="onVersionChange"
+    >
+      <button type="button" class="version-trigger">
+        <span>{{ version }}</span>
+        <i class="version-trigger-arrow" aria-hidden="true" />
+      </button>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item
+            v-for="item in VERSION_CONFIG.versions"
+            :key="item.value"
+            :command="item.value"
+            :class="{ 'is-active-version': item.value === version }"
+          >
+            {{ item.label }}
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+    <span v-else class="version-fixed">{{ versionLabel }}</span>
+  </div>
 </template>
 
 <style lang="scss" scope>
+
+  .platform-version-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+  }
 
   .option-content:hover .default {
     display: none;
@@ -183,7 +357,57 @@ const options = [
     padding-right: 5px;
   }
 
-  .el-select {
+  .platform-select {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 3.5rem);
+  }
+
+  .version-dropdown {
+    flex: 0 0 auto;
+  }
+
+  .version-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 2.125rem;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--theme-color);
+
+      .version-trigger-arrow {
+        background-color: var(--theme-color);
+      }
+    }
+  }
+
+  .version-trigger-arrow {
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: #909399;
+    mask: url(/icon-arrow-down.svg) no-repeat center / contain;
+    -webkit-mask: url(/icon-arrow-down.svg) no-repeat center / contain;
+  }
+
+  .version-fixed {
+    flex: 0 0 auto;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 2.125rem;
+  }
+
+  .platform-select.el-select {
     .el-select__wrapper {
       min-height: 2.125rem;
       .el-select__icon {
@@ -204,7 +428,7 @@ const options = [
   }
 
   .platform-select-dropdown {
-    width: 16rem;
+    width: 17.5rem;
 
     .el-select-group__wrap {
       position: relative;
@@ -266,6 +490,26 @@ const options = [
         &::after {
           display: none;
         }
+      }
+    }
+  }
+
+  .version-dropdown-menu {
+    min-width: 5.5rem;
+
+    .el-dropdown-menu__item {
+      min-width: 5.5rem;
+      height: 2rem;
+      padding: 0 1rem;
+      line-height: 2rem;
+      color: var(--text-color);
+      font-size: 0.875rem;
+
+      &:hover,
+      &:focus,
+      &.is-active-version {
+        color: var(--theme-color);
+        background-color: var(--switch-hover-bg-color);
       }
     }
   }
