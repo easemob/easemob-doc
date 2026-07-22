@@ -97,8 +97,8 @@ const VERSION_CONFIG: VersionConfig = {
       value: '4.x',
       label: '4.x',
       homePath: {
-        android: '/document/android/',
-        ios: '/document/ios/',
+        android: '/document/android/quickstart.html',
+        ios: '/document/ios/quickstart.html',
       },
     },
     {
