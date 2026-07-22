@@ -113,7 +113,7 @@ SDKClient.Instance.InitWithOptions(options);
 在 `SignInAction` 方法尾部添加以下代码，使用账号登录即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
+SDKClient.Instance.Login(userId: Username.text, pwdOrToken: Password.text, callback: new CallBack(
   onSuccess: () => {
     AddLogToLogText("sign in sdk succeed");
   },
@@ -123,7 +123,7 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
 ));
 
 // 说明：自 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text 中的内容需要由输入密码改为输入token
-SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
+SDKClient.Instance.LoginWithToken(userId: Username.text, pwdOrToken: Password.text, callback: new CallBack(
     onSuccess: () =>
     {
          AddLogToLogText("sign in sdk succeed");
