@@ -1,5 +1,6 @@
 import { sidebar } from "vuepress-theme-hope";
 import { DOC_SIDEBAR } from "./document";
+import { DOC_V5_SIDEBAR } from "./document-v5";
 import { CHAT_UIKIT_SIDEBAR, CHATROOM_UIKIT_SIDEBAR } from "./uikit";
 import { PRIVATE_IM_SIDEBAR, PRIVATE_MEDIA_SIDEBAR } from "./private";
 import { CALL_KIT_SIDEBAR } from "./callkit";
@@ -394,6 +395,7 @@ export const zhSidebar = sidebar({
     },   
   ],
   ...DOC_SIDEBAR,
+  ...DOC_V5_SIDEBAR,
   ...CHAT_UIKIT_SIDEBAR,
   ...CHATROOM_UIKIT_SIDEBAR,
   ...CALL_KIT_SIDEBAR,
