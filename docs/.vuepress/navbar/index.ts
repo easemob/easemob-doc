@@ -1,14 +1,6 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
-  {
-    text: 'V4.x',
-      children: [
-        { text: 'V4.x', link: 'https://doc.easemob.com/product/introduction.html'},
-        { text: 'V3.x', link: 'https://docs-im.easemob.com/ccim/intro'},
-        { text: 'V2.x', link: 'https://docs-im.easemob.com/start/start'}
-      ]
-  },
   { text: '产品介绍', link: '/product/introduction.html' },
   {
     text: 'UIKit',
