@@ -88,6 +88,7 @@
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "name":"XXXX",
     "version":"3.8.9.1",
     "timestamp":1642585154644,
     "status":"online"
@@ -106,6 +107,7 @@
     "host":"XXXX",
     "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
+    "name":"XXXX",
     "version":"3.8.9.1",
     "timestamp":1642648914742,
     "status":"offline"
@@ -124,6 +126,7 @@
     "host":"msync@ebs-ali-beijing-msync40",
     "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
+    "name":"XXXX",
     "version":"3.8.9.1",
     "timestamp":1642648955563,
     "status":"offline"
@@ -141,7 +144,8 @@
 | `ip`        | String   | 用户登录的 IP 地址。                                         |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 环信控制台注册的应用唯一标识。                               |
-| `user`      | String   | 用户标识，格式为 `{appkey}_{username}@easemob.com/{os}_{deviceId}`，其中 `@easemob.com` 为固定后缀，`deviceId` 由 SDK 随机生成。 |
+| `user`      | String   | 状态变更用户的唯一标识。格式为 `{appkey}_{username}@easemob.com/{os}_{deviceId}`，其中 `@easemob.com` 为固定后缀，`deviceId` 由 SDK 随机生成。 |
+| `name`      | String   | 状态变更用户的用户名，对应 `user` 字段中的 `{username}` 部分。                                   |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | Long     | 请求到达 IM 服务器的 UNIX 时间戳，单位为毫秒。               |
 | `status`    | String   | 变更后的状态，取值：`online`（在线）或 `offline`（离线）。   |
