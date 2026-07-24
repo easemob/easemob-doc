@@ -14,20 +14,20 @@
 
 ### Android 平台
 
-- Flutter 2.5.0 或以上版本
-- Dart 2.19.1 或以上版本
+- Flutter 3.3.0 或以上版本
+- Dart 3.0.0 或以上版本
 - macOS 或 Windows 系统
 - 支持 JDK 1.8 或以上版本的 Android Studio 4.0 或以上版本
-- 运行 Android SDK API 级别 21 或以上的 Android 模拟器或真机
+- 运行 Android SDK API 级别 24 或以上的 Android 模拟器或真机
 
 ### iOS 平台
 
-- Flutter 2.5.0 或以上版本
-- Dart 2.19.1 或以上版本
+- Flutter 3.3.0 或以上版本
+- Dart 3.0.0 或以上版本
 - macOS
 - 安装有 Xcode 命令行工具的 Xcode 12.4 或以上版本
 - CocoaPods
-- 运行 iOS 10.0 或以上版本的 iOS 模拟器或真机
+- 运行 iOS 12.0 或以上版本的 iOS 模拟器或真机
 
 ## 所需权限
 
@@ -51,15 +51,6 @@
 | `Privacy - Camera Usage Description` | 摄像头权限  |
 | `Privacy - Photo Library Usage Description` | 相册权限 |
 
-## 防止代码混淆
-
-安卓中需要配置防止代码混淆，在 `proguard-rules.pro` 文件中添加以下代码：
-
-```
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
-```
-
 ## 发送第一条消息
 
 ### 第一步 集成 em_chat_uikit
@@ -81,56 +72,44 @@ dependencies:
         path: `<#uikit path#>`
 ```
 
-em_chat_uikit 使用了以下第三方依赖库：
+`em_chat_uikit` 会通过自身 `pubspec.yaml` 管理所需的 IM SDK 和第三方依赖，业务项目无需手动添加这些间接依赖。
 
-```dart
-dependencies:
-  intl: ^0.18.0
-  image_picker: ^0.8.6+4
-  file_picker: ^4.6.1
-  record: ^4.4.4
-  audioplayers: ^3.0.1
-  im_flutter_sdk: ^4.1.0
-```
+### 第二步 初始化 ChatUIKit
 
-### 第二步 初始化即时通讯 IM SDK 
-
-在 app 的 `main` 下调用 SDK 初始化方法。
+在 app 的 `main` 下调用 `ChatUIKit` 初始化方法。
 
 :::tip
-em_chat_uikit 不包含 IM SDK 的初始化和登录，使用时确保已完成 SDK 初始化和登录。
+使用 UIKit 组件前，需要先完成 `ChatUIKit` 初始化和登录。
 :::
 
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final options = ChatOptions(
-    appKey: <#Your AppKey#>,
+  await ChatUIKit.instance.init(
+    options: Options.withAppKey(appKey),
   );
-  await EMClient.getInstance.init(options);
   runApp(const MyApp());
 }
 ```
 
 #### 第三步 创建聊天界面
 
-em_chat_uikit 提供了 `ChatMessagesView`，添加到 `build` 中，传入必填参数 `conversation` 及所需的可选参数即可。详见[聊天界面参数描述](ui_chat.html#创建聊天界面)。
+em_chat_uikit 提供了 `MessagesView`，添加到 `build` 中，传入必填参数 `profile` 及所需的可选参数即可。详见[聊天页面介绍](chatuikit_chat_intro.html#创建聊天页面)。
 
-1. 通过 IM SDK 获取一个本地会话。
+1. 创建对端用户的 `ChatUIKitProfile`。
 
 ```dart
-// targetId: 接收方的用户 ID。单聊为对方的用户 ID，群聊为群组 ID，聊天室为聊天 室 ID。
-// type: 单聊为 `EMConversationType.Chat`, 群聊为 `EMConversationType.GroupChat`, 聊天室为 `EMConversationType.ChatRoom`。
-EMConversation conversation = await EMClient.getInstance.chatManager.getConversation(targetId, type: EMConversationType.Chat);
+// targetId: 接收方的用户 ID。
+final profile = ChatUIKitProfile.contact(id: targetId);
 ```
 
-2. 将会话传递给 `ChatMessagesView`。
+2. 将用户信息传递给 `MessagesView`。
 
 ```dart
 class MessagesPage extends StatefulWidget {
-  const MessagesPage(this.conversation, {super.key});
+  const MessagesPage(this.profile, {super.key});
 
-  final EMConversation conversation;
+  final ChatUIKitProfile profile;
 
   @override
   State<MessagesPage> createState() => _MessagesPageState();
@@ -141,12 +120,12 @@ class _MessagesPageState extends State<MessagesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.conversation.id),
+        title: Text(widget.profile.id),
       ),
       body: SafeArea(
         // UIKit 中的聊天界面。
-        child: ChatMessagesView(
-          conversation: widget.conversation,
+        child: MessagesView(
+          profile: widget.profile,
         ),
       ),
     );

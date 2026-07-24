@@ -24,8 +24,8 @@
 ### 开发环境要求
 
 - Flutter 3.29.0;
-- Android SDK API 21 及以上;
-- iOS 14 及以上;
+- Android SDK API 24 及以上;
+- iOS 13.0 及以上;
 
 ### 跑通步骤
 
@@ -62,16 +62,16 @@ App Server 为 Demo 提供以下功能：
 ```
 
 ├── custom
+│   ├── call_helper.dart       // 呼叫工具类，集成了 1v1 音视频呼叫和多人呼叫的方法。
 │   └── chat_route_filter.dart // chat-uikit 自定义拦截类，所有对 chat-uikit 的自定义通过该文件实现。
 ├── demo_config.dart           // Demo 运行的配置类，包含 appkey， agoraAppId， appServer 
-├── demo_localizations.dart    // Demo 国际化类，用于对 Ddemo 中文字国际化
+├── demo_localizations.dart    // Demo 国际化类，用于对 Demo 中文字国际化
 ├── main.dart                  // 项目入口，包括了初始化 SDK，设置主题
 ├── notifications
 │   └── app_settings_notification.dart      // 主题变更通知
 ├── pages
 │   ├── call                                // 呼叫相关页面
 │   │   ├── call_handler_widget.dart        // 呼叫监听页面，当 Home 页启动时会初始化，用于监听语音会叫回调。
-│   │   ├── call_helper.dart                // 呼叫工具类，集成了 1v1 音视频呼叫和多人呼叫的方法。
 │   │   ├── call_pages                      // 呼叫相关的 UI 页面
 │   │   │   ├── call_button.dart            // 呼叫使用的自定义按钮
 │   │   │   ├── call_user_info.dart         // 用于展示呼叫的头像昵称
@@ -87,12 +87,16 @@ App Server 为 Demo 提供以下功能：
 │   ├── help
 │   │   └── download_page.dart              // 附件消息下载页面
 │   ├── home_page.dart                      // 主页
-│   ├── login_page.dart                     // 登录页面
+│   ├── phone_login_page.dart               // 手机号验证码登录页面
+│   ├── userid_login_page.dart              // 用户 ID 登录页面
 │   ├── me
 │   │   ├── about_page.dart                 // About 页面
 │   │   ├── my_page.dart                    // 个人页面
 │   │   ├── personal
 │   │   │   └── personal_info_page.dart     // 个人详情页
+│   │   ├── privacy
+│   │   │   ├── block_list_page.dart        // 黑名单页面
+│   │   │   └── privacy_page.dart           // 隐私设置页面
 │   │   └── settings
 │   │       ├── advanced_page.dart          // 特性开关页面
 │   │       ├── general_page.dart           // 设置页面
@@ -102,11 +106,17 @@ App Server 为 Demo 提供以下功能：
 ├── tool
 │   ├── app_server_helper.dart              // AppServer 请求封装页面，用于封装向 AppServer 的请求
 │   ├── format_time_tool.dart               // 时间工具，用于格式化通话时间
+│   ├── online_status_helper.dart           // 在线状态工具
+│   ├── presence_status_helper.dart         // Presence 状态工具
 │   ├── settings_data_store.dart            // 配置存储工具
-│   └── user_data_store.dart                // 用户属性存储类
+│   ├── toast_handler_widget.dart           // toast 页面，对 UIKit 中事件结果的封装，如添加好友的 loading toast 等
+│   ├── token_status_handler_widget.dart    // token 过期监听页，用于监听 SDK 登录用户 Token 过期。
+│   ├── user_data_store.dart                // 用户属性存储类
+│   └── user_provider_handler_widget.dart   // 用户数据配置类，用于把用户信息传给 UIKit 和根据 UIKit 的请求返回对应用户数据
 └── widgets
     ├── list_item.dart                      // 设置页面的item
-    ├── toast_handler_widget.dart           // toast 页面，对 UIKit 中事件结果的封装，如添加好友的loading toast 等
-    ├── token_status_handler_widget.dart    // token 过期监听页，用于监听 SDK 登录用户 Token 过期。
-    └── user_provider_handler_widget.dart   // 用户数据配置类，用于把用户信息传给 UIKit 和根据 UIKit 的请求返回对应用户数据
+    ├── online_icon_status_widget.dart      // 在线状态图标
+    ├── presence_icon_status_widget.dart    // Presence 状态图标
+    ├── presence_title_widget.dart          // Presence 状态标题
+    └── verify_code_widget.dart             // 验证码输入组件
 ```

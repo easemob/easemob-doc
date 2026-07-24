@@ -2,6 +2,10 @@
 
 <Toc />
 
+:::warning
+ChatroomUIKit 已合并到 `em_chat_uikit` 中，当前版本不再单独发布 `chatroom_uikit` 包。本文中涉及旧独立包的组件名仅供历史版本参考；新项目请优先参考 [快速开始](roomuikit_quickstart.html) 和 `easemob-uikit-flutter/example`。
+:::
+
 `chatroom_uikit` 的组件中包含各种属性，你可以根据需求进行设置。
 
  `chatroom_uikit` 主要包括如下组件：

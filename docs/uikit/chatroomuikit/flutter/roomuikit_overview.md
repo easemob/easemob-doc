@@ -4,7 +4,11 @@
 
 环信 ChatroomUIKit 提供 UIKit 的各种组件帮助开发者根据实际业务需求快速搭建聊天室应用。通过该 UIKit，聊天室中的用户可实时交互，发送普通弹幕消息、打赏消息和全局广播等功能。
 
-- 若要访问源码，请点击[这里](https://github.com/easemob/UIKit_Chatroom_flutter)。
+:::tip
+ChatroomUIKit 已合并到单群聊 UIKit 包 `em_chat_uikit` 中，当前版本不再单独发布 `chatroom_uikit` 包。集成和示例源码请以 `easemob-uikit-flutter` 仓库为准。
+:::
+
+- 若要访问源码，请点击[这里](https://github.com/easemob/easemob-uikit-flutter)。
 
 - 你可以体验环信 [Android](http://www.pgyer.com/YZUCrW) 和 [iOS](https://testflight.apple.com/join/NzmtvJ6n) 聊天室 UIKit demo。
 
