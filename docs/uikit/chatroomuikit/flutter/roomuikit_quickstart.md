@@ -2,12 +2,17 @@
 
 <Toc />
 
-利用 `chatroom_uikit`，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。
+利用 `em_chat_uikit` 内置的 ChatroomUIKit 能力，你可以轻松实现聊天室内的用户交互。本文介绍如何实现在聊天室中发送消息。
+
+:::tip
+ChatroomUIKit 已合并到 `em_chat_uikit` 中，当前版本不再单独发布 `chatroom_uikit` 包。请不要再通过 `flutter pub add chatroom_uikit` 集成。
+:::
 
 ## 前提条件
 
-- 即时通讯 SDK 3.0.0（包含）-4.0.0；
 - Flutter 3.3.0 或以上版本；
+- Android minSDKVersion 24 或以上版本；
+- iOS 12 或以上版本；
 - 有效的环信即时通讯 IM 开发者账号和 [App Key](/product/console/app_manage.html#管理应用)。
 
 ## 操作流程
@@ -27,51 +32,52 @@ flutter create --platforms=android,ios room_project
 进入创建的项目，执行以下命令：
 
 ```sh
-flutter pub get add chatroom_uikit
+flutter pub add em_chat_uikit
 ```
 
-### 第四步 初始化 chatroom_uikit
+在 Dart 文件中引入 UIKit：
 
-你可以在应用加载时或使用 `chatroom_uikit` 之前对其进行初始化。
+```dart
+import 'package:em_chat_uikit/chat_uikit.dart';
+```
+
+### 第四步 初始化 ChatUIKit
+
+你可以在应用加载时初始化 `ChatUIKit`。
 
 初始化时，需传入 App Key。你可以在[环信控制台](https://console.easemob.com/user/login)的**应用概览**页面查看 App Key。
 
 ```dart
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   assert(appKey.isNotEmpty, 'appKey is empty');
-  await ChatroomUIKitClient.instance.initWithAppkey(
-    appKey,
+  await ChatUIKit.instance.init(
+    options: Options.withAppKey(appKey),
   );
   runApp(const MyApp());
 }
 ```
 
-### 第五步 登录 chatroom_uikit
+### 第五步 登录 ChatUIKit
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 `chatroom_uikit`。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
+在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token 登录 `ChatUIKit`。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
 
 :::tip
-若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 `chatroom_uikit`。
+若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 `ChatUIKit`。
 :::
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
-登录服务, 可使用 `userId` 和 `password` 登录，也可以使用 `userId` 和 token 进行登录。
+登录服务可使用 `userId` 和密码登录，也可以使用 `userId` 和 token 登录。生产环境推荐使用 token 登录。
 
 - 使用 `userId` 和 `password` 登录：
 
 ```dart
-// ...
-//设置当前用户的头像和昵称
- UserEntity user = UserEntity(userId, nickname: nickname, avatarURL: avatarURL);
 try {
-  // 通过密码登录
-  await ChatroomUIKitClient.instance.loginWithPassword(
-    userId: userId!,
+  await ChatUIKit.instance.loginWithPassword(
+    userId: userId,
     password: password,
-    userInfo: user,
   );
-
 } on ChatError catch (e) {
   // error.
 }
@@ -80,15 +86,11 @@ try {
 - 使用 `userId` 和 token 登录：
 
 ```dart
-//设置当前用户的头像和昵称
- UserEntity user = UserEntity(userId, nickname: nickname, avatarURL: avatarURL);
 try {
-  await ChatroomUIKitClient.instance.loginWithToken(
+  await ChatUIKit.instance.loginWithToken(
     userId: userId,
-    token: token!,
-    userInfo: user,
+    token: token,
   );
-
 } on ChatError catch (e) {
   // error.
 }
@@ -96,7 +98,7 @@ try {
 
 ### 第六步 设置主题颜色
 
-可以通过 `ChatUIKitTheme` 进行主题设置，默认提供了 `light` 和 `dart` 两种主题:
+可以通过 `ChatUIKitTheme` 进行主题设置，默认提供了 `light` 和 `dark` 两种主题:
 
 ```dart
 ChatUIKitTheme(
@@ -119,9 +121,9 @@ ChatUIKitColor({
 ```
 
 
-### 第七步 使用 chatroom_uikit 组件
+### 第七步 使用聊天室组件
 
-1. 需要确保 `ChatUIKitTheme` 在 `ChatroomUIKit` 组件在你项目的父节点，建议将 `ChatUIKitTheme` 放到项目的根节点。
+1. 需要确保 `ChatUIKitTheme` 在聊天室组件的父节点，建议将 `ChatUIKitTheme` 放到项目的根节点。
 
 ```dart
 
@@ -138,30 +140,60 @@ ChatUIKitColor({
 ```
 
 
-2. 在需要使用 `chatroom_uikit` 时，需要先创建 `ChatroomController`, 并使 `ChatRoomUIKit` 作为当前页面的根节点，并将其他组件作为 `ChatRoomUIKit` 的子组件。
+2. 在需要使用聊天室组件时，先加入聊天室，然后组合消息列表和输入组件。
 
 ```dart
-// roomId: 需要加入的房间id；
-// ownerId: 房主id；
-ChatroomController controller = ChatroomController(roomId: roomId, ownerId: ownerId);
+class RoomPage extends StatefulWidget {
+  const RoomPage({required this.roomId, super.key});
 
-@override
-Widget build(BuildContext context) {
-  Widget content = Scaffold(
-    resizeToAvoidBottomInset: false,
-    appBar: AppBar(),
-    body: ChatRoomUIKit(
-      controller: controller,
-      child: (context) {
-        // 在子组件中构建页面，比如 礼物弹窗，消息列表等。
-        return ...;
-      },
-    ),
-  );
+  final String roomId;
 
-  return content;
+  @override
+  State<RoomPage> createState() => _RoomPageState();
 }
 
+class _RoomPageState extends State<RoomPage> {
+  final RoomInputBarController inputBarController = RoomInputBarController();
+
+  @override
+  void initState() {
+    super.initState();
+    ChatUIKit.instance.joinChatRoom(roomId: widget.roomId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned(
+            left: 16,
+            right: 78,
+            height: 204,
+            bottom: 90,
+            child: ChatRoomMessagesWidget(roomId: widget.roomId),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 40,
+            child: ChatRoomInputBar(
+              controller: inputBarController,
+              onSend: (text) {
+                if (text.trim().isEmpty) {
+                  return;
+                }
+                ChatUIKit.instance.sendMessage(
+                  message: ChatRoomMessage.roomMessage(widget.roomId, text),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 ```
 
 ### 第八步 发送第一条消息

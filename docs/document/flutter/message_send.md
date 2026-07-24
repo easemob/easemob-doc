@@ -106,7 +106,7 @@ EMClient.getInstance.chatManager.sendMessage(gifMsg);
 
 1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
 你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `EMChatManager#addMessageEvent` 接口。
-2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、图片文件的 `filePath`、创建视频消息。
+2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、视频文件的 `filePath`、创建视频消息。
 3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
 
 ```dart
@@ -124,7 +124,7 @@ EMClient.getInstance.chatManager.sendMessage(videoMsg);
 
 ### 发送文件消息
 
-1. 发送方调用 `EMMessage#createImageSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的 `filePath`，创建文件消息。
+1. 发送方调用 `EMMessage#createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的 `filePath`，创建文件消息。
 2. 发送方调用 `sendMessage` 方法发送该消息。SDK 将文件上传至环信服务器。
 
 ```dart

@@ -76,7 +76,7 @@ try {
 
 ```dart
 try {
-    await EMClient.getInstance.login(userId, password);
+  await EMClient.getInstance.loginWithPassword(userId, password);
 } on EMError catch (e) {}
 ```
 
@@ -88,7 +88,7 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.login(userId, token, false);
+  await EMClient.getInstance.loginWithToken(userId, token);
 } on EMError catch (e) {}
 ```
 
@@ -149,4 +149,3 @@ EMClient.getInstance.removeConnectionEventHandler(
   "UNIQUE_HANDLER_ID",
 );
 ```
-

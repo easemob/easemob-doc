@@ -25,7 +25,8 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - `getAllContactIds`：一次性获取本地好友列表（列表只包含好友的用户 ID）；
 - `addUserToBlockList` 添加用户到黑名单；
 - `removeUserFromBlockList` 将用户从黑名单移除；
-- `getBlockListFromServer` 从服务器获取黑名单列表。
+- `fetchBlockIds` 从服务器获取黑名单列表；
+- `getBlockIds` 从本地数据库获取黑名单列表。
 
 ## 前提条件
 
@@ -74,7 +75,7 @@ String userId = "foo";
 // 请求加为好友的理由
 String reason = "Request to add a friend.";
 try{
-  await EMClient.getInstance.contactManager.addContact(userId, reason);
+  await EMClient.getInstance.contactManager.addContact(userId, reason: reason);
 } on EMError catch (e) {
 }
 ```
@@ -117,7 +118,7 @@ bool keepConversation = true;
 try {
   await EMClient.getInstance.contactManager.deleteContact(
     userId,
-    keepConversation,
+    keepConversation: keepConversation,
   );
 } on EMError catch (e) {
 }
@@ -127,7 +128,7 @@ try {
 
 ### 设置好友备注
 
-自 4.2.0 版本开始，你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+自 4.2.0 版本开始，你可以调用 `setContactRemark` 方法设置单个好友的备注。
 
 好友备注的长度不能超过 100 个字符。
 
@@ -271,7 +272,7 @@ try {
 ```dart
 try {
   List<String> list =
-      await EMClient.getInstance.contactManager.getBlockListFromServer();
+      await EMClient.getInstance.contactManager.fetchBlockIds();
 } on EMError catch (e) {
 }
 ```
@@ -281,7 +282,7 @@ try {
 ```dart
 try {
   List<String> list =
-      await EMClient.getInstance.contactManager.getBlockListFromDB();
+      await EMClient.getInstance.contactManager.getBlockIds();
 } on EMError catch (e) {
 }
 ```

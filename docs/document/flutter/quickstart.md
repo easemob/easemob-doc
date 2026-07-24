@@ -24,6 +24,7 @@
 - iOS 12 或以上版本;
 - Android SDK API 等级 21 或以上版本；
 - Flutter 3.3.0 或以上版本;
+- Dart 3.3.0 或以上版本;
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
@@ -41,31 +42,32 @@ flutter create quick_start
 
 ### 设置 Android
 
-1. 打开文件 `quick_start/android/app/build.gradle.kts` 在文件最后添加：
+1. 打开文件 `quick_start/android/app/build.gradle`，在 `defaultConfig` 中设置 `minSdkVersion`：
 
 ```gradle
 android {
     defaultConfig {
-        minSdk = 24
+        minSdkVersion 21
     }
 }
 ```
 
-2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `</application>` 下方添加：
+如果你的工程使用 Kotlin DSL，则打开 `quick_start/android/app/build.gradle.kts`，在 `defaultConfig` 中设置 `minSdk`：
+
+```gradle
+android {
+    defaultConfig {
+        minSdk = 21
+    }
+}
+```
+
+2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `<manifest>` 节点下、`<application>` 节点外添加以下权限：
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.WAKE_LOCK"/>
-```
-
-3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则。
-
-如果 `proguard-rules.pro` 文件不存在，需自行创建。
-
-```dart
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
 ### 设置 iOS
