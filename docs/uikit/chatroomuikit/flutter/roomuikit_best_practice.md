@@ -2,6 +2,10 @@
 
 <Toc />
 
+:::warning
+ChatroomUIKit 已合并到 `em_chat_uikit` 中，当前版本不再单独发布 `chatroom_uikit` 包。本文中涉及旧独立包的 API 仅供历史版本参考；新项目请优先参考 [快速开始](roomuikit_quickstart.html) 和 `easemob-uikit-flutter/example`。
+:::
+
 ## 初始化 chatroom_uikit
 
 初始化是使用 `chatroom_uikit` 的必要步骤，需在所有接口方法调用前完成。

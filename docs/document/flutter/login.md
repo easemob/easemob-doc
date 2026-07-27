@@ -39,9 +39,11 @@ try {
 
 ```dart
 try {
-    await EMClient.getInstance.login(userId, password);
+  await EMClient.getInstance.loginWithPassword(userId, password);
 } on EMError catch (e) {}
 ```
+
+`login(userId, password)` 方法已废弃，请使用 `loginWithPassword(userId, password)` 或更安全的 `loginWithToken(userId, token)`。
 
 ## 自动登录
 

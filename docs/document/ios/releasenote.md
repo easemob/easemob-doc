@@ -4,7 +4,7 @@
 
 #### 新增功能
 
-支持 [服务端消息搜索](message_search_server.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用。
+支持 [服务端消息搜索](message_search_server.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
 

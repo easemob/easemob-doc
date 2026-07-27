@@ -55,24 +55,24 @@ await EMClient.getInstance.init(options);
 ```dart
 // 设置连接监听器。
 EMClient.getInstance.addConnectionEventHandler(
-      'identifier',
-      EMConnectionEventHandler(
-        onConnected: () {
-         // SDK 成功连接到 IM 服务器时触发。
-        },
-        onDisconnected: () {
-         // SDK 与 IM 服务器断开连接时触发。
-        },
-      ),
-        
- // 设置消息监听器。
+  'identifier',
+  EMConnectionEventHandler(
+    onConnected: () {
+      // SDK 成功连接到 IM 服务器时触发。
+    },
+    onDisconnected: () {
+      // SDK 与 IM 服务器断开连接时触发。
+    },
+  ),
+);
+
+// 设置消息监听器。
 EMClient.getInstance.chatManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-      EMChatEventHandler(
-        onMessagesReceived: (messages) {
-          // 处理接收到的消息
-        },
-      ),
-    ),
+  "UNIQUE_HANDLER_ID",
+  EMChatEventHandler(
+    onMessagesReceived: (messages) {
+      // 处理接收到的消息。
+    },
+  ),
 );
 ```
