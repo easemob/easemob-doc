@@ -1,6 +1,6 @@
 # 开通增值服务
 
-即时通讯 IM 的增值服务包括实时音视频服务、内容审核、即时推送和消息翻译。你可以在 [环信控制台](https://console.easemob.com/user/login) 订阅增值服务。
+即时通讯 IM 的增值服务包括实时音视频服务、内容审核、即时推送、消息翻译和消息搜索。你可以在 [环信控制台](https://console.easemob.com/user/login) 订阅增值服务。
 
 按如下步骤开通增值服务：
 
@@ -65,6 +65,12 @@
 服务开通后，你可以查看消息翻译额度、总使用量以及指定时间段内每天的使用量。
 
 ![img](/images/console/translation_statistics.png)
+
+## 消息搜索
+
+在左侧导航栏，选择 **增值服务** > **消息搜索**，点击 **立即试用**。
+
+![img](/images/console/message_search_server.png)
 
 ## 测试版应用试用说明
 

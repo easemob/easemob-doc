@@ -14,7 +14,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 ## 功能开通
 
-要使用服务端消息搜索功能，需 **联系环信商务开通**。
+要使用服务端消息搜索功能，需要在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
