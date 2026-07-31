@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/document/web/message_translation.html",
+    pageUri: "/value-added/translation/message_translation_web.html",
     title: "消息翻译"
 }
 ---

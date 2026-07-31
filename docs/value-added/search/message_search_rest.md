@@ -44,7 +44,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/messages/search/get
 | :--- | :--- | :--- | :--- |
 | `username` | String | 是 | 发起搜索的用户 ID。搜索结果仅返回该用户参与会话中的消息。 |  
 
-关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
+关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](/document/server-side/overview.html#请求-url)。
 
 ## 请求示例
 

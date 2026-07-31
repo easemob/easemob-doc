@@ -10,18 +10,18 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 4.24.0 开发版发布   | - Android 和 iOS SDK [支持服务端消息搜索](/document/android/message_search_server.html)。<br/> - Android 可通过异步方法 [更新群扩展字段](/document/android/group_attributes.html#更新群扩展字段)。<br/> - Android 可通过异步方法 [获取服务器端推送配置](/document/android/push/push_display_attribute.html#获取推送通知的显示属性)。   | 2026-7-10     | - [Android SDK 4.24.0 更新日志](/document/android/releasenote.html#v4-24-0-dev-2026-7-10-开发版) <br/> - [iOS SDK 4.24.0 更新日志](/document/ios/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
+| Android/iOS SDK 4.24.0 开发版发布   | - Android 和 iOS SDK [支持服务端消息搜索](/value-added/search/message_search_android.html)。<br/> - Android 可通过异步方法 [更新群扩展字段](/document/android/group_attributes.html#更新群扩展字段)。<br/> - Android 可通过异步方法 [获取服务器端推送配置](/document/android/push/push_display_attribute.html#获取推送通知的显示属性)。   | 2026-7-10     | - [Android SDK 4.24.0 更新日志](/document/android/releasenote.html#v4-24-0-dev-2026-7-10-开发版) <br/> - [iOS SDK 4.24.0 更新日志](/document/ios/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
 
 
 #### 环信 Web/小程序 SDK v4.24.1 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web/小程序 SDK v4.24.1 开发版发布   | [支持服务端消息搜索](/document/android/message_search_server.html)。   | 2026-7-10     | - [Web SDK 4.24.1 更新日志](/document/web/releasenote.html#v4-24-1-dev-2026-7-10-开发版) <br/> - [小程序 SDK 4.24.1 更新日志](/document/applet/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
+| Web/小程序 SDK v4.24.1 开发版发布   | [支持服务端消息搜索](/value-added/search/message_search_web.html)。   | 2026-7-10     | - [Web SDK 4.24.1 更新日志](/document/web/releasenote.html#v4-24-1-dev-2026-7-10-开发版) <br/> - [小程序 SDK 4.24.1 更新日志](/document/applet/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
 
 #### 服务端支持消息搜索
 
-服务端支持根据关键词搜索历史消息。详见 [消息搜索文档](/document/server-side/message_search.html)。
+服务端支持根据关键词搜索历史消息。详见 [消息搜索文档](/value-added/search/message_search_rest.html)。
 
 消息搜索为增值服务，要使用该功能，需要在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。开通后，系统会为你的应用创建搜索索引资源并开始同步消息数据。
 
