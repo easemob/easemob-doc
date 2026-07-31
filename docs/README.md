@@ -161,7 +161,7 @@ starter:
         link: /value-added/moderation/moderation_overview.html
         text: 服务端消息搜索
       - icon: /sdk/instant.svg
-        link: /value-added/stt/speech_to_text_billing.html
+        link: /value-added/search/message_search_android.html
         text: 语音转文字    
 projects:
   - title: SDK/服务端功能
