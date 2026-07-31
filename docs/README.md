@@ -152,7 +152,7 @@ starter:
         link: /callkit/android/product_overview.html
         text: 实时音视频
       - icon: /sdk/translation.svg
-        link: /uikit/chatuikit/web/chatfeature_message.html#消息翻译
+        link: /value-added/translation/message_translation_android.html
         text: 消息翻译
       - icon: /sdk/instant.svg
         link: /value-added/push/push_overview.html
@@ -423,7 +423,7 @@ projects:
                 link: /document/windows/message_search_local.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/message_search.html  
+                link: /value-added/search/message_search_rest.html  
           - text: 表情回复
             desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
             sdks:

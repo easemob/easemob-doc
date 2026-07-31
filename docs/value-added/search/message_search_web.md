@@ -26,7 +26,7 @@ Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息�
 
 开始前，请确保满足以下条件：
 
-- 已完成 Web SDK v4.24.1 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
+- 已完成 Web/小程序 SDK v4.24.1 或以上版本的 [初始化](/document/web/initialization.html) 并 [登录](/document/web/login.html) 成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -251,4 +251,4 @@ console.log(result.messages);
 - 调用前需确保 SDK 已初始化并登录成功，否则 `searchMessages` 会直接返回连接状态相关错误。
 - `conversationId` 和 `conversationType` 必须同时设置或同时不设置。仅设置其中一个会返回 `Code.REQUEST_PARAMETER_ERROR`（错误码 `-3`）。
 - 参数错误会在请求发出前由 SDK 以 `Code.REQUEST_PARAMETER_ERROR`（错误码 `-3`）拒绝。
-- 服务端鉴权失败、应用不存在、服务异常等错误会按照 Web SDK 统一错误处理逻辑返回。常见错误包括：`WEBIM_CONNCTION_AUTH_ERROR`(错误码 2)、`WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR`(错误码 28)、`WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR`(错误码 27)、`REST_PARAMS_STATUS`(错误码 700)、`SERVICE_NOT_ENABLED`(错误码 505)、`SERVER_BUSY`(错误码 500) 和 `SERVER_UNKNOWN_ERROR`(错误码 503) 等。详见 [错误码文档](error.html)。
+- 服务端鉴权失败、应用不存在、服务异常等错误会按照 Web SDK 统一错误处理逻辑返回。常见错误包括：`WEBIM_CONNCTION_AUTH_ERROR`(错误码 2)、`WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR`(错误码 28)、`WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR`(错误码 27)、`REST_PARAMS_STATUS`(错误码 700)、`SERVICE_NOT_ENABLED`(错误码 505)、`SERVER_BUSY`(错误码 500) 和 `SERVER_UNKNOWN_ERROR`(错误码 503) 等。详见 [错误码文档](/document/web/error.html)。

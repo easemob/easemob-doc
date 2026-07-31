@@ -26,7 +26,7 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 
 开始前，请确保满足以下条件：
 
-- 已完成 Android SDK v4.24.0 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
+- 已完成 Android SDK v4.24.0 或以上版本的 [初始化](/document/android/initialization.html) 并 [登录](/document/android/login.html) 成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -307,4 +307,4 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 ## 注意事项
 
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMError.SERVICE_NOT_ENABLED`（错误码 `505`）。
-- 参数错误可能通过 `EMValueCallBack#onError` 返回 `EMError.INVALID_PARAM`（错误码 `110`）；鉴权失败可能返回 `EMError.USER_AUTHENTICATION_FAILED`（错误码 `202`）；未知服务端错误可能返回 `EMError.SERVER_UNKNOWN_ERROR`（错误码 `303`）。详见 [错误码文档](error.html)。
+- 参数错误可能通过 `EMValueCallBack#onError` 返回 `EMError.INVALID_PARAM`（错误码 `110`）；鉴权失败可能返回 `EMError.USER_AUTHENTICATION_FAILED`（错误码 `202`）；未知服务端错误可能返回 `EMError.SERVER_UNKNOWN_ERROR`（错误码 `303`）。详见 [错误码文档](/document/android/error.html)。
