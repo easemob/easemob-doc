@@ -4,7 +4,7 @@
 
 服务端消息搜索用于按关键词从服务端搜索当前用户可见的历史消息，适用于全局消息搜索、会话内搜索、按消息类型过滤搜索以及按时间范围检索消息等场景。
 
-Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息搜索。该接口支持以下功能：
+SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息搜索。该接口支持以下功能：
 
 - 支持使用一个或多个关键词搜索历史消息，并设置多关键词匹配关系。
 - 支持按指定会话、消息类型和消息发送时间范围筛选结果。
@@ -43,7 +43,7 @@ Web SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息�
 | 搜索维度 | 支持能力 | 设置参数 |
 | :--- | :--- | :--- |
 | 关键词 | 支持使用一个或多个关键词搜索历史消息，并可设置匹配任一关键词或匹配全部关键词。 | `keywordList`、`keywordListMatchType` |
-| 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。Web SDK 指定会话时必须同时传入会话类型。 | `conversationId`、`conversationType` |
+| 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。指定会话时必须同时传入会话类型。 | `conversationId`、`conversationType` |
 | 消息类型 | 支持搜索文本、图片、视频、位置、文件和合并消息，不支持搜索自定义消息、语音消息和透传消息。 | `msgTypes` |
 | 时间范围 | 支持按消息发送时间范围搜索。开始时间和结束时间必须同时设置。 | `startTime`、`endTime` |
 | 搜索内容 | 支持仅搜索消息内容、搜索消息内容和消息扩展字段（`ext`），或仅搜索消息扩展字段。消息内容包括文本消息内容以及自动翻译后的文本内容。 | `searchScope` |
@@ -139,7 +139,7 @@ try {
 | `requestId` | `string` | 服务端返回的请求追踪 ID。 |
 | `timestamp` | `number` | 服务端响应时间戳，单位为毫秒。 |
 
-`messages` 中的每一项为 `ServerSearchMessage`。该对象会被 SDK 映射为 Web SDK 消息结构，可按普通消息字段读取消息 ID、消息类型、发送方、接收方、会话类型、消息时间戳、消息体字段和扩展字段。
+`messages` 中的每一项为 `ServerSearchMessage`。该对象会被 SDK 映射为消息结构，可按普通消息字段读取消息 ID、消息类型、发送方、接收方、会话类型、消息时间戳、消息体字段和扩展字段。
 
 常用字段如下：
 
@@ -247,8 +247,8 @@ console.log(result.messages);
 
 ## 注意事项
 
-- 搜索服务需要单独开通。若未开通，服务端可能返回服务未开通错误，Web SDK 会映射为 `Code.SERVICE_NOT_ENABLED`（错误码 `505`）。
+- 搜索服务需要单独开通。若未开通，服务端可能返回服务未开通错误，SDK 会映射为 `Code.SERVICE_NOT_ENABLED`（错误码 `505`）。
 - 调用前需确保 SDK 已初始化并登录成功，否则 `searchMessages` 会直接返回连接状态相关错误。
 - `conversationId` 和 `conversationType` 必须同时设置或同时不设置。仅设置其中一个会返回 `Code.REQUEST_PARAMETER_ERROR`（错误码 `-3`）。
 - 参数错误会在请求发出前由 SDK 以 `Code.REQUEST_PARAMETER_ERROR`（错误码 `-3`）拒绝。
-- 服务端鉴权失败、应用不存在、服务异常等错误会按照 Web SDK 统一错误处理逻辑返回。常见错误包括：`WEBIM_CONNCTION_AUTH_ERROR`(错误码 2)、`WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR`(错误码 28)、`WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR`(错误码 27)、`REST_PARAMS_STATUS`(错误码 700)、`SERVICE_NOT_ENABLED`(错误码 505)、`SERVER_BUSY`(错误码 500) 和 `SERVER_UNKNOWN_ERROR`(错误码 503) 等。详见 [错误码文档](/document/web/error.html)。
+- 服务端鉴权失败、应用不存在、服务异常等错误会按照 SDK 统一错误处理逻辑返回。常见错误包括：`WEBIM_CONNCTION_AUTH_ERROR`(错误码 2)、`WEBIM_CONNCTION_TOKEN_NOT_ASSIGN_ERROR`(错误码 28)、`WEBIM_CONNCTION_APPKEY_NOT_ASSIGN_ERROR`(错误码 27)、`REST_PARAMS_STATUS`(错误码 700)、`SERVICE_NOT_ENABLED`(错误码 505)、`SERVER_BUSY`(错误码 500) 和 `SERVER_UNKNOWN_ERROR`(错误码 503) 等。详见 [错误码文档](/document/web/error.html)。
