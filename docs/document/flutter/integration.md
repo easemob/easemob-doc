@@ -28,19 +28,12 @@ android {
 }
 ```
 
-2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `</application>` 下添加：
+2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `<manifest>` 节点下、`<application>` 节点外添加以下权限：
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.WAKE_LOCK"/>
-```
-
-3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则：
-
-```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
 ### 设置 iOS

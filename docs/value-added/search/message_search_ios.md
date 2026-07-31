@@ -14,7 +14,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 ## 功能开通
 
-要使用服务端消息搜索功能，需 **联系环信商务开通**。
+要使用服务端消息搜索功能，需要在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
@@ -26,7 +26,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 开始前，请确保满足以下条件：
 
-- 已完成 iOS SDK v4.24.0 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
+- 已完成 iOS SDK v4.24.0 或以上版本的 [初始化](/document/ios/initialization.html) 并 [登录](/document/ios/login.html) 成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -198,4 +198,4 @@ option.keywordMatchType = EMKeywordListMatchTypeAND;
 ## 注意事项
 
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMErrorServiceNotEnable`（错误码 `505`）。
-- 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。详见 [错误码文档](error.html)。
+- 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。详见 [错误码文档](/document/ios/error.html)。

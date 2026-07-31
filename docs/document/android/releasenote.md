@@ -4,7 +4,7 @@
 
 #### 新增功能
 
-- 支持 [服务端消息搜索](message_search_server.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用。
+- 支持 [服务端消息搜索](/value-added/search/message_search_android.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
   消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
 - 新增异步接口，用于 [更新群组扩展字段](group_attributes.html#更新群扩展字段)。
 - 新增异步接口，用于 [获取服务器端推送配置](/document/android/push/push_display_attribute.html#获取推送通知的显示属性)。

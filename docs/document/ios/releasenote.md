@@ -1,10 +1,10 @@
-# iOS IM SDK 更新日志
+﻿# iOS IM SDK 更新日志
 
 ## v4.24.0 Dev 2026-7-10（开发版）
 
 #### 新增功能
 
-支持 [服务端消息搜索](message_search_server.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用。
+支持 [服务端消息搜索](/value-added/search/message_search_ios.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
 
@@ -819,7 +819,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 新增特性:
 
 - [IM SDK] [用户在线状态 (Presence) 订阅](presence.html)功能。
-- [IM SDK] [翻译](message_translation.html)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
+- [IM SDK] [翻译](/value-added/translation/message_translation_ios.html)功能更新，增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 #### 优化：
 
@@ -1836,3 +1836,4 @@ bug fix:
 
 1. 全新的通信协议：全新的基于消息同步的私有协议，在不稳定网络环境下更稳定更省流量，确保消息投递的可靠、顺序以及实时性，并具有更高的安全性。同时提供了更好的扩展性，将支持更多的对接和设备同步场景。
 2. 全新的 SDK：全面重构，将核心通信模块做了更好的封装；简化了接口，结构更清晰，集成更容易；提升了登录速度和弱网络环境下的可靠性编辑。
+

@@ -1,5 +1,9 @@
 # 聊天页面
 
+:::warning
+本文为旧版 UI 组件文档，仅供历史版本参考。当前版本请参考 [聊天页面介绍](chatuikit_chat_intro.html)，使用 `MessagesView` 和 `ChatUIKitProfile` 集成聊天页面。
+:::
+
 用户可以在聊天页面中进行单聊、群聊或聊天室聊天。该页面分为消息列表和消息输入区域。
 
 ## 创建聊天界面

@@ -1,10 +1,10 @@
-# Web IM SDK 更新日志
+﻿# Web IM SDK 更新日志
 
 ## v4.24.1 Dev 2026-7-10（开发版）
 
 #### 新增功能
 
-支持 [服务端消息搜索](message_search_server.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用。
+支持 [服务端消息搜索](/value-added/search/message_search_web.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
 
@@ -529,7 +529,7 @@
 #### 新增特性:
 
 - [IM SDK] 增加 [用户在线状态(Presence)](presence.html) 订阅功能。
-- [IM SDK] [翻译功能](message_translation.html)：增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
+- [IM SDK] [翻译功能](/value-added/translation/message_translation_web.html)：增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 #### 优化：
 
@@ -1117,3 +1117,4 @@
 - 修复 bug。IE 浏览器接收文本消息以换行符开始时会遮挡好友名称。
 - 修复 bug。在线用户被邀请加入群组不能实时显示，必须重新登录。
 - 丰富相关文档内容。
+

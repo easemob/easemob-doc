@@ -55,7 +55,7 @@ flutter create chat_uikit_demo --platforms=android,ios
 
 ```bash
 cd chat_uikit_demo
-flutter pub add em_chat_uikit:2.3.0
+flutter pub add em_chat_uikit
 flutter pub get
 ```
 

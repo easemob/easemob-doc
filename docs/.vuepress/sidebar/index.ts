@@ -8,6 +8,7 @@ import { PUSH_SIDEBAR } from "./push";
 import { MODERATION_SIDEBAR } from "./moderation";
 import { TRANSLATION_SIDEBAR } from "./translation";
 import { STT_SIDEBAR } from "./stt";
+import { SEARCH_SIDEBAR } from "./search";
 
 export const zhSidebar = sidebar({
   "/product/": [
@@ -405,4 +406,5 @@ export const zhSidebar = sidebar({
   "/value-added/moderation":MODERATION_SIDEBAR,
   "/value-added/translation":TRANSLATION_SIDEBAR,
   "/value-added/stt":STT_SIDEBAR,
+  "/value-added/search": SEARCH_SIDEBAR,
 });
