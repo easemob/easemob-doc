@@ -67,7 +67,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 | `data`                | JSON   | 离线推送通知的设置。   |
 | `data.type`           | String | 离线推送通知方式。     |
 | `data.ignoreInterval` | String | 离线推送免打扰时间段。 |
-| `data.ignoreDuration` | Long   | 离线推送免打扰时长。   |
+| `data.ignoreDuration` | Long   | 离线推送免打扰时长到期的时间戳。   |
 
 响应体中的其他参数说明如下表所示：
 
