@@ -4,6 +4,10 @@
 
 本文介绍环信即时通讯 IM Android SDK 如何搜索本地消息。调用本文中的消息搜索方法可以搜索本地数据库中除透传消息之外的所有类型的消息，因为透传消息不在本地数据库中存储。
 
+:::tip
+若要搜索服务端的消息，请联系商务开通。详见 [服务端消息搜索文档](/value-added/search/message_search_android.html)。
+:::
+
 ## 技术原理
 
 环信即时通讯 IM Android SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
