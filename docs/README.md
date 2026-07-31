@@ -151,12 +151,15 @@ starter:
       - icon: /sdk/video.svg
         link: /callkit/android/product_overview.html
         text: 实时音视频
-      - icon: /sdk/translation.svg
-        link: /value-added/translation/message_translation_android.html
-        text: 消息翻译
       - icon: /sdk/instant.svg
         link: /value-added/push/push_overview.html
         text: 即时推送
+      - icon: /sdk/translation.svg
+        link: /value-added/translation/message_translation_android.html
+        text: 消息翻译
+      - icon: /sdk/check_texts.svg
+        link: /value-added/moderation/moderation_overview.html
+        text: 服务端消息搜索
       - icon: /sdk/instant.svg
         link: /value-added/stt/speech_to_text_billing.html
         text: 语音转文字    
