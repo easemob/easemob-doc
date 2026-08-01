@@ -86,7 +86,7 @@ let loggedIn = EMClient.shared().isLoggedIn
 
 通过 `EMClient.add(_:delegateQueue:)` 注册 `EMClientDelegate`。建议在调用登录接口前注册，以免遗漏登录建连及后续同步状态。
 
-`delegateQueue` 传 `nil` 时，iOS SDK 5.0 的当前实现会将代理回调分发到主队列；传入自定义队列时，回调在指定队列执行。
+`delegateQueue` 传 `nil` 时，iOS SDK 的当前实现会将代理回调分发到主队列；传入自定义队列时，回调在指定队列执行。
 
 ### 回调说明
 
@@ -190,7 +190,7 @@ EMClient.shared().removeDelegate(connectionListener)
 
 登录成功后，如果因网络信号弱、网络切换或其他可恢复原因导致连接中断，SDK 会自动尝试重连，无需应用重复调用登录接口。
 
-连接断开时，`connectionStateDidChange(_:)` 返回 `.disconnected`；重连成功后返回 `.connected`。iOS SDK 5.0 仅公开“已连接”和“未连接”两种 `EMConnectionState`，不提供独立的“正在连接”或“重连失败”状态。应用应结合该回调、`isConnected` 和系统网络状态展示连接状态。
+连接断开时，`connectionStateDidChange(_:)` 返回 `.disconnected`；重连成功后返回 `.connected`。iOS SDK 仅公开“已连接”和“未连接”两种 `EMConnectionState`，不提供独立的“正在连接”或“重连失败”状态。应用应结合该回调、`isConnected` 和系统网络状态展示连接状态。
 
 以下情况不能仅靠自动重连恢复，应用需要根据专用回调处理账号、Token、设备或服务限制：
 
@@ -250,7 +250,7 @@ EMClient.shared().renewToken("newToken") { error in
 ## 最佳实践
 
 - 在调用 Token 登录接口前注册 `EMClientDelegate`，避免遗漏连接、Token 和同步状态回调。
-- iOS SDK 5.0 不再依赖自动登录；应用启动或需要建立 IM 会话时应显式登录。
+- iOS SDK 不再依赖自动登录；应用启动或需要建立 IM 会话时应显式登录。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
 - 使用 `isConnected` 查询当前连接状态，使用 `isLoggedIn` 查询登录状态，并优先以代理回调驱动 UI 更新。
 - 收到 `tokenWillExpire(_:)` 后尽快续期 Token；收到 `tokenDidExpire(_:)` 后获取新 Token 并重新登录。
