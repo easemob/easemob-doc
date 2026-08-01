@@ -628,7 +628,7 @@ func sendPrivateImage(
 ```
 
 :::tip 
-- 对于图片消息，应将 `isOriginalImage` 设置为 `true`，确保 `remotePath` 表示设置的自有服务器地址。 <br/> - 关闭 `isAutoTransferMessageAttachments` 后，附件的上传、下载、缓存、失败重试和访问鉴权均需由应用自行实现。 <br/>  - 该配置会影响所有附件消息，而不只影响图片消息。 - 消息本身仍通过环信服务器发送。 
+对于图片消息，应将 `isOriginalImage` 设置为 `true`，确保 `remotePath` 表示设置的自有服务器地址。 <br/> - 关闭 `isAutoTransferMessageAttachments` 后，附件的上传、下载、缓存、失败重试和访问鉴权均需由应用自行实现。 <br/>  - 该配置会影响所有附件消息，而不只影响图片消息。 - 消息本身仍通过环信服务器发送。 
 :::
 
 ## 发送位置消息
@@ -722,7 +722,9 @@ iOS SDK 只负责封装和发送经纬度、地址及建筑物名称等位置数
 
 `action` 用于标识具体的业务命令，但不能以 `em_` 或 `easemob::` 开头，这些前缀为 SDK 内部保留字段。
 
-:::tip - 透传消息发送后不支持撤回。 - 透传消息不会写入 SDK 本地消息数据库，因此通常不在聊天 UI 中显示。 - 透传消息通过独立的消息回调接收，接收方需要实现 `EMChatManagerDelegate#cmdMessagesDidReceive:`。 - 如果只需将透传消息投递给当前在线用户，可以将 `EMCmdMessageBody#isDeliverOnlineOnly` 设置为 `true`。 :::
+:::tip 
+<br/> - 透传消息发送后不支持撤回。 <br/> - 透传消息不会写入 SDK 本地消息数据库，因此通常不在聊天 UI 中显示。<br/> - 如果只需将透传消息投递给当前在线用户，可以将 `EMCmdMessageBody#isDeliverOnlineOnly` 设置为 `true`。 
+:::
 
 #### 发送流程
 

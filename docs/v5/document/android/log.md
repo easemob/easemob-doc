@@ -24,9 +24,6 @@ EMClient.getInstance().setDebugMode(true);
 - `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`。
 - `{App Key}` 需要替换为应用的环信 App Key。
 
-// TODO：AI 建议下面的命令中用 Android，而不是 android 
-// 用Android
-
 ```shell
 adb pull /sdcard/Android/data/{应用包名}/{App Key}/core_log
 ```

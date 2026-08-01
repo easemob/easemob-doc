@@ -12,7 +12,7 @@ Android SDK 中，删除好友、退出群组或退出聊天室时，本地会�
 
 你还可以通过 `EMChatManager` 删除当前用户服务端和本地的指定会话、仅删除本地会话、批量删除本地会话或清空全部会话；通过 `EMConversation` 可删除指定的本地消息。
 
-:::tip
+:::warning
 删除操作可能无法恢复。调用前应明确删除范围。
 :::
 
@@ -193,7 +193,7 @@ EMClient.getInstance()
                 });
 ```
 
-:::caution 
+:::warning
 将 `clearServerData` 设为 `true` 会删除当前用户服务端保存的全部会话及消息。执行前应再次向用户确认删除范围。
 :::
 

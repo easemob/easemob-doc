@@ -167,7 +167,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 }
 ```
 
-1. 你可以通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径：
+3. 你可以通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径：
 
 ```java
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
