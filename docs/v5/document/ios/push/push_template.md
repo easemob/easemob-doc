@@ -38,9 +38,7 @@
 - [调用 REST API 配置](/document/server-side/push_template_overview.html)。
 - 在 [环信控制台](https://console.easemob.com/user/login) 设置推送模板。
 
-推送模板相关的数据结构，详见 [推送扩展字段](/document/server-side/push_extension.html)。
-
-下面为在环信控制台设置离线推送模板。
+推送模板相关的数据结构，详见 [推送扩展字段](/document/server-side/push_extension.html)。下面为在环信控制台设置离线推送模板。
 
 ### 编辑默认推送模板
 

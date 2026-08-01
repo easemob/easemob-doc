@@ -199,8 +199,6 @@ client.removeEventHandler('conversation-listener');
 
 ## 接口最佳实践
 
-// TODO：接口改为最佳实践，之前是 “接口限制与最佳实践”，统一替换链接。
-
 | 场景 | 说明 | 推荐做法 |
 | :--- | :--- | :--- |
 | 会话列表更新 | `getConversationList` 从 SDK 本地会话列表缓存中读取当前已有的非空会话，不发起网络请求。收发消息、会话同步、置顶、标记、删除会话、清零未读数等操作可能更新本地会话列表，并触发 `onConversationListUpdate`。 | 1. 登录后可通过自动同步或调用 `refreshSessionList` 从服务端获取最新会话列表，并更新本地缓存。<br/>2. 展示会话列表时，建议监听 `onConversationListUpdate`，使用事件中的 `items` 刷新 UI。<br/>3. 如需主动读取当前本地非空会话列表，可调用 `getConversationList`。 |

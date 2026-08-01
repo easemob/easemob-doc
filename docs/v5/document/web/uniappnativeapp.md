@@ -1,4 +1,4 @@
-# 使用 uni-app 构建 App（Android、iOS）和小程序
+# uni-app 构建移动 App 和小程序
 
 ## 概述
 

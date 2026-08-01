@@ -8,7 +8,7 @@
 
 1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)。
 2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-3. 若使用推送模板，你需要在 [环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能 > 消息** 页面激活。**激活后，如需关闭推送模板功能，必须联系商务，因为该操作会删除推送模板相关的所有配置。**
+3. 若使用推送模板，你需要在 [环信控制台](https://console.easemob.com/user/login)的 **即时通讯 > 基础功能 > 消息** 页面激活。**激活后，如需关闭推送模板功能，必须联系商务，因为该操作会删除推送模板相关的所有配置。**
 4. 各推送使用的条件：
     - 小米推送：在小米设备上可用；
     - 华为推送：在华为设备上可用；
@@ -23,7 +23,7 @@
 
 ## 实现流程
 
-### 步骤一 上传推送证书至环信控制台
+### 步骤 1 上传推送证书至环信控制台
 
 1. 在第三方推送服务后台注册应用，获取应用信息，开启推送服务。
    
@@ -33,7 +33,7 @@
 更多详情，参见 [Android 离线推送](/document/android/push/push_fcm.html)和 [APNs 离线推送](/document/ios/push/push_apns.html)。
 :::
 
-### 步骤二 配置 uni-app 应用支持推送插件
+### 步骤 2 配置 uni-app 应用支持推送插件
 
 1. 新建 uni-app 工程，并引入[环信 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.1.0.zip)。
    
@@ -89,11 +89,7 @@
   
 ![img](/images/applet/push_tip6.png)
 
-### 步骤三 集成 EMPushUniPlugin 插件
-
-:::tip
-SDK 4.14.0 及以上版本支持 uni-app 推送。
-:::
+### 步骤 3 集成 EMPushUniPlugin 插件
 
 1. 安装并引入环信 uni-app SDK。
 
@@ -156,7 +152,7 @@ onLaunch(() => {
 ```
 
 
-### 步骤四 测试离线推送
+### 步骤 4 测试离线推送
 
 消息接收方登录 IM 账户后，SDK 会自动上传对应的推送证书, 杀死应用，收到离线消息，能够接收到推送消息。
 
