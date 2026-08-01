@@ -46,7 +46,7 @@ client.chatManager.addEventHandler(CHAT_HANDLER_ID, {
 | `conversationType` | `'singleChat' \| 'groupChat' \| 'chatRoom'` | 会话类型。 |
 | `type` | MessageType | 消息类型。 |
 | `body` | MessageBody | 消息体。不同消息类型的结构不同。 |
-| `ext` | Record<string, unknown> | 扩展字段。 |
+| `ext` | `Record<string, unknown>` | 扩展字段。 |
 | `timestamp` | Number | 消息时间戳，单位为毫秒。 |
 | `direct` | `'SEND' \| 'RECEIVE'` | 消息方向。 |
 | `isOnline` | Boolean | 是否为在线消息；`false` 表示离线同步得到的消息。 |
@@ -442,7 +442,7 @@ client.chatManager.addEventHandler('cmd-message-listener', {
 | 字段 | 类型 | 必填/可选 | 适用场景 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
 | `action` | String | 必填 | 业务指令分发 | 透传消息的命令动作。 |
-| `params` | Record<string, String> | 可选 | 协议兼容读取 | 命令参数。当前主要用于接收或协议兼容场景。 |
+| `params` | `Record<string, String>` | 可选 | 协议兼容读取 | 命令参数。当前主要用于接收或协议兼容场景。 |
 
 ## 接收自定义类型消息
 
@@ -479,7 +479,7 @@ client.chatManager.addEventHandler('custom-message-listener', {
 | 字段 | 类型 | 必填/可选 | 适用场景 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
 | `event` | String | 必填 | 业务事件分发 | 自定义消息事件名。 |
-| `params` | Record<string, String> | 可选 | 业务参数读取 | 自定义业务参数。 |
+| `params` | `Record<string, String>` | 可选 | 业务参数读取 | 自定义业务参数。 |
 
 ## 接收合并消息
 
@@ -543,7 +543,7 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | `compatibleText` | String | 必填 | 兼容展示 | 不支持完整合并展示时的兼容文案。 | // 要删除吗？
 | `url` | String | 可选 | 下载详情 | 合并消息详情下载地址。 |
 | `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
-| `messageList` | ReadonlyArray<Message> | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |
+| `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |
 | `combineLevel` | Number | 必填 | 嵌套层级判断 | 当前合并消息层级。 |
 
 ## 离线消息同步事件

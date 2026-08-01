@@ -38,7 +38,6 @@ const sentMessage = await client.chatManager.sendMessage(message);
 ```
 
 :::tip
-
 - `sendMessage` 的 Promise 成功返回，表示该消息已经完成 SDK 发送流程。
 - 接收方以及发送方的其他在线设备会通过 `onMessage` 事件收到消息。
 - 附件类消息会先上传附件，再发送消息体。
@@ -49,14 +48,14 @@ const sentMessage = await client.chatManager.sendMessage(message);
 各类消息的创建方法 `create*Message()` 都支持以下基础参数：
 
 | 参数                   | 类型                    | 必填/可选   | 适用场景              | 说明                                                                                                 |
-| :--------------------- | :---------------------- | :---------- | :-------------------- | :--------------------------------------------------------------------------------------------------- | ---------- | ------------------------------------ |
-| `conversationId`       | String                  | 必填        | 所有消息              | 会话 ID。单聊时为对端用户 ID，群聊时为群组 ID，聊天室时为聊天室 ID。                                 |
-| `conversationType`     | `'singleChat'           | 'groupChat' | 'chatRoom'`           | 必填                                                                                                 | 所有消息   | 指定单聊、群聊或聊天室。             |
-| `ext`                  | Record<string, unknown> | 可选        | 所有消息              | 扩展字段，需可 JSON 序列化，建议放业务附加信息，如埋点、卡片元数据、审核外字段。                     |
+| :--------------------- | :---------------------- | :---------- | :-------------------- | :---------------------------- | 
+| `conversationId`       | String                  | 必填        | 所有消息              | 会话 ID。单聊时为对端用户 ID，群聊时为群组 ID，聊天室时为聊天室 ID。   |
+| `conversationType`     | `singleChat` / `groupChat` / `chatRoom`           | 必填              | 所有消息   | 指定单聊、群聊或聊天室。             |
+| `ext`                  | `Record<string, unknown>` | 可选        | 所有消息              | 扩展字段，需可 JSON 序列化，建议放业务附加信息，如埋点、卡片元数据、审核外字段。                     |
 | `timestamp`            | Number                  | 可选        | 所有消息              | 本地时间戳，单位毫秒。不传时由 SDK 自动生成。                                                        |
 | `deliverOnlineOnly`    | Boolean                 | 可选        | 文本、透传、自定义等  | 是否仅投递给在线用户。适合输入状态、瞬时控制消息，不需要离线保存。                                   |
 | `webhookEnv`           | String                  | 可选        | 所有消息              | Webhook 路由环境标识。服务端会根据该字段进行回调路由匹配。需要区分开发、测试或灰度等回调环境时使用。 |
-| `priority`             | `'high'                 | 'normal'    | 'low'`                | 可选                                                                                                 | 聊天室消息 | 聊天室高并发时为重要消息提高优先级。 |
+| `priority`             | `high` / `low` / `normal`                | 可选      | 聊天室消息 | 聊天室高并发时为重要消息提高优先级。 |
 | `receiverList`         | String[]                | 可选        | 群组/聊天室的定向消息 | 群组或聊天室里只发给指定成员时使用。    |
 | `needReadReceipt` | Boolean                 | 可选        | 群聊消息              | 需要统计群消息已读情况时使用。                                                                       |
 
@@ -98,7 +97,7 @@ await client.chatManager.sendMessage(message);
 | :--------------------- | :---------------------- | :-------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------- |
 | `content`              | String                  | 必填      | 普通聊天、通知正文、说明文本 | 文本消息的核心内容。                                                                                             |
 | `targetLanguages`      | String[]                | 可选      | 发送即翻译                   | 发送时附带目标翻译语言，适用于需要即时翻译的文本消息场景。                                                       |
-| `ext`                  | Record<string, unknown> | 可选      | 业务扩展信息                 | 用于传递业务附加字段，需保持 JSON 可序列化。建议将业务附加数据放入该字段，而不要将复杂业务结构直接写入文本正文。 |
+| `ext`                  | `Record<string, unknown>` | 可选      | 业务扩展信息                 | 用于传递业务附加字段，需保持 JSON 可序列化。建议将业务附加数据放入该字段，而不要将复杂业务结构直接写入文本正文。 |
 | `deliverOnlineOnly`    | Boolean                 | 可选      | 瞬时消息、状态通知           | 是否仅投递给在线用户。                                                                                           |
 | `webhookEnv`           | String                  | 可选      | 多环境回调路由               | 用于区分不同 Webhook 回调环境。                                                                                  |
 | `receiverList`         | String[]                | 可选      | 群聊/聊天室定向消息          | 指定群聊中的定向接收者，仅群聊和聊天室有效。                                                                     |
@@ -608,7 +607,7 @@ await client.chatManager.sendMessage(message);
 | :------------------ | :---------------------- | :-------- | :--------------------------- | :----------------------- |
 | `action`            | String                  | 必填      | 输入状态、控制信令、业务指令 | 透传消息的动作名称。     |
 | `deliverOnlineOnly` | Boolean                 | 可选      | 瞬时状态通知                 | 是否仅投递给在线用户。   |
-| `ext`               | Record<string, unknown> | 可选      | 业务扩展信息                 | 用于携带附加业务上下文。 |
+| `ext`               | `Record<string, unknown>` | 可选      | 业务扩展信息                 | 用于携带附加业务上下文。 |
 
 ## 发送自定义类型消息
 
@@ -659,8 +658,8 @@ await client.chatManager.sendMessage(message);
 | 参数     | 类型                    | 必填/可选 | 适用场景                       | 说明                               |
 | :------- | :---------------------- | :-------- | :----------------------------- | :--------------------------------- |
 | `event`  | String                  | 必填      | 礼物、订单、互动动作、业务卡片 | 自定义事件名称。                   |
-| `params` | Record<string, string>  | 可选      | 传递业务参数                   | 自定义业务参数。建议保持结构简单。 |
-| `ext`    | Record<string, unknown> | 可选      | 业务扩展信息                   | 用于传递额外业务上下文。           |
+| `params` | `Record<string, string>`  | 可选      | 传递业务参数                   | 自定义业务参数。建议保持结构简单。 |
+| `ext`    | `Record<string, unknown>` | 可选      | 业务扩展信息                   | 用于传递额外业务上下文。           |
 
 ## 发送合并消息
 
@@ -708,7 +707,7 @@ await client.chatManager.sendMessage(message);
 | `title`          | String                 | 必填      | 聊天记录转发     | 合并消息标题。                                   |
 | `summary`        | String                 | 必填      | 聊天记录预览     | 合并消息摘要，通常用于列表预览展示。             |
 | `compatibleText` | String                 | 可选      | 兼容展示         | 兼容展示文本；未传时 SDK 默认使用 `[版本过低]`。 |
-| `messageList`    | ReadonlyArray<Message> | 必填      | 多条消息打包转发 | 被合并的原始消息列表。                           |
+| `messageList`    | `ReadonlyArray<Message>` | 必填      | 多条消息打包转发 | 被合并的原始消息列表。                           |
 
 #### 逻辑说明
 

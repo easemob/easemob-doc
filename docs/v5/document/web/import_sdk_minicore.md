@@ -1,7 +1,5 @@
 ﻿# 按需导入 SDK
 
-<Toc />
-
 环信即时通讯 IM Web SDK 采用模块化设计。你可以通过 `ChatClient` 创建 SDK 实例，并根据业务需要注册对应的功能管理器（Manager），例如消息管理、联系人管理、群组管理、聊天室管理、在线状态管理和推送管理等。注册对应 Manager 后，即可通过 `client.chatManager`、`client.contactManager`、`client.groupManager` 等属性访问相关功能。
 
 :::tip

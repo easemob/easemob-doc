@@ -1,7 +1,5 @@
 # 消息翻译
 
-<Toc />
-
 ## 功能说明
 
 为方便用户在聊天过程中对文本消息进行翻译，环信即时通讯 IM Android SDK 集成了 Microsoft Azure Translation API，支持对文本消息进行按需翻译或自动翻译：
