@@ -2,97 +2,150 @@
 
 <Toc />
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对 **文本消息** 进行按需翻译或自动翻译：
+## 功能说明
 
-- 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
-- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。  
+为方便用户在聊天过程中对文本消息进行翻译，环信即时通讯 IM Android SDK 集成了 Microsoft Azure Translation API，支持对文本消息进行按需翻译或自动翻译：
+
+- **按需翻译**：接收方在收到文本消息后，将消息内容翻译为一种或多种目标语言。
+- **自动翻译**：发送方在创建文本消息时设置目标语言列表。消息发送时，SDK 会自动翻译文本内容，接收方收到的消息中可包含原文和译文。
 
 ## 功能开通
 
-文本翻译为增值服务，如需使用请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译)。
+文本翻译为增值服务，需先在[环信控制台开通](/product/console/purchase_value_added.html#消息翻译)，具体费用详见[计费策略](/product/pricing_policy.html#消息翻译)。
 
-单次翻译请求最多支持 10,000 字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 字符翻译为 4 种语言，则计费字符数为 2000 字符。
+使用时需注意：
 
-若传入的文本超过上限，则上报错误 400，错误提示为 “The input text is too long”。
-
-该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译)。
+- 单次翻译请求最多支持 10,000 字符，计费按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 字符翻译为 4 种语言，计费字符数为 2000。
+- 按需翻译场景下，若消息文本过长，`translateMessage` 将返回错误码 `1110`，错误原因为 `translate_text_too_long`。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-2. [已开通翻译功能， 了解翻译服务的使用限制](#功能开通)。
-3. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-4. 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+- 已完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- [已开通翻译功能，并了解翻译服务的使用限制](#功能开通)。
+- 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+- 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
-## 技术原理
+## 获取翻译服务支持的语言
 
-SDK 支持你通过调用 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMTextMessageBody](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_text_message_body.html) 类在项目中实现如下功能：
+无论是按需翻译还是自动翻译，都需先调用 `EMChatManager#fetchSupportLanguages` 获取翻译服务支持的语言列表。`EMLanguage` 对象中的 `LanguageCode`、`LanguageName` 和 `LanguageLocalName` 分别表示语言代码、语言名称和本地语言名称。
 
-- `EMChatManager#fetchSupportLanguages` 获取支持的翻译语言；
-- 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
-- 自动翻译：发送方发送消息之前设置 `MessageBody` 中的 `setTargetLanguages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
+```java
+EMClient.getInstance()
+        .chatManager()
+        .fetchSupportLanguages(
+                new EMValueCallBack<List<EMLanguage>>() {
+                    @Override
+                    public void onSuccess(List<EMLanguage> languages) {
+                        for (EMLanguage language : languages) {
+                            String code = language.LanguageCode;
+                            String name = language.LanguageName;
+                            String localName = language.LanguageLocalName;
+                        }
+                    }
 
-如下为按需翻译示例：
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+## 按需翻译
+
+接收方调用 `EMChatManager#translateMessage`，将收到的文本消息翻译为一种或多种目标语言。翻译成功后，可从回调返回的消息中调用 `EMTextMessageBody#getTranslations` 获取译文列表。
 
 ![img](/images/ios/translation.png)
 
-## 实现方法
-
-### 获取翻译服务支持的语言
-
-无论是按需翻译还是自动翻译，都需先调用 `fetchSupportLanguages` 获取支持的翻译语言。获取支持的翻译语言的示例代码如下：
-
 ```java
-//获取支持的翻译语言。
-EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<List<EMLanguage>>{});
+List<String> targetLanguages = Arrays.asList("zh-Hans", "ja");
+
+EMClient.getInstance()
+        .chatManager()
+        .translateMessage(
+                message,
+                targetLanguages,
+                new EMValueCallBack<EMMessage>() {
+                    @Override
+                    public void onSuccess(EMMessage translatedMessage) {
+                        if (translatedMessage.getType()
+                                != EMMessage.Type.TXT) {
+                            return;
+                        }
+
+                        EMTextMessageBody body =
+                                (EMTextMessageBody) translatedMessage.getBody();
+                        List<EMTextMessageBody.EMTranslationInfo>
+                                translations = body.getTranslations();
+
+                        for (EMTextMessageBody.EMTranslationInfo info
+                                : translations) {
+                            String languageCode = info.languageCode;
+                            String translatedText = info.translationText;
+                        }
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 按需翻译
+## 自动翻译
 
-接收方调用 `translateMessage` 对收到的文本消息进行翻译。翻译调用过程如下：
+发送方创建文本消息后，调用 `EMTextMessageBody#setTargetLanguages` 设置自动翻译的目标语言列表。发送消息时，SDK 会根据该列表翻译文本内容。接收方收到的文本消息中可包含原文和译文。
 
 ```java
-List<String> languageList = new ArrayList<>();
-languageList.add("en");
-...
-EMClient.getInstance().chatManager().translateMessage(
-    message,
-    languageList,
-    new EMValueCallBack<EMMessage>() {});
+List<String> targetLanguages =
+        Collections.singletonList("zh-Hans");
+
+EMMessage message = EMMessage.createTextSendMessage(
+        "Hello!",
+        conversationId);
+
+// 群聊设置为 GroupChat，聊天室设置为 ChatRoom；单聊默认为 Chat。
+message.setChatType(EMMessage.ChatType.Chat);
+
+EMTextMessageBody body =
+        (EMTextMessageBody) message.getBody();
+// 设置自动翻译的目标语言列表。
+body.setTargetLanguages(targetLanguages);
+
+EMClient.getInstance()
+        .chatManager()
+        .sendMessage(message);
 ```
 
-翻译成功之后，译文信息会保存到消息中。调用 `getTranslations` 获取译文内容。示例代码如下：
+接收方收到文本消息后，可以调用 `EMTextMessageBody#getTranslations` 获取译文列表：
 
 ```java
-EMTextMessageBody body = (EMTextMessageBody)message.getBody();
-List<EMTranslationInfo> infoList = body.getTranslations();
-```
-
-### 设置自动翻译
-
-创建消息时，发送方设置 `MessageBody` 中的 `setTargetLanguages` 字段为译文语言，设置过程如下：
-
-```java
-...
-EMTextMessageBody body = new EMTextMessageBody("文本内容");
-body.setTargetLanguages(languageList);
-...
-```
-
-发送时消息原文和译文一起发送。
-
-接收方收到消息后，调用 `getTranslations` 获取消息的译文列表，示例代码如下：
-
-```java
-EMTextMessageBody body = (EMTextMessageBody)message.getBody();
-List<EMTranslationInfo> infoList = body.getTranslations();
+if (message.getType() == EMMessage.Type.TXT) {
+    EMTextMessageBody body =
+            (EMTextMessageBody) message.getBody();
+    List<EMTextMessageBody.EMTranslationInfo> translations =
+            body.getTranslations();
+}
 ```
 
 ## 参考
 
-### 设置和获取推送的目标语言
+#### 设置和获取推送的目标语言
 
-设置推送的目标语言，设置之后收到的离线推送就会是目标语言，如果目标语言在消息里不存在，就以原文推送，详见 [设置推送翻译](/document/android/push/push_translation.html)。
+设置推送的目标语言后，收到的离线推送将使用目标语言。如果消息中不存在该目标语言的译文，则推送原文。详见[设置推送翻译](/document/android/push/push_translation.html)。
 
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`fetchSupportLanguages`](#获取翻译服务支持的语言) | `EMChatManager` | 获取翻译服务支持的语言列表。 |
+| [`translateMessage`](#按需翻译) | `EMChatManager` | 将文本消息按需翻译为一种或多种目标语言。 |
+| [`getBody`](#按需翻译) | `EMMessage` | 获取消息体。 |
+| [`getTranslations`](#按需翻译) | `EMTextMessageBody` | 获取文本消息中的译文列表。 |
+| [`createTextSendMessage`](#自动翻译) | `EMMessage` | 创建文本消息。 |
+| [`setChatType`](#自动翻译) | `EMMessage` | 设置消息的会话类型。 |
+| [`setTargetLanguages`](#自动翻译) | `EMTextMessageBody` | 设置自动翻译的目标语言列表。 |
+| [`sendMessage`](#自动翻译) | `EMChatManager` | 发送包含自动翻译配置的文本消息。 |

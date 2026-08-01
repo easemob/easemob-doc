@@ -16,7 +16,7 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 
 要使用服务端消息搜索功能，需 **联系环信商务开通**。
 
-**关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
+**关于扩展字段搜索**：开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
 :::tip
 目前，仅国内二区集群支持该功能。
@@ -26,7 +26,7 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 
 开始前，请确保满足以下条件：
 
-- 已完成 Android SDK v4.24.0 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
+- 已完成 SDK [初始化](initialization.html) 并 [登录](login.html)成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -53,8 +53,9 @@ Android SDK 提供 `EMChatManager#asyncSearchMessagesFromServer` 方法进行服
 服务端消息搜索仅返回当前用户参与且有权访问的会话中的消息：
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
-- 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
+- 搜索群聊或聊天室消息时，服务端会校验当前用户的成员身份。
+- 搜索的消息必须是在服务端保存期限内的历史消息。
+- 未设置会话 ID 时搜索当前用户有权访问的全部会话；设置会话 ID 时仅搜索指定会话。
 
 #### 示例代码
 
@@ -134,7 +135,7 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 | 方法 | 返回类型 | 描述 |
 | --- | --- | --- |
 | `getData()` | `List<EMSearchServerMessageResult>` | 获取当前页的搜索结果列表。 |
-| `getPageCount()` | `int` | 获取服务端返回的分页页数信息。 |
+| `getPageCount()` | `int` | 获取服务端返回的分页计数。当该值小于请求的 `pageSize` 时，表示服务端没有更多搜索结果。 |
 
 搜索结果为 `EMSearchServerMessageResult` 对象列表。你可以从结果对象中获取消息 ID、消息体、扩展字段、发送方、接收方、会话 ID、会话类型、消息时间戳以及服务端返回的高亮文本列表。
 
@@ -148,8 +149,8 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 | `getFrom()` | String | 获取消息发送方。 |
 | `getTo()` | String | 获取消息接收方。 |
 | `getConversationId()` | String | 获取会话 ID。 |
-| `getChatType()` | EMMessage.ChatType | 获取会话类型。可能为 `Chat`、`GroupChat` 或 `ChatRoom`。 |
-| `getTimestamp()` | Long | 获取消息时间戳，单位为毫秒。 |
+| `getChatType()` | EMMessage.ChatType | 获取会话类型，可能为 `Chat`、`GroupChat` 或 `ChatRoom`。 |
+| `getTimestamp()` | long | 获取消息时间戳，单位为毫秒。 |
 | `getHighlightTexts()` | `List<String>` | 获取服务端返回的搜索高亮文本列表。该列表可能为空。 |
 
 ### 常见搜索场景
@@ -186,7 +187,7 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 
 ```java
 EMMessageSearchOption option = new EMMessageSearchOption();
-// 关键词列表最多包含 5 个关键词；每个关键词长度为 1-512 个字符；所有关键词总长度不超过 1024 个字符。
+// 关键词列表最多包含 5 个关键词；每个关键词长度为 1-120 个字符；所有关键词总长度不超过 120 个字符。
 option.setKeywordList(Arrays.asList("会议", "明天"));
 option.setKeywordMatchType(EMKeywordListMatchType.AND);
 
@@ -307,6 +308,28 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 
 ## 注意事项
 
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMError.SERVICE_NOT_ENABLED`（错误码 `505`）。
 - 参数错误可能通过 `EMValueCallBack#onError` 返回 `EMError.INVALID_PARAM`（错误码 `110`）；鉴权失败可能返回 `EMError.USER_AUTHENTICATION_FAILED`（错误码 `202`）；未知服务端错误可能返回 `EMError.SERVER_UNKNOWN_ERROR`（错误码 `303`）。详见 [错误码文档](error.html)。
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncSearchMessagesFromServer`](#调用方法) | `EMChatManager` | 根据搜索条件从服务端分页搜索当前用户有权访问的历史消息。 |
+| [`setKeywordList`](#搜索参数) | `EMMessageSearchOption` | 设置搜索关键词列表。 |
+| [`setKeywordMatchType`](#搜索参数) | `EMMessageSearchOption` | 设置多个关键词之间的匹配关系。 |
+| [`setConversationId`](#搜索参数) | `EMMessageSearchOption` | 设置要搜索的会话 ID。 |
+| [`setMsgTypes`](#搜索参数) | `EMMessageSearchOption` | 设置消息类型过滤条件。 |
+| [`setStartTime`](#搜索参数) | `EMMessageSearchOption` | 设置消息查询的开始时间。 |
+| [`setEndTime`](#搜索参数) | `EMMessageSearchOption` | 设置消息查询的结束时间。 |
+| [`setSearchScope`](#搜索参数) | `EMMessageSearchOption` | 设置搜索消息内容、扩展字段或二者。 |
+| [`getData`](#返回结果) | `EMPageResult` | 获取当前页的搜索结果列表。 |
+| [`getPageCount`](#返回结果) | `EMPageResult` | 获取服务端返回的分页计数。 |
+| [`getMessageId`](#返回结果) | `EMSearchServerMessageResult` | 获取消息 ID。 |
+| [`getBody`](#返回结果) | `EMSearchServerMessageResult` | 获取消息体。 |
+| [`getExt`](#返回结果) | `EMSearchServerMessageResult` | 获取消息扩展字段。 |
+| [`getFrom`](#返回结果) | `EMSearchServerMessageResult` | 获取消息发送方。 |
+| [`getTo`](#返回结果) | `EMSearchServerMessageResult` | 获取消息接收方。 |
+| [`getConversationId`](#返回结果) | `EMSearchServerMessageResult` | 获取消息所属的会话 ID。 |
+| [`getChatType`](#返回结果) | `EMSearchServerMessageResult` | 获取消息所属的会话类型。 |
+| [`getTimestamp`](#返回结果) | `EMSearchServerMessageResult` | 获取消息时间戳。 |
+| [`getHighlightTexts`](#返回结果) | `EMSearchServerMessageResult` | 获取与关键词匹配的高亮文本列表。 |

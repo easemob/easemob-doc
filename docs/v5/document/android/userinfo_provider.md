@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-**自 V4.20.0 起**，环信即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+环信即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片的场景。
 
@@ -10,17 +10,19 @@
 
 ## 技术原理
 
-用户信息自动管理功能由 `EMOptions#setEnableUserInfo(true)` 控制。开启后，SDK 按以下流程处理用户信息同步与内存更新：
+用户信息自动管理功能由 `EMOptions#setEnableUserInfo(true)` 控制。开启该功能后，SDK 会在登录成功后自动同步当前登录用户的用户属性；在发送消息时自动附带发送方用户属性的更新时间；对于群聊消息，还会额外附带发送方在当前群中的群成员名片更新时间。
+
+接收消息后，SDK 会自动将消息中携带的更新时间与本地缓存中的对应时间戳进行比较；当检测到数据已更新或本地缺少相关缓存时，会自动从服务端拉取最新的用户属性或群成员名片，并更新本地缓存，同时通过相关事件通知业务层刷新界面。
+
+在通过消息获取发送方信息的过程中，SDK 会自动完成用户信息的同步、内存更新以及相关展示数据刷新。处理流程如下：
 
 1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地内存。
 2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间。
 3. 接收方收到消息后，SDK 会解析消息中的发送方信息及更新时间。
 4. SDK 会将消息中的更新时间与本地内存中的时间戳进行比较。
-5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
+5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从服务端获取群成员名片)。
 6. 拉取成功后，SDK 会自动更新本地内存。
 7. 本地内存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
-
-**该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地内存更新和变更通知。**
 
 内存更新流程如下：
 
@@ -30,7 +32,6 @@
 
 开始接入前，请确保满足以下条件：
 
-- 已将 SDK 升级至 v4.20.0 或以上版本。
 - 已完成 SDK 初始化。详见[快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
@@ -54,7 +55,7 @@ EMClient.getInstance().init(context, options);
 SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，主要包括：
 - `EMUserInfoManagerListener#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
 - `EMUserInfoManagerListener#onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需要将 SDK 升级至 4.20.0 及以上版本，并开启用户信息自动管理。
+  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需开启用户信息自动管理。
   - 主动 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_manage.html#从服务端获取群成员列表)。
 
@@ -63,7 +64,7 @@ SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，
 - 添加监听：
 
 ```java
-EMClient.getInstance().userInfoManager().addUserInfoManagerListener(new EMUserInfoManagerListener() {
+EMUserInfoManagerListener userInfoListener = new EMUserInfoManagerListener() {
     @Override
     public void onSelfUserInfoUpdate(EMUserInfo userInfo) {
         EMLog.d("UserInfo", "当前登录用户属性更新 - nickname:" + userInfo.getNickname()
@@ -78,12 +79,24 @@ EMClient.getInstance().userInfoManager().addUserInfoManagerListener(new EMUserIn
                     + ", avatarUrl:" + userInfo.getAvatarUrl());
         }
     }
-});
+};
+
+EMClient.getInstance()
+        .userInfoManager()
+        .addUserInfoManagerListener(userInfoListener);
+```
+
+不再需要监听时，应移除监听器：
+
+```java
+EMClient.getInstance()
+        .userInfoManager()
+        .removeUserInfoManagerListener(userInfoListener);
 ```
 
 ## 通过消息获取发送方信息
 
-对于 4.20.0，开启用户信息自动管理后，如果发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
+开启用户信息自动管理后，如果发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
 
 你可以通过 `EMMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
 
@@ -111,7 +124,9 @@ public void onMessageReceived(List<EMMessage> messages) {
 
 ## 从本地内存读取用户属性
 
-如需直接从本地内存读取用户属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId`。该接口返回的是单个用户的 `EMUserInfo`。它适用于直接从本地内存读取指定用户的资料，不会发起网络请求，因此可以作为好友列表读取能力之外的补充资料读取方式。
+如需直接从本地内存读取多个用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserIds`。该接口通过回调返回用户 ID 与 `EMUserInfo` 的映射。它适用于直接从本地内存读取指定用户的属性，不会发起网络请求，因此可以作为好友列表读取能力之外的补充资料读取方式。
+
+若只需同步读取单个用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId`；本地内存中不存在该用户时返回 `null`。
 
 ```java
 EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
@@ -186,5 +201,22 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 ### 通过消息同步的发送方信息
 
 开启用户信息自动管理后，接收到的消息中会包含发送方相关信息，包括昵称、头像、备注和群成员名片。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`setAppKey`](#开启用户信息自动管理) | `EMOptions` | 设置应用的 App Key。 |
+| [`setEnableUserInfo`](#开启用户信息自动管理) | `EMOptions` | 开启或关闭用户信息自动管理功能。 |
+| [`init`](#开启用户信息自动管理) | `EMClient` | 使用指定配置初始化 SDK。 |
+| [`addUserInfoManagerListener`](#监听用户属性更新) / [`removeUserInfoManagerListener`](#监听用户属性更新) | `EMUserInfoManager` | 注册或移除用户属性更新监听器。 |
+| [`onSelfUserInfoUpdate`](#监听用户属性更新) | `EMUserInfoManagerListener` | 监听当前登录用户的属性更新。 |
+| [`onUserInfoUpdate`](#监听用户属性更新) | `EMUserInfoManagerListener` | 监听其他用户的属性更新。 |
+| [`getUserId`](#监听用户属性更新) / [`getNickname`](#监听用户属性更新) / [`getAvatarUrl`](#监听用户属性更新) | `EMUserInfo` | 获取用户 ID、昵称和头像 URL。 |
+| [`getSenderInfo`](#通过消息获取发送方信息) | `EMMessage` | 获取消息发送方信息。 |
+| [`getNickname`](#通过消息获取发送方信息) / [`getAvatar`](#通过消息获取发送方信息) / [`getRemark`](#通过消息获取发送方信息) / [`getNamecard`](#通过消息获取发送方信息) | `EMSenderInfo` | 获取发送方昵称、头像、好友备注和群成员名片。 |
+| [`getUserInfoWithUserId`](#从本地内存读取用户属性) / [`getUserInfoWithUserIds`](#从本地内存读取用户属性) | `EMUserInfoManager` | 从本地内存读取单个或多个用户的属性。 |
+| [`fetchUserInfoByUserId`](#从本地内存读取用户属性) | `EMUserInfoManager` | 从服务器获取一个或多个用户的属性。 |
+| [`updateOwnInfo`](#用户属性与用户信息) | `EMUserInfoManager` | 设置或更新当前登录用户的多个属性。 |
 
 

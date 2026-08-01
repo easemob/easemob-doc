@@ -1,23 +1,22 @@
-# 创建和管理聊天室以及监听事件
+# 创建和管理聊天室
 
-<Toc />
+## 功能说明
 
-聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
- 
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
+聊天室是支持大量用户实时互动的即时通讯场景，常用于直播互动、消息广播和开放讨论等业务。聊天室成员没有固定关系，用户离线后通常不会继续接收聊天室消息；除聊天室白名单成员外，普通成员离线超过约 2 分钟会自动退出聊天室。如需调整自动退出时间，请联系环信商务经理。
 
-消息相关内容见 [消息管理](message_overview.html)。
+聊天室成员角色如下表所示：
 
-## 技术原理
+| 成员角色 | 描述 | 管理权限 |
+| :--- | :--- | :--- |
+| 普通成员 | 加入聊天室后参与互动的用户。 | 可以发送和接收聊天室消息、获取聊天室详情和成员列表等。 |
+| 聊天室管理员 | 由聊天室所有者设置，协助管理聊天室。 | 可以移除成员、管理禁言列表、白名单、黑名单和聊天室公告等。 |
+| 聊天室所有者 | 聊天室创建者或被转让所有权的用户。 | 拥有聊天室最高管理权限，可解散聊天室、添加或移除管理员、修改聊天室信息等。 |
 
-环信即时通讯 IM SDK 提供 [EMChatRoomManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room_manager.html) 类 和 [EMChatRoom](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_room.html) 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+本文介绍如何创建、解散、加入、退出和管理聊天室，并监听聊天室相关事件。聊天室消息的发送、接收和管理，参见 [消息管理](message_overview.html)。
 
-- 创建聊天室
-- 从服务器获取聊天室列表
-- 加入聊天室
-- 获取聊天室详情
-- 解散聊天室
-- 监听聊天室事件
+:::tip
+聊天室所有者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
+:::
 
 ## 前提条件
 
@@ -27,40 +26,40 @@
 - 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 - 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 - 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin_add.html)。
-- 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
-## 实现方法
+## 创建聊天室
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+创建聊天室需调用服务端 REST API [从服务端创建聊天室](/document/server-side/chatroom_create.html)。创建成功后，客户端可以 [加入该聊天室](#加入聊天室)，也可以 [获取聊天室详情](room_attributes.html#获取聊天室详情)。
 
-### 创建聊天室
+## 解散聊天室
 
-仅 [超级管理员](/document/server-side/chatroom_superadmin_add.html) 可以调用 `createChatRoom` 方法创建聊天室，并设置聊天室的名称、描述、最大成员数等信息。成功创建聊天室后，该超级管理员为该聊天室的所有者。
+解散聊天室需调用服务端 REST API [解散聊天室](/document/server-side/chatroom_delete.html)。聊天室解散后，聊天室内其他在线成员会收到 `onChatRoomDestroyed` 事件，并被移出该聊天室。
 
-建议直接调用 REST API [从服务端创建聊天室](/document/server-side/chatroom_create.html)。
-
-示例代码如下：
-
-```java
-// 异步方法
-EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(subject, description, welcomMessage, maxUserCount, members);
-```
-
-### 加入聊天室
+## 加入聊天室
 
 用户申请加入聊天室的步骤如下：
 
-1. 调用 `fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
+1. 调用 `asyncFetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
 2. 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
 
 示例代码如下：
 
 ```java
-// 获取公开聊天室列表，每次最多可获取 1,000 个。
-// 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
+// 获取应用的聊天室列表。
 // pageNum：当前页码，从 1 开始。
-// pageSize：每页期望返回的记录数。取值范围为 [1,50]。
-EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
+// pageSize：每页期望返回的记录数。取值范围为 [1,1000]。
+EMClient.getInstance().chatroomManager().asyncFetchPublicChatRoomsFromServer(
+        pageNumber, pageSize, new EMValueCallBack<EMPageResult<EMChatRoom>>() {
+            @Override
+            public void onSuccess(EMPageResult<EMChatRoom> value) {
+                // 获取聊天室列表成功。
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                // 获取聊天室列表失败。
+            }
+        });
 
 // 加入聊天室
 EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCallBack<EMChatRoom>() {
@@ -105,31 +104,109 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ```
 
-### 获取聊天室详情
+## 退出聊天室
 
-聊天室所有成员均可调用 `fetchChatRoomFromServer` 方法获取聊天室的详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。
+### 主动退出
 
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomFromServer(String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
-```
-
-### 解散聊天室
-
-仅聊天室所有者可以调用 `destroyChatRoom` 方法解散聊天室。聊天室解散时，其他成员收到 `onChatRoomDestroyed` 回调并被踢出聊天室。
+聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。
 
 示例代码如下：
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncDestroyChatRoom(String, EMCallBack)。
-EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
+// 异步方法。
+EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
-### 监听聊天室事件
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+
+示例代码如下：
+
+```java
+EMOptions options = new EMOptions();
+options.setDeleteMessagesAsExitChatRoom(false);
+```
+
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
+
+### 被移出
+
+仅聊天室所有者和管理员可调用 `EMChatRoomManager#asyncRemoveChatRoomMembers` 方法将单个或多个成员移出聊天室。
+
+被移出后，该成员收到 `onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomChangeListener#onMemberExited` 回调。
+
+被移出的成员可以重新进入聊天室。
+
+示例代码如下：
+
+```java
+// 异步方法。
+EMClient.getInstance().chatroomManager().asyncRemoveChatRoomMembers(
+        chatRoomId, members, new EMValueCallBack<EMChatRoom>() {
+            @Override
+            public void onSuccess(EMChatRoom value) {
+                // 成员移出成功。
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                // 成员移出失败。
+            }
+        });
+```
+
+### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+以下两类成员即使离线也不会退出聊天室：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html) 时拉入的用户从未登录过。
+
+若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 API 加入聊天室。
+
+## 获取聊天室列表
+
+你可以调用 `asyncFetchPublicChatRoomsFromServer` 方法分页获取聊天室列表。
+
+该接口获取当前应用下的聊天室列表，不仅限于当前用户已加入的聊天室。若要获取本地已加入的聊天室详情，可使用 `EMChatRoomManager#getChatRoom`；若要获取当前用户加入的聊天室列表，需要结合业务侧本地维护。
+
+```java
+// 异步方法。
+// pageSize：每页期望返回的聊天室数量，取值范围为 [1, 1000]。
+EMClient.getInstance().chatroomManager().asyncFetchPublicChatRoomsFromServer(
+        pageNum, pageSize, new EMValueCallBack<EMPageResult<EMChatRoom>>() {
+            @Override
+            public void onSuccess(EMPageResult<EMChatRoom> result) {
+                // 通过 result.getData() 获取当前页聊天室列表。
+            }
+
+            @Override
+            public void onError(int error, String errorMsg) {
+                // 获取聊天室列表失败。
+            }
+        });
+```
+
+返回结果 `EMPageResult<EMChatRoom>` 的主要字段如下：
+
+| 字段             | 类型               | 描述                                                         |
+| ---------------- | ------------------ | ------------------------------------------------------------ |
+| `getData()`      | `List<EMChatRoom>` | 当前页的聊天室列表。                                         |
+| `getPageCount()` | `int`              | 下一页可获取的聊天室数量。若该值小于请求时传入的 `pageSize`，表示服务端没有更多聊天室数据。 |
+
+`getData()` 返回的每个 `EMChatRoom` 对象可读取以下主要字段：
+
+| 字段                   | 类型     | 描述                           |
+| ---------------------- | -------- | ------------------------------ |
+| `getId()`              | `String` | 聊天室 ID。                    |
+| `getName()`            | `String` | 聊天室名称。                   |
+| `getDescription()`     | `String` | 聊天室描述。                   |
+| `getOwner()`           | `String` | 聊天室所有者的用户 ID。        |
+| `getMemberCount()`     | `int`    | 聊天室当前在线成员数。         |
+| `getCreateTimestamp()` | `long`   | 聊天室创建时间戳，单位为毫秒。 |
+
+## 监听聊天室事件
 
 `EMChatRoomChangeListener` 类中提供了聊天室事件的监听接口。你可以通过注册聊天室监听器，获取聊天室事件，并作出相应处理。如不再使用该监听器，需要移除，防止出现内存泄露。
 
@@ -140,11 +217,10 @@ EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 // 注册聊天室回调
 EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
 // 移除聊天室回调
-EMClient.getInstance().chatroomManager().removeChatRoomListener(chatRoomChangeListener);
+EMClient.getInstance().chatroomManager().removeChatRoomChangeListener(chatRoomChangeListener);
 ```
 
 具体事件如下：
-
 
 ```java
 public interface EMChatRoomChangeListener {
@@ -152,7 +228,7 @@ public interface EMChatRoomChangeListener {
     void onChatRoomDestroyed(final String roomId, final String roomName);
 
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-    void onMemberJoined(final String roomId, final String participant);
+    void onMemberJoined(final String roomId, final String participant, final String ext);
 
     // 有成员主动退出或被移出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
     void onMemberExited(final String roomId, final String roomName, final String participant);
@@ -162,7 +238,7 @@ public interface EMChatRoomChangeListener {
      *
      * @param reason        用户被移出聊天室的原因：
      *                        - xxx BE_KICKED：该用户被聊天室管理员移出；
-     *                        - xxxBE_LICKED)FOR_OFFLINE：该用户由于当前设备断网被服务器移出聊天室。
+     *                        - xxx BE_KICKED_FOR_OFFLINE：该用户由于当前设备断网被服务器移出聊天室。
      */
     void onRemovedFromChatRoom(final int reason, final String roomId, final String roomName, final String participant);
 
@@ -204,7 +280,7 @@ public interface EMChatRoomChangeListener {
 }
 ```
 
-### 实时更新聊天室成员人数
+## 实时更新聊天室成员人数
 
 如果聊天室短时间内有成员频繁加入或退出时，实时更新聊天室成员人数的逻辑如下：
 
@@ -216,7 +292,7 @@ public interface EMChatRoomChangeListener {
 EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoomChangeListener() {
 
             @Override
-            public void onMemberJoined(String roomId, String participant) {
+            public void onMemberJoined(String roomId, String participant, String ext) {
                 //获取聊天室在线人数
                 int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
 
@@ -231,3 +307,16 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoo
         });
 
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncFetchPublicChatRoomsFromServer`](#获取聊天室列表) | `EMChatRoomManager` | 获取应用下的聊天室列表。 |
+| [`joinChatRoom`](#加入聊天室) | `EMChatRoomManager` | 加入聊天室。 |
+| [`leaveChatRoom`](#主动退出) | `EMChatRoomManager` | 主动退出聊天室。 |
+| [`asyncRemoveChatRoomMembers`](#被移出) | `EMChatRoomManager` | 将成员移出聊天室。 |
+| [`addChatRoomChangeListener`](#监听聊天室事件) | `EMChatRoomManager` | 注册聊天室事件监听器。 |
+| [`removeChatRoomChangeListener`](#监听聊天室事件) | `EMChatRoomManager` | 移除聊天室事件监听器。 |
+| [`getChatRoom`](#实时更新聊天室成员人数) | `EMChatRoomManager` | 获取本地聊天室详情。 |
+

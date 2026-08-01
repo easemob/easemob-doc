@@ -6,7 +6,7 @@
 
 例如，在企业群组中，成员可将在群组中的名片设置为“部门-姓名”或“岗位-姓名”的格式，便于群内成员快速识别和沟通。
 
-**自 V4.20.0 起**，环信即时通讯 IM Android SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启用户信息自动管理功能后，SDK 还支持通过消息自动同步群成员名片更新。
+环信即时通讯 IM Android SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
 
 ## 技术原理
 
@@ -26,7 +26,7 @@
 
 开始接入前，请确保满足以下条件：
 
-- 已将 SDK 升级至 v4.20.0 或以上版本。
+- 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
 ## 监听群成员名片更新
@@ -54,16 +54,11 @@ EMClient.getInstance().groupManager().addGroupChangeListener(new EMGroupChangeLi
 
 ## 设置群成员名片
 
-调用 `EMGroupManager#asyncUpdateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件。
-
-:::tip
-权限说明：
-- 群主：可以设置所有成员的名片。
-- 群管理员：可以设置普通成员的名片（不能设置其他管理员或群主）。
-- 普通成员：只能设置自己的名片。
-:::
+调用 `EMGroupManager#asyncUpdateGroupNamecard` 设置或更新当前登录用户在指定群组中的群成员名片，传入 `null` 可删除自己的群名片。群内其他在线成员在接收到对应的群成员名片变更通知后，会触发 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件。
 
 ```java
+// 异步方法。
+// 传入的 `namecard` 为 `null` 时，清除当前用户在该群组中的名片。
 EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_namecard", new EMCallBack() {
     @Override
     public void onSuccess() {
@@ -79,9 +74,12 @@ EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_n
 
 ## 从服务端获取群成员名片
 
-调用 `EMGroupManager#asyncFetchGroupMembersInfo` 可从服务端批量获取群成员信息。返回的 `EMGroupMemberInfo` 包含 `namecard`、`nickname`、`avatarUrl` 等字段。获取成功后，相关数据会自动更新至本地内存。
+调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务器分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前调用 `EMOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)；否则，返回的 `EMGroupMemberInfo` 不包含 `namecard`、`nickname` 和 `avatarUrl`。获取成功后，相关数据会自动更新至本地内存。
 
 ```java
+// 异步方法。
+// `pageSize` 的取值范围为 1-50。
+// 首次调用时可将 `cursor` 传入 `null`，后续传入上次返回的游标。
 EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo("groupId", "", 20,
         new EMValueCallBack<EMCursorResult<EMGroupMemberInfo>>() {
             @Override
@@ -116,7 +114,7 @@ EMLog.d("GroupNamecard", "群成员名片：" + namecard);
 
 ## 通过消息自动同步群成员名片
 
-如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要开启用户信息自动管理功能，即调用 `EMOptions#setEnableUserInfo(true)`。
+如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要开启 [用户信息自动管理功能](userinfo_provider.html)，即调用 `EMOptions#setEnableUserInfo(true)`。
 
 ```java
 EMOptions options = new EMOptions();
@@ -142,7 +140,7 @@ EMClient.getInstance().init(context, options);
 
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `EMGroupManager#getGroupNamecard` 仅查询本地内存，不会主动从服务端获取最新数据。
-- `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。
+- `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。只有 [开启用户信息自动管理功能](userinfo_provider.html) 后，该接口返回的信息才包含群名片、昵称和头像。
 - `EMGroupChangeListener#onUserGroupNamecardUpdated` 仅对在线用户投递。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化前调用 `EMOptions#setEnableUserInfo(true)`。
 - 开启 `EMOptions#setEnableUserInfo(true)` 后，群成员名片的自动更新依赖消息触发；若业务需要主动获取最新数据，仍应调用服务端接口。
@@ -174,3 +172,19 @@ EMClient.getInstance().init(context, options);
 - [用户信息自动管理](userinfo_provider.html)
 - [管理用户属性](userprofile.html)
 - [使用限制](/product/limitation.html)
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addGroupChangeListener`](#监听群成员名片更新) / [`removeGroupChangeListener`](#监听群成员名片更新) | `EMGroupManager` | 注册或移除群组事件监听器。 |
+| [`onUserGroupNamecardUpdated`](#监听群成员名片更新) | `EMGroupChangeListener` | 监听群成员名片更新。 |
+| [`asyncUpdateGroupNamecard`](#设置群成员名片) | `EMGroupManager` | 设置、更新或清除当前用户在指定群组中的名片。 |
+| [`asyncFetchGroupMembersInfo`](#从服务端获取群成员名片) | `EMGroupManager` | 从服务器分页获取群成员信息。 |
+| [`getUserId`](#从服务端获取群成员名片) / [`getNamecard`](#从服务端获取群成员名片) | `EMGroupMemberInfo` | 获取群成员用户 ID 和群名片。 |
+| [`getNickname`](#从服务端获取群成员名片) / [`getAvatarUrl`](#从服务端获取群成员名片) | `EMGroupMemberInfo` | 获取群成员昵称和头像。 |
+| [`getGroupNamecard`](#从本地内存获取群成员名片) | `EMGroupManager` | 从本地内存读取指定成员的群名片。 |
+| [`setAppKey`](#通过消息自动同步群成员名片) | `EMOptions` | 设置应用的 App Key。 |
+| [`setEnableUserInfo`](#通过消息自动同步群成员名片) | `EMOptions` | 开启或关闭用户信息自动管理功能。 |
+| [`init`](#通过消息自动同步群成员名片) | `EMClient` | 使用指定配置初始化 SDK。 |
+| [`getSenderInfo`](#通过消息自动同步群成员名片) | `EMMessage` | 获取消息发送方信息。 |

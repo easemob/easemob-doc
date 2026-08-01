@@ -1,27 +1,12 @@
 # 获取历史消息
 
-<Toc />
+## 功能说明
 
-本文介绍环信即时通讯 IM Android SDK 如何从服务器和本地获取历史消息。
+环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
-- 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 
-- SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
-
-## 技术原理
-
-环信即时通讯 IM Android SDK 提供 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 和 [EMConversation](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_conversation.html) 类支持获取服务器和本地的消息，包含如下主要方法：
-
-- `EMChatManager#asyncFetchHistoryMessages`：根据 `EMFetchMessageOption` 类从服务端分页获取指定会话的历史消息；
-- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息；
-- `EMChatManager#asyncLoadConversationMessagesWithKeyword`：根据关键字获取本地会话中的消息；
-- `EMChatManager#asyncLoadMessages`：根据消息 ID 获取单个或多个本地消息；
-- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息；
-- `EMConversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
-- `EMChatManager#getMessage`：根据消息 ID 获取单个本地消息；
-- `EMChatManager#searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)`：获取本地存储的指定会话中特定类型的消息；
-- `EMChatManager#searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)`：获取一定时间段内本地指定会话中发送和接收的消息；
-- `EMConversation#getAllMsgCount`：从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
+本文介绍环信即时通讯 IM SDK 如何从服务器获取历史消息。
 
 ## 前提条件
 
@@ -36,7 +21,7 @@
 
 你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。分页查询时，若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
 
-通过设置 [EMFetchMessageOption](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_fetch_message_option.html) 类，你可以根据以下条件拉取历史消息：
+通过设置 `EMFetchMessageOption` 类，你可以根据以下条件拉取历史消息：
 
 - 消息发送方；
 - 消息类型；
@@ -48,10 +33,9 @@
 若你在初始化时打开了 `EMOptions#setRegardImportedMsgAsRead` 开关，调用该接口获取的[通过服务端接口](/document/server-side/message_import_single.html)导入的消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
 
 :::tip
-1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
-2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需升级至 4.5.0 版本，并联系环信商务。**
-3. 自 4.11.0 版本开始，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。 
-4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
+2. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。 
+3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 :::
 
 ```java
@@ -60,6 +44,8 @@ EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
 EMFetchMessageOption option = new EMFetchMessageOption();
 //例如，设置获取的消息保存到数据库。
 //option.setIsSave(true);
+//例如，设置按时间正序获取消息。
+//option.setDirection(EMConversation.EMSearchDirection.DOWN);
 int pageSize = 40;
 String cursor = "";
 List<EMMessage> messages = new ArrayList<>();
@@ -79,7 +65,7 @@ int pageSize,String cursor,
                 if (list != null && list.size() > 0) {
                     messages.addAll(list);
                 }
-                //自 Android SDK 4.14.0 版本开始，拉取到最后一页时，返回的 `newCursor` 由 `undefined` 改为空字符串。
+                // 拉取到最后一页时，返回的 newCursor 为空字符串。
                 String newCursor = value.getCursor();
                 if( !TextUtils.isEmpty(newCursor)) {
                     doAsyncFetchHistoryMessages(conversationId, type, pageSize, newCursor, option, messages);
@@ -95,35 +81,10 @@ int pageSize,String cursor,
 }
 ```
 
-此外，你可以调用 `asyncFetchHistoryMessage` 方法从服务器分页获取指定会话的消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
-
-为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。拉取后，SDK 会自动将消息更新到本地数据库。
-
-```java
-// 异步方法。同步方法为 fetchHistoryMessages(String, EMConversationType, int, String, EMConversation.EMSearchDirection)。
-EMClient.getInstance().chatManager().asyncFetchHistoryMessage(
-    conversationId,
-    conversationType,
-    pageSize,
-    startMsgId,
-    searchDirection,
-    new EMValueCallBack<EMCursorResult<EMMessage>>() {
-        @Override
-        public void onSuccess(EMCursorResult<EMMessage> value) {
-
-        }
-
-        @Override
-        public void onError(int error, String errorMsg) {
-
-        }
-    }
-);
-```
 
 ### 从服务器获取指定群成员发送的消息
 
-自 4.14.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
+对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```java
 String conversationId = " ";
@@ -131,6 +92,8 @@ EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
 EMFetchMessageOption option = new EMFetchMessageOption();
 //例如，设置获取的消息保存到数据库。
 //option.setIsSave(true);
+//例如，设置按时间正序获取消息。
+//option.setDirection(EMConversation.EMSearchDirection.DOWN);
 //例如，你可以获取群组中某2个用户ID的消息
 //List<String> fromIds = new ArrayList<String>();
 //fromIds.add("user1");
@@ -173,7 +136,7 @@ int pageSize,String cursor,
 
 ### 根据关键字获取本地会话中的消息
 
-自 SDK 4.15.1 开始，你可通过设置关键词获取本地数据库中会话的某些消息。SDK 返回会话 ID 及消息 ID 列表的映射关系，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
+你可通过设置关键词获取本地数据库中会话的某些消息。SDK 返回会话 ID 及消息 ID 列表的映射关系，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
 ```java
 String keyword="时间";
@@ -193,7 +156,7 @@ EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(ke
 
 ### 根据消息 ID 获取本地消息
 
-自 SDK 4.15.1 版本开始，你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
+你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
 ```java
 // messageIds：消息 ID 列表。每次最多可传入 20 个消息 ID。
@@ -212,7 +175,7 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
 
 ### 从本地获取指定群成员发送的消息
 
-自 4.14.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
+对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```java
 String conversationId = "user_or_group_id";
@@ -262,7 +225,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messages = conversation.getAllMessages();
 // startMsgId：查询的起始消息 ID。SDK 从该消息 ID 开始按消息时间戳的逆序加载。如果传入消息的 ID 为空，SDK 从最新消息开始按消息时间戳的逆序获取。
 // pageSize：每页期望加载的消息数。取值范围为 [1,400]。
-List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
+List<EMMessage> pagedMessages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
 
 ### 根据消息 ID 获取单个本地消息
@@ -314,3 +277,21 @@ if(conversation!=null) {
     EMLog.i(TAG, "queryMsgCountWithDuration count:" + count);
 }
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncFetchHistoryMessages`](#从服务器获取指定会话的消息) | `EMChatManager` | 从服务端分页获取指定会话的历史消息。 |
+| [`setDirection`](#从服务器获取指定会话的消息) | `EMFetchMessageOption` | 设置服务端历史消息的查询方向。 |
+| [`setIsSave`](#从服务器获取指定会话的消息) | `EMFetchMessageOption` | 设置拉取的历史消息是否保存到本地数据库。 |
+| [`setFromIds`](#从服务器获取指定群成员发送的消息) | `EMFetchMessageOption` | 设置群聊历史消息的指定发送成员。 |
+| [`asyncLoadConversationMessagesWithKeyword`](#根据关键字获取本地会话中的消息) | `EMChatManager` | 根据关键词从本地数据库搜索消息。 |
+| [`asyncLoadMessages`](#根据消息-id-获取本地消息) | `EMChatManager` | 根据消息 ID 获取本地消息。 |
+| [`asyncSearchMsgFromDB`](#从本地获取指定群成员发送的消息) | `EMConversation` | 根据关键词和发送方从本地会话搜索消息。 |
+| [`getAllMessages`](#从本地读取指定会话的消息) | `EMConversation` | 获取会话内存中的全部消息。 |
+| [`loadMoreMsgFromDB`](#从本地读取指定会话的消息) | `EMConversation` | 从本地数据库分页加载会话消息。 |
+| [`getMessage`](#根据消息-id-获取单个本地消息) | `EMChatManager` | 根据消息 ID 获取单条本地消息。 |
+| [`searchMsgFromDB`](#获取本地会话中特定类型的消息) | `EMConversation` | 按消息类型、时间和发送方搜索本地消息。 |
+| [`searchMsgFromDB`](#获取一定时间内本地会话的消息) | `EMConversation` | 按时间范围搜索本地会话消息。 |
+| [`getAllMsgCount`](#获取会话在一定时间内的消息数) | `EMConversation` | 统计指定时间范围内的本地消息数。 |

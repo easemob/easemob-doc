@@ -1,73 +1,65 @@
-# 管理用户关系  
+# 管理用户关系
+
+## 功能说明
 
 SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
-- 好友管理：添加好友、处理好友申请、删除好友、设置好友备注、获取好友列表，以及在登录成功后自动同步好友列表和好友信息。
-- 黑名单管理：获取黑名单列表、以及添加和移除黑名单用户。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
-
-## 技术原理
-
-环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
-
-- 添加、删除好友。
-- 设置好友备注。
-- 获取好友列表和好友信息
-- 登录后自动同步好友列表
-- 添加黑名单。
-- 删除黑名单。
-- 从服务器获取黑名单列表。
+ - 好友管理：添加好友、处理好友申请、删除好友、设置好友备注，以及在登录后自动同步好友列表和好友信息。
+ - 黑名单管理：从服务器获取黑名单列表、添加黑名单用户和移除黑名单用户。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 调用好友请求相关方法之前先导入头文件 `IEMContactManager.h`；
-- 调用监听接收好友请求等回调方法 API 之前导入头文件：`EMContactManagerDelegate.h`。
-- 已在 [环信控制台](https://console.easemob.com/user/login) 开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
+ - 完成 iOS SDK 初始化并登录，详见 [快速开始](quickstart.html)。
+ - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+ - 已在 [环信控制台](https://console.easemob.com/user/login) 开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
 ## 好友管理
 
-### 添加好友事件监听
+### 监听好友关系和好友信息变更
 
-为了接收好友添加、删除和好友申请状态的变更事件，你需要添加好友事件监听。
+通过 `EMContactManagerDelegate` 监听好友申请、接受、拒绝、添加、删除及好友信息变更事件。
 
 ```objectivec
-// 注册好友回调。
-[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
-// 移除好友回调。
-[[EMClient sharedClient].contactManager removeDelegate:self];
+@interface ContactViewController () <EMContactManagerDelegate>
+@end
 
-// 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
-- (void)friendRequestDidApproveByUser:(NSString *)aUsername
-{
-   
+@implementation ContactViewController
+
+- (void)startObserveContacts {
+    [[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
 }
 
-// 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，拒绝加好友，则用户 A 收到该事件。
-- (void)friendRequestDidDeclineByUser:(NSString *)aUsername
-{
-    
+- (void)stopObserveContacts {
+    [[EMClient sharedClient].contactManager removeDelegate:self];
+}
+
+// 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 同意后，用户 A 收到该事件。
+- (void)friendRequestDidApproveByUser:(NSString *)username {
+}
+
+// 对方拒绝了好友请求。用户 A 向用户 B 发送好友请求，用户 B 拒绝后，用户 A 收到该事件。
+- (void)friendRequestDidDeclineByUser:(NSString *)username {
 }
 
 // 接收到好友请求。用户 B 向用户 A 发送好友请求，用户 A 收到该事件。
-- (void)friendRequestDidReceiveFromUser:(NSString *)aUsername message:(NSString *)aMessage
-{
-    
+- (void)friendRequestDidReceiveFromUser:(NSString *)username message:(NSString *)message {
 }
 
-// 好友被删除。用户 B 将用户 A 从好友列表上删除，用户 A 收到该事件。
-- (void)friendshipDidRemoveByUser:(NSString *)aUsername
-{
-    
+// 好友被删除。用户 B 将用户 A 从好友列表中删除后，双方收到该事件。
+- (void)friendshipDidRemoveByUser:(NSString *)username {
 }
 
-// 好友已添加。用户 B 向用户 A 发送好友请求，用户 A 接受该请求，用户 B 收到 `onFriendRequestAccepted` 事件，双方用户收到 `onContactAdded` 事件。
-- (void)friendshipDidAddByUser:(NSString *)aUsername
-{
-    
+// 好友已添加。用户 B 同意用户 A 的好友申请后，双方收到该事件。
+- (void)friendshipDidAddByUser:(NSString *)username {
 }
+
+// 好友信息发生变更，可通过 contact 获取更新后的好友信息。
+- (void)onFriendInfoChanged:(EMContact *)contact {
+}
+
+@end
 ```
 
 ### 添加好友
@@ -82,304 +74,252 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 你可以调用 `addContact` 发起好友申请：
 
-示例代码如下：
-
 ```objectivec
-// 异步方法
-[[EMClient sharedClient].contactManager addContact:@"aUsername" message:@"Message" completion:^(NSString *aUsername, EMError *aError) {
-if (!aError) {
-    NSLog(@"添加好友成功 %@",aUsername);
-} else {
-    NSLog(@"添加好友失败的原因 %@", aError.errorDescription);
-}
+[[EMClient sharedClient].contactManager addContact:@"userB"
+                                            message:@"你好，我想添加你为好友"
+                                         completion:^(NSString *username, EMError *error) {
+    if (!error) {
+        // 好友申请发送成功。
+    } else {
+        // 发送失败。
+    }
 }];
 ```
 
-对端用户通过 `friendRequestDidReceiveFromUser` 事件监听收到好友请求，确认是否成为好友。 
+接收方会通过 `friendRequestDidReceiveFromUser` 收到申请，可按需接受或拒绝：
 
-- 调用 `approveFriendRequestFromUser` 接受好友申请。请求方收到 `friendRequestDidApproveByUser` 事件，双方都收到 `friendshipDidAddByUser` 事件。
+ - 调用 `approveFriendRequestFromUser` 接受好友申请。请求方会收到 `friendRequestDidApproveByUser`，双方都会收到 `friendshipDidAddByUser`。
+ - 调用 `declineFriendRequestFromUser` 拒绝好友申请。请求方会收到 `friendRequestDidDeclineByUser`。
 
 ```objectivec
-// 接受好友请求。
-// 异步方法
-[[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
-if (!aError) {
-    NSLog(@"同意加好友申请成功");
-} else {
-    NSLog(@"同意加好友申请失败的原因 --- %@", aError.errorDescription);
-}
+// 接受好友申请。
+[[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"userB"
+                                                           completion:^(NSString *username, EMError *error) {
+    // 根据 error 处理结果。
 }];
-```
-
-```objectivec
-// 请求方收到的事件
-- (void)friendRequestDidApproveByUser:(NSString *)aUsername
-  { }
-```
-
-- 调用 `declineFriendRequestFromUser` 拒绝好友申请。请求方收到 `friendRequestDidDeclineByUser` 事件。
-
-```objectivec
 
 // 拒绝好友申请。
-// 异步方法
-[[EMClient sharedClient].contactManager declineFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
-if (!aError) {
-    NSLog(@"拒绝加好友申请成功");
-} else {
-    NSLog(@"拒绝加好友申请失败的原因 %@", aError.errorDescription);
-}
+[[EMClient sharedClient].contactManager declineFriendRequestFromUser:@"userB"
+                                                           completion:^(NSString *username, EMError *error) {
+    // 根据 error 处理结果。
 }];
-```
-
-```objectivec
-// 请求方收到的事件。
-- (void)friendRequestDidDeclineByUser:(NSString *)aUsername
-  { }
 ```
 
 :::tip
-
-- 服务器不会重复下发好友申请事件。若业务需要展示待处理申请列表，建议在收到 `friendRequestDidReceiveFromUser` 时本地保存申请记录。
-- 当前 SDK 不提供好友申请列表拉取接口。
+ - 服务器不会重复下发好友申请事件。若业务需要展示待处理申请列表，建议在收到 `friendRequestDidReceiveFromUser` 时本地保存申请记录。
+ - 当前 SDK 不提供好友申请列表拉取接口。
 :::
 
 ### 删除好友
 
-调用 `deleteContact` 删除好友后，对方好友列表中的该用户也会被移除。该操作无需对方确认，建议在应用侧增加二次确认。
+调用 `deleteContact` 删除好友后。删除好友后，对方好友列表中的该用户也会被移除，双方的好友关系都会解除，对方会收到 `friendshipDidRemoveByUser` 事件。该删除操作无需对方确认，建议在应用侧增加二次确认。
 
-```objectivec
-// 删除好友。
-// 异步方法
-[[EMClient sharedClient].contactManager deleteContact:@"aUsername" isDeleteConversation:aIsDeleteConversation completion:^(NSString *aUsername, EMError *aError) {
-if (!aError) {
-    NSLog(@"删除好友成功");
-} else {
-    NSLog(@"删除好友失败的原因 %@", aError.errorDescription);
+该接口提供 `isDeleteConversation` 参数，可直接控制是否删除与该好友对应的本地单聊会话及消息：
+
+- `true`：删除好友，同时删除本地单聊会话及本地消息。
+- `false`：仅删除好友，保留本地单聊会话及本地消息。
+
+```swift
+let username = "userId"
+
+// 删除好友，同时删除对应的本地单聊会话及消息。
+EMClient.shared().contactManager?.deleteContact(
+    username,
+    isDeleteConversation: true
+) { _, error in
+    if let error = error {
+        // 好友删除失败，根据错误码和错误描述处理。
+        print("删除好友失败，错误码：\(error.code)")
+        print("错误描述：\(error.errorDescription ?? "未知错误")")
+        return
+    }
+
+    // 好友删除成功，本地单聊会话及消息已删除。
+    print("删除好友成功")
 }
-}];
-```
-
-删除后，双方均会收到 `friendshipDidRemoveByUser` 回调，示例代码如下：
-
-```objectivec
-// 好友已被删除。
-- (void)friendshipDidRemoveByUser:(NSString *)aUsername
-  { }
 ```
 
 ### 设置好友备注
 
-自 4.2.0 版本开始，你可以调用 `setContactRemark` 方法设置好友备注。
+调用 `setContactRemark` 设置单个好友的备注。
+
+备注长度不能超过 100 个字符；传入 `nil` 清空好友备注。
 
 ```objectivec
-// 好友备注长度不能超过 100 个字符。传入 nil 清空好友备注。
-[EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
-            
-    }];
-```
-
-### 获取好友列表和好友信息
-
-你可以从服务器获取好友列表，也可以从本地获取已保存的好友列表。
-
-#### 从服务端获取好友列表
-
-自 4.2.0 版本开始，你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象 `EMContact` 包含好友的用户 ID 和好友备注；自 4.22.0 起，还可以进一步获取好友用户属性和好友添加时间。
-
-`EMContact` 对象包含如下信息：
-
-- `userId`：好友的用户 ID。
-- `remark`：好友备注。
-- `userInfo`：好友用户属性对象，包含好友的用户属性，如昵称、头像等。
-- `addTimestamp`：好友添加时间，单位为毫秒。
-
-示例代码如下：
-
-- 一次性获取服务端的好友列表。
-
-```objectivec
-[EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
-            
-    }];
-```
-
-- 分页获取服务端的好友列表。
-
-```objectivec
-//pageSize 的取值范围为 [1,50]
-[EMClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(EMCursorResult<EMContact *> * _Nullable aResult, EMError * _Nullable aError) {
-        
-    }];
-```
-
-此外，你也可以调用 `getContactsFromServerWithCompletion` 方法从服务器获取所有好友的列表。该列表只包含好友的用户 ID。
-
-```objectivec
-// 异步方法
-[[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
-    if (!aError) {
-        NSLog(@"获取所有好友成功 %@",aList);
+[[EMClient sharedClient].contactManager setContactRemark:@"userB"
+                                                   remark:@"小李"
+                                               completion:^(EMContact *contact, EMError *error) {
+    if (!error) {
+        // contact 为更新后的好友对象。
     } else {
-        NSLog(@"获取所有好友失败的原因 %@", aError.errorDescription);
+        // 设置失败。
     }
 }];
 ```
 
-#### 从本地获取好友列表
+### 获取好友列表和好友信息
 
-自 v4.2.0 开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象 `EMContact` 包含好友的用户 ID 和好友备注；自 v4.22.0 起，还可以进一步获取好友用户属性和好友添加时间。
+#### 登录后自动同步好友列表
 
-`EMContact` 对象包含如下信息：
+iOS SDK 通过登录后的数据同步获取最新好友数据。初始化 SDK 前，需要将 `EMOptions#dataSyncType` 设置为包含 `EMDataSyncTypeContacts`。用户登录后，SDK 会自动同步好友列表及好友信息并写入本地。
 
-- `userId`：好友的用户 ID。
-- `remark`：好友备注。
-- `userInfo`：好友用户属性对象，包含好友的用户属性，如昵称、头像等。
-- `addTimestamp`：好友添加时间，单位为毫秒。
+**开启好友数据自动同步**
 
-:::tip
-需要先从服务器获取好友列表，才能从本地读取到好友列表。
-:::
-
-- 获取本地单个好友：  
+在初始化 SDK 前配置 `EMDataSyncTypeContacts`。若还需要同步其他类型的数据，可按位组合对应枚举值。
 
 ```objectivec
-EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+options.dataSyncType = EMDataSyncTypeContacts;
+
+// 使用 options 初始化 SDK 后，再调用异步 Token 登录接口。
 ```
 
-- 一次性获取本地好友列表：
+**监听好友数据同步状态**
+
+开启自动同步后，通过 `EMClientDelegate` 监听好友数据同步的开始和完成：
+
+ - `syncDataStartWithType`：某类数据开始同步时触发；`type` 命中 `EMDataSyncTypeContacts` 时表示好友数据开始同步。
+ - `syncDataFinished`：某类数据同步完成时触发；`type` 命中 `EMDataSyncTypeContacts` 且 error 为 `nil` 时表示好友数据同步成功。
+ - 好友关系及好友信息变更由 `EMContactManagerDelegate` 监听，详见 [监听好友关系和好友信息变更](#监听好友关系和好友信息变更)。
+ - 关于不同场景下好友的用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```objectivec
-NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
-```
+@interface ContactSyncObserver () <EMClientDelegate>
+@end
 
-此外，你也可以调用 `getContacts` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
+@implementation ContactSyncObserver
 
-示例代码如下：
-
-```objectivec
-NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
-```
-
-#### 从本地内存获取单个用户属性
-
-如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoByIds`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
-
-该接口返回的是单个用户的 `userInfo`，不是 `EMContact`。它不会发起网络请求，可作为好友列表读取之外的补充资料读取方式。
-
-### 登录后自动同步好友列表
-
-#### 开启自动同步
-
-自 4.22.0 版本开始，你可以设置在登录成功后自动同步好友列表及好友信息。开启后，SDK 会在登录完成后自动拉取并更新本地好友数据，便于应用直接读取最新的好友列表和好友信息。
-
-你可以通过 `EMOptions#enableAutoSyncContacts` 配置该功能。该配置需要在初始化 SDK 时设置，示例代码如下：
-
-```objectivec
-EMOptions *options = [EMOptions optionsWithAppkey:@"YourAppKey"];
-// 开启登录后自动同步好友列表及好友信息。
-options.enableAutoSyncContacts = YES;
-[[EMClient sharedClient] initializeSDKWithOptions:options];
-```
-
-#### 监听同步状态和好友信息变更
-
-开启自动同步后，建议通过 `EMContactManagerDelegate` 监听好友同步开始、同步完成以及好友信息变更等事件，以便及时更新 UI 或处理异常情况。
-
-- `onFriendStartSync`：好友列表及好友信息开始同步时触发。
-- `onFriendSyncFinished`：好友列表及好友信息同步完成时触发。若同步失败，可通过 `error` 获取失败原因。
-- `onFriendInfoChanged`：好友信息发生变更时触发。你可以通过 `contact` 获取更新后的好友信息。
-
-关于不同场景下好友的用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
-
-```objectivec
-// 添加好友事件监听。
-[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
-
-// 好友列表及好友信息开始同步。
-- (void)onFriendStartSync
-{
+- (void)startObserveSync {
+    [[EMClient sharedClient] addDelegate:self delegateQueue:nil];
 }
 
-// 好友列表及好友信息同步完成。
-- (void)onFriendSyncFinished:(EMError *)error
-{
-    if (error) {
-        NSLog(@"好友列表及好友信息同步失败：%@", error.errorDescription);
+- (void)stopObserveSync {
+    [[EMClient sharedClient] removeDelegate:self];
+}
+
+- (void)syncDataStartWithType:(EMDataSyncType)type {
+    if ((type & EMDataSyncTypeContacts) == EMDataSyncTypeContacts) {
+        // 好友数据开始同步。
     }
 }
 
-// 好友信息发生变更。
-- (void)onFriendInfoChanged:(EMContact *)contact
-{
-    EMUserInfo *userInfo = contact.userInfo;
-    NSUInteger addTimestamp = contact.addTimestamp;
+- (void)syncDataFinished:(EMError *)error type:(EMDataSyncType)type {
+    if ((type & EMDataSyncTypeContacts) != EMDataSyncTypeContacts) {
+        return;
+    }
+    if (!error) {
+        // 好友数据同步成功，可以读取本地好友列表和好友信息。
+    } else {
+        // 好友数据同步失败。
+    }
 }
+
+@end
+```
+
+#### 从本地读取好友列表
+
+好友数据同步成功后，可调用 `getContacts` 获取本地好友用户 ID 列表，或调用 `getAllContacts` 获取本地好友对象列表。`EMContact` 提供以下好友信息：
+
+ - `userId`：好友用户 ID。
+ - `remark`：好友备注。
+ - `userInfo`：好友用户属性，如昵称、头像等；本地不存在相关属性时可能为 `nil`。
+ - `addTimestamp`：好友添加时间的毫秒级时间戳。
+
+:::tip
+`getContacts`、`getAllContacts` 和 `getContact` 为本地读取接口。应在 `syncDataFinished` 确认联系人同步成功后使用这些本地数据作为 UI 数据源，避免在主线程执行耗时的数据处理。
+:::
+
+#### 获取单个用户属性
+
+如果需要获取指定用户的用户属性，可调用异步接口 `fetchUserInfoById`。关于该接口的说明，详见 [获取用户属性](userinfo_provider.html)。
+
+该接口返回用户属性，而不是 `EMContact`，可作为好友列表读取之外的补充资料获取方式。
+
+```objectivec
+[[EMClient sharedClient].userInfoManager fetchUserInfoById:@[@"userB"]
+                                                completion:^(NSDictionary<NSString *, EMUserInfo *> *userInfos, EMError *error) {
+    if (!error) {
+        EMUserInfo *userInfo = userInfos[@"userB"];
+        // 使用 userInfo 中的昵称、头像等属性。
+    } else {
+        // 获取失败。
+    }
+}];
 ```
 
 ### 设置仅给好友发消息
 
-环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`。
+环信即时通讯 IM 默认支持非好友用户之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login) [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。开启后，SDK 会在用户发起单聊时检查好友关系；若用户向非好友用户发送单聊消息，SDK 会返回错误码 `221`，即 `EMErrorUserNotOnRoster`。
 
 ## 黑名单管理
 
 黑名单与好友体系相互独立，主要用于管理需要屏蔽的用户。
 
-### 查看当前用户黑名单列表
+### 添加用户到黑名单
 
-- 通过服务器获取黑名单列表
+若需屏蔽某个用户的消息，可将其加入黑名单。该操作适用于任何用户，无论是否为好友。被加入黑名单后，该用户将无法向你发送消息或好友申请。
 
-从服务器获取黑名单列表之后，才能从本地数据库获取到黑名单列表。
+若被加入黑名单的是好友，其好友关系仍会保留在你的好友列表中。
+
+你可以调用 `addUserToBlackList` 将用户加入黑名单：
 
 ```objectivec
-// 从服务器获取黑名单列表。
-// 异步方法
-[[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
-    if (!aError) {
-        NSLog(@"获取黑名单列表成功 %@",aList);
+[[EMClient sharedClient].contactManager addUserToBlackList:@"userB"
+                                                completion:^(NSString *username, EMError *error) {
+    if (!error) {
+        // 已加入黑名单。
     } else {
-        NSLog(@"获取黑名单列表失败的原因 %@", aError.errorDescription);
+        // 添加失败。
     }
 }];
 ```
 
-- 从本地数据库获取黑名单列表
+### 将用户从黑名单移除
+
+调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，用户发送消息和好友申请等行为将恢复。
 
 ```objectivec
-// 同步方法
-NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
-```
-
-### 将用户加入黑名单
-
-你可以调用 `addUserToBlackList` 将指定用户加入黑名单。用户被加入黑名单后将无法向你发送消息，也无法发送好友申请。
-
-用户可以将任何其他聊天用户添加到他们的黑名单列表中，无论该用户是否是好友。好友被加入黑名单后仍在好友列表上显示。
-
-示例代码如下：
-
-```objectivec
-// 异步方法
-[[EMClient sharedClient].contactManager addUserToBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
-    if (!aError) {
-        NSLog(@"将用户加入黑名单成功");
+[[EMClient sharedClient].contactManager removeUserFromBlackList:@"userB"
+                                                     completion:^(NSString *username, EMError *error) {
+    if (!error) {
+        // 已移出黑名单。
     } else {
-        NSLog(@"将用户加入黑名单失败的原因 %@", aError.errorDescription);
+        // 移除失败。
     }
 }];
 ```
 
-### 将用户移出黑名单
+### 从服务器获取黑名单列表
 
-你可以调用 `removeUserFromBlackList` 将用户从黑名单移除，用户发送消息等行为将恢复。
+调用 `getBlackListFromServerWithCompletion` 异步从服务器获取当前用户的黑名单列表。
 
 ```objectivec
-// 异步方法
-[[EMClient sharedClient].contactManager removeUserFromBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
-    if (!aError) {
-        NSLog(@"将用户移出黑名单成功");
+[[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray<NSString *> *userIds, EMError *error) {
+    if (!error) {
+        // userIds 为服务器返回的黑名单用户 ID 列表。
     } else {
-        NSLog(@"将用户移出黑名单失败的原因 %@", aError.errorDescription);
+        // 获取失败。
     }
 }];
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`addDelegate`](#监听好友关系和好友信息变更) / [`removeDelegate`](#监听好友关系和好友信息变更) | `IEMContactManager` | 注册或移除好友关系及好友信息变更监听器。 |
+| [`friendRequestDidReceiveFromUser`](#监听好友关系和好友信息变更) / [`friendRequestDidApproveByUser`](#监听好友关系和好友信息变更) / [`friendRequestDidDeclineByUser`](#监听好友关系和好友信息变更) | `EMContactManagerDelegate` | 监听好友申请、接受和拒绝事件。 |
+| [`friendshipDidAddByUser`](#监听好友关系和好友信息变更) / [`friendshipDidRemoveByUser`](#监听好友关系和好友信息变更) / [`onFriendInfoChanged`](#监听好友关系和好友信息变更) | `EMContactManagerDelegate` | 监听好友添加、删除和好友信息变更事件。 |
+| [`addContact`](#添加好友) | `IEMContactManager` | 异步发起好友申请。 |
+| [`approveFriendRequestFromUser`](#添加好友) / [`declineFriendRequestFromUser`](#添加好友) | `IEMContactManager` | 异步接受或拒绝好友申请。 |
+| [`deleteContact`](#删除好友) | `IEMContactManager` | 异步删除好友，并按参数决定是否删除本地会话和消息。 |
+| [`setContactRemark`](#设置好友备注) | `IEMContactManager` | 异步设置好友备注。 |
+| [`dataSyncType`](#登录后自动同步好友列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
+| [`addDelegate`](#登录后自动同步好友列表) / [`removeDelegate`](#登录后自动同步好友列表) | `EMClient` | 注册或移除登录及数据同步状态监听器。 |
+| [`syncDataStartWithType`](#登录后自动同步好友列表) / [`syncDataFinished`](#登录后自动同步好友列表) | `EMClientDelegate` | 监听好友数据的同步状态。 |
+| [`getContacts`](#从本地读取好友列表) / [`getAllContacts`](#从本地读取好友列表) | `IEMContactManager` | 在好友同步成功后读取本地好友用户 ID 或好友对象列表。 |
+| [`fetchUserInfoById`](#获取单个用户属性) | `EMUserInfoManager` | 异步获取指定用户的用户属性。 |
+| [`addUserToBlackList`](#添加用户到黑名单) | `IEMContactManager` | 异步将用户加入黑名单。 |
+| [`removeUserFromBlackList`](#将用户从黑名单移除) | `IEMContactManager` | 异步将用户移出黑名单。 |
+| [`getBlackListFromServerWithCompletion`](#从服务器获取黑名单列表) | `IEMContactManager` | 异步从服务器获取黑名单列表。 |

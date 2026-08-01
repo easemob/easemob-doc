@@ -22,7 +22,7 @@
 - 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
 
 :::tip
-用户 A 可根据需要设置透传消息发送间隔。
+输入状态属于瞬时状态，建议设置发送间隔，避免在每次文本变化时都发送消息。接收方在一段时间内未再次收到输入状态时，应自动隐藏输入指示器。
 :::
 
 ### 发送输入状态的透传消息
@@ -33,10 +33,12 @@
 //发送表示正在输入的透传消息
 private static final String MSG_TYPING_BEGIN = "TypingBegin";
 private long previousChangedTimeStamp;
+// 示例间隔为 5 秒，业务侧可根据交互体验调整。
+private static final long TYPING_SEND_INTERVAL = 5_000L;
 
 private void textChange() {
     long currentTimestamp = System.currentTimeMillis();
-    if(currentTimestamp - previousChangedTimeStamp > 5) {
+    if (currentTimestamp - previousChangedTimeStamp >= TYPING_SEND_INTERVAL) {
         sendBeginTyping();
         previousChangedTimeStamp = currentTimestamp;
     }
@@ -45,7 +47,7 @@ private void textChange() {
 private void sendBeginTyping() {
     EMMessage beginMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
     EMCmdMessageBody body = new EMCmdMessageBody(MSG_TYPING_BEGIN);
-    // 将该透传消息只发送给在线用户
+    // 接收方离线时丢弃该瞬时状态消息。
     body.deliverOnlineOnly(true);
     beginMsg.addBody(body);
     beginMsg.setTo(toChatUsername);
@@ -63,7 +65,7 @@ private static final int MSG_TYPING_END = 1;
 private Handler typingHandler;
 
 private void initTypingHandler() {
-    typingHandler = new Handler(Looper.myLooper()) {
+    typingHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
@@ -78,8 +80,8 @@ private void initTypingHandler() {
 @Override
 public void onCmdMessageReceived(List<EMMessage> messages) {
     for (EMMessage msg : messages) {
-        if(!TextUtils.equals(msg.conversationId(), currentConversationId)) {
-            return;
+        if (!TextUtils.equals(msg.conversationId(), currentConversationId)) {
+            continue;
         }
         EMCmdMessageBody body = (EMCmdMessageBody) msg.getBody();
         if(TextUtils.equals(body.action(), MSG_TYPING_BEGIN)) {
