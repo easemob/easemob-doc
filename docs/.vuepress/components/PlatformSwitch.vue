@@ -89,7 +89,7 @@ const PLATFORM_ICON_MAP: Record<PlatformKey, PlatformIcon> = {
 
 /** 版本切换配置：平台、默认版本、各版本按平台的 homePath 均可在此调整 */
 const VERSION_CONFIG: VersionConfig = {
-  switchablePlatforms: ['android', 'ios'],
+  switchablePlatforms: ['android', 'ios', 'web'],
   fixedVersionLabel: '4.x',
   defaultVersion: '4.x',
   versions: [
@@ -99,6 +99,7 @@ const VERSION_CONFIG: VersionConfig = {
       homePath: {
         android: '/document/android/quickstart.html',
         ios: '/document/ios/quickstart.html',
+        web: '/document/web/quickstart.html',
       },
     },
     {
@@ -107,6 +108,7 @@ const VERSION_CONFIG: VersionConfig = {
       homePath: {
         android: '/v5/document/android/quickstart.html',
         ios: '/v5/document/ios/quickstart.html',
+        web: '/v5/document/web/quickstart.html',
       },
     },
   ],
@@ -241,31 +243,34 @@ const onVersionChange = (nextVersion: DocVersion | string): void => {
   router.push(getHomePath(nextVersion, platform.value))
 }
 
-const options: PlatformOptionGroup[] = [
-  {
-    label: '平台',
-    options: [
-      { value: 'android', label: 'Android' },
-      { value: 'ios', label: 'iOS' },
-      { value: 'web', label: 'Web' },
-      { value: 'harmonyos', label: 'HarmonyOS' },
-      { value: 'windows', label: 'Windows' },
-    ],
-  },
-  {
-    label: '框架',
-    options: [
-      { value: 'react-native', label: 'React Native' },
-      { value: 'flutter', label: 'Flutter' },
-      { value: 'unity', label: 'Unity' },
-      { value: 'applet', label: '小程序' },
-    ],
-  },
-  {
-    label: '服务端',
-    options: [{ value: 'server-side', label: 'Rest Api' }],
-  },
-]
+const options = computed<PlatformOptionGroup[]>(() => {
+  const isV5 = version.value === '5.x'
+  return [
+    {
+      label: '平台',
+      options: [
+        { value: 'android', label: 'Android' },
+        { value: 'ios', label: 'iOS' },
+        { value: 'web', label: isV5 ? 'Web/小程序' : 'Web' },
+        { value: 'harmonyos', label: 'HarmonyOS' },
+        { value: 'windows', label: 'Windows' },
+      ],
+    },
+    {
+      label: '框架',
+      options: [
+        { value: 'react-native', label: 'React Native' },
+        { value: 'flutter', label: 'Flutter' },
+        { value: 'unity', label: 'Unity' },
+        ...(!isV5 ? [{ value: 'applet' as PlatformKey, label: '小程序' }] : []),
+      ],
+    },
+    {
+      label: '服务端',
+      options: [{ value: 'server-side', label: 'Rest Api' }],
+    },
+  ]
+})
 </script>
 
 

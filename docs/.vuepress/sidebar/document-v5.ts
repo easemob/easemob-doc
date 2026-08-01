@@ -16,7 +16,17 @@ const documentV5Sidebar = [
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
-  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'web', 'harmonyos', 'unity', 'windows']},
+  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'harmonyos', 'unity', 'windows']},
+  {
+    text: '集成 SDK',
+    collapsible: true,
+    children: [
+      { text: '导入 SDK（Web）', link: 'integration.html' },
+      { text: '集成 SDK（小程序）', link: 'integration_applet.html' },
+      { text: '集成 SDK（uni-app）', link: 'uniapp.html' },
+    ],
+    only: ['web']
+  },
   { text: '添加依赖', link: 'integration.html', only: ['flutter', 'react-native']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
@@ -156,6 +166,15 @@ const documentV5Sidebar = [
         { text: '设置推送模板', link: 'push/push_template.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
         { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
         { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+        {
+          text: 'uni-app 离线推送',
+          collapsible: true,
+          children: [
+            { text: '使用推送插件', link: 'push/uniapp_push.html' },
+            { text: '集成 FCM', link: 'push/uniapp_push_fcm.html' },
+          ],
+          only: ['web']
+        },
         { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
         { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
       ],
@@ -173,6 +192,7 @@ const documentV5Sidebar = [
       { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
+      { text: 'uni-app 构建 App 与小程序', link: 'uniappnativeapp.html', only: ['web'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
     ],
   },
