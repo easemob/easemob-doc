@@ -54,6 +54,8 @@ SDK 提供 `WebIM.conn.contact.searchMessages` 方法进行服务端消息搜索
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
 - 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
+- 搜索的消息必须是在服务端保存期限内的历史消息。
+- 未设置会话 ID 时搜索当前用户有权访问的全部会话；设置会话 ID 时仅搜索指定会话。
 
 #### 示例代码
 
@@ -114,7 +116,7 @@ try {
 
 | 参数 | 类型 | 是否必需 | 描述 |
 | --- | --- | --- | --- |
-| `keywordList` | `string[]` | 是 | 设置关键词列表。SDK 会去除关键词首尾空白并过滤空字符串，最多设置 5 个关键词。 |
+| `keywordList` | `string[]` | 是 | 设置关键词列表。每个关键词长度为 1-120 个字符，所有关键词总长度不超过 120 个字符，最多设置 5 个关键词。SDK 会去除关键词首尾空白并过滤空字符串。 |
 | `keywordListMatchType` | `'or' \| 'and'` | 否 | 设置多关键词匹配关系。`or` 表示匹配任一关键词，`and` 表示同时匹配全部关键词。默认值为 `or`。 |
 | `conversationId` | `string` | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为空表示搜索所有会话。若传入该参数，必须同时传入 `conversationType`。 |
 | `conversationType` | `'singleChat' \| 'groupChat' \| 'chatRoom'` | 否 | 设置会话类型。指定 `conversationId` 时必传。`singleChat` 表示单聊，`groupChat` 表示群聊，`chatRoom` 表示聊天室。 |
