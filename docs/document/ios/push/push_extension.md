@@ -28,7 +28,7 @@ message.chatType = EMChatTypeChat;
 
 ```json
 {
-    "apns": {
+    "aps": {
         "alert": {
             "body": "test"
         }, 
@@ -253,3 +253,14 @@ message.chatType = EMChatTypeChat;
 | `f`               | 消息发送方 ID。                                              |
 | `t`               | 消息接收方 ID。                                              |
 | `m`               | 消息 ID。                                                    |
+
+## 接口列表
+
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`initWithText:`](#自定义推送字段) | `EMTextMessageBody` | 创建文本消息体。 |
+| [`initWithConversationID:from:to:body:ext:`](#自定义推送字段) | `EMChatMessage` | 创建待发送的聊天消息。 |
+| [`ext`](#自定义推送字段) | `EMChatMessage` | 设置消息扩展字段，用于配置自定义推送参数。 |
+| [`chatType`](#自定义推送字段) | `EMChatMessage` | 设置消息会话类型。 |
+| [`sendMessage:progress:completion:`](#自定义推送字段) | `IEMChatManager` | 发送带推送扩展字段的消息。 |
+| [`setPushTemplate:completion:`](#消息接收方使用推送模板) | `IEMPushManager` | 设置接收方使用的离线推送模板。 |

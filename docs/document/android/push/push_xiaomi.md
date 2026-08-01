@@ -2,17 +2,17 @@
 
 环信即时通讯 IM SDK 中已经集成了小米推送（基于 ` MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤。
 
-## **步骤一 在小米开放平台创建应用**
+## 步骤一 在小米开放平台创建应用
 
 在 [小米开放平台](https://dev.mi.com/platform) 创建应用，开启推送服务。详见小米官方网站的 [推送服务接入指南](https://dev.mi.com/console/doc/detail?pId=68)。
 
-## **步骤二 上传推送证书**
+## 步骤二 上传推送证书
 
-在[环信控制台](https://console.easemob.com/user/login)上传推送证书：
-
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，在 **应用管理** 页面点击测试版或正式版的应用的 App Key。
    
-2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **小米** 页签，配置小米推送参数。参数相关信息，详见你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
+2. 选择 **增值功能** > **消息推送**。
+   
+3. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框中选择 **小米** 页签，配置小米推送参数。参数相关信息，详见你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
 
 ![img](/images/console/push_certificate_xiaomi.png)
 
@@ -24,7 +24,7 @@
 | Channel ID  | String | 是     |  Channel ID。该参数仅对离线推送有效。            |
 | Action      | String | 否     | 点击通知后的动作。该参数仅对离线推送有效。           |
 
-## **步骤三 集成小米推送 SDK**
+## 步骤三 集成小米推送 SDK
 
 1. 下载 [小米推送 SDK](https://admin.xmpush.xiaomi.com/zh_CN/mipush/downpage) ，将 `aar` 包添加到项目中。
 

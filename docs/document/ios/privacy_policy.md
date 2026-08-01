@@ -4,21 +4,36 @@
 
 ## 环信即时通讯 IM 的适配
 
-### IM SDK 4.4.1 及以上版本
+### iOS SDK V5
 
-IM SDK 4.4.1 及以上版本默认包含 **PrivacyInfo.xcprivacy** 隐私协议，无需任何额外操作。
+iOS SDK V5 已在 SDK 包中提供 `PrivacyInfo.xcprivacy`。将 SDK 正确集成到 App 工程后，SDK 自身的隐私清单会随构建产物参与隐私清单汇总，接入方无需将 SDK 的声明重复复制到 App 的 `PrivacyInfo.xcprivacy` 中。
 
-### IM SDK 4.4.1 之前版本
+App 开发者仍需维护 App 自身及其他第三方 SDK 的隐私清单声明。SDK 的隐私清单仅描述 iOS SDK V5 自身的访问和声明，不等同于 App 在 App Store Connect 中应完成的全部隐私申报。
 
-对于 IM SDK 4.4.1 之前版本，你需要将 SDK 对 **Required Reason APIs** 的使用，手动添加到 App 已有的 **PrivacyInfo.xcprivacy** 中。
+### SDK V5 声明的 Required Reason APIs
 
-1. 在 App 工程中添加文件：
+| API 类别 | 原因代码 | SDK 中的声明 |
+| :--- | :--- | :--- |
+| `NSPrivacyAccessedAPICategoryUserDefaults` | `CA92.1` | SDK 使用 `NSUserDefaults` 保存运行所需的本地状态等信息。 |
+| `NSPrivacyAccessedAPICategoryFileTimestamp` | `C617.1` | SDK 按其 `PrivacyInfo.xcprivacy` 声明文件时间戳访问原因。 |
 
-   打开 **File > New > File...**，选择 **Resource** 下的 **App Privacy**，点击 **Next** 添加到工程。 
+iOS SDK V5 的隐私清单还声明：
 
-2. 将 **PrivacyInfo.xcprivacy** 中的条目补充到 App 自身的 **PrivacyInfo.xcprivacy** 中，可以通过源码或 Property List 方式添加：
+ - `NSPrivacyCollectedDataTypes` 为 `<array/>`。
+ - `NSPrivacyTrackingDomains` 为 `<array/>`。
+ - `NSPrivacyTracking` 为 `false`。
 
-- 通过源码方式添加：
+### 手动合并隐私清单
+
+通常无需手动合并 SDK V5 的隐私清单。仅当你使用未携带隐私清单的旧 SDK，或自行分发并移除了 SDK 隐私清单的二进制副本时，可参考以下内容，将对应条目补充到 App 的 `PrivacyInfo.xcprivacy` 中。
+
+1. 在 App 工程中添加隐私清单文件：
+
+   打开 **File > New > File...**，选择 **Resource** 下的 **App Privacy**，然后点击 **Next** 将文件添加到工程。
+
+2. 将以下 SDK V5 声明合并到 App 的 `PrivacyInfo.xcprivacy` 中。可通过源代码或 Property List 方式编辑；合并时请保留 App 已有的声明，不要覆盖其他 SDK 或 App 自身的条目。
+
+ - 通过源代码方式添加：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -52,11 +67,8 @@ IM SDK 4.4.1 及以上版本默认包含 **PrivacyInfo.xcprivacy** 隐私协议�
 	<false/>
 </dict>
 </plist>
-
 ```
 
--  通过 Property List 方式添加：
+ - 通过 Property List 方式添加：
 
-![img](/images/ios/apple_privacy_policy.png) 
-
-
+![img](/images/ios/apple_privacy_policy.png)

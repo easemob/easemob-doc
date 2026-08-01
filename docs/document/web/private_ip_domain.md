@@ -1,31 +1,51 @@
-# 私有云 SDK IP 地址/域名配置
+# 私有化 IP/域名配置
 
-## Web Vue 3 Demo
 
-对于 Web Vue 3 Demo，进行私有化配置需在 [Vue 3 Demo 源代码](https://github.com/easemob/webim-vue-demo/tree/vue3-miniCore) 中进行修改。
+如果你要接入私有部署环境，优先使用固定服务地址模式；如果仍希望走 DNS 发现流程，可配置自定义 DNS 地址列表。
 
-在 `src/IM/config/index.js` 文件中，修改环境配置：
+## 配置方式
 
-```javascript
-//环信appKey默认配置项
-export const DEFAULT_EASEMOB_APPKEY = 'easemob#easeim';// 私有化的 App Key
-export const DEFAULT_EASEMOB_SOCKET_URL = 'http://im-api-v2.easemob.com/ws';//私有化的 WebSocket 地址
-export const DEFAULT_EASEMOB_REST_URL = 'ws://a1.easemob.com';//私有化的 RESTful 服务器地址
+### 固定服务地址
+
+通过 `serviceConfig.serverUrls` 配置固定地址。至少需要提供：
+
+- `restApiUrl`
+- `wsUrl`
+
+如果还需要支持登录后自动同步会话、好友数据，建议同时配置：
+
+- `syncRestApiUrl`
+- `syncWsUrl`
+
+配置 `serverUrls` 后，SDK 会直接连接这些地址，不再请求 DNS 配置。
+
+### DNS 发现
+
+如果不传 `serviceConfig.serverUrls`，SDK 默认使用内置 DNS 配置。
+
+如需自定义 DNS 配置，可传入 `serviceConfig.dnsConfigUrls`。
+
+`serviceConfig.dnsConfigUrls` 和 `serviceConfig.serverUrls` 不能同时使用。
+
+## 示例代码
+
+```typescript
+import { ChatClient, ChatManager } from 'easemob-websdk';
+
+const client = ChatClient.init({
+  appKey: 'your-org#your-app',
+  managers: [ChatManager],
+  serviceConfig: {
+    serverUrls: {
+      restApiUrl: 'https://rest.example.com',
+      wsUrl: 'wss://ws.example.com',
+      syncRestApiUrl: 'https://sync-rest.example.com',
+      syncWsUrl: 'wss://sync-ws.example.com',
+    },
+  },
+});
 ```
 
-## Web React Demo
+## 读取当前固定地址
 
-对于 Web React Demo，进行私有化配置需在 [React Demo 源代码](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)中进行修改。
-
-在 `easemob-demo-react/src/App.tsx` 中修改配置信息，如下所示：
-
-```javascript
-		initConfig={{
-  		  appKey: 'easemob#easeim',// 私有化的 App Key
-        isHttpDNS: false,//固定为 false
-        restUrl:'http://a1.easemob.com',//私有化的 RESTful 服务器地址
-        msyncUrl: 'ws://im-api-v2.easemob.com/ws',//私有化的 WebSocket 地址
-		    useUserInfo: true,
-        translationTargetLanguage: state.translationTargetLanguage,
-      }}
-```
+如果初始化时传入了 `serviceConfig.serverUrls`，可以通过 `client.getServerUrlsConfig()` 读取当前固定服务地址配置。

@@ -1,60 +1,78 @@
 # 删除消息
 
-<Toc />
+## 功能说明
 
-本文介绍用户如何单向清空本地和服务端的聊天记录和单向删除服务端的历史消息。
+SDK 支持单向删除服务端的消息：
 
-## 技术原理
+- 单向清空服务端的聊天记录：单向清空服务端的当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。清空成功后，SDK 会同步清除本地已缓存的会话和消息数据，并更新本地会话列表缓存
+- 单向删除服务端的历史消息：按消息 ID 或时间戳单向删除当前用户在服务端保存的历史消息。不会自动删除当前设备上的本地消息缓存。若业务侧已在本地保存或展示这些消息，需要在接口调用成功后自行更新本地消息列表。
 
-利用环信即时通讯 IM SDK 可从服务器单向删除历史消息，主要方法如下：
-
-- `removeHistoryMessages`：单向删除服务端的历史消息。
-- `deleteAllMessagesAndConversations`：单向清空服务端的聊天记录，本地若有会话和消息，也会被清除。
+若你单向清空了服务端的聊天记录或删除了历史消息，你无法从服务端拉取到会话和消息，而其他用户不受该操作影响。
 
 ## 前提条件
 
-开始前，请确保已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
+开始前，请确保满足以下条件：
 
-## 实现方法
+- 已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
+- 初始化 SDK 时已注册 `ChatManager`，能够通过 `client.chatManager` 调用消息与会话删除相关接口。
 
-### 清空聊天记录
+## 单向清空聊天记录
 
-你可以调用 `deleteAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。若你清空了聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受该操作影响。
+你可以调用 `clearAllMessagesAndConversations` 方法单向清空服务端的当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。若你清空了聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受该操作影响。
 
-若存在本地会话和消息，也会被清除。
+清空成功后，SDK 会同步清除本地已缓存的会话和消息数据，并更新本地会话列表缓存；如果本地会话列表发生变化，会触发 `onConversationListUpdate` 事件，`reason` 为 `local`。
 
-:::tip
-若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
-:::
-
-```javascript
-conn.deleteAllMessagesAndConversations().then(() => {
-  // 清除全部会话和消息记录成功
-})
+```typescript
+await client.chatManager.clearAllMessagesAndConversations();
 ```
 
-### 单向删除服务端的历史消息
+## 单向删除服务端的历史消息
 
-你可以调用 `removeHistoryMessages` 方法按照消息时间或消息 ID 单向删除服务端的历史消息。
+你可以调用 `removeHistoryMessages`，按消息 ID或时间戳单向删除当前用户在服务端保存的历史消息。该操作仅对当前用户生效：删除后，当前用户无法再从服务端漫游获取这些消息；同一单聊、群聊或聊天室中的其他用户不受影响，仍可按照漫游策略获取这些消息。
 
-- 按时间删除：删除指定时间及之前的历史消息。
-- 按消息 ID 删除：每次最多可删除 50 条消息。
+支持以下删除方式：
 
-删除后，该用户无法从服务端拉取到该消息，不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
-每次最多可删除 20 条消息。多端多设备登录时，删除成功后会触发 `onMultiDeviceEvent#deleteRoaming` 回调。
+- 按消息 ID 删除：通过 `messageIds` 指定要删除的消息，每次最多可删除 50 条。
+- 按时间删除：通过 `beforeTimestamp` 指定时间戳，删除服务器接收时间早于该时间戳的历史消息，时间戳单位为毫秒。
 
-:::tip
-若使用该功能，需将 SDK 升级至 V4.1.2 或以上版本。
+调用时，`messageIds` 和 `beforeTimestamp` 至少需要传入一个：
+
+- 仅传入 `messageIds`：按消息 ID 删除。
+- 仅传入 `beforeTimestamp`：按时间戳删除。
+- 同时传入两者：SDK 优先按 `messageIds` 删除。
+
+多端多设备登录时，删除成功后，当前用户的其他在线设备会收到 `onMultiDeviceMessageRemoved` 回调。
+
+:::tip 
+`removeHistoryMessages` 仅删除当前用户在服务端保存的历史消息，不会自动删除当前设备上的本地消息缓存。若业务侧已在本地保存或展示这些消息，需要在调用成功后自行更新本地消息列表。
 :::
 
-示例代码如下：
+- 按消息 ID 删除
 
-```javascript
-// 按时间删除消息
-conn.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
-
-// 按消息 ID 删除消息
-conn.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', messageIds: ['messageId']})
+```typescript
+await client.chatManager.removeHistoryMessages({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  messageIds: ['msg-1', 'msg-2', 'msg-3'], // 最多 50 条
+});
 ```
 
+- 按时间删除
 
+删除指定时间戳之前的所有消息：
+
+```typescript
+await client.chatManager.removeHistoryMessages({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  beforeTimestamp: Date.now(), 
+});
+```
+
+## 接口列表
+
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`clearAllMessagesAndConversations`](#清空聊天记录) | `ChatManager` | 清空当前用户侧的全部会话和服务端漫游消息。 |
+| [`removeHistoryMessages`](#单向删除服务端的历史消息) | `ChatManager` | 按消息 ID 或时间范围单向删除指定会话的服务端历史消息。 |
+| [`addEventHandler`](#监听会话列表更新) | `ChatManager` | 注册会话列表更新监听器，用于在删除消息或清空会话后刷新 UI。 |

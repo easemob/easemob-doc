@@ -1,26 +1,29 @@
 # 推送模板
 
-## 概述
+## 功能说明
 
-推送模板主要用于服务器提供的默认离线推送配置不满足你的需求时，设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。
+推送模板用于在默认离线推送内容不满足业务需求时，自定义推送通知的标题和内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。
 
-推送模板包括默认推送模板 `default`、`detail` 和自定义推送模板。
+你可以通过环信控制台或 [服务端 REST API 配置推送模板](/document/server-side/push_template_create.html)，并在发送消息时通过消息扩展字段指定模板名称和模板参数。
 
-推送模板的特点如下：
+推送模板包括默认模板 `default`、`detail` 和自定义模板。默认模板适用于通用推送场景；自定义模板适用于需要按业务场景、语言或接收对象展示不同推送内容的场景。
+
+推送模板具有以下特点：
+
 1. 推送模板的优先级高于 [调用 API 设置通知栏的推送内容](push_display_attribute.html)。
-2. 实现自定义修改环信服务端默认推送内容。   
+2. 支持通过环信控制台或 [服务端 REST API](/document/server-side/push_template_create.html) 自定义服务端默认推送内容。
 3. 对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
-4. 接收方可以决定使用哪个模板。 
-5. 按优先级选择模板使用方式： 
-   - 使用自定义推送模板的优先级高于默认推送模板。
-   - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
+4. 接收方可配置推送模板：若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
+5. 推送模板使用优先级：
+   - 自定义模板的优先级高于默认模板。
+   - 发送方在消息扩展字段中指定推送模板时，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
 ## 开通功能
 
 [推送模板](push_template.html) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推送高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击测试版 App Key 或正式版 App Key。
 3. 选择 **增值服务 > 消息推送 > 离线推送**。
 4. 点击 **免费开通**。
 
@@ -35,7 +38,7 @@
 - [调用 REST API 配置](/document/server-side/push_template_overview.html)。
 - 在 [环信控制台](https://console.easemob.com/user/login) 设置推送模板。
 
-推送模板相关的数据结构，详见[推送扩展字段](/document/server-side/push_extension.html)。
+推送模板相关的数据结构，详见 [推送扩展字段](/document/server-side/push_extension.html)。
 
 下面为在环信控制台设置离线推送模板。
 
@@ -43,8 +46,8 @@
 
 离线推送模板开通后，**模板管理** 页面默认添加两个模板，`default` 和 `detail`。若未配置自定义推送模板，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
-- `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。若调用了 `updatePushDisplayStyle` 方法将 `DisplayStyle` 设置为 `EMPushDisplayStyleSimpleBanner`，则默认推送模板为 `default`。
- - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为消息内容。若调用了 `updatePushDisplayStyle` 方法将 `DisplayStyle` 设置为 `EMPushDisplayStyleMessageSummary`，则默认推送模板为 `detail`。
+- `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。若调用了 `updatePushDisplayStyle` 方法将 `EMPushDisplayStyle` 设置为 `EMPushDisplayStyleSimpleBanner`，则默认推送模板为 `default`。
+ - `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为消息内容。若调用了 `updatePushDisplayStyle` 方法将 `EMPushDisplayStyle` 设置为 `EMPushDisplayStyleMessageSummary`，则默认推送模板为 `detail`。
 
 ![img](/images/console/push_template_default.png)
 

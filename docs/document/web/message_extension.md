@@ -1,31 +1,41 @@
 # 消息扩展
 
-如果上述消息类型无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如，消息中需要携带被回复的消息内容或者是图文消息等场景。
+## 功能说明
 
-```javascript
-function sendTextMessage() {
-  let option = {
-    type: "txt",
-    msg: "message content",
-    to: "username",
-    chatType: "singleChat",
-    // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
+当内置消息字段无法满足业务需求时，你可以通过消息扩展字段 `ext` 携带自定义业务数据，例如被回复消息信息、图文消息展示数据或业务标识等。
+
+SDK 支持在创建各类消息时传入 `ext` 字段。该字段为可选字段，取值必须为可 JSON 序列化的对象。接收方收到消息后，可从消息对象的 `ext` 字段中读取自定义数据，并根据业务需求进行处理。
+
+## 示例代码
+
+```typescript
+async function sendTextMessage() {
+  const message = client.chatManager.createTextMessage({
+    conversationId: 'user2',
+    conversationType: 'singleChat',
+    content: 'message content',
+    // 设置消息扩展字段。扩展字段需为可 JSON 序列化的对象。
     ext: {
-      key1: "Self-defined value1",
+      key1: 'Self-defined value1',
       key2: {
-        key3: "Self-defined value3",
+        key3: 'Self-defined value3',
       },
     },
-  };
-  let msg = WebIM.message.create(option);
-  //  调用 `send` 方法发送该扩展消息。
-  conn
-    .send(msg)
-    .then((res) => {
-      console.log("send private text Success");
-    })
-    .catch((e) => {
-      console.log("Send private text error");
-    });
+  });
+
+  // 调用 `sendMessage` 方法发送携带扩展字段的消息。
+  try {
+    await client.chatManager.sendMessage(message);
+    console.log('Send private text success.');
+  } catch (e) {
+    console.log('Send private text error.', e);
+  }
 }
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createTextMessage`](#示例代码) | `ChatManager` | 创建携带扩展字段的文本消息。 |
+| [`sendMessage`](#示例代码) | `ChatManager` | 发送消息。 |

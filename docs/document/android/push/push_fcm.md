@@ -2,13 +2,13 @@
 
 环信即时通讯 IM SDK 中已集成 FCM 推送相关逻辑，你还需要完成以下步骤。
 
-## **FCM 推送集成**
+## FCM 推送集成
 
-### **<strong class="step">步骤一</strong> 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase**
+### 步骤一 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase
 
 详见 [FCM 的官网介绍](https://firebase.google.com/docs/android/setup?hl=zh-cn#console)。
 
-### **<strong class="step">步骤二</strong> 获取 FCM V1 版本证书**
+### 步骤二 获取 FCM V1 版本证书
 
 1. 登录 [FCM 控制台](https://console.firebase.google.com)，选择你的项目。
 
@@ -42,11 +42,13 @@
 }
 ```
 
-### **<strong class="step">步骤三</strong> 上传推送证书**
+### 步骤三 上传推送证书
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，选择你的应用 > **功能配置** > **增值功能** > **即时推送**。
+1. 登录 [环信控制台](https://console.easemob.com/user/login)，在 **应用管理** 页面点击测试版或正式版的应用的 App Key。
+   
+2. 选择 **增值功能** > **消息推送**。
 
-2. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框打开后，默认显示 **谷歌** 页签。你可以在该页面配置谷歌 FCM 推送证书。
+3. 在 **证书管理** 页面，点击 **添加推送证书**。在 **添加推送证书** 对话框打开后，默认显示 **谷歌** 页签。你可以在该页面配置谷歌 FCM 推送证书。
 
 ![img](/images/console/push_certificate_fcm.png)
 
@@ -80,7 +82,7 @@
 3. 点击 **上传证书** 上传本地保存的 V1 证书文件（.json）。
 4. 点击 **保存** 完成切换。
 
-### **<strong class="step">步骤四</strong> FCM 推送集成**
+### 步骤四 FCM 推送集成
 
 1. 在你的 app 项目的 `build.gradle` 文件中，配置 FCM 库的依赖：
 
@@ -113,7 +115,7 @@ plugins {
 }
 ```
 
-对于 Gradle 5.0 及以上版本，BoM 自动开启，而对于 Gradle 5.0 之前的版本，你需要开启 BoM 特性。详见[Firebase Android BoM](https://firebase.google.cn/docs/android/learn-more#bom)和[Firebase Android SDK Release Notes](https://firebase.google.cn/support/release-notes/android)。
+使用 Firebase BoM 时，需要在应用模块的 `dependencies` 中显式声明 `implementation platform('com.google.firebase:firebase-bom:32.7.4')`。声明 BoM 后，Firebase 库依赖无需单独指定版本。BoM 版本应根据项目实际需要和 Firebase 官方发布说明进行更新。详见 [Firebase Android BoM](https://firebase.google.cn/docs/android/learn-more#bom) 和 [Firebase Android SDK Release Notes](https://firebase.google.cn/support/release-notes/android)。
 
 2. 同步应用后，继承 `FirebaseMessagingService` 的服务，并将其在 `AndroidManifest.xml` 中注册。
 
@@ -205,8 +207,11 @@ public class MyFCMMSGService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String token) {
         Log.i("MessagingService", "onNewToken: " + token);
-        // 若要对该应用实例发送消息或管理服务端的应用订阅，将 FCM 注册 token 发送至你的应用服务器。
-        if(EMClient.getInstance().isSdkInited()) {
+        // 先保存 Token，确保在 SDK 尚未登录时也不会丢失。
+        EMPushHelper.getInstance().setFCMPushToken(token);
+        // 登录成功后上传 Token 至环信服务器。
+        if (EMClient.getInstance().isSdkInited()
+                && EMClient.getInstance().isLoggedIn()) {
             EMClient.getInstance().sendFCMTokenToServer(token);
         }
     }
@@ -244,3 +249,18 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
 4. 检查设备是否为国行手机的 ROM。一些品牌的国产手机不支持 GMS 服务，需替换为海外发售的设备。
 5. 检查发送消息时是否设置了只发在线(`deliverOnlineOnly = true`)。只发在线的消息不推送。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`enableFCM`](#步骤四-fcm-推送集成) | `EMPushConfig.Builder` | 启用 FCM 推送并设置 FCM Sender ID。 |
+| [`setPushConfig`](#步骤四-fcm-推送集成) | `EMOptions` | 设置 SDK 的推送配置。 |
+| [`init`](#步骤四-fcm-推送集成) | `EMClient` | 初始化 Android SDK。 |
+| [`setPushListener`](#步骤四-fcm-推送集成) | `EMPushHelper` | 注册推送类型与 Token 绑定结果监听器。 |
+| [`isSupportPush`](#步骤四-fcm-推送集成) | `PushListener` | 判断当前设备是否支持指定推送类型。 |
+| [`sendFCMTokenToServer`](#步骤四-fcm-推送集成) | `EMClient` | 将 FCM Token 上传至环信服务器。 |
+| [`setFCMPushToken`](#步骤四-fcm-推送集成) | `EMPushHelper` | 保存当前设备的 FCM Token。 |
+| [`isSdkInited`](#步骤四-fcm-推送集成) | `EMClient` | 判断 SDK 是否已初始化。 |
+| [`isLoggedIn`](#步骤四-fcm-推送集成) | `EMClient` | 判断当前用户是否已登录。 |
+| [`onNewToken`](#步骤四-fcm-推送集成) | `FirebaseMessagingService` | 监听 FCM Token 更新。 |
