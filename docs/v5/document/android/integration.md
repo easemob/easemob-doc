@@ -6,7 +6,7 @@
 
 - 推荐 Android Studio Meerkat | 2024.3.1 Patch 2及以上
 - 推荐 Gradle 8.0 及以上
-- targetVersion 33 及以上
+- `targetSdkVersion` 33 及以上
 - Android SDK API 21 及以上
 - JDK 17 及以上
 
@@ -48,7 +48,7 @@ allprojects {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号
+    // x.x.x 请填写具体版本号
     // 可通过 SDK 发版说明获得最新版本号。
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
@@ -82,16 +82,16 @@ dependencies {
 }
 ```
 
-如果对生成的 `apk` 大小比较敏感，我们建议使用 `jar` 方式，并且手工拷贝 `so`，而不是使用 `Aar`，因为 `Aar` 方式会把各个平台的 `so` 文件都包含在其中。采用 `jar` 方式，可以仅保留一个 `ARCH` 目录，建议仅保留 `armeabi-v7a`，这样虽然在对应平台执行的速度会降低，但是能有效减小 `apk` 的大小。
+如果对生成的 `apk` 大小比较敏感，可以使用 `jar` 方式，并仅手动拷贝应用需要支持的 CPU 架构对应的 `.so` 文件；也可以在 Gradle 中通过 `abiFilters` 限制打包的 CPU 架构。发布应用时，应根据目标设备和应用商店要求选择支持的架构。面向当前主流的 64 位 Android 设备发布时，通常至少需要包含 `arm64-v8a`，不建议只保留用于 32 位 ARM 设备的 `armeabi-v7a`。
 
 ### 方法三：动态加载 .so 库文件
 
-为了减少应用安装包的大小，SDK 提供了 `EMOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 4.5.0 为例，`.so` 文件包括 `libcipherdb.so` 和 `libhyphenate.so` 两个文件。**从 4.11.0 开始，`.so`文件还包含 `libaosl.so` 文件**。
+为了减少应用安装包的大小，SDK 提供了 `EMOptions#setNativeLibBasePath` 方法支持从指定目录加载 SDK 所需的 `.so` 文件。SDK 使用的动态库包括 `libcipherdb.so`、`libhyphenate.so` 和 `libaosl.so`。
 
 该功能的实现步骤如下：
 
 1. [下载最新版本的 SDK](https://www.easemob.com/download/im#Android) 并解压缩。
-2. 集成 `hyphenatechat_4.5.0.jar` 到你的项目中。
+2. 将下载包中的 `hyphenatechat_x.y.z.jar` 集成到项目中。
 3. 将所有架构的 `.so` 文件上传到你的服务器，并确保应用程序可以通过网络下载目标架构的 `.so` 文件。
 4. 应用运行时，会检查 `.so` 文件是否存在。如果未找到，应用会下载该 `.so` 文件并将其保存到你自定义的应用程序的私有目录中。
 5. 调用 `EMClient#init` 初始化时，将 `.so` 文件所在的 app 私有目录作为参数设置进 `EMOptions#setNativeLibBasePath` 方法中。
@@ -101,16 +101,19 @@ dependencies {
 1. 该方法仅适合手动集成 Android SDK，不适用于通过 Maven Central 集成。
 2. so 库的路径取决于 `EMOptions#setNativeLibBasePath` 方法的 `path` 参数：
 - 若设置了 `path` 参数，SDK 内部会使用 `System.load` 从设置的路径下搜索和加载 so 库。该路径必须为有效的 app 的私有目录路径。
-- `path` 参数为空或者不调用该方法时，SDK 内部会使用 `system.loadLibrary` 从系统默认路径中搜索并加载 so 库。
+- `path` 参数为空或者不调用该方法时，SDK 内部会使用 `System.loadLibrary` 从系统默认路径中搜索并加载 so 库。
 :::
 
 ```java
-//假设用户已经通过动态下发的方式，将环信 SDK 中的 libcipherdb.so 和 libhyphenate.so 两个 so 库，放到 app 的 /data/data/packagename/files 目录下。
+// 假设已将当前设备 CPU 架构对应的 libcipherdb.so、libhyphenate.so 和
+// libaosl.so 下载到应用的 files 私有目录。
 String filesPath = mContext.getFilesDir().getAbsolutePath();
 
 EMOptions options = new EMOptions();
+// 设置三个动态库所在的目录；必须在初始化 SDK 前调用。
 options.setNativeLibBasePath(filesPath);
 
+// SDK 初始化时从上述目录加载动态库。
 EMClient.getInstance().init(mContext, options);
 
 ```
@@ -119,9 +122,12 @@ EMClient.getInstance().init(mContext, options);
 
 根据场景需要，在 `/app/src/main/AndroidManifest.xml` 文件中添加如下行，获取相应的设备权限：
 
+// TODO：这里的 129 行的 https AI 建议改成了 http
+//应该使用http
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="https://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="Your Package"
     android:versionCode="100"
     android:versionName="1.0.0">
@@ -137,15 +143,13 @@ EMClient.getInstance().init(mContext, options);
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 获取运营商信息，用于获取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!-- 获取读存储权限，用于附件等的获取 -->
+    <!-- Android 12 及以下按业务需要申请读取外部存储权限，用于访问外部存储中的附件 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 访问 GPS 定位，用于定位消息，如果不用定位相关可以移除 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!-- 允许程序在手机屏幕关闭后后台进程仍然运行 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 申请闹钟定时权限，SDK 心跳中使用，3.9.8及以后版本可以不添加 -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <!-- IM SDK required end -->
 
 </manifest>
@@ -159,3 +163,10 @@ EMClient.getInstance().init(mContext, options);
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`setNativeLibBasePath`](#方法三动态加载-so-库文件) | `EMOptions` | 设置 SDK 原生动态库所在的应用私有目录。 |
+| [`init`](#方法三动态加载-so-库文件) | `EMClient` | 使用指定配置初始化 Android SDK，并加载所需动态库。 |

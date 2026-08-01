@@ -4,7 +4,7 @@
 
 服务端消息搜索用于按关键词从服务端搜索当前用户可见的历史消息，适用于全局消息搜索、会话内搜索、按消息类型过滤搜索以及按时间范围检索消息等场景。
 
-iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageNum:completion:` 方法进行服务端消息搜索。该接口支持以下功能：
+iOS SDK 提供 `searchMessagesFromServerWithOption` 方法进行服务端消息搜索。该接口支持以下功能：
 
 - 支持使用一个或多个关键词搜索历史消息，并设置多关键词匹配关系。
 - 支持按指定会话、消息类型和消息发送时间范围筛选结果。
@@ -14,7 +14,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 ## 功能开通
 
-要使用服务端消息搜索功能，需 **联系环信商务开通**。
+要使用服务端消息搜索功能，需要在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
 **关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
@@ -26,7 +26,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 开始前，请确保满足以下条件：
 
-- 已完成 iOS SDK v4.24.0 或以上版本的 [初始化](initialization.html) 并 [登录](login.html) 成功。
+- 已完成 iOS SDK V5.0 的 [初始化](initialization.html) 并 [登录](login.html) 成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -34,7 +34,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 ### 调用方法
 
-你可以创建 `EMMessageSearchOption` 对象设置搜索条件，然后调用 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageNum:completion:` 从服务端异步搜索历史消息。
+你可以创建 `EMMessageSearchOption` 对象设置搜索条件，然后调用 `searchMessagesFromServerWithOption` 从服务端异步搜索历史消息。
 
 #### 搜索条件和内容
 
@@ -44,7 +44,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 | :--- | :--- | :--- |
 | 关键词 | 支持使用一个或多个关键词搜索历史消息，并可设置匹配任一关键词或匹配全部关键词。 | `keywordList`、`keywordMatchType` |
 | 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。 | `conversationId` |
-| 消息类型 | 支持搜索文本、图片、视频、位置、文件和合并消息，不支持搜索自定义消息、语音消息和透传消息。 | `msgTypes` |
+| 消息类型 | 支持搜索文本、图片、视频、位置、文件、合并和自定义消息；不支持搜索语音消息和透传消息。 | `msgTypes` |
 | 时间范围 | 支持按消息发送时间范围搜索。开始时间和结束时间必须同时设置。 | `startTime`、`endTime` |
 | 搜索内容 | 支持仅搜索消息内容、仅搜索消息扩展字段（`ext`），或同时搜索两者。消息内容包括文本消息内容以及自动翻译后的文本内容。 | `searchScope` |
 
@@ -54,7 +54,6 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 - 单聊可返回当前用户作为发送方或接收方的消息。
 - 搜索群聊或聊天室消息时，需指定对应的群组 ID 或聊天室 ID，并通过服务端成员身份校验。
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 
 #### 示例代码
 
@@ -117,7 +116,7 @@ NSInteger pageNum = 1;
 | `keywordList` | `NSArray<NSString *> *` | 是 | 设置关键词列表。每个关键词长度为 1–120 个字符，所有关键词总长度不超过 120 个字符，最多设置 5 个关键词。 |
 | `keywordMatchType` | `EMKeywordListMatchType` | 否 | 设置多关键词匹配关系。<br/> - （默认）`EMKeywordListMatchTypeOR` 表示匹配任一关键词。<br/> - `EMKeywordListMatchTypeAND` 表示同时匹配全部关键词。|
 | `conversationId` | `NSString *` | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为 `nil` 或空表示搜索所有会话。注意：iOS SDK 不需要额外传入会话类型。 |
-| `msgTypes` | `NSArray<NSNumber *> *` | 否 | 设置消息类型过滤条件。数组元素为 `EMMessageBodyType` 枚举值，可使用 `EMMessageBodyTypeText`、`EMMessageBodyTypeImage`、`EMMessageBodyTypeVideo`、`EMMessageBodyTypeLocation`、`EMMessageBodyTypeFile` 和 `EMMessageBodyTypeCombine`。不支持 `EMMessageBodyTypeCustom`、`EMMessageBodyTypeVoice` 和 `EMMessageBodyTypeCmd`。 |
+| `msgTypes` | `NSArray<NSNumber *> *` | 否 | 设置消息类型过滤条件。数组元素为 `EMMessageBodyType` 枚举值，可使用 `EMMessageBodyTypeText`、`EMMessageBodyTypeImage`、`EMMessageBodyTypeVideo`、`EMMessageBodyTypeLocation`、`EMMessageBodyTypeFile`、`EMMessageBodyTypeCombine` 和 `EMMessageBodyTypeCustom`。不支持 `EMMessageBodyTypeVoice` 和 `EMMessageBodyTypeCmd`。 |
 | `startTime` | `NSInteger` | 否 | 设置查询开始时间，Unix 时间戳，单位为毫秒。需与结束时间同时设置。 |
 | `endTime` | `NSInteger` | 否 | 设置查询结束时间，Unix 时间戳，单位为毫秒。需与开始时间同时设置，而且不应早于开始时间。 |
 | `searchScope` | `EMMessageSearchScope` | 否 | 设置搜索范围。<br/> - （默认）`EMMessageSearchScopeContent`：仅搜索消息内容。<br/> - `EMMessageSearchScopeExt`：仅搜索消息扩展字段。<br/> - `EMMessageSearchScopeAll`：搜索消息内容和扩展字段。|
@@ -198,6 +197,5 @@ option.keywordMatchType = EMKeywordListMatchTypeAND;
 
 ## 注意事项
 
-- 当前用户已单方面删除的消息不会出现在搜索结果中。
 - 搜索服务需要单独开通。若未开通，服务端可能返回 `EMErrorServiceNotEnable`（错误码 `505`）。
 - 参数错误可能通过完成回调返回 `EMErrorInvalidParam`（错误码 `110`）；鉴权失败可能返回 `EMErrorUserAuthenticationFailed`（错误码 `202`）；未知服务端错误可能返回 `EMErrorServerUnknownError`（错误码 `303`）。详见 [错误码文档](error.html)。

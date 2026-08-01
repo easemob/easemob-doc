@@ -1,15 +1,39 @@
 # 消息扩展
 
-当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型，例如，消息中需要携带被回复的消息内容或者是图文消息等场景。
+## 功能说明
+
+当内置消息字段无法满足业务需求时，你可以通过消息扩展字段携带自定义业务数据，例如被回复消息信息、图文消息展示数据或业务标识等。
+
+Android SDK 通过 `EMMessage#setAttribute` 设置消息扩展字段，支持 `Boolean`、`Int`、`Long`、`Float`、`Double`、`String`、`JSONObject` 和 `JSONArray` 类型。接收方收到消息后，可以调用对应类型的属性读取方法获取自定义数据，也可以调用 `EMMessage#getAttributes` 获取消息中的全部扩展字段，并根据业务需求进行处理。
+
+## 示例代码
 
 ```java
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 增加自定义属性。
 message.setAttribute("attribute1", "value");
 message.setAttribute("attribute2", true);
-// 接收消息的时候获取扩展属性。
+// 发送携带扩展字段的消息。
 EMClient.getInstance().chatManager().sendMessage(message);
-// 获取自定义属性，第 2 个参数为没有此定义的属性时返回的默认值。
-message.getStringAttribute("attribute1",null);
-message.getBooleanAttribute("attribute2", false)
+
+// 接收消息后读取自定义属性。属性不存在时，返回第 2 个参数指定的默认值。
+String attribute1 = message.getStringAttribute("attribute1", null);
+boolean attribute2 = message.getBooleanAttribute("attribute2", false);
+
+// 获取消息中的全部扩展字段。
+Map<String, Object> attributes = message.getAttributes();
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createTextSendMessage`](#示例代码) | `EMMessage` | 创建待发送的文本消息。 |
+| [`setAttribute`](#示例代码) | `EMMessage` | 设置指定类型的消息扩展字段。 |
+| [`sendMessage`](#示例代码) | `EMChatManager` | 发送携带扩展字段的消息。 |
+| [`getStringAttribute`](#示例代码) | `EMMessage` | 获取字符串类型的消息扩展字段。 |
+| [`getBooleanAttribute`](#示例代码) | `EMMessage` | 获取布尔类型的消息扩展字段。 |
+| [`getIntAttribute`](#示例代码) / [`getLongAttribute`](#示例代码) | `EMMessage` | 获取整型或长整型消息扩展字段。 |
+| [`getFloatAttribute`](#示例代码) / [`getDoubleAttribute`](#示例代码) | `EMMessage` | 获取单精度或双精度浮点型消息扩展字段。 |
+| [`getJSONObjectAttribute`](#示例代码) / [`getJSONArrayAttribute`](#示例代码) | `EMMessage` | 获取 JSON 对象或 JSON 数组类型的消息扩展字段。 |
+| [`getAttributes`](#示例代码) | `EMMessage` | 获取消息中的全部扩展字段。 |

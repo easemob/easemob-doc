@@ -1,6 +1,8 @@
 # 接收消息
 
-环信即时通讯 IM Android SDK 通过 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 类实现文本、图片、音频、视频和文件等类型的消息的接收。
+## 功能说明
+
+环信即时通讯 IM Android SDK 通过 `EMMessageListener` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息监听回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。
 
 ## 前提条件
 
@@ -9,24 +11,81 @@
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 接收文本消息
+## 监听消息事件
 
-- 你可以用注册监听 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 接收消息。该 [EMMessageListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_message_listener.html) 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
-- 在新消息到来时，你会收到 `onMessageReceived` 回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
+应用通过 `EMChatManager#addMessageListener` 注册 `EMMessageListener`。收到普通消息时触发 `onMessageReceived`；收到透传消息时，还会触发 `onCmdMessageReceived`。
 
 ```java
-EMMessageListener msgListener = new EMMessageListener() {
+EMMessageListener messageListener = new EMMessageListener() {
+    @Override
+    public void onMessageReceived(List<EMMessage> messages) {
+        // 处理文本、附件、位置、自定义及合并消息。
+    }
 
-   // 收到消息，遍历消息队列，解析和显示。
-   @Override
-   public void onMessageReceived(List<EMMessage> messages) {
-
-   }
+    @Override
+    public void onCmdMessageReceived(List<EMMessage> messages) {
+        // 处理透传消息。
+    }
 };
-// 注册消息监听
-EMClient.getInstance().chatManager().addMessageListener(msgListener);
-// 解注册消息监听
-EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+
+EMClient.getInstance().chatManager().addMessageListener(messageListener);
+// 不再使用时移除监听器。
+EMClient.getInstance().chatManager().removeMessageListener(messageListener);
+```
+
+## 消息通用信息
+
+收到消息后，可通过以下 `EMMessage` 方法读取消息的通用信息：
+
+| 字段或属性 | 获取方式 | 说明 |
+| :--- | :--- | :--- |
+| 消息 ID | `EMMessage#getMsgId` | 消息的唯一 ID。 |
+| 发送方 | `EMMessage#getFrom` | 消息发送者的用户 ID。 |
+| 接收方 | `EMMessage#getTo` | 消息目标 ID。 |
+| 会话类型 | `EMMessage#getChatType` | 单聊、群聊或聊天室。 |
+| 消息类型 | `EMMessage#getType` | 文本、图片、语音、视频、文件等类型。 |
+| 消息体 | `EMMessage#getBody` | 获取并转换为对应的 `EMMessageBody` 子类。 |
+| 扩展字段 | `EMMessage#getStringAttribute` 等 | 读取发送方通过 `setAttribute` 设置的业务字段。 |
+
+## 接收文本消息
+
+收到 `onMessageReceived` 回调后，遍历消息列表。对于文本消息，将消息体转换为 `EMTextMessageBody`，调用 `getMessage()` 获取文本内容；如需读取业务扩展字段，可调用 `EMMessage#getExt()` 获取扩展字段映射。
+
+示例代码如下所示：
+
+```java
+EMMessageListener messageListener = new EMMessageListener() {
+    @Override
+    public void onMessageReceived(List<EMMessage> messages) {
+        for (EMMessage message : messages) {
+            if (message.getType() != EMMessage.Type.TXT) {
+                continue;
+            }
+
+            // 获取文本消息内容。
+            EMTextMessageBody textBody =
+                    (EMTextMessageBody) message.getBody();
+            String text = textBody.getMessage();
+
+            // 按业务字段名读取消息扩展字段。
+            // 字段不存在时返回默认值 null。
+            String businessValue = message.getStringAttribute(
+                    "businessKey",
+                    null);
+
+            EMLog.d(
+                    "Message",
+                    "text: " + text
+                            + ", businessValue: " + businessValue);
+        }
+    }
+
+    // 其他回调方法按需实现。
+};
+
+EMClient.getInstance()
+        .chatManager()
+        .addMessageListener(messageListener);
 ```
 
 ## 接收附件消息
@@ -44,7 +103,7 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `getRemoteUrl` 或 `getLocalUri` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```java
-EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) msg.getBody();
+EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) message.getBody();
 // 获取语音文件在服务器的地址。
 String voiceRemoteUrl = voiceBody.getRemoteUrl();
 // 本地语音文件的资源路径。
@@ -52,6 +111,13 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 ```
 
 ### 接收图片消息
+
+一条图片消息通常包含三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
 
 收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
 
@@ -67,13 +133,15 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 - 调用 `downloadAttachment(message, callback)` 下载原图。
 - 调用 `downloadBigImage(message, callback)` 下载大图。
 
-3. 如果本地已存在对应资源路径，建议优先复用本地文件，避免重复下载。
+如果本地已存在对应资源路径，建议优先复用本地文件，避免重复下载。
+
+示例代码如下所示：
 
 ```java
 @Override
 public void onMessageReceived(List<EMMessage> messages) {
     for(EMMessage message : messages) {
-        if (message.getType() == Type.IMAGE) {
+        if (message.getType() == EMMessage.Type.IMAGE) {
             EMCallBack callback = new EMCallBack() {
                @Override
                public void onSuccess() {
@@ -99,13 +167,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 }
 ```
 
-自 SDK 4.22.0 版本新增大图资源，一条图片消息通常包含三类图片资源：
-
-- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
-- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
-- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
-
-你可以通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径：
+1. 你可以通过 `EMImageMessageBody` 获取原图、大图和缩略图的服务端地址或本地路径：
 
 ```java
 EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
@@ -123,7 +185,7 @@ Uri bigImgLocalUri = imgBody.getBigImageLocalUri();
 Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```
 
-此外，SDK 4.22.0 及以上版本支持通过以下方法判断图片资源状态：
+此外，SDK 还支持通过以下方法判断图片资源状态：
 
 - `isOriginalImage()`：判断当前消息对应的是原图还是发送方压缩后的大图资源。
 - `getBigImageDownloadStatus()`：获取大图的下载状态。
@@ -131,17 +193,15 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 
 ### 接收 GIF 图片消息
 
-自 Android SDK 4.14.0 开始，支持接收 GIF 图片消息。
+GIF 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
-
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若 `isGif()` 返回 `true`，则为 GIF 图片消息；返回 `false` 时为普通图片消息。
 
 ```java
 public void onMessageReceived(List<EMMessage> messages) {
     for(EMMessage message : messages) {
-        if (message.getType() == Type.IMAGE) {
-            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
+        if (message.getType() == EMMessage.Type.IMAGE) {
+            EMImageMessageBody body = (EMImageMessageBody) message.getBody();
             if(body.isGif()) {
                 // 根据业务情况处理gif message, 例如下载展示该消息
             }
@@ -194,17 +254,21 @@ private void downloadVideo(final EMMessage message) {
 4. 通过 `EMVideoMessageBody` 获取视频原文件和缩略图的服务端地址或本地路径。其中，缩略图适合用于预览展示，视频原文件适合用于播放或下载保存。
 
 ```java
+EMVideoMessageBody videoBody =
+        (EMVideoMessageBody) message.getBody();
 // 从服务器端获取视频文件。
-String imgRemoteUrl = ((EMVideoMessageBody) body).getRemoteUrl();
+String videoRemoteUrl = videoBody.getRemoteUrl();
 // 从服务器获取视频缩略图文件。
-String thumbnailUrl = ((EMVideoMessageBody) body).getThumbnailUrl();
+String thumbnailUrl = videoBody.getThumbnailUrl();
 // 从本地获取视频文件文件。
-Uri localUri = ((EMVideoMessageBody) body).getLocalUri();
+Uri localUri = videoBody.getLocalUri();
 // 从本地获取视频缩略图文件。
-Uri localThumbUri = ((EMVideoMessageBody) body).thumbnailLocalUri();
+Uri localThumbUri = videoBody.getLocalThumbUri();
 ```
 
 ### 接收文件消息
+
+接收文件消息的流程如下所示：
 
 1. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment(message, callback)` 方法下载文件。
 
@@ -247,18 +311,28 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
 
 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
+将消息体转换为 `EMLocationMessageBody`，通过 `getLatitude()`、`getLongitude()` 和 `getAddress()` 获取位置坐标及地址信息。
+
+```java
+EMLocationMessageBody locationBody =
+        (EMLocationMessageBody) message.getBody();
+double latitude = locationBody.getLatitude();
+double longitude = locationBody.getLongitude();
+String address = locationBody.getAddress();
+```
+
 ## 接收透传消息
 
-透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
+可将透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。
 
-具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
+具体功能可以根据自身业务需求自定义。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
 
 :::tip
 - 透传消息发送后，不支持撤回。
 - 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
-接收方通过 `onMessageReceived` 和 `onCmdMessageReceived` 回调接收透传消息，方便用户进行不同的处理。
+接收方通过 `onMessageReceived` 和 `onCmdMessageReceived` 回调接收透传消息，方便用户进行不同的处理。透传消息通常通过 `onCmdMessageReceived` 接收。
 
 ```java
 EMMessageListener msgListener = new EMMessageListener(){
@@ -273,23 +347,34 @@ EMMessageListener msgListener = new EMMessageListener(){
 }
 ```
 
+将消息体转换为 `EMCmdMessageBody`，通过 `action()` 获取命令动作。如需传递结构化参数，应在命令内容中定义业务协议，或改用自定义消息。
+
 ## 接收自定义类型消息
 
 你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
+接收自定义消息与其他类型消息一致，应用在 `onMessageReceived` 回调中判断消息类型并读取消息体。
+
+将消息体转换为 `EMCustomMessageBody`，通过 `event()` 获取自定义事件，通过 `getParams()` 获取自定义参数。
+
+```java
+EMCustomMessageBody customBody =
+        (EMCustomMessageBody) message.getBody();
+String event = customBody.event();
+Map<String, String> params = customBody.getParams();
+```
 
 ## 接收合并消息
 
-为了方便消息互动，即时通讯 IM 自 4.1.0 版本开始支持将多个消息合并在一起进行转发。
-
-接收合并消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收合并消息与接收普通消息的操作相同，应用在 `onMessageReceived` 回调中识别 `EMMessage.Type.COMBINE` 消息。
 
 - 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
-- 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
-- 对于一条合并消息，首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表，而后续调用会存在以下情况：
+- 合并消息实际上是一种附件消息。收到合并消息后，可以调用 `EMChatManager#downloadAndParseCombineMessage` 下载并解析合并消息附件，获取原始消息列表：
+- 首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表：
   - 若附件已存在，该方法会直接解析附件并返回原始消息列表。
   - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
+
+将消息体转换为 `EMCombineMessageBody` 后，可以读取合并消息的标题、摘要和兼容文本。
 
 ```java
 EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessage, new EMValueCallBack<List<EMMessage>>() {
@@ -309,12 +394,43 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 ### 消息接收回调返回发送成功的消息
 
-自 4.4.0 版本开始，若初始化时开启了 `EMOptions#setIncludeSendMessageInMessageListener` 选项，发送成功的消息也会通过 `onMessageReceived` 事件返回。
+若初始化时开启了 `EMOptions#setIncludeSendMessageInMessageListener` 选项，发送成功的消息也会通过 `onMessageReceived` 事件返回。
 
 ### 判断消息是否为聊天室广播消息
 
-自 4.2.1 版本开始，对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 ### 消息附件下载鉴权
 
-自 4.14.0 版本开始，即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment(message, callback)` 等下载接口下载消息附件。
+环信即时通讯 IM 支持消息附件下载鉴权功能。该功能默认关闭，如要开通需联系环信商务。该功能开通后，用户必须调用 SDK 的 `downloadAttachment(message, callback)` 等下载接口下载消息附件。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addMessageListener`](#监听消息事件) | `EMChatManager` | 注册消息监听器。 |
+| [`removeMessageListener`](#监听消息事件) | `EMChatManager` | 移除消息监听器。 |
+| [`onMessageReceived`](#接收文本消息) | `EMMessageListener` | 接收普通消息。 |
+| [`onCmdMessageReceived`](#接收透传消息) | `EMMessageListener` | 接收透传消息。 |
+| [`getType`](#消息通用信息) | `EMMessage` | 获取消息类型。 |
+| [`getMsgId`](#消息通用信息) | `EMMessage` | 获取消息 ID。 |
+| [`getBody`](#消息通用信息) | `EMMessage` | 获取消息体。 |
+| [`getFrom`](#消息通用信息) | `EMMessage` | 获取消息发送方。 |
+| [`getTo`](#消息通用信息) | `EMMessage` | 获取消息接收方。 |
+| [`getChatType`](#消息通用信息) | `EMMessage` | 获取会话类型。 |
+| [`getMessage`](#接收文本消息) | `EMTextMessageBody` | 获取文本内容。 |
+| [`downloadThumbnail`](#接收图片消息) | `EMChatManager` | 下载图片或视频缩略图。 |
+| [`downloadBigImage`](#接收图片消息) | `EMChatManager` | 下载图片大图。 |
+| [`downloadAttachment`](#接收附件消息) | `EMChatManager` | 下载原图、视频或文件附件。 |
+| [`downloadAndParseCombineMessage`](#接收合并消息) | `EMChatManager` | 下载并解析合并消息。 |
+| [`getRemoteUrl`](#接收语音消息) | `EMFileMessageBody` | 获取附件服务器地址。 |
+| [`getLocalUri`](#接收语音消息) | `EMFileMessageBody` | 获取附件本地 URI。 |
+| [`getBigImageRemoteUrl`](#接收图片消息) | `EMImageMessageBody` | 获取图片大图服务器地址。 |
+| [`thumbnailLocalUri`](#接收图片消息) | `EMImageMessageBody` | 获取图片缩略图本地 URI。 |
+| [`isGif`](#接收-gif-图片消息) | `EMImageMessageBody` | 判断图片是否为 GIF。 |
+| [`action`](#接收透传消息) | `EMCmdMessageBody` | 获取透传命令动作。 |
+| [`event`](#接收自定义类型消息) | `EMCustomMessageBody` | 获取自定义事件。 |
+| [`getParams`](#接收自定义类型消息) | `EMCustomMessageBody` | 获取自定义参数。 |
+| [`getLatitude`](#接收位置消息) | `EMLocationMessageBody` | 获取纬度。 |
+| [`getLongitude`](#接收位置消息) | `EMLocationMessageBody` | 获取经度。 |
+| [`getAddress`](#接收位置消息) | `EMLocationMessageBody` | 获取位置地址。 |

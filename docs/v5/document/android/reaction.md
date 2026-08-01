@@ -1,46 +1,37 @@
 # 消息表情回复 Reaction
 
-<Toc />
+## 功能说明
 
-环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
+环信即时通讯 IM 提供消息表情回复功能。用户可以在单聊和群聊中对消息添加或删除表情。表情可以直观表达情绪；在群聊场景下，也可以结合不同表情的数量实现轻量投票、反馈收集等互动能力。
 
-:::tip
-1. **开通方式**：要使用 Reaction 功能，需在 [环信控制台](https://console.easemob.com/user/login) 开通。具体操作步骤详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
-2. **适用范围**：目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
-3. **使用限制**：关于 Reaction 的详细使用限制，详见 [产品使用限制](limitation.html) 文档。
-:::
-
-## 技术原理
-
-环信即时通讯 IM SDK 通过 [EMChatManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html) 支持你通过调用 API 在项目中实现如下功能：
-
-- `asyncAddReaction` 在消息上添加 Reaction；
-- `asyncRemoveReaction` 删除消息的 Reaction；
-- `asyncGetReactionList` 获取消息的 Reaction 列表；
-- `asyncGetReactionDetail` 获取 Reaction 详情；
-- `EMMessage.getMessageReaction()` 从 `EMMessage` 对象获取 Reaction 列表。
-
-Reaction 场景示例如下：
+Reaction 场景示例如下，分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 
 ![img](/images/android/reactions.png)
 
-分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
+
+## 功能开通
+
+使用 Reaction 前，需在[环信控制台](https://console.easemob.com/user/login)开通该功能，具体操作请参见[环信控制台文档](/product/console/basic_message.html#消息表情回复)。
+
+## 使用限制
+
+- Reaction 仅适用于单聊和群聊，聊天室暂不支持。
+- 关于 Reaction 的详细使用限制，请参见[产品使用限制](limitation.html)。
+
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-1. 完成 3.9.2.1 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已在 [环信控制台](https://console.easemob.com/user/login) 开通 Reaction 功能。
 
-## 实现方法
+## 在消息上添加 Reaction
 
-### 在消息上添加 Reaction
+调用 `asyncAddReaction` 可为消息添加 Reaction。对于单聊，会话对端用户会收到 `onReactionChanged` 回调；对于群聊，除操作者外的其他群成员会收到该回调。回调信息包括会话 ID、消息 ID、当前消息的 Reaction 列表以及 Reaction 操作列表。操作列表会记录操作者用户 ID、发生变化的 Reaction 和操作类型，业务侧可据此实时更新消息上的 Reaction 展示。
 
-调用 `asyncAddReaction` 在消息上添加一条 Reaction。对于单聊会话，对端用户会收到 `onReactionChanged` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表、Reaction 操作列表（列明添加者的用户 ID、添加的 Reaction 的 ID 以及明确该操作为添加操作）。
-
-对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1301。
+同一用户对同一条消息上的同一个 Reaction 只能添加一次。重复添加时，SDK 会返回错误码 `1301`，业务侧可统一按“该 Reaction 已添加过”进行处理。
 
 示例代码如下：
 
@@ -76,9 +67,11 @@ EMMessageListener listener = new EMMessageListener() {
 EMClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
-### 删除消息的 Reaction
+## 删除消息的 Reaction
 
-调用 `asyncRemoveReaction` 删除消息的 Reaction。对于单聊会话，对端用户会收到 `onReactionChanged` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表和 Reaction 操作列表（列明删除者的用户 ID、删除的 Reaction 的 ID 以及明确该操作为删除操作）。
+调用 `asyncRemoveReaction` 删除当前用户为消息添加的 Reaction。删除成功后，单聊中的对端用户以及群聊中除操作者外的其他成员会收到 `onReactionChanged` 回调。回调信息包括会话 ID、消息 ID、当前消息的 Reaction 列表和 Reaction 操作列表；操作列表会记录操作者用户 ID、被删除的 Reaction 以及操作类型。业务侧可据此实时更新消息上的 Reaction 展示。
+
+执行删除操作的一方可通过 `asyncRemoveReaction` 的 `EMCallBack` 获取操作结果，并在成功回调中更新当前界面。
 
 示例代码如下：
 
@@ -114,11 +107,17 @@ EMMessageListener listener = new EMMessageListener() {
 EMClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
-### 获取消息的 Reaction 列表
+## 获取消息的 Reaction 列表
 
-调用 `asyncGetReactionList` 可以从服务器获取多条指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
+调用 `asyncGetReactionList` 可从服务器获取一条或多条指定消息的 Reaction 概览。
+
+每条 Reaction 概览包含 Reaction 内容、添加该 Reaction 的用户数量，以及最早添加 Reaction 的三个用户的用户 ID。该用户列表仅用于概览展示，并不代表全部用户。若需要获取完整用户列表，可调用 `asyncGetReactionDetail` 分页查询。对于已获取并缓存的消息，也可以通过 `EMMessage#getMessageReaction()` 读取消息中的 Reaction 列表。
+
+示例代码如下：
 
 ```java
+// `chatType` 仅支持单聊（`EMMessage.ChatType.Chat`）和群聊（`EMMessage.ChatType.GroupChat`）.
+// 在群聊场景下，还需传入对应的 `groupId`。
 EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.ChatType.Chat, groupId, new EMValueCallBack<Map<String, List<EMMessageReaction>>>() {
     @Override
     public void onSuccess(Map<String, List<EMMessageReaction>> stringListMap) {
@@ -132,9 +131,10 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 });
 ```
 
-### 获取 Reaction 详情
+## 获取 Reaction 详情
 
-调用 `asyncGetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
+调用 `asyncGetReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息，包括 Reaction 内容、当前添加该 Reaction 的用户数量，以及当前添加该 Reaction 的全部用户 ID。
+接口返回 `EMCursorResult<EMMessageReaction>`，其中包含当前页数据和分页游标；当仍有后续数据时，业务侧可使用游标继续查询下一页。
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
@@ -150,3 +150,24 @@ EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
     }
 });
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncAddReaction`](#在消息上添加-reaction) | `EMChatManager` | 异步添加消息 Reaction。 |
+| [`asyncRemoveReaction`](#删除消息的-reaction) | `EMChatManager` | 异步删除消息 Reaction。 |
+| [`asyncGetReactionList`](#获取消息的-reaction-列表) | `EMChatManager` | 异步获取多条消息的 Reaction 概览。 |
+| [`asyncGetReactionDetail`](#获取-reaction-详情) | `EMChatManager` | 异步分页获取指定 Reaction 的详情。 |
+| [`getMessageReaction`](#获取消息的-reaction-列表) | `EMMessage` | 从消息对象获取 Reaction 列表。 |
+| [`onReactionChanged`](#在消息上添加-reaction) | `EMMessageListener` | 接收 Reaction 变更事件。 |
+| [`getConversionID`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取会话 ID。 |
+| [`getMessageId`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取消息 ID。 |
+| [`getMessageReactionList`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取消息 Reaction 列表。 |
+| [`getOperations`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取 Reaction 操作列表。 |
+| [`getUserId`](#在消息上添加-reaction) | `EMMessageReactionOperation` | 获取 Reaction 操作者 ID。 |
+| [`getOperation`](#在消息上添加-reaction) | `EMMessageReactionOperation` | 获取 Reaction 操作类型。 |
+| [`getReaction`](#获取-reaction-详情) | `EMMessageReaction` | 获取 Reaction 内容。 |
+| [`getUserCount`](#获取消息的-reaction-列表) | `EMMessageReaction` | 获取添加该 Reaction 的用户数量。 |
+| [`getUserList`](#获取消息的-reaction-列表) | `EMMessageReaction` | 获取 Reaction 用户列表。 |
+| [`isAddedBySelf`](#获取消息的-reaction-列表) | `EMMessageReaction` | 判断当前用户是否添加过该 Reaction。 |

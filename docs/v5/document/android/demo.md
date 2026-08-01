@@ -37,8 +37,9 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `local.properties` 文件，格式为 `APPKEY = 你申请的appkey`。
-7. 编译运行项目。
-8. 使用注册的用户 ID 和密码登录。
+7. 当你创建AppKey对应的数据中心位于国内一区时，需要在`local.properties` 文件中继续添加 `CHAT_REST_SERVER_DOMAIN=a1.easemob.com`；当你创建时AppKey对应的数据中心位于国内二区时，添加 `CHAT_REST_SERVER_DOMAIN=ngi-a1.easemob.com`。
+8. 编译运行项目。
+9. 使用注册的用户 ID 和密码登录。
 
 ### App Server
 
