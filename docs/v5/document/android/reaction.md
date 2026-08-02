@@ -8,7 +8,6 @@ Reaction 场景示例如下，分别展示如何添加 Reaction，群聊中 Reac
 
 ![img](/images/android/reactions.png)
 
-
 ## 功能开通
 
 使用 Reaction 前，需在[环信控制台](https://console.easemob.com/user/login)开通该功能，具体操作请参见[环信控制台文档](/product/console/basic_message.html#消息表情回复)。
@@ -16,8 +15,7 @@ Reaction 场景示例如下，分别展示如何添加 Reaction，群聊中 Reac
 ## 使用限制
 
 - Reaction 仅适用于单聊和群聊，聊天室暂不支持。
-- 关于 Reaction 的详细使用限制，请参见[产品使用限制](limitation.html)。
-
+- Reaction 的计数规则和存储时间、用户添加限制、每条消息可添加的 Reaction 数量，以及表情 ID 规范，详见 [使用限制文档](limitation.html)。
 
 ## 前提条件
 

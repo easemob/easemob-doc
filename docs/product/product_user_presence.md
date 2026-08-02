@@ -29,11 +29,9 @@
 
 ### 用户在线状态变更通知
 
-1. 若用户的状态从“在线”变为“离线”时，客户端收到连接断开通知（例如，Android 为 `OnDisconnected`），从“离线”变为“在线”时，客户端收到已连接通知（例如，Android 为 `OnConnected`）。订阅者会收到用户在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
+1. 若客户端连接状态从“在线”变为“离线”，客户端会收到连接断开通知（例如，Android 为 `EMConnectionListener#onDisconnected(int errorCode)`）；从“离线”变为“在线”时，客户端会收到已连接通知（例如，Android 为 `EMConnectionListener#onConnected()`）。订阅者会收到被订阅用户在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated(List<EMPresence>)`。
 
-2. 用户发布自定义在线状态后，发布者和订阅者均会收到自定义在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
-
-3. 当 SDK 监测到当前账号从“自定义状态”变更为“离线”状态后，会触发状态变更通知，例如，Android 为 `OnConnected`。订阅者会收到用户在线状态变更的回调，例如，Android 为 `EMPresenceListener#onPresenceUpdated` 回调。
+2. 当 SDK 监测到当前账号从“自定义状态”变更为“离线”状态后，当前账号将自定义在线状态变更为离线时，可通过状态发布接口的回调返回操作结果（例如，Android 为 `EMPresenceManager#publishPresence` 的 `EMCallBack`）；订阅该账号的用户会收到在线状态变更通知（例如，Android 为 `EMPresenceListener#onPresenceUpdated(List<EMPresence>)`）。
 
 ### 用户状态回调事件
 

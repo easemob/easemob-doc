@@ -11,7 +11,8 @@
 | `audio` | 语音消息  |
 | `video` | 视频消息 |
 | `file` | 文件消息 |
-| `custom` | 自定义消息 |
+| `custom` | 自定义类型消息 |
+| `combine` | 合并消息 |
 
 ## 消息 body 内容介绍
 
