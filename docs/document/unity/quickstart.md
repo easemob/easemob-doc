@@ -44,7 +44,7 @@
 参考以下步骤：
 
 1. 克隆 `chat_unity_demo` 至本地。详见 [GitHub](https://github.com/easemob/chat_unity_demo) 或 [Gitee](https://gitee.com/easemob-code/chat_unity_demo) 上的示例项目。
-2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
+2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1： 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
 3. 单击 **chat_unity_quickstart** 打开项目。
 
    如果正常打开，该流程结束。

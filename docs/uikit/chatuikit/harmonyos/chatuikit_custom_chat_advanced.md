@@ -25,7 +25,7 @@
 
 #### 实现自定义气泡
 
-**步骤 1 创建自定义气泡组件**
+**步骤 1： 创建自定义气泡组件**
 
 使用 `@Builder` 定义消息气泡的 UI 布局。根据消息类型（文本、图片等）分别实现对应的气泡组件，通过 `message.origin.getBody()` 获取消息体数据并渲染。
 
@@ -354,7 +354,7 @@ messageItemMenusProvider: (message: ChatKitMessage) => {
 
 #### 实现自定义消息条目
 
-**步骤 1 创建自定义消息条目组件**
+**步骤 1： 创建自定义消息条目组件**
 
 使用 `@Builder` 定义消息条目的完整 UI 布局，包括头像、昵称、消息内容、时间戳等。通过 `message.origin` 获取原始消息数据进行渲染。
 
@@ -472,7 +472,7 @@ interface ChatMessageItemProvider {
 
 ### 自定义消息列表 ViewModel
 
-**步骤 1 自定义 ViewModel，重写逻辑**
+**步骤 1： 自定义 ViewModel，重写逻辑**
 
 继承 `ChatViewModel`，重写 `getMoreMessages` 和 `sortMessages` 等方法以实现自定义消息加载与排序逻辑。
 

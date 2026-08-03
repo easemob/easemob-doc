@@ -4,7 +4,7 @@
 
 本文介绍如何将环信即时通讯 IM SDK 快速集成到抖音小程序中。集成步骤如下：
 
-## 步骤 1 注册环信账号
+## 步骤 1： 注册环信账号
 
 开发者需要在环信控制台 [注册账号](/product/console/account_register.html)，[创建应用](/product/console/app_create.html)，获取唯一 App Key，SDK 初始化时需要配置 App Key。
 

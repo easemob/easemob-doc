@@ -21,7 +21,7 @@
 
 ## 操作步骤
 
-### 步骤 1 配置项目 
+### 步骤 1： 配置项目 
 
 1. 在 [GitHub](https://github.com/easemob/easemob-callkit-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-callkit-android) 中克隆或下载代码。
 

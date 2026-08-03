@@ -54,7 +54,7 @@
   "metadata": [ 
     {
       "name": "client_id",
-      // 配置为步骤 1 中获取的 Client ID
+      // 配置为步骤 1： 中获取的 Client ID
       "value": "xxxxxx"  
     }
   ]
