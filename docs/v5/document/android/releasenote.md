@@ -1,32 +1,43 @@
-# Android IM SDK 更新日志
-
-## v5.0.0 2026-7-31
+## v5.0.0 Dev 2026-7-28（开发版）
 
 #### 新增功能
 
-- 支持统一的消息已读回执能力：单聊和群聊消息均可在发送前通过 `EMMessage#setIsNeedReadReceipt` 标记需要已读回执，并支持批量发送消息已读回执；发送方可通过 `EMMessageListener#onMessageReadReceipts` 统一接收单聊和群聊消息的已读回执。
-- 新增 `EMMessageReadReceipt`，用于获取消息 ID、会话 ID、单聊对端回执状态和群聊消息已读人数。
-- 支持监听会话列表变更：新增 `EMConversationListener`，并提供 `EMChatManager#addConversationListener` 和 `EMChatManager#removeConversationListener` 接口。
-- `EMConversation` 新增 `getConversationName` 和 `getConversationAvatar` 方法。单聊会话返回对端用户的昵称和头像，群聊会话返回群组名称和头像。
-- 支持获取本地全部会话的未读消息总数：调用 `EMChatManager#getUnreadMessageCount`。该统计不包含聊天室会话和已开启免打扰的会话。
-- 新增登录后自动数据同步配置：通过 `EMOptions#setDataSyncType` 可选择同步会话、联系人和已加入的群组数据，并可通过 `EMConnectionListener` 监听各类数据同步的开始和结束。
+- 新增独立的数据同步通道。通过 `EMOptions#setDataSyncType(EnumSet<EMDataSyncType>)` 配置登录后自动同步的会话列表、联系人和已加入群组；通过 `EMConnectionListener#onDataSyncStart(EMDataSyncType)` 和 `onDataSyncFinish(EMDataSyncType, int)` 获取各类数据的同步开始与完成状态。`EMDataSyncType` 支持 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS` 和 `NONE`。数据同步连接空闲 60 秒后自动断开，停止接收消息时同步释放连接。
+- 数据同步替代了主动拉取服务端列表的方式，因此移除以下 API：
+  - 联系人：`EMContactManager#getAllContactsFromServer()`、`asyncGetAllContactsFromServer(...)`、`asyncFetchAllContactsFromServer(...)`。改用 `getContactsFromLocal()`、`fetchContactFromLocal(...)` 或 `asyncFetchAllContactsFromLocal(...)`。
+  - 会话：`EMChatManager#asyncFetchConversationsFromServer(...)`、`asyncFetchPinnedConversationsFromServer(...)`、`asyncGetConversationsFromServerWithCursor(...)`。改用 `getAllConversations()` 或 `getAllConversationsBySort()`。
+  - 已加入群组：`EMGroupManager#getJoinedGroupsFromServer(...)`、`asyncGetJoinedGroupsFromServer(...)`。改用 `getAllGroups()`。
+  - `EMChatManager#loadAllConversations()` 和 `EMGroupManager#loadAllGroups()` 调整为 SDK 内部接口。应用读取本地数据后，通过 `onDataSyncFinish(...)` 刷新界面。
+- 联系人独立同步回调 `EMContactListener#onContactSyncStart()` 和 `onContactSyncFinishWithError(...)` 移除，统一迁移到 `EMConnectionListener#onDataSyncStart(...)` 和 `onDataSyncFinish(...)`，并通过 `EMDataSyncType.CONTACTS` 区分联系人同步事件。
+- 支持在登录完成前访问本地数据。通过 `EMConnectionListener#onDatabaseOpened(String)` 获取数据库打开完成回调，通过 `EMClient#isDatabaseOpened()` 查询数据库状态，便于应用提前加载本地缓存数据，缩短首屏等待时间。
+- 重构群组配置模型。使用 `EMGroupConfigs` 取代 `EMGroupOptions` 和 `EMGroupStyle`，通过 `isPublic`、`joinApprovalRequired` 和 `allowInvites` 分别描述群组公开性、入群审批和成员邀请权限；`createGroup(...)` 和 `asyncCreateGroup(...)` 的配置参数同步改为 `EMGroupConfigs`，`EMGroup#isMemberOnly()` 更名为 `isJoinApprovalRequired()`。
+- 新增 `EMGroupManager#updateGroupConfigs(...)` 和 `asyncUpdateGroupConfigs(...)`，可通过 `EMGroupConfigsType` 按需更新指定群组配置。
+- 升级消息已读回执能力。新增 `EMChatManager#asyncSendMessageReadReceipts(...)`、`asyncGetGroupMessageReadReceipts(...)` 和 `asyncFetchGroupMessageReadReceipts(...)`，并通过 `EMMessageListener#onMessageReadReceipts(...)` 统一接收单聊和群聊的已读回执。
+- 新增 `EMChatManager#asyncClearConversationUnreadMessageCount(...)` 和 `asyncClearAllConversationUnreadMessageCount(...)`，用于异步清除未读数并通过多设备事件同步。清除未读数不再向对方发送消息已读回执。
+- 已读回执相关 API 同步调整：原逐条消息回执、会话回执和全局回执开关移除，改用批量回执、未读数清理接口和逐消息 `EMMessage#setIsNeedReadReceipt(true)`；`EMGroupReadAck` 更名为 `EMGroupReadReceipt`，并新增 `EMMessageReadReceipt`。
+- 新增 `EMChatManager#asyncDeleteConversations(...)`，支持批量删除会话，并可选择是否同时删除消息。
+- 新增 `EMClient#fetchLoggedInDevicesFromServerWithToken(...)`，支持通过 Token 异步获取已登录设备列表。
+- 新增 `EMConversation#getConversationName()`、`getConversationAvatar()` 和 `EMGroup#getUsers()`。
 
-#### 重要变更
+#### 优化
 
-v5.0.0 包含不兼容的 API 变更。从 v4.x 升级时，请根据 Android SDK V5 的迁移文档完成代码适配。
+- `EMOptions.AreaCode` 由整型常量类改为枚举，`EMOptions#setAreaCode(int)` 调整为 `setAreaCode(AreaCode)`。原 `AREA_CODE_*` 常量改为 `CN`、`NA`、`EU`、`AS`、`JP`、`IN`、`GLOB` 枚举值。
+- 移除 `EMOptions#setAutoLogin(...)`、`getAutoLogin()` 和 `EMClient#isLoggedInBefore()`，改为通过 `loginWithToken(...)` 显式登录；联系人自动同步开关统一并入 `setDataSyncType(...)`。
+- 登录和设备管理统一使用 Token 鉴权。移除密码登录、密码换取 Token 及密码鉴权设备管理接口。
+- 移除消息举报 `reportMessage(...)`、`asyncReportMessage(...)`，改由应用服务器处理。
+- 移除客户端注册、公开群列表、聊天室创建/销毁、群共享文件上传、消息统计等低频 API，并清理其他已废弃接口。
+- 统一部分 API 命名和回调签名，包括 Token 登录、消息撤回、退出登录、群组和聊天室成员变更等接口。
+- 移除 `EMClient#check(...)`、`EMCheckType`、上报服务器配置、全量聊天室列表等历史接口；历史消息获取、消息搜索和群/聊天室成员获取统一使用推荐的异步或分页接口。
+- 迁移至 AndroidX，并使用 `LifecycleOwner` 监听应用前后台状态。
+- 优化本地数据库性能，复用批量消息写入语句、减少未读数持久化次数、优化消息查询，并增加会话 ID 不区分大小写的查询索引。
+- 调整 `EMChatManager#getUnreadMessageCount()` 的统计规则，不再统计免打扰等提醒类型非 `ALL` 的会话。
+- 优化附件分片上传的超时策略，并减少日志记录过程中的非必要序列化。
 
-- 登录与账号相关 API 已收敛：移除 SDK 内的注册、用户名/密码登录及部分设备管理接口，应用应使用 `EMClient#loginWithToken` 进行 Token 登录。
-- 数据同步与消息已读回执的配置方式已调整：原有联系人自动同步配置已移除，使用 `EMOptions#setDataSyncType` 统一配置；已读回执改为消息级配置，通过 `EMMessage#setIsNeedReadReceipt` 设置。
-- 群组配置模型已调整：使用 `EMGroupConfigs` 和 `EMGroupManager#EMGroupConfigsType` 配置和更新群组属性；更新群组配置时需按字段指定要修改的配置类型。
-- 消息已读回执相关模型、字段和方法的命名统一由 `Ack` 调整为 `ReadReceipt`；单聊和群聊使用统一的已读回执发送与回调机制。
-- 会话、消息、联系人、群组和聊天室中一批已废弃、同步或旧式回调 API 已移除；请使用 V5 对应的异步 API、监听器或替代接口完成适配。
+#### 修复
 
-#### 优化与修复
-
-- 修复发送文件、图片等附件消息时，若未设置 `displayName`，上传附件可能会有 2 MB 大小限制的问题。SDK 会自动使用本地文件名作为显示名。
-- 修复账号在其他设备登录、被服务端移除或被禁用时，本地客户端状态未完整登出的问题。
-
-#### 注意事项
-
-- SDK 不再提供注册与用户名/密码登录能力。应用需通过自身 App Server 获取 Token，再调用 `EMClient#loginWithToken` 登录。
-- 创建文件和图片消息时，使用本地文件路径或本地 `Uri`；原有基于字节数组的文件或图片消息体初始化方式已移除。
+- 修复账号被服务端强制断开后，本地登录状态可能未及时清理的问题。
+- 修复切换账号登录时，Android 层可能复用上一账号数据库缓存的问题。
+- 修复修改消息时复用请求标识可能导致响应匹配异常的问题。
+- 修复部分场景下群名片无法设置为空字符串的问题。
+- 修复关闭附件 MD5 校验后，上传附件仍可能执行 MD5 预校验的问题。
+- 修复网络传输、任务队列和数据库缓存中的若干并发安全问题。
