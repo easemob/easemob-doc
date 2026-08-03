@@ -353,7 +353,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 - [IM SDK] 修复发送图片消息时指定缩略图尺寸未生效的问题。
 - [IM SDK] 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 
-#### [EaseCallKIt](easecallkit.html)
+#### [EaseCallKIt](/callkit/ios/easecallkit.html)
 
 - 升级依赖的 `AgoraRtcEngine` 版本，防止因为旧版本包含 Bitcode 无法上传 App Store。
 

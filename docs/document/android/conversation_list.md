@@ -312,7 +312,7 @@ EMClient.getInstance()
 | [`asyncFilterConversationsFromDB`](#获取本地所有或筛选的会话) | `EMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `EMChatManager` | 获取置顶优先并按最后消息时间倒序排列的本地会话列表。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
-| [`getConversationName`](#获取会话显示名称和头像) / [`getConversationAvatar`](#获取会话显示名称和头像) | `EMConversation` | 获取单聊或群聊会话的显示名称和头像。 |
+| [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `EMConversation` | 获取单聊或群聊会话的显示名称和头像。 |
 | [`cleanConversationsMemoryCache`](#清除内存中的会话) | `EMChatManager` | 清理内存中的全部会话。 |
 | [`getUnreadMessageCount`](#一次性获取本地所有会话) | `EMChatManager` | 获取本地全部会话的未读消息总数。 |
 | [`asyncPinConversation`](#会话列表数据更新场景) | `EMChatManager` | 设置或取消会话置顶。 |

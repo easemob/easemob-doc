@@ -96,7 +96,7 @@
 
 对于推送通知的标题和内容，你可以通过多种方式设置，包括调用 API、使用推送模板以及发送消息时使用消息扩展字段。
 
-关于这些设置方式的使用和设置优先级，详见具体文档，例如，对于 Android，可参见[设置通知的显示内容](/document/android/push/push_display.html)。
+关于这些设置方式的使用和设置优先级，详见具体文档，例如，对于 Android，可参见[设置通知的显示内容](/document/android/push/push_display_attribute.html#设置推送通知的显示属性)。
 
 ## 推送翻译
 

@@ -49,7 +49,7 @@ App Server 为 Demo 提供以下功能：
 - 通过手机号获取验证码。
 - 通过手机号和验证码返回环信用户 ID 和环信用户 Token。
 - 上传头像并返回地址。
-- 根据用户的信息生成 [EaseCallKit](https://doc.easemob.com/v4/ios/easecallkit.html) 登录所需的 Token。
+- 根据用户的信息生成 [EaseCallKit](https://doc.easemob.com/callkit/ios/easecallkit.html) 登录所需的 Token。
 - 获取音视频通话时环信用户 ID 和 Agora UID 的映射关系。
 
 你通过以下步骤部署 App Server：

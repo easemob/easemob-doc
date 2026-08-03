@@ -203,7 +203,7 @@ UI 使用建议如下：
 | [消息扩展](message_extension.html)  | 支持 | 为消息携带自定义扩展字段。 |
 | [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
 | [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
-| [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
+| [消息输入状态](/v4/android/typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
 | [消息表情回复（Reaction）](reaction.html)  | 支持 | 对消息添加回复表情。 |
 | [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
 | [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |

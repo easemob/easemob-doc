@@ -384,7 +384,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 优化
  
 - [IM SDK] [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](/v4/android/message_extension.html)，会同步到发送方。
-- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - [IM SDK] 适配 Android 15 的 16K page size。
 - [IM SDK] 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - [IM SDK] 底层长连接使用 poll 代替 select，解决文件描述符（fd）最大数量 1024 的限制问题。
@@ -398,7 +398,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - 修复发送方发送的部分表情与接收方收到的不匹配的问题。
 
-#### [EaseCallKIt](easecallkit.html)
+#### [EaseCallKIt](/callkit/android/easecallkit.html)
 
 - 修复部分手机在拨号时，切换到悬浮窗口后再返回时，通话状态显示错误的问题。
 - 修复切换悬浮窗时，悬浮窗闪烁一次的问题.
@@ -444,7 +444,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### CallKit
 
-[添加声网私有化环境接口，对外暴露 RTCEngine](easecallkit.html#私有化部署)。
+[添加声网私有化环境接口，对外暴露 RTCEngine](/callkit/android/easecallkit.html#私有化部署)。
 
 ## v4.8.1 2024-07-18
 

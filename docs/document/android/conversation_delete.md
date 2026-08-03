@@ -243,7 +243,7 @@ EMClient.getInstance()
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`deleteConversationFromServer`](#单向删除服务端会话及本地会话) | `EMChatManager` | 删除当前用户服务端和本地的指定会话，并可设置是否同时删除服务端历史消息。 |
+| [`deleteConversationFromServer`](#单向删除服务端会话) | `EMChatManager` | 删除当前用户服务端和本地的指定会话，并可设置是否同时删除服务端历史消息。 |
 | [`deleteConversation`](#删除本地会话) | `EMChatManager` | 删除指定的本地会话，并可设置是否同时删除本地历史消息。 |
 | [`asyncDeleteConversations`](#批量删除本地会话) | `EMChatManager` | 异步批量删除本地会话，并可设置是否同时删除本地消息。 |
 | [`asyncDeleteAllMsgsAndConversations`](#删除全部会话及消息) | `EMChatManager` | 异步清空全部本地会话和消息，并可选择是否同时清空当前用户的服务端数据。 |
