@@ -91,24 +91,25 @@ const PLATFORM_ICON_MAP: Record<PlatformKey, PlatformIcon> = {
 const VERSION_CONFIG: VersionConfig = {
   switchablePlatforms: ['android', 'ios', 'web'],
   fixedVersionLabel: '4.x',
-  defaultVersion: '4.x',
+  defaultVersion: '5.x',
   versions: [
     {
       value: '4.x',
       label: '4.x',
       homePath: {
-        android: '/document/android/quickstart.html',
-        ios: '/document/ios/quickstart.html',
-        web: '/document/web/quickstart.html',
+        android: '/v4/android/quickstart.html',
+        ios: '/v4/ios/quickstart.html',
+        web: '/v4/web/quickstart.html',
+        applet: '/v4/applet/beginner_guide.html',
       },
     },
     {
       value: '5.x',
       label: '5.x',
       homePath: {
-        android: '/v5/document/android/quickstart.html',
-        ios: '/v5/document/ios/quickstart.html',
-        web: '/v5/document/web/quickstart.html',
+        android: '/document/android/quickstart.html',
+        ios: '/document/ios/quickstart.html',
+        web: '/document/web/quickstart.html',
       },
     },
   ],
@@ -130,7 +131,7 @@ const isPlatformKey = (value: string): value is PlatformKey =>
   Object.prototype.hasOwnProperty.call(PLATFORM_ICON_MAP, value)
 
 const parsePlatform = (path: string): PlatformKey | null => {
-  const matched = path.match(/^(?:\/v5)?\/document\/([^/]+)/)
+  const matched = path.match(/^\/(?:document|v4)\/([^/]+)/)
   if (!matched) return null
   return isPlatformKey(matched[1]) ? matched[1] : null
 }
@@ -153,9 +154,9 @@ const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): strin
 }
 
 const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
-  // /v5 开头优先判定为 5.x
-  if (path.startsWith('/v5/')) {
-    return '5.x'
+  // /v4 开头优先判定为 4.x；默认 /document 为 5.x
+  if (path.startsWith('/v4/')) {
+    return '4.x'
   }
 
   const candidates = VERSION_CONFIG.versions
@@ -185,12 +186,7 @@ const navigateToDefaultPlatformDoc = (platformName: PlatformKey): void => {
     .map((item) => item.path)
 
   let newPath = route.path.split('/')
-  // /document/{platform}/... or /v5/document/{platform}/...
-  if (route.path.startsWith('/v5/document/')) {
-    newPath = ['', 'document', platformName, ...route.path.split('/').slice(4)]
-  } else {
-    newPath[2] = platformName
-  }
+  newPath[2] = platformName
   const nextPathPath = newPath.join('/')
   const quickstartPath = `/document/${platformName}/quickstart.html`
   const overviewPath = `/document/${platformName}/overview.html`
@@ -212,24 +208,25 @@ watch(
     if (!nextPlatform) return
 
     platform.value = nextPlatform
-    if (isSwitchablePlatform(nextPlatform)) {
-      version.value = resolveVersion(route.path, nextPlatform)
-    }
+    version.value = resolveVersion(route.path, nextPlatform)
   },
   { immediate: true }
 )
 
 // 切换平台
 const onChange = (nextPlatform: PlatformKey): void => {
+  // 小程序仅在 V4 中独立存在。
+  if (nextPlatform === 'applet') {
+    router.push(getHomePath('4.x', nextPlatform))
+    return
+  }
+
   if (isSwitchablePlatform(nextPlatform)) {
-    const keepVersion =
-      isSwitchablePlatform(platform.value) &&
-      version.value !== VERSION_CONFIG.defaultVersion
-    if (keepVersion) {
-      router.push(getHomePath(version.value, nextPlatform))
-      return
-    }
-    navigateToDefaultPlatformDoc(nextPlatform)
+    // V4 的 Web 与小程序是两个独立平台，互相切换时保持在 V4。
+    const targetVersion = route.path.startsWith('/v4/')
+      ? '4.x'
+      : version.value
+    router.push(getHomePath(targetVersion, nextPlatform))
     return
   }
   navigateToDefaultPlatformDoc(nextPlatform)

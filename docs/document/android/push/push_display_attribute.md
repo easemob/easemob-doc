@@ -2,20 +2,49 @@
 
 ## 设置推送通知的显示属性
 
-调用 `updatePushNickname` 方法设置推送通知中显示的昵称，如以下代码示例所示：
+调用 `asyncUpdatePushNickname` 方法设置当前用户在推送通知中显示的昵称。推送昵称与用户属性中的昵称不同；若业务侧更新了用户昵称，也应同步更新推送昵称，避免展示不一致。
 
 ```java
-// 需要异步处理。
-EMClient.getInstance().pushManager().updatePushNickname("pushNickname");
+// 异步方法。
+// 同步方法为 updatePushNickname。该方法会阻塞当前线程，请勿在主线程中调用。
+EMClient.getInstance().pushManager().asyncUpdatePushNickname(
+        "pushNickname",
+        new EMCallBack() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+            }
+        });
 ```
 
-调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
+调用 `asyncUpdatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
 ```java
-// 设置为简单样式。
+// 异步方法。
+// 同步方法为 updatePushDisplayStyle。该方法会阻塞当前线程，请勿在主线程中调用。
 EMPushManager.DisplayStyle displayStyle = EMPushManager.DisplayStyle.SimpleBanner;
-// 需要异步处理。
-EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
+EMClient.getInstance().pushManager().asyncUpdatePushDisplayStyle(
+        displayStyle,
+        new EMCallBack() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+            }
+        });
 ```
 
 若要在通知栏中显示消息内容，需要设置通知显示样式 `DisplayStyle`。`DisplayStyle` 是枚举类型，有如下两种设置：
@@ -37,27 +66,11 @@ EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 
 ## 获取推送通知的显示属性
 
-你可以调用同步方法 `EMPushManager#getPushConfigsFromServer` 从服务器获取推送通知的显示属性。该方法会阻塞当前线程，请勿在主线程中调用。
+你可以调用 `asyncGetPushConfigsFromServer` 从服务器获取推送通知的显示属性。该方法不会阻塞当前线程。获取成功时，SDK 通过 `onSuccess` 回调返回推送配置；获取失败时，通过 `onError` 回调返回错误码和错误信息。
 
 ```java
-try {
-    EMPushConfigs pushConfigs = EMClient.getInstance()
-        .pushManager()
-        .getPushConfigsFromServer();
-
-    // 获取推送显示昵称。
-    String nickname = pushConfigs.getDisplayNickname();
-
-    // 获取推送通知的显示样式。
-    EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
-} catch (HyphenateException e) {
-    // 获取推送配置失败。
-}
-```
-
-自 4.24.0 版本开始，SDK 新增异步方法 `EMPushManager#asyncGetPushConfigsFromServer`。该方法不会阻塞当前线程。获取成功时，SDK 通过 `onSuccess` 回调返回推送配置；获取失败时，通过 `onError` 回调返回错误码和错误信息。
-
-```java
+// 异步方法。建议在主线程中使用。
+// 同步方法为 getPushConfigsFromServer。该方法会阻塞当前线程，请勿在主线程中调用。
 EMClient.getInstance().pushManager().asyncGetPushConfigsFromServer(
     new EMValueCallBack<EMPushConfigs>() {
         @Override
@@ -77,4 +90,15 @@ EMClient.getInstance().pushManager().asyncGetPushConfigsFromServer(
 );
 ```
 
-同步方法会等待服务器返回结果并可能阻塞当前线程；异步方法会立即返回，并通过回调通知调用结果。建议在主线程中使用异步方法。
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncUpdatePushNickname`](#设置推送通知的显示属性) | `EMPushManager` | 异步设置当前用户的推送显示昵称。 |
+| [`asyncUpdatePushDisplayStyle`](#设置推送通知的显示属性) | `EMPushManager` | 异步设置推送通知显示样式。 |
+| [`updatePushNickname`](#设置推送通知的显示属性) | `EMPushManager` | 同步设置当前用户的推送显示昵称。 |
+| [`updatePushDisplayStyle`](#设置推送通知的显示属性) | `EMPushManager` | 同步设置推送通知显示样式。 |
+| [`getPushConfigsFromServer`](#获取推送通知的显示属性) | `EMPushManager` | 同步从服务器获取推送配置。 |
+| [`asyncGetPushConfigsFromServer`](#获取推送通知的显示属性) | `EMPushManager` | 异步从服务器获取推送配置。 |
+| [`getDisplayNickname`](#获取推送通知的显示属性) | `EMPushConfigs` | 获取推送显示昵称。 |
+| [`getDisplayStyle`](#获取推送通知的显示属性) | `EMPushConfigs` | 获取推送通知显示样式。 |

@@ -1,7 +1,5 @@
 # 环信即时通讯 IM iOS 快速开始
 
-<Toc />
-
 本文介绍如何快速集成环信即时通讯 IM iOS SDK 实现单聊。
 
 ## 实现原理
@@ -158,3 +156,11 @@ end
 
 ![img](/images/ios/quickstart_error_solve.png)
 
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [initializeSDKWithOptions:](#3-初始化-sdk) | EMClient | 使用 EMOptions 初始化 SDK。 |
+| [loginWithUsername:token:completion:](#5-登录账号) | EMClient | 使用用户 ID 与 Token 异步登录。 |
+| [sendMessage:progress:completion:](#6-发送消息) | IEMChatManager | 异步发送消息。 |

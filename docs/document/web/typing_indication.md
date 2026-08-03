@@ -1,13 +1,14 @@
 # 通过透传消息实现输入指示器
 
-输入指示器显示其他用户何时输入消息。通过该功能，用户之间可进行有效沟通，增加了用户对聊天应用中交互的期待感。
+输入指示器用于在单聊场景中向对方展示“对方正在输入...”的状态。Web SDK 当前未提供专用的输入指示器 API，通常通过透传消息（CMD）实现。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- SDK 初始化时，已注册 `ChatManager`。
+- 已了解即时通讯 IM 的 [使用限制](/product/limitation.html)。
 
 ## 实现过程
 
@@ -15,77 +16,68 @@
 
 ![img](/images/common/typing_indicator.png)
 
-监听用户 A 的输入状态。一旦有文本输入，通过透传消息将输入状态发送给用户 B，用户 B 收到该消息，了解到用户 A 正在输入文本。
+监听用户 A 的输入状态。一旦用户 A 开始输入文本，业务侧向用户 B 发送一条表示“正在输入”的透传消息。用户 B 收到该消息后，即可在与用户 A 的当前聊天界面中展示输入指示器。
 
-- 用户 A 向用户 B 发送消息，通知其开始输入文本。
-- 收到消息后，如果用户 B 与用户 A 的聊天页面处于打开状态，则显示用户 A 的输入指示器。
-- 如果用户 B 在几秒后未收到用户 A 的输入，则自动取消输入指示器。
+- 用户 A 向用户 B 发送一条输入状态透传消息，通知对方“开始输入”。
+- 用户 B 收到该消息后，若当前正停留在与用户 A 的单聊会话页面，可显示“对方正在输入”提示。
+- 若用户 B 在设定时间内未再收到新的输入状态消息，应自动隐藏输入指示器。
 
 :::tip
-用户 A 可根据需要设置透传消息发送间隔。
+建议业务侧对输入状态透传消息进行节流控制，例如每 5 秒最多发送一次，避免频繁发送。
 :::
 
 ### 发送输入状态的透传消息
 
-以下示例代码展示如何发送输入状态的透传消息。
+以下示例代码展示如何发送输入状态透传消息。
 
 ```typescript
-let previousChangedTimeStamp = 0;
-// 监听输入状态的变化
-const onInputChange = function () {
-  const currentTimestamp = new Date().getTime();
-  if (currentTimestamp - previousChangedTimeStamp > 5000) {
-    sendBeginTyping();
-    previousChangedTimeStamp = currentTimestamp;
-  }
-};
+// 发送“正在输入”指示。
+function sendTypingIndicator(to: string): void {
+  const message = client.chatManager.createCmdMessage({
+    // 接收方用户 ID。
+    conversationId: to,
+    // 会话类型。输入指示器通常仅用于单聊场景。
+    conversationType: 'singleChat',
+    // 透传动作名称，由发送方和接收方自行约定。
+    action: 'TypingBegin',
+    // 仅向在线用户投递，避免离线场景下收到过期输入状态。
+    deliverOnlineOnly: true,
+  });
 
-// 创建输入状态消息并发送
-const sendBeginTyping = function () {
-  const option = {
-    // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-    chatType: "singleChat",
-    // 消息类型。
-    type: "cmd",
-    // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-    to: "<target id>",
-    // 用户自定义操作。
-    action: "TypingBegin",
-  };
-  const typingMessage = message.create(option);
-
-  connection
-    .send(typingMessage)
-    .then(() => {
-      console.log("success");
-    })
-    .catch((e) => {
-      console.log("fail");
-    });
-};
+  void client.chatManager.sendMessage(message);
+}
 ```
 
 ### 接收和解析输入状态的透传消息
 
-以下示例代码展示如何接收和解析输入状态的透传消息。
+以下示例代码展示如何接收和解析输入状态透传消息。
 
 ```typescript
-// 设置状态监听器
-let timer;
-conn.addEventHandler("message", {
-  onCmdMessage: (msg) => {
-    console.log("onCmdMessage", msg);
-    if (msg.action === "TypingBegin") {
-      // 这里需更新 UI，显示“对方正在输入”
-      beginTimer();
+client.chatManager.addEventHandler('typing', {
+  onMessage: (message) => {
+    // 仅处理单聊透传消息。
+    if (message.conversationType !== 'singleChat' || message.type !== 'cmd') {
+      return;
+    }
+    // 根据约定的 action 判断是否为“正在输入”指示。
+    if (message.body.action === 'TypingBegin') {
+      // `message.from` 表示发送该输入状态的用户 ID。
+      console.log(message.from, '正在输入...');
+      // 可在此处显示“正在输入”提示。
+
+      // 设置超时，例如 5 秒后自动隐藏输入指示器。
+      setTimeout(() => {
+        console.log('输入指示超时，隐藏提示');
+      }, 5000);
     }
   },
 });
-
-const beginTimer = () => {
-  timer && clearTimeout(timer);
-  timer = setTimeout(() => {
-    // 这里需更新 UI，不再显示“对方正在输入”
-  }, 5000);
-};
 ```
+
+## 接口列表
+
+| API 名称                                           | 所属模块/类   | 说明                             |
+| -------------------------------------------------- | ------------- | -------------------------------- |
+| [`createCmdMessage`](#发送输入状态的透传消息)      | `ChatManager` | 创建输入状态透传消息。           |
+| [`sendMessage`](#发送输入状态的透传消息)           | `ChatManager` | 发送输入状态透传消息。           |
+| [`addEventHandler`](#接收和解析输入状态的透传消息) | `ChatManager` | 监听消息并解析输入状态透传消息。 |

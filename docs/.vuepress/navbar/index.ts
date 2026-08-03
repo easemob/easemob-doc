@@ -151,12 +151,12 @@ export const zhNavbar = navbar([
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/document/applet/beginner_guide.html'
+            link: '/document/web/integration_applet.html'
           },
           {
             text: 'uni-app',
             icon: '/icon-uni-app.svg',
-            link: '/document/applet/uniapp.html'
+            link: '/document/web/uniapp.html'
           },
         ]
       },

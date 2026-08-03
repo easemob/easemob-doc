@@ -15,22 +15,31 @@ EMTextMessageBody txtBody = new EMTextMessageBody("message content");
 // 设置要发送的用户 ID。
 message.setTo("toChatUsername");
 // 设置自定义推送扩展。
-JSONObject emPushExt = new JSONObject() {
-   {
-        put("custom", new JSONObject() {
-            {
-                put("key1", "value1");
-                put("key2", "value2");
-            }
-        });
-    }
-};
+JSONObject emPushExt = new JSONObject();
+try {
+    JSONObject custom = new JSONObject();
+    custom.put("key1", "value1");
+    custom.put("key2", "value2");
+    emPushExt.put("custom", custom);
+} catch (JSONException e) {
+    // 处理 JSON 构造失败。
+    return;
+}
 // 将推送扩展设置到消息中。
 message.setAttribute("em_push_ext", emPushExt);
 // 设置消息体。
 message.addBody(txtBody);
 // 设置消息回调。
-message.setMessageStatusCallback(new CallBack() {...});
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {}
+
+    @Override
+    public void onError(int errorCode, String errorMessage) {}
+
+    @Override
+    public void onProgress(int progress, String status) {}
+});
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -68,8 +77,19 @@ EMTextMessageBody txtBody = new EMTextMessageBody("test");
 message.setTo("toChatUsername");
 // 设置是否为强制推送，该字段为内置扩展字段：`true`：强制推送；（默认）`false`：非强制推送。
 message.setAttribute("em_force_notification", true);
+// 设置消息体。
+message.addBody(txtBody);
 // 设置消息回调。
-message.setMessageStatusCallback(new CallBack() {...});
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {}
+
+    @Override
+    public void onError(int errorCode, String errorMessage) {}
+
+    @Override
+    public void onProgress(int progress, String status) {}
+});
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
@@ -88,10 +108,32 @@ EMTextMessageBody txtBody = new EMTextMessageBody("test");
 message.setTo("toChatUsername");
 // 设置是否发送静默消息。该字段为内置扩展字段：`true`：发送静默消息；（默认）`false`：推送该消息。
 message.setAttribute("em_ignore_notification", true);
+// 设置消息体。
+message.addBody(txtBody);
 // 设置消息回调。
-message.setMessageStatusCallback(new CallBack() {...});
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {}
+
+    @Override
+    public void onError(int errorCode, String errorMessage) {}
+
+    @Override
+    public void onProgress(int progress, String status) {}
+});
 // 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createSendMessage`](#设置自定义推送字段) | `EMMessage` | 创建指定类型的消息。 |
+| [`setTo`](#设置自定义推送字段) | `EMMessage` | 设置消息接收方。 |
+| [`setAttribute`](#设置自定义推送字段) | `EMMessage` | 设置自定义或内置消息扩展字段。 |
+| [`addBody`](#设置自定义推送字段) | `EMMessage` | 设置消息体。 |
+| [`setMessageStatusCallback`](#设置自定义推送字段) | `EMMessage` | 设置消息发送状态回调。 |
+| [`sendMessage`](#设置自定义推送字段) | `EMChatManager` | 发送消息。 |
 
 

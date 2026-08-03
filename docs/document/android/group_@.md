@@ -9,9 +9,9 @@
 例如，该功能的 UI 实现如下图所示：
 
 1. 在输入框输入 "@" 字符后，选择要 @ 的群成员。
-2. 选择群成员后，返回聊天界面，编辑消息，然后发送。
-3. 如果有消息 @ 我，会收到会话更新，例如，“Somebody@You”。
-4. 打开会话页面，查看消息。
+2. 选择群成员后返回聊天页面，编辑并发送消息。
+3. 当前用户被 @ 时，在会话列表或消息页面显示相应提示，例如，“Somebody@You”。
+4. 用户进入会话页面查看消息。
 
 UI 实现示例图如下：
 
@@ -26,16 +26,22 @@ UI 实现示例图如下：
 
 ## 实现过程
 
-在群组中，@ 某人发送消息与发送普通消息没有区别，只是被 @ 的用户在 UI 上显示会有不同。该功能可以通过扩展消息实现：
+群组 @ 消息的发送方式与普通群消息相同。发送方通过消息扩展字段 `em_at_list` 指定被 @ 的群成员；SDK 不会自动生成 @ 提示或处理相关 UI，应用需要自行解析该字段并展示。
 
-1. 发送方将要 @ 的用户的用户 ID 通过扩展字段添加到消息，并将消息发送到群组。
-2. 群组成员收到消息时，检查对应的扩展字段是否存在。若存在，检查当前登录的用户 ID 是否包含在扩展字段中。
-3. 若包含，需要对被 @ 的用户在 UI 上进行特殊处理，显示出相应的提示信息，如“[Somebody@You]”。若不包含，表明用户没有被 @，则 UI 无需处理。
+实现流程如下：
 
-群组 @ 消息的扩展数据结构如下：
+1. 发送方创建群消息后，将被 @ 成员的用户 ID 写入扩展字段 `em_at_list`，然后发送消息。
+2. 接收方通过 `EMMessageListener#onMessageReceived(List<EMMessage>)` 接收消息，并读取 `EMMessage` 的扩展字段。
+3. 若 `em_at_list` 包含当前登录用户的用户 ID，或该字段值为 `ALL`，应用可在 UI 中显示 @ 提示；否则按普通群消息处理。
 
-- @ 单个或多个群组成员："em_at_list": [user1, user2, user3]
-- @ 群全体成员："em_at_list":"All"
+`em_at_list` 的数据格式如下：
+
+- @ 单个或多个群成员：值为用户 ID 数组，例如 `["user1", "user2"]`。
+- @ 群内所有成员：值为字符串 `ALL`。
+
+::tip
+被 @ 成员的用户 ID 不包含“@”前缀。发送方与接收方应统一约定字段名、字段值类型，以及 `ALL` 的含义。
+:::
 
 ### 发送消息
 
@@ -46,15 +52,21 @@ UI 实现示例图如下：
 @tab Java
 
 ```java
+// 扩展字段中填写被 @ 成员的用户 ID，不要添加“@”前缀。
 JSONArray atUserList = new JSONArray();
-atUserList.put("@User1");
-atUserList.put("@User2");
-EMMessage msg = EMMessage.createTextSendMessage("@userId 你好", conversationID);
+atUserList.put("user1");
+atUserList.put("user2");
+
+EMMessage msg = EMMessage.createTextSendMessage("@user1 @user2 你好", conversationId);
+// 群组 @ 消息必须设置为群聊类型。
 msg.setChatType(EMMessage.ChatType.GroupChat);
-// @ 指定用户的消息构造如下。
-msg.setAttribute("em_at_list",atUserList);
-// 如果要 @ 所有人，ext 可以设置为 ["em_at_list": "ALL"]。
-//msg.setAttribute("em_at_list","ALL");
+
+// @ 单个或多个成员时，将用户 ID 数组写入 em_at_list。
+msg.setAttribute("em_at_list", atUserList);
+// @ 所有人时，将 em_at_list 的值设置为字符串 "ALL"：
+// msg.setAttribute("em_at_list", "ALL");
+
+// 发送群组消息。
 EMClient.getInstance().chatManager().sendMessage(msg);
 
 ```
@@ -62,112 +74,149 @@ EMClient.getInstance().chatManager().sendMessage(msg);
 @tab Kotlin
 
 ```kotlin
-  val atUserList = JSONArray()
-  atUserList.put("@User1")
-  atUserList.put("@User2")
-  val msg = EMMessage.createTextSendMessage("@userId 你好", conversationID)
-  msg.chatType = EMMessage.ChatType.GroupChat
-  // @ 指定用户的消息构造如下。
-  msg.setAttribute("em_at_list", atUserList)
-  // 如果要 @ 所有人，ext 可以设置为 ["em_at_list": "ALL"]。
-  //msg.setAttribute("em_at_list","ALL");
-  EMClient.getInstance().chatManager().sendMessage(msg)
+// 扩展字段中填写被 @ 成员的用户 ID，不要添加“@”前缀。
+val atUserList = JSONArray()
+atUserList.put("user1")
+atUserList.put("user2")
+
+val msg = EMMessage.createTextSendMessage("@user1 @user2 你好", conversationId)
+// 群组 @ 消息必须设置为群聊类型。
+msg.chatType = EMMessage.ChatType.GroupChat
+
+// @ 单个或多个成员时，将用户 ID 数组写入 em_at_list。
+msg.setAttribute("em_at_list", atUserList)
+// @ 所有人时，将 em_at_list 的值设置为字符串 "ALL"：
+// msg.setAttribute("em_at_list", "ALL")
+
+// 发送群组消息。
+EMClient.getInstance().chatManager().sendMessage(msg)
 
 ```
-
 :::
-
 
 ### 接收消息
 
-接收方收到消息时，通过解析消息扩展字段 `ext`，检查消息是否 @ 了自己，过程如下：
+接收方收到消息时，接收方可根据扩展字段的值类型，调用 `getJSONArrayAttribute` 或 `getStringAttribute` 读取 `em_at_list`，检查消息是否 @ 了自己，过程如下：
 
 ::: tabs#code
 
 @tab Java
 
 ```java
-private void handleMentionedMessage(EMMessage messages) {
-   try {
-      String groupId = msg.getTo();
-      JSONArray jsonArray = msg.getJSONArrayAttribute("em_at_list");
-      for(int i = 0; i < jsonArray.length(); i++){
-           String username = jsonArray.getString(i);
-           if(EMClient.getInstance().getCurrentUser().equals(username)){
-               // 消息 @ 自己，需要更新 UI。
-            }
-      }
+private void handleMentionedMessage(EMMessage message) {
+    // 先按字符串读取，以识别 @ 所有人。
+    String atAll = message.getStringAttribute("em_at_list", null);
+    if ("ALL".equalsIgnoreCase(atAll)) {
+        // 消息 @ 所有人，需要更新 UI。
+        return;
+    }
 
-   }
-   catch (Exception e1) {
-       //确认是否是 @ 所有人
-       String usernameStr = msg.getStringAttribute("em_at_list", null);
-       if(usernameStr != null){
-           String s = usernameStr.toUpperCase();
-           if(s.equals("ALL")){
-               // 消息 @ 所有人，需要更新 UI。
-           }
-      }
-   } 
+    try {
+        // @ 单个或多个成员时，em_at_list 为用户 ID 数组。
+        JSONArray atUserList = message.getJSONArrayAttribute("em_at_list");
+        String currentUser = EMClient.getInstance().getCurrentUser();
+        for (int i = 0; i < atUserList.length(); i++) {
+            if (currentUser.equals(atUserList.getString(i))) {
+                // 消息 @ 自己，需要更新 UI。
+                return;
+            }
+        }
+    } catch (HyphenateException | JSONException e) {
+        // 扩展字段不存在或格式不正确，按普通群消息处理。
+    }
 }
 
- @Override
- public void onMessageReceived(List<EMMessage> messages) {
-    super.onMessageReceived(messages);
+@Override
+public void onMessageReceived(List<EMMessage> messages) {
     for (EMMessage message : messages) {
-       if (message.getChatType() == EMMessage.ChatType.GroupChat && message.getType()== EMMessage.Type.TXT){
-          handleMentionedMessage(message)
-       }
+        // 仅解析群聊文本消息中的 @ 扩展字段。
+        if (message.getChatType() == EMMessage.ChatType.GroupChat
+                && message.getType() == EMMessage.Type.TXT) {
+            handleMentionedMessage(message);
+        }
     }
- }
+}
 
 ```
 
 @tab Kotlin
 
 ```kotlin
-    private fun handleMentionedMessage(messages: EMMessage) {
-        try {
-            val groupId: String = messages.to
-            val jsonArray: JSONArray = messages.getJSONArrayAttribute("em_at_list")
-            for (i in 0 until jsonArray.length()) {
-                val username = jsonArray.getString(i)
-                if (EMClient.getInstance().currentUser == username) {
-                    // 消息 @ 自己，需要更新 UI。
-                }
-            }
-        } catch (e1: java.lang.Exception) {
-            //确认是否是 @ 所有人
-            val usernameStr: String = messages.getStringAttribute("em_at_list", null)
-            val s = usernameStr.uppercase(Locale.getDefault())
-            if (s == "ALL") {
-                // 消息 @ 所有人，需要更新 UI。
-            }
-        }
+private fun handleMentionedMessage(message: EMMessage) {
+    // 先按字符串读取，以识别 @ 所有人。
+    val atAll = message.getStringAttribute("em_at_list", null)
+    if (atAll.equals("ALL", ignoreCase = true)) {
+        // 消息 @ 所有人，需要更新 UI。
+        return
     }
 
-    override fun onMessageReceived(messages: MutableList<EMMessage>?) {
-        super.onMessageReceived(messages);
-        messages?.forEach {
-            if (it.chatType == EMMessage.ChatType.GroupChat && it.type == EMMessage.Type.TXT){
-                handleMentionedMessage(it)
+    try {
+        // @ 单个或多个成员时，em_at_list 为用户 ID 数组。
+        val atUserList = message.getJSONArrayAttribute("em_at_list")
+        val currentUser = EMClient.getInstance().currentUser
+        for (i in 0 until atUserList.length()) {
+            if (currentUser == atUserList.getString(i)) {
+                // 消息 @ 自己，需要更新 UI。
+                return
             }
         }
+    } catch (e: Exception) {
+        // 扩展字段不存在或格式不正确，按普通群消息处理。
     }
+}
+
+override fun onMessageReceived(messages: MutableList<EMMessage>?) {
+    messages?.forEach { message ->
+        // 仅解析群聊文本消息中的 @ 扩展字段。
+        if (message.chatType == EMMessage.ChatType.GroupChat
+                && message.type == EMMessage.Type.TXT) {
+            handleMentionedMessage(message)
+        }
+    }
+}
 
 ```
 
 :::
 
+上述 `onMessageReceived` 方法应在 `EMMessageListener` 中实现。创建监听器后进行注册，并在不再需要监听时移除：
+
+```java
+// 注册保存为成员变量的消息监听器，接收新消息回调。
+EMClient.getInstance().chatManager().addMessageListener(messageListener);
+
+// 页面或组件销毁且不再需要监听时，移除同一个监听器实例。
+EMClient.getInstance().chatManager().removeMessageListener(messageListener);
+```
+
 ## 常见问题
 
-1. Q：@ 群所有人时为何发消息失败？
+1. Q：@ 群所有人时为何没有显示 @ 提示？
 
-   A：可能是 `ALL` 的拼写错误，比较时可兼容处理先统一转为小写或者大写。
+   A：请检查 `em_at_list` 的值是否为字符串 `ALL`。由于 @ 功能由应用通过消息扩展实现，字段名、字段值类型或拼写不一致不会导致普通消息发送失败，但会导致接收方无法正确识别 @ 状态。比较时可使用不区分大小写的方式兼容处理。
 
-2. Q：@ 多人与 @ 所有人有什么区别？  
+2. Q：@ 多个成员与 @ 所有成员有什么区别？
 
    A：设置 `ext` 时，若 @ 单个、多个群成员，字段的值为要 @ 的用户的用户 ID 数组；@ 所有人时，字段值为 `ALL` 字符串。
+
+3. Q：Q：SDK 是否会自动显示“有人 @ 我”提示？
+
+   A：不会。SDK 负责传输消息及其扩展字段。应用需要在 `EMMessageListener#onMessageReceived(List<EMMessage>)` 回调中读取 `EMMessage` 的扩展字段，并自行更新会话列表或消息页面的 UI。 
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createTextSendMessage`](#发送消息) | `EMMessage` | 创建待发送的文本消息。 |
+| [`setChatType`](#发送消息) | `EMMessage` | 将消息的会话类型设置为群聊。 |
+| [`setAttribute`](#发送消息) | `EMMessage` | 设置消息扩展字段，用于携带被 @ 的用户 ID 或 `ALL`。 |
+| [`sendMessage`](#发送消息) | `EMChatManager` | 发送群组消息。 |
+| [`addMessageListener`](#接收消息) / [`removeMessageListener`](#接收消息) | `EMChatManager` | 注册或移除消息监听器。 |
+| [`onMessageReceived`](#接收消息) | `EMMessageListener` | 监听收到的新消息。 |
+| [`getChatType`](#接收消息) / [`getType`](#接收消息) | `EMMessage` | 获取消息的会话类型和消息类型。 |
+| [`getJSONArrayAttribute`](#接收消息) | `EMMessage` | 将 `em_at_list` 读取为用户 ID 数组。 |
+| [`getStringAttribute`](#接收消息) | `EMMessage` | 将 `em_at_list` 读取为字符串，以识别 @ 所有人。 |
+| [`getCurrentUser`](#接收消息) | `EMClient` | 获取当前登录用户的用户 ID。 |
 
 
 

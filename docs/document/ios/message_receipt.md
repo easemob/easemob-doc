@@ -1,268 +1,322 @@
 # 实现消息回执
 
-<Toc />
+## 功能说明
 
-**单聊会话支持消息送达回执和消息已读回执**，发送方发送消息后可及时了解接收方是否及时收到并阅读了消息。
+**消息送达回执** 表示消息已成功送达接收方设备。接收方开启该能力后，收到单聊消息时 SDK 会自动向发送方回发送达回执。发送方可通过送达回执确认消息是否已经到达对方客户端。
 
-**群聊会话只支持消息已读回执，不支持送达回执**。群成员在发送消息时，可以设置该消息是否需要已读回执。要使用该功能，你需要 [在环信控制台上开通该功能](/product/console/basic_message.html#群聊消息已读回执)，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
+**消息已读回执** 表示接收方已阅读指定消息。接收方阅读消息后，需要发送消息已读回执，消息发送方收到回执后可更新对应消息的已读状态。
 
 消息送达回执和已读回执的效果示例，如下图所示：
 
-![img](/images/android/message_receipt.png)
+![消息送达和已读状态](/images/android/message_receipt.png)
+
+## 使用限制
+
+ - 单聊会话支持消息送达回执和消息已读回执。
+ - 群聊会话支持消息已读回执，不支持消息送达回执。
+ - 聊天室暂不支持消息送达回执和消息已读回执。
+ - **群聊消息已读回执需要在 [环信控制台开通该功能](/product/console/basic_message.html#群聊消息已读回执)。**
 
 ## 技术原理
 
-使用环信即时通讯 IM iOS SDK 可以实现消息的送达回执与已读回执。
+#### 单聊消息送达回执
 
-- 单聊消息送达回执的逻辑如下：
+单聊消息送达回执的实现流程如下：
 
-  1. 你可以通过设置 `EMOptions#enableDeliveryAck` 为 `YES` 开启送达回执功能。
-  2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执。
-  3. 消息发送方通过监听 `EMChatManagerDelegate#messagesDidDeliver` 回调接收消息送达回执。
+![img](/images/ios/message_delivery_receipt.png)
 
-- 单聊消息已读回执的逻辑如下：
+实现该功能的基本步骤如下：
 
-  1. 你可以通过设置 `EMOptions#enableRequireReadAck` 为 `YES` 开启已读回执功能。
-  2. 消息接收方收到消息后，调用 `IEMChatManager#sendMessageReadAck` 方法发送消息已读回执。
-  3. 消息发送方通过监听 `EMChatManagerDelegate#messagesDidRead` 回调接收消息已读回执。
+1. 消息接收方在调用 `initializeSDKWithOptions` 前，通过 `EMOptions#enableDeliveryAck` 开启送达回执功能。该配置默认为 `NO`。
+2. 消息发送方通过 `addDelegate` 注册消息代理，并通过 `messagesDidDeliver` 监听送达回执。
+3. 消息接收方收到单聊消息后，SDK 自动向消息发送方发送送达回执，无需应用手动调用接口。
+4. 消息发送方收到 `messagesDidDeliver` 回调后，表示消息已送达接收方客户端。应用可据此更新消息的展示状态，也可通过 `isDeliverAcked` 查询消息是否已送达。
 
-- 群聊消息已读回执的逻辑如下：
+:::tip
+消息送达回执仅支持单聊，不支持群聊和聊天室。
+:::
 
-  1. 你可以通过设置 `EMOptions#enableRequireReadAck` 为 `YES` 开启已读回执功能。
-  2. 发送方发送消息时设置 `EMChatMessage#isNeedGroupAck` 为 `YES` 要求接收方返回消息已读回执。
-  3. 接收方收到或阅读消息后通过 `IEMChatManager#sendGroupMessageReadAck` 方法发送群组消息的已读回执。
+#### 消息已读回执
+
+iOS SDK 使用 `sendMessageReadReceipts` 统一发送单聊和群聊消息的已读回执，消息发送方通过 `onMessageReadReceipts` 接收回执。
+
+消息已读回执的实现流程如下：
+
+![img](/images/ios/message_read_receipt.png)
+
+实现该功能的基本步骤如下：
+
+1. 消息发送方在发送单聊或群聊消息前，设置消息的 `isNeedReadReceipt` 为 `YES`，表示该消息需要已读回执。
+2. 消息发送方通过 `addDelegate` 注册消息代理，并通过 `onMessageReadReceipts` 监听已读回执。
+3. 消息接收方在用户实际阅读消息后，调用 `sendMessageReadReceipts` 发送一条或多条消息的已读回执。
+4. 消息发送方收到 `onMessageReadReceipts` 回调后，可通过 `messageId` 定位消息，并更新对应消息的已读状态。
+
+`sendMessageReadReceipts` 单次最多可传入 50 条消息。所有消息必须属于同一会话，并且其 `isNeedReadReceipt` 必须为 `YES`。该接口仅支持单聊和群聊，不支持聊天室。
+
+对于群聊消息，应用可以通过以下接口或属性获取已读情况：
+
+ - `readCount` 或 `groupReadReceiptCount`：获取群消息的已读人数。
+ - `getGroupMessageReadReceipts`：批量获取多条群消息的已读回执详情，单次最多传入 20 条属于同一会话的消息。
+ - `asyncFetchGroupMessageReadUsersFromServer`：分页获取单条群消息的已读回执成员详情。
+
+:::tip
+发送消息已读回执不会改变会话未读数。如需清零会话未读数，应另行调用 `clearConversationUnreadMessageCount`；该操作不会向消息发送方发送已读回执。
+:::
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 要使用群消息已读回执功能，需在 [环信控制台开通](/product/console/basic_message.html#群聊消息已读回执) ，具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。
-  
-## 实现方法
+- 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
+- 已了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 使用群消息已读回执前，已在 [环信控制台](/product/console/basic_message.html#群聊消息已读回执)开通该功能。
 
-### 单聊消息送达回执
+## 单聊消息送达回执
 
-1. 开启消息送达功能，即 SDK 初始化时将 `EMOptions#enableDeliveryAck` 设置为 `YES`。
+#### 步骤 1：开启送达回执
 
-当接收方收到消息后，SDK 底层会自动进行消息送达回执。
+在调用 `initializeSDKWithOptions` 前，通过 `EMOptions#enableDeliveryAck` 设置是否需要单聊消息送达回执。该配置默认为 `NO`。
 
 ```objectivec
-// 设置是否需要接收方送达确认，默认为 `NO` 即不需要。
+// 创建 SDK 配置对象。
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+// 接收方开启后，收到单聊消息时 SDK 自动发送送达回执。
 options.enableDeliveryAck = YES;
+
+// 使用配置初始化 SDK。
+[[EMClient sharedClient] initializeSDKWithOptions:options];
 ```
 
-2. 接收方收到消息后，SDK 自动向发送方送达回执。
-   
-3. 发送方监听 `EMChatManagerDelegate#messagesDidDeliver` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
+开启后，接收方收到单聊消息时由 SDK 自动发送送达回执，无需应用主动调用发送接口。
+
+#### 步骤 2：监听送达回执
+
+发送方通过 `messagesDidDeliver` 接收送达回执，并可通过 `isDeliverAcked` 查询消息是否已送达。
 
 ```objectivec
-// 继承并实现监听器。
-EMChatManagerDelegate
-
-// 收到消息送达回执。
-- (void)messagesDidDeliver:(NSArray *)aMessages
-{
-
+// 实现 EMChatManagerDelegate 中的送达回执回调。
+- (void)messagesDidDeliver:(NSArray<EMChatMessage *> *)messages {
+    for (EMChatMessage *message in messages) {
+        // YES 表示发送方已收到对端的送达回执。
+        BOOL delivered = message.isDeliverAcked;
+        // 根据 delivered 更新消息的送达状态。
+    }
 }
-// 注册监听器。
+
+// 注册消息代理。
 [[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 
-// 若不再需要监听器，可将其移除，如在 viewController 的 dealloc 时。
+// 不再需要监听时移除消息代理。
 [[EMClient sharedClient].chatManager removeDelegate:self];
 ```
 
-### 单聊消息已读回执
+## 单聊和群聊消息已读回执
 
-单聊既支持消息已读回执，也支持[会话已读回执](conversation_receipt.html)。我们建议你结合使用这两种回执，见实现步骤的描述。
+单聊消息和群聊消息均支持已读回执功能。群消息已读回执功能使用前还存在以下使用限制：
 
-- 聊天页面打开时，若收到消息，发送消息已读回执。
-- 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
+| 使用限制 | 默认设置 | 说明 |
+| :--- | :--- | :--- |
+| 功能开通 | 关闭 | 使用前需在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯** > **基础功能** > **消息** 页面开通 **群聊消息已读回执**。具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。 |
+| 使用权限 | 所有群成员 | 默认情况下，所有群成员发送消息时均可要求已读回执。若只允许群主和群管理员要求已读回执，请联系商务调整配置。 |
+| 已读回执有效期 | 3 天 | 群消息已读回执的有效期为 3 天。消息发送时间超过 3 天后，服务器不再记录阅读该消息的群成员，也不会再发送该消息的已读回执。 |
+| 群规模 | 200 人 | 该功能最多支持 200 人的群组。群成员数量超过 200 后，群消息不会返回已读回执，该上限目前无法提升。 |
+| 查看已读人数 | 消息发送方 | 默认仅消息发送方可以查看群消息的已读人数。如需允许所有群成员查看，请联系商务开通。 |
 
-单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 
+:::tip
+消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+:::
 
-参考如下步骤在单聊中实现消息已读回执。
+#### 步骤 1：设置消息需要已读回执
 
-1. 开启已读回执功能，即 SDK 初始化时将 `EMOptions#enableRequireReadAck` 设置为 `YES`。
+消息接收方在初始化 SDK 时需将 `isNeedReadReceipt` 设置为 `YES`；该属性默认值为 `NO`。该属性对单聊和群聊均有效。
 
-该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
-
-```objectivec
-options.enableRequireReadAck = YES;
-```
-
-2. 接收方发送消息已读回执。
-
-- 消息接收方进入会话时，发送会话已读回执。
-  
-  聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
+单聊消息已读回执无需额外开通。群聊消息已读回执需先在环信控制台开通功能，再设置该属性。
 
 ```objectivec
-[[EMClient sharedClient].chatManager ackConversationRead:conversationId completion:nil];
-```
+// 创建文本消息；单聊时 conversationId 为对端用户 ID。
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId body:body ext:nil];
+// 群聊时设为 YES，conversationId 传群组 ID。
+BOOL isGroupChat = NO;
+// 根据会话类型设置聊天类型。
+message.chatType = isGroupChat ? EMChatTypeGroupChat : EMChatTypeChat;
+// 标记该消息需要接收方发送已读回执。
+message.isNeedReadReceipt = YES;
 
-- 接收方在聊天页面打开时，接收到消息时，再根据消息类型发送单个消息已读回执。  
-
-```objectivec
-// 接收消息回调。
-- (void)messagesDidReceive:(NSArray *)aMessages
-  {
-    for (EMChatMessage *message in aMessages) {
-        //发送消息已读回执。
-        [self sendReadAckForMessage:message];
-    }
-  }
-
-// 发送消息已读回执
-- (void)sendReadAckForMessage:(EMChatMessage *)aMessage
-  {
-    //这里是接收的消息，未发送过 read ack 消息且是单聊。
-    if (aMessage.direction == EMMessageDirectionSend || aMessage.isReadAcked || aMessage.chatType != EMChatTypeChat)
-        return;
-
-    EMMessageBody *body = aMessage.body;
-    // 视频、语音及文件需要点击后再发送,可以根据需求进行调整。
-    if (body.type == EMMessageBodyTypeFile || body.type == EMMessageBodyTypeVoice || body.type == EMMessageBodyTypeImage)
-        return;
-
-    [[EMClient sharedClient].chatManager sendMessageReadAck:aMessage.messageId toUser:aMessage.conversationId completion:nil];
-  }
-```
-
-3. 消息发送方监听消息已读回调。
-
-消息发送方可以通过 `EMChatManagerDelegate#messagesDidRead` 事件监听指定消息是否已读，示例代码如下：
-
-```objectivec
-// 继承并实现监听器。
-EMChatManagerDelegate
-
-// 接收到已读回执。
-- (void)messagesDidRead:(NSArray *)aMessages
-  {
-    for (EMChatMessage *message in aMessages) {
-        // 添加刷新页面通知等逻辑。
-    }
-  }
-// 注册监听器。
-[[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
-
-// 移除监听器。
-[[EMClient sharedClient].chatManager removeDelegate:self];
-```
-
-### 群聊消息已读回执
-
-对于群聊，群成员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员阅读消息后，SDK 均会发送已读回执，即阅读该消息的群成员数量即为已读回执的数量。
-
-群消息已读回执特性的使用限制如下表所示：
-
-| 使用限制| 默认 | 描述 | 
-| :--------- | :----- | :------- | 
-| 功能开通   | 关闭   | 若要使用该功能，你需要在[环信控制台](https://console.easemob.com/user/login)的 **功能配置** > **基础功能** > **消息**页签下，搜索找到 **消息已读回执（群聊）** 开通功能。具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。   | 
-| 使用权限  | 所有群成员    | 默认情况下，所有群成员发送消息时可要求已读回执。如果仅需群主和群管理员发消息时要求已读回执，可联系商务修改。   | 
-| 已读回执有效期    | 3 天    | 群聊已读回执的有效期为 3 天，即群组中的消息发送时间超过 3 天，服务器不记录阅读该条消息的群组成员，也不会发送已读回执。   | 
-| 群规模    |  200 人   | 该特性最多支持 200 人的群组。当群人数超过 200 时，群成员发送的消息将不会返回已读回执。该上限目前无法提升。 | 
-| 查看返回已读回执数量    | 消息发送方 | 对消息返回的已读回执数量（或返回已读回执的人数），默认仅消息发送方可查看。如需所有群成员均可查看，可联系商务开通。 | 
-
-你可以按以下步骤实现群消息已读回执特性：
-
-1. 开启已读回执功能，即 SDK 初始化时将 `enableRequireReadAck` 设置为 `YES`。
-
-该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
-
-```objectivec
-options.enableRequireReadAck = YES;
-```
-
-2. 发送方发送消息时设置 `EMChatMessage#isNeedGroupAck` 属性为 `YES`。
-
-```objectivec
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to from:from to:to body:aBody ext:aExt];
-message.isNeedGroupAck = YES;
-```
-
-3. 消息接收方发送群组消息的已读回执。
-
-```objectivec
-- (void)sendGroupMessageReadAck:(EMChatMessage *)msg
-  {
-    if (msg.isNeedGroupAck && !msg.isReadAcked) {
-        [[EMClient sharedClient].chatManager sendGroupMessageReadAck:msg.messageId toGroup:msg.conversationId content:@"123" completion:^(EMError *error) {
-            if (error) {
-
-            }
-        }];
-    }
-  }
-```
-
-4. 消息发送方监听群组消息已读回调。
-
-群消息已读回调在回调代理 `EMChatManagerDelegate` 中实现。
-
-发送方接收到群组消息已读回执后，其发出消息的属性 `groupAckCount` 会有相应变化。
-
-```objectivec
-// 继承并实现监听器。
-EMChatManagerDelegate
-
-// 接收到群组消息的已读回执, 消息的接收方已经阅读此消息。
-- (void)groupMessageDidRead:(EMChatMessage *)aMessage groupAcks:(NSArray *)aGroupAcks
-  {
-    for (GroupMessageAck *messageAck in aGroupAcks) {
-        //收到群消息已读回执
-    }
-  }
-
-// 注册监听器。
-[[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
-
-// 移除监听器。
-[[EMClient sharedClient].chatManager removeDelegate:self];
-```
-
-5. 消息发送方获取群组消息的已读回执详情。
-
-你可以调用 `IEMChatManager#asyncFetchGroupMessageAcksFromServer` 方法从服务器获取单条消息的已读回执的详情。
-
-```objectivec
- // 异步方法。
- // aMessageId           要获取的消息 ID。
- // aGroupId             要获取回执对应的群 ID。
- // aGroupAckId          查询起始的已读回执 ID。首次调用为空，SDK 从最新的已读回执开始按服务器接收回执时间的逆序获取。后续调用从 EMCursorResult 中的 cursor 获取。
- // aPageSize            要获取的回执条数。
- //  aCompletionBlock     获取结束的回调。
-[[EMClient sharedClient].chatManager asyncFetchGroupMessageAcksFromServer:messageId groupId:groupId startGroupAckId:nil pageSize:pageSize completion:^(EMCursorResult *aResult, EMError *error, int totalCount) {
-    // 页面刷新等操作。
+// 异步发送消息。
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
+    // 根据 error 处理发送结果。
 }];
 ```
 
-### 查看消息送达和已读状态
+#### 步骤 2：发送消息已读回执
 
-对于单聊消息，本地通过 `EMChatMessage#isDeliverAcked` 字段存储消息送达状态。
+接收方阅读消息后，调用 `sendMessageReadReceipts` 批量发送已读回执。单次最多传入 50 条消息，所有消息必须属于同一会话，且 `isNeedReadReceipt` 必须为 `YES`。
 
-对于单聊消息，本地通过以下字段存储消息已读状态：
+```objectivec
+// 仅传入已阅读、需要已读回执且属于同一会话的接收消息。
+NSArray<EMChatMessage *> *messages = @[message];
 
-| 字段       | 描述   | 
-| :--------- | :----- | 
-| `EMChatMessage#isRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。 | 
-| `EMChatMessage#isReadAcked`      | 是否（消息接收方）已发送或（消息发送方）已收到消息已读回执。如果是自己发送的消息，记录的是对方是否已读。如果是对方的消息，则记录的是自己是否发送过已读回执。| 
+// 异步发送当前批次的消息已读回执。
+[[EMClient sharedClient].chatManager sendMessageReadReceipts:messages
+                                                   completion:^(EMError *error) {
+    if (!error) {
+        // 当前批次的消息已读回执发送成功。
+    } else {
+        // 根据错误码和错误信息处理。
+    }
+}];
+```
 
-对于群聊消息，本地数据库通过以下字段存储消息已读状态：
+:::tip
+建议只为接收方向、属于单聊或群聊且 `isNeedReadReceipt` 为 `YES` 的消息发送已读回执。视频、语音和文件等消息可在用户实际查看内容后再发送。
+:::
 
-| 字段       | 描述   | 
-| :--------- | :----- | 
-| `EMChatMessage#isRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。   | 
-| `EMChatMessage#groupAckCount`  | 已阅读消息的群成员数量。    | 
+#### 步骤 3：监听消息已读回执
 
-### 已读回执与未读消息数
+发送方通过 `onMessageReadReceipts` 统一监听单聊和群聊消息的已读回执。回调返回 `EMMessageReadReceipt` 列表。每个回执对象提供以下信息：
 
-- 会话已读回执发送后，SDK 会自动调用 `EMConversation#markAllMessagesAsRead` 方法，将该会话的未读消息数清零。
+| 属性 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `messageId` | `NSString *` | 获取回执对应的消息 ID。 |
+| `conversationId` | `NSString *` | 获取回执对应的会话 ID。 |
+| `isPeerReceipt` | `BOOL` | 判断是否为单聊对端发送的已读回执。 |
+| `readCount` | `NSInteger` | 获取群消息的已读人数。 |
 
-- 消息已读回执发送后，开发者可以调用 `EMConversation#markMessageAsReadWithId` 方法，将本地数据库中的该条消息置为已读，则消息未读数会有变化。
+```objectivec
+// 实现 EMChatManagerDelegate 中的已读回执回调。
+- (void)onMessageReadReceipts:(NSArray<EMMessageReadReceipt *> *)receipts {
+    for (EMMessageReadReceipt *receipt in receipts) {
+        // 回执对应的消息和会话 ID。
+        NSString *messageId = receipt.messageId;
+        NSString *conversationId = receipt.conversationId;
+        // 单聊对端已读状态和群消息已读人数。
+        BOOL peerRead = receipt.isPeerReceipt;
+        NSInteger readCount = receipt.readCount;
+        // 根据回执刷新单聊消息已读状态或群消息已读人数。
+    }
+}
 
+// 群消息读取状态更新时可按需刷新界面。
+- (void)groupMessageReadReceiptsHasChanged {
+}
 
+// 注册消息代理。
+[[EMClient sharedClient].chatManager addDelegate:self delegateQueue:nil];
 
+// 不再需要监听时移除消息代理。
+[[EMClient sharedClient].chatManager removeDelegate:self];
+```
 
+## 获取群消息已读回执详情
+
+### 批量获取多条群消息的回执汇总
+
+调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一会话。
+
+```objectivec
+// messages 中最多包含 20 条、且属于同一群会话的消息。
+[[EMClient sharedClient].chatManager getGroupMessageReadReceipts:messages
+                                                       completion:^(NSArray<EMMessageReadReceipt *> *receipts, EMError *error) {
+    if (!error) {
+        // receipts 为各消息的已读回执汇总信息。
+    } else {
+        // 获取失败。
+    }
+}];
+```
+
+### 获取单条群消息的回执成员详情
+
+调用 `asyncFetchGroupMessageReadUsersFromServer` 分页获取单条群消息的已读回执成员详情。目标消息必须是需要已读回执的群聊消息。
+
+首次调用时将 `readReceiptId` 传入空字符串。后续调用时，将上一次结果中的 `cursor` 作为新的 `readReceiptId`。
+
+```objectivec
+// 首次调用时 readReceiptId 传空字符串；后续传入上一次结果的 cursor。
+[[EMClient sharedClient].chatManager asyncFetchGroupMessageReadUsersFromServer:messageId
+                                                                        groupId:groupId
+                                                                  readReceiptId:readReceiptId
+                                                                       pageSize:20
+                                                                     completion:^(EMCursorResult<EMGroupReadReceipt *> *result, EMError *error, int totalCount) {
+    if (!error) {
+        NSArray<EMGroupReadReceipt *> *receipts = result.list;
+        NSString *nextCursor = result.cursor;
+        // 保存 nextCursor，用于获取下一页；totalCount 为已读回执总数。
+    } else {
+        // 获取失败。
+    }
+}];
+```
+
+`EMGroupReadReceipt` 提供以下信息：
+
+ - `readReceiptId`：已读回执 ID。
+ - `messageId`：消息 ID。
+ - `from`：发送回执的群成员信息，类型为 `EMGroupMemberInfo`。
+ - `readCount`：已读人数。
+ - `timestamp`：已读回执时间戳。
+
+## 事件说明
+
+| 事件 | 触发时机 | 接收方 |
+| :--- | :--- | :--- |
+| `messagesDidReceive` | 收到普通消息时触发。 | 消息接收方；多设备场景下，发送方的其他在线设备也可能收到消息。 |
+| `messagesDidDeliver` | 接收方 SDK 自动发送单聊消息送达回执后触发。 | 单聊消息发送方。 |
+| `onMessageReadReceipts` | 接收方调用 `sendMessageReadReceipts` 发送一条或多条消息的已读回执后触发。 | 单聊或群聊消息发送方。 |
+| `groupMessageReadReceiptsHasChanged` | 群消息的读取状态更新时触发。 | 需要刷新群消息已读状态的客户端。 |
+
+## 查看消息送达和已读状态
+
+你可以通过 `EMChatMessage` 中的属性查看消息送达和已读状态。
+
+| API | 适用场景 | 说明 |
+| :--- | :--- | :--- |
+| `isDeliverAcked` | 单聊 | 查询消息是否已送达对端。 |
+| `isPeerRead` | 单聊 | 查询对端是否已读该消息。 |
+| `groupReadReceiptCount` | 群聊 | 查询群消息的已读人数。 |
+| `isRead` | 单聊、群聊 | 查询该消息在当前设备上的本地已读状态。 |
+| `isNeedReadReceipt` | 单聊、群聊 | 查询该消息是否需要已读回执。 |
+
+## 消息已读回执与会话未读数清零
+
+发送消息已读回执和清零会话未读数是两个独立操作：
+
+| 操作 | 作用 | 是否通知消息发送方 | 是否改变会话未读数 |
+| :--- | :--- | :--- | :--- |
+| `sendMessageReadReceipts` | 为指定消息发送已读回执。 | 是 | 否 |
+| `clearConversationUnreadMessageCount` | 清除指定会话的本地未读数，并同步当前账号的其他设备。 | 否 | 是 |
+| `clearAllConversationUnreadMessageCount` | 清除所有本地会话的未读数，并同步当前账号的其他设备。详见 [会话未读数](conversation_unread.html)。 | 否 | 是 |
+
+## 注意事项
+
+ - 消息送达回执仅支持单聊，不支持群聊和聊天室。
+ - 消息已读回执仅支持单聊和群聊，不支持聊天室。
+ - 单聊和群聊消息在发送前都需要将 `isNeedReadReceipt` 设置为 `YES`。
+ - `sendMessageReadReceipts` 单次最多传入 50 条消息。所有消息必须属于同一会话，且其 `isNeedReadReceipt` 必须为 `YES`。
+ - 调用 `sendMessageReadReceipts` 的客户端不会通过 `onMessageReadReceipts` 收到自己发送的回执；该回调由原消息发送方收到。
+ - 群消息已读回执功能需要在环信控制台开通，并受有效期、群规模和查看权限等服务端配置限制。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`EMOptions#enableDeliveryAck`](#开启送达回执) | `EMOptions` | 设置是否需要单聊消息送达回执。 |
+| [`initializeSDKWithOptions`](#开启送达回执) | `EMClient` | 使用指定配置初始化 SDK。 |
+| [`isDeliverAcked`](#监听送达回执) | `EMChatMessage` | 查询单聊消息是否已送达。 |
+| [`addDelegate`](#监听送达回执) / [`removeDelegate`](#监听送达回执) | `IEMChatManager` | 注册或移除消息代理。 |
+| [`initWithConversationID`](#设置消息需要已读回执) | `EMChatMessage` | 创建消息。 |
+| [`chatType`](#设置消息需要已读回执) | `EMChatMessage` | 设置消息的会话类型。 |
+| [`isNeedReadReceipt`](#设置消息需要已读回执) | `EMChatMessage` | 设置消息是否需要已读回执。 |
+| [`sendMessage`](#设置消息需要已读回执) | `IEMChatManager` | 异步发送消息。 |
+| [`sendMessageReadReceipts`](#发送消息已读回执) | `IEMChatManager` | 批量异步发送单聊或群聊消息的已读回执。 |
+| [`messageId`](#监听消息已读回执) / [`conversationId`](#监听消息已读回执) | `EMMessageReadReceipt` | 获取回执对应的消息 ID 和会话 ID。 |
+| [`isPeerReceipt`](#监听消息已读回执) / [`readCount`](#监听消息已读回执) | `EMMessageReadReceipt` | 获取单聊对端回执状态或群消息已读人数。 |
+| [`getGroupMessageReadReceipts`](#批量获取多条群消息的回执汇总) | `IEMChatManager` | 批量获取多条群消息的已读回执详情。 |
+| [`asyncFetchGroupMessageReadUsersFromServer`](#获取单条群消息的回执成员详情) | `IEMChatManager` | 分页获取单条群消息的已读回执成员详情。 |
+| [`readReceiptId`](#获取单条群消息的回执成员详情) / [`messageId`](#获取单条群消息的回执成员详情) / [`from`](#获取单条群消息的回执成员详情) / [`readCount`](#获取单条群消息的回执成员详情) / [`timestamp`](#获取单条群消息的回执成员详情) | `EMGroupReadReceipt` | 获取群消息已读回执详情。 |
+| [`isPeerRead`](#查看消息送达和已读状态) | `EMChatMessage` | 查询单聊消息是否已被对端阅读。 |
+| [`groupReadReceiptCount`](#查看消息送达和已读状态) | `EMChatMessage` | 查询群消息的已读人数。 |
+| [`isRead`](#查看消息送达和已读状态) | `EMChatMessage` | 查询消息在当前设备上的本地已读状态。 |
+| [`clearConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `IEMChatManager` | 异步清除指定会话的本地未读消息数。 |
+| [`clearAllConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `IEMChatManager` | 异步清除所有本地会话的未读消息数。 |
