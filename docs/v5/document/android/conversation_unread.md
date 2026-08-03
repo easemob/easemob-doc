@@ -11,6 +11,25 @@
 - 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
+## 会话未读数清零流程
+
+会话未读数清零的核心流程如下：
+
+![](/images/android/conversation_unread_count_clear.png)
+
+会话未读数清零的基本步骤如下：
+
+1. 用户进入会话页面后，在应用层记录当前会话 ID，并根据需要调用 `asyncClearConversationUnreadMessageCount(conversationId, callback)` 清零该会话的未读数。
+2. 调用成功后，SDK 会将本地缓存中目标会话的未读数更新为 `0`，并同步给当前用户登录的其他设备。
+3. 会话数据发生变化时，注册的 `onConversationUpdate()` 会收到回调，应用可据此刷新会话列表 UI。
+4. 多设备登录时，清零操作不会通知会话对端，也不会触发对端的消息已读回执；仅会同步给当前用户的其他在线设备。
+5. 如需清零所有会话的未读数，可调用：asyncClearAllConversationUnreadMessageCount 接口
+   该操作会清零当前设备本地缓存中的全部会话未读数，并同步给当前用户的其他在线设备。
+
+:::tip
+清零会话未读数不会向会话对端发送通知，也不会触发对端的消息已读回执。如需让消息发送方感知消息已读，请使用消息已读回执功能。
+:::
+
 ## 获取所有会话的未读消息数
 
 调用 `getUnreadMessageCount` 获取本地单聊和群聊会话的未读消息总数。

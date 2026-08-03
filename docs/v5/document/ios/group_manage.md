@@ -84,7 +84,7 @@ EMClient.shared().groupManager?.createGroup(
 
 仅群主可以调用 `destroyGroup` 解散群组。解散成功后，群成员会收到 `didLeaveGroup` 回调，离开原因为 `.destroyed`。
 
-:::caution
+:::warning
 解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组，SDK 也会移除内存中该群组对应的会话。执行该操作前，建议在应用侧进行二次确认。
 :::
 
@@ -111,6 +111,10 @@ EMClient.shared().groupManager?.destroyGroup(
 
 - `allowInvites = false`：仅群主和群管理员可以邀请用户。
 - `allowInvites = true`：普通成员也可以邀请用户。
+
+邀请流程如下：
+
+![](/images/ios/goup_member_invite.png)
 
 调用 `addMembers` 发起邀请：
 
@@ -188,6 +192,10 @@ final class GroupInvitationDelegate: NSObject, EMGroupManagerDelegate {
 
 公开群支持用户主动申请加入，私有群不支持用户主动申请加入。
 
+用户申请加入公开群的流程如下：
+
+![](/images/ios/group_member_apply.png)
+
 具体调用方式由 `joinApprovalRequired` 决定：
 
 - `false`：调用 `joinPublicGroup` 直接加入公开群。
@@ -218,6 +226,8 @@ EMClient.shared().groupManager?.request(
 ```
 
 需要审批时，群主和群管理员会收到 `joinGroupRequestDidReceive` 回调后，并选择同意或拒绝申请：
+- 申请被同意后，申请人会收到 `joinGroupRequestDidApprove` 回调。
+- 申请被拒绝后，申请人会收到 `joinGroupRequestDidDecline` 回调。
 
 ```swift
 EMClient.shared().groupManager?.approveJoinGroupRequest(
@@ -242,8 +252,6 @@ EMClient.shared().groupManager?.declineJoinGroupRequest(
     }
 }
 ```
-
-申请被同意后，申请人会收到 `joinGroupRequestDidApprove` 回调；申请被拒绝后，申请人会收到 `joinGroupRequestDidDecline` 回调。
 
 ## 退出群组
 

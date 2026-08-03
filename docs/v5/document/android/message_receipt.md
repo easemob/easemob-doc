@@ -21,7 +21,11 @@
 
 #### 单聊消息送达回执
 
-实现流程如下：
+实现单聊消息送达回执的流程如下：
+
+![img](/images/android/message_delivery_receipt.png)
+
+实现该功能的基本步骤如下：
 
 1. 消息接收方在调用 `EMClient#init` 前，通过 `EMOptions#setRequireDeliveryAck(true)` 开启送达回执功能。该配置默认为 `false`，如需送达回执必须设置为 `true`。
 2. 消息发送方通过 `EMChatManager#addMessageListener` 注册消息监听器，并通过 `EMMessageListener#onMessageDelivered` 监听送达回执。
@@ -36,7 +40,11 @@
 
 Android SDK 使用 `EMChatManager#asyncSendMessageReadReceipts` 统一发送单聊和群聊消息的已读回执，消息发送方通过 `EMMessageListener#onMessageReadReceipts` 接收回执。
 
-实现流程如下：
+实现消息已读回执的基本流程如下：
+
+![img](/images/android/message_read_receipt.png)
+
+实现该功能的基本步骤如下：
 
 1. 消息发送方在发送单聊或群聊消息前，调用 `EMMessage#setIsNeedReadReceipt(true)`，设置该消息需要已读回执。
 2. 消息发送方通过 `EMChatManager#addMessageListener` 注册消息监听器，并通过 `EMMessageListener#onMessageReadReceipts` 监听已读回执。

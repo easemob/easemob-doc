@@ -144,7 +144,7 @@ await client.groupManager.joinGroup({
 });
 ```
 
-流程说明如下：
+关于入群是否需要审批，规则如下：
 
 - 如果 `joinApprovalRequired` 为 `false`，用户调用 `joinGroup` 后可直接加入群组。
 - 如果 `joinApprovalRequired` 为 `true`，用户调用 `joinGroup` 后需要等待群主或管理员审批。

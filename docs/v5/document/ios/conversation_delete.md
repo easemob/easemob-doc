@@ -151,7 +151,7 @@ EMClient.shared().chatManager?.deleteAllMessagesAndConversations(
 }
 ```
 
-:::caution
+:::warning
 将 `clearServerData` 设为 `true` 会删除当前用户服务端保存的全部会话及消息。执行前应再次向用户确认删除范围。
 :::
 

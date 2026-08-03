@@ -21,7 +21,11 @@
 
 #### 单聊消息送达回执
 
-实现流程如下：
+单聊消息送达回执的实现流程如下：
+
+![img](/images/ios/message_delivery_receipt.png)
+
+实现该功能的基本步骤如下：
 
 1. 消息接收方在调用 `initializeSDKWithOptions` 前，通过 `EMOptions#enableDeliveryAck` 开启送达回执功能。该配置默认为 `NO`。
 2. 消息发送方通过 `addDelegate` 注册消息代理，并通过 `messagesDidDeliver` 监听送达回执。
@@ -36,7 +40,11 @@
 
 iOS SDK 使用 `sendMessageReadReceipts` 统一发送单聊和群聊消息的已读回执，消息发送方通过 `onMessageReadReceipts` 接收回执。
 
-实现流程如下：
+消息已读回执的实现流程如下：
+
+![img](/images/ios/message_read_receipt.png)
+
+实现该功能的基本步骤如下：
 
 1. 消息发送方在发送单聊或群聊消息前，设置消息的 `isNeedReadReceipt` 为 `YES`，表示该消息需要已读回执。
 2. 消息发送方通过 `addDelegate` 注册消息代理，并通过 `onMessageReadReceipts` 监听已读回执。

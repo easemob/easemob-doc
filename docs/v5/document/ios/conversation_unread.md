@@ -13,6 +13,24 @@
 - 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
+## 技术原理
+
+会话未读数清零的核心流程如下：
+
+![](/images/ios/conversation_unread_count_clear.png)
+
+会话未读数清零的基本步骤如下：
+
+1. 用户进入会话页面后，应用记录当前会话 ID，并根据需要调用 `IEMChatManager#clearConversationUnreadMessageCount:completion:` 清零该会话的未读数。
+2. 调用成功后，SDK 会将本地数据库中目标会话的未读数更新为 `0`，并将该操作同步至当前用户登录的其他设备。
+3. 应用应在 `completion` 回调成功后刷新当前会话及会话列表 UI。此外，可通过 `EMConversationDelegate#conversationListDidUpdate:` 监听会话列表变化。
+4. 清零操作不会通知会话对端，也不会触发对端的消息已读回执；多设备登录时，当前用户的其他设备可通过 `EMMultiDevicesDelegate` 提供的多设备会话事件感知该操作。
+5. 如需清零所有会话的未读数，可调用 `IEMChatManager#clearAllConversationUnreadMessageCount:`。该接口会清零本地数据库中所有会话的未读数，并将该操作同步至当前用户登录的其他设备。
+
+:::tip 
+清零会话未读数不会向会话对端发送通知，也不会自动发送消息已读回执。如需让消息发送方感知消息已读，请使用消息已读回执功能。 
+:::
+
 ## 获取所有会话的未读消息数
 
 你可以调用 `getUnreadMessageCount` 方法直接获取本地符合统计条件的会话未读消息总数，无需遍历会话列表并手动累加。

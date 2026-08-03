@@ -64,7 +64,7 @@ const documentV5Sidebar = [
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
       { text: '消息表情回复', link: 'reaction.html' },
-      { text: '转发消息', link: 'message_forward.html', except: ['web']},
+      { text: '转发消息', link: 'message_forward.html'},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
       { text: '更新消息', link: 'message_update.html', except: ['web']},
       { text: '删除消息', link: 'message_delete.html' },    
@@ -99,7 +99,7 @@ const documentV5Sidebar = [
       { text: '群组概述', link: 'group_overview.html' },
       { text: '创建和管理群组', link: 'group_manage.html' },
       { text: '管理群组成员', link: 'group_members.html' },
-      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos'] },
+      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'web', 'harmonyos'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
       { text: '管理消息话题', link: 'thread.html', except: ['harmonyos'] },
       { text: '管理消息话题中的消息', link: 'thread_message.html', except: ['harmonyos'] }

@@ -28,9 +28,11 @@
 
 #### 单聊消息送达回执
 
+实现单聊消息送达回执的流程如下：
+
 ![img](/images/web/message_delivery_receipt.png)
 
-实现该功能的流程如下：
+实现该功能的基本步骤如下：
 
 1. 消息发送方注册消息监听器，监听送达回执事件 `onMessageDelivered`。
 2. 消息接收方初始化 SDK 时设置 `enableDeliveryReceipt: true`。
@@ -41,9 +43,11 @@
 
 SDK 使用 `sendMessageReadReceipts` 发送单聊和群聊消息已读回执，消息发送方通过 `onMessageReadReceipts` 事件接收回执。
 
+实现消息已读回执的基本流程如下：
+
 ![img](/images/web/message_read_receipt.png)
 
-实现该功能的流程如下：
+实现该功能的基本步骤如下：
 
 1. 消息发送方注册消息监听器，监听已读回执事件 `onMessageReadReceipts`。
 2. 消息接收方收到单聊或群聊消息后，在用户阅读消息时调用 `sendMessageReadReceipts` 发送已读回执。
@@ -124,7 +128,7 @@ client.chatManager.addEventHandler('single-read-receipt-listener', {
 
 #### 步骤 2：发送单聊消息
 
-发送一条单聊消息：
+发送一条单聊消息。对于单聊消息，无需设置 `needReadReceipt: true`。接收方阅读后可以直接发送单聊消息已读回执。
 
 ```typescript
 const message = client.chatManager.createTextMessage({

@@ -15,9 +15,13 @@
 - 当前客户端已连接到服务器。清零动作需要通过连接通道发送到服务器。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 技术原理
+## 会话未读数清零流程
 
 会话未读数清零的核心流程如下：
+
+![](/images/web/conversation_unread_count_clear.png)
+
+会话未读数清零的基本步骤如下：
 
 1. 用户进入会话页面时，可先调用 `setCurrentConversation` 设置当前正在浏览的会话，避免该会话后续收到在线消息时继续累加本地未读数。
 2. 如果该会话已有未读数，调用 `clearConversationUnreadMessageCount` 清零指定会话未读数。
@@ -30,10 +34,6 @@
 - 清零会话未读数不会向会话对端发送通知，也不会触发对端的消息已读回执事件。若需要让消息发送方感知某些消息已读，应使用 [消息已读回执](message_receipt.html)。
 - 会话列表快照是 SDK 在本地内存中维护的会话列表数据视图，用于记录当前已同步到本地的会话及其未读数、最后一条消息等展示信息。
 :::
-
-流程图如下所示：
-
-![](/images/web/conversation_unread_count_clear.png)
 
 ## 设置当前正在浏览的会话
 
