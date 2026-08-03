@@ -9,6 +9,7 @@ const platformList = getSubDirectories(DOC_PATH)
 /** V5 独立侧栏配置，可与 V4（document-v4.ts）分叉演进 */
 const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
@@ -45,7 +46,7 @@ const documentV5Sidebar = [
     children: [
       { text: '用户关系', link: 'user_relationship.html' },
       { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos']},
+      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'web', 'harmonyos']},
       { text: '在线状态订阅', link: 'presence.html' },
     ],
     except: ['server-side', 'applet']
@@ -57,7 +58,7 @@ const documentV5Sidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'flutter', 'react-native'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索本地消息', link: 'message_search_local.html', except: ['web'] },
@@ -71,7 +72,6 @@ const documentV5Sidebar = [
       { text: '定向消息', link: 'message_target.html' },    
       { text: '消息扩展', link: 'message_extension.html' },    
       { text: '置顶消息', link: 'message_pin.html'},         
-      { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
       { text: '只投在线用户', link: 'message_deliver_only_online.html'},
       { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
       { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
@@ -85,6 +85,7 @@ const documentV5Sidebar = [
       { text: '会话介绍', link: 'conversation_overview.html' },
       { text: '会话列表', link: 'conversation_list.html' },
       { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
+      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter', 'harmonyos','react-native','unity','windows'] },
       { text: '会话未读数', link: 'conversation_unread.html'},
       { text: '置顶会话', link: 'conversation_pin.html' },
       { text: '会话标记', link: 'conversation_mark.html' },
@@ -186,6 +187,7 @@ const documentV5Sidebar = [
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: 'uni-app 构建 App 与小程序', link: 'uniappnativeapp.html', only: ['web'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
+      { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
     ],
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },

@@ -1,83 +1,264 @@
-# Android IM SDK 5.0.0 迁移指南
+# 环信 IM SDK 4.x → 5.0 迁移文档（Android）
 
-## 概述
+---
 
-本文档说明如何将 Android IM SDK 从 v4.x 升级至 v5.0.0。v5.0.0 包含不兼容的 API 变更，升级后必须重新编译项目并完成本文档中的代码适配。
+## 一、升级总览
 
-升级时遵循以下原则：
+5.0 是一次**源码不兼容**的大版本升级，围绕四个主题：
 
-- 对于名称或模型调整的 API，使用本文档列出的 5.0 API 替换原调用。
-- 对于已移除且没有 SDK 替代 API 的能力，将其迁移至业务服务或由应用自行实现。
-- Android V5 同时保留部分同步和异步 API。优先在非阻塞场景使用异步 API 并通过 `EMCallBack` 或 `EMValueCallBack` 处理结果；调用同步 API 时，不要在主线程执行。
+1. **数据同步通道**：登录后自动同步会话/联系人/已加入群组并落本地库，替代原先一批"主动从服务器拉取"的 API。
+2. **已读回执体系重构**：逐条 ack → 批量回执；"清未读数"与"发已读回执"彻底解耦；单聊/群聊回执回调统一。
+3. **群组配置模型重构**：`EMGroupStyle` 单枚举拆为 `isPublic / joinApprovalRequired / allowInvites` 三布尔，支持建群后按位更新。
+4. **历史 API 精简**：删除长期 `@Deprecated` 的接口与边缘能力（注册、举报、统计等下沉到服务端 REST），密码登录下线、仅保留 token 登录。
 
-## 升级步骤
+**集成要求**：5.0 已全面迁移 AndroidX（公开 API 注解由 `android.support.*` 变为 `androidx.*`），**宿主 App 必须开启 AndroidX**（`android.useAndroidX=true`），使用 support 库的工程不兼容。
 
-1. 更新项目中的 Android IM SDK 至 v5.0.0，并重新编译项目以定位不兼容的 API 调用。
-2. 调整登录流程：将注册、密码登录和 Token 获取逻辑移至 App Server；客户端通过 Token 登录接口登录。
-3. 按本文档的 API 迁移对照处理模型更名、方法移除和参数变更，重点检查已读回执、数据同步、群组配置与附件消息创建代码。
-4. 完成以下功能验证：Token 登录、会话及未读数、单聊和群聊消息已读回执、群组创建与属性更新，以及文件和图片消息发送。
+---
 
-## API 迁移对照
+## 二、初始化与登录
 
-### 客户端与初始化
+### 2.1 自动登录移除，冷启动必须显式登录
 
-| 4.x API 或配置 | 5.0.0 适配方式 | 说明 |
-| --- | --- | --- |
-| 注册、用户名/密码登录及 Token 获取 API | 移至 App Server；客户端调用 `EMClient#loginWithToken(String, String, EMCallBack)` | SDK 不再提供用户注册、密码登录和 Token 获取能力。 |
-| 基于用户名/密码的多设备查询和强制登出接口 | 使用 `EMClient#fetchLoggedInDevicesFromServerWithToken`、`EMClient#kickDeviceWithToken` 或 `EMClient#kickAllDevicesWithToken` | 需由业务服务为目标用户提供有效 Token。 |
-| 旧的联系人自动同步配置 | 使用 `EMOptions#setDataSyncType(EnumSet<EMOptions.EMDataSyncType>)` | `EMDataSyncType` 可组合 `CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`。 |
-| 全局消息已读回执配置 | 发送前调用 `EMMessage#setIsNeedReadReceipt(boolean)` | 已读回执配置调整为消息级配置。 |
+4.x 中 `EMClient.init()` 末尾存在 `if (options.getAutoLogin() && isLoggedInBefore()) { ...自动登录... }` 逻辑；5.0 该逻辑整体删除，同时删除：
 
-如需感知登录后的本地数据库打开或数据同步进度，可实现 `EMConnectionListener` 的以下回调：
+| 删除的 API | 替代方式 |
+|---|---|
+| `EMOptions.setAutoLogin(boolean)` / `getAutoLogin()` | 无替代；App 启动时显式 `loginWithToken(...)` |
+| `EMClient.isLoggedInBefore()` | `isLoggedIn()`（当前登录态）/ `isConnected()`（连接状态）/ `isDatabaseOpened()`（本地库就绪） |
 
-- `onDatabaseOpened(String username)`；
-- `onDataSyncStart(EMOptions.EMDataSyncType type)`；
-- `onDataSyncFinish(EMOptions.EMDataSyncType type, int errorCode)`。
+### 2.2 密码登录下线，仅保留 token 登录
 
-`onDatabaseOpened(String username)` 仅表示当前账号的本地数据库已经打开，不表示会话、联系人或已加入群组已经完成同步。需要最新业务数据时，应等待相应类型的 `onDataSyncFinish` 成功回调。
+| 删除的 API | 替代方式 |
+|---|---|
+| `login(String id, String password, EMCallBack)`（4.x 已 @Deprecated） | `loginWithToken(String username, String token, EMCallBack)` |
+| `loginWithAgoraToken(String, String, EMCallBack)`（@Deprecated） | 同上 `loginWithToken` |
+| `renewToken(String newAgoraToken)`（@Deprecated） | `renewToken(String newToken, EMCallBack)` |
+| `getUserTokenFromServer(String, String, EMValueCallBack<String>)` | 无客户端替代，token 改由 App Server 下发 |
+| `createAccount(String username, String password)` | 无客户端替代，改用服务端 REST 注册 |
+| `check(String, String, CheckResultListener)` 及 `EMCheckType` 整个类 | 无替代；连通性诊断依赖正常登录流程与连接回调 |
 
-### 消息与会话
+### 2.3 登录与数据库打开解耦（新能力）
 
-| 4.x API 或配置 | 5.0.0 适配方式 | 说明 |
-| --- | --- | --- |
-| `isNeedGroupAck`、群消息已读人数及对端已读状态等旧 Ack 字段 | `EMMessage#isNeedReadReceipt`、`EMMessageReadReceipt#getReadCount`、`EMMessageReadReceipt#isPeerReceipt` | 已读回执相关模型和字段统一使用 `ReadReceipt` 命名。 |
-| 单聊或群聊的旧消息已读回执发送接口 | `EMChatManager#asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)` | 单聊和群聊统一使用；单次最多传入 50 条消息，消息必须属于同一会话且需设置已读回执。 |
-| 单聊和群聊的旧已读回执事件 | `EMMessageListener#onMessageReadReceipts(List<EMMessageReadReceipt>)` | 单聊和群聊的实时已读回执通过统一回调返回。 |
-| 群消息已读状态变化的旧 Ack 回调 | `EMMessageListener#onReadReceiptForGroupMessageUpdated()` | 群消息已读回执状态变化回调已统一为 ReadReceipt 命名。 |
-| 旧群消息已读成员详情模型或接口 | `EMGroupReadReceipt`、`EMChatManager#asyncFetchGroupMessageReadReceipts` | 分页获取单条群消息的已读成员详情。 |
-| 无 | `EMChatManager#asyncGetGroupMessageReadReceipts` | 批量获取群消息的已读回执汇总。 |
-| 无 | `EMConversationListener`，以及 `EMChatManager#addConversationListener` | 用于监听会话列表更新。 |
-| 无 | `EMConversation#getConversationName`、`EMConversation#getConversationAvatar`、`EMChatManager#getUnreadMessageCount` | 用于会话展示和未读汇总；未读总数不包含聊天室和免打扰会话。 |
-| 旧服务端会话查询、导入或置顶会话查询接口 | 数据同步结束后，使用保留的本地会话接口 | 以本地会话列表作为展示数据来源。 |
-| 同步历史消息接口或旧服务端历史消息接口 | `EMChatManager#asyncFetchHistoryMessages` | 服务端历史消息统一通过异步分页接口获取。 |
-| 旧式本地消息加载、消息重发或编辑消息接口 | 使用保留的异步消息加载接口、`EMChatManager#sendMessage`、`EMChatManager#asyncModifyMessage` | 按原业务场景选择对应接口；编辑消息时，按消息类型传入需要更新的消息体或扩展字段。 |
-| 基于字节数组创建文件或图片消息体的方式 | 使用 `EMMessage#createFileSendMessage` 或 `EMMessage#createImageSendMessage`，传入本地文件路径或 `Uri` | 创建待发送附件消息时使用本地文件或本地 URI；未设置显示名时，SDK 使用本地文件名。 |
-| 直接修改消息 `isRead` 或旧的标记已读接口 | `EMChatManager#asyncClearConversationUnreadMessageCount` 或 `EMChatManager#asyncClearAllConversationUnreadMessageCount` | 清除本地未读数与向发送方发送消息已读回执是两个独立操作。 |
-| 会话级已读回执接口 | 分别调用未读数清理接口和 `asyncSendMessageReadReceipts` | V5 不再提供会话级已读回执；应按业务目的分别处理本地未读数和消息已读回执。 |
-| 旧的单个 Reaction 查询方式 | 遍历 `EMMessage#getMessageReaction()` 返回的 `List<EMMessageReaction>` | 按 Reaction 内容从列表中查找对应对象。 |
-| `EMStreamChunk` 的分片序列号 | `EMStreamChunk#isCompleted` | V5 不再公开分片序列号；通过 `isCompleted` 判断流式消息是否已完成。 |
+登录完成前即可读本地数据，加快冷启动首屏：
 
-### 群组
+- `EMConnectionListener.onDatabaseOpened(String username)`：本地数据库打开完成回调。
+- `EMClient.isDatabaseOpened()`：随时查询数据库是否就绪
 
-| 4.x API 或配置 | 5.0.0 适配方式 | 说明 |
-| --- | --- | --- |
-| `EMGroupOptions`、`EMGroupStyle` | `EMGroupConfigs`、`EMGroupManager.EMGroupConfigsType` | 群类型不再是单一枚举；需按原业务场景分别设置 `isPublic`、`joinApprovalRequired` 和 `allowInvites`。 |
-| 创建群组方法的 `EMGroupOptions` 参数 | 传入 `EMGroupConfigs` | 创建群组时同步替换配置对象类型。 |
-| 群成员上限、公开属性、入群审批、邀请确认、成员邀请权限和群扩展等配置更新接口 | `EMGroupManager#asyncUpdateGroupConfigs` | 通过 `EnumSet<EMGroupConfigsType>` 指定要更新的字段，并通过 `EMGroupConfigs` 提供字段值。 |
-| 群名称、描述和头像更新接口 | 使用对应的异步更新接口 | 这些字段不属于 `EMGroupConfigsType`，仍使用各自的更新接口。 |
-| 群对象上的推送开关状态 | 从 `EMConversation` 或 `EMPushManager` 查询会话级推送设置 | 群组对象不再作为会话推送设置的数据来源。 |
-| 已移除的同步群组查询和管理 API | 使用保留的异步群组接口及回调 | 重新编译后按方法签名选择对应异步接口完成适配。 |
+---
 
-### 联系人、聊天室与推送
+## 三、数据同步机制（新）与被替代的拉取 API
 
-| 模块 | 4.x API 或配置 | 5.0.0 适配方式 |
-| --- | --- | --- |
-| 联系人 | 服务端好友列表查询接口 | 初始化前将 `EMOptions#setDataSyncType` 配置为包含 `CONTACTS`；同步完成后通过本地联系人接口读取。 |
-| 联系人 | 好友同步开始与结束事件 | 使用 `EMConnectionListener#onDataSyncStart` 和 `onDataSyncFinish`，并判断数据类型是否为 `CONTACTS`。 |
-| 联系人 | 添加好友、处理好友申请和黑名单管理等同步接口 | 使用同名或对应的异步接口及回调；本地黑名单通过 `EMContactManager#getBlackListUsernames` 获取。 |
-| 聊天室 | 聊天室创建和销毁接口 | SDK 不再提供聊天室创建和销毁能力；由 App Server 或业务服务完成相应管理操作。 |
-| 推送 | 更新推送显示属性或查询服务端推送配置的接口 | Android v5 同时保留同步和异步接口。UI 场景建议使用异步接口及回调；调用同步接口时不要在主线程执行。 |
+### 3.1 新增 API
 
-### 统计
+| 所在类 | 新增 API | 用途 |
+|---|---|---|
+| `EMOptions` | `enum EMDataSyncType { NONE(0), CONVERSATIONS(1<<0), CONTACTS(1<<1), JOINED_GROUPS(1<<2) }` | 可组合的数据类型位 |
+| `EMOptions` | `setDataSyncType(EnumSet<EMDataSyncType>)` / `getDataSyncType()` | 配置登录后自动同步哪些数据 |
+| `EMConnectionListener` | `onDataSyncStart(EMDataSyncType type)` / `onDataSyncFinish(EMDataSyncType type, int errorCode)` | 统一的同步开始/结束回调 |
 
-Android SDK V5 仍保留消息流量统计配置，例如 `EMOptions#setEnableStatistics`。如应用已使用该能力，升级至 V5 后无需因统计配置进行迁移；请以当前 Android SDK 的公开 API 为准完成编译检查。
+**迁移要点（最容易踩的坑）**：`EMOptions` 的 `dataSyncType` **默认值为 `NONE`**（代码确认）——不显式配置时登录后不会自动同步任何数据，`getAllConversations()` / `getAllGroups()` / 本地联系人均可能为空。典型配置：
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-appkey");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS,
+        EMOptions.EMDataSyncType.JOINED_GROUPS));
+EMClient.getInstance().init(context, options);
+```
+
+### 3.2 被数据同步替代的"从服务器拉取"API
+
+原先"主动 fetch + 回调刷新"的写法，统一改为"**配置同步范围 → 登录后自动同步 → 读本地数据 → `onDataSyncFinish` 刷新 UI**"：
+
+| 所在类 | 删除的 API | 5.0 推荐方式 |
+|---|---|---|
+| `EMChatManager` | `fetchConversationsFromServer()` 及全部 4 个 `asyncFetchConversationsFromServer(...)` 重载 | `getAllConversations()` / `getAllConversationsBySort()`（本地）+ `onDataSyncFinish(CONVERSATIONS, ...)` |
+| `EMChatManager` | `asyncFetchPinnedConversationsFromServer(...)` | 置顶随会话同步落地，读本地会话置顶状态 |
+| `EMChatManager` | `asyncGetConversationsFromServerWithCursor(...)` | 本地查询 |
+| `EMGroupManager` | `getJoinedGroupsFromServer()` / `getJoinedGroupsFromServer(pageIndex, pageSize, ...)` 及两个 async 版本 | `getAllGroups()`（本地）+ `onDataSyncFinish(JOINED_GROUPS, ...)` |
+| `EMContactManager` | `getAllContactsFromServer()`、`asyncGetAllContactsFromServer(...)`、`asyncFetchAllContactsFromServer(...)`（含分页重载） | `getContactsFromLocal()` / `fetchContactFromLocal(String)` / `asyncFetchAllContactsFromLocal(...)` + `onDataSyncFinish(CONTACTS, ...)`。**5.0 已无任何从服务器拉取联系人列表的入口** |
+| `EMChatManager` | `loadAllConversations()` | 降为包私有；直接 `getAllConversations()` |
+| `EMGroupManager` | `loadAllGroups()` | 降为包私有；直接 `getAllGroups()` |
+| `EMOptions` | `setEnableAutoSyncContacts(boolean)` / `isEnableAutoSyncContacts()` | 并入 `setDataSyncType(...)` 的 `CONTACTS` 位 |
+
+配套地，`EMContactListener.onContactSyncStart()` / `onContactSyncFinishWithError(int, String)` 被删除，迁移到 `EMConnectionListener.onDataSyncStart/onDataSyncFinish(EMDataSyncType.CONTACTS, ...)`（见第八节）。
+
+---
+
+## 四、已读回执体系重构
+
+回执机制从"逐条 ack + 全局开关"升级为"**批量回执 + 未读数清理**"，旧 API 无兼容别名，属 break 式变更。
+
+### 4.1 发送回执 / 清除未读
+
+| 删除的 API | 5.0 替代 | 说明 |
+|---|---|---|
+| `EMChatManager.ackMessageRead(String to, String messageId)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)` | 批量发送，单聊群聊统一 |
+| `EMChatManager.ackGroupMessageRead(String to, String messageId, String ext)` | 同上 | **不再支持自定义 ack 扩展内容** |
+| `EMChatManager.ackConversationRead(String conversationId)` | `asyncClearConversationUnreadMessageCount(String, EMCallBack)` | ⚠️ 语义变化：仅本地清零未读 + 同步多设备，**不再向对方发已读回执**；如需告知对方，另调 `asyncSendMessageReadReceipts` |
+| `EMChatManager.markAllConversationsAsRead()` | `asyncClearAllConversationUnreadMessageCount(EMCallBack)` | 新增多设备同步 |
+| `EMConversation.markMessageAsRead(String)` / `markAllMessagesAsRead()` | `EMChatManager.asyncClearConversationUnreadMessageCount(...)` | 消息已读态由 SDK 内部管理 |
+| `EMConversation.getMessage(String, boolean markAsRead)` | `getMessage(String)` | 查询不再附带已读副作用 |
+| `EMOptions.setRequireAck(boolean)` / `getRequireAck()` | 无全局开关 | 发送前逐消息 `message.setIsNeedReadReceipt(true)` |
+
+`asyncSendMessageReadReceipts` 约束（javadoc 确认）：单批**须同一会话、最多 50 条**；消息的 `isNeedReadReceipt()` 需为 `true`；无需回执或已回执的消息自动跳过；按整个批次回调 `onSuccess/onError`；**不改变会话未读数**。
+
+### 4.2 接收回执
+
+| 4.x | 5.0 |
+|---|---|
+| `EMMessageListener.onMessageRead(List<EMMessage>)`（单聊） | 统一为 `onMessageReadReceipts(List<EMMessageReadReceipt>)` |
+| `EMMessageListener.onGroupMessageRead(List<EMGroupReadAck>)`（群聊） | 同上 |
+| `EMConversationListener.onConversationRead(String from, String to)` | 经 `onMessageReadReceipts` 下发；该接口现仅剩 `onConversationUpdate()` |
+| `EMMessageListener.onReadAckForGroupMessageUpdated()` | 改名 `onReadReceiptForGroupMessageUpdated()`（仅改名） |
+
+新数据类 `EMMessageReadReceipt`：`getMessageId()` / `getConversationId()` / `isPeerReceipt()`（单聊对方是否已发回执）/ `getReadCount()`（群聊已读人数）。
+
+### 4.3 回执详情查询
+
+| 4.x | 5.0 |
+|---|---|
+| `fetchGroupReadAcks(msgId, pageSize, startAckId)` / `asyncFetchGroupReadAcks(...)` | `asyncFetchGroupMessageReadReceipts(String msgId, int pageSize, String startAckId, EMValueCallBack<EMCursorResult<EMGroupReadReceipt>>)`（分页，pageSize 1–50） |
+| —（新增） | `asyncGetGroupMessageReadReceipts(List<EMMessage>, EMValueCallBack<List<EMMessageReadReceipt>>)`：批量取群消息已读详情，须同一会话、最多 20 条 |
+
+回执数据类替换：`EMGroupReadAck` → `EMGroupReadReceipt`。注意 **`getFrom()` 返回类型由 `String` 变为 `EMGroupMemberInfo`**，`getContent()` 移除（服务器不再下发 ack 扩展内容）；`getAckId()/getMsgId()/getCount()/getTimestamp()` 保留。
+
+### 4.4 `EMMessage` 已读相关方法重命名
+
+| 4.x（已删除） | 5.0 | 说明 |
+|---|---|---|
+| `isAcked()` / `setAcked(boolean)` | `isPeerRead()` / `setPeerRead(boolean)` | 对方是否已读；setter 包级可见 |
+| `isUnread()` / `setUnread(boolean)` | `isRead()` / `setRead(boolean)` | ⚠️ **语义取反**；setter 包级可见 |
+| `isNeedGroupAck()` / `setIsNeedGroupAck(boolean)` | `isNeedReadReceipt()` / `setIsNeedReadReceipt(boolean)` | 单聊群聊均生效，发送前设置 |
+| `groupAckCount()` / `setGroupAckCount(int)` | `readReceiptCount()` / `setReadReceiptCount(int)` | 群消息已读人数；setter 包级可见 |
+
+### 4.5 多设备事件
+
+`EMMultiDeviceListener` 新增常量：其他设备清除未读数时本端收到通知。
+
+- `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED = 65`（清除指定会话）
+- `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED = 66`（清除所有会话）
+
+---
+
+## 五、群组配置模型重构
+
+群可见性配置从单一 `style` 枚举拆为三个显式布尔字段，属**无兼容层**的源码不兼容重构。
+
+### 5.1 `EMGroupStyle` → 三布尔字段对照
+
+| 4.x `EMGroupManager.EMGroupStyle`（已删除） | 5.0 `EMGroupConfigs` 字段组合 |
+|---|---|
+| `EMGroupStylePrivateOnlyOwnerInvite` | `isPublic=false, allowInvites=false` |
+| `EMGroupStylePrivateMemberCanInvite` | `isPublic=false, allowInvites=true` |
+| `EMGroupStylePublicJoinNeedApproval` | `isPublic=true, joinApprovalRequired=true` |
+| `EMGroupStylePublicOpenJoin` | `isPublic=true, joinApprovalRequired=false` |
+
+### 5.2 `EMGroupOptions` → `EMGroupConfigs`
+
+| 4.x `EMGroupOptions`（类已删除） | 5.0 `EMGroupConfigs` |
+|---|---|
+| `EMGroupStyle style` | `boolean isPublic` / `joinApprovalRequired` / `allowInvites`（默认均 `false`） |
+| `int maxUsers = 200` | `int maxUsers = 200`（不变） |
+| `boolean inviteNeedConfirm` | 不变 |
+| `String extField` | 不变 |
+
+### 5.3 相关方法变化
+
+| 4.x | 5.0 |
+|---|---|
+| `createGroup(groupName, desc, allMembers, reason, EMGroupOptions)`（无头像重载） | 删除；仅保留 `createGroup(String groupName, String avatar, String desc, String[] allMembers, String reason, EMGroupConfigs configs)` / `asyncCreateGroup(...)` |
+| `EMGroup.isMemberOnly()` | `EMGroup.isJoinApprovalRequired()`（改名且语义收窄：仅表示公开群入群需审批） |
+| —（新增） | `updateGroupConfigs(String groupId, EnumSet<EMGroupConfigsType>, EMGroupConfigs)` / `asyncUpdateGroupConfigs(...)`：建群后按位更新指定属性，避免整体覆盖 |
+| —（新增） | `EMGroupManager.EMGroupConfigsType`：`IS_PUBLIC / JOIN_APPROVAL_REQUIRED / ALLOW_INVITES / MAX_USERS / INVITE_NEED_CONFIRM / EXT`（位掩码） |
+
+`EMGroup.isPublic()`、`isMemberAllowToInvite()` 签名不变（内部改为读取显式字段），调用方无需修改。
+
+---
+
+## 六、设备管理与鉴权
+
+随密码登录下线，"用户名+密码"鉴权接口一并移除，设备管理保留 token 版本：
+
+| 删除的 API | 替代 |
+|---|---|
+| `kickDevice(String username, String password, String resource)` | `kickDeviceWithToken(String username, String token, String resource)` |
+| `kickAllDevices(String username, String password)` | `kickAllDevicesWithToken(String username, String token)` |
+| `getLoggedInDevicesFromServer(String username, String password)` | 无替代 |
+| `getLoggedInDevicesFromServerWithToken(String, String)`（同步） | `fetchLoggedInDevicesFromServerWithToken(String, String, EMValueCallBack<List<EMDeviceInfo>>)`（异步） |
+
+---
+
+## 七、其他删除的 API
+
+### 7.1 无客户端替代（能力下沉服务端或直接下线）
+
+| 所在类 | 删除的 API | 建议 |
+|---|---|---|
+| `EMClient` | `createAccount(...)` | 服务端 REST 注册 |
+| `EMClient` | `statisticsManager()` 及 `EMStatisticsManager` 整个类（含 `EMMessageStatistics`、`EMSearchMessageDirect/Type`） | 统计需求业务侧自行采集 |
+| `EMChatManager` | `reportMessage(...)` / `asyncReportMessage(...)` | 举报提交到业务服务器 |
+| `EMChatManager` | `updateParticipant(String from, String changeTo)` | 历史遗留，删除调用 |
+| `EMGroupManager` | `getPublicGroupsFromServer(...)` / `asyncGetPublicGroupsFromServer(...)` | 服务端自建群目录 |
+| `EMGroupManager` | `asyncUploadGroupSharedFile(...)`（一个 async 重载） | 删除调用（同步 `uploadGroupSharedFile(groupId, filePath, callBack)` 保留） |
+| `EMChatRoomManager` | `createChatRoom(...)` / `asyncCreateChatRoom(...)` | 服务端 REST 创建聊天室 |
+| `EMChatRoomManager` | `destroyChatRoom(...)` / `asyncDestroyChatRoom(...)` | 服务端 REST 销毁 |
+| `EMChatRoomManager` | `getAllChatRooms()` | 聊天室非持久化资源，按需 `fetchChatRoomFromServer`，不要缓存全量 |
+| `EMOptions` | `getReportServer()` / `setReportServer(String)` | 删除配置；私有化需求走服务端 |
+
+### 7.2 有替代的调整
+
+| 4.x | 5.0 |
+|---|---|
+| `EMMessage.createTxtSendMessage(...)`（@Deprecated） | `createTextSendMessage(String content, String toChatUsername)` |
+| `EMMessage.getUserName()` | `getFrom()` |
+| `EMMessage.getRecaller()` | `EMRecallMessageInfo.getRecallBy()`（经 `onMessageRecalledWithExt` 下发） |
+| `EMChatManager.asyncModifyMessage(msgId, body, callBack)`（3 参） | `asyncModifyMessage(msgId, body, Map ext, callBack)`（4 参） |
+| `EMConversation.searchMsgFromDB(...)`（同步） | `asyncSearchMsgFromDB(...)`（异步） |
+| `EMChatManager.fetchHistoryMessages(...)` 两个同步重载、`asyncFetchHistoryMessage(...)` 旧重载 | 仅保留 `asyncFetchHistoryMessages(String conversationId, EMConversationType, int pageSize, String cursor, EMFetchMessageOption, EMValueCallBack<EMCursorResult<EMMessage>>)` |
+| `EMGroupManager.getGroupFromServer(String, boolean fetchMembers)` | `getGroupFromServer(String)`（成员用 `fetchGroupMembers` 分页） |
+| `EMChatRoomManager.fetchChatRoomFromServer(String, boolean fetchMembers)` | `fetchChatRoomFromServer(String)` |
+| `EMChatRoomManager.removeChatRoomListener(...)` | `removeChatRoomChangeListener(...)` |
+| `EMOptions.setAreaCode(int)` 及 `AreaCode` 的 `AREA_CODE_*` int 常量 | `setAreaCode(AreaCode)`，`AreaCode` 改为枚举 `CN(1)/NA(2)/EU(4)/AS(8)/JP(16)/IN(32)/GLOB(-1)`，取整型用 `AreaCode.CN.getValue()`；`getAreaCode()` 仍返回 `int` |
+
+### 7.3 主要新增 API（其他）
+
+- `EMChatManager.asyncDeleteConversations(List<String> conversationIds, boolean deleteMessages, EMCallBack)`：批量删除会话。
+- `EMConversation.getConversationName()` / `getConversationAvatar()`：会话显示名/头像（单聊为对方昵称头像、群聊为群名群头像；未同步时可能返回空字符串）。
+- `EMGroup.getUsers()`：群主+管理员+成员合并列表（不去重）。
+
+---
+
+## 八、监听器回调变化汇总
+
+⚠️ 删除的旧回调如果你的实现类**没写 `@Override`**，升级后不会报编译错误，但回调会静默丢失——务必逐个核对。
+
+| 接口 | 4.x（已删除） | 5.0 |
+|---|---|---|
+| `EMConnectionListener` | `onLogout(int)`、`onLogout(int, String)`（均 @Deprecated） | `onLogout(int errorCode, EMLoginExtensionInfo info)` |
+| `EMConnectionListener` | —（新增） | `onDataSyncStart(EMDataSyncType)` / `onDataSyncFinish(EMDataSyncType, int)` / `onDatabaseOpened(String)` |
+| `EMMessageListener` | `onMessageRecalled(List<EMMessage>)`（@Deprecated） | `onMessageRecalledWithExt(List<EMRecallMessageInfo>)` |
+| `EMMessageListener` | `onMessageRead(...)`、`onGroupMessageRead(...)` | `onMessageReadReceipts(List<EMMessageReadReceipt>)` |
+| `EMMessageListener` | `onReadAckForGroupMessageUpdated()` | `onReadReceiptForGroupMessageUpdated()` |
+| `EMConversationListener` | `onConversationRead(String, String)` | 仅剩 `onConversationUpdate()` |
+| `EMContactListener` | `onContactSyncStart()`、`onContactSyncFinishWithError(int, String)` | `EMConnectionListener.onDataSyncStart/onDataSyncFinish(EMDataSyncType.CONTACTS, ...)` |
+| `EMGroupChangeListener` | `onMemberJoined(String, String)`（@Deprecated） | `onMembersJoined(String, List<String>)` |
+| `EMGroupChangeListener` | `onMemberExited(String, String)`（@Deprecated） | `onMembersExited(String, List<String>)` |
+| `EMGroupChangeListener` | `onRequestToJoinDeclined(groupId, groupName, decliner, reason)`（@Deprecated） | `onRequestToJoinDeclined(..., String applicant)`（5 参） |
+| `EMChatRoomChangeListener` | `onMemberJoined(String roomId, String participant)`（@Deprecated） | `onMemberJoined(String roomId, String participant, String ext)` |
+| `EMChatRoomChangeListener` | `onMuteListAdded(String, List<String>, long expireTime)`（@Deprecated） | `onMuteListAdded(String, Map<String, Long> muteInfo)` |
+
+---
+
+## 九、行为变化（不报错但影响逻辑）
+
+1. **`getUnreadMessageCount()` 统计口径变化**：原来只排除聊天室；5.0 起**仅统计推送提醒类型为 `EMPushRemindType.ALL` 的会话**，免打扰会话不再计入总未读数。业务如需全量未读，自行遍历 `getAllConversations()` 累加各会话 `unreadMessagesCount()`。
+2. **清未读 ≠ 发回执**：`asyncClearConversationUnreadMessageCount` 只本地清零并同步多设备，不给对方发已读回执；4.x 的 `ackConversationRead` 会给对方发会话已读回执。需要"对方看到已读"的场景必须额外调 `asyncSendMessageReadReceipts`。
+3. **初始化不再自动登录**：`EMClient.init()` 后 SDK 处于未登录态，必须显式 `loginWithToken(...)`。
+4. **`EMConversation.getMessage(String)` 不再标记已读**（原 `getMessage(id, true)` 副作用取消）。
+5. **前后台检测实现更换**：由 `ActivityLifecycleCallbacks` 改为 `ProcessLifecycleOwner`（androidx.lifecycle），这是新增 `lifecycle-process` 依赖的原因。
+6. **`EMChatService` 保活逻辑删除**：`onDestroy` 中基于 `isLoggedInBefore()` 的自重启 Service 代码块移除。
+7. **推送 token 上传条件简化**：随自动登录移除，`EMPushHelper` 的上传条件简化为 `!isLoggedIn()`。
+8. 新增多设备事件 65/66（见 4.5），多端未读数一致性依赖该事件刷新 UI。
