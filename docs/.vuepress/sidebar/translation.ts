@@ -11,7 +11,7 @@ export const TRANSLATION_SIDEBAR = [
 { text: 'Windows', link: '/value-added/translation/message_translation_windows.html' },
 {
               text: "服务端",
-              collapsible: true,
+              collapsible: false,
               children: [
                 {
                   text: "翻译消息内容",
