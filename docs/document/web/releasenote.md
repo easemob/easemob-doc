@@ -45,7 +45,7 @@ v5.0.0 包含不兼容的 API 变更。从旧版 Web SDK 升级时，请参见 [
 #### 注意事项
 
 - 使用任何 Manager 能力前，必须先在初始化时通过 `managers` 注册，或在初始化后通过 `.use()` 注册对应 Manager。
-- Web SDK V5 使用 Token 登录。应用需通过自身 App Server 获取用户 Token，再调用 `client.login({ userId, token })` 登录。
+- Web SDK v5 使用 Token 登录。应用需通过自身 App Server 获取用户 Token，再调用 `client.login({ userId, token })` 登录。
 - 未显式传入 `enableSyncData` 时，SDK 默认登录后同步会话列表；如需同步联系人或群组，请显式配置 `enableSyncData` 并注册对应 Manager。
 - 如果使用固定服务地址的私有部署环境，并开启联系人或群组等同步能力，请同时配置 `serviceConfig.serverUrls` 中的同步服务地址。
 - 消息送达回执仅支持单聊；消息已读回执仅支持单聊和群聊，聊天室不支持消息送达回执和消息已读回执。

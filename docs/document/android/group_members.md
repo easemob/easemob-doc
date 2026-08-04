@@ -102,7 +102,7 @@ EMClient.getInstance()
 
 ### 从本地群组对象获取成员 ID
 
-此外，如已获取 `EMGroup` 对象，可调用 `EMGroup#getUsers()` 获取该对象中包含的全部成员用户 ID，包括群主、管理员和普通成员：
+如已获取 `EMGroup` 对象，可调用 `EMGroup#getUsers()` 获取该对象中包含的全部成员用户 ID，包括群主、管理员和普通成员：
 
 ```java
 List<String> userIds = group.getUsers();

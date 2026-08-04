@@ -7,11 +7,11 @@ Android IM SDK 5.0 是一次源代码不兼容的大版本升级，主要涉及�
 1. **数据同步机制调整**
    登录后，SDK 可自动同步会话、联系人和已加入的群组数据，并将数据保存到本地数据库，替代部分原先由应用主动调用的服务端拉取接口。
 2. **消息已读回执机制重构**
-   已读回执由逐条 ACK 调整为批量发送；清除本地未读数与向对方发送消息已读回执相互独立；单聊和群聊使用统一的回执模型与回调。
+   已读回执由逐条发送调整为批量发送；清除本地未读数与向消息发送方发送消息已读回执相互独立；单聊和群聊使用统一的回执模型与回调。
 3. **群组配置模型重构**
    `EMGroupStyle` 单一枚举拆分为 `isPublic`、`joinApprovalRequired` 和 `allowInvites` 三个布尔字段，并支持创建群组后按配置类型更新群组属性。
 4. **历史 API 精简**
-   移除长期标记为 `@Deprecated` 的接口及部分边缘能力。注册、举报和统计等功能需由业务服务或服务端 REST API 承担；密码登录接口下线，仅保留 Token 登录。
+   移除长期标记为废弃 `@Deprecated` 的接口及部分边缘能力。注册、举报和消息流量统计等功能需由业务服务或服务端 REST API 实现；密码登录接口下线，仅保留 Token 登录。
 
 :::tip
 **集成要求：** Android IM SDK 5.0 已全面迁移至 AndroidX。宿主 App 必须启用 AndroidX `android.useAndroidX=true`
@@ -37,7 +37,7 @@ Android SDK v5 仅保留 Token 登录方式。用户注册和 Token 获取等账
 
 | 删除的 API       | 替代方式   | 接口说明              |
 | :------------------- | :----- | :--------- |
-| `login(String id, String password, EMCallBack)`（4.x 已废弃） | `loginWithToken(String username, String token, EMCallBack)` | 使用用户名和密码登录。          |
+| `login(String id, String password, EMCallBack)`（4.x 已废弃） | `loginWithToken(String username, String token, EMCallBack)` | 使用用户 ID 和密码登录。          |
 | `loginWithAgoraToken(String, String, EMCallBack)`（4.x 已废弃） | `loginWithToken(String username, String token, EMCallBack)` | 使用 Agora Token 登录。         |
 | `renewToken(String newAgoraToken)`（4.x 已废弃）             | `renewToken(String newToken, EMCallBack)`                   | 使用新 Token 更新当前登录会话。 |
 | `getUserTokenFromServer(String, String, EMValueCallBack<String>)` | 无客户端替代，由 App Server 获取并下发 Token。              | 从 SDK 获取或请求用户 Token。   |
@@ -46,7 +46,7 @@ Android SDK v5 仅保留 Token 登录方式。用户注册和 Token 获取等账
 
 ### 登录与数据库打开解耦
 
-这是 Android v5 新增的能力。SDK 在本地数据库打开后即可读取本地数据，不必等待登录完成，有助于加快冷启动时的首屏展示。
+Android v5.0 新增本地数据库打开回调。SDK 在本地数据库打开后即可读取本地数据，不必等待登录完成，有助于加快冷启动时的首屏展示。
 
 - `EMConnectionListener#onDatabaseOpened(String username)`：本地数据库打开完成时触发。
 - `EMClient#isDatabaseOpened()`：查询当前本地数据库是否已就绪。
@@ -55,7 +55,7 @@ Android SDK v5 仅保留 Token 登录方式。用户注册和 Token 获取等账
 
 ### 数据同步 API
 
-Android v5 新增登录后自动数据同步机制。应用可在初始化时通过 `EMOptions#setDataSyncType` 指定需要同步的数据类型，并通过 `EMConnectionListener` 监听同步进度。同步完成后，应用应从本地接口读取数据。
+Android SDK v5.0.0 新增登录后自动数据同步机制。应用可在初始化时通过 `EMOptions#setDataSyncType` 指定需要同步的数据类型，并通过 `EMConnectionListener` 监听同步进度。同步完成后，应用应从本地接口读取数据。
 
 | 所属类     | API 或配置    | 接口说明       |
 | :------------------- | :----- | :-------------------------------------------- |
@@ -64,7 +64,7 @@ Android v5 新增登录后自动数据同步机制。应用可在初始化时通
 | `EMConnectionListener` | `onDataSyncStart(EMDataSyncType type)` / `onDataSyncFinish(EMDataSyncType type, int errorCode)` | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `EMError#EM_NO_ERROR` 时表示同步成功。 |
 
 :::tip
-`EMOptions#dataSyncType` 默认为 `NONE`。如果不显式配置，登录后不会自动同步会话、联系人或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地联系人查询接口可能返回空数据。 
+`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、联系人或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地联系人查询接口可能返回空数据。 
 :::
 
 典型配置如下：
@@ -98,17 +98,17 @@ EMClient.getInstance().init(context, options);
 
 ## 已读回执体系重构
 
-回执机制由逐条 ACK 和全局开关调整为 **批量回执与未读数清理**。旧 API 不提供兼容别名，属于不兼容变更。
+消息已读回执由逐条发送调整为批量发送；是否需要回执通过 `EMMessage#setIsNeedReadReceipt` 按消息设置；发送消息已读回执与清理会话未读数相互独立。旧 API 不提供兼容别名，属于不兼容变更。
 
 ### 发送消息已读回执与清除未读数
 
 | 删除的 API        | 5.0 替代      | 说明     |
 | :------------------- | :----- | :-------------------------------------------- |
 | `EMChatManager#ackMessageRead(String to, String messageId)`  | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)`  | 批量发送消息已读回执，单聊和群聊统一使用。                   |
-| `EMChatManager#ackGroupMessageRead(String to, String messageId, String ext)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)`  | 不再支持通过 `ext` 传递自定义 ACK 扩展内容。                 |
+| `EMChatManager#ackGroupMessageRead(String to, String messageId, String ext)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)`  | 不再为群聊提供单独的逐条已读回执接口，也不再支持通过 `ext` 传递自定义消息已读回执中携带的自定义内容。                 |
 | `EMChatManager#ackConversationRead(String conversationId)`   | `asyncClearConversationUnreadMessageCount(String, EMCallBack)` | 仅清除本地会话未读数并同步至当前用户的其他设备，不会向消息发送方发送已读回执。如需发送消息已读回执，需另行调用 `asyncSendMessageReadReceipts`。 |
 | `EMChatManager#markAllConversationsAsRead()`                 | `asyncClearAllConversationUnreadMessageCount(EMCallBack)`    | 清除所有会话的本地未读数，并同步至当前用户的其他设备。       |
-| `EMConversation#markMessageAsRead(String)` / `markAllMessagesAsRead()` | `EMChatManager#asyncClearConversationUnreadMessageCount(String, EMCallBack)` | 通过会话级接口清除本地未读数。消息已读态由 SDK 内部管理。   |
+| `EMConversation#markMessageAsRead(String)` / `markAllMessagesAsRead()` | `EMChatManager#asyncClearConversationUnreadMessageCount(String, EMCallBack)` | 通过会话级接口清除本地未读数。`EMConversation` 不再提供修改消息已读状态的接口。SDK 内部维护消息的 `isRead` 状态。   |
 | `EMConversation#getMessage(String, boolean markAsRead)`      | `getMessage(String)`                                         | 仅查询消息，不会自动将消息标记为已读。若需清除未读数，应单独调用未读数清除接口。 |
 | `EMOptions#setRequireAck(boolean)` / `getRequireAck()`       | 无全局配置                                                   | 发送消息前，通过 `EMMessage#setIsNeedReadReceipt(true)` 为需要回执的消息单独开启。 |
 
@@ -199,7 +199,7 @@ Android SDK v5 将群组的可见性、入群审批和成员邀请权限从 `EMG
 
 ## 设备管理与鉴权
 
-随密码登录下线，"用户名+密码"鉴权接口一并移除，设备管理保留 token 版本：
+随密码登录下线，"用户 ID + 密码"鉴权接口一并移除，设备管理保留 token 版本：
 
 | 4.x API        | 5.0 替代方式          | 接口说明                |
 | :---------------- | :----- | :------------- |
@@ -282,7 +282,7 @@ Android SDK v5 将群组的可见性、入群审批和成员邀请权限从 `EMG
    
 2. **清除未读数不会发送消息已读回执**
    
-   `EMChatManager#asyncClearConversationUnreadMessageCount` 只负责清除指定会话的本地未读数，并将清除结果同步至当前账号的其他设备，不会向消息发送方发送已读回执。  
+   `EMChatManager#asyncClearConversationUnreadMessageCount` 只清除指定会话的本地未读数，并将清除结果同步至当前账号的其他设备，不会向消息发送方发送已读回执。  
    如果业务需要通知对方消息已读，需额外调用 `EMChatManager#asyncSendMessageReadReceipts`。
    
 3. **初始化后不再自动登录**
