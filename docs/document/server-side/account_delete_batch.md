@@ -87,7 +87,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/users?limit=2'  \
 |  - `modified`  | Long   | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。       |
 |  - `username`  | String | 用户 ID。            |
 |  - `nickname`  | String | 推送消息时，在消息推送通知栏内显示的昵称。     |
-|  - `activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](user_account_unban.html)方法解除封禁。 |
+|  - `activated` | Bool   | 用户是否为正常状态：<br/> - `true`：用户为正常状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](account_unban.html)方法解除封禁。 |
 
 响应体中的其他参数说明如下表所示：
 

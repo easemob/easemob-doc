@@ -166,7 +166,7 @@ client.chatManager.addEventHandler('single-message-listener', {
 ```
 
 :::tip
-`sendMessageReadReceipts` 仅用于发送消息级已读回执，不会更新会话级已读位置，也不会直接清零本地会话未读数。如需清零会话未读数，请使用 [会话未读数清零](conversation_receipt.html)。
+`sendMessageReadReceipts` 仅用于发送消息级已读回执，不会更新会话级已读位置，也不会直接清零本地会话未读数。如需清零会话未读数，请使用 [会话未读数清零](conversation_unread.html)。
 :::
 
 #### 步骤 4：发送方收到已读回执后更新消息状态
@@ -319,7 +319,7 @@ details.forEach(item => {
 - 消息已读回执仅支持单聊和群聊，聊天室不支持。
 - `sendMessageReadReceipts` 的本地调用方不会收到 `onMessageReadReceipts`；该事件发送给消息发送方。
 - `sendMessageReadReceipts` 不会更新会话级已读位置，也不会直接清零本地会话未读数。
-- 若需要清零会话未读数，请调用 `clearConversationUnreadMessageCount` 或 `clearAllConversationUnreadMessageCount`，详见 [会话未读数清零](conversation_receipt.html)。
+- 若需要清零会话未读数，请调用 `clearConversationUnreadMessageCount` 或 `clearAllConversationUnreadMessageCount`，详见 [会话未读数清零](conversation_unread.html)。
 - `needReadReceipt` 主要用于群聊消息已读回执统计；单聊消息已读回执无需设置该参数，聊天室消息不支持已读回执。
 
 ## 消息已读回执与会话未读数关系

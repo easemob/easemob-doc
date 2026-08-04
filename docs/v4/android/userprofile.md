@@ -237,7 +237,7 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 - 调用 RESTful 接口设置用户昵称时，请求中必须使用 `nickname` 键名，否则客户端无法正确读取该属性。
 - RESTful API [获取用户详情](/document/server-side/account_detail_obtain_single.html) 和 [删除用户账户](/document/server-side/account_delete_single.html) 返回的 `nickname` 表示推送昵称，即离线推送通知中显示的昵称，与用户属性中的昵称不同。不过，建议两者保持一致；修改其中一个昵称时，也同步更新另一个昵称。
 
-例如，Android 侧可调用 [updatePushNickname](/v4/android/push/push_display.html#设置推送通知的显示属性) 更新推送昵称；RESTful API 可参考 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
+例如，Android 侧可调用 [updatePushNickname](/v4/android/push/push_display_attribute.html#设置推送通知的显示属性) 更新推送昵称；RESTful API 可参考 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
 
 ### 为什么会返回错误码 4？
 

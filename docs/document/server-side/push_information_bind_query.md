@@ -69,4 +69,4 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 
 ## 错误码
 
-如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](push.error.html) 了解可能的原因。
+如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考 [常见错误码](push_error.html) 了解可能的原因。

@@ -289,7 +289,7 @@ EMClient.getInstance()
 
 ### 获取群管理员列表
 
-通过 `EMGroup#getAdminList` 获取群组管理员列表。若需要最新数据，应先调用 [获取群组详情的方法 `asyncGetGroupFromServer`](group_attribute.html#获取群组详情) 刷新群详情。
+通过 `EMGroup#getAdminList` 获取群组管理员列表。若需要最新数据，应先调用 [获取群组详情的方法 `asyncGetGroupFromServer`](group_attributes.html#获取群组详情) 刷新群详情。
 
 ```java
 // 获取内存中管理员列表。

@@ -106,7 +106,7 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/XXXX?msgIdList=msgId1,msgId
 | `data.msgId`                   | String     | Reaction 对应的消息 ID。                                                                                |
 | `data.reactionList`            | JSON Array | 单条消息的 Reaction 列表。                                                                              |
 | `data.reactionList.reactionId` | String     | Reaction ID。                                                                                           |
-| `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[添加 Reaction API](message_reaction_add.html)的请求参数 `message` 相同。 |
+| `data.reactionList.reaction`   | String     | 表情 ID，与客户端一致。该参数与[添加 Reaction API](reaction_add.html)的请求参数 `message` 相同。 |
 | `data.reactionList.count`      | Int        | 添加该 Reaction 的用户人数。                                                                            |
 | `data.reactionList.state`      | Bool       | 当前请求用户是否添加过该 Reaction： <br/> - `true`: 是； <br/> - `false`：否。                          |
 | `data.reactionList.userList`   | Array      | 添加 Reaction 的用户 ID 列表。只返回最早操作 Reaction 的三个用户的 ID。                                 |

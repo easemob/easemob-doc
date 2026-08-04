@@ -194,7 +194,7 @@ SDK 会根据当前登录 Token 的过期时间管理 Token 生命周期：
 - 当 Token 即将过期时，SDK 触发 `onTokenWillExpire`。该事件通常在 Token 生命周期达到约 80% 时触发。
 - 当 Token 已过期时，SDK 触发 `onTokenExpired`，并断开当前连接。
 
-收到 `onTokenWillExpire` 后，建议业务层从应用服务器获取新的 IM Token，并调用 `renewToken` 续期。`renewToken` 仅在 SDK 已连接时可调用。若 Token 已过期并触发 `onTokenExpired`，需要重新获取 Token 后调用 `login` 登录 SDK。详见 [Token 续期](2_login.html#token-续期)。
+收到 `onTokenWillExpire` 后，建议业务层从应用服务器获取新的 IM Token，并调用 `renewToken` 续期。`renewToken` 仅在 SDK 已连接时可调用。若 Token 已过期并触发 `onTokenExpired`，需要重新获取 Token 后调用 `login` 登录 SDK。详见 [Token 续期](login.html#token-续期)。
 
 ### 离线消息同步
 

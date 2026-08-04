@@ -114,7 +114,7 @@ SDK 常用会话功能如下：
 | :--- | :--- | :--- |
 | 会话列表 | `refreshSessionList`、`getConversationList` | 从服务端刷新会话列表，或从本地缓存读取非空会话列表。详见 [会话列表](conversation_list.html)。 |
 | 当前会话 | `setCurrentConversation`、`resetCurrentConversation`、`getCurrentConversation` | 标识当前正在浏览的会话，用于控制在线消息到达时的本地未读数累加行为。 |
-| 会话未读数 | `clearConversationUnreadMessageCount`、`clearAllConversationUnreadMessageCount` | 清零单个或全部会话的未读数。详见 [会话未读数清零](conversation_receipt.html)。 |
+| 会话未读数 | `clearConversationUnreadMessageCount`、`clearAllConversationUnreadMessageCount` | 清零单个或全部会话的未读数。详见 [会话未读数清零](conversation_unread.html)。 |
 | 会话删除 | `deleteConversation`、`clearAllMessagesAndConversations` | 删除指定会话，或清空当前用户的所有会话和服务端漫游消息。详见 [删除会话](conversation_delete.html)。 |
 | 会话置顶 | `setConversationPinned` | 设置或取消设置会话置顶。详见 [置顶会话](conversation_pin.html)。 |
 | 会话标记 | `addConversationMark`、`removeConversationMark` | 为单个或多个会话添加或移除标记。详见 [会话标记](conversation_mark.html)。 |
