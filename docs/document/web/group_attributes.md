@@ -316,7 +316,7 @@ await client.groupManager.getGroup('groupId').deleteSharedFile({
 | [`refresh`](#获取群组详情) | `Group` | 强制从服务端刷新当前群组详情。 |
 | [`getGroupInfo`](#获取群组详情) | `GroupManager` | 按群组 ID 从服务端获取单个群组详情。 |
 | [`getGroupInfoList`](#获取群组详情) | `GroupManager` | 批量获取多个群组详情。 |
-| [`createGroup`](#创建群组) | `GroupManager` | 创建群组。 |
+| [`createGroup`](group_manage.html#创建群组) | `GroupManager` | 创建群组。 |
 | [`updateInfo`](#修改群组信息) | `Group` | 修改群组名称、描述、头像和扩展信息等基础资料。 |
 | [`updateGroupInfo`](#修改群组信息) | `GroupManager` | 按群组 ID 直接修改群组基础资料或群组配置。 |
 | [`getAnnouncement`](#获取群公告) | `Group` | 获取当前群组公告。 |

@@ -170,7 +170,7 @@ EMClient.shared().chatManager?.send(
 
 初始化 SDK 时，可以通过 `EMOptions#isAutoTransferMessageAttachments` 设置是否由 SDK 自动上传或下载消息附件。对于图片和视频缩略图以及语音消息，可以通过 `EMOptions#autoDownloadThumbnail` 控制是否自动下载。
 
-消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
 ### 发送图片消息
 
@@ -1110,7 +1110,7 @@ NSDictionary<NSString *, NSString *> *
 
 各类消息正文、扩展字段和附件的大小及存储期限受产品限制。发送消息前，应确保消息内容和附件大小未超过相应限制。
 
-具体限制详见 [消息限制说明](limitation.html#消息大小)。
+具体限制详见 [消息限制说明](/product/limitation.html#消息大小)。
 
 #### 发消息时设置回调路由
 

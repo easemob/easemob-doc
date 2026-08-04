@@ -135,6 +135,6 @@ client.addEventHandler('group-at-message', {
 
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`createTextMessage`](#发送群组-@-消息) | `ChatManager` | 创建文本消息，并通过 `ext.em_at_list` 设置群组 @ 信息。 |
-| [`sendMessage`](#发送群组--消息) | `ChatManager` | 发送携带群组 @ 信息的群聊消息。 |
-| [`addEventHandler`](#接收群组-@-消息) | `ChatClient` | 注册消息接收监听器，并从消息扩展字段中解析群组 @ 信息。 |
+| [`createTextMessage`](#发送群组-消息) | `ChatManager` | 创建文本消息，并通过 `ext.em_at_list` 设置群组 @ 信息。 |
+| [`sendMessage`](#发送群组-消息) | `ChatManager` | 发送携带群组 @ 信息的群聊消息。 |
+| [`addEventHandler`](#接收群组-消息) | `ChatClient` | 注册消息接收监听器，并从消息扩展字段中解析群组 @ 信息。 |

@@ -275,7 +275,7 @@ client.addEventHandler('thread-multi-device-events', {
 | [`destroyChatThread`](#解散消息话题)                         | `ChatThreadManager` | 解散消息话题。                                   |
 | [`joinChatThread`](#加入消息话题)                            | `ChatThreadManager` | 加入消息话题。                                   |
 | [`leaveChatThread`](#退出消息话题)                           | `ChatThreadManager` | 主动退出消息话题。                               |
-| [`removeChatThreadMember`](#消息话题成员被移出消息话题)      | `ChatThreadManager` | 将指定成员移出消息话题。                         |
+| [`removeChatThreadMember`](#移出成员)      | `ChatThreadManager` | 将指定成员移出消息话题。                         |
 | [`updateChatThreadName`](#修改消息话题名称)                  | `ChatThreadManager` | 修改消息话题名称。                               |
 | [`getChatThreadInfo`](#获取消息话题详情)                     | `ChatThreadManager` | 获取消息话题详情。                               |
 | [`getChatThreadMemberList`](#获取消息话题成员列表)           | `ChatThreadManager` | 分页获取消息话题成员列表。                       |

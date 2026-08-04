@@ -150,7 +150,7 @@ await client.chatManager.sendMessage(message);
 - 视频消息发送后，通常以视频首帧作为缩略图。
 - 不同附件类型在创建消息时，除通用会话参数外，还需传入各自特有的业务参数，例如图片宽高、语音时长、视频时长、文件名等。
 
-消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
 ### 发送图片消息
 
@@ -963,7 +963,7 @@ await client.chatManager.sendMessage(message, {
 
 #### 消息大小和存储限制
 
-各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
+各类消息的大小和存储限制，详见 [消息限制说明](/product/limitation.html#消息大小)。
 
 #### 发消息时设置回调路由
 
@@ -1038,15 +1038,15 @@ await client.chatManager.sendMessage(message);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#监听消息相关事件) | `ChatClient` | 注册事件监听。 |
+| [`addEventHandler`](message_receive.html#监听消息事件) | `ChatClient` | 注册事件监听。 |
 | [`createTextMessage`](#发送文本消息) | `ChatManager` | 创建文本消息。 |
 | [`createImageMessage`](#发送图片消息) | `ChatManager` | 创建图片消息，GIF 也通过该 API 创建。 |
 | [`createVoiceMessage`](#发送语音消息) | `ChatManager` | 创建语音消息。 |
 | [`createVideoMessage`](#发送视频消息) | `ChatManager` | 创建视频消息。 |
 | [`createFileMessage`](#发送文件消息) | `ChatManager` | 创建文件消息。 |
 | [`createLocationMessage`](#发送位置消息) | `ChatManager` | 创建位置消息。 |
-| [`createCmdMessage`](#发送命令消息) | `ChatManager` | 创建命令消息。 |
+| [`createCmdMessage`](#发送透传消息) | `ChatManager` | 创建命令消息。 |
 | [`createCustomMessage`](#发送自定义类型消息) | `ChatManager` | 创建自定义消息。 |
 | [`createCombineMessage`](#发送合并消息) | `ChatManager` | 创建合并消息。 |
-| [`downloadAndParseCombineMessage`](#解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |
+| [`downloadAndParseCombineMessage`](#接收端解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |
 | [`sendMessage`](#发送过程回调) | `ChatManager` | 发送已创建的消息，并支持发送过程回调。 |

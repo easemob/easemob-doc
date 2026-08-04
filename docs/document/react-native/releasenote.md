@@ -81,15 +81,15 @@
 - 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [根据关键字从本地数据库中获取会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
 - 更新 [根据搜索范围搜索当前会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
 - [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 
 **群组相关**
 
-- 支持 [创建群组时设置群头像](group_attributes.html#管理群组头像)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
+- 支持 [创建群组时设置群头像](group_manage.html#创建群组)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
 - 支持 [修改群组头像](group_attributes.html#修改群头像)。
-- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [获取群成员列表](group_members.html#获取群成员列表) 时包括成员角色和入群时间。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
 
@@ -283,8 +283,8 @@
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
-- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法 [从服务器分页获取会话列表](conversation_list.html#获取会话列表)。
-- 新增[置顶服务器会话的功能](conversation_list.html#获取服务端的置顶会话列表)：
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法 [从服务器分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
+- 新增[置顶服务器会话的功能](conversation_pin.html#获取服务端的置顶会话列表)：
   - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
   - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
 - 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
@@ -342,7 +342,7 @@
 - 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
 - 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
 - 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
-- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除指定时间段的本地消息)。
+- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除本地单个会话在指定时间段的消息)。
 - 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
 - 新增 `ChatConnectEventListener.onAppActiveNumberReachLimit` 事件，在应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时触发该事件。
 - 新增日志回调接口 `handler`。

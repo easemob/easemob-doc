@@ -361,16 +361,16 @@ await client.groupManager.getGroup('groupId').unmuteAllMembers();
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`inviteUsersToGroup`](#邀请用户入群) | `GroupManager` | 邀请一个或多个用户加入群组。 |
-| [`acceptInvitation`](#邀请用户入群) | `GroupManager` | 当前用户接受收到的群组邀请。 |
-| [`rejectInvitation`](#邀请用户入群) | `GroupManager` | 当前用户拒绝收到的群组邀请。 |
-| [`joinGroup`](#用户申请入群) | `GroupManager` | 申请加入或直接加入指定群组。 |
-| [`acceptGroupJoinRequest`](#用户申请入群) | `GroupManager` | 群主或管理员同意用户的入群申请。 |
-| [`rejectGroupJoinRequest`](#用户申请入群) | `GroupManager` | 群主或管理员拒绝用户的入群申请。 |
+| [`inviteUsersToGroup`](group_manage.html#邀请用户入群) | `GroupManager` | 邀请一个或多个用户加入群组。 |
+| [`acceptInvitation`](group_manage.html#邀请用户入群) | `GroupManager` | 当前用户接受收到的群组邀请。 |
+| [`rejectInvitation`](group_manage.html#邀请用户入群) | `GroupManager` | 当前用户拒绝收到的群组邀请。 |
+| [`joinGroup`](group_manage.html#用户申请入群) | `GroupManager` | 申请加入或直接加入指定群组。 |
+| [`acceptGroupJoinRequest`](group_manage.html#用户申请入群) | `GroupManager` | 群主或管理员同意用户的入群申请。 |
+| [`rejectGroupJoinRequest`](group_manage.html#用户申请入群) | `GroupManager` | 群主或管理员拒绝用户的入群申请。 |
 | [`getGroup`](#获取群成员列表) | `GroupManager` | 获取绑定指定群组 ID 的 `Group` 单群对象。 |
 | [`getMembers`](#获取群成员列表) | `Group` | 通过 `Group` 单群对象分页获取群成员列表。 |
-| [`leave`](#主动退出) | `Group` | 当前登录用户主动退出群组。 |
-| [`removeMembers`](#移出成员) | `Group` | 通过 `Group` 单群对象移除一个或多个群成员。 |
+| [`leave`](group_manage.html#主动退出) | `Group` | 当前登录用户主动退出群组。 |
+| [`removeMembers`](group_manage.html#移出成员) | `Group` | 通过 `Group` 单群对象移除一个或多个群成员。 |
 | [`setMemberAttributes`](#设置群成员的自定义属性) | `Group` | 通过 `Group` 单群对象设置群成员属性。 |
 | [`getMembersAttributes`](#获取群成员的自定义属性) | `Group` | 通过 `Group` 单群对象批量获取群成员属性。 |
 | [`changeOwner`](#变更群主) | `Group` | 通过 `Group` 单群对象转让群主。 |

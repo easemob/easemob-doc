@@ -424,7 +424,7 @@ EMClient.shared().groupManager?.unmuteAllMembers(fromGroup: "groupId") { _, erro
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`fetchGroupMemberInfoListFromServerWithGroupId`](#分页获取群成员信息) | `IEMGroupManager` | 获取成员详细信息 |
-| [`getGroupMemberListFromServerWithId`](##分页获取群成员-id) | `IEMGroupManager` | 获取成员 ID 列表 |
+| [`getGroupMemberListFromServerWithId`](#分页获取群成员-id) | `IEMGroupManager` | 获取成员 ID 列表 |
 | [`setMemberAttribute`](#设置群成员的自定义属性) | `IEMGroupManager` | 设置成员属性 |
 | [`fetchMemberAttribute`](#获取单个群成员的自定义属性) | `IEMGroupManager` | 获取单个成员属性 |
 | [`fetchMembersAttributes`](#根据属性-key-获取群成员自定义属性) | `IEMGroupManager` | 批量获取成员属性 |

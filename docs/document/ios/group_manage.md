@@ -635,7 +635,7 @@ EMClient.shared().groupManager?.removeDelegate(groupEventListener)
 | [`approveJoinGroupRequest`](#用户申请入群) / [`declineJoinGroupRequest`](#用户申请入群) | `IEMGroupManager` | 同意或拒绝入群申请。 |
 | [`leaveGroup`](#主动退出) | `IEMGroupManager` | 主动退出群组。 |
 | [`removeMembers`](#移出成员) | `IEMGroupManager` | 将一个或多个成员移出群组。 |
-| [`dataSyncType`](#获取当前用户已加入的群组列表) | `EMOptions` | 配置登录后自动同步已加入群组数据。 |
+| [`dataSyncType`](#获取当前用户加入的群组列表) | `EMOptions` | 配置登录后自动同步已加入群组数据。 |
 | [`syncDataFinished`](#获取当前用户加入的群组列表) | `EMClientDelegate` | 监听已加入群组数据同步结束。 |
 | [`getJoinedGroups`](#获取当前用户加入的群组列表) | `IEMGroupManager` | 从本地读取当前用户已加入的群组列表。 |
 | [`getJoinedGroupsCountFromServerWithCompletion`](#查询当前用户已加入的群组数量) | `IEMGroupManager` | 从服务器获取当前用户已加入的群组数量。 |

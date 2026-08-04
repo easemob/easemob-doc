@@ -280,8 +280,8 @@ await client.chatManager.sendMessage(newMessage);
 | [`createVideoMessage`](message_send.html#发送视频消息) | `ChatManager` | 创建转发后的视频消息。 |
 | [`createFileMessage`](message_send.html#发送文件消息) | `ChatManager` | 创建转发后的文件消息。 |
 | [`createLocationMessage`](message_send.html#发送位置消息) | `ChatManager` | 创建转发后的位置消息。 |
-| [`createCmdMessage`](message_send.html#发送命令消息) | `ChatManager` | 创建转发后的命令消息。 |
+| [`createCmdMessage`](message_send.html#发送透传消息) | `ChatManager` | 创建转发后的命令消息。 |
 | [`createCustomMessage`](message_send.html#发送自定义类型消息) | `ChatManager` | 创建转发后的自定义消息。 |
 | [`createCombineMessage`](message_send.html#发送合并消息) | `ChatManager` | 创建转发后的合并消息。 |
-| [`downloadAndParseCombineMessage`](message_send.html#解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始子消息列表。 |
+| [`downloadAndParseCombineMessage`](message_send.html#接收端解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始子消息列表。 |
 | [`sendMessage`](message_send.html#发送过程回调) | `ChatManager` | 发送转发消息。 |

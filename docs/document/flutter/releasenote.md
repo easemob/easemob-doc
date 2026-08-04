@@ -59,7 +59,7 @@
 - 依赖的原生 `SDK` 升级:
   - `iOS` 升级至 4.16.2
   - `Android` 升级至 4.16.1
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
 - 支持私有部署时设置 IPv6 格式的 REST 地址。
 
 #### 优化
@@ -210,7 +210,7 @@
 - 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/document/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
 - 新增 [EMPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/document/flutter/push/push_easemob_console.html#绑定推送信息)。
 - 新增 `EMConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
-- 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取一定时间内本地会话的消息)。
 - 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
   - 新增 `LoginExtensionInfo` 类接收用户设备扩展信息。
   - 新增 `EMOptions.loginExtension` 设置登录时携带的扩展信息。

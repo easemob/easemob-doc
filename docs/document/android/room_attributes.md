@@ -387,8 +387,8 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer
 | [`asyncChangeChatroomDescription`](#修改聊天室描述) | `EMChatRoomManager` | 异步修改聊天室描述。 |
 | [`asyncFetchChatroomAttributesFromServer`](#获取聊天室指定自定义属性) | `EMChatRoomManager` | 获取指定自定义属性。 |
 | [`asyncFetchChatRoomAllAttributesFromServer`](#获取聊天室所有自定义属性) | `EMChatRoomManager` | 获取全部自定义属性。 |
-| [`asyncSetChatroomAttribute`](#设置更新单个聊天室属性) | `EMChatRoomManager` | 设置或更新单个自定义属性。 |
-| [`asyncSetChatroomAttributes`](#设置更新多个聊天室自定义属性) | `EMChatRoomManager` | 设置或更新多个自定义属性。 |
+| [`asyncSetChatroomAttribute`](#设置单个聊天室属性) | `EMChatRoomManager` | 设置或更新单个自定义属性。 |
+| [`asyncSetChatroomAttributes`](#设置多个聊天室自定义属性) | `EMChatRoomManager` | 设置或更新多个自定义属性。 |
 | [`asyncRemoveChatRoomAttributeFromServer`](#删除单个聊天室自定义属性) | `EMChatRoomManager` | 删除单个自定义属性。 |
 | [`asyncRemoveChatRoomAttributesFromServer`](#删除多个聊天室自定义属性) | `EMChatRoomManager` | 删除多个自定义属性。 |
 

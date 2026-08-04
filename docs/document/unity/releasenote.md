@@ -24,7 +24,7 @@
 - 支持 [从本地获取指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
 - 支持 [根据关键字从本地数据库中获取会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。<br/>
   新增群成员进出事件 [OnMembersJoinedFromGroup](group_manage.html#监听群组事件) 和 [OnMembersExitedFromGroup](group_manage.html#监听群组事件)。已废弃原事件 `OnMemberJoinedFromGroup` 和 `OnMemberExitedFromGroup`，请使用新事件代替。 
 

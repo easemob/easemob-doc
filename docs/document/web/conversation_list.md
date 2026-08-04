@@ -49,7 +49,7 @@ const client = ChatClient.init({
 
 SDK 返回的会话列表已按照会话列表排序规则排序：置顶会话优先展示；非置顶会话通常按照会话更新时间或最新一条消息时间倒序排列。
 
-对于每个终端用户，服务端默认存储 100 条会话。超过该限制后，新会话会覆盖旧会话。若会话中的历史消息均已过期，该会话可能变成 [空会话](conversation_overview.html#空会话)。调用 `refreshSessionList` 时，默认不返回空会话；如需返回空会话，可将 `includeEmpty` 设置为 `true`。
+对于每个终端用户，服务端默认存储 100 条会话。超过该限制后，新会话会覆盖旧会话。若会话中的历史消息均已过期，该会话可能变成 [空会话](conversation_overview.html#会话列表与空会话)。调用 `refreshSessionList` 时，默认不返回空会话；如需返回空会话，可将 `includeEmpty` 设置为 `true`。
 
 :::tip
 1. **若使用该功能，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)。只有开通该功能，你才能使用置顶会话和会话标记功能。**
@@ -202,7 +202,7 @@ client.removeEventHandler('conversation-listener');
 | 场景 | 说明 | 推荐做法 |
 | :--- | :--- | :--- |
 | 会话列表更新 | `getConversationList` 从 SDK 本地会话列表缓存中读取当前已有的非空会话，不发起网络请求。收发消息、会话同步、置顶、标记、删除会话、清零未读数等操作可能更新本地会话列表，并触发 `onConversationListUpdate`。 | 1. 登录后可通过自动同步或调用 `refreshSessionList` 从服务端获取最新会话列表，并更新本地缓存。<br/>2. 展示会话列表时，建议监听 `onConversationListUpdate`，使用事件中的 `items` 刷新 UI。<br/>3. 如需主动读取当前本地非空会话列表，可调用 `getConversationList`。 |
-| 会话展示信息 | `ConversationItem` 提供会话列表展示所需的基础字段，例如 `conversationName`、`conversationAvatar`、`lastMessage` 和 `unreadCount`，但不等同于完整用户属性或完整群组详情。 | 1. 会话列表可优先使用 `ConversationItem` 中的展示字段渲染。<br/>2. 如需展示更完整的用户资料或群组信息，可按需调用 [用户属性接口](userprofile.html#从服务端获取用户的所有属性) 或 [群组详情接口](group_manage.html#获取群组详情信息)。 |
+| 会话展示信息 | `ConversationItem` 提供会话列表展示所需的基础字段，例如 `conversationName`、`conversationAvatar`、`lastMessage` 和 `unreadCount`，但不等同于完整用户属性或完整群组详情。 | 1. 会话列表可优先使用 `ConversationItem` 中的展示字段渲染。<br/>2. 如需展示更完整的用户资料或群组信息，可按需调用 [用户属性接口](userprofile.html#从服务端获取用户的所有属性) 或 [群组详情接口](group_attributes.html#获取群组详情)。 |
 
 ## 接口列表
 

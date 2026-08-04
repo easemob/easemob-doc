@@ -154,7 +154,7 @@ EMClient.getInstance()
 
 #### 资源处理说明
 
-默认情况下，调用 `EMChatManager#sendMessage` 后，SDK 会自动将本地附件上传至环信服务器；接收方也可由 SDK 自动下载附件。你可以通过 `EMOptions#setAutoTransferMessageAttachments` 控制附件是否由 SDK 自动传输。消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+默认情况下，调用 `EMChatManager#sendMessage` 后，SDK 会自动将本地附件上传至环信服务器；接收方也可由 SDK 自动下载附件。你可以通过 `EMOptions#setAutoTransferMessageAttachments` 控制附件是否由 SDK 自动传输。消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
 ### 发送图片消息
 
@@ -778,7 +778,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 #### 消息大小和存储限制
 
-各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
+各类消息的大小和存储限制，详见 [消息限制说明](/product/limitation.html#消息大小)。
 
 #### 发消息时设置回调路由
 

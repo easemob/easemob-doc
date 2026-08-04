@@ -160,7 +160,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 **特殊说明**
 
 - **当前用户**：当前用户的属性变更，通过 `UserInfoListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
-- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `ContactListener#onContactInfoUpdate(contact: Contact)` 事件。此事件为好友关系特有，与 `UserInfoListener#onUserInfoUpdate` 区分。
+- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#获取好友列表和好友信息)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `ContactListener#onContactInfoUpdate(contact: Contact)` 事件。此事件为好友关系特有，与 `UserInfoListener#onUserInfoUpdate` 区分。
 
 ## 相关功能
 

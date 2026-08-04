@@ -315,8 +315,8 @@ client.chatRoomManager.removeEventHandler('chatroom-member-events');
 | :--- | :--- | :--- |
 | [`getChatRoom`](#获取聊天室成员列表) | `ChatRoomManager` | 获取绑定指定聊天室 ID 的 `ChatRoom` 单聊天室对象。 |
 | [`getMembers`](#获取聊天室成员列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象分页获取聊天室成员列表。 |
-| [`leaveChatRoom`](#当前用户主动退出聊天室) | `ChatRoom` | 当前登录用户主动退出聊天室。 |
-| [`removeMembers`](#移除聊天室成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象移除一个或多个聊天室成员。 |
+| [`leaveChatRoom`](room_manage.html#主动退出) | `ChatRoom` | 当前登录用户主动退出聊天室。 |
+| [`removeMembers`](room_manage.html#移出成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象移除一个或多个聊天室成员。 |
 | [`addAdmin`](#添加聊天室管理员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象添加聊天室管理员。 |
 | [`removeAdmin`](#移除聊天室管理员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象移除聊天室管理员。 |
 | [`getAdminList`](#获取聊天室管理员列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室管理员列表。 |

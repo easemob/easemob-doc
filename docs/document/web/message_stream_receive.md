@@ -25,7 +25,7 @@
 - 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：Web SDK 仅支持接收，不支持发送。
 - 消息标识：`message.msgServerId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#使用限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 

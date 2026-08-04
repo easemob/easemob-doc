@@ -168,5 +168,5 @@ EMClient.getInstance().init(mContext, options);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`setNativeLibBasePath`](#方法三动态加载-so-库文件) | `EMOptions` | 设置 SDK 原生动态库所在的应用私有目录。 |
-| [`init`](#方法三动态加载-so-库文件) | `EMClient` | 使用指定配置初始化 Android SDK，并加载所需动态库。 |
+| [`setNativeLibBasePath`](#方法三-动态加载-so-库文件) | `EMOptions` | 设置 SDK 原生动态库所在的应用私有目录。 |
+| [`init`](#方法三-动态加载-so-库文件) | `EMClient` | 使用指定配置初始化 Android SDK，并加载所需动态库。 |

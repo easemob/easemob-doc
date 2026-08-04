@@ -36,7 +36,7 @@ message.receiverList = @[@"A", @"B"];
 }];
 ```
 
-接收定向消息与接收普通消息的操作相同，详见 [接收文本消息](message_extension.html#接收文本消息)。
+接收定向消息与接收普通消息的操作相同，详见 [接收文本消息](message_receive.html#接收文本消息)。
 
 ## 接口列表
 

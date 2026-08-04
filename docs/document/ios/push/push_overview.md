@@ -103,4 +103,4 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](/document/ios/quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 若使用[推送高级功能](#离线推送高级功能)，需在[环信即时通讯控制台](https://console.easemob.com/user/login)上激活。
+- 若使用[推送高级功能](#推送高级功能)，需在[环信即时通讯控制台](https://console.easemob.com/user/login)上激活。

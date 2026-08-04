@@ -25,7 +25,7 @@
 - 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：iOS SDK 仅支持接收，不支持发送。
 - 消息标识：`msgId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#使用限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 
@@ -209,7 +209,7 @@ UI 使用建议如下：
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
 
 ## 常见问题
 

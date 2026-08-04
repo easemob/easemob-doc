@@ -223,8 +223,8 @@ android {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`init`](#1-sdk-初始化) | `EMClient` | 初始化 Android SDK。 |
-| [`setAppKey`](#1-sdk-初始化) | `EMOptions` | 设置应用的 App Key。 |
-| [`loginWithToken`](#3-登录账号) | `EMClient` | 使用用户 ID 和 Token 登录。 |
-| [`createTextSendMessage`](#4-发送一条单聊消息) | `EMMessage` | 创建文本消息。 |
-| [`sendMessage`](#4-发送一条单聊消息) | `EMChatManager` | 发送消息。 |
+| [`init`](#_1-sdk-初始化) | `EMClient` | 初始化 Android SDK。 |
+| [`setAppKey`](#_1-sdk-初始化) | `EMOptions` | 设置应用的 App Key。 |
+| [`loginWithToken`](#_3-登录账号) | `EMClient` | 使用用户 ID 和 Token 登录。 |
+| [`createTextSendMessage`](#_4-发送一条单聊消息) | `EMMessage` | 创建文本消息。 |
+| [`sendMessage`](#_4-发送一条单聊消息) | `EMChatManager` | 发送消息。 |

@@ -52,14 +52,14 @@ options.dnsURL = @"xxxx";//设置服务器端配置的 URL 地址
 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
-| [`optionsWithAppkey`](#静态配置-ip-地址域名) | `EMOptions` | 创建 SDK 配置对象。 |
-| [`enableDnsConfig`](#静态配置-ip-地址域名) | `EMOptions (PrivateDeploy)` | 控制是否使用 DNS 配置；设为 `NO` 时使用静态服务器地址。 |
-| [`chatServer`](#方式一tcp-连接) | `EMOptions (PrivateDeploy)` | 设置 TCP Chat 服务器地址。 |
-| [`chatPort`](#方式一tcp-连接) | `EMOptions (PrivateDeploy)` | 设置 TCP Chat 服务器端口。 |
-| [`restServer`](#静态配置-ip-地址域名) | `EMOptions (PrivateDeploy)` | 设置 REST 服务器地址。 |
-| [`webSocketServer`](#方式二websocket-连接) | `EMOptions (PrivateDeploy)` | 设置 WebSocket 服务器地址。 |
-| [`webSocketPort`](#方式二websocket-连接) | `EMOptions (PrivateDeploy)` | 设置 WebSocket 服务器端口。 |
-| [`enableTLSConnection`](#静态配置-ip-地址域名) | `EMOptions (PrivateDeploy)` | 为 Chat 或 WebSocket 连接启用 TLS。 |
-| [`usingHttpsOnly`](#静态配置-ip-地址域名) | `EMOptions` | 仅使用 HTTPS 协议。 |
+| [`optionsWithAppkey`](#静态配置-ip-地址-域名) | `EMOptions` | 创建 SDK 配置对象。 |
+| [`enableDnsConfig`](#静态配置-ip-地址-域名) | `EMOptions (PrivateDeploy)` | 控制是否使用 DNS 配置；设为 `NO` 时使用静态服务器地址。 |
+| [`chatServer`](#方式一-tcp-连接) | `EMOptions (PrivateDeploy)` | 设置 TCP Chat 服务器地址。 |
+| [`chatPort`](#方式一-tcp-连接) | `EMOptions (PrivateDeploy)` | 设置 TCP Chat 服务器端口。 |
+| [`restServer`](#静态配置-ip-地址-域名) | `EMOptions (PrivateDeploy)` | 设置 REST 服务器地址。 |
+| [`webSocketServer`](#方式二-websocket-连接) | `EMOptions (PrivateDeploy)` | 设置 WebSocket 服务器地址。 |
+| [`webSocketPort`](#方式二-websocket-连接) | `EMOptions (PrivateDeploy)` | 设置 WebSocket 服务器端口。 |
+| [`enableTLSConnection`](#静态配置-ip-地址-域名) | `EMOptions (PrivateDeploy)` | 为 Chat 或 WebSocket 连接启用 TLS。 |
+| [`usingHttpsOnly`](#静态配置-ip-地址-域名) | `EMOptions` | 仅使用 HTTPS 协议。 |
 | [`dnsURL`](#动态配置地址) | `EMOptions (PrivateDeploy)` | 设置服务器端 DNS 地址表的 URL。 |
-| [`initializeSDKWithOptions`](#静态配置-ip-地址域名) | `EMClient` | 使用上述配置初始化 SDK。 |
+| [`initializeSDKWithOptions`](#静态配置-ip-地址-域名) | `EMClient` | 使用上述配置初始化 SDK。 |

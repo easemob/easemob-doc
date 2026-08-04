@@ -85,7 +85,7 @@ SDK 提供两类会话列表读取方式：
 
 调用 `refreshSessionList` 时，默认不返回空会话；如需返回空会话，可将 `includeEmpty` 设置为 `true`。登录后自动同步会话列表时，也可以通过 `syncConversationListConfig.includeEmpty` 配置是否同步空会话。
 
-此外，也可以对空会话进行 [置顶](conversation_pin.html) 或 [添加标记](conversation_mark.html#标记会话)。
+此外，也可以对空会话进行 [置顶](conversation_pin.html) 或 [添加标记](conversation_mark.html#会话标记)。
 
 :::tip
 `getConversationList` 从本地会话列表缓存中读取非空会话，不返回空会话。如需获取空会话，请使用 `refreshSessionList({ includeEmpty: true })` 的返回结果。

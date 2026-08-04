@@ -68,8 +68,6 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 | `data` | JSON | 设置的群成员自定义属性。 |
 | `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
 
-其他字段及描述详见 [公共参数](overview.html#公共参数)。
-
 ## 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：

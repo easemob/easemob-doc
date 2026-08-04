@@ -161,6 +161,6 @@ end
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [initializeSDKWithOptions:](#3-初始化-sdk) | EMClient | 使用 EMOptions 初始化 SDK。 |
-| [loginWithUsername:token:completion:](#5-登录账号) | EMClient | 使用用户 ID 与 Token 异步登录。 |
-| [sendMessage:progress:completion:](#6-发送消息) | IEMChatManager | 异步发送消息。 |
+| [initializeSDKWithOptions:](#_3-初始化-sdk) | EMClient | 使用 EMOptions 初始化 SDK。 |
+| [loginWithUsername:token:completion:](#_5-登录账号) | EMClient | 使用用户 ID 与 Token 异步登录。 |
+| [sendMessage:progress:completion:](#_6-发送消息) | IEMChatManager | 异步发送消息。 |

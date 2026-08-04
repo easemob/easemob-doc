@@ -72,7 +72,7 @@
 
 ### 回调时机
 
-普通群成员通过 [客户端邀请用户入群](/document/android/group_members.html#邀请用户入群)，用户成功入群。
+普通群成员通过 [客户端邀请用户入群](/document/android/group_manage.html#邀请用户入群)，用户成功入群。
 
 **聊天室无此事件。**
 
@@ -123,7 +123,7 @@
 
 ### 回调时机
 
-用户 [通过客户端申请方式成功加入群组](/document/android/group_members.html#用户申请入群)/[聊天室](/document/android/room_manage.html#加入聊天室)。
+用户 [通过客户端申请方式成功加入群组](/document/android/group_manage.html#用户申请入群)/[聊天室](/document/android/room_manage.html#加入聊天室)。
 
 ### 回调请求
 

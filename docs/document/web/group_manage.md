@@ -70,7 +70,7 @@ console.log(result.groupId);
 | `ext` | String | 否 | 群组扩展信息。 |
 | `avatar` | String | 否 | 群头像地址或标识。 |
 
-群组创建成功后，`createGroup` 方法会返回新群组的 `groupId`。用户加入群组通常有两种方式：[主动申请加入](group_members.html#用户申请入群) 和 [邀请加入](group_members.html#邀请用户入群)。
+群组创建成功后，`createGroup` 方法会返回新群组的 `groupId`。用户加入群组通常有两种方式：[主动申请加入](#用户申请入群) 和 [邀请加入](#邀请用户入群)。
 
 ## 解散群组
 

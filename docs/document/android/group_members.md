@@ -642,8 +642,8 @@ EMClient.getInstance()
 | [`getNamecard`](#分页获取群成员信息) / [`getNickname`](#分页获取群成员信息) / [`getAvatarUrl`](#分页获取群成员信息) | `EMGroupMemberInfo` | 获取成员群名片、昵称和头像。 |
 | [`getUsers`](#从本地群组对象获取成员-id) | `EMGroup` | 获取群组对象中包含的群主、管理员和普通成员的用户 ID 列表。 |
 | [`asyncSetGroupMemberAttributes`](#设置群成员的自定义属性) | `EMGroupManager` | 设置群成员自定义属性。 |
-| [`asyncFetchGroupMemberAllAttributes`](#获取群成员的自定义属性) | `EMGroupManager` | 获取单个群成员的全部自定义属性。 |
-| [`asyncFetchGroupMembersAttributes`](#获取群成员的自定义属性) | `EMGroupManager` | 获取多个群成员的指定或全部自定义属性。 |
+| [`asyncFetchGroupMemberAllAttributes`](#获取单个群成员的自定义属性) | `EMGroupManager` | 获取单个群成员的全部自定义属性。 |
+| [`asyncFetchGroupMembersAttributes`](#获取单个群成员的自定义属性) | `EMGroupManager` | 获取多个群成员的指定或全部自定义属性。 |
 | [`asyncChangeOwner`](#变更群主) | `EMGroupManager` | 转让群主权限。 |
 | [`asyncAddGroupAdmin`](#添加群管理员) / [`asyncRemoveGroupAdmin`](#移除群管理员) | `EMGroupManager` | 添加或移除群管理员。 |
 | [`asyncGetGroupFromServer`](#获取群管理员列表) | `EMGroupManager` | 从服务器获取最新群详情。 |
