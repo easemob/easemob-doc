@@ -1,6 +1,6 @@
 # 设置推送翻译
 
-如果用户启用 [自动翻译](/document/web/message_translation.html) 功能并发送消息，SDK 可以在消息中携带原始内容和翻译结果。
+如果用户启用 [自动翻译](/value-added/translation/message_translation_web.html) 功能并发送消息，SDK 可以在消息中携带原始内容和翻译结果。
 
 推送通知可与消息翻译功能协同工作。作为接收方，你可以通过 `client.pushManager.setPushLanguage` 设置离线推送通知的首选语言。如果翻译消息的语言与接收方设置的首选语言匹配，推送通知中将展示翻译后的内容；否则，将展示原始消息内容。
 
