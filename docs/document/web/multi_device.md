@@ -184,4 +184,3 @@ const client = ChatClient.init({
 | ------------------------------------------------------------ | ------------ | ------------------------------------------------------------ |
 | [`ChatClient.init`](#设置登录设备的平台)                     | `ChatClient` | 初始化 SDK，并配置多端登录相关参数，例如 `useFixedDeviceId`、`deviceId`、`customOSPlatform`、`customDeviceName` 和 `loginExtensionInfo`。 |
 | [`getSelfIdsOnOtherPlatform`](#获取当前用户的其他登录设备的登录-id-列表) | `ChatClient` | 获取当前用户在其他已登录设备上的 `userId/resource` 列表，当前设备会被自动过滤。 |
-| [`addEventHandler`](#监听多设备事件)                         | `ChatClient` | 注册多设备事件监听。                                         |

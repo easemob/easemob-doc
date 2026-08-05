@@ -333,5 +333,3 @@ client.chatRoomManager.removeEventHandler('chatroom-member-events');
 | [`getMuteList`](#获取禁言列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室禁言列表。 |
 | [`muteAllMembers`](#开启全员禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象开启全员禁言。 |
 | [`unmuteAllMembers`](#关闭全员禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象关闭全员禁言。 |
-| [`addEventHandler`](#监听聊天室成员事件) | `ChatRoomManager` | 注册聊天室成员相关事件监听器。 |
-| [`removeEventHandler`](#监听聊天室成员事件) | `ChatRoomManager` | 移除聊天室成员相关事件监听器。 |

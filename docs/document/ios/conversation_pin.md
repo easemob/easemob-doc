@@ -239,14 +239,8 @@ let sortedConversations =
 | :--- | :--- | :--- |
 | [`pinConversation`](#设置或取消置顶会话) | `IEMChatManager` | 设置或取消指定会话的置顶状态。 |
 | [`getConversation`](#设置或取消置顶会话) | `IEMChatManager` | 获取指定类型的本地会话对象。 |
-| [`isPinned`](#设置或取消置顶会话) | `EMConversation` | 获取会话是否置顶。 |
 | [`pinnedTime`](#设置或取消置顶会话) | `EMConversation` | 获取会话置顶时间戳。 |
 | [`dataSyncType`](#获取置顶会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`initializeSDKWithOptions`](#获取置顶会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
-| [`syncDataFinished`](#获取置顶会话列表) | `EMClientDelegate` | 监听会话数据同步结束。 |
 | [`getAllConversations`](#获取置顶会话列表) | `IEMChatManager` | 获取本地会话数组，并按参数决定是否排序。 |
 | [`loadEmptyConversations`](#获取置顶会话列表) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
-| [`conversationListDidUpdate`](#监听本地会话列表更新) | `EMConversationDelegate` | 返回本地会话列表变化后的会话数组。 |
-| [`addConversation`](#监听本地会话列表更新) / [`removeConversation`](#监听本地会话列表更新) | `IEMChatManager` | 注册或移除本地会话列表更新代理。 |
-| [`multiDevicesConversationEvent`](#监听多设备会话置顶事件) | `EMMultiDevicesDelegate` | 监听其他设备的会话置顶和取消置顶事件。 |
-| [`addMultiDevicesDelegate`](#监听多设备会话置顶事件) / [`removeMultiDevicesDelegate`](#监听多设备会话置顶事件) | `EMClient` | 注册或移除多设备事件代理。 |

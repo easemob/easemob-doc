@@ -81,8 +81,6 @@ forwardMessage.chatType = EMChatTypeGroupChat;
 | :--- | :--- | :--- |
 | [`getMessageWithMessageId`](#转发单条消息) | `IEMChatManager` | 根据消息 ID 获取本地消息。 |
 | [`initWithConversationID`](#转发单条消息) | `EMChatMessage` | 创建与原消息类型相同的待发送消息。 |
-| [`body`](#转发单条消息) | `EMChatMessage` | 获取原消息的消息体。 |
 | [`ext`](#转发单条消息) | `EMChatMessage` | 获取原消息的扩展字段。 |
 | [`chatType`](#转发单条消息) | `EMChatMessage` | 设置新消息的会话类型。 |
-| [`isChatThreadMessage`](#转发单条消息) | `EMChatMessage` | 设置新消息是否为消息话题消息。 |
 | [`sendMessage`](#转发单条消息) | `IEMChatManager` | 发送转发消息。 |

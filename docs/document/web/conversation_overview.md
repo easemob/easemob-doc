@@ -172,4 +172,3 @@ SDK 通过 `client.chatManager.addEventHandler` 和 `client.addEventHandler` 提
 | [`pinMessage`](#会话功能列表) | `ChatManager` | 置顶会话内的指定消息。 |
 | [`unpinMessage`](#会话功能列表) | `ChatManager` | 取消置顶会话内的指定消息。 |
 | [`getPinnedMessageList`](#会话功能列表) | `ChatManager` | 获取指定会话中的置顶消息列表。 |
-| [`addEventHandler`](#会话事件) | `ChatClient`、`ChatManager` | 注册会话、会话列表及多设备相关事件监听。 |

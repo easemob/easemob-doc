@@ -636,11 +636,8 @@ EMClient.shared().groupManager?.removeDelegate(groupEventListener)
 | [`leaveGroup`](#主动退出) | `IEMGroupManager` | 主动退出群组。 |
 | [`removeMembers`](#移出成员) | `IEMGroupManager` | 将一个或多个成员移出群组。 |
 | [`dataSyncType`](#获取当前用户加入的群组列表) | `EMOptions` | 配置登录后自动同步已加入群组数据。 |
-| [`syncDataFinished`](#获取当前用户加入的群组列表) | `EMClientDelegate` | 监听已加入群组数据同步结束。 |
 | [`getJoinedGroups`](#获取当前用户加入的群组列表) | `IEMGroupManager` | 从本地读取当前用户已加入的群组列表。 |
 | [`getJoinedGroupsCountFromServerWithCompletion`](#查询当前用户已加入的群组数量) | `IEMGroupManager` | 从服务器获取当前用户已加入的群组数量。 |
 | [`blockGroup`](#屏蔽群消息) / [`unblockGroup`](#解除屏蔽群消息) | `IEMGroupManager` | 屏蔽或解除屏蔽群消息。 |
 | [`getGroupSpecificationFromServerWithId`](#检查当前用户是否已屏蔽群消息) | `IEMGroupManager` | 从服务器获取群详情。 |
 | [`isBlocked`](#检查当前用户是否已屏蔽群消息) | `EMGroup` | 判断当前用户是否已屏蔽指定群组消息。 |
-| [`addDelegate`](#监听群组事件) / [`removeDelegate`](#监听群组事件) | `IEMGroupManager` | 注册或移除群组事件代理。 |
-| [`groupInvitationDidReceive`](#监听群组事件) / [`didLeaveGroup`](#监听群组事件) | `EMGroupManagerDelegate` | 监听当前用户的群邀请和离群事件。 |

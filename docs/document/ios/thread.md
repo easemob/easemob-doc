@@ -282,5 +282,3 @@ EMThreadManagerDelegate
 | [`getJoinedChatThreadsFromServerWithCursor`](#获取消息话题列表) | `EMChatThreadManager` | 分页获取当前用户已加入或创建的消息话题。 |
 | [`getChatThreadsFromServerWithParentId`](#获取消息话题列表) | `EMChatThreadManager` | 分页获取指定群组的消息话题。 |
 | [`getLastMessageFromSeverWithChatThreads`](#批量获取消息话题中的最新消息) | `EMChatThreadManager` | 批量获取消息话题的最新一条消息。 |
-| [`addDelegate`](#监听消息话题事件) | `EMChatThreadManager` | 注册消息话题事件监听。 |
-| [`removeDelegate`](#监听消息话题事件) | `EMChatThreadManager` | 移除消息话题事件监听。 |

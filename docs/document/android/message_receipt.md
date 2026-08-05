@@ -318,24 +318,14 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`setRequireDeliveryAck`](#步骤-1-开启送达回执) | `EMOptions` | 设置是否需要单聊消息送达回执。 |
 | [`init`](#步骤-1-开启送达回执) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`onMessageDelivered`](#步骤-2-监听送达回执) | `EMMessageListener` | 监听单聊消息送达回执。 |
-| [`isDelivered`](#步骤-2-监听送达回执) | `EMMessage` | 查询单聊消息是否已送达。 |
-| [`addMessageListener`](#步骤-2-监听送达回执) / [`removeMessageListener`](#步骤-2-监听送达回执) | `EMChatManager` | 注册或移除消息事件监听器。 |
 | [`createTextSendMessage`](#步骤-1-设置消息需要已读回执) | `EMMessage` | 创建文本消息。 |
-| [`setChatType`](#步骤-1-设置消息需要已读回执) | `EMMessage` | 设置消息的会话类型。 |
-| [`setIsNeedReadReceipt`](#步骤-1-设置消息需要已读回执) | `EMMessage` | 设置消息是否需要已读回执。 |
 | [`sendMessage`](#步骤-1-设置消息需要已读回执) | `EMChatManager` | 发送消息。 |
 | [`asyncSendMessageReadReceipts`](#步骤-2-发送消息已读回执) | `EMChatManager` | 批量发送单聊或群聊消息的已读回执。 |
-| [`onMessageReadReceipts`](#步骤-3-监听消息已读回执) | `EMMessageListener` | 统一监听单聊和群聊消息已读回执。 |
-| [`onReadReceiptForGroupMessageUpdated`](#步骤-3-监听消息已读回执) | `EMMessageListener` | 监听群消息读取状态更新。 |
 | [`getMessageId`](#步骤-3-监听消息已读回执) / [`getConversationId`](#步骤-3-监听消息已读回执) | `EMMessageReadReceipt` | 获取回执对应的消息 ID 和会话 ID。 |
 | [`isPeerReceipt`](#步骤-3-监听消息已读回执) / [`getReadCount`](#步骤-3-监听消息已读回执) | `EMMessageReadReceipt` | 获取单聊对端回执状态或群消息已读人数。 |
 | [`asyncGetGroupMessageReadReceipts`](#批量获取多条群消息的回执汇总) | `EMChatManager` | 批量获取多条群消息的已读回执详情。 |
 | [`asyncFetchGroupMessageReadReceipts`](#获取单条群消息的回执成员详情) | `EMChatManager` | 分页获取单条群消息的已读回执成员详情。 |
 | [`getAckId`](#获取单条群消息的回执成员详情) / [`getMsgId`](#获取单条群消息的回执成员详情) / [`getFrom`](#获取单条群消息的回执成员详情) / [`getCount`](#获取单条群消息的回执成员详情) / [`getTimestamp`](#获取单条群消息的回执成员详情) | `EMGroupReadReceipt` | 获取群消息已读回执详情。 |
-| [`isPeerRead`](#查看消息送达和已读状态) | `EMMessage` | 查询单聊消息是否已被对端阅读。 |
 | [`readReceiptCount`](#查看消息送达和已读状态) | `EMMessage` | 查询群消息的已读人数。 |
-| [`isRead`](#查看消息送达和已读状态) | `EMMessage` | 查询消息在当前设备上的本地已读状态。 |
-| [`isNeedReadReceipt`](#查看消息送达和已读状态) | `EMMessage` | 查询消息是否需要已读回执。 |
 | [`asyncClearConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `EMChatManager` | 清除指定会话的本地未读消息数。 |
 | [`asyncClearAllConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `EMChatManager` | 清除所有本地会话的未读消息数。 |

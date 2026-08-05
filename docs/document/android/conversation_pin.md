@@ -232,16 +232,9 @@ sortedConversations.addAll(unpinnedConversations);
 | :--- | :--- | :--- |
 | [`asyncPinConversation`](#设置或取消置顶会话) | `EMChatManager` | 设置或取消指定会话的置顶状态。 |
 | [`getConversation`](#设置或取消置顶会话) | `EMChatManager` | 获取指定的本地会话对象。 |
-| [`isPinned`](#设置或取消置顶会话) | `EMConversation` | 获取会话是否置顶。 |
-| [`getPinnedTime`](#设置或取消置顶会话) | `EMConversation` | 获取会话置顶时间。 |
 | [`setAppKey`](#获取置顶会话列表) | `EMOptions` | 设置应用的 App Key。 |
 | [`setDataSyncType`](#获取置顶会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#获取置顶会话列表) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`onDataSyncFinish`](#获取置顶会话列表) | `EMConnectionListener` | 监听会话数据同步完成。 |
 | [`getAllConversationsBySort`](#获取置顶会话列表) | `EMChatManager` | 获取置顶优先排序的本地会话列表。 |
 | [`conversationId`](#获取置顶会话列表) / [`getType`](#获取置顶会话列表) | `EMConversation` | 获取会话 ID 和会话类型。 |
 | [`setLoadEmptyConversations`](#获取置顶会话列表) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
-| [`onConversationUpdate`](#监听本地会话列表更新) | `EMConversationListener` | 监听本地会话变化。 |
-| [`addConversationListener`](#监听本地会话列表更新) / [`removeConversationListener`](#监听本地会话列表更新) | `EMChatManager` | 注册或移除会话变化监听器。 |
-| [`onConversationEvent`](#监听多设备会话置顶事件) | `EMMultiDeviceListener` | 监听多设备会话操作。 |
-| [`addMultiDeviceListener`](#监听多设备会话置顶事件) / [`removeMultiDeviceListener`](#监听多设备会话置顶事件) | `EMClient` | 注册或移除多设备事件监听器。 |

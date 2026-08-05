@@ -342,6 +342,4 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | [`subscribeUsersInfo`](#订阅非好友用户属性变更事件)          | `EMUserInfoManager` | 订阅非好友用户的属性变更事件。         |
 | [`unsubscribeUsersInfo`](#取消订阅非好友用户属性变更事件)    | `EMUserInfoManager` | 取消订阅非好友用户的属性变更事件。     |
 | [`fetchSubscribedUsers`](#获取已被订阅用户属性变更事件的用户列表) | `EMUserInfoManager` | 获取已订阅用户属性变更事件的用户列表。 |
-| [`addUserInfoManagerListener`](#监听用户属性变更)           | `EMUserInfoManager` | 注册用户属性更新监听器。               |
-| [`removeUserInfoManagerListener`](#监听用户属性变更)        | `EMUserInfoManager` | 移除用户属性更新监听器。               |
 

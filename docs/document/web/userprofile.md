@@ -320,7 +320,5 @@ await client.chatManager.sendMessage(message);
 | [`subscribeUsersInfo`](#订阅非好友用户属性变更事件)          | `UserInfoManager` | 订阅非好友用户属性变更事件。               |
 | [`unsubscribeUsersInfo`](#取消订阅非好友用户属性变更事件)    | `UserInfoManager` | 取消订阅非好友用户属性变更事件。           |
 | [`getSubscribedUsers`](#获取已被订阅用户属性变更事件的用户列表) | `UserInfoManager` | 获取已订阅用户属性变更事件的用户列表。     |
-| [`addEventHandler`](#监听用户属性变更)                       | `UserInfoManager` | 监听当前用户和其他用户的属性更新事件。     |
-| [`addEventHandler`](#监听用户属性变更)                       | `ContactManager`  | 监听好友用户属性更新事件。                 |
 | [`createCustomMessage`](#名片消息)                           | `ChatManager`     | 创建自定义消息，用于封装名片消息内容。     |
 | [`sendMessage`](#名片消息)                                   | `ChatManager`     | 发送名片消息。                             |

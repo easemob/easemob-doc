@@ -271,7 +271,6 @@ await client.chatManager.sendMessage(newMessage);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`onMessage`](message_receive.html) | `ChatManager` 事件 | 接收消息事件。转发单条消息时，可直接使用该事件返回的原始消息对象。 |
 | [`getHistoryMessages`](message_retrieve.html) | `ChatManager` | 从服务器获取历史消息。转发单条消息时，可从返回结果中获取原始消息对象。 |
 | [`searchMessages`](message_retrieve.html) | `ChatManager` | 按关键词和过滤条件搜索历史消息。需要从搜索结果中选择原始消息时可使用该接口。 |
 | [`createTextMessage`](message_send.html#发送文本消息) | `ChatManager` | 创建转发后的文本消息。 |

@@ -698,4 +698,3 @@ EMClient.getInstance()
 | [`asyncGetGroupFromServer`](#检查当前用户是否已屏蔽群消息) | `EMGroupManager` | 从服务器获取群组详情。 |
 | [`isMsgBlocked`](#检查当前用户是否已屏蔽群消息) | `EMGroup` | 判断当前用户是否已屏蔽指定群组消息。 |
 | [`asyncBlockGroupMessage`](#屏蔽群消息) / [`asyncUnblockGroupMessage`](#解除屏蔽群消息) | `EMGroupManager` | 屏蔽或解除屏蔽群消息。 |
-| [`addGroupChangeListener`](#监听群组事件) / [`removeGroupChangeListener`](#监听群组事件) | `EMGroupManager` | 注册或移除群组事件监听器。 |

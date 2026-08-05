@@ -105,4 +105,3 @@ client.chatManager.addEventHandler('conversation-delete-listener', {
 | :--- | :--- | :--- |
 | [`deleteConversation`](#删除单个会话) | `ChatManager` | 删除当前用户侧的指定会话，并可选择是否同时删除该会话的服务端漫游消息。 |
 | [`clearAllMessagesAndConversations`](#清空全部会话和消息) | `ChatManager` | 清空当前用户侧的全部会话和服务端漫游消息。 |
-| [`addEventHandler`](#监听会话列表更新) | `ChatManager` | 注册会话列表更新监听器，用于在删除会话或清空全部会话后刷新 UI。 |

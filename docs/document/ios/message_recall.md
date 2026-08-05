@@ -109,11 +109,8 @@ NSString *recallExt = @"撤回了一条消息";
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`recallMessageWithMessageId`](#撤回消息) | `IEMChatManager` | 异步撤回一条已发送成功的消息，并可携带扩展字符串。 |
-| [`messagesInfoDidRecall`](#设置消息撤回监听) | `EMChatManagerDelegate` | 监听消息撤回事件及其扩展信息。 |
 | [`recallBy`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取撤回消息的用户 ID。 |
 | [`recallMessageId`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回消息的消息 ID。 |
 | [`ext`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取撤回时携带的扩展字符串。 |
 | [`conversationId`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回消息所属的会话 ID。 |
 | [`recallMessage`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回的消息对象；离线场景下可能返回 `nil`。 |
-| [`addDelegate`](#设置消息撤回监听) | `IEMChatManager` | 注册消息代理。 |
-| [`removeDelegate`](#设置消息撤回监听) | `IEMChatManager` | 移除消息代理。 |

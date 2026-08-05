@@ -161,16 +161,7 @@ List<EMMessage> messages = conversation.loadMoreMsgFromDB(startMsgId, pagesize, 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送消息话题中的消息) | `EMMessage` | 创建文本消息。 |
-| [`setChatType`](#发送消息话题中的消息) | `EMMessage` | 设置消息会话类型。 |
-| [`setIsChatThreadMessage`](#发送消息话题中的消息) | `EMMessage` | 将消息标记为消息话题中的消息。 |
-| [`setMessageStatusCallback`](#发送消息话题中的消息) | `EMMessage` | 设置消息发送状态回调。 |
 | [`sendMessage`](#发送消息话题中的消息) | `EMChatManager` | 发送消息话题中的消息。 |
-| [`isChatThreadMessage`](#接收消息话题中的消息) | `EMMessage` | 判断消息是否为消息话题中的消息。 |
-| [`addMessageListener`](#接收消息话题中的消息) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#接收消息话题中的消息) | `EMChatManager` | 移除消息监听器。 |
-| [`onMessageReceived`](#接收消息话题中的消息) | `EMMessageListener` | 接收消息话题中的消息。 |
-| [`onMessageRecalledWithExt`](#撤回消息话题中的消息) | `EMMessageListener` | 接收消息话题中的消息撤回事件。 |
-| [`isChatThread`](#获取消息话题中的消息) | `EMConversation` | 判断会话是否为消息话题会话。 |
 | [`asyncFetchHistoryMessages`](#从服务器获取单个消息话题的消息-消息漫游) | `EMChatManager` | 从服务器分页获取消息话题中的历史消息。 |
 | [`getConversation`](#从本地获取单个消息话题的消息) | `EMChatManager` | 获取本地消息话题会话。 |
 | [`getAllMessages`](#从本地获取单个消息话题的消息) | `EMConversation` | 获取会话中已加载到内存的消息。 |

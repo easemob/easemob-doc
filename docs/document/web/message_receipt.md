@@ -333,7 +333,6 @@ details.forEach(item => {
 | API | 所属模块或类 | 说明 |
 | --- | --- | --- |
 | [`ChatClient.init`](#步骤-1-接收方开启送达回执) | `ChatClient` | 初始化 SDK；接收方可通过 `enableDeliveryReceipt` 开启单聊送达回执自动回送能力。 |
-| [`addEventHandler`](#步骤-2-发送方监听送达回执) | `ChatManager` | 注册消息、送达回执和已读回执等事件监听器。 |
 | [`createTextMessage`](#步骤-1-发送需要已读回执的群聊消息) | `ChatManager` | 创建文本消息；可在群聊已读统计场景设置 `needReadReceipt: true`。 |
 | [`sendMessage`](#步骤-1-发送需要已读回执的群聊消息) | `ChatManager` | 发送消息。 |
 | [`sendMessageReadReceipts`](#步骤-3-群成员发送已读回执) | `ChatManager` | 批量发送单聊或群聊消息已读回执。 |

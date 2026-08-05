@@ -164,7 +164,6 @@ console.log(joinedGroups);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 SDK 单例实例。 |
-| [`addEventHandler`](#初始化后设置监听) | `ChatClient` | 注册连接、消息等事件监听。 |
 | [`getConversationList`](#登录后读取同步结果) | `ChatManager` | 从本地缓存读取当前会话列表。 |
 | [`getContacts`](#登录后读取同步结果) | `ContactManager` | 从本地快照读取当前好友列表视图。 |
 | [`getJoinedGroupList`](#登录后读取同步结果) | `GroupManager` | 从本地快照读取当前用户已加入的群组列表。 |

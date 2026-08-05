@@ -157,15 +157,7 @@ EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
 | [`asyncRemoveReaction`](#删除消息的-reaction) | `EMChatManager` | 异步删除消息 Reaction。 |
 | [`asyncGetReactionList`](#获取消息的-reaction-列表) | `EMChatManager` | 异步获取多条消息的 Reaction 概览。 |
 | [`asyncGetReactionDetail`](#获取-reaction-详情) | `EMChatManager` | 异步分页获取指定 Reaction 的详情。 |
-| [`getMessageReaction`](#获取消息的-reaction-列表) | `EMMessage` | 从消息对象获取 Reaction 列表。 |
-| [`onReactionChanged`](#在消息上添加-reaction) | `EMMessageListener` | 接收 Reaction 变更事件。 |
 | [`getConversionID`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取会话 ID。 |
 | [`getMessageId`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取消息 ID。 |
 | [`getMessageReactionList`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取消息 Reaction 列表。 |
 | [`getOperations`](#在消息上添加-reaction) | `EMMessageReactionChange` | 获取 Reaction 操作列表。 |
-| [`getUserId`](#在消息上添加-reaction) | `EMMessageReactionOperation` | 获取 Reaction 操作者 ID。 |
-| [`getOperation`](#在消息上添加-reaction) | `EMMessageReactionOperation` | 获取 Reaction 操作类型。 |
-| [`getReaction`](#获取-reaction-详情) | `EMMessageReaction` | 获取 Reaction 内容。 |
-| [`getUserCount`](#获取消息的-reaction-列表) | `EMMessageReaction` | 获取添加该 Reaction 的用户数量。 |
-| [`getUserList`](#获取消息的-reaction-列表) | `EMMessageReaction` | 获取 Reaction 用户列表。 |
-| [`isAddedBySelf`](#获取消息的-reaction-列表) | `EMMessageReaction` | 判断当前用户是否添加过该 Reaction。 |

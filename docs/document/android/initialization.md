@@ -195,8 +195,6 @@ List<EMGroup> joinedGroups =
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `EMClient` | 初始化 Android SDK 单例。 |
 | [`setDataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
-| [`addConnectionListener`](#初始化后设置监听) | `EMClient` | 注册连接状态及数据同步状态监听。 |
-| [`addMessageListener`](#初始化后设置监听) | `EMChatManager` | 注册消息监听。 |
 | [`getAllConversations`](#登录后读取同步结果) | `EMChatManager` | 读取本地会话列表。 |
 | [`getContactsFromLocal`](#登录后读取同步结果) | `EMContactManager` | 从本地数据库读取好友列表。 |
 | [`getAllGroups`](#登录后读取同步结果) | `EMGroupManager` | 读取本地群组列表。 |

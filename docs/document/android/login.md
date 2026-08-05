@@ -381,13 +381,8 @@ EMClient.getInstance()
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`loginWithToken`](#登录) | `EMClient` | 使用用户 ID 和 Token 登录。 |
-| [`onSuccess`](#登录) / [`onError`](#登录) | `EMCallBack` | 返回登录、Token 更新或退出登录的操作结果。 |
 | [`isDatabaseOpened`](#登录完成前使用本地数据库) | `EMClient` | 判断当前是否存在可用的本地数据库上下文。 |
-| [`addConnectionListener`](#登录完成前使用本地数据库) / [`removeConnectionListener`](#登录完成前使用本地数据库) | `EMClient` | 注册或移除连接状态监听器。 |
-| [`onDatabaseOpened`](#登录完成前使用本地数据库) | `EMConnectionListener` | 监听指定用户的本地数据库打开成功事件。 |
-| [`onConnected`](#登录完成前使用本地数据库) / [`onDisconnected`](#登录完成前使用本地数据库) | `EMConnectionListener` | 监听 SDK 与 IM 服务器的连接状态。 |
 | [`getAllConversationsBySort`](#登录完成前使用本地数据库) | `EMChatManager` | 获取置顶优先并按最后一条消息时间倒序排列的本地会话列表。 |
-| [`onTokenWillExpire`](#token-续期) / [`onTokenExpired`](#token-续期) | `EMConnectionListener` | 监听 Token 即将过期或已经过期事件。 |
 | [`renewToken`](#token-续期) | `EMClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUser`](#获取当前登录的用户) | `EMClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `EMClient` | 判断当前用户是否已登录。 |
@@ -399,8 +394,5 @@ EMClient.getInstance()
 | [`setLoginCustomExt`](#多设备登录) | `EMOptions` | 设置当前设备的登录扩展信息。 |
 | [`init`](#多设备登录) | `EMClient` | 使用指定配置初始化 Android SDK。 |
 | [`getOptions`](#多设备登录) | `EMClient` | 获取当前 SDK 的初始化配置。 |
-| [`onLogout`](#多设备登录) | `EMConnectionListener` | 监听 SDK 被动退出登录事件及退出原因。 |
-| [`getDeviceInfo`](#多设备登录) / [`getDeviceExt`](#多设备登录) | `EMLoginExtensionInfo` | 获取将当前设备踢下线的新设备名称及登录扩展信息。 |
 | [`asyncGetSelfIdsOnOtherPlatform`](#多设备登录) | `EMContactManager` | 异步获取当前账号在其他设备上的登录 ID。 |
 | [`getSelfIdsOnOtherPlatform`](#多设备登录) | `EMContactManager` | 同步获取当前账号在其他设备上的登录 ID。 |
-| [`onSuccess`](#多设备登录) / [`onError`](#多设备登录) | `EMValueCallBack` | 返回异步获取其他设备登录 ID 的结果。 |

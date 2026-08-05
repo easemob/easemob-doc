@@ -51,6 +51,4 @@ EMClient.getInstance()
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送定向消息) | `EMMessage` | 创建文本消息。 |
-| [`setChatType`](#发送定向消息) | `EMMessage` | 将消息的会话类型设置为群聊或聊天室。 |
-| [`setReceiverList`](#发送定向消息) | `EMMessage` | 设置定向消息的接收方列表。 |
 | [`sendMessage`](#发送定向消息) | `EMChatManager` | 发送定向消息。 |

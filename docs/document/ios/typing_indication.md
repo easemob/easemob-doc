@@ -113,6 +113,3 @@
 | :--- | :--- | :--- |
 | [`initWithAction`](#发送输入状态的透传消息) | `EMCmdMessageBody` | 创建表示输入状态的透传消息体。 |
 | [`sendMessage`](#发送输入状态的透传消息) | `EMChatManager` | 发送在线透传消息。 |
-| [`cmdMessagesDidReceive`](#接收和解析输入状态的透传消息) | `EMChatManagerDelegate` | 接收并解析输入状态透传消息。 |
-| [`addDelegate`](#接收和解析输入状态的透传消息) | `EMChatManager` | 注册透传消息监听。 |
-| [`removeDelegate`](#接收和解析输入状态的透传消息) | `EMChatManager` | 移除透传消息监听。 |

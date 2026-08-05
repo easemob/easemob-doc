@@ -191,7 +191,4 @@ extension ConversationListViewController: EMMultiDevicesDelegate {
 | [`unreadMessagesCount`](#获取指定会话的未读消息数) | `EMConversation` | 是 | 获取指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#将所有会话的未读消息数清零) | `IEMChatManager` | 是 | 清空全部本地会话的未读数，并同步当前账号其他设备。 |
 | [`clearConversationUnreadMessageCount`](#指定会话的未读消息数清零) | `IEMChatManager` | 是 | 清空指定会话的本地未读数，并同步当前账号其他设备。 |
-| [`addMultiDevicesDelegate`](#指定会话的未读消息数清零) / [`removeMultiDevicesDelegate`](#指定会话的未读消息数清零) | `EMClient` | 是 | 注册或移除多设备事件代理。 |
-| [`multiDevicesConversationEvent`](#指定会话的未读消息数清零) | `EMMultiDevicesDelegate` | 是 | 监听其他设备清除指定或全部会话未读数等会话事件。 |
 | [`sendMessageReadReceipts`](#单条消息的已读状态和已读回执) | `IEMChatManager` | 否 | 为同一单聊或群聊会话中的消息批量发送已读回执，最多 50 条。 |
-| [`onMessageReadReceipts`](#单条消息的已读状态和已读回执) | `EMChatManagerDelegate` | 否 | 接收单聊和群聊统一的消息已读回执列表。 |

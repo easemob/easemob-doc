@@ -210,5 +210,3 @@ client.removeEventHandler('conversation-listener');
 | :--- | :--- | :--- |
 | [`refreshSessionList`](#从服务端获取会话列表) | `ChatManager` | 从服务端获取最新会话列表，并更新本地会话列表缓存。 |
 | [`getConversationList`](#获取本地会话列表) | `ChatManager` | 从 SDK 本地会话列表缓存读取会话列表，并支持按置顶状态或会话标记筛选。 |
-| [`addEventHandler`](#监听会话列表相关事件) | `ChatClient` | 注册会话列表同步状态和本地会话列表更新相关事件监听。 |
-| [`removeEventHandler`](#监听会话列表相关事件) | `ChatClient` | 移除会话列表同步状态和本地会话列表更新相关事件监听。 |

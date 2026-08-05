@@ -120,8 +120,6 @@ EMConversation* conversation = [EMClient.sharedClient.chatManager getConversatio
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
 | [`sendMessage`](#发送消息话题中的消息) | `EMChatManager` | 发送带 `isChatThread` 标记的消息话题消息。 |
-| [`messagesDidReceive`](#接收消息话题中的消息) | `EMChatManagerDelegate` | 接收消息话题中的新消息。 |
-| [`messagesInfoDidRecall`](#撤回消息话题中的消息) | `EMChatManagerDelegate` | 接收消息话题消息的撤回通知。 |
 | [`fetchMessagesFromServerBy`](#从服务器获取单个消息话题中的消息-消息漫游) | `EMChatManager` | 分页从服务器获取指定消息话题的历史消息。 |
 | [`getConversation`](#从本地获取单个消息话题的消息) | `EMChatManager` | 获取本地消息话题会话。 |
 | [`loadMessagesStartFromId`](#从本地获取单个消息话题的消息) | `EMConversation` | 从本地会话加载消息话题消息。 |

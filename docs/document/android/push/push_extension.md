@@ -130,10 +130,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createSendMessage`](#设置自定义推送字段) | `EMMessage` | 创建指定类型的消息。 |
-| [`setTo`](#设置自定义推送字段) | `EMMessage` | 设置消息接收方。 |
-| [`setAttribute`](#设置自定义推送字段) | `EMMessage` | 设置自定义或内置消息扩展字段。 |
 | [`addBody`](#设置自定义推送字段) | `EMMessage` | 设置消息体。 |
-| [`setMessageStatusCallback`](#设置自定义推送字段) | `EMMessage` | 设置消息发送状态回调。 |
 | [`sendMessage`](#设置自定义推送字段) | `EMChatManager` | 发送消息。 |
 
 

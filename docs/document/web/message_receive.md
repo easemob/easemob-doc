@@ -622,6 +622,5 @@ client.chatManager.addEventHandler('chatroom-broadcast-listener', {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#监听消息事件) | `ChatManager` / `ChatClient` | 注册消息域或全局事件监听。 |
 | [`downloadAttachment`](#接收图片消息) | `ChatManager` | 下载图片、语音、视频、文件等附件消息的二进制数据。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |

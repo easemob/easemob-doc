@@ -132,10 +132,8 @@ if (conversation != null && deleteMsg != null) {
 | [`asyncDeleteAllMsgsAndConversations`](#单向清空聊天记录) | `EMChatManager` | 清空本地所有会话及消息，并按参数决定是否同时单向清除服务端数据。 |
 | [`getConversation`](#单向删除服务端的历史消息) | `EMChatManager` | 根据会话 ID 获取本地会话对象。 |
 | [`removeMessagesFromServer`](#单向删除服务端的历史消息) | `EMConversation` | 按时间戳或消息 ID 单向删除服务端历史消息。 |
-| [`onMessageRemoved`](#单向删除服务端的历史消息) | `EMMultiDeviceListener` | 监听其他设备发起的服务端历史消息删除事件。 |
 | [`clearAllMessages`](#删除本地指定会话的所有消息) | `EMConversation` | 删除指定会话在本地数据库和内存缓存中的所有消息。 |
 | [`removeMessages`](#删除本地会话指定时间段的消息) | `EMConversation` | 删除指定时间段内的本地消息。 |
 | [`removeMessage`](#删除本地会话的指定消息) | `EMConversation` | 从本地数据库和会话内存缓存中删除指定消息。 |
-| [`getMsgId`](#删除本地会话的指定消息) | `EMMessage` | 获取消息 ID。 |
 
 

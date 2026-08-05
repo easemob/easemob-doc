@@ -164,9 +164,7 @@ EMClient.shared().initializeSDK(with: options)
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| `addDelegate:delegateQueue:` | `EMGroupManager` | 注册或移除群组事件代理 |
 | `updateGroupNamecard:namecard:completion:` | `EMGroupManager` | 更新或删除自己的群名片 |
 | `getGroupNamecardWithGroupId:userId:` | `EMGroupManager` | 获取本地群名片 |
 | `fetchGroupMemberInfoListFromServerWithGroupId:cursor:limit:completion:` | `EMGroupManager` | 从服务端获取群成员信息 |
-| `onUserGroupNamecardChanged:userId:namecard:` | `EMGroupManagerDelegate` | 监听群名片变化 |
 | [`senderInfo`](#通过消息自动同步群成员名片) | `EMChatMessage` | 获取消息发送方信息 |

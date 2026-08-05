@@ -307,8 +307,6 @@ EMClient.getInstance()
 | [`setDeleteMessagesAsExitChatRoom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
 | [`setAutoLoadAllConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
 | [`init`](#登录后自动同步会话列表) | `EMClient` | 使用指定配置初始化 Android SDK。 |
-| [`addConnectionListener`](#监听会话列表同步状态) / [`removeConnectionListener`](#监听会话列表同步状态) | `EMClient` | 注册或移除连接及数据同步状态监听器。 |
-| [`onDataSyncStart`](#监听会话列表同步状态) / [`onDataSyncFinish`](#监听会话列表同步状态) | `EMConnectionListener` | 监听会话列表数据的同步状态。 |
 | [`asyncFilterConversationsFromDB`](#获取本地所有或筛选的会话) | `EMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `EMChatManager` | 获取置顶优先并按最后消息时间倒序排列的本地会话列表。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
@@ -321,7 +319,4 @@ EMClient.getInstance()
 | [`deleteConversationFromServer`](#会话列表数据更新场景) | `EMChatManager` | 删除服务端和本地的指定会话。 |
 | [`asyncClearConversationUnreadMessageCount`](#会话列表数据更新场景) | `EMChatManager` | 清空指定会话的未读消息数。 |
 | [`asyncClearAllConversationUnreadMessageCount`](#会话列表数据更新场景) | `EMChatManager` | 清空全部会话的未读消息数。 |
-| [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `EMChatManager` | 注册或移除会话更新监听器。 |
 | [`filter`](#获取本地所有或筛选的会话) | `EMCustomConversationFilter` | 判断会话是否保留在筛选结果中并加载到内存。 |
-| [`getUnreadMsgCount`](#降低会话占用内存的示例) | `EMConversation` | 获取单个会话的未读消息数。 |
-| [`onConversationUpdate`](#监听会话列表更新) | `EMConversationListener` | 监听本地会话列表变化。 |

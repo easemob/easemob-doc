@@ -280,8 +280,6 @@ EMClient.shared().chatManager?.removeConversation(delegate: listListener)
 | [`loadEmptyConversations`](#获取本地所有或筛选的会话) | `EMOptions` | 设置从本地加载会话时是否包含空会话。 |
 | [`deleteMessagesOnLeaveChatroom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
 | [`autoLoadConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录后是否自动将本地会话加载到内存。 |
-| [`addDelegate`](#监听会话列表同步状态) / [`removeDelegate`](#监听会话列表同步状态) | `EMClient` | 注册或移除数据同步状态代理。 |
-| [`syncDataStartWithType`](#监听会话列表同步状态) / [`syncDataFinished`](#监听会话列表同步状态) | `EMClientDelegate` | 监听会话列表自动同步的开始和结束。 |
 | [`filterConversationsFromDB`](#获取本地所有或筛选的会话) | `IEMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `IEMChatManager` | 获取本地会话数组，并按参数决定是否排序。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `IEMChatManager` | 获取未要求排序的本地会话数组。 |
@@ -292,4 +290,3 @@ EMClient.shared().chatManager?.removeConversation(delegate: listListener)
 | [`deleteServerConversation`](#会话列表数据更新场景) | `IEMChatManager` | 删除服务端和本地指定会话。 |
 | [`clearConversationUnreadMessageCount`](#会话列表数据更新场景) | `IEMChatManager` | 清空指定会话未读数并同步多设备状态。 |
 | [`clearAllConversationUnreadMessageCount`](#会话列表数据更新场景) | `IEMChatManager` | 清空全部会话未读数并同步多设备状态。 |
-| [`addConversation`](#监听会话列表更新) / [`removeConversation`](#监听会话列表更新) | `IEMChatManager` | 注册或移除会话列表更新代理。 |

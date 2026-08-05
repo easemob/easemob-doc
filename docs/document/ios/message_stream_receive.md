@@ -244,8 +244,5 @@ SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消�
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| `addDelegate:delegateQueue:` | `IEMChatManager` | 注册或移除消息事件代理 |
-| `onStreamMessagesReceived:` | `EMChatManagerDelegate` | 接收流式消息分片 |
 | [`streamChunk`](#核心概念) | `EMChatMessage` | 获取当前消息分片 |
 | [`status`](#核心概念) | `EMStreamChunk` | 获取流式消息状态与内容 |
-| [`text`](#核心概念) | `EMTextMessageBody` | 获取累计合并文本 |

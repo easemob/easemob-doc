@@ -212,7 +212,6 @@ console.log(otherDeviceIds);
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`login`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录 SDK。 |
-| [`addEventHandler`](#登录) | `ChatClient` | 注册登录态、断开连接或 Token 相关事件监听。 |
 | [`getConnectionState`](#获取当前登录状态和信息) | `ChatClient` | 获取当前连接状态。 |
 | [`getCurrentUserId`](#获取当前登录状态和信息) | `ChatClient` | 获取当前登录用户 ID。 |
 | [`getClientResource`](#获取当前登录状态和信息) | `ChatClient` | 获取当前连接的设备资源标识。 |

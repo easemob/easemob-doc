@@ -68,5 +68,4 @@ client.addEventHandler('recall', {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#设置消息撤回监听) | `ChatClient` | 注册事件监听。 |
 | [`recallMessage`](#撤回消息) | `ChatManager` | 撤回消息。 |

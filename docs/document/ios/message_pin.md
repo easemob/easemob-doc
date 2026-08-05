@@ -144,6 +144,3 @@ if (pinInfo) {
 | [`pinnedInfo`](#获取单条消息的置顶详情) | `EMChatMessage` | 获取单条消息的置顶详情；未置顶时返回 `nil`。 |
 | [`pinTime`](#获取单条消息的置顶详情) | `EMMessagePinInfo` | 获取最近一次置顶操作的时间。 |
 | [`operatorId`](#获取单条消息的置顶详情) | `EMMessagePinInfo` | 获取最近一次置顶操作的操作者用户 ID。 |
-| [`onMessagePinChanged`](#监听消息置顶事件) | `EMChatManagerDelegate` | 监听消息置顶或取消置顶事件。 |
-| [`addDelegate`](#监听消息置顶事件) | `IEMChatManager` | 注册消息代理。 |
-| [`removeDelegate`](#监听消息置顶事件) | `IEMChatManager` | 移除消息代理。 |

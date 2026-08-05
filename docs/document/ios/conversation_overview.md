@@ -282,13 +282,11 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | :--- | :--- | :--- |
 | [`conversationId`](#会话对象) / [`type`](#会话对象) | `EMConversation` | 获取会话 ID 和会话类型。 |
 | [`unreadMessagesCount`](#会话对象) / [`latestMessage`](#会话对象) | `EMConversation` | 获取会话未读数和最新一条消息。 |
-| [`isPinned`](#会话对象) / [`pinnedTime`](#会话对象) | `EMConversation` | 获取会话置顶状态和置顶时间。 |
 | [`marks`](#会话对象) / [`ext`](#会话对象) | `EMConversation` | 获取会话标记和本地扩展属性。 |
 | [`conversationName`](#会话对象) / [`conversationAvatar`](#会话对象) | `EMConversation` | 获取会话显示名称和头像。 |
 | [`getConversation`](#通过接口创建本地会话) | `IEMChatManager` | 查找本地会话，并可按参数在会话不存在时创建。 |
 | [`dataSyncType`](#通过服务端同步更新会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`initializeSDKWithOptions`](#通过服务端同步更新会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
-| [`syncDataStartWithType`](#通过服务端同步更新会话列表) / [`syncDataFinished`](#通过服务端同步更新会话列表) | `EMClientDelegate` | 监听会话数据自动同步的开始和结束。 |
 | [`getAllConversations`](#会话列表与空会话) / [`getAllConversations`](#会话列表与空会话) | `IEMChatManager` | 获取本地会话数组。 |
 | [`filterConversationsFromDB`](#会话列表与空会话) | `IEMChatManager` | 从本地数据库加载全部会话或筛选会话。 |
 | [`loadEmptyConversations`](#会话列表与空会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
@@ -302,7 +300,3 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | [`deleteMessageWithId`](#会话功能列表) / [`deleteAllMessages`](#会话功能列表) | `EMConversation` | 删除指定本地消息或清空会话的全部本地消息。 |
 | [`pinMessage`](#会话功能列表) / [`unpinMessage`](#会话功能列表) | `IEMChatManager` | 置顶或取消置顶会话中的消息。 |
 | [`getPinnedMessagesFromServer`](#会话功能列表) | `IEMChatManager` | 从服务器获取会话中的置顶消息。 |
-| [`conversationListDidUpdate`](#会话列表事件) | `EMConversationDelegate` | 返回本地会话列表变化后的会话数组。 |
-| [`addConversation`](#会话列表事件) / [`removeConversation`](#会话列表事件) | `IEMChatManager` | 注册或移除会话列表事件代理。 |
-| [`multiDevicesConversationEvent`](#多设备会话事件) | `EMMultiDevicesDelegate` | 监听当前账号其他设备执行的会话操作。 |
-| [`addMultiDevicesDelegate`](#多设备会话事件) / [`removeMultiDevicesDelegate`](#多设备会话事件) | `EMClient` | 注册或移除多设备事件代理。 |

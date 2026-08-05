@@ -237,11 +237,5 @@ EMClient.getInstance()
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送引用的消息) | `EMMessage` | 创建用于回复原消息的文本消息。 |
-| [`setChatType`](#发送引用的消息) | `EMMessage` | 设置回复消息的会话类型。 |
-| [`setAttribute`](#发送引用的消息) | `EMMessage` | 将引用摘要写入消息扩展字段。 |
 | [`sendMessage`](#发送引用的消息) | `EMChatManager` | 发送携带引用信息的消息。 |
 | [`ext`](#接收方解析收到的消息) | `EMMessage` | 获取消息的全部扩展字段。 |
-| [`getJSONObjectAttribute`](#接收方解析收到的消息) | `EMMessage` | 获取 JSON 对象类型的引用信息。 |
-| [`onMessageReceived`](#接收方解析收到的消息) | `EMMessageListener` | 接收普通消息。 |
-| [`addMessageListener`](#接收方解析收到的消息) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#接收方解析收到的消息) | `EMChatManager` | 移除消息监听器。 |

@@ -179,11 +179,5 @@ EMClient.getInstance()
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`asyncModifyMessage`](#编辑消息) | `EMChatManager` | 编辑服务端及本地消息的消息体或扩展字段。 |
-| [`onMessageContentChanged`](#编辑消息) | `EMMessageListener` | 监听消息内容编辑事件。 |
-| [`getBody`](#编辑消息) | `EMMessage` | 获取编辑后的消息体。 |
-| [`operationCount`](#编辑消息) | `EMMessageBody` | 获取消息累计编辑次数。 |
 | [`operatorId`](#编辑消息) | `EMMessageBody` | 获取最后一次编辑消息的用户 ID。 |
-| [`operationTime`](#编辑消息) | `EMMessageBody` | 获取最后一次编辑消息的时间戳。 |
 | [`ext`](#编辑消息) | `EMMessage` | 获取编辑后的消息扩展字段。 |
-| [`addMessageListener`](#编辑消息) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#编辑消息) | `EMChatManager` | 移除消息监听器。 |

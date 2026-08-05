@@ -206,7 +206,6 @@ await client.chatManager.modifyMessage({
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#编辑消息) | `ChatClient` | 注册事件监听。 |
 | [`modifyMessage`](#编辑消息) | `ChatManager` | 编辑消息。 |
 
 

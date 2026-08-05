@@ -129,11 +129,3 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`asyncRecallMessage`](#撤回消息) | `EMChatManager` | 异步撤回一条已发送成功的消息，并可携带扩展字符串。 |
 | [`recallMessage`](#撤回消息) | `EMChatManager` | 同步撤回一条已发送成功的消息，并可携带扩展字符串。 |
-| [`onMessageRecalledWithExt`](#设置消息撤回监听) | `EMMessageListener` | 监听消息撤回事件及其扩展信息。 |
-| [`getRecallBy`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取撤回消息的用户 ID。 |
-| [`getRecallMessageId`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回消息的消息 ID。 |
-| [`getExt`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取撤回时携带的扩展字符串。 |
-| [`getConversationId`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回消息所属的会话 ID。 |
-| [`getRecallMessage`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回的消息对象；离线场景下可能返回 `null`。 |
-| [`addMessageListener`](#设置消息撤回监听) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#设置消息撤回监听) | `EMChatManager` | 移除消息监听器。 |

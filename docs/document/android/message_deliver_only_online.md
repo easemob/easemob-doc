@@ -43,6 +43,5 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#仅向在线用户投递消息) | `EMMessage` | 创建待发送的文本消息。 |
 | [`deliverOnlineOnly`](#仅向在线用户投递消息) | `EMMessage` | 设置消息是否只投递给在线用户。 |
-| [`setChatType`](#仅向在线用户投递消息) | `EMMessage` | 设置消息的会话类型。 |
 | [`sendMessage`](#仅向在线用户投递消息) | `EMChatManager` | 发送消息。 |
 

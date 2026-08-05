@@ -244,4 +244,3 @@ client.chatManager.addEventHandler('conversation-list-listener', {
 | [`clearAllMessagesAndConversations`](#更新本地会话列表缓存的常见操作) | `ChatManager` | 清空当前用户的全部会话和服务端漫游消息，并清空本地会话列表缓存。 |
 | [`clearConversationUnreadMessageCount`](#更新本地会话列表缓存的常见操作) | `ChatManager` | 清零指定会话未读数，并更新本地缓存中的 `unreadCount` 和 `readAt`。 |
 | [`clearAllConversationUnreadMessageCount`](#更新本地会话列表缓存的常见操作) | `ChatManager` | 清零全部会话未读数，并更新本地会话列表缓存。 |
-| [`addEventHandler`](#监听本地会话列表更新) | `ChatManager` | 注册会话列表更新监听器，用于在本地缓存变化后刷新 UI。 |

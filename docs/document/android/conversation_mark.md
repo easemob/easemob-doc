@@ -225,11 +225,6 @@ EMClient.getInstance().removeMultiDeviceListener(multiDeviceListener);
 | [`setAppKey`](#按标记筛选会话列表) | `EMOptions` | 设置应用的 App Key。 |
 | [`setDataSyncType`](#按标记筛选会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#按标记筛选会话列表) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`onDataSyncFinish`](#按标记筛选会话列表) | `EMConnectionListener` | 监听会话数据同步完成。 |
 | [`getAllConversationsBySort`](#按标记筛选会话列表) | `EMChatManager` | 获取置顶优先排序的本地会话列表。 |
 | [`getConversation`](#按标记筛选会话列表) | `EMChatManager` | 获取指定的本地会话对象。 |
 | [`marks`](#按标记筛选会话列表) | `EMConversation` | 获取会话的全部标记。 |
-| [`onConversationUpdate`](#监听会话列表更新) | `EMConversationListener` | 监听本地会话变化。 |
-| [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `EMChatManager` | 注册或移除会话变化监听器。 |
-| [`onConversationEvent`](#监听会话列表更新) | `EMMultiDeviceListener` | 监听多设备会话操作。 |
-| [`addMultiDeviceListener`](#监听会话列表更新) / [`removeMultiDeviceListener`](#监听会话列表更新) | `EMClient` | 注册或移除多设备事件监听器。 |

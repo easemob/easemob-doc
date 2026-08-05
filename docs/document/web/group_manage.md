@@ -482,6 +482,4 @@ client.groupManager.removeEventHandler('group-events');
 | [`getPublicGroupList`](#获取公开群列表) | `GroupManager` | 分页获取公开群列表。 |
 | [`getJoinedGroupList`](#获取当前用户已加入的群组列表) | `GroupManager` | 读取当前用户已加入群组的本地同步列表。 |
 | [`refresh`](#检查当前用户是否已屏蔽群消息) | `Group` | 强制从服务端刷新当前群组详情。 |
-| [`addEventHandler`](#监听群组事件) | `GroupManager` | 注册群组事件监听器。 |
-| [`removeEventHandler`](#监听群组事件) | `GroupManager` | 移除群组事件监听器。 |
 

@@ -141,9 +141,5 @@ if (message.getType() == EMMessage.Type.TXT) {
 | :--- | :--- | :--- |
 | [`fetchSupportLanguages`](#获取翻译服务支持的语言) | `EMChatManager` | 获取翻译服务支持的语言列表。 |
 | [`translateMessage`](#按需翻译) | `EMChatManager` | 将文本消息按需翻译为一种或多种目标语言。 |
-| [`getBody`](#按需翻译) | `EMMessage` | 获取消息体。 |
-| [`getTranslations`](#按需翻译) | `EMTextMessageBody` | 获取文本消息中的译文列表。 |
 | [`createTextSendMessage`](#自动翻译) | `EMMessage` | 创建文本消息。 |
-| [`setChatType`](#自动翻译) | `EMMessage` | 设置消息的会话类型。 |
-| [`setTargetLanguages`](#自动翻译) | `EMTextMessageBody` | 设置自动翻译的目标语言列表。 |
 | [`sendMessage`](#自动翻译) | `EMChatManager` | 发送包含自动翻译配置的文本消息。 |

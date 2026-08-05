@@ -286,7 +286,6 @@ console.log(blocklist);
 
 | API 名称                                             | 所属模块/类       | 说明                                                         |
 | ---------------------------------------------------- | ----------------- | ------------------------------------------------------------ |
-| [`addEventHandler`](#添加好友事件监听)               | `ContactManager`  | 注册好友关系和好友属性变更事件监听。                         |
 | [`addContact`](#添加好友)                            | `ContactManager`  | 发起好友申请。                                               |
 | [`acceptContactInvite`](#添加好友)                   | `ContactManager`  | 接受好友申请。                                               |
 | [`declineContactInvite`](#添加好友)                  | `ContactManager`  | 拒绝好友申请。                                               |
@@ -296,7 +295,6 @@ console.log(blocklist);
 | [`getContacts`](#从本地获取好友列表)                 | `ContactManager`  | 读取当前内存中的好友列表视图。                               |
 | [`getUserInfoByUserId`](#从本地内存获取单个用户属性) | `UserInfoManager` | 从服务端获取指定用户的最新用户属性。                         |
 | [`ChatClient.init`](#开启自动同步)                   | `ChatClient`      | 通过 `enableSyncData` 配置登录后自动同步好友列表及好友信息。 |
-| [`addEventHandler`](#监听同步状态和好友信息变更)     | `ChatClient`      | 监听好友同步开始和完成事件。                                 |
 | [`addUsersToBlocklist`](#添加用户到黑名单)           | `ContactManager`  | 批量添加黑名单用户。                                         |
 | [`removeUserFromBlocklist`](#将用户从黑名单移除)     | `ContactManager`  | 批量移除黑名单用户。                                         |
 | [`getBlocklist`](#从服务器获取黑名单列表)            | `ContactManager`  | 获取当前登录会话下的黑名单列表。                             |

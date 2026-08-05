@@ -75,4 +75,3 @@ await client.chatManager.removeHistoryMessages({
 | :--- | :--- | :--- |
 | [`clearAllMessagesAndConversations`](#单向清空聊天记录) | `ChatManager` | 清空当前用户侧的全部会话和服务端漫游消息。 |
 | [`removeHistoryMessages`](#单向删除服务端的历史消息) | `ChatManager` | 按消息 ID 或时间范围单向删除指定会话的服务端历史消息。 |
-| [`addEventHandler`](conversation_list.html#监听会话列表更新) | `ChatManager` | 注册会话列表更新监听器，用于在删除消息或清空会话后刷新 UI。 |

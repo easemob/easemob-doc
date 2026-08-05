@@ -1038,7 +1038,6 @@ await client.chatManager.sendMessage(message);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](message_receive.html#监听消息事件) | `ChatClient` | 注册事件监听。 |
 | [`createTextMessage`](#发送文本消息) | `ChatManager` | 创建文本消息。 |
 | [`createImageMessage`](#发送图片消息) | `ChatManager` | 创建图片消息，GIF 也通过该 API 创建。 |
 | [`createVoiceMessage`](#发送语音消息) | `ChatManager` | 创建语音消息。 |

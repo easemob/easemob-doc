@@ -215,14 +215,10 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`conversationId`](#会话对象) / [`getType`](#会话对象) | `EMConversation` | 获取会话 ID 和会话类型。 |
 | [`getUnreadMsgCount`](#会话对象) / [`getLastMessage`](#会话对象) | `EMConversation` | 获取会话未读数和最近一条消息。 |
-| [`isPinned`](#会话对象) / [`getPinnedTime`](#会话对象) | `EMConversation` | 获取会话置顶状态和置顶时间。 |
-| [`marks`](#会话对象) | `EMConversation` | 获取会话标记集合。 |
-| [`getExtField`](#会话对象) / [`setExtField`](#会话对象) | `EMConversation` | 获取或设置会话的本地扩展字段。 |
 | [`getConversation`](#通过接口创建本地会话) | `EMChatManager` | 查找本地会话，并可按参数在会话不存在时创建。 |
 | [`setAppKey`](#通过服务端同步更新会话列表) | `EMOptions` | 设置应用的 App Key。 |
 | [`setDataSyncType`](#通过服务端同步更新会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#通过服务端同步更新会话列表) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`onDataSyncStart`](#通过服务端同步更新会话列表) / [`onDataSyncFinish`](#通过服务端同步更新会话列表) | `EMConnectionListener` | 监听会话数据自动同步的开始和完成。 |
 | [`getAllConversationsBySort`](#会话列表与空会话) | `EMChatManager` | 获取置顶优先排序的本地会话列表。 |
 | [`getAllConversations`](#会话列表与空会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
 | [`asyncFilterConversationsFromDB`](#会话列表与空会话) | `EMChatManager` | 从本地数据库加载全部会话或筛选会话。 |
@@ -240,7 +236,3 @@ EMClient.getInstance()
 | [`removeMessage`](#会话功能列表) / [`clearAllMessages`](#会话功能列表) | `EMConversation` | 删除指定本地消息或清空会话的全部本地消息。 |
 | [`asyncPinMessage`](#会话功能列表) / [`asyncUnPinMessage`](#会话功能列表) | `EMChatManager` | 置顶或取消置顶会话中的消息。 |
 | [`asyncGetPinnedMessagesFromServer`](#会话功能列表) | `EMChatManager` | 从服务器获取会话中的置顶消息。 |
-| [`onConversationUpdate`](#会话列表事件) | `EMConversationListener` | 监听本地会话变化。 |
-| [`addConversationListener`](#会话列表事件) / [`removeConversationListener`](#会话列表事件) | `EMChatManager` | 注册或移除会话变化监听器。 |
-| [`addMultiDeviceListener`](#多设备会话事件) / [`removeMultiDeviceListener`](#多设备会话事件) | `EMClient` | 注册或移除多设备事件监听器。 |
-| [`onConversationEvent`](#多设备会话事件) | `EMMultiDeviceListener` | 监听当前账号其他设备执行的会话操作。 |

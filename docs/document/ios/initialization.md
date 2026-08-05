@@ -209,13 +209,6 @@ let joinedGroups = EMClient.shared().groupManager?.getJoinedGroups() ?? []
 | :--- | :--- | :--- |
 | [`initializeSDKWithOptions`](#初始化-sdk) | `EMClient` | 初始化 iOS SDK 单例，Swift 调用为 `initializeSDK(with:)`。 |
 | [`dataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
-| [`addDelegate`](#初始化后设置监听) | `EMClient` | 注册连接状态、数据库打开及数据同步状态监听。 |
-| [`removeDelegate`](#初始化后设置监听) | `EMClient` | 移除客户端监听。 |
-| [`addDelegate`](#初始化后设置监听) | `IEMChatManager` | 注册消息监听。 |
-| [`removeDelegate`](#初始化后设置监听) | `IEMChatManager` | 移除消息监听。 |
-| [`syncDataStartWithType`](#监听同步状态) | `EMClientDelegate` | 某类登录后数据开始同步时触发。 |
-| [`syncDataFinished`](#监听同步状态) | `EMClientDelegate` | 某类登录后数据同步结束时触发，并返回可空的 `EMError`。 |
-| [`onDatabaseOpened`](#监听同步状态) | `EMClientDelegate` | 当前用户数据库打开结束时触发。 |
 | [`getAllConversations`](#登录后读取同步结果) | `IEMChatManager` | 读取本地会话列表。 |
 | [`getContacts`](#登录后读取同步结果) | `IEMContactManager` | 读取本地好友用户 ID 列表。 |
 | [`getAllContacts`](#登录后读取同步结果) | `IEMContactManager` | 读取本地好友对象列表。 |

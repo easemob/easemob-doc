@@ -303,9 +303,6 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"convers
 | [`subscribeUsersInfo`](#订阅非好友用户属性变更事件) | `IEMUserInfoManager` | 异步订阅非好友用户的属性变更事件。 |
 | [`unsubscribeUsersInfo`](#取消订阅非好友用户属性变更事件) | `IEMUserInfoManager` | 异步取消订阅非好友用户的属性变更事件。 |
 | [`fetchSubscribedUsers`](#获取已被订阅用户属性变更事件的用户列表) | `IEMUserInfoManager` | 异步获取已订阅用户属性变更事件的用户列表。 |
-| [`addDelegate`](#监听用户属性变更) / [`removeDelegate`](#监听用户属性变更) | `IEMUserInfoManager` | 注册或移除用户属性更新监听器。 |
-| [`onSelfUserInfoUpdate`](#监听用户属性变更) | `EMUserInfoManagerDelegate` | 接收当前用户的属性更新。 |
-| [`onUserInfoUpdate`](#监听用户属性变更) | `EMUserInfoManagerDelegate` | 接收其他用户的属性更新。 |
 | [`userId`](#设置当前用户的所有属性) / [`nickname`](#设置当前用户的所有属性) / [`avatarUrl`](#设置当前用户的所有属性) | `EMUserInfo` | 获取用户 ID、昵称和头像 URL。 |
 | [`mail`](#设置当前用户的所有属性) / [`phone`](#设置当前用户的所有属性) / [`gender`](#设置当前用户的所有属性) | `EMUserInfo` | 获取用户邮箱、联系方式和性别。 |
 | [`sign`](#设置当前用户的所有属性) / [`birth`](#设置当前用户的所有属性) / [`ext`](#设置当前用户的所有属性) | `EMUserInfo` | 获取用户签名、生日和扩展字段。 |

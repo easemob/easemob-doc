@@ -408,29 +408,8 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addMessageListener`](#监听消息事件) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#监听消息事件) | `EMChatManager` | 移除消息监听器。 |
-| [`onMessageReceived`](#接收文本消息) | `EMMessageListener` | 接收普通消息。 |
-| [`onCmdMessageReceived`](#接收透传消息) | `EMMessageListener` | 接收透传消息。 |
-| [`getType`](#消息通用信息) | `EMMessage` | 获取消息类型。 |
-| [`getMsgId`](#消息通用信息) | `EMMessage` | 获取消息 ID。 |
-| [`getBody`](#消息通用信息) | `EMMessage` | 获取消息体。 |
-| [`getFrom`](#消息通用信息) | `EMMessage` | 获取消息发送方。 |
-| [`getTo`](#消息通用信息) | `EMMessage` | 获取消息接收方。 |
-| [`getChatType`](#消息通用信息) | `EMMessage` | 获取会话类型。 |
-| [`getMessage`](#接收文本消息) | `EMTextMessageBody` | 获取文本内容。 |
 | [`downloadThumbnail`](#接收图片消息) | `EMChatManager` | 下载图片或视频缩略图。 |
 | [`downloadBigImage`](#接收图片消息) | `EMChatManager` | 下载图片大图。 |
 | [`downloadAttachment`](#接收附件消息) | `EMChatManager` | 下载原图、视频或文件附件。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `EMChatManager` | 下载并解析合并消息。 |
-| [`getRemoteUrl`](#接收语音消息) | `EMFileMessageBody` | 获取附件服务器地址。 |
-| [`getLocalUri`](#接收语音消息) | `EMFileMessageBody` | 获取附件本地 URI。 |
-| [`getBigImageRemoteUrl`](#接收图片消息) | `EMImageMessageBody` | 获取图片大图服务器地址。 |
 | [`thumbnailLocalUri`](#接收图片消息) | `EMImageMessageBody` | 获取图片缩略图本地 URI。 |
-| [`isGif`](#接收-gif-图片消息) | `EMImageMessageBody` | 判断图片是否为 GIF。 |
-| [`action`](#接收透传消息) | `EMCmdMessageBody` | 获取透传命令动作。 |
-| [`event`](#接收自定义类型消息) | `EMCustomMessageBody` | 获取自定义事件。 |
-| [`getParams`](#接收自定义类型消息) | `EMCustomMessageBody` | 获取自定义参数。 |
-| [`getLatitude`](#接收位置消息) | `EMLocationMessageBody` | 获取纬度。 |
-| [`getLongitude`](#接收位置消息) | `EMLocationMessageBody` | 获取经度。 |
-| [`getAddress`](#接收位置消息) | `EMLocationMessageBody` | 获取位置地址。 |

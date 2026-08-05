@@ -239,12 +239,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | [`removeConversationMark`](#移除会话标记) | `IEMChatManager` | 从一个或多个会话中移除指定标记，同时更新服务端和本地。 |
 | [`dataSyncType`](#按标记筛选会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`initializeSDKWithOptions`](#按标记筛选会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
-| [`syncDataFinished`](#按标记筛选会话列表) | `EMClientDelegate` | 监听会话数据同步结束。 |
 | [`getAllConversations`](#按标记筛选会话列表) | `IEMChatManager` | 获取排序后的本地会话数组。 |
 | [`filterConversationsFromDB`](#按标记筛选会话列表) | `IEMChatManager` | 从本地数据库读取并筛选会话。 |
 | [`getConversation`](#按标记筛选会话列表) | `IEMChatManager` | 获取指定类型的本地会话对象。 |
 | [`marks`](#按标记筛选会话列表) | `EMConversation` | 获取会话的全部标记，返回 `NSArray<NSNumber *>`，Swift 中为 `[NSNumber]`。 |
-| [`conversationListDidUpdate`](#监听会话列表更新) | `EMConversationDelegate` | 返回本地会话列表变化后的会话数组。 |
-| [`addConversation`](#监听会话列表更新) / [`removeConversation`](#监听会话列表更新) | `IEMChatManager` | 注册或移除会话列表更新代理。 |
-| [`multiDevicesConversationEvent`](#监听会话列表更新) | `EMMultiDevicesDelegate` | 监听其他设备的会话标记更新事件。 |
-| [`addMultiDevicesDelegate`](#监听会话列表更新) / [`removeMultiDevicesDelegate`](#监听会话列表更新) | `EMClient` | 注册或移除多设备事件代理。 |

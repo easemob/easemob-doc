@@ -209,12 +209,6 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 | [`setAppKey`](#开启用户信息自动管理) | `EMOptions` | 设置应用的 App Key。 |
 | [`setEnableUserInfo`](#开启用户信息自动管理) | `EMOptions` | 开启或关闭用户信息自动管理功能。 |
 | [`init`](#开启用户信息自动管理) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`addUserInfoManagerListener`](#监听用户属性更新) / [`removeUserInfoManagerListener`](#监听用户属性更新) | `EMUserInfoManager` | 注册或移除用户属性更新监听器。 |
-| [`onSelfUserInfoUpdate`](#监听用户属性更新) | `EMUserInfoManagerListener` | 监听当前登录用户的属性更新。 |
-| [`onUserInfoUpdate`](#监听用户属性更新) | `EMUserInfoManagerListener` | 监听其他用户的属性更新。 |
-| [`getUserId`](#监听用户属性更新) / [`getNickname`](#监听用户属性更新) / [`getAvatarUrl`](#监听用户属性更新) | `EMUserInfo` | 获取用户 ID、昵称和头像 URL。 |
-| [`getSenderInfo`](#通过消息获取发送方信息) | `EMMessage` | 获取消息发送方信息。 |
-| [`getNickname`](#通过消息获取发送方信息) / [`getAvatar`](#通过消息获取发送方信息) / [`getRemark`](#通过消息获取发送方信息) / [`getNamecard`](#通过消息获取发送方信息) | `EMSenderInfo` | 获取发送方昵称、头像、好友备注和群成员名片。 |
 | [`getUserInfoWithUserId`](#从本地内存读取用户属性) / [`getUserInfoWithUserIds`](#从本地内存读取用户属性) | `EMUserInfoManager` | 从本地内存读取单个或多个用户的属性。 |
 | [`fetchUserInfoByUserId`](#从本地内存读取用户属性) | `EMUserInfoManager` | 从服务器获取一个或多个用户的属性。 |
 | [`updateOwnInfo`](#用户属性与用户信息) | `EMUserInfoManager` | 设置或更新当前登录用户的多个属性。 |

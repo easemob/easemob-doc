@@ -294,12 +294,5 @@ options.loginExtensionInfo = @"{\"source\":\"iPad\"}";
 | [`loginExtensionInfo`](#设置登录设备的扩展信息) | `EMOptions` | 设置当前登录设备的扩展信息。 |
 | [`kickDeviceWithUserId`](#强制指定账号从单个设备下线) | `EMClient` | 异步将指定账号从指定设备踢下线。 |
 | [`kickAllDevicesWithUserId`](#强制指定账号从所有设备下线) | `EMClient` | 异步将指定账号从所有设备踢下线。 |
-| [`addMultiDevicesDelegate`](#监听多设备事件) / [`removeMultiDevicesDelegate`](#监听多设备事件) | `EMClient` | 注册或移除多设备事件监听器。 |
-| [`multiDevicesContactEventDidReceive`](#监听多设备事件) | `EMMultiDevicesDelegate` | 接收其他设备上的联系人操作事件。 |
-| [`multiDevicesGroupEventDidReceive`](#监听多设备事件) | `EMMultiDevicesDelegate` | 接收其他设备上的群组操作事件。 |
-| [`multiDevicesChatThreadEventDidReceive`](#监听多设备事件) | `EMMultiDevicesDelegate` | 接收其他设备上的消息话题操作事件。 |
-| [`multiDevicesConversationEvent`](#监听多设备事件) | `EMMultiDevicesDelegate` | 接收其他设备上的会话操作事件。 |
-| [`multiDevicesMessageBeRemoved`](#监听多设备事件) | `EMMultiDevicesDelegate` | 接收其他设备单向删除服务端历史消息的事件。 |
-| [`userAccountDidLoginFromOtherDeviceWithInfo`](#设置登录设备的扩展信息) | `EMClientDelegate` | 接收同账号其他设备登录并导致当前设备下线的事件。 |
 | [`resource`](#获取指定账号的在线登录设备列表) / [`deviceUUID`](#获取指定账号的在线登录设备列表) / [`deviceName`](#获取指定账号的在线登录设备列表) | `EMDeviceConfig` | 获取登录设备的资源标识、UUID 和名称。 |
 | [`deviceName`](#设置登录设备的扩展信息) / [`extensionInfo`](#设置登录设备的扩展信息) | `EMLoginExtensionInfo` | 获取导致当前设备下线的新设备名称和扩展信息。 |

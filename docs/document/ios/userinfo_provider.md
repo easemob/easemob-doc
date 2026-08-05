@@ -178,8 +178,6 @@ if let userInfoMap = result {
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`enableUserInfo`](#技术原理) | `EMOptions` | 开启用户信息服务 |
-| [`addDelegate:delegateQueue:`](#监听用户属性更新) | `IEMUserInfoManager` | 注册或移除用户信息事件代理 |
-| [`onSelfUserInfoUpdate:`](#监听用户属性更新) | `EMUserInfoManagerDelegate` | 监听当前用户或其他用户信息变化 |
 | [`updateOwnUserInfo:completion:`](#用户属性与用户信息) | `IEMUserInfoManager` | 更新当前用户信息 |
 | [`fetchUserInfoById:completion:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 从服务端获取用户信息 |
 | [`getUserInfoByIds:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 获取本地用户信息 |

@@ -303,11 +303,8 @@ NSArray<EMChatMessage *> *messages = @[message];
 | :--- | :--- | :--- |
 | [`EMOptions#enableDeliveryAck`](#步骤-1-开启送达回执) | `EMOptions` | 设置是否需要单聊消息送达回执。 |
 | [`initializeSDKWithOptions`](#步骤-1-开启送达回执) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`isDeliverAcked`](#步骤-2-监听送达回执) | `EMChatMessage` | 查询单聊消息是否已送达。 |
-| [`addDelegate`](#步骤-2-监听送达回执) / [`removeDelegate`](#步骤-2-监听送达回执) | `IEMChatManager` | 注册或移除消息代理。 |
 | [`initWithConversationID`](#步骤-1-设置消息需要已读回执) | `EMChatMessage` | 创建消息。 |
 | [`chatType`](#步骤-1-设置消息需要已读回执) | `EMChatMessage` | 设置消息的会话类型。 |
-| [`isNeedReadReceipt`](#步骤-1-设置消息需要已读回执) | `EMChatMessage` | 设置消息是否需要已读回执。 |
 | [`sendMessage`](#步骤-1-设置消息需要已读回执) | `IEMChatManager` | 异步发送消息。 |
 | [`sendMessageReadReceipts`](#步骤-2-发送消息已读回执) | `IEMChatManager` | 批量异步发送单聊或群聊消息的已读回执。 |
 | [`messageId`](#步骤-3-监听消息已读回执) / [`conversationId`](#步骤-3-监听消息已读回执) | `EMMessageReadReceipt` | 获取回执对应的消息 ID 和会话 ID。 |
@@ -315,8 +312,6 @@ NSArray<EMChatMessage *> *messages = @[message];
 | [`getGroupMessageReadReceipts`](#批量获取多条群消息的回执汇总) | `IEMChatManager` | 批量获取多条群消息的已读回执详情。 |
 | [`asyncFetchGroupMessageReadUsersFromServer`](#获取单条群消息的回执成员详情) | `IEMChatManager` | 分页获取单条群消息的已读回执成员详情。 |
 | [`readReceiptId`](#获取单条群消息的回执成员详情) / [`messageId`](#获取单条群消息的回执成员详情) / [`from`](#获取单条群消息的回执成员详情) / [`readCount`](#获取单条群消息的回执成员详情) / [`timestamp`](#获取单条群消息的回执成员详情) | `EMGroupReadReceipt` | 获取群消息已读回执详情。 |
-| [`isPeerRead`](#查看消息送达和已读状态) | `EMChatMessage` | 查询单聊消息是否已被对端阅读。 |
 | [`groupReadReceiptCount`](#查看消息送达和已读状态) | `EMChatMessage` | 查询群消息的已读人数。 |
-| [`isRead`](#查看消息送达和已读状态) | `EMChatMessage` | 查询消息在当前设备上的本地已读状态。 |
 | [`clearConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `IEMChatManager` | 异步清除指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `IEMChatManager` | 异步清除所有本地会话的未读消息数。 |

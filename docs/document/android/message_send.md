@@ -862,24 +862,11 @@ String webhookEnv = message.getWebhookEnv();
 | [`createLocationSendMessage`](#发送位置消息) | `EMMessage` | 创建位置消息。 |
 | [`createSendMessage`](#发送透传消息) | `EMMessage` | 创建指定类型的待发送消息。 |
 | [`createCombinedSendMessage`](#发送合并消息) | `EMMessage` | 创建合并消息。 |
-| [`setChatType`](#发送消息统一流程) | `EMMessage` | 设置消息的会话类型。 |
-| [`setTo`](#发送透传消息) | `EMMessage` | 设置消息接收方的会话 ID。 |
-| [`setBody`](#发送透传消息) | `EMMessage` | 设置消息体。 |
-| [`setAttribute`](#通用消息创建参数) | `EMMessage` | 设置消息扩展字段。 |
 | [`deliverOnlineOnly`](#通用消息创建参数) | `EMMessage` | 设置消息是否仅投递给在线用户。 |
-| [`setReceiverList`](#通用消息创建参数) | `EMMessage` | 设置群聊或聊天室定向消息的接收成员列表。 |
-| [`setIsNeedReadReceipt`](#带群消息已读回执和扩展字段的示例) | `EMMessage` | 设置消息是否需要已读回执。 |
-| [`setTargetLanguages`](#关键参数和属性) | `EMTextMessageBody` | 设置文本消息的目标翻译语言。 |
-| [`setMessageStatusCallback`](#发送过程回调) | `EMMessage` | 设置消息发送状态及附件上传进度回调。 |
 | [`sendMessage`](#发送消息统一流程) | `EMChatManager` | 发送消息。 |
 | [`downloadAndParseCombineMessage`](#发送合并消息) | `EMChatManager` | 下载并解析合并消息附件。 |
 | [`setAutoTransferMessageAttachments`](#上传消息附件至自有服务器) | `EMOptions` | 设置 SDK 是否自动上传和下载消息附件。 |
-| [`setRemoteUrl`](#上传消息附件至自有服务器) | `EMFileMessageBody` | 设置附件的远程 URL。 |
-| [`getRemoteUrl`](#上传消息附件至自有服务器) | `EMFileMessageBody` | 获取附件的远程 URL。 |
-| [`setPriority`](#聊天室消息优先级与消息丢弃逻辑) | `EMMessage` | 设置聊天室消息优先级。 |
 | [`setUseReplacedMessageContents`](#发送消息前的内容审核) | `EMOptions` | 设置发送方是否接收内容审核替换后的消息内容。 |
-| [`setWebhookEnv`](#发消息时设置回调路由) | `EMMessage` | 设置消息回调环境。 |
-| [`getWebhookEnv`](#发消息时设置回调路由) | `EMMessage` | 获取消息回调环境。 |
 
 
 

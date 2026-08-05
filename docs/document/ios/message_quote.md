@@ -135,4 +135,3 @@ EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversat
 | [`initWithConversationID`](#发送引用的消息) | `EMChatMessage` | 创建用于回复原消息的消息。 |
 | [`ext`](#接收方解析收到的消息) | `EMChatMessage` | 获取消息扩展字段。 |
 | [`sendMessage`](#发送引用的消息) | `IEMChatManager` | 发送携带引用信息的消息。 |
-| [`messagesDidReceive`](#接收方解析收到的消息) | `EMChatManagerDelegate` | 接收普通消息。 |

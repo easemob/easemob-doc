@@ -44,4 +44,3 @@ message.chatType = EMChatTypeChat;
 | :--- | :--- | :--- |
 | [`ext`](#示例代码) | `EMChatMessage` | 设置或获取消息扩展字段。 |
 | [`sendMessage`](#示例代码) | `IEMChatManager` | 发送携带扩展字段的消息。 |
-| [`messagesDidReceive`](#示例代码) | `EMChatManagerDelegate` | 接收消息。 |

@@ -182,9 +182,6 @@ NSArray<NSString *> *members = @[@"Alice", @"Tom"];
 | :--- | :--- | :--- |
 | [`subscribe`](#订阅指定用户的在线状态) | `IEMPresenceManager` | 异步订阅指定用户的在线状态，并返回当前在线状态。 |
 | [`publishPresenceWithDescription`](#发布自定义在线状态) | `IEMPresenceManager` | 异步发布当前用户的自定义在线状态。 |
-| [`addDelegate`](#添加在线状态监听器) | `IEMPresenceManager` | 注册在线状态监听器。 |
-| [`removeDelegate`](#添加在线状态监听器) | `IEMPresenceManager` | 移除在线状态监听器。 |
-| [`presenceStatusDidChanged`](#添加在线状态监听器) | `EMPresenceManagerDelegate` | 接收被订阅用户的在线状态更新。 |
 | [`unsubscribe`](#取消订阅指定用户的在线状态) | `IEMPresenceManager` | 异步取消订阅指定用户的在线状态。 |
 | [`fetchSubscribedMembersWithPageNum`](#查询被订阅用户列表) | `IEMPresenceManager` | 异步分页查询当前用户已订阅的用户列表。 |
 | [`fetchPresenceStatus`](#获取用户的当前在线状态) | `IEMPresenceManager` | 异步查询指定用户的当前在线状态。 |

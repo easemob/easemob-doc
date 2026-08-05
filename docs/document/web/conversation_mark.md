@@ -170,4 +170,3 @@ client.chatManager.addEventHandler('conversation-mark-listener', {
 | [`removeConversationMark`](#移除会话标记) | `ChatManager` | 从单个或多个会话移除指定标记。 |
 | [`getConversationList`](#按标记筛选会话列表) | `ChatManager` | 从 SDK 本地会话列表缓存读取会话列表，并支持按标记筛选。 |
 | [`refreshSessionList`](#按标记筛选会话列表) | `ChatManager` | 从服务端刷新会话列表，并更新 SDK 本地会话列表缓存。 |
-| [`addEventHandler`](#监听会话列表更新) | `ChatManager` | 注册会话列表更新监听器，用于在标记变化后刷新 UI。 |

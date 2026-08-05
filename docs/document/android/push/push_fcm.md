@@ -257,10 +257,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 | [`enableFCM`](#步骤四-fcm-推送集成) | `EMPushConfig.Builder` | 启用 FCM 推送并设置 FCM Sender ID。 |
 | [`setPushConfig`](#步骤四-fcm-推送集成) | `EMOptions` | 设置 SDK 的推送配置。 |
 | [`init`](#步骤四-fcm-推送集成) | `EMClient` | 初始化 Android SDK。 |
-| [`setPushListener`](#步骤四-fcm-推送集成) | `EMPushHelper` | 注册推送类型与 Token 绑定结果监听器。 |
-| [`isSupportPush`](#步骤四-fcm-推送集成) | `PushListener` | 判断当前设备是否支持指定推送类型。 |
 | [`sendFCMTokenToServer`](#步骤四-fcm-推送集成) | `EMClient` | 将 FCM Token 上传至环信服务器。 |
 | [`setFCMPushToken`](#步骤四-fcm-推送集成) | `EMPushHelper` | 保存当前设备的 FCM Token。 |
 | [`isSdkInited`](#步骤四-fcm-推送集成) | `EMClient` | 判断 SDK 是否已初始化。 |
 | [`isLoggedIn`](#步骤四-fcm-推送集成) | `EMClient` | 判断当前用户是否已登录。 |
-| [`onNewToken`](#步骤四-fcm-推送集成) | `FirebaseMessagingService` | 监听 FCM Token 更新。 |

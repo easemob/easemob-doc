@@ -50,8 +50,5 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createSendMessage`](#使用消息扩展字段设置推送通知显示内容) | `EMMessage` | 创建指定类型的消息。 |
-| [`setTo`](#使用消息扩展字段设置推送通知显示内容) | `EMMessage` | 设置消息接收方。 |
-| [`setAttribute`](#使用消息扩展字段设置推送通知显示内容) | `EMMessage` | 设置消息扩展字段。 |
 | [`addBody`](#使用消息扩展字段设置推送通知显示内容) | `EMMessage` | 设置消息体。 |
-| [`setMessageStatusCallback`](#使用消息扩展字段设置推送通知显示内容) | `EMMessage` | 设置消息发送状态回调。 |
 | [`sendMessage`](#使用消息扩展字段设置推送通知显示内容) | `EMChatManager` | 发送消息。 |

@@ -103,7 +103,6 @@ iOS SDK 中 `ext` 为 `NSDictionary *` 类型，Key 应为 `NSString *`，Value 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
 | [`modifyMessage`](#编辑消息) | `IEMChatManager` | 编辑服务端和本地消息。 |
-| [`onMessageContentChanged`](#编辑消息) | `EMChatManagerDelegate` | 接收消息内容编辑事件。 |
 
 
 

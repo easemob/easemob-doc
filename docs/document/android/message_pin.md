@@ -181,13 +181,9 @@ EMClient.getInstance()
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`getMsgId`](#置顶消息) | `EMMessage` | 获取消息 ID。 |
 | [`asyncPinMessage`](#置顶消息) | `EMChatManager` | 置顶指定消息。 |
 | [`asyncUnPinMessage`](#取消置顶消息) | `EMChatManager` | 取消置顶指定消息。 |
 | [`asyncGetPinnedMessagesFromServer`](#获取单个会话中的置顶消息) | `EMChatManager` | 从服务端获取指定会话的置顶消息列表。 |
 | [`pinnedInfo`](#获取单条消息的置顶详情) | `EMMessage` | 获取单条消息的置顶详情；未置顶时返回 `null`。 |
 | [`pinTime`](#获取单条消息的置顶详情) | `EMMessagePinInfo` | 获取最近一次置顶操作的时间。 |
 | [`operatorId`](#获取单条消息的置顶详情) | `EMMessagePinInfo` | 获取最近一次置顶操作的操作者用户 ID。 |
-| [`onMessagePinChanged`](#监听消息置顶事件) | `EMMessageListener` | 监听消息置顶或取消置顶事件。 |
-| [`addMessageListener`](#监听消息置顶事件) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#监听消息置顶事件) | `EMChatManager` | 移除消息监听器。 |

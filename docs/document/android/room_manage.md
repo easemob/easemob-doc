@@ -316,7 +316,5 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoo
 | [`joinChatRoom`](#加入聊天室) | `EMChatRoomManager` | 加入聊天室。 |
 | [`leaveChatRoom`](#主动退出) | `EMChatRoomManager` | 主动退出聊天室。 |
 | [`asyncRemoveChatRoomMembers`](#被移出) | `EMChatRoomManager` | 将成员移出聊天室。 |
-| [`addChatRoomChangeListener`](#监听聊天室事件) | `EMChatRoomManager` | 注册聊天室事件监听器。 |
-| [`removeChatRoomChangeListener`](#监听聊天室事件) | `EMChatRoomManager` | 移除聊天室事件监听器。 |
 | [`getChatRoom`](#实时更新聊天室成员人数) | `EMChatRoomManager` | 获取本地聊天室详情。 |
 

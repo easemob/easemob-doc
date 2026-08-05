@@ -308,16 +308,11 @@ options.dataSyncType = EMDataSyncTypeContacts;
 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
-| [`addDelegate`](#监听好友关系和好友信息变更) / [`removeDelegate`](#监听好友关系和好友信息变更) | `IEMContactManager` | 注册或移除好友关系及好友信息变更监听器。 |
-| [`friendRequestDidReceiveFromUser`](#监听好友关系和好友信息变更) / [`friendRequestDidApproveByUser`](#监听好友关系和好友信息变更) / [`friendRequestDidDeclineByUser`](#监听好友关系和好友信息变更) | `EMContactManagerDelegate` | 监听好友申请、接受和拒绝事件。 |
-| [`friendshipDidAddByUser`](#监听好友关系和好友信息变更) / [`friendshipDidRemoveByUser`](#监听好友关系和好友信息变更) / [`onFriendInfoChanged`](#监听好友关系和好友信息变更) | `EMContactManagerDelegate` | 监听好友添加、删除和好友信息变更事件。 |
 | [`addContact`](#添加好友) | `IEMContactManager` | 异步发起好友申请。 |
 | [`approveFriendRequestFromUser`](#添加好友) / [`declineFriendRequestFromUser`](#添加好友) | `IEMContactManager` | 异步接受或拒绝好友申请。 |
 | [`deleteContact`](#删除好友) | `IEMContactManager` | 异步删除好友，并按参数决定是否删除本地会话和消息。 |
 | [`setContactRemark`](#设置好友备注) | `IEMContactManager` | 异步设置好友备注。 |
 | [`dataSyncType`](#登录后自动同步好友列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
-| [`addDelegate`](#登录后自动同步好友列表) / [`removeDelegate`](#登录后自动同步好友列表) | `EMClient` | 注册或移除登录及数据同步状态监听器。 |
-| [`syncDataStartWithType`](#登录后自动同步好友列表) / [`syncDataFinished`](#登录后自动同步好友列表) | `EMClientDelegate` | 监听好友数据的同步状态。 |
 | [`getContacts`](#从本地读取好友列表) / [`getAllContacts`](#从本地读取好友列表) | `IEMContactManager` | 在好友同步成功后读取本地好友用户 ID 或好友对象列表。 |
 | [`fetchUserInfoById`](#获取单个用户属性) | `EMUserInfoManager` | 异步获取指定用户的用户属性。 |
 | [`addUserToBlackList`](#添加用户到黑名单) | `IEMContactManager` | 异步将用户加入黑名单。 |

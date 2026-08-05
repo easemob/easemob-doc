@@ -231,7 +231,6 @@ client.addEventHandler('offline-message-sync-listener', {
 
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#监听连接变化) | `ChatClient` | 注册连接相关事件监听，包括建连、断连、重连、Token 生命周期与离线消息同步事件。 |
 | [`login`](#连接生命周期) | `ChatClient` | 登录 SDK，并建立到消息服务的连接。 |
 | [`getConnectionState`](#获取连接状态) | `ChatClient` | 获取当前连接状态。 |
 | [`renewToken`](#连接恢复与异常处理) | `ChatClient` | 在 Token 即将过期或已过期时续期当前登录会话。 |

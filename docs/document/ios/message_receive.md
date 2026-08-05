@@ -369,18 +369,8 @@ NSDictionary<NSString *, NSString *> *customExt = customBody.customExt;
 | :--- | :--- | :--- |
 | [`addDelegate`](#接收文本消息) | `IEMChatManager` | 注册消息代理。 |
 | [`removeDelegate`](#接收文本消息) | `IEMChatManager` | 移除消息代理。 |
-| [`messagesDidReceive`](#接收文本消息) | `EMChatManagerDelegate` | 接收普通消息。 |
-| [`cmdMessagesDidReceive`](#接收透传消息) | `EMChatManagerDelegate` | 接收透传消息。 |
-| [`body`](#接收文本消息) | `EMChatMessage` | 获取消息体。 |
-| [`text`](#接收文本消息) | `EMTextMessageBody` | 获取文本内容。 |
 | [`downloadMessageThumbnail`](#接收图片消息) | `IEMChatManager` | 下载图片或视频缩略图。 |
 | [`downloadBigImageAttachment`](#接收图片消息) | `IEMChatManager` | 下载图片大图。 |
 | [`downloadMessageAttachment`](#接收附件消息) | `IEMChatManager` | 下载原图、视频或文件附件。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `IEMChatManager` | 下载并解析合并消息。 |
-| [`remotePath`](#接收语音消息) / [`localPath`](#接收语音消息) | `EMFileMessageBody` | 获取附件服务器地址和本地路径。 |
-| [`bigImageRemotePath`](#接收图片消息) / [`thumbnailLocalPath`](#接收图片消息) | `EMImageMessageBody` | 获取图片大图服务器地址或缩略图本地路径。 |
-| [`isGif`](#接收-gif-图片消息) | `EMImageMessageBody` | 判断图片是否为 GIF。 |
-| [`action`](#接收透传消息) | `EMCmdMessageBody` | 获取透传命令动作。 |
-| [`event`](#接收自定义类型消息) / [`customExt`](#接收自定义类型消息) | `EMCustomMessageBody` | 获取自定义事件和扩展字段。 |
-| [`latitude`](#接收位置消息) / [`longitude`](#接收位置消息) / [`address`](#接收位置消息) | `EMLocationMessageBody` | 获取位置坐标及地址。 |
 

@@ -638,8 +638,6 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`asyncFetchGroupMembersInfo`](#分页获取群成员信息) | `EMGroupManager` | 分页获取包含角色、入群时间和资料的群成员信息。 |
 | [`asyncFetchGroupMembers`](#分页获取群成员-id) | `EMGroupManager` | 分页获取群成员用户 ID。 |
-| [`getUserId`](#分页获取群成员信息) / [`getJoinTime`](#分页获取群成员信息) / [`getRole`](#分页获取群成员信息) | `EMGroupMemberInfo` | 获取成员 ID、入群时间和角色。 |
-| [`getNamecard`](#分页获取群成员信息) / [`getNickname`](#分页获取群成员信息) / [`getAvatarUrl`](#分页获取群成员信息) | `EMGroupMemberInfo` | 获取成员群名片、昵称和头像。 |
 | [`getUsers`](#从本地群组对象获取成员-id) | `EMGroup` | 获取群组对象中包含的群主、管理员和普通成员的用户 ID 列表。 |
 | [`asyncSetGroupMemberAttributes`](#设置群成员的自定义属性) | `EMGroupManager` | 设置群成员自定义属性。 |
 | [`asyncFetchGroupMemberAllAttributes`](#获取单个群成员的自定义属性) | `EMGroupManager` | 获取单个群成员的全部自定义属性。 |

@@ -80,4 +80,3 @@ client.chatManager.addEventHandler('typing', {
 | -------------------------------------------------- | ------------- | -------------------------------- |
 | [`createCmdMessage`](#发送输入状态的透传消息)      | `ChatManager` | 创建输入状态透传消息。           |
 | [`sendMessage`](#发送输入状态的透传消息)           | `ChatManager` | 发送输入状态透传消息。           |
-| [`addEventHandler`](#接收和解析输入状态的透传消息) | `ChatManager` | 监听消息并解析输入状态透传消息。 |

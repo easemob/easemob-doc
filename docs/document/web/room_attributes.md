@@ -255,5 +255,3 @@ client.chatRoomManager.removeEventHandler('chatroom-attribute-events');
 | [`getAttributes`](#获取聊天室自定义属性) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室自定义属性。 |
 | [`setAttributes`](#设置聊天室自定义属性) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象设置聊天室自定义属性。 |
 | [`removeAttributes`](#删除聊天室自定义属性) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象删除聊天室自定义属性。 |
-| [`addEventHandler`](#监听聊天室属性事件) | `ChatRoomManager` | 注册聊天室属性相关事件监听器。 |
-| [`removeEventHandler`](#监听聊天室属性事件) | `ChatRoomManager` | 移除聊天室属性相关事件监听器。 |

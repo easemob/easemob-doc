@@ -152,7 +152,5 @@ final class GroupMentionHandler: NSObject, EMChatManagerDelegate {
 | [`chatType`](#发送消息) | `EMChatMessage` | 设置消息的会话类型；群组 @ 消息应设置为 `EMChatTypeGroupChat`。 |
 | [`sendMessage`](#发送消息) | `IEMChatManager` | 发送群组 @ 消息。 |
 | [`addDelegate`](#接收消息) / [`removeDelegate`](#接收消息) | `IEMChatManager` | 注册或移除消息代理。 |
-| [`messagesDidReceive`](#接收消息) | `EMChatManagerDelegate` | 接收新消息。 |
 | [`ext`](#接收消息) | `EMChatMessage` | 获取消息扩展字段并读取 `em_at_list`。 |
-| [`body`](#接收消息) / [`chatType`](#接收消息) | `EMChatMessage` | 获取消息体和会话类型，用于筛选群聊文本消息。 |
 | [`currentUsername`](#接收消息) | `EMClient` | 获取当前登录用户的用户 ID。 |

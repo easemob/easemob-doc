@@ -155,7 +155,6 @@ page.items.forEach(message => {
 | API 名称                                           | 所属模块/类   | 说明                                                |
 | -------------------------------------------------- | ------------- | --------------------------------------------------- |
 | [`addReaction`](#在消息上添加-reaction)            | `ChatManager` | 在消息上添加 Reaction。                             |
-| [`addEventHandler`](#在消息上添加-reaction)        | `ChatManager` | 监听 Reaction 变化事件。                            |
 | [`removeReaction`](#删除消息的-reaction)           | `ChatManager` | 删除当前用户在消息上添加的 Reaction。               |
 | [`getReactionList`](#获取消息的-reaction-列表)     | `ChatManager` | 获取一条或多条消息的 Reaction 汇总列表。            |
 | [`getReactionDetail`](#获取-reaction-详情)         | `ChatManager` | 获取指定消息上某个 Reaction 的详情。                |

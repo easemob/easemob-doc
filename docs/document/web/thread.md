@@ -282,5 +282,3 @@ client.addEventHandler('thread-multi-device-events', {
 | [`getJoinedChatThreadList`](#获取消息话题列表)               | `ChatThreadManager` | 分页获取当前用户已加入的消息话题列表。           |
 | [`getChatThreadList`](#获取消息话题列表)                     | `ChatThreadManager` | 分页获取指定群组中的消息话题列表。               |
 | [`getChatThreadLastMessageList`](#批量获取消息话题中的最后一条消息) | `ChatThreadManager` | 批量获取一个或多个消息话题中的最后一条消息摘要。 |
-| [`addEventHandler`](#监听消息话题事件)                       | `ChatThreadManager` | 监听公开的消息话题事件。                         |
-| [`addEventHandler`](#监听消息话题事件)                       | `ChatClient`        | 监听 `onMultiDeviceThread` 多设备消息话题事件。  |

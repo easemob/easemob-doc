@@ -177,14 +177,9 @@ EMClient.getInstance().init(context, options);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`addGroupChangeListener`](#监听群成员名片更新) / [`removeGroupChangeListener`](#监听群成员名片更新) | `EMGroupManager` | 注册或移除群组事件监听器。 |
-| [`onUserGroupNamecardUpdated`](#监听群成员名片更新) | `EMGroupChangeListener` | 监听群成员名片更新。 |
 | [`asyncUpdateGroupNamecard`](#设置群成员名片) | `EMGroupManager` | 设置、更新或清除当前用户在指定群组中的名片。 |
 | [`asyncFetchGroupMembersInfo`](#从服务端获取群成员名片) | `EMGroupManager` | 从服务器分页获取群成员信息。 |
-| [`getUserId`](#从服务端获取群成员名片) / [`getNamecard`](#从服务端获取群成员名片) | `EMGroupMemberInfo` | 获取群成员用户 ID 和群名片。 |
-| [`getNickname`](#从服务端获取群成员名片) / [`getAvatarUrl`](#从服务端获取群成员名片) | `EMGroupMemberInfo` | 获取群成员昵称和头像。 |
 | [`getGroupNamecard`](#从本地内存获取群成员名片) | `EMGroupManager` | 从本地内存读取指定成员的群名片。 |
 | [`setAppKey`](#通过消息自动同步群成员名片) | `EMOptions` | 设置应用的 App Key。 |
 | [`setEnableUserInfo`](#通过消息自动同步群成员名片) | `EMOptions` | 开启或关闭用户信息自动管理功能。 |
 | [`init`](#通过消息自动同步群成员名片) | `EMClient` | 使用指定配置初始化 SDK。 |
-| [`getSenderInfo`](#通过消息自动同步群成员名片) | `EMMessage` | 获取消息发送方信息。 |

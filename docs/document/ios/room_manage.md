@@ -276,5 +276,3 @@ SDK 通过 `IEMChatroomManager` 提供了聊天室事件的监听接口。你可
 | [`getChatroomsFromServerWithPage`](#获取聊天室列表) | `IEMChatroomManager` | 异步获取应用下的聊天室列表。 |
 | [`joinChatroom`](#加入聊天室) | `IEMChatroomManager` | 异步加入聊天室。可携带扩展信息加入聊天室，并可指定是否退出其他聊天室。 |
 | [`leaveChatroom`](#主动退出) | `IEMChatroomManager` | 异步退出聊天室。 |
-| [`addDelegate`](#监听聊天室事件) | `IEMChatroomManager` | 注册聊天室事件代理。 |
-| [`removeDelegate`](#监听聊天室事件) | `IEMChatroomManager` | 移除聊天室事件代理。 |

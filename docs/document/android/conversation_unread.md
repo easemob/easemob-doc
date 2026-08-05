@@ -248,5 +248,4 @@ public final class ConversationListActivity extends AppCompatActivity {
 | [`getUnreadMsgCount`](#获取指定会话的未读消息数) | `EMConversation` | 是 | 获取指定会话的本地未读消息数。 |
 | [`asyncClearAllConversationUnreadMessageCount`](#将所有会话的未读消息数清零) | `EMChatManager` | 是 | 清空全部本地会话的未读消息数，并同步当前账号的其他设备。 |
 | [`asyncClearConversationUnreadMessageCount`](#指定会话的未读消息数清零) | `EMChatManager` | 是 | 清空指定会话的本地未读消息数，并同步当前账号的其他设备。 |
-| [`isRead`](#单条消息的已读状态和已读回执) | `EMMessage` | 是 | 查询单条消息的本地已读状态。 |
 | [`asyncSendMessageReadReceipts`](#单条消息的已读状态和已读回执) | `EMChatManager` | 否 | 为单聊或群聊消息发送已读回执。 |

@@ -309,5 +309,3 @@ SDK 支持通过 `ChatRoomManager` 管理器和 `ChatRoom` 单聊天室对象实
 | [`joinChatRoom`](#加入聊天室) | `ChatRoomManager` | 加入指定聊天室。 |
 | [`getChatRoom`](#退出聊天室) | `ChatRoomManager` | 获取绑定指定聊天室 ID 的 `ChatRoom` 单聊天室对象。 |
 | [`leaveChatRoom`](#退出聊天室) | `ChatRoom` | 退出当前聊天室。 |
-| [`addEventHandler`](#监听聊天室事件) | `ChatRoomManager` | 注册聊天室事件监听器。 |
-| [`removeEventHandler`](#监听聊天室事件) | `ChatRoomManager` | 移除聊天室事件监听器。 |

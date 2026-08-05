@@ -197,13 +197,4 @@ if (conversation != null) {
 | [`asyncSearchMsgFromDB`](#根据搜索范围搜索当前会话中的消息) | `EMConversation` | 按照关键词、发送方列表及搜索范围，异步搜索指定会话中的消息。 |
 | [`searchMsgFromDB`](#根据消息类型搜索所有会话中的消息) | `EMChatManager` | 按照一种或多种消息类型，在全部本地会话中搜索消息。 |
 | [`searchMsgFromDB`](#根据消息类型搜索当前会话中的消息) | `EMConversation` | 按照一种或多种消息类型，在指定会话中搜索消息。 |
-| [`getBody`](#根据消息类型搜索所有会话中的消息) | `EMMessage` | 获取消息体。 |
-| [`getMsgTime`](#根据消息类型搜索所有会话中的消息) | `EMMessage` | 获取消息时间戳。 |
-| [`getMessage`](#只搜索消息内容) | `EMTextMessageBody` | 获取文本消息内容。 |
-| [`getFileName`](#只搜索消息内容) | `EMFileMessageBody` | 获取图片、语音、视频或文件消息的文件名。 |
-| [`getAddress`](#只搜索消息内容) | `EMLocationMessageBody` | 获取位置消息的地址。 |
-| [`getBuildingName`](#只搜索消息内容) | `EMLocationMessageBody` | 获取位置消息的建筑物名称。 |
-| [`event`](#只搜索消息内容) | `EMCustomMessageBody` | 获取自定义消息的事件名称。 |
-| [`getTitle`](#只搜索消息内容) | `EMCombineMessageBody` | 获取合并消息的标题。 |
-| [`getSummary`](#只搜索消息内容) | `EMCombineMessageBody` | 获取合并消息的摘要。 |
 

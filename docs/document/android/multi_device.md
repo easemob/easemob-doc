@@ -450,15 +450,3 @@ try {
 | [`setLoginCustomExt`](#设置登录设备的扩展信息) | `EMOptions` | 设置当前登录设备的扩展信息。 |
 | [`kickDeviceWithToken`](#强制指定账号从单个设备下线) | `EMClient` | 将指定账号从指定设备踢下线。 |
 | [`kickAllDevicesWithToken`](#强制指定账号从所有设备下线) | `EMClient` | 将指定账号从所有设备踢下线。 |
-| [`addMultiDeviceListener`](#监听多设备事件) | `EMClient` | 注册多设备事件监听器。 |
-| [`removeMultiDeviceListener`](#监听多设备事件) | `EMClient` | 移除多设备事件监听器。 |
-| [`onContactEvent`](#监听多设备事件) | `EMMultiDeviceListener` | 接收其他设备上的联系人操作事件。 |
-| [`onGroupEvent`](#监听多设备事件) | `EMMultiDeviceListener` | 接收其他设备上的群组操作事件。 |
-| [`onChatThreadEvent`](#监听多设备事件) | `EMMultiDeviceListener` | 接收其他设备上的消息话题操作事件。 |
-| [`onConversationEvent`](#监听多设备事件) | `EMMultiDeviceListener` | 接收其他设备上的会话操作事件。 |
-| [`onMessageRemoved`](#监听多设备事件) | `EMMultiDeviceListener` | 接收其他设备单向删除服务端历史消息的事件。 |
-| [`onLogout`](#设置登录设备的名称) | `EMConnectionListener` | 当前设备被踢下线或发生其他登出事件时触发。 |
-| [`getResource`](#强制指定账号从单个设备下线) | `EMDeviceInfo` | 获取设备资源标识。 |
-| [`getDeviceName`](#获取指定账号的在线登录设备列表) | `EMDeviceInfo` | 获取设备名称。 |
-| [`getDeviceInfo`](#设置登录设备的名称) | `EMLoginExtensionInfo` | 获取导致当前设备被踢下线的设备名称。 |
-| [`getDeviceExt`](#设置登录设备的扩展信息) | `EMLoginExtensionInfo` | 获取导致当前设备被踢下线的设备扩展信息。 |

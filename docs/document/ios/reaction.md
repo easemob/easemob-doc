@@ -161,8 +161,6 @@ NSArray<NSString *> *messageIds = @[@"messageId1", @"messageId2"];
 | [`getReactionList`](#获取消息的-reaction-列表) | `IEMChatManager` | 异步获取一条或多条消息的 Reaction 概览。 |
 | [`getReactionDetail`](#获取-reaction-详情) | `IEMChatManager` | 异步分页获取群聊消息中指定 Reaction 的详情。 |
 | [`reactionList`](#获取消息的-reaction-列表) | `EMChatMessage` | 从消息对象获取已缓存的 Reaction 列表。 |
-| [`addDelegate`](#监听-reaction-更新) / [`removeDelegate`](#监听-reaction-更新) | `IEMChatManager` | 注册或移除消息事件监听器。 |
-| [`messageReactionDidChange`](#监听-reaction-更新) | `EMChatManagerDelegate` | 接收 Reaction 变更事件。 |
 | [`conversationId`](#监听-reaction-更新) | `EMMessageReactionChange` | 获取 Reaction 变更所属的会话 ID。 |
 | [`messageId`](#监听-reaction-更新) | `EMMessageReactionChange` | 获取发生 Reaction 变更的消息 ID。 |
 | [`reactions`](#监听-reaction-更新) | `EMMessageReactionChange` | 获取变更后的 Reaction 列表。 |
@@ -172,4 +170,3 @@ NSArray<NSString *> *messageIds = @[@"messageId1", @"messageId2"];
 | [`reaction`](#获取-reaction-详情) | `EMMessageReaction` | 获取 Reaction 内容。 |
 | [`count`](#获取消息的-reaction-列表) | `EMMessageReaction` | 获取添加该 Reaction 的用户数量。 |
 | [`userList`](#获取-reaction-详情) | `EMMessageReaction` | 获取当前页或概览中的 Reaction 用户列表。 |
-| [`isAddedBySelf`](#获取消息的-reaction-列表) | `EMMessageReaction` | 判断当前用户是否添加过该 Reaction。 |

@@ -267,13 +267,6 @@ SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消�
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`onStreamMessageReceived`](#接入流程与示例) | `EMMessageListener` | 接收流式消息分片。每个分片到达时均会触发该回调。 |
-| [`addMessageListener`](#接入流程与示例) | `EMChatManager` | 注册消息监听器。 |
-| [`removeMessageListener`](#接入流程与示例) | `EMChatManager` | 移除消息监听器。 |
-| [`getMsgId`](#接入流程) | `EMMessage` | 获取流式消息 ID，用于定位同一条流式消息。 |
-| [`getStreamChunk`](#当前分片信息) | `EMMessage` | 获取当前流式消息分片对象；非流式消息返回 `null`。 |
-| [`getBody`](#累计合并内容) | `EMMessage` | 获取包含累计合并内容的消息体。 |
-| [`getMessage`](#累计合并内容) | `EMTextMessageBody` | 获取从首个分片到当前分片的累计文本。 |
 | [`getText`](#当前分片信息) | `EMStreamChunk` | 获取当前分片的文本内容。 |
 | [`getStatus`](#传输状态与错误处理) | `EMStreamChunk` | 获取流式消息的传输状态。 |
 | [`isCompleted`](#当前分片信息) | `EMStreamChunk` | 判断流式消息是否已结束。 |

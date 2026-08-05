@@ -174,7 +174,6 @@ result.forEach((item) => {
 | ---------------------------------------------------- | ----------------- | ---------------------------------- |
 | [`subscribePresence`](#订阅指定用户的在线状态)       | `PresenceManager` | 订阅指定用户的在线状态。           |
 | [`publishPresence`](#发布自定义在线状态)             | `PresenceManager` | 发布当前用户的自定义在线状态。     |
-| [`addEventHandler`](#添加在线状态监听器)             | `PresenceManager` | 注册在线状态事件监听器。           |
 | [`unsubscribePresence`](#取消订阅指定用户的在线状态) | `PresenceManager` | 取消订阅指定用户的在线状态。       |
 | [`getSubscribedPresenceList`](#查询被订阅用户列表)   | `PresenceManager` | 分页查询当前用户已订阅的用户列表。 |
 | [`getPresenceStatus`](#获取用户的当前在线状态)       | `PresenceManager` | 主动查询指定用户当前的在线状态。   |

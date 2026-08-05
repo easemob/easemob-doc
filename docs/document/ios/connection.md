@@ -267,14 +267,4 @@ EMClient.shared().renewToken("newToken") { error in
 | [`logout`](#连接生命周期) | `EMClient` | 主动登出并关闭当前连接。 |
 | [`isConnected`](#获取连接状态) | `EMClient` | 查询 SDK 当前是否已连接到服务器。 |
 | [`isLoggedIn`](#获取连接状态) | `EMClient` | 查询当前用户是否已登录聊天服务器。 |
-| [`addDelegate`](#监听连接变化) / [`removeDelegate`](#监听连接变化) | `EMClient` | 注册或移除 `EMClientDelegate`。 |
-| [`connectionStateDidChange`](#回调说明) | `EMClientDelegate` | 监听连接成功和连接断开。 |
-| [`onDatabaseOpened`](#回调说明) | `EMClientDelegate` | 监听指定用户的本地数据库打开流程结束。 |
-| [`userAccountDidLoginFromOtherDeviceWithInfo`](#连接断开和异常登出处理) | `EMClientDelegate` | 监听其他设备登录或设备变更。 |
-| [`userAccountDidRemoveFromServer`](#连接断开和异常登出处理) | `EMClientDelegate` | 监听当前账号被服务端删除。 |
-| [`userDidForbidByServer`](#连接断开和异常登出处理) | `EMClientDelegate` | 监听账号或应用服务被禁用。 |
-| [`userAccountDidForcedToLogout`](#连接断开和异常登出处理) | `EMClientDelegate` | 监听不可恢复原因导致的强制登出。 |
-| [`tokenWillExpire`](#token-生命周期) / [`tokenDidExpire`](#token-生命周期) | `EMClientDelegate` | 监听 Token 即将过期和已过期。 |
 | [`renewToken`](#token-生命周期) | `EMClient` | 异步更新当前登录用户的 Token。 |
-| [`onOfflineMessageSyncStart`](#离线消息和业务数据同步) / [`onOfflineMessageSyncFinish`](#离线消息和业务数据同步) | `EMClientDelegate` | 监听离线消息同步开始和完成。 |
-| [`syncDataStartWithType`](#离线消息和业务数据同步) / [`syncDataFinished`](#离线消息和业务数据同步) | `EMClientDelegate` | 监听登录后业务数据自动同步的开始和结束。 |

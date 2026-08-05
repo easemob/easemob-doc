@@ -208,14 +208,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送消息) | `EMMessage` | 创建待发送的文本消息。 |
-| [`setChatType`](#发送消息) | `EMMessage` | 将消息的会话类型设置为群聊。 |
-| [`setAttribute`](#发送消息) | `EMMessage` | 设置消息扩展字段，用于携带被 @ 的用户 ID 或 `ALL`。 |
 | [`sendMessage`](#发送消息) | `EMChatManager` | 发送群组消息。 |
-| [`addMessageListener`](#接收消息) / [`removeMessageListener`](#接收消息) | `EMChatManager` | 注册或移除消息监听器。 |
-| [`onMessageReceived`](#接收消息) | `EMMessageListener` | 监听收到的新消息。 |
-| [`getChatType`](#接收消息) / [`getType`](#接收消息) | `EMMessage` | 获取消息的会话类型和消息类型。 |
-| [`getJSONArrayAttribute`](#接收消息) | `EMMessage` | 将 `em_at_list` 读取为用户 ID 数组。 |
-| [`getStringAttribute`](#接收消息) | `EMMessage` | 将 `em_at_list` 读取为字符串，以识别 @ 所有人。 |
 | [`getCurrentUser`](#接收消息) | `EMClient` | 获取当前登录用户的用户 ID。 |
 
 

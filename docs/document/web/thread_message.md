@@ -146,7 +146,5 @@ $([Environment]::NewLine)
 | :--- | :--- | :--- |
 | [`createTextMessage`](#发送消息话题中的消息) | `ChatManager` | 创建消息话题中的文本消息。创建时需设置 `conversationType` 为 `groupChat`，并设置 `isChatThread: true`。 |
 | [`sendMessage`](#发送消息话题中的消息) | `ChatManager` | 发送消息话题中的消息。 |
-| [`addEventHandler`](#接收消息话题中的消息) | `ChatClient` | 注册消息监听器，用于接收消息话题中的消息。 |
 | [`recallMessage`](#撤回消息话题中的消息) | `ChatManager` | 撤回消息话题中的消息。 |
-| [`addEventHandler`](#撤回消息话题中的消息) | `ChatClient` | 注册消息撤回事件监听器，用于监听消息话题中的消息撤回。 |
 | [`getHistoryMessages`](#从服务器获取单个消息话题的消息) | `ChatManager` | 从服务器获取指定消息话题中的历史消息。 |

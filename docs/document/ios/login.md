@@ -305,11 +305,6 @@ options.loginExtensionInfo = @"login from iOS";
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
 | [`loginWithUsername`](#登录) | `EMClient` | 使用用户 ID 和 Token 异步登录。 |
-| [`addDelegate`](#登录完成前使用本地数据库) / [`removeDelegate`](#登录完成前使用本地数据库) | `EMClient` | 注册或移除客户端状态监听器。 |
-| [`onDatabaseOpened`](#登录完成前使用本地数据库) | `EMClientDelegate` | 监听当前用户的本地数据库打开完成事件。 |
-| [`connectionStateDidChange`](#登录完成前使用本地数据库) | `EMClientDelegate` | 监听 SDK 与 IM 服务器的连接状态。 |
-| [`syncDataFinished`](#登录完成前使用本地数据库) | `EMClientDelegate` | 监听登录后指定类型的数据同步完成事件。 |
-| [`tokenWillExpire`](#token-续期) / [`tokenDidExpire`](#token-续期) | `EMClientDelegate` | 监听 Token 即将过期或已经过期事件。 |
 | [`renewToken`](#token-续期) | `EMClient` | 异步更新当前登录使用的 Token。 |
 | [`currentUsername`](#获取当前登录的用户) | `EMClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `EMClient` | 判断当前用户是否已登录。 |
@@ -318,8 +313,5 @@ options.loginExtensionInfo = @"login from iOS";
 | [`customOSType`](#多设备登录) | `EMOptions` | 设置登录设备的自定义系统类型。 |
 | [`customDeviceName`](#多设备登录) | `EMOptions` | 设置当前设备的自定义名称。 |
 | [`loginExtensionInfo`](#多设备登录) | `EMOptions` | 设置登录时携带的扩展信息。 |
-| [`userAccountDidLoginFromOtherDeviceWithInfo`](#多设备登录) | `EMClientDelegate` | 监听其他设备登录当前账号的事件。 |
-| [`userAccountDidForcedToLogout`](#多设备登录) | `EMClientDelegate` | 监听当前账号被服务器强制退出的事件。 |
 | [`getLoggedInDevicesFromServerWithUserId`](#多设备登录) | `EMClient` | 异步获取指定用户已登录的设备信息。 |
 | [`resource`](#多设备登录) / [`deviceName`](#多设备登录) | `EMDeviceConfig` | 获取登录设备的资源标识和设备名称。 |
-| [`userDidForbidByServer`](#登录被封禁账号的提示) | `EMClientDelegate` | 监听当前已登录用户账号被服务端禁用的事件。 |

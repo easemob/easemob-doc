@@ -217,5 +217,3 @@ console.log('自定义排序后的会话列表:', sortedConversations);
 | [`setConversationPinned`](#设置或取消置顶会话) | `ChatManager` | 设置或取消指定会话的置顶状态。 |
 | [`getConversationList`](#获取置顶会话列表) | `ChatManager` | 从 SDK 本地会话列表缓存读取会话列表，并支持通过 `isPinned` 筛选置顶会话。 |
 | [`refreshSessionList`](#获取置顶会话列表) | `ChatManager` | 从服务端刷新会话列表，并更新 SDK 本地会话列表缓存。 |
-| [`addEventHandler`](#监听本地会话列表更新) | `ChatManager` | 注册本地会话列表更新监听器。 |
-| [`addEventHandler`](#监听多设备会话置顶事件) | `ChatClient` | 注册多设备会话置顶相关事件监听器。 |

@@ -190,9 +190,6 @@ contacts.forEach(contact => {
 | API 名称                                         | 所属模块/类       | 说明                                                         |
 | ------------------------------------------------ | ----------------- | ------------------------------------------------------------ |
 | [`init`](#开启用户信息自动管理)                  | `ChatClient`      | 初始化 SDK，并通过 `enableUserInfoSync` 开启用户信息自动管理。 |
-| [`addEventHandler`](#监听用户属性更新)           | `UserInfoManager` | 监听当前用户和其他用户的用户属性更新事件。                   |
-| [`addEventHandler`](#监听用户属性更新)           | `ContactManager`  | 监听好友用户属性更新事件。                                   |
-| [`addEventHandler`](#通过消息获取发送方信息)     | `ChatManager`     | 监听消息并读取 `message.sender`。                            |
 | [`getContacts`](#从本地内存读取用户属性)         | `ContactManager`  | 读取当前内存中的好友列表及其用户属性视图。                   |
 | [`getUserInfoByUserId`](#从本地内存读取用户属性) | `UserInfoManager` | 从服务端获取指定用户的最新用户属性。                         |
 | [`updateOwnInfo`](#用户属性与用户信息)           | `UserInfoManager` | 更新当前登录用户的用户属性。                                 |

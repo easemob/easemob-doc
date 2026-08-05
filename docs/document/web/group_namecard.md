@@ -182,7 +182,6 @@ SDK 中 消息对象的 `message.sender` 当前主要提供发送方基础用户
 
 | API 名称 | 所属类/模块    | 说明    |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#监听群成员名片更新)  | `GroupManager` | 注册群成员属性和群成员名片更新事件监听。 |
 | [`getGroup`](#设置群成员名片)  | `GroupManager` | 获取绑定指定群组 ID 的 `Group` 单群对象。 |
 | [`setMemberAttributes`](#设置群成员名片)  | `Group` | 通过 `Group` 单群对象设置群成员名片。 |
 | [`getMembersAttributes`](#从服务端获取群成员名片)  | `Group`        | 通过 `Group` 单群对象批量获取群成员名片。 |

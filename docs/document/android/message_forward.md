@@ -109,13 +109,6 @@ EMClient.getInstance()
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`getMessage`](#转发单条消息) | `EMChatManager` | 根据消息 ID 获取本地消息。 |
-| [`getType`](#转发单条消息) | `EMMessage` | 获取原消息的消息类型。 |
 | [`createSendMessage`](#转发单条消息) | `EMMessage` | 创建指定类型的发送消息。 |
-| [`setTo`](#转发单条消息) | `EMMessage` | 设置新消息的接收方或目标会话 ID。 |
-| [`setChatType`](#转发单条消息) | `EMMessage` | 设置新消息的会话类型。 |
-| [`setIsChatThreadMessage`](#转发单条消息) | `EMMessage` | 设置新消息是否为消息子区消息。 |
-| [`getBody`](#转发单条消息) | `EMMessage` | 获取原消息的消息体。 |
-| [`setBody`](#转发单条消息) | `EMMessage` | 设置新消息的消息体。 |
 | [`ext`](#转发单条消息) | `EMMessage` | 获取原消息的扩展字段。 |
-| [`setAttribute`](#转发单条消息) | `EMMessage` | 为新消息设置扩展字段。 |
 | [`sendMessage`](#转发单条消息) | `EMChatManager` | 发送转发消息。 |

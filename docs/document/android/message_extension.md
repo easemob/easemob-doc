@@ -29,11 +29,4 @@ Map<String, Object> attributes = message.getAttributes();
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#示例代码) | `EMMessage` | 创建待发送的文本消息。 |
-| [`setAttribute`](#示例代码) | `EMMessage` | 设置指定类型的消息扩展字段。 |
 | [`sendMessage`](#示例代码) | `EMChatManager` | 发送携带扩展字段的消息。 |
-| [`getStringAttribute`](#示例代码) | `EMMessage` | 获取字符串类型的消息扩展字段。 |
-| [`getBooleanAttribute`](#示例代码) | `EMMessage` | 获取布尔类型的消息扩展字段。 |
-| [`getIntAttribute`](#示例代码) / [`getLongAttribute`](#示例代码) | `EMMessage` | 获取整型或长整型消息扩展字段。 |
-| [`getFloatAttribute`](#示例代码) / [`getDoubleAttribute`](#示例代码) | `EMMessage` | 获取单精度或双精度浮点型消息扩展字段。 |
-| [`getJSONObjectAttribute`](#示例代码) / [`getJSONArrayAttribute`](#示例代码) | `EMMessage` | 获取 JSON 对象或 JSON 数组类型的消息扩展字段。 |
-| [`getAttributes`](#示例代码) | `EMMessage` | 获取消息中的全部扩展字段。 |

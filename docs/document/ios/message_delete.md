@@ -143,11 +143,9 @@ if (conversation && deleteMsg) {
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`deleteAllMessagesAndConversations`](#单向清空聊天记录) | `IEMChatManager` | 异步清空本地所有会话及消息，并按参数决定是否同时单向清除服务端数据。 |
-| [`conversationListDidUpdate`](#单向清空聊天记录) | `EMConversationDelegate` | 监听本地会话列表变化。 |
 | [`getConversationWithConvId`](#单向删除服务端的历史消息) | `IEMChatManager` | 根据会话 ID 获取本地会话对象。 |
 | [`removeMessagesFromServerWithTimeStamp`](#单向删除服务端的历史消息) | `EMConversation` | 按时间戳单向删除服务端历史消息，同时删除当前设备该会话中的对应本地消息。 |
 | [`removeMessagesFromServerMessageIds`](#单向删除服务端的历史消息) | `EMConversation` | 按消息 ID 单向删除服务端历史消息，同时删除当前设备该会话中的对应本地消息。 |
-| [`multiDevicesMessageBeRemoved`](#单向删除服务端的历史消息) | `EMMultiDevicesDelegate` | 监听其他设备发起的服务端历史消息删除事件。 |
 | [`deleteAllMessages`](#删除本地指定会话的所有消息) | `EMConversation` | 删除指定会话在本地数据库和内存缓存中的所有消息。 |
 | [`removeMessagesStart`](#删除本地会话指定时间段的消息) | `EMConversation` | 删除指定时间段内的本地消息。 |
 | [`deleteMessageWithId`](#删除本地会话的指定消息) | `EMConversation` | 从本地数据库和会话内存缓存中删除指定消息。 |

@@ -238,4 +238,3 @@ await client.chatManager.sendMessageReadReceipts({
 | [`clearAllConversationUnreadMessageCount`](#清零全部会话未读数) | `ChatManager` | 清零当前用户全部会话的未读数。 |
 | [`getConversationList`](#监听当前设备会话列表更新) | `ChatManager` | 主动读取 SDK 本地会话列表缓存。 |
 | [`sendMessageReadReceipts`](#与消息已读回执的区别) | `ChatManager` | 发送指定消息的已读回执，不会直接清零会话未读数。 |
-| [`addEventHandler`](#监听当前设备会话列表更新) | `ChatClient` | 注册事件监听器，监听会话列表更新和多设备清零事件。 |

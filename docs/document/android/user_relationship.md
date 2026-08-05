@@ -425,16 +425,11 @@ EMClient.getInstance().contactManager().getBlackListUsernames();
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`setContactListener`](#监听好友关系和好友信息变更) / [`removeContactListener`](#监听好友关系和好友信息变更) | `EMContactManager` | 注册或移除好友关系及好友信息变更监听器。 |
-| [`onContactInvited`](#监听好友关系和好友信息变更) / [`onFriendRequestAccepted`](#监听好友关系和好友信息变更) / [`onFriendRequestDeclined`](#监听好友关系和好友信息变更) | `EMContactListener` | 监听好友申请、接受和拒绝事件。 |
-| [`onContactAdded`](#监听好友关系和好友信息变更) / [`onContactDeleted`](#监听好友关系和好友信息变更) / [`onContactInfoUpdate`](#监听好友关系和好友信息变更) | `EMContactListener` | 监听好友添加、删除和好友信息变更事件。 |
 | [`asyncAddContact`](#添加好友) | `EMContactManager` | 异步发起好友申请。 |
 | [`asyncAcceptInvitation`](#添加好友) / [`asyncDeclineInvitation`](#添加好友) | `EMContactManager` | 异步接受或拒绝好友申请。 |
 | [`asyncDeleteContact`](#删除好友) / [`deleteContact`](#删除好友) | `EMContactManager` | 异步或同步删除好友；仅同步双参数方法可设置是否保留本地会话和消息。 |
 | [`asyncSetContactRemark`](#设置好友备注) | `EMContactManager` | 设置好友备注。 |
 | [`setDataSyncType`](#登录后自动同步好友列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
-| [`addConnectionListener`](#登录后自动同步好友列表) / [`removeConnectionListener`](#登录后自动同步好友列表) | `EMClient` | 注册或移除连接及数据同步状态监听器。 |
-| [`onDataSyncStart`](#登录后自动同步好友列表) / [`onDataSyncFinish`](#登录后自动同步好友列表) | `EMConnectionListener` | 监听好友数据的同步状态。 |
 | [`asyncFetchAllContactsFromLocal`](#从本地读取好友列表) | `EMContactManager` | 异步获取本地全部好友对象。 |
 | [`fetchContactFromLocal`](#从本地读取好友列表) / [`getContactsFromLocal`](#从本地读取好友列表) | `EMContactManager` | 同步读取本地好友信息或用户 ID 列表。 |
 | [`getUserInfoWithUserId`](#从本地内存获取单个用户属性) | `EMUserInfoManager` | 从本地内存读取单个用户属性。 |

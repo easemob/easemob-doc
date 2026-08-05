@@ -291,11 +291,8 @@ private void getIntentData(Intent intent) {
 | [`enableHonorPush`](#步骤三-集成荣耀推送-sdk) | `EMPushConfig.Builder` | 启用荣耀推送。 |
 | [`setPushConfig`](#步骤三-集成荣耀推送-sdk) | `EMOptions` | 设置 SDK 的推送配置。 |
 | [`init`](#步骤三-集成荣耀推送-sdk) | `EMClient` | 初始化 Android SDK。 |
-| [`setPushListener`](#步骤三-集成荣耀推送-sdk) | `EMPushHelper` | 注册推送类型和 Token 绑定结果监听器。 |
-| [`isSupportPush`](#步骤三-集成荣耀推送-sdk) | `PushListener` | 判断当前设备是否支持指定推送类型。 |
 | [`sendHonorPushTokenToServer`](#步骤五-将-device-token-与-im-的登录账号绑定) | `EMClient` | 将荣耀设备 Token 上传至环信服务器。 |
 | [`isSdkInited`](#步骤四-清单文件配置) | `EMClient` | 判断 SDK 是否已初始化。 |
 | [`isLoggedIn`](#步骤四-清单文件配置) | `EMClient` | 判断当前用户是否已登录。 |
-| [`setAttribute`](#步骤六-实现通知栏消息点击动作) | `EMMessage` | 设置通知点击动作扩展字段。 |
 | [`addBody`](#步骤六-实现通知栏消息点击动作) | `EMMessage` | 设置消息体。 |
 | [`sendMessage`](#步骤六-实现通知栏消息点击动作) | `EMChatManager` | 发送消息。 |
