@@ -175,26 +175,40 @@ const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => 
   return VERSION_CONFIG.defaultVersion
 }
 
+/**
+ * VuePress may register generated document routes as nested routes. Flatten
+ * the route tree before checking whether a page exists on the target platform.
+ */
+const getRoutePaths = (
+  routes: typeof router.options.routes,
+  parentPath = ''
+): string[] =>
+  routes.flatMap((item) => {
+    if (typeof item.path !== 'string') return []
+    const path = item.path.startsWith('/')
+      ? item.path
+      : `${parentPath}/${item.path}`
+    return [path, ...(item.children ? getRoutePaths(item.children, path) : [])]
+  })
+
+const normalizeRoutePath = (path: string): string =>
+  path.replace(/\.html$/, '').replace(/\/$/, '')
+
 const navigateToDefaultPlatformDoc = (platformName: PlatformKey): void => {
-  const nextPlatformDocRouters = router.options.routes
-    .filter(
-      (item) =>
-        Object.prototype.hasOwnProperty.call(item, 'name') &&
-        typeof item.path === 'string' &&
-        item.path.indexOf(`/document/${platformName}`) === 0
-    )
-    .map((item) => item.path)
+  const nextPlatformDocRouters = getRoutePaths(router.options.routes)
+    .filter((path) => path.indexOf(`/document/${platformName}/`) === 0)
+    .map(normalizeRoutePath)
 
   let newPath = route.path.split('/')
   newPath[2] = platformName
   const nextPathPath = newPath.join('/')
   const quickstartPath = `/document/${platformName}/quickstart.html`
   const overviewPath = `/document/${platformName}/overview.html`
-  if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
+  if (nextPlatformDocRouters.indexOf(normalizeRoutePath(nextPathPath)) > -1) {
     router.push(nextPathPath)
-  } else if (nextPlatformDocRouters.indexOf(quickstartPath) > -1) {
+  } else if (nextPlatformDocRouters.indexOf(normalizeRoutePath(quickstartPath)) > -1) {
     router.push(quickstartPath)
-  } else if (nextPlatformDocRouters.indexOf(overviewPath) > -1) {
+  } else if (nextPlatformDocRouters.indexOf(normalizeRoutePath(overviewPath)) > -1) {
     router.push(overviewPath)
   } else {
     router.push(`/document/${platformName}`)
