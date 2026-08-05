@@ -13,6 +13,7 @@
 | `file` | 文件消息 |
 | `custom` | 自定义类型消息 |
 | `combine` | 合并消息 |
+| `markdown` | 流式消息 |
 
 ## 消息 body 内容介绍
 
