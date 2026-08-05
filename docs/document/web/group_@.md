@@ -131,8 +131,6 @@ client.addEventHandler('group-at-message', {
 
 ## 接口列表
 
-// TODO：最终上线时查看链接是否准确
-
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextMessage`](#发送群组-消息) | `ChatManager` | 创建文本消息，并通过 `ext.em_at_list` 设置群组 @ 信息。 |

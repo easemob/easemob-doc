@@ -116,7 +116,7 @@ client.addEventHandler('thread-message-recall', {
 });
 ```
 
-### 从服务器获取单个消息话题的消息
+## 从服务器获取单个消息话题的消息
 
 调用 `client.chatManager.getHistoryMessages` 方法从服务器获取消息话题中的历史消息。获取消息话题中的历史消息与获取群聊历史消息的方法基本一致，区别在于 `conversationId` 需传入消息话题 ID，`conversationType` 设置为 `groupChat`。
 

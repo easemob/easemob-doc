@@ -4,7 +4,9 @@
 
 当前 SDK 支持微信、QQ、百度、抖音/头条、支付宝等小程序运行环境和 uniAPP、taro 跨平台框架。各平台的集成流程基本一致，主要差异集中在开发者工具、服务器合法域名配置。
 
-## 步骤 1： 注册环信账号
+## 集成 SDK
+
+### 步骤 1：注册环信账号
 
 在环信控制台完成以下操作：
 
@@ -12,7 +14,7 @@
 2. [创建应用](/product/console/app_create.html)。
 3. 获取应用唯一的 App Key。初始化 SDK 时需要传入该 App Key。
 
-## 步骤 2 搭建小程序开发环境
+### 步骤 2：搭建小程序开发环境
 
 根据目标平台下载对应的开发者工具，并按照平台接入流程创建小程序项目。
 
@@ -28,32 +30,19 @@
 百度小程序的注册主体不能为个人，必须使用企业、媒体、政府等主体。
 :::
 
-## 步骤 3 配置服务器域名
+### 步骤 3：配置服务器域名
+
+#### 确认应用所属的数据中心
 
 小程序发布前，需在对应平台后台配置合法域名。请先在环信控制台的 **应用概览** 页面确认应用所在数据中心，再选择对应的 REST API 和 WebSocket 地址。
 
 ![应用所在数据中心](/images/applet/service_overview.png)
 
-### 按数据中心选择服务地址
-
-TODO: 建议去掉这个表格，让用户按照上面说的去 环信控制台的 **应用概览** 页面查找，同时console上需要补充第二通道的服务地址
-
-| 数据中心 | REST API 请求地址 | 微信、QQ、百度和抖音 WebSocket 地址 | 支付宝 WebSocket 地址 |
-| :--- | :--- | :--- | :--- |
-| 国内 1 区 | `https://a1.easemob.com`<br/>`https://a1-v2.easemob.com` | `wss://im-api-wechat.easemob.com/websocket`<br/>`wss://im-api-wechat.easecdn.com/websocket` | `wss://im-api-alipay.easemob.com/websocket`<br/>`wss://im-api-alipay.easecdn.com/websocket` |
-| 国内 2 区 | `https://ngi-a1.easemob.com` | `wss://ngi-im-api-wechat.easemob.com/websocket` | `wss://ngi-im-api-wechat.easemob.com/websocket` |
-| 国内 VIP 区 | 请咨询商务经理 | 请咨询商务经理 | 请咨询商务经理 |
-| 客服专用 | 请咨询商务经理 | 请咨询商务经理 | 请咨询商务经理 |
-| 新加坡 1 区 | `https://a1-sgp.easemob.com`<br/>`https://a1-sgp.easecdn.com` | `wss://im-api-wechat-sgp.easemob.com/websocket`<br/>`wss://im-api-wechat-sgp.easecdn.com/websocket` | `wss://im-api-alipay-sgp.easemob.com/websocket`<br/>`wss://im-api-alipay-sgp.easecdn.com/websocket` |
-| 新加坡 2 区 | `https://a61.easemob.com`<br/>`https://a61.easecdn.com` | `wss://im-api-wechat-61.easemob.com/websocket`<br/>`wss://im-api-wechat-61.easecdn.com/websocket` | `wss://im-api-alipay-61.easemob.com/websocket`<br/>`wss://im-api-alipay-61.easecdn.com/websocket` |
-| 美东 1 区 | `https://a41.easemob.com`<br/>`https://a41.easecdn.com` | `wss://im-api-wechat-41.easemob.com/websocket`<br/>`wss://im-api-wechat-41.easecdn.com/websocket` | `wss://im-api-alipay-41.easemob.com/websocket`<br/>`wss://im-api-alipay-41.easecdn.com/websocket` |
-| 德国 2 区 | `https://a71.easemob.com`<br/>`https://a71.easecdn.com` | `wss://im-api-wechat-71.easemob.com/websocket`<br/>`wss://im-api-wechat-71.easecdn.com/websocket` | `wss://im-api-alipay-71.easemob.com/websocket`<br/>`wss://im-api-alipay-71.easecdn.com/websocket` |
-
 :::tip
 文件下载相关域名需按数据中心进行配置：国内 1 区配置 `https://a1-chatfile.easemob.com`，国内 2 区配置 `ngi-chatfile.easemob.com`。<br/>实际需要配置的 `request`、`uploadFile`、`downloadFile` 以及 WebSocket 合法域名，应以应用所在数据中心和服务端实际下发的服务地址为准。若小程序使用文件消息、图片消息、语音消息或视频消息，需确保相关上传、下载域名已在小程序后台完成配置。
 :::
 
-### 在平台后台配置域名
+#### 在平台后台配置域名
 
 | 平台 | 配置平台 | 配置入口 | WebSocket 地址选择 |
 | :--- | :--- | :--- | :--- |
@@ -65,7 +54,7 @@ TODO: 建议去掉这个表格，让用户按照上面说的去 环信控制台�
 
 在平台后台按需配置 `request`、`uploadFile`、`downloadFile` 和 WebSocket（或 socket）合法域名。配置 WebSocket 地址时，**不要将地址末尾重复写成 `/websocket/websocket`**。
 
-## 步骤 4 安装或获取 SDK
+### 步骤 4：安装或获取 SDK
 
 推荐通过 npm 安装 SDK：
 
@@ -73,7 +62,7 @@ TODO: 建议去掉这个表格，让用户按照上面说的去 环信控制台�
 npm install easemob-websdk
 ```
 
-## 步骤 5 引入 SDK
+### 步骤 5：引入 SDK
 
 若项目构建流程支持 npm 包导入，可直接从主入口引入 SDK。小程序场景建议优先从主入口导入 `ChatClient`、需要使用的 Manager 以及平台常量。
 
@@ -81,7 +70,7 @@ npm install easemob-websdk
 import { ChatClient, ChatManager } from 'easemob-websdk';
 ```
 
-## 步骤 6 初始化 SDK
+### 步骤 6：初始化 SDK
 
 调用 `ChatClient.init` 初始化 SDK。小程序环境下，SDK 默认会自动识别当前运行平台并装配小程序适配器。若运行在非标准宿主环境，或自动识别结果不符合预期，可通过 `platformAdapterOptions.prefer` 指定目标平台。
 
@@ -120,7 +109,7 @@ const client = ChatClient.init({
 | 百度小程序 | `RUNTIME_PLATFORMS.BAIDU_MINIAPP` 或 `'baidu-miniapp'` |
 | 支付宝小程序 | `RUNTIME_PLATFORMS.ALIPAY_MINIAPP` 或 `'alipay-miniapp'` |
 
-## 步骤 7 登录 SDK
+### 步骤 7：登录 SDK
 
 SDK 当前通过用户 ID 和 IM Token 登录。调用 `client.login` 时，需传入 `userId` 和 `token`。
 
@@ -142,7 +131,7 @@ console.log(client.getCurrentUserId());
 生产环境中，建议由你的应用服务器集成环信用户 Token 获取逻辑，客户端从应用服务器获取用户 Token 后再登录 SDK。不要在小程序客户端保存 App Token 或 App Secret。
 :::
 
-## 步骤 8 监听连接和消息事件
+### 步骤 8：监听连接和消息事件
 
 建议在登录前注册事件监听，以便及时感知连接状态变化、Token 状态和新消息。
 
@@ -169,7 +158,7 @@ client.addEventHandler('miniapp-listener', {
 });
 ```
 
-## 步骤 9 验证消息收发
+### 步骤 9：验证消息收发
 
 注册 `ChatManager` 后，可通过 `client.chatManager` 创建并发送消息。
 
@@ -190,7 +179,6 @@ await client.chatManager.sendMessage(message);
 以下限制主要来自小程序运行环境，不属于 SDK 接口差异。实际限制可能随小程序基础库版本变化，请以目标平台最新规则为准。
 
 小程序对同时存在的 WebSocket 连接数量有限制。应用需合理管理连接生命周期，避免同一小程序内创建过多长连接。
-
 
 ## 后续步骤
 

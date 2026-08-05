@@ -68,7 +68,7 @@ Demo 仅包含部分 IM 功能，完整能力请以 SDK 的实际支持范围为
 
 ## 集成 SDK
 
-### 步骤 1： 准备开发环境
+### 步骤 1：准备开发环境
 
 #### 注册环信账号并创建应用
 
@@ -84,28 +84,15 @@ Demo 仅包含部分 IM 功能，完整能力请以 SDK 的实际支持范围为
 
 完成以上操作后，即可创建、运行和发布 uni-app 项目。
 
-### 步骤 2 配置服务器域名
+### 步骤 2：配置服务器域名
 
 #### 确认应用所属的数据中心
 
 环信在多个地区部署了数据中心。不同数据中心对应不同的 REST API 和 WebSocket 服务地址，因此必须根据应用所属的数据中心进行配置。
 
-可以在环信控制台的“**应用概览**”页面查看应用所属的数据中心：
+你可以在环信控制台的 **应用概览** 页面查看应用所属的数据中心，再选择对应的 REST API 和 WebSocket 地址。
 
 ![应用概览中的数据中心信息](/images/applet/service_overview.png)
-
-各数据中心的服务地址如下：
-
-| 数据中心 | REST API 地址 | WebSocket 地址 |
-| --- | --- | --- |
-| 国内 1 区 | `https://a1.easemob.com` | `wss://im-api-wechat.easemob.com/websocket`<br/>`wss://im-api-wechat.easecdn.com/websocket` |
-| 国内 2 区 | `https://ngi-a1.easemob.com` | `wss://ngi-im-api-wechat.easemob.com/websocket` |
-| 国内 VIP 区 | 请咨询商务经理 | 请咨询商务经理 |
-| 客服专用 | 请咨询商务经理 | 请咨询商务经理 |
-| 新加坡 1 区 | `https://a1-sgp.easemob.com`<br/>`https://a1-sgp.easecdn.com` | `wss://im-api-wechat-sgp.easemob.com/websocket`<br/>`wss://im-api-wechat-sgp.easecdn.com/websocket` |
-| 新加坡 2 区 | `https://a61.easemob.com`<br/>`https://a61.easecdn.com` | `wss://im-api-wechat-61.easemob.com/websocket`<br/>`wss://im-api-wechat-61.easecdn.com/websocket` |
-| 美东 1 区 | `https://a41.easemob.com`<br/>`https://a41.easecdn.com` | `wss://im-api-wechat-41.easemob.com/websocket`<br/>`wss://im-api-wechat-41.easecdn.com/websocket` |
-| 德国 2 区 | `https://a71.easemob.com`<br/>`https://a71.easecdn.com` | `wss://im-api-wechat-71.easemob.com/websocket`<br/>`wss://im-api-wechat-71.easecdn.com/websocket` |
 
 :::tip
 请以环信控制台显示的数据中心和实际分配的服务地址为准，不要直接将示例地址用于所有应用。
@@ -132,7 +119,7 @@ Demo 仅包含部分 IM 功能，完整能力请以 SDK 的实际支持范围为
 | 支付宝小程序 | 一段时间内只能保留一个 WebSocket 连接；如果已有连接，创建新连接时会自动关闭原连接。 |
 
 
-### 步骤 3 SDK 接入方式
+### 步骤 3：SDK 接入方式
 
 开发者可以选择以下任一种方式接入 SDK：
 
@@ -184,7 +171,7 @@ import SDK from "easemob-websdk/uniApp/Easemob-chat";
    - [GitHub Demo](https://github.com/easemob/easemob-uikit-uniapp)
    - [Gitee Demo](https://gitee.com/easemob-code/easemob-uikit-uniapp)
 
-### 步骤 4 初始化 SDK
+### 步骤 4：初始化 SDK
 
 #### 创建连接实例
 
