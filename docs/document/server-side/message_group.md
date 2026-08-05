@@ -137,7 +137,9 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' \
 }'
 ```
 
-仅发送给在线用户，即 `routetype` 设置为 `ROUTE_ONLINE`：
+仅发送给在线用户，即 `routetype` 设置为 `ROUTE_ONLINE`。
+
+若仅发送给在线用户，默认不支持漫游存储。发送的消息默认不存储在环信消息服务器，用户无法在其他终端设备获取该消息。如需开通在线消息的漫游存储，需联系环信商务。
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -153,7 +155,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
     "body": {
         "msg": "testmessages"
     },
-    "routetype":"ROUTE_ONLINE"
+    "routetype": "ROUTE_ONLINE"
 }'
 ```
 

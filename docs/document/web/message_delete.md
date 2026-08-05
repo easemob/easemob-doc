@@ -44,7 +44,8 @@ await client.chatManager.clearAllMessagesAndConversations();
 多端多设备登录时，删除成功后，当前用户的其他在线设备会收到 `onMultiDeviceMessageRemoved` 回调。
 
 :::tip 
-`removeHistoryMessages` 仅删除当前用户在服务端保存的历史消息，不会自动删除当前设备上的本地消息缓存。若业务侧已在本地保存或展示这些消息，需要在调用成功后自行更新本地消息列表。
+1. `removeHistoryMessages` 仅删除当前用户在服务端保存的历史消息，不会自动删除当前设备上的本地消息缓存。若业务侧已在本地保存或展示这些消息，需要在调用成功后自行更新本地消息列表。
+2. 聊天室漫游消息默认关闭，若要使用该功能需联系环信商务开通。
 :::
 
 - 按消息 ID 删除

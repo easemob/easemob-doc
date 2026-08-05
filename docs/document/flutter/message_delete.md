@@ -41,8 +41,6 @@ try {
 
 ### 单向删除服务端的历史消息
 
-
-
 你可以调用 `deleteRemoteMessagesBefore` 或 `deleteRemoteMessagesWithIds` 方法按照消息时间或消息 ID 删除你在服务器和本地的消息。
 
 - 按时间删除：删除指定时间及之前的历史消息。
@@ -52,7 +50,8 @@ try {
 多设备情况下，登录该账号的其他设备会收到 `EMMultiDeviceEventHandler` 中的 `onRemoteMessagesRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V4.0.0 或以上版本。
+1. 若使用该功能，需将 SDK 升级至 4.0.0 或以上版本。
+2. 聊天室漫游消息默认关闭。若要使用该功能需将 SDK 升级至 4.5.0 或以上版本并联系环信商务开通。
 :::
 
 ```dart

@@ -119,7 +119,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 #### 请求示例
 
-发送给目标用户，消息无需同步给发送方：
+发送给目标用户，消息无需同步给发送方（设置 `sync_device` 为 `false`）：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -132,14 +132,16 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "from": "user1",
   "to": ["user2"],
   "type": "txt",
-  "roam_ignore_users": [],
+  "sync_device": false,
   "body": {
     "msg": "testmessages"
     }
   }'
 ```
 
-仅发送给在线用户，消息同步给发送方（设置 `sync_device` 参数）：
+仅发送给在线用户，消息同步给发送方（设置 `sync_device` 为 true，`routetype` 为 `ROUTE_ONLINE`）。
+
+若仅发送给在线用户，默认不支持漫游存储。发送的消息默认不存储在环信消息服务器，用户无法在其他终端设备获取该消息。如需开通在线消息的漫游存储，需联系环信商务。
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -155,7 +157,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "body": {
     "msg": "testmessages"
     },
-  "sync_device":true
+  "sync_device": true,
+  "routetype": ROUTE_ONLINE
 }'
 ```
 
