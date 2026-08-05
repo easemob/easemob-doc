@@ -122,9 +122,6 @@ EMClient.getInstance().init(mContext, options);
 
 根据场景需要，在 `/app/src/main/AndroidManifest.xml` 文件中添加如下行，获取相应的设备权限：
 
-// TODO：这里的 129 行的 https AI 建议改成了 http
-//应该使用http
-
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"

@@ -88,8 +88,6 @@ const groupInfoList = await client.groupManager.getGroupInfoList({
 
 修改成功后，群成员会收到 `onGroupInfoChanged` 事件。
 
-// TODO：第一种方法需要调用三个方法，是不是太复杂了？
-
 ```typescript
 const group = client.groupManager.getGroup('groupId');
 
@@ -102,26 +100,6 @@ await group.updateInfo({
 
 await client.groupManager.updateGroupInfo({
   groupId: 'groupId',
-  public: true,
-  joinApprovalRequired: true,
-  allowInvites: false,
-  inviteNeedConfirm: true,
-  maxMembers: 500,
-});
-```
-
-如需直接通过 `GroupManager` 调用，也可以使用 `updateGroupInfo`：
-
-```typescript
-await client.groupManager.updateGroupInfo({
-  groupId: 'groupId',
-  name: '研发群',
-  description: '用于 SDK 讨论',
-  avatar: 'https://example.com/group-avatar.png',
-  ext: JSON.stringify({
-    business: 'im',
-    level: 'vip',
-  }),
   public: true,
   joinApprovalRequired: true,
   allowInvites: false,

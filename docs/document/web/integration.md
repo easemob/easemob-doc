@@ -8,17 +8,19 @@
 - 不支持 Internet Explorer（IE）浏览器。
 - 项目需支持 npm 包管理或能够引入浏览器脚本文件。
 
-## 1. 使用 npm 安装 SDK
+## 导入流程
+
+### 步骤 1：使用 npm 安装 SDK
 
 ```bash
 npm install easemob-websdk
 ```
 
-## 2. 引入 SDK
+### 步骤 2：引入 SDK
 
 你可以通过以下方式引入 SDK。对于使用构建工具的 Web 项目，推荐通过 npm 安装并按需导入 SDK 模块，从而减少最终打包体积。
 
-### 通过 npm 导入 SDK
+#### 通过 npm 导入 SDK
 
 SDK 采用模块化设计。你可以通过 `ChatClient` 创建 SDK 实例，并根据业务需要注册对应的功能管理器（Manager），例如，消息和会话管理、好友管理、群组管理、聊天室管理、消息话题管理、在线状态管理、推送管理和用户资料管理等。
 
@@ -29,20 +31,6 @@ SDK 采用模块化设计。你可以通过 `ChatClient` 创建 SDK 实例，并
 2. 若需要使用好友、群组、聊天室、在线状态、推送等功能，请按需注册对应的 Manager。
 3. 小程序和 uni-app 场景由 SDK 的跨平台运行时适配能力处理，SDK 会根据当前运行环境适配请求、上传、WebSocket、本地存储等基础功能。
 :::
-
-#### 支持按需导入的 SDK 模块
-
-| 功能 | 导入文件 | 使用方式 |
-| :--- | :--- | :--- |
-| SDK 初始化与连接管理 | `import { ChatClient } from "easemob-websdk";` | `ChatClient.init({ appKey: "your appKey" });` |
-| 消息和会话管理 | `import { ChatManager } from "easemob-websdk";` 或 `import { ChatManager } from "easemob-websdk/managers/chat";` | 通过 `managers` 参数或 `.use(ChatManager)` 注册后，调用 `client.chatManager`。 |
-| 好友管理 | `import { ContactManager } from "easemob-websdk";` 或 `import { ContactManager } from "easemob-websdk/managers/contact";` | 通过 `managers` 参数或 `.use(ContactManager)` 注册后，调用 `client.contactManager`。 |
-| 群组管理 | `import { GroupManager } from "easemob-websdk";` 或 `import { GroupManager } from "easemob-websdk/managers/group";` | 通过 `managers` 参数或 `.use(GroupManager)` 注册后，调用 `client.groupManager`。 |
-| 聊天室管理 | `import { ChatRoomManager } from "easemob-websdk";` 或 `import { ChatRoomManager } from "easemob-websdk/managers/chatroom";` | 通过 `managers` 参数或 `.use(ChatRoomManager)` 注册后，调用 `client.chatRoomManager`。 |
-| 消息话题管理 | `import { ChatThreadManager } from "easemob-websdk";` 或 `import { ChatThreadManager } from "easemob-websdk/managers/chat-thread";` | 通过 `managers` 参数或 `.use(ChatThreadManager)` 注册后，调用 `client.chatThreadManager`。 |
-| 在线状态管理 | `import { PresenceManager } from "easemob-websdk";` 或 `import { PresenceManager } from "easemob-websdk/managers/presence";` | 通过 `managers` 参数或 `.use(PresenceManager)` 注册后，调用 `client.presenceManager`。 |
-| 推送管理 | `import { PushManager } from "easemob-websdk";` 或 `import { PushManager } from "easemob-websdk/managers/push";` | 通过 `managers` 参数或 `.use(PushManager)` 注册后，调用 `client.pushManager`。 |
-| 用户资料管理 | `import { UserInfoManager } from "easemob-websdk";` 或 `import { UserInfoManager } from "easemob-websdk/managers/user-info";` | 通过 `managers` 参数或 `.use(UserInfoManager)` 注册后，调用 `client.userInfoManager`。 |
 
 #### 按需导入 SDK 模块
 
@@ -120,7 +108,21 @@ await client.chatManager.sendMessage(message);
 const contacts = await client.contactManager.getContacts();
 ```
 
-### 从官网获取并导入 SDK
+##### 支持按需导入的 SDK 模块
+
+| 功能 | 导入文件 | 使用方式 |
+| :--- | :--- | :--- |
+| SDK 初始化与连接管理 | `import { ChatClient } from "easemob-websdk";` | `ChatClient.init({ appKey: "your appKey" });` |
+| 消息和会话管理 | `import { ChatManager } from "easemob-websdk";` 或 `import { ChatManager } from "easemob-websdk/managers/chat";` | 通过 `managers` 参数或 `.use(ChatManager)` 注册后，调用 `client.chatManager`。 |
+| 好友管理 | `import { ContactManager } from "easemob-websdk";` 或 `import { ContactManager } from "easemob-websdk/managers/contact";` | 通过 `managers` 参数或 `.use(ContactManager)` 注册后，调用 `client.contactManager`。 |
+| 群组管理 | `import { GroupManager } from "easemob-websdk";` 或 `import { GroupManager } from "easemob-websdk/managers/group";` | 通过 `managers` 参数或 `.use(GroupManager)` 注册后，调用 `client.groupManager`。 |
+| 聊天室管理 | `import { ChatRoomManager } from "easemob-websdk";` 或 `import { ChatRoomManager } from "easemob-websdk/managers/chatroom";` | 通过 `managers` 参数或 `.use(ChatRoomManager)` 注册后，调用 `client.chatRoomManager`。 |
+| 消息话题管理 | `import { ChatThreadManager } from "easemob-websdk";` 或 `import { ChatThreadManager } from "easemob-websdk/managers/chat-thread";` | 通过 `managers` 参数或 `.use(ChatThreadManager)` 注册后，调用 `client.chatThreadManager`。 |
+| 在线状态管理 | `import { PresenceManager } from "easemob-websdk";` 或 `import { PresenceManager } from "easemob-websdk/managers/presence";` | 通过 `managers` 参数或 `.use(PresenceManager)` 注册后，调用 `client.presenceManager`。 |
+| 推送管理 | `import { PushManager } from "easemob-websdk";` 或 `import { PushManager } from "easemob-websdk/managers/push";` | 通过 `managers` 参数或 `.use(PushManager)` 注册后，调用 `client.pushManager`。 |
+| 用户资料管理 | `import { UserInfoManager } from "easemob-websdk";` 或 `import { UserInfoManager } from "easemob-websdk/managers/user-info";` | 通过 `managers` 参数或 `.use(UserInfoManager)` 注册后，调用 `client.userInfoManager`。 |
+
+#### 从官网获取并导入 SDK
 
 如果项目不使用 npm 包管理工具，也可以下载浏览器脚本文件并在页面中引入。
 
@@ -144,7 +146,7 @@ const contacts = await client.contactManager.getContacts();
 通过浏览器脚本方式引入时，SDK 会挂载到全局变量 `IMSDK`。如果你使用的是从官网下载的 SDK 文件，请以实际文件名为准调整 `script` 路径。
 :::
 
-### Nuxt 或 Next 项目中引入 SDK
+#### Nuxt 或 Next 项目中引入 SDK
 
 对于服务端渲染框架（如 Nuxt、Next 等），需要在客户端渲染阶段引入 SDK，避免在服务端渲染阶段访问浏览器运行时能力。
 
