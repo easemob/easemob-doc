@@ -1,6 +1,6 @@
 ## v5.0.0 Dev 2026-8-15（开发版）
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Android SDK 5.0.0 迁移指南](migration_guide.html)。
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Android SDK 5.0.0.0 迁移指南](migration_guide.html)。
 
 #### 重大变更
 

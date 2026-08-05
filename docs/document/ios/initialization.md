@@ -38,7 +38,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 | `apnsCertName` | APNs 推送证书名称。必须在初始化前设置，运行期间不可修改。 |
 | `pushKitCertName` | PushKit 证书名称。必须在初始化前设置，运行期间不可修改。 |
 | `autoAcceptGroupInvitation` | 是否自动接受群组邀请。<br/> -（默认）`true`：自动接受。<br/> - `false`：不自动接受。 |
-| `autoAcceptFriendInvitation` | 是否自动接受好友邀请。按当前 iOS 5.0 实现，默认值为 `false`。<br/> - `true`：自动接受。<br/> -（默认）`false`：不自动接受。 |
+| `autoAcceptFriendInvitation` | 是否自动接受好友邀请。按当前 iOS 5.0.0 实现，默认值为 `false`。<br/> - `true`：自动接受。<br/> -（默认）`false`：不自动接受。 |
 | `deleteMessagesOnLeaveChatroom` | 主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `deleteMessagesOnLeaveGroup` | 主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `canChatroomOwnerLeave` | 是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许。<br/> - `false`：不允许。 |
@@ -130,7 +130,7 @@ options.dataSyncType = .none
 ```
 
 :::tip
-当前 iOS 5.0 实现创建 `EMOptions` 时会将 `dataSyncType` 初始化为会话同步，但公开头文件注释与变更说明中记载的默认值为 `.none`。为保证行为明确且不受版本差异影响，建议始终显式设置该属性。
+当前 iOS 5.0.0 实现创建 `EMOptions` 时会将 `dataSyncType` 初始化为会话同步，但公开头文件注释与变更说明中记载的默认值为 `.none`。为保证行为明确且不受版本差异影响，建议始终显式设置该属性。
 :::
 
 ### 监听同步状态
