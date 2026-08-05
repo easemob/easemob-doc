@@ -1,17 +1,19 @@
 # 群组 @ 消息
 
-群组 @ 消息指在群组聊天中，用户可以 @ 单个、多个或所有成员，发送消息。群组中的每个成员均可使用 @ 功能，而且可以 @ 群所有成员。
+## 功能说明
+
+群组 @ 消息用于在群聊中提醒指定群成员或全体群成员。发送群消息时，发送方可以在消息扩展字段中携带 @ 信息；接收方收到消息后，可以根据消息扩展字段判断该消息是否 @ 了当前用户或 @ 了全体成员。
 
 :::tip
-目前，该功能只支持文本消息和表情。
+群组 @ 消息通常用于群聊文本消息场景，表情可作为文本消息内容的一部分发送。
 :::
 
 例如，该功能的 UI 实现如下图所示：
 
-1. 在输入框输入 "@" 字符后，选择要 @ 的群成员。
-2. 选择群成员后，返回聊天界面，编辑消息，然后发送。
-3. 如果有消息 @ 我，会收到会话更新，例如，“Somebody@You”。
-4. 打开会话页面，查看消息。
+1. 在输入框输入 `@` 字符后，选择要 @ 的群成员。
+2. 选择群成员后，返回聊天界面，继续编辑消息并发送。
+3. 若收到 @ 当前用户的消息，会话列表中可展示相应提醒，例如 “Somebody@You”。
+4. 打开会话页面，查看对应消息。
 
 UI 实现示例图如下所示：
 
@@ -19,72 +21,119 @@ UI 实现示例图如下所示：
 
 ## 前提条件
 
-开始前，请确保满足以下条件：
+使用群组 @ 消息前，需完成以下准备工作：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
+- 当前用户已加入目标群组。
+- 若需要 @ 指定群成员，需获取被 @ 成员的用户 ID。
 
 ## 实现过程
 
-在群组中，@ 某人发送消息与发送普通消息没有区别，只是被 @ 的用户在 UI 上显示会有不同。该功能可以通过扩展消息实现：
+在群组中，发送 @ 消息的流程与发送普通群消息基本一致，区别在于发送方需要在消息扩展字段中携带被 @ 用户的用户 ID。群组成员收到消息后，可根据该扩展字段判断当前用户是否被 @，并在 UI 上展示相应提示。
 
-1. 发送方将要 @ 的用户的用户 ID 通过扩展字段添加到消息，并将消息发送到群组。
-2. 群组成员收到消息时，检查对应的扩展字段是否存在。若存在，检查当前登录的用户 ID 是否包含在扩展字段中。
-3. 若包含，需要对被 @ 的用户在 UI 上进行特殊处理，显示出相应的提示信息，如“[Somebody@You]”。若不包含，表明用户没有被 @，则 UI 无需处理。
+发送 @ 消息通过以下步骤实现：
 
-群组 @ 消息的扩展数据结构如下：
+1. 发送方将被 @ 用户的用户 ID 添加到消息扩展字段中，并将消息发送到群组。
+2. 群组成员收到消息后，检查消息中是否存在对应扩展字段；若存在，继续判断当前登录用户的用户 ID 是否包含在该扩展字段中。
+3. 若包含，表示当前用户被 @，可在 UI 上展示相应提示，例如 “[Somebody@You]”；若不包含，表示当前用户未被 @，无需做特殊展示。
 
-- @ 单个或多个群组成员："em_at_list": [user1, user2, user3]
-- @ 群全体成员："em_at_list":"All"
+SDK 通过消息扩展字段 `ext.em_at_list` 标识群组 @ 信息。`em_at_list` 的取值规则如下：
 
-### 发送消息
+| 取值 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `["userId1", "userId2"]` | String[] | @ 一个或多个指定群成员。数组元素为被 @ 用户的用户 ID。 |
+| `"all"` | String | @ 全体群成员。 |
 
-发送方 @ 用户发送消息的过程如下示例代码所示。
+:::tip
+群组 @ 消息仅适用于群聊消息，即 `conversationType` 为 `groupChat` 的消息。
+:::
 
-```javascript
-const message = chatSDK.message.create({
-  to: "userId",
-  chatType: "groupChat",
-  type: "txt",
-  msg: "hello",
+### 发送群组 @ 消息
+
+你可以在创建群聊消息时，通过消息扩展字段 `ext.em_at_list` 设置 @ 信息，然后调用 `client.chatManager.sendMessage` 发送消息。
+
+#### @ 指定群成员
+
+示例代码如下：
+
+```typescript
+const message = client.chatManager.createTextMessage({
+  conversationId: 'groupId',
+  conversationType: 'groupChat',
+  content: '@user1 @user2 请查看这条消息',
   ext: {
-    em_at_list: "ALL" || ["user1", "user2"],
+    em_at_list: ['user1', 'user2'],
   },
 });
 
-client.send(message);
+await client.chatManager.sendMessage(message);
 ```
 
-### 接收消息
+#### @ 全体群成员
 
-接收方收到消息时，通过解析消息扩展字段 `ext`，检查消息是否 @ 了自己，过程如下。
+示例代码如下：
 
-```javascript
-receiveMessage(message){
-    let mentionList = message?.ext?.em_at_list;
-    // 收到文本消息            
-    if (mentionList && message.from !== client.user && message.type === 'txt') {
-        // 消息 @ 所有人或包含自己时，需要更新 UI。
-        if (mentionList === "ALL" || mentionList.includes(client.user)) {
-        }
+```typescript
+const message = client.chatManager.createTextMessage({
+  conversationId: 'groupId',
+  conversationType: 'groupChat',
+  content: '@所有人 请查看这条消息',
+  ext: {
+    em_at_list: 'all',
+  },
+});
+
+await client.chatManager.sendMessage(message);
+```
+
+参数说明如下：
+
+| 参数 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `conversationId` | String | 群组 ID。 |
+| `conversationType` | String | 会话类型。群组 @ 消息需设置为 `groupChat`。 |
+| `content` | String | 文本消息内容。消息内容中的 @ 文案用于客户端展示，实际 @ 关系以 `ext.em_at_list` 为准。 |
+| `ext.em_at_list` | String[] \| String | 群组 @ 信息。传入用户 ID 数组表示 @ 指定成员；传入 `all` 表示 @ 全体群成员。 |
+
+### 接收群组 @ 消息
+
+收到群聊消息后，可以从消息对象的 `ext.em_at_list` 字段中读取 @ 信息，并判断该消息是否 @ 了当前用户。
+
+示例代码如下：
+
+```typescript
+client.addEventHandler('group-at-message', {
+  onTextMessage: message => {
+    if (message.conversationType !== 'groupChat') {
+      return;
     }
-}
 
+    const atList = message.ext?.em_at_list;
+    const currentUserId = client.user;
+
+    if (atList === 'all') {
+      console.log('收到 @ 全体成员的群消息：', message);
+      return;
+    }
+
+    if (Array.isArray(atList) && atList.includes(currentUserId)) {
+      console.log('收到 @ 当前用户的群消息：', message);
+    }
+  },
+});
 ```
 
-## 常见问题
+客户端可根据业务需要，在会话列表或消息列表中展示“有人 @ 我”“@ 所有人”等提示。
 
-1. Q：@ 群所有人时为何发消息失败？
+### 与离线推送的关系
 
-   A：可能是 `ALL` 的拼写错误，比较时可兼容处理先统一转为小写或者大写。
+若接收方的会话 [推送通知方式](/document/web/push/push_notification_mode_dnd.html#推送通知方式) 设置为 `AT`（仅接收 @ 消息通知），服务端会根据消息扩展字段 `ext.em_at_list` 判断该群消息是否需要触发离线推送。因此，发送群组 @ 消息时，需正确设置 `em_at_list` 字段。
 
-2. Q：@ 多人与 @ 所有人有什么区别？  
+## 接口列表
 
-   A：设置 `ext` 时，若 @ 单个、多个群成员，字段的值为要 @ 的用户的用户 ID 数组；@ 所有人时，字段值为 `ALL` 字符串。
+// TODO：最终上线时查看链接是否准确
 
-
-
-
-
-
-
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createTextMessage`](#发送群组-消息) | `ChatManager` | 创建文本消息，并通过 `ext.em_at_list` 设置群组 @ 信息。 |
+| [`sendMessage`](#发送群组-消息) | `ChatManager` | 发送携带群组 @ 信息的群聊消息。 |

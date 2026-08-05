@@ -1,225 +1,531 @@
 # 管理群组属性
 
-<Toc />
+## 功能说明
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM Android SDK 在实时互动 app 中实现群组属性相关功能。
-
-## 技术原理
-
-环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html) 类和 [EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
-
-- 修改群组名称、描述和群头像
-- 获取、更新群组公告
-- 管理群组共享文件
-- 更新群扩展字段
+群组是支持多人沟通的即时通讯场景。本文介绍如何使用环信即时通讯 IM Android SDK 获取和管理群组详情、名称、描述、头像、公告、共享文件及扩展字段。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
+- 已登录并连接到 IM 服务器。
+- 已了解接口调用频率、群组及群成员数量限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 获取群组详情
 
-本节介绍如何使用环信即时通讯 IM Android SDK 提供的 API 实现上述功能。
+调用 `EMGroupManager#getGroup` 可以根据群组 ID 从本地内存获取群组详情，该接口不会发起网络请求。调用 `asyncGetGroupFromServer` 可以从服务器获取最新群组详情，并更新本地缓存。
 
-### 修改群组名称
+`asyncGetGroupFromServer` 不返回群成员列表。如果需要群成员列表，需调用 `asyncFetchGroupMembersInfo` 或 `asyncFetchGroupMembers`，详见 [获取群成员列表](group_members.html#获取群成员列表)。
 
-仅群主和群管理员可以调用 `changeGroupName` 方法设置和修改群组名称，其他群成员会收到`EMGroupChangeListener#onSpecificationChanged` 回调。群名称的长度限制为 128 个字符。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeGroupName(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().changeGroupName(groupId,changedGroupName);
-```
-
-### 修改群组描述
-
-仅群主和群管理员可以调用 `changeGroupDescription` 方法设置和修改群组描述，其他群成员会收到`EMGroupChangeListener#onSpecificationChanged` 回调。群描述的长度限制为 512 个字符。
-
-示例代码如下：
+:::tip
+对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
+:::
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeGroupDescription(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().changeGroupDescription(groupId,description);
+// 从本地内存获取群组详情，不会向服务器发起请求。
+EMGroup localGroup = EMClient.getInstance()
+        .groupManager()
+        .getGroup(groupId);
+
+// 从服务器获取最新群组详情，并更新本地缓存。
+EMClient.getInstance()
+        .groupManager()
+        .asyncGetGroupFromServer(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                        // 获取群组 ID。
+                        String id = group.getGroupId();
+
+                        // 获取群组名称。
+                        String name = group.getGroupName();
+
+                        // 获取群组描述。
+                        String description = group.getDescription();
+
+                        // 获取群头像 URL。
+                        String avatar = group.getGroupAvatar();
+
+                        // 获取群主的用户 ID。
+                        String owner = group.getOwner();
+
+                        // 获取群管理员的用户 ID 列表。
+                        List<String> admins = group.getAdminList();
+
+                        // 判断当前用户是否已屏蔽该群组的消息。
+                        boolean messageBlocked = group.isMsgBlocked();
+
+                        // 判断群组是否已被禁用。
+                        boolean disabled = group.isDisabled();
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                        // 获取失败，根据错误码和错误信息处理。
+                    }
+                });
 ```
+## 修改群组配置
 
-### 管理群组头像
+群主或群管理员可调用 `asyncUpdateGroupConfigs` 按指定属性位修改群组配置，未指定的字段不会被覆盖。
 
-自 Android SDK 4.14.0 开始，支持群组头像功能。
+通过 `EMGroupConfigsType` 指定要更新的字段，如下表所示：
 
-#### 设置群组头像
+| 配置类型                 | `EMGroupConfigs` 字段  | 说明                                 |
+| ------------------------ | ---------------------- | ------------------------------------ |
+| `IS_PUBLIC`              | `isPublic`             | 是否为公开群。                       |
+| `JOIN_APPROVAL_REQUIRED` | `joinApprovalRequired` | 公开群加入是否需要群主或管理员审批。 |
+| `ALLOW_INVITES`          | `allowInvites`         | 私有群普通成员是否可以邀请其他用户。 |
+| `MAX_USERS`              | `maxUsers`             | 群组最大成员数。默认值为 `200`。                    |
+| `INVITE_NEED_CONFIRM`    | `inviteNeedConfirm`    | 被邀请用户加入群组前是否需要确认。   |
+| `EXT`                    | `extField`             | 群组扩展字段。                       |
 
-- 创建群组时，可设置群组头像：
+例如，仅修改群最大成员数，示例代码如下：
 
 ```java
-EMGroupOptions option = new EMGroupOptions();
-option.maxUsers = 100;
-option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncCreateGroup(String, String, String, String[], String, EMGroupOptions, EMValueCallBack)。
-EMClient.getInstance().groupManager().createGroup(groupName, avatar,  desc, allMembers, reason, option);
+// 异步方法。
+//未包含在 `EnumSet` 中的配置项不会被更新。
+EMGroupConfigs configs = new EMGroupConfigs();
+configs.maxUsers = 300;
+EMClient.getInstance().groupManager().asyncUpdateGroupConfigs(
+        groupId,
+        EnumSet.of(EMGroupManager.EMGroupConfigsType.MAX_USERS),
+        configs,
+        new EMValueCallBack<EMGroup>() {
+            @Override
+            public void onSuccess(EMGroup group) {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+        });
 ```
 
-- 创建群组后，若设置群组头像，可调用 [修改群组头像](#修改群组头像) API 设置头像。
+群成员会通过 `onSpecificationChanged(EMGroup group)` 收到群组详情更新回调。回调中的 `EMGroup` 表示更新后的群组信息。为确保获取完整且最新的配置，建议在回调中调用 `asyncGetGroupFromServer` 从服务器获取群组详情。
 
-#### 修改群组头像
+## 修改群组名称
 
-创建群组完成后，群主或管理员可调用 `EMGroupManager#changeGroupAvatar` 设置或修改群组头像：
+仅群主和群管理员可以调用 `asyncChangeGroupName` 修改群组名称。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群名称的长度限制为 128 个字符。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeGroupAvatar(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().changeGroupAvatar(groupId,changedAvatar);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncChangeGroupName(
+                groupId,
+                changedGroupName,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-群组头像被修改后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调：
+
+## 修改群组描述
+
+仅群主和群管理员可以调用 `asyncChangeGroupDescription` 修改群组描述。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群描述的长度限制为 512 个字符。
 
 ```java
-EMGroupChangeListener#onSpecificationChanged(EMGroup group)
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncChangeGroupDescription(
+                groupId,
+                description,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 获取群组头像
 
-群成员可以通过获取群详情的方法 `EMGroupManager#getGroupFromServer`，获取群组头像：
+## 管理群组头像
+
+Android SDK 支持在创建群组时设置群头像，也支持在群组创建后修改或获取群头像。
+
+### 设置群组头像
+
+创建群组时，将头像 URL 作为 `asyncCreateGroup` 的 `avatar` 参数传入。Android SDK 使用 `EMGroupConfigs` 配置群组属性。
 
 ```java
-// 根据群组 ID 从服务器获取群组详情。
-// 同步方法，会阻塞当前线程。异步方法为 asyncGetGroupFromServer(String, EMValueCallBack)。
-EMGroup group = EMClient.getInstance().groupManager().getGroupFromServer(groupId);
-String avatar = group.getGroupAvatar();
+EMGroupConfigs configs = new EMGroupConfigs();
+configs.maxUsers = 200;
+configs.isPublic = false;
+configs.allowInvites = true;
+configs.inviteNeedConfirm = true;
+
+EMClient.getInstance()
+        .groupManager()
+        .asyncCreateGroup(
+                groupName,
+                avatar,
+                description,
+                new String[0],
+                null,
+                configs,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 更新群公告
+创建群组后，可以通过 [修改群组头像](#修改群组头像) 接口设置或更新头像。
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupChangeListener#onAnnouncementChanged` 回调。
+### 修改群组头像
 
-示例代码如下：
+创建群组完成后，群主或群管理员可以调用 `asyncChangeGroupAvatar` 设置或修改群头像。修改成功后，其他群成员会收到 `onSpecificationChanged` 回调。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUpdateGroupAnnouncement(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().updateGroupAnnouncement(groupId, announcement);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncChangeGroupAvatar(
+                groupId,
+                changedAvatar,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 获取群公告
+### 获取群组头像
 
-所有群成员均可以调用 `EMGroupManager#fetchGroupAnnouncement` 方法从服务器获取群公告。
-
-示例代码如下：
+调用 `asyncGetGroupFromServer` 获取最新群组详情，然后通过 `EMGroup#getGroupAvatar` 读取群头像。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchGroupAnnouncement(String, EMValueCallBack)。
-EMClient.getInstance().groupManager().fetchGroupAnnouncement(groupId);
+EMClient.getInstance()
+        .groupManager()
+        .asyncGetGroupFromServer(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                        String avatar = group.getGroupAvatar();
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 管理共享文件
+## 更新群公告
 
-#### 上传共享文件
+仅群主和群管理员可以调用 `asyncUpdateGroupAnnouncement` 设置或更新群公告。更新成功后，群成员会收到 `EMGroupChangeListener#onAnnouncementChanged` 回调。
 
-所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileAddedFromGroup` 回调。
-
-示例代码如下：
+群公告的长度限制为 512 个字符。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUploadGroupSharedFile(String, String, EMValueCallBack)。
-EMClient.getInstance().groupManager().uploadGroupSharedFile(groupId, filePath, callBack);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncUpdateGroupAnnouncement(
+                groupId,
+                announcement,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 下载共享文件
 
-所有群成员均可调用 `EMGroupManager#asyncDownloadGroupSharedFile` 方法下载群组共享文件。
+## 获取群公告
+
+所有群成员均可以调用 `asyncFetchGroupAnnouncement` 从服务器获取群公告。
 
 ```java
-// 同步方法，需要放到异步线程
-// pageNum	当前页码，从 1 开始。
-// pageSize	每页返回的共享文件数。
-List<EMMucSharedFile> sharedFiles = EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
-// 获取需要的共享文件信息
-EMMucSharedFile sharedFile = sharedFiles.get(index);
-EMClient.getInstance().groupManager().asyncDownloadGroupSharedFile(groupId, sharedFile.getFileId(), savePath, new EMCallBack() {
-    @Override
-    public void onSuccess() {
-        // 在这里处理 savePath 保存的文件
-    }
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupAnnouncement(
+                groupId,
+                new EMValueCallBack<String>() {
+                    @Override
+                    public void onSuccess(String announcement) {
+                    }
 
-    @Override
-    public void onError(int code, String error) {
-
-    }
-});
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 删除共享文件
 
-所有群成员均可以调用 `EMGroupManager#DeleteGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupChangeListener#OnSharedFileDeletedFromGroup` 回调。
+## 管理共享文件
 
-群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
+群成员可以下载、获取和删除群共享文件。普通成员只能删除自己上传的文件，群主和群管理员可以删除群组中的任意共享文件。
 
-示例代码如下：
+### 上传共享文件
+
+你可以调用 `asyncUploadGroupSharedFile` 上传群共享文件。文件上传后，群组所有成员都会收到 `onSharedFileAdded` 回调。
+
+单个群共享文件大小限制为 10 MB。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncDeleteGroupSharedFile(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().deleteGroupSharedFile(groupId, fileId);
+String groupId = "group_id";
+// 指向存在且可读的本地文件。
+String filePath = getExternalFilesDir(null) + "/docs/test.pdf";
+
+EMClient.getInstance()
+        .groupManager()
+        .asyncUploadGroupSharedFile(
+                groupId,
+                filePath,
+                new EMValueCallBack<EMMucSharedFile>() {
+                    @Override
+                    public void onProgress(int progress, String status) {
+                        // 回调线程不一定是主线程
+                        runOnUiThread(() -> {
+                            uploadProgressBar.setProgress(progress);
+                        });
+                    }
+
+                    @Override
+                    public void onSuccess(EMMucSharedFile sharedFile) {
+                        runOnUiThread(() -> {
+                            String fileId = sharedFile.getFileId();
+                            String fileName = sharedFile.getFileName();
+    
+                            Toast.makeText(
+                                    MyActivity.this,
+                                    "上传成功：" + fileName,
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        });
+                    }
+    
+                    @Override
+                    public void onError(int error, String errorMsg) {
+                        runOnUiThread(() -> {
+                            Toast.makeText(
+                                    MyActivity.this,
+                                    "上传失败：" + errorMsg,
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        });
+                    }
+                }
+        );
 ```
 
-#### 从服务器获取共享文件
-
-所有群成员均可以调用 `EMGroupManager#fetchGroupSharedFileList` 方法从服务器获取群组的共享文件列表。
+上传成功后，可通过 `EMMucSharedFile` 获取：
 
 ```java
-// 同步方法，会阻塞当前线程。
-// pageNum	当前页码，从 1 开始。
-// pageSize	每页返回的共享文件数。
-// 异步方法为 asyncFetchGroupSharedFileList(String, int, int, EMValueCallBack)。
-EMClient.getInstance().groupManager().fetchGroupSharedFileList(groupId, pageNum, pageSize);
+sharedFile.getFileId();         // 共享文件 ID
+sharedFile.getFileName();       // 文件名
+sharedFile.getFileOwner();      // 上传者
+sharedFile.getFileSize();       // 文件大小，单位：字节
+sharedFile.getFileUpdateTime(); // 更新时间，Unix 毫秒时间戳
 ```
 
-### 更新群扩展字段
+### 下载共享文件
+
+先调用 `asyncFetchGroupSharedFileList` 获取共享文件信息，再调用 `asyncDownloadGroupSharedFile` 下载指定文件。
+
+```java
+EMClient.getInstance()
+        .groupManager()
+         // pageNum：当前页码，从 1 开始。
+         // pageSize：每页返回的共享文件数。
+        .asyncFetchGroupSharedFileList(
+                groupId,
+                1,
+                20,
+                new EMValueCallBack<List<EMMucSharedFile>>() {
+                    @Override
+                    public void onSuccess(
+                            List<EMMucSharedFile> sharedFiles) {
+                        if (sharedFiles.isEmpty()) {
+                            return;
+                        }
+
+                        String fileId = sharedFiles.get(0).getFileId();
+                        EMClient.getInstance()
+                                .groupManager()
+                                .asyncDownloadGroupSharedFile(
+                                        groupId,
+                                        fileId,
+                                        savePath,
+                                        new EMCallBack() {
+                                            @Override
+                                            public void onSuccess() {
+                                            }
+
+                                            @Override
+                                            public void onProgress(
+                                                    int progress,
+                                                    String status) {
+                                            }
+
+                                            @Override
+                                            public void onError(
+                                                    int errorCode,
+                                                    String errorMessage) {
+                                            }
+                                        });
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 删除共享文件
+
+所有群成员均可以调用 `asyncDeleteGroupSharedFile` 删除指定群共享文件。删除成功后，其他群成员会收到 `onSharedFileDeleted` 回调。
+
+普通成员只能删除自己上传的文件，群主和群管理员可以删除任意共享文件。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncDeleteGroupSharedFile(
+                groupId,
+                fileId,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+
+### 从服务器获取共享文件
+
+所有群成员均可以调用 `asyncFetchGroupSharedFileList` 使用从服务器分页获取群共享文件列表。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        // pageNum：当前页码，从 1 开始。
+        // pageSize：每页返回的共享文件数。
+        .asyncFetchGroupSharedFileList(
+                groupId,
+                pageNum,
+                pageSize,
+                new EMValueCallBack<List<EMMucSharedFile>>() {
+                    @Override
+                    public void onSuccess(
+                            List<EMMucSharedFile> sharedFiles) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+
+## 更新群扩展字段
 
 仅群主和群管理员可以更新群组扩展字段。群扩展字段可用于存储 JSON 格式的自定义群组信息，长度不能超过 8 KB。
 
-你可以调用同步方法 `EMGroupManager#updateGroupExtension` 更新群扩展字段。该方法会阻塞当前线程，请勿在主线程中调用。
+建议调用 `asyncUpdateGroupExtension` 单独更新群扩展字段。更新成功后，回调返回更新后的 `EMGroup` 对象，其他群成员会收到 `onSpecificationChanged` 回调。
 
 ```java
-try {
-    EMGroup group = EMClient.getInstance()
+// 异步方法。
+EMClient.getInstance()
         .groupManager()
-        .updateGroupExtension(groupId, extension);
-    // 群扩展字段更新成功。
-} catch (HyphenateException e) {
-    // 群扩展字段更新失败。
-}
+        .asyncUpdateGroupExtension(
+                groupId,
+                extension,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                        String updatedExtension = group.getExtension();
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-自 4.24.0 版本开始，SDK 新增异步方法 `EMGroupManager#asyncUpdateGroupExtension`。更新成功时，SDK 通过 `onSuccess` 回调返回更新后的群组对象；更新失败时，通过 `onError` 回调返回错误码和错误信息。
+## 监听群组事件
 
-```java
-EMClient.getInstance().groupManager().asyncUpdateGroupExtension(
-    groupId,
-    extension,
-    new EMValueCallBack<EMGroup>() {
-        @Override
-        public void onSuccess(EMGroup group) {
-            // 群扩展字段更新成功。
-        }
+群名称、描述、头像、公告、共享文件和扩展字段发生变化时，SDK 会触发对应的 `EMGroupChangeListener` 回调。监听器的注册、移除及完整事件说明详见[监听群组事件](group_manage.html#监听群组事件)。
 
-        @Override
-        public void onError(int errorCode, String errorMessage) {
-            // 群扩展字段更新失败。
-        }
-    }
-);
-```
+## 接口列表
 
-### 监听群组事件
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getGroup`](#获取群组详情) | `EMGroupManager` | 从本地内存获取群组详情。 |
+| [`asyncGetGroupFromServer`](#获取群组详情) | `EMGroupManager` | 从服务器获取最新群组详情。 |
+| [`getGroupId`](#获取群组详情) / [`getGroupName`](#获取群组详情) / [`getDescription`](#获取群组详情) | `EMGroup` | 获取群组 ID、名称和描述。 |
+| [`getOwner`](#获取群组详情) / [`getAdminList`](#获取群组详情) | `EMGroup` | 获取群主和群管理员列表。 |
+| [`isMsgBlocked`](#获取群组详情) / [`isDisabled`](#获取群组详情) | `EMGroup` | 获取群消息屏蔽状态和群禁用状态。 |
+| [`asyncUpdateGroupConfigs`](#修改群组配置) | `EMGroupManager` | 按指定属性位修改群组配置。 |
+| [`asyncChangeGroupName`](#修改群组名称) | `EMGroupManager` | 修改群名称。 |
+| [`asyncChangeGroupDescription`](#修改群组描述) | `EMGroupManager` | 修改群描述。 |
+| [`asyncCreateGroup`](#设置群组头像) | `EMGroupManager` | 创建群组并设置群头像。 |
+| [`asyncChangeGroupAvatar`](#修改群组头像) | `EMGroupManager` | 修改群头像。 |
+| [`getGroupAvatar`](#获取群组头像) | `EMGroup` | 获取群头像。 |
+| [`asyncUpdateGroupAnnouncement`](#更新群公告) | `EMGroupManager` | 更新群公告。 |
+| [`asyncFetchGroupAnnouncement`](#获取群公告) | `EMGroupManager` | 获取群公告。 |
+| [`asyncUploadGroupSharedFile`](#上传共享文件) | `EMGroupManager` | 上传群共享文件。 |
+| [`asyncDownloadGroupSharedFile`](#下载共享文件) | `EMGroupManager` | 下载群共享文件。 |
+| [`asyncDeleteGroupSharedFile`](#删除共享文件) | `EMGroupManager` | 删除群共享文件。 |
+| [`asyncFetchGroupSharedFileList`](#从服务器获取共享文件) | `EMGroupManager` | 分页获取群共享文件列表。 |
+| [`getFileId`](#下载共享文件) | `EMMucSharedFile` | 获取群共享文件 ID。 |
+| [`asyncUpdateGroupExtension`](#更新群扩展字段) | `EMGroupManager` | 更新群扩展字段。 |
+| [`getExtension`](#更新群扩展字段) | `EMGroup` | 获取群扩展字段。 |
 
-详见 [监听群组事件](group_manage.html#监听群组事件)。

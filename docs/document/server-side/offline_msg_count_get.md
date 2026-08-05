@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 获取环信即时通讯 IM 用户的离线消息数量。
-- 离线消息的存储条数和天数，详见 [离线消息存储说明](/product/product_message_overview.html#离线消息存储)。
+- 离线消息的存储条数和天数，详见 [离线消息存储说明](/product/product_message_overview.html#消息存储)。
 
 ## 调用频率上限
 

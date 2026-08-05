@@ -11,7 +11,7 @@
 
 ## 回调时机
 
-客户端 [发送单聊会话已读回执](/document/android/conversation_receipt.html)。
+客户端 [发送单聊会话已读回执](/v4/document/android/conversation_receipt.html)。
 
 ## 回调请求
 

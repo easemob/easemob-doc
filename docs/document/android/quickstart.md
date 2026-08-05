@@ -1,6 +1,4 @@
-# 快速开始
-
-<Toc />
+﻿# 快速开始
 
 本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
 
@@ -68,7 +66,7 @@ dependencyResolutionManagement {
 ```gradle
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：4.13.0。
+    // x.y.z 请填写要集成的 Android SDK 版本号。
     implementation("io.hyphenate:hyphenate-chat:x.y.z")
 }
 ```
@@ -177,9 +175,8 @@ EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
 ```
 
 :::tip
-1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
-2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
-3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `onCreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
+1. 需要访问服务器的 SDK 操作需在登录并建立连接后进行；SDK 初始化可在登录前完成。本地数据库会在登录流程中打开，具体使用方式详见 [登录](login.html) 文档。
+2. 登录成功后，SDK 会自动加载本地会话和群组数据；进入主页面时可直接调用本地读取接口 [获取会话](conversation_list.html#一次性获取本地所有会话) 和 [群组列表](group_manage.html#获取当前用户加入的群组列表)。
 :::
 
 ### 4. 发送一条单聊消息
@@ -200,7 +197,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### SDK 依赖的 Crash 上报库冲突
 
-当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+当同时集成环信 SDK 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
 
 ```java
 com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
@@ -221,3 +218,13 @@ android {
 ```
 
 然后 Gradle 文件同步，重新构建项目。如欲了解详情，请参见 [声网官方文档](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`init`](#_1-sdk-初始化) | `EMClient` | 初始化 Android SDK。 |
+| [`setAppKey`](#_1-sdk-初始化) | `EMOptions` | 设置应用的 App Key。 |
+| [`loginWithToken`](#_3-登录账号) | `EMClient` | 使用用户 ID 和 Token 登录。 |
+| [`createTextSendMessage`](#_4-发送一条单聊消息) | `EMMessage` | 创建文本消息。 |
+| [`sendMessage`](#_4-发送一条单聊消息) | `EMChatManager` | 发送消息。 |

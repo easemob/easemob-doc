@@ -48,7 +48,7 @@ ChatClient.getInstance().chatManager()?.deleteAllConversationsAndMessages(clearS
 多设备情况下，登录该账号的其他设备会收到 `MultiDeviceListener` 中的 `onMessageRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-要单向删除服务端聊天室的历史消息，需将 SDK 升级至 1.4.0 或以上版本。
+要单向删除服务端聊天室的历史消息，需将 SDK 升级至 1.4.0 或以上版本，并联系商务开通聊天室漫游消息功能。
 :::
 
 示例代码如下：

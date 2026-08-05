@@ -37,7 +37,7 @@
 - 测试阶段：[应用创建](/product/console/app_create.html) 后默认为免费版，支持免费升级至专业版或旗舰版。关于测试版应用对套餐包以及服务的试用，详见 [相关介绍](pricing_method.html#测试版应用试用说明)。
 - [应用上线](/product/console/app_launch.html)：必须选择专业版或旗舰版。
 
-所有付费套餐均默认开启自动续订。套餐到期时，你也可以在环信控制台重新下单 [订阅同版本或其他版本套餐](pricing_method.html#订阅套餐包)。
+所有付费套餐均默认开启自动续订。套餐到期时，你也可以在环信控制台重新下单 [订阅同版本或其他版本套餐](pricing_method.html#订阅-升级套餐包)。
 
 :::tip
 关于各套餐包之间功能差异详情，详见 [各套餐包功能对比文档](product_package_feature.html)。

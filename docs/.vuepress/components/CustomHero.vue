@@ -7,8 +7,27 @@
           提供完整 API 参考、多端 SDK 示例与最佳实践，快速集成消息、群组、聊天室、音视频等核心功能，助您轻松构建稳定可靠的 IM 应用。
         </div>
         <div class="hero-desc">
-        探索下面的综合文档，立即释放 IM 即时通讯的力量。
+          探索下面的综合文档，立即释放 IM 即时通讯的力量。
         </div>
+        <ul class="hero-version-info">
+          <li>
+            <strong><a
+              class="hero-version-v5"
+              href="/document/android/beginner_guide.html"
+            >v5 全新上线</a></strong>：<strong>V5 文档已就位！</strong>目前为 Android、iOS 及 Web/小程序提供全新集成指南，带来更优性能与体验。更多平台文档即将陆续登场，选择 V5，即刻开启升级之旅。
+          </li>
+          <li>
+            <a href="/v4/android/quickstart.html">v4.x 持续维护</a>：各端 V4.x 文档仍在正常维护中，现有客户可安心使用。
+          </li>
+          <li>
+            <a
+              href="https://docs-im.easemob.com/start/start"
+            >v2</a>
+            /
+            <a href="https://docs-im.easemob.com/ccim/intro">v3</a>
+            已停止维护：旧版本文档已归档，不再更新。
+          </li>
+        </ul>
       </div>
       <img src="/hero_chat.png" alt="Documentation icon" class="hero-img" />
     </div>
@@ -79,6 +98,17 @@ export default defineComponent({
   &:last-child {
     margin-top: 22px;
   }
+}
+
+.hero-version-info {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  color: #505e72;
+  line-height: 24px;
+}
+
+.hero-version-v5 {
+  font-size: calc(1em + 4px);
 }
 
 .hero-img {

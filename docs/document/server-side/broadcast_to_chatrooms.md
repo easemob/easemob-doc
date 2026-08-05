@@ -230,7 +230,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | `msg` | JSON | 是 | 消息体包含的信息。  |
 | `msg.type` | String | 是 | 广播消息类型：<br/> - `txt`：文本消息；<br/> - `img`：图片消息；<br/> - `audio`：语音消息；<br/> - `video`：视频消息；<br/> - `file`：文件消息；<br/> - `loc`：位置消息；<br/> - `cmd`：透传消息；<br/> - `custom`：自定义消息。 |
 | `msg.msg` | String | 是 | 消息内容。  |
-| `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
+| `ext`           | JSON   | 否       | 广播消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display_field.md) 和 [Android 推送字段说明](/document/android/push/push_display_field.html)。 |
 
 不同类型的消息的请求体只在 `msg` 字段有差别，其他参数相同。除了 `type` 字段，`msg` 字段中包含的参数与发送聊天室消息的请求体中的 `body` 字段含义相同，详见各类消息的参数说明。
 - [发送图片消息](message_chatroom.html#发送图片消息)

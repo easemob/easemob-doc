@@ -1,120 +1,113 @@
-# 在多个设备上登录
+# 多设备登录
 
-<Toc />
+## 功能说明
 
-即时通讯 IM 支持同一账号在多个设备上登录。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
+即时通讯 IM 支持同一账号在多个设备上登录。使用该功能前，需要在 [环信控制台](https://console.easemob.com/user/login) 开通多端多设备服务。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
 
-多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
+iOS SDK 在登录时会将设备相关信息同步到服务器。服务器根据多端多设备策略维护当前账号的在线设备状态。当同一账号在其他设备上执行好友、群组、消息话题、会话或单向删除服务端历史消息等操作时，当前设备可通过 `addMultiDevicesDelegate` 注册的 `EMMultiDevicesDelegate` 接收相应事件。
 
-- 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
-- 好友和群组相关操作；
-- 消息话题相关操作；
-- 会话相关操作。
+多端多设备登录场景下，iOS SDK 支持以下功能：
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的 **功能配置 > 基础功能** > **用户** 页面，在弹出的对话框中设置各端设备的数量：
+ - 接收当前账号其他设备触发的多设备事件。
+ - 同步好友、群组、消息话题、会话以及单向删除服务端历史消息等操作。
+ - 获取当前用户的其他已登录设备的登录 ID 列表。
+ - 获取指定账号的在线登录设备列表。
+ - 设置登录设备的名称、平台和扩展信息。
+ - 将指定账号从单个或所有设备踢下线。
+
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的 **即时通讯 > 基础功能** > **用户** 页面设置各端设备的数量：
 
 ![img](/images/common/multidevice_device_count.png)
 
-单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
+## 互踢策略
 
-<table width="807" height="327" border="1">
-  <tbody>
-    <tr>
-      <td width="109" height="49">单端/多端登录</td>
-      <td width="384">互踢策略</td>
-      <td width="292">自动登录安全检查</td>
-    </tr>
-    <tr>
-      <td height="52">单端登录</td>
-      <td>新登录的设备会将当前在线设备踢下线。</td>
-      <td rowspan="2">对于自动登录的设备，下线后设备会自动重连环信服务器。若重连成功，默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系环信商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。</td>
-    </tr>
-    <tr>
-      <td height="156">多端登录</td>
-      <td><p>若一端的登录设备数量达到了上限，最新登录的设备会将该端最早登录的设备踢下线。</p>
-      <p>即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。</p></td>
-    </tr>
-  </tbody>
-</table>
+单端和多端登录场景下的互踢策略如下表所示：
 
-## 技术原理  
-
-iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送时识别设备，并将该 ID 发送到服务器。服务器会自动将新消息发送到用户登录的设备，可以自动监听到其他设备上进行的好友或群组操作。即时通讯 IM iOS SDK 提供以下多设备场景功能：
-
-- 获取当前用户的其他已登录设备的登录 ID 列表；
-- 获取指定账号的在线登录设备列表；  
-- 设置登录设备的名称；
-- 设置登录设备的平台；
-- 强制指定账号从单个设备下线；
-- 强制指定账号从所有设备下线；
-- 获取其他设备的好友或者群组操作。
+| 单端/多端登录 | 互踢策略 |
+| :---: | :--- |
+| **单端登录** | 新登录的设备会将当前在线设备踢下线。 |
+| **多端登录** | 若一端的登录设备数量达到上限，最新登录的设备会将该端最早登录的设备踢下线。<br><br>即时通讯 IM 仅支持同端互踢，不支持各端之间互踢。 |
 
 ## 前提条件
 
-- 开始前，确保将 SDK 初始化，连接到服务器。详见[快速开始](quickstart.html)。
-- 已在 [环信控制台](https://console.easemob.com/user/login) 开通多端多设备功能。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
-- 设置登录设备的自定义名称和平台需在 SDK 初始化时中完成。
+开始前，请确保满足以下条件：
 
-## 实现方法
+ - 完成 iOS SDK 初始化并登录，详见 [快速开始](quickstart.html)。
+ - 已在 [环信控制台](https://console.easemob.com/user/login) 开通多端多设备功能。详见 [环信控制台文档](/product/console/basic_user.html#多端多设备)。
 
-### 获取当前用户的其他已登录设备的登录 ID 列表
+## 获取当前用户的其他登录设备的登录 ID 列表
 
-你可以调用 `getSelfIdsOnOtherPlatformWithCompletion:` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
+调用 `getSelfIdsOnOtherPlatformWithCompletion` 异步获取当前账号在其他平台（Windows 或 Web）上的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。该登录 ID 可以作为单聊消息的接收方使用，使用方式与好友用户 ID 类似。
+
+该接口适用于多设备登录场景，用于查询当前账号在其他设备上的登录状态。返回结果中会自动排除当前设备，通常可用于展示已登录设备列表、识别异常登录、进行多端登录提醒，或配合服务端接口对指定设备执行下线等管理操作。
 
 ```objectivec
-[EMClient.sharedClient.contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> * _Nullable aList, EMError * _Nullable aError) {
-    // 选择一个登录 ID 作为消息接收方。
-    NSString *to = aList.firstObject;
-    if (to.length > 0) {
-        EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"Hello World"];
-        // 创建一条文本消息，content 为消息文字内容，to 传入登录 ID 作为消息接收方。
-        EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to body:body ext:nil];
-        // 发送消息。
-        [EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:^(EMChatMessage * _Nullable message, EMError * _Nullable error) {
-        }];
+[[EMClient sharedClient].contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> *loginIds, EMError *error) {
+    if (!error) {
+        NSString *loginId = loginIds.firstObject;
+        // loginId 可作为单聊消息的接收方。
+    } else {
+        // 获取失败。
     }
 }];
 ```
 
-### 获取指定账号的在线登录设备列表  
+每项登录 ID 均采用 `userId/resource` 格式：
 
-你可以调用 `getLoggedInDevicesFromServerWithUsername` 或 `getLoggedInDevicesFromServerWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceConfig` 中的 `deviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
+- `userId`：当前用户的用户 ID。
+- `resource`：已登录设备对应的资源标识，用于区分该用户的具体登录设备。
+
+其中，`resource` 与服务端 [单设备下线接口](/document/server-side/account_offline_device_single.html)中的 `resourceId` 参数，以及服务端[获取指定账号在线设备列表](/document/server-side/account_online_device_obtain.html)返回的 `res` 字段，在语义上是一致的，均用于标识用户的某个登录设备。
+
+iOS 客户端接口返回完整的 `userId/resource` 登录 ID；服务端相关接口通常只需要 `/` 后面的 `resource`。因此，若业务需要调用服务端单设备下线接口，应先从登录 ID 中提取 `resource`，再将其作为 `resourceId` 传入。
+
+## 获取指定账号的在线登录设备列表
+
+调用 `getLoggedInDevicesFromServerWithUserId`，传入用户 ID 和有效 Token，从服务器异步获取指定账号的在线登录设备列表。
 
 ```objectivec
-// 用户 ID + 密码
-[EMClient.sharedClient getLoggedInDevicesFromServerWithUsername:<#userId#>  password:<#password#>  completion:^(NSArray<EMDeviceConfig *> * _Nullable aList, EMError * _Nullable aError) {
-            
-        }];
-// 用户ID + token
-[EMClient.sharedClient getLoggedInDevicesFromServerWithUserId:<#userId#> token:<#token#>  completion:^(NSArray<EMDeviceConfig *> * _Nullable aList, EMError * _Nullable aError) {
-        
+[[EMClient sharedClient] getLoggedInDevicesFromServerWithUserId:userId
+                                                          token:token
+                                                     completion:^(NSArray<EMDeviceConfig *> *devices, EMError *error) {
+    if (!error) {
+        for (EMDeviceConfig *device in devices) {
+            NSString *resource = device.resource;
+            NSString *deviceUUID = device.deviceUUID;
+            NSString *deviceName = device.deviceName;
+            // 使用 resource、deviceUUID 和 deviceName 展示或管理设备。
+        }
+    } else {
+        // 获取失败。
+    }
 }];
 ```
 
-### 设置登录设备的名称
+该接口返回的 `EMDeviceConfig` 字段如下：
 
-即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备登录的场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
+| 字段 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `resource` | `NSString *` | 登录设备的资源标识，用于指定目标设备。 |
+| `deviceUUID` | `NSString *` | 登录设备的 UUID。 |
+| `deviceName` | `NSString *` | 登录设备名称；未设置自定义名称时，通常为设备型号。 |
 
-初始化 SDK 时，你可以调用 `initializeSDKWithOptions` 方法时设置 `EMOptions#customDeviceName` 属性自定义登录设备的名称。设置设备名称后，若登录设备时因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `userAccountDidLoginFromOtherDevice` 回调里会包含导致该设备被踢下线的自定义设备名称。
+## 设置登录设备的名称
 
-:::tip
-登录成功后才会将该设置发送到服务器。
-:::
+环信即时通讯 IM 支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢设备可明确是被哪个设备挤下线。
+
+初始化 SDK 时，你可以调用 `EMOptions#customDeviceName` 设置当前设备的自定义名称。设置设备名称后，若登录设备时因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `userAccountDidLoginFromOtherDeviceWithInfo` 回调里会包含导致该设备被踢下线的自定义设备名称。
 
 ```objectivec
-EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
-option.customDeviceName = @"XXX的iPad";
-[EMClient.sharedClient initializeSDKWithOptions:option]; 
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+options.customDeviceName = @"Alice 的 iPad";
 
+// 使用 options 初始化 SDK 后，再通过异步 Token 登录接口登录。
 ```
 
-### 设置登录设备的平台
+## 设置登录设备的平台
 
-即时通讯 IM 自 4.1.0 版本开始支持自定义设置登录设备的平台，例如将手机和平板电脑设置为单独的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
+可通过 `EMOptions#customOSType` 设置当前设备所属的自定义平台，例如将手机和平板电脑设置为单独的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
 
-你可以按照以下步骤设置登录设备所属的平台：
-
-1. 在环信控制台的 **功能配置** > **基础功能** > **用户** 页面，在 **多端多设备** 区域，点击 **设置**。在弹出的对话框中点击 **新增自定义平台**，在 **添加自定义平台** 对话框中设置 **设备平台** 和 **设备数量**。
+1. 在环信控制台的 **即时通讯** > **基础功能** > **用户** 页面，在**多端多设备** 区域，点击 **设置**。在弹出的对话框中点击 **新增自定义平台**，在 **添加自定义平台** 对话框中设置 **设备平台** 和 **设备数量**。
 
 **设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
 
@@ -127,245 +120,179 @@ option.customDeviceName = @"XXX的iPad";
 :::
 
 ```objectivec
-EMOptions* option = [EMOptions optionsWithAppkey:Appkey];
-option.customOSType = 60;
-[EMClient.sharedClient initializeSDKWithOptions:option];
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+options.customOSType = 60;
+
+// 使用 options 初始化 SDK 后，再通过异步 Token 登录接口登录。
 ```
 
-### 设置登录设备的扩展信息
+## 设置登录设备的扩展信息
 
-即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息。这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
+环信即时通讯 IM 支持为登录设备设置自定义扩展信息。在多设备登录场景下，该功能可用于传递当前登录设备的附加标识信息，便于业务侧进行设备识别和管理，例如，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
 
-初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线（`206` 错误，`EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
+初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线（`206` 错误，`EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `userAccountDidLoginFromOtherDeviceWithInfo` 回调的 `EMLoginExtensionInfo` 参数中包含新登录设备的设备名称 `deviceName` 和扩展信息 `extensionInfo`。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```objectivec
-EMClient.sharedClient.option.loginExtensionInfo = @"you was kicked out by other device";
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+options.loginExtensionInfo = @"{\"source\":\"iPad\"}";
 
-- (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo* _Nullable)info {
-    //`EMLoginExtensionInfo` 中包含 `deviceName` 以及 `loginExtensionInfo` 属性。
-    //`loginExtensionInfo` 即 SDK 初始化时传入的登录时携带给被踢设备的扩展信息。
+// 使用 options 初始化 SDK 后，再通过异步 Token 登录接口登录。
+
+- (void)userAccountDidLoginFromOtherDeviceWithInfo:(EMLoginExtensionInfo *)info {
+    NSString *deviceName = info.deviceName;
+    NSString *extensionInfo = info.extensionInfo;
+    // 根据新登录设备信息提示当前用户。
 }
 ```
 
-### 强制指定账号从单个设备下线
+## 强制指定账号从单个设备下线
 
-你可以调用 `kickDeviceWithUsername` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录的设备踢下线。你需要首先调用 `getLoggedInDevicesFromServerWithUsername` 方法获取设备 ID。
+调用 `kickDeviceWithUserId` 可将指定账号从单个设备踢下线。你需要首先调用 `getLoggedInDevicesFromServerWithUserId` 获取目标设备的 `resource`，再传入该资源标识。
 
 :::tip
 不登录也可以使用该接口。
 :::
 
 ```objectivec
-// username：账户名称，password：账户密码。
-NSString *username = @"";
-NSString *password = @"";
-[EMClient.sharedClient getLoggedInDevicesFromServerWithUsername:username password:password completion:^(NSArray<EMDeviceConfig *> * _Nullable aList, EMError * _Nullable aError) {
-    NSString *resource = aList.firstObject.resource;
-    if (resource.length > 0) {
-        // username：账户名称，password：账户密码, resource：设备 ID。
-        [EMClient.sharedClient kickDeviceWithUsername:username password:password resource:resource completion:^(EMError * _Nullable aError) {
-        }];
+[[EMClient sharedClient] getLoggedInDevicesFromServerWithUserId:userId
+                                                          token:token
+                                                     completion:^(NSArray<EMDeviceConfig *> *devices, EMError *error) {
+    if (error || devices.count == 0) {
+        return;
+    }
+
+    NSString *resource = devices.firstObject.resource;
+    [[EMClient sharedClient] kickDeviceWithUserId:userId
+                                             token:token
+                                          resource:resource
+                                        completion:^(EMError *kickError) {
+        if (!kickError) {
+            // 踢出指定设备成功。
+        } else {
+            // 踢出失败。
+        }
+    }];
+}];
+```
+
+## 强制指定账号从所有设备下线
+
+调用 `kickAllDevicesWithUserId` 可将指定账号从所有设备踢下线。
+
+:::tip
+不登录也可以使用该接口。
+:::
+
+```objectivec
+[[EMClient sharedClient] kickAllDevicesWithUserId:userId
+                                             token:token
+                                        completion:^(EMError *error) {
+    if (!error) {
+        // 踢出所有设备成功。
+    } else {
+        // 踢出失败。
     }
 }];
 ```
 
-### 强制指定账号从所有设备下线
-
-你可以调用 `kickAllDevicesWithUsername` 或 `kickAllDevicesWithUserId` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备都踢下线。 
-
-:::tip
-不登录也可以使用该接口。
-:::
-
-```objectivec
-// 用户 ID + 密码
-[EMClient.sharedClient kickAllDevicesWithUsername:username password:password completion:^(EMError * _Nullable aError) {
-}];
-        
-// 用户 ID + token
-[EMClient.sharedClient kickAllDevicesWithUserId:userId token:token completion:^(EMError * _Nullable aError) {
-                
-}];
-```
-
-### 获取其他设备上的操作
+## 监听多设备事件
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
-你需要先实现 `EMMultiDevicesDelegate` 类监听其他设备上的操作，然后调用 `addMultiDevicesDelegate:delegateQueue:` 方法添加多设备监听。
+实现 `EMMultiDevicesDelegate` 并调用 `addMultiDevicesDelegate` 注册监听。无需监听时调用 `removeMultiDevicesDelegate` 移除。
 
 :::tip
-多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+多端多设备场景下，不提供聊天室操作相关的多设备事件；聊天室仅支持消息收发同步。
 :::
 
 ```objectivec
- //实现 `EMMultiDevicesDelegate` 监听其他设备上的操作。
-@interface ViewController () <EMMultiDevicesDelegate>
-
+@interface MultiDeviceObserver () <EMMultiDevicesDelegate>
 @end
 
-@implementation ViewController
+@implementation MultiDeviceObserver
 
-- (void)viewDidLoad 
-{
-    [super viewDidLoad];
-    [EMClient.sharedClient addMultiDevicesDelegate:self delegateQueue:nil];
+- (void)startObserveMultiDeviceEvents {
+    [[EMClient sharedClient] addMultiDevicesDelegate:self delegateQueue:nil];
 }
 
-- (void)dealloc 
-{
-    [EMClient.sharedClient removeMultiDevicesDelegate:self];
+- (void)stopObserveMultiDeviceEvents {
+    [[EMClient sharedClient] removeMultiDevicesDelegate:self];
 }
 
-#pragma mark - EMMultiDevicesDelegate
-- (void)multiDevicesContactEventDidReceive:(EMMultiDevicesEvent)aEvent
-                                  username:(NSString *)aUsername
-                                       ext:(NSString *)aExt 
-{
-    switch (aEvent) {
-        //当前用户在其他设备上删除好友。
-        case EMMultiDevicesEventContactRemove:
-            break;
-        //当前用户在其他设备上接受好友请求。
-        case EMMultiDevicesEventContactAccept:
-            break;
-        //当前用户在其他设备上拒绝好友请求。 
-        case EMMultiDevicesEventContactDecline:
-            break;
-        //当前用户在其他设备上将好友加入黑名单。  
-        case EMMultiDevicesEventContactBan:
-            break;
-        //当前用户在其他设备上将好友移出黑名单。 
-        case EMMultiDevicesEventContactAllow:
-            break;
-        default:
-            break;
-   }
+- (void)multiDevicesContactEventDidReceive:(EMMultiDevicesEvent)event
+                                  username:(NSString *)username
+                                       ext:(NSString *)ext {
+    // 处理 EMMultiDevicesEventContactRemove、ContactAccept、ContactDecline、ContactBan 或 ContactAllow。
 }
 
-- (void)multiDevicesGroupEventDidReceive:(EMMultiDevicesEvent)aEvent
-                                 groupId:(NSString *)aGroupId
-                                     ext:(id)aExt {
-    switch (aEvent) {
-        //当前⽤户在其他设备创建了群组。
-        case EMMultiDevicesEventGroupCreate:
-            break;
-        //当前⽤户在其他设备销毁了群组。
-        case EMMultiDevicesEventGroupDestroy:
-            break;
-        //当前⽤户在其他设备已经加⼊群组。
-        case EMMultiDevicesEventGroupJoin:
-            break;
-        //当前⽤户在其他设备已经离开群组。
-        case EMMultiDevicesEventGroupLeave:
-            break;
-        //当前⽤户在其他设备发起了群组申请。
-        case EMMultiDevicesEventGroupApply:
-            break;
-        //当前⽤户在其他设备同意了群组申请。
-        case EMMultiDevicesEventGroupApplyAccept:
-            break;
-        //当前⽤户在其他设备拒绝了群组申请。
-        case EMMultiDevicesEventGroupApplyDecline:
-            break;
-        //当前⽤户在其他设备邀请了群成员。
-        case EMMultiDevicesEventGroupInvite:
-            break;
-        //当前⽤户在其他设备同意了群组邀请。
-        case EMMultiDevicesEventGroupInviteAccept:
-            break;
-        //当前⽤户在其他设备拒绝了群组邀请。
-        case EMMultiDevicesEventGroupInviteDecline:
-            break;
-        //当前⽤户在其他设备将某⼈踢出群。
-        case EMMultiDevicesEventGroupKick:
-            break;
-        //当前⽤户在其他设备将成员加⼊群组⿊名单。
-        case EMMultiDevicesEventGroupBan:
-            break;
-        //当前⽤户在其他设备将成员移除群组⿊名单。
-        case EMMultiDevicesEventGroupAllow:
-            break;
-        //当前⽤户在其他设备屏蔽群组。
-        case EMMultiDevicesEventGroupBlock:
-            break;
-        //当前⽤户在其他设备取消群组屏蔽。
-        case EMMultiDevicesEventGroupUnBlock:
-            break;
-        //当前⽤户在其他设备转移群主。
-        case EMMultiDevicesEventGroupAssignOwner:
-            break;
-        //当前⽤户在其他设备添加管理员。
-        case EMMultiDevicesEventGroupAddAdmin:
-            break;
-        //当前⽤户在其他设备移除管理员。
-        case EMMultiDevicesEventGroupRemoveAdmin:
-            break;
-        //当前⽤户在其他设备禁⾔⽤户。
-        case EMMultiDevicesEventGroupAddMute:
-            break;
-        //当前⽤户在其他设备移除禁⾔。
-        case EMMultiDevicesEventGroupRemoveMute:
-            break;
-        //当前⽤户在其他设备设置了群成员自定义属性。
-        case EMMultiDevicesEventGroupMemberAttributesChanged:
-            break;
-        default:
-            break;
-    }
+- (void)multiDevicesGroupEventDidReceive:(EMMultiDevicesEvent)event
+                                 groupId:(NSString *)groupId
+                                     ext:(id)ext {
+    // 处理群组创建、解散、加群、退群、邀请、禁言等事件。
 }
 
-- (void)multiDevicesConversationEvent:(EMMultiDevicesEvent)aEvent conversationId:(NSString *)conversationId conversationType:(EMConversationType)conversationType
-{
-    switch (aEvent) {
-        // 当前用户在其他设备上置顶会话。
-        case EMMultiDevicesEventConversationPinned:
-            break;
-        // 当前用户在其他设备上取消会话置顶。
-        case EMMultiDevicesEventConversationUnpinned:
-            break;
-        // 当前用户在其他设备上删除了服务端的会话。
-        case EMMultiDevicesEventConversationDelete:
-            break;
-        // 当前用户在其他设备上更新了会话标记，包括添加和移除会话标记。
-        case EMMultiDevicesEventConversationUpdateMark:
-            break; 
-        // 当前用户在其他设备更新了会话免打扰设置。
-        case EMMultiDevicesEventConversationMuteInfoChanged:
-            break;           
-        default:
-            break;
-    }
+- (void)multiDevicesChatThreadEventDidReceive:(EMMultiDevicesEvent)event
+                                      threadId:(NSString *)threadId
+                                           ext:(id)ext {
+    // 处理 EMMultiDevicesEventChatThreadCreate、Destroy、Join、Leave、Update 或 Kick。
 }
 
-// 当前用户在其他设备上单向删除服务端某个会话的历史消息。
-- (void)multiDevicesMessageBeRemoved:(NSString *)conversationId deviceId:(NSString *)deviceId
-{
-    
+- (void)multiDevicesConversationEvent:(EMMultiDevicesEvent)event
+                        conversationId:(NSString *)conversationId
+                      conversationType:(EMConversationType)conversationType {
+    // 处理会话置顶、取消置顶、删除、标记、免打扰及未读数清零等事件。
+    // 收到会话事件后，按业务需要刷新本地会话数据。
 }
+
+- (void)multiDevicesMessageBeRemoved:(NSString *)conversationId deviceId:(NSString *)deviceId {
+    // 当前用户在其他设备上单向删除了服务端某个会话的历史消息。
+}
+
+@end
 ```
 
-### 典型示例
 
-当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
+
+多设备清除未读数事件使用以下枚举值：
+
+ - `EMMultiDevicesEventConversationUnreadMessageCountCleared`（65）：其他设备清除了指定会话的未读数。
+ - `EMMultiDevicesEventAllConversationUnreadMessageCountCleared`（66）：其他设备清除了全部会话的未读数。
+
+## 典型示例
+
+当 PC 端和移动端登录同一个账号时，移动端可以异步获取 PC 端的登录 ID，并向该登录 ID 发送单聊消息：
 
 ```objectivec
- NSArray *otherPlatformIds = [[EMClient sharedClient].contactManager getSelfIdsOnOtherPlatformWithError:nil];
-if ([otherPlatformIds count] > 0) {
-    NSString *chatter = otherPlatformIds[0];
-    //获取会话
-    EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:chatter type:EMConversationTypeChat createIfNotExist:YES];
+[[EMClient sharedClient].contactManager getSelfIdsOnOtherPlatformWithCompletion:^(NSArray<NSString *> *loginIds, EMError *error) {
+    if (error || loginIds.count == 0) {
+        return;
+    }
 
-    //发送消息
-    NSString *sendText = @"test";
-    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:sendText];
-    NSString *from = [[EMClient sharedClient] currentUsername];
-    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversation.conversationId from:from to:chatter body:body ext:nil];
+    NSString *to = loginIds.firstObject;
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"Hello World"];
+    EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:to body:body ext:nil];
     message.chatType = EMChatTypeChat;
-    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
- }
+
+    [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *sendError) {
+        // 根据 sendError 处理发送结果。
+    }];
+}];
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`getSelfIdsOnOtherPlatformWithCompletion`](#获取当前用户的其他登录设备的登录-id-列表) | `IEMContactManager` | 异步获取当前用户在其他平台的登录 ID 列表。 |
+| [`getLoggedInDevicesFromServerWithUserId`](#获取指定账号的在线登录设备列表) | `EMClient` | 使用用户 ID 和 Token 异步获取指定账号的在线设备列表。 |
+| [`customDeviceName`](#设置登录设备的名称) | `EMOptions` | 设置当前登录设备的名称。 |
+| [`customOSType`](#设置登录设备的平台) | `EMOptions` | 设置当前登录设备的平台编号。 |
+| [`loginExtensionInfo`](#设置登录设备的扩展信息) | `EMOptions` | 设置当前登录设备的扩展信息。 |
+| [`kickDeviceWithUserId`](#强制指定账号从单个设备下线) | `EMClient` | 异步将指定账号从指定设备踢下线。 |
+| [`kickAllDevicesWithUserId`](#强制指定账号从所有设备下线) | `EMClient` | 异步将指定账号从所有设备踢下线。 |
+| [`resource`](#获取指定账号的在线登录设备列表) / [`deviceUUID`](#获取指定账号的在线登录设备列表) / [`deviceName`](#获取指定账号的在线登录设备列表) | `EMDeviceConfig` | 获取登录设备的资源标识、UUID 和名称。 |
+| [`deviceName`](#设置登录设备的扩展信息) / [`extensionInfo`](#设置登录设备的扩展信息) | `EMLoginExtensionInfo` | 获取导致当前设备下线的新设备名称和扩展信息。 |

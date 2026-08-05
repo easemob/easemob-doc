@@ -1,39 +1,74 @@
 # SDK 日志
 
-环信即时通讯 IM 日志记录 SDK 相关的信息和事件。环信技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
+环信即时通讯 IM SDK 会记录运行过程中的相关信息和事件。排查问题时，环信技术支持团队可能会要求提供 SDK 日志。
 
 ## 输出信息到日志文件
 
-默认情况下，SDK 最多可生成和保存三个文件，`easemob.log` 和两个 `easemob_YYYY-MM-DD_HH-MM-SS.log` 文件。这些文件为 UTF-8 编码，每个不超过 5 MB。SDK 会将最新的日志写入 `easemob.log` 文件，写满时则会将其重命名为对应时间点的 `easemob_YYYY-MM-DD_HH-MM-SS.log` 文件，若日志文件超过三个，则会删除最早的文件。
+默认情况下，SDK 最多生成并保留三个日志文件：一个当前日志文件 `easemob.log`，以及两个按时间戳命名的历史日志文件 `easemob_YYYY-MM-DD_HH-MM-SS.log`。日志文件采用 UTF-8 编码，单个文件最大为 5 MB。
 
-例如，SDK 在 2024 年 1 月 1 日上午 8:00:00 记录日志时会生成 `easemob.log` 文件，若在 8:30:00 将 `easemob.log` 文件写满则会将其重命名为 `easemob_2024-01-01_08-30-00.log` 文件，随后在 9:30:30 和 10:30:30 分别生成了 `easemob_2024-01-01_09-30-30.log` 和 `easemob_2024-01-01_10-30-30.log` 文件，则此时 `easemob_2024-01-01_08-30-00.log` 文件会被移除。
+SDK 将最新日志写入 `easemob.log`。该文件写满后会被重命名为对应时间点的历史日志文件，并重新创建 `easemob.log`。当日志文件数量超过三个时，SDK 会删除最早的历史日志文件。
 
-SDK 的 `EMOptions#logLevel` 指定了日志输出级别，默认为 `EMLogLevelDebug`，即所有等级日志。
+例如，SDK 在 2024 年 1 月 1 日 08:00:00 开始记录日志时会生成 `easemob.log`。若该文件在 08:30:00 写满，则会重命名为 `easemob_2024-01-01_08-30-00.log`。后续产生新的历史日志文件时，如果日志文件总数超过三个，最早的历史日志文件会被移除。
 
-- (默认)EMLogLevelDebug：所有等级的日志；
-- EMLogLevelWarning：警告及错误；
-- EMLogLevelError：错误。
+`EMOptions#logLevel` 用于设置日志输出级别，默认值为 `EMLogLevelDebug`：
 
-开发阶段若希望在 XCode console 上输出 SDK 日志，可在 SDK 初始化时打开开关。
+- `EMLogLevelDebug`：输出所有级别的日志。
+- `EMLogLevelWarning`：输出警告和错误日志。
+- `EMLogLevelError`：仅输出错误日志。
+
+开发阶段如需在 Xcode Console 中输出 SDK 日志，可在初始化 SDK 前设置 `enableConsoleLog`：
 
 ```objectivec
-EMOptions* option = [EMOptions optionsWithAppkey:@"<#appkey#>"];
-// 日志输出到 XCode console
-option.enableConsoleLog = YES;
-// 调整日志输出级别，默认为所有级别。
-option.logLevel = EMLogLevelDebug;
-[EMClient.sharedClient initializeSDKWithOptions:option];
+EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
+
+// 输出 SDK 日志到 Xcode Console。
+options.enableConsoleLog = YES;
+
+// 设置日志级别，默认值为 EMLogLevelDebug。
+options.logLevel = EMLogLevelDebug;
+
+[[EMClient sharedClient] initializeSDKWithOptions:options];
+```
+
+## 监听日志输出
+
+iOS SDK V5 支持通过 `EMLogDelegate` 监听 SDK 输出的日志。注册日志代理时可以指定回调队列；若传入 `nil`，SDK 默认在主队列执行回调。
+
+```objectivec
+@interface LogListener : NSObject <EMLogDelegate>
+@end
+
+@implementation LogListener
+
+- (void)logDidOutput:(NSString *)log {
+    // 处理 SDK 输出的日志。
+    NSLog(@"SDK 日志：%@", log);
+}
+
+@end
+
+LogListener *listener = [[LogListener alloc] init];
+
+// 应持有 listener 的强引用，避免其被提前释放。
+[[EMClient sharedClient] addLogDelegate:listener delegateQueue:nil];
+
+// 不再需要监听时移除代理。
+[[EMClient sharedClient] removeLogDelegate:listener];
 ```
 
 ## 获取本地日志
 
-SDK 会写入日志文件到本地。日志文件路径如下：沙箱 Library/Application Support/HyphenateSDK/easemobLog。
+SDK 将数据写入应用沙箱的 `Library/Application Support/HyphenateSDK` 目录。日志文件位于其 `easemobLog` 子目录中：
 
-以真机为例，获取本地日志过程如下：
+```text
+Library/Application Support/HyphenateSDK/easemobLog
+```
 
-- 打开 Xcode，连接设备，选择 **Xcode** > **Window** > **Devices and Simulators**。
-- 进入 **Devices** 选项卡，在左侧选择目标设备，例如 Easemob IM，点击设置图标，然后选择 **Download Container**。
+以真机为例，获取本地日志的步骤如下：
+
+1. 打开 Xcode，连接设备，然后选择 **Xcode > Window > Devices and Simulators**。
+2. 在 **Devices** 选项卡中选择目标设备和应用。
+3. 点击设置图标，选择 **Download Container** 下载应用沙箱。
+4. 在下载包的 `AppData/Library/Application Support/HyphenateSDK/easemobLog` 目录中获取 `easemob.log` 及历史日志文件。
 
 ![img](/images/ios/overview_fetchlogfile.png)
-
-日志文件 `easemob.log` 文件在下载包的 `AppData/Library/Application Support/HyphenateSDK/easemobLog` 目录下。

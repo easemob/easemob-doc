@@ -83,7 +83,7 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1'   
 | `data.msgId`        | String  | 添加 Reaction 的消息 ID。                                                                         |
 | `data.msgType`      | String  | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。                                 |
 | `data.groupId`      | String  | 群组 ID。该参数在单聊时为 null。                                                                  |
-| `data.reaction`     | String  | 表情 ID，与客户端一致，与[添加 Reaction API](#添加-Reaction)的请求参数 `message` 相同。 |
+| `data.reaction`     | String  | 表情 ID，与客户端一致，与[添加 Reaction API](#添加-reaction)的请求参数 `message` 相同。 |
 | `data.createAt`     | Instant | Reaction 的添加时间。                                                                            |
 | `data.updateAt`     | Instant | Reaction 的修改时间。                                                                             |
 

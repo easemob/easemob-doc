@@ -13,7 +13,7 @@
 
 ### 回调时机
 
-1. 客户端将 [群组](/document/android/group_members.html#将成员加入群组禁言列表)或[聊天室成员](/document/android/room_members.html#添加成员至聊天室禁言列表) 加入了禁言列表。
+1. 客户端将 [群组](/document/android/group_members.html#禁言指定成员)或[聊天室成员](/document/android/room_members.html#添加成员至聊天室禁言列表) 加入了禁言列表。
 2. 调用 RESTful API 将 [群组](/document/server-side/group_member_mute.html) 或 [聊天室成员](/document/server-side/chatroom_member_mute.html) 加入了禁言列表。
 3. 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 加入了禁言列表。
 
@@ -64,7 +64,7 @@
 
 ### 回调时机
 
-1. 客户端将 [群组](/document/android/group_members.html#将成员移出群组禁言列表)或[聊天室成员](/document/android/room_members.html#将成员移出聊天室禁言列表) 移出了禁言列表。
+1. 客户端将 [群组](/document/android/group_members.html#解除指定成员禁言)或[聊天室成员](/document/android/room_members.html#将成员移出聊天室禁言列表) 移出了禁言列表。
 2. 调用 RESTful API 将 [群组](/document/server-side/group_member_unmute.html)或[聊天室成员](/document/server-side/chatroom_member_mute.html) 移出了禁言列表。
 3. 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 移出了禁言列表。
 

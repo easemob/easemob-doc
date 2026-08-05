@@ -13,7 +13,7 @@
 
 ### 回调时机
 
-- 客户端将 [群组](/document/android/group_members.html#开启群组全员禁言)/[聊天室全员禁言或解除了全员禁言](/document/android/room_members.html#开启和关闭聊天室全员禁言)。
+- 客户端将 [群组](/document/android/group_members.html#开启全员禁言)/[聊天室全员禁言或解除了全员禁言](/document/android/room_members.html#开启和关闭聊天室全员禁言)。
 - 调用 RESTful API 将 [群组](/document/server-side/group_member_mute_all.html)/[聊天室全员禁言或解除了全员禁言](/document/server-side/chatroom_member_mute_all.html)。
 - 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/product/console/operation_group.html#群组审核管理)/[聊天室全员禁言或解除了全员禁言](/product/console/operation_chatroom.html#聊天室审核管理)。
  

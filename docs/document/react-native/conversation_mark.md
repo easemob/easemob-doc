@@ -31,7 +31,7 @@ mapping.set(ChatConversationMarkType.Type2, "unimportant");
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- **[开通服务端会话列表功能](conversation_list#从服务器分页获取会话列表)**。
+- **[开通服务端会话列表功能](conversation_list.html#从服务器分页获取会话列表)**。
 
 ## 实现方法
 

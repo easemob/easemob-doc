@@ -59,7 +59,7 @@ starter:
         link: /document/web/quickstart.html
         text: Web
       - icon: /sdk/applet.svg
-        link: /document/applet/wechat.html
+        link: /document/web/integration_applet.html
         text: 小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
@@ -80,7 +80,7 @@ starter:
     desc: "点击“Demo 体验”按钮立即体验环信 IM 即时通讯功能。"
     platform:
       - icon: /sdk/demo_list.svg
-        link: "https://doc.easemob.com/product/demo.html"
+        link: "/product/demo.html"
         text: Demo 体验 
   - title: "服务端 API"
     desc: "可通过 RESTful API 构建即时通讯应用，点击“REST”按钮快速实现即时通讯消息收发等功能。"
@@ -179,11 +179,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_send.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_send.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_send.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_send.html
@@ -221,11 +218,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_receive.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_receive.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_receive.html
@@ -254,11 +248,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_stream_receive.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_stream_receive.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_stream_receive.html   
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_stream_receive.html   
@@ -275,11 +266,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_retrieve.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_retrieve.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_retrieve.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_retrieve.html
@@ -311,11 +299,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_recall.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_recall.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_recall.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_recall.html 
@@ -347,11 +332,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_modify.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_modify.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_modify.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_modify.html    
@@ -380,11 +362,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_receipt.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_receipt.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_receipt.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_receipt.html   
@@ -437,11 +416,8 @@ projects:
                 text: iOS
                 link: /document/ios/reaction.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/reaction.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/reaction.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/reaction.html 
@@ -470,11 +446,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_forward.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_send.html#发送合并消息
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_send.html#发送合并消息
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_forward.html   
@@ -557,11 +530,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_delete.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_delete.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_delete.html  
@@ -593,11 +563,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_target.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_target.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_target.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_target.html  
@@ -623,11 +590,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_extension.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_extension.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_extension.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_extension.html  
@@ -653,11 +617,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_pin.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_pin.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_pin.html   
@@ -673,33 +634,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_pin.html 
-          - text: 消息审核（举报）
-            desc: 你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在环信控制台展示。你可在环信控制台查看举报记录，并进行相应处理。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /document/android/moderation.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /document/ios/moderation.html
-              - icon: /sdk/web.svg
-                text: Web
-                link: /document/web/moderation.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/moderation.html
-              - icon: /sdk/flutter.svg
-                text: Flutter
-                link: /document/flutter/moderation.html
-              - icon: /sdk/react.svg
-                text: React Native
-                link: /document/react-native/moderation.html
-              - icon: /sdk/unity.svg
-                text: Unity
-                link: /document/unity/moderation.html
-              - icon: /sdk/windows.svg
-                text: Windows
-                link: /document/windows/moderation.html
           - text: 消息只投在线
             desc: 只将消息投递给在线用户。若接收方不在线，则无法收到消息。
             sdks:
@@ -710,11 +644,8 @@ projects:
                 text: iOS
                 link: /document/ios/message_deliver_only_online.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/message_deliver_only_online.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/message_deliver_only_online.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_deliver_only_online.html  
@@ -740,11 +671,8 @@ projects:
                 text: iOS
                 link: /document/ios/conversation_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/conversation_list.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/conversation_list.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_list.html  
@@ -791,7 +719,7 @@ projects:
             desc: Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 LocalCache 模块对本地会话数据进行管理。
             sdks:
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/conversation_local.html        
           - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
@@ -803,11 +731,8 @@ projects:
                 text: iOS
                 link: /document/ios/conversation_pin.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/conversation_pin.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/conversation_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_pin.html    
@@ -833,11 +758,8 @@ projects:
                 text: iOS
                 link: /document/ios/conversation_mark.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/conversation_mark.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/conversation_mark.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_mark.html   
@@ -863,11 +785,8 @@ projects:
                 text: iOS
                 link: /document/ios/conversation_delete.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/conversation_delete.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/conversation_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_delete.html  
@@ -902,11 +821,8 @@ projects:
                 text: iOS
                 link: /document/ios/group_manage.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/group_manage.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/group_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_manage.html  
@@ -935,11 +851,8 @@ projects:
                 text: iOS
                 link: /document/ios/group_members.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/group_members.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/group_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_members.html  
@@ -983,11 +896,8 @@ projects:
                 text: iOS
                 link: /document/ios/group_attributes.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/group_attributes.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/group_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_attributes.html  
@@ -1019,11 +929,8 @@ projects:
                 text: iOS
                 link: /document/ios/room_manage.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/room_manage.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/room_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_manage.html  
@@ -1055,11 +962,8 @@ projects:
                 text: iOS
                 link: /document/ios/room_members.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/room_members.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/room_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_members.html    
@@ -1091,11 +995,8 @@ projects:
                 text: iOS
                 link: /document/ios/room_attributes.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/room_attributes.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/room_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_attributes.html  
@@ -1127,11 +1028,8 @@ projects:
                 text: iOS
                 link: /document/ios/thread.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/thread.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/thread.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/thread.html
@@ -1157,11 +1055,8 @@ projects:
                 text: iOS
                 link: /document/ios/thread_message.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/thread_message.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/thread_message.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/thread_message.html
@@ -1193,14 +1088,11 @@ projects:
                 text: iOS
                 link: /document/ios/userprofile.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/userprofile.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userprofile.html     
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/userprofile.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/userprofile.html
@@ -1238,11 +1130,8 @@ projects:
                 text: iOS
                 link: /document/ios/user_relationship.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/user_relationship.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/user_relationship.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/user_relationship.html   
@@ -1271,11 +1160,8 @@ projects:
                 text: iOS
                 link: /document/ios/presence.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/presence.html
-              - icon: /sdk/applet.svg
-                text: 小程序
-                link: /document/applet/presence.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/presence.html  
@@ -1307,11 +1193,11 @@ projects:
                 text: iOS
                 link: /document/ios/push/push_overview.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web/小程序
                 link: /document/web/push/push_overview.html
               - icon: /sdk/uniapp.svg
                 text: uni-app
-                link: /document/applet/push/uniapp_push.html
+                link: /document/web/push/uniapp_push.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html

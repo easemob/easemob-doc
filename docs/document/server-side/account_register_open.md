@@ -76,7 +76,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
 | - `created`       | Long       | 注册用户的 Unix 时间戳，单位为毫秒。                         |
 | - `modified`      | Long       | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。             |
 | - `username`      | String     | 用户 ID。                                                    |
-| - `activated`     | Bool       | 用户是否为正常状态： - `true`：用户为正常状态。 - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](user_account_unban.html)方法解除封禁。 |
+| - `activated`     | Bool       | 用户是否为正常状态： - `true`：用户为正常状态。 - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](account_unban.html)方法解除封禁。 |
 
 响应体中的其他参数说明如下表所示：
 
@@ -104,4 +104,4 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
 | 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/console/app_create.html)。 |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 免费套餐包最多支持 100 个注册用户。你可以 [升级至付费套餐包](product/pricing_method.html#升级套餐包)。专业版和旗舰版对注册用户数量无限制。   |
+| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 免费套餐包最多支持 100 个注册用户。你可以 [升级至付费套餐包](/product/pricing_method.html#订阅-升级套餐包)。专业版和旗舰版对注册用户数量无限制。   |

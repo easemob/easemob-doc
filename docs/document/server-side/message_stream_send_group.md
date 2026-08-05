@@ -205,7 +205,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储)         | 是 | 
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储)         | 是 |
 
 
 

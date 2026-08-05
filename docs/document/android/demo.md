@@ -37,8 +37,9 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `local.properties` 文件，格式为 `APPKEY = 你申请的appkey`。
-7. 编译运行项目。
-8. 使用注册的用户 ID 和密码登录。
+7. 当你创建AppKey对应的数据中心位于国内一区时，需要在`local.properties` 文件中继续添加 `CHAT_REST_SERVER_DOMAIN=a1.easemob.com`；当你创建时AppKey对应的数据中心位于国内二区时，添加 `CHAT_REST_SERVER_DOMAIN=ngi-a1.easemob.com`。
+8. 编译运行项目。
+9. 使用注册的用户 ID 和密码登录。
 
 ### App Server
 
@@ -49,7 +50,7 @@ App Server 为 Demo 提供以下功能：
 - 通过手机号获取验证码。
 - 通过手机号和验证码返回环信用户 ID 和环信用户 Token。
 - 上传头像并返回地址。
-- 根据用户的信息生成 [EaseCallKit](easecallkit.html) 登录所需的 Token。
+- 根据用户的信息生成 [EaseCallKit](/callkit/android/easecallkit.html) 登录所需的 Token。
 - 获取音视频通话时环信用户 ID 和 Agora UID 的映射关系。
 
 你通过以下步骤部署 App Server：
@@ -79,7 +80,7 @@ APP_GROUP_AVATAR=/avatarurl
 # 从服务端拉取 Callkit 登录使用的 RTC Token URL 路径
 APP_RTC_TOKEN_URL=/inside/token/rtc/channel
 
-# RTC APP ID (easecallkit.html)
+# RTC APP ID (https://doc.easemob.com/callkit/android/easecallkit.html)
 RTC_APPID=xxxxxxxxxxxxxxxxxxxxxxx
 
 # 获取 RTC UID 和环信用户名映射关系的 URL 路径
@@ -190,7 +191,7 @@ HONOR_PUSH_APPID=xxxxxxxxxxxxxxxxxxxxxxx
 
 | 模块               | 描述   | 
 | :------------------- | :----- |
-| DemoHelper               | 环信（Demo）全局帮助类，主要功能为初始化 IM SDK，初始化 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 、[EaseCallKit](easecallkit.html) 相关及注册对话类型等。  | 
+| DemoHelper               | 环信（Demo）全局帮助类，主要功能为初始化 IM SDK，初始化 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 、[EaseCallKit](/callkit/android/easecallkit.html) 相关及注册对话类型等。  | 
 | ConversationListFragment   | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitConversationListFragment`，展示当前用户的所有会话，包含单聊和群组聊天（不包括聊天室），并且提供会话搜索、删除、置顶和免打扰功能  | 
 | ChatActivity 及 ChatFragment  | `ChatActivity` 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `UIKitChatActivity`，主要进行了权限的请求，比如相机权限，语音权限等。`ChatFragment` 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `UIKitChatFragment`，该页面提供如下功能：<br/> - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。<br/> - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。<br/> - 清除本地消息。  | 
 | ChatContactListFragment                | 继承自 [ChatUIKit](/uikit/chatuikit/android/chatuikit_overview.html) 中的 `ChatUIKitContactsListFragment`，用于展示通讯录列表，包括好友搜索，添加好友，好友申请列表入口，群组列表入口，好友列表。 |

@@ -5,7 +5,7 @@
 ## 功能说明
 
 - 对于附件类型的消息，如图片、语音、视频或其他类型文件，发送消息前需上传文件，可上传到自己的服务器或环信服务器。
-- 上传响应返回的文件 ID（`file_uuid`）、文件地址（`uri`）和文件访问密钥（`share-secret`）可用于后续构造附件消息及下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程) 和 [下载附件](message_download.file.html)。
+- 上传响应返回的文件 ID（`file_uuid`）、文件地址（`uri`）和文件访问密钥（`share-secret`）可用于后续构造附件消息及下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程) 和 [下载附件](message_download_file.html)。
 
 #### 图片上传说明
 

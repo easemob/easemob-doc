@@ -1,6 +1,6 @@
 import { sidebar } from "vuepress-theme-hope";
-import { DOC_SIDEBAR } from "./document";
-import { DOC_V5_SIDEBAR } from "./document-v5";
+import { DOC_SIDEBAR } from "./document-v4";
+import { DOC_V5_SIDEBAR } from "./document";
 import { CHAT_UIKIT_SIDEBAR, CHATROOM_UIKIT_SIDEBAR } from "./uikit";
 import { PRIVATE_IM_SIDEBAR, PRIVATE_MEDIA_SIDEBAR } from "./private";
 import { CALL_KIT_SIDEBAR } from "./callkit";

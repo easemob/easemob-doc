@@ -13,7 +13,7 @@
 
 ### 回调时机
 
-- 客户端将 [群组](/document/android/group_members.html#将成员加入群组白名单)/[聊天室成员](/document/android/room_members.html#将成员加入聊天室白名单) 加入了白名单。
+- 客户端将 [群组](/document/android/group_members.html#添加成员到白名单)/[聊天室成员](/document/android/room_members.html#将成员加入聊天室白名单) 加入了白名单。
 - 调用 RESTful API 将 [群组](/document/server-side/group_allowlist_add_single.html)/[聊天室成员](/document/server-side/chatroom_allowlist_add_single.html) 加入了白名单。
 
 ### 回调请求
@@ -61,7 +61,7 @@
 
 ### 回调时机
 
-1. 客户端将[群组](/document/android/group_members.html#将成员移出群组白名单)/[聊天室成员](/document/android/room_members.html#将成员移出聊天室白名单列表)移出了白名单。
+1. 客户端将[群组](/document/android/group_members.html#从白名单移除成员)/[聊天室成员](/document/android/room_members.html#将成员移出聊天室白名单列表)移出了白名单。
 2. 调用 RESTful API 将 [群组](/document/server-side/group_allowlist_remove.html)/[聊天室成员](/document/server-side/chatroom_allowlist_remove.html) 移出了白名单。
 
 ### 回调请求

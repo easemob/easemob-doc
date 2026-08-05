@@ -1,4 +1,4 @@
-﻿# 设置推送翻译
+# 设置推送翻译
 
 推送通知与翻译功能协同工作。如果用户启用 [自动翻译](/value-added/translation/message_translation_android.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
 
@@ -13,4 +13,3 @@ EMClient.getInstance().pushManager().setPreferredNotificationLanguage("en", new 
 // 获取设置的离线推送的首选语言。
 EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValueCallBack<String>(){});
 ```
-

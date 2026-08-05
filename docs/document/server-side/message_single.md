@@ -29,7 +29,7 @@
 
 ### 限制与校验
 
-- 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。消息的其他限制，详见 [消息限制说明](limitation.html#消息大小)。
+- 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。消息的其他限制，详见 [消息限制说明](/product/limitation.html#消息大小)。
 - 该接口不校验传入的发送方和接收方用户 ID。即使传入的用户 ID 不存在，服务器也不会报错，仍会照常发送消息。
 - 该接口默认不会检查发送方和接收方的好友关系。若你在环信控制台开启了 [好友关系检查](/product/console/basic_user.html#好友关系检查)，该接口会检查双方的好友关系。
 - 该接口不会检查接收方是否在黑名单中，也不会检查发送方是否被禁言。
@@ -119,7 +119,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users
 
 #### 请求示例
 
-发送给目标用户，消息无需同步给发送方：
+发送给目标用户，消息无需同步给发送方（设置 `sync_device` 为 `false`）：
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -132,14 +132,16 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "from": "user1",
   "to": ["user2"],
   "type": "txt",
-  "roam_ignore_users": [],
+  "sync_device": false,
   "body": {
     "msg": "testmessages"
     }
   }'
 ```
 
-仅发送给在线用户，消息同步给发送方（设置 `sync_device` 参数）：
+仅发送给在线用户，消息同步给发送方（设置 `sync_device` 为 true，`routetype` 为 `ROUTE_ONLINE`）。
+
+若仅发送给在线用户，默认不支持漫游存储。发送的消息默认不存储在环信消息服务器，用户无法在其他终端设备获取该消息。如需开通在线消息的漫游存储，需联系环信商务。
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -155,7 +157,8 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
   "body": {
     "msg": "testmessages"
     },
-  "sync_device":true
+  "sync_device": true,
+  "routetype": ROUTE_ONLINE
 }'
 ```
 
@@ -943,7 +946,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `sync_device`   | Bool   | 否       | 消息发送成功后，是否将消息同步到发送方的所有在线设备。<br/> - `true`：是；<br/> - （默认）`false`：否。   |
 | `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
-| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/document/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
+| `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/document/ios/push_display_field.html) 和 [Android 推送字段说明](/document/android/push/push_display_field.html)。 |
 | `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，环信即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。|
 
 #### 响应说明

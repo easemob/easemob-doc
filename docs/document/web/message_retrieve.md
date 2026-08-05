@@ -1,90 +1,64 @@
 # 获取历史消息
 
-<Toc />
+## 功能说明
 
 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
 本文介绍环信即时通讯 IM SDK 如何从服务器获取历史消息。
 
-## 技术原理
-
-利用环信即时通讯 IM SDK 可从服务器获取历史消息，主要方法如下：
-
-- `getHistoryMessages`：基于 `searchOptions` 参数对象从服务器获取指定会话的消息。
-
 ## 前提条件
 
-开始前，请确保已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
+开始前，请确保满足以下条件：
 
-## 实现方法
+- 已完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
+- 初始化 SDK 时已注册 `ChatManager`，能够通过 `client.chatManager` 调用历史消息相关接口。
 
-### 从服务器获取指定会话的消息
+## 从服务器获取指定会话的消息
 
-你可以调用 `getHistoryMessages` 方法基于 `searchOptions` 参数对象允许用户按消息发送方、消息类型或时间段从服务器分页拉取历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。分页查询时，若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
+你可以调用 `getHistoryMessages` 方法从服务器分页拉取指定会话的历史消息，并通过 `searchDirection`、`senderIds`、`messageTypes`、`startTime` 和 `endTime` 等参数控制拉取方向和过滤条件。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。
 
-对于群组聊天，你可以通过设置 `searchOptions` 对象中的 `from` 参数拉取群组中单个成员发送的历史消息。
+对于群组聊天，你可以通过设置 `senderIds` 参数拉取群组中一个或多个成员发送的历史消息。
 
 :::tip
-1. 若使用该 API，需将 SDK 版本升级至 V4.1.6 版本或以上。
-2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
-3. 自 4.11.0 版本起，获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。
-4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
+2. 获取单聊历史消息时会读取服务端保存的消息送达状态和已读状态。该功能默认关闭，如果需要，请联系环信商务开通。
+3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 :::
 
-```javascript
-conn.getHistoryMessages({
-  // 单聊为对端用户 ID，群组聊天为群组 ID。
-  targetId: 'targetId', 
-  // 会话类型：单聊、群组聊天和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-  chatType: 'groupChat', 
-  // 每次获取的消息数量，取值范围为 [1,50]，默认值为 `20`。
-  pageSize: 20, 
-  // 消息搜索方向。
-  // （默认）`up` 表示按消息时间戳递减的方向获取，即先获取最新消息。
-  // `down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
-  searchDirection: 'up', 
-  searchOptions: {
-    // 消息发送方的用户 ID。该参数仅用于群组聊天。 
-    from: 'message sender userID', 
-    // 要获取的消息类型的数组。若不传值，会获取所有类型的消息。
-    msgTypes: ['txt'], 
-    // 查询的起始时间戳，单位为毫秒。
-    startTime: new Date('2023,11,9').getTime(), 
-    // 查询的结束时间戳，单位为毫秒。
-    endTime: new Date('2023,11,10').getTime(), 
-  },
+```typescript
+const result = await client.chatManager.getHistoryMessages({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+   pageSize: 20, // 每页获取的消息数量。取值范围为 1-50，默认值为 20。若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
+  cursor: '', // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  searchDirection: 'down', // 'up' 向前翻页 | 'down' 向后翻页
 });
+
+console.log('消息列表:', result.items);
+console.log('下一页 cursor:', result.cursor);
+console.log('是否还有更多:', result.hasMore);
 ```
 
 此外，你可以调用 `getHistoryMessages` 方法从服务器获取指定会话的历史消息。你可以指定消息查询方向，即明确按时间顺序或逆序获取。
 
-为确保数据可靠，我们建议你每次最多获取 50 条消息，可多次获取。
+为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50；如果还有更多数据，可根据返回的 `cursor` 继续分页获取。
 
-```javascript
-let options = {
-  // 对方的用户 ID 或者群组 ID 或聊天室 ID。
-  targetId: "user1",
-  // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
+```typescript
+const result = await client.chatManager.getHistoryMessages({
+  conversationId: 'group1',
+  conversationType: 'groupChat',
   pageSize: 20,
-  // 查询的起始消息 ID。若该参数设置为 `-1`、`null` 或空字符串（''），从最新消息开始。
-  // 后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-  cursor: -1,
-  // 会话类型：（默认） `singleChat`：单聊；`groupChat`：群聊；`chatRoom`：聊天室
-  chatType: "groupChat",
-  // 消息搜索方向。
-  // （默认）`up` 表示按消息时间戳递减的方向获取，即先获取最新消息。
-  // `down` 表示按消息时间戳递增的方向获取，即先获取最老的消息。
-  searchDirection: "up",
-};
-WebIM.conn
-  .getHistoryMessages(options)
-  .then((res) => {
-    // 成功获取历史消息。
-    console.log(res);
-  })
-  .catch((e) => {
-    // 获取失败。
-  });
+  cursor: '',
+  senderIds: ['user1'],        // 按发送者过滤，仅在群聊场景下生效
+  messageTypes: ['text'],      // 按消息类型过滤
+  startTime: 1700000000000,    // 起始时间戳，单位为毫秒
+  endTime: 1700100000000,      // 结束时间戳，单位为毫秒
+  },
+});
 ```
 
+## 接口列表
 
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getHistoryMessages`](#从服务器获取指定会话的消息) | `ChatManager` | 分页从服务器拉取指定会话的历史消息。 |

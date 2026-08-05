@@ -1,322 +1,335 @@
-# 管理聊天室成员
+# 聊天室成员管理
 
-<Toc />
+## 功能说明
 
-聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM Web SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
+聊天室适用于直播互动、开放讨论和消息广播等多人实时互动场景。本文介绍如何使用 SDK 管理聊天室成员，包括查询成员列表、管理员、白名单、黑名单和禁言等功能。
 
-## 技术原理
+## 接口使用方式
 
-环信即时通讯 IM SDK 支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等：
+SDK 提供 `ChatRoomManager` 管理器和 `ChatRoom` 单聊天室对象用于管理聊天室成员：
 
-- 获取聊天室成员列表；
-- 退出聊天室；
-- 管理聊天室黑名单；
-- 管理聊天室白名单；
-- 管理聊天室禁言；
-- 管理聊天室所有者及管理员。
+- `client.chatRoomManager` 适合处理直接按 `chatRoomId` 操作聊天室成员。
+- `client.chatRoomManager.getChatRoom(chatRoomId)` 可获取绑定指定聊天室的 `ChatRoom` 对象，适合在已知聊天室 ID 的页面内连续执行成员列表、管理员、禁言、白名单、黑名单和公告等操作。
+- 对于成员列表、管理员、禁言、白名单和黑名单等单聊天室操作，推荐优先使用 `ChatRoom` 单聊天室对象写法。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation)；
-- 了解环信即时通讯 IM 聊天室不同套餐相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 已完成 SDK 初始化并登录成功。
+- 初始化 SDK 时已注册 `ChatRoomManager`，能够通过 `client.chatRoomManager` 调用聊天室相关接口。
+- 已了解聊天室数量、聊天室成员数量、接口调用频率和套餐能力等服务限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 获取聊天室成员列表
 
-### 获取聊天室成员列表
+先调用 `getChatRoom` 获取单聊天室对象，再调用 `getMembers` 分页获取聊天室成员列表。返回结果中包含成员用户信息、成员角色和加入聊天室时间等信息。
 
-自 SDK 4.15.0 开始，聊天室所有成员均可调用 `getChatRoomMembers`方法获取聊天室成员信息，包括用户 ID 和成员角色。服务器不对成员进行排序，因此，返回的成员列表不保证有序。
+服务器不对成员进行排序，因此，返回的成员列表不保证有序。
 
-原方法 `listChatRoomMembers` 废弃。
+```typescript
+const chatRoom = client.chatRoomManager.getChatRoom('chatroomId');
 
-```javascript
-conn
-// limit：每页获取的成员数。取值范围为 [1,50]，默认为 50。
-  .getChatRoomMembers({ cursor: "", limit: 50, chatRoomId: "chatRoomId" })
-  .then((res) => {
-    console.log(res);
-  });
+const result = await chatRoom.getMembers({
+  // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  cursor: '',
+  // 每页获取的成员数。取值范围为 [1,50]，默认为 50。
+  pageSize: 50,
+});
+
+console.log(result.items);
+console.log(result.cursor);
+console.log(result.hasMore);
 ```
 
-### 退出聊天室
+返回结果中，`items` 为当前页成员列表；`cursor` 为下一页游标，若服务端未返回游标则该字段可能为空；`hasMore` 表示是否还有下一页，服务端未返回时该字段可能为空。
 
-#### 主动退出
+`items` 中的每一项均为 `ChatRoomMemberEntry`，主要字段如下：
 
-聊天室所有成员均可以调用 `leaveChatRoom` 退出当前聊天室。成员退出聊天室时，其他成员收到 `memberAbsence` 事件。与群主无法退出群组不同，聊天室所有者可以离开聊天室，退出后重新进入仍是该聊天室的所有者。
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `user` | Object | 成员用户信息。至少包含 `userId`，其他信息字段取决于本地缓存或服务端返回结果。 |
+| `role` | String | 成员在聊天室中的角色，可能为 `owner`、`admin` 或 `member`。服务端未返回时，该字段可能为空。 |
+| `joinedAt` | Number | 成员加入聊天室的时间戳。服务端未返回时，该字段可能为空。 |
 
-示例代码如下：
+## 管理聊天室所有者和管理员
 
-```javascript
-let option = {
-    roomId: 'roomId'
-}
-conn.leaveChatRoom(option).then(res => console.log(res))
+### 变更聊天室所有者
+
+当前 SDK 未提供客户端转让聊天室所有者的接口。若业务要变更聊天室所有者，需调用 [服务端接口](/document/server-side/chatroom_owner_transfer.html)。
+
+### 添加聊天室管理员
+
+仅聊天室所有者可调用 `addAdmin` 添加聊天室管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 事件。
+
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').addAdmin({
+  userId: 'user1',
+});
 ```
 
-#### 被移出
+### 移除聊天室管理员
 
-仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定的单个成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
+仅聊天室所有者可调用 `removeAdmin` 移除聊天室管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 事件。
 
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    username: "userId"
-};
-conn.removeChatRoomMember(option).then(res => console.log(res))
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').removeAdmin({
+  userId: 'user1',
+});
 ```
 
-#### 离线后自动退出
+### 获取聊天室管理员列表
 
-由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+聊天室所有者和管理员可调用 `getAdminList` 获取聊天室管理员列表。
 
-以下两类成员即使离线也不会退出聊天室：
-
-- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
-- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html)时拉入的用户从未登录过。
-
-若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 API 加入聊天室。
-
-### 管理聊天室黑名单
-
-#### 获取聊天室黑名单列表
-
-仅聊天室所有者和管理员可调用 `getChatRoomBlocklist` 获取当前聊天室黑名单成员列表。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-};
-conn.getChatRoomBlocklist(option);
+```typescript
+const admins = await client.chatRoomManager.getChatRoom('chatroomId').getAdminList();
+console.log(admins);
 ```
 
-#### 将成员添加至聊天室黑名单
+## 管理聊天室白名单
 
-仅聊天室所有者和管理员可调用 `blockChatRoomMembers` 方法将成员加入聊天室黑名单。被加入黑名单的成员会收到 `removeMember` 事件。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
+聊天室白名单成员在全员禁言场景下仍可发言；聊天室所有者和管理员默认属于白名单。
 
-被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室。黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
+白名单成员发送的消息具有更高的投递优先级，但不保证一定能够送达。当系统负载较高时，服务端可能优先丢弃低优先级消息；若负载持续升高，也可能丢弃高优先级消息。
 
-```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    usernames: ['user1', 'user2'] // 用户 ID 数组。
-};
-conn.blockChatRoomMembers(option).then(res => console.log(res));
+### 添加成员到白名单
+
+聊天室所有者或管理员可调用 `addUsersToAllowlist` 将指定成员加入聊天室白名单。添加成功后，该成员以及聊天室所有者和管理员（除操作者外）会收到 `onAllowListAdded` 事件。
+
+```typescript
+const result = await client.chatRoomManager.getChatRoom('chatroomId').addUsersToAllowlist({
+  userIds: ['user1'],
+});
+
+console.log(result);
 ```
 
-#### 将成员移出聊天室黑名单
+### 从白名单移除成员
 
-仅聊天室所有者和管理员可调用 `unblockChatRoomMembers` 方法将成员移出聊天室黑名单。
+聊天室所有者或管理员可调用 `removeUsersFromAllowlist` 将指定成员移出聊天室白名单。移除成功后，该成员以及聊天室所有者和管理员（除操作者外）会收到 `onAllowListRemoved` 事件。
 
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    usernames: ["user1", "user2"] // 用户 ID 数组。
-}
-conn.unblockChatRoomMembers(option).then(res => console.log(res));
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').removeUsersFromAllowlist({
+  userIds: ['user1'],
+});
 ```
 
-### 管理聊天室白名单
+### 查询当前用户是否在白名单中
 
-聊天室所有者和管理员默认会被加入聊天室白名单。
+调用 `checkIfInAllowList` 可查询当前登录用户是否在该聊天室白名单中。
 
-聊天室白名单中的成员在聊天室中发送的消息为高优先级，会优先送达，但不保证必达。当负载较高时，服务器会优先丢弃低优先级的消息。若即便如此负载仍很高，服务器也会丢弃高优先级消息。
-
-#### 获取聊天室白名单列表
-
-仅聊天室所有者和管理员可调用 `getChatRoomAllowlist` 方法获取当前聊天室白名单成员列表。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId"
-}
-conn.getChatRoomAllowlist(option).then(res => console.log(res));
+```typescript
+const inAllowlist = await client.chatRoomManager.getChatRoom('chatroomId').checkIfInAllowList();
+console.log(inAllowlist);
 ```
 
-#### 检查自己是否在聊天室白名单中
+### 获取白名单列表
 
-所有聊天室成员可以调用 `isInChatRoomAllowlist` 方法检查自己是否在聊天室白名单中。
+聊天室所有者或管理员可调用 `getAllowlist` 获取聊天室白名单列表。
+
+```typescript
+const allowlist = await client.chatRoomManager.getChatRoom('chatroomId').getAllowlist();
+console.log(allowlist);
+```
+
+## 管理聊天室黑名单
+
+聊天室黑名单用于禁止指定用户加入或继续留在聊天室。成员被加入黑名单后，会被移出聊天室，无法继续收发该聊天室消息；只有先从黑名单移除，才可再次加入聊天室。
+
+### 添加成员到黑名单
+
+聊天室所有者或管理员可调用 `blockMembers` 将指定成员加入聊天室黑名单。被加入黑名单后，该成员收到 `onMembersExited` 回调事件。
+
+- 被加入黑名单的成员会被移出聊天室，且无法继续收发该聊天室消息。
+- 默认情况下，其他聊天室成员不会收到该事件通知；如需此类事件通知，请联系商务支持。
+- 黑名单中的成员如需再次加入聊天室，必须先由聊天室所有者或管理员将其移出黑名单。
+
+```typescript
+const result = await client.chatRoomManager.getChatRoom('chatroomId').blockMembers({
+  userIds: ['user1'],
+});
+
+console.log(result);
+```
+
+### 从黑名单移除成员
+
+聊天室所有者或管理员可调用 `unblockMembers` 将指定成员移出聊天室黑名单。移出黑名单后，该用户可以再次加入聊天室。
+
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').unblockMembers({
+  userIds: ['user1'],
+});
+```
+
+### 获取黑名单列表
+
+聊天室所有者或管理员可调用 `getBlocklist` 分页获取聊天室黑名单列表。
+
+```typescript
+const blocklist = await client.chatRoomManager.getChatRoom('chatroomId').getBlocklist({
+  // 当前页码，从 1 开始。
+  pageNum: 1,
+  // 每页获取的黑名单用户数。取值范围为 [1,50]，默认值是 20。
+  pageSize: 20,
+});
+
+console.log(blocklist);
+```
+
+## 管理聊天室禁言
+
+聊天室所有者和管理员可以对指定成员单独禁言，也可以开启全员禁言。
+
+这两种禁言方式相互独立，互不影响：
+
+- 单独禁言：将指定用户加入禁言列表。
+- 全员禁言：一键禁言聊天室普通成员。白名单成员在全员禁言场景下仍可发言。
+- 开启或关闭全员禁言不会影响单个成员的禁言列表。
+
+### 禁言指定成员
+
+聊天室所有者或管理员可调用 `muteMembers` 将一个或多个成员加入聊天室禁言列表。加入禁言列表后，被禁言成员、聊天室管理员和聊天室所有者（除操作者外）会收到 `onMuteListAdded` 事件。
+
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').muteMembers({
+  userIds: ['user1'],
+  // 禁言时长，单位为秒。传 -1 表示永久禁言。
+  duration: 3600,
+});
+```
+
+### 解除指定成员禁言
+
+聊天室所有者或管理员可调用 `unmuteMembers` 将单个或多个成员移出聊天室禁言列表。解除禁言后，被解除禁言的成员、聊天室管理员和聊天室所有者（除操作者外）会收到 `onMuteListRemoved` 事件。
 
 :::tip
-聊天室的管理员可查询所有用户，普通成员只能查询自己。
+聊天室所有者可解除所有成员的禁言状态；聊天室管理员通常只能解除普通成员的禁言状态。
 :::
 
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    userName: "user"
-}
-conn.isInChatRoomAllowlist(option);
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').unmuteMembers({
+  userIds: ['user1'],
+});
 ```
 
-#### 将成员加入聊天室白名单
+### 查询当前用户是否被禁言
 
-仅聊天室所有者和管理员可调用 `addUsersToChatRoomAllowlist` 方法将成员添加至聊天室白名单。
+聊天室成员可以调用 `checkIfInMuteList` 查询当前登录用户是否在该聊天室禁言列表中。
 
-示例代码如下：
+```typescript
+const status = await client.chatRoomManager.getChatRoom('chatroomId').checkIfInMuteList();
 
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    users: ["user1", "user2"] // 成员 ID 列表。
-};
-conn.addUsersToChatRoomAllowlist(option);
+console.log(status.muted);
+console.log(status.muteExpireAt);
 ```
 
-#### 将成员移出聊天室白名单
+### 获取禁言列表
 
-仅聊天室所有者和管理员可调用 `removeChatRoomAllowlistMember` 方法将成员移出聊天室白名单。
+聊天室所有者或管理员可调用 `getMuteList` 分页获取聊天室禁言列表。
 
-示例代码如下：
+```typescript
+const muteList = await client.chatRoomManager.getChatRoom('chatroomId').getMuteList({
+  // 当前页码，从 1 开始。
+  pageNum: 1,
+  // 每页返回的禁言成员数。
+  pageSize: 20,
+});
 
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    userName: "userId"
-}
-conn.removeChatRoomAllowlistMember(option);
+console.log(muteList);
 ```
 
-### 管理禁言
+### 开启全员禁言
 
-聊天室所有者和管理员可以将指定聊天室成员添加或移出禁言列表，也可开启关闭全员禁言。全员禁言和单独的成员禁言不冲突，开启和关闭全员禁言，并不影响禁言列表。
+聊天室所有者或管理员可调用 `muteAllMembers` 开启全员禁言。全员禁言不会自动到期，如要关闭需主动调用 `unmuteAllMembers`。
 
-#### 获取聊天室禁言列表
+开启后，聊天室成员会收到 `onAllMemberMuteStateChanged` 事件。除白名单成员外，其他成员将无法发送聊天室消息。
 
-仅聊天室所有者和管理员可调用 `getChatRoomMuteList` 方法获取聊天室禁言列表。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId"
-};
-conn.getChatRoomMutelist(option).then(res => console.log(res))
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').muteAllMembers();
 ```
 
-#### 将成员添加至聊天室禁言列表
+### 关闭全员禁言
 
-仅聊天室所有者和管理员可调用 `muteChatRoomMember` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `muteMember` 事件。
+聊天室所有者或管理员可调用 `unmuteAllMembers` 关闭全员禁言。关闭后，聊天室成员会收到 `onAllMemberMuteStateChanged` 事件。
 
-:::tip
-聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
-:::
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID。
-    username: 'userId',     // 被禁言的聊天室成员的 ID。
-    muteDuration: -1000       // 禁言时长，单位为毫秒。若传 “-1,000” 表示永久禁言。
-};
-conn.muteChatRoomMember(option).then(res => console.log(res))
+```typescript
+await client.chatRoomManager.getChatRoom('chatroomId').unmuteAllMembers();
 ```
 
-#### 将成员移出聊天室禁言列表
+## 监听聊天室成员事件
 
-仅聊天室所有者和管理员可调用 `unmuteChatRoomMember` 方法将一组成员解除禁言。
+聊天室成员相关操作成功后，SDK 会触发对应聊天室事件。你可以调用 `addEventHandler` 注册聊天室事件监听器。
 
-:::tip
-聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `unmuteMember` 事件。
-:::
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    username: 'username'
-};
-conn.unmuteChatRoomMember(option).then(res => console.log(res))
+```typescript
+client.chatRoomManager.addEventHandler('chatroom-member-events', {
+  // 有成员被设为管理员。被添加的管理员会收到该事件。
+  onAdminAdded: event => {
+    console.log('聊天室新增管理员:', event.chatRoomId, event.admin);
+  },
+  // 有成员被移除管理员权限。被移除的管理员会收到该事件。
+  onAdminRemoved: event => {
+    console.log('聊天室移除管理员:', event.chatRoomId, event.admin);
+  },
+  // 有成员被加入禁言列表。被添加的成员收到该事件。
+  onMuteListAdded: event => {
+    console.log('聊天室禁言列表新增成员:', event.chatRoomId, event.mutes, event.muteExpire);
+  },
+  // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。
+  onMuteListRemoved: event => {
+    console.log('聊天室禁言列表移除成员:', event.chatRoomId, event.mutes);
+  },
+  // 有成员被加入白名单列表。被添加的成员收到该事件。
+  onAllowListAdded: event => {
+    console.log('聊天室白名单新增成员:', event.chatRoomId, event.allowlist);
+  },
+  // 有成员被移出白名单列表。被移出白名单的成员会收到该事件。
+  onAllowListRemoved: event => {
+    console.log('聊天室白名单移除成员:', event.chatRoomId, event.allowlist);
+  },
+  // 全员禁言状态变更。聊天室所有成员会收到该事件。
+  onAllMemberMuteStateChanged: event => {
+    console.log('聊天室全员禁言状态变更:', event.chatRoomId, event.isMuted);
+  },
+});
 ```
 
-#### 检查自己是否在聊天室禁言列表
+如需移除监听器，可调用 `removeEventHandler`：
 
-聊天室成员可以调用 `isInChatRoomMutelist` 方法查看自己是否在聊天室禁言列表。
-
-```javascript
-conn
-    .isInChatRoomMutelist({ chatRoomId: 'chatRoomId' })
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+```typescript
+client.chatRoomManager.removeEventHandler('chatroom-member-events');
 ```
 
-#### 开启全员禁言
+## 注意事项
 
-仅聊天室所有者和管理员可调用 `disableSendChatRoomMsg` 方法设置全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendChatRoomMsg` 方法取消全员禁言。
+- 本文中的 `chatRoomId`、`userId` 和 `userIds` 均不能为空；参数非法时 SDK 会抛出参数错误。
+- `userIds` 用于批量操作成员，不能为空数组；SDK 会过滤空字符串并对重复用户 ID 做归一化处理。
+- `getMembers` 使用游标分页；`getMuteList` 和 `getBlocklist` 使用页码分页。
+- `muteMembers` 的禁言时长参数为 `duration`，单位为秒。
+- `checkIfInAllowList` 和 `checkIfInMuteList` 查询的是当前登录用户自身状态，不支持传入其他用户 ID。
+- 管理员、白名单、黑名单和禁言等操作需要当前用户具备聊天室所有者或管理员权限；无权限或鉴权失败时 SDK 会抛出错误。
 
+## 接口列表
 
-全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。调用成功后，聊天室成员会收到 `muteAllMembers` 事件。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId"
-};
-conn.disableSendChatRoomMsg(option).then(res => console.log(res))
-```
-
-#### 关闭全员禁言
-
-仅聊天室所有者和管理员可调用 `enableSendChatRoomMsg` 方法设置解除全员禁言。调用成功后，聊天室成员会收到 `unmuteAllMembers` 事件。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: "chatRoomId"
-};
-conn.enableSendChatRoomMsg(option).then((res) => {
-    console.log(res)
-})
-```
-
-### 管理聊天室管理员
-
-#### 添加聊天室管理员
-
-仅聊天室所有者可调用 `setChatRoomAdmin` 添加聊天室管理员。成功添加后，新管理员及其他管理员会收到 `setAdmin` 事件。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    username: 'userId'
-}
-conn.setChatRoomAdmin(option).then(res => console.log(res))
-```
-
-#### 移除聊天室管理员
-
-仅聊天室的所有者可调用 `removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的聊天室管理员和其他管理员会收到 `removeAdmin` 事件。
-
-示例代码如下：
-
-```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    username: 'userId'
-}
-conn.removeChatRoomAdmin(option).then(res => console.log(res))
-```
-### 监听聊天室事件
-
-有关详细信息，请参阅 [聊天室事件](room_manage.html#监听聊天室事件)。
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getChatRoom`](#获取聊天室成员列表) | `ChatRoomManager` | 获取绑定指定聊天室 ID 的 `ChatRoom` 单聊天室对象。 |
+| [`getMembers`](#获取聊天室成员列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象分页获取聊天室成员列表。 |
+| [`leaveChatRoom`](room_manage.html#主动退出) | `ChatRoom` | 当前登录用户主动退出聊天室。 |
+| [`removeMembers`](room_manage.html#移出成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象移除一个或多个聊天室成员。 |
+| [`addAdmin`](#添加聊天室管理员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象添加聊天室管理员。 |
+| [`removeAdmin`](#移除聊天室管理员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象移除聊天室管理员。 |
+| [`getAdminList`](#获取聊天室管理员列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室管理员列表。 |
+| [`addUsersToAllowlist`](#添加成员到白名单) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象将成员加入白名单。 |
+| [`removeUsersFromAllowlist`](#从白名单移除成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象将成员移出白名单。 |
+| [`checkIfInAllowList`](#查询当前用户是否在白名单中) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象查询当前用户是否在白名单中。 |
+| [`getAllowlist`](#获取白名单列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室白名单。 |
+| [`blockMembers`](#添加成员到黑名单) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象将成员加入聊天室黑名单。 |
+| [`unblockMembers`](#从黑名单移除成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象将成员移出聊天室黑名单。 |
+| [`getBlocklist`](#获取黑名单列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室黑名单。 |
+| [`muteMembers`](#禁言指定成员) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象禁言指定成员。 |
+| [`unmuteMembers`](#解除指定成员禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象解除指定成员禁言。 |
+| [`checkIfInMuteList`](#查询当前用户是否被禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象查询当前用户是否被禁言。 |
+| [`getMuteList`](#获取禁言列表) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象获取聊天室禁言列表。 |
+| [`muteAllMembers`](#开启全员禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象开启全员禁言。 |
+| [`unmuteAllMembers`](#关闭全员禁言) | `ChatRoom` | 通过 `ChatRoom` 单聊天室对象关闭全员禁言。 |

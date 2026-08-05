@@ -1,485 +1,655 @@
-# 管理群组成员
+﻿# 群组成员管理
 
-<Toc />
+## 功能说明
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
-
-## 技术原理
-
-环信即时通讯 IM Android SDK 提供 [EMGroupManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager.html)、[EMGroup](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html) 和 [EMGroupChangeListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_group_change_listener.html)用于群组管理，支持你通过调用 API 在项目中实现如下功能：
-
-- 加入、退出群组
-- 管理群成员的自定义属性
-- 管理群主及群管理员
-- 管理群组白名单
-- 管理群组黑名单
-- 管理群组禁言
+群组是支持多人实时沟通的即时通讯场景。本文介绍如何使用 Android SDK 管理群组成员，包括查询成员列表、管理成员自定义属性、群主和管理员、白名单、黑名单及禁言等功能。用户入群、退出和移出群组的操作详见 [创建和管理群组](group_manage.html#加入群组)。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 了解群成员角色，详见 [群组概述](group_overview.html)；
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 已完成 [SDK 初始化](initialization.html) 并 [登录成功](login.html)。
+- 已了解群成员角色及其权限，详见 [群组概述](group_overview.html)。
+- 已了解群成员数量、接口调用频率和群成员属性大小等限制，详见[使用限制](/product/limitation.html)。
 
-## 实现方法
+## 获取群成员列表
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+可通过三种方式获取群成员列表：
 
-### 加入群组
+- 分页获取群成员信息：通过 `asyncFetchGroupMembersInfo` 从服务器分页获取成员详情。
+- 分页获取群成员 ID：通过 `asyncFetchGroupMembers` 从服务器分页获取成员 ID。
+- 从本地群组对象获取成员 ID：通过 `EMGroup#getUsers` 读取已获取的 `EMGroup` 对象中的成员 ID。
 
-用户进群分为两种方式：主动申请入群和群成员邀请入群。
+### 分页获取群成员信息
 
-公开群和私有群在两种入群方式方面存在差别：
-
-| 入群方式                   | 公开群       | 私有群          |
-| :------------------------- | :------------------ | :------------------------------------ |
-| 是否支持用户申请入群       | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置。 | 不支持                                                                                             |
-| 是否支持群成员邀请用户入群 | 支持 <br/>只能由群主和管理员邀请。    | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置。 |
-
-#### 用户申请入群
-
-只有公开群支持用户申请入群，私有群不支持。用户可获取公开群列表，选择相应的群组 ID，然后调用相应方法加入该群组。
-
-任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组类型 [EMGroupStyle](https://sdkdocs.easemob.com/apidoc/android/chat3.0/enumcom_1_1hyphenate_1_1chat_1_1_e_m_group_manager_1_1_e_m_group_style.html) 的设置：
-
-- `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
-- `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
-
-若申请加入公开群，申请人需执行以下步骤：
-
-1. 调用 `getPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
-
-```java
-EMCursorResult<EMGroupInfo> result = EMClient.getInstance().groupManager().getPublicGroupsFromServer(pageSize, cursor);
-List<EMGroupInfo> groupsList = result.getData();
-String cursor = result.getCursor();
-```
-
-2. 调用 `joinGroup` 或 `applyJoinToGroup` 方法传入群组 ID，申请加入对应群组。
-
-   - 调用 `joinGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupChangeListener#onMembersJoined` 回调。
-
-   示例代码如下：
-
-   ```java
-   EMClient.getInstance().groupManager().joinGroup(groupId);
-   ```
-
-   - 调用 `applyJoinToGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 设置为 `EMGroupStylePublicJoinNeedApproval`。示例代码如下：
-
-   ```java
-   EMClient.getInstance().groupManager().applyJoinToGroup(groupId, "your reason");
-   ```
-
-   群主或群管理员收到 `EMGroupChangeListener#OnRequestToJoinReceived` 回调：
-
-   - 若同意加入群组，需要调用 `acceptApplication` 方法。
-
-   申请人会收到 `EMGroupChangeListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `EMGroupChangeListener#onMembersJoined` 回调。
-
-   示例代码如下：
-
-   ```java
-   EMClient.getInstance().groupManager().acceptApplication(username, groupId);
-   ```
-
-   - 若群主或群管理员拒绝申请人入群，需要调用 `declineApplication` 方法。申请人会收到 `EMGroupChangeListener#onRequestToJoinDeclined` 回调。
-
-   示例代码如下：
-
-   ```java
-   EMClient.getInstance().groupManager().declineApplication(username, groupId, "your reason");
-   ```
-
-#### 邀请用户入群
-
-邀请用户入群的方式详见 [邀请用户入群的配置](./group_manage.html#创建群组)。
-
-邀请用户入群流程如下：
-
-1. 群成员邀请用户入群。
-
-   - 群主或群管理员加人，需要调用 `addUsersToGroup` 方法：
-
-   ```java
-   EMClient.getInstance().groupManager().addUsersToGroup(groupId, newmembers);
-   ```
-
-   - 普通成员邀请人入群，需要调用 `inviteUser` 方法：
-
-   对于私有群，`EMGroupStyle` 设置为 `EMGroupStylePrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
-
-   ```java
-   EMClient.getInstance().groupManager().inviteUser(groupId, newmembers, "your reason");
-   ```
-
-2. 受邀用户自动进群或确认是否加入群组：
-
-   - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
-
-   ```java
-   EMClient.getInstance().groupManager().acceptInvitation(groupId, inviter);
-   ```
-
-   - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
-
-   ```java
-   EMClient.getInstance().groupManager().declineInvitation(groupId, inviter, "your reason");
-   ```
-
-### 退出群组
-
-#### 群成员主动退出群组
-
-群成员可以调用 `leaveGroup` 方法退出群组。其他成员收到 `EMGroupChangeListener#onMembersExited` 回调。
-
-退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 `DestroyGroup` 解散群组。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncLeaveGroup(String, EMCallBack)。
-EMClient.getInstance().groupManager().leaveGroup(groupId);
-```
-
-#### 群成员被移出群组
-
-仅群主和群管理员可以调用 `removeUserFromGroup` 或 `asyncRemoveUsersFromGroup` 方法将单个或多个成员移出群组。被踢出群组后，被踢成员将会收到群组事件回调 `EMGroupChangeListener#onUserRemoved`，其他成员将会收到回调 `EMGroupChangeListener#onMembersExited`。被移出群组后，用户还可以再次加入群组。
-
-- 移出单个群成员，示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncRemoveUserFromGroup(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().removeUserFromGroup(groupId, username);
-```
-
-- 批量移出群成员，示例代码如下：
+调用 `EMGroupManager#asyncFetchGroupMembersInfo` 分页获取群成员信息，返回的成员信息包括群成员的用户 ID、角色、入群时间、群名片、昵称和头像。
 
 ```java
 // 异步方法。
-EMClient.getInstance().groupManager().asyncRemoveUsersFromGroup("GroupId", userList, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                
-            }
+// cursor：首次请求时将 `cursor` 传入 `null` 或空字符串；后续请求传入上一次结果中的游标。当返回的游标为空时，表示已到最后一页。
+EMClient.getInstance()
+        .groupManager()
+        // pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
+        .asyncFetchGroupMembersInfo(
+                groupId,
+                null,
+                50,
+                new EMValueCallBack<
+                        EMCursorResult<EMGroupMemberInfo>>() {
+                    @Override
+                    public void onSuccess(
+                            EMCursorResult<EMGroupMemberInfo> result) {
+                        List<EMGroupMemberInfo> members = result.getData();
+                        String nextCursor = result.getCursor();
 
-            @Override
-            public void onError(int code, String error) {
+                        for (EMGroupMemberInfo member : members) {
+                            String userId = member.getUserId();
+                            long joinedAt = member.getJoinTime();
+                            EMGroup.EMGroupPermissionType role =
+                                    member.getRole();
+                            String namecard = member.getNamecard();
+                            String nickname = member.getNickname();
+                            String avatarUrl = member.getAvatarUrl();
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 管理群成员的自定义属性
+`EMGroupMemberInfo` 的主要接口如下：
 
-群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
+| API | 返回值 | 描述 |
+| :--- | :--- | :--- |
+| `getUserId()` | `String` | 获取群成员的用户 ID。 |
+| `getJoinTime()` | `long` | 获取入群时间，Unix 时间戳，单位为毫秒。 |
+| `getRole()` | `EMGroupPermissionType` | 获取成员角色：`owner`、`admin`、`member` 或 `none`。 |
+| `getNamecard()` | `String` | 获取群成员名片。 |
+| `getNickname()` | `String` | 获取群成员昵称。 |
+| `getAvatarUrl()` | `String` | 获取群成员头像 URL。 |
 
-- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
+### 分页获取群成员 ID
 
-- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
-
-#### 设置群成员自定义属性
-
-你可以调用 `EMGroupManager#asyncSetGroupMemberAttributes` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
-
-设置后，群内其他成员会收到 `EMGroupChangeListener#onGroupMemberAttributeChanged` 事件。
-
-示例代码如下：
+如果只需要群成员用户 ID，也可以调用 `asyncFetchGroupMembers` 分页获取：
 
 ```java
-    Map<String,String> attrMap=new HashMap();
-    attrMap.put("key","value");
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupMembers(
+                groupId,
+                null,
+                50,
+                new EMValueCallBack<EMCursorResult<String>>() {
+                    @Override
+                    public void onSuccess(
+                            EMCursorResult<String> result) {
+                        List<String> userIds = result.getData();
+                        String nextCursor = result.getCursor();
+                    }
 
-    EMClient.getInstance().groupManager().asyncSetGroupMemberAttributes(groupId, userId, attrMap, new EMCallBack() {
-        @Override
-        public void onSuccess() {
-
-        }
-
-        @Override
-        public void onError(int code, String error) {
-
-        }
-    });
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 获取单个群成员的所有自定义属性
+### 从本地群组对象获取成员 ID
 
-你可以调用 `EMGroupManager#asyncFetchGroupMemberAllAttributes` 方法获取单个群成员的所有自定义属性。
-
-示例代码如下：
+如已获取 `EMGroup` 对象，可调用 `EMGroup#getUsers()` 获取该对象中包含的全部成员用户 ID，包括群主、管理员和普通成员：
 
 ```java
-    EMClient.getInstance().groupManager().asyncFetchGroupMemberAllAttributes(groupId, userId, new EMValueCallBack<Map<String, Map<String, String>>>() {
-        @Override
-        public void onSuccess(Map<String, Map<String, String>> value) {
-
-        }
-
-        @Override
-        public void onError(int error, String errorMsg) {
-
-        }
-    });
+List<String> userIds = group.getUsers();
 ```
 
-#### 根据属性 key 获取多个群成员的自定义属性
+## 管理群成员自定义属性
 
-你可调用 `EMGroupManager#asyncFetchGroupMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+群成员自定义属性是群组维度的成员信息，适用于业务标签等场景，采用字符串 key-value 结构。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。
+- 单个属性的 key 不能超过 16 字节，value 不能超过 512 字节。
+- 群主可以修改所有群成员的属性，其他群成员只能修改自己的属性。
+
+### 设置群成员的自定义属性
+
+调用 `asyncSetGroupMemberAttributes` 设置指定成员的属性。将某个 key 对应的 value 设置为空字符串表示删除该属性。设置成功后，群内其他成员会收到 `EMGroupChangeListener#onGroupMemberAttributeChanged` 回调。
+
+```java
+Map<String, String> attributes = new HashMap<>();
+attributes.put("department", "product");
+attributes.put("roleTag", "speaker");
+
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncSetGroupMemberAttributes(
+                groupId,
+                userId,
+                attributes,
+                new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 获取单个群成员的自定义属性
+
+调用 `asyncFetchGroupMemberAllAttributes` 获取指定群成员的全部自定义属性。成功时，回调返回 `Map<String, Map<String, String>>`：外层 `Map` 的键为成员用户 ID，内层 `Map` 为该成员的属性键值对。
+
+若该成员未设置自定义属性，返回结果中该用户 ID 对应的属性 `Map` 可能为空；业务侧应按需判空处理。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupMemberAllAttributes(
+                groupId,
+                userId,
+                new EMValueCallBack<
+                        Map<String, Map<String, String>>>() {
+                    @Override
+                    public void onSuccess(
+                            Map<String, Map<String, String>> result) {
+                        Map<String, String> attributes = result.get(userId);
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 根据属性 key 获取群成员自定义属性
+
+调用 `asyncFetchGroupMembersAttributes` 可以按属性 key 批量获取多个群成员的属性。`keyList` 为空列表时，返回这些成员的全部属性。
 
 :::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 
-示例代码如下：
-
 ```java
-   // keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
-    EMClient.getInstance().groupManager().asyncFetchGroupMembersAttributes(groupId, userIds, keyList, new EMValueCallBack<Map<String, Map<String, String>>>() {
-        @Override
-        public void onSuccess(Map<String, Map<String, String>> value) {
+List<String> userIds = Arrays.asList("user1", "user2");
+List<String> keyList = Arrays.asList("department", "roleTag");
 
-        }
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupMembersAttributes(
+                groupId,
+                userIds,
+                // keyList：要获取自定义属性的 key 的数组。若 keyList 为空数组或不传则获取这些成员的所有自定义属性。
+                keyList,
+                new EMValueCallBack<
+                        Map<String, Map<String, String>>>() {
+                    @Override
+                    public void onSuccess(
+                            Map<String, Map<String, String>> result) {
+                    }
 
-        @Override
-        public void onError(int error, String errorMsg) {
-
-        }
-    });
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 管理群主和群管理员
+## 管理群主和群管理员
 
-#### 变更群主
+### 变更群主
 
-仅群主可以调用 `changeOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，新群主收到 `EMGroupChangeListener#onOwnerChanged` 回调。
-
-示例代码如下：
+仅群主可以调用 `asyncChangeOwner` 将群所有权转让给指定群成员。转让成功后，原群主变为普通成员，新群主拥有群主权限，群成员会收到 `onOwnerChanged` 回调。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
-EMClient.getInstance().groupManager().changeOwner(groupId, newOwner);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncChangeOwner(
+                groupId,
+                newOwner,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 添加群组管理员
+### 添加群管理员
 
-仅群主可以调用 `addGroupAdmin` 方法添加群管理员。成功添加后，新管理员及其他管理员收到 `EMGroupChangeListener#onAdminAdded` 回调。
+仅群主可以调用 `asyncAddGroupAdmin` 添加群管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 回调。
 
 管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
 
-示例代码如下：
-
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncAddGroupAdmin(String, String, EMValueCallBack)。
-EMClient.getInstance().groupManager().addGroupAdmin(groupId, admin);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncAddGroupAdmin(
+                groupId,
+                userId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-#### 移除群组管理员权限
+### 移除群管理员
 
-仅群主可以调用 `RemoveGroupAdmin` 方法移除群管理员。成功移除后，被移除的管理员及其他管理员收到 `EMGroupChangeListener#onAdminRemoved` 回调。
+仅群主可以调用 `asyncRemoveGroupAdmin` 移除群管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 回调。
 
-群管理员被移除群管理权限后将只拥有群成员的权限。
-
-示例代码如下：
+群管理员被移除群管理权限后将只拥有普通群成员的权限。
 
 ```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncRemoveGroupAdmin(String, String, EMValueCallBack)。
-EMClient.getInstance().groupManager().removeGroupAdmin(groupId, admin);
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncRemoveGroupAdmin(
+                groupId,
+                userId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
 ### 获取群管理员列表
 
-获取群管理员列表示例如下：
+通过 `EMGroup#getAdminList` 获取群组管理员列表。若需要最新数据，应先调用 [获取群组详情的方法 `asyncGetGroupFromServer`](group_attributes.html#获取群组详情) 刷新群详情。
 
 ```java
 // 获取内存中管理员列表。
 List<String> adminList = group.getAdminList();
 ```
 
-或者也可以用 [获取群组详情](group_manage.html#获取群组详情) 获取群组管理员列表。
+## 管理群组白名单
 
-### 管理群组白名单
+群组白名单用于控制全员禁言场景下仍可发言的成员。群主和群管理员默认属于白名单。
 
-群主和群组中的管理员默认会被加入群组白名单。
+:::tip
+全员禁言和单独禁言相互独立。全员禁言时，白名单成员仍可发送群消息；如果该成员同时被单独禁言，则单独禁言优先，该成员仍不能发送群消息。
+:::
 
-#### 将成员加入群组白名单
+### 添加成员到白名单
 
-仅群主和群管理员可以调用 `addToGroupWhiteList` 方法将指定群成员加入群白名单。群成员被添加至群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupChangeListener#onWhiteListAdded`。
-
-即使开启了群组全员禁言，群组白名单中的成员仍可以发送群组消息。不过，禁言列表上的用户即使加入了群白名单仍无法在群组中发送消息。
+仅群主或群管理员可以调用 `addToGroupWhiteList` 将指定成员加入群白名单。添加成功后，该成员以及群主和群管理员（除操作者外）会收到 `onWhiteListAdded` 回调。
+即使开启了全员禁言，白名单中的成员仍可发送群消息；但如果某个成员同时在禁言列表中，则无法发送群消息。
 
 ```java
+List<String> members = Arrays.asList("user1", "user2");
+
 // 异步方法。
-public void addToGroupWhiteList(final String groupId, final List<String> members, final EMCallBack callBack);
-```
-
-#### 将成员移出群组白名单
-
-仅群主和群管理员可以调用 `removeFromGroupWhiteList` 方法将指定群成员移出群白名单。
-
-群成员被移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到群组事件回调 `EMGroupChangeListener#onWhiteListRemoved`。
-
-```java
-// 异步方法。
-public void removeFromGroupWhiteList(final String groupId, final List<String> members, final EMCallBack callBack);
-```
-
-#### 检查自己是否在白名单中
-
-所有群成员可以调用 `checkIfInGroupWhiteList` 方法检查自己是否在群白名单中，示例代码如下：
-
-```java
-// 异步方法。
-public void checkIfInGroupWhiteList(final String groupId, EMValueCallBack<Boolean> callBack)
-```
-
-#### 获取群组白名单
-
-仅群主和群管理员可以调用 `fetchGroupWhiteList` 方法从服务器获取当前群组的白名单。
-
-```java
-// 异步方法。
-public void fetchGroupWhiteList(final String groupId, final EMValueCallBack<List<String>> callBack);
-```
-
-### 管理群组黑名单
-
-#### 将成员加入群组黑名单
-
-仅群主和群管理员可以调用 `BlockGroupMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `EMGroupChangeListener#OnUserRemovedFromGroup` 事件。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
-
-黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncBlockUser(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().blockUser(groupId, username);
-```
-
-#### 将成员移出群组黑名单
-
-仅群主和群管理员可以调用 `unblockUser` 方法将成员移出群组黑名单。指定用户被群主或者群管理员移出群黑名单后，可以再次申请加入群组。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUnblockUser(String, String, EMCallBack)。
-EMClient.getInstance().groupManager().unblockUser(groupId, username);
-```
-
-#### 获取群组的黑名单用户列表
-
-仅群主和群管理员可以调用 `getBlockedUsers` 方法获取当前群组的黑名单。默认最多取 200 个。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncGetBlockedUsers(String, EMValueCallBack)。
-EMClient.getInstance().groupManager().getBlockedUsers(groupId);
-```
-
-### 管理群组禁言
-
-群主和群管理员若对单个或多个群成员禁言或解除禁言，可将其添加至或移出群组禁言列表。此外，群主和群管理员也可开启或关闭全员禁言。
-
-全员禁言和单独的成员禁言不冲突，开启和关闭全员禁言，并不影响群组禁言列表。
-
-#### 将成员加入群组禁言列表
-
-仅群主和群管理员可以调用 `muteGroupMembers` 方法将指定成员添加至群组禁言列表。群成员被群主或者群管理员加入禁言列表中后，被禁言成员和其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupChangeListener#onMuteListAdded`。群成员被加入群禁言列表后，将不能够发言，即使其被加入群白名单也不能发言。
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncMuteGroupMembers(String, List, long, EMValueCallBack)。
-// `duration`：禁言时间。传 -1 表示永久禁言。
-EMClient.getInstance().groupManager().muteGroupMembers(groupId, muteMembers, duration);
-```
-
-#### 将成员移出群组禁言列表
-
-仅群主和群管理员可以调用 `UnMuteGroupMembers` 方法将指定成员移出群组禁言列表。
-
-群成员被移出禁言列表后可以在群组中正常发送消息，被移出的群成员及其他未操作的管理员或者群主将会收到群组事件回调 `EMGroupChangeListener#onMuteListRemoved`。
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUnMuteGroupMembers(String, List, EMValueCallBack)。
-EMClient.getInstance().groupManager().unMuteGroupMembers(String groupId, List<String> members);
-```
-
-#### 获取群组禁言列表
-
-仅群主和群管理员可以调用 `fetchGroupMuteList` 方法从服务器获取当前群组的禁言列表。
-
-示例代码如下：
-
-```java
-// 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchGroupMuteList(String, int, int, EMValueCallBack)。
-// pageNum	当前页码，从 1 开始。
-// pageSize	每页返回的禁言成员数。
-EMClient.getInstance().groupManager().fetchGroupMuteList(String groupId, int pageNum, int pageSize);
-```
-
-#### 检查自己是否在群组禁言列表
-
-群成员可以调用 `asyncCheckIfInMuteList` 方法查看自己是否在群组禁言列表中。
-
-```java
-EMClient.getInstance().groupManager().asyncCheckIfInMuteList(groupId, new EMValueCallBack<Boolean>() {
+EMClient.getInstance()
+        .groupManager()
+        .addToGroupWhiteList(groupId, members, new EMCallBack() {
             @Override
-            public void onSuccess(Boolean inMuteList) {
-                if(inMuteList) {
-                    EMLog.d( TAG,"you are in the mutelist of group");
-                }else{
-                    EMLog.d( TAG,"you are not in the mutelist of group");
-                }
-
+            public void onSuccess() {
             }
 
             @Override
-            public void onError(int error, String errorMsg) {
-                EMLog.d( TAG,"asyncCheckIfInMuteList error:"+error+" errorMsg:"+errorMsg);
+            public void onError(int errorCode, String errorMessage) {
             }
         });
 ```
 
-#### 开启群组全员禁言
+### 从白名单移除成员
 
-仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembers` 方法解除全员禁言。
-
-开启群组全员禁言后，除了在白名单中的群成员，其他成员将不能发言。开启群组全员禁言后，群成员将会收到群组事件回调 `EMGroupChangeListener#onAllMemberMuteStateChanged`。
-
-群组全员禁言状态（`isAllMemberMuted` 的返回值）存储在本地数据库中，下次登录时可以直接从本地获取到。
- 
-示例代码如下：
+仅群主或群管理员可以调用 `removeFromGroupWhiteList` 将指定成员移出群白名单。群成员被移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到 `onWhiteListRemoved` 回调。
 
 ```java
 // 异步方法。
-public void muteAllMembers(final String groupId, final EMValueCallBack<EMGroup> callBack);
+EMClient.getInstance()
+        .groupManager()
+        .removeFromGroupWhiteList(groupId, members, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+        });
 ```
 
-#### 关闭群组全员禁言
+### 查询当前用户是否在白名单中
 
-仅群主和群管理员可以调用 `unmuteAllMembers` 方法取消全员禁言。关闭群组全员禁言后，群成员将会收到群组事件回调 `EMGroupChangeListener#onAllMemberMuteStateChanged`。
-
-示例代码如下：
+所有群成员均可调用 `checkIfInGroupWhiteList` 查询当前登录用户是否在群白名单中。
 
 ```java
 // 异步方法。
-public void unmuteAllMembers(final String groupId, final EMValueCallBack<EMGroup> callBack);
+EMClient.getInstance()
+        .groupManager()
+        .checkIfInGroupWhiteList(
+                groupId,
+                new EMValueCallBack<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean inWhiteList) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
 ```
 
-### 监听群组事件
+### 获取白名单列表
 
-详见 [监听群组事件](group_manage.html#监听群组事件)。
+仅群主或群管理员可以调用 `fetchGroupWhiteList` 方法从服务器获取当前群组的白名单。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .fetchGroupWhiteList(
+                groupId,
+                new EMValueCallBack<List<String>>() {
+                    @Override
+                    public void onSuccess(List<String> members) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+## 管理群组黑名单
+
+群组黑名单用于禁止指定用户加入或继续留在群组。成员被加入黑名单后会被移出群组，无法继续收发该群消息；只有先从黑名单中移除，才可再次申请或被邀请加入。
+
+### 添加成员到黑名单
+
+仅群主或群管理员可以调用 `asyncBlockUsers` 将一个或多个成员加入群黑名单。被加入黑名单的成员会收到 `onUserRemoved` 回调。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
+
+黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
+
+```java
+List<String> members = Arrays.asList("user1", "user2");
+
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncBlockUsers(groupId, members, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+        });
+```
+
+### 从黑名单移除成员
+
+仅群主或群管理员可以调用 `asyncUnblockUsers` 将一个或多个用户移出群黑名单。移除后，用户可以再次申请或被邀请加入群组。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncUnblockUsers(groupId, members, new EMCallBack() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+            }
+        });
+```
+
+### 获取黑名单列表
+
+仅群主或群管理员可以调用 `asyncFetchGroupBlackList` 分页获取黑名单成员列表。
+
+```java
+// 异步方法。
+// `pageNum` 从 `1` 开始。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupBlackList(
+                groupId,
+                1,
+                20,
+                new EMValueCallBack<List<String>>() {
+                    @Override
+                    public void onSuccess(List<String> members) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+## 管理群组禁言
+
+群主和管理员可以对群成员单独禁言，也可以对全员禁言。这两种禁言方式相互独立，互不影响：
+- 单独禁言：将指定用户加入禁言列表。被禁言成员不能发送群消息。禁言时长的单位为毫秒。
+- 全员禁言：一键禁言群组所有成员。白名单成员可发言；若成员同时被单独禁言，则单独禁言优先，禁止发言。
+- 开启或关闭全员禁言不会影响单个成员的禁言列表。
+
+### 禁言指定成员
+
+仅群主或群管理员可以调用 `asyncMuteGroupMembers` 禁言指定成员。加入禁言列表后，被禁言成员、群管理员和群主（除操作者外）会收到 `onMuteListAdded` 回调。
+
+```java
+List<String> members = Arrays.asList("user1", "user2");
+// `duration` 的单位为毫秒，传入 `-1` 表示永久禁言。
+long duration = 60 * 60 * 1000L;
+
+EMClient.getInstance()
+        .groupManager()
+        .asyncMuteGroupMembers(
+                groupId,
+                members,
+                duration,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 解除指定成员禁言
+
+仅群主或群管理员可以调用 `asyncUnMuteGroupMembers` 解除指定成员禁言。解除禁言后，被解除禁言的成员、群管理员和群主（除操作者外）会收到 `onMuteListRemoved` 回调。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncUnMuteGroupMembers(
+                groupId,
+                members,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 查询当前用户是否被禁言
+
+群成员可以调用 `asyncCheckIfInMuteList` 查询当前登录用户是否在群禁言列表中。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .asyncCheckIfInMuteList(
+                groupId,
+                new EMValueCallBack<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean muted) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 获取禁言列表
+
+仅群主或群管理员可以调用 `asyncFetchGroupMuteList` 分页获取禁言列表。返回 `Map` 的 `key` 为成员 ID，`value` 为禁言时长，单位为毫秒。
+
+```java
+// 异步方法。
+// `pageNum` 从 `1` 开始。
+EMClient.getInstance()
+        .groupManager()
+        .asyncFetchGroupMuteList(
+                groupId,
+                1,
+                20,
+                new EMValueCallBack<Map<String, Long>>() {
+                    @Override
+                    public void onSuccess(
+                            Map<String, Long> muteList) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 开启全员禁言
+
+仅群主或群管理员可以调用 `muteAllMembers` 开启全员禁言。开启后，群成员会收到 `onAllMemberMuteStateChanged` 回调。除白名单成员外，其他成员将无法发送群消息。
+
+全员禁言不会自动到期，如要关闭需主动调用关闭接口。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .muteAllMembers(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+### 关闭全员禁言
+
+仅群主或群管理员可以调用 `unmuteAllMembers` 关闭全员禁言。关闭后，群成员会收到 `onAllMemberMuteStateChanged` 回调。
+
+```java
+// 异步方法。
+EMClient.getInstance()
+        .groupManager()
+        .unmuteAllMembers(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                    }
+
+                    @Override
+                    public void onError(
+                            int errorCode,
+                            String errorMessage) {
+                    }
+                });
+```
+
+## 监听群组成员事件
+
+群组成员相关操作成功后，SDK 会触发对应的 `EMGroupChangeListener` 回调。监听器的注册、移除及完整事件说明详见 [监听群组事件](group_manage.html#监听群组事件)。
+
+## 注意事项
+
+- `groupId`、`userId` 和成员列表不能为空；参数无效时，SDK 会通过回调返回错误。
+- `asyncFetchGroupMembersInfo` 和 `asyncFetchGroupMembers` 使用游标分页；禁言列表和黑名单使用页码分页，页码从 `1` 开始。
+- `asyncMuteGroupMembers` 的禁言时长单位为毫秒，`-1` 表示永久禁言。
+- `checkIfInGroupWhiteList` 和 `asyncCheckIfInMuteList` 仅查询当前登录用户自身的状态，不能指定其他用户。
+- 管理员、白名单、黑名单和禁言操作要求当前用户具备相应权限。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`asyncFetchGroupMembersInfo`](#分页获取群成员信息) | `EMGroupManager` | 分页获取包含角色、入群时间和资料的群成员信息。 |
+| [`asyncFetchGroupMembers`](#分页获取群成员-id) | `EMGroupManager` | 分页获取群成员用户 ID。 |
+| [`getUsers`](#从本地群组对象获取成员-id) | `EMGroup` | 获取群组对象中包含的群主、管理员和普通成员的用户 ID 列表。 |
+| [`asyncSetGroupMemberAttributes`](#设置群成员的自定义属性) | `EMGroupManager` | 设置群成员自定义属性。 |
+| [`asyncFetchGroupMemberAllAttributes`](#获取单个群成员的自定义属性) | `EMGroupManager` | 获取单个群成员的全部自定义属性。 |
+| [`asyncFetchGroupMembersAttributes`](#获取单个群成员的自定义属性) | `EMGroupManager` | 获取多个群成员的指定或全部自定义属性。 |
+| [`asyncChangeOwner`](#变更群主) | `EMGroupManager` | 转让群主权限。 |
+| [`asyncAddGroupAdmin`](#添加群管理员) / [`asyncRemoveGroupAdmin`](#移除群管理员) | `EMGroupManager` | 添加或移除群管理员。 |
+| [`asyncGetGroupFromServer`](#获取群管理员列表) | `EMGroupManager` | 从服务器获取最新群详情。 |
+| [`getAdminList`](#获取群管理员列表) | `EMGroup` | 获取群管理员列表。 |
+| [`addToGroupWhiteList`](#添加成员到白名单) / [`removeFromGroupWhiteList`](#从白名单移除成员) | `EMGroupManager` | 添加或移除群白名单成员。 |
+| [`checkIfInGroupWhiteList`](#查询当前用户是否在白名单中) / [`fetchGroupWhiteList`](#获取白名单列表) | `EMGroupManager` | 查询当前用户是否在白名单中或获取白名单。 |
+| [`asyncBlockUsers`](#添加成员到黑名单) / [`asyncUnblockUsers`](#从黑名单移除成员) | `EMGroupManager` | 添加或移除群黑名单成员。 |
+| [`asyncFetchGroupBlackList`](#获取黑名单列表) | `EMGroupManager` | 分页获取群黑名单。 |
+| [`asyncMuteGroupMembers`](#禁言指定成员) / [`asyncUnMuteGroupMembers`](#解除指定成员禁言) | `EMGroupManager` | 禁言或解除禁言指定成员。 |
+| [`asyncCheckIfInMuteList`](#查询当前用户是否被禁言) / [`asyncFetchGroupMuteList`](#获取禁言列表) | `EMGroupManager` | 查询当前用户是否被禁言或分页获取禁言列表。 |
+| [`muteAllMembers`](#开启全员禁言) / [`unmuteAllMembers`](#关闭全员禁言) | `EMGroupManager` | 开启或关闭全员禁言。 |

@@ -6,7 +6,7 @@
 
 - 支持下载图片、语音、视频或其他类型的文件。
 - 支持文件访问限制：如果上传文件时设置了文件访问限制（`restrict-access` 设置为 `true`），需要在下载请求头中包含文件上传响应中返回的 `share-secret` 和当前登录用户的 token 才能下载文件。
-- [上传文件接口](message_upload_file.html#响应-body-字段) 响应中返回的文件 ID（`file_uuid`）、文件地址（`uri`）和文件访问密钥（`share-secret`）可用于后续构造附件消息及下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程) 和 [下载附件](message_download.file.html)。若文件上传时开启了受限访问，即 `restrict-access=true`，则后续无论下载原文件还是缩略图，都需要传入 `share-secret`。
+- [上传文件接口](message_upload_file.html#响应-body-字段) 响应中返回的文件 ID（`file_uuid`）、文件地址（`uri`）和文件访问密钥（`share-secret`）可用于后续构造附件消息及下载附件，详见 [发送附件消息流程](message_single.html#附件消息发送流程) 和 [下载附件](message_download_file.html)。若文件上传时开启了受限访问，即 `restrict-access=true`，则后续无论下载原文件还是缩略图，都需要传入 `share-secret`。
 
 ## 调用频率上限
 
