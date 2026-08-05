@@ -55,7 +55,7 @@
 
 新版 SDK 使用 `ChatClient.init` 创建客户端实例。需要使用的业务模块可在初始化时通过 `managers` 注册，也可以在初始化后通过 `.use()` 注册。未注册的 Manager 不会挂载到 `client` 上。
 
-### 旧 SDK 写法
+### 旧版 SDK 用法
 
 ```typescript
 import SDK from 'easemob-websdk';
@@ -70,7 +70,7 @@ const conn = new SDK.connection({
 conn.addEventHandler('handler', { onConnected: () => {} });
 ```
 
-### 新 SDK 写法
+### 新版 SDK 用法
 
 ```typescript
 import {
@@ -103,14 +103,14 @@ const client = ChatClient.init({ appKey: 'org#app' })
 
 | 旧参数 | 新参数 | 说明 |
 | :--- | :--- | :--- |
-| `appKey` | `appKey` | 不变。 |
+| `appKey` | `appKey` | 保持一致。 |
 | `isFixedDeviceId` | `useFixedDeviceId` | 参数重命名。默认 `true`，同一浏览器内复用固定设备标识。 |
 | `delivery` | `enableDeliveryReceipt` | 参数重命名，用于开启送达回执。 |
 | `isHttpDNS` | - | 新 SDK 默认处理，无需显式配置。 |
 | `useOwnUploadFun` | `useCustomAttachmentUpload` | 参数重命名。 |
-| `useReplacedMessageContents` | `useReplacedMessageContents` | 不变。 |
-| `customDeviceName` | `customDeviceName` | 不变。 |
-| `customOSPlatform` | `customOSPlatform` | 不变。 |
+| `useReplacedMessageContents` | `useReplacedMessageContents` | 保持一致。 |
+| `customDeviceName` | `customDeviceName` | 保持一致。 |
+| `customOSPlatform` | `customOSPlatform` | 保持一致。 |
 | `apiUrl` / `url` | `serviceConfig` | 服务地址配置合并为对象。 |
 | `autoReconnectNumMax` | - | 新 SDK 内置重连策略，无需配置。 |
 | `isDebug` | - | 使用 `logger.setLevel()` 设置日志级别。 |
@@ -127,7 +127,7 @@ const client = ChatClient.init({ appKey: 'org#app' })
 
 新版 SDK 使用 `client.login` 登录，使用 `client.logout` 登出。登录参数名称发生变化，密码登录参数不再作为客户端推荐方式使用。
 
-### 旧 SDK 写法
+### 旧版 SDK 用法
 
 ```typescript
 await conn.open({
@@ -138,7 +138,7 @@ await conn.open({
 conn.close();
 ```
 
-### 新 SDK 写法
+### 新版 SDK 用法
 
 ```typescript
 await client.login({
@@ -242,11 +242,11 @@ client.chatManager.addEventHandler('message-handler', {
 
 | 旧 SDK 事件 | 新 SDK 事件 | 说明 |
 | :--- | :--- | :--- |
-| `onConnected` | `onConnected` | 不变。 |
-| `onDisconnected` | `onDisconnected` | 不变。 |
+| `onConnected` | `onConnected` | 保持一致。 |
+| `onDisconnected` | `onDisconnected` | 保持一致。 |
 | `onReconnecting` | `onConnecting` | 事件名调整。 |
-| `onTokenWillExpire` | `onTokenWillExpire` | 不变。 |
-| `onTokenExpired` | `onTokenExpired` | 不变。 |
+| `onTokenWillExpire` | `onTokenWillExpire` | 保持一致。 |
+| `onTokenExpired` | `onTokenExpired` | 保持一致。 |
 | `onOnline` | - | 已移除。 |
 | `onOffline` | - | 已移除。 |
 | `onError` | - | 已移除，建议通过 Promise reject 和类型化错误处理。 |
@@ -267,7 +267,7 @@ client.chatManager.addEventHandler('message-handler', {
 
 ### 群组事件迁移
 
-旧 SDK 使用 `onGroupEvent` 加 `operation` 字段区分群组事件。新版 SDK 将群组事件拆分为独立事件名。
+旧版 SDK 使用 `onGroupEvent` 加 `operation` 字段区分群组事件。新版 SDK 将群组事件拆分为独立事件名。
 
 ```typescript
 // 旧 SDK
@@ -327,11 +327,11 @@ client.groupManager.addEventHandler('group-handler', {
 
 | 旧 SDK 事件 | 新 SDK 事件 | 说明 |
 | :--- | :--- | :--- |
-| `onContactInvited` | `onContactInvited` | 不变。 |
-| `onContactAgreed` | `onContactAgreed` | 不变。 |
-| `onContactRefuse` | `onContactRefuse` | 不变。 |
-| `onContactDeleted` | `onContactDeleted` | 不变。 |
-| `onContactAdded` | `onContactAdded` | 不变。 |
+| `onContactInvited` | `onContactInvited` | 保持一致。 |
+| `onContactAgreed` | `onContactAgreed` | 保持一致。 |
+| `onContactRefuse` | `onContactRefuse` | 保持一致。 |
+| `onContactDeleted` | `onContactDeleted` | 保持一致。 |
+| `onContactAdded` | `onContactAdded` | 保持一致。 |
 
 ### 多设备事件迁移
 
@@ -398,7 +398,7 @@ try {
 
 旧 SDK 通过 `WebIM.message.create` 结合 `type` 字段创建不同类型的消息。新版 SDK 将消息创建拆分为多个类型化方法，例如 `createTextMessage`、`createImageMessage`、`createCustomMessage` 等。发送消息统一调用 `client.chatManager.sendMessage`。
 
-### 旧 SDK 写法
+### 旧版 SDK 用法
 
 ```typescript
 const msg = WebIM.message.create({
@@ -412,7 +412,7 @@ const msg = WebIM.message.create({
 const result = await conn.send(msg);
 ```
 
-### 新 SDK 写法
+### 新版 SDK 用法
 
 ```typescript
 const msg = client.chatManager.createTextMessage({

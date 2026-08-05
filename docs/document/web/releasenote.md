@@ -5,12 +5,12 @@
 #### 新增功能
 
 - 新增 `ChatClient` 统一入口，负责 SDK 初始化、登录登出、连接生命周期、事件分发和 Manager 注册。业务可通过 `ChatClient.init({ appKey, managers })` 初始化 SDK，也可在初始化后通过 `.use()` 按需注册功能模块。
-- 支持模块化 Manager 能力拆分：消息和会话由 `ChatManager` 管理，好友关系由 `ContactManager` 管理，用户资料由 `UserInfoManager` 管理，群组由 `GroupManager` 管理，聊天室由 `ChatRoomManager` 管理，在线状态由 `PresenceManager` 管理，消息话题由 `ChatThreadManager` 管理，推送由 `PushManager` 管理。
+- 支持模块化 Manager 能力拆分：消息和会话由 `ChatManager` 管理，好友关系由 `ContactManager` 管理，用户属性由 `UserInfoManager` 管理，群组由 `GroupManager` 管理，聊天室由 `ChatRoomManager` 管理，在线状态由 `PresenceManager` 管理，消息话题由 `ChatThreadManager` 管理，推送由 `PushManager` 管理。
 - 支持类型化消息创建接口：通过 `createTextMessage`、`createImageMessage`、`createFileMessage`、`createVoiceMessage`、`createVideoMessage`、`createLocationMessage`、`createCmdMessage`、`createCustomMessage` 和 `createCombineMessage` 创建不同类型消息，并通过 `sendMessage` 统一发送。
 - 支持统一的消息已读回执能力：可通过 `sendMessageReadReceipts` 批量发送单聊或群聊消息已读回执，发送方通过 `onMessageReadReceipts` 接收回执；群聊还支持通过 `getGroupMessageReadUsers` 查询单条群消息已读成员列表，并通过 `getGroupMessageReadReceipts` 批量查询群消息已读数量。
 - 支持会话列表本地缓存与自动同步：登录后可通过 `enableSyncData` 配置自动同步会话、联系人和已加入群组数据，并通过 `onSyncDataStart`、`onSyncDataFinished` 监听同步状态；会话列表变化通过 `onConversationListUpdate` 通知业务层。
 - 支持会话置顶、会话标记、会话删除和会话未读数清零能力，并提供 `clearConversationUnreadMessageCount` 和 `clearAllConversationUnreadMessageCount` 清除指定会话或全部会话未读数。
-- 支持用户资料订阅和用户资料自动管理：可通过 `subscribeUsersInfo` 订阅用户资料变更；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户资料和群成员名片更新时间。
+- 支持用户属性订阅和用户信息自动管理：可通过 `subscribeUsersInfo` 订阅用户信息变更；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
 - 支持消息扩展能力，包括消息撤回、消息编辑、消息置顶、引用消息、Reaction、历史消息拉取、服务端消息搜索、消息翻译、合并消息解析和流式消息接收。
 - 支持群组、聊天室、消息话题、在线状态和推送通知相关能力，并提供 Group、ChatRoom 和 ChatThread 实体对象风格 API，便于围绕单个实体连续操作。
 - 支持跨平台运行时适配层，可在 Web、微信小程序、uni-app、React Native 和 Electron 等环境中适配请求、上传、WebSocket 和本地存储等基础能力。
@@ -27,7 +27,7 @@ v5.0.0 包含不兼容的 API 变更。从旧版 Web SDK 升级时，请参见 [
 - 事件模型已调整：消息接收统一通过 `onMessage` 分发，再根据 `message.type` 区分消息类型；群组、聊天室、消息话题、多设备等事件拆分为独立事件名。
 - 多数异步 API 直接返回业务对象或业务列表，不再要求业务侧从旧版 `AsyncResult<T>.data` 中读取数据。
 - 全局 `onError` 事件已移除。业务侧应通过 `try...catch` 捕获 Promise reject，并结合 `ValidationError`、`ConnectionError`、`AuthenticationError`、`SDKError`、`MessageSendError` 等错误类型处理异常。
-- 注册用户、部分旧式设备管理、旧小程序生命周期处理、旧插件注册方式和一批 deprecated 别名已移除；无客户端等价能力的管理操作应由 App Server 调用服务端 REST API 完成。
+- 注册用户、部分旧式设备管理、旧小程序生命周期处理、旧插件注册方式和一批已废弃的别名已移除；无客户端等价能力的管理操作应由 App Server 调用服务端 REST API 完成。
 - 聊天室创建通常应通过服务端 REST API 完成；Web SDK 客户端侧主要提供聊天室列表、详情、加入、退出、成员、公告和自定义属性等管理能力。
 
 #### 优化与修复
