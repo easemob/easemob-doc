@@ -1,6 +1,10 @@
-# Web IM SDK 更新日志
+# Web/小程序 IM SDK 更新日志
 
-## v5.0.0 2026-7-31
+## v5.0.0 Dev
+
+该版本于 2026 年 8 月 15 日发布。
+
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Web/小程序 SDK 5.0.0.0 迁移指南](migration_guide.html)。
 
 #### 新增功能
 
@@ -9,15 +13,13 @@
 - **支持类型化消息创建接口**：通过 `createTextMessage`、`createImageMessage`、`createFileMessage`、`createVoiceMessage`、`createVideoMessage`、`createLocationMessage`、`createCmdMessage`、`createCustomMessage` 和 `createCombineMessage` 创建不同类型消息，并通过 `sendMessage` 统一发送。
 - **支持统一的消息已读回执能力**：可通过 `sendMessageReadReceipts` 批量发送单聊或群聊消息已读回执，发送方通过 `onMessageReadReceipts` 接收回执；群聊还支持通过 `getGroupMessageReadUsers` 查询单条群消息已读成员列表，并通过 `getGroupMessageReadReceipts` 批量查询群消息已读数量。
 - **支持会话列表本地缓存与自动同步**：登录后可通过 `enableSyncData` 配置自动同步会话、联系人和已加入群组数据，并通过 `onSyncDataStart`、`onSyncDataFinished` 监听同步状态；会话列表变化通过 `onConversationListUpdate` 通知业务层。
-- **会话管理完善**：支持会话置顶、会话标记、会话删除和会话未读数清零能力，并提供 `clearConversationUnreadMessageCount` 和 `clearAllConversationUnreadMessageCount` 清除指定会话或全部会话未读数。
+- **完善会话管理**：支持会话置顶、会话标记、会话删除和会话未读数清零能力，并提供 `clearConversationUnreadMessageCount` 和 `clearAllConversationUnreadMessageCount` 清除指定会话或全部会话未读数。
 - **支持用户属性订阅和用户信息自动管理**：可通过 `subscribeUsersInfo` 订阅用户信息变更；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
 - **支持消息能力**：包括消息撤回、消息编辑、消息置顶、引用消息、Reaction、历史消息拉取、服务端消息搜索、消息翻译、合并消息解析和流式消息接收。
 - **多场景能力统一**：支持群组、聊天室、消息话题、在线状态和推送通知相关能力，并提供 Group、ChatRoom 和 ChatThread 实体对象风格 API，便于围绕单个实体连续操作。
 - **支持跨平台运行时适配层**：可在 Web、微信小程序、uni-app、React Native 和 Electron 等环境中适配请求、上传、WebSocket 和本地存储等基础能力。
 
 #### 重要变更
-
-v5.0.0 包含不兼容的 API 变更。从旧版 Web SDK 升级时，请参见 [Web IM SDK 迁移指南](migration_guide.html) 完成代码适配。
 
 - **初始化方式调整**：SDK 初始化入口由 `new SDK.connection({ appKey })` 调整为 `ChatClient.init({ appKey })`。需要使用的业务模块必须通过 `managers` 参数或 `.use()` 注册，否则对应的 `client.xxxManager` 不会挂载。
 - **模块职责拆分**：API 不再集中挂载在 `conn` 实例上，而是按业务能力拆分到各 Manager，例如 `client.chatManager`、`client.contactManager`、`client.groupManager` 和 `client.chatRoomManager`。
