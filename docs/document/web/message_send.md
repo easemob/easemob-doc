@@ -43,19 +43,271 @@ const sentMessage = await client.chatManager.sendMessage(message);
 - 附件类消息会先上传附件，再发送消息体。
 :::
 
+## 跨平台消息示例
+
+### 图片和视频消息示例
+
+以下示例适用于微信小程序、uni-app、Taro 和 React Native。文本、位置、透传和自定义等不包含本地附件的消息，在各端调用方式一致，可直接参考下文通用的 `create*Message()` 示例。
+
+发送图片或视频消息时，需先通过宿主框架的媒体选择 API 获取本地资源，再将资源转换为 SDK 支持的附件对象：
+
+- 微信小程序、uni-app 和 Taro 小程序：`{ path, name?, type?, size? }`
+- React Native：`{ uri, name?, type?, size? }`
+
+以下示例均假设 `client` 已完成初始化并登录，示例发送的是单聊消息。发送群聊或聊天室消息时，只需调整 `conversationId` 和 `conversationType`。
+
+::: tabs#code
+
+@tab 微信小程序
+
+```typescript
+type MediaType = 'image' | 'video';
+
+const chooseMedia = (mediaType: MediaType): Promise<WechatMiniprogram.MediaFile> =>
+  new Promise((resolve, reject) => {
+    wx.chooseMedia({
+      count: 1,
+      mediaType: [mediaType],
+      sourceType: ['album', 'camera'],
+      success: result => {
+        const file = result.tempFiles[0];
+        file ? resolve(file) : reject(new Error('未选择媒体文件'));
+      },
+      fail: reject,
+    });
+  });
+
+// 发送图片消息。
+const image = await chooseMedia('image');
+const imageMessage = client.chatManager.createImageMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: image.tempFilePath,
+    name: image.tempFilePath.split('/').pop() ?? 'image.jpg',
+    type: 'image/jpeg',
+    size: image.size,
+  },
+  width: image.width,
+  height: image.height,
+});
+await client.chatManager.sendMessage(imageMessage);
+
+// 发送视频消息。
+const video = await chooseMedia('video');
+const videoMessage = client.chatManager.createVideoMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: video.tempFilePath,
+    name: video.tempFilePath.split('/').pop() ?? 'video.mp4',
+    type: 'video/mp4',
+    size: video.size,
+  },
+  duration: video.duration ?? 0,
+  width: video.width,
+  height: video.height,
+});
+await client.chatManager.sendMessage(videoMessage);
+```
+
+@tab uni-app
+
+```typescript
+const chooseImage = (): Promise<UniApp.ChooseImageSuccessCallbackResult> =>
+  new Promise((resolve, reject) => {
+    uni.chooseImage({
+      count: 1,
+      sourceType: ['album', 'camera'],
+      success: resolve,
+      fail: reject,
+    });
+  });
+
+const chooseVideo = (): Promise<UniApp.ChooseVideoSuccess> =>
+  new Promise((resolve, reject) => {
+    uni.chooseVideo({
+      sourceType: ['album', 'camera'],
+      success: resolve,
+      fail: reject,
+    });
+  });
+
+// 发送图片消息。
+const imageResult = await chooseImage();
+const image = imageResult.tempFiles?.[0];
+const imagePath = image?.path ?? imageResult.tempFilePaths[0];
+if (!imagePath) throw new Error('未选择图片');
+
+// uni-app demo 同样通过 uni.getImageInfo() 补齐图片宽高和实际格式。
+const imageInfo = await new Promise<{ width: number; height: number; type?: string }>(
+  (resolve, reject) => {
+    uni.getImageInfo({
+      src: imagePath,
+      success: resolve,
+      fail: reject,
+    });
+  }
+);
+
+const imageMessage = client.chatManager.createImageMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: imagePath,
+    name: imagePath.split('/').pop() ?? 'image.jpg',
+    type: imageInfo.type ? `image/${imageInfo.type}` : undefined,
+    size: image?.size,
+  },
+  width: imageInfo.width,
+  height: imageInfo.height,
+});
+await client.chatManager.sendMessage(imageMessage);
+
+// 发送视频消息。
+const video = await chooseVideo();
+const videoMessage = client.chatManager.createVideoMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: video.tempFilePath,
+    name: video.name ?? video.tempFilePath.split('/').pop() ?? 'video.mp4',
+    type: 'video/mp4',
+    size: video.size,
+  },
+  duration: video.duration ?? 0,
+  width: video.width,
+  height: video.height,
+});
+await client.chatManager.sendMessage(videoMessage);
+```
+
+@tab Taro（小程序）
+
+```typescript
+import Taro from '@tarojs/taro';
+
+// 发送图片消息。
+const imageResult = await Taro.chooseImage({ count: 1 });
+const image = imageResult.tempFiles[0];
+const imagePath = imageResult.tempFilePaths[0];
+if (!image || !imagePath) throw new Error('未选择图片');
+
+// @tarojs/taro 4.2.0 的 getImageInfo() Promise 返回图片原始宽高和格式。
+const imageInfo = await Taro.getImageInfo({ src: imagePath });
+
+const imageMessage = client.chatManager.createImageMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: imagePath,
+    name: imagePath.split('/').pop() ?? 'image.jpg',
+    type: image.type ?? `image/${imageInfo.type}`,
+    size: image.size,
+  },
+  width: imageInfo.width,
+  height: imageInfo.height,
+});
+await client.chatManager.sendMessage(imageMessage);
+
+// 发送视频消息。
+const video = await Taro.chooseVideo({ sourceType: ['album', 'camera'] });
+const videoMessage = client.chatManager.createVideoMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    path: video.tempFilePath,
+    name: video.tempFilePath.split('/').pop() ?? 'video.mp4',
+    type: 'video/mp4',
+    size: video.size,
+  },
+  duration: video.duration ?? 0,
+  width: video.width,
+  height: video.height,
+});
+await client.chatManager.sendMessage(videoMessage);
+```
+
+@tab React Native
+
+```typescript
+import { launchImageLibrary } from 'react-native-image-picker';
+
+const chooseAsset = async (mediaType: 'photo' | 'video') => {
+  const result = await launchImageLibrary({ mediaType, selectionLimit: 1 });
+  const asset = result.assets?.[0];
+  if (!asset?.uri) throw new Error('未选择媒体文件');
+  return asset;
+};
+
+// 发送图片消息。
+const image = await chooseAsset('photo');
+const imageMessage = client.chatManager.createImageMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    uri: image.uri,
+    name: image.fileName ?? 'image.jpg',
+    type: image.type ?? 'image/jpeg',
+    size: image.fileSize,
+  },
+  width: image.width,
+  height: image.height,
+});
+await client.chatManager.sendMessage(imageMessage);
+
+// 发送视频消息。
+const video = await chooseAsset('video');
+const videoMessage = client.chatManager.createVideoMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  data: {
+    uri: video.uri,
+    name: video.fileName ?? 'video.mp4',
+    type: video.type ?? 'video/mp4',
+    size: video.fileSize,
+  },
+  duration: video.duration ?? 0,
+  width: video.width,
+  height: video.height,
+});
+await client.chatManager.sendMessage(videoMessage);
+```
+
+:::
+
+:::tip
+1. React Native 示例使用第三方库 `react-native-image-picker` 获取图片或视频的 `uri`。SDK 不限定媒体选择库，只要求传入可读取的本地 `uri`，并提供正确的文件元数据。
+2. 附件的 `name` 和 `type` 用于 multipart 上传。如果宿主选择 API 未返回这两个字段，请根据文件路径或实际文件格式补全，避免将所有附件统一设置为不符合实际的 MIME 类型。
+3. `CreateImageMessageParams` 中的 `width` 和 `height` 为可选字段。如果未传入本地图片尺寸，SDK 会在上传前通过当前平台的 `ImageProcessor.getImageInfo()` 自动获取。uni-app 和 Taro 示例会主动传入宽高，因此应用在调用 `sendMessage()` 前即可使用准确的图片尺寸渲染消息占位。
+:::
+
+### 文件消息限制
+
+SDK 的 `createFileMessage()` 及附件上传层支持前文所述的附件对象格式。部分宿主框架无法跨平台选择任意本地文件，这是宿主自身的文件访问限制，并不表示 SDK 只能发送图片和视频。
+
+| 平台   | 文件选择限制        | 建议方案                   |
+| :-------------- | :----- | :------- |
+| 微信小程序   | `wx.chooseMessageFile()` 只能选择微信会话中的文件，无法像桌面浏览器一样浏览任意目录。 | 文件来自微信会话时，可将返回的临时 `path` 传入 `createFileMessage()`；其他来源的文件可先上传到业务服务器，再通过 `originalUrl` 创建文件消息。 |
+| uni-app      | `uni.chooseFile()` 仅在部分运行端可用；微信小程序通常需要调用 `wx.chooseMessageFile()`。 | 根据 `uni.getSystemInfoSync().uniPlatform` 检测平台能力；不支持的端接入原生文件选择插件，或使用远程 `originalUrl`。 |
+| Taro         | `Taro.chooseMessageFile()` 仅部分小程序目标支持，React Native 目标通常不提供该 API。 | 先检测 API 是否可用；不支持时接入目标平台的文件选择插件，或先上传文件，再使用 `originalUrl` 创建文件消息。 |
+| React Native | React Native Core 未内置文档选择器，无法直接获取任意文件 URI。 | 接入 `react-native-document-picker`、Expo DocumentPicker 等原生模块，获取 `{ uri, name, type, size }` 后发送。 |
+
+如果宿主未提供文件选择器，业务也未接入原生插件，则不应展示普通文件消息入口。对于已托管在业务服务器或 CDN 上的文件，可直接将远程地址作为 `originalUrl` 传入 `createFileMessage()`，无需 SDK 再次上传本地文件。
+
 ## 通用消息创建参数
 
 各类消息的创建方法 `create*Message()` 都支持以下基础参数：
 
-| 参数                   | 类型                    | 必填/可选   | 适用场景              | 说明                                                                                                 |
-| :--------------------- | :---------------------- | :---------- | :-------------------- | :---------------------------- | 
-| `conversationId`       | String                  | 必填        | 所有消息              | 会话 ID。单聊时为对端用户 ID，群聊时为群组 ID，聊天室时为聊天室 ID。   |
-| `conversationType`     | `singleChat` / `groupChat` / `chatRoom`           | 必填              | 所有消息   | 指定单聊、群聊或聊天室。             |
-| `ext`                  | `Record<string, unknown>` | 可选        | 所有消息              | 扩展字段，需可 JSON 序列化，建议放业务附加信息，如埋点、卡片元数据、审核外字段。                     |
+| 参数      | 类型    | 必填/可选   | 适用场景     | 说明     |
+| :------- | :------- | :---- | :------ | :------------ |
+| `conversationId`       | String                  | 必填        | 所有消息              | 会话 ID。单聊时为对端用户 ID，群聊时为群组 ID，聊天室时为聊天室 ID。                                 |
+| `conversationType`     | `'singleChat'           | 'groupChat' | 'chatRoom'`           | 必填                                                                                                 | 所有消息   | 指定单聊、群聊或聊天室。             |
+| `ext`                  | Record<string, unknown> | 可选        | 所有消息              | 扩展字段，需可 JSON 序列化，建议放业务附加信息，如埋点、卡片元数据、审核外字段。                     |
 | `timestamp`            | Number                  | 可选        | 所有消息              | 本地时间戳，单位毫秒。不传时由 SDK 自动生成。                                                        |
 | `deliverOnlineOnly`    | Boolean                 | 可选        | 文本、透传、自定义等  | 是否仅投递给在线用户。适合输入状态、瞬时控制消息，不需要离线保存。                                   |
 | `webhookEnv`           | String                  | 可选        | 所有消息              | Webhook 路由环境标识。服务端会根据该字段进行回调路由匹配。需要区分开发、测试或灰度等回调环境时使用。 |
-| `priority`             | `high` / `low` / `normal`                | 可选      | 聊天室消息 | 聊天室高并发时为重要消息提高优先级。 |
+| `priority`             | `'high'                 | 'normal'    | 'low'`                | 可选                                                                                                 | 聊天室消息 | 聊天室高并发时为重要消息提高优先级。 |
 | `receiverList`         | String[]                | 可选        | 群组/聊天室的定向消息 | 群组或聊天室里只发给指定成员时使用。    |
 | `needReadReceipt` | Boolean                 | 可选        | 群聊消息              | 需要统计群消息已读情况时使用。                                                                       |
 
@@ -97,7 +349,7 @@ await client.chatManager.sendMessage(message);
 | :--------------------- | :---------------------- | :-------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------- |
 | `content`              | String                  | 必填      | 普通聊天、通知正文、说明文本 | 文本消息的核心内容。                                                                                             |
 | `targetLanguages`      | String[]                | 可选      | 发送即翻译                   | 发送时附带目标翻译语言，适用于需要即时翻译的文本消息场景。                                                       |
-| `ext`                  | `Record<string, unknown>` | 可选      | 业务扩展信息                 | 用于传递业务附加字段，需保持 JSON 可序列化。建议将业务附加数据放入该字段，而不要将复杂业务结构直接写入文本正文。 |
+| `ext`                  | Record<string, unknown> | 可选      | 业务扩展信息                 | 用于传递业务附加字段，需保持 JSON 可序列化。建议将业务附加数据放入该字段，而不要将复杂业务结构直接写入文本正文。 |
 | `deliverOnlineOnly`    | Boolean                 | 可选      | 瞬时消息、状态通知           | 是否仅投递给在线用户。                                                                                           |
 | `webhookEnv`           | String                  | 可选      | 多环境回调路由               | 用于区分不同 Webhook 回调环境。                                                                                  |
 | `receiverList`         | String[]                | 可选      | 群聊/聊天室定向消息          | 指定群聊中的定向接收者，仅群聊和聊天室有效。                                                                     |
@@ -150,7 +402,7 @@ await client.chatManager.sendMessage(message);
 - 视频消息发送后，通常以视频首帧作为缩略图。
 - 不同附件类型在创建消息时，除通用会话参数外，还需传入各自特有的业务参数，例如图片宽高、语音时长、视频时长、文件名等。
 
-消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
+消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
 
 ### 发送图片消息
 
@@ -287,30 +539,177 @@ await client.chatManager.sendMessage(message);
    - 当传入 `data` 时，SDK 会先上传本地语音文件，再发送消息。
    - 当传入 `originalUrl` 时，SDK 直接使用远程地址构造并发送消息，不再执行本地上传。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器) 的说明。
 
-下面的示例代码为传入本地语音文件，创建并发送语音消息：
+下面分别展示浏览器、微信小程序、uni-app、Taro 和 React Native 的本地语音发送方式。`duration` 是必填参数，单位为秒，并且必须大于 `0`。
+
+::: tabs#voice-code
+
+@tab 浏览器
 
 ```typescript
-// 本地语音文件对象。
-const audioFile = selectedAudioFile;
+const sendBrowserVoice = async (audioFile: File, durationSeconds: number): Promise<void> => {
+  const message = client.chatManager.createVoiceMessage({
+    conversationId: "user2",
+    conversationType: "singleChat",
+    // Web File 自带 name、type 和 size。
+    data: audioFile,
+    duration: durationSeconds,
+  });
 
-// 创建一条语音消息。
-const message = client.chatManager.createVoiceMessage({
-  // 接收方：单聊为对方用户 ID，群聊为群组 ID，聊天室为聊天室 ID。
-  conversationId: "user2",
-  // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-  conversationType: "singleChat",
-  // 本地语音文件。若使用远程语音资源，应传 `originalUrl`。
-  data: audioFile,
-  // 语音时长，单位为秒。
-  duration: 5,
-  // 可选：语音文件名。
-  filename: "voice.amr",
-  // 可选：语音文件 MIME 类型。
-  filetype: "audio/amr",
+  await client.chatManager.sendMessage(message);
+};
+```
+
+@tab 微信小程序
+
+```typescript
+const recorder = wx.getRecorderManager();
+let voiceRecordStartAt = 0;
+
+recorder.onStart(() => {
+  voiceRecordStartAt = Date.now();
 });
 
-await client.chatManager.sendMessage(message);
+recorder.onStop(async result => {
+  if (!result.tempFilePath) throw new Error("录音结束但未返回 tempFilePath");
+
+  const durationMs =
+    typeof result.duration === "number" && result.duration > 0
+      ? result.duration
+      : Date.now() - voiceRecordStartAt;
+  const durationSeconds = Math.max(1, Math.ceil(durationMs / 1000));
+
+  const message = client.chatManager.createVoiceMessage({
+    conversationId: "user2",
+    conversationType: "singleChat",
+    data: {
+      path: result.tempFilePath,
+      name: "wechat-record.mp3",
+      type: "audio/mpeg",
+      size: result.fileSize,
+    },
+    // 微信录音管理器返回毫秒，SDK duration 使用秒。
+    duration: durationSeconds,
+  });
+
+  await client.chatManager.sendMessage(message);
+});
+
+recorder.onError(error => console.error("录音失败", error));
+recorder.start({ format: "mp3" });
+// 在业务需要结束录音时调用 recorder.stop()。
 ```
+
+@tab uni-app
+
+```typescript
+const recorder = uni.getRecorderManager();
+let voiceRecordStartAt = 0;
+
+recorder.onStart(() => {
+  voiceRecordStartAt = Date.now();
+});
+
+recorder.onStop(async result => {
+  if (!result.tempFilePath) throw new Error("录音结束但未返回 tempFilePath");
+
+  const durationMs =
+    typeof result.duration === "number" && result.duration > 0
+      ? result.duration
+      : Date.now() - voiceRecordStartAt;
+  const durationSeconds = Math.max(1, Math.ceil(durationMs / 1000));
+  const name = result.tempFilePath.split("/").pop() ?? `voice-${Date.now()}.mp3`;
+
+  const message = client.chatManager.createVoiceMessage({
+    conversationId: "user2",
+    conversationType: "singleChat",
+    data: {
+      path: result.tempFilePath,
+      name: /\.[a-z0-9]+$/i.test(name) ? name : `${name}.mp3`,
+      type: "audio/mpeg",
+      size: result.fileSize,
+    },
+    duration: durationSeconds,
+  });
+
+  await client.chatManager.sendMessage(message);
+});
+
+recorder.start({ format: "mp3" });
+// 在业务需要结束录音时调用 recorder.stop()。
+```
+
+@tab Taro
+
+```typescript
+import Taro from "@tarojs/taro";
+
+if (typeof Taro.getRecorderManager !== "function") {
+  throw new Error("当前 Taro 目标不支持录音管理器");
+}
+const recorder = Taro.getRecorderManager();
+
+recorder.onStop(async result => {
+  const durationSeconds = result.duration / 1000;
+  if (durationSeconds <= 0) throw new Error("录音时长必须大于 0 秒");
+
+  const message = client.chatManager.createVoiceMessage({
+    conversationId: "user2",
+    conversationType: "singleChat",
+    data: {
+      path: result.tempFilePath,
+      name: "taro-record.mp3",
+      type: "audio/mpeg",
+      size: result.fileSize,
+    },
+    // Taro RecorderManager 返回毫秒，SDK duration 使用秒。
+    duration: durationSeconds,
+  });
+
+  await client.chatManager.sendMessage(message);
+});
+
+recorder.start({ format: "mp3" });
+// 在业务需要结束录音时调用 recorder.stop()。
+```
+
+@tab React Native
+
+```typescript
+interface ReactNativeVoiceInput {
+  readonly uri: string;
+  readonly name?: string;
+  readonly type?: string;
+  readonly size?: number;
+  readonly durationSeconds: number;
+}
+
+const sendReactNativeVoice = async (voice: ReactNativeVoiceInput): Promise<void> => {
+  const message = client.chatManager.createVoiceMessage({
+    conversationId: "user2",
+    conversationType: "singleChat",
+    data: {
+      uri: voice.uri,
+      name: voice.name,
+      type: voice.type,
+      size: voice.size,
+    },
+    duration: voice.durationSeconds,
+  });
+
+  await client.chatManager.sendMessage(message);
+};
+```
+
+:::
+
+:::tip
+
+- 浏览器只能把 Web `File` 作为本地语音 `data`；小程序、uni-app 和 Taro 小程序使用带 `path` 的文件描述符；React Native 使用带 `uri` 的文件描述符。
+- `RecorderManager.start()` 的 `duration` 选项表示最长录音时间，并非消息的最终时长。本示例省略该选项并使用宿主的默认上限（微信小程序默认为 60 秒）；在自动停止前，业务可随时调用 `stop()`，并以 `onStop` 结果计算 SDK 所需的语音秒数。
+- `filename`、`filetype` 和 `fileLength` 都是可选顶层字段。本地文件的元数据已包含在 `data` 中时无需重复传入；缺失时才作为回退值使用。
+- 使用远程语音时，改传 `originalUrl`，不要同时传本地 `data`；`duration` 仍然必填。
+
+:::
 
 #### 关键参数
 
@@ -417,7 +816,9 @@ await client.chatManager.sendMessage(message);
    - 当传入 `data` 时，SDK 会先上传本地文件，再发送消息。
    - 当传入 `originalUrl` 时，SDK 直接使用远程地址构造并发送消息，不再执行本地上传。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器) 的说明。
 
-下面的示例代码为传入本地文件，创建并发送文件消息：
+#### 使用本地文件 `data`
+
+Web `File` 对象本身已经包含 `name`、`type` 和 `size`。传入 `data` 后，SDK 会在上传阶段读取这些元数据，因此无需再重复传顶层 `filename`、`filetype` 或 `fileSize`：
 
 ```typescript
 // 本地文件对象。
@@ -433,18 +834,74 @@ const message = client.chatManager.createFileMessage({
   conversationId: "user2",
   // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
   conversationType: "singleChat",
-  // 本地文件。若使用远程文件资源，应传 `originalUrl`。
+  // Web File 已包含 name、type 和 size。
   data: selectedFile,
-  // 可选：文件名。建议在已知时传入，便于消息列表和下载展示。
-  filename: "document.pdf",
-  // 可选：文件 MIME 类型。
-  filetype: "application/pdf",
-  // 可选：文件大小，单位为字节。
-  fileSize: 102400,
 });
 
 await client.chatManager.sendMessage(message);
 ```
+
+对于小程序 `{ path }` 或 React Native `{ uri }` 文件描述符，应优先把宿主实际返回的元数据放在 `data` 内。两类描述符结构不同，分别如下：
+
+::: tabs#file-source
+
+@tab 小程序、uni-app、Taro
+
+```typescript
+const message = client.chatManager.createFileMessage({
+  conversationId: "user2",
+  conversationType: "singleChat",
+  data: {
+    path: selectedFile.path,
+    name: selectedFile.name,
+    type: selectedFile.type,
+    size: selectedFile.size,
+  },
+});
+
+await client.chatManager.sendMessage(message);
+```
+
+@tab React Native
+
+```typescript
+const message = client.chatManager.createFileMessage({
+  conversationId: "user2",
+  conversationType: "singleChat",
+  data: {
+    uri: selectedFile.uri,
+    name: selectedFile.name,
+    type: selectedFile.type,
+    size: selectedFile.size,
+  },
+});
+
+await client.chatManager.sendMessage(message);
+```
+
+:::
+
+SDK 归一化本地附件时，优先读取 `data` 自身的 `name/type/size`。小程序或 React Native 文件缺少 `name`、`type` 时，SDK 会尝试根据 `path` 或 `uri` 的最后一段及扩展名推导；仍无法取得时才使用顶层 `filename/filetype/fileSize` 作为回退值。因此，元数据已经在 `data` 内时不要在顶层重复传一份。
+
+#### 使用远程文件 `originalUrl`
+
+远程文件不经过 SDK 上传和本地附件归一化，应单独使用 `originalUrl`。`filename`、`filetype` 和 `fileLength` 在类型和校验规则中都是可选字段，但 SDK 无法从远程文件对象自动补齐它们；如果接收端需要展示文件名、类型和大小，建议显式传入：
+
+```typescript
+const message = client.chatManager.createFileMessage({
+  conversationId: "user2",
+  conversationType: "singleChat",
+  originalUrl: "https://static.example.com/files/document.pdf",
+  filename: "document.pdf",
+  filetype: "application/pdf",
+  // 协议编码使用 fileLength 表示附件大小，单位为字节。
+  fileLength: 102400,
+});
+
+await client.chatManager.sendMessage(message);
+```
+
+`fileSize` 是 `FileMessageBody` 的本地文件大小字段；当前 MSync 协议编码发送的是 `fileLength`。使用 `originalUrl` 且需要把文件大小发送给接收端时，应传 `fileLength`，不要用 `fileSize` 代替。
 
 #### 关键参数
 
@@ -452,16 +909,17 @@ await client.chatManager.sendMessage(message);
 | :------------ | :------------- | :-------------------------- | :----------------- | :---------------------------------------------------------- |
 | `data`        | CompatibleFile | 与 `originalUrl` 二选一必填 | 本地文件发送       | 本地文件。传入后由 SDK 负责上传。                           |
 | `originalUrl` | String         | 与 `data` 二选一必填        | 远程文件直发       | 文件已存储在业务服务器或 CDN 时使用。SDK 不再执行本地上传。 |
-| `filename`    | String         | 可选                        | 文件展示、下载展示 | 建议传入，便于界面显示和用户下载识别。                      |
-| `filetype`    | String         | 可选                        | 文件类型识别       | 例如 `application/pdf`、`application/zip`。                 |
-| `fileSize`    | Number         | 可选                        | 文件大小展示       | 用于界面展示更直接。                                        |
-| `fileLength`  | Number         | 可选                        | 服务端兼容字段     | 与部分服务端字段兼容时使用。                                |
+| `filename`    | String         | 可选                        | 元数据回退、远程文件 | 本地 `data` 缺少文件名时作为回退值；远程文件建议显式传入。  |
+| `filetype`    | String         | 可选                        | 元数据回退、远程文件 | 本地 `data` 缺少 MIME 类型时作为回退值；远程文件建议显式传入。 |
+| `fileSize`    | Number         | 可选                        | 本地文件大小       | 本地 `data` 缺少 `size` 时作为上传归一化的回退值；不作为 MSync 协议中的附件大小发送。 |
+| `fileLength`  | Number         | 可选                        | 协议附件大小       | MSync 协议编码使用的附件大小字段；远程文件需要传递大小时使用。 |
 
 :::tip
 - `data` 和 `originalUrl` 至少传一个。
   - 传 `data` 时，SDK 会先使用本地文件创建消息，并在发送前自动上传。
   - 传 `originalUrl` 时，SDK 使用已有远程地址构造文件消息，不再负责本地上传。
-- `fileSize` 更适合用于界面展示；`fileLength` 更偏向服务端兼容字段，使用时应根据业务需要选择。
+- 本地 `data` 的元数据优先级高于顶层回退字段。使用 Web `File` 或已经包含 `name/type/size` 的小程序、React Native 文件描述符时，不需要重复传顶层元数据。
+- `originalUrl` 场景不会经过上传阶段，SDK 不会自动补齐远程文件的名称、类型和大小。
 :::
 
 ### 上传消息附件至自有服务器
@@ -607,7 +1065,7 @@ await client.chatManager.sendMessage(message);
 | :------------------ | :---------------------- | :-------- | :--------------------------- | :----------------------- |
 | `action`            | String                  | 必填      | 输入状态、控制信令、业务指令 | 透传消息的动作名称。     |
 | `deliverOnlineOnly` | Boolean                 | 可选      | 瞬时状态通知                 | 是否仅投递给在线用户。   |
-| `ext`               | `Record<string, unknown>` | 可选      | 业务扩展信息                 | 用于携带附加业务上下文。 |
+| `ext`               | Record<string, unknown> | 可选      | 业务扩展信息                 | 用于携带附加业务上下文。 |
 
 ## 发送自定义类型消息
 
@@ -658,8 +1116,8 @@ await client.chatManager.sendMessage(message);
 | 参数     | 类型                    | 必填/可选 | 适用场景                       | 说明                               |
 | :------- | :---------------------- | :-------- | :----------------------------- | :--------------------------------- |
 | `event`  | String                  | 必填      | 礼物、订单、互动动作、业务卡片 | 自定义事件名称。                   |
-| `params` | `Record<string, string>`  | 可选      | 传递业务参数                   | 自定义业务参数。建议保持结构简单。 |
-| `ext`    | `Record<string, unknown>` | 可选      | 业务扩展信息                   | 用于传递额外业务上下文。           |
+| `params` | Record<string, string>  | 可选      | 传递业务参数                   | 自定义业务参数。建议保持结构简单。 |
+| `ext`    | Record<string, unknown> | 可选      | 业务扩展信息                   | 用于传递额外业务上下文。           |
 
 ## 发送合并消息
 
@@ -707,7 +1165,7 @@ await client.chatManager.sendMessage(message);
 | `title`          | String                 | 必填      | 聊天记录转发     | 合并消息标题。                                   |
 | `summary`        | String                 | 必填      | 聊天记录预览     | 合并消息摘要，通常用于列表预览展示。             |
 | `compatibleText` | String                 | 可选      | 兼容展示         | 兼容展示文本；未传时 SDK 默认使用 `[版本过低]`。 |
-| `messageList`    | `ReadonlyArray<Message>` | 必填      | 多条消息打包转发 | 被合并的原始消息列表。                           |
+| `messageList`    | ReadonlyArray<Message> | 必填      | 多条消息打包转发 | 被合并的原始消息列表。                           |
 
 #### 逻辑说明
 
@@ -963,7 +1421,7 @@ await client.chatManager.sendMessage(message, {
 
 #### 消息大小和存储限制
 
-各类消息的大小和存储限制，详见 [消息限制说明](/product/limitation.html#消息大小)。
+各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
 
 #### 发消息时设置回调路由
 
@@ -1038,14 +1496,15 @@ await client.chatManager.sendMessage(message);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`addEventHandler`](#监听消息相关事件) | `ChatClient` | 注册事件监听。 |
 | [`createTextMessage`](#发送文本消息) | `ChatManager` | 创建文本消息。 |
 | [`createImageMessage`](#发送图片消息) | `ChatManager` | 创建图片消息，GIF 也通过该 API 创建。 |
 | [`createVoiceMessage`](#发送语音消息) | `ChatManager` | 创建语音消息。 |
 | [`createVideoMessage`](#发送视频消息) | `ChatManager` | 创建视频消息。 |
 | [`createFileMessage`](#发送文件消息) | `ChatManager` | 创建文件消息。 |
 | [`createLocationMessage`](#发送位置消息) | `ChatManager` | 创建位置消息。 |
-| [`createCmdMessage`](#发送透传消息) | `ChatManager` | 创建命令消息。 |
+| [`createCmdMessage`](#发送命令消息) | `ChatManager` | 创建命令消息。 |
 | [`createCustomMessage`](#发送自定义类型消息) | `ChatManager` | 创建自定义消息。 |
 | [`createCombineMessage`](#发送合并消息) | `ChatManager` | 创建合并消息。 |
-| [`downloadAndParseCombineMessage`](#接收端解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |
+| [`downloadAndParseCombineMessage`](#解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |
 | [`sendMessage`](#发送过程回调) | `ChatManager` | 发送已创建的消息，并支持发送过程回调。 |
