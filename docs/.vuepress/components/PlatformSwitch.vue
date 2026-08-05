@@ -194,16 +194,21 @@ const getRoutePaths = (
 const normalizeRoutePath = (path: string): string =>
   path.replace(/\.html$/, '').replace(/\/$/, '')
 
-const navigateToDefaultPlatformDoc = (platformName: PlatformKey): void => {
+const navigateToPlatformDoc = (
+  platformName: PlatformKey,
+  targetVersion: DocVersion = '5.x'
+): void => {
+  const documentRoot = targetVersion === '4.x' ? '/v4' : '/document'
   const nextPlatformDocRouters = getRoutePaths(router.options.routes)
-    .filter((path) => path.indexOf(`/document/${platformName}/`) === 0)
+    .filter((path) => path.indexOf(`${documentRoot}/${platformName}/`) === 0)
     .map(normalizeRoutePath)
 
   let newPath = route.path.split('/')
+  newPath[1] = documentRoot.slice(1)
   newPath[2] = platformName
   const nextPathPath = newPath.join('/')
-  const quickstartPath = `/document/${platformName}/quickstart.html`
-  const overviewPath = `/document/${platformName}/overview.html`
+  const quickstartPath = `${documentRoot}/${platformName}/quickstart.html`
+  const overviewPath = `${documentRoot}/${platformName}/overview.html`
   if (nextPlatformDocRouters.indexOf(normalizeRoutePath(nextPathPath)) > -1) {
     router.push(nextPathPath)
   } else if (nextPlatformDocRouters.indexOf(normalizeRoutePath(quickstartPath)) > -1) {
@@ -211,7 +216,7 @@ const navigateToDefaultPlatformDoc = (platformName: PlatformKey): void => {
   } else if (nextPlatformDocRouters.indexOf(normalizeRoutePath(overviewPath)) > -1) {
     router.push(overviewPath)
   } else {
-    router.push(`/document/${platformName}`)
+    router.push(`${documentRoot}/${platformName}`)
   }
 }
 
@@ -240,10 +245,10 @@ const onChange = (nextPlatform: PlatformKey): void => {
     const targetVersion = route.path.startsWith('/v4/')
       ? '4.x'
       : version.value
-    router.push(getHomePath(targetVersion, nextPlatform))
+    navigateToPlatformDoc(nextPlatform, targetVersion)
     return
   }
-  navigateToDefaultPlatformDoc(nextPlatform)
+  navigateToPlatformDoc(nextPlatform)
 }
 
 // 切换版本：固定跳到配置的平台首页
