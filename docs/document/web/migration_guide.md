@@ -341,7 +341,7 @@ client.groupManager.addEventHandler('group-handler', {
 | :--- | :--- | :--- |
 | `onMultiDeviceEvent` | `onMultiDeviceContact`        | 监听多设备好友事件，例如，其他设备添加、删除好友，接受或拒绝好友申请等。 |
 | `onMultiDeviceEvent` | `onMultiDeviceGroup`          | 监听多设备群组事件，例如，其他设备创建群组、加入或退出群组、修改群组信息、管理群成员等。 |
-| `onMultiDeviceEvent` | `onMultiDeviceThread`         | 监听多设备子区事件，例如，其他设备创建、加入、退出、解散子区或修改子区信息等。 |
+| `onMultiDeviceEvent` | `onMultiDeviceThread`         | 监听多设备消息话题事件，例如，其他设备创建、加入、退出、解散消息话题或修改消息话题的信息等。 |
 | `onMultiDeviceEvent` | `onMultiDeviceConversation`   | 监听多设备会话事件，例如，其他设备设置或取消会话置顶、添加或移除会话标记等。 |
 | `onMultiDeviceEvent` | `onMultiDeviceMessageRemoved` | 监听多设备消息删除事件，例如，其他设备删除服务端历史消息后，当前设备收到对应同步通知。 |
 

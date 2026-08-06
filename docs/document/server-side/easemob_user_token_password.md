@@ -15,7 +15,7 @@ POST https://{host}/{org_name}/{app_name}/token
 ## 请求示例
 
 ```shell
-curl -X POST 'http://XXXX/XXXX/XXXX/token'    \
+curl -X POST 'https://XXXX/XXXX/XXXX/token'    \
 -H 'Content-Type: application/json'    \
 -H 'Accept: application/json'   \
 -d '{

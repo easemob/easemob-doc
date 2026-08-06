@@ -146,26 +146,26 @@ try {
 | 706 | `CHATROOM_OWNER_NOT_ALLOW_LEAVE` | 聊天室所有者不允许直接退出聊天室。 | 先转让聊天室所有者，或执行符合当前聊天室规则的操作。 |
 | 707 | `CHATROOM_USER_IN_BLOCKLIST` | 用户在聊天室黑名单中，无法加入或执行当前聊天室操作。 | 联系聊天室管理员将用户移出黑名单后重试。 |
 
-## 联系人
+## 好友
 
 | 错误码 | 错误信息 | 描述和可能原因 | 解决办法 |
 | :--- | :--- | :--- | :--- |
-| 204 | `CONTACT_ADD_USER_NOT_FOUND` / `CONTACT_BLOCKLIST_USER_NOT_FOUND` | 目标联系人不存在。 | 检查 `userId` 是否正确，并确认目标用户已注册。 |
+| 204 | `CONTACT_ADD_USER_NOT_FOUND` / `CONTACT_BLOCKLIST_USER_NOT_FOUND` | 目标好友不存在。 | 检查 `userId` 是否正确，并确认目标用户已注册。 |
 | 210 | `CONTACT_ADD_BLOCKED_BY_USER` | 添加好友失败，可能是被对方拉黑或服务端禁止添加。 | 检查双方关系状态、黑名单状态和服务端好友策略。 |
 | 223 | `CONTACT_SET_REMARK_NOT_FRIEND` | 给非好友设置备注。 | 先添加好友，再设置好友备注。 |
 | 1000 | `CONTACT_ADD_ALREADY_FRIEND` | 重复添加好友，对方已是好友。 | 无需重复添加。 |
-| 1001 | `CONTACT_REACH_LIMIT` | 当前用户联系人数量达到上限。 | 删除不再需要的联系人后重试，或联系商务提升限制。 |
-| 1002 | `CONTACT_REACH_LIMIT_PEER` | 对方联系人数量达到上限。 | 提示对方清理联系人列表后再试。 |
+| 1001 | `CONTACT_REACH_LIMIT` | 当前用户好友数量达到上限。 | 删除不再需要的好友后重试，或联系商务提升限制。 |
+| 1002 | `CONTACT_REACH_LIMIT_PEER` | 对方好友数量达到上限。 | 提示对方清理好友列表后再试。 |
 
-联系人同步相关错误：
+好友同步相关错误：
 
 | 错误码 | 错误信息 | 描述和可能原因 | 解决办法 |
 | :--- | :--- | :--- | :--- |
-| 1700 | `CONTACT_SYNC_METADATA_FAILED` | 联系人同步元数据获取失败。 | 重试同步，检查网络和服务端状态。 |
-| 1701 | `CONTACT_SYNC_SOCKET_FAILED` | 联系人同步链路失败。 | 检查连接状态后重试。 |
-| 1702 | `CONTACT_SYNC_CURSOR_INVALID` | 联系人同步游标无效。 | 重新登录或重新发起同步，以重建同步游标。 |
-| 1703 | `CONTACT_SYNC_PROTO_DECODE_FAILED` | 联系人同步协议解码失败。 | 检查返回数据；若持续出现，升级 SDK 或联系技术支持。 |
-| 1704 | `CONTACT_SYNC_CANCELLED` | 联系人同步被取消。 | 如仍需同步，重新发起同步或重新登录触发自动同步。 |
+| 1700 | `CONTACT_SYNC_METADATA_FAILED` | 好友同步元数据获取失败。 | 重试同步，检查网络和服务端状态。 |
+| 1701 | `CONTACT_SYNC_SOCKET_FAILED` | 好友同步链路失败。 | 检查连接状态后重试。 |
+| 1702 | `CONTACT_SYNC_CURSOR_INVALID` | 好友同步游标无效。 | 重新登录或重新发起同步，以重建同步游标。 |
+| 1703 | `CONTACT_SYNC_PROTO_DECODE_FAILED` | 好友同步协议解码失败。 | 检查返回数据；若持续出现，升级 SDK 或联系技术支持。 |
+| 1704 | `CONTACT_SYNC_CANCELLED` | 好友同步被取消。 | 如仍需同步，重新发起同步或重新登录触发自动同步。 |
 
 ## 用户资料
 

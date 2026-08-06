@@ -99,7 +99,7 @@ boolean loggedIn = EMClient.getInstance().isLoggedIn();
 | `onTokenExpired()` | Token 已过期时触发。 | SDK 会退出登录；需要获取新 Token 后重新登录。 |
 | `onOfflineMessageSyncStart()` | SDK 开始从服务器同步离线消息时触发。 | 没有离线消息时可能不触发。 |
 | `onOfflineMessageSyncFinish()` | SDK 完成离线消息同步时触发。 | 同步过程中若连接中断，可能不触发。 |
-| `onDataSyncStart(EMDataSyncType)` | 登录后某类业务数据开始自动同步时触发。 | `type` 表示会话、联系人或已加入群组等数据类型。 |
+| `onDataSyncStart(EMDataSyncType)` | 登录后某类业务数据开始自动同步时触发。 | `type` 表示会话、好友或已加入群组等数据类型。 |
 | `onDataSyncFinish(EMDataSyncType, int)` | 某类业务数据同步结束时触发。 | `errorCode == EMError.EM_NO_ERROR` 表示同步成功。 |
 
 ### 示例代码
@@ -242,7 +242,7 @@ EMClient.getInstance().renewToken(
 
 登录成功或连接恢复后，如果服务端存在离线消息，SDK 会自动同步。可通过 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 监听同步过程。
 
-会话、联系人和已加入群组等数据的登录后自动同步状态，则通过 `onDataSyncStart` 和 `onDataSyncFinish` 监听。两类同步回调含义不同，不应混用。
+会话、好友和已加入群组等数据的登录后自动同步状态，则通过 `onDataSyncStart` 和 `onDataSyncFinish` 监听。两类同步回调含义不同，不应混用。
 
 ## 最佳实践
 

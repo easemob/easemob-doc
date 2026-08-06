@@ -223,7 +223,7 @@ client.contactManager.addEventHandler('contact-profile-listener', {
       console.log('好友添加时间:', event.contact.addTs);
     }
 
-    // 可在此处刷新好友列表、联系人详情页或会话列表中的头像和昵称等展示信息。
+    // 可在此处刷新好友列表、好友详情页或会话列表中的头像和昵称等展示信息。
   },
 });
 ```

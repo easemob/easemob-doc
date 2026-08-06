@@ -37,7 +37,7 @@ GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET 'http://XXX/XXX/XXX/presence/online/XXX/type/XXX'   \
+curl -X GET 'https://XXX/XXX/XXX/presence/online/XXX/type/XXX'   \
 -H 'Accept: application/json'    \
 -H 'Authorization: Bearer <YourAppToken>' 
 ```

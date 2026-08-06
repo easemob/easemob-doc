@@ -5,7 +5,7 @@
 iOS IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要涉及以下四个方面：
 
 1. **数据同步机制调整**
-   登录后，SDK 可自动同步会话、联系人和已加入的群组数据，并将数据保存到本地数据库，替代原先由应用主动调用服务端拉取接口。
+   登录后，SDK 可自动同步会话、好友和已加入的群组数据，并将数据保存到本地数据库，替代原先由应用主动调用服务端拉取接口。
 2. **消息已读回执机制重构**
    已读回执由逐条发送调整为批量发送；清除本地未读数与向消息发送方发送已读回执相互独立；单聊和群聊使用统一的回执模型与回调。
 3. **群组配置模型重构**
@@ -14,7 +14,7 @@ iOS IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要涉及以
    移除一批同步接口、长期标记为废弃 `@Deprecated` 的接口及部分边缘能力。注册、举报和消息流量统计等功能需由业务服务或服务端 REST API 实现；密码登录接口下线，仅保留 Token 登录。
 
 :::tip
-**升级要求：** iOS IM SDK 5.0.0 包含不兼容的 Objective-C API 变更。更新 SDK 后必须重新编译，并重点验证 Token 登录、数据同步、会话未读数、单聊和群聊已读回执、群组创建和配置更新、联系人、附件消息及推送设置。
+**升级要求：** iOS IM SDK 5.0.0 包含不兼容的 Objective-C API 变更。更新 SDK 后必须重新编译，并重点验证 Token 登录、数据同步、会话未读数、单聊和群聊已读回执、群组创建和配置更新、好友、附件消息及推送设置。
 :::
 
 ## 初始化与登录
@@ -49,7 +49,7 @@ iOS SDK 5.0.0 仅保留 Token 登录方式。用户注册、密码校验和 Toke
 
 ### 登录与数据库打开解耦
 
-iOS SDK 5.0.0 新增本地数据库打开回调。数据库打开后即可读取当前账号的本地数据，不必等待会话、联系人或已加入群组的服务端同步完成，有助于加快冷启动时的首屏展示。
+iOS SDK 5.0.0 新增本地数据库打开回调。数据库打开后即可读取当前账号的本地数据，不必等待会话、好友或已加入群组的服务端同步完成，有助于加快冷启动时的首屏展示。
 
 - `EMClientDelegate#onDatabaseOpened:username:`：当前账号本地数据库打开完成时触发；`error` 为空表示打开成功。应用如需感知本地库是否就绪，应记录该回调状态。
 :::
@@ -71,7 +71,7 @@ iOS SDK 5.0.0 新增登录后自动数据同步机制。应用应在初始化 SD
 | `EMClientDelegate` | `onDatabaseOpened:username:` | 通知指定账号的本地数据库已经打开；该事件不表示任何服务端数据已经同步完成。 |
 
 :::tip
-`EMOptions#dataSyncType` 默认为 `EMDataSyncTypeConversations`，因此配置时仅自动同步会话，不会自动同步联系人或已加入群组。
+`EMOptions#dataSyncType` 默认为 `EMDataSyncTypeConversations`，因此配置时仅自动同步会话，不会自动同步好友或已加入群组。
 :::
 
 典型配置如下：
@@ -86,7 +86,7 @@ EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
 
 ### 服务端拉取 API 迁移
 
-原先主动拉取会话、联系人和已加入群组，并在 completion 中刷新数据的方式，统一调整为 **配置数据同步范围、登录后自动同步、读取本地数据，并在 `syncDataFinished:type:` 成功后刷新 UI**。
+原先主动拉取会话、好友和已加入群组，并在 completion 中刷新数据的方式，统一调整为 **配置数据同步范围、登录后自动同步、读取本地数据，并在 `syncDataFinished:type:` 成功后刷新 UI**。
 
 | 类 | 删除的 API | 5.0.0 推荐方式 |
 | :--- | :--- | :--- |
@@ -95,7 +95,7 @@ EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
 | `IEMChatManager` | `getConversationsFromServerWithCursor:filter:completion:` | 该接口按条件拉取服务端会话。改用 `getAllConversations`，或使用本地 `filterConversationsFromDB:filter:` 过滤。 |
 | `IEMGroupManager` | `getJoinedGroupsFromServerWithPage:pageSize:needMemberCount:needRole:completion:` | 该接口分页拉取已加入群组。改用本地 `getJoinedGroups`，并在 `syncDataFinished:EMDataSyncTypeJoinedGroups` 成功后刷新。 |
 | `IEMContactManager` | `getAllContactsFromServerWithCompletion:`、`getContactsFromServerWithCursor:pageSize:completion:`、`getContactsFromServerWithCompletion:`、`getContactsFromServerWithError:` | 这些接口从服务器拉取好友列表。5.0.0 已无好友列表服务端拉取入口；改用本地 `getAllContacts`、`getContacts` 或 `getContact:`，并在 `syncDataFinished:EMDataSyncTypeContacts` 成功后刷新。 |
-| `EMOptions` | `enableAutoSyncContacts` | 该配置控制联系人自动同步。改为在 `dataSyncType` 中包含 `EMDataSyncTypeContacts`。 |
+| `EMOptions` | `enableAutoSyncContacts` | 该配置控制好友自动同步。改为在 `dataSyncType` 中包含 `EMDataSyncTypeContacts`。 |
 
 相应地，`EMContactManagerDelegate#onFriendStartSync` 和 `onFriendSyncFinished:` 已删除。请改用 `EMClientDelegate#syncDataStartWithType:` 和 `syncDataFinished:type:`，并判断 `type` 是否包含 `EMDataSyncTypeContacts`。详见 [监听器回调变化汇总](#监听器回调变化汇总)。
 
@@ -260,7 +260,7 @@ iOS SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `EMGroup
 | `joinPublicGroup:error:`、`applyJoinPublicGroup:message:error:` | `joinPublicGroup:completion:`、`requestToJoinPublicGroup:message:completion:` | 直接加入公开群，或申请加入需要审批的公开群。 | 同步版本已删除；申请入群接口同时调整了方法名。 |
 | `getGroupsWithoutPushNotification:` | `EMConversation.disturbType`，或 `getSilentModeForConversation:conversationType:completion:` | 获取关闭推送通知的群组。 | 旧群组级查询已删除，改为查询群会话的免打扰设置。 |
 | `acceptJoinApplication:`、`declineJoinApplication:`、`acceptInvitationFromGroup:`、`declineInvitationFromGroup:` 的同步版本 | `approveJoinGroupRequest:sender:completion:`、`declineJoinGroupRequest:sender:reason:completion:`、`acceptInvitationFromGroup:inviter:completion:`、`declineGroupInvitation:inviter:reason:completion:` | 审批入群申请或处理群邀请。 | 使用语义更明确的异步接口，并提供申请人或邀请人 ID。 |
-| 联系人同步操作：`addContact:message:`、`addUserToBlackList:`、`removeUserFromBlackList:`、`acceptInvitationForUsername:`、`declineInvitationForUsername:`、`getSelfIdsOnOtherPlatformWithError:` | 对应的 completion 版本：`addContact:message:completion:`、黑名单操作、`approveFriendRequestFromUser:completion:`、`declineFriendRequestFromUser:completion:`、`getSelfIdsOnOtherPlatformWithCompletion:` | 添加好友、管理黑名单、处理好友申请及查询其他平台登录 ID。 | 使用保留的异步接口；本地黑名单通过 `getBlackList` 获取。 |
+| 好友同步操作：`addContact:message:`、`addUserToBlackList:`、`removeUserFromBlackList:`、`acceptInvitationForUsername:`、`declineInvitationForUsername:`、`getSelfIdsOnOtherPlatformWithError:` | 对应的 completion 版本：`addContact:message:completion:`、黑名单操作、`approveFriendRequestFromUser:completion:`、`declineFriendRequestFromUser:completion:`、`getSelfIdsOnOtherPlatformWithCompletion:` | 添加好友、管理黑名单、处理好友申请及查询其他平台登录 ID。 | 使用保留的异步接口；本地黑名单通过 `getBlackList` 获取。 |
 | `getBlackListFromServerWithError:` | `getBlackListFromServerWithCompletion:` | 从服务器获取当前用户的黑名单。 | 同步版本已删除，改用 completion 返回黑名单和错误。 |
 | `IEMPushManager#updatePushDisplayStyle:`、`updatePushDisplayName:`、`getPushOptionsFromServerWithError:` | `updatePushDisplayStyle:completion:`、`updatePushDisplayName:completion:`、`getPushNotificationOptionsFromServerWithCompletion:` | 更新推送显示样式、显示名或获取服务端推送配置。 | 同步版本已删除，改为在 completion 中处理结果。 |
 
@@ -268,7 +268,7 @@ iOS SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `EMGroup
 
 | 所属类 | 新增 API | 接口说明 |
 | :--- | :--- | :--- |
-| `EMOptions` | `dataSyncType`、`EMDataSyncType` | 配置登录后自动同步会话、联系人和已加入群组，可按位组合。 |
+| `EMOptions` | `dataSyncType`、`EMDataSyncType` | 配置登录后自动同步会话、好友和已加入群组，可按位组合。 |
 | `EMClientDelegate` | `onDatabaseOpened:username:`、`syncDataStartWithType:`、`syncDataFinished:type:` | 监听本地数据库打开及自动数据同步的开始和结束。 |
 | `IEMChatManager` | `sendMessageReadReceipts:completion:` | 批量发送单聊或群聊消息已读回执；最多 50 条且必须属于同一会话。 |
 | `IEMChatManager` | `clearConversationUnreadMessageCount:completion:`、`clearAllConversationUnreadMessageCount:` | 清除指定会话或全部会话的本地未读数，并同步至当前账号其他设备，不向发送方发送消息已读回执。 |
@@ -291,7 +291,7 @@ iOS SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `EMGroup
 | `EMClientDelegate` | `userAccountDidLoginFromOtherDevice:`、无参数的 `userAccountDidLoginFromOtherDevice` | `userAccountDidLoginFromOtherDeviceWithInfo:` | 当前账号在其他设备登录的通知；5.0.0 通过 `EMLoginExtensionInfo` 提供登录设备及扩展信息。 |
 | `EMClientDelegate` | 无 | `onDatabaseOpened:username:` | 当前账号本地数据库打开完成；不代表业务数据同步完成。 |
 | `EMClientDelegate` | 无 | `syncDataStartWithType:`、`syncDataFinished:type:` | 指定类型的数据同步开始和结束通知。 |
-| `EMContactManagerDelegate` | `onFriendStartSync`、`onFriendSyncFinished:` | `EMClientDelegate#syncDataStartWithType:`、`syncDataFinished:type:` | 联系人同步回调统一迁移至客户端代理，并通过 `EMDataSyncTypeContacts` 识别类型。 |
+| `EMContactManagerDelegate` | `onFriendStartSync`、`onFriendSyncFinished:` | `EMClientDelegate#syncDataStartWithType:`、`syncDataFinished:type:` | 好友同步回调统一迁移至客户端代理，并通过 `EMDataSyncTypeContacts` 识别类型。 |
 | `EMChatManagerDelegate` | `messagesDidRead:`、`groupMessageDidRead:groupAcks:` | `onMessageReadReceipts:` | 统一接收单聊和群聊的消息已读回执。 |
 | `EMChatManagerDelegate` | `groupMessageAckHasChanged` | `groupMessageReadReceiptsHasChanged` | 群聊消息已读回执状态变化通知。 |
 | `EMChatManagerDelegate` | `onConversationRead:to:` | 无直接替代 | 会话级已读回执回调已删除；按消息处理 `onMessageReadReceipts:`。 |
@@ -334,11 +334,11 @@ iOS SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `EMGroup
 
 6. **大量同步接口迁移为 completion 版本**
 
-   Token 登录、群组管理、联系人管理和推送配置等多项同步接口已删除。调用方不得依赖同步返回值，应在异步 completion 中处理成功、错误和 UI 刷新，避免在主线程上模拟同步等待。
+   Token 登录、群组管理、好友管理和推送配置等多项同步接口已删除。调用方不得依赖同步返回值，应在异步 completion 中处理成功、错误和 UI 刷新，避免在主线程上模拟同步等待。
 
 7. **自动同步完成前，本地列表可能不完整**
 
-   `onDatabaseOpened:username:` 只表示数据库可以访问。若 `dataSyncType` 包含相应类型，需要等待 `syncDataFinished:type:` 成功后，再将会话、联系人或已加入群组的本地查询结果视为本次登录后的最新数据。
+   `onDatabaseOpened:username:` 只表示数据库可以访问。若 `dataSyncType` 包含相应类型，需要等待 `syncDataFinished:type:` 成功后，再将会话、好友或已加入群组的本地查询结果视为本次登录后的最新数据。
 
 8. **新增多设备未读数同步事件**
 

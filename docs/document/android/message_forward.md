@@ -52,7 +52,7 @@ newMessage.setTo(to);
 // 默认为单聊。转发到群聊或聊天室时，分别设置为 GroupChat 或 ChatRoom。
 newMessage.setChatType(EMMessage.ChatType.GroupChat);
 
-// 转发到消息子区时，将 to 设置为子区 ID，并标记为子区消息。
+// 转发到消息话题时，将 to 设置为话题 ID，并标记为话题消息。
 // newMessage.setIsChatThreadMessage(true);
 
 // 复用原消息的消息体。

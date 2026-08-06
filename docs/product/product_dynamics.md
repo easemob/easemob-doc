@@ -6,7 +6,7 @@
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[联系人](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 <br/> - | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev)  |
+| Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[好友](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 <br/> - | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev)  |
 
 #### 环信 Web SDK v5.0.0 发版
 

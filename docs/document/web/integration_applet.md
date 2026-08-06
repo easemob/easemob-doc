@@ -89,8 +89,8 @@ const client = ChatClient.init({
 | `managers` | Array | 否 | 初始化时注册的功能管理器列表。若需要使用消息和会话能力，需注册 `ChatManager`。 |
 | `serviceConfig.serverUrls.restApiUrl` | String | 是 | REST API 服务地址。小程序中使用固定服务地址时需配置。 |
 | `serviceConfig.serverUrls.wsUrl` | String | 是 | 消息长连接 WebSocket 地址。小程序中使用固定服务地址时需配置。 |
-| `serviceConfig.serverUrls.syncRestApiUrl` | String | 否 | 会话、联系人等同步能力使用的 REST API 地址。仅在服务端提供独立同步地址时配置。 |
-| `serviceConfig.serverUrls.syncWsUrl` | String | 否 | 会话、联系人等同步能力使用的 WebSocket 地址。仅在服务端提供独立同步地址时配置。 |
+| `serviceConfig.serverUrls.syncRestApiUrl` | String | 否 | 会话、好友等同步能力使用的 REST API 地址。仅在服务端提供独立同步地址时配置。 |
+| `serviceConfig.serverUrls.syncWsUrl` | String | 否 | 会话、好友等同步能力使用的 WebSocket 地址。仅在服务端提供独立同步地址时配置。 |
 | `platformAdapterOptions.prefer` | String | 否 | 优先使用的平台适配类型。缺省时 SDK 自动识别运行环境。 |
 
 :::tip

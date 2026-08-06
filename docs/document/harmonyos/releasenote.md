@@ -200,7 +200,7 @@
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
+- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个好友的信息。
 
 #### 优化
 
