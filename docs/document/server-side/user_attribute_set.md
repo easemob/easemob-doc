@@ -110,6 +110,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/metadata/user/user1'  \
 | 403     | FORBIDDEN         | size of metadata for this single user exceeds the current mysql column size, {}Bytes        | 单个用户的用户属性超过字段长度限制。关于用户属性字段（例如，用户昵称）的长度限制，详见[设置用户属性](/document/server-side/user_attribute_set.html)。  | 减少用户属性字段的长度。    |
 | 403     | FORBIDDEN          | total size of user metadata for this app exceeds the user defined limit, {}Bytes        | 整个应用的用户属性用量超过限制。默认单个 app 下所有用户的属性总长度不得超过 10 GB。   | 调整用量或联系商务提升用量上限。    |
 | 409 | CONFLICT | Failed to xxx. Concurrent xxx not allowed | 多个请求同时修改同一个资源的并发操作冲突。 | 减少并发请求操作。 |
+| 415 | UNSUPPORTED_MEDIA_TYPE | Content-Type 'application/json;charset=UTF-8' is not supported. | 请求的 `Content-Type` 不受接口支持，使用了 JSON 请求体。 | 将 `Content-Type` 改为 `application/x-www-form-urlencoded`，并使用表单格式提交请求 body。 |
 | 500     | INTERNAL_SERVER_ERROR          | update metadata failed        | 服务异常导致更新用户属性失败。  |     |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
