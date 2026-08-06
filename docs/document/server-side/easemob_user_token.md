@@ -41,7 +41,7 @@ POST https://{host}/{org_name}/{app_name}/token
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'http://XXXX/XXXX/XXXX/token'  \
+curl -X POST 'https://XXXX/XXXX/XXXX/token'  \
 -H 'Content-Type: application/json'   \
 -H 'Accept: application/json'   \
 -H 'Authorization: Bearer <YourAppToken>'   \

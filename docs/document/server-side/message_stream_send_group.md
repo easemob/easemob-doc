@@ -57,7 +57,7 @@ POST https://{host}/{org_name}/{app_name}/stream_message/chatgroup
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
+curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -77,7 +77,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 - 发送第二个消息分片：
 
 ```bash
-curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
+curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \

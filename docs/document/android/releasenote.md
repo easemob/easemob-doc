@@ -10,14 +10,14 @@
 
 **数据同步与本地数据访问**
 
-SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，包括会话、联系人和已加入群组，并通过统一的同步状态回调监听同步进度。
+SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，包括会话、好友和已加入群组，并通过统一的同步状态回调监听同步进度。
 
 数据库打开和服务端数据同步分别对应不同阶段，应用可按以下步骤处理：
 
-1. **配置同步范围**：通过 `EMOptions#setDataSyncType(EnumSet<EMDataSyncType>)` 配置登录后自动同步的数据类型，包括会话、联系人、已加入群组和不同步数据等。多个数据类型可按位组合，建议在调用 `EMClient.getInstance().init(context, options)` 前显式设置。
+1. **配置同步范围**：通过 `EMOptions#setDataSyncType(EnumSet<EMDataSyncType>)` 配置登录后自动同步的数据类型，包括会话、好友、已加入群组和不同步数据等。多个数据类型可按位组合，建议在调用 `EMClient.getInstance().init(context, options)` 前显式设置。
 2. **读取本地数据**：`EMConnectionListener#onDatabaseOpened(String username)` 回调表示当前账号的本地数据库已打开。收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。
 3. **监听服务端数据同步**：通过 `EMConnectionListener#onDataSyncStart(EMDataSyncType type)` 和 `EMConnectionListener#onDataSyncFinish(EMDataSyncType type, int errorCode)` 监听指定类型的数据同步开始和结束。
-4. **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish(...)` 回调成功后，再读取本地会话、联系人或已加入群组数据并刷新界面。
+4. **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish(...)` 回调成功后，再读取本地会话、好友或已加入群组数据并刷新界面。
 
 **群组配置模型重构**
 
@@ -59,7 +59,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - 客户端注册接口已移除，账号注册应由业务服务器实现。
 - 登录和设备管理统一使用 Token 鉴权，移除密码登录及密码鉴权设备管理接口。
 - SDK 不再支持自动登录：移除 `EMOptions#setAutoLogin(...)`、`getAutoLogin()` 和 `EMClient#isLoggedInBefore()`，改为通过 `loginWithToken(...)` 登录。
-- 联系人自动同步开关并入 `EMOptions#setDataSyncType(...)`。
+- 好友自动同步开关并入 `EMOptions#setDataSyncType(...)`。
 - `EMOptions.AreaCode` 由整型常量类改为枚举，`EMOptions#setAreaCode(int)` 调整为 `setAreaCode(AreaCode)`；原 `AREA_CODE_*` 常量改为 `CN`、`NA`、`EU`、`AS`、`JP`、`IN` 和 `GLOB`。
 
 **低频与历史 API 清理**
@@ -97,7 +97,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 #### 优化
 
-- 优化联系人自动同步的状态与结果上报逻辑。
+- 优化好友自动同步的状态与结果上报逻辑。
 - 优化停止消息接收时的数据同步处理，现会同时断开数据同步 WebSocket 连接。
 - 优化数据同步连接的重试策略，仅在启用 DNS 功能时刷新 DNS 配置。
 

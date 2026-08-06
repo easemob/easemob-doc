@@ -227,7 +227,7 @@ options.dataSyncType = EMDataSyncTypeContacts;
  - `addTimestamp`：好友添加时间的毫秒级时间戳。
 
 :::tip
-`getContacts`、`getAllContacts` 和 `getContact` 为本地读取接口。应在 `syncDataFinished` 确认联系人同步成功后使用这些本地数据作为 UI 数据源，避免在主线程执行耗时的数据处理。
+`getContacts`、`getAllContacts` 和 `getContact` 为本地读取接口。应在 `syncDataFinished` 确认好友同步成功后使用这些本地数据作为 UI 数据源，避免在主线程执行耗时的数据处理。
 :::
 
 #### 获取单个用户属性

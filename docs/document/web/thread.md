@@ -23,7 +23,7 @@
 
 群成员可调用 `createChatThread` 方法，基于一条群消息创建消息话题。
 
-创建成功后，子区所属群组的所有成员会收到 `onChatThreadCreated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_CREATE`。
+创建成功后，消息话题所属群组的所有成员会收到 `onChatThreadCreated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_CREATE`。
 
 示例代码如下：
 
@@ -44,7 +44,7 @@ console.log('Thread ID:', result.chatThreadId);
 
 通常情况下，仅话题所属群组的群主和群管理员可调用 `destroyChatThread` 方法解散消息话题。
 
-解散成功后，子区所属群组的所有成员会收到 `onChatThreadDestroyed` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_DESTROY`。
+解散成功后，消息话题所属群组的所有成员会收到 `onChatThreadDestroyed` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_DESTROY`。
 
 示例代码如下：
 
@@ -114,7 +114,7 @@ await client.chatThreadManager.removeChatThreadMember({
 
 通常情况下，仅群主、群管理员以及话题创建者可调用 `updateChatThreadName` 方法修改消息话题名称。
 
-修改成功后，子区所属群组的所有成员会收到 `onChatThreadUpdated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_UPDATE`。
+修改成功后，消息话题所属群组的所有成员会收到 `onChatThreadUpdated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_UPDATE`。
 
 示例代码如下：
 

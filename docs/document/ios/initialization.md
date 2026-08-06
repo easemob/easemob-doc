@@ -42,7 +42,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 | `deleteMessagesOnLeaveChatroom` | 主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `deleteMessagesOnLeaveGroup` | 主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `canChatroomOwnerLeave` | 是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许。<br/> - `false`：不允许。 |
-| `dataSyncType` | 配置登录后自动同步的数据类型。该属性是 `EMDataSyncType` 位选项，可组合配置会话、联系人和已加入群组。建议在初始化前显式设置，避免依赖默认值。 |
+| `dataSyncType` | 配置登录后自动同步的数据类型。该属性是 `EMDataSyncType` 位选项，可组合配置会话、好友和已加入群组。建议在初始化前显式设置，避免依赖默认值。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 

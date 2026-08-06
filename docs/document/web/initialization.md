@@ -20,7 +20,7 @@ const client = ChatClient.init({
 
 :::tip
 - 本文示例中的 `client` 为通过 `ChatClient.init` 创建的 SDK 实例。
-- 如需使用聊天、联系人、群组等功能，还需在初始化时通过 `managers` 参数或后续 `use` 方法注册对应管理器。
+- 如需使用聊天、好友、群组等功能，还需在初始化时通过 `managers` 参数或后续 `use` 方法注册对应管理器。
 :::
 
 下表明确初始化 SDK 时的一些参数。

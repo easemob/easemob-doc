@@ -117,9 +117,9 @@ const client = ChatClient.init({
 
 ```typescript
 client.addEventHandler('multiDevice', {
-  // 联系人相关多设备事件
+  // 好友相关多设备事件
   onMultiDeviceContact: event => {
-    console.log('联系人多设备操作:', event.operation);
+    console.log('好友多设备操作:', event.operation);
     console.log('目标用户 ID:', event.targetUserId);
     console.log('来源设备 ID:', event.deviceId);
   },

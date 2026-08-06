@@ -29,7 +29,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST 'http://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1'  \
+curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1'  \
 -H 'Content-Type: application/json'  \
 -H 'Accept: application/json'  \
 -H 'Authorization: Bearer <YourAppToken>' 

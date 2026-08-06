@@ -143,7 +143,7 @@ public final class ConversationListActivity extends AppCompatActivity {
             new EMMultiDeviceListener() {
                 @Override
                 public void onContactEvent(int event, String target, String ext) {
-                    // 本示例不处理联系人多设备事件。
+                    // 本示例不处理好友多设备事件。
                 }
 
                 @Override

@@ -5,7 +5,7 @@
 Android IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要涉及以下四个方面：
 
 1. **数据同步机制调整**
-   登录后，SDK 可自动同步会话、联系人和已加入的群组数据，并将数据保存到本地数据库，替代部分原先由应用主动调用的服务端拉取接口。
+   登录后，SDK 可自动同步会话、好友和已加入的群组数据，并将数据保存到本地数据库，替代部分原先由应用主动调用的服务端拉取接口。
 2. **消息已读回执机制重构**
    已读回执由逐条发送调整为批量发送；清除本地未读数与向消息发送方发送消息已读回执相互独立；单聊和群聊使用统一的回执模型与回调。
 3. **群组配置模型重构**
@@ -64,7 +64,7 @@ Android SDK v5.0.0 新增登录后自动数据同步机制。应用可在初始�
 | `EMConnectionListener` | `onDataSyncStart(EMDataSyncType type)` / `onDataSyncFinish(EMDataSyncType type, int errorCode)` | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `EMError#EM_NO_ERROR` 时表示同步成功。 |
 
 :::tip
-`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、联系人或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地联系人查询接口可能返回空数据。 
+`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、好友或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地好友查询接口可能返回空数据。 
 :::
 
 典型配置如下：
@@ -89,12 +89,12 @@ EMClient.getInstance().init(context, options);
 | `EMChatManager` | `asyncFetchPinnedConversationsFromServer(...)` | 置顶随会话同步落地，读本地会话置顶状态 |
 | `EMChatManager` | `asyncGetConversationsFromServerWithCursor(...)` | 本地查询 |
 | `EMGroupManager` | `getJoinedGroupsFromServer()` / `getJoinedGroupsFromServer(pageIndex, pageSize, ...)` 及两个 async 版本 | `getAllGroups()`（本地）+ `onDataSyncFinish(JOINED_GROUPS, ...)` |
-| `EMContactManager` | `getAllContactsFromServer()`、`asyncGetAllContactsFromServer(...)`、`asyncFetchAllContactsFromServer(...)`（含分页重载） | `getContactsFromLocal()` / `fetchContactFromLocal(String)` / `asyncFetchAllContactsFromLocal(...)` + `onDataSyncFinish(CONTACTS, ...)`。**5.0.0 已无任何从服务器拉取联系人列表的入口** |
+| `EMContactManager` | `getAllContactsFromServer()`、`asyncGetAllContactsFromServer(...)`、`asyncFetchAllContactsFromServer(...)`（含分页重载） | `getContactsFromLocal()` / `fetchContactFromLocal(String)` / `asyncFetchAllContactsFromLocal(...)` + `onDataSyncFinish(CONTACTS, ...)`。**5.0.0 已无任何从服务器拉取好友列表的入口** |
 | `EMChatManager` | `loadAllConversations()` | 降为包私有；直接 `getAllConversations()` |
 | `EMGroupManager` | `loadAllGroups()` | 降为包私有；直接 `getAllGroups()` |
 | `EMOptions` | `setEnableAutoSyncContacts(boolean)` / `isEnableAutoSyncContacts()` | 并入 `setDataSyncType(...)` 的 `CONTACTS` 位 |
 
-相应地，`EMContactListener#onContactSyncStart()` 和 `onContactSyncFinishWithError(int, String)` 已删除。请改用 `EMConnectionListener#onDataSyncStart(EMDataSyncType.CONTACTS)` 和 `onDataSyncFinish(EMDataSyncType.CONTACTS, int)` 监听联系人数据同步状态。详见 [监听器回调变化汇总](#监听器回调变化汇总)。
+相应地，`EMContactListener#onContactSyncStart()` 和 `onContactSyncFinishWithError(int, String)` 已删除。请改用 `EMConnectionListener#onDataSyncStart(EMDataSyncType.CONTACTS)` 和 `onDataSyncFinish(EMDataSyncType.CONTACTS, int)` 监听好友数据同步状态。详见 [监听器回调变化汇总](#监听器回调变化汇总)。
 
 ## 已读回执体系重构
 
@@ -260,7 +260,7 @@ Android SDK v5 将群组的可见性、入群审批和成员邀请权限从 `EMG
 | `EMMessageListener`        | `onMessageRead(...)`、`onGroupMessageRead(...)`              | `onMessageReadReceipts(List<EMMessageReadReceipt>)`          | 统一接收单聊和群聊消息已读回执。               |
 | `EMMessageListener`        | `onReadAckForGroupMessageUpdated()`                          | `onReadReceiptForGroupMessageUpdated()`                      | 群聊消息已读回执状态变化通知。                 |
 | `EMConversationListener`   | `onConversationRead(String, String)`                         | `onConversationUpdate()`                                     | 会话列表发生变化时触发。                       |
-| `EMContactListener`        | `onContactSyncStart()`、`onContactSyncFinishWithError(int, String)` | `EMConnectionListener#onDataSyncStart/onDataSyncFinish(EMDataSyncType.CONTACTS, ...)` | 监听联系人数据同步状态。                       |
+| `EMContactListener`        | `onContactSyncStart()`、`onContactSyncFinishWithError(int, String)` | `EMConnectionListener#onDataSyncStart/onDataSyncFinish(EMDataSyncType.CONTACTS, ...)` | 监听好友数据同步状态。                       |
 | `EMGroupChangeListener`    | `onMemberJoined(String, String)`                             | `onMembersJoined(String, List<String>)`                      | 一次通知多个成员加入群组。                     |
 | `EMGroupChangeListener`    | `onMemberExited(String, String)`                             | `onMembersExited(String, List<String>)`                      | 一次通知多个成员退出群组。                     |
 | `EMGroupChangeListener`    | `onRequestToJoinDeclined(groupId, groupName, decliner, reason)` | `onRequestToJoinDeclined(..., String applicant)`             | 增加申请者 ID 参数。                           |

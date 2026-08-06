@@ -25,7 +25,7 @@ POST https://{host}/{org_name}/{app_name}/token
 ### 请求示例
 
 ```shell
-curl -X POST 'http://a1.easemob.com/easemob-demo/testapp/token'    \
+curl -X POST 'https://a1.easemob.com/easemob-demo/testapp/token'    \
 -H 'Content-Type: application/json'    \
 -H 'Accept: application/json'     \
 -d '{

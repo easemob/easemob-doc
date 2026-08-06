@@ -4,7 +4,7 @@
 
 本文面向 HBuilderX 4.x / 5.x 的 uni-app Vue 3 项目，介绍如何集成当前版本的环信 Web SDK，并构建 Android 和 iOS 原生应用。不同 HBuilderX 补丁版本提供的宿主 API 可能存在差异，最终应以目标版本和真机验证结果为准。
 
-当前 SDK 使用 `ChatClient.init()` 创建客户端，通过 Manager 注册消息、联系人、群组等领域能力。
+当前 SDK 使用 `ChatClient.init()` 创建客户端，通过 Manager 注册消息、好友、群组等领域能力。
 
 uni-app 原生 App 中，SDK 通过平台适配层调用 `uni.request`、`uni.connectSocket`、`uni.uploadFile`、文件系统、网络状态和应用前后台等宿主能力。
 
@@ -65,7 +65,7 @@ import { ChatClient, ChatManager } from 'easemob-websdk';
 
 ### 最小消息能力配置
 
-如果应用只验证登录和消息收发，可以关闭登录后的会话、联系人和群组数据同步，只配置 REST 与消息 WebSocket 地址：
+如果应用只验证登录和消息收发，可以关闭登录后的会话、好友和群组数据同步，只配置 REST 与消息 WebSocket 地址：
 
 ```typescript
 import { ChatClient, ChatManager } from 'easemob-websdk';
@@ -84,12 +84,12 @@ const client = ChatClient.init({
 `enableSyncData` 控制登录后自动同步的数据类型，可选值为：
 
 - `conversation`：会话列表；
-- `contact`：联系人；
+- `contact`：好友；
 - `group`：已加入群组。
 
 当前 SDK 未显式传入 `enableSyncData` 时，默认启用 `conversation`。如果使用固定地址模式并启用数据同步，应配置 `syncWsUrl`；只需要消息收发时，建议显式设置 `enableSyncData: []`。
 
-联系人和群组能力还需要注册对应 Manager。例如：
+好友和群组能力还需要注册对应 Manager。例如：
 
 ```typescript
 import {
@@ -265,7 +265,7 @@ HBuilderX 支持云打包和离线打包两种方式。
 
 #### 为什么固定地址模式下会话同步不可用？
 
-未传 `enableSyncData` 时默认同步会话。如果只需要消息能力，设置 `enableSyncData: []`；如果需要会话、联系人或群组同步，请为固定地址模式配置 `syncWsUrl`，并注册相应 Manager。
+未传 `enableSyncData` 时默认同步会话。如果只需要消息能力，设置 `enableSyncData: []`；如果需要会话、好友或群组同步，请为固定地址模式配置 `syncWsUrl`，并注册相应 Manager。
 
 #### 为什么原生 App 中提示缺少 request、socket 或 upload 能力？
 

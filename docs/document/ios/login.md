@@ -54,7 +54,7 @@ SDK 通过用户 ID 和 IM Token 登录。调用 `loginWithUsername` 时，需�
 
 iOS SDK V5 支持在在线登录完成前打开当前用户的本地数据库。应用初始化 SDK 并注册 `EMClientDelegate` 后，调用 `loginWithUsername`。SDK 在登录流程中打开本地数据库，完成后触发 `onDatabaseOpened`。
 
-收到该回调后，即使在线登录尚未完成，应用也可以使用已打开的本地数据库中的缓存数据提前渲染页面；调用需要访问服务器的接口时，仍需等待登录 completion 成功并通过 `connectionStateDidChange` 确认已连接。数据库打开不表示会话、联系人或群组数据已经同步完成；若配置了 `EMOptions#dataSyncType`，应在 `syncDataFinished` 成功后刷新相应本地数据。
+收到该回调后，即使在线登录尚未完成，应用也可以使用已打开的本地数据库中的缓存数据提前渲染页面；调用需要访问服务器的接口时，仍需等待登录 completion 成功并通过 `connectionStateDidChange` 确认已连接。数据库打开不表示会话、好友或群组数据已经同步完成；若配置了 `EMOptions#dataSyncType`，应在 `syncDataFinished` 成功后刷新相应本地数据。
 
 在发起登录前注册 `EMClientDelegate`，并在回调中处理数据库和连接状态：
 

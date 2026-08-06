@@ -244,7 +244,7 @@ EMClient.getInstance().fetchLoggedInDevicesFromServerWithToken(
 
 你需要先实现 `EMMultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
 
-若当前设备因同端设备数量达到上限而被踢下线，SDK 会通过 `EMConnectionListener#onLogout` 回调通知；当前设备在其他设备上的联系人、群组、消息话题和会话操作，则通过 `EMMultiDeviceListener` 的对应回调通知。聊天室不产生会话管理类多设备事件，但聊天室消息仍会同步。
+若当前设备因同端设备数量达到上限而被踢下线，SDK 会通过 `EMConnectionListener#onLogout` 回调通知；当前设备在其他设备上的好友、群组、消息话题和会话操作，则通过 `EMMultiDeviceListener` 的对应回调通知。聊天室不产生会话管理类多设备事件，但聊天室消息仍会同步。
 
 :::tip
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
