@@ -11,7 +11,9 @@
 | `audio` | 语音消息  |
 | `video` | 视频消息 |
 | `file` | 文件消息 |
-| `custom` | 自定义消息 |
+| `custom` | 自定义类型消息 |
+| `combine` | 合并消息 |
+| `markdown` | 流式消息 |
 
 ## 消息 body 内容介绍
 
@@ -28,9 +30,9 @@
 示例如下：
 
 ```json
-"body": {
-    "msg": "testmessages"
-    }
+{
+  "msg": "testmessages"
+}
 ```
 
 ### 位置消息
@@ -39,18 +41,18 @@
 
 | 参数   | 类型   | 描述                         |
 | :----- | :----- | :--------------------------- |
-| `lat`  | Long   | 位置的纬度。                 |
-| `lng`  | Long   | 位置的经度。                 |
+| `lat`  | double   | 位置的纬度。                 |
+| `lng`  | double   | 位置的经度。                 |
 | `addr` | String | 位置的地址描述。             |
 
 示例如下：
 
 ```json
-"body": {
-    "lat": "39.966",
-    "lng":"116.322",
+{
+    "lat": 39.966,
+    "lng": 116.322,
     "addr":"中国北京市海淀区中关村"
-  }
+}
 ```
 
 ### 透传消息
@@ -64,9 +66,9 @@
 示例如下：
 
 ```json
-"body":{
-    "action":"action1"
-  }
+{
+  "action":"action1"
+}
 ```
 
 ### 图片消息
@@ -87,7 +89,7 @@
 示例如下：
 
 ```json
-"body": {
+{
     "filename":"testimg.jpg",
     "secret":"VfXXXXNb_",
     "url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
@@ -95,7 +97,7 @@
       "width":480,
       "height":720
     }
-  }
+}
 ```
 
 ### 语音消息
@@ -116,12 +118,12 @@
 示例如下：
 
 ```json
-"body": {
+{
     "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
     "filename": "testaudio.amr",
     "length": 10,
     "secret": "HfXXXXCjM"
-  }
+}
 ```
 
 ### 视频消息
@@ -145,7 +147,7 @@
 示例如下：
 
 ```json
-"body": {
+{
     "filename" : "test.avi",
     "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
     "length" : 0,
@@ -153,7 +155,7 @@
     "file_length" : 58103,
     "thumb_secret" : "ZyXXXX2I",
     "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
-  }
+}
 ```
 
 ### 文件消息
@@ -173,11 +175,11 @@
 示例如下：
 
 ```json
-"body": {
+{
     "filename":"test.txt",
     "secret":"1-g0XXXXua",
     "url": "https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
-  }
+}
 ```
 
 ### 消息携带自定义扩展字段
@@ -207,7 +209,6 @@
 自定义类型消息格式示例如下：
 
 ```json
-"body":
 [
   {
   "customExts":

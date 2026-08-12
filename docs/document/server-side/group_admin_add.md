@@ -28,7 +28,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin    \
+curl -X POST https://XXXX/XXXX/XXXX/chatgroups/10XXXX85/admin    \
 -H 'Authorization: Bearer <YourAppToken>'   \
 -d '{"newadmin":"user1"}' 
 ```

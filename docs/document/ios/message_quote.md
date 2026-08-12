@@ -1,19 +1,21 @@
 # 消息引用
 
-消息引用是指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
+## 功能说明
 
-除了透传消息，各类发送成功的消息均支持该功能，发送失败的消息不支持该功能。
+消息引用是指用户回复某一条已发送消息，并在新消息中携带被引用消息的摘要信息，便于接收方理解回复上下文。
 
-对引用的消息进行回复时，你可以发送各种类型（除透传消息外）的消息。
+除透传消息外，各类发送成功的消息均可通过新消息的扩展字段携带引用信息。SDK 不提供专用的引用消息创建 API，也不会校验被引用原消息是否真实存在、是否属于当前会话，或是否确实为已发送消息。引用信息由业务侧作为新消息 `ext` 中的自定义字段传入，因此可传入任意字符串作为消息 ID。
+
+建议业务侧自行校验被引用消息 ID 是否属于当前会话，并同时在 `ext` 中保存 `msgPreview`、`msgSender`、`msgType` 等摘要字段。这样即使原消息已删除或本地未加载，也能正常展示引用内容。
 
 :::tip
-消息引用时，回复消息的长度为默认的消息长度限制，即消息内容和扩展字段的总和不超过 5 KB。
+`msgQuote` 是新消息 `ext` 中的业务自定义字段，需与其他扩展字段一起保持 JSON 可序列化，并满足消息发送时的整体大小限制。
 :::
 
-各类型的消息引用的 UI 展示示例如下表所示：
+各类型消息的引用 UI 展示示例如下：
 
-| 消息类型  | 原消息存在 | 原消息不存在 |
-| :--------- | :----- | :------- |
+| 消息类型 | 原消息存在 | 原消息不存在 |
+| :--- | :--- | :--- |
 | 文本消息 | ![img](/images/product/solution_common/message_reply/text_normal_mobile.png) | ![img](/images/product/solution_common/message_reply/text_no_mobile.png) |
 | 图片消息 | ![img](/images/product/solution_common/message_reply/image_normal_mobile.png)  | ![img](/images/product/solution_common/message_reply/image_no_mobile.png)|
 | 语音消息 | ![img](/images/product/solution_common/message_reply/voice_normal_mobile.png)| ![img](/images/product/solution_common/message_reply/voice_no_mobile.png)|
@@ -26,88 +28,110 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见各端 [快速开始](quickstart.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+ - 完成 SDK 初始化和登录，详见 [快速开始](quickstart.html)。
+ - 已具备基础的消息发送和接收能力。
+ - 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现过程
 
-为展示原消息的引用，需要在发送消息时，将原消息的信息传入新消息的拓展字段中。
+消息引用的实现方式如下：
 
-以下为扩展字段的数据结构的示例：
+1. 业务侧在发送回复消息前，获取被引用原消息的关键信息，并校验该消息是否属于当前会话。
+2. 创建新的 `EMChatMessage`，并将原消息摘要写入新消息 `ext` 中的 `msgQuote` 字段。
+3. 接收方收到新消息后，读取 `EMChatMessage#ext` 并解析 `msgQuote`，在消息列表中渲染引用区域。
+4. 如需支持点击引用区域跳转至原消息，可根据 `msgQuote` 中的 `msgID` 在本地消息列表中定位原消息。若原消息已删除或尚未加载，可使用摘要信息进行降级展示。
 
-```
-"msgQuote": {
-   "msgID": 原消息的 ID，字符串类型。
-   "msgPreview": 本地找不到原消息时的默认文本展示，字符串类型。
-   "msgSender": 原消息的发送方的用户 ID，字符串类型。
-   "msgType": 原消息类型，字符串类型。
+`msgQuote` 的数据结构由业务侧自行约定，可以参考以下结构：
+
+```json
+{
+  "msgQuote": {
+    "msgID": "原消息 ID",
+    "msgPreview": "原消息的预览内容",
+    "msgSender": "原消息发送方的用户 ID",
+    "msgType": "原消息类型"
+  }
 }
 ```
 
-在消息列表中展示时，可从新消息的拓展字段中提取上述 JSON 信息，拼接展示 "${msgSender}: ${messageAbstract}"。
+各字段说明如下：
 
-如需支持点击展示引用消息的区域，跳转至被引用的原消息。可根据上述 JSON 中的 `msgID` 字段，在消息列表中找到该消息进行跳转。
+- `msgID`：业务侧记录的被引用消息 ID。建议校验该 ID 是否属于当前会话，用于定位原消息。
+- `msgPreview`：被引用消息的预览内容，用于原消息无法找到时的降级展示。
+- `msgSender`：业务侧记录的被引用消息发送方用户 ID。
+- `msgType`：业务侧记录的被引用消息类型，用于按类型渲染引用摘要。
 
-如果被引用消息已经删除，可以提示 **引用内容不存在**。
+在消息列表中展示时，可以根据 `EMChatMessage#ext` 中 `msgQuote` 的信息组合引用摘要，例如 `${msgSender}: ${msgPreview}`。
+
+如需支持点击引用区域跳转至原消息，可以根据 `msgID` 在本地消息列表中定位该消息，然后滚动到对应位置并高亮展示。如果被引用消息已被删除或尚未加载到本地消息列表，可以展示 `msgPreview`，或提示 **引用内容不存在**。
 
 ### 发送引用的消息
 
 以回复文本消息为例，发送引用消息的过程如下：
 
-```swift
-let textBody = EMTextMessageBody(text: "hi")
-        let ext = ["msgQuote": [
-            "msgID": <#quoted messageId#>
-            "msgPreview": <#quoted message text#>
-            "msgSender": <#quoted message senderId#>
-            "msgType": "txt"
-            ]
-        ]
-        let message = EMChatMessage(conversationID: "userId", body: textBody, ext: ext)
-        EMClient.shared().chatManager?.send(message, progress: nil, completion: { msg, err in
-            
-        })
+```objectivec
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"好的，收到！"];
+NSDictionary *quote = @{
+    @"msgID": @"original-message-id",
+    @"msgPreview": @"原消息内容预览",
+    @"msgSender": @"user1",
+    @"msgType": @"text"
+};
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId
+                                                                   body:body
+                                                                    ext:@{@"msgQuote": quote}];
+
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
+    // 处理发送结果。
+}];
 ```
 
 ### 接收方解析收到的消息
 
-接收方收到消息时，通过解析 `ext`，检查消息是否是引用消息。
+接收方收到消息后，可以检查 `EMChatMessage#ext` 中是否包含 `msgQuote`。若包含，则从 `ext[@"msgQuote"]` 读取并解析引用信息，然后刷新 UI。
 
-```swift
-    func handleQuotedMessage(_ message: EMChatMessage) {
-        if let ext = message.ext {
-            if let quotedInfo = ext["msgQuote"] as? [String: AnyObject] {
-                // 读取 msgQuote 中的源消息信息
-                if let quotedMessageId = quotedInfo["msgID"] as? String,
-                   let msgPreview = quotedInfo["msgPreview"] as? String,
-                   let msgSender = quotedInfo["msgSender"] as? String,
-                   let msgType = quotedInfo["msgType"] as? String {
-                   // 消息引用了其他消息，需要更新 UI
-                }
-            }
-        }
+```objectivec
+- (void)handleQuotedMessage:(EMChatMessage *)message {
+    NSDictionary *quote = message.ext[@"msgQuote"];
+    if (![quote isKindOfClass:[NSDictionary class]]) {
+        return;
     }
-func messagesDidReceive(_ aMessages: [EMChatMessage]) {
-    for msg in aMessages {
-         handleQuotedMessage(msg)
+
+    NSString *quotedMessageId = quote[@"msgID"];
+    NSString *quotedPreview = quote[@"msgPreview"];
+    NSString *quotedSender = quote[@"msgSender"];
+    NSString *quotedType = quote[@"msgType"];
+    // 使用引用信息更新 UI。
+}
+
+- (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
+    for (EMChatMessage *message in messages) {
+        [self handleQuotedMessage:message];
     }
 }
 ```
 
+不再需要监听消息时，应移除消息代理：
+
+```objectivec
+[[EMClient sharedClient].chatManager removeDelegate:self];
+```
+
 ## 常见问题
 
-1. Q: 被引用消息不存在时，如何显示？ 
-   A: 可以显示 `msgPreview` 内容，也可以显示**引用内容不存在**。
-   
-2. Q: 跳转到被引用消息时，如果被引用消息加载到当前消息的条数太多，怎么办？
-   A: 这种情况下，将当前消息与被引用的消息之间的所有消息都展示到 UI 会导致内存占用太多，你需要设置一个加载消息数量的阈值，超过该阈值就不再跳转。
+1. Q: SDK 是否提供专用的引用消息创建 API？
+   A: 不提供。当前通过新消息的扩展字段 `msgQuote` 实现引用消息。
 
+2. Q: 被引用消息不存在时，如何显示？
+   A: 可以显示 `msgPreview` 内容，也可以显示 **引用内容不存在**。
 
+3. Q: 跳转到被引用消息时，如果当前消息与被引用消息之间的消息数量过多，怎么办？
+   A: 如果一次性将两条消息之间的全部消息加载到 UI，可能会占用较多内存。建议设置单次加载数量阈值；超过阈值时停止继续加载，或不执行跳转。
 
+## 接口列表
 
-
-
-
-
-
-
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`initWithConversationID`](#发送引用的消息) | `EMChatMessage` | 创建用于回复原消息的消息。 |
+| [`ext`](#接收方解析收到的消息) | `EMChatMessage` | 获取消息扩展字段。 |
+| [`sendMessage`](#发送引用的消息) | `IEMChatManager` | 发送携带引用信息的消息。 |

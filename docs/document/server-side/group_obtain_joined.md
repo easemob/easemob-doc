@@ -27,7 +27,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
+curl -X GET 'https://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 -H 'Authorization: Bearer  <YourAppToken>'
 ```
 
@@ -84,7 +84,7 @@ curl -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 |  - `maxusers`     | Int | 群组最大成员数（包括群主）。      |
 |  - `created `     | Long | 群组创建时间戳。      |
 
-其他参数及说明详见 [公共参数](#公共参数)。
+其他参数及说明如下。
 
 | 参数      | 类型     | 描述     |
 |:-------------------------|:-------|:----------------------------|

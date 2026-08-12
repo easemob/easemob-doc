@@ -1,14 +1,6 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
-  {
-    text: 'V4.x',
-      children: [
-        { text: 'V4.x', link: 'https://doc.easemob.com/product/introduction.html'},
-        { text: 'V3.x', link: 'https://docs-im.easemob.com/ccim/intro'},
-        { text: 'V2.x', link: 'https://docs-im.easemob.com/start/start'}
-      ]
-  },
   { text: '产品介绍', link: '/product/introduction.html' },
   {
     text: 'UIKit',
@@ -159,12 +151,12 @@ export const zhNavbar = navbar([
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/document/applet/beginner_guide.html'
+            link: '/document/web/integration_applet.html'
           },
           {
             text: 'uni-app',
             icon: '/icon-uni-app.svg',
-            link: '/document/applet/uniapp.html'
+            link: '/document/web/uniapp.html'
           },
         ]
       },

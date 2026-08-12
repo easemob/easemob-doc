@@ -12,7 +12,7 @@
 
 - **流式消息**：将一条完整消息拆分为多个分片，并按顺序逐步发送和接收的消息传输方式。
 - **消息分片**：流式消息中的单个数据片段。多个分片按顺序组合后构成一条完整消息。
-- **当前分片内容**：当前回调中接收到的单个分片内容，可通过 `message.streamChunk.chunk` 属性获取。
+- **当前分片内容**：当前回调中接收到的单个分片内容，可通过 `message.streamChunk.text` 属性获取。
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `EMTextMessageBody` 的 `text` 属性获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `EMStreamChunk` 的 `status` 属性获取。
 - **完成原因码**：流式消息结束时的业务原因标识，可通过 `EMStreamChunk` 的 `finishReason` 属性获取。
@@ -25,13 +25,12 @@
 - 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：iOS SDK 仅支持接收，不支持发送。
 - 消息标识：`msgId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#使用限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 已升级 SDK 至 v4.19.0 或以上版本。
 - 已完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 已了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 
@@ -63,7 +62,7 @@ final class ChatViewController: UIViewController, EMChatManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        EMChatClient.shared().chatManager?.add(self, delegateQueue: nil)
+        EMClient.shared().chatManager?.add(self, delegateQueue: nil)
     }
 
     func onStreamMessagesReceived(_ messages: [EMChatMessage]) {
@@ -85,7 +84,7 @@ private func handleStreamChunk(_ message: EMChatMessage) {
     }
 
     // 当前分片内容
-    let incrementText = chunk.chunk
+    let incrementText = chunk.text
 
     // 当前传输状态
     let status = chunk.status
@@ -116,14 +115,14 @@ private func handleStreamChunk(_ message: EMChatMessage) {
 
 | 属性 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `chunk` | String | 获取当前分片的文本内容。 |
+| `text` | String | 获取当前分片的文本内容。 |
 | `status` | EMStreamChunkStatus | 获取当前分片对应的流式消息传输状态。 |
 | `customType` | String | 获取自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
 | `errorCode` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `finishReason` | Int | 获取完成原因码。默认值 `0` 表示无异常。 |
 
 :::tip
-- `chunk` 获取的是当前分片的内容。
+- `text` 获取的是当前分片的内容。
 - `EMTextMessageBody.text` 获取的是从首个分片到当前分片的累计合并内容。
 - 建议界面展示优先使用累计合并内容。如需实现动画效果，可结合当前分片内容进行展示。
 :::
@@ -131,7 +130,7 @@ private func handleStreamChunk(_ message: EMChatMessage) {
 ```swift
 private func handleStreamChunk(_ message: EMChatMessage) {
     if let chunk = message.streamChunk {
-        let incrementText = chunk.chunk
+        let incrementText = chunk.text
         let status = chunk.status
     }
 }
@@ -210,7 +209,7 @@ UI 使用建议如下：
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
 
 ## 常见问题
 
@@ -218,10 +217,10 @@ UI 使用建议如下：
 
 不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，iOS SDK 只负责接收。
 
-#### 2. `chunk` 和 `text` 有何区别？
+#### 2. `text` 和消息体文本有何区别？
 
-- `chunk`：当前分片内容。
-- `text`：从首个分片到当前分片的累计合并内容。
+- `EMStreamChunk.text`：当前分片内容。
+- `EMTextMessageBody.text`：从首个分片到当前分片的累计合并内容。
 
 通常 UI 展示应以 `text` 为准。
 
@@ -240,3 +239,10 @@ UI 使用建议如下：
 #### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI。在 iOS SDK 中，可使用 `message.messageId` 作为对应标识，避免将同一条流式消息误显示为多条消息。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`streamChunk`](#核心概念) | `EMChatMessage` | 获取当前消息分片 |
+| [`status`](#核心概念) | `EMStreamChunk` | 获取流式消息状态与内容 |

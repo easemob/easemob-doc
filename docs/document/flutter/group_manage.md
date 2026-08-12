@@ -52,6 +52,9 @@
 
 用户可以调用 `EMGroupManager#createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组头像 URL、群组成员和建群原因。
 
+- 群组名称长度不能超过 255 个字符。
+- 群组描述长度不能超过 2048 个字符。
+
 示例代码如下：
 
 ```dart
@@ -60,14 +63,15 @@ EMGroupOptions groupOptions = EMGroupOptions(
   inviteNeedConfirm: true,
   maxCount: 200,
 );
-
 String groupName = "newGroup";
 String groupDesc = "group desc";
 String groupAvatarUrl = "url";
 try {
   await EMClient.getInstance.groupManager.createGroup(
+    // 群组名称长度不能超过 255 个字符。
     groupName: groupName,
     avatarUrl: groupAvatarUrl,
+    // 群组描述长度不能超过 2048 个字符。
     desc: groupDesc,
     options: groupOptions,
   );

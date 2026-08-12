@@ -24,7 +24,7 @@ logPath = EMClient.getInstance().compressLogs();
 
 #### 从手机或者模拟器获取日志文件
 
-前提条件
+确保满足以下条件：
 
 - 确保电脑上安装了 adb 工具，可以参考 [SDK Platform Tools](https://developer.android.com/studio/releases/platform-tools)
 - 手机连接到电脑，adb 的使用可以参考：[Android Debug Bridge]( https://developer.android.com/studio/command-line/adb)
@@ -60,4 +60,4 @@ App_Sandbox_path/Application Support/HyphenateSDK/easemobLog
 
 2. 对于 Web 来说，消息重发机制如下：
 
-发送消息时如果  WebSocket 已经断开正在进行重连时，重新连接后会重新发送消息；若 WebSocket  断开时发送消息，SDK 会提示网络断开连接导致消息发送失败的错误，即错误码 510 `MESSAGE_WEBSOCKET_DISCONNECTED`。
+发送消息时，若客户端处于重连中或 WebSocket 已断开，发送请求会立即失败，SDK 抛出 `MessageSendError`，错误码为 300 `MESSAGE_NOT_CONNECTED`。当前 Web SDK V5 不会缓存该次发送请求并在重连成功后自动重发。应用可监听 `onConnected` 事件，在连接恢复后自行重试发送。若消息已发送但未在规定时间内收到服务器 ACK，则 SDK 抛出错误码 301 `MESSAGE_ACK_TIMEOUT`。

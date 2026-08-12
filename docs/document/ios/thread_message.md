@@ -1,10 +1,12 @@
 # 管理消息话题中的消息
 
-<Toc />
-
-消息话题中的消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。使用消息话题中的消息功能前，你需要联系商务开通。
+消息话题中的消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。
 
 本文介绍环信即时通讯 IM iOS SDK 如何发送、接收以及撤回消息话题中的消息。
+
+## 功能开通
+
+使用消息话题中的消息功能前，你需要联系商务开通消息话题功能。
 
 ## 技术原理
 
@@ -22,20 +24,16 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 3.9.3 以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 iOS SDK 初始化，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解消息话题和消息话题成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 已联系商务开通消息话题功能。
 
-## 实现方法
-
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
-
-### 发送消息话题中的消息
+## 发送消息话题中的消息
 
 发送消息话题中的消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送消息话题中的消息需要指定标记 `isChatThread` 为 `YES`。
 
-单设备登录时，消息话题所属群组的所有成员会收到 `EMChatThreadManagerDelegate#onChatThreadUpdated` 回调。
+单设备登录时，消息话题所属群组的所有成员会收到 `onChatThreadUpdate` 回调。
 
 示例代码如下：
 
@@ -46,7 +44,7 @@ NSString *chatThreadId = self.currentConversation.conversationId;
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:chatThreadId from:from to:chatThreadId body:aBody ext:aExt];
 // 是否需要消息已读回执。
 if([aExt objectForKey:MSG_EXT_READ_RECEIPT]) {
-    message.isNeedGroupAck = YES;
+    message.isNeedReadReceipt = YES;
 }
 message.chatType = (EMChatType)self.conversationType;
 message.isChatThread = self.isChatThread;
@@ -56,11 +54,11 @@ message.isChatThread = self.isChatThread;
 }];
 ```
 
-### 接收消息话题中的消息
+## 接收消息话题中的消息
 
 接收消息的具体逻辑，请参考 [接收消息](message_receive.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-消息话题成员可以设置消息监听回调 `EMManagerDelegate#messagesDidReceive` 对消息话题中的消息的接收进行监听。
+消息话题成员可以设置消息监听回调 `messagesDidReceive` 对消息话题中的消息的接收进行监听。
 
 示例代码如下：
 
@@ -75,11 +73,11 @@ message.isChatThread = self.isChatThread;
 [[EMClient sharedClient].chatManager removeDelegate:self];
 ```
 
-### 撤回消息话题中的消息
+## 撤回消息话题中的消息
 
 撤回消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-消息话题成员可以设置消息监听回调 `EMChatManagerDelegate#messagesInfoDidRecall` 对消息话题中的消息的撤回进行监听。
+消息话题成员可以设置消息监听回调 `messagesInfoDidRecall` 对消息话题中的消息的撤回进行监听。
 
 示例代码如下：
 
@@ -88,25 +86,25 @@ message.isChatThread = self.isChatThread;
 {}
 ```
 
-### 获取消息话题中的消息
+## 获取消息话题中的消息
 
 从服务器还是本地数据库获取消息话题中的消息取决于你的生产环境。
 
-你可以通过 `EMConversation#isChatThread` 属性判断当前会话是否为消息话题会话。
+你可以通过 `isChatThread` 属性判断当前会话是否为消息话题会话。
 
 ### 从服务器获取单个消息话题中的消息 (消息漫游)
 
-调用 `asyncFetchHistoryMessagesFromServer` 方法从服务器获取消息话题中的消息。从服务器获取消息话题中的消息与获取群组消息的唯一区别为前者需传入消息话题 ID，后者需传入群组 ID。
+调用 `fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:` 方法从服务器获取消息话题中的消息。从服务器获取消息话题中的消息与获取群组消息的唯一区别为前者需传入消息话题 ID，后者需传入群组 ID。
 
 ```objectivec
-[EMClient.sharedClient.chatManager asyncFetchHistoryMessagesFromServer:@"threadId" conversationType:EMConversationTypeGroupChat startMessageId:@"" fetchDirection:EMMessageFetchHistoryDirectionUp pageSize:20 completion:^(EMCursorResult<EMChatMessage *> * _Nullable aResult, EMError * _Nullable aError) {
+[EMClient.sharedClient.chatManager fetchMessagesFromServerBy:@"threadId" conversationType:EMConversationTypeGroupChat cursor:nil pageSize:20 option:nil completion:^(EMCursorResult<EMChatMessage *> * _Nullable aResult, EMError * _Nullable aError) {
             
     }];
 ```
 
-#### 从本地获取单个消息话题的消息
+### 从本地获取单个消息话题的消息
 
-调用 `EMChatManager#getAllConversations` 方法只能获取单聊或群聊会话。要获取本地单个消息话题会话中的消息，参考以下示例代码：
+调用 `getAllConversations` 方法只能获取单聊或群聊会话。要获取本地单个消息话题会话中的消息，参考以下示例代码：
 
 ```objectivec
 // 需设置会话类型为 `EMConversationTypeGroupChat` 和 `isThread` 为 `YES`
@@ -116,3 +114,12 @@ EMConversation* conversation = [EMClient.sharedClient.chatManager getConversatio
             
 }];
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`sendMessage`](#发送消息话题中的消息) | `EMChatManager` | 发送带 `isChatThread` 标记的消息话题消息。 |
+| [`fetchMessagesFromServerBy`](#从服务器获取单个消息话题中的消息-消息漫游) | `EMChatManager` | 分页从服务器获取指定消息话题的历史消息。 |
+| [`getConversation`](#从本地获取单个消息话题的消息) | `EMChatManager` | 获取本地消息话题会话。 |
+| [`loadMessagesStartFromId`](#从本地获取单个消息话题的消息) | `EMConversation` | 从本地会话加载消息话题消息。 |

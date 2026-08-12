@@ -2,11 +2,14 @@ import path from "node:path"
 import fs from "node:fs"
 
 const getSubDirectories = (dir) => fs.readdirSync(dir).filter(item => fs.statSync(path.join(dir, item)).isDirectory())
+/** 默认文档根目录：V5 使用 docs/document */
 const DOC_PATH = path.resolve(__dirname, '../../document')
 const platformList = getSubDirectories(DOC_PATH)
 
-const documentSidebar = [
+/** V5 独立侧栏配置，可与 V4（document-v4.ts）分叉演进 */
+const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
@@ -14,7 +17,17 @@ const documentSidebar = [
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
-  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'web', 'harmonyos', 'unity', 'windows']},
+  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'harmonyos', 'unity', 'windows']},
+  {
+    text: '集成 SDK',
+    collapsible: true,
+    children: [
+      { text: '导入 SDK（Web）', link: 'integration.html' },
+      { text: '集成 SDK（小程序）', link: 'integration_applet.html' },
+      { text: '集成 SDK（uni-app）', link: 'uniapp.html' },
+    ],
+    only: ['web']
+  },
   { text: '添加依赖', link: 'integration.html', only: ['flutter', 'react-native']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
@@ -33,7 +46,7 @@ const documentSidebar = [
     children: [
       { text: '用户关系', link: 'user_relationship.html' },
       { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos']},
+      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'web', 'harmonyos']},
       { text: '在线状态订阅', link: 'presence.html' },
     ],
     except: ['server-side', 'applet']
@@ -45,14 +58,14 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'flutter', 'react-native'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
-      { text: '搜索本地消息', link: 'message_search_local.html', except: ['web']}, 
+      { text: '搜索本地消息', link: 'message_search_local.html', except: ['web'] },
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
       { text: '消息表情回复', link: 'reaction.html' },
-      { text: '转发消息', link: 'message_forward.html', except: ['web']},
+      { text: '转发消息', link: 'message_forward.html'},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
       { text: '更新消息', link: 'message_update.html', except: ['web']},
       { text: '删除消息', link: 'message_delete.html' },    
@@ -72,8 +85,8 @@ const documentSidebar = [
       { text: '会话介绍', link: 'conversation_overview.html' },
       { text: '会话列表', link: 'conversation_list.html' },
       { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-      { text: '会话已读回执', link: 'conversation_receipt.html' },
-      { text: '会话未读数', link: 'conversation_unread.html', except: ['web'] },
+      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter', 'harmonyos','react-native','unity','windows'] },
+      { text: '会话未读数', link: 'conversation_unread.html'},
       { text: '置顶会话', link: 'conversation_pin.html' },
       { text: '会话标记', link: 'conversation_mark.html' },
       { text: '删除会话', link: 'conversation_delete.html' },
@@ -87,7 +100,7 @@ const documentSidebar = [
       { text: '群组概述', link: 'group_overview.html' },
       { text: '创建和管理群组', link: 'group_manage.html' },
       { text: '管理群组成员', link: 'group_members.html' },
-      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos'] },
+      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'web', 'harmonyos'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
       { text: '管理消息话题', link: 'thread.html', except: ['harmonyos'] },
       { text: '管理消息话题中的消息', link: 'thread_message.html', except: ['harmonyos'] }
@@ -146,6 +159,15 @@ const documentSidebar = [
         { text: '设置推送模板', link: 'push/push_template.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
         { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
         { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+        {
+          text: 'uni-app 离线推送',
+          collapsible: true,
+          children: [
+            { text: '使用推送插件', link: 'push/uniapp_push.html' },
+            { text: '集成 FCM', link: 'push/uniapp_push_fcm.html' },
+          ],
+          only: ['web']
+        },
         { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
         { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
       ],
@@ -163,7 +185,9 @@ const documentSidebar = [
       { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
+      { text: 'uni-app 构建 App 与小程序', link: 'uniappnativeapp.html', only: ['web'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
+      { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
     ],
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
@@ -218,6 +242,7 @@ const documentSidebar = [
           { text: '接收流式消息', link: 'message_stream_receive.html' },
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
+          { text: '搜索消息', link: 'message_search_server.html' },
           { text: '消息回执', link: 'message_receipt.html' }, 
           { text: '消息表情回复', link: 'reaction.html' },
           { text: '编辑消息', link: 'message_modify.html' },
@@ -225,6 +250,7 @@ const documentSidebar = [
           { text: '定向消息', link: 'message_target.html' }, 
           { text: '消息扩展', link: 'message_extension.html' },    
           { text: '置顶消息', link: 'message_pin.html' }, 
+          { text: '翻译消息', link: 'message_translation.html' },
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
           { text: '消息审核（举报）', link: 'moderation.html'},      
         ],
@@ -958,11 +984,11 @@ const documentSidebar = [
   },
 ]
 
-function buildDocSidebar() {
+function buildDocV5Sidebar() {
   const result = {}
   platformList.forEach(platform => {
     const key = `/document/${platform}/`
-    result[key] = documentSidebar.map(sidebar => handleSidebarItem(platform, sidebar)).filter(s => s)
+    result[key] = documentV5Sidebar.map(sidebar => handleSidebarItem(platform, sidebar)).filter(s => s)
   });
   return result
 }
@@ -1036,7 +1062,5 @@ function handleSidebarItem(platform, sidebar) {
   }
 }
 
-export const DOC_SIDEBAR = buildDocSidebar()
-
-// console.dir(buildDocSidebar(), {depth: null})
+export const DOC_V5_SIDEBAR = buildDocV5Sidebar()
 

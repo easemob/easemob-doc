@@ -1,6 +1,6 @@
 # 群组 @ 消息
 
-群组 @ 消息指在群组聊天中，用户可以 @ 单个、多个或所有成员，发送消息。群组中的每个成员均可使用 @ 功能，而且可以 @ 群所有成员。
+群组 @ 消息是指在群聊中，用户可以 @ 单个、多个或所有群成员并发送消息。群组中的每个成员均可使用 @ 功能，也可以 @ 群内所有成员。
 
 :::tip
 目前，该功能只支持文本消息和表情。
@@ -8,12 +8,12 @@
 
 例如，该功能的 UI 实现如下图所示：
 
-1. 在输入框输入 "@" 字符后，选择要 @ 的群成员。
-2. 选择群成员后，返回聊天界面，编辑消息，然后发送。
-3. 如果有消息 @ 我，会收到会话更新，例如，“Somebody@You”。
-4. 打开会话页面，查看消息。
+1. 在输入框中输入“@”字符，选择要 @ 的群成员。
+2. 选择群成员后返回聊天页面，编辑并发送消息。
+3. 当前用户被 @ 时，在会话列表或消息页面显示相应提示，例如，“Somebody@You”。
+4. 用户进入会话页面查看消息。
 
-UI 实现示例图如下所示：
+UI 实现示例图如下：
 
 ![img](/images/product/solution_common/group_mention/group_@_mobile.png)
 
@@ -26,75 +26,131 @@ UI 实现示例图如下所示：
 
 ## 实现过程
 
-在群组中，@ 某人发送消息与发送普通消息没有区别，只是被 @ 的用户在 UI 上显示会有不同。该功能可以通过扩展消息实现：
+群组 @ 消息与普通群消息的发送流程相同。@ 功能由应用通过消息扩展字段实现，SDK 不会自动生成 @ 提示或处理相关 UI。
 
-1. 发送方将要 @ 的用户的用户 ID 通过扩展字段添加到消息，并将消息发送到群组。
-2. 群组成员收到消息时，检查对应的扩展字段是否存在。若存在，检查当前登录的用户 ID 是否包含在扩展字段中。
-3. 若包含，需要对被 @ 的用户在 UI 上进行特殊处理，显示出相应的提示信息，如“[Somebody@You]”。若不包含，表明用户没有被 @，则 UI 无需处理。
+实现流程如下：
 
-群组 @ 消息的扩展数据结构如下：
+1. 发送方将被 @ 成员的用户 ID 写入消息扩展字段 `em_at_list`，然后发送群聊消息。
+2. 接收方在 `messagesDidReceive` 回调中获取消息并解析 `ext`。
+3. 如果 `em_at_list` 包含当前登录用户的用户 ID，或者其值为 `ALL`，应用应在 UI 中显示相应的 @ 提示；否则按普通群消息处理。
 
-- @ 单个或多个群组成员："em_at_list": [user1, user2, user3]
-- @ 群全体成员："em_at_list":"All"
+`em_at_list` 的数据格式如下：
+
+- @ 单个或多个群成员：值为用户 ID 数组，例如 `"em_at_list": ["user1", "user2"]`。
+- @ 群内所有成员：值为字符串 `ALL`，即 `"em_at_list": "ALL"`。
+
+:::tip
+被 @ 成员的用户 ID 不包含“@”前缀。发送方与接收方必须约定一致的字段名、字段值类型和 `ALL` 字符串。
+:::
 
 ### 发送消息
 
-发送方 @ 用户发送消息的过程如下示例代码所示。
+发送方创建 `EMChatMessage`，将被 @ 成员的用户 ID 写入 `ext`，将 `chatType` 设置为群聊，然后发送消息。
 
 ```swift
-let textBody = EMTextMessageBody(text: "@userId1 你好")
-// @ 指定用户的消息构造如下。如果要 @ 所有人，ext 可以设置为 ["em_at_list": "All"]。
-let msg = EMMessage(conversationID: "groupId", body: textBody, ext: ["em_at_list": ["userId1"]])
-// 指定聊天类型为群组。
-msg.chatType = .groupChat
-// 发送消息
-EMClient.shared().chatManager?.send(msg, progress: nil, completion: { msg, err in
-    if err == nil {
-        print("send success")
+let groupId = "groupId"
+let mentionedUserIds = ["user1", "user2"]
+let body = EMTextMessageBody(text: "@user1 @user2 你好")
+
+// @ 单个或多个群成员时，em_at_list 的值为用户 ID 数组。
+let ext: [String: Any] = ["em_at_list": mentionedUserIds]
+let message = EMChatMessage(
+    conversationID: groupId,
+    body: body,
+    ext: ext
+)
+message.chatType = .groupChat
+
+EMClient.shared().chatManager?.send(
+    message,
+    progress: nil
+) { _, error in
+    if let error = error {
+        print("群组 @ 消息发送失败：\(error.errorDescription ?? "unknown error")")
+        return
     }
-})
+    print("群组 @ 消息发送成功")
+}
+```
+
+若要 @ 群内所有成员，将 `em_at_list` 设置为字符串 `ALL`：
+
+```swift
+let ext: [String: Any] = ["em_at_list": "ALL"]
 ```
 
 ### 接收消息
 
-接收方收到消息时，通过解析消息扩展字段 `ext`，检查消息是否 @ 了自己，过程如下。
+接收方实现 `messagesDidReceive`，仅解析群聊文本消息的 `em_at_list` 扩展字段，并判断消息是否 @ 当前用户。
 
 ```swift
-func handleMentionedMessage(_ message: EMChatMessage) {
-    let atListInfo = message.ext?["em_at_list"]
-        if let atListInfo = atListInfo as? String, 
-            atListInfo.lowercased() == "all" {
-            // 消息 @ 所有人，需要更新 UI。
+final class GroupMentionHandler: NSObject, EMChatManagerDelegate {
+    func startObserving() {
+        EMClient.shared().chatManager?.add(self, delegateQueue: nil)
+    }
+
+    func stopObserving() {
+        EMClient.shared().chatManager?.remove(self)
+    }
+
+    func messagesDidReceive(_ messages: [EMChatMessage]) {
+        for message in messages {
+            guard message.chatType == .groupChat,
+                  message.body.type == .text else {
+                continue
+            }
+
+            handleMention(in: message)
         }
-        if let atListInfo = atListInfo as? [String],
-           let currentUserId = EMClient.shared().currentUsername,
-           atListInfo.contains(currentUserId) {
-            // 消息 @ 自己，需要更新 UI。
+    }
+
+    private func handleMention(in message: EMChatMessage) {
+        guard let mentionValue = message.ext?["em_at_list"] else {
+            return
         }
-}
-func messagesDidReceive(_ aMessages: [EMChatMessage]) {
-    for msg in aMessages {
-        if msg.chatType == .groupChat,
-           msg.body.type == .text {
-            handleMentionedMessage(msg)
+
+        // em_at_list 为字符串 ALL 时，表示 @ 群内所有成员。
+        if let mentionTarget = mentionValue as? String,
+           mentionTarget.caseInsensitiveCompare("ALL") == .orderedSame {
+            // 更新 UI，显示“@所有人”等提示。
+            return
         }
+
+        // em_at_list 为字符串数组时，判断是否包含当前登录用户。
+        guard let mentionedUserIds = mentionValue as? [String],
+              let currentUserId = EMClient.shared().currentUsername,
+              mentionedUserIds.contains(currentUserId) else {
+            return
+        }
+
+        // 更新 UI，显示“有人@我”等提示。
     }
 }
 ```
 
+调用 `startObserving` 注册消息代理。页面或组件销毁且不再需要接收消息回调时，调用 `stopObserving` 移除同一个代理实例，避免重复回调。
+
 ## 常见问题
 
-1. Q：@ 群所有人时为何发消息失败？
+1. Q：@ 群内所有成员时，为何没有显示 @ 提示？
 
-   A：可能是 `ALL` 的拼写错误，比较时可兼容处理先统一转为小写或者大写。
+   A：请确认 `em_at_list` 的值是字符串 `ALL`。@ 功能由应用通过消息扩展实现；字段名、字段值类型或拼写不一致通常不会影响普通消息发送，但会导致接收方无法识别 @ 状态。接收方比较 `ALL` 时可以忽略大小写。
 
-2. Q：@ 多人与 @ 所有人有什么区别？  
+2. Q：@ 多个成员与 @ 所有成员有什么区别？
 
-   A：设置 `ext` 时，若 @ 单个、多个群成员，字段的值为要 @ 的用户的用户 ID 数组；@ 所有人时，字段值为 `ALL` 字符串。
+   A：@ 单个或多个成员时，`em_at_list` 的值为被 @ 成员的用户 ID 数组；@ 所有成员时，其值为字符串 `ALL`。
 
+3. Q：SDK 是否会自动显示“有人@我”提示？
 
+   A：不会。SDK 负责传输消息及其扩展字段，应用需要在收到消息后解析 `ext`，并自行更新会话列表或消息页面的 UI。
 
+## 接口列表
 
-
-
-
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`initWithConversationID`](#发送消息) | `EMChatMessage` | 创建消息，并通过 `ext` 携带被 @ 成员的用户 ID 数组或字符串 `ALL`。 |
+| [`chatType`](#发送消息) | `EMChatMessage` | 设置消息的会话类型；群组 @ 消息应设置为 `EMChatTypeGroupChat`。 |
+| [`sendMessage`](#发送消息) | `IEMChatManager` | 发送群组 @ 消息。 |
+| [`addDelegate`](#接收消息) / [`removeDelegate`](#接收消息) | `IEMChatManager` | 注册或移除消息代理。 |
+| [`ext`](#接收消息) | `EMChatMessage` | 获取消息扩展字段并读取 `em_at_list`。 |
+| [`currentUsername`](#接收消息) | `EMClient` | 获取当前登录用户的用户 ID。 |

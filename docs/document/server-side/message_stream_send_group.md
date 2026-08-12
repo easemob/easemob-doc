@@ -57,7 +57,7 @@ POST https://{host}/{org_name}/{app_name}/stream_message/chatgroup
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
+curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -77,7 +77,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 - 发送第二个消息分片：
 
 ```bash
-curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
+curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -205,7 +205,7 @@ curl -L 'http://XXXX/XXXX/XXXX/stream_message/chatgroup' \
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储)         | 是 | 
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储)         | 是 |
 
 
 

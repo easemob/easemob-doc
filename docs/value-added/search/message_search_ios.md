@@ -4,7 +4,7 @@
 
 服务端消息搜索用于按关键词从服务端搜索当前用户可见的历史消息，适用于全局消息搜索、会话内搜索、按消息类型过滤搜索以及按时间范围检索消息等场景。
 
-iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageNum:completion:` 方法进行服务端消息搜索。该接口支持以下功能：
+iOS SDK 提供 `searchMessagesFromServerWithOption` 方法进行服务端消息搜索。该接口支持以下功能：
 
 - 支持使用一个或多个关键词搜索历史消息，并设置多关键词匹配关系。
 - 支持按指定会话、消息类型和消息发送时间范围筛选结果。
@@ -34,7 +34,7 @@ iOS SDK 提供 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageN
 
 ### 调用方法
 
-你可以创建 `EMMessageSearchOption` 对象设置搜索条件，然后调用 `IEMChatManager#searchMessagesFromServerWithOption:pageSize:pageNum:completion:` 从服务端异步搜索历史消息。
+你可以创建 `EMMessageSearchOption` 对象设置搜索条件，然后调用 `searchMessagesFromServerWithOption` 从服务端异步搜索历史消息。
 
 #### 搜索条件和内容
 

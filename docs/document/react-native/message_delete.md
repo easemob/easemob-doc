@@ -53,7 +53,8 @@ ChatClient.getInstance()
 多设备情况下，登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
-若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
+1. 若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
+2. 聊天室漫游消息默认关闭。若要使用该功能需，需将 SDK 升级至 1.4.0 或以上版本并联系环信商务开通。 
 :::
 
 示例代码如下：

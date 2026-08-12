@@ -4,7 +4,7 @@
 
 - 将单个聊天室管理员移出聊天室管理员列表，即将聊天室管理员降为普通聊天室成员。
 - 移除聊天室管理员会触发发送后回调，详见 [移除聊天室管理员事件](callback_group_room_admin.html)。
-- 关于聊天室成员的角色，详见 [聊天室成员角色说明](chatroom_member_obtain.html#聊天室成员角色)。
+- 关于聊天室成员的角色，详见 [聊天室成员角色说明](chatroom_member_list_obtain.html)。
 
 ## 调用频率上限
 

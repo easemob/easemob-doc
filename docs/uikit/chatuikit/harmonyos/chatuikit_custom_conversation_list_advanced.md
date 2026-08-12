@@ -379,7 +379,7 @@ struct CustomConvListPage {
 
 #### 完全自定义会话列表
 
-**步骤 1 创建自定义会话条目组件**
+**步骤 1： 创建自定义会话条目组件**
 
 使用 `@Builder` 定义会话条目的完整 UI 布局，包括头像、会话名称、最后一条消息、未读数、置顶与免打扰标记等。通过 `conversation` 参数（`ChatKitConversation`）获取会话数据进行渲染。时间戳使用 `formatConversationDate` 格式化，最后一条消息内容使用 `ChatConvInfoManager.getInstance().getLatestMessageContent()` 获取。
 
@@ -557,7 +557,7 @@ export interface ConversationItemProvider {
 1. 创建自定义 `ViewModel` 类。
 2. 在页面中使用自定义 `ViewModel`。
 
-**步骤 1 创建自定义 ViewModel 类**
+**步骤 1： 创建自定义 ViewModel 类**
 
 继承 `ConvListViewModel`，按需重写 `aboutToAppear`、`pinConversation`、`muteConversation`、`deleteConversation`、`searchConversations` 等方法，以扩展或拦截会话列表的加载与操作逻辑。
 

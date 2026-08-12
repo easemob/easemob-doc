@@ -1,4 +1,4 @@
-﻿# 设置推送翻译
+# 设置推送翻译
 
 如果用户启用 [自动翻译](/value-added/translation/message_translation_ios.html) 功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
 

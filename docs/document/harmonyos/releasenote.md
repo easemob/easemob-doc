@@ -169,7 +169,7 @@
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
 - 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定会话的消息)。
 - 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
 - 支持 [根据搜索范围搜索所有会话中的消息](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 
@@ -200,7 +200,7 @@
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个联系人的信息。
+- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个好友的信息。
 
 #### 优化
 
@@ -335,7 +335,7 @@
   - `fetchMemberAttributes`：获取单个群成员的所有自定义属性。
   - `fetchMembersAttributes`：根据属性 key 获取多个群成员的自定义属性。
   - `GroupListener#onGroupMemberAttributeChanged`：群组成员自定义属性变化的回调。
-- 新增[设置推送通知的显示内容](/document/harmonyos/push/push_display.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。
+- 新增[设置推送通知的显示内容](/document/harmonyos/push/push_display_attribute.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。
 - 新增[在线状态订阅](presence.html)功能。
 - 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性-key-value)功能。
   - `fetchChatroomAttributes`：获取聊天室自定义属性。

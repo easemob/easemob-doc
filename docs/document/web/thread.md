@@ -1,239 +1,284 @@
 # 管理消息话题
 
-<Toc />
+## 功能说明
 
-消息话题是群组成员的子集，是支持多人沟通的即时通讯系统。使用消息话题功能前，你需要在联系商务开通。
+消息话题（Thread）是群组内围绕某条父消息展开的独立讨论空间。开启该功能后，群成员可以基于指定群消息创建话题，并在该话题内进行集中回复和管理。
 
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理消息话题，并实现消息话题相关功能。
+本文介绍如何使用环信即时通讯 IM Web SDK 在项目中创建和管理消息话题，并实现消息话题相关功能。
 
-## 技术原理
+## 功能开通
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
-
-- 创建、解散消息话题
-- 加入、退出消息话题
-- 修改消息话题名称
-- 获取消息话题详情
-- 获取消息话题成员列表
-- 获取消息话题列表
-- 批量获取消息话题中的最新消息
+使用消息话题功能前，你需要在联系商务开通。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 4.0.7 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 了解消息话题和消息话题成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 已联系商务开通消息话题功能。
+- 已完成 SDK 初始化并登录，详见 [快速开始](quickstart.html)。
+- SDK 初始化时，已注册 `ChatThreadManager`。
+- 已了解消息话题及其成员数量等限制，详见[使用限制](/product/limitation.html)。
+- 已联系商务开通了消息话题功能。
 
-## 实现方法
+## 创建消息话题
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+群成员可调用 `createChatThread` 方法，基于一条群消息创建消息话题。
 
-### 创建消息话题
-
-所有群成员均可以调用 `createChatThread` 方法，基于一条群组消息新建消息话题。
-
-单设备登录时，消息话题所属群组的所有成员均会收到 `onChatThreadChange` 回调，事件为 `create`；多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadCreate`。
+创建成功后，消息话题所属群组的所有成员会收到 `onChatThreadCreated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_CREATE`。
 
 示例代码如下：
 
-```javascript
-// 创建消息话题
-conn.createChatThread({parentId: 'parentId',name: 'threadName',messageId: 'messageId'})
-// 监听消息话题创建回调
-conn.addEventHandler('THREAD',{
-  onChatThreadChange:(threadMsg) =>{
-			console.log(threadMsg)
-	},
+```typescript
+const result = await client.chatThreadManager.createChatThread({
+  // 话题所属的父级群组 ID。
+  parentId: 'group1',
+  // 话题名称。
+  name: '讨论主题',
+  // 作为话题根消息的父消息 ID。
+  messageId: 'msg-id-123',
 });
+
+console.log('Thread ID:', result.chatThreadId);
 ```
 
-### 解散消息话题
+## 解散消息话题
 
-仅消息话题所在群组的群主和群管理员可以调用 `destroyChatThread` 方法解散消息话题。
+通常情况下，仅话题所属群组的群主和群管理员可调用 `destroyChatThread` 方法解散消息话题。
 
-单设备登录时，消息话题所属群组的所有成员均会收到 `onChatThreadChange` 回调，事件为 `destroy`；多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadDestroy`。
+解散成功后，消息话题所属群组的所有成员会收到 `onChatThreadDestroyed` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_DESTROY`。
 
 示例代码如下：
 
-```javascript
-// 解散消息话题
-conn.destroyChatThread({chatThreadId: 'chatThreadId'})
-// 监听消息话题解散回调
-conn.addEventHandler('THREAD',{
-  onChatThreadChange:(threadMsg) =>{
-			console.log(threadMsg)
-	},
+```typescript
+await client.chatThreadManager.destroyChatThread({
+  // 待解散的话题 ID。
+  chatThreadId: 'thread1',
 });
 ```
 
-### 加入消息话题
+## 加入消息话题
 
-消息话题所在群组的所有成员均可以调用 `joinChatThread` 方法加入消息话题。
+话题所属群组的成员可调用 `joinChatThread` 方法加入消息话题。
 
-加入消息话题的具体步骤如下：
+加入消息话题的推荐步骤如下：
 
-1. 收到 `onChatThreadChange` 回调或调用 `getChatThreads` 方法从服务器查询指定群组的消息话题列表，获得要加入的消息话题 ID。
-2. 调用 `joinChatThread` 方法传入消息话题 ID 加入对应消息话题。  
+1. 通过 `onChatThreadCreated` 事件，或调用 `getChatThreadList` 方法，获取目标群组中的消息话题列表。
+2. 确定要加入的话题 ID。
+3. 调用 `joinChatThread` 方法加入该话题。
 
-多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadJoin`。
+若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_JOIN`。
 
 示例代码如下：
 
-```javascript
-// 加入消息话题
-conn.joinChatThread({chatThreadId: 'chatThreadId'});
+```typescript
+await client.chatThreadManager.joinChatThread({
+  // 待加入的话题 ID。
+  chatThreadId: 'thread1',
+});
 ```
 
-### 退出消息话题
+## 退出消息话题
 
-#### 消息话题成员主动退出消息话题
+### 主动退出
 
-消息话题成员均可以调用 `leaveChatThread` 方法主动退出消息话题。退出消息话题后，该成员将不会再收到消息话题中的消息。
+消息话题成员可调用 `leaveChatThread` 方法主动退出消息话题。退出后，该成员将不再接收该话题中的后续消息。
 
-多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadLeave`。
+若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_LEAVE`。
 
 示例代码如下：
 
-```javascript
-conn.leaveChatThread({chatThreadId: 'chatThreadId'});
+```typescript
+await client.chatThreadManager.leaveChatThread({
+  // 待退出的话题 ID。
+  chatThreadId: 'thread1',
+});
 ```
 
-#### 消息话题成员被移出消息话题
+### 移出成员
 
-仅群主和群管理员可以调用 `removeChatThreadMember` 方法将指定成员 (群管理员或普通成员) 踢出消息话题，被踢出消息话题的成员将不再接收到消息话题中的消息。
+通常情况下，仅群主和群管理员可调用 `removeChatThreadMember` 方法将指定成员移出消息话题。被移出后，该成员将不再接收该话题中的后续消息。
 
-单设备登录时，被踢出消息话题的成员会收到 `onChatThreadChange` 回调，事件为 `userRemove`。
+被移出的当前登录用户会收到 `onChatThreadUserRemoved` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_KICK`。
 
 示例代码如下：
 
-```javascript
-// chatThreadId: 消息话题 ID
-// username: 消息话题成员的用户 ID
-conn.removeChatThreadMember({chatThreadId: 'chatThreadId',username:'username'}); 
+```typescript
+await client.chatThreadManager.removeChatThreadMember({
+  // 目标话题 ID。
+  chatThreadId: 'thread1',
+  // 待移出的成员用户 ID。
+  memberId: 'user3',
+});
 ```
 
-### 修改消息话题名称
+## 修改消息话题名称
 
-仅群主和群管理员以及消息话题的创建者可以调用 `changeChatThreadName` 方法修改消息话题名称。
+通常情况下，仅群主、群管理员以及话题创建者可调用 `updateChatThreadName` 方法修改消息话题名称。
 
-单设备登录时，消息话题所属群组的所有成员会收到 `onChatThreadChange` 回调，事件为 `update`；多设备登录时，其他设备会同时收到 `onMultiDeviceEvent` 回调，事件为 `chatThreadNameUpdate`。
+修改成功后，消息话题所属群组的所有成员会收到 `onChatThreadUpdated` 事件。若当前用户同时在其他设备登录，其余设备会收到 `onMultiDeviceThread` 多设备事件，事件类型为 `THREAD_UPDATE`。
 
 示例代码如下：
 
-```javascript
-// chatThreadId：消息话题 ID
-// name：修改后的消息话题名称，长度不超过 64 个字符
-conn.changeChatThreadName({chatThreadId: 'chatThreadId',name: 'name'})
-// 监听消息话题更新
-conn.addEventHandler('THREAD',{
-  onChatThreadChange:(threadMsg) =>{
-			console.log(threadMsg)
-	},
+```typescript
+await client.chatThreadManager.updateChatThreadName({
+  // 待修改的话题 ID。
+  chatThreadId: 'thread1',
+  // 新的话题名称。
+  name: '新主题名称',
 });
 ```
 
-### 获取消息话题详情
+## 获取消息话题详情
 
-消息话题所有成员均可以调用 `getChatThreadDetail` 从服务器获取消息话题详情。
+话题相关成员可调用 `getChatThreadInfo` 方法从服务器获取消息话题详情。
 
 示例代码如下：
 
-```javascript
-// chatThreadID：消息话题 ID
-conn.getChatThreadDetail({chatThreadId: 'chatThreadId'}).then((res)=>{
-  console.log(res)
+```typescript
+const detail = await client.chatThreadManager.getChatThreadInfo({
+  // 目标话题 ID。
+  chatThreadId: 'thread1',
 });
+
+console.log('话题详情:', detail);
 ```
 
-### 获取消息话题成员列表
+## 获取消息话题成员列表
 
-消息话题所属群组的所有成员均可以调用 `getChatThreadMembers` 方法从服务器分页获取消息话题成员列表。
-
-```javascript
-// chatThreadId：消息话题 ID
-// pageSize：单次请求返回的成员数，取值范围为 [1,50]，默认为 20。
-// cursor：开始获取数据的游标位置，首次调用方法时传 `null`、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-conn.getChatThreadMembers({chatThreadId: 'chatThreadId ',pageSize:20,cursor:'cursor'}).then((res)=>{
-  console.log(res)
-});
-```
-
-### 获取消息话题列表
-
-1. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取自己加入的消息话题列表：
-
-```javascript
-// pageSize：单次请求返回的消息话题数，取值范围为 [1,50]，默认为 20。
-// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-conn.getJoinedChatThreads({cursor: 'cursor',pageSize: 20}).then((res)=>{
-  console.log(res)
-});
-```
-
-2. 用户可以调用 `getJoinedChatThreads` 方法从服务器分页获取指定群组中自己加入的消息话题列表：
-
-```javascript
-// parentId：群组 ID
-// pageSize：单次请求返回的消息话题数，取值范围为 [1,50]，默认为 20。
-// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-conn.getJoinedChatThreads({parentId: 'parentId',cursor: 'cursor',pageSize: 20}).then((res)=>{
-  console.log(res)
-});
-```
-
-3. 用户还可以调用 `getChatThreads` 方法从服务器分页获取指定群组的消息话题列表：
-
-```javascript
-// parentId：群组 ID
-// pageSize：单次请求返回的消息话题数，取值范围为 [1,50]，默认为 20。
-// cursor：开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-conn.getChatThreads({parentId: 'parentId', cursor:'cursor', pageSize: 20}).then((res)=>{
-  console.log(res)
-});
-```
-
-### 批量获取消息话题中的最新消息
-
-用户可以调用 `getChatThreadLastMessage` 方法从服务器批量获取消息话题中的最新一条消息。
+话题所属群组的成员可调用 `getChatThreadMemberList` 方法从服务器分页获取消息话题成员列表。
 
 示例代码如下：
 
-```javascript
-// chatThreadIds：要查询的消息话题 ID 列表，每次最多可传入 20 个消息话题 ID
-conn.getChatThreadLastMessage({chatThreadIds: ['chatThreadId1','chatThreadId2']}).then((res)=>{
-  console.log(res)
+```typescript
+const result = await client.chatThreadManager.getChatThreadMemberList({
+  // 目标话题 ID。
+  chatThreadId: 'thread1',
+  // 每页返回的成员数量，默认 20，取值范围为 1-50。
+  pageSize: 20,
+  // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  cursor: '',
 });
+
+console.log('成员列表:', result.items);
+console.log('下一页游标:', result.cursor);
 ```
 
-### 监听消息话题事件
+## 获取消息话题列表
 
-SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取群组中的事件。
+1. 你可以调用 `getJoinedChatThreadList` 方法，从服务器分页获取当前用户已加入的消息话题列表：
+
+```typescript
+const joined = await client.chatThreadManager.getJoinedChatThreadList({
+  // 可选：父级群组 ID。不传时查询当前用户加入的所有话题。
+  parentId: 'group1',
+  // 每页返回的话题数量，默认 20，取值范围为 1-50。
+  pageSize: 20,
+  // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  cursor: '',
+});
+
+console.log('已加入的话题列表:', joined.items);
+console.log('下一页游标:', joined.cursor);
+```
+
+2. 你也可以调用 `getJoinedChatThreadList` 方法，从服务器分页获取当前用户在指定群组内已加入的消息话题列表：
+
+```typescript
+const joinedInGroup = await client.chatThreadManager.getJoinedChatThreadList({
+  // 指定群组 ID。
+  parentId: 'group1',
+  // 每页返回的话题数量，默认 20，取值范围为 1-50。
+  pageSize: 20,
+  // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  cursor: '',
+});
+
+console.log('指定群组内已加入的话题列表:', joinedInGroup.items);
+console.log('下一页游标:', joinedInGroup.cursor);
+```
+
+3. 你还可以调用 `getChatThreadList` 方法，从服务器分页获取指定群组中的消息话题列表：
+
+```typescript
+const result = await client.chatThreadManager.getChatThreadList({
+  // 父级群组 ID。
+  parentId: 'group1',
+  // 每页返回的话题数量，默认 20，取值范围为 1-50。
+  pageSize: 20,
+  // 分页游标。首次请求可不传，或在运行时传 `null` / `''`；后续请求传入上次返回结果中的 `cursor`。当返回的 `cursor` 为空字符串时，表示已到达最后一页。
+  cursor: '',
+});
+
+console.log('群组内的话题列表:', result.items);
+console.log('下一页游标:', result.cursor);
+```
+
+## 批量获取消息话题中的最后一条消息
+
+你可以调用 `getChatThreadLastMessageList` 方法，从服务器批量获取一个或多个消息话题中的最后一条消息摘要。
 
 示例代码如下：
 
-```javascript
-// 创建一个消息话题事件监听器
-conn.addEventHandler("eventName", {
-  onChatThreadChange: function (msg) {
-    switch (msg.operation) {
-      // 消息话题创建。消息话题所属群组的所有成员收到该事件。
-      case "create":
-        break;
-      // 消息话题名称修改、消息话题中新增或撤回消息。消息话题所属群组的所有成员会收到该事件。
-      case "update":
-        break;
-      // 消息话题解散。消息话题所属群组的所有成员会收到该事件。
-      case "destroy":
-        break;
-      // 消息话题成员被移除。被踢出消息话题的成员收到该事件。
-      case "userRemove":
-        break;
-      default:
-        break;
-    }
+```typescript
+const result = await client.chatThreadManager.getChatThreadLastMessageList({
+  // 待查询的话题 ID 列表，每次最多可传 20 个。
+  chatThreadIds: ['thread1', 'thread2'],
+});
+
+console.log('最后一条消息列表:', result.items);
+```
+
+## 监听消息话题事件
+
+SDK 提供 `chatThreadManager.addEventHandler` 方法用于注册消息话题事件监听。你可以通过该监听获取话题创建、解散、更新以及当前用户被移出话题等事件。
+
+当前公开的消息话题事件包括：
+
+- `onChatThreadCreated`
+- `onChatThreadDestroyed`
+- `onChatThreadUpdated`
+- `onChatThreadUserRemoved`
+
+若需监听多设备同步的消息话题操作，应通过 `client.addEventHandler` 监听 `onMultiDeviceThread`。
+
+示例代码如下：
+
+```typescript
+// 监听公开的消息话题事件。
+client.chatThreadManager.addEventHandler('thread-events', {
+  onChatThreadCreated: (event) => {
+    console.log('话题创建:', event.chatThreadId, event.chatThreadName);
+  },
+  onChatThreadDestroyed: (event) => {
+    console.log('话题解散:', event.chatThreadId);
+  },
+  onChatThreadUpdated: (event) => {
+    console.log('话题更新:', event.chatThreadId, event.messageCount);
+  },
+  onChatThreadUserRemoved: (event) => {
+    console.log('当前用户被移出话题:', event.chatThreadId, event.memberId);
+  },
+});
+
+// 如需监听多设备消息话题事件，可在 ChatClient 上注册。
+client.addEventHandler('thread-multi-device-events', {
+  onMultiDeviceThread: (event) => {
+    console.log('多设备话题事件:', event.operation, event.threadId, event.deviceId);
   },
 });
 ```
+
+## 接口列表
+
+| API 名称     | 所属模块/类         | 说明            |
+| :-------------- | :----- | :------- |
+| [`createChatThread`](#创建消息话题)                          | `ChatThreadManager` | 基于指定群消息创建消息话题。                     |
+| [`destroyChatThread`](#解散消息话题)                         | `ChatThreadManager` | 解散消息话题。                                   |
+| [`joinChatThread`](#加入消息话题)                            | `ChatThreadManager` | 加入消息话题。                                   |
+| [`leaveChatThread`](#退出消息话题)                           | `ChatThreadManager` | 主动退出消息话题。                               |
+| [`removeChatThreadMember`](#移出成员)      | `ChatThreadManager` | 将指定成员移出消息话题。                         |
+| [`updateChatThreadName`](#修改消息话题名称)                  | `ChatThreadManager` | 修改消息话题名称。                               |
+| [`getChatThreadInfo`](#获取消息话题详情)                     | `ChatThreadManager` | 获取消息话题详情。                               |
+| [`getChatThreadMemberList`](#获取消息话题成员列表)           | `ChatThreadManager` | 分页获取消息话题成员列表。                       |
+| [`getJoinedChatThreadList`](#获取消息话题列表)               | `ChatThreadManager` | 分页获取当前用户已加入的消息话题列表。           |
+| [`getChatThreadList`](#获取消息话题列表)                     | `ChatThreadManager` | 分页获取指定群组中的消息话题列表。               |
+| [`getChatThreadLastMessageList`](#批量获取消息话题中的最后一条消息) | `ChatThreadManager` | 批量获取一个或多个消息话题中的最后一条消息摘要。 |

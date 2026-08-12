@@ -7,6 +7,10 @@
   - 调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从环信服务端拉取到这些漫游消息。若清除了该会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。
   - 会话中的其他用户不受影响，仍然可以拉取这些漫游消息和会话。
 
+:::tip
+聊天室漫游消息默认关闭，若要使用该功能需联系环信商务开通。
+:::
+
 ## 调用频率上限
 
 100 次/秒/App Key
@@ -30,7 +34,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000&isNotify=false' \
+curl -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 

@@ -15,7 +15,7 @@
 
 ### 回调时机
 
-- 客户端将 [群组](/document/android/group_members.html#将成员加入群组白名单)/[聊天室成员](/document/android/room_members.html#将成员加入聊天室白名单) 加入了黑名单。
+- 客户端将 [群组](/document/android/group_members.html#添加成员到黑名单)/[聊天室成员](/document/android/room_members.html#将成员加入聊天室白名单) 加入了黑名单。
 - 调用 RESTful API 将 [群组](/document/server-side/group_member_blocklist_add_single.html)/[聊天室成员](/document/server-side/chatroom_allowlist_add_single.html)  加入了黑名单。
 - 在 [环信控制台](https://console.easemob.com/user/login) 将 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理) 或 [聊天室成员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理) 添加了黑名单。
 

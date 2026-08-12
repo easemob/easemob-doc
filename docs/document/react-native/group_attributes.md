@@ -28,7 +28,7 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
+仅群主和群管理员可以调用 `changeGroupName` 方法设置和修改群组名称，群名称的长度限制为 255 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
 
 示例代码如下：
 
@@ -46,7 +46,7 @@ ChatClient.getInstance()
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
+仅群主和群管理员可以调用 `changeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 2048 个字符。其他群成员会收到 `ChatGroupEventListener#onDetailChanged` 事件。
 
 示例代码如下：
 

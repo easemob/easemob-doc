@@ -73,7 +73,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get' \
 | `data` | JSON | 获取的群成员的自定义属性。如下响应示例中的 `test1` 和 `test2` 为自定义属性所属的群成员的用户 ID。 |
 | `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
 
-其他字段及描述详见 [公共参数](overview.html#公共参数)。
+其他字段及描述见上表。
 
 ## 错误码
 

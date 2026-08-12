@@ -79,6 +79,11 @@ button {
       
       .nav-item {
         margin: 0 1.25rem !important;
+
+        &:first-child {
+          margin-left: 2.5rem !important;
+        }
+
         .nav-link {
           display: flex;
           align-items: center;
@@ -340,62 +345,6 @@ button {
               .nav-link {
                 &:hover {
                   background-color: var(--switch-hover-bg-color);
-                }
-              }
-            }
-          }
-        }
-
-        &:first-child {
-          display: flex;
-          width: 6.5rem;
-          padding: 0 0.75rem;
-          margin-left: 1rem !important;
-          border-radius: 6px;
-          border: 1px solid var(--border-color, #dce2e6);
-          background: var(--fill-color-blank, #fff);
-
-          &:hover {
-            border-color: var(--theme-color);
-          }
-
-          .dropdown-wrapper {
-            width: 100%;
-            .dropdown-title {
-              display: flex;
-              align-items: center;
-              width: 100%;
-
-              .title {
-                flex: 1;
-                text-align: left;
-                color: var(--text-color);
-              }
-
-              .arrow {
-                width: 0.88rem;
-                height: 0.88rem;
-              }
-            }
-          }
-
-          .nav-dropdown {
-            left: unset !important;
-            right: 0 !important;
-            top: calc(100% + 6px) !important;
-            .dropdown-item {
-              span {
-                display: none;
-              }
-
-              .nav-link {
-                width: calc(100% - 2rem) !important; 
-                padding-left: 1.25rem !important; 
-              }
-
-              &:hover {
-                .nav-link {
-                  color: var(--theme-color);
                 }
               }
             }

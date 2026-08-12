@@ -25,13 +25,11 @@
 - 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：Android SDK 仅支持接收，不支持发送。
 - 消息标识：`msgId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#使用限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
-
-- 已升级 SDK 至 v4.19.0 或以上版本。
 - 已完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 已了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 
@@ -59,7 +57,7 @@
 以下示例展示了如何注册消息监听器并接收流式消息分片。
 
 ```java
-EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
+EMMessageListener messageListener = new EMMessageListener() {
     @Override
     public void onMessageReceived(List<EMMessage> messages) {
         // 普通消息回调
@@ -72,7 +70,19 @@ EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() 
             handleStreamChunk(message);
         }
     }
-});
+};
+
+EMClient.getInstance()
+        .chatManager()
+        .addMessageListener(messageListener);
+```
+
+不再需要接收消息事件时，应移除监听器：
+
+```java
+EMClient.getInstance()
+        .chatManager()
+        .removeMessageListener(messageListener);
 ```
 
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `msgId` 更新同一条消息的展示内容。
@@ -101,7 +111,10 @@ private void handleStreamChunk(EMMessage message) {
     // 自定义类型，例如 text / markdown
     String customType = chunk.getCustomType();
 
-    // 错误码与完成原因
+    // 判断流式消息是否已结束。
+    boolean completed = chunk.isCompleted();
+
+    // 错误码仅在 ERROR 状态下有效；完成原因由业务服务器设置。
     int errorCode = chunk.getErrorCode();
     int finishReason = chunk.getFinishReason();
     // 建议业务侧按 msgId 更新同一条消息的展示内容
@@ -119,8 +132,8 @@ private void handleStreamChunk(EMMessage message) {
 | 方法 | 返回值类型 | 说明 |
 | :--- | :--- | :--- |
 | `getText()` | String | 获取当前分片的文本内容。 |
-| `getStatus()` | EMStreamStatus | 获取当前分片对应的流式消息的传输状态。 |
-| `isCompleted()` | Boolean | 判断流式消息是否已传输完成。<br>当 `getStatus()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中任意一种状态时，`isCompleted()` 方法返回 `true`。 |
+| `getStatus()` | EMMessage.EMStreamStatus | 获取当前分片对应的流式消息的传输状态。 |
+| `isCompleted()` | Boolean | 判断流式消息是否已结束。<br>当 `getStatus()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中任意一种状态时，`isCompleted()` 方法返回 `true`。 |
 | `getCustomType()` | String | 获取自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
 | `getErrorCode()` | Int | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
 | `getFinishReason()` | Int | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
@@ -218,7 +231,7 @@ UI 使用建议如下：
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html)  | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
 
 ## 常见问题
 
@@ -249,3 +262,14 @@ UI 使用建议如下：
 #### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI，避免将同一条流式消息误显示为多条消息。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getText`](#当前分片信息) | `EMStreamChunk` | 获取当前分片的文本内容。 |
+| [`getStatus`](#传输状态与错误处理) | `EMStreamChunk` | 获取流式消息的传输状态。 |
+| [`isCompleted`](#当前分片信息) | `EMStreamChunk` | 判断流式消息是否已结束。 |
+| [`getCustomType`](#当前分片信息) | `EMStreamChunk` | 获取分片的自定义类型。 |
+| [`getErrorCode`](#传输状态与错误处理) | `EMStreamChunk` | 获取流式消息异常结束时的错误码。 |
+| [`getFinishReason`](#传输状态与错误处理) | `EMStreamChunk` | 获取业务服务器设置的完成原因码。 |

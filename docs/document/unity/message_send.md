@@ -58,7 +58,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 1. 创建和发送附件类型消息。
 2. SDK 将附件上传到环信服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
-消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
 ### 发送语音消息
 
@@ -453,5 +453,5 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 ### 消息大小和存储限制
 
-各类消息的大小和存储限制，详见 [消息限制说明](limitation.html#消息大小)。
+各类消息的大小和存储限制，详见 [消息限制说明](/product/limitation.html#消息大小)。
 

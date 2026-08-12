@@ -1,105 +1,172 @@
 # 会话标记
 
-<Toc />
+## 功能说明
 
-某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯云 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。
+会话标记用于为会话添加业务分类，例如标星、待处理、重要客户等。Web SDK 支持为单聊、群聊和聊天室会话添加或移除标记。单个会话最多支持添加 20 个标记，每个标记的业务含义由您自行定义和维护。
 
-**如果要使用会话标记功能，你需要确保开通了[会话列表服务](conversation_list.html#从服务器分页获取会话列表)并将 SDK 版本升级至 4.4.0 或以上版本。**  
+:::tip
+会话标记只用于会话分类和筛选，不会影响会话的未读数、消息收发、置顶状态或消息已读状态。
+:::
 
-你需要自行维护会话标记与具体业务含义之间的映射，例如 [`MarkType.mark_0`](https://doc.easemob.com/jsdoc/enums/Types.ContactType.MarkType.html)表示待处理会话。
+## 功能开通
 
-```javascript
-const MarkMap = new Map();
-MarkMap.set(0, 'IMPORTANT');
-MarkMap.set(1, 'NORMAL');
-MarkMap.set(2, 'STAR');
-```
-
-## 技术原理
-
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
-
-- `addConversationMark`：标记会话。
-- `removeConversationMark`：取消标记会话。
-- `getServerConversationsByFilter`：根据会话标记从服务器分页查询会话列表。
+会话标记属于服务端会话列表功能的一部分。使用前，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- SDK 初始化时需注册 `ChatManager`，可以通过 `client.chatManager` 调用会话相关接口。
+- 已开通 [服务端会话列表功能](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- **[开通服务端会话列表功能](conversation_list#从服务器分页获取会话列表)**。
 
-## 实现方法
+## 添加会话标记
 
-### 标记会话
+你可以调用 `addConversationMark` 为单个或多个会话添加指定标记。
 
-你可以调用 `addConversationMark` 方法标记会话。调用该方法会为服务器端的会话添加标记。
+添加会话标记后，标记数据会更新到服务端，并同步更新 SDK 本地会话列表缓存。会话标记会随服务端会话列表在登录后自动同步到本地；同步完成后，可调用 `client.chatManager.getConversationList()` 读取本地会话列表，并通过会话对象中的 `marks` 字段获取该会话的全部标记。
 
-添加会话标记后，若调用 `getServerConversations` 方法从服务器分页获取会话列表，返回的会话对象中包含会话标记，即 `ConversationItem#marks` 字段。若你已经达到了服务端会话列表长度限制（默认 100 个会话），服务端会根据会话的活跃度（最新一条消息的时间戳）删除不活跃会话，这些会话的会话标记也随之删除。
+若服务端会话列表达到数量限制，默认最多保存 100 个会话，服务端可能根据会话活跃度移除不活跃会话。对应会话被移出服务端会话列表后，该会话的标记也可能不再随服务端会话列表同步到本地。
+
+- 为单个会话添加标记：
+
+```typescript
+const result = await client.chatManager.addConversationMark({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  mark: 0, // 标记编号 0-19。单个会话最多支持添加 20 个标记。
+});
+
+console.log(result.succeeded, result.failed, result.mark, result.operation);
+```
+
+- 为多个会话批量添加标记：
+
+```typescript
+const result = await client.chatManager.addConversationMark({
+  conversations: [
+    { conversationId: 'user2', conversationType: 'singleChat' },
+    { conversationId: 'group1', conversationType: 'groupChat' },
+  ],
+  mark: 0, // 标记编号 0-19
+});
+
+console.log(result.succeeded, result.failed);
+```
+
+参数说明如下：
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `conversationId` | String | 条件必需 | 会话 ID。单个会话操作时传入。单聊为对方用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `conversationType` | String | 条件必需 | 会话类型。单个会话操作时传入。取值为 `singleChat`、`groupChat` 或 `chatRoom`。 |
+| `conversations` | Array | 条件必需 | 会话列表。批量操作时传入，数组不能为空。 |
+| `mark` | Number | 是 | 添加的会话标记，取值范围为 `0` 到 `19`。 |
+
+返回结果为 `ConversationMarkMutationResult`，字段说明如下：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `succeeded` | Array | 成功应用标记变更的会话列表。 |
+| `failed` | Array | 未能应用标记变更的会话列表。失败项中可能包含 `reason` 字段。 |
+| `mark` | Number | 本次操作涉及的标记槽位。 |
+| `operation` | String | 标记操作类型。添加标记时为 `addMark`。 |
+
+## 移除会话标记
+
+你可以调用 `removeConversationMark` 从单个或多个会话移除指定标记。
+
+- 从单个会话移除标记：
+
+```typescript
+const result = await client.chatManager.removeConversationMark({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  mark: 0,
+});
+
+console.log(result.succeeded, result.failed, result.mark, result.operation);
+```
+
+- 从多个会话批量移除标记：
+
+```typescript
+const result = await client.chatManager.removeConversationMark({
+  conversations: [
+    { conversationId: 'user2', conversationType: 'singleChat' },
+    { conversationId: 'group1', conversationType: 'groupChat' },
+  ],
+  mark: 0,
+});
+
+console.log(result.succeeded, result.failed);
+```
+
+`removeConversationMark` 的参数与 `addConversationMark` 相同。返回结果中的 `operation` 为 `removeMark`。
+
+## 按标记筛选会话列表
+
+添加会话标记后，会话对象中的 `marks` 字段会包含该会话已有的标记槽位。你可以调用 `getConversationList({ mark })` 从 SDK 本地会话列表缓存中筛选带有指定标记的会话。
+
+```typescript
+const markedConversations = client.chatManager.getConversationList({
+  mark: 0,
+});
+
+markedConversations.forEach(conversation => {
+  console.log('会话 ID:', conversation.conversationId);
+  console.log('会话类型:', conversation.conversationType);
+  console.log('会话标记:', conversation.marks);
+});
+```
+
+如果需要先从服务端刷新会话列表，可调用 `refreshSessionList`：
+
+```typescript
+await client.chatManager.refreshSessionList({
+  includeEmpty: false,
+});
+
+const markedConversations = client.chatManager.getConversationList({
+  mark: 0,
+});
+```
 
 :::tip
-对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
+`getConversationList` 读取的是 SDK 本地会话列表缓存，不会发起网络请求。该方法默认不返回最后一条消息为空的空会话。
 :::
 
+## 监听会话列表更新
 
-```javascript
-const options = {
-  conversations: [
-    {conversationId: 'test', conversationType: 'singleChat'},
-    {conversationId: 'groupId', conversationType: 'groupChat'}
-  ],
-  mark: 0,
-}
+添加或移除会话标记后，如果本地会话列表缓存发生变化，SDK 会触发 `onConversationListUpdate` 事件，事件中的 `reason` 为 `local`。你可以监听该事件刷新会话列表 UI。
 
-conn.addConversationMark(options).then(() => {
-  console.log('addConversationMark success')
-})
+```typescript
+client.chatManager.addEventHandler('conversation-mark-listener', {
+  onConversationListUpdate: payload => {
+    console.log('会话列表更新原因:', payload.reason);
+    console.log('当前完整会话列表:', payload.items);
+    console.log('本次变化补丁:', payload.patch);
+  },
+});
 ```
 
-### 取消标记会话
+事件回调中的 `items` 为 SDK 当前完整且已排序的会话列表快照；简单 UI 可直接使用该字段刷新会话列表。如果业务层需要保留自定义本地字段，可结合 `patch` 做增量合并。
 
-你可以调用 `removeConversationMark` 方法删除会话标记。
+## 注意事项
 
-调用该方法会同时移除本地和服务器端会话的标记。
+- 会话标记取值范围为 `0` 到 `19`。各槽位的业务含义由你在业务层自行维护。
+- `addConversationMark` 和 `removeConversationMark` 支持操作单个会话，也支持通过 `conversations` 批量操作多个会话。
+- 如果 `mark` 不是 `0` 到 `19` 之间的整数，或会话目标列表非法，SDK 会返回参数错误，错误码为 `110`。
+- 会话标记会写入服务端，并同步更新 SDK 本地会话列表缓存；如果本地会话列表发生变化，会触发 `onConversationListUpdate` 事件。
+- 会话标记不影响会话未读数、消息已读状态、消息收发或会话置顶状态。
+- 若服务端会话列表达到数量限制，服务端可能根据会话活跃度移除不活跃会话；对应会话的会话标记也会随会话列表数据一起不可见。
 
-```javascript
-const options = {
-  conversations: [
-    {conversationId: 'test', conversationType: 'singleChat'},
-    {conversationId: 'groupId', conversationType: 'groupChat'}
-  ],
-  mark: 0,
-}
+## 接口列表
 
-conn.removeConversationMark(options).then(() => {
-  console.log('removeConversationMark success')
-})
-```
-
-### 根据会话标记从服务器分页查询会话列表
-
-你可以调用 `getServerConversationsByFilter` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、未读消息数、会话标记以及最新一条消息。
-
-```javascript
-const options = {
-  //每页期望获取的会话数量。取值范围为 [1,10]，默认为 10。
-  pageSize: 10,
-  // 开始获取数据的游标位置。首次调用方法时传 `null` 、空字符串（''）或不传该字段，SDK 返回最新标记的会话。后续调用传入上一次查询结果的游标 res.data.cursor，若 cursor 的值为空字符串（''），表示当前为最后一页数据。
-  cursor: '',
-  filter: {
-    mark: 0
-  }
-}
-conn.getServerConversationsByFilter().then((res) => {
-  console.log('getServerConversationsByFilter success', res)
-})
-```
-
-
-
-
-
-
-
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addConversationMark`](#添加会话标记) | `ChatManager` | 为单个或多个会话添加指定标记。 |
+| [`removeConversationMark`](#移除会话标记) | `ChatManager` | 从单个或多个会话移除指定标记。 |
+| [`getConversationList`](#按标记筛选会话列表) | `ChatManager` | 从 SDK 本地会话列表缓存读取会话列表，并支持按标记筛选。 |
+| [`refreshSessionList`](#按标记筛选会话列表) | `ChatManager` | 从服务端刷新会话列表，并更新 SDK 本地会话列表缓存。 |

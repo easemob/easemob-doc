@@ -47,8 +47,11 @@
 
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
+    const isSdkDocPath =
+      (pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) &&
+      pagePath.indexOf('/document/server-side/') < 0
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
-    showPlatformSwitch.value = pagePath.indexOf('/document/') == 0 && pagePath.indexOf('/server-side/') < 0
+    showPlatformSwitch.value = isSdkDocPath
     showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
     showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0
 
@@ -56,7 +59,7 @@
     else if(pagePath.indexOf('/uikit/') == 0) title.value = 'UIKit'
     else if(pagePath.indexOf('/callkit/') == 0) title.value = 'CallKit'
     else if(pagePath.indexOf('/document/server-side/') == 0) title.value = ''
-    else if(pagePath.indexOf('/document/') == 0) title.value = 'SDK'
+    else if(pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) title.value = 'SDK'
     else if(pagePath.indexOf('/value-added/') == 0) title.value = ''
     isNull.value = title.value ? false : true
 
@@ -113,7 +116,8 @@
     }
 
     .platform-switch {
-      flex-grow: 1;
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     &.pt20 {

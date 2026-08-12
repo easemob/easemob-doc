@@ -55,7 +55,7 @@ SDKClient.Instance.ChatManager.DeleteAllMessagesAndConversations(clearServerData
 
 :::tip
 1. 要单向删除服务端单聊和群组聊天的历史消息，需将 SDK 升级至 V1.1.0 或以上版本。
-2. 要单向删除服务端聊天室的历史消息，需将 SDK 升级至 1.3.2 或以上版本。
+2. 要单向删除服务端聊天室的历史消息，需将 SDK 升级至 1.3.0 或以上版本，并联系环信商务开通。
 :::
 
 ```csharp

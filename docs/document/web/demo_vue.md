@@ -1,7 +1,5 @@
 # Vue Demo（WebIM）介绍
 
-<Toc />
-
 环信即时通讯 Web 端提供示例应用可供体验。你可以按以下步骤体验：
 
 1. 登录 [Vue 3 Demo](https://webim-vue3.easemob.com/login)

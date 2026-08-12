@@ -26,7 +26,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/bat
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X PUT 'http://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/users/batch' \
+curl -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/users/batch' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \

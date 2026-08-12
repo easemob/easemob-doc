@@ -1,0 +1,59 @@
+# 连接
+
+应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
+
+你调用 `open` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+
+## 监听连接状态
+
+```javascript
+conn.addEventHandler("connectionListener", {
+  onConnected: () => {
+    console.log("连接成功");
+  },
+  // 自 4.8.0 版本，`onDisconnected` 事件新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
+  onDisconnected: () => {
+    console.log("连接断开");
+  },
+  onReconnecting: () => {
+    console.log("重连中");
+  },
+  // 自 4.15.0 版本，SDK 会在 Token 有效期达到 80% 时回调即将过期通知。
+  onTokenWillExpire: () => {
+    console.log("token 即将过期");
+  },
+  onTokenExpired: () => {
+    console.log("token 已经过期");
+  },
+  // 连接成功，开始从服务器拉取离线消息时触发。
+  onOfflineMessageSyncStart: () => {
+    console.log("开始从服务器拉取离线消息");
+  },
+  // 从服务器拉取离线消息结束时触发。
+  onOfflineMessageSyncFinish: () => {
+    console.log("从服务器拉取离线消息结束");
+  },
+});
+```
+
+## 自动重连
+
+登录后，SDK 在以下情况下会尝试自动重连：
+
+- 网络断开
+
+- 网络切换
+
+- 非主动调用登出
+
+登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。
+
+不过，SDK 在以下情况下会停止自动重连。你需要调用 `open` 方法登录。
+
+- 用户调用了 SDK 的登出方法 `close` 主动退出登录。
+- 登录时鉴权错误，例如， token 无效（错误码 104）或已过期（错误码 108）。
+- 用户在其他的设备上更改了密码，导致此设备上自动登录失败，提示错误码 216。
+- 用户的账号被从服务器端删除，提示错误码 207。
+- 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
+- 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
+- 开启多设备服务后，用户在其他设备上通过调用 API 或者环信控制台将当前设备登录的 ID 强制退出登录（错误码 217）。

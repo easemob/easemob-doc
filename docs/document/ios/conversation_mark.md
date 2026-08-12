@@ -1,106 +1,245 @@
 # 会话标记
 
-<Toc />
+## 功能说明
 
-某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯云 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。
+会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。iOS SDK 支持为单聊、群聊和聊天室会话添加或移除标记。
 
-**如果要使用会话标记功能，你需要确保开通了[会话列表服务](conversation_list.html#从服务器分页获取会话列表)并将 SDK 版本升级至 4.3.0 或以上版本。**
+SDK 提供 `EMMarkType0` 至 `EMMarkType19` 共 20 个标记，单个会话最多可同时包含 20 个标记。各标记与业务含义之间的映射由应用自行定义和维护。在 Swift 中，对应枚举值为 `.markType0` 至 `.markType19`。
 
-你需要自行维护会话标记与具体业务含义（比如 `EMMarkType0` 为重要会话）之间的映射关系。例如：
-
-```objectivec
-NSDictionary* mapping = @{
-        @(EMMarkType0): @"important",
-        @(EMMarkType1): @"normal",
-        @(EMMarkType2): @"unimportant",
-        @(EMMarkType3): @"boys",
-        @(EMMarkType4): @"girls",
-    };
+```swift
+let markMapping: [EMMarkType: String] = [
+    .markType0: "important",
+    .markType1: "pending",
+    .markType2: "customer"
+]
 ```
 
-## 技术原理
+:::tip
+会话标记只用于业务分类和筛选，不会影响会话未读数、消息收发、消息已读状态或会话置顶状态。
+:::
 
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
+## 功能开通
 
-- `EMChatManager#addConversationMark:completion`：标记会话。
-- `EMChatManager#removeConversationMark:completion`：取消标记会话。
-- `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：根据会话标记从服务器分页查询会话列表。
-- 根据会话标记从本地查询会话列表：调用 `getAllConversations` 方法获取本地所有会话后自己进行会话过滤。
-- 获取本地单个会话的所有标记：调用 `getConversationWithConvId` 方法获取本地单个会话，然后从会话的 `marks` 属性中查看该会话的所有标记。
+会话标记属于服务端会话列表功能的一部分。使用前，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- **[开通服务端会话列表功能](conversation_list#从服务器分页获取会话列表)**。
+- 已完成 SDK 初始化并成功登录，详见[快速开始](quickstart.html)。
+- 已开通[服务端会话列表功能](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)。
+- 已了解环信即时通讯 IM API 的使用限制，详见[使用限制](/product/limitation.html)。
 
-## 实现方法
+## 添加会话标记
 
-### 标记会话
+调用 `addConversationMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记，单次最多传入 20 个会话 ID。
 
-你可以调用 `addConversationMark` 方法标记会话。每次最多可为 20 个会话添加标记。调用该方法会同时为本地和服务器端的会话添加标记。
+添加会话标记后，SDK 会同时更新服务端和本地的标记数据。初始化 SDK 前，将 `EMOptions#dataSyncType` 配置为包含 `EMDataSyncTypeConversations`。登录后，当 `syncDataFinished` 通知会话数据同步成功时，可通过本地会话列表接口获取 `EMConversation` 对象，并通过 `EMConversation#marks` 获取该会话的全部标记。
 
-添加会话标记后，若调用 `getConversationsFromServerWithCursor:pageSize:completion` 接口从服务器分页获取会话列表，返回的会话对象中包含会话标记，即 `EMConversation#marks` 字段。若你已经达到了服务端会话列表长度限制（默认 100 个会话），服务端会根据会话的活跃度（最新一条消息的时间戳）删除不活跃会话，这些会话的会话标记也随之删除。
+若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话，对应标记也可能不再随服务端会话列表同步到本地。
 
-:::tip
-对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
-:::
+```swift
+let conversationIds = [
+    "user2",
+    "group1"
+]
 
-```objectivec
-[EMClient.sharedClient.chatManager addConversationMark:@[@"conversationId1"] mark:EMMarkType0 completion:^(EMError * _Nullable aError) {
-            
-    }];
-```
-
-### 取消标记会话
-
-你可以调用 `removeConversationMark` 方法删除会话标记。每次最多可移除 20 个会话的标记。
-
-调用该方法会同时移除本地和服务器端会话的标记。
-
-```objectivec
-[EMClient.sharedClient.chatManager removeConversationMark:@[@"conversationId1"] mark:EMMarkType0 completion:^(EMError * _Nullable aError) {
-            
-    }];
-```
-
-### 根据会话标记从服务器分页查询会话列表
-
-你可以调用 `getConversationsFromServerWithCursor` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
-
-
-```objectivec
-//cursor：查询的开始位置。若传入空字符串，SDK 从最新标记操作的会话开始获取。
-// filter：会话查询选项，包括会话标记和每页获取的会话条数（最多可获取 10 条）。
-EMConversationFilter* filter = [[EMConversationFilter alloc] initWithMark:EMMarkType0 pageSize:10];
-[EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:@"" filter:filter completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
-            
-    }];
-```
-
-### 根据会话标记从本地查询会话列表
-
-对于本地会话，你可以调用 `getAllConversations` 方法获取本地所有会话后自己进行会话过滤。下面以查询标记了 `EMMarkType0` 的所有本地会话为例。
-
-```objectivec
-//最终的查询结果全部放入 result 中。
-NSMutableArray<EMConversation*>* result = [NSMutableArray array];
- NSArray<EMConversation*>* allConversations = [EMClient.sharedClient.chatManager getAllConversations];
-for (EMConversation* conversation in allConversations) {
-    if ([conversation.marks containsObject:@(EMMarkType0)]) {
-          [result addObject:conversation];
+EMClient.shared().chatManager?.addConversationMark(
+    conversationIds,
+    mark: .markType0
+) { error in
+    if let error {
+        print("添加会话标记失败：\(error.errorDescription)")
+    } else {
+        print("会话标记添加成功")
     }
 }
 ```
 
-### 获取本地单个会话的所有标记
+参数说明如下：
 
-要获取本地单个会话的所有标记，你需要首先调用 `getConversationWithConvId` 方法获取本地单个会话，然后从会话的 `marks` 属性中查看该会话的所有标记，示例代码如下：
+| 参数 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `conversationIds` | `[String]` | 会话 ID 数组，不能为空，单次最多传入 20 个。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> - 聊天室：聊天室 ID。 |
+| `mark` | `EMMarkType` | 要添加的标记，取值为 `.markType0` 至 `.markType19`。 |
+| `completion` | `(EMError?) -> Void` | 异步操作结果。`error == nil` 表示成功，否则可通过 `EMError#code` 和 `EMError#errorDescription` 处理失败。 |
 
-```objectivec
-EMConversation* conversation = [EMClient.sharedClient.chatManager getConversationWithConvId:@"conversationId"];
-    NSArray<NSNumber*>* marks = conversation.marks;
+:::tip
+会话标记不会将会话标为“消息已读”或“消息未读”。如需清除会话未读数，应使用会话未读数接口。
+:::
+
+## 移除会话标记
+
+调用 `removeConversationMark` 从一个或多个会话中移除指定标记。该操作会同时更新服务端和本地的会话标记，单次最多传入 20 个会话 ID。
+
+```swift
+let conversationIds = [
+    "user2",
+    "group1"
+]
+
+EMClient.shared().chatManager?.removeConversationMark(
+    conversationIds,
+    mark: .markType0
+) { error in
+    if let error {
+        print("移除会话标记失败：\(error.errorDescription)")
+    } else {
+        print("会话标记移除成功")
+    }
+}
 ```
 
+`removeConversationMark` 的参数规则与 [添加标记](#添加会话标记) 接口相同。移除某个标记不会影响该会话已有的其他标记。
+
+## 按标记筛选会话列表
+
+应用应在初始化 SDK 前将 `EMOptions#dataSyncType` 配置为包含 `.conversations`，登录后等待会话数据同步完成，再通过本地 `EMConversation#marks` 筛选会话。
+
+初始化 SDK 前配置会话同步：
+
+```swift
+let options = EMOptions(appkey: "your-org#your-app")
+options.dataSyncType = [.conversations]
+
+if let error = EMClient.shared().initializeSDK(with: options) {
+    print("SDK 初始化失败：\(error.errorDescription)")
+}
+```
+
+通过 `syncDataFinished` 监听会话数据同步结束。`error == nil` 且 `type` 包含 `.conversations` 时，可以读取本地会话列表并筛选：
+
+```swift
+final class ConversationMarkSyncListener: NSObject, EMClientDelegate {
+    func syncDataFinished(_ error: EMError?, type: EMDataSyncType) {
+        guard error == nil, type.contains(.conversations) else {
+            return
+        }
+
+        let conversations =
+            EMClient.shared().chatManager?.getAllConversations(true) ?? []
+
+        let targetMark = NSNumber(value: EMMarkType.markType0.rawValue)
+        let markedConversations = conversations.filter { conversation in
+            conversation.marks.contains(targetMark)
+        }
+
+        // 使用 markedConversations 刷新业务列表。
+    }
+}
+
+let syncListener = ConversationMarkSyncListener()
+EMClient.shared().add(syncListener, delegateQueue: nil)
+```
+
+如需从本地数据库加载会话并按标记筛选，也可以直接使用 `filterConversationsFromDB`：
+
+```swift
+let targetMark = NSNumber(value: EMMarkType.markType0.rawValue)
+
+let markedConversations = EMClient.shared().chatManager?
+    .filterConversationsFromDB(
+        cleanMemoryCache: false,
+        filter: { conversation in
+            conversation.marks.contains(targetMark)
+        }
+    ) ?? []
+```
+
+如需获取单个本地会话的全部标记，调用 `getConversation` 获取会话，再读取 `EMConversation#marks`：
+
+```swift
+let conversation = EMClient.shared().chatManager?.getConversation(
+    "conversationId",
+    type: .chat,
+    createIfNotExist: false
+)
+
+let marks = conversation?.marks ?? []
+```
+
+:::tip
+`getAllConversations`、`filterConversationsFromDB` 和 `getConversation` 均读取本地数据，不会主动向服务器请求最新标记。需要最新服务端状态时，应先等待会话数据同步成功。
+:::
+
+## 监听会话列表更新
+
+本地会话列表发生变化时，SDK 通过 `conversationListDidUpdate` 返回更新后的会话数组。应用可以重新筛选带有目标标记的会话并刷新 UI。
+
+```swift
+final class ConversationMarkListListener: NSObject, EMConversationDelegate {
+    func conversationListDidUpdate(
+        _ conversationList: [EMConversation]
+    ) {
+        let targetMark = NSNumber(value: EMMarkType.markType0.rawValue)
+        let markedConversations = conversationList.filter { conversation in
+            conversation.marks.contains(targetMark)
+        }
+
+        // 使用 markedConversations 刷新 UI。
+    }
+}
+
+let listListener = ConversationMarkListListener()
+EMClient.shared().chatManager?.addConversation(delegate: listListener, queue: nil)
+
+// 不再需要监听时移除。
+EMClient.shared().chatManager?.removeConversation(delegate: listListener)
+```
+
+同一用户在其他设备添加或移除会话标记时，当前设备可通过 `multiDevicesConversationEvent` 收到 `.conversationUpdateMark` 事件，对应 Objective-C 枚举值为 `EMMultiDevicesEventConversationUpdateMark`，数值为 63。
+
+```swift
+final class ConversationMarkMultiDeviceListener:
+    NSObject,
+    EMMultiDevicesDelegate {
+
+    func multiDevicesConversationEvent(
+        _ event: EMMultiDevicesEvent,
+        conversationId: String,
+        conversationType: EMConversationType
+    ) {
+        guard event == .conversationUpdateMark else {
+            return
+        }
+
+        // 其他设备更新了会话标记，重新读取本地会话并刷新 UI。
+        let conversations =
+            EMClient.shared().chatManager?.getAllConversations(true) ?? []
+    }
+}
+
+let multiDeviceListener = ConversationMarkMultiDeviceListener()
+EMClient.shared().addMultiDevices(
+    delegate: multiDeviceListener,
+    queue: nil
+)
+
+// 不再需要监听时移除。
+EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
+```
+
+## 注意事项
+
+- 会话标记支持单聊、群聊和聊天室会话。
+- Objective-C 标记值为 `EMMarkType0` 至 `EMMarkType19`，Swift 对应 `.markType0` 至 `.markType19`；具体业务含义由应用维护。
+- 单个会话最多可以同时包含 20 个标记。
+- `addConversationMark` 和 `removeConversationMark` 可同时操作多个会话，单次最多传入 20 个会话 ID。
+- 会话 ID 数组不能为空。调用失败时，应根据 completion 中的 `EMError#code` 和 `EMError#errorDescription` 处理。
+- 会话标记会同时更新服务端和本地会话数据，并同步到当前用户的其他设备。
+- 会话标记不影响会话未读数、消息已读状态、消息收发或会话置顶状态。
+- 应在会话数据同步完成后，通过本地接口读取并筛选会话。
+- 若服务端会话列表达到数量限制，不活跃会话可能被移出服务端会话列表，对应标记也可能不再随会话列表返回。
+
+## 接口列表
+
+| API 名称 | 所属模块/类型 | 说明 |
+| :--- | :--- | :--- |
+| [`addConversationMark`](#添加会话标记) | `IEMChatManager` | 为一个或多个会话添加指定标记，同时更新服务端和本地。 |
+| [`removeConversationMark`](#移除会话标记) | `IEMChatManager` | 从一个或多个会话中移除指定标记，同时更新服务端和本地。 |
+| [`dataSyncType`](#按标记筛选会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
+| [`initializeSDKWithOptions`](#按标记筛选会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
+| [`getAllConversations`](#按标记筛选会话列表) | `IEMChatManager` | 获取排序后的本地会话数组。 |
+| [`filterConversationsFromDB`](#按标记筛选会话列表) | `IEMChatManager` | 从本地数据库读取并筛选会话。 |
+| [`getConversation`](#按标记筛选会话列表) | `IEMChatManager` | 获取指定类型的本地会话对象。 |
+| [`marks`](#按标记筛选会话列表) | `EMConversation` | 获取会话的全部标记，返回 `NSArray<NSNumber *>`，Swift 中为 `[NSNumber]`。 |

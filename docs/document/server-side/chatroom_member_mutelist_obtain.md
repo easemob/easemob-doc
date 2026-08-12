@@ -24,7 +24,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/mute
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute   \
+curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/mute   \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 

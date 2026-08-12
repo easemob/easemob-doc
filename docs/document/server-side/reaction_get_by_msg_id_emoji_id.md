@@ -84,7 +84,7 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/reaction/user/wz/detail?msgId=99762778773
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
 | `data`              | JSON   | 消息添加的 Reaction 的详情。                                                                            |
 | `data.reactionId`   | String | Reaction ID。                                                                                           |
-| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与 [添加 Reaction API](message_reaction_add.html) 的请求参数 `message` 相同。 |
+| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与 [添加 Reaction API](reaction_add.html) 的请求参数 `message` 相同。 |
 | `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
 | `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
 | `data.userList`     | Array  | 按 Reaction 添加时间正序返回的用户 ID 列表。                           |

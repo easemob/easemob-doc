@@ -54,6 +54,8 @@
 ```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
+//群组名称长度不能超过 255 个字符。
+//群组描述长度不能超过 2048 个字符。
 SDKClient.Instance.GroupManager.CreateGroup(groupname, option, avatar, desc, members, callback:new ValueCallBack<Group>(
   onSuccess: (group) => {
   },

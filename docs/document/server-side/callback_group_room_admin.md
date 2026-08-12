@@ -13,7 +13,7 @@
  
 ### 回调时机
 
-- 客户端添加了 [群组](/document/android/group_members.html#添加群组管理员)/[聊天室管理员](/document/android/room_members.html#添加聊天室管理员)。
+- 客户端添加了 [群组](/document/android/group_members.html#添加群管理员)/[聊天室管理员](/document/android/room_members.html#添加聊天室管理员)。
 - 调用 RESTful API 添加了 [群组](/document/server-side/group_admin_add.html)/[聊天室管理员](/document/server-side/chatroom_admin_add.html)。
 - 在 [环信控制台](https://console.easemob.com/user/login) 上添加了 [群组](/value-added/moderation/moderation_manual_review.html#群组审核管理)/[聊天室管理员](/value-added/moderation/moderation_manual_review.html#聊天室审核管理)。 
 
@@ -65,7 +65,7 @@
  
 ### 回调时机
 
-- 客户端删除了 [群组](/document/android/group_members.html#移除群组管理员权限)/[聊天室管理员](/document/android/room_members.html#移除聊天室管理员)。
+- 客户端删除了 [群组](/document/android/group_members.html#移除群管理员)/[聊天室管理员](/document/android/room_members.html#移除聊天室管理员)。
 - 调用 RESTful API 删除了 [群组](/document/server-side/group_delete.html)/[聊天室管理员](/document/server-side/chatroom_delete.html)。
 
 ### 回调请求

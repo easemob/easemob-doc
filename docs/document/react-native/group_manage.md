@@ -72,9 +72,9 @@
 ```typescript
 // 群组选项。核心选项为 `style`，用于设置群组类型。详见 `ChatGroupStyle`。
 option.style = PrivateOnlyOwnerInvite;
-// 群组的名称，不能超过 128 个字符
+// 群组的名称，不能超过 255 个字符
 const groupName = "study";
-// 群组描述，不能超过 512 个字符
+// 群组描述，不能超过 1024 个字符
 const desc = "this is study group";
 // 成员列表
 const allMembers = ["Tom", "Jason"];

@@ -34,7 +34,7 @@ POST https://{host}/{org_name}/{app_name}/moderation/txt/check
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST 'http://XXXX/XXX/XXX/moderation/txt/check' \
+curl -X POST 'https://XXXX/XXX/XXX/moderation/txt/check' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \

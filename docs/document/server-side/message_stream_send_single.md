@@ -57,7 +57,7 @@ POST https://{host}/{org_name}/{app_name}/stream_message/user
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
+curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \
@@ -77,7 +77,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 - 发送第二个消息分片：
 
 ```bash
-curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
+curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \
@@ -98,7 +98,7 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 - 发送最后一个消息分片：
   
 ```bash
-curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
+curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \
@@ -237,4 +237,4 @@ curl -X POST -i 'http://XXXX/XXXX/XXXX/stream_message/user' \
 | [发送前回调](/document/server-side/callback_presending.html)         | 否                               |
 | [发送后回调](/document/server-side/callback_postsending.html)         | 否      |
 | 消息发送成功后在发送方多客户端同步        |   否  |
-| [发送方和接收方的本地数据库存储](limitation.html#消息存储)         | 是 | 
+| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储)         | 是 |

@@ -51,7 +51,7 @@
 1. 图片消息 bodies 示例：
 
 ```json
-"bodies": [    {       "file_length":128827,      "filename":"test1.jpg",       "secret":"DRGM8OZrEeO1vaXXXXXXXXHBeKlIhDp0GCnFu54xOF3M6KLr",       "size":{"height":1325,"width":746},       "type":"img",      "url":"https://XXXX/XXXX/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b",   }]
+"bodies": [    {       "file_length":128827,      "filename":"test1.jpg",       "secret":"DRGM8OZrEeO1vaXXXXXXXXHBeKlIhDp0GCnFu54xOF3M6KLr",       "size":{"height":1325,"width":746},       "type":"img",      "url":"https://XXXX/XXXX/XXXX/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b",   }]
 ```
 
 2. 语音消息 bodies 示例：
@@ -65,7 +65,7 @@
   "length":10,
   "secret":"DRGM8OZrEeO1vafuJSo2IjHBeKlIhDp0GCnFu54xOF3M6KLr",
   "type":"audio",
-  "url":"https://XXXX/XXXX/chatdemoui/chatfiles/0637e55a-f606-XXXX-XXXX-51f25fd1215b"
+  "url":"https://XXXX/XXXX/XXXX/chatfiles/0637e55a-f606-XXXX-XXXX-51f25fd1215b"
       }
    ]
 ```
@@ -78,10 +78,10 @@
   "length": 10,
   "secret": "VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_",
   "size":{"height":480,"width":360},
-  "thumb": "https://XXXX/XXXX/chatdemoui/chatfiles/67279b20-XXXX-XXXX-8eee-21d3334b3a97",
+  "thumb": "https://XXXX/XXXX/XXXX/chatfiles/67279b20-XXXX-XXXX-8eee-21d3334b3a97",
   "thumb_secret": "ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I",
   "type": "video",
-  "url": "https://XXXX/XXXX/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"}]
+  "url": "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"}]
 ```
 
 ## 自定义消息

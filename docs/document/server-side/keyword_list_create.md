@@ -3,7 +3,7 @@
 ## 功能说明
 
 - 创建关键词名单。
-- 关键词名单在 [文本审核规则](/value-added/moderation/moderation_rule_config.html#设置审核规则) 中应用。使用前，你需要开通 [文本审核服务](/value-added/moderation/moderation_enable.html), 配置 [文本审核规则](/value-added/moderation/moderation_rule_config.html#设置审核规则)。
+- 关键词名单在 [文本审核规则](/value-added/moderation/moderation_rule_config.html#配置审核规则) 中应用。使用前，你需要开通 [文本审核服务](/value-added/moderation/moderation_enable.html), 配置 [文本审核规则](/value-added/moderation/moderation_rule_config.html#配置审核规则)。
 - 创建的名单会在环信控制台中展示。你可以在环信控制台编辑、删除名单或进行添加/删除关键词等操作。详见 [关键词审核文档](/value-added/moderation/moderation_keyword.html#配置关键词名单)。
 - 每个应用最多可配置 100 个名单, 每个名单最多可添加 10,000 个关键词，即每个应用最多可配置 1,000,000 个词条。
 
@@ -126,7 +126,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list' \
 | - `tagId` | String | 标签 ID。 |
 | - `fullMatch` | Boolean | 关键词与消息内容是否要精确匹配。 |
 | - `suggestion` | String | 对匹配关键词的消息内容的处理建议。该字段的值以及值的含义与 `disposition` 字段相同。  |
-| - `disposition` | String | 对匹配关键词的消息内容的处理。关于该字段的说明，详见 [请求 body](#请求-body) 中的 `disposition`。 |
+| - `disposition` | String | 对匹配关键词的消息内容的处理。关于该字段的说明，详见 [请求 body](#请求-body-参数) 中的 `disposition`。 |
 | - `quantity` | Int | 关键词数量。 |
 | - `status` | String | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
 | - `createDataTime` | Long | 关键词名单的创建时间。|

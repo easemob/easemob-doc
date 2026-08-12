@@ -1,6 +1,6 @@
 # 在线状态订阅
 
-<Toc />
+## 功能说明
 
 用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
 
@@ -8,15 +8,11 @@
 
 关于用户的在线、离线和自定义状态的定义、变更以及用户的实时感知，详见[用户在线状态管理](/product/product_user_presence.html)。
 
-## 技术原理
+## 功能开通
 
-环信 IM SDK 提供 [EMPresence](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence.html)、[EMPresenceManager](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_presence_manager.html) 和 [EMPresenceListener](https://sdkdocs.easemob.com/apidoc/android/chat3.0/interfacecom_1_1hyphenate_1_1_e_m_presence_listener.html) 类，用于管理在线状态订阅，包含如下核心方法：
+使用在线状态订阅功能前，需要在环信控制台开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
 
-- `subscribePresences`：订阅用户的在线状态；
-- `publishPresence`：发布自定义在线状态；
-- `addListener`：添加在线状态监听器；
-- `onPresenceUpdated`：被订阅用户的在线状态变更时，订阅者收到监听回调；
-- `unsubscribePresences`：无需关注用户的在线状态时，取消订阅；
+## 订阅流程
 
 订阅用户在线状态的基本工作流程如下：
 
@@ -36,15 +32,11 @@
 
 使用在线状态功能前，请确保满足以下条件：
 
-1. 完成 3.9.1 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在[环信控制台](https://console.easemob.com/user/login)开通在线状态订阅功能。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
+- 完成 SDK 初始化并登录，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+- 已在[环信控制台](https://console.easemob.com/user/login)开通在线状态订阅功能。详见 [环信控制台文档](/product/console/basic_user.html#用户离在线状态实时同步)。
 
-## 实现方法
-
-本节介绍如何使用环信 IM SDK 提供的 API 实现上述功能。
-
-### 订阅指定用户的在线状态
+## 订阅指定用户的在线状态
 
 默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `EMPresenceManager#subscribePresences` 方法订阅指定用户的在线状态，示例代码如下：
 
@@ -73,7 +65,7 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 - 每个用户最多可被 3000 个用户订阅。
 :::
 
-### 发布自定义在线状态
+## 发布自定义在线状态
 
 用户在线时，可调用 `EMPresenceManager#publishPresence` 方法发布自定义在线状态：
 
@@ -93,12 +85,13 @@ EMClient.getInstance().presenceManager().publishPresence("自定义状态", new 
 
 在线状态发布后，发布者和订阅者均会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
-### 添加在线状态监听器
+## 添加在线状态监听器
 
 添加用户在线状态的监听器，示例代码如下：
 
 ```java
-EMClient.getInstance().presenceManager().addListener(new MyPresenceListener());
+EMPresenceListener presenceListener = new MyPresenceListener();
+EMClient.getInstance().presenceManager().addListener(presenceListener);
 ```
 
 参考如下示例代码，使用 `EMPresenceListener` 监听器实现以下接口。当订阅的用户在线状态发生变化时，会收到 `onPresenceUpdated` 回调。
@@ -109,7 +102,13 @@ public interface EMPresenceListener {
 }
 ```
 
-### 取消订阅指定用户的在线状态
+不再需要监听时，可调用 `EMPresenceManager#removeListener` 移除监听器：
+
+```java
+EMClient.getInstance().presenceManager().removeListener(presenceListener);
+```
+
+## 取消订阅指定用户的在线状态
 
 若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unsubscribePresences` 方法，示例代码如下：
 
@@ -127,13 +126,13 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 });
 ```
 
-### 查询被订阅用户列表
+## 查询被订阅用户列表
 
 为方便用户管理订阅关系，SDK 提供 `EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```java
-// pageNum	当前页码，从 1 开始。
-// pageSize	每页的订阅用户的数量。
+// pageNum：当前页码，从 1 开始。
+// pageSize：每页返回的用户数量。取值范围为 [1,100]，默认值为 1。
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {
@@ -147,7 +146,7 @@ EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSiz
 });
 ```
 
-### 获取用户的当前在线状态
+## 获取用户的当前在线状态
 
 如果不关注用户的在线状态变更，你可以调用 `EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
@@ -165,3 +164,18 @@ EMClient.getInstance().presenceManager().fetchPresenceStatus(contactsList, new E
     }
 });
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`subscribePresences`](#订阅指定用户的在线状态) | `EMPresenceManager` | 订阅指定用户的在线状态。 |
+| [`publishPresence`](#发布自定义在线状态) | `EMPresenceManager` | 发布当前用户的自定义在线状态。 |
+| [`unsubscribePresences`](#取消订阅指定用户的在线状态) | `EMPresenceManager` | 取消订阅指定用户的在线状态。 |
+| [`fetchSubscribedMembers`](#查询被订阅用户列表) | `EMPresenceManager` | 分页查询当前用户已订阅的用户列表。 |
+| [`fetchPresenceStatus`](#获取用户的当前在线状态) | `EMPresenceManager` | 查询指定用户当前的在线状态。 |
+| [`getPublisher`](#获取用户的当前在线状态) | `EMPresence` | 获取在线状态发布者 ID。 |
+| [`getStatusList`](#获取用户的当前在线状态) | `EMPresence` | 获取发布者各设备的在线状态。 |
+| [`getExt`](#发布自定义在线状态) | `EMPresence` | 获取自定义在线状态扩展信息。 |
+| [`getLatestTime`](#获取用户的当前在线状态) | `EMPresence` | 获取状态更新时间。 |
+| [`getExpiryTime`](#订阅指定用户的在线状态) | `EMPresence` | 获取订阅到期时间。 |
