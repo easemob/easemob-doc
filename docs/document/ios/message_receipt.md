@@ -128,7 +128,7 @@ options.enableDeliveryAck = YES;
 
 #### 步骤 1：设置消息需要已读回执
 
-消息接收方在初始化 SDK 时需将 `isNeedReadReceipt` 设置为 `YES`；该属性默认值为 `NO`。该属性对单聊和群聊均有效。
+消息发送方在初始化消息对象时需将 `isNeedReadReceipt` 设置为 `YES`；该属性默认值为 `NO`。该属性对单聊和群聊均有效。
 
 单聊消息已读回执无需额外开通。群聊消息已读回执需先在环信控制台开通功能，再设置该属性。
 
@@ -169,7 +169,7 @@ NSArray<EMChatMessage *> *messages = @[message];
 ```
 
 :::tip
-建议只为接收方向、属于单聊或群聊且 `isNeedReadReceipt` 为 `YES` 的消息发送已读回执。视频、语音和文件等消息可在用户实际查看内容后再发送。
+建议只为接收方向、属于单聊或群聊， `isNeedReadReceipt` 为 `YES`，且`isPeerRead`为`NO`的消息发送已读回执。视频、语音和文件等消息可在用户实际查看内容后再发送。
 :::
 
 #### 步骤 3：监听消息已读回执
@@ -195,10 +195,6 @@ NSArray<EMChatMessage *> *messages = @[message];
         NSInteger readCount = receipt.readCount;
         // 根据回执刷新单聊消息已读状态或群消息已读人数。
     }
-}
-
-// 群消息读取状态更新时可按需刷新界面。
-- (void)groupMessageReadReceiptsHasChanged {
 }
 
 // 注册消息代理。
@@ -264,7 +260,6 @@ NSArray<EMChatMessage *> *messages = @[message];
 | `messagesDidReceive` | 收到普通消息时触发。 | 消息接收方；多设备场景下，发送方的其他在线设备也可能收到消息。 |
 | `messagesDidDeliver` | 接收方 SDK 自动发送单聊消息送达回执后触发。 | 单聊消息发送方。 |
 | `onMessageReadReceipts` | 接收方调用 `sendMessageReadReceipts` 发送一条或多条消息的已读回执后触发。 | 单聊或群聊消息发送方。 |
-| `groupMessageReadReceiptsHasChanged` | 群消息的读取状态更新时触发。 | 需要刷新群消息已读状态的客户端。 |
 
 ## 查看消息送达和已读状态
 
