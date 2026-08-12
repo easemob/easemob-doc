@@ -36,12 +36,17 @@
 
 你可以调用 `createGroup` 方法创建群组，并在创建时设置群组名称、群描述、初始成员、群组类型以及入群规则等信息。
 
+- 群组名称长度不能超过 255 个字符。
+- 群组描述长度不能超过 2048 个字符。
+
 示例代码如下：
 
 ```typescript
 const result = await client.groupManager.createGroup({
+  // 群组名称长度不能超过 255 个字符。
   name: 'groupname',
   avatar: 'https://example.com/group-avatar.png',
+  // 群组描述长度不能超过 2048 个字符。
   description: 'this is my group',
   memberIds: ['user1', 'user2'],
   public: true,

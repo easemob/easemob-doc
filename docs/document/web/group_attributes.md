@@ -83,7 +83,7 @@ const groupInfoList = await client.groupManager.getGroupInfoList({
 
 你可以通过 `Group` 对象修改群组资料或群组配置。
 
-- `updateInfo`：修改群组名称、描述、头像和扩展信息等基础资料。群名称的长度限制为 128 个字符。群描述的长度限制为 512 个字符。
+- `updateInfo`：修改群组名称、描述、头像和扩展信息等基础资料。
 - `updateConfigs`：修改是否公开、入群审批、成员邀请权限、邀请确认和群成员人数上限等配置。
 
 修改成功后，群成员会收到 `onGroupInfoChanged` 事件。
@@ -92,7 +92,9 @@ const groupInfoList = await client.groupManager.getGroupInfoList({
 const group = client.groupManager.getGroup('groupId');
 
 await group.updateInfo({
+  // 群名称的长度限制为 255 个字符。
   name: 'new group name',
+  // 群描述的长度限制为 2048 个字符。
   description: 'new description',
   avatar: 'https://example.com/new-group-avatar.png',
   ext: JSON.stringify({ info: 'new group info' }),
@@ -112,8 +114,8 @@ await client.groupManager.updateGroupInfo({
 
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `name` | String | 否 | 新的群组名称。 |
-| `description` | String | 否 | 新的群组描述。 |
+| `name` | String | 否 | 新的群组名称。群名称的长度限制为 255 个字符。 |
+| `description` | String | 否 | 新的群组描述。群描述的长度限制为 2048 个字符。 |
 | `avatar` | String | 否 | 新的群头像地址或标识。 |
 | `ext` | String | 否 | 新的群组扩展信息，通常为业务自定义字符串。 |
 | `public` | Boolean | 否 | 是否为公开群。 |

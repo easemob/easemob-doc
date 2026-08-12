@@ -28,7 +28,7 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `changeGroupSubject` 方法设置和修改群组名称，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群名称的长度限制为 128 个字符。
+仅群主和群管理员可以调用 `changeGroupSubject` 方法设置和修改群组名称，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群名称的长度限制为 255 个字符。
 
 ```objectivec
 [[EMClient sharedClient].groupManager changeGroupSubject:@"subject"];
@@ -36,7 +36,7 @@
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `changeDescription` 方法设置和修改群组描述，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群描述的长度限制为 512 个字符。
+仅群主和群管理员可以调用 `changeDescription` 方法设置和修改群组描述，其他群成员都会收到 `EMGroupManagerDelegate#groupSpecificationDidUpdate` 回调，群描述的长度限制为 2048 个字符。
 
 ```objectivec
 [[EMClient sharedClient].groupManager changeDescription:@"desc"
