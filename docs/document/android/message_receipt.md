@@ -168,7 +168,7 @@ EMClient.getInstance()
 ```
 
 :::tip
-建议只为接收方向、属于单聊或群聊且 `isNeedReadReceipt()` 为 `true` 的消息发送已读回执。视频、语音和文件等消息可在用户实际查看内容后再发送。
+建议只为接收方向、属于单聊或群聊，`isNeedReadReceipt()` 为 `true`，且 `isPeerRead` 为 `false` 的的消息发送已读回执。视频、语音和文件等消息可在用户实际查看内容后再发送。
 :::
 
 #### 步骤 3：监听消息已读回执
@@ -178,7 +178,7 @@ EMClient.getInstance()
 | API                   | 返回类型  | 说明                               |
 | --------------------- | --------- | ---------------------------------- |
 | `getMessageId()`      | `String`  | 获取回执对应的消息 ID。            |
-| `getConversationId()` | `String`  | 获取回执对应的会话 ID。            |
+| `getConversationId()` | `String`  | 获取回执对应的会话 ID。            |a
 | `isPeerReceipt()`     | `boolean` | 判断是否为单聊对端发送的已读回执。 |
 | `getReadCount()`      | `int`     | 获取群消息的已读人数。             |
 
