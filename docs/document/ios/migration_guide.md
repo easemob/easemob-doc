@@ -126,7 +126,7 @@ iOS SDK 5.0.0 将单聊和群聊的实时已读回执统一通过 `EMChatManager
 | `EMChatManagerDelegate#messagesDidRead:` | `EMChatManagerDelegate#onMessageReadReceipts:` | 接收单聊消息的已读回执。 |
 | `EMChatManagerDelegate#groupMessageDidRead:groupAcks:` | `EMChatManagerDelegate#onMessageReadReceipts:` | 接收群聊消息的已读回执。 |
 | `EMChatManagerDelegate#onConversationRead:to:` | 无直接替代 | 会话级已读回执不再单独回调；消息级已读结果由 `onMessageReadReceipts:` 通知。 |
-| `EMChatManagerDelegate#groupMessageAckHasChanged` | `EMChatManagerDelegate#groupMessageReadReceiptsHasChanged` | 群聊消息已读回执状态发生变化时触发，仅调整回调命名。 |
+| `EMChatManagerDelegate#groupMessageAckHasChanged` | `EMChatManagerDelegate#onMessageReadReceipts:` | 接收群聊消息的已读回执。 |
 
 SDK 5.0.0 新增 `EMMessageReadReceipt`，用于统一描述消息已读回执：
 
@@ -293,7 +293,7 @@ iOS SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `EMGroup
 | `EMClientDelegate` | 无 | `syncDataStartWithType:`、`syncDataFinished:type:` | 指定类型的数据同步开始和结束通知。 |
 | `EMContactManagerDelegate` | `onFriendStartSync`、`onFriendSyncFinished:` | `EMClientDelegate#syncDataStartWithType:`、`syncDataFinished:type:` | 好友同步回调统一迁移至客户端代理，并通过 `EMDataSyncTypeContacts` 识别类型。 |
 | `EMChatManagerDelegate` | `messagesDidRead:`、`groupMessageDidRead:groupAcks:` | `onMessageReadReceipts:` | 统一接收单聊和群聊的消息已读回执。 |
-| `EMChatManagerDelegate` | `groupMessageAckHasChanged` | `groupMessageReadReceiptsHasChanged` | 群聊消息已读回执状态变化通知。 |
+| `EMChatManagerDelegate` | `groupMessageAckHasChanged` | `onMessageReadReceipts:` | 群聊消息已读回执状态变化通知。 |
 | `EMChatManagerDelegate` | `onConversationRead:to:` | 无直接替代 | 会话级已读回执回调已删除；按消息处理 `onMessageReadReceipts:`。 |
 | `EMChatManagerDelegate` | `conversationListDidUpdate:` | `EMConversationDelegate#conversationListDidUpdate:` | 会话列表更新回调迁移到独立代理；使用 `addConversationDelegate:delegateQueue:` 注册。 |
 | `EMGroupManagerDelegate` | `joinGroupRequestDidDecline:reason:`、`joinGroupRequestDidDecline:reason:applicant:` | `joinGroupRequestDidDecline:reason:decliner:applicant:` | 增加拒绝者 ID，并统一保留申请者 ID；旧两参数和三参数回调均已删除。 |
