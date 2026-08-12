@@ -27,7 +27,7 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `ChangeGroupName` 方法设置和修改群组名称，群名称的长度限制为 128 个字符。
+仅群主和群管理员可以调用 `ChangeGroupName` 方法设置和修改群组名称，群名称的长度限制为 255 个字符。
 
 示例代码如下：
 
@@ -44,7 +44,7 @@ SDKClient.Instance.GroupManager.ChangeGroupName(groupId, groupName, new CallBack
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `ChangeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 512 个字符。
+仅群主和群管理员可以调用 `ChangeGroupDescription` 方法设置和修改群组描述，群描述的长度限制为 2048 个字符。
 
 示例代码如下：
 

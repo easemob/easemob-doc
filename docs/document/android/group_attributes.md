@@ -110,7 +110,7 @@ EMClient.getInstance().groupManager().asyncUpdateGroupConfigs(
 
 ## 修改群组名称
 
-仅群主和群管理员可以调用 `asyncChangeGroupName` 修改群组名称。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群名称的长度限制为 128 个字符。
+仅群主和群管理员可以调用 `asyncChangeGroupName` 修改群组名称。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群名称的长度限制为 255 个字符。
 
 ```java
 // 异步方法。
@@ -135,7 +135,7 @@ EMClient.getInstance()
 
 ## 修改群组描述
 
-仅群主和群管理员可以调用 `asyncChangeGroupDescription` 修改群组描述。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群描述的长度限制为 512 个字符。
+仅群主和群管理员可以调用 `asyncChangeGroupDescription` 修改群组描述。修改成功后，其他群成员会收到 `EMGroupChangeListener#onSpecificationChanged` 回调。群描述的长度限制为 2048 个字符。
 
 ```java
 // 异步方法。

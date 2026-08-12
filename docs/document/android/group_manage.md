@@ -44,9 +44,9 @@ SDK 使用 `EMGroupConfigs` 配置群组类型和入群规则：
 
 | 参数或字段 | 类型 | 是否必填 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `groupName` | String | 否 | 群组名称；不设置时传 `null`。 |
+| `groupName` | String | 否 | 群组名称；不设置时传 `null`。长度不能超过 255 个字符。|
 | `avatar` | String | 否 | 群头像 URL；不设置时传 `null`。 |
-| `desc` | String | 否 | 群组描述；不设置时传 `null`。 |
+| `desc` | String | 否 | 群组描述；不设置时传 `null`。长度不能超过 2048 个字符。|
 | `allMembers` | String[] | 是 | 初始群成员的用户 ID 数组，不包含群主；没有初始成员时传空数组，不能传 `null`。 |
 | `reason` | String | 否 | 邀请初始成员入群的说明；不设置时传 `null`。 |
 | `configs` | EMGroupConfigs | 是 | 群组配置对象，不能为 `null`。 |

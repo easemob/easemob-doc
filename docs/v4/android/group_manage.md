@@ -74,7 +74,10 @@
 
 ![img](/images/android/group-flow.png)
 
-用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因：
+
+- 群组名称长度不能超过 255 个字符。
+- 群组描述长度不能超过 2048 个字符。
 
 用户加入群组后，将可以收到群消息。示例代码如下：
 
@@ -84,6 +87,7 @@ option.maxUsers = 100;
 option.style = EMGroupStyle.EMGroupStylePrivateMemberCanInvite;
 // 同步方法，会阻塞当前线程。
 // 异步方法为 asyncCreateGroup(String, String, String[], String, EMGroupOptions, EMValueCallBack)。
+// 群组名称长度不能超过 255 个字符。群组描述长度不能超过 2048 个字符。
 EMClient.getInstance().groupManager().createGroup(groupName, desc, allMembers, reason, option);
 ```
 

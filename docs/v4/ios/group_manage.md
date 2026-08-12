@@ -72,6 +72,9 @@
 
 用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
+- 群组名称长度不能超过 255 个字符。
+- 群组描述长度不能超过 2048 个字符。
+
 用户加入群组后，将可以收到群消息。
 
 示例代码如下：
@@ -86,6 +89,8 @@ options.IsInviteNeedConfirm = YES;
 options.style = EMGroupStylePrivateMemberCanInvite;
 NSArray *members = @{@"member1",@"member2"};
 // 调用 `createGroupWithSubject` 创建群组。同步方法，异步方法见 [EMGroupManager createGroupWithSubject:description:invitees:message:setting:completion:]
+// 群组名称长度不能超过 255 个字符。
+// 群组描述长度不能超过 2048 个字符。
 [[EMClient sharedClient].groupManager createGroupWithSubject:@"subject"
                          description:@"description"
                          invitees:members

@@ -38,9 +38,9 @@
 
 | 参数                | 类型   | 描述          |
 | :------------- | :----- | :--------------------------------------------- |
-| `groupName` | String | 群组名称。 |
+| `groupName` | String | 群组名称。长度不能超过 255 个字符。 |
 | `avatar` | String | 群组头像。 |
-| `description` | String | 群组描述。 |
+| `description` | String | 群组描述。长度不能超过 2048 个字符。 |
 | `members` | `Array<string>` | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。 |
 | `isPublic` | Boolean | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。 |
 | `needApprovalToJoin` | Boolean | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `isPublic` 设置为 `true` 时，对私有群无效。 |

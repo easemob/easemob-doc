@@ -51,11 +51,16 @@
 
 用户可以调用 `CreateGroup` 方法创建群组，并通过 `GroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
+- 群组名称长度不能超过 255 个字符。
+- 群组描述长度不能超过 2048 个字符。
+
 示例代码如下：
 
 ```csharp
 GroupOptions option = new GroupOptions(GroupStyle.PrivateMemberCanInvite);
 option.MaxCount = 100;
+// 群组名称长度不能超过 255 个字符。
+// 群组描述长度不能超过 2048 个字符。
 SDKClient.Instance.GroupManager.CreateGroup(groupname, option, desc, members, callback:new ValueCallBack<Group>(
   onSuccess: (group) => {
   },

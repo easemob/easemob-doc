@@ -42,9 +42,9 @@ iOS SDK 使用 `EMGroupConfigs` 的多个字段定义群组类型：
 
 | 参数或字段                     | Swift 类型        | 是否必填 | 描述                                                         |
 | :--- | :--- | :--- | :--- |
-| `subject`                      | `String?`         | 否       | 群组名称。                                                   |
+| `subject`                      | `String?`         | 否       | 群组名称。长度不能超过 255 个字符。                                                   |
 | `avatar`                       | `String?`         | 否       | 群头像 URL。                                                 |
-| `description`                  | `String?`         | 否       | 群组描述。                                                   |
+| `description`                  | `String?`         | 否       | 群组描述。长度不能超过 2048 个字符。                                                   |
 | `invitees`                     | `[String]?`       | 否       | 初始群成员的用户 ID 数组，不包含创建者。无初始成员时可传空数组或 `nil`。 |
 | `message`                      | `String?`         | 否       | 邀请初始成员入群时附带的消息。                               |
 | `setting`                      | `EMGroupConfigs?` | 否       | 群组配置对象。传入 `nil` 时使用 SDK 默认配置。               |
