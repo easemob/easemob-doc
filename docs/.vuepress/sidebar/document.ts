@@ -185,6 +185,7 @@ const documentV5Sidebar = [
       { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
+      { text: '配置服务器域名', link: 'serverconfig.html', only: ['web'] },
       { text: 'uni-app 构建 App 与小程序', link: 'uniappnativeapp.html', only: ['web'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
       { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
