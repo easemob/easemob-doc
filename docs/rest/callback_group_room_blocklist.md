@@ -1,0 +1,117 @@
+# Chat Group and Chat Room Blocklist Callback
+
+## Feature overview
+
+When a chat group or chat room member is added to or removed from the blocklist, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to identify the affected member and synchronize data.
+
+## Prerequisite
+
+- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
+- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+
+## Add a member to the blocklist
+
+After a member is added to the chat group or chat room blocklist, they are removed from the chat group or chat room. For the removal callback event, see [Leave after being added to the blocklist](callback_group_room_leave.html#leave-after-being-added-to-the-blocklist).
+
+### Trigger conditions
+
+- A [chat group member](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
+- A RESTful API is called to add a [chat group member](/document/server-side/group_member_blocklist_add_single.html) or [chat room member](/document/server-side/chatroom_allowlist_add_single.html) to the blocklist.
+- In the [Easemob Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
+
+### Callback request
+
+#### Request example
+
+```json
+{
+	"callId": "XXXX#XXXX_e2bf62d5-XXXX-XXXX-8664-d011f9d4ccbf",
+	"security": "d0b53a5aXXXX3fdf42ca362737983392",
+	"payload": {
+		"member": [
+			"tst02"
+		],
+		"expire_timestamp": 4638873600000, 
+		"type": "ADD"
+	},
+	"appkey": "XXXX#XXXX",
+	"id": "255445981790209",
+	"type": "GROUP",
+	"event": "group_op_event",
+	"operation": "BLOCK",
+	"operator": "tst",
+	"timestamp": 1729498876236
+}
+
+```
+
+#### Request fields
+
+| Field         | Type   | Description                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `callId`       | String   | The unique identifier of the callback request, in the format `App Key_UUID`. | 
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `paylod`       | Object | Event content.                                                     |
+| `payload.member` | Array | User ID of the user added to or removed from the chat group or chat room blocklist.        | 
+| `payload.expire_timestamp` | Long | Expiration time of the user's blocklist entry. The system automatically assigns this value after the user is added to the blocklist.  | 
+| `payload.type` | String  | Event type. `ADD` indicates that a user is added to the chat group or chat room blocklist.     |
+| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `id`           | String | Chat group or chat room ID.                                                 |
+| `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
+| `event`        | String | The value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `operation`    | String | Operation. The value is `BLOCK` when a user is added to the chat group or chat room blocklist. |
+| `operator`     | String | Operator. If an app admin adds the member to the blocklist, the value is fixed as `@ppAdmin`.                         | 
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.                | 
+
+## Remove a member from the blocklist 
+
+### Trigger conditions 
+
+1. A member is removed from the chat group or chat room blocklist on the client.
+2. A RESTful API is called to remove a member from the [chat group blocklist](/document/server-side/group_allowlist_remove.html) or chat room blocklist.
+3. A user is removed from the chat group or chat room blocklist in the [Easemob Console](https://console.easemob.com/user/login).
+
+### Callback request
+
+#### Request example
+
+```json
+{
+	"callId": "XXXX#XXXX_0fb0c3cf-XXXX-XXXX-9eb8-e9b756c83ec4",
+	"security": "3c10eae0ec4aXXXX891a85ea974f75ca",
+	"payload": {
+		"member": [
+			"tst07"
+		],
+		"type": "REMOVE"
+	},
+	"appkey": "XXXX#XXXX",
+	"id": "255445981790209",
+	"type": "GROUP",
+	"event": "group_op_event",
+	"operation": "BLOCK",
+	"operator": "@ppAdmin",
+	"timestamp": 1729499386434
+}
+```
+
+#### Request fields
+
+| Field         | Type   | Description                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `payload`       | Object | Event content.                                                     |
+| `payload.member` | Array | User ID of the user removed from the chat group or chat room blocklist.        | 
+| `payload.type` | Array  | Event for removing a user from the chat group or chat room blocklist. The value is `REMOVE`.     |
+| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `id`           | String | Chat group or chat room ID.                                                 |
+| `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `operation`    | String | Operation. The value is `BLOCK` when a user is removed from the chat group or chat room blocklist. |
+| `operator`     | String | Operator. If an app admin removes the member from the blocklist, the value is fixed as `@ppAdmin`.                       | 
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.  | 
+
+## Other information
+
+**More chat group operation events and sub-events will be added in the future. If your business strongly depends on these events or sub-events, implement strict checks for `operation` and `payload.type`.**

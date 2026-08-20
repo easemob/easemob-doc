@@ -1,126 +1,122 @@
-# 群组概述
+# Chat Group Overview
 
-<Toc />
+## Chat group basics
 
-## 群组基本介绍
+A chat group is an instant messaging system that supports multi-user communication and relatively stable member relationships. All chat group members can receive and send messages in the chat group. Members can receive push notifications while offline. A chat group supports multiple member roles: owner, admin, and regular member. It also provides extensive management capabilities, such as member muting, announcements, and shared files.
 
-群组是支持多人沟通的即时通讯系统，成员关系相对稳定。所有群成员可以收到群中的消息，可以在群中发送消息。群成员离线时可以收到推送消息。群组成员支持多种角色：群主、群管理员和普通成员。群组提供丰富的管理能力，如群组禁言、群公告和群文件等。
+### Chat group types
 
-### 群组分类
+Chat groups are classified as public or private based on whether they are visible to users.
 
-群组按照是否对用户公开，可以分为公开群和私有群。
-
-| 群组分类 | 加群方式   |  获取群组信息       |
+| Chat group type | How to join   |  Retrieve chat group information       |
 | :------- | :---------- | :---------- | 
-| 公开群   | 可申请加入群或者被管理员和群主邀请入群。任何用户均可申请入群，是否需要群主和群管理员审批，取决于群组的设置。 | - 对于群组详情和公开群列表，用户即使不加入群也能获取。<br/> - 对于群公告和群共享文件列表，用户只有加入群时才能获取。 |
-| 私有群   | 需要被邀请才能入群。除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组的设置。 | 用户只有加入群后才能获取群详情、群公告、群共享文件列表、和群成员列表等群组信息。   |
+| Public chat group   | A user can apply to join or be invited by a chat group owner or admin. Any user can apply to join. Whether approval from the owner or an admin is required depends on the chat group settings. | - Users can retrieve chat group details and the public chat group list without joining the chat group.<br/> - Users can retrieve chat group announcements and the shared file list only after joining the chat group. |
+| Private chat group   | A user must be invited to join. Whether regular members can invite other users in addition to the chat group owner and admins depends on the chat group settings. | Users can retrieve information such as chat group details, the announcement, the shared file list, and the member list only after joining the chat group.   |
 
-### 群组成员角色  
+### Chat group member roles  
 
-| 群成员角色<div style="width: 100px;"></div> | 描述<div style="width: 384px;"></div> | 管理权限 |
+| Chat group member role | Description | Management permissions |
 | :------ | :-------------- | :------------ |
-| 普通成员   | 不具备管理权限的普通成员。 | 普通成员可以：<br/> - 在群组内发送和接收消息；<br/> - 获取群公告；<br/> - 上传、下载、删除、以及从服务器获取共享文件；<br/> - 获取群组列表、群管理员列表、群成员列表和群组详情；<br/> - 查询自己已加入的群组数量；<br/> - 退出群组、屏蔽和解除屏蔽群消息；<br/> - 设置自己的自定义属性（key-value）；<br/> - 创建和管理消息话题、在所属消息话题中发送消息。<br/> - 批量获取消息话题中的最新一条消息。|
-| 群管理员   | 由群主指定，协助群主进行管理，拥有一定的管理权限。 | 除了普通成员的权限，管理员还具备以下权限：<br/> - 修改群组名称和群组描述、更新群公告、更新群扩展字段；<br/> - 审批是否允许用户加入群组；<br/> - 邀请用户加入群组、将群成员被移出群组；<br/> - 管理群组白名单、黑名单、禁言列表；<br/> - 开启和关闭群组全员禁言；<br/> - 修改消息话题名称，将消息话题中的成员移出消息话题以及解散群组中的消息话题。 |
-| 群主       | 群组的创建者默认成为群主，在群中拥有最高权限。 | 除了管理员权限，群主还具备以下权限：<br/> - 添加和移除管理员、解散群组；<br/> - 将群主权限转移给群组中的其他成员。 |
+| Regular member   | A regular member without management permissions. | A regular member can:<br/> - Send and receive messages in the chat group;<br/> - Retrieve the chat group announcement;<br/> - Upload, download, and delete shared files and retrieve shared files from the server;<br/> - Retrieve the chat group list, admin list, member list, and chat group details;<br/> - Query the number of chat groups they have joined;<br/> - Leave a chat group and block or unblock chat group messages;<br/> - Set their own custom attributes (key-value);<br/> - Create and manage message threads and send messages in message threads they belong to.<br/> - Retrieve the latest message from multiple message threads in a batch.|
+| Chat group admin   | Appointed by the chat group owner to assist with management and granted certain management permissions. | In addition to the permissions of a regular member, an admin can:<br/> - Change the chat group name and description, update the announcement, and update the chat group extension field;<br/> - Approve or decline requests to join the chat group;<br/> - Invite users to join the chat group and remove members from it;<br/> - Manage the chat group allowlist, blocklist, and mute list;<br/> - Enable and disable mute all in the chat group;<br/> - Change message thread names, remove members from message threads, and destroy message threads in the chat group. |
+| Chat group owner       | The chat group creator becomes the owner by default and has the highest permissions in the chat group. | In addition to admin permissions, the chat group owner can:<br/> - Add and remove admins and destroy the chat group;<br/> - Transfer ownership to another chat group member. |
 
-### 群组与聊天室的区别
+### Differences between chat groups and chat rooms
 
-群组和聊天室均为支持多人沟通的即时通讯系统。两者的区别在于，群组中的成员会有固定的强的关系，成员加入后会长时间在群组中。聊天室中的成员没有固定关系，类似于一个开放的空间，大家可以自由加入，离开即退出聊天室。以下为功能对比：
+Chat groups and chat rooms are both instant messaging systems that support multi-user communication. The difference is that chat group members have strong, persistent relationships and generally remain in the chat group for a long time after joining. Chat room members do not have fixed relationships. A chat room is more like an open space that users can freely join, and leaving the space means leaving the chat room. The following table compares their features:
 
-| 功能<div style="width: 100px;"></div> | 群组<div style="width: 300px;"></div> | 聊天室 |
+| Feature | Chat group | Chat room |
 | :----------- | :------------------- | :--------------------- |
-| 使用场景     | 类似于 Signal，Skype 里的群聊，所有加入的用户拥有固定的关系。  | 类似 Twitch 的直播间，成员间没有固定关系，离开即退出。     |
-| 创建方式 | 所有 app 用户都可以创建群组。   | 仅 [超级管理员](/document/server-side/chatroom_superadmin_add.html) 有权限创建聊天室。  |
-| 类型 | 分为公开群和私有群，创建群组时可设置入群是否需获得群主和群管理员的同意，支持不同使用场景。 | 没有公开和私有之分，所有用户均可自由加入或退出。      |
-| 最大成员数   | 成员数支持取决于所选择的版本，最高版本默认支持 8,000 人。如需提升该上限，请联系商务。| 成员数支持取决于所选择的版本，最高版本默认支持 10,000 人。如需提升该上限，请联系商务。 |
-| 成员关系 | 成员关系相对稳定，加入后会保留成员身份。 | 成员关系临时性更强，加入后参与实时互动，离开或离线超时后退出聊天室。 |
-| 管理能力 | 支持群成员、管理员、禁言、黑名单等管理能力。 | 支持聊天室成员、管理员、禁言、全员禁言、黑名单、白名单、公告和自定义属性等管理能力。 |
-| 在线状态 | 群成员可以离线，离线后仍保留群成员身份。 | 聊天室强调在线成员，成员离线超过一定时间后会自动退出聊天室；白名单成员不受该自动退出机制影响。 |
-| 消息可靠性 | 适合长期会话和离线消息触达。群组中发送的所有消息，用户都会收到。 | 适合高并发实时消息。聊天室消息可设置消息优先级，高优先级消息会被优先投递。 当消息量大时，聊天室中超过阈值的消息会被丢弃。消息开始丢弃的阈值为每秒 100 条消息，可以根据需求进行调整。|
-| 离线消息存储 | 支持离线消息存储。用户离线时，服务器会先保存发送给这些用户的消息，等待这些用户上线时发送。对于单个终端用户，服务器对每个群最多可保存 200 条离线消息。<Container type="tip" title="提示">若群组总人数超过 3000，默认不再支持离线推送，若希望使用该功能，请联系商务开通。</Container>  | 不支持离线消息存储。离线时，不会收到推送通知和消息；成员（除聊天室白名单中的成员）离线超过 2 分钟会自动退出聊天室。        |
-| 漫游消息/历史消息记录存储 | 支持漫游消息和历史记录的存储。服务器存储漫游消息和历史消息记录的时间取决于你订阅的 IM 套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。<br/> - 你可以[调用 REST API 接口从服务端获取历史消息记录 JSON 文件](/document/server-side/message_historical.html)。<br/> - 你还可以[调用客户端接口从服务端获取指定会话的漫游消息](/document/android/message_retrieve.html#从服务器获取指定会话的消息)，在多设备间同步。 | 支持漫游消息和历史记录的存储。服务器存储漫游消息和历史消息记录的时间取决于你订阅的 IM 套餐包，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。<br/> - 你可以[调用 REST API 接口从服务端获取历史消息记录 JSON 文件](/document/server-side/message_historical.html)。<br/> - 你还可以[调用客户端接口从服务端获取指定会话的漫游消息](/document/android/message_retrieve.html#从服务器获取指定会话的消息)，在多设备间同步。<br/> - 如果需要用户新加入聊天室时服务器发送最近的漫游消息，可以联系商务开通，每个会话默认支持 10 条消息，最多可调整至 200 条。|
+| Use case     | Similar to group chats in Signal or Skype, where all members have persistent relationships.  | Similar to a Twitch live room, where members do not have persistent relationships and leaving the room means leaving the chat room.     |
+| Creation method | Any app user can create a chat group.   | Only a [superadmin](/document/server-side/chatroom_superadmin_add.html) can create a chat room.  |
+| Type | Public or private. When creating a chat group, you can configure whether approval from the chat group owner or admins is required to join, supporting different use cases. | Chat rooms are not classified as public or private. All users can freely join or leave them.      |
+| Maximum number of members   | The supported member count depends on the selected plan. The highest-tier plan supports 8,000 members by default. To increase this limit, contact the Easemob business team.| The supported member count depends on the selected plan. The highest-tier plan supports 10,000 members by default. To increase this limit, contact the Easemob business team. |
+| Member relationships | Member relationships are relatively stable, and users remain members after joining. | Member relationships are more temporary. Users participate in real-time interactions after joining and leave the chat room when they leave or remain offline past the timeout. |
+| Management capabilities | Manage chat group members, admins, mute settings, blocklists, and more. | Manage chat room members, admins, mute settings, mute all, blocklists, allowlists, announcements, custom attributes, and more. |
+| Presence | Chat group members can be offline and retain their membership while offline. | Chat rooms focus on online members. A member who remains offline for a specified period automatically leaves the chat room. Members on the allowlist are not affected by this automatic removal mechanism. |
+| Message reliability | Suitable for persistent conversations and offline message delivery. Users receive all messages sent in the chat group. | Suitable for high-concurrency real-time messaging. You can set the priority of chat room messages, and high-priority messages are delivered first. When the message volume is high, chat room messages that exceed the threshold are discarded. Messages start being discarded at a threshold of 100 messages per second, which can be adjusted as needed.|
+| Offline message storage | Offline message storage is supported. When users are offline, the server first stores messages sent to them and delivers the messages when the users get online. For a single end user, the server can store up to 200 offline messages for each chat group.<Container type="tip" title="Tip">If a chat group has more than 3000 members, offline push is not supported by default. To use this feature, contact the Easemob business team to activate it.</Container>  | Offline message storage is not supported. Users do not receive push notifications or messages while offline. A member, except one on the chat room allowlist, who remains offline for more than 2 minutes automatically leaves the chat room.        |
+| Roaming message/historical message storage | Roaming and historical message storage is supported. The period for which the server stores roaming and historical messages depends on your subscribed EasyIM plan. For details, see [EasyIM plan features](/product/product_package_feature.html).<br/> - You can [call a REST API to retrieve a JSON file containing historical messages from the server](/document/server-side/message_historical.html).<br/> - You can also [call a client API to retrieve roaming messages in a specified conversation from the server](/document/android/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) and synchronize them across multiple devices. | Roaming and historical message storage is supported. The period for which the server stores roaming and historical messages depends on your subscribed EasyIM plan. For details, see [EasyIM plan features](/product/product_package_feature.html).<br/> - You can [call a REST API to retrieve a JSON file containing historical messages from the server](/document/server-side/message_historical.html).<br/> - You can also [call a client API to retrieve roaming messages in a specified conversation from the server](/document/android/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) and synchronize them across multiple devices.<br/> - To have the server send recent roaming messages when a user joins a chat room, contact the Easemob business team to activate this feature. Each conversation supports 10 messages by default, which can be increased to a maximum of 200.| 
 
-## 群组功能
+## Chat group features
 
-群组功能主要分为群组的创建和管理，群成员管理，以及群属性管理。
+Chat group features mainly cover chat group creation and management, member management, and attribute management.
 
-### 创建和管理群组
+### Create and manage chat groups
 
-| 功能               | 描述  |
+| Feature               | Description  |
 | :----------------- | :---------------------- |
-| 创建群组           | 任何用户都可以创建群组。群组创建者为群主。群组创建时可以指定群组名称、头像、描述，是否是公开群、要加入群组的用户列表、是否需要审批、普通成员是否能邀请新用户加入群组，以及群扩展信息等。群组数量和群成员数量根据套餐版本有所不同，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。 |
-| 解散群组           | 只有群主才能解散群组。群组一旦解散，所有本地群组数据都会被删除，所有群成员都被强制退出群。 |
-| 封禁/解禁群组           | - 可调用 REST API 封禁指定的群组。例如，群成员经常在群中发送违规消息，可以调用该 API 对该群进行封禁。群组被封禁后，群中任何成员均无法在群组以及该群组下的消息话题中发送和接收消息，也无法进行群组和消息话题管理操作。<br/> - 可调用 REST API 解除对指定群组的封禁。群组解禁后，群成员可以在该群组以及该群组下的消息话题中发送和接收消息并进行群组和消息话题管理相关操作。|
-| 屏蔽和解除屏蔽群消息   | 所有群组成员都可以屏蔽和取消屏蔽群组消息。用户屏蔽群组消息后，他们将不再收到来自指定群组的消息。 |
+| Create a chat group           | Any user can create a chat group, and its creator becomes the owner. When creating a chat group, you can specify its name, avatar, description, whether it is public, a list of users to add, whether approval is required, whether regular members can invite new users, extension information, and more. The limits on the number of chat groups and chat group members vary by plan. For details, see [EasyIM pricing](https://www.easemob.com/pricing/im). |
+| Destroy a chat group           | Only the chat group owner can destroy the chat group. After a chat group is destroyed, all local chat group data is deleted and all members are forced to leave. |
+| Ban or unban a chat group           | - Call a REST API to ban a specified chat group. For example, you can ban a chat group if its members frequently send prohibited messages. After a chat group is banned, no member can send or receive messages in the chat group or its message threads, or perform chat group or message thread management operations.<br/> - Call a REST API to unban a specified chat group. After the chat group is unbanned, members can send and receive messages in the chat group and its message threads and perform chat group and message thread management operations.|
+| Block or unblock chat group messages   | All chat group members can block and unblock chat group messages. After users block chat group messages, they no longer receive messages from the specified chat group. |
 
-### 查询群组信息
+### Query chat group information
 
-| 功能               | 描述  |
+| Feature               | Description  |
 | :----------------- | :---------------------- |
-| 获取群组详情     | - 群成员可以从内存获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表，默认不包含群成员。<br/> - 群成员可从服务器获取群组详情。返回的结果包括群组 ID、群组名称、群组描述、群组基本属性、群主、群组管理员列表、是否已屏蔽群组消息以及群组是否禁用等信息。另外，可通过参数设置是否获取群成员列表，默认最多包括 200 个成员。<br/> - 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。 |
-| 修改群组详情     | 修改群组详情，例如群组名称、群组描述和扩展信息。 |
-| 获取群成员列表     | 所有群组用户都可以从服务器获取群组成员的分页列表。群成员按加入群组时的时间戳降序显示。 |
-| 获取 app 中的群组列表 | 可调用 REST API 分页获取应用下的群组的信息。 |
-| 获取群组列表       | 用户可以获取自己创建或加入的群组列表。 |
-| 查询当前用户已加入的群组数量  | 用户可以从服务器获取当前用户已加入的群组数量。 |
-| 获取单个用户加入的所有群组  | 可调用 REST API 根据用户 ID 分页获取指定用户加入的所有群组。 |
-| 查看指定用户是否已加入群组  | 可调用 REST API 查看单个用户是否已加入了指定的群组。 |
+| Retrieve chat group details     | - Chat group members can retrieve chat group details from memory. The result includes the chat group ID, name, description, basic attributes, owner, and admin list, but does not include members by default.<br/> - Chat group members can retrieve chat group details from the server. The result includes the chat group ID, name, description, basic attributes, owner, admin list, whether chat group messages are blocked, whether the chat group is disabled, and other information. You can also use a parameter to specify whether to retrieve the member list, which contains up to 200 members by default.<br/> - Users can retrieve details of a public chat group without joining it, but can retrieve details of a private chat group only after joining it. |
+| Modify chat group details     | Modify details such as the chat group name, description, and extension information. |
+| Retrieve the chat group member list     | All chat group users can retrieve a paginated list of chat group members from the server. Members are displayed in descending order by the timestamp when they joined the chat group. |
+| Retrieve the list of chat groups in an app | Call a REST API to retrieve a paginated list of chat groups in an app. |
+| Retrieve a chat group list       | Users can retrieve a list of chat groups they created or joined. |
+| Query the number of chat groups the current user has joined  | Users can retrieve from the server the number of chat groups the current user has joined. |
+| Retrieve all chat groups a specified user has joined  | Call a REST API to retrieve a paginated list of all chat groups a specified user has joined, based on the user ID. |
+| Check whether a specified user has joined a chat group  | Call a REST API to check whether a specified user has joined a specified chat group. |
 
 :::tip
-环信即时通讯 IM 支持用户登录多个设备，用户在一台设备上进行的群组操作，会在其他设备上收到这些操作对应的通知。
+EasyIM allows a user to log in on multiple devices. When the user performs a chat group operation on one device, the other devices receive a notification of the operation.
 :::
 
-### 群属性管理
+### Chat group attribute management
 
-| 功能             | 描述                                                         |
+| Feature             | Description                                                         |
 | :--------------- | :----------------------------------------------------------- |
-| 修改群组信息 | 群主和群管理员可以修改群名称、群组描述和扩展字段。 |
-| 修改/获取群公告 | 群主和群管理员可以设置和更新群公告，群成员可以获取群公告。   |
-| 管理共享文件     | 群主和群管理员可以上传文件并删除所有群共享文件，群成员只能删除自己上传的文件。所有群成员均可以下载群组的共享文件以及从服务器获取共享文件列表。|
+| Modify chat group information | The chat group owner and admins can change the chat group name, description, and extension field. |
+| Modify or retrieve the chat group announcement | The chat group owner and admins can set and update the announcement, and members can retrieve it.   |
+| Manage shared files     | The chat group owner and admins can upload files and delete any chat group shared file. Regular members can delete only the files they uploaded. All chat group members can download shared files and retrieve the shared file list from the server.|
 
-### 群组扩展字段
+### Chat group extension field
 
-用户创建群组时可以设置群组扩展字段，群组扩展字段支持 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
+When creating a chat group, a user can set the chat group extension field, which supports JSON data and can be used to define additional chat group information. The length limit of the chat group extension field is 8 KB.
 
-不过，仅群主和群管理员可以更新群扩展字段：
+However, only the chat group owner and admins can update the chat group extension field:
 
-- 对于 Web 端，可以[调用修改群组信息的接口](/document/web/group_attributes.html#修改群组信息)更新群组扩展字段。
-- 除 Web 端外，Android、iOS、Web 等其它各端可[调用单独的更新群组扩展字段的接口](/document/android/group_attributes.html#更新群扩展字段)修改群扩展字段。
+- On the Web client, [call the API for modifying chat group information](/document/web/group_attributes.html#modify-chat-group-information) to update the chat group extension field.
+- On clients other than Web, such as Android and iOS, [call the separate API for updating the chat group extension field](/document/android/group_attributes.html#update-the-chat-group-extension-field) to modify the field.
 
-### 群成员管理
+### Chat group member management
 
-| 功能                   | 描述                                                         |
+| Feature                   | Description                                                         |
 | :--------------------- | :----------------------------------------------------------- |
-| 加入群组              | 公开群和私有群中，群主和管理员均可以邀请用户加入群。<br/>支持需要用户确认后，再加入群。此外用户也可以申请加入公开群。|
-| 退出群组              | 群主不支持退群操作，只能解散群。退出群组分为主动退群和被动退群。被动退群即为被群主或群管理员踢出群。         |
-| 变更群主               | 群主可以将群组的所有权转让给指定的组成员。所有权转移后，群主成为普通群成员。 |
-| 添加/移除/获取群管理员 | 群主可以添加成员到群组管理员列表，将管理员移出该列表。所有群成员均可获取群组下的管理员列表。 |
-| 群组白名单             | 群主和管理员可以将群成员加入或移出白名单。白名单中的群成员可以在全员禁言状态下发送群消息。仅群主和群管理员可以获取群组白名单列表。 |
-| 群组黑名单             | 群主和群管理员可以将群成员加入或移出黑名单，黑名单中的成员将被移出群且无法再次加入群。仅群主和群管理员可以获取群组白名单列表。 |
-| 群组禁言               | - 群主和管理员可以将群成员加入或移出禁言列表，禁言列表中的成员无法发送群消息，但可以接收群消息。<br/> - 仅群主和群管理员可以获取群组禁言列表。<br/> - 群成员可检查自己是否在群组禁言列表中。<br/> - 群主和管理员可以开启或关闭全员禁言。开启全员禁言后，仅群组、管理员和白名单中的成员可以发送群消息。|
-| 管理群成员的自定义属性 | 支持设置群成员自定义属性和获取单个群成员的自定义属性。群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。 |
+| Join a chat group              | In both public and private chat groups, the owner and admins can invite users to join.<br/>A user can be required to confirm before joining. Users can also apply to join a public chat group.|
+| Leave a chat group              | The chat group owner cannot leave the chat group and can only destroy it. A member can leave voluntarily or be removed by the chat group owner or an admin.         |
+| Transfer chat group ownership               | The chat group owner can transfer ownership to a specified chat group member. After ownership is transferred, the original owner becomes a regular member. |
+| Add, remove, or retrieve chat group admins | The chat group owner can add members to or remove admins from the admin list. All chat group members can retrieve the admin list. |
+| Chat group allowlist             | The chat group owner and admins can add members to or remove members from the allowlist. Members on the allowlist can send chat group messages when mute all is enabled. Only the chat group owner and admins can retrieve the chat group allowlist. |
+| Chat group blocklist             | The chat group owner and admins can add members to or remove members from the blocklist. Members on the blocklist are removed from the chat group and cannot rejoin it. Only the chat group owner and admins can retrieve the chat group blocklist. |
+| Chat group mute list               | - The chat group owner and admins can add members to or remove members from the mute list. Muted members cannot send chat group messages but can receive them.<br/> - Only the chat group owner and admins can retrieve the chat group mute list.<br/> - Chat group members can check whether they are on the mute list.<br/> - The chat group owner and admins can enable or disable all-member mute. After all-member mute is enabled, only the chat group owner, admins, and members on the allowlist can send chat group messages.|
+| Manage custom chat group member attributes | Set custom chat group member attributes and retrieve the custom attributes of an individual member. The chat group owner can modify the custom attributes of all members, while other members can modify only their own. |
 
-### 群成员的扩展字段
+### Chat group member extension fields
 
-设置群成员的扩展字段即设置群成员的自定义属性，例如在群组中的昵称和头像等。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。
+Setting chat group member extension fields means setting custom member attributes, such as a nickname and avatar in the chat group. A custom attribute uses the key-value format, where the key is the attribute name and the value is the attribute value. Setting the value to an empty string deletes the custom attribute.
 
-- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
-- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
+- The total length of a chat group member's custom attributes cannot exceed 4 KB. For an individual custom attribute, the key cannot exceed 16 bytes and the value cannot exceed 512 bytes; otherwise, an error is reported.
+- The chat group owner can modify the custom attributes of all members, while other members can modify only their own.
 
-## 监听群组事件
+## Monitor chat group events
 
-你可以实现群组事件监听，群组内进行了相关操作，例如，有新成员入群、退群、被添加到禁言列表、黑名单列表等，群组中的其他人员会收到相关事件，详见[监听群组事件](/document/android/group_manage.html#监听群组事件)。
+You can implement chat group event listeners. When an operation occurs in a chat group, such as a new member joining or a member leaving or being added to the mute list or blocklist, the other users in the chat group receive the corresponding event. For details, see [Monitor chat group events](/document/android/group_manage.html#monitor-chat-group-events).
 
-## 群组事件回调
+## Chat group event callbacks
 
-你可以实现发送后回调，使环信 IM 服务器将群组事件同步给你的应用服务器。若群组内发生新成员入群、退群、被添加到禁言列表、黑名单列表等相关操作时，环信 IM 服务器向应用服务器发起 HTTP/HTTPS POST 请求，同步所发生的事件，详见[群组事件回调文档](/document/server-side/callback_group_room_create.html)。
+You can implement a post-delivery callback so that the EasyIM server synchronizes chat group events with your app server. When an operation occurs in a chat group, such as a new member joining or a member leaving or being added to the mute list or blocklist, the EasyIM server sends an HTTP/HTTPS POST request to the app server to synchronize the event. For details, see [Chat group event callbacks](/document/server-side/callback_group_room_create.html).
 
-## 群组限制
+## Chat group limitations
 
-- 群组相关限制，包括群成员数量、群组/群成员属性以及群组共享文件的相关限制，详见[群组限制](/product/limitation.html#群组)文档。
-- 群成员的数量根据不同的套餐版本而不同，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
-
-
+- For chat group limitations, including limits on the number of chat group members, chat group and member attributes, and shared files, see [Chat group limitations](/product/limitation.html#chat-groups).
+- The number of chat group members varies by plan. For details, see [EasyIM plan features](/product/product_package_feature.html).
 
 
 

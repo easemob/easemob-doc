@@ -1,33 +1,33 @@
-# 消息格式描述 
+# Message Format 
 
-目前，环信即时通讯 IM 支持的消息类型 `type` 如下表所示：
+EasyIM currently supports the following message `type` values:
 
-| 参数   | 类型   |
+| Parameter   | Type   |
 | :----- | :----- |
-| `txt` | 文本消息 |
-| `loc`  | 位置消息 |
-| `cmd` | 透传消息 |
-| `img` | 图片消息 |
-| `audio` | 语音消息  |
-| `video` | 视频消息 |
-| `file` | 文件消息 |
-| `custom` | 自定义类型消息 |
-| `combine` | 合并消息 |
-| `markdown` | 流式消息 |
+| `txt` | Text message |
+| `loc`  | Location message |
+| `cmd` | Command message |
+| `img` | Image message |
+| `audio` | Voice message  |
+| `video` | Video message |
+| `file` | File message |
+| `custom` | Custom message |
+| `combine` | Combined message |
+| `markdown` | Streaming message |
 
-## 消息 body 内容介绍
+## Message body
 
-消息 body 为 JSONArray 结构，其中包含消息类型和消息内容。不同类型的消息只是 `body` 字段内容存在差异。
+The message body is a JSONArray that contains the message type and content. Only the content of the `body` field differs between message types.
 
-### 文本消息
+### Text message
 
-文本消息的 body 包含如下字段：
+The body of a text message contains the following field:
 
-| 参数   | 类型   | 描述                             |
+| Parameter   | Type   | Description                             |
 | :----- | :----- | :------------------------------- |
-| `msg`  | String | 消息内容。                       |
+| `msg`  | String | Message content.                       |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -35,17 +35,17 @@
 }
 ```
 
-### 位置消息
+### Location message
 
-位置消息的 body 包含如下字段：
+The body of a location message contains the following fields:
 
-| 参数   | 类型   | 描述                         |
+| Parameter   | Type   | Description                         |
 | :----- | :----- | :--------------------------- |
-| `lat`  | double   | 位置的纬度。                 |
-| `lng`  | double   | 位置的经度。                 |
-| `addr` | String | 位置的地址描述。             |
+| `lat`  | double   | Latitude of the location.                 |
+| `lng`  | double   | Longitude of the location.                 |
+| `addr` | String | Description of the location address.             |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -55,15 +55,15 @@
 }
 ```
 
-### 透传消息
+### Command message
 
-透传消息的 body 包含如下字段：
+The body of a command message contains the following field:
 
-| 参数     | 类型   | 描述                         |
+| Parameter     | Type   | Description                         |
 | :------- | :----- | :--------------------------- |
-| `action` | String | 命令内容。                   |
+| `action` | String | Command content.                   |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -71,22 +71,22 @@
 }
 ```
 
-### 图片消息
+### Image message
 
-对于图片消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到图片消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应图片。
+When sending an image message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the image message. Also ensure that the image can be downloaded using the `url` parameter.
 
-若上传图片时，设置了文件访问限制（`restrict-access`），则图片上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送图片消息时传入该参数。上传原图，环信服务器会自动为图片生成缩略图。
+If access restrictions (`restrict-access`) are enabled when the image is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the image message. When you upload the original image, the EasyIM server automatically generates a thumbnail.
 
-图片消息的 body 包含如下字段：
+The body of an image message contains the following fields:
 
-| 参数          | 类型   | 描述        |
+| Parameter          | Type   | Description        |
 | :------------ | :----- | :------------------------ |
-| `filename`    | String | 图片文件名称，包含文件后缀名。     |
-| `secret`      | String | 图片的访问密钥，即成功上传图片后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
-| `url`         | String | 图片 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。  |
-| `size`        | JSON   | 图片的尺寸。单位为像素。<br/> - `height`：图片高度。<br/> - `width`：图片宽度。   |
+| `filename`    | String | Image file name, including the file extension.     |
+| `secret`      | String | Image access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the image is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the image file was uploaded. |
+| `url`         | String | Image URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the image file is uploaded successfully.  |
+| `size`        | JSON   | Image dimensions in pixels.<br/> - `height`: Image height.<br/> - `width`: Image width.   |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -100,22 +100,22 @@
 }
 ```
 
-### 语音消息
+### Voice message
 
-对于语音消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到语音消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应语音。
+When sending a voice message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the voice message. Also ensure that the voice file can be downloaded using the `url` parameter.
 
-若上传语音文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送语音消息时传入该参数。 
+If access restrictions (`restrict-access`) are enabled when the voice file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the voice message. 
 
-语音消息的 body 包含如下字段：
+The body of a voice message contains the following fields:
 
-| 参数          | 类型   | 描述                                                                              |
+| Parameter          | Type   | Description                                                                              |
 | :------------ | :----- | :------------------------------------------ |
-| `url`         | String | 语音文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。 |
-| `filename`    | String | 语音文件名称，包含文件后缀名。    |
-| `length`      | Int    | 语音时长。单位为秒。    |
-| `secret`      | String | 语音文件的访问密钥，即成功上传语音文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果语音文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |
+| `url`         | String | Voice file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the voice file is uploaded successfully. |
+| `filename`    | String | Voice file name, including the file extension.    |
+| `length`      | Int    | Voice duration in seconds.    |
+| `secret`      | String | Voice file access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the voice file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the voice file was uploaded. |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -126,25 +126,25 @@
 }
 ```
 
-### 视频消息
+### Video message
 
-对于视频消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到视频消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应视频。
+When sending a video message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the video message. Also ensure that the video can be downloaded using the `url` parameter.
 
-若上传视频文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送视频消息时传入该参数。环信服务器不会自动为视频文件生成缩略图。若需要视频缩略图，需先调用[文件上传](/document/server-side/message_upload_file.html)接口上传缩略图。然后，再次调用文件上传接口上传视频源文件。
+If access restrictions (`restrict-access`) are enabled when the video file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the video message. The EasyIM server does not automatically generate a thumbnail for a video file. If you need a video thumbnail, first call the [file upload](/document/server-side/message_upload_file.html) API to upload the thumbnail, and then call the API again to upload the original video file.
 
-视频消息的 body 包含如下字段：
+The body of a video message contains the following fields:
 
-| 参数           | 类型   | 描述    |
+| Parameter           | Type   | Description    |
 | :------------- | :----- | :--------- |
-| `filename`     | String | 视频文件名称，包含文件后缀名。  |
-| `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 |
-| `length`       | Int    | 视频时长。单位为秒。   |
-| `secret`       | String | 视频文件的访问密钥，即成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。  |
-| `file_length`  | Long   | 否      | 视频文件大小，单位为字节。  |
-| `thumb_secret` | String | 缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。 |
-| `url`          | String | 视频文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。 |
+| `filename`     | String | Video file name, including the file extension.  |
+| `thumb`        | String | Video thumbnail URL in the format https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the thumbnail UUID returned by the EasyIM server after the video thumbnail is uploaded. |
+| `length`       | Int    | Video duration in seconds.   |
+| `secret`       | String | Video file access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the video file was uploaded.  |
+| `file_length`  | Long   | Video file size in bytes.  |
+| `thumb_secret` | String | Thumbnail file access key. This field is present if access restrictions were enabled when the file was uploaded. |
+| `url`          | String | Video file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -158,21 +158,21 @@
 }
 ```
 
-### 文件消息
+### File message
 
-对于文件消息，通过 REST API 发消息时建议传入 `filename` 参数，否则客户端收到文件消息时无法显示文件名称，而且需保证通过 `url` 参数能下载到对应文件。
+When sending a file message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the file message. Also ensure that the file can be downloaded using the `url` parameter.
 
-若上传文件时，设置了文件访问限制（`restrict-access`），则文件上传后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`，发送文件消息时传入该参数。 
+If access restrictions (`restrict-access`) are enabled when the file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the file message. 
 
-文件消息的 body 包含如下字段：
+The body of a file message contains the following fields:
 
-| 参数       | 类型   | 是否必需 | 描述     |
+| Parameter       | Type   | Required | Description     |
 | :--------- | :----- | :------- | :------------ |
-| `filename` | String | 否       | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
-| `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
-| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取。 |
+| `filename` | String | No       | File name. We recommend passing this parameter. Otherwise, the client cannot display the file name when receiving the file message.   |
+| `secret`   | String | No       | File access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the file is uploaded successfully. This field is required if access restrictions (`restrict-access`) were enabled when the file was uploaded.      |
+| `url`      | String | Yes       | File URL: `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. |
 
-示例如下：
+Example:
 
 ```json
 {
@@ -182,9 +182,9 @@
 }
 ```
 
-### 消息携带自定义扩展字段
+### Custom message extension fields
 
-你可以在消息扩展部分 `ext` 中保存更多信息。例如，下面示例中的 `em_ignore_notification` 表示是否发送静默消息。
+You can store additional information in the message extension section `ext`. For example, `em_ignore_notification` in the following example specifies whether to send a silent message.
 
 ```json
 "ext": {
@@ -192,21 +192,21 @@
     }
 ```
 
-| 参数          | 类型   | 描述                                                                          |
+| Parameter          | Type   | Description                                                                          |
 | :------------ | :----- | :---------------------------------------------------------------------------- |
-| `ext` | JSON | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。 |
+| `ext` | JSON | Messages support extension fields for custom information. You cannot pass `null` for this parameter. |
 
-### 自定义消息
+### Custom message
 
-自定义消息的 body 包含如下字段：
+The body of a custom message contains the following fields:
 
-| 参数          | 类型   | 描述                                             |
+| Parameter          | Type   | Description                                             |
 | :------------ | :----- | :----------------------------------------------- |
-| `customExts`  | JSON   | 用户自定义的事件属性，类型必须是 `Map<String,String>`，最多可以包含 16 个元素。`customExts` 是可选的，发消息时不需要可以不传。 |
-| `customEvent` | String | 用户自定义的事件类型。该参数的值必须满足正则表达式 [a-zA-Z0-9-_/\.]{1,32}，长度为 1-32 个字符。 |
-| `type`        | String | 消息类型。自定义消息为 `custom`。                |
+| `customExts`  | JSON   | User-defined event attributes. The type must be `Map<String,String>`, and up to 16 elements are supported. `customExts` is optional and can be omitted when it is not required. |
+| `customEvent` | String | User-defined event type. The value must match the regular expression [a-zA-Z0-9-_/\.]{1,32} and contain 1-32 characters. |
+| `type`        | String | Message type. The value for a custom message is `custom`.                |
 
-自定义类型消息格式示例如下：
+Example custom message format:
 
 ```json
 [
@@ -223,104 +223,87 @@
 ]
 ```
 
-## 离线推送的消息扩展字段
+## Message extension fields for offline push
 
-环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如，设置推送模板中的推送标题和内容、设置仅接收提及（`@`）某些用户的推送通知等。
+EasyIM supports APNs and Android vendor offline push services, including Huawei, HONOR, FCM, Xiaomi, Meizu, OPPO, and vivo. When using offline push, you can implement push features through message extension fields, such as setting the push title and content in a push template or receiving push notifications only for messages that mention (`@`) specified users.
 
-### 推送扩展字段
+### Push extension fields
 
-`payload.ext` 结构如下：
+The structure of `payload.ext` is as follows:
 
-| 字段                   | 类型         | 描述  |
+| Field                   | Type         | Description  |
 | ---------------------- | ------------ | ------------------ |
-| `em_push_filter`     | Object       | 推送过滤。                                                   |
-| `em_at_list`             | `List<String>` | `@`列表。      |
-| `em_push_template `      | Object       | 推送模板。     |
-| `em_ignore_notification` | Boolean      | 静默消息开关，`true` 表示不推送。  |
-| `em_force_notification`  | Boolean      | 强制推送开关，`true` 则不检查用户是否开启免打扰。  |
-| `em_apns_ext`            | Object       | APNs 配置。 |
-| `em_android_push_ext`    | Object       | Android 配置。 |
-| `em_harmony_push_ext`    | Object       | 鸿蒙推送扩展配置。 |
-| `em_push_ext`            | Object       | 通用的配置。 |
+| `em_push_filter`     | Object       | Push filter.                                                   |
+| `em_at_list`             | `List<String>` | `@` list.      |
+| `em_push_template `      | Object       | Push template.     |
+| `em_ignore_notification` | Boolean      | Silent message switch. `true` means that no push notification is sent.  |
+| `em_force_notification`  | Boolean      | Forced push switch. If the value is `true`, the server does not check whether the user has enabled Do Not Disturb.  |
+| `em_apns_ext`            | Object       | APNs configuration. |
+| `em_android_push_ext`    | Object       | Android configuration. |
+| `em_push_ext`            | Object       | General configuration. |
 
-`em_push_filter` 结构如下：
+The structure of `em_push_filter` is as follows:
 
-| 字段                 | 类型         | 描述                     |
+| Field                 | Type         | Description                     |
 | ----------------     | ------------ | ------------------------ |
-| `accept_device_id`     | `List<String>` | 接收推送通知的设备 ID 列表。   |
-| `ignore_device_id`     | `List<String>` | 不接收推送通知的设备 ID 列表。 |
-| `accept_notifier_name` | `List<String>` | 接收推送的证书名列表。     |
-| `ignore_notifier_name` | `List<String>` | 不接收推送的证书名列表。   |
+| `accept_device_id`     | `List<String>` | List of device IDs that receive push notifications.   |
+| `ignore_device_id`     | `List<String>` | List of device IDs that do not receive push notifications. |
+| `accept_notifier_name` | `List<String>` | List of certificate names that receive push notifications.     |
+| `ignore_notifier_name` | `List<String>` | List of certificate names that do not receive push notifications.   |
 
-`em_push_template` 结构如下：
+The structure of `em_push_template` is as follows:
 
-| 字段         | 类型         | 描述                                                         |
+| Field         | Type         | Description                                                         |
 | ------------ | ------------ | ------------------------------------------------------------ |
-| `name`         | String       | 推送模板名称。                                                 |
-| `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送方昵称 `{$fromNickname}`。      |
-| `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
-| `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，即群组中某个或某些用户需要接收的离线推送通知与其他用户不同的场景。其中的字段如下表所示。    |
-| `disable_at_content` | Boolean        | 是否禁用默认 @ 内容：<br/> - `true`：禁用<br/> - （默认）`false`：不禁用  |
+| `name`         | String       | Push template name.                                                 |
+| `title_args`   | `List<String>` | Push template title parameters. Built-in parameter: sender nickname `{$fromNickname}`.      |
+| `content_args` | `List<String>` | Push template content parameters. Built-in parameter: message content `{$msg}`. If translation is activated, the displayed message content follows the translation result. |
+| `directed_template` | Object        | Targeted push template. This type of template applies to offline push for chat group messages when one or more users in the chat group need to receive a different offline push notification from other users. Its fields are described in the following table.    |
+| `disable_at_content` | Boolean        | Whether to disable the default @ content:<br/> - `true`: Disable<br/> - (Default) `false`: Do not disable  |
 
-关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](/document/server-side/push_template_overview.html)。
+For information about configuring the `title_args` and `content_args` fields, see the [push template documentation](/document/server-side/push_template_overview.html).
 
-`em_push_ext` 结构如下：
+The structure of `em_push_ext` is as follows:
 
-| 字段                  | 类型   | 描述                                           |
+| Field                  | Type   | Description                                           |
 | --------------------- | ------ | ---------------------------------------------- |
-| `title`               | String | 自定义推送标题。                                 |
-| `content`             | String | 自定义推送内容。                                 |
-| `custom`              | Object | 自定义推送扩展参数(t, f, m, g, e) 中 e 的内容。 |
-| `group_user_nickname` | String | 发送方群组昵称（用于推送显示替换发送方信息）。   |
+| `title`               | String | Custom push title.                                 |
+| `content`             | String | Custom push content.                                 |
+| `custom`              | Object | Content of e in the custom push extension parameters (t, f, m, g, e). |
+| `group_user_nickname` | String | Sender's chat group nickname, used to replace sender information in the push notification.   |
 
-`em_apns_ext` 结构如下：
+The structure of `em_apns_ext` is as follows:
 
-| 字段                | 类型             | 描述   |
+| Field                | Type             | Description   |
 | -------------- | ---------------- | ------ |
-| `em_push_category`           | String           | APNs 推送配置，推送通知类别。                                       |
-| `em_push_mutable_content`    | Boolean          | APNs 推送配置，`true` 为富文本推送通知，`false` 则为普通通知。             |
-| `em_push_sound`              | String           | APNs 推送配置，自定义铃声，`Library/Sounds/` 目录下的 `aiff`、`wav` 或 `caf` 文件，例如 `appsound.caf`。 |
-| `em_push_badge`              | Integer          | APNs 推送配置，自定义角标数。      |
-| `thread_id`         | String         | 通知分组标识符。|
-| `em_push_content_available`              | Integer          | 设置为 `1` 表示后台通知。详见[苹果官网的用户通知文档](https://developer.apple.com/documentation/usernotifications/pushing-background-updates-to-your-app?language=objc)。  |
+| `em_push_category`           | String           | APNs push configuration: Push notification category.                                       |
+| `em_push_mutable_content`    | Boolean          | APNs push configuration. `true` indicates a rich media push notification; `false` indicates a regular notification.             |
+| `em_push_sound`              | String           | APNs push configuration: Custom ringtone. In the `Library/Sounds/` directory, use an `aiff`, `wav`, or `caf` file, such as `appsound.caf`. |
+| `em_push_badge`              | Integer          | APNs push configuration: Custom badge count.      |
+| `thread_id`         | String         | Notification grouping identifier.|
+| `em_push_content_available`              | Integer          | A value of `1` indicates a background notification. For details, see Apple's [user notification documentation](https://developer.apple.com/documentation/usernotifications/pushing-background-updates-to-your-app?language=objc).  |
 
 
-`em_android_push_ext` 结构如下：
+The structure of `em_android_push_ext` is as follows:
 
-| 字段                      | 类型    | 描述                                                         |
+| Field                      | Type    | Description                                                         |
 | ------------------------- | ------- | ------------------------------------------------------------ |
-| `fcm_options`               | Object  | FCM SDK 功能选项。                                           |
-| `fcm_channel_id`            | String  | FCM 推送通道（最高优先级）。                                 |
-| `honor_click_action`        | String  | 荣耀点击跳转，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **荣耀** 页面设置的 **Action** 参数的配置。 |
-| `honor_importance`          | String  | 荣耀推送优先级：<br/> - `LOW`：低优先级；<br/> - （默认）`NORMAL`：普通优先级。 |
-| `honor_target_user_type`  | Integer | 推送用户类型：<br/> - `0`：普通 <br/> - `1`：测试             |
-| `huawei_target_user_type` | Integer | 推送用户类型：<br/> - `0`：普通 <br/> - `1`：测试              |
-| `huawei_category`   | String  | 完成[自分类权益申请](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#section893184112272)后，用于标识消息类型，确定[消息提醒方式](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#ZH-CN_TOPIC_0000001149358835__p3850133955718)，对特定类型消息加快发送，取值如下：[华为官方文档中category字段的解释](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#section13271045101216)。该参数的设置优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Category** 参数的配置。 |
-| `huawei_receipt_id`       | String  | 华为回执地址 ID。                           |
-| `huawei_click_action`       | String  | 华为点击跳转 action，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **华为** 页面设置的 **Action** 参数的配置。 |
-| `huawei_channel_id`         | String  | 华为推送通道（最高优先级）。                                 |
-| `meizu_click_activity`      | String  | 魅族点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **魅族** 页面设置的 **Activity** 参数的配置。 |
-| `meizu_notice_type`      | Int  | 通道类型：<br/> - `0`：公信通道<br/> - `1`：私信通道 |
-| `oppo_channel_id`           | String  | OPPO 推送通道（最高优先级），优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
-| `oppo_click_activity`       | String  | OPPO 点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **OPPO** 页面设置的 **Activity** 参数的配置。 |
-| `vivo_category`             | String  | vivo 二级分类配置，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Category** 参数的配置。 |
-| `vivo_click_activity`       | String  | vivo 点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Activity** 参数的配置。 |
-| `xiaomi_channel_id` | String  | 小米通道 ID，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Channel ID** 参数的配置。 |
-| `xiaomi_click_action`       | String  | 小米点击跳转 action，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Action** 参数的配置。 |
+| `fcm_options`               | Object  | FCM SDK feature options.                                           |
+| `fcm_channel_id`            | String  | FCM push channel with the highest priority.                                 |
 
-`em_harmony_push_ext` 结构如下：
+The structure of `em_harmony_push_ext` is as follows:
 
-| 字段              | 类型    | 描述                                  |
+| Field              | Type    | Description                                  |
 | ----------------- | ------- | ------------------------------------- |
-| `category`        | String  | 消息分类。                              |
-| `click_action`    | String  | 点击跳转应用内页。                      |
-| `is_test_message` | Boolean | 是否是推送测试消息(beta 版仅支持测试)。 |
-| `notify_id`       | Integer | 通知 ID，相同的 ID 通知替换。             |
-| `receipt_id`      | String  | 回执 ID。                                |
+| `category`        | String  | Message category.                              |
+| `click_action`    | String  | Click action that opens a page in the app.                      |
+| `is_test_message` | Boolean | Whether this is a push test message. The beta version supports test messages only. |
+| `notify_id`       | Integer | Notification ID. A notification with the same ID replaces the existing notification.             |
+| `receipt_id`      | String  | Receipt ID.                                |
 
-### 示例
+### Example
 
-离线推送的消息扩展字段如下所示：
+The message extension fields for offline push are as follows:
 
 ```json
 {
@@ -374,23 +357,6 @@
                 "key": "value"
             },
             "fcm_channel_id": "",
-            "honor_click_action": "",
-            "honor_importance": "",
-            "honor_target_user_type": 0,
-            "huawei_target_user_type": 0,
-            "huawei_category": "",
-            "huawei_receipt_id": "",
-            "huawei_click_action": "",
-            "huawei_channel_id": "",
-            "meizu_click_activity": "",
-            "meizu_notice_type": 1,
-            "xiaomi_channel_id": "",
-            "oppo_channel_id": "",
-            "oppo_click_activity": "",
-            "vivo_category": "",
-            "vivo_click_activity": "",
-            "xiaomi_channel_id": "",
-            "xiaomi_click_action": "",
         },
         "em_harmony_push_ext": {
           "click_action": "com.a.b.shot",
@@ -402,7 +368,6 @@
     }
 }
 ```
-
 
 
 

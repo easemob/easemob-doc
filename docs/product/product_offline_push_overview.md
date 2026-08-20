@@ -1,117 +1,114 @@
-# 离线推送
+# Offline Push
 
-环信即时通讯 IM 支持集成第三方离线消息推送服务。客户端断开连接或应用进程被关闭等原因导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备推送消息通知。当用户再次上线时，服务器会将离线期间的消息发送给用户。例如，当你离线时，有用户向你发送了消息，你的手机的通知中心会弹出消息通知，当你再次打开 app 并登录成功，即时通讯 IM SDK 会主动拉取你不在线时的消息。
+EasyIM supports integration with third-party offline message push services. When a user goes offline because the client disconnects or the app process closes, EasyIM sends a message notification to the offline user's device through a third-party message push service. When the user gets online again, the server sends the messages received while the user was offline. For example, if another user sends you a message while you are offline, a message notification appears in your phone's notification center. When you open the app again and log in successfully, the EasyIM SDK automatically retrieves the messages received while you were offline.
 
 :::tip
-以下两种情况，即时通讯 IM 不会发送离线推送通知：
-1. 若应用在后台运行，则用户仍为在线状态，即时通讯 IM 不会向用户推送消息通知。
-2. 应用在后台运行或手机锁屏等情况，若客户端未断开与服务器的连接，则即时通讯 IM 不会收到离线推送通知。
+EasyIM does not send offline push notifications in the following two situations:
+1. If the app is running in the background, the user remains online, and EasyIM does not send a message notification to the user.
+2. If the client remains connected to the server while the app is running in the background or the phone is locked, EasyIM does not send an offline push notification.
 :::
 
-## 各端支持的推送服务或推送插件
+## Push services or plugins supported on each platform
 
-| 平台                | 支持的推送服务            | 参考文档   |
+| Platform                | Supported push service            | Reference   |
 | -------------- | ---------------- | ------ |
-|  Android            | - Google FCM <br/> - 华为  <br/> - 荣耀 <br/> - OPPO  <br/> - VIVO  <br/> - 小米  <br/> - 魅族  | 各推送服务的集成以及推送设置，详见 [Android 推送文档](/document/android/push/push_overview.html)。                                    |
-|  iOS            | APNs         | APNs 推送服务的集成以及推送设置，详见 [APNs 推送文档](/document/ios/push/push_overview.html)。                                  |
-|  uni-app            | uni-app SDK 支持推送插件 `EMPushUniPlugin`。         | 推送插件相关描述，详见 [uni-app 推送插件](/document/applet/push/uniapp_push.html)                               |
-|  React Native            | React Native SDK 支持离线推送配置。| 详见 [React Native 离线推送文档](/document/react-native/push/push_overview.html)。  |
+|  Android            | Google FCM   | For push service integration and push settings, see the [Android push documentation](/document/android/push/push_overview.html).                                    |
+|  iOS            | APNs         | For APNs push service integration and push settings, see the [APNs push documentation](/document/ios/push/push_overview.html).                                  |
 
 :::tip
-环信 IM Web SDK 本身不支持离线推送，只支持对移动端离线推送进行配置。具体设置，详见 [Web 离线推送文档](/document/web/push/push_overview.html)。
+The EasyIM Web SDK does not support offline push itself. It supports only configuring offline push for mobile clients. For details, see the [Web offline push documentation](/document/web/push/push_overview.html).
 :::
 
-## 推送 token
+## Push token
 
-推送 token（device token） 是第三方推送厂商提供的推送 token。例如，对于 FCM 推送，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。该 token 用于标识每台设备上的每个应用，FCM 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `FirebaseMessaging.getInstance().getToken()` 方法获得 token。
+A push token (device token) is provided by a third-party push service. For example, for FCM push, the FCM SDK generates a registration token for the client app instance when your app starts for the first time. This token identifies each app on each device. FCM uses it to determine the destination device, forwards the message to the device, and the device then notifies the app. You can call the `FirebaseMessaging.getInstance().getToken()` method to obtain the token.
 
-打开应用，初始化环信 IM SDK 成功且成功登录后，获取推送 token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
+Open the app. After the EasyIM SDK is initialized and the user logs in successfully, obtain the push token and upload it to the EasyIM server to bind it to the EasyIM login account.
 
-如果退出即时通讯 IM 登录时不解绑 device token。例如，对于 Android 平台，调用 `logout` 方法时对 `unbindToken` 参数传 `false` 时不解绑 `device token`，传 `true` 表示解绑 token），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
+If you do not unbind the device token when logging out of EasyIM, the user continues to receive offline push notifications while the push certificate and token remain valid. For example, on Android, when calling the `logout` method, set the `unbindToken` parameter to `false` to keep the `device token` bound or to `true` to unbind it.
 
-## 上传推送证书
+## Upload a push certificate
 
-在第三方推送服务控制台创建应用后，下载推送证书并获取证书相关信息，将推送证书上传至环信控制台，并配置证书相关信息。
+After creating an app in the third-party push service console, download the push certificate and obtain the related information. Upload the push certificate to the Easemob Console and configure its information.
 
-例如，对于 FCM 推送证书相关配置，详见 [FCM 推送集成文档](/document/android/push/push_fcm.html#步骤三-上传推送证书)。 
+For example, for FCM push certificate configuration, see the [FCM push integration documentation](/document/android/push/push_fcm.html#step-3-upload-the-push-certificate). 
 
-## 多设备离线推送策略
+## Multi-device offline push policy
 
-多设备登录时，可在环信控制台的证书管理页面配置推送策略，该策略配置对所有推送通道生效：
+For multi-device login, you can configure a push policy on the Certificate Management page of the Easemob Console. This policy applies to all push channels:
 
-- 所有设备离线时，才发送推送消息；
-- 任一设备离线时，都发送推送消息。
+- Send push messages only when all devices are offline;
+- Send push messages whenever any device is offline.
 
-**多端登录时若有设备被踢下线，即使接入了 IM 离线推送，也收不到离线推送消息。**
+**During multi-device login, a device that is forced offline does not receive offline push messages even if EasyIM offline push has been integrated.**
 
-## 推送通知方式
+## Push notification mode
 
-推送通知方式包括以下三种：
-- 接收所有离线消息的推送通知。
-- 仅接收提及某些用户的消息的推送通知。该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。
-- 不接收离线消息的推送通知。
+The following push notification modes are available:
+- Receive push notifications for all offline messages.
+- Receive push notifications only for messages that mention specified users. This mode is recommended for group chats. To mention one or more users, pass "em_at_list":["user1", "user2" ...] for the ext field when creating a message. To mention all users, pass "em_at_list":"all" for the field.
+- Do not receive push notifications for offline messages.
 
-推送通知方式在 App 或单聊/群聊会话层级生效，会话级别的设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。
+The push notification mode takes effect at the app or one-to-one/group chat conversation level. Conversation-level settings take precedence over app-level settings. A conversation without a configured push notification mode uses the app setting by default.
 
-关于推送通知方式的设置，详见相应文档，例如，对于 Android，可参见[推送通知方式文档](/document/android/push/push_notification_mode_dnd.html#推送通知方式)。
+For information about configuring the push notification mode, see the documentation for the relevant platform. For example, for Android, see [Push notification mode](/document/android/push/push_notification_mode_dnd.html#push-notification-mode).
 
-## 免打扰模式
+## Do Not Disturb mode
 
-免打扰的设置包括免打扰时间段和免打扰时长。环信 IM 在这两个时间段内不发送离线推送通知，因此，你可以通过设置免打扰模式关闭推送。若在免打扰时段或时长生效期间需要对指定用户推送消息，需设置[强制推送](/document/android/push/push_extension.html#强制推送)。
+Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM does not send offline push notifications during either period, so you can disable push by configuring Do Not Disturb mode. To push a message to a specified user while a Do Not Disturb period or duration is in effect, configure [forced push](/document/android/push/push_extension.html#forced-push).
 
-免打扰时间段仅在 app 级别生效，而免打扰时长对 app、单聊和群聊会话均生效。如果你既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
+The Do Not Disturb period applies only at the app level, while the Do Not Disturb duration applies to the app and one-to-one and group chat conversations. If you configure both a Do Not Disturb period and a Do Not Disturb duration, the total time during which Do Not Disturb mode is in effect is the sum of the two periods.
 
-关于免打扰时间段和免打扰时长的设置，详见相应文档，例如，对于 Android，可参见[免打扰模式文档](/document/android/push/push_notification_mode_dnd.html#免打扰模式)。
+For information about configuring the Do Not Disturb period and duration, see the documentation for the relevant platform. For example, for Android, see [Do Not Disturb mode](/document/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
 
-免打扰模式与推送通知方式之间的关系
+Relationship between Do Not Disturb mode and push notification mode
 
-对于 app 和 app 中的所有会话，免打扰模式的设置优先于推送通知方式的设置。对于二者关系的具体描述，详见相应文档，例如，对于 Android，可参见[推送通知方式与免打扰模式之间的关系文档](/document/android/push/push_notification_mode_dnd.html#免打扰模式)。
+For the app and all conversations in it, Do Not Disturb settings take precedence over push notification mode settings. For details about their relationship, see the documentation for the relevant platform. For example, for Android, see [Relationship between push notification mode and Do Not Disturb mode](/document/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
 
-## 使用推送模板
+## Use push templates
 
-设置推送模板为推送的高级功能，使用前需要在[环信控制台](https://console.easemob.com/user/login)的 **功能配置** > **基础功能** > **消息** > **设置离线推送模板** 中激活推送高级功能。
+Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [Easemob Console](https://console.easemob.com/user/login).
 
-推送模板主要用于服务器提供的默认配置不满足你的需求时，可使你设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。推送模板包括默认推送模板 `default` 和自定义推送模板。对于群组消息，你可以使用定向模板向某些用户推送与其他用户不同的离线通知。
+Push templates are primarily used when the server's default configuration does not meet your requirements. They allow you to set global push notification titles and content. For example, the server provides default push titles and content in Chinese and English. If you need Korean or Japanese push titles and content, you can configure templates for those languages. Push templates include the `default` push template and custom push templates. For chat group messages, you can use targeted templates to send some users offline notifications that differ from those sent to other users.
 
-你可以通过以下两种方式设置：
+You can configure push templates in the following ways:
 
-- [调用 REST API 配置](/document/server-side/push_template_overview.html)。
-- 在[环信控制台](https://console.easemob.com/user/login)设置推送模板，详见[设置推送模板的文档](/document/android/push/push_template.html)。
+- [Call a REST API](/document/server-side/push_template_overview.html).
+- Configure push templates in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
 
-使用推送模板有以下优势：
+Push templates provide the following benefits:
 
-1. 自定义修改环信服务端默认的推送内容。   
-2. 接收方可以决定使用哪个模板。 
-3. 按优先级选择模板使用方式： 
-   - 使用自定义推送模板的优先级高于默认推送模板。
-   - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
+1. Customize the default push content on the EasyIM server.   
+2. Allow the recipient to decide which template to use. 
+3. Select templates by priority: 
+   - A custom push template has a higher priority than the default push template.
+   - If the sender specifies a push template when sending a message, the notification is displayed using the sender's template even if the recipient has also configured a push template.
 
-关于推送模板的详情，可以参见各端的 [如何使用推送模板](/document/android/push/push_template.html)的文档。
+For details about push templates, see [How to use push templates](/document/android/push/push_template.html) in the documentation for each platform.
 
-## 开启第三方离线推送服务
+## Enable a third-party offline push service
 
-在环信即时通讯 IM SDK 初始化时开启相应的离线推送服务，例如 对于 FCM 推送，详见 [FCM 推送集成文档](/document/android/push/push_fcm.html#步骤四-fcm-推送集成)。
+Enable the corresponding offline push service when initializing the EasyIM SDK. For example, for FCM push, see the [FCM push integration documentation](/document/android/push/push_fcm.html#step-4-integrate-fcm-push).
 
-## 设置推送通知的显示内容
+## Set push notification display content
 
-对于推送通知的标题和内容，你可以通过多种方式设置，包括调用 API、使用推送模板以及发送消息时使用消息扩展字段。
+You can set push notification titles and content in multiple ways, including calling an API, using a push template, and using message extension fields when sending a message.
 
-关于这些设置方式的使用和设置优先级，详见具体文档，例如，对于 Android，可参见[设置通知的显示内容](/document/android/push/push_display_attribute.html#设置推送通知的显示属性)。
+For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set push notification display attributes](/document/android/push/push_display_attribute.html#set-push-notification-display-attributes).
 
-## 推送翻译
+## Push translation
 
-推送通知与[翻译功能](/value-added/translation/message_translation_android.html)协同工作。如果用户启用自动翻译功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
+Push notifications work with the [translation feature](/value-added/translation/message_translation_android.html). If a user enables automatic translation and sends a message, the SDK sends both the original and translated messages.
 
-作为接收方，你可以设置你在离线时希望接收的推送通知的首选语言。如果翻译消息的语言符合你的设置，则翻译消息显示在推送通知中；否则，将显示原始消息。翻译功能由 Microsoft Azure Translation API 提供，你可以点击[这里](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)了解支持的翻译语言。
+As a recipient, you can set a preferred language for push notifications received while you are offline. If the language of the translated message matches your setting, the translated message is displayed in the push notification. Otherwise, the original message is displayed. The translation feature is provided by the Microsoft Azure Translation API. Click [here](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) to view the supported languages.
 
-关于如何设置和获取推送通知的首选语言，详见相应文档，例如，对于 Android，可参见[设置推送翻译文档](/document/android/push/push_translation.html)。
+For information about setting and retrieving the preferred language for push notifications, see the documentation for the relevant platform. For example, for Android, see [Configure push translation](/document/android/push/push_translation.html).
 
-## 推送扩展
+## Push extensions
 
-你可以利用扩展字段实现自定义推送设置，包括仅对群组中某些成员推送通知、设置通知栏折叠、强制推送和发送静默消息。
+You can use extension fields to customize push settings, including sending push notifications only to specified chat group members, collapsing notifications in the notification bar, forcing push, and sending silent messages.
 
-关于如何设置推送扩展字段，详见相应文档，例如，对于 Android，可参见[设置推送扩展功能文档](/document/android/push/push_extension.html)。
-
+For information about configuring push extension fields, see the documentation for the relevant platform. For example, for Android, see [Configure push extensions](/document/android/push/push_extension.html).
 
 
 

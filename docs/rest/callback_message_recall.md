@@ -1,0 +1,60 @@
+# Message Recall Callback
+
+## Feature overview
+
+After a message is recalled successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain the recalled message and synchronize data.
+
+## Prerequisite
+
+- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
+- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+
+## Trigger conditions
+
+1. A [user recalls a message on the client](/document/android/message_recall.html).
+2. A RESTful API is called to recall a [single message](/document/server-side/message_recall_single.html) or [recall messages in batches](/document/server-side/message_recall_batch.html).
+3. A message is recalled in the [Easemob Console](https://console.easemob.com/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
+
+## Callback request
+
+### Request example
+
+```json
+{
+    "chat_type":"recall",
+    "callId":"XXXX#XXXX_966475585536657404",
+    "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
+    "payload":{
+        "ext":{},
+        "ack_message_id":"966475220900644860",
+        "bodies":[]
+    },
+    "host":"******",
+    "appkey":"orgname#appname",
+    "from":"tst",
+    "recall_id":"966475220900644860",
+    "to":"170908972023810",
+    "eventType":"chat",
+    "msg_id":"966475585536657404",
+    "timestamp":1642589932646
+}
+```
+
+### Request fields
+
+| Field              | Type | Description                                                         |
+| :---------------- | :------- | :----------------------------------------------------------- |
+| `callId`          | String   | The `callId` field is the unique identifier of each callback request, in the format “App Key_message ID of the recall event”. |
+| `eventType`       | String   | `chat`: Uplink message; `chat_offline`: Offline message.                   |
+| `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
+| `chat_type`       | String   | `recall`, indicating message recall.                                     |
+| `group_id`        | String   | The chat group or chat room where the callback message occurs. This field applies only to group chats and chat rooms. |
+| `from`            | String   | Message sender.                                               |
+| `to`              | String   | Message recipient.                                               |
+| `recall_id`       | String   | ID of the message to recall.                                            |
+| `msg_id`          | String   | Message ID of the recall event, which is the same as the `msg_id` used when the message was sent.          |
+| `payload`         | object   | For a message recall, the `bodies` and `ext` fields are empty.<br/> `ack_message_id` indicates the original message ID. |
+| `securityVersion` | String   | Security verification version, currently 1.0.0. Ignore this field. It will be configured in the Easemob Console in the future. |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                           |
+| `host`            | String   | Server name.                                                 |

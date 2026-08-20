@@ -1,0 +1,58 @@
+# One-to-One Message Read Receipt Callback
+
+## Feature overview
+
+After a one-to-one message read receipt is sent successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain read receipt information and synchronize data.
+
+## Prerequisite
+
+- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
+- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+
+## Trigger conditions
+
+The [client sends a one-to-one message read receipt](/document/android/message_receipt.html#one-to-one-and-group-message-read-receipts).
+
+## Callback request
+
+### Request example
+
+The following example shows a one-to-one message read receipt being sent.
+
+```json
+{
+    "chat_type": "read_ack",
+    "callId": "XXXX#XXXX_968665325555943556",
+    "channel_channel": "XXXX#XXXX_2222@conference.easemob.com",
+    "security": "bd63d5fa8f72823e6d33e09a43aa4239",
+    "payload": {
+        "ext": {},
+        "ack_message_id": "968665323572037776",
+        "bodies": []
+    },
+    "host": "msync@ebs-ali-beijing-msync45",
+    "appkey": "XXXX#XXXX",
+    "from": "1111",
+    "to": "2222",
+    "eventType": "chat",
+    "msg_id": "968665325555943556",
+    "timestamp": 1643099771248
+}
+```
+
+### Request fields
+
+| Field        | Type | Description                                                         |
+| :---------- | :------- | :----------------------------------------------------------- |
+| `chat_type` | String   | `read_ack`: Read receipt.                                        |
+| `callId`    | String   | The `callId` field is the unique identifier of each callback request, in the format “App Key_message ID of the receipt message”. | 
+| `channel_channel` | String   | Read receipt for a one-to-one message, in the format `App Key_接收已读回执用户 ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
+| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `payload`   | object   | Contains:<br/> - `ext`: Message extension field<br/> - `ack_message_id`: Message ID<br/> - `bodies`: Message body content. |
+| `host`      | String   | Server name.                                                 |
+| `appkey`    | String   | Unique identifier of the app registered in the Easemob Console.                         |
+| `from`      | String   | ID of the user who sends the read receipt.                                        |
+| `to`        | String   | ID of the user who receives the read receipt.                                        |
+| `eventType`       | String | `chat`: An uplink message.                      |
+| `timestamp` | long     | Unix timestamp when the EasyIM server receives the message read receipt, in milliseconds.                  |
+| `msg_id`    | String   | Message ID of the receipt message.                                        |

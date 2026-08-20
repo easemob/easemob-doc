@@ -1,79 +1,77 @@
-# 产品介绍
+# Product Introduction
 
-环信即时通讯 IM 为开发者提供高可靠、低时延、高并发、安全、全球化的通信云服务，帮助开发者快速构建端到端通信的场景。环信提供 SDK 和 RESTful API，支持同时在线人数无上限，聊天室亿级消息并发，全球平均延时小于 200 毫秒，相同区域平均延时小于 100 毫秒。
+EasyIM provides developers with highly reliable, low-latency, high-concurrency, secure, and global communications cloud services, helping them quickly build end-to-end communication scenarios. Easemob provides SDKs and RESTful APIs that support unlimited concurrent online users, hundreds of millions of concurrent chat room messages, an average global latency of less than 200 milliseconds, and an average latency within the same region of less than 100 milliseconds.
 
-- 支持单聊、群聊、聊天室服务；
-- 提供服务端 RESTful API 和 [回调服务](/document/server-side/callback_overview.html)；
-- 提供多平台 SDK，包括 Android、iOS、Web、HarmonyOS、Windows、Linux、Unity、Flutter、React Native、小程序、uni-app 和 Electron；
-- 提供 Demo 和 UIKit。
+- Support one-to-one chats, group chats, and chat rooms;
+- Provide server-side RESTful APIs and [callback services](/document/server-side/callback_overview.html);
+- Provide multi-platform SDKs for Android, iOS, Web, HarmonyOS, Windows, Linux, Unity, Flutter, React Native, Mini Program, uni-app, and Electron;
+- Provide demos and UIKit.
 
-## 产品架构
+## Product architecture
 
-环信即时通讯 IM 提供单聊、群聊、聊天室、离线推送、账号鉴权、用户属性和用户关系等服务，以及完善的 SDK API 和 RESTful API。
+EasyIM provides services for one-to-one chats, group chats, chat rooms, offline push, account authentication, user attributes, and user relationships, as well as comprehensive SDK APIs and RESTful APIs.
 
-![环信架构](/images/product/framework.png)
+![EasyIM architecture](/images/product/framework.png)
 
-## 产品服务
+## Product services
 
-### 数据中心
+### Data centers
 
-环信在全球设有五大数据中心、200+ 边缘加速节点，网络服务覆盖全球 200 多个国家和地区。环信数据中心同城三中心部署，SLA 99.95%，提供优异的弱网对抗能力，70% 丢包情况下消息到达率 100%。
+Easemob has five major data centers and more than 200 edge acceleration nodes worldwide, providing network services in over 200 countries and regions. Easemob data centers use a three-data-center deployment within each city, provide an SLA of 99.95%, and deliver excellent performance on unstable networks, with a 100% message delivery rate at 70% packet loss.
 
-你在环信控制台创建应用时需选择数据中心，你的业务数据会存在该数据中心。详见 [数据中心介绍文档](https://doc.easemob.com/product/data_center.html)。
+When creating an app in the Easemob Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](https://doc.easemob.com/product/data_center.html).
 
-### 单聊
+### One-to-one chats
 
-单聊即一对一聊天，提供包括文本、图片、位置、语音、视频和自定义消息（例如，红包）以及合并消息的能力，支持离线消息、消息漫游、消息回执、消息撤回、修改、搜索、表情回复（Reaction）、翻译、置顶以及消息审核等功能。详情可参见 [单聊消息](message_single_chat) 文档。
+A one-to-one chat is a conversation between two users. It supports text, image, location, voice, video, custom messages such as red packets, and combined messages, as well as offline messages, message roaming, message receipts, message recall, editing, searching, Reactions, translation, message pinning, content moderation, and other features. For details, see [One-to-one messages](message_single_chat).
 
-### 群聊
+### Group chats
 
-群组是支持多人沟通的即时通讯系统，成员关系相对稳定。所有群成员可以收到群中的消息，可以在群中发送消息。
+A chat group is an instant messaging system that supports multi-user communication and relatively stable member relationships. All chat group members can receive and send messages in the chat group.
 
-群组按照是否对用户公开，可以分为公开群和私有群。
+Chat groups are classified as public or private based on whether they are visible to users.
 
-| 群组分类 | 加群方式   | 
+| Chat group type | How to join   | 
 | :------- | :---------- | 
-| 公开群   | 任何用户可以搜索到该群，任何人均可申请加入群或者被管理员和群主邀请入群。任何用户均可申请入群，是否需要群主和群管理员审批取决于群组设置。 |
-| 私有群   | 群外用户不能搜索到此类群组，需要被邀请才能入群。除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组的设置。 |
+| Public chat group   | Any user can find the chat group, apply to join it, or be invited by an admin or the chat group owner. Whether an application requires approval from the owner or an admin depends on the chat group settings. |
+| Private chat group   | Users outside the chat group cannot find it and must be invited to join. Whether regular members can invite other users in addition to the chat group owner and admins depends on the chat group settings. |
 
-你可以根据自己的需求对群组进行定制，包括用户创建群组时可以设置群组扩展字段自定义更多群组信息，设置群成员自定义属性（KV），例如群成员在群组中的昵称和头像等。详情可参见 [群组](/product/product_group_overview.html) 文档。
+You can customize chat groups based on your requirements. For example, users can set a chat group extension field when creating a chat group to define additional information and set custom member attributes (KV), such as a member's nickname and avatar in the chat group. For details, see [Chat groups](/product/product_group_overview.html).
 
-### 聊天室
+### Chat rooms
 
-聊天室是支持多人加入的类似 Twitch 的组织，可以应用于直播、消息广播等。与群组相比，聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息。详情可参见 [聊天室](/product/product_chatroom_overview.html) 文档。
+A chat room is a Twitch-like organization that supports many participants and can be used for live streaming and message broadcasting. Unlike chat group members, chat room members do not have fixed relationships and do not receive any chat room messages after going offline. For details, see [Chat rooms](/product/product_chatroom_overview.html).
 
-### 用户属性和用户关系
+### User attributes and user relationships
 
-环信支持设置用户属性和用户关系，详情可参见 [用户属性](/product/product_user_attribute.html) 和 [用户关系](/product/product_user_relationship.html) 文档。
+EasyIM supports user attributes and user relationships. For details, see [User attributes](/product/product_user_attribute.html) and [User relationships](/product/product_user_relationship.html).
 
-- 用户属性：例如，用户昵称、头像、邮箱、电话、性别、签名、生日等。
-- 用户关系：好友列表和黑名单等。
+- User attributes: User nickname, avatar, email address, phone number, gender, signature, birthday, and other information.
+- User relationships: Friend lists, blocklists, and more.
 
-### 账号鉴权
+### Account authentication
 
-即时通讯 IM 支持使用 App 自身账号快速集成即时通讯 IM 服务，无需进行账号映射。集成 SDK 后，可以通过接口调用完成用户 ID 与 Token 的鉴权，详情可参见 [用户注册与登录](/product/product_user_registration_login.html) 文档。
+EasyIM supports quick integration using the app's own account system without account mapping. After integrating the SDK, authenticate the user ID and token through API calls. For details, see [User registration and login](/product/product_user_registration_login.html).
 
-## 管理与监控
+## Management and monitoring
 
-环信控制台提供对即时通讯 IM 的管理功能。通过控制台，你可以开通即时通讯 IM 服务、购买增值服务、升级版本，进行消息推送、回调配置以及用户、群组、聊天室管理；同时，你还可以进行内容审核配置以及查看数据统计。
+The Easemob Console provides management capabilities for EasyIM. In the Console, you can activate EasyIM, purchase value-added services, upgrade your plan, configure message push and callbacks, and manage users, chat groups, and chat rooms. You can also configure content moderation and view statistics.
 
-## 服务端功能 
+## Server-side features 
 
-### RESTful API
+### RESTful APIs
 
-环信即时通讯通过 REST 平台提供如下 RESTful API，你可以通过你的业务服务器向环信 REST 服务器发送 HTTP 请求，在服务端实现实时通信。RESTful API 可实现消息发送、获取、撤回、修改、导入、表情回复以及群组管理、聊天室管理、用户账号和用户关系管理等功能。相对于环信控制台，RESTful API 可实现更为强大的管理能力。详情请参见 [RESTful API](/document/server-side/overview.html) 文档。
+EasyIM provides the following RESTful APIs through the REST platform. Your business server can send HTTP requests to the EasyIM REST server to implement real-time communication on the server side. RESTful APIs provide features such as sending, retrieving, recalling, editing, importing messages, adding Reactions, and managing chat groups, chat rooms, user accounts, and user relationships. RESTful APIs provide more powerful management capabilities than the Easemob Console. For details, see [RESTful APIs](/document/server-side/overview.html).
 
-某些功能只能通过 RESTful API 提供，例如，封禁和解禁账号、全局禁言、发送 app/聊天室 全局广播消息等。
+Some features are available only through RESTful APIs, such as banning and unbanning accounts, globally muting users, and sending app or chat room global broadcast messages.
 
-### 消息回调
+### Message callbacks
 
-环信即时通讯 IM 提供[消息回调](/document/server-side/callback_overview.html)功能，在事件发生之前或之后，环信 IM 服务器会以 HTTP POST 请求的形式向你的应用服务器发送通知，让 app 后台干预该事件的处理逻辑或者实现必要的数据同步。
+EasyIM provides [message callbacks](/document/server-side/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.
 
-## 私有化
+## On-premises deployment
 
-环信即时通讯私有化服务是基于 IM 核心技术实现的可私有化部署解决方案。该方案可适配内网物理服务器集群、公有云以及私有云等任意部署环境，提供功能完备、安全可靠、易于扩展的即时通讯平台。更多详情，请参见[私有化服务文档](https://docs-im-privatization-v3.easemob.com)。
-
-
+The EasyIM on-premises service is a privately deployable solution based on core instant messaging technologies. It supports deployment in intranet physical server clusters, public clouds, private clouds, and other environments, providing a full-featured, secure, reliable, and scalable instant messaging platform. For details, see the [on-premises service documentation](https://docs-im-privatization-v3.easemob.com).
 
 
 

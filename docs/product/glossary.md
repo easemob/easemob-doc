@@ -1,205 +1,189 @@
-# 术语表
+# Glossary
 
-<Toc />
+## EasyIM SDK
 
-## 环信即时通讯 IM SDK
+The EasyIM SDK is provided by Easemob to implement instant messaging scenarios such as one-to-one chats, group chats, and chat rooms.
 
-环信即时通讯 IM SDK 是环信提供的用于实现即时通讯，比如：单聊、群聊、聊天室的 SDK。
+## Easemob Console
 
-### 环信即时通讯 IMKit
+The [Easemob Console](https://console.easemob.com/user/login) is a tool provided by Easemob for developers to manage Easemob services.
 
-IMKit 是环信即时通讯 IM SDK 的一个开源 UI 组件，提供应用内聊天的常用页面和 UI 组件，帮助开发者快速构建应用的 UI。
+## Daily active users
 
-## 环信即时通讯 CallKit
+The number of daily active users (DAU) is the total number of users who interact with the EasyIM server through business operations, including but not limited to logging in and sending or receiving messages, during a calendar day.
 
-CallKit 提供应用内聊天中音视频通话的页面和 UI 组件，帮助开发者快速构建音视频通话功能。 
+## Conversations and messages
 
-### 环信通讯云控制台（Easemob Console）
+### Conversation
 
-[环信通讯云控制台](https://console.easemob.com/user/login)是环信提供给开发者管理环信各项服务的工具。
+A conversation is a collection of all messages in a one-to-one chat, group chat, chat room, or message thread. Users send messages, view historical messages, clear historical messages, and perform other operations in a conversation.
 
-## Demo
+### Conversation list
 
-环信即时通讯 IM 示例开源项目，目前支持 Android、iOS 和 Web 平台。
+A conversation list is a list of conversations arranged in a specific order. The order depends on factors such as the time when the latest message in each conversation was received.
 
-## 日活用户
+### Broadcast message
 
-日活用户（DAU），指日活跃用户数，即一个自然日内与环信服务器进行业务行为交互（包含但不局限于登录、收发消息）的用户总数。
+A broadcast message is sent to all users in an app through a RESTful API. When a user is offline, the message is automatically converted to a system offline push notification.
 
-## 会话和消息
+### Offline message
 
-### 会话
+When a recipient is offline, the EasyIM server temporarily stores messages for them. When the user gets online, they receive the offline messages stored on the server. The storage period for offline messages varies by plan. One-to-one chats and group chats support offline messages, while chat rooms do not.
 
-会话是一个单聊、群聊、聊天室或者消息话题所有消息的集合。用户需在会话中发送消息或查看历史消息或清空历史消息等操作。
+### Historical message
 
-### 会话列表
+The EasyIM server stores historical messages for queries. Developers can download compressed historical message files through a RESTful API.
 
-会话列表是指会话依照一定顺序排列的列表，会话的排列顺序依赖于会话中最近一条消息的接收时间等因素。
+### Roaming message
 
-### 广播消息
+During multi-device login, a message sent by a user on one client is synchronized to all other clients. This type of message is called a roaming message.
 
-广播消息是指通过 RESTful API 对应用内的所有用户发送消息。当用户离线时，消息会自动转换为系统离线推送。
+### Text message
 
-### 离线消息
+A text message contains plain text and can include hyperlinks. After receiving a text message, the client stores it in the database and increments the unread message count. Emoji messages are customized by developers and are essentially text messages. After receiving a text message, the recipient first checks whether it is an emoji message. If so, the client displays the corresponding emoji image.
 
-当接收方不在线时，环信即时通讯 IM 服务器会暂时保存消息，用户上线时，会接收到服务器保存的离线消息。不同套餐版本的离线消息保存时长不同。单聊和群聊支持离线消息，聊天室不支持离线消息。
+### Image message
 
-### 历史消息
+An image message is an attachment message whose content includes the image URL, dimensions, file size, and other information. The maximum supported size is 10 MB.
 
-环信即时通讯 IM 服务器会保存历史消息以供查询。开发者可以通过 RESTful API 下载历史消息压缩包文件。
+### Location message
 
-### 漫游消息
+A location message contains a geographic location title, longitude, and latitude.
 
-多端登录时，用户在其中一端发送的消息会同步到所有其他客户端，此类消息称为漫游消息。
+### Voice message
 
-### 文本消息
+Voice data is an attachment and must include its duration in seconds. The maximum supported size is 10 MB.
 
-消息内容是普通文本，其中可以包括超链接，客户端收到消息后存入数据库、计入未读消息数。表情消息为开发者自定义。实质上是发文本消息。接收方收到文本消息后，首先查询文本消息是否是表情消息，如果是，则显示该文本消息为对应的表情图片。
+### Video message
 
-### 图片消息
+A video message contains information such as the video file URL, duration, size, and format. The default supported size is 10 MB.
 
-图片消息内容属于附件类型消息，内容图片 URL 地址、尺寸、图片大小等信息。最大支持 10 MB。
+### File message
 
-### 位置消息
+A file message contains information such as the file URL, size, and format. Any format is supported, and the default supported size is 10 MB.
 
-消息内容为地理位置标题、经度和纬度信息。
+### Command message
 
-### 语音消息
+A command message can be regarded as an instruction. By sending the instruction, the sender notifies the recipient of an operation to perform. After receiving the message, the recipient can process it as needed. Command messages are not stored in the local database, displayed in the UI, or counted as unread messages. You can customize their behavior based on your business requirements, such as updating an avatar or nickname.
 
-语音数据属于附件类型，需要提供时长信息，以秒为单位。最大支持 10 MB。
+### Custom message extension
 
-### 视频消息
+If the basic message types do not meet your requirements, you can enhance them with custom message extensions, for example, to include the content of a quoted message.
 
-消息内容为视频文件的 URL 地址、时长、大小、格式等信息，默认支持 10 MB。
+After an extension is added, the message cannot exceed the size limit of the original message type. Custom message extensions are stored as message content in the local database.
 
-### 文件消息
+### Custom message
 
-消息内容为文件的 URL 地址、大小、格式等信息，格式不限，默认支持 10 MB。
+A message type customized by the developer, such as a red packet message or a rock-paper-scissors message.
 
-### 透传消息
+### Reaction
 
-透传消息可视为一条指令，通过发送这条指令给对方，通知对方要执行的操作，对方收到消息可自定义处理。透传消息不会存入本地数据库中，在 UI 上不显示，也不计入未读消息。具体功能可以根据自身业务需求自定义，例如实现头像或昵称的更新等。
+Add or delete Reactions to messages in one-to-one chats and group chats. Reactions provide an intuitive way to express emotions and improve the user experience. In a chat group, you can also use Reactions to initiate a poll and determine the result based on the number of each Reaction added.
 
-### 消息自定义扩展
+### Message callback
 
-当基础的消息类型不满足需求时，可以使用消息自定义扩展增强基础消息类型，例如消息中需要携带被回复的消息内容等场景。
+For a message callback, the chat server sends a request to the customer's app server before or after an event occurs. The app server can then perform necessary data synchronization or intervene in subsequent event processing based on business requirements.
 
-使用扩展后，消息大小不能超过原类型消息的大小。消息自定义扩展作为消息内容会存入本地数据库。
+### Cloud message storage
 
-### 自定义消息
+Store one-to-one, group chat, and chat room messages sent by users on the chat server so that users can retrieve historical messages from the server after switching devices or deleting local messages. For message storage periods, see the [message storage period limits](limitation.html#message-storage) for each plan.
 
-发者自定义的消息类型，例如红包消息、石头剪刀布等形式的消息。
+## Users
 
-### 消息表情回复 Reaction
+### User ID
 
-在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
-
-### 消息回调
-
-消息回调，即聊天服务器会在事件发生之前或之后，向客户的应用服务器发送请求，应用服务器可据此进行必要的数据同步，或者根据业务需求干预事件的后续处理流程。
-
-### 消息云存储
-
-将用户发送的单聊、群聊、聊天室消息存储到聊天服务器，方便用户在更换设备或删除本地消息后，通过服务端获取历史消息。消息存储时间，详见各套餐版本的[消息存储时长](limitation.html#消息存储时长限制)。
-
-## 用户相关
-
-### 用户 ID
-
-用户 ID 即用户名，是 App Key 内用户的唯一标识，代码中出现的“username”、“userId”、“user”参数指定了用户 ID。用户 ID 不同于即时通讯系统服务器为用户创建的 UUID。
+A user ID, or username, uniquely identifies a user within an App Key. The “username”, “userId”, and “user” parameters in code specify a user ID. A user ID differs from the UUID created for the user by the EasyIM server.
 
 ### UUID
 
-即时通讯服务器为 App Key 内用户创建的唯一 ID，不同于用户 ID。
+A unique ID created by the EasyIM server for a user within an App Key. It differs from the user ID.
 
-### 用户属性
+### User attributes
 
-用户属性指用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。例如，在招聘场景下，利用用户属性功能，可以存储性别、邮箱、用户类型（面试者）、职位类型（Web 研发）等。当查看用户信息时，可以直接查询服务器存储的用户属性信息。
+User attributes are user information, such as a nickname, avatar, email address, phone number, gender, signature, and birthday. In a recruitment scenario, for example, you can use user attributes to store a user's gender, email address, user type (candidate), and position type (Web developer). When viewing user information, you can directly query the user attributes stored on the server.
 
-### 在线状态订阅
+### Presence
 
-用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。环信即时通讯 IM 提供发布、订阅和查询用户的在线状态的功能。
+User presence includes online, offline, and custom states. EasyIM provides features for publishing, subscribing to, and querying user presence.
 
-- **在线**：用户启动 app 后，客户端和即时通讯 IM 服务端成功建立了网络连接。客户端可以发消息给即时通讯 IM 服务端，也可以收到来自即时通讯 IM 服务端推送的消息。即时通讯 IM 服务端保存客户端的在线信息，例如，客户端的网络链路信息，客户端的平台版本等。App 在运行过程中，**IM SDK 每隔 5 分钟发一个心跳包给服务器，以确认用户的在线状态**。
-- **离线**：用户成功登出环信即时通讯 IM 系统或与即时通讯 IM 系统断开连接后的状态。用户登出即时通讯 IM 系统之后，无法发送和接收消息，在下次登录后可以接收到离线消息。
-- **自定义状态**：用户可以设置自定义状态，例如忙碌、马上回来、离开、接听电话、外出就餐等。
+- **Online**: After a user starts the app, the client successfully establishes a network connection to the EasyIM server. The client can send messages to the EasyIM server and receive messages pushed by it. The EasyIM server stores the client's online information, such as network connection information and client platform version. While the app is running, **the EasyIM SDK sends a heartbeat packet to the server every 5 minutes to confirm the user's online status**.
+- **Offline**: The state after a user successfully logs out of or disconnects from EasyIM. After logging out of EasyIM, the user cannot send or receive messages but can receive offline messages after the next login.
+- **Custom state**: A user can set a custom state, such as busy, be right back, away, on a call, or out to lunch.
 
-### 封禁用户
+### Ban a user
 
-禁止用户使用即时通讯 IM 服务。封禁后，用户无法连接即时通讯 IM 服务器。
+Prevent a user from using EasyIM. After being banned, the user cannot connect to the EasyIM server.
 
-### 用户黑名单
+### User blocklist
 
-用户将不会接收黑名单中用户发送的消息。
+A user does not receive messages sent by users on their blocklist.
 
-## 单聊
+## One-to-one chat
 
-单聊即一对一聊天，支持全类型消息。参与聊天的双方可以是好友也可以是陌生人。
+A one-to-one chat is a conversation between two users and supports all message types. The two participants can be friends or non-friends.
 
-## 群组
+## Chat group
 
-群组是支持多人沟通的即时通讯系统，成员关系相对稳定。所有群成员可在群中收发送消息。当群成员离线时，可以收到推送消息。群组分为公开群和私有群，公开群可以被搜索到，非群成员可以加入；私有群不能被搜索到，需要群主或群管理员添加用户进入。群组成员支持多种角色：群主、群管理员、群成员。群组提供丰富的管理能力，例如，群组禁言、黑名单和白名单等。
+A chat group is an instant messaging system that supports multi-user communication and relatively stable member relationships. All chat group members can send and receive messages in the chat group. Members can receive push notifications while offline. Chat groups can be public or private. Public chat groups can be found through a search and joined by non-members. Private chat groups cannot be found through a search, and the chat group owner or an admin must add users. A chat group supports multiple member roles: owner, admin, and regular member. It also provides extensive management capabilities, such as muting, blocklists, and allowlists.
 
-### 群主
+### Chat group owner
 
-群主即群组的创建者，在群中拥有最高权限，可以指定管理员、解散群组、更改群组信息以及对群组成员进行管理。
+The chat group creator is the owner and has the highest permissions in the chat group. The owner can appoint admins, destroy the chat group, change chat group information, and manage members.
 
-群主也可以将群主权限转移给群组其他成员。
+The owner can also transfer ownership to another chat group member.
 
-### 群管理员
+### Chat group admin
 
-由群主授权，协助进行管理，拥有一定管理权限。可以对群组成员进行管理。
+Authorized by the chat group owner to assist with management and granted certain management permissions. An admin can manage chat group members.
 
-### 群成员
+### Chat group member
 
-群组的普通成员，可以收发消息和查看群组描述信息，不具备群组管理权限。
+A regular chat group member can send and receive messages and view chat group information but does not have chat group management permissions.
 
-### 群组黑名单
+### Chat group blocklist
 
-群主和管理员可以将群组成员加入黑名单，加入群黑名单的用户不能在群中发送消息。
+The chat group owner and admins can add members to the blocklist. Users added to the chat group blocklist cannot send messages in the chat group.
 
-### 群组白名单
+### Chat group allowlist
 
-群主和管理员可以将群组成员加入白名单。群组开启全局禁言时，只有白名单中的用户可以在群组中发送消息。
+The chat group owner and admins can add members to the allowlist. When global mute is enabled for a chat group, only users on the allowlist can send messages in the chat group.
 
-### 消息话题
+### Message thread
 
-消息话题是建立在群组内一条消息上的支持多人沟通的即时通讯系统，消息话题成员是群组成员的子集。
+A message thread is an instant messaging system created from a message in a chat group and supports multi-user communication. Message thread members are a subset of the chat group members.
 
-消息话题中的成员可以在消息话题内发送和接收消息以及获取和撤回消息。
+Members can send, receive, retrieve, and recall messages in a message thread.
 
-## 聊天室
+## Chat room
 
-聊天室是支持多人加入的组织。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。
+A chat room is an organization that supports many participants. Chat room members do not have fixed relationships. Once offline, they do not receive any chat room messages and, except for members on the chat room allowlist, automatically leave the chat room after being offline for more than 2 minutes. Chat rooms can be used for live streaming, message broadcasting, and other scenarios.
 
-### 聊天室黑名单
+### Chat room blocklist
 
-聊天室创建者和管理员可以将聊天室成员加入黑名单，被加入聊天室黑名单的用户不能在聊天室中发送消息。
+The chat room creator and admins can add members to the blocklist. Users added to the chat room blocklist cannot send messages in the chat room.
 
-### 聊天室白名单
+### Chat room allowlist
 
-聊天室创建者和管理员可以将聊天室成员加入白名单，聊天室开启全局禁言时，只有白名单中的用户可以在聊天室中发送消息。
+The chat room creator and admins can add members to the allowlist. When global mute is enabled for a chat room, only users on the allowlist can send messages in the chat room.
 
-### 聊天室创建者
+### Chat room creator
 
-聊天室的创建者，在聊天室中拥有最高权限。可以指定管理员、解散聊天室、更改聊天室信息、对聊天室成员进行管理。
+The chat room creator has the highest permissions in the chat room. The creator can appoint admins, destroy the chat room, change chat room information, and manage members.
 
-### 聊天室管理员
+### Chat room admin
 
-由聊天室所有者授权，协助进行管理，拥有一定管理权限。可以对聊天室成员进行管理。
+Authorized by the chat room owner to assist with management and granted certain management permissions. An admin can manage chat room members.
 
-### 聊天室成员
+### Chat room member
 
-聊天室的普通成员，不具备聊天室管理权限。
+A regular chat room member without chat room management permissions.
 
-## RESTful 接口
+## RESTful API
 
-环信即时通讯 IM 的服务器端接口都是通过 RESTful 服务方式提供的，RESTful API 基于最简单的 HTTP 协议，在各个编程语言中都提供了良好的支持。
+EasyIM server-side APIs are provided as RESTful services. RESTful APIs are based on the simple HTTP protocol and are well supported across programming languages.
 
-环信即时通讯 IM RESTful 平台提供一个多租户用户体系，以集合（Collection）的形式的形式管理资源，一个集合包括数据库、企业、应用、用户、群组、消息和文件等。
+The EasyIM RESTful platform provides a multi-tenant user system and manages resources as collections. A collection can contain databases, organizations, apps, users, chat groups, messages, files, and other resources.
 
-## 离线推送
+## Offline push
 
-离线推送是指当应用被杀死时，通过厂商推送接收消息。iOS 设备使用苹果推送通知服务（APNs），Android 设备为谷歌云消息传递服务（FCM）、华为推送、小米推送、魅族推送、OPPO 推送和 vivo 推送。
-
-
+Offline push uses a vendor push service to deliver messages when an app is killed. iOS devices use Apple Push Notification service (APNs), while Android devices use Firebase Cloud Messaging (FCM).

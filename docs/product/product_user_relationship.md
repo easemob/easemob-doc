@@ -1,75 +1,74 @@
-# 用户关系
+# User Relationships
 
-环信即时通讯 IM 支持用户关系管理能力，提供完整的社交关系管理方案：
+EasyIM supports user relationship management and provides a complete solution for managing social relationships:
 
-- 支持用户关系存储能力, 包括: 好友关系和用户黑名单。
-- 支持用户关系管理能力，包括:
-  - 添加好友；
-  - 删除好友； 
-  - 添加好友至黑名单；
-  - 将好友移除黑名单。
-- 支持方便易用的客户端和服务端接口, 满足多种业务场景需求。
+- Store user relationships, including friend relationships and user blocklists.
+- Manage user relationships, including:
+  - Add a friend;
+  - Delete a friend; 
+  - Add a friend to the blocklist;
+  - Remove a friend from the blocklist.
+- Provide easy-to-use client-side and server-side APIs for various business scenarios.
 
-## 好友列表
+## Friend list
 
-你可以对好友列表进行相关管理操作，包括添加好友、删除好友、从服务端和本地获取好友列表以及导入好友列表。
+You can manage the friend list by adding and deleting friends, retrieving the friend list from the server and local database, and importing a friend list.
 
-好友列表相关的限制，如单个用户的好友数上限，详见 [产品使用限制](/product/limitation.html)。
+For friend list limitations, such as the maximum number of friends per user, see [Product limitations](/product/limitation.html).
 
-### 添加好友
+### Add a friend
 
-即时通讯 IM 支持每次添加单个好友。添加好友的流程如下：
+EasyIM supports adding one friend at a time. The process is as follows:
 
-- 服务端：调用 REST API 可直接将用户添加至好友列表，要添加的好友无需确认。
-- 客户端：例如，若用户 A 添加用户 B 为好友：用户 A 申请添加用户 B，用户 B 接到好友邀请后，选择同意或拒绝成为好友；若同意，则添加好友成功，则用户 A 和 B 均被添加到对方的好友列表中。若拒绝，则添加好友失败。
+- Server side: Call a REST API to add a user directly to the friend list. The friend does not need to confirm.
+- Client side: For example, if user A adds user B as a friend, user A sends a friend request to user B. After receiving the request, user B accepts or declines it. If user B accepts, users A and B are added to each other's friend lists. If user B declines, they are not added as friends.
 
-好友表中的好友信息如下：
+A friend entry contains the following information:
 
-- 为哪个用户添加的好友。
-- 好友的用户 ID。
-- 好友备注（如果调用添加好友备注接口进行了设置）。
+- The user to whose friend list the friend is added.
+- The friend's user ID.
+- Friend remarks, if set by calling the API for adding friend remarks.
   
-### 删除好友
+### Delete a friend
 
-即时通讯 IM 支持每次删除单个好友。删除好友的同时会删除对方好友列表中的该用户。
+EasyIM supports deleting one friend at a time. Deleting a friend also deletes the user from the other user's friend list.
 
-删除操作不需要对方同意或者拒绝。此外，删除好友时支持选择是否保留其会话和消息。
+The other user does not need to accept or decline the deletion. When deleting a friend, you can also choose whether to retain the conversation and messages with the user.
 
-### 获取好友列表
+### Retrieve the friend list
 
-- 利用服务端 API：
-  - 可 [调用推荐的方法分页获取好友列表](/document/server-side/user_friend_list_paged.html)，其中每个好友对象包含好友的用户 ID 和备注。
-  - 你也可以 [调用之前的方法一次性获取所有好友的列表](/document/server-side/user_friend_list_obtain.html)，该列表只包含好友的用户 ID。
-- 利用客户端 API：
-  - 可调用推荐的方法 [从服务器一次性或分页获取好友列表](/document/android/user_relationship.html#从服务端获取好友列表)，其中每个好友对象包含好友的用户 ID 和备注。你也可以调用之前的方法一次性获取所有好友的列表，该列表只包含好友的用户 ID。 
-  - 可一次性获取本地好友列表或单个好友的信息，包括好友的用户 ID 和备注。
+- Using a server-side API:
+  - You can [call the recommended API to retrieve a paginated friend list](/document/server-side/user_friend_list_paged.html). Each friend object contains the friend's user ID and remarks.
+  - You can also [call the earlier API to retrieve the entire friend list at once](/document/server-side/user_friend_list_obtain.html). This list contains only the user IDs of the friends.
+- Using a client-side API:
+  - You can call the recommended API to [retrieve the friend list from the server all at once or a page at a time](/document/android/user_relationship.html#retrieve-the-friend-list-from-the-server). Each friend object contains the friend's user ID and remarks. You can also call the earlier API to retrieve the entire friend list at once. This list contains only the user IDs of the friends. 
+  - You can retrieve the local friend list or information about an individual friend, including the friend's user ID and remarks, at once.
    
 :::tip
-需要从服务器获取好友列表之后，才能从本地获取到好友列表。
+You must retrieve the friend list from the server before you can retrieve it locally.
 :::
 
-### 导入好友列表
+### Import a friend list
 
-你可以[调用 REST API](/document/server-side/user_friend_import.html) 一次性导入多个好友。
+You can [call a REST API](/document/server-side/user_friend_import.html) to import multiple friends at once.
 
-### 开启或关闭发送消息权限控制
+### Enable or disable message sending permission control
 
-单聊用户之间的消息通讯，包括好友之间和陌生人之间的通讯。例如，对于企业内部的移动办公 app 来说，企业内部同事之间可以互相发送消息，可能不需要消息发送权限控制，而对于一个交友类 app，可能要控制只有好友之间才能发送消息，陌生人之间若要发消息，需要发送好友邀请，同意加好友后才能发消息。
+One-to-one message communication can occur between friends or non-friends. For example, colleagues in an enterprise mobile office app may be allowed to send messages to one another without message sending permission control. In a dating app, however, messages may be allowed only between friends. Non-friends must send a friend request and can send messages only after the request is accepted.
 
-环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要按以下步骤开启好友关系检查。
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, enable friend relationship check as follows:
 
-1. 在环信控制台左侧导航栏中，选择 **即时通讯 > 基础功能** > **用户**。
-2. 点击 **好友关系检查** 对应的开启按钮。
-   该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
+1. In the left navigation pane of the Easemob Console, select **EasyIM > Basic Features** > **Users**.
+2. Click the enable button for **Friend Relationship Check**.
+   After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If a user sends a one-to-one message to a non-friend, the SDK reports error code 221.
 
-## 黑名单
+## Blocklist
 
-每个用户都有一份黑名单，用于保存被拉黑的用户。黑名单最多可添加 500 个用户。
+Each user has a blocklist that stores blocked users. Up to 500 users can be added to the blocklist.
 
-用户可以将任何用户加入黑名单，不论该用户与你是否是好友关系。黑名单上的用户无法向你发送消息，也无法发送好友申请。好友被加入黑名单后仍在好友列表上显示。
+A user can add any user to the blocklist, regardless of whether they are friends. A user on your blocklist cannot send you messages or friend requests. A friend who is added to the blocklist remains in the friend list.
 
-你可以 [添加用户到黑名单](/document/android/user_relationship.html#添加用户到黑名单)、[将用户从黑名单移除](/document/android/user_relationship.html#将用户从黑名单移除)以及 [从服务器和本地数据库获取黑名单](/document/android/user_relationship.html#从服务器获取黑名单列表)。
-
+You can [add a user to the blocklist](/document/android/user_relationship.html#add-a-user-to-the-blocklist), [remove a user from the blocklist](/document/android/user_relationship.html#remove-a-user-from-the-blocklist), and [retrieve the blocklist from the server and local database](/document/android/user_relationship.html#retrieve-the-blocklist-from-the-server).
 
 
 

@@ -1,93 +1,90 @@
-# GDPR 安全合规
+# GDPR Security and Compliance
 
-<Toc />
+EasyIM provides a set of data deletion and export APIs to protect data security and user privacy and ensure compliance with the General Data Protection Regulation (GDPR).
 
-环信 IM 提供一系列数据删除和导出 API，保护数据安全和用户隐私 ，确保符合 GDPR（通用数据保护条例）的安全合规要求。
+## Data deletion
 
-## 数据删除
+To protect user privacy, Easemob provides data deletion REST APIs that developers can use to delete user-related data stored on EasyIM servers, such as user accounts and attributes, and to destroy chat groups and chat rooms.
 
+### Authentication method
 
-为保护用户隐私，环信提供数据删除 REST API 供开发者对环信即时通讯服务器存储的用户相关数据进行删除，例如：删除用户账号、删除用户属性、解散群组和聊天室。
-
-### 认证方式
-
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+EasyIM RESTful APIs require Bearer HTTP authentication. Each HTTP request must include the following `Authorization` field in the request header:
 
 `Authorization：Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 仅支持使用 app token 的鉴权方式，详见[使用 App Token 鉴权](/document/server-side/easemob_app_token.html)。
+To improve project security, EasyIM uses tokens, which are dynamic keys, to authenticate users who are about to log in to the instant messaging system. EasyIM RESTful APIs support only app token authentication. For details, see [Authenticate with an App Token](/document/server-side/easemob_app_token.html).
 
-### REST API 介绍
+### REST API overview
 
-#### 删除用户账号
+#### Delete a user account
 
-[删除 App 下指定的用户](/document/server-side/account_delete_single.html)，删除的用户数据主要包括用户的会话列表、用户属性和好友关系。
+[Delete a specified user from an app](/document/server-side/account_delete_single.html). The deleted user data mainly includes the user's conversation list, user attributes, and friend relationships.
 
-#### 删除用户属性
+#### Delete user attributes
 
-[删除 App 下指定用户的用户属性](/document/server-side/user_attribute_delete.html)。
+[Delete the user attributes of a specified user from an app](/document/server-side/user_attribute_delete.html).
 
-#### 解散群组
+#### Destroy a chat group
 
-[删除 App 下指定群 ID 的群组](/document/server-side/group_delete.html)。
+[Delete the chat group with a specified chat group ID from an app](/document/server-side/group_delete.html).
 
-#### 解散聊天室
+#### Destroy a chat room
 
-[删除 App 下指定 ID 的聊天室](/document/server-side/chatroom_delete.html)。
+[Delete the chat room with a specified ID from an app](/document/server-side/chatroom_delete.html).
 
-## 数据导出
+## Data export
 
-### 功能描述
+### Feature overview
 
-为了保证用户管理其隐私数据的权利，环信提供了数据导出 REST API，可供开发者导出环信即时通讯服务器存储的相关数据，包括用户数据、群组数据、聊天室数据、历史消息和附件。
+To ensure users' right to manage their private data, Easemob provides data export REST APIs that developers can use to export data stored on EasyIM servers, including user data, chat group data, chat room data, historical messages, and attachments.
 
-### REST API 概览
+### REST API overview
 
-本文介绍数据导出 API 的列表。
+This document describes the data export APIs.
 
-#### 导出用户数据
+#### Export user data
 
-| REST API                                                     | 描述                                |
+| REST API                                                     | Description                                |
 | :----------------------------------------------------------- | :---------------------------------- |
-| [获取单个用户信息](/document/server-side/account_detail_obtain_single.html)<br>[批量获取用户信息](/document/server-side/account_detail_obtain_batch.html) | 获取 App 下指定用户 ID 的用户信息。 |
-| [获取用户属性](/document/server-side/user_attribute_obtain_single.html) | 获取 App 下指定用户 ID 的用户属性。 |
+| [Retrieve information about a single user](/document/server-side/account_detail_obtain_single.html)<br>[Retrieve information about users in a batch](/document/server-side/account_detail_obtain_batch.html) | Retrieve information about users with specified user IDs in an app. |
+| [Retrieve user attributes](/document/server-side/user_attribute_obtain_single.html) | Retrieve the attributes of a user with a specified user ID in an app. |
 
-#### 导出群组数据
+#### Export chat group data
 
-| REST API                                                     | 描述                                      |
+| REST API                                                     | Description                                      |
 | :----------------------------------------------------------- | :---------------------------------------- |
-| [群组详情](/document/server-side/group_obtain_detail.html) | 获取 App 下指定群组 ID 的群组详情。       |
-| [App 下所有的群组](/document/server-side/group_obtain_total.html) | 获取 App 下包含所有群组的列表。           |
-| [群组管理员列表](/document/server-side/group_admin_list_get.html) | 获取 App 下指定群组 ID 的群组管理员列表。 |
-| [群组成员列表](/document/server-side/group_member_list_obtain.html) | 获取 App下指定群组 ID 的群组成员列表。    |
-| [群组公告](/document/server-side/group_announcement_obtain.html) | 获取 App 下指定群组 ID 的群组公告。       |
-| [群组共享文件](/document/server-side/group_shared_file_obtain.html) | 获取 App 下指定群组 ID 的群组共享文件。   |
-| [群组黑名单列表](/document/server-side/group_member_blocklist_obtain.html) | 获取 App 下指定群组 ID 的群组黑名单列表。 |
-| [群组禁言列表](/document/server-side/group_member_mutelist_obtain.html) | 获取 App 下指定群组 ID 的群组禁言列表。   |
+| [Chat group details](/document/server-side/group_obtain_detail.html) | Retrieve details of a chat group with a specified chat group ID in an app.       |
+| [All chat groups in an app](/document/server-side/group_obtain_total.html) | Retrieve a list of all chat groups in an app.           |
+| [Chat group admin list](/document/server-side/group_admin_list_get.html) | Retrieve the admin list of a chat group with a specified chat group ID in an app. |
+| [Chat group member list](/document/server-side/group_member_list_obtain.html) | Retrieve the member list of a chat group with a specified chat group ID in an app.    |
+| [Chat group announcement](/document/server-side/group_announcement_obtain.html) | Retrieve the announcement of a chat group with a specified chat group ID in an app.       |
+| [Chat group shared files](/document/server-side/group_shared_file_obtain.html) | Retrieve the shared files of a chat group with a specified chat group ID in an app.   |
+| [Chat group blocklist](/document/server-side/group_member_blocklist_obtain.html) | Retrieve the blocklist of a chat group with a specified chat group ID in an app. |
+| [Chat group mute list](/document/server-side/group_member_mutelist_obtain.html) | Retrieve the mute list of a chat group with a specified chat group ID in an app.   |
 
-#### 导出聊天室数据
+#### Export chat room data
 
-| REST API                                                     | 描述                                          |
+| REST API                                                     | Description                                          |
 | :----------------------------------------------------------- | :-------------------------------------------- |
-| [获取聊天室详情](/document/server-side/chatroom_obtain_detail.html) | 获取 App 下指定聊天室 ID 的聊天室详情。       |
-| [App 下所有的聊天室](/document/server-side/chatroom_obtain_total.html) | 获取 App 下所有的聊天室列表。                 |
-| [用户加入的聊天室](/document/server-side/chatroom_obtain_joined.html) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
-| [聊天室管理员列表](/document/server-side/chatroom_admin_list_get.html) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
-| [聊天室成员列表](/document/server-side/chatroom_member_list_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
-| [聊天室禁言列表](/document/server-side/chatroom_member_mutelist_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [Retrieve chat room details](/document/server-side/chatroom_obtain_detail.html) | Retrieve details of a chat room with a specified chat room ID in an app.       |
+| [All chat rooms in an app](/document/server-side/chatroom_obtain_total.html) | Retrieve a list of all chat rooms in an app.                 |
+| [Chat rooms joined by a user](/document/server-side/chatroom_obtain_joined.html) | Retrieve a list of chat rooms joined by a user with a specified user ID in an app.     |
+| [Chat room admin list](/document/server-side/chatroom_admin_list_get.html) | Retrieve the admin list of a chat room with a specified chat room ID in an app. |
+| [Chat room member list](/document/server-side/chatroom_member_list_obtain.html) | Retrieve the member list of a chat room with a specified chat room ID in an app.   |
+| [Chat room mute list](/document/server-side/chatroom_member_mutelist_obtain.html) | Retrieve the mute list of a chat room with a specified chat room ID in an app.   |
 
-#### 获取历史消息记录
+#### Retrieve historical messages
 
-此接口一次只能获取一个小时的历史消息记录。
+This API can retrieve only one hour of historical messages at a time.
 
-| REST API                                                     | 描述                                  |
+| REST API                                                     | Description                                  |
 | :----------------------------------------------------------- | :------------------------------------ |
-| [获取历史消息记录](/document/server-side/message_historical.html) | 获取 App 下指定时间段的历史消息文件。 |
+| [Retrieve historical messages](/document/server-side/message_historical.html) | Retrieve a historical message file for a specified period from an app. |
 
-#### 导出附件
+#### Export attachments
 
-附件包含图片、语音、视频、文件。
+Attachments include images, voice files, videos, and other files.
 
-| REST API                                                     | 描述                          |
+| REST API                                                     | Description                          |
 | :----------------------------------------------------------- | :---------------------------- |
-| [下载附件](/document/server-side/message_download_file.html) | 下载 App 下指定 UUID 的附件。 |
+| [Download an attachment](/document/server-side/message_download_file.html) | Download the attachment with a specified UUID from an app. |

@@ -1,7 +1,6 @@
 <script setup>
   import Sidebar from "vuepress-theme-hope/modules/sidebar/components/Sidebar.js";
   import PlatformSwitch from './PlatformSwitch.vue'
-  import PrivateSwitch from './PrivateSwitch.vue'
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
@@ -9,7 +8,6 @@
 
   const pageData = usePageData()
   const showPlatformSwitch = ref(false)
-  const showPrivateSwitch = ref(false)
   const showUIKitSwitch = ref(false)
   const showCallKitSwitch = ref(false)
   let title = ref('')
@@ -48,9 +46,7 @@
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     const isSdkDocPath =
-      (pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) &&
-      pagePath.indexOf('/document/server-side/') < 0
-    showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
+      pagePath.indexOf('/sdk/v5/') == 0
     showPlatformSwitch.value = isSdkDocPath
     showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
     showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0
@@ -58,8 +54,8 @@
     if(pagePath.indexOf('/product/') == 0) title.value = ''
     else if(pagePath.indexOf('/uikit/') == 0) title.value = 'UIKit'
     else if(pagePath.indexOf('/callkit/') == 0) title.value = 'CallKit'
-    else if(pagePath.indexOf('/document/server-side/') == 0) title.value = ''
-    else if(pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) title.value = 'SDK'
+    else if(pagePath.indexOf('/rest/') == 0) title.value = ''
+    else if(pagePath.indexOf('/sdk/v5/') == 0) title.value = 'SDK'
     else if(pagePath.indexOf('/value-added/') == 0) title.value = ''
     isNull.value = title.value ? false : true
 
@@ -75,11 +71,6 @@
         <div v-show="showPlatformSwitch" class="platform-switch">
           <ClientOnly>
             <PlatformSwitch />
-          </ClientOnly>
-        </div>
-        <div v-show="showPrivateSwitch" class="platform-switch">
-          <ClientOnly>
-            <PrivateSwitch />
           </ClientOnly>
         </div>
         <div v-show="showUIKitSwitch" class="platform-switch">

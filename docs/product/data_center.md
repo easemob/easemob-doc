@@ -1,190 +1,131 @@
-# 数据中心与加速节点
+# Data Centers and Acceleration Nodes
 
-为满足不同业务覆盖区域的部署需求，环信提供多种数据中心和加速节点选择。你可以根据终端用户分布、业务部署区域以及合规要求，选择合适的数据中心和网络加速方案。
+To meet deployment requirements across different business coverage regions, Easemob provides multiple data centers and acceleration nodes. You can select the appropriate data center and network acceleration solution based on end-user distribution, business deployment regions, and compliance requirements.
 
-目前环信支持以下数据中心和加速节点。
+Easemob currently supports the following data centers and acceleration nodes.
 
-## 数据中心与加速节点概览
+## Overview
 
-### 数据中心
+The following table lists the data centers:
 
-| 类型         | 名称                                           |
-| :----------- | :--------------------------------------------- |
-| 国内数据中心 | 国内 1 区、国内 2 区、国内 VIP 区。              |
-| 海外数据中心 | 新加坡 1 区、新加坡 2 区、美东 1 区、德国 2 区。 |
-
-数据中心的用途说明如下：
-
-| 名称                     | 用途                                                       |
+| Name                     | Purpose                                                       |
 | :----------------------- | :--------------------------------------------------------- |
-| 国内 1 区、国内 2 区     | 环信 IM 社区版、企业版、旗舰版、免费版和专业版客户所在集群。 |
-| 国内 VIP 区              | 尊享版客户及单独购买 VIP 集群服务的客户所在集群。            |
-| 新加坡 1 区、新加坡 2 区 | 环信海外客户所在集群。                                       |
-| 美东 1 区                | 环信海外客户所在集群。                                       |
-| 德国 2 区                | 环信海外客户所在集群。                                       |
+| Singapore Zone 1 and Singapore Zone 2 | Clusters for Easemob's overseas customers.                                       |
+| US East Zone 1                | Cluster for Easemob's overseas customers.                                       |
+| Germany Zone 2                | Cluster for Easemob's overseas customers.                                       |
 
-### 加速节点
+The following table lists the overseas acceleration nodes.
 
-| 类型         | 名称 |
+| Type         | Name |
 | :----------- | :--- |
-| 海外加速节点 | 全球 |
+| Overseas acceleration node | Global |
 
-### 数据中心选择与查看
+You can select a data center based on where most of your end users are located:
 
-你可以根据终端用户的主要分布区域选择数据中心：
+- If most end users are in the Chinese mainland, we recommend selecting a domestic data center.
+- If most end users are outside the Chinese mainland, we recommend selecting an overseas data center.
+- If end users are located both inside and outside the Chinese mainland and frequently communicate across countries, we recommend activating overseas acceleration for your existing data center.
+- If you require dedicated resources or a higher-specification cluster service, select a domestic VIP zone or contact the Easemob business team to purchase the appropriate service.
 
-- 如果绝大部分终端用户位于中国大陆，建议选择国内数据中心。
-- 如果绝大部分终端用户位于海外，建议选择海外数据中心。
-- 如果终端用户同时分布在国内和海外，且跨国通信频繁，建议在已有数据中心基础上开通海外加速服务。
-- 如果你需要专属资源或更高规格的集群服务，可选择国内 VIP 区或联系商务购买相应服务。
-
-在环信控制台创建应用时：
-- 国内数据中心默认为 **国内 2 区**。若要使用其他数据中心，需要联系环信商务。
-- 海外数据中心默认为 **新加坡 1 区**，也可选择 **美东1区** 或 **德国2区**。若要使用新加坡2区，需要联系环信商务。
+When creating an app in the Easemob Console:
+- The default domestic data center is **Domestic Zone 2**. To use another data center, contact the Easemob business team.
+- The default overseas data center is **Singapore Zone 1**. You can also select **US East Zone 1** or **Germany Zone 2**. To use Singapore Zone 2, contact the Easemob business team.
 
 ![img](/images/product/data_center_selection.png)
 
-你可以在环信控制台的 **应用概览** 页面查看应用所在的数据中心及服务器域名。
+You can view the app's data center and server domain on the **App Overview** page of the Easemob Console.
 
 ![img](/images/product/data_center.png)
 
-## 国内数据中心
+## Data centers
 
-### 应用场景
+### Use case
 
-适用于绝大部分终端用户位于国内的应用。
+Suitable for apps whose end users are primarily outside the Chinese mainland.
 
-### 集成说明
+### Integration instructions
 
-创建应用时，国内数据中心默认为 **国内二区**。
+The default overseas data center is **Singapore Zone 1**.
 
-集成各端 SDK 时需要根据应用所在的数据中心使用对应的 WebSocket 地址、RESTful API 地址和小程序地址。
+When integrating an SDK, use the WebSocket address, RESTful API address, and Mini Program address corresponding to the app's data center.
 
-#### WebSocket 地址
+#### WebSocket addresses
 
-| 数据中心名称 | Socket 3.0 地址                                    | Socket 2.0（老版本）地址                     |
-| :----------- | :------------------------------------------------- | :------------------------------------------- |
-| 国内 1 区    | `im-api-v2.easemob.com` 或 `im-api-v2.easecdn.com` | `im-api.easemob.com` 或 `im-api.easecdn.com` |
-| 国内 2 区    | `ngi-im-api-wechat.easemob.com`                    | 无                                           |
-| 国内 VIP 区  | 请咨询你的商务经理                                 | 请咨询你的商务经理                           |
-
-#### RESTful API 地址
-
-不同数据中心的 RESTful API 请求地址不同，具体如下：
-
-| 数据中心名称 | RESTful API 请求地址                 |
-| :----------- | :----------------------------------- |
-| 国内 1 区    | `a1.easemob.com` 或 `a1.easecdn.com` |
-| 国内 2 区    | `ngi-a1.easemob.com`                 |
-| 国内 VIP 区  | 请咨询你的商务经理                   |
-
-#### 小程序地址
-
-不同数据中心下，微信小程序和支付宝小程序使用的地址如下：
-
-| 数据中心名称 | 微信小程序                                                 | 支付宝小程序                                               |
-| :----------- | :--------------------------------------------------------- | :--------------------------------------------------------- |
-| 国内 1 区    | `im-api-wechat.easemob.com` 或 `im-api-wechat.easecdn.com` | `im-api-alipay.easemob.com` 或 `im-api-alipay.easecdn.com` |
-| 国内 2 区    | `ngi-im-api-wechat.easemob.com`                            | `ngi-im-api-wechat.easemob.com`                            |
-| 国内 VIP 区  | 请咨询你的商务经理                                         | 请咨询你的商务经理                                         |
-
-## 海外数据中心
-
-### 应用场景
-
-适用于绝大部分终端用户位于海外的应用。
-
-### 集成说明
-
-海外数据中心默认为 **新加坡 1 区**。
-
-集成各端 SDK 时需要根据应用所在的数据中心使用对应的 WebSocket 地址、RESTful API 地址和小程序地址。
-
-#### WebSocket 地址
-
-| 集群名称    | WebSocket 地址                                             |
+| Cluster name    | WebSocket address                                             |
 | :---------- | :--------------------------------------------------------- |
-| 新加坡 1 区 | `im-api-sgp-v2.easemob.com` 或 `im-api-sgp-v2.easecdn.com` |
-| 新加坡 2 区 | `msync-api-61.easemob.com` 或 `msync-api-61.easecdn.com`   |
-| 美东 1 区   | `msync-api-41.easemob.com` 或 `msync-api-41.easecdn.com`   |
-| 德国 2 区   | `msync-api-71.easemob.com` 或 `msync-api-71.easecdn.com`   |
+| Singapore Zone 1 | `im-api-sgp-v2.easemob.com` or `im-api-sgp-v2.easecdn.com` |
+| Singapore Zone 2 | `msync-api-61.easemob.com` or `msync-api-61.easecdn.com`   |
+| US East Zone 1   | `msync-api-41.easemob.com` or `msync-api-41.easecdn.com`   |
+| Germany Zone 2   | `msync-api-71.easemob.com` or `msync-api-71.easecdn.com`   |
 
-#### RESTful API 地址
+#### RESTful API addresses
 
-不同海外数据中心的 RESTful API 请求地址如下：
+The following table lists the RESTful API request addresses for each overseas data center:
 
-| 集群名称    | RESTful API 请求地址                         |
+| Cluster name    | RESTful API request address                         |
 | :---------- | :------------------------------------------- |
-| 新加坡 1 区 | `a1-sgp.easemob.com` 或 `a1-sgp.easecdn.com` |
-| 新加坡 2 区 | `a61.easemob.com` 或 `a61.easecdn.com`       |
-| 美东 1 区   | `a41.easemob.com` 或 `a41.easecdn.com`       |
-| 德国 2 区   | `a71.easemob.com` 或 `a71.easecdn.com`       |
+| Singapore Zone 1 | `a1-sgp.easemob.com` or `a1-sgp.easecdn.com` |
+| Singapore Zone 2 | `a61.easemob.com` or `a61.easecdn.com`       |
+| US East Zone 1   | `a41.easemob.com` or `a41.easecdn.com`       |
+| Germany Zone 2   | `a71.easemob.com` or `a71.easecdn.com`       |
 
-#### 微信小程序地址
+#### WeChat Mini Program addresses
 
-不同海外集群下，微信小程序使用的地址如下：
+The following table lists the WeChat Mini Program addresses for each overseas cluster:
 
-| 集群名称    | 微信小程序                                                   |
+| Cluster name    | WeChat Mini Program                                                   |
 | :---------- | :----------------------------------------------------------- |
-| 新加坡 1 区 | `im-api-wechat-sgp.easemob.com` 或 `im-api-wechat-sgp.easecdn.com` |
-| 新加坡 2 区 | `im-api-wechat-61.easemob.com` 或 `im-api-wechat-61.easecdn.com` |
-| 美东 1 区   | `im-api-wechat-41.easemob.com` 或 `im-api-wechat-41.easecdn.com` |
-| 德国 2 区   | `im-api-wechat-71.easemob.com` 或 `im-api-wechat-71.easecdn.com` |
+| Singapore Zone 1 | `im-api-wechat-sgp.easemob.com` or `im-api-wechat-sgp.easecdn.com` |
+| Singapore Zone 2 | `im-api-wechat-61.easemob.com` or `im-api-wechat-61.easecdn.com` |
+| US East Zone 1   | `im-api-wechat-41.easemob.com` or `im-api-wechat-41.easecdn.com` |
+| Germany Zone 2   | `im-api-wechat-71.easemob.com` or `im-api-wechat-71.easecdn.com` |
 
 :::tip
-根据海外数据隐私保护协议规定，选择新加坡 1 区、新加坡 2 区、美东 1 区或德国 2 区后，不可迁移至其他集群。
+Under overseas data privacy agreements, after selecting Singapore Zone 1, Singapore Zone 2, US East Zone 1, or Germany Zone 2, you cannot migrate to another cluster.
 :::
 
-## 海外加速服务
+## Acceleration service
 
-### 应用场景
+### Use case
 
-适用于部分终端用户位于国内、部分终端用户位于海外，且跨国用户之间需要进行消息通信的场景。
+Suitable when some end users are in the Chinese mainland, others are outside the Chinese mainland, and users need to exchange messages across countries.
 
-### 使用说明
+### Instructions
 
-环信会根据应用所在数据中心及终端用户分布，为你开通所需的网络加速节点。
+Easemob activates the required network acceleration nodes based on the app's data center and the distribution of its end users.
 
-加速节点默认带宽为 **1 Mbps**，你可以根据实际流量需求配置更合适的带宽。  
+The default bandwidth of an acceleration node is **1 Mbps**. You can configure a more appropriate bandwidth based on your actual traffic requirements.  
 
-如需开通相关服务，请联系你的商务经理。
+To activate the service, contact your Easemob business manager.
 
-### 节点分布
+### Node distribution
 
-| 名称         | 节点 |
+| Name         | Node |
 | :----------- | :--- |
-| 海外加速节点 | 全球 |
+| Overseas acceleration node | Global |
 
-节点价格请查看 [价格页](https://www.easemob.com/pricing/im)。
+For node pricing, see the [pricing page](https://www.easemob.com/pricing/im).
 
-## 常见问题
+## FAQ
 
-### 1. 创建应用时为何看不到某些数据中心？
+### 1. Why are some data centers unavailable when I create an app?
 
-环信控制台默认仅开放部分常用数据中心供选择。如果你需要使用其他数据中心，例如国内 VIP 区或其他海外集群，请联系环信商务申请开通。
+By default, only some commonly used data centers are available in the Easemob Console. To use another data center, contact the Easemob business team to request activation.
 
-### 2. 如何确认应用使用的数据中心？
+### 4. Can I migrate between data centers?
 
-你可以登录环信控制台，在 **应用概览** 页面查看应用所在数据中心及对应服务器域名。
+Under data privacy agreements, after selecting Singapore Zone 1, Singapore Zone 2, US East Zone 1, or Germany Zone 2, you cannot migrate to another overseas cluster.
 
-### 3. 国内 1 区和国内 2 区有什么区别？
+### 5. When do I need overseas acceleration?
 
-国内 1 区和国内 2 区在服务能力上没有区别。要使用国内 1 区需联系环信商务申请开通。
+If your end users are located both inside and outside the Chinese mainland and frequently exchange messages across countries, we recommend activating overseas acceleration to improve the cross-region access experience.
 
-### 4. 海外数据中心之间可以迁移吗？
+### 6. What is the default bandwidth of an overseas acceleration node, and can I adjust it?
 
-根据海外数据隐私保护协议规定，选择新加坡 1 区、新加坡 2 区、美东 1 区或德国 2 区后，不可迁移至其他海外集群。
+The default bandwidth of an overseas acceleration node is **1 Mbps**. If your business traffic is higher, you can configure more bandwidth based on your requirements. Contact the Easemob business team for details.
 
-### 5. 什么情况下需要开通海外加速服务？
+### 7. Do I need to configure different addresses for each data center on each client?
 
-如果你的终端用户同时分布在国内和海外，且跨国用户之间存在频繁消息通信需求，建议开通海外加速服务，以提升跨区域访问体验。
-
-### 6. 海外加速节点默认带宽及可否调整？
-
-海外加速节点默认带宽为 **1 Mbps**。如果业务流量更高，可以根据实际需求配置更高带宽，具体请联系环信商务。
-
-### 7. 各端是否需按数据中心配置不同地址？
-
-需要。
+Yes.
   
-不同数据中心对应的 WebSocket、RESTful API 和小程序接入地址不同。集成时请根据应用所在数据中心填写对应地址。
+Each data center has different WebSocket, RESTful API, and Mini Program access addresses. During integration, enter the addresses corresponding to the app's data center.

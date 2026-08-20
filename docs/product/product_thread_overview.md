@@ -1,39 +1,39 @@
-# 消息话题
+# Message Threads
 
-消息话题可由群成员基于一条群组消息创建，是群组的子集，该条群组消息称为消息话题的父消息。
+A chat group member can create a message thread from a chat group message. The message thread is a subset of the chat group, and the chat group message used to create it is called the parent message.
 
-## 消息话题管理
+## Message thread management
 
-| 功能       | 描述   | 
+| Feature       | Description   | 
 | :--------- | :----- | 
-| 创建消息话题       | 所有群成员均可基于一条群组消息新建消息话题。   | 
-| 解散消息话题       | 仅消息话题所在群组的群主和群管理员可以解散消息话题。  | 
-| 加入消息话题     | 消息话题所在群组的所有成员均可以加入消息话题。你可以调用 REST API 批量加入消息话题。  | 
-| 退出消息话题     | 消息话题成员均可以退出消息话题。你可以调用 REST API 将成员批量踢出消息话题。退出消息话题后，该成员将不会再收到消息话题中的消息：<br/> - 消息话题成员主动退出消息话题；<br/> - 消息话题成员被移出消息话题。仅群主和群管理员有该权限。 | 
-| 修改消息话题名称      | 仅群主和群管理员以及消息话题创建者可以修改消息话题名称。  | 
-| 获取消息话题详情     | 消息话题所属群组的所有成员均可以从服务器获取消息话题详情。  | 
-| 获取消息话题成员列表      | 消息话题所属群组的所有成员均可以从服务器分页获取消息话题成员列表。   | 
-| 获取消息话题列表     | - 用户可以从服务器分页获取自己加入和创建的消息话题列表。 <br/> - 从服务器分页获取指定群组中自己加入和创建的消息话题列表。 | 
-| 批量获取消息话题中的最新消息      | 用户可以从服务器批量获取消息话题中的最新一条消息。  | 
-| 获取消息话题 | 你可以调用 REST API 获取消息话题： <br/> - 获取 app 下的所有消息话题。<br/> - 获取单个用户加入的所有消息话题。<br/> - 获取当前用户加入的所有消息话题。 <br/> - 获取单个用户在指定群组中加入的所有消息话题。|
+| Create a message thread       | Any chat group member can create a message thread from a chat group message.   | 
+| Destroy a message thread       | Only the owner and admins of the chat group containing the message thread can destroy the message thread.  | 
+| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in a batch.  | 
+| Leave a message thread     | Message thread members can leave the message thread. You can call a REST API to remove members from a message thread in a batch. After a member leaves the message thread, they no longer receive messages in it:<br/> - A message thread member voluntarily leaves the message thread;<br/> - A message thread member is removed from the message thread. Only the chat group owner and admins have permission to remove members. | 
+| Change a message thread name      | Only the chat group owner and admins and the message thread creator can change the message thread name.  | 
+| Retrieve message thread details     | All members of the chat group containing a message thread can retrieve its details from the server.  | 
+| Retrieve the message thread member list      | All members of the chat group containing a message thread can retrieve its paginated member list from the server.   | 
+| Retrieve a list of message threads     | - A user can retrieve a paginated list of message threads they joined or created from the server. <br/> - A user can retrieve a paginated list of message threads they joined or created in a specified chat group from the server. | 
+| Retrieve the latest messages from message threads in a batch      | A user can retrieve the latest message from multiple message threads in a batch from the server.  | 
+| Retrieve message threads | You can call REST APIs to retrieve message threads: <br/> - Retrieve all message threads in an app.<br/> - Retrieve all message threads that a specified user has joined.<br/> - Retrieve all message threads that the current user has joined. <br/> - Retrieve all message threads that a specified user has joined in a specified chat group.| 
 
-## 消息话题中的消息管理
+## Message management in a message thread
 
-| 功能       | 描述   | 
+| Feature       | Description   | 
 | :--------- | :----- | 
-| 发送消息话题中的消息  | 发送消息话题中的消息和发送群组消息的方法基本一致。唯一不同的是，发送消息话题中的消息需要指定是否是消息话题的标记。| 
-| 接收消息话题中的消息      | 接收消息话题中的消息与接收单聊、群聊和聊天室相同，详见[接收消息](/document/android/message_receive.htm)。   | 
-| 撤回消息话题中的消息      | 撤回消息话题中的消息的逻辑与撤回单聊、群聊和聊天室相同。消息撤回后，消息话题所属群组的所有成员收到消息话题更新回调，消息话题成员收到消息话题中的消息撤回的回调。 | 
-| 获取消息话题中的消息      | 你可以从服务器或本地获取单个消息话题的消息。  | 
+| Send a message in a message thread  | Sending a message in a message thread is essentially the same as sending a chat group message. The only difference is that a message sent in a message thread must include a flag indicating that it belongs to the message thread.| 
+| Receive a message in a message thread      | Receiving messages in a message thread is the same as receiving messages in one-to-one chats, group chats, and chat rooms. For details, see [Receive messages](/document/android/message_receive.htm).   | 
+| Recall a message in a message thread      | The logic for recalling a message in a message thread is the same as that for recalling a message in a one-to-one chat, group chat, or chat room. After a message is recalled, all members of the chat group containing the message thread receive a message thread update callback, while message thread members receive a callback indicating that a message in the message thread was recalled. | 
+| Retrieve messages in a message thread      | You can retrieve messages in a specified message thread from the server or the local database.  | 
 
-## 监听消息话题事件
+## Monitor message thread events
 
-你可以实现消息话题事件监听，若消息话题内进行了相关操作，包括消息话题创建、消息话题名称修改、消息话题解散、消息话题成员被移除，消息话题中的其他人员会收到相关事件，详见[监听消息话题事件](/document/android/thread.html#监听消息话题事件)。
+You can implement message thread event listeners. When an operation occurs in a message thread, including message thread creation, name changes, destruction, or member removal, the other users in the message thread receive the corresponding event. For details, see [Monitor message thread events](/document/android/thread.html#monitor-message-thread-events).
 
-## 消息话题事件回调
+## Message thread event callbacks
 
-你可以实现发送后回调，使环信 IM 服务器通过 HTTP/HTTPS POST 请求将消息话题事件（例如，对消息话题中的一条消息进行相关操作，包括发送、撤回或修改）同步给你的应用服务器，详见[消息话题事件回调文档](/document/server-side/callback_thread.html)。
+You can implement a post-delivery callback so that the EasyIM server synchronizes message thread events with your app server through HTTP/HTTPS POST requests. Such events include operations on a message in a message thread, such as sending, recalling, or editing the message. For details, see [Message thread event callback](/document/server-side/callback_thread.html).
 
-## 消息话题限制
+## Message thread limitations
 
-消息话题相关限制，详见[消息话题限制文档](/product/limitation.html#消息话题)。
+For message thread limitations, see [Message thread limitations](/product/limitation.html#message-threads).

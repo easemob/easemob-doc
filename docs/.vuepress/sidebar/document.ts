@@ -2,11 +2,12 @@ import path from "node:path"
 import fs from "node:fs"
 
 const getSubDirectories = (dir) => fs.readdirSync(dir).filter(item => fs.statSync(path.join(dir, item)).isDirectory())
-/** 默认文档根目录：V5 使用 docs/document */
-const DOC_PATH = path.resolve(__dirname, '../../document')
-const platformList = getSubDirectories(DOC_PATH)
+/** V5 客户端 SDK 与 REST 文档已从原 docs/document 拆分。 */
+const SDK_PATH = path.resolve(__dirname, '../../sdk/v5')
+const REST_PATH = path.resolve(__dirname, '../../rest')
+const platformList = getSubDirectories(SDK_PATH)
 
-/** V5 独立侧栏配置，可与 V4（document-v4.ts）分叉演进 */
+/** SDK V5 与 REST 共用的侧栏条目模板。 */
 const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
   { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
@@ -988,16 +989,20 @@ const documentV5Sidebar = [
 function buildDocV5Sidebar() {
   const result = {}
   platformList.forEach(platform => {
-    const key = `/document/${platform}/`
+    const key = `/sdk/v5/${platform}/`
     result[key] = documentV5Sidebar.map(sidebar => handleSidebarItem(platform, sidebar)).filter(s => s)
   });
+  result['/rest/'] = documentV5Sidebar
+    .map(sidebar => handleSidebarItem('server-side', sidebar))
+    .filter(s => s)
   return result
 }
 
 
 function linkExists(platform: string, link: string): boolean {
   try {
-    const filePath = `${DOC_PATH}/${platform}/${link.replace(/.html$/, '.md')}`;
+    const docRoot = platform === 'server-side' ? REST_PATH : path.join(SDK_PATH, platform)
+    const filePath = `${docRoot}/${link.replace(/.html$/, '.md')}`;
     return fs.existsSync(filePath);
   } catch (e) {
     console.error(`Error checking file existence: ${e}`);
@@ -1017,7 +1022,7 @@ function linkExists(platform: string, link: string): boolean {
 //         }
 //       }
 //     } else if (linkExists(platform, item.link)) {
-//       const documentLink = `/document/${platform}/${item.link.replace(/.html$/, '')}`;
+//       const documentLink = `/sdk/v5/${platform}/${item.link.replace(/.html$/, '')}`;
 //       newchildren.push({ ...item, link: documentLink });
 //     }
 //   }
@@ -1057,7 +1062,8 @@ function handleSidebarItem(platform, sidebar) {
     }
   } else {
     if (linkExists(platform, sidebar.link)) {
-      const newLink = `/document/${platform}/${sidebar.link}`
+      const basePath = platform === 'server-side' ? '/rest' : `/sdk/v5/${platform}`
+      const newLink = `${basePath}/${sidebar.link}`
       return {...sidebar, link:newLink}
     }
   }
