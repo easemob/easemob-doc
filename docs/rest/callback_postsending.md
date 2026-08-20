@@ -1,64 +1,64 @@
-# Post-Delivery Callback
+# Post-Delivery Webhook
 
 ## Feature overview
 
-The post-delivery callback sends the corresponding event to your business server in real time after a message is sent successfully. It applies to chat messages sent through the SDK or RESTful API, including one-to-one, group, and chat room messages, as well as various operation events.
+The post-delivery webhook sends the corresponding event to your business server in real time after a message is sent successfully. It applies to chat messages sent through the SDK or RESTful API, including one-to-one, group, and chat room messages, as well as various operation events.
 
-The post-delivery callback is commonly used in the following scenarios:
+The post-delivery webhook is commonly used in the following scenarios:
 
 - Synchronize messages with a business system in real time for data coordination or auditing;
 - Trigger automatic replies, bot processing, or business workflow orchestration based on message content;
 - Promptly archive chat history, offline messages, or business event data on the app server.
 
 :::tip
-1. If your business does not have strict real-time message synchronization requirements, use the free [RESTful API for downloading chat history files](message_historical.html#historical-message-content) to obtain historical messages. You do not need to activate the post-delivery callback.
-2. If anti-spam or sensitive word filtering is activated for the app, a message that is identified and intercepted is not sent successfully and therefore does not trigger the post-delivery callback.
+1. If your business does not have strict real-time message synchronization requirements, use the free [RESTful API for downloading chat history files](message_historical.html#historical-message-content) to obtain historical messages. You do not need to activate the post-delivery webhook.
+2. If anti-spam or sensitive word filtering is activated for the app, a message that is identified and intercepted is not sent successfully and therefore does not trigger the post-delivery webhook.
 :::
 
 ![](/images/server-side/im-callback1.png)
 
 ## Scope
 
-The post-delivery callback applies to message callbacks in one-to-one chats, group chats, and chat rooms, and supports messages sent through a client SDK or RESTful API. In addition to message callbacks, it supports callbacks for some server-side and client-side operation events, such as user login and logout, message-related events, and chat group and chat room operation events. The actual supported event scope is determined by the [callback rule settings in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).
+The post-delivery webhook applies to message webhooks in one-to-one chats, group chats, and chat rooms, and supports messages sent through a client SDK or RESTful API. In addition to message webhooks, it supports webhooks for some server-side and client-side operation events, such as user login and logout, message-related events, and chat group and chat room operation events. The actual supported event scope is determined by the [webhook rule settings in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Activation and configuration
 
-Before using the post-delivery callback, complete the following configuration:
+Before using the post-delivery webhook, complete the following configuration:
 
-1. In the [Easemob Console](https://console.easemob.com/user/login), [activate the callback service](/product/console/basic_webhook.html).
-2. Configure callback rules based on your business requirements. For example, provide an accessible HTTP or HTTPS callback URL to receive callback requests initiated by the EasyIM server. For details, see [Callback rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+1. In the [Easemob Console](https://console.easemob.com/user/login), [activate the webhook service](/product/console/basic_webhook.html).
+2. Configure webhook rules based on your business requirements. For example, provide an accessible HTTP or HTTPS webhook URL to receive webhook requests initiated by the EasyIM server. For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
-After you complete this configuration, when a message is sent or a related event occurs, the EasyIM server sends a callback to your business server according to the configured rules.
+After you complete this configuration, when a message is sent or a related event occurs, the EasyIM server sends a webhook to your business server according to the configured rules.
 
-## Callback rules
+## Webhook rules
 
-To use the post-delivery callback, first configure callback rules in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Callback rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+To use the post-delivery webhook, first configure webhook rules in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
-For the same app, you can configure separate callback rules for chat messages and offline messages. If your business needs both callback types, use separate callback URLs to facilitate server decoupling, log tracing, and troubleshooting. If the callback types share the same callback URL, use the `eventType` field in the request body to distinguish them.
+For the same app, you can configure separate webhook rules for chat messages and offline messages. If your business needs both webhook types, use separate webhook URLs to facilitate server decoupling, log tracing, and troubleshooting. If the webhook types share the same webhook URL, use the `eventType` field in the request body to distinguish them.
 
-## Callback latency
+## Webhook latency
 
-Post-delivery callback latency is the time between when the EasyIM message server receives a message and when the message is successfully sent to your specified business server through a callback.
+Post-delivery webhook latency is the time between when the EasyIM message server receives a message and when the message is successfully sent to your specified business server through a webhook.
 
-The service objective is to deliver 99.95% of callback requests within 30 seconds.
+The service objective is to deliver 99.95% of webhook requests within 30 seconds.
 
 ## Retry and banning mechanisms
 
 ### Retry mechanism
 
-After the EasyIM server sends a request to your callback URL, if the received HTTP response status code is not `200`, the callback is considered failed and one retry is triggered immediately.
+After the EasyIM server sends a request to your webhook URL, if the received HTTP response status code is not `200`, the webhook is considered failed and one retry is triggered immediately.
 
 The default retry policy is as follows:
 
-- Each callback message is retried only 1 time;
-- The retry occurs immediately after the first callback attempt fails;
-- If the retry also fails, the callback is no longer delivered automatically.
+- Each webhook message is retried only 1 time;
+- The retry occurs immediately after the first webhook attempt fails;
+- If the retry also fails, the webhook is no longer delivered automatically.
 
-If [Callback Data Stored on the Chat Server](callback_postsending_exception_storage.html) is activated, callback messages whose retries fail are stored for subsequent queries and redelivery.
+If [Webhook Data Stored on the Chat Server](callback_postsending_exception_storage.html) is activated, webhook messages whose retries fail are stored for subsequent queries and redelivery.
 
 ### Banning mechanism
 
-If, within 30 seconds, the cumulative number of failures reaches 90, the system temporarily bans the app's callback rules.
+If, within 30 seconds, the cumulative number of failures reaches 90, the system temporarily bans the app's webhook rules.
 
 The banning rules are as follows:
 
@@ -78,17 +78,17 @@ The corresponding ban durations are as follows:
 | 5 and later | 25 minutes |
 
 :::tip
-1. Neither **callback messages whose retries fail** nor **callback messages generated while callback rules are banned** are automatically recovered by the system. You can recover them using the historical message feature.
-2. If your business has strict requirements that callback messages not be lost, activate [Callback Data Stored on the Chat Server](callback_postsending_exception_storage.html), and use the [query stored callback data](callback_postsending_exception_storage.html#query-stored-callback-data) and [redeliver stored callback data](callback_postsending_exception_storage.html#redeliver-stored-callback-data) APIs for compensating processing.
+1. Neither **webhook messages whose retries fail** nor **webhook messages generated while webhook rules are banned** are automatically recovered by the system. You can recover them using the historical message feature.
+2. If your business has strict requirements that webhook messages not be lost, activate [Webhook Data Stored on the Chat Server](callback_postsending_exception_storage.html), and use the [query stored webhook data](callback_postsending_exception_storage.html#query-stored-webhook-data) and [redeliver stored webhook data](callback_postsending_exception_storage.html#redeliver-stored-webhook-data) APIs for compensating processing.
 :::
 
-## Callback example
+## Webhook example
 
-### Callback request
+### Webhook request
 
 After a message is sent or a related event occurs, the EasyIM server sends an `HTTP/HTTPS POST` request to your business server. The request body is a `UTF-8`-encoded JSON string.
 
-To allow your server to verify the request, the EasyIM server signs the callback request. The current signature algorithm is MD5, implemented by `org.apache.commons.codec.digest.DigestUtils#md5Hex`.
+To allow your server to verify the request, the EasyIM server signs the webhook request. The current signature algorithm is MD5, implemented by `org.apache.commons.codec.digest.DigestUtils#md5Hex`.
 
 #### Request example
 
@@ -114,23 +114,23 @@ To allow your server to verify the request, the EasyIM server signs the callback
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `callId` | String | Unique callback identifier in the format `{appkey}_{uuid}`, where `uuid` is a randomly generated unique value. |
-| `eventType` | String | Callback event type:<br/> - `chat`: Chat message;<br/> - `chat_offline`: Offline message.  |
+| `callId` | String | Unique webhook identifier in the format `{appkey}_{uuid}`, where `uuid` is a randomly generated unique value. |
+| `eventType` | String | Webhook event type:<br/> - `chat`: Chat message;<br/> - `chat_offline`: Offline message.  |
 | `timestamp` | Long | Unix timestamp when the EasyIM server receives the message, in milliseconds. |
-| `chat_type` | String | Conversation type:<br/> - `chat`: One-to-one chat;<br/> - `groupchat`: Group chat, including message callbacks for chat groups and chat rooms. All are selected by default.|
+| `chat_type` | String | Conversation type:<br/> - `chat`: One-to-one chat;<br/> - `groupchat`: Group chat, including message webhooks for chat groups and chat rooms. All are selected by default.|
 | `group_id` | String | ID of the chat group containing the message. This field is returned only when `chat_type` is `groupchat`. |
 | `from` | String | Message sender. |
 | `to` | String | Message recipient. |
 | `msg_id` | String | Message ID. |
 | `payload` | Object | Message content, with the same message body structure as a message sent through the RESTful API. For details, see [Message format](message_historical.html#historical-message-content). |
 | `securityVersion` | String | Security verification version, currently fixed as `1.0.0`. This field can currently be ignored. |
-| `security` | String | Request signature calculated as `MD5(callId + Secret + timestamp)`. For information about configuring `Secret`, see [Callback rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security` | String | Request signature calculated as `MD5(callId + Secret + timestamp)`. For information about configuring `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules). |
 
-### Callback response
+### Webhook response
 
-The EasyIM server does not validate the response body. The callback is considered processed successfully as long as your business server returns HTTP status code `200`.
+The EasyIM server does not validate the response body. The webhook is considered processed successfully as long as your business server returns HTTP status code `200`.
 
-When processing a callback request, your business server must meet the following requirements:
+When processing a webhook request, your business server must meet the following requirements:
 
 - The response body cannot exceed 1,000 characters;
-- If oversized response content is returned continuously and, within 30 seconds, reaches a total of 90 occurrences, [callback rule banning](#banning-mechanism) may also be triggered.
+- If oversized response content is returned continuously and, within 30 seconds, reaches a total of 90 occurrences, [webhook rule banning](#banning-mechanism) may also be triggered.

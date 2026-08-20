@@ -1,10 +1,10 @@
-# Friend and Blocklist Callback
+# Friend and Blocklist Webhook Events
 
 ## Feature overview
 
-After a friend is added or deleted, or a user is added to or removed from the blocklist, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain information about friend and blocklist operations and synchronize data.
+After a friend is added or deleted, or a user is added to or removed from the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about friend and blocklist operations and synchronize data.
 
-This document describes the following user relationship callback events:
+This document describes the following user relationship webhook events:
 
 - [Send a friend request](#send-a-friend-request)
 - [Accept a friend request](#accept-a-friend-request)
@@ -15,8 +15,8 @@ This document describes the following user relationship callback events:
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Send a friend request
 
@@ -24,7 +24,7 @@ This document describes the following user relationship callback events:
 
 A [client sends a friend request](/document/android/user_relationship.html#add-a-friend).
 
-#### Callback request
+#### Webhook request
 
 Request example:
 
@@ -51,9 +51,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the friend addition event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend addition event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.reason`    | object   | Reason for the friend request.                |
 | `payload.operation` | String   | `add`: Add a friend. |
@@ -62,7 +62,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.                   |
-| `msg_id`    | String   | Message ID of the friend addition event. | 
+| `msg_id`    | String   | Message ID of the friend addition event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 ## Accept a friend request
@@ -73,7 +73,7 @@ After receiving a friend request, a [user accepts the request on the client](/do
 
 #### Event received by the requester
 
-When `payload.operation` is `remote_accept`, the user who sent the friend request receives the event. In this case, `to` is the user who sent the friend request.  
+When `payload.operation` is `remote_accept`, the user who sent the friend request receives the event. In this case, `to` is the user who sent the friend request.
 
 Request example:
 
@@ -100,9 +100,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the friend request acceptance event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request acceptance event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remote_accept`: Friend request acceptance event. The user who sent the friend request receives this event. |
@@ -111,7 +111,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | User ID of the user who sent the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the friend request acceptance event. | 
+| `msg_id`    | String   | Message ID of the friend request acceptance event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 #### Event received by the acceptor
@@ -145,9 +145,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the friend request acceptance event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request acceptance event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `accept`: Accept a friend request. The user who accepted the request receives this event, which synchronizes the operation result in single-device and multi-device login scenarios. |
@@ -156,7 +156,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | ID of the user who accepted the friend request.                     |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the friend request acceptance event. | 
+| `msg_id`    | String   | Message ID of the friend request acceptance event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 
@@ -170,7 +170,7 @@ After receiving a friend request, a [user declines the request on the client](/d
 
 When `payload.operation` is `remote_decline`, the user who sent the friend request receives the event.
 
-In this case, `to` is the ID of the user who sent the friend request. 
+In this case, `to` is the ID of the user who sent the friend request.
 
 Request example:
 
@@ -197,9 +197,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the friend request decline event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request decline event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remote_decline`: Decline a friend request. The user who sent the request receives this event. |
@@ -208,7 +208,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | ID of the user who sent the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the friend request decline event. | 
+| `msg_id`    | String   | Message ID of the friend request decline event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 
@@ -216,7 +216,7 @@ Request fields:
 
 When `payload.operation` is `decline`, the user who declined the friend request receives the event. This event synchronizes the operation result in multi-device login scenarios.
 
-Callback request example:
+Webhook request example:
 
 ```json
 {
@@ -241,9 +241,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | The `callId` field is the unique identifier of the callback request, in the format “App Key_message ID of the friend request decline event”. | 
+| `callId`    | String   | The `callId` field is the unique identifier of the webhook request, in the format “App Key_message ID of the friend request decline event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `decline`: Decline a friend request. The user who declined the request receives this event, which synchronizes the operation result in multi-device login scenarios. |
@@ -252,7 +252,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | ID of the user who declined the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the friend request decline event. | 
+| `msg_id`    | String   | Message ID of the friend request decline event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 ## Delete a friend
@@ -288,9 +288,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the friend deletion event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend deletion event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remove`: Delete a friend. |
@@ -299,7 +299,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.        |
-| `msg_id`    | String   | Message ID of the friend deletion event. | 
+| `msg_id`    | String   | Message ID of the friend deletion event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 ## Add a user to the blocklist
@@ -308,7 +308,7 @@ Request fields:
 
 1. A [user is added to the blocklist on the client](/document/android/user_relationship.html#add-a-user-to-the-blocklist).
 2. A [RESTful API is called to add a user to the blocklist](/document/server-side/user_friend_blocklist_add.html).
-3. In the [Easemob Console](https://console.easemob.com/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist). 
+3. In the [Easemob Console](https://console.easemob.com/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
 
@@ -337,9 +337,9 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the user block event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the user block event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.operation` | String   | `ban`: Add a user to the blocklist. |
 | `payload.status`    | object   | Contains `error_code`.  |
@@ -349,7 +349,7 @@ Request fields:
 | `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the user block event. | 
+| `msg_id`    | String   | Message ID of the user block event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 
@@ -359,7 +359,7 @@ Request fields:
 
 1. A user [removes a friend from the blocklist on the client](/document/android/user_relationship.html#remove-a-user-from-the-blocklist).
 2. A [RESTful API is called to remove a friend from the blocklist](/document/server-side/user_friend_blocklist_remove.html).
-3. In the [Easemob Console](https://console.easemob.com/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist). 
+3. In the [Easemob Console](https://console.easemob.com/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
 
@@ -388,17 +388,17 @@ Request fields:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format “App Key_message ID of the user unblock event”. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the user unblock event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.operation` | String   | `allow`: Remove a user from the blocklist. |
 | `payload.status`    | object   | Contains `error_code`.  |
 | `payload.status.error_code`    | String   | Error code for an operation failure. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_sender user ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
-| `msg_id`    | String   | Message ID of the user unblock event. | 
+| `msg_id`    | String   | Message ID of the user unblock event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |

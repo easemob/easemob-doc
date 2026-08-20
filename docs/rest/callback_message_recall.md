@@ -1,13 +1,13 @@
-# Message Recall Callback
+# Message Recall Webhook Events
 
 ## Feature overview
 
-After a message is recalled successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain the recalled message and synchronize data.
+After a message is recalled successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the recalled message and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
@@ -15,7 +15,7 @@ After a message is recalled successfully, the EasyIM server sends a callback req
 2. A RESTful API is called to recall a [single message](/document/server-side/message_recall_single.html) or [recall messages in batches](/document/server-side/message_recall_batch.html).
 3. A message is recalled in the [Easemob Console](https://console.easemob.com/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
 
-## Callback request
+## Webhook request
 
 ### Request example
 
@@ -44,17 +44,17 @@ After a message is recalled successfully, the EasyIM server sends a callback req
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request, in the format “App Key_message ID of the recall event”. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request, in the format “App Key_message ID of the recall event”. |
 | `eventType`       | String   | `chat`: Uplink message; `chat_offline`: Offline message.                   |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 | `chat_type`       | String   | `recall`, indicating message recall.                                     |
-| `group_id`        | String   | The chat group or chat room where the callback message occurs. This field applies only to group chats and chat rooms. |
+| `group_id`        | String   | The chat group or chat room where the webhook message occurs. This field applies only to group chats and chat rooms. |
 | `from`            | String   | Message sender.                                               |
 | `to`              | String   | Message recipient.                                               |
 | `recall_id`       | String   | ID of the message to recall.                                            |
 | `msg_id`          | String   | Message ID of the recall event, which is the same as the `msg_id` used when the message was sent.          |
 | `payload`         | object   | For a message recall, the `bodies` and `ext` fields are empty.<br/> `ack_message_id` indicates the original message ID. |
 | `securityVersion` | String   | Security verification version, currently 1.0.0. Ignore this field. It will be configured in the Easemob Console in the future. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                           |
 | `host`            | String   | Server name.                                                 |

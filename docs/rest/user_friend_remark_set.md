@@ -4,7 +4,7 @@
 
 - Set remarks for one of your friends in the current app.
 - Add the user as a friend before setting friend remarks.
-- Calling this API triggers the post-delivery callback event for setting friend remarks. For details, see [Callback events](callback_contact.html).
+- Calling this API triggers the post-delivery callback event for setting friend remarks. For details, see [Webhook events](callback_contact.html).
 
 ## Call frequency limit
 

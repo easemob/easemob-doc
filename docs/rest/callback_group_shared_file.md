@@ -1,13 +1,13 @@
-# Chat Group Shared File Callback
+# Chat Group Shared File Webhook Events
 
 ## Feature overview
 
-After a chat group shared file is uploaded or deleted, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain information about the uploaded or deleted file and synchronize data.
+After a chat group shared file is uploaded or deleted, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the uploaded or deleted file and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Chat group shared file upload event
 
@@ -16,7 +16,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 - A [chat group shared file is uploaded on the client](/document/android/group_attributes.html#upload-a-shared-file).
 - A [RESTful API is called to upload a chat group shared file](/document/server-side/group_shared_file_upload.html).
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -44,18 +44,18 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The unique identifier of the callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
-|  - `share_file`| String | Uploaded chat group shared file. | 
+|  - `share_file`| String | Uploaded chat group shared file. |
 |  - `type`      | String | Chat group shared file upload event. The value is `ADD`. |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
 | `id`           | String | Chat group ID.                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `SHARE_FILE` when a chat group shared file is uploaded. |
-| `operator`     | String | Operator. If an app admin uploads the shared file, the value is fixed as `@ppAdmin`.                     | 
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.            | 
+| `operator`     | String | Operator. If an app admin uploads the shared file, the value is fixed as `@ppAdmin`.                     |
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.            |
 
 ## Chat group shared file deletion event
 
@@ -64,7 +64,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 - A [chat group shared file is deleted on the client](/document/android/group_attributes.html#manage-shared-files).
 - A [RESTful API is called to delete a chat group shared file](/document/server-side/group_shared_file_delete.html).
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -92,18 +92,18 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                          |
-|  - `share_file`| String | Deleted chat group shared file.                 | 
+|  - `share_file`| String | Deleted chat group shared file.                 |
 |  - `type`      | String | Chat group shared file deletion event. The value is `REMOVE`. |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.   |
 | `id`           | String | Chat group ID.                           |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` when a chat group shared file is deleted. |
-| `operator`     | String | Operator. If an app admin deletes the shared file, the value is fixed as `@ppAdmin`.                     | 
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.            | 
+| `operator`     | String | Operator. If an app admin deletes the shared file, the value is fixed as `@ppAdmin`.                     |
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.            |
 
 ## Other information
 

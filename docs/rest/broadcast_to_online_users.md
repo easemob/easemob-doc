@@ -8,7 +8,7 @@ You can use this API to send broadcast messages of any message type to all onlin
 - Broadcast messages do not support offline storage, so offline users do not receive them.
 - Broadcast messages are written to the server-side conversation list. Message roaming is not supported by default. **To enable it, contact the sales team.**
 - Broadcast messages have a broadcast ID but no message ID.
-- Broadcast messages do not trigger the [pre-delivery callback](callback_presending.html).
+- Broadcast messages do not trigger the [pre-delivery webhook](callback_presending.html).
 
 ## Feature activation
 

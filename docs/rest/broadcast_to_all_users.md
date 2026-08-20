@@ -9,7 +9,7 @@ You can use this API to send broadcast messages of any message type to all users
 - Broadcast messages are written to the server-side conversation list and support message roaming.
 - Broadcast messages can be included in the unread message count.
 - Broadcast messages have a broadcast ID but no message ID.
-- Broadcast messages do not trigger the [pre-delivery callback](callback_presending.html).
+- Broadcast messages do not trigger the [pre-delivery webhook](callback_presending.html).
 
 ## Feature activation
 

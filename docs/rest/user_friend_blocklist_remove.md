@@ -5,7 +5,7 @@
 - Remove a user from another user's blocklist.
 - Removing a friend from the blocklist restores the friendship and allows messages to be sent and received normally.
 - Removing a non-friend from the blocklist restores the state in which the users are not friends. If friendship verification is disabled, the two users can send and receive messages normally.
-- Calling this API triggers the post-delivery callback event for removing a user from the blocklist. For details, see [Callback events](callback_contact.html#remove-a-user-from-the-blocklist).
+- Calling this API triggers the post-delivery callback event for removing a user from the blocklist. For details, see [Webhook events](callback_contact.html#remove-a-user-from-the-blocklist).
 
 ## Feature activation
 

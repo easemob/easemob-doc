@@ -7,7 +7,7 @@ EasyIM supports sending broadcast messages of all message types to all active ch
 - Broadcast messages do not support offline storage, so offline users do not receive them.
 - Broadcast messages are written to the server-side conversation list. Message roaming is not supported by default. **To enable it, contact the sales team.**
 - Broadcast messages have a broadcast ID but no message ID.
-- Broadcast messages do not trigger the [pre-delivery callback](callback_presending.html).
+- Broadcast messages do not trigger the [pre-delivery webhook](callback_presending.html).
 - When the client receives a message, it [uses the attribute fields in the message body](/document/android/message_receive.html#determine-whether-a-message-is-a-chat-room-broadcast-message) to identify and distinguish a chat room broadcast message.
 
 ## Feature activation

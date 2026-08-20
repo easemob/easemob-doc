@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Add multiple users to a chat room. You can add up to 100 users at a time.
-- Adding chat room members triggers a post-delivery callback. For details, see the [callback event for adding users to a chat room](callback_group_room_join.html).
+- Adding chat room members triggers a post-delivery callback. For details, see the [webhook event for adding users to a chat room](callback_group_room_join.html).
 
 ## Call frequency limit
 

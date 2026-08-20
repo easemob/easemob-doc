@@ -6,7 +6,7 @@
 - After being added to the chat room blocklist, the user cannot rejoin the chat room, view its information, or send and receive messages.
 - To resume sending and receiving messages normally in the chat room, the blocklisted user must first be manually removed from the blocklist and then rejoin the chat room.
 - The chat room owner cannot be added to the chat room blocklist.
-- Adding a user to the chat room blocklist triggers a post-delivery callback. For details, see the [callback event for adding chat room members to the blocklist](callback_group_room_blocklist.html#add-a-member-to-the-blocklist).
+- Adding a user to the chat room blocklist triggers a post-delivery callback. For details, see the [webhook event for adding chat room members to the blocklist](callback_group_room_blocklist.html#add-a-member-to-the-blocklist).
 
 ## Call frequency limit
 

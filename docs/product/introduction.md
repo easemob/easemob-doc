@@ -3,7 +3,7 @@
 EasyIM provides developers with highly reliable, low-latency, high-concurrency, secure, and global communications cloud services, helping them quickly build end-to-end communication scenarios. Easemob provides SDKs and RESTful APIs that support unlimited concurrent online users, hundreds of millions of concurrent chat room messages, an average global latency of less than 200 milliseconds, and an average latency within the same region of less than 100 milliseconds.
 
 - Support one-to-one chats, group chats, and chat rooms;
-- Provide server-side RESTful APIs and [callback services](/document/server-side/callback_overview.html);
+- Provide server-side RESTful APIs and [webhook services](/document/server-side/callback_overview.html);
 - Provide multi-platform SDKs for Android, iOS, Web, HarmonyOS, Windows, Linux, Unity, Flutter, React Native, Mini Program, uni-app, and Electron;
 - Provide demos and UIKit.
 
@@ -67,33 +67,8 @@ Some features are available only through RESTful APIs, such as banning and unban
 
 ### Message callbacks
 
-EasyIM provides [message callbacks](/document/server-side/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.
+EasyIM provides [message webhooks](/document/server-side/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.
 
 ## On-premises deployment
 
 The EasyIM on-premises service is a privately deployable solution based on core instant messaging technologies. It supports deployment in intranet physical server clusters, public clouds, private clouds, and other environments, providing a full-featured, secure, reliable, and scalable instant messaging platform. For details, see the [on-premises service documentation](https://docs-im-privatization-v3.easemob.com).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

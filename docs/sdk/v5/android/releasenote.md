@@ -469,7 +469,7 @@ Fixed an issue where a recalled pinned one-to-one message was not promptly remov
   
 #### Improvements
  
-- [EasyIM SDK] A [pre-delivery callback](/document/server-side/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
+- [EasyIM SDK] A [pre-delivery webhook](/document/server-side/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
 - [EasyIM SDK] After the [server-side conversation deletion API](conversation_delete.html#单向删除服务端会话及本地会话) is successfully called, the local conversation is deleted. In previous versions, this API could be configured to delete the local messages in a conversation but could not delete the local conversation.
 - [EasyIM SDK] Added support for the 16K page size on Android 15.
 - [EasyIM SDK] The default error codes reported for chat group and chat room operations have changed from `GROUP_MEMBERS_FULL` (604) and `CHATROOM_MEMBERS_FULL` (704) to `GROUP_PERMISSION_DENIED` (603) and `CHATROOM_PERMISSION_DENIED` (703). For example, if a regular chat group member attempts to assign a chat group admin, error 603 is reported because the user lacks permission.
@@ -976,7 +976,7 @@ Added `getJoinedGroupsFromServer` to retrieve the chat groups joined by the curr
 
 - [EasyIM SDK] Added the chat group disabled status attribute [EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) to chat group details. Developers must set this attribute on the server.
 - [EasyIM SDK] Improved the strategy for updating access points when connection issues occur, enhancing availability.
-- [EasyIM SDK] [Pre-delivery callback](/document/server-side/callback_presending.html): Custom error information is now added to the error description returned to the app user when sending fails, namely the code information in the [response body fields](/document/server-side/callback_presending.html#响应-body).
+- [EasyIM SDK] [Pre-delivery webhook](/document/server-side/callback_presending.html): Custom error information is now added to the error description returned to the app user when sending fails, namely the code information in the [response body fields](/document/server-side/callback_presending.html#响应-body).
 - [EasyIM SDK] In [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html), added error code 1101, [EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99), indicating that a user cannot subscribe to their own presence.
 
 #### Improvements:

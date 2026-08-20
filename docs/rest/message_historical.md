@@ -10,7 +10,7 @@ You can retrieve records of historical messages sent by users from the server.
 
 - A single request retrieves records of historical messages sent within one hour from the specified start time.
 - You can retrieve historical message records from up to the past 3 days. To increase this limit, contact the Easemob business team.
-- When the platform distributes a large volume of messages, the server needs time to generate historical message records. We recommend retrieving these records after 24 hours. If timeliness is important, use the [post-delivery callback service](callback_postsending.html).
+- When the platform distributes a large volume of messages, the server needs time to generate historical message records. We recommend retrieving these records after 24 hours. If timeliness is important, use the [post-delivery webhook service](callback_postsending.html).
 - Calling the REST API to [delete a conversation unilaterally](conversation_delete.html) or [delete roaming messages unilaterally](message_delete_roam_single_msgid.html) does not affect historical message records retrieved through this API.
 
 ### Call frequency limit

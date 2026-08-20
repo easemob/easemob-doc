@@ -111,12 +111,9 @@ You can implement chat group event listeners. When an operation occurs in a chat
 
 ## Chat group event callbacks
 
-You can implement a post-delivery callback so that the EasyIM server synchronizes chat group events with your app server. When an operation occurs in a chat group, such as a new member joining or a member leaving or being added to the mute list or blocklist, the EasyIM server sends an HTTP/HTTPS POST request to the app server to synchronize the event. For details, see [Chat group event callbacks](/document/server-side/callback_group_room_create.html).
+You can implement a post-delivery callback so that the EasyIM server synchronizes chat group events with your app server. When an operation occurs in a chat group, such as a new member joining or a member leaving or being added to the mute list or blocklist, the EasyIM server sends an HTTP/HTTPS POST request to the app server to synchronize the event. For details, see [Chat group webhook events](/document/server-side/callback_group_room_create.html).
 
 ## Chat group limitations
 
 - For chat group limitations, including limits on the number of chat group members, chat group and member attributes, and shared files, see [Chat group limitations](/product/limitation.html#chat-groups).
 - The number of chat group members varies by plan. For details, see [EasyIM plan features](/product/product_package_feature.html).
-
-
-

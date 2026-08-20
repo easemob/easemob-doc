@@ -37,7 +37,7 @@ The steps are described below:
 
 - Messages sent in a chat room are not synchronized to the sender.
 - Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the Easemob Console](/product/console/basic_conversation_group_chatroom.html#write-messages-sent-through-the-rest-api-to-the-conversation-list).
-- Calling this API triggers a post-delivery callback event. For details, see [Callback events](callback_message_send.html#send-group-messages).
+- Calling this API triggers a post-delivery callback event. For details, see [Webhook events](callback_message_send.html#send-group-messages).
 - You can use common optional message parameters to specify which users cannot retrieve the message when fetching roaming messages and to add extension parameters. For details, see [Common optional message parameters](#common-optional-message-parameters).
 - [The content moderation service checks specific fields in the message `body`; the fields checked vary by message type](/value-added/moderation/moderation_mechanism.html). Passing too much business information in these fields may reduce moderation effectiveness. Avoid placing business information in fields subject to moderation and use the `ext` extension field instead.
 
@@ -1062,7 +1062,7 @@ The request method, response example, and response field descriptions in this se
 
 ### Set callback routing when sending messages
 
-Callback routing lets you deliver different messages under the same App Key to different callback addresses by callback environment. When sending a message, include a callback environment field such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it uses this field to match a [callback routing rule](/product/console/basic_webhook.html#configure-message-callback-rules) configured in the console and routes the message to the corresponding [pre-delivery callback](/document/server-side/callback_presending.html) or [post-delivery callback](/document/server-side/callback_postsending.html) address.
+Callback routing lets you deliver different messages under the same App Key to different callback addresses by callback environment. When sending a message, include a callback environment field such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it uses this field to match a [callback routing rule](/product/console/basic_webhook.html#configure-message-callback-rules) configured in the console and routes the message to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) address.
 
 :::tip
 This feature is currently available only in China regions 1 and 2.

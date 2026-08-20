@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Set global mute for one-to-one, group, and chat room messages for a user ID.
-- After the setting succeeds, the user cannot send messages in the corresponding one-to-one chats, chat groups, or chat rooms, and the [pre-delivery callback](callback_presending.html) is not triggered.
+- After the setting succeeds, the user cannot send messages in the corresponding one-to-one chats, chat groups, or chat rooms, and the [pre-delivery webhook](callback_presending.html) is not triggered.
 - You can set a mute duration. When it expires, the server automatically unmutes the user and restores their permission to send messages.
 - Permanent mute is supported for one-to-one chats, chat groups, and chat rooms.
 

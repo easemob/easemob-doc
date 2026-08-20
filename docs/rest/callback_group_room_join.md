@@ -1,13 +1,13 @@
-# New Chat Group and Chat Room Member Join Callback
+# Chat Group and Chat Room Member Join Webhook Events
 
 ## Feature overview
 
-When users are added during chat group or chat room creation, invited to join, or join by application, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to synchronize data.
+When users are added during chat group or chat room creation, invited to join, or join by application, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Join directly
 
@@ -17,7 +17,7 @@ When users are added during chat group or chat room creation, invited to join, o
 - A user [joins a chat room](/document/android/room_manage.html#join-a-chat-room) on the client.
 - Users are added directly when a RESTful API is called to [create a chat group](/document/server-side/group_create.html) or [chat room](/document/server-side/chatroom_create.html).
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -53,22 +53,22 @@ Note: The `payload.options.ext` field applies only to chat room join events, not
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
-| `payload.member` | JSON | <br/> - IDs of users added to the chat group or chat room during its creation. <br/> - ID of a user who actively joins a chat room.       | 
+| `payload.member` | JSON | <br/> - IDs of users added to the chat group or chat room during its creation. <br/> - ID of a user who actively joins a chat room.       |
 | `payload.options.ext` | JSON  | Extension information. This field applies only to chat room join events, not chat group join events.    |
 | `payload.type` | Array  | Join method: `DIRECT` indicates that users are added during chat group or chat room creation, or that a user actively joins a chat room.     |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `JOIN` when a user joins a chat group or chat room. |
-| `operator`     | String | <br/> - Operator who adds the user to the chat group or chat room.<br/> - ID of the user who actively joins the chat room.                     | 
-| `member_count`     | Int | Current number of chat group or chat room members.                     | 
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.          | 
+| `operator`     | String | <br/> - Operator who adds the user to the chat group or chat room.<br/> - ID of the user who actively joins the chat room.                     |
+| `member_count`     | Int | Current number of chat group or chat room members.                     |
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.          |
 
-## Invite a user to join a chat group 
+## Invite a user to join a chat group
 
 ### Trigger conditions
 
@@ -76,7 +76,7 @@ A regular chat group member [invites a user to join the chat group on the client
 
 **Chat rooms do not have this event.**
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -105,19 +105,19 @@ A regular chat group member [invites a user to join the chat group on the client
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
-| `payload.member`| JSON  | ID of the invited user.        | 
+| `payload.member`| JSON  | ID of the invited user.        |
 | `payload.type` | Array  | Join method: `INVITE` indicates that a user is invited to join the chat group.     |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
 | `id`           | String | Chat group ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room  <br/> Because chat rooms do not have this event, the value can only be `GROUP`. |
-| `event`        | String | Chat group operation event. The value is `group_op_event`. | 
+| `event`        | String | Chat group operation event. The value is `group_op_event`. |
 | `operation`    | String | Operation. The value is `JOIN` when a user joins a chat group. |
-| `operator`     | String | Operator.                                 | 
+| `operator`     | String | Operator.                                 |
 | `member_count`     | Int | Total number of chat group members after the new user joins.                     |
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.                             | 
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
 
 ## Apply to join
 
@@ -125,7 +125,7 @@ A regular chat group member [invites a user to join the chat group on the client
 
 A user successfully joins a [chat group by application on the client](/document/android/group_manage.html#apply-to-join-a-chat-group) or [chat room](/document/android/room_manage.html#join-a-chat-room).
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -156,19 +156,19 @@ The following example uses an event generated when a user applies to join a chat
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `paylod`       | Object | Event content.                                                     |
-| `payload.member` | JSON | ID of the user applying to join.        | 
+| `payload.member` | JSON | ID of the user applying to join.        |
 | `payload.type`| Array | Join method: `APPLY` indicates an application to join a chat group.     |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
 | `id`       | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `JOIN` when a user joins a chat group or chat room. |
-| `operator`     | String | Operator.                     | 
+| `operator`     | String | Operator.                     |
 | `member_count`     | Int | Total number of chat group or chat room members after the new user joins.                     |
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.            | 
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.            |
 
 ## Other information
 

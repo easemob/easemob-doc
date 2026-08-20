@@ -234,7 +234,7 @@ The following table lists the message features supported for stream messages:
 | [Offline push](/document/server-side/push_settings_set.html)     | Yes                                |
 | [Content moderation](/value-added/moderation/moderation_overview.html)     | No                                |
 | [Message translation](message_translation_text.html)         | Yes                                |
-| [Pre-delivery callback](/document/server-side/callback_presending.html)         | No                               |
-| [Post-delivery callback](/document/server-side/callback_postsending.html)         | No      |
+| [Pre-delivery webhook](/document/server-side/callback_presending.html)         | No                               |
+| [Post-delivery webhook](/document/server-side/callback_postsending.html)         | No      |
 | Synchronize a successfully sent message across the sender's clients        |   No  |
 | [Store messages in the sender's and recipient's local databases](/product/limitation.html#message-storage)         | Yes |

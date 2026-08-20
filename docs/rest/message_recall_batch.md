@@ -5,9 +5,9 @@
 - Recall multiple successfully sent messages at a time, including messages sent from a client or through the REST API. **You can recall up to 30 messages per request.** 
 - After you call this API, the messages on the server, including historical, offline, or roaming messages, and the messages in the memory and database of the senders and recipients are recalled.
 - For attachment messages, including image, audio, video, and file messages, recalling the messages also deletes the message attachments.
-- Before recalling messages, obtain their message IDs by calling the [Historical message API](https://doc.easemob.com/document/server-side/message_historical.html) or using a [message callback](https://doc.easemob.com/document/server-side/callback_overview.html).
+- Before recalling messages, obtain their message IDs by calling the [Historical message API](https://doc.easemob.com/document/server-side/message_historical.html) or using a [message webhook](https://doc.easemob.com/document/server-side/callback_overview.html).
 - Use the `sync_device` parameter to specify whether to synchronize the recall of a one-to-one chat message to all online devices of the message sender.
-- Recalling messages triggers a post-delivery callback. For details, see [Callback events](https://doc.easemob.com/document/server-side/callback_message_recall.html).
+- Recalling messages triggers a post-delivery callback. For details, see [Webhook events](https://doc.easemob.com/document/server-side/callback_message_recall.html).
 - If the recipient of a one-to-one chat, group chat, or chat room message is offline when the message is sent or recalled, the recipient is notified of the recall when they come online because the server sends an event notification to the client SDK.
 
 #### Configure the recall period

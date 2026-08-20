@@ -7,7 +7,7 @@
 - A user can add any other user to the blocklist, regardless of whether they are friends.
 - Each user's blocklist can contain up to 500 users.
 - A friend remains in the friend list after being added to the blocklist.
-- Calling this API triggers the post-delivery callback event for adding a user to the blocklist. For details, see [Callback events](callback_contact.html#add-a-user-to-the-blocklist).
+- Calling this API triggers the post-delivery callback event for adding a user to the blocklist. For details, see [Webhook events](callback_contact.html#add-a-user-to-the-blocklist).
 
 ## Feature activation
 

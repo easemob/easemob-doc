@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Add a member to a chat room.
-- Adding a chat room member triggers a post-delivery callback. For details, see the [callback event for adding users to a chat room](callback_group_room_join.html).
+- Adding a chat room member triggers a post-delivery callback. For details, see the [webhook event for adding users to a chat room](callback_group_room_join.html).
 
 ## Call frequency limit
 

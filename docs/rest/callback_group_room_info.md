@@ -1,14 +1,14 @@
-# Chat Group and Chat Room Information Update Callback
+# Chat Group and Chat Room Information Update Webhook Events
 
 ## Feature overview
 
-After chat group or chat room information is updated successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain the updated information and synchronize data.
+After chat group or chat room information is updated successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the updated information and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
- 
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+
 ## Trigger conditions
 
 This event is triggered when any of the following chat group or chat room information is modified through the [client](/document/android/group_attributes.html), a [RESTful API](/document/server-side/group_modify.html), or the [Easemob Console](/product/console/operation_group.html#chat-group-moderation-management):
@@ -25,10 +25,10 @@ This event is triggered when any of the following chat group or chat room inform
 
 2. Chat room
 - Chat room name
-- Chat room description 
-- Maximum number of chat room members  
+- Chat room description
+- Maximum number of chat room members
 
-## Callback request
+## Webhook request
 
 ### Request example
 
@@ -73,18 +73,18 @@ The following descriptions use the chat group creation event as an example:
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 |  - `type`| String |     | Chat group information modification event. |
 |  - `info`   | JSON | Modified chat group information.<br/> - `owner`: String. Group owner.<br/> - `created`: Long. Chat group creation time.<br/> - `custom`: String. Custom chat group information.<br/> - `description`: String. Chat group description.<br/> - `mute`: Bool. Whether all members are muted. `true` means yes; `false` means no.<br/> - `mute_duration`: Long. Mute duration for all members, calculated from the current time, in seconds. `0` means unmute; `-1` means mute permanently.<br/> - `avatar`: String. Chat group avatar URL.<br/> - `title`: String. Chat group name.<br/> - `max_users`: Maximum number of chat group members, including the group owner.<br/> - `invite_need_confirm`: Bool. Whether an invited user must accept the invitation to join the chat group. `true` means acceptance is required; `false` means it is not required.<br/> - `public`: Bool. Whether the chat group is public. `true` indicates a public group; `false` indicates a private group.<br/> - `allow_user_invites`: Bool. Whether regular chat group members can invite users to join the chat group. `true` means allowed; `false` means not allowed, and only the group owner and chat group admins can invite users.<br/> - `disabled`: Boolean. `true` indicates that the chat group is disabled; `false` indicates that it is enabled and can be used normally. <br/> - `last_modified`: Long. Time when the chat group information was last modified. |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.           |
 | `id`       | String | Chat group ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` when chat group information is modified. |
-| `operator`     | String | Operator.                     | 
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.                | 
+| `operator`     | String | Operator.                     |
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.                |
 
 :::tip
 More chat group operation events and sub-events will be added in the future. If your business strongly depends on these events or sub-events, implement strict checks for `operation` and `payload.type`.

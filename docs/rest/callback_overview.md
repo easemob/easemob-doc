@@ -1,56 +1,53 @@
-# Callback
+# Webhooks Overview
 
 <Toc />
 
 ## Overview
 
-EasyIM supports callbacks. Before or after an event occurs, the EasyIM server sends a notification to your app server in an HTTP POST request. Depending on whether they can affect message delivery, callbacks fall into two categories:
+EasyIM supports webhooks. Before or after an event occurs, the EasyIM server sends a notification to your app server in an HTTP POST request. Depending on whether they can affect message delivery, webhooks fall into two categories:
 
-- **Pre-delivery callback**: Allows your app backend to affect how an event is processed. The EasyIM server determines the subsequent processing flow based on the value returned in the response. **This callback applies only to messages sent from your client app.**
+- **Pre-delivery webhook**: Allows your app backend to affect how an event is processed. The EasyIM server determines the subsequent processing flow based on the value returned in the response. **This webhook applies only to messages sent from your client app.**
 
-  This callback typically processes user-generated message content. A common use case is content moderation: when the EasyIM server receives a message from a client app, it sends a request to your app server and waits for a response to determine whether to deliver or reject the message.
+  This webhook typically processes user-generated message content. A common use case is content moderation: when the EasyIM server receives a message from a client app, it sends a request to your app server and waits for a response to determine whether to deliver or reject the message.
 
-- **Post-delivery callback**: Allows your app backend to perform necessary data synchronization. The EasyIM server ignores the callback response code.
+- **Post-delivery webhook**: Allows your app backend to perform necessary data synchronization. The EasyIM server ignores the webhook response code.
 
-  Post-delivery callbacks cover events such as sending messages and message read receipts, performing chat group or chat room operations, changing friend relationships, and changing user status. For details, see [Configure post-delivery callback filtering rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+  Post-delivery webhooks cover events such as sending messages and message read receipts, performing chat group or chat room operations, changing friend relationships, and changing user status. For details, see [Configure post-delivery webhook filtering rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
-Before using callbacks, check whether your plan supports this feature. For details, see [Value-added service fees](/product/pricing_policy.html#value-added-service-fees). If your plan does not support callbacks, first open the [Easemob Console](https://console.easemob.com/user/login) to [activate the feature](/product/console/basic_webhook.html#message-callback-1), and then [configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+Before using webhooks, check whether your plan supports this feature. For details, see [Value-added service fees](/product/pricing_policy.html#value-added-service-fees). If your plan does not support webhooks, first open the [Easemob Console](https://console.easemob.com/user/login) to [activate the feature](/product/console/basic_webhook.html#message-callback-1), and then [configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 :::tip
-To disable callbacks after using the feature, contact the Easemob business team. Disabling callbacks deletes all related callback configurations. Proceed with caution.
+To disable webhooks after using the feature, contact the Easemob business team. Disabling webhooks deletes all related webhook configurations. Proceed with caution.
 :::
 
-## Differences between the two callback types
+## Differences between the two webhook types
 
-| Category       | Pre-delivery callback | Post-delivery callback            |
+| Category       | Pre-delivery webhook | Post-delivery webhook            |
 | ---------- | ---------- | ---------------------- |
-| Supported message sending methods | Client SDK | Client SDK and RESTful API | 
+| Supported message sending methods | Client SDK | Client SDK and RESTful API |
 | Supported scope | Messages only   | Messages and other events         |
 | When triggered  | After the EasyIM server receives an uplink one-to-one or group message from a user and before it delivers the message to the target user   | After a message is sent or an operation related to a one-to-one chat, group chat, chat room, or friend is performed  |
 | Response required   | Yes       | No                    |
 | Typical use case   | Content moderation   | Chat history synchronization           |
 
-## Callback security
+## Webhook security
 
-For both pre-delivery and post-delivery callbacks, the EasyIM server sends your app server an HTTP/HTTPS POST request with a JSON payload. The request uses UTF-8 encoding, and the message in each request is signed with MD5. In each request header, the `Content-Type` field is `application/json`.
+For both pre-delivery and post-delivery webhooks, the EasyIM server sends your app server an HTTP/HTTPS POST request with a JSON payload. The request uses UTF-8 encoding, and the message in each request is signed with MD5. In each request header, the `Content-Type` field is `application/json`.
 
-For a post-delivery callback, the message in the request uses an MD5 signature calculated with `org.apache.commons.codec.digest.DigestUtils#md5Hex`.
+For a post-delivery webhook, the message in the request uses an MD5 signature calculated with `org.apache.commons.codec.digest.DigestUtils#md5Hex`.
 
-You can verify the signature to determine whether a callback was sent by the EasyIM server:
+You can verify the signature to determine whether a webhook was sent by the EasyIM server:
 
 1. Locate the following information:
 
-   - Callback ID: The `callId` field in the callback request body.
+   - Webhook ID: The `callId` field in the webhook request body.
 
-   - The secret generated by the EasyIM server for the callback rule: You can find it in the callback rule list on the **Message callback** page of the [Easemob Console](https://console.easemob.com/user/login).
+   - The secret generated by the EasyIM server for the webhook rule: You can find it in the webhook rule list on the **Message webhook** page of the [Easemob Console](https://console.easemob.com/user/login).
 
     ![img](/images/product/callback_secret.png)
 
-   - Callback timestamp: The timestamp field in the callback request body.
+   - Webhook timestamp: The timestamp field in the webhook request body.
 
-2. Calculate the MD5 value of the string formed by concatenating the callback ID, secret, and callback timestamp.
+2. Calculate the MD5 value of the string formed by concatenating the webhook ID, secret, and webhook timestamp.
 
-3. Check whether the calculated value is the same as the secret field in the request body. If they match, the callback request was sent by the EasyIM server.
-
-
-
+3. Check whether the calculated value is the same as the secret field in the request body. If they match, the webhook request was sent by the EasyIM server.

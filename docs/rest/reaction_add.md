@@ -6,7 +6,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 - Add a Reaction to an individual message in a one-to-one or group chat.
 - Currently, **Reaction applies only to one-to-one chats and chat groups. Chat rooms do not support Reaction.**
-- Adding a Reaction triggers a post-delivery callback. For details, see [Post-delivery callback events](callback_group_room_create.html).
+- Adding a Reaction triggers a post-delivery callback. For details, see [Post-delivery webhook events](callback_group_room_create.html).
 - For detailed Reaction usage limits, see [Product usage limits](limitation.html).
 
 ## Feature activation

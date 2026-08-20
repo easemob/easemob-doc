@@ -5,7 +5,7 @@
 - Add a friend. The friend must be a user under the same App Key as the current user.
 - This API adds the friendship in both directions. After a friend is added, each user appears in the other's friend list.
 - For the free EasyIM service, each user under an App Key can have up to 100 friends. This limit varies by service edition. For details, see [IM plan features](/product/product_package_feature.html).
-- Calling this API triggers the post-delivery callback event for adding a friend. For details, see [Callback events](callback_contact.html#send-a-friend-request).
+- Calling this API triggers the post-delivery callback event for adding a friend. For details, see [Webhook events](callback_contact.html#send-a-friend-request).
 
 ## Call frequency limit
 

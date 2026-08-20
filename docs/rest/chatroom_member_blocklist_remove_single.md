@@ -4,7 +4,7 @@
 
 - Remove a user from the chat room blocklist.
 - For a blocklisted user to send and receive messages normally in the chat room, first remove the user from the blocklist, and then have the user rejoin the chat room.
-- Removing a user from the chat room blocklist triggers a post-delivery callback. For details, see the [callback event for removing a chat room member from the chat room blocklist](callback_group_room_blocklist.html#remove-a-member-from-the-blocklist).
+- Removing a user from the chat room blocklist triggers a post-delivery callback. For details, see the [webhook event for removing a chat room member from the chat room blocklist](callback_group_room_blocklist.html#remove-a-member-from-the-blocklist).
 
 ## Call frequency limit
 

@@ -1,4 +1,4 @@
-# User Status Change Callback
+# User Status Change Webhook Events
 
 ## Feature overview
 
@@ -12,11 +12,11 @@ The following table describes the reasons for user status changes:
 | Logout (`logout`) | The user goes offline. |
 | Forced logout (`replaced`) | The user is forced offline by another device or by the server. |
 
-For the callback response rules and retry mechanism, see [Post-delivery callback](callback_postsending.html).
+For the webhook response rules and retry mechanism, see [Post-delivery webhook](callback_postsending.html).
 
 ## Real-time status change awareness
 
-#### Android/iOS/HarmonyOS/Flutter/React Native 
+#### Android/iOS/HarmonyOS/Flutter/React Native
 
 User status changes can be detected in real time:
 
@@ -67,14 +67,14 @@ User status changes can be detected in real time:
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
-## Callback request
+## Webhook request
 
 ### Request example
 
-When a user logs in, logs out, or is forced offline, the EasyIM server sends a status change callback to your app server. The three callbacks have the same request field structure and differ only in the values of `reason` and `status`.
+When a user logs in, logs out, or is forced offline, the EasyIM server sends a status change webhook to your app server. The three webhooks have the same request field structure and differ only in the values of `reason` and `status`.
 
 **User login (`reason` = `login`, `status` = `online`)**
 
@@ -137,9 +137,9 @@ When a user logs in, logs out, or is forced offline, the EasyIM server sends a s
 
 | Field        | Type | Description                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format `App Key_UUID`.              |
+| `callId`    | String   | Unique identifier of the webhook request, in the format `App Key_UUID`.              |
 | `reason`    | String   | Reason for the status change: `login` (login), `logout` (logout), or `replaced` (forced offline). |
-| `security`  | String   | Signature in the format `MD5(callId + secret + timestamp)`. For the `secret`, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`  | String   | Signature in the format `MD5(callId + secret + timestamp)`. For the `secret`, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
 | `os`        | String   | Device operating system type.                                           |
 | `ip`        | String   | IP address from which the user logs in.                                         |
 | `host`      | String   | Server name.                                                 |

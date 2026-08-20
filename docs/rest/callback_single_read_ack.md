@@ -1,19 +1,19 @@
-# One-to-One Message Read Receipt Callback
+# One-to-One Message Read Receipt Webhook Events
 
 ## Feature overview
 
-After a one-to-one message read receipt is sent successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain read receipt information and synchronize data.
+After a one-to-one message read receipt is sent successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain read receipt information and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 The [client sends a one-to-one message read receipt](/document/android/message_receipt.html#one-to-one-and-group-message-read-receipts).
 
-## Callback request
+## Webhook request
 
 ### Request example
 
@@ -45,9 +45,9 @@ The following example shows a one-to-one message read receipt being sent.
 | Field        | Type | Description                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack`: Read receipt.                                        |
-| `callId`    | String   | The `callId` field is the unique identifier of each callback request, in the format “App Key_message ID of the receipt message”. | 
+| `callId`    | String   | The `callId` field is the unique identifier of each webhook request, in the format “App Key_message ID of the receipt message”. |
 | `channel_channel` | String   | Read receipt for a one-to-one message, in the format `App Key_接收已读回执用户 ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
-| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
 | `payload`   | object   | Contains:<br/> - `ext`: Message extension field<br/> - `ack_message_id`: Message ID<br/> - `bodies`: Message body content. |
 | `host`      | String   | Server name.                                                 |
 | `appkey`    | String   | Unique identifier of the app registered in the Easemob Console.                         |

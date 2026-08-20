@@ -6,7 +6,7 @@
 - Messages can only be deleted for that user:
   - The specified roaming messages are deleted from the server and the user's local device, and the user can no longer retrieve them from the EasyIM server. If all roaming messages in the conversation are deleted, the conversation is also cleared for that user on the server and is no longer returned when the user retrieves the conversation list.
   - Other users in the chat group or chat room are not affected and can still retrieve these roaming messages and the conversation.
-- Before calling this API, you can obtain the message IDs to delete by [retrieving historical messages](message_historical.html). If you use [message callbacks](callback_overview.html), you can also obtain the message IDs from your server because the callback data sent to your server contains them.
+- Before calling this API, you can obtain the message IDs to delete by [retrieving historical messages](message_historical.html). If you use [message webhooks](callback_overview.html), you can also obtain the message IDs from your server because the callback data sent to your server contains them.
 
 :::tip
 Chat room roaming messages are disabled by default. To use this feature, contact the Easemob business team to enable it.

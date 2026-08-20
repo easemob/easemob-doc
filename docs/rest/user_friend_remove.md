@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Remove a user from another user's friend list and end their friendship. For example, after user A removes user B, each user disappears from the other's friend list.
-- Calling this API triggers the post-delivery callback event for removing a friend. For details, see [Callback events](callback_contact.html#remove-a-friend).
+- Calling this API triggers the post-delivery callback event for removing a friend. For details, see [Webhook events](callback_contact.html#remove-a-friend).
 
 ## Call frequency limit
 

@@ -1,22 +1,22 @@
-# Message Editing Callback
+# Message Editing Webhook Events
 
 ## Feature overview
 
-After a message is edited, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](callback_postsending.html#callback-rules). Your app server can use the callback to obtain the edited message and synchronize data.
+After a message is edited, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](callback_postsending.html#webhook-rules). Your app server can use the webhook to obtain the edited message and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 - A [message is edited on the client](/document/android/message_modify.html).
 - A [RESTful API is called to edit a message](/document/server-side/message_modify.html).
- 
-## Callback request
 
-The following table describes the editable content supported by each message type: 
+## Webhook request
+
+The following table describes the editable content supported by each message type:
 
 | Message type | Supported editable content        |
 | :------- | :-------------------- |
@@ -68,22 +68,22 @@ The following table describes the editable content supported by each message typ
 }
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | Long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `bodies`         | JSON Array   | Specific edited message content, in the same format as content sent through the RESTful API. See [Historical message content](message_historical.html#historical-message-content). |
@@ -138,22 +138,22 @@ Callback request body fields:
 }
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.         |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -217,22 +217,22 @@ Callback request body fields:
 }
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -291,22 +291,22 @@ Callback request body fields:
 
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -367,22 +367,22 @@ Callback request body fields:
 
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -439,22 +439,22 @@ Callback request body fields:
 
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -516,22 +516,22 @@ Callback request body fields:
 }
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |
 
 `payload` contains the event content and the fields described in the following table:
-  
+
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | ID of the original message being edited.                                       |
@@ -594,16 +594,16 @@ Callback request body fields:
 
 ```
 
-Callback request body fields:
+Webhook request body fields:
 
 | Field              | Type | Description                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | The `callId` field is the unique identifier of each callback request. |
+| `callId`          | String   | The `callId` field is the unique identifier of each webhook request. |
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure callback rules in the Easemob Console](callback_postsending.html#callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the Easemob Console](callback_postsending.html#webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the Easemob Console.                         |
-| `from`            | String   | User ID of the message sender.                                     | 
+| `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
 | `msg_id`          | String   | Message ID of the message editing event.                                       |
 | `timestamp`       | long     | Unix timestamp when the EasyIM server receives the message, in milliseconds.        |

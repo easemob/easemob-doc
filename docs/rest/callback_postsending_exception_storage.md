@@ -1,24 +1,24 @@
-# Callback Data Stored on the Chat Server
+# Webhook Data Stored on the Chat Server
 
 ## Feature overview
 
-Callback data stored on the chat server is a value-added service for post-delivery callbacks and **must be purchased and activated separately**. When a post-delivery callback cannot be delivered because of a callback URL connection timeout, business server response timeout, temporary callback rule ban, or another exception, this service temporarily stores the undelivered callback message to prevent message loss. It is suitable for business scenarios that require high message reliability and retention of callback data for subsequent compensating processing when an exception occurs. **The service stores only failed callbacks that meet the exception storage conditions. Successfully delivered messages are not stored.**
+Webhook data stored on the chat server is a value-added service for post-delivery webhooks and **must be purchased and activated separately**. When a post-delivery webhook cannot be delivered because of a webhook URL connection timeout, business server response timeout, temporary webhook rule ban, or another exception, this service temporarily stores the undelivered webhook message to prevent message loss. It is suitable for business scenarios that require high message reliability and retention of webhook data for subsequent compensating processing when an exception occurs. **The service stores only failed webhooks that meet the exception storage conditions. Successfully delivered messages are not stored.**
 
 ## Limitations
 
-- Stored callback data is retained for 3 days by default. Query and redeliver it within this period.
+- Stored webhook data is retained for 3 days by default. Query and redeliver it within this period.
 - Limit redelivery retries for a single set of stored data to no more than 10.
-- Callback data stored on the chat server provides only a compensating capability for exceptional scenarios. It does not replace business-side safeguards for callback processing accuracy, consumption acknowledgment, and overall reliability.
+- Webhook data stored on the chat server provides only a compensating capability for exceptional scenarios. It does not replace business-side safeguards for webhook processing accuracy, consumption acknowledgment, and overall reliability.
 
 ## Activate the service
 
-To use callback data stored on the chat server, first activate the service in the console. For details, see [Easemob Console activation entry](/product/console/basic_webhook.html#callback-data-stored-on-the-chat-server).
+To use webhook data stored on the chat server, first activate the service in the console. For details, see [Easemob Console activation entry](/product/console/basic_webhook.html#callback-data-stored-on-the-chat-server).
 
-After the service is activated, when a post-delivery callback fails and meets the exception storage conditions, the system archives failed callback messages by time slice and **generates a date key every 10 minutes to identify a set of failed callbacks**. First call the [query API](#query-stored-callback-data) to obtain callback data available for redelivery, and then call the [redelivery API](#redeliver-stored-callback-data) based on the returned result to compensate for data in exceptional scenarios.
+After the service is activated, when a post-delivery webhook fails and meets the exception storage conditions, the system archives failed webhook messages by time slice and **generates a date key every 10 minutes to identify a set of failed webhooks**. First call the [query API](#query-stored-webhook-data) to obtain webhook data available for redelivery, and then call the [redelivery API](#redeliver-stored-webhook-data) based on the returned result to compensate for data in exceptional scenarios.
 
-## Query stored callback data
+## Query stored webhook data
 
-This API queries sets of callback data placed in the storage queue because of callback exceptions under the current App Key. The system generates a date key every 10 minutes to identify the failed callback set in the corresponding time slice. You can use the date key to query and redeliver the data.
+This API queries sets of webhook data placed in the storage queue because of webhook exceptions under the current App Key. The system generates a date key every 10 minutes to identify the failed webhook set in the corresponding time slice. You can use the date key to query and redeliver the data.
 
 ### Request URL
 
@@ -76,7 +76,7 @@ The `data` field is described in the following table:
 | :--- | :--- | :--- |
 | `data` | JSON Array | List of stored data sets. Each element corresponds to a time slice available for redelivery. |
 | - `date` | String | Date key of the current set. It represents a 10-minute time slice and is set to the start time of that slice. |
-| - `size` | Int | Number of callback messages stored under the current date key. |
+| - `size` | Int | Number of webhook messages stored under the current date key. |
 | - `retry` | Int | Number of redeliveries performed for the current set. The value is `0` if no redelivery has been performed. |
 
 Other response fields are described in the following table:
@@ -94,9 +94,9 @@ Other response fields are described in the following table:
 
 An HTTP status code other than `200` indicates that the request failed. See [Error code](#error-code) in this document for troubleshooting.
 
-## Redeliver stored callback data
+## Redeliver stored webhook data
 
-This API redelivers stored callback messages for a specified date key.
+This API redelivers stored webhook messages for a specified date key.
 
 ### Request URL
 
@@ -129,7 +129,7 @@ For the `Content-Type` and `Authorization` fields, see [Request header fields](o
 | :--- | :--- | :--- | :--- |
 | `date` | String | Yes | Date key corresponding to the data set to redeliver. The key is the start time of a 10-minute time slice. |
 | `retry` | Int | No | Number of retries for the current redelivery request. Because redelivery may still fail, your business should maintain and control this value based on actual conditions. The initial value is `0`. |
-| `targetUrl` | String | No | Target callback URL for this redelivery. If this field is omitted or empty, the callback URL configured in the original callback rule is used. |
+| `targetUrl` | String | No | Target webhook URL for this redelivery. If this field is omitted or empty, the webhook URL configured in the original webhook rule is used. |
 
 ### Response example
 

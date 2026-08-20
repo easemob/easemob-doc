@@ -5,7 +5,7 @@
 - Create a chat room.
 - **Only chat room superadmins have permission to create chat rooms on the client.**
 - You can set the chat room name, description, maximum number of members (including admins), chat room admins and regular members, and chat room extension information.
-- Creating a chat room triggers a post-delivery callback. For details, see [Chat room creation callback event](callback_group_room_create.html).
+- Creating a chat room triggers a post-delivery callback. For details, see [Chat room creation webhook event](callback_group_room_create.html).
 
 ## Call frequency limit
 

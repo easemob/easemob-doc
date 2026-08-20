@@ -1,13 +1,13 @@
-# Offline Push Callback
+# Offline Push Webhook Events
 
 ## Feature overview
 
-After EasyIM sends an offline push notification through a third-party offline push service, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain information about the push notification and whether it was delivered successfully, and synchronize data.
+After EasyIM sends an offline push notification through a third-party offline push service, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the push notification and whether it was delivered successfully, and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
@@ -15,9 +15,9 @@ After EasyIM sends an offline push notification through a third-party offline pu
 - A message is sent through the REST API in a [one-to-one chat](/document/server-side/message_single.html) or [group chat](/document/server-side/message_group.html) while the recipient is offline.
 - A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message) or [group chat](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) while the recipient is offline.
 
-## Callback request
+## Webhook request
 
-### Successful push callback request
+### Successful push webhook request
 
 ```json
 {
@@ -30,7 +30,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
         "apnsId":"7d988394-XXXX-XXXX-2b9f-e7a13a92fb96",
         "pushNotification":{
             "expiration":1656484422884,
-            "payload":"{\"t\":\"wzy_apns\",\"aps\":{\"badge\":1,\"alert\":{\"body\":\"请点击查看\",\"title\":\"您有一条新消息\"},\"sound\":\"ring.caf\"},\"e\":{\"em_push_sound\":\"ring.caf\"},\"f\":\"wzy_vivo\",\"m\":\"626473521765161477\"}",
+            "payload":"{\"t\":\"wzy_apns\",\"aps\":{\"badge\":1,\"alert\":{\"body\":\"Please click to view\",\"title\":\"You have a new message\"},\"sound\":\"ring.caf\"},\"e\":{\"em_push_sound\":\"ring.caf\"},\"f\":\"wzy_vivo\",\"m\":\"626473521765161477\"}",
             "priority":"IMMEDIATE",
             "token":"XXXX",
             "topic":"com.easemob.XXXX.easeim"
@@ -51,20 +51,20 @@ After EasyIM sends an offline push notification through a third-party offline pu
 
 | Field   | Always present | Type   | Description          |
 | :----- | :------- | :---------- | :----------- |
-| `callId`    | String   | Unique identifier of the callback request, in the format `App Key_离线消息的消息 ID`. |
+| `callId`    | String   | Unique identifier of the webhook request, in the format `App Key_message ID of the new offline message`. |
 | `appkey`        | Yes               | String | Unique app identifier consisting of Orgname and Appname.      |
 | `channel`       | No               | String | Push channel: APNS, ANDROID, XIAOMI, HUAWEI, MEIZU, OPPO, or VIVO. This field is associated with the push certificate platform.   |
 | `chat_type`     | Yes               | String | Chat type: `chat` for a one-to-one chat and `groupchat` for a group chat.     |
-| `data`          | No    | Object | Third-party response content.   | 
-| `device_id`     | No   | String | Device ID of the offline push notification recipient.   | 
-| `device_token`  | No     | String | Third-party push identifier. | 
+| `data`          | No    | Object | Third-party response content.   |
+| `device_id`     | No   | String | Device ID of the offline push notification recipient.   |
+| `device_token`  | No     | String | Third-party push identifier. |
 | `msg_id`        | Yes               | String | Message ID of the offline message.  |
-| `notifier_name` |  No               |  String  | Push certificate name.                   | 
+| `notifier_name` |  No               |  String  | Push certificate name.                   |
 | `status`   | Yes    | String | Push status:<br/> - `success`: Push succeeded;<br/> - `fail`: Push failed because of a third-party failure or unmet push conditions;<br/> - `error`: Push exception. |
 | `step`   | Yes   | String | Fixed string `push`.  |
 | `target`| Yes   | String | User ID of the offline push notification recipient. |
 | `timestamp`     | Yes    | String | Timestamp when the event is sent.           |
-| `e_message`     | No               | String | Exception information. This field is provided only when an error occurs.| 
+| `e_message`     | No               | String | Exception information. This field is provided only when an error occurs.|
 | `from`          | Yes               | String | User ID of the sender.  |
 | `group_id`      | No               | String | Chat group ID. This field appears only for a group chat message. |
 | `payload`       | Yes    | Object | Message payload containing the offline message payload.  |
@@ -130,7 +130,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
     "callId": "XXXX#XXXX_1029518239182358904",
     "data": {
     "result": 10206,
-    "desc": "sign 不正确"
+    "desc": "Incorrect sign"
     },
     "device_id": "0f581e52-XXXX-XXXX-8774-f804a49571f5",
     "channel": "VIVOPUSH",
@@ -150,14 +150,14 @@ After EasyIM sends an offline push notification through a third-party offline pu
 
 ### Push failure reasons
 
-If a push fails, the `detail` field in the callback request returns the reason, as described in the following table.
+If a push fails, the `detail` field in the webhook request returns the reason, as described in the following table.
 
 | Offline push failure reason    | Description          |
-| :------------------- | :----- | 
+| :------------------- | :----- |
 | `no push binding`           | No push device is bound.       |
 | `illegal binding`           | Invalid binding information. This means that the certificate name or `deviceToken` is an empty string. This generally does not occur, but may exist in historical data. |
-| `no user exist`             | The recipient does not exist.       |  
-| `notifier out of limit`     | The certificate has exceeded its push limit.     | 
+| `no user exist`             | The recipient does not exist.       |
+| `notifier out of limit`     | The certificate has exceeded its push limit.     |
 | `notifier disabled`         | The certificate is disabled after being banned once.  |
 | `notifier is ban`           | The certificate is banned.        |
 | `no notifier exist`         | The certificate does not exist.     |
@@ -165,8 +165,8 @@ If a push fails, the `detail` field in the callback request returns the reason, 
 | `message ignore push`       | The message ignores push notifications, as specified by the offline extension field `em_ignore_notification=true`. |
 | `invalid message`           | Invalid message. This error generally does not occur in protocol content.                     |
 | `expire message`            | Expired message. A message whose push has been delayed for more than one day is no longer pushed.                 |
-| `user ignore push`          | The user has actively enabled Do Not Disturb (DND).      | 
+| `user ignore push`          | The user has actively enabled Do Not Disturb (DND).      |
 | `ignore push device id`     | Push to the user's device is ignored because the extension limits which devices receive or do not receive push notifications.    |
-| `invalid VOIP notification` | Invalid APNs VoIP push.   | 
+| `invalid VOIP notification` | Invalid APNs VoIP push.   |
 | `get push token fail`       | Failed to obtain the push token.       |
 | `push yet but fail `        | The push was sent but returned a failure.       |

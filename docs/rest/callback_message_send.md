@@ -1,33 +1,33 @@
-# Message Sending Callback
+# Message Sending Webhook Events
 
 ## Feature overview
 
-After a message is sent successfully, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain the sent message and synchronize data.
+After a message is sent successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the sent message and synchronize data.
 
-Callback requests for one-to-one, chat group, and chat room messages contain a set of common parameters. For details, see [Common parameters](#common-parameters). The structure of the `payload` field varies by message type, as described below.
+Webhook requests for one-to-one, chat group, and chat room messages contain a set of common parameters. For details, see [Common parameters](#common-parameters). The structure of the `payload` field varies by message type, as described below.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Common parameters
 
-The following table describes the common parameters in callback requests for messages sent in one-to-one chats, group chats, and chat rooms:
+The following table describes the common parameters in webhook requests for messages sent in one-to-one chats, group chats, and chat rooms:
 
 | Parameter | Type   | Description |
 | :---------------- | :----- |:------------------------------------------------------------------|
-| `callId`    | String   | Unique identifier of the callback request, in the format `{App Key}_{发送的消息的ID}`. | 
+| `callId`    | String   | Unique identifier of the webhook request, in the format `{App Key}_{发送的消息的ID}`. |
 | `eventType`       | String | Event type: `chat` for an uplink message and `chat_offline` for an offline message.                    |
 | `timestamp`       | long   | Unix timestamp when the EasyIM server receives the message, in milliseconds.                           |
-| `chat_type`       | String | Conversation type. All types are selected by default:<br/> - `chat`: One-to-one chat callback;<br/> - `groupchat`: Group chat callback, including message callbacks for chat groups and chat rooms;<br/> - `notify`: Notification callback, including callbacks for message threads (Thread) and Reactions. Use `payload` and its `type` field to determine the specific type. |
-| `group_id`        | String | Present when `chat_type` is `groupchat`. It indicates the chat group or chat room where the callback message occurs.                |
+| `chat_type`       | String | Conversation type. All types are selected by default:<br/> - `chat`: One-to-one chat webhook;<br/> - `groupchat`: Group chat webhook, including message webhooks for chat groups and chat rooms;<br/> - `notify`: Notification webhook, including webhooks for message threads (Thread) and Reactions. Use `payload` and its `type` field to determine the specific type. |
+| `group_id`        | String | Present when `chat_type` is `groupchat`. It indicates the chat group or chat room where the webhook message occurs.                |
 | `from`            | String | Message sender.     |
 | `to`              | String | Message recipient.   |
-| `msg_id`    | String   | ID of the sent message. | 
+| `msg_id`    | String   | ID of the sent message. |
 | `payload`         | object | Event content, in the same format as content sent through the REST API. See [Historical message content](message_historical.html#historical-message-content).      |
 | `securityVersion` | String | Security verification version, currently `1.0.0`. Ignore this parameter. It will be configured in the Easemob Console in the future.                   |
-| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Callback rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules) in the Easemob Console.     |
+| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules) in the Easemob Console.     |
 | `appkey`          | String | Unique identifier of the app registered in the Easemob Console.        |
 | `host`            | String | Server name.              |
 | `content_type`            | String | Message type:<br/> - `chat:user:*`: One-to-one message  <br/> - `chat:group:*`: Chat group message   <br/> - `chat:room:*`: Chat room message  <br/>  For the specific parameter values of each message type, see [Send one-to-one messages](#send-one-to-one-messages), [Send chat group messages](#send-chat-group-messages), and [Send chat room messages](#send-chat-room-messages).   |
@@ -44,7 +44,7 @@ The following table describes the common parameters in callback requests for mes
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a text message. The callback request for a command message has the same structure, with the `type` field set to `cmd`.
+The following example shows the `payload` field in a webhook request for sending a text message. The webhook request for a command message has the same structure, with the `type` field set to `cmd`.
 
 ```json
 "payload":{
@@ -55,22 +55,22 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a text message:
+The following table describes the `payload` field in a webhook request for sending a text message:
 
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `ext`    | object   | Message extension field.                                             |
-| `bodies` | object   | Callback body content containing the `msg` and `type` fields.           |
+| `bodies` | object   | Webhook body content containing the `msg` and `type` fields.           |
 | `msg`    | String    | Message content.                                                   |
 | `type`   | String   | Message type:<br/> - Text message: `txt` <br/> - Command message: `cmd` |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Image message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending an image message:
+The following example shows the `payload` field in a webhook request for sending an image message:
 
 ```json
 "payload":{
@@ -88,12 +88,12 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending an image message:
+The following table describes the `payload` field in a webhook request for sending an image message:
 
 | Field          | Type   | Description                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
 | `ext`         | Json   | Message extension field.                                             |
-| `bodies`      | object | Callback body content containing the `filename`, `secret`, `file_length`, `size`, `url`, and `type` fields. |
+| `bodies`      | object | Webhook body content containing the `filename`, `secret`, `file_length`, `size`, `url`, and `type` fields. |
 | `filename`    | String | Image name.                                                   |
 | `secret`      | String | Access key returned after the file is uploaded successfully.                              |
 | `file_length` | Int    | Image file size, in bytes.                                 |
@@ -101,13 +101,13 @@ The following table describes the `payload` field in a callback request for send
 | `url`         | String | UUID returned after a file is uploaded successfully to the domain `/orgname/appname/chatfiles/`. See the request example. |
 | `type`        | String | Message type: `img` |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Voice message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a voice message:
+The following example shows the `payload` field in a webhook request for sending a voice message:
 
 ```json
 "payload":{
@@ -125,7 +125,7 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a voice message:
+The following table describes the `payload` field in a webhook request for sending a voice message:
 
 | Field          | Type   | Description                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
@@ -138,13 +138,13 @@ The following table describes the `payload` field in a callback request for send
 | `url`         | String | UUID returned after a file is uploaded successfully to the domain `/org_name/app_name/chatfiles/`. |
 | `type`        | String | Message type: `audio` |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Video message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a video message:
+The following example shows the `payload` field in a webhook request for sending a video message:
 
 ```json
 "payload":{
@@ -167,12 +167,12 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a video message:
+The following table describes the `payload` field in a webhook request for sending a video message:
 
 | Field           | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `ext`          | JSON   | Message extension field.                                             |
-| `bodies`       | object | Callback body content containing the following fields: `thumb_secret`, `thumb`, `filename`, `secret`, `file_length`, `size`, `url`, and `type`. |
+| `bodies`       | object | Webhook body content containing the following fields: `thumb_secret`, `thumb`, `filename`, `secret`, `file_length`, `size`, `url`, and `type`. |
 | `thumb_secret` | String | Access key returned after the video thumbnail is uploaded successfully.                          |
 | `filename`     | String | Video file name.                                                   |
 | `size`         | JSON   | Thumbnail dimensions: `height` for height and `width` for width.              |
@@ -183,13 +183,13 @@ The following table describes the `payload` field in a callback request for send
 | `type`         | String | Message type. The value is `video` for a video message.   |
 | `url`          | String | Video file URL in the format `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`, where `file_uuid` is the video file ID. Obtain it from the file upload response body after the video file is uploaded successfully.  |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### File message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a file message:
+The following example shows the `payload` field in a webhook request for sending a file message:
 
 ```json
 "payload":{
@@ -206,12 +206,12 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a file message:
+The following table describes the `payload` field in a webhook request for sending a file message:
 
 | Parameter          | Type   | Description         |
 | :------------ | :----- | :---------------- |
 | `ext`          | JSON   | Message extension field.     |
-| `bodies`       | object | Callback body content containing the `file_length`, `filename`, `secret`, `type`, and `url` fields. |
+| `bodies`       | object | Webhook body content containing the `file_length`, `filename`, `secret`, `type`, and `url` fields. |
 | `file_length`  | Long   | File size, in bytes.   |
 | `filename`     | String | File name, including the extension.     |
 | `secret`       | String | File access key. This field is present if access restrictions are enabled during [file upload](message_upload_file.html). |
@@ -219,13 +219,13 @@ The following table describes the `payload` field in a callback request for send
 | `url`          | String | File URL. You can use the URL to download the historical message file.  |
 
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Location message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a location message:
+The following example shows the `payload` field in a webhook request for sending a location message:
 
 ```json
 "payload":{
@@ -241,7 +241,7 @@ The following example shows the `payload` field in a callback request for sendin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a file message:
+The following table describes the `payload` field in a webhook request for sending a file message:
 
 | Field   | Type   | Description             |
 | :----- | :----- | :--------------- |
@@ -250,29 +250,29 @@ The following table describes the `payload` field in a callback request for send
 | `lng`  | String | Longitude.           |
 | `addr` | String | Text description of the location. |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Custom message
 
 #### Request example
 
-The following example shows the `payload` field in a callback request for sending a custom message:
+The following example shows the `payload` field in a webhook request for sending a custom message:
 
 ```json
 "payload": {
-    "ext": {}, 
-    "bodies": [{ 
+    "ext": {},
+    "bodies": [{
         "customExts": [ {"name": 1 } ],
         "v2:customExts":{"k":"v","k1":"v1"},
-        "customEvent": "flower", 
-        "type": "custom" 
-    }] 
+        "customEvent": "flower",
+        "type": "custom"
+    }]
 }
 ```
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a custom message:
+The following table describes the `payload` field in a webhook request for sending a custom message:
 
 | Parameter          | Type | Description                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
@@ -281,7 +281,7 @@ The following table describes the `payload` field in a callback request for send
 | `from`        | String   | Message sender. This field is optional and defaults to `admin` on the server if omitted. If it is passed as an empty string "", the request is rejected. |
 | `ext`         | JSON     | Extension field for app-defined content. This field is optional and is ignored if omitted. If provided, its value cannot be the string `ext:null`; otherwise, an error occurs. |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ### Combined message
 
@@ -318,7 +318,7 @@ The following example shows the `payload` format of a combined message containin
 
 #### Request fields
 
-The following table describes the `payload` field in a callback request for sending a combined message:
+The following table describes the `payload` field in a webhook request for sending a combined message:
 
 | Parameter          | Type   | Description                                             |
 | :------------ | :----- | :----------------------------------------------- |
@@ -336,11 +336,11 @@ The following table describes the `payload` field in a callback request for send
 | `to`        | String | User ID of the recipient.                |
 | `type`        | String | Conversation type:<br/> - `chat`: One-to-one chat;<br/> - `groupchat`: Group chat;<br/> - `chatroom`: Chat room.              |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 ## Send chat group messages
 
-This section provides an example callback request body sent by the EasyIM server to your app server after each type of message is sent in a chat group.
+This section provides an example webhook request body sent by the EasyIM server to your app server after each type of message is sent in a chat group.
 
 | content_type          | Type in payload                                      | Trigger event                 |
 | :-------------------- | :-------------------------------------------------- | :----------------------- |
@@ -360,10 +360,10 @@ This section provides an example callback request body sent by the EasyIM server
 
 ```json
 {
-    "callId":"{appkey}_8924312242322", 
+    "callId":"{appkey}_8924312242322",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
+    "chat_type":"groupchat",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
@@ -381,17 +381,17 @@ This section provides an example callback request body sent by the EasyIM server
 | Field     | Type | Description                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `ext`    | String   | Message extension field.                                             |
-| `bodies` | object   | Callback body content containing the `msg` and `type` fields.           |
+| `bodies` | object   | Webhook body content containing the `msg` and `type` fields.           |
 | `msg`    | String   | Message content.                                                   |
 | `type`   | String   | Message type:<br/> - Text message: `txt`;<br/> - Image message: `img`;<br/> - Voice message: `audio`;<br/> - Location message: `loc`;<br/> - Video message: `video`;<br/> - File message: `file`;<br/> - Command message: `cmd`; <br/> - Custom message: `custom`;<br/> - Unknown message: `unknown`. |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 The payload of a chat group message is the same as that of a one-to-one message. For details, see [Send one-to-one messages](#send-one-to-one-messages).
 
 ## Send chat room messages
 
-This section provides an example callback request body sent by the EasyIM server to your app server after each type of message is sent in a chat room.
+This section provides an example webhook request body sent by the EasyIM server to your app server after each type of message is sent in a chat room.
 
 | content_type         | Type in payload                                      | Trigger event                   |
 | :------------------- | :-------------------------------------------------- | :------------------------- |
@@ -414,11 +414,11 @@ This section provides an example callback request body sent by the EasyIM server
     "callId":"{appkey}_8924312242322",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
-    "chat_type":"groupchat", 
+    "chat_type":"groupchat",
     "group_id":"16934809238921545",
     "from":"user1",
     "to":"user2",
-    "msg_id":"8924312242322", 
+    "msg_id":"8924312242322",
     "payload":{
         // Specific message content, the same as the corresponding one-to-one message type
     },
@@ -432,10 +432,10 @@ This section provides an example callback request body sent by the EasyIM server
 | Field     | Type | Description                                                       |
 | :------- | :------- | :----------------------------------------------------------- |
 | `ext`    | object   | Message extension field.                                             |
-| `bodies` | object   | Callback body content containing the `msg` and `type` fields.           |
+| `bodies` | object   | Webhook body content containing the `msg` and `type` fields.           |
 | `msg`    | String   | Message content.                                                   |
 | `type`   | String   | Message type:<br/> - Text message: `txt`;<br/> - Image message: `img`;<br/> - Voice message: `audio`;<br/> - Location message: `loc`;<br/> - Video message: `video`;<br/> - File message: `file`;<br/> - Command message: `cmd`; <br/> - Custom message: `custom`;<br/> - Unknown message: `unknown`. |
 
-For other parameters in the callback request, see [Common parameters](#common-parameters).
+For other parameters in the webhook request, see [Common parameters](#common-parameters).
 
 The `payload` structure of a chat room message is the same as that of a one-to-one message. For details, see [Send one-to-one messages](#send-one-to-one-messages).

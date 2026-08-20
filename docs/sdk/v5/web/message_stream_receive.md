@@ -251,8 +251,8 @@ Stream messages support the following message features:
 | [Offline push](/document/web/push/push_overview.html) | No | Sends a push notification when the user is offline. Web does not support offline push itself and supports only configuring offline push for mobile clients. |
 | [Content moderation](/value-added/moderation/moderation_overview.html) | No | Reviews and intercepts message content. |
 | [Message translation](/value-added/translation/message_translation_web.html) | Yes | Translates message content. | 
-| [Pre-delivery callbacks](/document/server-side/callback_presending.html) | No | Triggers a server-side callback before message delivery so that the app server can preprocess the message. |
-| [Post-delivery callbacks](/document/server-side/callback_postsending.html) | No | Triggers a server-side callback after message delivery so that the app backend can perform required data synchronization. |
+| [Pre-delivery webhooks](/document/server-side/callback_presending.html) | No | Triggers a server-side callback before message delivery so that the app server can preprocess the message. |
+| [Post-delivery webhooks](/document/server-side/callback_postsending.html) | No | Triggers a server-side callback after message delivery so that the app backend can perform required data synchronization. |
 | Multi-device synchronization to the sender after successful message sending | No | Synchronizes a successfully sent message to the sender's other devices. |
 
 ## FAQ

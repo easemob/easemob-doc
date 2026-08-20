@@ -1,13 +1,13 @@
-# Chat Group and Chat Room Mute List Callback
+# Chat Group and Chat Room Mute List Webhook Events
 
 ## Feature overview
 
-After a chat group or chat room member is successfully added to or removed from the mute list, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain information about the mute or unmute and synchronize data.
+After a chat group or chat room member is successfully added to or removed from the mute list, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the mute or unmute and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add a member to the mute list
 
@@ -17,7 +17,7 @@ After a chat group or chat room member is successfully added to or removed from 
 2. A RESTful API is called to add a [chat group member](/document/server-side/group_member_mute.html) or [chat room member](/document/server-side/chatroom_member_mute.html) to the mute list.
 3. In the [Easemob Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the mute list.
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -46,8 +46,8 @@ After a chat group or chat room member is successfully added to or removed from 
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON   | User ID of the member added to the mute list. |
 | `payload.expire_timestamp` | LONG   | Mute expiration time. After a chat group or chat room member is muted, the system automatically assigns a mute expiration timestamp. |
@@ -68,7 +68,7 @@ After a chat group or chat room member is successfully added to or removed from 
 2. A RESTful API is called to remove a [chat group member](/document/server-side/group_member_unmute.html) or [chat room member](/document/server-side/chatroom_member_mute.html) from the mute list.
 3. In the [Easemob Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is removed from the mute list.
 
-### Callback request
+### Webhook request
 
 #### Request example
 
@@ -96,10 +96,10 @@ After a chat group or chat room member is successfully added to or removed from 
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
-| `payload.member` | JSON   | User ID of the member removed from the mute list. | 
+| `payload.member` | JSON   | User ID of the member removed from the mute list. |
 | `payload.type` | String | Event for removing a member from the mute list. The value is `REMOVE`. |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.        |
 | `id`           | String | Chat group or chat room ID.                                                |
@@ -112,11 +112,3 @@ After a chat group or chat room member is successfully added to or removed from 
 ## Other information
 
 **More chat group operation events and sub-events will be added in the future. If your business strongly depends on these events or sub-events, implement strict checks for `operation` and `payload.type`.**
-
-
-
-
-
-
-
-

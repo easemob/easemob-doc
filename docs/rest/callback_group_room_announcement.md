@@ -1,13 +1,13 @@
-# Chat Group and Chat Room Announcement Callback
+# Chat Group and Chat Room Announcement Webhook Events
 
 ## Feature overview
 
-After a chat group or chat room announcement is set or updated, the EasyIM server sends a callback request to your app server according to the [post-delivery callback rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the callback to obtain the announcement information and synchronize data.
+After a chat group or chat room announcement is set or updated, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the announcement information and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
@@ -15,7 +15,7 @@ After a chat group or chat room announcement is set or updated, the EasyIM serve
 - A RESTful API is called to set or update a [chat group announcement](/document/server-side/group_announcement_modify.html) or [chat room announcement](/document/server-side/chatroom_announcement_update.html).
 - In the [Easemob Console](https://console.easemob.com/user/login), a [chat group announcement](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room announcement](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is set or updated.
 
-## Callback request
+## Webhook request
 
 ### Request example
 
@@ -41,18 +41,18 @@ After a chat group or chat room announcement is set or updated, the EasyIM serve
 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | The `callId` field is the unique identifier of each callback request, in the format `App Key_UUID`. | 
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure callback rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `paylod`       | Object | Event content.                                                     |
-|  - `type` | String | Announcement update event. | 
+|  - `type` | String | Announcement update event. |
 |  - `announcement`   | String | New announcement content. This field does not exist if the announcement content is deleted. |
 | `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
 | `id`       | String | Chat group ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. | 
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` when a chat group announcement is set or updated. |
-| `operator`     | String | Operator. If an app admin sets or updates the announcement, the value is fixed as `@ppAdmin`. | 
-| `timestamp`    | Long   | Unix timestamp when the operation is completed.                | 
+| `operator`     | String | Operator. If an app admin sets or updates the announcement, the value is fixed as `@ppAdmin`. |
+| `timestamp`    | Long   | Unix timestamp when the operation is completed.                |
 
 ## Other information
 

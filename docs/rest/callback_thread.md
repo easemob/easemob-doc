@@ -1,20 +1,20 @@
-# Message Operations in a Message Thread Callback
+# Message Thread Operation Webhook Events
 
 ## Feature overview
 
-When a message in a message thread (Thread) is sent, recalled, or modified, the EasyIM server sends a callback request to your app server.
+When a message in a message thread (Thread) is sent, recalled, or modified, the EasyIM server sends a webhook request to your app server.
 
 ## Prerequisite
 
-- The post-delivery callback service is activated. For details, see [Activate the message callback service](/product/console/basic_webhook.html#activate-the-service) and [Callback overview](/document/server-side/callback_postsending.html).
-- Post-delivery callback rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure callback rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 - A message in a message thread is [sent](/document/android/thread_message.html#send-a-message-in-a-message-thread), [recalled](/document/android/thread_message.html#recall-a-message-in-a-message-thread), or [edited](/document/android/message_modify.html) on the client.
 - A RESTful API is called to [send](/document/server-side/message_group.html), [recall](/document/server-side/message_recall_single.html), or [edit](/document/server-side/message_modify.html) a message in a message thread.
 
-## Callback request
+## Webhook request
 
 ### Request example
 
@@ -81,14 +81,14 @@ When a message in a message thread (Thread) is sent, recalled, or modified, the 
 
 | Field                 | Type | Description                              |
 | :------------------- | :------- | :-------------------------------- |
-| `chat_type` | String | The value is fixed as `notify`. Notification callbacks include callbacks for message threads (Thread) and Reactions. Use `payload` and its `type` field to determine the specific type. |
+| `chat_type` | String | The value is fixed as `notify`. Notification webhooks include webhooks for message threads (Thread) and Reactions. Use `payload` and its `type` field to determine the specific type. |
 | `host`            | String | Server name.              |
 | `appkey`          | String | Unique identifier assigned to each app by EasyIM. It consists of the values of `orgname` and `appname` and cannot be changed after it is generated. |
 | `from`            | String | The value is fixed as `admin`.  |
 | `to`              | String | ID of the chat group containing the Thread. |
 | `eventType`       | String | Event type. The value is fixed as `chat`.     |
-| `msg_id`          | Long   | Message ID of the callback event.       |
-| `timestamp`       | Long   | Time when the callback event is generated. |
+| `msg_id`          | Long   | Message ID of the webhook event.       |
+| `timestamp`       | Long   | Time when the webhook event is generated. |
 | `payload.type`               | String   | The value is fixed as `thread`.                 |
 | `payload.data`               | JSON     | Thread operation data structure.             |
 | `payload.data.msg_parent_id` | String   | ID of the message used to create the Thread. This field may be empty. |
