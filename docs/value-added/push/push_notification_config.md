@@ -336,7 +336,7 @@ FCM 通道推送通知示例如下：
 | `onlySendOnce`           | String | 值为 `1`时表示消息仅在设备在线时发送一次，不缓存离线消息进行多次下发。 |
 | `channelId`              | String | [通知类别的 ID。](https://dev.mi.com/console/doc/detail?pId=1163#_11) |
 | `templateId`             | String | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `channelId`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。 |
-| `templateParam`          | String | 小米推送模板参数，JSON 格式，示例 `{"keywords1": "k1"}`。<br/> - 必须与模板预配置的格式和参数个数完全一致；<br/> -  参数值长度 1–128 字符，不可为纯空格；<br/> - 不支持 emoji、\p{So} 及未分配 Unicode 字符。 |
+| `templateParam`          | String | 小米推送模板参数采用 JSON 格式，例如 `{"keywords1": "k1"}`。<br/> - 必须与模板预配置的格式和参数个数完全一致；<br/> -  参数值长度 1–128 字符，不可为纯空格；<br/> - 不支持 emoji、\p{So} 及未分配 Unicode 字符。 |
 
 ### vivo 推送说明
 
