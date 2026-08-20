@@ -705,6 +705,10 @@ button {
   }
 }
 /* footer */
+.page-reading-time-info {
+  display: none !important;
+}
+
 .footer-wrapper {
   margin-left: var(--sidebar-width);
   margin-top: 4rem;

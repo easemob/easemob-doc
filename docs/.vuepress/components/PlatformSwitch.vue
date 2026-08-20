@@ -55,7 +55,7 @@ const onChange = (nextPlatform: PlatformKey): void => {
 const options = [
   { value: 'android' as PlatformKey, label: 'Android' },
   { value: 'ios' as PlatformKey, label: 'iOS' },
-  { value: 'web' as PlatformKey, label: 'Web/小程序' },
+  { value: 'web' as PlatformKey, label: 'Web' },
 ]
 </script>
 

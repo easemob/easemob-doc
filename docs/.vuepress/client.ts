@@ -17,6 +17,9 @@ import Step from "./components/Step.vue";
 import FeedBack from "./components/Feedback.vue";
 import { embedChatbot } from "./embed";
 
+const SHOW_DOCUMENT_FEEDBACK = false;
+const SHOW_DOCUMENT_ASSISTANT = false;
+
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
     app.component("Container", Container);
@@ -32,7 +35,7 @@ export default defineClientConfig({
     app.component("Step", Step);
     
     if (typeof window !== "undefined") {
-      embedChatbot();
+      if (SHOW_DOCUMENT_ASSISTANT) embedChatbot();
 
       // 发布后旧 hash chunk 被删，路由懒加载失败时整页跳到目标路径；同一路径只跳一次，避免死循环
       const chunkReloadKey = "vuepress:chunk-reload";
@@ -65,5 +68,5 @@ export default defineClientConfig({
     WjxLayout,
     InstanceSearchLayout,
   },
-  rootComponents: [FeedBack],
+  rootComponents: SHOW_DOCUMENT_FEEDBACK ? [FeedBack] : [],
 });
