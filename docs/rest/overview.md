@@ -1,4 +1,4 @@
-# Server-Side API Overview
+# Server API Overview
 
 <Toc />
 

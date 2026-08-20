@@ -231,6 +231,11 @@ export default defineUserConfig({
       './components/MarkdownContent.vue'
     ),
 
+    '@theme-hope/components/BreadCrumb': path.resolve(
+      __dirname,
+      './components/BreadCrumb.vue'
+    ),
+
     '@theme-hope/components/PageNav': path.resolve(
       __dirname,
       './components/PageNav.vue'
