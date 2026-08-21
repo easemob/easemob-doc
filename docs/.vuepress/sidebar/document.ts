@@ -78,23 +78,22 @@ const documentV5Sidebar = [
   { text: "Beginner's Guide", link: "beginner_guide.html" },
   { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
   { text: "Migration Guide", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
-  { text: "Integrate with MCP", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
-  { text: 'Quickstart', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
+  { text: "Integrate with MCP", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side']},
+  { text: 'Quickstart', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
   { text: 'Quickstart', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-  { type: "separator", except: ['server-side', 'applet'] } as any,
+  { type: "separator", except: ['server-side'] } as any,
   { text: 'Import the SDK', link: 'integration.html', only: ['android', 'ios', 'harmonyos', 'unity', 'windows']},
   {
     text: 'Integrate the SDK',
     collapsible: true,
     children: [
       { text: 'Import SDK (Web)', link: 'integration.html' },
-      { text: 'Integrate SDK (Mini Program)', link: 'integration_applet.html' },
       { text: 'Integrate SDK (uni-app)', link: 'uniapp.html' },
     ],
     only: ['web']
   },
   { text: 'Add Dependencies', link: 'integration.html', only: ['flutter', 'react-native']},
-  { text: 'Initialization', link: 'initialization.html', except: ['server-side', 'applet']},
+  { text: 'Initialization', link: 'initialization.html', except: ['server-side']},
   {
     text: 'Login',
     collapsible: true,
@@ -103,7 +102,7 @@ const documentV5Sidebar = [
       { text: 'Connection', link: 'connection.html' },
       { text: 'Multi-Device Login', link: 'multi_device.html' },
     ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
   },
   {
     text: 'User Management',
@@ -114,7 +113,7 @@ const documentV5Sidebar = [
       { text: 'Automatic User Information Management', link: 'userinfo_provider.html', only: ['android', 'ios', 'web', 'harmonyos']},
       { text: 'Presence Subscription', link: 'presence.html' },
     ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
   },
   {
     text: 'Message Management',
@@ -141,7 +140,7 @@ const documentV5Sidebar = [
       { text: 'Message Moderation (Reporting)', link: 'moderation.html', except: ['harmonyos']},
       { text: 'Message Traffic Statistics', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
       },
   {
     text: 'Conversation Management',
@@ -156,7 +155,7 @@ const documentV5Sidebar = [
       { text: 'Conversation Marks', link: 'conversation_mark.html' },
       { text: 'Delete Conversations', link: 'conversation_delete.html' },
     ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
   },  
   {
     text: 'Group Management',
@@ -170,7 +169,7 @@ const documentV5Sidebar = [
       { text: 'Manage Message Threads', link: 'thread.html', except: ['harmonyos'] },
       { text: 'Manage Messages in Threads', link: 'thread_message.html', except: ['harmonyos'] }
     ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
   },
   {
     text: 'Chat Room Management',
@@ -181,7 +180,7 @@ const documentV5Sidebar = [
       { text: 'Manage Chat Room Members', link: 'room_members.html' },
       { text: 'Manage Chat Room Attributes', link: 'room_attributes.html' },
     ],
-    except: ['server-side', 'applet']
+    except: ['server-side']
   },
   {
     text: 'Offline Push',
@@ -236,13 +235,13 @@ const documentV5Sidebar = [
         { text: 'Push Notification Categories', link: 'push/push_message_classification.html', only: ['android'] },
         { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
       ],
-      except: ['applet','server-side']
+      except: ['server-side']
   },
-  { text: 'Error Codes', link: 'error.html', except: ['server-side', 'applet']},
-  { text: 'API Reference', link: 'apireference.html', except: ['server-side', 'applet']},
-  { type: "separator", except: ['server-side', 'applet']} as any,
-  { text: 'Release Notes', link: 'releasenote.html', except: ['server-side', 'applet']},
-  { text: 'Feature Limitations', link: 'limitation.html', except: ['server-side', 'applet']},
+  { text: 'Error Codes', link: 'error.html', except: ['server-side']},
+  { text: 'API Reference', link: 'apireference.html', except: ['server-side']},
+  { type: "separator", except: ['server-side']} as any,
+  { text: 'Release Notes', link: 'releasenote.html', except: ['server-side']},
+  { text: 'Feature Limitations', link: 'limitation.html', except: ['server-side']},
   {
     text: 'FAQs',
     collapsible: true,
@@ -251,165 +250,16 @@ const documentV5Sidebar = [
       { text: 'Implement Message Quotes', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: 'Implement Typing Indicators', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: 'Configure the Server Domain', link: 'serverconfig.html', only: ['web'] },
-      { text: 'Build Apps and Mini Programs with uni-app', link: 'uniappnativeapp.html', only: ['web'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
       { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
     ],
   },
-  { text: 'Get SDK Logs', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
+  { text: 'Get SDK Logs', link: 'log.html', except: ['flutter', 'server-side'] },
   { text: 'FAQs', link: 'faq.html', only: ['react-native'] },
   { text: 'Lite SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   { text: 'Private Cloud SDK IP Address/Domain Configuration', link: 'private_ip_domain.html', only: ['android', 'ios', 'web', 'harmonyos']},
-  { text: 'Compliance Guide', link: 'sdk_compliance.html', except: ['applet']},
+  { text: 'Compliance Guide', link: 'sdk_compliance.html'},
   { text: 'Apple Privacy Policy', link: 'privacy_policy.html', only: ['ios'] },
-  { text: '概述', link: 'overview.html', only: ['applet'] },
-  { type: "separator", only: ['applet']} as any,
-  {
-        text: '集成介绍',
-        collapsible: true,
-        children: [
-          { text: '微信小程序', link: 'wechat.html' },
-          { text: 'QQ 小程序', link: 'qq.html' },
-          { text: '百度小程序', link: 'baidu.html' },
-          { text: '抖音小程序', link: 'bytedance.html' },
-          { text: '支付宝小程序', link: 'alipay.html' },
-          { text: 'Uniapp 全平台', link: 'uniapp.html' },
-        ],
-        only: ['applet']
-  },
-  { text: '初始化', link: 'initialization.html', only: ['applet'] },
-  {
-        text: '登录',
-        collapsible: true,
-        children: [
-          { text: '登录介绍', link: 'login.html' },
-          { text: '连接', link: 'connection.html' },
-          { text: '多设备登录', link: 'multi_device.html' },
-        ], 
-        only: ['applet'] 
-  },
-  {
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户关系', link: 'user_relationship.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'presence.html' },
-        ],
-        only: ['applet']
-  },        
-  {
-        text: '消息管理',
-        collapsible: true,
-        children: [
-          { text: '消息概述', link: 'message_overview.html' },
-          { text: '发送消息', link: 'message_send.html' },
-          { text: '接收消息', link: 'message_receive.html' },
-          { text: '接收流式消息', link: 'message_stream_receive.html' },
-          { text: '获取历史消息', link: 'message_retrieve.html' },
-          { text: '撤回消息', link: 'message_recall.html' },
-          { text: '搜索消息', link: 'message_search_server.html' },
-          { text: '消息回执', link: 'message_receipt.html' }, 
-          { text: '消息表情回复', link: 'reaction.html' },
-          { text: '编辑消息', link: 'message_modify.html' },
-          { text: '删除消息', link: 'message_delete.html' },
-          { text: '定向消息', link: 'message_target.html' }, 
-          { text: '消息扩展', link: 'message_extension.html' },    
-          { text: '置顶消息', link: 'message_pin.html' }, 
-          { text: '翻译消息', link: 'message_translation.html' },
-          { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
-          { text: '消息审核（举报）', link: 'moderation.html'},      
-        ],
-        only: ['applet']
-  },
-  {
-        text: '会话管理',
-        collapsible: true,
-        children: [
-          { text: '会话介绍', link: 'conversation_overview.html' },
-          { text: '会话列表', link: 'conversation_list.html' },
-          { text: '会话已读回执', link: 'conversation_receipt.html' },
-          { text: '会话未读数', link: 'conversation_unread.html' },
-          { text: '置顶会话', link: 'conversation_pin.html' },
-          { text: '会话标记', link: 'conversation_mark.html'},
-          { text: '删除会话', link: 'conversation_delete.html'},
-        ],
-        only: ['applet']
-  },
-  {
-        text: '群组管理',
-        collapsible: true,
-        children: [
-          { text: '群组概述', link: 'group_overview.html' },
-          { text: '创建和管理群组', link: 'group_manage.html' },
-          { text: '管理群组成员', link: 'group_members.html' },
-          { text: '管理群组属性', link: 'group_attributes.html' },
-          {
-            text: '消息话题管理',
-            collapsible: true,
-            children: [
-              { text: '管理消息话题', link: 'thread.html' },
-              { text: '管理消息话题中的消息', link: 'thread_message.html' }
-            ]
-          },
-        ],
-        only: ['applet']
-  },
-  {
-        text: '聊天室管理',
-        collapsible: true,
-        children: [
-          { text: '聊天室概述', link: 'room_overview.html' },
-          { text: '创建和管理聊天室', link: 'room_manage.html' },
-          { text: '管理聊天室成员', link: 'room_members.html' },
-          { text: '管理聊天室属性', link: 'room_attributes.html' },
-        ],
-        only: ['applet']
-  },
-  { text: '离线推送', 
-        collapsible: true,
-        children: [
-        { text: '离线推送概述', link: 'push/push_overview.html' }, 
-        { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html' },
-        { text: '设置推送模板', link: 'push/push_template.html' },
-        { text: '设置推送翻译', link: 'push/push_translation.html' },
-        { text: '设置推送扩展功能', link: 'push/push_extension.html' },
-        { text: 'uni-app 离线推送',
-          collapsible: true, 
-          children: [
-            { text: '使用推送插件', link: 'push/uniapp_push.html' },
-            { text: '集成 FCM', link: 'push/uniapp_push_fcm.html' },
-          ],
-        }
-        ],
-        only: ['applet']
-  }, 
-  {
-    text: '错误排查',
-    collapsible: true,
-    children: [
-      { text: '错误码', link: 'error.html' },
-      { text: '日志', link: 'log.html' },
-    ],
-    only: ['applet']
-  },
-  { text: 'API 参考', link: 'apidoc.html', only: ['applet']},
-  { type: "separator", only: ['applet']} as any,
-  { text: '更新日志', link: 'releasenote.html', only: ['applet']},
-  { text: '特性限制', link: 'limitation.html', only: ['applet']},
-  {
-    text: '其他帮助',
-    collapsible: true,
-    children: [
-      { text: 'Uniapp 生成原生 Android/iOS 应用', link: 'uniappnativeapp.html' },
-      { text: '小程序模板使用指南', link: 'uniappuikit.html' },
-      { text: '如何配置服务器域名', link: 'serverconfig.html' },
-      { text: 'Vue3 项目在 H5 平台发布的注意事项', link: 'vue3_project_h5.html' },
-    ],
-    only: ['applet']
-  },
-  { text: '精简版 SDK', link: 'elite_sdk.html', only: ['applet']},
-  { text: '合规指南', link: 'sdk_compliance.html', only: ['applet']},
   { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },
   { type: "separator", only: ['server-side']} as any,
@@ -909,9 +759,9 @@ const documentV5Sidebar = [
     ],
     only: ['server-side']
   },
-  { text: 'RTC 用量', link: 'rtc_usage_query.html', only: ['server-side'] },
+  /*
   { 
-    text: '内容审核',
+   text: '内容审核',
     collapsible: true,
     children: [
       { text: '主动文本审核', link: 'moderation_text_active.html' },
@@ -933,6 +783,7 @@ const documentV5Sidebar = [
     ],
     only: ['server-side']
   },
+  */
   { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '回调',

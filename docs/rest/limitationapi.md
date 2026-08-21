@@ -1,3 +1,8 @@
+---
+title: RESTful API Call Frequency Limits
+show_content_moderation: false
+---
+
 # RESTful API Call Frequency Limits
 
 <Toc />
@@ -286,11 +291,7 @@ The total default call frequency limit for the user management APIs and offline 
 | Delete an Offline Push Template          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 calls/second/App Key  |          |  
 | Set the Push Template Name for a Receiver   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 calls/second/App Key. |          |  
 
-## Query monthly RTC usage
-
-| RESTful API |Method  | API URL| Maximum API call frequency (default) | Single add-on package size|
-| :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
-| Query Monthly RTC Usage | GET | /{org_name}/{app_name}/billing/rtc/usage-summary?appKey={org_name}%23{app_name}  | 10 calls/10 seconds/App Key | ——  |
+<HideSection :show="$frontmatter.show_content_moderation" :headings="['content-moderation']">
 
 ## Content moderation
 
@@ -313,6 +314,8 @@ The total default call frequency limit for the user management APIs and offline 
 | Query Keywords | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 calls/second/App Key | 50 calls/second  |
 | Delete a Keyword | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word?wordId={word_id} | 100 calls/second/App Key | 50 calls/second  |
 | Delete Keywords in Batches | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 calls/second/App Key | 50 calls/second  |
+
+</HideSection>
 
 ## Post-sending callbacks
 

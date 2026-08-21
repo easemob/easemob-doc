@@ -1,12 +1,21 @@
+---
+title: Search Messages
+show_server_search: false
+---
+
 # Search Messages
 
 ## Feature overview
 
 The message search methods in this document can search all message types except command messages in the local database because command messages are not stored in the local database.
 
+<HideSection :show="$frontmatter.show_server_search">
+
 :::tip
 To search server-side messages, contact the Easemob business team to activate the feature. For details, see [Server-side Message Search](/value-added/search/message_search_android.html).
 :::
+
+</HideSection>
 
 ## Prerequisite
 

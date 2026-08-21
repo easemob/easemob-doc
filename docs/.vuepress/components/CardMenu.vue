@@ -10,7 +10,7 @@
         </p>
       </section>
       <section class="links-section">
-        <div class="links-header">文档链接</div>
+        <div class="links-header">Documentation Links</div>
         <div v-for="sdk in sdks" :key="sdk.text" class="link-item">
           <img
             v-if="sdk.icon"

@@ -1,10 +1,19 @@
+---
+title: Search Messages
+show_server_search: false
+---
+
 # Search Messages
 
 This document describes how the EasyIM Android SDK searches local messages by keyword, search scope, message type, sender, timestamp, and other conditions. The APIs in this document query only the local database on the current user's device and do not send search requests to the server. Because command messages are not stored in the local database, they cannot be searched through these APIs.
 
+<HideSection :show="$frontmatter.show_server_search">
+
 :::tip
 To search server-side messages, contact the Easemob business team to enable the feature. See [Server-side Message Search](/value-added/search/message_search_android.html).
 :::
+
+</HideSection>
 
 ## Prerequisite
 

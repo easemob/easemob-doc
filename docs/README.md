@@ -1,32 +1,30 @@
 ---
 home: true
-title: 首页
+title: Home
 heroText: false
 tagline: false
 products:
   - link: "/product/introduction.html"
-    text: 产品概述
+    text: Product Introduction
   - link: "/product/pricing_policy.html"
-    text: 产品价格
-  - link: "/product/product_dynamics.html"
-    text: 产品动态
-  - link: "/document/android/releasenote.html"
-    text: 最新发版
+    text: Pricing
+  - link: "/sdk/v5/android/releasenote.html"
+    text: Latest Release
   - link: "/product/limitation.html"
-    text: 使用限制
+    text: Feature Limitations
   - link: "https://www.easemob.com/protocol"
-    text: 隐私协议
+    text: Privacy Policy
   - link: "/product/security_best_practices.html"
-    text: 安全最佳实践
+    text: Security Best Practices
   - link: "https://rte-src.vulbox.com/"
-    text: 安全响应中心  
+    text: Security Response Center
     target: '_blank'
 starter:
-  - title: "入门指引"
-    desc: "了解接入环信即时通讯 IM SDK 的整个流程。"
+  - title: "Beginner's Guide"
+    desc: "Learn the complete process for integrating the EasyIM SDK."
     platform:
       - icon: /guide/sdk.svg
-        link: /document/android/beginner_guide.html
+        link: /sdk/v5/android/beginner_guide.html
         text: SDK
       - icon: /guide/uikit.svg
         link: /uikit/chatuikit/android/beginner_guide.html
@@ -36,11 +34,11 @@ starter:
         link: /callkit/android/beginner_guide.html
         text: CallKit
         hidden: true
-  - title: "使用 MCP 集成"
-    desc: "环信 MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供环信 IM 相关文档查询和源码检索能力。"
+  - title: "Integrate with MCP"
+    desc: "The Easemob MCP Server enables MCP-compatible AI coding tools to search EasyIM documentation and source code."
     platform:
       - icon: /guide/sdk.svg
-        link: /document/android/easemob_mcp_server.html
+        link: /sdk/v5/android/easemob_mcp_server.html
         text: SDK
       - icon: /guide/uikit.svg
         link: /uikit/chatuikit/android/easemob_mcp_server.html
@@ -50,47 +48,23 @@ starter:
         link: /callkit/android/easemob_mcp_server.html
         text: CallKit
         hidden: true
-  - title: "SDK 快速开始"
-    desc: "选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。"
+  - title: "SDK Quickstart"
+    desc: "Choose a client SDK and quickly add real-time messaging to your app."
     platform:
       - icon: /sdk/android.svg
-        link: /document/android/quickstart.html
+        link: /sdk/v5/android/quickstart.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /document/ios/quickstart.html
+        link: /sdk/v5/ios/quickstart.html
         text: iOS 
       - icon: /sdk/web.svg
-        link: /document/web/quickstart.html
+        link: /sdk/v5/web/quickstart.html
         text: Web
-      - icon: /sdk/applet.svg
-        link: /document/web/integration_applet.html
-        text: 小程序/Uniapp
-      - icon: /sdk/harmonyos.svg
-        link: /document/harmonyos/quickstart.html
-        text: HarmonyOS 
-      - icon: /sdk/flutter.svg
-        link: /document/flutter/quickstart.html
-        text: Flutter
-      - icon: /sdk/react.svg
-        link: /document/react-native/quickstart.html
-        text: React Native
-      - icon: /sdk/unity.svg
-        link: /document/unity/quickstart.html
-        text: Unity
-      - icon: /sdk/windows.svg
-        link: /document/windows/quickstart.html
-        text: Windows
-  - title: "Demo 体验" 
-    desc: "点击“Demo 体验”按钮立即体验环信 IM 即时通讯功能。"
-    platform:
-      - icon: /sdk/demo_list.svg
-        link: "/product/demo.html"
-        text: Demo 体验 
-  - title: "服务端 API"
-    desc: "可通过 RESTful API 构建即时通讯应用，点击“REST”按钮快速实现即时通讯消息收发等功能。"
+  - title: "Server APIs"
+    desc: "Use the RESTful APIs to implement messaging and resource management from your app server."
     platform:
       - icon: /sdk/rest.svg
-        link: /document/server-side/overview.html
+        link: /rest/overview.html
         text: REST
   - title: "单/群聊 UIKit"
     hidden: true
