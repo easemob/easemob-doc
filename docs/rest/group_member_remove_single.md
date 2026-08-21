@@ -84,7 +84,7 @@ The other fields are described below:
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 ## Error code
 
@@ -95,7 +95,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 403     | forbidden_op | users [XX] are not members of this group! | The user is not in the chat group. | Specify the user ID of a chat group member.|
 | 403     | forbidden_op | forbidden operation on group owner! | The group owner cannot be removed. | Do not specify the group owner's user ID. |
-| 403     | exceed_limit | user XX has joined too many groups! | The user has reached the limit on joined chat groups. | Leave unused chat groups or increase the limit in the [Easemob Console](/product/console/basic_conversation_group_chatroom.html#maximum-number-of-chat-groups-a-user-can-join). |
+| 403     | exceed_limit | user XX has joined too many groups! | The user has reached the limit on joined chat groups. | Leave unused chat groups or increase the limit in the [EasyIM Console](/product/console/basic_conversation_group_chatroom.html#maximum-number-of-chat-groups-a-user-can-join). |
 | 404     | resource_not_found | grpID XX does not exist! | The chat group does not exist. | Use a valid chat group ID. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

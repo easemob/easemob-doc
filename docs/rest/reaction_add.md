@@ -11,7 +11,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 ## Feature activation
 
-To use Reaction, activate it in the [Easemob Console](https://console.easemob.com/user/login). For detailed steps, see the [Easemob Console documentation](/product/console/basic_message.html#message-reactions).
+To use Reaction, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message.html#message-reactions).
 
 ## Call frequency limit
 
@@ -93,8 +93,8 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 
 | HTTP status code | Error type    | Error message      | Possible cause      | Recommendation        |
 |:---------|:--------------------|:-----------|:----------|:------------|
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction is not activated. | Activate the Reaction service in the Easemob Console. |
-| 400      | Bad Request         | The quantity has exceeded the limit!  | The number of Reactions on a message has reached the limit.| By default, you can add 20 Reactions to each message. To increase this limit, contact the Easemob business team.|
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction is not activated. | Activate the Reaction service in the EasyIM Console. |
+| 400      | Bad Request         | The quantity has exceeded the limit!  | The number of Reactions on a message has reached the limit.| By default, you can add 20 Reactions to each message. To increase this limit, contact the EasyIM business manager.|
 | 400      | Bad Request                | the user operation is illegal!                      | The user is not a participant in the conversation. | Only conversation participants can operate on Reactions.       |
 | 400      | Bad Request                | the user is already operation this message                      | The same user added the same Reaction more than once. | A user cannot add the same Reaction more than once.     |
 

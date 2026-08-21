@@ -43,7 +43,7 @@ The Android SDK creates different message types through different static methods
 
 ## API call frequency limit
 
-By default, the SDK does not limit the frequency at which a single user sends messages. If you have contacted the Easemob business team to configure a per-user sending frequency limit, the SDK returns error code `509` (`MESSAGE_CURRENT_LIMITING`) when a user's sending frequency in one-to-one chats, group chats, or chat rooms exceeds the limit.
+By default, the SDK does not limit the frequency at which a single user sends messages. If you have contacted the EasyIM business manager to configure a per-user sending frequency limit, the SDK returns error code `509` (`MESSAGE_CURRENT_LIMITING`) when a user's sending frequency in one-to-one chats, group chats, or chat rooms exceeds the limit.
 
 ## Send text messages
 
@@ -162,7 +162,7 @@ An image message typically involves the following three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
 - Large image: An image proportionally compressed from the original and uploaded by the SDK client. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This image is typically displayed on the chat details page.
-- Thumbnail: An image proportionally compressed by the server from the original. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [Easemob Console](/product/console/basic_message.html#图片消息缩略图). Thumbnails are typically used for lightweight displays such as conversation and chat lists.
+- Thumbnail: An image proportionally compressed by the server from the original. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message.html#图片消息缩略图). Thumbnails are typically used for lightweight displays such as conversation and chat lists.
 
 #### Sending process
 
@@ -774,7 +774,7 @@ Text, location, command, and custom messages typically do not involve attachment
 
 - Set whether the sender receives replaced content after moderation.
 
-By default, content replaced during moderation is delivered only to the recipient. For the sender to also receive the replacement, **contact the Easemob business team to enable the permission** and set `EMOptions#setUseReplacedMessageContents` to `true` during SDK initialization. After it is enabled, the sender receives the new content when a message is replaced during moderation. If the setting is disabled, which is the default, the sender retains the original sent content and is not notified of the replacement.
+By default, content replaced during moderation is delivered only to the recipient. For the sender to also receive the replacement, **contact the EasyIM business manager to enable the permission** and set `EMOptions#setUseReplacedMessageContents` to `true` during SDK initialization. After it is enabled, the sender receives the new content when a message is replaced during moderation. If the setting is disabled, which is the default, the sender retains the original sent content and is not notified of the replacement.
 
 #### Message size and storage limitations
 

@@ -141,7 +141,7 @@ The chat room blocklist prevents specified users from joining or remaining in th
 The chat room owner or an admin can call `blockMembers` to add specified members to the chat room blocklist. After being added to the blocklist, a member receives the `onMembersExited` callback event.
 
 - A member added to the blocklist is removed from the chat room and can no longer send or receive chat room messages.
-- By default, the other chat room members do not receive this event notification. To enable this type of event notification, contact the Easemob business team.
+- By default, the other chat room members do not receive this event notification. To enable this type of event notification, contact the EasyIM business manager.
 - Before a member on the blocklist can rejoin the chat room, the chat room owner or an admin must remove the member from the blocklist.
 
 ```typescript

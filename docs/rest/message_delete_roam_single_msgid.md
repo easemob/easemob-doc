@@ -65,7 +65,7 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 
 | HTTP status code | Error type      | Error message                                          | Possible cause            | Recommendation           |
 |:---------|:-------------------|:----------------------------------------------|:----------------|:---------------|
-| 400      | service open exception  | this appKey not open message roaming   | Message roaming is not enabled.  | Contact the Easemob business team to enable it.  |
+| 400      | service open exception  | this appKey not open message roaming   | Message roaming is not enabled.  | Contact the EasyIM business manager to enable it.  |
 | 400      | param exception  | delete msg list limit can not greater than 50 | The number of message IDs to delete in a single request exceeds the limit of 50. | Reduce the number of message IDs in a single deletion request. |
 | 400      | Bad Request  | Bad Request    | A required parameter, such as the query parameter `userId` or `msgIdList`, is missing. | Check whether the parameters are passed correctly.  |
 

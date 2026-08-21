@@ -8,7 +8,7 @@ This document describes how to use the EasyIM Web SDK to create and manage messa
 
 ## Feature activation
 
-Before using message threads, contact the Easemob business team to enable the feature.
+Before using message threads, contact the EasyIM business manager to enable the feature.
 
 ## Prerequisite
 
@@ -17,7 +17,7 @@ Before you begin, ensure that the following requirements are met:
 - You have initialized and logged in to the SDK. For details, see [Quickstart](quickstart.html).
 - You registered `ChatThreadManager` during SDK initialization.
 - You understand the limits on message threads and their number of members. For details, see [Limitations](/product/limitation.html).
-- You contacted the Easemob business team to enable message threads.
+- You contacted the EasyIM business manager to enable message threads.
 
 ## Create a message thread
 

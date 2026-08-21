@@ -15,13 +15,13 @@ The following image shows message delivery and read receipts:
 - One-to-one conversations support message delivery receipts and message read receipts.
 - Group conversations support message read receipts but not message delivery receipts.
 - Chat rooms currently support neither message delivery receipts nor message read receipts.
-- **To use group message read receipts, [enable the feature in the Easemob Console](/product/console/basic_message.html#群聊消息已读回执).**
+- **To use group message read receipts, [enable the feature in the EasyIM Console](/product/console/basic_message.html#群聊消息已读回执).**
 
 ## Prerequisite
 
 - You have completed [SDK initialization](initialization.html) and implemented account registration and login.
 - You have registered `ChatManager` and use `client.chatManager` to call the message, receipt, and event-monitoring APIs in this document.
-- To use group message read receipts, you have [enabled the feature in the Easemob Console](/product/console/basic_message.html#群聊消息已读回执).
+- To use group message read receipts, you have [enabled the feature in the EasyIM Console](/product/console/basic_message.html#群聊消息已读回执).
 - You understand the EasyIM limitations. For details, see [Limitations](/product/limitation.html).
 
 ## Understand the tech
@@ -181,11 +181,11 @@ The following table lists the limitations of group message read receipts:
 
 | Limitation       | Default       | Description                                                         |
 | :------- | :------- | :-------------- |
-| Feature activation       | Disabled       | To use this feature, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [Easemob Console](https://console.easemob.com/user/login). If the feature is not enabled, the SDK returns error code `505` with the key `SERVICE_NOT_ENABLED`. |
-| Permission       | All group members | By default, all group members can request group message read receipts when sending messages. To limit this feature to the group owner and group admins, contact the Easemob business team. If this setting is enabled and a regular member sends a message that requires a group message read receipt, the SDK returns error code `603` with the key `GROUP_PERMISSION_DENIED`.    |
+| Feature activation       | Disabled       | To use this feature, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [EasyIM Console](https://console.easemob.com/user/login). If the feature is not enabled, the SDK returns error code `505` with the key `SERVICE_NOT_ENABLED`. |
+| Permission       | All group members | By default, all group members can request group message read receipts when sending messages. To limit this feature to the group owner and group admins, contact the EasyIM business manager. If this setting is enabled and a regular member sends a message that requires a group message read receipt, the SDK returns error code `603` with the key `GROUP_PERMISSION_DENIED`.    |
 | Read receipt validity period | 3 days       | The default validity period for group message read receipts is 3 days. After this period, the server no longer records new read states for the message, and the SDK returns error code `506` with the key `MESSAGE_EXPIRED`. |
 | Group size   | 200 members | This feature currently supports groups with up to 200 members. If the group size exceeds this limit, group messages may no longer produce valid read receipt statistics. If the server returns `limit send group ack msg`, the SDK may return error code `4` with the key `SERVICE_LIMIT_EXCEEDED`. |
-| Who can view the read count   | Message sender | By default, only the sender can view the read count or list of members who have read a group message. To allow all group members to view this information, contact the Easemob business team to enable the option. |
+| Who can view the read count   | Message sender | By default, only the sender can view the read count or list of members who have read a group message. To allow all group members to view this information, contact the EasyIM business manager to enable the option. |
 
 :::tip
 A message's read receipt remains valid for as long as the message is stored on the server. Read receipts can be sent throughout the server-side storage period. The storage period depends on your plan. For details, see [EasyIM Plan Features](/product/product_package_feature.html). 

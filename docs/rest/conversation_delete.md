@@ -84,7 +84,7 @@ The other fields in the response body are described below:
 | `entities`        | JSON Array   | Response entities. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the HTTP request to receiving the response, in milliseconds.                                     |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 

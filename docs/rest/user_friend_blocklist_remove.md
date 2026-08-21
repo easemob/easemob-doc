@@ -9,7 +9,7 @@
 
 ## Feature activation
 
-Before using this API, activate the blocklist feature for free in the Easemob Console. For details, see [Easemob Console documentation](/product/console/basic_user.html#user-blocklist).
+Before using this API, activate the blocklist feature for free in the EasyIM Console. For details, see [EasyIM Console documentation](/product/console/basic_user.html#user-blocklist).
 
 ## Call frequency limit
 
@@ -92,7 +92,7 @@ The other fields in the response are described below:
 | `timestamp`          | Long   | Unix timestamp of the HTTP response, in milliseconds. |
 | `duration`           | Long   | Duration from sending the HTTP request to receiving the response, in milliseconds. |
 | `organization`       | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName`    | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName`    | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Error code](#error-code) for possible causes.
 

@@ -7,7 +7,7 @@ After a chat group is successfully banned or unbanned, the EasyIM server sends a
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
@@ -40,11 +40,11 @@ This event is triggered when you call a RESTful API to [ban](/document/server-si
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `paylod`       | Object | Event content.                                                     |
 |  - `disabled`| Boolean | <br/> - `true`: Ban  <br/> - `false`: Unban |
 |  - `type`   | String | `DISABLE`: A ban or unban operation.  |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`       | String | Chat group ID.                                                 |
 | `type`         | String | Distinguishes a chat group event from a chat room event. Because chat rooms do not have ban or unban events, this event applies only to chat groups, and the value can only be `GROUP`.   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |

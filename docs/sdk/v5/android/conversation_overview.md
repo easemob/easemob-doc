@@ -12,7 +12,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
 - Understand the EasyIM API [limitations](/product/limitation.html).
-- To use value-added features such as the server-side conversation list, conversation pinning, or conversation tags, activate the corresponding features in Easemob Console.
+- To use value-added features such as the server-side conversation list, conversation pinning, or conversation tags, activate the corresponding features in EasyIM Console.
 
 ## Conversation model
 

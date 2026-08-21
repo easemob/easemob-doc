@@ -54,7 +54,7 @@ With multi-device login, the current user's other online devices receive `EMMult
 
 :::tip 
 1. After `removeMessagesFromServer` succeeds, the SDK removes the corresponding messages from the current device's in-memory conversation cache. The primary purpose of this API is to delete historical messages stored for the current user on the server. Refresh the message list in the success callback to avoid continuing to display old data. 
-2. Chat room message roaming is disabled by default. To enable it, contact the Easemob business team.
+2. Chat room message roaming is disabled by default. To enable it, contact the EasyIM business manager.
 :::
 
 Example code:

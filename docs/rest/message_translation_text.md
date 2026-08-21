@@ -7,7 +7,7 @@
 
 ## Feature activation
 
-Text message translation is a value-added service. To use this feature, **contact the Easemob business team to enable it**.
+Text message translation is a value-added service. To use this feature, **contact the EasyIM business manager to enable it**.
 
 ## Call frequency limit
 
@@ -89,6 +89,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | 400   | An input text is missing or invalid  | The `text` parameter is missing from the request or its content is invalid.    | The `text` parameter is required and must contain valid content.      |
 | 400   | The target language is missing or invalid  | The `to` parameter is missing from the request or its content is invalid.     | The `to` parameter is required and must contain valid content.     |
 | 400   | The input text is too long                  | The content passed in the `text` parameter is too long.    | Pass no more than 10,000 characters in the `text` parameter. Calculate the character count by multiplying the number of text characters to translate by the number of target languages, that is, the number of characters in `text` multiplied by the number of target languages in `to`. For example, if `text` contains 500 characters and `to` contains 4 target language codes, the text counts as 2000 characters.    |
-| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the Easemob business team to increase the limit, or reduce the call frequency.      |
+| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the EasyIM business manager to increase the limit, or reduce the call frequency.      |
 | 400   | InternalTranslateFailedException                  | An error occurred in the Microsoft Azure translation service.   |       |
-| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the Easemob business team to enable it before calling the API.      |
+| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the EasyIM business manager to enable it before calling the API.      |

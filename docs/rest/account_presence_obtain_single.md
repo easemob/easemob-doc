@@ -59,7 +59,7 @@ If the returned HTTP status code is `200`, the request is successful. The `data`
 
 | Field   | Type | Description         |
 | :----- | :--- | :---------------------- |
-| `data` | JSON | The user's presence data.<br/> The data is in the format `"user ID": "current status"`. For example, user1's online and offline states are `"user1": "online"` and `"user1": "offline"`, respectively. <br/> - `online`: The client has established a persistent connection to the EasyIM server after login.<br/> - `offline`: The iOS or Android process has been killed, or the connection has been interrupted due to network issues. The user enters the `offline` state and can receive offline push notifications for messages, provided that a push certificate has been uploaded in the Easemob Console and the offline push service has been integrated. |
+| `data` | JSON | The user's presence data.<br/> The data is in the format `"user ID": "current status"`. For example, user1's online and offline states are `"user1": "online"` and `"user1": "offline"`, respectively. <br/> - `online`: The client has established a persistent connection to the EasyIM server after login.<br/> - `offline`: The iOS or Android process has been killed, or the connection has been interrupted due to network issues. The user enters the `offline` state and can receive offline push notifications for messages, provided that a push certificate has been uploaded in the EasyIM Console and the offline push service has been integrated. |
 
 The other fields in the response body are described below:
 

@@ -10,7 +10,7 @@ You can unsubscribe from the presence of up to 100 users at a time.
 
 ## Feature activation
 
-Before using Presence, activate it in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+Before using Presence, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
 
 ## Call frequency limit
 
@@ -70,7 +70,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :---------- | :--- | :----------- | :-------------- | :-- |
 | 400         | illegal_argument       | usernames cannot be null       | The array of user IDs whose presence is to be unsubscribed from is empty.    | Ensure that the array of user IDs whose presence is to be unsubscribed from is not empty.  |
 | 400         | illegal_argument       | too many unsub presences      | The list of users whose presence is to be unsubscribed from exceeds 100 user IDs. | Limit the list of users whose presence is to be unsubscribed from to no more than 100 user IDs. |
-| 400         | service open exception | the app not open presence      | The Presence service is not activated.        | Contact the Easemob business team to activate the Presence service.   |
+| 400         | service open exception | the app not open presence      | The Presence service is not activated.        | Contact the EasyIM business manager to activate the Presence service.   |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect.  | Use a new token to access the API.  |
 
 For other errors, see [Response status codes](error.html) for possible causes.

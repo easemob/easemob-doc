@@ -13,9 +13,9 @@ When the client disconnects, the app process closes, or the user goes offline fo
 
 ## Upload a push certificate
 
-In addition to ensuring that the user is offline, to use third-party offline push, configure the push certificate or channel parameters in the [Easemob Console](https://console.easemob.com/user/login). For vendor-specific certificate configuration, see [Android Push](/document/android/push/push_fcm.html) and [APNs Push](/document/ios/push/push_apns.html).
+In addition to ensuring that the user is offline, to use third-party offline push, configure the push certificate or channel parameters in the [EasyIM Console](https://console.easemob.com/user/login). For vendor-specific certificate configuration, see [Android Push](/document/android/push/push_fcm.html) and [APNs Push](/document/ios/push/push_apns.html).
 
-In the SDK, call `client.pushManager.uploadPushToken` to upload a push token. Before calling it, initialize and log in to the SDK and obtain the `deviceToken` assigned by the vendor push channel. `deviceId` identifies the current device, and `notifierName` corresponds to the push-certificate name or channel identifier configured in the Easemob Console.
+In the SDK, call `client.pushManager.uploadPushToken` to upload a push token. Before calling it, initialize and log in to the SDK and obtain the `deviceToken` assigned by the vendor push channel. `deviceId` identifies the current device, and `notifierName` corresponds to the push-certificate name or channel identifier configured in the EasyIM Console.
 
 ```typescript
 await client.pushManager.uploadPushToken({
@@ -29,9 +29,9 @@ await client.pushManager.uploadPushToken({
 
 ### Feature activation
 
-[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [Do Not Disturb](push_notification_mode_dnd.html#do-not-disturb), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [Easemob Console](https://console.easemob.com/user/login). **After activation, to disable advanced push features, you must contact the Easemob business team because this operation deletes all configurations related to the advanced features.**
+[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [Do Not Disturb](push_notification_mode_dnd.html#do-not-disturb), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easemob.com/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
-1. Log in to the [Easemob Console](https://console.easemob.com/user/login).
+1. Log in to the [EasyIM Console](https://console.easemob.com/user/login).
 2. Select **App Management** at the top of the page. On the app list page that appears, click **Manage** in the **Actions** column for your app.
 3. Select **Value-added Services > Message Push > Offline Push**.
 4. Click **Enable for Free**.
@@ -63,13 +63,13 @@ For details, see [Do Not Disturb](push_notification_mode_dnd.html#do-not-disturb
 
 ### Push templates
 
-Push templates are primarily used to configure global push titles and content when the default offline-push content provided by the server does not meet your requirements. Push templates include the default templates `default` and `detail` and custom templates. Configure them in the [Easemob Console](https://console.easemob.com/user/login).
+Push templates are primarily used to configure global push titles and content when the default offline-push content provided by the server does not meet your requirements. Push templates include the default templates `default` and `detail` and custom templates. Configure them in the [EasyIM Console](https://console.easemob.com/user/login).
 
 For push-template configuration and usage, see [Push Templates](push_template.html).
 
 ## Multi-device offline push policy
 
-For multi-device login, configure the push policy on the **Certificate Management** page in the [Easemob Console](https://console.easemob.com/user/login). The policy applies to all push channels:
+For multi-device login, configure the push policy on the **Certificate Management** page in the [EasyIM Console](https://console.easemob.com/user/login). The policy applies to all push channels:
 
 - Send push messages only when all devices are offline.
 - Send push messages when any device is offline.

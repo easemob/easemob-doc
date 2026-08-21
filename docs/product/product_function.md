@@ -47,7 +47,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Single-platform login | Only 1 of the following platforms can be online: Android, iPhone, iPad, HarmonyOS, Windows, Mac, or Web. |
 | Multi-platform login | Up to 4 devices can be online simultaneously on each platform by default. |
 
-Before using multi-device login, find **Multiple Platforms and Devices** on the **Feature Configuration** > **Basic Features** > **Users** page of the [Easemob Console](https://console.easemob.com/user/login) and enable it. Then click **Settings** and configure the number of devices for each platform in the dialog box.
+Before using multi-device login, find **Multiple Platforms and Devices** on the **Feature Configuration** > **Basic Features** > **Users** page of the [EasyIM Console](https://console.easemob.com/user/login) and enable it. Then click **Settings** and configure the number of devices for each platform in the dialog box.
 
 ## Message types
 
@@ -80,7 +80,7 @@ Before using multi-device login, find **Multiple Platforms and Devices** on the 
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
 | Message search  | Search for all message types in server-side and local conversations by keyword.     |
-| Message recall       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the Easemob Console, up to 7 days. |
+| Message recall       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |
@@ -118,7 +118,7 @@ Before using multi-device login, find **Multiple Platforms and Devices** on the 
 
 ## User relationships
 
-By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [Easemob Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
 
 | Feature       | Description |
 | :-------------- | :----- |
@@ -155,18 +155,18 @@ By default, EasyIM supports sending one-to-one messages between non-friends, mea
 | Role change notifications         | Notifications are delivered by default when a chat group admin is added or removed or ownership changes     | Notifications are delivered by default when a chat room admin is added or removed or ownership changes     |
 | Chat group/chat room attribute change notifications   | Notifications are delivered by default when the chat group name, description, or announcement changes     | Notifications are delivered by default when the chat room name, description, announcement, or custom attributes change     |
 | Chat group/chat room member status change notifications         | Notifications are delivered by default when a member is muted or added to the blocklist or allowlist, or when an admin changes      | Notifications are delivered by default when a member is muted or added to the blocklist or allowlist, or when an admin changes     |
-| Message features     | <br/> - Support message sending, roaming, editing, recall, pinning, receipts, Reactions, translation, combination, forwarding, delivery only to online users, and more.<br/> - Support targeted messages sent only to one or more specified members.    | <br/> - Support most chat group message features, including targeted messages.<br/> - To use message roaming, upgrade the SDK to the specified version and contact the Easemob business team to activate it.<br/> - Reactions and offline messages are not supported.     | 
+| Message features     | <br/> - Support message sending, roaming, editing, recall, pinning, receipts, Reactions, translation, combination, forwarding, delivery only to online users, and more.<br/> - Support targeted messages sent only to one or more specified members.    | <br/> - Support most chat group message features, including targeted messages.<br/> - To use message roaming, upgrade the SDK to the specified version and contact the EasyIM business manager to activate it.<br/> - Reactions and offline messages are not supported.     | 
 | Historical message storage         | Supported     |  Supported    |
-| View roaming messages         | Enabled by default     | Contact the Easemob business team to activate     |
-| View roaming messages sent before joining          |  Supported    | Supported (contact the Easemob business team to activate)    |
+| View roaming messages         | Enabled by default     | Contact the EasyIM business manager to activate     |
+| View roaming messages sent before joining          |  Supported    | Supported (contact the EasyIM business manager to activate)    |
 | Unread message count          | Supported     | Not supported   |
 | Default message reception          | Receive online messages and support offline push     | Receive only online messages; offline push is not supported    |
 | Offline message storage          | Supported     | Not supported     |
 | Message reliability         | Users receive all messages sent in the chat group     | When the message volume is high, chat room messages above the threshold of 100 messages per second are discarded    |
 
-## Easemob Console
+## EasyIM Console
 
-You can configure and manage your app in the [Easemob Console](https://console.easemob.com/user/login).
+You can configure and manage your app in the [EasyIM Console](https://console.easemob.com/user/login).
 
 | Feature   | Description  | 
 | :------ | :----------- | 

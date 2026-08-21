@@ -45,7 +45,7 @@ With multi-device login, after deletion succeeds, the current user's other onlin
 
 :::tip 
 1. `removeHistoryMessages` deletes only the current user's historical messages saved on the server. It does not automatically delete the local message cache on the current device. If your app has saved or displayed these messages locally, update the local message list after the call succeeds.
-2. Chat room message roaming is disabled by default. To use this feature, contact the Easemob business team.
+2. Chat room message roaming is disabled by default. To use this feature, contact the EasyIM business manager.
 :::
 
 - Delete by message ID

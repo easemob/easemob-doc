@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Messages in a message thread are group message types. They differ from regular chat group messages in that they require the `isChatThreadMessage` flag. Before using messages in message threads, contact the Easemob business team to activate the feature.
+Messages in a message thread are group message types. They differ from regular chat group messages in that they require the `isChatThreadMessage` flag. Before using messages in message threads, contact the EasyIM business manager to activate the feature.
 
 This page describes how the EasyIM Android SDK sends, receives, and recalls messages in message threads.
 
@@ -18,7 +18,7 @@ The following figure shows how a message thread is created and viewed:
 
 ## Feature activation
 
-Before using message threads, contact the Easemob business team to activate the feature.
+Before using message threads, contact the EasyIM business manager to activate the feature.
 
 ## Prerequisite
 
@@ -26,7 +26,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
 - Understand the EasyIM [limitations](/product/limitation.html).
-- Contact the Easemob business team to activate message threads.
+- Contact the EasyIM business manager to activate message threads.
 
 ## Send messages in a message thread
 

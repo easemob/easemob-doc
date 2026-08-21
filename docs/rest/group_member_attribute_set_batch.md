@@ -109,7 +109,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 400     | metadata_error | Some users are not in the group: user99 | Some users are not in the chat group. | Add the users to the group chat or remove them from the request. |
 | 400     | metadata_error | exceeds chatgroup metadata batch put users limit | The batch size exceeds the limit. | Specify no more than 20 chat group members in a request. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
-| 403     | metadata_error | chatgroup user metadata service not allow | The function of customizing chat group member attributes is not enabled. | Contact the Easemob business team for activation. |
+| 403     | metadata_error | chatgroup user metadata service not allow | The function of customizing chat group member attributes is not enabled. | Contact the EasyIM business manager for activation. |
 | 404     | metadata_error | group not exists | The chat group does not exist. | Check whether the group_id in the request is valid. |
 | 409     | metadata_error | Failed to operate user metadata. Concurrent operation not allowed | Concurrent requests attempted to modify the same user's metadata. | Avoid concurrent operations on the same user. Pass all metadata required for a user in a single request. |
 

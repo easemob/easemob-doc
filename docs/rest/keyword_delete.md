@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Delete a keyword.
-- In the [Easemob Console](https://console.easemob.com/user/login), you can also [delete keywords](/value-added/moderation/moderation_keyword.html#delete-keywords).
+- In the [EasyIM Console](https://console.easemob.com/user/login), you can also [delete keywords](/value-added/moderation/moderation_keyword.html#delete-keywords).
 
 ## Call frequency limit
 

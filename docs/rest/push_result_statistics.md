@@ -1,12 +1,12 @@
 # Retrieve Offline Push Result Statistics
 
-To retrieve offline push results, contact the Easemob business team to activate this feature. After activation, the EasyIM offline push service generates push result messages.
+To retrieve offline push results, contact the EasyIM business manager to activate this feature. After activation, the EasyIM offline push service generates push result messages.
 
 ## Ways to retrieve offline push results
 
 You can retrieve offline push results in the following ways:
 
-- View IM message delivery queries in the [Easemob Console](https://console.easemob.com/user/login):
+- View IM message delivery queries in the [EasyIM Console](https://console.easemob.com/user/login):
   - In **App List**, click **Manage** in the **Actions** column for the target app to open the **App Overview** page.
   - Select **Instant Messaging > Real-Time Query > IM Message Delivery Query** to view push result records, as shown below:
 
@@ -126,7 +126,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 
 | HTTP status code | Error type         | Error message       | Possible cause            | Recommendation             |
 | :---------- | :--------------- | :------------------ | :-------------- | :--------------- |
-| 403         | forbidden_op     |        | The offline push result statistics feature is not activated.                               | Contact the Easemob business team to activate the feature.                                     |
+| 403         | forbidden_op     |        | The offline push result statistics feature is not activated.                               | Contact the EasyIM business manager to activate the feature.                                     |
 | 401         | unauthorized     | Unable to authenticate (OAuth)                               | The token is invalid, expired, or incorrect.                        | Use a new token.                                        |
 
 For other errors, see [Response status codes](error.html) for possible causes.

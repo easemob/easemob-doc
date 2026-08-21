@@ -7,7 +7,7 @@ When a member leaves a chat group or chat room voluntarily, is removed, or leave
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Leave voluntarily
 
@@ -73,12 +73,12 @@ The following examples show chat room leave events.
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user who leaves the chat group or chat room.        |
 | `payload.action` | JSON | This field applies only to chat room leave events, not chat group leave events:<br/> - `user_quit`: The user voluntarily leaves the chat room.<br/> - `user_offline`: The user leaves the chat room because they are offline. |
 | `payload.type` | Array  | Leave method: `QUIT` indicates that a user voluntarily leaves a chat group or chat room, or leaves a chat room because they are offline.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -93,7 +93,7 @@ The following examples show chat room leave events.
 
 - A user is removed from a [chat group](/document/android/group_manage.html#remove-a-member) or [chat room](/document/android/room_manage.html#be-removed) on the client.
 - A [RESTful API is called to remove a user from a chat group](/document/server-side/group_member_remove_single.html) or [chat room](/document/server-side/chatroom_member_remove_single.html).
-- In the [Easemob Console](https://console.easemob.com/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
+- In the [EasyIM Console](https://console.easemob.com/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 
@@ -127,11 +127,11 @@ The following example shows an event generated when a user is removed from a cha
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user removed from the chat group or chat room.        |
 | `payload.type` | Array  | Leave method: `KICK` indicates that a user is removed from a chat group or chat room.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -146,7 +146,7 @@ The following example shows an event generated when a user is removed from a cha
 
 - A user leaves a chat group or chat room after being added to the [chat group blocklist](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/document/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
 - A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/document/server-side/group_member_blocklist_add_single.html) or [chat room blocklist](/document/server-side/chatroom_member_blocklist_add_single.html).
-- In the [Easemob Console](https://console.easemob.com/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
+- In the [EasyIM Console](https://console.easemob.com/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 
@@ -180,11 +180,11 @@ The following example shows an event generated when a user is added to the group
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user who leaves after being added to the chat group or chat room blocklist.        |
 | `payload.type` | Array  | Leave method: `BLOCK` indicates that a user leaves a chat group or chat room after being added to its blocklist.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -199,7 +199,7 @@ The following example shows an event generated when a user is added to the group
 
 - Users leave when a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) is destroyed on the client.
 - Users leave when a RESTful API is called to [destroy a chat group](/document/server-side/group_delete.html) or [chat room](/document/server-side/chatroom_delete.html).
-- In the [Easemob Console](https://console.easemob.com/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
+- In the [EasyIM Console](https://console.easemob.com/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
 
 ### Webhook request
 
@@ -232,14 +232,14 @@ The following example shows an event generated when a user is added to the group
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `operation`    | String | Operation. The value is `LEAVE` when a user leaves a chat group or chat room. |
 | `operator`     | String | Operator.                     |
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | IDs of users who leave after the chat group or chat room is destroyed.        |
 | `payload.type` | Array  | Leave method: `DELETE` indicates that users leave a chat group or chat room after it is destroyed.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |

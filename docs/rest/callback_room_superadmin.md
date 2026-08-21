@@ -7,7 +7,7 @@ After a chat room superadmin is added or removed successfully, the EasyIM server
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add a superadmin
 
@@ -44,11 +44,11 @@ A RESTful API is called to [add a chat room superadmin](/document/server-side/ch
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the added chat room superadmin. |
 | `payload.type` | String | Event for adding a chat room superadmin. The value is `ADD`.  |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.                                |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat room ID.                                                 |
 | `type`         | String | Event type. The value is `CHATROOM`, indicating a chat room event.     |
 | `event`        | String | Event name. The value is fixed as `group_op_event`. |
@@ -92,11 +92,11 @@ A RESTful API is called to [remove a chat room superadmin](/document/server-side
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the removed chat room superadmin. |
 | `payload.type` | String | Event for removing a chat room superadmin. The value is `REMOVE`.  |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.                                |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat room ID.                                                 |
 | `type`         | String | Event type. The value is `CHATROOM`, indicating a chat room event.     |
 | `event`        | String | Event name. The value is fixed as `group_op_event`. |

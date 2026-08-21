@@ -9,7 +9,7 @@ The Server SDK 2.0 provides APIs for managing resources such as users, messages,
 ## Prerequisites
 
 - Java 1.8
-- A valid EasyIM developer account, App Key, Client ID, ClientSecret, and BasePath. BasePath is the corresponding RESTful API domain name. In the Easemob Console, go to the **App Overview** page and find the RESTful API server domain name in the **Development Information** section.
+- A valid EasyIM developer account, App Key, Client ID, ClientSecret, and BasePath. BasePath is the corresponding RESTful API domain name. In the EasyIM Console, go to the **App Overview** page and find the RESTful API server domain name in the **Development Information** section.
 
 ## Implementation
 
@@ -43,7 +43,7 @@ public class Config {
     static {
         try {
             com.easemob.im.Configuration.setDefaultApiClient(ApiClient.builder()
-            // BasePath is the corresponding RESTful API domain name. In the Easemob Console, go to the App Overview page and find the RESTful API server domain name in the Development Information section.
+            // BasePath is the corresponding RESTful API domain name. In the EasyIM Console, go to the App Overview page and find the RESTful API server domain name in the Development Information section.
                     .setBasePath("BasePath")
                     .setAppKey("Appkey")
                     .setClientId("Client ID")

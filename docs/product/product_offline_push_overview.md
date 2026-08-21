@@ -29,13 +29,13 @@ If you do not unbind the device token when logging out of EasyIM, the user conti
 
 ## Upload a push certificate
 
-After creating an app in the third-party push service console, download the push certificate and obtain the related information. Upload the push certificate to the Easemob Console and configure its information.
+After creating an app in the third-party push service console, download the push certificate and obtain the related information. Upload the push certificate to the EasyIM Console and configure its information.
 
 For example, for FCM push certificate configuration, see the [FCM push integration documentation](/document/android/push/push_fcm.html#step-3-upload-the-push-certificate). 
 
 ## Multi-device offline push policy
 
-For multi-device login, you can configure a push policy on the Certificate Management page of the Easemob Console. This policy applies to all push channels:
+For multi-device login, you can configure a push policy on the Certificate Management page of the EasyIM Console. This policy applies to all push channels:
 
 - Send push messages only when all devices are offline;
 - Send push messages whenever any device is offline.
@@ -67,14 +67,14 @@ For the app and all conversations in it, Do Not Disturb settings take precedence
 
 ## Use push templates
 
-Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [Easemob Console](https://console.easemob.com/user/login).
+Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [EasyIM Console](https://console.easemob.com/user/login).
 
 Push templates are primarily used when the server's default configuration does not meet your requirements. They allow you to set global push notification titles and content. For example, the server provides default push titles and content in Chinese and English. If you need Korean or Japanese push titles and content, you can configure templates for those languages. Push templates include the `default` push template and custom push templates. For chat group messages, you can use targeted templates to send some users offline notifications that differ from those sent to other users.
 
 You can configure push templates in the following ways:
 
 - [Call a REST API](/document/server-side/push_template_overview.html).
-- Configure push templates in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
+- Configure push templates in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
 
 Push templates provide the following benefits:
 

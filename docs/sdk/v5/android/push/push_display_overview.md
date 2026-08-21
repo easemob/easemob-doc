@@ -9,5 +9,5 @@ After a notification is received, the push title and content displayed in the no
 5. [**Use a custom push template**](push_template.html#): Specify the push template name through the message extension field when sending a message.
 
 :::tip
-Push templates are an advanced feature of offline push. Before using this feature, you need to [enable it in Easemob Console](push_template.html#feature-activation).
+Push templates are an advanced feature of offline push. Before using this feature, you need to [enable it in EasyIM Console](push_template.html#feature-activation).
 :::

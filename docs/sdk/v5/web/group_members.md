@@ -228,7 +228,7 @@ The group blocklist prevents specified users from joining or remaining in the ch
 The group owner or an admin can call `blockMembers` to add specified members to the group blocklist.
 
 - After being added to the blocklist, the member receives the `onUserRemoved` event.
-- By default, other group members do not receive this event. To enable this event notification, contact the Easemob business team.
+- By default, other group members do not receive this event. To enable this event notification, contact the EasyIM business manager.
 - Members added to the blocklist are removed from the chat group and can no longer send or receive group messages. They can apply or be invited to join again only after being removed from the blocklist.
 
 ```typescript

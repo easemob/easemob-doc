@@ -7,7 +7,7 @@
 
 ## Feature activation
 
-Text translation is a value-added service. To use it, first enable [message translation in the Easemob Console](/product/console/purchase_value_added.html#message-translation).
+Text translation is a value-added service. To use it, first enable [message translation in the EasyIM Console](/product/console/purchase_value_added.html#message-translation).
 
 A single translation request supports up to 10,000 characters. The number of billable characters is calculated as **the number of source text characters × the number of target languages**. For example, translating 500 characters into 4 languages counts as 2000 billable characters.
 
@@ -79,6 +79,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 |:---------|:----------------------|:--------|:----------|
 | 400   | An input text is missing or invalid  | The `text` parameter is missing from the request or its content is invalid.    | The `text` parameter is required and must contain valid characters.      |
 | 400   | The input text is too long                  | The content passed in the `text` parameter is too long.    | Pass no more than 10,000 characters in the `text` parameter.|
-| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the Easemob business team to increase the limit, or reduce the call frequency.      |
+| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the EasyIM business manager to increase the limit, or reduce the call frequency.      |
 | 400   | InternalTranslateFailedException                  | An error occurred in the Microsoft Azure translation service.   |       |
-| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the Easemob business team to enable it before calling the API.      |
+| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the EasyIM business manager to enable it before calling the API.      |

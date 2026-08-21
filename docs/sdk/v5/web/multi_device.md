@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM allows the same account to log in on multiple devices. Before using this feature, enable the service in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+EasyIM allows the same account to log in on multiple devices. Before using this feature, enable the service in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 
 When logging in, the EasyIM SDK generates a login identifier for the current device based on the initialization parameters and sends the device information to the server. The server maintains the online device status of the current account according to the multi-device login policy. When the same account performs operations related to friends, chat groups, message threads, conversations, or roaming-message deletion on another device, the SDK normalizes these operations into multi-device events and notifies the current device through the corresponding callback registered with `client.addEventHandler`.
 
@@ -13,7 +13,7 @@ Multi-device login supports the following features:
 - Query the login identifiers of the current account on other devices;
 - Customize the device identifier, platform, and device name through initialization parameters.
 
-With multi-device login, EasyIM supports up to 4 devices online simultaneously on each platform by default. To increase the supported number of devices, contact the Easemob business team. On the **EasyIM > Basic Features > Users** page in the Easemob Console, you can set the number of devices for each platform in the dialog box that appears:
+With multi-device login, EasyIM supports up to 4 devices online simultaneously on each platform by default. To increase the supported number of devices, contact the EasyIM business manager. On the **EasyIM > Basic Features > Users** page in the EasyIM Console, you can set the number of devices for each platform in the dialog box that appears:
 
 ![img](/images/common/multidevice_device_count.png)
 
@@ -32,7 +32,7 @@ The EasyIM server provides RESTful APIs to [retrieve the list of devices on whic
 ## Prerequisite
 
 - Before you start, initialize the SDK and connect it to the server. For details, see [Quick Start](quickstart.html).
-- Multi-device login has been enabled in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+- Multi-device login has been enabled in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 - To set a custom name, custom platform, or login extension information for a login device, configure it during SDK initialization.
 
 ## Retrieve the list of login IDs for the current user on other devices
@@ -54,7 +54,7 @@ The SDK allows you to customize the platform of a login device. For example, you
 
 Set the platform of a login device as follows:
 
-1. On the **EasyIM > Basic Features > Users** page in the Easemob Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Number of Devices**.
+1. On the **EasyIM > Basic Features > Users** page in the EasyIM Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Number of Devices**.
 
 The value range of **Device Platform** is [1,100], and that of **Number of Devices** is [0,4].
 

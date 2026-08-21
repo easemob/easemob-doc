@@ -10,7 +10,7 @@ Initialize the SDK in the app's main process and pass the Application Context to
 
 ## Prerequisite
 
-Register a valid EasyIM developer account, create an app, and obtain its App Key. For details, see the [Easemob Console documentation](/product/console/app_create.html).
+Register a valid EasyIM developer account, create an app, and obtain its App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
 ## Initialize the SDK
 
@@ -27,7 +27,7 @@ The following table lists common `EMOptions` methods used during initialization.
 
 | Method | Description |
 | :--- | :--- |
-| `setAppKey(String appkey)` | Sets the App Key. `appkey` is the unique identifier obtained after creating an app in Easemob Console. Its format is generally `orgName#appName`. |
+| `setAppKey(String appkey)` | Sets the App Key. `appkey` is the unique identifier obtained after creating an app in EasyIM Console. Its format is generally `orgName#appName`. |
 | `setPushConfig(EMPushConfig pushConfig)` | Sets the offline push configuration. Pass a constructed `EMPushConfig` before `init`. If it is not set, the SDK creates a default push configuration. |
 | `setAutoAcceptGroupInvitation(boolean value)` | Sets whether to automatically accept chat group invitations.<br/> - (Default) `true`: Automatically accepts chat group invitations.<br/> - `false`: Does not automatically accept chat group invitations. |
 | `setAcceptInvitationAlways(boolean value)` | Sets whether to automatically accept friend invitations.<br/> - (Default) `true`: Automatically accepts friend invitations.<br/> - `false`: Does not automatically accept friend invitations. |

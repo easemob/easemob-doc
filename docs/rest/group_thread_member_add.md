@@ -4,7 +4,7 @@
 
 - Add users to a specified message thread in batches.
 - Up to 10 users can join the message thread at a time.
-- Before using this API, contact the Easemob business team to activate the message thread feature.
+- Before using this API, contact the EasyIM business manager to activate the message thread feature.
 
 ## Call frequency limit
 
@@ -74,7 +74,7 @@ The other fields are described below:
 | Field          | Type | Description                                                                              |
 | :------------ | :--- | :-------------------------------------------------------------------------------- |
 | `action`          | String | Request method. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
@@ -88,8 +88,8 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | request body reaches limit. | More than 10 user IDs were specified in `usernames`. | Check `usernames` and specify no more than 10 user IDs. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
-| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the Easemob business team to activate the message thread feature before calling this API. |
-| 403     | group_error | user join thread reach limit. | The number of message threads added by the user has reached the upper limit. | Exit unused message threads or contact the Easemob business team to adjust the limit. |
+| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the EasyIM business manager to activate the message thread feature before calling this API. |
+| 403     | group_error | user join thread reach limit. | The number of message threads added by the user has reached the upper limit. | Exit unused message threads or contact the EasyIM business manager to adjust the limit. |
 | 404     | group_error | thread not found. | The message thread does not exist. | Specify a valid message thread ID. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

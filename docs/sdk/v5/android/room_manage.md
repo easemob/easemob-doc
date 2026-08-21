@@ -156,7 +156,7 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomMembers(
 
 ### Automatically leave after going offline
 
-A chat room member who remains offline for more than 2 minutes because of network or other issues automatically leaves the chat room. To adjust this period, contact the Easemob business team.
+A chat room member who remains offline for more than 2 minutes because of network or other issues automatically leaves the chat room. To adjust this period, contact the EasyIM business manager.
 
 The following types of members do not leave the chat room even when offline:
 

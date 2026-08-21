@@ -6,7 +6,7 @@ This document describes how the EasyIM iOS SDK sends, receives, and recalls mess
 
 ## Feature activation
 
-Before using messages in message threads, contact the Easemob business team to activate message threads.
+Before using messages in message threads, contact the EasyIM business manager to activate message threads.
 
 ## Understand the tech
 
@@ -27,7 +27,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the iOS SDK. See [Quickstart](quickstart.html).
 - Understand the EasyIM API [limitations](/product/limitation.html).
 - Understand the limits on message threads and the number of message thread members. See [Limitations](/product/limitation.html).
-- Contact the Easemob business team to activate message threads.
+- Contact the EasyIM business manager to activate message threads.
 
 ## Send messages in a message thread
 

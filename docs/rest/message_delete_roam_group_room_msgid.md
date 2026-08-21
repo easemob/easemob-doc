@@ -9,7 +9,7 @@
 - Before calling this API, you can obtain the message IDs to delete by [retrieving historical messages](message_historical.html). If you use [message webhooks](callback_overview.html), you can also obtain the message IDs from your server because the callback data sent to your server contains them.
 
 :::tip
-Chat room roaming messages are disabled by default. To use this feature, contact the Easemob business team to enable it.
+Chat room roaming messages are disabled by default. To use this feature, contact the EasyIM business manager to enable it.
 :::
 
 ## Call frequency limit
@@ -69,7 +69,7 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 
 | HTTP status code | Error type     | Error message     | Possible cause    | Recommendation   |
 |:---------|:----------|:-----------------------|:--------|:--------------|
-| 400   | service open exception    | this appKey not open message roaming | Message roaming is not enabled. | Contact the Easemob business team to enable it. |
+| 400   | service open exception    | this appKey not open message roaming | Message roaming is not enabled. | Contact the EasyIM business manager to enable it. |
 | 400      | param exception         | delete msg list limit can not greater than 50 | The number of message IDs to delete in a single request exceeds the limit of 50. | Reduce the number of message IDs in a single deletion request. |
 
 For other errors and their possible causes, see [Response status codes](error.html).

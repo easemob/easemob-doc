@@ -10,14 +10,14 @@ Multiple messages can be pinned in the same conversation. Your app can retrieve 
 
 ## Feature activation
 
-Before using message pinning, contact the Easemob business team to enable it.
+Before using message pinning, contact the EasyIM business manager to enable it.
 
 ## Prerequisite
 
 Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
-- Contact the Easemob business team to enable message pinning.
+- Contact the EasyIM business manager to enable message pinning.
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 ## Pin a message
@@ -27,7 +27,7 @@ Call `EMChatManager#asyncPinMessage` and pass a non-empty message ID to pin a sp
 The same message can be pinned repeatedly by multiple users, but only information about the latest pin operation is retained. Therefore, the operator user ID and pinning time obtained through `EMMessagePinInfo` correspond to the latest pin operation.
 
 Only messages still stored on the server can be pinned. If a message exists only locally and has been deleted from the server after its retention period expired, pinning fails.
-**By default, up to 20 messages can be pinned in a conversation. To increase the limit, contact the Easemob business team. The maximum supported limit is 100.**
+**By default, up to 20 messages can be pinned in a conversation. To increase the limit, contact the EasyIM business manager. The maximum supported limit is 100.**
 
 ```java
 String messageId = message.getMsgId();

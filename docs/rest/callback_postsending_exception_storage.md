@@ -12,7 +12,7 @@ Webhook data stored on the chat server is a value-added service for post-deliver
 
 ## Activate the service
 
-To use webhook data stored on the chat server, first activate the service in the console. For details, see [Easemob Console activation entry](/product/console/basic_webhook.html#callback-data-stored-on-the-chat-server).
+To use webhook data stored on the chat server, first activate the service in the console. For details, see [EasyIM Console activation entry](/product/console/basic_webhook.html#callback-data-stored-on-the-chat-server).
 
 After the service is activated, when a post-delivery webhook fails and meets the exception storage conditions, the system archives failed webhook messages by time slice and **generates a date key every 10 minutes to identify a set of failed webhooks**. First call the [query API](#query-stored-webhook-data) to obtain webhook data available for redelivery, and then call the [redelivery API](#redeliver-stored-webhook-data) based on the returned result to compensate for data in exceptional scenarios.
 
@@ -86,11 +86,11 @@ Other response fields are described in the following table:
 | `path` | String | Request path. |
 | `uri` | String | Full request URI. |
 | `timestamp` | Long | Unix timestamp when the EasyIM server receives the request, in milliseconds. |
-| `organization` | String | Unique identifier of the organization registered in the Easemob Console, corresponding to `org_name` in the console. |
-| `application` | String | Unique identifier of the app registered in the Easemob Console. |
+| `organization` | String | Unique identifier of the organization registered in the EasyIM Console, corresponding to `org_name` in the console. |
+| `application` | String | Unique identifier of the app registered in the EasyIM Console. |
 | `action` | String | Request method. |
 | `duration` | Long | Request duration, in milliseconds. |
-| `applicationName` | String | Name of the app registered in the Easemob Console. |
+| `applicationName` | String | Name of the app registered in the EasyIM Console. |
 
 An HTTP status code other than `200` indicates that the request failed. See [Error code](#error-code) in this document for troubleshooting.
 
@@ -157,7 +157,7 @@ HTTP status code `200` indicates that the redelivery request was received succes
 | `uri` | String | Full request URI. |
 | `timestamp` | Long | Unix timestamp when the EasyIM server receives the request, in milliseconds. |
 | `organization` | String | Unique identifier assigned by EasyIM to each company (organization), matching the `org_name` request parameter. |
-| `application` | String | Unique identifier of the app registered in the Easemob Console. |
+| `application` | String | Unique identifier of the app registered in the EasyIM Console. |
 | `action` | String | Request method. |
 | `data` | String | Redelivery result: `success` indicates that the request succeeded, and `failure` indicates that the request failed. |
 | `duration` | Long | Request duration, in milliseconds. |

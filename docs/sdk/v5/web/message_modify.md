@@ -33,7 +33,7 @@ In addition to changes to the content or extension, the body of an edited messag
 
 ## Feature activation
 
-To use message editing, **contact the Easemob business team to enable it**.
+To use message editing, **contact the EasyIM business manager to enable it**.
 
 ## Prerequisite
 
@@ -42,7 +42,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html) and [Initialization](initialization.html).
 - Register `ChatManager` during SDK initialization so that you can call message APIs through `client.chatManager`.
 - Understand the EasyIM API limitations. For details, see [Limitations](/product/limitation.html).
-- Contact the Easemob business team to enable message editing.
+- Contact the EasyIM business manager to enable message editing.
 
 ## Edit a message
 

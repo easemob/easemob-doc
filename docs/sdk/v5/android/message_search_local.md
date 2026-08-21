@@ -10,7 +10,7 @@ This document describes how the EasyIM Android SDK searches local messages by ke
 <HideSection :show="$frontmatter.show_server_search">
 
 :::tip
-To search server-side messages, contact the Easemob business team to enable the feature. See [Server-side Message Search](/value-added/search/message_search_android.html).
+To search server-side messages, contact the EasyIM business manager to enable the feature. See [Server-side Message Search](/value-added/search/message_search_android.html).
 :::
 
 </HideSection>

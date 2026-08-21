@@ -9,7 +9,7 @@
 You can retrieve records of historical messages sent by users from the server.
 
 - A single request retrieves records of historical messages sent within one hour from the specified start time.
-- You can retrieve historical message records from up to the past 3 days. To increase this limit, contact the Easemob business team.
+- You can retrieve historical message records from up to the past 3 days. To increase this limit, contact the EasyIM business manager.
 - When the platform distributes a large volume of messages, the server needs time to generate historical message records. We recommend retrieving these records after 24 hours. If timeliness is important, use the [post-delivery webhook service](callback_postsending.html).
 - Calling the REST API to [delete a conversation unilaterally](conversation_delete.html) or [delete roaming messages unilaterally](message_delete_roam_single_msgid.html) does not affect historical message records retrieved through this API.
 
@@ -81,7 +81,7 @@ The other fields are described below:
 | `timestamp`       | Long   | Unix timestamp in milliseconds.                                                      |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds.                                           |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 

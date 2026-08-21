@@ -4,7 +4,7 @@ After initializing the Android SDK, the app must log in with a user ID and user 
 
 ## User registration
 
-Before logging in to the SDK, create an EasyIM user. Before creating a user, set the user registration mode on the **Instant Messaging > Basic Features > Users** page in [Easemob Console](https://console.easemob.com/user/login).
+Before logging in to the SDK, create an EasyIM user. Before creating a user, set the user registration mode on the **Instant Messaging > Basic Features > Users** page in [EasyIM Console](https://console.easemob.com/user/login).
 
 Two user registration modes are available:
 
@@ -18,15 +18,15 @@ After setting the registration mode, create users in either of the following way
    - Authorized registration: Call [Register a Single User (Authorized)](/document/server-side/account_register_authorized_single.html) or [Batch Register Users (Authorized)](/document/server-side/account_register_authorized_batch.html).
    - Open registration: After enabling open registration, create users through the client or the [REST API for open registration](/document/server-side/account_register_open.html).
 
-2. **Create a user in Easemob Console**
+2. **Create a user in EasyIM Console**
 
-   Create users for a production or test environment in [Easemob Console](https://console.easemob.com/user/login). For details, see [Create Users](/product/console/operation_user.html#创建用户).
+   Create users for a production or test environment in [EasyIM Console](https://console.easemob.com/user/login). For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 ## Login
 
 The SDK logs in with a user ID and EasyIM token. Pass `userId` and `token` when calling `loginWithToken`. After login succeeds, the SDK establishes a persistent connection to the messaging service.
 
-In a test environment, after you create users in [Easemob Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#创建用户).
+In a test environment, after you create users in [EasyIM Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 In a production environment, we recommend integrating the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
 
@@ -303,7 +303,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
                 break;
 
             case EMError.USER_KICKED_BY_OTHER_DEVICE:
-                // Forcibly logged out from another device, Easemob Console, or a server-side API.
+                // Forcibly logged out from another device, EasyIM Console, or a server-side API.
                 break;
 
             case EMError.USER_LOGIN_TOO_MANY_DEVICES:
@@ -337,7 +337,7 @@ Common multi-device error codes are as follows:
 | The current account is bound to another device | `213` / `USER_BIND_ANOTHER_DEVICE` | Guide the user according to the device binding policy. |
 | The logged-in device limit is exceeded | `214` / `USER_LOGIN_TOO_MANY_DEVICES` | Resolve the device limit first. Repeated login attempts are not recommended. |
 | The user is logged out because the password changed | `216` / `USER_KICKED_BY_CHANGE_PASSWORD` | Obtain a valid token and log in again. |
-| The user is forcibly logged out from another device, Easemob Console, or a server-side API | `217` / `USER_KICKED_BY_OTHER_DEVICE` | Notify the user that the current account was forcibly logged out. |
+| The user is forcibly logged out from another device, EasyIM Console, or a server-side API | `217` / `USER_KICKED_BY_OTHER_DEVICE` | Notify the user that the current account was forcibly logged out. |
 | The login device changes | `220` / `USER_DEVICE_CHANGED` | Notify the user and log in again according to the business scenario. |
 
 **Retrieve login IDs on other devices**
@@ -374,7 +374,7 @@ For example, in the login ID `alice/android_xxx`, `alice` is the user ID and `an
 
 ### Notification when logging in to a banned account
 
-If a user account has been disabled through Easemob Console or a REST API, calling `EMClient#loginWithToken` triggers `EMCallBack#onError` and returns `EMError#SERVER_SERVICE_RESTRICTED` (305). This error code indicates that the EasyIM service or a feature of the current app is restricted. Handle it according to the service configuration and error information returned by the server. Do not rely on error text such as `"service is disabled"`.
+If a user account has been disabled through EasyIM Console or a REST API, calling `EMClient#loginWithToken` triggers `EMCallBack#onError` and returns `EMError#SERVER_SERVICE_RESTRICTED` (305). This error code indicates that the EasyIM service or a feature of the current app is restricted. Handle it according to the service configuration and error information returned by the server. Do not rely on error text such as `"service is disabled"`.
 
 ## API list
 

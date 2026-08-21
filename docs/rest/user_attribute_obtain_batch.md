@@ -100,6 +100,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | BAD_REQUEST  | exceed allowed batch size %s   | The number of users whose attributes are requested exceeds the limit. You can retrieve attributes for up to 100 users per request. | Reduce the number of users in the batch request. |
 | 401     | metadata_error  | auth error        | Authentication failed. |     |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | The user attribute feature is not activated. | Contact the sales team to activate the user attribute feature. |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | The user attribute feature is not activated. | Contact the business manager to activate the user attribute feature. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

@@ -90,8 +90,8 @@ The SDK adds capabilities for conversation display information, batch conversati
 
 #### New features
 
-- Added support for [server-side message search](/value-added/search/message_search_android.html), which lets you filter by keyword combinations, conversation ID, message type, time range, and message content or extension attributes. To use this feature, contact the Easemob business team for activation. For details, see the [activation instructions](/product/console/purchase_value_added.html#消息搜索).
-  By default, message search does not support the `ext` extension field. To search this field, contact the Easemob business team.
+- Added support for [server-side message search](/value-added/search/message_search_android.html), which lets you filter by keyword combinations, conversation ID, message type, time range, and message content or extension attributes. To use this feature, contact the EasyIM business manager for activation. For details, see the [activation instructions](/product/console/purchase_value_added.html#消息搜索).
+  By default, message search does not support the `ext` extension field. To search this field, contact the EasyIM business manager.
 - Added an asynchronous API to [update the chat group extension field](group_attributes.html#update-the-chat-group-extension).
 - Added an asynchronous API to [retrieve server-side push configurations](/document/android/push/push_display_attribute.html#获取推送通知的显示属性).
 
@@ -369,7 +369,7 @@ Fixed an issue where updating chat group attributes affected the chat group avat
 
 - Added support for [sending](message_send.html#send-gif-images) and [receiving GIF image messages](message_receive.html#receive-gif-image-messages).
 - Added support for [chat group avatars](group_attributes.html#manage-the-chat-group-avatar).
-- Added support for [message attachment authentication](message_receive.html#receive-attachment-messages). To activate this feature, contact the Easemob business team. After activation, you must call an SDK API to download message attachments.
+- Added support for [message attachment authentication](message_receive.html#receive-attachment-messages). To activate this feature, contact the EasyIM business manager. After activation, you must call an SDK API to download message attachments.
 - Added support for [retrieving only messages sent by specified chat group members](message_retrieve.html#retrieve-messages-sent-by-specified-group-members-from-the-server) when retrieving roaming messages.
 - Added support for [loading only messages sent by specified chat group members](message_retrieve.html#retrieve-messages-sent-by-specified-group-members-locally) when loading local conversation messages.
 - The [chat group member list](group_manage.html#获取群成员列表) now includes member roles and join times.
@@ -425,7 +425,7 @@ Fixed an issue where updating chat group attributes affected the chat group avat
 
 #### New features
 
-- [EasyIM SDK] When [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server), the SDK now reads message read and delivery status from the server. This feature applies only to one-to-one messages and is disabled by default. To enable it, contact the Easemob business team. 
+- [EasyIM SDK] When [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server), the SDK now reads message read and delivery status from the server. This feature applies only to one-to-one messages and is disabled by default. To enable it, contact the EasyIM business manager. 
 - [EasyIM SDK] Chat room member mute callback:
   - Added the chat room mute callback `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.Map<java.lang.String,java.lang.Long>)`. In the callback, the `Map<String,Long> muteInfo` parameter contains the user IDs of muted users and their mute expiration timestamps.
   - Deprecated the original callback `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.List<java.lang.String>, long)`.
@@ -1546,7 +1546,7 @@ Updates:
 
 New features:
 
-- Added the chat group receipt API. This is a value-added service; contact the Easemob business team for activation.
+- Added the chat group receipt API. This is a value-added service; contact the EasyIM business manager for activation.
 - Added a reminder callback when no audio or video data is received from the remote end.
 
 Updates:
@@ -1601,7 +1601,7 @@ New features:
 Updates:
 
 - Upgraded the audio and video engine, improving noise cancellation and performance and reducing call setup time.
-- Temporarily removed on-device recording starting with version 3.6.0. Mobile clients can use SDK parameters to configure whether each call is recorded on the server. If the Web client also requires recording, contact the Easemob business team to enable recording on all clients. Once enabled, this feature takes precedence over the SDK parameter configuration.
+- Temporarily removed on-device recording starting with version 3.6.0. Mobile clients can use SDK parameters to configure whether each call is recorded on the server. If the Web client also requires recording, contact the EasyIM business manager to enable recording on all clients. Once enabled, this feature takes precedence over the SDK parameter configuration.
 - Improved the batch message saving method by acknowledging messages to the server after they are saved in a batch, fixing an issue where messages were not saved correctly in extreme scenarios.
 - Corresponding error codes are returned when the audio and video service has not been activated or has an overdue balance when a call is initiated or a conference is created.
 - Modified the custom local video data API for one-to-one video calls.
@@ -1899,9 +1899,9 @@ Fixed a bug where sending a message failed when the username contained an unders
 New features
 
 1. For newly added APIs, see [3.3.4api changes](https://docs-im.easemob.com/im/200androidclientintegration/3.3.4apichange).
-2. Added an API for retrieving historical messages (message roaming). `Contact the Easemob business team to activate this feature.`
+2. Added an API for retrieving historical messages (message roaming). `Contact the EasyIM business manager to activate this feature.`
 3. Added support for sending messages and files between PC and mobile clients.
-4. Added message recall APIs and callbacks. `Contact the Easemob business team to activate this feature.`
+4. Added message recall APIs and callbacks. `Contact the EasyIM business manager to activate this feature.`
 5. Added support for the new Huawei Push functionality (HMS).
 
 ## v3.3.3 2017-07-21
@@ -1909,7 +1909,7 @@ New features
 New features
 
 1. For newly added APIs, see [3.3.3api changes](https://docs-im.easemob.com/im/200androidclientintegration/3.3.3apichange).
-2. Added support for logging in to the same account on multiple devices and synchronizing messages and friend and chat group operations between those devices. Multi-device login is a value-added service; contact the Easemob business team for activation.
+2. Added support for logging in to the same account on multiple devices and synchronizing messages and friend and chat group operations between those devices. Multi-device login is a value-added service; contact the EasyIM business manager for activation.
 3. Added the file size attribute to chat group shared files.
 4. Added an API for retrieving the list of devices logged in to the same account, with the option to kick a device offline.
 
@@ -1988,7 +1988,7 @@ Red packets:
 Added:
 
 1. Small random red packets.
-2. Added advertising red packets. Contact the Easemob business team separately to use them.
+2. Added advertising red packets. Contact the EasyIM business manager separately to use them.
 3. Added advertising red packet configuration and statistics to the merchant backend.
 4. Added password changes to the merchant backend.
 

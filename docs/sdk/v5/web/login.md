@@ -12,7 +12,7 @@ Before you begin, ensure that the following requirements are met:
 
 ## Register a user
 
-Before logging in to the SDK, create an EasyIM user. Before creating the user, set the user registration mode on the **EasyIM > Basic Features** > **Users** page in the [Easemob Console](https://console.easemob.com/user/login).
+Before logging in to the SDK, create an EasyIM user. Before creating the user, set the user registration mode on the **EasyIM > Basic Features** > **Users** page in the [EasyIM Console](https://console.easemob.com/user/login).
 
 The following user registration modes are available:
 
@@ -26,15 +26,15 @@ After setting the registration mode, create users in either of the following way
    - Authorized registration: Call [Register a Single User](/document/server-side/account_register_authorized_single.html) or [Register Users in Batches](/document/server-side/account_register_authorized_batch.html) to create users.
    - Open registration: After enabling open registration, create users through the client or the [REST API for Open Registration](/document/server-side/account_register_open.html).
 
-2. **Create users in the Easemob Console**
+2. **Create users in the EasyIM Console**
 
-   You can create users for production or test environments in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Create users](/product/console/operation_user.html#创建用户).
+   You can create users for production or test environments in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Create users](/product/console/operation_user.html#创建用户).
 
 ## Login
 
 The SDK logs in using a user ID and user token. When calling `client.login`, pass `userId` and `token`. After login succeeds, the SDK establishes a persistent connection to the message service. The Promise returned by `login` resolves without a value.
 
-In a test environment, after you create users in the [Easemob Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create users](/product/console/operation_user.html#创建用户).
+In a test environment, after you create users in the [EasyIM Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create users](/product/console/operation_user.html#创建用户).
 
 For a production environment, we recommend integrating the [Get an App Token API](/document/server-side/easemob_app_token.html) and [Get a User Token API](/document/server-side/easemob_user_token.html) on your app server. The client then retrieves the user token from your app server before logging in to the SDK.
 
@@ -187,7 +187,7 @@ The following table lists common multi-device error codes:
 | :--- | :--- | :--- |
 | The user logs in on another device, which kicks the current device offline | `206` / `USER_LOGIN_ANOTHER_DEVICE` | Generally, notify the user that the current account has logged in on another device. |
 | The user is kicked offline after changing the password | `216` / `USER_KICKED_BY_CHANGE_PASSWORD` | Generally, retrieve a new token and log in again. |
-| The user is forcibly logged out from another device, through an API, or in the Easemob Console | `217` / `USER_KICKED_BY_OTHER_DEVICE` | You can notify the user that they were forcibly logged out and direct them to log in again if they want to continue. |
+| The user is forcibly logged out from another device, through an API, or in the EasyIM Console | `217` / `USER_KICKED_BY_OTHER_DEVICE` | You can notify the user that they were forcibly logged out and direct them to log in again if they want to continue. |
 | The number of logged-in devices exceeds the limit | `214` / `AUTH_LOGIN_TOO_MANY_DEVICES` | Resolve the device-count limit first. Repeated login attempts alone cannot resolve this issue. |
 | The account is bound to another device, or the login resource changes | `213` / `AUTH_BIND_ANOTHER_DEVICE`, or `220` / `USER_DEVICE_CHANGED` | Generally, log in again or direct the user to resolve the device state. |
 

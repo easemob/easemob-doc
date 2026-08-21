@@ -7,7 +7,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Chat group shared file upload event
 
@@ -45,11 +45,11 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 |  - `share_file`| String | Uploaded chat group shared file. |
 |  - `type`      | String | Chat group shared file upload event. The value is `ADD`. |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group ID.                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -93,11 +93,11 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                          |
 |  - `share_file`| String | Deleted chat group shared file.                 |
 |  - `type`      | String | Chat group shared file deletion event. The value is `REMOVE`. |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.   |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.   |
 | `id`           | String | Chat group ID.                           |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |

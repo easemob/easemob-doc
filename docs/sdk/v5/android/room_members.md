@@ -42,7 +42,7 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomMembers(
 
 Only the chat room owner and admins can call the `EMChatRoomManager#asyncBlockChatroomMembers` method to add specified members to the blocklist.
 
-After being added to the blocklist, a member receives the `EMChatRoomChangeListener#onRemovedFromChatRoom` callback. By default, the other members do not receive an event notification. To enable this event, contact the Easemob business team.
+After being added to the blocklist, a member receives the `EMChatRoomChangeListener#onRemovedFromChatRoom` callback. By default, the other members do not receive an event notification. To enable this event, contact the EasyIM business manager.
 
 After being added to the blocklist, a member can no longer send or receive chat room messages and is removed from the chat room. Before the member can rejoin, the chat room owner or an admin must remove the member from the blocklist.
 

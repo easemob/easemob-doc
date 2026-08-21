@@ -21,7 +21,7 @@
 
 :::tip
 
-1. By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB and can be stored for 7 days. To increase either limit, contact the Easemob business team.
+1. By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB and can be stored for 7 days. To increase either limit, contact the EasyIM business manager.
 2. If the basic message types do not meet your requirements, you can enhance them with custom message extensions. A typical use case is sending a message that quotes an earlier text or image message. After an extension is added, the message cannot exceed the size limit of the original message type.
 3. The size and storage period limits for message attachments are the same as those for chat group shared files. If a limit for message attachments is increased, the corresponding limit for chat group shared files is automatically adjusted accordingly, and vice versa.
    
@@ -40,7 +40,7 @@
 | Include sender information in chat group messages | Include the sender's nickname, avatar, and user- or chat-group-related custom fields in a chat group message through message extension fields | Display the message sender's nickname, avatar, and other user information      |
 | Control chat group message sending   | Control message sending through muting, banning the chat group, pre-delivery callbacks for chat group messages, blocklists, and content moderation.  | <br/> - Prevent a member from sending messages in the chat group<br/> - Prevent all chat group members from sending messages in the chat group<br/> - The app server filters or modifies messages |
 | Control chat group message reception  | <br/> - A user can block messages from a chat group through an SDK API <br/> - Ban a chat group through a RESTful API| <br/> - A user no longer receives messages from a chat group<br/> - Prevent all members of a chat group from sending and receiving messages in it  |
-| Control chat group message frequency    | <br/>For a single app, the RESTful API has the following 3 limits:<br/> - 20 messages/second/App Key  <br/> - 20 calls/second <br/> -  3 chat groups/call.| Prevent overly frequent RESTful API calls. To increase these limits, contact the Easemob business team.  |
+| Control chat group message frequency    | <br/>For a single app, the RESTful API has the following 3 limits:<br/> - 20 messages/second/App Key  <br/> - 20 calls/second <br/> -  3 chat groups/call.| Prevent overly frequent RESTful API calls. To increase these limits, contact the EasyIM business manager.  |
 
 ## Chat group message sending controls
 
@@ -53,7 +53,7 @@
 
 ### REST API
 
-For a single app, the RESTful API for sending chat group messages has the following limits. You can contact the Easemob business team to increase them:
+For a single app, the RESTful API for sending chat group messages has the following limits. You can contact the EasyIM business manager to increase them:
   
 <table>
 <tbody>
@@ -116,7 +116,7 @@ For a single app, the RESTful API for sending chat group messages has the follow
 
 ### SDK
 
-By default, the SDK does not limit the frequency at which an individual user can send messages. If you contact the Easemob business team to configure this limit, the SDK reports an error when a user's group chat message sending frequency exceeds it. For example, the Android SDK reports error code 509 `MESSAGE_CURRENT_LIMITING`.
+By default, the SDK does not limit the frequency at which an individual user can send messages. If you contact the EasyIM business manager to configure this limit, the SDK reports an error when a user's group chat message sending frequency exceeds it. For example, the Android SDK reports error code 509 `MESSAGE_CURRENT_LIMITING`.
 
 ## Message format
 

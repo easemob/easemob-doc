@@ -21,8 +21,8 @@ Through `EMFetchServerMessagesOption`, you can set the message sender, message t
 If `EMOptions#regardImportMessagesAsRead` is enabled during initialization, messages imported [through the server-side API](/document/server-side/message_import_single.html) are marked as read after they are retrieved, and the conversation's `unreadMessagesCount` does not increase. If this setting is disabled, the count increases.
 
 :::tip
-1. **By default, you can retrieve historical messages from one-to-one and group chats. To retrieve chat room historical messages, contact the Easemob business team.**
-2. When retrieving one-to-one historical messages, the feature for reading the delivery and read states stored on the server is disabled by default. To use it, contact the Easemob business team.
+1. **By default, you can retrieve historical messages from one-to-one and group chats. To retrieve chat room historical messages, contact the EasyIM business manager.**
+2. When retrieving one-to-one historical messages, the feature for reading the delivery and read states stored on the server is disabled by default. To use it, contact the EasyIM business manager.
 3. The server-side retention period for historical messages depends on the product plan. See [EasyIM Plan Features](/product/product_package_feature.html).
 :::
 

@@ -66,6 +66,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | HTTP status code | Error type | Error message | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | Authentication failed. | Use a valid token. |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | The user attribute feature is not activated. | Contact the sales team to activate the user attribute feature. |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | The user attribute feature is not activated. | Contact the business manager to activate the user attribute feature. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

@@ -13,7 +13,7 @@ The following figure shows the workflow for sending and receiving one-to-one tex
 - Xcode (the latest version is recommended).
 - An iOS simulator or Apple device running iOS 10.0 or later.
 - CocoaPods [1.10.1 or later](https://cocoapods.org/).
-- A valid EasyIM developer account and App Key. For details, see the [Easemob Console documentation](/product/console/app_manage.html#管理应用).
+- A valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_manage.html#管理应用).
 - If your network environment has a firewall deployed, contact Easemob technical support to configure an allowlist.
 
 ## 1. Prepare the development environment
@@ -70,7 +70,7 @@ In the following method in the project's AppDelegate, call the corresponding SDK
 ```objectivec
 (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    // Replace appkey with the App Key of the app registered in Easemob Console.
+    // Replace appkey with the App Key of the app registered in EasyIM Console.
     EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
     // apnsCertName is the certificate name. You can pass nil for now and provide the certificate name later when configuring APNs push.
     options.apnsCertName = nil;
@@ -81,7 +81,7 @@ In the following method in the project's AppDelegate, call the corresponding SDK
 
 ## 4. Create an account
 
-Create a user in [Easemob Console](https://console.easemob.com/user/login) and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#创建用户).
+Create a user in [EasyIM Console](https://console.easemob.com/user/login) and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 In a production environment, for security reasons, you must integrate the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server to implement the business logic for obtaining Tokens, allowing users to obtain Tokens from your app server.
 

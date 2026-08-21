@@ -21,16 +21,16 @@
 
 
 :::tip
-<br/> - By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB and can be stored for 7 days. To increase either limit, contact the Easemob business team.<br/> - If the basic message types do not meet your requirements, you can enhance them with custom message extensions. A typical use case is sending a message that quotes an earlier text or image message. After an extension is added, the message cannot exceed the size limit of the original message type.
+<br/> - By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB and can be stored for 7 days. To increase either limit, contact the EasyIM business manager.<br/> - If the basic message types do not meet your requirements, you can enhance them with custom message extensions. A typical use case is sending a message that quotes an earlier text or image message. After an extension is added, the message cannot exceed the size limit of the original message type.
 :::
 
 ## One-to-one message sending controls
 
 | One-to-one message sending control      | Description   |
 | :--------- | :----- |
-| Send messages between non-friends | Any two users in an app can send one-to-one messages to each other. In this scenario, **Friend Relationship Check** is disabled on the **EasyIM > Basic Features** > **Users** page of the Easemob Console. |
+| Send messages between non-friends | Any two users in an app can send one-to-one messages to each other. In this scenario, **Friend Relationship Check** is disabled on the **EasyIM > Basic Features** > **Users** page of the EasyIM Console. |
 | App admin sends one-to-one messages  | An app admin sends messages to any user in the app as another user. |
-| Send messages only to friends  | Users can send messages only to friends. In this scenario, **Friend Relationship Check** is enabled on the **EasyIM > Basic Features** > **Users** page of the Easemob Console. |
+| Send messages only to friends  | Users can send messages only to friends. In this scenario, **Friend Relationship Check** is enabled on the **EasyIM > Basic Features** > **Users** page of the EasyIM Console. |
 | Reject messages from a user | You can reject messages from a user in the following ways:<br/> - **Add the user to the blocklist** to reject messages from the user.<br/> - **Remove the user from the friend list.** This method applies when an app allows messages only between friends. If the app allows messages between non-friends, user A can still send a message to user B after user A is removed from user B's friend list.<br/> - **Global mute (RESTful API)**: Globally mute a specified user in one-to-one chats so that the user cannot send one-to-one messages to any user in the app.|
 |Allow or intercept messages|- **Pre-delivery callback**: Before sending a message, the EasyIM server sends a request to your app server. You can configure rules based on your business requirements to determine whether to deliver or intercept the message.<br/> - **Content moderation**: Process messages based on content moderation results, including intercepting messages, replacing sensitive information, and allowing messages. This service applies only to text, image, audio, and video messages. |
 
@@ -38,7 +38,7 @@
 
 ### REST API
   
-For a single app, the REST API for sending one-to-one messages has the following default limits. You can contact the Easemob business team to increase them:
+For a single app, the REST API for sending one-to-one messages has the following default limits. You can contact the EasyIM business manager to increase them:
   
 <table>
 <tbody>
@@ -103,7 +103,7 @@ For a single app, the REST API for sending one-to-one messages has the following
 
 ### SDK
 
-By default, the SDK does not limit the frequency at which an individual user can send messages. If you contact the Easemob business team to configure this limit, the SDK reports an error when a user's one-to-one message sending frequency exceeds it. For example, the Android SDK reports error code 509 `MESSAGE_CURRENT_LIMITING`.
+By default, the SDK does not limit the frequency at which an individual user can send messages. If you contact the EasyIM business manager to configure this limit, the SDK reports an error when a user's one-to-one message sending frequency exceeds it. For example, the Android SDK reports error code 509 `MESSAGE_CURRENT_LIMITING`.
 
 ## Extended one-to-one message capabilities
 

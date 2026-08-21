@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Retrieve the member list of the specified message thread.
-- Before using this API, contact the Easemob business team to activate the message thread feature.
+- Before using this API, contact the EasyIM business manager to activate the message thread feature.
 
 ## Call frequency limit
 
@@ -81,7 +81,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | group_error | query param reaches limit. | The value of the paging parameter `limit` is too large. | Check whether the query parameter `limit` is within the value range.  |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
-| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the Easemob business team to activate the message thread feature before calling this API. |
+| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the EasyIM business manager to activate the message thread feature before calling this API. |
 | 404     | group_error | thread not found. | The message thread does not exist. | Specify a valid message thread ID. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

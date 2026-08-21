@@ -24,7 +24,7 @@ EasyIM uses the following billing methods:
 - During testing, an app uses the Free plan by default after it is [created](/product/console/app_create.html). You can upgrade a test app to the Pro or Enterprise plan free of charge. Test apps remain subject to trial restrictions.
 - Before you [launch an app](/product/console/app_launch.html), you must select the Pro or Enterprise plan.
 
-Automatic renewal is enabled by default for all paid plans. When a plan expires, you can also place a new order in Easemob Console for the same plan or a different plan.
+Automatic renewal is enabled by default for all paid plans. When a plan expires, you can also place a new order in EasyIM Console for the same plan or a different plan.
 
 :::tip
 For the differences between plans, see [Plan Feature Comparison](product_package_feature.html).

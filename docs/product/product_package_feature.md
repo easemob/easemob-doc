@@ -5,7 +5,7 @@ EasyIM offers **Free**, **Pro**, and **Enterprise** plans for different stages o
 :::tip
 
 1. `✓` means that the feature is included and can be used after subscribing to the plan.
-2. `*` identifies an optional add-on that can be purchased separately in Easemob Console.
+2. `*` identifies an optional add-on that can be purchased separately in EasyIM Console.
 3. `——` indicates that the current version does not support this feature and requires an upgrade to a later version.
 4. The Free plan is available only to test apps. A test app remains subject to trial restrictions even after it is upgraded to Pro or Enterprise. See [Launch an App](/product/console/app_launch.html) for information about moving an app into production.
 :::
@@ -881,10 +881,10 @@ EasyIM offers **Free**, **Pro**, and **Enterprise** plans for different stages o
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>Contact Easemob Sales</p>
+<p>Contact your business manager</p>
 </td>
 <td width="332">
-<p>Contact Easemob Sales</p>
+<p>Contact your business manager</p>
 </td>
 </tr>
 <tr>

@@ -43,7 +43,7 @@ The iOS SDK creates message bodies through different `EMMessageBody` subclasses 
 
 ## API call frequency limit
 
-By default, the SDK does not limit the frequency at which a single user sends messages. If you have contacted the Easemob business team to configure a per-user sending frequency limit, the SDK returns error code `509` (`MESSAGE_CURRENT_LIMITING`) when a user's sending frequency in one-to-one chats, group chats, or chat rooms exceeds the limit.
+By default, the SDK does not limit the frequency at which a single user sends messages. If you have contacted the EasyIM business manager to configure a per-user sending frequency limit, the SDK returns error code `509` (`MESSAGE_CURRENT_LIMITING`) when a user's sending frequency in one-to-one chats, group chats, or chat rooms exceeds the limit.
 
 ## Send text messages
 
@@ -178,7 +178,7 @@ An image message typically involves the following three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
 - Large image: An image proportionally compressed from the original image by the SDK client. If the shorter side is greater than 720 pixels, the image is proportionally compressed until the shorter side is 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This type of image is typically displayed on the chat details page.
-- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [Easemob Console](/product/console/basic_message.html#图片消息缩略图). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
+- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message.html#图片消息缩略图). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
 
 #### Sending process
 
@@ -1116,7 +1116,7 @@ For details, see [Message Restrictions](/product/limitation.html#消息大小).
 
 Callback routing allows you to route different messages under the same App Key to different service URLs based on the callback environment identifier carried in the message.
 
-When sending a message, you can set a callback environment such as `dev`, `test`, or `prod` through `EMChatMessage#webhookEnv`. After the EasyIM server receives the message, it matches the environment identifier against the callback routes configured in the Easemob Console and sends the current message callback to the corresponding [pre-delivery callback](/document/server-side/callback_presending.html) or [post-delivery callback](/document/server-side/callback_postsending.html) URL.
+When sending a message, you can set a callback environment such as `dev`, `test`, or `prod` through `EMChatMessage#webhookEnv`. After the EasyIM server receives the message, it matches the environment identifier against the callback routes configured in the EasyIM Console and sends the current message callback to the corresponding [pre-delivery callback](/document/server-side/callback_presending.html) or [post-delivery callback](/document/server-side/callback_postsending.html) URL.
 
 :::tip 
 Currently, this feature is available only in China Regions 1 and 2.
@@ -1140,7 +1140,7 @@ Currently, this feature is available only in China Regions 1 and 2.
 
 **Workflow**
 
-1. [Configure callback routes](/product/console/basic_webhook.html#配置消息回调规则) for pre-delivery or post-delivery callbacks in the Easemob Console.
+1. [Configure callback routes](/product/console/basic_webhook.html#配置消息回调规则) for pre-delivery or post-delivery callbacks in the EasyIM Console.
 2. When the client sends a message, set the callback environment identifier through `webhookEnv`.
 3. The EasyIM server matches the service URL for the current callback stage based on the callback environment identifier.
 4. After a valid route is matched, the server sends the callback request to the corresponding URL.
@@ -1149,7 +1149,7 @@ Currently, this feature is available only in China Regions 1 and 2.
 
 | Parameter | Type | Required | Description |
 | ------------ | -------- | -------- | ------------------------------------------------------------ |
-| `webhookEnv` | `String` | No | The callback environment identifier. It supports only letters and numbers and cannot exceed 8 characters. We recommend keeping it consistent with the configuration in the Easemob Console, such as `dev`, `test`, or `prod`. If it is not set or is set to `nil`, the default callback route is used. |
+| `webhookEnv` | `String` | No | The callback environment identifier. It supports only letters and numbers and cannot exceed 8 characters. We recommend keeping it consistent with the configuration in the EasyIM Console, such as `dev`, `test`, or `prod`. If it is not set or is set to `nil`, the default callback route is used. |
 
 **Sample code**
 
@@ -1194,6 +1194,6 @@ func sendTextMessage(
 | Scenario | Routing result |
 | :--------------------------------------- | :----------------------------------------------------------- |
 | An environment value is included and matches a valid route | Route to the corresponding callback URL based on that environment value. |
-| An environment value is included but does not match a valid route | **No callback is triggered.** The `default` fallback configuration in the Easemob Console **does not take effect** in this scenario. |
+| An environment value is included but does not match a valid route | **No callback is triggered.** The `default` fallback configuration in the EasyIM Console **does not take effect** in this scenario. |
 | No environment value is included | Automatically route to the callback URL for the `default` environment. |
 | The same message needs to trigger both pre-delivery and post-delivery callbacks | Both stages must use the **same environment value**. For example, if pre-delivery is configured as `test -> url1` and post-delivery as `test -> url2`, including `test` in the message enables it for both stages. |

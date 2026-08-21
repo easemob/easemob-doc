@@ -117,7 +117,7 @@ NSArray<NSString *> *members = @[@"user_1", @"user_2"];
 
 ### Leave automatically after going offline
 
-If a regular chat room member remains offline for more than 2 minutes because of network issues or other reasons, the member automatically leaves the chat room. To change this period, contact the Easemob business team.
+If a regular chat room member remains offline for more than 2 minutes because of network issues or other reasons, the member automatically leaves the chat room. To change this period, contact the EasyIM business manager.
 
 The following two types of members do not automatically leave the chat room when offline:
 

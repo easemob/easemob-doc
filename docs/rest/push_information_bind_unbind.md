@@ -67,7 +67,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 | Parameter            | Type   | Description                                                         | Required |
 | :-------------- | :----- | :----------------------------------------------------------- | :------- |
 | `device_id`     | String | Mobile device identifier used by the server to identify the device and bind or unbind push information. | Yes       |
-| `notifier_name` | String | Push certificate name.<br/> - The specified certificate name must match the certificate name entered on the **Add Push Certificate** page of the Easemob Console. Otherwise, push fails.<br/> - If `notifier_name` is empty, the current device is unbound from all push information. | Yes       |
+| `notifier_name` | String | Push certificate name.<br/> - The specified certificate name must match the certificate name entered on the **Add Push Certificate** page of the EasyIM Console. Otherwise, push fails.<br/> - If `notifier_name` is empty, the current device is unbound from all push information. | Yes       |
 | `device_token`  | String | Push device token. Incorrect information causes push to fail, and the server automatically unbinds it. If `device_token` is empty, the binding between the current user's current device ID and the current certificate name is removed. | Yes       |
 
 ## Response example

@@ -100,7 +100,7 @@ Synchronous APIs for chat group member management, friend management, Token logi
 
 Added support for [server-side message search](/value-added/search/message_search_ios.html), which allows filtering by keyword combinations, conversation ID, message type, time range, and message content or extension attributes. For details, see [Activation instructions](/product/console/purchase_value_added.html#消息搜索).
 
-Message search does not support the `ext` extension field by default. To search this field, contact the Easemob business team.
+Message search does not support the `ext` extension field by default. To search this field, contact the EasyIM business manager.
 
 #### Fixes
 
@@ -339,7 +339,7 @@ Fixed an occasional failure to bind an APNs Token introduced in v4.16.0.
 
 - Added support for [sending](message_send.html#发送-gif-图片消息) and [receiving GIF image messages](message_receive.html#接收-gif-图片消息).
 - Added support for [chat group avatars](group_attributes.html#manage-the-chat-group-avatar).
-- Added support for [message attachment authentication](message_receive.html#receive-attachment-messages). To activate this feature, contact the Easemob business team. After activation, you must call an SDK API to download message attachments.
+- Added support for [message attachment authentication](message_receive.html#receive-attachment-messages). To activate this feature, contact the EasyIM business manager. After activation, you must call an SDK API to download message attachments.
 - Added support for [retrieving only messages sent by specified chat group members](message_retrieve.html#retrieve-messages-sent-by-specified-group-members-from-the-server) when retrieving roaming messages.
 - Added support for [loading only messages sent by specified chat group members](message_retrieve.html#retrieve-messages-sent-by-specified-group-members-locally) when loading local conversation messages.
 - The [chat group member list](group_manage.html#获取群成员列表) now includes member roles and join times.
@@ -395,7 +395,7 @@ Fixed an occasional failure to bind an APNs Token introduced in v4.16.0.
 
 #### New features
 
-- [EasyIM SDK] When [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server), the SDK now reads message read and delivery status from the server. This feature applies only to one-to-one messages and is disabled by default. To enable it, contact the Easemob business team. 
+- [EasyIM SDK] When [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server), the SDK now reads message read and delivery status from the server. This feature applies only to one-to-one messages and is disabled by default. To enable it, contact the EasyIM business manager. 
 - [EasyIM SDK] Chat room member mute callback:
   - Added the chat room mute callback `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:`. In the callback, the `(NSDictionary<NSString *,NSNumber*> *)aMutes` parameter indicates the mute expiration timestamp.
   - Deprecated the original callback `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`.
@@ -1403,7 +1403,7 @@ Fixes:
 
 New features:
 
-- Added the chat group receipt API. This is a value-added service; contact the Easemob business team for activation.
+- Added the chat group receipt API. This is a value-added service; contact the EasyIM business manager for activation.
 
 Updates:
 
@@ -1445,7 +1445,7 @@ New features:
 Updates:
 
 - Upgraded the audio and video engine, improving noise cancellation and performance and reducing call setup time.
-- Temporarily removed on-device recording starting with version 3.6.0. Mobile clients can use SDK parameters to configure whether each call is recorded on the server. If the Web client also requires recording, contact the Easemob business team to enable recording on all clients. Once enabled, this feature takes precedence over the SDK parameter configuration.
+- Temporarily removed on-device recording starting with version 3.6.0. Mobile clients can use SDK parameters to configure whether each call is recorded on the server. If the Web client also requires recording, contact the EasyIM business manager to enable recording on all clients. Once enabled, this feature takes precedence over the SDK parameter configuration.
 - Improved the batch message saving method by acknowledging messages to the server after they are saved in a batch, fixing an issue where messages were not saved correctly in extreme scenarios.
 - Corresponding error codes are returned when the audio and video service has not been activated or has an overdue balance when a call is initiated or a conference is created.
 - Starting with v3.6.0, the SDK supports only iOS 9.0 and later.
@@ -1670,7 +1670,7 @@ Fixes and improvements:
 
 New features:
 
-- Added support for logging in to the same account on multiple devices and synchronizing messages and friend and chat group operations between those devices. Multi-device login is a value-added service; contact the Easemob business team for activation.
+- Added support for logging in to the same account on multiple devices and synchronizing messages and friend and chat group operations between those devices. Multi-device login is a value-added service; contact the EasyIM business manager for activation.
 - Added: A size property for shared chat group files.
 - Added an API for retrieving the list of devices logged in to the same account, with the option to kick a device offline.
 

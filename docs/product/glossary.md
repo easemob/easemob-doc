@@ -4,9 +4,9 @@
 
 The EasyIM SDK is provided by Easemob to implement instant messaging scenarios such as one-to-one chats, group chats, and chat rooms.
 
-## Easemob Console
+## EasyIM Console
 
-The [Easemob Console](https://console.easemob.com/user/login) is a tool provided by Easemob for developers to manage Easemob services.
+The [EasyIM Console](https://console.easemob.com/user/login) is a tool for developers to manage Easemob services.
 
 ## Daily active users
 

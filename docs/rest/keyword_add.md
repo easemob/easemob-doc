@@ -4,7 +4,7 @@
 
 - Add keywords.
 - Each app can have up to 100 lists, and each list can contain up to 10,000 keywords. Therefore, each app can have up to 1,000,000 entries.
-- You can also configure and use keywords in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#add-keywords).
+- You can also configure and use keywords in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#add-keywords).
 
 ## Call frequency limit
 

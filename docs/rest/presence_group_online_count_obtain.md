@@ -6,15 +6,15 @@ For definitions of online, offline, and custom presence states, see [User presen
 
 ## Feature overview
 
-- Retrieve the number of online members in a chat group. **To use this API, contact the Easemob business team to activate it.**
+- Retrieve the number of online members in a chat group. **To use this API, contact the EasyIM business manager to activate it.**
 - In this API, online indicates that the user's app has successfully established a connection to the server. It does not include custom presence states such as Busy or Be right back.
 
 # Feature Activation
 
 Before using this API, you need to activate Presence and activate this API separately:
 
-1. Activate Presence in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
-2. Contact the Easemob business team to activate this API.
+1. Activate Presence in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+2. Contact the EasyIM business manager to activate this API.
 
 ## Call frequency limit
 
@@ -71,7 +71,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 400         | illegal_argument       | Id cannot be null.       | The chat group ID is empty. | Ensure that the chat group ID is not empty. |
 | 400         | illegal_argument       | Type cannot be null.     | The query type is empty.    | Ensure that the query type is not empty. |
 | 400         | illegal_argument       | Type must be 0 or 1.     | The query type (`query_type`) is neither 0 nor 1.  | To query the number of online members in a chat group, set the query type to `1`. Passing `0` retrieves the number of online members on a community server in a super community and is unrelated to chat groups. |
-| 400         | service open exception | this appkey not open rest group online service | The service for counting online chat group members is not activated. | Contact the Easemob business team to activate the service for counting online chat group members. |
+| 400         | service open exception | this appkey not open rest group online service | The service for counting online chat group members is not activated. | Contact the EasyIM business manager to activate the service for counting online chat group members. |
 | 401         | unauthorized           | Unable to authenticate (OAuth)    | The token is invalid, expired, or incorrect. | Use a new token to access the API. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

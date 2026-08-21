@@ -19,7 +19,7 @@ EasyIM provides services for one-to-one chats, group chats, chat rooms, offline 
 
 Easemob has five major data centers and more than 200 edge acceleration nodes worldwide, providing network services in over 200 countries and regions. Easemob data centers use a three-data-center deployment within each city, provide an SLA of 99.95%, and deliver excellent performance on unstable networks, with a 100% message delivery rate at 70% packet loss.
 
-When creating an app in the Easemob Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](https://doc.easemob.com/product/data_center.html).
+When creating an app in the EasyIM Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](https://doc.easemob.com/product/data_center.html).
 
 ### One-to-one chats
 
@@ -55,13 +55,13 @@ EasyIM supports quick integration using the app's own account system without acc
 
 ## Management and monitoring
 
-The Easemob Console provides management capabilities for EasyIM. In the Console, you can activate EasyIM, purchase value-added services, upgrade your plan, configure message push and callbacks, and manage users, chat groups, and chat rooms. You can also configure content moderation and view statistics.
+The EasyIM Console provides management capabilities for EasyIM. In the Console, you can activate EasyIM, purchase value-added services, upgrade your plan, configure message push and callbacks, and manage users, chat groups, and chat rooms. You can also configure content moderation and view statistics.
 
 ## Server-side features 
 
 ### RESTful APIs
 
-EasyIM provides the following RESTful APIs through the REST platform. Your business server can send HTTP requests to the EasyIM REST server to implement real-time communication on the server side. RESTful APIs provide features such as sending, retrieving, recalling, editing, importing messages, adding Reactions, and managing chat groups, chat rooms, user accounts, and user relationships. RESTful APIs provide more powerful management capabilities than the Easemob Console. For details, see [RESTful APIs](/document/server-side/overview.html).
+EasyIM provides the following RESTful APIs through the REST platform. Your business server can send HTTP requests to the EasyIM REST server to implement real-time communication on the server side. RESTful APIs provide features such as sending, retrieving, recalling, editing, importing messages, adding Reactions, and managing chat groups, chat rooms, user accounts, and user relationships. RESTful APIs provide more powerful management capabilities than the EasyIM Console. For details, see [RESTful APIs](/document/server-side/overview.html).
 
 Some features are available only through RESTful APIs, such as banning and unbanning accounts, globally muting users, and sending app or chat room global broadcast messages.
 

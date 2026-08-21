@@ -5,7 +5,7 @@
 The EasyIM SDK supports sending text, image, voice, video, file, location, command, custom, and combined messages.
 
 - `ChatManager` provides a unified message-sending feature. The standard process is to create a message object and then call `sendMessage` to send it.
-- By default, users who are not friends can send one-to-one messages to each other. If your app allows one-to-one messages only between friends, [enable friend relationship checks](/product/console/basic_user.html#好友关系检查) in the Easemob Console.
+- By default, users who are not friends can send one-to-one messages to each other. If your app allows one-to-one messages only between friends, [enable friend relationship checks](/product/console/basic_user.html#好友关系检查) in the EasyIM Console.
 - In a chat group or chat room, a user can send a message to only one group or chat room to which they belong at a time.
 
 ## Prerequisite
@@ -410,7 +410,7 @@ Image messages generally involve the following three image resources:
 
 - Original image: The original image file selected locally by the sender, generally used to view or save the original image.
 - Large image: An image proportionally compressed from the original image by the SDK client. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained and the image is not enlarged. This image is generally displayed on the chat details page.
-- Thumbnail: An image proportionally compressed from the original image by the server. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained and the image is not enlarged. Configure thumbnail compression and dimensions in the [Easemob Console](/product/console/basic_message.html#图片消息缩略图). Thumbnails are generally used for lightweight display in conversation lists and chat lists.
+- Thumbnail: An image proportionally compressed from the original image by the server. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained and the image is not enlarged. Configure thumbnail compression and dimensions in the [EasyIM Console](/product/console/basic_message.html#图片消息缩略图). Thumbnails are generally used for lightweight display in conversation lists and chat lists.
 
 #### Sending process
 
@@ -1427,7 +1427,7 @@ For size and storage limitations for all message types, see [Message Limitations
 
 Callback routing uses the callback environment value carried by each message to route different messages under the same App Key to different callback URLs.
 
-When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `prod`. After the message is sent, the EasyIM server matches the value against the [callback routing rules](/product/console/basic_webhook.html#配置消息回调规则) configured in the Easemob Console and routes the message to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) URL.
+When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `prod`. After the message is sent, the EasyIM server matches the value against the [callback routing rules](/product/console/basic_webhook.html#配置消息回调规则) configured in the EasyIM Console and routes the message to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) URL.
 
 **Use cases**
 
@@ -1449,7 +1449,7 @@ When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `
 
 To send a message with callback routing:
 
-1. Configure callback routing in the Easemob Console.
+1. Configure callback routing in the EasyIM Console.
    Configure callback URLs for different environment values for pre-delivery or post-delivery callbacks.
 2. Set the callback environment when creating the message.
    Call `client.chatManager.create*Message()` and pass `webhookEnv` in the creation parameters.
@@ -1470,7 +1470,7 @@ const message = client.chatManager.createTextMessage({
   conversationType: "singleChat",
   // Text message content.
   content: "Hello!",
-  // Optional: Callback environment value. The server uses this value to match callback routes configured in the Easemob Console.
+  // Optional: Callback environment value. The server uses this value to match callback routes configured in the EasyIM Console.
   webhookEnv: "test",
 });
 
@@ -1488,7 +1488,7 @@ await client.chatManager.sendMessage(message);
 | Scenario                                 | Routing result                                                                                                                                  |
 | :----------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | Carries an environment value that matches a valid route             | Routes to the corresponding callback URL for that environment value.                                                                                                          |
-| Carries an environment value that does not match a valid route           | **Does not trigger a callback.** The `default` fallback configuration in the Easemob Console **does not take effect** in this scenario.                                                                      |
+| Carries an environment value that does not match a valid route           | **Does not trigger a callback.** The `default` fallback configuration in the EasyIM Console **does not take effect** in this scenario.                                                                      |
 | Does not carry an environment value                         | Automatically routes to the callback URL for the `default` environment.                                                                                                 |
 | The same message must trigger both pre-delivery and post-delivery callbacks | Both stages must use the **same environment value**. For example, if pre-delivery is configured as `test -> url1` and post-delivery as `test -> url2`, carrying `test` in the message enables both stages. |
 

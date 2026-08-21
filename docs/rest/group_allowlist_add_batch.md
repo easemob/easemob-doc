@@ -99,7 +99,7 @@ The other fields are described below:
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 ## Error code
 

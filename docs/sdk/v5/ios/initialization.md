@@ -10,7 +10,7 @@ Initialize the SDK in the app's main process. After initialization succeeds, reg
 
 ## Prerequisite
 
-Register a valid EasyIM developer account, create an app, and obtain the app's App Key. For details, see the [Easemob Console documentation](/product/console/app_create.html).
+Register a valid EasyIM developer account, create an app, and obtain the app's App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
 ## Initialize the SDK
 

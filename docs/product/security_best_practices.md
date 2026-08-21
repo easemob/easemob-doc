@@ -35,7 +35,7 @@ Communications between users and the EasyIM server are encrypted in transit usin
 
 | Data type                                 | Data classification | Storage period                                                                              |
 |:-----------------------------------------|:---------|:--------------------------------------------------------------------------------------|
-| Easemob Console registration data                          | Customer information | Until the customer deletes the account or 6 months after service deactivation.                                                     |
+| EasyIM Console registration data                          | Customer information | Until the customer deletes the account or 6 months after service deactivation.                                                     |
 | Messages, including historical, roaming, and offline messages | User information | The cloud storage period for messages depends on the plan. For details, see [EasyIM plan features](/product/product_package_feature.html). |
 | Message attachments                                 | User information | 7 days.                                                                                   |
 | Message callbacks                                 | User information | 3 days.                                                                                   |

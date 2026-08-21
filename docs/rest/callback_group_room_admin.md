@@ -7,7 +7,7 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add an admin
 
@@ -15,7 +15,7 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 
 - A [chat group admin](/document/android/group_members.html#add-a-group-admin) or [chat room admin](/document/android/room_members.html#add-a-chat-room-admin) is added on the client.
 - A RESTful API is called to add a [chat group admin](/document/server-side/group_admin_add.html) or [chat room admin](/document/server-side/chatroom_admin_add.html).
-- In the [Easemob Console](https://console.easemob.com/user/login), a [chat group admin](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room admin](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added.
+- In the [EasyIM Console](https://console.easemob.com/user/login), a [chat group admin](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room admin](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added.
 
 ### Webhook request
 
@@ -48,11 +48,11 @@ The following example uses the event for adding a chat group admin. The fields a
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the user added as a chat group or chat room admin. |
 | `payload.type` | String | Event for adding a chat group or chat room admin. The value is `ADD`.  |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.                                |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -99,11 +99,11 @@ The following example uses the event for removing a chat group admin. The fields
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the removed chat group or chat room admin. |
 | `payload.type` | String | Event for removing a chat group or chat room admin. The value is `REMOVE`.    |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.                                |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |

@@ -9,7 +9,7 @@ EasyIM supports delivering messages only to online users. If a recipient is offl
 - **Applicable conversation types**: This feature supports only one-to-one and group chats. It **does not apply to chat rooms**.
 - **Supported message types:** All message types support this feature and can be delivered only to online users.
 - **Offline storage limitation:** **Offline storage is not supported.** If the recipient is offline when the message is sent, the recipient cannot receive it, even after logging in again. A regular message is delivered in real time when the recipient is online. When the recipient is offline, an offline push notification is triggered, and the EasyIM server delivers messages sent during the offline period after the recipient gets online again.
-- **Roaming storage limitation:** Roaming storage is not supported by default. By default, sent messages are not stored on the EasyIM message server, so users cannot retrieve them on other devices. **To enable roaming storage for online-only messages, contact the Easemob business team.**
+- **Roaming storage limitation:** Roaming storage is not supported by default. By default, sent messages are not stored on the EasyIM message server, so users cannot retrieve them on other devices. **To enable roaming storage for online-only messages, contact the EasyIM business manager.**
 
 ## Prerequisite
 

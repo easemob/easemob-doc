@@ -15,7 +15,7 @@ The following image shows an example of message delivery and read receipts:
 - One-to-one conversations support message delivery receipts and read receipts.
 - Group chat conversations support read receipts but not delivery receipts.
 - Chat rooms do not currently support delivery receipts or read receipts.
-- **Enable [group message read receipts in the Easemob Console](/product/console/basic_message.html#群聊消息已读回执) before using them.**
+- **Enable [group message read receipts in the EasyIM Console](/product/console/basic_message.html#群聊消息已读回执) before using them.**
 
 ## Understand the tech
 
@@ -69,7 +69,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in successfully. See [Quickstart](quickstart.html).
 - Understand the EasyIM usage restrictions. See [Limitations](/product/limitation.html).
-- Enable group message read receipts in the [Easemob Console](/product/console/basic_message.html#群聊消息已读回执) before using them.
+- Enable group message read receipts in the [EasyIM Console](/product/console/basic_message.html#群聊消息已读回执) before using them.
 
 ## One-to-one message delivery receipts
 
@@ -116,11 +116,11 @@ Both one-to-one and group messages support read receipts. Before using group mes
 
 | Limitation       | Default setting   | Description                                                         |
 | :--- | :--- | :--- |
-| Feature activation       | Disabled       | Before use, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [Easemob Console](https://console.easemob.com/user/login).|
-| Permission       | All group members | By default, all group members can require read receipts when sending messages. To allow only the group owner and group admins to require them, contact the Easemob business team to update the configuration. |
+| Feature activation       | Disabled       | Before use, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [EasyIM Console](https://console.easemob.com/user/login).|
+| Permission       | All group members | By default, all group members can require read receipts when sending messages. To allow only the group owner and group admins to require them, contact the EasyIM business manager to update the configuration. |
 | Read receipt validity period | 3 days       | Group message read receipts are valid for 3 days. More than 3 days after a message is sent, the server no longer records the members who read the message or sends read receipts for it. |
 | Group size         | 200 members     | This feature supports chat groups with up to 200 members. If a group has more than 200 members, group messages do not return read receipts. This limit cannot currently be increased. |
-| View read count   | Message sender | By default, only the sender can view the number of members who have read a group message. To allow all group members to view it, contact the Easemob business team. |
+| View read count   | Message sender | By default, only the sender can view the number of members who have read a group message. To allow all group members to view it, contact the EasyIM business manager. |
 
 :::tip
 The message read receipt validity period is the same as the message's server-side retention period. A read receipt can be sent while the message is stored on the server. The retention period depends on your subscribed plan. See [EasyIM Plan Features](/product/product_package_feature.html). 
@@ -130,7 +130,7 @@ The message read receipt validity period is the same as the message's server-sid
 
 When initializing a message object, the sender must set `isNeedReadReceipt` to `YES`. The default value of this property is `NO`. This property applies to both one-to-one and group chats.
 
-One-to-one message read receipts require no additional activation. For group message read receipts, first enable the feature in the Easemob Console and then set this attribute.
+One-to-one message read receipts require no additional activation. For group message read receipts, first enable the feature in the EasyIM Console and then set this attribute.
 
 ```objectivec
 // Create a text message. For a one-to-one chat, conversationId is the peer user ID.
@@ -290,7 +290,7 @@ Sending message read receipts and clearing conversation unread counts are indepe
 - Before sending a one-to-one or group message, set `isNeedReadReceipt` to `YES`.
 - You can pass up to 50 messages to `sendMessageReadReceipts` in each call. All messages must belong to the same conversation, and their `isNeedReadReceipt` value must be `YES`.
 - The client that calls `sendMessageReadReceipts` does not receive its own receipts through `onMessageReadReceipts`; the original message sender receives this callback.
-- Group message read receipts must be enabled in the Easemob Console and are subject to server-side configurations such as validity period, group size, and viewing permissions.
+- Group message read receipts must be enabled in the EasyIM Console and are subject to server-side configurations such as validity period, group size, and viewing permissions.
 
 ## API list
 

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-A message thread is a subset of chat group members and supports multi-user communication. Before using message threads, contact the Easemob business team to activate the feature.
+A message thread is a subset of chat group members and supports multi-user communication. Before using message threads, contact the EasyIM business manager to activate the feature.
 
 This page describes how to use the EasyIM Android SDK to create and manage message threads in a real-time interactive app and implement message thread features. For message-related content, see [Manage Messages in Message Threads](thread_message.html).
 
@@ -13,7 +13,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK. For details, see [Quickstart](quickstart.html).
 - Understand the EasyIM API [limitations](/product/limitation.html).
 - Understand the limits on message threads and their members. For details, see [Feature Limitations](/product/limitation.html).
-- Contact the Easemob business team to activate message threads.
+- Contact the EasyIM business manager to activate message threads.
 
 ## Create a message thread
 

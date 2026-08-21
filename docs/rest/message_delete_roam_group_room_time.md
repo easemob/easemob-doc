@@ -8,7 +8,7 @@
   - Other users in the conversation are not affected and can still retrieve these roaming messages and the conversation.
 
 :::tip
-Chat room roaming messages are disabled by default. To use this feature, contact the Easemob business team to enable it.
+Chat room roaming messages are disabled by default. To use this feature, contact the EasyIM business manager to enable it.
 :::
 
 ## Call frequency limit
@@ -66,6 +66,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 
 | HTTP status code | Error type    | Error message       | Possible cause    | Recommendation       |
 |:---------|:-------------------|:--------------|:--------------|:----------------------|
-| 400      | service open exception    | this appKey not open message roaming    | Message roaming is not enabled. | Contact the Easemob business team to enable it. |
+| 400      | service open exception    | this appKey not open message roaming    | Message roaming is not enabled. | Contact the EasyIM business manager to enable it. |
 
 For other errors and their possible causes, see [Response status codes](error.html).

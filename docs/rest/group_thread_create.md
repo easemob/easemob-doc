@@ -4,8 +4,8 @@
 
 - Chat group members create message threads from messages in the chat group. The source message becomes the parent message of the message thread.
 - The message thread creator is the message thread owner.
-- **By default, an app can have up to 100,000 message threads. To adjust this limit, contact the Easemob business team.**
-- Before using this API, contact the Easemob business team to activate the message thread feature.
+- **By default, an app can have up to 100,000 message threads. To adjust this limit, contact the EasyIM business manager.**
+- Before using this API, contact the EasyIM business manager to activate the message thread feature.
 
 ## Call frequency limit
 
@@ -77,7 +77,7 @@ The other fields are described below:
 | Field          | Type | Description                                                                              |
 | :------------ | :--- | :-------------------------------------------------------------------------------- |
 | `action`          | String | Request method. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
@@ -96,10 +96,10 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 400     | group_error | msg not belong to group . | The message does not belong to the group. | Enter a valid message ID. |
 | 400     | group_error | thread not nested. | Creating a message thread on a message thread is not allowed. | Enter a valid message ID. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
-| 403     | group_error | thread number has reached limit. | The appKey has reached the message thread limit. | Delete unused message threads or contact the Easemob business team to adjust the limit. By default, an app can have up to 100,000 message threads. |
-| 403     | group_error | user join thread reach limit. | The user has reached the limit on joined message threads. | Leave unused message threads or contact the Easemob business team to adjust the limit. By default, a user can join up to 100,000 message threads. |
+| 403     | group_error | thread number has reached limit. | The appKey has reached the message thread limit. | Delete unused message threads or contact the EasyIM business manager to adjust the limit. By default, an app can have up to 100,000 message threads. |
+| 403     | group_error | user join thread reach limit. | The user has reached the limit on joined message threads. | Leave unused message threads or contact the EasyIM business manager to adjust the limit. By default, a user can join up to 100,000 message threads. |
 | 403     | group_error | msg already create thread.not allow to create. | A message thread has already been created from the message. | Specify another message ID, or retrieve and join the existing message thread. |
-| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the Easemob business team to activate the message thread feature before calling this API. |
+| 403     | group_error | thread not open. | The message thread feature is not enabled. | Contact the EasyIM business manager to activate the message thread feature before calling this API. |
 | 404     | group_error | user not in group. | The message thread owner is not in the chat group. | Specify the user ID of a chat group member. |
 | 404     | group_error | msg not exist. | The message does not exist. | Enter an existing message ID. |
 | 404     | group_error | group not found. | The chat group does not exist. | Check whether the chat group for the message thread exists. |

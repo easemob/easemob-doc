@@ -70,6 +70,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | HTTP status code | Error type               | Error message                  | Possible cause    | Recommendation      |
 |:---------|:-------------------|:----------------------|:--------|:----------|
 | 404      | entity_not_found | file may not exists | The specified `file_uuid` does not exist. | Enter the correct path parameter `file_uuid`. |
-| 404      | file_expired | file xxxxx is expired | The file has expired. | By default, message attachments such as images, audio, video, and other files can be stored for 7 days. To increase this limit, contact the Easemob business team.  |
+| 404      | file_expired | file xxxxx is expired | The file has expired. | By default, message attachments such as images, audio, video, and other files can be stored for 7 days. To increase this limit, contact the EasyIM business manager.  |
 
 For other errors and their possible causes, see [Response status codes](error.html).

@@ -7,7 +7,7 @@
 
 ## Feature activation
 
-Text message translation is a value-added service. To use this feature, **contact the Easemob business team to enable it**.
+Text message translation is a value-added service. To use this feature, **contact the EasyIM business manager to enable it**.
 
 ## Call frequency limit
 
@@ -74,6 +74,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 
 | HTTP status code | Error message                  | Possible cause    | Recommendation      |
 |:---------|:----------------------|:--------|:----------|
-| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the Easemob business team to increase the limit, or reduce the call frequency.      |
+| 400   | The request has reached the maximum limit  | The call frequency exceeds the limit.    | Contact the EasyIM business manager to increase the limit, or reduce the call frequency.      |
 | 400   | InternalTranslateFailedException                  | An error occurred in the Microsoft Azure translation service.   |       |
-| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the Easemob business team to enable it before calling the API.      |
+| 503   | service not open                  | The translation service is not enabled.    | Translation is a value-added service. Contact the EasyIM business manager to enable it before calling the API.      |

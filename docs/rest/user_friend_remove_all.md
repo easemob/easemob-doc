@@ -68,7 +68,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | `timestamp`          | Long   | Unix timestamp of the HTTP response, in milliseconds. |
 | `duration`           | Long   | Duration from sending the HTTP request to receiving the response, in milliseconds. |
 | `organization`       | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName`    | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName`    | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Error code](#error-code) for possible causes.
 
@@ -79,7 +79,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | HTTP status code        | Error type | Error message          | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401  | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
-| 429 | reach_limit | This request has reached api limit. | The API call frequency exceeds the limit. | Contact the sales team to adjust the limit or reduce the call rate. |
+| 429 | reach_limit | This request has reached api limit. | The API call frequency exceeds the limit. | Contact the business manager to adjust the limit or reduce the call rate. |
 | 403   | forbidden_service_operation | Service operation not allowed | The app or user is banned. | Unban the app or user before calling this API. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

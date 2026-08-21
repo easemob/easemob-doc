@@ -28,7 +28,7 @@ See [Chat Group Overview](group_overview.html).
 
 ### Chat room operations
 
-The Web SDK supports operations on existing chat rooms, including retrieving, joining, leaving, updating information, and sending and receiving messages. Chat rooms are generally created and destroyed through the server-side REST API or Easemob Console. The Web SDK primarily provides chat room operations performed by the client at runtime.
+The Web SDK supports operations on existing chat rooms, including retrieving, joining, leaving, updating information, and sending and receiving messages. Chat rooms are generally created and destroyed through the server-side REST API or EasyIM Console. The Web SDK primarily provides chat room operations performed by the client at runtime.
 
 | Feature | Description |
 | :--- | :--- |

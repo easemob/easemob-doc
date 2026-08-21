@@ -6,7 +6,7 @@ Conversation pinning keeps important one-to-one, group, or chat room conversatio
 
 ## Feature activation
 
-Conversation pinning is part of the server-side conversation list feature. Before using it, [activate the server-side conversation list feature in Easemob Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+Conversation pinning is part of the server-side conversation list feature. Before using it, [activate the server-side conversation list feature in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
 
 ## Prerequisite
 

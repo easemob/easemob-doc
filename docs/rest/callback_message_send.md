@@ -9,7 +9,7 @@ Webhook requests for one-to-one, chat group, and chat room messages contain a se
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Common parameters
 
@@ -26,9 +26,9 @@ The following table describes the common parameters in webhook requests for mess
 | `to`              | String | Message recipient.   |
 | `msg_id`    | String   | ID of the sent message. |
 | `payload`         | object | Event content, in the same format as content sent through the REST API. See [Historical message content](message_historical.html#historical-message-content).      |
-| `securityVersion` | String | Security verification version, currently `1.0.0`. Ignore this parameter. It will be configured in the Easemob Console in the future.                   |
-| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules) in the Easemob Console.     |
-| `appkey`          | String | Unique identifier of the app registered in the Easemob Console.        |
+| `securityVersion` | String | Security verification version, currently `1.0.0`. Ignore this parameter. It will be configured in the EasyIM Console in the future.                   |
+| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules) in the EasyIM Console.     |
+| `appkey`          | String | Unique identifier of the app registered in the EasyIM Console.        |
 | `host`            | String | Server name.              |
 | `content_type`            | String | Message type:<br/> - `chat:user:*`: One-to-one message  <br/> - `chat:group:*`: Chat group message   <br/> - `chat:room:*`: Chat room message  <br/>  For the specific parameter values of each message type, see [Send one-to-one messages](#send-one-to-one-messages), [Send chat group messages](#send-chat-group-messages), and [Send chat room messages](#send-chat-room-messages).   |
 

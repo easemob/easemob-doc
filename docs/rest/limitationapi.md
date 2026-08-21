@@ -14,8 +14,8 @@ show_content_moderation: false
 Unless otherwise specified for an API, the default API call frequency limit is 100 calls/second. You can view the call frequency limit for each API by module.
 
 In EasyIM, most client APIs are implemented through their corresponding RESTful APIs.
-- A RESTful API marked with an asterisk (*) in the following tables has no corresponding client API. Therefore, its call frequency depends only on calls to that RESTful API. If the call frequency reaches the limit, contact the Easemob business team to request a higher limit.
-- For all other APIs, the call frequency is the sum of calls to the RESTful API and its corresponding client API. If the call frequency reaches the limit, check whether the client API is being called too frequently. To request a higher call frequency limit, contact the Easemob business team.
+- A RESTful API marked with an asterisk (*) in the following tables has no corresponding client API. Therefore, its call frequency depends only on calls to that RESTful API. If the call frequency reaches the limit, contact the EasyIM business manager to request a higher limit.
+- For all other APIs, the call frequency is the sum of calls to the RESTful API and its corresponding client API. If the call frequency reaches the limit, check whether the client API is being called too frequently. To request a higher call frequency limit, contact the EasyIM business manager.
 
 ### API call frequency limit period
 
@@ -37,8 +37,8 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | * Send Group Messages                 | POST   | /{org_name}/{app_name}/messages/chatgroups           | For a single app, this REST API has the following three limits:<br/> - 20 messages/second/App Key   <br/> - 20 calls/second <br/> -  3 chat groups/request   | 50 messages/second   |  
 | * Send Targeted Messages                 | POST   | /{org_name}/{app_name}/messages/chatgroups/users           | 100 messages/second/App Key   | 100 calls/second    |  
 | * Send Chat Room Messages               | POST   | /{org_name}/{app_name}/messages/chatrooms            | For a single app, this REST API has the following three limits:<br/> - 100 messages/second  <br/> - 100 calls/second   <br/> -  10 chat rooms/request   | 100 messages/second    |  
-| * Send a Broadcast Message to All App Users | POST | /{org_name}/{app_name}/messages/broadcast | <br/> - Every 30 minutes, 1 call is allowed. This limit cannot be increased.<br/> - 3 calls/day. Contact the Easemob business team to request a higher limit.<br/> - Messages can be sent to up to 1000 users/second. This limit cannot be increased. |          |  
-| * Send a Broadcast Message to Online App Users | POST | /{org_name}/{app_name}/messages/users/broadcast | 1 call/minute and 50 calls/day. Contact the Easemob business team to request a higher limit. |          |  
+| * Send a Broadcast Message to All App Users | POST | /{org_name}/{app_name}/messages/broadcast | <br/> - Every 30 minutes, 1 call is allowed. This limit cannot be increased.<br/> - 3 calls/day. Contact the EasyIM business manager to request a higher limit.<br/> - Messages can be sent to up to 1000 users/second. This limit cannot be increased. |          |  
+| * Send a Broadcast Message to Online App Users | POST | /{org_name}/{app_name}/messages/users/broadcast | 1 call/minute and 50 calls/day. Contact the EasyIM business manager to request a higher limit. |          |  
 | * Send One-to-One Stream Messages                 | POST   | /{org_name}/{app_name}/stream_message/user           | 100 messages/second/App Key   | ——   |  
 | * Send Group Chat Stream Messages                 | POST   | /{org_name}/{app_name}/stream_message/chatgroup           | 100 messages/second/App Key   | ——   |  
 | * Send a Global Broadcast Message to Chat Rooms | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 10 calls/minute and 100 broadcast messages/day. | 100calls/day    |  

@@ -9,8 +9,8 @@ A targeted message is sent to one or more specified members of a chat group or c
 - **Supported message types:** Targeted messages support text, image, voice, video, and other message types.
 - **Recipient limit:** Each targeted message can specify up to 20 recipients in a chat group or chat room.
 - **Conversation list and unread count:** Targeted messages are not written to the server-side conversation list or included in the unread message count of a server-side conversation.
-- **Group message roaming:** Roaming is not supported for targeted group messages by default. To enable it, contact the Easemob business team.
-- **Chat room message roaming:** Roaming is not supported for targeted chat room messages by default. To enable it, contact the Easemob business team to activate both chat room message roaming and targeted message roaming.
+- **Group message roaming:** Roaming is not supported for targeted group messages by default. To enable it, contact the EasyIM business manager.
+- **Chat room message roaming:** Roaming is not supported for targeted chat room messages by default. To enable it, contact the EasyIM business manager to activate both chat room message roaming and targeted message roaming.
 
 ## Send a targeted message
 

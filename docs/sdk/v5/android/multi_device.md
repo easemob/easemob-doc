@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM allows the same account to log in on multiple devices. Before using this feature, activate the multi-device login service in [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+EasyIM allows the same account to log in on multiple devices. Before using this feature, activate the multi-device login service in [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 
 During login, the Android SDK generates a login resource identifier for the current device and synchronizes device-related information to the server. The server maintains the current account's online device state according to the multi-device policy. When the same account performs operations involving friends, chat groups, message threads, conversations, or one-way deletion of server-side historical messages on another device, the current device receives the corresponding multi-device events through an `EMMultiDeviceListener` registered with `EMClient#addMultiDeviceListener`.
 
@@ -18,7 +18,7 @@ The Android SDK supports the following features in multi-device login scenarios:
 - Forcibly log out a specified account from all devices.
 - Retrieve friend or chat group operations performed on other devices.
 
-By default, EasyIM allows up to 4 devices on each platform to be online simultaneously during multi-device login. To increase this limit, contact the Easemob business team. On the **Feature Configuration > Basic Features > Users** page in Easemob Console, set the device count for each platform in the dialog box:
+By default, EasyIM allows up to 4 devices on each platform to be online simultaneously during multi-device login. To increase this limit, contact the EasyIM business manager. On the **Feature Configuration > Basic Features > Users** page in EasyIM Console, set the device count for each platform in the dialog box:
 
 ![img](/images/common/multidevice_device_count.png)
 
@@ -34,7 +34,7 @@ The mutual-kick policies for single-device and multi-device login are as follows
 ## Prerequisite
 
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html).
-- Activate multi-device login in [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+- Activate multi-device login in [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 - Set the custom login device name and platform during SDK initialization.
 
 ## Retrieve login IDs for the current user's other logged-in devices  
@@ -135,13 +135,13 @@ EasyIM supports custom login device platforms. For example, define Android phone
 
 Set the platform to which a login device belongs as follows:
 
-1. On the **Instant Messaging > Basic Features > Users** page in Easemob Console, click **Settings** in the **Multi-Device Login** section. In the dialog box, click **Add Custom Platform**, and set **Device Platform** and **Device Count**.
+1. On the **Instant Messaging > Basic Features > Users** page in EasyIM Console, click **Settings** in the **Multi-Device Login** section. In the dialog box, click **Add Custom Platform**, and set **Device Platform** and **Device Count**.
 
 The range for **Device Platform** is [1,100], and the range for **Device Count** is [0,4].
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. During SDK initialization, call `EMOptions#setCustomOSPlatform` to set a custom login device platform. Ensure that `platform` has the same value as **Device Platform** in the **Add Custom Platform** dialog box in Easemob Console.
+2. During SDK initialization, call `EMOptions#setCustomOSPlatform` to set a custom login device platform. Ensure that `platform` has the same value as **Device Platform** in the **Add Custom Platform** dialog box in EasyIM Console.
 
 :::tip
 This setting is sent to the server only after login succeeds.

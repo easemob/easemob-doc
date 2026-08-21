@@ -38,9 +38,9 @@ Each request URL contains the `host`, `org_name`, and `app_name` parameters.
 | :--------- | :----- | :------- | :------------------------- |
 | `host`     | String | Yes       | Domain assigned by EasyIM for accessing RESTful APIs.<br/> - To meet different customers' business requirements, Easemob has deployed data centers in multiple locations. REST API request domains vary by data center. Select the request domain for your data center.<br/> - Customers in the domestic VIP region or customer service region should contact their Easemob business manager to obtain the REST API request address.<br/> -  HTTP and HTTPS are supported.|
 | `org_name` | String | Yes       | Unique identifier assigned by EasyIM to each company (organization). |
-| `app_name` | String | Yes       | App name entered when you created the app in the Easemob Console.|
+| `app_name` | String | Yes       | App name entered when you created the app in the EasyIM Console.|
 
-You can view the app's domain `host`, organization name `org_name`, and app name `app_name` on the **App Overview** page of the Easemob Console.
+You can view the app's domain `host`, organization name `org_name`, and app name `app_name` on the **App Overview** page of the EasyIM Console.
 
 ![img](/images/server-side/app_info.png)
 
@@ -75,5 +75,5 @@ For the method, API URL, brief description, and call frequency limit of each RES
 
 Before calling EasyIM RESTful APIs, ensure that the following requirements are met:
 
-- In the [Easemob Console](https://console.easemob.com/user/login), you have [registered an account](/product/console/account_register.html) and [created an app](/product/console/app_create.html).
+- In the [EasyIM Console](https://console.easemob.com/user/login), you have [registered an account](/product/console/account_register.html) and [created an app](/product/console/app_create.html).
 - You have obtained an app token from the server. For details, see [Authenticate with an App Token](easemob_app_token.html).

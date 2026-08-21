@@ -72,7 +72,7 @@ The other fields in the response body are described below:
 | `action`          | String | The request method.                                                                     |
 | `entities`        | JSON Array   | The response entity.                                                                     |
 | `duration`        | Int    | The time elapsed from sending the request to receiving the response, in milliseconds.                                           |
-| `applicationName` | String | The app name you entered when creating the app in the Easemob Console. This value is the same as the request parameter `app_name`. |
+| `applicationName` | String | The app name you entered when creating the app in the EasyIM Console. This value is the same as the request parameter `app_name`. |
 
 ## Error code
 

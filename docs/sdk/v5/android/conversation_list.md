@@ -8,7 +8,7 @@
 
 ## Feature activation
 
-Before use, activate the server-side conversation list feature in [Easemob Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+Before use, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
 
 ## Prerequisite
 

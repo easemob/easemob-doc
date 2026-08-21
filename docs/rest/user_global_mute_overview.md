@@ -12,7 +12,7 @@ This feature can be widely used in real-time interactive apps. For example, if a
 
 ## Feature activation
 
-Before using global user mute, activate it in the Easemob Console. For details, see [Easemob Console documentation](/product/console/basic_user.html#global-user-mute).
+Before using global user mute, activate it in the EasyIM Console. For details, see [EasyIM Console documentation](/product/console/basic_user.html#global-user-mute).
 
 ## API list
 

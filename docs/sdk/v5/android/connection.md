@@ -206,7 +206,7 @@ The following situations cannot be recovered through automatic reconnection alon
 | User logged out after changing the password | `EMError.USER_KICKED_BY_CHANGE_PASSWORD` (216) | Obtain a new token and log in. |
 | User forcibly logged out by another device, API, or the console | `EMError.USER_KICKED_BY_OTHER_DEVICE` (217) | Notify the user and log in again according to your business policy. |
 | Login device changed | `EMError.USER_DEVICE_CHANGED` (220) | Handle the device policy, and then log in again. |
-| DAU or MAU limit reached | `EMError.APP_ACTIVE_NUMBER_REACH_LIMITATION` (8) | Check the app quota or contact the Easemob business team. |
+| DAU or MAU limit reached | `EMError.APP_ACTIVE_NUMBER_REACH_LIMITATION` (8) | Check the app quota or contact the EasyIM business manager. |
 | Service restricted | `EMError.SERVER_SERVICE_RESTRICTED` (305) | Check service activation and quota status. |
 
 When the `onLogout` error code is `USER_LOGIN_ANOTHER_DEVICE`, `EMLoginExtensionInfo` provides extension information and the name of the new device that logged out the current device. Your app can use this information to display a more specific notification.

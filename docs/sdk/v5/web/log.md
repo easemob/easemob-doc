@@ -20,4 +20,4 @@ setLogLevel('WARN');
 
 ## Log reporting
 
-The Web SDK supports reporting logs to the EasyIM server. This feature is disabled by default. To enable it, contact the Easemob business team.
+The Web SDK supports reporting logs to the EasyIM server. This feature is disabled by default. To enable it, contact the EasyIM business manager.

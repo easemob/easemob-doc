@@ -4,7 +4,7 @@
 
 - Create a keyword list.
 - Keyword lists are applied in [text moderation rules](/value-added/moderation/moderation_rule_config.html#configure-moderation-rules). Before use, activate the [text moderation service](/value-added/moderation/moderation_enable.html) and configure [text moderation rules](/value-added/moderation/moderation_rule_config.html#configure-moderation-rules).
-- Created lists are displayed in the Easemob Console, where you can edit or delete lists and add or delete keywords. For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
+- Created lists are displayed in the EasyIM Console, where you can edit or delete lists and add or delete keywords. For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
 - Each app can have up to 100 lists, and each list can contain up to 10,000 keywords. Therefore, each app can have up to 1,000,000 entries.
 
 ## Call frequency limit

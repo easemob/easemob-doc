@@ -10,7 +10,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 ## Feature activation
 
-To use Reaction, activate it in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_message.html#message-reactions).
+To use Reaction, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_message.html#message-reactions).
 
 ## Call frequency limit
 
@@ -66,6 +66,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | HTTP status code        | Error type | Error message          | Possible cause                     | Recommendation        |
 | :----------- | :--- | :------------- |:-------------------------|:------------|
 | 400     | Bad Request   | the user operation is illegal!        | The specified user ID has not operated on the Reaction. | Specify the correct user ID. |
-| 400      | Bad Request  | this appKey is not open reaction service!   | The Reaction service is not activated. | Activate the Reaction service in the Easemob Console. |
+| 400      | Bad Request  | this appKey is not open reaction service!   | The Reaction service is not activated. | Activate the Reaction service in the EasyIM Console. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM supports logging in to the same account on multiple devices. Before using this feature, activate the multi-device login service in the [Easemob Console](https://console.easemob.com/user/login). See the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+EasyIM supports logging in to the same account on multiple devices. Before using this feature, activate the multi-device login service in the [EasyIM Console](https://console.easemob.com/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 
 During login, the iOS SDK synchronizes device-related information to the server. The server maintains the online device state of the current account according to the multi-device login policy. When the same account performs operations involving friends, groups, message threads, conversations, or one-way deletion of server-side historical messages on another device, the current device can receive the corresponding events through `EMMultiDevicesDelegate`, which is registered with `addMultiDevicesDelegate`.
 
@@ -15,7 +15,7 @@ In multi-device login scenarios, the iOS SDK supports the following features:
  - Set the name, platform, and extension information of a login device.
  - Kick a specified account offline from one or all devices.
 
-For multi-device login, EasyIM supports up to 4 simultaneously online devices on each platform by default. To increase the number of supported devices, contact the Easemob business team. You can set the number of devices for each platform on the **EasyIM > Basic Features** > **Users** page in the Easemob Console:
+For multi-device login, EasyIM supports up to 4 simultaneously online devices on each platform by default. To increase the number of supported devices, contact the EasyIM business manager. You can set the number of devices for each platform on the **EasyIM > Basic Features** > **Users** page in the EasyIM Console:
 
 ![img](/images/common/multidevice_device_count.png)
 
@@ -33,7 +33,7 @@ The device kicking policies for single-device and multi-device login are describ
 Before you begin, ensure that the following requirements are met:
 
  - Initialize and log in to the iOS SDK. See [Quickstart](quickstart.html).
- - Activate multi-device login in the [Easemob Console](https://console.easemob.com/user/login). See the [Easemob Console documentation](/product/console/basic_user.html#多端多设备).
+ - Activate multi-device login in the [EasyIM Console](https://console.easemob.com/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 
 ## Retrieve the login ID list of the current user's other login devices
 
@@ -107,13 +107,13 @@ options.customDeviceName = @"Alice 的 iPad";
 
 Use `EMOptions#customOSType` to set a custom platform for the current device. For example, set phones and tablets as separate platforms so that users can precisely control the number of login devices on the same platform and device kicking behavior between platforms.
 
-1. On the **EasyIM** > **Basic Features** > **Users** page in the Easemob Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**, and then set **Device Platform** and **Device Count** in the **Add Custom Platform** dialog box.
+1. On the **EasyIM** > **Basic Features** > **Users** page in the EasyIM Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**, and then set **Device Platform** and **Device Count** in the **Add Custom Platform** dialog box.
 
 The value range of **Device Platform** is [1,100], and the value range of **Device Count** is [0,4].
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. When initializing the SDK, call `initializeSDKWithOptions` and set the `EMOptions#customOSType` property to add a custom platform. Ensure that this property has the same value as **Device Platform** in the **Add Custom Platform** dialog box in the Easemob Console.
+2. When initializing the SDK, call `initializeSDKWithOptions` and set the `EMOptions#customOSType` property to add a custom platform. Ensure that this property has the same value as **Device Platform** in the **Add Custom Platform** dialog box in the EasyIM Console.
 
 :::tip
 This setting is sent to the server only after login succeeds.

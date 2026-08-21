@@ -15,7 +15,7 @@ For definitions of online, offline, and custom presence states, see [User presen
 
 ## Feature activation
 
-Before using Presence, activate it in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+Before using Presence, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
 
 ## Call frequency limit
 
@@ -100,7 +100,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 400         | illegal_argument       | usernames is empty   | The array of subscribed users' user IDs is empty.           | Ensure that the array of subscribed users' user IDs is not empty.  |
 | 400         | illegal_argument       | too many sub presence   | The list of subscribed users exceeds the limit of 100 user IDs.    | Limit the list of subscribed users to no more than 100 user IDs. |
 | 400         | illegal_argument       | you can't sub yourself  | The list of subscribed users includes the current user, that is, it contains the `username` in the request URL path. | Remove the current user from the list of subscribed users.  |
-| 400         | service open exception | the app not open presence  | The Presence service is not activated.                 | Contact the Easemob business team to activate the Presence service.    |
+| 400         | service open exception | the app not open presence  | The Presence service is not activated.                 | Contact the EasyIM business manager to activate the Presence service.    |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect.      | Use a new token to access the API.           |
 
 For other errors, see [Response status codes](error.html) for possible causes.

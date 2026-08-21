@@ -4,7 +4,7 @@
 
 - Query keywords in a keyword list.
 - This API performs a fuzzy query. For example, if you pass the keyword `message`, the response returns entries in the keyword list that contain it, including `message``messageid`, `addmessage`, and `deletemessage`.
-- You can also query keywords in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
+- You can also query keywords in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Keyword moderation](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
 
 ## Call frequency limit
 

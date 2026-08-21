@@ -31,13 +31,13 @@ The steps are described below:
 
 - The combined length of the request body and extension fields cannot exceed 5 KB. For other message limitations, see [Message limitations](/product/limitation.html#message-size).
 - This API does not validate the specified sender or recipient user IDs. Even if a specified user ID does not exist, the server does not return an error and sends the message as usual.
-- By default, this API does not check the friendship between the sender and recipient. If you enable [friendship verification](/product/console/basic_user.html#friendship-verification) in the Easemob Console, the API checks their friendship.
+- By default, this API does not check the friendship between the sender and recipient. If you enable [friendship verification](/product/console/basic_user.html#friendship-verification) in the EasyIM Console, the API checks their friendship.
 - This API does not check whether the recipient is on the blocklist or whether the sender is muted.
 
 ### Sending behavior and related notes
 
 - All sent messages can be synchronized to the sender.
-- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the Easemob Console](/product/console/basic_conversation_group_chatroom.html#write-messages-sent-through-the-rest-api-to-the-conversation-list).
+- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_conversation_group_chatroom.html#write-messages-sent-through-the-rest-api-to-the-conversation-list).
 - Calling this API triggers a post-delivery callback event. For details, see [Webhook events](callback_message_send.html#send-one-to-one-messages).
 - You can use common optional message parameters to specify whether to synchronize a message to all of the sender's online devices, which users cannot retrieve the message when fetching roaming messages, and whether to deliver the message only to online users. For details, see [Common optional message parameters](#common-optional-message-parameters).
 - [The content moderation service checks specific fields in the message `body`; the fields checked vary by message type](/value-added/moderation/moderation_mechanism.html). Passing too much business information in these fields may reduce moderation effectiveness. Avoid placing business information in fields subject to moderation and use the `ext` extension field instead.
@@ -141,7 +141,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 
 Send only to online users and synchronize the message to the sender by setting `sync_device` to true and `routetype` to `ROUTE_ONLINE`.
 
-Messages sent only to online users do not support roaming storage by default. By default, these messages are not stored on the EasyIM message server, so users cannot retrieve them on other devices. To enable roaming storage for online messages, contact the Easemob business team.
+Messages sent only to online users do not support roaming storage by default. By default, these messages are not stored on the EasyIM message server, so users cannot retrieve them on other devices. To enable roaming storage for online messages, contact the EasyIM business manager.
 
 ```bash
 # Replace <YourAppToken> with the App Token generated on your server
@@ -235,7 +235,7 @@ The other fields in the response body are described below:
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -332,7 +332,7 @@ The other fields are described below:
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -426,7 +426,7 @@ The other fields are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -526,7 +526,7 @@ The other fields in the response body are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -618,7 +618,7 @@ The other fields in the response body are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -707,7 +707,7 @@ The other fields in the response body are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -793,7 +793,7 @@ The other fields in the response body are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -883,7 +883,7 @@ The other fields in the response body are described below:
 | `application`     | String | Unique identifier of the app in the system. It is generated by the system and does not require your attention. |
 | `action`          | String | Request method. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 

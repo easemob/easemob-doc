@@ -16,7 +16,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in server-side and local conversations by keyword.     |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the Easemob Console, up to 7 days. |
+| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |
@@ -41,7 +41,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 
 ### User relationships
 
-By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [Easemob Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
 
 | Feature       | Description |
 | :-------------- | :----- |
@@ -65,7 +65,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in local conversations by keyword.     |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the Easemob Console, up to 7 days. |
+| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |
@@ -169,7 +169,7 @@ A chat group member can create a message thread from a chat group message. The m
 ## Chat room conversations
 
 A chat room is a Twitch-like organization that supports many participants and can be used for live streaming and message broadcasting. Chat room members do not have fixed relationships and do not receive any chat room messages after going offline.
-By default, a chat room supports up to 10,000 members, including the owner. To adjust this limit, contact the Easemob business team.
+By default, a chat room supports up to 10,000 members, including the owner. To adjust this limit, contact the EasyIM business manager.
 
 ### Message features 
 
@@ -177,13 +177,13 @@ By default, a chat room supports up to 10,000 members, including the owner. To a
 | :------------- | :---------------------- |
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the Easemob business team to activate the feature. |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the Easemob Console, up to 7 days. |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature. |
+| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
 | Edit messages  | Edit successfully sent messages.    |
 | Targeted messages  | Send a message to one or more specified chat room members. Other members do not receive it.|
 | Combined messages  | Combine multiple messages and forward them together.    |
 | Delete messages  | Delete server-side historical messages only for the current user, or clear chat history.     |
-| Pin messages  | Pin and unpin messages and retrieve pinned messages. To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the Easemob business team to activate the feature.    |
+| Pin messages  | Pin and unpin messages and retrieve pinned messages. To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature.    |
 | Translate messages | Translate text messages on demand or automatically.    |
 | Import and insert messages  | Import and insert messages locally.    |
 | Update messages  | Update existing messages in the local memory and database of the current device.  |
@@ -223,80 +223,6 @@ Unlike one-to-one and group chats, chat rooms do not support offline message pus
 | Change the chat room name | Only the chat room owner can change the chat room name.                   |
 | Retrieve or update the chat room announcement     | Only the chat room owner can update or delete the announcement.<br/>All members can retrieve the announcement. |
 | Manage chat room custom attributes (key-value)     | Set, retrieve, delete, force-set, and force-delete chat room custom attributes. |
-
-## Super Community
-
-Easemob Super Community (Circle) is a Discord-like real-time community solution built on EasyIM. It supports a three-level structure of communities (Server), channels (Channel), and message threads (Thread). An app can have multiple communities and also supports one-to-one chats between friends or non-friends. Users can create and manage their own communities, create and manage channels to divide subtopics under a topic, and start a message thread in a channel from a message of interest. This enables real-time group chats for tens of thousands of users and supports smooth communication at very large scale.
-
-### Message features
-
-| Feature           | Description           |
-| :------------- | :---------------------- |
-| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
-| Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
-| Search for messages  | Search for all message types in local conversations by keyword.     |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the Easemob Console, up to 7 days. |
-| Reactions  | Add or delete Reactions on messages.   |
-| Import and insert messages  | Import and insert messages locally.    |
-| Delete messages  | Delete server-side and local historical messages only for the current user, or clear chat history.     |
-| Translate messages | Translate text messages on demand or automatically.     |
-| Report messages  | Report prohibited messages.    |
-
-### Community management
-
-|Feature|Description|
-| :- | :- |
-|Create a community|By default, each user can create up to 100 communities. To adjust this threshold, contact the Easemob business team.|
-|Modify community information|The community owner and admins can modify basic community information.|
-|Destroy a community|Community owner permissions are required to destroy a community.<br/>After a community is destroyed, all members receive a community destruction callback.|
-|Add community tags|The community owner and admins can add tags to a community. Users outside the community can find it by searching for tags. Up to 10 tags can be added to each community.|
-|Remove community tags|The community owner and admins can remove existing tags from a community.|
-|Retrieve the community tag list|Community members can retrieve the community tag list.|
-|Retrieve community details|Users can retrieve community details.|
-|Retrieve joined communities|Retrieve a list of communities the user has joined. |
-|Search public communities|Community members can search public communities by community name or tag name. |
-|Retrieve the community member list by page|Retrieve a paginated member list for a specified community.|
-
-### Community member management
-
-|Feature|Description|
-| :- | :- |
-|Join a community|Communities can be public or private.<br/> - For a public community, users can apply to join by searching for the community name or tags, or a community member can invite them.<br/> - For a private community, users can join only by invitation from a community member. A user can accept or decline the invitation.|
-|Leave a community|The community owner cannot leave and can only destroy the community.<br/>A member can leave voluntarily or be removed by the community owner or an admin. The community owner and admins can remove regular users, but an admin can be removed only by the community owner. |
-|Check whether the current user is in a community|Check whether a specified user has joined a specified community.|
-|Change a member's role in a community|The community owner can grant admin permissions to a regular community member or revoke them to make an admin a regular member.|
-|Query the current user's role in a community|Community members can retrieve a user's role in the community.|
-
-### Channel management
-
-|Feature|Description|
-| :- | :- |
-|Create a channel|The community owner can create public or private channels in the community.|
-|Modify channel information|The community owner and admins can modify channel attributes.|
-|Destroy a channel|The community owner can destroy a channel in the community.|
-|Retrieve channel details|Community members can retrieve channel details.|
-|Retrieve a list of public channels in a community|Community members can retrieve a list of all public channels in the community.|
-|Retrieve a list of private channels in a community|Community members can retrieve a list of all private channels in the community.|
-|Retrieve a list of channels joined by a user in a community|Community members can retrieve the channels they have joined.|
-|Retrieve the channel member list|Channel members can retrieve the channel member list.|
-|Create a channel category|The community owner can create a channel category.|
-|Change a channel category name|The community owner can change a channel category name.|
-|Retrieve the channel category list of a community|Community members can retrieve the channel category list of the community.|
-|Delete a channel category|The community owner can delete a channel category.|
-|Retrieve public channels in a channel category by page|Community members can retrieve a paginated list of public channels in a channel category.|
-|Retrieve private channels in a channel category by page|Community members can retrieve a paginated list of private channels in a channel category.|
-|Move a channel to another channel category|The community owner and admins can move a specified channel from one channel category to another.|
-
-### Channel member management
-
-|Feature|Description|
-| :- | :- |
-|Join a channel|Channels can be public or private.<br/> - For a public channel, users can retrieve the public channel list and apply to join, or a channel member can invite them.<br/> - For a private channel, users can join only by invitation from a channel member. A user can accept or decline the invitation.|
-|Leave a channel|A member can leave voluntarily or be removed from the channel by the community owner or an admin. |
-|Check whether a user is in a channel|Check whether a specified user is in a specified channel.|
-|Mute or unmute a channel member|The community owner and admins can add channel members to or remove them from the mute list. Muted members cannot send channel messages but can receive them.|
-|Retrieve the channel mute list|The community owner and admins can retrieve the list of muted users in a channel.|
 
 ### Message thread management
 
@@ -361,7 +287,7 @@ You can implement global user mute by calling RESTful APIs:
 
 ## Offline push
 
-The EasyIM SDKs for Android, iOS, uni-app, and React Native support offline push. Supported mobile vendor push services include APNs, Google FCM, Huawei, HONOR, Xiaomi, OPPO, vivo, and Meizu.
+The EasyIM SDKs support offline push. Supported mobile vendor push services include APNs and Google FCM.
 
 | Feature               | Description  |
 | :----------------- | :---------------------- |
@@ -372,7 +298,7 @@ The EasyIM SDKs for Android, iOS, uni-app, and React Native support offline push
 | Set Do Not Disturb mode | Set a Do Not Disturb period and duration. |
 | Set the preferred language for push notifications | If translation is enabled, the SDK sends both the original and translated messages. If the language of the translated message matches your setting, the translated message is displayed in the push notification. Otherwise, the original message is displayed. |
 | Set push extensions | Use extension fields to customize push settings, such as forced push and silent messages. |
-| Query offline push result statistics | Query offline push results in the [Easemob Console](https://console.easemob.com/user/login). |
+| Query offline push result statistics | Query offline push results in the [EasyIM Console](https://console.easemob.com/user/login). |
 
 ## Content moderation
 

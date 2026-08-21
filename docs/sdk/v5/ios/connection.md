@@ -215,7 +215,7 @@ The following conditions cannot be recovered through automatic reconnection alon
 | User kicked offline after changing the password | `EMErrorUserKickedByChangePassword` (216) | `userAccountDidForced(toLogout:)`. Obtain a new Token and log in again. |
 | User forcibly logged out by another device, an API, or the console | `EMErrorUserKickedByOtherDevice` (217) | `userAccountDidForced(toLogout:)`. Display a prompt and log in again according to your business policy. |
 | Login device changed | `EMErrorUserDeviceChanged` (220) | `userAccountDidLoginFromOtherDevice(with:)`. Handle it according to the device policy. |
-| DAU or MAU limit reached | `EMErrorAppActiveNumbersReachLimitation` (8) | `userAccountDidForced(toLogout:)`. Check the app quota or contact the Easemob business team. |
+| DAU or MAU limit reached | `EMErrorAppActiveNumbersReachLimitation` (8) | `userAccountDidForced(toLogout:)`. Check the app quota or contact the EasyIM business manager. |
 | Service disabled | `EMErrorServerServingForbidden` (305) | `userDidForbidByServer()`. Check feature activation and app status. |
 
 When another device logs in or a device changes, `EMLoginExtensionInfo` can provide the `deviceName` and `extensionInfo` of the newly logged-in device. The app can use this information to display a clearer prompt.

@@ -4,7 +4,7 @@ Initialization is required before using the SDK and must be completed before you
 
 ## Prerequisite
 
-You have a valid EasyIM developer account and App Key. For details, see the [Easemob Console documentation](/product/console/app_create.html).
+You have a valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
 ## Initialize the SDK
 

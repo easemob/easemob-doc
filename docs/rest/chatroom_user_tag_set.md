@@ -7,7 +7,7 @@
 
 ## Feature activation
 
-EasyIM supports setting tags for users in a chat room and muting users by tag. To use this API, contact the Easemob business team to activate the feature.
+EasyIM supports setting tags for users in a chat room and muting users by tag. To use this API, contact the EasyIM business manager to activate the feature.
 
 ## Call frequency limit
 
@@ -90,7 +90,7 @@ The other fields in the response body are described below:
 | `properties`      | String | Response properties.                                                                     |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Error code](#error-code) for possible causes.
 
@@ -103,7 +103,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 401         | unauthorized       | Unable to authenticate (OAuth)            | The token is invalid, expired, or incorrect. | Use a new token.   |
 | 400         | forbidden_op       | users [XX] are not members of this group! | The user ID is not in the chat room.                | Specify a user ID in the chat room.  |
 | 404         | resource_not_found | grpID XX does not exist!                  | The chat room does not exist.                        | Specify a valid chat room ID.  |
-| 403         | forbidden_op       | Group tag mute is disabled                | The chat room tag-based mute feature is not activated.          | Contact the Easemob business team to activate the chat room tag-based mute feature.       |
+| 403         | forbidden_op       | Group tag mute is disabled                | The chat room tag-based mute feature is not activated.          | Contact the EasyIM business manager to activate the chat room tag-based mute feature.       |
 | 403         | exceed_limit       | user group tag count exceed limit | The number of chat room tags set for the user exceeds the limit.    | Limit the number of tags in `tags` in a single request to 10 or fewer. |
 | 400         | invalid_parameter  | tags should be type of List               | The type of `tags` in the request body is incorrect.   | Use an array for `tags` in the request body.|
 | 403 | exceed_limit | tag length exceeds limit! | The tag name exceeds the length limit. | Limit the tag name to 32 characters or fewer. |

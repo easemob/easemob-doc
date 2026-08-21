@@ -86,7 +86,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | HTTP status code | Error type               | Error message | Possible cause                | Recommendation|  
 | :---------- | :--- | :----------- | :-------- | :-------------- |
 | 400         | illegal_argument       | too many get presences        | The list of users whose presence is to be retrieved exceeds the limit of 100 user IDs. | Limit the list to no more than 100 user IDs. |
-| 400         | service open exception | the app not open presence      | The presence service is not activated.  | Contact the Easemob business team to activate the presence service.    |
+| 400         | service open exception | the app not open presence      | The presence service is not activated.  | Contact the EasyIM business manager to activate the presence service.    |
 | 401         | unauthorized           | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect.   | Use a new token to access the API.  |
 
 For other errors, see [Response status codes](error.html) for possible causes.

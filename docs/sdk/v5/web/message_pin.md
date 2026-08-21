@@ -10,7 +10,7 @@ Multiple messages can be pinned in the same conversation. An app can retrieve th
 
 ## Feature activation
 
-Before using message pinning, contact the Easemob business team to enable it.
+Before using message pinning, contact the EasyIM business manager to enable it.
 
 ## Prerequisite
 
@@ -25,7 +25,7 @@ Call `pinMessage` to pin a message in a specified conversation. After the messag
 
 Multiple members of the same conversation can pin the same message in succession. If the same message is pinned repeatedly, its pin information is updated to the most recent operation, including the latest operator and pin time.
 
-By default, up to 20 messages can be pinned in a conversation. Contact the Easemob business team to increase this limit to a maximum of 100.
+By default, up to 20 messages can be pinned in a conversation. Contact the EasyIM business manager to increase this limit to a maximum of 100.
 
 If the number of pinned messages reaches the server limit, `pinMessage` may return error code `4` with the error reason `pin_message_limit`.
 

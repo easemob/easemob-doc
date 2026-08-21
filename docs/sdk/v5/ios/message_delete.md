@@ -50,7 +50,7 @@ When the user is logged in on multiple devices, the user's other online devices 
 
 :::tip
 1. After one of the APIs above successfully deletes server-side historical messages one way, the SDK removes the corresponding messages from local storage and the in-memory cache of the current device's conversation. The main purpose of this API is to delete the current user's server-side historical messages one way. Refresh the message list in the success callback to avoid continuing to display stale data.
-2. Chat room message roaming is disabled by default. To use it, contact the Easemob business team to enable it.
+2. Chat room message roaming is disabled by default. To use it, contact the EasyIM business manager to enable it.
 :::
 
 Example:

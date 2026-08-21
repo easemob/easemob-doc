@@ -28,7 +28,7 @@ This article describes how to call the REST API to upload message attachments to
 #### File restrictions
 
 - By default, an uploaded file cannot exceed 10 MB. An upload fails if the file exceeds this limit.
-- **Restricted file access is supported. To use this feature, contact the Easemob business team to enable it.** After this feature is enabled, you must use the `share-secret` returned in the file upload response to download a restricted file. When message callbacks, including pre-delivery and post-delivery callbacks, and historical message retrieval involve downloading files, append the key to the download URL as follows: `{{url}}?share-secret={{secret}}`.
+- **Restricted file access is supported. To use this feature, contact the EasyIM business manager to enable it.** After this feature is enabled, you must use the `share-secret` returned in the file upload response to download a restricted file. When message callbacks, including pre-delivery and post-delivery callbacks, and historical message retrieval involve downloading files, append the key to the download URL as follows: `{{url}}?share-secret={{secret}}`.
 
 ## Call frequency limit
 
@@ -63,9 +63,9 @@ For descriptions of the `Content-Type`, `Accept`, and `Authorization` fields, se
 
 | Parameter              | Type   | Required | Description      |
 | :---------------- | :----- | :------- | :------------------------ |
-| `restrict-access` | Bool   | No       | Whether to restrict access to the file:<br/> - `true`: Yes. The user needs the file access key (`share-secret`) obtained from the response body to download the file.<br/> - `false`: No. Access is not restricted, and the user can download the file directly.<br/><Container type="tip" title="Tip">To use restricted file access, contact the Easemob business team to enable it.</Container>|
-| `thumbnail-height` | Int    | No       | The thumbnail height in pixels.<br/> - If the uploaded original image or video thumbnail is smaller than 10 KB, the uploaded image itself is used as the thumbnail.<br/> - If the uploaded image exceeds 10 KB, the thumbnail height depends on this parameter.<br/> - If this parameter is not passed, the thumbnail height defaults to 170 pixels. You can also modify the default on the **Feature Configuration > Basic Features** > **Messages** page of the [Easemob Console](https://console.easemob.com/user/login). |
-| `thumbnail-width`  | Int    | No       | The thumbnail width in pixels.<br/> - If the uploaded original image or video thumbnail is smaller than 10 KB, the original image itself is used as the thumbnail.<br/> - If the uploaded image exceeds 10 KB, the thumbnail width depends on this parameter.<br/> - If this parameter is not passed, the thumbnail width defaults to 170 pixels. You can also modify the default on the **Feature Configuration > Basic Features** > **Messages** page of the [Easemob Console](https://console.easemob.com/user/login).   |
+| `restrict-access` | Bool   | No       | Whether to restrict access to the file:<br/> - `true`: Yes. The user needs the file access key (`share-secret`) obtained from the response body to download the file.<br/> - `false`: No. Access is not restricted, and the user can download the file directly.<br/><Container type="tip" title="Tip">To use restricted file access, contact the EasyIM business manager to enable it.</Container>|
+| `thumbnail-height` | Int    | No       | The thumbnail height in pixels.<br/> - If the uploaded original image or video thumbnail is smaller than 10 KB, the uploaded image itself is used as the thumbnail.<br/> - If the uploaded image exceeds 10 KB, the thumbnail height depends on this parameter.<br/> - If this parameter is not passed, the thumbnail height defaults to 170 pixels. You can also modify the default on the **Feature Configuration > Basic Features** > **Messages** page of the [EasyIM Console](https://console.easemob.com/user/login). |
+| `thumbnail-width`  | Int    | No       | The thumbnail width in pixels.<br/> - If the uploaded original image or video thumbnail is smaller than 10 KB, the original image itself is used as the thumbnail.<br/> - If the uploaded image exceeds 10 KB, the thumbnail width depends on this parameter.<br/> - If this parameter is not passed, the thumbnail width defaults to 170 pixels. You can also modify the default on the **Feature Configuration > Basic Features** > **Messages** page of the [EasyIM Console](https://console.easemob.com/user/login).   |
 
 ## Request body fields
 
@@ -116,7 +116,7 @@ The other fields in the response body are described below:
 | `timestamp`       | Long   | The Unix timestamp, in milliseconds.                                                      |
 | `duration`        | Int    | The time elapsed from sending the request to receiving the response, in milliseconds.                                           |
 | `organization`    | String | The unique identifier that EasyIM assigns to each company or organization. This value is the same as the request parameter `org_name`. |
-| `applicationName` | String | The app name you entered when creating the app in the Easemob Console. This value is the same as the request parameter `app_name`. |
+| `applicationName` | String | The app name you entered when creating the app in the EasyIM Console. This value is the same as the request parameter `app_name`. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](error.html) for possible causes.
 
@@ -127,6 +127,6 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | HTTP status code | Error type    | Error message          | Possible cause          | Recommendation        |
 |:---------|:-------------------|:---------------|:--------------|:------------|
 | 400      | illegal_argument | file must be provided.   | The `file` request parameter is not passed.   | Enter the correct `file` request parameter. |
-| 413      | file exceeding maximum limit | the file size exceeds the maximum limit.    | The uploaded file exceeds the maximum size. | Specify a `file` of the correct size. By default, message attachments such as images, audio, video, and other files cannot exceed 10 MB. To increase this limit, contact the Easemob business team. |
+| 413      | file exceeding maximum limit | the file size exceeds the maximum limit.    | The uploaded file exceeds the maximum size. | Specify a `file` of the correct size. By default, message attachments such as images, audio, video, and other files cannot exceed 10 MB. To increase this limit, contact the EasyIM business manager. |
 
 For other errors and their possible causes, see [Response status codes](error.html).

@@ -92,7 +92,7 @@ An image message typically contains three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
 - Large image: An image proportionally compressed by the server from the original image. If the shorter side is greater than 720 pixels, the image is proportionally compressed until the shorter side is 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This type of image is typically displayed on the chat details page.
-- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [Easemob Console](/product/console/basic_message.html#图片消息缩略图). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
+- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message.html#图片消息缩略图). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
 
 After receiving an image message, the SDK automatically downloads the thumbnail according to the configuration. If your business needs to display a clearer image, download the large or original image as required.
 
@@ -362,7 +362,7 @@ For a chat room message, you can use the message's `EMChatMessage#broadcast` pro
 
 ### Message attachment download authentication
 
-EasyIM supports message attachment download authentication. This feature is disabled by default. To enable it, contact the Easemob business team. After it is enabled, users must call the SDK API `downloadMessageAttachment` to download message attachments.
+EasyIM supports message attachment download authentication. This feature is disabled by default. To enable it, contact the EasyIM business manager. After it is enabled, users must call the SDK API `downloadMessageAttachment` to download message attachments.
 
 ## API list
 

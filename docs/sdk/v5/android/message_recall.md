@@ -17,7 +17,7 @@ One-to-one, group chat, and chat room conversations support recalling a successf
 **Time limit**
 
 - By default, a sender can recall a message within 2 minutes after sending it.
-- You can adjust the recall period, up to 7 days, on the **EasyIM > Basic Features > Messages** page in the [Easemob Console](https://console.easemob.com/user/login).
+- You can adjust the recall period, up to 7 days, on the **EasyIM > Basic Features > Messages** page in the [EasyIM Console](https://console.easemob.com/user/login).
 
 **Recall result**
 

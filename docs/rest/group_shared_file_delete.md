@@ -74,7 +74,7 @@ The descriptions of other fields are shown in the following table:
 | `timestamp`       | Long   | Unix timestamp in milliseconds.     |
 | `duration`        | Int    | The length of time from sending the request to the response, in milliseconds.    |
 | `organization`    | String | Unique identifier assigned by EasyIM to each company (organization), identical to the `org_name` request parameter. |
-| `applicationName` | String | App name entered when you created the app in the Easemob Console, identical to the `app_name` request parameter. |
+| `applicationName` | String | App name entered when you created the app in the EasyIM Console, identical to the `app_name` request parameter. |
 
 If the returned HTTP status code is not `200`, the request fails. See [Error code](#error-code) for possible causes.
 

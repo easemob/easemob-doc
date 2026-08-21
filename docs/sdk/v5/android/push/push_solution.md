@@ -20,7 +20,7 @@
 
 4. Check whether the push certificate exists and whether push testing is available.
 
-On the [Easemob Console](https://console.easemob.com) **Feature Configuration** > **Value-Added Features** > **Push** > **Certificate Management** page, select the push certificate you want to test, which is the certificate bound to the user, and choose **More** > **Test**.
+On the [EasyIM Console](https://console.easemob.com) **Feature Configuration** > **Value-Added Features** > **Push** > **Certificate Management** page, select the push certificate you want to test, which is the certificate bound to the user, and choose **More** > **Test**.
 
 ![image](/images/android/push/push_notification_test.png)
 

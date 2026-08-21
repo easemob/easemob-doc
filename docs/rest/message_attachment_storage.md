@@ -6,7 +6,7 @@
 - This API supports attachments, including image and video thumbnails, uploaded when sending image, voice, video, file, and combined messages through clients or the REST API.
 - Users can retrieve permanently stored message attachments at any time.
 - For message attachment storage limits, see [Message attachment storage](/product/message_store.html#historical-message-storage).
-- To use this API, **contact the Easemob business team to enable it**.
+- To use this API, **contact the EasyIM business manager to enable it**.
 
 ## Call frequency limit
 
@@ -87,7 +87,7 @@ The other fields in the response body are described below:
 | `application`        | String | The unique identifier generated for the app in the system. You do not need to pay attention to this field.          |
 | `action`             | String | The request method.                                   |
 | `duration`           | Long   | The time elapsed from sending the HTTP request to receiving the response, in milliseconds.     |
-| `applicationName`    | String | The app name you entered when creating the app in the Easemob Console. This value is the same as the request parameter `app_name`.    |
+| `applicationName`    | String | The app name you entered when creating the app in the EasyIM Console. This value is the same as the request parameter `app_name`.    |
 
 If the returned HTTP status code is not `200`, the request fails. See [Error code](#error-code) for possible causes.
 
@@ -97,7 +97,7 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 
 | HTTP status code        | Error type | Error message          | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 403                 | forbidden_op        |                 | The message attachment storage feature is not enabled.          | Contact the Easemob business team to enable the feature.          |
+| 403                 | forbidden_op        |                 | The message attachment storage feature is not enabled.          | Contact the EasyIM business manager to enable the feature.          |
 | 400                 | illegal_argument   | chatfile_ids size is too large    | The number of message attachment file IDs passed in `chatfile_ids` exceeds the limit of 100.  | Pass no more than 100 message attachment file IDs.|
 | 400               | illegal_argument   |  lifetime must be either 'forever' or 'default' or 'refresh'。     | The value passed in `lifetime` is not `forever`, `default`, or `refresh`.       | Set `lifetime` only to `forever`, `default`, or `refresh`.          |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid. It may have expired or be incorrect. | Use a new token to access the API. |

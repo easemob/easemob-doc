@@ -10,7 +10,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 ## Feature activation
 
-To use Reaction, activate it in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_message.html#message-reactions).
+To use Reaction, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_message.html#message-reactions).
 
 ## Call frequency limit
 

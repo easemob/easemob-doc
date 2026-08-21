@@ -30,7 +30,7 @@ We recommend implementing fault-tolerant handling for the results of REST APIs c
 | 409                        | This error is reported when automatic user creation is enabled during concurrent calls to the [Obtain a user token by user ID API](easemob_user_token.html#obtain-a-user-token-by-user-id). Specifically, the error is reported when `grant_type` is set to `inherit` and `autoCreateUser` is set to `true` when calling the API. If the user for whom the token is being obtained is already registered, concurrent calls to the API do not report this error.|
 | 413                        | (Payload Too Large) The message attachment uploaded by calling [Upload a File](message_upload_file.html) exceeds the maximum limit.  |
 | 415                        | The request body type is unsupported.                                         |
-| 429                        | (Service Unavailable) The request exceeds the API call frequency limit and is rate-limited, or it exceeds the Community plan limit. Contact the Easemob business team if necessary. |
+| 429                        | (Service Unavailable) The request exceeds the API call frequency limit and is rate-limited, or it exceeds the Community plan limit. Contact the EasyIM business manager if necessary. |
 | 500                        | (Internal Server Error) The server encountered an error and cannot complete the request. For example:<br/> -  no_full_text_index: "Entity ‘user’ with property named ‘username’ is not full text indexed. You cannot use the ‘contains’ operand on this field" indicates that username does not support full-text indexing and the `contains` operation cannot be performed on this field.<br/> - unsupported_service_operation: "Service operation not supported" indicates that the request URL does not support the request method.<br/> -  web_application: "javax.ws.rs.WebApplicationException" indicates that the request URL is incorrect.  |
 | 501                        | (Not Implemented) The server does not support the functionality required to complete the request. For example, this code may be returned when the server cannot recognize the request method. |
 | 502                        | (Bad Gateway) The server, acting as a gateway or proxy, received an invalid response from an upstream server. |
@@ -80,13 +80,13 @@ When calling a REST API, if the relevant service is not activated, a 400 or 403 
 
 | HTTP status code | Error type    | Error message      | Possible cause      | 
 | :---------- | :---------- | :--------- | :----------- |
-| 403     | group_error | thread not open. | The message thread feature is not activated. | Activate the message thread service in the Easemob Console. |
-| 403      | forbidden_op | message broadcast service is unopened  | The feature for sending chat room broadcast messages is not activated.| Contact the Easemob business team to activate it. |
-| 400      | service open exception  | this appKey not open message roaming   | Message roaming is not enabled.  | Contact the Easemob business team to enable it.  |
-| 400         | service open exception | the app not open presence   | The presence service is not activated.  | Contact the Easemob business team to activate the presence service. |
-| 403      | message_rewrite_error   | The rewrite message feature is not open.   | The message editing feature is not activated.  | Contact the Easemob business team to activate message editing.  |
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction is not activated. | Activate the Reaction service in the Easemob Console. |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | The user attribute feature is not activated. | Contact the sales team to activate the user attribute feature. |
+| 403     | group_error | thread not open. | The message thread feature is not activated. | Activate the message thread service in the EasyIM Console. |
+| 403      | forbidden_op | message broadcast service is unopened  | The feature for sending chat room broadcast messages is not activated.| Contact the EasyIM business manager to activate it. |
+| 400      | service open exception  | this appKey not open message roaming   | Message roaming is not enabled.  | Contact the EasyIM business manager to enable it.  |
+| 400         | service open exception | the app not open presence   | The presence service is not activated.  | Contact the EasyIM business manager to activate the presence service. |
+| 403      | message_rewrite_error   | The rewrite message feature is not open.   | The message editing feature is not activated.  | Contact the EasyIM business manager to activate message editing.  |
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction is not activated. | Activate the Reaction service in the EasyIM Console. |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | The user attribute feature is not activated. | Contact the business manager to activate the user attribute feature. |
 
     
 

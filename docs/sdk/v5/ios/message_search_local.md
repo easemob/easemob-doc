@@ -12,7 +12,7 @@ The message search methods in this document can search all message types except 
 <HideSection :show="$frontmatter.show_server_search">
 
 :::tip
-To search server-side messages, contact the Easemob business team to activate the feature. For details, see [Server-side Message Search](/value-added/search/message_search_android.html).
+To search server-side messages, contact the EasyIM business manager to activate the feature. For details, see [Server-side Message Search](/value-added/search/message_search_android.html).
 :::
 
 </HideSection>

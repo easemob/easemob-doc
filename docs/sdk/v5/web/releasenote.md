@@ -51,7 +51,7 @@ This section focuses on feature and behavior changes. For details about removed 
 - If `enableSyncData` is not passed, the SDK synchronizes the conversation list after login by default. To synchronize friends or chat groups, explicitly configure `enableSyncData` and register the corresponding Manager.
 - If you use a privately deployed environment with fixed service addresses and enable friend, group, or other synchronization capabilities, also configure the synchronization service address in `serviceConfig.serverUrls`.
 - Message delivery receipts support only one-to-one chats. Message read receipts support only one-to-one and group chats. Chat rooms do not support delivery or read receipts.
-- Group-message read receipts must be enabled in the Easemob Console and are subject to group-size, validity-period, and permission-configuration restrictions.
+- Group-message read receipts must be enabled in the EasyIM Console and are subject to group-size, validity-period, and permission-configuration restrictions.
 - `sendMessageReadReceipts` only marks the specified messages as read. It does not advance the conversation-level read position or directly clear the local conversation unread count. To clear the unread count, call the API for clearing conversation unread counts.
 - When upgrading from the legacy Web SDK, pay particular attention to the initialization entry point, Manager registration, login parameters, message creation, event listeners, return-value access, and removed APIs.
 
@@ -59,9 +59,9 @@ This section focuses on feature and behavior changes. For details about removed 
 
 #### New features
 
-Supports [server-side message search](/value-added/search/message_search_web.html), which can filter messages by keyword combinations, conversation ID, message type, time range, and message content or extension attributes. To use this feature, contact the Easemob business team to enable it. For details, see [Feature activation](/product/console/purchase_value_added.html#消息搜索).
+Supports [server-side message search](/value-added/search/message_search_web.html), which can filter messages by keyword combinations, conversation ID, message type, time range, and message content or extension attributes. To use this feature, contact the EasyIM business manager to enable it. For details, see [Feature activation](/product/console/purchase_value_added.html#消息搜索).
 
-Message search does not support the `ext` extension field by default. To search this field, contact the Easemob business team.
+Message search does not support the `ext` extension field by default. To search this field, contact the EasyIM business manager.
 
 ## v4.23.0 Dev 2026-6-10 (Dev version)
 
@@ -154,7 +154,7 @@ Fixes an error when recalling a message.
 
 - Supports [sending](message_send.html#send-gif-images) and [receiving GIF image messages](message_receive.html#receive-gif-image-messages).
 - Supports [chat group avatars](group_attributes.html#manage-the-chat-group-avatar).
-- Supports [message attachment authentication](message_receive.html#接收附件消息). Contact the Easemob business team to enable this feature. After it is enabled, you must call an SDK API to download message attachments.
+- Supports [message attachment authentication](message_receive.html#接收附件消息). Contact the EasyIM business manager to enable this feature. After it is enabled, you must call an SDK API to download message attachments.
 - Supports [custom device platforms](multi_device.html#set-the-login-device-platform).
 
 #### Improvements
@@ -197,7 +197,7 @@ Fixes an error when recalling a message.
 
 #### New features
 
-- [EasyIM SDK] Adds reading of server-side message read and delivery states when [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server-with-pagination). This feature applies only to one-to-one messages and is disabled by default. To use it, contact the Easemob business team.
+- [EasyIM SDK] Adds reading of server-side message read and delivery states when [retrieving roaming messages from the server](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server-with-pagination). This feature applies only to one-to-one messages and is disabled by default. To use it, contact the EasyIM business manager.
 - [EasyIM SDK] Adds the `muteTimestamp` parameter to the chat room mute callback `muteMember`. This parameter indicates when the mute expires.
 - [EasyIM SDK] Adds the `userId` field to the group/chat room mute event `muteMember`. This field identifies the muted member.
 
@@ -260,7 +260,7 @@ Adjusts the timing of `open().then` in the login method and the connection-succe
 
 #### New features
 
-- [EasyIM SDK] Adds [log reporting](log.html#log-reporting), which uploads logs to the EasyIM server. This feature is disabled by default. To use it, contact the Easemob business team.
+- [EasyIM SDK] Adds [log reporting](log.html#log-reporting), which uploads logs to the EasyIM server. This feature is disabled by default. To use it, contact the EasyIM business manager.
 
 ## v4.8.0 Dev 2024-07-01
 

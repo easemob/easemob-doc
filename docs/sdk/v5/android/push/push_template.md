@@ -4,14 +4,14 @@
 
 Push templates are used to customize the title and content of push notifications when the default offline push content cannot meet business requirements. For example, if the default settings provided by the server are push titles and content in Chinese and English, and you need to use push titles and content in Korean or Japanese, you can set push templates for the corresponding languages.
 
-You can configure push templates through Easemob Console or the [server-side REST API for configuring push templates](/document/server-side/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
+You can configure push templates through EasyIM Console or the [server-side REST API for configuring push templates](/document/server-side/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
 
 Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or receiver.
 
 Push templates have the following characteristics:
 
 1. Push templates have a higher priority than [calling the API to set push content in the notification bar](push_display_attribute.html).
-2. Customizing the server-side default push content through Easemob Console or the [server-side REST API](/document/server-side/push_template_create.html) is supported.
+2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/document/server-side/push_template_create.html) is supported.
 3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users.
 4. The receiver can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
 5. Priority of push template usage:
@@ -20,9 +20,9 @@ Push templates have the following characteristics:
 
 ## Feature activation
 
-[Push templates](push_template.html) are an advanced push feature. Before using them, you need to enable them for free in [Easemob Console](https://console.easemob.com/user/login). **After activation, if you need to disable advanced push features, you must contact the Easemob business team, because this operation deletes all configurations related to advanced features.**
+[Push templates](push_template.html) are an advanced push feature. Before using them, you need to enable them for free in [EasyIM Console](https://console.easemob.com/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
 
-1. Log in to [Easemob Console](https://console.easemob.com/user/login).
+1. Log in to [EasyIM Console](https://console.easemob.com/user/login).
 2. Select **App Management** at the top of the page. On the app list page that appears, click the App Key of the test app or production app.
 3. Select **Value-Added Services > Message Push > Offline Push**.
 4. Click **Enable for free**.
@@ -36,9 +36,9 @@ After activation, you can [set push templates](#set-push-templates).
 You can set offline push templates in the following two ways:
 
 - [Call the REST API to configure them](/document/server-side/push_template_overview.html).
-- Set push templates in [Easemob Console](https://console.easemob.com/user/login).
+- Set push templates in [EasyIM Console](https://console.easemob.com/user/login).
 
-For the data structure related to push templates, see [Push extension fields](/document/server-side/push_extension.html). The following describes how to set offline push templates in Easemob Console.
+For the data structure related to push templates, see [Push extension fields](/document/server-side/push_extension.html). The following describes how to set offline push templates in EasyIM Console.
 
 ### Edit the default push template
 
@@ -66,7 +66,7 @@ Push template parameters are in the message extension `ext.em_push_template`. Th
       "ext":{
           "em_push_template":{
               "title_args":[
-                  "Easemob"
+                  "EasyIM"
               ],
               "content_args":[
                   "Welcome to im-push",
@@ -76,7 +76,7 @@ Push template parameters are in the message extension `ext.em_push_template`. Th
       }
   }
   
-  # title: {0} = "Easemob"
+  # title: {0} = "EasyIM"
   # content: {0} = "Welcome to im-push" {1} = "Keep going"
   ```
 
@@ -94,7 +94,7 @@ Push template parameters are in the message extension `ext.em_push_template`. Th
 
 ### Add a custom push template
 
-EasyIM supports adding custom push templates. In addition to [calling the RESTful API](/document/server-side/push_template_create.html) to create a custom push template, you can also add a custom push template in [Easemob Console](https://console.easemob.com/user/login). **Custom push templates have a higher level than default templates.**
+EasyIM supports adding custom push templates. In addition to [calling the RESTful API](/document/server-side/push_template_create.html) to create a custom push template, you can also add a custom push template in [EasyIM Console](https://console.easemob.com/user/login). **Custom push templates have a higher level than default templates.**
 
 On the **Offline Push** page, click **Add push template** to create a custom push template.
 
@@ -130,7 +130,7 @@ message.setTo("6006");
 // Set the push template.
 JSONObject pushObject = new JSONObject();
 try {
-    // Set the push template name. Before setting it, create the push template in Easemob Console or by calling the REST API.
+    // Set the push template name. Before setting it, create the push template in EasyIM Console or by calling the REST API.
    // If it is the default template `default` or `detail`, you do not need to pass in the template name.
    // If it is a custom template, you need to pass in the template name.
     pushObject.put("name", "test7");
@@ -187,7 +187,7 @@ After you use the following sample code, the push notification that appears in t
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("message content");
 message.setTo("6006");
-// Set the push template. Before setting it, create the push template in Easemob Console or by calling the REST API.
+// Set the push template. Before setting it, create the push template in EasyIM Console or by calling the REST API.
 JSONObject pushObject = new JSONObject();
 JSONArray titleArgs = new JSONArray();
 JSONArray contentArgs = new JSONArray();

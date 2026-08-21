@@ -6,7 +6,7 @@ Retrieve blocklisted users by page. The server returns users in reverse order by
 
 ## Feature activation
 
-Before using this API, activate the blocklist feature for free in the Easemob Console. For details, see [Easemob Console documentation](/product/console/basic_user.html#user-blocklist).
+Before using this API, activate the blocklist feature for free in the EasyIM Console. For details, see [EasyIM Console documentation](/product/console/basic_user.html#user-blocklist).
 
 ## Call frequency limit
 

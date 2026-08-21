@@ -3,7 +3,7 @@
 ## Feature overview
 
 - You can query a keyword list or query keyword lists with pagination.
-- In the [Easemob Console](https://console.easemob.com/user/login), you can also [query keyword lists](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
+- In the [EasyIM Console](https://console.easemob.com/user/login), you can also [query keyword lists](/value-added/moderation/moderation_keyword.html#configure-keyword-lists).
 
 ## Call frequency limit
 

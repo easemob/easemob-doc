@@ -8,7 +8,7 @@
 
 ## Configure authorized registration
 
-To use authorized registration, configure it in the Easemob Console as follows:
+To use authorized registration, configure it in the EasyIM Console as follows:
 
 On the **App Management** page of the console, click **Manage** in the **Actions** column for the target app. Then select **Feature Configuration > Basic Features** > **Users**, and set **User Registration Mode** to **Authorized Registration**.
 
@@ -101,7 +101,7 @@ The other fields in the response body are described below:
 | `timestamp`       | Long   | The Unix timestamp, in milliseconds.                                                      |
 | `duration`        | Int    | The time elapsed from sending the request to receiving the response, in milliseconds.                                           |
 | `organization`    | String | The unique identifier that EasyIM assigns to each company or organization. This value is the same as the request parameter `org_name`. |
-| `applicationName` | String | The app name you entered when creating the app in the Easemob Console. This value is the same as the request parameter `app_name`. |
+| `applicationName` | String | The app name you entered when creating the app in the EasyIM Console. This value is the same as the request parameter `app_name`. |
 
 ## Error code
 

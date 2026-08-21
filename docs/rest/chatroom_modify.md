@@ -50,7 +50,7 @@ You can modify only the chat room name, description, and maximum number of membe
 | :------------ | :----- | :------- | :------------- |
 | `name`        | String | Yes       | Chat room name. It cannot exceed 128 characters.     |
 | `description` | String | Yes       | Chat room description. It cannot exceed 512 characters.     |
-| `maxusers`    | Int    | Yes       | Maximum number of chat room members, including the chat room owner. The maximum value that can be set by default is 10,000. To adjust it, contact the Easemob business team. |
+| `maxusers`    | Int    | Yes       | Maximum number of chat room members, including the chat room owner. The maximum value that can be set by default is 10,000. To adjust it, contact the EasyIM business manager. |
 
 ## Response example
 

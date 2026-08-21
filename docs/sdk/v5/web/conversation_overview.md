@@ -69,7 +69,7 @@ During SDK initialization, `enableSyncData` includes `conversation` by default. 
 To explicitly retrieve the latest conversation list from the server, call `refreshSessionList`. This method triggers the conversation list synchronization process and returns the refreshed list.
 
 :::tip
-To use the server-side conversation list, conversation pinning, and conversation tags, activate the corresponding features in Easemob Console.
+To use the server-side conversation list, conversation pinning, and conversation tags, activate the corresponding features in EasyIM Console.
 :::
 
 ## Conversation lists and empty conversations
@@ -149,7 +149,7 @@ The SDK provides conversation and conversation list events through `client.chatM
 - To refresh the conversation list from the server or retrieve empty conversations, call `refreshSessionList`.
 - When the user enters a conversation page, call `setCurrentConversation`; when the user leaves or switches pages, call `resetCurrentConversation`.
 - Clearing a conversation unread count and sending a message read receipt are different features. The former updates the current user's conversation unread state, while the latter notifies the original sender that a message was read.
-- Messages sent through the RESTful API do not create or enter the conversation list by default. To write such messages to the conversation list, activate the corresponding feature in Easemob Console.
+- Messages sent through the RESTful API do not create or enter the conversation list by default. To write such messages to the conversation list, activate the corresponding feature in EasyIM Console.
 
 ## API list
 

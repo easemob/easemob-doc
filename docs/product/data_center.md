@@ -25,15 +25,15 @@ You can select a data center based on where most of your end users are located:
 - If most end users are in the Chinese mainland, we recommend selecting a domestic data center.
 - If most end users are outside the Chinese mainland, we recommend selecting an overseas data center.
 - If end users are located both inside and outside the Chinese mainland and frequently communicate across countries, we recommend activating overseas acceleration for your existing data center.
-- If you require dedicated resources or a higher-specification cluster service, select a domestic VIP zone or contact the Easemob business team to purchase the appropriate service.
+- If you require dedicated resources or a higher-specification cluster service, select a domestic VIP zone or contact the EasyIM business manager to purchase the appropriate service.
 
-When creating an app in the Easemob Console:
-- The default domestic data center is **Domestic Zone 2**. To use another data center, contact the Easemob business team.
-- The default overseas data center is **Singapore Zone 1**. You can also select **US East Zone 1** or **Germany Zone 2**. To use Singapore Zone 2, contact the Easemob business team.
+When creating an app in the EasyIM Console:
+- The default domestic data center is **Domestic Zone 2**. To use another data center, contact the EasyIM business manager.
+- The default overseas data center is **Singapore Zone 1**. You can also select **US East Zone 1** or **Germany Zone 2**. To use Singapore Zone 2, contact the EasyIM business manager.
 
 ![img](/images/product/data_center_selection.png)
 
-You can view the app's data center and server domain on the **App Overview** page of the Easemob Console.
+You can view the app's data center and server domain on the **App Overview** page of the EasyIM Console.
 
 ![img](/images/product/data_center.png)
 
@@ -110,7 +110,7 @@ For node pricing, see the [pricing page](https://www.easemob.com/pricing/im).
 
 ### 1. Why are some data centers unavailable when I create an app?
 
-By default, only some commonly used data centers are available in the Easemob Console. To use another data center, contact the Easemob business team to request activation.
+By default, only some commonly used data centers are available in the EasyIM Console. To use another data center, contact the EasyIM business manager to request activation.
 
 ### 4. Can I migrate between data centers?
 
@@ -122,7 +122,7 @@ If your end users are located both inside and outside the Chinese mainland and f
 
 ### 6. What is the default bandwidth of an overseas acceleration node, and can I adjust it?
 
-The default bandwidth of an overseas acceleration node is **1 Mbps**. If your business traffic is higher, you can configure more bandwidth based on your requirements. Contact the Easemob business team for details.
+The default bandwidth of an overseas acceleration node is **1 Mbps**. If your business traffic is higher, you can configure more bandwidth based on your requirements. Contact the EasyIM business manager for details.
 
 ### 7. Do I need to configure different addresses for each data center on each client?
 

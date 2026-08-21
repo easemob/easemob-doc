@@ -30,7 +30,7 @@ Message editing has no time limit: a message can be edited as long as it is stil
 
 ## Feature activation
 
-Contact the Easemob business team to enable this feature.
+Contact the EasyIM business manager to enable this feature.
 
 ## Prerequisite
 
@@ -38,7 +38,7 @@ Before you start, make sure that the following requirements are met:
 
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html) and [Initialization](initialization.html).
 - Understand the API usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
-- Contact the Easemob business team to enable message editing.
+- Contact the EasyIM business manager to enable message editing.
 
 ## Edit a message
 

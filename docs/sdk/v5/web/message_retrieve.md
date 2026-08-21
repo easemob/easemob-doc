@@ -20,8 +20,8 @@ Call `getHistoryMessages` to retrieve historical messages in a specified convers
 For a group chat, set `senderIds` to retrieve historical messages sent by one or more group members.
 
 :::tip
-1. **By default, you can retrieve historical messages from one-to-one chats and group chats. To retrieve historical chat room messages, contact the Easemob business team.**
-2. When retrieving historical one-to-one messages, the SDK reads the delivery and read states stored on the server. This feature is disabled by default. To enable it, contact the Easemob business team.
+1. **By default, you can retrieve historical messages from one-to-one chats and group chats. To retrieve historical chat room messages, contact the EasyIM business manager.**
+2. When retrieving historical one-to-one messages, the SDK reads the delivery and read states stored on the server. This feature is disabled by default. To enable it, contact the EasyIM business manager.
 3. The storage period for historical messages on the server depends on your plan. For details, see [EasyIM Plan Features](/product/product_package_feature.html).
 :::
 

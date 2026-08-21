@@ -8,11 +8,11 @@ After a message is reviewed by the [content moderation service](/value-added/mod
 
 - The [content moderation service is activated](/value-added/moderation/moderation_enable.html), and [moderation rules](/value-added/moderation/moderation_rule_config.html) are configured.
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
-A message triggers a [content moderation rule](/value-added/moderation/moderation_overview.html) configured in the Easemob Console.
+A message triggers a [content moderation rule](/value-added/moderation/moderation_overview.html) configured in the EasyIM Console.
 
 ## Webhook request
 
@@ -52,7 +52,7 @@ The following example shows a moderation result webhook when the message passes 
 | `callId` | String| Webhook identifier in the format {appkey}_{uuid}, where UUID is randomly generated as the unique identifier of each webhook.|
 | moderationResult  | String  | Message processing result:<br/> - `PASS`: Deliver the message;<br/> - `REJECT`: Reject message delivery;<br/> - `EXCHANGE`: Replace prohibited content in the message;<br/> - `RECALL`: Recall the delivered audio or video message. |
 | `providerResult` | String | Moderation result:<br/> - `PASS`: The message contains no prohibited content;<br/> - `REVIEWED`: The message may contain prohibited content;<br/> - `REJECT`: The message contains prohibited content.|
-| `security`       | String | Signature in the format MD5（callId+Secret+timestamp）. For the Secret, see the webhook rules in the [Easemob Console](https://console.easemob.com/user/login). |
+| `security`       | String | Signature in the format MD5（callId+Secret+timestamp）. For the Secret, see the webhook rules in the [EasyIM Console](https://console.easemob.com/user/login). |
 | `messageType`       | String | Message type:<br/> - `txt`: Text message;<br/> - `img`: Image message;<br/> - `audio`: Voice message;<br/> - `video`: Video message;<br/> - `custom`: Custom message.   |
 | `messageId`       | String  | Message ID.   |
 | `targetType`       | String | Conversation type:<br/> - `chat`: One-to-one chat;<br/> - `groupchat`: Group chat;<br/> - `chatroom`: Chat room.  |

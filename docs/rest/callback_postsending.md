@@ -19,20 +19,20 @@ The post-delivery webhook is commonly used in the following scenarios:
 
 ## Scope
 
-The post-delivery webhook applies to message webhooks in one-to-one chats, group chats, and chat rooms, and supports messages sent through a client SDK or RESTful API. In addition to message webhooks, it supports webhooks for some server-side and client-side operation events, such as user login and logout, message-related events, and chat group and chat room operation events. The actual supported event scope is determined by the [webhook rule settings in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).
+The post-delivery webhook applies to message webhooks in one-to-one chats, group chats, and chat rooms, and supports messages sent through a client SDK or RESTful API. In addition to message webhooks, it supports webhooks for some server-side and client-side operation events, such as user login and logout, message-related events, and chat group and chat room operation events. The actual supported event scope is determined by the [webhook rule settings in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Activation and configuration
 
 Before using the post-delivery webhook, complete the following configuration:
 
-1. In the [Easemob Console](https://console.easemob.com/user/login), [activate the webhook service](/product/console/basic_webhook.html).
+1. In the [EasyIM Console](https://console.easemob.com/user/login), [activate the webhook service](/product/console/basic_webhook.html).
 2. Configure webhook rules based on your business requirements. For example, provide an accessible HTTP or HTTPS webhook URL to receive webhook requests initiated by the EasyIM server. For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 After you complete this configuration, when a message is sent or a related event occurs, the EasyIM server sends a webhook to your business server according to the configured rules.
 
 ## Webhook rules
 
-To use the post-delivery webhook, first configure webhook rules in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+To use the post-delivery webhook, first configure webhook rules in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 For the same app, you can configure separate webhook rules for chat messages and offline messages. If your business needs both webhook types, use separate webhook URLs to facilitate server decoupling, log tracing, and troubleshooting. If the webhook types share the same webhook URL, use the `eventType` field in the request body to distinguish them.
 

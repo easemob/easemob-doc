@@ -7,7 +7,7 @@ When a chat group or chat room member is added to or removed from the blocklist,
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [Easemob Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add a member to the blocklist
 
@@ -17,7 +17,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 
 - A [chat group member](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
 - A RESTful API is called to add a [chat group member](/document/server-side/group_member_blocklist_add_single.html) or [chat room member](/document/server-side/chatroom_allowlist_add_single.html) to the blocklist.
-- In the [Easemob Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
+- In the [EasyIM Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
 
 ### Webhook request
 
@@ -50,12 +50,12 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `paylod`       | Object | Event content.                                                     |
 | `payload.member` | Array | User ID of the user added to or removed from the chat group or chat room blocklist.        |
 | `payload.expire_timestamp` | Long | Expiration time of the user's blocklist entry. The system automatically assigns this value after the user is added to the blocklist.  |
 | `payload.type` | String  | Event type. `ADD` indicates that a user is added to the chat group or chat room blocklist.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | The value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
@@ -69,7 +69,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 
 1. A member is removed from the chat group or chat room blocklist on the client.
 2. A RESTful API is called to remove a member from the [chat group blocklist](/document/server-side/group_allowlist_remove.html) or chat room blocklist.
-3. A user is removed from the chat group or chat room blocklist in the [Easemob Console](https://console.easemob.com/user/login).
+3. A user is removed from the chat group or chat room blocklist in the [EasyIM Console](https://console.easemob.com/user/login).
 
 ### Webhook request
 
@@ -100,11 +100,11 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the Easemob Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | Array | User ID of the user removed from the chat group or chat room blocklist.        |
 | `payload.type` | Array  | Event for removing a user from the chat group or chat room blocklist. The value is `REMOVE`.     |
-| `appkey`       | String | Unique identifier of the app registered in the Easemob Console.  |
+| `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 | `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |

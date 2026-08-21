@@ -4,7 +4,7 @@ After initializing iOS SDK V5, the app must log in with a user ID and user token
 
 ## User registration
 
-Before logging in to the SDK, you must create an EasyIM user. Before creating a user, set the user registration mode on the **EasyIM > Basic Features** > **Users** page in the [Easemob Console](https://console.easemob.com/user/login).
+Before logging in to the SDK, you must create an EasyIM user. Before creating a user, set the user registration mode on the **EasyIM > Basic Features** > **Users** page in the [EasyIM Console](https://console.easemob.com/user/login).
 
 The following two user registration modes are available:
 
@@ -18,9 +18,9 @@ After setting the registration mode, create users in either of the following way
    - Authorized registration: Call the API for [registering a user with authorization](/document/server-side/account_register_authorized_single.html) or [registering users with authorization in batches](/document/server-side/account_register_authorized_batch.html).
    - Open registration: After enabling open registration, create users through the client or the REST API for [registering a user in open mode](/document/server-side/account_register_open.html).
 
-2. **Create users in the Easemob Console**
+2. **Create users in the EasyIM Console**
 
-   You can create users in production or test environments in the [Easemob Console](https://console.easemob.com/user/login). See [Create Users](/product/console/operation_user.html#创建用户).
+   You can create users in production or test environments in the [EasyIM Console](https://console.easemob.com/user/login). See [Create Users](/product/console/operation_user.html#创建用户).
 
 :::tip
 iOS SDK V5 no longer provides public APIs for registering users on the client, retrieving a token with a username and password, or logging in with a password. In a production environment, the app server must authenticate users and retrieve an EasyIM token. The client uses only the user ID and token to log in to the SDK.
@@ -30,7 +30,7 @@ iOS SDK V5 no longer provides public APIs for registering users on the client, r
 
 The SDK logs in with a user ID and EasyIM token. When calling `loginWithUsername`, pass the user ID and token. After login succeeds, the SDK establishes a persistent connection to the messaging service.
 
-In a test environment, after you create users in the [Easemob Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. See [Create Users](/product/console/operation_user.html#创建用户).
+In a test environment, after you create users in the [EasyIM Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. See [Create Users](/product/console/operation_user.html#创建用户).
 
 In a production environment, we recommend integrating the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server. The client retrieves a user token from your app server and then logs in to the SDK.
 
@@ -258,7 +258,7 @@ Common multi-device-related error codes are as follows:
 | The current account is bound to another device. | `213` / `EMErrorUserBindAnotherDevice` | Guide the user according to the device binding policy. |
 | The number of logged-in devices exceeds the limit. | `214` / `EMErrorUserLoginTooManyDevices` | Handle the device count limit first. Repeated login attempts are not recommended. |
 | The user is kicked offline because the password was changed. | `216` / `EMErrorUserKickedByChangePassword` | Retrieve a valid token and log in again. |
-| The user is forcibly logged out on another device, in the Easemob Console, or through a server-side API. | `217` / `EMErrorUserKickedByOtherDevice` | Inform the user that the current account was forcibly logged out. |
+| The user is forcibly logged out on another device, in the EasyIM Console, or through a server-side API. | `217` / `EMErrorUserKickedByOtherDevice` | Inform the user that the current account was forcibly logged out. |
 | The login device changes. | `220` / `EMErrorUserDeviceChanged` | Inform the user based on the business scenario and log in again. |
 
 **Retrieve login information for other devices**

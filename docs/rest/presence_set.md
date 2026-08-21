@@ -10,7 +10,7 @@ Set a user's presence on a specified device.
 
 ## Feature activation
 
-Before using Presence, activate it in the [Easemob Console](https://console.easemob.com/user/login). For details, see the [Easemob Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+Before using Presence, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
 
 ## Call frequency limit
 
@@ -74,7 +74,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400   | illegal_argument | ext cannot be null | An empty value was passed for the presence extension parameter `ext`. | Ensure that a non-empty value is passed for `ext`. |
 | 400   | illegal_argument | ext is too big | The presence extension information exceeds the 1024-byte limit. | Limit the presence extension information to no more than 1024 bytes. |
-| 400   | service open exception | the app not open presence | The Presence service is not activated. | Contact the Easemob business team to activate the Presence service.|
+| 400   | service open exception | the app not open presence | The Presence service is not activated. | Contact the EasyIM business manager to activate the Presence service.|
 | 401  | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token to access the API. |
 
 For other errors, see [Error code](#error-code) for possible causes.
