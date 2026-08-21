@@ -29,7 +29,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 
 `initializeSDK(with:)` synchronously returns `EMError?`: `nil` indicates that initialization succeeded, while a non-empty error indicates that initialization failed. A parameter error is returned if the App Key is empty or has an invalid format.
 
-The following table lists commonly used `EMOptions` properties for initialization. For all `EMOptions` properties, see the [API reference](https://doc.easemob.com/apidoc/ios/chat3.0/interface_e_m_options.html).
+The following table lists commonly used `EMOptions` properties for initialization. For all `EMOptions` properties, see the [API reference](https://doc.easyim.ai/apidoc/ios/chat3.0/interface_e_m_options.html).
 
 | Property | Description |
 | :--- | :--- |

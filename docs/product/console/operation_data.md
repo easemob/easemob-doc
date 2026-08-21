@@ -1,8 +1,8 @@
 # 实时信息概览
 
-在 [环信控制台](https://console.easemob.com/user/login) 上，你可以查看运营数据：
+在 [环信控制台](https://console.easyim.ai/user/login) 上，你可以查看运营数据：
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+1. 登录 [环信控制台](https://console.easyim.ai/user/login)。
 2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
 3. 在左侧导航栏，选择 **运营管理** > **运营数据**。
 

@@ -7,7 +7,7 @@ When a member leaves a chat group or chat room voluntarily, is removed, or leave
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Leave voluntarily
 
@@ -93,7 +93,7 @@ The following examples show chat room leave events.
 
 - A user is removed from a [chat group](/document/android/group_manage.html#remove-a-member) or [chat room](/document/android/room_manage.html#be-removed) on the client.
 - A [RESTful API is called to remove a user from a chat group](/document/server-side/group_member_remove_single.html) or [chat room](/document/server-side/chatroom_member_remove_single.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 
@@ -146,7 +146,7 @@ The following example shows an event generated when a user is removed from a cha
 
 - A user leaves a chat group or chat room after being added to the [chat group blocklist](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/document/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
 - A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/document/server-side/group_member_blocklist_add_single.html) or [chat room blocklist](/document/server-side/chatroom_member_blocklist_add_single.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 
@@ -199,7 +199,7 @@ The following example shows an event generated when a user is added to the group
 
 - Users leave when a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) is destroyed on the client.
 - Users leave when a RESTful API is called to [destroy a chat group](/document/server-side/group_delete.html) or [chat room](/document/server-side/chatroom_delete.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
+- In the [EasyIM Console](https://console.easyim.ai/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
 
 ### Webhook request
 

@@ -8,7 +8,7 @@ For definitions and changes of users' online, offline, and custom states and how
 
 ## Feature activation
 
-Before using this feature, enable the service in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
+Before using this feature, enable the service in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
 
 ## Subscription process
 
@@ -33,7 +33,7 @@ Before using presence, ensure that the following requirements are met:
 - You have initialized and logged in to the SDK. For details, see [Quickstart](quickstart.html).
 - You have registered `PresenceManager` and can call presence APIs through `client.presenceManager`.
 - You understand the EasyIM API [limitations](/product/limitation.html).
-- You have enabled presence subscription in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
+- You have enabled presence subscription in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
 
 ## Subscribe to specified users' presence
 

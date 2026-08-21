@@ -64,7 +64,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 | `grant_type` | String | Yes       | Authorization method. Set it to `inherit` to obtain a user token by user ID. You must set the `username` parameter.  |
 | `username`   | String | Yes       | User ID.                |
 | `autoCreateUser`   | Boolean | Yes       | Whether to automatically create the user if the user does not exist.|
-| `ttl`        | Long   | No       | User token validity period, in seconds. Set it to `0` so the token never expires. If this parameter is not passed, the default validity period is 60 days. You can also set it on the **User Management** page of the [EasyIM Console](https://console.easemob.com/user/login/). The most recent setting takes precedence. |
+| `ttl`        | Long   | No       | User token validity period, in seconds. Set it to `0` so the token never expires. If this parameter is not passed, the default validity period is 60 days. You can also set it on the **User Management** page of the [EasyIM Console](https://console.easyim.ai/user/login/). The most recent setting takes precedence. |
 
 ### Response example
 
@@ -128,7 +128,7 @@ Generating a dynamic user token depends on `ClientSecret`. Therefore, you must i
 
 Generate a dynamic user token as follows:
 
-1. Create an app in the [EasyIM Console](https://console.easemob.com/user/login) to generate `AppKey`, `Client ID`, and `ClientSecret`.
+1. Create an app in the [EasyIM Console](https://console.easyim.ai/user/login) to generate `AppKey`, `Client ID`, and `ClientSecret`.
 
 2. Generate a user token based on `AppKey`, `ClientSecret`, and `userId`, which is the `username` passed when registering the user, as shown in the following example.
 

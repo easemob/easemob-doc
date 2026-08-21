@@ -23,7 +23,7 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-The following table lists common `EMOptions` methods used during initialization. For all `EMOptions` methods, see the [API reference](https://doc.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html).
+The following table lists common `EMOptions` methods used during initialization. For all `EMOptions` methods, see the [API reference](https://doc.easyim.ai/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html).
 
 | Method | Description |
 | :--- | :--- |

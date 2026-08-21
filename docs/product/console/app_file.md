@@ -4,7 +4,7 @@
 
 按如下步骤进行应用备案：
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，在页面上方选择 **应用管理** 或者在 **首页** 的 **应用概览** 区域选择 **应用管理**。
+1. 登录 [环信控制台](https://console.easyim.ai/user/login)，在页面上方选择 **应用管理** 或者在 **首页** 的 **应用概览** 区域选择 **应用管理**。
 
 ![img](/images/console/app_mgmt_menu.png)
 

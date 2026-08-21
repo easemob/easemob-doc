@@ -29,7 +29,7 @@ Call `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member inform
 // cursor: Pass `null` or an empty string for `cursor` in the first request. In subsequent requests, pass the cursor from the previous result. An empty returned cursor indicates the last page.
 EMClient.getInstance()
         .groupManager()
-        // pageSize: The expected number of group members returned per page. The upper limit depends on the server. See https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url.
+        // pageSize: The expected number of group members returned per page. The upper limit depends on the server. See https://doc.easyim.ai/rest/group_member_list_obtain.html#request-url.
         .asyncFetchGroupMembersInfo(
                 groupId,
                 null,

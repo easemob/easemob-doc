@@ -75,5 +75,5 @@ For the method, API URL, brief description, and call frequency limit of each RES
 
 Before calling EasyIM RESTful APIs, ensure that the following requirements are met:
 
-- In the [EasyIM Console](https://console.easemob.com/user/login), you have [registered an account](/product/console/account_register.html) and [created an app](/product/console/app_create.html).
+- In the [EasyIM Console](https://console.easyim.ai/user/login), you have [registered an account](/product/console/account_register.html) and [created an app](/product/console/app_create.html).
 - You have obtained an app token from the server. For details, see [Authenticate with an App Token](easemob_app_token.html).

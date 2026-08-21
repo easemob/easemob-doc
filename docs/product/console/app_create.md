@@ -1,17 +1,17 @@
 # 创建应用
 
-接入即时通讯 IM 前，你需要先在 [环信控制台](https://console.easemob.com/user/login) 创建应用。
+接入即时通讯 IM 前，你需要先在 [环信控制台](https://console.easyim.ai/user/login) 创建应用。
 
 - 新创建的应用默认为 **测试版**，可用于开发、联调和测试。
 - 测试版应用上线后会生成 **正式版** 应用。上线方式及说明详见 [应用上线说明](app_launch.html)。
 
 ## 前提条件
 
-创建应用前，你需要先在 [环信控制台](https://console.easemob.com/user/login) [注册账号](account_register.html)。
+创建应用前，你需要先在 [环信控制台](https://console.easyim.ai/user/login) [注册账号](account_register.html)。
 
 ## 操作步骤
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，在首页 **应用概览** 区域点击 **创建应用**。
+1. 登录 [环信控制台](https://console.easyim.ai/user/login)，在首页 **应用概览** 区域点击 **创建应用**。
 
 ![img](/images/console/app_create_overview.png)
 

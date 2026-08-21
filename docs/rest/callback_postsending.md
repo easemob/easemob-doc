@@ -25,14 +25,14 @@ The post-delivery webhook applies to message webhooks in one-to-one chats, group
 
 Before using the post-delivery webhook, complete the following configuration:
 
-1. In the [EasyIM Console](https://console.easemob.com/user/login), [activate the webhook service](/product/console/basic_webhook.html).
+1. In the [EasyIM Console](https://console.easyim.ai/user/login), [activate the webhook service](/product/console/basic_webhook.html).
 2. Configure webhook rules based on your business requirements. For example, provide an accessible HTTP or HTTPS webhook URL to receive webhook requests initiated by the EasyIM server. For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 After you complete this configuration, when a message is sent or a related event occurs, the EasyIM server sends a webhook to your business server according to the configured rules.
 
 ## Webhook rules
 
-To use the post-delivery webhook, first configure webhook rules in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+To use the post-delivery webhook, first configure webhook rules in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 For the same app, you can configure separate webhook rules for chat messages and offline messages. If your business needs both webhook types, use separate webhook URLs to facilitate server decoupling, log tracing, and troubleshooting. If the webhook types share the same webhook URL, use the `eventType` field in the request body to distinguish them.
 

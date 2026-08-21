@@ -1,6 +1,6 @@
 # 消息回调
 
-创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息回调和回调异常缓存功能。
+创建应用后，你可以在 [环信控制台](https://console.easyim.ai/user/login) 开通消息回调和回调异常缓存功能。
 
 ## 消息回调概述
 

@@ -534,7 +534,7 @@ Fixes the sending of unnecessary message delivery receipts.
 
 #### New features
 
-- [EasyIM SDK] Adds the chat group event callback [onGroupEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) and chat room event callback [onChatroomEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent). The original callbacks remain available;
+- [EasyIM SDK] Adds the chat group event callback onGroupEvent and chat room event callback onChatroomEvent. The original callbacks remain available;
 - [EasyIM SDK] Adds the group-message rate-limit error code [MESSAGE_CURRENT_LIMITING](error.html)
 - [EasyIM SDK] Adds the group-name parameter value to the return value of the group-chat invitation callback onGroupChange.
 

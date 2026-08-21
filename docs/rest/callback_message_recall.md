@@ -7,13 +7,13 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 1. A [user recalls a message on the client](/document/android/message_recall.html).
 2. A RESTful API is called to recall a [single message](/document/server-side/message_recall_single.html) or [recall messages in batches](/document/server-side/message_recall_batch.html).
-3. A message is recalled in the [EasyIM Console](https://console.easemob.com/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
+3. A message is recalled in the [EasyIM Console](https://console.easyim.ai/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
 
 ## Webhook request
 

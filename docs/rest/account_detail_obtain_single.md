@@ -97,7 +97,7 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | HTTP status code | Error type    | Error message      | Possible cause      | Recommendation    |
 | :---------- | :---------- | :--------- | :----------- | :---------- |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)    | The token is invalid. It may have expired or be incorrect. | Use a new token to access the API.    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | The App Key does not exist.   | Check whether `orgName` and `appName` are correct, or [create an app](https://doc.easemob.com/product/console/app_create.html). |
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | The App Key does not exist.   | Check whether `orgName` and `appName` are correct, or [create an app](/product/console/app_create.html). |
 | 404         | service_resource_not_found         | Service resource not found  | The user does not exist.  | Register the user first, or check whether the username is correct.  |
 
 For other errors and their possible causes, see [Response status codes](error.html).

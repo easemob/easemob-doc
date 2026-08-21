@@ -10,7 +10,7 @@ The following figure shows examples of adding a Reaction, how Reactions appear i
 
 ## Feature activation
 
-Before using Reactions, activate the feature in [EasyIM Console](https://console.easemob.com/user/login). For instructions, see the [EasyIM Console documentation](/product/console/basic_message.html#消息表情回复).
+Before using Reactions, activate the feature in [EasyIM Console](https://console.easyim.ai/user/login). For instructions, see the [EasyIM Console documentation](/product/console/basic_message.html#消息表情回复).
 
 ## Limitations
 
@@ -23,7 +23,7 @@ Before you begin, ensure that the following requirements are met:
 
 1. Initialize the SDK. For details, see [Quickstart](quickstart.html).
 2. Understand the EasyIM API [limitations](/product/limitation.html).
-3. Activate the Reaction feature in [EasyIM Console](https://console.easemob.com/user/login).
+3. Activate the Reaction feature in [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Add a Reaction to a message
 

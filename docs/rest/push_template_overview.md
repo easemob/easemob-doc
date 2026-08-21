@@ -8,7 +8,7 @@ Push templates are primarily used to set global push titles and content when the
 
 You can use push templates to set push titles and content. Push templates include the default **default** and **detail** templates and custom push templates.
 
-In addition to calling the REST API to configure default push templates, you can also configure push templates in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Push template configuration](/document/android/push/push_template.html).
+In addition to calling the REST API to configure default push templates, you can also configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Push template configuration](/document/android/push/push_template.html).
 
 ## Push template features
 

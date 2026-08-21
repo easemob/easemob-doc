@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Delete a keyword list.
-- You can also delete a keyword list in the [EasyIM Console](https://console.easemob.com/user/login): Select **EasyIM** > **Content Moderation** > **Text Moderation** > **Keyword Lists**.
+- You can also delete a keyword list in the [EasyIM Console](https://console.easyim.ai/user/login): Select **EasyIM** > **Content Moderation** > **Text Moderation** > **Keyword Lists**.
 
 ## Call frequency limit
 

@@ -30,7 +30,7 @@ const group = client.groupManager.getGroup('groupId');
 const result = await group.getMembers({
   // Pagination cursor. For the first request, omit this parameter or pass `null` / `''` at runtime. For subsequent requests, pass the `cursor` from the previous result. An empty `cursor` in the result indicates that the last page has been reached.
   cursor: '',
-  // Expected number of group members returned per page. The maximum depends on the server. For details, see https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url.
+  // Expected number of group members returned per page. The maximum depends on the server. For details, see https://doc.easyim.ai/rest/group_member_list_obtain.html#request-url.
   pageSize: 50,
 });
 

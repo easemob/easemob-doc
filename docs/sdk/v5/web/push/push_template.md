@@ -19,9 +19,9 @@ Push templates have the following characteristics:
 
 ## Feature activation
 
-[Push templates](push_template.html) are an advanced push feature. Before using them, enable them for free in the [EasyIM Console](https://console.easemob.com/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
+[Push templates](push_template.html) are an advanced push feature. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
-1. Log in to the [EasyIM Console](https://console.easemob.com/user/login).
+1. Log in to the [EasyIM Console](https://console.easyim.ai/user/login).
 2. Select **App Management** at the top of the page. On the app list page that appears, click the trial or production App Key.
 3. Select **Value-added Services > Message Push > Offline Push**.
 4. Click **Enable for Free**.
@@ -35,7 +35,7 @@ After activation, you can [configure push templates](#configure-push-templates).
 Configure offline push templates in either of the following ways:
 
 - [Call a REST API](/document/server-side/push_template_overview).
-- Configure push templates in the [EasyIM Console](https://console.easemob.com/user/login).
+- Configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 For push-template data structures, see [Push Extension Fields](/document/server-side/push_extension.html). The following sections describe how to configure offline push templates in the EasyIM Console.
 
@@ -87,7 +87,7 @@ To display a group member's nickname in the chat group in a push notification, p
 
 ### Add a custom push template
 
-EasyIM supports adding custom push templates. In addition to [calling a RESTful API](/document/server-side/push_template_create.html) to create a custom push template, you can add one in the [EasyIM Console](https://console.easemob.com/user/login). **A custom push template has a higher priority than a default template.**
+EasyIM supports adding custom push templates. In addition to [calling a RESTful API](/document/server-side/push_template_create.html) to create a custom push template, you can add one in the [EasyIM Console](https://console.easyim.ai/user/login). **A custom push template has a higher priority than a default template.**
 
 On the **Template Management** page, click **Add Push Template** to create a custom push template.
 

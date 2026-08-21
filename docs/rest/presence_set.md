@@ -10,7 +10,7 @@ Set a user's presence on a specified device.
 
 ## Feature activation
 
-Before using Presence, activate it in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+Before using Presence, activate it in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
 
 ## Call frequency limit
 

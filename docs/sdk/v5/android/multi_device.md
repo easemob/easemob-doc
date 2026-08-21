@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM allows the same account to log in on multiple devices. Before using this feature, activate the multi-device login service in [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
+EasyIM allows the same account to log in on multiple devices. Before using this feature, activate the multi-device login service in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 
 During login, the Android SDK generates a login resource identifier for the current device and synchronizes device-related information to the server. The server maintains the current account's online device state according to the multi-device policy. When the same account performs operations involving friends, chat groups, message threads, conversations, or one-way deletion of server-side historical messages on another device, the current device receives the corresponding multi-device events through an `EMMultiDeviceListener` registered with `EMClient#addMultiDeviceListener`.
 
@@ -34,7 +34,7 @@ The mutual-kick policies for single-device and multi-device login are as follows
 ## Prerequisite
 
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html).
-- Activate multi-device login in [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
+- Activate multi-device login in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
 - Set the custom login device name and platform during SDK initialization.
 
 ## Retrieve login IDs for the current user's other logged-in devices  

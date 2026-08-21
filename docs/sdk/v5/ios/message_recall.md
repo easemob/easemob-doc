@@ -17,7 +17,7 @@ All message types except command messages support recall.
 **Time limit**
 
 - By default, the sender can recall a message within 2 minutes after sending it.
-- You can adjust the recall period on the **Instant Messaging > Basic Features > Messages** page in the [EasyIM Console](https://console.easemob.com/user/login). The maximum is 7 days.
+- You can adjust the recall period on the **Instant Messaging > Basic Features > Messages** page in the [EasyIM Console](https://console.easyim.ai/user/login). The maximum is 7 days.
 
 **Recall result**
 

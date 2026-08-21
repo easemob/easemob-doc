@@ -116,7 +116,7 @@ Both one-to-one and group messages support read receipts. Before using group mes
 
 | Limitation       | Default setting   | Description                                                         |
 | :--- | :--- | :--- |
-| Feature activation       | Disabled       | Before use, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [EasyIM Console](https://console.easemob.com/user/login).|
+| Feature activation       | Disabled       | Before use, enable **Group Message Read Receipts** on the **EasyIM** > **Basic Features** > **Messages** page in the [EasyIM Console](https://console.easyim.ai/user/login).|
 | Permission       | All group members | By default, all group members can require read receipts when sending messages. To allow only the group owner and group admins to require them, contact the EasyIM business manager to update the configuration. |
 | Read receipt validity period | 3 days       | Group message read receipts are valid for 3 days. More than 3 days after a message is sent, the server no longer records the members who read the message or sends read receipts for it. |
 | Group size         | 200 members     | This feature supports chat groups with up to 200 members. If a group has more than 200 members, group messages do not return read receipts. This limit cannot currently be increased. |

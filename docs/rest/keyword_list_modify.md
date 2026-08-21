@@ -3,7 +3,7 @@
 ## Feature overview
 
 - Modify a keyword list, including its name, scope, matching tag, moderation action for matching message content, whether to use exact matching, and other parameters.
-- You can also modify a keyword list in the [EasyIM Console](https://console.easemob.com/user/login): Select **EasyIM** > **Content Moderation** > **Text Moderation** > **Keyword Lists**.
+- You can also modify a keyword list in the [EasyIM Console](https://console.easyim.ai/user/login): Select **EasyIM** > **Content Moderation** > **Text Moderation** > **Keyword Lists**.
 
 ## Call frequency limit
 

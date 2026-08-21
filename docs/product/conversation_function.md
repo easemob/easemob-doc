@@ -41,7 +41,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 
 ### User relationships
 
-By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
 
 | Feature       | Description |
 | :-------------- | :----- |
@@ -298,7 +298,7 @@ The EasyIM SDKs support offline push. Supported mobile vendor push services incl
 | Set Do Not Disturb mode | Set a Do Not Disturb period and duration. |
 | Set the preferred language for push notifications | If translation is enabled, the SDK sends both the original and translated messages. If the language of the translated message matches your setting, the translated message is displayed in the push notification. Otherwise, the original message is displayed. |
 | Set push extensions | Use extension fields to customize push settings, such as forced push and silent messages. |
-| Query offline push result statistics | Query offline push results in the [EasyIM Console](https://console.easemob.com/user/login). |
+| Query offline push result statistics | Query offline push results in the [EasyIM Console](https://console.easyim.ai/user/login). |
 
 ## Content moderation
 

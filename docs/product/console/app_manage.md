@@ -4,7 +4,7 @@
 
 ## 管理应用
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+1. 登录 [环信控制台](https://console.easyim.ai/user/login)。
    
 2. 在页面上方选择 **应用管理**，或在首页 **应用概览** 区域点击 **应用管理**。
 

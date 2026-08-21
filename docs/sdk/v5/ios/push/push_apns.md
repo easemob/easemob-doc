@@ -110,9 +110,9 @@ The CSR file `EMImDemoAPS.certSigningRequest` is created locally.
 
 ## **Upload the push certificate**
 
-Upload the APNs push certificate in [EasyIM Console](https://console.easemob.com/user/login).
+Upload the APNs push certificate in [EasyIM Console](https://console.easyim.ai/user/login).
 
-1. Log in to [EasyIM Console](https://console.easemob.com/user/login), select your app > **Feature Configuration** > **Value-Added Features** > **Push**.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login), select your app > **Feature Configuration** > **Value-Added Features** > **Push**.
 
 2. On the **Certificate Management** page, click **Add push certificate**. In the **Add push certificate** dialog box, select the **Apple** tab and configure the APNs push parameters.
 
@@ -195,7 +195,7 @@ To ensure reliable test results, avoid using an emulator.
 
 1. Kill the app process.
 
-2. Send a test message in [EasyIM Console](https://console.easemob.com/user/login).
+2. Send a test message in [EasyIM Console](https://console.easyim.ai/user/login).
 
   On the left navigation bar, choose **Operations Management** > **Operations** > **User Management**. On the **User Management** page, click **More** in the **Actions** column for the corresponding user ID, then select **Send rest message**. In the dialog box that appears, select the message type, enter the message content, and click **Send**.
 
@@ -211,7 +211,7 @@ To ensure reliable test results, avoid using an emulator.
 
    On the left navigation bar, choose **Operations Management** > **Operations** > **User Management**. On the **User Management** page, click **View IM user bound push certificate** in the **Actions** column for the corresponding user ID. In the pop-up box, check whether the certificate name and device token are displayed correctly.
 
-2. Check whether the correct APNs certificate was uploaded in [EasyIM Console](https://console.easemob.com/user/login) and whether the correct certificate environment was set.
+2. Check whether the correct APNs certificate was uploaded in [EasyIM Console](https://console.easyim.ai/user/login) and whether the correct certificate environment was set.
 
 3. Check whether the message is being pushed in a chat room. Chat rooms do not support offline message push.
 

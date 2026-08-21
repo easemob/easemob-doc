@@ -9,7 +9,7 @@
 
 ## Configure open registration
 
-Before using this API, enable open registration for the corresponding app in the [EasyIM Console](https://console.easemob.com/user/login). On the **App Management** page of the console, click **Manage** in the **Actions** column for the target app. Then select **Feature Configuration > Basic Features** > **Users**, and set **User Registration Mode** to **Open Registration**.
+Before using this API, enable open registration for the corresponding app in the [EasyIM Console](https://console.easyim.ai/user/login). On the **App Management** page of the console, click **Manage** in the **Actions** column for the target app. Then select **Feature Configuration > Basic Features** > **Users**, and set **User Registration Mode** to **Open Registration**.
 
 ## Call frequency limit
 

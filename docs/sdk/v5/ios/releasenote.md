@@ -550,7 +550,7 @@ Fixed a crash caused by missing internal member variables in the `IEMChatManager
 #### Major changes
 
 Starting from v4.6.0, the new Swift-based `EaseChatUIKit` and `EaseChatDemo` are used. The legacy Demo and UIKit will gradually no longer be maintained. See:
-- [UIKit documentation](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
+- [UIKit documentation](https://doc.easyim.ai/uikit/chatuikit/ios/chatuikit_overview.html)
 - Demo source code on [GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) or [Gitee](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo)
 
 ## v4.5.0 Dev 2024-04-03

@@ -48,7 +48,7 @@
 
 ### 手机号验证码登录
 
-1. 打开 [环信控制台](https://console.easemob.com/user/login) 登录页面。
+1. 打开 [环信控制台](https://console.easyim.ai/user/login) 登录页面。
 2. 单击 **通过手机验证码登录**。
 3. 输入手机号，点击 **获取验证码**，按住滑块拖动到最右边，输入短信验证码。
 4. 阅读并勾选同意隐私协议。
@@ -60,7 +60,7 @@
 
 ### 邮箱和密码登录
 
-1. 打开 [环信控制台](https://console.easemob.com/user/login) 登录页面。
+1. 打开 [环信控制台](https://console.easyim.ai/user/login) 登录页面。
 2. 输入邮箱地址和登录密码。
 3. 阅读并勾选同意隐私协议。
 4. 单击 **登录** 登录环信控制台。
@@ -69,7 +69,7 @@
 
 ### 手机号和密码登录
 
-1. 打开 [环信控制台](https://console.easemob.com/user/login) 登录页面。
+1. 打开 [环信控制台](https://console.easyim.ai/user/login) 登录页面。
 2. 输入手机号和登录密码。
 3. 阅读并勾选同意隐私协议。
 4. 单击 **登录** 登录环信控制台。

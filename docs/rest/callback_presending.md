@@ -12,13 +12,13 @@ After the EasyIM server receives an uplink one-to-one, group, or chat room messa
 
 ## Implementation steps
 
-1. Activate the webhook service: In the [EasyIM Console](https://console.easemob.com/user/login), [activate the message webhook service](/product/console/basic_webhook.html#activate-the-service).
-2. Configure pre-delivery webhook rules: In the [EasyIM Console](https://console.easemob.com/user/login), see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+1. Activate the webhook service: In the [EasyIM Console](https://console.easyim.ai/user/login), [activate the message webhook service](/product/console/basic_webhook.html#activate-the-service).
+2. Configure pre-delivery webhook rules: In the [EasyIM Console](https://console.easyim.ai/user/login), see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 3. The EasyIM server sends an HTTP/HTTPS POST request to your app server.
 
 ## Webhook rules
 
-To use the pre-delivery webhook, configure webhook rules in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
+To use the pre-delivery webhook, configure webhook rules in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 For the same app, you can configure different rules for different message types. You can also select two or more message types in the same rule and send their webhooks to one specified server address. After receiving a message, you can process it according to its message type.
 
@@ -60,7 +60,7 @@ The following example shows a message sent in a chat room:
 | `to`              | Message recipient. For a one-to-one chat, the message recipient; for a group chat or chat room, the chat group ID or chat room ID.  |
 | `msg_id`          | Message ID.   |
 | `payload`         | Message content, in the same format as a message sent through the RESTful API. See [Message format](message_historical.html#historical-message-content).     |
-| `security`        | Signature in the format MD5（callId+Secret+timestamp）. For the Secret, see the [EasyIM Console](https://console.easemob.com/user/login) [webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`        | Signature in the format MD5（callId+Secret+timestamp）. For the Secret, see the [EasyIM Console](https://console.easyim.ai/user/login) [webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). |
 
 ### Request fields
 

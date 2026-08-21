@@ -16,7 +16,7 @@ This document describes the following user relationship webhook events:
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Send a friend request
 
@@ -261,7 +261,7 @@ Request fields:
 
 - A [friend is deleted on the client](/document/android/user_relationship.html#delete-a-friend).
 - A RESTful API is called to [delete a friend](/document/server-side/user_friend_remove.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a [friend is deleted](/product/console/operation_user.html#delete-a-users-friend).
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is deleted](/product/console/operation_user.html#delete-a-users-friend).
 
 #### Request example
 
@@ -308,7 +308,7 @@ Request fields:
 
 1. A [user is added to the blocklist on the client](/document/android/user_relationship.html#add-a-user-to-the-blocklist).
 2. A [RESTful API is called to add a user to the blocklist](/document/server-side/user_friend_blocklist_add.html).
-3. In the [EasyIM Console](https://console.easemob.com/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
+3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
 
@@ -359,7 +359,7 @@ Request fields:
 
 1. A user [removes a friend from the blocklist on the client](/document/android/user_relationship.html#remove-a-user-from-the-blocklist).
 2. A [RESTful API is called to remove a friend from the blocklist](/document/server-side/user_friend_blocklist_remove.html).
-3. In the [EasyIM Console](https://console.easemob.com/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
+3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
 

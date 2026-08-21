@@ -67,14 +67,14 @@ For the app and all conversations in it, Do Not Disturb settings take precedence
 
 ## Use push templates
 
-Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [EasyIM Console](https://console.easemob.com/user/login).
+Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 Push templates are primarily used when the server's default configuration does not meet your requirements. They allow you to set global push notification titles and content. For example, the server provides default push titles and content in Chinese and English. If you need Korean or Japanese push titles and content, you can configure templates for those languages. Push templates include the `default` push template and custom push templates. For chat group messages, you can use targeted templates to send some users offline notifications that differ from those sent to other users.
 
 You can configure push templates in the following ways:
 
 - [Call a REST API](/document/server-side/push_template_overview.html).
-- Configure push templates in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
+- Configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
 
 Push templates provide the following benefits:
 

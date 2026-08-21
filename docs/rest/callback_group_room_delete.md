@@ -7,13 +7,13 @@ After a chat group or chat room is deleted successfully, the EasyIM server sends
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 - A user destroys a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) on the client.
 - A user calls a RESTful API to destroy a [chat group](/document/server-side/group_delete.html) or [chat room](/document/server-side/chatroom_delete.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a user deletes a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room).
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a user deletes a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room).
 
 ## Webhook request
 

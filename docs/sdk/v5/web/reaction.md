@@ -14,7 +14,7 @@ EasyIM provides the Reaction feature. Users can add Reactions to or remove them 
 
 ## Feature activation
 
-To use the Reaction feature, enable it in the [EasyIM Console](https://console.easemob.com/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message.html#消息表情回复).
+To use the Reaction feature, enable it in the [EasyIM Console](https://console.easyim.ai/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message.html#消息表情回复).
 
 ## Limitations
 
@@ -28,7 +28,7 @@ Before you begin, ensure that the following requirements are met:
 1. You have initialized the SDK. For details, see [Quickstart](quickstart.html).
 2. You registered `ChatManager` during SDK initialization.
 3. You understand the EasyIM API [limitations](/product/limitation.html).
-4. You enabled the Reaction feature in the [EasyIM Console](https://console.easemob.com/user/login).
+4. You enabled the Reaction feature in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Add a Reaction to a message
 

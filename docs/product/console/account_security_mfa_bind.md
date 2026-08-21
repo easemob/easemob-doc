@@ -23,7 +23,7 @@ MFA（Multi-Factor Authentication）即多重身份验证，是一种通过要�
 
 ## 绑定步骤 
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+1. 登录 [环信控制台](https://console.easyim.ai/user/login)。
 2. 鼠标悬停或单击右上角账号管理下拉菜单，选择 **账号信息**。
 3. 在左侧导航栏中选择 **安全设置**。
 4. 在右侧的 **安全设置** 页面中，在 **基本设置** 一栏中点击 **绑定**。

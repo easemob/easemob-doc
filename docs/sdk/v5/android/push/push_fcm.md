@@ -44,7 +44,7 @@ Download the certificate file, for example, `myapplication-72d8c-firebase-admins
 
 ### Step 3: Upload the push certificate
 
-1. Log in to [EasyIM Console](https://console.easemob.com/user/login). On the **App Management** page, click the App Key of the test or production app.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). On the **App Management** page, click the App Key of the test or production app.
 
 2. Select **Value-Added Features** > **Message Push**.
 
@@ -234,10 +234,10 @@ To ensure reliable test results, avoid using an emulator.
 ### **Test steps**
 
 1. Log in to the app on the device and confirm that the device token is bound successfully.
-   You can check the logs or call [the RESTful API for obtaining user details](https://doc.easemob.com/document/server-side/account_detail_obtain_single.html) to confirm whether the device token is bound successfully. After success, the `pushInfo` field appears under the `entities` field, and related information such as `device_Id`, `device_token`, and `notifier_name` appears under `pushInfo`.
+   You can check the logs or call [the RESTful API for obtaining user details](/rest/account_detail_obtain_single.html) to confirm whether the device token is bound successfully. After success, the `pushInfo` field appears under the `entities` field, and related information such as `device_Id`, `device_token`, and `notifier_name` appears under `pushInfo`.
 2. Enable notification bar permissions for the app.
 3. Kill the app process.
-4. Send a test message in [EasyIM Console](https://console.easemob.com/user/login).
+4. Send a test message in [EasyIM Console](https://console.easyim.ai/user/login).
    On the left navigation bar, choose **EasyIM** > **Operations Service** > **User Management**. On the **User Management** page, click **More** in the **Actions** column for the corresponding user ID, then select **Send rest message**. In the dialog box that appears, select the message type, enter the message content, and click **Send**.
 5. Check whether the device receives the push notification.
 

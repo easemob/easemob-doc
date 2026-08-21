@@ -7,7 +7,7 @@ When a chat group or chat room member is added to or removed from the blocklist,
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add a member to the blocklist
 
@@ -17,7 +17,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 
 - A [chat group member](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
 - A RESTful API is called to add a [chat group member](/document/server-side/group_member_blocklist_add_single.html) or [chat room member](/document/server-side/chatroom_allowlist_add_single.html) to the blocklist.
-- In the [EasyIM Console](https://console.easemob.com/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
 
 ### Webhook request
 
@@ -69,7 +69,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 
 1. A member is removed from the chat group or chat room blocklist on the client.
 2. A RESTful API is called to remove a member from the [chat group blocklist](/document/server-side/group_allowlist_remove.html) or chat room blocklist.
-3. A user is removed from the chat group or chat room blocklist in the [EasyIM Console](https://console.easemob.com/user/login).
+3. A user is removed from the chat group or chat room blocklist in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 ### Webhook request
 

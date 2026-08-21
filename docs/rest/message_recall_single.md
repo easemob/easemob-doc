@@ -5,14 +5,14 @@
 - Recall one successfully sent message at a time, including messages sent from a client or through the REST API.
 - After you call this API, the message on the server, including the historical, offline, or roaming message, and the message in the memory and database of the sender and recipient are recalled.
 - For attachment messages, including image, audio, video, and file messages, recalling the message also deletes the message attachment.
-- Before recalling a message, obtain its message ID by calling the [Historical message API](https://doc.easemob.com/document/server-side/message_historical.html) or using a [message webhook](https://doc.easemob.com/document/server-side/callback_overview.html).
+- Before recalling a message, obtain its message ID by calling the [Historical message API](message_historical.html) or using a [message webhook](callback_overview.html).
 - Use the `sync_device` parameter to specify whether to synchronize the recall of a one-to-one chat message to all online devices of the message sender.
-- Recalling a message triggers a post-delivery callback. For details, see [Webhook events](https://doc.easemob.com/document/server-side/callback_message_recall.html).
+- Recalling a message triggers a post-delivery callback. For details, see [Webhook events](callback_message_recall.html).
 - If the recipient of a one-to-one chat, group chat, or chat room message is offline when the message is sent or recalled, the recipient is notified of the recall when they come online because the server sends an event notification to the client SDK.
 
 #### Configure the recall period
 
-By default, the sender can recall a message within 2 minutes after sending it. On the **Feature Configuration** > **Basic Features** > **Messages** page of the [EasyIM Console](https://console.easemob.com/user/login), you can set a message recall period of up to 7 days.
+By default, the sender can recall a message within 2 minutes after sending it. On the **Feature Configuration** > **Basic Features** > **Messages** page of the [EasyIM Console](https://console.easyim.ai/user/login), you can set a message recall period of up to 7 days.
 
 #### Force recall
 

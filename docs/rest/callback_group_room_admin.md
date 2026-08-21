@@ -7,7 +7,7 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Add an admin
 
@@ -15,7 +15,7 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 
 - A [chat group admin](/document/android/group_members.html#add-a-group-admin) or [chat room admin](/document/android/room_members.html#add-a-chat-room-admin) is added on the client.
 - A RESTful API is called to add a [chat group admin](/document/server-side/group_admin_add.html) or [chat room admin](/document/server-side/chatroom_admin_add.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a [chat group admin](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room admin](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added.
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group admin](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room admin](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added.
 
 ### Webhook request
 

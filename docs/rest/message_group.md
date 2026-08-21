@@ -9,7 +9,7 @@ EasyIM supports sending text, image, voice, video, file, location, command, cust
 In group chats, all message types use the same RESTful API. The main difference between message types is the structure of the `body` field in the request body.
 
 - Text, location, command, and custom messages: Construct the message body directly and call the sending API.
-- Image, voice, video, and file messages: To send an attachment message, you cannot directly use the original attachment URL from your business system. First call the [file upload](https://doc.easemob.com/document/server-side/message_upload_file.html) API to upload the attachment, and then construct the message body with the returned attachment URL and related fields.
+- Image, voice, video, and file messages: To send an attachment message, you cannot directly use the original attachment URL from your business system. First call the [file upload](message_upload_file.html) API to upload the attachment, and then construct the message body with the returned attachment URL and related fields.
 - Unlike when [importing group messages](message_import_group.html), when sending attachment messages, you **cannot directly use the original file URL from your business system**.
 
 ### Attachment message sending workflow

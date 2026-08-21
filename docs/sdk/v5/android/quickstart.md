@@ -15,7 +15,7 @@ The following figure shows the workflow for sending and receiving one-to-one tex
 - targetVersion 33 or later
 - Android SDK API 21 or later
 - JDK 17 or later
-- A valid EasyIM developer account and App Key. See [EasyIM Console](https://console.easemob.com/user/login).
+- A valid EasyIM developer account and App Key. See [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Prepare the development environment
 
@@ -113,7 +113,7 @@ Add the following lines to `/app/src/main/AndroidManifest.xml` as required by yo
 </manifest>
 ```
 
-To obtain the value corresponding to the App Key, create an app in [EasyIM Console](https://console.easemob.com/user/login), apply for an App Key, and complete the relevant configuration.
+To obtain the value corresponding to the App Key, create an app in [EasyIM Console](https://console.easyim.ai/user/login), apply for an App Key, and complete the relevant configuration.
 
 ### 4. Prevent code obfuscation
 
@@ -145,7 +145,7 @@ EMClient.getInstance().init(context, options);
 ```
 ### 2. Create a user
 
-Create a user in [EasyIM Console](https://console.easemob.com/user/login), and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#创建用户).
+Create a user in [EasyIM Console](https://console.easyim.ai/user/login), and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 For security in production, integrate the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server to implement token retrieval, so users obtain tokens from your app server.
 

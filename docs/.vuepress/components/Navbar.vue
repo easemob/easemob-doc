@@ -109,7 +109,7 @@ const handleLogout = () => {
 };
 
 const handleLogin = () => {
-  window.location.href = "https://console.easemob.com/user/login";
+  window.location.href = "https://console.easyim.ai/user/login";
 };
 
 const handleRegister = () => {

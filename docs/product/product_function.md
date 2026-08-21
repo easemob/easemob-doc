@@ -47,7 +47,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Single-platform login | Only 1 of the following platforms can be online: Android, iPhone, iPad, HarmonyOS, Windows, Mac, or Web. |
 | Multi-platform login | Up to 4 devices can be online simultaneously on each platform by default. |
 
-Before using multi-device login, find **Multiple Platforms and Devices** on the **Feature Configuration** > **Basic Features** > **Users** page of the [EasyIM Console](https://console.easemob.com/user/login) and enable it. Then click **Settings** and configure the number of devices for each platform in the dialog box.
+Before using multi-device login, find **Multiple Platforms and Devices** on the **Feature Configuration** > **Basic Features** > **Users** page of the [EasyIM Console](https://console.easyim.ai/user/login) and enable it. Then click **Settings** and configure the number of devices for each platform in the dialog box.
 
 ## Message types
 
@@ -118,7 +118,7 @@ Before using multi-device login, find **Multiple Platforms and Devices** on the 
 
 ## User relationships
 
-By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easemob.com/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
 
 | Feature       | Description |
 | :-------------- | :----- |
@@ -166,7 +166,7 @@ By default, EasyIM supports sending one-to-one messages between non-friends, mea
 
 ## EasyIM Console
 
-You can configure and manage your app in the [EasyIM Console](https://console.easemob.com/user/login).
+You can configure and manage your app in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 | Feature   | Description  | 
 | :------ | :----------- | 

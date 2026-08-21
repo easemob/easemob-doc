@@ -6,7 +6,7 @@ The EasyIM SDK is provided by EasyIM to implement instant messaging scenarios su
 
 ## EasyIM Console
 
-The [EasyIM Console](https://console.easemob.com/user/login) is a tool for developers to manage EasyIM services.
+The [EasyIM Console](https://console.easyim.ai/user/login) is a tool for developers to manage EasyIM services.
 
 ## Daily active users
 

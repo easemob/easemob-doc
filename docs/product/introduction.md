@@ -19,11 +19,11 @@ EasyIM provides services for one-to-one chats, group chats, chat rooms, offline 
 
 EasyIM has five major data centers and more than 200 edge acceleration nodes worldwide, providing network services in over 200 countries and regions. EasyIM data centers use a three-data-center deployment within each city, provide an SLA of 99.95%, and deliver excellent performance on unstable networks, with a 100% message delivery rate at 70% packet loss.
 
-When creating an app in the EasyIM Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](https://doc.easemob.com/product/data_center.html).
+When creating an app in the EasyIM Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](data_center.html).
 
 ### One-to-one chats
 
-A one-to-one chat is a conversation between two users. It supports text, image, location, voice, video, custom messages such as red packets, and combined messages, as well as offline messages, message roaming, message receipts, message recall, editing, searching, Reactions, translation, message pinning, content moderation, and other features. For details, see [One-to-one messages](message_single_chat).
+A one-to-one chat is a conversation between two users. It supports text, image, location, voice, video, custom messages such as red packets, and combined messages, as well as offline messages, message roaming, message receipts, message recall, editing, searching, Reactions, translation, message pinning, content moderation, and other features. For details, see [One-to-one messages](/product/message_single_chat.html).
 
 ### Group chats
 
@@ -68,7 +68,3 @@ Some features are available only through RESTful APIs, such as banning and unban
 ### Message callbacks
 
 EasyIM provides [message webhooks](/document/server-side/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.
-
-## On-premises deployment
-
-The EasyIM on-premises service is a privately deployable solution based on core instant messaging technologies. It supports deployment in intranet physical server clusters, public clouds, private clouds, and other environments, providing a full-featured, secure, reliable, and scalable instant messaging platform. For details, see the [on-premises service documentation](https://docs-im-privatization-v3.easemob.com).

@@ -4,7 +4,7 @@ After initializing the Android SDK, the app must log in with a user ID and user 
 
 ## User registration
 
-Before logging in to the SDK, create an EasyIM user. Before creating a user, set the user registration mode on the **Instant Messaging > Basic Features > Users** page in [EasyIM Console](https://console.easemob.com/user/login).
+Before logging in to the SDK, create an EasyIM user. Before creating a user, set the user registration mode on the **Instant Messaging > Basic Features > Users** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
 Two user registration modes are available:
 
@@ -20,13 +20,13 @@ After setting the registration mode, create users in either of the following way
 
 2. **Create a user in EasyIM Console**
 
-   Create users for a production or test environment in [EasyIM Console](https://console.easemob.com/user/login). For details, see [Create Users](/product/console/operation_user.html#创建用户).
+   Create users for a production or test environment in [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 ## Login
 
 The SDK logs in with a user ID and EasyIM token. Pass `userId` and `token` when calling `loginWithToken`. After login succeeds, the SDK establishes a persistent connection to the messaging service.
 
-In a test environment, after you create users in [EasyIM Console](https://console.easemob.com/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#创建用户).
+In a test environment, after you create users in [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
 In a production environment, we recommend integrating the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
 

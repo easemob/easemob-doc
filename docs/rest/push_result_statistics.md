@@ -6,7 +6,7 @@ To retrieve offline push results, contact the EasyIM business manager to activat
 
 You can retrieve offline push results in the following ways:
 
-- View IM message delivery queries in the [EasyIM Console](https://console.easemob.com/user/login):
+- View IM message delivery queries in the [EasyIM Console](https://console.easyim.ai/user/login):
   - In **App List**, click **Manage** in the **Actions** column for the target app to open the **App Overview** page.
   - Select **Instant Messaging > Real-Time Query > IM Message Delivery Query** to view push result records, as shown below:
 

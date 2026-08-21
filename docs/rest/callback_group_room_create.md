@@ -7,13 +7,13 @@ After a chat group or chat room is created successfully, the EasyIM server sends
 ## Prerequisite
 
 - The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easemob.com/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
 
 ## Trigger conditions
 
 - A [chat group](/document/android/group_manage.html#create-a-chat-group) or [chat room](/document/android/room_manage.html#create-a-chat-room) is created on the client.
 - A RESTful API is called to create a [chat group](/document/server-side/group_create.html) or [chat room](/document/server-side/chatroom_create.html).
-- In the [EasyIM Console](https://console.easemob.com/user/login), a [chat group](/product/console/operation_group.html#create-a-chat-group) or [chat room](/product/console/operation_chatroom.html#create-a-chat-room) is created.
+- In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group](/product/console/operation_group.html#create-a-chat-group) or [chat room](/product/console/operation_chatroom.html#create-a-chat-room) is created.
 
 ## Webhook request
 

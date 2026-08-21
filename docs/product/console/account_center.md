@@ -2,7 +2,7 @@
 
 ## 查看账户余额和充值
 
-登录 [环信控制台](https://console.easemob.com/user/login)，选择 **账单中心** > **账户中心**。你可以查看当前的账户余额，点击 **立即充值** 对该账户充值。
+登录 [环信控制台](https://console.easyim.ai/user/login)，选择 **账单中心** > **账户中心**。你可以查看当前的账户余额，点击 **立即充值** 对该账户充值。
 
 ![img](/images/console/billing_account_center.png)
 

@@ -5,7 +5,7 @@
 The SDK provides user relationship management, including friend and blocklist management.
 
 - Friend management: Add friends, handle friend requests, delete friends, set friend remarks, retrieve the friend list, and automatically synchronize the friend list and friend information after a successful login.
-- Blocklist management: Retrieve the blocklist and add users to or remove users from it. Before using this feature, enable the service in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
+- Blocklist management: Retrieve the blocklist and add users to or remove users from it. Before using this feature, enable the service in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
 
 ## Prerequisite
 
@@ -13,7 +13,7 @@ Before you begin, ensure that the following requirements are met:
 - You have initialized the SDK and connected to the server. For details, see [Quickstart](quickstart.html).
 - You have registered `ContactManager` and can call friend and blocklist APIs through `client.contactManager`.
 - You understand the EasyIM limitations. For details, see [Limitations](/product/limitation.html).
-- You have enabled the blocklist feature in the [EasyIM Console](https://console.easemob.com/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
+- You have enabled the blocklist feature in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
 
 ## Friend management
 
@@ -232,7 +232,7 @@ For friend user-attribute change notifications in different scenarios, see [Moni
 
 ### Allow only friends to send messages
 
-By default, EasyIM allows one-to-one messages between users who are not friends, so they can chat without adding each other as friends. To allow one-to-one messages only between friends, go to the [EasyIM Console](https://console.easemob.com/user/login) and [enable friend relationship checks](/product/console/basic_user.html#好友关系检查). After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If the user sends a one-to-one message to a non-friend user, the SDK returns error code `221`.
+By default, EasyIM allows one-to-one messages between users who are not friends, so they can chat without adding each other as friends. To allow one-to-one messages only between friends, go to the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship checks](/product/console/basic_user.html#好友关系检查). After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If the user sends a one-to-one message to a non-friend user, the SDK returns error code `221`.
 
 ## Blocklist management
 
