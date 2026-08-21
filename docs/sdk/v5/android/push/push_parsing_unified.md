@@ -6,7 +6,7 @@ Developers may need to write multiple sets of click-handling code for different 
 
 ## Solution details
 
-If MainActivity is the launch page, Easemob recommends using the common Activity method to obtain messages uniformly after users tap the notification bar. If MainActivity is not the launch page, you need to specify that the app jumps to MainActivity to obtain messages uniformly after users tap the notification bar.
+If MainActivity is the launch page, EasyIM recommends using the common Activity method to obtain messages uniformly after users tap the notification bar. If MainActivity is not the launch page, you need to specify that the app jumps to MainActivity to obtain messages uniformly after users tap the notification bar.
 
 The client app receives data through the `onCreate` method in `MainActivity`.
 

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-A chat room is an instant messaging use case that supports real-time interaction among a large number of users. It is commonly used for live streaming interactions, message broadcasting, open discussions, and other scenarios. Chat room members do not have fixed relationships and generally do not continue receiving chat room messages after going offline. Except for members on the chat room allowlist, regular members automatically leave the chat room after being offline for approximately 2 minutes. To adjust the automatic exit period, contact your Easemob business manager.
+A chat room is an instant messaging use case that supports real-time interaction among a large number of users. It is commonly used for live streaming interactions, message broadcasting, open discussions, and other scenarios. Chat room members do not have fixed relationships and generally do not continue receiving chat room messages after going offline. Except for members on the chat room allowlist, regular members automatically leave the chat room after being offline for approximately 2 minutes. To adjust the automatic exit period, contact your EasyIM business manager.
 
 The following table describes chat room member roles:
 
@@ -88,7 +88,7 @@ console.log(result.failed);
 
 ### Leave after going offline
 
-A regular chat room member automatically leaves the chat room after being offline for approximately 2 minutes because of network issues or an extended period of inactivity. To adjust this period, contact your Easemob business manager.
+A regular chat room member automatically leaves the chat room after being offline for approximately 2 minutes because of network issues or an extended period of inactivity. To adjust this period, contact your EasyIM business manager.
 
 The following members generally do not leave a chat room automatically after going offline:
 

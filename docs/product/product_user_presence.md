@@ -61,7 +61,7 @@ When a user logs in successfully on the Web client, the EasyIM server detects in
 
 ## Multi-device login
 
-- **Multiple devices online simultaneously**: During multi-device login, EasyIM supports up to 4 devices online simultaneously on each client platform by default. To increase the number of supported devices, contact your Easemob business manager.
+- **Multiple devices online simultaneously**: During multi-device login, EasyIM supports up to 4 devices online simultaneously on each client platform by default. To increase the number of supported devices, contact your EasyIM business manager.
 
 In a single-device login scenario, a device that logs in later forces the previously logged-in device offline. The device that is forced offline is logged out and does not receive offline push notifications.
 

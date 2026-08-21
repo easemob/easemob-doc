@@ -37,8 +37,8 @@ The same public error code may correspond to multiple error messages or trigger 
 | 2 | `COMBINE_DOWNLOAD_FAILED` / `REST_NETWORK_ERROR` | A network request or combined-message download failed. | Check the network, login state, service address, and resource address, and try again. |
 | 3 | `STORAGE_OPERATION_FAILED` | A local storage operation failed. For example, the current runtime environment does not support the required storage capability, permission is restricted, or storage space is insufficient. | Check local-storage permissions, capacity, and availability in the browser or Mini Program runtime. |
 | 4 | `COMBINE_LEVEL_EXCEEDED` / `COMBINE_ITEM_LIMIT_EXCEEDED` / `SERVICE_LIMIT_EXCEEDED` | A service limit was reached. Common scenarios include exceeding the nesting-level or item-count limit for combined messages, request frequency or service quota limits, blocklist or attribute-count limits, or limits on the DAU, MAU, or number of online users. | Use `error.message` or `details` to identify the specific limit, and reduce the size of each request or the call frequency. For a service quota limit, contact the EasyIM business manager to increase the quota. |
-| 302 | `SERVER_BUSY` | The server is busy. | Try again later. If the issue persists, contact the Easemob technical support team to investigate the server state. |
-| 303 | `MESSAGE_SEND_FAILED` / `STREAM_SEND_NOT_SUPPORTED` / `REST_HTTP_ERROR` / `REST_BUSINESS_UNKNOWN` | Message sending failed, the current runtime environment does not support stream sending, or a REST request returned an unnormalized business error. | Check the API parameters, current connection state, runtime capabilities, and server response. If necessary, try again later or contact the Easemob technical support team. |
+| 302 | `SERVER_BUSY` | The server is busy. | Try again later. If the issue persists, contact the EasyIM technical support team to investigate the server state. |
+| 303 | `MESSAGE_SEND_FAILED` / `STREAM_SEND_NOT_SUPPORTED` / `REST_HTTP_ERROR` / `REST_BUSINESS_UNKNOWN` | Message sending failed, the current runtime environment does not support stream sending, or a REST request returned an unnormalized business error. | Check the API parameters, current connection state, runtime capabilities, and server response. If necessary, try again later or contact the EasyIM technical support team. |
 
 ### Validation errors
 
@@ -109,7 +109,7 @@ The same public error code may correspond to multiple error messages or trigger 
 | Error code | Error message | Description and possible causes | Recommendation |
 | :--- | :--- | :--- | :--- |
 | 811001 | `SESSION_LIST_SOCKET_FAILED` | The conversation-list synchronization channel failed, possibly because the synchronization WebSocket failed to connect or the connection failed during synchronization. | Check the connection state and network, and try again. |
-| 811002 | `SESSION_LIST_PROTO_DECODE_FAILED` | Conversation-list synchronization protocol decoding failed. | Check the synchronized response data. If the issue persists, upgrade the SDK or contact the Easemob technical support team. |
+| 811002 | `SESSION_LIST_PROTO_DECODE_FAILED` | Conversation-list synchronization protocol decoding failed. | Check the synchronized response data. If the issue persists, upgrade the SDK or contact the EasyIM technical support team. |
 | 811003 | `SESSION_LIST_REQUEST_INVALID` | The conversation-list synchronization request is invalid, possibly because of invalid request parameters or cursor. | Check the request parameters and cursor. If necessary, start synchronization again. |
 | 811004 | `SESSION_LIST_FETCH_FAILED` | Failed to retrieve the conversation list during synchronization. | Try again later and check the server-side conversation-list service state. |
 | 811005 | `SESSION_LIST_SERVICE_DISABLED` | The conversation-list synchronization service is not enabled or is unavailable. | Check whether the server-side conversation-list capability is enabled. |
@@ -164,7 +164,7 @@ Friend-synchronization errors:
 | 1700 | `CONTACT_SYNC_METADATA_FAILED` | Failed to retrieve friend-synchronization metadata. | Retry synchronization and check the network and server state. |
 | 1701 | `CONTACT_SYNC_SOCKET_FAILED` | The friend-synchronization channel failed. | Check the connection state and try again. |
 | 1702 | `CONTACT_SYNC_CURSOR_INVALID` | The friend-synchronization cursor is invalid. | Log in again or restart synchronization to rebuild the cursor. |
-| 1703 | `CONTACT_SYNC_PROTO_DECODE_FAILED` | Friend-synchronization protocol decoding failed. | Check the returned data. If the issue persists, upgrade the SDK or contact the Easemob technical support team. |
+| 1703 | `CONTACT_SYNC_PROTO_DECODE_FAILED` | Friend-synchronization protocol decoding failed. | Check the returned data. If the issue persists, upgrade the SDK or contact the EasyIM technical support team. |
 | 1704 | `CONTACT_SYNC_CANCELLED` | Friend synchronization was canceled. | If synchronization is still required, start it again or log in again to trigger automatic synchronization. |
 
 ## User profile errors
@@ -190,7 +190,7 @@ Friend-synchronization errors:
 | 1110 | `TRANSLATE_PARAM_INVALID` | A translation parameter is invalid. For example, the target language is invalid, the text to translate is empty, or the message type does not support translation. | Check the target language code and input content, and call the translation API only for supported messages. |
 | 1111 | `TRANSLATE_SERVICE_NOT_ENABLED` | The translation service is not enabled. | Enable the translation service in the EasyIM Console and try again. |
 | 1112 | `TRANSLATE_USAGE_LIMIT` | Translation-service usage has reached the limit. | Wait for the quota to reset or contact the EasyIM business manager to increase it. |
-| 1113 | `TRANSLATE_FAILED` | The translation service encountered an error, or translation failed. | Try again later. If the issue persists, contact the Easemob technical support team. |
+| 1113 | `TRANSLATE_FAILED` | The translation service encountered an error, or translation failed. | Try again later. If the issue persists, contact the EasyIM technical support team. |
 
 ## Content moderation errors
 

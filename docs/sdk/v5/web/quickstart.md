@@ -74,11 +74,11 @@ The contents of `index.html` are as follows.
 
 <head>
     <meta charset="UTF-8">
-    <title>Easemob Chat Examples</title>
+    <title>EasyIM Chat Examples</title>
 </head>
 
 <body>
-    <h2 class="left-align">Easemob Chat Examples</h2>
+    <h2 class="left-align">EasyIM Chat Examples</h2>
     <form id="loginForm">
         <div class="col" style="min-width: 433px; max-width: 443px">
             <div class="card" style="margin-top: 0px; margin-bottom: 0px;">

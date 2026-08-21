@@ -28,4 +28,4 @@ In the **Test Push Certificate** dialog box, enter the user's bound **device tok
 
 ![image](/images/android/push/huawei_push_notification_test.png)
 
-5. If the issue still exists after all of the above checks, contact Easemob technical support for further investigation.
+5. If the issue still exists after all of the above checks, contact EasyIM technical support for further investigation.

@@ -1338,7 +1338,7 @@ Fixes:
 - [EasyIM SDK] Fixed some duplicate HTTP requests.
 - [EasyIM SDK] Removed logic for retrieving the device IMEI.
 - [EaseIMKit] Fixed an issue where animated images did not send read receipts (read ack).
-- [EaseIMKit] Fixed an issue where nicknames or Easemob IDs were not displayed on the chat group conversation page.
+- [EaseIMKit] Fixed an issue where nicknames or EasyIM user IDs were not displayed on the chat group conversation page.
 - [EaseIMKit] Fixed an issue where retrieved historical messages were not displayed after message roaming was enabled.
 - [EaseIMKit] Fixed an issue where the copy function was intercepted after the message long-press event was intercepted on the chat page.
 - [EaseIMKit] Fixed an issue where the "typing" status on the chat page did not disappear.

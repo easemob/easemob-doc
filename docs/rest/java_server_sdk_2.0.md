@@ -33,7 +33,7 @@ implementation 'com.easemob.im:im-sdk-core:V1.0.19'
 
 ### Usage
 
-Initialize the Java Server SDK before using it. The following example uses Easemob App Credentials:
+Initialize the Java Server SDK before using it. The following example uses EasyIM App Credentials:
 
 ```java
 SDK 初始化建议写到配置类中，示例如下：

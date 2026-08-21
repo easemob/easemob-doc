@@ -2,7 +2,7 @@
 
 Security and compliance are critical to instant messaging technology. To provide secure and reliable cloud services, EasyIM complies with the requirements of different countries, regions, and industries. EasyIM employs multiple security measures to defend against common attacks in instant messaging scenarios. This document describes some of the security best practices implemented by EasyIM and the security tools available to developers.
 
-For details about Easemob's user privacy policy, see [Easemob User Privacy Policy](https://www.easemob.com/protocol).
+For details about EasyIM's user privacy policy, see [Easemob User Privacy Policy](https://www.easemob.com/protocol).
 | Security measure     | Enabled by default | Recommended scenario                                          |
 |:-------------|:---------|:--------------------------------------------------|
 | Data center isolation | Yes       | All instant messaging scenarios.                                  |

@@ -119,62 +119,39 @@ Multi-device login does not provide events for chat room operations. It supports
 client.addEventHandler('multiDevice', {
   // Friend-related multi-device events
   onMultiDeviceContact: event => {
-    console.log('好友多设备操作:', event.operation);
-    console.log('目标用户 ID:', event.targetUserId);
-    console.log('来源设备 ID:', event.deviceId);
+    console.log('Multi-device operation on friend:', event.operation);
+    console.log('Target user ID:', event.targetUserId);
+    console.log('Source device ID:', event.deviceId);
   },
   // Chat-group-related multi-device events
   onMultiDeviceGroup: event => {
-    console.log('群组多设备操作:', event.operation);
-    console.log('群组 ID:', event.groupId);
-    console.log('相关用户 ID 列表:', event.userIds);
-    console.log('来源设备 ID:', event.deviceId);
+    console.log('Multi-device operation on group:', event.operation);
+    console.log('Group ID:', event.groupId);
+    console.log('Related user ID list:', event.userIds);
+    console.log('Source device ID:', event.deviceId);
   },
   // Message-thread-related multi-device events
   onMultiDeviceThread: event => {
-    console.log('Thread 多设备操作:', event.operation);
-    console.log('话题 ID:', event.threadId);
-    console.log('父消息 ID:', event.parentId);
-    console.log('来源设备 ID:', event.deviceId);
+    console.log('Multi-device operation on thread:', event.operation);
+    console.log('Thread ID:', event.threadId);
+    console.log('Parent message ID:', event.parentId);
+    console.log('Source device ID:', event.deviceId);
   },
   // Conversation-related multi-device events
   onMultiDeviceConversation: event => {
-    console.log('会话多设备操作:', event.operation);
-    console.log('会话 ID:', event.conversationId);
-    console.log('会话类型:', event.conversationType);
-    console.log('来源设备 ID:', event.deviceId);
+    console.log('Multi-device operation on conversation:', event.operation);
+    console.log('Conversation ID:', event.conversationId);
+    console.log('Conversation type:', event.conversationType);
+    console.log('Source device ID:', event.deviceId);
   },
   // Multi-device events related to roaming-message deletion
   onMultiDeviceMessageRemoved: event => {
-    console.log('消息删除多设备操作:', event.operation);
-    console.log('会话 ID:', event.conversationId);
-    console.log('消息 ID 列表:', event.messageIds);
-    console.log('删除时间戳上限:', event.beforeTimestamp);
-    console.log('来源设备 ID:', event.deviceId);
+    console.log('Multi-device operation on message removal:', event.operation);
+    console.log('Conversation ID:', event.conversationId);
+    console.log('Message ID list:', event.messageIds);
+    console.log('Deletion timestamp upper limit:', event.beforeTimestamp);
+    console.log('Source device ID:', event.deviceId);
   },
-});
-```
-
-## FAQ
-
-Q: In a multi-device login scenario, how do I configure the Uniapp mobile client as a separate platform?
-
-A: By default, mobile and mini program clients packaged using Uniapp are considered Web clients in Easemob multi-device login scenarios. To treat these clients as independent platforms, use the custom-platform feature to configure a platform number and device count for each client.
-
-For example, to configure the Uniapp mobile client as a separate platform that supports one device, set the device platform ID and supported number of devices in the console. Then set the corresponding `customOSPlatform` and `customDeviceName` during client initialization, as shown below:
-
-![img](/images/web/multidevice_uniapp_mobile.png)
-
-The following is sample client code:
-
-```typescript
-const client = ChatClient.init({
-  appKey: 'your appKey',
-  // The custom platform ID passed here must be the same as the one configured in the console.
-  customOSPlatform: 1,
-  // Custom device name.
-  customDeviceName: 'Uniapp-mobile',
-  managers: [],
 });
 ```
 

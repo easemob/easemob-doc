@@ -204,7 +204,7 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | Trending data query | Provide information about the TOP 50 active users, chat groups, and chat rooms with a minimum granularity of one minute.  |
 | EasyIM message delivery query | Query message delivery within the last three days.  |
 | EasyIM user connection status | Query the historical connection status of a user within the last three days by user ID.  |
-| EasyIM user device logs | Query logs on a user's device or upload device logs to the Easemob log server.  |
+| EasyIM user device logs | Query logs on a user's device or upload device logs to the EasyIM log server.  |
 | Chat room message rate | Query the number of uplink and downlink messages per minute in a chat room by chat room ID.  |
 
 ## Value-added services

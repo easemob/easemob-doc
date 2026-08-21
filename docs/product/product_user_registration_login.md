@@ -8,7 +8,7 @@ Before logging in to the SDK, you must first create an EasyIM user. Before creat
 
 The following user registration modes are available:
 
-- **Authorized registration**: Register users through a REST API provided by Easemob. This mode is suitable for production environments. After registration succeeds, you can save the user account to your app server or return it to the client.
+- **Authorized registration**: Register users through a REST API provided by EasyIM. This mode is suitable for production environments. After registration succeeds, you can save the user account to your app server or return it to the client.
 - **Open registration**: Allow a client or REST API to register users directly. This mode is generally used for demos and test environments and is not recommended for production environments.
 
 After setting the registration mode, you can create users in the following ways:

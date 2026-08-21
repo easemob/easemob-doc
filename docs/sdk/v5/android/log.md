@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM logs record SDK-related information and events. The Easemob technical support team might ask you to provide SDK logs when helping you troubleshoot issues.
+EasyIM logs record SDK-related information and events. The EasyIM technical support team might ask you to provide SDK logs when helping you troubleshoot issues.
 
 ## Write information to log files
 

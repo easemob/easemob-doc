@@ -1,6 +1,6 @@
 # SDK Logs
 
-EasyIM logs record SDK-related information. The Easemob technical support team may ask you to provide SDK logs when helping you troubleshoot an issue.
+EasyIM logs record SDK-related information. The EasyIM technical support team may ask you to provide SDK logs when helping you troubleshoot an issue.
 
 ## Log levels
 

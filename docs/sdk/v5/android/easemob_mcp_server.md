@@ -1,8 +1,8 @@
-# Easemob MCP Server User Guide
+# EasyIM MCP Server User Guide
 
 ## Feature overview
 
-Easemob MCP Server is based on MCP (Model Context Protocol). It enables AI coding tools that support MCP to query EasyIM-related documentation and search source code. You can use it to:
+EasyIM MCP Server is based on MCP (Model Context Protocol). It enables AI coding tools that support MCP to query EasyIM-related documentation and search source code. You can use it to:
 
 - Query SDK, one-to-one and group chat UIKit, CallKit, and chat room UIKit documentation.
 - Search Demo or sample project source code.
@@ -33,7 +33,7 @@ The following table shows documentation querying and source-code search support 
 
 ## Supported tools
 
-Easemob MCP Server supports the following AI coding tools:
+EasyIM MCP Server supports the following AI coding tools:
 
 - Claude (Desktop/CLI)
 - Cursor
@@ -52,7 +52,7 @@ Before installation, ensure that the following requirements are met:
 - Node.js and npm are installed.
 - The AI coding tool supports MCP configuration.
 
-Install Easemob MCP Server as follows:
+Install EasyIM MCP Server as follows:
 
 1. Clone the code repository:
 
@@ -100,11 +100,11 @@ The configuration options are as follows:
 
 ## Usage recommendations
 
-Use Easemob MCP Server as follows:
+Use EasyIM MCP Server as follows:
 
 1. Open your project directory in the AI coding tool.
-2. Confirm that the tool has correctly loaded Easemob MCP Server.
-3. Ask questions directly in natural language. The AI tool answers using Easemob documentation and source code.
+2. Confirm that the tool has correctly loaded EasyIM MCP Server.
+3. Ask questions directly in natural language. The AI tool answers using EasyIM documentation and source code.
 
 For more accurate answers, include as much of the following information as possible in your question:
 

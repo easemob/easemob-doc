@@ -1,6 +1,6 @@
 # Product Introduction
 
-EasyIM provides developers with highly reliable, low-latency, high-concurrency, secure, and global communications cloud services, helping them quickly build end-to-end communication scenarios. Easemob provides SDKs and RESTful APIs that support unlimited concurrent online users, hundreds of millions of concurrent chat room messages, an average global latency of less than 200 milliseconds, and an average latency within the same region of less than 100 milliseconds.
+EasyIM provides developers with highly reliable, low-latency, high-concurrency, secure, and global communications cloud services, helping them quickly build end-to-end communication scenarios. EasyIM provides SDKs and RESTful APIs that support unlimited concurrent online users, hundreds of millions of concurrent chat room messages, an average global latency of less than 200 milliseconds, and an average latency within the same region of less than 100 milliseconds.
 
 - Support one-to-one chats, group chats, and chat rooms;
 - Provide server-side RESTful APIs and [webhook services](/document/server-side/callback_overview.html);
@@ -17,7 +17,7 @@ EasyIM provides services for one-to-one chats, group chats, chat rooms, offline 
 
 ### Data centers
 
-Easemob has five major data centers and more than 200 edge acceleration nodes worldwide, providing network services in over 200 countries and regions. Easemob data centers use a three-data-center deployment within each city, provide an SLA of 99.95%, and deliver excellent performance on unstable networks, with a 100% message delivery rate at 70% packet loss.
+EasyIM has five major data centers and more than 200 edge acceleration nodes worldwide, providing network services in over 200 countries and regions. EasyIM data centers use a three-data-center deployment within each city, provide an SLA of 99.95%, and deliver excellent performance on unstable networks, with a 100% message delivery rate at 70% packet loss.
 
 When creating an app in the EasyIM Console, you must select a data center. Your business data is stored in that data center. For details, see [Data centers](https://doc.easemob.com/product/data_center.html).
 

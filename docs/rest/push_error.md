@@ -26,7 +26,7 @@ Common error codes for the preceding APIs are listed below:
 | 400 | RequiredPropertyNotFoundException | Entity user requires a property named username | The user does not exist. | Check and modify the request parameters. Specify a valid existing user ID. |
 | 400  | IllegalArgumentException | parameters is invalid : XXX | The value of the XXX property is invalid. | Check and modify the request parameters. Specify a value within the allowed range.|
 | 404 | Request path does not exist | url is invalid | The request path is incorrect. | Check and modify the request to use the correct path. |
-| 5xx | Internal server error   | Any      | An internal error occurred while the server was processing the request.| Contact Easemob technical support. |
+| 5xx | Internal server error   | Any      | An internal error occurred while the server was processing the request.| Contact EasyIM technical support. |
 
 ## Common error codes for push template APIs
 
@@ -45,7 +45,7 @@ Common error codes for these REST APIs are listed below:
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400  | EntityNotFoundException | XXX template is not exist | The XXX template does not exist. | Check and modify the request parameters. Specify a valid existing template name. |
 | 404 | Request path does not exist | url is invalid | The request path is incorrect. | Check and modify the request to use the correct path. |
-| 5xx | Internal server error   | Any      | An internal error occurred while the server was processing the request. | Contact Easemob technical support. |
+| 5xx | Internal server error   | Any      | An internal error occurred while the server was processing the request. | Contact EasyIM technical support. |
 
 For other errors, see [Error code](error.html) for possible causes.
 

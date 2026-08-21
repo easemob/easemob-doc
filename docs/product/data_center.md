@@ -1,8 +1,8 @@
 # Data Centers and Acceleration Nodes
 
-To meet deployment requirements across different business coverage regions, Easemob provides multiple data centers and acceleration nodes. You can select the appropriate data center and network acceleration solution based on end-user distribution, business deployment regions, and compliance requirements.
+To meet deployment requirements across different business coverage regions, EasyIM provides multiple data centers and acceleration nodes. You can select the appropriate data center and network acceleration solution based on end-user distribution, business deployment regions, and compliance requirements.
 
-Easemob currently supports the following data centers and acceleration nodes.
+EasyIM currently supports the following data centers and acceleration nodes.
 
 ## Overview
 
@@ -10,9 +10,9 @@ The following table lists the data centers:
 
 | Name                     | Purpose                                                       |
 | :----------------------- | :--------------------------------------------------------- |
-| Singapore Zone 1 and Singapore Zone 2 | Clusters for Easemob's overseas customers.                                       |
-| US East Zone 1                | Cluster for Easemob's overseas customers.                                       |
-| Germany Zone 2                | Cluster for Easemob's overseas customers.                                       |
+| Singapore Zone 1 and Singapore Zone 2 | Clusters for EasyIM's overseas customers.                                       |
+| US East Zone 1                | Cluster for EasyIM's overseas customers.                                       |
+| Germany Zone 2                | Cluster for EasyIM's overseas customers.                                       |
 
 The following table lists the overseas acceleration nodes.
 
@@ -92,11 +92,11 @@ Suitable when some end users are in the Chinese mainland, others are outside the
 
 ### Instructions
 
-Easemob activates the required network acceleration nodes based on the app's data center and the distribution of its end users.
+EasyIM activates the required network acceleration nodes based on the app's data center and the distribution of its end users.
 
 The default bandwidth of an acceleration node is **1 Mbps**. You can configure a more appropriate bandwidth based on your actual traffic requirements.  
 
-To activate the service, contact your Easemob business manager.
+To activate the service, contact your EasyIM business manager.
 
 ### Node distribution
 

@@ -1,7 +1,7 @@
 # Legacy Chat Group and Chat Room Webhook Events
 
 :::tip
-**This document describes legacy webhook events and is no longer maintained or updated by Easemob. See the [new chat group and chat room webhook documentation](callback_group_room_create.html).**
+**This document describes legacy webhook events and is no longer maintained or updated by EasyIM. See the [new chat group and chat room webhook documentation](callback_group_room_create.html).**
 :::
 
 | Event                       | Type in payload                         | Group chat trigger event                                   | Chat room trigger event         |

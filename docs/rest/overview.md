@@ -36,7 +36,7 @@ Each request URL contains the `host`, `org_name`, and `app_name` parameters.
 
 | Parameter       | Type   | Required | Description         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | Yes       | Domain assigned by EasyIM for accessing RESTful APIs.<br/> - To meet different customers' business requirements, Easemob has deployed data centers in multiple locations. REST API request domains vary by data center. Select the request domain for your data center.<br/> - Customers in the domestic VIP region or customer service region should contact their Easemob business manager to obtain the REST API request address.<br/> -  HTTP and HTTPS are supported.|
+| `host`     | String | Yes       | Domain assigned by EasyIM for accessing RESTful APIs.<br/> - To meet different customers' business requirements, EasyIM has deployed data centers in multiple locations. REST API request domains vary by data center. Select the request domain for your data center.<br/> - Customers in the domestic VIP region or customer service region should contact their EasyIM business manager to obtain the REST API request address.<br/> -  HTTP and HTTPS are supported.|
 | `org_name` | String | Yes       | Unique identifier assigned by EasyIM to each company (organization). |
 | `app_name` | String | Yes       | App name entered when you created the app in the EasyIM Console.|
 

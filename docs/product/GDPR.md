@@ -4,7 +4,7 @@ EasyIM provides a set of data deletion and export APIs to protect data security 
 
 ## Data deletion
 
-To protect user privacy, Easemob provides data deletion REST APIs that developers can use to delete user-related data stored on EasyIM servers, such as user accounts and attributes, and to destroy chat groups and chat rooms.
+To protect user privacy, EasyIM provides data deletion REST APIs that developers can use to delete user-related data stored on EasyIM servers, such as user accounts and attributes, and to destroy chat groups and chat rooms.
 
 ### Authentication method
 
@@ -36,7 +36,7 @@ To improve project security, EasyIM uses tokens, which are dynamic keys, to auth
 
 ### Feature overview
 
-To ensure users' right to manage their private data, Easemob provides data export REST APIs that developers can use to export data stored on EasyIM servers, including user data, chat group data, chat room data, historical messages, and attachments.
+To ensure users' right to manage their private data, EasyIM provides data export REST APIs that developers can use to export data stored on EasyIM servers, including user data, chat group data, chat room data, historical messages, and attachments.
 
 ### REST API overview
 

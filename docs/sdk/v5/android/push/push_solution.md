@@ -32,4 +32,4 @@ In the **Test Push Certificate** dialog box, enter the user's bound **device tok
 
 For details, see [Push message classification](push_message_classification.html).
 
-6. If the issue still exists after all of the above checks, contact Easemob technical support for further investigation.
+6. If the issue still exists after all of the above checks, contact EasyIM technical support for further investigation.
