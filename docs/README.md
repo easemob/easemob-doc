@@ -864,7 +864,10 @@ projects:
                 link: /document/android/group_namecard.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_namecard.html    
+                link: /document/ios/group_namecard.html
+              - icon: /sdk/web.svg
+                text: Web
+                link: /sdk/v5/web/group_namecard.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_namecard.html         

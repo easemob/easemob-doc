@@ -1,39 +1,40 @@
-# 即时通讯 IM 套餐包功能对比
+# EasyIM Plan Feature Comparison
 
-即时通讯 IM 提供**免费版**、**专业版**和**旗舰版**三种套餐，满足不同业务发展阶段的需求。下表详细列出了各版本支持的功能，方便你根据实际业务场景进行选择。
+EasyIM offers **Free**, **Pro**, and **Enterprise** plans for different stages of business growth. The following table provides a complete comparison to help you select the plan that best fits your requirements.
 
 :::tip
 
-1. `✓` 表示该版本支持的功能。订阅对应套餐包后，即可直接使用。
-2. `*` 表示扩展功能。如需使用，可在环信控制台中付费开通。
-3. 免费版套餐包仅适用于测试版应用。测试版应用即使升级到了专业版或旗舰版套餐，仍存在以下限制，详见 [测试版应用试用套餐包说明](/product/pricing_method.html#试用套餐包)。
+1. `✓` means that the feature is included and can be used after subscribing to the plan.
+2. `*` identifies an optional add-on that can be purchased separately in Easemob Console.
+3. `——` indicates that the current version does not support this feature and requires an upgrade to a later version.
+4. The Free plan is available only to test apps. A test app remains subject to trial restrictions even after it is upgraded to Pro or Enterprise. See [Launch an App](/product/console/app_launch.html) for information about moving an app into production.
 :::
 
 <table width="1225">
 <tbody>
 <tr>
 <td width="216">
-<p><strong>模块</strong></p>
+<p><strong>Module</strong></p>
 </td>
 <td width="224">
-<p><strong>功能</strong></p>
+<p><strong>Feature</strong></p>
 </td>
 <td width="224">
-<p><strong>免费版</strong></p>
+<p><strong>Free</strong></p>
 </td>
 <td width="229">
-<p><strong>专业版</strong></p>
+<p><strong>Pro</strong></p>
 </td>
 <td width="332">
-<p><strong>旗舰版</strong></p>
+<p><strong>Enterprise</strong></p>
 </td>
 </tr>
 <tr>
 <td rowspan="7" width="216">
-<p>用户</p>
+<p>Users</p>
 </td>
 <td width="224">
-<p>峰值日活跃用户数（DAU）</p>
+<p>Peak daily active users (DAU)</p>
 </td>
 <td width="224">
 <p>100</p>
@@ -47,21 +48,21 @@
 </tr>
 <tr>
 <td width="224">
-<p>注册用户总数上限</p>
+<p>Maximum total registered users</p>
 </td>
 <td width="224">
 <p>100</p>
 </td>
 <td width="229">
-<p>无限制</p>
+<p>Unlimited</p>
 </td>
 <td width="332">
-<p>无限制</p>
+<p>Unlimited</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>单个用户好友数上限</p>
+<p>Maximum friends per user</p>
 </td>
 <td width="224">
 <p>100</p>
@@ -75,7 +76,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>用户属性<br /> （用户头像、昵称等数据存储服务）</p>
+<p>User attributes<br />(storage for avatars, nicknames, and other profile data)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -89,7 +90,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>用户在线状态订阅</p>
+<p>Presence subscriptions</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -103,7 +104,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>多端多设备在线</p>
+<p>Multi-platform and multi-device connections</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -117,7 +118,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>用户全局禁言</p>
+<p>Global user mutes</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -131,10 +132,10 @@
 </tr>
 <tr>
 <td rowspan="6" width="216">
-<p>会话</p>
+<p>Conversations</p>
 </td>
 <td width="224">
-<p>会话列表<br /> （服务端会话拉取数量）</p>
+<p>Conversation list<br />(number of conversations retrieved from the server)</p>
 </td>
 <td width="224">
 <p>100</p>
@@ -148,7 +149,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>会话置顶</p>
+<p>Pin conversations</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -162,7 +163,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>会话已读回执</p>
+<p>Conversation read receipts</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -176,7 +177,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>会话未读数</p>
+<p>Conversation unread counts</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -190,7 +191,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>会话标记</p>
+<p>Conversation marks</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -204,7 +205,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>会话删除</p>
+<p>Delete conversations</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -218,24 +219,24 @@
 </tr>
 <tr>
 <td rowspan="24" width="216">
-<p>消息</p>
+<p>Messages</p>
 </td>
 <td width="224">
-<p>单群聊消息云存储<br/> （历史消息、漫游消息）</p>
+<p>One-to-one and group chat message cloud storage<br/>(historical message files and roaming messages)</p>
 </td>
 <td width="224">
-<p>3 天</p>
+<p>3 days</p>
 </td>
 <td width="229">
-<p>7 天（*）</p>
+<p>7 days (*)</p>
 </td>
 <td width="332">
-<p>90 天（*）</p>
+<p>90 days (*)</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>聊天室消息云存储<br /> （历史消息、漫游消息）</p>
+<p>Chat room message cloud storage<br />(historical message files and roaming messages)</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -249,7 +250,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>全消息类型<br /> （包括：文本、表情、语音、视频、图片、位置、透传、自定义等消息）</p>
+<p>All message types<br />(including text, emoji, voice, video, image, location, command, and custom messages)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -263,13 +264,13 @@
 </tr>
 <tr>
 <td width="224">
-<p>发送 app 全局广播消息（服务端）</p>
+<p>Send app-wide broadcast messages from the server</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>联系商务</p>
+<p>Contact Sales</p>
 </td>
 <td width="332">
 <p>✓</p>
@@ -277,7 +278,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>离线消息<br /> （支持用户上线后自动拉取离线期间未接收的单聊和群聊消息）</p>
+<p>Offline messages<br />(automatically retrieves one-to-one and group messages missed while a user was offline)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -291,7 +292,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>单聊消息已读回执</p>
+<p>One-to-one message read receipts</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -305,7 +306,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群聊消息已读回执</p>
+<p>Group message read receipts</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -319,7 +320,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息撤回</p>
+<p>Recall messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -333,7 +334,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>合并消息</p>
+<p>Combined messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -347,7 +348,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>定向消息<br /> （支持群组和聊天室）</p>
+<p>Targeted messages<br />(supported in chat groups and chat rooms)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -361,7 +362,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>全平台离线推送<br /> （支持苹果、谷歌、华为、荣耀、鸿蒙、小米、OPPO、VIVO、魅族，自定义铃声和扩展）</p>
+<p>Cross-platform offline push<br />(supports Apple, Google, Huawei, Honor, HarmonyOS, Xiaomi, OPPO, vivo, and Meizu, plus custom ringtones and extensions)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -375,7 +376,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息免打扰<br /> （在设置的免打扰时间内不收推送消息）</p>
+<p>Message Do Not Disturb<br />(no push notifications during the configured period)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -389,7 +390,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息表情回复</p>
+<p>Message reactions</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -403,7 +404,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>本地消息搜索</p>
+<p>Search local messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -417,7 +418,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息扩展</p>
+<p>Message extensions</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -431,7 +432,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息编辑</p>
+<p>Edit messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -445,7 +446,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息置顶</p>
+<p>Pin messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -459,7 +460,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息转发</p>
+<p>Forward messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -473,7 +474,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息本地删除</p>
+<p>Delete local messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -487,7 +488,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息导入和插入</p>
+<p>Import and insert messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -501,7 +502,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>消息只投在线用户</p>
+<p>Deliver messages only to online users</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -515,7 +516,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>发送前回调</p>
+<p>Pre-delivery webhooks</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -529,7 +530,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>发送后回调</p>
+<p>Post-delivery webhooks</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -543,7 +544,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>回调异常缓存<br /> （高保障回调）</p>
+<p>Webhook failure storage<br />(high-reliability webhook delivery)</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -557,52 +558,52 @@
 </tr>
 <tr>
 <td rowspan="11" width="216">
-<p>群组</p>
+<p>Chat groups</p>
 </td>
 <td width="224">
-<p>群组总数上限</p>
-</td>
-<td width="224">
-<p>100</p>
-</td>
-<td width="229">
-<p>无限制</p>
-</td>
-<td width="332">
-<p>无限制</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>峰值群组数</p>
+<p>Maximum total chat groups</p>
 </td>
 <td width="224">
 <p>100</p>
 </td>
 <td width="229">
-<p>无限制</p>
+<p>Unlimited</p>
 </td>
 <td width="332">
-<p>无限制</p>
+<p>Unlimited</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>单个群成员数上限</p>
+<p>Maximum peak chat groups</p>
 </td>
 <td width="224">
 <p>100</p>
 </td>
 <td width="229">
-<p>300（*）</p>
+<p>Unlimited</p>
 </td>
 <td width="332">
-<p>3000（*）</p>
+<p>Unlimited</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>群组管理<br /> （创建、转让、解散、封禁、获取群组信息、获取群组列表/群成员列表等）</p>
+<p>Maximum members per chat group</p>
+</td>
+<td width="224">
+<p>100</p>
+</td>
+<td width="229">
+<p>300 (*)</p>
+</td>
+<td width="332">
+<p>3,000 (*)</p>
+</td>
+</tr>
+<tr>
+<td width="224">
+<p>Chat group management<br />(create, transfer ownership, delete, ban, and retrieve chat group and member information)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -616,7 +617,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群属性管理<br /> （修改群组名称、描述、头像、公告、共享文件等）</p>
+<p>Chat group attribute management<br />(modify names, descriptions, avatars, announcements, shared files, and other attributes)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -630,7 +631,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群组白名单</p>
+<p>Chat group allowlists</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -644,7 +645,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群组黑名单</p>
+<p>Chat group blocklists</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -658,7 +659,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群组禁言</p>
+<p>Chat group mutes</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -672,7 +673,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群成员属性</p>
+<p>Chat group member attributes</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -686,7 +687,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群组自定义扩展</p>
+<p>Custom chat group extensions</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -700,7 +701,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>群定向消息</p>
+<p>Targeted chat group messages</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -714,80 +715,38 @@
 </tr>
 <tr>
 <td rowspan="11" width="216">
-<p>聊天室</p>
+<p>Chat rooms</p>
 </td>
 <td width="224">
-<p>聊天室总数上限</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>无限制</p>
-</td>
-<td width="332">
-<p>无限制</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>免费聊天室消息量<br /> （如预估聊天室消息量巨大，请联系商务）</p>
+<p>Maximum total chat rooms</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>1000万条/10000 DAU/天</p>
+<p>Unlimited</p>
 </td>
 <td width="332">
-<p>1000万条/10000 DAU/天</p>
+<p>Unlimited</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>聊天室管理<br /> （创建、解散、加入聊天室、获取聊天室详情、获取聊天室成员列表）</p>
+<p>Free chat room message allowance<br />(contact Sales if you expect very high message volume)</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>✓</p>
+<p>10 million messages per 10,000 DAU/day</p>
 </td>
 <td width="332">
-<p>✓</p>
+<p>10 million messages per 10,000 DAU/day</p>
 </td>
 </tr>
 <tr>
 <td width="224">
-<p>聊天室基本属性<br /> （修改聊天室名称、描述、公告）</p>
-</td>
-<td width="224">
-<p>✓</p>
-</td>
-<td width="229">
-<p>✓</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>聊天室自定义属性（KV）</p>
-</td>
-<td width="224">
-<p>✓</p>
-</td>
-<td width="229">
-<p>✓</p>
-</td>
-<td width="332">
-<p>✓</p>
-</td>
-</tr>
-<tr>
-<td width="224">
-<p>聊天室白名单</p>
+<p>Chat room management<br />(create, delete, and join chat rooms, and retrieve chat room details and member lists)</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -801,7 +760,35 @@
 </tr>
 <tr>
 <td width="224">
-<p>聊天室黑名单</p>
+<p>Basic chat room attributes<br />(modify the name, description, and announcement)</p>
+</td>
+<td width="224">
+<p>✓</p>
+</td>
+<td width="229">
+<p>✓</p>
+</td>
+<td width="332">
+<p>✓</p>
+</td>
+</tr>
+<tr>
+<td width="224">
+<p>Custom chat room attributes (key-value pairs)</p>
+</td>
+<td width="224">
+<p>✓</p>
+</td>
+<td width="229">
+<p>✓</p>
+</td>
+<td width="332">
+<p>✓</p>
+</td>
+</tr>
+<tr>
+<td width="224">
+<p>Chat room allowlists</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -815,7 +802,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>聊天室禁言</p>
+<p>Chat room blocklists</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -829,7 +816,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>聊天室新成员查看加入前消息</p>
+<p>Chat room mutes</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -843,7 +830,7 @@
 </tr>
 <tr>
 <td width="224">
-<p>聊天室消息优先级</p>
+<p>Allow new chat room members to view messages sent before they joined</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -857,7 +844,21 @@
 </tr>
 <tr>
 <td width="224">
-<p>聊天室广播消息</p>
+<p>Chat room message priorities</p>
+</td>
+<td width="224">
+<p>&mdash;</p>
+</td>
+<td width="229">
+<p>✓</p>
+</td>
+<td width="332">
+<p>✓</p>
+</td>
+</tr>
+<tr>
+<td width="224">
+<p>Chat room broadcast messages</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -871,27 +872,27 @@
 </tr>
 <tr>
 <td width="216">
-<p>开发者工具</p>
+<p>Developer tools</p>
 </td>
 <td width="224">
-<p>请求质量监控</p>
+<p>Request quality monitoring</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
 </td>
 <td width="229">
-<p>联系环信商务</p>
+<p>Contact Easemob Sales</p>
 </td>
 <td width="332">
-<p>联系环信商务</p>
+<p>Contact Easemob Sales</p>
 </td>
 </tr>
 <tr>
 <td width="216">
-<p>服务端 API 调用频率上调</p>
+<p>Increased Server API call limits</p>
 </td>
 <td width="224">
-<p>上调 RESTful API 调用频率</p>
+<p>Increase RESTful Server API call limits</p>
 </td>
 <td width="224">
 <p>&mdash;</p>
@@ -905,10 +906,10 @@
 </tr>
 <tr>
 <td rowspan="2" width="216">
-<p>网络</p>
+<p>Network</p>
 </td>
 <td width="224">
-<p>全球加速网络<br/>（SD-GMN，全球 5 大数据中心、230+ 国家及地区，3000+ 边缘加速节点）</p>
+<p>Global acceleration network<br/>(SD-GMN, with five global data centers, coverage in more than 230 countries and regions, and over 3,000 edge acceleration nodes)</p>
 </td>
 <td width="224">
 <p>✓</p>
@@ -922,4 +923,3 @@
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p>

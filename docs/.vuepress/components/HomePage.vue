@@ -186,6 +186,9 @@ const normalizeDocLink = (link = ""): string =>
     .replace(/^\/document\/server-side\//, "/rest/")
     .replace(/^\/document\/(android|ios|web)\//, "/sdk/v5/$1/");
 
+const normalizePlatformLabel = (text = ""): string =>
+  text === "Web/小程序" ? "Web" : text;
+
 const starter = (frontmatter.value.starter || []).filter((item) => !item.hidden);
 const projects = (frontmatter.value.projects || [])
   .filter((item) => !item.hidden)
@@ -205,8 +208,12 @@ const projects = (frontmatter.value.projects || [])
             desc: `Explore APIs and implementation guidance for ${text.toLowerCase()}.`,
             link: link && !UNAVAILABLE_LINKS.has(link) ? link : undefined,
             sdks: (context.sdks || [])
+              .map((sdk) => ({
+                ...sdk,
+                text: normalizePlatformLabel(sdk.text),
+                link: normalizeDocLink(sdk.link),
+              }))
               .filter((sdk) => SUPPORTED_PLATFORMS.has(sdk.text))
-              .map((sdk) => ({ ...sdk, link: normalizeDocLink(sdk.link) }))
               .filter((sdk) => !UNAVAILABLE_LINKS.has(sdk.link)),
           };
         })
