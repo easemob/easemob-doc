@@ -9,7 +9,7 @@ export const zhNavbar = navbar([
         text: 'Clients',
         children: [
           { text: 'Android', icon: '/icon-Android.svg', link: '/sdk/v5/android/beginner_guide.html' },
-          { text: 'iOS', icon: '/icon-iOS.svg', link: '/sdk/v5/ios/' },
+          { text: 'iOS', icon: '/icon-iOS.svg', link: '/sdk/v5/ios/beginner_guide.html' },
           { text: 'Web', icon: '/icon-web.svg', link: '/sdk/v5/web/beginner_guide.html' }
         ]
       }

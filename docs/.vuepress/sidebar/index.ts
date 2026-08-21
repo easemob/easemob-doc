@@ -2,10 +2,13 @@ import { sidebar } from "vuepress-theme-hope";
 import { DOC_V5_SIDEBAR } from "./document";
 
 export const zhSidebar = sidebar({
+  // Put platform-specific SDK sidebars before the generic SDK overview.
+  // Sidebar matching is prefix-based, so the more specific paths must win.
+  ...DOC_V5_SIDEBAR,
   "/sdk/v5/": [
     { text: "SDK Overview", link: "/sdk/v5/" },
     { text: "Android", link: "/sdk/v5/android/" },
-    { text: "iOS", link: "/sdk/v5/ios/" },
+    { text: "iOS", link: "/sdk/v5/ios/beginner_guide.html" },
     { text: "Web", link: "/sdk/v5/web/" },
   ],
   "/product/": [
@@ -167,5 +170,4 @@ export const zhSidebar = sidebar({
     },
     { text: "Glossary", link: "glossary.html" },
   ],
-  ...DOC_V5_SIDEBAR,
 });

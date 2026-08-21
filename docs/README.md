@@ -23,17 +23,19 @@ products:
     target: '_blank'
 starter:
   - title: "入门指引"
-    desc: "了解接入环信即时通讯 IM SDK、单群聊 UIKit 和 CallKit 的整个流程。"
+    desc: "了解接入环信即时通讯 IM SDK 的整个流程。"
     platform:
       - icon: /guide/sdk.svg
         link: /document/android/beginner_guide.html
         text: SDK
       - icon: /guide/uikit.svg
         link: /uikit/chatuikit/android/beginner_guide.html
-        text: UIKit 
+        text: UIKit
+        hidden: true
       - icon: /guide/callkit.svg
         link: /callkit/android/beginner_guide.html
         text: CallKit
+        hidden: true
   - title: "使用 MCP 集成"
     desc: "环信 MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供环信 IM 相关文档查询和源码检索能力。"
     platform:
@@ -42,10 +44,12 @@ starter:
         text: SDK
       - icon: /guide/uikit.svg
         link: /uikit/chatuikit/android/easemob_mcp_server.html
-        text: UIKit 
+        text: UIKit
+        hidden: true
       - icon: /guide/callkit.svg
         link: /callkit/android/easemob_mcp_server.html
-        text: CallKit      
+        text: CallKit
+        hidden: true
   - title: "SDK 快速开始"
     desc: "选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。"
     platform:
@@ -89,6 +93,7 @@ starter:
         link: /document/server-side/overview.html
         text: REST
   - title: "单/群聊 UIKit"
+    hidden: true
     desc: "选择合适的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
@@ -113,6 +118,7 @@ starter:
         link: /uikit/chatuikit/react-native/chatuikit_overview.html
         text: React Native
   - title: "聊天室 UIKit"
+    hidden: true
     desc: "选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
@@ -131,6 +137,7 @@ starter:
         link: /uikit/chatroomuikit/flutter/roomuikit_overview.html
         text: React Native
   - title: "CallKit" 
+    hidden: true
     desc: "选择 CallKit 构建音视频功能，点击各客户端按钮了解 CallKit 主要功能介绍。"
     platform:
       - icon: /sdk/android.svg
@@ -143,6 +150,7 @@ starter:
         link: /callkit/web/product_overview.html
         text: Web
   - title: "增值服务" 
+    hidden: true
     desc: "选择合适的增值服务构建内容审核、实时音视频、消息翻译、即时推送等功能，点击对应按钮了解主要功能介绍。"
     platform:
       - icon: /sdk/check_texts.svg
@@ -1231,6 +1239,7 @@ projects:
           - text: 用户全局禁言
             link: /document/server-side/user_global_mute_overview.html                                      
   - title: UIKit
+    hidden: true
     features:
       - title: 单/群聊
         icon: /feature/uikit.svg

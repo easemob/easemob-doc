@@ -7,9 +7,76 @@ const SDK_PATH = path.resolve(__dirname, '../../sdk/v5')
 const REST_PATH = path.resolve(__dirname, '../../rest')
 const platformList = getSubDirectories(SDK_PATH)
 
+/** English labels for REST sidebar groups that do not point to a document. */
+const REST_GROUP_LABELS: Record<string, string> = {
+  'Token 鉴权': 'Token Authentication',
+  '消息管理': 'Message Management',
+  '发送流式消息': 'Send Streaming Messages',
+  '发送全局广播消息': 'Send Global Broadcast Messages',
+  '上传和下载文件': 'Upload and Download Files',
+  '消息表情回复': 'Message Reactions',
+  '撤回消息': 'Recall Messages',
+  '单向删除漫游消息': 'Delete Roaming Messages',
+  '消息翻译': 'Message Translation',
+  '获取离线消息数据': 'Retrieve Offline Message Data',
+  '导入消息': 'Import Messages',
+  '群组管理': 'Chat Group Management',
+  '获取群组': 'Retrieve Chat Groups',
+  '管理群组': 'Manage Chat Groups',
+  '管理群组公告': 'Manage Chat Group Announcements',
+  '管理群组共享文件': 'Manage Chat Group Shared Files',
+  '拉人入群': 'Add Chat Group Members',
+  '踢人出群': 'Remove Chat Group Members',
+  '管理群成员': 'Manage Chat Group Members',
+  '管理群主和管理员': 'Manage Chat Group Owners and Admins',
+  '管理禁言': 'Manage Mutes',
+  '管理白名单': 'Manage Allowlists',
+  '管理黑名单': 'Manage Blocklists',
+  '管理群成员自定义属性': 'Manage Custom Chat Group Member Attributes',
+  '管理消息话题': 'Manage Message Threads',
+  '聊天室管理': 'Chat Room Management',
+  '管理超级管理员': 'Manage Superadmins',
+  '获取聊天室': 'Retrieve Chat Rooms',
+  '管理聊天室': 'Manage Chat Rooms',
+  '管理聊天室属性': 'Manage Chat Room Attributes',
+  '拉人入聊天室': 'Add Chat Room Members',
+  '踢人出聊天室': 'Remove Chat Room Members',
+  '管理聊天室成员': 'Manage Chat Room Members',
+  '管理聊天室所有者和管理员': 'Manage Chat Room Owners and Admins',
+  '用户相关': 'User Management',
+  '用户体系管理': 'User Account Management',
+  '注册用户': 'Register Users',
+  '获取用户详情': 'Retrieve User Details',
+  '删除用户': 'Delete Users',
+  '获取用户在线状态': 'Retrieve User Presence',
+  '用户属性': 'User Attributes',
+  '用户状态订阅': 'Presence Subscriptions',
+  '用户关系': 'User Relationships',
+  '用户全局禁言': 'Global User Mutes',
+  '用户收藏': 'User Favorites',
+  '离线推送': 'Offline Push',
+  '设置离线推送': 'Configure Offline Push',
+  '使用推送模板': 'Use Push Templates',
+  '内容审核': 'Content Moderation',
+  '关键词名单': 'Keyword Lists',
+  '回调': 'Webhooks',
+  '回调事件': 'Webhook Events',
+  '消息回调': 'Message Webhooks',
+  '会话回调': 'Conversation Webhooks',
+  '群组与聊天室回调': 'Chat Group and Chat Room Webhooks',
+  '创建与删除': 'Creation and Deletion',
+  '信息与状态变更': 'Information and Status Changes',
+  '成员与权限变更': 'Member and Permission Changes',
+  '内容与资源操作': 'Content and Resource Operations',
+  'API 参考': 'API Reference',
+  '特性限制': 'Feature Limitations',
+  '已废弃内容': 'Deprecated Content',
+}
+
 /** SDK V5 与 REST 共用的侧栏条目模板。 */
 const documentV5Sidebar = [
   { text: "Beginner's Guide", link: "beginner_guide.html" },
+  { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
   { text: "Migration Guide", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
   { text: "Integrate with MCP", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: 'React Demo', link: 'demo_react.html', only: ['web'] },
@@ -1010,6 +1077,33 @@ function linkExists(platform: string, link: string): boolean {
   }
 }
 
+function getRestDocumentTitle(link: string): string | undefined {
+  try {
+    const filePath = path.join(REST_PATH, link.replace(/\.html$/, '.md'))
+    const content = fs.readFileSync(filePath, 'utf8')
+    return content.match(/^#\s+(.+)$/m)?.[1]?.trim()
+  } catch {
+    return undefined
+  }
+}
+
+function getSdkDocumentTitle(platform: string, link: string): string | undefined {
+  try {
+    const filePath = path.join(SDK_PATH, platform, link.replace(/\.html$/, '.md'))
+    const content = fs.readFileSync(filePath, 'utf8')
+    const heading = content.match(/^#\s+(.+)$/m)?.[1]?.trim()
+    if (heading) return heading
+
+    // Some migrated SDK documents define their page title in YAML or JSON
+    // frontmatter instead of using a Markdown level-one heading.
+    return content
+      .match(/^\s*title\s*:\s*["']?([^"'\r\n,}]+)["']?\s*,?\s*$/m)?.[1]
+      ?.trim()
+  } catch {
+    return undefined
+  }
+}
+
 // function handleSidebarItem(platform: string, sidebar: any): any {
 //   const children = Array.isArray(sidebar.children) ? sidebar.children : [];
 //   const newchildren = [];
@@ -1058,13 +1152,21 @@ function handleSidebarItem(platform, sidebar) {
     //   return r.find(i => i.link === cur.link)? r: [...r, cur]
     // }, [])
     if (newchildren.length > 0) {
-      return {...sidebar, children: newchildren }
+      const text = platform === 'server-side'
+        ? REST_GROUP_LABELS[sidebar.text] || sidebar.text
+        : sidebar.text
+      return {...sidebar, text, children: newchildren }
     }
   } else {
     if (linkExists(platform, sidebar.link)) {
       const basePath = platform === 'server-side' ? '/rest' : `/sdk/v5/${platform}`
       const newLink = `${basePath}/${sidebar.link}`
-      return {...sidebar, link:newLink}
+      const text = platform === 'server-side'
+        ? getRestDocumentTitle(sidebar.link) || REST_GROUP_LABELS[sidebar.text] || sidebar.text
+        : platform === 'ios'
+          ? getSdkDocumentTitle(platform, sidebar.link) || sidebar.text
+          : sidebar.text
+      return {...sidebar, text, link:newLink}
     }
   }
 }

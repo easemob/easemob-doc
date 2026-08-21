@@ -13,7 +13,7 @@
                 <div class="sdk-start-list">
                   <div
                     class="sdk-start-item"
-                    v-for="item in s.platform"
+                    v-for="item in s.platform.filter((item) => !item.hidden)"
                     :key="item.text"
                     @click="goTo(item.link)"
                   >
@@ -117,8 +117,8 @@ import CardMenu from "./CardMenu.vue";
 import { usePageFrontmatter } from "@vuepress/client";
 const frontmatter = usePageFrontmatter();
 const router = useRouter();
-const starter = frontmatter.value.starter || [];
-const projects = frontmatter.value.projects || [];
+const starter = (frontmatter.value.starter || []).filter((item) => !item.hidden);
+const projects = (frontmatter.value.projects || []).filter((item) => !item.hidden);
 const containerRef = ref<HTMLElement | null>(null);
 
 const goTo = (path: string) => {
