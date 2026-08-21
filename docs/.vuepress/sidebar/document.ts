@@ -79,9 +79,6 @@ const documentV5Sidebar = [
   { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
   { text: "Migration Guide", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
   { text: "Integrate with MCP", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
-  { text: 'React Demo', link: 'demo_react.html', only: ['web'] },
-  { text: 'Vue Demo', link: 'demo_vue.html', only: ['web'] },
-  { text: 'Demo', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },
   { text: 'Quickstart', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: 'Quickstart', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
@@ -1022,26 +1019,8 @@ const documentV5Sidebar = [
     only: ['server-side']
   },
   { type: "separator", only: ['server-side']} as any,
-  {
-    text: 'Server SDK',
-    collapsible: true,
-    children: [
-      { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
-      { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
-    ],
-    only: ['server-side']
-  },
-  {
-    text: 'API 参考',
-    collapsible: true,
-    children: [
-      { text: 'Java Server SDK 2.0', link: 'apireference_java_2.0.html' },
-      { text: 'Java Server SDK 1.0', link: 'apireference_java_1.0.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
-    ],
-    only: ['server-side']
-  },
+  { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
+  { text: 'API 参考', link: 'apireference_java_2.0.html' },
   { text: '特性限制', link: 'limitation.html', only: ['server-side']},
   {
     text: '已废弃内容',
