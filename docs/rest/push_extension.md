@@ -208,18 +208,18 @@ The following describes how to use a directed template so that the push notifica
 }
 ```
 
-2. Use the directed push template when sending a message in a chat group. For example, send the push notification "Zhang San mentioned you in the group" to user `hxtest` in the chat group, while other users receive "Zhang San sent a message."
+2. Use the directed push template when sending a message in a chat group. For example, send the push notification "Allen mentioned you in the group" to user `hxtest` in the chat group, while other users receive "Allen sent a message."
 
 ```json
 {
     "em_push_template": {
         "name": "push_template",
         "title_args": [
-            "群组名"
+            "Group Name"
         ],
         "content_args": [
-            "张三",
-            "发来一条消息"
+            "Allen",
+            "Sent a message"
         ],
         "directed_template": {
             "target": [
@@ -227,11 +227,11 @@ The following describes how to use a directed template so that the push notifica
             ],
             "name": "at_push_template",
             "title_args": [
-                "群组名"
+                "Group Name"
             ],
             "content_args": [
-                "张三",
-                "在群里@了你"
+                "Allen",
+                "Mentioned you in the group"
             ]
         }
     }
@@ -249,17 +249,17 @@ For users other than the mentioned user, you do not have to use a template for t
             ],
             "name": "at_push_template",
             "title_args": [
-                "群组名"
+                "Group Name"
             ],
             "content_args": [
-                "张三",
-                "在群里@了你"
+                "Allen",
+                "Mentioned you in the group"
             ]
         }
     },
     "em_push_ext": {
-        "title": "群组名",
-        "content": "张三:发来一条消息",
+        "title": "Group Name",
+        "content": "Allen: Sent a message",
         "type": "call"
 
     }

@@ -92,9 +92,9 @@ Fixes a compatibility error that occurred when importing the SDK for use with Vi
 
 #### New features
 
-Supports [receiving stream messages sent by the server](message_stream_receive.html).
+Supports [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, stream messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives but cannot send them.
 
 #### Fixes
 

@@ -127,7 +127,7 @@ In the Android SDK, the group owner and group admins can call `asyncAddUsersToGr
 
 The invitation process is as follows:
 
-![](/images/android/goup_member_invite.png)
+![](/images/android/group_member_invite.png)
 
 The group owner and group admins can call `asyncAddUsersToGroup` to add one or more users. Regular members of a private group that allows invitations can call `asyncInviteUser` to send an invitation.
 

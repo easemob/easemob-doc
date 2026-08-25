@@ -8,7 +8,7 @@ After the EasyIM server receives an uplink one-to-one, group, or chat room messa
 - **The pre-delivery webhook supports text, image, location, voice, video, file, command, custom, and combined messages.**
 - **The pre-delivery webhook does not support targeted messages in chat groups or chat rooms.**
 
-![](/images/server-side/im-webhook.jpeg)
+![](/images/server-side/im-callback.png)
 
 ## Implementation steps
 

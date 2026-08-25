@@ -232,8 +232,7 @@ const documentV5Sidebar = [
           ],
           only: ['web']
         },
-        { text: 'Push Notification Categories', link: 'push/push_message_classification.html', only: ['android'] },
-        { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
+        // { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
       ],
       except: ['server-side']
   },

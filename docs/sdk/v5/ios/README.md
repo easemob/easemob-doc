@@ -9,7 +9,7 @@ The EasyIM iOS SDK documentation currently covers message, chat group, and chat 
 | Feature category | Description |
 | --- | --- |
 | [User management](user_relationship.html) | Provides user relationships, user attributes, automatic user information management, and presence subscriptions. |
-| [Message management](message_overview.html) | Manages message sending, receiving, deletion, forwarding, editing, recall, pinning, quoting, extensions, targeted delivery, stream messages, online-only delivery, and message import. |
+| [Message management](message_overview.html) | Manages message sending, receiving, deletion, forwarding, editing, recall, pinning, quoting, extensions, targeted delivery, streaming messages, online-only delivery, and message import. |
 | [Conversation management](conversation_overview.html) | Provides conversation list, unread count, pinning, marking, and deletion capabilities. Documentation is coming soon. |
 | [Chat group management](group_overview.html) | Manages chat groups, members, group attributes, member attributes, name cards, group @ mentions, and other group operations. |
 | [Chat room management](room_overview.html) | Manages chat rooms, members, chat room attributes, mute lists, allowlists, blocklists, announcements, and superadmins. |

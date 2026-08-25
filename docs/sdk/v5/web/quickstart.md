@@ -7,7 +7,7 @@ This page describes how to quickly integrate the EasyIM Web SDK and use it to se
 
 The following diagram shows how a client sends and receives one-to-one text messages.
 
-![](/images/web/sendandreceivemsg.png)
+![](/images/android/sendandreceivemsg.png)
 
 ## Environment setup
 

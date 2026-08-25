@@ -10,7 +10,7 @@ This section describes the response codes returned after REST API calls. You can
 
 An example response is shown below:
 
-![REST API error response example](/images/server-side/response_icon.jpeg)
+![REST API error response example](/images/server-side/response_icon.png)
 
 We recommend implementing fault-tolerant handling for the results of REST APIs called from your app server, for example:
 

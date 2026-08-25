@@ -68,7 +68,7 @@ The SDK adds capabilities such as conversation list monitoring, conversation dis
 - Historical message retrieval, local message search, and server-side message search now uniformly use the retained asynchronous or paginated APIs.
 - Message modification, message resending, and combined message attachment download and parsing now uniformly use the retained asynchronous APIs.
 - Reaction data is now uniformly read through retained methods or properties, and deprecated legacy APIs have been removed.
-- `EMStreamChunk` no longer exposes `sequenceNumber`. Use `isComplete` to determine whether a stream message is complete.
+- `EMStreamChunk` no longer exposes `sequenceNumber`. Use `isComplete` to determine whether a streaming message is complete.
 
 **Chat group and chat room API changes**
 
@@ -197,9 +197,9 @@ If translation fails when a message is sent, the SDK returns error code 1113 to 
 
 #### New features
 
-Added support for [receiving stream messages sent by the server](message_stream_receive.html).
+Added support for [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, stream messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
 
 #### Improvements
 

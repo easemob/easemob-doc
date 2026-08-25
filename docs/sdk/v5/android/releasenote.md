@@ -220,9 +220,9 @@ Fixed an issue where forwarded attachment messages failed to send.
 
 #### New features
 
-Added support for [receiving stream messages sent by the server](message_stream_receive.html).
+Added support for [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, stream messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
 
 #### Improvements
 

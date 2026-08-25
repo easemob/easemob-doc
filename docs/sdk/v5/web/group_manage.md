@@ -92,7 +92,7 @@ For a public group, generally only the owner and admins can invite users. For a 
 
 The invitation process is as follows:
 
-![](/images/web/goup_member_invite.png)
+![](/images/web/group_member_invite.png)
 
 Example code:
 

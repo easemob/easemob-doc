@@ -114,7 +114,7 @@ The chat group owner and admins can invite users to join the chat group. For a p
 
 The invitation process is as follows:
 
-![](/images/ios/goup_member_invite.png)
+![](/images/ios/group_member_invite.png)
 
 Call `addMembers` to send an invitation:
 
