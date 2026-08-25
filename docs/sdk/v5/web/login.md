@@ -61,17 +61,17 @@ Example code:
 ```typescript
 client.addEventHandler('login-listener', {
   onConnected: event => {
-    console.log('登录并连接成功:', event);
+    console.log('Logged in and connected successfully:', event);
   },
   onDisconnected: event => {
-    console.log('连接断开:', event.reason, event.errorCode, event.errorMessage);
+    console.log('Disconnected:', event.reason, event.errorCode, event.errorMessage);
   },
   onTokenWillExpire: async () => {
     const newToken = await fetchNewTokenFromServer();
     await client.renewToken(newToken);
   },
   onTokenExpired: () => {
-    console.log('Token 已过期，需要重新获取 Token 后登录');
+    console.log('The token has expired. Retrieve a new token and log in again');
   },
 });
 
@@ -101,13 +101,13 @@ const state = client.getConnectionState();
 const userId = client.getCurrentUserId();
 const clientResource = client.getClientResource();
 
-console.log('连接状态:', state);
-console.log('当前登录用户:', userId);
-console.log('设备资源标识:', clientResource);
+console.log('Connection state:', state);
+console.log('Current logged-in user:', userId);
+console.log('Device resource identifier:', clientResource);
 
 if (state === 'connected') {
   const restContext = client.getRestContext();
-  console.log('REST 访问上下文:', restContext);
+  console.log('REST access context:', restContext);
 }
 ```
 
@@ -129,10 +129,10 @@ client.addEventHandler('token-listener', {
   onTokenWillExpire: async () => {
     const newToken = await fetchNewTokenFromServer();
     const result = await client.renewToken(newToken);
-    console.log('Token 续期成功，过期时间:', result.expireAt);
+    console.log('Token renewed successfully. Expiration time:', result.expireAt);
   },
   onTokenExpired: () => {
-    console.log('Token 已过期，需要重新获取 Token 后登录');
+    console.log('The token has expired. Retrieve a new token and log in again');
   },
 });
 ```

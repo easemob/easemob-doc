@@ -25,32 +25,32 @@ To receive friend-addition, friend-deletion, and friend-request state-change eve
 client.contactManager.addEventHandler('contact-listener', {
   // The other user accepted the friend request. User A receives this event after User A sends a friend request to User B and User B accepts it.
   onContactAgreed: event => {
-    console.log('对方已接受好友请求:', event.from);
+    console.log('The peer accepted the contact request:', event.from);
   },
 
   // The other user declined the friend request. User A receives this event after User A sends a friend request to User B and User B declines it.
   onContactRefuse: event => {
-    console.log('对方已拒绝好友请求:', event.from);
+    console.log('The peer declined the contact request:', event.from);
   },
 
   // A friend request was received. User A receives this event after User B sends a friend request to User A.
   onContactInvited: event => {
-    console.log('收到好友请求:', event.from, '附言:', event.status);
+    console.log('Contact request received:', event.from, 'Message:', event.status);
   },
 
   // A friend was deleted. User A receives this event after User B removes User A from User B's friend list.
   onContactDeleted: event => {
-    console.log('被删除好友:', event.userInfo.userId);
+    console.log('Removed as a contact:', event.userInfo.userId);
   },
 
   // A friend was added. Both users receive this event after the friend relationship is established.
   onContactAdded: event => {
-    console.log('新增好友:', event.userInfo.userId);
+    console.log('Contact added:', event.userInfo.userId);
   },
 
   // Triggered when a friend's user attributes are updated.
   onContactInfoUpdated: event => {
-    console.log('好友属性更新:', event.userInfo.userId, event.userInfo);
+    console.log('Contact attributes updated:', event.userInfo.userId, event.userInfo);
   },
 });
 ```
@@ -70,7 +70,7 @@ Call `addContact` to send a friend request:
 ```typescript
 await client.contactManager.addContact({
   userId: 'user2',
-  message: '你好，我是 user1，想加你为好友',
+  message: 'Hello, I'm user1. I'd like to add you as a contact',
 });
 ```
 
@@ -110,7 +110,7 @@ Call `setContactRemark` to set remarks for an individual friend.
 ```typescript
 await client.contactManager.setContactRemark({
   userId: 'user2',
-  remark: '同事小王', // Friend remarks cannot exceed 100 characters. Pass an empty string to clear them.
+  remark: 'Colleague Alex', // Friend remarks cannot exceed 100 characters. Pass an empty string to clear them.
 });
 ```
 
@@ -197,16 +197,16 @@ Example code:
 client.addEventHandler('contact-sync-listener', {
   onSyncDataStart: payload => {
     if (payload.dataType === 'contact') {
-      console.log('好友同步开始');
+      console.log('Contact synchronization started');
     }
   },
 
   onSyncDataFinished: payload => {
     if (payload.dataType === 'contact') {
       if (payload.status === 'success') {
-        console.log('好友同步完成');
+        console.log('Contact synchronization completed');
       } else {
-        console.log('好友同步失败:', payload.error);
+        console.log('Contact synchronization failed:', payload.error);
       }
     }
   },
@@ -215,12 +215,12 @@ client.addEventHandler('contact-sync-listener', {
 // Monitor friend-attribute updates.
 client.contactManager.addEventHandler('contact-profile-listener', {
   onContactInfoUpdated: event => {
-    console.log('好友用户 ID:', event.userInfo.userId);
-    console.log('好友属性:', event.userInfo);
+    console.log('Contact user ID:', event.userInfo.userId);
+    console.log('Contact attributes:', event.userInfo);
 
     if (event.contact) {
-      console.log('好友备注:', event.contact.remark);
-      console.log('好友添加时间:', event.contact.addTs);
+      console.log('Contact remarks:', event.contact.remark);
+      console.log('Contact added time:', event.contact.addTs);
     }
 
     // Refresh the friend list, friend-details page, or avatar, nickname, and other displayed information in the conversation list here.

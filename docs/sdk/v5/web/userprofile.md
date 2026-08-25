@@ -108,7 +108,7 @@ const contacts = client.contactManager.getContacts();
 
 contacts.forEach(contact => {
   console.log(
-    '好友属性:',
+    'Contact attributes:',
     contact.userId,
     contact.userInfo.nickname,
     contact.userInfo.avatarUrl,
@@ -193,14 +193,14 @@ client.userInfoManager.addEventHandler('profile-listener', {
   // Triggered after the current user's attributes are updated.
   // For example, this event is received after the current user successfully calls updateOwnInfo or updateOwnInfoByAttribute.
   onOwnInfoUpdated: profile => {
-    console.log('当前用户属性更新:', profile);
+    console.log('Current user's attributes updated:', profile);
   },
   // Triggered after another user's attributes are updated.
   // For example:
   // 1. A subscribed non-friend user's attributes change.
   // 2. After `enableUserInfoSync` is enabled, the SDK detects updated user attributes while processing a message and retrieves the latest user attributes.
   onUserInfoUpdated: users => {
-    console.log('订阅用户或消息同步触发的属性更新:', users);
+    console.log('Attribute updates triggered by subscribed users or message synchronization:', users);
   },
 });
 
@@ -208,7 +208,7 @@ client.contactManager.addEventHandler('contact-profile-listener', {
   // Triggered after a friend's user attributes are updated.
   // This event applies only to friend users and must be monitored through contactManager. It is not a userInfoManager event.
   onContactInfoUpdated: event => {
-    console.log('好友的用户属性更新:', event.userInfo);
+    console.log('Contact's user attributes updated:', event.userInfo);
   },
 });
 ```
@@ -291,7 +291,7 @@ const message = client.chatManager.createCustomMessage({
   event: 'userCard',
   params: {
     userId: 'user_card_target',
-    nickname: '昵称',
+    nickname: 'Nickname',
     avatarUrl: 'https://example.com/avatar.png',
     mail: '123@qq.com',
     phone: '16888888888',

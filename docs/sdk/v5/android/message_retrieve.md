@@ -163,7 +163,7 @@ The parameters are described below:
 | `callBack` | `EMValueCallBack<Map<String, List<String>>>` | Search result callback. On success, a mapping between conversation IDs and message ID lists is returned. |
 
 ```java
-String keyword="时间";
+String keyword="time";
 EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(keyword, -1, null, EMConversation.EMSearchDirection.UP, EMConversation.EMMessageSearchScope.CONTENT, new EMValueCallBack<Map<String, List<String>>>() {
     @Override
     public void onSuccess(Map<String, List<String>> value) {

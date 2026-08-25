@@ -113,7 +113,7 @@ The chat room owner or an admin can call `updateAnnouncement` to set or update t
 ```typescript
 await client.chatRoomManager.getChatRoom('chatroomId').updateAnnouncement({
   // The chat room announcement cannot exceed 512 characters.
-  announcement: '欢迎来到直播间！',
+  announcement: 'Welcome to the live room!',
 });
 ```
 
@@ -209,19 +209,19 @@ When basic chat room information, the announcement, or custom attributes change,
 client.chatRoomManager.addEventHandler('chatroom-attribute-events', {
   // The chat room details change. All chat room members receive this event.
   onChatRoomInfoChanged: event => {
-    console.log('聊天室信息变更:', event.chatRoomId, event.chatRoomInfo);
+    console.log('Chat room information changed:', event.chatRoomId, event.chatRoomInfo);
   },
   // The chat room announcement changes. All chat room members receive this event.
   onAnnouncementChanged: event => {
-    console.log('聊天室公告变更:', event.chatRoomId, event.announcement);
+    console.log('Chat room announcement changed:', event.chatRoomId, event.announcement);
   },
   // Chat room custom attributes are updated. All chat room members receive this event.
   onAttributesUpdate: event => {
-    console.log('聊天室属性更新:', event.chatRoomId, event.attributes, event.from);
+    console.log('Chat room attributes updated:', event.chatRoomId, event.attributes, event.from);
   },
   // Chat room custom attributes are removed. All chat room members receive this event.
   onAttributesRemoved: event => {
-    console.log('聊天室属性删除:', event.chatRoomId, event.keyList, event.from);
+    console.log('Chat room attributes deleted:', event.chatRoomId, event.keyList, event.from);
   },
 });
 ```

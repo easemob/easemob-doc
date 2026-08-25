@@ -98,7 +98,7 @@ When initializing the SDK, you can call `EMOptions#customDeviceName` to set a cu
 
 ```objectivec
 EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
-options.customDeviceName = @"Alice 的 iPad";
+options.customDeviceName = @"Alice's iPad";
 
 // Initialize the SDK with options, and then log in through the asynchronous token login API.
 ```

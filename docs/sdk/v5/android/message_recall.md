@@ -45,7 +45,7 @@ After the call succeeds, the message stored on the server and the local copies s
 
 
 ```java
-String recallExt = "撤回了一条消息";
+String recallExt = "recalled a message";
 
 // Asynchronous method.
 EMClient.getInstance()

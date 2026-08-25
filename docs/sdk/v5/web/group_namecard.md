@@ -45,15 +45,15 @@ After a change is synchronized to the SDK's internal cache, it triggers `onUserG
 ```typescript
 client.groupManager.addEventHandler('group-namecard-listener', {
   onGroupMemberAttributeChanged: event => {
-    console.log('群成员属性变更 groupId:', event.groupId);
-    console.log('变更成员:', event.user?.userId);
-    console.log('变更后的属性:', event.attribute);
+    console.log('Group member attributes changed, groupId:', event.groupId);
+    console.log('Changed member:', event.user?.userId);
+    console.log('Updated attributes:', event.attribute);
   },
 
   onUserGroupNamecardUpdated: event => {
-    console.log('群成员名片更新 groupId:', event.groupId);
-    console.log('用户 ID:', event.userId);
-    console.log('群成员名片:', event.namecard);
+    console.log('Group member card updated, groupId:', event.groupId);
+    console.log('User ID:', event.userId);
+    console.log('Group member card:', event.namecard);
   },
 });
 ```
@@ -77,7 +77,7 @@ await client.groupManager.getGroup('groupId').setMemberAttributes({
   },
 });
 
-console.log('设置群成员名片成功');
+console.log('Group member card set successfully');
 ```
 
 After success, other online group members receive `onGroupMemberAttributeChanged` and `onUserGroupNamecardUpdated`.
@@ -111,10 +111,10 @@ The result is a collection of group member attributes indexed by user ID:
 {
   items: {
     user1: {
-      groupNamecard: '研发部-Alice',
+      groupNamecard: 'R&D-Alice',
     },
     user2: {
-      groupNamecard: '产品部-Bob',
+      groupNamecard: 'Product-Bob',
     },
   },
 }

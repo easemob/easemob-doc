@@ -136,8 +136,8 @@ Set `avatar` when creating a group:
 
 ```typescript
 const result = await client.groupManager.createGroup({
-  name: 'SDK 讨论群',
-  description: '用于讨论 SDK',
+  name: 'SDK discussion group',
+  description: 'For SDK discussions',
   public: true,
   joinApprovalRequired: false,
   allowInvites: true,
@@ -191,7 +191,7 @@ When it changes, group members receive `onAnnouncementChanged`.
 
 ```typescript
 await client.groupManager.getGroup('groupId').updateAnnouncement({
-  announcement: '欢迎加入本群！',
+  announcement: 'Welcome to the group!',
 });
 ```
 

@@ -46,11 +46,11 @@ Define the `msgQuote` data structure according to your business requirements. Th
 const message = client.chatManager.createTextMessage({
   conversationId: 'user2',
   conversationType: 'singleChat',
-  content: '好的，收到！',
+  content: 'Okay, got it!',
   ext: {
     msgQuote: {
       msgID: 'original-msg-id',
-      msgPreview: '原消息内容预览',
+      msgPreview: 'Preview of the original message content',
       msgSender: 'user1',
       msgType: 'text',
     },
@@ -91,14 +91,14 @@ const message = client.chatManager.createTextMessage({
   // Conversation type: `singleChat` for a one-to-one chat, `groupChat` for a group chat, or `chatRoom` for a chat room.
   conversationType: 'singleChat',
   // Content of the new reply.
-  content: '好的，收到！',
+  content: 'Okay, got it!',
   // Extension: Use `msgQuote` to carry a summary of the quoted message.
   ext: {
     msgQuote: {
       // Message ID of the quoted message.
       msgID: 'original-msg-id',
       // Preview of the quoted message.
-      msgPreview: '原消息内容预览',
+      msgPreview: 'Preview of the original message content',
       // User ID of the quoted message sender.
       msgSender: 'user1',
       // Type of the quoted message, such as `text`, `image`, or `voice`.
@@ -132,10 +132,10 @@ client.chatManager.addEventHandler('quote-message', {
     }
 
     // Display the quote summary in the UI.
-    console.log('引用消息 ID:', quote.msgID);
-    console.log('引用消息预览:', quote.msgPreview);
-    console.log('引用消息发送方:', quote.msgSender);
-    console.log('引用消息类型:', quote.msgType);
+    console.log('Quoted message ID:', quote.msgID);
+    console.log('Quoted message preview:', quote.msgPreview);
+    console.log('Quoted message sender:', quote.msgSender);
+    console.log('Quoted message type:', quote.msgType);
 
     // Locate the original message using the message ID mapping maintained by your app.
     const originalMessage = messageList.find(
@@ -143,7 +143,7 @@ client.chatManager.addEventHandler('quote-message', {
     );
 
     if (!originalMessage) {
-      console.log('引用内容不存在');
+      console.log('The quoted content does not exist');
       return;
     }
 

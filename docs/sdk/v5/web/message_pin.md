@@ -71,9 +71,9 @@ const result = await client.chatManager.getPinnedMessageList({
 });
 
 for (const item of result.items) {
-  console.log('置顶消息 ID:', item.messageId);
-  console.log('置顶时间:', item.pinnedAt);
-  console.log('置顶消息:', item.message);
+  console.log('Pinned message ID:', item.messageId);
+  console.log('Pin time:', item.pinnedAt);
+  console.log('Pinned message:', item.message);
 }
 ```
 
@@ -89,9 +89,9 @@ With multi-device login, after a message is pinned or unpinned, the current user
 ```typescript
 client.addEventHandler('pin', {
   onPinnedMessageChanged: (event) => {
-    console.log('操作:', event.operation); // 'pin' | 'unpin'
-    console.log('消息 ID:', event.messageId);
-    console.log('操作者:', event.operatorId);
+    console.log('Operation:', event.operation); // 'pin' | 'unpin'
+    console.log('Message ID:', event.messageId);
+    console.log('Operator:', event.operatorId);
   },
 });
 ```

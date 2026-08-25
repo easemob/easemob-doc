@@ -1,4 +1,4 @@
-# Implement Message Receipts
+# Message Receipts
 
 ## Feature overview
 

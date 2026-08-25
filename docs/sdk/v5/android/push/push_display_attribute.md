@@ -51,7 +51,7 @@ To display message content in the notification bar, you need to set the notifica
 
 | Parameter value | Description |
 | :--------------- | :---------------------- |
-| (default) `SimpleBanner` | Whether or not `nickname` is set, when any type of message is pushed, the notification bar uses the default display settings. That is, the push title is **You have a new message** and the push content is **Please tap to view**. |
+| (default) `SimpleBanner` | Whether or not `nickname` is set, when any type of message is pushed, the notification bar uses the default display settings. That is, the push title is **You've got a new message** and the push content is **Please click to view**. |
 | `MessageSummary` | `MessageSummary`: Displays the message content. The configured nickname takes effect only when `DisplayStyle` is `MessageSummary`, and does not take effect when `SimpleBanner` is used. |
 
 The following table uses a **one-to-one text message** as an example to describe the display attribute settings.
@@ -60,9 +60,9 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 
 | Parameter setting | Push display | Image |
 | :--------- | :----- |:------------- |
-| <br/> - `DisplayStyle`: (default) `SimpleBanner`<br/> - `nickname`: set or not set | <br/> - Push title: **You have a new message**<br/> - Push content: **Please tap to view** | ![img](/images/android/push/push_displayattribute_1.png)|
-| <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: set to a specific value | <br/> - Push title: **You have a new message**<br/> - Push content: **Push nickname of the message sender: message content** |![img](/images/android/push/push_displayattribute_2.png) |
-| <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: not set | <br/> - Push title: **You have a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png)|
+| <br/> - `DisplayStyle`: (default) `SimpleBanner`<br/> - `nickname`: set or not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **Please click to view** | ![img](/images/android/push/push_displayattribute_1.png)|
+| <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: set to a specific value | <br/> - Push title: **You've got a new message**<br/> - Push content: **Push nickname of the message sender: message content** |![img](/images/android/push/push_displayattribute_2.png) |
+| <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png)|
 
 ## Get push notification display attributes
 

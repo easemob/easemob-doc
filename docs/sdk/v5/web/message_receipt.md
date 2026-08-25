@@ -1,4 +1,4 @@
-# Implement Message Receipts
+# Message Receipts
 
 ## Feature overview
 
@@ -78,11 +78,11 @@ The sender monitors the `onMessageDelivered` event.
 client.chatManager.addEventHandler('message-delivery-listener', {
   onMessageDelivered: event => {
     // ID of the original message that was delivered.
-    console.log('消息已送达:', event.messageId);
+    console.log('Message delivered:', event.messageId);
     // Conversation ID.
-    console.log('会话 ID:', event.conversationId);
+    console.log('Conversation ID:', event.conversationId);
     // Conversation type. This value is always singleChat for a one-to-one chat.
-    console.log('会话类型:', event.conversationType);
+    console.log('Conversation type:', event.conversationType);
   },
 });
 ```
@@ -117,10 +117,10 @@ A message's read receipt remains valid for as long as the message is stored on t
 client.chatManager.addEventHandler('single-read-receipt-listener', {
   onMessageReadReceipts: receipts => {
     for (const receipt of receipts) {
-      console.log('会话 ID:', receipt.conversationId);
-      console.log('会话类型:', receipt.conversationType); // singleChat
-      console.log('已读消息 ID 列表:', receipt.messageIds);
-      console.log('回执时间:', receipt.timestamp);
+      console.log('Conversation ID:', receipt.conversationId);
+      console.log('Conversation type:', receipt.conversationType); // singleChat
+      console.log('Read message ID list:', receipt.messageIds);
+      console.log('Receipt time:', receipt.timestamp);
     }
   },
 });
@@ -215,10 +215,10 @@ The group message sender receives group message read receipts through `onMessage
 client.chatManager.addEventHandler('group-read-receipt-listener', {
   onMessageReadReceipts: receipts => {
     for (const receipt of receipts) {
-      console.log('群组 ID:', receipt.conversationId);
-      console.log('会话类型:', receipt.conversationType); // groupChat
-      console.log('已读消息 ID 列表:', receipt.messageIds);
-      console.log('回执时间:', receipt.timestamp);
+      console.log('Group ID:', receipt.conversationId);
+      console.log('Conversation type:', receipt.conversationType); // groupChat
+      console.log('Read message ID list:', receipt.messageIds);
+      console.log('Receipt time:', receipt.timestamp);
     }
   },
 });
@@ -253,12 +253,12 @@ const result = await client.chatManager.getGroupMessageReadUsers({
   cursor: '',
 });
 
-console.log('群组 ID:', result.groupId);
-console.log('消息 ID:', result.messageId);
-console.log('已读成员列表:', result.users);
-console.log('已读成员总数:', result.count);
-console.log('下一页游标:', result.cursor);
-console.log('是否还有更多:', result.hasMore);
+console.log('Group ID:', result.groupId);
+console.log('Message ID:', result.messageId);
+console.log('Read member list:', result.users);
+console.log('Total number of members who have read the message:', result.count);
+console.log('Next-page cursor:', result.cursor);
+console.log('Has more:', result.hasMore);
 ```
 
 Each item in `result.users` contains the following fields:
@@ -284,8 +284,8 @@ const details = await client.chatManager.getGroupMessageReadReceipts({
 });
 
 details.forEach(item => {
-  console.log('消息 ID:', item.messageId);
-  console.log('已读数量:', item.count);
+  console.log('Message ID:', item.messageId);
+  console.log('Read count:', item.count);
 });
 ```
 

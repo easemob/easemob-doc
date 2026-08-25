@@ -62,19 +62,19 @@ configs.allowInvites = true
 configs.maxUsers = 200
 
 EMClient.shared().groupManager?.createGroup(
-    withSubject: "项目讨论组",
+    withSubject: "Project discussion group",
     avatar: nil,
-    description: "用于项目沟通",
+    description: "For project communication",
     invitees: ["user1", "user2"],
-    message: "邀请你加入项目讨论组",
+    message: "You are invited to join the project discussion group",
     setting: configs
 ) { group, error in
     if let error {
-        print("创建群组失败：\(error.errorDescription)")
+        print("Failed to create the group: \(error.errorDescription)")
         return
     }
 
-    print("群组创建成功：\(group?.groupId ?? "")")
+    print("Group created successfully: \(group?.groupId ?? "")")
 }
 ```
 
@@ -93,11 +93,11 @@ EMClient.shared().groupManager?.destroyGroup(
     "groupId"
 ) { error in
     if let error {
-        print("解散群组失败：\(error.errorDescription)")
+        print("Failed to destroy the group: \(error.errorDescription)")
         return
     }
 
-    print("群组已解散")
+    print("Group destroyed")
 }
 ```
 
@@ -122,14 +122,14 @@ Call `addMembers` to send an invitation:
 EMClient.shared().groupManager?.addMembers(
     ["user1", "user2"],
     toGroup: "groupId",
-    message: "欢迎加入群组"
+    message: "Welcome to the group"
 ) { group, error in
     if let error {
-        print("邀请成员失败：\(error.errorDescription)")
+        print("Failed to invite members: \(error.errorDescription)")
         return
     }
 
-    print("已发出群邀请：\(group?.groupId ?? "")")
+    print("Group invitation sent: \(group?.groupId ?? "")")
 }
 ```
 
@@ -164,11 +164,11 @@ final class GroupInvitationDelegate: NSObject, EMGroupManagerDelegate {
             inviter: inviter
         ) { group, error in
             if let error {
-                print("接受群邀请失败：\(error.errorDescription)")
+                print("Failed to accept the group invitation: \(error.errorDescription)")
                 return
             }
 
-            print("已加入群组：\(group?.groupId ?? "")")
+            print("Joined the group: \(group?.groupId ?? "")")
         }
     }
 
@@ -176,10 +176,10 @@ final class GroupInvitationDelegate: NSObject, EMGroupManagerDelegate {
         EMClient.shared().groupManager?.declineGroupInvitation(
             groupId,
             inviter: inviter,
-            reason: "暂不加入"
+            reason: "Not joining at this time"
         ) { error in
             if let error {
-                print("拒绝群邀请失败：\(error.errorDescription)")
+                print("Failed to decline the group invitation: \(error.errorDescription)")
             }
         }
     }
@@ -207,20 +207,20 @@ EMClient.shared().groupManager?.joinPublicGroup(
     "groupId"
 ) { group, error in
     if let error {
-        print("加入公开群失败：\(error.errorDescription)")
+        print("Failed to join the public group: \(error.errorDescription)")
         return
     }
 
-    print("已加入群组：\(group?.groupId ?? "")")
+    print("Joined the group: \(group?.groupId ?? "")")
 }
 
 // Apply to join a public group that requires approval.
 EMClient.shared().groupManager?.request(
     toJoinPublicGroup: "groupId",
-    message: "申请加入"
+    message: "Request to join"
 ) { _, error in
     if let error {
-        print("提交入群申请失败：\(error.errorDescription)")
+        print("Failed to submit the join request: \(error.errorDescription)")
     }
 }
 ```
@@ -236,20 +236,20 @@ EMClient.shared().groupManager?.approveJoinGroupRequest(
     sender: "applicantId"
 ) { group, error in
     if let error {
-        print("同意入群申请失败：\(error.errorDescription)")
+        print("Failed to approve the join request: \(error.errorDescription)")
         return
     }
 
-    print("已同意申请：\(group?.groupId ?? "")")
+    print("Join request approved: \(group?.groupId ?? "")")
 }
 
 EMClient.shared().groupManager?.declineJoinGroupRequest(
     "groupId",
     sender: "applicantId",
-    reason: "群成员已满"
+    reason: "The group is full"
 ) { _, error in
     if let error {
-        print("拒绝入群申请失败：\(error.errorDescription)")
+        print("Failed to reject the join request: \(error.errorDescription)")
     }
 }
 ```
@@ -267,11 +267,11 @@ EMClient.shared().groupManager?.leaveGroup(
     "groupId"
 ) { error in
     if let error {
-        print("退出群组失败：\(error.errorDescription)")
+        print("Failed to leave the group: \(error.errorDescription)")
         return
     }
 
-    print("已退出群组")
+    print("Left the group")
 }
 ```
 
@@ -287,11 +287,11 @@ EMClient.shared().groupManager?.removeMembers(
     fromGroup: "groupId"
 ) { group, error in
     if let error {
-        print("移出成员失败：\(error.errorDescription)")
+        print("Failed to remove the member: \(error.errorDescription)")
         return
     }
 
-    print("成员已移出群组：\(group?.groupId ?? "")")
+    print("Member removed from the group: \(group?.groupId ?? "")")
 }
 ```
 
@@ -306,7 +306,7 @@ let options = EMOptions.options(withAppkey: "your-org#your-app")
 options.dataSyncType = [.joinedGroups]
 
 if let error = EMClient.shared().initializeSDK(with: options) {
-    print("SDK 初始化失败：\(error.errorDescription)")
+    print("SDK initialization failed: \(error.errorDescription)")
 }
 ```
 
@@ -321,7 +321,7 @@ final class ClientDelegate: NSObject, EMClientDelegate {
             EMClient.shared().groupManager?.getJoinedGroups() ?? []
 
         // Display the local chat group list on the initial screen.
-        print("本地群组数量：\(cachedGroups.count)")
+        print("Number of local groups: \(cachedGroups.count)")
     }
 
     func syncDataFinished(_ error: EMError?, type: EMDataSyncType) {
@@ -333,7 +333,7 @@ final class ClientDelegate: NSObject, EMClientDelegate {
             EMClient.shared().groupManager?.getJoinedGroups() ?? []
 
         // Refresh the page with the synchronized list of joined chat groups.
-        print("同步后的群组数量：\(groups.count)")
+        print("Number of groups after synchronization: \(groups.count)")
     }
 }
 ```
@@ -347,11 +347,11 @@ The maximum number of chat groups a user can join depends on the subscribed Easy
 ```swift
 EMClient.shared().groupManager?.getJoinedGroupsCountFromServer { count, error in
     if let error {
-        print("查询已加入群组数量失败：\(error.errorDescription)")
+        print("Failed to query the number of joined groups: \(error.errorDescription)")
         return
     }
 
-    print("已加入群组数量：\(count)")
+    print("Number of joined groups: \(count)")
 }
 ```
 
@@ -368,11 +368,11 @@ EMClient.shared().groupManager?.blockGroup(
     "groupId"
 ) { _, error in
     if let error {
-        print("屏蔽群消息失败：\(error.errorDescription)")
+        print("Failed to block group messages: \(error.errorDescription)")
         return
     }
 
-    print("已屏蔽群消息")
+    print("Group messages blocked")
 }
 ```
 
@@ -385,11 +385,11 @@ EMClient.shared().groupManager?.unblockGroup(
     "groupId"
 ) { _, error in
     if let error {
-        print("解除屏蔽失败：\(error.errorDescription)")
+        print("Failed to unblock group messages: \(error.errorDescription)")
         return
     }
 
-    print("已解除屏蔽")
+    print("Group messages unblocked")
 }
 ```
 
@@ -405,7 +405,7 @@ EMClient.shared().groupManager?.getGroupSpecificationFromServer(
         return
     }
 
-    print("是否已屏蔽群消息：\(group.isBlocked)")
+    print("Are group messages blocked: \(group.isBlocked)")
 }
 ```
 

@@ -34,9 +34,9 @@ const result = await client.chatManager.getHistoryMessages({
   searchDirection: 'down', // 'up' for the previous page | 'down' for the next page
 });
 
-console.log('消息列表:', result.items);
-console.log('下一页 cursor:', result.cursor);
-console.log('是否还有更多:', result.hasMore);
+console.log('Message list:', result.items);
+console.log('Next-page cursor:', result.cursor);
+console.log('Has more:', result.hasMore);
 ```
 
 You can also call `getHistoryMessages` to retrieve historical messages in a specified conversation from the server and specify whether to retrieve them in chronological or reverse chronological order.

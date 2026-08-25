@@ -64,8 +64,8 @@ On the Web client, pass message extension fields through the `ext` parameter whe
 {
   "ext": {
     "em_push_template": {
-      "title_args": ["环信"],
-      "content_args": ["欢迎使用im-push", "加油"]
+      "title_args": ["EasyIM"],
+      "content_args": ["Welcome to IM Push", "Keep it up"]
     }
   }
 }
@@ -181,9 +181,9 @@ const message = client.chatManager.createTextMessage({
       // Set the push-template name. If omitted, the server applies the default push-template logic.
       name: 'push',
       // Set the value array used to populate the template title.
-      title_args: ['您', '消息'],
+      title_args: ['You', 'message'],
       // Set the value array used to populate the template content.
-      content_args: ['请', '查看'],
+      content_args: ['Please', 'check'],
     },
   },
 });

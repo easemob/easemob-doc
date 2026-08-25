@@ -76,7 +76,7 @@ You can call `addContact` to send a friend request:
 
 ```objectivec
 [[EMClient sharedClient].contactManager addContact:@"userB"
-                                            message:@"你好，我想添加你为好友"
+                                            message:@"Hello, I'd like to add you as a contact"
                                          completion:^(NSString *username, EMError *error) {
     if (!error) {
         // The friend request was sent successfully.
@@ -147,7 +147,7 @@ The remarks cannot exceed 100 characters. Pass `nil` to clear the friend remarks
 
 ```objectivec
 [[EMClient sharedClient].contactManager setContactRemark:@"userB"
-                                                   remark:@"小李"
+                                                   remark:@"Alex"
                                                completion:^(EMContact *contact, EMError *error) {
     if (!error) {
         // contact is the updated friend object.

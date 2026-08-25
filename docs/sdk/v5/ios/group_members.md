@@ -29,14 +29,14 @@ EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(
     limit: 50
 ) { result, error in
     if let error {
-        print("获取群成员失败：\(error.errorDescription)")
+        print("Failed to retrieve group members: \(error.errorDescription)")
         return
     }
 
     let members = result?.list ?? []
     let nextCursor = result?.cursor
     for member in members {
-        print("用户：\(member.userId)，入群时间：\(member.joinedTimestamp)")
+        print("User: \(member.userId), join time: \(member.joinedTimestamp)")
     }
     // A nil or empty nextCursor indicates that there is no more data.
 }
@@ -64,14 +64,14 @@ EMClient.shared().groupManager?.getGroupMemberListFromServer(
     pageSize: 50
 ) { result, error in
     if let error {
-        print("获取群成员列表失败：\(error.errorDescription)")
+        print("Failed to retrieve the group member list: \(error.errorDescription)")
         return
     }
 
     let userIds = result?.list ?? []
     let nextCursor = result?.cursor
 
-    print("当前页成员：\(userIds)")
+    print("Members on the current page: \(userIds)")
 
     // A nil or empty nextCursor indicates that there is no more data.
 }
@@ -103,7 +103,7 @@ EMClient.shared().groupManager?.setMemberAttribute(
     attributes: attributes
 ) { error in
     if let error {
-        print("设置成员属性失败：\(error.errorDescription)")
+        print("Failed to set member attributes: \(error.errorDescription)")
     }
 }
 ```
@@ -120,7 +120,7 @@ EMClient.shared().groupManager?.fetchMemberAttribute(
     userId: "userId"
 ) { attributes, error in
     if let error {
-        print("获取成员属性失败：\(error.errorDescription)")
+        print("Failed to retrieve member attributes: \(error.errorDescription)")
         return
     }
     print(attributes ?? [:])
@@ -142,7 +142,7 @@ EMClient.shared().groupManager?.fetchMembersAttributes(
     keys: ["department", "roleTag"]
 ) { attributes, error in
     if let error {
-        print("批量获取成员属性失败：\(error.errorDescription)")
+        print("Failed to retrieve member attributes in batches: \(error.errorDescription)")
         return
     }
     print(attributes ?? [:])
@@ -161,7 +161,7 @@ EMClient.shared().groupManager?.updateGroupOwner(
     newOwner: "newOwnerId"
 ) { _, error in
     if let error {
-        print("变更群主失败：\(error.errorDescription)")
+        print("Failed to change the group owner: \(error.errorDescription)")
     }
 }
 ```
@@ -178,7 +178,7 @@ EMClient.shared().groupManager?.addAdmin(
     toGroup: "groupId"
 ) { _, error in
     if let error {
-        print("添加群管理员失败：\(error.errorDescription)")
+        print("Failed to add a group admin: \(error.errorDescription)")
     }
 }
 ```
@@ -195,7 +195,7 @@ EMClient.shared().groupManager?.removeAdmin(
     fromGroup: "groupId"
 ) { _, error in
     if let error {
-        print("移除群管理员失败：\(error.errorDescription)")
+        print("Failed to remove a group admin: \(error.errorDescription)")
     }
 }
 ```
@@ -209,12 +209,12 @@ EMClient.shared().groupManager?.getGroupSpecificationFromServer(
     withId: "groupId"
 ) { group, error in
     if let error {
-        print("获取群详情失败：\(error.errorDescription)")
+        print("Failed to retrieve group details: \(error.errorDescription)")
         return
     }
 
     let adminIds = group?.adminList ?? []
-    print("群管理员列表：\(adminIds)")
+    print("Group admin list: \(adminIds)")
 }
 ```
 
@@ -237,7 +237,7 @@ EMClient.shared().groupManager?.addWhiteListMembers(
     ["userId"],
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("添加白名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to add users to the allowlist: \(error.errorDescription)") }
 }
 ```
 
@@ -250,7 +250,7 @@ EMClient.shared().groupManager?.removeWhiteListMembers(
     ["userId"],
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("移除白名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to remove users from the allowlist: \(error.errorDescription)") }
 }
 ```
 
@@ -261,10 +261,10 @@ All chat group members can call `isMemberInWhiteListFromServerWithGroupId` to ch
 ```swift
 EMClient.shared().groupManager?.isMember(inWhiteListFromServerWithGroupId: "groupId") { inWhiteList, error in
     if let error {
-        print("查询白名单失败：\(error.errorDescription)")
+        print("Failed to query the allowlist: \(error.errorDescription)")
         return
     }
-    print("是否在白名单中：\(inWhiteList)")
+    print("Is in the allowlist: \(inWhiteList)")
 }
 ```
 
@@ -274,7 +274,7 @@ Only the chat group owner or an admin can call `getGroupWhiteListFromServerWithI
 
 ```swift
 EMClient.shared().groupManager?.getGroupWhiteListFromServer(withId: "groupId") { members, error in
-    if let error { print("获取白名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to retrieve the allowlist: \(error.errorDescription)") }
     else { print(members ?? []) }
 }
 ```
@@ -294,7 +294,7 @@ EMClient.shared().groupManager?.blockMembers(
     ["userId"],
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("添加黑名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to add users to the blocklist: \(error.errorDescription)") }
 }
 ```
 
@@ -307,7 +307,7 @@ EMClient.shared().groupManager?.unblockMembers(
     ["userId"],
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("移除黑名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to remove users from the blocklist: \(error.errorDescription)") }
 }
 ```
 
@@ -321,7 +321,7 @@ EMClient.shared().groupManager?.getGroupBlacklistFromServer(
     pageNumber: 1,
     pageSize: 50
 ) { members, error in
-    if let error { print("获取黑名单失败：\(error.errorDescription)") }
+    if let error { print("Failed to retrieve the blocklist: \(error.errorDescription)") }
     else { print(members ?? []) }
 }
 ```
@@ -345,7 +345,7 @@ EMClient.shared().groupManager?.muteMembers(
     muteMilliseconds: 3_600_000,
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("禁言成员失败：\(error.errorDescription)") }
+    if let error { print("Failed to mute members: \(error.errorDescription)") }
 }
 ```
 
@@ -358,7 +358,7 @@ EMClient.shared().groupManager?.unmuteMembers(
     ["userId"],
     fromGroup: "groupId"
 ) { _, error in
-    if let error { print("解除禁言失败：\(error.errorDescription)") }
+    if let error { print("Failed to unmute members: \(error.errorDescription)") }
 }
 ```
 
@@ -368,8 +368,8 @@ Chat group members can call `isMemberInMuteListFromServerWithGroupId` to check w
 
 ```swift
 EMClient.shared().groupManager?.isMember(inMuteListFromServerWithGroupId: "groupId") { inMuteList, error in
-    if let error { print("查询禁言状态失败：\(error.errorDescription)") }
-    else { print("是否被禁言：\(inMuteList)") }
+    if let error { print("Failed to query the mute status: \(error.errorDescription)") }
+    else { print("Is muted: \(inMuteList)") }
 }
 ```
 
@@ -384,7 +384,7 @@ EMClient.shared().groupManager?.fetchGroupMuteListFromServer(
     pageNumber: 1,
     pageSize: 50
 ) { muteList, error in
-    if let error { print("获取禁言列表失败：\(error.errorDescription)") }
+    if let error { print("Failed to retrieve the mute list: \(error.errorDescription)") }
     else { print(muteList ?? [:]) }
 }
 ```
@@ -397,7 +397,7 @@ Mute-all does not expire automatically. To disable it, proactively call the unmu
 
 ```swift
 EMClient.shared().groupManager?.muteAllMembers(fromGroup: "groupId") { _, error in
-    if let error { print("开启全员禁言失败：\(error.errorDescription)") }
+    if let error { print("Failed to mute all members: \(error.errorDescription)") }
 }
 ```
 
@@ -407,7 +407,7 @@ Only the chat group owner or an admin can call `unmuteAllMembersFromGroup` to di
 
 ```swift
 EMClient.shared().groupManager?.unmuteAllMembers(fromGroup: "groupId") { _, error in
-    if let error { print("关闭全员禁言失败：\(error.errorDescription)") }
+    if let error { print("Failed to unmute all members: \(error.errorDescription)") }
 }
 ```
 

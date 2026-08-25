@@ -72,10 +72,10 @@ const pinnedConversations = client.chatManager.getConversationList({
 });
 
 pinnedConversations.forEach(conversation => {
-  console.log('会话 ID:', conversation.conversationId);
-  console.log('会话类型:', conversation.conversationType);
-  console.log('是否置顶:', conversation.isPinned);
-  console.log('置顶时间:', conversation.pinnedTimestamp);
+  console.log('Conversation ID:', conversation.conversationId);
+  console.log('Conversation type:', conversation.conversationType);
+  console.log('Is pinned:', conversation.isPinned);
+  console.log('Pin time:', conversation.pinnedTimestamp);
 });
 ```
 
@@ -116,9 +116,9 @@ After `setConversationPinned` succeeds, if the SDK's local conversation list cac
 ```typescript
 client.chatManager.addEventHandler('conversation-pin-listener', {
   onConversationListUpdate: payload => {
-    console.log('会话列表更新原因:', payload.reason);
-    console.log('当前完整会话列表:', payload.items);
-    console.log('本次变更补丁:', payload.patch);
+    console.log('Reason for conversation list update:', payload.reason);
+    console.log('Current complete conversation list:', payload.items);
+    console.log('Changes in this update:', payload.patch);
   },
 });
 ```
@@ -141,7 +141,7 @@ client.addEventHandler('multi-device-conversation-pin-listener', {
       event.operation === 'CONVERSATION_PINNED' ||
       event.operation === 'CONVERSATION_UNPINNED'
     ) {
-      console.log('会话置顶多设备事件:', event);
+      console.log('Multi-device conversation pin event:', event);
     }
   },
 });
@@ -176,7 +176,7 @@ The sorting rules are as follows:
 ```typescript
 const conversations = client.chatManager.getConversationList();
 
-console.log('会话列表:', conversations);
+console.log('Conversation list:', conversations);
 ```
 
 For custom sorting, use `isPinned`, `pinnedTimestamp`, and `lastMessageAt` in `ConversationItem`:
@@ -199,7 +199,7 @@ const sortedConversations = [...conversations].sort((first, second) => {
   return (second.lastMessageAt ?? 0) - (first.lastMessageAt ?? 0);
 });
 
-console.log('自定义排序后的会话列表:', sortedConversations);
+console.log('Custom-sorted conversation list:', sortedConversations);
 ```
 
 ## Considerations

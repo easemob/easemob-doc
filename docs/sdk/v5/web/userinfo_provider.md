@@ -71,19 +71,19 @@ The following example adds listeners:
 ```typescript
 client.userInfoManager.addEventHandler('profile-listener', {
   onOwnInfoUpdated: profile => {
-    console.log('当前登录用户属性更新:', profile.nickname, profile.avatarUrl);
+    console.log('Current logged-in user's attributes updated:', profile.nickname, profile.avatarUrl);
   },
 
   onUserInfoUpdated: users => {
     users.forEach(user => {
-      console.log('用户属性更新:', user.userId, user.nickname, user.avatarUrl);
+      console.log('User attributes updated:', user.userId, user.nickname, user.avatarUrl);
     });
   },
 });
 
 client.contactManager.addEventHandler('contact-profile-listener', {
   onContactInfoUpdated: event => {
-    console.log('好友的用户属性更新:', event.userInfo.userId, event.userInfo.nickname);
+    console.log('Contact's user attributes updated:', event.userInfo.userId, event.userInfo.nickname);
   },
 });
 ```
@@ -101,7 +101,7 @@ client.chatManager.addEventHandler('message-listener', {
   onMessage: message => {
     const sender = message.sender;
     console.log(
-      '发送方信息:',
+      'Sender information:',
       sender.userId,
       sender.nickname,
       sender.avatarUrl
@@ -123,7 +123,7 @@ const contacts = client.contactManager.getContacts();
 
 contacts.forEach(contact => {
   console.log(
-    '好友属性:',
+    'Contact attributes:',
     contact.userId,
     contact.userInfo.nickname,
     contact.userInfo.avatarUrl,

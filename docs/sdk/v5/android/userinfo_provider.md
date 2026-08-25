@@ -67,14 +67,14 @@ The SDK provides `EMUserInfoManagerListener` to monitor user attribute update ev
 EMUserInfoManagerListener userInfoListener = new EMUserInfoManagerListener() {
     @Override
     public void onSelfUserInfoUpdate(EMUserInfo userInfo) {
-        EMLog.d("UserInfo", "当前登录用户属性更新 - nickname:" + userInfo.getNickname()
+        EMLog.d("UserInfo", "Current user's attributes updated - nickname:" + userInfo.getNickname()
                 + ", avatarUrl:" + userInfo.getAvatarUrl());
     }
 
     @Override
     public void onUserInfoUpdate(List<EMUserInfo> userInfoList) {
         for (EMUserInfo userInfo : userInfoList) {
-            EMLog.d("UserInfo", "用户属性更新 - userId:" + userInfo.getUserId()
+            EMLog.d("UserInfo", "User attributes updated - userId:" + userInfo.getUserId()
                     + ", nickname:" + userInfo.getNickname()
                     + ", avatarUrl:" + userInfo.getAvatarUrl());
         }
@@ -109,7 +109,7 @@ public void onMessageReceived(List<EMMessage> messages) {
             String avatar = senderInfo.getAvatar();
             String remark = senderInfo.getRemark();
             String namecard = senderInfo.getNamecard();
-            EMLog.d("UserInfo", "发送方信息 - nickname:" + nickname
+            EMLog.d("UserInfo", "Sender information - nickname:" + nickname
                     + ", avatar:" + avatar
                     + ", remark:" + remark
                     + ", namecard:" + namecard);
@@ -136,7 +136,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
             public void onSuccess(Map<String, EMUserInfo> userInfoMap) {
                 for (Map.Entry<String, EMUserInfo> entry : userInfoMap.entrySet()) {
                     EMUserInfo userInfo = entry.getValue();
-                    EMLog.d("UserInfo", "用户属性 - userId:" + entry.getKey()
+                    EMLog.d("UserInfo", "User attributes - userId:" + entry.getKey()
                             + ", nickname:" + userInfo.getNickname()
                             + ", avatarUrl:" + userInfo.getAvatarUrl());
                 }
@@ -144,7 +144,7 @@ EMClient.getInstance().userInfoManager().getUserInfoWithUserIds(
 
             @Override
             public void onError(int code, String error) {
-                EMLog.e("UserInfo", "读取本地用户属性失败：" + code + ", " + error);
+                EMLog.e("UserInfo", "Failed to read local user attributes: " + code + ", " + error);
             }
         });
 ```

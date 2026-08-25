@@ -23,7 +23,7 @@ const message = client.chatManager.createTextMessage({
   conversationId: 'group1',
   // Conversation type: `groupChat` for a group chat and `chatRoom` for a chat room.
   conversationType: 'groupChat',
-  content: '这条消息只有指定的人能看到',
+  content: 'Only specified members can see this message',
   // Recipient list for the message. You can pass up to 20 recipient user IDs. If this field is omitted or a value other than an array, such as a string, is passed, the message is sent to all members of the chat group or chat room.
   receiverList: ['user1', 'user2', 'user3'],
 });

@@ -265,31 +265,31 @@ After a chat room member operation succeeds, the SDK triggers the corresponding 
 client.chatRoomManager.addEventHandler('chatroom-member-events', {
   // A member is appointed as an admin. The new admin receives this event.
   onAdminAdded: event => {
-    console.log('聊天室新增管理员:', event.chatRoomId, event.admin);
+    console.log('Chat room admin added:', event.chatRoomId, event.admin);
   },
   // A member's admin permissions are revoked. The removed admin receives this event.
   onAdminRemoved: event => {
-    console.log('聊天室移除管理员:', event.chatRoomId, event.admin);
+    console.log('Chat room admin removed:', event.chatRoomId, event.admin);
   },
   // A member is added to the mute list. The added member receives this event.
   onMuteListAdded: event => {
-    console.log('聊天室禁言列表新增成员:', event.chatRoomId, event.mutes, event.muteExpire);
+    console.log('Members added to the chat room mute list:', event.chatRoomId, event.mutes, event.muteExpire);
   },
   // A member is removed from the mute list. The unmuted member receives this event.
   onMuteListRemoved: event => {
-    console.log('聊天室禁言列表移除成员:', event.chatRoomId, event.mutes);
+    console.log('Members removed from the chat room mute list:', event.chatRoomId, event.mutes);
   },
   // A member is added to the allowlist. The added member receives this event.
   onAllowListAdded: event => {
-    console.log('聊天室白名单新增成员:', event.chatRoomId, event.allowlist);
+    console.log('Members added to the chat room allowlist:', event.chatRoomId, event.allowlist);
   },
   // A member is removed from the allowlist. The removed member receives this event.
   onAllowListRemoved: event => {
-    console.log('聊天室白名单移除成员:', event.chatRoomId, event.allowlist);
+    console.log('Members removed from the chat room allowlist:', event.chatRoomId, event.allowlist);
   },
   // The state for muting all members changes. All chat room members receive this event.
   onAllMemberMuteStateChanged: event => {
-    console.log('聊天室全员禁言状态变更:', event.chatRoomId, event.isMuted);
+    console.log('Chat room mute-all status changed:', event.chatRoomId, event.isMuted);
   },
 });
 ```

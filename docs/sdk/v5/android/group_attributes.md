@@ -332,7 +332,7 @@ EMClient.getInstance()
     
                             Toast.makeText(
                                     MyActivity.this,
-                                    "上传成功：" + fileName,
+                                    "Upload succeeded: " + fileName,
                                     Toast.LENGTH_SHORT
                             ).show();
                         });
@@ -343,7 +343,7 @@ EMClient.getInstance()
                         runOnUiThread(() -> {
                             Toast.makeText(
                                     MyActivity.this,
-                                    "上传失败：" + errorMsg,
+                                    "Upload failed: " + errorMsg,
                                     Toast.LENGTH_SHORT
                             ).show();
                         });

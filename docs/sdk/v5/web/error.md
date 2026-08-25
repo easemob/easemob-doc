@@ -16,9 +16,9 @@ try {
 
   await client.chatManager.sendMessage(message);
 } catch (error: any) {
-  console.log('错误码:', error.code);
-  console.log('错误信息:', error.message);
-  console.log('服务端错误码:', error.details?.serverCode);
+  console.log('Error code:', error.code);
+  console.log('Error message:', error.message);
+  console.log('Server-side error code:', error.details?.serverCode);
   console.log('canonicalCode:', error.details?.canonicalCode);
 }
 ```

@@ -32,7 +32,7 @@ const result = await client.chatThreadManager.createChatThread({
   // ID of the parent chat group to which the thread belongs.
   parentId: 'group1',
   // Thread name.
-  name: '讨论主题',
+  name: 'Discussion topic',
   // ID of the parent message used as the thread's root message.
   messageId: 'msg-id-123',
 });
@@ -123,7 +123,7 @@ await client.chatThreadManager.updateChatThreadName({
   // ID of the thread to change.
   chatThreadId: 'thread1',
   // New thread name.
-  name: '新主题名称',
+  name: 'New topic name',
 });
 ```
 
@@ -139,7 +139,7 @@ const detail = await client.chatThreadManager.getChatThreadInfo({
   chatThreadId: 'thread1',
 });
 
-console.log('话题详情:', detail);
+console.log('Thread details:', detail);
 ```
 
 ## Retrieve a message thread's member list
@@ -158,8 +158,8 @@ const result = await client.chatThreadManager.getChatThreadMemberList({
   cursor: '',
 });
 
-console.log('成员列表:', result.items);
-console.log('下一页游标:', result.cursor);
+console.log('Member list:', result.items);
+console.log('Next-page cursor:', result.cursor);
 ```
 
 ## Retrieve message thread lists
@@ -176,8 +176,8 @@ const joined = await client.chatThreadManager.getJoinedChatThreadList({
   cursor: '',
 });
 
-console.log('已加入的话题列表:', joined.items);
-console.log('下一页游标:', joined.cursor);
+console.log('Joined thread list:', joined.items);
+console.log('Next-page cursor:', joined.cursor);
 ```
 
 2. You can also call `getJoinedChatThreadList` to retrieve, from the server and with pagination, the list of message threads that the current user has joined in a specified chat group:
@@ -192,8 +192,8 @@ const joinedInGroup = await client.chatThreadManager.getJoinedChatThreadList({
   cursor: '',
 });
 
-console.log('指定群组内已加入的话题列表:', joinedInGroup.items);
-console.log('下一页游标:', joinedInGroup.cursor);
+console.log('Joined thread list in the specified group:', joinedInGroup.items);
+console.log('Next-page cursor:', joinedInGroup.cursor);
 ```
 
 3. You can also call `getChatThreadList` to retrieve the message thread list in a specified chat group from the server with pagination:
@@ -208,8 +208,8 @@ const result = await client.chatThreadManager.getChatThreadList({
   cursor: '',
 });
 
-console.log('群组内的话题列表:', result.items);
-console.log('下一页游标:', result.cursor);
+console.log('Thread list in the group:', result.items);
+console.log('Next-page cursor:', result.cursor);
 ```
 
 ## Retrieve the last messages in message threads in batches
@@ -224,7 +224,7 @@ const result = await client.chatThreadManager.getChatThreadLastMessageList({
   chatThreadIds: ['thread1', 'thread2'],
 });
 
-console.log('最后一条消息列表:', result.items);
+console.log('Last message list:', result.items);
 ```
 
 ## Monitor message thread events
@@ -246,23 +246,23 @@ Example code:
 // Monitor public message-thread events.
 client.chatThreadManager.addEventHandler('thread-events', {
   onChatThreadCreated: (event) => {
-    console.log('话题创建:', event.chatThreadId, event.chatThreadName);
+    console.log('Thread created:', event.chatThreadId, event.chatThreadName);
   },
   onChatThreadDestroyed: (event) => {
-    console.log('话题解散:', event.chatThreadId);
+    console.log('Thread destroyed:', event.chatThreadId);
   },
   onChatThreadUpdated: (event) => {
-    console.log('话题更新:', event.chatThreadId, event.messageCount);
+    console.log('Thread updated:', event.chatThreadId, event.messageCount);
   },
   onChatThreadUserRemoved: (event) => {
-    console.log('当前用户被移出话题:', event.chatThreadId, event.memberId);
+    console.log('Current user removed from the thread:', event.chatThreadId, event.memberId);
   },
 });
 
 // To monitor multi-device message-thread events, register the listener on ChatClient.
 client.addEventHandler('thread-multi-device-events', {
   onMultiDeviceThread: (event) => {
-    console.log('多设备话题事件:', event.operation, event.threadId, event.deviceId);
+    console.log('Multi-device thread event:', event.operation, event.threadId, event.deviceId);
   },
 });
 ```

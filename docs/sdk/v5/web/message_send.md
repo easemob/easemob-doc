@@ -71,7 +71,7 @@ const chooseMedia = (mediaType: MediaType): Promise<WechatMiniprogram.MediaFile>
       sourceType: ['album', 'camera'],
       success: result => {
         const file = result.tempFiles[0];
-        file ? resolve(file) : reject(new Error('未选择媒体文件'));
+        file ? resolve(file) : reject(new Error('No media file selected'));
       },
       fail: reject,
     });
@@ -137,7 +137,7 @@ const chooseVideo = (): Promise<UniApp.ChooseVideoSuccess> =>
 const imageResult = await chooseImage();
 const image = imageResult.tempFiles?.[0];
 const imagePath = image?.path ?? imageResult.tempFilePaths[0];
-if (!imagePath) throw new Error('未选择图片');
+if (!imagePath) throw new Error('No image selected');
 
 // The uni-app demo also uses uni.getImageInfo() to obtain the image dimensions and actual format.
 const imageInfo = await new Promise<{ width: number; height: number; type?: string }>(
@@ -191,7 +191,7 @@ import Taro from '@tarojs/taro';
 const imageResult = await Taro.chooseImage({ count: 1 });
 const image = imageResult.tempFiles[0];
 const imagePath = imageResult.tempFilePaths[0];
-if (!image || !imagePath) throw new Error('未选择图片');
+if (!image || !imagePath) throw new Error('No image selected');
 
 // The Promise returned by getImageInfo() in @tarojs/taro 4.2.0 contains the original image dimensions and format.
 const imageInfo = await Taro.getImageInfo({ src: imagePath });
@@ -236,7 +236,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 const chooseAsset = async (mediaType: 'photo' | 'video') => {
   const result = await launchImageLibrary({ mediaType, selectionLimit: 1 });
   const asset = result.assets?.[0];
-  if (!asset?.uri) throw new Error('未选择媒体文件');
+  if (!asset?.uri) throw new Error('No media file selected');
   return asset;
 };
 
@@ -364,7 +364,7 @@ For a text message with business attributes, carry the additional fields in `ext
 const message = client.chatManager.createTextMessage({
   conversationId: "group_001",
   conversationType: "groupChat",
-  content: "大家好",
+  content: "Hello everyone",
   // Extension
   ext: { bizType: "announcement" },
   // Whether the group message requires read receipts
@@ -570,7 +570,7 @@ recorder.onStart(() => {
 });
 
 recorder.onStop(async result => {
-  if (!result.tempFilePath) throw new Error("录音结束但未返回 tempFilePath");
+  if (!result.tempFilePath) throw new Error("Recording ended without returning tempFilePath");
 
   const durationMs =
     typeof result.duration === "number" && result.duration > 0
@@ -594,7 +594,7 @@ recorder.onStop(async result => {
   await client.chatManager.sendMessage(message);
 });
 
-recorder.onError(error => console.error("录音失败", error));
+recorder.onError(error => console.error("Recording failed", error));
 recorder.start({ format: "mp3" });
 // Call recorder.stop() when your app needs to stop recording.
 ```
@@ -610,7 +610,7 @@ recorder.onStart(() => {
 });
 
 recorder.onStop(async result => {
-  if (!result.tempFilePath) throw new Error("录音结束但未返回 tempFilePath");
+  if (!result.tempFilePath) throw new Error("Recording ended without returning tempFilePath");
 
   const durationMs =
     typeof result.duration === "number" && result.duration > 0
@@ -644,13 +644,13 @@ recorder.start({ format: "mp3" });
 import Taro from "@tarojs/taro";
 
 if (typeof Taro.getRecorderManager !== "function") {
-  throw new Error("当前 Taro 目标不支持录音管理器");
+  throw new Error("The current Taro target does not support the recording manager");
 }
 const recorder = Taro.getRecorderManager();
 
 recorder.onStop(async result => {
   const durationSeconds = result.duration / 1000;
-  if (durationSeconds <= 0) throw new Error("录音时长必须大于 0 秒");
+  if (durationSeconds <= 0) throw new Error("The recording duration must be greater than 0 seconds");
 
   const message = client.chatManager.createVoiceMessage({
     conversationId: "user2",
@@ -993,9 +993,9 @@ const message = client.chatManager.createLocationMessage({
   // Location longitude.
   longitude: 116.4074,
   // Optional: Location address description.
-  address: '北京市天安门广场',
+  address: 'Tiananmen Square, Beijing',
   // Optional: Building name.
-  buildingName: '天安门',
+  buildingName: 'Tiananmen',
 });
 
 await client.chatManager.sendMessage(message);
@@ -1146,11 +1146,11 @@ const message = client.chatManager.createCombineMessage({
   // Conversation type: `singleChat` for a one-to-one chat, `groupChat` for a group chat, or `chatRoom` for a chat room.
   conversationType: "singleChat",
   // Combined message title.
-  title: "聊天记录",
+  title: "Chat history",
   // Combined message summary, generally used for preview display in the message list.
   summary: "user1: Hello\nuser2: Hi",
-  // Optional: Compatibility text. If omitted, the SDK uses `[版本过低]` by default.
-  compatibleText: "[版本过低]",
+  // Optional: Compatibility text. If omitted, the SDK uses `[Version too old]` by default.
+  compatibleText: "[Version too old]",
   // List of original messages to combine.
   messageList: [msg1, msg2, msg3],
 });
@@ -1290,10 +1290,10 @@ const message = client.chatManager.createTextMessage({
 
 await client.chatManager.sendMessage(message, {
   onSuccess: sentMessage => {
-    console.log('发送成功:', sentMessage.msgServerId);
+    console.log('Sent successfully:', sentMessage.msgServerId);
   },
   onFailed: (failedMessage, error) => {
-    console.log('发送失败:', failedMessage, error);
+    console.log('Failed to send:', failedMessage, error);
   },
 });
 ```
@@ -1338,7 +1338,7 @@ const result = await client.chatRoomManager.setAttributes({
   isForced: false,
 });
 
-console.log('设置麦位属性结果:', result);
+console.log('Result of setting seat attributes:', result);
 ```
 
 After custom chat room attributes are set or updated, other members in the chat room can monitor changes through `onAttributesUpdate` and update the local seat state:
@@ -1346,19 +1346,19 @@ After custom chat room attributes are set or updated, other members in the chat 
 ```typescript
 client.chatRoomManager.addEventHandler('room-attributes-listener', {
   onAttributesUpdate: event => {
-    console.log('聊天室 ID:', event.chatRoomId);
-    console.log('本次更新的属性:', event.attributes);
-    console.log('操作者:', event.operatorId);
+    console.log('Chat room ID:', event.chatRoomId);
+    console.log('Attributes updated this time:', event.attributes);
+    console.log('Operator:', event.operatorId);
 
     const seat = event.attributes.seat_1
       ? JSON.parse(event.attributes.seat_1)
       : undefined;
 
     // Refresh the seat UI based on seat.
-    console.log('麦位信息:', seat);
+    console.log('Seat information:', seat);
   },
   onAttributesRemoved: event => {
-    console.log('被删除的属性:', event.keys);
+    console.log('Deleted attributes:', event.keys);
   },
 });
 ```
@@ -1379,7 +1379,7 @@ In `onFileUploadProgress`, `loaded` is the number of bytes currently uploaded. O
 const file = document.querySelector<HTMLInputElement>('#file')?.files?.[0];
 
 if (!file) {
-  throw new Error('请选择要发送的文件');
+  throw new Error('Select a file to send');
 }
 
 const message = client.chatManager.createImageMessage({
@@ -1390,17 +1390,17 @@ const message = client.chatManager.createImageMessage({
 
 await client.chatManager.sendMessage(message, {
   onFileUploadProgress: progress => {
-    console.log('已上传字节数:', progress.loaded);
+    console.log('Uploaded bytes:', progress.loaded);
 
     // If the current runtime can obtain the total file size, calculate the percentage in your app.
     const percent = Math.round((progress.loaded / file.size) * 100);
-    console.log('上传进度:', `${percent}%`);
+    console.log('Upload progress:', `${percent}%`);
   },
   onSuccess: sentMessage => {
-    console.log('发送成功，消息 ID:', sentMessage.msgServerId);
+    console.log('Message sent successfully. Message ID:', sentMessage.msgServerId);
   },
   onFailed: (failedMessage, error) => {
-    console.log('发送失败:', failedMessage, error);
+    console.log('Failed to send:', failedMessage, error);
   },
 });
 ```

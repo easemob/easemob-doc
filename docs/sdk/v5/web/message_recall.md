@@ -45,7 +45,7 @@ const result = await client.chatManager.recallMessage({
   conversationId: 'user2',
   conversationType: 'singleChat',
   // Optional: Extension information included with the recall, such as "recalled and edited a message"
-  ext: { reason: '发错了' },
+  ext: { reason: 'Sent by mistake' },
 });
 ```
 
@@ -56,9 +56,9 @@ Use `onMessageRecalled` to monitor message-recall events. After a message is rec
 ```typescript
 client.addEventHandler('recall', {
   onMessageRecalled: (event) => {
-    console.log('消息被撤回:', event.messageId);
-    console.log('会话 ID:', event.conversationId);
-    console.log('撤回时间:', event.timestamp);
+    console.log('Message recalled:', event.messageId);
+    console.log('Conversation ID:', event.conversationId);
+    console.log('Recall time:', event.timestamp);
     // Replace the message identified by messageId in the UI with placeholder text such as "Message recalled."
   },
 });

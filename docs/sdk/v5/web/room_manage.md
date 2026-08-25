@@ -143,11 +143,11 @@ let memberCount = 0;
 client.chatRoomManager.addEventHandler('chatroom-member-count', {
   onMembersJoined: event => {
     memberCount += event.members.length;
-    console.log('成员加入:', event.members, '当前本地成员数:', memberCount);
+    console.log('Members joined:', event.members, 'Current number of local members:', memberCount);
   },
   onMembersExited: event => {
     memberCount = Math.max(0, memberCount - event.members.length);
-    console.log('成员退出:', event.members, '当前本地成员数:', memberCount);
+    console.log('Members left:', event.members, 'Current number of local members:', memberCount);
   },
 });
 ```
@@ -211,82 +211,82 @@ You can call the `addEventHandler` method to register a chat room event listener
 client.chatRoomManager.addEventHandler('chatroom-events', {
   // The chat room is destroyed. All chat room members receive this event. 
   onChatRoomDestroyed: event => { 
-    console.log('聊天室被解散:', event.chatRoomId, event.chatRoomName);
+    console.log('Chat room destroyed:', event.chatRoomId, event.chatRoomName);
   },
 
   // A user joins the chat room. All chat room members except the new member receive this event.
   onMembersJoined: event => {  
-    console.log('成员加入聊天室:', event.chatRoomId, event.members, event.ext);
+    console.log('Members joined the chat room:', event.chatRoomId, event.members, event.ext);
   },
 
   // A member leaves voluntarily or is removed. All chat room members except the member who leaves receive this event.
   onMembersExited: event => {
-    console.log('成员退出聊天室:', event.chatRoomId, event.members);
+    console.log('Members left the chat room:', event.chatRoomId, event.members);
   },
 
   // A member is removed from the chat room. The removed member receives this event.
   onRemovedFromChatRoom: event => {
-    console.log('当前用户被移出聊天室:', event.chatRoomId, event.reason, event.participant);
+    console.log('Current user removed from the chat room:', event.chatRoomId, event.reason, event.participant);
   },
 
   // A member is added to the mute list. The added member receives this event.
   onMuteListAdded: event => {
-    console.log('聊天室禁言列表新增成员:', event.chatRoomId, event.mutes, event.muteExpire);
+    console.log('Members added to the chat room mute list:', event.chatRoomId, event.mutes, event.muteExpire);
   },
 
   // A member is removed from the mute list. The unmuted member receives this event.
   onMuteListRemoved: event => {
-    console.log('聊天室禁言列表移除成员:', event.chatRoomId, event.mutes);
+    console.log('Members removed from the chat room mute list:', event.chatRoomId, event.mutes);
   },
 
   // A member is added to the allowlist. The added member receives this event.
   onAllowListAdded: event => {
-    console.log('聊天室白名单新增成员:', event.chatRoomId, event.allowlist);
+    console.log('Members added to the chat room allowlist:', event.chatRoomId, event.allowlist);
   },
 
   // A member is removed from the allowlist. The removed member receives this event.
   onAllowListRemoved: event => {
-    console.log('聊天室白名单移除成员:', event.chatRoomId, event.allowlist);
+    console.log('Members removed from the chat room allowlist:', event.chatRoomId, event.allowlist);
   },
 
   // The state for muting all members changes. All chat room members receive this event.
   onAllMemberMuteStateChanged: event => {
-    console.log('聊天室全员禁言状态变更:', event.chatRoomId, event.isMuted);
+    console.log('Chat room mute-all status changed:', event.chatRoomId, event.isMuted);
   },
 
   // A member is appointed as an admin. The new admin receives this event.
   onAdminAdded: event => {
-    console.log('聊天室新增管理员:', event.chatRoomId, event.admin);
+    console.log('Chat room admin added:', event.chatRoomId, event.admin);
   },
 
   // A member's admin permissions are revoked. The removed admin receives this event.
   onAdminRemoved: event => {
-    console.log('聊天室移除管理员:', event.chatRoomId, event.admin);
+    console.log('Chat room admin removed:', event.chatRoomId, event.admin);
   },
 
   // The chat room owner changes. All chat room members receive this event.
   onOwnerChanged: event => {
-    console.log('聊天室所有者变更:', event.chatRoomId, event.oldOwner, event.newOwner);
+    console.log('Chat room owner changed:', event.chatRoomId, event.oldOwner, event.newOwner);
   },
 
   // The chat room announcement changes. All chat room members receive this event.
   onAnnouncementChanged: event => {
-    console.log('聊天室公告变更:', event.chatRoomId, event.announcement);
+    console.log('Chat room announcement changed:', event.chatRoomId, event.announcement);
   },
 
   // The chat room details change. All chat room members receive this event.
   onChatRoomInfoChanged: event => {
-    console.log('聊天室信息变更:', event.chatRoomId, event.chatRoomInfo);
+    console.log('Chat room information changed:', event.chatRoomId, event.chatRoomInfo);
   },
 
   // Chat room custom attributes are updated. All chat room members receive this event.
   onAttributesUpdate: event => {
-    console.log('聊天室属性更新:', event.chatRoomId, event.attributes, event.from);
+    console.log('Chat room attributes updated:', event.chatRoomId, event.attributes, event.from);
   },
 
   // Chat room custom attributes are removed. All chat room members receive this event.
   onAttributesRemoved: event => {
-    console.log('聊天室属性删除:', event.chatRoomId, event.keyList, event.from);
+    console.log('Chat room attributes deleted:', event.chatRoomId, event.keyList, event.from);
   },
 });
 ```

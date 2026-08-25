@@ -142,7 +142,7 @@ EMClient.getInstance()
                             EMUserInfo userInfo = entry.getValue();
                             EMLog.d(
                                     "UserInfo",
-                                    "用户属性 - userId:"
+                                    "User attributes - userId:"
                                             + entry.getKey()
                                             + ", nickname:"
                                             + userInfo.getNickname()
@@ -157,7 +157,7 @@ EMClient.getInstance()
                             String errorMessage) {
                         EMLog.e(
                                 "UserInfo",
-                                "读取本地用户属性失败："
+                                "Failed to read local user attributes: "
                                         + errorCode
                                         + ", "
                                         + errorMessage);

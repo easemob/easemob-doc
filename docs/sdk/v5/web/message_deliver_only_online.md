@@ -29,7 +29,7 @@ The following example sends a text message:
 const message = client.chatManager.createTextMessage({
   conversationId: 'user2',
   conversationType: 'singleChat',
-  content: '这条消息只有在线才能收到',
+  content: 'This message can be received only while online',
   deliverOnlineOnly: true,
 });
 

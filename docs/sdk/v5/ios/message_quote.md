@@ -70,10 +70,10 @@ To support jumping to the original message, locate it in the local message list 
 The following example replies to a text message with a quote:
 
 ```objectivec
-EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"好的，收到！"];
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"Okay, got it!"];
 NSDictionary *quote = @{
     @"msgID": @"original-message-id",
-    @"msgPreview": @"原消息内容预览",
+    @"msgPreview": @"Preview of the original message content",
     @"msgSender": @"user1",
     @"msgType": @"text"
 };

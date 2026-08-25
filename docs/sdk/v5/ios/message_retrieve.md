@@ -148,7 +148,7 @@ The parameters are described below:
 | `scope` | `EMMessageSearchScope` | Search the content, extension fields, or both. |
 
 ```objectivec
-[[EMClient sharedClient].chatManager loadConversationMessagesWithKeyword:@"时间"
+[[EMClient sharedClient].chatManager loadConversationMessagesWithKeyword:@"time"
                                                                  timestamp:-1
                                                                   fromUser:nil
                                                            searchDirection:EMMessageSearchDirectionUp

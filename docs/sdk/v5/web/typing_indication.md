@@ -62,12 +62,12 @@ client.chatManager.addEventHandler('typing', {
     // Determine whether this is a "typing" indicator based on the agreed-upon action.
     if (message.body.action === 'TypingBegin') {
       // `message.from` identifies the user who sent the typing status.
-      console.log(message.from, '正在输入...');
+      console.log(message.from, 'is typing...');
       // Display a "typing" prompt here.
 
       // Set a timeout, for example, to hide the typing indicator automatically after 5 seconds.
       setTimeout(() => {
-        console.log('输入指示超时，隐藏提示');
+        console.log('Typing indicator timed out; hide the indicator');
       }, 5000);
     }
   },

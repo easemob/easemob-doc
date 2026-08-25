@@ -284,7 +284,7 @@ try {
         long addTimestamp = contact.getAddTimestamp();
     }
 } catch (HyphenateException e) {
-    Log.e("Contact", "获取本地好友信息失败", e);
+    Log.e("Contact", "Failed to retrieve local contact information", e);
 }
 ```
 
@@ -303,7 +303,7 @@ try {
             .contactManager()
             .getContactsFromLocal();
 } catch (HyphenateException e) {
-    Log.e("Contact", "获取本地好友列表失败", e);
+    Log.e("Contact", "Failed to retrieve the local contact list", e);
 }
 ```
 
@@ -349,7 +349,7 @@ EMClient.getInstance()
                             String errorMessage) {
                         Log.e(
                                 "Contact",
-                                "加入黑名单失败：" + errorCode
+                                "Failed to add the user to the blocklist: " + errorCode
                                         + ", " + errorMessage);
                     }
                 });
@@ -378,7 +378,7 @@ EMClient.getInstance()
                             String errorMessage) {
                         Log.e(
                                 "Contact",
-                                "移出黑名单失败：" + errorCode
+                                "Failed to remove the user from the blocklist: " + errorCode
                                         + ", " + errorMessage);
                     }
                 });
@@ -407,7 +407,7 @@ EMClient.getInstance()
                             String errorMessage) {
                         Log.e(
                                 "Contact",
-                                "获取服务端黑名单失败：" + errorCode
+                                "Failed to retrieve the server-side blocklist: " + errorCode
                                         + ", " + errorMessage);
                     }
                 });

@@ -107,8 +107,8 @@ console.log(result.items);
 
 // For example, retrieve the attributes of a member.
 const user1Attrs = result.items['user-1'];
-console.log('user-1 的部门:', user1Attrs?.department);
-console.log('user-1 的角色标签:', user1Attrs?.roleTag);
+console.log('user-1's department:', user1Attrs?.department);
+console.log('user-1's role tag:', user1Attrs?.roleTag);
 ```
 
 The result is a collection of member attributes indexed by user ID:
@@ -303,9 +303,9 @@ Group members can call `checkIfInMuteList` to check whether the current logged-i
 ```typescript
 const muted = await client.groupManager.getGroup('groupId').checkIfInMuteList();
 if (muted) {
-  console.log('当前用户已被该群禁言');
+  console.log('The current user is muted in this group');
 } else {
-  console.log('当前用户未被该群禁言');
+  console.log('The current user is not muted in this group');
 }
 ```
 

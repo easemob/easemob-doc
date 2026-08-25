@@ -115,9 +115,9 @@ const markedConversations = client.chatManager.getConversationList({
 });
 
 markedConversations.forEach(conversation => {
-  console.log('会话 ID:', conversation.conversationId);
-  console.log('会话类型:', conversation.conversationType);
-  console.log('会话标记:', conversation.marks);
+  console.log('Conversation ID:', conversation.conversationId);
+  console.log('Conversation type:', conversation.conversationType);
+  console.log('Conversation tags:', conversation.marks);
 });
 ```
 
@@ -144,9 +144,9 @@ After a conversation tag is added or removed, if the local conversation list cac
 ```typescript
 client.chatManager.addEventHandler('conversation-mark-listener', {
   onConversationListUpdate: payload => {
-    console.log('会话列表更新原因:', payload.reason);
-    console.log('当前完整会话列表:', payload.items);
-    console.log('本次变化补丁:', payload.patch);
+    console.log('Reason for conversation list update:', payload.reason);
+    console.log('Current complete conversation list:', payload.items);
+    console.log('Changes in this update:', payload.patch);
   },
 });
 ```

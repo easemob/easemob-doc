@@ -51,7 +51,7 @@ EMClient.shared().groupManager?.add(self, delegateQueue: nil)
 ```swift
 extension YourViewController: EMGroupManagerDelegate {
     func onUserGroupNamecardChanged(_ groupId: String, userId: String, namecard: String?) {
-        print("群成员名片更新 - groupId:\(groupId), userId:\(userId), namecard:\(namecard ?? \"\")")
+        print("Group member card updated - groupId:\(groupId), userId:\(userId), namecard:\(namecard ?? \"\")")
     }
 }
 ```
@@ -63,9 +63,9 @@ Call `updateGroupNamecard` to set or update the current logged-in user's name ca
 ```swift
 EMClient.shared().groupManager?.updateGroupNamecard("groupId", namecard: "new_namecard") { error in
     if let error = error {
-        print("设置群成员名片失败：\(error.errorDescription)")
+        print("Failed to set group member card: \(error.errorDescription)")
     } else {
-        print("设置群成员名片成功")
+        print("Group member card set successfully")
     }
 }
 ```
@@ -77,7 +77,7 @@ Call `fetchGroupMemberInfoListFromServer` to retrieve chat group member details 
 ```swift
 EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(withGroupId: "groupId", cursor: "", limit: 20) { result, error in
     if let error = error {
-        print("获取群成员信息失败：\(error.errorDescription)")
+        print("Failed to retrieve group member information: \(error.errorDescription)")
         return
     }
     if let list = result?.list {
@@ -98,7 +98,7 @@ Call `getGroupNamecard` to read a specified member's name card in a specified ch
 
 ```swift
 let namecard = EMClient.shared().groupManager?.getGroupNamecard(withGroupId: "groupId", userId: "userId")
-print("群成员名片：\(namecard ?? \"\")")
+print("Group member card: \(namecard ?? \"\")")
 ```
 
 ## Automatically synchronize chat group member name cards through messages

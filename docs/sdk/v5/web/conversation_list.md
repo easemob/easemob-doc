@@ -122,8 +122,8 @@ conversations.forEach(conversation => {
   const conversationName = conversation.conversationName;
   const conversationAvatar = conversation.conversationAvatar;
 
-  console.log('会话名称:', conversationName);
-  console.log('会话头像:', conversationAvatar);
+  console.log('Conversation name:', conversationName);
+  console.log('Conversation avatar:', conversationAvatar);
 });
 ```
 
@@ -156,12 +156,12 @@ To monitor synchronization after login, use `client.addEventHandler` for `onSync
 client.addEventHandler('conversation-sync-listener', {
   onSyncDataStart: payload => {
     if (payload.dataType === 'conversation') {
-      console.log('会话列表同步开始');
+      console.log('Conversation list synchronization started');
     }
   },
   onSyncDataFinished: payload => {
     if (payload.dataType === 'conversation') {
-      console.log('会话列表同步完成:', payload.status, payload.error);
+      console.log('Conversation list synchronization completed:', payload.status, payload.error);
     }
   },
 });
@@ -184,9 +184,9 @@ When the list changes, the SDK triggers `onConversationListUpdate`. Synchronizat
 ```typescript
 client.addEventHandler('conversation-listener', {
   onConversationListUpdate: payload => {
-    console.log('会话列表更新原因:', payload.reason);
-    console.log('当前完整会话列表:', payload.items);
-    console.log('本次变化补丁:', payload.patch);
+    console.log('Reason for conversation list update:', payload.reason);
+    console.log('Current complete conversation list:', payload.items);
+    console.log('Changes in this update:', payload.patch);
   },
 });
 ```

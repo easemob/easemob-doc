@@ -60,7 +60,7 @@ Example code:
 const message = client.chatManager.createTextMessage({
   conversationId: 'groupId',
   conversationType: 'groupChat',
-  content: '@user1 @user2 请查看这条消息',
+  content: '@user1 @user2 Please check this message',
   ext: {
     em_at_list: ['user1', 'user2'],
   },
@@ -77,7 +77,7 @@ Example code:
 const message = client.chatManager.createTextMessage({
   conversationId: 'groupId',
   conversationType: 'groupChat',
-  content: '@所有人 请查看这条消息',
+  content: '@All Please check this message',
   ext: {
     em_at_list: 'all',
   },
@@ -112,12 +112,12 @@ client.addEventHandler('group-at-message', {
     const currentUserId = client.user;
 
     if (atList === 'all') {
-      console.log('收到 @ 全体成员的群消息：', message);
+      console.log('Received a group message mentioning all members：', message);
       return;
     }
 
     if (Array.isArray(atList) && atList.includes(currentUserId)) {
-      console.log('收到 @ 当前用户的群消息：', message);
+      console.log('Received a group message mentioning the current user：', message);
     }
   },
 });

@@ -26,7 +26,7 @@ const CHAT_HANDLER_ID = 'chat-message-listener';
 client.chatManager.addEventHandler(CHAT_HANDLER_ID, {
   // Receive messages of various types.
   onMessage: message => {
-    console.log('收到消息:', message.msgServerId, message.type);
+    console.log('Message received:', message.msgServerId, message.type);
   },
 });
 ```
@@ -65,8 +65,8 @@ Example code:
 client.chatManager.addEventHandler('message-listener', {
   onMessage: message => {
     if (message.type === 'text') {
-      console.log('文本内容:', message.body.content);
-      console.log('扩展字段:', message.ext);
+      console.log('Text content:', message.body.content);
+      console.log('Extension fields:', message.ext);
     }
   },
 });
@@ -107,15 +107,15 @@ client.chatManager.addEventHandler('image-message-listener', {
     }
 
     // Thumbnail URL, suitable for display in a conversation list or chat list.
-    console.log('缩略图地址:', message.body.thumbnailUrl);
+    console.log('Thumbnail URL:', message.body.thumbnailUrl);
     // Large image URL, suitable for display on a chat details page.
-    console.log('大图地址:', message.body.bigImageUrl);
+    console.log('Large image URL:', message.body.bigImageUrl);
     // Original image URL, suitable for viewing or saving the original image.
-    console.log('原图地址:', message.body.originalImageUrl);
+    console.log('Original image URL:', message.body.originalImageUrl);
     // Image width and height.
-    console.log('图片尺寸:', message.body.width, message.body.height);
+    console.log('Image dimensions:', message.body.width, message.body.height);
     // Whether this is a GIF image.
-    console.log('是否为 GIF:', message.body.isGif);
+    console.log('Is GIF:', message.body.isGif);
   },
 });
 ```
@@ -145,16 +145,16 @@ client.chatManager.addEventHandler('image-download-listener', {
     // Read the original image URL.
     const originalImageUrl = message.body.originalImageUrl;
 
-    console.log('缩略图地址:', thumbnailUrl);
-    console.log('大图地址:', bigImageUrl);
-    console.log('原图地址:', originalImageUrl);
+    console.log('Thumbnail URL:', thumbnailUrl);
+    console.log('Large image URL:', bigImageUrl);
+    console.log('Original image URL:', originalImageUrl);
 
     // Download the original image attachment.
     const attachment = await client.chatManager.downloadAttachment({ message });
 
-    console.log('下载文件名:', attachment.filename);
-    console.log('下载地址:', attachment.downloadUrl);
-    console.log('原图二进制数据:', attachment.data);
+    console.log('Downloaded filename:', attachment.filename);
+    console.log('Download URL:', attachment.downloadUrl);
+    console.log('Original image binary data:', attachment.data);
   },
 });
 ```
@@ -201,8 +201,8 @@ client.chatManager.addEventHandler('gif-message-listener', {
     }
 
     // Read the GIF image resource URLs.
-    console.log('GIF 缩略图:', message.body.thumbnailUrl);
-    console.log('GIF 原图:', message.body.originalImageUrl);
+    console.log('GIF thumbnail:', message.body.thumbnailUrl);
+    console.log('Original GIF:', message.body.originalImageUrl);
   },
 });
 ```
@@ -237,15 +237,15 @@ client.chatManager.addEventHandler('voice-message-listener', {
     }
 
     // Read the voice URL.
-    console.log('语音地址:', message.body.url);
+    console.log('Voice message URL:', message.body.url);
     // Read the voice duration.
-    console.log('语音时长:', message.body.duration);
+    console.log('Voice message duration:', message.body.duration);
     // Read the voice filename.
-    console.log('文件名:', message.body.filename);
+    console.log('Filename:', message.body.filename);
 
     // Download the voice attachment.
     const attachment = await client.chatManager.downloadAttachment({ message });
-    console.log('下载地址:', attachment.downloadUrl);
+    console.log('Download URL:', attachment.downloadUrl);
   },
 });
 ```
@@ -285,17 +285,17 @@ client.chatManager.addEventHandler('video-message-listener', {
     }
 
     // Read the video URL.
-    console.log('视频地址:', message.body.url);
+    console.log('Video URL:', message.body.url);
     // Read the video thumbnail URL.
-    console.log('缩略图地址:', message.body.thumbnailUrl);
+    console.log('Thumbnail URL:', message.body.thumbnailUrl);
     // Read the video duration.
-    console.log('视频时长:', message.body.duration);
+    console.log('Video duration:', message.body.duration);
     // Read the video dimensions.
-    console.log('视频尺寸:', message.body.width, message.body.height);
+    console.log('Video dimensions:', message.body.width, message.body.height);
 
     // Download the video attachment.
     const attachment = await client.chatManager.downloadAttachment({ message });
-    console.log('下载地址:', attachment.downloadUrl);
+    console.log('Download URL:', attachment.downloadUrl);
   },
 });
 ```
@@ -337,17 +337,17 @@ client.chatManager.addEventHandler('file-message-listener', {
     }
 
     // Read the file URL.
-    console.log('文件地址:', message.body.url);
+    console.log('File URL:', message.body.url);
     // Read the filename.
-    console.log('文件名:', message.body.filename);
+    console.log('Filename:', message.body.filename);
     // Read the file type.
-    console.log('文件类型:', message.body.filetype);
+    console.log('File type:', message.body.filetype);
     // Read the file size.
-    console.log('文件大小:', message.body.fileSize ?? message.body.fileLength);
+    console.log('File size:', message.body.fileSize ?? message.body.fileLength);
 
     // Download the file attachment.
     const attachment = await client.chatManager.downloadAttachment({ message });
-    console.log('下载地址:', attachment.downloadUrl);
+    console.log('Download URL:', attachment.downloadUrl);
   },
 });
 ```
@@ -386,12 +386,12 @@ client.chatManager.addEventHandler('location-message-listener', {
     }
 
     // Read the latitude and longitude.
-    console.log('纬度:', message.body.latitude);
-    console.log('经度:', message.body.longitude);
+    console.log('Latitude:', message.body.latitude);
+    console.log('Longitude:', message.body.longitude);
     // Read the address description.
-    console.log('地址描述:', message.body.address);
+    console.log('Address description:', message.body.address);
     // Read the building name.
-    console.log('建筑名称:', message.body.buildingName);
+    console.log('Building name:', message.body.buildingName);
   },
 });
 ```
@@ -430,9 +430,9 @@ client.chatManager.addEventHandler('cmd-message-listener', {
     }
 
     // Read the command action.
-    console.log('命令动作:', message.body.action);
+    console.log('Command action:', message.body.action);
     // Read the command parameters.
-    console.log('命令参数:', message.body.params);
+    console.log('Command parameters:', message.body.params);
   },
 });
 ```
@@ -467,9 +467,9 @@ client.chatManager.addEventHandler('custom-message-listener', {
     }
 
     // Read the custom event name.
-    console.log('事件名:', message.body.event);
+    console.log('Event name:', message.body.event);
     // Read the custom parameters.
-    console.log('业务参数:', message.body.params);
+    console.log('Business parameters:', message.body.params);
   },
 });
 ```
@@ -507,18 +507,18 @@ client.chatManager.addEventHandler('combine-message-listener', {
     }
 
     // Read the combined message title.
-    console.log('标题:', message.body.title);
+    console.log('Title:', message.body.title);
     // Read the combined message summary.
-    console.log('摘要:', message.body.summary);
+    console.log('Summary:', message.body.summary);
     // Read the compatibility text.
-    console.log('兼容文案:', message.body.compatibleText);
+    console.log('Compatibility text:', message.body.compatibleText);
 
     // Download and parse the original child message list.
     const subMessages = await client.chatManager.downloadAndParseCombineMessage({
       message,
     });
 
-    console.log('子消息列表:', subMessages);
+    console.log('Submessage list:', subMessages);
   },
 });
 ```
@@ -565,11 +565,11 @@ To monitor offline message synchronization events:
 client.addEventHandler('offline-sync', {
   // Triggered when offline message synchronization starts.
   onOfflineMessageSyncStart: () => {
-    console.log('开始同步离线消息');
+    console.log('Offline message synchronization started');
   },
   // Triggered when offline message synchronization completes.
   onOfflineMessageSyncFinish: () => {
-    console.log('离线消息同步完成');
+    console.log('Offline message synchronization completed');
   },
 });
 ```
@@ -582,11 +582,11 @@ client.chatManager.addEventHandler('online-flag-listener', {
   onMessage: message => {
     // Check whether the current message was obtained through offline synchronization.
     if (message.isOnline === false) {
-      console.log('收到离线消息:', message.msgServerId);
+      console.log('Offline message received:', message.msgServerId);
       return;
     }
 
-    console.log('收到在线消息:', message.msgServerId);
+    console.log('Online message received:', message.msgServerId);
   },
 });
 ```
@@ -608,7 +608,7 @@ client.chatManager.addEventHandler('chatroom-broadcast-listener', {
   onMessage: message => {
     // Check whether this is a chat room broadcast message.
     if (message.conversationType === 'chatRoom' && message.isBroadcast) {
-      console.log('收到聊天室广播消息:', message.msgServerId);
+      console.log('Chat room broadcast message received:', message.msgServerId);
     }
   },
 });

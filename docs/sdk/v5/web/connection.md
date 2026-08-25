@@ -37,10 +37,10 @@ const client = ChatClient.init({
 
 client.addEventHandler('connection-listener', {
   onConnected: event => {
-    console.log('连接成功:', event);
+    console.log('Connected:', event);
   },
   onDisconnected: event => {
-    console.log('连接断开:', event.reason, event.errorCode, event.errorMessage);
+    console.log('Disconnected:', event.reason, event.errorCode, event.errorMessage);
   },
 });
 
@@ -60,7 +60,7 @@ Call `getConnectionState` to retrieve the current connection state:
 
 ```typescript
 const state = client.getConnectionState();
-console.log('当前连接状态:', state);
+console.log('Current connection state:', state);
 ```
 
 The connection state can be any of the following values:
@@ -130,29 +130,29 @@ Common values of the connection-state change reason `reason` are as follows:
 ```typescript
 client.addEventHandler('connection-listener', {
   onConnecting: event => {
-    console.log('正在连接:', event.reason, event.attempt, event.maxAttempts);
+    console.log('Connecting:', event.reason, event.attempt, event.maxAttempts);
   },
   onConnected: event => {
-    console.log('连接成功:', event.reason);
+    console.log('Connected:', event.reason);
   },
   onDisconnected: event => {
-    console.log('连接断开:', event.reason, event.errorCode, event.errorMessage);
+    console.log('Disconnected:', event.reason, event.errorCode, event.errorMessage);
   },
   onReconnectFailed: event => {
-    console.log('自动重连失败:', event.reason, event.attempt, event.maxAttempts);
+    console.log('Automatic reconnection failed:', event.reason, event.attempt, event.maxAttempts);
   },
   onTokenWillExpire: async () => {
     const newToken = await fetchNewTokenFromServer();
     await client.renewToken(newToken);
   },
   onTokenExpired: () => {
-    console.log('Token 已过期，需要重新获取 Token 后登录');
+    console.log('The token has expired. Retrieve a new token and log in again');
   },
   onOfflineMessageSyncStart: () => {
-    console.log('开始同步离线消息');
+    console.log('Offline message synchronization started');
   },
   onOfflineMessageSyncFinish: () => {
-    console.log('离线消息同步完成');
+    console.log('Offline message synchronization completed');
   },
 });
 ```
@@ -203,10 +203,10 @@ After a successful login or connection recovery, if the server has offline messa
 ```typescript
 client.addEventHandler('offline-message-sync-listener', {
   onOfflineMessageSyncStart: () => {
-    console.log('开始同步离线消息');
+    console.log('Offline message synchronization started');
   },
   onOfflineMessageSyncFinish: () => {
-    console.log('离线消息同步完成');
+    console.log('Offline message synchronization completed');
   },
 });
 ```

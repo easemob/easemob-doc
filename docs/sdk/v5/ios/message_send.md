@@ -119,7 +119,7 @@ For a text message with business properties, you can pass `ext` when initializin
 
 ```swift
 // Create a group chat text message body.
-let body = EMTextMessageBody(text: "大家好")
+let body = EMTextMessageBody(text: "Hello everyone")
 
 // Add a business extension field.
 let ext: [String: Any] = [
@@ -648,7 +648,7 @@ The following sample code creates and sends a location message:
 // latitude is the latitude, longitude is the longitude, and address is the location description.
 let latitude = 39.9042
 let longitude = 116.4074
-let address = "北京市东城区"
+let address = "Dongcheng District, Beijing"
 
 // Create a location message body.
 let body = EMLocationMessageBody(
@@ -690,7 +690,7 @@ let body = EMLocationMessageBody(
     latitude: latitude,
     longitude: longitude,
     address: address,
-    buildingName: "环信大厦"
+    buildingName: "EasyIM Building"
 )
 ```
 
@@ -799,7 +799,7 @@ let event = "gift"
 // customExt carries custom parameters. Both Key and Value are String values.
 let customExt: [String: String] = [
     "giftId": "gift_001",
-    "giftName": "鲜花",
+    "giftName": "Flowers",
     "count": "1"
 ]
 
@@ -864,12 +864,12 @@ You can retrieve the combined message attachment upload progress through the `pr
 The following sample code creates and sends a combined message:
 
 ```swift
-let title = "A 和 B 的聊天记录"
+let title = "Chat history between A and B"
 let summary = """
-A：这是 A 的消息内容
-B：这是 B 的消息内容
+A: This is A's message content
+B: This is B's message content
 """
-let compatibleText = "当前版本不支持合并消息，请升级至最新版本"
+let compatibleText = "The current version does not support combined messages. Upgrade to the latest version."
 
 // Add the original message IDs to combine.
 let messageIdList = [

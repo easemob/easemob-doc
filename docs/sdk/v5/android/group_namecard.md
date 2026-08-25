@@ -45,7 +45,7 @@ After a name card change is synchronized to local memory, the SDK triggers `EMGr
 EMClient.getInstance().groupManager().addGroupChangeListener(new EMGroupChangeListener() {
     @Override
     public void onUserGroupNamecardUpdated(String groupId, String userId, String groupNamecard) {
-        EMLog.d("GroupNamecard", "群成员名片更新 - groupId:" + groupId
+        EMLog.d("GroupNamecard", "Group member card updated - groupId:" + groupId
                 + ", userId:" + userId
                 + ", namecard:" + groupNamecard);
     }
@@ -62,12 +62,12 @@ Call `EMGroupManager#asyncUpdateGroupNamecard` to set or update the current user
 EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_namecard", new EMCallBack() {
     @Override
     public void onSuccess() {
-        EMLog.d("GroupNamecard", "设置群成员名片成功");
+        EMLog.d("GroupNamecard", "Group member card set successfully");
     }
 
     @Override
     public void onError(int code, String error) {
-        EMLog.e("GroupNamecard", "设置群成员名片失败：" + code + ", " + error);
+        EMLog.e("GroupNamecard", "Failed to set group member card: " + code + ", " + error);
     }
 });
 ```
@@ -98,7 +98,7 @@ EMClient.getInstance().groupManager().asyncFetchGroupMembersInfo("groupId", "", 
 
             @Override
             public void onError(int code, String error) {
-                EMLog.e("GroupNamecard", "获取群成员信息失败：" + code + ", " + error);
+                EMLog.e("GroupNamecard", "Failed to retrieve group member information: " + code + ", " + error);
             }
         });
 ```
@@ -109,7 +109,7 @@ Call `EMGroupManager#getGroupNamecard` to read a specified member's name card in
 
 ```java
 String namecard = EMClient.getInstance().groupManager().getGroupNamecard("groupId", "userId");
-EMLog.d("GroupNamecard", "群成员名片：" + namecard);
+EMLog.d("GroupNamecard", "Group member card: " + namecard);
 ```
 
 ## Automatically synchronize group member name cards through messages

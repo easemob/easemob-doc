@@ -43,7 +43,7 @@ This API applies to multi-device login and queries the login status of the curre
 
 ```typescript
 const otherDeviceIds = await client.getSelfIdsOnOtherPlatform();
-console.log('其他设备登录 ID:', otherDeviceIds);
+console.log('Login IDs on other devices:', otherDeviceIds);
 ```
 
 Each login ID in the result uses the `userId/resource` format, where `userId` is the current user ID and `resource` is the resource identifier of a logged-in device. This `resource` is semantically equivalent to the `resourceId` parameter in the [server-side API for forcing a single device offline](/document/server-side/account_offline_device_single.html) and the `res` parameter in the [server-side API for retrieving the online login devices of a specified account](/document/server-side/account_online_device_obtain.html). Each uniquely identifies one of a user's login devices. The difference is that the client API returns the complete login ID, whereas the server-side API requires only the portion after `/`, namely `resource`. Therefore, to call the server-side API for forcing a single device offline, first extract `resource` from the login ID and then pass it as `resourceId`.
@@ -72,7 +72,7 @@ const client = ChatClient.init({
   // Custom platform number. The value range is [1,100].
   customOSPlatform: 1,
   // Custom device name. Takes effect only when `customOSPlatform` is set.
-  customDeviceName: '自定义平台1',
+  customDeviceName: 'Custom platform 1',
   managers: [],
 });
 ```

@@ -106,7 +106,7 @@ This setting is sent to the server only after login succeeds.
 
 ```java
     EMOptions options =  new EMOptions();
-    options.setCustomDeviceName("你的自定义设备名称");
+    options.setCustomDeviceName("Your custom device name");
     EMClient.getInstance().init(context,options);
 
     EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
@@ -165,7 +165,7 @@ This setting is sent to the server only after login succeeds.
 
 ```java
     EMOptions options =  new EMOptions();
-    options.setLoginCustomExt("你的自定义扩展信息json字符串");
+    options.setLoginCustomExt("Your custom extension information as a JSON string");
     EMClient.getInstance().init(context,options);
 
     EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
@@ -211,7 +211,7 @@ EMClient.getInstance().fetchLoggedInDevicesFromServerWithToken(
                             token,
                             deviceInfos.get(selectedIndex).getResource());
                 } catch (HyphenateException e) {
-                    EMLog.e(TAG, "踢出指定设备失败", e);
+                    EMLog.e(TAG, "Failed to log out the specified device", e);
                 }
             }
 
@@ -434,7 +434,7 @@ When the same account is logged in on a PC and a mobile device, call the method 
 try {
     List<String> selfIds = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
 } catch (HyphenateException e) {
-    EMLog.e(TAG, "获取其他平台登录 ID 失败", e);
+    EMLog.e(TAG, "Failed to retrieve login IDs on other platforms", e);
 }
 ```
 

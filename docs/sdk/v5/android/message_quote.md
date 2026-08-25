@@ -44,10 +44,10 @@ Your business logic defines the data structure of `msgQuote`. You can use the fo
 ```json
 {
   "msgQuote": {
-    "msgID": "原消息 ID",
-    "msgPreview": "原消息的预览内容",
-    "msgSender": "原消息发送方的用户 ID",
-    "msgType": "原消息类型"
+    "msgID": "Original message ID",
+    "msgPreview": "Preview of the original message",
+    "msgSender": "User ID of the original message sender",
+    "msgType": "Original message type"
   }
 }
 ```
@@ -73,7 +73,7 @@ The following example replies to a text message with a quoted message:
 
 ```java
 EMMessage message = EMMessage.createTextSendMessage(
-        "好的，收到！",
+        "Okay, got it!",
         conversationId);
 
 // Set GroupChat for group chat or ChatRoom for a chat room. The default is Chat for one-to-one chat.
@@ -83,7 +83,7 @@ JSONObject quote = new JSONObject();
 try {
     // Add summary information about the quoted message.
     quote.put("msgID", "original-message-id");
-    quote.put("msgPreview", "原消息内容预览");
+    quote.put("msgPreview", "Preview of the original message content");
     quote.put("msgSender", "user1");
     quote.put("msgType", "text");
 } catch (JSONException exception) {
@@ -102,7 +102,7 @@ EMClient.getInstance()
 
 ```kotlin
 val message = EMMessage.createTextSendMessage(
-    "好的，收到！",
+    "Okay, got it!",
     conversationId
 )
 
@@ -113,7 +113,7 @@ val quote = JSONObject()
 try {
     // Add summary information about the quoted message.
     quote.put("msgID", "original-message-id")
-    quote.put("msgPreview", "原消息内容预览")
+    quote.put("msgPreview", "Preview of the original message content")
     quote.put("msgSender", "user1")
     quote.put("msgType", "text")
 } catch (exception: JSONException) {

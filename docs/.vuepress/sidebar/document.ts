@@ -257,7 +257,7 @@ const documentV5Sidebar = [
   { text: 'FAQs', link: 'faq.html', only: ['react-native'] },
   { text: 'Lite SDK', link: 'elite_sdk.html', only: ['android', 'ios']},
   { text: 'Private Cloud SDK IP Address/Domain Configuration', link: 'private_ip_domain.html', only: ['android', 'ios', 'web', 'harmonyos']},
-  { text: 'Compliance Guide', link: 'sdk_compliance.html'},
+  // { text: 'Compliance Guide', link: 'sdk_compliance.html'},
   { text: 'Apple Privacy Policy', link: 'privacy_policy.html', only: ['ios'] },
   { text: '服务端 API 概述', link: 'overview.html', only: ['server-side'] },
   { text: 'API 调用频率限制', link: 'limitationapi.html', only: ['server-side'] },

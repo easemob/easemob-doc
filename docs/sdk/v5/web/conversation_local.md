@@ -198,9 +198,9 @@ When the local cache changes, the SDK triggers a conversation list update event.
 ```typescript
 client.chatManager.addEventHandler('conversation-list-listener', {
   onConversationListUpdate: event => {
-    console.log('会话列表更新原因:', event.reason);
-    console.log('当前完整会话列表:', event.items);
-    console.log('本次变化补丁:', event.patch);
+    console.log('Reason for conversation list update:', event.reason);
+    console.log('Current complete conversation list:', event.items);
+    console.log('Changes in this update:', event.patch);
   },
 });
 ```

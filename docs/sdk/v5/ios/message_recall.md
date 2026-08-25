@@ -45,7 +45,7 @@ After the call succeeds, the message saved on the server and in the sender's and
 
 ```objectivec
 // messageId is the ID of the successfully sent message to recall.
-NSString *recallExt = @"撤回了一条消息";
+NSString *recallExt = @"recalled a message";
 
 // Asynchronously recall the message and carry custom information in ext.
 [[EMClient sharedClient].chatManager recallMessageWithMessageId:messageId

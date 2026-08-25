@@ -57,7 +57,7 @@ JSONArray atUserList = new JSONArray();
 atUserList.put("user1");
 atUserList.put("user2");
 
-EMMessage msg = EMMessage.createTextSendMessage("@user1 @user2 你好", conversationId);
+EMMessage msg = EMMessage.createTextSendMessage("@user1 @user2 Hello", conversationId);
 // A group @ message must be set to the group chat type.
 msg.setChatType(EMMessage.ChatType.GroupChat);
 
@@ -79,7 +79,7 @@ val atUserList = JSONArray()
 atUserList.put("user1")
 atUserList.put("user2")
 
-val msg = EMMessage.createTextSendMessage("@user1 @user2 你好", conversationId)
+val msg = EMMessage.createTextSendMessage("@user1 @user2 Hello", conversationId)
 // A group @ message must be set to the group chat type.
 msg.chatType = EMMessage.ChatType.GroupChat
 

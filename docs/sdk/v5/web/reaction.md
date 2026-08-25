@@ -50,13 +50,13 @@ To monitor Reaction changes, register the following event:
 ```typescript
 client.chatManager.addEventHandler('reaction-events', {
   onReactionChanged: payload => {
-    console.log('消息 ID:', payload.messageId);
-    console.log('会话 ID:', payload.conversationId);
-    console.log('会话类型:', payload.conversationType);
-    console.log('发送方:', payload.from);
-    console.log('接收方:', payload.to);
-    console.log('当前 Reaction 列表:', payload.reactions);
-    console.log('更新时间:', payload.timestamp);
+    console.log('Message ID:', payload.messageId);
+    console.log('Conversation ID:', payload.conversationId);
+    console.log('Conversation type:', payload.conversationType);
+    console.log('Sender:', payload.from);
+    console.log('Recipient:', payload.to);
+    console.log('Current Reaction list:', payload.reactions);
+    console.log('Update time:', payload.timestamp);
   },
 });
 ```
@@ -90,13 +90,13 @@ const reactions = await client.chatManager.getReactionList({
 });
 
 reactions.forEach(item => {
-  console.log('消息 ID:', item.messageId);
+  console.log('Message ID:', item.messageId);
 
   item.reactions.forEach(reaction => {
     console.log('Reaction:', reaction.reaction);
-    console.log('数量:', reaction.count);
-    console.log('用户 ID 列表:', reaction.userIds);
-    console.log('自己是否添加:', reaction.isAddedBySelf);
+    console.log('Count:', reaction.count);
+    console.log('User ID list:', reaction.userIds);
+    console.log('Added by the current user:', reaction.isAddedBySelf);
   });
 });
 ```
@@ -117,12 +117,12 @@ const detail = await client.chatManager.getReactionDetail({
 });
 
 console.log('Reaction:', detail.reaction);
-console.log('数量:', detail.count);
-console.log('自己是否添加:', detail.isAddedBySelf);
-console.log('用户列表:', detail.reactionUsers);
-console.log('下一页游标:', detail.cursor);
-console.log('是否还有更多:', detail.hasMore);
-console.log('创建时间:', detail.createdAt);
+console.log('Count:', detail.count);
+console.log('Added by the current user:', detail.isAddedBySelf);
+console.log('User list:', detail.reactionUsers);
+console.log('Next-page cursor:', detail.cursor);
+console.log('Has more:', detail.hasMore);
+console.log('Creation time:', detail.createdAt);
 ```
 
 Each item in `reactionUsers` contains the following information:
@@ -145,8 +145,8 @@ const page = await client.chatManager.getHistoryMessages({
 });
 
 page.items.forEach(message => {
-  console.log('消息 ID:', message.msgServerId);
-  console.log('Reaction 概览:', message.reactions);
+  console.log('Message ID:', message.msgServerId);
+  console.log('Reaction overview:', message.reactions);
 });
 ```
 

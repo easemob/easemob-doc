@@ -25,7 +25,7 @@ The following example shows how to send a targeted text message:
 ```java
 // Create a group text message.
 EMMessage message = EMMessage.createTextSendMessage(
-        "这条消息只有指定的成员能看到",
+        "Only specified members can see this message",
         groupId);
 
 // Set the chat type to GroupChat for group chat or ChatRoom for a chat room.

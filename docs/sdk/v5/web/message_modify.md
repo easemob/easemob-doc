@@ -62,10 +62,10 @@ Example code:
 client.addEventHandler('modify', {
   onMessageUpdated: event => {
     console.log('onMessageUpdated', event);
-    console.log('编辑后的消息内容:', event.message);
-    console.log('编辑者:', event.message.modifiedInfo?.operatorId);
-    console.log('编辑时间:', event.message.modifiedInfo?.operationTime);
-    console.log('编辑次数:', event.message.modifiedInfo?.operationCount);
+    console.log('Edited message content:', event.message);
+    console.log('Editor:', event.message.modifiedInfo?.operatorId);
+    console.log('Edit time:', event.message.modifiedInfo?.operationTime);
+    console.log('Number of edits:', event.message.modifiedInfo?.operationCount);
   },
 });
 
@@ -77,7 +77,7 @@ await client.chatManager.modifyMessage({
   message: {
     type: 'text',
     body: {
-      content: '修改后的内容',
+      content: 'Updated content',
     },
     ext: {
       edited: true,

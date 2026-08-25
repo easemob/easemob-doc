@@ -123,7 +123,7 @@ For a text message with business attributes, call `EMMessage#setAttribute` to ad
 ```java
 // Create a group text message. groupId is the chat group ID.
 EMMessage message = EMMessage.createTextSendMessage(
-        "大家好",
+        "Hello everyone",
         groupId);
 
 // Set the message as a group chat message.
@@ -186,7 +186,7 @@ The following sample code creates and sends an image message:
 String imagePath = selectedImagePath;
 
 if (imagePath == null || imagePath.isEmpty()) {
-    throw new IllegalArgumentException("图片路径不能为空");
+    throw new IllegalArgumentException("The image path cannot be empty");
 }
 
 // Create an image message.
@@ -517,9 +517,9 @@ Call `createCombinedSendMessage` to create a combined message, and then call `se
 The following sample code creates and sends a combined message:
 
 ```java
-String title = "A和B的聊天记录";
-String summary = "A:这是A的消息内容\nB:这是B的消息内容";
-String compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
+String title = "Chat history between A and B";
+String summary = "A: This is A's message content\nB: This is B's message content";
+String compatibleText = "Your current version does not support this message. Upgrade to the latest version.";
 
 // Add the original message IDs.
 ArrayList<String> msgIdList = new ArrayList<>();
@@ -643,12 +643,12 @@ message.setPriority(
 message.setMessageStatusCallback(new EMCallBack() {
     @Override
     public void onSuccess() {
-        Log.d("Chat", "发送成功");
+        Log.d("Chat", "Message sent successfully");
     }
 
     @Override
     public void onError(int code, String error) {
-        Log.e("Chat", "发送失败：" + code + ", " + error);
+        Log.e("Chat", "Failed to send the message: " + code + ", " + error);
     }
 
     @Override
@@ -701,7 +701,7 @@ EMClient.getInstance().chatroomManager()
 
                     @Override
                     public void onError(int errorCode, String errorMsg) {
-                        Log.e("ChatRoom", "设置麦位属性失败：" + errorMsg);
+                        Log.e("ChatRoom", "Failed to set the seat attribute: " + errorMsg);
                     }
                 }
         );
@@ -739,7 +739,7 @@ message.setMessageStatusCallback(new EMCallBack() {
     public void onProgress(int progress, String status) {
         // Attachment upload progress. The value range is 0～100.
         runOnUiThread(() -> {
-            Log.d("Chat", "上传进度：" + progress + "%");
+            Log.d("Chat", "Upload progress: " + progress + "%");
             // progressBar.setProgress(progress);
         });
     }
@@ -747,14 +747,14 @@ message.setMessageStatusCallback(new EMCallBack() {
     @Override
     public void onSuccess() {
         runOnUiThread(() -> {
-            Log.d("Chat", "发送成功，消息 ID：" + message.getMsgId());
+            Log.d("Chat", "Message sent successfully. Message ID: " + message.getMsgId());
         });
     }
 
     @Override
     public void onError(int code, String error) {
         runOnUiThread(() -> {
-            Log.e("Chat", "发送失败：" + code + ", " + error);
+            Log.e("Chat", "Failed to send the message: " + code + ", " + error);
         });
     }
 });

@@ -40,15 +40,15 @@ After initialization, set the required listeners, such as connection and message
 
 ```typescript
 client.addEventHandler('connection', {
-  onConnecting: () => console.log('正在连接...'),
-  onConnected: () => console.log('连接成功'),
-  onDisconnected: (event) => console.log('连接断开', event.reason, event),
-  onTokenWillExpire: () => console.log('Token 即将过期'),
-  onTokenExpired: () => console.log('Token 已过期'),
+  onConnecting: () => console.log('Connecting...'),
+  onConnected: () => console.log('Connected'),
+  onDisconnected: (event) => console.log('Disconnected', event.reason, event),
+  onTokenWillExpire: () => console.log('The token will expire soon'),
+  onTokenExpired: () => console.log('The token has expired'),
 });
 
 client.addEventHandler('message', {
-  onMessage: (message) => console.log('收到消息', message),
+  onMessage: (message) => console.log('Message received', message),
 });
 ```
 
@@ -127,15 +127,15 @@ Example code:
 ```typescript
 client.addEventHandler('sync-listener', {
   onSyncDataStart: payload => {
-    console.log('同步开始:', payload.dataType);
+    console.log('Synchronization started:', payload.dataType);
   },
   onSyncDataFinished: payload => {
     if (payload.status === 'success') {
-      console.log('同步成功:', payload.dataType);
+      console.log('Synchronization succeeded:', payload.dataType);
       return;
     }
 
-    console.log('同步失败:', payload.dataType, payload.error);
+    console.log('Synchronization failed:', payload.dataType, payload.error);
   },
 });
 ```

@@ -92,15 +92,15 @@ client.presenceManager.addEventHandler('presence', {
   onPresenceStatusChange: (presenceList) => {
     presenceList.forEach((presence) => {
       // User ID associated with the presence.
-      console.log('用户:', presence.userId);
+      console.log('User:', presence.userId);
       // Detailed list of multi-device states.
-      console.log('设备状态:', presence.statusDetails);
+      console.log('Device status:', presence.statusDetails);
       // Custom presence description corresponding to `customStatus` when published.
-      console.log('扩展状态:', presence.ext);
+      console.log('Extended status:', presence.ext);
       // Latest update time in milliseconds.
-      console.log('更新时间:', presence.lastTime);
+      console.log('Update time:', presence.lastTime);
       // Current subscription expiration time in milliseconds.
-      console.log('订阅到期时间:', presence.expire);
+      console.log('Subscription expiration time:', presence.expire);
     });
   },
 });

@@ -154,15 +154,15 @@ EMConnectionListener syncListener = new EMConnectionListener() {
 
     @Override
     public void onDataSyncStart(EMOptions.EMDataSyncType type) {
-        Log.d("ChatSDK", "数据同步开始：" + type);
+        Log.d("ChatSDK", "Data synchronization started: " + type);
     }
 
     @Override
     public void onDataSyncFinish(EMOptions.EMDataSyncType type, int errorCode) {
         if (errorCode == EMError.EM_NO_ERROR) {
-            Log.d("ChatSDK", "数据同步成功：" + type);
+            Log.d("ChatSDK", "Data synchronization succeeded: " + type);
         } else {
-            Log.e("ChatSDK", "数据同步失败：" + type + ", errorCode=" + errorCode);
+            Log.e("ChatSDK", "Data synchronization failed: " + type + ", errorCode=" + errorCode);
         }
     }
 };
@@ -182,7 +182,7 @@ try {
     List<String> contacts =
             EMClient.getInstance().contactManager().getContactsFromLocal();
 } catch (HyphenateException e) {
-    Log.e("ChatSDK", "读取本地好友失败", e);
+    Log.e("ChatSDK", "Failed to read local contacts", e);
 }
 
 List<EMGroup> joinedGroups =

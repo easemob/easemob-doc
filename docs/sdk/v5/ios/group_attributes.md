@@ -29,7 +29,7 @@ EMClient.shared().groupManager?.getGroupSpecificationFromServer(
     withId: groupId
 ) { group, error in
     guard error == nil, let group = group else {
-        print("获取群组详情失败：\(error?.errorDescription ?? "unknown error")")
+        print("Failed to retrieve group details: \(error?.errorDescription ?? "unknown error")")
         return
     }
 
@@ -74,11 +74,11 @@ EMClient.shared().groupManager?.updateGroup(
     configs: configs
 ) { group, error in
     if let error = error {
-        print("修改群组配置失败：\(error.errorDescription)")
+        print("Failed to modify the group configuration: \(error.errorDescription)")
         return
     }
 
-    print("修改群组配置成功：\(group?.groupId ?? "")")
+    print("Group configuration modified successfully: \(group?.groupId ?? "")")
 }
 ```
 
@@ -94,11 +94,11 @@ EMClient.shared().groupManager?.updateGroupSubject(
     forGroup: "groupId"
 ) { group, error in
     if let error = error {
-        print("修改群组名称失败：\(error.errorDescription)")
+        print("Failed to modify the group name: \(error.errorDescription)")
         return
     }
 
-    print("修改后的群组名称：\(group?.groupName ?? "")")
+    print("Updated group name: \(group?.groupName ?? "")")
 }
 ```
 
@@ -112,11 +112,11 @@ EMClient.shared().groupManager?.updateDescription(
     forGroup: "groupId"
 ) { group, error in
     if let error = error {
-        print("修改群组描述失败：\(error.errorDescription)")
+        print("Failed to modify the group description: \(error.errorDescription)")
         return
     }
 
-    print("修改后的群组描述：\(group?.description ?? "")")
+    print("Updated group description: \(group?.description ?? "")")
 }
 ```
 
@@ -143,11 +143,11 @@ EMClient.shared().groupManager?.createGroup(
     setting: configs
 ) { group, error in
     if let error = error {
-        print("创建群组失败：\(error.errorDescription)")
+        print("Failed to create the group: \(error.errorDescription)")
         return
     }
 
-    print("群组创建成功：\(group?.groupId ?? "")")
+    print("Group created successfully: \(group?.groupId ?? "")")
 }
 ```
 
@@ -163,11 +163,11 @@ EMClient.shared().groupManager?.updateGroupAvatar(
     groupId: "groupId"
 ) { group, error in
     if let error = error {
-        print("修改群头像失败：\(error.errorDescription)")
+        print("Failed to modify the group avatar: \(error.errorDescription)")
         return
     }
 
-    print("修改后的群头像：\(group?.groupAvatar ?? "")")
+    print("Updated group avatar: \(group?.groupAvatar ?? "")")
 }
 ```
 
@@ -184,7 +184,7 @@ EMClient.shared().groupManager?.getGroupSpecificationFromServer(
     }
 
     let avatar = group.groupAvatar
-    print("群头像：\(avatar)")
+    print("Group avatar: \(avatar)")
 }
 ```
 
@@ -200,11 +200,11 @@ EMClient.shared().groupManager?.updateGroupAnnouncement(
     announcement: "new announcement"
 ) { group, error in
     if let error = error {
-        print("更新群公告失败：\(error.errorDescription)")
+        print("Failed to update the group announcement: \(error.errorDescription)")
         return
     }
 
-    print("群公告更新成功：\(group?.groupId ?? "")")
+    print("Group announcement updated successfully: \(group?.groupId ?? "")")
 }
 ```
 
@@ -217,11 +217,11 @@ EMClient.shared().groupManager?.getGroupAnnouncement(
     withId: "groupId"
 ) { announcement, error in
     if let error = error {
-        print("获取群公告失败：\(error.errorDescription)")
+        print("Failed to retrieve the group announcement: \(error.errorDescription)")
         return
     }
 
-    print("群公告：\(announcement ?? "")")
+    print("Group announcement: \(announcement ?? "")")
 }
 ```
 
@@ -240,15 +240,15 @@ EMClient.shared().groupManager?.uploadGroupSharedFile(
     withId: "groupId",
     filePath: localFilePath,
     progress: { progress in
-        print("上传进度：\(progress)%")
+        print("Upload progress: \(progress)%")
     },
     completion: { sharedFile, error in
         if let error = error {
-            print("上传共享文件失败：\(error.errorDescription)")
+            print("Failed to upload the shared file: \(error.errorDescription)")
             return
         }
 
-        print("共享文件 ID：\(sharedFile?.fileId ?? "")")
+        print("Shared file ID: \(sharedFile?.fileId ?? "")")
     }
 )
 ```
@@ -272,15 +272,15 @@ EMClient.shared().groupManager?.getGroupFileList(
         filePath: localSavePath,
         sharedFileId: fileId,
         progress: { progress in
-            print("下载进度：\(progress)%")
+            print("Download progress: \(progress)%")
         },
         completion: { _, error in
             if let error = error {
-                print("下载共享文件失败：\(error.errorDescription)")
+                print("Failed to download the shared file: \(error.errorDescription)")
                 return
             }
 
-            print("共享文件下载成功")
+            print("Shared file downloaded successfully")
         }
     )
 }
@@ -298,11 +298,11 @@ EMClient.shared().groupManager?.removeGroupSharedFile(
     sharedFileId: "fileId"
 ) { _, error in
     if let error = error {
-        print("删除共享文件失败：\(error.errorDescription)")
+        print("Failed to delete the shared file: \(error.errorDescription)")
         return
     }
 
-    print("共享文件删除成功")
+    print("Shared file deleted successfully")
 }
 ```
 
@@ -317,7 +317,7 @@ EMClient.shared().groupManager?.getGroupFileList(
     pageSize: 20
 ) { sharedFiles, error in
     if let error = error {
-        print("获取共享文件列表失败：\(error.errorDescription)")
+        print("Failed to retrieve the shared file list: \(error.errorDescription)")
         return
     }
 
@@ -341,11 +341,11 @@ EMClient.shared().groupManager?.updateGroupExt(
     ext: ext
 ) { group, error in
     if let error = error {
-        print("更新群扩展字段失败：\(error.errorDescription)")
+        print("Failed to update the group extension: \(error.errorDescription)")
         return
     }
 
-    print("更新后的群扩展字段：\(group?.settings.ext ?? "")")
+    print("Updated group extension: \(group?.settings.ext ?? "")")
 }
 ```
 

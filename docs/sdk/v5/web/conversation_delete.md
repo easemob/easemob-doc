@@ -81,9 +81,9 @@ After a conversation is deleted or all conversations are cleared, the SDK trigge
 ```typescript
 client.chatManager.addEventHandler('conversation-delete-listener', {
   onConversationListUpdate: payload => {
-    console.log('会话列表更新原因:', payload.reason);
-    console.log('当前完整会话列表:', payload.items);
-    console.log('本次变化补丁:', payload.patch);
+    console.log('Reason for conversation list update:', payload.reason);
+    console.log('Current complete conversation list:', payload.items);
+    console.log('Changes in this update:', payload.patch);
   },
 });
 ```

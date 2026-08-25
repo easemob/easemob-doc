@@ -70,7 +70,7 @@ When presence changes, subscribers receive the `EMPresenceListener#onPresenceUpd
 When a user is online, call `EMPresenceManager#publishPresence` to publish custom presence:
 
 ```java
-EMClient.getInstance().presenceManager().publishPresence("自定义状态", new EMCallBack() {
+EMClient.getInstance().presenceManager().publishPresence("Custom status", new EMCallBack() {
     @Override
     public void onSuccess() {
 

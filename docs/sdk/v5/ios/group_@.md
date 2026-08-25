@@ -50,7 +50,7 @@ The sender creates an `EMChatMessage`, writes the IDs of the mentioned members t
 ```swift
 let groupId = "groupId"
 let mentionedUserIds = ["user1", "user2"]
-let body = EMTextMessageBody(text: "@user1 @user2 你好")
+let body = EMTextMessageBody(text: "@user1 @user2 Hello")
 
 // When mentioning one or multiple group members, em_at_list is an array of user IDs.
 let ext: [String: Any] = ["em_at_list": mentionedUserIds]
@@ -66,10 +66,10 @@ EMClient.shared().chatManager?.send(
     progress: nil
 ) { _, error in
     if let error = error {
-        print("群组 @ 消息发送失败：\(error.errorDescription ?? "unknown error")")
+        print("Failed to send the group @ message: \(error.errorDescription ?? "unknown error")")
         return
     }
-    print("群组 @ 消息发送成功")
+    print("Group @ message sent successfully")
 }
 ```
 

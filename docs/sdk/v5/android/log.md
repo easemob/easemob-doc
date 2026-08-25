@@ -21,11 +21,11 @@ EMClient.getInstance().setDebugMode(true);
 
 When the app-specific external storage directory is available and writable, retrieve local logs with the following command. Make these replacements in the code below:
 
-- Replace `{应用包名}` with the app's package name, such as `com.hyphenate.chatuidemo`.
+- Replace `{app package name}` with the app's package name, such as `com.hyphenate.chatuidemo`.
 - Replace `{App Key}` with the app's EasyIM App Key.
 
 ```shell
-adb pull /sdcard/Android/data/{应用包名}/{App Key}/core_log
+adb pull /sdcard/Android/data/{app package name}/{App Key}/core_log
 ```
 
 If the app-specific external storage directory is unavailable, the SDK writes logs to the app's internal `files` directory. This directory usually cannot be read directly with the `adb pull` command above. Export the logs from within the app, or use an appropriate debugging method in a debuggable app.
