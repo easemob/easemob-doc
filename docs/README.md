@@ -57,10 +57,7 @@ starter:
         text: iOS 
       - icon: /sdk/web.svg
         link: /document/web/quickstart.html
-        text: Web
-      - icon: /sdk/applet.svg
-        link: /document/web/integration_applet.html
-        text: 小程序/Uniapp
+        text: Web/小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
         text: HarmonyOS 

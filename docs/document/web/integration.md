@@ -8,6 +8,14 @@
 - 不支持 Internet Explorer（IE）浏览器。
 - 项目需支持 npm 包管理或能够引入浏览器脚本文件。
 
+## 支持平台
+
+SDK 支持以下平台：
+
+- Web 和 H5。
+- 微信、支付宝、QQ、百度和抖音小程序。
+- 通过 uniapp/uniappX/taro 编译的 Android 和 iOS 原生应用和小程序应用。
+
 ## 导入流程
 
 ### 步骤 1：使用 npm 安装 SDK
@@ -189,3 +197,15 @@ export default function Home() {
   return null;
 }
 ```
+
+## 配置服务器域名
+
+小程序发布前，需在对应平台后台配置合法域名。请先在声网控制台的 **基础信息** 页面确认应用所在数据中心，再选择对应的 REST API 和 WebSocket 地址。
+
+![img](/images/applet/service_overview.png)
+
+:::tip
+1. 将 https://rs.chat.rtnsvc.com 和 https://rs.easemob.com 添加至 request 白名单。
+2. 将 wss://ngi-fusion.easemob.com 添加为 WebSocket 合法域名。
+3. 文件下载相关域名需按数据中心进行配置：国内 1 区配置 `https://a1-chatfile.easemob.com`，国内 2 区配置 `ngi-chatfile.easemob.com`。<br/>实际需要配置的 `request`、`uploadFile`、`downloadFile` 以及 WebSocket 合法域名，应以应用所在数据中心和服务端实际下发的服务地址为准。若小程序使用文件消息、图片消息、语音消息或视频消息，需确保相关上传、下载域名已在小程序后台完成配置。
+:::
