@@ -17,17 +17,7 @@ const documentV5Sidebar = [
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
-  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'harmonyos', 'unity', 'windows']},
-  {
-    text: '集成 SDK',
-    collapsible: true,
-    children: [
-      { text: '导入 SDK（Web）', link: 'integration.html' },
-      { text: '集成 SDK（小程序）', link: 'integration_applet.html' },
-      { text: '集成 SDK（uni-app）', link: 'uniapp.html' },
-    ],
-    only: ['web']
-  },
+  { text: '导入 SDK', link: 'integration.html', only: ['android', 'ios', 'web', 'harmonyos', 'unity', 'windows']},
   { text: '添加依赖', link: 'integration.html', only: ['flutter', 'react-native']},
   { text: '初始化', link: 'initialization.html', except: ['server-side', 'applet']},
   {
