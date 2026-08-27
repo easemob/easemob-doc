@@ -4,35 +4,31 @@ After initializing iOS SDK V5, the app must log in with a user ID and user token
 
 ## User registration
 
-Before logging in to the SDK, you must create an EasyIM user. Before creating a user, set the user registration mode on the **EasyIM > Basic Features** > **Users** page in the [EasyIM Console](https://console.easyim.ai/user/login).
+Before logging in to the SDK, you must first create an IM user. Before creating a user, set the user registration mode on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
-The following two user registration modes are available:
+The following user registration modes are available:
 
- - **Authorized registration**: Register users through a REST API provided by EasyIM. This mode is suitable for production environments. After registration succeeds, you can save the user account to your app server or return it to the client.
- - **Open registration**: Allow the client or REST API to register users directly. This mode is generally used for demos and test environments and is not recommended for production environments.
+- **Authorized Registration**: Register users through the REST APIs provided by EasyIM. An app token is required. This mode is suitable for production environments. After a user is successfully registered, you can save the user account to your App Server or return it to the client.
+- **Open Registration**: Register users directly through the REST API without passing a token. This mode is generally used for demos and test environments and is not recommended for production environments.
 
-After setting the registration mode, create users in either of the following ways:
+After setting the registration mode, you can create users in either of the following ways:
 
-1. **Call a REST API to create users**
+1. **Create users by calling the REST API**
 
-   - Authorized registration: Call the API for [registering a user with authorization](/document/server-side/account_register_authorized_single.html) or [registering users with authorization in batches](/document/server-side/account_register_authorized_batch.html).
-   - Open registration: After enabling open registration, create users through the client or the REST API for [registering a user in open mode](/document/server-side/account_register_open.html).
+   - Authorized registration: Call the [Register a Single User Through Authorized Registration](/rest/account_register_authorized_single.html) or [Register Users in a Batch Through Authorized Registration](/rest/account_register_authorized_batch.html) API.
+   - Open registration: After enabling open registration, call the [Register a User Through the REST API Using Open Registration](/rest/account_register_open.html) API.
 
-2. **Create users in the EasyIM Console**
+2. **Create users in EasyIM Console**
 
-   You can create users in production or test environments in the [EasyIM Console](https://console.easyim.ai/user/login). See [Create Users](/product/console/operation_user.html#创建用户).
-
-:::tip
-iOS SDK V5 no longer provides public APIs for registering users on the client, retrieving a token with a username and password, or logging in with a password. In a production environment, the app server must authenticate users and retrieve an EasyIM token. The client uses only the user ID and token to log in to the SDK.
-:::
+   You can create users in a production or test environment in [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Create a user](/product/console/operation_user.html#create-a-user).
 
 ## Login
 
 The SDK logs in with a user ID and EasyIM token. When calling `loginWithUsername`, pass the user ID and token. After login succeeds, the SDK establishes a persistent connection to the messaging service.
 
-In a test environment, after you create users in the [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. See [Create Users](/product/console/operation_user.html#创建用户).
+In a test environment, after you create users in the [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. See [Create Users](/product/console/operation_user.html#create-a-user).
 
-In a production environment, we recommend integrating the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server. The client retrieves a user token from your app server and then logs in to the SDK.
+In a production environment, we recommend integrating the [Get App Token API](/rest/easemob_app_token.html) and [Get User Token API](/rest/easemob_user_token.html) into your app server. The client retrieves a user token from your app server and then logs in to the SDK.
 
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:userId
