@@ -92,7 +92,7 @@ class MainActivity {
 
 ## References
 
-- [Easemob server-side push extension fields](/rest/push_extension.html#offline-push-related-extension-fields)
+- [Easemob server-side push extension fields](/rest/push_extension.html#extension-fields-related-to-offline-push)
 - [Android message parsing example](/document/android/push/push_parsing.html)
 - [Huawei official documentation](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/andorid-basic-clickaction-0000001087554076)
 - [Xiaomi official documentation](https://dev.mi.com/console/doc/detail?pId=68)

@@ -19,7 +19,5 @@ The EasyIM Web SDK provides messaging, conversation, chat group, chat room, user
 
 - [Beginner's Guide](beginner_guide.html)
 - [Quickstart](quickstart.html)
-- [React Demo](demo_react.html)
-- [Vue Demo](demo_vue.html)
 - [API Reference](apireference.html)
 - [Release Notes](releasenote.html)

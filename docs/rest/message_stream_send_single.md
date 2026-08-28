@@ -218,7 +218,7 @@ The following table lists the message features supported for streaming messages:
 | Feature | Supported                          |
 | :--------------- | :-------------------------------- |
 | [Send messages](/rest/message_stream_send_single.html)         | Yes (only through the RESTful API) |
-| [Message roaming (client)](/document/android/message_retrieve.html#retrieve-messages-of-a-specified-conversation-from-the-server)         | Yes                                |
+| [Message roaming (client)](/document/android/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server)         | Yes                                |
 | [Message extensions](message_stream_send_single.html#request-example)         | Yes                                |
 | [Targeted messages](/document/android/message_target.html)         | No                                |
 | [Message read receipts (client)](/document/android/message_receipt.html)     | No                                |
@@ -232,9 +232,10 @@ The following table lists the message features supported for streaming messages:
 | [Conversation unread count (client)](/document/android/conversation_unread.html)       | Yes                                |
 | Last message in a conversation | Yes                                |
 | [Offline push](/rest/push_settings_set.html)     | Yes                                |
-| [Content moderation](/value-added/moderation/moderation_overview.html)     | No                                |
 | [Message translation](message_translation_text.html)         | Yes                                |
 | [Pre-delivery webhook](/rest/callback_presending.html)         | No                               |
 | [Post-delivery webhook](/rest/callback_postsending.html)         | No      |
 | Synchronize a successfully sent message across the sender's clients        |   No  |
 | [Store messages in the sender's and recipient's local databases](/product/limitation.html#message-storage)         | Yes |
+
+<!-- | [Content moderation](/value-added/moderation/moderation_overview.html)     | No                                | -->

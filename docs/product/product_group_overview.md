@@ -82,8 +82,8 @@ When creating a chat group, a user can set the chat group extension field, which
 
 However, only the chat group owner and admins can update the chat group extension field:
 
-- On the Web client, [call the API for modifying chat group information](/document/web/group_attributes.html#modify-chat-group-information) to update the chat group extension field.
-- On clients other than Web, such as Android and iOS, [call the separate API for updating the chat group extension field](/document/android/group_attributes.html#update-the-chat-group-extension-field) to modify the field.
+- On the Web client, [call the API for modifying chat group information](/document/web/group_attributes.html#update-chat-group-information) to update the chat group extension field.
+- On clients other than Web, such as Android and iOS, [call the separate API for updating the chat group extension field](/document/android/group_attributes.html#update-the-chat-group-extension) to modify the field.
 
 ### Chat group member management
 

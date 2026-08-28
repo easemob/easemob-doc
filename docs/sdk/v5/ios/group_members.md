@@ -427,7 +427,7 @@ Implement `EMGroupManagerDelegate` and register it through `addDelegate`. For ca
 | [`fetchGroupMemberInfoListFromServerWithGroupId`](#retrieve-chat-group-member-details-by-page) | `IEMGroupManager` | Retrieves member details. |
 | [`getGroupMemberListFromServerWithId`](#retrieve-chat-group-member-ids-by-page) | `IEMGroupManager` | Retrieves the member ID list. |
 | [`setMemberAttribute`](#set-custom-attributes-for-a-chat-group-member) | `IEMGroupManager` | Sets member attributes. |
-| [`fetchMemberAttribute`](#retrieve-a-single-chat-group-member’s-custom-attributes) | `IEMGroupManager` | Retrieves a single member's attributes. |
+| [`fetchMemberAttribute`](#retrieve-a-single-chat-group-members-custom-attributes) | `IEMGroupManager` | Retrieves a single member's attributes. |
 | [`fetchMembersAttributes`](#retrieve-chat-group-member-custom-attributes-by-attribute-key) | `IEMGroupManager` | Retrieves member attributes in batches. |
 | [`updateGroupOwner`](#transfer-the-chat-group-ownership) | `IEMGroupManager` | Transfers chat group ownership. |
 | [`addAdmin`](#add-a-chat-group-admin) | `IEMGroupManager` | Adds an admin. |

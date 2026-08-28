@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/product/purchase_package.html",
+    pageUri: "/product/console/purchase_package.html",
     title: "Plan Subscription"
 }
 ---

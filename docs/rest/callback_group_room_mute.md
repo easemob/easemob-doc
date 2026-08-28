@@ -13,7 +13,7 @@ After a chat group or chat room member is successfully added to or removed from 
 
 ### Trigger conditions
 
-1. A [chat group member](/document/android/group_members.html#mute-a-specified-member) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-mute-list) is added to the mute list on the client.
+1. A [chat group member](/document/android/group_members.html#mute-specified-members) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-mute-list) is added to the mute list on the client.
 2. A RESTful API is called to add a [chat group member](/rest/group_member_mute.html) or [chat room member](/rest/chatroom_member_mute.html) to the mute list.
 
 ### Webhook request
@@ -63,7 +63,7 @@ After a chat group or chat room member is successfully added to or removed from 
 
 ### Trigger conditions
 
-1. A [chat group member](/document/android/group_members.html#unmute-a-specified-member) or [chat room member](/document/android/room_members.html#remove-members-from-the-chat-room-mute-list) is removed from the mute list on the client.
+1. A [chat group member](/document/android/group_members.html#unmute-specified-members) or [chat room member](/document/android/room_members.html#remove-members-from-the-chat-room-mute-list) is removed from the mute list on the client.
 2. A RESTful API is called to remove a [chat group member](/rest/group_member_unmute.html) or [chat room member](/rest/chatroom_member_mute.html) from the mute list.
 
 ### Webhook request

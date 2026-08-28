@@ -23,7 +23,7 @@ A user can set a custom state, such as busy, be right back, away, on a call, or 
 
 ## Query user presence
 
-EasyIM supports querying the presence of multiple users by calling a [REST API](/rest/presence_get.html) or [client API](/document/android/presence.html#query-subscribed-users).
+EasyIM supports querying the presence of multiple users by calling a [REST API](/rest/presence_get.html) or [client API](/document/android/presence.html#query-the-subscribed-user-list).
 
 ## User status changes
 

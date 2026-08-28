@@ -72,7 +72,7 @@ Note: The `payload.options.ext` field applies only to chat room join events, not
 
 ### Trigger conditions
 
-A regular chat group member [invites a user to join the chat group on the client](/document/android/group_manage.html#invite-a-user-to-join-a-chat-group), and the user joins successfully.
+A regular chat group member [invites a user to join the chat group on the client](/document/android/group_manage.html#invite-users-to-join-a-chat-group), and the user joins successfully.
 
 **Chat rooms do not have this event.**
 

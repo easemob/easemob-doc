@@ -402,7 +402,7 @@ All attachment messages use the following process:
 - After a video message is sent, the first video frame is generally used as the thumbnail.
 - In addition to common conversation parameters, each attachment type requires its own business parameters when creating a message, such as image dimensions, voice duration, video duration, or filename.
 
-For attachment size and storage limitations, see [Message Attachment Limitations](limitation.html#消息存储).
+For attachment size and storage limitations, see [Message Attachment Limitations](limitation.html#message-storage).
 
 ### Send image messages
 
@@ -1409,6 +1409,7 @@ await client.chatManager.sendMessage(message, {
 Text, location, command, and custom messages generally do not upload attachments, so `onFileUploadProgress` is generally not triggered. Update page data in callbacks based on the latest state.
 :::
 
+<!--
 #### Content moderation before sending messages
 
 - Content moderation checks the message body
@@ -1418,10 +1419,11 @@ Text, location, command, and custom messages generally do not upload attachments
 - Configure the sender to receive content replaced by moderation
 
 If `useReplacedMessageContents` is enabled during initialization and moderation replaces text message content, the sender receives the replaced content. If it is disabled, the sender does not receive the replaced content.
+-->
 
 #### Message size and storage limitations
 
-For size and storage limitations for all message types, see [Message Limitations](limitation.html#消息大小).
+For size and storage limitations for all message types, see [Message Limitations](limitation.html#message-size).
 
 #### Set callback routing when sending a message
 
@@ -1496,7 +1498,7 @@ await client.chatManager.sendMessage(message);
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#monitor-message-related-events) | `ChatClient` | Registers an event listener. |
+| [`addEventHandler`](#api-list) | `ChatClient` | Registers an event listener. |
 | [`createTextMessage`](#send-text-messages) | `ChatManager` | Creates a text message. |
 | [`createImageMessage`](#send-image-messages) | `ChatManager` | Creates an image message. GIF images are also created through this API. |
 | [`createVoiceMessage`](#send-voice-messages) | `ChatManager` | Creates a voice message. |

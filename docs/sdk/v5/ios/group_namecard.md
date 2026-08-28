@@ -122,7 +122,7 @@ After automatic user information management is enabled, the SDK performs the fol
 3. If the update time in the message is later than the value in local memory, the SDK automatically retrieves the latest name card from the server.
 4. After a successful retrieval, the SDK updates local memory and triggers the `onUserGroupNamecardChanged` event.
 
-You can also use `senderInfo` to obtain the currently available name card information of the message sender. For details, see [Automatic user information management](userinfo_provider.html#retrieve-sender-information-through-messages).
+You can also use `senderInfo` to obtain the currently available name card information of the message sender. For details, see [Automatic user information management](userinfo_provider.html#obtain-sender-information-through-a-message).
 
 ## Notes
 

@@ -5,7 +5,7 @@
 - Create a chat group.
 - Configure the chat group name, description, public or private status, maximum number of members (including the group owner), whether approval is required to join a public group, group owner, members, and extension information.
 - Creating a chat group triggers a post-delivery callback. For details, see [Chat Group Created](callback_group_room_create.html).
-- For details about the number of chat groups supported by an app, the number of members supported by a chat group, and chat group size tiers, see [Chat group limitations](/product/limitation.html#chat-group-and-member-counts).
+- For details about the number of chat groups supported by an app, the number of members supported by a chat group, and chat group size tiers, see [Chat group limitations](/product/limitation.html#number-of-chat-groups-and-chat-group-members).
 
 ## Call frequency limit
 

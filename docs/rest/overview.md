@@ -4,7 +4,7 @@
 
 EasyIM provides server-side APIs through its REST platform. You can send HTTP requests from your business server to the EasyIM REST server to implement real-time communication on the server side.
 
-EasyIM Server SDKs also provide management capabilities for resources such as users, messages, chat groups, and chat rooms. For details, see [Java Server SDK](java_server_sdk.html) and [PHP Server SDK](php_server_sdk.html).
+EasyIM Server SDKs also provide management capabilities for resources such as users, messages, chat groups, and chat rooms. For details, see [Java Server SDK](java_server_sdk_2.0.html).
 
 ## REST platform architecture
 

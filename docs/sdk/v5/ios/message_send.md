@@ -6,7 +6,7 @@ The EasyIM iOS SDK creates message bodies through the corresponding subclasses o
 
 - For one-to-one chat, EasyIM supports messaging between strangers by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check).
 - For group chats and chat rooms, a user can send a message to only one group or chat room to which the user belongs at a time.
-- For message sending controls, see the related documentation for [one-to-one chat](/product/message_single_chat.html#单聊消息发送控制), [group chat](/product/message_group.html#群组消息发送控制), and [chat room](/product/message_chatroom.html#聊天室消息发送控制).
+- For message sending controls, see the related documentation for [one-to-one chat](/product/message_single_chat.html#one-to-one-message-sending-controls), [group chat](/product/message_group.html#chat-group-message-sending-controls), and [chat room](/product/message_chatroom.html#chat-room-message-sending-controls).
 
 ## Prerequisite
 
@@ -170,7 +170,7 @@ By default, after `IEMChatManager#sendMessage:progress:completion:` is called, t
 
 When initializing the SDK, you can use `EMOptions#isAutoTransferMessageAttachments` to set whether the SDK automatically uploads or downloads message attachments. For image and video thumbnails and voice messages, you can use `EMOptions#autoDownloadThumbnail` to control automatic downloading.
 
-For message attachment size and storage restrictions, see [Message Attachment Restrictions](/product/limitation.html#消息存储).
+For message attachment size and storage restrictions, see [Message Attachment Restrictions](/product/limitation.html#message-storage).
 
 ### Send image messages
 

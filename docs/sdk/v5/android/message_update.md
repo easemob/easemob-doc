@@ -8,7 +8,7 @@ A local message update takes effect only on the current device. It does not modi
 
 Before you begin, ensure that the following requirements are met:
 
-- Initialize the SDK and ensure that the current user's [local database is open](login.html#登录完成前使用本地数据库). See [Quickstart](quickstart.html).
+- Initialize the SDK and ensure that the current user's [local database is open](login.html#use-the-local-database-before-login-is-complete). See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 ## Update messages in the local database

@@ -19,7 +19,7 @@ To search server-side messages, contact the EasyIM business manager to enable th
 
 Before you begin, ensure that the following requirements are met:
 
-- Initialize the SDK and [open the current user's local database](login.html#登录完成前使用本地数据库). See [Quickstart](quickstart.html). Local message search does not require the client to remain connected to the server.
+- Initialize the SDK and [open the current user's local database](login.html#use-the-local-database-before-login-is-complete). See [Quickstart](quickstart.html). Local message search does not require the client to remain connected to the server.
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 ## Implementation

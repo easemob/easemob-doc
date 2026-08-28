@@ -20,7 +20,7 @@ When sender information is obtained through a message, the SDK automatically syn
 2. After the user updates their information, subsequent messages carry the corresponding information update time.
 3. After the recipient receives a message, the SDK parses the sender information and update time in it.
 4. The SDK compares the update time in the message with the timestamp in local memory.
-5. If the update time in the message is later, the SDK automatically [retrieves the latest user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or the [group member name card](group_namecard.html#从服务端获取群成员名片).
+5. If the update time in the message is later, the SDK automatically [retrieves the latest user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or the [group member name card](group_namecard.html#retrieve-group-member-name-cards-from-the-server).
 6. After retrieval succeeds, the SDK automatically updates local memory.
 7. After local memory is updated, the SDK notifies the upper-layer app through an event, which the business layer can use to refresh the UI.
 
@@ -57,7 +57,7 @@ The SDK provides `EMUserInfoManagerListener` to monitor user attribute update ev
 - `EMUserInfoManagerListener#onUserInfoUpdate`: Triggered after another user's attributes are updated and written to local memory, including these scenarios:
   - A message is received from another user, and the sender's nickname or avatar in the message has changed. To receive user attribute update events in this scenario, enable automatic user information management.
   - Your app explicitly [retrieves user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server).
-  - Your app explicitly [retrieves chat group member information from the server](group_members.html#获取群成员列表).
+  - Your app explicitly [retrieves chat group member information from the server](group_members.html#retrieve-the-group-member-list).
 
 **We recommend registering the listener during business initialization so that the app promptly receives events and refreshes the UI during initial synchronization after login, message-triggered updates, or explicit retrieval.** For user attribute change notifications in other scenarios, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
 

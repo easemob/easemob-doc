@@ -172,7 +172,7 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | :------ | :----------- | 
 | Create an app  | Create your app                   | 
 | Upgrade the plan  | Activate the Pro or Enterprise EasyIM plan on a self-service basis                   | 
-| Subscribe to value-added services  | Activate [value-added services](/product/pricing_policy.html#value-added-service-fees) such as content moderation, real-time audio and video, and Instant Push                | 
+| Subscribe to value-added services  | Activate [value-added services](/product/pricing_policy.html#add-on-service-fees) such as content moderation, real-time audio and video, and Instant Push                |
 | Account center  | View order history and bills                  | 
 | Activate features  | Activate features such as the server-side conversation list or multiple platforms and devices                  | 
 | App overview | Display the service plan, domain configuration, and other information                  | 
@@ -207,6 +207,7 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | EasyIM user device logs | Query logs on a user's device or upload device logs to the EasyIM log server.  |
 | Chat room message rate | Query the number of uplink and downlink messages per minute in a chat room by chat room ID.  |
 
+<!--
 ## Value-added services
 
 ### Content moderation
@@ -264,6 +265,8 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 | Convert a local voice file to text | Convert a local voice file to text.                     |
 | Configure voice parameters       | Configure the format, sample rate, bit depth, and number of channels for a local voice file. |
 | Read transcription results       | Read the persisted text result from a voice message body.           |
+
+-->
 
 ## On-premises deployment
 

@@ -41,7 +41,7 @@ The other user does not need to accept or decline the deletion. When deleting a 
   - You can [call the recommended API to retrieve a paginated friend list](/rest/user_friend_list_paged.html). Each friend object contains the friend's user ID and remarks.
   - You can also [call the earlier API to retrieve the entire friend list at once](/rest/user_friend_list_obtain.html). This list contains only the user IDs of the friends.
 - Using a client-side API:
-  - You can call the recommended API to [retrieve the friend list from the server all at once or a page at a time](/document/android/user_relationship.html#retrieve-the-friend-list-from-the-server). Each friend object contains the friend's user ID and remarks. You can also call the earlier API to retrieve the entire friend list at once. This list contains only the user IDs of the friends. 
+  - You can call the recommended API to [retrieve the friend list from the server all at once or a page at a time](/document/android/user_relationship.html#retrieve-the-friend-list-and-friend-information). Each friend object contains the friend's user ID and remarks. You can also call the earlier API to retrieve the entire friend list at once. This list contains only the user IDs of the friends.
   - You can retrieve the local friend list or information about an individual friend, including the friend's user ID and remarks, at once.
    
 :::tip

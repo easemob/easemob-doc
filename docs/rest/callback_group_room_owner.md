@@ -11,7 +11,7 @@ After the group owner or chat room owner is changed successfully, the EasyIM ser
 
 ## Trigger conditions
 
-- The [group owner](/document/android/group_members.html#change-the-group-owner) or [chat room owner](/document/android/room_members.html#change-the-chat-room-owner) is changed on the client.
+- The [group owner](/document/android/group_members.html#transfer-chat-group-ownership) or [chat room owner](/document/android/room_members.html#transfer-chat-room-ownership) is changed on the client.
 - A RESTful API is called to change the [group owner](/rest/group_owner_transfer.html) or [chat room owner](/rest/chatroom_owner_transfer.html).
 
 ## Webhook request

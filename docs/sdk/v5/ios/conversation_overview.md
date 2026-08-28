@@ -4,7 +4,7 @@
 
 A conversation is a collection of messages in a one-to-one chat, group chat, or chat room. The iOS SDK represents a local conversation through `EMConversation`. The application can read data such as the conversation ID, conversation type, latest message, unread count, pin status, conversation tags, local extension properties, conversation name, and avatar.
 
-The iOS SDK supports [automatically synchronizing server-side conversation data locally after successful login](initialization.html#设置登录后自动同步数据). After synchronization is complete, the application reads and displays the conversation list through local APIs.
+The iOS SDK supports [automatically synchronizing server-side conversation data locally after successful login](initialization.html#set-automatic-data-synchronization-after-login). After synchronization is complete, the application reads and displays the conversation list through local APIs.
 
 ## Prerequisite
 

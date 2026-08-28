@@ -91,7 +91,7 @@ The following examples show chat room leave events.
 
 ### Trigger conditions
 
-- A user is removed from a [chat group](/document/android/group_manage.html#remove-a-member) or [chat room](/document/android/room_manage.html#be-removed) on the client.
+- A user is removed from a [chat group](/document/android/group_manage.html#remove-members) or [chat room](/document/android/room_manage.html#be-removed) on the client.
 - A [RESTful API is called to remove a user from a chat group](/rest/group_member_remove_single.html) or [chat room](/rest/chatroom_member_remove_single.html).
 
 ### Webhook request

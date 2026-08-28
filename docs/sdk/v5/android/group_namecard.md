@@ -134,7 +134,7 @@ After automatic user information management is enabled, the SDK performs the fol
 3. If the message contains a later update time, the SDK automatically retrieves the latest name card from the server.
 4. After a successful retrieval, the SDK updates local memory and triggers `EMGroupChangeListener#onUserGroupNamecardUpdated`.
 
-You can also call `EMMessage#getSenderInfo()` to obtain the currently available group member name card information for the message sender. See [Automatic user information management](userinfo_provider.html#通过消息获取发送方信息).
+You can also call `EMMessage#getSenderInfo()` to obtain the currently available group member name card information for the message sender. See [Automatic user information management](userinfo_provider.html#obtain-sender-information-through-a-message).
 
 ## Considerations
 

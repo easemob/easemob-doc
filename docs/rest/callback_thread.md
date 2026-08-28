@@ -11,7 +11,7 @@ When a message in a message thread (Thread) is sent, recalled, or modified, the 
 
 ## Trigger conditions
 
-- A message in a message thread is [sent](/document/android/thread_message.html#send-a-message-in-a-message-thread), [recalled](/document/android/thread_message.html#recall-a-message-in-a-message-thread), or [edited](/document/android/message_modify.html) on the client.
+- A message in a message thread is [sent](/document/android/thread_message.html#send-messages-in-a-message-thread), [recalled](/document/android/thread_message.html#recall-messages-in-a-message-thread), or [edited](/document/android/message_modify.html) on the client.
 - A RESTful API is called to [send](/rest/message_group.html), [recall](/rest/message_recall_single.html), or [edit](/rest/message_modify.html) a message in a message thread.
 
 ## Webhook request

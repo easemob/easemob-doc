@@ -40,7 +40,7 @@ To also synchronize the contact list or joined chat group list, include `.contac
 options.dataSyncType = [.conversations, .contacts, .joinedGroups]
 ```
 
-`EMDataSyncType` is a bitmask option. To ensure explicit behavior that is not affected by differences in default values between versions, explicitly set `dataSyncType`. For details about automatically synchronizing data after login, see [SDK initialization documentation](initialization.html#设置登录后自动同步数据).
+`EMDataSyncType` is a bitmask option. To ensure explicit behavior that is not affected by differences in default values between versions, explicitly set `dataSyncType`. For details about automatically synchronizing data after login, see [SDK initialization documentation](initialization.html#set-automatic-data-synchronization-after-login).
 
 ### Monitor conversation list synchronization
 

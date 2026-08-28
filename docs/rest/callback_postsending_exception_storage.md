@@ -37,7 +37,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/callbacks/storage/info' \
 
 ### Request header fields
 
-For the `Accept` and `Authorization` fields, see [Request header fields](overview.html#request-header).
+For the `Accept` and `Authorization` fields, see [Request header fields](overview.html#request-header-fields).
 
 ### Response example
 
@@ -121,7 +121,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/callbacks/storage/retry' \
 
 ### Request header fields
 
-For the `Content-Type` and `Authorization` fields, see [Request header fields](overview.html#request-header).
+For the `Content-Type` and `Authorization` fields, see [Request header fields](overview.html#request-header-fields).
 
 ### Request body fields
 

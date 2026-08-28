@@ -140,7 +140,7 @@ After the feature is enabled, the SDK performs the following operations:
 4. If the message contains a later time or no corresponding name card is cached, the SDK automatically retrieves the sender's latest name card in that group.
 5. After retrieval and cache update, the SDK triggers `onUserGroupNamecardUpdated`.
 
-The `message.sender` field currently provides basic sender attributes such as `userId`, `nickname`, and `avatarUrl`; it is not a public entry point for reading a group member name card. To display a name card, use `getMembersAttributes`, `onUserGroupNamecardUpdated`, and locally maintained display data in your app. See [Automatic user information management](userinfo_provider.html#通过消息获取发送方信息).
+The `message.sender` field currently provides basic sender attributes such as `userId`, `nickname`, and `avatarUrl`; it is not a public entry point for reading a group member name card. To display a name card, use `getMembersAttributes`, `onUserGroupNamecardUpdated`, and locally maintained display data in your app. See [Automatic user information management](userinfo_provider.html#retrieve-sender-information-from-a-message).
 
 ## Considerations
 

@@ -4,7 +4,7 @@
 
 A conversation is a collection of messages in a one-to-one chat, group chat, or chat room. The SDK represents a local conversation with `EMConversation`. Your app can read data such as the conversation ID, conversation type, latest message, unread count, pin status, conversation tags, and local extension field.
 
-The SDK can [automatically synchronize server-side conversation data after login and write it locally](initialization.html#设置登录后自动同步数据). After synchronization is complete, your app reads and displays the conversation list through local APIs.
+The SDK can [automatically synchronize server-side conversation data after login and write it locally](initialization.html#set-automatic-data-synchronization-after-login). After synchronization is complete, your app reads and displays the conversation list through local APIs.
 
 ## Prerequisite
 

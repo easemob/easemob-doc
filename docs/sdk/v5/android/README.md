@@ -19,6 +19,5 @@ The EasyIM Android SDK provides messaging, conversation, chat group, chat room, 
 
 - [Beginner's Guide](beginner_guide.html)
 - [Quickstart](quickstart.html)
-- [Demo](demo.html)
 - [API Reference](apireference.html)
 - [Release Notes](releasenote.html)

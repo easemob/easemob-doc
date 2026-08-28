@@ -25,7 +25,7 @@ Before continuing, familiarize yourself with the following core concepts:
 - Sending method: Stream messages can be sent only through the [server-side RESTful API](/rest/message_stream_send_single.html).
 - Client capabilities: The Android SDK supports only receiving streaming messages, not sending them.
 - Message identifier: `msgId` identifies an entire streaming message.
-- Message limitations: For limits such as the total message length, chunk sending interval, and total transmission duration, see the [server-side API documentation](/rest/message_stream_send_single.html#支持范围与限制).
+- Message limitations: For limits such as the total message length, chunk sending interval, and total transmission duration, see the [server-side API documentation](/rest/message_stream_send_single.html#supported-scope-and-limitations).
 
 ## Prerequisite
 
@@ -226,12 +226,13 @@ Stream messages support the following message features:
 | [Conversation unread count](conversation_unread.html) | Yes | Include the message in the conversation unread count. |
 | Last message in a conversation | Yes | Display the message as the last message in a conversation. |
 | [Offline push](/document/android/push/push_overview.html) | Yes | Send a push notification when the user is offline. |
-| [Content moderation](/value-added/moderation/moderation_overview.html) | No | Moderate and intercept message content. |
-| [Message translation](/value-added/translation/message_translation_android.html) | Yes | Translate message content. |
 | [Pre-delivery webhook](/rest/callback_presending.html) | No | Trigger a server-side callback before sending a message so the app server can preprocess it. |
 | [Post-delivery webhook](/rest/callback_postsending.html)  | No | Trigger a server-side callback after sending a message so the app backend can perform necessary data synchronization. |
 | Synchronization to the sender's other clients after successful delivery | No | Synchronize the successfully sent message to the sender's other devices. |
-| [Local database storage on the sender and recipient](/product/limitation.html#消息存储) | Yes | Store the message in the sender's and recipient's local databases. |
+| [Local database storage on the sender and recipient](/product/limitation.html#message-storage) | Yes | Store the message in the sender's and recipient's local databases. |
+
+<!-- | [Content moderation](/value-added/moderation/moderation_overview.html) | No | Moderate and intercept message content. | -->
+<!-- | [Message translation](/value-added/translation/message_translation_android.html) | Yes | Translate message content. | -->
 
 ## FAQ
 

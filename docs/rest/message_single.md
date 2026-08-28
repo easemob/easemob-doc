@@ -40,7 +40,9 @@ The steps are described below:
 - Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_message_conversation.html#add-messages-sent-through-rest-apis-to-the-conversation-list).
 - Calling this API triggers a post-delivery callback event. For details, see [Webhook events](callback_message_send.html#send-one-to-one-messages).
 - You can use common optional message parameters to specify whether to synchronize a message to all of the sender's online devices, which users cannot retrieve the message when fetching roaming messages, and whether to deliver the message only to online users. For details, see [Common optional message parameters](#common-optional-message-parameters).
+<!--
 - [The content moderation service checks specific fields in the message `body`; the fields checked vary by message type](/value-added/moderation/moderation_mechanism.html). Passing too much business information in these fields may reduce moderation effectiveness. Avoid placing business information in fields subject to moderation and use the `ext` extension field instead.
+-->
 
 ## Call frequency limit
 
@@ -946,7 +948,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/users' \
 | `sync_device`   | Bool   | No       | Whether to synchronize the message to all of the sender's online devices after it is sent successfully:<br/> - `true`: Yes.<br/> - (Default) `false`: No. |
 | `roam_ignore_users`   | List   | No | Specifies which users cannot retrieve this message when fetching roaming messages. |
 | `routetype`     | String | No       | If this parameter is included, set it to `ROUTE_ONLINE`. The recipient receives the message only when online and cannot receive it when offline. If this parameter is omitted, the recipient receives the message whether online or offline. |
-| `ext`   | JSON   | No       | Messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/document/ios/push_display_field.html) and [Android push fields](/document/android/push/push_display_field.html). |
+| `ext`   | JSON   | No       | Messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/document/ios/push/push_display_field.html) and [Android push fields](/document/android/push/push_display_field.html). |
 | `ext.em_ignore_notification` | Bool   | No | Whether to send a silent message:<br/> - `true`: Yes.<br/> - (Default) `false`: No.<br/>For a silent message, when the user is offline, EasyIM does not push a message notification to the user's device through a third-party push service. The user therefore receives no push notification. When the user gets online again, they receive all messages sent while they were offline. Neither silent messages nor DND mode sends push notifications. The difference is that the sender sets a message to be silent, whereas the recipient uses DND mode to disable push notifications during a specified period. |
 
 #### Response description

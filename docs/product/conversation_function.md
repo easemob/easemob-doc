@@ -300,6 +300,7 @@ The EasyIM SDKs support offline push. Supported mobile vendor push services incl
 | Set push extensions | Use extension fields to customize push settings, such as forced push and silent messages. |
 | Query offline push result statistics | Query offline push results in the [EasyIM Console](https://console.easyim.ai/user/login). |
 
+<!--
 ## Content moderation
 
 Use the EasyIM [content moderation service](/value-added/moderation/moderation_overview.html) to detect message content in various scenarios, helping you manage app message content and mitigate the risk of prohibited content.
@@ -310,6 +311,7 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 | Custom message handling rules | Customize policies for message delivery or interception.  |
 | Callback for message moderation results | Send message moderation results to the customer's server through a callback. |
 | Unified content moderation backend | Provide a visual content moderation backend for querying moderation records and viewing moderation statistics.  |
+-->
 
 
 

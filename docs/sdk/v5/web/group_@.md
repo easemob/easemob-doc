@@ -127,7 +127,7 @@ Depending on your business requirements, the client can display prompts such as 
 
 ### Relationship with offline push
 
-If the recipient's conversation [push notification mode](/document/web/push/push_notification_mode_dnd.html#推送通知方式) is set to `AT` (receive only @ message notifications), the server uses `ext.em_at_list` to determine whether the group message triggers offline push. Therefore, correctly set `em_at_list` when sending a group @ message.
+If the recipient's conversation [push notification mode](/document/web/push/push_notification_mode_dnd.html#push-notification-modes) is set to `AT` (receive only @ message notifications), the server uses `ext.em_at_list` to determine whether the group message triggers offline push. Therefore, correctly set `em_at_list` when sending a group @ message.
 
 ## API list
 

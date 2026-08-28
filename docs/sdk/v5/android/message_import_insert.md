@@ -16,7 +16,7 @@ The Android SDK provides the following methods:
 
 Before you begin, ensure that the following requirements are met:
 
-- Initialize the SDK and [open the current user's local database](initialization.html#设置登录后自动同步数据). See [Quickstart](quickstart.html).
+- Initialize the SDK and [open the current user's local database](initialization.html#set-automatic-data-synchronization-after-login). See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 

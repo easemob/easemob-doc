@@ -52,14 +52,14 @@ options.dnsURL = @"xxxx";// Set the URL configured on the server.
 
 | API | Module/Type | Description |
 | :--- | :--- | :--- |
-| [`optionsWithAppkey`](#statically-configure-an-ip-address-domain) | `EMOptions` | Creates an SDK configuration object. |
-| [`enableDnsConfig`](#statically-configure-an-ip-address-domain) | `EMOptions (PrivateDeploy)` | Controls whether to use DNS configuration. When set to `NO`, static server addresses are used. |
+| [`optionsWithAppkey`](#statically-configure-an-ip-addressdomain) | `EMOptions` | Creates an SDK configuration object. |
+| [`enableDnsConfig`](#statically-configure-an-ip-addressdomain) | `EMOptions (PrivateDeploy)` | Controls whether to use DNS configuration. When set to `NO`, static server addresses are used. |
 | [`chatServer`](#method-1-tcp-connection) | `EMOptions (PrivateDeploy)` | Sets the TCP chat server address. |
 | [`chatPort`](#method-1-tcp-connection) | `EMOptions (PrivateDeploy)` | Sets the TCP chat server port. |
-| [`restServer`](#statically-configure-an-ip-address-domain) | `EMOptions (PrivateDeploy)` | Sets the REST server address. |
+| [`restServer`](#statically-configure-an-ip-addressdomain) | `EMOptions (PrivateDeploy)` | Sets the REST server address. |
 | [`webSocketServer`](#method-2-websocket-connection) | `EMOptions (PrivateDeploy)` | Sets the WebSocket server address. |
 | [`webSocketPort`](#method-2-websocket-connection) | `EMOptions (PrivateDeploy)` | Sets the WebSocket server port. |
-| [`enableTLSConnection`](#statically-configure-an-ip-address-domain) | `EMOptions (PrivateDeploy)` | Enables TLS for chat or WebSocket connections. |
-| [`usingHttpsOnly`](#statically-configure-an-ip-address-domain) | `EMOptions` | Uses only HTTPS. |
+| [`enableTLSConnection`](#statically-configure-an-ip-addressdomain) | `EMOptions (PrivateDeploy)` | Enables TLS for chat or WebSocket connections. |
+| [`usingHttpsOnly`](#statically-configure-an-ip-addressdomain) | `EMOptions` | Uses only HTTPS. |
 | [`dnsURL`](#dynamically-configure-addresses) | `EMOptions (PrivateDeploy)` | Sets the URL of the server-side DNS address table. |
-| [`initializeSDKWithOptions`](#statically-configure-an-ip-address-domain) | `EMClient` | Initializes the SDK using the preceding configuration. |
+| [`initializeSDKWithOptions`](#statically-configure-an-ip-addressdomain) | `EMClient` | Initializes the SDK using the preceding configuration. |

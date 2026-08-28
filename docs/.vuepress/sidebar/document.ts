@@ -221,17 +221,8 @@ const documentV5Sidebar = [
         { text: '设置推送通知的显示属性', link: 'push/push_display_attribute.html', only: ['harmonyos'] },
         { text: 'Notification Modes and Do Not Disturb', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
         { text: 'Push Templates', link: 'push/push_template.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
-        { text: 'Push Translation', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+        // { text: 'Push Translation', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
         { text: 'Push Extensions', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
-        {
-          text: 'uni-app Offline Push',
-          collapsible: true,
-          children: [
-            { text: 'Use the Push Plugin', link: 'push/uniapp_push.html' },
-            { text: 'Integrate FCM', link: 'push/uniapp_push_fcm.html' },
-          ],
-          only: ['web']
-        },
         // { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
       ],
       except: ['server-side']
@@ -727,8 +718,8 @@ const documentV5Sidebar = [
           { text: '设置通知展示方式', link: 'push_display_mode_set.html' },
           { text: '设置免打扰和通知方式', link: 'push_settings_set.html' },
           { text: '查询免打扰和通知方式设置', link: 'push_settings_query.html' },
-          { text: '设置通知首选语言', link: 'push_preferred_language_set.html' },
-          { text: '获取通知首选语言', link: 'push_preferred_language_obtain.html' },
+          // { text: '设置通知首选语言', link: 'push_preferred_language_set.html' },
+          // { text: '获取通知首选语言', link: 'push_preferred_language_obtain.html' },
           { 
           text: '使用推送模板',
           collapsible: true,
@@ -798,12 +789,6 @@ const documentV5Sidebar = [
                   { text: '表情回复变更', link: 'callback_reaction.html' },
                 ]
          },
-          { text: '会话回调',
-                collapsible: true,
-                children: [
-                  { text: '会话已读回执', link: 'callback_single_conversation_ack.html' }
-                ]
-          },
           { text: '群组与聊天室回调', 
             collapsible: true,
             children: [
@@ -847,7 +832,6 @@ const documentV5Sidebar = [
                 { text: '话题内消息操作', link: 'callback_thread.html' }
               ]
             },
-            { text: '历史版本（群组与聊天室操作消息）', link: 'callback_group_room_old.html' }, 
             ]
           },
           { text: '离线推送回调', link: 'callback_offline_push.html' },

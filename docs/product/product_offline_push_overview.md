@@ -55,7 +55,7 @@ For information about configuring the push notification mode, see the documentat
 
 ## Do Not Disturb mode
 
-Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM does not send offline push notifications during either period, so you can disable push by configuring Do Not Disturb mode. To push a message to a specified user while a Do Not Disturb period or duration is in effect, configure [forced push](/document/android/push/push_extension.html#forced-push).
+Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM does not send offline push notifications during either period, so you can disable push by configuring Do Not Disturb mode. To push a message to a specified user while a Do Not Disturb period or duration is in effect, configure [forced push](/document/android/push/push_extension.html#force-push).
 
 The Do Not Disturb period applies only at the app level, while the Do Not Disturb duration applies to the app and one-to-one and group chat conversations. If you configure both a Do Not Disturb period and a Do Not Disturb duration, the total time during which Do Not Disturb mode is in effect is the sum of the two periods.
 
@@ -96,6 +96,7 @@ You can set push notification titles and content in multiple ways, including cal
 
 For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set push notification display attributes](/document/android/push/push_display_attribute.html#set-push-notification-display-attributes).
 
+<!--
 ## Push translation
 
 Push notifications work with the [translation feature](/value-added/translation/message_translation_android.html). If a user enables automatic translation and sends a message, the SDK sends both the original and translated messages.
@@ -103,6 +104,8 @@ Push notifications work with the [translation feature](/value-added/translation/
 As a recipient, you can set a preferred language for push notifications received while you are offline. If the language of the translated message matches your setting, the translated message is displayed in the push notification. Otherwise, the original message is displayed. The translation feature is provided by the Microsoft Azure Translation API. Click [here](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) to view the supported languages.
 
 For information about setting and retrieving the preferred language for push notifications, see the documentation for the relevant platform. For example, for Android, see [Configure push translation](/document/android/push/push_translation.html).
+
+-->
 
 ## Push extensions
 

@@ -1,10 +1,10 @@
-# Authenticate with an EasyIM App Token
+# Authenticate with an App Token
 
 <Toc />
 
 The REST APIs provided by EasyIM require an app token, which is an admin-privilege token. You need to include an app token when sending an HTTP request. This section describes how to obtain an app token.
 
-EasyIM Server SDKs also provide management capabilities for resources such as users, messages, chat groups, and chat rooms. For details, see [Java Server SDK](java_server_sdk.html) and [PHP Server SDK](php_server_sdk.html).
+EasyIM Server SDKs also provide management capabilities for resources such as users, messages, chat groups, and chat rooms. For details, see [Java Server SDK](java_server_sdk_2.0.html).
 
 ## Obtain an admin-privilege token
 

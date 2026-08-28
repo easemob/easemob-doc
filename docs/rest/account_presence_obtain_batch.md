@@ -12,7 +12,7 @@ This API queries whether multiple users are online or offline. To query multiple
 
 ## Call frequency limit
 
-The aggregate call frequency limit for this API, other user account management APIs, and offline push APIs is 100 requests per second per App Key. For details, see [API call frequency limits](limitationapi.html#user-account-management).
+The aggregate call frequency limit for this API, other user account management APIs, and offline push APIs is 100 requests per second per App Key. For details, see [API call frequency limits](limitationapi.html#user-management).
 
 ## Request URL
 

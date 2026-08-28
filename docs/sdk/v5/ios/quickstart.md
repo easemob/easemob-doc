@@ -162,6 +162,6 @@ When you create a new project using Xcode 15, if the **Sandbox: rsync.samba(4733
 
 | API | Module/Class | Description |
 | :--- | :--- | :--- |
-| [initializeSDKWithOptions:](#_3-initialize-the-sdk) | EMClient | Initializes the SDK with EMOptions. |
-| [loginWithUsername:token:completion:](#_5-log-in-to-the-account) | EMClient | Logs in asynchronously using a user ID and Token. |
-| [sendMessage:progress:completion:](#_6-send-a-message) | IEMChatManager | Sends a message asynchronously. |
+| [initializeSDKWithOptions:](#3-initialize-the-sdk) | EMClient | Initializes the SDK with EMOptions. |
+| [loginWithUsername:token:completion:](#5-log-in-to-the-account) | EMClient | Logs in asynchronously using a user ID and Token. |
+| [sendMessage:progress:completion:](#6-send-a-message) | IEMChatManager | Sends a message asynchronously. |

@@ -13,7 +13,7 @@ Before using this API, enable open registration for the corresponding app in the
 
 ## Call frequency limit
 
-The aggregate call frequency limit for this API, other user account management APIs, and offline push APIs is 100 requests per second per App Key. For details, see [API call frequency limits](limitationapi.html#user-account-management).
+The aggregate call frequency limit for this API, other user account management APIs, and offline push APIs is 100 requests per second per App Key. For details, see [API call frequency limits](limitationapi.html#user-management).
 
 ## Request URL
 
@@ -104,4 +104,4 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | The username being registered already exists. | Register the user again with a different username.  |
 | 401         | unauthorized  | Unable to authenticate (OAuth)   | The token is invalid. It may have expired or be incorrect.   | Use a new token to access the API.       |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | The App Key does not exist. | Check whether `orgName` and `appName` are correct, or [create an app](/product/console/app_create.html). |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | The number of registered users exceeds the limit of the current product plan. | The free plan supports up to 100 registered users. You can [upgrade to a paid plan](/product/pricing_method.html#subscription-upgrade-plan). The Pro and Enterprise plans have no limit on the number of registered users.   |
+| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | The number of registered users exceeds the limit of the current product plan. | The free plan supports up to 100 registered users. You can [upgrade to a paid plan](/product/pricing_method.html#subscribe-to-or-upgrade-a-plan). The Pro and Enterprise plans have no limit on the number of registered users.   |

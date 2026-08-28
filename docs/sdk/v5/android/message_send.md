@@ -6,7 +6,7 @@ The EasyIM Android SDK creates messages through `EMMessage` and sends them throu
 
 - By default, EasyIM allows strangers to send one-to-one messages without adding each other as friends. To allow only friends to exchange one-to-one messages, [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check).
 - For chat groups and chat rooms, a user can send a message to only one group or chat room at a time, and the user must belong to that group or chat room.
-- For message sending controls, see the relevant documentation for [one-to-one chats](/product/message_single_chat.html#单聊消息发送控制), [group chats](/product/message_group.html#群组消息发送控制), and [chat rooms](/product/message_chatroom.html#聊天室消息发送控制).
+- For message sending controls, see the relevant documentation for [one-to-one chats](/product/message_single_chat.html#one-to-one-message-sending-controls), [group chats](/product/message_group.html#chat-group-message-sending-controls), and [chat rooms](/product/message_chatroom.html#chat-room-message-sending-controls).
 
 ## Prerequisite
 
@@ -154,7 +154,7 @@ Sending an attachment message consists of the following two steps:
 
 #### Resource processing
 
-By default, after `EMChatManager#sendMessage` is called, the SDK automatically uploads local attachments to the EasyIM server, and the recipient SDK can automatically download them. Use `EMOptions#setAutoTransferMessageAttachments` to control whether the SDK automatically transfers attachments. For message attachment size and storage limits, see [Message Attachment Limitations](/product/limitation.html#消息存储).
+By default, after `EMChatManager#sendMessage` is called, the SDK automatically uploads local attachments to the EasyIM server, and the recipient SDK can automatically download them. Use `EMOptions#setAutoTransferMessageAttachments` to control whether the SDK automatically transfers attachments. For message attachment size and storage limits, see [Message Attachment Limitations](/product/limitation.html#message-storage).
 
 ### Send image messages
 
@@ -766,6 +766,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 Text, location, command, and custom messages typically do not involve attachment uploads, so `onProgress` is generally not triggered. SDK callbacks are not guaranteed to run on the main thread. Switch to the main thread when updating the Android UI.
 :::
 
+<!--
 #### Content moderation before sending messages
 
 - Content moderation examines the message body.
@@ -775,6 +776,7 @@ Text, location, command, and custom messages typically do not involve attachment
 - Set whether the sender receives replaced content after moderation.
 
 By default, content replaced during moderation is delivered only to the recipient. For the sender to also receive the replacement, **contact the EasyIM business manager to enable the permission** and set `EMOptions#setUseReplacedMessageContents` to `true` during SDK initialization. After it is enabled, the sender receives the new content when a message is replaced during moderation. If the setting is disabled, which is the default, the sender retains the original sent content and is not notified of the replacement.
+-->
 
 #### Message size and storage limitations
 

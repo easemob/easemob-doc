@@ -176,7 +176,7 @@ EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
 
 :::tip
 1. SDK operations that require server access must be performed after login and connection establishment. SDK initialization can be completed before login. The local database opens during login. For details, see [Login](login.html).
-2. After login succeeds, the SDK automatically loads local conversation and chat group data. On the main page, directly call the local read APIs for [conversations](conversation_list.html#一次性获取本地所有会话) and the [chat group list](group_manage.html#获取当前用户加入的群组列表).
+2. After login succeeds, the SDK automatically loads local conversation and chat group data. On the main page, directly call the local read APIs for [conversations](conversation_list.html#retrieve-all-local-conversations-at-once) and the [chat group list](group_manage.html#retrieve-the-groups-joined-by-the-current-user).
 :::
 
 ### 4. Send a one-to-one message

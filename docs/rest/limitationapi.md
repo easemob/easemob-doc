@@ -291,6 +291,7 @@ The total default call frequency limit for the user management APIs and offline 
 | Delete an Offline Push Template          | DELETE  | /{org_name}/{app_name}/notification/template/{name} | 10 calls/second/App Key  |          |  
 | Set the Push Template Name for a Receiver   | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template | 100 calls/second/App Key. |          |  
 
+<!--
 <HideSection :show="$frontmatter.show_content_moderation" :headings="['content-moderation']">
 
 ## Content moderation
@@ -316,6 +317,7 @@ The total default call frequency limit for the user management APIs and offline 
 | Delete Keywords in Batches | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 calls/second/App Key | 50 calls/second  |
 
 </HideSection>
+-->
 
 ## Post-sending callbacks
 

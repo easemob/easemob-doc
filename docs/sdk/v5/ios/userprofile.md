@@ -200,7 +200,7 @@ If you do not subscribe to attribute changes of non-friend users, the app genera
 
 Attribute updates of both friends and non-friend users can trigger the SDK's `onUserInfoUpdate` event in the following ways:
 
-1. **Explicit update retrieval**: When the app calls an API to [retrieve user attributes from the server](#retrieve-all-user-attributes-from-the-server) or [retrieve group member information from the server](group_members.html#获取群成员列表), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates the local data and triggers this event.
+1. **Explicit update retrieval**: When the app calls an API to [retrieve user attributes from the server](#retrieve-all-user-attributes-from-the-server) or [retrieve group member information from the server](group_members.html#retrieve-the-chat-group-member-list), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates the local data and triggers this event.
 2. **Updates carried in messages**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a message is received and the sender's user attribute update time carried in the message is later than the local cache, the SDK retrieves the user attributes again and triggers this event. This mechanism applies to both friend and non-friend senders.
 3. **Subscribed user changes (non-friend users only)**: If the app has [subscribed to attribute change events of non-friend users](#subscribe-to-attribute-change-events-of-non-friend-users), the SDK also triggers this event when the attributes of these subscribed non-friend users change.
 
@@ -245,7 +245,7 @@ If you have set a user nickname through the [client](#set-all-attributes-of-the-
  - When setting the user nickname through a RESTful API, use the `nickname` key in the request. Otherwise, the client cannot read the attribute correctly.
  - The `nickname` returned by the RESTful APIs for [retrieving user details](/rest/account_detail_obtain_single.html) and [deleting a user account](/rest/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. We recommend keeping them consistent. When changing one nickname, update the other at the same time.
 
-For iOS, call [updatePushDisplayName](/document/ios/push/push_display_attribute.html#设置和获取推送通知的显示属性) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
+For iOS, call [updatePushDisplayName](/document/ios/push/push_display_attribute.html#set-push-notification-display-attributes) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
 
 ### Why is error code 4 returned?
 

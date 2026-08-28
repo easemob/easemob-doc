@@ -38,7 +38,6 @@ In the **Development Configuration** section, you can view the following app cre
 
 In the **Service Information** section, you can view the current plan and account balance and [change the plan](purchase_package.html#subscribe-to-or-upgrade-a-plan).
 
-For information about trial plans and extended features for development version apps, see [Development Version App Trial](/product/pricing_method.html#测试版应用试用说明).
+For information about trial plans and extended features for development version apps, see [Development Version App Trial](/product/pricing_method.html#trial-plans-for-development-apps).
 
 ![img](/images/console/app_info_activation.png)
-

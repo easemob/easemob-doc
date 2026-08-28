@@ -4,7 +4,7 @@ EasyIM supports integration with third-party message-push services to send messa
 
 ## Offline push process
 
-When the client disconnects, the app process closes, or the user goes offline for another reason, EasyIM sends a notification to the offline user's device through an integrated third-party push channel. After the user gets online again, the SDK synchronizes messages generated while the user was offline from the server. The notification badge generally indicates the accumulated number of notifications during the offline period and is not the same as the actual unread message count in the app. For details, see the offline push documentation for [Android](/document/android/push/push_overview.html#推送原理) and [iOS](/document/ios/push/push_overview.html#推送原理).
+When the client disconnects, the app process closes, or the user goes offline for another reason, EasyIM sends a notification to the offline user's device through an integrated third-party push channel. After the user gets online again, the SDK synchronizes messages generated while the user was offline from the server. The notification badge generally indicates the accumulated number of notifications during the offline period and is not the same as the actual unread message count in the app. For details, see the offline push documentation for [Android](/document/android/push/push_overview.html#push-principles) and [iOS](/document/ios/push/push_overview.html#offline-push-process).
 
 **EasyIM does not send offline push notifications in the following two scenarios:**
 

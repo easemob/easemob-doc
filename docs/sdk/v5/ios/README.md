@@ -13,7 +13,7 @@ The EasyIM iOS SDK documentation currently covers message, chat group, and chat 
 | [Conversation management](conversation_overview.html) | Provides conversation list, unread count, pinning, marking, and deletion capabilities. Documentation is coming soon. |
 | [Chat group management](group_overview.html) | Manages chat groups, members, group attributes, member attributes, name cards, group @ mentions, and other group operations. |
 | [Chat room management](room_overview.html) | Manages chat rooms, members, chat room attributes, mute lists, allowlists, blocklists, announcements, and superadmins. |
-| [Offline push](/push/push_overview.html) | Provides APNs-based offline push configuration and notification management. |
+| [Offline push](/document/ios/push/push_overview.html) | Provides APNs-based offline push configuration and notification management. |
 
 ## Explore the documentation
 
