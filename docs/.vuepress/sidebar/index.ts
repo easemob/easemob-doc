@@ -78,7 +78,6 @@ export const zhSidebar = sidebar({
       collapsible: true,
       children: [
         { text: "Register an Account", link: "console/account_register.html" },
-        { text: "Identity Verification", link: "console/real_name_authentication.html" },
         {
           text: "App Management",
           collapsible: true,
@@ -87,7 +86,6 @@ export const zhSidebar = sidebar({
             { text: "Create an App", link: "console/app_create.html" },
             { text: "Manage and Configure an App", link: "console/app_manage.html" },
             { text: "Launch an App", link: "console/app_launch.html" },
-            { text: "App Filing", link: "console/app_file.html" },
           ],
         },
         { text: "Purchase a Plan", link: "console/purchase_package.html" },
@@ -95,43 +93,15 @@ export const zhSidebar = sidebar({
           text: "Configure Basic Features",
           collapsible: true,
           children: [
-            { text: "Users", link: "console/basic_user.html" },
-            { text: "Messages", link: "console/basic_message.html" },
-            { text: "Conversations, Groups, and Chat Rooms", link: "console/basic_conversation_group_chatroom.html" },
-            { text: "Message Webhooks", link: "console/basic_webhook.html" },
-            { text: "Server API Calls", link: "console/basic_restful_api_call.html" },
-            { text: "Other Settings", link: "console/basic_other.html" },
+            { text: "User and Login", link: "console/basic_user.html" },
+            { text: "Message and Conversation", link: "console/basic_message_conversation.html" },
+            { text: "One-to-One and Group Chat", link: "console/basic_single_group_chat.html" },
+            { text: "Chat Room", link: "console/basic_chat_room.html" },
+            { text: "Webhooks", link: "console/basic_webhook.html" },
+            { text: "REST API Call Rate", link: "console/basic_restful_api_call.html" },
+            { text: "Security", link: "console/basic_security.html" },
           ],
         },
-        { text: "Activate Value-Added Services", link: "console/purchase_value_added.html" },
-        {
-          text: "Account Management",
-          collapsible: true,
-          children: [
-            { text: "Manage Account Information", link: "console/account_modify.html" },
-            {
-              text: "Security Settings",
-              collapsible: true,
-              children: [
-                {
-                  text: "MFA Verification",
-                  collapsible: true,
-                  children: [
-                    { text: "Bind an MFA Device", link: "console/account_security_mfa_bind.html" },
-                    { text: "Unbind an MFA Device", link: "console/account_security_mfa_unbind.html" },
-                  ],
-                },
-                { text: "Login Protection", link: "console/account_security_protection_login.html" },
-                { text: "Operation Protection", link: "console/account_security_protection_operation.html" },
-                { text: "Change the Account Password", link: "console/account_security_password_change.html" },
-                { text: "Change the Phone Number and Email Address", link: "console/account_security_mobile_email.html" },
-              ],
-            },
-            { text: "Recover the Account Password", link: "console/account_password_retrieve.html" },
-            { text: "Manage Subaccounts", link: "console/account_sub_create.html" },
-          ],
-        },
-        { text: "Billing Center", link: "console/account_center.html" },
         {
           text: "Operations Management",
           collapsible: true,
@@ -143,25 +113,6 @@ export const zhSidebar = sidebar({
                 { text: "User Management", link: "console/operation_user.html" },
                 { text: "Group Management", link: "console/operation_group.html" },
                 { text: "Chat Room Management", link: "console/operation_chatroom.html" },
-              ],
-            },
-            {
-              text: "Operational Data",
-              collapsible: true,
-              children: [
-                { text: "Data Queries", link: "console/operation_data.html" },
-                { text: "Message Statistics", link: "console/operation_message_statistics.html" },
-              ],
-            },
-            {
-              text: "Troubleshooting",
-              collapsible: true,
-              children: [
-                { text: "Request Quality Monitoring", link: "console/operation_troubleshooting_request_quality.html" },
-                { text: "Message Delivery Queries", link: "console/operation_troubleshooting_message_delivery.html" },
-                { text: "User Connection Status Queries", link: "console/operation_troubleshooting_user_connection.html" },
-                { text: "User Device Logs", link: "console/operation_troubleshooting_device_log.html" },
-                { text: "Chat Room Message Rate", link: "console/operation_troubleshooting_chatroom_rate.html" },
               ],
             },
           ],
