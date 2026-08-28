@@ -429,7 +429,7 @@ projects:
                 link: /document/ios/message_forward.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_send.html#发送合并消息
+                link: /document/web/message_send.html#send-combined-messages
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_forward.html   
@@ -1182,7 +1182,7 @@ projects:
                 link: /document/web/push/push_overview.html
               - icon: /sdk/uniapp.svg
                 text: uni-app
-                link: /document/web/push/uniapp_push.html
+                link: /document/web/push/push_overview.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html
