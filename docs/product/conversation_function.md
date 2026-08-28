@@ -196,7 +196,7 @@ Unlike one-to-one and group chats, chat rooms do not support offline message pus
 
 | Feature           | Description                                                         |
 | :------------- | :----------------------------------------------------------- |
-| Create a chat room     | Only users granted [superadmin](/document/server-side/chatroom_superadmin_add.html) permissions can create chat rooms. We recommend [calling a REST API to create a chat room](/document/server-side/chatroom_create.html). |
+| Create a chat room     | Only users granted [superadmin](/rest/chatroom_superadmin_add.html) permissions can create chat rooms. We recommend [calling a REST API to create a chat room](/rest/chatroom_create.html). |
 | Join a chat room     | Any app user who is not on the blocklist can freely join a chat room.                                   |
 | Leave a chat room     | Leave voluntarily or be removed from the chat room.  |
 | Destroy a chat room     | The chat room owner can destroy the chat room.                                       |

@@ -27,11 +27,11 @@ Before you begin, ensure that the following requirements are met:
 
 ## Create a chat room
 
-To create a chat room, call the server-side REST API described in [Create a chat room on the server](/document/server-side/chatroom_create.html). After the chat room is created, the client can [join the chat room](#join-a-chat-room) or [retrieve its details](room_attributes.html#retrieve-chat-room-details).
+To create a chat room, call the server-side REST API described in [Create a chat room on the server](/rest/chatroom_create.html). After the chat room is created, the client can [join the chat room](#join-a-chat-room) or [retrieve its details](room_attributes.html#retrieve-chat-room-details).
 
 ## Destroy a chat room
 
-To destroy a chat room, call the server-side REST API described in [Destroy a chat room](/document/server-side/chatroom_delete.html). After the chat room is destroyed, the other online members receive the `didDismissFromChatroom` callback with `reason` set to `EMChatroomBeKickedReasonDestroyed` and are then removed from the chat room.
+To destroy a chat room, call the server-side REST API described in [Destroy a chat room](/rest/chatroom_delete.html). After the chat room is destroyed, the other online members receive the `didDismissFromChatroom` callback with `reason` set to `EMChatroomBeKickedReasonDestroyed` and are then removed from the chat room.
 
 ## Join a chat room
 
@@ -122,7 +122,7 @@ If a regular chat room member remains offline for more than 2 minutes because of
 The following two types of members do not automatically leave the chat room when offline:
 
 - Members on the chat room allowlist. The chat room owner and admins are on the allowlist by default.
-- Users who were added when the chat room was [created through the REST API](/document/server-side/chatroom_create.html) and have never logged in.
+- Users who were added when the chat room was [created through the REST API](/rest/chatroom_create.html) and have never logged in.
 
 If multi-client and multi-device support is enabled for chat rooms, an allowlisted member's device does not automatically rejoin the chat room after reconnecting from an offline state and therefore cannot receive chat room messages. After logging in on that device, call `joinChatroom` to join the chat room manually.
 

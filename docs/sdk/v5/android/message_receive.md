@@ -398,7 +398,7 @@ If `EMOptions#setIncludeSendMessageInMessageListener` is enabled during initiali
 
 ### Determine whether a message is a chat room broadcast message
 
-For a chat room message, use the `EMMessage#isBroadcast` attribute to determine whether it is a [global chat room broadcast message sent through the REST API](/document/server-side/broadcast_to_chatrooms.html).
+For a chat room message, use the `EMMessage#isBroadcast` attribute to determine whether it is a [global chat room broadcast message sent through the REST API](/rest/broadcast_to_chatrooms.html).
 
 ### Message attachment download authentication
 

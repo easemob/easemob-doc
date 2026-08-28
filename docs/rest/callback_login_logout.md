@@ -61,14 +61,14 @@ User status changes can be detected in real time:
 3. The user actively disconnects the client from the network.
 4. The client network becomes completely unavailable, for example, when the user enters a tunnel without network coverage or enables airplane mode on a mobile device. The EasyIM server detects a heartbeat timeout after waiting 5 minutes, and the status changes to offline.
 5. The user terminates the app process, the device operating system terminates the process after the app is moved to the background, or the process exits unexpectedly because of a crash.
-6. The user is forced offline from a [single device](/document/server-side/account_offline_device_single.html) or [all logged-in devices](/document/server-side/account_offline_forced.html). This operation can be initiated from the [client](/document/android/multi_device.html#force-an-account-offline-from-a-single-device), [server](/document/server-side/account_offline_device_single.html), or [EasyIM Console](/product/console/operation_user.html#force-offline).
+6. The user is forced offline from a [single device](/rest/account_offline_device_single.html) or [all logged-in devices](/rest/account_offline_forced.html). This operation can be initiated from the [client](/document/android/multi_device.html#force-an-account-offline-from-a-single-device), [server](/rest/account_offline_device_single.html), or [EasyIM Console](/product/console/operation_user.html#force-offline).
 7. In a single-device login scenario, a device that logs in later forces the previously logged-in device offline.
 8. When the maximum number of devices for [multi-device login](/document/android/multi_device.html) is reached, a newly logged-in device forces a previously logged-in device offline. For multi-device login, EasyIM supports up to 4 simultaneously online devices per platform by default.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Webhook request
 
@@ -139,7 +139,7 @@ When a user logs in, logs out, or is forced offline, the EasyIM server sends a s
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format `App Key_UUID`.              |
 | `reason`    | String   | Reason for the status change: `login` (login), `logout` (logout), or `replaced` (forced offline). |
-| `security`  | String   | Signature in the format `MD5(callId + secret + timestamp)`. For the `secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`  | String   | Signature in the format `MD5(callId + secret + timestamp)`. For the `secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
 | `os`        | String   | Device operating system type.                                           |
 | `ip`        | String   | IP address from which the user logs in.                                         |
 | `host`      | String   | Server name.                                                 |

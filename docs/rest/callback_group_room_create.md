@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After a chat group or chat room is created successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the created chat group or chat room and synchronize data.
+After a chat group or chat room is created successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the created chat group or chat room and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - A [chat group](/document/android/group_manage.html#create-a-chat-group) or [chat room](/document/android/room_manage.html#create-a-chat-room) is created on the client.
-- A RESTful API is called to create a [chat group](/document/server-side/group_create.html) or [chat room](/document/server-side/chatroom_create.html).
+- A RESTful API is called to create a [chat group](/rest/group_create.html) or [chat room](/rest/chatroom_create.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group](/product/console/operation_group.html#create-a-chat-group) or [chat room](/product/console/operation_chatroom.html#create-a-chat-room) is created.
 
 ## Webhook request
@@ -66,7 +66,7 @@ The following descriptions use the chat group creation event as an example. The 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.role` | JSON | Chat group roles. If admins are configured, the admin roles are displayed. Otherwise, only the group owner role is displayed:<br/> - User ID: `owner`<br/> - User ID: `admin` |
 | `payload.member`| Array | Users added to the chat group when the chat group is created.    |

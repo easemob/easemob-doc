@@ -55,7 +55,7 @@ Each item in `items` is a `ChatRoomMemberEntry` with the following main fields:
 
 ### Transfer chat room ownership
 
-The current SDK does not provide a client API for transferring chat room ownership. To change the chat room owner, call the [server-side API](/document/server-side/chatroom_owner_transfer.html).
+The current SDK does not provide a client API for transferring chat room ownership. To change the chat room owner, call the [server-side API](/rest/chatroom_owner_transfer.html).
 
 ### Add a chat room admin
 

@@ -6,13 +6,13 @@ When a message in a message thread (Thread) is sent, recalled, or modified, the 
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - A message in a message thread is [sent](/document/android/thread_message.html#send-a-message-in-a-message-thread), [recalled](/document/android/thread_message.html#recall-a-message-in-a-message-thread), or [edited](/document/android/message_modify.html) on the client.
-- A RESTful API is called to [send](/document/server-side/message_group.html), [recall](/document/server-side/message_recall_single.html), or [edit](/document/server-side/message_modify.html) a message in a message thread.
+- A RESTful API is called to [send](/rest/message_group.html), [recall](/rest/message_recall_single.html), or [edit](/rest/message_modify.html) a message in a message thread.
 
 ## Webhook request
 

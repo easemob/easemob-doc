@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After a chat group or chat room is deleted successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to synchronize data.
+After a chat group or chat room is deleted successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - A user destroys a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) on the client.
-- A user calls a RESTful API to destroy a [chat group](/document/server-side/group_delete.html) or [chat room](/document/server-side/chatroom_delete.html).
+- A user calls a RESTful API to destroy a [chat group](/rest/group_delete.html) or [chat room](/rest/chatroom_delete.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a user deletes a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room).
 
 ## Webhook request
@@ -38,7 +38,7 @@ After a chat group or chat room is deleted successfully, the EasyIM server sends
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |

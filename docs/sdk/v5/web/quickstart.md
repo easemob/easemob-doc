@@ -60,7 +60,7 @@ This section describes how to integrate the EasyIM Web SDK into your project.
 
 Create a user in the [EasyIM Console](https://console.easyim.ai/user/login) and obtain the user ID and user token. For details, see [Create users](/product/console/operation_user.html#创建用户).
 
-In a production environment, to ensure security, integrate the [Get an App Token API](/document/server-side/easemob_app_token.html) and [Get a User Token API](/document/server-side/easemob_user_token.html) on your app server. The app server then issues user tokens to clients so that sensitive credentials are not exposed on the client.
+In a production environment, to ensure security, integrate the [Get an App Token API](/rest/easemob_app_token.html) and [Get a User Token API](/rest/easemob_user_token.html) on your app server. The app server then issues user tokens to clients so that sensitive credentials are not exposed on the client.
 
 ### Step 3: Implement the user interface
 

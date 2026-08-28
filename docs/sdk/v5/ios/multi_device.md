@@ -57,7 +57,7 @@ Each login ID uses the `userId/resource` format:
 - `userId`: The current user's user ID.
 - `resource`: The resource identifier corresponding to the logged-in device, used to distinguish a specific login device of the user.
 
-The `resource`, the `resourceId` parameter of the server-side [log out a device API](/document/server-side/account_offline_device_single.html), and the `res` field returned by the server-side [retrieve the online device list of a specified account API](/document/server-side/account_online_device_obtain.html) are semantically equivalent and identify one of the user's login devices.
+The `resource`, the `resourceId` parameter of the server-side [log out a device API](/rest/account_offline_device_single.html), and the `res` field returned by the server-side [retrieve the online device list of a specified account API](/rest/account_online_device_obtain.html) are semantically equivalent and identify one of the user's login devices.
 
 The iOS client API returns a complete `userId/resource` login ID, while the related server-side APIs generally require only the `resource` after `/`. Therefore, to call the server-side API for logging out a device, first extract `resource` from the login ID and then pass it as `resourceId`.
 

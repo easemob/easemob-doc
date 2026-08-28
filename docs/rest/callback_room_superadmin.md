@@ -2,18 +2,18 @@
 
 ## Feature overview
 
-After a chat room superadmin is added or removed successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the added or removed chat room superadmin and synchronize data.
+After a chat room superadmin is added or removed successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the added or removed chat room superadmin and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Add a superadmin
 
 ### Trigger conditions
 
-A RESTful API is called to [add a chat room superadmin](/document/server-side/chatroom_admin_add.html).
+A RESTful API is called to [add a chat room superadmin](/rest/chatroom_admin_add.html).
 
 ### Webhook request
 
@@ -44,7 +44,7 @@ A RESTful API is called to [add a chat room superadmin](/document/server-side/ch
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the added chat room superadmin. |
 | `payload.type` | String | Event for adding a chat room superadmin. The value is `ADD`.  |
@@ -61,7 +61,7 @@ A RESTful API is called to [add a chat room superadmin](/document/server-side/ch
 
 ### Trigger conditions
 
-A RESTful API is called to [remove a chat room superadmin](/document/server-side/chatroom_admin_remove.html).
+A RESTful API is called to [remove a chat room superadmin](/rest/chatroom_admin_remove.html).
 
 ### Webhook request
 
@@ -92,7 +92,7 @@ A RESTful API is called to [remove a chat room superadmin](/document/server-side
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.admin`| JSON   | User ID of the removed chat room superadmin. |
 | `payload.type` | String | Event for removing a chat room superadmin. The value is `REMOVE`.  |

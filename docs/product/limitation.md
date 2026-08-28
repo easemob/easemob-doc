@@ -43,9 +43,9 @@ By default, message attachments, such as images, audio, video, and other files, 
 
 When sending **one text streaming message**, you must comply with the following rules:
 
-- **Interval between chunks**: The interval between adjacent chunks cannot exceed 30 seconds. If it does, [error 14033](/document/server-side/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
-- **Total transmission duration**: The total transmission duration of all chunks cannot exceed 30 minutes. If another chunk is sent after the timeout, [error 14034](/document/server-side/message_stream_send_single.html#error-code) is returned.
-- **Total length**: The total length of the text content in all chunks cannot exceed 128 KB. If it does, [error 14032](/document/server-side/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
+- **Interval between chunks**: The interval between adjacent chunks cannot exceed 30 seconds. If it does, [error 14033](/rest/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
+- **Total transmission duration**: The total transmission duration of all chunks cannot exceed 30 minutes. If another chunk is sent after the timeout, [error 14034](/rest/message_stream_send_single.html#error-code) is returned.
+- **Total length**: The total length of the text content in all chunks cannot exceed 128 KB. If it does, [error 14032](/rest/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
 
 ### Message recall
 
@@ -94,7 +94,7 @@ Combined forwarding supports up to 10 nested levels and up to 300 messages at ea
 
 ### Chat room global broadcast messages
 
-You can [call a REST API to send a chat room global broadcast message](/document/server-side/broadcast_to_chatrooms.html). This feature is disabled by default. To activate it, contact the EasyIM business manager.
+You can [call a REST API to send a chat room global broadcast message](/rest/broadcast_to_chatrooms.html). This feature is disabled by default. To activate it, contact the EasyIM business manager.
 
 ### Pin messages
 
@@ -259,5 +259,5 @@ You can customize the sender nickname displayed in the recipient's push notifica
 
 ## Call frequency limit
 
-For REST API call frequency limits, see [REST API call frequency limits](/document/server-side/limitationapi.html).
+For REST API call frequency limits, see [REST API call frequency limits](/rest/limitationapi.html).
 

@@ -2,7 +2,7 @@
 
 You can use extension fields to implement custom push settings. This article uses force push and sending silent messages as examples to describe how to implement push extension features.
 
-For push extension fields, see [Offline push extension fields](/document/server-side/push_extension.html).
+For push extension fields, see [Offline push extension fields](/rest/push_extension.html).
 
 ## Set custom push fields
 

@@ -80,7 +80,7 @@ A message can be edited up to 10 times by default.
 After a message is edited, the recipient and the current account's other online devices receive the `onMessageContentChanged` callback. The callback carries the edited message, the user ID of the last editor, and the latest edit time. In group chats and chat rooms, all other members except the user who performed the edit receive the callback.
 
 :::tip
-If a custom message is edited through the [RESTful API](/document/server-side/message_modify.html), the recipient also receives the edited custom message through the `onMessageContentChanged` callback.
+If a custom message is edited through the [RESTful API](/rest/message_modify.html), the recipient also receives the edited custom message through the `onMessageContentChanged` callback.
 :::
 
 ```objectivec

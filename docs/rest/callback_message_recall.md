@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After a message is recalled successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the recalled message and synchronize data.
+After a message is recalled successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain the recalled message and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 1. A [user recalls a message on the client](/document/android/message_recall.html).
-2. A RESTful API is called to recall a [single message](/document/server-side/message_recall_single.html) or [recall messages in batches](/document/server-side/message_recall_batch.html).
+2. A RESTful API is called to recall a [single message](/rest/message_recall_single.html) or [recall messages in batches](/rest/message_recall_batch.html).
 3. A message is recalled in the [EasyIM Console](https://console.easyim.ai/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
 
 ## Webhook request
@@ -55,6 +55,6 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
 | `msg_id`          | String   | Message ID of the recall event, which is the same as the `msg_id` used when the message was sent.          |
 | `payload`         | object   | For a message recall, the `bodies` and `ext` fields are empty.<br/> `ack_message_id` indicates the original message ID. |
 | `securityVersion` | String   | Security verification version, currently 1.0.0. Ignore this field. It will be configured in the EasyIM Console in the future. |
-| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                           |
 | `host`            | String   | Server name.                                                 |

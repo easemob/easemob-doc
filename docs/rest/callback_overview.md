@@ -12,9 +12,9 @@ EasyIM supports webhooks. Before or after an event occurs, the EasyIM server sen
 
 - **Post-delivery webhook**: Allows your app backend to perform necessary data synchronization. The EasyIM server ignores the webhook response code.
 
-  Post-delivery webhooks cover events such as sending messages and message read receipts, performing chat group or chat room operations, changing friend relationships, and changing user status. For details, see [Configure post-delivery webhook filtering rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+  Post-delivery webhooks cover events such as sending messages and message read receipts, performing chat group or chat room operations, changing friend relationships, and changing user status. For details, see [Configure post-delivery webhook filtering rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
-Before using webhooks, check whether your plan supports this feature. For details, see [Value-added service fees](/product/pricing_policy.html#value-added-service-fees). If your plan does not support webhooks, first open the [EasyIM Console](https://console.easyim.ai/user/login) to [activate the feature](/product/console/basic_webhook.html#message-callback-1), and then [configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+Before using webhooks, check whether your plan supports this feature. For details, see [Value-added service fees](/product/pricing_policy.html#value-added-service-fees). If your plan does not support webhooks, first open the [EasyIM Console](https://console.easyim.ai/user/login) to [activate the feature](/product/console/basic_webhook.html#message-callback-1), and then [configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 :::tip
 To disable webhooks after using the feature, contact the EasyIM business manager. Disabling webhooks deletes all related webhook configurations. Proceed with caution.

@@ -69,7 +69,7 @@ If the returned HTTP status code is `200`, the token is returned successfully. T
 | `expires_in`   | Long   | Token validity period, in seconds. You do not need to obtain another token during this period. |
 | `application`  | String | UUID of the current app.                                |
 
-If the returned HTTP status code is not `200`, the request fails. See [Response status codes](/document/server-side/error.html) for possible causes.
+If the returned HTTP status code is not `200`, the request fails. See [Response status codes](/rest/error.html) for possible causes.
 
 ### Error code
 

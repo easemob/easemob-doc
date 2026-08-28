@@ -2,14 +2,14 @@
 
 ## Feature overview
 
-After a message is sent successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the sent message and synchronize data.
+After a message is sent successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain the sent message and synchronize data.
 
 Webhook requests for one-to-one, chat group, and chat room messages contain a set of common parameters. For details, see [Common parameters](#common-parameters). The structure of the `payload` field varies by message type, as described below.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Common parameters
 
@@ -27,7 +27,7 @@ The following table describes the common parameters in webhook requests for mess
 | `msg_id`    | String   | ID of the sent message. |
 | `payload`         | object | Event content, in the same format as content sent through the REST API. See [Historical message content](message_historical.html#historical-message-content).      |
 | `securityVersion` | String | Security verification version, currently `1.0.0`. Ignore this parameter. It will be configured in the EasyIM Console in the future.                   |
-| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-message-callback-rules) in the EasyIM Console.     |
+| `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-webhook-rules) in the EasyIM Console.     |
 | `appkey`          | String | Unique identifier of the app registered in the EasyIM Console.        |
 | `host`            | String | Server name.              |
 | `content_type`            | String | Message type:<br/> - `chat:user:*`: One-to-one message  <br/> - `chat:group:*`: Chat group message   <br/> - `chat:room:*`: Chat room message  <br/>  For the specific parameter values of each message type, see [Send one-to-one messages](#send-one-to-one-messages), [Send chat group messages](#send-chat-group-messages), and [Send chat room messages](#send-chat-room-messages).   |
@@ -35,7 +35,7 @@ The following table describes the common parameters in webhook requests for mess
 ## Trigger conditions
 
 - A [message is sent](/document/android/message_send.html#send-a-text-message) in a one-to-one chat, group chat, or chat room on the client.
-- A REST API is called to send a message in a [one-to-one chat](/document/server-side/message_single.html#send-a-text-message), [group chat](/document/server-side/message_group.html#send-a-text-message), or [chat room](/document/server-side/message_chatroom.html#send-a-text-message).
+- A REST API is called to send a message in a [one-to-one chat](/rest/message_single.html#send-a-text-message), [group chat](/rest/message_group.html#send-a-text-message), or [chat room](/rest/message_chatroom.html#send-a-text-message).
 - A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message), [group chat](/product/console/operation_group.html#send-a-rest-message), or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ## Send one-to-one messages

@@ -1116,7 +1116,7 @@ For details, see [Message Restrictions](/product/limitation.html#消息大小).
 
 Callback routing allows you to route different messages under the same App Key to different service URLs based on the callback environment identifier carried in the message.
 
-When sending a message, you can set a callback environment such as `dev`, `test`, or `prod` through `EMChatMessage#webhookEnv`. After the EasyIM server receives the message, it matches the environment identifier against the callback routes configured in the EasyIM Console and sends the current message callback to the corresponding [pre-delivery callback](/document/server-side/callback_presending.html) or [post-delivery callback](/document/server-side/callback_postsending.html) URL.
+When sending a message, you can set a callback environment such as `dev`, `test`, or `prod` through `EMChatMessage#webhookEnv`. After the EasyIM server receives the message, it matches the environment identifier against the callback routes configured in the EasyIM Console and sends the current message callback to the corresponding [pre-delivery callback](/rest/callback_presending.html) or [post-delivery callback](/rest/callback_postsending.html) URL.
 
 :::tip 
 Currently, this feature is available only in China Regions 1 and 2.
@@ -1135,8 +1135,8 @@ Currently, this feature is available only in China Regions 1 and 2.
 
 | Callback type | Scope | Description |
 | ------------------------------------------------------------ | --------------------------------------------------- | ------------------------------------------------------------ |
-| [Pre-delivery callback](/document/server-side/callback_presending.html) | Applies only to messages sent through the SDK. Targeted group and chat room messages are not supported. | Before the message is delivered to the target user, the business server can determine whether to intercept or modify the message content. |
-| [Post-delivery callback](/document/server-side/callback_postsending.html) | Applies to messages sent through both the SDK and REST API. | Notifies the business server after the message is sent successfully. |
+| [Pre-delivery callback](/rest/callback_presending.html) | Applies only to messages sent through the SDK. Targeted group and chat room messages are not supported. | Before the message is delivered to the target user, the business server can determine whether to intercept or modify the message content. |
+| [Post-delivery callback](/rest/callback_postsending.html) | Applies to messages sent through both the SDK and REST API. | Notifies the business server after the message is sent successfully. |
 
 **Workflow**
 

@@ -2,12 +2,12 @@
 
 ## Feature overview
 
-When a chat group or chat room member is added to or removed from the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to identify the affected member and synchronize data.
+When a chat group or chat room member is added to or removed from the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to identify the affected member and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Add a member to the blocklist
 
@@ -16,7 +16,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 ### Trigger conditions
 
 - A [chat group member](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
-- A RESTful API is called to add a [chat group member](/document/server-side/group_member_blocklist_add_single.html) or [chat room member](/document/server-side/chatroom_allowlist_add_single.html) to the blocklist.
+- A RESTful API is called to add a [chat group member](/rest/group_member_blocklist_add_single.html) or [chat room member](/rest/chatroom_allowlist_add_single.html) to the blocklist.
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the blocklist.
 
 ### Webhook request
@@ -50,7 +50,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `paylod`       | Object | Event content.                                                     |
 | `payload.member` | Array | User ID of the user added to or removed from the chat group or chat room blocklist.        |
 | `payload.expire_timestamp` | Long | Expiration time of the user's blocklist entry. The system automatically assigns this value after the user is added to the blocklist.  |
@@ -68,7 +68,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 ### Trigger conditions
 
 1. A member is removed from the chat group or chat room blocklist on the client.
-2. A RESTful API is called to remove a member from the [chat group blocklist](/document/server-side/group_allowlist_remove.html) or chat room blocklist.
+2. A RESTful API is called to remove a member from the [chat group blocklist](/rest/group_allowlist_remove.html) or chat room blocklist.
 3. A user is removed from the chat group or chat room blocklist in the [EasyIM Console](https://console.easyim.ai/user/login).
 
 ### Webhook request
@@ -100,7 +100,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | Array | User ID of the user removed from the chat group or chat room blocklist.        |
 | `payload.type` | Array  | Event for removing a user from the chat group or chat room blocklist. The value is `REMOVE`.     |

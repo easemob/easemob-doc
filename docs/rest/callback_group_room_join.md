@@ -2,12 +2,12 @@
 
 ## Feature overview
 
-When users are added during chat group or chat room creation, invited to join, or join by application, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to synchronize data.
+When users are added during chat group or chat room creation, invited to join, or join by application, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Join directly
 
@@ -15,7 +15,7 @@ When users are added during chat group or chat room creation, invited to join, o
 
 - Users are added directly when a [chat group](/document/android/group_manage.html#create-a-chat-group) or [chat room](/document/android/room_manage.html#create-a-chat-room) is created on the client.
 - A user [joins a chat room](/document/android/room_manage.html#join-a-chat-room) on the client.
-- Users are added directly when a RESTful API is called to [create a chat group](/document/server-side/group_create.html) or [chat room](/document/server-side/chatroom_create.html).
+- Users are added directly when a RESTful API is called to [create a chat group](/rest/group_create.html) or [chat room](/rest/chatroom_create.html).
 
 ### Webhook request
 
@@ -54,7 +54,7 @@ Note: The `payload.options.ext` field applies only to chat room join events, not
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | <br/> - IDs of users added to the chat group or chat room during its creation. <br/> - ID of a user who actively joins a chat room.       |
 | `payload.options.ext` | JSON  | Extension information. This field applies only to chat room join events, not chat group join events.    |
@@ -106,7 +106,7 @@ A regular chat group member [invites a user to join the chat group on the client
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member`| JSON  | ID of the invited user.        |
 | `payload.type` | Array  | Join method: `INVITE` indicates that a user is invited to join the chat group.     |
@@ -157,7 +157,7 @@ The following example uses an event generated when a user applies to join a chat
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `paylod`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user applying to join.        |
 | `payload.type`| Array | Join method: `APPLY` indicates an application to join a chat group.     |

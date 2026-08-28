@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After a Reaction is added to or removed from a message, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain Reaction information and synchronize data.
+After a Reaction is added to or removed from a message, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain Reaction information and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - A Reaction is [added](/document/android/reaction.html#add-a-reaction-to-a-message) to or [removed](/document/android/reaction.html#delete-a-reaction-from-a-message) from a message on the client.
-- A REST API is called to [add](/document/server-side/reaction_add.html) a Reaction to or [remove](/document/server-side/reaction_delete.html) a Reaction from a message.
+- A REST API is called to [add](/rest/reaction_add.html) a Reaction to or [remove](/rest/reaction_delete.html) a Reaction from a message.
 
 ## Webhook request
 

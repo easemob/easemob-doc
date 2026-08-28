@@ -25,7 +25,7 @@ You can enable this service based on your current plan:
 
 For a post-delivery webhook, each failed webhook request is retried only once and discarded if the retry also fails. If webhook data must not be lost, you can enable webhook data storage on the IM Server.
 
-After enabling the service, you can use the APIs to [query stored webhook data](/document/server-side/callback_postsending_exception_storage.html#query-stored-webhook-data) and [resend stored webhook data](/document/server-side/callback_postsending_exception_storage.html#redeliver-stored-webhook-data) APIs.
+After enabling the service, you can use the APIs to [query stored webhook data](/rest/callback_postsending_exception_storage.html#query-stored-webhook-data) and [resend stored webhook data](/rest/callback_postsending_exception_storage.html#redeliver-stored-webhook-data) APIs.
 
 You can enable this service based on your current plan:
 
@@ -73,8 +73,8 @@ Webhook routing applies as follows:
 
 | Webhook type | Scope | Description |
 | :--- | :--- | :--- |
-| [Pre-delivery webhook](/document/server-side/callback_presending.html) | Applies only to **messages sent through the SDK**. Targeted group and chat room messages are not supported. | Before a message is delivered to the target user, your server can determine whether to intercept the message or modify its content. |
-| [Post-delivery webhook](/document/server-side/callback_postsending.html) | Applies to **messages sent through both the SDK and REST API**. | Notifies your server after a message is successfully sent. |
+| [Pre-delivery webhook](/rest/callback_presending.html) | Applies only to **messages sent through the SDK**. Targeted group and chat room messages are not supported. | Before a message is delivered to the target user, your server can determine whether to intercept the message or modify its content. |
+| [Post-delivery webhook](/rest/callback_postsending.html) | Applies to **messages sent through both the SDK and REST API**. | Notifies your server after a message is successfully sent. |
 
 Webhook routing is subject to the following configuration rules:
 
@@ -100,7 +100,7 @@ On the **Webhook Settings** page, click **Add Webhook Address**. In the dialog b
 | :--- | :--- | :--- |
 | Rule Name | Yes | Supports letters, digits, and underscores only. Chinese characters are not supported. The maximum length is 32 characters. The rule name must be unique. |
 | Status | Yes | Whether to enable the rule. |
-| Webhook Type | Yes | The webhook type. You can select webhooks for various types of one-to-one, group, and chat room messages and events. For details, see [Webhook Events](/document/server-side/callback_message_send.html). |
+| Webhook Type | Yes | The webhook type. You can select webhooks for various types of one-to-one, group, and chat room messages and events. For details, see [Webhook Events](/rest/callback_message_send.html). |
 | Message Type | Yes | The type to be included in webhooks:<br/>- **Chat message**: A successfully sent message, including messages sent through a client or REST API. These messages are consistent with those returned by exported chat history. For example, when user u1 sends a message to user u2, one chat message is generated regardless of whether the recipient is online. In the received message, `from` is u1 and `to` is u2. When user u1 sends a message in chat group g1, one chat message is generated. In the received message, `from` is u1 and `to` is g1, and the response contains the `group_id` field.<br/>- **Offline message**: A message for which the recipient was offline when it was sent. For example, in a one-to-one chat, an offline message is generated if the other user is offline. In a group chat, if several group members are offline, several offline messages are generated. The `to` parameter in these offline messages is the user ID of the message recipient, not the group ID. The app can use a push service to send personalized notifications for these messages. |
 | Message Source | Yes | The source of messages to include in webhooks:<br/>- **SDK message**: A message sent through the SDK.<br/>- **Rest message**: A message sent through a REST API. |
 

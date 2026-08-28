@@ -2,19 +2,19 @@
 
 ## Feature overview
 
-After all chat group or chat room members are muted or unmuted, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain the mute-all status and synchronize data.
+After all chat group or chat room members are muted or unmuted, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain the mute-all status and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Mute/unmute all members
 
 ### Trigger conditions
 
 - All members of a [chat group](/document/android/group_members.html#mute-all-members) or [chat room are muted or unmuted](/document/android/room_members.html#mute-and-unmute-all-chat-room-members) on the client.
-- A RESTful API is called to mute or unmute all members of a [chat group](/document/server-side/group_member_mute_all.html) or [chat room](/document/server-side/chatroom_member_mute_all.html).
+- A RESTful API is called to mute or unmute all members of a [chat group](/rest/group_member_mute_all.html) or [chat room](/rest/chatroom_member_mute_all.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), all members of a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room are muted or unmuted](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
@@ -44,7 +44,7 @@ After all chat group or chat room members are muted or unmuted, the EasyIM serve
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`.      |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `paylod`       | Object | Event content.                                                     |
 | `payload.mute` | JSON   | Whether all members are muted or unmuted:<br/> - `true`: Mute all members <br/> - `false`: Unmute all members |
 | `payload.type` | String | Mute-all or unmute-all event. The value is `MUTE`.        |

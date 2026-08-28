@@ -4,14 +4,14 @@
 
 Push templates are used to customize the title and content of push notifications when the default offline push content cannot meet business requirements. For example, if the default settings provided by the server are push titles and content in Chinese and English, and you need to use push titles and content in Korean or Japanese, you can set push templates for the corresponding languages.
 
-You can configure push templates through EasyIM Console or the [server-side REST API for configuring push templates](/document/server-side/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
+You can configure push templates through EasyIM Console or the [server-side REST API for configuring push templates](/rest/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
 
 Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or receiver.
 
 Push templates have the following characteristics:
 
 1. Push templates have a higher priority than [calling the API to set push content in the notification bar](push_display_attribute.html).
-2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/document/server-side/push_template_create.html) is supported.
+2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/rest/push_template_create.html) is supported.
 3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users.
 4. The receiver can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
 5. Priority of push template usage:
@@ -35,10 +35,10 @@ After activation, you can [set push templates](#set-push-templates).
 
 You can set offline push templates in the following two ways:
 
-- [Call the REST API to configure them](/document/server-side/push_template_overview.html).
+- [Call the REST API to configure them](/rest/push_template_overview.html).
 - Set push templates in [EasyIM Console](https://console.easyim.ai/user/login).
 
-For the data structure related to push templates, see [Push extension fields](/document/server-side/push_extension.html). The following describes how to set offline push templates in EasyIM Console.
+For the data structure related to push templates, see [Push extension fields](/rest/push_extension.html). The following describes how to set offline push templates in EasyIM Console.
 
 ### Edit the default push template
 
@@ -94,7 +94,7 @@ Push template parameters are in the message extension `ext.em_push_template`. Th
 
 ### Add a custom push template
 
-EasyIM supports adding custom push templates. In addition to [calling the RESTful API](/document/server-side/push_template_create.html) to create a custom push template, you can also add a custom push template in [EasyIM Console](https://console.easyim.ai/user/login). **Custom push templates have a higher level than default templates.**
+EasyIM supports adding custom push templates. In addition to [calling the RESTful API](/rest/push_template_create.html) to create a custom push template, you can also add a custom push template in [EasyIM Console](https://console.easyim.ai/user/login). **Custom push templates have a higher level than default templates.**
 
 On the **Offline Push** page, click **Add push template** to create a custom push template.
 

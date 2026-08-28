@@ -65,7 +65,7 @@ Each login ID returned by `EMContactManager#asyncGetSelfIdsOnOtherPlatform` uses
 - `userId`: Current user's user ID.
 - `resource`: Resource identifier of the logged-in device, used to distinguish a specific device for the user.
 
-`resource` has the same meaning as the `resourceId` parameter of the server-side [Log Out a User from a Device API](/document/server-side/account_offline_device_single.html) and the `res` field returned by the server-side [Get Online Devices for an Account API](/document/server-side/account_online_device_obtain.html). Each identifies one of the user's login devices.
+`resource` has the same meaning as the `resourceId` parameter of the server-side [Log Out a User from a Device API](/rest/account_offline_device_single.html) and the `res` field returned by the server-side [Get Online Devices for an Account API](/rest/account_online_device_obtain.html). Each identifies one of the user's login devices.
 
 The Android client API returns a complete `userId/resource` login ID, while the server-side APIs generally require only the `resource` after `/`. Therefore, to call the server-side single-device logout API, first extract `resource` from the login ID and pass it as `resourceId`.
 

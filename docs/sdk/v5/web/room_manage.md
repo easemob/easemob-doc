@@ -26,15 +26,15 @@ Before you begin, ensure that the following requirements are met:
 - You registered `ChatRoomManager` during SDK initialization.
 - You understand the EasyIM API call frequency limits. For details, see [Limitations](/product/limitation.html).
 - You understand the limits on the number of chat rooms, number of chat room members, and plan capabilities. For details, see [EasyIM plan features](/product/product_package_feature.html).
-- Only a [superadmin](/document/server-side/chatroom_superadmin_add.html) can create chat rooms.
+- Only a [superadmin](/rest/chatroom_superadmin_add.html) can create chat rooms.
 
 ## Create a chat room
 
-To create a chat room, call the server-side REST API for [creating a chat room](/document/server-side/chatroom_create.html). After the chat room is created, the client can [join it](#join-a-chat-room) or [retrieve its details](#).
+To create a chat room, call the server-side REST API for [creating a chat room](/rest/chatroom_create.html). After the chat room is created, the client can [join it](#join-a-chat-room) or [retrieve its details](#).
 
 ## Destroy a chat room
 
-To destroy a chat room, call the server-side REST API for [destroying a chat room](/document/server-side/chatroom_delete.html). After the chat room is destroyed, the other online members receive the `onChatRoomDestroyed` event and are removed from the chat room.
+To destroy a chat room, call the server-side REST API for [destroying a chat room](/rest/chatroom_delete.html). After the chat room is destroyed, the other online members receive the `onChatRoomDestroyed` event and are removed from the chat room.
 
 ## Join a chat room
 
@@ -93,7 +93,7 @@ A regular chat room member automatically leaves the chat room after being offlin
 The following members generally do not leave a chat room automatically after going offline:
 
 - Members on the chat room allowlist. The chat room owner and admins are on the allowlist by default.
-- Users who were added when the chat room was [created through the server-side REST API](/document/server-side/chatroom_create.html) and have never logged in.
+- Users who were added when the chat room was [created through the server-side REST API](/rest/chatroom_create.html) and have never logged in.
 
 If multi-device login for chat rooms is enabled, a member on the allowlist may no longer receive messages from a chat room on a device after that device reconnects from an offline state. To resume receiving chat room messages on that device, call `joinChatRoom` to rejoin the chat room after logging in again.
 

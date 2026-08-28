@@ -51,7 +51,7 @@ To add a user to the chat group blocklist, enter a user ID and click **Add**.
 
 ## Send a message through the REST API
 
-In the chat group list, click **More** in the **Operation** column for the target chat group and select **Send Admin Message** to call the [REST API](/document/server-side/message_group.html) to send a text or image message to the group.
+In the chat group list, click **More** in the **Operation** column for the target chat group and select **Send Admin Message** to call the [REST API](/rest/message_group.html) to send a text or image message to the group.
 
 ![img](/images/console/operation_group_rest_send.png)
 

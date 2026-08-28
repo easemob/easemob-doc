@@ -73,7 +73,7 @@ Push templates are primarily used when the server's default configuration does n
 
 You can configure push templates in the following ways:
 
-- [Call a REST API](/document/server-side/push_template_overview.html).
+- [Call a REST API](/rest/push_template_overview.html).
 - Configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
 
 Push templates provide the following benefits:

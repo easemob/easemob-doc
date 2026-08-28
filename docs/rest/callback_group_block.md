@@ -2,12 +2,12 @@
 
 ## Feature overview
 
-After a chat group is successfully blocked or unblocked, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the block or unblock and synchronize data.
+After a chat group is successfully blocked or unblocked, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the block or unblock and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Block a chat group
 
@@ -41,7 +41,7 @@ A user [blocks chat group messages on the client](/document/android/group_manage
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.type` | String | Chat group block event. The value is `ADD`. |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
@@ -84,7 +84,7 @@ A user [unblocks chat group messages on the client](/document/android/group_mana
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `paylod`       | Object | Event content.                                                     |
 | `payload.type` | String | Chat group unblock event. The value is `REMOVE`. |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |

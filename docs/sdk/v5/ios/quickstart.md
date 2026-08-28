@@ -83,7 +83,7 @@ In the following method in the project's AppDelegate, call the corresponding SDK
 
 Create a user in [EasyIM Console](https://console.easyim.ai/user/login) and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#创建用户).
 
-In a production environment, for security reasons, you must integrate the [Get App Token API](/document/server-side/easemob_app_token.html) and [Get User Token API](/document/server-side/easemob_user_token.html) into your app server to implement the business logic for obtaining Tokens, allowing users to obtain Tokens from your app server.
+In a production environment, for security reasons, you must integrate the [Get App Token API](/rest/easemob_app_token.html) and [Get User Token API](/rest/easemob_user_token.html) into your app server to implement the business logic for obtaining Tokens, allowing users to obtain Tokens from your app server.
 
 ## 5. Log in to the account
 

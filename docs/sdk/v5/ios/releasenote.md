@@ -199,7 +199,7 @@ If translation fails when a message is sent, the SDK returns error code 1113 to 
 
 Added support for [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/rest/message_stream_send_single.html). The SDK receives these messages but cannot send them.
 
 #### Improvements
 
@@ -438,7 +438,7 @@ Fixed an issue where calling [EMPushManager#getSilentModeForConversations:comple
   
 #### Improvements
  
-- [EasyIM SDK] A [pre-delivery callback](/document/server-side/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
+- [EasyIM SDK] A [pre-delivery callback](/rest/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
 - [EasyIM SDK] After the [server-side conversation deletion API](conversation_delete.html#单向删除服务端会话及其历史消息) is successfully called, the local conversation is deleted. In previous versions, this API could be configured to delete the local messages in a conversation but could not delete the local conversation.
 - [EasyIM SDK] The default error codes reported for chat group and chat room operations have changed from `EMErrorGroupMembersFull` (604) and `EMErrorChatroomMembersFull` (704) to `EMErrorGroupPermissionDenied` (603) and `EMErrorChatroomPermissionDeniedD` (703). For example, if a regular chat group member attempts to assign a chat group admin, error 603 is reported because the user lacks permission.
 
@@ -468,7 +468,7 @@ Fixed an issue where calling [EMPushManager#getSilentModeForConversations:comple
 #### Fixes
 
 - [EasyIM SDK] Fixed an occasional incorrect conversation unread count when multiple threads retrieved the conversation list at the same time.
-- [EasyIM SDK] Fixed an issue where the original group owner failed to leave the chat group in the SDK after the group ownership was transferred by calling the [REST API](/document/server-side/group_member.html#转让群组).
+- [EasyIM SDK] Fixed an issue where the original group owner failed to leave the chat group in the SDK after the group ownership was transferred by calling the [REST API](/rest/group_member.html#转让群组).
 - [EasyIM SDK] Fixed an occasional unread count synchronization issue caused by receiving a multi-device conversation read synchronization event after multi-device login was enabled.
 
 ## v4.8.1 2024-07-26
@@ -567,7 +567,7 @@ Starting from v4.6.0, the new Swift-based `EaseChatUIKit` and `EaseChatDemo` are
   - Added the `EMMessageListener#onMessagePinChanged` event. When a user pins a message in a chat group or chat room conversation, other members of the chat group or chat room receive this callback.
 - [EasyIM SDK] Added support for [retrieving chat room roaming messages](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server).
 - [EasyIM SDK] Added `EMChatManager#markAllConversationsAsRead` to [mark all unread messages in all conversations as read](conversation_unread.html#将所有会话的未读消息数清零).
-- [EasyIM SDK] The message editing callback `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` can now return [custom messages edited through the RESTful API](/document/server-side/message_modify.html).
+- [EasyIM SDK] The message editing callback `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` can now return [custom messages edited through the RESTful API](/rest/message_modify.html).
 
 #### Improvements
 
@@ -598,7 +598,7 @@ Starting from v4.6.0, the new Swift-based `EaseChatUIKit` and `EaseChatDemo` are
 - [EasyIM SDK] Added [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索所有会话中的消息) and [EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索当前会话中的消息). When searching for messages by keyword, you can select a search scope, such as message content only, message extension information only, or both message content and extension information.
 - [EasyIM SDK] Added the [EMOptions#useReplacedMessageContents](message_send.html#发送消息前的内容审核) switch. When this switch is enabled, if content moderation replaces content when a message is sent, the sender can retrieve the replaced content.
 - [EasyIM SDK] Added the [EMOptions#includeSendMessageInMessageListener](message_send.html#发送文本消息) switch. When this switch is enabled, successfully sent messages are included in the `messagesDidReceive` callback.
-- [EasyIM SDK] Added the [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) switch. When this switch is enabled, messages imported through the [server-side API](/document/server-side/message_import_single.html) are marked as read after they are [retrieved through message roaming](message_retrieve.html#从服务器获取指定会话的消息) on the client, and `EMConversation#unreadMessagesCount` does not change. When this switch is disabled, `EMConversation#unreadMessagesCount` increases.
+- [EasyIM SDK] Added the [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) switch. When this switch is enabled, messages imported through the [server-side API](/rest/message_import_single.html) are marked as read after they are [retrieved through message roaming](message_retrieve.html#从服务器获取指定会话的消息) on the client, and `EMConversation#unreadMessagesCount` does not change. When this switch is disabled, `EMConversation#unreadMessagesCount` increases.
 
 #### Improvements
 
@@ -638,7 +638,7 @@ Starting from v4.6.0, the new Swift-based `EaseChatUIKit` and `EaseChatDemo` are
 - [EasyIM SDK] Added `getAllContactsFromServerWithCompletion` and `getContactsFromServerWithCursor` to [retrieve the friend list from the server all at once or by page](user_relationship.html#retrieve-the-friend-list-and-friend-information). Each friend object contains the friend's user ID and friend remarks.
 - [EasyIM SDK] Added `getContact` to [retrieve a single friend's user ID and friend remarks locally](user_relationship.html#read-the-friend-list-locally).
 - [EasyIM SDK] Added `getAllContacts` to [retrieve the friend list from local storage by page](user_relationship.html#read-the-friend-list-locally). Each friend object contains the friend's user ID and friend remarks.
-- [EasyIM SDK] Added the `EMChatMessage#broadcast` attribute to determine whether a message is a global chat room broadcast message. You can [send a global chat room broadcast message by calling the REST API](/document/server-side/broadcast_to_chatrooms.html).
+- [EasyIM SDK] Added the `EMChatMessage#broadcast` attribute to determine whether a message is a global chat room broadcast message. You can [send a global chat room broadcast message by calling the REST API](/rest/broadcast_to_chatrooms.html).
 - [EasyIM SDK] Added `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` to [retrieve from the server the number of chat groups the current user has joined](group_manage.html#查询当前用户已加入的群组数量). 
 - [EasyIM SDK] Added [error code 706](error.html), `EMErrorChatroomOwnerNotAllowLeave`, indicating that the chat room owner is not allowed to leave the chat room. If `EMOptions#canChatroomOwnerLeave` is set to `false` during initialization, this error is reported when the chat room owner calls `leaveChatroom` to leave the chat room.
 - [EasyIM SDK] Added the `EMOptions#loadEmptyConversations` property to configure during initialization whether empty conversations can be returned when retrieving the conversation list.

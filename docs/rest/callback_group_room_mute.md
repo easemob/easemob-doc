@@ -2,19 +2,19 @@
 
 ## Feature overview
 
-After a chat group or chat room member is successfully added to or removed from the mute list, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the mute or unmute and synchronize data.
+After a chat group or chat room member is successfully added to or removed from the mute list, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the mute or unmute and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Add a member to the mute list
 
 ### Trigger conditions
 
 1. A [chat group member](/document/android/group_members.html#mute-a-specified-member) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-mute-list) is added to the mute list on the client.
-2. A RESTful API is called to add a [chat group member](/document/server-side/group_member_mute.html) or [chat room member](/document/server-side/chatroom_member_mute.html) to the mute list.
+2. A RESTful API is called to add a [chat group member](/rest/group_member_mute.html) or [chat room member](/rest/chatroom_member_mute.html) to the mute list.
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added to the mute list.
 
 ### Webhook request
@@ -47,7 +47,7 @@ After a chat group or chat room member is successfully added to or removed from 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON   | User ID of the member added to the mute list. |
 | `payload.expire_timestamp` | LONG   | Mute expiration time. After a chat group or chat room member is muted, the system automatically assigns a mute expiration timestamp. |
@@ -65,7 +65,7 @@ After a chat group or chat room member is successfully added to or removed from 
 ### Trigger conditions
 
 1. A [chat group member](/document/android/group_members.html#unmute-a-specified-member) or [chat room member](/document/android/room_members.html#remove-members-from-the-chat-room-mute-list) is removed from the mute list on the client.
-2. A RESTful API is called to remove a [chat group member](/document/server-side/group_member_unmute.html) or [chat room member](/document/server-side/chatroom_member_mute.html) from the mute list.
+2. A RESTful API is called to remove a [chat group member](/rest/group_member_unmute.html) or [chat room member](/rest/chatroom_member_mute.html) from the mute list.
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group member](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room member](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is removed from the mute list.
 
 ### Webhook request
@@ -97,7 +97,7 @@ After a chat group or chat room member is successfully added to or removed from 
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON   | User ID of the member removed from the mute list. |
 | `payload.type` | String | Event for removing a member from the mute list. The value is `REMOVE`. |

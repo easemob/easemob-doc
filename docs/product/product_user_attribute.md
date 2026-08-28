@@ -11,7 +11,7 @@ EasyIM provides storage for user attributes. You can store the following informa
 
 All attributes of a single user cannot exceed 2 KB, and all user attribute data in a single app cannot exceed 10 GB.
 
-For user attributes, the client uses the following default keys for the user nickname, avatar URL, contact information, email address, gender, signature, birthday, and extension fields. When you call a RESTful API to [set](/document/server-side/user_attribute_set.html) or [delete](/document/server-side/user_attribute_delete.html) user attributes, you must pass the following keys in the request to keep them consistent with the client and ensure that the settings can be retrieved on the client. Set the values based on your use case.
+For user attributes, the client uses the following default keys for the user nickname, avatar URL, contact information, email address, gender, signature, birthday, and extension fields. When you call a RESTful API to [set](/rest/user_attribute_set.html) or [delete](/rest/user_attribute_delete.html) user attributes, you must pass the following keys in the request to keep them consistent with the client and ensure that the settings can be retrieved on the client. Set the values based on your use case.
 
 | Field    | Type   | Description   |
 | :---------- | :----- | :------- |

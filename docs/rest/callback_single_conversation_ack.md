@@ -6,8 +6,8 @@ After the message recipient successfully sends a conversation read receipt in a 
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
@@ -43,7 +43,7 @@ A client [sends a one-to-one conversation read receipt](/v4/document/android/con
 | `callId`    | String   | The `callId` field is the unique identifier of each webhook request, in the format “App Key_message ID of the receipt message”. |
 | `eventType` | String   | `chat`: Uplink message.                                               |
 | `chat_type` | String    | Conversation read receipt.           |
-| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules). |
+| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
 | `payload`   | object   | Conversation read receipt details. |
 | `payload.ack_message_id` | String     | ID of the message in the conversation.                  |
 | `payload.type` | String | Conversation read receipt type.       |                |

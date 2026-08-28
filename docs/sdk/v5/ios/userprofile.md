@@ -49,7 +49,7 @@ userInfo.gender = 1;
 }];
 ```
 
-The client uses the following keys to store user attributes by default. When [setting](/document/server-side/user_attribute_set.html) or [deleting user attributes](/document/server-side/user_attribute_delete.html) through a RESTful API, use the same keys so that the client can read them correctly.
+The client uses the following keys to store user attributes by default. When [setting](/rest/user_attribute_set.html) or [deleting user attributes](/rest/user_attribute_delete.html) through a RESTful API, use the same keys so that the client can read them correctly.
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
@@ -240,12 +240,12 @@ Register the delegate through `addDelegate` and remove it through `removeDelegat
 
 ### Why can't I retrieve a user nickname after setting it?
 
-If you have set a user nickname through the [client](#set-all-attributes-of-the-current-user) or [RESTful API](/document/server-side/user_attribute_set.html) but cannot retrieve it correctly, check the following:
+If you have set a user nickname through the [client](#set-all-attributes-of-the-current-user) or [RESTful API](/rest/user_attribute_set.html) but cannot retrieve it correctly, check the following:
 
  - When setting the user nickname through a RESTful API, use the `nickname` key in the request. Otherwise, the client cannot read the attribute correctly.
- - The `nickname` returned by the RESTful APIs for [retrieving user details](/document/server-side/account_detail_obtain_single.html) and [deleting a user account](/document/server-side/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. We recommend keeping them consistent. When changing one nickname, update the other at the same time.
+ - The `nickname` returned by the RESTful APIs for [retrieving user details](/rest/account_detail_obtain_single.html) and [deleting a user account](/rest/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. We recommend keeping them consistent. When changing one nickname, update the other at the same time.
 
-For iOS, call [updatePushDisplayName](/document/ios/push/push_display_attribute.html#设置和获取推送通知的显示属性) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/document/server-side/push_nickname_set_single.html).
+For iOS, call [updatePushDisplayName](/document/ios/push/push_display_attribute.html#设置和获取推送通知的显示属性) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
 
 ### Why is error code 4 returned?
 

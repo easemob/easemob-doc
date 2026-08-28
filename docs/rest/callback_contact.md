@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-After a friend is added or deleted, or a user is added to or removed from the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about friend and blocklist operations and synchronize data.
+After a friend is added or deleted, or a user is added to or removed from the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about friend and blocklist operations and synchronize data.
 
 This document describes the following user relationship webhook events:
 
@@ -15,8 +15,8 @@ This document describes the following user relationship webhook events:
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Send a friend request
 
@@ -53,7 +53,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend addition event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.reason`    | object   | Reason for the friend request.                |
 | `payload.operation` | String   | `add`: Add a friend. |
@@ -102,7 +102,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request acceptance event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remote_accept`: Friend request acceptance event. The user who sent the friend request receives this event. |
@@ -147,7 +147,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request acceptance event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `accept`: Accept a friend request. The user who accepted the request receives this event, which synchronizes the operation result in single-device and multi-device login scenarios. |
@@ -199,7 +199,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend request decline event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remote_decline`: Decline a friend request. The user who sent the request receives this event. |
@@ -243,7 +243,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | The `callId` field is the unique identifier of the webhook request, in the format “App Key_message ID of the friend request decline event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `decline`: Decline a friend request. The user who declined the request receives this event, which synchronizes the operation result in multi-device login scenarios. |
@@ -260,7 +260,7 @@ Request fields:
 #### Trigger conditions
 
 - A [friend is deleted on the client](/document/android/user_relationship.html#delete-a-friend).
-- A RESTful API is called to [delete a friend](/document/server-side/user_friend_remove.html).
+- A RESTful API is called to [delete a friend](/rest/user_friend_remove.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is deleted](/product/console/operation_user.html#delete-a-users-friend).
 
 #### Request example
@@ -290,7 +290,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the friend deletion event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.roster_ver`    | String   | Version number of the friend list.  |
 | `payload.operation` | String   | `remove`: Delete a friend. |
@@ -307,7 +307,7 @@ Request fields:
 #### Trigger conditions
 
 1. A [user is added to the blocklist on the client](/document/android/user_relationship.html#add-a-user-to-the-blocklist).
-2. A [RESTful API is called to add a user to the blocklist](/document/server-side/user_friend_blocklist_add.html).
+2. A [RESTful API is called to add a user to the blocklist](/rest/user_friend_blocklist_add.html).
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
@@ -339,7 +339,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the user block event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.operation` | String   | `ban`: Add a user to the blocklist. |
 | `payload.status`    | object   | Contains `error_code`.  |
@@ -358,7 +358,7 @@ Request fields:
 #### Trigger conditions
 
 1. A user [removes a friend from the blocklist on the client](/document/android/user_relationship.html#remove-a-user-from-the-blocklist).
-2. A [RESTful API is called to remove a friend from the blocklist](/document/server-side/user_friend_blocklist_remove.html).
+2. A [RESTful API is called to remove a friend from the blocklist](/rest/user_friend_blocklist_remove.html).
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
 #### Request example
@@ -390,7 +390,7 @@ Request fields:
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | Unique identifier of the webhook request, in the format “App Key_message ID of the user unblock event”. |
 | `chat_type`       | String | `roster`: User relationship event. |
-| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5(callId+secret+timestamp)`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.operation` | String   | `allow`: Remove a user from the blocklist. |
 | `payload.status`    | object   | Contains `error_code`.  |

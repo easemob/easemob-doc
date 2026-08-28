@@ -131,7 +131,7 @@ EMClient.getInstance()
 After a message is edited, the recipient and the current account's other online devices receive `EMMessageListener#onMessageContentChanged`. This callback carries the edited message, the last editor's user ID, and the latest editing time. For group chat and chat room conversations, all group or chat room members other than the user who performed the edit receive the callback.
 
 :::tip
-If a custom message is [edited through the RESTful API](/document/server-side/message_modify.html), the recipient also receives the edited custom message through `EMMessageListener#onMessageContentChanged`.
+If a custom message is [edited through the RESTful API](/rest/message_modify.html), the recipient also receives the edited custom message through `EMMessageListener#onMessageContentChanged`.
 :::
 
 ```java

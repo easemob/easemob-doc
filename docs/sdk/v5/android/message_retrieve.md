@@ -32,7 +32,7 @@ The parameters are described below:
 | `option` | `EMFetchMessageOption` | Retrieval options. You can set the following conditions:<br/> - Message sender;<br/> - Message type;<br/> - Message time range;<br/> - Message search direction;<br/> - Whether to save retrieved messages to the database;<br/> - For a group chat, set the `from` parameter to retrieve historical messages sent by a single group member. |
 | `callBack` | `EMValueCallBack<EMCursorResult<EMMessage>>` | Result callback. On success, obtain the message list and next-page cursor through `EMCursorResult`. |
 
-If `EMOptions#setRegardImportedMsgAsRead` was enabled during initialization, messages imported [through a server-side API](/document/server-side/message_import_single.html) and retrieved through this API are marked as read, and the conversation unread message count returned by `EMConversation#getUnreadMsgCount` does not change. If this setting is disabled, the value returned by `EMConversation#getUnreadMsgCount` increases.
+If `EMOptions#setRegardImportedMsgAsRead` was enabled during initialization, messages imported [through a server-side API](/rest/message_import_single.html) and retrieved through this API are marked as read, and the conversation unread message count returned by `EMConversation#getUnreadMsgCount` does not change. If this setting is disabled, the value returned by `EMConversation#getUnreadMsgCount` increases.
 
 :::tip
 1. **By default, you can retrieve historical messages from one-to-one and group chats. To retrieve chat room historical messages, contact the EasyIM business manager.**

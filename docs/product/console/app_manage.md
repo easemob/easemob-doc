@@ -30,7 +30,7 @@ On the **Applications** page, you can view development and production version ap
 In the **Development Configuration** section, you can view the following app credentials:
 
 - **AppKey**: The unique app identifier in the format `orgname#appname`. The App Key cannot be changed after the app is created. For details, see [App Creation](app_create.html#procedure).
-- **Client ID** and **Client Secret**: Used to generate an [app token](/document/server-side/easemob_app_token.html) and [user token](/document/server-side/easemob_user_token.html).
+- **Client ID** and **Client Secret**: Used to generate an [app token](/rest/easemob_app_token.html) and [user token](/rest/easemob_user_token.html).
 
 ![img](/images/console/app_info_develop.png)
 

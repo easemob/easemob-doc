@@ -222,7 +222,7 @@ Fixed an issue where forwarded attachment messages failed to send.
 
 Added support for [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives these messages but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/rest/message_stream_send_single.html). The SDK receives these messages but cannot send them.
 
 #### Improvements
 
@@ -469,7 +469,7 @@ Fixed an issue where a recalled pinned one-to-one message was not promptly remov
   
 #### Improvements
  
-- [EasyIM SDK] A [pre-delivery webhook](/document/server-side/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
+- [EasyIM SDK] A [pre-delivery webhook](/rest/callback_presending.html) can modify [message extension fields](/document/android/message_extension.html), which are now synchronized to the sender.
 - [EasyIM SDK] After the [server-side conversation deletion API](conversation_delete.html#单向删除服务端会话及本地会话) is successfully called, the local conversation is deleted. In previous versions, this API could be configured to delete the local messages in a conversation but could not delete the local conversation.
 - [EasyIM SDK] Added support for the 16K page size on Android 15.
 - [EasyIM SDK] The default error codes reported for chat group and chat room operations have changed from `GROUP_MEMBERS_FULL` (604) and `CHATROOM_MEMBERS_FULL` (704) to `GROUP_PERMISSION_DENIED` (603) and `CHATROOM_PERMISSION_DENIED` (703). For example, if a regular chat group member attempts to assign a chat group admin, error 603 is reported because the user lacks permission.
@@ -647,7 +647,7 @@ Starting with V4.6.0, new EaseIM App and EaseIMKIt projects written in Kotlin ar
   - Added the `EMMessagePinInfo` class, which includes the user who pinned a message and the time it was pinned.
   - Added `EMChatMessage#pinnedInfo` to display message pinning details.
   - Added the `EMMessageListener#onMessagePinChanged` event. When a user pins a message in a chat group or chat room conversation, other members of the chat group or chat room receive this callback.
-- [EasyIM SDK] The message editing callback `EMMessageListener#onMessageContentChanged` can now return [custom messages edited through the RESTful API](/document/server-side/message_modify.html).
+- [EasyIM SDK] The message editing callback `EMMessageListener#onMessageContentChanged` can now return [custom messages edited through the RESTful API](/rest/message_modify.html).
 - [EasyIM SDK] Added support for [retrieving chat room roaming messages](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server).
 - [EasyIM SDK] Added support for [dynamically loading .so library files](quickstart.html#方法三-动态加载-so-库文件).
 
@@ -676,7 +676,7 @@ Starting with V4.6.0, new EaseIM App and EaseIMKIt projects written in Kotlin ar
 - [EasyIM SDK] Added [EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search_local.html#search-messages-in-all-conversations-by-search-scope) and [EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search_local.html#search-messages-in-the-current-conversation-by-search-scope). When searching for messages by keyword, you can select a search scope, such as only message content, only message extension information, or both message content and extension information.
 - [EasyIM SDK] Added the [EMOptions#setUseReplacedMessageContents](message_send.html#content-moderation-before-sending-messages) switch. When this switch is enabled, if content moderation replaces content when a message is sent, the sender can retrieve the replaced content.
 - [EasyIM SDK] Added the [EMOptions#setIncludeSendMessageInMessageListener](message_receive.html#receive-text-messages) switch. When this switch is enabled, successfully sent messages are included in the `EMMessageListener#onMessageReceived` callback.
-- [EasyIM SDK] Added the [EMOptions#setRegardImportedMsgAsRead](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) switch. When enabled, messages imported through the [server-side API](/document/server-side/message_import_single.html) are in the read state after they are [retrieved as roaming messages](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) on the client. The number of unread messages in the conversation, or the value returned by `EMConversation#getUnreadMsgCount`, does not change. If this switch is disabled, the value returned by `EMConversation#getUnreadMsgCount` increases.
+- [EasyIM SDK] Added the [EMOptions#setRegardImportedMsgAsRead](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) switch. When enabled, messages imported through the [server-side API](/rest/message_import_single.html) are in the read state after they are [retrieved as roaming messages](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) on the client. The number of unread messages in the conversation, or the value returned by `EMConversation#getUnreadMsgCount`, does not change. If this switch is disabled, the value returned by `EMConversation#getUnreadMsgCount` increases.
 
 #### Improvements
 
@@ -714,7 +714,7 @@ Starting with V4.6.0, new EaseIM App and EaseIMKIt projects written in Kotlin ar
 - [EasyIM SDK] Added `asyncFetchAllContactsFromServer` to [retrieve the friend list from the server all at once or by page](user_relationship.html#retrieve-the-friend-list-and-friend-information). Each friend object contains the friend's user ID and friend remarks.
 - [EasyIM SDK] Added `fetchContactFromLocal` to [retrieve a single friend's user ID and friend remarks locally](user_relationship.html#read-the-friend-list-locally).
 - [EasyIM SDK] Added `asyncFetchAllContactsFromLocal` to [retrieve the friend list from local storage by page](user_relationship.html#read-the-friend-list-locally). Each friend object contains the friend's user ID and friend remarks.
-- [EasyIM SDK] Added the `EMMessage#isBroadcast` attribute to determine whether a message is a global chat room broadcast message. You can [send a global chat room broadcast message by calling the REST API](/document/server-side/broadcast_to_chatrooms.html).
+- [EasyIM SDK] Added the `EMMessage#isBroadcast` attribute to determine whether a message is a global chat room broadcast message. You can [send a global chat room broadcast message by calling the REST API](/rest/broadcast_to_chatrooms.html).
 - [EasyIM SDK] Added `EMGroupManager#asyncGetJoinedGroupsCountFromServer` to [retrieve from the server the number of chat groups the current user has joined](group_manage.html#query-the-number-of-groups-joined-by-the-current-user). 
 - [EasyIM SDK] Added [error code 706](error.html), `CHATROOM_OWNER_NOT_ALLOW_LEAVE`, indicating that the chat room owner is not allowed to leave the chat room. If `EMOptions#allowChatroomOwnerLeave` is set to `false` during initialization, this error is reported when the chat room owner calls `leaveChatRoom` to leave the chat room.
 - [EasyIM SDK] Added `EMOptions#setLoadEmptyConversations` to configure during initialization whether empty conversations can be returned when retrieving the conversation list.
@@ -976,7 +976,7 @@ Added `getJoinedGroupsFromServer` to retrieve the chat groups joined by the curr
 
 - [EasyIM SDK] Added the chat group disabled status attribute [EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) to chat group details. Developers must set this attribute on the server.
 - [EasyIM SDK] Improved the strategy for updating access points when connection issues occur, enhancing availability.
-- [EasyIM SDK] [Pre-delivery webhook](/document/server-side/callback_presending.html): Custom error information is now added to the error description returned to the app user when sending fails, namely the code information in the [response body fields](/document/server-side/callback_presending.html#响应-body).
+- [EasyIM SDK] [Pre-delivery webhook](/rest/callback_presending.html): Custom error information is now added to the error description returned to the app user when sending fails, namely the code information in the [response body fields](/rest/callback_presending.html#响应-body).
 - [EasyIM SDK] In [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html), added error code 1101, [EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99), indicating that a user cannot subscribe to their own presence.
 
 #### Improvements:

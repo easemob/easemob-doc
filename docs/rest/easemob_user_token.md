@@ -9,7 +9,7 @@ Before an app can use the features provided by an EasyIM SDK, the user must log 
 In a production environment, you typically first implement login for your app's own account system. After login succeeds, use the userId and token returned by your app server to log in to EasyIM. In other words, your app server needs to distribute the token to the client.
 
 :::tip
-A user ID is unique within an app, and the userId must be passed when communicating with other users. Therefore, userId can be considered public information. To prevent malicious use, we recommend that it differ from the app's own account identifier and that it not be an easily guessed string, such as 1111, a string in a particular character sequence, such as 12345, or a string with an obvious characteristic, such as a name or birthday. For user ID requirements, see [Register users](/document/server-side/account_register_open.html).
+A user ID is unique within an app, and the userId must be passed when communicating with other users. Therefore, userId can be considered public information. To prevent malicious use, we recommend that it differ from the app's own account identifier and that it not be an easily guessed string, such as 1111, a string in a particular character sequence, such as 12345, or a string with an obvious characteristic, such as a name or birthday. For user ID requirements, see [Register users](/rest/account_register_open.html).
 ::: 
 
 The EasyIM server supports the following two methods for obtaining a user token:
@@ -99,9 +99,9 @@ If the returned HTTP status code is 200, the token was obtained successfully. Th
 | `user.created`  | Long  | Unix timestamp when the user was registered, in milliseconds.            |
 | `user.modified`  | Long  | Unix timestamp when the user information was last modified, in milliseconds.          |
 | `user.username`  | String | User ID.                                                       |
-| `user.activated` | Bool  | Whether the user is active:<br/> - `true`: The user is active.<br/> - `false`: The user is banned. To use a banned user, call the [Unban a User API](/document/server-side/account_unban.html). |
+| `user.activated` | Bool  | Whether the user is active:<br/> - `true`: The user is active.<br/> - `false`: The user is banned. To use a banned user, call the [Unban a User API](/rest/account_unban.html). |
 
-If the returned HTTP status code is not 200, the request fails. See [Response status codes](/document/server-side/error.html) for possible causes.
+If the returned HTTP status code is not 200, the request fails. See [Response status codes](/rest/error.html) for possible causes.
 
 ### Error code
 

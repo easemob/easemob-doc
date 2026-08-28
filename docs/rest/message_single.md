@@ -957,7 +957,7 @@ The request method, response example, and response field descriptions in this se
 
 ### Set callback routing when sending messages
 
-Callback routing lets you deliver different messages under the same App Key to different callback addresses by callback environment. When sending a message, include a callback environment field such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it uses this field to match a [callback routing rule](/product/console/basic_webhook.html#configure-message-callback-rules) configured in the console and routes the message to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) address.
+Callback routing lets you deliver different messages under the same App Key to different callback addresses by callback environment. When sending a message, include a callback environment field such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it uses this field to match a [callback routing rule](/product/console/basic_webhook.html#configure-webhook-rules) configured in the console and routes the message to the corresponding [pre-delivery webhook](/rest/callback_presending.html) or [post-delivery webhook](/rest/callback_postsending.html) address.
 
 :::tip
 This feature is currently available only in China regions 1 and 2.
@@ -976,12 +976,12 @@ This feature is currently available only in China regions 1 and 2.
 
 | Callback type | Scope | Description |
 | :------------- | :------- | :---------------- |
-| [Pre-delivery webhook](/document/server-side/callback_presending.html) | Applies only to **messages sent through an SDK** and does not support targeted group or chat room messages. | Before a message is delivered to target users, your server can determine whether to intercept or modify the message content. |
-| [Post-delivery webhook](/document/server-side/callback_postsending.html) | Applies to **messages sent through an SDK or the REST API**. | Notifies your server after a message is sent successfully. |
+| [Pre-delivery webhook](/rest/callback_presending.html) | Applies only to **messages sent through an SDK** and does not support targeted group or chat room messages. | Before a message is delivered to target users, your server can determine whether to intercept or modify the message content. |
+| [Post-delivery webhook](/rest/callback_postsending.html) | Applies to **messages sent through an SDK or the REST API**. | Notifies your server after a message is sent successfully. |
 
 **Workflow**
 
-1. In the console, [configure callback routing](/product/console/basic_webhook.html#configure-message-callback-rules) for the pre-delivery or post-delivery callback.
+1. In the console, [configure callback routing](/product/console/basic_webhook.html#configure-webhook-rules) for the pre-delivery or post-delivery callback.
 2. Set the callback environment value when the client sends a message.
 3. After the EasyIM server receives the message, it matches the callback address for the current stage based on the callback environment value in the message.
 4. After a valid route is matched, the server sends the callback request to the corresponding address.

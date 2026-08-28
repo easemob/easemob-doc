@@ -741,4 +741,4 @@ Ensure that the corresponding Manager is registered and that the listener is reg
 
 #### Which client API should I use to create a chat room?
 
-The new Web SDK does not provide `createChatRoom` as a recommended client-side capability. We recommend creating a chat room through a [server-side REST API](/document/server-side/chatroom_create.html). The client is primarily responsible for retrieving, joining, leaving, and managing existing chat rooms.
+The new Web SDK does not provide `createChatRoom` as a recommended client-side capability. We recommend creating a chat room through a [server-side REST API](/rest/chatroom_create.html). The client is primarily responsible for retrieving, joining, leaving, and managing existing chat rooms.

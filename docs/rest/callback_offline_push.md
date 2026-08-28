@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After EasyIM sends an offline push notification through a third-party offline push service, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the push notification and whether it was delivered successfully, and synchronize data.
+After EasyIM sends an offline push notification through a third-party offline push service, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the push notification and whether it was delivered successfully, and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - A [message is sent](/document/android/message_send.html) in a one-to-one or group chat on the client while the recipient is offline.
-- A message is sent through the REST API in a [one-to-one chat](/document/server-side/message_single.html) or [group chat](/document/server-side/message_group.html) while the recipient is offline.
+- A message is sent through the REST API in a [one-to-one chat](/rest/message_single.html) or [group chat](/rest/message_group.html) while the recipient is offline.
 - A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message) or [group chat](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) while the recipient is offline.
 
 ## Webhook request

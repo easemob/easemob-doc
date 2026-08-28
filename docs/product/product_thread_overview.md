@@ -32,7 +32,7 @@ You can implement message thread event listeners. When an operation occurs in a 
 
 ## Message thread event callbacks
 
-You can implement a post-delivery callback so that the EasyIM server synchronizes message thread events with your app server through HTTP/HTTPS POST requests. Such events include operations on a message in a message thread, such as sending, recalling, or editing the message. For details, see [Message thread webhook events](/document/server-side/callback_thread.html).
+You can implement a post-delivery callback so that the EasyIM server synchronizes message thread events with your app server through HTTP/HTTPS POST requests. Such events include operations on a message in a message thread, such as sending, recalling, or editing the message. For details, see [Message thread webhook events](/rest/callback_thread.html).
 
 ## Message thread limitations
 

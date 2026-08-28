@@ -80,7 +80,7 @@ The request body is a JSON object containing the following fields:
 |  - `created`                          | Long    | Unix timestamp when the user was created, in milliseconds.            |
 |  - `modified`                         | Long    | Unix timestamp when the user information was last modified, in milliseconds.      |
 |  - `username`                         | String  | User ID, which is the unique account used to log in.      |
-|  - `activated`                        | Boolean | Whether the user is active:<ul><li>`true`: The user is active.</li><li>`false`: The user is banned. To use a banned user account, call [Unban a User](/document/server-side/account_unban.html) to unban the user.</li></ul> |
+|  - `activated`                        | Boolean | Whether the user is active:<ul><li>`true`: The user is active.</li><li>`false`: The user is banned. To use a banned user account, call [Unban a User](/rest/account_unban.html) to unban the user.</li></ul> |
 |  - `notification_display_style`       | Int     | Offline push notification display mode.      |
 |  - `nickname`                         | String  | Nickname displayed when an offline push notification is received.    |
 |  - `notifier_name`                    | String  | Push certificate name.   |

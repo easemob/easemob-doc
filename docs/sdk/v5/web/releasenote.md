@@ -94,7 +94,7 @@ Fixes a compatibility error that occurred when importing the SDK for use with Vi
 
 Supports [receiving streaming messages sent by the server](message_stream_receive.html).
 
-Currently, streaming messages can be delivered only through the [server-side RESTful API](/document/server-side/message_stream_send_single.html). The SDK receives but cannot send them.
+Currently, streaming messages can be delivered only through the [server-side RESTful API](/rest/message_stream_send_single.html). The SDK receives but cannot send them.
 
 #### Fixes
 
@@ -302,7 +302,7 @@ Adjusts the timing of `open().then` in the login method and the connection-succe
   - `unpinMessage`: Unpins a message.
   - `getServerPinnedMessages`: Retrieves pinned messages for a specified conversation from the server.
   - `onMessagePinEvent`: When a user pins or unpins a message in a group or chat room conversation, other members of the group or chat room receive this callback.
-- [EasyIM SDK] The message-editing callback `onModifiedMessage` supports returning [custom messages edited through a RESTful API](/document/server-side/message_modify.html).
+- [EasyIM SDK] The message-editing callback `onModifiedMessage` supports returning [custom messages edited through a RESTful API](/rest/message_modify.html).
 - [EasyIM SDK] Supports [retrieving roaming messages from a chat room](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server-with-pagination).
 
 #### Improvements
@@ -379,7 +379,7 @@ Adjusts the timing of `open().then` in the login method and the connection-succe
 
 - [EasyIM SDK] Adds [friend remarks](user_relationship.html#set-friend-remarks).
 - [EasyIM SDK] Adds the `getAllContacts` and `getContactsWithCursor` methods to [retrieve the friend list from the server all at once or by page](user_relationship.html#retrieve-the-friend-list-and-friend-information). Each friend object contains the friend's user ID and friend remarks.
-- [EasyIM SDK] Adds the `broadcast` field to the message structure to indicate whether a message is a chat room global broadcast message. You can [send a chat room global broadcast message through a REST API](/document/server-side/broadcast_to_chatrooms.html).
+- [EasyIM SDK] Adds the `broadcast` field to the message structure to indicate whether a message is a chat room global broadcast message. You can [send a chat room global broadcast message through a REST API](/rest/broadcast_to_chatrooms.html).
 
 #### Improvements
 

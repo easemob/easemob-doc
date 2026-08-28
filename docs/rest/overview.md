@@ -69,7 +69,7 @@ All request URLs and request body content are case-sensitive.
 
 ## Server-side API list
 
-For the method, API URL, brief description, and call frequency limit of each REST API, see [RESTful API call frequency limits](/document/server-side/limitationapi.html).
+For the method, API URL, brief description, and call frequency limit of each REST API, see [RESTful API call frequency limits](/rest/limitationapi.html).
 
 ## Prerequisites for calling APIs
 

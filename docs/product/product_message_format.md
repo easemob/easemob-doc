@@ -75,15 +75,15 @@ Example:
 
 When sending an image message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the image message. Also ensure that the image can be downloaded using the `url` parameter.
 
-If access restrictions (`restrict-access`) are enabled when the image is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the image message. When you upload the original image, the EasyIM server automatically generates a thumbnail.
+If access restrictions (`restrict-access`) are enabled when the image is uploaded, obtain `share-secret` from the [file upload](/rest/message_upload_file.html) response body after the upload and pass it when sending the image message. When you upload the original image, the EasyIM server automatically generates a thumbnail.
 
 The body of an image message contains the following fields:
 
 | Parameter          | Type   | Description        |
 | :------------ | :----- | :------------------------ |
 | `filename`    | String | Image file name, including the file extension.     |
-| `secret`      | String | Image access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the image is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the image file was uploaded. |
-| `url`         | String | Image URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the image file is uploaded successfully.  |
+| `secret`      | String | Image access key obtained from `share-secret` in the [file upload](/rest/message_upload_file.html) response body after the image is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the image file was uploaded. |
+| `url`         | String | Image URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/rest/message_upload_file.html) response body after the image file is uploaded successfully.  |
 | `size`        | JSON   | Image dimensions in pixels.<br/> - `height`: Image height.<br/> - `width`: Image width.   |
 
 Example:
@@ -104,16 +104,16 @@ Example:
 
 When sending a voice message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the voice message. Also ensure that the voice file can be downloaded using the `url` parameter.
 
-If access restrictions (`restrict-access`) are enabled when the voice file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the voice message. 
+If access restrictions (`restrict-access`) are enabled when the voice file is uploaded, obtain `share-secret` from the [file upload](/rest/message_upload_file.html) response body after the upload and pass it when sending the voice message. 
 
 The body of a voice message contains the following fields:
 
 | Parameter          | Type   | Description                                                                              |
 | :------------ | :----- | :------------------------------------------ |
-| `url`         | String | Voice file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the voice file is uploaded successfully. |
+| `url`         | String | Voice file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/rest/message_upload_file.html) response body after the voice file is uploaded successfully. |
 | `filename`    | String | Voice file name, including the file extension.    |
 | `length`      | Int    | Voice duration in seconds.    |
-| `secret`      | String | Voice file access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the voice file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the voice file was uploaded. |
+| `secret`      | String | Voice file access key obtained from `share-secret` in the [file upload](/rest/message_upload_file.html) response body after the voice file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the voice file was uploaded. |
 
 Example:
 
@@ -130,7 +130,7 @@ Example:
 
 When sending a video message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the video message. Also ensure that the video can be downloaded using the `url` parameter.
 
-If access restrictions (`restrict-access`) are enabled when the video file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the video message. The EasyIM server does not automatically generate a thumbnail for a video file. If you need a video thumbnail, first call the [file upload](/document/server-side/message_upload_file.html) API to upload the thumbnail, and then call the API again to upload the original video file.
+If access restrictions (`restrict-access`) are enabled when the video file is uploaded, obtain `share-secret` from the [file upload](/rest/message_upload_file.html) response body after the upload and pass it when sending the video message. The EasyIM server does not automatically generate a thumbnail for a video file. If you need a video thumbnail, first call the [file upload](/rest/message_upload_file.html) API to upload the thumbnail, and then call the API again to upload the original video file.
 
 The body of a video message contains the following fields:
 
@@ -139,10 +139,10 @@ The body of a video message contains the following fields:
 | `filename`     | String | Video file name, including the file extension.  |
 | `thumb`        | String | Video thumbnail URL in the format https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the thumbnail UUID returned by the EasyIM server after the video thumbnail is uploaded. |
 | `length`       | Int    | Video duration in seconds.   |
-| `secret`       | String | Video file access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the video file was uploaded.  |
+| `secret`       | String | Video file access key obtained from `share-secret` in the [file upload](/rest/message_upload_file.html) response body after the video file is uploaded successfully. This field is required when sending a message if access restrictions (`restrict-access`) were enabled when the video file was uploaded.  |
 | `file_length`  | Long   | Video file size in bytes.  |
 | `thumb_secret` | String | Thumbnail file access key. This field is present if access restrictions were enabled when the file was uploaded. |
-| `url`          | String | Video file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. |
+| `url`          | String | Video file URL: https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}, where `file_uuid` is the file ID obtained from the [file upload](/rest/message_upload_file.html) response body after the video file is uploaded successfully. |
 
 Example:
 
@@ -162,15 +162,15 @@ Example:
 
 When sending a file message through a REST API, we recommend passing the `filename` parameter. Otherwise, the client cannot display the file name when receiving the file message. Also ensure that the file can be downloaded using the `url` parameter.
 
-If access restrictions (`restrict-access`) are enabled when the file is uploaded, obtain `share-secret` from the [file upload](/document/server-side/message_upload_file.html) response body after the upload and pass it when sending the file message. 
+If access restrictions (`restrict-access`) are enabled when the file is uploaded, obtain `share-secret` from the [file upload](/rest/message_upload_file.html) response body after the upload and pass it when sending the file message. 
 
 The body of a file message contains the following fields:
 
 | Parameter       | Type   | Required | Description     |
 | :--------- | :----- | :------- | :------------ |
 | `filename` | String | No       | File name. We recommend passing this parameter. Otherwise, the client cannot display the file name when receiving the file message.   |
-| `secret`   | String | No       | File access key obtained from `share-secret` in the [file upload](/document/server-side/message_upload_file.html) response body after the file is uploaded successfully. This field is required if access restrictions (`restrict-access`) were enabled when the file was uploaded.      |
-| `url`      | String | Yes       | File URL: `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`, where `file_uuid` is the file ID obtained from the [file upload](/document/server-side/message_upload_file.html) response body after the video file is uploaded successfully. |
+| `secret`   | String | No       | File access key obtained from `share-secret` in the [file upload](/rest/message_upload_file.html) response body after the file is uploaded successfully. This field is required if access restrictions (`restrict-access`) were enabled when the file was uploaded.      |
+| `url`      | String | Yes       | File URL: `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`, where `file_uuid` is the file ID obtained from the [file upload](/rest/message_upload_file.html) response body after the video file is uploaded successfully. |
 
 Example:
 
@@ -261,7 +261,7 @@ The structure of `em_push_template` is as follows:
 | `directed_template` | Object        | Targeted push template. This type of template applies to offline push for chat group messages when one or more users in the chat group need to receive a different offline push notification from other users. Its fields are described in the following table.    |
 | `disable_at_content` | Boolean        | Whether to disable the default @ content:<br/> - `true`: Disable<br/> - (Default) `false`: Do not disable  |
 
-For information about configuring the `title_args` and `content_args` fields, see the [push template documentation](/document/server-side/push_template_overview.html).
+For information about configuring the `title_args` and `content_args` fields, see the [push template documentation](/rest/push_template_overview.html).
 
 The structure of `em_push_ext` is as follows:
 

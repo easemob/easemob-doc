@@ -191,7 +191,7 @@ To ensure reliable test results, avoid using an emulator.
 
 1. Log in to the app on the device and confirm that the device token is bound successfully.
 
-  You can check the logs or call the [RESTful API for obtaining user details](/document/server-side/account_detail_obtain_single.html) to confirm whether the device token is bound successfully.
+  You can check the logs or call the [RESTful API for obtaining user details](/rest/account_detail_obtain_single.html) to confirm whether the device token is bound successfully.
 
 1. Kill the app process.
 

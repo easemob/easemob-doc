@@ -3,7 +3,7 @@
 EasyIM provides developers with highly reliable, low-latency, high-concurrency, secure, and global communications cloud services, helping them quickly build end-to-end communication scenarios. EasyIM provides SDKs and RESTful APIs that support unlimited concurrent online users, hundreds of millions of concurrent chat room messages, an average global latency of less than 200 milliseconds, and an average latency within the same region of less than 100 milliseconds.
 
 - Support one-to-one chats, group chats, and chat rooms;
-- Provide server-side RESTful APIs and [webhook services](/document/server-side/callback_overview.html);
+- Provide server-side RESTful APIs and [webhook services](/rest/callback_overview.html);
 - Provide multi-platform SDKs for Android, iOS, Web, HarmonyOS, Windows, Linux, Unity, Flutter, React Native, Mini Program, uni-app, and Electron;
 - Provide demos and UIKit.
 
@@ -61,10 +61,10 @@ The EasyIM Console provides management capabilities for EasyIM. In the Console, 
 
 ### RESTful APIs
 
-EasyIM provides the following RESTful APIs through the REST platform. Your business server can send HTTP requests to the EasyIM REST server to implement real-time communication on the server side. RESTful APIs provide features such as sending, retrieving, recalling, editing, importing messages, adding Reactions, and managing chat groups, chat rooms, user accounts, and user relationships. RESTful APIs provide more powerful management capabilities than the EasyIM Console. For details, see [RESTful APIs](/document/server-side/overview.html).
+EasyIM provides the following RESTful APIs through the REST platform. Your business server can send HTTP requests to the EasyIM REST server to implement real-time communication on the server side. RESTful APIs provide features such as sending, retrieving, recalling, editing, importing messages, adding Reactions, and managing chat groups, chat rooms, user accounts, and user relationships. RESTful APIs provide more powerful management capabilities than the EasyIM Console. For details, see [RESTful APIs](/rest/overview.html).
 
 Some features are available only through RESTful APIs, such as banning and unbanning accounts, globally muting users, and sending app or chat room global broadcast messages.
 
 ### Message callbacks
 
-EasyIM provides [message webhooks](/document/server-side/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.
+EasyIM provides [message webhooks](/rest/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.

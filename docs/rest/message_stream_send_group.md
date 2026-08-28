@@ -20,7 +20,7 @@ Before continuing, familiarize yourself with these core concepts:
 
 - Conversation types: Only one-to-one chats and group chats are supported. Chat rooms are not supported.
 - Message type: Only text streaming messages are supported.
-- Sending method: Messages can only be sent through the [server-side RESTful API](/document/server-side/message_stream_send_single.html).
+- Sending method: Messages can only be sent through the [server-side RESTful API](/rest/message_stream_send_single.html).
 - Client capability: [The SDK only supports receiving streaming messages](/document/android/message_stream_receive.html), not sending them.
 - Message identifier: `msgId` identifies the entire streaming message.
 - Message limitations: The following limitations apply when sending a streaming message:
@@ -185,7 +185,7 @@ The following table lists the message features supported for streaming messages:
  
 | Feature | Supported                          |
 | :--------------- | :-------------------------------- |
-| [Send messages](/document/server-side/message_stream_send_single.html)         | Yes (only through the RESTful API) |
+| [Send messages](/rest/message_stream_send_single.html)         | Yes (only through the RESTful API) |
 | [Message roaming (client)](/document/android/message_retrieve.html#retrieve-messages-of-a-specified-conversation-from-the-server)         | Yes                                |
 | [Message extensions](message_stream_send_single.html#request-example)         | Yes                                |
 | [Targeted messages](/document/android/message_target.html)         | No                                |
@@ -199,10 +199,10 @@ The following table lists the message features supported for streaming messages:
 | [Search for messages (client)](/document/android/message_search_local.html)         | Yes                                |
 | [Conversation unread count (client)](/document/android/conversation_unread.html)       | Yes                                |
 | Last message in a conversation | Yes                                |
-| [Offline push](/document/server-side/push_settings_set.html)     | Yes                                |
+| [Offline push](/rest/push_settings_set.html)     | Yes                                |
 | [Content moderation](/value-added/moderation/moderation_overview.html)     | No                                |
 | [Message translation](message_translation_text.html)         | Yes                                |
-| [Pre-delivery webhook](/document/server-side/callback_presending.html)         | No                               |
-| [Post-delivery webhook](/document/server-side/callback_postsending.html)         | No      |
+| [Pre-delivery webhook](/rest/callback_presending.html)         | No                               |
+| [Post-delivery webhook](/rest/callback_postsending.html)         | No      |
 | Synchronize a successfully sent message across the sender's clients        |   No  |
 | [Store messages in the sender's and recipient's local databases](/product/limitation.html#message-storage)         | Yes |

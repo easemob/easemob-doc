@@ -2,12 +2,12 @@
 
 ## Feature overview
 
-When a member leaves a chat group or chat room voluntarily, is removed, or leaves after being added to the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to identify the member who left and synchronize data.
+When a member leaves a chat group or chat room voluntarily, is removed, or leaves after being added to the blocklist, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to identify the member who left and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Leave voluntarily
 
@@ -73,7 +73,7 @@ The following examples show chat room leave events.
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user who leaves the chat group or chat room.        |
 | `payload.action` | JSON | This field applies only to chat room leave events, not chat group leave events:<br/> - `user_quit`: The user voluntarily leaves the chat room.<br/> - `user_offline`: The user leaves the chat room because they are offline. |
@@ -92,7 +92,7 @@ The following examples show chat room leave events.
 ### Trigger conditions
 
 - A user is removed from a [chat group](/document/android/group_manage.html#remove-a-member) or [chat room](/document/android/room_manage.html#be-removed) on the client.
-- A [RESTful API is called to remove a user from a chat group](/document/server-side/group_member_remove_single.html) or [chat room](/document/server-side/chatroom_member_remove_single.html).
+- A [RESTful API is called to remove a user from a chat group](/rest/group_member_remove_single.html) or [chat room](/rest/chatroom_member_remove_single.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
@@ -127,7 +127,7 @@ The following example shows an event generated when a user is removed from a cha
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user removed from the chat group or chat room.        |
 | `payload.type` | Array  | Leave method: `KICK` indicates that a user is removed from a chat group or chat room.     |
@@ -145,7 +145,7 @@ The following example shows an event generated when a user is removed from a cha
 ### Trigger conditions
 
 - A user leaves a chat group or chat room after being added to the [chat group blocklist](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/document/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
-- A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/document/server-side/group_member_blocklist_add_single.html) or [chat room blocklist](/document/server-side/chatroom_member_blocklist_add_single.html).
+- A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/rest/group_member_blocklist_add_single.html) or [chat room blocklist](/rest/chatroom_member_blocklist_add_single.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
@@ -180,7 +180,7 @@ The following example shows an event generated when a user is added to the group
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 | `payload.member` | JSON | ID of the user who leaves after being added to the chat group or chat room blocklist.        |
 | `payload.type` | Array  | Leave method: `BLOCK` indicates that a user leaves a chat group or chat room after being added to its blocklist.     |
@@ -198,7 +198,7 @@ The following example shows an event generated when a user is added to the group
 ### Trigger conditions
 
 - Users leave when a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) is destroyed on the client.
-- Users leave when a RESTful API is called to [destroy a chat group](/document/server-side/group_delete.html) or [chat room](/document/server-side/chatroom_delete.html).
+- Users leave when a RESTful API is called to [destroy a chat group](/rest/group_delete.html) or [chat room](/rest/chatroom_delete.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
 
 ### Webhook request
@@ -232,7 +232,7 @@ The following example shows an event generated when a user is added to the group
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `operation`    | String | Operation. The value is `LEAVE` when a user leaves a chat group or chat room. |
 | `operator`     | String | Operator.                     |

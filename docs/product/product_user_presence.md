@@ -23,7 +23,7 @@ A user can set a custom state, such as busy, be right back, away, on a call, or 
 
 ## Query user presence
 
-EasyIM supports querying the presence of multiple users by calling a [REST API](/document/server-side/presence_get.html) or [client API](/document/android/presence.html#query-subscribed-users).
+EasyIM supports querying the presence of multiple users by calling a [REST API](/rest/presence_get.html) or [client API](/document/android/presence.html#query-subscribed-users).
 
 ## User status changes
 
@@ -37,7 +37,7 @@ EasyIM supports querying the presence of multiple users by calling a [REST API](
 
 After a user logs in successfully, their status is online. After the user logs out successfully or is forced offline, their status is offline.
 
-When a user logs in, logs out, or is forced offline, the EasyIM server includes the user's status in the corresponding event sent to your configured post-delivery callback URL. For details, see [User login and logout events](/document/server-side/callback_login_logout.html).
+When a user logs in, logs out, or is forced offline, the EasyIM server includes the user's status in the corresponding event sent to your configured post-delivery callback URL. For details, see [User login and logout events](/rest/callback_login_logout.html).
 
 ### Real-time awareness of status changes
 

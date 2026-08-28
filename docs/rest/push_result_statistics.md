@@ -12,7 +12,7 @@ You can retrieve offline push results in the following ways:
 
 ![img](/images/server-side/message_delivery_query.png)
 
-- Push result callback: [Create a post-delivery callback rule](/product/console/basic_webhook.html#configure-message-callback-rules). For the **Callback Type** parameter, select **Offline Push Event**, and then select **Push Succeeded**, **Push Failed**, or **Push Exception** to receive push result callback content. For details about offline push events, see [Post-delivery webhook events](/document/server-side/callback_login_logout.html).
+- Push result callback: [Create a post-delivery callback rule](/product/console/basic_webhook.html#configure-webhook-rules). For the **Callback Type** parameter, select **Offline Push Event**, and then select **Push Succeeded**, **Push Failed**, or **Push Exception** to receive push result callback content. For details about offline push events, see [Post-delivery webhook events](/rest/callback_login_logout.html).
 
 ![img](/images/server-side/post_callback_push.png)
 

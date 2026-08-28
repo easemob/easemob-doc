@@ -66,9 +66,9 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
 }
 ```
 
-For API details, see [Send text messages](/document/server-side/message_single.html#send-text-messages).
+For API details, see [Send text messages](/rest/message_single.html#send-text-messages).
 
-For APIs used to send other types of messages in one-to-one chat conversations, see [Send one-to-one chat messages](/document/server-side/message_single.html).
+For APIs used to send other types of messages in one-to-one chat conversations, see [Send one-to-one chat messages](/rest/message_single.html).
 
 ## Use a push template when sending group chat messages
 
@@ -120,6 +120,6 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
 }
 ```
 
-For API details, see [Send text messages](/document/server-side/message_group.html#send-text-messages).
+For API details, see [Send text messages](/rest/message_group.html#send-text-messages).
 
-For APIs used to send other types of messages in group chat conversations, see [Send group chat messages](/document/server-side/message_group.html).
+For APIs used to send other types of messages in group chat conversations, see [Send group chat messages](/rest/message_group.html).

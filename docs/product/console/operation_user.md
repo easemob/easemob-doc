@@ -19,7 +19,7 @@ In [EasyIM Console](https://console.easyim.ai/user/login), you can create and ma
 | Parameter | Type | Required | Description |
 | :-------- | :--- | :------- | :---------- |
 | User ID | String | Yes | The user ID cannot exceed 64 bytes and supports the following characters:<br/>- The 26 lowercase English letters a–z.<br/>- The 10 digits 0–9.<br/>- Underscores (`_`), hyphens (`-`), and periods (`.`).<br/><Container type="notice" title="Notice"><br/>- Do not use uppercase English letters A–Z.<br/>- Make sure that each user ID is unique within the same app.<br/>- A user ID is public information. Do not use sensitive information such as a UUID, email address, or mobile number.</Container> |
-| User Nickname | String | No | The sender nickname displayed in the recipient's notification bar for offline push. You can customize this nickname. It cannot exceed 100 characters.<br/>The following characters are supported:<br/>- The 26 lowercase English letters a–z.<br/>- The 26 uppercase English letters A–Z.<br/>- The 10 digits 0–9.<br/>- Chinese characters.<br/>- Special characters.<Container type="notice" title="Notice">1. If no nickname is set, the sender's user ID is displayed instead of a nickname in push notifications.<br/>2. This nickname can differ from the nickname in the user attributes. However, we recommend keeping the two nicknames consistent. When you modify one nickname, call the corresponding method to update the other. For information about updating the nickname in user attributes, see [Set User Attributes](/document/server-side/user_attribute_set.html).</Container> |
+| User Nickname | String | No | The sender nickname displayed in the recipient's notification bar for offline push. You can customize this nickname. It cannot exceed 100 characters.<br/>The following characters are supported:<br/>- The 26 lowercase English letters a–z.<br/>- The 26 uppercase English letters A–Z.<br/>- The 10 digits 0–9.<br/>- Chinese characters.<br/>- Special characters.<Container type="notice" title="Notice">1. If no nickname is set, the sender's user ID is displayed instead of a nickname in push notifications.<br/>2. This nickname can differ from the nickname in the user attributes. However, we recommend keeping the two nicknames consistent. When you modify one nickname, call the corresponding method to update the other. For information about updating the nickname in user attributes, see [Set User Attributes](/rest/user_attribute_set.html).</Container> |
 | Password | String | Yes | The user login password. It cannot exceed 64 characters. |
 | Confirm Password | String | Yes | Enter the user login password again. |
 
@@ -88,7 +88,7 @@ In the user list, click **More** in the **Operation** column for the target user
 
 ## Send a message through the REST API
 
-In the user list, click **More** in the **Operation** column for the target user and select **Send Admin Message** to call the [REST API](/document/server-side/message_single.html) to send a text or image message to the user.
+In the user list, click **More** in the **Operation** column for the target user and select **Send Admin Message** to call the [REST API](/rest/message_single.html) to send a text or image message to the user.
 
 ![img](/images/console/operation_user_rest_msg.png)
 

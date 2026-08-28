@@ -18,7 +18,7 @@ Before you begin, ensure that the following requirements are met:
 You can call `fetchMessagesFromServerBy` to retrieve historical messages from one-to-one chats, group chats, and chat rooms for which the service has been enabled from the server by page based on `EMFetchServerMessagesOption`. We recommend retrieving 20 messages per page, with a maximum of 50. When the number of returned messages is less than `pageSize`, there are no more messages.
 
 Through `EMFetchServerMessagesOption`, you can set the message sender, message type, time range, search direction, and whether to save messages to the local database. For group chats, you can set `fromIds` to retrieve historical messages sent by one or more specified members of the group.
-If `EMOptions#regardImportMessagesAsRead` is enabled during initialization, messages imported [through the server-side API](/document/server-side/message_import_single.html) are marked as read after they are retrieved, and the conversation's `unreadMessagesCount` does not increase. If this setting is disabled, the count increases.
+If `EMOptions#regardImportMessagesAsRead` is enabled during initialization, messages imported [through the server-side API](/rest/message_import_single.html) are marked as read after they are retrieved, and the conversation's `unreadMessagesCount` does not increase. If this setting is disabled, the count increases.
 
 :::tip
 1. **By default, you can retrieve historical messages from one-to-one and group chats. To retrieve chat room historical messages, contact the EasyIM business manager.**

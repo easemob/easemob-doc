@@ -782,7 +782,7 @@ For size and storage limits of each message type, see [Message Limitations](/pro
 
 #### Set callback routing when sending a message
 
-Callback routing allows you to deliver different messages under the same App Key to different callback URLs by callback environment. When sending a message, include a callback environment such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it matches the [callback routing rule](/product/console/basic_webhook.html#配置消息回调规则) configured in the console based on this value and sends the current message callback to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) URL.
+Callback routing allows you to deliver different messages under the same App Key to different callback URLs by callback environment. When sending a message, include a callback environment such as `dev`, `test`, or `prod`. After the EasyIM server receives the message, it matches the [callback routing rule](/product/console/basic_webhook.html#配置消息回调规则) configured in the console based on this value and sends the current message callback to the corresponding [pre-delivery webhook](/rest/callback_presending.html) or [post-delivery webhook](/rest/callback_postsending.html) URL.
 
 :::tip
 Currently, this feature is available only in Mainland China regions 1 and 2.
@@ -801,8 +801,8 @@ Currently, this feature is available only in Mainland China regions 1 and 2.
 
 | Callback type    | Scope       | Description      |
 | :------------- | :------- | :---------------- |
-| [Pre-delivery webhook](/document/server-side/callback_presending.html) | Applies only to **messages sent through an SDK**. Targeted group and chat room messages are not supported. | Before delivering a message to target users, your server can determine whether to intercept or modify it. |
-| [Post-delivery webhook](/document/server-side/callback_postsending.html) | Applies to **messages sent through an SDK or REST API**.  | Notify your server after a message is sent successfully.   |
+| [Pre-delivery webhook](/rest/callback_presending.html) | Applies only to **messages sent through an SDK**. Targeted group and chat room messages are not supported. | Before delivering a message to target users, your server can determine whether to intercept or modify it. |
+| [Post-delivery webhook](/rest/callback_postsending.html) | Applies to **messages sent through an SDK or REST API**.  | Notify your server after a message is sent successfully.   |
 
 **Workflow**
 

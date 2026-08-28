@@ -248,7 +248,7 @@ await client.groupManager.getGroup('groupId').uploadSharedFile({
 
 Call `downloadSharedFile` to download a specified shared file. After completion, the SDK returns the data through `onFileDownloadComplete`.
 
-If an access restriction was set through the [server-side API for uploading a shared group file](/document/server-side/group_shared_file_download.html), pass `secret` when downloading on the client.
+If an access restriction was set through the [server-side API for uploading a shared group file](/rest/group_shared_file_download.html), pass `secret` when downloading on the client.
 
 ```typescript
 await client.groupManager.getGroup('groupId').downloadSharedFile({

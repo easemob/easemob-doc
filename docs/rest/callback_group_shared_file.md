@@ -2,19 +2,19 @@
 
 ## Feature overview
 
-After a chat group shared file is uploaded or deleted, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the uploaded or deleted file and synchronize data.
+After a chat group shared file is uploaded or deleted, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the uploaded or deleted file and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Chat group shared file upload event
 
 ### Trigger conditions
 
 - A [chat group shared file is uploaded on the client](/document/android/group_attributes.html#upload-a-shared-file).
-- A [RESTful API is called to upload a chat group shared file](/document/server-side/group_shared_file_upload.html).
+- A [RESTful API is called to upload a chat group shared file](/rest/group_shared_file_upload.html).
 
 ### Webhook request
 
@@ -45,7 +45,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The unique identifier of the webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 |  - `share_file`| String | Uploaded chat group shared file. |
 |  - `type`      | String | Chat group shared file upload event. The value is `ADD`. |
@@ -62,7 +62,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 ### Trigger conditions
 
 - A [chat group shared file is deleted on the client](/document/android/group_attributes.html#manage-shared-files).
-- A [RESTful API is called to delete a chat group shared file](/document/server-side/group_shared_file_delete.html).
+- A [RESTful API is called to delete a chat group shared file](/rest/group_shared_file_delete.html).
 
 ### Webhook request
 
@@ -93,7 +93,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 | Field         | Type   | Description                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                          |
 |  - `share_file`| String | Deleted chat group shared file.                 |
 |  - `type`      | String | Chat group shared file deletion event. The value is `REMOVE`. |

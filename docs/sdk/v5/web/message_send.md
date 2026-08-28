@@ -1427,7 +1427,7 @@ For size and storage limitations for all message types, see [Message Limitations
 
 Callback routing uses the callback environment value carried by each message to route different messages under the same App Key to different callback URLs.
 
-When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `prod`. After the message is sent, the EasyIM server matches the value against the [callback routing rules](/product/console/basic_webhook.html#配置消息回调规则) configured in the EasyIM Console and routes the message to the corresponding [pre-delivery webhook](/document/server-side/callback_presending.html) or [post-delivery webhook](/document/server-side/callback_postsending.html) URL.
+When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `prod`. After the message is sent, the EasyIM server matches the value against the [callback routing rules](/product/console/basic_webhook.html#配置消息回调规则) configured in the EasyIM Console and routes the message to the corresponding [pre-delivery webhook](/rest/callback_presending.html) or [post-delivery webhook](/rest/callback_postsending.html) URL.
 
 **Use cases**
 
@@ -1442,8 +1442,8 @@ When creating a message, set `webhookEnv` to a value such as `dev`, `test`, or `
 
 | Callback type                                                      | Scope                            | Description                                                       |
 | :------------------------------------------------------------ | :---------------------------------- | :--------------------------------------------------------- |
-| [Pre-delivery webhook](/document/server-side/callback_presending.html)  | Applies only to messages sent by the SDK             | Before the message is delivered to target users, the app server can intercept or modify its content as needed. |
-| [Post-delivery webhook](/document/server-side/callback_postsending.html) | Applies to messages sent by both the SDK and REST API | After the message is sent, the app server receives a callback notification.                   |
+| [Pre-delivery webhook](/rest/callback_presending.html)  | Applies only to messages sent by the SDK             | Before the message is delivered to target users, the app server can intercept or modify its content as needed. |
+| [Post-delivery webhook](/rest/callback_postsending.html) | Applies to messages sent by both the SDK and REST API | After the message is sent, the app server receives a callback notification.                   |
 
 **Process**
 

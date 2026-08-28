@@ -24,8 +24,8 @@ The maximum number of registered users supported by an app depends on its subscr
 
 User registration modes include authorized registration and open registration. Click **Edit** to switch the user registration mode.
 
-- Authorized registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account, and then save the account on your server or return it to the client. This API is intended for production environments. For details about the related REST APIs, see [Register a User Through Authorized Registration](/document/server-side/account_register_authorized_single.html) and [Register Users in Batches Through Authorized Registration](/document/server-side/account_register_authorized_batch.html).
-- Open registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account. This API is generally intended for demo and test environments and is not recommended for production environments. For details about the related APIs, see the [REST API](/document/server-side/account_register_open.html) documentation.
+- Authorized registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account, and then save the account on your server or return it to the client. This API is intended for production environments. For details about the related REST APIs, see [Register a User Through Authorized Registration](/rest/account_register_authorized_single.html) and [Register Users in Batches Through Authorized Registration](/rest/account_register_authorized_batch.html).
+- Open registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account. This API is generally intended for demo and test environments and is not recommended for production environments. For details about the related APIs, see the [REST API](/rest/account_register_open.html) documentation.
 
 ![img](/images/console/basic_user_registration.png)
 
@@ -50,7 +50,7 @@ This feature must be enabled before use on all plans.
 
 ## User blocklist
 
-To block messages from a user, add the user to the blocklist. A user can add any other user to the blocklist, regardless of whether that user is in the friend list. After being added to the blocklist, the blocked user cannot send messages or friend requests to the other user. For details, see [Blocklist](/document/server-side/user_friend_blocklist_add.html).
+To block messages from a user, add the user to the blocklist. A user can add any other user to the blocklist, regardless of whether that user is in the friend list. After being added to the blocklist, the blocked user cannot send messages or friend requests to the other user. For details, see [Blocklist](/rest/user_friend_blocklist_add.html).
 
 This feature is enabled by default for all plans and can be disabled.
 
@@ -58,7 +58,7 @@ This feature is enabled by default for all plans and can be disabled.
 
 ## Presence
 
-Presence includes online, offline, and custom states. Users can set their own presence and subscribe to or query the presence of other users. For details, see [Presence Subscription](/document/server-side/presence_set.html).
+Presence includes online, offline, and custom states. Users can set their own presence and subscribe to or query the presence of other users. For details, see [Presence Subscription](/rest/presence_set.html).
 
 You can enable this service based on your current plan:
 
@@ -70,7 +70,7 @@ You can enable this service based on your current plan:
 
 ## Global user mute
 
-Global user mute prevents an individual user from sending messages in one-to-one chats, chat groups, or chat rooms. While muted, the user cannot call client APIs or REST APIs to send messages in one-to-one chats, chat groups, or chat rooms. When the mute expires, the IM Server automatically unmutes the user and restores their permission to send messages. For details, see [Global User Mute](/document/server-side/user_global_mute_overview.html).
+Global user mute prevents an individual user from sending messages in one-to-one chats, chat groups, or chat rooms. While muted, the user cannot call client APIs or REST APIs to send messages in one-to-one chats, chat groups, or chat rooms. When the mute expires, the IM Server automatically unmutes the user and restores their permission to send messages. For details, see [Global User Mute](/rest/user_global_mute_overview.html).
 
 You can enable this service based on your plan:
 

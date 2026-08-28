@@ -2,17 +2,17 @@
 
 ## Feature overview
 
-After the group owner or chat room owner is changed successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). Your app server can use the webhook to obtain information about the new owner and synchronize data.
+After the group owner or chat room owner is changed successfully, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). Your app server can use the webhook to obtain information about the new owner and synchronize data.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
 - The [group owner](/document/android/group_members.html#change-the-group-owner) or [chat room owner](/document/android/room_members.html#change-the-chat-room-owner) is changed on the client.
-- A RESTful API is called to change the [group owner](/document/server-side/group_owner_transfer.html) or [chat room owner](/document/server-side/chatroom_owner_transfer.html).
+- A RESTful API is called to change the [group owner](/rest/group_owner_transfer.html) or [chat room owner](/rest/chatroom_owner_transfer.html).
 
 ## Webhook request
 
@@ -47,7 +47,7 @@ The following field descriptions use a group owner change event as an example. T
 | Field         | Type   | Description                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_UUID`. |
-| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).|
+| `security`     | String | Signature in the format `MD5（callId+secret+timestamp）`. For details, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).|
 | `payload`       | Object | Event content.                                                     |
 |  - `owner`| String | Previous group owner. |
 |  - `new_owner`   | String | New group owner. |

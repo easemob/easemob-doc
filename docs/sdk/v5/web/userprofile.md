@@ -45,12 +45,12 @@ const profile = await client.userInfoManager.updateOwnInfo({
 console.log(profile.userId, profile.nickname);
 ```
 
-The client uses the following keys to store user attributes by default. When [setting](/document/server-side/user_attribute_set.html) or [deleting user attributes](/document/server-side/user_attribute_delete.html) through a RESTful API, use the same keys so that the client can read the attributes correctly.
+The client uses the following keys to store user attributes by default. When [setting](/rest/user_attribute_set.html) or [deleting user attributes](/rest/user_attribute_delete.html) through a RESTful API, use the same keys so that the client can read the attributes correctly.
 
 | Field | Type | Description |
 | :--- | :--- | :--- |
 | `nickname` | String | User nickname. The maximum length is 64 characters. |
-| `avatarurl` | String | User avatar URL. The maximum length is 256 characters. When this field is [set](/document/server-side/user_attribute_set.html) or [deleted](/document/server-side/user_attribute_delete.html) through a RESTful API, its server-side key is `avatarurl`. |
+| `avatarurl` | String | User avatar URL. The maximum length is 256 characters. When this field is [set](/rest/user_attribute_set.html) or [deleted](/rest/user_attribute_delete.html) through a RESTful API, its server-side key is `avatarurl`. |
 | `phone` | String | User contact information. The maximum length is 32 characters. |
 | `mail` | String | User email address. The maximum length is 64 characters. |
 | `gender` | Number | User gender:<br/> - `1`: Male.<br/> - `2`: Female.<br/> - (Default) `0`: Unknown.<br/> - Other values are invalid.  |
@@ -220,9 +220,9 @@ client.contactManager.addEventHandler('contact-profile-listener', {
 If you set a user nickname through the client or RESTful API but cannot subsequently retrieve it, generally check the following:
 
 - When setting a user nickname through the RESTful API, the request must use the `nickname` key. Otherwise, the client cannot read the attribute correctly.
-- The `nickname` returned by the RESTful APIs [Get User Details](/document/server-side/account_detail_obtain_single.html) and [Delete a User Account](/document/server-side/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. However, we recommend keeping them consistent. When changing one nickname, update the other as well.
+- The `nickname` returned by the RESTful APIs [Get User Details](/rest/account_detail_obtain_single.html) and [Delete a User Account](/rest/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. However, we recommend keeping them consistent. When changing one nickname, update the other as well.
 
-The Web SDK **does not provide a dedicated API for setting the push nickname**. To set it, see [Configure Display Attributes for Offline Push Notifications](/document/server-side/push_nickname_set_single.html) in the RESTful API documentation.
+The Web SDK **does not provide a dedicated API for setting the push nickname**. To set it, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html) in the RESTful API documentation.
 
 #### Why is error code 4 returned?
 

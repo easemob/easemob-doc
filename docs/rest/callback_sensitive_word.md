@@ -2,12 +2,12 @@
 
 ## Feature overview
 
-When message content matches a sensitive word in the politically sensitive word library, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules). You can use the webhook to obtain information about the message processing action, such as interception or replacement of sensitive words, for data synchronization and subsequent analysis.
+When message content matches a sensitive word in the politically sensitive word library, the EasyIM server sends a webhook request to your app server according to the [post-delivery webhook rules](/product/console/basic_webhook.html#configure-webhook-rules). You can use the webhook to obtain information about the message processing action, such as interception or replacement of sensitive words, for data synchronization and subsequent analysis.
 
 ## Prerequisite
 
-- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/document/server-side/callback_postsending.html).
-- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-message-callback-rules).
+- The post-delivery webhook service is activated. For details, see [Activate the message webhook service](/product/console/basic_webhook.html#activate-the-service) and [Webhook overview](/rest/callback_postsending.html).
+- Post-delivery webhook rules are configured in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure webhook rules](/product/console/basic_webhook.html#configure-webhook-rules).
 
 ## Trigger conditions
 
@@ -96,7 +96,7 @@ When a message matches a word in the politically sensitive word library, the web
 | `eventType`  |  String | Event type, used to distinguish sensitive word detection from other event types. |
 | `sensitiveWords`  | List   | Sensitive word content.  |
 | `contentOwner`  |  String | User ID of the content sender.  |
-| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the `secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-message-callback-rules).  |
+| `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the `secret`, see [Configure webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules).  |
 | `contentUri`  |  String | Unique message identifier in the format msync:msgId. |
 | `host`  | String  | Server name.  |
 | `appkey`  | String  | Unique identifier assigned to each app by EasyIM, consisting of the values of the `orgname` and `appname` fields.  |
