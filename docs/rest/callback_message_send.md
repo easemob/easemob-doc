@@ -36,7 +36,7 @@ The following table describes the common parameters in webhook requests for mess
 
 - A [message is sent](/document/android/message_send.html#send-a-text-message) in a one-to-one chat, group chat, or chat room on the client.
 - A REST API is called to send a message in a [one-to-one chat](/rest/message_single.html#send-a-text-message), [group chat](/rest/message_group.html#send-a-text-message), or [chat room](/rest/message_chatroom.html#send-a-text-message).
-- A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message).
+- A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-message-through-the-rest-api).
 
 ## Send one-to-one messages
 

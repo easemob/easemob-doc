@@ -11,7 +11,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 ## Feature activation
 
-To use Reaction, activate it in the [EasyIM Console](https://console.easyim.ai/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message.html#message-reactions).
+To use Reaction, activate it in the [EasyIM Console](https://console.easyim.ai/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message_conversation.html#message-reactions).
 
 ## Call frequency limit
 
