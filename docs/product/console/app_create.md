@@ -37,7 +37,7 @@ Before creating an app, [register an account](account_register.html) in [EasyIM 
 
 ## Development Version App Trial
 
-Before a development version app is [launched as a production version](/product/console/app_launch.html), you can try IM plans and basic features free of charge. For details, see [Development Version App Trial](/product/pricing_method.html#测试版应用试用说明).
+Before a development version app is [launched as a production version](/product/console/app_launch.html), you can try IM plans and basic features free of charge. For details, see [Development Version App Trial](/product/pricing_method.html#trial-plans-for-development-apps).
 
 ## Next Steps
 

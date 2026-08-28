@@ -9,7 +9,7 @@ Before or after an event occurs, the IM Server sends a notification to your App 
 - Pre-delivery webhook: After the IM Server receives an upstream one-to-one, group, or chat room message from a user and before delivering it to the target user, the IM Server notifies your App Server through an HTTP/HTTPS POST request. Your App Server can process users' chat messages in real time through pre-delivery webhooks, for example, by intercepting text, image, custom, and other message types.
 - Post-delivery webhook: After a message is sent or a chat group-, chat room-, or friend-related operation is performed, the IM Server sends a webhook request to your App Server. This type of webhook is typically used when the app backend needs to implement required data synchronization.
 
-## Feature activation
+## Activate the Service
 
 ### Webhooks
 

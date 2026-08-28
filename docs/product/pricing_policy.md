@@ -4,7 +4,7 @@ This document describes the EasyIM pricing policy.
 
 ## Billing overview
 
-EasyIM is billed monthly. On the first day of each month, the charges for the previous month are calculated, a [bill](/product/console/account_center.html) is generated, and payment is automatically deducted.
+EasyIM is billed monthly. On the first day of each month, the charges for the previous month are calculated, a bill is generated, and payment is automatically deducted.
 
 EasyIM uses the following billing methods:
 
@@ -52,7 +52,7 @@ After purchasing the Professional or Flagship plan, you can activate the followi
 | --- | --- | --- | --- | --- |
 | [One-to-one and group chat message cloud storage](/product/console/basic_single_group_chat.html#message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 180 days: $70/month<br/>360 days: $140/month<br/>720 days: $280/month | 180 days: $35/month<br/>360 days: $105/month<br/>720 days: $245/month |
 | [Chat room message cloud storage](/product/console/basic_chat_room.html#chat-room-message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 30 days: $35/month<br/>60 days: $70/month<br/>90 days: $105/month | 30 days: $35/month<br/>60 days: $70/month<br/>90 days: $105/month |
-| [Chat group member limit](/product/console/console/basic_single_group_chat.html#maximum-members-per-chat-group) | Maximum number of members in each chat group in an app | Prepaid | Increase to 3,000 members: $70/month | Increase to 8,000 members: $70/month |
+| [Chat group member limit](/product/console/basic_single_group_chat.html#maximum-members-per-chat-group) | Maximum number of members in each chat group in an app | Prepaid | Increase to 3,000 members: $70/month | Increase to 8,000 members: $70/month |
 | [Presence subscriptions](/product/console/basic_user.html#presence) | Subscribe to and query user presence | Prepaid | $140/month | Included |
 | [Pre-delivery webhooks](/product/console/basic_webhook.html) | The EasyIM server notifies your app server before delivering a message, allowing it to process the message, for example, for content moderation. | Prepaid | $140/month | Included |
 | [Message Reactions](/product/console/basic_message_conversation.html#message-reactions) | Add emoji reactions to messages for richer interactions | Prepaid | $84/month | Included |
