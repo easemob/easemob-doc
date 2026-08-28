@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-User presence includes online, offline, and custom states. Before using this feature, activate the service in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
+User presence includes online, offline, and custom states. Before using this feature, activate the service in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#presence).
 
 This page describes how to publish, subscribe to, and query user presence in an instant messaging app.
 
@@ -10,7 +10,7 @@ For definitions and changes of online, offline, and custom states, and how users
 
 ## Feature activation
 
-Before using presence subscriptions, activate the service in EasyIM Console. For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
+Before using presence subscriptions, activate the service in EasyIM Console. For details, see the [EasyIM Console documentation](/product/console/basic_user.html#presence).
 
 ## Subscription process
 
@@ -34,7 +34,7 @@ Before using presence, ensure that the following requirements are met:
 
  - Initialize the iOS SDK and log in. For details, see [Quickstart](quickstart.html).
  - Understand the EasyIM API [limitations](/product/limitation.html).
- - Activate presence subscriptions in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户离在线状态实时同步).
+ - Activate presence subscriptions in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#presence).
 
 ## Subscribe to specified users' presence
 

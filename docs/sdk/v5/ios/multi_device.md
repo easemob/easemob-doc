@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-EasyIM supports logging in to the same account on multiple devices. Before using this feature, activate the multi-device login service in the [EasyIM Console](https://console.easyim.ai/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
+EasyIM supports logging in to the same account on multiple devices. Before using this feature, activate the multi-device login service in the [EasyIM Console](https://console.easyim.ai/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#multi-device-login).
 
 During login, the iOS SDK synchronizes device-related information to the server. The server maintains the online device state of the current account according to the multi-device login policy. When the same account performs operations involving friends, groups, message threads, conversations, or one-way deletion of server-side historical messages on another device, the current device can receive the corresponding events through `EMMultiDevicesDelegate`, which is registered with `addMultiDevicesDelegate`.
 
@@ -33,7 +33,7 @@ The device kicking policies for single-device and multi-device login are describ
 Before you begin, ensure that the following requirements are met:
 
  - Initialize and log in to the iOS SDK. See [Quickstart](quickstart.html).
- - Activate multi-device login in the [EasyIM Console](https://console.easyim.ai/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#多端多设备).
+ - Activate multi-device login in the [EasyIM Console](https://console.easyim.ai/user/login). See the [EasyIM Console documentation](/product/console/basic_user.html#multi-device-login).
 
 ## Retrieve the login ID list of the current user's other login devices
 

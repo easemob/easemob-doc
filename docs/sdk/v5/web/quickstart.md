@@ -26,7 +26,7 @@ Easemob_quickstart<br>
 
 ## Prerequisite
 
-- You have a valid [EasyIM developer account](/product/console/account_register.html#注册账号).
+- You have a valid [EasyIM developer account](/product/console/account_register.html#register-an-account).
 - You have [created an app](/product/console/app_create.html) in the EasyIM Console and [obtained the App Key](/product/console/app_manage.html#管理应用).
 - You have installed [npm](https://www.npmjs.com/get-npm).
 - The SDK supports IE 9+, Firefox 10+, Chrome 54+, and Safari 6+.
@@ -58,7 +58,7 @@ This section describes how to integrate the EasyIM Web SDK into your project.
 
 ### Step 2: Create a user
 
-Create a user in the [EasyIM Console](https://console.easyim.ai/user/login) and obtain the user ID and user token. For details, see [Create users](/product/console/operation_user.html#创建用户).
+Create a user in the [EasyIM Console](https://console.easyim.ai/user/login) and obtain the user ID and user token. For details, see [Create users](/product/console/operation_user.html#create-a-user).
 
 In a production environment, to ensure security, integrate the [Get an App Token API](/rest/easemob_app_token.html) and [Get a User Token API](/rest/easemob_user_token.html) on your app server. The app server then issues user tokens to clients so that sensitive credentials are not exposed on the client.
 

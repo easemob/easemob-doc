@@ -19,14 +19,14 @@ Conversation tags are used only to categorize and filter conversations. They do 
 
 ## Feature activation
 
-Conversation tags are part of the server-side conversation list feature. Before using them, [activate the server-side conversation list feature in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+Conversation tags are part of the server-side conversation list feature. Before using them, [activate the server-side conversation list feature in EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Prerequisite
 
 Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
-- Activate the [server-side conversation list feature](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+- Activate the [server-side conversation list feature](/product/console/basic_message_conversation.html#server-side-conversation-list).
 - Understand the EasyIM API [limitations](/product/limitation.html).
 
 ## Add conversation tags

@@ -8,7 +8,7 @@
 
 ## Feature activation
 
-Before use, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+Before use, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Prerequisite
 
@@ -52,7 +52,7 @@ The SDK sorts the returned list according to its conversation list rules: pinned
 The server stores 100 conversations for each end user by default. Beyond this limit, new conversations overwrite old ones. If all historical messages in a conversation expire, it may become an [empty conversation](conversation_overview.html#conversation-lists-and-empty-conversations). `refreshSessionList` does not return empty conversations by default; set `includeEmpty` to `true` to return them.
 
 :::tip
-1. **To use this feature, [activate it in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表). Only then can you use conversation pinning and tags.**
+1. **To use this feature, [activate it in EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list). Only then can you use conversation pinning and tags.**
 2. Mixed letter cases in login user IDs may cause an empty or inconsistent list. Use lowercase user IDs consistently.
 3. Server-side list updates may be delayed. Do not call this method immediately after every message. The SDK synchronizes automatically after login; explicitly refresh only as required.
 4. Messages sent through the RESTful API do not create or enter a conversation by default. If the latest message was sent through RESTful API, the conversation may still show the latest message sent through a non-RESTful API. To write RESTful API messages to the list, [activate the feature in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表).

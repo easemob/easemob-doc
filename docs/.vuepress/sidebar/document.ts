@@ -338,15 +338,6 @@ const documentV5Sidebar = [
       },
       { text: '编辑消息', link: 'message_modify.html' },
       {
-        text: '消息翻译',
-        collapsible: true,
-        children: [
-        { text: '翻译消息内容', link: 'message_translation_text.html' },
-        { text: '获取翻译语言列表', link: 'message_translation_language_list.html' },
-        { text: '检测文本的源语言', link: 'message_translation_detect.html' },
-        ],
-      },
-      {
         text: '获取离线消息数据',
         collapsible: true,
         children: [

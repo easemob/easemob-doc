@@ -12,7 +12,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in successfully.
 - Register `ChatManager` during initialization so conversation and message APIs can be called through `client.chatManager`.
-- To use the server-side conversation list, pinning, or tags, [activate the server-side conversation list feature in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+- To use the server-side conversation list, pinning, or tags, [activate the server-side conversation list feature in EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Local conversation data sources
 

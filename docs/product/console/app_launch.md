@@ -7,7 +7,7 @@ After development and testing of a development version app are complete, you can
 Before applying to launch an app, make sure that all of the following conditions are met:
 
 - The current app is still a **development version**, and no production version has been generated.
-- The [IM Pro or Enterprise plan](/product/pricing_method.html#订阅-升级套餐包) has been activated for the development version.
+- The [IM Pro or Enterprise plan](/product/pricing_method.html#subscribe-to-or-upgrade-a-plan) has been activated for the development version.
 - You have determined whether to retain the plans and extended features activated for the development version in the production version.
 
 ## Procedure

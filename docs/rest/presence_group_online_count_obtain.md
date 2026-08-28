@@ -13,7 +13,7 @@ For definitions of online, offline, and custom presence states, see [User presen
 
 Before using this API, you need to activate Presence and activate this API separately:
 
-1. Activate Presence in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+1. Activate Presence in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#presence).
 2. Contact the EasyIM business manager to activate this API.
 
 ## Call frequency limit

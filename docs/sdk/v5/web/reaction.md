@@ -14,7 +14,7 @@ EasyIM provides the Reaction feature. Users can add Reactions to or remove them 
 
 ## Feature activation
 
-To use the Reaction feature, enable it in the [EasyIM Console](https://console.easyim.ai/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message.html#消息表情回复).
+To use the Reaction feature, enable it in the [EasyIM Console](https://console.easyim.ai/user/login). For detailed steps, see the [EasyIM Console documentation](/product/console/basic_message_conversation.html#message-reactions).
 
 ## Limitations
 

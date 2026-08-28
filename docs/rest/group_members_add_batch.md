@@ -102,7 +102,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 403     | forbidden_op | an not join this group, reason:user: XX already in group: XX\n | The user is already in the chat group. | Do not add the same user again.|
-| 403     | exceed_limit | user XX has joined too many groups! | The user has reached the limit on joined chat groups. | Leave unused chat groups or increase the limit in the [EasyIM Console](/product/console/basic_conversation_group_chatroom.html#maximum-number-of-chat-groups-a-user-can-join). |
+| 403     | exceed_limit | user XX has joined too many groups! | The user has reached the limit on joined chat groups. | Leave unused chat groups or increase the limit in the [EasyIM Console](/product/console/basic_single_group_chat.html#maximum-chat-groups-per-user). |
 | 403     | exceed_limit | members size is greater than max user size ! | More than 100 users were specified. | Reduce the number of users. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat group does not exist. | Use a valid chat group ID. |
 | 404     | resource_not_found | username XX doesn't exist! | The user to add does not exist. | Specify an existing user ID in `username`. |

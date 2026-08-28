@@ -107,7 +107,7 @@ Example:
 | 407    |      `EMErrorFileExpired`      | The file has expired. For example, this error occurs when a user downloads an expired message attachment or chat group shared file. Message attachments and chat group shared files are stored for 7 days by default. To extend the storage period, contact the EasyIM business manager. | To extend the file storage period, contact the EasyIM business manager. |
 | 500    |        `EMErrorMessageInvalid`        | The message is invalid. For example, this error occurs when sending a message if the message object or message ID is empty or if the message sender ID differs from the currently logged-in ID. | Check how the message is constructed and whether the message ID, sender, and message body are configured correctly. |
 | 501    | `EMErrorMessageIncludeIllegalContent` | The message contains prohibited content. This error is returned if the filtering system identifies the message as prohibited. | The message is blocked by the sensitive-word filtering system or anti-spam system. View the blocking record in the EasyIM Console. |
-| 504    |    `EMErrorMessageRecallTimeLimit`    | The message recall time limit is exceeded. | Display an error in the UI, or [extend the message recall period in the EasyIM Console](/product/console/basic_message.html#消息撤回) to a maximum of 7 days. |
+| 504    |    `EMErrorMessageRecallTimeLimit`    | The message recall time limit is exceeded. | Display an error in the UI, or [extend the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall) to a maximum of 7 days. |
 | 505    |       `EMErrorServiceNotEnable`       | The service is not enabled. This error occurs when an unactivated feature is used. | Analyze the API and logs, and enable the corresponding feature in the EasyIM Console. |
 | 506    |        `EMErrorMessageExpired`        | The message has expired. This error occurs when a read receipt for a group chat message is sent after the time limit, which is 3 days by default. | Display an error in the UI, or contact the EasyIM business manager to extend the validity period for sending group chat message read receipts. |
 | 507    |   `EMErrorMessageIllegalWhiteList`    | The user is not on the allowlist. This error occurs when a user who is not on the allowlist sends a message while all members of a chat group or chat room are muted. | Display an error in the UI, or check whether all members of the chat group are muted. |
@@ -162,8 +162,8 @@ Example:
 | Error code | Error | Description and possible cause | Solution |
 | :----- | :------------ | :--------------------------- | :--------------------------- |
 | 1000   |       `EMErrorContactAddFailed`       | Adding a contact fails. | Analyze the called API and `EMError#errorDescription` to determine why the contact could not be added. |
-| 1001   |      `EMErrorContactReachLimit`       | The inviter's number of contacts reaches the upper limit. | Display the error in the UI, or [increase the maximum number of contacts per user in the EasyIM Console](/product/console/basic_user.html#单个用户好友数上限). |
-| 1002   |    `EMErrorContactReachLimitPeer`     | The invitee's number of contacts reaches the upper limit. | Display the error in the UI, or [increase the maximum number of contacts per user in the EasyIM Console](/product/console/basic_user.html#单个用户好友数上限). |
+| 1001   |      `EMErrorContactReachLimit`       | The inviter's number of contacts reaches the upper limit. | Display the error in the UI, or [increase the maximum number of contacts per user in the EasyIM Console](/product/console/basic_user.html#maximum-friends-per-user). |
+| 1002   |    `EMErrorContactReachLimitPeer`     | The invitee's number of contacts reaches the upper limit. | Display the error in the UI, or [increase the maximum number of contacts per user in the EasyIM Console](/product/console/basic_user.html#maximum-friends-per-user). |
 
 ## Presence errors
 

@@ -36,7 +36,7 @@ The steps are described below:
 ### Sending behavior and related notes
 
 - Messages sent in a chat room are not synchronized to the sender.
-- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_conversation_group_chatroom.html#write-messages-sent-through-the-rest-api-to-the-conversation-list).
+- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_message_conversation.html#add-messages-sent-through-rest-apis-to-the-conversation-list).
 - Calling this API triggers a post-delivery callback event. For details, see [Webhook events](callback_message_send.html#send-group-messages).
 - You can use common optional message parameters to specify which users cannot retrieve the message when fetching roaming messages and to add extension parameters. For details, see [Common optional message parameters](#common-optional-message-parameters).
 - [The content moderation service checks specific fields in the message `body`; the fields checked vary by message type](/value-added/moderation/moderation_mechanism.html). Passing too much business information in these fields may reduce moderation effectiveness. Avoid placing business information in fields subject to moderation and use the `ext` extension field instead.

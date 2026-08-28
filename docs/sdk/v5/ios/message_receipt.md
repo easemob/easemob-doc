@@ -15,7 +15,7 @@ The following image shows an example of message delivery and read receipts:
 - One-to-one conversations support message delivery receipts and read receipts.
 - Group chat conversations support read receipts but not delivery receipts.
 - Chat rooms do not currently support delivery receipts or read receipts.
-- **Enable [group message read receipts in the EasyIM Console](/product/console/basic_message.html#群聊消息已读回执) before using them.**
+- **Enable [group message read receipts in the EasyIM Console](/product/console/basic_single_group_chat.html#group-message-read-receipts) before using them.**
 
 ## Understand the tech
 
@@ -69,7 +69,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in successfully. See [Quickstart](quickstart.html).
 - Understand the EasyIM usage restrictions. See [Limitations](/product/limitation.html).
-- Enable group message read receipts in the [EasyIM Console](/product/console/basic_message.html#群聊消息已读回执) before using them.
+- Enable group message read receipts in the [EasyIM Console](/product/console/basic_single_group_chat.html#group-message-read-receipts) before using them.
 
 ## One-to-one message delivery receipts
 

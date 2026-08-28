@@ -31,13 +31,13 @@ The steps are described below:
 
 - The combined length of the request body and extension fields cannot exceed 5 KB. For other message limitations, see [Message limitations](/product/limitation.html#message-size).
 - This API does not validate the specified sender or recipient user IDs. Even if a specified user ID does not exist, the server does not return an error and sends the message as usual.
-- By default, this API does not check the friendship between the sender and recipient. If you enable [friendship verification](/product/console/basic_user.html#friendship-verification) in the EasyIM Console, the API checks their friendship.
+- By default, this API does not check the friendship between the sender and recipient. If you enable [friendship verification](/product/console/basic_user.html#friend-relationship-check) in the EasyIM Console, the API checks their friendship.
 - This API does not check whether the recipient is on the blocklist or whether the sender is muted.
 
 ### Sending behavior and related notes
 
 - All sent messages can be synchronized to the sender.
-- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_conversation_group_chatroom.html#write-messages-sent-through-the-rest-api-to-the-conversation-list).
+- Messages sent through the RESTful API are not written to the conversation list by default. To write them to the conversation list, [activate this feature in the EasyIM Console](/product/console/basic_message_conversation.html#add-messages-sent-through-rest-apis-to-the-conversation-list).
 - Calling this API triggers a post-delivery callback event. For details, see [Webhook events](callback_message_send.html#send-one-to-one-messages).
 - You can use common optional message parameters to specify whether to synchronize a message to all of the sender's online devices, which users cannot retrieve the message when fetching roaming messages, and whether to deliver the message only to online users. For details, see [Common optional message parameters](#common-optional-message-parameters).
 - [The content moderation service checks specific fields in the message `body`; the fields checked vary by message type](/value-added/moderation/moderation_mechanism.html). Passing too much business information in these fields may reduce moderation effectiveness. Avoid placing business information in fields subject to moderation and use the `ext` extension field instead.

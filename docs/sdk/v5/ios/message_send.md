@@ -4,7 +4,7 @@
 
 The EasyIM iOS SDK creates message bodies through the corresponding subclasses of `EMMessageBody`, wraps messages in `EMChatMessage`, and sends them through `IEMChatManager`. The SDK supports text, image, GIF, voice, video, file, location, command, custom, and combined messages in one-to-one chats, group chats, and chat rooms.
 
-- For one-to-one chat, EasyIM supports messaging between strangers by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#好友关系检查).
+- For one-to-one chat, EasyIM supports messaging between strangers by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check).
 - For group chats and chat rooms, a user can send a message to only one group or chat room to which the user belongs at a time.
 - For message sending controls, see the related documentation for [one-to-one chat](/product/message_single_chat.html#单聊消息发送控制), [group chat](/product/message_group.html#群组消息发送控制), and [chat room](/product/message_chatroom.html#聊天室消息发送控制).
 
@@ -178,7 +178,7 @@ An image message typically involves the following three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
 - Large image: An image proportionally compressed from the original image by the SDK client. If the shorter side is greater than 720 pixels, the image is proportionally compressed until the shorter side is 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This type of image is typically displayed on the chat details page.
-- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message.html#图片消息缩略图). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
+- Thumbnail: An image proportionally compressed by the server from the original image. By default, if the shorter side is greater than 170 pixels, the image is proportionally compressed until the shorter side is 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message_conversation.html#image-message-thumbnails). This type of image is typically used for lightweight displays such as conversation lists and chat lists.
 
 #### Sending process
 
@@ -1110,7 +1110,7 @@ Text, location, command, and custom messages generally do not involve attachment
 
 The sizes and storage periods of the message body, extension fields, and attachments for each message type are subject to product restrictions. Before sending a message, ensure that the message content and attachment size do not exceed the corresponding restrictions.
 
-For details, see [Message Restrictions](/product/limitation.html#消息大小).
+For details, see [Message Restrictions](/product/limitation.html#message-size).
 
 #### Set callback routing when sending a message
 
@@ -1140,7 +1140,7 @@ Currently, this feature is available only in China Regions 1 and 2.
 
 **Workflow**
 
-1. [Configure callback routes](/product/console/basic_webhook.html#配置消息回调规则) for pre-delivery or post-delivery callbacks in the EasyIM Console.
+1. [Configure callback routes](/product/console/basic_webhook.html#configure-webhook-rules) for pre-delivery or post-delivery callbacks in the EasyIM Console.
 2. When the client sends a message, set the callback environment identifier through `webhookEnv`.
 3. The EasyIM server matches the service URL for the current callback stage based on the callback environment identifier.
 4. After a valid route is matched, the server sends the callback request to the corresponding URL.

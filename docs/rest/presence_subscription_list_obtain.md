@@ -10,7 +10,7 @@ Query, with pagination, the list of users whose presence the current user has su
 
 ## Feature activation
 
-Before using Presence, activate it in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#real-time-user-presence-status-synchronization).
+Before using Presence, activate it in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#presence).
 
 ## Call frequency limit
 

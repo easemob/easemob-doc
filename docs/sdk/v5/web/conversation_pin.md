@@ -14,7 +14,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and log in.
 - Register `ChatManager` during SDK initialization so that conversation APIs can be called through `client.chatManager`.
-- [Activate the server-side conversation list feature](/product/console/basic_conversation_group_chatroom.html#服务端会话列表).
+- [Activate the server-side conversation list feature](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Pin or unpin a conversation
 

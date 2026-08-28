@@ -2,7 +2,7 @@
 
 要使用环信即时通讯 IM，你需要首先注册环信账号。环信账号是你登录环信控制台进行应用配置和管理和的重要凭证。
 
-## 注册账号
+## Register an account
 
 你可以通过手机号和短信验证码注册环信账号：
 
@@ -38,7 +38,7 @@
 
   ![img](/images/console/account_mail_link_auth.png)
 
-## 登录控制台
+## Log in to the console
 
 你可以通过邮箱和密码登录控制台：
 
