@@ -55,7 +55,7 @@ The server stores 100 conversations for each end user by default. Beyond this li
 1. **To use this feature, [activate it in EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list). Only then can you use conversation pinning and tags.**
 2. Mixed letter cases in login user IDs may cause an empty or inconsistent list. Use lowercase user IDs consistently.
 3. Server-side list updates may be delayed. Do not call this method immediately after every message. The SDK synchronizes automatically after login; explicitly refresh only as required.
-4. Messages sent through the RESTful API do not create or enter a conversation by default. If the latest message was sent through RESTful API, the conversation may still show the latest message sent through a non-RESTful API. To write RESTful API messages to the list, [activate the feature in EasyIM Console](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表).
+4. Messages sent through the RESTful API do not create or enter a conversation by default. If the latest message was sent through RESTful API, the conversation may still show the latest message sent through a non-RESTful API. To write RESTful API messages to the list, [activate the feature in EasyIM Console](/product/console/basic_message_conversation.html#add-messages-sent-through-rest-apis-to-the-conversation-list).
 :::
 
 ```typescript

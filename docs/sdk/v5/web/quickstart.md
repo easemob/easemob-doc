@@ -27,7 +27,7 @@ Easemob_quickstart<br>
 ## Prerequisite
 
 - You have a valid [EasyIM developer account](/product/console/account_register.html#register-an-account).
-- You have [created an app](/product/console/app_create.html) in the EasyIM Console and [obtained the App Key](/product/console/app_manage.html#管理应用).
+- You have [created an app](/product/console/app_create.html) in the EasyIM Console and [obtained the App Key](/product/console/app_manage.html#manage-apps).
 - You have installed [npm](https://www.npmjs.com/get-npm).
 - The SDK supports IE 9+, Firefox 10+, Chrome 54+, and Safari 6+.
 

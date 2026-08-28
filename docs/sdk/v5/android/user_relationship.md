@@ -3,7 +3,7 @@
 The SDK provides user relationship management, including friend and blocklist management.
 
 - Friend management: Add friends, process friend requests, delete friends, set friend remarks, retrieve the friend list, and automatically synchronize the friend list and friend information after login succeeds.
-- Blocklist management: Retrieve the blocklist and add or remove users. Before using this feature, activate the service in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
+- Blocklist management: Retrieve the blocklist and add or remove users. Before using this feature, activate the service in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#user-blocklist).
 
 ## Prerequisite
 
@@ -11,7 +11,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html).
 - Understand the EasyIM [limitations](/product/limitation.html).
-- Activate the blocklist feature in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#用户黑名单).
+- Activate the blocklist feature in [EasyIM Console](https://console.easyim.ai/user/login). For details, see the [EasyIM Console documentation](/product/console/basic_user.html#user-blocklist).
 
 ## Friend management
 

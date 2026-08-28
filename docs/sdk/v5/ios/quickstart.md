@@ -13,7 +13,7 @@ The following figure shows the workflow for sending and receiving one-to-one tex
 - Xcode (the latest version is recommended).
 - An iOS simulator or Apple device running iOS 10.0 or later.
 - CocoaPods [1.10.1 or later](https://cocoapods.org/).
-- A valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_manage.html#管理应用).
+- A valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_manage.html#manage-apps).
 - If your network environment has a firewall deployed, contact EasyIM technical support to configure an allowlist.
 
 ## 1. Prepare the development environment
@@ -61,6 +61,7 @@ After they are added, the project automatically links the required system librar
 ## 3. Initialize the SDK
 
 Import the SDK header file.
+
 ```
 #import <HyphenateChat/HyphenateChat.h>
 ```
