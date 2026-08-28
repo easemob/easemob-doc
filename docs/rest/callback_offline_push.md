@@ -13,7 +13,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
 
 - A [message is sent](/document/android/message_send.html) in a one-to-one or group chat on the client while the recipient is offline.
 - A message is sent through the REST API in a [one-to-one chat](/rest/message_single.html) or [group chat](/rest/message_group.html) while the recipient is offline.
-- A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message) or [group chat](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) while the recipient is offline.
+- A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-rest-message) while the recipient is offline.
 
 ## Webhook request
 

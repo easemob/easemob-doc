@@ -11,7 +11,7 @@ After chat group or chat room information is updated successfully, the EasyIM se
 
 ## Trigger conditions
 
-This event is triggered when any of the following chat group or chat room information is modified through the [client](/document/android/group_attributes.html), a [RESTful API](/rest/group_modify.html), or the [EasyIM Console](/product/console/operation_group.html#chat-group-moderation-management):
+This event is triggered when any of the following chat group or chat room information is modified through the [client](/document/android/group_attributes.html) or a [RESTful API](/rest/group_modify.html):
 
 1. Chat group
 - Chat group name
@@ -23,7 +23,7 @@ This event is triggered when any of the following chat group or chat room inform
 - Chat group extension information
 - Whether the chat group is public
 
-2. Chat room
+1. Chat room
 - Chat room name
 - Chat room description
 - Maximum number of chat room members

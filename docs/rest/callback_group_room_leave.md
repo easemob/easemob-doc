@@ -93,7 +93,6 @@ The following examples show chat room leave events.
 
 - A user is removed from a [chat group](/document/android/group_manage.html#remove-a-member) or [chat room](/document/android/room_manage.html#be-removed) on the client.
 - A [RESTful API is called to remove a user from a chat group](/rest/group_member_remove_single.html) or [chat room](/rest/chatroom_member_remove_single.html).
-- In the [EasyIM Console](https://console.easyim.ai/user/login), a user is removed from a [chat group](/product/console/operation_group.html#chat-group-moderation-management) or [chat room](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 
@@ -146,7 +145,6 @@ The following example shows an event generated when a user is removed from a cha
 
 - A user leaves a chat group or chat room after being added to the [chat group blocklist](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/document/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
 - A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/rest/group_member_blocklist_add_single.html) or [chat room blocklist](/rest/chatroom_member_blocklist_add_single.html).
-- In the [EasyIM Console](https://console.easyim.ai/user/login), a user leaves a chat group or chat room after being added to the [chat group blocklist](/product/console/operation_group.html#chat-group-moderation-management) or [chat room blocklist](/product/console/operation_chatroom.html#chat-room-moderation-management).
 
 ### Webhook request
 

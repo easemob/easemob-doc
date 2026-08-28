@@ -13,7 +13,6 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
 
 1. A [user recalls a message on the client](/document/android/message_recall.html).
 2. A RESTful API is called to recall a [single message](/rest/message_recall_single.html) or [recall messages in batches](/rest/message_recall_batch.html).
-3. A message is recalled in the [EasyIM Console](https://console.easyim.ai/user/login), for example, on the [Message report management](/value-added/moderation/moderation_message_report.html#view-message-report-details), [Chat group management](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management), or [Chat room management](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) page.
 
 ## Webhook request
 

@@ -15,7 +15,6 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 
 - A [chat group admin](/document/android/group_members.html#add-a-group-admin) or [chat room admin](/document/android/room_members.html#add-a-chat-room-admin) is added on the client.
 - A RESTful API is called to add a [chat group admin](/rest/group_admin_add.html) or [chat room admin](/rest/chatroom_admin_add.html).
-- In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group admin](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room admin](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is added.
 
 ### Webhook request
 

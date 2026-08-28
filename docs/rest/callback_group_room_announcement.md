@@ -13,7 +13,6 @@ After a chat group or chat room announcement is set or updated, the EasyIM serve
 
 - A [chat group announcement](/document/android/group_attributes.html#update-the-group-announcement) or [chat room announcement](/document/android/room_attributes.html#update-the-chat-room-announcement) is set or updated on the client.
 - A RESTful API is called to set or update a [chat group announcement](/rest/group_announcement_modify.html) or [chat room announcement](/rest/chatroom_announcement_update.html).
-- In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group announcement](/value-added/moderation/moderation_manual_review.html#chat-group-moderation-management) or [chat room announcement](/value-added/moderation/moderation_manual_review.html#chat-room-moderation-management) is set or updated.
 
 ## Webhook request
 
