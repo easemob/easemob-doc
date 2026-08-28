@@ -26,7 +26,7 @@ By default, message attachments, such as images, audio, video, and other files, 
 
 ### Message storage
 
-- **Historical messages**: The server-side storage period depends on your subscribed plan: 3 days for the Free plan, 7 days for the Pro plan, and 90 days for the Enterprise plan. You can contact the EasyIM business manager to increase the message storage period for the Pro and Enterprise plans.
+- **Historical messages**: The server-side storage period depends on your subscribed plan: 3 days for the Free plan, 7 days for the Professional plan, and 90 days for the Flagship plan. You can contact the EasyIM business manager to increase the message storage period for the Professional and Flagship plans.
 - **Chat history files**: You can retrieve user chat history files from the server.
   - A single request retrieves the chat history file containing messages sent within one hour from the specified start time.
   - You can retrieve chat history from up to the last 3 days. To increase this limit, contact the EasyIM business manager.
@@ -114,7 +114,7 @@ This feature supports only one-to-one and group chats, not chat rooms.
   - The character set is unrestricted, but the server and client settings must be consistent.
   - If special characters are used, URL-encode them when retrieving or deleting a Reaction.
 - **Storage period**:
-  - The default Reaction storage period is 7 days for the Pro and Enterprise EasyIM plans.
+  - The default Reaction storage period is 7 days for the Professional and Flagship EasyIM plans.
   - To adjust it, contact the EasyIM business manager. We recommend keeping the Reaction storage period consistent with that of the corresponding message.
 
 ### Retrieve message traffic statistics

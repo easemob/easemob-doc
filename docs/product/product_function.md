@@ -137,8 +137,8 @@ By default, EasyIM supports sending one-to-one messages between non-friends, mea
 | :------ | :----------- | :-------- |
 | Use case   | Similar to group chats in Signal or Skype, where all members have persistent relationships     | Members do not have persistent relationships and leaving the room means leaving the chat room     |
 | Type   | Public or private. When creating a chat group, you can configure whether approval from the chat group owner or admins is required to join     | Chat rooms are not classified as public or private. All users can freely join or leave them |
-| Maximum number of chat groups/chat rooms  | <br/> - Trial: 100 <br/> - Pro: Unlimited  <br/> - Enterprise: Unlimited  | <br/> -Trial: Not supported <br/> - Pro: Unlimited  <br/> - Enterprise: Unlimited     |
-| Maximum number of members          | <br/> -Trial: 100 members/chat group <br/> - Pro: 300 members/chat group (adjustable*)  <br/> - Enterprise: 3000 members/chat group (adjustable*) | <br/> - Trial: 100 <br/> - Pro: Unlimited  <br/> - Enterprise: Unlimited   |
+| Maximum number of chat groups/chat rooms  | <br/> - Trial: 100 <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited  | <br/> -Trial: Not supported <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited     |
+| Maximum number of members          | <br/> -Trial: 100 members/chat group <br/> - Professional: 300 members/chat group (adjustable*)  <br/> - Flagship: 3000 members/chat group (adjustable*) | <br/> - Trial: 100 <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited   |
 | Member list   | Visible to all members     | Visible to all members      |
 | Create   | Any app user can create a chat group     | Only a chat room superadmin can create a chat room on the client     |
 | Destroy   | Chat group owner     | Chat room owner     |
@@ -171,7 +171,7 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | Feature   | Description  | 
 | :------ | :----------- | 
 | Create an app  | Create your app                   | 
-| Upgrade the plan  | Activate the Pro or Enterprise EasyIM plan on a self-service basis                   | 
+| Upgrade the plan  | Activate the Professional or Flagship EasyIM plan on a self-service basis                   | 
 | Subscribe to value-added services  | Activate [value-added services](/product/pricing_policy.html#add-on-service-fees) such as content moderation, real-time audio and video, and Instant Push                |
 | Account center  | View order history and bills                  | 
 | Activate features  | Activate features such as the server-side conversation list or multiple platforms and devices                  | 

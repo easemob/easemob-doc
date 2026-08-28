@@ -35,7 +35,7 @@ User registration modes include authorized registration and open registration. C
 
 The maximum number of friends per user depends on your subscribed plan:
 
-- Free: Each user can have up to 100 friends. To increase the limit, click **Upgrade** to upgrade to the Pro or flagship plan.
+- Free: Each user can have up to 100 friends. To increase the limit, click **Upgrade** to upgrade to the Professional or Flagship plan.
 - Professional/flagship: Each user can have up to 3,000 friends.
 
 ![img](/images/console/basic_user_friends.png)
@@ -62,7 +62,7 @@ Presence includes online, offline, and custom states. Users can set their own pr
 
 You can enable this service based on your current plan:
 
-- Free: Click **Upgrade Now** to upgrade to the Pro or Enterprise plan.
+- Free: Click **Upgrade Now** to upgrade to the Professional or Flagship plan.
 - Professional: Click **Buy Now** to purchase and enable the service.
 - Flagship: Click **Free Activation** to enable the service.
 

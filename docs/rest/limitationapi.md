@@ -23,7 +23,7 @@ The API rate-limit period is calculated in UTC, from 00:00:00 on the current day
 
 ### API call frequency add-on packages
 
-The following tables list the server-side APIs whose call frequency limits can be adjusted for EasyIM Pro and Enterprise plans, together with the size of each add-on package. The Free plan does not support these adjustments.
+The following tables list the server-side APIs whose call frequency limits can be adjusted for EasyIM Professional and Flagship plans, together with the size of each add-on package. The Free plan does not support these adjustments.
 
 The size of one add-on package is the amount by which the frequency is increased per adjustment. For example, the default call frequency limit of the file upload API is 100 calls/second/App Key, and one add-on package provides 100 calls/second. After purchasing one add-on package, the API call frequency limit increases to 200 calls/second/App Key.
 
@@ -54,15 +54,22 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | Delete a Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 calls/second/App Key  | 50 calls/second    |  
 | Retrieve Reaction Information by Message ID and Emoji ID | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 calls/second/App Key  | 25 calls/second    |  
 | Edit a Message | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 calls/second/App Key  | 50 messages/second    |  
-| Translate Message Content | POST  | /{org_name}/{app_name}/translate | 100 calls/second/App Key  | 50 calls/second    |  
-| Retrieve the Translation Language List | GET  | /{org_name}/{app_name}/translate/support/language | 100 calls/second/App Key  | 50 calls/second    |  
-| Detect the Source Language of Text | POST  | /{org_name}/{app_name}/translate/detect | 100 calls/second/App Key  | 50 calls/second    |  
 | Delete One-to-One Chat Roaming Messages for One User by Message ID  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 calls/second/App Key   | 50 calls/second    |  
 | Delete Group Chat Roaming Messages for One User by Message ID  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 calls/second/App Key   |          |  
 | Delete All Roaming Messages for One User | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 calls/second/App Key  | 100 calls/second    |  
 | Delete One-to-One Chat Roaming Messages up to a Specific Time for One User | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime} | 100 calls/second/App Key  | 50 calls/second    |  
 | Delete Group or Chat Room Roaming Messages up to a Specific Time for One User | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 calls/second/App Key  | 50 calls/second    |  
 | Import One-to-One Chat Messages | POST  | /{org_name}/{app_name}/messages/users/import | 100 messages/second/App Key    | 100 calls/second    |  
+
+<!--
+| Translate Message Content | POST  | /{org_name}/{app_name}/translate | 100 calls/second/App Key  | 50 calls/second    |  
+-->
+<!--
+| Retrieve the Translation Language List | GET  | /{org_name}/{app_name}/translate/support/language | 100 calls/second/App Key  | 50 calls/second    | 
+-->
+<!--
+| Detect the Source Language of Text | POST  | /{org_name}/{app_name}/translate/detect | 100 calls/second/App Key  | 50 calls/second    |   
+-->
 
 ## Chat groups
 

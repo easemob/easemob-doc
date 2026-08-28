@@ -14,8 +14,8 @@ You can use this API to send broadcast messages of any message type to all onlin
 
 Availability of the app-wide broadcast messaging feature depends on your EasyIM plan:
 
-- **Pro edition**: This feature is disabled by default. **To use it, contact the EasyIM business manager for activation**.
-- **Enterprise edition**: This feature is enabled by default.
+- **Professional edition**: This feature is disabled by default. **To use it, contact the EasyIM business manager for activation**.
+- **Flagship edition**: This feature is enabled by default.
 
 After activation, you can [send broadcast messages to all app users](broadcast_to_all_users.html) or send broadcast messages to online app users.
 

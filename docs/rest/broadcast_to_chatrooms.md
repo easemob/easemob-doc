@@ -12,7 +12,7 @@ EasyIM supports sending broadcast messages of all message types to all active ch
 
 ## Feature activation
 
-To use global chat room broadcast messaging, you must **upgrade EasyIM to the Enterprise edition**.
+To use global chat room broadcast messaging, you must **upgrade EasyIM to the Flagship edition**.
 
 ## Call frequency limit
 

@@ -1,13 +1,13 @@
 # EasyIM Plan Feature Comparison
 
-EasyIM offers **Free**, **Pro**, and **Enterprise** plans for different stages of business growth. The following table provides a complete comparison to help you select the plan that best fits your requirements.
+EasyIM offers **Free**, **Professional**, and **Flagship** plans for different stages of business growth. The following table provides a complete comparison to help you select the plan that best fits your requirements.
 
 :::tip
 
 1. `✓` means that the feature is included and can be used after subscribing to the plan.
 2. `*` identifies an optional add-on that can be purchased separately in EasyIM Console.
 3. `——` indicates that the current version does not support this feature and requires an upgrade to a later version.
-4. The Free plan is available only to test apps. A test app remains subject to trial restrictions even after it is upgraded to Pro or Enterprise. See [Launch an App](/product/console/app_launch.html) for information about moving an app into production.
+4. The Free plan is available only to test apps. A test app remains subject to trial restrictions even after it is upgraded to Professional or Flagship. See [Launch an App](/product/console/app_launch.html) for information about moving an app into production.
 :::
 
 <table width="1225">
@@ -23,10 +23,10 @@ EasyIM offers **Free**, **Pro**, and **Enterprise** plans for different stages o
 <p><strong>Free</strong></p>
 </td>
 <td width="229">
-<p><strong>Pro</strong></p>
+<p><strong>Professional</strong></p>
 </td>
 <td width="332">
-<p><strong>Enterprise</strong></p>
+<p><strong>Flagship</strong></p>
 </td>
 </tr>
 <tr>
