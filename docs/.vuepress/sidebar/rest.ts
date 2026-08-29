@@ -8,7 +8,7 @@ export const REST_SIDEBAR = [
     ]
   },
   {
-    "text": "RESTful API Call Frequency Limits",
+    "text": "API Call Frequency Limits",
     "link": "/rest/limitationapi.html",
     "only": [
       "server-side"
@@ -25,11 +25,11 @@ export const REST_SIDEBAR = [
     "collapsible": true,
     "children": [
       {
-        "text": "Authenticate with an App Token",
+        "text": "Authenticate with App Token",
         "link": "/rest/easemob_app_token.html"
       },
       {
-        "text": "Authenticate with a User Token",
+        "text": "Authenticate with User Token",
         "link": "/rest/easemob_user_token.html"
       }
     ],
@@ -58,11 +58,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Send One-to-One Stream Messages",
+            "text": "Send One-to-One Streaming Messages",
             "link": "/rest/message_stream_send_single.html"
           },
           {
-            "text": "Send Group Stream Messages",
+            "text": "Send Group Streaming Messages",
             "link": "/rest/message_stream_send_group.html"
           }
         ]
@@ -72,15 +72,15 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Send a Broadcast Message to All App Users",
+            "text": "Send a Broadcast Message to All Users",
             "link": "/rest/broadcast_to_all_users.html"
           },
           {
-            "text": "Send a Broadcast Message to Online App Users",
+            "text": "Send a Broadcast Message to Online Users",
             "link": "/rest/broadcast_to_online_users.html"
           },
           {
-            "text": "Send a Global Broadcast Message to Chat Rooms",
+            "text": "Send a Broadcast Message to Chat Rooms",
             "link": "/rest/broadcast_to_chatrooms.html"
           }
         ]
@@ -98,7 +98,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/message_download_file.html"
           },
           {
-            "text": "Download a File Thumbnail",
+            "text": "Download a Thumbnail",
             "link": "/rest/message_download_thumbnail.html"
           }
         ]
@@ -108,7 +108,7 @@ export const REST_SIDEBAR = [
         "link": "/rest/message_historical.html"
       },
       {
-        "text": "Set the Storage Method for Specified Message Attachments",
+        "text": "Set the Storage Method for Message Attachments",
         "link": "/rest/message_attachment_storage.html"
       },
       {
@@ -124,11 +124,11 @@ export const REST_SIDEBAR = [
             "link": "/rest/reaction_delete.html"
           },
           {
-            "text": "Retrieve Reactions by Message ID",
+            "text": "Retrieve Reaction List",
             "link": "/rest/reaction_get_by_msg_id.html"
           },
           {
-            "text": "Retrieve Reaction Information by Message ID and Emoji ID",
+            "text": "Retrieve Reaction by Emoji ID",
             "link": "/rest/reaction_get_by_msg_id_emoji_id.html"
           }
         ]
@@ -148,7 +148,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Delete a Conversation for One User",
+        "text": "Delete a Conversation for a User",
         "link": "/rest/conversation_delete.html"
       },
       {
@@ -156,23 +156,23 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Delete One-to-One Chat Roaming Messages for One User by Message ID",
+            "text": "Delete by Msg ID (One-to-One)",
             "link": "/rest/message_delete_roam_single_msgid.html"
           },
           {
-            "text": "Delete Group and Chat Room Roaming Messages for One User by Message ID",
+            "text": "Delete by Msg ID (Group/Room)",
             "link": "/rest/message_delete_roam_group_room_msgid.html"
           },
           {
-            "text": "Delete All Roaming Messages for One User",
+            "text": "Delete All",
             "link": "/rest/message_delete_roam_user.html"
           },
           {
-            "text": "Delete One-to-One Chat Roaming Messages up to a Specific Time for One User",
+            "text": "Delete by Time (One-to-One)",
             "link": "/rest/message_delete_roam_single_time.html"
           },
           {
-            "text": "Delete Group or Chat Room Roaming Messages up to a Specific Time for One User",
+            "text": "Delete by Time (Group/Room)",
             "link": "/rest/message_delete_roam_group_room_time.html"
           }
         ]
@@ -186,11 +186,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve a User's Offline Message Count",
+            "text": "Retrieve Message Count",
             "link": "/rest/offline_msg_count_get.html"
           },
           {
-            "text": "Retrieve the Delivery Status of an Offline Message",
+            "text": "Retrieve Delivery Status",
             "link": "/rest/offline_msg_status_get.html"
           }
         ]
@@ -200,11 +200,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Import One-to-One Chat Messages",
+            "text": "Import Messages（One-to-One）",
             "link": "/rest/message_import_single.html"
           },
           {
-            "text": "Import Group Chat Messages",
+            "text": "Import Messages（Group）",
             "link": "/rest/message_import_group.html"
           }
         ]
@@ -227,11 +227,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve Chat Groups in an App",
+            "text": "Retrieve Chat Groups",
             "link": "/rest/group_obtain_total.html"
           },
           {
-            "text": "Retrieve the Chat Groups a User Has Joined",
+            "text": "Retrieve Joined Chat Groups",
             "link": "/rest/group_obtain_joined.html"
           },
           {
@@ -245,19 +245,19 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Modify Chat Group Information",
+            "text": "Modify Group",
             "link": "/rest/group_modify.html"
           },
           {
-            "text": "Ban a Chat Group",
+            "text": "Ban Group",
             "link": "/rest/group_ban.html"
           },
           {
-            "text": "Unban a Chat Group",
+            "text": "Unban Group",
             "link": "/rest/group_unban.html"
           },
           {
-            "text": "Destroy a Chat Group",
+            "text": "Destroy Group",
             "link": "/rest/group_delete.html"
           }
         ]
@@ -267,11 +267,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve the Chat Group Announcement",
+            "text": "Retrieve Announcement",
             "link": "/rest/group_announcement_obtain.html"
           },
           {
-            "text": "Modify the Chat Group Announcement",
+            "text": "Modify Announcement",
             "link": "/rest/group_announcement_modify.html"
           }
         ]
@@ -281,19 +281,19 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve Chat Group Shared Files",
+            "text": "Retrieve Shared Files",
             "link": "/rest/group_shared_file_obtain.html"
           },
           {
-            "text": "Upload a Chat Group Shared File",
+            "text": "Upload a Shared File",
             "link": "/rest/group_shared_file_upload.html"
           },
           {
-            "text": "Download a Chat Group Shared File",
+            "text": "Download a Shared File",
             "link": "/rest/group_shared_file_download.html"
           },
           {
-            "text": "Delete a Chat Group Shared File",
+            "text": "Delete a Shared File",
             "link": "/rest/group_shared_file_delete.html"
           }
         ]
@@ -303,11 +303,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Add a Chat Group Member",
+            "text": "Add One",
             "link": "/rest/group_member_add_single.html"
           },
           {
-            "text": "Add Chat Group Members in Batches",
+            "text": "Add Batch",
             "link": "/rest/group_members_add_batch.html"
           }
         ]
@@ -317,11 +317,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Remove a Chat Group Member",
+            "text": "Remove One",
             "link": "/rest/group_member_remove_single.html"
           },
           {
-            "text": "Remove Chat Group Members in Batches",
+            "text": "Remove Batch",
             "link": "/rest/group_members_remove_batch.html"
           }
         ]
@@ -331,127 +331,127 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve Chat Group Members by Page",
+            "text": "Retrieve Members",
             "link": "/rest/group_member_list_obtain.html"
           },
           {
-            "text": "Manage Chat Group Owners and Admins",
+            "text": "Owner and Admins",
             "collapsible": true,
             "children": [
               {
-                "text": "Transfer Chat Group Ownership",
+                "text": "Transfer Ownership",
                 "link": "/rest/group_owner_transfer.html"
               },
               {
-                "text": "Add a Chat Group Admin",
+                "text": "Add Admin",
                 "link": "/rest/group_admin_add.html"
               },
               {
-                "text": "Retrieve the Chat Group Admin List",
+                "text": "Retrieve Admin List",
                 "link": "/rest/group_admin_list_get.html"
               },
               {
-                "text": "Remove a Chat Group Admin",
+                "text": "Remove Admin",
                 "link": "/rest/group_admin_remove.html"
               }
             ]
           },
           {
-            "text": "Manage Mutes",
+            "text": "Mutes",
             "collapsible": true,
             "children": [
               {
-                "text": "Mute Specified Chat Group Members",
+                "text": "Mute Members",
                 "link": "/rest/group_member_mute.html"
               },
               {
-                "text": "Mute All Chat Group Members",
+                "text": "Mute All",
                 "link": "/rest/group_member_mute_all.html"
               },
               {
-                "text": "Unmute Chat Group Members",
+                "text": "Unmute Members",
                 "link": "/rest/group_member_unmute.html"
               },
               {
-                "text": "Unmute All Chat Group Members",
+                "text": "Unmute All",
                 "link": "/rest/group_member_unmute_all.html"
               },
               {
-                "text": "Retrieve the Chat Group Mute List",
+                "text": "Retrieve Mute List",
                 "link": "/rest/group_member_mutelist_obtain.html"
               }
             ]
           },
           {
-            "text": "Manage Allowlists",
+            "text": "Allowlist",
             "collapsible": true,
             "children": [
               {
-                "text": "Add a User to the Chat Group Allowlist",
+                "text": "Add One",
                 "link": "/rest/group_allowlist_add_single.html"
               },
               {
-                "text": "Add Users to the Chat Group Allowlist in Batches",
+                "text": "Add Batch",
                 "link": "/rest/group_allowlist_add_batch.html"
               },
               {
-                "text": "Remove Users from the Chat Group Allowlist",
+                "text": "Remove Batch",
                 "link": "/rest/group_allowlist_remove.html"
               },
               {
-                "text": "Retrieve the Chat Group Allowlist",
+                "text": "Retrieve Allowlist",
                 "link": "/rest/group_allowlist_query.html"
               }
             ]
           },
           {
-            "text": "Manage Blocklists",
+            "text": "Blocklist",
             "collapsible": true,
             "children": [
               {
-                "text": "Add a User to the Group Blocklist",
+                "text": "Add One",
                 "link": "/rest/group_member_blocklist_add_single.html"
               },
               {
-                "text": "Add Users to the Group Blocklist in Batches",
+                "text": "Add Batch",
                 "link": "/rest/group_member_blocklist_add_batch.html"
               },
               {
-                "text": "Remove a User from the Group Blocklist",
+                "text": "Remove One",
                 "link": "/rest/group_member_blocklist_remove_single.html"
               },
               {
-                "text": "Remove Users from the Group Blocklist in Batches",
+                "text": "Remove Batch",
                 "link": "/rest/group_member_blocklist_remove_batch.html"
               },
               {
-                "text": "Retrieve the Group Blocklist",
+                "text": "Retrieve",
                 "link": "/rest/group_member_blocklist_obtain.html"
               }
             ]
           },
           {
-            "text": "Check Whether a User Has Joined a Chat Group",
+            "text": "Check Membership",
             "link": "/rest/group_check_joined.html"
           },
           {
-            "text": "Manage Custom Chat Group Member Attributes",
+            "text": "Manage Custom Member Attributes",
             "collapsible": true,
             "children": [
               {
-                "text": "Set Custom Attributes of a Chat Group Member",
+                "text": "Set",
                 "link": "/rest/group_member_attribute_set.html"
               },
               {
-                "text": "Set Custom Attributes of Chat Group Members in Batches",
+                "text": "Batch Set",
                 "link": "/rest/group_member_attribute_set_batch.html"
               },
               {
-                "text": "Retrieve All Custom Attributes of a Chat Group Member",
+                "text": "Retrieve All",
                 "link": "/rest/group_member_attribute_get.html"
               },
               {
-                "text": "Retrieve Custom Attributes of Chat Group Members by Attribute Key",
+                "text": "Retrieve by Key",
                 "link": "/rest/group_member_attribute_get_by_key.html"
               }
             ]
@@ -463,39 +463,39 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Create a Message Thread",
+            "text": "Create",
             "link": "/rest/group_thread_create.html"
           },
           {
-            "text": "Modify a Message Thread",
+            "text": "Modify",
             "link": "/rest/group_thread_modify.html"
           },
           {
-            "text": "Delete a Message Thread",
+            "text": "Delete",
             "link": "/rest/group_thread_delete.html"
           },
           {
-            "text": "Retrieve Message Threads in an App",
+            "text": "Retrieve All",
             "link": "/rest/group_thread_obtain.html"
           },
           {
-            "text": "Retrieve the Message Threads a User Has Joined",
+            "text": "Retrieve Joined Threads",
             "link": "/rest/group_thread_joined.html"
           },
           {
-            "text": "Retrieve the Message Threads a User Has Joined in a Chat Group",
+            "text": "Retrieve by Group",
             "link": "/rest/group_threads_in_group.html"
           },
           {
-            "text": "Retrieve the Message Thread Member List",
+            "text": "Retrieve Members",
             "link": "/rest/group_thread_member_get.html"
           },
           {
-            "text": "Add Users to a Message Thread in Batches",
+            "text": "Add Members",
             "link": "/rest/group_thread_member_add.html"
           },
           {
-            "text": "Remove Message Thread Members in Batches",
+            "text": "Remove Members",
             "link": "/rest/group_thread_member_remove.html"
           }
         ]
@@ -514,21 +514,21 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Add a Chat Room Superadmin",
+            "text": "Add Superadmin",
             "link": "/rest/chatroom_superadmin_add.html"
           },
           {
-            "text": "Retrieve the Chat Room Superadmin List by Page",
+            "text": "Retrieve Superadmin List",
             "link": "/rest/chatroom_superadmin_list_obtain.html"
           },
           {
-            "text": "Remove a Chat Room Superadmin",
+            "text": "Remove Superadmin",
             "link": "/rest/chatroom_superadmin_delete.html"
           }
         ]
       },
       {
-        "text": "Create a Chat Room",
+        "text": "Create Chat Room",
         "link": "/rest/chatroom_create.html"
       },
       {
@@ -536,15 +536,15 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve Chat Rooms in an App",
+            "text": "Retrieve All",
             "link": "/rest/chatroom_obtain_total.html"
           },
           {
-            "text": "Retrieve Chat Rooms Joined by a User",
+            "text": "Retrieve Joined",
             "link": "/rest/chatroom_obtain_joined.html"
           },
           {
-            "text": "Retrieve Chat Room Details",
+            "text": "Retrieve Details",
             "link": "/rest/chatroom_obtain_detail.html"
           }
         ]
@@ -554,7 +554,7 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Modify Chat Room Information",
+            "text": "Modify Basic Info",
             "link": "/rest/chatroom_modify.html"
           },
           {
@@ -568,31 +568,31 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve the Chat Room Announcement",
+            "text": "Retrieve Announcement",
             "link": "/rest/chatroom_announcement_get.html"
           },
           {
-            "text": "Modify the Chat Room Announcement",
+            "text": "Modify Announcement",
             "link": "/rest/chatroom_announcement_update.html"
           },
           {
-            "text": "Set Chat Room Custom Attributes",
+            "text": "Set Custom Attributes",
             "link": "/rest/chatroom_custom_attribute_set.html"
           },
           {
-            "text": "Force Set Chat Room Custom Attributes",
+            "text": "Force Set Custom Attributes",
             "link": "/rest/chatroom_custom_attribute_set_force.html"
           },
           {
-            "text": "Retrieve Chat Room Custom Attributes",
+            "text": "Retrieve Custom Attributes",
             "link": "/rest/chatroom_custom_attribute_get.html"
           },
           {
-            "text": "Delete Chat Room Custom Attributes",
+            "text": "Delete Custom Attributes",
             "link": "/rest/chatroom_custom_attribute_delete.html"
           },
           {
-            "text": "Force Delete Chat Room Custom Attributes",
+            "text": "Force Delete Custom Attributes",
             "link": "/rest/chatroom_custom_attribute_delete_force.html"
           }
         ]
@@ -602,11 +602,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Add a Chat Room Member",
+            "text": "Add One",
             "link": "/rest/chatroom_member_add_single.html"
           },
           {
-            "text": "Add Chat Room Members in Batches",
+            "text": "Add Batch",
             "link": "/rest/chatroom_member_add_batch.html"
           }
         ]
@@ -616,11 +616,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Remove a Chat Room Member",
+            "text": "Remove one",
             "link": "/rest/chatroom_member_remove_single.html"
           },
           {
-            "text": "Remove Chat Room Members in Batches",
+            "text": "Remove Batch",
             "link": "/rest/chatroom_member_remove_batch.html"
           }
         ]
@@ -630,91 +630,91 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Retrieve the Chat Room Member List",
+            "text": "Retrieve Member List",
             "link": "/rest/chatroom_member_list_obtain.html"
           },
           {
-            "text": "Manage Chat Room Owners and Admins",
+            "text": "Manage Owner and Admins",
             "collapsible": true,
             "children": [
               {
-                "text": "Transfer Chat Room Ownership",
+                "text": "Transfer Ownership",
                 "link": "/rest/chatroom_owner_transfer.html"
               },
               {
-                "text": "Add a Chat Room Admin",
+                "text": "Add Admin",
                 "link": "/rest/chatroom_admin_add.html"
               },
               {
-                "text": "Retrieve the Chat Room Admin List",
+                "text": "Retrieve Admin List",
                 "link": "/rest/chatroom_admin_list_get.html"
               },
               {
-                "text": "Remove a Chat Room Admin",
+                "text": "Remove Admin",
                 "link": "/rest/chatroom_admin_remove.html"
               }
             ]
           },
           {
-            "text": "Manage Mutes",
+            "text": "Mute",
             "collapsible": true,
             "children": [
               {
-                "text": "Mute Chat Room Members",
+                "text": "Mute Members",
                 "link": "/rest/chatroom_member_mute.html"
               },
               {
-                "text": "Mute All Chat Room Members",
+                "text": "Mute All",
                 "link": "/rest/chatroom_member_mute_all.html"
               },
               {
-                "text": "Unmute Chat Room Members",
+                "text": "Unmute Members",
                 "link": "/rest/chatroom_member_unmute.html"
               },
               {
-                "text": "Unmute All Chat Room Members",
+                "text": "Unmute All",
                 "link": "/rest/chatroom_member_unmute_all.html"
               },
               {
-                "text": "Retrieve the Chat Room Mute List",
+                "text": "Retrieve Mute List",
                 "link": "/rest/chatroom_member_mutelist_obtain.html"
               },
               {
-                "text": "Mute Users by Chat Room Tag",
+                "text": "Mute by Room Tag",
                 "link": "/rest/chatroom_user_tag_mute.html"
               },
               {
-                "text": "Set a User's Chat Room Tags",
+                "text": "Set Room Tags by User",
                 "link": "/rest/chatroom_user_tag_set.html"
               },
               {
-                "text": "Retrieve a User's Chat Room Tags",
+                "text": "Retrieve Room Tags by User",
                 "link": "/rest/chatroom_user_tag_get.html"
               }
             ]
           },
           {
-            "text": "Manage Allowlists",
+            "text": "Allowlist",
             "collapsible": true,
             "children": [
               {
-                "text": "Chat Room Allowlist Management",
+                "text": "Overvie",
                 "link": "/rest/chatroom_allowlist_overview.html"
               },
               {
-                "text": "Add a User to the Chat Room Allowlist",
+                "text": "Add One to Allowlist",
                 "link": "/rest/chatroom_allowlist_add_single.html"
               },
               {
-                "text": "Add Users to the Chat Room Allowlist in Batches",
+                "text": "Add Batch to Allowlist",
                 "link": "/rest/chatroom_allowlist_add_batch.html"
               },
               {
-                "text": "Remove Users from the Chat Room Allowlist",
+                "text": "Remove from Allowlist",
                 "link": "/rest/chatroom_allowlist_remove.html"
               },
               {
-                "text": "Retrieve the Chat Room Allowlist",
+                "text": "Retrieve Allowlist",
                 "link": "/rest/chatroom_allowlist_obtain.html"
               }
             ]
@@ -1122,45 +1122,45 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "User Status Change Webhook Events",
+            "text": "User Status",
             "link": "/rest/callback_login_logout.html"
           },
           {
-            "text": "Friend and Blocklist Webhook Events",
+            "text": "Friend and Blocklist",
             "link": "/rest/callback_contact.html"
           },
           {
-            "text": "Message Webhooks",
+            "text": "Message",
             "collapsible": true,
             "children": [
               {
-                "text": "Message Sending Webhook Events",
+                "text": "Message Sending",
                 "link": "/rest/callback_message_send.html"
               },
               {
-                "text": "One-to-One Message Read Receipt Webhook Events",
+                "text": "One-to-One Message Read Receipt",
                 "link": "/rest/callback_single_read_ack.html"
               },
               {
-                "text": "Group Message Read Receipt Webhook Events",
+                "text": "Group Message Read Receipt",
                 "link": "/rest/callback_group_read_ack.html"
               },
               {
-                "text": "Message Editing Webhook Events",
+                "text": "Message Editing",
                 "link": "/rest/callback_message_modify.html"
               },
               {
-                "text": "Message Recall Webhook Events",
+                "text": "Message Recall",
                 "link": "/rest/callback_message_recall.html"
               },
               {
-                "text": "Reaction Webhook Events",
+                "text": "Reaction",
                 "link": "/rest/callback_reaction.html"
               }
             ]
           },
           {
-            "text": "Chat Group and Chat Room Webhooks",
+            "text": "Chat Group and Chat Room",
             "collapsible": true,
             "children": [
               {
@@ -1168,41 +1168,41 @@ export const REST_SIDEBAR = [
                 "collapsible": true,
                 "children": [
                   {
-                    "text": "Chat Group and Chat Room Creation Webhook Events",
+                    "text": "Creation",
                     "link": "/rest/callback_group_room_create.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Deletion Webhook Events",
+                    "text": "Deletion",
                     "link": "/rest/callback_group_room_delete.html"
                   }
                 ]
               },
               {
-                "text": "Information and Status Changes",
+                "text": "Info and Status Changes",
                 "collapsible": true,
                 "children": [
                   {
-                    "text": "Chat Group and Chat Room Information Update Webhook Events",
+                    "text": "Basic Info",
                     "link": "/rest/callback_group_room_info.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Owner Change Webhook Events",
+                    "text": "Owner",
                     "link": "/rest/callback_group_room_owner.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Announcement Webhook Events",
+                    "text": "Announcement",
                     "link": "/rest/callback_group_room_announcement.html"
                   },
                   {
-                    "text": "Chat Group Ban Status Change Webhook Events",
+                    "text": "Group Ban Status",
                     "link": "/rest/callback_group_ban.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Mute-All Webhook Events",
+                    "text": "Mute-All",
                     "link": "/rest/callback_group_room_muteall.html"
                   },
                   {
-                    "text": "Chat Group Block Status Change Webhook Events",
+                    "text": "Group Block Status",
                     "link": "/rest/callback_group_block.html"
                   }
                 ]
@@ -1212,31 +1212,31 @@ export const REST_SIDEBAR = [
                 "collapsible": true,
                 "children": [
                   {
-                    "text": "Chat Group and Chat Room Member Join Webhook Events",
+                    "text": "Member Join",
                     "link": "/rest/callback_group_room_join.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Member Leave Webhook Events",
+                    "text": "Member Leave",
                     "link": "/rest/callback_group_room_leave.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Admin Change Webhook Events",
+                    "text": "Admin",
                     "link": "/rest/callback_group_room_admin.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Mute List Webhook Events",
+                    "text": "Mute List",
                     "link": "/rest/callback_group_room_mute.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Allowlist Webhook Events",
+                    "text": "Allowlist",
                     "link": "/rest/callback_group_room_allowlist.html"
                   },
                   {
-                    "text": "Chat Group and Chat Room Blocklist Webhook Events",
+                    "text": "Blocklist",
                     "link": "/rest/callback_group_room_blocklist.html"
                   },
                   {
-                    "text": "Chat Room Superadmin Change Webhook Events",
+                    "text": "Room Superadmin",
                     "link": "/rest/callback_room_superadmin.html"
                   }
                 ]
@@ -1246,11 +1246,11 @@ export const REST_SIDEBAR = [
                 "collapsible": true,
                 "children": [
                   {
-                    "text": "Chat Group Shared File Webhook Events",
+                    "text": "Group Shared File",
                     "link": "/rest/callback_group_shared_file.html"
                   },
                   {
-                    "text": "Message Thread Operation Webhook Events",
+                    "text": "Message Thread",
                     "link": "/rest/callback_thread.html"
                   }
                 ]
@@ -1258,17 +1258,13 @@ export const REST_SIDEBAR = [
             ]
           },
           {
-            "text": "Offline Push Webhook Events",
+            "text": "Offline Push",
             "link": "/rest/callback_offline_push.html"
-          },
-          {
-            "text": "Sensitive Word Detection Webhook Events",
-            "link": "/rest/callback_sensitive_word.html"
           }
         ]
       },
       {
-        "text": "Webhook Data Stored on the Chat Server",
+        "text": "Webhook Data Storage on the Chat Server",
         "link": "/rest/callback_postsending_exception_storage.html"
       }
     ],
