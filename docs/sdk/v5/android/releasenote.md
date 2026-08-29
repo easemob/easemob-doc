@@ -25,7 +25,7 @@ The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 - [**Automatic user information management**](userinfo_provider.html): The SDK automatically synchronizes user information and updates it in memory, reducing the work required for developers to manually retrieve, store, and update user information.
 - [**Presence**](presence.html): Subscribe to and unsubscribe from user presence, publish custom presence states, and query the list of subscribed users.
 
-5. **[Offline push](/document/android/push/push_overview.html)**:
+5. **[Offline push](/sdk/v5/android/push/push_overview.html)**:
 
 - **Integrate Google FCM push**: Obtain a V1 certificate from the Firebase console, upload it to the EasyIM Console, configure dependencies in the project, initialize the SDK, and upload the device token.
 - **Configure offline push notifications**: Configure push notification titles and content through APIs, push templates, and message extensions.

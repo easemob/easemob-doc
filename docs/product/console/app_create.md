@@ -1,6 +1,6 @@
 # App Creation
 
-Before integrating IM, you must create an app in [EasyIM Console](https://im-console.pages.dev/user/login).
+Before integrating IM, you must create an app in [EasyIM Console](https://console.easyim.ai/user/login).
 
 - A newly created app is a **development version** by default and can be used for development, integration testing, and general testing.
 - After a development version app is launched, a **production version** app is generated. For launch methods and related information, see [App Launch](app_launch.html).

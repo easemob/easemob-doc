@@ -22,13 +22,13 @@ A chat group member can create a message thread from a chat group message. The m
 | Feature       | Description   | 
 | :--------- | :----- | 
 | Send a message in a message thread  | Sending a message in a message thread is essentially the same as sending a chat group message. The only difference is that a message sent in a message thread must include a flag indicating that it belongs to the message thread.| 
-| Receive a message in a message thread      | Receiving messages in a message thread is the same as receiving messages in one-to-one chats, group chats, and chat rooms. For details, see [Receive messages](/document/android/message_receive.htm).   | 
+| Receive a message in a message thread      | Receiving messages in a message thread is the same as receiving messages in one-to-one chats, group chats, and chat rooms. For details, see [Receive messages](/sdk/v5/android/message_receive.htm).   | 
 | Recall a message in a message thread      | The logic for recalling a message in a message thread is the same as that for recalling a message in a one-to-one chat, group chat, or chat room. After a message is recalled, all members of the chat group containing the message thread receive a message thread update callback, while message thread members receive a callback indicating that a message in the message thread was recalled. | 
 | Retrieve messages in a message thread      | You can retrieve messages in a specified message thread from the server or the local database.  | 
 
 ## Monitor message thread events
 
-You can implement message thread event listeners. When an operation occurs in a message thread, including message thread creation, name changes, destruction, or member removal, the other users in the message thread receive the corresponding event. For details, see [Monitor message thread events](/document/android/thread.html#monitor-message-thread-events).
+You can implement message thread event listeners. When an operation occurs in a message thread, including message thread creation, name changes, destruction, or member removal, the other users in the message thread receive the corresponding event. For details, see [Monitor message thread events](/sdk/v5/android/thread.html#monitor-message-thread-events).
 
 ## Message thread event callbacks
 

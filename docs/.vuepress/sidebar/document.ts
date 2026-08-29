@@ -208,7 +208,6 @@ const documentV5Sidebar = [
         { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
         { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
         { text: 'Parse Push Notifications', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-        { text: 'Unified Message Retrieval', link: 'push/push_parsing_unified.html', only: ['android'] },
         { text: 'Configure Notification Content',
             collapsible: true,
             children: [

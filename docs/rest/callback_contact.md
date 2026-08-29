@@ -22,7 +22,7 @@ This document describes the following user relationship webhook events:
 
 #### Trigger conditions
 
-A [client sends a friend request](/document/android/user_relationship.html#add-a-friend).
+A [client sends a friend request](/sdk/v5/android/user_relationship.html#add-a-friend).
 
 #### Webhook request
 
@@ -69,7 +69,7 @@ Request fields:
 
 #### Trigger conditions
 
-After receiving a friend request, a [user accepts the request on the client](/document/android/user_relationship.html#add-a-friend).
+After receiving a friend request, a [user accepts the request on the client](/sdk/v5/android/user_relationship.html#add-a-friend).
 
 #### Event received by the requester
 
@@ -164,7 +164,7 @@ Request fields:
 
 #### Trigger conditions
 
-After receiving a friend request, a [user declines the request on the client](/document/android/user_relationship.html#add-a-friend).
+After receiving a friend request, a [user declines the request on the client](/sdk/v5/android/user_relationship.html#add-a-friend).
 
 #### Event received by the requester
 
@@ -259,7 +259,7 @@ Request fields:
 
 #### Trigger conditions
 
-- A [friend is deleted on the client](/document/android/user_relationship.html#delete-a-friend).
+- A [friend is deleted on the client](/sdk/v5/android/user_relationship.html#delete-a-friend).
 - A RESTful API is called to [delete a friend](/rest/user_friend_remove.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is deleted](/product/console/operation_user.html#delete-a-users-friend).
 
@@ -306,7 +306,7 @@ Request fields:
 
 #### Trigger conditions
 
-1. A [user is added to the blocklist on the client](/document/android/user_relationship.html#add-a-user-to-the-blocklist).
+1. A [user is added to the blocklist on the client](/sdk/v5/android/user_relationship.html#add-a-user-to-the-blocklist).
 2. A [RESTful API is called to add a user to the blocklist](/rest/user_friend_blocklist_add.html).
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [user is added to the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 
@@ -357,7 +357,7 @@ Request fields:
 
 #### Trigger conditions
 
-1. A user [removes a friend from the blocklist on the client](/document/android/user_relationship.html#remove-a-user-from-the-blocklist).
+1. A user [removes a friend from the blocklist on the client](/sdk/v5/android/user_relationship.html#remove-a-user-from-the-blocklist).
 2. A [RESTful API is called to remove a friend from the blocklist](/rest/user_friend_blocklist_remove.html).
 3. In the [EasyIM Console](https://console.easyim.ai/user/login), a [friend is removed from the blocklist](/product/console/operation_user.html#view-a-users-blocklist).
 

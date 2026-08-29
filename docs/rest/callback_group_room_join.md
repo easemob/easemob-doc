@@ -13,8 +13,8 @@ When users are added during chat group or chat room creation, invited to join, o
 
 ### Trigger conditions
 
-- Users are added directly when a [chat group](/document/android/group_manage.html#create-a-chat-group) or [chat room](/document/android/room_manage.html#create-a-chat-room) is created on the client.
-- A user [joins a chat room](/document/android/room_manage.html#join-a-chat-room) on the client.
+- Users are added directly when a [chat group](/sdk/v5/android/group_manage.html#create-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#create-a-chat-room) is created on the client.
+- A user [joins a chat room](/sdk/v5/android/room_manage.html#join-a-chat-room) on the client.
 - Users are added directly when a RESTful API is called to [create a chat group](/rest/group_create.html) or [chat room](/rest/chatroom_create.html).
 
 ### Webhook request
@@ -72,7 +72,7 @@ Note: The `payload.options.ext` field applies only to chat room join events, not
 
 ### Trigger conditions
 
-A regular chat group member [invites a user to join the chat group on the client](/document/android/group_manage.html#invite-users-to-join-a-chat-group), and the user joins successfully.
+A regular chat group member [invites a user to join the chat group on the client](/sdk/v5/android/group_manage.html#invite-users-to-join-a-chat-group), and the user joins successfully.
 
 **Chat rooms do not have this event.**
 
@@ -123,7 +123,7 @@ A regular chat group member [invites a user to join the chat group on the client
 
 ### Trigger conditions
 
-A user successfully joins a [chat group by application on the client](/document/android/group_manage.html#apply-to-join-a-chat-group) or [chat room](/document/android/room_manage.html#join-a-chat-room).
+A user successfully joins a [chat group by application on the client](/sdk/v5/android/group_manage.html#apply-to-join-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#join-a-chat-room).
 
 ### Webhook request
 

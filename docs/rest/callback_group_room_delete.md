@@ -11,7 +11,7 @@ After a chat group or chat room is deleted successfully, the EasyIM server sends
 
 ## Trigger conditions
 
-- A user destroys a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) on the client.
+- A user destroys a [chat group](/sdk/v5/android/group_manage.html#destroy-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#destroy-a-chat-room) on the client.
 - A user calls a RESTful API to destroy a [chat group](/rest/group_delete.html) or [chat room](/rest/chatroom_delete.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a user deletes a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room).
 

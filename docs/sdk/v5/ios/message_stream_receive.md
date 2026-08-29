@@ -190,20 +190,20 @@ Use cumulative merged content for UI rendering so users always see the latest co
 | :--- | :--- | :--- |
 | [Send messages](/rest/message_stream_send_single.html) | Yes | Send streaming messages through the server-side API. |
 | [Receive messages](message_stream_receive.html) | Yes | The client receives streaming messages sent through the server-side API. |
-| [Message roaming](/document/ios/message_retrieve.html#) | Yes | Retrieve historical messages from the server. |
-| [Message extensions](/document/ios/message_extension.html)  | Yes | Carry custom extensions in a message. |
-| [Targeted messages](/document/ios/message_target.html) | No | Deliver a message only to specified members of a group. |
-| [Message read receipts](/document/ios/message_receipt.html) | No | The recipient returns the read state. |
+| [Message roaming](/sdk/v5/ios/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) | Yes | Retrieve historical messages from the server. |
+| [Message extensions](/sdk/v5/ios/message_extension.html)  | Yes | Carry custom extensions in a message. |
+| [Targeted messages](/sdk/v5/ios/message_target.html) | No | Deliver a message only to specified members of a group. |
+| [Message read receipts](/sdk/v5/ios/message_receipt.html) | No | The recipient returns the read state. |
 | [Typing indicators](typing_indication.html) | No | Notify the peer of a “Typing” state. |
-| [Message Reactions](/document/ios/reaction.html)  | Yes | Add a reaction to a message. |
-| [Pin messages](/document/ios/message_pin.html) | Yes | Pin a message in a conversation. |
-| [Recall messages](/document/ios/message_recall.html) | Yes | Recall a sent message. |
-| [Delete messages for the current user](/document/ios/message_delete.html#) | Yes | Delete only the current user's message records. |
-| [Edit messages](/document/ios/message_modify.html) | Yes | Edit sent message content. |
-| [Search messages](/document/ios/message_search_local.html) | Yes | Search messages locally or in a conversation. |
-| [Conversation unread count](/document/ios/conversation_unread.html) | Yes | Include the message in the conversation unread count. |
+| [Message Reactions](/sdk/v5/ios/reaction.html)  | Yes | Add a reaction to a message. |
+| [Pin messages](/sdk/v5/ios/message_pin.html) | Yes | Pin a message in a conversation. |
+| [Recall messages](/sdk/v5/ios/message_recall.html) | Yes | Recall a sent message. |
+| [Delete messages for the current user](/sdk/v5/ios/message_delete.html) | Yes | Delete only the current user's message records. |
+| [Edit messages](/sdk/v5/ios/message_modify.html) | Yes | Edit sent message content. |
+| [Search messages](/sdk/v5/ios/message_search_local.html) | Yes | Search messages locally or in a conversation. |
+| [Conversation unread count](/sdk/v5/ios/conversation_unread.html) | Yes | Include the message in the conversation unread count. |
 | Last message in a conversation | Yes | Display the message as the last message in a conversation. |
-| [Offline push](/document/ios/push/push_overview.html) | Yes | Send a push notification when the user is offline. |
+| [Offline push](/sdk/v5/ios/push/push_overview.html) | Yes | Send a push notification when the user is offline. |
 | [Pre-delivery webhook](/rest/callback_presending.html) | No | Trigger a server-side callback before sending a message so the app server can preprocess it. |
 | [Post-delivery webhook](/rest/callback_postsending.html)  | No | Trigger a server-side callback after sending a message so the app backend can perform necessary data synchronization. |
 | Synchronization to the sender's other clients after successful delivery | No | Synchronize the successfully sent message to the sender's other devices. |

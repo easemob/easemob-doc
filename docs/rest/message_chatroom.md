@@ -929,7 +929,7 @@ The following table describes the common request body for all message types. It 
 | `chatroom_msg_level` | String | No       | Chat room message priority:<br/> - `high`: High.<br/> - (Default) `normal`: Normal.<br/> - `low`: Low. |
 | `type`          | String | Yes       | Message type:<br/> - `txt`: Text message.<br/> - `img`: Image message.<br/> - `audio`: Voice message.<br/> - `video`: Video message.<br/> - `file`: File message.<br/> - `loc`: Location message.<br/> - `cmd`: Command message.<br/> - `custom`: Custom message.    |
 | `body`          | JSON   | Yes       | Message content. The fields in `body` are described below.       |
-| `ext`           | JSON   | No       | Messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/document/ios/push/push_display_field.md) and [Android push fields](/document/android/push/push_display_field.html). |
+| `ext`           | JSON   | No       | Messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/sdk/v5/ios/push/push_display_field.md) and [Android push fields](/sdk/v5/android/push/push_display_field.html). |
 | `users` | Array | Yes       | Array of user IDs of chat room members who receive the message. You can specify up to 20 user IDs per request. |
 
 The fields in `body` in the request body are described below.

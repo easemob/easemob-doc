@@ -25,7 +25,7 @@ The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 - [**Automatic user information management**](userinfo_provider.html): The SDK automatically synchronizes user information and updates it in memory, reducing the work required for developers to manually retrieve, store, and update user information.
 - [**Presence**](presence.html): Subscribe to and unsubscribe from user presence, publish custom presence states, and query the list of subscribed users.
 
-5. **[Offline push](/document/ios/push/push_overview.html)**:
+5. **[Offline push](/sdk/v5/ios/push/push_overview.html)**:
 
 - **Integrate APNs push**: Generate a push certificate on the Apple Developer Center, upload it to the EasyIM Console, enable notifications, pass the certificate name to the SDK, and get the device token and pass it to the SDK.
 - **Configure offline push notifications**: Configure push notification titles and content through APIs, push templates, and message extensions.

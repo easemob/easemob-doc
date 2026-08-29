@@ -12,7 +12,7 @@ The default overseas data center is **Singapore Zone 1**. You can also select **
 
 ![img](/images/product/data_center_selection.png)
 
-You can view the app's data center and server domain on the **App Overview** page of the EasyIM Console.
+You can view the app's data center and server domain on the **Overview** page of the EasyIM Console.
 
 ![img](/images/product/data_center.png)
 

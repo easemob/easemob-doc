@@ -187,6 +187,7 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | Content moderation | Configure message moderation rules, view moderation records, perform keyword-based moderation, and more                  |   
 -->
 
+<!--
 ## Statistics
 
 | Feature | Description |
@@ -207,6 +208,8 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | EasyIM user connection status | Query the historical connection status of a user within the last three days by user ID.  |
 | EasyIM user device logs | Query logs on a user's device or upload device logs to the EasyIM log server.  |
 | Chat room message rate | Query the number of uplink and downlink messages per minute in a chat room by chat room ID.  |
+
+-->
 
 <!--
 ## Value-added services

@@ -11,7 +11,7 @@ After a message is edited, the EasyIM server sends a webhook request to your app
 
 ## Trigger conditions
 
-- A [message is edited on the client](/document/android/message_modify.html).
+- A [message is edited on the client](/sdk/v5/android/message_modify.html).
 - A [RESTful API is called to edit a message](/rest/message_modify.html).
 
 ## Webhook request

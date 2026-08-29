@@ -284,7 +284,7 @@ If you set a user nickname through the client or a RESTful API but cannot subseq
 - When setting a user nickname through a RESTful API, use the `nickname` key in the request. Otherwise, the client cannot read the attribute correctly.
 - The `nickname` returned by the RESTful APIs [Get User Details](/rest/account_detail_obtain_single.html) and [Delete a User Account](/rest/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. However, we recommend keeping them consistent and updating one when the other changes.
 
-On Android, call [updatePushNickname](/document/android/push/push_display_attribute.html#set-push-notification-display-attributes) to update the push nickname. For RESTful APIs, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
+On Android, call [updatePushNickname](/sdk/v5/android/push/push_display_attribute.html#set-push-notification-display-attributes) to update the push nickname. For RESTful APIs, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
 
 ### Why is error code 4 returned?
 

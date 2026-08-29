@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Create offline push message templates, including the default **default** and **detail** templates and custom templates. You can also create push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Push template configuration](/document/android/push/push_template.html#feature-activation).
+Create offline push message templates, including the default **default** and **detail** templates and custom templates. You can also create push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Push template configuration](/sdk/v5/android/push/push_template.html#feature-activation).
 
 If you use the default **default** or **detail** template, the default template is automatically applied when a message is pushed. You do not need to pass the template name when creating the message.
 

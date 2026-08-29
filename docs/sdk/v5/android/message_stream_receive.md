@@ -225,7 +225,7 @@ Stream messages support the following message features:
 | [Search messages](message_search_local.html) | Yes | Search messages locally or in a conversation. |
 | [Conversation unread count](conversation_unread.html) | Yes | Include the message in the conversation unread count. |
 | Last message in a conversation | Yes | Display the message as the last message in a conversation. |
-| [Offline push](/document/android/push/push_overview.html) | Yes | Send a push notification when the user is offline. |
+| [Offline push](/sdk/v5/android/push/push_overview.html) | Yes | Send a push notification when the user is offline. |
 | [Pre-delivery webhook](/rest/callback_presending.html) | No | Trigger a server-side callback before sending a message so the app server can preprocess it. |
 | [Post-delivery webhook](/rest/callback_postsending.html)  | No | Trigger a server-side callback after sending a message so the app backend can perform necessary data synchronization. |
 | Synchronization to the sender's other clients after successful delivery | No | Synchronize the successfully sent message to the sender's other devices. |

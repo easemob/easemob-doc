@@ -13,7 +13,7 @@ After a chat group is successfully blocked or unblocked, the EasyIM server sends
 
 ### Trigger conditions
 
-A user [blocks chat group messages on the client](/document/android/group_manage.html#block-group-messages).
+A user [blocks chat group messages on the client](/sdk/v5/android/group_manage.html#block-group-messages).
 
 ### Webhook request
 
@@ -56,7 +56,7 @@ A user [blocks chat group messages on the client](/document/android/group_manage
 
 ### Trigger conditions
 
-A user [unblocks chat group messages on the client](/document/android/group_manage.html#unblock-group-messages).
+A user [unblocks chat group messages on the client](/sdk/v5/android/group_manage.html#unblock-group-messages).
 
 ### Webhook request
 

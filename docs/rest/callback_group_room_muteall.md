@@ -13,7 +13,7 @@ After all chat group or chat room members are muted or unmuted, the EasyIM serve
 
 ### Trigger conditions
 
-- All members of a [chat group](/document/android/group_members.html#mute-all-members) or [chat room are muted or unmuted](/document/android/room_members.html#mute-and-unmute-all-chat-room-members) on the client.
+- All members of a [chat group](/sdk/v5/android/group_members.html#mute-all-members) or [chat room are muted or unmuted](/sdk/v5/android/room_members.html#mute-and-unmute-all-chat-room-members) on the client.
 - A RESTful API is called to mute or unmute all members of a [chat group](/rest/group_member_mute_all.html) or [chat room](/rest/chatroom_member_mute_all.html).
 
 ### Webhook request

@@ -4,7 +4,7 @@ EasyIM supports integration with third-party message-push services to send messa
 
 ## Offline push process
 
-When the client disconnects, the app process closes, or the user goes offline for another reason, EasyIM sends a notification to the offline user's device through an integrated third-party push channel. After the user gets online again, the SDK synchronizes messages generated while the user was offline from the server. The notification badge generally indicates the accumulated number of notifications during the offline period and is not the same as the actual unread message count in the app. For details, see the offline push documentation for [Android](/document/android/push/push_overview.html#push-principles) and [iOS](/document/ios/push/push_overview.html#offline-push-process).
+When the client disconnects, the app process closes, or the user goes offline for another reason, EasyIM sends a notification to the offline user's device through an integrated third-party push channel. After the user gets online again, the SDK synchronizes messages generated while the user was offline from the server. The notification badge generally indicates the accumulated number of notifications during the offline period and is not the same as the actual unread message count in the app. For details, see the offline push documentation for [Android](/sdk/v5/android/push/push_overview.html#push-principles) and [iOS](/sdk/v5/ios/push/push_overview.html#offline-push-process).
 
 **EasyIM does not send offline push notifications in the following two scenarios:**
 
@@ -13,7 +13,7 @@ When the client disconnects, the app process closes, or the user goes offline fo
 
 ## Upload a push certificate
 
-In addition to ensuring that the user is offline, to use third-party offline push, configure the push certificate or channel parameters in the [EasyIM Console](https://console.easyim.ai/user/login). For vendor-specific certificate configuration, see [Android Push](/document/android/push/push_fcm.html) and [APNs Push](/document/ios/push/push_apns.html).
+In addition to ensuring that the user is offline, to use third-party offline push, configure the push certificate or channel parameters in the [EasyIM Console](https://console.easyim.ai/user/login). For vendor-specific certificate configuration, see [Android Push](/sdk/v5/android/push/push_fcm.html) and [APNs Push](/sdk/v5/ios/push/push_apns.html).
 
 In the SDK, call `client.pushManager.uploadPushToken` to upload a push token. Before calling it, initialize and log in to the SDK and obtain the `deviceToken` assigned by the vendor push channel. `deviceId` identifies the current device, and `notifierName` corresponds to the push-certificate name or channel identifier configured in the EasyIM Console.
 

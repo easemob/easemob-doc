@@ -11,7 +11,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
 
 ## Trigger conditions
 
-- A [message is sent](/document/android/message_send.html) in a one-to-one or group chat on the client while the recipient is offline.
+- A [message is sent](/sdk/v5/android/message_send.html) in a one-to-one or group chat on the client while the recipient is offline.
 - A message is sent through the REST API in a [one-to-one chat](/rest/message_single.html) or [group chat](/rest/message_group.html) while the recipient is offline.
 - A message is sent through the console in a [one-to-one chat](/product/console/operation_user.html#send-a-message-through-the-rest-api) while the recipient is offline.
 

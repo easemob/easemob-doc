@@ -15,7 +15,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 
 ### Trigger conditions
 
-- A [chat group member](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
+- A [chat group member](/sdk/v5/android/group_members.html#add-members-to-the-blocklist) or [chat room member](/sdk/v5/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the blocklist on the client.
 - A RESTful API is called to add a [chat group member](/rest/group_member_blocklist_add_single.html) or [chat room member](/rest/chatroom_allowlist_add_single.html) to the blocklist.
 
 ### Webhook request

@@ -13,7 +13,7 @@ After a chat group or chat room admin is successfully added or removed, the Easy
 
 ### Trigger conditions
 
-- A [chat group admin](/document/android/group_members.html#add-a-group-admin) or [chat room admin](/document/android/room_members.html#add-a-chat-room-admin) is added on the client.
+- A [chat group admin](/sdk/v5/android/group_members.html#add-a-group-admin) or [chat room admin](/sdk/v5/android/room_members.html#add-a-chat-room-admin) is added on the client.
 - A RESTful API is called to add a [chat group admin](/rest/group_admin_add.html) or [chat room admin](/rest/chatroom_admin_add.html).
 
 ### Webhook request
@@ -64,7 +64,7 @@ The following example uses the event for adding a chat group admin. The fields a
 
 ### Trigger conditions
 
-- A [chat group admin](/document/android/group_members.html#remove-a-group-admin) or [chat room admin](/document/android/room_members.html#remove-a-chat-room-admin) is removed on the client.
+- A [chat group admin](/sdk/v5/android/group_members.html#remove-a-group-admin) or [chat room admin](/sdk/v5/android/room_members.html#remove-a-chat-room-admin) is removed on the client.
 - A RESTful API is called to remove a [chat group admin](/rest/group_delete.html) or [chat room admin](/rest/chatroom_delete.html).
 
 ### Webhook request

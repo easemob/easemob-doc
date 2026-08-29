@@ -13,7 +13,7 @@ When a member leaves a chat group or chat room voluntarily, is removed, or leave
 
 ### Trigger conditions
 
-- A user voluntarily leaves a [chat group](/document/android/group_manage.html#leave-a-chat-group) or [chat room](/document/android/room_manage.html#leave-a-chat-room) on the client.
+- A user voluntarily leaves a [chat group](/sdk/v5/android/group_manage.html#leave-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#leave-a-chat-room) on the client.
 - A user leaves a chat room after being offline for 2 minutes due to network or other issues.
 
 ### Webhook request
@@ -91,7 +91,7 @@ The following examples show chat room leave events.
 
 ### Trigger conditions
 
-- A user is removed from a [chat group](/document/android/group_manage.html#remove-members) or [chat room](/document/android/room_manage.html#be-removed) on the client.
+- A user is removed from a [chat group](/sdk/v5/android/group_manage.html#remove-members) or [chat room](/sdk/v5/android/room_manage.html#be-removed) on the client.
 - A [RESTful API is called to remove a user from a chat group](/rest/group_member_remove_single.html) or [chat room](/rest/chatroom_member_remove_single.html).
 
 ### Webhook request
@@ -143,7 +143,7 @@ The following example shows an event generated when a user is removed from a cha
 
 ### Trigger conditions
 
-- A user leaves a chat group or chat room after being added to the [chat group blocklist](/document/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/document/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
+- A user leaves a chat group or chat room after being added to the [chat group blocklist](/sdk/v5/android/group_members.html#add-members-to-the-blocklist) or [chat room blocklist](/sdk/v5/android/room_members.html#add-members-to-the-chat-room-blocklist) on the client.
 - A user leaves a chat group or chat room when a RESTful API is called to add the user to the [chat group blocklist](/rest/group_member_blocklist_add_single.html) or [chat room blocklist](/rest/chatroom_member_blocklist_add_single.html).
 
 ### Webhook request
@@ -195,7 +195,7 @@ The following example shows an event generated when a user is added to the group
 
 ### Trigger conditions
 
-- Users leave when a [chat group](/document/android/group_manage.html#destroy-a-chat-group) or [chat room](/document/android/room_manage.html#destroy-a-chat-room) is destroyed on the client.
+- Users leave when a [chat group](/sdk/v5/android/group_manage.html#destroy-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#destroy-a-chat-room) is destroyed on the client.
 - Users leave when a RESTful API is called to [destroy a chat group](/rest/group_delete.html) or [chat room](/rest/chatroom_delete.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), users leave when a [chat group](/product/console/operation_group.html#delete-a-chat-group) or [chat room](/product/console/operation_chatroom.html#delete-a-chat-room) is destroyed.
 

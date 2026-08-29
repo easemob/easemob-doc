@@ -11,7 +11,7 @@ After a chat group or chat room is created successfully, the EasyIM server sends
 
 ## Trigger conditions
 
-- A [chat group](/document/android/group_manage.html#create-a-chat-group) or [chat room](/document/android/room_manage.html#create-a-chat-room) is created on the client.
+- A [chat group](/sdk/v5/android/group_manage.html#create-a-chat-group) or [chat room](/sdk/v5/android/room_manage.html#create-a-chat-room) is created on the client.
 - A RESTful API is called to create a [chat group](/rest/group_create.html) or [chat room](/rest/chatroom_create.html).
 - In the [EasyIM Console](https://console.easyim.ai/user/login), a [chat group](/product/console/operation_group.html#create-a-chat-group) or [chat room](/product/console/operation_chatroom.html#create-a-chat-room) is created.
 

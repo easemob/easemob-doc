@@ -15,9 +15,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
-## Implementation
-
-### Retrieve messages in a specified conversation from the server
+## Retrieve messages in a specified conversation from the server
 
 Call `asyncFetchHistoryMessages` with the `EMFetchMessageOption` class to retrieve historical messages in one-to-one and group chats from the server by page. For reliability, we recommend retrieving 20 messages per page and no more than 50. If the total number of matching messages is greater than `pageSize`, a paginated query returns `pageSize` messages. If it is less than `pageSize`, the actual number is returned. When all messages have been retrieved, the number returned is less than `pageSize`.
 
@@ -84,7 +82,7 @@ int pageSize,String cursor,
 ```
 
 
-### Retrieve messages sent by specified group members from the server
+## Retrieve messages sent by specified group members from the server
 
 For a single group conversation, you can retrieve messages sent by specified members, instead of all members, from the server.
 
@@ -147,7 +145,7 @@ int pageSize,String cursor,
 
 ```
 
-### Retrieve messages in a local conversation by keyword
+## Retrieve messages in a local conversation by keyword
 
 Set a keyword to retrieve specified messages in conversations from the local database. The SDK returns a mapping between conversation IDs and message ID lists. Message IDs are listed in chronological or reverse chronological order by message timestamp based on the `direction` parameter.
 
@@ -178,7 +176,7 @@ EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(ke
 
 ```
 
-### Retrieve local messages by message ID
+## Retrieve local messages by message ID
 
 Pass one or more message IDs to retrieve messages in a local conversation.
 
@@ -205,7 +203,7 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
     });
 ```
 
-### Retrieve messages sent by specified group members locally
+## Retrieve messages sent by specified group members locally
 
 For a single group conversation, you can retrieve locally stored messages sent by specified members instead of all members.
 
@@ -258,7 +256,7 @@ if (conversation != null) {
 }
 ```
 
-### Read messages in a specified conversation locally
+## Read messages in a specified conversation locally
 
 Call `getAllMessages` to retrieve all messages in a specified conversation from memory. If memory is empty, the SDK loads the latest message from the local database.
 
@@ -280,7 +278,7 @@ List<EMMessage> messages = conversation.getAllMessages();
 List<EMMessage> pagedMessages = conversation.loadMoreMsgFromDB(startMsgId, pagesize);
 ```
 
-### Retrieve a local message by message ID
+## Retrieve a local message by message ID
 
 Call `getMessage` to retrieve a specified locally stored message by message ID. If the message does not exist, an empty value is returned.
 
@@ -295,7 +293,7 @@ The parameters are described below:
 EMMessage msg = EMClient.getInstance().chatManager().getMessage(msgId);
 ```
 
-### Retrieve messages of a specified type in a local conversation
+## Retrieve messages of a specified type in a local conversation
 
 Call `searchMsgFromDB(Type type, long timeStamp, int maxCount, String from, EMConversation.EMSearchDirection direction)` to retrieve messages of a specified type in a specified conversation from local storage.
 
@@ -320,7 +318,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, System.currentTimeMillis(), maxCount, from, EMConversation.EMSearchDirection.UP);
 ```
 
-### Retrieve messages in a local conversation within a specified period
+## Retrieve messages in a local conversation within a specified period
 
 Call `searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` to search local storage for messages sent and received in a specified conversation within a specified period.
 
@@ -342,7 +340,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTimeStamp, maxCount);
 ```
 
-### Retrieve the message count in a conversation within a specified period
+## Retrieve the message count in a conversation within a specified period
 
 Call `getAllMsgCount` to retrieve from the SDK's local database the total number of messages in a conversation within a specified period.
 

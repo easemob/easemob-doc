@@ -156,13 +156,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_send.html
+                link: /sdk/v5/android/message_send.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_send.html
+                link: /sdk/v5/ios/message_send.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_send.html
+                link: /sdk/v5/web/message_send.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_send.html
@@ -195,13 +195,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_receive.html
+                link: /sdk/v5/android/message_receive.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_receive.html
+                link: /sdk/v5/ios/message_receive.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_receive.html
+                link: /sdk/v5/web/message_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_receive.html
@@ -225,13 +225,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_stream_receive.html
+                link: /sdk/v5/android/message_stream_receive.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_stream_receive.html
+                link: /sdk/v5/ios/message_stream_receive.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_stream_receive.html
+                link: /sdk/v5/web/message_stream_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_stream_receive.html   
@@ -243,13 +243,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_retrieve.html
+                link: /sdk/v5/android/message_retrieve.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_retrieve.html
+                link: /sdk/v5/ios/message_retrieve.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_retrieve.html
+                link: /sdk/v5/web/message_retrieve.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /document/harmonyos/message_retrieve.html
@@ -276,13 +276,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_recall.html
+                link: /sdk/v5/android/message_recall.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_recall.html
+                link: /sdk/v5/ios/message_recall.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_recall.html
+                link: /sdk/v5/web/message_recall.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_recall.html 
@@ -309,13 +309,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_modify.html
+                link: /sdk/v5/android/message_modify.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_modify.html
+                link: /sdk/v5/ios/message_modify.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_modify.html
+                link: /sdk/v5/web/message_modify.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_modify.html    
@@ -339,13 +339,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_receipt.html
+                link: /sdk/v5/android/message_receipt.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_receipt.html
+                link: /sdk/v5/ios/message_receipt.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_receipt.html
+                link: /sdk/v5/web/message_receipt.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_receipt.html   
@@ -366,10 +366,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_search_local.html
+                link: /sdk/v5/android/message_search_local.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_search_local.html
+                link: /sdk/v5/ios/message_search_local.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_search_local.html   
@@ -393,13 +393,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/reaction.html
+                link: /sdk/v5/android/reaction.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/reaction.html
+                link: /sdk/v5/ios/reaction.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/reaction.html
+                link: /sdk/v5/web/reaction.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/reaction.html 
@@ -423,13 +423,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_forward.html
+                link: /sdk/v5/android/message_forward.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_forward.html
+                link: /sdk/v5/ios/message_forward.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_send.html#send-combined-messages
+                link: /sdk/v5/web/message_send.html#send-combined-messages
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_forward.html   
@@ -450,10 +450,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_import_insert.html
+                link: /sdk/v5/android/message_import_insert.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_import_insert.html
+                link: /sdk/v5/ios/message_import_insert.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_import_insert.html   
@@ -480,10 +480,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_update.html
+                link: /sdk/v5/android/message_update.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_update.html
+                link: /sdk/v5/ios/message_update.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_update.html  
@@ -507,13 +507,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_delete.html
+                link: /sdk/v5/android/message_delete.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_delete.html
+                link: /sdk/v5/ios/message_delete.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_delete.html
+                link: /sdk/v5/web/message_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_delete.html  
@@ -540,13 +540,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_target.html
+                link: /sdk/v5/android/message_target.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_target.html
+                link: /sdk/v5/ios/message_target.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_target.html
+                link: /sdk/v5/web/message_target.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_target.html  
@@ -567,13 +567,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_extension.html
+                link: /sdk/v5/android/message_extension.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_extension.html
+                link: /sdk/v5/ios/message_extension.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_extension.html
+                link: /sdk/v5/web/message_extension.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_extension.html  
@@ -594,13 +594,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_pin.html
+                link: /sdk/v5/android/message_pin.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_pin.html
+                link: /sdk/v5/ios/message_pin.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_pin.html
+                link: /sdk/v5/web/message_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_pin.html   
@@ -621,13 +621,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/message_deliver_only_online.html
+                link: /sdk/v5/android/message_deliver_only_online.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/message_deliver_only_online.html
+                link: /sdk/v5/ios/message_deliver_only_online.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/message_deliver_only_online.html
+                link: /sdk/v5/web/message_deliver_only_online.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/message_deliver_only_online.html  
@@ -648,13 +648,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/conversation_list.html
+                link: /sdk/v5/android/conversation_list.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/conversation_list.html
+                link: /sdk/v5/ios/conversation_list.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/conversation_list.html
+                link: /sdk/v5/web/conversation_list.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_list.html  
@@ -675,10 +675,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/conversation_unread.html
+                link: /sdk/v5/android/conversation_unread.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/conversation_unread.html
+                link: /sdk/v5/ios/conversation_unread.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_unread.html  
@@ -702,19 +702,19 @@ projects:
             sdks:
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/conversation_local.html        
+                link: /sdk/v5/web/conversation_local.html        
           - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/conversation_pin.html
+                link: /sdk/v5/android/conversation_pin.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/conversation_pin.html
+                link: /sdk/v5/ios/conversation_pin.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/conversation_pin.html
+                link: /sdk/v5/web/conversation_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_pin.html    
@@ -735,13 +735,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/conversation_mark.html
+                link: /sdk/v5/android/conversation_mark.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/conversation_mark.html
+                link: /sdk/v5/ios/conversation_mark.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/conversation_mark.html
+                link: /sdk/v5/web/conversation_mark.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_mark.html   
@@ -762,13 +762,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/conversation_delete.html
+                link: /sdk/v5/android/conversation_delete.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/conversation_delete.html
+                link: /sdk/v5/ios/conversation_delete.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/conversation_delete.html
+                link: /sdk/v5/web/conversation_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/conversation_delete.html  
@@ -798,13 +798,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/group_manage.html
+                link: /sdk/v5/android/group_manage.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_manage.html
+                link: /sdk/v5/ios/group_manage.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/group_manage.html
+                link: /sdk/v5/web/group_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_manage.html  
@@ -828,13 +828,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/group_members.html
+                link: /sdk/v5/android/group_members.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_members.html
+                link: /sdk/v5/ios/group_members.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/group_members.html
+                link: /sdk/v5/web/group_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_members.html  
@@ -861,10 +861,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/group_namecard.html
+                link: /sdk/v5/android/group_namecard.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_namecard.html
+                link: /sdk/v5/ios/group_namecard.html
               - icon: /sdk/web.svg
                 text: Web
                 link: /sdk/v5/web/group_namecard.html
@@ -876,13 +876,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/group_attributes.html
+                link: /sdk/v5/android/group_attributes.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/group_attributes.html
+                link: /sdk/v5/ios/group_attributes.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/group_attributes.html
+                link: /sdk/v5/web/group_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_attributes.html  
@@ -909,13 +909,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/room_manage.html
+                link: /sdk/v5/android/room_manage.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/room_manage.html
+                link: /sdk/v5/ios/room_manage.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/room_manage.html
+                link: /sdk/v5/web/room_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_manage.html  
@@ -942,13 +942,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/room_members.html
+                link: /sdk/v5/android/room_members.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/room_members.html
+                link: /sdk/v5/ios/room_members.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/room_members.html
+                link: /sdk/v5/web/room_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_members.html    
@@ -975,13 +975,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/room_attributes.html
+                link: /sdk/v5/android/room_attributes.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/room_attributes.html
+                link: /sdk/v5/ios/room_attributes.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/room_attributes.html
+                link: /sdk/v5/web/room_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/room_attributes.html  
@@ -1008,13 +1008,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/thread.html
+                link: /sdk/v5/android/thread.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/thread.html
+                link: /sdk/v5/ios/thread.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/thread.html
+                link: /sdk/v5/web/thread.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/thread.html
@@ -1035,13 +1035,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/thread_message.html
+                link: /sdk/v5/android/thread_message.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/thread_message.html
+                link: /sdk/v5/ios/thread_message.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/thread_message.html
+                link: /sdk/v5/web/thread_message.html
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/thread_message.html
@@ -1068,13 +1068,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/userprofile.html
+                link: /sdk/v5/android/userprofile.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/userprofile.html
+                link: /sdk/v5/ios/userprofile.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/userprofile.html
+                link: /sdk/v5/web/userprofile.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userprofile.html     
@@ -1098,10 +1098,10 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/userinfo_provider.html
+                link: /sdk/v5/android/userinfo_provider.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/userinfo_provider.html 
+                link: /sdk/v5/ios/userinfo_provider.html 
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userinfo_provider.html   
@@ -1110,13 +1110,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/user_relationship.html
+                link: /sdk/v5/android/user_relationship.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/user_relationship.html
+                link: /sdk/v5/ios/user_relationship.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/user_relationship.html
+                link: /sdk/v5/web/user_relationship.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/user_relationship.html   
@@ -1140,13 +1140,13 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/presence.html
+                link: /sdk/v5/android/presence.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/presence.html
+                link: /sdk/v5/ios/presence.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/presence.html
+                link: /sdk/v5/web/presence.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/presence.html  
@@ -1173,16 +1173,16 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /document/android/push/push_overview.html
+                link: /sdk/v5/android/push/push_overview.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /document/ios/push/push_overview.html
+                link: /sdk/v5/ios/push/push_overview.html
               - icon: /sdk/web.svg
                 text: Web/小程序
-                link: /document/web/push/push_overview.html
+                link: /sdk/v5/web/push/push_overview.html
               - icon: /sdk/uniapp.svg
                 text: uni-app
-                link: /document/web/push/push_overview.html
+                link: /sdk/v5/web/push/push_overview.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html

@@ -43,7 +43,7 @@ public class Config {
     static {
         try {
             com.easemob.im.Configuration.setDefaultApiClient(ApiClient.builder()
-            // BasePath is the corresponding RESTful API domain name. In the EasyIM Console, go to the App Overview page and find the RESTful API server domain name in the Development Information section.
+            // BasePath is the corresponding RESTful API domain name. In the EasyIM Console, go to the Overview page and find the RESTful API server domain name in the Development Information section.
                     .setBasePath("BasePath")
                     .setAppKey("Appkey")
                     .setClientId("Client ID")

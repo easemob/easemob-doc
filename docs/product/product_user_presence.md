@@ -23,7 +23,7 @@ A user can set a custom state, such as busy, be right back, away, on a call, or 
 
 ## Query user presence
 
-EasyIM supports querying the presence of multiple users by calling a [REST API](/rest/presence_get.html) or [client API](/document/android/presence.html#query-the-subscribed-user-list).
+EasyIM supports querying the presence of multiple users by calling a [REST API](/rest/presence_get.html) or [client API](/sdk/v5/android/presence.html#query-the-subscribed-user-list).
 
 ## User status changes
 
@@ -67,4 +67,4 @@ In a single-device login scenario, a device that logs in later forces the previo
 
 - **Force a device offline**: During multi-device login, if the maximum number of logged-in devices is reached, a newly logged-in device forces a previously logged-in device offline. The device that is forced offline is logged out and does not receive offline push notifications.
 
-For more information about multi-device login, see the [related documentation](/document/android/multi_device.html).
+For more information about multi-device login, see the [related documentation](/sdk/v5/android/multi_device.html).

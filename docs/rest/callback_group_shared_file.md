@@ -13,7 +13,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 
 ### Trigger conditions
 
-- A [chat group shared file is uploaded on the client](/document/android/group_attributes.html#upload-a-shared-chat-group-file).
+- A [chat group shared file is uploaded on the client](/sdk/v5/android/group_attributes.html#upload-a-shared-chat-group-file).
 - A [RESTful API is called to upload a chat group shared file](/rest/group_shared_file_upload.html).
 
 ### Webhook request
@@ -61,7 +61,7 @@ After a chat group shared file is uploaded or deleted, the EasyIM server sends a
 
 ### Trigger conditions
 
-- A [chat group shared file is deleted on the client](/document/android/group_attributes.html#manage-shared-chat-group-files).
+- A [chat group shared file is deleted on the client](/sdk/v5/android/group_attributes.html#manage-shared-chat-group-files).
 - A [RESTful API is called to delete a chat group shared file](/rest/group_shared_file_delete.html).
 
 ### Webhook request

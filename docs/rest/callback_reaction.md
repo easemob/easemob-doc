@@ -11,7 +11,7 @@ After a Reaction is added to or removed from a message, the EasyIM server sends 
 
 ## Trigger conditions
 
-- A Reaction is [added](/document/android/reaction.html#add-a-reaction-to-a-message) to or [removed](/document/android/reaction.html#remove-a-reaction-from-a-message) from a message on the client.
+- A Reaction is [added](/sdk/v5/android/reaction.html#add-a-reaction-to-a-message) to or [removed](/sdk/v5/android/reaction.html#remove-a-reaction-from-a-message) from a message on the client.
 - A REST API is called to [add](/rest/reaction_add.html) a Reaction to or [remove](/rest/reaction_delete.html) a Reaction from a message.
 
 ## Webhook request

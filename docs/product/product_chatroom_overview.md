@@ -57,7 +57,7 @@ For details, see [Chat group overview](product_group_overview.html).
 
 ### Monitor chat room events
 
-You can implement chat room event listeners. When an operation occurs in a chat room, such as a new member joining or a member leaving or being added to the mute list or blocklist, the other users in the chat room receive the corresponding event. For details, see [Monitor chat room events](/document/android/room_manage.html#monitor-chat-room-events).
+You can implement chat room event listeners. When an operation occurs in a chat room, such as a new member joining or a member leaving or being added to the mute list or blocklist, the other users in the chat room receive the corresponding event. For details, see [Monitor chat room events](/sdk/v5/android/room_manage.html#monitor-chat-room-events).
 
 ## Chat room event callbacks
 

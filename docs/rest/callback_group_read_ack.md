@@ -11,7 +11,7 @@ After a group message read receipt is sent successfully, the EasyIM server sends
 
 ## Trigger conditions
 
-A user [sends a group message read receipt on the client](/document/android/message_receipt.html#one-to-one-and-group-message-read-receipts).
+A user [sends a group message read receipt on the client](/sdk/v5/android/message_receipt.html#one-to-one-and-group-message-read-receipts).
 
 ## Webhook request
 

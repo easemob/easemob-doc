@@ -48,7 +48,7 @@ Example:
 
 | Error code | Error | Description and possible cause | Solution |
 | :----- | :------------ | :--------------------------- | :--------------------------- |
-| 100    |        `EMErrorInvalidAppkey`         | The App Key is invalid because its format is incorrect. You can view the App Key on the **App Overview** page in the [EasyIM Console](https://console.easyim.ai/user/login). | Initialize the SDK with the correct App Key. |
+| 100    |        `EMErrorInvalidAppkey`         | The App Key is invalid because its format is incorrect. You can view the App Key on the **Overview** page in the [EasyIM Console](https://console.easyim.ai/user/login). | Initialize the SDK with the correct App Key. |
 | 101    |       `EMErrorInvalidUsername`        | The user ID is invalid. This error generally occurs when the user ID is empty, such as when the username parameter is an empty string while inviting a contact. | Check whether the user ID parameter passed to the API is empty. |
 | 102    |       `EMErrorInvalidPassword`        | The user password is invalid. The password provided during login is empty or incorrect. | Check whether the password parameter passed to the API is correct. |
 | 103    |          `EMErrorInvalidURL`          | The URL is invalid. | Check whether the parameters passed to the API are correct. |

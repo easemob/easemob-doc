@@ -87,7 +87,7 @@ Multi-device login allows the same account to be used on multiple devices at the
 - Free: Click **Upgrade Now** to upgrade to the professional or flagship plan.
 - Professional/flagship: Click **Free Activation** to enable the service. After enabling it, click **Settings** to specify the number of devices allowed for each platform during multi-device login. By default, up to four devices can be online simultaneously on each platform. To increase this limit, contact your business manager. You can also click **Add Custom Platform** to add a custom platform. For example, you can treat an Android phone and an Android tablet as two separate platforms.
 
-For details, see [Multi-Device Login](/document/android/multi_device.html).
+For details, see [Multi-Device Login](/sdk/v5/android/multi_device.html).
 
 ![img](/images/console/basic_user_multidevice.png)
 

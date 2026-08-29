@@ -245,7 +245,7 @@ If you have set a user nickname through the [client](#set-all-attributes-of-the-
  - When setting the user nickname through a RESTful API, use the `nickname` key in the request. Otherwise, the client cannot read the attribute correctly.
  - The `nickname` returned by the RESTful APIs for [retrieving user details](/rest/account_detail_obtain_single.html) and [deleting a user account](/rest/account_delete_single.html) is the push nickname displayed in offline push notifications, which differs from the nickname in user attributes. We recommend keeping them consistent. When changing one nickname, update the other at the same time.
 
-For iOS, call [updatePushDisplayName](/document/ios/push/push_display_attribute.html#set-push-notification-display-attributes) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
+For iOS, call [updatePushDisplayName](/sdk/v5/ios/push/push_display_attribute.html#set-push-notification-display-attributes) to update the push nickname. For the RESTful API, see [Configure Display Attributes for Offline Push Notifications](/rest/push_nickname_set_single.html).
 
 ### Why is error code 4 returned?
 

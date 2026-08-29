@@ -13,7 +13,7 @@ After a chat group or chat room member is added to or removed from the allowlist
 
 ### Trigger conditions
 
-- A [chat group member](/document/android/group_members.html#add-members-to-the-allowlist) or [chat room member](/document/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the allowlist on the client.
+- A [chat group member](/sdk/v5/android/group_members.html#add-members-to-the-allowlist) or [chat room member](/sdk/v5/android/room_members.html#add-members-to-the-chat-room-allowlist) is added to the allowlist on the client.
 - A RESTful API is called to add a [chat group member](/rest/group_allowlist_add_single.html) or [chat room member](/rest/chatroom_allowlist_add_single.html) to the allowlist.
 
 ### Webhook request
@@ -61,7 +61,7 @@ After a chat group or chat room member is added to or removed from the allowlist
 
 ### Trigger conditions
 
-1. A [chat group member](/document/android/group_members.html#remove-members-from-the-allowlist) or [chat room member](/document/android/room_members.html#remove-members-from-the-chat-room-allowlist) is removed from the allowlist on the client.
+1. A [chat group member](/sdk/v5/android/group_members.html#remove-members-from-the-allowlist) or [chat room member](/sdk/v5/android/room_members.html#remove-members-from-the-chat-room-allowlist) is removed from the allowlist on the client.
 2. A RESTful API is called to remove a [chat group member](/rest/group_allowlist_remove.html) or [chat room member](/rest/chatroom_allowlist_remove.html) from the allowlist.
 
 ### Webhook request

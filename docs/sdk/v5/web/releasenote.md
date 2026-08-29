@@ -25,7 +25,7 @@ The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 - [**Automatic user information management**](userinfo_provider.html): The SDK automatically synchronizes user information and updates it in memory, reducing the work required for developers to manually retrieve, store, and update user information.
 - [**Presence**](presence.html): Subscribe to and unsubscribe from user presence, publish custom presence states, and query the list of subscribed users.
 
-5. **[Offline push](/document/web/push/push_overview.html)**:
+5. **[Offline push](/sdk/v5/web/push/push_overview.html)**:
 
 The IM Web SDK does not natively support offline push notifications. It only supports configuring offline push notifications for mobile terminals, including:
 

@@ -8,7 +8,7 @@ EasyIM supports sending broadcast messages of all message types to all active ch
 - Broadcast messages are written to the server-side conversation list. Message roaming is not supported by default. **To enable it, contact the business manager.**
 - Broadcast messages have a broadcast ID but no message ID.
 - Broadcast messages do not trigger the [pre-delivery webhook](callback_presending.html).
-- When the client receives a message, it [uses the attribute fields in the message body](/document/android/message_receive.html#determine-whether-a-message-is-a-chat-room-broadcast-message) to identify and distinguish a chat room broadcast message.
+- When the client receives a message, it [uses the attribute fields in the message body](/sdk/v5/android/message_receive.html#determine-whether-a-message-is-a-chat-room-broadcast-message) to identify and distinguish a chat room broadcast message.
 
 ## Feature activation
 
@@ -230,7 +230,7 @@ The following is the request body for sending a text broadcast message.
 | `msg` | JSON | Yes | Information contained in the message body. |
 | `msg.type` | String | Yes | Broadcast message type:<br/> - `txt`: Text message.<br/> - `img`: Image message.<br/> - `audio`: Voice message.<br/> - `video`: Video message.<br/> - `file`: File message.<br/> - `loc`: Location message.<br/> - `cmd`: Command message.<br/> - `custom`: Custom message. |
 | `msg.msg` | String | Yes | Message content. |
-| `ext`           | JSON   | No       | Broadcast messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/document/ios/push/push_display_field.md) and [Android push fields](/document/android/push/push_display_field.html). |
+| `ext`           | JSON   | No       | Broadcast messages support extension fields for adding custom information. This parameter cannot be `null`. Push notifications also support custom extension fields. For details, see [APNs custom display](/sdk/v5/ios/push/push_display_field.md) and [Android push fields](/sdk/v5/android/push/push_display_field.html). |
 
 The request bodies for different message types differ only in the `msg` field; all other parameters are the same. Except for `type`, the parameters in `msg` have the same meanings as those in `body` for chat room messages. For details, see the parameters for each message type.
 - [Send image messages](message_chatroom.html#send-image-messages)
