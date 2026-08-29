@@ -8,9 +8,7 @@
 
 ## Configure authorized registration
 
-To use authorized registration, configure it in the EasyIM Console as follows:
-
-On the **App Management** page of the console, click **Manage** in the **Actions** column for the target app. Then select **Feature Configuration > Basic Features** > **Users**, and set **User Registration Mode** to **Authorized Registration**.
+To use authorized registration, set the user registration mode on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Call frequency limit
 

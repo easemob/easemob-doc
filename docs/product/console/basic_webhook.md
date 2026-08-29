@@ -11,7 +11,7 @@ Before or after an event occurs, the IM Server sends a notification to your App 
 
 ## Activate the Service
 
-### Webhooks
+### Webhook
 
 You can enable this service based on your current plan:
 

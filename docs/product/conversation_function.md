@@ -16,7 +16,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in server-side and local conversations by keyword.     |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
+| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |
@@ -65,7 +65,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in local conversations by keyword.     |
-| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
+| Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/basic_message_conversation.html#message-recall), up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |

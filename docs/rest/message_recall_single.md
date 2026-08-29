@@ -12,7 +12,7 @@
 
 #### Configure the recall period
 
-By default, the sender can recall a message within 2 minutes after sending it. On the **Feature Configuration** > **Basic Features** > **Messages** page of the [EasyIM Console](https://console.easyim.ai/user/login), you can set a message recall period of up to 7 days.
+By default, the sender can recall a message within 2 minutes after sending it.  You can set the message recall period, up to 7 days, on the **Chat** > **Features > Message & Conversation** page of the [EasyIM Console](https://console.easyim.ai/user/login).
 
 #### Force recall
 

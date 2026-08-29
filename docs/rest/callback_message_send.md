@@ -17,7 +17,7 @@ The following table describes the common parameters in webhook requests for mess
 
 | Parameter | Type   | Description |
 | :---------------- | :----- |:------------------------------------------------------------------|
-| `callId`    | String   | Unique identifier of the webhook request, in the format `{App Key}_{发送的消息的ID}`. |
+| `callId`    | String   | Unique identifier of the webhook request, in the format `{App Key}_{ID of the sent message}`. |
 | `eventType`       | String | Event type: `chat` for an uplink message and `chat_offline` for an offline message.                    |
 | `timestamp`       | long   | Unix timestamp when the EasyIM server receives the message, in milliseconds.                           |
 | `chat_type`       | String | Conversation type. All types are selected by default:<br/> - `chat`: One-to-one chat webhook;<br/> - `groupchat`: Group chat webhook, including message webhooks for chat groups and chat rooms;<br/> - `notify`: Notification webhook, including webhooks for message threads (Thread) and Reactions. Use `payload` and its `type` field to determine the specific type. |

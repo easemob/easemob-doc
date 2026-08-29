@@ -22,8 +22,8 @@ Push templates have the following characteristics:
 [Push templates](push_template.html) are an advanced push feature. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
 1. Log in to the [EasyIM Console](https://console.easyim.ai/user/login).
-2. Select **App Management** at the top of the page. On the app list page that appears, click the trial or production App Key.
-3. Select **Value-added Services > Message Push > Offline Push**.
+2. On the **Applications** page, click the App Key of the app of the development or production environment.
+3. Select **Push** in the left navigation pane.
 4. Click **Enable for Free**.
 
 After activation, you can [configure push templates](#configure-push-templates).

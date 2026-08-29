@@ -5,7 +5,7 @@ EasyIM offers **Free**, **Professional**, and **Flagship** plans for different s
 :::tip
 
 1. `✓` means that the feature is included and can be used after subscribing to the plan.
-2. `*` identifies an optional add-on that can be purchased separately in EasyIM Console.
+2. `*` identifies an optional add-on that can be purchased separately in [EasyIM Console](https://console.easyim.ai/user/login).
 3. `——` indicates that the current version does not support this feature and requires an upgrade to a later version.
 4. The Free plan is available only to test apps. A test app remains subject to trial restrictions even after it is upgraded to Professional or Flagship. See [Launch an App](/product/console/app_launch.html) for information about moving an app into production.
 :::

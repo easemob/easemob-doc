@@ -59,7 +59,7 @@ Request fields:
 | `payload.operation` | String   | `add`: Add a friend. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.                   |
 | `msg_id`    | String   | Message ID of the friend addition event. |
@@ -108,7 +108,7 @@ Request fields:
 | `payload.operation` | String   | `remote_accept`: Friend request acceptance event. The user who sent the friend request receives this event. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | User ID of the user who sent the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the friend request acceptance event. |
@@ -153,7 +153,7 @@ Request fields:
 | `payload.operation` | String   | `accept`: Accept a friend request. The user who accepted the request receives this event, which synchronizes the operation result in single-device and multi-device login scenarios. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | ID of the user who accepted the friend request.                     |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the friend request acceptance event. |
@@ -205,7 +205,7 @@ Request fields:
 | `payload.operation` | String   | `remote_decline`: Decline a friend request. The user who sent the request receives this event. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | ID of the user who sent the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the friend request decline event. |
@@ -249,7 +249,7 @@ Request fields:
 | `payload.operation` | String   | `decline`: Decline a friend request. The user who declined the request receives this event, which synchronizes the operation result in multi-device login scenarios. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | ID of the user who declined the friend request.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the friend request decline event. |
@@ -296,7 +296,7 @@ Request fields:
 | `payload.operation` | String   | `remove`: Delete a friend. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.        |
 | `msg_id`    | String   | Message ID of the friend deletion event. |
@@ -346,7 +346,7 @@ Request fields:
 | `payload.status.error_code`    | String   | Error code for an operation failure. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_发起方用户 ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the user block event. |
@@ -397,7 +397,7 @@ Request fields:
 | `payload.status.error_code`    | String   | Error code for an operation failure. |
 | `host`            | String   | Server name.          |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
-| `from`       | String | Initiator, in the format `App Key_sender user ID@easemob.com`.                                |
+| `from`       | String | Initiator, in the format `App Key_initiator user ID@easemob.com`.                                |
 | `to`       | String | User ID of the recipient.                                |
 | `eventType`       | String   | <br/> - `chat`: Uplink message<br/> - `chat_offline`: Offline message.       |
 | `msg_id`    | String   | Message ID of the user unblock event. |

@@ -7,7 +7,7 @@ To retrieve offline push results, contact the EasyIM business manager to activat
 You can retrieve offline push results in the following ways:
 
 - View IM message delivery queries in the [EasyIM Console](https://console.easyim.ai/user/login):
-  - In **App List**, click **Manage** in the **Actions** column for the target app to open the **App Overview** page.
+  - On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
   - Select **Instant Messaging > Real-Time Query > IM Message Delivery Query** to view push result records, as shown below:
 
 ![img](/images/server-side/message_delivery_query.png)
@@ -34,7 +34,7 @@ GET https://{host}/{org_name}/{app_name}/push/data/offline-push/begin/{startTime
 | :--------- | :----- | :------- | :------------------------- |
 | `startTime` | String |  Yes       | Start time of the data query in yyyy-MM-dd format, for example, `2024-04-01`. |
 | `endTime`   | String |  Yes       | End time of the data query in yyyy-MM-dd format, for example, `2024-04-02`. |
-| `platform` | enum |  Yes      | Platform to query:<br/> - (Default) `ALL`: Query push statistics for all push platforms.<br/> - `APNS`: APNs push.<br/> - `ANDROID`: FCM push.<br/> - `XIAOMIPUSH`: Xiaomi push.<br/> - `HUAWEIPUSH`: Huawei push.<br/> - `MEIZUPUSH`: Meizu push.<br/> - `OPPOPUSH`: OPPO push.<br/> - `VIVOPUSH`: vivo push.<br/> - `HONOR`: Honor push.|
+| `platform` | enum |  Yes      | Platform to query:<br/> - (Default) `ALL`: Query push statistics for all push platforms.<br/> - `APNS`: APNs push.<br/> - `ANDROID`: FCM push.|
 
 For details about the parameters in the request URL, see [Request URL parameters](overview.html#request-url).
 
@@ -59,47 +59,23 @@ curl -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/e
     "status": "OK",
     "data": {
         "2024-04-02": {
-            "HONOR": {
+            "APNS": {
                 "successCount": 7218,
                 "failCount": 239
             },
-            "HUAWEIPUSH": {
+            "ANDROID": {
                 "successCount": 48852,
                 "failCount": 1969
-            },
-            "OPPOPUSH": {
-                "successCount": 66226,
-                "failCount": 3774
-            },
-            "VIVOPUSH": {
-                "successCount": 42380,
-                "failCount": 2189,
-                "arriveCount": 40559
-            },
-            "XIAOMIPUSH": {
-                "successCount": 23071
             }
         },
         "2024-04-01": {
-            "HONOR": {
+            "APNS": {
                 "successCount": 8306,
                 "failCount": 1208
             },
-            "HUAWEIPUSH": {
+            "ANDROID": {
                 "successCount": 55933,
                 "failCount": 1335
-            },
-            "OPPOPUSH": {
-                "successCount": 76026,
-                "failCount": 4534
-            },
-            "VIVOPUSH": {
-                "successCount": 52091,
-                "failCount": 3042,
-                "arriveCount": 49623
-            },
-            "XIAOMIPUSH": {
-                "successCount": 26364
             }
         }
     }

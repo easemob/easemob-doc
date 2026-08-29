@@ -200,10 +200,10 @@ The following table lists the message features supported for streaming messages:
 | [Conversation unread count (client)](/document/android/conversation_unread.html)       | Yes                                |
 | Last message in a conversation | Yes                                |
 | [Offline push](/rest/push_settings_set.html)     | Yes                                |
-| [Message translation](message_translation_text.html)         | Yes                                |
 | [Pre-delivery webhook](/rest/callback_presending.html)         | No                               |
 | [Post-delivery webhook](/rest/callback_postsending.html)         | No      |
 | Synchronize a successfully sent message across the sender's clients        |   No  |
 | [Store messages in the sender's and recipient's local databases](/product/limitation.html#message-storage)         | Yes |
 
 <!-- | [Content moderation](/value-added/moderation/moderation_overview.html)     | No                                | -->
+<!-- | [Message translation](message_translation_text.html)         | Yes                                | -->

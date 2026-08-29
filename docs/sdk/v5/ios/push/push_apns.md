@@ -112,9 +112,13 @@ The CSR file `EMImDemoAPS.certSigningRequest` is created locally.
 
 Upload the APNs push certificate in [EasyIM Console](https://console.easyim.ai/user/login).
 
-1. Log in to [EasyIM Console](https://console.easyim.ai/user/login), select your app > **Feature Configuration** > **Value-Added Features** > **Push**.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
 
-2. On the **Certificate Management** page, click **Add push certificate**. In the **Add push certificate** dialog box, select the **Apple** tab and configure the APNs push parameters.
+2. On the **Applications** page, click the App Key of the app of the development or production environment.
+
+3. Select **Push** in the left navigation pane.
+
+3. On the **Certificate Management** page, click **Add push certificate**. In the **Add push certificate** dialog box, select the **Apple** tab and configure the APNs push parameters.
 
 ![img](/images/console/push_certificate_apns.png)
 
@@ -197,7 +201,7 @@ To ensure reliable test results, avoid using an emulator.
 
 2. Send a test message in [EasyIM Console](https://console.easyim.ai/user/login).
 
-  On the left navigation bar, choose **Operations Management** > **Operations** > **User Management**. On the **User Management** page, click **More** in the **Actions** column for the corresponding user ID, then select **Send rest message**. In the dialog box that appears, select the message type, enter the message content, and click **Send**.
+In the left navigation pane, select **Operation** > **IM Admin**. On the **Users** page, click **More** in the **Actions** column for the corresponding user ID, then select **Send rest message**. In the dialog box that appears, select the message type, enter the message content, and click **Send**.
 
   :::tip
   In the certificate list on the **Certificate Management** page, click **More** > **Test** in the **Actions** column for each certificate. This directly calls the third-party API to push notifications, while the message-sending test on the **User Management** page first calls the EasyIM API for sending messages. If the conditions are met, namely the user is offline, the push certificate is valid, and the device token is bound, the third-party API is then called to push notifications.

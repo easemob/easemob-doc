@@ -18,7 +18,7 @@ The Android SDK supports the following features in multi-device login scenarios:
 - Forcibly log out a specified account from all devices.
 - Retrieve friend or chat group operations performed on other devices.
 
-By default, EasyIM allows up to 4 devices on each platform to be online simultaneously during multi-device login. To increase this limit, contact the EasyIM business manager. On the **Feature Configuration > Basic Features > Users** page in EasyIM Console, set the device count for each platform in the dialog box:
+By default, EasyIM allows up to 4 devices on each platform to be online simultaneously during multi-device login. To increase this limit, contact the EasyIM business manager. On the **Chat > Features > User & Login** page in EasyIM Console, set the device count for each platform in the dialog box:
 
 ![img](/images/common/multidevice_device_count.png)
 
@@ -135,7 +135,7 @@ EasyIM supports custom login device platforms. For example, define Android phone
 
 Set the platform to which a login device belongs as follows:
 
-1. On the **Instant Messaging > Basic Features > Users** page in EasyIM Console, click **Settings** in the **Multi-Device Login** section. In the dialog box, click **Add Custom Platform**, and set **Device Platform** and **Device Count**.
+1. On the **Chat > Features > User & Login** page in EasyIM Console, click **Settings** in the **Multi-Device Login** section. In the dialog box, click **Add Custom Platform**, and set **Device Platform** and **Device Count**.
 
 The range for **Device Platform** is [1,100], and the range for **Device Count** is [0,4].
 

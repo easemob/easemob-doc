@@ -44,7 +44,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 
 | Error code | Error | Description and possible cause | Solution |
 | :--- | :--- | :--- | :--- |
-| 100 | `INVALID_APP_KEY` | The App Key is invalid because its format is incorrect. You can view the App Key on the **App Overview** page in the [EasyIM Console](https://console.easyim.ai/user/login). | Initialize the SDK with the correct App Key. |
+| 100 | `INVALID_APP_KEY` | The App Key is invalid because its format is incorrect. You can view the App Key on the **Overview** page in the [EasyIM Console](https://console.easyim.ai/user/login). | Initialize the SDK with the correct App Key. |
 | 101 | `INVALID_USER_NAME` | The user ID is invalid. This error generally occurs when the user ID is empty, such as when the username parameter is an empty string while inviting a contact. | Check whether the user ID parameter passed to the API is empty. |
 | 102 | `INVALID_PASSWORD` | The user password is invalid. The password provided during login is empty or incorrect. | Check whether the password parameter passed to the API is correct. |
 | 103 | `INVALID_URL` | The URL is invalid. | Check whether the parameters passed to the API are correct. |

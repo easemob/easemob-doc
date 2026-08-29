@@ -79,24 +79,7 @@ notifications.<br/> Set this field to `call` to specify that the current message
 | ------------------------- | ------- | ------------------------------------------------------------ |
 | `fcm_options`               | Object  | FCM SDK feature options.                                           |
 | `fcm_channel_id`            | String  | FCM push channel, with the highest priority.                                 |
-| `honor_click_action`        | String  | Honor click action. This setting takes precedence over the **Action** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Honor**. |
-| `honor_importance`          | String  | Honor push priority:<br/> - `LOW`: Low priority.<br/> - (Default) `NORMAL`: Normal priority. |
-| `honor_target_user_type`  | Integer | Push user type:<br/> - `0`: Regular <br/> - `1`: Test             |
-| `huawei_target_user_type` | Integer | Push user type:<br/> - `0`: Regular <br/> - `1`: Test              |
-| `huawei_category`   | String  | After completing the [application for self-classification rights](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#section893184112272), use this field to identify the message type, determine the [message alert method](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-classification-0000001149358835#ZH-CN_TOPIC_0000001149358835__p3850133955718), and accelerate the delivery of specific types of messages. For available values, see [the description of the category field in Huawei's official documentation](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-References/https-send-api-0000001050986197#section13271045101216). This setting takes precedence over the **Category** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Huawei**. |
-| `huawei_receipt_id`       | String  | Huawei receipt address ID.                           |
-| `huawei_click_action`       | String  | Huawei click action. This setting takes precedence over the **Action** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Huawei**. |
-| `huawei_channel_id`         | String  | Huawei push channel, with the highest priority.                                 |
-| `meizu_click_activity`      | String  | Meizu click activity. This setting takes precedence over the **Activity** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Meizu**. |
-| `meizu_notice_type`      | Int  | Channel type:<br/> - `0`: Public channel<br/> - `1`: Private channel |
-| `oppo_channel_id`           | String  | OPPO push channel, with the highest priority. This setting takes precedence over the **Activity** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **OPPO**. |
-| `oppo_click_activity`       | String  | OPPO click activity. This setting takes precedence over the **Activity** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **OPPO**. |
-| `oppo_category`       | String  | Channel category name. This setting takes precedence over the **Category** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **OPPO**. |
-| `oppo_notify_level`       | String  | Notification bar alert level. This setting takes precedence over the **NotifyLevel** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **OPPO**.<br/> - `1`: Notification bar<br/> - `2`: Notification bar + lock screen<br/> - `16`: Notification bar + lock screen + banner + vibration + alert sound<br/>When using the `notify_level` parameter, the `oppo_category` parameter is required.|
-| `vivo_category`             | String  | vivo secondary category configuration. This setting takes precedence over the **Category** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **VIVO**. |
-| `vivo_click_activity`       | String  | vivo click activity. This setting takes precedence over the **Activity** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **VIVO**. |
-| `xiaomi_channel_id` | String  | Xiaomi channel ID. This setting takes precedence over the **Channel ID** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Xiaomi**. |
-| `xiaomi_click_action`       | String  | Xiaomi click action. This setting takes precedence over the **Action** parameter configured in the EasyIM Console under **EasyIM** > **Feature Configuration** > **Message Push** > **Certificate Management** > **Add Push Certificate** > **Xiaomi**. |
+
 
 `em_harmony_push_ext` has the following structure:
 
@@ -165,23 +148,6 @@ The message extension fields for offline push are as follows:
                 "key": "value"
             },
             "fcm_channel_id": "",
-            "honor_click_action": "",
-            "honor_importance": "",
-            "honor_target_user_type": 0,
-            "huawei_target_user_type": 0,
-            "huawei_category": "",
-            "huawei_receipt_id": "",
-            "huawei_click_action": "",
-            "huawei_channel_id": "",
-            "meizu_click_activity": "",
-            "meizu_notice_type": 1,
-            "xiaomi_channel_id": "",
-            "oppo_channel_id": "",
-            "oppo_click_activity": "",
-            "vivo_category": "",
-            "vivo_click_activity": "",
-            "xiaomi_channel_id": "",
-            "xiaomi_click_action": "",
         },
         "em_harmony_push_ext": {
           "click_action": "com.a.b.shot",

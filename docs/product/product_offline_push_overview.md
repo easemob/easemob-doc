@@ -12,11 +12,11 @@ EasyIM does not send offline push notifications in the following two situations:
 
 | Platform                | Supported push service            | Reference   |
 | -------------- | ---------------- | ------ |
-|  Android            | Google FCM   | For push service integration and push settings, see the [Android push documentation](/document/android/push/push_overview.html).                                    |
-|  iOS            | APNs         | For APNs push service integration and push settings, see the [APNs push documentation](/document/ios/push/push_overview.html).                                  |
+|  Android            | Google FCM   | For push service integration and push settings, see the [Android push documentation](/sdk/v5/android/push/push_overview.html).                                    |
+|  iOS            | APNs         | For APNs push service integration and push settings, see the [APNs push documentation](/sdk/v5/ios/push/push_overview.html).                                  |
 
 :::tip
-The EasyIM Web SDK does not support offline push itself. It supports only configuring offline push for mobile clients. For details, see the [Web offline push documentation](/document/web/push/push_overview.html).
+The EasyIM Web SDK does not support offline push itself. It supports only configuring offline push for mobile clients. For details, see the [Web offline push documentation](/sdk/v5/web/push/push_overview.html).
 :::
 
 ## Push token
@@ -29,9 +29,9 @@ If you do not unbind the device token when logging out of EasyIM, the user conti
 
 ## Upload a push certificate
 
-After creating an app in the third-party push service console, download the push certificate and obtain the related information. Upload the push certificate to the EasyIM Console and configure its information.
+After creating an app in the third-party push service console, download the push certificate and obtain the related information. Upload the push certificate to the [EasyIM Console](https://console.easyim.ai/user/login) and configure its information.
 
-For example, for FCM push certificate configuration, see the [FCM push integration documentation](/document/android/push/push_fcm.html#step-3-upload-the-push-certificate). 
+For example, for FCM push certificate configuration, see the [FCM push integration documentation](/sdk/v5/android/push/push_fcm.html#step-3-upload-the-push-certificate). 
 
 ## Multi-device offline push policy
 
@@ -51,30 +51,30 @@ The following push notification modes are available:
 
 The push notification mode takes effect at the app or one-to-one/group chat conversation level. Conversation-level settings take precedence over app-level settings. A conversation without a configured push notification mode uses the app setting by default.
 
-For information about configuring the push notification mode, see the documentation for the relevant platform. For example, for Android, see [Push notification mode](/document/android/push/push_notification_mode_dnd.html#push-notification-mode).
+For information about configuring the push notification mode, see the documentation for the relevant platform. For example, for Android, see [Push notification mode](/sdk/v5/android/push/push_notification_mode_dnd.html#push-notification-mode).
 
 ## Do Not Disturb mode
 
-Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM does not send offline push notifications during either period, so you can disable push by configuring Do Not Disturb mode. To push a message to a specified user while a Do Not Disturb period or duration is in effect, configure [forced push](/document/android/push/push_extension.html#force-push).
+Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM does not send offline push notifications during either period, so you can disable push by configuring Do Not Disturb mode. To push a message to a specified user while a Do Not Disturb period or duration is in effect, configure [forced push](/sdk/v5/android/push/push_extension.html#force-push).
 
 The Do Not Disturb period applies only at the app level, while the Do Not Disturb duration applies to the app and one-to-one and group chat conversations. If you configure both a Do Not Disturb period and a Do Not Disturb duration, the total time during which Do Not Disturb mode is in effect is the sum of the two periods.
 
-For information about configuring the Do Not Disturb period and duration, see the documentation for the relevant platform. For example, for Android, see [Do Not Disturb mode](/document/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
+For information about configuring the Do Not Disturb period and duration, see the documentation for the relevant platform. For example, for Android, see [Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
 
 Relationship between Do Not Disturb mode and push notification mode
 
-For the app and all conversations in it, Do Not Disturb settings take precedence over push notification mode settings. For details about their relationship, see the documentation for the relevant platform. For example, for Android, see [Relationship between push notification mode and Do Not Disturb mode](/document/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
+For the app and all conversations in it, Do Not Disturb settings take precedence over push notification mode settings. For details about their relationship, see the documentation for the relevant platform. For example, for Android, see [Relationship between push notification mode and Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
 
 ## Use push templates
 
-Configuring push templates is an advanced push feature. Before using it, activate advanced push features under **Feature Configuration** > **Basic Features** > **Messages** > **Configure Offline Push Templates** in the [EasyIM Console](https://console.easyim.ai/user/login).
+Configuring push templates is an advanced push feature. Before using it, [activate advanced push features](/sdk/v5/android/push/push_overview.html#advanced-push-features) in the [EasyIM Console](https://console.easyim.ai/user/login).
 
-Push templates are primarily used when the server's default configuration does not meet your requirements. They allow you to set global push notification titles and content. For example, the server provides default push titles and content in Chinese and English. If you need Korean or Japanese push titles and content, you can configure templates for those languages. Push templates include the `default` push template and custom push templates. For chat group messages, you can use targeted templates to send some users offline notifications that differ from those sent to other users.
+Push templates are primarily used when the server's default configuration does not meet your requirements. They allow you to set global push notification titles and content. For example, the server provides default push titles and content in Chinese and English. If you need Korean or Japanese push titles and content, you can configure templates for those languages. Push templates include the `default` and `detail` push templates and custom push templates. For chat group messages, you can use targeted templates to send some users offline notifications that differ from those sent to other users.
 
 You can configure push templates in the following ways:
 
 - [Call a REST API](/rest/push_template_overview.html).
-- Configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure push templates](/document/android/push/push_template.html).
+- Configure push templates in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Configure push templates](/sdk/v5/android/push/push_template.html).
 
 Push templates provide the following benefits:
 
@@ -84,17 +84,17 @@ Push templates provide the following benefits:
    - A custom push template has a higher priority than the default push template.
    - If the sender specifies a push template when sending a message, the notification is displayed using the sender's template even if the recipient has also configured a push template.
 
-For details about push templates, see [How to use push templates](/document/android/push/push_template.html) in the documentation for each platform.
+For details about push templates, see [How to use push templates](/sdk/v5/android/push/push_template.html) in the documentation for each platform.
 
 ## Enable a third-party offline push service
 
-Enable the corresponding offline push service when initializing the EasyIM SDK. For example, for FCM push, see the [FCM push integration documentation](/document/android/push/push_fcm.html#step-4-integrate-fcm-push).
+Enable the corresponding offline push service when initializing the EasyIM SDK. For example, for FCM push, see the [FCM push integration documentation](/sdk/v5/android/push/push_fcm.html#step-4-integrate-fcm-push).
 
 ## Set push notification display content
 
 You can set push notification titles and content in multiple ways, including calling an API, using a push template, and using message extension fields when sending a message.
 
-For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set push notification display attributes](/document/android/push/push_display_attribute.html#set-push-notification-display-attributes).
+For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set push notification display attributes](/sdk/v5/android/push/push_display_attribute.html#set-push-notification-display-attributes).
 
 <!--
 ## Push translation
@@ -103,7 +103,7 @@ Push notifications work with the [translation feature](/value-added/translation/
 
 As a recipient, you can set a preferred language for push notifications received while you are offline. If the language of the translated message matches your setting, the translated message is displayed in the push notification. Otherwise, the original message is displayed. The translation feature is provided by the Microsoft Azure Translation API. Click [here](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) to view the supported languages.
 
-For information about setting and retrieving the preferred language for push notifications, see the documentation for the relevant platform. For example, for Android, see [Configure push translation](/document/android/push/push_translation.html).
+For information about setting and retrieving the preferred language for push notifications, see the documentation for the relevant platform. For example, for Android, see [Configure push translation](/sdk/v5/android/push/push_translation.html).
 
 -->
 
@@ -111,7 +111,7 @@ For information about setting and retrieving the preferred language for push not
 
 You can use extension fields to customize push settings, including sending push notifications only to specified chat group members, collapsing notifications in the notification bar, forcing push, and sending silent messages.
 
-For information about configuring push extension fields, see the documentation for the relevant platform. For example, for Android, see [Configure push extensions](/document/android/push/push_extension.html).
+For information about configuring push extension fields, see the documentation for the relevant platform. For example, for Android, see [Configure push extensions](/sdk/v5/android/push/push_extension.html).
 
 
 

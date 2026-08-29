@@ -46,7 +46,7 @@ The following example shows a one-to-one message read receipt being sent.
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack`: Read receipt.                                        |
 | `callId`    | String   | The `callId` field is the unique identifier of each webhook request, in the format “App Key_message ID of the receipt message”. |
-| `channel_channel` | String   | Read receipt for a one-to-one message, in the format `App Key_接收已读回执用户 ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
+| `channel_channel` | String   | Read receipt for a one-to-one message, in the format `App Key_user ID that receives the read receipt@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
 | `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
 | `payload`   | object   | Contains:<br/> - `ext`: Message extension field<br/> - `ack_message_id`: Message ID<br/> - `bodies`: Message body content. |
 | `host`      | String   | Server name.                                                 |

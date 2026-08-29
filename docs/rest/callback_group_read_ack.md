@@ -50,8 +50,8 @@ The following example shows a request generated when a group message read receip
 
 | Field        | Type | Description                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_回执消息的消息 ID`. |
-| `channel_channel` | String   | Read receipt for a group message, in the format `App Key_群组 ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
+| `callId`    | String   | The `callId` field is the unique identifier of each webhook request, in the format `App Key_message ID of the receipt message`. |
+| `channel_channel` | String   | Read receipt for a group message, in the format `App Key_group ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
 | `eventType`       | String | `chat`: An uplink message.                      |
 | `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
 | `payload`   | object   | Contains:<br/> - `ext`: Message extension field<br/> - `ack_message_id`: Message ID<br/> - `msg_config.allow_group_ack`: Whether a group message read receipt is required <br/> - `type`: `read_ack` indicates a message read receipt.|

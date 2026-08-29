@@ -58,8 +58,8 @@ One-to-one message communication can occur between friends or non-friends. For e
 
 By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, enable friend relationship check as follows:
 
-1. In the left navigation pane of the EasyIM Console, select **EasyIM > Basic Features** > **Users**.
-2. Click the enable button for **Friend Relationship Check**.
+1. In the left navigation pane of the EasyIM Console, select **Chat** > **Features** >**User & Login**.
+2. Enable **Friend Relationship Check**.
    After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If a user sends a one-to-one message to a non-friend, the SDK reports error code 221.
 
 ## Blocklist

@@ -107,7 +107,7 @@ options.customDeviceName = @"Alice's iPad";
 
 Use `EMOptions#customOSType` to set a custom platform for the current device. For example, set phones and tablets as separate platforms so that users can precisely control the number of login devices on the same platform and device kicking behavior between platforms.
 
-1. On the **EasyIM** > **Basic Features** > **Users** page in the EasyIM Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**, and then set **Device Platform** and **Device Count** in the **Add Custom Platform** dialog box.
+1. On the **Chat** > **Features** >**User & Login** page in the EasyIM Console, click **Settings** in the **Multi-device Login** area. In the dialog box that appears, click **Add Custom Platform**, and then set **Device Platform** and **Device Count** in the **Add Custom Platform** dialog box.
 
 The value range of **Device Platform** is [1,100], and the value range of **Device Count** is [0,4].
 

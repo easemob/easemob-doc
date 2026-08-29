@@ -49,11 +49,11 @@ When sending **one text streaming message**, you must comply with the following 
 
 ### Message recall
 
-By default, a sender can recall a message within 2 minutes after sending it. You can set the message recall period, up to 7 days, on the **Feature Configuration** > **Basic Features** > **Messages** page of the [EasyIM Console](https://console.easyim.ai/user/login).
+By default, a sender can recall a message within 2 minutes after sending it. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days.
 
 :::tip
 All message types except command messages can be recalled.
-:::
+::: 
 
 ### Message receipts
 
@@ -64,7 +64,7 @@ The following table lists the limitations of read receipts for chat group messag
 
 | Limitation| Default | Description | 
 | :--------- | :----- | :------- | 
-| Feature activation   | Disabled   | To use this feature, on the **Feature Configuration** > **Basic Features** > **Messages** tab of the [EasyIM Console](https://console.easyim.ai/user/login), find **Message Read Receipt (Group Chat)** and activate the feature. For pricing, see [Billing policy](/product/pricing_policy.html#add-on-service-fees).   |
+| Feature activation   | Disabled   | To use this feature, on the **Chat** > **Features** > **1-on-1/Group Chat** tab of the [EasyIM Console](https://console.easyim.ai/user/login), activate **Group Message Read Receipt**. For pricing, see [Billing policy](/product/pricing_policy.html#add-on-service-fees).   |
 | Permission  | All chat group members    | By default, all chat group members can request a read receipt when sending a message. To allow only the chat group owner and admins to request read receipts, contact the EasyIM business manager.   | 
 | Read receipt validity period    | 3 days    | A group chat read receipt is valid for 3 days. If a message was sent more than 3 days ago, the server does not record which chat group members read the message or send read receipts.   | 
 | Chat group size    |  200 members   | This feature supports chat groups with up to 200 members. If a chat group has more than 200 members, messages sent by members do not return read receipts. This limit cannot currently be increased. | 

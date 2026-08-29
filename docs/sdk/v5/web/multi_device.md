@@ -13,7 +13,7 @@ Multi-device login supports the following features:
 - Query the login identifiers of the current account on other devices;
 - Customize the device identifier, platform, and device name through initialization parameters.
 
-With multi-device login, EasyIM supports up to 4 devices online simultaneously on each platform by default. To increase the supported number of devices, contact the EasyIM business manager. On the **EasyIM > Basic Features > Users** page in the EasyIM Console, you can set the number of devices for each platform in the dialog box that appears:
+With multi-device login, EasyIM supports up to 4 devices online simultaneously on each platform by default. To increase the supported number of devices, contact the EasyIM business manager. On the **Chat** > **Features** >**User & Login** page in the EasyIM Console, you can set the number of devices for each platform in the dialog box that appears:
 
 ![img](/images/common/multidevice_device_count.png)
 
@@ -54,7 +54,7 @@ The SDK allows you to customize the platform of a login device. For example, you
 
 Set the platform of a login device as follows:
 
-1. On the **EasyIM > Basic Features > Users** page in the EasyIM Console, click **Settings** in the **Multi-Device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Number of Devices**.
+1. On the **Chat** > **Features** >**User & Login** page in the EasyIM Console, click **Settings** in the **Multi-device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Number of Devices**.
 
 The value range of **Device Platform** is [1,100], and that of **Number of Devices** is [0,4].
 

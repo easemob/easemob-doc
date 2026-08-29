@@ -1,4 +1,4 @@
-# Key EasyIM Features
+# Key Features
 
 EasyIM supports message management, user management, offline push, and content moderation.
 
@@ -10,20 +10,20 @@ EasyIM supports Android, iOS, Web, and other platforms, with interoperability ac
 SDK V5.0.0 currently fully supports Android, iOS, Web, and Mini Program. More platform versions will be officially released soon. Stay tuned for updates.
 :::
 
-| Platform     | Version supported by the SDK      | Demo | Source code | One-to-one and group chat UIKit | Chat room UIKit |
+| Platform     | Version supported by the SDK      | Source code | One-to-one and group chat UIKit | Chat room UIKit |
 | ------------ | ------- | ------- | ------- | ------- | ------- |
-| Android      | Android 5.0 or later (API level 21 or later)   | Supported | - | Supported | Supported |
-| iOS          | iOS 10.0 or later     | Supported | - | Supported | Supported |
-| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | Supported | - | Supported | Supported |
-| Mini Program        | Supported   | Supported | - | - | - |
-| uni-app        | Supported  | - | - | Supported | - |
-| HarmonyOS        | HarmonyOS NEXT (API level 12 or later)   | Supported | - | Supported | - |
-| Flutter      | Flutter 2.10   | Supported | - | Supported | Supported |
-| React Native | React Native 0.63.4 or later  | Supported | - | Supported | Supported |
-| Unity        | Unity 2017 or later | Supported | - | - | - |
-| Windows      | Windows 10 or later | Supported | - | - | - |
-| Electron      | Supported | -  | - | - | - |
-| Linux      | Supported | - | - | - | - |
+| Android      | Android 5.0 or later (API level 21 or later)   |  - | Supported | Supported |
+| iOS          | iOS 10.0 or later     | - | Supported | Supported |
+| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | - | Supported | Supported |
+| Mini Program        | Supported   | - | - | - |
+| uni-app        | Supported  |  - | Supported | - |
+| HarmonyOS        | HarmonyOS NEXT (API level 12 or later)   | - | Supported | - |
+| Flutter      | Flutter 2.10   | - | Supported | Supported |
+| React Native | React Native 0.63.4 or later  | - | Supported | Supported |
+| Unity        | Unity 2017 or later | - | - | - |
+| Windows      | Windows 10 or later |  - | - | - |
+| Electron      | Supported |  - | - | - |
+| Linux      | Supported | - | - | - |
 
 ## Account features
 
@@ -44,10 +44,8 @@ You can perform the following user account operations by calling RESTful APIs:
 
 | Feature               | Description  |
 | :----------------- | :---------------------- |
-| Single-platform login | Only 1 of the following platforms can be online: Android, iPhone, iPad, HarmonyOS, Windows, Mac, or Web. |
-| Multi-platform login | Up to 4 devices can be online simultaneously on each platform by default. |
-
-Before using multi-device login, find **Multiple Platforms and Devices** on the **Feature Configuration** > **Basic Features** > **Users** page of the [EasyIM Console](https://console.easyim.ai/user/login) and enable it. Then click **Settings** and configure the number of devices for each platform in the dialog box.
+| Single-device login | Only 1 of the following platforms can be online: Android, iPhone, iPad, HarmonyOS, Windows, Mac, or Web. |
+| Multi-device login | Up to 4 devices can be online simultaneously on each platform by default. Before using multi-device login, you can enable it on the EasyIM Console and specify the number of devices allowed for each platform. For details, see the [EasyIM Console document](/product/console/basic_user.html#multi-device-login.html). |
 
 ## Message types
 
@@ -80,7 +78,7 @@ Before using multi-device login, find **Multiple Platforms and Devices** on the 
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
 | Message search  | Search for all message types in server-side and local conversations by keyword.     |
-| Message recall       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
+| Message recall       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
 | Edit messages  | Edit successfully sent messages.    |
 | Reactions  | Add or delete Reactions on messages.   |
@@ -184,7 +182,10 @@ You can configure and manage your app in the [EasyIM Console](https://console.ea
 | Chat room management  | Create and delete chat rooms and view chat room members, admins, the mute list, the blocklist, and other information                   | 
 | Statistics | View statistics about users, chat groups, and chat rooms and message volume statistics                   | 
 | Real-time queries | View the number of active users, chat groups, and chat rooms in real time, request quality, trending data, EasyIM message delivery queries, and more                   | 
-| Content moderation | Configure message moderation rules, view moderation records, perform keyword-based moderation, and more                  | 
+
+<!--
+| Content moderation | Configure message moderation rules, view moderation records, perform keyword-based moderation, and more                  |   
+-->
 
 ## Statistics
 
@@ -268,6 +269,8 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 
 -->
 
+<!--
 ## On-premises deployment
 
 The EasyIM on-premises service is a privately deployable solution based on core instant messaging technologies. It supports deployment in intranet physical server clusters, public clouds, private clouds, and other environments, providing a full-featured, secure, reliable, and scalable instant messaging platform. For details, see the [on-premises service documentation](https://docs-im-privatization-v3.easemob.com).
+-->

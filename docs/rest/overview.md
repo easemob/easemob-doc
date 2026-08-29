@@ -40,7 +40,7 @@ Each request URL contains the `host`, `org_name`, and `app_name` parameters.
 | `org_name` | String | Yes       | Unique identifier assigned by EasyIM to each company (organization). |
 | `app_name` | String | Yes       | App name entered when you created the app in the EasyIM Console.|
 
-You can view the app's domain `host`, organization name `org_name`, and app name `app_name` on the **App Overview** page of the EasyIM Console.
+You can view the app's domain `host`, organization name `org_name`, and app name `app_name` in the **Application Basic Information** section on the **Overview** page of the EasyIM Console.
 
 ![img](/images/server-side/app_info.png)
 

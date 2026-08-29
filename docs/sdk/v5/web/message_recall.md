@@ -17,7 +17,7 @@ You can recall a successfully sent message in a one-to-one chat, group chat, or 
 **Time limit**
 
 - By default, senders can recall messages within 2 minutes after sending them.
-- You can adjust the message recall period, up to 7 days, on the **EasyIM > Basic Features > Messages** page in the [EasyIM Console](https://console.easyim.ai/user/login).
+- You can adjust the message recall period, up to 7 days, on the **Chat** > **Features > Message & Conversation** page of the [EasyIM Console](https://console.easyim.ai/user/login).
 
 **Recall results**
 

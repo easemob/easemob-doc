@@ -344,8 +344,8 @@ The message extension fields for offline push are as follows:
         "em_ignore_notification": false,
         "em_force_notification": true,
         "em_apns_ext": {
-            "em_push_title": "您有一条新消息",
-            "em_push_content": "您有一条新消息",
+            "em_push_title": "You've got a new message",
+            "em_push_content": "You've got a new message",
             "em_push_category": "",
             "em_push_mutable_content": true,
             "em_push_sound": "appsound.mp3",

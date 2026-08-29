@@ -65,6 +65,6 @@ EasyIM provides the following RESTful APIs through the REST platform. Your busin
 
 Some features are available only through RESTful APIs, such as banning and unbanning accounts, globally muting users, and sending app or chat room global broadcast messages.
 
-### Message callbacks
+### Webhooks
 
 EasyIM provides [message webhooks](/rest/callback_overview.html). Before or after an event occurs, the EasyIM server sends an HTTP POST request to your app server, allowing your app backend to intervene in the event processing logic or perform necessary data synchronization.

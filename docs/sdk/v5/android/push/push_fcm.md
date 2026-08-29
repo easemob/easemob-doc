@@ -44,9 +44,9 @@ Download the certificate file, for example, `myapplication-72d8c-firebase-admins
 
 ### Step 3: Upload the push certificate
 
-1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). On the **App Management** page, click the App Key of the test or production app.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). On the **Applications** page, click the App Key of the app of the development or production environment.
 
-2. Select **Value-Added Features** > **Message Push**.
+2. Select **Push** in the left navigation pane.
 
 3. On the **Certificate Management** page, click **Add push certificate**. After the **Add push certificate** dialog box opens, the **Google** tab is displayed by default. You can configure the Google FCM push certificate on this page.
 
@@ -66,21 +66,6 @@ Download the certificate file, for example, `myapplication-72d8c-firebase-admins
 - Get the V1 certificate name
 
 ![image](/images/android/push/fcm_v1.png)
-
-- Get the legacy certificate name and push key
-
-![image](/images/android/push/fcm_old_version.png)
-
-#### **Seamlessly switch from a legacy certificate to a V1 certificate**
-
-The legacy HTTP or XMPP API was discontinued on June 20, 2024. Migrate to the latest FCM API (HTTP v1) certificate as soon as possible. For details, see the [FCM console](https://console.firebase.google.com). Make sure that the V1 certificate is available, because after the certificate conversion is performed, the legacy certificate is deleted. If the V1 certificate is unavailable, push failures occur.
-
-You can follow these steps to seamlessly switch from a legacy certificate to a new V1 certificate:
-
-1. On the **Certificate Management** page, click **Edit** in the **Actions** column of the legacy certificate.
-2. In the **Google** tab of the **Edit push certificate** window, switch **Certificate type** to **V1**.
-3. Click **Upload certificate** to upload the locally saved V1 certificate file (.json).
-4. Click **Save** to complete the switch.
 
 ### Step 4: Integrate FCM push
 

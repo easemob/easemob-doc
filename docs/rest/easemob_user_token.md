@@ -64,7 +64,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 | `grant_type` | String | Yes       | Authorization method. Set it to `inherit` to obtain a user token by user ID. You must set the `username` parameter.  |
 | `username`   | String | Yes       | User ID.                |
 | `autoCreateUser`   | Boolean | Yes       | Whether to automatically create the user if the user does not exist.|
-| `ttl`        | Long   | No       | User token validity period, in seconds. Set it to `0` so the token never expires. If this parameter is not passed, the default validity period is 60 days. You can also set it on the **User Management** page of the [EasyIM Console](https://console.easyim.ai/user/login/). The most recent setting takes precedence. |
+| `ttl`        | Long   | No       | User token validity period, in seconds. Set it to `0` so the token never expires. If this parameter is not passed, the default validity period is 60 days. You can also set it on the **Users** page of the [EasyIM Console](https://console.easyim.ai/user/login/). The most recent setting takes precedence. |
 
 ### Response example
 
@@ -133,19 +133,19 @@ Generate a dynamic user token as follows:
 2. Generate a user token based on `AppKey`, `ClientSecret`, and `userId`, which is the `username` passed when registering the user, as shown in the following example.
 
 ```
-a. 获取当前时间戳，单位为秒。
+a. Get the current timestamp in seconds.
     CurTime = 1686207557
-b. 设置过期时间，单位为秒。
+b. Set the expiration time in seconds.
     ttl = 600
-c. 生成 signature，将 clientId、appkey、userId、curTime、ttl、clientSecret 六个字段拼成一个字符串，进行 sha256 编码并将编码内容得到的字节转换为十六进制字符串。
+c. Generate the signature. Concatenate the six fields clientId, appkey, userId, curTime, ttl, and clientSecret into a string, perform SHA256 encoding, and convert the resulting bytes to a hexadecimal string.
     str = clientId + appkey + userId + curTime + ttl + clientSecret
     sha256hash = sha256.Sum256([]byte(str))
     signature = fmt.Sprintf("%x", shaBytes)
-d. 组装为 json。
+d. Assemble into JSON.
      json = {"signature": "xx", "appkey":"xx#xx", "userId":"xx", "curTime":1686207557, "ttl": 600}
-e. 将 token 类型 "dt-" 放到 json 转成的字符串前，生成最终的字符串。
+e. Prepend the token type "dt-" to the JSON string to generate the final string.
     str = "dt-" + jsonStr
-f. 进行 base64 编码，生成最终的 token。
+f. Encode with Base64 to generate the final token.
     token = base64.urlEncode.encode(str)
 ```
 

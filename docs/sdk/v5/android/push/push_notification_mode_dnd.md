@@ -6,9 +6,9 @@ To optimize the user experience when users handle a large number of push notific
 
 [Push notification mode](push_notification_mode_dnd.html#push-notification-mode) and [Do Not Disturb mode](push_notification_mode_dnd.html#do-not-disturb-mode) are advanced push features. Before using them, you need to enable them for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
 
-1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
-2. Select **App Management** at the top of the page. On the app list page that appears, click the App Key of your test or production app.
-3. Select **Value-Added Services > Message Push > Offline Push**.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
+2. On the **Applications** page, click the App Key of the app of the development or production environment.
+3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
 4. Click **Enable for free**.
 
 ![image](/images/android/push/push_advanced_feature_enable.png)

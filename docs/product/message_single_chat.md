@@ -28,11 +28,11 @@
 
 | One-to-one message sending control      | Description   |
 | :--------- | :----- |
-| Send messages between non-friends | Any two users in an app can send one-to-one messages to each other. In this scenario, **Friend Relationship Check** is disabled on the **EasyIM > Basic Features** > **Users** page of the EasyIM Console. |
+| Send messages between non-friends | Any two users in an app can send one-to-one messages to each other. In this scenario, **Friend Relationship Check** is disabled on the **Chat** > **Features** >**User & Login** page of the EasyIM Console. |
 | App admin sends one-to-one messages  | An app admin sends messages to any user in the app as another user. |
-| Send messages only to friends  | Users can send messages only to friends. In this scenario, **Friend Relationship Check** is enabled on the **EasyIM > Basic Features** > **Users** page of the EasyIM Console. |
+| Send messages only to friends  | Users can send messages only to friends. In this scenario, **Friend Relationship Check** is enabled on the **Chat** > **Features** >**User & Login** page of the EasyIM Console. |
 | Reject messages from a user | You can reject messages from a user in the following ways:<br/> - **Add the user to the blocklist** to reject messages from the user.<br/> - **Remove the user from the friend list.** This method applies when an app allows messages only between friends. If the app allows messages between non-friends, user A can still send a message to user B after user A is removed from user B's friend list.<br/> - **Global mute (RESTful API)**: Globally mute a specified user in one-to-one chats so that the user cannot send one-to-one messages to any user in the app.|
-|Allow or intercept messages|- **Pre-delivery callback**: Before sending a message, the EasyIM server sends a request to your app server. You can configure rules based on your business requirements to determine whether to deliver or intercept the message.<br/> - **Content moderation**: Process messages based on content moderation results, including intercepting messages, replacing sensitive information, and allowing messages. This service applies only to text, image, audio, and video messages. |
+|Allow or intercept messages|- **Pre-delivery webhook**: Before sending a message, the EasyIM server sends a request to your app server. You can configure rules based on your business requirements to determine whether to deliver or intercept the message.<br/> - **Content moderation**: Process messages based on content moderation results, including intercepting messages, replacing sensitive information, and allowing messages. This service applies only to text, image, audio, and video messages. |
 
 ## One-to-one message sending frequency limits
 
