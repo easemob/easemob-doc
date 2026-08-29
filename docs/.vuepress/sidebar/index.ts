@@ -12,6 +12,7 @@ export const zhSidebar = sidebar({
     { text: "Web", link: "/sdk/v5/web/" },
   ],
   "/product/": [
+    { text: "Product Dynamics", link: "product_dynamics.html" },
     { text: "Product Introduction", link: "introduction.html" },
     {
       text: "Purchase Guide",

@@ -1,6 +1,6 @@
 # v5.0.0 2026-8-28
 
-The Instant Messaging (IM) SDK v5.0.0 provides the following features:
+The EasyIM SDK v5.0.0 provides the following features:
 
 1. **[Message sending](message_send.html) and [receiving](message_receive.html)**.
 
