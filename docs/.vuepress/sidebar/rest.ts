@@ -38,49 +38,306 @@ export const REST_SIDEBAR = [
     ]
   },
   {
-    "text": "Message Management",
+    "text": "User",
     "collapsible": true,
     "children": [
       {
-        "text": "Send One-to-One Messages",
-        "link": "/rest/message_single.html"
-      },
-      {
-        "text": "Send Group Messages",
-        "link": "/rest/message_group.html"
-      },
-      {
-        "text": "Send Chat Room Messages",
-        "link": "/rest/message_chatroom.html"
-      },
-      {
-        "text": "Send Streaming Messages",
+        "text": "Account",
         "collapsible": true,
         "children": [
           {
-            "text": "Send One-to-One Streaming Messages",
+            "text": "Register User",
+            "collapsible": true,
+            "children": [
+              {
+                "text": "Open Sign-up",
+                "link": "/rest/account_register_open.html"
+              },
+              {
+                "text": "Single Approved",
+                "link": "/rest/account_register_authorized_single.html"
+              },
+              {
+                "text": "Bulk Approved",
+                "link": "/rest/account_register_authorized_batch.html"
+              }
+            ]
+          },
+          {
+            "text": "Change Password",
+            "link": "/rest/account_password_change.html"
+          },
+          {
+            "text": "Retrieve User Details",
+            "collapsible": true,
+            "children": [
+              {
+                "text": "Retrieve Single",
+                "link": "/rest/account_detail_obtain_single.html"
+              },
+              {
+                "text": "Retrieve Bulk",
+                "link": "/rest/account_detail_obtain_batch.html"
+              }
+            ]
+          },
+          {
+            "text": "Delete User",
+            "collapsible": true,
+            "children": [
+              {
+                "text": "Delete Single",
+                "link": "/rest/account_delete_single.html"
+              },
+              {
+                "text": "Delete Bulk",
+                "link": "/rest/account_delete_batch.html"
+              }
+            ]
+          },
+          {
+            "text": "Ban User",
+            "link": "/rest/account_ban.html"
+          },
+          {
+            "text": "Unban User",
+            "link": "/rest/account_unban.html"
+          },
+          {
+            "text": "Kick All Devices",
+            "link": "/rest/account_offline_forced.html"
+          },
+          {
+            "text": "Kick Single Device",
+            "link": "/rest/account_offline_device_single.html"
+          },
+          {
+            "text": "Retrieve Presence",
+            "collapsible": true,
+            "children": [
+              {
+                "text": "Retrieve Single",
+                "link": "/rest/account_presence_obtain_single.html"
+              },
+              {
+                "text": "Retrieve Bulk",
+                "link": "/rest/account_presence_obtain_batch.html"
+              }
+            ]
+          },
+          {
+            "text": "Retrieve Online Devices",
+            "link": "/rest/account_online_device_obtain.html"
+          }
+        ]
+      },
+      {
+        "text": "User Attribute",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Set",
+            "link": "/rest/user_attribute_set.html"
+          },
+          {
+            "text": "Delete",
+            "link": "/rest/user_attribute_delete.html"
+          },
+          {
+            "text": "Retrieve Single",
+            "link": "/rest/user_attribute_obtain_single.html"
+          },
+          {
+            "text": "Retrieve Bulk",
+            "link": "/rest/user_attribute_obtain_batch.html"
+          },
+          {
+            "text": "Get Total Size",
+            "link": "/rest/user_attribute_capacity_get.html"
+          }
+        ]
+      },
+      {
+        "text": "Presence",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Set State",
+            "link": "/rest/presence_set.html"
+          },
+          {
+            "text": "Subscribe",
+            "link": "/rest/presence_subscribe.html"
+          },
+          {
+            "text": "Unsubscribe",
+            "link": "/rest/presence_unsubscribe.html"
+          },
+          {
+            "text": "Retrieve Subscriptions",
+            "link": "/rest/presence_subscription_list_obtain.html"
+          },
+          {
+            "text": "Retrieve Bulk",
+            "link": "/rest/presence_get.html"
+          },
+          {
+            "text": "Retrieve Group Online Count",
+            "link": "/rest/presence_group_online_count_obtain.html"
+          }
+        ]
+      },
+      {
+        "text": "User Relationship",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Add Friend",
+            "link": "/rest/user_friend_add.html"
+          },
+          {
+            "text": "Check Friend",
+            "link": "/rest/user_friend_check.html"
+          },
+          {
+            "text": "Remove Friend",
+            "link": "/rest/user_friend_remove.html"
+          },
+          {
+            "text": "Remove All Friends",
+            "link": "/rest/user_friend_remove_all.html"
+          },
+          {
+            "text": "Set Friend Remark",
+            "link": "/rest/user_friend_remark_set.html"
+          },
+          {
+            "text": "Retrieve Paged Friends",
+            "link": "/rest/user_friend_list_paged.html"
+          },
+          {
+            "text": "Retrieve All Friends",
+            "link": "/rest/user_friend_list_obtain.html"
+          },
+          {
+            "text": "Import Friend List",
+            "link": "/rest/user_friend_import.html"
+          },
+          {
+            "text": "Add Blocklist",
+            "link": "/rest/user_friend_blocklist_add.html"
+          },
+          {
+            "text": "Remove Blocklist",
+            "link": "/rest/user_friend_blocklist_remove.html"
+          },
+          {
+            "text": "Retrieve Blocklist",
+            "link": "/rest/user_friend_blocklist_obtain.html"
+          },
+          {
+            "text": "Check Blocklist",
+            "link": "/rest/user_friend_blocklist_check.html"
+          }
+        ]
+      },
+      {
+        "text": "Global User Mute",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Overview",
+            "link": "/rest/user_global_mute_overview.html"
+          },
+          {
+            "text": "Set",
+            "link": "/rest/user_global_mute_set.html"
+          },
+          {
+            "text": "Retrieve Single",
+            "link": "/rest/user_global_mute_query_single.html"
+          },
+          {
+            "text": "Retrieve All",
+            "link": "/rest/user_global_mute_query_all.html"
+          }
+        ]
+      },
+      {
+        "text": "User Favorites",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Add Single",
+            "link": "/rest/user_collection_add_single.html"
+          },
+          {
+            "text": "Add Bulk",
+            "link": "/rest/user_collection_add_batch.html"
+          },
+          {
+            "text": "Update Extension",
+            "link": "/rest/user_collection_ext_modify.html"
+          },
+          {
+            "text": "Delete",
+            "link": "/rest/user_collection_delete.html"
+          },
+          {
+            "text": "Retrieve",
+            "link": "/rest/user_collection_get.html"
+          }
+        ]
+      }
+    ],
+    "only": [
+      "server-side"
+    ]
+  },
+  {
+    "text": "Message",
+    "collapsible": true,
+    "children": [
+      {
+        "text": "Send One-to-One Message",
+        "link": "/rest/message_single.html"
+      },
+      {
+        "text": "Send Group Message",
+        "link": "/rest/message_group.html"
+      },
+      {
+        "text": "Send Chat Room Message",
+        "link": "/rest/message_chatroom.html"
+      },
+      {
+        "text": "Send Streaming Message",
+        "collapsible": true,
+        "children": [
+          {
+            "text": "Send One-to-One Streaming Message",
             "link": "/rest/message_stream_send_single.html"
           },
           {
-            "text": "Send Group Streaming Messages",
+            "text": "Send Group Streaming Message",
             "link": "/rest/message_stream_send_group.html"
           }
         ]
       },
       {
-        "text": "Send Global Broadcast Messages",
+        "text": "Send Broadcast Message",
         "collapsible": true,
         "children": [
           {
-            "text": "Send to All Users",
+            "text": "Broadcast to All",
             "link": "/rest/broadcast_to_all_users.html"
           },
           {
-            "text": "Send to Online Users",
+            "text": "Broadcast to Online",
             "link": "/rest/broadcast_to_online_users.html"
           },
           {
-            "text": "Send to Chat Rooms",
+            "text": "Broadcast to Chatrooms",
             "link": "/rest/broadcast_to_chatrooms.html"
           }
         ]
@@ -104,11 +361,11 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Retrieve Historical Messages",
+        "text": "Retrieve History",
         "link": "/rest/message_historical.html"
       },
       {
-        "text": "Set Storage for Message Attachments",
+        "text": "Configure Attachment Storage",
         "link": "/rest/message_attachment_storage.html"
       },
       {
@@ -124,17 +381,17 @@ export const REST_SIDEBAR = [
             "link": "/rest/reaction_delete.html"
           },
           {
-            "text": "Retrieve by Msg ID",
+            "text": "Retrieve by Message",
             "link": "/rest/reaction_get_by_msg_id.html"
           },
           {
-            "text": "Retrieve by Emoji ID",
+            "text": "Retrieve by Emoji",
             "link": "/rest/reaction_get_by_msg_id_emoji_id.html"
           }
         ]
       },
       {
-        "text": "Recall Messages",
+        "text": "Recall Message",
         "collapsible": true,
         "children": [
           {
@@ -152,15 +409,15 @@ export const REST_SIDEBAR = [
         "link": "/rest/conversation_delete.html"
       },
       {
-        "text": "Delete Roaming Messages",
+        "text": "Delete Roaming Message",
         "collapsible": true,
         "children": [
           {
-            "text": "Delete by Msg ID (One-to-One)",
+            "text": "Delete by Message (One-to-One)",
             "link": "/rest/message_delete_roam_single_msgid.html"
           },
           {
-            "text": "Delete by Msg ID (Group/Room)",
+            "text": "Delete by Message (Group/Room)",
             "link": "/rest/message_delete_roam_group_room_msgid.html"
           },
           {
@@ -200,11 +457,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Import One-to-One Message",
+            "text": "One-to-One",
             "link": "/rest/message_import_single.html"
           },
           {
-            "text": "Import Group Message",
+            "text": "Chat Group",
             "link": "/rest/message_import_group.html"
           }
         ]
@@ -215,7 +472,7 @@ export const REST_SIDEBAR = [
     ]
   },
   {
-    "text": "Chat Group Management",
+    "text": "Chat Group",
     "collapsible": true,
     "children": [
       {
@@ -506,7 +763,7 @@ export const REST_SIDEBAR = [
     ]
   },
   {
-    "text": "Chat Room Management",
+    "text": "Chat Room",
     "collapsible": true,
     "children": [
       {
@@ -750,263 +1007,6 @@ export const REST_SIDEBAR = [
                 "link": "/rest/chatroom_member_blocklist_obtain.html"
               }
             ]
-          }
-        ]
-      }
-    ],
-    "only": [
-      "server-side"
-    ]
-  },
-  {
-    "text": "User Management",
-    "collapsible": true,
-    "children": [
-      {
-        "text": "Account",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Register Users",
-            "collapsible": true,
-            "children": [
-              {
-                "text": "Register One Without Authorization",
-                "link": "/rest/account_register_open.html"
-              },
-              {
-                "text": "Register Single with Authorization",
-                "link": "/rest/account_register_authorized_single.html"
-              },
-              {
-                "text": "Register Bulk with Authorization",
-                "link": "/rest/account_register_authorized_batch.html"
-              }
-            ]
-          },
-          {
-            "text": "Change a Password",
-            "link": "/rest/account_password_change.html"
-          },
-          {
-            "text": "Retrieve User Details",
-            "collapsible": true,
-            "children": [
-              {
-                "text": "Retrieve User Details",
-                "link": "/rest/account_detail_obtain_single.html"
-              },
-              {
-                "text": "Retrieve User Details in Batches",
-                "link": "/rest/account_detail_obtain_batch.html"
-              }
-            ]
-          },
-          {
-            "text": "Delete Users",
-            "collapsible": true,
-            "children": [
-              {
-                "text": "Delete Single",
-                "link": "/rest/account_delete_single.html"
-              },
-              {
-                "text": "Delete Bulk",
-                "link": "/rest/account_delete_batch.html"
-              }
-            ]
-          },
-          {
-            "text": "Ban a User",
-            "link": "/rest/account_ban.html"
-          },
-          {
-            "text": "Unban",
-            "link": "/rest/account_unban.html"
-          },
-          {
-            "text": "Force Offline",
-            "link": "/rest/account_offline_forced.html"
-          },
-          {
-            "text": "Force Offline on Device",
-            "link": "/rest/account_offline_device_single.html"
-          },
-          {
-            "text": "Retrieve User Presence",
-            "collapsible": true,
-            "children": [
-              {
-                "text": "Retrieve Single User Presence",
-                "link": "/rest/account_presence_obtain_single.html"
-              },
-              {
-                "text": "Retrieve Bulk User Presence",
-                "link": "/rest/account_presence_obtain_batch.html"
-              }
-            ]
-          },
-          {
-            "text": "Retrieve Online Devices",
-            "link": "/rest/account_online_device_obtain.html"
-          }
-        ]
-      },
-      {
-        "text": "User Attributes",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Set",
-            "link": "/rest/user_attribute_set.html"
-          },
-          {
-            "text": "Delete",
-            "link": "/rest/user_attribute_delete.html"
-          },
-          {
-            "text": "Retrieve Single",
-            "link": "/rest/user_attribute_obtain_single.html"
-          },
-          {
-            "text": "Retrieve Bulk",
-            "link": "/rest/user_attribute_obtain_batch.html"
-          },
-          {
-            "text": "Get Total Size",
-            "link": "/rest/user_attribute_capacity_get.html"
-          }
-        ]
-      },
-      {
-        "text": "Presence Subscriptions",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Set Presence",
-            "link": "/rest/presence_set.html"
-          },
-          {
-            "text": "Subscribe to Presence",
-            "link": "/rest/presence_subscribe.html"
-          },
-          {
-            "text": "Unsubscribe from Presence",
-            "link": "/rest/presence_unsubscribe.html"
-          },
-          {
-            "text": "Retrieve Subscription List",
-            "link": "/rest/presence_subscription_list_obtain.html"
-          },
-          {
-            "text": "Retrieve Presence in Batches",
-            "link": "/rest/presence_get.html"
-          },
-          {
-            "text": "Retrieve Online Group Member Count",
-            "link": "/rest/presence_group_online_count_obtain.html"
-          }
-        ]
-      },
-      {
-        "text": "User Relationships",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Add Friend",
-            "link": "/rest/user_friend_add.html"
-          },
-          {
-            "text": "Check Friends",
-            "link": "/rest/user_friend_check.html"
-          },
-          {
-            "text": "Remove Friend",
-            "link": "/rest/user_friend_remove.html"
-          },
-          {
-            "text": "Remove All Friends",
-            "link": "/rest/user_friend_remove_all.html"
-          },
-          {
-            "text": "Set Friend Remarks",
-            "link": "/rest/user_friend_remark_set.html"
-          },
-          {
-            "text": "Retrieve by Page",
-            "link": "/rest/user_friend_list_paged.html"
-          },
-          {
-            "text": "Retrieve All",
-            "link": "/rest/user_friend_list_obtain.html"
-          },
-          {
-            "text": "Import Friend List",
-            "link": "/rest/user_friend_import.html"
-          },
-          {
-            "text": "Add to Blocklist",
-            "link": "/rest/user_friend_blocklist_add.html"
-          },
-          {
-            "text": "Remove from Blocklist",
-            "link": "/rest/user_friend_blocklist_remove.html"
-          },
-          {
-            "text": "Retrieve Blocklist",
-            "link": "/rest/user_friend_blocklist_obtain.html"
-          },
-          {
-            "text": "Check Blocklist",
-            "link": "/rest/user_friend_blocklist_check.html"
-          }
-        ]
-      },
-      {
-        "text": "Global User Mute",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Overview",
-            "link": "/rest/user_global_mute_overview.html"
-          },
-          {
-            "text": "Set",
-            "link": "/rest/user_global_mute_set.html"
-          },
-          {
-            "text": "Query Single",
-            "link": "/rest/user_global_mute_query_single.html"
-          },
-          {
-            "text": "Query All",
-            "link": "/rest/user_global_mute_query_all.html"
-          }
-        ]
-      },
-      {
-        "text": "User Favorites",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "Add One",
-            "link": "/rest/user_collection_add_single.html"
-          },
-          {
-            "text": "Add Batch",
-            "link": "/rest/user_collection_add_batch.html"
-          },
-          {
-            "text": "Modify Extension",
-            "link": "/rest/user_collection_ext_modify.html"
-          },
-          {
-            "text": "Delete",
-            "link": "/rest/user_collection_delete.html"
-          },
-          {
-            "text": "Retrieve",
-            "link": "/rest/user_collection_get.html"
           }
         ]
       }
