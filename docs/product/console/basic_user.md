@@ -58,7 +58,7 @@ This feature is enabled by default for all plans and can be disabled.
 
 ## Presence
 
-Presence includes online, offline, and custom states. Users can set their own presence and subscribe to or query the presence of other users. For details, see [Presence Subscription](/rest/presence_set.html).
+Presence includes online, offline, and custom states. Users can set their own presence and subscribe to or query the presence of other users. For details, see [Presence](/rest/presence_set.html).
 
 You can enable this service based on your current plan:
 

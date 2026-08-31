@@ -1090,7 +1090,7 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/user_friend_add.html 
-          - text: Presence Subscriptions
+          - text: Presence
             desc: "Subscribe to and query user presence, including online, offline, and custom states."
             sdks:
               - icon: /sdk/android.svg
