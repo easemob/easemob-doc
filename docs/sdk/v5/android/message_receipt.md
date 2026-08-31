@@ -144,7 +144,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 #### Step 2: Send message read receipts
 
-After reading messages, the recipient calls `asyncSendMessageReadReceipts` to send read receipts in batches. You can pass up to 50 messages in each call. All messages must belong to the same conversation, and `isNeedReadReceipt()` must be `true`.
+After reading messages, the recipient calls `asyncSendMessageReadReceipts` to send read receipts in bulk. You can pass up to 50 messages in each call. All messages must belong to the same conversation, and `isNeedReadReceipt()` must be `true`.
 
 ```java
 List<EMMessage> messages = Collections.singletonList(message);
@@ -320,7 +320,7 @@ Sending message read receipts and clearing conversation unread counts are indepe
 | [`init`](#step-1-enable-delivery-receipts) | `EMClient` | Initialize the SDK with the specified configuration. |
 | [`createTextSendMessage`](#step-1-set-a-message-to-require-a-read-receipt) | `EMMessage` | Create a text message. |
 | [`sendMessage`](#step-1-set-a-message-to-require-a-read-receipt) | `EMChatManager` | Send a message. |
-| [`asyncSendMessageReadReceipts`](#step-2-send-message-read-receipts) | `EMChatManager` | Send read receipts for one-to-one or group messages in batches. |
+| [`asyncSendMessageReadReceipts`](#step-2-send-message-read-receipts) | `EMChatManager` | Send read receipts for one-to-one or group messages in bulk. |
 | [`getMessageId`](#step-3-monitor-message-read-receipts) / [`getConversationId`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieve the message ID and conversation ID corresponding to a receipt. |
 | [`isPeerReceipt`](#step-3-monitor-message-read-receipts) / [`getReadCount`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieve the one-to-one peer receipt state or group message read count. |
 | [`asyncGetGroupMessageReadReceipts`](#batch-retrieve-receipt-summaries-for-multiple-group-messages) | `EMChatManager` | Batch-retrieve read receipt details for multiple group messages. |

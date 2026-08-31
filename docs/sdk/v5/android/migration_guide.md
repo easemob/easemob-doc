@@ -7,7 +7,7 @@ Android EasyIM SDK 5.0.0 is a major release that is not source-compatible with e
 1. **Data synchronization mechanism changes**
    After login, the SDK can automatically synchronize conversations, contacts, and joined chat groups and save the data to the local database, replacing some APIs that previously required the app to actively retrieve data from the server.
 2. **Read receipt mechanism redesign**
-   Read receipts are now sent in batches instead of individually. Clearing the local unread count and sending message read receipts to message senders are now independent operations. One-to-one chats and group chats use a unified receipt model and callback.
+   Read receipts are now sent in bulk instead of individually. Clearing the local unread count and sending message read receipts to message senders are now independent operations. One-to-one chats and group chats use a unified receipt model and callback.
 3. **Chat group configuration model redesign**
    The single `EMGroupStyle` enum has been replaced with three Boolean fields: `isPublic`, `joinApprovalRequired`, and `allowInvites`. Chat group properties can also be updated by configuration type after a chat group is created.
 4. **Legacy API cleanup**
@@ -98,13 +98,13 @@ Accordingly, `EMContactListener#onContactSyncStart()` and `onContactSyncFinishWi
 
 ## Read receipt mechanism redesign
 
-Message read receipts are now sent in batches instead of individually. Whether a receipt is required is configured per message through `EMMessage#setIsNeedReadReceipt`. Sending message read receipts and clearing a conversation's unread count are independent operations. The old APIs have no compatibility aliases, making this a breaking change.
+Message read receipts are now sent in bulk instead of individually. Whether a receipt is required is configured per message through `EMMessage#setIsNeedReadReceipt`. Sending message read receipts and clearing a conversation's unread count are independent operations. The old APIs have no compatibility aliases, making this a breaking change.
 
 ### Sending message read receipts and clearing unread counts
 
 | Removed API | Alternative in 5.0.0 | Description |
 | :------------------- | :----- | :-------------------------------------------- |
-| `EMChatManager#ackMessageRead(String to, String messageId)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)` | Sends message read receipts in batches. The same API is used for one-to-one chats and group chats. |
+| `EMChatManager#ackMessageRead(String to, String messageId)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)` | Sends message read receipts in bulk. The same API is used for one-to-one chats and group chats. |
 | `EMChatManager#ackGroupMessageRead(String to, String messageId, String ext)` | `asyncSendMessageReadReceipts(List<EMMessage>, EMCallBack)` | A separate API for sending individual group message read receipts is no longer provided, and custom content can no longer be included in a read receipt through `ext`. |
 | `EMChatManager#ackConversationRead(String conversationId)` | `asyncClearConversationUnreadMessageCount(String, EMCallBack)` | Clears only the local unread count for the conversation and synchronizes the change to the current user's other devices. It does not send read receipts to message senders. To send message read receipts, call `asyncSendMessageReadReceipts` separately. |
 | `EMChatManager#markAllConversationsAsRead()` | `asyncClearAllConversationUnreadMessageCount(EMCallBack)` | Clears the local unread counts of all conversations and synchronizes the change to the current user's other devices. |
@@ -137,7 +137,7 @@ SDK v5 adds the `EMMessageReadReceipt` data class to describe message read recei
 | 4.x API | 5.0.0 API | Description |
 | :------------------- | :----- | :-------------- |
 | `fetchGroupReadAcks(String msgId, int pageSize, String startAckId)` / `asyncFetchGroupReadAcks(...)` | `asyncFetchGroupMessageReadReceipts(String msgId, int pageSize, String startAckId, EMValueCallBack<EMCursorResult<EMGroupReadReceipt>>)` | Retrieves details of read receipts for a specified group chat message by page. The value of `pageSize` ranges from 1 to 50, and `startAckId` specifies where pagination starts. |
-| None | `asyncGetGroupMessageReadReceipts(List<EMMessage>, EMValueCallBack<List<EMMessageReadReceipt>>)` | Retrieves read receipt summaries for group chat messages in batches. Each call accepts a maximum of 20 messages, and all messages must belong to the same conversation. |
+| None | `asyncGetGroupMessageReadReceipts(List<EMMessage>, EMValueCallBack<List<EMMessageReadReceipt>>)` | Retrieves read receipt summaries for group chat messages in bulk. Each call accepts a maximum of 20 messages, and all messages must belong to the same conversation. |
 
 The `EMGroupReadAck` receipt data model has been replaced by `EMGroupReadReceipt`:
 
@@ -244,7 +244,7 @@ With the removal of password-based login, authentication APIs that use a user ID
 
 | Class | New API | Description |
 | :---------------- | :----- | :------- |
-| `EMChatManager` | `asyncDeleteConversations(List<String> conversationIds, boolean deleteMessages, EMCallBack)` | Deletes local conversations in batches and, depending on `deleteMessages`, also deletes their local messages. |
+| `EMChatManager` | `asyncDeleteConversations(List<String> conversationIds, boolean deleteMessages, EMCallBack)` | Deletes local conversations in bulk and, depending on `deleteMessages`, also deletes their local messages. |
 | `EMConversation` | `getConversationName()`, `getConversationAvatar()` | Gets the conversation display name and avatar. For a one-to-one chat, the peer's user information is returned. For a group chat, chat group information is returned. An empty string may be returned if the related data has not yet been synchronized. |
 | `EMGroup` | `getUsers()` | Gets a list of the user IDs of the chat group owner, administrators, and regular members. The list combines users by role and may contain duplicate user IDs. |
 

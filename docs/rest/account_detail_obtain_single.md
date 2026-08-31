@@ -1,4 +1,4 @@
-# Retrieve User Details
+# Retrieve Details of a Single User
 
 ## Feature overview
 

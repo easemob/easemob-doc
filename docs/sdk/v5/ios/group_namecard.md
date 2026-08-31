@@ -14,7 +14,7 @@ Chat group member name card management is mainly provided by `EMGroupManager` an
 
 1. The current logged-in user can call `updateGroupNamecard` to set or update their name card in a specified chat group.
 2. When a name card changes and is synchronized to local memory, the SDK notifies the app through the `onUserGroupNamecardChanged` event.
-3. The SDK supports calling `fetchGroupMemberInfoListFromServer` to retrieve chat group member details in batches from the server and write the returned name cards to local memory.
+3. The SDK supports calling `fetchGroupMemberInfoListFromServer` to retrieve chat group member details in bulk from the server and write the returned name cards to local memory.
 4. The SDK supports calling `getGroupNamecard` to read a specified member's name card in a specified chat group from local memory.
 5. If `EMOptions#enableUserInfo` is enabled, the SDK automatically attaches the sender's name card update time when sending a message. When the recipient detects that the update time in the message is later than the value in local memory, the SDK automatically retrieves the latest name card from the server, updates local memory, and notifies the app of the event.
 
@@ -72,7 +72,7 @@ EMClient.shared().groupManager?.updateGroupNamecard("groupId", namecard: "new_na
 
 ## Retrieve chat group member name cards from the server
 
-Call `fetchGroupMemberInfoListFromServer` to retrieve chat group member details in batches from the server. The returned `EMGroupMemberInfo` contains fields such as `namecard`, `nickname`, and `avatarUrl`. After a successful retrieval, the data is automatically updated in local memory.
+Call `fetchGroupMemberInfoListFromServer` to retrieve chat group member details in bulk from the server. The returned `EMGroupMemberInfo` contains fields such as `namecard`, `nickname`, and `avatarUrl`. After a successful retrieval, the data is automatically updated in local memory.
 
 ```swift
 EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(withGroupId: "groupId", cursor: "", limit: 20) { result, error in

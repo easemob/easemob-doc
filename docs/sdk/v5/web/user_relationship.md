@@ -295,6 +295,6 @@ console.log(blocklist);
 | [`getContacts`](#retrieve-the-friend-list-locally)                 | `ContactManager`  | Reads the current in-memory friend-list view.                               |
 | [`getUserInfoByUserId`](#retrieve-an-individual-users-attributes-from-local-memory) | `UserInfoManager` | Retrieves the latest user attributes for specified users from the server.                         |
 | [`ChatClient.init`](#enable-automatic-synchronization)                   | `ChatClient`      | Configures automatic synchronization of the friend list and friend information after login through `enableSyncData`. |
-| [`addUsersToBlocklist`](#add-users-to-the-blocklist)           | `ContactManager`  | Adds users to the blocklist in batches.                                         |
-| [`removeUserFromBlocklist`](#remove-users-from-the-blocklist)     | `ContactManager`  | Removes users from the blocklist in batches.                                         |
+| [`addUsersToBlocklist`](#add-users-to-the-blocklist)           | `ContactManager`  | Adds users to the blocklist in bulk.                                         |
+| [`removeUserFromBlocklist`](#remove-users-from-the-blocklist)     | `ContactManager`  | Removes users from the blocklist in bulk.                                         |
 | [`getBlocklist`](#retrieve-the-blocklist-from-the-server)            | `ContactManager`  | Retrieves the blocklist for the current login session.                             |

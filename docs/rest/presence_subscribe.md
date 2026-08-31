@@ -1,6 +1,6 @@
-# Subscribe to Presence in Batches
+# Subscribe to Presence in Bulk
 
-Presence indicates a user's current status. In addition to the online and offline states built into EasyIM, you can add custom presence states such as Busy, Be right back, Away, On the phone, and Out to lunch. This section shows how to use the EasyIM RESTful APIs to manage presence subscriptions, including setting presence, subscribing to and retrieving presence in batches, unsubscribing, and querying the subscription list.
+Presence indicates a user's current status. In addition to the online and offline states built into EasyIM, you can add custom presence states such as Busy, Be right back, Away, On the phone, and Out to lunch. This section shows how to use the EasyIM RESTful APIs to manage presence subscriptions, including setting presence, subscribing to and retrieving presence in bulk, unsubscribing, and querying the subscription list.
 
 For definitions of online, offline, and custom presence states, see [User presence management](/product/product_user_presence.html).
 
@@ -84,7 +84,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 
 | Field        | Type       | Description                                                         |
 | :---------- | :--------- | :----------------------------------------------------------- |
-| `result`    | JSON Array | Whether the presence of multiple users was successfully subscribed to in batches. If successful, the subscribed users' presence is returned. Otherwise, the corresponding error reason is returned. |
+| `result`    | JSON Array | Whether the presence of multiple users was successfully subscribed to in bulk. If successful, the subscribed users' presence is returned. Otherwise, the corresponding error reason is returned. |
 |  - `uid`       | String     | Unique ID of the subscribed user on the EasyIM server.                              |
 |  - `last_time` | Long    | Unix timestamp of the subscribed user's most recent online time, in seconds. The server records this time when the subscribed user logs in or out. |
 |  - `expiry`    | Long    | Unix timestamp when the subscription expires, in seconds.                                           |

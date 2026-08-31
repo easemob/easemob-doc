@@ -1,8 +1,8 @@
-# Add Users to a Message Thread in Batches
+# Add Users to a Message Thread in Bulk
 
 ## Feature overview
 
-- Add users to a specified message thread in batches.
+- Add users to a specified message thread in bulk.
 - Up to 10 users can join the message thread at a time.
 - Before using this API, contact the EasyIM business manager to activate the message thread feature.
 

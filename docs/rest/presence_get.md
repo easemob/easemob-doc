@@ -1,4 +1,4 @@
-# Retrieve Presence in Batches
+# Retrieve Presence in Bulk
 
 ## Feature overview
 
@@ -73,7 +73,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 
 | Parameter        | Type       | Description                                                         |
 | :---------- | :--------- | :----------------------------------------------------------- |
-| `result`    | JSON Array | Whether users' presence was successfully retrieved in batches. If successful, the presence of the subscribed users is returned. Otherwise, the corresponding error reason is returned. |
+| `result`    | JSON Array | Whether users' presence was successfully retrieved in bulk. If successful, the presence of the subscribed users is returned. Otherwise, the corresponding error reason is returned. |
 |  - `uid`       | String     | Unique ID of the user on the EasyIM server.                              |
 |  - `last_time` | Long       | Unix timestamp of the user's most recent online time, in seconds.                                           |
 |  - `ext`       | String     | User's presence extension information.                 |

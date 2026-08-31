@@ -8,7 +8,7 @@ These operations update only local message and conversation data on the current 
 
 The Android SDK provides the following methods:
 
-- Import messages in batches: Call `EMChatManager#importMessages` to import multiple messages sent or received by the current user into the local database.
+- Import messages in bulk: Call `EMChatManager#importMessages` to import multiple messages sent or received by the current user into the local database.
 - Insert a message into a specified conversation: Call `EMConversation#insertMessage` to insert a message into a specified conversation based on the message's Unix timestamp.
 - Save a message directly: Call `EMChatManager#saveMessage` to save a message to memory and the local database. If the corresponding conversation does not exist, the SDK automatically creates it.
 
@@ -20,7 +20,7 @@ Before you begin, ensure that the following requirements are met:
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 
-## Import messages into the database in batches
+## Import messages into the database in bulk
 
 To insert messages into local conversations through a batch import, construct `EMMessage` objects and call `importMessages` to import them into the local database.
 
@@ -71,7 +71,7 @@ EMClient.getInstance()
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`importMessages`](#import-messages-into-the-database-in-batches) | `EMChatManager` | Import messages sent or received by the current user into the local database in batches. |
+| [`importMessages`](#import-messages-into-the-database-in-batches) | `EMChatManager` | Import messages sent or received by the current user into the local database in bulk. |
 | [`getConversation`](#insert-messages) | `EMChatManager` | Retrieve a local conversation with a specified ID. Returns `null` if it is not found. |
 | [`insertMessage`](#insert-messages) | `EMConversation` | Insert a message into a specified local conversation based on its Unix timestamp. |
 | [`saveMessage`](#insert-messages) | `EMChatManager` | Save a message to memory and the local database, automatically creating a conversation if necessary. |

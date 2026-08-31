@@ -1,4 +1,4 @@
-# Add Users to the Chat Room Allowlist in Batches
+# Add Users to the Chat Room Allowlist in Bulk
 
 ## Feature overview
 
@@ -79,7 +79,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | Field              | Type   | Description                |
 | :---------------- | :----- | :--------------- |
 | `data` | JSON Array | Response data.|
-|  - `result`     | Bool   | Whether the users were successfully added to the chat room allowlist in batches:<br/> - `true`: Yes.<br/> - `false`: No.         |
+|  - `result`     | Bool   | Whether the users were successfully added to the chat room allowlist in bulk:<br/> - `true`: Yes.<br/> - `false`: No.         |
 |  - `reason`     | String | Reason the operation failed.                                                                        |
 |  - `chatroomid` | String | Chat room ID.                                                                             |
 |  - `action`     | String | Operation performed. In this response, the value is `add_user_whitelist`, indicating that users were added to the chat room allowlist. |

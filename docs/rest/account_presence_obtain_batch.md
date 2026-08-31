@@ -1,4 +1,4 @@
-# Retrieve User Presence in Batches
+# Retrieve User Presence in Bulk
 
 ## Feature overview
 
@@ -7,7 +7,7 @@
 - This API does not validate user IDs. If you query the presence of a user ID that does not exist, the returned status is `offline`.
 
 :::tip
-This API queries whether multiple users are online or offline. To query multiple users' presence in batches, including online, offline, or custom status, use the [Retrieve presence in batches](presence_get.html) API.
+This API queries whether multiple users are online or offline. To query multiple users' presence in bulk, including online, offline, or custom status, use the [Retrieve presence in bulk](presence_get.html) API.
 :::
 
 ## Call frequency limit
@@ -69,7 +69,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 
 | Field     | Type      | Description       |
 | :------- | :-------- | :-------------------------------------------------------------- |
-| `action` | String    | The operation performed. In this response, the value is `get batch user status`, indicating that user presence is retrieved in batches.                                                  |
+| `action` | String    | The operation performed. In this response, the value is `get batch user status`, indicating that user presence is retrieved in bulk.                                                  |
 | `data`   | JSON Array | The queried users' presence.<br/> The data is in the format `"user ID": "current status"`. For example, user1's online and offline states are `"user1": "online"` and `"user1": "offline"`, respectively.<br/> - `online`: The client has established a persistent connection to the EasyIM server after login.<br/> - `offline`: The iOS or Android process has been killed, or the connection has been interrupted due to network issues. The user enters the `offline` state and can receive offline push notifications for messages. |
 | `timestamp`          | Long   | The Unix timestamp of the HTTP response, in milliseconds.       |
 | `duration`           | Long   | The time elapsed from sending the HTTP request to receiving the response, in milliseconds.     |

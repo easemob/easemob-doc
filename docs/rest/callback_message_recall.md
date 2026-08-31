@@ -12,7 +12,7 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
 ## Trigger conditions
 
 1. A [user recalls a message on the client](/sdk/v5/android/message_recall.html).
-2. A RESTful API is called to recall a [single message](/rest/message_recall_single.html) or [recall messages in batches](/rest/message_recall_batch.html).
+2. A RESTful API is called to recall a [single message](/rest/message_recall_single.html) or [recall messages in bulk](/rest/message_recall_batch.html).
 
 ## Webhook request
 

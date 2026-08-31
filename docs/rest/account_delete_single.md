@@ -1,4 +1,4 @@
-# Delete a User
+# Delete a Single User
 
 ## Feature overview
 

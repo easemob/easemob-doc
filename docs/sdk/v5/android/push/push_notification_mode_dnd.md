@@ -220,7 +220,7 @@ EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId
 });
 ```
 
-## Get push receiving rules for conversations in batches
+## Get push receiving rules for conversations in bulk
 
 1. You can get settings for up to 20 conversations in each call.
 
@@ -247,5 +247,5 @@ EMClient.getInstance().pushManager().getSilentModeForConversations(conversationL
 | [`getSilentModeForConversation`](#get-push-receiving-rules-for-a-specified-conversation) | `EMPushManager` | Gets push receiving rules for a specified conversation. |
 | [`setSilentModeForAll`](#set-global-push-receiving-rules) | `EMPushManager` | Sets global push receiving rules. |
 | [`getSilentModeForAll`](#get-global-push-receiving-rules) | `EMPushManager` | Gets global push receiving rules. |
-| [`getSilentModeForConversations`](#get-push-receiving-rules-for-conversations-in-batches) | `EMPushManager` | Gets push receiving rules for conversations in batches. |
+| [`getSilentModeForConversations`](#get-push-receiving-rules-for-conversations-in-batches) | `EMPushManager` | Gets push receiving rules for conversations in bulk. |
 | [`clearRemindTypeForConversation`](#clear-the-push-notification-mode-setting-of-a-specified-conversation) | `EMPushManager` | Clears the push notification mode setting of a specified conversation. |

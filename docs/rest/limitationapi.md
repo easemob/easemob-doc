@@ -47,7 +47,7 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | * Retrieve a Historical Message File   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 calls/minute/App Key  | 20 calls/minute    |  
 | * Set the Storage Method for Specified Message Attachments   |  POST     | /{org_name}/{app_name}/users/{username}/chatfiles/lifetime          | 100 calls/second/App Key     |          |  
 | * Recall a Message    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 calls/second/App Key   | 100 calls/second    |  
-| * Recall Messages in Batches    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 calls/second/App Key  | 100 calls/second    |  
+| * Recall Messages in Bulk    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 calls/second/App Key  | 100 calls/second    |  
 | Delete a Conversation for One User on the Server Side   |    DELETE    | /{org_name}/{app_name}/users/{userName}/user_channel          | 5 calls/minute/single user ID, 100 calls/second/App Key   | 100 calls/second    |  
 | Add a Reaction         | POST   | /{org_name}/{app_name}/reaction/user/{userId}   | 100 calls/second/App Key | 50 calls/second    |  
 | Retrieve Reactions by Message ID     | GET    | /{org_name}/{app_name}/reaction/user/{userId}  | 100 calls/second/App Key  | 25 calls/second    |  
@@ -99,11 +99,11 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Retrieve Chat Group Members by Page  |  GET     | /{org_name}/{app_name}/chatgroups/{group_id}/users       | 100 calls/second/App Key     |  100 calls/second   |  
 | Add a Chat Group Member     |    POST | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false    | 100 calls/second/App Key      | 50 calls/second    |  
-| Add Chat Group Members in Batches    |    POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users?need_notify=false           | 100 calls/second/App Key     | 50 calls/second    |  
+| Add Chat Group Members in Bulk    |    POST   | /{org_name}/{app_name}/chatgroups/{group_id}/users?need_notify=false           | 100 calls/second/App Key     | 50 calls/second    |  
 | Remove a Chat Group Member     |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/users/{username}?need_notify=false    | 100 calls/second/App Key    |          |  
-| Remove Chat Group Members in Batches    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}?need_notify=false    | 100 calls/second/App Key   | 50 calls/second    |  
+| Remove Chat Group Members in Bulk    |    DELETE     | /{org_name}/{app_name}/chatgroups/{group_id}/users/{usernames}?need_notify=false    | 100 calls/second/App Key   | 50 calls/second    |  
 | Set Custom Attributes of a Chat Group Member    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}              | 100 calls/second/App Key   | 100 calls/second    |  
-| Set Custom Attributes of Chat Group Members in Batches    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/batch  | 100 calls/second/App Key  |          |  
+| Set Custom Attributes of Chat Group Members in Bulk    |  PUT       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/batch  | 100 calls/second/App Key  |          |  
 | Retrieve All Custom Attributes of a Chat Group Member    |  GET       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}            | 100 calls/second/App Key   | 100 calls/second    |  
 | Retrieve Custom Attributes of Chat Group Members by Attribute Key    |  POST       | /{org_name}/{app_name}/metadata/chatgroup/{group_id}/get              | 100 calls/second/App Key     | 100 calls/second    |  
 | Retrieve the Chat Group Admin List    |  GET       | /{org_name}/{app_name}/chatgroups/{group_id}/admin              | 100 calls/second/App Key   | 100 calls/second    |  
@@ -112,12 +112,12 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | Transfer Chat Group Ownership       |    PUT | /{org_name}/{app_name}/chatgroups/{group_id}                     | 100 calls/second/App Key   |          |  
 | Retrieve the Group Blocklist    |    GET   | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 calls/second/App Key    | 50 calls/second    |  
 | Add a User to the Group Blocklist   |    POST      | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}    | 100 calls/second/App Key | 100 calls/second    |  
-| Add Users to the Group Blocklist in Batches   |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 calls/second/App Key | 50 calls/second    |  
+| Add Users to the Group Blocklist in Bulk   |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 calls/second/App Key | 50 calls/second    |  
 | Remove a User from the Group Blocklist   |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{username}    | 100 calls/second/App Key  | 50 calls/second    |  
-| Remove Users from the Group Blocklist in Batches  |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}    | 100 calls/second/App Key   | 50 calls/second    |  
+| Remove Users from the Group Blocklist in Bulk  |    DELETE  | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users/{usernames}    | 100 calls/second/App Key   | 50 calls/second    |  
 | Retrieve the Chat Group Allowlist  |    GET | /{org_name}/{app_name}/chatgroups/{group_id}/white/users        | 100 calls/second/App Key         | 100 calls/second   |  
 | Add a User to the Chat Group Allowlist |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username}    | 100 calls/second/App Key  | 100 calls/second    |  
-| Add Users to the Chat Group Allowlist in Batches|    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 calls/second/App Key  | 50 calls/second    |  
+| Add Users to the Chat Group Allowlist in Bulk|    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/blocks/users       | 100 calls/second/App Key  | 50 calls/second    |  
 | Remove a User from the Chat Group Allowlist |    DELETE    | /{org_name}/{app_name}/chatgroups/{group_id}/white/users/{username}    | 100 calls/second/App Key    | 100 calls/second    |  
 | Retrieve the Chat Group Mute List |    GET    | /{org_name}/{app_name}/chatgroups/{group_id}/mute              | 100 calls/second/App Key    | 100 calls/second    |  
 | Mute a Chat Group Member    |    POST    | /{org_name}/{app_name}/chatgroups/{group_id}/mute               | 100 calls/second/App Key      | 100 calls/second    |  
@@ -136,8 +136,8 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | Modify a Message Thread  | PUT     | /{org_name}/{app_name}/thread/{thread_id}    | 100 calls/second/App Key   |          |  
 | Delete a Message Thread  | DELETE     | /{org_name}/{app_name}/thread/{thread_id}    | 100 calls/second/App Key   |          |  
 | Retrieve the Message Thread Member List by Page  | GET     | /{org_name}/{app_name}/thread/{thread_id}/users    | 100 calls/second/App Key   |          |  
-| Add Users to a Message Thread in Batches  | POST     | /{org_name}/{app_name}/thread/{thread_id}/users   | 100 calls/second/App Key   |          |  
-| Remove Message Thread Members in Batches  | DELETE     | /{org_name}/{app_name}/threads/{thread_id}/users   | 100 calls/second/App Key  |          |  
+| Add Users to a Message Thread in Bulk  | POST     | /{org_name}/{app_name}/thread/{thread_id}/users   | 100 calls/second/App Key   |          |  
+| Remove Message Thread Members in Bulk  | DELETE     | /{org_name}/{app_name}/threads/{thread_id}/users   | 100 calls/second/App Key  |          |  
 
 ## Chat rooms
 
@@ -166,20 +166,20 @@ Each add-on package costs CNY 200/month in China and CNY 400/month outside China
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Retrieve Chat Room Members by Page   |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users          | 100 calls/second/App Key                                                 |  50 calls/second   |  
 | Add a Chat Room Member    |    POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}  | 100 calls/second/App Key                                                 | 100 calls/second    |  
-| Add Chat Room Members in Batches    |    POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users           | 100 calls/second/App Key                                                 | 50 calls/second    |  
+| Add Chat Room Members in Bulk    |    POST   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users           | 100 calls/second/App Key                                                 | 50 calls/second    |  
 | Remove a Chat Room Member  |  DELETE   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}  | 100 calls/second/App Key                                                 |          |  
-| Remove Chat Room Members in Batches |  DELETE   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{usernames}  | 100 calls/second/App Key                                                 | 50 calls/second    |  
+| Remove Chat Room Members in Bulk |  DELETE   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{usernames}  | 100 calls/second/App Key                                                 | 50 calls/second    |  
 | Retrieve the Chat Room Admin List    |   GET    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin          | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Add a Chat Room Admin  |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin          | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Remove a Chat Room Admin   |  DELETE    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/admin/{oldadmin}  | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Retrieve the Chat Room Blocklist    |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users   | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Add a User to the Chat Room Blocklist |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}  | 100 calls/second/App Key                                                 | 100 calls/second    |  
-| Add Users to the Chat Room Blocklist in Batches  |    POST     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users   | 100 calls/second/App Key                                                 | 50 calls/second    |  
+| Add Users to the Chat Room Blocklist in Bulk  |    POST     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users   | 100 calls/second/App Key                                                 | 50 calls/second    |  
 | Remove a User from the Chat Room Blocklist   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{username}  | 100 calls/second/App Key                                                 |          |  
-| Remove Users from the Chat Room Blocklist in Batches   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames}  | 100 calls/second/App Key                                                 |  50 calls/second   |  
+| Remove Users from the Chat Room Blocklist in Bulk   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/blocks/users/{usernames}  | 100 calls/second/App Key                                                 |  50 calls/second   |  
 | Retrieve the Chat Room Allowlist   |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users   | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Add a User to the Chat Room Allowlist  |    POST     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username}  | 100 calls/second/App Key                                                 | 100 calls/second    |  
-| Add Users to the Chat Room Allowlist in Batches   |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users    | 100 calls/second/App Key                                                 | 50 calls/second   |  
+| Add Users to the Chat Room Allowlist in Bulk   |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users    | 100 calls/second/App Key                                                 | 50 calls/second   |  
 | Remove a User from the Chat Room Allowlist  |  DELETE       | /{org_name}/{app_name}/chatrooms/{chatroom_id}/white/users/{username}  | 100 calls/second/App Key                                                 |  100 calls/second   |  
 | Retrieve the Chat Room Mute List  |   GET   | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute           | 100 calls/second/App Key                                                 | 100 calls/second    |  
 | Mute Chat Room Members   |    POST    | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute           | 100 calls/second/App Key                                                 | 100 calls/second    |  
@@ -206,14 +206,14 @@ The total default call frequency limit for the user management APIs and offline 
 | RESTful API |Method  | API URL|  
 | :-------- | :----- | :---------------- | 
 | Register a Single User  |  POST  | /{org_name}/{app_name}/users        |  
-| * Register Users in Batches |  POST   | /{org_name}/{app_name}/users       |  
+| * Register Users in Bulk |  POST   | /{org_name}/{app_name}/users       |  
 | Retrieve a Single User  |  GET | /{org_name}/{app_name}/users/{username}   |
-| * Retrieve Users in Batches |  GET  | /{org_name}/{app_name}/users      |  
+| * Retrieve Users in Bulk |  GET  | /{org_name}/{app_name}/users      |  
 | * Delete a User |  DELETE  | /{org_name}/{app_name}/users/{username}         |  
-| * Delete Users in Batches |  DELETE   | /{org_name}/{app_name}/users  | 30 calls/second/App Key   |  
+| * Delete Users in Bulk |  DELETE   | /{org_name}/{app_name}/users  | 30 calls/second/App Key   |  
 | * Change a User's Password  |  POST | /{org_name}/{app_name}/users/{username}/password   |  
 | * Retrieve User Presence  |  GET | /{org_name}/{app_name}/users/{username}/status   |  
-| * Retrieve User Presence in Batches  |  POST    | /{org_name}/{app_name}/users/batch/status  |  
+| * Retrieve User Presence in Bulk  |  POST    | /{org_name}/{app_name}/users/batch/status  |  
 | * Retrieve the Offline Message Count       |  GET     | /{org_name}/{app_name}/users/{owner_username}/offline_msg_count    |
 | * Retrieve the Status of an Offline Message    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   |  
 | * Ban a User   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          |  
@@ -234,7 +234,7 @@ The total default call frequency limit for the user management APIs and offline 
 | RESTful API |Method  | API URL| Maximum API call frequency (default) | Single add-on package size|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Set User Attributes      | PUT     | /{org_name}/{app_name}/metadata/user/{username}            | 100 calls/second/App Key | 100 calls/second    |  
-| Get User Attributes in Batches    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 calls/second/App Key    | 50 calls/second    |  
+| Get User Attributes in Bulk    | POST      | /{org_name}/{app_name}/metadata/user/get           | 100 calls/second/App Key    | 50 calls/second    |  
 | Delete User Attributes   | DELETE     | /{org_name}/{app_name}/metadata/user/{username}      | 100 calls/second/App Key  | 100 calls/second    |  
 | Retrieve All User Attributes of a Specified User/Retrieve the Total Size of User Attributes in an App    | GET     | <br/> - /{org_name}/{app_name}/metadata/user/{username} <br/> - /{org_name}/{app_name}/metadata/user/capacity      | 100 calls/second/App Key | 100 calls/second    |  
 
@@ -243,8 +243,8 @@ The total default call frequency limit for the user management APIs and offline 
 | RESTful API |Method  | API URL| Maximum API call frequency (default) | Single add-on package size|
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Set User Presence Information  |  POST     | /{org_name}/{app_name}/users/{uid}/presence/{resource}/{status} | 50 calls/second/App Key  | 100 calls/second    |  
-| Subscribe to Presence in Batches    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 50 calls/second/App Key   | 50 calls/second    |  
-| Retrieve Presence in Batches    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 calls/second/App Key | 50 calls/second    |  
+| Subscribe to Presence in Bulk    |  POST      | /{org_name}/{app_name}/users/{uid}/presence/{expiry}         | 50 calls/second/App Key   | 50 calls/second    |  
+| Retrieve Presence in Bulk    |  POST   | /{org_name}/{app_name}/users/{uid}/presence                  | 50 calls/second/App Key | 50 calls/second    |  
 | Retrieve the Number of Online Members in a Chat Group    |  GET   | /{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}  | 100 calls/second/App Key |          |  
 | Unsubscribe from the Presence of Multiple Users     |  DELETE           | /{org_name}/{app_name}/users/{uid}/presence                  | 50 calls/second/App Key    | 100 calls/second    |  
 | Retrieve the Subscription List    |   GET       | /{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize} | 50 calls/second/App Key  | 100 calls/second    |  
@@ -263,7 +263,7 @@ The total default call frequency limit for the user management APIs and offline 
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Get User Favorites by Page      | GET  | /{org_name}/{app_name}/users/{username}/collections   | 100 calls/second/App Key |          |  
 | Add a Favorite      | POST  | /{org_name}/{app_name}/users/{username}/collections   | 100 calls/second/App Key |          |  
-| Add User Favorites in Batches      | POST  | /{org_name}/{app_name}/collections   | 100 calls/second/App Key |          |  
+| Add User Favorites in Bulk      | POST  | /{org_name}/{app_name}/collections   | 100 calls/second/App Key |          |  
 | Modify the Extension Information of a User Favorite   | PUT  | /{org_name}/{app_name}/users/{username}/collections/{collectionId}  | 100 calls/second/App Key |          |  
 | Delete User Favorites   | DELETE | /{org_name}/{app_name}/users/{username}/collections  | 100 calls/second/App Key |          |  
 
@@ -290,7 +290,7 @@ The total default call frequency limit for the user management APIs and offline 
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Configure Offline Push         | PUT  | /{org}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 calls/second/App Key          | The combined add-on package size for this API and the Retrieve Offline Push Settings API in the following row is 100 calls/second.    |  
 | Retrieve Offline Push Settings     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} | 100 calls/second/App Key  | The combined add-on package size for this API and the Configure Offline Push API in the preceding row is 100 calls/second.    |  
-| Set Offline Push Nicknames in Batches     | PUT | /{org_name}/{app_name}/push/nickname | 100 calls/second/App Key  |          |  
+| Set Offline Push Nicknames in Bulk     | PUT | /{org_name}/{app_name}/push/nickname | 100 calls/second/App Key  |          |  
 | Set the Preferred Language for Push Notifications     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 calls/second/App Key          |          |  
 | Retrieve the Preferred Language for Push Notifications | GET  | /{org_name}/{app_name}/users/{userId}/notification/language | 100 calls/second/App Key  |          |  
 | Create an Offline Push Template          | POST  | /{org_name}/{app_name}/notification/template | 10 calls/second/App Key  |          |  
@@ -321,7 +321,7 @@ The total default call frequency limit for the user management APIs and offline 
 | Modify a Keyword | PUT | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 calls/second/App Key | 50 calls/second  |
 | Query Keywords | POST | /{org_name}/{app_name}/moderation/text/list/{list_id}/word | 100 calls/second/App Key | 50 calls/second  |
 | Delete a Keyword | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word?wordId={word_id} | 100 calls/second/App Key | 50 calls/second  |
-| Delete Keywords in Batches | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 calls/second/App Key | 50 calls/second  |
+| Delete Keywords in Bulk | DELETE | /{org_name}/{app_name}/moderation/text/list/(list_id)/word/batch | 100 calls/second/App Key | 50 calls/second  |
 
 </HideSection>
 -->

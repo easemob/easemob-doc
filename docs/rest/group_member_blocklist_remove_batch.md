@@ -1,4 +1,4 @@
-# Remove Users from the Group Blocklist in Batches
+# Remove Users from the Group Blocklist in Bulk
 
 ## Feature overview
 
@@ -75,7 +75,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | :------------- | :----- | :-------------------------- |
 | `data` | JSON Array | Response data.|
 |  - `result`  | Bool   | Whether the user was removed successfully: <br/> - `true`: The user was removed; <br/> - `false`: The user was not removed. |
-|  - `action`  | String | The operation performed. In this response, the value of this field is `remove_blocks`, indicating that users are removed from the group blocklist in batches. |
+|  - `action`  | String | The operation performed. In this response, the value of this field is `remove_blocks`, indicating that users are removed from the group blocklist in bulk. |
 |  - `user`    | String | Removed user ID.                                                                      |
 |  - `groupid` | String | Chat group ID.                                                                              |
 

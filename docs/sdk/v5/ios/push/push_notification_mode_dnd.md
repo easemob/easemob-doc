@@ -190,9 +190,9 @@ const result = await client.pushManager.getConversationSilentMode({
 });
 ```
 
-## Retrieve push-receiving rules for conversations in batches
+## Retrieve push-receiving rules for conversations in bulk
 
-Call `client.pushManager.getConversationSilentModes` to retrieve the offline-push notification receiving rules for multiple conversations in batches.
+Call `client.pushManager.getConversationSilentModes` to retrieve the offline-push notification receiving rules for multiple conversations in bulk.
 
 Note the following when using this API:
 

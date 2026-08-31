@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Check in batches whether users are in a friend list.
+Check in bulk whether users are in a friend list.
 
 ## Call frequency limit
 
@@ -44,7 +44,7 @@ The request body is a JSON object containing the following fields:
 
 | Parameter  | Type | Required  | Description             | 
 | :---- | :----- | :---------------------- | :------- |
-| `username` | String | Yes | Current user ID whose friends are to be checked in batches. | 
+| `username` | String | Yes | Current user ID whose friends are to be checked in bulk. | 
 | `check_list` | JSON Array | Yes | User IDs of friends to check, with up to 100 user IDs per request. | 
 
 ## Response example

@@ -154,7 +154,7 @@ Example:
 
 | Error code | Error | Description and possible cause | Solution |
 | :----- | :------------ | :--------------------------- | :--------------------------- |
-| 900    |       `EMErrorUserCountExceed`        | The number of users whose attributes are being retrieved exceeds 100. | Attributes can be retrieved for a maximum of 100 users in each API call. Retrieve them in batches. |
+| 900    |       `EMErrorUserCountExceed`        | The number of users whose attributes are being retrieved exceeds 100. | Attributes can be retrieved for a maximum of 100 users in each API call. Retrieve them in bulk. |
 | 901    |   `EMErrorUserInfoDataLengthExceed`   | The user attributes being set are too long. All attribute data for a single user cannot exceed 2 KB, and the attribute data for all users in a single app cannot exceed 10 GB. | Check whether the user attributes set through the API exceed the limit. |
 
 ## Contact errors

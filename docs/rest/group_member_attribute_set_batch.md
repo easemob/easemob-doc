@@ -1,8 +1,8 @@
-# Set Custom Attributes of Chat Group Members in Batches
+# Set Custom Attributes of Chat Group Members in Bulk
 
 ## Feature overview
 
-- Set custom attributes as key-value pairs for chat group members in batches, such as nicknames and avatars in the chat group.
+- Set custom attributes as key-value pairs for chat group members in bulk, such as nicknames and avatars in the chat group.
 - Multiple attributes can be set for up to 20 chat group members per request, and different attributes can be set for different chat group members.
 - For the same user ID, new attribute names are added and existing attribute names are updated.
 

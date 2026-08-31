@@ -46,6 +46,6 @@ EMError *error = nil;
 
 | API name | Module/Type | Description |
 | :--- | :--- | :--- |
-| [`importMessages`](#batch-import-messages-into-the-database) | `IEMChatManager` | Imports messages in batches asynchronously. |
+| [`importMessages`](#batch-import-messages-into-the-database) | `IEMChatManager` | Imports messages in bulk asynchronously. |
 | [`getConversation`](#insert-a-message) | `IEMChatManager` | Retrieves or creates a local conversation. |
 | [`insertMessage`](#insert-a-message) | `EMConversation` | Inserts a message into a local conversation synchronously. |

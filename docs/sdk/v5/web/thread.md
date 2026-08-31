@@ -212,9 +212,9 @@ console.log('Thread list in the group:', result.items);
 console.log('Next-page cursor:', result.cursor);
 ```
 
-## Retrieve the last messages in message threads in batches
+## Retrieve the last messages in message threads in bulk
 
-Call `getChatThreadLastMessageList` to retrieve the last-message summaries for one or more message threads from the server in batches.
+Call `getChatThreadLastMessageList` to retrieve the last-message summaries for one or more message threads from the server in bulk.
 
 Example code:
 
@@ -281,4 +281,4 @@ client.addEventHandler('thread-multi-device-events', {
 | [`getChatThreadMemberList`](#retrieve-a-message-threads-member-list)           | `ChatThreadManager` | Retrieves a message thread's member list with pagination.                       |
 | [`getJoinedChatThreadList`](#retrieve-message-thread-lists)               | `ChatThreadManager` | Retrieves the current user's joined-message-thread list with pagination.           |
 | [`getChatThreadList`](#retrieve-message-thread-lists)                     | `ChatThreadManager` | Retrieves the message thread list in a specified chat group with pagination.               |
-| [`getChatThreadLastMessageList`](#retrieve-the-last-messages-in-message-threads-in-batches) | `ChatThreadManager` | Retrieves the last-message summaries for one or more message threads in batches. |
+| [`getChatThreadLastMessageList`](#retrieve-the-last-messages-in-message-threads-in-batches) | `ChatThreadManager` | Retrieves the last-message summaries for one or more message threads in bulk. |

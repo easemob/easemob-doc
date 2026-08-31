@@ -6,7 +6,7 @@
 - If the user is logged in on multiple devices, the user is considered online as long as at least one device is online.
 
 :::tip
-This API queries whether a single user is online or offline. To query users' presence in batches, including online, offline, or custom status, use the [Retrieve presence in batches](presence_get.html) API.
+This API queries whether a single user is online or offline. To query users' presence in bulk, including online, offline, or custom status, use the [Retrieve presence in bulk](presence_get.html) API.
 :::
 
 ## Call frequency limit

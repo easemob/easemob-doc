@@ -1,4 +1,4 @@
-# Retrieve User Details in Batches
+# Retrieve User Details in Bulk
 
 ## Feature overview
 

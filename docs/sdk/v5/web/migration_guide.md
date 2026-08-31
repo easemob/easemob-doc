@@ -585,15 +585,15 @@ Chat-room-related APIs are migrated from `conn.xxx` to `client.chatRoomManager.x
 | `conn.leaveChatRoom({ roomId })` | `chatRoomManager.leaveChatRoom({ chatRoomId })` | `roomId` changes to `chatRoomId`. |
 | `conn.modifyChatRoom(params)` | `chatRoomManager.updateChatRoomInfo(params)` | Method renamed. |
 | `conn.getChatRoomMembers({ chatRoomId, cursor, limit })` | `chatRoomManager.getMemberList({ chatRoomId, cursor, pageSize })` | `limit` changes to `pageSize`. |
-| `conn.removeChatRoomMember(params)` | `chatRoomManager.removeMembers({ chatRoomId, userIds })` | Supports removing members in batches. |
+| `conn.removeChatRoomMember(params)` | `chatRoomManager.removeMembers({ chatRoomId, userIds })` | Supports removing members in bulk. |
 | `conn.setChatRoomAdmin({ chatRoomId, username })` | `chatRoomManager.addAdmin({ chatRoomId, userId })` | `username` changes to `userId`. |
 | `conn.removeChatRoomAdmin({ chatRoomId, username })` | `chatRoomManager.removeAdmin({ chatRoomId, userId })` | `username` changes to `userId`. |
 | `conn.getChatRoomMuteList(params)` | `chatRoomManager.getMuteList(params)` | Method renamed. |
-| `conn.muteChatRoomMember(params)` | `chatRoomManager.muteMembers({ chatRoomId, userIds, duration })` | Supports muting members in batches. |
-| `conn.unmuteChatRoomMember(params)` | `chatRoomManager.unmuteMembers({ chatRoomId, userIds })` | Supports unmuting members in batches. |
+| `conn.muteChatRoomMember(params)` | `chatRoomManager.muteMembers({ chatRoomId, userIds, duration })` | Supports muting members in bulk. |
+| `conn.unmuteChatRoomMember(params)` | `chatRoomManager.unmuteMembers({ chatRoomId, userIds })` | Supports unmuting members in bulk. |
 | `conn.getChatRoomBlocklist(params)` | `chatRoomManager.getBlocklist(params)` | Method renamed. |
-| `conn.blockChatRoomMembers(params)` | `chatRoomManager.blockMembers({ chatRoomId, userIds })` | Supports adding members to the blocklist in batches. |
-| `conn.unblockChatRoomMembers(params)` | `chatRoomManager.unblockMembers({ chatRoomId, userIds })` | Supports removing members from the blocklist in batches. |
+| `conn.blockChatRoomMembers(params)` | `chatRoomManager.blockMembers({ chatRoomId, userIds })` | Supports adding members to the blocklist in bulk. |
+| `conn.unblockChatRoomMembers(params)` | `chatRoomManager.unblockMembers({ chatRoomId, userIds })` | Supports removing members from the blocklist in bulk. |
 | `conn.fetchChatRoomAnnouncement(params)` | `chatRoomManager.getAnnouncement(params)` | Method renamed. |
 | `conn.updateChatRoomAnnouncement(params)` | `chatRoomManager.updateAnnouncement(params)` | Method renamed. |
 | `conn.getChatRoomAttributes(params)` | `chatRoomManager.getAttributes(params)` | Method renamed. |
@@ -652,7 +652,7 @@ Push-related APIs are migrated from `conn.xxx` to `client.pushManager.xxx`. In t
 | `conn.getSilentModeForAll()` | `pushManager.getGlobalSilentMode()` | Retrieves the global push configuration. |
 | `conn.setSilentModeForConversation(params)` | `pushManager.setConversationSilentMode(params)` | Sets conversation-level push-receiving or Do Not Disturb rules. |
 | `conn.getSilentModeForConversation(params)` | `pushManager.getConversationSilentMode(params)` | Retrieves the push configuration for a single conversation. |
-| `conn.getSilentModeForConversations(params)` | `pushManager.getConversationSilentModes(params)` | Retrieves push configurations for multiple conversations in batches. |
+| `conn.getSilentModeForConversations(params)` | `pushManager.getConversationSilentModes(params)` | Retrieves push configurations for multiple conversations in bulk. |
 | `conn.clearRemindTypeForConversation(params)` | `pushManager.clearConversationRemindType(params)` | Clears the conversation-level push notification mode. |
 | `conn.setPushPerformLanguage(params)` | `pushManager.setPushLanguage(params)` | Sets the display language for offline push notifications. |
 | `conn.getPushPerformLanguage()` | `pushManager.getPushLanguage()` | Retrieves the display language for offline push notifications. |

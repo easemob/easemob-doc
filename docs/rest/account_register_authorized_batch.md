@@ -1,4 +1,4 @@
-# Register Users in Batches with Authorization
+# Register Users in Bulk with Authorization
 
 ## Feature overview
 

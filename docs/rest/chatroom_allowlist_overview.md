@@ -17,6 +17,6 @@ Members on the chat room allowlist have the following characteristics:
 Chat room allowlist management includes the following APIs:
 
 - [Retrieve the chat room allowlist](chatroom_allowlist_obtain.html)
-- [Add users to the chat room allowlist in batches](chatroom_allowlist_add_batch.html)
+- [Add users to the chat room allowlist in bulk](chatroom_allowlist_add_batch.html)
 - [Add a user to the chat room allowlist](chatroom_allowlist_add_single.html)
 - [Remove users from the chat room allowlist](chatroom_allowlist_remove.html)

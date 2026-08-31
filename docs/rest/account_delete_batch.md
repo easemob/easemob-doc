@@ -1,4 +1,4 @@
-# Delete Users in Batches
+# Delete Users in Bulk
 
 ## Feature overview
 

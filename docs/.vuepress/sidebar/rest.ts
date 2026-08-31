@@ -1,14 +1,14 @@
 /** Complete English REST API and Webhooks sidebar. Menu labels are independent of Markdown H1 titles. */
 export const REST_SIDEBAR = [
   {
-    "text": "REST API Overview",
+    "text": "Server API Overview",
     "link": "/rest/overview.html",
     "only": [
       "server-side"
     ]
   },
   {
-    "text": "API Call Frequency Limits",
+    "text": "API Call Frequency Limit",
     "link": "/rest/limitationapi.html",
     "only": [
       "server-side"
@@ -343,7 +343,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Upload and Download Files",
+        "text": "Upload & Download File",
         "collapsible": true,
         "children": [
           {
@@ -369,7 +369,7 @@ export const REST_SIDEBAR = [
         "link": "/rest/message_attachment_storage.html"
       },
       {
-        "text": "Message Reactions",
+        "text": "Reaction",
         "collapsible": true,
         "children": [
           {
@@ -413,11 +413,11 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Delete by Message (One-to-One)",
+            "text": "Delete by Msg ID (One-to-One)",
             "link": "/rest/message_delete_roam_single_msgid.html"
           },
           {
-            "text": "Delete by Message (Group/Room)",
+            "text": "Delete by Msg ID (Group/Room)",
             "link": "/rest/message_delete_roam_group_room_msgid.html"
           },
           {
@@ -498,7 +498,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Manage Groups",
+        "text": "Manage Group",
         "collapsible": true,
         "children": [
           {
@@ -534,7 +534,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Shared Files",
+        "text": "Shared File",
         "collapsible": true,
         "children": [
           {
@@ -556,7 +556,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Add Members",
+        "text": "Add Member",
         "collapsible": true,
         "children": [
           {
@@ -570,7 +570,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Remove Members",
+        "text": "Remove Member",
         "collapsible": true,
         "children": [
           {
@@ -584,7 +584,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Manage Members",
+        "text": "Manage Member",
         "collapsible": true,
         "children": [
           {
@@ -592,7 +592,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/group_member_list_obtain.html"
           },
           {
-            "text": "Owner and Admins",
+            "text": "Owner & Admin",
             "collapsible": true,
             "children": [
               {
@@ -692,7 +692,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/group_check_joined.html"
           },
           {
-            "text": "Custom Member Attributes",
+            "text": "Custom Member Attribute",
             "collapsible": true,
             "children": [
               {
@@ -716,7 +716,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Message Threads",
+        "text": "Message Thread",
         "collapsible": true,
         "children": [
           {
@@ -767,7 +767,7 @@ export const REST_SIDEBAR = [
     "collapsible": true,
     "children": [
       {
-        "text": "Superadmins",
+        "text": "Superadmin",
         "collapsible": true,
         "children": [
           {
@@ -807,7 +807,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Manage Chat Rooms",
+        "text": "Manage Chat Room",
         "collapsible": true,
         "children": [
           {
@@ -835,7 +835,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Custom Attributes",
+        "text": "Custom Attribute",
         "collapsible": true,
         "children": [
           {
@@ -861,7 +861,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Add Members",
+        "text": "Add Member",
         "collapsible": true,
         "children": [
           {
@@ -875,7 +875,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Remove Members",
+        "text": "Remove Member",
         "collapsible": true,
         "children": [
           {
@@ -889,7 +889,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Manage Members",
+        "text": "Manage Member",
         "collapsible": true,
         "children": [
           {
@@ -897,7 +897,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/chatroom_member_list_obtain.html"
           },
           {
-            "text": "Owner and Admins",
+            "text": "Owner & Admin",
             "collapsible": true,
             "children": [
               {
@@ -947,7 +947,7 @@ export const REST_SIDEBAR = [
                 "link": "/rest/chatroom_user_tag_mute.html"
               },
               {
-                "text": "Set Room Tags by User",
+                "text": "Set Room Tag by User",
                 "link": "/rest/chatroom_user_tag_set.html"
               },
               {
@@ -1024,7 +1024,7 @@ export const REST_SIDEBAR = [
         "collapsible": true,
         "children": [
           {
-            "text": "Bind and Unbind Push Info",
+            "text": "Bind & Unbind Push Info",
             "link": "/rest/push_information_bind_unbind.html"
           },
           {
@@ -1052,7 +1052,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/push_settings_query.html"
           },
           {
-            "text": "Use Push Templates",
+            "text": "Use Push Template",
             "collapsible": true,
             "children": [
               {
@@ -1088,7 +1088,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Message Extensions",
+        "text": "Message Extension",
         "link": "/rest/push_extension.html"
       },
       {
@@ -1124,7 +1124,7 @@ export const REST_SIDEBAR = [
         "link": "/rest/callback_postsending.html"
       },
       {
-        "text": "Webhook Events",
+        "text": "Webhook Event",
         "collapsible": true,
         "children": [
           {
@@ -1132,7 +1132,7 @@ export const REST_SIDEBAR = [
             "link": "/rest/callback_login_logout.html"
           },
           {
-            "text": "Friend and Blocklist",
+            "text": "Friend & Blocklist",
             "link": "/rest/callback_contact.html"
           },
           {
@@ -1166,11 +1166,11 @@ export const REST_SIDEBAR = [
             ]
           },
           {
-            "text": "Chat Group and Chat Room",
+            "text": "Chat Group & Chat Room",
             "collapsible": true,
             "children": [
               {
-                "text": "Creation and Deletion",
+                "text": "Creation & Deletion",
                 "collapsible": true,
                 "children": [
                   {
@@ -1184,7 +1184,7 @@ export const REST_SIDEBAR = [
                 ]
               },
               {
-                "text": "Info and Status Changes",
+                "text": "Info & Status Change",
                 "collapsible": true,
                 "children": [
                   {
@@ -1214,7 +1214,7 @@ export const REST_SIDEBAR = [
                 ]
               },
               {
-                "text": "Member and Permission Changes",
+                "text": "Member & Permission Change",
                 "collapsible": true,
                 "children": [
                   {
@@ -1248,7 +1248,7 @@ export const REST_SIDEBAR = [
                 ]
               },
               {
-                "text": "Content and Resource Operations",
+                "text": "Content & Resource Operation",
                 "collapsible": true,
                 "children": [
                   {
@@ -1270,7 +1270,7 @@ export const REST_SIDEBAR = [
         ]
       },
       {
-        "text": "Webhook Data Storage on the Chat Server",
+        "text": "Webhook Data Storage",
         "link": "/rest/callback_postsending_exception_storage.html"
       }
     ],

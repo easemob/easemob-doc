@@ -62,7 +62,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 }
 ```
 
-Because this API sets chat room custom attributes in batches, you can specify multiple key-value pairs at a time. Even if validation fails for some key-value pairs, the other pairs are still written normally, and the response status code remains `200`, as shown below:
+Because this API sets chat room custom attributes in bulk, you can specify multiple key-value pairs at a time. Even if validation fails for some key-value pairs, the other pairs are still written normally, and the response status code remains `200`, as shown below:
 
 ```json
 {

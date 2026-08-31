@@ -24,7 +24,7 @@ The maximum number of registered users supported by an app depends on its subscr
 
 User registration modes include authorized registration and open registration. Click **Edit** to switch the user registration mode.
 
-- Authorized registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account, and then save the account on your server or return it to the client. This API is intended for production environments. For details about the related REST APIs, see [Register a User Through Authorized Registration](/rest/account_register_authorized_single.html) and [Register Users in Batches Through Authorized Registration](/rest/account_register_authorized_batch.html).
+- Authorized registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account, and then save the account on your server or return it to the client. This API is intended for production environments. For details about the related REST APIs, see [Register a User Through Authorized Registration](/rest/account_register_authorized_single.html) and [Register Users in Bulk Through Authorized Registration](/rest/account_register_authorized_batch.html).
 - Open registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account. This API is generally intended for demo and test environments and is not recommended for production environments. For details about the related APIs, see the [REST API](/rest/account_register_open.html) documentation.
 
 ![img](/images/console/basic_user_registration.png)

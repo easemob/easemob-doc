@@ -151,7 +151,7 @@ message.isNeedReadReceipt = YES;
 
 #### Step 2: Send message read receipts
 
-After reading messages, the recipient calls `sendMessageReadReceipts` to send read receipts in batches. You can pass up to 50 messages in each call. All messages must belong to the same conversation, and `isNeedReadReceipt` must be `YES`.
+After reading messages, the recipient calls `sendMessageReadReceipts` to send read receipts in bulk. You can pass up to 50 messages in each call. All messages must belong to the same conversation, and `isNeedReadReceipt` must be `YES`.
 
 ```objectivec
 // Pass only received messages that have been read, require read receipts, and belong to the same conversation.
@@ -301,7 +301,7 @@ Sending message read receipts and clearing conversation unread counts are indepe
 | [`initWithConversationID`](#step-1-set-a-message-to-require-a-read-receipt) | `EMChatMessage` | Creates a message. |
 | [`chatType`](#step-1-set-a-message-to-require-a-read-receipt) | `EMChatMessage` | Sets the conversation type of a message. |
 | [`sendMessage`](#step-1-set-a-message-to-require-a-read-receipt) | `IEMChatManager` | Sends a message asynchronously. |
-| [`sendMessageReadReceipts`](#step-2-send-message-read-receipts) | `IEMChatManager` | Asynchronously sends read receipts for one-to-one or group messages in batches. |
+| [`sendMessageReadReceipts`](#step-2-send-message-read-receipts) | `IEMChatManager` | Asynchronously sends read receipts for one-to-one or group messages in bulk. |
 | [`messageId`](#step-3-monitor-message-read-receipts) / [`conversationId`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieves the message ID and conversation ID corresponding to a receipt. |
 | [`isPeerReceipt`](#step-3-monitor-message-read-receipts) / [`readCount`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieves the one-to-one peer receipt status or group message read count. |
 | [`getGroupMessageReadReceipts`](#batch-retrieve-receipt-summaries-for-multiple-group-messages) | `IEMChatManager` | Batch retrieves read receipt details for multiple group messages. |

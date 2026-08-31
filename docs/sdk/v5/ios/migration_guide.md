@@ -7,7 +7,7 @@ EasyIM iOS SDK 5.0.0 is a major release that is not source-compatible. The upgra
 1. **Data synchronization mechanism changes**
    After login, the SDK can automatically synchronize conversations, contacts, and joined chat groups and save the data to the local database, replacing the server data retrieval APIs previously called by the app.
 2. **Message read receipt mechanism redesign**
-   Read receipts are now sent in batches instead of individually. Clearing the local unread count is independent of sending read receipts to message senders. One-to-one and group chats use a unified receipt model and callback.
+   Read receipts are now sent in bulk instead of individually. Clearing the local unread count is independent of sending read receipts to message senders. One-to-one and group chats use a unified receipt model and callback.
 3. **Chat group configuration model redesign**
    The single `EMGroupStyle` enum is split into the three Boolean properties `isPublic`, `joinApprovalRequired`, and `allowInvites`. Chat group properties can also be updated by configuration type after a chat group is created.
 4. **Legacy API cleanup**
@@ -101,13 +101,13 @@ Accordingly, `EMContactManagerDelegate#onFriendStartSync` and `onFriendSyncFinis
 
 ## Read receipt mechanism redesign
 
-Message read receipts are now sent in batches instead of individually. Whether a receipt is required is set per message through `EMChatMessage.isNeedReadReceipt`. Sending message read receipts is independent of clearing conversation unread counts. The old APIs have no compatibility aliases, so these are incompatible changes.
+Message read receipts are now sent in bulk instead of individually. Whether a receipt is required is set per message through `EMChatMessage.isNeedReadReceipt`. Sending message read receipts is independent of clearing conversation unread counts. The old APIs have no compatibility aliases, so these are incompatible changes.
 
 ### Sending message read receipts and clearing unread counts
 
 | Removed API | 5.0.0 alternative | Description |
 | :--- | :--- | :--- |
-| `IEMChatManager#sendMessageReadAck:toUser:completion:` | `sendMessageReadReceipts:completion:` | Sends message read receipts in batches. The same API is used for one-to-one and group chats. |
+| `IEMChatManager#sendMessageReadAck:toUser:completion:` | `sendMessageReadReceipts:completion:` | Sends message read receipts in bulk. The same API is used for one-to-one and group chats. |
 | `IEMChatManager#sendGroupMessageReadAck:toGroup:content:completion:` | `sendMessageReadReceipts:completion:` | A separate API is no longer provided for individual group message read receipts, and `content` can no longer carry custom content in a group message read receipt. |
 | `IEMChatManager#ackConversationRead:completion:` | `clearConversationUnreadMessageCount:completion:`, and call `sendMessageReadReceipts:completion:` as needed | The old API sends a conversation-level read receipt. In 5.0.0, clearing the current user's unread count and notifying message senders are separate operations. |
 | `IEMChatManager#markAllConversationsAsRead` | `clearAllConversationUnreadMessageCount:` | Clears unread counts for all local conversations and synchronizes the result to the current user's other devices. |
@@ -140,7 +140,7 @@ SDK 5.0.0 adds `EMMessageReadReceipt` to uniformly describe message read receipt
 | 4.x API | 5.0.0 API | Description |
 | :--- | :--- | :--- |
 | `asyncFetchGroupMessageAcksFromServer:groupId:startGroupAckId:pageSize:completion:` | `asyncFetchGroupMessageReadUsersFromServer:groupId:readReceiptId:pageSize:completion:` | Retrieves by page the details of members who have read a specified group message. Returns `EMCursorResult<EMGroupReadReceipt *>`, an error, and the total read count. Pass the cursor from the previous page as `readReceiptId` for the next page. |
-| None | `getGroupMessageReadReceipts:completion:` | Retrieves read receipt summaries for group messages from the server in batches. Pass up to 20 messages per call, and all messages must belong to the same conversation. Returns a list of `EMMessageReadReceipt` objects. |
+| None | `getGroupMessageReadReceipts:completion:` | Retrieves read receipt summaries for group messages from the server in bulk. Pass up to 20 messages per call, and all messages must belong to the same conversation. Returns a list of `EMMessageReadReceipt` objects. |
 
 The receipt details model changes from `EMGroupMessageAck` to `EMGroupReadReceipt`:
 
@@ -270,13 +270,13 @@ The target user Token required by these APIs should be provided by a trusted bus
 | :--- | :--- | :--- |
 | `EMOptions` | `dataSyncType` and `EMDataSyncType` | Configures automatic synchronization of conversations, contacts, and joined chat groups after login. Types can be combined with a bitwise OR. |
 | `EMClientDelegate` | `onDatabaseOpened:username:`, `syncDataStartWithType:`, and `syncDataFinished:type:` | Monitors local database opening and the start and end of automatic data synchronization. |
-| `IEMChatManager` | `sendMessageReadReceipts:completion:` | Sends read receipts for one-to-one or group chat messages in batches. Pass up to 50 messages, which must belong to the same conversation. |
+| `IEMChatManager` | `sendMessageReadReceipts:completion:` | Sends read receipts for one-to-one or group chat messages in bulk. Pass up to 50 messages, which must belong to the same conversation. |
 | `IEMChatManager` | `clearConversationUnreadMessageCount:completion:` and `clearAllConversationUnreadMessageCount:` | Clears the local unread count for a specified conversation or all conversations and synchronizes the result to the current account's other devices, without sending message read receipts to senders. |
-| `IEMChatManager` | `getGroupMessageReadReceipts:completion:` | Queries group message read receipt summaries in batches. Pass up to 20 messages, which must belong to the same conversation. |
+| `IEMChatManager` | `getGroupMessageReadReceipts:completion:` | Queries group message read receipt summaries in bulk. Pass up to 20 messages, which must belong to the same conversation. |
 | `IEMChatManager` | `getUnreadMessageCount` | Gets the total unread message count of local conversations. Chat rooms and conversations in do-not-disturb mode are excluded. |
 | `IEMChatManager` | `addConversationDelegate:delegateQueue:` and `removeConversationDelegate:` | Registers or removes a conversation list update delegate and allows the callback queue to be specified. |
 | `EMConversation` | `conversationName` and `conversationAvatar` | Gets the conversation display name and avatar. For a one-to-one chat, returns the peer's user information; for a group chat, returns the chat group information. The value may be empty if the relevant data has not been synchronized. |
-| `IEMContactManager` | `saveBlackList:completion:` | Adds users to the blocklist in batches and returns any operation error through the completion. |
+| `IEMContactManager` | `saveBlackList:completion:` | Adds users to the blocklist in bulk and returns any operation error through the completion. |
 | `IEMGroupManager` | `updateGroupWithId:types:configs:completion:` | Updates the fields specified by `EMGroupConfigsType` in the chat group configuration. |
 | `EMGroup` | `users` | Gets the IDs of all chat group members, including the owner, admins, and regular members. The SDK merges the arrays by role without deduplication. |
 | `EMMultiDevicesEvent` | `EMMultiDevicesEventConversationUnreadMessageCountCleared` and `EMMultiDevicesEventAllConversationUnreadMessageCountCleared` | Notifies other devices that the unread count of one conversation or all conversations has been cleared. |

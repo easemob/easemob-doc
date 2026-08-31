@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-- Check in batches whether users are on a user's blocklist.
+- Check in bulk whether users are on a user's blocklist.
 - Before using this API, activate the blocklist feature for free in the EasyIM Console. For details, see [EasyIM Console documentation](/product/console/basic_user.html#user-blocklist).
 
 ## Feature activation

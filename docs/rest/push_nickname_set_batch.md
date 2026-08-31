@@ -1,8 +1,8 @@
-# Set Offline Push Nicknames in Batches
+# Set Offline Push Nicknames in Bulk
 
 ## Feature overview
 
-- Set the nicknames displayed in users' offline push notifications in batches.
+- Set the nicknames displayed in users' offline push notifications in bulk.
 - You can set nicknames for up to 50 user IDs in a single request.
 
 ## Call frequency limit

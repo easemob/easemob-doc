@@ -1,4 +1,4 @@
-# Add Users to the Chat Group Allowlist in Batches
+# Add Users to the Chat Group Allowlist in Bulk
 
 ## Feature overview
 

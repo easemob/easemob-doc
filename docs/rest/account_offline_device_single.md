@@ -1,4 +1,4 @@
-# Force a User Offline on a Specific Device
+# Kick a User Offline on a Specific Device
 
 ## Feature overview
 

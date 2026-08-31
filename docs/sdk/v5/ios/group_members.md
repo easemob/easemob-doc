@@ -129,7 +129,7 @@ EMClient.shared().groupManager?.fetchMemberAttribute(
 
 ### Retrieve chat group member custom attributes by attribute key
 
-Call `fetchMembersAttributes` to retrieve member attributes in batches by attribute key. Pass an empty array for `keys` to retrieve all attributes of these members.
+Call `fetchMembersAttributes` to retrieve member attributes in bulk by attribute key. Pass an empty array for `keys` to retrieve all attributes of these members.
 
 :::tip
 You can retrieve custom attributes for at most 10 chat group members in each request.
@@ -142,7 +142,7 @@ EMClient.shared().groupManager?.fetchMembersAttributes(
     keys: ["department", "roleTag"]
 ) { attributes, error in
     if let error {
-        print("Failed to retrieve member attributes in batches: \(error.errorDescription)")
+        print("Failed to retrieve member attributes in bulk: \(error.errorDescription)")
         return
     }
     print(attributes ?? [:])
@@ -428,7 +428,7 @@ Implement `EMGroupManagerDelegate` and register it through `addDelegate`. For ca
 | [`getGroupMemberListFromServerWithId`](#retrieve-chat-group-member-ids-by-page) | `IEMGroupManager` | Retrieves the member ID list. |
 | [`setMemberAttribute`](#set-custom-attributes-for-a-chat-group-member) | `IEMGroupManager` | Sets member attributes. |
 | [`fetchMemberAttribute`](#retrieve-a-single-chat-group-members-custom-attributes) | `IEMGroupManager` | Retrieves a single member's attributes. |
-| [`fetchMembersAttributes`](#retrieve-chat-group-member-custom-attributes-by-attribute-key) | `IEMGroupManager` | Retrieves member attributes in batches. |
+| [`fetchMembersAttributes`](#retrieve-chat-group-member-custom-attributes-by-attribute-key) | `IEMGroupManager` | Retrieves member attributes in bulk. |
 | [`updateGroupOwner`](#transfer-the-chat-group-ownership) | `IEMGroupManager` | Transfers chat group ownership. |
 | [`addAdmin`](#add-a-chat-group-admin) | `IEMGroupManager` | Adds an admin. |
 | [`removeAdmin`](#remove-a-chat-group-admin) | `IEMGroupManager` | Removes an admin. |

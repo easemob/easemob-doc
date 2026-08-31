@@ -1,8 +1,8 @@
-# Remove Message Thread Members in Batches
+# Remove Message Thread Members in Bulk
 
 ## Feature overview
 
-- Remove message thread members in batches.
+- Remove message thread members in bulk.
 - You can remove up to 10 message thread members at a time.
 - Before using this API, contact the EasyIM business manager to activate the message thread feature.
 

@@ -1,4 +1,4 @@
-# Add Users to the Group Blocklist in Batches
+# Add Users to the Group Blocklist in Bulk
 
 ## Feature overview
 
