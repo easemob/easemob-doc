@@ -1,8 +1,8 @@
-# Query the Global Mute Settings of a User
+# Retrieve the Global Mute Settings of a User
 
 ## Feature overview
 
-Query a user's global mute details for one-to-one chats, group chats, and chat rooms.
+Retrieve a user's global mute details for one-to-one chats, group chats, and chat rooms.
 
 ## Feature activation
 

@@ -1,4 +1,4 @@
-# Get User Attributes in Bulk
+# Bulk Retrieve User Attributes
 
 User attributes are information about users in real-time messaging interactions, such as nicknames, avatars, email addresses, phone numbers, gender, signatures, and birthdays.
 

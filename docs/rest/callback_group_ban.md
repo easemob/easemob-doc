@@ -1,4 +1,4 @@
-# Chat Group Ban Status Change Webhook Events
+# Chat Group Ban Status Change Events
 
 ## Feature overview
 

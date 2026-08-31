@@ -1,14 +1,14 @@
-# Register Users in Bulk with Authorization
+# Bulk Register Users with Token
 
 ## Feature overview
 
-- Batch registration uses authorized registration. The server must validate a valid app token before performing the operation.
+- Open registration allows users to sign up accounts using a username and password **with app token**. The server validates a valid app token before registering users.
 - You can register up to 60 user IDs in a single request.
 - User IDs and passwords must meet the relevant requirements when you register users.
 
 ## Configure authorized registration
 
-To use authorized registration, set the user registration mode on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
+To use this API, set the user registration mode to **Authorized Registration** on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Call frequency limit
 

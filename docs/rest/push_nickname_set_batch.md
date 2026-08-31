@@ -1,4 +1,4 @@
-# Set Offline Push Nicknames in Bulk
+# Bulk Set Offline Push Nicknames
 
 ## Feature overview
 

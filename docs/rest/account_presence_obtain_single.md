@@ -1,4 +1,4 @@
-# Retrieve a User's Presence
+# Retrieve Presence of a Single User
 
 ## Feature overview
 

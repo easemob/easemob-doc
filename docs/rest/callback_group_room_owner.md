@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Owner Change Webhook Events
+# Chat Group and Chat Room Owner Change Events
 
 ## Feature overview
 

@@ -1,4 +1,4 @@
-# Remove Chat Group Members in Bulk
+# Bulk Remove Chat Group Members
 
 ## Feature overview
 

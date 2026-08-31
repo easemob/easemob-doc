@@ -1,4 +1,4 @@
-# Message Recall Webhook Events
+# Message Recall Events
 
 ## Feature overview
 

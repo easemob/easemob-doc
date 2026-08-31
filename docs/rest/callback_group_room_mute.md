@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Mute List Webhook Events
+# Chat Group and Chat Room Mute List Events
 
 ## Feature overview
 

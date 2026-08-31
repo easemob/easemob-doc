@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Creation Webhook Events
+# Chat Group and Chat Room Creation Events
 
 ## Feature overview
 

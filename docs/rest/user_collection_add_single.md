@@ -1,4 +1,4 @@
-# Add a Favorite
+# Add a Single Favorite
 
 EasyIM lets you favorite successfully sent messages and other custom content. Favorites are stored permanently and can be viewed at any time. For example, to favorite a message attachment, first [set the message attachment to permanent storage](message_attachment_storage.html), and then add it to favorites so that its content remains available.
 

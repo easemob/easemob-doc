@@ -1,4 +1,4 @@
-# Message Thread Operation Webhook Events
+# Message Thread Operation Events
 
 ## Feature overview
 

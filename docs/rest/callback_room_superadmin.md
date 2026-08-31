@@ -1,4 +1,4 @@
-# Chat Room Superadmin Change Webhook Events
+# Chat Room Superadmin Change Events
 
 ## Feature overview
 

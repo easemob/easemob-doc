@@ -2,7 +2,7 @@
 
 This page describes the error codes returned by API calls or callbacks in the EasyIM Android SDK. Developers can use an error code to identify the cause of a failure and refer to the corresponding solution.
 
-Android SDK error codes are defined in the [`EMError`](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) class. For example, when registering a user, you can use `EMError.USER_ALREADY_EXIST` to determine whether the user already exists.
+Android SDK error codes are defined in the `EMError` class. For example, when registering a user, you can use `EMError.USER_ALREADY_EXIST` to determine whether the user already exists.
 
 Example:
 

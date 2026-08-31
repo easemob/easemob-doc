@@ -1,4 +1,4 @@
-# Retrieve the Chat Room Superadmin List by Page
+# Retrieve the Chat Room Superadmin List
 
 ## Feature overview
 

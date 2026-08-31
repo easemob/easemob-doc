@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Information Update Webhook Events
+# Chat Group and Chat Room Information Update Events
 
 ## Feature overview
 

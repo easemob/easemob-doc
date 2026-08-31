@@ -1,4 +1,4 @@
-# Remove a User from the Chat Room Blocklist
+# Remove a Single User from the Chat Room Blocklist
 
 ## Feature overview
 

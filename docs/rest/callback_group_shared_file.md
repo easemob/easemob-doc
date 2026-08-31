@@ -1,4 +1,4 @@
-# Chat Group Shared File Webhook Events
+# Chat Group Shared File Events
 
 ## Feature overview
 

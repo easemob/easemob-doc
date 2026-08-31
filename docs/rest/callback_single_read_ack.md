@@ -1,4 +1,4 @@
-# One-to-One Message Read Receipt Webhook Events
+# One-to-One Message Read Receipt Event
 
 ## Feature overview
 

@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Deletion Webhook Events
+# Chat Group and Chat Room Deletion Events
 
 ## Feature overview
 

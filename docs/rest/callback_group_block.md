@@ -1,4 +1,4 @@
-# Chat Group Block Status Change Webhook Events
+# Chat Group Block Status Change Events
 
 ## Feature overview
 

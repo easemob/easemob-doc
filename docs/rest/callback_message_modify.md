@@ -1,4 +1,4 @@
-# Message Editing Webhook Events
+# Message Editing Events
 
 ## Feature overview
 

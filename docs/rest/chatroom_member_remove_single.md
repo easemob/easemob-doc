@@ -1,4 +1,4 @@
-# Remove a Chat Room Member
+# Remove a Single Chat Room Member
 
 ## Feature overview
 

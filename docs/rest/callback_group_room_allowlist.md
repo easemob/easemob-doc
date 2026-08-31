@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Allowlist Webhook Events
+# Chat Group and Chat Room Allowlist Events
 
 ## Feature overview
 

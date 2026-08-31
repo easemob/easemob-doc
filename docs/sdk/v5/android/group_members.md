@@ -16,13 +16,13 @@ Before you begin, ensure that the following requirements are met:
 
 You can retrieve the group member list in the following three ways:
 
-- Retrieve group member information by page: Call `asyncFetchGroupMembersInfo` to retrieve member details from the server by page.
-- Retrieve group member IDs by page: Call `asyncFetchGroupMembers` to retrieve member IDs from the server by page.
+- Retrieve group member information with pagination: Call `asyncFetchGroupMembersInfo` to retrieve member details from the server by page.
+- Retrieve group member IDs with pagination: Call `asyncFetchGroupMembers` to retrieve member IDs from the server with pagination.
 - Retrieve member IDs from a local chat group object: Call `EMGroup#getUsers` to read member IDs from a retrieved `EMGroup` object.
 
-### Retrieve group member information by page
+### Retrieve group member information with pagination
 
-Call `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member information by page. The returned information includes each member's user ID, role, join time, name card, nickname, and avatar.
+Call `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member information with pagination. The returned information includes each member's user ID, role, join time, name card, nickname, and avatar.
 
 ```java
 // Asynchronous method.

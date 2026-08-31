@@ -1,4 +1,4 @@
-# Recall a Message
+# Recall a Single Message
 
 ## Feature overview
 

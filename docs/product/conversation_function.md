@@ -262,7 +262,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Set user attributes | Set the user nickname, avatar, email address, phone number, and other attributes. |
 | Retrieve user attributes | Retrieve all user attributes for one or more specified users.  |
 | Retrieve the total size of user attributes in an app (server side only) | Retrieve the size, in bytes, of the attribute data for all users in the app.  |
-| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified non-friend changes.  |
+| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified stranger changes.  |
 | Delete user attributes | Delete all attributes of a single user. |
 
 ### Presence subscriptions

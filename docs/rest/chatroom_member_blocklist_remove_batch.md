@@ -1,4 +1,4 @@
-# Remove Users from the Chat Room Blocklist in Bulk
+# Bulk Remove Users from the Chat Room Blocklist
 
 ## Feature overview
 

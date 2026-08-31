@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Member Join Webhook Events
+# Chat Group and Chat Room Member Join Events
 
 ## Feature overview
 

@@ -1,4 +1,4 @@
-# Recall Messages in Bulk
+# Bulk Recall Messages
 
 ## Feature overview
 

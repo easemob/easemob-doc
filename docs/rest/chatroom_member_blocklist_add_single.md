@@ -1,4 +1,4 @@
-# Add a User to the Chat Room Blocklist
+# Add a Single User to the Chat Room Blocklist
 
 ## Feature overview
 

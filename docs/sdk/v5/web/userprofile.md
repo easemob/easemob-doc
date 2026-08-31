@@ -118,27 +118,27 @@ contacts.forEach(contact => {
 ```
 
 :::tip
-1. To retrieve the attributes of non-friend users, call [userInfoManager.getUserInfoByUserId](#retrieve-all-user-attributes-from-the-server).
+1. To retrieve the attributes of strangers, call [userInfoManager.getUserInfoByUserId](#retrieve-all-user-attributes-from-the-server).
 2. To have the SDK automatically synchronize the friend list and friend information after a successful login, include `contact` in `enableSyncData` and register `ContactManager` and `UserInfoManager` during SDK initialization. After synchronization finishes, call `contactManager.getContacts` to read the locally synchronized friend-attribute view. For automatic data synchronization after login, see [Initialization](initialization.html).
 :::
 
-## Subscribe to attribute changes for non-friend users
+## Subscribe to attribute changes for strangers
 
-The SDK supports subscribing to attribute changes for non-friend users. After subscribing, your app promptly receives a notification when a specified non-friend user's attributes change.
+The SDK supports subscribing to attribute changes for strangers. After subscribing, your app promptly receives a notification when a specified stranger's attributes change.
 
 This feature applies to the following scenarios:
 
-- In a conversation with a non-friend user, the other user's nickname, avatar, and other attributes must be updated promptly.
-- In a temporary conversation, customer-support interaction, or similar scenario, the app needs to detect attribute changes for a non-friend user.
-- When displaying group members or in similar scenarios, the app needs to maintain the latest user attributes of specified non-friend users.
+- In a conversation with a stranger, the other user's nickname, avatar, and other attributes must be updated promptly.
+- In a temporary conversation, customer-support interaction, or similar scenario, the app needs to detect attribute changes for a stranger.
+- When displaying group members or in similar scenarios, the app needs to maintain the latest user attributes of specified strangers.
 
 :::tip
-This feature applies only to non-friend users. For user-attribute change notifications related to the current user, non-friend users, and friends, see [Monitor user attribute changes](#monitor-user-attribute-changes).
+This feature applies only to strangers. For user-attribute change notifications related to the current user, strangers, and friends, see [Monitor user attribute changes](#monitor-user-attribute-changes).
 :::
 
-### Subscribe to attribute-change events for non-friend users
+### Subscribe to attribute-change events for strangers
 
-Call `subscribeUsersInfo` to subscribe to attribute-change events for non-friend users. After subscription succeeds, the SDK triggers `onUserInfoUpdated` when these users' attributes change.
+Call `subscribeUsersInfo` to subscribe to attribute-change events for strangers. After subscription succeeds, the SDK triggers `onUserInfoUpdated` when these users' attributes change.
 
 ```typescript
 await client.userInfoManager.subscribeUsersInfo({
@@ -146,9 +146,9 @@ await client.userInfoManager.subscribeUsersInfo({
 });
 ```
 
-### Unsubscribe from attribute-change events for non-friend users
+### Unsubscribe from attribute-change events for strangers
 
-Call `unsubscribeUsersInfo` to unsubscribe from attribute-change events for non-friend users.
+Call `unsubscribeUsersInfo` to unsubscribe from attribute-change events for strangers.
 
 ```typescript
 await client.userInfoManager.unsubscribeUsersInfo({
@@ -158,7 +158,7 @@ await client.userInfoManager.unsubscribeUsersInfo({
 
 ### Retrieve the list of users subscribed to for attribute-change events
 
-Call `getSubscribedUsers` to retrieve the list of users subscribed to for attribute-change events. The list contains the user IDs and user attributes of subscribed non-friend users.
+Call `getSubscribedUsers` to retrieve the list of users subscribed to for attribute-change events. The list contains the user IDs and user attributes of subscribed strangers.
 
 ```typescript
 const users = await client.userInfoManager.getSubscribedUsers();
@@ -168,7 +168,7 @@ console.log(users.map(user => user.userId));
 
 ### Memory considerations
 
-If your app does not subscribe to attribute changes for non-friend users, it generally calls the [retrieval API](#retrieve-all-user-attributes-from-the-server) to retrieve attributes when needed.
+If your app does not subscribe to attribute changes for strangers, it generally calls the [retrieval API](#retrieve-all-user-attributes-from-the-server) to retrieve attributes when needed.
 
 The current SDK internally maintains a user-attribute cache. To reduce repeated requests, use either of the following methods according to your business scenario:
 
@@ -177,10 +177,10 @@ The current SDK internally maintains a user-attribute cache. To reduce repeated 
 
 ## Monitor user attribute changes
 
-Receive attribute updates for friend and non-friend users through the `onUserInfoUpdated` event registered with `client.userInfoManager.addEventHandler`. This primarily includes the following scenarios:
+Receive attribute updates for friend and strangers through the `onUserInfoUpdated` event registered with `client.userInfoManager.addEventHandler`. This primarily includes the following scenarios:
 
-1. **A message carries an update time**: If `enableUserInfoSync` was enabled during SDK initialization, when a received message carries a sender user-attribute update time later than that in the local cache, the SDK automatically retrieves the latest user attributes, updates the local data, and then triggers `onUserInfoUpdated`. This mechanism may apply to both friend and non-friend senders.
-2. **A subscribed user changes (non-friend users only)**: If your app subscribed to attribute-change events for non-friend users, the SDK triggers `onUserInfoUpdated` when one of these users' attributes changes.
+1. **A message carries an update time**: If `enableUserInfoSync` was enabled during SDK initialization, when a received message carries a sender user-attribute update time later than that in the local cache, the SDK automatically retrieves the latest user attributes, updates the local data, and then triggers `onUserInfoUpdated`. This mechanism may apply to both friend and stranger senders.
+2. **A subscribed user changes (strangers only)**: If your app subscribed to attribute-change events for strangers, the SDK triggers `onUserInfoUpdated` when one of these users' attributes changes.
 
 **Special notes**
 
@@ -197,7 +197,7 @@ client.userInfoManager.addEventHandler('profile-listener', {
   },
   // Triggered after another user's attributes are updated.
   // For example:
-  // 1. A subscribed non-friend user's attributes change.
+  // 1. A subscribed stranger's attributes change.
   // 2. After `enableUserInfoSync` is enabled, the SDK detects updated user attributes while processing a message and retrieves the latest user attributes.
   onUserInfoUpdated: users => {
     console.log('Attribute updates triggered by subscribed users or message synchronization:', users);
@@ -317,8 +317,8 @@ User information refers to user-related information displayed by your app, inclu
 | [`getUserInfoByUserId`](#retrieve-all-user-attributes-from-the-server)         | `UserInfoManager` | Retrieves all default attributes of one or more users.         |
 | [`getUserInfoByAttribute`](#retrieve-specified-user-attributes-from-the-server)      | `UserInfoManager` | Retrieves specified attributes of specified users.                   |
 | [`getContacts`](#read-user-attributes-from-local-memory)                     | `ContactManager`  | Reads the current in-memory friend list and user-attribute view. |
-| [`subscribeUsersInfo`](#subscribe-to-attribute-change-events-for-non-friend-users)          | `UserInfoManager` | Subscribes to attribute-change events for non-friend users.               |
-| [`unsubscribeUsersInfo`](#unsubscribe-from-attribute-change-events-for-non-friend-users)    | `UserInfoManager` | Unsubscribes from attribute-change events for non-friend users.           |
+| [`subscribeUsersInfo`](#subscribe-to-attribute-change-events-for-strangers)          | `UserInfoManager` | Subscribes to attribute-change events for strangers.               |
+| [`unsubscribeUsersInfo`](#unsubscribe-from-attribute-change-events-for-strangers)    | `UserInfoManager` | Unsubscribes from attribute-change events for strangers.           |
 | [`getSubscribedUsers`](#retrieve-the-list-of-users-subscribed-to-for-attribute-change-events) | `UserInfoManager` | Retrieves the list of users subscribed to for attribute-change events.     |
 | [`createCustomMessage`](#contact-card-messages)                           | `ChatManager`     | Creates a custom message that encapsulates contact-card content.     |
 | [`sendMessage`](#contact-card-messages)                                   | `ChatManager`     | Sends a contact card message.                             |

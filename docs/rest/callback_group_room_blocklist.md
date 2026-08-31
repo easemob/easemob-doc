@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Blocklist Webhook Events
+# Chat Group and Chat Room Blocklist Events
 
 ## Feature overview
 

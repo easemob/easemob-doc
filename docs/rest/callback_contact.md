@@ -1,4 +1,4 @@
-# Friend and Blocklist Webhook Events
+# Friend and Blocklist Events
 
 ## Feature overview
 

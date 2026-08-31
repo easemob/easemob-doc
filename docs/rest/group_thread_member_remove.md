@@ -1,4 +1,4 @@
-# Remove Message Thread Members in Bulk
+# Bulk Remove Message Thread Members
 
 ## Feature overview
 

@@ -161,7 +161,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_send.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_send.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -178,9 +178,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_send.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#发送消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_single.html
@@ -200,7 +197,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_receive.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -217,9 +214,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_receive.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#接收消息
           - text: 接收流式消息
             desc: 在单聊和群聊场景中，客户端可接收服务端发送的流式消息。
             sdks:
@@ -230,7 +224,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_stream_receive.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_stream_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -248,7 +242,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_retrieve.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_retrieve.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -265,9 +259,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_retrieve.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_historical.html
@@ -281,7 +272,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_recall.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_recall.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -298,9 +289,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_recall.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#撤回消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_recall_single.html
@@ -314,7 +302,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_modify.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_modify.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -344,7 +332,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_receipt.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_receipt.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -398,7 +386,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/reaction.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/reaction.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -428,7 +416,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_forward.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_send.html#send-combined-messages
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -469,9 +457,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_import_insert.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#插入消息
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_import_single.html
@@ -499,9 +484,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_update.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
           - text: 删除消息
             desc: 单向删除服务端以及本地的历史消息。
             sdks:
@@ -512,7 +494,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_delete.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -529,9 +511,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_delete.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_delete_roam_single_msgid.html
@@ -545,7 +524,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_target.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_target.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -572,7 +551,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_extension.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_extension.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -599,7 +578,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_pin.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -626,7 +605,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_deliver_only_online.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_deliver_only_online.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -653,7 +632,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_list.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_list.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -694,14 +673,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_unread.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#获取会话中的未读消息计数   
           - text: 本地会话
             desc: Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 LocalCache 模块对本地会话数据进行管理。
             sdks:
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_local.html        
           - text: 置顶会话
             desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
@@ -713,7 +689,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_pin.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -740,7 +716,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_mark.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_mark.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -767,7 +743,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_delete.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -784,9 +760,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_delete.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#删除会话
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/conversation_delete.html
@@ -803,7 +776,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_manage.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -833,7 +806,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_members.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -850,9 +823,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_members.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_member_add_single.html
@@ -881,7 +851,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_attributes.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -898,9 +868,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_attributes.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#修改群组信息 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_modify.html     
@@ -914,7 +881,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_manage.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -931,9 +898,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_manage.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_create.html    
@@ -947,7 +911,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_members.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -964,9 +928,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_members.html 
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html#加入聊天室
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_member_add_single.html
@@ -980,7 +941,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_attributes.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -997,9 +958,6 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_attributes.html 
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html#修改聊天室信息
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_announcement_get.html
@@ -1013,7 +971,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/thread.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/thread.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1040,7 +998,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/thread_message.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/thread_message.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1073,7 +1031,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/userprofile.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/userprofile.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1115,7 +1073,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/user_relationship.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/user_relationship.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1145,7 +1103,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/presence.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/presence.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1178,7 +1136,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/push/push_overview.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/push/push_overview.html
               - icon: /sdk/uniapp.svg
                 text: uni-app

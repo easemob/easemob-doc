@@ -1,4 +1,4 @@
-# Set the Push Template Name for a Receiver
+# Set the Push Template Name for a Recipient
 
 ## Feature overview
 

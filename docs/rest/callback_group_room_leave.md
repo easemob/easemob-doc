@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Member Leave Webhook Events
+# Chat Group and Chat Room Member Leave Events
 
 ## Feature overview
 

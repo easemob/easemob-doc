@@ -1,8 +1,8 @@
-# Retrieve the Friend List by Page
+# Retrieve the Friend List with Pagination
 
 ## Feature overview
 
-- Retrieve a specified user's friend list by page. The server returns friends in descending order by the time they were added, with the most recently added friends first.
+- Retrieve a specified user's friend list with pagination. The server returns friends in descending order by the time they were added, with the most recently added friends first.
 - When retrieving a friend list, you can choose whether to return friend remarks.
 
 ## Call frequency limit

@@ -1,4 +1,4 @@
-# Message Sending Webhook Events
+# Message Sending Events
 
 ## Feature overview
 

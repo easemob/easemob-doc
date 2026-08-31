@@ -1,4 +1,4 @@
-# Add a User to the Chat Group Allowlist
+# Add a Single User to the Chat Group Allowlist
 
 ## Feature overview
 
