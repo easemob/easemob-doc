@@ -27,8 +27,8 @@
     "vuepress-theme-hope": "2.0.0-beta.189"
   },
   "resolutions": {
-    "**/mpegts.js": "1.7.3",
-    "**/webworkify-webpack": "2.1.5"
+    "mpegts.js": "1.7.3",
+    "webworkify-webpack": "2.1.5"
   },
   "overrides": {
     "mpegts.js": "1.7.3",
