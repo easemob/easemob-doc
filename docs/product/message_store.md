@@ -1,32 +1,32 @@
-# 消息存储
+# Message Storage
 
-消息存储分为本地存储和服务器存储。例如，客户端 A 向客户端 B 发送消息，客户端 A 发送消息到环信服务器的同时，SDK 会保存这条消息到本地数据库（SDK 内部创建数据库，不允许直接操作），环信服务器将消息发送到客户端 B 的同时也会进行记录，客户端 B 收到消息后，SDK 会将消息存储到本地数据库。 
+Messages are stored both locally and on the server. For example, when client A sends a message to client B, client A sends the message to the EasyIM server, while the SDK saves the message to a local database. The SDK creates this database internally, and you cannot operate on it directly. When the EasyIM server delivers the message to client B, the server also records the message. After client B receives the message, the SDK stores it in the local database. 
 
-## SDK 存储
+## SDK storage
 
-SDK 内部使用 SQLite 保存本地消息，你可以获取或删除本地消息。
+The SDK uses SQLite internally to store local messages. You can retrieve or delete these messages.
 
 :::tip
-Web 和小程序端无本地消息存储。
+The Web and Mini Program SDKs do not store messages locally.
 :::
 
-## 服务端存储
+## Server-side storage
 
-### 历史消息存储
+### Historical message storage
 
-历史消息在服务器上的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。默认可获取单聊和群组聊天的历史消息。**若要获取聊天室的历史消息，需联系环信商务**。
+The storage period for historical messages on the server depends on your subscribed plan. For details, see [EasyIM plan features](/product/product_package_feature.html). EasyIM provides message roaming, which stores the historical messages from all of a user's conversations on the message server. Users can retrieve their historical messages on any device, maintaining a consistent conversation experience when switching between devices. By default, users can retrieve historical messages from one-to-one chats and group chats. **To retrieve historical chat room messages, contact the EasyIM business manager**.
 
-### 消息附件的存储
+### Message attachment storage
 
-- 附件大小：默认情况下，消息附件，例如图片、音频、视频和其他文件不能超过 10 MB。
-- 存储时间：消息附件（图片、音频、视频及其他文件）默认存储 7 天。如需延长，请联系环信商务。消息附件大小（默认 10 MB）及存储时间限制与群组共享文件保持一致。若其中一个存储时间上限被调高，另一个将自动同步调整，反之亦然。
-- 存储大小：默认提供 1 TB 存储空间，用于图片、语音、文件等附件。若预计存储需求较大，你可以 [将附件上传至自有服务器](/document/android/message_send.html#上传消息附件至自有服务器)，或联系环信商务提升空间上限。
-- 流量大小：每月每 1 万 DAU 默认包含 100 GB 流量（适用于图片、语音、文件等附件）。超出后附件下载速度可能受限。若预计流量需求较大，你可以 [将附件上传至自有服务器](/document/android/message_send.html#上传消息附件至自有服务器)，或联系环信商务提升流量上限。
+- Attachment size: By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB.
+- Storage period: Message attachments, including images, audio, video, and other files, are stored for 7 days by default. To extend the storage period, contact the EasyIM business manager. The message attachment size limit (10 MB by default) and storage period limit are the same as those for chat group shared files. If the maximum storage period for either is increased, the other is automatically adjusted accordingly, and vice versa.
+- Storage capacity: By default, 1 TB of storage is provided for attachments such as images, voice files, and other files. If you expect to require more storage, you can [upload attachments to your own server](/sdk/v5/android/message_send.html#upload-message-attachments-to-your-own-server) or contact the EasyIM business manager to increase the storage limit.
+- Traffic allowance: By default, every 10,000 DAU includes 100 GB of traffic per month for attachments such as images, voice files, and other files. Attachment download speeds may be limited after this allowance is exceeded. If you expect to require more traffic, you can [upload attachments to your own server](/sdk/v5/android/message_send.html#upload-message-attachments-to-your-own-server) or contact the EasyIM business manager to increase the traffic limit.
 
-### 离线消息存储
+### Offline message storage
 
-对于单聊和群聊，离线消息默认保存 **7** 天。对于每个终端用户，所有的单聊会话可存储 500 条离线消息，所有的群聊会话可存储 200 条离线消息。若超过存储天数和条数的上限，最新的离线消息会挤掉最早的。如需提升上限，可联系商务。
+For one-to-one chats and group chats, offline messages are stored for **7** days by default. For each end user, all one-to-one conversations can store 500 offline messages, and all group chat conversations can store 200 offline messages. If either the storage period or message count limit is exceeded, the newest offline messages replace the oldest ones. To increase these limits, contact the EasyIM business manager.
 
-### 事件通知存储
+### Event notification storage
 
-各类事件通知的存储时间与历史消息的存储一致。
+All types of event notifications have the same storage period as historical messages.

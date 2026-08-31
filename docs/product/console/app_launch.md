@@ -1,75 +1,72 @@
-# 应用上线
+# App Launch
 
-测试版应用开发测试完成后，可申请上线为正式版，用于正式业务运营。
+After development and testing of a development version app are complete, you can apply to launch it as a production version for production business operations.
 
-## 上线准备
+## Preparation
 
-申请上线应用前，请确认以下条件均已满足：
+Before applying to launch an app, make sure that all of the following conditions are met:
 
-- 当前应用仍为 **测试版**，且尚未生成正式版。
-- 测试版已 [开通 IM 专业版或旗舰版套餐包](/product/pricing_method.html#订阅-升级套餐包)。
-- 已明确测试版中已开通的套餐、扩展功能与增值服务在正式版中是否保留。
-- 账号已完成 [实名认证](real_name_authentication.html)。
+- The current app is still a **development version**, and no production version has been generated.
+- The [IM Professional or Flagship plan](/product/pricing_method.html#subscribe-to-or-upgrade-a-plan) has been activated for the development version.
+- You have determined whether to retain the plans and extended features activated for the development version in the production version.
 
-## 上线步骤
+## Procedure
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)，在页面上方选择 **应用管理**，或在首页 **应用概览** 区域选择 **应用管理**。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
 
-![img](/images/console/app_overview.png)
-
-2. 在 **应用列表** 页面，找到目标测试版应用，在 **操作** 栏点击 **申请上线**。
+2. On the **Applications** page, find the target development version app and click **Apply to Production** in the **Operation** column.
 
 ![img](/images/console/app_launch_apply.png)
 
-1. 在 **申请上线** 对话框中，根据业务需求选择上线方式。建议先查看文档中的 [上线事项对照表](#上线事项)，再明确上线方式。
+3. In the **Launch** dialog box, select a launch method based on your business requirements. We recommend that you first review the [Launch Considerations](#launch-considerations) table before selecting a method.
 
-| 上线方式                     | 适用场景                   |
-| :--------------------------- | :------------------------- |
-| 原测试版应用直接升级为正式版 | 希望保留测试数据。           |
-| 创建新的正式版应用           | 希望测试环境和正式环境隔离。 |
+| Launch method | Use case |
+| :--- | :--- |
+| Upgrade this development app to production | Retain test data. |
+| Create a new production app | Isolate the test and production environments. |
 
-选定方式后，按需填写正式版应用信息：
+After selecting a method, enter the production version app information as needed:
 
-| 项 | 创建新的正式版应用 | 原测试版应用直接升级成正式版 |
+| Item | Create a new production app | Upgrade this development app to production |
 | :--- | :--- | :--- |
-| 测试版应用信息 | 确认测试版应用的 AppName、Appkey 和数据中心。  | 确认 AppName、Appkey 和数据中心。 |
-| 正式版应用信息 | 填写正式版应用的 AppName、Appkey 和数据中心。<br/> - 字段说明详见 [创建应用文档](app_create.html#操作步骤)。  | 无需填写。 |
-| 正式版费用信息 | 确认上线后的费用信息。 | 确认上线后的费用信息。 |
+| Development app information | Confirm the app name, app key, and data center of the development version app. | Confirm the app name, app key, and data center. |
+| Production app information | Enter the app name, app key, and data center of the production version app.<br/> - For field descriptions, see [App Creation](app_create.html#procedure). | No information is required. |
+| Fees | Confirm the fees after launch. | Confirm the fees after launch. |
 
-确认或填写正式版应用信息后，点击 **付费并上线**。
+After confirming or entering the production version app information, click **Release**.
 
 :::tip
-- 上线过程通常需要 **5—15 分钟**。
-- 上线期间无法修改测试版和正式版的应用信息及功能配置。
-- 请收到短信或邮件通知后再进行后续操作，避免影响业务。
+- The launch process usually takes **5–15 minutes**.
+- During the launch process, you cannot modify the app information or feature configurations of the development or production version.
+- Wait until you receive an SMS or email notification before performing subsequent operations to avoid affecting your business.
 :::
 
 ![img](/images/console/app_launch_confirm.png)
 
-4. 系统弹出 **申请上线** 确认框，点击 **确认**。
+4. In the **Apply for Launch** confirmation dialog box, click **Confirm**.
 
 ![img](/images/console/app_launch_prompt.png)
 
-5. 系统提示 **上线申请已提交**，点击 **我知道了**。
+// TODO：第 5 步和第 6 步尚未验证
 
-   上线成功后，你将收到短信及邮件通知。收到通知后再进行后续操作。
+5. When the system indicates that the **launch application has been submitted**, click **Got It**.
+
+   You will receive SMS and email notifications after the launch succeeds. Wait until you receive the notifications before performing subsequent operations.
 
 ![img](/images/console/app_launch_commit.png)
 
-6. 上线完成后，在应用列表中确认以下信息：
+6. After the launch is complete, verify the following information in the app list:
 
-- **应用状态** 为 **已上线**。
-- **AppKey-正式版** 项中显示正式版 App Key。若选择 **原测试版应用直接升级成正式版**，则上线后 **AppKey-测试版** 项中为空。
+- **App Status** is **Production**.
+- The App Key of the production version is displayed under **AppKey-Prod**. If you selected **Upgrade this development app to production**, **AppKey-Dev** is empty after launch.
 
 ![img](/images/console/app_launch_complete.png)
 
-## 上线事项
+## Launch Considerations
 
-| 上线事项 | 创建新的正式版应用 | 原测试版应用直接升级 |
+| Consideration | Create a new production app | Upgrade this development app to production |
 | :--- | :--- | :--- |
-| 客户端与服务端配置（AppName / AppKey / URL） | **需要变更**。<br/> - 更新客户端 SDK 初始化配置中的正式版 `AppKey`。<br/> - 更新服务端请求地址中的 `{app_name}`。 | **无需操作**。 |
-| 功能配置 | **同步**：测试版功能配置自动同步到新正式版。 | **继承**：完整继承测试版全部功能配置。 |
-| 业务数据 | **隔离**：测试版与正式版数据完全隔离，不互通。 | **继承**：完整继承测试版全部存量业务数据。 |
-| 应用备案（仅国内） | 若应用所在地为中国，需及时完成 [应用备案](app_file.html)。 | 同左。 |
-| 增值服务计费与订阅 | - [**内容审核**](purchase_value_added.html#内容审核)、[**消息翻译**](purchase_value_added.html#消息翻译) 和 [**即时推送**](purchase_value_added.html#即时推送)：若测试版已开通，上线后继续生效，并按正式版规则计费。<br/> - [**实时音视频**](purchase_value_added.html#实时音视频服务)：即使测试版已开通，上线后也不会自动保留，如需继续使用，仍需单独订阅。 | 同左。 |
-| 环境配置检查（回调地址 / IP 白名单） | - 检查 [发送前/发送后回调地址](basic_webhook.html)，按需切换为正式环境。<br/> - 检查 [REST IP 白名单](basic_other.html)，按需在正式版重新设置。 | **无需操作**。 |
+| Client and server configurations (app name / app key / URL) | **Changes required**.<br/> - Update the production version `App Key` in the client SDK initialization configuration.<br/> - Update `{app_name}` in the server request URL. | **No action required**. |
+| Feature configurations | **Synchronized**: The feature configurations of the development version are automatically synchronized to the new production version. | **Inherited**: The production version fully inherits all feature configurations from the development version. |
+| Business data | **Isolated**: Data in the development and production versions is completely isolated and is not shared. | **Inherited**: The production version fully inherits all existing business data from the development version. |
+| Environment configuration checks (webhook URLs / IP allowlist) | - Check the [pre-delivery and post-delivery webhook URLs](basic_webhook.html) and switch them to the production environment as needed.<br/> - Check the [REST IP allowlist](basic_security.html#rest-ip-allowlist) and configure it again for the production version as needed. | **No action required**. |

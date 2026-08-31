@@ -6,6 +6,7 @@ import { useThemeLocaleData } from "vuepress-theme-hope/composables/index";
 
 const themeData = useThemeLocaleData();
 const extraNavList = computed(() => themeData.value.extra_nav || []);
+const showDocumentSearch = false;
 
 const SESSION_COOKIE_NAME = "u_session_name";
 const SESSION_COOKIE_DOMAIN = ".easemob.com";
@@ -108,7 +109,7 @@ const handleLogout = () => {
 };
 
 const handleLogin = () => {
-  window.location.href = "https://console.easemob.com/user/login";
+  window.location.href = "https://console.easyim.ai/user/login";
 };
 
 const handleRegister = () => {
@@ -119,7 +120,7 @@ const handleRegister = () => {
 <template>
   <Navbar>
     <template #endBefore>
-      <div class="search-box" @click="handleSearch">
+      <div v-if="showDocumentSearch" class="search-box" @click="handleSearch">
         <div class="search-input-wrapper">
           <div class="search-icon"></div>
           <div class="search-input">搜索关键词</div>

@@ -1,70 +1,68 @@
-# 聊天室概述
+# Chat Room Overview
 
-<Toc />
+## Chat room basics
 
-## 聊天室基本介绍
+A chat room is a Twitch-like organization that supports many participants and can be used for live streaming and message broadcasting. Chat room members do not have fixed relationships. Once offline, they do not receive any chat room messages and, except for members on the chat room allowlist, automatically leave the chat room after being offline for more than 2 minutes. To adjust this period, contact the EasyIM business manager.
 
-聊天室是支持多人加入的类似 Twitch 的组织，可以应用于直播、消息广播等。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+### Chat room member roles  
 
-### 聊天室成员角色  
-
-| 聊天室成员角色<div style="width: 100px;"></div> | 描述<div style="width: 384px;"></div> | 管理权限 |
+| Chat room member role | Description | Management permissions |
 | :------ | :-------------- | :------------ |
-| 普通成员   | 不具备管理权限的普通成员。 | 普通成员可以：<br/> - 在聊天室内发送和接收消息；<br/> - 获取聊天室详情；<br/> - 退出聊天室；<br/> - 获取聊天室公告；<br/> - 获取聊天室成员列表；<br/> - 设置和删除自定义属性（key-value）；<br/> - 获取聊天室自定义属性。|
-| 聊天室管理员   | 由聊天室所有者指定，协助聊天室所有者进行管理，拥有一定的管理权限。 | 除了普通成员的权限，管理员还具备以下权限：<br/> - 修改聊天室名称和聊天室描述；<br/> - 更新聊天室公告；<br/> - 将成员被移出聊天室；<br/> - 管理聊天室白名单；<br/> - 管理聊天室黑名单；<br/> - 管理聊天室禁言列表；<br/> - 开启和关闭聊天室全员禁言。 |
-| 聊天室所有者       | 聊天室的创建者默认成为聊天室所有者，在聊天室中拥有最高权限。 | 除了管理员权限，聊天室所有者还具备以下权限：<br/> - 添加和移除管理员；<br/> - 解散聊天室；<br/> - 变更聊天室所有者。 |
+| Regular member   | A regular member without management permissions. | A regular member can:<br/> - Send and receive messages in the chat room;<br/> - Retrieve chat room details;<br/> - Leave the chat room;<br/> - Retrieve the chat room announcement;<br/> - Retrieve the chat room member list;<br/> - Set and delete custom attributes (key-value);<br/> - Retrieve chat room custom attributes.|
+| Chat room admin   | Appointed by the chat room owner to assist with management and granted certain management permissions. | In addition to the permissions of a regular member, an admin can:<br/> - Change the chat room name and description;<br/> - Update the chat room announcement;<br/> - Remove members from the chat room;<br/> - Manage the chat room allowlist;<br/> - Manage the chat room blocklist;<br/> - Manage the chat room mute list;<br/> - Enable and disable mute all in the chat room. |
+| Chat room owner       | The chat room creator becomes the chat room owner by default and has the highest permissions in the chat room. | In addition to admin permissions, the chat room owner can:<br/> - Add and remove admins;<br/> - Destroy the chat room;<br/> - Transfer chat room ownership. |
 
 :::tip
-仅聊天室超级管理员可以通过 [REST 接口](/document/server-side/chatroom_create.html) 创建聊天室。
+Only a chat room superadmin can create a chat room through a [REST API](/rest/chatroom_create.html).
 :::
 
-### 群组与聊天室的区别
+### Differences between chat groups and chat rooms
 
-群组和聊天室均为支持多人沟通的即时通讯系统。两者的区别在于，群组中的成员会有固定的强的关系，成员加入后会长时间的在群组中。聊天室中的成员没有固定关系，类似与一个开放的空间，用户可以自由加入，离开即退出聊天室。
+Chat groups and chat rooms are both instant messaging systems that support multi-user communication. The difference is that chat group members have strong, persistent relationships and generally remain in the chat group for a long time after joining. Chat room members do not have fixed relationships. A chat room is more like an open space that users can freely join, and leaving the space means leaving the chat room.
 
-详见 [群组概述](group_overview.html)。
+For details, see [Chat group overview](product_group_overview.html).
 
-## 功能列表
+## Feature list
 
-### 创建和管理聊天室
+### Create and manage chat rooms
 
-| 功能           | 描述                                                         |
+| Feature           | Description                                                         |
 | :------------- | :----------------------------------------------------------- |
-| 创建聊天室     | 只有被赋予 [超级管理员](/document/server-side/chatroom_superadmin_add.html) 权限的用户有权限创建聊天室。建议[调用 REST 接口创建聊天室](/document/server-side/chatroom_create.html)，设置聊天室名称、聊天室描述、聊天室成员最大人数（包括管理员）、聊天室管理员和普通成员以及聊天室扩展信息。 |
-| 加入聊天室     | 没有被加入黑名单的所有 app 用户可自由加入聊天室。                                   |
-| 离开聊天室     | 所有聊天室成员都可以自由退出聊天室；也可能被动离开聊天室，原因分为：被管理员移出聊天室、聊天室解散和用户账号离线。<br/> 与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。除了 Web 端，其他端在初始化时可以设置是否允许聊天室所有者离开聊天室。<br/>由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室，若需调整该时间，需联系环信商务。不过，聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）和[调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html)时拉入的用户若从未登录过，不会退出。<br/> 退出聊天室时，SDK 默认删除该聊天室所有本地消息。若要保留这些消息，可在 SDK 初始化时进行设置。  |
-| 解散聊天室     | 需要聊天室所有者权限。                                       |
-| 获取聊天室详情 | 所有聊天室成员有权限获取聊天室详情，包括聊天室 ID、聊天室名称，聊天室描述、最大成员数、聊天室所有者、是否全员禁言以及聊天室角色类型。聊天室公告、管理员列表、成员列表、黑名单列表、禁言列表需单独调用接口获取。        |
-| 实时更新聊天室成员人数 | 如果聊天室短时间内有成员频繁加入或退出时，可以实现实时更新聊天室成员人数。|
+| Create a chat room     | Only users granted [superadmin](/rest/chatroom_superadmin_add.html) permissions can create chat rooms. We recommend [calling a REST API to create a chat room](/rest/chatroom_create.html) to set the chat room name, description, maximum number of members (including admins), admins, regular members, and extension information. |
+| Join a chat room     | Any app user who is not on the blocklist can freely join a chat room.                                   |
+| Leave a chat room     | All chat room members can freely leave a chat room. A member may also involuntarily leave because an admin removes the member, the chat room is destroyed, or the user's account goes offline.<br/> Unlike a chat group owner, who cannot leave a chat group, a chat room owner can leave a chat room and remains its owner after rejoining. On all clients except Web, you can configure whether a chat room owner is allowed to leave the chat room during initialization.<br/>A chat room member who remains offline for more than 2 minutes because of network or other issues automatically leaves the chat room. To adjust this period, contact the EasyIM business manager. However, members on the chat room allowlist, to which the chat room owner and admins are added by default, and users added when a chat room is [created by calling a RESTful API](/rest/chatroom_create.html) do not leave if they have never logged in.<br/> When a user leaves a chat room, the SDK deletes all local messages in the chat room by default. To retain these messages, configure this behavior during SDK initialization.  |
+| Destroy a chat room     | Requires chat room owner permissions.                                       |
+| Retrieve chat room details | All chat room members can retrieve chat room details, including the chat room ID, name, description, maximum number of members, owner, whether mute all is enabled, and chat room role type. The chat room announcement, admin list, member list, blocklist, and mute list must be retrieved by calling separate APIs.        |
+| Update the chat room member count in real time | You can update the chat room member count in real time when members frequently join or leave within a short period.| 
 
-### 聊天室成员管理
+### Chat room member management
 
-| 功能               | 描述                                                         |
+| Feature               | Description                                                         |
 | :----------------- | :----------------------------------------------------------- |
-| 获取聊天室成员列表     | 所有聊天室成员均可获取当前聊天室成员列表。   |
-| 变更聊天室所有者       | 聊天室所有者可以将聊天室的所有权转让给指定的聊天室成员。所有权转移后，聊天室所有者成为聊天室的普通成员。   |
-| 聊天室禁言列表         | 需要聊天室所有者或管理员权限，可以对单个聊天室成员进行禁言或移出禁言。聊天室成员可检查自己是否在聊天室禁言列表中。   |
-| 聊天室全员禁言         | 需要聊天室所有者或管理员权限。全员禁言时，默认聊天室所有者和管理员不禁言。 |
-| 聊天室白名单           | 需要聊天室所有者或管理员权限。全员禁言时，白名单的成员可以发消息。        |
-| 聊天室黑名单           | 需要聊天室所有者或管理员权限，被加入黑名单的成员会被移出聊天室。黑名单中的成员需要聊天室所有者主动从黑名单移除后才能再次加入聊天室。    |
-| 管理聊天室管理员       | 仅聊天室所有者可以对成员指定或移除管理员权限。          |
+| Retrieve the chat room member list     | All chat room members can retrieve the current chat room member list.   |
+| Transfer chat room ownership       | The chat room owner can transfer ownership to a specified chat room member. After ownership is transferred, the original chat room owner becomes a regular member.   |
+| Chat room mute list         | Requires chat room owner or admin permissions. You can mute or unmute an individual chat room member. Chat room members can check whether they are on the chat room mute list.   |
+| Mute all chat room members         | Requires chat room owner or admin permissions. When mute all is enabled, the chat room owner and admins are not muted by default. |
+| Chat room allowlist           | Requires chat room owner or admin permissions. When mute all is enabled, members on the allowlist can send messages.        |
+| Chat room blocklist           | Requires chat room owner or admin permissions. A member added to the blocklist is removed from the chat room and can rejoin only after the chat room owner removes the member from the blocklist.    |
+| Manage chat room admins       | Only the chat room owner can grant or revoke admin permissions for members.          |
 
-### 聊天室属性管理
+### Chat room attribute management
 
-| 功能               | 描述                                                         |
+| Feature               | Description                                                         |
 | :----------------- | :----------------------------------------------------------- |
-| 修改聊天室名称 | 需要聊天室所有者权限。                   |
-| 获取/更新聊天室公告     | 仅聊天室所有者有权限更新公告、删除公告。<br/>公告更新会通过监听同步给所有成员。 |
-| 管理聊天室自定义属性（key-value）     | 设置、获取和删除以及强制设置和强制删除聊天室自定义属性。 |
+| Change the chat room name | Requires chat room owner permissions.                   |
+| Retrieve or update the chat room announcement     | Only the chat room owner can update or delete the announcement.<br/>Announcement updates are synchronized to all members through event listeners. |
+| Manage chat room custom attributes (key-value)     | Set, retrieve, delete, force-set, and force-delete chat room custom attributes. |
 
-### 监听聊天室事件
+### Monitor chat room events
 
-你可以实现聊天室事件监听，聊天室内进行了相关操作，例如，有新成员加入聊天室、退出聊天室、被添加到禁言列表、黑名单列表等，聊天室中的其他人员会收到相关事件，详见[监听聊天室事件](/document/android/room_manage.html#监听聊天室事件)。
+You can implement chat room event listeners. When an operation occurs in a chat room, such as a new member joining or a member leaving or being added to the mute list or blocklist, the other users in the chat room receive the corresponding event. For details, see [Monitor chat room events](/sdk/v5/android/room_manage.html#monitor-chat-room-events).
 
-## 聊天室事件回调
+## Chat room event callbacks
 
-你可以实现发送后回调，使环信 IM 服务器将聊天室事件同步给你的应用服务器。若聊天室内发生新成员加入、退出、被添加到禁言列表、黑名单列表等相关操作时，环信 IM 服务器向应用服务器发起 HTTP/HTTPS POST 请求，同步所发生的事件，详见[聊天室事件回调文档](/document/server-side/callback_group_room_create.html)。
+You can implement a post-delivery callback so that the EasyIM server synchronizes chat room events with your app server. When an operation occurs in a chat room, such as a new member joining or a member leaving or being added to the mute list or blocklist, the EasyIM server sends an HTTP/HTTPS POST request to the app server to synchronize the event. For details, see [Chat room webhook events](/rest/callback_group_room_create.html).
 
-## 聊天室限制
+## Chat room limitations
 
-聊天室相关限制，包括聊天室成员数量、基本属性和自定义属性的相关限制，详见[聊天室限制](/product/limitation.html#聊天室)文档。
+For chat room limitations, including limits on the number of chat room members and on basic and custom attributes, see [Chat room limitations](/product/limitation.html#chat-rooms).

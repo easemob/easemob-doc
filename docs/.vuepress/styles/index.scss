@@ -705,6 +705,10 @@ button {
   }
 }
 /* footer */
+.page-reading-time-info {
+  display: none !important;
+}
+
 .footer-wrapper {
   margin-left: var(--sidebar-width);
   margin-top: 4rem;
@@ -763,10 +767,6 @@ button {
       margin-inline-start: auto;
       margin-inline-end: auto;           
     }
-  }
-
-  .theme-hope-content {
-    display: none;
   }
 }
 

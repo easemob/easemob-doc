@@ -77,7 +77,7 @@ const mergeSeoHead = (
 
 export default defineUserConfig({
   base: '/',
-  lang: 'zh-CN',
+  lang: 'en-US',
   title: 'IM 文档',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
   description: '环信 IM 文档',
@@ -229,6 +229,11 @@ export default defineUserConfig({
     '@theme-hope/components/MarkdownContent': path.resolve(
       __dirname,
       './components/MarkdownContent.vue'
+    ),
+
+    '@theme-hope/components/BreadCrumb': path.resolve(
+      __dirname,
+      './components/BreadCrumb.vue'
     ),
 
     '@theme-hope/components/PageNav': path.resolve(

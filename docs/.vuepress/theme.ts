@@ -7,7 +7,7 @@ interface CustomConfig {
 }
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
-  hostname: 'https://doc.easemob.com/',
+  hostname: 'https://doc.easyim.ai',
   home: '/',
   iconAssets: 'iconfont',
   logo: '/logo_name.png',
@@ -22,11 +22,11 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   navbarLayout: {
     start: ['Brand','Links'],
     center: [],
-    end: ['Language', 'Repo', 'Outlook']
+    end: ['Language', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: `<div class="footer-left">环信 IM 文档</div><div class="footer-right">&copy; 环信 ${new Date().getFullYear()}</div>`,
+  footer: `<div class="footer-left">EasyIM Documentation</div><div class="footer-right">&copy; Easemob ${new Date().getFullYear()}</div>`,
   displayFooter: true,
   headerDepth: 2,
   editLink: false,
@@ -36,7 +36,17 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
     mdEnhance: {
       container: true,
       imgSize: true,
-      tabs: true
+      tabs: true,
+      locales: {
+        '/': {
+          info: 'Info',
+          note: 'Note',
+          tip: 'Tip',
+          warning: 'Warning',
+          danger: 'Warning',
+          details: 'Details'
+        }
+      }
     },
     prismjs: {
       light: "coldark-dark",

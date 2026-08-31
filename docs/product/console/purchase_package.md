@@ -1,102 +1,78 @@
-# 管理套餐包
+# Manage Plans
 
-## 订阅/升级套餐包
+## Subscribe to or upgrade a plan
 
-- **测试版应用**：创建后默认开通即时通讯 IM 免费版套餐包，可升级至专业版或旗舰版。**上线前不收取任何费用，上线成功当天开始计费**。
-- **正式版应用**：可从专业版升级至旗舰版。订阅成功的当天开始计费。
+- **Development app**: The Free EasyIM plan is enabled by default after the app is created. You can upgrade it to the Professional or Flagship plan. **No fees are charged before the app is launched as a production version. Billing starts on the day the app is launched as a production version.**
+- **Production app**: You can upgrade from the Professional to the Flagship plan. Billing starts on the day the subscription succeeds.
 
-你可以通过以下两种方式订阅或升级套餐包。
+You can subscribe to or upgrade a plan in either of the following ways.
 
-#### 方式一
+#### Method 1
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 点击 **应用管理**，在应用列表中单击目标应用的 **App Key**（测试版或正式版）。
-3. 在左侧导航栏，选择 **即时通讯** > **套餐购买**。
-4. 选择套餐包，点击 **立即订阅**。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the left navigation pane, select **Chat** > **Plans**.
+4. Select a plan and click **Subscribe Now**.
    
    ![img](/images/console/package_purchase.png)
 
-5. 在 **开通服务版本** 页面完成配置，然后点击 **下一步**。
+5. Complete the configuration on the **Activate Service Plan** page, and then click **Next**.
    
-   - **确认 App Key**：购买后不可修改。
-   - **选择服务版本**：免费版可升级至专业版或旗舰版；专业版可升级至旗舰版或单独购买增值服务。
-   - **购买扩展功能**：支持消息云存储、群组人数上限等。
+   - **Confirm the App Key**: The App Key cannot be changed after purchase.
+   - **Select a service plan**: You can upgrade the Free plan to the Professional to the Flagship plan. You can upgrade the Professional plan to the Flagship plan.
+   - **Purchase add-ons**: Add-ons such as message cloud storage and the maximum number of chat group members are available.
   
    :::tip
-   - 页面预付费用仅为基础费用，正式版应用以每月账单为准。
-   - 详见 [计费策略](/product/pricing_policy.html) 和 [套餐包功能对比](/product/product_package_feature.html)。
+   - The prepaid amount displayed on the page is only the base fee. Charges for a production app are based on the monthly bill.
+   - For details, see [Pricing Policy](/product/pricing_policy.html) and [Plan Feature Comparison](/product/product_package_feature.html).
    :::
 
    ![img](/images/console/package_price.png)
 
-6. 在 **付款确认** 对话框中核对订单，阅读并同意《环信云服务购买协议》，点击 **立即支付**。
+6. In the **Payment Confirmation** dialog box, verify the order, read and agree to the **Service Purchase Agreement**, and click **Pay Now**.
 
 ![img](/images/console/package_pay.png)
 
-7. 购买成功后，可点击 **查看订单详情** 或 **进入管理后台首页**。
+7. After the purchase succeeds, click **View Bill** or **Close**.
 
 ![img](/images/console/package_pay_finish.png)
 
-#### 方式二
+#### Method 2
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 点击 **应用管理**，选择目标应用的 App Key。
-3. 在 **应用概览** 页面的 **服务开通信息** 区域，点击 **调整套餐** 升级套餐包。
-4. 开通服务版本，支付费用。详见 [方式一](#方式一)。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the **Service Information** section of the **Overview** page, click **Adjust Plan** to upgrade the plan.
+4. Activate the service plan and pay the fee. For details, see [Method 1](#method-1).
 
 ![img](/images/console/app_info_activation.png)
 
-## 测试版试用套餐包
+## Trial plans for development apps
 
-测试版应用可[免费试用专业版或旗舰版](#订阅-升级套餐包)，也可试用扩展功能，试用期间均不收取费用。
+A development app can [try the Professional or Flagship plan for Free](#subscribe-to-or-upgrade-a-plan) and can also try add-ons. No fees are charged during the trial.
 
-即使已试用专业版或旗舰版套餐，测试版应用仍适用以下限制：
+Even if a development app is using a trial of the Professional to the Flagship plan, the following limits still apply:
 
-| 功能 | 限制 |
+| Feature | Limit |
 | :--- | :--- |
-| 注册用户数 | 100 |
-| 群组数 | 100 |
-| 聊天室数 | 100 |
-| 单群聊消息云存储 | 7 天 |
-| 聊天室消息云存储 | 3 天 |
-| 服务端 API 调用频率 | 不支持调整 |
+| Registered users | 100 |
+| Chat groups | 100 |
+| Chat rooms | 100 |
+| Cloud storage for one-to-one and group chat message  | 7 days |
+| cloud storage for chat room messages  | 3 days |
+| Server API call frequency | Cannot be adjusted |
 
 :::tip
-1. 测试版应用的试用配额及服务内容可能根据实际情况进行调整，请以最新规则为准。
-2. 仅试用专业版或旗舰版套餐的测试版应用支持上线，免费版套餐不支持上线。
+1. Trial quotas and services for development apps may be adjusted. Refer to the latest rules.
+2. Only development apps using a trial of the Professional or Flagship plan can be launched as a production version, while apps on the Free plan cannot.
 :::
 
-## 升级与降级说明
+## Upgrade and downgrade notes
 
-| 应用类型       | 升级说明      | 降级说明          |
-| :------------- | :---------- | :----------------------------------------------------------- |
-| **正式版应用** | 1. 升级成功后，当日起按新套餐计费，原套餐剩余费用自动退还。<br/> 2. 升级后，原套餐下订阅的所有增值服务将同时取消订阅，并退还剩余费用；如需继续使用，请重新订阅。 | 1. 降级或取消套餐包服务需联系环信商务。 <br/> 2. 降级后，目标版本不包含的功能将被关闭；部分功能（如回调）关闭后会导致相关数据被清除且无法恢复。 |
-| **测试版应用** | 可从免费版升级至专业版或旗舰版，无需额外付费。 | 可从旗舰版降级至专业版。降级前已开通的增值服务、基础功能和扩展功能在降级后仍保持开通状态。 |
+| App type | Upgrade | Downgrade |
+| :--- | :--- | :--- |
+| **Production app** | After a successful upgrade, billing under the new plan starts on the same day, and the unused amount from the previous plan is automatically refunded. | 1. Contact EasyIM business manager to downgrade or cancel a plan.<br/>2. After a downgrade, features not included in the target plan are disabled. Disabling some features, such as webhooks, clears the associated data, which cannot be recovered. |
+| **Development app** | You can upgrade from the Free plan to the Professional or Flagship plan at no additional cost. | You can downgrade from the Flagship plan to the Professional plan. Basic features and add-ons enabled before the downgrade remain enabled afterward. |
 
-## 续费套餐包
+## Renew a plan
 
-所有版本的即时通讯套餐包均默认自动续订。套餐包到期时，你也可以在 [环信控制台](https://console.easemob.com/user/login) 重新下单 [订阅同版本或其他版本套餐](#订阅-升级套餐包)。环信控制台暂不支持多笔订单的订阅时长叠加。若在套餐包未到期时创建新订单，系统将自动关闭旧订单并退还剩余费用。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+All EasyIM plans renew automatically by default. When a plan expires, you can also place a new order on [EasyIM Console](https://console.easyim.ai/user/login) to [subscribe to the same or another plan](#subscribe-to-or-upgrade-a-plan). EasyIM Console does not currently support combining the subscription periods of multiple orders. If you create a new order before the current plan expires, the system automatically closes the old order and refunds the unused amount.

@@ -1,130 +1,65 @@
-# 群组管理
+# Chat Group Management
 
-在 [环信控制台](https://console.easemob.com/user/login) 上，你可以对群组进行进行管理，包括创建群组、查看群组成员列表、查看群组黑名单等。
+In [EasyIM Console](https://console.easyim.ai/user/login), you can create and manage chat groups, including creating a chat group and viewing its member list and blocklist:
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
-3. 在左侧导航栏，选择 **运营管理** > **运营操作**。
-4. 在 **群组管理** 页面，你可以创建和管理群组。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the left navigation pane, select **Operation** > **IM Admin**.
+4. On the **Chat Groups** page, create and manage chat groups.
 
-## 群组操作
+![img](/images/console/operation_chatgroup.png)
 
-### 创建群组
+## Create a chat group
 
-1. 在 **群组管理** 页面，点击 **创建群组**。
-2. 在弹出的 **创建群组** 对话框中，填写群组名称、描述、群主等参数，然后点击 **创建**。
+1. On the **Chat Groups** page, click **Create Group**.
+2. In the **Create Group** dialog box, enter the chat group name, description, group owner, and other parameters, and then click **Create**.
 
 ![img](/images/console/operation_group_create.png)
 
-| 参数                  | 类型   | 是否必需 | 描述          |
-| :------------ | :----- | :------- | :------------------------------------------- |
-| 群组名称          | String | 是       | 群组名称，最大长度为 128 字符。|
-| 群组描述         | String | 是       | 群组描述，最大长度为 512 字符。|
-| 群主              | Bool   | 是       | 群主的用户 ID。   |
-| 最大人数           | Int    | 否       | 群组最大成员数（包括群主）。该参数的默认值为 `200`，若设置的值超过 `3000`，默认不再支持离线推送，若希望使用该功能，请联系商务开通。|
-| 群组类型             | String   | 否       | <br/> - （默认）**公开群**：公开群可以被搜索到，用户可以申请加入公开群。<br/> - **私有群**：私有群无法被搜索到，用户只有在群成员邀请后才能加入。 |
-| 申请入群方式        | Bool   | 否       | 用户申请入群是否需要群主或者群管理员审批。<br/> - （默认）**无需审批**：用户直接进群，不需要审批。<br/> - **需要审批**：需要审批。 <br/>该参数仅对公开群生效，因为对于私有群，用户无法申请加入群组，只能通过群成员邀请加入群。     |
-| 邀请方式        | Bool   | 否       | 是否允许普通群成员邀请用户加入群组：<br/> - （默认）**仅群主/管理员**：只有群主和群管理员才能拉人入群。<br/> - **所有群成员**：普通群成员可拉人入群。<br/><Container type="notice" title="提示"><br/>对于公开群，仅允许群主和管理员邀请用户入群。</Container> |
-| 被邀请用户是否需要确认 | Bool   | 否       | 邀请用户入群时是否需要被邀用户同意。<br/> - （默认）**需要**：需要同意；<br/> - **无需确认**：无需同意。   |
+| Parameter | Type | Required | Description |
+| :-------- | :--- | :------- | :---------- |
+| Group Name | String | Yes | The chat group name. It cannot exceed 128 characters. |
+| Description | String | Yes | The chat group description. It cannot exceed 512 characters. |
+| Group Owner | Bool | Yes | The user ID of the group owner. |
+| Maximum Members | Int | No | The maximum number of chat group members, including the group owner. The default value is `200`. By default, offline push is no longer supported when this value exceeds `3000`. To use offline push for a larger group, contact the Agora sales team to enable it. |
+| Group Type | String | No | - **Public Group** (default): A public group can be found through search, and users can request to join it.<br/>- **Private Group**: A private group cannot be found through search. Users can join it only after being invited by a group member. |
+| Authentication | Bool | No | Whether a request to join the group requires approval from the group owner or an admin.<br/>- **No approval** (default): The user joins the group directly without approval.<br/>- **Need approval**: Approval is required.<br/>This parameter applies only to public groups. Users cannot request to join a private group and can join it only through a group member invitation. |
+| Permission to invite | Bool | No | Whether regular group members can invite users to the group:<br/>- **Group owner/admin** (default): Only the group owner and admins can invite users.<br/>- **All group members**: Regular group members can invite users.<br/><Container type="notice" title="Notice"><br/>For public groups, only the group owner and admins can invite users.</Container> |
+| User confirm | Bool | No | Whether an invited user must accept the invitation before joining the group:<br/>- **Verify** (default): The user's confirmation is required.<br/>- **No verification**: The user's confirmation is not required. |
 
-### 搜索群组 ID
+## Search for a chat group ID
 
-你可以在群组列表右上方的搜索框中输入群组 ID 搜索群组。若该群组 ID 存在，则显示在群组列表中。
+Enter a chat group ID in the search box in the upper-right corner of the chat group list. If the chat group ID exists, the chat group is displayed in the list.
 
 ![img](/images/console/operation_group_search.png)
 
-### 查看群组成员列表
+## View the chat group member list
 
-在群组列表中，点击指定群组的 **操作** 栏中的 **更多**，选择 **查看群组成员** 查看该群组的成员列表。
+In the chat group list, click **More** in the **Operation** column for the target chat group and select **View Group Members**.
 
-你可以输入用户 ID，点击 **添加成员**，向该群组添加用户。
+To add a user to the chat group, enter a user ID and click **Add**.
 
 ![img](/images/console/operation_group_member.png)
 
-### 查看群组黑名单列表
+## View the chat group blocklist
 
-在群组列表中，点击指定群组的 **操作** 栏中的 **更多**，选择 **查看群组黑名单** 查看该群组的成员列表。
+In the chat group list, click **More** in the **Operation** column for the target chat group and select **View Group Blocklist**.
 
-你可以输入用户 ID，点击 **添加黑名单**，将用户加入群组黑名单。
+To add a user to the chat group blocklist, enter a user ID and click **Add**.
 
 ![img](/images/console/operation_group_block_list.png)
 
-### 发送 REST 消息
+## Send a message through the REST API
 
-在群组列表中，点击指定群组的 **操作** 栏中的 **更多**，选择 **发送rest消息** 调用 [REST API](/document/server-side/message_group.html) 向该群组发送文本或图片消息。
+In the chat group list, click **More** in the **Operation** column for the target chat group and select **Send Admin Message** to call the [REST API](/rest/message_group.html) to send a text or image message to the group.
 
 ![img](/images/console/operation_group_rest_send.png)
 
-### 删除群组
+## Delete a chat group
 
-在群组列表中，点击指定群组的 **操作** 栏中的 **更多**，选择 **删除群组** 删除群组。
+In the chat group list, click **More** in the **Operation** column for the target chat group and select **Delete Group**.
 
-- 群组删除后，群组中的文件，无法下载。
-- 群组删除后，服务端存储的群组信息不存在，群组会话不存在，但群消息仍然存在（与订阅的套餐包的消息存储时间有关）。客户端仍然能拉取到这个群组的漫游消息。
+- After the chat group is deleted, files in the group can no longer be downloaded.
+- After the chat group is deleted, the group information and group conversation no longer exist on the server, but group messages are retained according to the message retention period of the subscribed plan. Clients can still retrieve roaming messages from the deleted group.
 
 ![img](/images/console/operation_group_delete.png)
-
-## 群组审核管理
-
-[开通消息人工审核](basic_other.html#实时消息人工审核) 后，你可以对群组的消息、属性和成员进行实时审核管理操作。
-
-在群组列表中，点击指定的群组 ID 在 **群管理** 页面进行如下管理操作：
-- 修改群组名称、描述和群公告。
-- 开启/关闭群组全员禁言。
-- 添加群成员。
-- 添加群组管理员。
-- 将群成员加入黑名单。
-- 将群成员加入禁言列表。
-- 作为 app 管理员发送和撤回消息以及发送离线通知。
-
-![img](/images/console/operation_group_moderation.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

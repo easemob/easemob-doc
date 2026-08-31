@@ -1,272 +1,279 @@
-# 即时通讯 IM 主要功能
+# Key Features
 
-环信即时通讯 IM 支持消息管理、用户管理功能、离线推送和内容审核功能。
+EasyIM supports message management, user management, offline push, and content moderation.
 
-## 多平台支持
+## Multi-platform support
 
-环信即时通讯 IM 支持 Android、iOS、Web 等平台，而且各平台之间可互通。下表为即时通讯支持的各平台版本：
+EasyIM supports Android, iOS, Web, and other platforms, with interoperability across platforms. The following table lists the platform versions supported by EasyIM:
 
 :::tip
-SDK V5.0.0 目前已全面支持 Android、iOS、Web 及小程序端，更多平台版本将于近期正式发布，敬请关注后续更新。
+SDK V5.0.0 currently fully supports Android, iOS, Web, and Mini Program. More platform versions will be officially released soon. Stay tuned for updates.
 :::
 
-| 平台     | SDK 支持的版本      | Demo | 源码 | 单群聊 UIKit | 聊天室 UIKit |
+| Platform     | Version supported by the SDK      | Source code | One-to-one and group chat UIKit | Chat room UIKit |
 | ------------ | ------- | ------- | ------- | ------- | ------- |
-| Android      | Android 5.0 或以上版本（API 级别 21 或以上）   | 支持 | - | 支持 | 支持 |
-| iOS          | iOS 10.0 或以上版本     | 支持 | - | 支持 | 支持 |
-| Web          | <br/> - Internet Explorer 9 或以上 <br/> - FireFox 10 或以上 <br/> - Chrome 54 或以上 Safari 6 或以上<br/> - Edge 12 或以上 <br/> - Opera 58 或以上<br/> - iOS Safari 7 或以上<br/> - Android Browser 4.4 (KitKat) 或以上 | 支持 | - | 支持 | 支持 |
-| 小程序        | 支持   | 支持 | - | - | - |
-| uni-app        | 支持  | - | - | 支持 | - |
-| HarmonyOS        | HarmonyOS NEXT（API 级别 12 或以上）   | 支持 | - | 支持 | - |
-| Flutter      | Flutter 2.10   | 支持 | - | 支持 | 支持 |
-| React Native | React Native 0.63.4 或以上版本  | 支持 | - | 支持 | 支持 |
-| Unity        | Unity 2017 或以上版本 | 支持 | - | - | - |
-| Windows      | Windows 10 或以上版本 | 支持 | - | - | - |
-| Electron      | 支持 | -  | - | - | - |
-| Linux      | 支持 | - | - | - | - |
+| Android      | Android 5.0 or later (API level 21 or later)   |  - | Supported | Supported |
+| iOS          | iOS 10.0 or later     | - | Supported | Supported |
+| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | - | Supported | Supported |
+| Mini Program        | Supported   | - | - | - |
+| uni-app        | Supported  |  - | Supported | - |
+| HarmonyOS        | HarmonyOS NEXT (API level 12 or later)   | - | Supported | - |
+| Flutter      | Flutter 2.10   | - | Supported | Supported |
+| React Native | React Native 0.63.4 or later  | - | Supported | Supported |
+| Unity        | Unity 2017 or later | - | - | - |
+| Windows      | Windows 10 or later |  - | - | - |
+| Electron      | Supported |  - | - | - |
+| Linux      | Supported | - | - | - |
 
-## 账号功能
+## Account features
 
-通过调用 RESTful API，可进行如下用户账号操作：
+You can perform the following user account operations by calling RESTful APIs:
 
-| 功能               | 描述  |
+| Feature               | Description  |
 | :----------------- | :---------------------- |
-| 注册用户 | 单次请求最多可注册 60 个用户 ID。 |
-| 获取用户详情  | 用户名称、创建时间以及推送设置等。  |
-| 删除用户账号 | 删除某个 App 下指定数量的用户账号。 |
-| 修改用户密码 | 修改用户的登录密码，不需要提供原密码。 |
-| 封禁/解禁用户  | 禁用用户，使其立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。 |
-| 强制用户下线 | 将用户状态改为离线，用户需要重新登录才能正常使用。 |
-| 获取用户在线状态 | 查看单个用户是在线还是离线状态。 |
-| 获取指定账号的在线登录设备列表 | 获取指定账号的在线登录设备列表。 |
+| Register users | Register up to 60 user IDs in a single request. |
+| Retrieve user details  | Retrieve information such as the username, creation time, and push settings.  |
+| Delete user accounts | Delete a specified number of user accounts from an app. |
+| Change a user password | Change a user's login password without providing the original password. |
+| Ban or unban users  | Ban users, immediately force them offline, and prevent them from logging in to EasyIM until they are unbanned. |
+| Force a user offline | Change a user's status to offline. The user must log in again to resume normal use. |
+| Retrieve user presence | Check whether a user is online or offline. |
+| Retrieve the list of online devices for an account | Retrieve the list of devices on which a specified account is currently logged in. |
 
-## 单端/多端登录
+## Single-device and multi-device login
 
-| 功能               | 描述  |
+| Feature               | Description  |
 | :----------------- | :---------------------- |
-| 单平台登录 | Android、iPhone、iPad、HarmonyOS、Windows、Mac、Web 仅可有1种平台在线。 |
-| 多平台登录 | 每端默认最多支持 4 个设备同时在线。 |
+| Single-device login | Only 1 of the following platforms can be online: Android, iPhone, iPad, HarmonyOS, Windows, Mac, or Web. |
+| Multi-device login | Up to 4 devices can be online simultaneously on each platform by default. Before using multi-device login, you can enable it on the EasyIM Console and specify the number of devices allowed for each platform. For details, see the [EasyIM Console document](/product/console/basic_user.html#multi-device-login.html). |
 
-使用多端登录前，你需要在 [环信控制台](https://console.easemob.com/user/login) 的 **功能配置** > **基础功能** > **用户** 页面上查找 **多端多设备**，开启该功能。开通该功能后，点击 **设置**，在弹出的对话框中设置各端设备的数量。
+## Message types
 
-## 消息类型
-
-| 类型           | 描述                                                         |
+| Type           | Description                                                         |
 | :------------- | :----------------------------------------------------------- |
-| 文本消息       | 文本消息的内容是文本，包含超链接和表情符号等。|
-| 位置消息       | 消息内容为经纬度信息。 |
-| 图片消息       | 消息内容为图片大小和 URL 地址等。<br/> 图片默认不能超过 10 MB。 |
-| 语音消息       | 语音消息需要提供时长（单位为秒）和语音文件路径。<br/> 音频文件默认不能超过 10 MB。 |
-| 视频消息       | 视频消息需要提供时长（单位为秒）、视频文件路径以及缩略图路径等信息。<br/> 视频文件默认不能超过 10 MB。 |
-| 文件消息       | 文件消息需要提供文件 URL 地址和文件名等信息<br/> 附件大小不能超过 10 MB。 |
-| 透传消息       | 通过发送命令给对方，通知对方要执行的操作，对方收到消息后系统可以自定义处理。<br/> 透传消息不会在 UI 上展示，也不存入本地数据库。 |
-| 自定义消息     | 自定义消息类型，例如，红包消息、模板消息等。 |
-| 合并消息       | 将多条消息合并成一条消息。一条合并消息最多包含 300 个原始消息。|
-| 流式消息       | 将一条完整消息拆分为多个分片，并按顺序逐步发送和接收的消息传输方式。|
+| Text message       | A text message contains text, including hyperlinks and emojis.|
+| Location message       | A location message contains latitude and longitude information. |
+| Image message       | An image message contains information such as the image size and URL.<br/> By default, the image cannot exceed 10 MB. |
+| Voice message       | A voice message must include the duration in seconds and the voice file path.<br/> By default, the audio file cannot exceed 10 MB. |
+| Video message       | A video message must include the duration in seconds, video file path, thumbnail path, and other information.<br/> By default, the video file cannot exceed 10 MB. |
+| File message       | A file message must include the file URL, file name, and other information.<br/> The attachment cannot exceed 10 MB. |
+| Command message       | Send a command to notify the recipient of an operation to perform. After receiving the message, the recipient's system can process it as needed.<br/> Command messages are not displayed in the UI or stored in the local database. |
+| Custom message     | A custom message type, such as a red packet message or template message. |
+| Combined message       | Combine multiple messages into one. A combined message can contain up to 300 original messages.|
+| Streaming message       | A message transmission method that splits a complete message into multiple chunks and sends and receives them incrementally in sequence.|
 
 :::tip
-1. 各类消息大小不能超过 5 KB。 
-2. 支持消息扩展字段，传递自定义内容，例如，消息中需要携带被回复的消息内容或者是图文消息等场景。
+1. A message of any type cannot exceed 5 KB. 
+2. Message extension fields are supported for transferring custom content, such as quoted message content or rich media content.
 :::
 
-## 消息功能
+## Message features
 
-| 功能           | 描述           |
+| Feature           | Description           |
 | :------------- | :---------------------- |
-| 发送和接收消息 | 发送和接收各类消息，包括文本、图片、音频、视频、文件消息、位置消息、透传消息、自定义消息以及合并消息。  |
-| 发送和接收流式消息 | 发送和接收流式消息。可通过服务端接口发送流式消息、SDK 只支持接收流式消息。  |
-| 本地存储       | 接收的消息存储在本地。         |
-| 历史消息       | 环信服务器可存储消息。消息存储时间与你的产品套餐包相关，详见 [产品价格](https://www.easemob.com/pricing/im)。 |
-| 离线消息推送       | <br> - 用户离线时，可向消息接收方发送推送通知。<br> - 支持离线消息存储，默认为 7 天。 |
-| 多端同步       | 多端多设备消息同步，同时收到消息。 |
-| 消息搜索  | 按照关键字搜索服务端会话和本地会话中的各类消息。     |
-| 消息撤回       | 撤回发送成功的消息。默认可撤回发出 2 分钟内的消息。你可以在环信控制台设置消息撤回时长，该时长不超过 7 天。 |
-| 消息回执  | 消息送达回执和消息已读回执。    |
-| 编辑消息  | 编辑发送成功的消息。    |
-| 表情回复  | 对消息添加、删除表情。   |
-| 定向消息  | 指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。    |
-| 全局广播  | 向 app 所有用户或聊天室发送广播消息。    |
-| 删除消息  | 单向删除服务端和本地的历史消息、清除聊天记录。     |
-| 置顶消息  | 置顶、取消置顶消息和获取置顶消息。    |
-| 转发消息  | 将当前会话中发送成功或接收到的消息转发至其他会话。    |
-| 只投在线用户  | 只将消息投递给在线用户。    |
-| 消息扩展  | 当内置消息字段无法满足业务需求时，你可以通过消息扩展字段携带自定义业务数据，例如被回复消息信息、图文消息展示数据或业务标识等。 |
-| 导入和插入消息  | 在本地导入和插入消息。    |
-| 更新消息  | 修改本地消息的状态或内容。    |
-| 正在输入  | 可通过透传消息实现。    |
+| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
+| Send and receive streaming messages | Send and receive streaming messages. Streaming messages can be sent through a server-side API, while the SDK supports only receiving them.  |
+| Local storage       | Store received messages locally.         |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
+| Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
+| Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
+| Message search  | Search for all message types in server-side and local conversations by keyword.     |
+| Message recall       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days. |
+| Message receipts  | Send delivery receipts and message read receipts.    |
+| Edit messages  | Edit successfully sent messages.    |
+| Reactions  | Add or delete Reactions on messages.   |
+| Targeted messages  | Send a message to one or more specified members in a chat group or chat room. Other members do not receive it.    |
+| Global broadcast  | Send broadcast messages to all app users or chat rooms.    |
+| Delete messages  | Delete server-side and local historical messages only for the current user, or clear chat history.     |
+| Pin messages  | Pin and unpin messages and retrieve pinned messages.    |
+| Forward messages  | Forward a successfully sent or received message from the current conversation to another conversation.    |
+| Deliver only to online users  | Deliver messages only to online users.    |
+| Message extensions  | If built-in message fields do not meet your business requirements, use message extension fields to include custom business data, such as quoted message information, rich media display data, or business identifiers. |
+| Import and insert messages  | Import and insert messages locally.    |
+| Update messages  | Modify the status or content of local messages.    |
+| Typing indicator  | Implement through command messages.    |
 
-## 会话相关
+## Conversation features
 
-| 功能       | 描述 |
+| Feature       | Description |
 | :-------------- | :----- |
-| 会话列表  | 从服务器或本地获取会话列表。 |
-| 会话免打扰 | 可设置指定群聊会话，收到新消息后是否提醒。 |
-| 会话未读数  | 获取和清零群聊会话的未读消息数。 |
-| 会话置顶  | 将群聊会话固定在会话列表的顶部。 |
-| 会话标记  | 对群聊会话添加标记。 |
-| 会话删除  | 删除群聊会话。 |
+| Conversation list  | Retrieve a conversation list from the server or local database. |
+| Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified group chat conversation. |
+| Conversation unread count  | Retrieve and clear the unread message count of a group chat conversation. |
+| Pin a conversation  | Pin a group chat conversation to the top of the conversation list. |
+| Conversation mark  | Add a mark to a group chat conversation. |
+| Delete a conversation  | Delete a group chat conversation. |
 
-## 用户属性
+## User attributes
 
-| 功能               | 描述  |
+| Feature               | Description  |
 | :----------------- | :---------------------- |
-| 设置用户属性 | 设置用户昵称、头像、邮箱、电话等。 |
-| 获取用户属性 | 获取指定一个或多个用户的全部用户属性。  |
-| 获取 app 下用户属性总大小（仅服务端） | 获取该 app 下所有用户的属性数据大小，单位为字节。  |
-| 订阅非好友用户的属性变更 | 订阅后，指定非好友用户的属性发生变化时，应用可以及时收到通知。|
-| 删除用户属性 | 删除单个用户的所有属性。 |
+| Set user attributes | Set the user nickname, avatar, email address, phone number, and other attributes. |
+| Retrieve user attributes | Retrieve all user attributes for one or more specified users.  |
+| Retrieve the total size of user attributes in an app (server side only) | Retrieve the size, in bytes, of the attribute data for all users in the app.  |
+| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified non-friend changes.|
+| Delete user attributes | Delete all attributes of a single user. |
 
-## 用户关系
+## User relationships
 
-环信即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在 [环信控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/console/basic_user.html#好友关系检查)。 
+By default, EasyIM supports sending one-to-one messages between non-friends, meaning users can chat without adding each other as friends. To allow one-to-one messages only between friends, open the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check). 
 
-| 功能       | 描述 |
+| Feature       | Description |
 | :-------------- | :----- |
-| 添加好友  | 发送、接收和处理好友请求。 |
-| 移除好友  | 移除好友。 |
-| 同意/拒绝好友申请  | 收到好友请求后，可接受或拒绝。 |
-| 移除好友  | 移除好友。 |
-| 设置好友备注  | 设置单个好友的备注。 |
-| 获取好友列表  | 设置登录后自动同步好友列表后，SDK 通过自动同步获取最新好友数据。 |
-| 添加用户到黑名单  | 将用户添加至黑名单。可以将任何用户加入黑名单，不论该用户与你是否是好友关系。 |
-| 将好友移除黑名单  | 将用户从黑名单移除，用户发送消息等行为将恢复。|
-| 获取黑名单列表  | 从服务端和本地获取黑名单列表。 |
+| Add a friend  | Send, receive, and process friend requests. |
+| Remove a friend  | Remove a friend. |
+| Accept or decline a friend request  | Accept or decline a received friend request. |
+| Set friend remarks  | Set remarks for a specified friend. |
+| Retrieve the friend list  | After automatic friend list synchronization upon login is enabled, the SDK obtains the latest friend data through automatic synchronization. |
+| Add a user to the blocklist  | Add a user to the blocklist. Any user can be added, regardless of whether they are a friend. |
+| Remove a friend from the blocklist  | Remove a user from the blocklist to restore behaviors such as message sending.|
+| Retrieve the blocklist  | Retrieve the blocklist from the server and local database. |
 
-## 群组和聊天室
+## Chat groups and chat rooms
 
-| 功能   | 群组  | 聊天室  |
+| Feature   | Chat group  | Chat room  |
 | :------ | :----------- | :-------- |
-| 使用场景   | 类似于 Signal，Skype 里的群聊，所有加入的用户拥有固定的关系     | 成员间没有固定关系，离开即退出     |
-| 分类   | 分为公开群和私有群，创建群组时可设置入群是否需获得群主和群管理员的同意     | 没有公开和私有之分，所有用户均可自由加入或退出 |
-| 群组数/聊天室数上限  | <br/> - 测试版：100 <br/> - 专业版：无限制  <br/> - 旗舰版：无限制  | <br/> -测试版：不支持 <br/> - 专业版：无限制  <br/> - 旗舰版：无限制     |
-| 成员数上限          | <br/> -测试版：100 人/群 <br/> - 专业版：300人/群（可调*）  <br/> - 旗舰版：3000人/群（可调*） | <br/> - 测试版：100 <br/> - 专业版：不限制  <br/> - 旗舰版：不限制   |
-| 成员列表   | 所有成员均可见     | 所有成员均可见      |
-| 创建   | 所有 app 用户都可以创建群组     | 仅聊天室超级管理员可在客户端创建     |
-| 解散   | 群主     | 聊天室所有者     |
-| 申请加入         | 支持     | 支持    |
-| 加群审批         | 支持     | 支持     |
-| 邀请加入         |  支持    | 不支持   |
-| 群主/所有者退出         | 不支持     | 支持     |
-| 设置管理员         | 支持      | 支持     |
-| 移除成员         | <br/> - 群主 <br/> - 群管理员 | <br/> - 聊天室所有者 <br/> - 聊天室管理员     |
-| 成员禁言          | 支持     | 支持     |
-| 白名单          | 支持     | 支持     |
-| 黑名单         | 支持     | 支持     |
-| 成员变更通知         | 邀请进群/申请进群/踢人/退群，默认下发通知     | 主动离开和被踢，默认下发通知     |
-| 角色变更通知         | 添加/移除群管理员，群主变更，默认下发通知     | 添加/移除聊天室管理员，聊天室所有者变更，默认下发通知     |
-| 群/聊天室属性变更通知   | 群组名称、描述和公告变更时，默认下发通知     | 聊天室名称、描述和公告以及自定义属性变更时，默认下发通知     |
-| 群/聊天室成员状态变更通知         | 成员被禁言和添加至黑名单或白名单、群管理员变更，默认下发通知      | 成员被禁言和添加至黑名单或白名单、聊天室管理员变更，默认下发通知     |
-| 消息功能     | <br/> - 支持消息发送、消息漫游、修改、撤回、置顶、回执、表情回复、翻译、合并、转发、只投在线用户等特性。<br/> - 支持定向消息（仅向某个或某些成员发消息）。    | <br/> - 支持群组消息的大部分功能（包括定向消息）。<br/> - 要使用消息漫游，需升级 SDK 到指定版本并联系商务开通。<br/> - 不支持消息表情回复、离线消息。     | 
-| 历史消息存储         | 支持     |  支持    |
-| 查看漫游消息         | 默认开通     | 联系商务开通     |
-| 是否支持查看加入前漫游消息          |  支持    | 支持（联系商务开通）    |
-| 消息未读计数          | 支持     | 不支持   |
-| 默认消息接收          | 接收在线推送消息，支持离线推送     | 只接收在线消息，不支持离线推送    |
-| 离线消息存储          | 支持     | 不支持     |
-| 消息可靠性         | 群组中发送的所有消息，用户都会收到     | 当消息量大时，聊天室中超过阈值（每秒 100 条）的消息会被丢弃    |
+| Use case   | Similar to group chats in Signal or Skype, where all members have persistent relationships     | Members do not have persistent relationships and leaving the room means leaving the chat room     |
+| Type   | Public or private. When creating a chat group, you can configure whether approval from the chat group owner or admins is required to join     | Chat rooms are not classified as public or private. All users can freely join or leave them |
+| Maximum number of chat groups/chat rooms  | <br/> - Trial: 100 <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited  | <br/> -Trial: Not supported <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited     |
+| Maximum number of members          | <br/> -Trial: 100 members/chat group <br/> - Professional: 300 members/chat group (adjustable*)  <br/> - Flagship: 3000 members/chat group (adjustable*) | <br/> - Trial: 100 <br/> - Professional: Unlimited  <br/> - Flagship: Unlimited   |
+| Member list   | Visible to all members     | Visible to all members      |
+| Create   | Any app user can create a chat group     | Only a chat room superadmin can create a chat room on the client     |
+| Destroy   | Chat group owner     | Chat room owner     |
+| Apply to join         | Supported     | Supported    |
+| Join approval         | Supported     | Supported     |
+| Invite to join         |  Supported    | Not supported   |
+| Owner leaves         | Not supported     | Supported     |
+| Appoint admins         | Supported      | Supported     |
+| Remove members         | <br/> - Chat group owner <br/> - Chat group admin | <br/> - Chat room owner <br/> - Chat room admin     |
+| Mute members          | Supported     | Supported     |
+| Allowlist          | Supported     | Supported     |
+| Blocklist         | Supported     | Supported     |
+| Member change notifications         | Notifications are delivered by default for invitations, join requests, member removal, and voluntary departure     | Notifications are delivered by default when a member leaves voluntarily or is removed     |
+| Role change notifications         | Notifications are delivered by default when a chat group admin is added or removed or ownership changes     | Notifications are delivered by default when a chat room admin is added or removed or ownership changes     |
+| Chat group/chat room attribute change notifications   | Notifications are delivered by default when the chat group name, description, or announcement changes     | Notifications are delivered by default when the chat room name, description, announcement, or custom attributes change     |
+| Chat group/chat room member status change notifications         | Notifications are delivered by default when a member is muted or added to the blocklist or allowlist, or when an admin changes      | Notifications are delivered by default when a member is muted or added to the blocklist or allowlist, or when an admin changes     |
+| Message features     | <br/> - Support message sending, roaming, editing, recall, pinning, receipts, Reactions, translation, combination, forwarding, delivery only to online users, and more.<br/> - Support targeted messages sent only to one or more specified members.    | <br/> - Support most chat group message features, including targeted messages.<br/> - To use message roaming, upgrade the SDK to the specified version and contact the EasyIM business manager to activate it.<br/> - Reactions and offline messages are not supported.     | 
+| Historical message storage         | Supported     |  Supported    |
+| View roaming messages         | Enabled by default     | Contact the EasyIM business manager to activate     |
+| View roaming messages sent before joining          |  Supported    | Supported (contact the EasyIM business manager to activate)    |
+| Unread message count          | Supported     | Not supported   |
+| Default message reception          | Receive online messages and support offline push     | Receive only online messages; offline push is not supported    |
+| Offline message storage          | Supported     | Not supported     |
+| Message reliability         | Users receive all messages sent in the chat group     | When the message volume is high, chat room messages above the threshold of 100 messages per second are discarded    |
 
-## 环信控制台
+## EasyIM Console
 
-你可以在 [环信控制台](https://console.easemob.com/user/login) 对你的应用进行配置和管理。
+You can configure and manage your app in the [EasyIM Console](https://console.easyim.ai/user/login).
 
-| 功能   | 描述  | 
+| Feature   | Description  | 
 | :------ | :----------- | 
-| 创建应用  | 创建你的应用                   | 
-| 升级套餐包  | 自助开通专业版或旗舰版 IM                   | 
-| 订阅增值服务  | 开通内容审核、实时音视频、即时推送等 [增值服务](/product/pricing_policy.html#增值服务费用)                | 
-| 账户中心  | 查看订单记录和消费账单                  | 
-| 开通功能  | 开通服务端会话列表或多端多设备等功能                  | 
-| 应用概览 | 展示你的服务版本、域名配置等                  | 
-| 推送配置 | 包括各厂商推送证书管理和推送模板管理                  | 
-| 消息回调  | 发送前回调和发送后回调规则配置                   | 
-| IP 白名单 | 允许你赋给特定 IP 地址调用 RESTful API 的权限                   | 
-| 用户管理  | 创建、封禁、删除用户，添加好友等                   | 
-| 群组管理  | 创建、删除群组、查看群成员和黑名单                    | 
-| 聊天室管理  | 创建、删除聊天室，查看聊天室成员、管理员和禁言列表和黑名单等                   | 
-| 数据统计 | 用户、群组和聊天室相关数据统计以及消息量统计                   | 
-| 实时查询 | 实时活跃的用户数、群组数和聊天室数等，请求质量、热点数据、IM 消息投递查询等                   | 
-| 内容审核 | 配置消息审核规则、查看审核记录、基于关键词审核等                  | 
+| Create an app  | Create your app                   | 
+| Upgrade the plan  | Activate the Professional or Flagship EasyIM plan on a self-service basis                   | 
+| Subscribe to value-added services  | Activate [value-added services](/product/pricing_policy.html#add-on-service-fees) such as content moderation, real-time audio and video, and Instant Push                |
+| Account center  | View order history and bills                  | 
+| Activate features  | Activate features such as the server-side conversation list or multiple platforms and devices                  | 
+| App overview | Display the service plan, domain configuration, and other information                  | 
+| Push configuration | Manage vendor push certificates and push templates                  | 
+| Message callbacks  | Configure pre-delivery and post-delivery callback rules                   | 
+| IP allowlist | Allow specified IP addresses to call RESTful APIs                   | 
+| User management  | Create, ban, and delete users, add friends, and perform other operations                   | 
+| Chat group management  | Create and delete chat groups and view chat group members and the blocklist                    | 
+| Chat room management  | Create and delete chat rooms and view chat room members, admins, the mute list, the blocklist, and other information                   | 
+| Statistics | View statistics about users, chat groups, and chat rooms and message volume statistics                   | 
+| Real-time queries | View the number of active users, chat groups, and chat rooms in real time, request quality, trending data, EasyIM message delivery queries, and more                   | 
 
-## 数据统计
+<!--
+| Content moderation | Configure message moderation rules, view moderation records, perform keyword-based moderation, and more                  |   
+-->
 
-| 功能 | 描述 |
+<!--
+## Statistics
+
+| Feature | Description |
 | :------------- | :---------------------- |
-| 用户数据 | 用户数量统计，包括注册用户总数、今日活跃用户数、今日新增用户数  |
-| 群组数据 | 群组统计，包括群组总数、活跃群组数、新增群组数、解散群组数  |
-| 聊天室数据 | 聊天室统计，包括聊天室总数、活跃聊天室数、新增聊天室数、解散聊天室数、聊天室同时在线人数  |
-| Server 数据 | Server 统计，包括 Server 总数、今日活跃 Server 数、今日新增 Server 数、Channel 总数,、今日新增 Channel 数  |
-| 消息量统计 | 消息统计包含单聊、群聊、聊天室场景下各类消息量的总数统计和趋势分析。  |
+| User data | User statistics, including the total number of registered users, today's active users, and today's new users  |
+| Chat group data | Chat group statistics, including the total number of chat groups and the numbers of active, new, and destroyed chat groups  |
+| Chat room data | Chat room statistics, including the total number of chat rooms, the numbers of active, new, and destroyed chat rooms, and the number of concurrent online chat room members  |
+| Server data | Server statistics, including the total number of Servers, today's active Servers, today's new Servers, the total number of Channels, and today's new Channels  |
+| Message volume statistics | Total message volume statistics and trend analysis by message type in one-to-one chats, group chats, and chat rooms.  |
 
-## 实时查询
+## Real-time queries
 
-| 功能 | 描述 |
+| Feature | Description |
 | :------------- | :---------------------- |
-| 请求质量概览 | 提供质量数据的阶段性分析，帮助你掌握用量变化趋势、跟踪产品质量情况。  |
-| 热点数据查询 | 提供最小以分钟粒度的TOP 50 的活跃用户、活跃群组、活跃聊天室信息。  |
-| IM 消息投递查询 | 可以查询最近三天的消息投递情况。  |
-| IM 用户连接状态 | 通过用户 ID 查询最近三天的历史连接状态。  |
-| IM 用户设备日志 | 查询用户设备端的日志，或将设备端的日志上传到环信日志服务器。  |
-| 聊天室消息速率 | 可根据聊天室 ID 查询聊天室内每分钟的消息上下行数量。  |
+| Request quality overview | Provide periodic analysis of quality data to help you understand usage trends and track product quality.  |
+| Trending data query | Provide information about the TOP 50 active users, chat groups, and chat rooms with a minimum granularity of one minute.  |
+| EasyIM message delivery query | Query message delivery within the last three days.  |
+| EasyIM user connection status | Query the historical connection status of a user within the last three days by user ID.  |
+| EasyIM user device logs | Query logs on a user's device or upload device logs to the EasyIM log server.  |
+| Chat room message rate | Query the number of uplink and downlink messages per minute in a chat room by chat room ID.  |
 
-## 增值服务
+-->
 
-### 内容审核
+<!--
+## Value-added services
 
-支持使用 IM [内容审核服务](/value-added/moderation/moderation_overview.html)对消息内容进行多样化场景检测，帮助你对应用消息内容进行管控，规避内容违规风险。
+### Content moderation
 
-| 功能 | 描述 |
+Use the EasyIM [content moderation service](/value-added/moderation/moderation_overview.html) to detect message content in various scenarios, helping you manage app message content and mitigate the risk of prohibited content.
+
+| Feature | Description |
 | :------------- | :---------------------- |
-| 多消息类型审核 | 智能识别文本、图片和音视频文件。  |
-| 自定义消息处置规则 | 自定义消息下发或拦截的策略。  |
-| 消息审核结果可回调 | 支持将消息审核结果回调至客户服务器。 |
-| 一站式内容审核后台 | 提供可视化的内容审核后台，支持查询审核记录、审核数据统计。  |
+| Moderate multiple message types | Intelligently identify text, images, audio, and video files.  |
+| Custom message handling rules | Customize policies for message delivery or interception.  |
+| Callback for message moderation results | Send message moderation results to the customer's server through a callback. |
+| Unified content moderation backend | Provide a visual content moderation backend for querying moderation records and viewing moderation statistics.  |
 
-### 实时音视频
+### Real-time audio and video
 
-| 功能             | 描述                           |
+| Feature             | Description                           |
 | :------------- | :---------------------- |
-| 一对一音视频通话 | 支持一对一语音和视频通话。     |
-| 群组音视频通话   | 支持群组语音和视频通话。       |
-| 离线推送来电通知 | 支持通过离线推送接收通话邀请。 |
-| 来电通知与悬浮窗 | 支持来电通知栏和悬浮窗展示。   |
+| One-to-one audio and video calls | Support one-to-one voice and video calls.     |
+| Group audio and video calls   | Support group voice and video calls.       |
+| Incoming call notifications through offline push | Receive call invitations through offline push. |
+| Incoming call notifications and floating windows | Display incoming call notifications in the notification bar and floating windows.   |
 
-### 即时推送
+### Instant Push
 
-| 功能           | 描述                                         |
+| Feature           | Description                                         |
 | :------------- | :---------------------- |
-| 单用户同步推送 | 支持向单个用户同步发送推送通知。             |
-| 单用户异步推送 | 支持向单个用户异步发送推送通知。             |
-| 多用户批量推送 | 支持向多个用户异步批量推送通知。             |
-| 标签/全量推送  | 支持向指定标签用户群或应用全量用户推送通知。 |
+| Synchronous push to a single user | Send push notifications synchronously to a single user.             |
+| Asynchronous push to a single user | Send push notifications asynchronously to a single user.             |
+| Batch push to multiple users | Send push notifications asynchronously to multiple users in a batch.             |
+| Tag or broadcast push  | Send push notifications to users with specified tags or all users in an app. |
 
-### 服务端消息搜索
+### Server-side message search
 
-| 功能               | 描述                               |
+| Feature               | Description                               |
 | :------------- | :---------------------- |
-| 历史消息搜索       | 支持按关键字搜索历史消息。         |
-| 会话范围搜索       | 支持按指定会话搜索消息。           |
-| 条件筛选搜索       | 支持按消息类型和时间范围筛选消息。 |
-| 内容与扩展字段搜索 | 支持搜索消息内容和扩展字段。       |
+| Historical message search       | Search historical messages by keyword.         |
+| Conversation-scoped search       | Search for messages in specified conversations.           |
+| Conditional search filters       | Filter messages by message type and time range. |
+| Message content and extension field search | Search message content and extension fields.       |
 
-### 消息翻译
+### Message translation
 
-| 功能           | 描述                           |
+| Feature           | Description                           |
 | :------------- | :---------------------- |
-| 文本消息翻译   | 仅支持文本消息翻译。           |
-| 指定源语言翻译 | 支持传入源语言代码进行翻译。   |
-| 多目标语言翻译 | 支持一次翻译为多个目标语言。   |
-| 翻译结果返回   | 返回各目标语言对应的翻译结果。 |
+| Text message translation   | Translate text messages only.           |
+| Specify the source language | Pass the source language code for translation.   |
+| Multiple target languages | Translate a message into multiple target languages at once.   |
+| Translation results   | Return the translation result for each target language. |
 
-### 语音转文字
+### Speech-to-text
 
-| 功能     | 描述         |
+| Feature     | Description         |
 | :------------- | :---------------------- |
-| 语音消息转文字     | 支持将已发送成功的语音消息转换为文本。             |
-| 本地语音文件转文字 | 支持将本地语音文件转换为文本。                     |
-| 语音参数配置       | 支持为本地语音文件配置格式、采样率、位深和声道数。 |
-| 转写结果读取       | 支持从语音消息体读取已持久化的文本结果。           |
+| Convert a voice message to text     | Convert a successfully sent voice message to text.             |
+| Convert a local voice file to text | Convert a local voice file to text.                     |
+| Configure voice parameters       | Configure the format, sample rate, bit depth, and number of channels for a local voice file. |
+| Read transcription results       | Read the persisted text result from a voice message body.           |
 
-## 私有化
+-->
 
-环信即时通讯私有化服务是基于 IM 核心技术实现的可私有化部署解决方案。该方案可适配内网物理服务器集群、公有云以及私有云等任意部署环境，提供功能完备、安全可靠、易于扩展的即时通讯平台。更多详情，请参见[私有化服务文档](https://docs-im-privatization-v3.easemob.com)。
+<!--
+## On-premises deployment
 
+The EasyIM on-premises service is a privately deployable solution based on core instant messaging technologies. It supports deployment in intranet physical server clusters, public clouds, private clouds, and other environments, providing a full-featured, secure, reliable, and scalable instant messaging platform. For details, see the [on-premises service documentation](https://docs-im-privatization-v3.easemob.com).
+-->

@@ -1,44 +1,43 @@
-# 用户注册与登录
+# User Registration and Login
 
-本文介绍用户注册模式与登录方式。
+This document describes user registration modes and login methods.
 
-## 用户注册
+## User registration
 
-登录 SDK 前，你需要先创建环信 IM 用户。创建用户前，需先在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯 > 基础功能** > **用户** 页面设置用户注册模式。
+Before logging in to the SDK, you must first create an EasyIM user. Before creating the user, set the user registration mode on the **Chat** > **Features** >**User & Login** page of the [EasyIM Console](https://console.easyim.ai/user/login).
 
-用户注册模式分为以下两种：
+The following user registration modes are available:
 
-- **授权注册**：通过环信提供的 REST API 注册用户。该方式适用于正式生产环境，注册成功后，你可以将用户账号保存到你的应用服务器或返回给客户端。
-- **开放注册**：允许客户端或 REST API 直接注册用户。该方式一般用于体验 Demo 和测试环境，正式环境不推荐使用。
+- **Authorized registration**: Register users through a REST API provided by EasyIM. This mode is suitable for production environments. After registration succeeds, you can save the user account to your app server or return it to the client.
+- **Open registration**: Allow a client or REST API to register users directly. This mode is generally used for demos and test environments and is not recommended for production environments.
 
-设置注册模式后，你可以通过以下方式创建用户：
+After setting the registration mode, you can create users in the following ways:
 
-1. **调用 REST API 创建用户**
+1. **Call a REST API to create users**
 
-   - 授权注册：调用 [授权注册单个用户](/document/server-side/account_register_authorized_single.html) 或 [批量授权注册用户](/document/server-side/account_register_authorized_batch.html) 接口创建用户。
-   - 开放注册：开启开放注册后，可通过客户端或 [REST API 开放注册用户](/document/server-side/account_register_open.html) 创建用户。
+   - Authorized registration: Call the [authorized registration of a single user](/rest/account_register_authorized_single.html) or [authorized registration of users in a batch](/rest/account_register_authorized_batch.html) API to create users.
+   - Open registration: After enabling open registration, create users through a client or the [REST API for open user registration](/rest/account_register_open.html).
 
-2. **通过环信控制台创建用户**
+2. **Create users in the EasyIM Console**
 
-   你可以在 [环信控制台](https://console.easemob.com/user/login) 创建正式环境或测试环境下的用户，详见 [创建用户](/product/console/operation_user.html#创建用户)。
+   You can create users in production or test environments in the [EasyIM Console](https://console.easyim.ai/user/login). For details, see [Create a user](/product/console/operation_user.html#create-a-user).
 
-## 用户登录
+## User login
 
-初始化环信即时通讯 IM SDK 后，你需要调用登录接口进行登录。只有登录成功后，你才能正常使用 IM 的各种功能，例如消息和会话。
+After initializing the EasyIM SDK, call the login API to log in. You can use EasyIM features, such as messages and conversations, only after login succeeds.
 
-即时通讯 IM 支持用户 ID 和 token 登录。
+EasyIM supports login using a user ID and token.
 
-| 参数       | 类型   | 是否必需 | 描述          |
+| Parameter       | Type   | Required | Description          |
 | :--------- | :----- | :------- | :-------------------------------------------- |
-| `username` | String | 是  | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 请勿使用大写英文字母 A-Z。若你同时使用了大写字母和小写字母，响应中返回的用户 ID 只包含小写字母。<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `token` | String | 是 | token 可以通过调用 REST API 获取，即传入用户 ID （或用户 ID + 密码）和 token 有效期参数获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。<br/><Container type="notice" title="注意"><br/>- 你可以在调用 REST API 获取 token 时，传入 `ttl` 参数，设置 token 的有效期。此外，你也可以通过 [环信控制台](https://console.easemob.com/user/login/)的 **用户管理** 页面设置 token 的有效期。该参数值以最新设置为准。<br/>- 环信服务器完全信赖用户 token，为避免业务受影响，你需要确保 token 的安全。</Container> |
+| `username` | String | Yes  | User ID. The length cannot exceed 64 bytes, and the value cannot be empty. The following characters are supported:<br/>- 26 lowercase English letters, a-z;<br/>- 10 digits, 0-9;<br/>- "_", "-", and ".". <br/><Container type="notice" title="Notice"><br/>- Do not use uppercase English letters, A-Z. If you use both uppercase and lowercase letters, the user ID returned in the response contains only lowercase letters.<br/>- A user ID is public information. Do not use sensitive information such as a UUID, email address, or phone number.</Container> |
+| `token` | String | Yes | You can obtain a token by calling a REST API and passing a user ID (or a user ID and password) and the token validity period. For details, see [Obtain an EasyIM user token](/rest/easemob_user_token.html).<br/><Container type="notice" title="Notice"><br/>- When calling the REST API to obtain a token, you can pass the `ttl` parameter to set the token validity period. You can also set the token validity period on the **Users** page of the [EasyIM Console](https://console.easyim.ai/user/login/). The most recently configured value takes effect.<br/>- The EasyIM server fully trusts user tokens. To prevent disruption to your business, keep tokens secure.</Container> |
 
-## 登录流程
+## Login process
 
 ![img](/images/product/login_userid_token.png)
 
 :::tip
-1. 关于获取 token，详见 [获取 App Token](/document/server-side/easemob_app_token.html)和 [获取 User Token](/document/server-side/easemob_user_token.html)。
-2. 获取 token 时，token 有效期 `ttl` 以传入的值为准。若不传该参数，以[环信控制台](https://console.easemob.com/user/login)的 **用户管理** 页面的 token 有效期的设置为准，默认为 60 天。若设置为 `0`，则 token 永久有效。
+1. For information about obtaining tokens, see [Obtain an App Token](/rest/easemob_app_token.html) and [Obtain a User Token](/rest/easemob_user_token.html).
+2. When you obtain a token, the value passed for `ttl` determines the token validity period. If this parameter is not passed, the token validity period configured on the **Users** page of the [EasyIM Console](https://console.easyim.ai/user/login) is used. The default is 60 days. If the value is set to `0`, the token never expires.
 :::
-

@@ -1,11 +1,11 @@
-# 服务端 API 调用
+# Server API Calls
 
-选择 **服务端API调用** 页签。若你使用免费版，需要点击 **立即升级** 升级至专业版或旗舰版。
+Select the **REST API Rate Limits** tab. If you are on the free plan, click **Upgrade** to upgrade to the professional or flagship plan.
 
-专业版和旗舰版默认开通该服务。
+This service is enabled by default for the professional or flagship plans.
 
 ![img](/images/console/server_api_activation.png)
 
-开通后，你可以点击指定接口的 **操作** 栏中的 **编辑**，在弹出的 **编辑服务API限流** 对话框中，上调接口的调用频率限制，阅读并同意《环信云服务购买协议》，然后点击 **确认购买**。
+After the service is enabled, click **Edit** in the **Operation** column for the required API. In the **Edit REST API Rate Limit** dialog box, increase the API call frequency limit, read and agree to the **Service Purchase Agreement**, and then click **Confirm Purchase**.
 
 ![img](/images/console/server_api_raiselimit.png)

@@ -1,263 +1,263 @@
-# 产品相关限制
+# Product Limitations
 
-本文简要介绍环信即时通讯 IM 的使用限制条件，包括调用频率、字符串大小和编码格式等。
+This document briefly describes EasyIM usage limitations, including call frequency, string size, and encoding format.
 
-## 消息相关
+## Messages
 
-### 消息大小
+### Message size
 
-对于不同的消息类型，消息长度限制如下：
+The following table lists the message length limit for each message type:
 
-| 消息类型       | 消息长度限制            |
+| Message type       | Message length limit            |
 | :------------- | :----------------------------------- |
-| 文本消息       | 5 KB。                                 |
-| 图片消息       | 图片不能超过 10 MB，图片消息大小限制为 5 KB。      |
-| 语音消息       | 音频文件不能超过 10 MB，语音消息大小限制为 5 KB。  |
-| 视频消息       | 视频文件不能超过 10 MB，视频消息大小限制为 5 KB。  |
-| 文件消息       | 附件大小不能超过 10 MB，文件消息大小限制为 5 KB。  |
-| 透传消息       | 5 KB。                                 |
-| 自定义消息     | 5 KB。                                 |
-| 合并消息       | 5 KB。                                 |
-| 定向消息       | 5 KB。                                 |
+| Text message       | 5 KB.                                 |
+| Image message       | The image cannot exceed 10 MB. The size limit for an image message is 5 KB.      |
+| Voice message       | The audio file cannot exceed 10 MB. The size limit for a voice message is 5 KB.  |
+| Video message       | The video file cannot exceed 10 MB. The size limit for a video message is 5 KB.  |
+| File message       | The attachment cannot exceed 10 MB. The size limit for a file message is 5 KB.  |
+| Command message       | 5 KB.                                 |
+| Custom message     | 5 KB.                                 |
+| Combined message       | 5 KB.                                 |
+| Targeted message       | 5 KB.                                 |
 
 :::tip
-默认情况下，消息附件，例如图片、音频、视频和其他文件不能超过 10 MB，附件其他限制详见 [消息存储](#消息存储)。
+By default, message attachments, such as images, audio, video, and other files, cannot exceed 10 MB. For other attachment limitations, see [Message storage](#message-storage).
 :::
 
-### 消息存储
+### Message storage
 
-- **历史消息**：在服务器上的存储时间与你订阅的套餐包有关，免费版为 3 天，专业版为 7 天，旗舰版为 90 天。你可以联系商务上调专业版和旗舰版的消息存储时间。
-- **聊天记录文件**：可从服务端获取用户的聊天记录文件。
-  - 单次请求获取从指定起始时间开始一小时内的发送的聊天记录文件。
-  - 你最多可以获取最近 3 天的聊天记录。若要提升该限制，你需要联系环信商务。
-  - 查询历史消息记录时存在一定延时，无法实时获取。
-- **消息附件/文件**：
-  - 附件大小：消息附件（图片、音频、视频和其他文件）默认不能超过 10 MB。
-  - 存储时间：消息附件（图片、音频、视频及其他文件）默认存储 7 天。如需延长，请联系环信商务。消息附件大小（默认 10 MB）及存储时间限制与群组共享文件保持一致。若其中一个存储时间上限被调高，另一个将自动同步调整，反之亦然。
-  - 存储大小：默认提供 1 TB 存储空间，用于图片、语音、文件等附件。若预计存储需求较大，你可以 [将附件上传至自有服务器](/document/android/message_send.html#上传消息附件至自有服务器)，或联系环信商务提升空间上限。
-  - 流量大小：每月每 1 万 DAU 默认包含 100 GB 流量（适用于图片、语音、文件等附件）。超出后附件下载速度可能受限。若预计流量需求较大，你可以 [将附件上传至自有服务器](/document/android/message_send.html#上传消息附件至自有服务器)，或联系环信商务提升流量上限。
-- **离线消息**：对于单聊和群聊，离线消息默认保存 7 天。对于每个终端用户，所有的单聊会话可存储 500 条离线消息，所有的群聊会话可存储 200 条离线消息。若超过存储天数和条数的上限，最新的离线消息会挤掉最早的。如需提升上限，可联系商务。
-- **各类事件通知**：事件通知的存储时间与消息的存储一致。
+- **Historical messages**: The server-side storage period depends on your subscribed plan: 3 days for the Free plan, 7 days for the Professional plan, and 90 days for the Flagship plan. You can contact the EasyIM business manager to increase the message storage period for the Professional and Flagship plans.
+- **Chat history files**: You can retrieve user chat history files from the server.
+  - A single request retrieves the chat history file containing messages sent within one hour from the specified start time.
+  - You can retrieve chat history from up to the last 3 days. To increase this limit, contact the EasyIM business manager.
+  - Historical message queries have some latency and cannot return results in real time.
+- **Message attachments/files**:
+  - Attachment size: By default, message attachments, including images, audio, video, and other files, cannot exceed 10 MB.
+  - Storage period: Message attachments, including images, audio, video, and other files, are stored for 7 days by default. To extend the storage period, contact the EasyIM business manager. The message attachment size limit (10 MB by default) and storage period limit are the same as those for chat group shared files. If the maximum storage period for either is increased, the other is automatically adjusted accordingly, and vice versa.
+  - Storage capacity: By default, 1 TB of storage is provided for attachments such as images, voice files, and other files. If you expect to require more storage, you can [upload attachments to your own server](/sdk/v5/android/message_send.html#upload-message-attachments-to-your-own-server) or contact the EasyIM business manager to increase the storage limit.
+  - Traffic allowance: By default, every 10,000 DAU includes 100 GB of traffic per month for attachments such as images, voice files, and other files. Attachment download speeds may be limited after this allowance is exceeded. If you expect to require more traffic, you can [upload attachments to your own server](/sdk/v5/android/message_send.html#upload-message-attachments-to-your-own-server) or contact the EasyIM business manager to increase the traffic limit.
+- **Offline messages**: For one-to-one chats and group chats, offline messages are stored for 7 days by default. For each end user, all one-to-one conversations can store 500 offline messages, and all group chat conversations can store 200 offline messages. If either the storage period or message count limit is exceeded, the newest offline messages replace the oldest ones. To increase these limits, contact the EasyIM business manager.
+- **Event notifications**: Event notifications have the same storage period as messages.
 
-### 流式消息
+### Streaming messages
 
-发送 **一条文本类型的流式消息** 时，必须遵守以下规则：
+When sending **one text streaming message**, you must comply with the following rules:
 
-- **分片发送间隔**：相邻分片的发送间隔不能超过 30 秒，超时则返回 [错误 14033](/document/server-side/message_stream_send_single.html#错误码) 并终止流式消息。
-- **总传输时长**：所有分片的总传输时长不能超过 30 分钟，超时再发送分片则返回 [错误 14034](/document/server-side/message_stream_send_single.html#错误码)。
-- **总长度**：所有分片的文本内容总长度不能超过 128 KB，超限则返回 [错误 14032](/document/server-side/message_stream_send_single.html#错误码) 并终止流式消息。
+- **Interval between chunks**: The interval between adjacent chunks cannot exceed 30 seconds. If it does, [error 14033](/rest/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
+- **Total transmission duration**: The total transmission duration of all chunks cannot exceed 30 minutes. If another chunk is sent after the timeout, [error 14034](/rest/message_stream_send_single.html#error-code) is returned.
+- **Total length**: The total length of the text content in all chunks cannot exceed 128 KB. If it does, [error 14032](/rest/message_stream_send_single.html#error-code) is returned and the streaming message is terminated.
 
-### 消息撤回
+### Message recall
 
-默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信控制台](https://console.easemob.com/user/login)的**功能配置** > **基础功能** > **消息**页面设置消息撤回时长，该时长不超过 7 天。
+By default, a sender can recall a message within 2 minutes after sending it. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days.
 
 :::tip
-除了透传消息，其他各类型的消息都支持撤回。
-:::
+All message types except command messages can be recalled.
+::: 
 
-### 消息回执
+### Message receipts
 
-- 单聊会话支持消息送达回执、会话已读回执和消息已读回执。
-- 群聊会话只支持消息已读回执。
+- One-to-one conversations support delivery receipts, conversation read receipts, and message read receipts.
+- Group chat conversations support only message read receipts.
 
-群消息已读回执特性的使用限制如下表所示：
+The following table lists the limitations of read receipts for chat group messages:
 
-| 使用限制| 默认 | 描述 | 
+| Limitation| Default | Description | 
 | :--------- | :----- | :------- | 
-| 功能开通   | 关闭   | 若要使用该功能，你需要在[环信控制台](https://console.easemob.com/user/login)的 **功能配置** > **基础功能** > **消息**页签下，搜索找到 **消息已读回执（群聊）** 开通功能。具体费用详见 [计费策略](/product/pricing_policy.html#增值服务费用)。   | 
-| 使用权限  | 所有群成员    | 默认情况下，所有群成员发送消息时可要求已读回执。如果仅需群主和群管理员发消息时要求已读回执，可联系商务修改。   | 
-| 已读回执有效期    | 3 天    | 群聊已读回执的有效期为 3 天，即群组中的消息发送时间超过 3 天，服务器不记录阅读该条消息的群组成员，也不会发送已读回执。   | 
-| 群规模    |  200 人   | 该特性最多支持 200 人的群组。当群人数超过 200 时，群成员发送的消息将不会返回已读回执。该上限目前无法提升。 | 
-| 查看返回已读回执数量    | 消息发送方 | 对消息返回的已读回执数量（或返回已读回执的人数），默认仅消息发送方可查看。如需所有群成员均可查看，可联系商务开通。 | 
+| Feature activation   | Disabled   | To use this feature, on the **Chat** > **Features** > **1-on-1/Group Chat** tab of the [EasyIM Console](https://console.easyim.ai/user/login), activate **Group Message Read Receipt**. For pricing, see [Billing policy](/product/pricing_policy.html#add-on-service-fees).   |
+| Permission  | All chat group members    | By default, all chat group members can request a read receipt when sending a message. To allow only the chat group owner and admins to request read receipts, contact the EasyIM business manager.   | 
+| Read receipt validity period    | 3 days    | A group chat read receipt is valid for 3 days. If a message was sent more than 3 days ago, the server does not record which chat group members read the message or send read receipts.   | 
+| Chat group size    |  200 members   | This feature supports chat groups with up to 200 members. If a chat group has more than 200 members, messages sent by members do not return read receipts. This limit cannot currently be increased. | 
+| Who can view the number of returned read receipts    | Message sender | By default, only the message sender can view the number of returned read receipts or the number of users who returned them. To allow all chat group members to view this information, contact the EasyIM business manager to activate the feature. | 
 
-### 编辑消息
+### Edit messages
 
-该功能适用于单聊、群聊和聊天室，支持范围如下：
+This feature applies to one-to-one chats, group chats, and chat rooms and has the following scope:
 
-- 文本消息和自定义消息：支持修改消息体和扩展字段。
-- 文件、视频、音频、图片、位置及合并转发消息：仅支持修改扩展字段，不支持修改消息体。
-- 透传消息：不支持编辑。
+- Text and custom messages: The message body and extension fields can be edited.
+- File, video, voice, image, location, and combined forwarded messages: Only extension fields can be edited; the message body cannot be edited.
+- Command messages: Editing is not supported.
 
-一条消息默认最多可编辑 10 次。
+By default, a message can be edited up to 10 times.
 
-### 转发消息
+### Forward messages
 
-合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
+Combined forwarding supports up to 10 nested levels and up to 300 messages at each level.
 
-### 定向消息
+### Targeted messages
 
-- 适用于群组或聊天室会话。
-- 最多可向 20 个成员发送定向消息。
-- 适用于文本消息、图片消息和音视频消息等全类型消息。
-- 对于单聊会话，只有消息发送方才能对消息进行修改。
-- 对于群聊会话，普通群成员只能修改自己发送的消息。群主和群管理员除了可以修改自己发送的消息，还可以修改普通群成员发送的消息。
+- Applies to chat group or chat room conversations.
+- A targeted message can be sent to up to 20 members.
+- Applies to all message types, including text, image, audio, and video messages.
+- In a one-to-one conversation, only the message sender can edit the message.
+- In a group chat conversation, regular members can edit only messages they sent. In addition to their own messages, the chat group owner and admins can edit messages sent by regular members.
 
-### 聊天室全局广播消息
+### Chat room global broadcast messages
 
-你可以[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。该功能默认关闭，如果需要，请联系环信商务开通。
+You can [call a REST API to send a chat room global broadcast message](/rest/broadcast_to_chatrooms.html). This feature is disabled by default. To activate it, contact the EasyIM business manager.
 
-### 置顶消息
+### Pin messages
 
-单个会话默认可置顶 20 条消息。你可以联系环信商务提升该上限，最大可调整至 100。
+By default, up to 20 messages can be pinned in a conversation. You can contact the EasyIM business manager to increase this limit to a maximum of 100.
 
-### 消息仅投递在线用户
+### Deliver messages only to online users
 
-该功能只支持单聊和群组聊天，不支持聊天室。
+This feature supports only one-to-one and group chats, not chat rooms.
 
-### 消息表情回复（Reaction）
+### Reactions
 
-- **表情计数原则**：对于同一条消息，多个用户添加相同的 Reaction（例如均添加“👍”）时，SDK 将其视为同一种 Reaction 展示，并按添加该 Reaction 的用户数量计数；多个用户添加不同的 Reaction（例如“👍”和“❤️”）时，分别作为不同的 Reaction 计数和展示。
-- **用户添加限制**：同一用户对同一 Reaction 仅可添加一次，重复添加将返回错误码 1301。
-- **数量限制**：每条消息默认最多支持添加 20 个 Reaction。如需提升此上限，请联系环信商务。
-- **表情 ID 规范**：
-  - 表情 ID 长度不得超过 128 个字符。
-  - 字符集类型无限制，但服务端与客户端的设置必须保持一致。
-  - 若使用特殊字符，请在获取和删除 Reaction 时进行 URL 编码。
-- **存储时间**：
-  - 对于专业版和旗舰版 IM，Reaction 的默认存储时间为 7 天。
-  - 如需调整，请联系环信商务。建议将 Reaction 存储时长与对应消息的存储时长保持一致。
+- **Reaction counting**: If multiple users add the same Reaction to a message, such as "👍", the SDK displays it as one Reaction and counts the users who added it. If multiple users add different Reactions, such as "👍" and "❤️", the SDK counts and displays each Reaction separately.
+- **Per-user limit**: A user can add the same Reaction to the same message only once. Adding it again returns error code 1301.
+- **Quantity limit**: By default, up to 20 Reactions can be added to each message. To increase this limit, contact the EasyIM business manager.
+- **Reaction ID requirements**:
+  - A Reaction ID cannot exceed 128 characters.
+  - The character set is unrestricted, but the server and client settings must be consistent.
+  - If special characters are used, URL-encode them when retrieving or deleting a Reaction.
+- **Storage period**:
+  - The default Reaction storage period is 7 days for the Professional and Flagship EasyIM plans.
+  - To adjust it, contact the EasyIM business manager. We recommend keeping the Reaction storage period consistent with that of the corresponding message.
 
-### 获取消息流量统计
+### Retrieve message traffic statistics
 
-- SDK 只支持统计该功能开启后最近 30 天内发送和接收的消息。
-- 仅 Android and iOS 端 SDK 支持该功能。
+- The SDK can collect statistics only for messages sent and received within the last 30 days after this feature is enabled.
+- Only the Android and iOS SDKs support this feature.
 
-## 会话
+## Conversations
 
-### 会话列表
+### Conversation list
 
-对于每个终端用户，服务器默认存储 100 条会话。若提升该上限，需联系环信商务。如果你的会话条数超过了上限，新会话会覆盖之前的不活跃会话。
+By default, the server stores 100 conversations for each end user. To increase this limit, contact the EasyIM business manager. If the number of conversations exceeds the limit, new conversations overwrite older inactive conversations.
 
-### 置顶会话
+### Pinned conversations
 
-你最多可以置顶 50 个会话。
+You can pin up to 50 conversations.
 
-### 会话标记
+### Conversation marks
 
-- 支持对单聊和群组会话添加标记，不支持为聊天室聊天添加会话标记。
-- 一个会话最多可添加 20 个标记。
-- 每次最多可为 20 个会话添加标记。
-- 每次最多可移除 20 个会话的同一标记。
+- Marks can be added to one-to-one and group chat conversations but not chat room conversations.
+- Up to 20 marks can be added to a conversation.
+- Marks can be added to up to 20 conversations at a time.
+- The same mark can be removed from up to 20 conversations at a time.
 
-## 群组
+## Chat groups
 
-### 群组/群成员数量
+### Number of chat groups and chat group members
 
-- 群组总数、单个群的成员数和用户可加入的群组数取决于套餐版本，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
-- 对于单个群组，群主加管理员数量不能超过 100，即管理员最多可添加 99 个。
-- 群组总人数若超过 3000，默认不再支持离线推送，若希望使用该功能，请联系商务开通。
+- The total number of chat groups, number of members in a chat group, and number of chat groups a user can join depend on the plan. For details, see [EasyIM plan features](/product/product_package_feature.html).
+- In a chat group, the total number of the owner and admins cannot exceed 100, meaning that up to 99 admins can be added.
+- If a chat group has more than 3000 members, offline push is not supported by default. To use this feature, contact the EasyIM business manager to activate it.
 
-### 群组/群成员属性
+### Chat group and member attributes
 
-- 群组名称，字符串类型，最大长度为 255 字符。
-- 群组描述，字符串类型，最大长度为 2048 字符。
-- 群公告的长度限制为 512 个字符。
-- 群组扩展信息，例如可以给群组添加业务相关的标记，最大长度为 8 KB。
-- 单个群成员的自定义属性（key-value）总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节。
+- Chat group name: String. The maximum length is 128 characters.
+- Chat group description: String. The maximum length is 512 characters.
+- The length limit for a chat group announcement is 512 characters.
+- Chat group extension information, such as business-related tags added to the chat group, cannot exceed 8 KB.
+- The total length of a chat group member's custom attributes (key-value) cannot exceed 4 KB. For an individual custom attribute, the key cannot exceed 16 bytes and the value cannot exceed 512 bytes.
 
-### 群组共享文件
+### Chat group shared files
 
-- 单个群组共享文件大小上限默认 10 MB。如果需要提升限制，请联系商务。
-  该限制与消息附件的相同。如果消息附件的长度进行了上调，群组共享文件大小也会随之自动调整，反之亦然。
-- 单个群组最多上传 10,000 个共享文件。
-- 群组共享文件在服务器的存储时间与消息附件相同，即默认为 7 天。如果需要提升限制，请联系商务。
-  如果消息附件在服务器上的存储时间进行了上调，群组共享文件的存储时间也会随之自动调整，反之亦然。
+- By default, the maximum size of a single chat group shared file is 10 MB. To increase this limit, contact the EasyIM business manager.
+  This limit is the same as the message attachment size limit. If the message attachment size limit is increased, the chat group shared file size limit is automatically adjusted accordingly, and vice versa.
+- Up to 10,000 shared files can be uploaded to a chat group.
+- Chat group shared files have the same server-side storage period as message attachments, which is 7 days by default. To increase this limit, contact the EasyIM business manager.
+  If the server-side storage period for message attachments is increased, the storage period for chat group shared files is automatically adjusted accordingly, and vice versa.
 
-### 消息话题
+### Message threads
 
-- 单个 app 下的消息话题总数默认为 10 万，如需调整请联系商务。
-- 消息话题名称，不能超过 64 个字符。
+- By default, a single app can have up to 100,000 message threads. To adjust this limit, contact the EasyIM business manager.
+- A message thread name cannot exceed 64 characters.
 
-## 聊天室
+## Chat rooms
 
-不同套餐版本支持的聊天室总数，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+For the total number of chat rooms supported by each plan, see [EasyIM plan features](/product/product_package_feature.html).
 
-### 聊天室成员
+### Chat room members
 
-- 聊天室成员数上限（包括聊天室所有者）默认最大值为 10,000，如需调整请联系商务。
-- 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
-- 聊天室中的成员（除了聊天室白名单中的成员）离线超过 2 分钟会自动退出聊天室。
+- The maximum number of chat room members, including the chat room owner, is 10,000 by default. To adjust this limit, contact the EasyIM business manager.
+- The total number of chat room creators and admins cannot exceed 100, meaning that up to 99 admins can be added.
+- Chat room members, except those on the chat room allowlist, automatically leave the chat room after being offline for more than 2 minutes.
 
-### 聊天室基本属性
+### Basic chat room attributes
 
-- 聊天室名称，字符串类型，最大长度为 128 字符。
-- 聊天室描述，字符串类型，最大长度为 512 字符。
-- 聊天室公告，字符串类型，最大长度为 512 字符。
-- 聊天室扩展信息不能超过 8 KB。
+- Chat room name: String. The maximum length is 128 characters.
+- Chat room description: String. The maximum length is 512 characters.
+- Chat room announcement: String. The maximum length is 512 characters.
+- Chat room extension information cannot exceed 8 KB.
 
-### 聊天室自定义属性（key-value）
+### Chat room custom attributes (key-value)
 
-每个聊天室最多支持 100 个自定义属性，每个应用的聊天室自定义属性总大小不超过 10 GB。
+Each chat room supports up to 100 custom attributes, and the total size of chat room custom attributes in each app cannot exceed 10 GB.
 
-聊天室自定义属性为键值对（key-value）结构，单个 key 不能超过 128 个字符，支持以下字符集：
-- 26 个小写英文字母 a-z；
-- 26 个大写英文字母 A-Z；
-- 10 个数字 0-9；
-- “_”, “-”, “.”。
+Chat room custom attributes are key-value pairs. A key cannot exceed 128 characters and supports the following character set:
+- 26 lowercase English letters, a-z;
+- 26 uppercase English letters, A-Z;
+- 10 digits, 0-9;
+- "_", "-", and ".".
 
-每个聊天室属性 value 不能超过 4096 个字符。
+Each chat room attribute value cannot exceed 4096 characters.
 
-## 用户相关
+## Users
 
-### 用户注册
+### User registration
 
-- 用户 ID：长度不能超过 64 字节，支持以下字符集：
-  - 26 个小写英文字母 a-z；
-  - 10 个数字 0-9；
-  - “_”, “-”, “.”。
+- User ID: The length cannot exceed 64 bytes. The following characters are supported:
+  - 26 lowercase English letters, a-z;
+  - 10 digits, 0-9;
+  - "_", "-", and ".".
 
 :::tip
-- 请勿使用大写英文字母 A-Z。
-- 请确保同一个 app 下，用户 ID 唯一。
-- 用户 ID 是会公开的信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。
+- Do not use uppercase English letters, A-Z.
+- Ensure that the user ID is unique within an app.
+- A user ID is public information. Do not use sensitive information such as a UUID, email address, or phone number.
 :::
 
-- 密码：用户的登录密码，长度不可超过 64 个字符。
+- Password: User login password. The length cannot exceed 64 characters.
 
-### 用户属性
+### User attributes
 
-- 默认单个用户的属性总长不得超过 2 KB。
-- 默认单个 app 下所有用户的属性总长度不得超过 10 GB。
+- By default, the total length of a single user's attributes cannot exceed 2 KB.
+- By default, the total length of all user attributes in a single app cannot exceed 10 GB.
 
-### 用户关系
+### User relationships
 
-- 单个 App Key 下的每个用户的好友数量上限与套餐包版本相关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
-- 好友备注的长度不能超过 100 个字符。
-- 每个用户的黑名单最多可存 500 个用户。
+- The maximum number of friends per user within an App Key depends on the plan. For details, see [EasyIM plan features](/product/product_package_feature.html).
+- Friend remarks cannot exceed 100 characters.
+- Each user's blocklist can contain up to 500 users.
 
-### 在线状态订阅
+### Presence subscriptions
 
-- 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
-- 每次调用接口最多只能订阅 100 个账号，若数量较大需多次调用。
-- 每个用户 ID 订阅的用户数不超过 3000。
-- 每个用户最多可被 3000 个用户订阅。
+- The maximum subscription period is 30 days. You must resubscribe after it expires. If you resubscribe before the current subscription expires, the newly configured validity period overwrites the previous one.
+- You can subscribe to up to 100 accounts in each API call. For more accounts, make multiple calls.
+- Each user ID can subscribe to up to 3000 users.
+- Each user can have up to 3000 subscribers.
 
-## 离线推送
+## Offline push
 
-### 推送昵称
+### Push nickname
 
-离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称支持自定义，长度不能超过 100 个字符，支持以下字符集：  
-- 26 个小写英文字母 a-z；
-- 26 个大写英文字母 A-Z；
-- 10 个数字 0-9；
-- 中文；
-- 特殊字符。
+You can customize the sender nickname displayed in the recipient's push notification bar for offline push. The nickname cannot exceed 100 characters and supports the following character set:  
+- 26 lowercase English letters, a-z;
+- 26 uppercase English letters, A-Z;
+- 10 digits, 0-9;
+- Chinese characters;
+- Special characters.
 
-### 推送模板名称
+### Push template name
 
-- 添加默认的推送模板时，模板名称应设置为 `default`。
-- 自定义模板的名称最多可包含 64 个字符，支持以下字符集：
-  - 26 个小写英文字母 a-z；
-  - 26 个大写英文字母 A-Z；
-  - 10 个数字 0-9。    
+- When adding the default push template, set its name to `default`.
+- A custom template name can contain up to 64 characters from the following character set:
+  - 26 lowercase English letters, a-z;
+  - 26 uppercase English letters, A-Z;
+  - 10 digits, 0-9.    
 
-### 多设备登录
+### Multi-device login
 
-- 多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需提升上限，可联系环信商务。
+- During multi-device login, EasyIM supports up to 4 devices online simultaneously on each client platform by default. To increase this limit, contact the EasyIM business manager.
 
-- 自定义设置登录设备的平台时，设备平台的取值范围为 [1,100]，设备数量的取值范围为 [0,4]。
+- When customizing login device platforms, the device platform value range is [1,100], and the device count value range is [0,4].
 
-## 调用频率限制
+## Call frequency limit
 
-关于 REST API 的调用频率限制，详见 [REST API 调用频率限制](/document/server-side/limitationapi.html)。
+For REST API call frequency limits, see [REST API call frequency limits](/rest/limitationapi.html).
 

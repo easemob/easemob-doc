@@ -1,30 +1,26 @@
-# 应用创建与上线流程
+# App Creation and Launch Process
 
-在 [环信控制台](https://console.easemob.com/user/login) [创建应用](app_create.html) 后，即可体验即时通讯 IM 服务。新创建的应用默认为 **测试版**，用于开发、联调和测试；待开发测试完成后可申请上线为 **正式版**，用于正式上线和业务运营。
+After you [create an app](app_create.html) in [EasyIM Console](https://console.easyim.ai/user/login), you can start using IM services. A newly created app is a **development version** by default and is intended for development, integration testing, and general testing. After development and testing are complete, you can apply to launch it as a **production version** for production deployment and business operations.
 
-测试版应用上线时支持以下两种方式：
+You can launch a development version app in either of the following ways:
 
-- **创建新的正式版应用**
-  上线时会新建一个正式版应用，与测试版拥有不同的 App Key。测试版的功能配置自动同步至新应用，但业务数据完全隔离，不互通。
+- **Create a new production app**
+  A new production version app is created with an App Key different from that of the development version. The feature configurations of the development version are automatically synchronized to the new app, while their business data remains completely isolated and is not shared.
   
-- **原测试版应用直接升级为正式版**
-  上线时测试版应用直接升级为正式版应用，上线后 App Key 保持不变。正式版会继承测试版全部功能配置和全部存量业务数据。
+- **Upgrade this development app to production**
+  The development version app is upgraded directly to a production version app, and its App Key remains unchanged after launch. The production version inherits all feature configurations and existing business data from the development version.
 
-应用创建与上线流程如下：
+The app creation and launch process is as follows:
 
 ![img](/images/console/app_create_to_launch.png)
 
-**流程说明**
+**Process description**
 
-上图展示了应用从测试版创建到正式版上线的主要流程，分为测试、上线和上线后处理三个阶段：
+The preceding figure shows the main process from creating a development version app to launching a production version app. The process consists of three stages: testing, launch, and post-launch processing.
 
-1. **测试阶段**：[创建测试版应用](app_create.html) 后，可按需选择 IM 服务并配置基础功能。同时，可免费试用 [内容审核](purchase_value_added.html#内容审核)、[消息翻译](purchase_value_added.html#消息翻译)、[即时推送](purchase_value_added.html#即时推送) 和 [实时音视频](purchase_value_added.html#实时音视频服务) 等增值服务。
-   
-   各服务在测试阶段的灵活性说明：
-   
-   - IM 服务、内容审核、消息翻译和即时推送服务：在测试阶段可自由变更或取消。详见 [测试版应用试用说明](/product/console/purchase_value_added.html#测试版应用试用说明)。
-   - 实时音视频：仅支持测试版试用，上线后需单独开通正式服务。
+1. **Testing stage**: After you [create a development version app](app_create.html), select IM services as needed and configure basic features. During this stage, you can freely change or cancel IM services.
 
-2. **上线阶段**：完成测试后，可发起 [上线申请](app_launch.html)。上线前，需确认账号是否已完成 [实名认证](real_name_authentication.html)；若未完成，需先完成认证。认证通过后，支付已选 IM 服务及增值服务费用，应用即可上线为正式版。
+2. **Launch stage**: After testing is complete, you can submit a [launch application](app_launch.html).
 
-3. **上线后处理**：应用上线后，若应用所在地为中国，需在一个月内完成 [应用备案](app_file.html)。其他注意事项详见 [应用上线说明](app_launch.html#上线事项)。
+3. **Post-launch processing**: For details, see [Launch considerations](app_launch.html#launch-considerations).
+

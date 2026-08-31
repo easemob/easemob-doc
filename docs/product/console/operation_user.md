@@ -1,151 +1,125 @@
-# 用户管理
+# User Management
 
-在 [环信控制台](https://console.easemob.com/user/login) 上，你可以对即时通讯 IM 用户进行管理：
+In [EasyIM Console](https://console.easyim.ai/user/login), you can create and manage IM users:
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
-3. 在左侧导航栏，选择 **运营管理** > **运营操作**。
-4. 在 **用户管理** 页面，你可以创建用户和管理用户。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the left navigation pane, select **Operation** > **IM Admin**.
+4. On the **Users** page, create and manage users.
 
-## 创建用户
+![img](/images/console/operation_user.png)
 
-1. 在 **用户管理** 页面，点击 **创建IM用户**。
-2. 在弹出的 **创建IM用户** 对话框中，填写用户 ID、推送昵称和密码，然后点击 **保存**。
+## Create a user
+
+1. On the **Users** page, click **Create User**.
+2. In the **Create User** dialog box, enter the user ID, user nickname (used only for offline push), and password, and then click **Save**.
 
 ![img](/images/console/operation_user_create.png)
 
-| 参数       | 类型   | 是否必需 | 描述          |
-| :--------- | :----- | :------- | :-------------------------------------------- |
-| 用户 ID | String | 是       | 用户 ID，长度不可超过 64 个字节。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 请勿使用大写英文字母 A-Z。<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| 推送昵称 | String | 否       | 离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<Container type="tip" title="提示">1. 若不设置昵称，推送时会显示发送方的用户 ID，而非昵称。<br/>2. 该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](/document/server-side/user_attribute_set.html)。</Container> |
-| 密码 | String | 是       | 用户的登录密码，长度不可超过 64 个字符。 |
-| 确认密码 | String | 是       | 重新输入用户的登录密码。 |
+| Parameter | Type | Required | Description |
+| :-------- | :--- | :------- | :---------- |
+| User ID | String | Yes | The user ID cannot exceed 64 bytes and supports the following characters:<br/>- The 26 lowercase English letters a–z.<br/>- The 10 digits 0–9.<br/>- Underscores (`_`), hyphens (`-`), and periods (`.`).<br/><Container type="notice" title="Notice"><br/>- Do not use uppercase English letters A–Z.<br/>- Make sure that each user ID is unique within the same app.<br/>- A user ID is public information. Do not use sensitive information such as a UUID, email address, or mobile number.</Container> |
+| User Nickname | String | No | The sender nickname displayed in the recipient's notification bar for offline push. You can customize this nickname. It cannot exceed 100 characters.<br/>The following characters are supported:<br/>- The 26 lowercase English letters a–z.<br/>- The 26 uppercase English letters A–Z.<br/>- The 10 digits 0–9.<br/>- Chinese characters.<br/>- Special characters.<Container type="notice" title="Notice">1. If no nickname is set, the sender's user ID is displayed instead of a nickname in push notifications.<br/>2. This nickname can differ from the nickname in the user attributes. However, we recommend keeping the two nicknames consistent. When you modify one nickname, call the corresponding method to update the other. For information about updating the nickname in user attributes, see [Set User Attributes](/rest/user_attribute_set.html).</Container> |
+| Password | String | Yes | The user login password. It cannot exceed 64 characters. |
+| Confirm Password | String | Yes | Enter the user login password again. |
 
-## 设置 Token 有效期
+## Set the token validity period
 
-你可以在用户列表上方设置 Token 有效期。该设置对当前 App Key 下的 App Token 和用户 Token 均生效，而且仅对修改后新生成的 Token 生效，不影响修改前已生成的 Token。
+You can set the token validity period above the user list. This setting applies to both app tokens and user tokens under the current App Key. It applies only to tokens generated after the setting is changed and does not affect previously generated tokens.
 
 ![img](/images/console/operation_user_token_expiry.png)
 
-## 修改用户信息
+## Edit user information
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **修改IM用户信息** 对该用户的信息进行修改。
+In the user list, click **More** in the **Operation** column for the target user and select **Edit User Information**.
 
 ![img](/images/console/operation_user_modify.png)
 
-| 参数       | 类型   | 描述          |
-| :--------- | :----- | :------- | 
-| 推送昵称 | String | 详见 [创建用户](#创建用户) 中 **推送昵称** 参数的描述。 |
-| 消息提醒 | String  | 该用户接收的离线推送通知的展示方式：<br/> - **仅通知**：推送标题为“您有一条新消息”，推送内容为“请点击查看”。 <br/> - **发送详情**：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。|
-| 免打扰 | String  | 是否开启免打扰。 |
-| 证书 | String  | 离线推送证书。|
+| Parameter | Type | Description |
+| :-------- | :--- | :---------- |
+| User Nickname | String | See the description of **User Nickname** in the [Create a user](#create-a-user) section. |
+| Notification Mode | String | The display mode of offline push notifications received by the user:<br/>- **Notify Only**: The push title is “You've got a new message,” and the push content is “Please click to view.”<br/>- **Send Details**: The push title is “You've got a new message,” and the push content includes the sender nickname and offline message content. |
+| Do Not Disturb | String | Whether to enable Do Not Disturb (DND). |
+| Push Certificate | String | The offline push certificate. |
 
-## 查看用户好友
+## View a user's friends
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户好友** 查看该用户的好友列表。
+In the user list, click **More** in the **Operation** column for the target user and select **View Friends** to view the user's friend list.
 
-你可以输入用户 ID，点击 **添加好友**，为该用户添加好友。
+To add a friend for the user, enter a user ID and click **Add**.
 
 ![img](/images/console/operation_user_friend.png)
 
-## 删除用户好友
+## Delete a user's friend
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户好友** 并点击好友列表中的 **删除好友**。
+In the user list, click **More** in the **Operation** column for the target user, select **View Friends**, and click **Delete** in the friend list.
 
 ![img](/images/console/operation_user_friend_delete.png)
 
-## 查看用户黑名单
+## View a user's blocklist
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户黑名单** 查看该用户的黑名单列表。
+In the user list, click **More** in the **Operation** column for the target user and select **View Blocklist** to view the user's blocklist.
 
-你可以输入用户 ID，点击 **添加黑名单**，将该用户加入黑名单。
+To add a user to the blocklist, enter the user ID and click **Add**.
 
 ![img](/images/console/operation_user_blocklist.png)
 
-将用户加入黑名单后，你可以点击 **从黑名单中移除** 将用户移出黑名单。
+After adding a user to the blocklist, click **Remove** to remove the user from it.
 
-## 查看用户绑定的推送证书
+## View the push certificate bound to a user
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看IM用户绑定推送证书** 查看该用户绑定的推送证书。
+In the user list, click **More** in the **Operation** column for the target user and select **Push Certificate** to view the push certificate bound to the user.
 
-若该用户未绑定任何推送证书，弹出以下对话框。
+If the user is not bound to any push certificate, the following dialog box appears:
 
 ![img](/images/console/operation_user_certificate_no.png)
 
-## 查看用户 Token
+## View a user token
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **查看Token** 查看该用户的 Token。
+In the user list, click **More** in the **Operation** column for the target user and select **View Token** to view the user's token.
 
 ![img](/images/console/operation_user_token.png)
 
-## 重置密码
+## Reset a password
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **重置密码** 重置该用户的密码。密码长度不可超过 64 个字符。
+In the user list, click **More** in the **Operation** column for the target user and select **Reset Password** to reset the user's password. The password cannot exceed 64 characters.
 
 ![img](/images/console/operation_user_pwd.png)
 
-## 发送 REST 消息
+## Send a message through the REST API
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **发送rest消息** 调用 [REST API](/document/server-side/message_single.html) 向该用户发送文本或图片消息。
+In the user list, click **More** in the **Operation** column for the target user and select **Send Admin Message** to call the [REST API](/rest/message_single.html) to send a text or image message to the user.
 
 ![img](/images/console/operation_user_rest_msg.png)
 
-## 封禁用户
+## Ban a user
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **封禁用户** 对该用户进行封禁。
+In the user list, click **More** in the **Operation** column for the target user and select **Ban User**.
 
-用户被封禁后，会立即下线并无法登录即时通讯 IM，直到被解禁后才能恢复登录。被封禁期间，其他用户可向被封禁用户发送消息，但被封禁用户无法接收消息，无法收到推送通知。
+After the user is banned, the user is immediately logged out and cannot log in to IM until unbanned. While banned, other users can send messages to the banned user, but the banned user cannot receive messages or push notifications.
 
 ![img](/images/console/operation_user_ban.png)
 
-## 解禁用户
+## Unban a user
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **解封** 对该用户解禁。
+In the user list, click **More** in the **Operation** column for the target user and select **Unban**.
 
-解禁后，用户可正常连接并使用即时通讯服务，再次上线可以收到被封禁期间的离线消息。请注意，离线消息默认最长存储 7 天，如果 7 天内客户端都没有上线，服务端将丢弃过期的消息。
+After being unbanned, the user can connect to and use IM normally. When the user gets online again, the user can receive offline messages generated during the ban. Note that offline messages are stored for up to seven days by default. If the client does not get online within seven days, the server discards the expired messages.
 
 ![img](/images/console/operation_user_unban.png)
 
-## 强制下线
+## Force a user offline
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **强制下线** 对该用户强制下线。
+In the user list, click **More** in the **Operation** column for the target user and select **Force Offline**.
 
-多设备登录情况下，该用户会从所有登录的设备下线。
+If multi-device login is enabled, the user is logged out from all logged-in devices.
 
 ![img](/images/console/operation_user_offline.png)
 
-## 删除用户
+## Delete a user
 
-在用户列表中，点击指定用户的 **操作** 栏中的 **更多**，选择 **删除用户** 删除该用户。
+In the user list, click **More** in the **Operation** column for the target user and select **Delete User**.
 
-删除后，该用户的好友关系、用户属性、消息、会话等数据在服务端也会被删除。如果该用户是群主或者聊天室所有者，系统会同时删除对应的群组和聊天室。请在操作前进行确认。
+After the user is deleted, the user's friend relationships, user attributes, messages, conversations, and other server-side data are also deleted. If the user is a group owner or chat room owner, the corresponding chat groups and chat rooms are also deleted. Confirm the impact before performing this operation.
 
 ![img](/images/console/operation_user_delete.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

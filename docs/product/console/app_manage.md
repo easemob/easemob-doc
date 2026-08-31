@@ -1,50 +1,43 @@
-# 管理和配置应用
+# App Management and Configuration
 
-你可以在 **应用管理** 页面查看测试版和正式版应用，并进入对应配置页面。
+On the **Applications** page, you can view development and production version apps and access their configuration pages.
 
-## 管理应用
+## Manage Apps
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
    
-2. 在页面上方选择 **应用管理**，或在首页 **应用概览** 区域点击 **应用管理**。
-
-![img](/images/console/app_mgmt_menu.png)
-
-3. 进入应用列表页面后，你可以查看当前账号下的所有产品和应用。
+2. Go to the **Applications** page to view all apps under the current account.
    
-   点击测试版或正式版的 App Key，即可进入对应应用详情页。
+   Click the App Key of a development or production version to go to the corresponding app details page.
 
 ![img](/images/console/app_mgmt_list.png)
 
-| 字段 | 说明 |
+| Field | Description |
 | :--- | :--- |
-| 产品名称 | 创建应用时填写的产品名称。 |
-| 产品描述 | 创建应用时填写的产品描述。 |
-| AppKey-测试版 | 测试版应用的 App Key。点击可进入测试版应用详情。<br> - 若上线方式选择 **创建新的正式版应用**，应用上线后，测试版应用仍保留。<br> - 若上线方式选择 **原测试版应用升级为正式版**，上线后该项为空，**AppKey-正式版** 中显示正式版应用的 App Key。 |
-| AppKey-正式版 | 正式版应用的 App Key。若应用尚未上线，该项为空。应用上线后，点击可进入正式版应用详情。 |
-| 应用状态 | - **未上线**：仅有测试版应用。<br> - **上线中**：已提交上线申请，暂时无法进入应用详情。<br> - **已上线**：已生成正式版应用。 |
-| 操作 | - **申请上线**：将测试版应用上线为正式版。详见 [应用上线](app_launch.html) 说明。<br> - **应用备案**：对正式版应用进行备案。详见 [应用备案](app_file.html) 说明。 |
+| App Name | The app name entered when the app was created. |
+| Description | The product description entered when the app was created. |
+| AppKey-Dev | The App Key of the development version app. Click it to go to the development version app details.<br> - If you select **Create a new production app**, the development version app is retained after launch.<br> - If you select **Upgrade this development app to production**, this field is empty after launch, and the App Key of the production version app is displayed under **AppKey-Prod**. |
+| AppKey-Prod | The App Key of the production version app. This field is empty if the app has not been launched. After launch, click it to go to the production version app details. |
+| App Status | - **Development**: Only a development version app exists.<br> - **Launching**: A launch request is submitted and the launch is ongoing. The app details are temporarily unavailable.<br> - **Production**: A production version app has been generated. |
+| Operation | **Apply to Production**: Launch the development version app as a production version. For details, see [App Launch](app_launch.html). |
 
-4. 在 **应用概览** 页面查看应用详情，包含开发配置信息、应用基本信息、应用备案信息和服务开通信息。
+3. On the **Overview** page, view app details, including development configurations, basic app information, and IM service information.
 
 ![img](/images/console/app_info.png)
 
-## 获取应用凭证
+## Obtain App Credentials
 
-你可以在 **开发配置信息** 栏查看以下应用凭证：
+In the **Development Configuration** section, you can view the following app credentials:
 
-- **AppKey**：应用唯一标识，格式为 `orgname#appname`。应用创建后，App Key 不可修改。详见 [创建应用文档](app_create.html#操作步骤)。
-- **Client ID** 和 **Client Secret**：可用于生成 [App Token](/document/server-side/easemob_app_token.html) 和 [用户 Token](/document/server-side/easemob_user_token.html)。
+- **AppKey**: The unique app identifier in the format `orgname#appname`. The App Key cannot be changed after the app is created. For details, see [App Creation](app_create.html#procedure).
+- **Client ID** and **Client Secret**: Used to generate an [app token](/rest/easemob_app_token.html) and [user token](/rest/easemob_user_token.html).
 
 ![img](/images/console/app_info_develop.png)
 
-## 服务管理入口
+## Service Management
 
-在 **服务开通信息** 区域，可查看当前套餐版本与账户余额，也可 [调整套餐包](purchase_package.html#订阅-升级套餐包)、[开通增值服务](purchase_value_added.html) 并进行配置。
+In the **Service Information** section, you can view the current plan and account balance and [change the plan](purchase_package.html#subscribe-to-or-upgrade-a-plan).
 
-关于测试版应用试用套餐包、增值服务和扩展功能的说明，详见 [测试版应用试用说明](/product/pricing_method.html#测试版应用试用说明)。
+For information about trial plans and extended features for development version apps, see [Development Version App Trial](/product/pricing_method.html#trial-plans-for-development-apps).
 
 ![img](/images/console/app_info_activation.png)
-
-
-

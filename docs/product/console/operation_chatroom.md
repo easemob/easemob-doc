@@ -1,97 +1,75 @@
-# 聊天室管理
+# Chat Room Management
 
-在 [环信控制台](https://console.easemob.com/user/login) 上，你可以对聊天室进行管理，包括创建聊天室、查看聊天室成员列表、查看聊天室管理员和查看聊天室黑名单等。
+In [EasyIM Console](https://console.easyim.ai/user/login), you can create and manage chat rooms, including creating a chat room and viewing its member list, admin list, and blocklist:
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
-3. 在左侧导航栏，选择 **运营管理** > **运营操作**。
-4. 在 **聊天室管理** 页面，你可以创建和管理聊天室。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the left navigation pane, select **Operation** > **IM Admin**.
+4. On the **Chat Rooms** page, create and manage chat rooms.
 
-## 聊天室操作
+![img](/images/console/operation_chatroom.png)
 
-### 创建聊天室
+## Create a chat room
 
-1. 在 **聊天室管理** 页面，点击 **创建聊天室**。
-2. 在弹出的 **创建聊天室** 对话框中，填写聊天室昵称（名称）、描述、超级管理员、普通管理员等参数，然后点击 **创建**。
+1. On the **Chat Rooms** page, click **Create Chat Room**.
+2. In the **Create Chat Room** dialog box, enter the chat room name, description, superadmin, regular admins, and other parameters, and then click **Save**.
 
 ![img](/images/console/operation_chatroom_create.png)
 
-| 参数                  | 类型   | 是否必需 | 描述          |
-| :------------ | :----- | :------- | :------------------------------------------- |
-| 聊天室昵称          | String | 是       | 聊天室名称，最大长度为 128 字符。|
-| 描述         | String | 是       | 聊天室描述，最大长度为 512 字符。|
-| 超级管理员             | String   | 是   | 超级管理员的用户 ID。超级管理员为聊天室所有者。   |
-| 普通管理员          | String    | 否       | 聊天室普通管理员的用户 ID。多个用户 ID 以英文逗号分隔。|
-| 最大人数             | String   | 否       | 聊天室最大成员数（包括聊天室所有者）。取值范围为 [1,10,000]，默认值为 10,000。若你填写的值超过 10,000，则按 10,000 算。如需提升上限，请联系商务配置。 |
+| Parameter | Type | Required | Description |
+| :-------- | :--- | :------- | :---------- |
+| Chat Room Name | String | Yes | The chat room name. It cannot exceed 128 characters. |
+| Description | String | Yes | The chat room description. It cannot exceed 512 characters. |
+| Chat Room Superadmin | String | Yes | The user ID of the superadmin. The superadmin is the chat room owner. |
+| Chat Room Admin | String | No | The user IDs of regular chat room admins. Separate multiple user IDs with commas. |
+| Maximum Members | String | No | The maximum number of chat room members, including the chat room owner. The value ranges from 1 to 10,000, and the default is 10,000. If you enter a value greater than 10,000, it is treated as 10,000. To increase the limit, contact the Agora sales team. |
 
-### 搜索聊天室 ID
+## Search for a chat room ID
 
-你可以在聊天室列表右上方的搜索框中输入聊天室 ID 搜索聊天室。若该聊天室 ID 存在，则显示在聊天室列表中。
+Enter a chat room ID in the search box in the upper-right corner of the chat room list. If the chat room ID exists, the chat room is displayed in the list.
 
 ![img](/images/console/operation_chatroom_search.png)
 
-### 修改聊天室信息
+## Edit chat room information
 
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **修改聊天室信息** 修改聊天室信息。
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **Change Chat Room Information**.
 
 ![img](/images/console/operation_chatroom_edit.png)
 
-### 查看聊天室成员列表
+## View the chat room member list
 
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **查看聊天室成员** 查看该聊天室的成员列表。
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **View Chat Room Members**.
 
-你可以输入用户 ID，点击 **添加成员**，向该聊天室中添加用户。
+To add a user to the chat room, enter a user ID and click **Add**.
 
 ![img](/images/console/operation_chatroom_member.png)
 
-### 查看聊天室管理员列表
+## View the chat room admin list
 
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **查看聊天室管理员** 查看该聊天室的管理员列表。
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **View Chat Room Admins**.
 
 ![img](/images/console/operation_chatroom_admin.png)
 
-### 查看聊天室黑名单列表
+## View the chat room blocklist
 
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **查看聊天室黑名单** 查看该聊天室的黑名单列表。
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **View Chat Room Blocklist**.
 
-你可以输入用户 ID，点击 **添加黑名单**，将用户加入聊天室黑名单。
-
-![img](/images/console/operation_chatroom_block_list.png)
-
-### 查看聊天室禁言列表
-
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **查看聊天室禁言名单** 查看该聊天室的禁言列表。
-
-你可以输入用户 ID，设置禁言时长，点击 **添加禁言**，将用户加入聊天室禁言列表。若禁言一段时间，时间到期，自动解除禁言。若设置为永久禁言，只能手动解除禁言。
+To add a user to the chat room blocklist, enter a user ID and click **Add**.
 
 ![img](/images/console/operation_chatroom_block_list.png)
 
-### 删除聊天室
+## View the chat room mute list
 
-在聊天室列表中，点击指定聊天室的 **操作** 栏中的 **更多**，选择 **删除聊天室** 删除聊天室。
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **View Chat Room Mute List**.
 
-聊天室删除后，服务端上存储的聊天室信息不存在，会话信息不存在，但消息仍存在。
+To add a user to the chat room mute list, enter a user ID, set the mute duration, and click **Add**. For a temporary mute, the user is automatically unmuted when the duration expires. For a permanent mute, you must manually unmute the user.
+
+![img](/images/console/operation_chatroom_block_list.png)
+
+## Delete a chat room
+
+In the chat room list, click **More** in the **Operation** column for the target chat room and select **Delete Chat Room**.
+
+After the chat room is deleted, the chat room information and conversation no longer exist on the server, but its messages are retained.
 
 ![img](/images/console/operation_chatroom_delete.png)
-
-## 聊天室审核管理
-
-开通消息人工审核后，你可以对聊天室的消息、属性和成员进行实时管理操作。
-
-在聊天室列表中，点击指定的聊天室 ID，可以在 **聊天室管理** 页面进行如下管理操作：
-- 修改聊天室名称、描述和公告；
-- 设置聊天室全员禁言；
-- 添加聊天室成员；
-- 添加聊天室管理员；
-- 黑名单管理；
-- 禁言列表管理；
-- 作为 app 管理员发送和撤回消息。
-
-![img](/images/console/operation_chatroom_moderation.png)
-
-
-
-
-
-
-

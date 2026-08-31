@@ -1,156 +1,156 @@
-# 消息回调
+# Webhooks
 
-创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通消息回调和回调异常缓存功能。
+After creating an app, you can enable webhooks and webhook data storage in [EasyIM Console](https://console.easyim.ai/user/login).
 
-## 消息回调概述
+## Webhook overview
 
-消息回调指事件发生之前或之后，环信 IM 服务器会以 HTTP POST 请求的形式向你的应用服务器发送通知。根据是否干预消息投递，回调分为两类：
+Before or after an event occurs, the IM Server sends a notification to your App Server through an HTTP POST request. Depending on whether the webhook can intervene in message delivery, webhooks are divided into two types:
 
-- 发送前回调：环信服务器收到用户发送的上行单聊、群组或聊天室消息之后、将该消息下发给目标用户之前，环信服务器会通过 HTTP/HTTPS POST 请求通知给你的应用服务器。应用服务器可以通过发送前回调实时处理用户的聊天消息，例如，拦截包含文本、图片、自定义消息等类型的消息。
-- 发送后回调：发送消息或进行群组、聊天室或好友相关操作后，环信服务器向你的应用服务器发送回调请求。该类回调通常用于 app 后台需要实现必要的数据同步。
+- Pre-delivery webhook: After the IM Server receives an upstream one-to-one, group, or chat room message from a user and before delivering it to the target user, the IM Server notifies your App Server through an HTTP/HTTPS POST request. Your App Server can process users' chat messages in real time through pre-delivery webhooks, for example, by intercepting text, image, custom, and other message types.
+- Post-delivery webhook: After a message is sent or a chat group-, chat room-, or friend-related operation is performed, the IM Server sends a webhook request to your App Server. This type of webhook is typically used when the app backend needs to implement required data synchronization.
 
-## 开通服务
+## Activate the Service
 
-### 消息回调
+### Webhook
 
-你可以根据当前的套餐包版本开通该服务：
+You can enable this service based on your current plan:
 
--  免费版：点击 **立即升级** 升级至专业版或旗舰版。
--  专业版：点击 **单独购买** 单独购买该服务。
--  旗舰版：点击 **免费开通** 开通该服务。
+- Free: Click **Upgrade** to upgrade to the Professional or Flagship plan.
+- Professional: Click **Buy Now** to purchase the service separately.
+- Flagship: Click **Free Activation** to enable the service.
 
 ![img](/images/console/basic_message_webhook.png)
 
-### 回调异常缓存
+### Webhook data storage
 
-对于发送后回调，每条回调请求发送失败仅重试一次，重试失败后即丢弃。若有特殊需求不能丢失回调消息的情况下，可开通回调异常缓存功能。
+For a post-delivery webhook, each failed webhook request is retried only once and discarded if the retry also fails. If webhook data must not be lost, you can enable webhook data storage on the IM Server.
 
-服务开通后，你可以使用 [查询异常缓存数据](/document/server-side/callback_postsending_exception_storage.html#查询异常缓存数据)和 [补发异常回调数据](/document/server-side/callback_postsending_exception_storage.html#补发异常回调数据) 接口。
+After enabling the service, you can use the APIs to [query stored webhook data](/rest/callback_postsending_exception_storage.html#query-stored-webhook-data) and [resend stored webhook data](/rest/callback_postsending_exception_storage.html#redeliver-stored-webhook-data) APIs.
 
-你可以根据当前的套餐包版本开通该服务：
+You can enable this service based on your current plan:
 
--  免费版：点击 **立即升级** 升级至专业版或旗舰版，然后再点击 **立即购买** 单独付费订阅该服务。
--  专业版/旗舰版：点击 **立即购买** 单独付费订阅该服务。
+- Free: Click **Upgrade Now** to upgrade to the Professional/Flagship plan, and then click **Buy Now** to subscribe to the service separately.
+- Professional/Flagship: Click **Buy Now** to subscribe to the service separately.
 
 ![img](/images/console/basic_message_webhook_storage.png)
 
-## 配置消息回调规则
+## Configure webhook rules
 
-你最多可以配置 4 条发送前回调和 4 条发送后回调规则。配置回调规则后，环信服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成签名（即请求中的 `security` 参数），作为你的服务器识别环信服务器的依据。若要使用自定义密钥，可联系环信商务。
+You can configure up to four pre-delivery webhook rules and four post-delivery webhook rules. After you configure a webhook rule, the IM Server automatically generates a secret for the rule. When sending data to your App Server, the IM Server uses this secret to generate a signature, which is the `security` parameter in the request. Your server uses the signature to verify the IM Server. To use a custom secret, contact EasyIM sales.
 
 :::tip
-如果你已在测试版应用中配置发送前回调或发送后回调地址，应用上线后请及时检查，并按需切换为正式环境地址。
+If you configured a pre-delivery or post-delivery webhook URL for a development app, check the URL after the app goes live and change it to the production URL as needed.
 :::
 
-### 发送前回调
+### Pre-delivery webhook
 
-在 **消息回调** 页面，点击 **添加回调规则**。在弹出的对话框中，选择 **发送前回调**，配置相关参数。
+On the **Webhook Settings** page, click **Add Webhook Address**. In the dialog box, select **Pre-delivery Webhook** and configure the relevant fields.
 
 ![img](/images/console/basic_presending_rule.png)
 
-#### 基本配置
+#### Basic settings
 
-| 参数           | 是否必需 | 描述       |
-| :----------------- | :------- | :--------------- |
-| 规则名称           | 是       | 支持中英文字符，最多可包含 32 个字符。规则名称必须唯一。     |
-| 会话类型           | 是       | 会话类型：<br/> - **单聊**：单聊会话中发送前的消息。<br/> - **群组**：群组会话中发送前的消息。<br/> - **聊天室**：聊天室会话中发送前的消息。<br/> - **消息编辑**：单聊、群组或聊天室会话中对发送成功的消息进行编辑时的待发消息。  |
-| 消息类型           | 是       | 支持发送前回调的消息类型包括文本、图片、视频、位置、语音、文件、透传消息和自定义消息。 |
-| 等待响应时间       | 是       | 后台判断超时时间，默认为 200 毫秒。如果回调超时无应答，消息默认会正常下发，支持修改消息处理逻辑。  |
-| 调用失败时默认策略 | 是       | 当你的服务器返回结果异常或等待时间内未返回结果时，消息放行或不放行。  |
-| 消息拦截报错时显示 | 是       | 当消息被拦截时，是否通知发送者 SDK 消息发送失败： <br/>- **报错**：通知发送者 SDK 消息发送失败，发送者会感知到消息发送失败； <br/>- **不报错**：不通知发送者 SDK 消息发送失败，发送者不会感知消息发送失败。 |
-| 启用状态           | 是       | 回调规则是否立即生效：<br/>- **启用**：立即生效； <br/> - **关闭**：暂不生效。<br/>建议首次创建配置为 **关闭**，等你的服务器配置好验证信息后再修改为 **启用**。 |
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| Rule Name | Yes | Supports Chinese and English characters and can contain up to 32 characters. The rule name must be unique. |
+| Conversation Type | Yes | Conversation type:<br/>- **1-on-1 chat**: A message before it is sent in a one-to-one conversation.<br/>- **Group chat**: A message before it is sent in a group conversation.<br/>- **Chat room**: A message before it is sent in a chat room conversation.<br/>- **Edit message**: A pending edit to a successfully sent message in a one-to-one, group, or chat room conversation. |
+| Message Type | Yes | Message types supported by pre-delivery webhooks include text, image, video, location, voice, file, command, and custom messages. |
+| Timeout | Yes | The backend timeout, which is 200 milliseconds by default. If the webhook times out without a response, the message is delivered normally by default. You can change the message processing logic. |
+| Fallback Action | Yes | Whether to allow or reject the message when your server returns an invalid result or does not return a result within the timeout. |
+| Report Error | Yes | Whether to notify the sender's SDK that message sending failed when a message is intercepted:<br/>- **Yes**: Notifies the sender's SDK. The sender is aware of the message sending failure.<br/>- **No**: Does not notify the sender's SDK. The sender is not aware of the message sending failure. |
+| Status | Yes | Whether the webhook rule takes effect immediately:<br/>- **Enabled**: Takes effect immediately.<br/>- **Disabled**: Does not take effect yet.<br/>When creating a rule for the first time, we recommend setting it to **Disabled** and changing it to **Enabled** after your server is configured to verify requests. |
 
-#### 回调路由配置
+#### Webhook routing settings
 
-回调路由用于在同一个 App Key 下，将不同消息按环境维度分别回调至不同的回调地址。
+Webhook routing routes different messages under the same App Key to different webhook URLs by environment.
 
-| 参数     | 是否必需 | 描述                                                         |
-| :------- | :------- | :----------------------------------------------------------- |
-| 回调环境 | 是       | 仅支持字母和数字，长度不超过 8 个字符。默认为 `default`，不可删除。 |
-| 回调地址 | 否       | 最大长度不超过 512 个字符。为空时表示该环境不走回调。        |
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| Callback Env | Yes | Supports letters and digits only, with a maximum length of eight characters. The default value is `default` and cannot be deleted. |
+| Callback URL | No | The maximum length is 512 characters. If left empty, webhooks are not triggered for this environment. |
 
-回调路由的适用范围如下：
+Webhook routing applies as follows:
 
-| 回调类型    | 生效范围       | 说明      |
-| :------------- | :------- | :---------------- |
-| [发送前回调](/document/server-side/callback_presending.html) | 仅对 **SDK 发送的消息** 生效（不支持群组/聊天室的定向消息）。 | 消息下发给目标用户前，你的服务器可判断是否拦截或修改消息内容。 |
-| [发送后回调](/document/server-side/callback_postsending.html) | 对 **SDK 和 REST API 发送的消息** 均生效。  | 消息成功发送后，通知你的服务器。   |
+| Webhook type | Scope | Description |
+| :--- | :--- | :--- |
+| [Pre-delivery webhook](/rest/callback_presending.html) | Applies only to **messages sent through the SDK**. Targeted group and chat room messages are not supported. | Before a message is delivered to the target user, your server can determine whether to intercept the message or modify its content. |
+| [Post-delivery webhook](/rest/callback_postsending.html) | Applies to **messages sent through both the SDK and REST API**. | Notifies your server after a message is successfully sent. |
 
-回调路由的配置规则说明如下：
-- 每个回调阶段最多可配置 8 条路由，包含默认路由 `default`。
-- 发送前回调与发送后回调的 **回调路由相互独立**，即各自维护自己的环境与地址映射表。
+Webhook routing is subject to the following configuration rules:
 
-如果发送消息时传入了回调环境参数，回调路由命中逻辑：
- - 消息携带环境值且精确匹配当前阶段的有效路由，按该环境值路由。
- - 消息携带环境值但未命中有效路由，**不触发回调**，`default` 在此场景下**不生效**。
- - 消息未携带环境值，自动路由至 `default` 环境对应的回调地址。
- - 若同一消息需同时触发发送前与发送后回调，在两个阶段必须配置 **相同的回调环境值**，以便消息中只需携带一个环境值即可同时生效。例如，若发送前回调配置 `test -> url1`，发送后回调配置 `test -> url2`，则消息中只需携带一个回调环境值：`test`。
+- You can configure up to eight routes for each webhook stage, including the `default` route.
+- The webhook routes for pre-delivery and post-delivery webhooks are **independent**. Each stage maintains its own environment-to-URL mapping.
 
-### 发送后回调
+If a webhook environment is specified when sending a message, the route is selected as follows:
 
-在 **消息回调** 页面，点击 **添加回调规则**。在弹出的对话框中，选择 **发送后回调**，配置相关参数。
+- If the message carries an environment value that exactly matches a valid route for the current stage, the message uses that route.
+- If the message carries an environment value that does not match a valid route, **no webhook is triggered**. The `default` route **does not apply** in this case.
+- If the message does not carry an environment value, it is automatically routed to the webhook URL for the `default` environment.
+- If the same message needs to trigger both pre-delivery and post-delivery webhooks, configure the **same webhook environment value** for both stages. The message then needs to carry only one environment value for both webhooks to take effect. For example, if the pre-delivery webhook uses `test -> url1` and the post-delivery webhook uses `test -> url2`, the message only needs to carry the webhook environment value `test`.
+
+### Post-delivery webhook
+
+On the **Webhook Settings** page, click **Add Webhook Address**. In the dialog box, select **Post-delivery Webhook** and configure the relevant fields.
 
 ![img](/images/console/basic_postsending_rule.png)
 
-#### 基本过滤
+#### Basic filters
 
-| 参数 | 是否必需 | 描述       |
-| :----------- | :------- | :--------------- |
-| 规则名称 | 是 | 仅支持字母、数字和下划线，不支持中文字符，长度不超过 32 字符。规则名称必须唯一。 |
-| 启用状态 | 是 |是否启用该规则。|
-| 回调类型 | 是 |回调类型。你可以选择对各种类型的单聊、群聊、和聊天室消息以及各种事件进行回调，详见 [回调事件](/document/server-side/callback_message_send.html)。|
-| 消息类型 | 是 |需要回调的类型：<br/> - **聊天消息**：发送成功的消息，包括通过客户端和 REST API 发送的消息。这些消息与通过 REST 导出的聊天记录查询到的消息一致。例如，用户 u1 向用户 u2 发送消息，则会产生一条聊天消息，与接收方是否在线无关。收到的消息中 `from` 为 u1，`to` 为 u2。用户 u1 在群组 g1 中发送消息，则会产生一条聊天消息，收到的消息中 `from` 为 u1，`to` 为 g1，且返回值包含 `group_id` 字段。<br/> - **离线消息**：消息发送时接收方为离线的消息。例如：单聊中发送消息，若对端用户不在线，则会产生一条离线消息；在群聊中发送消息，若有几个群成员不在线，则会产生几条离线消息，这些离线消息的 `to` 参数为接收消息用户的 ID，并不是群组 ID。App 可以通过推送服务对这些消息进行个性化推送。|
-| 消息来源 | 是 | 需要回调的消息的来源：<br/> - **SDK 消息**：通过 SDK 发送的消息。<br/> - **Rest 消息**：通过 REST API 发送的消息。 |
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| Rule Name | Yes | Supports letters, digits, and underscores only. Chinese characters are not supported. The maximum length is 32 characters. The rule name must be unique. |
+| Status | Yes | Whether to enable the rule. |
+| Webhook Type | Yes | The webhook type. You can select webhooks for various types of one-to-one, group, and chat room messages and events. For details, see [Webhook Events](/rest/callback_message_send.html). |
+| Message Type | Yes | The type to be included in webhooks:<br/>- **Chat message**: A successfully sent message, including messages sent through a client or REST API. These messages are consistent with those returned by exported chat history. For example, when user u1 sends a message to user u2, one chat message is generated regardless of whether the recipient is online. In the received message, `from` is u1 and `to` is u2. When user u1 sends a message in chat group g1, one chat message is generated. In the received message, `from` is u1 and `to` is g1, and the response contains the `group_id` field.<br/>- **Offline message**: A message for which the recipient was offline when it was sent. For example, in a one-to-one chat, an offline message is generated if the other user is offline. In a group chat, if several group members are offline, several offline messages are generated. The `to` parameter in these offline messages is the user ID of the message recipient, not the group ID. The app can use a push service to send personalized notifications for these messages. |
+| Message Source | Yes | The source of messages to include in webhooks:<br/>- **SDK message**: A message sent through the SDK.<br/>- **Rest message**: A message sent through a REST API. |
 
-#### 回调路由说明
+#### Webhook routing
 
-回调路由用于在同一个 App Key 下，将不同消息按环境维度分别投递到不同的回调地址。
+Webhook routing delivers different messages under the same App Key to different webhook URLs by environment.
 
-| 参数 | 是否必需 | 描述       |
-| :--------------------- | :------- | :--------------- |
-| 回调环境 | 是 | 回调环境仅支持字母和数字，长度不超过 8 个字符。默认为 `default`，不可删除。|
-| 回调地址 | 否 | 回调地址最大长度不超过 512 个字符。为空时表示该环境不走回调。|
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| Callback Env | Yes | Supports letters and digits only, with a maximum length of eight characters. The default value is `default` and cannot be deleted. |
+| Callback URL | No | The maximum length is 512 characters. If left empty, webhooks are not triggered for this environment. |
 
-回调路由的匹配规则如下：
-- 消息类回调：按消息中携带的回调环境值进行路由，精确匹配当前阶段的有效路由。
-- 事件类回调：固定使用 `default` 环境对应的回调地址，不参与环境匹配。
+Webhook routes are matched as follows:
 
-其他配置规则（如数量限制、双阶段路由建议、消息与路由的匹配等）与发送前回调一致，详见上文 [回调路由配置](#回调路由配置)。
+- Message webhooks: Routed according to the webhook environment value carried in the message. The value must exactly match a valid route for the current stage.
+- Event webhooks: Always use the webhook URL for the `default` environment and do not participate in environment matching.
 
-#### 高级过滤
+Other configuration rules, such as route limits, dual-stage routing recommendations, and message-to-route matching, are the same as those for pre-delivery webhooks. For details, see [Webhook routing settings](#webhook-routing-settings).
 
-| 参数             | 是否必需 | 描述                                                         |
-| :--------------- | :------- | :----------------------------------------------------------- |
-| From ID          | 否       | 消息发送方或操作者的用户 ID。每行一个，最多 50 条。设置后，仅针对该用户发送的消息及执行的操作（如好友、群组或聊天室相关操作）进行回调。不指定则不限制。 |
-| To ID            | 否       | 单聊消息或事件接收方的用户 ID。每行一个，最多 50 条。不指定则不限制。 |
-| 群组/聊天室 ID   | 否       | 群组或聊天室 ID。每行一个，最多 50 条。设置后，仅针对该群组或聊天室中的消息或事件进行回调。不指定则不限制。 |
-| 扩展字段中的 Key | 否       | 消息扩展字段中的属性 Key。每行一个，最多 50 条。设置后，仅针对包含该属性 Key 的消息进行回调。不指定则不限制。 |
+#### Advanced filters
 
-**高级过滤配置示例**
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| From ID | No | The user ID of the message sender or operator. Enter one per line, with a maximum of 50. If specified, webhooks are triggered only for messages sent and operations performed by these users, such as friend-, chat group-, or chat room-related operations. If not specified, no restriction applies. |
+| To ID | No | The user ID of the recipient of a one-to-one message or event. Enter one per line, with a maximum of 50. If not specified, no restriction applies. |
+| Group/Chat Room ID | No | A chat group or chat room ID. Enter one per line, with a maximum of 50. If specified, webhooks are triggered only for messages or events in these chat groups or chat rooms. If not specified, no restriction applies. |
+| Extension Attribute Key | No | An attribute key in the message extension. Enter one per line, with a maximum of 50. If specified, webhooks are triggered only for messages containing the attribute key. If not specified, no restriction applies. |
 
-| 场景                   | 配置方式                               | 效果                                                         |
-| :--------------------- | :------------------------------------- | :----------------------------------------------------------- |
-| 仅对单聊回调           | 设置 **From ID** 和 **To ID**          | 指定发送方向接收方发送单聊消息或执行操作（如删除好友）时触发回调。例如，**From ID** 为 test1，**To** ID 为 test2，则 test1 向 test2 发送单聊消息时收到回调。 |
-| 仅对群组/聊天室回调    | 仅设置 **群组/聊天室 ID**              | 仅在指定的群组或聊天室中发送消息或执行操作时触发回调。例如，群组 ID 设为 228978，则仅在该群组中发送消息时收到回调。 |
-| 仅对群组中特定用户回调 | 设置 **From ID** 和 **群组/聊天室 ID** | 仅当群组或聊天室中的指定用户发送消息或执行操作时触发回调。例如，**From ID** 为 test1，群组 ID 为 228978，则仅 test1 在该群组中发送消息时收到回调。 |
+**Advanced filter examples**
+
+| Scenario | Configuration | Result |
+| :--- | :--- | :--- |
+| One-to-one webhooks only | Set **From ID** and **To ID**. | A webhook is triggered when the specified sender sends a one-to-one message to the specified recipient or performs an operation, such as deleting a friend. For example, if **From ID** is test1 and **To ID** is test2, a webhook notification is received when test1 sends a one-to-one message to test2. |
+| Chat group/chat room webhooks only | Set only **Group/Chat Room ID**. | A webhook is triggered only when a message is sent or an operation is performed in the specified chat group or chat room. For example, if the chat group ID is 228978, a webhook notification is received only when a message is sent in that chat group. |
+| Webhooks for a specific user in a chat group only | Set **From ID** and **Group/Chat Room ID**. | A webhook is triggered only when the specified user sends a message or performs an operation in the chat group or chat room. For example, if **From ID** is test1 and the chat group ID is 228978, a webhook notification is received only when test1 sends a message in that chat group. |
 
 :::tip
-若 **From ID**、**To ID** 和 **群组/聊天室 ID** 同时设置，则发送方向接收方发送单聊或群聊消息时 **不会收到回调**（二者互斥）。
+If **From ID**, **To ID**, and **Group/Chat Room ID** are all set, **no webhook notification is received** when the sender sends a one-to-one or group message to the recipient because these settings are mutually exclusive.
 :::
 
-## 发送后回调失败告警配置
+## Configure post-delivery webhook failure alerts
 
-发送后回调若在一定时间内达到累计失败次数会封禁该 app 的回调规则。为及时了解发送后回调的失败次数，进行相应处理，你可以设置发送后回调告警，避免 app 的回调规则被封禁。
+If the cumulative number of post-delivery webhook failures reaches the threshold within a specific period, the webhook rule for the app is disabled. To learn about post-delivery webhook failures promptly and take appropriate action, configure post-delivery webhook alerts to prevent the app's webhook rule from being disabled.
 
-在 **消息回调** 页面，点击回调规则列表右上方的 **回调失败告警**。在弹出的对话框中，配置告警参数。
+On the **Webhook Settings** page, click **Webhook Failure Alert**. In the dialog box, configure the alert fields.
 
 ![img](/images/console/basic_webhook_alert.png)
 
-| 参数 | 是否必需 | 描述       |
-| :--------------------- | :------- | :--------------- |
-| 告警开关 | 是 | 是否开启发送后回调失败告警功能。      |
-| 告警策略 | 是 | - **告警间隔**：触发告警的时间间隔，单位为 5 分钟。 <br/> - **触发次数**：告警间隔内触发告警的回调失败次数。   |
-| 邮箱地址 | 是 | 接收发送后回调失败告警的邮箱地址。一次最多可输入 20 个，每行一个。      |
-
-
-
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| Alert Status | Yes | Whether to enable post-delivery webhook failure alerts. |
+| Alert Strategy | Yes | - **Alert Interval**: The interval for triggering alerts, in increments of 5 minutes.<br/>- **Trigger Count**: The number of webhook failures that triggers an alert within the alert interval. |
+| Email Address | Yes | Email addresses that receive post-delivery webhook failure alerts. Enter up to 20 addresses, one per line. |

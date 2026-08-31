@@ -1,97 +1,96 @@
-# 用户
+# User and Login
 
-创建应用后，你可以在 [环信控制台](https://console.easemob.com/user/login) 开通用户相关配置，包括用户注册、好友、用户状态、多端多设备等配置。
+After creating an app, you can configure user-related features in [EasyIM Console](https://console.easyim.ai/user/login), including user registration, friends, presence, and multi-device login.
 
-你可以按以下步骤打开用户配置页面：
+To open the user settings page:
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
-3. 在左侧导航栏，选择 **功能配置** > **基础功能**。
-4. 在 **用户** 页面，开通用户相关配置。
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
+2. On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
+3. In the left navigation pane, select **Chat** > **Features**.
+4. On the **User & Login** page, configure user and login features.
 
 ![img](/images/console/basic_user.png)
 
-## 注册用户总数上限
+## Maximum number of registered users
 
-应用支持的注册用户总数上限取决于订阅的套餐版本：
+The maximum number of registered users supported by an app depends on its subscribed plan:
 
-- 免费版：支持 100 个注册用户。若要提升上限，点击 **升级** 升级至专业版或旗舰版。
-- 专业版/旗舰版：对注册用户数无限制。
+- Free: Supports up to 100 registered users. To increase the limit, click **Upgrade** to upgrade to the professional or flagship plan.
+- Professional or flagship: No limit on the number of registered users.
 
 ![img](/images/console/basic_user_count.png)
 
-## 用户注册模式
+## User registration mode
 
-用户注册模式包括授权注册和开发注册。你可以点击 **编辑** 切换用户注册模式。
+User registration modes include authorized registration and open registration. Click **Edit** to switch the user registration mode.
 
-- 授权注册：以应用管理员身份调用环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。该方式用于正式环境。相关的 REST API 介绍，详见 [授权注册单个用户](/document/server-side/account_register_authorized_single.html) 和 [批量授权注册用户](/document/server-side/account_register_authorized_batch.html)的接口介绍。
-- 开放注册：用户登录客户端 SDK 后自行通过账号密码注册账号。该方式一般用于体验 Demo 和测试环境，不推荐在正式环境中使用。相关的 API 介绍，详见 [客户端](/document/android/login.html#用户注册) 和 [REST API](/document/server-side/account_register_open.html) 文档。
+- Authorized registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account, and then save the account on your server or return it to the client. This API is intended for production environments. For details about the related REST APIs, see [Register a User Through Authorized Registration](/rest/account_register_authorized_single.html) and [Register Users in Bulk Through Authorized Registration](/rest/account_register_authorized_batch.html).
+- Open registration: As the app admin, call the REST API provided by EasyIM to register an EasyIM user account. This API is generally intended for demo and test environments and is not recommended for production environments. For details about the related APIs, see the [REST API](/rest/account_register_open.html) documentation.
 
 ![img](/images/console/basic_user_registration.png)
 
-## 单个用户好友数上限
+![img](/images/console/basic_user_registration_set.png)
 
-单个用户的好友数量取决于订阅的套餐版本：
-- 免费版：单个用户最多可有 100 个好友。若要提升该上限，点击 **升级** 升级至专业版或旗舰版。
-- 专业版/旗舰版：单个用户最多可有 3000 个好友。
+## Maximum friends per user
+
+The maximum number of friends per user depends on your subscribed plan:
+
+- Free: Each user can have up to 100 friends. To increase the limit, click **Upgrade** to upgrade to the Professional or Flagship plan.
+- Professional/flagship: Each user can have up to 3,000 friends.
 
 ![img](/images/console/basic_user_friends.png)
 
-## 好友关系检查
+## Friend relationship check
 
-好友关系检查功能默认关闭，表示用户之间无需添加好友即可聊天。开启后，仅允许好友之间发送单聊消息。
+Friend relationship check is disabled by default, which means users can chat without adding each other as friends. When enabled, only friends can send one-to-one messages to each other.
 
-对于各版本套餐包，使用该功能前需要先开启。
+This feature must be enabled before use on all plans.
 
 ![img](/images/console/basic_user_friend_check.png)
 
-## 用户黑名单
+## User blocklist
 
-若需屏蔽某个用户的消息，可将其拉入黑名单。用户可将任何其他用户加入黑名单，不论该用户是否在好友列表上。用户被加入黑名单后，无法向对方发送消息或好友申请。关于该功能的详情，请参见 [黑名单文档](/document/server-side/user_friend_blocklist_add.html)。
+To block messages from a user, add the user to the blocklist. A user can add any other user to the blocklist, regardless of whether that user is in the friend list. After being added to the blocklist, the blocked user cannot send messages or friend requests to the other user. For details, see [Blocklist](/rest/user_friend_blocklist_add.html).
 
-对于各版本套餐包，该功能默认关闭，使用前需点击 **免费开通**，然后开启。
+This feature is enabled by default for all plans and can be disabled.
 
 ![img](/images/console/basic_user_blocklist.png)
 
-## 用户离在线状态实时同步
+## Presence
 
-用户在线状态（Presence）包含用户的在线、离线和自定义状态。用户可设置自己的在线状态，订阅和查询其他用户的状态。关于该功能的详情，请参见 [在线状态订阅文档](/document/server-side/presence_set.html)。
+Presence includes online, offline, and custom states. Users can set their own presence and subscribe to or query the presence of other users. For details, see [Presence Subscription](/rest/presence_set.html).
 
-你可以根据当前的套餐包版本开通该服务：
+You can enable this service based on your current plan:
 
-- 免费版：点击 **立即升级** 升级至专业版或旗舰版。
-- 专业版：点击 **立即购买** 单独购买和开通服务。
-- 旗舰版：点击 **免费开通** 开通服务。
+- Free: Click **Upgrade Now** to upgrade to the Professional or Flagship plan.
+- Professional: Click **Buy Now** to purchase and enable the service.
+- Flagship: Click **Free Activation** to enable the service.
 
 ![img](/images/console/basic_user_presence.png)
 
-## 用户全局禁言
+## Global user mute
 
-用户全局禁言指对单个用户设置单聊、群组或聊天室消息全局禁言。禁言后，该用户无法调用客户端 API 或 REST API 在单聊、群组或聊天室中发送消息。禁言到期后，服务器会自动解除禁言，恢复该用户发送消息的权限。关于该功能的详情，请参见 [全局禁言文档](/document/server-side/user_global_mute_overview.html)。
+Global user mute prevents an individual user from sending messages in one-to-one chats, chat groups, or chat rooms. While muted, the user cannot call client APIs or REST APIs to send messages in one-to-one chats, chat groups, or chat rooms. When the mute expires, the IM Server automatically unmutes the user and restores their permission to send messages. For details, see [Global User Mute](/rest/user_global_mute_overview.html).
 
-你可以根据套餐版本开通该服务：
+You can enable this service based on your plan:
 
-- 免费版：点击 **立即升级** 升级至旗舰版。
-- 专业版：点击 **立即升级** 升级至旗舰版。
-- 旗舰版：点击 **免费开通** 开通服务。
+- Free: Click **Upgrade Now** to upgrade to the flagship plan.
+- Professional: Click **Upgrade Now** to upgrade to the flagship plan.
+- Flagship: Click **Free Activation** to enable the service.
 
 ![img](/images/console/basic_user_mute.png)
 
-## 多端多设备
+## Multi-device login
 
-多端多设备功能指同一账号在多个终端设备上同时使用。你可以根据当前的套餐版本开通该服务：
+Multi-device login allows the same account to be used on multiple devices at the same time. You can enable this service based on your current plan:
 
-- 免费版：点击 **立即升级** 升级至专业版或旗舰版。
-- 专业版/旗舰版：点击 **免费开通** 开通服务。开通后，点击 **设置** 设置多端登录时各端设备的数量。每端默认最多支持 4 个设备同时在线。如需提升该上限，请联系商务经理。并且，你可以单击 **新增自定义平台** 添加自定义平台，例如，将 Android 手机和 Android 系统的平板电脑设置为两个单独的平台。
-关于该功能的详情，请参见 [多端多设备](/document/android/multi_device.html) 文档。
+- Free: Click **Upgrade Now** to upgrade to the professional or flagship plan.
+- Professional/flagship: Click **Free Activation** to enable the service. After enabling it, click **Settings** to specify the number of devices allowed for each platform during multi-device login. By default, up to four devices can be online simultaneously on each platform. To increase this limit, contact your business manager. You can also click **Add Custom Platform** to add a custom platform. For example, you can treat an Android phone and an Android tablet as two separate platforms.
+
+For details, see [Multi-Device Login](/sdk/v5/android/multi_device.html).
 
 ![img](/images/console/basic_user_multidevice.png)
-
-![img](/images/console/basic_user_multidevice_activate.png)
 
 ![img](/images/console/basic_user_multidevice_set.png)
 
 ![img](/images/console/basic_user_multidevice_set_device.png)
-
-
-
