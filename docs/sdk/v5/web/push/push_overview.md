@@ -29,7 +29,7 @@ await client.pushManager.uploadPushToken({
 
 ### Feature activation
 
-[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [DND](push_notification_mode_dnd.html#do-not-disturb), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
+[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [DND](push_notification_mode_dnd.html#dnd), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
@@ -59,7 +59,7 @@ After initializing and successfully logging in to the SDK, configure DND globall
 - Configure DND globally or for an individual one-to-one or group conversation.
 - To push a message to a specified user during DND, use forced push.
 
-For details, see [DND](push_notification_mode_dnd.html#do-not-disturb).
+For details, see [DND](push_notification_mode_dnd.html#dnd).
 
 ### Push templates
 

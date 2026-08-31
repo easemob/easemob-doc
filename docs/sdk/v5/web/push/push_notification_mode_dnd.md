@@ -4,7 +4,7 @@ To improve the user experience when handling large numbers of push notifications
 
 ## Feature activation
 
-[Push notification modes](push_notification_mode_dnd.html#push-notification-modes) and [DND](push_notification_mode_dnd.html#do-not-disturb) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
+[Push notification modes](push_notification_mode_dnd.html#push-notification-modes) and [DND](push_notification_mode_dnd.html#dnd) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.

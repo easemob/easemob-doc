@@ -59,11 +59,11 @@ Do Not Disturb settings include a Do Not Disturb period and duration. EasyIM doe
 
 The Do Not Disturb period applies only at the app level, while the Do Not Disturb duration applies to the app and one-to-one and group chat conversations. If you configure both a Do Not Disturb period and a Do Not Disturb duration, the total time during which Do Not Disturb mode is in effect is the sum of the two periods.
 
-For information about configuring the Do Not Disturb period and duration, see the documentation for the relevant platform. For example, for Android, see [Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
+For information about configuring the Do Not Disturb period and duration, see the documentation for the relevant platform. For example, for Android, see [Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#dnd).
 
 Relationship between Do Not Disturb mode and push notification mode
 
-For the app and all conversations in it, Do Not Disturb settings take precedence over push notification mode settings. For details about their relationship, see the documentation for the relevant platform. For example, for Android, see [Relationship between push notification mode and Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#do-not-disturb-mode).
+For the app and all conversations in it, Do Not Disturb settings take precedence over push notification mode settings. For details about their relationship, see the documentation for the relevant platform. For example, for Android, see [Relationship between push notification mode and Do Not Disturb mode](/sdk/v5/android/push/push_notification_mode_dnd.html#dnd).
 
 ## Use push templates
 
