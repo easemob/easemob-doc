@@ -113,7 +113,7 @@ const handleLogin = () => {
 };
 
 const handleRegister = () => {
-  window.location.href = "https://console.easemob.com/user/register";
+  window.location.href = "https://console.easyim.ai/user/register";
 };
 </script>
 
@@ -161,8 +161,8 @@ const handleRegister = () => {
       </div>
 
       <div v-else class="auth-actions">
-        <button type="button" @click="handleLogin" class="auth-link">登录</button>
-        <button type="button" @click="handleRegister" class="auth-link auth-link-primary">注册</button>
+        <button type="button" @click="handleLogin" class="auth-link">Login</button>
+        <button type="button" @click="handleRegister" class="auth-link auth-link-primary">Sign up</button>
       </div>
     </template>
   </Navbar>

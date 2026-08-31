@@ -117,104 +117,21 @@ import CardMenu from "./CardMenu.vue";
 import { usePageFrontmatter } from "@vuepress/client";
 const frontmatter = usePageFrontmatter();
 const router = useRouter();
-const CONTEXT_LABELS: Record<string, string> = {
-  "发送消息": "Send Messages",
-  "发送流式消息": "Send Streaming Messages",
-  "接收消息": "Receive Messages",
-  "接收流式消息": "Receive Streaming Messages",
-  "获取消息": "Retrieve Messages",
-  "撤回消息": "Recall Messages",
-  "编辑消息": "Edit Messages",
-  "消息回执": "Message Receipts",
-  "搜索消息": "Search Messages",
-  "表情回复": "Message Reactions",
-  "转发消息": "Forward Messages",
-  "导入/插入消息": "Import and Insert Messages",
-  "更新消息": "Update Messages",
-  "删除消息": "Delete Messages",
-  "定向消息": "Targeted Messages",
-  "消息扩展": "Message Extensions",
-  "置顶消息": "Pin Messages",
-  "消息只投在线": "Deliver Messages Only to Online Users",
-  "会话列表": "Conversation List",
-  "会话未读数": "Conversation Unread Counts",
-  "本地会话": "Local Conversations",
-  "置顶会话": "Pin Conversations",
-  "会话标记": "Conversation Marks",
-  "删除会话": "Delete Conversations",
-  "群组创建和管理": "Create and Manage Chat Groups",
-  "群成员管理": "Manage Chat Group Members",
-  "群成员名片管理": "Manage Chat Group Member Name Cards",
-  "群组属性管理": "Manage Chat Group Attributes",
-  "聊天室创建和管理": "Create and Manage Chat Rooms",
-  "聊天室成员管理": "Manage Chat Room Members",
-  "聊天室属性管理": "Manage Chat Room Attributes",
-  "消息话题管理": "Manage Message Threads",
-  "话题的消息管理": "Manage Messages in Threads",
-  "用户体系(REST 端)": "User Account Management (REST)",
-  "用户属性": "User Attributes",
-  "用户信息自动管理": "Automatic User Information Management",
-  "用户关系": "User Relationships",
-  "用户在线状态订阅": "Presence Subscriptions",
-  "离线推送": "Offline Push",
-  "即时推送": "Instant Push",
-  "Token 鉴权": "Token Authentication",
-  "回调": "Webhooks",
-  "多设备管理": "Multi-Device Management",
-  "用户全局禁言": "Global User Mutes",
-};
-
-const FEATURE_LABELS: Record<string, string> = {
-  "SDK/服务端功能": "SDK and Server API Features",
-  "消息和会话": "Messages and Conversations",
-  "群组和聊天室": "Chat Groups and Chat Rooms",
-  "用户": "Users",
-  "推送": "Push Notifications",
-  "其他": "Other Features",
-};
-
 const SUPPORTED_PLATFORMS = new Set(["Android", "iOS", "Web", "REST"]);
-const UNAVAILABLE_LINKS = new Set([
-  "/value-added/search/message_search_rest.html",
-  "/value-added/push/push_integration_note_android.html",
-  "/value-added/push/push_integration_note_ios.html",
-  "/value-added/push/push_api_call_limitation.html",
-]);
-
-const normalizeDocLink = (link = ""): string =>
-  link
-    .replace(/^\/document\/server-side\//, "/rest/")
-    .replace(/^\/document\/(android|ios|web)\//, "/sdk/v5/$1/");
-
-const normalizePlatformLabel = (text = ""): string =>
-  text === "Web/小程序" ? "Web" : text;
 
 const starter = (frontmatter.value.starter || []).filter((item) => !item.hidden);
 const projects = (frontmatter.value.projects || [])
   .filter((item) => !item.hidden)
   .map((project) => ({
     ...project,
-    title: FEATURE_LABELS[project.title] || project.title,
     features: project.features.map((feature) => ({
       ...feature,
-      title: FEATURE_LABELS[feature.title] || feature.title,
       contexts: feature.contexts
         .map((context) => {
-          const text = CONTEXT_LABELS[context.text] || context.text;
-          const link = context.link ? normalizeDocLink(context.link) : context.link;
           return {
             ...context,
-            text,
-            desc: `Explore APIs and implementation guidance for ${text.toLowerCase()}.`,
-            link: link && !UNAVAILABLE_LINKS.has(link) ? link : undefined,
             sdks: (context.sdks || [])
-              .map((sdk) => ({
-                ...sdk,
-                text: normalizePlatformLabel(sdk.text),
-                link: normalizeDocLink(sdk.link),
-              }))
               .filter((sdk) => SUPPORTED_PLATFORMS.has(sdk.text))
-              .filter((sdk) => !UNAVAILABLE_LINKS.has(sdk.link)),
           };
         })
         .filter((context) => context.link || context.sdks.length),

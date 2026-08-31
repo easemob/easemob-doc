@@ -10,7 +10,7 @@
           Start exploring the documentation and build reliable real-time communication into your app.
         </div>
       </div>
-      <img src="/hero_chat.png" alt="Documentation icon" class="hero-img" />
+      <img src="/home_right.png" alt="EasyIM messaging experience" class="hero-img" />
     </div>
   </div>
 </template>
