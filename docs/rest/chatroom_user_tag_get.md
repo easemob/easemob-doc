@@ -64,7 +64,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 
 | Field   | Type | Description                                                         |
 | :----- | :--- | :----------------------------------------------------------- |
-| `data` | JSON | Response data in the format <tag name>:<tag expiration timestamp (milliseconds)>. `-1` indicates that the user is permanently muted. |
+| `data` | JSON | Response data in the format &lt;tag name&gt;:&lt;tag expiration timestamp (milliseconds)&gt;. `-1` indicates that the user is permanently muted. |
 
 The other fields in the response body are described below:
 
