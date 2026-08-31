@@ -4,11 +4,13 @@
   "description": "A project of vuepress-theme-hope",
   "license": "MIT",
   "type": "module",
+  "packageManager": "pnpm@10.33.2",
   "scripts": {
     "docs:build": "NODE_OPTIONS=--max-old-space-size=16384 vuepress build docs",
     "docs:clean-dev": "vuepress dev docs --clean-cache",
     "docs:dev": "vuepress dev docs",
     "docs:update-package": "pnpm dlx vp-update",
+    "preview": "pnpm run docs:build && wrangler dev",
     "postinstall": "patch-package"
   },
   "devDependencies": {

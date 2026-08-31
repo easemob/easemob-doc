@@ -20,20 +20,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: pnpm
 
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Build production bundle
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: docs:build
+        run: pnpm run docs:build
 
       # 上传打包资源
       - name: Deploy
