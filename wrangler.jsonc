@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "easemob-doc",
+  "compatibility_date": "2026-08-28",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "docs/.vuepress/dist"
+  }
+}
