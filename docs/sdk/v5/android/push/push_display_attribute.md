@@ -1,4 +1,4 @@
-# Set and Get Push Notification Display Attributes
+# Set and Retrieve Push Notification Display Attributes
 
 ## Set push notification display attributes
 
@@ -64,9 +64,9 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 | <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: set to a specific value | <br/> - Push title: **You've got a new message**<br/> - Push content: **Push nickname of the message sender: message content** |![img](/images/android/push/push_displayattribute_2.png) |
 | <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png)|
 
-## Get push notification display attributes
+## Retrieve push notification display attributes
 
-You can call `asyncGetPushConfigsFromServer` to get push notification display attributes from the server. This method does not block the current thread. If the call succeeds, the SDK returns the push configurations through the `onSuccess` callback. If the call fails, the SDK returns the error code and error information through the `onError` callback.
+You can call `asyncGetPushConfigsFromServer` to retrieve push notification display attributes from the server. This method does not block the current thread. If the call succeeds, the SDK returns the push configurations through the `onSuccess` callback. If the call fails, the SDK returns the error code and error information through the `onError` callback.
 
 ```java
 // Asynchronous method. Recommended for use on the main thread.
@@ -90,7 +90,7 @@ EMClient.getInstance().pushManager().asyncGetPushConfigsFromServer(
 );
 ```
 
-## API list
+## API List
 
 | API name | Module/class | Description |
 | :--- | :--- | :--- |
@@ -98,7 +98,7 @@ EMClient.getInstance().pushManager().asyncGetPushConfigsFromServer(
 | [`asyncUpdatePushDisplayStyle`](#set-push-notification-display-attributes) | `EMPushManager` | Asynchronously sets the push notification display style. |
 | [`updatePushNickname`](#set-push-notification-display-attributes) | `EMPushManager` | Synchronously sets the push display nickname of the current user. |
 | [`updatePushDisplayStyle`](#set-push-notification-display-attributes) | `EMPushManager` | Synchronously sets the push notification display style. |
-| [`getPushConfigsFromServer`](#get-push-notification-display-attributes) | `EMPushManager` | Synchronously gets push configurations from the server. |
-| [`asyncGetPushConfigsFromServer`](#get-push-notification-display-attributes) | `EMPushManager` | Asynchronously gets push configurations from the server. |
-| [`getDisplayNickname`](#get-push-notification-display-attributes) | `EMPushConfigs` | Gets the push display nickname. |
-| [`getDisplayStyle`](#get-push-notification-display-attributes) | `EMPushConfigs` | Gets the push notification display style. |
+| [`getPushConfigsFromServer`](#retrieve-push-notification-display-attributes) | `EMPushManager` | Synchronously gets push configurations from the server. |
+| [`asyncGetPushConfigsFromServer`](#retrieve-push-notification-display-attributes) | `EMPushManager` | Asynchronously gets push configurations from the server. |
+| [`getDisplayNickname`](#retrieve-push-notification-display-attributes) | `EMPushConfigs` | Gets the push display nickname. |
+| [`getDisplayStyle`](#retrieve-push-notification-display-attributes) | `EMPushConfigs` | Gets the push notification display style. |

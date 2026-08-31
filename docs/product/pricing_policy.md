@@ -33,8 +33,8 @@ For the differences between plans, see [Plan Feature Comparison](product_package
 | Plan | Price | Billing method | Description |
 | --- | --- | --- | --- |
 | Free | Free | — | Supports chat scenarios with up to 100 users. Includes basic messaging, conversation, chat group, and chat room features, and allows free subscriptions to value-added services. You can upgrade to the Professional or Flagship plan. |
-| Professional | $182/month | Prepaid | Required for production apps and subscribed to monthly. The subscription is valid from the purchase date to the corresponding date in the following month. Supports 10,000 DAU and core one-to-one chat, group chat, and chat room capabilities, including message sending and retrieval, message receipts, targeted messages, conversation lists and marks, and chat group/chat room and member management. You can upgrade to the Flagship plan. |
-| Flagship | $420/month | Prepaid | Required for production apps and subscribed to monthly. The subscription is valid from the purchase date to the corresponding date in the following month. Supports 10,000 DAU. In addition to features of the Professional plan, it includes presence subscriptions, message reactions, broadcast messages, and other advanced features. |
+| Professional | $364/month | Prepaid | Required for production apps and subscribed to monthly. The subscription is valid from the purchase date to the corresponding date in the following month. Supports 10,000 DAU and core one-to-one chat, group chat, and chat room capabilities, including message sending and retrieval, message receipts, targeted messages, conversation lists and marks, and chat group/chat room and member management. You can upgrade to the Flagship plan. |
+| Flagship | $840/month | Prepaid | Required for production apps and subscribed to monthly. The subscription is valid from the purchase date to the corresponding date in the following month. Supports 10,000 DAU. In addition to features of the Professional plan, it includes presence subscriptions, message reactions, broadcast messages, and other advanced features. |
 
 ### Overage charges
 
@@ -42,7 +42,7 @@ You are charged for actual usage that exceeds the allowance included in your pla
 
 | Service | Description | Billing method | Professional | Flagship |
 | --- | --- | --- | --- | --- |
-| Peak daily active users (DAU) | The highest number of active users reached in a single day | Postpaid | Includes 10,000 DAU. Additional usage is charged at $140 per 10,000 DAU per month. Any amount below 10,000 is rounded up to 10,000. | Includes 10,000 DAU. Additional usage is charged at $140 per 10,000 DAU per month. Any amount below 10,000 is rounded up to 10,000. |
+| Peak daily active users (DAU) | The highest number of active users reached in a single day | Postpaid | Includes 10,000 DAU. Additional usage is charged at $420 per 10,000 DAU per month. Any amount below 10,000 is rounded up to 10,000. | Includes 10,000 DAU. Additional usage is charged at $420 per 10,000 DAU per month. Any amount below 10,000 is rounded up to 10,000. |
 
 ### Add-on service fees
 
@@ -50,14 +50,14 @@ After purchasing the Professional or Flagship plan, you can activate the followi
 
 | Service | Description | Billing method | Professional | Flagship |
 | --- | --- | --- | --- | --- |
-| [One-to-one and group chat message cloud storage](/product/console/basic_single_group_chat.html#message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 180 days: $70/month<br/>360 days: $140/month<br/>720 days: $280/month | 180 days: $35/month<br/>360 days: $105/month<br/>720 days: $245/month |
-| [Chat room message cloud storage](/product/console/basic_chat_room.html#chat-room-message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 30 days: $35/month<br/>60 days: $70/month<br/>90 days: $105/month | 30 days: $35/month<br/>60 days: $70/month<br/>90 days: $105/month |
-| [Chat group member limit](/product/console/basic_single_group_chat.html#maximum-members-per-chat-group) | Maximum number of members in each chat group in an app | Prepaid | Increase to 3,000 members: $70/month | Increase to 8,000 members: $70/month |
-| [Presence subscriptions](/product/console/basic_user.html#presence) | Subscribe to and query user presence | Prepaid | $140/month | Included |
-| [Pre-delivery webhooks](/product/console/basic_webhook.html) | The EasyIM server notifies your app server before delivering a message, allowing it to process the message, for example, for content moderation. | Prepaid | $140/month | Included |
-| [Message Reactions](/product/console/basic_message_conversation.html#message-reactions) | Add emoji reactions to messages for richer interactions | Prepaid | $84/month | Included |
-| [Webhook data storage](/rest/callback_postsending_exception_storage.html) | High-reliability webhook delivery | Prepaid | $280/month | $280/month |
-| [Server API call limits](/product/console/basic_restful_api_call.html) | Increase RESTful Server API call limits | Prepaid | See [RESTful API Call Frequency Limits](/rest/limitationapi.html). | See [RESTful API Call Frequency Limits](/rest/limitationapi.html). |
+| [One-to-one and group chat message cloud storage](/product/console/basic_single_group_chat.html#message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 180 days: $210/month<br/>360 days: $420/month<br/>720 days: $840/month | 180 days: $105/month<br/>360 days: $315/month<br/>720 days: $735/month |
+| [Chat room message cloud storage](/product/console/basic_chat_room.html#chat-room-message-storage-duration) | Includes historical message record files and roaming messages | Prepaid | 30 days: $210/month<br/>60 days: $420/month<br/>90 days: $630/month | 30 days: $210/month<br/>60 days: $420/month<br/>90 days: $630/month |
+| [Chat group member limit](/product/console/basic_single_group_chat.html#maximum-members-per-chat-group) | Maximum number of members in each chat group in an app | Prepaid | Increase to 3,000 members: $210/month | Increase to 8,000 members: $210/month |
+| [Presence](/product/console/basic_user.html#presence) | Subscribe to and query user presence | Prepaid | $420/month | Included |
+| [Pre-delivery webhooks](/product/console/basic_webhook.html) | The EasyIM server notifies your app server before delivering a message, allowing it to process the message, for example, for content moderation. | Prepaid | $420/month | Included |
+| [Message Reactions](/product/console/basic_message_conversation.html#message-reactions) | Add emoji reactions to messages for richer interactions | Prepaid | $252/month | Included |
+| [Webhook data storage](/rest/callback_postsending_exception_storage.html) | High-reliability webhook delivery | Prepaid | $840/month | $840/month |
+| [Server API call limits](/product/console/basic_restful_api_call.html) | Increase RESTful Server API call limits | Prepaid | $56/month/add-on package<br/>See [RESTful API Call Frequency Limits](/rest/limitationapi.html). | $56/month/add-on package<br/>See [RESTful API Call Frequency Limits](/rest/limitationapi.html). |
 
 ### Billing example
 

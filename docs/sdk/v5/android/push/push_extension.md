@@ -1,4 +1,4 @@
-# Set Push Extension Features
+# Configure Push Extension Features
 
 You can use extension fields to implement custom push settings. This article uses force push and sending silent messages as examples to describe how to implement push extension features.
 

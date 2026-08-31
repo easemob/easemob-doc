@@ -1,10 +1,10 @@
-# Set Push Notification Mode and Do Not Disturb Mode
+# Set Push Notification Mode and DND
 
-To optimize the user experience when users handle a large number of push notifications, the SDK provides fine-grained configuration of push notification mode and Do Not Disturb mode at both the global and conversation levels. You can control offline push in a unified way based on push notification mode, a specified Do Not Disturb duration, or a daily time period.
+To optimize the user experience when users handle a large number of push notifications, the SDK provides fine-grained configuration of push notification mode and Do Not Disturb (DND) mode at both the global and conversation levels. You can control offline push in a unified way based on push notification mode, a specified Do Not Disturb duration, or a daily time period.
 
 ## Feature activation
 
-[Push notification mode](push_notification_mode_dnd.html#push-notification-mode) and [Do Not Disturb mode](push_notification_mode_dnd.html#do-not-disturb-mode) are advanced push features. Before using them, you need to enable them for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
+[Push notification mode](push_notification_mode_dnd.html#push-notification-mode) and [DND mode](push_notification_mode_dnd.html#do-not-disturb-mode) are advanced push features. Before using them, you need to enable them for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
 
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
@@ -25,7 +25,7 @@ For example, assume that the global push mode is set to `MENTION_ONLY`, while th
 | `MENTION_ONLY` | Receives push notifications only for messages that mention the current user. This parameter is usually more suitable for group chat scenarios. If a message needs to mention one or more users, you can pass `"em_at_list":["user1", "user2" ...]` in the message extension field `ext` when sending the message. If everyone is mentioned, pass `"em_at_list":"all"` for this field. |
 | `NONE` | Does not receive push notifications for offline messages. |
 
-### Get the push notification mode settings of all conversations
+### Retrieve global push notification mode settings
 
 You can call `EMPushManager#syncSilentModeConversationsFromServer` to synchronize the push notification mode settings of all conversations from the server. After synchronization succeeds, the result is stored in the local database. Then you can query the push notification mode of the current conversation through `EMConversation#pushRemindType`.
 
@@ -94,9 +94,9 @@ You can call `clearRemindTypeForConversation` to clear the push notification mod
 EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new EMCallBack(){});
 ```
 
-## Do Not Disturb mode
+## DND
 
-After SDK initialization is completed and login succeeds, you can set Do Not Disturb mode for the app globally or for specified one-to-one and group chat conversations. While Do Not Disturb mode is in effect, EasyIM does not send push notifications to offline users within the corresponding scope.
+After SDK initialization is completed and login succeeds, you can set the DND mode for the app globally or for specified one-to-one and group chat conversations. While the DND mode is in effect, EasyIM does not send push notifications to offline users within the corresponding scope.
 
 The Android SDK uses `EMSilentModeParam` to configure Do Not Disturb rules and supports the following two modes:
 
@@ -107,8 +107,8 @@ The Do Not Disturb time parameters are described in the following table:
 
 | Rule mode | Configuration method | Type | Description | Scope |
 | :--------------------- | :------------------------------------------ | :----------------- | :----------------------------------------------------------- | :----------------------------- |
-| `SILENT_MODE_INTERVAL` | `setSilentModeInterval(startTime, endTime)` | `EMSilentModeTime` | A daily recurring Do Not Disturb time period. It uses the 24-hour format and is accurate to the minute. The hour range of `startTime` and `endTime` is `0`-`23`, and the minute range is `0`-`59`.<br/> - **Triggered daily at the specified time**: After being set, Do Not Disturb mode is automatically entered every day during the specified time period.<br/> - **Cross-day support**: If the end time is earlier than the start time, the time period spans days. For example, `10:00`-`08:00` means Do Not Disturb is enabled from `10:00` of the current day to `08:00` of the next day.<br/> - **All-day and disabled**: If the start time is the same as the end time, it is considered all-day Do Not Disturb. When it is set to `00:00`-`00:00`, Do Not Disturb mode is disabled.<br/> - **Single time period limit**: Only one Do Not Disturb time period can be set per day. A new configuration overwrites the old one.<br/> - **Effective time**: The setting takes effect immediately. For example, if `08:00`-`12:00` is set at `11:00` of the current day, it takes effect from `11:00` to `12:00` on that day, and then follows `08:00`-`12:00` every day. | App global only. |
-| `SILENT_MODE_DURATION` | `setSilentModeDuration(duration)` | `Int` | One-time Do Not Disturb duration, in minutes. The value range is `0`-`10080` (0 to 7 days). `0` indicates that this parameter is invalid.<br/><br/> - **Valid once**: After this mode is set, timing starts immediately and is not triggered repeatedly by day.<br/> - **Effective example**: If `duration = 240` is set at `08:00`, Do Not Disturb mode is active from `08:00` to `12:00` on that day. | App global or specified one-to-one/group chat conversations. |
+| `SILENT_MODE_INTERVAL` | `setSilentModeInterval(startTime, endTime)` | `EMSilentModeTime` | A daily recurring Do Not Disturb time period. It uses the 24-hour format and is accurate to the minute. The hour range of `startTime` and `endTime` is `0`-`23`, and the minute range is `0`-`59`.<br/> - **Triggered daily at the specified time**: After being set, DND is automatically entered every day during the specified time period.<br/> - **Cross-day support**: If the end time is earlier than the start time, the time period spans days. For example, `10:00`-`08:00` means Do Not Disturb is enabled from `10:00` of the current day to `08:00` of the next day.<br/> - **All-day and disabled**: If the start time is the same as the end time, it is considered all-day Do Not Disturb. When it is set to `00:00`-`00:00`, DND is disabled.<br/> - **Single time period limit**: Only one Do Not Disturb time period can be set per day. A new configuration overwrites the old one.<br/> - **Effective time**: The setting takes effect immediately. For example, if `08:00`-`12:00` is set at `11:00` of the current day, it takes effect from `11:00` to `12:00` on that day, and then follows `08:00`-`12:00` every day. | App global only. |
+| `SILENT_MODE_DURATION` | `setSilentModeDuration(duration)` | `Int` | One-time Do Not Disturb duration, in minutes. The value range is `0`-`10080` (0 to 7 days). `0` indicates that this parameter is invalid.<br/><br/> - **Valid once**: After this mode is set, timing starts immediately and is not triggered repeatedly by day.<br/> - **Effective example**: If `duration = 240` is set at `08:00`, DND is active from `08:00` to `12:00` on that day. | App global or specified one-to-one/group chat conversations. |
 
 **Superposition rules when `SILENT_MODE_INTERVAL` and `SILENT_MODE_DURATION` are both set**
 
@@ -120,9 +120,9 @@ The Do Not Disturb time parameters are described in the following table:
 - **Current day**: Do Not Disturb is active from `08:00` to `12:00`.
 - **Starting from the next day**: Do Not Disturb is active from `08:00` to `10:00` every day.
 
-**Relationship between push notification mode and Do Not Disturb mode**
+**Relationship between push notification mode and DND mode**
 
-Do Not Disturb mode has a higher priority than push notification mode. For example, if the push notification mode of a conversation is set to `ALL`, but the conversation currently matches the Do Not Disturb duration, or the app globally currently matches the Do Not Disturb time period, offline push notifications for this conversation are not received while Do Not Disturb is in effect.
+DND has a higher priority than push notification mode. For example, if the push notification mode of a conversation is set to `ALL`, but the conversation currently matches the Do Not Disturb duration, or the app globally currently matches the Do Not Disturb time period, offline push notifications for this conversation are not received while Do Not Disturb is in effect.
 
 If only one-time Do Not Disturb is set for a conversation and no app-level Do Not Disturb is set, offline push notifications are not sent only for this conversation while Do Not Disturb is in effect. Other conversations still send push notifications according to their own push notification mode or inherited global settings.
 
@@ -130,9 +130,9 @@ If only one-time Do Not Disturb is set for a conversation and no app-level Do No
 If you need to send offline push notifications to specified users while Do Not Disturb is in effect, you can set [force push](push_extension.html#force-push).
 :::
 
-## Set global push receiving rules
+## Set global notification receiving rules
 
-You can call `setSilentModeForAll` to set app-level push notifications, and set the push notification mode and Do Not Disturb mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
+You can call `setSilentModeForAll` to set app-level push notifications, and set the push notification mode and DND mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
 
 ```java
 // Set the push notification mode to `MENTION_ONLY`.
@@ -151,7 +151,7 @@ EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModePa
 EMClient.getInstance().pushManager().setSilentModeForAll(param, new EMValueCallBack<EMSilentModeResult>(){});
 ```
 
-## Get global push receiving rules
+## Get global notification receiving rules
 
 You can call `getSilentModeForAll` to get app-level push notification settings, as shown in the following example:
 
@@ -179,9 +179,9 @@ EMClient.getInstance().pushManager().getSilentModeForAll(new EMValueCallBack<EMS
 });
 ```
 
-## Set push receiving rules for a specified conversation
+## Set notification receiving rules for a specified conversation
 
-You can call `setSilentModeForConversation` to set push notifications for a specified conversation, and set the push notification mode and Do Not Disturb mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
+You can call `setSilentModeForConversation` to set push notifications for a specified conversation, and set the push notification mode and DND mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
 
 ```java
 // Set the push notification mode to `MENTION_ONLY`.
@@ -191,13 +191,13 @@ EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModePa
 // Set the offline push Do Not Disturb duration to 15 minutes.
 EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_DURATION)
                                 .setSilentModeDuration(15);
-// Set the offline push Do Not Disturb mode for the conversation. Setting a conversation Do Not Disturb time period is not supported currently.
+// Set the offline push DND mode for the conversation. Setting a conversation Do Not Disturb time period is not supported currently.
 EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId, conversationType, param, new EMValueCallBack<EMSilentModeResult>(){});
 ```
 
-## Get push receiving rules for a specified conversation
+## Retrieve notification receiving rules for a specified conversation
 
-You can call `getSilentModeForConversation` to get push notification settings for a specified conversation, as shown in the following example:
+You can call `getSilentModeForConversation` to retrieve push notification settings for a specified conversation, as shown in the following example:
 
 ```java
 EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId, conversationType, new EMValueCallBack<EMSilentModeResult>(){
@@ -220,7 +220,7 @@ EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId
 });
 ```
 
-## Get push receiving rules for conversations in bulk
+## Retrieve notification receiving rules for conversations in bulk
 
 1. You can get settings for up to 20 conversations in each call.
 
@@ -238,14 +238,14 @@ EMClient.getInstance().pushManager().getSilentModeForConversations(conversationL
 });
 ```
 
-## API list
+## API List
 
 | API name | Module/class | Description |
 | :--- | :--- | :--- |
-| [`syncSilentModeConversationsFromServer`](#get-the-push-notification-mode-settings-of-all-conversations) | `EMPushManager` | Asynchronously synchronizes conversation push notification modes saved on the server. |
+| [`syncSilentModeConversationsFromServer`](#retrieve-global-push-notification-mode-settings) | `EMPushManager` | Asynchronously synchronizes conversation push notification modes saved on the server. |
 | [`setSilentModeForConversation`](#set-the-push-notification-mode-of-a-specified-conversation) | `EMPushManager` | Sets the push notification mode of a specified conversation. |
-| [`getSilentModeForConversation`](#get-push-receiving-rules-for-a-specified-conversation) | `EMPushManager` | Gets push receiving rules for a specified conversation. |
-| [`setSilentModeForAll`](#set-global-push-receiving-rules) | `EMPushManager` | Sets global push receiving rules. |
-| [`getSilentModeForAll`](#get-global-push-receiving-rules) | `EMPushManager` | Gets global push receiving rules. |
-| [`getSilentModeForConversations`](#get-push-receiving-rules-for-conversations-in-batches) | `EMPushManager` | Gets push receiving rules for conversations in bulk. |
+| [`getSilentModeForConversation`](#retrieve-notification-receiving-rules-for-a-specified-conversation) | `EMPushManager` | Gets notification receiving rules for a specified conversation. |
+| [`setSilentModeForAll`](#set-global-notification-receiving-rules) | `EMPushManager` | Sets global notification receiving rules. |
+| [`getSilentModeForAll`](#get-global-notification-receiving-rules) | `EMPushManager` | Gets global notification receiving rules. |
+| [`getSilentModeForConversations`](#retrieve-notification-receiving-rules-for-conversations-in-bulk) | `EMPushManager` | Gets push receiving rules for conversations in bulk. |
 | [`clearRemindTypeForConversation`](#clear-the-push-notification-mode-setting-of-a-specified-conversation) | `EMPushManager` | Clears the push notification mode setting of a specified conversation. |

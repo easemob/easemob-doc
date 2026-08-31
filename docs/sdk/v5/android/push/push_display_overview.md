@@ -1,4 +1,4 @@
-# Set Push Notification Display Content
+# Configure push notification display content
 
 After a notification is received, the push title and content displayed in the notification bar can be set in the following ways. The priority is from low to high:
 

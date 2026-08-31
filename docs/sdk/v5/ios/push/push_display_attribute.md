@@ -1,4 +1,4 @@
-# Set and Get Push Notification Display Attributes
+# Set and Retrieve Push Notification Display Attributes
 
 ## Set push notification display attributes
 
@@ -42,9 +42,9 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 | <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: set to a specific value | <br/> - Push title: **You have a new message**<br/> - Push content: **Push nickname of the message sender: message content** | ![img](/images/android/push/push_displayattribute_2.png) |
 | <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: not set | <br/> - Push title: **You have a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png) |
 
-## Get push notification display attributes
+## Retrieve push notification display attributes
 
-You can call `getPushNotificationOptionsFromServerWithCompletion` to get the display attributes in push notifications, as shown in the following example:
+You can call `getPushNotificationOptionsFromServerWithCompletion` to retrieve the display attributes in push notifications, as shown in the following example:
 
 ```objectivec
 // Asynchronous method
@@ -63,10 +63,10 @@ You can call `getPushNotificationOptionsFromServerWithCompletion` to get the dis
 | `displayName` | The name shown for the sender when the other party receives the push notification. |
 | `displayStyle` | Push display type. |
 
-## API list
+## API List
 
 | API name | Module/type | Description |
 | :--- | :--- | :--- |
 | [`updatePushDisplayName`](#set-push-notification-display-attributes) | `IEMPushManager` | Sets the nickname displayed in offline push notifications. |
 | [`updatePushDisplayStyle`](#set-push-notification-display-attributes) | `IEMPushManager` | Sets the display style of offline push notifications. |
-| [`getPushNotificationOptionsFromServerWithCompletion`](#get-push-notification-display-attributes) | `IEMPushManager` | Gets the push notification display attributes from the server. |
+| [`getPushNotificationOptionsFromServerWithCompletion`](#retrieve-push-notification-display-attributes) | `IEMPushManager` | Gets the push notification display attributes from the server. |

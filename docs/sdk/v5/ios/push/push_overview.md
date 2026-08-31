@@ -1,6 +1,6 @@
 # Offline Push Overview
 
-EasyIM supports integration with third-party message-push services to send message notifications to mobile devices when users are offline. **The EasyIM Web SDK itself does not support offline push. It supports only configuring offline push for mobile clients**, such as uploading a push token, configuring global or conversation-level Do Not Disturb settings, querying push configuration, and setting the push language.
+EasyIM supports integration with third-party message-push services to send message notifications to mobile devices when users are offline. **The EasyIM Web SDK itself does not support offline push. It supports only configuring offline push for mobile clients**, such as uploading a push token, configuring global or conversation-level Do Not Disturb (DND) settings, querying push configuration, and setting the push language.
 
 ## Offline push process
 
@@ -29,7 +29,7 @@ await client.pushManager.uploadPushToken({
 
 ### Feature activation
 
-[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [Do Not Disturb](push_notification_mode_dnd.html#do-not-disturb), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
+[Push notification modes](push_notification_mode_dnd.html#push-notification-modes), [DND](push_notification_mode_dnd.html#do-not-disturb), and [push templates](push_template.html) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
 
 1. Log in to the [EasyIM Console](https://console.easyim.ai/user/login).
 2. Select **App Management** at the top of the page. On the app list page that appears, click **Manage** in the **Actions** column for your app.
@@ -52,14 +52,14 @@ For details, see [Push notification modes](push_notification_mode_dnd.html#push-
 
 ### Do Not Disturb
 
-After initializing and successfully logging in to the SDK, configure Do Not Disturb globally or for an individual one-to-one or group conversation.
+After initializing and successfully logging in to the SDK, configure DND globally or for an individual one-to-one or group conversation.
 
-- Set a one-time Do Not Disturb duration, such as 30 minutes.
-- Set a daily recurring Do Not Disturb period, such as 8:0-10:0.
-- Configure Do Not Disturb globally or for an individual one-to-one or group conversation.
-- To push a message to a specified user during Do Not Disturb, use forced push.
+- Set a one-time DND duration, such as 30 minutes.
+- Set a daily recurring DND period, such as 8:0-10:0.
+- Configure DND globally or for an individual one-to-one or group conversation.
+- To push a message to a specified user during DND, use forced push.
 
-For details, see [Do Not Disturb](push_notification_mode_dnd.html#do-not-disturb).
+For details, see [DND](push_notification_mode_dnd.html#do-not-disturb).
 
 ### Push templates
 
@@ -83,7 +83,7 @@ For multi-device login, configure the push policy on the **Certificate Managemen
 The EasyIM Web SDK primarily supports the following configuration options for mobile offline push:
 
 - Upload a push token:
-- Configure push notifications, including the push notification mode and Do Not Disturb:
+- Configure push notifications, including the push notification mode and DND:
   - Configure global push notifications.
   - Retrieve global push-notification settings.
   - Configure push notifications for a conversation.

@@ -7,7 +7,12 @@ const getSubDirectories = (dir) => fs.readdirSync(dir).filter(item => fs.statSyn
 const SDK_PATH = path.resolve(__dirname, '../../sdk/v5')
 const platformList = getSubDirectories(SDK_PATH)
 
-/** SDK V5 sidebar template. */
+/**
+ * SDK V5 sidebar template.
+ *
+ * Sidebar labels come exclusively from each item's `text` field and are
+ * intentionally independent of Markdown H1 and frontmatter titles.
+ */
 const sdkV5Sidebar = [
   { text: "Beginner's Guide", link: "beginner_guide.html" },
   { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
@@ -175,23 +180,6 @@ function linkExists(platform: string, link: string): boolean {
   }
 }
 
-function getSdkDocumentTitle(platform: string, link: string): string | undefined {
-  try {
-    const filePath = path.join(SDK_PATH, platform, link.replace(/\.html$/, '.md'))
-    const content = fs.readFileSync(filePath, 'utf8')
-    const heading = content.match(/^#\s+(.+)$/m)?.[1]?.trim()
-    if (heading) return heading
-
-    // Some migrated SDK documents define their page title in YAML or JSON
-    // frontmatter instead of using a Markdown level-one heading.
-    return content
-      .match(/^\s*title\s*:\s*["']?([^"'\r\n,}]+)["']?\s*,?\s*$/m)?.[1]
-      ?.trim()
-  } catch {
-    return undefined
-  }
-}
-
 // function handleSidebarItem(platform: string, sidebar: any): any {
 //   const children = Array.isArray(sidebar.children) ? sidebar.children : [];
 //   const newchildren = [];
@@ -247,10 +235,7 @@ function handleSidebarItem(platform, sidebar) {
     if (linkExists(platform, sidebar.link)) {
       const basePath = `/sdk/v5/${platform}`
       const newLink = `${basePath}/${sidebar.link}`
-      const text = platform === 'ios'
-        ? getSdkDocumentTitle(platform, sidebar.link) || sidebar.text
-        : sidebar.text
-      return {...sidebar, text, link:newLink}
+      return {...sidebar, text: sidebar.text, link:newLink}
     }
   }
 }

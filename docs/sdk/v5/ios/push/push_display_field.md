@@ -1,4 +1,4 @@
-# Use the Message Extension Field to Set Push Notification Content
+# Set Push Notification with Message Extensions
 
 When creating a push message, you can set the message extension field to customize the push title `title` and push content `content` to display.
 

@@ -1,4 +1,4 @@
-# Use the Message Extension Field to Set Push Notification Content
+# Set Push Notification with Message Extensions
 
 When sending a message, you can set custom push display content through the fixed message extension field `em_push_ext`. The value of this field is a `JSONObject`, in which `title` and `content` are used to set the push title and push content respectively.
 

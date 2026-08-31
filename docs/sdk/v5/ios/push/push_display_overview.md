@@ -9,5 +9,5 @@ You can configure the push title and content shown in the notification center in
 5. **Use a custom push template**: Specify the template name in the message extension fields when sending a message.
 
 :::tip
-Push templates are an advanced offline-push feature. Enable them in the EasyIM Console before use.
+Push templates are an advanced offline push feature. Enable them in the EasyIM Console before use.
 :::
