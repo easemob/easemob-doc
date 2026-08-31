@@ -39,7 +39,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 | Parameter            | Type   | Required | Description      |
 | :-------------- | :----- | :------- | :------------------ |
 | `username`      | String | Yes       | User ID whose push nickname to modify. You can set nicknames for up to 50 user IDs in a single request.    |
-| `push_nickname` | String | Yes       | Sender nickname displayed in the push notification area on the receiver's client for offline push. You can customize this nickname, which cannot exceed 100 characters.<br/>The following characters are supported:<br/> - 26 lowercase letters a-z;<br/> - 26 uppercase letters A-Z;<br/> - 10 digits 0-9;<br/> - Chinese characters;<br/> - Special characters.<br/><Container type="tip" title="Tip">1. If no nickname is set, the sender's user ID rather than the nickname is displayed in the push notification.<br/>2. This nickname can differ from the nickname in the user attributes, but we recommend keeping them consistent. Therefore, when you modify one nickname, call the corresponding method to update the other one as well. For details about updating the nickname in user attributes, see [Set User Attributes](user_attribute_set.html).</Container>       |
+| `push_nickname` | String | Yes       | Sender nickname displayed in the push notification area on the recipient's client for offline push. You can customize this nickname, which cannot exceed 100 characters.<br/>The following characters are supported:<br/> - 26 lowercase letters a-z;<br/> - 26 uppercase letters A-Z;<br/> - 10 digits 0-9;<br/> - Chinese characters;<br/> - Special characters.<br/><Container type="tip" title="Tip">1. If no nickname is set, the sender's user ID rather than the nickname is displayed in the push notification.<br/>2. This nickname can differ from the nickname in the user attributes, but we recommend keeping them consistent. Therefore, when you modify one nickname, call the corresponding method to update the other one as well. For details about updating the nickname in user attributes, see [Set User Attributes](user_attribute_set.html).</Container>       |
 
 ## Response example
 
@@ -73,7 +73,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | Field            | Type   | Description                                                         |
 | :-------------- | :----- | :------- |
 | `entities`           | JSON Array  | Nickname displayed in the user's push notifications and related user information.     |
-| - `push_nickname`  | String | Sender nickname displayed in the push notification area on the receiver's client for offline push.  |
+| - `push_nickname`  | String | Sender nickname displayed in the push notification area on the recipient's client for offline push.  |
 | - `username`        | String | User for whom the sender nickname displayed during offline push is set.    |
 
 The other fields in the response body are described below:

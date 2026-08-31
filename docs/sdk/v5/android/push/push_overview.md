@@ -27,7 +27,7 @@ In the following two cases, EasyIM does not send offline push notifications:
 
 The complete message push flow is as follows:
 
-1. User B, the message receiver, detects the push channels supported by the device, that is, the configured third-party push service types and their usage conditions.
+1. User B, the message recipient, detects the push channels supported by the device, that is, the configured third-party push service types and their usage conditions.
 2. User B requests a push token from the third-party push server through the configured third-party push SDK.
 3. The third-party push server returns a push token to user B.
 4. User B uploads the push certificate name and push token to the EasyIM server.

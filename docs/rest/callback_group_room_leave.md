@@ -81,7 +81,7 @@ The following examples show chat room leave events.
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `LEAVE` when a user voluntarily leaves a chat group or chat room. |
 | `operator`     | String | Operator.                     |
 | `member_count`     | Int | Total number of chat group or chat room members after the user leaves.                     |
@@ -133,7 +133,7 @@ The following example shows an event generated when a user is removed from a cha
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `LEAVE` when a user is removed from a chat group or chat room. |
 | `operator`     | String | Operator.                     |
 | `member_count`     | Int | Total number of chat group or chat room members after the user is removed.                     |
@@ -185,7 +185,7 @@ The following example shows an event generated when a user is added to the group
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `LEAVE` when a user is removed from a chat group or chat room. |
 | `operator`     | String | Operator.                     |
 | `member_count`     | Int | Total number of chat group or chat room members after the user is added to the blocklist.                     |
@@ -238,7 +238,7 @@ The following example shows an event generated when a user is added to the group
 | `payload.member` | JSON | IDs of users who leave after the chat group or chat room is destroyed.        |
 | `payload.type` | Array  | Leave method: `DELETE` indicates that users leave a chat group or chat room after it is destroyed.     |
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
 

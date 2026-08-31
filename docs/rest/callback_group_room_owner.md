@@ -55,7 +55,7 @@ The following field descriptions use a group owner change event as an example. T
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`       | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` when the group owner is changed. |
 | `operator`     | String | Operator.                      |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.             |

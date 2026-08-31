@@ -52,7 +52,7 @@ if(conversation!=null) {
 }
 ```
 
-### Set the push notification mode of a specified conversation
+### Set the push notification mode of a conversation
 
 Call `EMPushManager#setSilentModeForConversation` on the local device to set the push notification mode of a conversation. The current operation is called back in the multi-device event `EMMultiDeviceListener#onConversationEvent`, and the value of the `event` parameter is `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`.
 
@@ -86,9 +86,9 @@ EMClient.getInstance().addMultiDeviceListener(new EMMultiDeviceListener() {
 
 ```
 
-### Clear the push notification mode setting of a specified conversation
+### Clear the push notification mode setting of a conversation
 
-You can call `clearRemindTypeForConversation` to clear the push notification mode setting of a specified conversation. After it is cleared, this conversation inherits the app setting by default.
+You can call `clearRemindTypeForConversation` to Clear the push notification mode setting of a conversation. After it is cleared, this conversation inherits the app setting by default.
 
 ```java
 EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new EMCallBack(){});

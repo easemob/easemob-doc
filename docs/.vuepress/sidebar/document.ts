@@ -109,14 +109,14 @@ const sdkV5Sidebar = [
     children: [
       { text: 'Overview', link: 'push/push_overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter'] },
       { text: 'Integrate APNs', link: 'push/push_apns.html', only: ['ios'] },
-      { text: 'Integrate FCM', link: 'push/push_fcm.html.html', only: ['android'] },
+      { text: 'Integrate FCM', link: 'push/push_fcm.html', only: ['android'] },
       { text: 'Integrate HarmonyOS Push', link: 'push/push_harmony.html', only: ['harmonyos'] },
         { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
         { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
         { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
         { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
-        { text: 'Parse Push Notifications', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-        { text: 'Configure Notification Content',
+        { text: 'Parse Notifications', link: 'push/push_parsing.html', only: ['android', 'ios'] },
+        { text: 'Configure Notification',
             collapsible: true,
             children: [
               { text: 'Overview', link: 'push/push_display_overview.html'},

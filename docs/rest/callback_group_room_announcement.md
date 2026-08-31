@@ -48,7 +48,7 @@ After a chat group or chat room announcement is set or updated, the EasyIM serve
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`       | String | Chat group ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` when a chat group announcement is set or updated. |
 | `operator`     | String | Operator. If an app admin sets or updates the announcement, the value is fixed as `@ppAdmin`. |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                |

@@ -62,7 +62,7 @@ Note: The `payload.options.ext` field applies only to chat room join events, not
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `JOIN` when a user joins a chat group or chat room. |
 | `operator`     | String | <br/> - Operator who adds the user to the chat group or chat room.<br/> - ID of the user who actively joins the chat room.                     |
 | `member_count`     | Int | Current number of chat group or chat room members.                     |
@@ -164,7 +164,7 @@ The following example uses an event generated when a user applies to join a chat
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`       | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `JOIN` when a user joins a chat group or chat room. |
 | `operator`     | String | Operator.                     |
 | `member_count`     | Int | Total number of chat group or chat room members after the new user joins.                     |

@@ -6,17 +6,17 @@ Push templates are used to customize the title and content of push notifications
 
 You can configure push templates through EasyIM Console or the [server-side REST API for configuring push templates](/rest/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
 
-Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or receiver.
+Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or recipient.
 
 Push templates have the following characteristics:
 
 1. Push templates have a higher priority than [calling the API to set push content in the notification bar](push_display_attribute.html).
 2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/rest/push_template_create.html) is supported.
 3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users.
-4. The receiver can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
+4. The recipient can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
 5. Priority of push template usage:
    - Custom templates have a higher priority than default templates.
-   - When the sender specifies a push template in the message extension field, even if the receiver has set a push template, the push notification is displayed according to the push template set by the sender.
+   - When the sender specifies a push template in the message extension field, even if the recipient has set a push template, the push notification is displayed according to the push template set by the sender.
 
 ## Feature activation
 
@@ -215,9 +215,9 @@ message.setMessageStatusCallback(new EMCallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-## The message receiver uses a push template
+## The message recipient uses a push template
 
-The message receiver can call `setPushTemplate` and pass in the push template name to select the template to use.
+The message recipient can call `setPushTemplate` and pass in the push template name to select the template to use.
 
 :::tip
 If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.

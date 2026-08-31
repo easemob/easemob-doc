@@ -3,8 +3,8 @@
 ## Feature overview
 
 - Retrieve the delivery status of a user's specified offline message to determine whether it has been delivered.
-- "Delivered" indicates that the receiver received the message when they got online.
-- "Undelivered" indicates that the receiver is offline and the message has not yet been delivered. It will be delivered after the receiver gets online.
+- "Delivered" indicates that the recipient received the message when they got online.
+- "Undelivered" indicates that the recipient is offline and the message has not yet been delivered. It will be delivered after the recipient gets online.
 - For the number of offline messages stored and their retention period, see [Offline message storage](/product/product_message_overview.html#message-storage).
 
 ## Call frequency limit

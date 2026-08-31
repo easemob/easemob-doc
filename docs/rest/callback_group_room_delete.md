@@ -42,7 +42,7 @@ After a chat group or chat room is deleted successfully, the EasyIM server sends
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `DELETE` when a chat group or chat room is deleted. |
 | `operator`     | String | Operator.                               |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                      |

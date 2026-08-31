@@ -47,7 +47,7 @@ This event is triggered when you call a RESTful API to [ban](/rest/group_ban.htm
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`       | String | Chat group ID.                                                 |
 | `type`         | String | Distinguishes a chat group event from a chat room event. Because chat rooms do not have ban or unban events, this event applies only to chat groups, and the value can only be `GROUP`.   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `UPDATE` for banning or unbanning a chat group. |
 | `operator`     | String | Operator.                     |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                |

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-A receiver can call this API to set a push template.
+A recipient can call this API to set a push template.
 
 ## Call frequency limit
 

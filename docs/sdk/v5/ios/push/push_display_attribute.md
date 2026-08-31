@@ -1,6 +1,6 @@
-# Set and Retrieve Push Notification Display Attributes
+# Set and Retrieve Notification Display Attributes
 
-## Set push notification display attributes
+## Set notification display attributes
 
 You can call `updatePushDisplayName` to set the nickname displayed in push notifications, as shown in the following example:
 
@@ -42,7 +42,7 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 | <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: set to a specific value | <br/> - Push title: **You have a new message**<br/> - Push content: **Push nickname of the message sender: message content** | ![img](/images/android/push/push_displayattribute_2.png) |
 | <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: not set | <br/> - Push title: **You have a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png) |
 
-## Retrieve push notification display attributes
+## Retrieve notification display attributes
 
 You can call `getPushNotificationOptionsFromServerWithCompletion` to retrieve the display attributes in push notifications, as shown in the following example:
 

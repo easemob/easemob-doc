@@ -94,7 +94,7 @@ Enable the corresponding offline push service when initializing the EasyIM SDK. 
 
 You can set push notification titles and content in multiple ways, including calling an API, using a push template, and using message extension fields when sending a message.
 
-For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set push notification display attributes](/sdk/v5/android/push/push_display_attribute.html#set-push-notification-display-attributes).
+For information about these settings and their priorities, see the relevant documentation. For example, for Android, see [Set notification display attributes](/sdk/v5/android/push/push_display_attribute.html#set-push-notification-display-attributes).
 
 <!--
 ## Push translation

@@ -1,6 +1,6 @@
-# Set and Retrieve Push Notification Display Attributes
+# Set and Retrieve Notification Display Attributes
 
-## Set push notification display attributes
+## Set notification display attributes
 
 Call `asyncUpdatePushNickname` to set the nickname displayed for the current user in push notifications. The push nickname is different from the nickname in user attributes. If the business side updates the user nickname, it should also update the push nickname to avoid inconsistent display.
 
@@ -64,9 +64,9 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 | <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: set to a specific value | <br/> - Push title: **You've got a new message**<br/> - Push content: **Push nickname of the message sender: message content** |![img](/images/android/push/push_displayattribute_2.png) |
 | <br/> - `DisplayStyle`: `MessageSummary`<br/> - `nickname`: not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png)|
 
-## Retrieve push notification display attributes
+## Retrieve notification display attributes
 
-You can call `asyncGetPushConfigsFromServer` to retrieve push notification display attributes from the server. This method does not block the current thread. If the call succeeds, the SDK returns the push configurations through the `onSuccess` callback. If the call fails, the SDK returns the error code and error information through the `onError` callback.
+You can call `asyncGetPushConfigsFromServer` to Retrieve notification display attributes from the server. This method does not block the current thread. If the call succeeds, the SDK returns the push configurations through the `onSuccess` callback. If the call fails, the SDK returns the error code and error information through the `onError` callback.
 
 ```java
 // Asynchronous method. Recommended for use on the main thread.

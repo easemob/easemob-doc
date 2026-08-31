@@ -1,4 +1,4 @@
-# Configure push notification display content
+# Configure notification display content
 
 You can configure the push title and content shown in the notification center in the following ways, listed from lowest to highest priority:
 

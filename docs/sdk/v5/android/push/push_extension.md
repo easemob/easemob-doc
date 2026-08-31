@@ -67,13 +67,13 @@ For how the app parses custom fields, see [Parse received push fields](push_pars
 
 ## Force push
 
-After force push is set, when a user sends a message, the receiver's Do Not Disturb settings are ignored. The message is pushed to the receiver normally regardless of whether the receiver is in a Do Not Disturb time period.
+After force push is set, when a user sends a message, the recipient's Do Not Disturb settings are ignored. The message is pushed to the recipient normally regardless of whether the recipient is in a Do Not Disturb time period.
 
 ```java
 // This example uses a text message. Other message types, such as image and file messages, are configured in the same way.
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
-// Set the receiver: the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for chat room chat.
+// Set the recipient: the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for chat room chat.
 message.setTo("toChatUsername");
 // Set whether to force push. This field is a built-in extension field: `true`: force push; (default) `false`: non-force push.
 message.setAttribute("em_force_notification", true);
@@ -98,13 +98,13 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 Sending a silent message means that the sender sets the message not to be pushed when sending it. That is, when the user is offline, the EasyIM service does not push a message notification to the user's device through a third-party vendor message push service. Therefore, the user does not receive a message push notification. When the user gets online again, the user receives all messages sent during the offline period.
 
-Both sending silent messages and Do Not Disturb mode result in no message push. The difference is that sending a silent message is set by the sender when sending a message, while Do Not Disturb mode is set by the receiver to not receive push notifications during a specified time period.
+Both sending silent messages and Do Not Disturb mode result in no message push. The difference is that sending a silent message is set by the sender when sending a message, while Do Not Disturb mode is set by the recipient to not receive push notifications during a specified time period.
 
 ```java
 // This example uses a text message. Other message types, such as image and file messages, are configured in the same way.
 EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
 EMTextMessageBody txtBody = new EMTextMessageBody("test");
-// Set the receiver: the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for chat room chat.
+// Set the recipient: the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for chat room chat.
 message.setTo("toChatUsername");
 // Set whether to send a silent message. This field is a built-in extension field: `true`: send a silent message; (default) `false`: push this message.
 message.setAttribute("em_ignore_notification", true);
