@@ -103,9 +103,9 @@ Call `client.pushManager.getGlobalSilentMode` to retrieve the global push notifi
 const result = await client.pushManager.getGlobalSilentMode();
 ```
 
-## Retrieve the list of conversations with a configured push notification mode
+## Retrieve conversations by push notification mode
 
-Call `client.pushManager.getConversationListByRemindType` to retrieve the list of conversations with a configured push notification mode.
+Call `client.pushManager.getConversationListByRemindType` to Retrieve conversations by push notification mode.
 
 [Push notification modes](#push-notification-modes) include the following three types:
 - **ALL**: Receive push notifications for all offline messages.
@@ -123,9 +123,9 @@ const result = await client.pushManager.getConversationListByRemindType({
 });
 ```
 
-## Clear the push notification mode for a specified conversation
+## Clear the push notification mode for a conversation
 
-Call `client.pushManager.clearConversationRemindType` to clear the push notification mode for a specified conversation. After it is cleared, the conversation inherits the global setting again by default.
+Call `client.pushManager.clearConversationRemindType` to Clear the push notification mode for a conversation. After it is cleared, the conversation inherits the global setting again by default.
 
 Example code:
 
@@ -136,7 +136,7 @@ const result = await client.pushManager.clearConversationRemindType({
 });
 ```
 
-## Set push-receiving rules for a specified conversation
+## Set push receiving rules for a conversation
 
 Call `client.pushManager.setConversationSilentMode` to set the push notification receiving rules for a specified conversation, including the push notification mode, DND duration, or DND period, as shown in the following example.
 

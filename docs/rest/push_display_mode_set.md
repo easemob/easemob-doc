@@ -40,7 +40,7 @@ The request body is a JSON object containing the following fields:
 
 | Parameter                         | Type | Description             | Required |
 | :--------------------------- | :--- | :--------------------------------- | :------- |
-| `notification_display_style` | Int  | Offline push notification display mode:<ul><li>(Default) `0`: The push notification title is "You have a new message," and the content is "Tap to view."</li><li>`1`: The push notification title is "You have a new message," and the content consists of the sender's nickname and the offline message content.</li></ul> | Yes       |
+| `notification_display_style` | Int  | Offline push notification display mode:<ul><li>(Default) `0`: The push notification title is "You've got a new message," and the content is "Please click to view."</li><li>`1`: The push notification title is "You've got a new message," and the content consists of the sender's nickname and the offline message content.</li></ul> | Yes       |
 
 ## Response example
 

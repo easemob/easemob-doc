@@ -1,229 +1,258 @@
-# Set Push Notification Modes and DND
+# Set Push Notification Mode and DND
 
-To improve the user experience when handling large numbers of push notifications, the SDK provides fine-grained configuration of push notification modes and Do Not Disturb (DND) at the global and conversation levels through `client.pushManager`. You can centrally control mobile offline push based on the push notification mode, a specified duration, or a daily period.
+To optimize the user experience when users handle a large number of push notifications, the SDK provides fine-grained configuration of push notification mode and Do Not Disturb (DND) mode at both the global and conversation levels. You can control offline push in a unified way based on push notification mode, a specified DND duration, or a daily time period.
 
 ## Feature activation
 
-[Push notification modes](push_notification_mode_dnd.html#push-notification-modes) and [DND](push_notification_mode_dnd.html#dnd) are advanced push features. Before using them, enable them for free in the [EasyIM Console](https://console.easyim.ai/user/login). **After activation, to disable advanced push features, you must contact the EasyIM business manager because this operation deletes all configurations related to the advanced features.**
+[Push notification mode](push_notification_mode_dnd.html#push-notification-mode) and [DND mode](push_notification_mode_dnd.html#dnd) are advanced push features. Before using them, you need to enable them for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
 
-1. Log in to the [EasyIM Console](https://console.easyim.ai/user/login).
-2. Select **App Management** at the top of the page. On the app list page that appears, click the trial or production App Key for your app.
-3. Select **Value-added Services > Message Push > Offline Push**.
-4. Click **Enable for Free**.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
+2. On the **Applications** page, click the App Key of the app of the development or production environment.
+3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
+4. Click **Enable for free**.
 
 ![image](/images/android/push/push_advanced_feature_enable.png)
 
-## Push notification modes
+## Push notification mode
 
-The following table describes the three push notification modes. These settings apply globally to the app and to individual one-to-one and group conversations. **A conversation-level push notification mode takes precedence over the global setting.** A conversation for which no mode is configured inherits the global setting by default.
+The push notification mode `disturbType` contains the following three types. This setting applies to the app globally and to specific one-to-one and group chat conversations. **Conversation-level push notification mode settings take precedence over global-level settings**. Conversations for which the push notification mode is not set inherit the global setting by default.
 
-For example, suppose the global push notification mode is `AT`, while the mode for a specified conversation is `ALL`. You receive all push notifications from that conversation, while for other conversations, you receive push notifications only for messages that mention you.
+For example, assume that the global push mode is set to `EMPushRemindTypeMentionOnly`, while the push mode of a specified conversation is set to `EMPushRemindTypeAll`. You receive all push notifications from that conversation, while for other conversations, you receive push notifications only for messages that mention you.
 
-| Push notification mode | Description            | 
+| Push notification mode | Description |
 | :---- | :------------- |
-| `ALL`          | Receive push notifications for all offline messages.                                 |
-| `AT`           | Receive push notifications only for messages that mention the current user. This value is generally more suitable for group chats. To mention one or more users in a message, pass "em_at_list":["user1", "user2" ...] through the message extension field ext when sending it. To mention everyone, pass "em_at_list":"all" to this field. |
-| `NONE`        | Do not receive push notifications for offline messages.                                   |
+| `EMPushRemindTypeAll` | Receives push notifications for all offline messages. |
+| `EMPushRemindTypeMentionOnly` | Receives push notifications only for messages that mention the current user. This parameter is usually more suitable for group chat scenarios. If a message needs to mention one or more users, you can pass `"em_at_list":["user1", "user2" ...]` in the message extension field `ext` when sending the message. If everyone is mentioned, pass `"em_at_list":"all"` for this field. |
+| `EMPushRemindTypeNone` | Does not receive push notifications for offline messages. |
+
+### Retrieve global push notification mode settings
+
+You can call `syncSilentModeConversationsFromServerCompletion:` to synchronize the push notification mode settings of all conversations from the server. After synchronization succeeds, the result is stored in the local database. Then you can query the push notification mode of the current conversation through `EMConversation#disturbType`.
+
+```swift
+EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion: { err in
+    if err == nil {
+        if let conversations = EMClient.shared().chatManager?.getAllConversations() {
+            for conversation in conversations {
+                let disturbType = conversation.disturbType
+                }
+        }
+    }
+})
+
+```
+
+### Set the push notification mode of a conversation
+
+Call `EMPushManager#setSilentModeForConversation` on the local device to set the push notification mode of a conversation. The current operation is called back in the multi-device event `EMMultiDeviceListener#onConversationEvent`, and the value of the `event` parameter is `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`.
+
+```swift
+// Set the push notification mode for a conversation.
+let param = EMSilentModeParam(paramType: .remindType)
+        param.remindType = .none
+        EMClient.shared().pushManager?.setSilentModeForConversation("conversationId", conversationType: .chat, params: param, completion: { result, err in
+    if err == nil {
+        print("setSilentModeForConversation success")
+    }
+})
+
+
+// Listen for multi-device events.
+EMClient.shared().addMultiDevices(delegate: self, queue: nil)
+
+// Receive the multi-device event callback.
+extension ViewController: EMMultiDevicesDelegate {
+    func multiDevicesConversationEvent(_ event: EMMultiDevicesEvent, conversationId: String, conversationType: EMConversationType) {
+        switch event {
+        case .conversationMuteInfoChanged:
+            print("multiDevicesConversationEvent mute info changed")
+        default:
+            break
+        }
+    }
+}
+```
+
+### Clear the push notification mode setting of a conversation
+
+You can call `clearRemindTypeForConversation` to clear the push notification mode setting of a conversation. After it is cleared, this conversation inherits the app setting by default.
+
+```objectivec
+// Clear the push notification mode setting for the specified conversation. After it is cleared, the conversation inherits the app setting.
+// Asynchronous method.
+EMConversationType conversationType = EMConversationTypeGroupChat;
+[[EMClient sharedClient].pushManager clearRemindTypeForConversation:@"conversationId" conversationType:conversationType completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"clearRemindTypeForConversation error---%@",aError.errorDescription);
+    }
+}];
+```
 
 ## DND
 
-After initializing and successfully logging in to the SDK, configure DND globally at the app level or for a specified conversation. While DND is in effect, EasyIM does not send push notifications to offline users in the corresponding scope.
+After SDK initialization is completed and login succeeds, you can set the DND mode for the app globally or for specified one-to-one and group chat conversations. While the DND mode is in effect, EasyIM does not send push notifications to offline users within the corresponding scope.
 
-DND supports the following rule types:
+The Android SDK uses `EMSilentModeParam` to configure DND rules and supports the following two modes:
 
-- `DURATION` (one-time DND): Takes effect immediately after configuration and automatically ends when it expires. It is suitable when the user temporarily does not want to be disturbed.
-- `INTERVAL` (daily recurring DND): Configures a period that recurs daily, such as `23:00` to `07:00` the following day. It is suitable for a regular rest period.
+- `EMSilentModeParamTypeDuration` (one-time DND): Takes effect immediately after being set and automatically restores after expiration. This is suitable for scenarios where users temporarily do not want to be disturbed.
+- `EMSilentModeParamTypeInterval` (daily recurring DND): Sets a daily recurring time period, such as from `23:00` to `07:00` the next day. This is suitable for fixed rest periods.
 
-The following table describes the DND time parameters:
+The DND time parameters are described in the following table:
 
-| Rule mode | Parameter | Type | Description | Scope |
-| :--- | :--- | :--- | :--- | :--- |
-| `INTERVAL` | `startTime` and `endTime` | Object | Daily recurring DND period, using the 24-hour clock with minute-level precision in the format `{ hours, minutes }`. Value ranges: 0–23 for hours and 0–59 for minutes.<br/> - **Daily scheduled trigger**: After configuration, DND starts automatically during the specified period each day.<br/> - **Cross-day support**: If the end time is earlier than the start time, the period crosses midnight and continues from the start time on the current day to the end time on the next day. For example, 10:00–8:00 means that DND applies from 10:00 on the current day to 8:00 on the next day.<br/> - **All day and disable**: If the start and end times are the same, DND applies all day. Set 0:00–0:00 to disable DND.<br/> - **Single-period limit**: Only one daily DND period is supported. A new configuration overwrites the old configuration.<br/> - **Effective time**: The configuration takes effect immediately. For example, if 8:00–12:00 is configured at 11:00, it takes effect from 11:00 to 12:00 that day and then applies from 8:00 to 12:00 each day. | App-wide only. |
-| `DURATION` | `duration` | Int | One-time DND duration in minutes. The value range is `0`–`10080`, or 0 to 7 days, where `0` means that the parameter has no effect.<br/> - **Effective once**: Unlike a daily recurring DND period, this parameter applies once and begins counting down immediately after configuration.<br/> - **Example**: If `duration = 240` (4 hours) is configured at 8:00 AM, the app is in DND from 8:00 AM to 12:00 PM that day. | App-wide or for a specified one-to-one or group conversation. |
+| Rule mode | Configuration method | Type | Description | Scope |
+| :--------------------- | :------------------------------------------ | :----------------- | :----------------------------------------------------------- | :----------------------------- |
+| `EMSilentModeParamTypeInterval` | Set `silentModeStartTime` and `silentModeEndTime` | `EMSilentModeTime` | A daily recurring DND time period. It uses the 24-hour format and is accurate to the minute. The hour range of `startTime` and `endTime` is `0`-`23`, and the minute range is `0`-`59`.<br/> - **Triggered daily at the specified time**: After being set, DND is automatically entered every day during the specified time period.<br/> - **Cross-day support**: If the end time is earlier than the start time, the time period spans days. For example, `10:00`-`08:00` means DND is enabled from `10:00` of the current day to `08:00` of the next day.<br/> - **All-day and disabled**: If the start time is the same as the end time, it is considered all-day DND. When it is set to `00:00`-`00:00`, DND is disabled.<br/> - **Single time period limit**: Only one DND time period can be set per day. A new configuration overwrites the old one.<br/> - **Effective time**: The setting takes effect immediately. For example, if `08:00`-`12:00` is set at `11:00` of the current day, it takes effect from `11:00` to `12:00` on that day, and then follows `08:00`-`12:00` every day. | App global only. |
+| `EMSilentModeParamTypeDuration` | `Set `silentModeDuration`` | `Int` | One-time DND duration, in minutes. The value range is `0`-`10080` (0 to 7 days). `0` indicates that this parameter is invalid.<br/><br/> - **Valid once**: After this mode is set, timing starts immediately and is not triggered repeatedly by day.<br/> - **Effective example**: If `duration = 240` is set at `08:00`, DND is active from `08:00` to `12:00` on that day. | App global or specified one-to-one/group chat conversations. |
 
-**Combined behavior when `INTERVAL` and `DURATION` are both configured**
+**Superposition rules when `EMSilentModeParamTypeInterval` and `EMSilentModeParamTypeDuration` are both set**
 
-- Both apply on the current day, and overlapping time is not counted twice.
-- Starting the next day, only the DND period recurs daily. The DND duration is not triggered again.
+- On the current day, both settings **take effect in combination**, and overlapping time periods are not counted repeatedly.
+- Starting from the next day, only the daily recurring DND time period continues to take effect. The one-time DND duration is not triggered repeatedly.
 
-**Example**: At 8:00 AM, set `startTime/endTime` to 8:00–10:00 and `duration = 240` (4 hours). The result is:
+**Example**: Set the daily DND time period to `08:00`-`10:00` at `08:00`, and set `duration = 240` (4 hours) at the same time:
 
-- **Current day**: DND applies from 8:00 AM to 12:00 PM. The period setting covers 8:00–10:00, and the duration setting covers 10:00–12:00.
-- **Starting the next day**: DND applies from 8:00 AM to 10:00 AM each day. Only the period setting applies.
+- **Current day**: DND is active from `08:00` to `12:00`.
+- **Starting from the next day**: DND is active from `08:00` to `10:00` every day.
 
-**Relationship between push notification modes and DND**
+**Relationship between push notification mode and DND mode**
 
-DND has a higher priority than the push notification mode. For example, if a conversation's push notification mode is `ALL`, but the conversation is currently within a DND period or duration, you still do not receive offline push notifications for the conversation while DND is in effect.
+DND has a higher priority than push notification mode. For example, if the push notification mode of a conversation is set to `EMPushRemindTypeAll`, but the conversation currently matches the DND duration, or the app globally currently matches the DND time period, offline push notifications for this conversation are not received while DND is in effect.
 
-If one-time DND is configured only for a conversation and DND is not configured globally for the app, offline push notifications are not sent for that conversation while DND is in effect. Other conversations continue sending push notifications according to their own push notification modes or the inherited global setting.
+If only one-time DND is set for a conversation and no app-level DND is set, offline push notifications are not sent only for this conversation while DND is in effect. Other conversations still send push notifications according to their own push notification mode or inherited global settings.
+
+:::tip
+If you need to send offline push notifications to specified users while DND is in effect, you can set [force push](push_extension.html#force-push).
+:::
 
 ## Set global notification receiving rules
 
-Call `client.pushManager.setGlobalSilentMode` to set global notification receiving rules, and specify the rule type through `rule.mode`:
+You can call `setSilentModeForAll` to set app-level push notifications, and set the push notification mode and DND mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
 
-- `REMIND_TYPE`: Sets the push notification mode. Possible values are `ALL`, `AT`, and `NONE`.
-- `DURATION`: Sets a one-time DND duration.
-- `INTERVAL`: Sets a daily recurring DND period.
+```objectivec
+// Set the push notification mode to `EMPushRemindTypeMentionOnly`.
+EMSilentModeParam *remindTypeParam = [[EMSilentModeParam alloc] initWithParamType:EMSilentModeParamTypeRemindType];
+remindTypeParam.remindType = EMPushRemindTypeMentionOnly;
+// Set the app-level DND mode for offline push notifications.
+// Asynchronous method.
+[[EMClient sharedClient].pushManager setSilentModeForAll:remindTypeParam completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"setSilentModeForAll error---%@", aError.errorDescription);
+    }
+}];
 
-```typescript
-await client.pushManager.setGlobalSilentMode({
-  rule: {
-    mode: 'REMIND_TYPE',
-    remindType: 'ALL', // Can be set to `ALL`, `AT`, or `NONE`.
-  },
-});
+// Set the DND duration for offline push notifications to 15 minutes.
+EMSilentModeParam *durationParam = [[EMSilentModeParam alloc] initWithParamType:EMSilentModeParamTypeDuration];
+durationParam.silentModeDuration = 15;
+[[EMClient sharedClient].pushManager setSilentModeForAll:durationParam completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"setSilentModeForAll error---%@", aError.errorDescription);
+    }
+}];
 
-await client.pushManager.setGlobalSilentMode({
-  rule: {
-    mode: 'DURATION',
-    duration: 7200, // One-time DND duration.
-  },
-});
-
-await client.pushManager.setGlobalSilentMode({
-  rule: {
-    mode: 'INTERVAL', // Daily recurring DND period
-    startTime: {
-      hours: 8,
-      minutes: 0,
-    },
-    endTime: {
-      hours: 12,
-      minutes: 0,
-    },
-  },
-});
+// Set the DND period for offline push notifications from 08:30 to 15:00.
+EMSilentModeParam *intervalParam = [[EMSilentModeParam alloc] initWithParamType:EMSilentModeParamTypeInterval];
+intervalParam.silentModeStartTime = [[EMSilentModeTime alloc] initWithHours:8 minutes:30];
+intervalParam.silentModeEndTime = [[EMSilentModeTime alloc] initWithHours:15 minutes:0];
+[[EMClient sharedClient].pushManager setSilentModeForAll:intervalParam completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"setSilentModeForAll error---%@", aError.errorDescription);
+    }
+}];
 ```
 
-## Retrieve global notification receiving rules
+## Get global notification receiving rules
 
-Call `client.pushManager.getGlobalSilentMode` to retrieve the global offline push notification receiving settings, as shown in the following example:
+You can call `getSilentModeForAll` to get app-level push notification settings, as shown in the following example:
 
-```typescript
-const result = await client.pushManager.getGlobalSilentMode();
+```objectivec
+// Asynchronous method.
+[[EMClient sharedClient].pushManager getSilentModeForAllWithCompletion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (!aError) {
+        // Get the app-level push notification mode.
+        EMPushRemindType remindType = aResult.remindType;
+        // Get the Unix timestamp when the app-level DND setting for offline push notifications expires.
+        NSTimeInterval ex = aResult.expireTimestamp;
+        // Get the start time of the app-level DND period for offline push notifications.
+        EMSilentModeTime *startTime = aResult.silentModeStartTime;
+        EMSilentModeTime *endTime = aResult.silentModeEndTime;
+    }else{
+        NSLog(@"getSilentModeForAll error---%@",aError.errorDescription);
+    }
+}];
 ```
 
-## Retrieve the list of conversations with a configured push notification mode
+## Set notification receiving rules for a conversation
 
-Call `client.pushManager.getConversationListByRemindType` to retrieve the list of conversations with a configured push notification mode.
+You can call `setSilentModeForConversation` to set push notifications for a specified conversation, and set the push notification mode and DND mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
 
-[Push notification modes](#push-notification-modes) include the following three types:
-- **ALL**: Receive push notifications for all offline messages.
-- **AT**: Receive push notifications only for messages that mention the current user.
-- **NONE**: Do not receive push notifications for offline messages.
+```objectivec
+EMConversationType conversationType = EMConversationTypeGroupChat;
 
-In the SDK, this API uses pagination to filter the local conversation cache for conversations with a configured push notification mode. The SDK locally generates and returns the pagination cursor.
+// Set the push notification mode to `EMPushRemindTypeMentionOnly`.
+EMSilentModeParam *remindTypeParam = [[EMSilentModeParam alloc] initWithParamType:EMSilentModeParamTypeRemindType];
+remindTypeParam.remindType = EMPushRemindTypeMentionOnly;
+// Asynchronous method.
+[[EMClient sharedClient].pushManager setSilentModeForConversation:@"conversationId" conversationType:conversationType params:remindTypeParam completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"setSilentModeForConversation error---%@", aError.errorDescription);
+    }
+}];
 
-```typescript
-const result = await client.pushManager.getConversationListByRemindType({
-  // Number of conversations retrieved per page. The value range is [1,100], and the default is 10.
-  pageSize: 10,
-  // Pagination cursor. For the first request, omit it or pass `null` / `''` at runtime. For subsequent requests, pass the `cursor` from the previous result. If the returned `cursor` is empty, the last page has been reached. 
-  cursor: '',
-});
+// Set the DND duration for offline push notifications to 15 minutes.
+EMSilentModeParam *durationParam = [[EMSilentModeParam alloc] initWithParamType:EMSilentModeParamTypeDuration];
+durationParam.silentModeDuration = 15;
+[[EMClient sharedClient].pushManager setSilentModeForConversation:@"conversationId" conversationType:conversationType params:durationParam completion:^(EMSilentModeResult *aResult, EMError *aError) {
+    if (aError) {
+        NSLog(@"setSilentModeForConversation error---%@", aError.errorDescription);
+    }
+}];
 ```
 
-## Clear the push notification mode for a specified conversation
+## Retrieve notification receiving rules for a conversation
 
-Call `client.pushManager.clearConversationRemindType` to clear the push notification mode for a specified conversation. After it is cleared, the conversation inherits the global setting again by default.
+You can call `getSilentModeForConversation` to retrieve push notification settings for a specified conversation, as shown in the following example:
 
-Example code:
-
-```typescript
-const result = await client.pushManager.clearConversationRemindType({
-  conversationId: '12345', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'groupChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
-});
+```objectivec
+    [EMClient.sharedClient.pushManager getSilentModeForConversation:@"conversationId" conversationType:EMConversationTypeGroupChat completion:^(EMSilentModeResult * _Nullable aResult, EMError * _Nullable aError) {
+            if (aError == nil) {
+                // Get the push notification mode of the conversation.
+                EMPushRemindType remindType = aResult.remindType;
+                // Get the Unix timestamp when the conversation-level DND setting for offline push notifications expires.
+                NSTimeInterval ex = aResult.expireTimestamp;
+            }
+    }];
 ```
 
-## Set notification receiving rules for a specified conversation
+## Retrieve notification receiving rules for conversations in bulk
 
-Call `client.pushManager.setConversationSilentMode` to set the offline push notification receiving rules for a specified conversation, including the push notification mode, DND duration, or DND period, as shown in the following example.
+1. You can get settings for up to 20 conversations in each call.
 
-The SDK currently supports only `singleChat` and `groupChat` conversations, not `chatRoom`.
+2. If a conversation inherits the app settings or its push notification settings have expired, the returned dictionary does not contain this conversation.
 
-```typescript
-// Set the push notification mode for a conversation
-await client.pushManager.setConversationSilentMode({
-  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
-  rule: {
-    mode: 'REMIND_TYPE', // Push notification mode.
-    remindType: 'ALL', // Can be set to `ALL`, `AT`, or `NONE`.
-  },
-});
-// Set DND for a conversation
-await client.pushManager.setConversationSilentMode({
-  conversationId: '12345567',
-  conversationType: 'groupChat',
-  rule: {
-    mode: 'DURATION', // DND duration.
-    duration: 7200, // DND duration in milliseconds.
-  },
-});
+You can call `getSilentModeForConversations` to get push notification settings for multiple conversations, as shown in the following example:
 
-await client.pushManager.setConversationSilentMode({
-  conversationId: '12345',
-  conversationType: 'groupChat',
-  rule: {
-    mode: 'INTERVAL',
-    startTime: {
-      hours: 23,
-      minutes: 0,
-    },
-    endTime: {
-      hours: 7,
-      minutes: 30,
-    },
-  },
-});
+```objectivec
+NSArray *conversations = @[conversation1,conversation2];
+// Asynchronous method.
+    [[EMClient sharedClient].pushManager getSilentModeForConversations:conversations completion:^(NSDictionary<NSString*,EMSilentModeResult*>*aResult, EMError *aError) {
+        if (aError) {
+            NSLog(@"getSilentModeForConversations error---%@",aError.errorDescription);
+        }
+    }];
 ```
 
-## Retrieve push-receiving rules for a specified conversation
 
-Call `client.pushManager.getConversationSilentMode` to retrieve the offline-push notification receiving settings for a specified conversation, as shown in the following example:
 
-```typescript
-const result = await client.pushManager.getConversationSilentMode({
-  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
-});
-```
 
-## Retrieve push-receiving rules for conversations in bulk
-
-Call `client.pushManager.getConversationSilentModes` to retrieve the offline-push notification receiving rules for multiple conversations in bulk.
-
-Note the following when using this API:
-
-1. You can query up to 20 conversations per call.
-2. The result contains the push-notification receiving rule for each conversation in the input conversation list. If no individual rule is configured for a conversation, the global push-notification receiving rule is returned.
-
-Example code:
-
-```typescript
-const result = await client.pushManager.getConversationSilentModes({
-  conversationList: [
-    {
-      conversationId: 'test',  // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-      conversationType: 'singleChat',  // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
-    },
-    {
-      conversationId: '1234',
-      conversationType: 'groupChat',
-    },
-  ],
-});
-```
 
 ## API List
 
 | API name | Module/type | Description |
 | :--- | :--- | :--- |
-| [`setGlobalSilentMode`](#set-global-notification-receiving-rules) | `client.pushManager` | Sets global push notification and DND rules. |
-| [`getGlobalSilentMode`](#retrieve-global-notification-receiving-rules) | `client.pushManager` | Retrieves global push notification and DND rules. |
-| [`getConversationListByRemindType`](#retrieve-the-list-of-conversations-with-a-configured-push-notification-mode) | `client.pushManager` | Retrieves conversations with an explicitly configured push notification mode. |
-| [`clearConversationRemindType`](#clear-the-push-notification-mode-for-a-specified-conversation) | `client.pushManager` | Clears a conversation's push notification mode. |
-| [`setConversationSilentMode`](#set-notification-receiving-rules-for-a-specified-conversation) | `client.pushManager` | Sets push notification and DND rules for a conversation. |
-| [`getConversationSilentMode`](#retrieve-push-receiving-rules-for-a-specified-conversation) | `client.pushManager` | Retrieves push notification and DND rules for a conversation. |
-| [`getConversationSilentModes`](#retrieve-push-receiving-rules-for-conversations-in-bulk) | `client.pushManager` | Retrieves push notification and DND rules for multiple conversations. |
+| [`syncSilentModeConversationsFromServerCompletion:`](#retrieve-global-push-notification-mode-settings) | `IEMPushManager` | Synchronizes push notification mode settings for all conversations from the server. |
+| [`setSilentModeForConversation:conversationType:params:completion:`](#set-the-push-notification-mode-of-a-conversation) | `IEMPushManager` | Sets the push notification mode or DND rules for a conversation. |
+| [`clearRemindTypeForConversation:conversationType:completion:`](#clear-the-push-notification-mode-setting-of-a-conversation) | `IEMPushManager` | Clears the push notification mode setting of a conversation. |
+| [`setSilentModeForAll:completion:`](#set-global-notification-receiving-rules) | `IEMPushManager` | Sets global push notification mode and DND rules. |
+| [`getSilentModeForAllWithCompletion:`](#get-global-notification-receiving-rules) | `IEMPushManager` | Retrieves global push notification mode and DND rules. |
+| [`getSilentModeForConversation:conversationType:completion:`](#retrieve-notification-receiving-rules-for-a-conversation) | `IEMPushManager` | Retrieves push notification mode and DND rules for a conversation. |
+| [`getSilentModeForConversations:completion:`](#retrieve-notification-receiving-rules-for-conversations-in-bulk) | `IEMPushManager` | Retrieves push notification mode and DND rules for multiple conversations. |

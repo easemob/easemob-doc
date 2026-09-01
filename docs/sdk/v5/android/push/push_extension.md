@@ -1,6 +1,6 @@
 # Configure Push Extension Features
 
-You can use extension fields to implement custom push settings. This article uses force push and sending silent messages as examples to describe how to implement push extension features.
+You can use extension fields to implement custom push behavior, including force push and sending silent messages.
 
 For push extension fields, see [Offline push extension fields](/rest/push_extension.html).
 
@@ -98,7 +98,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 Sending a silent message means that the sender sets the message not to be pushed when sending it. That is, when the user is offline, the EasyIM service does not push a message notification to the user's device through a third-party vendor message push service. Therefore, the user does not receive a message push notification. When the user gets online again, the user receives all messages sent during the offline period.
 
-Both sending silent messages and Do Not Disturb mode result in no message push. The difference is that sending a silent message is set by the sender when sending a message, while Do Not Disturb mode is set by the recipient to not receive push notifications during a specified time period.
+Both sending silent messages and Do Not Disturb mode result in no message push. The difference is that a silent message is configured by the sender when sending it, whereas DND is configured by the recipient to not receive push notifications during a specified period.
 
 ```java
 // This example uses a text message. Other message types, such as image and file messages, are configured in the same way.

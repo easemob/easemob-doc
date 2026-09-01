@@ -44,8 +44,8 @@ For the data structure related to push templates, see [Push extension fields](/r
 
 After offline push templates are enabled, two templates, `default` and `detail`, are added to the **Template Management** page by default. If no custom push template is configured, the default template is automatically used when a message is pushed, and you do not need to pass in a template name when creating a message.
 
- - `default`: By default, the push title is **You have a new message**, and the push content is **Please tap to view**. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `SimpleBanner`, the default push template is `default`.
- - `detail`: By default, the push title is **You have a new message**, and the push content is the push nickname of the message sender and the message content. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `MessageSummary`, the default push template is `detail`.
+ - `default`: By default, the push title is **You've got a new message**, and the push content is **Please click to view**. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `SimpleBanner`, the default push template is `default`.
+ - `detail`: By default, the push title is **You've got a new message**, and the push content is the push nickname of the message sender and the message content. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `MessageSummary`, the default push template is `detail`.
 
 ![img](/images/console/push_template_default.png)
 
@@ -55,7 +55,7 @@ You can choose **More > Edit** in the **Actions** column to modify the push titl
 
 | Parameter | Type | Description |
 | :-------------- | :----- | :----- |
-| Title/content | Array | The parameters can be set in the following ways:<br/> - Enter fixed content. For example, set the title to **Hello** and the content to **You have a new message**. <br/> - Built-in parameter filling: 1. `{$dynamicFrom}`: Fills friend remarks, group nickname (group messages only), and push nickname in descending priority order. 2. `{$fromNickname}`: Push nickname. 3. `{$msg}`: Message content.<br/> - Custom parameter filling: Enter array index placeholders in the template. The format is: {0} {1} {2} ... {n} |
+| Title/content | Array | The parameters can be set in the following ways:<br/> - Enter fixed content. For example, set the title to **Hello** and the content to **You've got a new message**. <br/> - Built-in parameter filling: 1. `{$dynamicFrom}`: Fills friend remarks, group nickname (group messages only), and push nickname in descending priority order. 2. `{$fromNickname}`: Push nickname. 3. `{$msg}`: Message content.<br/> - Custom parameter filling: Enter array index placeholders in the template. The format is: {0} {1} {2} ... {n} |
 
 For the push title and content, the first two setting methods do not require this parameter to be passed in when creating a message. The third setting method requires the parameter to be passed in through the extension field.
 
@@ -215,7 +215,7 @@ message.setMessageStatusCallback(new EMCallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-## The message recipient uses a push template
+## Use a push template for the message recipient
 
 The message recipient can call `setPushTemplate` and pass in the push template name to select the template to use.
 

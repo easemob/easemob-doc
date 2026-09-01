@@ -29,7 +29,7 @@ To display message content in the notification bar, you need to set the notifica
 
 | Parameter value | Description |
 | :--------------- | :---------------------- |
-| (default) `EMPushDisplayStyleSimpleBanner` | Whether or not `displayName` is set, when any type of message is pushed, the notification bar uses the default display settings. That is, the push title is **You have a new message** and the push content is **Please tap to view**. |
+| (default) `EMPushDisplayStyleSimpleBanner` | Whether or not `displayName` is set, when any type of message is pushed, the notification bar uses the default display settings. That is, the push title is **You've got a new message** and the push content is **Please click to view**. |
 | `EMPushDisplayStyleMessageSummary` | `EMPushDisplayStyleMessageSummary`: Displays the message content. The configured nickname takes effect only when `EMPushDisplayStyle` is `EMPushDisplayStyleMessageSummary`, and does not take effect when `EMPushDisplayStyleSimpleBanner` is used. |
 
 The following table uses a **one-to-one text message** as an example to describe the display attribute settings.
@@ -38,9 +38,9 @@ For a **group chat**, the **push nickname of the message sender** and the **IM u
 
 | Parameter setting | Push display | Image |
 | :--------- | :----- |:------------- |
-| <br/> - `EMPushDisplayStyle`: (default) `EMPushDisplayStyleSimpleBanner`<br/> - `displayName`: set or not set | <br/> - Push title: **You have a new message**<br/> - Push content: **Please tap to view** | ![img](/images/android/push/push_displayattribute_1.png) |
-| <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: set to a specific value | <br/> - Push title: **You have a new message**<br/> - Push content: **Push nickname of the message sender: message content** | ![img](/images/android/push/push_displayattribute_2.png) |
-| <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: not set | <br/> - Push title: **You have a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png) |
+| <br/> - `EMPushDisplayStyle`: (default) `EMPushDisplayStyleSimpleBanner`<br/> - `displayName`: set or not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **Please click to view** | ![img](/images/android/push/push_displayattribute_1.png) |
+| <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: set to a specific value | <br/> - Push title: **You've got a new message**<br/> - Push content: **Push nickname of the message sender: message content** | ![img](/images/android/push/push_displayattribute_2.png) |
+| <br/> - `EMPushDisplayStyle`: `EMPushDisplayStyleMessageSummary`<br/> - `displayName`: not set | <br/> - Push title: **You've got a new message**<br/> - Push content: **IM user ID of the message sender: message content** | ![img](/images/android/push/push_displayattribute_3.png) |
 
 ## Retrieve notification display attributes
 

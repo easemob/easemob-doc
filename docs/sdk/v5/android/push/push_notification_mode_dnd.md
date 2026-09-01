@@ -179,7 +179,7 @@ EMClient.getInstance().pushManager().getSilentModeForAll(new EMValueCallBack<EMS
 });
 ```
 
-## Set notification receiving rules for a specified conversation
+## Set notification receiving rules for a conversation
 
 You can call `setSilentModeForConversation` to set push notifications for a specified conversation, and set the push notification mode and DND mode by specifying fields in `EMSilentModeParam`, as shown in the following example:
 

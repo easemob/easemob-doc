@@ -30,7 +30,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
         "apnsId":"7d988394-XXXX-XXXX-2b9f-e7a13a92fb96",
         "pushNotification":{
             "expiration":1656484422884,
-            "payload":"{\"t\":\"wzy_apns\",\"aps\":{\"badge\":1,\"alert\":{\"body\":\"Please click to view\",\"title\":\"You have a new message\"},\"sound\":\"ring.caf\"},\"e\":{\"em_push_sound\":\"ring.caf\"},\"f\":\"wzy_vivo\",\"m\":\"626473521765161477\"}",
+            "payload":"{\"t\":\"wzy_apns\",\"aps\":{\"badge\":1,\"alert\":{\"body\":\"Please click to view\",\"title\":\"You've got a new message\"},\"sound\":\"ring.caf\"},\"e\":{\"em_push_sound\":\"ring.caf\"},\"f\":\"wzy_vivo\",\"m\":\"626473521765161477\"}",
             "priority":"IMMEDIATE",
             "token":"XXXX",
             "topic":"com.easemob.XXXX.easeim"

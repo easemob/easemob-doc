@@ -28,7 +28,7 @@ Data structure of the custom user information in the push notification:
 {
     "aps":{
         "alert":{
-            "body":"You have a new message"
+            "body":"You've got a new message"
         },   
         "badge":1,               
         "sound":"default"   

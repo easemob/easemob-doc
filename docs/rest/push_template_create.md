@@ -44,7 +44,7 @@ For details about the `Content-Type` and `Authorization` fields, see [Request he
 | `content_pattern` | String | Custom push content, for example, Content {0}, {1}. | Yes       |
 
 You can set `title_pattern` and `content_pattern` in the following ways:
-- Enter fixed content. For example, set the title to "Hello" and the content to "You have a new message."
+- Enter fixed content. For example, set the title to "Hello" and the content to "You've got a new message."
 - Use built-in parameters:
   - `{$dynamicFrom}`: Fills in friend remarks, the [group member nickname](push_template_send_message.html), or the push nickname, in descending order of priority.
   - `{$fromNickname}`: Push nickname.  
