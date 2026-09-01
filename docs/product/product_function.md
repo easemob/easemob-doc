@@ -65,7 +65,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | Send and receive streaming messages. Streaming messages can be sent through a server-side API, while the SDK supports only receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
 | Message search  | Search for all message types in server-side and local conversations by keyword.     |

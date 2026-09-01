@@ -23,19 +23,19 @@ import path from 'node:path'
 // const defineDocSearchConfig: (options: DocSearchClientOptions) => void
 
 const HOME_PATH = '/'
-const HOME_TITLE = 'IM集成_IM开发文档_即时通讯接入_即时通信IM文档_环信'
+const HOME_TITLE = 'IM Integration_IM Development Doc_Instant Messaging Integration_EasyIM Documentation_EasyIM'
 const HOME_KEYWORDS =
-  'IM集成,环信IM开发文档,即时通信IM开发文档,即时通讯接入,即时通信IM文档'
+  'IM Integration, Instant Messaging Integration, EasyIM Development Documentation, Instant Messaging Development Documentation, Instant Messaging Access, EasyIM Documentation'
 const HOME_DESCRIPTION =
-  '环信IM文档为您提供即时通讯IM集成全流程详解，涵盖从快速开始到深度功能开发，帮助开发者高效实现应用内即时通信IM需求。'
-const INNER_PAGE_TITLE_PREFIX = '即时通讯IM开发 '
-const INNER_PAGE_TITLE_SUFFIX = '｜环信IM文档'
+  'The EasyIM documentation guides you through the complete EasyIM integration process. From quick-start guides to advanced feature development, it helps developers easily implement in-app messaging.'
+const INNER_PAGE_TITLE_PREFIX = 'EasyIM Development '
+const INNER_PAGE_TITLE_SUFFIX = '｜EasyIM Documentation'
 const SEO_META_NAMES = new Set(['description', 'keywords'])
 
 const sanitizeTitle = (title: string): string =>
   title
-    .replace(/^即时通讯IM开发\s*/u, '')
-    .replace(/\s*[|｜]\s*环信IM文档$/u, '')
+    .replace(/^EasyIM Development\s*/u, '')
+    .replace(/\s*[|｜]\s*EasyIM Documentation$/u, '')
     .trim()
 
 const createSeoHead = ({
@@ -78,9 +78,9 @@ const mergeSeoHead = (
 export default defineUserConfig({
   base: '/',
   lang: 'en-US',
-  title: 'IM 文档',
+  title: 'EasyIM Documentation',
   head: [['link', { rel: 'icon', href: '/logo.png' }]],
-  description: '环信 IM 文档',
+  description: 'EasyIM Documentation',
   shouldPrefetch: false,
   bundler: viteBundler({
     viteOptions: {
