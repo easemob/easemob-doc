@@ -30,6 +30,7 @@ The cloud storage duration depends on your subscribed plan. For details, see [Pl
 
 - Free: Supports up to 3 days. To increase the limit, click **Upgrade** to upgrade to the professional or flagship plan.
 - Professional/flagship: Supports up to 7/90 days. To increase the limit, click **Buy Now** and pay separately to extend the storage duration.
-  Each additional 30 days costs CNY 500. You can purchase multiple units. For example, selecting 10 units extends the message cloud storage duration by 300 days (30 days x 10).
+
+For the fee details, see the [Pricing Policy](pricing_policy.html).
 
 ![img](/images/console/basic_chatroom_message_duration.png)  
