@@ -34,7 +34,7 @@ await client.pushManager.uploadPushToken({
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
 3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable for free**.
+4. Click **Enable Free**.
 
 ![image](/images/android/push/push_advanced_feature_enable.png)
 
@@ -69,7 +69,7 @@ For push-template configuration and usage, see [Push Templates](push_template.ht
 
 ## Multi-device offline push policy
 
-For multi-device login, configure the push policy on the **Certificate Management** page in the [EasyIM Console](https://console.easyim.ai/user/login). The policy applies to all push channels:
+For multi-device login, configure the push policy on the **Certificates** page in the [EasyIM Console](https://console.easyim.ai/user/login). The policy applies to all push channels:
 
 - Send push messages only when all devices are offline.
 - Send push messages when any device is offline.

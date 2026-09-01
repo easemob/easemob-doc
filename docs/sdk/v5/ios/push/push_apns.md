@@ -118,21 +118,21 @@ Upload the APNs push certificate in [EasyIM Console](https://console.easyim.ai/u
 
 3. Select **Push** in the left navigation pane.
 
-3. On the **Certificate Management** page, click **Add push certificate**. In the **Add push certificate** dialog box, select the **Apple** tab and configure the APNs push parameters.
+3. On the **Certificates** page, click **Add Push Certificate**. In the **Add Push Certificate** dialog box, select the **Apple** tab and configure the APNs push parameters.
 
 ![img](/images/console/push_certificate_apns.png)
 
 | Parameter | Type | Required | Description |
 | :--------- | :----- | :------- | :----------------------- |
-| Certificate type |  | Yes | The message push certificate type. Currently, **p8** and **p12** are supported. |
-| Certificate name | String | Yes | The message push certificate name. For details, see the message push certificate name created in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate) in the APNs integration guide. |
-| Push key | String | No | The message push certificate key. Enter the certificate key that you set when exporting the message push certificate file in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate). This parameter is required only when you use a p12 certificate. |
-| Upload file | File | Yes | Click **Upload certificate** to upload the push certificate file. For details, see the message push certificate file obtained in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate) in the APNs integration guide. |
-| key id | String | Yes | Enter the Key ID of the push certificate. This parameter is valid only for p8 certificates. |
-| team id | String | Yes | Enter the Team ID of the push certificate. This parameter is valid only for p8 certificates. |
-| Integration environment | | Yes | The integration environment, including the development environment and the production environment. |
+| Certificate Type |  | Yes | The message push certificate type. Currently, **p8** and **p12** are supported. |
+| Certificate Name | String | Yes | The message push certificate name. For details, see the message push certificate name created in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate) in the APNs integration guide. |
+| Push Key | String | No | The message push certificate key. Enter the certificate key that you set when exporting the message push certificate file in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate). This parameter is required only when you use a p12 certificate. |
+| Upload Certificate | File | Yes | Click **Upload** to upload the push certificate file. For details, see the message push certificate file obtained in [Step 4](#step-4-generate-the-push-certificate) of [Create a push certificate](#create-a-push-certificate) in the APNs integration guide. |
+| Key ID | String | Yes | Enter the Key ID of the push certificate. This parameter is valid only for p8 certificates. |
+| Team ID | String | Yes | Enter the Team ID of the push certificate. This parameter is valid only for p8 certificates. |
+| Integration Environment | | Yes | The integration environment, including the development environment and the production environment. |
 | Bundle ID | String | Yes | The bundle ID. For details, see the Bundle ID that you set when creating the App ID in [Step 2](#step-2-create-an-app-id) of [Create a push certificate](#create-a-push-certificate) in the APNs integration guide.<br/> - When you upload a VoIP service certificate, add the `.voip` suffix to the Bundle ID, such as `nvyvtp.dabaoiian`. For example, if the **Bundle ID** is **com.example.demo**, enter **com.example.demo.voip** when uploading the corresponding VoIP certificate. |
-| Ringtone | String | No | The ringtone reminder when the recipient gets the push notification. This parameter is valid only for offline push:<br/> - The ringtone can be up to 30 seconds long. If it exceeds this time, the system uses the default ringtone `default`.<br/> - Only aiff, wav, and caf files are supported. For example, the ringtone file name can be `test.caf`.<br/> - If the ringtone file is not found or left blank, the system uses the default ringtone. |
+| Sound | String | No | The ringtone reminder when the recipient gets the push notification. This parameter is valid only for offline push:<br/> - The ringtone can be up to 30 seconds long. If it exceeds this time, the system uses the default ringtone `default`.<br/> - Only aiff, wav, and caf files are supported. For example, the ringtone file name can be `test.caf`.<br/> - If the ringtone file is not found or left blank, the system uses the default ringtone. |
 
 ## **Integrate APNs on the client**
 
@@ -204,7 +204,7 @@ To ensure reliable test results, avoid using an emulator.
 In the left navigation pane, select **Operation** > **IM Admin**. On the **Users** page, click **More** in the **Actions** column for the corresponding user ID, then select **Send rest message**. In the dialog box that appears, select the message type, enter the message content, and click **Send**.
 
   :::tip
-  In the certificate list on the **Certificate Management** page, click **More** > **Test** in the **Actions** column for each certificate. This directly calls the third-party API to push notifications, while the message-sending test on the **User Management** page first calls the EasyIM API for sending messages. If the conditions are met, namely the user is offline, the push certificate is valid, and the device token is bound, the third-party API is then called to push notifications.
+  In the certificate list on the **Certificates** page, click **More** > **Test** in the **Actions** column for each certificate. This directly calls the third-party API to push notifications, while the message-sending test on the **User Management** page first calls the EasyIM API for sending messages. If the conditions are met, namely the user is offline, the push certificate is valid, and the device token is bound, the third-party API is then called to push notifications.
   :::
 
 1. Check whether the device receives the push notification.

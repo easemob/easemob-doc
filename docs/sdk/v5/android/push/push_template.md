@@ -25,7 +25,7 @@ Push templates have the following characteristics:
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
 3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable for free**.
+4. Click **Enable Free**.
 
 After activation, you can [set push templates](#set-push-templates).
 
@@ -195,13 +195,13 @@ try {
     // Set the push template name. If not specified, the default push template information is set.
     pushObject.put("name", "push");
     // Set the value array used to fill the template title.
-    titleArgs.put("You");
-    titleArgs.put("message,");
+    titleArgs.put("You've");
+    titleArgs.put("a new message,");
     //...
     pushObject.put("title_args", titleArgs);
     // Set the value array used to fill the template content.
     contentArgs.put("Please");
-    contentArgs.put("check");
+    contentArgs.put("view");
     //...
     pushObject.put("content_args", contentArgs);
 } catch (JSONException e) {
