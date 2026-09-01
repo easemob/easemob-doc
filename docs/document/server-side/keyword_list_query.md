@@ -244,8 +244,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/moderation/text/list/search' \
 | - `scope` | String | 关键词名单的生效范围。  |
 | - `tagId` | String | 标签 ID。 |
 | - `fullMatch` | Boolean | 关键词与消息内容是否要精确匹配。 |
-| - `suggestion` | String | 对匹配关键词的消息内容的处理建议。该字段的值以及值的含义与 `disposition` 字段相同。  |
-| - `disposition` | String | 对匹配关键词的消息内容的处理。  |
+| - `suggestion` | String | 对匹配关键词的消息内容的处理建议：<br/> - `PASS`：通过 <br/> - `REVIEW`：疑似 <br/> - `REJECT`：拒绝  |
+| - `disposition` | String | 对匹配关键词的消息内容的处理。<br/> - `PASS`：通过 <br/> - `REJECT`：拒绝 <br/> - `EXCHANGE`：替换 <br/> - `RECALL`：撤回  |
 | - `quantity` | Int | 名单中关键词的总数量。 |
 | - `status` | String | 关键词名单的状态：<br> - `ACTIVE`：开启<br> - `CLOSE`：关闭 |
 | - `createDataTime` | Long | 关键词名单的创建时间。|
