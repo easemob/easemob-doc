@@ -44,12 +44,12 @@ For a description of the `Authorization` field, see [Request header fields](over
   "duration": 0,
   "entities": [
     {
-      "name": "群组名称",
+      "name": "group name",
       "avatar": "https://www.XXXX.com/XXX/image",
-      "owner": "群组管理员",
+      "owner": "group admin",
       "id": "2XXXX1",
       "groupId": "2XXXX1",
-      "description": "群组描述",
+      "description": "group description",
       "disabled": false,
       "public": false,
       "allowinvites": false,

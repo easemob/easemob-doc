@@ -40,8 +40,8 @@ For a description of the `Authorization` field, see [Request header fields](over
     "name": "test7",
     "createAt": 1646989584124,
     "updateAt": 1646989584124,
-    "title_pattern": "你好,{0}",
-    "content_pattern": "推送测试,{0}"
+    "title_pattern": "Hello,{0}",
+    "content_pattern": "Push test,{0}"
   },
   "duration": 11,
   "applicationName": "XXXX"

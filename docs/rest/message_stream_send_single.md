@@ -65,7 +65,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
     "from": "111",
     "to": "222",
     "body": {
-        "msg": "第一个分片",
+        "msg": "first chunk",
         "seq": 0,
         "type": "markdown"
     },
@@ -86,7 +86,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
     "to": "222",
     "body": {
         "msgId": "1499696395467098072",
-        "msg": "第二个分片",
+        "msg": "second chunk",
         "seq": 1,
         "finish": false,
         "finishReason": 0,

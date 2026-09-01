@@ -156,9 +156,9 @@ When the following message search APIs search different message types, the `keyw
 | Voice message | `EMVoiceMessageBody#displayName` | The voice file name, "audio.amr." |
 | Video message | `EMVideoMessageBody#displayName` | The video file name, "video.mp4." |
 | File message | `EMFileMessageBody#displayName` | The file name, "report.pdf." |
-| Location message | `EMLocationMessageBody#address 和 EMLocationMessageBody#buildingName` | The address or building name, "Chaoyang District, Beijing" or "China World Trade Center." |
+| Location message | `EMLocationMessageBody#address and EMLocationMessageBody#buildingName` | The address or building name, "Chaoyang District, Beijing" or "China World Trade Center." |
 | Custom message | `EMCustomMessageBody#event` | The custom event name, "gift." |
-| Combined message | `EMCombineMessageBody#title 和 EMCombineMessageBody#summary` | The title or summary, "Chat history" or "Contains 5 messages." |
+| Combined message | `EMCombineMessageBody#title and EMCombineMessageBody#summary` | The title or summary, "Chat history" or "Contains 5 messages." |
 
 ### Search extensions only
 

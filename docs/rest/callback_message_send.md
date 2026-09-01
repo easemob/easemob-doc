@@ -296,10 +296,10 @@ The following example shows the `payload` format of a combined message containin
                 "combineLevel": 1,
                 "file_length": 1059,
                 "filename": "17326799853580001",
-                "msg": "当前版本过低，无法展示对应内容。",
+                "msg": "Version too low to show this content.",
                 "secret": "CeycYKx0Ee-I3fU0d5v4X9BduteO1RZNVsePAgkDQ9sxoVJM",
                 "subType": "sub_combine",
-                "summary": "wzy1: 你在哪里？\nwzy1: 你在哪里？\nwzy1: 你在哪里？",
+                "summary": "wzy1: where are you？\nwzy1: where are you？\nwzy1: where are you？",
                 "title": "Chat History",
                 "type": "txt",
                 "url": "https://a1-hsb.easemob.com/easemob-demo/testy/chatfiles/09ec7550-ac74-11ef-83ce-4719989e3c82"
@@ -307,7 +307,7 @@ The following example shows the `payload` format of a combined message containin
         ],
         "ext": {
             "ease_chat_uikit_user_info": {
-                "nickname": "公子小白有点黑"
+                "nickname": "red"
             }
         },
         "from": "user1",

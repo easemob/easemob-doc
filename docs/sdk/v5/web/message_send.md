@@ -1164,7 +1164,7 @@ await client.chatManager.sendMessage(message);
 | :--------------- | :--------------------- | :-------- | :--------------- | :----------------------------------------------- |
 | `title`          | String                 | Required      | Forward chat history     | Combined message title.                                   |
 | `summary`        | String                 | Required      | Chat history preview     | Combined message summary, generally used for list previews.             |
-| `compatibleText` | String                 | Optional      | Compatibility display         | Compatibility text. If omitted, the SDK uses `[版本过低]` by default. |
+| `compatibleText` | String                 | Optional      | Compatibility display         | Compatibility text. If omitted, the SDK uses `[Outdated version]` by default. |
 | `messageList`    | `ReadonlyArray<Message>` | Required      | Package and forward multiple messages | List of original messages to combine.                           |
 
 #### Logic
