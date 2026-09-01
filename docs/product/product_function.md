@@ -1,6 +1,6 @@
 # Key Features
 
-EasyIM supports message management, user management, offline push, and content moderation.
+EasyIM supports message management, user management, and offline push.
 
 ## Multi-platform support
 
@@ -10,20 +10,11 @@ EasyIM supports Android, iOS, Web, and other platforms, with interoperability ac
 SDK V5.0.0 currently fully supports Android, iOS, Web, and Mini Program. More platform versions will be officially released soon. Stay tuned for updates.
 :::
 
-| Platform     | Version supported by the SDK      | Source code | One-to-one and group chat UIKit | Chat room UIKit |
-| ------------ | ------- | ------- | ------- | ------- | ------- |
-| Android      | Android 5.0 or later (API level 21 or later)   |  - | Supported | Supported |
-| iOS          | iOS 10.0 or later     | - | Supported | Supported |
-| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | - | Supported | Supported |
-| Mini Program        | Supported   | - | - | - |
-| uni-app        | Supported  |  - | Supported | - |
-| HarmonyOS        | HarmonyOS NEXT (API level 12 or later)   | - | Supported | - |
-| Flutter      | Flutter 2.10   | - | Supported | Supported |
-| React Native | React Native 0.63.4 or later  | - | Supported | Supported |
-| Unity        | Unity 2017 or later | - | - | - |
-| Windows      | Windows 10 or later |  - | - | - |
-| Electron      | Supported |  - | - | - |
-| Linux      | Supported | - | - | - |
+| Platform     | Version supported by the SDK      |
+| ------------ | ------- |
+| Android      | Android 5.0 or later (API level 21 or later)   | 
+| iOS          | iOS 10.0 or later     |
+| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | 
 
 ## Account features
 

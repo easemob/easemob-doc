@@ -8,8 +8,8 @@ EasyIM is billed monthly. On the first day of each month, the charges for the pr
 
 EasyIM uses the following billing methods:
 
-- **Prepaid**: One-time payment at the time of purchase. This applies to plans, plan add-ons, and value-added services.
-- **Postpaid**: Billed monthly, with charges deducted on the 1st day of the following month. This applies to overage fees for plans and value-added services.
+- **Prepaid**: One-time payment at the time of purchase. This applies to plans, plan and add-ons services.
+- **Postpaid**: Billed monthly, with charges deducted on the first day of the following month. This applies to overage fees for plans.
 
 ## Basic services
 
