@@ -10,7 +10,7 @@ Before you start, make sure that the following requirements are met:
 
 - The SDK is initialized and the user is logged in successfully. For details, see [Quickstart](quickstart.html).
 - The user is logged in and connected to the EasyIM server.
-- You understand the API call frequency limits and the limits on the number of chat groups and chat group members. For details, see [Usage limits](/product/limitation.html).
+- You understand the API call frequency limits and the limits on the number of chat groups and chat group members. For details, see [IM feature limits](/product/limitation.html).
 
 ## Retrieve chat group details
 

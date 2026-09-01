@@ -16,7 +16,7 @@ Forwarding creates and sends a new message. The new message has its own message 
 Before you start, make sure that the following requirements are met:
 
 - Initialize the SDK. For details, see [Quickstart](quickstart.html).
-- Understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- Understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Forward a single message
 

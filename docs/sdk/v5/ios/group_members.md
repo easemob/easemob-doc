@@ -8,7 +8,7 @@ This document describes how to use the EasyIM iOS SDK to manage chat group membe
 
 - The SDK has been initialized and the user has logged in successfully. See [SDK initialization](initialization.html).
 - You understand chat group member roles and permissions. See [Chat Group Overview](group_overview.html).
-- You understand the limits on the number of chat group members, API call frequency, and member attribute size. See [Usage limits](/product/limitation.html).
+- You understand the limits on the number of chat group members, API call frequency, and member attribute size. See [IM feature limits](/product/limitation.html).
 
 ## Retrieve the chat group member list
 

@@ -28,7 +28,7 @@ The SDK logs in with a user ID and EasyIM token. When calling `loginWithUsername
 
 In a test environment, after you create users in the [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. See [Create Users](/product/console/operation_user.html#create-a-user).
 
-In a production environment, we recommend integrating the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) into your app server. The client retrieves a user token from your app server and then logs in to the SDK.
+In a production environment, you are advised to integrate the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) into your app server. The client retrieves a user token from your app server and then logs in to the SDK.
 
 ```objectivec
 [[EMClient sharedClient] loginWithUsername:userId

@@ -36,7 +36,7 @@ The SDK logs in using a user ID and user token. When calling `client.login`, pas
 
 In a test environment, after you create users in the [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create users](/product/console/operation_user.html#create-a-user).
 
-For a production environment, we recommend integrating the [Get an App Token API](/rest/easemob_app_token.html) and [Get a User Token API](/rest/easemob_user_token.html) on your app server. The client then retrieves the user token from your app server before logging in to the SDK.
+For a production environment, you are advised to integrate the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) on your app server. The client then retrieves the user token from your app server before logging in to the SDK.
 
 ```typescript
 const client = ChatClient.init({
@@ -52,7 +52,7 @@ await client.login({
 Note the following when logging in:
 
 - `userId` and `token` are required.
-- We recommend registering a connection event listener before calling `login` so that you can receive connection-success, disconnection, and token-lifecycle events.
+- You are advised to register a connection event listener before calling `login` so that you can receive connection-success, disconnection, and token-lifecycle events.
 - If the SDK is connecting or already connected, another call to `login` fails.
 - To switch users, call `logout` to log out the current user before logging in with the new user ID and token.
 

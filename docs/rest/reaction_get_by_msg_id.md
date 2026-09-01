@@ -6,7 +6,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 - This method retrieves Reaction information for one or more messages by message ID in a one-to-one or group chat. The information includes the Reaction ID, the emoji ID used, the IDs of users who used the Reaction, and the number of those users.
 - The retrieved Reaction user list displays only the first three users who added the Reaction.
-- For detailed Reaction usage limits, see [Product usage limits](limitation.html).
+- For detailed Reaction usage limits, see [IM feature limits](limitation.html).
 
 ## Feature activation
 

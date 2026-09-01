@@ -5,7 +5,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 ## Feature overview
 
 - This API retrieves the corresponding Reaction information by the specified message ID and emoji ID, including the IDs and number of users who used the Reaction.
-- For detailed Reaction usage limits, see [Product usage limits](limitation.html).
+- For detailed Reaction usage limits, see [IM feature limits](limitation.html).
 
 ## Feature activation
 

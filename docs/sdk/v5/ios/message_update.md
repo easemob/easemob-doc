@@ -11,7 +11,7 @@ Local message updates apply only to the current device. They do not modify messa
 Before you start, make sure that the following requirements are met:
 
 - The SDK is initialized and connected to the server. For details, see [Quickstart](quickstart.html).
-- You understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- You understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Update a message in the local database
 
