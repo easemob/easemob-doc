@@ -27,7 +27,7 @@ In the following two cases, EasyIM does not send offline push notifications:
 
 The complete message push flow is as follows:
 
-1. User B, the message receiver, detects the push channels supported by the device, that is, the configured third-party push service types and their usage conditions.
+1. User B, the message recipient, detects the push channels supported by the device, that is, the configured third-party push service types and their usage conditions.
 2. User B requests a push token from the third-party push server through the configured third-party push SDK.
 3. The third-party push server returns a push token to user B.
 4. User B uploads the push certificate name and push token to the EasyIM server.
@@ -49,7 +49,7 @@ For detailed steps on how to get a push token and upload it to the EasyIM server
 
 ### Feature activation
 
-[Push notification mode](push_notification_mode_dnd.html#push-notification-mode), [Do Not Disturb mode](push_notification_mode_dnd.html#do-not-disturb-mode), and [push templates](push_template.html) are advanced push features. Before using them, you need to enable the related services for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
+[Push notification mode](push_notification_mode_dnd.html#push-notification-mode), [Do Not Disturb mode](push_notification_mode_dnd.html#dnd), and [push templates](push_template.html) are advanced push features. Before using them, you need to enable the related services for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
 
 Follow these steps:
 
@@ -81,7 +81,7 @@ After SDK initialization is completed and the app is successfully logged in, you
 - Supports enabling all-day Do Not Disturb or completely disabling Do Not Disturb mode.
 - If you need to push messages to specified users in Do Not Disturb mode, you can set force push.
 
-For more details, see [Introduction to Do Not Disturb mode](push_notification_mode_dnd.html#do-not-disturb-mode).
+For more details, see [Introduction to Do Not Disturb mode](push_notification_mode_dnd.html#dnd).
 
 ### Push templates
 

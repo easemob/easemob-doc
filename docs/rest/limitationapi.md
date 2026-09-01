@@ -27,7 +27,9 @@ The following tables list the server-side APIs whose call frequency limits can b
 
 The size of one add-on package is the amount by which the frequency is increased per adjustment. For example, the default call frequency limit of the file upload API is 100 calls/second/App Key, and one add-on package provides 100 calls/second. After purchasing one add-on package, the API call frequency limit increases to 200 calls/second/App Key.
 
-Each add-on package costs CNY 200/month in China and CNY 400/month outside China.
+:::tip
+Each add-on package costs $56/month.
+:::
 
 ## Message management
 

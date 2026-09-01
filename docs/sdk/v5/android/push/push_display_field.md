@@ -1,4 +1,4 @@
-# Use the Message Extension Field to Set Push Notification Content
+# Set Notification with Message Extensions
 
 When sending a message, you can set custom push display content through the fixed message extension field `em_push_ext`. The value of this field is a `JSONObject`, in which `title` and `content` are used to set the push title and push content respectively.
 
@@ -40,7 +40,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 | Parameter | Description |
 | :--- | :--- |
-| `toChatUsername` | The user ID of the receiver of the one-to-one message. In group chat or chat room scenarios, set the corresponding group or chat room ID and set the message conversation type. |
+| `toChatUsername` | The user ID of the recipient of the one-to-one message. In group chat or chat room scenarios, set the corresponding group or chat room ID and set the message conversation type. |
 | `em_push_ext` | The fixed message extension field used to customize push display content. The value is a `JSONObject`. |
 | `title` | The fixed JSON key in `em_push_ext` used to set the custom push title. |
 | `content` | The fixed JSON key in `em_push_ext` used to set the custom push content. |

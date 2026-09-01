@@ -372,7 +372,7 @@ For example, in the login ID `alice/android_xxx`, `alice` is the user ID and `an
 
 ## More
 
-### Notification when logging in to a banned account
+#### Notification when logging in to a banned account
 
 If a user account has been disabled through EasyIM Console or a REST API, calling `EMClient#loginWithToken` triggers `EMCallBack#onError` and returns `EMError#SERVER_SERVICE_RESTRICTED` (305). This error code indicates that the EasyIM service or a feature of the current app is restricted. Handle it according to the service configuration and error information returned by the server. Do not rely on error text such as `"service is disabled"`.
 

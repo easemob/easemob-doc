@@ -1,4 +1,4 @@
-# EasyIM Plan Feature Comparison
+# EasyIM Plan Comparison
 
 EasyIM offers **Free**, **Professional**, and **Flagship** plans for different stages of business growth. The following table provides a complete comparison to help you select the plan that best fits your requirements.
 
@@ -872,27 +872,10 @@ EasyIM offers **Free**, **Professional**, and **Flagship** plans for different s
 </tr>
 <tr>
 <td width="216">
-<p>Developer tools</p>
+<p>Increased server API call limits</p>
 </td>
 <td width="224">
-<p>Request quality monitoring</p>
-</td>
-<td width="224">
-<p>&mdash;</p>
-</td>
-<td width="229">
-<p>Contact your business manager</p>
-</td>
-<td width="332">
-<p>Contact your business manager</p>
-</td>
-</tr>
-<tr>
-<td width="216">
-<p>Increased Server API call limits</p>
-</td>
-<td width="224">
-<p>Increase RESTful Server API call limits</p>
+<p>Increase RESTful API call limits</p>
 </td>
 <td width="224">
 <p>&mdash;</p>

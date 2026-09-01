@@ -16,7 +16,7 @@ You can subscribe to or upgrade a plan in either of the following ways.
    
    ![img](/images/console/package_purchase.png)
 
-5. Complete the configuration on the **Activate Service Plan** page, and then click **Next**.
+5. Complete the configuration on the **Activate Service Plan** page, and then click **Next** or **Free Trial**.
    
    - **Confirm the App Key**: The App Key cannot be changed after purchase.
    - **Select a service plan**: You can upgrade the Free plan to the Professional to the Flagship plan. You can upgrade the Professional plan to the Flagship plan.
@@ -29,11 +29,7 @@ You can subscribe to or upgrade a plan in either of the following ways.
 
    ![img](/images/console/package_price.png)
 
-6. In the **Payment Confirmation** dialog box, verify the order, read and agree to the **Service Purchase Agreement**, and click **Pay Now**.
-
-![img](/images/console/package_pay.png)
-
-7. After the purchase succeeds, click **View Bill** or **Close**.
+6. After the purchase succeeds, click **View Bill** or **Close**.
 
 ![img](/images/console/package_pay_finish.png)
 

@@ -1,4 +1,4 @@
-# Add Chat Group Members in Bulk
+# Bulk Add Chat Group Members
 
 ## Feature overview
 

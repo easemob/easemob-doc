@@ -35,7 +35,7 @@ starter:
         text: CallKit
         hidden: true
   - title: "Integrate with MCP"
-    desc: "The Easemob MCP Server enables MCP-compatible AI coding tools to search EasyIM documentation and source code."
+    desc: "The EasyIM MCP Server enables MCP-compatible AI coding tools to search EasyIM documentation and source code."
     platform:
       - icon: /guide/sdk.svg
         link: /sdk/v5/android/easemob_mcp_server.html
@@ -135,7 +135,7 @@ starter:
         text: 实时音视频
       - icon: /sdk/instant.svg
         link: /value-added/push/push_overview.html
-        text: 即时推送
+        text: Instant Push
       - icon: /sdk/translation.svg
         link: /value-added/translation/message_translation_android.html
         text: 消息翻译
@@ -146,13 +146,13 @@ starter:
         link: /value-added/search/message_search_android.html
         text: 语音转文字    
 projects:
-  - title: SDK/服务端功能
+  - title: SDK and Server API Features
     features:
-      - title: 消息和会话
+      - title: Messages and Conversations
         icon: /feature/message.svg
         contexts:
-          - text: 发送消息
-            desc: 在单聊、群聊和聊天室中发送各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
+          - text: Send Messages
+            desc: "Send various message types in one-to-one chats, group chats, and chat rooms, including text, image, voice, video, file, location, command, custom, and combined messages."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -161,7 +161,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_send.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_send.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -178,20 +178,17 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_send.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#发送消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_single.html
-          - text: 发送流式消息
-            desc: 可通过调用 RESTful API 在单聊和群聊场景中发送流式消息。
+          - text: Send Streaming Messages
+            desc: "Send streaming messages in one-to-one and group chats through RESTful APIs."
             sdks:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_stream_send_single.html     
-          - text: 接收消息
-            desc: 在单聊、群聊和聊天室中接收各种类型的消息，包括文本消息、图片、语音、视频、文件消息、位置消息、透传消息、自定义消息、合并消息。
+          - text: Receive Messages
+            desc: "Receive various message types in one-to-one chats, group chats, and chat rooms, including text, image, voice, video, file, location, command, custom, and combined messages."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -200,7 +197,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_receive.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -217,11 +214,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_receive.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#接收消息
-          - text: 接收流式消息
-            desc: 在单聊和群聊场景中，客户端可接收服务端发送的流式消息。
+          - text: Receive Streaming Messages
+            desc: "Receive streaming messages sent by the server in one-to-one and group chats."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -230,7 +224,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_stream_receive.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_stream_receive.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -238,8 +232,8 @@ projects:
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_stream_receive.html    
-          - text: 获取消息
-            desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
+          - text: Retrieve Messages
+            desc: "Retrieve roaming messages from the EasyIM server or retrieve messages from the local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -248,7 +242,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_retrieve.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_retrieve.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -265,14 +259,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_retrieve.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_historical.html
-          - text: 撤回消息
-            desc: 发送方可以撤回一条发送成功的消息，包括已经发送的历史消息，离线消息或漫游消息。
+          - text: Recall Messages
+            desc: "Recall a successfully sent message, including a historical, offline, or roaming message."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -281,7 +272,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_recall.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_recall.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -298,14 +289,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_recall.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/message.html#撤回消息  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_recall_single.html
-          - text: 编辑消息
-            desc: 编辑单聊或群组聊天会话中已经发送成功的消息。
+          - text: Edit Messages
+            desc: "Edit a successfully sent message in a one-to-one or group conversation."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -314,7 +302,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_modify.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_modify.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -334,8 +322,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_modify.html       
-          - text: 消息回执
-            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
+          - text: Message Receipts
+            desc: "Use delivery, conversation read, and message read receipts in one-to-one chats. Group chats support message read receipts."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -344,7 +332,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_receipt.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_receipt.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -361,8 +349,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_receipt.html
-          - text: 搜索消息
-            desc: 支持搜索本地数据库和服务端的消息。
+          - text: Search Messages
+            desc: "Search for messages in the local database or on the server."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -385,11 +373,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_search_local.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /value-added/search/message_search_rest.html  
-          - text: 表情回复
-            desc: 消息表情回复（“Reaction”）功能，即用户可以在单聊和群聊中对消息添加、删除表情。
+          - text: Message Reactions
+            desc: "Add or remove emoji reactions from messages in one-to-one and group chats."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -398,7 +383,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/reaction.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/reaction.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -418,8 +403,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/reaction_add.html 
-          - text: 转发消息
-            desc: 转发消息即将会话中发送成功或收到的消息转发给别人，支持转发单条消息和多条消息（合并消息）。
+          - text: Forward Messages
+            desc: "Forward sent or received messages to other users, either individually or as multiple messages combined into one."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -428,7 +413,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_forward.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_send.html#send-combined-messages
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -445,8 +430,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_forward.html
-          - text: 导入/插入消息
-            desc: 批量导入消息到数据库或在本地会话中插入一条消息。
+          - text: Import and Insert Messages
+            desc: "Import messages into the local database in batches or insert a message into a local conversation."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -469,14 +454,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_import_insert.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#插入消息
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_import_single.html
-          - text: 更新消息
-            desc: 更新本地数据库中的消息。
+          - text: Update Messages
+            desc: "Update messages stored in the local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -499,11 +481,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_update.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
-          - text: 删除消息
-            desc: 单向删除服务端以及本地的历史消息。
+          - text: Delete Messages
+            desc: "Delete historical messages unilaterally from the server or local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -512,7 +491,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_delete.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -529,14 +508,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_delete.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html  
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/message_delete_roam_single_msgid.html
-          - text: 定向消息
-            desc: 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+          - text: Targeted Messages
+            desc: "Send a targeted message to one or more specified members of a group or chat room without delivering it to other members."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -545,7 +521,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_target.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_target.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -562,8 +538,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_target.html 
-          - text: 消息扩展
-            desc: 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
+          - text: Message Extensions
+            desc: "Pass custom content through message extension fields when the SDK's built-in message types do not meet your requirements."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -572,7 +548,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_extension.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_extension.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -589,8 +565,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_extension.html         
-          - text: 置顶消息
-            desc: 将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
+          - text: Pin Messages
+            desc: "Pin messages to the top of a conversation so that all participants can quickly find important information."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -599,7 +575,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_pin.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -616,8 +592,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_pin.html 
-          - text: 消息只投在线
-            desc: 只将消息投递给在线用户。若接收方不在线，则无法收到消息。
+          - text: Deliver Messages Only to Online Users
+            desc: "Deliver messages only to users who are online. Offline recipients do not receive these messages."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -626,7 +602,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/message_deliver_only_online.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/message_deliver_only_online.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -643,8 +619,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/message_deliver_only_online.html      
-          - text: 会话列表
-            desc: 支持从服务端和本地获取会话列表。
+          - text: Conversation List
+            desc: "Retrieve conversation lists from the server or local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -653,7 +629,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_list.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_list.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -670,8 +646,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_list.html
-          - text: 会话未读数
-            desc: 支持查看本地所有会话或指定会话的未读消息数，并针对会话的未读消息数清零。
+          - text: Conversation Unread Counts
+            desc: "View unread message counts for all local conversations or a specified conversation, and clear conversation unread counts."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -694,17 +670,14 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_unread.html
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#获取会话中的未读消息计数   
-          - text: 本地会话
-            desc: Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 LocalCache 模块对本地会话数据进行管理。
+          - text: Local Conversations
+            desc: "Use the Web SDK's LocalCache module to manage one-to-one and group conversations stored in IndexedDB."
             sdks:
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_local.html        
-          - text: 置顶会话
-            desc: 将单聊或群聊会话固定在会话列表的顶部，方便用户查找。支持置顶、取消置顶会话和从服务端获取置顶会话列表。
+          - text: Pin Conversations
+            desc: "Pin or unpin one-to-one and group conversations at the top of the conversation list, and retrieve pinned conversations from the server."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -713,7 +686,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_pin.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_pin.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -730,8 +703,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_pin.html
-          - text: 会话标记
-            desc: 对单聊和群聊会话添加标记，支持标记和取消标记会话以及根据标记查询服务器或本地会话。
+          - text: Conversation Marks
+            desc: "Add or remove marks on one-to-one and group conversations, and retrieve marked conversations from the server or local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -740,7 +713,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_mark.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_mark.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -757,8 +730,8 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_mark.html
-          - text: 删除会话
-            desc: 单向删除服务端或本地的会话及其历史消息。
+          - text: Delete Conversations
+            desc: "Delete a conversation and its historical messages unilaterally from the server or local database."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -767,7 +740,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/conversation_delete.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/conversation_delete.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -784,17 +757,14 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_delete.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/conversation.html#删除会话
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/conversation_delete.html
-      - title: 群组和聊天室
+      - title: Chat Groups and Chat Rooms
         icon: /feature/group.svg
         contexts:
-          - text: 群组创建和管理
-            desc: 支持创建和解散群组、获取群组详情、获取群成员列表和群组列表、查询用户加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。
+          - text: Create and Manage Chat Groups
+            desc: "Create and destroy chat groups, retrieve group details and lists, query how many groups a user has joined, block or unblock group messages, and monitor group events."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -803,7 +773,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_manage.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -823,8 +793,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_create.html   
-          - text: 群成员管理
-            desc: 支持加入、退出群组、群组白名单、黑名单、禁言和设置群成员的自定义属性。
+          - text: Manage Chat Group Members
+            desc: "Join or leave chat groups, manage group allowlists, blocklists, and mutes, and set custom member attributes."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -833,7 +803,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_members.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -850,14 +820,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_members.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_member_add_single.html
-          - text: 群成员名片管理
-            desc: 支持设置和获取群成员名片。群成员名片用于区分该用户在不同群组中的身份展示，例如，展示部门、岗位、项目角色等群内身份信息。
+          - text: Manage Chat Group Member Name Cards
+            desc: "Set and retrieve group member name cards to represent a user's identity in different groups, such as department, position, or project role."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -871,8 +838,8 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_namecard.html         
-          - text: 群组属性管理
-            desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
+          - text: Manage Chat Group Attributes
+            desc: "Modify group names and descriptions, retrieve and update announcements, manage shared files, and update group extension fields."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -881,7 +848,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/group_attributes.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/group_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -898,14 +865,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/group_attributes.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/group.html#修改群组信息 
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_modify.html     
-          - text: 聊天室创建和管理
-            desc: 支持创建和加入聊天室、获取聊天室详情、退出和解散聊天室、更新聊天室成员人数以及监听聊天室事件。
+          - text: Create and Manage Chat Rooms
+            desc: "Create and join chat rooms, retrieve room details, leave and destroy rooms, update member counts, and monitor chat room events."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -914,7 +878,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_manage.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_manage.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -931,14 +895,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_manage.html  
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_create.html    
-          - text: 聊天室成员管理
-            desc: 支持加入和退出聊天室、聊天室白名单、黑名单、禁言、以及监听聊天室事件等功能。
+          - text: Manage Chat Room Members
+            desc: "Join or leave chat rooms, manage room allowlists, blocklists, and mutes, and monitor chat room events."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -947,7 +908,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_members.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_members.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -964,14 +925,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_members.html 
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html#加入聊天室
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_member_add_single.html
-          - text: 聊天室属性管理
-            desc: 管理聊天室基本属性，包括聊天室名称、描述和公告，以及自定义属性。
+          - text: Manage Chat Room Attributes
+            desc: "Manage chat room names, descriptions, announcements, and custom attributes."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -980,7 +938,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/room_attributes.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/room_attributes.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -997,14 +955,11 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/room_attributes.html 
-              - icon: /sdk/electron.svg
-                text: Electron
-                link: /document/electron/chatroom.html#修改聊天室信息
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/chatroom_announcement_get.html
-          - text: 消息话题管理
-            desc: 支持创建、解散、加入、退出消息话题，修改消息话题名称、获取消息话题详情和消息话题成员列表和消息话题列表，获取消息话题中最新一条消息以及监听消息话题事件。
+          - text: Manage Message Threads
+            desc: "Create, destroy, join, and leave message threads; update thread names; retrieve thread details, members, and lists; get the latest thread message; and monitor thread events."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1013,7 +968,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/thread.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/thread.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1030,8 +985,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/group_thread_create.html
-          - text: 话题的消息管理
-            desc: 支持发送和接收话题消息、撤回话题消息和获取话题消息。
+          - text: Manage Messages in Threads
+            desc: "Send, receive, recall, and retrieve messages in message threads."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1040,7 +995,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/thread_message.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/thread_message.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1054,17 +1009,17 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/thread_message.html                        
-      - title: 用户
+      - title: Users
         icon: /feature/user.svg
         contexts:
-          - text: 用户体系(REST 端)
-            desc: 支持注册、删除用户、获取用户详情、修改用户密码、获取用户在线状态和获取指定账号的在线登录设备列表。
+          - text: User Account Management (REST)
+            desc: "Register and delete users, retrieve user details and presence, change passwords, and retrieve the online device list for a specified account."
             sdks:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/account_register_open.html
-          - text: 用户属性
-            desc: 设置和获取用户属性，例如用户昵称、头像、邮箱、电话、性别、签名、生日等。
+          - text: User Attributes
+            desc: "Set and retrieve user attributes such as nickname, avatar, email address, phone number, gender, signature, and birthday."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1073,7 +1028,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/userprofile.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/userprofile.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1093,8 +1048,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/user_attribute_set.html
-          - text: 用户信息自动管理
-            desc: 用户信息指用于业务展示的用户相关信息，包括 用户属性、好友备注 和 群成员名片。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+          - text: Automatic User Information Management
+            desc: "Automatically synchronize and update user attributes, friend remarks, and group member name cards in memory, reducing the need to retrieve, store, and update user information manually."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1105,8 +1060,8 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userinfo_provider.html   
-          - text: 用户关系
-            desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
+          - text: User Relationships
+            desc: "Add and remove friends, set friend remarks, retrieve friend lists, and manage user blocklists."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1115,7 +1070,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/user_relationship.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/user_relationship.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1135,8 +1090,8 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/user_friend_add.html 
-          - text: 用户在线状态订阅
-            desc: 订阅和查询用户的在线状态（即 Presence），包含用户的在线、离线以及自定义状态。
+          - text: Presence
+            desc: "Subscribe to and query user presence, including online, offline, and custom states."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1145,7 +1100,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/presence.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/presence.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1165,11 +1120,11 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/presence_set.html               
-      - title: 推送
+      - title: Push Notifications
         icon: /feature/push.svg
         contexts:
-          - text: 离线推送
-            desc: 支持集成第三方消息推送服务，包括 FCM、APNs、华为、荣耀、小米、OPPO、vivo 和魅族。
+          - text: Offline Push
+            desc: "Integrate third-party message push services, including FCM, APNs, Huawei, Honor, Xiaomi, OPPO, vivo, and Meizu."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1178,7 +1133,7 @@ projects:
                 text: iOS
                 link: /sdk/v5/ios/push/push_overview.html
               - icon: /sdk/web.svg
-                text: Web/小程序
+                text: Web
                 link: /sdk/v5/web/push/push_overview.html
               - icon: /sdk/uniapp.svg
                 text: uni-app
@@ -1192,28 +1147,19 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /rest/push_information_bind_unbind.html 
-          - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、vivo 等主流手机厂商通道。
+          - text: Instant Push
+            desc: "Use instant push for system notifications, promotional campaigns, user re-engagement, social interactions, and content subscriptions across major vendor channels such as Google and Applet."
             sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /value-added/push/push_integration_note_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /value-added/push/push_integration_note_ios.html 
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /value-added/push/push_api_call_limitation.html
-      - title: 其他
+      - title: Other Features
         icon: /feature/api-server.svg
         contexts:
-          - text: Token 鉴权
+          - text: Token Authentication
             link: /rest/easemob_app_token.html
-          - text: 回调
+          - text: Webhooks
             link: /rest/callback_presending.html
-          - text: 多设备管理
+          - text: Multi-Device Management
             link: /rest/callback_login_logout.html 
-          - text: 用户全局禁言
+          - text: Global User Mutes
             link: /rest/user_global_mute_overview.html                                      
   - title: UIKit
     hidden: true
@@ -1221,8 +1167,8 @@ projects:
       - title: 单/群聊
         icon: /feature/uikit.svg
         contexts:
-          - text: 会话列表
-            desc: 会话列表页面展示当前用户的所有会话并且提供会话相关功能，支持自定义标题栏、自定义会话布局等。
+          - text: Conversation List
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1246,7 +1192,7 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_conversation_list_intro.html
           - text: 消息
-            desc: 聊天页面展示发送和接收的所有消息，支持消息操作，以及消息列表和消息输入区的自定义等。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1270,7 +1216,7 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_chat_intro
           - text: 通讯录
-            desc: 通讯录页面展示通讯录列表，包括添加好友，好友申请列表入口，好友列表等。支持自定义好友列表和好友事件监听。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1291,7 +1237,7 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_contactlist_intro.html
           - text: 好友详情
-            desc: 好友详情页面展示好友的详细信息，支持自定义导航栏、好友条目以及发消息、音频通话、视频通话等按钮。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1306,7 +1252,7 @@ projects:
                 text: React Native
                 link: /uikit/chatuikit/react-native/chatuikit_custom_contact_details.html  
           - text: 群组详情
-            desc: 群组详情页面展示群组的详细信息，支持自定义标题栏、按钮和群详情条目。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1325,7 +1271,7 @@ projects:
         icon: /feature/uikit-chatroom.svg
         contexts:
           - text: 聊天室管理
-            desc: 支持创建聊天室、离开聊天室和解散聊天室。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1343,7 +1289,7 @@ projects:
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#创建聊天室
           - text: 弹幕和打赏
-            desc: 用户可在聊天室中向其他成员发送文字和表情的消息，也可以通过赠送虚拟礼物，向聊天室中的主播或其他用户表达赞赏或者支持。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1361,7 +1307,7 @@ projects:
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#发送弹幕  
           - text: 禁言
-            desc: 聊天室所有者可以在聊天室中对某个特定的成员禁言，通常是对违反聊天室规则、发表不当言论或不断干扰聊天室秩序的成员所采取的一种惩罚。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1379,7 +1325,7 @@ projects:
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_member.html#禁言成员
           - text: 全局广播
-            desc: 向 App 内所有聊天室中的所有用户发送消息或通知，可用于传达重要信息、公告、提醒或紧急通知等。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1397,7 +1343,7 @@ projects:
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#全局广播
           - text: 消息管理
-            desc: 聊天室未读消息数指在一个聊天室中用户尚未读取的消息数量。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1415,7 +1361,7 @@ projects:
                 text: React Native
                 link: /uikit/chatroomuikit/react-native/roomfeature_common.html#未读消息数               
           - text: 成员管理
-            desc: 聊天室成员列表显示了该聊天室中的当前在线用户。
+            desc: "Explore APIs and implementation guidance for conversation list."
             sdks:
               - icon: /sdk/android.svg
                 text: Android

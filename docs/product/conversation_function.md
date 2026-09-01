@@ -13,7 +13,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in server-side and local conversations by keyword.     |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days. |
@@ -62,7 +62,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in local conversations by keyword.     |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/basic_message_conversation.html#message-recall), up to 7 days. |
@@ -262,7 +262,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Set user attributes | Set the user nickname, avatar, email address, phone number, and other attributes. |
 | Retrieve user attributes | Retrieve all user attributes for one or more specified users.  |
 | Retrieve the total size of user attributes in an app (server side only) | Retrieve the size, in bytes, of the attribute data for all users in the app.  |
-| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified non-friend changes.  |
+| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified stranger changes.  |
 | Delete user attributes | Delete all attributes of a single user. |
 
 ### Presence subscriptions

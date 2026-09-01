@@ -1,4 +1,4 @@
-# Set a User's Chat Room Tags
+# Set Chat Room Tags for a User
 
 ## Feature overview
 

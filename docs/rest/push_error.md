@@ -16,8 +16,8 @@ The REST APIs related to offline push settings and queries, including **Set the 
 | Retrieve offline push settings     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
 | Set the preferred language for push notifications     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language |
 | Retrieve the preferred language for push notifications | GET  | /{org_name}/{app_name}/users/{userId}/notification/language |
-| Set the receiver's push template name | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template |
-| Retrieve the receiver's push template name | GET | /{org_name}/{app_name}/users/{userId}/notification/template |
+| Set the recipient's push template name | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template |
+| Retrieve the recipient's push template name | GET | /{org_name}/{app_name}/users/{userId}/notification/template |
 
 Common error codes for the preceding APIs are listed below:
 

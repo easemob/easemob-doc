@@ -1,6 +1,6 @@
 # Key Features
 
-EasyIM supports message management, user management, offline push, and content moderation.
+EasyIM supports message management, user management, and offline push.
 
 ## Multi-platform support
 
@@ -10,20 +10,11 @@ EasyIM supports Android, iOS, Web, and other platforms, with interoperability ac
 SDK V5.0.0 currently fully supports Android, iOS, Web, and Mini Program. More platform versions will be officially released soon. Stay tuned for updates.
 :::
 
-| Platform     | Version supported by the SDK      | Source code | One-to-one and group chat UIKit | Chat room UIKit |
-| ------------ | ------- | ------- | ------- | ------- | ------- |
-| Android      | Android 5.0 or later (API level 21 or later)   |  - | Supported | Supported |
-| iOS          | iOS 10.0 or later     | - | Supported | Supported |
-| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | - | Supported | Supported |
-| Mini Program        | Supported   | - | - | - |
-| uni-app        | Supported  |  - | Supported | - |
-| HarmonyOS        | HarmonyOS NEXT (API level 12 or later)   | - | Supported | - |
-| Flutter      | Flutter 2.10   | - | Supported | Supported |
-| React Native | React Native 0.63.4 or later  | - | Supported | Supported |
-| Unity        | Unity 2017 or later | - | - | - |
-| Windows      | Windows 10 or later |  - | - | - |
-| Electron      | Supported |  - | - | - |
-| Linux      | Supported | - | - | - |
+| Platform     | Version supported by the SDK      |
+| ------------ | ------- |
+| Android      | Android 5.0 or later (API level 21 or later)   | 
+| iOS          | iOS 10.0 or later     |
+| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | 
 
 ## Account features
 
@@ -74,7 +65,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | Send and receive streaming messages. Streaming messages can be sent through a server-side API, while the SDK supports only receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
 | Message search  | Search for all message types in server-side and local conversations by keyword.     |
@@ -111,7 +102,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Set user attributes | Set the user nickname, avatar, email address, phone number, and other attributes. |
 | Retrieve user attributes | Retrieve all user attributes for one or more specified users.  |
 | Retrieve the total size of user attributes in an app (server side only) | Retrieve the size, in bytes, of the attribute data for all users in the app.  |
-| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when an attribute of a specified non-friend changes.|
+| Subscribe to attribute changes of non-friends | After subscription, the app promptly receives a notification when a user attribute of a specified stranger changes.|
 | Delete user attributes | Delete all attributes of a single user. |
 
 ## User relationships

@@ -250,7 +250,7 @@ This API returns user attributes rather than `EMContact` and can supplement the 
 
 ### Allow messages only between friends
 
-EasyIM supports one-to-one messaging between non-friend users by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check) in the [EasyIM Console](https://console.easyim.ai/user/login). After it is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If a user sends a one-to-one message to a non-friend user, the SDK returns error code `221`, or `EMErrorUserNotOnRoster`.
+EasyIM supports one-to-one messaging between strangers by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check) in the [EasyIM Console](https://console.easyim.ai/user/login). After it is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If a user sends a one-to-one message to a stranger, the SDK returns error code `221`, or `EMErrorUserNotOnRoster`.
 
 ## Blocklist management
 

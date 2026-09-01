@@ -1,4 +1,4 @@
-# Add Users to a Message Thread in Bulk
+# Bulk Add Users to a Message Thread
 
 ## Feature overview
 

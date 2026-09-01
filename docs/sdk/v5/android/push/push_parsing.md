@@ -7,7 +7,7 @@ After receiving a push notification, you need to parse the data.
 | Parameter | Description |
 | ------- | -------------- |
 | `f` | The user ID of the sender of the push notification. |
-| `t` | The user ID of the receiver of the push notification. |
+| `t` | The user ID of the recipient of the push notification. |
 | `m` | The message ID. The unique identifier of the message. |
 | `g` | The group ID. This field exists only when the message is a group message. |
 | `e` | User-defined extension field. |
@@ -51,7 +51,7 @@ The data structure of the extension information in the `RemoteMessage` object is
 
 ```java
 {
-    "t":"receiver",
+    "t":"recipient",
     "f":"fromUsername",
     "m":"msg_id",
     "g":"group_id",

@@ -15,7 +15,7 @@ Before you begin, ensure that the following requirements are met:
 
 ## Friend management
 
-### Monitor friend relationships and friend information changes
+### Monitor friend relationships and friend info changes
 
 Use `EMContactListener` to monitor friend request, acceptance, rejection, addition, deletion, and friend information change events.
 
@@ -172,7 +172,7 @@ EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, ne
 });
 ```
 
-### Retrieve the friend list and friend information
+### Retrieve the friend list and friend info
 
 #### Automatically synchronize the friend list after login
 
@@ -315,7 +315,7 @@ This API returns an `EMUserInfo` for a single user, not an `EMContact`. It does 
 
 ### Allow messages only between friends
 
-By default, EasyIM supports one-to-one messages between non-friends. To allow one-to-one messages only between friends, [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check) in [EasyIM Console](https://console.easyim.ai/user/login). After it is enabled, the SDK checks the relationship when a user sends a one-to-one message. A message to a non-friend returns error code `221`.
+By default, EasyIM supports one-to-one messages between non-friends. To allow one-to-one messages only between friends, [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check) in [EasyIM Console](https://console.easyim.ai/user/login). After it is enabled, the SDK checks the relationship when a user sends a one-to-one message. A message to a stranger returns error code `221`.
 
 ## Blocklist management
 

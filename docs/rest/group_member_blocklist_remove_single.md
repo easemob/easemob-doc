@@ -1,4 +1,4 @@
-# Remove a User from the Group Blocklist
+# Remove a Single User from the Group Blocklist
 
 ## Feature overview
 

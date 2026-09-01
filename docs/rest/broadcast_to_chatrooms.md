@@ -1,4 +1,4 @@
-# Send a Global Broadcast Message to Chat Rooms
+# Send a Broadcast Message to Chat Rooms in an App
 
 ## Feature overview
 

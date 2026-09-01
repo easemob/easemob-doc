@@ -1,4 +1,4 @@
-# Import One-to-One Chat Messages
+# Import a One-to-One Chat Message
 
 ## Feature overview
 

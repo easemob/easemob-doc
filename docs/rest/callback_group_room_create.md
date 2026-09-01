@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Creation Webhook Events
+# Chat Group and Chat Room Creation Events
 
 ## Feature overview
 
@@ -74,7 +74,7 @@ The following descriptions use the chat group creation event as an example. The 
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `CREATE` when a chat group is created. |
 | `operator`     | String | Operator. If an app admin creates the chat group, the value is fixed as `@ppAdmin`.         |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                                                       |

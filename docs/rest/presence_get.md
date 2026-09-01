@@ -1,4 +1,4 @@
-# Retrieve Presence in Bulk
+# Retrieve Presence of Users
 
 ## Feature overview
 

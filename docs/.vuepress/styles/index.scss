@@ -58,18 +58,13 @@ button {
       gap: 12px;
 
       img {
-        width: 50px;
-        height: 22px;
+        width: auto;
+        height: 44px;
         margin-inline-end: 0;
       }
 
       .site-name {
-        color: #009dff;
-        font-weight: 500;
-        font-size: 22px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 28px;
+        display: none;
       }
     }
 

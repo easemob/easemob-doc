@@ -1,4 +1,4 @@
-# Add Users to the Chat Room Blocklist in Bulk
+# Bulk Add Users to the Chat Room Blocklist
 
 ## Feature overview
 

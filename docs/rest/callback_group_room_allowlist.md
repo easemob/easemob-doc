@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Allowlist Webhook Events
+# Chat Group and Chat Room Allowlist Events
 
 ## Feature overview
 
@@ -52,7 +52,7 @@ After a chat group or chat room member is added to or removed from the allowlist
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                           |
 | `id`           | String | Chat group or chat room ID.                                                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `WHITE` when a chat group or chat room member is added to the allowlist. |
 | `operator`     | String | Operator.                                                       |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed. If an app admin adds the chat group or chat room member to the allowlist, the value is fixed as `@ppAdmin`.  |
@@ -101,7 +101,7 @@ After a chat group or chat room member is added to or removed from the allowlist
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                           |
 | `id`           | String | Chat group or chat room ID.                                                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `WHITE` when a chat group or chat room member is removed from the allowlist. |
 | `operator`     | String | Operator. If an app admin removes the chat group or chat room member from the allowlist, the value is fixed as `@ppAdmin`.                                                       |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed. |

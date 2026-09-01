@@ -1,4 +1,4 @@
-# Add a User to the Group Blocklist
+# Add a Single User to the Group Blocklist
 
 ## Feature overview
 

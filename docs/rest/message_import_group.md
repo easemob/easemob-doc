@@ -1,4 +1,4 @@
-# Import Group Chat Messages
+# Import a Group Chat Message
 
 ## Feature overview
 

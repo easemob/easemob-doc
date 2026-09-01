@@ -134,23 +134,23 @@ NSArray<NSNumber *> *types = @[
 To have the SDK automatically synchronize the friend list and friend information after login succeeds, configure `EMDataSyncTypeContacts` through `EMOptions#dataSyncType` before initializing the SDK. After synchronization is complete, you can use the local friend data. For details about automatic data synchronization after login succeeds, see [Automatically synchronize the friend list after login](user_relationship.html#automatically-synchronize-the-friend-list-after-login).
 :::
 
-## Subscribe to attribute changes of non-friend users
+## Subscribe to attribute changes of strangers
 
-The SDK supports subscribing to attribute changes of non-friend users. After subscription, the app promptly receives notifications when the attributes of specified non-friend users change.
+The SDK supports subscribing to attribute changes of strangers. After subscription, the app promptly receives notifications when the attributes of specified strangers change.
 
 This feature applies to the following scenarios:
 
- - Update the peer user's nickname, avatar, and other attributes promptly in a non-friend conversation.
- - Detect attribute changes of non-friend users in scenarios such as temporary conversations and customer service communications.
- - Maintain the latest attributes of specified non-friend users when displaying group members and in similar scenarios.
+ - Update the peer user's nickname, avatar, and other attributes promptly in a stranger conversation.
+ - Detect attribute changes of strangers in scenarios such as temporary conversations and customer service communications.
+ - Maintain the latest attributes of specified strangers when displaying group members and in similar scenarios.
 
 :::tip
-This feature applies only to non-friend users. For details about user attribute change notifications for the current user, non-friend users, and friends, see [User attribute change events](#monitor-user-attribute-changes).
+This feature applies only to strangers. For details about user attribute change notifications for the current user, strangers, and friends, see [User attribute change events](#monitor-user-attribute-changes).
 :::
 
-### Subscribe to attribute change events of non-friend users
+### Subscribe to attribute change events of strangers
 
-Call `subscribeUsersInfo` to subscribe to user attribute change events of non-friend users. After subscription succeeds, the SDK triggers `onUserInfoUpdate` when the attributes of these users change.
+Call `subscribeUsersInfo` to subscribe to user attribute change events of strangers. After subscription succeeds, the SDK triggers `onUserInfoUpdate` when the attributes of these users change.
 
 ```objectivec
 NSArray<NSString *> *userIds = @[@"user1", @"user2"];
@@ -164,9 +164,9 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 }];
 ```
 
-### Unsubscribe from attribute change events of non-friend users
+### Unsubscribe from attribute change events of strangers
 
-Call `unsubscribeUsersInfo` to unsubscribe from attribute change events of non-friend users.
+Call `unsubscribeUsersInfo` to unsubscribe from attribute change events of strangers.
 
 ```objectivec
 [[EMClient sharedClient].userInfoManager unsubscribeUsersInfo:userIds completion:^(EMError *error) {
@@ -180,7 +180,7 @@ Call `unsubscribeUsersInfo` to unsubscribe from attribute change events of non-f
 
 ### Retrieve the list of users whose attribute change events are subscribed to
 
-Call `fetchSubscribedUsers` to asynchronously retrieve the list of users whose attribute change events are subscribed to. The list contains the user IDs and user attributes of subscribed non-friend users.
+Call `fetchSubscribedUsers` to asynchronously retrieve the list of users whose attribute change events are subscribed to. The list contains the user IDs and user attributes of subscribed strangers.
 
 ```objectivec
 [[EMClient sharedClient].userInfoManager fetchSubscribedUsers:^(NSArray<EMUserInfo *> *users, EMError *error) {
@@ -194,15 +194,15 @@ Call `fetchSubscribedUsers` to asynchronously retrieve the list of users whose a
 
 ### Memory
 
-If you do not subscribe to attribute changes of non-friend users, the app generally needs to explicitly call an asynchronous retrieval API to retrieve user attributes when required by the business. To reduce unnecessary network requests, determine whether to [retrieve data from the server](#retrieve-all-user-attributes-from-the-server) based on your business requirements.
+If you do not subscribe to attribute changes of strangers, the app generally needs to explicitly call an asynchronous retrieval API to retrieve user attributes when required by the business. To reduce unnecessary network requests, determine whether to [retrieve data from the server](#retrieve-all-user-attributes-from-the-server) based on your business requirements.
 
 ## Monitor user attribute changes
 
-Attribute updates of both friends and non-friend users can trigger the SDK's `onUserInfoUpdate` event in the following ways:
+Attribute updates of both friends and strangers can trigger the SDK's `onUserInfoUpdate` event in the following ways:
 
 1. **Explicit update retrieval**: When the app calls an API to [retrieve user attributes from the server](#retrieve-all-user-attributes-from-the-server) or [retrieve group member information from the server](group_members.html#retrieve-the-chat-group-member-list), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates the local data and triggers this event.
-2. **Updates carried in messages**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a message is received and the sender's user attribute update time carried in the message is later than the local cache, the SDK retrieves the user attributes again and triggers this event. This mechanism applies to both friend and non-friend senders.
-3. **Subscribed user changes (non-friend users only)**: If the app has [subscribed to attribute change events of non-friend users](#subscribe-to-attribute-change-events-of-non-friend-users), the SDK also triggers this event when the attributes of these subscribed non-friend users change.
+2. **Updates carried in messages**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a message is received and the sender's user attribute update time carried in the message is later than the local cache, the SDK retrieves the user attributes again and triggers this event. This mechanism applies to both friend and stranger senders.
+3. **Subscribed user changes (strangers only)**: If the app has [subscribed to attribute change events of strangers](#subscribe-to-attribute-change-events-of-strangers), the SDK also triggers this event when the attributes of these subscribed strangers change.
 
 **Special notes**
 
@@ -300,8 +300,8 @@ User information refers to user-related information displayed by your app, inclu
 | [`updateOwnUserInfo`](#set-an-attribute-of-the-current-user) | `IEMUserInfoManager` | Asynchronously set or update an attribute of the current user. |
 | [`fetchUserInfoById`](#retrieve-all-user-attributes-from-the-server) | `IEMUserInfoManager` | Asynchronously retrieve all attributes of one or more users. |
 | [`fetchUserInfoById`](#retrieve-specified-user-attributes-from-the-server) | `IEMUserInfoManager` | Asynchronously retrieve specified attributes of specified users. |
-| [`subscribeUsersInfo`](#subscribe-to-attribute-change-events-of-non-friend-users) | `IEMUserInfoManager` | Asynchronously subscribe to attribute change events of non-friend users. |
-| [`unsubscribeUsersInfo`](#unsubscribe-from-attribute-change-events-of-non-friend-users) | `IEMUserInfoManager` | Asynchronously unsubscribe from attribute change events of non-friend users. |
+| [`subscribeUsersInfo`](#subscribe-to-attribute-change-events-of-strangers) | `IEMUserInfoManager` | Asynchronously subscribe to attribute change events of strangers. |
+| [`unsubscribeUsersInfo`](#unsubscribe-from-attribute-change-events-of-strangers) | `IEMUserInfoManager` | Asynchronously unsubscribe from attribute change events of strangers. |
 | [`fetchSubscribedUsers`](#retrieve-the-list-of-users-whose-attribute-change-events-are-subscribed-to) | `IEMUserInfoManager` | Asynchronously retrieve the list of users whose attribute change events are subscribed to. |
 | [`userId`](#set-all-attributes-of-the-current-user) / [`nickname`](#set-all-attributes-of-the-current-user) / [`avatarUrl`](#set-all-attributes-of-the-current-user) | `EMUserInfo` | Retrieve the user ID, nickname, and avatar URL. |
 | [`mail`](#set-all-attributes-of-the-current-user) / [`phone`](#set-all-attributes-of-the-current-user) / [`gender`](#set-all-attributes-of-the-current-user) | `EMUserInfo` | Retrieve the user email address, contact information, and gender. |

@@ -22,16 +22,16 @@ Before applying to launch an app, make sure that all of the following conditions
 
 | Launch method | Use case |
 | :--- | :--- |
-| Upgrade this development app to production | Retain test data. |
-| Create a new production app | Isolate the test and production environments. |
+| Upgrade this development app to production | Retain development version app data. |
+| Create a new production app | Isolate the development and production environments. |
 
 After selecting a method, enter the production version app information as needed:
 
 | Item | Create a new production app | Upgrade this development app to production |
 | :--- | :--- | :--- |
 | Development app information | Confirm the app name, app key, and data center of the development version app. | Confirm the app name, app key, and data center. |
-| Production app information | Enter the app name, app key, and data center of the production version app.<br/> - For field descriptions, see [App Creation](app_create.html#procedure). | No information is required. |
-| Fees | Confirm the fees after launch. | Confirm the fees after launch. |
+| Production app information | Enter the app name and confirm the app key and data center of the production version app.<br/> - For field descriptions, see [App Creation](app_create.html#procedure). | No information is required. |
+| Fees | Confirm the fees to be paid after launch. | Confirm the fees to be paid after launch. |
 
 After confirming or entering the production version app information, click **Release**.
 
@@ -43,7 +43,7 @@ After confirming or entering the production version app information, click **Rel
 
 ![img](/images/console/app_launch_confirm.png)
 
-4. In the **Apply for Launch** confirmation dialog box, click **Confirm**.
+4. In the **Apply to Production** confirmation dialog box, click **Confirm**.
 
 ![img](/images/console/app_launch_prompt.png)
 

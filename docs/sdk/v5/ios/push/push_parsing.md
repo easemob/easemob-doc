@@ -28,7 +28,7 @@ Data structure of the custom user information in the push notification:
 {
     "aps":{
         "alert":{
-            "body":"You have a new message"
+            "body":"You've got a new message"
         },   
         "badge":1,               
         "sound":"default"   
@@ -46,6 +46,6 @@ Data structure of the custom user information in the push notification:
 | `badge` | Badge count. |
 | `sound` | Notification sound. |
 | `f` | User ID of the message sender. |
-| `t` | User ID of the message receiver. |
+| `t` | User ID of the message recipient. |
 | `g` | Group ID. This field does not exist for one-to-one chat. |
 | `m` | Message ID. |

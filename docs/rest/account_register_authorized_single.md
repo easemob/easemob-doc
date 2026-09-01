@@ -1,14 +1,14 @@
-# Register a User with Authorization
+# Register a User with Token
 
 ## Feature overview
 
-- Authorized registration means including administrator authentication credentials, specifically an app token, when registering an EasyIM account.
+- Register a user with a token. The server validates a valid app token before registering a user.
 - **We recommend this mode because it is more secure**. It prevents anyone who has obtained the registration URL and understands the registration process from maliciously registering large numbers of spam users on the server.
 - User IDs and passwords must meet the relevant requirements when you register users.
 
 ## Configure authorized registration
 
-To use authorized registration, set the user registration mode on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
+To use this API, set the user registration mode to **Authorized Registration** on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Call frequency limit
 

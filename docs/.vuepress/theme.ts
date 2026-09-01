@@ -10,7 +10,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: 'https://doc.easyim.ai',
   home: '/',
   iconAssets: 'iconfont',
-  logo: '/logo_name.png',
+  logo: '/navi_left.png',
   repo: 'easemob/easemob-doc',
   docsBranch: 'doc-v2',
   docsDir: 'docs',

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-- If a user is logged in on multiple devices, you can call this API to force the user offline on one device.
+- If a user is logged in on multiple devices, you can call this API to force the user offline on a single device.
 - To force a user offline on all devices, call the [Force a user offline](account_offline_forced.html) API.
 
 ## Call frequency limit

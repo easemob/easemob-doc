@@ -232,7 +232,7 @@ For friend user-attribute change notifications in different scenarios, see [Moni
 
 ### Allow only friends to send messages
 
-By default, EasyIM allows one-to-one messages between users who are not friends, so they can chat without adding each other as friends. To allow one-to-one messages only between friends, go to the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check). After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If the user sends a one-to-one message to a non-friend user, the SDK returns error code `221`.
+By default, EasyIM allows one-to-one messages between users who are not friends, so they can chat without adding each other as friends. To allow one-to-one messages only between friends, go to the [EasyIM Console](https://console.easyim.ai/user/login) and [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check). After this feature is enabled, the SDK checks the friend relationship when a user initiates a one-to-one chat. If the user sends a one-to-one message to a stranger, the SDK returns error code `221`.
 
 ## Blocklist management
 

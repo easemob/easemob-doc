@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Retrieve blocklisted users by page. The server returns users in reverse order by the time they were added, with the most recently blocklisted users first.
+Retrieve blocklisted users with pagination. The server returns users in reverse order by the time they were added, with the most recently blocklisted users first.
 
 ## Feature activation
 

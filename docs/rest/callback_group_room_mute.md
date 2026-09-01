@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Mute List Webhook Events
+# Chat Group and Chat Room Mute List Events
 
 ## Feature overview
 
@@ -54,7 +54,7 @@ After a chat group or chat room member is successfully added to or removed from 
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `MUTE` when a member is added to the chat group or chat room mute list. |
 | `operator`     | String | Operator. If an app admin adds the member to the mute list, the value is fixed as `@ppAdmin`.                                      |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |
@@ -102,7 +102,7 @@ After a chat group or chat room member is successfully added to or removed from 
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.        |
 | `id`           | String | Chat group or chat room ID.                                                |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `MUTE` when a member is removed from the mute list. |
 | `operator`     | String | Operator. If an app admin removes the member from the mute list, the value is fixed as `@ppAdmin`.                                      |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                             |

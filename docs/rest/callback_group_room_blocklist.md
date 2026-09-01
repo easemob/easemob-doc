@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Blocklist Webhook Events
+# Chat Group and Chat Room Blocklist Events
 
 ## Feature overview
 
@@ -57,7 +57,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | The value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | The value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `BLOCK` when a user is added to the chat group or chat room blocklist. |
 | `operator`     | String | Operator. If an app admin adds the member to the blocklist, the value is fixed as `@ppAdmin`.                         |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.                |
@@ -106,7 +106,7 @@ After a member is added to the chat group or chat room blocklist, they are remov
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.  |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room   |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `BLOCK` when a user is removed from the chat group or chat room blocklist. |
 | `operator`     | String | Operator. If an app admin removes the member from the blocklist, the value is fixed as `@ppAdmin`.                       |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.  |

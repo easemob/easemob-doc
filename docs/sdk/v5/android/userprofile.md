@@ -28,8 +28,8 @@ Call `updateOwnInfo` to set or update multiple or all attributes of the current 
 ```java
 EMUserInfo userInfo = new EMUserInfo();
 userInfo.setUserId(EMClient.getInstance().getCurrentUser());
-userInfo.setNickname("easemob");
-userInfo.setAvatarUrl("https://www.easemob.com");
+userInfo.setNickname("im");
+userInfo.setAvatarUrl("https://www.aaa.com");
 userInfo.setBirth("2000.10.10");
 userInfo.setSignature("hello world");
 userInfo.setPhoneNumber("13333333333");
@@ -169,23 +169,23 @@ EMClient.getInstance()
 To automatically synchronize the friend list and friend information after login succeeds, configure `EMOptions#EMDataSyncType.CONTACTS` through `EMOptions#setDataSyncType` before SDK initialization. After synchronization is complete, call `EMClient.getInstance().contactManager().getContactsFromLocal()` to read the local friend list and `fetchContactFromLocal` to retrieve local friend information. For details about automatic data synchronization after login, see [Initialization](initialization.html).
 :::
 
-## Subscribe to non-friend user attribute changes
+## Subscribe to stranger attribute changes
 
-The SDK supports subscribing to non-friend user attribute changes. After subscription, the app promptly receives notifications when specified non-friend users' attributes change.
+The SDK supports subscribing to stranger attribute changes. After subscription, the app promptly receives notifications when specified strangers' attributes change.
 
 This feature applies to the following scenarios:
 
-- Updating a peer's nickname, avatar, or other attributes promptly in a non-friend conversation.
-- Detecting non-friend user attribute changes in temporary conversations, customer service communication, and similar scenarios.
-- Maintaining the latest attributes of specified non-friend users when displaying chat group members.
+- Updating a peer's nickname, avatar, or other attributes promptly in a stranger conversation.
+- Detecting stranger attribute changes in temporary conversations, customer service communication, and similar scenarios.
+- Maintaining the latest attributes of specified strangers when displaying chat group members.
 
 :::tip
-This feature applies only to non-friend users. For details about user attribute change notifications for the current user, non-friends, and friends, see [User attribute change events](#monitor-user-attribute-changes).
+This feature applies only to strangers. For details about user attribute change notifications for the current user, strangers, and friends, see [User attribute change events](#monitor-user-attribute-changes).
 :::
 
-### Subscribe to non-friend user attribute change events
+### Subscribe to stranger attribute change events
 
-Call `subscribeUsersInfo` to subscribe to non-friend user attribute change events. After subscription succeeds, the SDK triggers [EMUserInfoManagerListener#onUserInfoUpdate](#monitor-user-attribute-changes) when these users' attributes change.
+Call `subscribeUsersInfo` to subscribe to stranger attribute change events. After subscription succeeds, the SDK triggers [EMUserInfoManagerListener#onUserInfoUpdate](#monitor-user-attribute-changes) when these users' attributes change.
 
 ```java
 String[] userIds = new String[2];
@@ -203,9 +203,9 @@ EMClient.getInstance().userInfoManager().subscribeUsersInfo(userIds, new EMCallB
 });
 ```
 
-### Unsubscribe from non-friend user attribute change events
+### Unsubscribe from stranger attribute change events
 
-Call `unsubscribeUsersInfo` to unsubscribe from non-friend user attribute change events.
+Call `unsubscribeUsersInfo` to unsubscribe from stranger attribute change events.
 
 ```java
 EMClient.getInstance().userInfoManager().unsubscribeUsersInfo(userIds, new EMCallBack() {
@@ -221,7 +221,7 @@ EMClient.getInstance().userInfoManager().unsubscribeUsersInfo(userIds, new EMCal
 
 ### Retrieve the list of users whose attribute change events are subscribed to
 
-Call `fetchSubscribedUsers` to retrieve the list of users whose attribute change events are subscribed to. The list contains the user IDs and attributes of subscribed non-friend users.
+Call `fetchSubscribedUsers` to retrieve the list of users whose attribute change events are subscribed to. The list contains the user IDs and attributes of subscribed strangers.
 
 ```java
 EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBack<List<EMUserInfo>>() {
@@ -237,15 +237,15 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 
 ### Memory usage
 
-If non-friend user attribute changes are not subscribed to, the app generally needs to explicitly call retrieval APIs when the attributes are needed. To reduce unnecessary network requests, preferentially reuse user information in local memory and decide whether to [retrieve server-side data](userprofile.html#retrieve-all-user-attributes-from-the-server) again according to business requirements.
+If stranger attribute changes are not subscribed to, the app generally needs to explicitly call retrieval APIs when the attributes are needed. To reduce unnecessary network requests, preferentially reuse user information in local memory and decide whether to [retrieve server-side data](userprofile.html#retrieve-all-user-attributes-from-the-server) again according to business requirements.
 
 ## Monitor user attribute changes
 
-Updates to friend and non-friend user attributes can trigger `EMUserInfoManagerListener#onUserInfoUpdate` in the following ways:
+Updates to friend and stranger attributes can trigger `EMUserInfoManagerListener#onUserInfoUpdate` in the following ways:
 
 1. **Explicit retrieval update**: When [retrieving user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or [retrieving chat group member information from the server](group_members.html#retrieve-the-group-member-list), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates local data and triggers the event.
-2. **Message-carried update**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a received message carries a sender user attribute update time later than the local cache, the SDK retrieves those user attributes again and triggers the event. This applies to both friend and non-friend senders.
-3. **Subscribed user change (non-friends only)**: If non-friend user attribute change events are subscribed to, the SDK also triggers the event when those subscribed non-friend users' attributes change.
+2. **Message-carried update**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a received message carries a sender user attribute update time later than the local cache, the SDK retrieves those user attributes again and triggers the event. This applies to both friend and stranger senders.
+3. **Subscribed user change (strangers only)**: If stranger attribute change events are subscribed to, the SDK also triggers the event when those subscribed strangers' attributes change.
 
 **Special notes**
 
@@ -339,6 +339,6 @@ User information refers to user-related information displayed by your app, inclu
 | [`fetchUserInfoByUserId`](#retrieve-all-user-attributes-from-the-server) | `EMUserInfoManager` | Retrieves all attributes of one or more users. |
 | [`fetchUserInfoByAttribute`](#retrieve-specified-user-attributes-from-the-server) | `EMUserInfoManager` | Retrieves specified attributes of specified users. |
 | [`getUserInfoWithUserId`](#read-user-attributes-from-local-memory) | `EMUserInfoManager` | Reads a single user's attributes from local memory. |
-| [`subscribeUsersInfo`](#subscribe-to-non-friend-user-attribute-change-events) | `EMUserInfoManager` | Subscribes to non-friend user attribute change events. |
-| [`unsubscribeUsersInfo`](#unsubscribe-from-non-friend-user-attribute-change-events) | `EMUserInfoManager` | Unsubscribes from non-friend user attribute change events. |
+| [`subscribeUsersInfo`](#subscribe-to-stranger-attribute-change-events) | `EMUserInfoManager` | Subscribes to stranger attribute change events. |
+| [`unsubscribeUsersInfo`](#unsubscribe-from-stranger-attribute-change-events) | `EMUserInfoManager` | Unsubscribes from stranger attribute change events. |
 | [`fetchSubscribedUsers`](#retrieve-the-list-of-users-whose-attribute-change-events-are-subscribed-to) | `EMUserInfoManager` | Retrieves the list of users whose attribute change events are subscribed to. |

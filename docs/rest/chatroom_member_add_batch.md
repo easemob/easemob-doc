@@ -1,4 +1,4 @@
-# Add Chat Room Members in Bulk
+# Bulk Add Chat Room Members
 
 ## Feature overview
 

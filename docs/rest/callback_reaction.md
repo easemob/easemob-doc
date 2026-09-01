@@ -1,4 +1,4 @@
-# Reaction Webhook Events
+# Reaction Events
 
 ## Feature overview
 

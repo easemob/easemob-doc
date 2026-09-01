@@ -1,4 +1,4 @@
-# Retrieve the Online Login Device List for an Account
+# Retrieve the Online Login Device List for a User
 
 ## Feature overview
 

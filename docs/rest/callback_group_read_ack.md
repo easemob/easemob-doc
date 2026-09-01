@@ -1,4 +1,4 @@
-# Group Message Read Receipt Webhook Events
+# Group Message Read Receipt Events
 
 ## Feature overview
 

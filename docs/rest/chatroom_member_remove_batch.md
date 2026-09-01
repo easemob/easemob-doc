@@ -1,4 +1,4 @@
-# Remove Chat Room Members in Bulk
+# Bulk Remove Chat Room Members
 
 ## Feature overview
 

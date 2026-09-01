@@ -7,7 +7,12 @@ const getSubDirectories = (dir) => fs.readdirSync(dir).filter(item => fs.statSyn
 const SDK_PATH = path.resolve(__dirname, '../../sdk/v5')
 const platformList = getSubDirectories(SDK_PATH)
 
-/** SDK V5 sidebar template. */
+/**
+ * SDK V5 sidebar template.
+ *
+ * Sidebar labels come exclusively from each item's `text` field and are
+ * intentionally independent of Markdown H1 and frontmatter titles.
+ */
 const sdkV5Sidebar = [
   { text: "Beginner's Guide", link: "beginner_guide.html" },
   { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
@@ -104,14 +109,14 @@ const sdkV5Sidebar = [
     children: [
       { text: 'Overview', link: 'push/push_overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter'] },
       { text: 'Integrate APNs', link: 'push/push_apns.html', only: ['ios'] },
-      { text: 'Integrate FCM', link: 'push/push_fcm.html.html', only: ['android'] },
+      { text: 'Integrate FCM', link: 'push/push_fcm.html', only: ['android'] },
       { text: 'Integrate HarmonyOS Push', link: 'push/push_harmony.html', only: ['harmonyos'] },
         { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
         { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
         { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
         { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
-        { text: 'Parse Push Notifications', link: 'push/push_parsing.html', only: ['android', 'ios'] },
-        { text: 'Configure Notification Content',
+        { text: 'Parse Notifications', link: 'push/push_parsing.html', only: ['android', 'ios'] },
+        { text: 'Configure Notification',
             collapsible: true,
             children: [
               { text: 'Overview', link: 'push/push_display_overview.html'},
@@ -175,23 +180,6 @@ function linkExists(platform: string, link: string): boolean {
   }
 }
 
-function getSdkDocumentTitle(platform: string, link: string): string | undefined {
-  try {
-    const filePath = path.join(SDK_PATH, platform, link.replace(/\.html$/, '.md'))
-    const content = fs.readFileSync(filePath, 'utf8')
-    const heading = content.match(/^#\s+(.+)$/m)?.[1]?.trim()
-    if (heading) return heading
-
-    // Some migrated SDK documents define their page title in YAML or JSON
-    // frontmatter instead of using a Markdown level-one heading.
-    return content
-      .match(/^\s*title\s*:\s*["']?([^"'\r\n,}]+)["']?\s*,?\s*$/m)?.[1]
-      ?.trim()
-  } catch {
-    return undefined
-  }
-}
-
 // function handleSidebarItem(platform: string, sidebar: any): any {
 //   const children = Array.isArray(sidebar.children) ? sidebar.children : [];
 //   const newchildren = [];
@@ -247,10 +235,7 @@ function handleSidebarItem(platform, sidebar) {
     if (linkExists(platform, sidebar.link)) {
       const basePath = `/sdk/v5/${platform}`
       const newLink = `${basePath}/${sidebar.link}`
-      const text = platform === 'ios'
-        ? getSdkDocumentTitle(platform, sidebar.link) || sidebar.text
-        : sidebar.text
-      return {...sidebar, text, link:newLink}
+      return {...sidebar, text: sidebar.text, link:newLink}
     }
   }
 }

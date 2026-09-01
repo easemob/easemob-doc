@@ -1,4 +1,4 @@
-# Receive Stream Messages
+# Receive Streaming Messages
 
 ## Feature overview
 

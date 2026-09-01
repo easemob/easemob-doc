@@ -77,7 +77,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 2. The SDK supports reading the current user's locally cached data before login is complete. Use `EMConnectionListener#onDatabaseOpened` to monitor when the database is opened. For details, see [Use the local database before login is complete](login.html#use-the-local-database-before-login-is-complete).
 :::
 
-## Set automatic data synchronization after login
+## Set auto data synchronization after login
 
 ### Synchronized data
 

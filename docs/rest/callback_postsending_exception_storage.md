@@ -1,4 +1,4 @@
-# Webhook Data Stored on the Chat Server
+# Webhook Data Storage on the Chat Server
 
 ## Feature overview
 

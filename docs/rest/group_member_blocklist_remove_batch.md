@@ -1,4 +1,4 @@
-# Remove Users from the Group Blocklist in Bulk
+# Bulk Remove Users from the Group Blocklist
 
 ## Feature overview
 

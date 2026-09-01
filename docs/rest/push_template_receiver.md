@@ -1,8 +1,8 @@
-# Set the Push Template Name for a Receiver
+# Set the Push Template Name for a Recipient
 
 ## Feature overview
 
-A receiver can call this API to set a push template.
+A recipient can call this API to set a push template.
 
 ## Call frequency limit
 

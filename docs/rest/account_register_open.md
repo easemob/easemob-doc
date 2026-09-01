@@ -1,15 +1,14 @@
-# Register a User Without Authorization
+# Register a User Openly
 
 ## Feature overview
 
-- Open registration allows users to register their own accounts with a username and password after logging in to the client SDK.
-- It is generally used when trying the demo and in test or development environments.
-- You do not need to pass a token when calling this API.
+- Open registration allows users to sign up accounts using a username and password **without providing a token**.
+- It is generally used in development environments.
 - User IDs and passwords must meet the relevant requirements when you register users.
 
 ## Configure open registration
 
-To use open registration, set the user registration mode on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
+To use open registration, set the user registration mode to **Open Registration** on the **Chat > Features > User & Login** page in [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Call frequency limit
 

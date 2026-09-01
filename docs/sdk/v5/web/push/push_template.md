@@ -43,8 +43,8 @@ For push-template data structures, see [Push Extension Fields](/rest/push_extens
 
 After offline push templates are enabled, the **Offline Push** page generates the `default` and `detail` templates. If a custom template is not configured or specified, the server uses a default template to generate the offline push notification, and you do not need to pass a template name when sending a message.
 
-- `default`: The default push title is **You have a new message**, and the push content is **Tap to view**.
-- `detail`: The default push title is **You have a new message**, and the push content contains the message sender's push nickname and message content.
+- `default`: The default push title is **You've got a new message**, and the push content is **Please click to view**.
+- `detail`: The default push title is **You've got a new message**, and the push content contains the message sender's push nickname and message content.
 
 ![img](/images/console/push_template_default.png)
 
@@ -54,7 +54,7 @@ In the **Actions** column, select **More > Edit** to change the push title and c
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| Title/Content | Array | Push titles and content support the following configuration methods:<br/> - Fixed content: Enter fixed content directly, such as the title **Hello** and content **You have a new message**.<br/> - Built-in parameters: Use server-defined placeholders to dynamically populate content. 1. `{$dynamicFrom}` populates friend remarks, the group nickname (for group messages only), or the push nickname in order of priority. 2. `{$fromNickname}` represents the push nickname. 3. `{$msg}` represents the message content.<br/> - Custom parameters: Use array-index placeholders to populate content in the format `{0}`, `{1}`, `{2}` ... `{n}`. |
+| Title/Content | Array | Push titles and content support the following configuration methods:<br/> - Fixed content: Enter fixed content directly, such as the title **Hello** and content **You've got a new message**.<br/> - Built-in parameters: Use server-defined placeholders to dynamically populate content. 1. `{$dynamicFrom}` populates friend remarks, the group nickname (for group messages only), or the push nickname in order of priority. 2. `{$fromNickname}` represents the push nickname. 3. `{$msg}` represents the message content.<br/> - Custom parameters: Use array-index placeholders to populate content in the format `{0}`, `{1}`, `{2}` ... `{n}`. |
 
 For fixed content and built-in parameters, you do not need to pass additional template parameters when sending a message. For custom parameters, pass parameter values through message extension fields when sending a message.
 

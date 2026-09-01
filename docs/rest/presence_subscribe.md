@@ -1,4 +1,4 @@
-# Subscribe to Presence in Bulk
+# Subscribe to Presence of Users
 
 Presence indicates a user's current status. In addition to the online and offline states built into EasyIM, you can add custom presence states such as Busy, Be right back, Away, On the phone, and Out to lunch. This section shows how to use the EasyIM RESTful APIs to manage presence subscriptions, including setting presence, subscribing to and retrieving presence in bulk, unsubscribing, and querying the subscription list.
 

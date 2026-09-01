@@ -61,7 +61,7 @@ The SDK provides events for monitoring changes to the current user's, other user
 - `onOwnInfoUpdated`: Triggered after the currently logged-in user's attributes are synchronized or updated and written to the cache.
 - `onUserInfoUpdated`: Triggered after another user's attributes are updated and written to the cache, including in the following scenarios:
   - A message from another user is received, and the sender's nickname or avatar in the message changed. To implement a user-attribute update event in this scenario, enable `enableUserInfoSync` during initialization.
-  - [A subscribed non-friend user's attributes change](userprofile.html#subscribe-to-attribute-changes-for-non-friend-users).
+  - [A subscribed stranger's attributes change](userprofile.html#subscribe-to-attribute-changes-for-strangers).
 - `onContactInfoUpdated`: Triggered after a friend's user attributes are updated. This is a friend event and is monitored through `contactManager`.
 
 **We recommend registering the listeners during app initialization so that you can receive events and refresh the UI promptly during initial synchronization after login, message-triggered updates, and subscription updates.** For user-attribute change notifications in other scenarios, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
@@ -133,7 +133,7 @@ contacts.forEach(contact => {
 ```
 
 :::tip
-`contactManager.getContacts` returns only the current in-memory friend list and its user-attribute view. To retrieve the latest user attributes for a non-friend user, call a server API such as [userInfoManager.getUserInfoByUserId](userprofile.html#retrieve-all-user-attributes-from-the-server).
+`contactManager.getContacts` returns only the current in-memory friend list and its user-attribute view. To retrieve the latest user attributes for a stranger, call a server API such as [userInfoManager.getUserInfoByUserId](userprofile.html#retrieve-all-user-attributes-from-the-server).
 :::
 
 ## Considerations

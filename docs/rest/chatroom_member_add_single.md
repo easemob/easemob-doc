@@ -1,4 +1,4 @@
-# Add a Chat Room Member
+# Add a Single Chat Room Member
 
 ## Feature overview
 

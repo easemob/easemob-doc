@@ -1,4 +1,4 @@
-# User Status Change Webhook Events
+# User Status Change Events
 
 ## Feature overview
 

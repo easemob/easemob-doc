@@ -207,7 +207,7 @@ Use cumulative merged content for UI rendering so users always see the latest co
 | [Pre-delivery webhook](/rest/callback_presending.html) | No | Trigger a server-side callback before sending a message so the app server can preprocess it. |
 | [Post-delivery webhook](/rest/callback_postsending.html)  | No | Trigger a server-side callback after sending a message so the app backend can perform necessary data synchronization. |
 | Synchronization to the sender's other clients after successful delivery | No | Synchronize the successfully sent message to the sender's other devices. |
-| [Local database storage for both sender and receiver](/product/limitation.html#message-storage) | Yes | Store messages in the local databases of both the sender and receiver. |
+| [Local database storage for both sender and recipient](/product/limitation.html#message-storage) | Yes | Store messages in the local databases of both the sender and recipient. |
 
 <!-- | [Content moderation](/value-added/moderation/moderation_overview.html) | No | Moderate and intercept message content. | -->
 <!-- | [Message translation](/value-added/translation/message_translation_ios.html) | Yes | Translate message content. | -->

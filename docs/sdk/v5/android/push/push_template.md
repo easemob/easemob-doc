@@ -6,17 +6,17 @@ Push templates are used to customize the title and content of push notifications
 
 You can configure push templates through EasyIM Console or the [server-side REST API for configuring push templates](/rest/push_template_create.html), and specify the template name and template parameters through message extension fields when sending messages.
 
-Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or receiver.
+Push templates include the default templates `default` and `detail`, and custom templates. Default templates apply to general push scenarios. Custom templates apply to scenarios where different push content needs to be displayed by business scenario, language, or recipient.
 
 Push templates have the following characteristics:
 
 1. Push templates have a higher priority than [calling the API to set push content in the notification bar](push_display_attribute.html).
 2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/rest/push_template_create.html) is supported.
 3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users.
-4. The receiver can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
+4. The recipient can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
 5. Priority of push template usage:
    - Custom templates have a higher priority than default templates.
-   - When the sender specifies a push template in the message extension field, even if the receiver has set a push template, the push notification is displayed according to the push template set by the sender.
+   - When the sender specifies a push template in the message extension field, even if the recipient has set a push template, the push notification is displayed according to the push template set by the sender.
 
 ## Feature activation
 
@@ -44,8 +44,8 @@ For the data structure related to push templates, see [Push extension fields](/r
 
 After offline push templates are enabled, two templates, `default` and `detail`, are added to the **Template Management** page by default. If no custom push template is configured, the default template is automatically used when a message is pushed, and you do not need to pass in a template name when creating a message.
 
- - `default`: By default, the push title is **You have a new message**, and the push content is **Please tap to view**. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `SimpleBanner`, the default push template is `default`.
- - `detail`: By default, the push title is **You have a new message**, and the push content is the push nickname of the message sender and the message content. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `MessageSummary`, the default push template is `detail`.
+ - `default`: By default, the push title is **You've got a new message**, and the push content is **Please click to view**. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `SimpleBanner`, the default push template is `default`.
+ - `detail`: By default, the push title is **You've got a new message**, and the push content is the push nickname of the message sender and the message content. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `MessageSummary`, the default push template is `detail`.
 
 ![img](/images/console/push_template_default.png)
 
@@ -55,7 +55,7 @@ You can choose **More > Edit** in the **Actions** column to modify the push titl
 
 | Parameter | Type | Description |
 | :-------------- | :----- | :----- |
-| Title/content | Array | The parameters can be set in the following ways:<br/> - Enter fixed content. For example, set the title to **Hello** and the content to **You have a new message**. <br/> - Built-in parameter filling: 1. `{$dynamicFrom}`: Fills friend remarks, group nickname (group messages only), and push nickname in descending priority order. 2. `{$fromNickname}`: Push nickname. 3. `{$msg}`: Message content.<br/> - Custom parameter filling: Enter array index placeholders in the template. The format is: {0} {1} {2} ... {n} |
+| Title/content | Array | The parameters can be set in the following ways:<br/> - Enter fixed content. For example, set the title to **Hello** and the content to **You've got a new message**. <br/> - Built-in parameter filling: 1. `{$dynamicFrom}`: Fills friend remarks, group nickname (group messages only), and push nickname in descending priority order. 2. `{$fromNickname}`: Push nickname. 3. `{$msg}`: Message content.<br/> - Custom parameter filling: Enter array index placeholders in the template. The format is: {0} {1} {2} ... {n} |
 
 For the push title and content, the first two setting methods do not require this parameter to be passed in when creating a message. The third setting method requires the parameter to be passed in through the extension field.
 
@@ -215,9 +215,9 @@ message.setMessageStatusCallback(new EMCallBack() {...});
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-## The message receiver uses a push template
+## Use a push template for the message recipient
 
-The message receiver can call `setPushTemplate` and pass in the push template name to select the template to use.
+The message recipient can call `setPushTemplate` and pass in the push template name to select the template to use.
 
 :::tip
 If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.

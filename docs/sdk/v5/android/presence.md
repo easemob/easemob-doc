@@ -1,4 +1,4 @@
-# Presence Subscription
+# Presence
 
 ## Feature overview
 

@@ -1,4 +1,4 @@
-# Chat Group and Chat Room Admin Change Webhook Events
+# Chat Group and Chat Room Admin Change Events
 
 ## Feature overview
 
@@ -54,7 +54,7 @@ The following example uses the event for adding a chat group admin. The fields a
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `ADMIN` when a chat group or chat room admin is added. |
 | `operator`     | String | Operator. If an app admin adds the admin, the value is fixed as `@ppAdmin`.        |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.      |
@@ -105,7 +105,7 @@ The following example uses the event for removing a chat group admin. The fields
 | `appkey`       | String | Unique identifier of the app registered in the EasyIM Console.                                |
 | `id`           | String | Chat group or chat room ID.                                                 |
 | `type`         | String | Event type:<br/> - `GROUP`: Chat group <br/> - `CHATROOM`: Chat room     |
-| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The receiver can use this field to identify a chat group or chat room operation event. |
+| `event`        | String | For chat groups and chat rooms, the value is fixed as `group_op_event`. The recipient can use this field to identify a chat group or chat room operation event. |
 | `operation`    | String | Operation. The value is `ADMIN` when a chat group or chat room admin is removed. |
 | `operator`     | String | Operator. If an app admin removes the admin, the value is fixed as `@ppAdmin`.         |
 | `timestamp`    | Long   | Unix timestamp when the operation is completed.      |

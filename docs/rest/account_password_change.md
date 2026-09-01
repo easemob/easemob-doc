@@ -1,4 +1,4 @@
-# Change a User's Password
+# Change the Password of a Single User
 
 ## Feature overview
 

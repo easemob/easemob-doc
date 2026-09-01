@@ -1,8 +1,8 @@
-# Query an Offline Push Template
+# Retrieve an Offline Push Template
 
 ## Feature overview
 
-Query an offline push template.
+Retrieve an offline push template.
 
 ## Call frequency limit
 

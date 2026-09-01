@@ -1,10 +1,10 @@
-# Force a User Offline
+# Kick a User Offline All Devices
 
 ## Feature overview
 
-- Forcing a user offline changes the user's status to offline. The user must log in again to resume normal use.
+- Kicking a user offline changes the user's status to offline. The user must log in again to resume normal use.
 - When the user comes online again, they can receive offline messages sent while they were banned. Note that offline messages are stored for up to 7 days by default. If the client does not come online within 7 days, the server discards the expired messages.
-- If the user is logged in on multiple devices, calling this API forces the specified user offline on all logged-in devices. To force the user offline on a specific device, call the [Force a user offline on a specific device](account_offline_device_single.html) API.
+- If the user is logged in on multiple devices, calling this API forces the specified user offline on all logged-in devices. To kick the user offline on a specific device, call the [Kick a user offline on a specific device](account_offline_device_single.html) API.
   
 ## Call frequency limit
 
@@ -18,7 +18,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 
 | Parameter       | Type     | Description               |
 |:---------|:-------|:-----------------|
-| `username` | String | The user ID of the user to force offline.|
+| `username` | String | The user ID of the user to kick offline.|
 
 For descriptions of the parameters in the request URL, see [Request URL parameters](overview.html#request-url).
 

@@ -1,8 +1,8 @@
-# Query All Globally Muted Users in an App
+# Retrieve All Globally Muted Users in an App
 
 ## Feature overview
 
-Query all globally muted users in an app and their remaining mute durations by page.
+Retrieve all globally muted users in an app and their remaining mute durations by page.
 
 ## Feature activation
 

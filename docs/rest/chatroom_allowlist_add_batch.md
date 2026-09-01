@@ -1,4 +1,4 @@
-# Add Users to the Chat Room Allowlist in Bulk
+# Bulk Add Users to the Chat Room Allowlist
 
 ## Feature overview
 
