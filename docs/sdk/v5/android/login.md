@@ -15,8 +15,8 @@ After setting the registration mode, you can create users in either of the follo
 
 1. **Create users by calling the REST API**
 
-   - Authorized registration: Call the [Register a Single User Through Authorized Registration](/rest/account_register_authorized_single.html) or [Register Users in a Batch Through Authorized Registration](/rest/account_register_authorized_batch.html) API.
-   - Open registration: After enabling open registration, call the [Register a User Through the REST API Using Open Registration](/rest/account_register_open.html) API.
+   - Authorized registration: [Create a single user](/rest/account_register_authorized_single.html) or [multiple users](/rest/account_register_authorized_batch.html) through the RESTful APIs.
+   - Open registration: [Create users](/rest/account_register_open.html) through the open registration API.
 
 2. **Create users in EasyIM Console**
 
@@ -28,7 +28,7 @@ The SDK logs in with a user ID and EasyIM token. Pass `userId` and `token` when 
 
 In a test environment, after you create users in [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#create-a-user).
 
-In a production environment, we recommend integrating the [Get App Token API](/rest/easemob_app_token.html) and [Get User Token API](/rest/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
+In a production environment, we recommend integrating the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
 
 ```java
 EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {

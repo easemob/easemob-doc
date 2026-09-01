@@ -147,7 +147,7 @@ EMClient.getInstance().init(context, options);
 
 Create a user in [EasyIM Console](https://console.easyim.ai/user/login), and obtain the user ID and user token. For details, see [Create Users](/product/console/operation_user.html#create-a-user).
 
-For security in production, integrate the [Get App Token API](/rest/easemob_app_token.html) and [Get User Token API](/rest/easemob_user_token.html) into your app server to implement token retrieval, so users obtain tokens from your app server.
+For security in production, integrate the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) into your app server to implement token retrieval, so users obtain tokens from your app server.
 
 ### 3. Log in to an account
 

@@ -65,7 +65,7 @@ curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
     "from": "222",
     "to": "301018534445057",
     "body": {
-        "msg": "第一个分片",
+        "msg": "first chunk",
         "seq": 0,
         "type": "markdown"
     },
@@ -86,7 +86,7 @@ curl -L 'https://XXXX/XXXX/XXXX/stream_message/chatgroup' \
     "to": "301018534445057",
     "body": {
         "msgId": "1499712384170721280",
-        "msg": "第二个分片，finish。",
+        "msg": "second chunk，finish.",
         "seq": 1,
         "finish": true,
         "finishReason": 0,

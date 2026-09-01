@@ -106,7 +106,7 @@ For a description of the `Authorization` field, see [Request header field descri
 
 ### Attachment message import description
 
-For attachment messages such as image, voice, video, and file messages, **importing an attachment message** uses a different process from **sending an attachment message**. When importing an attachment message, you can directly use the attachment URL from your service. When sending an attachment message, first call [Upload a file](message_upload_file.html), and then use the EasyIM file URL returned after upload to construct the message body.
+For attachment messages such as image, voice, video, and file messages, **importing an attachment message** uses a different process from **sending an attachment message**. When importing an attachment message, you can directly use the attachment URL from your service. When sending an attachment message, first call [the file upload API](message_upload_file.html), and then use the EasyIM file URL returned after upload to construct the message body.
 
 When importing attachment messages, note the following:
 
