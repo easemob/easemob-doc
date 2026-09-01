@@ -1,5 +1,24 @@
 # Flutter 单群聊 UIKit 更新日志
 
+## v2.3.3
+
+#### 优化
+
+- 依赖的 `Flutter SDK` 升级至 4.22.0。
+- 升级示例工程的 Android 构建工具链以适配 Flutter 3.47（Gradle 9.3.1 / AGP 9.1.0 / KGP 2.4.0），仅涉及示例工程构建配置。
+
+## v2.3.2
+
+#### 优化
+
+- 依赖的 `Flutter SDK` 升级至 4.19.3。
+- 更新 README 中 Android 最低版本说明为 minSDKVersion 24。
+- 重构原生插件使用中性命名，以支持跨仓库同步。
+
+#### 修复
+
+修复与 `im_flutter_sdk` 同项目集成时 `MessageType` 等同名类型产生导入冲突的问题。
+
 ## v2.3.1
 
 #### 新增特性
