@@ -172,7 +172,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/messages/broadcast' \
         "type": "loc",
         "lat": "39.966",
         "lng":"116.322",
-        "addr":"中国北京市海淀区中关村"
+        "addr":"123 Main Street, Apt 4B, Los Angeles, CA"
     },
     "from": "admin",
     "ext": {

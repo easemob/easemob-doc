@@ -22,7 +22,7 @@ The following figure shows an example UI implementation:
 Before you start, make sure that the following requirements are met:
 
 - The SDK is initialized. For details, see [Quickstart](quickstart.html).
-- You understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- You understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Implementation process
 

@@ -27,7 +27,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Delete user accounts | Delete a specified number of user accounts from an app. |
 | Change a user password | Change a user's login password without providing the original password. |
 | Ban or unban users  | Ban users, immediately force them offline, and prevent them from logging in to EasyIM until they are unbanned. |
-| Force a user offline | Change a user's status to offline. The user must log in again to resume normal use. |
+| Kick a user offline | Change a user's status to offline. The user must log in again to resume normal use. |
 | Retrieve user presence | Check whether a user is online or offline. |
 | Retrieve the list of online devices for an account | Retrieve the list of devices on which a specified account is currently logged in. |
 

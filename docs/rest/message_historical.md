@@ -202,7 +202,7 @@ Example
 ```json
 "bodies": [
   {
-    "addr":"西城区西便门桥 ",
+    "addr":"123 Main Street, Apt 4B, Los Angeles, CA ",
     "lat":39.9053,
     "lng":116.36302,
     "type":"loc"
@@ -384,8 +384,8 @@ For example, the following is the format of a combined message whose source mess
       "filename": "17289718748990036",
       "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
       "subType": "sub_combine",
-      "summary": ":yyuu\n:[图片]\n:[文件]\n",
-      "title": "聊天记录",
+      "summary": ":yyuu\n:[Image]\n:[File]\n",
+      "title": "Chat History",
       "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
     }
 ]

@@ -6,7 +6,7 @@ A Reaction is an emoji response to an individual message in a one-to-one or grou
 
 - Delete a Reaction added by the current user.
 - Currently, **Reaction applies only to one-to-one chats and chat groups. Chat rooms do not support Reaction.**
-- For detailed Reaction usage limits, see [Product usage limits](limitation.html).
+- For detailed Reaction usage limits, see [IM feature limits](limitation.html).
 
 ## Feature activation
 

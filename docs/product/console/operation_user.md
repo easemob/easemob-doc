@@ -108,7 +108,7 @@ After being unbanned, the user can connect to and use IM normally. When the user
 
 ![img](/images/console/operation_user_unban.png)
 
-## Force a user offline
+## Kick a user offline
 
 In the user list, click **More** in the **Operation** column for the target user and select **Force Offline**.
 

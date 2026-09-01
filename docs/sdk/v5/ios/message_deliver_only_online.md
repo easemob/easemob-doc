@@ -14,7 +14,7 @@ EasyIM supports delivering messages only to online users. If the recipient is of
 ## Prerequisite
 
 - Initialize the SDK. For details, see [Quickstart](quickstart.html).
-- Understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- Understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Deliver messages only to online users
 

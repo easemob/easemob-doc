@@ -107,7 +107,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
     "to": "222",
     "body": {
         "msgId": "1499696395467098072",
-        "msg": "第三个分片",
+        "msg": "third chunk",
         "seq": 2,
         "finish": true,
         "finishReason": 1,

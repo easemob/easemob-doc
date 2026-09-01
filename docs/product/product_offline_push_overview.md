@@ -35,7 +35,7 @@ For example, for FCM push certificate configuration, see the [FCM push integrati
 
 ## Multi-device offline push policy
 
-For multi-device login, you can configure a push policy on the Certificate Management page of the EasyIM Console. This policy applies to all push channels:
+For multi-device login, you can configure a push policy on the **Certificates** page of the EasyIM Console. This policy applies to all push channels:
 
 - Send push messages only when all devices are offline;
 - Send push messages whenever any device is offline.

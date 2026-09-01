@@ -28,7 +28,7 @@ Before integration, make sure that the following requirements are met:
 
 - The SDK has been upgraded to v4.20.0 or later.
 - The SDK has been initialized. For details, see [Quickstart](quickstart.html).
-- You understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- You understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Monitor chat group member name card updates
 
@@ -159,7 +159,7 @@ It depends on the app scenario. Automatic synchronization through messages depen
 
 - [Automatic user information management](userinfo_provider.html)
 - [Manage user attributes](userprofile.html)
-- [Usage limits](/product/limitation.html)
+- [IM feature limits](/product/limitation.html)
 
 ## API list
 

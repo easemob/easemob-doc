@@ -220,8 +220,8 @@ The total default call frequency limit for the user management APIs and offline 
 | * Retrieve the Status of an Offline Message    |  GET   | /{org_name}/{app_name}/users/{username}/offline_msg_status/{msg_id}   |  
 | * Ban a User   |  POST     | /{org_name}/{app_name}/users/{username}/deactivate          |  
 | * Unban a User    |  POST                    | /{org_name}/{app_name}/users/{username}/activate         |  
-| * Force a User Offline         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    |  
-| * Force a User Offline on a Specific Device | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} |  
+| * Kick a User Offline         |  GET    | /{org_name}/{app_name}/users/{username}/disconnect    |  
+| * Kick a User Offline on a Device | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} |  
 | * Retrieve the Online Login Device List for an Account    | GET  | /{org_name}/{app_name}/users/{username}/resources |  
 
 | RESTful API |Method  | API URL|  
@@ -266,7 +266,7 @@ The total default call frequency limit for the user management APIs and offline 
 | Get User Favorites by Page      | GET  | /{org_name}/{app_name}/users/{username}/collections   | 100 calls/second/App Key |          |  
 | Add a Favorite      | POST  | /{org_name}/{app_name}/users/{username}/collections   | 100 calls/second/App Key |          |  
 | Add User Favorites in Bulk      | POST  | /{org_name}/{app_name}/collections   | 100 calls/second/App Key |          |  
-| Modify the Extension Information of a User Favorite   | PUT  | /{org_name}/{app_name}/users/{username}/collections/{collectionId}  | 100 calls/second/App Key |          |  
+| Modify User Favorite Extensions   | PUT  | /{org_name}/{app_name}/users/{username}/collections/{collectionId}  | 100 calls/second/App Key |          |  
 | Delete User Favorites   | DELETE | /{org_name}/{app_name}/users/{username}/collections  | 100 calls/second/App Key |          |  
 
 ### User relationship management

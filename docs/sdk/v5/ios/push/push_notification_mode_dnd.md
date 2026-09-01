@@ -9,7 +9,7 @@ To optimize the user experience when users handle a large number of push notific
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
 3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable for free**.
+4. Click **Enable Free**.
 
 ![image](/images/android/push/push_advanced_feature_enable.png)
 
@@ -240,10 +240,6 @@ NSArray *conversations = @[conversation1,conversation2];
         }
     }];
 ```
-
-
-
-
 
 ## API List
 

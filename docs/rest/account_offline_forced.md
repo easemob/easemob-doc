@@ -4,7 +4,7 @@
 
 - Kicking a user offline changes the user's status to offline. The user must log in again to resume normal use.
 - When the user comes online again, they can receive offline messages sent while they were banned. Note that offline messages are stored for up to 7 days by default. If the client does not come online within 7 days, the server discards the expired messages.
-- If the user is logged in on multiple devices, calling this API forces the specified user offline on all logged-in devices. To kick the user offline on a specific device, call the [Kick a user offline on a specific device](account_offline_device_single.html) API.
+- If the user is logged in on multiple devices, calling this API forces the specified user offline on all logged-in devices. To kick the user offline on a specific device, call the [Kick a user offline on a device](account_offline_device_single.html) API.
   
 ## Call frequency limit
 

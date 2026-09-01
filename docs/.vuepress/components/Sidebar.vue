@@ -64,7 +64,7 @@
   }, {immediate:true})
 </script>
 <template>
-  <Sidebar>
+  <Sidebar :key="pageData.path">
     <template #top>
       <div class="sidebar-header" :class="{'pt20':isNull}">
         <span class="sidebar-title">{{title}}</span>

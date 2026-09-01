@@ -113,7 +113,7 @@ Webhook request body fields:
         "bodies": [
             {
                 "lng": 116.322,
-                "addr": "中国北京市海淀区中关村",
+                "addr": "123 Main Street, Apt 4B, Los Angeles, CA",
                 "type": "loc",
                 "lat": 39.966
             }
@@ -491,7 +491,7 @@ Webhook request body fields:
                 "subType": "sub_combine",
                 "file_length": 701,
                 "secret": "7sUSEC7gEfCYlE9p85BBKlYH1ZsF2VFN49QS85LJMTNIkBKw",
-                "title": "聊天记录",
+                "title": "Chat History",
                 "type": "txt",
                 "url": "https://a1.easemob.com/easemob-demo/support/chatfiles/eec4eb00-2ee0-11f0-8f24-b3ce6aa9421a"
             }

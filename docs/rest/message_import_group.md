@@ -7,7 +7,7 @@ You can import group chat messages during data migration:
 - **Conversation constraint**: Importing a message does not automatically create a chat group conversation. If the target chat group does not exist, importing the message still does not create the corresponding chat group conversation.
 - **Order requirement**: Import messages in chronological order so that earlier messages are imported first.
 - **Roaming retrieval**: After a message is imported successfully, the client must actively retrieve roaming messages to view it.
-- **Attachment message description**: The process for importing attachment messages differs from the process for sending them. For details, see [Attachment message import workflow](#message-import-workflow) and [Attachment message import description](#attachment-message-import-description) below.
+- **Attachment message description**: The process for importing attachment messages differs from the process for sending them. For details, see [Attachment message import workflow](#message-import-workflow) and [Attachment message import description](#attachment-message-import) below.
 
 ## Message import workflow
 
@@ -104,9 +104,9 @@ For a description of the `Authorization` field, see [Request header field descri
 | `msg_timestamp` | Long   | No       | The timestamp of the message to import, in milliseconds.<br/> - If this parameter is not passed, the EasyIM server sets the import time to the current time.<br/> - The value cannot be `0` or less than `1000` milliseconds. It must be later than the chat group creation time and earlier than the current time.<br/> - **Order constraint**: The value must be greater than the timestamp of the last message imported into the same chat group. Import messages in chronological order. |
 | `need_download` | Bool   | No       | Whether the EasyIM server retrieves the attachment and saves it to the EasyIM file service.<br/> - `true`: Yes. Make sure that the EasyIM server can directly access `body.url` and that the URL returns actual, valid attachment content.<br/> - (Default) `false`: No. EasyIM does not actively save the attachment, and attachment access continues to depend on the original URL from your service. |
 
-### Attachment message import description
+### Attachment message import
 
-For attachment messages such as image, voice, video, and file messages, **importing an attachment message** uses a different process from **sending an attachment message**. When importing an attachment message, you can directly use the attachment URL from your service. When sending an attachment message, first call [Upload a file](message_upload_file.html), and then use the EasyIM file URL returned after upload to construct the message body.
+For attachment messages such as image, voice, video, and file messages, **importing an attachment message** uses a different process from **sending an attachment message**. When importing an attachment message, you can directly use the attachment URL from your service. When sending an attachment message, first call [the file upload API](message_upload_file.html), and then use the EasyIM file URL returned after upload to construct the message body.
 
 When importing attachment messages, note the following:
 

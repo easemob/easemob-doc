@@ -649,7 +649,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/users"  \
   "body": {
     "lat": "39.966",
     "lng":"116.322",
-    "addr":"中国北京市海淀区中关村"
+    "addr":"123 Main Street, Apt 4B, Los Angeles, CA"
   }
 }'
 ```

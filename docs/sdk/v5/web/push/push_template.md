@@ -24,7 +24,7 @@ Push templates have the following characteristics:
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
 3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable for free**.
+4. Click **Enable Free**.
 
 After activation, you can [configure push templates](#configure-push-templates).
 
@@ -167,23 +167,22 @@ For example, configure the push template as shown in the following image:
 
 After you use the following example code, the notification displayed in the notification bar is:
 
-You received a message<br/>
-View it now
+![img](/images/android/push/push_template_custom_example.png)
 
 ```typescript
 // The following example uses a text message. Other message types are configured in the same way.
 const message = client.chatManager.createTextMessage({
-  conversationId: 'username',
-  conversationType: 'singleChat',
-  content: 'message content',
+  conversationId: "username",
+  conversationType: "singleChat",
+  content: "message content",
   ext: {
     em_push_template: {
       // Set the push-template name. If omitted, the server applies the default push-template logic.
-      name: 'push',
+      name: "push",
       // Set the value array used to populate the template title.
-      title_args: ['You', 'message'],
+      title_args: ["You've", "message"],
       // Set the value array used to populate the template content.
-      content_args: ['Please', 'check'],
+      content_args: ["Please", "view"],
     },
   },
 });

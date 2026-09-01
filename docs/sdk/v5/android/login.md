@@ -15,8 +15,8 @@ After setting the registration mode, you can create users in either of the follo
 
 1. **Create users by calling the REST API**
 
-   - Authorized registration: Call the [Register a Single User Through Authorized Registration](/rest/account_register_authorized_single.html) or [Register Users in a Batch Through Authorized Registration](/rest/account_register_authorized_batch.html) API.
-   - Open registration: After enabling open registration, call the [Register a User Through the REST API Using Open Registration](/rest/account_register_open.html) API.
+   - Authorized registration: [Create a single user](/rest/account_register_authorized_single.html) or [multiple users](/rest/account_register_authorized_batch.html) through the RESTful APIs.
+   - Open registration: [Create users](/rest/account_register_open.html) through the open registration API.
 
 2. **Create users in EasyIM Console**
 
@@ -28,7 +28,7 @@ The SDK logs in with a user ID and EasyIM token. Pass `userId` and `token` when 
 
 In a test environment, after you create users in [EasyIM Console](https://console.easyim.ai/user/login), the EasyIM server automatically assigns user tokens to them. For details, see [Create Users](/product/console/operation_user.html#create-a-user).
 
-In a production environment, we recommend integrating the [Get App Token API](/rest/easemob_app_token.html) and [Get User Token API](/rest/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
+In a production environment, you are advised to integrate the [app token retrieval API](/rest/easemob_app_token.html) and [user token retrieval API](/rest/easemob_user_token.html) into your app server. The client then obtains a user token from your app server before logging in to the SDK.
 
 ```java
 EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
@@ -174,10 +174,7 @@ boolean connected = EMClient.getInstance().isConnected();
 
 ## Logout
 
-Call `EMClient#logout` to log out of the current account. `unbindToken` indicates whether to unbind the device push token during logout:
-
-- `true`: Unbinds the device push token.
-- `false`: Does not unbind the device push token.
+Call `EMClient#logout` to log out of the current account. 
 
 Obtain the asynchronous logout result through `EMCallBack`:
 
@@ -196,13 +193,21 @@ EMClient.getInstance().logout(true, new EMCallBack() {
 });
 ```
 
-:::tip
-1. If the app integrates third-party push such as FCM, we recommend setting `unbindToken` in `logout` to `true` so that the SDK also unbinds the current device's push token. Otherwise, the device might continue receiving offline push notifications for the current account after logout.
+### Push token unbinding
+
+If the app integrates FCM, we recommend setting `unbindToken` in `logout` to `true` so that the SDK also unbinds the current device's push token. Otherwise, the device might continue receiving offline push notifications for the current account after logout.
+
+`unbindToken` indicates whether to unbind the device push token during logout:
+
+- `true`: Unbinds the device push token.
+- `false`: Does not unbind the device push token.
 
 If push token unbinding fails because of a network exception, `logout` returns a failure. The app can inform the user that unbinding failed and that push notifications might still be received after continuing to log out. If the user confirms, set `unbindToken` to `false` and call `logout` again to log out only of the EasyIM account without unbinding the push token. After the network recovers, handle the remaining push token unbinding at an appropriate time. Do not retry indefinitely on a background thread.
 
-2. When calling the asynchronous `logout(boolean, EMCallBack)`, wait for `onSuccess()` before calling `loginWithToken` for another account or performing an operation that depends on logout completion. `onError(int, String)` indicates that logout or push token unbinding failed. Handle it according to the error code and business scenario.
-:::
+### Logout completion handling
+
+When calling the asynchronous `logout(boolean, EMCallBack)`, wait for `onSuccess()` before calling `loginWithToken` for another account or performing an operation that depends on logout completion. `onError(int, String)` indicates that logout or push token unbinding failed. Handle it according to the error code and business scenario.
+
 
 ## Switch accounts
 

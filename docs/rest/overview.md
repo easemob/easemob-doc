@@ -40,7 +40,7 @@ Each request URL contains the `host`, `org_name`, and `app_name` parameters.
 | `org_name` | String | Yes       | Unique identifier assigned by EasyIM to each company (organization). |
 | `app_name` | String | Yes       | App name entered when you created the app in the EasyIM Console.|
 
-You can view the app's domain `host`, organization name `org_name`, and app name `app_name` in the **Application Basic Information** section on the **Overview** page of the EasyIM Console.
+You can view the app's domain `host`, organization name `org_name`, and app name `app_name` in the **Application Basic Information** area on the **Overview** page of the EasyIM Console.
 
 ![img](/images/server-side/app_info.png)
 
@@ -50,7 +50,7 @@ You can view the app's domain `host`, organization name `org_name`, and app name
 | :-------------- | :----- | :----------------- | :-------------------- |
 | `Content-Type`  | String | Yes                                       | Content type. Set it to `application/json`.    |
 | `Accept`        | String | Yes                                       | Content type. Set it to `application/json`.    |
-| `Authorization` | String | Yes                                       | App admin authentication token in the format `Bearer YourAppToken`, where `Bearer` is a fixed string followed by a space and the obtained app token.<br/>EasyIM REST APIs require Bearer HTTP authentication. You must include this field in the request header each time you send an HTTP request. For information about obtaining a dynamic app token, see [Authenticate with an EasyIM App Token](easemob_app_token.html). |
+| `Authorization` | String | Yes                                       | App admin authentication token in the format `Bearer YourAppToken`, where `Bearer` is a fixed string followed by a space and the obtained app token.<br/>EasyIM REST APIs require Bearer HTTP authentication. You must include this field in the request header each time you send an HTTP request. For information about obtaining a dynamic app token, see [Authentication with an EasyIM App Token](easemob_app_token.html). |
 
 ### Request body
 
@@ -76,4 +76,4 @@ For the method, API URL, brief description, and call frequency limit of each RES
 Before calling EasyIM RESTful APIs, ensure that the following requirements are met:
 
 - In the [EasyIM Console](https://console.easyim.ai/user/login), you have [registered an account](/product/console/account_register.html) and [created an app](/product/console/app_create.html).
-- You have obtained an app token from the server. For details, see [Authenticate with an App Token](easemob_app_token.html).
+- You have obtained an app token from the server. For details, see [Authenticate with an app token](easemob_app_token.html).

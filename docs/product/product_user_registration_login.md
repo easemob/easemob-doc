@@ -15,8 +15,8 @@ After setting the registration mode, you can create users in the following ways:
 
 1. **Call a REST API to create users**
 
-   - Authorized registration: Call the [authorized registration of a single user](/rest/account_register_authorized_single.html) or [authorized registration of users in a batch](/rest/account_register_authorized_batch.html) API to create users.
-   - Open registration: After enabling open registration, create users through a client or the [REST API for open user registration](/rest/account_register_open.html).
+   - Authorized registration: [Create a single user](/rest/account_register_authorized_single.html) or [multiple users](/rest/account_register_authorized_batch.html) through the RESTful APIs.
+   - Open registration: [Create users](/rest/account_register_open.html) through the open registration API.
 
 2. **Create users in the EasyIM Console**
 

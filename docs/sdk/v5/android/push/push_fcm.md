@@ -48,20 +48,20 @@ Download the certificate file, for example, `myapplication-72d8c-firebase-admins
 
 2. Select **Push** in the left navigation pane.
 
-3. On the **Certificate Management** page, click **Add push certificate**. After the **Add push certificate** dialog box opens, the **Google** tab is displayed by default. You can configure the Google FCM push certificate on this page.
+3. On the **Certificates** page, click **Add push certificate**. After the **Add push certificate** dialog box opens, the **Google** tab is displayed by default. You can configure the Google FCM push certificate on this page.
 
 ![img](/images/console/push_certificate_fcm.png)
 
 | Parameter | Type | Required | Description |
 | :-------------- | :----- | :------- | :---------------------------- |
-| Certificate type | File | Yes | Select whether to use a V1 or legacy certificate.<br/> - **V1**: Recommended. You need to click **Upload certificate** to upload the FCM V1 certificate file and set the **certificate name**.<br/> - **Legacy**: Deprecated and not recommended. You need to configure the **certificate name** and **push key**. |
-| Upload file | File | Yes | Click **Upload certificate** to upload the obtained FCM V1 certificate file (.json file). This item is valid only for V1 certificates. |
-| Certificate name | String | Yes | The FCM sender ID.<br/> - V1 certificate: Obtain the sender ID in the **Firebase Cloud Messaging API (V1)** area on the **Project settings** > **Cloud Messaging** page in the [Firebase console](https://console.firebase.google.com/?hl=zh-cn), as shown below.<br/> - Legacy certificate: Obtain the sender ID in the **Cloud Messaging API (Legacy)** area on the **Project settings > Cloud Messaging** page in the [Firebase console](https://console.firebase.google.com/?hl=zh-cn), as shown below. |
+| Certificate Type | File | Yes | Select whether to use a V1 or legacy certificate.<br/> - **V1**: Recommended. You need to click **Upload** to upload the FCM V1 certificate file and set the **certificate Name**.<br/> - **Okd Version**: Deprecated and not recommended. You need to configure the **Certificate Name** and **Push Key**. |
+| Upload file | File | Yes | Click **Upload** to upload the obtained FCM V1 certificate file (.json file). This item is valid only for V1 certificates. |
+| Certificate Name | String | Yes | The FCM sender ID.<br/> - V1 certificate: Obtain the sender ID in the **Firebase Cloud Messaging API (V1)** area on the **Project settings** > **Cloud Messaging** page in the [Firebase console](https://console.firebase.google.com), as shown below.<br/> - Legacy certificate: Obtain the sender ID in the **Cloud Messaging API (Legacy)** area on the **Project settings > Cloud Messaging** page in the [Firebase console](https://console.firebase.google.com/?hl=zh-cn), as shown below. |
 | Push key | String | Yes | The FCM server key. You need to obtain the server key in the **Cloud Messaging API (Legacy)** area on the **Project settings** > **Cloud Messaging** page in the [Firebase console](https://console.firebase.google.com/), as shown below. This parameter is valid only for legacy certificates. |
 | Channel ID | String | No | FCM channel ID. This parameter is valid only for offline push. |
-| Push priority setting | | No | Message delivery priority. See [Set message priority](https://firebase.google.cn/docs/cloud-messaging/customize-messages/setting-message-priority).<br/> This parameter is valid only for offline push. |
-| Push message type | | No | The type of messages sent to the client through FCM:<br/> - **Data**: Data messages, which are handled by the client app.<br/> - **Notification**: Notification messages, which are automatically handled by the FCM SDK. **Data + notification**: Both notification messages and data messages can be sent through the FCM client.<br/>See FCM's [message type introduction](https://firebase.google.com/docs/cloud-messaging/customize-messages/set-message-type).<br/> This parameter is valid only for offline push. |
-| APNs cross-platform push support | String | No | Whether to enable APNs cross-platform push support. We recommend that you do not enable this parameter for non-cross-platform apps. This parameter is valid only for offline push. |
+| Push Priority setting | | No | Message delivery priority. See [Set message priority](https://firebase.google.cn/docs/cloud-messaging/customize-messages/setting-message-priority).<br/> This parameter is valid only for offline push. |
+| Push Msg Type | | No | The type of messages sent to the client through FCM:<br/> - **Data**: Data messages, which are handled by the client app.<br/> - **Notification**: Notification messages, which are automatically handled by the FCM SDK. **Both**: Both notification messages and data messages can be sent through the FCM client.<br/>See FCM's [message type introduction](https://firebase.google.com/docs/cloud-messaging/customize-messages/set-message-type).<br/> This parameter is valid only for offline push. |
+| APNs cross-platform support | String | No | Whether to enable APNs cross-platform push support. We recommend that you do not enable this parameter for non-cross-platform apps. This parameter is valid only for offline push. |
 
 - Get the V1 certificate name
 

@@ -53,10 +53,10 @@ For detailed steps on how to get a push token and upload it to the EasyIM server
 
 Follow these steps:
 
-1. Log in to [EasyIM Console](https://console.easyim.ai/user/login).
-2. Select **App Management** at the top of the page. In the app list, click the App Key of the test app or production app.
-3. Select **Value-Added Services > Message Push > Offline Push**.
-4. Click **Enable for free**.
+1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
+2. On the **Applications** page, click the App Key of the app of the development or production environment.
+3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
+4. Click **Enable Free**.
 
 ![image](/images/android/push/push_advanced_feature_enable.png)
 
@@ -91,7 +91,7 @@ For the specific configuration method and usage instructions of push templates, 
 
 ## Multi-device offline push policy
 
-In multi-device login scenarios, you can configure the push policy on the **Certificate Management** page in [EasyIM Console](https://console.easyim.ai/user/login). This policy takes effect uniformly for all push channels:
+In multi-device login scenarios, you can configure the push policy on the **Certificates** page in [EasyIM Console](https://console.easyim.ai/user/login). This policy takes effect uniformly for all push channels:
 
 - Send push messages only when all devices are offline.
 - Send push messages when any device is offline.
@@ -105,20 +105,8 @@ In multi-device login scenarios, you can configure the push policy on the **Cert
 1. EasyIM has been enabled. For details, see [Enable and configure EasyIM](/product/console/app_create.html).
 2. You understand the usage limitations of EasyIM. For details, see [Usage limitations](/product/limitation.html).
 3. If you need to use push templates, you must first complete activation in [EasyIM Console](https://console.easyim.ai/user/login).
-4. The applicable conditions for each push service are as follows:
-   - Google FCM: The device has Google Play services enabled and can connect to Google servers.
-   - Xiaomi Push: Xiaomi devices only.
-   - Huawei Push: Huawei devices only.
-   - Meizu Push: Meizu devices only.
-   - OPPO Push: OPPO devices only.
-   - VIVO Push: VIVO devices only.
-   - Honor Push: Honor devices only.
 
-The SDK internally checks device push support in the order above. If no third-party push is configured or the usage conditions are not met, the EasyIM SDK uses the keep-alive mechanism to maintain a persistent connection with the EasyIM server as much as possible to ensure timely message delivery.
-
-**If your app has overseas usage scenarios, we recommend enabling FCM push. Because the applicable conditions of each push service differ, we recommend integrating push services from multiple vendors whenever possible.**
-
-1. Before using message push, you need to complete project registration on the corresponding vendor push service platform and upload the device push certificate to [EasyIM Console](https://console.easyim.ai/user/login).
+4. Before using message push, you need to complete project registration on the [Firebase console](https://console.firebase.google.com/) and upload the device push certificate to [EasyIM Console](https://console.easyim.ai/user/login).
 
 ## Configure push APIs
 

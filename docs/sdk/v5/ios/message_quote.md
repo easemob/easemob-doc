@@ -30,7 +30,7 @@ Before you start, make sure that the following requirements are met:
 
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
 - You can already send and receive messages.
-- Understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- Understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Implementation process
 

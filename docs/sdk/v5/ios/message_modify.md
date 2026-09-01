@@ -37,7 +37,7 @@ Contact the EasyIM business manager to enable this feature.
 Before you start, make sure that the following requirements are met:
 
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html) and [Initialization](initialization.html).
-- Understand the API usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- Understand the API usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 - Contact the EasyIM business manager to enable message editing.
 
 ## Edit a message

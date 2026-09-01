@@ -34,7 +34,7 @@ For chat group messaging capabilities, see [Message Management](message_overview
 Before you start, make sure that the following requirements are met:
 
 - The SDK is initialized and the user is logged in successfully. For details, see [Quickstart](quickstart.html).
-- You understand API call frequency limits and the limits on the number of chat groups and chat group members. For details, see [Usage limits](/product/limitation.html).
+- You understand API call frequency limits and the limits on the number of chat groups and chat group members. For details, see [IM feature limits](/product/limitation.html).
 
 ## Create a chat group
 

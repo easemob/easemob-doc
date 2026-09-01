@@ -300,7 +300,7 @@ The following example shows the `payload` format of a combined message containin
                 "secret": "CeycYKx0Ee-I3fU0d5v4X9BduteO1RZNVsePAgkDQ9sxoVJM",
                 "subType": "sub_combine",
                 "summary": "wzy1: 你在哪里？\nwzy1: 你在哪里？\nwzy1: 你在哪里？",
-                "title": "聊天记录",
+                "title": "Chat History",
                 "type": "txt",
                 "url": "https://a1-hsb.easemob.com/easemob-demo/testy/chatfiles/09ec7550-ac74-11ef-83ce-4719989e3c82"
             }

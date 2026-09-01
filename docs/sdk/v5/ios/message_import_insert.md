@@ -14,7 +14,7 @@ The iOS SDK provides the following methods:
 ## Prerequisite
 
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
-- Understand the usage limits of EasyIM. For details, see [Usage limits](/product/limitation.html).
+- Understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
 ## Batch import messages into the database
 

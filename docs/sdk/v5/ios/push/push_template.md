@@ -25,7 +25,7 @@ Push templates have the following characteristics:
 1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
 2. On the **Applications** page, click the App Key of the app of the development or production environment.
 3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable for free**.
+4. Click **Enable Free**.
 
 After activation, you can [set push templates](#set-push-templates).
 
@@ -96,12 +96,12 @@ Push template parameters are in the message extension `ext.em_push_template`. Th
 
 EasyIM supports adding custom push templates. In addition to [calling the RESTful API](/rest/push_template_create.html) to create a custom push template, you can also add a custom push template in [EasyIM Console](https://console.easyim.ai/user/login). **Custom push templates have a higher level than default templates.**
 
-On the **Offline Push** page, click **Add push template** to create a custom push template.
+On the **Offline Push** page, click **Add Push Template** to create a custom push template.
 
 | Parameter | Type | Description |
 | :-------------- | :----- | :----- |
-| Template name | String | The push template name, which can contain up to 64 characters and supports the following character sets:<br/> - 26 lowercase English letters a-z <br/> - 26 uppercase English letters A-Z <br/> - 10 digits 0-9 |
-| Title/content | Array | For details, see [Configuration in the default push template](#edit-the-default-push-template). |
+| Template Name | String | The push template name, which can contain up to 64 characters and supports the following character sets:<br/> - 26 lowercase English letters a-z <br/> - 26 uppercase English letters A-Z <br/> - 10 digits 0-9 |
+| Title/Content | Array | For details, see [Configuration in the default push template](#edit-the-default-push-template). |
 
 **When creating a message, you need to pass in the template name, push title, and push content by using extension fields**. The push title and content in the notification bar use the formats in the template respectively. For details, see [Parameters of the default push template in message extensions](#edit-the-default-push-template).
 
@@ -184,7 +184,7 @@ NSDictionary *pushObject = @{
     // Set the push template name. If it is not specified, configure the default push template.
     // Before setting it, create the push template in EasyIM Console or by calling the REST API.
     @"name":@"templateName",
-    @"title_args":@[@"You",@"message"],// Set the value array used to populate the template title.
+    @"title_args":@[@"You've",@"a new message"],// Set the value array used to populate the template title.
     @"content_args":@[@"Please",@"view"]// Set the value array used to populate the template content.
 };
 message.ext = @{
@@ -207,8 +207,6 @@ If the sender uses a push template when sending a message, the display content i
 
 }];
 ```
-
-
 
 ## API List
 
