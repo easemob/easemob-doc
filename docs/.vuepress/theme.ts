@@ -26,7 +26,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   },
   // sidebar
   sidebar: zhSidebar,
-  footer: `<div class="footer-left">EasyIM Documentation</div><div class="footer-right">&copy; Easemob ${new Date().getFullYear()}</div>`,
+  footer: `<div class="footer-left">EasyIM Documentation</div><div class="footer-right">&copy; EasyIM ${new Date().getFullYear()}</div>`,
   displayFooter: true,
   headerDepth: 2,
   editLink: false,
