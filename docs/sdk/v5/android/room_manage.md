@@ -24,7 +24,7 @@ Before you begin, ensure that the following requirements are met:
 
 - Complete SDK initialization. For details, see [Quickstart](quickstart.html).
 - Understand the EasyIM [limitations](/product/limitation.html).
-- Understand the limits on the number of chat rooms for different EasyIM plans. For details, see [EasyIM pricing](https://www.easemob.com/pricing/im).
+- Understand the limits on the number of chat rooms for different EasyIM plans. For details, see [EasyIM pricing](http://easyim.ai/pricing).
 - Only a superadmin can create chat rooms. Therefore, ensure that you have called a RESTful API to add a superadmin. For details, see [Add a chat room superadmin](/rest/chatroom_superadmin_add.html).
 
 ## Create a chat room

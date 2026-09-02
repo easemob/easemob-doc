@@ -46,7 +46,7 @@ For details about the `Accept` and `Authorization` fields, see [Request header f
   "data": {
     "ext": "ext",
     "nickname": "nickname",
-    "avatarurl": "https://www.easemob.com/avatar.png"
+    "avatarurl": "http://easyim.ai/avatar.png"
   },
   "duration": 166
 }

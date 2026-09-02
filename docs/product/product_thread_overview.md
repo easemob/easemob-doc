@@ -17,7 +17,7 @@ A chat group member can create a message thread from a chat group message. The m
 | Retrieve the latest messages from message threads in bulk      | A user can retrieve the latest message from multiple message threads in bulk from the server.  | 
 | Retrieve message threads | You can call REST APIs to retrieve message threads: <br/> - Retrieve all message threads in an app.<br/> - Retrieve all message threads that a specified user has joined.<br/> - Retrieve all message threads that the current user has joined. <br/> - Retrieve all message threads that a specified user has joined in a specified chat group.| 
 
-## Message management in a message thread
+## Message management
 
 | Feature       | Description   | 
 | :--------- | :----- | 

@@ -59,7 +59,7 @@ EasyIM activates the required network acceleration nodes based on the app's data
 
 The default bandwidth of an acceleration node is **1 Mbps**. You can configure a more appropriate bandwidth based on your actual traffic requirements.
 
-To activate the service or for node pricing, contact your EasyIM business manager. For pricing details, see the [pricing page](https://www.easemob.com/pricing/im).
+To activate the service or for node pricing, contact your EasyIM business manager. For pricing details, see the [pricing page](http://easyim.ai/pricing).
 
 ## FAQ
 
