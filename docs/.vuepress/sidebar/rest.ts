@@ -42,7 +42,7 @@ export const REST_SIDEBAR = [
     "collapsible": true,
     "children": [
       {
-        "text": "Account",
+        "text": "Account System",
         "collapsible": true,
         "children": [
           {

@@ -190,7 +190,7 @@ Use cumulative merged content for UI rendering so users always see the latest co
 | :--- | :--- | :--- |
 | [Send messages](/rest/message_stream_send_single.html) | Yes | Send streaming messages through the server-side API. |
 | [Receive messages](message_stream_receive.html) | Yes | The client receives streaming messages sent through the server-side API. |
-| [Message roaming](/sdk/v5/ios/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) | Yes | Retrieve historical messages from the server. |
+| [Message roaming](/sdk/v5/ios/message_retrieve.html#retrieve-messages-in-a-conversation-from-the-server) | Yes | Retrieve historical messages from the server. |
 | [Message extensions](/sdk/v5/ios/message_extension.html)  | Yes | Carry custom extensions in a message. |
 | [Targeted messages](/sdk/v5/ios/message_target.html) | No | Deliver a message only to specified members of a group. |
 | [Message read receipts](/sdk/v5/ios/message_receipt.html) | No | The recipient returns the read state. |

@@ -1,4 +1,4 @@
-# Conversation Tags
+# Tag Conversations
 
 ## Feature overview
 

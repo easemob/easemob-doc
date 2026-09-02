@@ -13,7 +13,7 @@ Before you begin, ensure that the following requirements are met:
 - You have initialized the SDK and connected to the server. For details, see [Quickstart](quickstart.html).
 - You registered `ChatManager` during SDK initialization and can call historical-message APIs through `client.chatManager`.
 
-## Retrieve messages in a specified conversation from the server with pagination
+## Retrieve messages in a conversation from the server
 
 Call `getHistoryMessages` to retrieve historical messages in a specified conversation from the server with pagination. Use parameters such as `searchDirection`, `senderIds`, `messageTypes`, `startTime`, and `endTime` to control the retrieval direction and filters. To ensure data reliability, we recommend retrieving 20 messages at a time, with a maximum of 50.
 
@@ -61,4 +61,4 @@ const result = await client.chatManager.getHistoryMessages({
 
 | API | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`getHistoryMessages`](#retrieve-messages-in-a-specified-conversation-from-the-server-with-pagination) | `ChatManager` | Retrieves historical messages in a specified conversation from the server with pagination. |
+| [`getHistoryMessages`](#retrieve-messages-in-a-conversation-from-the-server) | `ChatManager` | Retrieves historical messages in a specified conversation from the server with pagination. |

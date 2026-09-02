@@ -15,7 +15,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
-## Retrieve messages in a specified conversation from the server
+## Retrieve messages in a conversation from the server
 
 Call `asyncFetchHistoryMessages` with the `EMFetchMessageOption` class to retrieve historical messages in one-to-one and group chats from the server by page. For reliability, we recommend retrieving 20 messages per page and no more than 50. If the total number of matching messages is greater than `pageSize`, a paginated query returns `pageSize` messages. If it is less than `pageSize`, the actual number is returned. When all messages have been retrieved, the number returned is less than `pageSize`.
 
@@ -366,9 +366,9 @@ if(conversation!=null) {
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`asyncFetchHistoryMessages`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMChatManager` | Retrieve historical messages in a specified conversation from the server by page. |
-| [`setDirection`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMFetchMessageOption` | Set the server-side historical message query direction. |
-| [`setIsSave`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMFetchMessageOption` | Set whether to save retrieved historical messages to the local database. |
+| [`asyncFetchHistoryMessages`](#retrieve-messages-in-a-conversation-from-the-server) | `EMChatManager` | Retrieve historical messages in a specified conversation from the server by page. |
+| [`setDirection`](#retrieve-messages-in-a-conversation-from-the-server) | `EMFetchMessageOption` | Set the server-side historical message query direction. |
+| [`setIsSave`](#retrieve-messages-in-a-conversation-from-the-server) | `EMFetchMessageOption` | Set whether to save retrieved historical messages to the local database. |
 | [`setFromIds`](#retrieve-messages-sent-by-specified-group-members-from-the-server) | `EMFetchMessageOption` | Set the specified senders for group chat historical messages. |
 | [`asyncLoadConversationMessagesWithKeyword`](#retrieve-messages-in-a-local-conversation-by-keyword) | `EMChatManager` | Search messages in the local database by keyword. |
 | [`asyncLoadMessages`](#retrieve-local-messages-by-message-id) | `EMChatManager` | Retrieve local messages by message ID. |

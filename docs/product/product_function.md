@@ -92,7 +92,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified group chat conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a group chat conversation. |
 | Pin a conversation  | Pin a group chat conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a group chat conversation. |
+| Conversation tag  | Add a mark to a group chat conversation. |
 | Delete a conversation  | Delete a group chat conversation. |
 
 ## User attributes

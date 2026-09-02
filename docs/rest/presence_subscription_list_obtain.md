@@ -6,7 +6,7 @@ For definitions of online, offline, and custom presence states, see [User presen
 
 ## Feature overview
 
-Query, with pagination, the list of users whose presence the current user has subscribed to.
+Query the list of users whose presence the current user has subscribed to.
 
 ## Feature activation
 

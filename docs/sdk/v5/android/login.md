@@ -193,7 +193,7 @@ EMClient.getInstance().logout(true, new EMCallBack() {
 });
 ```
 
-### Push token unbinding
+### Unbinding the push token
 
 If the app integrates FCM, we recommend setting `unbindToken` in `logout` to `true` so that the SDK also unbinds the current device's push token. Otherwise, the device might continue receiving offline push notifications for the current account after logout.
 
@@ -204,10 +204,9 @@ If the app integrates FCM, we recommend setting `unbindToken` in `logout` to `tr
 
 If push token unbinding fails because of a network exception, `logout` returns a failure. The app can inform the user that unbinding failed and that push notifications might still be received after continuing to log out. If the user confirms, set `unbindToken` to `false` and call `logout` again to log out only of the EasyIM account without unbinding the push token. After the network recovers, handle the remaining push token unbinding at an appropriate time. Do not retry indefinitely on a background thread.
 
-### Logout completion handling
+### Handling logout completion
 
 When calling the asynchronous `logout(boolean, EMCallBack)`, wait for `onSuccess()` before calling `loginWithToken` for another account or performing an operation that depends on logout completion. `onError(int, String)` indicates that logout or push token unbinding failed. Handle it according to the error code and business scenario.
-
 
 ## Switch accounts
 

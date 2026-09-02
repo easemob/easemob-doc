@@ -152,7 +152,7 @@ Clearing a conversation unread count does not send a message read receipt to the
 | Conversation unread count | `getUnreadMessageCount`, `getUnreadMsgCount`, `asyncClearConversationUnreadMessageCount`, `asyncClearAllConversationUnreadMessageCount` | Retrieves or clears conversation unread counts. See [Conversation Unread Counts](conversation_unread.html). |
 | Delete conversations | `deleteConversation`, `asyncDeleteConversations`, `deleteConversationFromServer`, `asyncDeleteAllMsgsAndConversations` | Deletes local or server-side conversations and messages. See [Delete Conversations](conversation_delete.html). |
 | Pin conversations | `asyncPinConversation` | Pins or unpins a conversation. See [Pin Conversations](conversation_pin.html). |
-| Conversation tags | `asyncAddConversationMark`, `asyncRemoveConversationMark` | Adds tags to or removes them from one or more conversations. See [Conversation Tags](conversation_mark.html). |
+| Conversation tags | `asyncAddConversationMark`, `asyncRemoveConversationMark` | Adds tags to or removes them from one or more conversations. See [Tag Conversations](conversation_mark.html). |
 | Conversation DND | Conversation DND APIs in `EMPushManager` | Sets or queries DND rules for one-to-one and group conversations. |
 | Messages in a conversation | `loadMoreMsgFromDB`, `searchMsgFromDB`, `removeMessage`, `clearAllMessages` | Retrieves, searches for, or deletes local messages in a conversation. |
 | Pinned messages in a conversation | `asyncPinMessage`, `asyncUnPinMessage`, `asyncGetPinnedMessagesFromServer` | Pins, unpins, or retrieves pinned messages in a conversation. |

@@ -44,15 +44,15 @@ This document describes the data export APIs.
 
 #### Export user data
 
-| REST API                                                     | Description                                |
-| :----------------------------------------------------------- | :---------------------------------- |
+| REST API        | Description            |
+| :----------- | :-------------- |
 | [Retrieve information about a single user](/rest/account_detail_obtain_single.html)<br>[Retrieve information about users in a batch](/rest/account_detail_obtain_batch.html) | Retrieve information about users with specified user IDs in an app. |
 | [Retrieve user attributes](/rest/user_attribute_obtain_single.html) | Retrieve the attributes of a user with a specified user ID in an app. |
 
 #### Export chat group data
 
-| REST API                                                     | Description                                      |
-| :----------------------------------------------------------- | :---------------------------------------- |
+| REST API      | Description            |
+| :-------------- | :------------- |
 | [Chat group details](/rest/group_obtain_detail.html) | Retrieve details of a chat group with a specified chat group ID in an app.       |
 | [All chat groups in an app](/rest/group_obtain_total.html) | Retrieve a list of all chat groups in an app.           |
 | [Chat group admin list](/rest/group_admin_list_get.html) | Retrieve the admin list of a chat group with a specified chat group ID in an app. |
@@ -64,8 +64,8 @@ This document describes the data export APIs.
 
 #### Export chat room data
 
-| REST API                                                     | Description                                          |
-| :----------------------------------------------------------- | :-------------------------------------------- |
+| REST API    | Description           |
+| :--------------- | :---------------- |
 | [Retrieve chat room details](/rest/chatroom_obtain_detail.html) | Retrieve details of a chat room with a specified chat room ID in an app.       |
 | [All chat rooms in an app](/rest/chatroom_obtain_total.html) | Retrieve a list of all chat rooms in an app.                 |
 | [Chat rooms joined by a user](/rest/chatroom_obtain_joined.html) | Retrieve a list of chat rooms joined by a user with a specified user ID in an app.     |
@@ -77,14 +77,14 @@ This document describes the data export APIs.
 
 This API can retrieve only one hour of historical messages at a time.
 
-| REST API                                                     | Description                                  |
-| :----------------------------------------------------------- | :------------------------------------ |
+| REST API       | Description         |
+| :---------- | :---------------------- |
 | [Retrieve historical messages](/rest/message_historical.html) | Retrieve a historical message file for a specified period from an app. |
 
 #### Export attachments
 
 Attachments include images, voice files, videos, and other files.
 
-| REST API                                                     | Description                          |
-| :----------------------------------------------------------- | :---------------------------- |
+| REST API      | Description        |
+| :------------------ | :------------ |
 | [Download an attachment](/rest/message_download_file.html) | Download the attachment with a specified UUID from an app. |

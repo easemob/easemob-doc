@@ -13,7 +13,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
-## Retrieve messages in a specified conversation from the server
+## Retrieve messages in a conversation from the server
 
 You can call `fetchMessagesFromServerBy` to retrieve historical messages from one-to-one chats, group chats, and chat rooms for which the service has been enabled from the server by page based on `EMFetchServerMessagesOption`. We recommend retrieving 20 messages per page, with a maximum of 50. When the number of returned messages is less than `pageSize`, there are no more messages.
 
@@ -279,7 +279,7 @@ NSInteger count = [conversation getMessageCountStart:startTimestamp to:endTimest
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`fetchMessagesFromServerBy`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `IEMChatManager` | Retrieve historical messages from a specified conversation from the server by page. |
+| [`fetchMessagesFromServerBy`](#retrieve-messages-in-a-conversation-from-the-server) | `IEMChatManager` | Retrieve historical messages from a specified conversation from the server by page. |
 | [`loadConversationMessagesWithKeyword`](#retrieve-messages-in-local-conversations-by-keyword) | `IEMChatManager` | Search for messages in the local database by keyword. |
 | [`getMessages`](#retrieve-local-messages-by-message-id) | `IEMChatManager` | Retrieve local messages by message ID. |
 | [`loadMessagesWithKeyword`](#retrieve-messages-sent-by-specified-group-members-locally) | `EMConversation` | Search for messages in a local conversation by keyword and sender. |

@@ -212,7 +212,7 @@ Stream messages support the following message features:
 | :--- | :--- | :--- |
 | [Send messages](/rest/message_stream_send_single.html) | Yes | Send streaming messages through the server-side API. |
 | [Receive messages](message_stream_receive.html) | Yes | The client receives streaming messages sent through the server-side API. |
-| [Message roaming](message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server) | Yes | Retrieve historical messages from the server. |
+| [Message roaming](message_retrieve.html#retrieve-messages-in-a-conversation-from-the-server) | Yes | Retrieve historical messages from the server. |
 | [Message extensions](message_extension.html)  | Yes | Carry custom extensions in a message. |
 | [Targeted messages](message_target.html) | No | Deliver a message only to specified members of a group. |
 | [Message read receipts](message_receipt.html) | No | The recipient returns the read state. |

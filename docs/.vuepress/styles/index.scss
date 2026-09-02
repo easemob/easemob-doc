@@ -33,7 +33,20 @@ h2,h3,h4 {
 }
 
 code {
-  word-break: break-all;
+  // Keep English identifiers and words intact. Wrap at natural word boundaries
+  // instead of splitting a word at the end of a line (for example, "attributes").
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+// Apply the same natural wrapping behavior to all rendered documentation text.
+// This prevents inline links and emphasis text from being split mid-word while
+// still allowing the browser to move the complete word to the next line.
+.theme-hope-content,
+.theme-default-content,
+.page-content {
+  word-break: normal;
+  overflow-wrap: normal;
 }
 /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
 button {
@@ -627,6 +640,39 @@ button {
       tr,td {
         background-color: #fafdff;
       }
+
+      // Keep wide six-column API tables scrollable without separating the
+      // header and body column calculations. Both sections use the same fixed
+      // table width and layout, so every cell stays aligned.
+      &:has(> thead > tr > th:nth-child(6)) {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+
+        thead,
+        tbody {
+          display: table;
+          width: 1100px;
+          table-layout: fixed;
+
+          th:nth-child(1), td:nth-child(1) { width: 18%; }
+          th:nth-child(2), td:nth-child(2) { width: 13%; }
+          th:nth-child(3), td:nth-child(3) { width: 19%; }
+          th:nth-child(4), td:nth-child(4) { width: 15%; }
+          th:nth-child(5), td:nth-child(5) { width: 14%; }
+          th:nth-child(6), td:nth-child(6) { width: 21%; }
+
+          th code,
+          td code {
+            white-space: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+          }
+        }
+      }
+
     }
 
     /* 移动端表格专属优化 */

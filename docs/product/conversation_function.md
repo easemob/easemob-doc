@@ -36,7 +36,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified one-to-one conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a one-to-one conversation. |
 | Pin a conversation  | Pin a one-to-one conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a one-to-one conversation. |
+| Conversation tag  | Add a mark to a one-to-one conversation. |
 | Delete a conversation  | Delete a one-to-one conversation. |
 
 ### User relationships
@@ -92,7 +92,7 @@ For messages, the difference between group chat and one-to-one conversations is 
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified group chat conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a group chat conversation. |
 | Pin a conversation  | Pin a group chat conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a group chat conversation. |
+| Conversation tag  | Add a mark to a group chat conversation. |
 | Delete a conversation  | Delete a group chat conversation. |
 
 ### Create and manage chat groups

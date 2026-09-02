@@ -103,18 +103,18 @@ EMClient.getInstance()
 
 #### Key parameters and attributes
 
-| Parameter or attribute       | Type                                  | Configuration                                  | Required        | Use case             | Description                                                         |
-| ---------------- | ------------------------------------- | ----------------------------------------- | ---------------- | -------------------- | ------------------------------------------------------------ |
-| Text content         | `String`                              | The `message` parameter of `createTextSendMessage` | Yes             | Text messages             | The text message body.                                             |
-| Target conversation ID      | `String`                              | The `to` parameter of `createTextSendMessage`      | Yes             | All conversation types         | The peer user ID for one-to-one chat, group ID for group chat, or chat room ID for a chat room.  |
+| Parameter or attribute   | Type  | Configuration   | Required | Use case    | Description      |
+| :-------------- | :----- | :------- | :------------- | :------------- | :------------- |
+| Text content         | `String`     | `message` in `createTextSendMessage` | Yes             | Text messages             | The text message body.   |
+| Target conversation ID      | `String`  | `to` in `createTextSendMessage`      | Yes             | All conversation types         | The peer user ID for one-to-one chat, group ID for group chat, or chat room ID for a chat room.  |
 | Conversation type         | `EMMessage.ChatType`                  | `setChatType`                             | Required for group chat and chat rooms | All conversation types         | `Chat`, `GroupChat`, or `ChatRoom` for one-to-one chat, group chat, or a chat room, respectively. The default is `Chat`. |
-| Target translation languages     | `List<String>`                        | `EMTextMessageBody#setTargetLanguages`    | No             | Text messages             | After obtaining `EMTextMessageBody` from the text message, set target language codes. |
-| Extension         | Depends on the field value                          | `setAttribute`                            | No             | Business extensions         | Carry additional business information. Extensions count toward the message size limit.           |
-| Online-only delivery       | `boolean`                             | `deliverOnlineOnly`                       | No             | Transient messages and state notifications   | When set to `true`, the message is delivered only to online users.                     |
-| Callback routing environment     | `String`                              | `setWebhookEnv`                           | No             | Multi-environment callback routing       | Set the Webhook callback environment identifier.                                  |
-| Target recipients     | `List<String>`                        | `setReceiverList`                         | No             | Targeted group and chat room messages | Specify the recipients of a group or chat room message.                             |
-| Read receipt required | `boolean`                             | `setIsNeedReadReceipt`                    | No             | One-to-one and group chats           | Mark whether the message requires a read receipt. Chat rooms are not supported.                     |
-| Message priority       | `EMMessage.EMChatRoomMessagePriority` | `setPriority`                             | No             | Chat room messages           | Set the chat room message priority.                                       |
+| Target translation languages     | `List<String>`    | `EMTextMessageBody#setTargetLanguages`    | No   | Text messages   | After obtaining `EMTextMessageBody` from the text message, set target language codes. |
+| Extension   | Depends on the field value     | `setAttribute`  | No    | Business extensions   | Carry additional business information. Extensions count toward the message size limit.    |
+| Online-only delivery   | `boolean`   | `deliverOnlineOnly`   | No   | Transient messages and state notifications   | When set to `true`, the message is delivered only to online users.   |
+| Callback routing environment | `String`  | `setWebhookEnv` | No | Multi-environment callback routing       | Set the Webhook callback environment identifier.   |
+| Target recipients     | `List<String>`  | `setReceiverList`     | No   | Targeted group and chat room messages | Specify the recipients of a group or chat room message.    |
+| Read receipt required | `boolean`   | `setIsNeedReadReceipt`    | No   | One-to-one and group chats  | Mark whether the message requires a read receipt. Chat rooms are not supported.   |
+| Message priority       | `EMMessage.EMChatRoomMessagePriority` | `setPriority`  | No             | Chat room messages   | Set the chat room message priority.  |
 
 #### Example with group message read receipts and extensions
 

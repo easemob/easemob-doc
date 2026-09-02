@@ -172,13 +172,15 @@ Retrieve the asynchronous logout result through the completion callback:
 }];
 ```
 
-:::tip
-1. If the app integrates push services such as APNs or PushKit, we recommend setting the `aIsUnbindDeviceToken` parameter of `logout` to `YES` during logout so that the SDK also unbinds the current device's push token. Otherwise, the device might continue receiving offline push notifications for the current account after logout.
+### Unbinding the push token
+
+If the app integrates push services such as APNs or PushKit, we recommend setting the `aIsUnbindDeviceToken` parameter of `logout` to `YES` during logout so that the SDK also unbinds the current device's push token. Otherwise, the device might continue receiving offline push notifications for the current account after logout.
 
 If the push token cannot be unbound because of a network exception, the completion callback returns an error. The app can inform the user that unbinding failed and that push notifications might still be received after continuing to log out. If the user confirms that they want to continue, set the parameter to `NO` and call `logout` again to log out of only the EasyIM account without unbinding the push token. After the network recovers, handle the remaining push token unbinding at an appropriate time. Infinite retries on a background thread are not recommended.
 
-2. When calling the asynchronous `logout` method, wait until the completion callback returns a `nil` error before logging in to another account or performing an operation that depends on logout being complete. If an error is returned, logout or push token unbinding failed. The app must handle the error based on the error code and business scenario.
-:::
+### Handling the logout result
+
+When calling the asynchronous `logout` method, wait until the completion callback returns a `nil` error before logging in to another account or performing an operation that depends on logout being complete. If an error is returned, logout or push token unbinding failed. The app must handle the error based on the error code and business scenario.
 
 ## Switch accounts
 

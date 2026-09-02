@@ -3,6 +3,7 @@
 Security and compliance are critical to instant messaging technology. To provide secure and reliable cloud services, EasyIM complies with the requirements of different countries, regions, and industries. EasyIM employs multiple security measures to defend against common attacks in instant messaging scenarios. This document describes some of the security best practices implemented by EasyIM and the security tools available to developers.
 
 For details about EasyIM's user privacy policy, see [Easemob User Privacy Policy](https://www.easemob.com/protocol).
+
 | Security measure     | Enabled by default | Recommended scenario                                          |
 |:-------------|:---------|:--------------------------------------------------|
 | Data center isolation | Yes       | All instant messaging scenarios.                                  |
@@ -18,12 +19,11 @@ EasyIM has data centers in the following regions. Each data center serves its co
 
 | Data center | Location           | Service region |
 |:---------|:---------------|:---------|
-| Singapore   | Singapore         | Southeast Asia   |
-| Chinese mainland | Beijing           | Chinese mainland |
-| Europe     | Frankfurt, Germany | Europe     |
-| North America     | Virginia, United States | North America     |
+| Singapore 1/Singapore 2   | Singapore         | Southeast Asia   |
+| Germany 2    | Frankfurt, Germany | Europe     |
+| US East 1     | Virginia, United States | North America     |
 
-To use EasyIM, you must specify a data center. After you select a data center, RESTful requests to the message server and SDK API requests are directed to that data center, where your business data is also stored. Apps in the Chinese mainland can use only data centers in the Chinese mainland but support global access. You cannot change the selected data center. EasyIM does not support data migration across service regions.
+To use EasyIM, you must specify a data center. After you select a data center, RESTful requests to the message server and SDK API requests are directed to that data center, where your business data is also stored. You cannot change the selected data center. EasyIM does not support data migration across service regions.
 
 ## Token authentication
 
@@ -31,7 +31,7 @@ EasyIM uses tokens to authenticate end users. A token is an access key whose val
 
 ## Data transmission and storage
 
-Communications between users and the EasyIM server are encrypted in transit using technologies such as the EasyIM private transport protocol, Transport Layer Security (TLS), and WebSocket Secure (WSS). User data and messages generated through EasyIM are stored in the data center in the specified region. We retain your information only while providing services to you and for no longer than necessary to fulfill the relevant purposes.
+Communications between users and the EasyIM server are encrypted in transit using technologies such as the EasyIM private transport protocol, Transport Layer Security (TLS), and WebSocket Secure (WSS). User data and messages generated through EasyIM are stored in the data center in the specified region. EasyIM retains your information only while providing services to you and for no longer than necessary to fulfill the relevant purposes.
 
 | Data type                                 | Data classification | Storage period                                                                              |
 |:-----------------------------------------|:---------|:--------------------------------------------------------------------------------------|

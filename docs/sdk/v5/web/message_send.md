@@ -47,188 +47,13 @@ const sentMessage = await client.chatManager.sendMessage(message);
 
 ### Image and video message examples
 
-The following examples apply to WeChat Mini Program, uni-app, Taro, and React Native. Text, location, command, custom, and other messages without local attachments use the same APIs on all platforms. Refer to the general `create*Message()` examples later in this document.
+The following React Native example demonstrates how to send image and video messages. Text, location, command, custom, and other messages that do not contain local attachments use the same APIs. See the general `create*Message()` examples in this document.
 
-To send an image or video message, first obtain a local resource through the host framework's media selection API and convert it to an attachment object supported by the SDK:
+Before creating an image or video message, use the host framework’s media picker to obtain a local resource and convert it into an SDK-compatible attachment object. In React Native, use the following format:
 
-- WeChat Mini Program, uni-app, and Taro Mini Program: `{ path, name?, type?, size? }`
-- React Native: `{ uri, name?, type?, size? }`
+`{ uri, name?, type?, size? }`
 
-The following examples assume that `client` has been initialized and logged in. They send one-to-one messages. To send a group or chat room message, change only `conversationId` and `conversationType`.
-
-::: tabs#code
-
-@tab WeChat Mini Program
-
-```typescript
-type MediaType = 'image' | 'video';
-
-const chooseMedia = (mediaType: MediaType): Promise<WechatMiniprogram.MediaFile> =>
-  new Promise((resolve, reject) => {
-    wx.chooseMedia({
-      count: 1,
-      mediaType: [mediaType],
-      sourceType: ['album', 'camera'],
-      success: result => {
-        const file = result.tempFiles[0];
-        file ? resolve(file) : reject(new Error('No media file selected'));
-      },
-      fail: reject,
-    });
-  });
-
-// Send an image message.
-const image = await chooseMedia('image');
-const imageMessage = client.chatManager.createImageMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: image.tempFilePath,
-    name: image.tempFilePath.split('/').pop() ?? 'image.jpg',
-    type: 'image/jpeg',
-    size: image.size,
-  },
-  width: image.width,
-  height: image.height,
-});
-await client.chatManager.sendMessage(imageMessage);
-
-// Send a video message.
-const video = await chooseMedia('video');
-const videoMessage = client.chatManager.createVideoMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: video.tempFilePath,
-    name: video.tempFilePath.split('/').pop() ?? 'video.mp4',
-    type: 'video/mp4',
-    size: video.size,
-  },
-  duration: video.duration ?? 0,
-  width: video.width,
-  height: video.height,
-});
-await client.chatManager.sendMessage(videoMessage);
-```
-
-@tab uni-app
-
-```typescript
-const chooseImage = (): Promise<UniApp.ChooseImageSuccessCallbackResult> =>
-  new Promise((resolve, reject) => {
-    uni.chooseImage({
-      count: 1,
-      sourceType: ['album', 'camera'],
-      success: resolve,
-      fail: reject,
-    });
-  });
-
-const chooseVideo = (): Promise<UniApp.ChooseVideoSuccess> =>
-  new Promise((resolve, reject) => {
-    uni.chooseVideo({
-      sourceType: ['album', 'camera'],
-      success: resolve,
-      fail: reject,
-    });
-  });
-
-// Send an image message.
-const imageResult = await chooseImage();
-const image = imageResult.tempFiles?.[0];
-const imagePath = image?.path ?? imageResult.tempFilePaths[0];
-if (!imagePath) throw new Error('No image selected');
-
-// The uni-app demo also uses uni.getImageInfo() to obtain the image dimensions and actual format.
-const imageInfo = await new Promise<{ width: number; height: number; type?: string }>(
-  (resolve, reject) => {
-    uni.getImageInfo({
-      src: imagePath,
-      success: resolve,
-      fail: reject,
-    });
-  }
-);
-
-const imageMessage = client.chatManager.createImageMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: imagePath,
-    name: imagePath.split('/').pop() ?? 'image.jpg',
-    type: imageInfo.type ? `image/${imageInfo.type}` : undefined,
-    size: image?.size,
-  },
-  width: imageInfo.width,
-  height: imageInfo.height,
-});
-await client.chatManager.sendMessage(imageMessage);
-
-// Send a video message.
-const video = await chooseVideo();
-const videoMessage = client.chatManager.createVideoMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: video.tempFilePath,
-    name: video.name ?? video.tempFilePath.split('/').pop() ?? 'video.mp4',
-    type: 'video/mp4',
-    size: video.size,
-  },
-  duration: video.duration ?? 0,
-  width: video.width,
-  height: video.height,
-});
-await client.chatManager.sendMessage(videoMessage);
-```
-
-@tab Taro (Mini Program)
-
-```typescript
-import Taro from '@tarojs/taro';
-
-// Send an image message.
-const imageResult = await Taro.chooseImage({ count: 1 });
-const image = imageResult.tempFiles[0];
-const imagePath = imageResult.tempFilePaths[0];
-if (!image || !imagePath) throw new Error('No image selected');
-
-// The Promise returned by getImageInfo() in @tarojs/taro 4.2.0 contains the original image dimensions and format.
-const imageInfo = await Taro.getImageInfo({ src: imagePath });
-
-const imageMessage = client.chatManager.createImageMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: imagePath,
-    name: imagePath.split('/').pop() ?? 'image.jpg',
-    type: image.type ?? `image/${imageInfo.type}`,
-    size: image.size,
-  },
-  width: imageInfo.width,
-  height: imageInfo.height,
-});
-await client.chatManager.sendMessage(imageMessage);
-
-// Send a video message.
-const video = await Taro.chooseVideo({ sourceType: ['album', 'camera'] });
-const videoMessage = client.chatManager.createVideoMessage({
-  conversationId: 'user2',
-  conversationType: 'singleChat',
-  data: {
-    path: video.tempFilePath,
-    name: video.tempFilePath.split('/').pop() ?? 'video.mp4',
-    type: 'video/mp4',
-    size: video.size,
-  },
-  duration: video.duration ?? 0,
-  width: video.width,
-  height: video.height,
-});
-await client.chatManager.sendMessage(videoMessage);
-```
-
-@tab React Native
+The following example sends image and video messages in a one-to-one conversation. It assumes that `client` has been initialized and the user has logged in. To send a message to a group or chat room, change only `conversationId` and `conversationType`.
 
 ```typescript
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -274,26 +99,21 @@ const videoMessage = client.chatManager.createVideoMessage({
 await client.chatManager.sendMessage(videoMessage);
 ```
 
-:::
-
 :::tip
 1. The React Native example uses the third-party library `react-native-image-picker` to obtain an image or video `uri`. The SDK does not require a particular media selection library. It only requires a readable local `uri` and correct file metadata.
 2. The attachment `name` and `type` are used for multipart upload. If the host selection API does not return these fields, supply them based on the file path or actual file format. Do not assign the same inaccurate MIME type to every attachment.
-3. `width` and `height` in `CreateImageMessageParams` are optional. If the local image dimensions are not passed, the SDK automatically retrieves them through `ImageProcessor.getImageInfo()` on the current platform before upload. The uni-app and Taro examples pass the dimensions explicitly, allowing the app to render an accurately sized message placeholder before calling `sendMessage()`.
+3. `width` and `height` in `CreateImageMessageParams` are optional. If the local image dimensions are not passed, the SDK automatically retrieves them through `ImageProcessor.getImageInfo()` on the current platform before upload.
 :::
 
 ### File message limitations
 
-The SDK's `createFileMessage()` and attachment upload layer support the attachment object formats described above. Some host frameworks cannot select arbitrary local files across platforms. This is a host file-access limitation and does not mean that the SDK can send only images and videos.
+The SDK supports the attachment formats described above through `createFileMessage()` and its attachment upload layer. However, React Native Core does not include a built-in document picker, so it cannot select arbitrary local files or provide their URIs by itself. This is a file-access limitation of the host platform, not a limitation of the SDK. The SDK supports file messages in addition to image and video messages.
 
-| Platform   | File selection limitation        | Recommendation                   |
-| :-------------- | :----- | :------- |
-| WeChat Mini Program   | `wx.chooseMessageFile()` can select only files in WeChat conversations and cannot browse arbitrary directories like a desktop browser. | For a file from a WeChat conversation, pass the returned temporary `path` to `createFileMessage()`. For a file from another source, upload it to your app server first and create a file message using `originalUrl`. |
-| uni-app      | `uni.chooseFile()` is available only on some runtime platforms. WeChat Mini Program generally requires `wx.chooseMessageFile()`. | Detect platform capabilities through `uni.getSystemInfoSync().uniPlatform`. On unsupported platforms, integrate a native file selection plugin or use a remote `originalUrl`. |
-| Taro         | `Taro.chooseMessageFile()` supports only some Mini Program targets. React Native targets generally do not provide this API. | Check whether the API is available first. If not, integrate a file selection plugin for the target platform, or upload the file first and create a file message using `originalUrl`. |
-| React Native | React Native Core has no built-in document picker and cannot directly obtain an arbitrary file URI. | Integrate a native module such as `react-native-document-picker` or Expo DocumentPicker. Send the file after obtaining `{ uri, name, type, size }`. |
+| Platform     | File selection limitation                                    | Recommendation                                               |
+| :----------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| React Native | React Native Core does not provide a built-in document picker for selecting arbitrary local files. | Integrate a native module such as `react-native-document-picker` or Expo DocumentPicker. After obtaining the file information, pass `{ uri, name, type, size }` to `createFileMessage()`. |
 
-If the host does not provide a file picker and your app has not integrated a native plugin, do not display an entry point for regular file messages. For a file already hosted on your app server or CDN, pass its remote URL as `originalUrl` to `createFileMessage()`. The SDK does not need to upload a local file again.
+If your app does not provide a file picker or integrate a suitable native module, do not expose an entry point for selecting local file messages. For a file that is already hosted on your app server or CDN, pass its remote URL as `originalUrl` to `createFileMessage()`. The SDK then sends the message without uploading a local file.
 
 ## Common message creation parameters
 
@@ -539,7 +359,7 @@ To send a voice message:
    - If you pass `data`, the SDK uploads the local voice file before sending the message.
    - If you pass `originalUrl`, the SDK constructs and sends the message using the remote URL without uploading a local file. See [Upload message attachments to your own server](#upload-message-attachments-to-your-own-server).
 
-The following examples send a local voice file in a browser, WeChat Mini Program, uni-app, Taro, and React Native. `duration` is required, is measured in seconds, and must be greater than `0`.
+The following examples demonstrate how to send a local voice message from a browser or a React Native app. The `duration` parameter is required, is measured in seconds, and must be greater than `0`.
 
 ::: tabs#voice-code
 
@@ -557,119 +377,6 @@ const sendBrowserVoice = async (audioFile: File, durationSeconds: number): Promi
 
   await client.chatManager.sendMessage(message);
 };
-```
-
-@tab WeChat Mini Program
-
-```typescript
-const recorder = wx.getRecorderManager();
-let voiceRecordStartAt = 0;
-
-recorder.onStart(() => {
-  voiceRecordStartAt = Date.now();
-});
-
-recorder.onStop(async result => {
-  if (!result.tempFilePath) throw new Error("Recording ended without returning tempFilePath");
-
-  const durationMs =
-    typeof result.duration === "number" && result.duration > 0
-      ? result.duration
-      : Date.now() - voiceRecordStartAt;
-  const durationSeconds = Math.max(1, Math.ceil(durationMs / 1000));
-
-  const message = client.chatManager.createVoiceMessage({
-    conversationId: "user2",
-    conversationType: "singleChat",
-    data: {
-      path: result.tempFilePath,
-      name: "wechat-record.mp3",
-      type: "audio/mpeg",
-      size: result.fileSize,
-    },
-    // WeChat RecorderManager returns milliseconds, while the SDK duration uses seconds.
-    duration: durationSeconds,
-  });
-
-  await client.chatManager.sendMessage(message);
-});
-
-recorder.onError(error => console.error("Recording failed", error));
-recorder.start({ format: "mp3" });
-// Call recorder.stop() when your app needs to stop recording.
-```
-
-@tab uni-app
-
-```typescript
-const recorder = uni.getRecorderManager();
-let voiceRecordStartAt = 0;
-
-recorder.onStart(() => {
-  voiceRecordStartAt = Date.now();
-});
-
-recorder.onStop(async result => {
-  if (!result.tempFilePath) throw new Error("Recording ended without returning tempFilePath");
-
-  const durationMs =
-    typeof result.duration === "number" && result.duration > 0
-      ? result.duration
-      : Date.now() - voiceRecordStartAt;
-  const durationSeconds = Math.max(1, Math.ceil(durationMs / 1000));
-  const name = result.tempFilePath.split("/").pop() ?? `voice-${Date.now()}.mp3`;
-
-  const message = client.chatManager.createVoiceMessage({
-    conversationId: "user2",
-    conversationType: "singleChat",
-    data: {
-      path: result.tempFilePath,
-      name: /\.[a-z0-9]+$/i.test(name) ? name : `${name}.mp3`,
-      type: "audio/mpeg",
-      size: result.fileSize,
-    },
-    duration: durationSeconds,
-  });
-
-  await client.chatManager.sendMessage(message);
-});
-
-recorder.start({ format: "mp3" });
-// Call recorder.stop() when your app needs to stop recording.
-```
-
-@tab Taro
-
-```typescript
-import Taro from "@tarojs/taro";
-
-if (typeof Taro.getRecorderManager !== "function") {
-  throw new Error("The current Taro target does not support the recording manager");
-}
-const recorder = Taro.getRecorderManager();
-
-recorder.onStop(async result => {
-  const durationSeconds = result.duration / 1000;
-  if (durationSeconds <= 0) throw new Error("The recording duration must be greater than 0 seconds");
-
-  const message = client.chatManager.createVoiceMessage({
-    conversationId: "user2",
-    conversationType: "singleChat",
-    data: {
-      path: result.tempFilePath,
-      name: "taro-record.mp3",
-      type: "audio/mpeg",
-      size: result.fileSize,
-    },
-    // Taro RecorderManager returns milliseconds, while the SDK duration uses seconds.
-    duration: durationSeconds,
-  });
-
-  await client.chatManager.sendMessage(message);
-});
-
-recorder.start({ format: "mp3" });
-// Call recorder.stop() when your app needs to stop recording.
 ```
 
 @tab React Native
@@ -704,29 +411,31 @@ const sendReactNativeVoice = async (voice: ReactNativeVoiceInput): Promise<void>
 
 :::tip
 
-- In a browser, only a Web `File` can be used as local voice `data`. Mini Programs, uni-app, and Taro Mini Program use a file descriptor with `path`. React Native uses a file descriptor with `uri`.
-- The `duration` option of `RecorderManager.start()` specifies the maximum recording time, not the final message duration. This example omits the option and uses the host's default limit, which is 60 seconds for WeChat Mini Program. Your app can call `stop()` at any time before automatic stopping and calculate the voice duration in seconds required by the SDK from the `onStop` result.
-- `filename`, `filetype`, and `fileLength` are optional top-level fields. If local file metadata is already included in `data`, do not pass it again. Use these fields only as fallbacks when metadata is missing.
-- For a remote voice file, pass `originalUrl` instead of local `data`. `duration` is still required.
+- In a browser, provide a Web `File` as the local voice `data`. In React Native, provide a file descriptor with a `uri`. The `name`, `type`, and `size` fields are optional when the corresponding metadata is unavailable.
+- The recording duration provided to the SDK must be the actual duration of the recorded audio, measured in seconds. The recording API’s duration limit, if any, only determines the maximum recording time and should not be used as the message duration.
+- `filename`, `filetype`, and `fileLength` are optional top-level fields. If the local file metadata is already included in `data`, do not pass it again. Use these fields only as fallbacks when metadata is unavailable.
+- To send a remote voice file, pass `originalUrl` instead of local `data`. The `duration` parameter is still required.
 
 :::
 
 #### Key parameters
 
-| Parameter          | Type           | Required/Optional                   | Use case           | Description                                                        |
-| :------------ | :------------- | :-------------------------- | :----------------- | :---------------------------------------------------------- |
-| `data`        | CompatibleFile | Either this or `originalUrl` is required | Send local voice       | Local voice file. The SDK uploads it.                       |
-| `originalUrl` | String         | Either this or `data` is required        | Send remote voice directly       | Use when the voice file is stored on your app server or CDN. The SDK does not upload a local file. |
-| `filename`    | String         | Optional                        | Preserve filename     | Can be passed for both local and remote voice files.                              |
-| `filetype`    | String         | Optional                        | Specify MIME type | For example, `audio/amr` or `audio/mpeg`.                            |
-| `duration`    | Number         | Required                        | Send voice message       | Voice duration in seconds.                                        |
-| `fileLength`  | Number         | Optional                        | Supply file size   | Pass when useful for UI display or business validation.                        |
+| Parameter  | Type   | Required/Optional    | Use case     | Description       |
+| :----- | :------- | :---------- | :------ | :-------- |
+| `data`        | CompatibleFile | Either `data` or `originalUrl` is required | Send a local voice message  | The local voice file. In a browser, provide a Web `File`; in React Native, provide a file descriptor with a `uri`. The SDK uploads the file before sending the message. |
+| `originalUrl` | String        | Either `originalUrl` or `data` is required | Send a remote voice message | The URL of a voice file stored on your app server or CDN. The SDK sends the message directly without uploading a local file. |
+| `filename`    | String         | Optional                                   | Preserve the filename       | The name of the voice file. Use this field as a fallback when the filename is not included in `data`. |
+| `filetype`    | String        | Optional                                   | Specify the MIME type       | The MIME type of the voice file, such as `audio/amr` or `audio/mpeg`. Use this field as a fallback when the file type is not included in `data`. |
+| `duration`    | Number         | Required                                   | Send a voice message        | The actual voice duration in seconds. The value must be greater than `0`. |
+| `fileLength`  | Number         | Optional                                   | Provide the file size       | The file size in bytes. Pass this field when it is needed for UI display or business validation. |
 
 :::tip
-- Pass at least one of `data` and `originalUrl`.
-  - If you pass `data`, the SDK creates the message from the local file and uploads it automatically before sending.
-  - If you pass `originalUrl`, the SDK constructs the voice message using the existing remote URL and does not upload a local file.
-- `duration` is required when creating a voice message.
+
+- Provide at least one of `data` and `originalUrl`; do not need to provide both.
+  - When `data` is provided, the SDK creates the message from the local file and uploads it automatically before sending.
+  - When `originalUrl` is provided, the SDK creates the message from the existing remote URL and does not upload a local file.
+- `duration` is required for all voice messages, including messages sent with a local file or a remote URL.
+
 :::
 
 ### Send video messages
@@ -818,7 +527,7 @@ To send a file message:
 
 #### Use a local file with `data`
 
-A Web `File` object already contains `name/type/size`. After you pass it through `data`, the SDK reads this metadata during upload, so you do not need to repeat the top-level `filename/filetype/fileSize` fields:
+A Web `File` object already contains the `name`, `type`, and `size` metadata. When you pass it through `data`, the SDK reads this metadata during upload, so you do not need to repeat the top-level `filename`, `filetype`, or `fileSize` fields:
 
 ```typescript
 // Local file object.
@@ -834,35 +543,14 @@ const message = client.chatManager.createFileMessage({
   conversationId: "user2",
   // Conversation type: `singleChat` for a one-to-one chat, `groupChat` for a group chat, or `chatRoom` for a chat room.
   conversationType: "singleChat",
-  // A Web File already contains name, type, and size.
+  // A Web File already contains the name, type, and size metadata.
   data: selectedFile,
 });
 
 await client.chatManager.sendMessage(message);
 ```
 
-For a Mini Program `{ path }` or React Native `{ uri }` file descriptor, place the actual metadata returned by the host in `data`. The two descriptor structures are different:
-
-::: tabs#file-source
-
-@tab Mini Program/uni-app/Taro
-
-```typescript
-const message = client.chatManager.createFileMessage({
-  conversationId: "user2",
-  conversationType: "singleChat",
-  data: {
-    path: selectedFile.path,
-    name: selectedFile.name,
-    type: selectedFile.type,
-    size: selectedFile.size,
-  },
-});
-
-await client.chatManager.sendMessage(message);
-```
-
-@tab React Native
+In React Native, pass a file descriptor with a `uri` and any available file metadata through `data`:
 
 ```typescript
 const message = client.chatManager.createFileMessage({
@@ -879,9 +567,7 @@ const message = client.chatManager.createFileMessage({
 await client.chatManager.sendMessage(message);
 ```
 
-:::
-
-When normalizing a local attachment, the SDK first reads `name/type/size` from `data`. If a Mini Program or React Native file lacks `name` or `type`, the SDK attempts to derive it from the last segment and extension of `path` or `uri`. Only if it still cannot obtain the value does it use the top-level `filename`, `filetype`, or `fileSize` as a fallback. Therefore, do not repeat metadata at the top level when it is already in `data`.
+When normalizing a local attachment, the SDK first reads the `name`, `type`, and `size` metadata from `data`. If a React Native file descriptor lacks `name` or `type`, the SDK attempts to derive the missing value from the last segment or file extension of `uri`. Only if the value still cannot be obtained does the SDK use the top-level `filename`, `filetype`, or `fileSize` field as a fallback. Therefore, do not repeat metadata at the top level when it is already included in `data`.
 
 #### Use a remote file with `originalUrl`
 
@@ -918,7 +604,7 @@ await client.chatManager.sendMessage(message);
 - Pass at least one of `data` and `originalUrl`.
   - If you pass `data`, the SDK creates the message from the local file and uploads it automatically before sending.
   - If you pass `originalUrl`, the SDK constructs the file message using the existing remote URL and does not upload a local file.
-- Metadata in local `data` takes precedence over top-level fallback fields. When using a Web `File` or a Mini Program or React Native file descriptor that already contains `name`, `type`, and `size`, do not repeat top-level metadata.
+- Metadata in local `data` takes precedence over top-level fallback fields. When using a Web `File` or a React Native file descriptor that already contains `name`, `type`, and `size`, do not repeat top-level metadata.
 - The `originalUrl` flow does not include the upload stage, so the SDK does not automatically populate the remote filename, type, or size.
 :::
 

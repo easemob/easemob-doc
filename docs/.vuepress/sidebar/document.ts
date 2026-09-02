@@ -15,7 +15,6 @@ const platformList = getSubDirectories(SDK_PATH)
  */
 const sdkV5Sidebar = [
   { text: "Beginner's Guide", link: "beginner_guide.html" },
-  { text: 'iOS SDK Overview', link: 'sdk_overview.html', only: ['ios'] },
   { text: "Integrate with MCP", link: "easemob_mcp_server.html", except: ['unity', 'windows']},
   { text: 'Quickstart', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity'] },
   { text: 'Quickstart', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
@@ -76,7 +75,7 @@ const sdkV5Sidebar = [
       { text: 'Conversation Read Receipt', link: 'conversation_receipt.html', only: ['flutter', 'harmonyos','react-native','unity','windows'] },
       { text: 'Conversation Unread Count', link: 'conversation_unread.html'},
       { text: 'Pin Conversation', link: 'conversation_pin.html' },
-      { text: 'Conversation Mark', link: 'conversation_mark.html' },
+      { text: 'Tag Conversation', link: 'conversation_mark.html' },
       { text: 'Delete Conversation', link: 'conversation_delete.html' },
     ],
   },  
