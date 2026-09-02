@@ -74,7 +74,7 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | Field          | Type   | Description                                                                  |
 | :------------ | :----- | :--------------------------------------- |
 | `data` | JSON Array | Response data.|
-|  - `result` | Bool   | Whether chat room members were successfully removed in a batch:<br/> - `true`: Yes.<br/> - `false`: No. |
+|  - `result` | Bool   | Whether chat room members were successfully removed in bulk:<br/> - `true`: Yes.<br/> - `false`: No. |
 |  - `action` | String | Operation performed. In this response, the value is `remove_member`, indicating that members were removed.  |
 |  - `reason` | String | Reason the operation failed.                                                      |
 |  - `user`   | String | List of user IDs of removed members.                                            |
@@ -99,7 +99,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 
 | HTTP status code        | Error type | Error message          | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | kickMember: kickMembers number more than maxSize : 60 | The number of members removed in a batch reaches the limit of 60. | Reduce the number of members to 60 or fewer. |
+| 400     | invalid_parameter | kickMember: kickMembers number more than maxSize : 60 | The number of members removed in bulk reaches the limit of 60. | Reduce the number of members to 60 or fewer. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 400     | forbidden_op | users [XX] are not members of this group! | The user is not in the chat room. | Specify the user ID of a chat room member. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat room ID does not exist. | Specify a valid chat room ID. |

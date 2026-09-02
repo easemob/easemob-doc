@@ -191,4 +191,4 @@ For details about message read receipts and read status, see [Message receipt do
 | [`unreadMessagesCount`](#retrieve-the-unread-count-for-a-specified-conversation) | `EMConversation` | Yes | Retrieves the local unread message count of a specified conversation. |
 | [`clearAllConversationUnreadMessageCount`](#clear-the-unread-counts-of-all-conversations) | `IEMChatManager` | Yes | Clears the unread counts of all local conversations and synchronizes the change to the current account's other devices. |
 | [`clearConversationUnreadMessageCount`](#clear-the-unread-count-of-a-specified-conversation) | `IEMChatManager` | Yes | Clears the local unread count of a specified conversation and synchronizes the change to the current account's other devices. |
-| [`sendMessageReadReceipts`](#read-status-and-read-receipts-for-individual-messages) | `IEMChatManager` | No | Batch sends read receipts for up to 50 messages in the same one-to-one or group conversation. |
+| [`sendMessageReadReceipts`](#read-status-and-read-receipts-for-individual-messages) | `IEMChatManager` | No | Bulk sends read receipts for up to 50 messages in the same one-to-one or group conversation. |

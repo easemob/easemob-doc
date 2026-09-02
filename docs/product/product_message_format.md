@@ -223,9 +223,9 @@ Example custom message format:
 ]
 ```
 
-## Message extension fields for offline push
+## Offline push extension fields
 
-EasyIM supports APNs and Android vendor offline push services, including Huawei, HONOR, FCM, Xiaomi, Meizu, OPPO, and vivo. When using offline push, you can implement push features through message extension fields, such as setting the push title and content in a push template or receiving push notifications only for messages that mention (`@`) specified users.
+EasyIM supports APNs and FCM. When using offline push, you can implement push features through message extension fields, such as setting the push title and content in a push template or receiving push notifications only for messages that mention (`@`) specified users.
 
 ### Push extension fields
 

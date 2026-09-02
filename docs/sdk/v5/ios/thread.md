@@ -224,9 +224,9 @@ All members of the chat group containing a message thread can call `getChatThrea
 }];
 ```
 
-## Batch retrieve the latest messages in message threads
+## Bulk retrieve the latest messages in message threads
 
-Call `getLastMessageFromSeverWithChatThreads` to batch retrieve the latest message in each message thread from the server.
+Call `getLastMessageFromSeverWithChatThreads` to retrieve the latest message in each message thread from the server.
 
 The following is sample code:
 
@@ -281,4 +281,4 @@ EMThreadManagerDelegate
 | [`getChatThreadMemberListFromServerWithId`](#retrieve-the-message-thread-member-list) | `EMChatThreadManager` | Retrieves the message thread member list by page. |
 | [`getJoinedChatThreadsFromServerWithCursor`](#retrieve-message-thread-lists) | `EMChatThreadManager` | Retrieves the list of message threads the current user has joined or created by page. |
 | [`getChatThreadsFromServerWithParentId`](#retrieve-message-thread-lists) | `EMChatThreadManager` | Retrieves the message thread list for a specified chat group by page. |
-| [`getLastMessageFromSeverWithChatThreads`](#batch-retrieve-the-latest-messages-in-message-threads) | `EMChatThreadManager` | Batch retrieves the latest message in each message thread. |
+| [`getLastMessageFromSeverWithChatThreads`](#bulk-retrieve-the-latest-messages-in-message-threads) | `EMChatThreadManager` | Retrieves the latest message in each message thread. |

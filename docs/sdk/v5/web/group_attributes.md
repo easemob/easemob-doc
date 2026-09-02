@@ -293,7 +293,7 @@ After basic information, configuration, the announcement, or shared files change
 | [`getDetail`](#retrieve-chat-group-details) | `Group` | Retrieve current details, reusing an available snapshot first and querying the server when necessary. |
 | [`refresh`](#retrieve-chat-group-details) | `Group` | Force a refresh of current details from the server. |
 | [`getGroupInfo`](#retrieve-chat-group-details) | `GroupManager` | Retrieve one group's details by ID from the server. |
-| [`getGroupInfoList`](#retrieve-chat-group-details) | `GroupManager` | Batch-retrieve details of multiple groups. |
+| [`getGroupInfoList`](#retrieve-chat-group-details) | `GroupManager` | Retrieve details of multiple groups. |
 | [`createGroup`](group_manage.html#create-a-chat-group) | `GroupManager` | Create a chat group. |
 | [`updateInfo`](#update-chat-group-information) | `Group` | Update basic information such as the name, description, avatar, and extension. |
 | [`updateGroupInfo`](#update-chat-group-information) | `GroupManager` | Directly update basic information or configuration by group ID. |

@@ -36,7 +36,7 @@ For details about other parameters in the request URL, see [Request URL paramete
 ## Request example
 
 ```shell
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+# Replace <YourAppToken> with the App Token generated on your server
 curl -X GET 'https://XXX/XXX/XXX/presence/online/XXX/type/XXX'   \
 -H 'Accept: application/json'    \
 -H 'Authorization: Bearer <YourAppToken>' 

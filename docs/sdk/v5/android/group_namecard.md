@@ -14,7 +14,7 @@ Group member name card management is primarily provided by `EMGroupManager` and 
 
 1. The current user can call `EMGroupManager#asyncUpdateGroupNamecard` to set or update their name card in a specified group.
 2. After a name card change is synchronized to local memory, the SDK notifies the business layer through `EMGroupChangeListener#onUserGroupNamecardUpdated`.
-3. The SDK supports calling `EMGroupManager#asyncFetchGroupMembersInfo` to batch-retrieve group member information from the server and writes the returned name cards to local memory.
+3. The SDK supports calling `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member information from the server and writes the returned name cards to local memory.
 4. The SDK supports calling `EMGroupManager#getGroupNamecard` to read a specified member's name card in a specified group from local memory.
 5. If `EMOptions#setEnableUserInfo(true)` is also enabled, messages automatically include the sender's name-card update time. If the recipient detects a newer update time than the value in local memory, the SDK automatically retrieves the latest name card from the server, updates local memory, and triggers an event to notify the business layer. Name card data in local memory comes from explicit server retrieval and message-triggered automatic synchronization.
 

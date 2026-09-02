@@ -51,7 +51,7 @@ If developers in China encounter network issues that prevent pod commands from r
 
 ### Method 2: Manually import the SDK
 
-1. Open the [SDK download page](https://www.easemob.com/download/im#IOS), download the latest EasyIM SDK, and decompress it.
+1. Open the [SDK download page](http://easyim.ai/sdk#iOS), download the latest EasyIM SDK, and decompress it.
 2. Drag `HyphenateChat.xcframework` and `aosl.xcframework` from the SDK package into your project.
 3. Open Xcode and go to **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**.
 4. Click **+ > Add Other… > Add Files** to add the corresponding dynamic libraries, and ensure that the **Embed** property of each added dynamic library is set to **Embed & Sign**.

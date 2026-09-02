@@ -145,7 +145,7 @@ EMClient.getInstance()
                 });
 ```
 
-### Retrieve a single group member's custom attributes
+### Retrieve a group member's custom attributes
 
 Call `asyncFetchGroupMemberAllAttributes` to retrieve all custom attributes of a specified group member. On success, the callback returns `Map<String, Map<String, String>>`. The key of the outer `Map` is the member's user ID, and the inner `Map` contains that member's attribute key-value pairs.
 
@@ -176,7 +176,7 @@ EMClient.getInstance()
 
 ### Retrieve custom group member attributes by attribute key
 
-Call `asyncFetchGroupMembersAttributes` to batch-retrieve attributes of multiple group members by attribute key. If `keyList` is an empty list, all attributes of those members are returned.
+Call `asyncFetchGroupMembersAttributes` to retrieve attributes of multiple group members by attribute key. If `keyList` is an empty list, all attributes of those members are returned.
 
 :::tip
 You can retrieve the custom attributes of up to 10 group members in each call.
@@ -640,7 +640,7 @@ After a group member operation succeeds, the SDK triggers the corresponding `EMG
 | [`asyncFetchGroupMembers`](#retrieve-group-member-ids-by-page) | `EMGroupManager` | Retrieve group member user IDs by page. |
 | [`getUsers`](#retrieve-member-ids-from-a-local-chat-group-object) | `EMGroup` | Retrieve the user IDs of the group owner, admins, and regular members contained in the chat group object. |
 | [`asyncSetGroupMemberAttributes`](#set-custom-group-member-attributes) | `EMGroupManager` | Set custom group member attributes. |
-| [`asyncFetchGroupMemberAllAttributes`](#retrieve-a-single-group-members-custom-attributes) | `EMGroupManager` | Retrieve all custom attributes of a single group member. |
+| [`asyncFetchGroupMemberAllAttributes`](#retrieve-a-group-members-custom-attributes) | `EMGroupManager` | Retrieve all custom attributes of a single group member. |
 | [`asyncFetchGroupMembersAttributes`](#retrieve-a-single-group-members-custom-attributes) | `EMGroupManager` | Retrieve specified or all custom attributes of multiple group members. |
 | [`asyncChangeOwner`](#transfer-chat-group-ownership) | `EMGroupManager` | Transfer chat group ownership. |
 | [`asyncAddGroupAdmin`](#add-a-group-admin) / [`asyncRemoveGroupAdmin`](#remove-a-group-admin) | `EMGroupManager` | Add or remove a group admin. |

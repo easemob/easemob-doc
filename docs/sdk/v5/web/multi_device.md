@@ -54,9 +54,9 @@ The SDK allows you to customize the platform of a login device. For example, you
 
 Set the platform of a login device as follows:
 
-1. On the **Chat** > **Features** >**User & Login** page in the EasyIM Console, click **Settings** in the **Multi-device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Number of Devices**.
+1. On the **Chat** > **Features** >**User & Login** page in the EasyIM Console, click **Settings** in the **Multi-device Login** area. In the dialog box that appears, click **Add Custom Platform**. In the **Add Custom Platform** dialog box, set **Device Platform** and **Device Count**.
 
-The value range of **Device Platform** is [1,100], and that of **Number of Devices** is [0,4].
+The value range of **Device Platform** is [1,100], and that of **Device Count** is [0,4].
 
 ![img](/images/common/multidevice_device_platform.png)
 

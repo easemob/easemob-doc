@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-- Import up to 10 friends in a batch.
+- Import up to 10 friends in bulk.
 - Ensure that the user's friend count does not exceed the limit after importing the friend list. If the limit is reached during import, the response returns the user IDs of friends that failed to import. The per-user friend limit depends on your plan. For details, see [IM plan features](/product/product_package_feature.html).
 
 ## Call frequency limit

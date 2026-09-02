@@ -90,7 +90,7 @@ await client.groupManager.getGroup('groupId').setMemberAttributes({
 
 ### Retrieve custom group member attributes
 
-Call `getMembersAttributes` to retrieve group member attributes for specified members in a batch. If `keys` is omitted, all attributes of these members are returned. If `keys` is specified, only the specified attributes are returned.
+Call `getMembersAttributes` to retrieve group member attributes for specified members in bulk. If `keys` is omitted, all attributes of these members are returned. If `keys` is specified, only the specified attributes are returned.
 
 :::tip
 You can retrieve the custom attributes of up to 10 group members at a time.
@@ -349,7 +349,7 @@ After an operation related to group members succeeds, the SDK triggers the corre
 ## Considerations
 
 - `groupId`, `userId`, and `userIds` cannot be empty. The SDK throws a parameter error if a parameter is invalid.
-- For batch member operations, `userIds` cannot be an empty array. The SDK normalizes duplicate user IDs.
+- For bulk member operations, `userIds` cannot be an empty array. The SDK normalizes duplicate user IDs.
 - `getMembers` uses cursor-based pagination. `getMuteList` and `getBlocklist` use page-number-based pagination.
 - The mute duration parameter of `muteMembers` and `unmuteMembers` is `muteDuration`, in seconds.
 - `checkIfInAllowList` and `checkIfInMuteList` check the current logged-in user's own status. You cannot pass another user ID.
@@ -372,7 +372,7 @@ After an operation related to group members succeeds, the SDK triggers the corre
 | [`leave`](group_manage.html#leave-voluntarily) | `Group` | Allows the current logged-in user to voluntarily leave the chat group. |
 | [`removeMembers`](group_manage.html#remove-members) | `Group` | Removes one or more group members through a `Group` object. |
 | [`setMemberAttributes`](#set-custom-group-member-attributes) | `Group` | Sets group member attributes through a `Group` object. |
-| [`getMembersAttributes`](#retrieve-custom-group-member-attributes) | `Group` | Retrieves group member attributes for specified members in a batch through a `Group` object. |
+| [`getMembersAttributes`](#retrieve-custom-group-member-attributes) | `Group` | Retrieves group member attributes for specified members in bulk through a `Group` object. |
 | [`changeOwner`](#transfer-chat-group-ownership) | `Group` | Transfers chat group ownership through a `Group` object. |
 | [`addAdmin`](#add-a-group-admin) | `Group` | Adds a group admin through a `Group` object. |
 | [`removeAdmin`](#remove-a-group-admin) | `Group` | Removes a group admin through a `Group` object. |

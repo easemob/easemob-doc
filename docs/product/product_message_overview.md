@@ -24,30 +24,30 @@ EasyIM message features include sending and receiving messages, retrieving histo
 
 The following table shows the message features supported on each platform or framework.
 
-| Message feature | Android  | iOS | Web  | Mini Program | HarmonyOS | Flutter | React Native  | Unity | Windows |
-| :----: | :------: |:------: |:------: |:------: |:------: |:------: |:------: |:------: |:------: |
-| Send and receive messages   |  ✓ |  ✓ |  ✓  | ✓   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Receive streaming messages  |  ✓ |  ✓ |  ✓  | ✓ | ✓ | ✓   |  ✓  |  —  | —  |
-| Retrieve historical messages from the server  |  ✓ |  ✓ |  ✓  | ✓  | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Retrieve local historical messages  |  ✓ |  ✓ |  —  | —   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Recall messages   |  ✓ |  ✓ |  ✓  | ✓   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Search for local messages   |  ✓ |  ✓ |   —  |  —   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Search for messages on the server   |  ✓ |  ✓ |  ✓  |  ✓   | — | —   |  —  |  —  | —  |
-| Edit messages  |  ✓ |  ✓ |  ✓  | ✓  | ✓ | —  |  ✓  |  ✓  | ✓  |
-| Add Reactions   |  ✓ |  ✓ |  ✓  | ✓   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Forward messages  |  ✓ |  ✓ |  —  | —  | ✓   |  ✓ | ✓  |  ✓  | ✓  |
-| Import and insert messages   |  ✓ |  ✓ |   —  |  —   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Update messages   |  ✓ |  ✓ |   —  |  —   | ✓  | ✓   |  ✓  |  ✓  | ✓  |
-| Delete historical messages from the server  |  ✓ |  ✓ |  ✓  | ✓ | ✓   | ✓   |  ✓  |  ✓  | ✓  |
-| Delete local historical messages  |  ✓ |  ✓ |  —  | —  | ✓  | ✓   |  ✓  |  ✓  | ✓  |
-| Send message receipts  |  ✓ |  ✓ |  ✓  | ✓ | ✓  | ✓   |  ✓  |  ✓  | ✓  |
-| Pin messages  |  ✓ |  ✓ |  ✓  | ✓ | ✓  | ✓   |  ✓  |  ✓  | ✓  |
-| Send targeted messages  |  ✓ |  ✓ |  ✓  | ✓ | ✓  | ✓   |  ✓  |  ✓  | ✓  |
-| Translate messages  |  ✓ |  ✓ |  ✓  | ✓ | —  | ✓   |  ✓  |  ✓  | ✓  |
-| Deliver messages only to online users  |  ✓ |  ✓ |  ✓  | ✓  | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Add message extensions  |  ✓ |  ✓ |  ✓  | ✓  | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Synchronize messages across multiple devices   |  ✓ |  ✓ |  ✓  | ✓   | ✓ | ✓   |  ✓  |  ✓  | ✓  |
-| Send offline push notifications   |  ✓ |  ✓ |  —  | — | ✓ | ✓   |  ✓  |  ✓  | ✓  |
+| Message feature | Android | iOS | Web |
+| :---- | :------ |:------ |:------ |
+| Send and receive messages | ✓ | ✓ | ✓ |
+| Receive streaming messages | ✓ | ✓ | ✓ |
+| Retrieve historical messages from the server | ✓ | ✓ | ✓ |
+| Retrieve local historical messages | ✓ | ✓ | — |
+| Recall messages | ✓ | ✓ | ✓ |
+| Search for local messages | ✓ | ✓ | — |
+| Search for messages on the server | ✓ | ✓ | ✓ |
+| Edit messages | ✓ | ✓ | ✓ |
+| Add Reactions | ✓ | ✓ | ✓ |
+| Forward messages | ✓ | ✓ | — |
+| Import and insert messages | ✓ | ✓ | — |
+| Update messages | ✓ | ✓ | — |
+| Delete historical messages from the server | ✓ | ✓ | ✓ |
+| Delete local historical messages | ✓ | ✓ | — |
+| Send message receipts | ✓ | ✓ | ✓ |
+| Pin messages | ✓ | ✓ | ✓ |
+| Send targeted messages | ✓ | ✓ | ✓ |
+| Translate messages | ✓ | ✓ | ✓ |
+| Deliver messages only to online users | ✓ | ✓ | ✓ |
+| Add message extensions | ✓ | ✓ | ✓ |
+| Synchronize messages across multiple devices | ✓ | ✓ | ✓ |
+| Send offline push notifications | ✓ | ✓ | — |
 
 ## Messages in each conversation type
 

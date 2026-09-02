@@ -44,7 +44,7 @@ For descriptions of the `Content-Type`, `Accept`, and `Authorization` fields, se
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement",
   "entities": [],
   "data": {
-    "announcement": "群组公告..."
+    "announcement": "group announcement"
   },
   "timestamp": 1542363546590,
   "duration": 0,

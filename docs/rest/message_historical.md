@@ -2,7 +2,7 @@
 
 <Toc />
 
-## Retrieve historical messages API
+## Historical Message Retrieval API
 
 ### Feature overview
 

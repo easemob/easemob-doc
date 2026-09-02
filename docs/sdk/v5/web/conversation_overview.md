@@ -117,7 +117,7 @@ Common conversation features provided by the SDK are as follows:
 | Conversation unread count | `clearConversationUnreadMessageCount`, `clearAllConversationUnreadMessageCount` | Clear the unread count of one or all conversations. See [Clear Conversation Unread Counts](conversation_unread.html). |
 | Delete conversations | `deleteConversation`, `clearAllMessagesAndConversations` | Delete a specified conversation, or clear all conversations and server-side roaming messages for the current user. See [Delete Conversations](conversation_delete.html). |
 | Pin conversations | `setConversationPinned` | Pin or unpin a conversation. See [Pin Conversations](conversation_pin.html). |
-| Conversation tags | `addConversationMark`, `removeConversationMark` | Add tags to or remove them from one or more conversations. See [Conversation Tags](conversation_mark.html). |
+| Conversation tags | `addConversationMark`, `removeConversationMark` | Add tags to or remove them from one or more conversations. See [Tag Conversations](conversation_mark.html). |
 | Conversation DND | Conversation DND methods in `PushManager` | Set, query, or clear DND rules for one-to-one and group conversations. Chat room conversations do not support this feature. |
 | Messages in a conversation | `getHistoryMessages`, `removeHistoryMessages`, and others | Retrieve or delete historical messages in a specified conversation. See [Retrieve Historical Messages](message_retrieve.html) and [Delete Messages](message_delete.html). |
 | Pinned messages in a conversation | `pinMessage`, `unpinMessage`, `getPinnedMessageList` | Pin, unpin, or retrieve pinned messages in a specified conversation. Up to 20 messages are returned. See [Pin Messages](message_pin.html). |

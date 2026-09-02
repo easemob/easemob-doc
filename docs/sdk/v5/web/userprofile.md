@@ -33,7 +33,7 @@ Call `updateOwnInfo` to set or update multiple attributes of the current user.
 ```typescript
 const profile = await client.userInfoManager.updateOwnInfo({
   nickname: 'easemob',
-  avatarUrl: 'https://www.easemob.com/avatar.png',
+  avatarUrl: 'http://easyim.ai/avatar.png',
   birth: '2000-10-10',
   sign: 'hello world',
   phone: '13333333333',

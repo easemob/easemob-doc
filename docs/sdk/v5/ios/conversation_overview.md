@@ -197,7 +197,7 @@ Clearing a conversation unread count does not send a read receipt to the message
 | Conversation unread counts | `unreadMessagesCount`, `clearConversationUnreadMessageCount`, `clearAllConversationUnreadMessageCount` | Retrieves or clears conversation unread counts. For details, see [Conversation Unread Counts](conversation_unread.html). |
 | Conversation deletion | `deleteConversation`, `deleteServerConversation`, `deleteAllMessagesAndConversations` | Deletes local conversations and messages or the current user's server-side conversations and messages. For details, see [Delete Conversations](conversation_delete.html). |
 | Conversation pinning | `pinConversation` | Pins or unpins a conversation. For details, see [Pin Conversations](conversation_pin.html). |
-| Conversation tags | `addConversationMark`, `removeConversationMark` | Adds tags to or removes tags from one or more conversations. For details, see [Conversation Tags](conversation_mark.html). |
+| Conversation tags | `addConversationMark`, `removeConversationMark` | Adds tags to or removes tags from one or more conversations. For details, see [Tag Conversations](conversation_mark.html). |
 | Conversation do-not-disturb | Conversation do-not-disturb APIs of `IEMPushManager` | Sets or queries conversation do-not-disturb rules. |
 | Local messages in a conversation | `loadMessageWithId`, `loadMessagesStartFromId`, `deleteMessageWithId`, `deleteAllMessages` | Retrieves or deletes local conversation messages. |
 | Server-side message deletion | `removeMessagesFromServerMessageIds`, `removeMessagesFromServerWithTimeStamp` | Deletes specified messages from the local and server-side data of the current conversation. |

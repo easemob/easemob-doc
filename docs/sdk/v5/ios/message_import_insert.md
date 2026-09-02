@@ -8,7 +8,7 @@ These operations update only local messages and conversation data on the current
 
 The iOS SDK provides the following methods:
 
-- Batch import messages: Call `importMessages` to asynchronously import multiple messages sent or received by the current user into the local database.
+- Import messages: Call `importMessages` to asynchronously import multiple messages sent or received by the current user into the local database.
 - Insert a message into a specified conversation: Call `insertMessage` to insert a message into the specified conversation according to its Unix timestamp and update properties such as `latestMessage`.
 
 ## Prerequisite
@@ -16,7 +16,7 @@ The iOS SDK provides the following methods:
 - Initialize the SDK and log in. For details, see [Quickstart](quickstart.html).
 - Understand the usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
-## Batch import messages into the database
+## Import messages into the database
 
 To batch import messages into local conversations, call `importMessages`, create `EMChatMessage` objects, and import the messages into the local database.
 
@@ -46,6 +46,6 @@ EMError *error = nil;
 
 | API name | Module/Type | Description |
 | :--- | :--- | :--- |
-| [`importMessages`](#batch-import-messages-into-the-database) | `IEMChatManager` | Imports messages in bulk asynchronously. |
+| [`importMessages`](#import-messages-into-the-database) | `IEMChatManager` | Imports messages in bulk asynchronously. |
 | [`getConversation`](#insert-a-message) | `IEMChatManager` | Retrieves or creates a local conversation. |
 | [`insertMessage`](#insert-a-message) | `EMConversation` | Inserts a message into a local conversation synchronously. |

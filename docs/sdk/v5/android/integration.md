@@ -56,7 +56,7 @@ dependencies {
 
 ### Method 2: Manually copy SDK files
 
-Open the [SDK download page](https://www.easemob.com/download/im#Android), download the latest EasyIM Android SDK, and decompress it.
+Open the [SDK download page](http://easyim.ai/sdk#Android), download the latest EasyIM Android SDK, and decompress it.
 
 ![img](@static/images/android/sdk-files.png)
 
@@ -90,7 +90,7 @@ To reduce the app package size, the SDK provides `EMOptions#setNativeLibBasePath
 
 Implement this feature as follows:
 
-1. [Download the latest SDK](https://www.easemob.com/download/im#Android) and decompress it.
+1. [Download the latest SDK](http://easyim.ai/sdk#Android) and decompress it.
 2. Integrate `hyphenatechat_x.y.z.jar` from the downloaded package into your project.
 3. Upload the `.so` files for all architectures to your server, and ensure that the app can download the `.so` files for the target architecture over the network.
 4. At runtime, the app checks whether the `.so` files exist. If they are not found, the app downloads them and saves them to your custom private app directory.

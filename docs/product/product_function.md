@@ -65,7 +65,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | Send and receive streaming messages. Streaming messages can be sent through a server-side API, while the SDK supports only receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Multi-device synchronization       | Synchronize messages across multiple platforms and devices so that they receive messages simultaneously. |
 | Message search  | Search for all message types in server-side and local conversations by keyword.     |
@@ -92,7 +92,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified group chat conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a group chat conversation. |
 | Pin a conversation  | Pin a group chat conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a group chat conversation. |
+| Conversation tag  | Add a mark to a group chat conversation. |
 | Delete a conversation  | Delete a group chat conversation. |
 
 ## User attributes
@@ -231,7 +231,7 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 | :------------- | :---------------------- |
 | Synchronous push to a single user | Send push notifications synchronously to a single user.             |
 | Asynchronous push to a single user | Send push notifications asynchronously to a single user.             |
-| Batch push to multiple users | Send push notifications asynchronously to multiple users in a batch.             |
+| Bulk push to multiple users | Send push notifications asynchronously to multiple users in bulk.             |
 | Tag or broadcast push  | Send push notifications to users with specified tags or all users in an app. |
 
 ### Server-side message search

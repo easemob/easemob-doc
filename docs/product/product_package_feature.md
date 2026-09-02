@@ -191,7 +191,7 @@ EasyIM offers **Free**, **Professional**, and **Flagship** plans for different s
 </tr>
 <tr>
 <td width="224">
-<p>Conversation marks</p>
+<p>Conversation tags</p>
 </td>
 <td width="224">
 <p>✓</p>

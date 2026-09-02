@@ -56,7 +56,7 @@ You can pass up to 50 messages to `sendMessageReadReceipts` in each call. All me
 For group messages, the app can retrieve read information through the following APIs:
 
 - `readCount` or `groupReadReceiptCount`: Retrieve the number of members who have read a group message.
-- `getGroupMessageReadReceipts`: Batch-retrieve read receipt details for multiple group messages. You can pass up to 20 messages from the same conversation in each call.
+- `getGroupMessageReadReceipts`: Retrieve read receipt details for multiple group messages. You can pass up to 20 messages from the same conversation in each call.
 - `asyncFetchGroupMessageReadUsersFromServer`: Retrieve the members who have read a single group message by page.
 
 :::tip
@@ -206,9 +206,9 @@ The sender monitors both one-to-one and group message read receipts through `onM
 
 ## Retrieve group message read receipt details
 
-### Batch-retrieve receipt summaries for multiple group messages
+### Retrieve receipt summaries for multiple group messages
 
-Call `getGroupMessageReadReceipts` to batch-retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same conversation.
+Call `getGroupMessageReadReceipts` to retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same conversation.
 
 ```objectivec
 // messages contains up to 20 messages, all from the same group conversation.
@@ -304,7 +304,7 @@ Sending message read receipts and clearing conversation unread counts are indepe
 | [`sendMessageReadReceipts`](#step-2-send-message-read-receipts) | `IEMChatManager` | Asynchronously sends read receipts for one-to-one or group messages in bulk. |
 | [`messageId`](#step-3-monitor-message-read-receipts) / [`conversationId`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieves the message ID and conversation ID corresponding to a receipt. |
 | [`isPeerReceipt`](#step-3-monitor-message-read-receipts) / [`readCount`](#step-3-monitor-message-read-receipts) | `EMMessageReadReceipt` | Retrieves the one-to-one peer receipt status or group message read count. |
-| [`getGroupMessageReadReceipts`](#batch-retrieve-receipt-summaries-for-multiple-group-messages) | `IEMChatManager` | Batch retrieves read receipt details for multiple group messages. |
+| [`getGroupMessageReadReceipts`](#retrieve-receipt-summaries-for-multiple-group-messages) | `IEMChatManager` | Retrieves read receipt details for multiple group messages. |
 | [`asyncFetchGroupMessageReadUsersFromServer`](#retrieve-receipt-member-details-for-a-group-message) | `IEMChatManager` | Retrieves the members who have read a group message by page. |
 | [`readReceiptId`](#retrieve-receipt-member-details-for-a-group-message) / [`messageId`](#retrieve-receipt-member-details-for-a-group-message) / [`from`](#retrieve-receipt-member-details-for-a-group-message) / [`readCount`](#retrieve-receipt-member-details-for-a-group-message) / [`timestamp`](#retrieve-receipt-member-details-for-a-group-message) | `EMGroupReadReceipt` | Retrieves group message read receipt details. |
 | [`groupReadReceiptCount`](#view-message-delivery-and-read-states) | `EMChatMessage` | Queries the group message read count. |

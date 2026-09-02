@@ -40,7 +40,7 @@ For details about the parameters in the request URL, see [Request URL parameters
 curl -X PUT 'https://XXXX/XXXX/XXXX/metadata/user/user1'  \
 -H 'Content-Type: application/x-www-form-urlencoded'  \
 -H 'Authorization: Bearer <YourAppToken>'   \
--d 'avatarurl=https://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 
+-d 'avatarurl=http://easyim.ai/avatar.png&ext=ext&nickname=nickname' 
 ```
 
 ## Request header fields
@@ -81,7 +81,7 @@ For user attributes, the client uses the following default keys for the user nic
   "data": {
     "ext": "ext",
     "nickname": "nickname",
-    "avatarurl": "https://www.easemob.com/avatar.png"
+    "avatarurl": "http://easyim.ai/avatar.png"
   },
   "duration": 166
 }

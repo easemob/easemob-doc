@@ -20,9 +20,9 @@ Before you begin, ensure that the following requirements are met:
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
 
-## Import messages into the database in bulk
+## Import messages into the database
 
-To insert messages into local conversations through a batch import, construct `EMMessage` objects and call `importMessages` to import them into the local database.
+To insert messages into local conversations through a bulk import, construct `EMMessage` objects and call `importMessages` to import them into the local database.
 
 The current user can import only messages that they sent or received. After import, the messages are added to the corresponding conversations based on their timestamps.
 
@@ -71,7 +71,7 @@ EMClient.getInstance()
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`importMessages`](#import-messages-into-the-database-in-batches) | `EMChatManager` | Import messages sent or received by the current user into the local database in bulk. |
+| [`importMessages`](#import-messages-into-the-database) | `EMChatManager` | Import messages sent or received by the current user into the local database in bulk. |
 | [`getConversation`](#insert-messages) | `EMChatManager` | Retrieve a local conversation with a specified ID. Returns `null` if it is not found. |
 | [`insertMessage`](#insert-messages) | `EMConversation` | Insert a message into a specified local conversation based on its Unix timestamp. |
 | [`saveMessage`](#insert-messages) | `EMChatManager` | Save a message to memory and the local database, automatically creating a conversation if necessary. |

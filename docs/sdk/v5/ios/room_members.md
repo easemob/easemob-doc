@@ -10,7 +10,7 @@ Before you begin, ensure that the following requirements are met:
 
  - Initialize the SDK. See [Quickstart](quickstart.html).
  - Understand the EasyIM [usage restrictions](/product/limitation.html).
- - Understand the EasyIM chat room restrictions. See [EasyIM pricing](https://www.easemob.com/pricing/im).
+ - Understand the EasyIM chat room restrictions. See [EasyIM pricing](http://easyim.ai/pricing).
 
 ## Retrieve the chat room member list
 

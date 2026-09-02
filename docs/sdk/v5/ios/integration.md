@@ -39,7 +39,7 @@ To update the installed SDK version, run `pod update HyphenateChat`, and then re
 
 ### Method 2: Manually import the SDK
 
-1. Open the [SDK download page](https://www.easemob.com/download/im#IOS), download the latest EasyIM iOS SDK, and decompress it.
+1. Open the [SDK download page](http://easyim.ai/sdk#iOS), download the latest EasyIM iOS SDK, and decompress it.
 2. Drag `HyphenateChat.xcframework` and `aosl.xcframework` from the SDK package into the Xcode project.
 3. Under **TARGETS > Project Name > General > Frameworks, Libraries, and Embedded Content**, ensure that both xcframeworks have been added and set **Embed** to **Embed & Sign** for each one.
 

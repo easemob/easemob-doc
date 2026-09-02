@@ -110,7 +110,7 @@ await client.chatThreadManager.removeChatThreadMember({
 });
 ```
 
-## Change a message thread's name
+## Change a message thread name
 
 Generally, only the group owner, group admins, and thread creator can call `updateChatThreadName` to change a message thread's name.
 
@@ -212,7 +212,7 @@ console.log('Thread list in the group:', result.items);
 console.log('Next-page cursor:', result.cursor);
 ```
 
-## Retrieve the last messages in message threads in bulk
+## Bulk retrieve last messages in message threads
 
 Call `getChatThreadLastMessageList` to retrieve the last-message summaries for one or more message threads from the server in bulk.
 
@@ -276,9 +276,9 @@ client.addEventHandler('thread-multi-device-events', {
 | [`joinChatThread`](#join-a-message-thread)                            | `ChatThreadManager` | Joins a message thread.                                   |
 | [`leaveChatThread`](#leave-a-message-thread)                           | `ChatThreadManager` | Voluntarily leaves a message thread.                               |
 | [`removeChatThreadMember`](#remove-a-member)      | `ChatThreadManager` | Removes a specified member from a message thread.                         |
-| [`updateChatThreadName`](#change-a-message-threads-name)                  | `ChatThreadManager` | Changes a message thread's name.                               |
+| [`updateChatThreadName`](#change-a-message-thread-name)                  | `ChatThreadManager` | Changes a message thread's name.                               |
 | [`getChatThreadInfo`](#retrieve-message-thread-details)                     | `ChatThreadManager` | Retrieves message thread details.                               |
 | [`getChatThreadMemberList`](#retrieve-a-message-threads-member-list)           | `ChatThreadManager` | Retrieves a message thread's member list with pagination.                       |
 | [`getJoinedChatThreadList`](#retrieve-message-thread-lists)               | `ChatThreadManager` | Retrieves the current user's joined-message-thread list with pagination.           |
 | [`getChatThreadList`](#retrieve-message-thread-lists)                     | `ChatThreadManager` | Retrieves the message thread list in a specified chat group with pagination.               |
-| [`getChatThreadLastMessageList`](#retrieve-the-last-messages-in-message-threads-in-batches) | `ChatThreadManager` | Retrieves the last-message summaries for one or more message threads in bulk. |
+| [`getChatThreadLastMessageList`](#bulk-retrieve-last-messages-in-message-threads) | `ChatThreadManager` | Retrieves the last-message summaries for one or more message threads in bulk. |

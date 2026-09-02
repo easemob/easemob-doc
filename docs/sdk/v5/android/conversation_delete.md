@@ -10,7 +10,7 @@ In the Android SDK, local conversations and messages are handled as follows when
 | Leave a chat group | Retains the local group conversation and removes it from the memory cache. Local group messages are deleted by default. | The local group conversation is retained by default. To retain local messages, call `EMOptions#setDeleteMessagesAsExitGroup(false)` before initialization. |
 | Leave a chat room | Deletes the local chat room conversation and its local messages by default. | Call `EMOptions#setDeleteMessagesAsExitChatRoom(false)` before initialization. |
 
-You can also use `EMChatManager` to delete a specified conversation for the current user from the server and local device, delete only local conversations, batch delete local conversations, or clear all conversations. Use `EMConversation` to delete a specified local message.
+You can also use `EMChatManager` to delete a specified conversation for the current user from the server and local device, delete only local conversations, bulk delete local conversations, or clear all conversations. Use `EMConversation` to delete a specified local message.
 
 :::warning
 Deletion might be irreversible. Confirm the scope before making the call.
@@ -138,9 +138,9 @@ EMClient.getInstance()
 After a conversation is deleted, the SDK recreates the corresponding local conversation when messages are subsequently sent or received. If `deleteMessages` is `false`, server-side roaming messages are not deleted with the conversation and can be retrieved as needed within their retention period. If `deleteMessages` is `true`, the conversation's server-side roaming messages are also deleted and can no longer be retrieved through the SDK.
 :::
 
-### Batch delete local conversations
+### Bulk delete local conversations
 
-Call `asyncDeleteConversations` to batch delete local conversations.
+Call `asyncDeleteConversations` to delete local conversations.
 
 The `deleteMessages` parameter controls whether to also delete local messages in each conversation:
 
@@ -245,7 +245,7 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`deleteConversationFromServer`](#delete-a-server-side-conversation-for-the-current-user) | `EMChatManager` | Deletes a specified conversation for the current user from the server and local device, with an option to also delete server-side historical messages. |
 | [`deleteConversation`](#delete-a-local-conversation) | `EMChatManager` | Deletes a specified local conversation, with an option to also delete local historical messages. |
-| [`asyncDeleteConversations`](#batch-delete-local-conversations) | `EMChatManager` | Asynchronously batch deletes local conversations, with an option to also delete local messages. |
+| [`asyncDeleteConversations`](#bulk-delete-local-conversations) | `EMChatManager` | Asynchronously bulk deletes local conversations, with an option to also delete local messages. |
 | [`asyncDeleteAllMsgsAndConversations`](#delete-all-conversations-and-messages) | `EMChatManager` | Asynchronously clears all local conversations and messages, with an option to also clear the current user's server-side data. |
 | [`getConversation`](#delete-a-specified-local-message-in-a-conversation) | `EMChatManager` | Retrieves a specified local conversation. |
 | [`removeMessage`](#delete-a-specified-local-message-in-a-conversation) | `EMConversation` | Deletes a specified local message from a conversation. |

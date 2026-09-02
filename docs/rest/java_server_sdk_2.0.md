@@ -191,8 +191,8 @@ try {
 
 | New feature                     | Description                                                    |
 | :--------------------------- | :----------------------------------------------------------- |
-| Recall messages in a batch | `batchRecallMessages`/`batchRecallMessagesAsync`: Recalls multiple successfully sent messages at a time, with a maximum of 30 messages per request.<br/>For details, see the [API description in MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#batchRecallMessages(com.easemob.im.api.model.EMBatchRecallMessages)).|
-| Check the blocklist | `userBlockCheck`/`userBlockCheckAsync`: Checks in a batch whether users are on the blocklist.<br/>For details, see the [API description in BlockApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html#userBlockCheck(com.easemob.im.api.model.EMUserBlockCheck)).|
+| Recall messages in bulk | `batchRecallMessages`/`batchRecallMessagesAsync`: Recalls multiple successfully sent messages at a time, with a maximum of 30 messages per request.<br/>For details, see the [API description in MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#batchRecallMessages(com.easemob.im.api.model.EMBatchRecallMessages)).|
+| Check the blocklist | `userBlockCheck`/`userBlockCheckAsync`: Checks in bulk whether users are on the blocklist.<br/>For details, see the [API description in BlockApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/BlockApi.html#userBlockCheck(com.easemob.im.api.model.EMUserBlockCheck)).|
 | Translate message content | `translateMessage`/`translateMessageAsync`: Translates the content of text messages. Only text messages are supported.<br/>For details, see the [API description in MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#translateMessage(com.easemob.im.api.model.EMMessageTranslate)). |
 | Retrieve the list of supported translation languages | `getTranslateSupportLanguages`: Retrieves the list of supported translation languages.<br/>For details, see the [API description in MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#getTranslateSupportLanguages()).|
 | Detect the source language of text | `detectTranslateLanguage`: Detects the source language of text.<br/>For details, see the [API description in MessageApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/MessageApi.html#detectTranslateLanguage(com.easemob.im.api.model.EMDetectTranslateLanguage)).|
@@ -201,7 +201,7 @@ try {
 
 | New feature                     | Description                                                    |
 | :--------------------------- | :----------------------------------------------------------- |
-| Remove chat room members in a batch | See [RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html) for details. |
+| Remove chat room members in bulk | See [RoomApi](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/api/RoomApi.html) for details. |
 
 ### V1.0.17 2026-04-03
 
@@ -213,7 +213,7 @@ try {
 
 ### V1.0.16 2025-07-25
 
-1. Added the feature for retrieving user attributes in a batch.
+1. Added the feature for retrieving user attributes in bulk.
 2. Added the feature for retrieving the number of chat group members.
 3. Added the feature for retrieving the number of chat room members.
 
@@ -244,7 +244,7 @@ For details about these updates, see EMCreateMessage and GroupApi.
 
 ### V1.0.11 2024-11-20
 
-1. Added the feature for setting custom chat group member attributes in a batch.
+1. Added the feature for setting custom chat group member attributes in bulk.
 
 For details about these updates, see MetadataApi.
 
@@ -275,7 +275,7 @@ For details about these updates, see MessageApi, ContactApi, UserApi, and GroupA
 
 ### V1.0.7 2024-06-28
 
-1. Added the feature for [modifying user push nicknames in a batch](push_nickname_set_batch.html).
+1. Added the feature for [modifying user push nicknames in bulk](push_nickname_set_batch.html).
 
 2. Added examples for sending image, voice, video, file, command, extension, and custom messages.
 
@@ -283,7 +283,7 @@ For details about these updates, see UserApi and MessageApiTest.
 
 ### V1.0.6 2024-06-07
 
-1. Added the feature for [removing chat group members in a batch](group_members_remove_batch.html).
+1. Added the feature for [removing chat group members in bulk](group_members_remove_batch.html).
 
 2. Added the feature for [retrieving the contact list at one time](user_friend_list_obtain.html).
 

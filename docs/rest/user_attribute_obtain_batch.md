@@ -65,17 +65,17 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
     "user1": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "http://easyim.ai/avatar.png"
     },
     "user2": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "http://easyim.ai/avatar.png"
     },
     "user3": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "http://easyim.ai/avatar.png"
     }
   },
   "duration": 3

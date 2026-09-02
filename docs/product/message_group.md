@@ -27,7 +27,7 @@
    
 :::
 
-## Chat group message capabilities
+## Message capabilities
 
 | Type    | Description       | Use case    |
 |  :--------- |  :--------- |  :--------- |
@@ -42,14 +42,14 @@
 | Control chat group message reception  | <br/> - A user can block messages from a chat group through an SDK API <br/> - Ban a chat group through a RESTful API| <br/> - A user no longer receives messages from a chat group<br/> - Prevent all members of a chat group from sending and receiving messages in it  |
 | Control chat group message frequency    | <br/>For a single app, the RESTful API has the following 3 limits:<br/> - 20 messages/second/App Key  <br/> - 20 calls/second <br/> -  3 chat groups/call.| Prevent overly frequent RESTful API calls. To increase these limits, contact the EasyIM business manager.  |
 
-## Chat group message sending controls
+## Message sending controls
 
 | Chat group message sending control     | Description   |
 | :--------- | :----- |
 | Prevent message sending  |  - **Blocklist**: After a member is added to the blocklist, the member is removed from the chat group and can no longer send or receive messages.<br/> - **Mute**: After a member is added to the mute list, the member cannot send messages in the chat group even if added to the allowlist, but can receive messages normally. After **mute all** is enabled, only members on the allowlist can send messages.<br/> - **Global mute (RESTful API)**: After a user is globally muted, the user cannot send one-to-one messages or messages in any chat group or chat room. A globally muted member cannot send messages in any one-to-one chat, chat group, or chat room even if added to a chat group or chat room allowlist.|
 |Allow or intercept messages|- **Pre-delivery callback**: Before sending a message, the EasyIM server sends a request to your app server. You can configure rules based on your business requirements to determine whether to deliver or intercept the message.<br/> - **Content moderation**: Process messages based on content moderation results, including intercepting messages, replacing sensitive information, and allowing messages. This service applies only to text, image, audio, and video messages. |
 
-## Chat group message frequency controls
+## Message frequency controls
 
 ### REST API
 

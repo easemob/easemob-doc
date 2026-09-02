@@ -186,7 +186,7 @@ The following table lists the message features supported for streaming messages:
 | Feature | Supported                          |
 | :--------------- | :-------------------------------- |
 | [Send messages](/rest/message_stream_send_single.html)         | Yes (only through the RESTful API) |
-| [Message roaming (client)](/sdk/v5/android/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server)         | Yes                                |
+| [Message roaming (client)](/sdk/v5/android/message_retrieve.html#retrieve-messages-in-a-conversation-from-the-server)         | Yes                                |
 | [Message extensions](message_stream_send_single.html#request-example)         | Yes                                |
 | [Targeted messages](/sdk/v5/android/message_target.html)         | No                                |
 | [Message read receipts (client)](/sdk/v5/android/message_receipt.html)     | No                                |

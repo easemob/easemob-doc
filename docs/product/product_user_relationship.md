@@ -52,7 +52,7 @@ You must retrieve the friend list from the server before you can retrieve it loc
 
 You can [call a REST API](/rest/user_friend_import.html) to import multiple friends at once.
 
-### Enable or disable message sending permission control
+### Message sending permission control
 
 One-to-one message communication can occur between friends or non-friends. For example, colleagues in an enterprise mobile office app may be allowed to send messages to one another without message sending permission control. In a dating app, however, messages may be allowed only between friends. Non-friends must send a friend request and can send messages only after the request is accepted.
 

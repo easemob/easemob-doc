@@ -248,9 +248,9 @@ EMClient.getInstance().chatThreadManager().getChatThreadsFromServer(parentId, li
 });
 ```
 
-## Batch retrieve the latest messages in message threads
+## Retrieve the latest messages in message threads
 
-Call `getChatThreadLatestMessage` to batch retrieve the latest messages in message threads from the server.
+Call `getChatThreadLatestMessage` to retrieve the latest messages in message threads from the server.
 
 The following is sample code:
 
@@ -310,4 +310,4 @@ EMClient.getInstance().chatThreadManager().removeChatThreadChangeListener(chatTh
 | [`getChatThreadMembers`](#retrieve-the-message-thread-member-list) | `EMChatThreadManager` | Retrieves the message thread member list by page. |
 | [`getJoinedChatThreadsFromServer`](#retrieve-message-thread-lists) | `EMChatThreadManager` | Retrieves the list of message threads the current user has joined or created by page. |
 | [`getChatThreadsFromServer`](#retrieve-message-thread-lists) | `EMChatThreadManager` | Retrieves the message thread list for a specified chat group by page. |
-| [`getChatThreadLatestMessage`](#batch-retrieve-the-latest-messages-in-message-threads) | `EMChatThreadManager` | Batch retrieves the latest messages in message threads. |
+| [`getChatThreadLatestMessage`](#retrieve-latest-messages-in-message-threads) | `EMChatThreadManager` | Retrieves the latest messages in message threads. |

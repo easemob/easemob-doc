@@ -9,7 +9,7 @@ EasyIM supports APNs push and offline push from Android vendors, including Huawe
 | Field                   | Type         | Description  |
 | ---------------------- | ------------ | ------------------ |
 | `em_push_filter`     | Object       | Push filtering.                                                   |
-| `em_at_list`             | `List<String>` | List of mentioned (`@`) users. In certain scenarios, you can use this field to make the push notification content received by `@` mentioned users different from that received by other users. For example, these users receive `{0}在群中@了我`. If this field does not meet your requirements, use directed templates to customize notification effects.      |
+| `em_at_list`             | `List<String>` | List of mentioned (`@`) users. In certain scenarios, you can use this field to make the push notification content received by `@` mentioned users different from that received by other users. For example, these users receive `{0}@me in the group`. If this field does not meet your requirements, use directed templates to customize notification effects.      |
 | `em_push_template `      | Object       | Push template.     |
 | `em_ignore_notification` | Boolean      | Silent message switch. `true` indicates that no push notification is sent.  |
 | `em_force_notification`  | Boolean      | Forced push switch. If set to `true`, the server does not check whether the user has enabled DND.  |

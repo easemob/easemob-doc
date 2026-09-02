@@ -126,7 +126,7 @@ const contacts = await client.contactManager.getContacts();
 
 If your project does not use an npm package manager, download the browser script file and include it on the page.
 
-1. [Download the Web SDK](https://www.easemob.com/download/im#Web) and save the SDK browser script file in your project.
+1. [Download the Web SDK](http://easyim.ai/sdk#Web) and save the SDK browser script file in your project.
 
 2. Include the SDK script file in `index.html`.
 

@@ -44,7 +44,7 @@ if (targetConversation) {
 If messages are subsequently sent or received after a conversation is deleted, the SDK recreates the corresponding local conversation. If `deleteRoamingMessages: false` is set when deleting a conversation, its server-side roaming messages are retained and can be retrieved as needed before they expire. If `deleteRoamingMessages: true` is set, the server-side roaming messages are also deleted and can no longer be retrieved through the SDK.
 :::
 
-## Delete multiple specified conversations
+## Delete multiple conversations
 
 To delete multiple specified conversations, iterate over them in your app and call `deleteConversation`. For information about setting `deleteRoamingMessage`, see [Delete a single conversation](#delete-a-single-conversation).
 

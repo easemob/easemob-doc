@@ -24,7 +24,7 @@
 2. If the basic message types do not meet your requirements, you can enhance them with custom message extensions. A typical use case is sending a message that quotes an earlier text or image message. After an extension is added, the message cannot exceed the size limit of the original message type. 
 :::
 
-## Chat room message capabilities
+## Message capabilities
 
 | Type    | Description       | Use case    |
 | ---------- | ---------------- | --------------------------- |
@@ -40,7 +40,7 @@
 Unlike group chats, chat rooms do not support offline push.
 :::
 
-## Chat room message sending controls
+## Message sending controls
 
 | Chat room message sending control   | Description  |
 | :--------- | :----- |
@@ -49,7 +49,7 @@ Unlike group chats, chat rooms do not support offline push.
 | Prevent message sending  |  - **Blocklist**: After a member is added to the blocklist, the member is removed from the chat room and can no longer send or receive messages.<br/> - **Mute**: After a member is added to the mute list, the member cannot send messages in the chat room even if added to the allowlist, but can receive messages normally. After **mute all** is enabled, only members on the allowlist can send messages.<br/> - **Global mute (RESTful API)**: After a user is globally muted, the user cannot send one-to-one messages or messages in any chat group or chat room. A globally muted member cannot send messages in any one-to-one chat, chat group, or chat room even if added to a chat room allowlist.|
 |Allow or intercept messages|- **Pre-delivery callback**: Before sending a message, the EasyIM server sends a request to your app server. You can configure rules based on your business requirements to determine whether to deliver or intercept the message.<br/> - **Content moderation**: Process messages based on content moderation results, including intercepting messages, replacing sensitive information, and allowing messages. This service applies only to text, image, audio, and video messages. |
 
-## Chat room message frequency controls
+## Message frequency controls
 
 - REST API
 

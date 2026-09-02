@@ -24,7 +24,7 @@ After a chat group or chat room announcement is set or updated, the EasyIM serve
 	"security": "de170d1c00XXXX9f294306ec72831d53",
 	"payload": {
 		"type": "ANNOUNCEMENT",
-		"announcement": "公告"
+		"announcement": "announcement"
 	},
 	"appkey": "XXXX#XXXX",
 	"id": "262246968131585",

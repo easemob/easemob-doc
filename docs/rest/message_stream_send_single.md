@@ -65,7 +65,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
     "from": "111",
     "to": "222",
     "body": {
-        "msg": "第一个分片",
+        "msg": "first chunk",
         "seq": 0,
         "type": "markdown"
     },
@@ -86,7 +86,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
     "to": "222",
     "body": {
         "msgId": "1499696395467098072",
-        "msg": "第二个分片",
+        "msg": "second chunk",
         "seq": 1,
         "finish": false,
         "finishReason": 0,
@@ -218,7 +218,7 @@ The following table lists the message features supported for streaming messages:
 | Feature | Supported                          |
 | :--------------- | :-------------------------------- |
 | [Send messages](/rest/message_stream_send_single.html)         | Yes (only through the RESTful API) |
-| [Message roaming (client)](/sdk/v5/android/message_retrieve.html#retrieve-messages-in-a-specified-conversation-from-the-server)         | Yes                                |
+| [Message roaming (client)](/sdk/v5/android/message_retrieve.html#retrieve-messages-in-a-conversation-from-the-server)         | Yes                                |
 | [Message extensions](message_stream_send_single.html#request-example)         | Yes                                |
 | [Targeted messages](/sdk/v5/android/message_target.html)         | No                                |
 | [Message read receipts (client)](/sdk/v5/android/message_receipt.html)     | No                                |

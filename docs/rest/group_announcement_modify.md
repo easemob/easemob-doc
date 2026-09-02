@@ -30,7 +30,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7/announcement'   \
 -H 'Content-Type: application/json'   \
 -H 'Accept: application/json'  \
 -H 'Authorization: Bearer <YourAppToken>'  \
--d '{"announcement" : "群组公告…"}' 
+-d '{"announcement" : "group announcement…"}' 
 ```
 
 ## Request header fields

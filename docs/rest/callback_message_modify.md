@@ -485,8 +485,8 @@ Webhook request body fields:
         "bodies": [
             {
                 "combineLevel": 1,
-                "msg": "当前版本过低，无法展示对应内容。",
-                "summary": "wzy1: [图片]\nwzy: [语音]\nwzy: [图片]",
+                "msg": "Version too low to show this content.",
+                "summary": "wzy1: [image]\nwzy: [voice]\nwzy: [image]",
                 "filename": "17470204055850033",
                 "subType": "sub_combine",
                 "file_length": 701,

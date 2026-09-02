@@ -127,8 +127,8 @@ The following table lists conversation-related options that can be set during in
 
 | Option | Description |
 | ------------------------------------------- | ------------------------------------------------------------ |
-| `EMOptions#setDeleteMessagesAsExitChatRoom` | Sets whether to delete a chat room's local messages when leaving it. - (Default) `true`: Deletes local messages. - `false`: Retains local messages. |
-| `EMOptions#setLoadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. - `true`: Includes empty conversations. - (Default) `false`: Excludes empty conversations. This option must be set before initializing the SDK. |
+| `EMOptions#setDeleteMessagesAsExitChatRoom` | Sets whether to delete a chat room's local messages when leaving it. <br/> - (Default) `true`: Deletes local messages. <br/> - `false`: Retains local messages. |
+| `EMOptions#setLoadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database.<br/> -  `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. This option must be set before initializing the SDK. |
 
 ### Retrieve all local conversations at once
 

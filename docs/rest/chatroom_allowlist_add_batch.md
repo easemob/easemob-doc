@@ -104,7 +104,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 
 | HTTP status code        | Error type | Error message          | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | usernames size is more than max limit : 100 | The number of users added to the allowlist in a batch exceeds the limit of 100. | Reduce the number of users to 100 or fewer. |
+| 400     | invalid_parameter | usernames size is more than max limit : 100 | The number of users added to the allowlist in bulk exceeds the limit of 100. | Reduce the number of users to 100 or fewer. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 403     | forbidden_op | users [XX] are not members of this group! | The user ID to add to the allowlist is not in the chat room. | Specify the user ID of a chat room member. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat room does not exist. | Specify a valid chat room ID.|

@@ -25,8 +25,8 @@ curl -X PUT 'https://XXX/XXX/XXX/push/nickname'  \
 -H 'Accept: application/json'  \
 -H 'Authorization: Bearer <YourAppToken>'  \
 -d '[
-      {"username":"user1", "push_nickname":"推送昵称-1"}, 
-      {"username":"user2", "push_nickname":"推送昵称-2"}
+      {"username":"user1", "push_nickname":"push nickname-1"}, 
+      {"username":"user2", "push_nickname":"push nickname-2"}
 ]'
 ```
 
@@ -52,11 +52,11 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
     "application": "6b58d05d-99c0-XXX-XXX-1ff3e95a3dc0",
     "entities": [
         {
-            "push_nickname": "推送昵称-1",
+            "push_nickname": "push nickname-1",
             "username": "user1"
         },
         {
-            "push_nickname": "推送昵称-2",
+            "push_nickname": "push nickname-2",
             "username": "user2"
         }
     ],

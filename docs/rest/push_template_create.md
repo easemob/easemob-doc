@@ -26,8 +26,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
     "name": "test7",
-    "title_pattern": "你好,{0}",
-    "content_pattern": "推送测试,{0}"
+    "title_pattern": "Hello,{0}",
+    "content_pattern": "Push test,{0}"
 }'
 ```
 
@@ -58,18 +58,18 @@ You can set `title_pattern` and `content_pattern` in the following ways:
       "ext":{
           "em_push_template":{
               "title_args":[
-                  "环信"
+                  "EasyIM"
               ],
               "content_args":[
-                  "欢迎使用im-push",
+                  "Welcome to EasyIM push",
                   "加油"
               ]
           }
       }
   }
   
-  # title: {0} = "环信"
-  # content: {0} = "欢迎使用im-push" {1} = "加油"
+  # title: {0} = "EasyIM"
+  # content: {0} = "Welcome to EasyIM push" {1} = "We wish you all the best"
   ```
 
 A group member nickname is the nickname of a member in a chat group. When sending a group message, the member sets the nickname through an extension field with the following JSON structure:
@@ -97,8 +97,8 @@ A group member nickname is the nickname of a member in a chat group. When sendin
     "name": "test7",
     "createAt": 1646989584124,
     "updateAt": 1646989584124,
-    "title_pattern": "你好,{0}",
-    "content_pattern": "推送测试,{0}"
+    "title_pattern": "Hello,{0}",
+    "content_pattern": "Push test,{0}"
   },
   "duration": 26,
   "applicationName": "XXXX"

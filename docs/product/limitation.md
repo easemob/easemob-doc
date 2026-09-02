@@ -132,12 +132,12 @@ By default, the server stores 100 conversations for each end user. To increase t
 
 You can pin up to 50 conversations.
 
-### Conversation marks
+### Conversation tags
 
-- Marks can be added to one-to-one and group chat conversations but not chat room conversations.
-- Up to 20 marks can be added to a conversation.
-- Marks can be added to up to 20 conversations at a time.
-- The same mark can be removed from up to 20 conversations at a time.
+- Tags can be added to one-to-one and group chat conversations but not chat room conversations.
+- Up to 20 tags can be added to a conversation.
+- Tags can be added to up to 20 conversations at a time.
+- The same tag can be removed from up to 20 conversations at a time.
 
 ## Chat groups
 

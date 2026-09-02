@@ -14,7 +14,7 @@ The SDK implements group member name cards through group member custom attribute
 
 1. The current user can call `client.groupManager.getGroup(groupId).setMemberAttributes` to set or update their name card in a specified group. With the required permissions, the user can also set another member's name card.
 2. After a name card change is synchronized to the SDK's internal cache, the SDK notifies the business layer through `onUserGroupNamecardUpdated`.
-3. The SDK supports calling `client.groupManager.getGroup(groupId).getMembersAttributes` to batch-retrieve group member attributes from the server. We recommend using `groupNamecard` as the attribute key for name cards.
+3. The SDK supports calling `client.groupManager.getGroup(groupId).getMembersAttributes` to retrieve group member attributes from the server. We recommend using `groupNamecard` as the attribute key for name cards.
 4. If `enableUserInfoSync: true` is enabled during initialization, group messages automatically include the sender's name-card update time. If the recipient detects a newer update time than the local cache or no cached value, the SDK automatically retrieves the latest name card, updates its internal cache, and triggers an event.
 
 The cache update process is shown below:
@@ -89,7 +89,7 @@ The SDK supports `group_namecard`, `group_name_card`, `namecard`, and `nameCard`
 
 ## Retrieve group member name cards from the server
 
-Call `getMembersAttributes` to batch-retrieve group member attributes from the server. To query name cards, set `keys` to `['groupNamecard']`.
+Call `getMembersAttributes` to retrieve group member attributes from the server. To query name cards, set `keys` to `['groupNamecard']`.
 
 To retrieve other custom attributes at the same time, pass multiple keys in `keys`. If `keys` is omitted, the server returns the available member attributes.
 
@@ -184,6 +184,6 @@ It depends on the use case. Automatic synchronization requires a group message. 
 | :--- | :--- | :--- |
 | [`getGroup`](#set-a-group-member-name-card)  | `GroupManager` | Obtain a `Group` object bound to a specified chat group ID. |
 | [`setMemberAttributes`](#set-a-group-member-name-card)  | `Group` | Set a group member name card through a `Group` object. |
-| [`getMembersAttributes`](#retrieve-group-member-name-cards-from-the-server)  | `Group`        | Batch-retrieve group member name cards through a `Group` object. |
-| [`getGroupMembersAttributes`](#retrieve-group-member-name-cards-from-the-server) | `GroupManager` | Batch-retrieve group member name cards through `GroupManager`. |
+| [`getMembersAttributes`](#retrieve-group-member-name-cards-from-the-server)  | `Group`        | Bulk retrieve group member name cards through a `Group` object. |
+| [`getGroupMembersAttributes`](#retrieve-group-member-name-cards-from-the-server) | `GroupManager` | Bulk retrieve group member name cards through `GroupManager`. |
 | [`ChatClient.init`](#automatically-synchronize-group-member-name-cards-through-messages) | `ChatClient`   | Initialize the SDK and optionally enable `enableUserInfoSync` for automatic information synchronization through messages. |

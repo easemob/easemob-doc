@@ -15,7 +15,7 @@ Before you begin, ensure that the following requirements are met:
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
 
-## Retrieve messages in a specified conversation from the server
+## Retrieve messages in a conversation from the server
 
 Call `asyncFetchHistoryMessages` with the `EMFetchMessageOption` class to retrieve historical messages in one-to-one and group chats from the server by page. For reliability, we recommend retrieving 20 messages per page and no more than 50. If the total number of matching messages is greater than `pageSize`, a paginated query returns `pageSize` messages. If it is less than `pageSize`, the actual number is returned. When all messages have been retrieved, the number returned is less than `pageSize`.
 
@@ -256,7 +256,7 @@ if (conversation != null) {
 }
 ```
 
-## Read messages in a specified conversation locally
+## Read messages in a conversation locally
 
 Call `getAllMessages` to retrieve all messages in a specified conversation from memory. If memory is empty, the SDK loads the latest message from the local database.
 
@@ -318,7 +318,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, System.currentTimeMillis(), maxCount, from, EMConversation.EMSearchDirection.UP);
 ```
 
-## Retrieve messages in a local conversation within a specified period
+## Retrieve messages in a local conversation in a specified period
 
 Call `searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` to search local storage for messages sent and received in a specified conversation within a specified period.
 
@@ -340,7 +340,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTimeStamp, maxCount);
 ```
 
-## Retrieve the message count in a conversation within a specified period
+## Retrieve the message count in a conversation in a specified period
 
 Call `getAllMsgCount` to retrieve from the SDK's local database the total number of messages in a conversation within a specified period.
 
@@ -366,9 +366,9 @@ if(conversation!=null) {
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`asyncFetchHistoryMessages`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMChatManager` | Retrieve historical messages in a specified conversation from the server by page. |
-| [`setDirection`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMFetchMessageOption` | Set the server-side historical message query direction. |
-| [`setIsSave`](#retrieve-messages-in-a-specified-conversation-from-the-server) | `EMFetchMessageOption` | Set whether to save retrieved historical messages to the local database. |
+| [`asyncFetchHistoryMessages`](#retrieve-messages-in-a-conversation-from-the-server) | `EMChatManager` | Retrieve historical messages in a specified conversation from the server by page. |
+| [`setDirection`](#retrieve-messages-in-a-conversation-from-the-server) | `EMFetchMessageOption` | Set the server-side historical message query direction. |
+| [`setIsSave`](#retrieve-messages-in-a-conversation-from-the-server) | `EMFetchMessageOption` | Set whether to save retrieved historical messages to the local database. |
 | [`setFromIds`](#retrieve-messages-sent-by-specified-group-members-from-the-server) | `EMFetchMessageOption` | Set the specified senders for group chat historical messages. |
 | [`asyncLoadConversationMessagesWithKeyword`](#retrieve-messages-in-a-local-conversation-by-keyword) | `EMChatManager` | Search messages in the local database by keyword. |
 | [`asyncLoadMessages`](#retrieve-local-messages-by-message-id) | `EMChatManager` | Retrieve local messages by message ID. |
@@ -377,5 +377,5 @@ if(conversation!=null) {
 | [`loadMoreMsgFromDB`](#read-messages-in-a-specified-conversation-locally) | `EMConversation` | Load conversation messages from the local database by page. |
 | [`getMessage`](#retrieve-a-local-message-by-message-id) | `EMChatManager` | Retrieve a local message by message ID. |
 | [`searchMsgFromDB`](#retrieve-messages-of-a-specified-type-in-a-local-conversation) | `EMConversation` | Search local messages by message type, time, and sender. |
-| [`searchMsgFromDB`](#retrieve-messages-in-a-local-conversation-within-a-specified-period) | `EMConversation` | Search local conversation messages by time range. |
-| [`getAllMsgCount`](#retrieve-the-message-count-in-a-conversation-within-a-specified-period) | `EMConversation` | Count local messages within a specified time range. |
+| [`searchMsgFromDB`](#retrieve-messages-in-a-local-conversation-in-a-specified-period) | `EMConversation` | Search local conversation messages by time range. |
+| [`getAllMsgCount`](#retrieve-the-message-count-in-a-conversation-in-a-specified-period) | `EMConversation` | Count local messages within a specified time range. |

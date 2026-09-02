@@ -431,7 +431,7 @@ projects:
                 text: Windows
                 link: /document/windows/message_forward.html
           - text: Import and Insert Messages
-            desc: "Import messages into the local database in batches or insert a message into a local conversation."
+            desc: "Import messages into the local database in bulk or insert a message into a local conversation."
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -703,7 +703,7 @@ projects:
               - icon: /sdk/windows.svg
                 text: Windows
                 link: /document/windows/conversation_pin.html
-          - text: Conversation Marks
+          - text: Tag Conversations
             desc: "Add or remove marks on one-to-one and group conversations, and retrieve marked conversations from the server or local database."
             sdks:
               - icon: /sdk/android.svg

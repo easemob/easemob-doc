@@ -152,7 +152,7 @@ Clearing a conversation unread count does not send a message read receipt to the
 | Conversation unread count | `getUnreadMessageCount`, `getUnreadMsgCount`, `asyncClearConversationUnreadMessageCount`, `asyncClearAllConversationUnreadMessageCount` | Retrieves or clears conversation unread counts. See [Conversation Unread Counts](conversation_unread.html). |
 | Delete conversations | `deleteConversation`, `asyncDeleteConversations`, `deleteConversationFromServer`, `asyncDeleteAllMsgsAndConversations` | Deletes local or server-side conversations and messages. See [Delete Conversations](conversation_delete.html). |
 | Pin conversations | `asyncPinConversation` | Pins or unpins a conversation. See [Pin Conversations](conversation_pin.html). |
-| Conversation tags | `asyncAddConversationMark`, `asyncRemoveConversationMark` | Adds tags to or removes them from one or more conversations. See [Conversation Tags](conversation_mark.html). |
+| Conversation tags | `asyncAddConversationMark`, `asyncRemoveConversationMark` | Adds tags to or removes them from one or more conversations. See [Tag Conversations](conversation_mark.html). |
 | Conversation DND | Conversation DND APIs in `EMPushManager` | Sets or queries DND rules for one-to-one and group conversations. |
 | Messages in a conversation | `loadMoreMsgFromDB`, `searchMsgFromDB`, `removeMessage`, `clearAllMessages` | Retrieves, searches for, or deletes local messages in a conversation. |
 | Pinned messages in a conversation | `asyncPinMessage`, `asyncUnPinMessage`, `asyncGetPinnedMessagesFromServer` | Pins, unpins, or retrieves pinned messages in a conversation. |
@@ -228,7 +228,7 @@ When monitoring is no longer needed, call `EMClient#removeMultiDeviceListener` t
 | [`asyncSendMessageReadReceipts`](#current-conversation-and-unread-count) | `EMChatManager` | Sends read receipts for one-to-one or group messages. |
 | [`getUnreadMessageCount`](#conversation-feature-list) | `EMChatManager` | Retrieves the total unread message count of local one-to-one and group conversations. |
 | [`deleteConversation`](#conversation-feature-list) / [`deleteConversationFromServer`](#conversation-feature-list) | `EMChatManager` | Deletes a local conversation or a specified server-side and local conversation for the current user. |
-| [`asyncDeleteConversations`](#conversation-feature-list) | `EMChatManager` | Asynchronously batch deletes local conversations and optionally their local messages. |
+| [`asyncDeleteConversations`](#conversation-feature-list) | `EMChatManager` | Asynchronously deletes local conversations and optionally their local messages. |
 | [`asyncDeleteAllMsgsAndConversations`](#conversation-feature-list) | `EMChatManager` | Deletes all messages and conversations and optionally clears server-side data. |
 | [`asyncPinConversation`](#conversation-feature-list) | `EMChatManager` | Pins or unpins a conversation. |
 | [`asyncAddConversationMark`](#conversation-feature-list) / [`asyncRemoveConversationMark`](#conversation-feature-list) | `EMChatManager` | Adds tags to or removes them from conversations. |

@@ -13,7 +13,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in server-side and local conversations by keyword.     |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/console/basic_message_conversation.html#message-recall), up to 7 days. |
@@ -36,7 +36,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified one-to-one conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a one-to-one conversation. |
 | Pin a conversation  | Pin a one-to-one conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a one-to-one conversation. |
+| Conversation tag  | Add a mark to a one-to-one conversation. |
 | Delete a conversation  | Delete a one-to-one conversation. |
 
 ### User relationships
@@ -62,7 +62,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](https://www.easemob.com/pricing/im). |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
 | Offline message push       | <br> - Send push notifications to message recipients while they are offline.<br> - Store offline messages for 7 days by default. |
 | Search for messages  | Search for all message types in local conversations by keyword.     |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/basic_message_conversation.html#message-recall), up to 7 days. |
@@ -92,7 +92,7 @@ For messages, the difference between group chat and one-to-one conversations is 
 | Conversation Do Not Disturb | Configure whether a notification is generated when a new message is received in a specified group chat conversation. |
 | Conversation unread count  | Retrieve and clear the unread message count of a group chat conversation. |
 | Pin a conversation  | Pin a group chat conversation to the top of the conversation list. |
-| Conversation mark  | Add a mark to a group chat conversation. |
+| Conversation tag  | Add a mark to a group chat conversation. |
 | Delete a conversation  | Delete a group chat conversation. |
 
 ### Create and manage chat groups
@@ -138,7 +138,7 @@ For messages, the difference between group chat and one-to-one conversations is 
 | Chat group mute list               | - The chat group owner and admins can add members to or remove members from the mute list. Muted members cannot send chat group messages but can receive them.<br/> - Mute all can be enabled or disabled.|
 | Manage custom chat group member attributes | Set custom chat group member attributes and retrieve the custom attributes of an individual member, such as a chat group nickname and avatar.<br/> The chat group owner can modify the custom attributes of all members, while other members can modify only their own. |
 
-### Message threads (Thread)
+### Message threads
 
 A chat group member can create a message thread from a chat group message. The message thread is a subset of the chat group, and the chat group message used to create it is called the parent message.
 
@@ -148,16 +148,16 @@ A chat group member can create a message thread from a chat group message. The m
 | :--------- | :----- |
 | Create a message thread       | Any chat group member can create a message thread from a chat group message.   |
 | Destroy a message thread       | Only the owner and admins of the chat group containing the message thread can destroy the message thread.  |
-| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in a batch.  |
+| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in bulk.  |
 | Leave a message thread     | A message thread member can leave voluntarily or be removed by the chat group owner or admins. |
 | Change a message thread name      | Only the chat group owner and admins and the message thread creator can change the message thread name.  |
 | Retrieve message thread details     | All members of the chat group containing a message thread can retrieve its details from the server.  |
 | Retrieve the message thread member list      | All members of the chat group containing a message thread can retrieve its paginated member list from the server.   |
 | Retrieve a list of message threads     | Retrieve from the server a paginated list of message threads that the current user joined or created in an app or a specified chat group. |
-| Retrieve the latest messages from message threads in a batch      | A user can retrieve the latest message from multiple message threads in a batch from the server.  |
+| Retrieve the latest messages from message threads in bulk      | A user can retrieve the latest message from multiple message threads in bulk from the server.  |
 | Retrieve message threads | Retrieve all message threads in an app, all message threads a specified user has joined, and all message threads the user has joined in a specified chat group.|
 
-#### Message management in a message thread
+#### Message management
 
 | Feature       | Description   |
 | :--------- | :----- |
@@ -177,7 +177,7 @@ By default, a chat room supports up to 10,000 members, including the owner. To a
 | :------------- | :---------------------- |
 | Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
-| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](https://www.easemob.com/pricing/im). To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature. |
+| Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](http://easyim.ai/pricing). To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature. |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
 | Edit messages  | Edit successfully sent messages.    |
 | Targeted messages  | Send a message to one or more specified chat room members. Other members do not receive it.|
