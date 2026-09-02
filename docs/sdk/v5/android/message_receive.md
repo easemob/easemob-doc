@@ -390,17 +390,17 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 });
 ```
 
-## More information
+## More
 
-### Return successfully sent messages through the message receipt callback
+#### Return successfully sent messages through the message receipt callback
 
 If `EMOptions#setIncludeSendMessageInMessageListener` is enabled during initialization, successfully sent messages are also returned through `onMessageReceived`.
 
-### Determine whether a message is a chat room broadcast message
+#### Determine whether a message is a chat room broadcast message
 
 For a chat room message, use the `EMMessage#isBroadcast` attribute to determine whether it is a [global chat room broadcast message sent through the REST API](/rest/broadcast_to_chatrooms.html).
 
-### Message attachment download authentication
+#### Message attachment download authentication
 
 EasyIM supports message attachment download authentication. This feature is disabled by default. To enable it, contact the EasyIM business manager. After it is enabled, users must call SDK download APIs such as `downloadAttachment(message, callback)` to download message attachments.
 

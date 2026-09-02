@@ -641,6 +641,21 @@ button {
         background-color: #fafdff;
       }
 
+      &:has(> thead > tr > th:nth-child(6)) {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+
+        thead,
+        tbody {
+          display: table-row-group;
+          width: 1100px;
+        }
+
+        tr { display: table-row; }
+      }
+
       // Keep wide six-column API tables scrollable without separating the
       // header and body column calculations. Both sections use the same fixed
       // table width and layout, so every cell stays aligned.

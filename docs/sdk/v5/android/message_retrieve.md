@@ -318,7 +318,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, System.currentTimeMillis(), maxCount, from, EMConversation.EMSearchDirection.UP);
 ```
 
-## Retrieve messages in a local conversation within a specified period
+## Retrieve messages in a local conversation in a specified period
 
 Call `searchMsgFromDB(long startTimeStamp, long endTimeStamp, int maxCount)` to search local storage for messages sent and received in a specified conversation within a specified period.
 
@@ -340,7 +340,7 @@ EMConversation conversation = EMClient.getInstance().chatManager().getConversati
 List<EMMessage> messageList = conversation.searchMsgFromDB(startTimeStamp,endTimeStamp, maxCount);
 ```
 
-## Retrieve the message count in a conversation within a specified period
+## Retrieve the message count in a conversation in a specified period
 
 Call `getAllMsgCount` to retrieve from the SDK's local database the total number of messages in a conversation within a specified period.
 
@@ -377,5 +377,5 @@ if(conversation!=null) {
 | [`loadMoreMsgFromDB`](#read-messages-in-a-specified-conversation-locally) | `EMConversation` | Load conversation messages from the local database by page. |
 | [`getMessage`](#retrieve-a-local-message-by-message-id) | `EMChatManager` | Retrieve a local message by message ID. |
 | [`searchMsgFromDB`](#retrieve-messages-of-a-specified-type-in-a-local-conversation) | `EMConversation` | Search local messages by message type, time, and sender. |
-| [`searchMsgFromDB`](#retrieve-messages-in-a-local-conversation-within-a-specified-period) | `EMConversation` | Search local conversation messages by time range. |
-| [`getAllMsgCount`](#retrieve-the-message-count-in-a-conversation-within-a-specified-period) | `EMConversation` | Count local messages within a specified time range. |
+| [`searchMsgFromDB`](#retrieve-messages-in-a-local-conversation-in-a-specified-period) | `EMConversation` | Search local conversation messages by time range. |
+| [`getAllMsgCount`](#retrieve-the-message-count-in-a-conversation-in-a-specified-period) | `EMConversation` | Count local messages within a specified time range. |
