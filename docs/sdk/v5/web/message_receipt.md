@@ -273,7 +273,7 @@ Each item in `result.users` contains the following fields:
 
 ### Retrieve read counts for multiple group messages
 
-You can also call `getGroupMessageReadReceipts` to retrieve the read counts for a group of messages in a batch. This API supports only group chats.
+You can also call `getGroupMessageReadReceipts` to retrieve the read counts for a group of messages in bulk. This API supports only group chats.
 
 ```typescript
 const details = await client.chatManager.getGroupMessageReadReceipts({

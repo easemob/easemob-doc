@@ -237,4 +237,4 @@ The differences are as follows:
 | [`clearConversationUnreadMessageCount`](#clear-the-unread-count-of-a-single-conversation) | `ChatManager` | Clear the unread count of a specified one-to-one or group conversation. |
 | [`clearAllConversationUnreadMessageCount`](#clear-unread-counts-of-all-conversations) | `ChatManager` | Clear all conversation unread counts for the current user. |
 | [`getConversationList`](#monitor-conversation-list-updates-on-the-current-device) | `ChatManager` | Explicitly read the SDK's local conversation list cache. |
-| [`sendMessageReadReceipts`](#differences-from-message-read-receipts) | `ChatManager` | Send read receipts for specified messages without directly clearing the conversation unread count. |
+| [`sendMessageReadReceipts`](#chat-groups-vs-chat-rooms) | `ChatManager` | Send read receipts for specified messages without directly clearing the conversation unread count. |

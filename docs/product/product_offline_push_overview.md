@@ -8,7 +8,7 @@ EasyIM does not send offline push notifications in the following two situations:
 2. If the client remains connected to the server while the app is running in the background or the phone is locked, EasyIM does not send an offline push notification.
 :::
 
-## Push services or plugins supported on each platform
+## Push services or plugins
 
 | Platform                | Supported push service            | Reference   |
 | -------------- | ---------------- | ------ |
@@ -86,7 +86,7 @@ Push templates provide the following benefits:
 
 For details about push templates, see [How to use push templates](/sdk/v5/android/push/push_template.html) in the documentation for each platform.
 
-## Enable a third-party offline push service
+## Enable an offline push service
 
 Enable the corresponding offline push service when initializing the EasyIM SDK. For example, for FCM push, see the [FCM push integration documentation](/sdk/v5/android/push/push_fcm.html#step-4-integrate-fcm-push).
 

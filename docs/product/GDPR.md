@@ -46,7 +46,7 @@ This document describes the data export APIs.
 
 | REST API        | Description            |
 | :----------- | :-------------- |
-| [Retrieve information about a single user](/rest/account_detail_obtain_single.html)<br>[Retrieve information about users in a batch](/rest/account_detail_obtain_batch.html) | Retrieve information about users with specified user IDs in an app. |
+| [Retrieve information about a single user](/rest/account_detail_obtain_single.html)<br>[Retrieve information about users in bulk](/rest/account_detail_obtain_batch.html) | Retrieve information about users with specified user IDs in an app. |
 | [Retrieve user attributes](/rest/user_attribute_obtain_single.html) | Retrieve the attributes of a user with a specified user ID in an app. |
 
 #### Export chat group data

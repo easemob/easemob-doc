@@ -256,7 +256,7 @@ if (conversation != null) {
 }
 ```
 
-## Read messages in a specified conversation locally
+## Read messages in a conversation locally
 
 Call `getAllMessages` to retrieve all messages in a specified conversation from memory. If memory is empty, the SDK loads the latest message from the local database.
 

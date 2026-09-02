@@ -122,7 +122,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 ### Read user attributes from local memory
 
-To batch read multiple users' attributes from local memory, call `EMUserInfoManager#getUserInfoWithUserIds`. This method does not initiate a network request and returns a mapping from user IDs to `EMUserInfo` objects through a callback. Users not found in local memory are not included in the result.
+To read multiple users' attributes from local memory, call `EMUserInfoManager#getUserInfoWithUserIds`. This method does not initiate a network request and returns a mapping from user IDs to `EMUserInfo` objects through a callback. Users not found in local memory are not included in the result.
 
 To synchronously read a single user's attributes, call `EMUserInfoManager#getUserInfoWithUserId`. It returns `null` if the user is not in local memory and throws `HyphenateException` if the call fails.
 

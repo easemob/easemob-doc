@@ -228,7 +228,7 @@ When monitoring is no longer needed, call `EMClient#removeMultiDeviceListener` t
 | [`asyncSendMessageReadReceipts`](#current-conversation-and-unread-count) | `EMChatManager` | Sends read receipts for one-to-one or group messages. |
 | [`getUnreadMessageCount`](#conversation-feature-list) | `EMChatManager` | Retrieves the total unread message count of local one-to-one and group conversations. |
 | [`deleteConversation`](#conversation-feature-list) / [`deleteConversationFromServer`](#conversation-feature-list) | `EMChatManager` | Deletes a local conversation or a specified server-side and local conversation for the current user. |
-| [`asyncDeleteConversations`](#conversation-feature-list) | `EMChatManager` | Asynchronously batch deletes local conversations and optionally their local messages. |
+| [`asyncDeleteConversations`](#conversation-feature-list) | `EMChatManager` | Asynchronously deletes local conversations and optionally their local messages. |
 | [`asyncDeleteAllMsgsAndConversations`](#conversation-feature-list) | `EMChatManager` | Deletes all messages and conversations and optionally clears server-side data. |
 | [`asyncPinConversation`](#conversation-feature-list) | `EMChatManager` | Pins or unpins a conversation. |
 | [`asyncAddConversationMark`](#conversation-feature-list) / [`asyncRemoveConversationMark`](#conversation-feature-list) | `EMChatManager` | Adds tags to or removes them from conversations. |

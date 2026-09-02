@@ -8,13 +8,13 @@ A chat group member can create a message thread from a chat group message. The m
 | :--------- | :----- | 
 | Create a message thread       | Any chat group member can create a message thread from a chat group message.   | 
 | Destroy a message thread       | Only the owner and admins of the chat group containing the message thread can destroy the message thread.  | 
-| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in a batch.  | 
-| Leave a message thread     | Message thread members can leave the message thread. You can call a REST API to remove members from a message thread in a batch. After a member leaves the message thread, they no longer receive messages in it:<br/> - A message thread member voluntarily leaves the message thread;<br/> - A message thread member is removed from the message thread. Only the chat group owner and admins have permission to remove members. | 
+| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in bulk.  | 
+| Leave a message thread     | Message thread members can leave the message thread. You can call a REST API to remove members from a message thread in bulk. After a member leaves the message thread, they no longer receive messages in it:<br/> - A message thread member voluntarily leaves the message thread;<br/> - A message thread member is removed from the message thread. Only the chat group owner and admins have permission to remove members. | 
 | Change a message thread name      | Only the chat group owner and admins and the message thread creator can change the message thread name.  | 
 | Retrieve message thread details     | All members of the chat group containing a message thread can retrieve its details from the server.  | 
 | Retrieve the message thread member list      | All members of the chat group containing a message thread can retrieve its paginated member list from the server.   | 
 | Retrieve a list of message threads     | - A user can retrieve a paginated list of message threads they joined or created from the server. <br/> - A user can retrieve a paginated list of message threads they joined or created in a specified chat group from the server. | 
-| Retrieve the latest messages from message threads in a batch      | A user can retrieve the latest message from multiple message threads in a batch from the server.  | 
+| Retrieve the latest messages from message threads in bulk      | A user can retrieve the latest message from multiple message threads in bulk from the server.  | 
 | Retrieve message threads | You can call REST APIs to retrieve message threads: <br/> - Retrieve all message threads in an app.<br/> - Retrieve all message threads that a specified user has joined.<br/> - Retrieve all message threads that the current user has joined. <br/> - Retrieve all message threads that a specified user has joined in a specified chat group.| 
 
 ## Message management in a message thread

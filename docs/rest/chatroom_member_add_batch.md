@@ -98,7 +98,7 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 
 | HTTP status code        | Error type | Error message          | Possible cause | Recommendation |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400     | invalid_parameter | addMembers: addMembers number more than maxSize : 100 | The number of members added in a batch reaches the limit of 100. | Reduce the number of members to 100 or fewer. |
+| 400     | invalid_parameter | addMembers: addMembers number more than maxSize : 100 | The number of members added in bulk reaches the limit of 100. | Reduce the number of members to 100 or fewer. |
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat room ID does not exist. | Specify a valid chat room ID. |
 | 404     | resource_not_found | username XXX doesn't exist! | The user ID to add does not exist. | Specify an existing user ID. |

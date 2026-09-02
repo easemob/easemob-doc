@@ -282,7 +282,7 @@ const group = client.groupManager.getGroup('groupId');
 | [Delete a shared file](group_attributes.html#delete-a-shared-chat-group-file) | `group.deleteSharedFile({ fileId })` | Delete a specified shared file. |
 | [Download a shared file](group_attributes.html#download-a-shared-chat-group-file) | `group.downloadSharedFile({ fileId, secret, ...callbacks })` | Download a specified shared file. |
 | [Set group member attributes](group_members.html#set-custom-group-member-attributes) | `group.setMemberAttributes({ userId, memberAttributes })` | Set member attributes, often used for a name card. |
-| [Retrieve group member attributes](group_members.html#retrieve-custom-group-member-attributes) | `group.getMembersAttributes({ userIds, keys })` | Batch-retrieve attributes of specified members. |
+| [Retrieve group member attributes](group_members.html#retrieve-custom-group-member-attributes) | `group.getMembersAttributes({ userIds, keys })` | Retrieve attributes of specified members. |
 
 Example code:
 

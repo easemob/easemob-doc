@@ -431,7 +431,7 @@ projects:
                 text: Windows
                 link: /document/windows/message_forward.html
           - text: Import and Insert Messages
-            desc: "Import messages into the local database in batches or insert a message into a local conversation."
+            desc: "Import messages into the local database in bulk or insert a message into a local conversation."
             sdks:
               - icon: /sdk/android.svg
                 text: Android

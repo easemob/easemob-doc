@@ -116,6 +116,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 400     | forbidden_op | users [XX] are not members of this group! | The user ID to mute is not in the chat room. | Specify the user ID of a chat room member. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat room does not exist. | Specify a valid chat room ID. |
-| 400     | invalid_parameter | userNames size is more than max limit : 100 | The number of specified chat room members to mute in a batch exceeds 100. | Limit the number of specified chat room members to mute to 100 or fewer. |
+| 400     | invalid_parameter | userNames size is more than max limit : 100 | The number of specified chat room members to mute in bulk exceeds 100. | Limit the number of specified chat room members to mute to 100 or fewer. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

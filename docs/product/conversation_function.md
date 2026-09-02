@@ -138,7 +138,7 @@ For messages, the difference between group chat and one-to-one conversations is 
 | Chat group mute list               | - The chat group owner and admins can add members to or remove members from the mute list. Muted members cannot send chat group messages but can receive them.<br/> - Mute all can be enabled or disabled.|
 | Manage custom chat group member attributes | Set custom chat group member attributes and retrieve the custom attributes of an individual member, such as a chat group nickname and avatar.<br/> The chat group owner can modify the custom attributes of all members, while other members can modify only their own. |
 
-### Message threads (Thread)
+### Message threads
 
 A chat group member can create a message thread from a chat group message. The message thread is a subset of the chat group, and the chat group message used to create it is called the parent message.
 
@@ -148,16 +148,16 @@ A chat group member can create a message thread from a chat group message. The m
 | :--------- | :----- |
 | Create a message thread       | Any chat group member can create a message thread from a chat group message.   |
 | Destroy a message thread       | Only the owner and admins of the chat group containing the message thread can destroy the message thread.  |
-| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in a batch.  |
+| Join a message thread     | All members of the chat group containing the message thread can join the message thread. You can call a REST API to add members to a message thread in bulk.  |
 | Leave a message thread     | A message thread member can leave voluntarily or be removed by the chat group owner or admins. |
 | Change a message thread name      | Only the chat group owner and admins and the message thread creator can change the message thread name.  |
 | Retrieve message thread details     | All members of the chat group containing a message thread can retrieve its details from the server.  |
 | Retrieve the message thread member list      | All members of the chat group containing a message thread can retrieve its paginated member list from the server.   |
 | Retrieve a list of message threads     | Retrieve from the server a paginated list of message threads that the current user joined or created in an app or a specified chat group. |
-| Retrieve the latest messages from message threads in a batch      | A user can retrieve the latest message from multiple message threads in a batch from the server.  |
+| Retrieve the latest messages from message threads in bulk      | A user can retrieve the latest message from multiple message threads in bulk from the server.  |
 | Retrieve message threads | Retrieve all message threads in an app, all message threads a specified user has joined, and all message threads the user has joined in a specified chat group.|
 
-#### Message management in a message thread
+#### Message management
 
 | Feature       | Description   |
 | :--------- | :----- |

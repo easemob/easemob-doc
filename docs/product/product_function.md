@@ -231,7 +231,7 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 | :------------- | :---------------------- |
 | Synchronous push to a single user | Send push notifications synchronously to a single user.             |
 | Asynchronous push to a single user | Send push notifications asynchronously to a single user.             |
-| Batch push to multiple users | Send push notifications asynchronously to multiple users in a batch.             |
+| Bulk push to multiple users | Send push notifications asynchronously to multiple users in bulk.             |
 | Tag or broadcast push  | Send push notifications to users with specified tags or all users in an app. |
 
 ### Server-side message search

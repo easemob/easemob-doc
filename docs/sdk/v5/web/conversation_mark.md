@@ -41,7 +41,7 @@ const result = await client.chatManager.addConversationMark({
 console.log(result.succeeded, result.failed, result.mark, result.operation);
 ```
 
-- Add a tag to multiple conversations in a batch:
+- Add a tag to multiple conversations in bulk:
 
 ```typescript
 const result = await client.chatManager.addConversationMark({
@@ -61,7 +61,7 @@ The parameters are as follows:
 | :--- | :--- | :--- | :--- |
 | `conversationId` | String | Conditionally required | Conversation ID. Pass it for a single-conversation operation. For one-to-one chat, it is the peer user ID; for group chat, the chat group ID; and for chat room chat, the chat room ID. |
 | `conversationType` | String | Conditionally required | Conversation type. Pass it for a single-conversation operation. Possible values are `singleChat`, `groupChat`, and `chatRoom`. |
-| `conversations` | Array | Conditionally required | Conversation list. Pass it for a batch operation. The array cannot be empty. |
+| `conversations` | Array | Conditionally required | Conversation list. Pass it for a bulk operation. The array cannot be empty. |
 | `mark` | Number | Yes | Conversation tag to add. The value range is an integer from `0` through `19`. |
 
 The result is returned as `ConversationMarkMutationResult` with the following fields:
@@ -89,7 +89,7 @@ const result = await client.chatManager.removeConversationMark({
 console.log(result.succeeded, result.failed, result.mark, result.operation);
 ```
 
-- Remove a tag from multiple conversations in a batch:
+- Remove a tag from multiple conversations in bulk:
 
 ```typescript
 const result = await client.chatManager.removeConversationMark({
@@ -156,7 +156,7 @@ In the event callback, `items` is the SDK's current complete and sorted conversa
 ## Considerations
 
 - Conversation tag values range from `0` through `19`. Maintain the business meaning of each slot in your business layer.
-- `addConversationMark` and `removeConversationMark` support both a single conversation and multiple conversations passed through `conversations` for batch operations.
+- `addConversationMark` and `removeConversationMark` support both a single conversation and multiple conversations passed through `conversations` for bulk operations.
 - If `mark` is not an integer from `0` through `19`, or the target conversation list is invalid, the SDK returns parameter error `110`.
 - Conversation tags are written to the server and synchronized to the SDK's local conversation list cache. If the local conversation list changes, `onConversationListUpdate` is triggered.
 - Conversation tags do not affect the unread count, message read status, message sending or receiving, or pin status.

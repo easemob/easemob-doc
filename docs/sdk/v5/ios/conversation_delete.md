@@ -10,7 +10,7 @@ In the iOS SDK, local conversations and local messages are handled as follows wh
 | Leave a chat group | Retains the local group conversation and deletes its local messages by default. | Set `EMOptions#deleteMessagesOnLeaveGroup = NO` to retain the local messages. The group conversation is retained by default. |
 | Leave a chat room | Deletes the local chat room conversation and its local messages by default. | Set `EMOptions#deleteMessagesOnLeaveChatroom = NO` to retain the local chat room conversation and messages. |
 
-You can also use `IEMChatManager` to delete a specified server-side and local conversation for the current user, delete only local conversations, batch delete local conversations, or clear all conversations. You can use `EMConversation` to delete specified local messages.
+You can also use `IEMChatManager` to delete a specified server-side and local conversation for the current user, delete only local conversations, bulk delete local conversations, or clear all conversations. You can use `EMConversation` to delete specified local messages.
 
 :::warning
 Deletion might be irreversible. Confirm the deletion scope before making the call.
@@ -110,9 +110,9 @@ EMClient.shared().chatManager?.deleteConversation(
 After a conversation is deleted, the SDK recreates the corresponding local conversation if messages are subsequently sent or received. If `isDeleteMessages` is `false`, server-side roaming messages are not deleted with the conversation and can be retrieved as needed within their retention period. If `isDeleteMessages` is `true`, the server-side roaming messages of this conversation are also deleted and can no longer be retrieved through the SDK.
 :::
 
-### Batch delete local conversations
+### Bulk delete local conversations
 
-Call `deleteConversations` to batch delete local conversations. The parameter must be an array of `EMConversation` objects, not an array of conversation IDs.
+Call `deleteConversations` to delete local conversations. The parameter must be an array of `EMConversation` objects, not an array of conversation IDs.
 
 ```swift
 let conversations: [EMConversation] = [conversation1, conversation2]
@@ -122,9 +122,9 @@ EMClient.shared().chatManager?.deleteConversations(
     isDeleteMessages: true
 ) { error in
     if let error {
-        print("Batch deletion failed: \(error.errorDescription)")
+        print("Bulk deletion failed: \(error.errorDescription)")
     } else {
-        print("Batch deletion succeeded")
+        print("Bulk deletion succeeded")
     }
 }
 ```
@@ -202,7 +202,7 @@ EMClient.shared().contactManager?.deleteContact(
 | :--- | :--- | :--- |
 | [`deleteServerConversation`](#delete-a-server-side-conversation-for-the-current-user) | `IEMChatManager` | Deletes a specified server-side and local conversation for the current user and determines whether to delete historical messages based on the parameter. |
 | [`deleteConversation`](#delete-a-specified-local-conversation) | `IEMChatManager` | Deletes a specified local conversation and determines whether to delete local historical messages based on the parameter. |
-| [`deleteConversations`](#batch-delete-local-conversations) | `IEMChatManager` | Batch deletes local conversations and determines whether to delete local historical messages based on the parameter. |
+| [`deleteConversations`](#bulk-delete-local-conversations) | `IEMChatManager` | Deletes local conversations and determines whether to delete local historical messages based on the parameter. |
 | [`deleteAllMessagesAndConversations`](#delete-all-conversations-and-messages) | `IEMChatManager` | Clears all conversations and messages and determines whether to also clear the current user's server-side data based on the parameter. |
 | [`getConversation`](#delete-specified-local-messages-from-a-conversation) | `IEMChatManager` | Retrieves a specified local conversation. Pass `false` for `createIfNotExist` when automatic creation is not required. |
 | [`deleteMessageWithId`](#delete-specified-local-messages-from-a-conversation) | `EMConversation` | Deletes a specified message from the SDK's local database. |

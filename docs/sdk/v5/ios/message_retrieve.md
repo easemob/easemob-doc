@@ -192,7 +192,7 @@ if (conversation) {
 }
 ```
 
-## Read messages in a specified conversation locally
+## Read messages in a conversation locally
 
 You can call `loadMessagesStartFromId` to load messages from a specified conversation from the local database by page. When you pass an empty message ID, `EMMessageSearchDirectionUp` loads messages in reverse chronological order starting with the latest message, while `EMMessageSearchDirectionDown` loads messages in chronological order starting with the earliest message.
 

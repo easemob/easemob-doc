@@ -176,7 +176,7 @@ EMClient.getInstance()
 
 ### Retrieve custom group member attributes by attribute key
 
-Call `asyncFetchGroupMembersAttributes` to batch-retrieve attributes of multiple group members by attribute key. If `keyList` is an empty list, all attributes of those members are returned.
+Call `asyncFetchGroupMembersAttributes` to retrieve attributes of multiple group members by attribute key. If `keyList` is an empty list, all attributes of those members are returned.
 
 :::tip
 You can retrieve the custom attributes of up to 10 group members in each call.

@@ -303,7 +303,7 @@ client.chatRoomManager.removeEventHandler('chatroom-member-events');
 ## Considerations
 
 - The `chatRoomId`, `userId`, and `userIds` values in this document cannot be empty. The SDK throws a parameter error if a parameter is invalid.
-- `userIds` is used for batch member operations and cannot be an empty array. The SDK filters out empty strings and normalizes duplicate user IDs.
+- `userIds` is used for bulk member operations and cannot be an empty array. The SDK filters out empty strings and normalizes duplicate user IDs.
 - `getMembers` uses cursor-based pagination, while `getMuteList` and `getBlocklist` use page-based pagination.
 - The mute duration parameter of `muteMembers` is `duration`, in seconds.
 - `checkIfInAllowList` and `checkIfInMuteList` query the current user's own status and do not support passing another user ID.
