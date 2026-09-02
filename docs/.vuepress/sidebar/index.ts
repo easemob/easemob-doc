@@ -3,7 +3,6 @@ import { DOC_V5_SIDEBAR } from "./document";
 
 export const zhSidebar = sidebar({
   // Put platform-specific SDK sidebars before the generic SDK overview.
-  // Sidebar matching is prefix-based, so the more specific paths must win.
   ...DOC_V5_SIDEBAR,
   "/sdk/v5/": [
     { text: "SDK Overview", link: "/sdk/v5/" },
