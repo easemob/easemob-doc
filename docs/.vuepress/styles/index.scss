@@ -847,6 +847,8 @@ button {
 
   .has-toc #toc {
     left: calc(100% + 2rem) !important;
+    width: 22rem;
+    max-width: 22rem;
   }
 }
 

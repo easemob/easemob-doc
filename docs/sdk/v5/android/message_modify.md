@@ -19,7 +19,7 @@ This feature applies to one-to-one chats, group chats, and chat rooms as follows
 3. The SDK updates the corresponding message in the local database and returns the updated message to the app through the edit result callback.  
 4. After other members of the conversation receive the message edit event, they can retrieve the edited message through the message listener and update the UI.
 
-### Message editing permissions by conversation type
+### Message edit permissions by conversation type
 
 - In a one-to-one chat, only the sender can edit a message.
 - In a group chat or chat room, regular members can edit only messages they sent. The group owner, chat room owner, and admins can edit their own messages and messages sent by regular members. In this case, the sender remains unchanged, while the editor user ID in the message body is the user ID of the group owner, chat room owner, or admin.
