@@ -748,8 +748,16 @@ button {
       align-items: center;
       min-height: 1.7rem;
       height: fit-content;
+      margin-bottom: 0.45rem;
 
       .toc-link {
+        display: block;
+        min-width: 0;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+        line-height: 1.3;
+
         &:hover {
           color: var(--theme-color);
         }
