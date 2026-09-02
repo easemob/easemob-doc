@@ -43,7 +43,10 @@
     initSubheading()
   })
 
-  watch(pageData, ()=> {
+  // Watch the route path itself so the sidebar is recalculated on every
+  // client-side navigation (Product, SDK, and REST), not only when the page
+  // data ref object is replaced.
+  watch(() => pageData.value.path, ()=> {
     const pagePath = pageData.value.path
     const isSdkDocPath =
       pagePath.indexOf('/sdk/v5/') == 0
