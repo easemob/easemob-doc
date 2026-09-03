@@ -95,7 +95,11 @@ export default defineClientConfig({
 
           const nextSection = getDocumentSection(destination.pathname);
           const currentSection = getDocumentSection(window.location.pathname);
-          if (!nextSection || nextSection === currentSection) return;
+          const isReturningHome = Boolean(currentSection) && destination.pathname === "/";
+          const isChangingDocumentSection =
+            Boolean(nextSection) && nextSection !== currentSection;
+
+          if (!isReturningHome && !isChangingDocumentSection) return;
 
           event.preventDefault();
           event.stopImmediatePropagation();
@@ -112,8 +116,11 @@ export default defineClientConfig({
 
         const nextSection = getDocumentSection(to.path);
         const previousSection = getDocumentSection(from.path);
+        const isReturningHome = Boolean(previousSection) && to.path === "/";
+        const isChangingDocumentSection =
+          Boolean(nextSection) && nextSection !== previousSection;
 
-        if (nextSection && nextSection !== previousSection) {
+        if (isReturningHome || isChangingDocumentSection) {
           window.location.assign(to.fullPath);
         }
       });

@@ -10,9 +10,9 @@ You can retrieve offline push results in the following ways:
   - On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
   - Select **Dev Tools > Diagnostics > Message Delivery** to view push result records.
 
-- Push result callback: [Create a post-delivery callback rule](/product/console/basic_webhook.html#configure-webhook-rules). For the **Callback Type** parameter, select **Offline Push Event**, and then select **Push Succeeded**, **Push Failed**, or **Push Exception** to receive push result callback content. For details about offline push events, see [Post-delivery webhook events](/rest/callback_login_logout.html).
+- Push result callback: [Create a post-delivery callback rule](/product/console/basic_webhook.html#configure-webhook-rules). For the **Callback Type** parameter, select **Offline Push Event**, and then select **Push Succeeded**, **Push Failed**, or **Push Exception** to receive push result callback content. For details about offline push events, see [Post-delivery webhook events](/rest/callback_offline_push.html).
 
-- Call the RESTful API to retrieve offline push result statistics.
+- Call the following RESTful API to retrieve offline push result statistics.
 
 ## Retrieve offline push result statistics using the RESTful API
 
