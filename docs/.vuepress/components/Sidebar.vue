@@ -4,9 +4,11 @@
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
+  import { useRoute } from 'vue-router'
   import { nextTick, ref, onMounted, watch} from 'vue'
 
   const pageData = usePageData()
+  const route = useRoute()
   const showPlatformSwitch = ref(false)
   const showUIKitSwitch = ref(false)
   const showCallKitSwitch = ref(false)
@@ -46,8 +48,8 @@
   // Watch the route path itself so the sidebar is recalculated on every
   // client-side navigation (Product, SDK, and REST), not only when the page
   // data ref object is replaced.
-  watch(() => pageData.value.path, ()=> {
-    const pagePath = pageData.value.path
+  watch(() => route.path, ()=> {
+    const pagePath = route.path
     const isSdkDocPath =
       pagePath.indexOf('/sdk/v5/') == 0
     showPlatformSwitch.value = isSdkDocPath
@@ -67,7 +69,7 @@
   }, {immediate:true})
 </script>
 <template>
-  <Sidebar :key="pageData.path">
+  <Sidebar :key="route.path">
     <template #top>
       <div class="sidebar-header" :class="{'pt20':isNull}">
         <span class="sidebar-title">{{title}}</span>
