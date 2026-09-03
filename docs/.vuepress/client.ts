@@ -63,6 +63,29 @@ export default defineClientConfig({
           sessionStorage.removeItem(chunkReloadKey);
         }
       });
+
+      // VuePress Theme Hope beta can retain the previous sidebar/layout state
+      // when client-side navigation crosses documentation sections. Reload the
+      // destination once when entering or switching between Product, SDK, and
+      // REST so the correct sidebar configuration is resolved immediately.
+      const getDocumentSection = (path: string) => {
+        if (path.startsWith("/product/")) return "product";
+        if (path.startsWith("/sdk/")) return "sdk";
+        if (path.startsWith("/rest/")) return "rest";
+        return "";
+      };
+
+      router.afterEach((to, from) => {
+        // Skip the router's initial navigation after a full page load.
+        if (!from.matched.length) return;
+
+        const nextSection = getDocumentSection(to.path);
+        const previousSection = getDocumentSection(from.path);
+
+        if (nextSection && nextSection !== previousSection) {
+          window.location.assign(to.fullPath);
+        }
+      });
     }
   },
   setup() {},
