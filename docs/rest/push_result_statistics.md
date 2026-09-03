@@ -8,13 +8,9 @@ You can retrieve offline push results in the following ways:
 
 - View IM message delivery queries in the [EasyIM Console](https://console.easyim.ai/user/login):
   - On the **Applications** page, click the App Key in the **AppKey-Dev** or **AppKey-Prod** column.
-  - Select **Instant Messaging > Real-Time Query > IM Message Delivery Query** to view push result records, as shown below:
-
-![img](/images/server-side/message_delivery_query.png)
+  - Select **Dev Tools > Diagnostics > Message Delivery** to view push result records.
 
 - Push result callback: [Create a post-delivery callback rule](/product/console/basic_webhook.html#configure-webhook-rules). For the **Callback Type** parameter, select **Offline Push Event**, and then select **Push Succeeded**, **Push Failed**, or **Push Exception** to receive push result callback content. For details about offline push events, see [Post-delivery webhook events](/rest/callback_login_logout.html).
-
-![img](/images/server-side/post_callback_push.png)
 
 - Call the RESTful API to retrieve offline push result statistics.
 
