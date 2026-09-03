@@ -75,6 +75,37 @@ export default defineClientConfig({
         return "";
       };
 
+      // Intercept cross-section links before Vue Router reuses the current
+      // layout. This covers navbar, home-page feature cards, and User Guide
+      // links, and guarantees that the destination resolves its own sidebar.
+      document.addEventListener(
+        "click",
+        (event) => {
+          if (event.defaultPrevented || event.button !== 0) return;
+          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+
+          const anchor = target.closest("a[href]") as HTMLAnchorElement | null;
+          if (!anchor || anchor.target === "_blank" || anchor.hasAttribute("download")) return;
+
+          const destination = new URL(anchor.href, window.location.href);
+          if (destination.origin !== window.location.origin) return;
+
+          const nextSection = getDocumentSection(destination.pathname);
+          const currentSection = getDocumentSection(window.location.pathname);
+          if (!nextSection || nextSection === currentSection) return;
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          window.location.assign(
+            `${destination.pathname}${destination.search}${destination.hash}`
+          );
+        },
+        true
+      );
+
       router.afterEach((to, from) => {
         // Skip the router's initial navigation after a full page load.
         if (!from.matched.length) return;
