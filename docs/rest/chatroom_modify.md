@@ -88,6 +88,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 403     | exceed_limit | title cannot exceed to XXXX| The chat room name exceeds the limit. | Specify a chat room name whose length is within the allowed range. |
 | 403     | exceed_limit | desc cannot exceed to XXXX | The chat room description exceeds the limit. | Specify a chat room description whose length is within the allowed range. |
 | 403     | exceed_limit | maxUsers cannot exceed XXXX | The maximum number of chat room members exceeds the limit. | Specify a valid maximum number of members. |
-| 400     | invalid_parameter  | "some of [chatroom_id] are not valid fields"  | When modifying chat room information, an unsupported parameter is specified, such as modifying `chatroom_id`. You can modify only the chat room name, description, and maximum number of members.| 
+| 400     | invalid_parameter  | "some of [chatroom_id] are not valid fields"  | When modifying chat room information, an unsupported parameter is specified, such as modifying `chatroom_id`. | You can modify only the chat room name, description, and maximum number of members.  | 
 
 For other errors, see [Response status codes](error.html) for possible causes.

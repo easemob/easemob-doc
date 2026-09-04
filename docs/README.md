@@ -1158,7 +1158,7 @@ projects:
           - text: Webhooks
             link: /rest/callback_presending.html
           - text: Multi-Device Management
-            link: /rest/callback_login_logout.html 
+            link: /sdk/v5/android/multi_device.html 
           - text: Global User Mutes
             link: /rest/user_global_mute_overview.html                                      
   - title: UIKit

@@ -51,7 +51,7 @@ After EasyIM sends an offline push notification through a third-party offline pu
 
 | Field   | Always present | Type   | Description          |
 | :----- | :------- | :---------- | :----------- |
-| `callId`    | String   | Unique identifier of the webhook request, in the format `App Key_message ID of the new offline message`. |
+| `callId`    | String | Yes | Unique identifier of the webhook request, in the format `App Key_message ID of the new offline message`. |
 | `appkey`        | Yes               | String | Unique app identifier consisting of Orgname and Appname.      |
 | `channel`       | No               | String | Push channel: APNS, ANDROID, XIAOMI, HUAWEI, MEIZU, OPPO, or VIVO. This field is associated with the push certificate platform.   |
 | `chat_type`     | Yes               | String | Chat type: `chat` for a one-to-one chat and `groupchat` for a group chat.     |

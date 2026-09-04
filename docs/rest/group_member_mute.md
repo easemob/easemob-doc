@@ -105,6 +105,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 403     | forbidden_op | users [XX] are not members of this group! | The user to mute is not in the chat group. | Specify the user ID of a chat group member. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat group does not exist. | Use a valid chat group ID. |
 | 400     | invalid_parameter | userNames size is more than max limit : 100 | More than 100 chat group members were specified. | Specify no more than 100 chat group members. |
-| 403    | forbidden_op   | "forbidden operation on group owner!"   | Group owners cannot be muted.  |
+| 403    | forbidden_op   | "forbidden operation on group owner!"   | Group owners cannot be muted.  | Remember not to mute group owners. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

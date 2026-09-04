@@ -1,4 +1,4 @@
-# Get User Attributes
+# Retrieve User Attributes
 
 User attributes are information about users in real-time messaging interactions, such as nicknames, avatars, email addresses, phone numbers, gender, signatures, and birthdays.
 
@@ -60,8 +60,8 @@ If the returned HTTP status code is `200`, the request is successful. The respon
 | :----- | :----- | :------------------------------------------------------------------------------------ |
 | `data` | Object | User attribute key-value pairs.<br/>If `data` is empty, verify that the user ID exists and that the user has attributes. |
 | - `ext`  | String      | Extension field. |
-| - `nickname`  | User nickname, up to 64 characters. |
-| - `avatarurl` | User avatar URL, up to 256 characters. |
+| - `nickname` | String | User nickname, up to 64 characters. |
+| - `avatarurl` | String | User avatar URL, up to 256 characters. |
 | `timestamp`       | Long   | Unix timestamp in milliseconds. |
 | `duration`        | Int    | Duration from sending the request to receiving the response, in milliseconds. |
 
@@ -73,6 +73,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | Authentication failed. For example, the token does not match the `username` path parameter. | Use a valid token. |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow        | The user attribute feature is not activated. | Contact the business manager to activate the user attribute feature. |
-| 500     | INTERNAL_SERVER_ERROR          |         | Unknown server error. |
+| 500     | INTERNAL_SERVER_ERROR          |         | Unknown server error. | |
 
 For other errors, see [Response status codes](error.html) for possible causes.

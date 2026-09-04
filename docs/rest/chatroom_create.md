@@ -93,6 +93,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 403     | exceed_limit | appKey:XX#XX has create too many chatrooms! | The appKey has reached the limit on the number of chat rooms it can create. | Delete unused chat rooms or contact the EasyIM business manager to adjust the limit. |
 | 403     | exceed_limit | user XX has joined too many chatrooms! | The user has reached the limit on the number of chat rooms they can join. | Leave unused chat rooms or contact the EasyIM business manager to adjust the limit. |
 | 403     | exceed_limit | members size is greater than max user size ! | The number of users added when creating the chat room exceeds the maximum (value range: [1,10,000]). | Contact the EasyIM business manager to increase the limit. |
-| 404     |  resource_not_found  | username XXXX doesn't exist!       | A user added when the chat room was created does not exist. |
+| 404     |  resource_not_found  | username XXXX doesn't exist!       | A user added when the chat room was created does not exist. | Add an existing user when the chat room was created. |
 
 For other errors, see [Response status codes](error.html) for possible causes.

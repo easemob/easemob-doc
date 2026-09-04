@@ -86,4 +86,4 @@ If the returned HTTP status code is not `200`, the request fails. See [Error cod
 |:---------| :--- | :------------- |:-----------------------------------|:---------------------|
 | 401      | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token.       |
 | 404      | service_resource_not_found | Service resource not found | The user ID whose friend list is being retrieved does not exist.   | Verify that the user ID whose friend list is being retrieved exists. |
-| 400      | illegal_argument | getContacts | page size more than max limit : 50 | The specified number of friends per page, `limit`, exceeds 50. | Reduce the value of `limit`. | 
+| 400      | illegal_argument | getContacts \| page size more than max limit : 50 | The specified number of friends per page, `limit`, exceeds 50. | Reduce the value of `limit`. | 
