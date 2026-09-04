@@ -79,7 +79,7 @@ export default defineUserConfig({
   base: '/',
   lang: 'en-US',
   title: 'EasyIM Documentation',
-  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]],
   description: 'EasyIM Documentation',
   shouldPrefetch: false,
   bundler: viteBundler({

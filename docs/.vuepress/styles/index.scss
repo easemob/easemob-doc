@@ -823,6 +823,10 @@ button {
 }
 /* 没有左侧栏时样式处理 */
 .no-sidebar {
+  #sidebar {
+    display: none !important;
+  }
+
   .page {
     .breadcrumb,
     .page-title,

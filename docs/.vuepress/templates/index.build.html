@@ -29,11 +29,11 @@
         background: var(--bg-color);
       }
 
-      /* The sidebar is already present in the server-rendered HTML. Keep it
-         visible on desktop during initial paint instead of waiting for theme
-         hydration to apply the open state. */
+      /* Keep the desktop sidebar visible during initial paint on pages that
+         actually have one. Skip `.no-sidebar` (the homepage) so Theme Hope's
+         home layout is not overridden. */
       @media (min-width: 720px) {
-        #sidebar {
+        .theme-container:not(.no-sidebar) #sidebar {
           display: block !important;
           visibility: visible !important;
           opacity: 1 !important;
