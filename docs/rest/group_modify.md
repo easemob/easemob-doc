@@ -128,6 +128,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 403     | group_name_violation | XX is violation, please change it. | The chat group name violates content requirements. | Use a chat group name that meets the content requirements. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat group does not exist. | Use a valid chat group ID. |
-| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | An unsupported field was specified, such as `groupid`.|
+| 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | An unsupported field was specified, such as `groupid`.| Ensure all fields are valid.|
 
 For other errors, see [Response status codes](error.html) for possible causes.

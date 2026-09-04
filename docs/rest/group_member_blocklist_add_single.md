@@ -97,6 +97,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 401     | unauthorized | Unable to authenticate (OAuth) | The token is invalid, expired, or incorrect. | Use a new token. |
 | 403     | forbidden_op | users [XX] are not members of this group! | The specified user is not in the chat group. | Specify the user ID of a chat group member. |
 | 404     | resource_not_found | grpID XX does not exist! | The chat group does not exist. | Use a valid chat group ID. |
-| 403    | forbidden_op   | forbidden operation on group owner!   | The group owner cannot be added to the group blocklist.  |
+| 403    | forbidden_op   | forbidden operation on group owner!   | The group owner cannot be added to the group blocklist.  | Remember not to add the group owner to the group blocklist.|
 
 For other errors, see [Response status codes](error.html) for possible causes.

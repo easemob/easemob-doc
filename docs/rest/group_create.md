@@ -124,6 +124,6 @@ If the returned HTTP status code is not `200`, the request fails and one of the 
 | 403     | exceed_limit | user XX has joined too many groups! | The user has reached the limit on joined chat groups. | Leave unused chat groups or increase the limit in the [EasyIM Console](/product/console/basic_single_group_chat.html#maximum-chat-groups-per-user). |
 | 403     | exceed_limit | members size is greater than max user size ! | The number of people joining when creating a group exceeds the maximum limit. | Adjust the number of people who can join the created group. For details about this upper limit, see [IM Package Function Details](/product/product_package_feature.html).|
 | 403     | group_name_violation | XX is violation, please change it. | The chat group name violates content requirements. | Use a chat group name that meets the content requirements. |
-| 404     |  resource_not_found  | username XXXX doesn't exist!       | A user specified when creating the chat group does not exist. |
+| 404     |  resource_not_found  | username XXXX doesn't exist!       | A user specified when creating the chat group does not exist. | Add an existing user when creating the chat group.|
 
 For other errors, see [Response status codes](error.html) for possible causes.

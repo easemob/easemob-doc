@@ -133,7 +133,7 @@ Each add-on package costs $56/month.
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | Retrieve Message Threads in an App by Page  | GET  | /{org_name}/{app_name}/thread | 100 calls/second/App Key   |          |  
 | Retrieve All Message Threads Joined by a User by Page  | GET     | /{org_name}/{app_name}/threads/user/{username}    | 100 calls/second/App Key   |          |  
-| Retrieve All Message Threads Joined by a User in a Specified Chat Group by Page  | GET  | /{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{username}    | 100 calls/second/App Key   |
+| Retrieve All Message Threads Joined by a User in a Specified Chat Group by Page  | GET  | /{org_name}/{app_name}/threads/chatgroups/{group_id}/user/{username}    | 100 calls/second/App Key   | |
 | Create a Message Thread  | POST     | /{org_name}/{app_name}/thread    | 100 calls/second/App Key  |          |  
 | Modify a Message Thread  | PUT     | /{org_name}/{app_name}/thread/{thread_id}    | 100 calls/second/App Key   |          |  
 | Delete a Message Thread  | DELETE     | /{org_name}/{app_name}/thread/{thread_id}    | 100 calls/second/App Key   |          |  

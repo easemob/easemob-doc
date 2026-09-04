@@ -58,8 +58,7 @@ For details about setting the `title_args` and `content_args` fields, see [Push 
 | `content`             | String | Custom push content.                                 |
 | `custom`              | Object | Content of e in the custom push extension parameters (t, f, m, g, e). |
 | `group_user_nickname` | String | Sender's group member nickname, used to replace the sender information displayed in push notifications.   |
-| `type` | String | Indicates that the current message is a VoIP push notification. Note: Use this field only for APNs, which currently supports VoIP push
-notifications.<br/> Set this field to `call` to specify that the current message is a VoIP notification message. If the recipient has bound an APNs VoIP push certificate (*.voip), the message is pushed through the VoIP channel by default.  |
+| `type` | String | Indicates that the current message is a VoIP push notification. Note: Use this field only for APNs, which currently supports VoIP push notifications.<br/> Set this field to `call` to specify that the current message is a VoIP notification message. If the recipient has bound an APNs VoIP push certificate (*.voip), the message is pushed through the VoIP channel by default.  |
 
 `em_apns_ext` has the following structure:
 

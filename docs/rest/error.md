@@ -78,8 +78,8 @@ When calling a REST API, if the user ID parameter passed in the HTTP path does n
 
 When calling a REST API, if the relevant service is not activated, a 400 or 403 error code is reported, as shown in the following table:
 
-| HTTP status code | Error type    | Error message      | Possible cause      | 
-| :---------- | :---------- | :--------- | :----------- |
+| HTTP status code | Error type    | Error message      | Possible cause      |  Recommendation |
+| :---------- | :---------- | :--------- | :----------- |:----------- |
 | 403     | group_error | thread not open. | The message thread feature is not activated. | Activate the message thread service in the EasyIM Console. |
 | 403      | forbidden_op | message broadcast service is unopened  | The feature for sending chat room broadcast messages is not activated.| Contact the EasyIM business manager to activate it. |
 | 400      | service open exception  | this appKey not open message roaming   | Message roaming is not enabled.  | Contact the EasyIM business manager to enable it.  |

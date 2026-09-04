@@ -62,7 +62,7 @@ You can set `title_pattern` and `content_pattern` in the following ways:
               ],
               "content_args":[
                   "Welcome to EasyIM push",
-                  "加油"
+                  "We wish you all the best"
               ]
           }
       }
