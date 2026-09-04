@@ -9,7 +9,7 @@ const extraNavList = computed(() => themeData.value.extra_nav || []);
 const showDocumentSearch = false;
 
 const SESSION_COOKIE_NAME = "u_session_name";
-const SESSION_COOKIE_DOMAIN = ".easemob.com";
+const SESSION_COOKIE_DOMAINS = [".easyim.ai", ".easemob.com"];
 
 const userName = ref("");
 const isLoggedIn = computed(() => userName.value !== "");
@@ -39,7 +39,9 @@ const clearCookie = (name) => {
   const expires = "Thu, 01 Jan 1970 00:00:00 GMT";
 
   document.cookie = `${name}=; expires=${expires}; path=/`;
-  document.cookie = `${name}=; expires=${expires}; path=/; domain=${SESSION_COOKIE_DOMAIN}`;
+  SESSION_COOKIE_DOMAINS.forEach((domain) => {
+    document.cookie = `${name}=; expires=${expires}; path=/; domain=${domain}`;
+  });
 };
 
 const syncUserSession = () => {
@@ -105,6 +107,8 @@ const openConsole = () => {
 
 const handleLogout = () => {
   clearCookie(SESSION_COOKIE_NAME);
+  userName.value = "";
+  isMobileAccountMenuOpen.value = false;
   window.location.reload();
 };
 
