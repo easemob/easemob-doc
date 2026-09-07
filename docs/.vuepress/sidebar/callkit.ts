@@ -28,6 +28,7 @@ const callKitSidebar = [
   { type: "separator" } as any,
   { text: "CallKit 架构", link: "architecture.html" },
   { text: "集成 CallKit", link: "integration.html" },
+  { text: "自有 RTC 凭证", link: "rtc_credential_management.html" },
   { text: "权限", link: "permission.html", only: ["android"] },
   { text: "使用 LiveCommunicationKit", link: "livecommunicationkit.html", only: ["ios"]},
   { text: "画中画", link: "picture_in_picture.html", only: ["ios"] },

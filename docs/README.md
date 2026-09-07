@@ -60,7 +60,7 @@ starter:
         link: /docs/document/web/quickstart.html
         text: Web
       - icon: /sdk/applet.svg
-        link: /docs/document/web/integration_applet.html
+        link: /docs/document/web/integration.html
         text: 小程序/Uniapp
       - icon: /sdk/harmonyos.svg
         link: /docs/document/harmonyos/quickstart.html

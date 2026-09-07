@@ -76,12 +76,12 @@ export const zhNavbar = navbar([
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/docs/document/web/integration_applet.html'
+            link: '/docs/document/web/integration.html'
           },
           {
             text: 'uni-app',
             icon: '/icon-uni-app.svg',
-            link: '/docs/document/web/uniapp.html'
+            link: '/docs/document/web/integration.html'
           },
         ]
       },
