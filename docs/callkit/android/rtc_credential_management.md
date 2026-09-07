@@ -119,9 +119,8 @@ class MyRTCConfigProvider : RTCConfigProvider {
         // 从你的业务服务器异步获取 RTC Token
         // channelName 非空时，服务端必须签发与该频道匹配的 Token
         // 建议服务端返回：{ "uid": 123456, "token": "007eJx...", "expireTimeStamp": 1710000000 }
-        
-        val currentUserId = EMClient.getInstance().currentUser
-        MyTokenServer.fetchRtcToken(currentUserId, channelName)
+        val userId = EMClient.getInstance().currentUser        
+        MyTokenServer.fetchRtcToken(userId,channelName)
             .onSuccess { resp ->
                 callback(
                     EMRTCTokenInfo(
@@ -138,8 +137,7 @@ class MyRTCConfigProvider : RTCConfigProvider {
                 // 返回 null 会回退到 IM SDK；使用自定义 App ID 时需确保回退 Token 与其匹配
                 callback(null)
             }
-    }
-
+    }         
     override fun onAsyncFetchUserIdByUid(
         uids: List<Int>,
         callback: OnValueSuccess<Map<Int, String>?>
