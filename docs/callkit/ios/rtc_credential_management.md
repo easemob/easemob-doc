@@ -302,7 +302,7 @@ struct MyTokenServer {
         // 实现你的网络请求逻辑，调用你的服务器获取 Token
         // 返回格式应为：{ "uid": 123456, "token": "007eJx...", "expiration": 1710000000 }
         return TokenResponse(
-            uid: userId.hashCode().toInt().let { if ($0 < 0) -$0 else $0 },
+            uid: userId,
             token: "your_agora_rtc_token",
             expireTime: Int64(Date().timeIntervalSince1970) + 24 * 3600
         )
