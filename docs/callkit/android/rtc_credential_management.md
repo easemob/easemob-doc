@@ -4,7 +4,7 @@
 
 默认情况下，CallKit 使用声网提供的 RTC 凭证体系，即登录即时通讯 IM 后，由 IM SDK 自动下发 RTC AppId、Token、UID 以及 UID 和 IM 用户 ID（`userId`）的映射关系。你只需通过 `CallKitClient.init(context, callKitConfig)` 完成初始化即可。
 
-**如果你已有自己的声网 App ID，并希望在自己的应用服务端独立签发 RTC Token、自行维护 IM userId 与 RTC UID 的映射关系**，你可以使用 `RTCConfigProvider` 接口进行自定义配置。
+**如果你已有自己的声网 App ID，并希望在自己的应用服务端独立签发 RTC Token、自行维护 IM userId 与 RTC UID 的映射关系**，你可以使用 `RTCConfigProvider` 接口进行自定义配置。源码详见 [RTCConfigProvider.kt](https://github.com/easemob/easemob-callkit-android/blob/409cb85eee2b1dd77d5f3098d53efd5c7b9445ef/ease-call-kit/src/main/java/com/hyphenate/callkit/interfaces/RTCConfigProvider.kt)。
 
 你可根据业务场景选择 CallKit 的两种凭证管理方式：
 

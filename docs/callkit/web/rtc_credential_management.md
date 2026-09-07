@@ -7,7 +7,7 @@ CallKit 默认通过传入的 IM SDK 客户端获取 RTC 进房信息和 RTC UID
 - `chatClient.getRTCTokenInfo({ channelName })`：获取声网 App ID、RTC Token 和本端 RTC UID；
 - `chatClient.getUserIdsWithRTCUids(rtcUids)`：将远端 RTC UID 映射为 IM `userId`，用于显示用户昵称和头像等业务信息。
 
-如果应用使用自有的声网项目，或希望由业务服务端签发 RTC Token、维护 RTC UID 与 IM 用户 ID 的关系，可以为 `CallKit` 传入 `rtcProvider`。`rtcProvider` 的类型为公开导出的 `CallKitRTCProvider`。
+如果应用使用自有的声网项目，或希望由业务服务端签发 RTC Token、维护 RTC UID 与 IM 用户 ID 的关系，可以为 `CallKit` 传入 `rtcProvider`。`rtcProvider` 的类型为公开导出的 `CallKitRTCProvider`。源码详见 [CallKitRTCProvider Interface](https://github.com/easemob/easemob-uikit-react/blob/4525a34007e19d181b72eaecd809025135e7c484/module/callkit/types/index.ts#L190)。
 
 ```tsx
 import type { CallKitRTCProvider, RTCTokenInfo, RTCUidUserIdMap } from 'easemob-chat-uikit';
