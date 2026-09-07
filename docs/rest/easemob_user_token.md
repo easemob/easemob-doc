@@ -92,7 +92,7 @@ If the returned HTTP status code is 200, the token was obtained successfully. Th
 | Field            | Type   | Description                                               |
 | :-------------- | :----- | :---------------- |
 | `access_token`  | String | Valid user token.                                     |
-| `expires_in`    | Long   | Token validity period, in seconds. You do not need to obtain another token during this period.<br/> Note: On a VIP 5 cluster, this parameter is measured in milliseconds.|
+| `expires_in` | Long | Token validity period, in seconds. Due to factors such as network latency, the token is not guaranteed to remain valid for the entire period specified by `expires_in`. If an API request returns HTTP 401 because the token is invalid or expired, obtain a new token and retry the request.<br/>Note: On a VIP 5 cluster, this parameter is measured in milliseconds. |
 | `user`          | JSON   | User-related information.                                             |
 | `user.uuid`    | String | User UUID. The EasyIM service generates this unique internal identifier for the app or user in the request to generate a user token.   |
 | `user.type`    | String | Object type, which does not require your attention.       |
@@ -115,7 +115,7 @@ When you call the API to obtain a user token, if the returned HTTP status code i
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | The token is invalid, expired, or incorrect.  | Use a new token to access the API.  |
 | 401         | auth_bad_access_token              | Unable to authenticate due to corrupt access token           | The token has incorrect permissions, possibly because a user token was used, or the App Key used to generate the token differs from the App Key used in the request URL. | Ensure that the correct token is used.   |
 | 404         | invalid_grant                      | user not found     | The user does not exist.  | Register the user first or check whether the username is correct.|
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | The App Key does not exist. | Check whether `orgName` and `appName` are correct, or [create an app](/product/console/app_create.html).|
+| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/token | The App Key does not exist. | Check whether `orgName` and `appName` are correct, or [create an app](/product/console/app_create.html).|
 | 404         | entity_not_found                   | User null not found     | The user does not exist.   | Register the user first or check whether the username is correct.    |
 | 409         | concurrent_operation_error         | concurrency create app user failed    | Obtaining a user token multiple times within the same second while automatically creating the user, that is, when `grant_type` in the request body is `inherit` and `autoCreateUser` is `true`, causes concurrent user registration. | Avoid calling this API multiple times within the same second to automatically create a user and obtain a user token. If the user for whom the token is being obtained is already registered, concurrent calls to this API do not report an error.  |
 | 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | If `grant_type` in the request body is `inherit` and `autoCreateUser` is `true`, meaning the user is automatically registered when they do not exist, the number of registered users exceeds the plan limit. | The free plan supports up to 100 registered users. You can [upgrade to a paid plan](/product/pricing_method.html#subscribe-to-or-upgrade-a-plan). The Professional and Flagship plans have no limit on the number of registered users. |
@@ -130,23 +130,57 @@ Generate a dynamic user token as follows:
 
 1. Create an app in the [EasyIM Console](https://console.easyim.ai/user/login) to generate `AppKey`, `Client ID`, and `ClientSecret`.
 
-2. Generate a user token based on `AppKey`, `ClientSecret`, and `userId`, which is the `username` passed when registering the user, as shown in the following example.
+2. Generate a user token based on `AppKey`, `ClientSecret`, and `userId`, which is the `username` passed when registering the user. The following Go example sets the token validity period to 600 seconds:
 
-```
-a. Get the current timestamp in seconds.
-    CurTime = 1686207557
-b. Set the expiration time in seconds.
-    ttl = 600
-c. Generate the signature. Concatenate the six fields clientId, appkey, userId, curTime, ttl, and clientSecret into a string, perform SHA256 encoding, and convert the resulting bytes to a hexadecimal string.
-    str = clientId + appkey + userId + curTime + ttl + clientSecret
-    sha256hash = sha256.Sum256([]byte(str))
-    signature = fmt.Sprintf("%x", shaBytes)
-d. Assemble into JSON.
-     json = {"signature": "xx", "appkey":"xx#xx", "userId":"xx", "curTime":1686207557, "ttl": 600}
-e. Prepend the token type "dt-" to the JSON string to generate the final string.
-    str = "dt-" + jsonStr
-f. Encode with Base64 to generate the final token.
-    token = base64.urlEncode.encode(str)
+```go
+package main
+
+import (
+    "crypto/sha256"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "strconv"
+    "time"
+)
+
+type dynamicTokenPayload struct {
+    Signature string `json:"signature"`
+    AppKey    string `json:"appkey"`
+    UserID    string `json:"userId"`
+    CurTime   int64  `json:"curTime"`
+    TTL       int64  `json:"ttl"`
+}
+
+func generateDynamicUserToken(clientID, appKey, userID, clientSecret string) (string, error) {
+    curTime := time.Now().Unix()
+    ttl := int64(600)
+
+    // Concatenate the fields in the required order without separators.
+    stringToSign := clientID + appKey + userID +
+        strconv.FormatInt(curTime, 10) +
+        strconv.FormatInt(ttl, 10) +
+        clientSecret
+
+    hash := sha256.Sum256([]byte(stringToSign))
+    signature := fmt.Sprintf("%x", hash)
+
+    payload, err := json.Marshal(dynamicTokenPayload{
+        Signature: signature,
+        AppKey:    appKey,
+        UserID:    userID,
+        CurTime:   curTime,
+        TTL:       ttl,
+    })
+    if err != nil {
+        return "", err
+    }
+
+    // Prepend the dynamic-token type and encode the result using URL-safe Base64.
+    tokenData := append([]byte("dt-"), payload...)
+    token := base64.URLEncoding.EncodeToString(tokenData)
+    return token, nil
+}
 ```
 
 3. After generating the token using the preceding method, the client SDK provides the token and logs in. Login succeeds after the server verifies the token.

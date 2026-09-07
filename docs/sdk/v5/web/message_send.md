@@ -51,7 +51,9 @@ The following React Native example demonstrates how to send image and video mess
 
 Before creating an image or video message, use the host framework’s media picker to obtain a local resource and convert it into an SDK-compatible attachment object. In React Native, use the following format:
 
+```
 `{ uri, name?, type?, size? }`
+```
 
 The following example sends image and video messages in a one-to-one conversation. It assumes that `client` has been initialized and the user has logged in. To send a message to a group or chat room, change only `conversationId` and `conversationType`.
 

@@ -27,8 +27,14 @@ For descriptions of the parameters in the request URL, see [Request URL paramete
 ```shell
 ## No token is required
 curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
+-H 'Content-Type: application/json'    \
+-H 'Accept: application/json'    \
 -d '{"username":"user1","password":"123","nickname":"testuser"}'
 ```
+
+## Request header fields
+
+For descriptions of the `Content-Type` and `Accept` fields, see [Request header field descriptions](overview.html#request-header-fields).
 
 ## Request body fields
 
@@ -65,7 +71,7 @@ curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users"  \
 
 ## Response body fields
 
-If the returned HTTP status code is `200`, the request is successful. The `data` field in the response body is described below:
+If the returned HTTP status code is `200`, the request is successful. The `entities` fields in the response body are described below:
 
 | Field       | Type   | Description        |
 | :------------ | :----- | :------------ |
@@ -99,7 +105,7 @@ If the returned HTTP status code is not `200`, the request fails and may return 
 | 400         | illegal_argument  | username XXX is not legal   | The username is invalid.  | See the [username requirements](account_register_open.html). |
 | 400         | illegal_argument | USERNAME_TOO_LONG  | The username exceeds the length limit.  | See the [username requirements](account_register_open.html). |
 | 400         | illegal_argument  | password or pin must provided    | The `password` parameter is not provided in the request body for user registration. | Provide `password` in the request body for user registration.   |
-| 400         | illegal_argument | NICKNAME_TOO_LONG    | The push nickname of the user being registered exceeds the length limit.   | See the [username requirements](account_register_open.html). |
+| 400         | illegal_argument | NICKNAME_TOO_LONG    | The push nickname of the user being registered exceeds the length limit.   | See the [nickname requirements](account_register_open.html). |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | The username being registered already exists. | Register the user again with a different username.  |
 | 401         | unauthorized  | Unable to authenticate (OAuth)   | The token is invalid. It may have expired or be incorrect.   | Use a new token to access the API.       |
 | 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | The App Key does not exist. | Check whether `orgName` and `appName` are correct, or [create an app](/product/console/app_create.html). |

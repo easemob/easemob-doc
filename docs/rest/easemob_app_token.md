@@ -25,7 +25,7 @@ For details about the parameters in the request URL, see [Request URL parameters
 ### Request example
 
 ```shell
-curl -X POST 'https://a1.easemob.com/easemob-demo/testapp/token'    \
+curl -X POST 'https://XXXX/XXXX/testapp/token'    \
 -H 'Content-Type: application/json'    \
 -H 'Accept: application/json'     \
 -d '{
@@ -66,7 +66,7 @@ If the returned HTTP status code is `200`, the token is returned successfully. T
 | Parameter           | Type   | Description                                                 |
 | :------------- | :----- | :--------------------------------------------------- |
 | `access_token` | String | Valid token string.                                |
-| `expires_in`   | Long   | Token validity period, in seconds. You do not need to obtain another token during this period. |
+| `expires_in`   | Long   | Token validity period, in seconds. Due to factors such as network latency, the token is not guaranteed to remain valid for the entire period specified by `expires_in`. If an API request returns HTTP 401 because the token is invalid or expired, obtain a new token and retry the request.|
 | `application`  | String | UUID of the current app.                                |
 
 If the returned HTTP status code is not `200`, the request fails. See [Response status codes](/rest/error.html) for possible causes.
@@ -74,7 +74,7 @@ If the returned HTTP status code is not `200`, the request fails. See [Response 
 ### Error code
 
 If the returned HTTP status code is not `200`, the request fails and one of the following error codes may be returned:
-
+f
 | HTTP status code | Error type     | Error message         | Possible cause           | Recommendation       |
 | :---------- | :-------- | :-------------- | :------------ | :----|
 | 400         | illegal_argument    | client_id must be provided.        | `client_id` is not passed in the request body.| See the **Client ID** parameter corresponding to the App Key on the **Overview** page in the [EasyIM Console](https://console.easyim.ai/user/login/). |
