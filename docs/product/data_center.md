@@ -4,7 +4,7 @@ EasyIM provides data centers and acceleration nodes to ensure stable and fast gl
 
 ## Data center
 
-When creating an app in the [EasyIM Console](https://console.easyim.ai/user/login), you can select the data center **Singapore 2**. 
+When creating an app in the [EasyIM Console](https://console.easyim.ai/user/login), you can select the data center **Singapore**. 
 
 ![img](/images/product/data_center_selection.png)
 

@@ -15,14 +15,6 @@ For details about EasyIM's user privacy policy, see [Easemob User Privacy Policy
 
 To comply with the laws and regulations of different countries and regions, EasyIM supports service region isolation to ensure that user privacy data in a specified region does not cross regional borders.
 
-EasyIM has data centers in the following regions. Each data center serves its corresponding region:
-
-| Data center | Location           | Service region |
-|:---------|:---------------|:---------|
-| Singapore 1/Singapore 2   | Singapore         | Southeast Asia   |
-| Germany 2    | Frankfurt, Germany | Europe     |
-| US East 1     | Virginia, United States | North America     |
-
 To use EasyIM, you must specify a data center. After you select a data center, RESTful requests to the message server and SDK API requests are directed to that data center, where your business data is also stored. You cannot change the selected data center. EasyIM does not support data migration across service regions.
 
 ## Token authentication
