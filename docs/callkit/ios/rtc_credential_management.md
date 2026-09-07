@@ -296,6 +296,35 @@ final class MyCallServiceListener: CallServiceListener {
     func onRtcEngineCreated(engine: AgoraRtcEngineKit) {}
 }
 
+// MARK: - 业务服务器实现
+struct MyTokenServer {
+    static func fetchRtcToken(userId: String, channelName: String?) async throws -> TokenResponse {
+        // 实现你的网络请求逻辑，调用你的服务器获取 Token
+        // 返回格式应为：{ "uid": 123456, "token": "007eJx...", "expiration": 1710000000 }
+        return TokenResponse(
+            uid: userId.hashCode().toInt().let { if ($0 < 0) -$0 else $0 },
+            token: "your_agora_rtc_token",
+            expireTime: Int64(Date().timeIntervalSince1970) + 24 * 3600
+        )
+    }
+}
+
+struct MyUserServer {
+    static func queryUserIdsByUids(_ uids: [UInt32]) async throws -> [UInt32: String] {
+        // 实现你的网络请求逻辑，调用你的服务器查询 uid 映射
+        // 返回格式应为：{ "123456": "userA", "234567": "userB" }
+        return uids.reduce(into: [UInt32: String]()) { result, uid in
+            result[uid] = "user_\(uid)"
+        }
+    }
+}
+
+struct TokenResponse {
+    let uid: UInt32
+    let token: String
+    let expireTime: Int64
+}
+
 // MARK: - 使用示例 ViewController
 class MyViewController: UIViewController {
     
