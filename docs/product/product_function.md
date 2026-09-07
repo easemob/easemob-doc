@@ -12,9 +12,9 @@ SDK V5.0.0 currently fully supports Android, iOS, Web, and Mini Program. More pl
 
 | Platform     | Version supported by the SDK      |
 | ------------ | ------- |
-| Android      | Android 5.0 or later (API level 21 or later)   | 
-| iOS          | iOS 10.0 or later     |
-| Web          | <br/> - Internet Explorer 9 or later <br/> - Firefox 10 or later <br/> - Chrome 54 or later Safari 6 or later<br/> - Edge 12 or later <br/> - Opera 58 or later<br/> - iOS Safari 7 or later<br/> - Android Browser 4.4 (KitKat) or later | 
+| Android      | Android 5.0 or later (API level 21 or later).   | 
+| iOS          | iOS 10.0 or later.     |
+| Web          | <br/> - A modern browser such as Chrome, Firefox, Safari, or another browser that uses one of these browser engines, such as Microsoft Edge.<br/> - Internet Explorer (IE) is not supported. | 
 
 ## Account features
 
