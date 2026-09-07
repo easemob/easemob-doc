@@ -36,7 +36,7 @@
 - **回退逻辑（返回 `null` 时）：** 使用 IM SDK 配置中的 App ID。
 - **返回值约束：** 返回有效的 RTC App ID 字符串。该方法必须轻量、同步，并支持重复调用。
 
-**onAsyncFetchRtcToken(channelName, callback)
+**onAsyncFetchRtcToken(channelName, callback)**
 
 - **说明：** 异步提供 RTC Token，通过 `callback(EMRTCTokenInfo?)` 返回结果。`channelName` 为非空值时，服务端必须签发与该频道匹配的 Token。
 - **调用时机：** 加入 RTC 频道前；RTC SDK 触发 `onTokenPrivilegeWillExpire` 或 `onRequestToken` 时。
@@ -121,12 +121,7 @@ class MyRTCConfigProvider : RTCConfigProvider {
         // 建议服务端返回：{ "uid": 123456, "token": "007eJx...", "expireTimeStamp": 1710000000 }
         
         val currentUserId = EMClient.getInstance().currentUser
-        val request = object {
-            val userId = currentUserId
-            val channelName = channelName
-        }
-        
-        MyTokenServer.fetchRtcToken(request)
+        MyTokenServer.fetchRtcToken(currentUserId, channelName)
             .onSuccess { resp ->
                 callback(
                     EMRTCTokenInfo(
@@ -169,7 +164,7 @@ class MyRTCConfigProvider : RTCConfigProvider {
 IM 登录仍使用 IM 用户 Token，**RTC Token 不会在登录时获取**，而是由 `RTCConfigProvider` 在进房或续期时按需回调。呼叫 API 与默认方式完全相同。
 
 :::tip
-切换账号或退出应用时，应调用 `CallKitClient.cleanUp()` 清理包括 RTC Token 在内的缓存。调用后如需继续使用 CallKit，需要重新初始化。
+切换账号时，应先结束当前通话并完成 IM 账号切换，不建议仅为普通账号切换而调用 `CallKitClient.cleanUp()`。如需完整释放 CallKit 资源，可调用 `CallKitClient.cleanUp()`；调用后如需继续使用 CallKit，需要重新初始化。
 :::
 
 ```kotlin
@@ -320,11 +315,11 @@ data class TokenResponse(
 | 问题 | 解决方法 |
 | --- | --- |
 | 收到 `Agora App ID is null or empty` 错误 | 如果使用自定义 RTC 配置，请检查 `onSyncGetAppId()` 是否返回非空、有效的 RTC App ID，并确认已在发起通话前设置 `RTCConfigProvider`。如果该方法返回 `null` 或空字符串，CallKit 会从 IM SDK 获取 App ID；此时请确认 IM SDK 已正确初始化，且当前应用已开通 RTC 服务。 |
-| 收到 `Failed to get RTC token` 错误 | 该错误表示 CallKit 最终未取得 `EMRTCTokenInfo`。请确认 `onAsyncFetchRtcToken()` 在每次调用后都调用且仅调用一次 `callback`，并返回非 `null` 的 `EMRTCTokenInfo`。如果 Provider 返回 `null`，CallKit 会回退到 IM SDK 获取 Token；回退也失败时会报此错误。不要将 `uid > 0` 作为固定要求，UID 应与 Token 的生成方式及加入频道时使用的用户身份一致。 |
+| 收到 `Failed to get RTC token` 错误 | 该错误表示 CallKit 最终未取得 `EMRTCTokenInfo`。请确认 `onAsyncFetchRtcToken()` 在每次调用后都调用且仅调用一次 `callback`，并返回非 `null` 的 `EMRTCTokenInfo`。如果 Provider 返回 `null`，CallKit 会回退到 IM SDK 获取 Token；回退也失败时会报此错误。 |
 | 能发送通话邀请，但无法进入 RTC 频道 | 确认生成 Token 时使用的 RTC App ID、频道名称以及用户身份（UID 或 User Account）与实际加入频道时传入的参数一致，并检查 Token 是否有效或已经过期。使用自定义 RTC App ID 时，不能混用其他 RTC 项目生成的 Token。 |
 | 配置 `RTCConfigProvider` 后仍然请求 IM SDK 的 RTC 接口 | `RTCConfigProvider` 按配置项生效，并不会在设置后自动接管所有 RTC 配置。当 `onSyncGetAppId()` 返回 `null` 或空字符串、`onAsyncFetchRtcToken()` 返回 `null`，或 `onAsyncFetchUserIdByUid()` 返回 `null`、未包含目标 UID 时，CallKit 会回退到 IM SDK 获取对应数据。请检查通话所需的方法是否均已实现，并返回有效、完整的数据。如果使用自定义 RTC App ID，应同时提供由同一 Agora 项目生成的 RTC Token，避免与 IM SDK 返回的 Token 混用。 |
 | 多人通话中远端用户的昵称或头像未正确显示 | 首先检查 `onAsyncFetchUserIdByUid()` 返回的映射是否包含请求的 RTC UID，并确认 Map 的键为 RTC UID、值为对应的 IM 用户 ID。该方法只负责 RTC UID 到 IM 用户 ID 的映射；昵称、头像等用户资料还需由 `CallInfoProvider.asyncFetchUsers()` 正确返回。 |
-| 通话过程中出现 `Failed to renew token` 错误 | 该错误表示 RTC SDK 触发 `onRequestToken` 或 `onTokenPrivilegeWillExpire` 后，CallKit 未取得新的 `EMRTCTokenInfo`。请确认 `onAsyncFetchRtcToken()` 及时调用 `callback`，并返回适用于当前频道和当前用户身份的新 Token，不要重复返回已经过期的 Token。CallKit 不会根据 `expireTimeStamp` 主动计算续期时间，而是依赖 RTC SDK 的 Token 过期回调。 |
+| 通话过程中出现 `Failed to renew token` 错误 | 该错误仅在 RTC SDK 触发 `onRequestToken` 后，CallKit 未取得新的 `EMRTCTokenInfo` 时上报，并会结束当前通话。`onTokenPrivilegeWillExpire` 触发后获取 Token 失败时，CallKit 只记录日志，不会上报该错误或结束通话。请确认 `onAsyncFetchRtcToken()` 及时调用 `callback`，并返回适用于当前频道和当前用户身份的新 Token，不要重复返回已经过期的 Token。CallKit 不会根据 `expireTimeStamp` 主动计算续期时间，而是依赖 RTC SDK 的 Token 过期回调。 |
 | 更换 RTC App ID 后配置未生效 | RTC App ID 只在 RTC 引擎创建时读取，同一个 RTC 引擎生命周期内不能更换。请先结束当前通话，并在下一次通话开始前设置新的 `RTCConfigProvider` 和 RTC App ID；下一次创建 RTC 引擎时，CallKit 会等待上一个引擎销毁完成。为避免同一次通话中的 App ID、Token 和 UID 映射来自不同配置，不建议在通话过程中更换 Provider。 |
 | 切换账号后 RTC 数据异常 | 请先结束当前通话并完成 IM 账号切换，再发起新通话；同时确认自定义 `RTCConfigProvider` 或业务服务没有复用上一个账号的 Token 和用户映射。CallKit 的 IM SDK 回退 Token 缓存按当前 IM 用户 ID 隔离。`CallKitClient.cleanUp()` 属于完整资源释放操作，不建议仅为普通账号切换而调用。 |
 
