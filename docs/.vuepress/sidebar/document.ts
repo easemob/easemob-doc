@@ -11,6 +11,7 @@ const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
   { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
+  { text: "使用 Skills 集成", link: "integrate_with_agent_skills.html", only: ['web']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
   { text: 'Vue Demo 体验', link: 'demo_vue.html', only: ['web'] },
   { text: 'Demo 体验', link: 'demo.html', only: ['android', 'ios', 'react-native', 'flutter'] },

@@ -32,8 +32,12 @@ h2,h3,h4 {
   }
 }
 
-code {
-  word-break: break-all;
+/* Keep inline code tokens intact. If a token does not fit at the end of a
+ * line, move the whole token to the next line instead of splitting it. */
+:not(pre) > code {
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
 button {
