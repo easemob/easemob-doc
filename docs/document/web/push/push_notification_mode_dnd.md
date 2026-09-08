@@ -158,7 +158,7 @@ await client.pushManager.setConversationSilentMode({
   conversationType: 'groupChat',
   rule: {
     mode: 'DURATION', // 免打扰时长。
-    duration: 7200, // 免打扰时长，单位为毫秒。
+    duration: 7200, // 免打扰时长，单位为分钟。
   },
 });
 
