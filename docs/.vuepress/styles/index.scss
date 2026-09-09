@@ -613,9 +613,14 @@ button {
     }
 
     table {
+      /* Keep wide tables inside the article column so they cannot cover the
+       * right-hand table of contents. */
       display: table;
       width: 100%;
-      table-layout: auto !important;
+      max-width: 100%;
+      /* Allocate columns from the available article width. Auto layout can
+       * grow a table to fit long API signatures and cover the right TOC. */
+      table-layout: fixed !important;
       border-collapse: collapse;
       color: var(--table-text-color);
       font-weight: 400;
@@ -628,8 +633,18 @@ button {
         padding: 9px 16px;
         border: 1px solid var(--border-color);
         background-color: #f0f3f5;
-        word-wrap: break-word; 
-        word-break: break-word; 
+        /* Keep normal word boundaries so narrow columns do not render
+         * Latin identifiers one character per line. Long unbroken values
+         * may still wrap when they cannot fit in the cell. */
+        word-break: normal;
+        overflow-wrap: break-word;
+      }
+
+      /* Inline code is kept intact in prose, but table cells must be able to
+       * wrap long identifiers such as version names and API signatures. */
+      code {
+        white-space: normal;
+        word-break: normal;
         overflow-wrap: break-word;
       }
 
@@ -649,8 +664,7 @@ button {
         td {
           font-size: 13px;
           padding: 10px 8px;
-          word-wrap: break-word;
-          word-break: break-word;
+          word-break: normal;
           overflow-wrap: break-word;
         }
       }
