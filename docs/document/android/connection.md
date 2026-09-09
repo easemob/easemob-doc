@@ -249,6 +249,7 @@ EMClient.getInstance().renewToken(
 - 在调用 `loginWithToken` 前注册 `EMConnectionListener`，避免遗漏连接、Token 和同步状态回调。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
 - 使用 `isConnected()` 查询当前连接状态，使用 `isLoggedIn()` 查询登录状态，并优先以监听器回调驱动 UI 更新。
+  **注意**：`isConnected()` 通常用于 UI 连接状态提示。调用发送消息或加入群组或聊天室等 API 前 **无需** 手动判断连接状态，SDK 内部会自动处理连接校验，并在连接成功后重试未完成的操作。
 - 收到 `onTokenWillExpire` 后尽快续期 Token；收到 `onTokenExpired` 后重新登录。
 - 使用 `onLogout` 处理账号、设备和服务限制等不可恢复的异常登出，并根据错误码给出明确提示。
 - 不再需要监听时调用 `removeConnectionListener`，避免重复回调和内存泄漏。

@@ -253,6 +253,7 @@ EMClient.shared().renewToken("newToken") { error in
 - iOS SDK 不再依赖自动登录；应用启动或需要建立 IM 会话时应显式登录。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
 - 使用 `isConnected` 查询当前连接状态，使用 `isLoggedIn` 查询登录状态，并优先以代理回调驱动 UI 更新。
+  **注意**：`isConnected()` 通常用于 UI 连接状态提示。调用发送消息或加入群组或聊天室等 API 前 **无需** 手动判断连接状态，SDK 内部会自动处理连接校验，并在连接成功后重试未完成的操作。
 - 收到 `tokenWillExpire(_:)` 后尽快续期 Token；收到 `tokenDidExpire(_:)` 后获取新 Token 并重新登录。
 - 使用账号异常回调处理设备、账号和服务限制，并根据 `EMError.code` 给出明确提示。
 - 不再需要监听时调用 `removeDelegate(_:)`，避免重复回调。
