@@ -2,6 +2,36 @@
 
 <Toc />
 
+## v1.18.0 2026-08-06
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.22.0
+  - `Android` 升级至 4.22.0
+- `ChatOptions` 新增 `enableUserInfo` 和 `enableAutoSyncContacts` 属性。
+- 新增 `ChatGroupManager.updateGroupNamecard` 和 `ChatGroupManager.getGroupNamecard` 方法，用于更新和获取群名片；新增 `ChatGroupEventListener.onUserGroupNamecardChanged` 回调。
+- `ChatGroupMember` 新增 `namecard`、`nickname` 和 `avatarUrl` 属性。
+- `ChatContact` 新增 `userInfo` 和 `addTimestamp` 属性；`ChatContactEventListener` 新增 `onContactSyncStart`、`onContactSyncFinish` 和 `onContactInfoUpdate` 回调。
+- 新增 `ChatUserInfoManager.getLocalUserInfoByIds`、`subscribeUsersInfo`、`unsubscribeUsersInfo` 和 `fetchSubscribedUsers` 方法，以及 `ChatUserInfoEventListener` 监听器。
+- 新增 `ChatManager.voiceMessageToText` 和 `ChatManager.voiceFileToText` 方法，用于语音转文字；新增 `ChatVoiceParam` 类。
+- 新增 `ChatManager.downloadBigImage` 方法；`ChatImageMessageBody` 新增 `bigImageLocalPath`、`bigImageRemotePath`、`bigImageDownloadStatus` 和 `isOriginalImage` 属性。
+- `ChatVoiceMessageBody` 新增 `text` 属性。
+- `ChatMessage` 新增 `senderInfo` 属性，并新增 `ChatMessageSenderInfo` 类。
+
+## v1.15.3 2026-07-07
+
+#### 优化
+
+- 对齐 TypeScript 消息工厂方法和消息体构造函数的可选参数语义，使文件、图片、视频、语音和位置消息与原生 SDK 行为保持一致。
+- 修正 `ChatPresence.lastTime`、`ChatPresence.expiryTime`、`ChatRoom.memberCount` 和 `ChatRoom.maxUsers` 的类型，由 string 调整为 number。
+- 更新 Android 原生 wrapper，改用 SDK 异步接口，并补充 `deleteContact.keepConversation` 和 `addMembers.welcome` 的 Android 平台参数限制说明。
+- 更新项目 Yarn 版本，由 3.6.1 升级到 4.14.1。
+
+#### 修复
+
+修复 Android 和 iOS 原生输入转换问题，仅在提供可选字段时才应用对应值，避免桥接层默认值覆盖用户显式输入。
+
 ## v1.15.2 2026-06-02
 
 - 依赖的原生 SDK 升级：
