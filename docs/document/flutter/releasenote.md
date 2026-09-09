@@ -21,7 +21,7 @@
 - 支持图片消息分层资源管理及相关处理逻辑优化：
   - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
   - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片](message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](message_receive.html#接收视频消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
 - 支持 [群成员名片管理功能](group_namecard.html)。
 - 支持登录后自动同步好友列表：
   - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。

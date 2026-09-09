@@ -185,6 +185,47 @@ try {
 
 群成员可以调用 `EMGroupManager#fetchMemberListFromServer` 方法从服务器分页获取群成员列表。
 
+- 自 SDK 4.22.0 开始，获取群成员列表时除了成员的用户 ID、成员角色和加入群组的时间等字段，还包括 [群成员名片](group_namecard.html)。
+
+```dart
+try {
+  final ChatCursorResult<GroupMemberInfo> result =
+      await ChatClient.getInstance.groupManager.fetchGroupMembersInfo(
+    groupId: groupId,
+    cursor: cursor,
+    // 每页期望返回的群成员数量，默认值为 20；
+    // 上限取决于服务端配置。
+    limit: limit,
+  );
+
+  for (final GroupMemberInfo member in result.data) {
+    debugPrint(
+      'userId=${member.userId}, '
+      'namecard=${member.namecard}',
+    );
+  }
+
+  // 下次分页请求时使用本次返回的游标。
+  cursor = result.cursor;
+} on ChatError catch (error) {
+  debugPrint(
+    'Failed to fetch group members: '
+    'code=${error.code}, description=${error.description}',
+  );
+}
+```
+
+该接口返回 `ChatCursorResult<GroupMemberInfo>`，每个 `GroupMemberInfo` 包含如下字段：
+
+| 字段        | 类型                      | 说明             |
+| ----------- | ------------------------- | ---------------- |
+| `userId`    | String                 | 群成员用户 ID    |
+| `joinedTs`  | int                     | 加入群组的时间戳 |
+| `role`      | `ChatGroupPermissionType` | 群成员角色       |
+| `namecard`  | String                 | 群成员名片       |
+| `nickname`  | String                 | 群成员昵称       |
+| `avatarUrl` | String                 | 群成员头像地址   |
+
 - 自 SDK 4.15.0 开始，获取群成员列表时除了成员的用户 ID，还包括成员角色和加入群组的时间。
   
 ```dart
@@ -314,33 +355,45 @@ try {
 示例代码如下：
 
 ```dart
-// 添加群组监听
-EMClient.getInstance.groupManager.addEventHandler(
+// 添加群组监听。
+ChatClient.getInstance.groupManager.addEventHandler(
   'UNIQUE_HANDLER_ID',
-  EMGroupEventHandler(
+  ChatGroupEventHandler(
     // 成员设置为管理员的回调。群主、新管理员和其他管理员会收到该回调。
     onAdminAddedFromGroup: (groupId, admin) {},
 
-    // 取消成员的管理员权限的回调。被取消管理员权限的成员、群主和群管理员（除操作者外）会收到该回调。
+    // 取消成员的管理员权限的回调。
+    // 被取消管理员权限的成员、群主和群管理员（除操作者外）会收到该回调。
     onAdminRemovedFromGroup: (groupId, admin) {},
 
     // 全员禁言状态变化回调。群组所有成员（除操作者外）会收到该回调。
     onAllGroupMemberMuteStateChanged: (groupId, isAllMuted) {},
 
-    // 成员加入群组白名单回调。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
+    // 成员加入群组白名单回调。
+    // 被添加的成员及群主和群管理员（除操作者外）会收到该回调。
     onAllowListAddedFromGroup: (groupId, members) {},
 
-    // 成员移出群组白名单回调。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
+    // 成员移出群组白名单回调。
+    // 被移出的成员及群主和群管理员（除操作者外）会收到该回调。
     onAllowListRemovedFromGroup: (groupId, members) {},
 
     // 群公告更新回调。群组所有成员会收到该回调。
     onAnnouncementChangedFromGroup: (groupId, announcement) {},
 
     // 群组成员自定义属性有变更。群内其他成员会收到该回调。
-    onAttributesChangedOfGroupMember: (groupId, userId, attributes, operatorId) {},
+    onAttributesChangedOfGroupMember: (
+      groupId,
+      userId,
+      attributes,
+      operatorId,
+    ) {},
 
     // 有用户自动同意加入群组。邀请人收到该回调。
-    onAutoAcceptInvitationFromGroup: (groupId, inviter, inviteMessage) {},
+    onAutoAcceptInvitationFromGroup: (
+      groupId,
+      inviter,
+      inviteMessage,
+    ) {},
 
     // 群组禁用状态变更。
     onDisableChanged: (groupId, isDisable) {},
@@ -349,13 +402,27 @@ EMClient.getInstance.groupManager.addEventHandler(
     onGroupDestroyed: (groupId, groupName) {},
 
     // 用户同意进群邀请。邀请人收到该回调。
-    onInvitationAcceptedFromGroup: (groupId, invitee, reason) {},
+    onInvitationAcceptedFromGroup: (
+      groupId,
+      invitee,
+      reason,
+    ) {},
 
     // 用户拒绝进群邀请。邀请人收到该回调。
-    onInvitationDeclinedFromGroup: (groupId, invitee, reason) {},
+    onInvitationDeclinedFromGroup: (
+      groupId,
+      invitee,
+      reason,
+    ) {},
 
-    // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
-    onInvitationReceivedFromGroup: (groupId, groupName, inviter, reason) {},
+    // 当前用户收到了入群邀请。受邀用户会收到该回调。
+    // 例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
+    onInvitationReceivedFromGroup: (
+      groupId,
+      groupName,
+      inviter,
+      reason,
+    ) {},
 
     // 有新成员加入了群。除了新成员，其他群成员会收到该回调。
     onMembersJoinedFromGroup: (groupId, userIds) {},
@@ -363,25 +430,50 @@ EMClient.getInstance.groupManager.addEventHandler(
     // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
     onMembersExitedFromGroup: (groupId, userIds) {},
 
-    // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
-    onMuteListAddedFromGroup: (groupId, mutes, muteExpire) {},
+    // 有成员被加入群组禁言列表。
+    // 被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+    onMuteListAddedFromGroup: (
+      groupId,
+      mutes,
+      muteExpire,
+    ) {},
 
-    // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
+    // 有成员被移出禁言列表。
+    // 被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
     onMuteListRemovedFromGroup: (groupId, mutes) {},
 
     // 群主转移权限。新群主会收到该回调。
-    onOwnerChangedFromGroup: (groupId, newOwner, oldOwner) {},
+    onOwnerChangedFromGroup: (
+      groupId,
+      newOwner,
+      oldOwner,
+    ) {},
 
     // 对端用户接受当前用户发送的群组申请的回调。当前用户收到该回调。
-    onRequestToJoinAcceptedFromGroup: (groupId, groupName, accepter) {},
+    onRequestToJoinAcceptedFromGroup: (
+      groupId,
+      groupName,
+      accepter,
+    ) {},
 
     // 对端用户拒绝群组申请的回调。当前用户收到该回调。
-    onRequestToJoinDeclinedFromGroup: (groupId, groupName, decliner, reason, applicant) {},
+    onRequestToJoinDeclinedFromGroup: (
+      groupId,
+      groupName,
+      decliner,
+      reason,
+      applicant,
+    ) {},
 
     // 对端用户收到了群组申请的回调。当前用户收到该回调。
-    onRequestToJoinReceivedFromGroup: (groupId, groupName, applicant, reason) {},
+    onRequestToJoinReceivedFromGroup: (
+      groupId,
+      groupName,
+      applicant,
+      reason,
+    ) {},
 
-   // 上传了新的群组共享文件。群组所有成员会收到该回调。
+    // 上传了新的群组共享文件。群组所有成员会收到该回调。
     onSharedFileAddedFromGroup: (groupId, sharedFile) {},
 
     // 删除了群组共享文件。群组所有成员会收到该回调。
@@ -390,13 +482,21 @@ EMClient.getInstance.groupManager.addEventHandler(
     // 群详情变更回调。群组所有成员会收到该回调。
     onSpecificationDidUpdate: (group) {},
 
+    // 群成员名片发生变更。群组内其他在线成员会收到该回调。
+    // namecard 为新的群成员名片；移除名片时为 null。
+    onUserGroupNamecardChanged: (
+      groupId,
+      userId,
+      namecard,
+    ) {},
+
     // 有成员被移出群组。被踢出群组的成员会收到该回调。
     onUserRemovedFromGroup: (groupId, groupName) {},
   ),
 );
 
-// ...
-
-// 移除群组监听
-EMClient.getInstance.groupManager.removeEventHandler('UNIQUE_HANDLER_ID');
+// 移除群组监听。
+ChatClient.getInstance.groupManager.removeEventHandler(
+  'UNIQUE_HANDLER_ID',
+);
 ```
