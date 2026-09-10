@@ -178,8 +178,10 @@ export const zhNavbar = navbar([
   {
     text: '增值服务',
       children: [
-      // { text: '即时推送', link: '/docs/value-added/push/push_overview.html'},
+      
+        { text: '实时音视频', link: '/callkit/android/beginner_guide.html'},
         { text: '消息翻译', link: '/docs/value-added/translation/message_translation_android.html'}
+        // { text: '即时推送', link: '/docs/value-added/push/push_overview.html'},
       ]
   },
   // {
