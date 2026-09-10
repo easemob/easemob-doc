@@ -30,7 +30,7 @@
 若使用了一段时间回调功能后需要将其关闭，请联系声网商务。关闭该功能会导致回调所有相关配置删除，请谨慎操作。
 :::
 
-![img](/images/product/callback_enable.png)
+![img](/images/callback/callback_enable.png)
 
 ## 两类回调的区别
 

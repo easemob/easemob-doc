@@ -153,7 +153,7 @@
 
 在 **添加推送证书** 页面，点击 **鸿蒙** 页签，配置鸿蒙推送证书。
 
-![img](/images/console/push_certificate_harmony.png)
+![img](/images/harmonyos/push/harmonyos_certificate.png)
 
 | 推送证书参数    | 类型   | 是否必需 | 描述   |
 | :-------- | :----- | :------- | :---------------- |
