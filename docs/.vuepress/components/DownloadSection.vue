@@ -7,8 +7,8 @@
       <div class="compliance-title">SDK 合规信息公示</div>
       <p><strong>功能介绍：</strong>为开发者提供低延时、高并发、可扩展、高可靠的实时消息及状态同步网络服务。</p>
       <p><strong>基本信息：</strong></p>
-      <p>【SDK 名称】即时通讯 SDK；【开发者】上海声网科技有限公司。</p>
-      <p>【使用说明】<a href="https://im.shengwang.cn/docs/sdk/android/security.html" target="_blank" rel="noopener noreferrer">《即时通讯 SDK 合规使用说明》</a>；【个人信息处理规则】<a href="https://www.shengwang.cn/SDK-privacy-policy/" target="_blank" rel="noopener noreferrer">《SDK个人信息处理规则》</a></p>
+      <p>【SDK 名称】即时通讯 SDK；【开发者】北京亿思摩博网络科技有限公司。</p>
+      <p>【使用说明】<a href="https://www.easemob.com/news/privacy" target="_blank" rel="noopener noreferrer">《即时通讯 SDK 合规使用说明》</a>；【个人信息处理规则】<a href="https://www.easemob.com/protocol" target="_blank" rel="noopener noreferrer">《SDK个人信息处理规则》</a></p>
     </div>
 
     <DownloadTable title="SDK 最新版本" :items="latestSDKDownloadInfo" :show-remark="true" />

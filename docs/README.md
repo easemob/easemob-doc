@@ -130,14 +130,15 @@ starter:
         link: /docs/callkit/web/product_overview.html
         text: Web
   - title: 增值服务
-    desc: 选择合适的增值服务构建消息翻译、实时音视频、即时推送等功能，点击对应按钮了解主要功能介绍。
+    # desc: 选择合适的增值服务构建消息翻译、实时音视频、即时推送等功能，点击对应按钮了解主要功能介绍。
+    desc: 选择合适的增值服务构建消息翻译、实时音视频等功能，点击对应按钮了解主要功能介绍。
     platform:
       - icon: /sdk/video.svg
         link: /docs/callkit/android/product_overview.html
         text: 实时音视频
-      - icon: /sdk/instant.svg
-        link: /docs/value-added/push/push_overview.html
-        text: 即时推送
+      # - icon: /sdk/instant.svg
+      #   link: /docs/value-added/push/push_overview.html
+      #   text: 即时推送
       - icon: /sdk/translation.svg
         link: /docs/value-added/translation/message_translation_android.html
         text: 消息翻译
@@ -1044,18 +1045,18 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /docs/document/server-side/push_information_bind_unbind.html
-          - text: 即时推送
-            desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、vivo 等主流手机厂商通道。
-            sdks:
-              - icon: /sdk/android.svg
-                text: Android
-                link: /docs/value-added/push/push_integration_note_android.html
-              - icon: /sdk/iOS.svg
-                text: iOS
-                link: /docs/value-added/push/push_integration_note_ios.html
-              - icon: /sdk/rest.svg
-                text: REST
-                link: /docs/value-added/push/push_api_call_limitation.html
+          # - text: 即时推送
+          #   desc: 即时推送服务的应用场景包括系统消息通知、活动促销营销、运营促活推送、社交互动通知、以及内容订阅推送等，覆盖谷歌、华为、小米、魅族、OPPO、vivo 等主流手机厂商通道。
+          #   sdks:
+          #     - icon: /sdk/android.svg
+          #       text: Android
+          #       link: /docs/value-added/push/push_integration_note_android.html
+          #     - icon: /sdk/iOS.svg
+          #       text: iOS
+          #       link: /docs/value-added/push/push_integration_note_ios.html
+          #     - icon: /sdk/rest.svg
+          #       text: REST
+          #       link: /docs/value-added/push/push_api_call_limitation.html
       - title: 其他
         icon: /feature/api-server.svg
         contexts:
