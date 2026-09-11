@@ -1,78 +1,113 @@
 # 初始化
 
-初始化是使用 SDK 的必要步骤，需在所有接口方法调用前完成。
+初始化是使用 SDK 的必要步骤。请在调用其他 SDK API 前完成初始化，并在应用生命周期内避免重复初始化。
 
-如果进行多次初始化操作，只有第一次初始化以及相关的参数生效。
+如果进行了多次初始化操作，只有第一次初始化以及相关的参数生效。
 
 :::tip
-需要在主进程中进行初始化。
+Android 应在应用主进程中初始化 SDK。
 :::
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台的相关文档](/product/console/app_create.html)。
+你已拥有有效的环信即时通讯 IM 开发者账号和 App Key。关于创建应用并获取 App Key，详见 [环信控制台相关文档](/product/console/app_create.html)。
 
 ## 初始化 SDK
 
-初始化时，你需要通过 `EMOptions` 中封装的 `appKey` 属性设置你的 App Key。
+使用 `ChatOptions.withAppKey` 创建初始化配置，然后调用 `ChatClient.getInstance.init` 初始化 SDK：
 
 ```dart
-EMOptions options = EMOptions.withAppKey(appKey);
-await EMClient.getInstance.init(options);
+final ChatOptions options = ChatOptions.withAppKey(appKey);
+await ChatClient.getInstance.init(options);
 ```
 
-对于 Flutter SDK 4.13.0 及以上版本，初始化时支持设置 `ExtSettings.kDisableIosEnterBackground` 参数，用于控制是否在 iOS 端应用进入和返回后台时调用 iOS SDK 的以下两种方法：
+### 配置 iOS 生命周期回调
 
-- `applicationDidEnterBackground`：调用该方法会断开连接。
-- `applicationWillEnterForeground` ：调用该方法后会重新链接。
+Flutter SDK 4.13.0 及以上版本支持通过 `ExtSettings.kDisableIosEnterBackground` 控制 Flutter iOS 插件是否自动向 iOS 原生 SDK 转发应用进入后台和返回前台的生命周期事件：
 
-该功能默认开启，若要关闭，可进行如下设置：
+- 未设置该参数或设置为 `false`：插件监听 iOS 生命周期通知，并分别调用原生 SDK 的 `applicationDidEnterBackground` 和 `applicationWillEnterForeground`。
+- 设置为 `true`：插件不注册上述生命周期通知，也不会自动调用这两个原生 SDK 方法。
+
+如需关闭 Flutter iOS 插件的自动转发，可进行如下配置：
 
 ```dart
-EMOptions options = EMOptions.withAppKey(
-    appKey,
-    extSettings: {ExtSettings.kDisableIosEnterBackground: true},
+final ChatOptions options = ChatOptions.withAppKey(
+  appKey,
+  extSettings: <String, dynamic>{
+    ExtSettings.kDisableIosEnterBackground: true,
+  },
 );
-await EMClient.getInstance.init(options);
+
+await ChatClient.getInstance.init(options);
 ```
 
-下表列明初始化配置 `EMOptions` 封装的一些属性。`EMOptions` 封装的所有属性，详见 [API 参考](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMOptions-class.html)。
+### 常用初始化配置
 
-| 属性           | 描述            |
-| :----------------- | :---------------- |
-| `appKey`                                   | `appkey` 为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
-| `autoLogin`                            | 是否自动登录。<br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
-| `autoAcceptGroupInvitation`         | 是否自动接受加群邀请。<br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
-| `acceptInvitationAlways`                   | 是否自动接受加好友邀请。 <br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
-| `deleteMessagesAsExitChatRoom`         | 退出(主动和被动退出)聊天室时是否删除聊天消息。<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
-| `deleteMessagesAsExitGroup`               | 退出(主动和被动退出)群组时是否删除聊天消息。<br/> -（默认）`true`: 退出群组时删除群组消息。 <br/> -  `false`: 退出群组时不删除群组消息。 |
-| `isChatRoomOwnerLeaveAllowed`                   | 是否允许聊天室所有者离开并删除会话记录。<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
+下表列出了 `ChatOptions.withAppKey` 的部分常用参数。全部参数请参见 [`ChatOptions` API 参考](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/ChatOptions-class.html)。
+
+| 参数 | 类型 | 默认值 | 描述 |
+| :--- | :--- | :---: | :--- |
+| `appKey` | `String` | 无 | 在环信控制台创建应用后获得的 App Key，必须传入。 |
+| `autoLogin` | `bool` | `true` | 是否开启自动登录。开启后，用户首次成功登录且未主动退出时，SDK 可在后续启动时自动登录。 |
+| `acceptInvitationAlways` | `bool` | `false` | 是否自动接受好友邀请：<br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
+| `autoAcceptGroupInvitation` | `bool` | `false` | 是否自动接受群组邀请：<br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
+| `requireAck` | `bool` | `true` | 是否要求消息已读回执。 |
+| `requireDeliveryAck` | `bool` | `false` | 是否要求消息送达回执。 |
+| `deleteMessagesAsExitGroup` | `bool` | `true` | 离开群组时是否删除该群组的本地消息：<br/> -（默认）`true`: 退出群组时删除群组消息。 <br/> -  `false`: 退出群组时不删除群组消息。 |
+| `deleteMessagesAsExitChatRoom` | `bool` | `true` | 离开聊天室时是否删除该聊天室的本地消息：<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
+| `isChatRoomOwnerLeaveAllowed` | `bool` | `true` | 是否允许聊天室所有者离开聊天室：<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
+| `enableUserInfo` | `bool` | `false` | 是否开启用户信息自动管理功能。 |
+| `enableAutoSyncContacts` | `bool` | `false` | 是否在登录后自动从服务器同步联系人列表。 |
 
 ## 初始化后设置监听
 
-初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
+初始化完成后，可以添加连接事件处理器和消息事件处理器，监听 SDK 连接状态及消息接收事件。每个事件处理器都使用业务自定义的唯一 ID 管理；使用相同 ID 再次添加时，会覆盖此前的处理器。
 
 ```dart
-// 设置连接监听器。
-EMClient.getInstance.addConnectionEventHandler(
-  'identifier',
-  EMConnectionEventHandler(
+const String connectionHandlerId = 'connection_handler';
+const String messageHandlerId = 'message_handler';
+
+ChatClient.getInstance.addConnectionEventHandler(
+  connectionHandlerId,
+  ConnectionEventHandler(
     onConnected: () {
-      // SDK 成功连接到 IM 服务器时触发。
+      debugPrint('Connected to the IM server.');
     },
     onDisconnected: () {
-      // SDK 与 IM 服务器断开连接时触发。
+      debugPrint('Disconnected from the IM server.');
     },
   ),
 );
 
-// 设置消息监听器。
-EMClient.getInstance.chatManager.addEventHandler(
-  "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(
-    onMessagesReceived: (messages) {
-      // 处理接收到的消息。
+ChatClient.getInstance.chatManager.addEventHandler(
+  messageHandlerId,
+  ChatEventHandler(
+    onMessagesReceived: (List<ChatMessage> messages) {
+      debugPrint('Received ${messages.length} message(s).');
     },
   ),
 );
 ```
+
+不再需要监听时，应使用对应的 ID 移除事件处理器：
+
+```dart
+ChatClient.getInstance.removeConnectionEventHandler(connectionHandlerId);
+ChatClient.getInstance.chatManager.removeEventHandler(messageHandlerId);
+```
+
+## 设置登录后自动同步联系人
+
+Flutter SDK 4.22.0 支持在初始化 SDK 时通过 `ChatOptions.enableAutoSyncContacts` 配置登录后是否自动从服务器同步联系人列表。登录成功后，原生 SDK 按配置同步联系人数据，并更新本地数据。详见 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`withAppKey`](#初始化-sdk) | `ChatOptions` | 使用 App Key 创建初始化配置。 |
+| [`init`](#初始化-sdk) | `ChatClient` | 初始化 Flutter SDK 单例。 |
+| [`addConnectionEventHandler`](#初始化后设置监听) | `ChatClient` | 添加连接事件处理器。 |
+| [`removeConnectionEventHandler`](#初始化后设置监听) | `ChatClient` | 移除连接事件处理器。 |
+| [`addEventHandler`](#初始化后设置监听) | `ChatManager` | 添加消息事件处理器。 |
+| [`removeEventHandler`](#初始化后设置监听) | `ChatManager` | 移除消息事件处理器。 |
+| [`enableAutoSyncContacts`](#设置登录后自动同步联系人) | `ChatOptions` | 设置登录后是否自动同步联系人列表。 |

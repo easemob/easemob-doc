@@ -69,46 +69,105 @@ if(msg.body.type == MessageType.VOICE) {
 
 ### 接收图片消息
 
-1. 接收方收到图片消息，自动下载图片缩略图。
-   
-- 默认情况下，SDK 自动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `true`。
-- 若设置为手动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `false`，需调用 `EMChatManager#downloadThumbnail` 下载。
+一条图片消息通常包含三类图片资源：
 
-2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
-```dart
-EMClient.getInstance.chatManager.addMessageEvent(
-  'UNIQUE_HANDLER_ID',
-  ChatMessageEvent(
-    onSuccess: (msgId, msg) {
-      // 下载成功
-    },
-    onProgress: (msgId, progress) {
-      // 下载进度
-    },
-    onError: (msgId, msg, error) {
-      // 下载失败
-    },
-  ),
-);
+收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
 
-// 下载附件
-EMClient.getInstance.chatManager.downloadAttachment(msg);
-```
+接收图片消息的流程如下：
 
-3. 下载成功后获取图片消息的缩略图和附件。
+1. 接收图片消息时，SDK 根据 `ChatOptions#isAutoDownloadThumbnail` 决定是否自动下载缩略图。
+   - 默认自动下载，即该参数默认为 `true`。
+   - 如果初始化时将该参数设置为 `false`，需要调用 `ChatManager#downloadThumbnail(message)` 手动下载缩略图。初始化后还可以调用 `ChatClient#updateAutoDownloadAttachmentThumbnailSetting` 更新该设置。
+
+2. 在 [`ChatEventHandler#onMessagesReceived`](#接收文本消息) 回调中识别图片消息，并根据业务需求下载对应资源：
+
+   - 调用 `ChatManager#downloadAttachment(message)` 下载原图附件。
+   - 调用 `ChatManager#downloadBigImage(message)` 下载大图。
+
+   如果 `ChatImageMessageBody` 中已有对应的本地路径，建议直接复用本地文件，避免重复下载。
+
+示例代码如下所示：
 
 ```dart
-EMImageMessageBody body = msg.body as EMImageMessageBody;
-// 本地大图路径
-body.localPath;
-// 本地缩略图路径
-body.thumbnailLocalPath;
-// 服务器大图路径。
-body.remotePath;
-// 服务器缩略图路径。
-body.thumbnailRemotePath;
+onMessagesReceived: (List<ChatMessage> messages) async {
+  for (final ChatMessage message in messages) {
+    if (message.body is! ChatImageMessageBody) {
+      continue;
+    }
+
+    try {
+      // 手动下载缩略图。
+      // SDK 已开启缩略图自动下载时，通常无需再次调用。
+      await ChatClient.getInstance.chatManager
+          .downloadThumbnail(message);
+
+      // 下载原图。
+      await ChatClient.getInstance.chatManager
+          .downloadAttachment(message);
+
+      // 下载大图。
+      await ChatClient.getInstance.chatManager
+          .downloadBigImage(message);
+    } on ChatError catch (error) {
+      debugPrint(
+        'Failed to download image: '
+        'code=${error.code}, description=${error.description}',
+      );
+    }
+  }
+},
 ```
+
+上述三个下载接口仅用于展示不同图片资源的下载方式。实际使用时，应根据业务需要选择相应接口，无需同时下载全部资源。如果消息体中已经存在对应的本地路径，建议直接使用本地文件，避免重复下载。
+
+Flutter 的下载接口不直接接收回调。如需监听下载进度以及成功或失败结果，可以通过 `ChatManager.addMessageEvent` 注册 `ChatMessageEvent`。
+
+3. 收到图片消息后，可以通过 `ChatImageMessageBody` 分别获取原图、大图和缩略图的服务端地址：
+
+```dart
+final ChatImageMessageBody imageBody =
+    message.body as ChatImageMessageBody;
+
+// 获取原图的服务端地址。
+final String? originalRemotePath = imageBody.remotePath;
+
+// 获取大图的服务端地址。
+final String? bigImageRemotePath = imageBody.bigImageRemotePath;
+
+// 获取缩略图的服务端地址。
+final String? thumbnailRemotePath = imageBody.thumbnailRemotePath;
+```
+
+也可以从消息体中获取已下载图片的本地路径：
+
+```dart
+// 获取原图的本地路径。
+final String originalLocalPath = imageBody.localPath;
+
+// 获取大图的本地路径。
+final String? bigImageLocalPath = imageBody.bigImageLocalPath;
+
+// 获取缩略图的本地路径。
+final String? thumbnailLocalPath = imageBody.thumbnailLocalPath;
+```
+
+各类图片资源对应的属性如下：
+
+| 图片资源 | 服务端地址 | 本地路径 | 下载状态 |
+| :--- | :--- | :--- | :--- |
+| 原图 | `remotePath` | `localPath` | `fileStatus` |
+| 大图 | `bigImageRemotePath` | `bigImageLocalPath` | `bigImageDownloadStatus` |
+| 缩略图 | `thumbnailRemotePath` | `thumbnailLocalPath` | `thumbnailStatus` |
+
+此外，还可以通过 `ChatImageMessageBody` 获取以下信息：
+
+- `sendOriginalImage`：发送方是否选择发送原图。
+- `width` 和 `height`：图片的宽度和高度，类型均为 `double?`，单位为像素。
+- `isGif`：图片是否为 GIF 格式。
 
 ### 接收 GIF 图片消息
 

@@ -66,19 +66,63 @@ EMClient.getInstance.chatManager.sendMessage(voiceMsg);
 
 ### 发送图片消息
 
-1. 发送方调用 `EMMessage#createImageSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和图片文件的 `filePath`，创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+图片消息通常涉及以下三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取当前平台原生层可访问的图片本地路径。
+2. 调用 `ChatMessage.createImageSendMessage` 创建图片消息。
+
+   创建消息时，需要传入目标会话 ID 和图片的 `filePath`。通过 `sendOriginalImage` 设置是否发送原图：`true` 表示上传原图；`false` 为默认值，图片超过 100 KB 时，底层 SDK 会压缩后上传。群聊或聊天室消息还需通过 `chatType` 指定对应的会话类型。
+
+3. 调用 `ChatManager.sendMessage` 发送消息。
+
+   `ChatOptions.serverTransfer` 默认为 `true`，SDK 会自动上传图片附件，服务器自动生成缩略图。如果关闭自动上传，需要由应用自行处理附件上传，详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
+
+创建并发送单聊图片消息的示例代码如下：
 
 ```dart
-final imgMsg = EMMessage.createImageSendMessage(
-  targetId: targetId,
+if (filePath.isEmpty) {
+  throw ArgumentError.value(filePath, 'filePath', '图片路径不能为空');
+}
+
+final ChatMessage imageMessage = ChatMessage.createImageSendMessage(
+  // 单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。
+  targetId: conversationId,
   filePath: filePath,
-  // 图片文件的显示名称，强烈建议传入该参数。
+  // 强烈建议传入图片的显示名称。
   displayName: displayName,
+  // false 表示允许 SDK 按需压缩；true 表示发送原图。
+  sendOriginalImage: false,
+  // 单聊默认为 Chat；群聊或聊天室需分别设置为 GroupChat 或 ChatRoom。
+  chatType: ChatType.Chat,
 );
 
-EMClient.getInstance.chatManager.sendMessage(imgMsg);
+try {
+  final ChatMessage sentMessage =
+      await ChatClient.getInstance.chatManager.sendMessage(imageMessage);
+  debugPrint('Image message sent: ${sentMessage.msgId}');
+} on ChatError catch (error) {
+  debugPrint(
+    'Failed to send image message, code=${error.code}, '
+    'description=${error.description}',
+  );
+}
 ```
+
+`createImageSendMessage` 的关键参数如下表所示：
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :---: | :--- |
+| `targetId` | `String` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `String` | 必填 | 图片的本地路径。应确保 Android 或 iOS 原生层可以访问该路径。 |
+| `sendOriginalImage` | `bool` | 可选 | 是否发送原图，默认值为 `false`。`true` 表示上传原图；`false` 表示允许底层 SDK 在图片超过 100 KB 时压缩后上传。 |
+| `chatType` | `ChatType` | 可选 | 会话类型，默认值为 `ChatType.Chat`。群聊和聊天室分别设置为 `ChatType.GroupChat` 和 `ChatType.ChatRoom`。 |
+| `displayName` | `String?` | 可选 | 图片的显示名称，强烈建议传入。 |
 
 ### 发送 GIF 图片消息
 

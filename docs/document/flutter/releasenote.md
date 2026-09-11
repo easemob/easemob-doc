@@ -1,5 +1,36 @@
 # Flutter IM SDK 更新日志
 
+## v4.22.0 2026-08-28
+
+#### 重大变更
+
+- **公开 API 命名统一**：为与海外版 `agora_chat_sdk` 保持一致，将所有公开 API 的类、枚举等统一更名为 `Chat` 前缀。
+  - 主要变更示例：`EMClient` → `ChatClient`，`EMOptions` → `ChatOptions`，`EMMessage` → `ChatMessage`。
+  - 兼容处理：在 `em_compat.dart` 中通过 `@Deprecated` 标记的 `typedef` 保留了旧名称，现有代码无需修改即可继续编译运行。建议开发者逐步迁移至新命名，旧名称将在未来大版本中移除。
+  - 不兼容变更：少量因语法限制无法通过 `typedef` 兼容的名称直接更名，包括 `EMLog` → `ChatLog`、`EMTools` → `ChatTools`、`EMGroupPermissionTypeExtension` → `ChatGroupPermissionTypeExtension`。
+  - 导入路径调整：深层路径导入（如 `package:im_flutter_sdk/src/models/em_options.dart`）将不再兼容，请统一从包入口 `package:im_flutter_sdk/im_flutter_sdk.dart` 导入。
+- **iOS 最低版本提升**：iOS 平台最低支持版本提升至 13.0。
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级：
+  - iOS SDK 升级至 4.22.2。
+  - Android SDK 升级至 4.22.1。
+- iOS 支持 Swift Package Manager（SPM）集成，与 CocoaPods 方式并存；SPM 方式下原生 SDK 通过 Swift 包 `HyphenateChat_iOS`（4.22.2）依赖。
+- 支持 [语音转文字功能](/value-added/stt/voice_to_text_flutter.html)。
+- 支持图片消息分层资源管理及相关处理逻辑优化：
+  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
+- 支持 [群成员名片管理功能](group_namecard.html)。
+- 支持登录后自动同步好友列表：
+  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
+  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 支持 [用户信息自动管理功能](userinfo_provider.html)。
+用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+
 ## v4.19.2 2026-6-9
 
 - Android 依赖 SDK 升级至 4.19.3.1。
