@@ -43,7 +43,7 @@ Each add-on package costs $56/month.
 | * Send a Broadcast Message to Online App Users | POST | /{org_name}/{app_name}/messages/users/broadcast | 1 call/minute and 50 calls/day. Contact the EasyIM business manager to request a higher limit. |          |  
 | * Send One-to-One Stream Messages                 | POST   | /{org_name}/{app_name}/stream_message/user           | 100 messages/second/App Key   | ——   |  
 | * Send Group Chat Stream Messages                 | POST   | /{org_name}/{app_name}/stream_message/chatgroup           | 100 messages/second/App Key   | ——   |  
-| * Send a Global Broadcast Message to Chat Rooms | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 10 calls/minute and 100 broadcast messages/day. | 100calls/day    |  
+| * Send a Global Broadcast Message to Chat Rooms | POST | /{org_name}/{app_name}/messages/chatrooms/broadcast | 10 calls/minute and 100 broadcast messages/day. | 100 calls/day    |  
 | Upload a File  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 calls/second/App Key                                                 |  100 calls/second   |  
 | Download a File      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 calls/second/App Key       | 100 calls/second    |  
 | * Retrieve a Historical Message File   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 calls/minute/App Key  | 20 calls/minute    |  

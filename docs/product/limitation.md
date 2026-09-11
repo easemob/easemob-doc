@@ -11,10 +11,10 @@ The following table lists the message length limit for each message type:
 | Message type       | Message length limit            |
 | :------------- | :----------------------------------- |
 | Text message       | 5 KB.                                 |
-| Image message       | The image cannot exceed 10 MB. The size limit for an image message is 5 KB.      |
+| Image message       | The image file cannot exceed 10 MB. The size limit for an image message is 5 KB.      |
 | Voice message       | The audio file cannot exceed 10 MB. The size limit for a voice message is 5 KB.  |
 | Video message       | The video file cannot exceed 10 MB. The size limit for a video message is 5 KB.  |
-| File message       | The attachment cannot exceed 10 MB. The size limit for a file message is 5 KB.  |
+| File message       | The file attachment cannot exceed 10 MB. The size limit for a file message is 5 KB.  |
 | Command message       | 5 KB.                                 |
 | Custom message     | 5 KB.                                 |
 | Combined message       | 5 KB.                                 |

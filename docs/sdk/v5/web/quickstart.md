@@ -29,7 +29,8 @@ Easemob_quickstart<br>
 - You have a valid [EasyIM developer account](/product/console/account_register.html#register-an-account).
 - You have [created an app](/product/console/app_create.html) in the EasyIM Console and [obtained the App Key](/product/console/app_manage.html#manage-apps).
 - You have installed [npm](https://www.npmjs.com/get-npm).
-- The SDK supports IE 9+, Firefox 10+, Chrome 54+, and Safari 6+.
+- A modern browser such as Chrome, Firefox, Safari, or another browser that uses one of these browser engines, such as Microsoft Edge, is supported.
+- Internet Explorer (IE) is not supported.
 
 ## Implementation process
 
@@ -49,7 +50,7 @@ This section describes how to integrate the EasyIM Web SDK into your project.
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "easemob-websdk": "latest"
+        "easemob-websdk": "^5.1.0"
     },
     "author": "",
     "license": "ISC"
@@ -232,7 +233,7 @@ This document uses webpack to bundle the project and `webpack-dev-server` to run
         "start:dev": "webpack serve --config webpack.config.js"
     },
     "dependencies": {
-        "easemob-websdk": "latest",
+        "easemob-websdk": "^5.1.0",
         "webpack": "^5.50.0",
         "webpack-dev-server": "^5.0.0",
         "webpack-cli": "^5.0.0"

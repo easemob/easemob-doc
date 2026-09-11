@@ -48,9 +48,9 @@ You can view the app's domain `host`, organization name `org_name`, and app name
 
 | Parameter | Type   | Required | Description     |
 | :-------------- | :----- | :----------------- | :-------------------- |
-| `Content-Type`  | String | Yes                                       | Content type. Set it to `application/json`.    |
-| `Accept`        | String | Yes                                       | Content type. Set it to `application/json`.    |
-| `Authorization` | String | Yes                                       | App admin authentication token in the format `Bearer YourAppToken`, where `Bearer` is a fixed string followed by a space and the obtained app token.<br/>EasyIM REST APIs require Bearer HTTP authentication. You must include this field in the request header each time you send an HTTP request. For information about obtaining a dynamic app token, see [Authentication with an EasyIM App Token](easemob_app_token.html). |
+| `Content-Type`  | String | Yes   | Content type. Set it to `application/json`.    |
+| `Accept`        | String | Yes   | Media types that the client accepts in the response. Set it to `application/json`.   |
+| `Authorization` | String | Yes   | App admin authentication token in the format `Bearer YourAppToken`, where `Bearer` is a fixed string followed by a space and the obtained app token.<br/>EasyIM REST APIs require Bearer HTTP authentication. You must include this field in the request header each time you send an HTTP request. For information about obtaining a dynamic app token, see [Authentication with an EasyIM App Token](easemob_app_token.html). |
 
 ### Request body
 
