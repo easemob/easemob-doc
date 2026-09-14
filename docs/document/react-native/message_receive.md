@@ -52,36 +52,155 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 
 ### 接收图片消息
 
-1. 接收方收到图片消息，自动下载图片缩略图。
+自 React Native SDK 1.18.0 版本开始，图片消息支持以下三类图片资源：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：服务端基于原图进行等比压缩后的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
+
+接收图片消息的流程如下：
+
+1. 接收图片消息时，SDK 根据 `ChatOptions.isAutoDownload` 决定是否自动下载缩略图。该属性默认为 `true`。若设置为 `false`，需要调用 `downloadThumbnail` 手动下载缩略图。
 
 ```typescript
+const autoDownloadThumbnail = false;
+
 ChatClient.getInstance().init(
   new ChatOptions({
     appKey,
-    isAutoDownload: true,
+    isAutoDownload: autoDownloadThumbnail,
   })
 );
 ```
 
-如果设置为手动下载，则需要设置 `isAutoDownload` 为 `false`，并且调用方法 `downloadThumbnail`。
+2. SDK 通过 `onMessagesReceived` 回调传递图片消息。接收方可根据业务需要调用以下方法下载图片资源：
+
+- `downloadThumbnail(message, callback)`：下载缩略图。
+- `downloadAttachment(message, callback)`：下载图片附件，即下载 `remotePath` 对应的图片附件。`isOriginalImage` 为 `true` 时，该附件为原图；为 `false` 时，该附件为发送方压缩后上传的大图。
+- `downloadBigImage(message, callback)`：下载大图。若 `downloadAttachment` 下载的图片附件本身已经是大图，通常无需再次调用。
+
+如果消息体中已有相应的本地路径，建议直接复用本地文件，避免重复下载。
 
 ```typescript
-ChatClient.getInstance()
-  .chatManager.downloadThumbnail(msg, callback)
-  .then()
-  .catch();
+const imageDownloadCallback: ChatMessageStatusCallback = {
+  onProgress(localMsgId: string, progress: number): void {
+    console.log("图片下载进度：", localMsgId, progress);
+  },
+
+  onError(localMsgId: string, error: ChatError): void {
+    console.log("图片下载失败：", localMsgId, error);
+  },
+
+  onSuccess(updatedMessage: ChatMessage): void {
+    console.log("图片下载成功：", updatedMessage.msgId);
+  },
+};
+
+// 按需下载图片附件。
+function downloadImageAttachmentIfNeeded(message: ChatMessage): void {
+  if (message.body.type !== ChatMessageType.IMAGE) {
+    return;
+  }
+
+  const body = message.body as ChatImageMessageBody;
+  if (body.localPath) {
+    // 本地已有图片附件，直接复用。
+    return;
+  }
+
+  void ChatClient.getInstance().chatManager
+    .downloadAttachment(message, imageDownloadCallback)
+    .catch((error) => console.log("发起图片附件下载失败：", error));
+}
+
+// 按需下载大图。
+function downloadBigImageIfNeeded(message: ChatMessage): void {
+  if (message.body.type !== ChatMessageType.IMAGE) {
+    return;
+  }
+
+  const body = message.body as ChatImageMessageBody;
+  if (body.bigImageLocalPath) {
+    // 本地已有大图，直接复用。
+    return;
+  }
+
+  void ChatClient.getInstance().chatManager
+    .downloadBigImage(message, imageDownloadCallback)
+    .catch((error) => console.log("发起大图下载失败：", error));
+}
+
+const imageMessageListener: ChatMessageEventListener = {
+  onMessagesReceived(messages: ChatMessage[]): void {
+    for (const message of messages) {
+      if (message.body.type !== ChatMessageType.IMAGE) {
+        continue;
+      }
+
+      const body = message.body as ChatImageMessageBody;
+
+      if (body.thumbnailLocalPath) {
+        // 本地已有缩略图，直接展示。
+      } else if (!autoDownloadThumbnail) {
+        // 仅在关闭自动下载缩略图时手动下载。
+        void ChatClient.getInstance().chatManager
+          .downloadThumbnail(message, imageDownloadCallback)
+          .catch((error) => console.log("发起缩略图下载失败：", error));
+      }
+
+      // 用户查看清晰图片时，根据业务需要调用其中一个方法：
+      // downloadBigImageIfNeeded(message);
+      // downloadImageAttachmentIfNeeded(message);
+    }
+  },
+};
+
+ChatClient.getInstance().chatManager.addMessageListener(
+  imageMessageListener
+);
 ```
 
-1. 接收方收到 [onMessagesReceived](#接收文本消息) 事件，调用 `downloadAttachment` 下载原图。
+:::tip
+`downloadThumbnail`、`downloadBigImage` 和 `downloadAttachment` 返回的 `Promise<void>` 用于报告方法调用错误。附件下载进度和最终结果通过 `ChatMessageStatusCallback` 返回；下载成功后，应从 `onSuccess` 参数 `updatedMessage` 的消息体中读取最新本地路径。
+:::
+
+1. 你可以通过 `ChatImageMessageBody` 获取图片附件、大图和缩略图的服务端地址或本地路径：
 
 ```typescript
-ChatClient.getInstance()
-  .chatManager.downloadAttachment(msg, callback)
-  .then()
-  .catch();
+if (message.body.type === ChatMessageType.IMAGE) {
+  const imageBody = message.body as ChatImageMessageBody;
+
+  // 图片附件的服务端地址和本地路径。
+  // isOriginalImage 为 true 时，该附件为原图。
+  const imageRemotePath = imageBody.remotePath;
+  const imageLocalPath = imageBody.localPath;
+
+  // 大图的服务端地址和本地路径。
+  const bigImageRemotePath = imageBody.bigImageRemotePath;
+  const bigImageLocalPath = imageBody.bigImageLocalPath;
+
+  // 缩略图的服务端地址和本地路径。
+  const thumbnailRemotePath = imageBody.thumbnailRemotePath;
+  const thumbnailLocalPath = imageBody.thumbnailLocalPath;
+}
 ```
 
-4. 获取图片消息的附件信息可以通过图片消息的消息体对象 `body` 获取。
+除了上述图片资源的服务端地址和本地路径，图片消息体 `ChatImageMessageBody` 还提供以下主要属性：
+
+| 属性                     | 类型                             | 描述                           |
+| ------------------------ | -------------------------------- | ------------------------------ |
+| `fileStatus`             | `ChatDownloadStatus`             | 图片附件的下载状态。           |
+| `bigImageDownloadStatus` | `ChatDownloadStatus | undefined` | 大图的下载状态。               |
+| `thumbnailStatus`        | `ChatDownloadStatus`             | 缩略图的下载状态。             |
+| `isOriginalImage`        | `boolean | undefined`            | 图片附件是否为未经压缩的原图。 |
+| `width`                  | `number`                         | 图片宽度，单位为像素。         |
+| `height`                 | `number`                         | 图片高度，单位为像素。         |
+
+:::tip
+`ChatDownloadStatus` 的取值包括 `PENDING`、`DOWNLOADING`、`SUCCESS` 和 `FAILED`。
+:::
 
 ### 接收 GIF 图片消息
 
@@ -112,18 +231,95 @@ ChatClient.getInstance().chatManager.addMessageListener({
 
 ### 接收视频消息
 
-1. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#接收图片消息)。
+收到视频消息后，通常先在聊天界面展示视频缩略图；当用户点击消息时，再下载或播放视频原文件。
 
-2. 接收方收到 [onMessagesReceived](#接收文本消息) 事件，可以调用 `downloadAttachment` 方法下载视频原文件。
+接收视频消息的流程如下：
+
+1. SDK 根据 `ChatOptions.isAutoDownload` 决定是否自动下载视频缩略图。该属性默认为 `true`。若关闭自动下载，需要调用 `downloadThumbnail(message, callback)` 手动下载。该配置与图片缩略图相同，详见 [接收图片消息](#接收图片消息)。
+
+2. SDK 通过 `onMessagesReceived` 回调传递视频消息。接收方可优先使用缩略图进行预览，并在用户需要播放视频时调用 `downloadAttachment(message, callback)` 下载视频原文件。
+
+3. 下载前建议先检查 `thumbnailLocalPath` 或 `localPath`。本地已有可用路径时，直接复用对应文件。
 
 ```typescript
-ChatClient.getInstance()
-  .chatManager.downloadAttachment(msg, callback)
-  .then()
-  .catch();
+const videoDownloadCallback: ChatMessageStatusCallback = {
+  onProgress(localMsgId: string, progress: number): void {
+    console.log("视频下载进度：", localMsgId, progress);
+  },
+  onError(localMsgId: string, error: ChatError): void {
+    console.log("视频下载失败：", localMsgId, error);
+  },
+  onSuccess(updatedMessage: ChatMessage): void {
+    if (updatedMessage.body.type !== ChatMessageType.VIDEO) {
+      return;
+    }
+    const body = updatedMessage.body as ChatVideoMessageBody;
+    // 从下载完成后返回的新消息对象中读取最新本地路径。
+    console.log("视频本地路径：", body.localPath);
+    console.log("视频缩略图本地路径：", body.thumbnailLocalPath);
+  },
+};
+
+// 与初始化时的 ChatOptions.isAutoDownload 设置保持一致。
+const isAutoDownloadVideoThumbnailEnabled = false;
+
+function downloadVideo(message: ChatMessage): void {
+  if (message.body.type !== ChatMessageType.VIDEO) {
+    return;
+  }
+
+  const body = message.body as ChatVideoMessageBody;
+  if (body.localPath) {
+    // 本地已有视频文件，直接播放。
+    console.log("播放本地视频：", body.localPath);
+    return;
+  }
+
+  void ChatClient.getInstance().chatManager
+    .downloadAttachment(message, videoDownloadCallback)
+    .catch((error) => console.log("发起视频下载失败：", error));
+}
+
+const videoMessageListener: ChatMessageEventListener = {
+  onMessagesReceived(messages: ChatMessage[]): void {
+    for (const message of messages) {
+      if (message.body.type !== ChatMessageType.VIDEO) {
+        continue;
+      }
+
+      const body = message.body as ChatVideoMessageBody;
+      if (body.thumbnailLocalPath) {
+        // 本地已有视频缩略图，直接展示。
+        console.log("视频缩略图本地路径：", body.thumbnailLocalPath);
+      } else if (!isAutoDownloadVideoThumbnailEnabled) {
+        // 仅在关闭自动下载缩略图时手动下载。
+        void ChatClient.getInstance().chatManager
+          .downloadThumbnail(message, videoDownloadCallback)
+          .catch((error) =>
+            console.log("发起视频缩略图下载失败：", error)
+          );
+      }
+
+      // 用户点击视频消息时调用：downloadVideo(message);
+    }
+  },
+};
+
+ChatClient.getInstance().chatManager.addMessageListener(videoMessageListener);
 ```
 
-3. 视频消息的信息可以通过消息体 `body` 对象获取。
+4. 视频消息体 `ChatVideoMessageBody` 提供以下主要属性：
+
+| 属性 | 类型 | 描述 |
+| --- | --- | --- |
+| `remotePath` | `string` | 视频原文件在服务器的地址。 |
+| `thumbnailRemotePath` | `string` | 视频缩略图在服务器的地址。 |
+| `localPath` | `string` | 视频原文件的本地路径。路径为空字符串时，表示本地暂无可用文件。 |
+| `thumbnailLocalPath` | `string` | 视频缩略图的本地路径。路径为空字符串时，表示本地暂无可用文件。 |
+| `fileStatus` | `ChatDownloadStatus` | 视频原文件的下载状态。 |
+| `thumbnailStatus` | `ChatDownloadStatus` | 视频缩略图的下载状态。 |
+| `duration` | `number` | 视频时长，单位为秒。 |
+| `width` / `height` | `number` | 视频缩略图宽高，单位为像素。 |
 
 ### 接收文件消息
 
