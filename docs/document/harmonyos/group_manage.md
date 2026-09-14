@@ -175,6 +175,15 @@ ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSi
 });
 ```
 
+`GroupMember` 提供群成员的以下常用属性：
+
+- `memberId`：群成员用户 ID。
+- `namecard`：成员在当前群组中的群成员名片。
+- `nickname`：成员的用户昵称。
+- `avatarUrl`：成员头像 URL。
+- `joinTime`：成员入群时间。
+- `role`：成员在群组中的角色。
+
 ### 获取群组列表
 
 用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。

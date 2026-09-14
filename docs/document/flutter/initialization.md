@@ -96,9 +96,29 @@ ChatClient.getInstance.removeConnectionEventHandler(connectionHandlerId);
 ChatClient.getInstance.chatManager.removeEventHandler(messageHandlerId);
 ```
 
-## 设置登录后自动同步联系人
+## 设置登录后自动同步好友数据
 
-Flutter SDK 4.22.0 支持在初始化 SDK 时通过 `ChatOptions.enableAutoSyncContacts` 配置登录后是否自动从服务器同步联系人列表。登录成功后，原生 SDK 按配置同步联系人数据，并更新本地数据。详见 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)。
+Flutter SDK 4.22.0 可通过 `ChatOptions.withAppKey` 的 `enableAutoSyncContacts` 参数设置登录后是否自动同步好友列表和好友对象。该参数默认为 `false`；如需开启，必须在初始化 SDK 时设置为 `true`。好友对象包含用户 ID、备注和添加时间等信息，不代表已获取所有好友的昵称和头像。
+
+同步状态监听、好友列表和好友对象的本地读取方式，详见[登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)。
+
+## 开启用户信息自动管理
+
+Flutter SDK 4.22.0 可通过 `enableUserInfo` 参数设置用户信息自动管理功能。该参数默认为 `false`，设置为 `true` 后，原生 SDK 会在登录成功时自动同步 **当前登录用户** 的属性；其他用户的属性可在接收相关消息和主动从服务端拉取用户属性等场景下更新。它与 `enableAutoSyncContacts` 相互独立，**不会在登录时自动获取所有好友的昵称和头像**。
+
+如果两项功能都需要，可在同一次初始化中配置：
+
+```dart
+final ChatOptions options = ChatOptions.withAppKey(
+  'your_app_key',
+  enableAutoSyncContacts: true,
+  enableUserInfo: true,
+);
+
+await ChatClient.getInstance.init(options);
+```
+
+用户属性更新事件、本地读取与主动获取方式，详见[用户信息自动管理](userinfo_provider.html)。
 
 ## 接口列表
 
@@ -110,4 +130,5 @@ Flutter SDK 4.22.0 支持在初始化 SDK 时通过 `ChatOptions.enableAutoSyncC
 | [`removeConnectionEventHandler`](#初始化后设置监听) | `ChatClient` | 移除连接事件处理器。 |
 | [`addEventHandler`](#初始化后设置监听) | `ChatManager` | 添加消息事件处理器。 |
 | [`removeEventHandler`](#初始化后设置监听) | `ChatManager` | 移除消息事件处理器。 |
-| [`enableAutoSyncContacts`](#设置登录后自动同步联系人) | `ChatOptions` | 设置登录后是否自动同步联系人列表。 |
+| [`enableAutoSyncContacts`](#设置登录后自动同步好友数据) | `ChatOptions` | 登录后自动同步好友数据的初始化配置。 |
+| [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | 用户属性自动管理的初始化配置。 |

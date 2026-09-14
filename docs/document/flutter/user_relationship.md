@@ -240,7 +240,7 @@ Future<void> initializeChatSdk() async {
 
 - `onContactSyncStart`：SDK 开始从服务器同步好友列表时触发，类型为 `void Function()?`。
 - `onContactSyncFinish`：同步结束时触发，类型为 `void Function(ChatError? error)?`。`error == null` 表示同步成功，否则可通过 `error.code` 和 `error.description` 获取失败信息。
-- `onContactInfoUpdate`：好友信息发生变更时触发，类型为 `void Function(ChatContact contact)?`。
+- `onContactInfoUpdate`：`onContactInfoUpdate`：原生 SDK 检测到好友信息更新时触发，返回更新后的 `ChatContact`，但不标识具体变更字段。类型为 `void Function(ChatContact contact)?`。昵称、头像等用户属性更新应另行监听 `ChatUserInfoEventHandler.onUserInfoUpdate`。
 
 事件处理器的完整注册方式见 [监听好友关系和好友信息变更](#监听好友关系和好友信息变更)。同步成功后，可通过 `getAllContacts`、`getContact` 或 `getAllContactIds` 读取本地好友数据。
 
