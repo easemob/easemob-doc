@@ -44,6 +44,7 @@ EMContactListener contactListener = new EMContactListener() {
     // 好友信息发生变更，可通过 contact 获取更新后的好友信息。
     @Override
     public void onContactInfoUpdate(EMContact contact) { }
+    
 };
 
 // 注册好友关系和好友信息变更监听器。

@@ -6,7 +6,7 @@
 
 例如，在企业群组中，成员可将在群组中的名片设置为“部门-姓名”或“岗位-姓名”的格式，便于群内成员快速识别和沟通。
 
-自 React Native SDK 1.18.0 版本开始，即时通讯 IM React Native SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
+自 **React Native SDK 1.18.0 版本开始** 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
 
 ## 技术原理
 
@@ -21,7 +21,7 @@ React Native SDK 基于 Android 和 iOS 原生 SDK，对群成员名片相关能
 
 开始接入前，请确保满足以下条件：
 
-- 使用 React Native SDK 1.18.0 或以上版本。
+- 已将 React Native SDK 升级至 v1.18.0 或以上版本。
 - 已完成 SDK 初始化并成功登录，详见 [初始化](initialization.html) 和 [快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制，详见 [使用限制](/product/limitation.html)。
 

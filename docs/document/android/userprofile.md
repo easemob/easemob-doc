@@ -19,6 +19,27 @@
 - 单个 app 的全部用户属性数据最大不超过 10 GB。
 - 调用设置或获取用户属性的相关接口超过频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
+## 开启用户信息自动管理功能
+
+如果需要使用用户属性本地缓存、消息发送方信息以及登录后自动同步当前用户信息，需在调用 `EMClient#init` 前开启 [用户信息自动管理功能](userinfo_provider.html)：
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your_app_key");
+options.setEnableUserInfo(true);
+
+// 使用 options 初始化 SDK。
+EMClient.getInstance().init(context, options);
+```
+
+`EMOptions#setEnableUserInfo` 默认为 `false`。未开启时，仍可调用服务端用户属性接口，但存在以下限制：
+
+- SDK 不会自动同步消息发送方最新的群成员名片和用户属性；
+- 从服务端获取的用户属性不会写入本地缓存；
+- `EMUserInfoManager#getUserInfoWithUserId` 和 `getUserInfoWithUserIds` 无法从本地读取相应数据；
+- `EMMessage#getSenderInfo()` 返回 `null`；
+- 登录成功后，SDK 不会自动同步当前用户信息。
+
 ## 设置当前用户的属性
 
 ### 设置当前用户的所有属性
@@ -241,16 +262,20 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 
 ## 监听用户属性变更
 
-好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `EMUserInfoManagerListener#onUserInfoUpdate` 事件：
+Android SDK 通过 `EMUserInfoManagerListener` 提供以下用户属性事件：
+- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新后触发。
+- `onUserInfoUpdate`：其他用户的属性更新并写入本地数据后触发。
 
-1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
+其他用户的属性更新可能由以下场景触发：
+
+1. **主动拉取更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
 2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
 **特殊说明**
 
 - **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
-- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
+- **好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
 
 通过 `addUserInfoManagerListener` 注册监听器，不再需要监听时通过 `removeUserInfoManagerListener` 移除：
 

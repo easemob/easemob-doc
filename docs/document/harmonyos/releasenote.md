@@ -1,5 +1,45 @@
 # HarmonyOS IM SDK 更新日志
 
+## v1.14.1 Dev 2026-9-4（开发版）
+
+1. 修复退出登录或切换账号后，未完成的群组或聊天室 REST 请求仍根据返回结果更新本地状态的问题。
+2. 修复鸿蒙平台将非 Token 过期导致的 HTTP 401 错误误判为 Token 过期，并触发相应回调的问题。
+
+## v1.14.0 Dev 2026-8-26（开发版）
+
+#### 新增特性
+
+- 支持图片消息分层资源管理及相关处理逻辑优化：
+  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 支持登录后自动同步好友列表：
+  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
+  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。 
+- 支持消息附件下载进度回调及 Promise 结果： `ChatManager` 的 `downloadAttachment` 和 `downloadThumbnail` 方法改为返回 `Promise<void>`，并支持可选的 `onProgress` 进度回调。
+- 支持配置数据同步第二通道的 WebSocket 服务器地址和端口。
+- 增强 `ChatOptions` 配置能力：
+  - 支持配置是否启用 DNS 配置：新增 `setEnableDnsConfig` 和 `getEnableDnsConfig` 方法。
+  - 支持配置是否将导入的消息视为已读：新增 `setRegardImportedMsgAsRead` 和 `regardImportedMsgAsRead` 方法。
+   
+#### 优化
+
+获取 DNS 失败时的错误码由 `305` 调整为 `304`。
+
+#### 修复
+
+1. 修复 `checkDns` 递归调用可能导致死锁的问题。
+2. 修复离线消息同步过程中并发访问同步队列可能导致崩溃的问题。
+3. 修复离线消息同步完成回调在持有同步队列锁时触发，可能导致锁等待和卡顿的问题。
+
+#### 注意
+
+升级至 1.14.0 版本后，如果使用私有云服务，需要主动调用 `ChatOptions#setEnableDnsConfig(false)`，关闭 SDK 的 DNS 地址配置。
+
+此前该配置由 SDK 内部自动处理；从 1.14.0 版本开始改为由用户显式设置，以与其他平台保持一致。
+
 ## v1.13.0 Dev 2026-6-24（开发版）
 
 #### 新增特性
