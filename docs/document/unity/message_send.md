@@ -105,7 +105,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 //`localPath` 为图片本地资源路径。
 //`displayName` 为图片显示名称。
 //`fileSize` 为用户上传的图片文件大小，单位为字节。
-//`original` 默认为 `false` 即发送压缩后的图片（默认超过 100 KB 的图片会被压缩），如需发送原图则该参数传 `true`。
+//`original` 默认为 `false` 即发送压缩后的图片，如需发送原图则该参数传 `true`。
 //`width` 为缩略图的宽度，`height` 为缩略图高度，单位为像素。
 Message msg = Message.CreateImageSendMessage(toChatUsername,localPath, displayName, fileSize, original, width , height);
 

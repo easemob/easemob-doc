@@ -70,14 +70,14 @@ EMClient.getInstance.chatManager.sendMessage(voiceMsg);
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
 - 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
-- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+- 缩略图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 发送图片消息的流程如下：
 
 1. 获取当前平台原生层可访问的图片本地路径。
 2. 调用 `ChatMessage.createImageSendMessage` 创建图片消息。
 
-   创建消息时，需要传入目标会话 ID 和图片的 `filePath`。通过 `sendOriginalImage` 设置是否发送原图：`true` 表示上传原图；`false` 为默认值，图片超过 100 KB 时，底层 SDK 会压缩后上传。群聊或聊天室消息还需通过 `chatType` 指定对应的会话类型。
+   创建消息时，需要传入目标会话 ID 和图片的 `filePath`。通过 `sendOriginalImage` 设置是否发送原图：`true` 表示上传原图；`false` 为默认值，SDK 会压缩后上传大图。群聊或聊天室消息还需通过 `chatType` 指定对应的会话类型。
 
 3. 调用 `ChatManager.sendMessage` 发送消息。
 
@@ -120,7 +120,7 @@ try {
 | :--- | :--- | :---: | :--- |
 | `targetId` | `String` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
 | `filePath` | `String` | 必填 | 图片的本地路径。应确保 Android 或 iOS 原生层可以访问该路径。 |
-| `sendOriginalImage` | `bool` | 可选 | 是否发送原图，默认值为 `false`。`true` 表示上传原图；`false` 表示允许底层 SDK 在图片超过 100 KB 时压缩后上传。 |
+| `sendOriginalImage` | `bool` | 可选 | 是否发送原图，默认值为 `false`。`true` 表示上传原图；`false` 表示 SDK 压缩后上传大图。 |
 | `chatType` | `ChatType` | 可选 | 会话类型，默认值为 `ChatType.Chat`。群聊和聊天室分别设置为 `ChatType.GroupChat` 和 `ChatType.ChatRoom`。 |
 | `displayName` | `String?` | 可选 | 图片的显示名称，强烈建议传入。 |
 

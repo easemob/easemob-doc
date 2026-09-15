@@ -102,7 +102,7 @@ Future<void> updateMyGroupNamecard() async {
 
 ## 从服务端获取群成员名片
 
-调用 `ChatGroupManager#fetchGroupMembersInfo` 从服务端分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前将 `ChatOptions#enableUserInfo` 设置为 `true`，开启 [用户信息自动管理功能](userinfo_provider.html)；否则返回的 `GroupMemberInfo` 可能不包含 `namecard`、`nickname` 和 `avatarUrl`。
+调用 `ChatGroupManager#fetchGroupMembersInfo` 从服务端分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前将 `ChatOptions#enableUserInfo` 设置为 `true`，开启 [用户信息自动管理功能](userinfo_provider.html)；否则返回的 `GroupMemberInfo` 不包含 `namecard`、`nickname` 和 `avatarUrl`。
 
 获取成功后，相关数据会自动更新至原生 SDK 的本地内存。
 
@@ -142,7 +142,7 @@ Future<String?> fetchGroupMemberNamecards({String? cursor}) async {
 | :--- | :--- | :---: | :--- |
 | `groupId` | String | 是 | 群组 ID。 |
 | `cursor` | String | 否 | 分页游标。首次调用传 `null` 或省略，后续传入上一次返回的 `ChatCursorResult#cursor`。 |
-| `limit` | int | 否 | 每页获取的成员数量，默认值为 `20`，有效范围为 1–50。 |
+| `limit` | int | 否 | 每页获取的成员数量，默认值为 `20`，取值范围取决于 [服务端获取群成员列表接口](/document/server-side/group_member_list_obtain.html#请求 URL)。 |
 
 `GroupMemberInfo` 的主要字段如下：
 

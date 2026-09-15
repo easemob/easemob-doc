@@ -49,8 +49,8 @@ await ChatClient.getInstance.init(options);
 | :--- | :--- | :---: | :--- |
 | `appKey` | `String` | 无 | 在环信控制台创建应用后获得的 App Key，必须传入。 |
 | `autoLogin` | `bool` | `true` | 是否开启自动登录。开启后，用户首次成功登录且未主动退出时，SDK 可在后续启动时自动登录。 |
-| `acceptInvitationAlways` | `bool` | `false` | 是否自动接受好友邀请：<br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
-| `autoAcceptGroupInvitation` | `bool` | `false` | 是否自动接受群组邀请：<br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
+| `acceptInvitationAlways` | `bool` | `false` | 是否自动接受好友邀请：<br/> - `true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
+| `autoAcceptGroupInvitation` | `bool` | `false` | 是否自动接受群组邀请：<br/> - `true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
 | `requireAck` | `bool` | `true` | 是否要求消息已读回执。 |
 | `requireDeliveryAck` | `bool` | `false` | 是否要求消息送达回执。 |
 | `deleteMessagesAsExitGroup` | `bool` | `true` | 离开群组时是否删除该群组的本地消息：<br/> -（默认）`true`: 退出群组时删除群组消息。 <br/> -  `false`: 退出群组时不删除群组消息。 |

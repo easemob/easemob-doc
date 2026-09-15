@@ -25,6 +25,14 @@ export const STT_SIDEBAR = [
             text: "小程序",
             link: "/value-added/stt/voice_to_text_applet.html",
           },
+          {
+            text: "flutter",
+            link: "/value-added/stt/voice_to_text_flutter.html",
+          },
+          {
+            text: "React Native",
+            link: "/value-added/stt/voice_to_text_rn.html",
+          },
         ],
       }
     ]    

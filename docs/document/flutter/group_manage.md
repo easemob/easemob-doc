@@ -183,7 +183,7 @@ try {
 
 ### 获取群成员列表
 
-群成员可以调用 `EMGroupManager#fetchMemberListFromServer` 方法从服务器分页获取群成员列表。
+群成员可以调用 `ChatGroupManager#fetchGroupMembersInfo` 从服务器分页获取群成员的详细信息。
 
 - 自 SDK 4.22.0 开始，获取群成员列表时除了成员的用户 ID、成员角色和加入群组的时间等字段，还包括 [群成员名片](group_namecard.html)。
 
@@ -194,14 +194,18 @@ try {
     groupId: groupId,
     cursor: cursor,
     // 每页期望返回的群成员数量，默认值为 20；
-    // 上限取决于服务端配置。
+    // 上限取决于服务端配置。详见：https://doc.easemob.com/document/server-side/group_member_list_obtain.html
     limit: limit,
   );
 
   for (final GroupMemberInfo member in result.data) {
     debugPrint(
       'userId=${member.userId}, '
-      'namecard=${member.namecard}',
+      'role=${member.role}, '
+      'joinedTs=${member.joinedTs}, '
+      'namecard=${member.namecard}, '
+      'nickname=${member.nickname}, '
+      'avatarUrl=${member.avatarUrl}',
     );
   }
 
@@ -217,14 +221,14 @@ try {
 
 该接口返回 `ChatCursorResult<GroupMemberInfo>`，每个 `GroupMemberInfo` 包含如下字段：
 
-| 字段        | 类型                      | 说明             |
-| ----------- | ------------------------- | ---------------- |
-| `userId`    | String                 | 群成员用户 ID    |
-| `joinedTs`  | int                     | 加入群组的时间戳 |
-| `role`      | `ChatGroupPermissionType` | 群成员角色       |
-| `namecard`  | String                 | 群成员名片       |
-| `nickname`  | String                 | 群成员昵称       |
-| `avatarUrl` | String                 | 群成员头像地址   |
+| 字段        | 类型                      | 说明                                    |
+| ----------- | ------------------------- | --------------------------------------- |
+| `userId`    | String                  | 群成员的用户 ID。                       |
+| `joinedTs`  | int                     | 群成员加入群组的时间戳。                |
+| `role`      | `ChatGroupPermissionType` | 群成员角色。                            |
+| `namecard`  | String                 | 群成员名片；未设置时为 `null`。         |
+| `nickname`  | String                 | 群成员昵称；无相关数据时为 `null`。     |
+| `avatarUrl` | String                 | 群成员头像地址；无相关数据时为 `null`。 |
 
 - 自 SDK 4.15.0 开始，获取群成员列表时除了成员的用户 ID，还包括成员角色和加入群组的时间。
   

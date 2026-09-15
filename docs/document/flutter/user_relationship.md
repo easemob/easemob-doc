@@ -285,7 +285,7 @@ Future<String?> fetchContactsByPage({String? cursor}) async {
   try {
     final ChatCursorResult<ChatContact> result =
         await ChatClient.getInstance.contactManager.fetchContacts(
-      // 首次调用可传 `null` 或省略    
+      // 首次调用可传 `null` 或省略
       cursor: cursor,
       // 默认值为 `20`，取值范围为 1–50。
       pageSize: 20,
@@ -413,7 +413,7 @@ Future<void> getAllLocalContactIds() async {
 
 ### 添加用户到黑名单
 
-若需屏蔽某个用户的消息，可调用 `ChatContactManager#ddUserToBlockList` 将其加入黑名单。该操作适用于任何用户，无论是否为好友。被加入黑名单后，该用户将无法向你发送消息或好友申请；若该用户是好友，其好友关系仍会保留在好友列表中。
+若需屏蔽某个用户的消息，可调用 `ChatContactManager#addUserToBlockList` 将其加入黑名单。该操作适用于任何用户，无论是否为好友。被加入黑名单后，该用户将无法向你发送消息或好友申请；若该用户是好友，其好友关系仍会保留在好友列表中。
 
 ```dart
 Future<void> addUserToBlockList(String userId) async {
