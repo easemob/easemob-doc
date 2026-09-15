@@ -47,10 +47,12 @@ ChatClient.getInstance().groupManager.addGroupListener(
   groupNamecardListener
 );
 
-// 不再需要监听时，移除同一个监听器对象。
-ChatClient.getInstance().groupManager.removeGroupListener(
-  groupNamecardListener
-);
+// 在页面或组件卸载时调用，移除同一个监听器对象。
+function removeGroupNamecardListener(): void {
+  ChatClient.getInstance().groupManager.removeGroupListener(
+    groupNamecardListener
+  );
+}
 ```
 
 ## 设置群成员名片
@@ -131,7 +133,7 @@ try {
 
 ```typescript
 const options = ChatOptions.withAppKey({
-  appKey: 'your_appkey',
+  appKey: 'your-org#your-app',
   enableUserInfo: true,
 });
 
@@ -211,4 +213,3 @@ ChatClient.getInstance().chatManager.addMessageListener({
 | [`onUserGroupNamecardChanged`](#监听群成员名片更新) | `ChatGroupEventListener` | 群成员名片发生变化并同步到本地时触发。 |
 | [`withAppKey`](#通过消息自动同步群成员名片) | `ChatOptions` | 使用 App Key 创建 SDK 初始化配置。也可根据业务配置使用 `withAppId`。 |
 | [`init`](#通过消息自动同步群成员名片) | `ChatClient` | 使用指定配置初始化 SDK。 |
-

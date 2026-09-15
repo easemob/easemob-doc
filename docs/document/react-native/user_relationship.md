@@ -70,8 +70,10 @@ const contactListener: ChatContactEventListener = {
 const contactManager = ChatClient.getInstance().contactManager;
 contactManager.addContactListener(contactListener);
 
-// 不再需要监听时，移除同一个监听器对象。
-contactManager.removeContactListener(contactListener);
+// 在页面或组件卸载时调用，移除同一个监听器对象。
+function removeContactListener(): void {
+  contactManager.removeContactListener(contactListener);
+}
 ```
 
 ### 添加好友
@@ -436,4 +438,3 @@ try {
 | [`onContactSyncStart`](#登录后自动同步好友列表) | `ChatContactEventListener` | `void` | 好友数据同步开始回调。 |
 | [`onContactSyncFinish`](#登录后自动同步好友列表) | `ChatContactEventListener` | `void` | 好友数据同步完成回调；`error` 为 `undefined` 表示成功。 |
 | [`onContactInfoUpdate`](#监听好友关系和好友信息变更) | `ChatContactEventListener` | `void` | 好友信息变更回调。 |
-

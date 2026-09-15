@@ -14,9 +14,9 @@
   - 优化 [图片](message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](message_receive.html#接收视频消息)。
 - 支持 [群成员名片管理功能](group_namecard.html)。
 - 支持好友列表自动同步：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
-  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+  - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
+  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](user_relationship.html#主动从服务器获取好友列表) 和 [本地](user_relationship.html#从本地读取好友列表) 获取好友列表时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
 - 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
 - 支持 [用户信息自动管理功能](userinfo_provider.html)。
 用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
@@ -26,7 +26,7 @@
 #### 优化
 
 - **统一可选参数语义**：对齐 TypeScript 消息工厂方法与消息体构造函数的可选参数处理，使文件、图片、视频、语音和位置消息与原生 SDK 行为保持一致。
-- **修正字段类型**：将 `ChatPresence.lastTime`、`ChatPresence.expiryTime`、`ChatRoom.memberCount` 和 `ChatRoom.maxUsers` 的类型由 String 调整为 Number。
+- **修正字段类型**：将 `ChatPresence.lastTime`、`ChatPresence.expiryTime`、`ChatRoom.memberCount` 和 `ChatRoom.maxUsers` 的类型由 `string` 调整为 `number`。
 - **更新 Android 原生 wrapper**：改用 SDK 异步接口，并补充 `deleteContact.keepConversation` 和 `addMembers.welcome` 在 Android 平台的参数限制说明。
 - **升级 Yarn 版本**：由 3.6.1 升级至 4.14.1。
 
@@ -296,9 +296,9 @@
   - `iOS` 升级至 4.2.0
   - `Android` 升级至 4.2.1
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
-- 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#主动从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地读取好友列表)。
+- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地读取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatMessage.isBroadcast` 属性用于判断通该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 - 新增 `ChatGroupManager.fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
 - [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。

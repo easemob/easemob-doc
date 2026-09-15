@@ -23,15 +23,13 @@ React Native SDK 通过 `ChatUserInfoManager` 管理用户属性，并使用 `Ch
 
 ## 设置当前用户的属性
 
-### 设置当前用户的属性
-
 调用 `ChatUserInfoManager#updateOwnUserInfo(params)` 设置或更新当前登录用户的一个或多个属性。
 
 ```typescript
 try {
   await ChatClient.getInstance().userManager.updateOwnUserInfo({
     nickName: 'easemob',
-    avatarUrl: 'https://www.easemob.com/avatar.png',
+    avatarUrl: '<avatar_url>',
     birth: '2000.10.10',
     sign: 'hello world',
     phone: '13333333333',
@@ -49,14 +47,14 @@ try {
 
 | 字段        | 类型   | 描述                                                                                              |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
-| `nickname`  | String | 用户昵称。长度不超过 64 字符。                                                                    |
-| `avatarurl` | String | 用户头像 URL。长度不超过 256 字符。                                                               |
-| `phone`     | String | 用户联系方式。长度不超过 32 字符。                                                                |
-| `mail`      | String | 用户邮箱。长度不超过 64 字符。                                                                    |
-| `gender`    | Int    | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 其他值无效。       |
-| `sign`      | String | 用户签名。长度不超过 256 字符。                                                                   |
-| `birth`     | String | 用户生日。长度不超过 64 字符。                                                                    |
-| `ext`       | String | 扩展字段。                                                                                        |
+| `nickname`  | `string` | 用户昵称。长度不超过 64 字符。                                                                    |
+| `avatarurl` | `string` | 用户头像 URL。长度不超过 256 字符。                                                               |
+| `phone`     | `string` | 用户联系方式。长度不超过 32 字符。                                                                |
+| `mail`      | `string` | 用户邮箱。长度不超过 64 字符。                                                                    |
+| `gender`    | `number` | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 其他值无效。       |
+| `sign`      | `string` | 用户签名。长度不超过 256 字符。                                                                   |
+| `birth`     | `string` | 用户生日。长度不超过 64 字符。                                                                    |
+| `ext`       | `string` | 扩展字段。                                                                                        |
 
 ## 获取用户属性
 
@@ -87,8 +85,6 @@ try {
 开启 [用户信息自动管理功能](userinfo_provider.html) 后，如果服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据，并通过 `ChatUserInfoEventListener#onUserInfoUpdate` 通知 React Native 业务层。
 
 ```typescript
-import type { ChatUserInfo } from 'react-native-chat-sdk';
-
 const userIds = ['userId1', 'userId2'];
 
 try {
@@ -114,8 +110,6 @@ try {
 ```
 
 ### 从服务端获取用户的指定属性
-
-// TODO：这一节有必要吗？
 
 若业务只使用昵称、头像等部分字段，应调用 `fetchUserInfoById` 获取完整的 `ChatUserInfo`，再在应用侧读取所需字段：
 
@@ -238,7 +232,7 @@ React Native SDK 通过 `ChatUserInfoEventListener` 提供以下用户属性事�
 
 其他用户的属性更新可能由以下场景触发：
 
-1. **主动拉取更新**：调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时时，如果服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
+1. **主动拉取更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，若服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
 2. **消息携带更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户的属性并触发 `onUserInfoUpdate`。该机制对好友和非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：已订阅的非好友用户属性发生变化时，SDK 会触发 `onUserInfoUpdate`。
 
@@ -268,8 +262,10 @@ const userInfoListener: ChatUserInfoEventListener = {
 const userManager = ChatClient.getInstance().userManager;
 userManager.addUserInfoListener(userInfoListener);
 
-// 不再需要监听时，移除同一个监听器对象。
-userManager.removeUserInfoListener(userInfoListener);
+// 在页面或组件卸载时调用，移除同一个监听器对象。
+function removeUserInfoListener(): void {
+  userManager.removeUserInfoListener(userInfoListener);
+}
 ```
 
 如需移除所有用户属性监听器，可调用 `ChatUserInfoManager#removeAllUserInfoListener()`。
@@ -327,7 +323,7 @@ const message = ChatMessage.createCustomMessage(
     params: {
       userId: 'userId',
       nickname: 'nickname',
-      avatarUrl: 'https://www.easemob.com/avatar.png',
+      avatarUrl: '<avatar_url>',
     },
   }
 );
@@ -350,7 +346,7 @@ try {
 
 | API 名称 | 所属模块/类 | 返回类型 | 说明 |
 | :--- | :--- | :--- | :--- |
-| [`updateOwnUserInfo`](#设置当前用户的多个或全部属性) | `ChatUserInfoManager` | `Promise<void>` | 设置或更新当前登录用户的一个或多个属性。 |
+| [`updateOwnUserInfo`](#设置当前用户的属性) | `ChatUserInfoManager` | `Promise<void>` | 设置或更新当前登录用户的一个或多个属性。 |
 | [`fetchOwnInfo`](#从服务端获取当前用户的属性) | `ChatUserInfoManager` | `Promise<ChatUserInfo \| undefined>` | 从服务端获取当前登录用户的属性。 |
 | [`fetchUserInfoById`](#从服务端获取用户的所有属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从服务端获取一个或多个用户的全部属性。 |
 | [`getLocalUserInfoByIds`](#从本地读取用户属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从本地读取一个或多个用户的属性，不发起网络请求。 |

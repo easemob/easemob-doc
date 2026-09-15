@@ -16,7 +16,7 @@
 
 在通过消息获取发送方信息的过程中，SDK 会自动完成用户信息同步、本地缓存更新及事件通知，处理流程详见原生平台文档：
 - [Android 处理流程](/document/android/userinfo_provider.html#技术原理)
-- [iOS 处理流程](/document/android/userinfo_provider.html#技术原理)
+- [iOS 处理流程](/document/ios/userinfo_provider.html#技术原理)
 
 ## 前提条件
 
@@ -32,7 +32,7 @@
 
 ```typescript
 const options = ChatOptions.withAppKey({
-  appKey: 'your_appkey',
+  appKey: 'your-org#your-app',
   enableUserInfo: true,
 });
 
@@ -57,12 +57,6 @@ SDK 提供 `ChatUserInfoEventListener`，用于监听用户属性更新事件，
 **建议在 SDK 初始化成功后、登录前完成监听注册，以便及时接收登录后的初始同步、消息触发或主动拉取产生的事件。** 不再需要监听时，应移除同一个监听器对象。关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```typescript
-import { ChatClient } from 'react-native-chat-sdk';
-import type {
-  ChatUserInfo,
-  ChatUserInfoEventListener,
-} from 'react-native-chat-sdk';
-
 const userInfoListener: ChatUserInfoEventListener = {
   onSelfUserInfoUpdate(userInfo: ChatUserInfo) {
     console.log('当前登录用户属性更新：', {
@@ -86,8 +80,10 @@ const userInfoListener: ChatUserInfoEventListener = {
 const userManager = ChatClient.getInstance().userManager;
 userManager.addUserInfoListener(userInfoListener);
 
-// 不再需要监听时，移除同一个监听器对象。
-userManager.removeUserInfoListener(userInfoListener);
+// 在页面或组件卸载时调用，移除同一个监听器对象。
+function removeUserInfoListener(): void {
+  userManager.removeUserInfoListener(userInfoListener);
+}
 ```
 
 如需一次移除所有用户信息监听器，可调用 `ChatUserInfoManager#removeAllUserInfoListener()`。
@@ -147,9 +143,6 @@ ChatClient.getInstance().chatManager.removeMessageListener(messageListener);
 ## 从本地读取用户属性
 
 如需直接从原生 SDK 的本地数据中读取一个或多个用户的属性，可调用 `ChatUserInfoManager#getLocalUserInfoByIds(userIds)`。该方法不会发起网络请求，返回类型为 `Promise<Map<string, ChatUserInfo>>`，Map 的键为用户 ID，值为对应的 `ChatUserInfo`。若本地不存在某个用户的属性，返回的 Map 中不会包含该用户。
-
-// TODO：需要添加吗？
-React Native SDK 不提供 Android 平台的单用户本地读取方法。读取单个用户时，向 `getLocalUserInfoByIds` 传入只包含一个用户 ID 的数组，再通过 `Map#get` 读取结果即可。
 
 ```typescript
 try {
@@ -223,7 +216,7 @@ try {
 ### 用户属性与用户信息
 
 - 用户信息：指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
-- 用户属性：指用户可设置和管理的资料字段，例如昵称、头像、邮箱、电话号码、性别、签名、生日和扩展字段。React Native SDK 使用 `ChatUserInfo` 表示用户属性，其中 `userId` 为 `String`，其余属性均为可选字段。你可以调用 `ChatUserInfoManager#updateOwnUserInfo` 更新当前登录用户的属性。开启用户信息自动管理后，更新后的信息会在后续发送消息时自动参与同步。详见 [管理用户属性](userprofile.html)。
+- 用户属性：指用户可设置和管理的资料字段，例如昵称、头像、邮箱、电话号码、性别、签名、生日和扩展字段。React Native SDK 使用 `ChatUserInfo` 表示用户属性，其中 `userId` 为 `string`，其余属性均为可选字段。你可以调用 `ChatUserInfoManager#updateOwnUserInfo` 更新当前登录用户的属性。开启用户信息自动管理后，更新后的信息会在后续发送消息时自动参与同步。详见 [管理用户属性](userprofile.html)。
 
 ### 通过消息同步的发送方信息
 
@@ -243,4 +236,4 @@ try {
 | [`onUserInfoUpdate`](#监听用户属性更新) | `ChatUserInfoEventListener` | `(userInfos: ChatUserInfo[]) => void` | 其他用户的属性更新回调。 |
 | [`senderInfo`](#通过消息获取发送方信息) | `ChatMessage` | `ChatMessageSenderInfo \| undefined` | 当前本地可用的消息发送方展示信息。 |
 | [`getLocalUserInfoByIds`](#从本地读取用户属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从本地读取一个或多个用户的属性，不发起网络请求。 |
-| [`fetchUserInfoById`](#从本地读取用户属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从服务端获取一个或多个用户的属性。 |
+| [`fetchUserInfoById`](userprofile.html#从服务端获取用户的所有属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从服务端获取一个或多个用户的属性。 |

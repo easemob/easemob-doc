@@ -101,11 +101,11 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 ### 发送图片消息
 
-自 React Native SDK 1.18.0 版本开始，图片消息支持以下三类图片资源：
+图片消息包含以下三类图片资源，其中大图资源自 React Native SDK 1.18.0 版本开始支持：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
 - 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
-- 缩略图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+- 缩略图：默认由服务器根据上传的图片附件生成。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 #### 发送流程
 
@@ -127,7 +127,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 ```typescript
 // 图片选择完成后，将 URI 归一化为原生层可访问且不带 file:// 的本地路径。
-const imagePath = '/data/user/0/com.example/cache/image.jpg';
+const imagePath = '<local_image_path>';
 
 if (imagePath.length === 0) {
   throw new Error('图片路径不能为空');
@@ -248,8 +248,8 @@ import {
 } from 'react-native-chat-sdk';
 import type { ChatMessageStatusCallback } from 'react-native-chat-sdk';
 
-const videoPath = '/data/user/0/com.example/cache/video.mp4';
-const thumbnailPath = '/data/user/0/com.example/cache/video_thumb.jpg';
+const videoPath = '<local_video_path>';
+const thumbnailPath = '<local_thumbnail_path>';
 
 if (videoPath.length === 0) {
   throw new Error('视频路径不能为空');
@@ -295,15 +295,15 @@ try {
 
 | 参数 | 类型 | 必填/可选 | 说明 |
 | :--- | :--- | :---: | :--- |
-| `targetId` | String | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
-| `filePath` | String | 必填 | 视频的本地文件路径。应确保 Android 或 iOS 原生层可以访问，建议不带 `file://` 前缀。 |
+| `targetId` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 视频的本地文件路径。应确保 Android 或 iOS 原生层可以访问，建议不带 `file://` 前缀。 |
 | `chatType` | `ChatMessageChatType` | 可选 | 会话类型，默认值为 `ChatMessageChatType.PeerChat`。群聊和聊天室分别使用 `GroupChat` 和 `ChatRoom`。 |
-| `displayName` | String | 可选 | 视频附件的显示名称，建议包含文件扩展名。 |
-| `thumbnailLocalPath` | String | 可选 | 视频缩略图的本地路径。为保证跨平台展示一致，建议传入应用生成的缩略图路径。 |
-| `duration` | Number | 可选 | 视频时长，单位为秒；未传入时消息体中的默认值为 `0`。业务展示视频时建议传入准确值。 |
-| `width` | Number | 可选 | 视频缩略图宽度，单位为像素；未传入时消息体中的默认值为 `0`。 |
-| `height` | Number | 可选 | 视频缩略图高度，单位为像素；未传入时消息体中的默认值为 `0`。 |
-| `fileSize` | Number | 可选 | 视频文件大小，单位为字节。 |
+| `displayName` | `string` | 可选 | 视频附件的显示名称，建议包含文件扩展名。 |
+| `thumbnailLocalPath` | `string` | 可选 | 视频缩略图的本地路径。为保证跨平台展示一致，建议传入应用生成的缩略图路径。 |
+| `duration` | `number` | 可选 | 视频时长，单位为秒；未传入时消息体中的默认值为 `0`。业务展示视频时建议传入准确值。 |
+| `width` | `number` | 可选 | 视频缩略图宽度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `height` | `number` | 可选 | 视频缩略图高度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `fileSize` | `number` | 可选 | 视频文件大小，单位为字节。 |
 
 ### 发送文件消息
 

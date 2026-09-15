@@ -52,11 +52,11 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 
 ### 接收图片消息
 
-自 React Native SDK 1.18.0 版本开始，图片消息支持以下三类图片资源：
+图片消息包含以下三类图片资源，其中大图资源自 React Native SDK 1.18.0 版本开始支持：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
 - 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
-- 缩略图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+- 缩略图：默认由服务器根据上传的图片附件生成。默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
 
@@ -67,12 +67,11 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 ```typescript
 const autoDownloadThumbnail = false;
 
-ChatClient.getInstance().init(
-  new ChatOptions({
-    appKey,
-    isAutoDownload: autoDownloadThumbnail,
-  })
-);
+const options = ChatOptions.withAppKey({
+  appKey,
+  isAutoDownload: autoDownloadThumbnail,
+});
+await ChatClient.getInstance().init(options);
 ```
 
 2. SDK 通过 `onMessagesReceived` 回调传递图片消息。接收方可根据业务需要调用以下方法下载图片资源：
@@ -166,7 +165,7 @@ ChatClient.getInstance().chatManager.addMessageListener(
 `downloadThumbnail`、`downloadBigImage` 和 `downloadAttachment` 返回的 `Promise<void>` 用于报告方法调用错误。附件下载进度和最终结果通过 `ChatMessageStatusCallback` 返回；下载成功后，应从 `onSuccess` 参数 `updatedMessage` 的消息体中读取最新本地路径。
 :::
 
-1. 你可以通过 `ChatImageMessageBody` 获取图片附件、大图和缩略图的服务端地址或本地路径：
+3. 你可以通过 `ChatImageMessageBody` 获取图片附件、大图和缩略图的服务端地址或本地路径：
 
 ```typescript
 if (message.body.type === ChatMessageType.IMAGE) {
@@ -192,9 +191,9 @@ if (message.body.type === ChatMessageType.IMAGE) {
 | 属性                     | 类型                             | 描述                           |
 | ------------------------ | -------------------------------- | ------------------------------ |
 | `fileStatus`             | `ChatDownloadStatus`             | 图片附件的下载状态。           |
-| `bigImageDownloadStatus` | `ChatDownloadStatus | undefined` | 大图的下载状态。               |
+| `bigImageDownloadStatus` | `ChatDownloadStatus \| undefined` | 大图的下载状态。               |
 | `thumbnailStatus`        | `ChatDownloadStatus`             | 缩略图的下载状态。             |
-| `isOriginalImage`        | `boolean | undefined`            | 图片附件是否为未经压缩的原图。 |
+| `isOriginalImage`        | `boolean \| undefined`            | 图片附件是否为未经压缩的原图。 |
 | `width`                  | `number`                         | 图片宽度，单位为像素。         |
 | `height`                 | `number`                         | 图片高度，单位为像素。         |
 
@@ -208,7 +207,7 @@ if (message.body.type === ChatMessageType.IMAGE) {
 
 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 事件。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessagesReceived` 事件。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值为 `true`，则为 GIF 图片消息。
 
 ```typescript
 ChatClient.getInstance().chatManager.addMessageListener({

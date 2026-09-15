@@ -14,15 +14,15 @@
 
 ## 初始化 SDK
 
-初始化时，你需要通过 `ChatOptions` 中封装的 `appKey` 设置你的 App Key。
+初始化时，你需要通过 `ChatOptions.withAppKey` 创建包含 App Key 的初始化配置。
 
 ```typescript
+const options = ChatOptions.withAppKey({
+  appKey,
+});
+
 ChatClient.getInstance()
-  .init(
-    new ChatOptions({
-      appKey: appKey,
-    }),
-  )
+  .init(options)
   .then(() => {
     console.log("init: success");
   })
@@ -71,7 +71,7 @@ await ChatClient.getInstance().init(options);
 
 初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
 
-```ts
+```typescript
 ChatClient.getInstance().addConnectionListener({
   // SDK 成功连接到 IM 服务器时触发。
   onConnected(): void {
@@ -98,6 +98,5 @@ ChatClient.getInstance().chatManager.addMessageListener({
 | [`init`](#初始化-sdk) | `ChatClient` | `Promise<void>` | 使用指定配置初始化 React Native SDK。 |
 | [`enableAutoSyncContacts`](#设置登录后自动同步好友数据) | `ChatOptions` | `boolean` | 登录后自动同步好友数据的初始化配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | `boolean` | 用户信息自动管理的初始化配置。 |
-| [`addContactListener`](#初始化后设置监听) | `ChatContactManager` | `void` | 添加好友关系、同步状态及好友信息监听器。 |
-| [`addMessageListener`](#初始化后设置监听) | `ChatContactManager` | `void` | 添加消息相关监听器。 |
-
+| [`addConnectionListener`](#初始化后设置监听) | `ChatClient` | `void` | 添加连接状态监听器。 |
+| [`addMessageListener`](#初始化后设置监听) | `ChatManager` | `void` | 添加消息相关监听器。 |
