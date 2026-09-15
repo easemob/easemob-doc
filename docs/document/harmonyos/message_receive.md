@@ -33,7 +33,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 
 附件消息的接收过程如下：
 
-1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
+1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载图片附件（原图或发送方上传的大图）、视频和文件，需调用 `downloadAttachment` 方法。
 2. 获取附件的服务器地址和本地路径。
 
 ### 接收语音消息
@@ -67,9 +67,9 @@ let voiceLocalPath = voiceBody.getLocalPath();
    - 默认自动下载，即 `ChatOptions#setAutoDownloadThumbnail(true)`。
    - 如果关闭自动下载，即设置为 `false`，则需要调用 `ChatManager#downloadThumbnail` 手动下载。
 
-2. 收到图片消息后，接收方可以在 `onMessageReceived` 回调中处理图片消息，并根据业务需要下载原图或大图：
+2. 收到图片消息后，接收方可以在 `onMessageReceived` 回调中处理图片消息，并根据业务需要下载图片附件或大图：
 
-   - 调用 `ChatManager#downloadAttachment` 下载原图或原始图片资源。
+   - 调用 `ChatManager#downloadAttachment` 下载图片附件。该附件可能是原图，也可能是发送方上传的大图。
    - 调用 `ChatManager#downloadBigImage` 下载大图。
 
    `downloadThumbnail`、`downloadAttachment` 和 `downloadBigImage` 均返回 `Promise<void>`，并支持可选的下载进度回调。如果本地已存在对应资源路径，建议优先复用本地文件，避免重复下载。
@@ -78,10 +78,10 @@ let voiceLocalPath = voiceBody.getLocalPath();
 
 ```typescript
 /**
- * 下载图片的大图或原图。
- * @param useBigImage true：下载大图；false：下载原图。
+ * 下载图片的大图或图片附件。
+ * @param useBigImage true：下载大图；false：下载图片附件（原图或发送方上传的大图）。
  */
-private downloadImage(message: ChatMessage, useBigImage: boolean): void {
+function downloadImage(message: ChatMessage, useBigImage: boolean): void {
   let chatManager = ChatClient.getInstance().chatManager();
   if (!chatManager) {
     return;
@@ -93,7 +93,7 @@ private downloadImage(message: ChatMessage, useBigImage: boolean): void {
     });
   } else {
     downloadTask = chatManager.downloadAttachment(message, (progress: number): void => {
-      // 原图下载进度
+      // 图片附件下载进度
     });
   }
   downloadTask.then(() => {
@@ -108,7 +108,7 @@ let msgListener: ChatMessageListener = {
     messages.forEach((message: ChatMessage): void => {
       if (message.getType() === ContentType.IMAGE) {
         // 优先使用已下载的缩略图展示；用户点击图片时再调用
-        // downloadImage(message, true) 下载大图，或 downloadImage(message, false) 下载原图。
+        // downloadImage(message, true) 下载大图，或 downloadImage(message, false) 下载图片附件。
       }
     });
   }
@@ -158,7 +158,7 @@ let thumbnailLocalPath = imgBody.getThumbnailLocalPath();
 
 GIF 图片缩略图的下载与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
-与普通消息相同，接收 GIF 图片消息时，接收方会收到 [onMessageReceived](#接收文本消息) 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
+与普通消息相同，接收 GIF 图片消息时，接收方会收到 [onMessageReceived](#接收文本消息) 回调方法。接收方判断为图片消息后，调用消息体的 `isGif()` 方法；若返回 `true`，则为 GIF 图片消息。
 
 ```typescript
 ChatClient.getInstance().chatManager()?.addMessageListener({
@@ -198,7 +198,7 @@ ChatClient.getInstance().chatManager()?.addMessageListener({
 /**
  * 下载视频原文件。
  */
-private downloadVideo(message: ChatMessage): void {
+function downloadVideo(message: ChatMessage): void {
   let chatManager = ChatClient.getInstance().chatManager();
   if (!chatManager) {
     return;
@@ -245,21 +245,18 @@ let videoThumbnailLocalPath = body.getThumbnailLocalPath();
 /**
  * 下载文件。
  */
-private downloadFile(message: ChatMessage) {
-    let callback: ChatCallback = {
-        onSuccess: (): void => {
-            // 附件下载成功
-        },
-        onError: (code: number, error: string): void => {
-            // 附件下载失败
-        },
-        onProgress: (progress: number): void => {
-            // 附件下载进度
-        }
-    }
-    message.setMessageStatusCallback(callback);
-    // 下载附件
-    ChatClient.getInstance().chatManager()?.downloadAttachment(message);
+function downloadFile(message: ChatMessage): void {
+  let chatManager = ChatClient.getInstance().chatManager();
+  if (!chatManager) {
+    return;
+  }
+  chatManager.downloadAttachment(message, (progress: number): void => {
+    // 附件下载进度
+  }).then(() => {
+    // 附件下载成功
+  }).catch((error: ChatError) => {
+    // 附件下载失败
+  });
 }
 ```
 

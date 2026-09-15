@@ -15,7 +15,7 @@
 
 ## 发送文本消息
 
-1. 发送方调用 `ChatMessage#createTextSendMessage` 类构造一条消息。
+1. 发送方调用 `ChatMessage#createTextSendMessage` 方法创建一条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
@@ -44,7 +44,7 @@ let callback: ChatCallback = {
     // 发送消息失败
   },
   onProgress: (progress: number): void => {
-    // 附件消息附件的上传进度
+    // 附件上传进度
   }
 }
 message.setMessageStatusCallback(callback);
@@ -59,7 +59,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 附件消息的发送过程如下：
 
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
-2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
+2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载图片附件（原图或发送方上传的大图）、视频和文件，需调用 `downloadAttachment` 方法。
 
 消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
@@ -103,8 +103,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 创建和发送图片消息的示例代码如下所示：
 
 ```typescript
-// `imageFilePathOrUri` 为图片本地路径或者 URI。
-let message = ChatMessage.createImageSendMessage(toChatUsername, imageFilePathOrUri);
+// `filePath` 为图片的本地路径或 URI。
+let message = ChatMessage.createImageSendMessage(to, filePath);
 if (!message) {
     return;
 }
@@ -123,8 +123,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 | 参数 | 类型 | 必填/可选 | 说明 |
 | :--- | :--- | :--- | :--- |
-| `toChatUsername` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
-| `imageFilePathOrUri` | `string` | 必填 | 图片的本地路径或 URI。 |
+| `to` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 图片的本地路径或 URI。 |
 | `isGif` | `boolean` | 可选 | 是否为 GIF 图片，默认为 `false`。GIF 图片不进行压缩，始终按原图发送。 |
 | `sendOriginalImage` | `boolean` | 必填 | 通过 `ImageMessageBody#setSendOriginalImage` 设置。`true` 表示发送原图，`false` 表示发送大图。 |
 
@@ -171,11 +171,11 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 ```typescript
 // 在应用层获取视频首帧，你需要自行实现 getThumbPath 方法。
-let thumbPath = this.getThumbPath(videoFilePathOrUri);
+let thumbPath = this.getThumbPath(filePath);
 let message = ChatMessage.createVideoSendMessage(
-    toChatUsername,
-    videoFilePathOrUri,
-    videoLength,
+    to,
+    filePath,
+    duration,
     thumbPath
 );
 if (!message) {
@@ -203,10 +203,10 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 | 参数 | 类型 | 必填/可选 | 说明 |
 | :--- | :--- | :--- | :--- |
-| `toChatUsername` | String | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
-| `videoFilePathOrUri` | String | 必填 | 视频文件的本地路径或 URI。 |
-| `videoLength` | Number | 必填 | 视频时长，单位为秒。 |
-| `imageThumbPath` | String | 可选 | 视频首帧缩略图的本地路径。建议由应用层生成，用于消息展示。 |
+| `to` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 视频文件的本地路径或 URI。 |
+| `duration` | `number` | 必填 | 视频时长，单位为秒。 |
+| `imageThumbPath` | `string` | 可选 | 视频首帧缩略图的本地路径。建议由应用层生成，用于消息展示。 |
 
 ### 发送文件消息
 
@@ -448,7 +448,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 - 设置发送方收到内容审核替换后的内容
 
-默认情况下，内容审核替换后的内容仅下发至接收方。发送方如需同步接收替换内容，需 **联系环信商务开通权限**，并在初始化 SDK 时将 `EMOptions#setUseReplacedMessageContents` 参数设为 `true`。开启后，发送方将在消息被审核替换时收到新内容；若开关关闭（默认状态），则发送方仍保留原始发送内容，不会感知替换结果。
+默认情况下，内容审核替换后的内容仅下发至接收方。发送方如需同步接收替换内容，需 **联系环信商务开通权限**，并在初始化 SDK 时调用 `ChatOptions#setUseReplacedMessageContents(true)`。开启后，发送方将在消息被审核替换时收到新内容；若开关关闭（默认状态），则发送方仍保留原始发送内容，不会感知替换结果。
 
 ### 消息大小和存储限制
 

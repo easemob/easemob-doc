@@ -147,7 +147,7 @@ ChatClient.getInstance().contactManager()?.deleteContact(userId, true)
 
 调用 `ContactManager#setContactRemark(userId, remark)` 设置单个好友的备注。
 
-好友备注更新后，可通过 `Contact#remark()` 读取。
+好友备注更新后，可通过 `Contact#remark()` 读取。好友备注仅对当前用户可见，对端用户不会因该操作收到好友关系或好友信息变更回调。
 
 ```typescript
 // 好友备注长度不能超过 100 个字符；传入空字符串可清空备注。
@@ -176,9 +176,10 @@ options.setEnableAutoSyncContacts(true);
 options.setEnableUserInfo(true);
 
 // 使用 options 调用 ChatClient.init 初始化 SDK。
+ChatClient.getInstance().init(context, options);
 ```
 
-自动同步开始时触发 `ContactListener#onContactSyncStart`。同步结束时触发 `onContactSyncFinishWithError(errorCode, error)`；`errorCode === ChatError.EM_NO_ERROR` 表示同步成功，此时可以通过本地接口读取好友列表和好友信息。
+自动同步开始时触发 `ContactListener#onContactSyncStart`。同步结束时触发 `ContactListener#onContactSyncFinishWithError(errorCode, error)`；`errorCode === ChatError.EM_NO_ERROR` 表示同步成功，此时可以通过本地接口读取好友列表和好友信息。
 
 :::tip
 好友关系和好友信息的其他变化也通过 `ContactListener` 通知。关于用户属性回调，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。

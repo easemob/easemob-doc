@@ -81,7 +81,7 @@ groupManager.updateGroupNamecard('groupId', 'new_namecard')
 
 ```typescript
 // `pageSize` 的取值范围为 1-50。
-// 首次调用时可将 `cursor` 传入 `null`，后续传入上次返回的游标。
+// 首次调用时省略 `cursor` 或传入空字符串，后续传入上次返回的游标。
 let groupManager = ChatClient.getInstance().groupManager();
 if (!groupManager) {
   return;
@@ -129,18 +129,18 @@ if (groupManager) {
 
 ## 通过消息自动同步群成员名片
 
-如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要在初始化 SDK 前通过 `ChatOptions#setEnableUserInfo(true)` 需要开启 [用户信息自动管理功能](userinfo_provider.html)。
+如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。
 
 ```typescript
 const options = new ChatOptions({ appKey: 'your-org#your-app' });
 options.setEnableUserInfo(true);
 
-// 使用 options 调用 ChatClient.init 初始化 SDK。
+// 使用 options 调用 ChatClient#init 初始化 SDK。
 ChatClient.getInstance().init(context, options);
 ```
 
 :::tip
-必须在调用 `ChatClient.init` 之前调用 `ChatOptions#setEnableUserInfo(true)`，否则消息发送方信息和用户信息本地内存功能不会生效。
+必须在调用 `ChatClient#init` 之前调用 `ChatOptions#setEnableUserInfo(true)`，否则消息发送方信息和用户信息本地内存功能不会生效。
 :::
 
 用户信息自动管理功能开启后，SDK 会执行以下操作：
@@ -177,7 +177,7 @@ if (senderInfo) {
 
 #### 为何调用 `getGroupNamecard` 获取不到群成员名片？
 
-`getGroupNamecard` 只读取本地内存，不会发起网络请求。如果本地尚未内存对应成员的群成员名片，返回值可能为空。此时可先调用 `fetchGroupMemberDetails` 从服务端获取群成员信息。
+`getGroupNamecard` 只读取本地内存，不会发起网络请求。如果本地内存中尚无对应成员的群成员名片，返回值可能为空。此时可先调用 `fetchGroupMemberDetails` 从服务端获取群成员信息。
 
 #### 从服务端获取的群成员信息是否写内存？
 

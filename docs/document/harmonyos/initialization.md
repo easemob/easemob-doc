@@ -38,12 +38,12 @@ ChatClient.getInstance().init(this.context, {
 | 方法名称           | 描述            |
 | :----------------- | :---------------- |
 | `setAppKey(appKey)`                                   | 设置 App Key。<br/>`appKey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
-| `setAutoLogin(boolean autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
+| `setAutoLogin(autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setAppIDForPush(appId)`                     | 设置用于推送的 app ID。         |
 | `setAutoAcceptGroupInvitations(isAutoAcceptGroups)`                | 设置是否自动接受加群邀请。<br/>`isAutoAcceptGroups` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
 | `setAcceptInvitationAlways(isAutoAccept)`                   | 设置是否自动接受加好友邀请。 <br/>`isAutoAccept` 参数表示是否自动接受加好友邀请。 <br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
-| `isDeleteMessagesOnLeaveChatroom()`            | 设置退出(主动和被动退出)聊天室时是否删除聊天消息。<br/>返回值如下：<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
-| `isDeleteMessagesOnLeaveGroup`               | 设置退出(主动和被动退出)群组时是否删除聊天消息。<br/>返回值如下：<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
+| `setDeleteMessagesOnLeaveChatroom(isDeleteMessageOnLeaveChatroom)`            | 设置退出（主动或被动退出）聊天室时是否删除聊天消息。<br/>`isDeleteMessageOnLeaveChatroom` 的值如下：<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
+| `setDeleteMessagesOnLeaveGroup(isDeleteMessagesOnLeaveGroup)`               | 设置退出（主动或被动退出）群组时是否删除聊天消息。<br/>`isDeleteMessagesOnLeaveGroup` 的值如下：<br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
 | `allowChatroomOwnerLeave(isChatroomOwnerLeaveAllowed)`                   | 设置是否允许聊天室所有者离开并删除会话记录。`isChatroomOwnerLeaveAllowed` 的值如下：<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
 | `setEnableAutoSyncContacts(enableAutoSyncContacts)` | 设置登录成功后是否自动同步好友列表和好友信息。<br/> - `true`：自动同步。<br/> -（默认）`false`：不自动同步。必须在 `init` 前设置。 |
 | `setEnableUserInfo(enableUserInfo)` | 设置是否开启用户信息自动管理。<br/> - `true`：开启。<br/> -（默认）`false`：关闭。必须在 `init` 前设置。 |

@@ -59,16 +59,16 @@
 
 受邀用户直接进群，会收到如下回调：
 
-- 新成员会收到 `GroupChangeListener#onAutoAcceptInvitationFromGroup` 回调；
-- 邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMembersJoined` 回调；
-- 其他群成员收到 `GroupChangeListener#onMembersJoined` 回调。
+- 新成员会收到 `GroupListener#onAutoAcceptInvitationFromGroup` 回调；
+- 邀请人收到 `GroupListener#onInvitationAccepted` 回调和 `GroupListener#onMembersJoined` 回调；
+- 其他群成员收到 `GroupListener#onMembersJoined` 回调。
 
 2. 受邀用户需要确认才能进群。
 
-只有 `GroupOptions#inviteNeedConfirm` 设置为 `true` 和 `ChatOptions#setAutoAcceptGroupInvitations` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `GroupChangeListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+只有 `GroupOptions#inviteNeedConfirm` 设置为 `true` 和 `ChatOptions#setAutoAcceptGroupInvitations` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `GroupListener#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
-- 用户同意入群邀请后，邀请人收到 `GroupChangeListener#onInvitationAccepted` 回调和 `GroupChangeListener#onMembersJoined` 回调，其他群成员收到 `GroupChangeListener#onMembersJoined` 回调；
-- 用户拒绝入群邀请后，邀请人收到 `GroupChangeListener#onInvitationDeclined` 回调。
+- 用户同意入群邀请后，邀请人收到 `GroupListener#onInvitationAccepted` 回调和 `GroupListener#onMembersJoined` 回调，其他群成员收到 `GroupListener#onMembersJoined` 回调；
+- 用户拒绝入群邀请后，邀请人收到 `GroupListener#onInvitationDeclined` 回调。
 
 邀请用户入群的流程如下图所示：
 
@@ -98,7 +98,7 @@ ChatClient.getInstance().groupManager()?.createGroup(option).then(res => console
 
 ### 解散群组
 
-仅群主可以调用 `destroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `GroupChangeListener#onGroupDestroyed` 回调并被踢出群组。
+仅群主可以调用 `destroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `GroupListener#onGroupDestroyed` 回调并被踢出群组。
 
 :::tip
 该操作是危险操作，解散群组后，将删除本地数据库及内存中的群相关信息及群会话。
@@ -147,15 +147,17 @@ let isMsgBlocked: boolean = group.isMsgBlocked();
 ### 获取群成员列表
 
 - 获取群成员 ID 列表。
+
+  `pageSize` 的上限取决于服务端，详见 [获取群成员列表 REST API](/document/server-side/group_member_list_obtain.html#请求-url)。
   
 ```typescript
-// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
+// pageSize：每页期望返回的群成员数量。
 ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cursor).then((res) => {
     // success logic
 });
 ```
 
-- 获取群成员列表，该方法返回的群成员信息包括用户 ID、加入时间、角色、群名片、昵称、头像 URL。其中，群名片、昵称、头像 URL 需 SDK 1.13.0 及以上版本才支持返回。
+- 获取群成员详细信息。该方法返回用户 ID、加入时间、角色等信息；如需同时获取群名片、昵称和头像 URL，除使用 HarmonyOS SDK 1.13.0 或以上版本外，还需在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。获取成功后，返回的数据会同步到本地内存。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {
@@ -171,6 +173,11 @@ ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSi
       let joinTime = item.joinTime;
       // 群成员在群组中的角色。
       let role = item.role;
+      // 群成员在当前群组中的群名片。
+      let namecard = item.namecard;
+      // 群成员的昵称和头像 URL。
+      let nickname = item.nickname;
+      let avatarUrl = item.avatarUrl;
     })
 });
 ```
@@ -186,7 +193,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSi
 
 ### 获取群组列表
 
-用户可以调用 `getJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
+用户可以调用 `fetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。
 
 示例代码如下：
 
@@ -195,7 +202,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSi
 // pageSize：每页期望返回的群组数。取值范围为[1,20]。
 ChatClient.getInstance().groupManager()?.fetchJoinedGroupsFromServer(pageNum, pageSize).then((res) => {
     // success logic
-});;
+});
 ```
 
 - 用户可以调用 `getAllGroups` 方法加载本地群组列表。为了保证数据的正确性，需要先从服务器获取自己加入和创建的群组列表。示例代码如下：
