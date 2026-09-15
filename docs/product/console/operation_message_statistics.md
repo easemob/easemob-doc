@@ -25,7 +25,7 @@ app 离线消息数：用户离线时，服务器端的离线消息总数量。
  
 ### 总体消息趋势
 
-在**消息趋势**区域，你可以查看 app 的上行消息、下行消息、离线消息和消息分发趋势。
+在 **消息趋势** 区域，你可以查看 app 的上行消息、下行消息、离线消息和消息分发趋势。
 
 ![img](/images/console/operation_data_message_statistics_app_trend.png)
 
@@ -42,7 +42,6 @@ app 离线消息数：用户离线时，服务器端的离线消息总数量。
 - 用户进入群和聊天室通知消息
 - 用户退出群和聊天室通知消息
 
-
 ![img](/images/console/operation_data_message_statistics_app_uplink.png)
 
 ![img](/images/console/operation_data_message_statistics_app_downlink.png)
@@ -51,7 +50,7 @@ app 离线消息数：用户离线时，服务器端的离线消息总数量。
 
 ## 单聊消息统计
 
-在**消息量统计**页面，选择 **单聊** 页签，设置数据统计时间，包括 **近7天**、**当前月**或自定义时间，查看单聊会话的消息统计数据，包括单聊上行消息总数、单聊下行消息总数、单聊离线消息总数和单聊消息分发总数。各项数据的含义如下：
+在 **消息量统计** 页面，选择 **单聊** 页签，设置数据统计时间，包括 **近7天**、**当前月**或自定义时间，查看单聊会话的消息统计数据，包括单聊上行消息总数、单聊下行消息总数、单聊离线消息总数和单聊消息分发总数。各项数据的含义如下：
 
 单聊消息分发总数 = 单聊下行消息总数 + 单聊离线消息总数
 
@@ -65,13 +64,13 @@ app 离线消息数：用户离线时，服务器端的离线消息总数量。
 
 ### 总体消息趋势
 
-在**单聊消息趋势**区域，你可以查看单聊会话的上行消息、下行消息、离线消息和消息分发的总体趋势。
+在 **单聊消息趋势** 区域，你可以查看单聊会话的上行消息、下行消息、离线消息和消息分发的总体趋势。
 
 ![img](/images/console/operation_data_message_statistics_single_trend.png)
 
 ### 上行/下行/离线消息趋势
 
-在**单聊上行/下行/离线消息类型趋势**区域，你可以查看以下类型的消息的趋势：
+在 **单聊上行/下行/离线消息类型趋势** 区域，你可以查看以下类型的消息的趋势：
 
 - 文本消息
 - 图片消息
@@ -83,7 +82,7 @@ app 离线消息数：用户离线时，服务器端的离线消息总数量。
 - 自定义消息
 - 合并转发消息
 - 空消息
-- 
+  
 ![img](/images/console/operation_data_message_statistics_single_uplink.png)
 ![img](/images/console/operation_data_message_statistics_single_downlink.png)
 ![img](/images/console/operation_data_message_statistics_single_offline.png)
