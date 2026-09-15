@@ -31,6 +31,10 @@
 - 支持 [用户信息自动管理功能](userinfo_provider.html)。
 用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 
+## v4.19.3 2026-8-18
+
+修复 iOS 13.0 上 `getUnreadMessageCount` 误将聊天室未读消息计入总数的问题。
+
 ## v4.19.2 2026-6-9
 
 - Android 依赖 SDK 升级至 4.19.3.1。
