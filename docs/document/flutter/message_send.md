@@ -1,6 +1,6 @@
 # 发送消息
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+环信即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
 - 对于单聊，环信即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要 [开启好友关系检查](/product/console/basic_user.html#好友关系检查)。
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
@@ -15,14 +15,14 @@
 
 ## 发送文本消息
 
-1. 调用 `EMMessage#createTxtSendMessage` 方法构造一条消息。
-2. 调用 `EMChatManager#sendMessage` 方法发送这条消息。
+1. 调用 `ChatMessage#createTxtSendMessage` 方法构造一条消息。
+2. 调用 `ChatManager#sendMessage` 方法发送这条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
 ```dart
 // 创建一条文本消息。
-final msg = EMMessage.createTxtSendMessage(
+final msg = ChatMessage.createTxtSendMessage(
   // `targetId` 为接收方，单聊为对端用户 ID、群聊为群组 ID，聊天室为聊天室 ID。
   targetId: conversationId,
   // `content` 为消息文字内容。
@@ -32,7 +32,7 @@ final msg = EMMessage.createTxtSendMessage(
 );
 
 // 发送消息。
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ## 发送附件消息
@@ -49,11 +49,11 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。
-2. 发送方调用 `EMMessage#createVoiceSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID），语音文件的 `filePath` 和语音时长创建语音消息。
+2. 发送方调用 `ChatMessage#createVoiceSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID），语音文件的 `filePath` 和语音时长创建语音消息。
 3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将语音文件上传至环信服务器。
 
 ```dart
-final voiceMsg = EMMessage.createVoiceSendMessage(
+final voiceMsg = ChatMessage.createVoiceSendMessage(
   targetId: targetId,
   filePath: filePath,
   duration: 30,
@@ -61,7 +61,7 @@ final voiceMsg = EMMessage.createVoiceSendMessage(
   displayName: displayName,
 );
 
-EMClient.getInstance.chatManager.sendMessage(voiceMsg);
+ChatClient.getInstance.chatManager.sendMessage(voiceMsg);
 ```
 
 ### 发送图片消息
@@ -132,10 +132,10 @@ GIF 图片消息是一种特殊的图片消息，与普通图片消息不同，*
 
 图片缩略图的生成和下载与普通图片消息相同，详见 [发送图片消息](#发送图片消息)。
 
-使用 `EMMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
+使用 `ChatMessage#createImageSendMessage` 方法构造 GIF 图片消息体。
 
 ```dart
-final gifMsg = EMMessage.createImageSendMessage(
+final gifMsg = ChatMessage.createImageSendMessage(
   targetId: targetId,
   filePath: filePath,
   isGif: true,
@@ -143,18 +143,18 @@ final gifMsg = EMMessage.createImageSendMessage(
   displayName: displayName,
 );
 
-EMClient.getInstance.chatManager.sendMessage(gifMsg);
+ChatClient.getInstance.chatManager.sendMessage(gifMsg);
 ```
 
 ### 发送视频消息
 
 1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `EMChatManager#addMessageEvent` 接口。
-2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、视频文件的 `filePath`、创建视频消息。
+你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `ChatManager#addMessageEvent` 接口。
+2. 发送方调用 `ChatMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、视频文件的 `filePath`、创建视频消息。
 3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
 
 ```dart
-final videoMsg = EMMessage.createVideoSendMessage(
+final videoMsg = ChatMessage.createVideoSendMessage(
   targetId: targetId,
   filePath: filePath,
   // 视频文件的显示名称，强烈建议传入该参数。
@@ -163,41 +163,41 @@ final videoMsg = EMMessage.createVideoSendMessage(
   duration: 30,
 );
 
-EMClient.getInstance.chatManager.sendMessage(videoMsg);
+ChatClient.getInstance.chatManager.sendMessage(videoMsg);
 ```
 
 ### 发送文件消息
 
-1. 发送方调用 `EMMessage#createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的 `filePath`，创建文件消息。
+1. 发送方调用 `ChatMessage#createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的 `filePath`，创建文件消息。
 2. 发送方调用 `sendMessage` 方法发送该消息。SDK 将文件上传至环信服务器。
 
 ```dart
-final fileMsg = EMMessage.createFileSendMessage(
+final fileMsg = ChatMessage.createFileSendMessage(
   targetId: targetId,
   filePath: filePath,
   // 文件的显示名称，强烈建议传入该参数。
   displayName: displayName,
 );
 
-EMClient.getInstance.chatManager.sendMessage(fileMsg);
+ChatClient.getInstance.chatManager.sendMessage(fileMsg);
 ```
 
 ## 发送位置消息
 
-1. 发送方调用 `EMMessage#createLocationSendMessage` 方法创建位置消息。
-2. 发送方调用 `EMChatManager#sendMessage` 方法发送位置消息。
+1. 发送方调用 `ChatMessage#createLocationSendMessage` 方法创建位置消息。
+2. 发送方调用 `ChatManager#sendMessage` 方法发送位置消息。
   
 发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
 
 ```dart
-final localMsg = EMMessage.createLocationSendMessage(
+final localMsg = ChatMessage.createLocationSendMessage(
   targetId: targetId,
   latitude: 0,
   longitude: 0,
   address: 'address',
 );
 
-EMClient.getInstance.chatManager.sendMessage(localMsg);
+ChatClient.getInstance.chatManager.sendMessage(localMsg);
 ```
 
 ## 发送和接收透传消息
@@ -213,17 +213,17 @@ EMClient.getInstance.chatManager.sendMessage(localMsg);
 
 发送透传消息的过程如下：
 
-1. 发送方调用 `EMMessage#createCmdSendMessage` 方法创建和发送透传消息。
+1. 发送方调用 `ChatMessage#createCmdSendMessage` 方法创建和发送透传消息。
 2. 发送方调用 `sendMessage` 方法发送消息。
 
 ```dart
-final cmdMsg = EMMessage.createCmdSendMessage(
+final cmdMsg = ChatMessage.createCmdSendMessage(
   targetId: targetId,
   // `action` 可以自定义。
   action: action,
 );
 
-EMClient.getInstance.chatManager.sendMessage(cmdMsg);
+ChatClient.getInstance.chatManager.sendMessage(cmdMsg);
 ```
 
 ## 发送自定义类型消息
@@ -231,7 +231,7 @@ EMClient.getInstance.chatManager.sendMessage(cmdMsg);
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
 ```dart
-final customMsg = EMMessage.createCustomSendMessage(
+final customMsg = ChatMessage.createCustomSendMessage(
   targetId: targetId,
   // `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
   event: 'gift',
@@ -239,7 +239,7 @@ final customMsg = EMMessage.createCustomSendMessage(
   params: {'k': 'v'},
 );
 
-EMClient.getInstance.chatManager.sendMessage(customMsg);
+ChatClient.getInstance.chatManager.sendMessage(customMsg);
 ```
 
 ## 发送合并消息
@@ -263,7 +263,7 @@ EMClient.getInstance.chatManager.sendMessage(customMsg);
 
 :::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
-2. 不论 `EMOptions#serverTransfer` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+2. 不论 `ChatOptions#serverTransfer` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 3. 合并消息不支持搜索。
 4. 对于转发合并消息，例如，用户 A 向用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见 [转发单条消息](message_forward.html#转发单条消息)。
 :::
@@ -271,7 +271,7 @@ EMClient.getInstance.chatManager.sendMessage(customMsg);
 示例代码如下：
 
 ```dart
-final combineMsg = EMMessage.createCombineSendMessage(
+final combineMsg = ChatMessage.createCombineSendMessage(
   targetId: targetId,
   title: 'A和B的聊天记录',
   summary: 'A:这是A的消息内容\nB:这是B的消息内容',
@@ -279,7 +279,7 @@ final combineMsg = EMMessage.createCombineSendMessage(
   msgIds: msgIds,
 );
 
-EMClient.getInstance.chatManager.sendMessage(combineMsg);
+ChatClient.getInstance.chatManager.sendMessage(combineMsg);
 ```
 
 ## 更多
@@ -288,22 +288,22 @@ EMClient.getInstance.chatManager.sendMessage(combineMsg);
 
 发消息时，若要将消息附件上传至你自己的服务器（而非环信服务器），需执行以下操作：
 
-1. 在 SDK 初始化时将 `EMOptions#serverTransfer` 设置为 `false`，使 SDK **不再自动上传或下载附件**。设置后，`EMChatManager#sendMessage` 将不再处理图片、视频等附件的自动处理与上传逻辑。
+1. 在 SDK 初始化时将 `ChatOptions#serverTransfer` 设置为 `false`，使 SDK **不再自动上传或下载附件**。设置后，`ChatManager#sendMessage` 将不再处理图片、视频等附件的自动处理与上传逻辑。
 2. 图片上传到你的服务器后，将附件 URL 填入消息体，然后发送消息。
-   以图片消息为例，上传后获取其 URL，通过 `EMImageMessageBody` 的 `remotePath` 属性设置到消息体中，然后调用 `sendMessage()` 发送消息。
+   以图片消息为例，上传后获取其 URL，通过 `ChatImageMessageBody` 的 `remotePath` 属性设置到消息体中，然后调用 `sendMessage()` 发送消息。
 
 ```dart
 import 'package:im_flutter_sdk/im_flutter_sdk.dart';
 
 // 1) SDK 初始化时关闭"自动上传附件到 Chat 服务器"
 Future<void> initSDK() async {
-  EMOptions options = EMOptions(
+  ChatOptions options = ChatOptions(
     appKey: "your_app_key",  // 替换为你的 App Key
     autoLogin: false,
     serverTransfer: false,  // 关闭自动上传附件
   );
 
-  await EMClient.getInstance.init(options);
+  await ChatClient.getInstance.init(options);
 }
 
 // 2) 你的业务：把图片上传到自有服务器，拿到可访问的 URL
@@ -317,7 +317,7 @@ Future<void> sendPrivateUrlImg({
 }) async {
   // 构造图片消息体
   // 建议传一个本地路径用于本地展示；真正下载走 urlPath 由你自己控制
-  EMImageMessageBody body = EMImageMessageBody(
+  ChatImageMessageBody body = ChatImageMessageBody(
     localPath: localPathForPreview ?? "",
     displayName: "IMG_111.png",  // 可选：文件名
     fileSize: 10000,             // 可选：文件大小（字节）
@@ -327,14 +327,14 @@ Future<void> sendPrivateUrlImg({
   body.remotePath = urlPath;
 
   // 构造消息
-  EMMessage message = EMMessage.createSendMessage(
+  ChatMessage message = ChatMessage.createSendMessage(
     chatType: ChatType.Chat,
     to: toUserId,
     body: body,
   );
 
   // 添加消息状态监听（可选）
-  EMClient.getInstance.chatManager.addMessageEvent(
+  ChatClient.getInstance.chatManager.addMessageEvent(
     "url_image_handler",
     ChatMessageEvent(
       onSuccess: (msgId, msg) {
@@ -350,11 +350,11 @@ Future<void> sendPrivateUrlImg({
   );
 
   // 发送消息
-  await EMClient.getInstance.chatManager.sendMessage(message);
+  await ChatClient.getInstance.chatManager.sendMessage(message);
 }
 ```
 
-> 接收端拿到消息后，可通过 `(message.body as EMImageMessageBody).remotePath` 取到你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
+> 接收端拿到消息后，可通过 `(message.body as ChatImageMessageBody).remotePath` 取到你的 URL，然后用你自己的下载/展示逻辑处理（因为你已关闭 SDK 自动附件传输）。
 
 
 ### 聊天室消息优先级与消息丢弃逻辑
@@ -364,7 +364,7 @@ Future<void> sendPrivateUrlImg({
 - **消息丢弃逻辑**：对于单个聊天室，每秒发送的消息数量默认超过 20 条，则会触发消息丢弃逻辑，即首先丢弃低优先级的消息，优先保留高优先级的消息。若带有优先级的消息超过了 20 条/秒，则按照消息发送时间顺序处理，丢弃后发送的消息。
 
 ```dart
-final msg = EMMessage.createTxtSendMessage(
+final msg = ChatMessage.createTxtSendMessage(
   targetId: conversationId,
   content: 'hello',
   chatType: ChatType.ChatRoom,
@@ -372,7 +372,7 @@ final msg = EMMessage.createTxtSendMessage(
 
 // 聊天室消息的优先级。如果不设置，默认值为 `Normal`，即“普通”优先级。
 msg.chatroomMessagePriority = ChatRoomMessagePriority.High;
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 
 ```
 
@@ -395,13 +395,13 @@ final handler = ChatMessageEvent(
 );
 
 /// 添加监听
-EMClient.getInstance.chatManager.addMessageEvent(
+ChatClient.getInstance.chatManager.addMessageEvent(
   'UNIQUE_HANDLER_ID',
   handler,
 );
 
 /// 移除监听
-EMClient.getInstance.chatManager.removeMessageEvent('UNIQUE_HANDLER_ID');
+ChatClient.getInstance.chatManager.removeMessageEvent('UNIQUE_HANDLER_ID');
 ```
 
 ### 发送消息前的内容审核

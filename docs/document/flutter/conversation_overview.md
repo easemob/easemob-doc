@@ -13,7 +13,7 @@
 
 - 方式二：通过获取会话信息时创建会话：
 
-  调用 [getConversation](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMChatManager/getConversation.html) 接口时，若将参数 `createIfNeed` 设为 `true`(默认值)，即时通讯 IM 会在会话不存在时自动创建该会话。  
+  调用 [getConversation](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/ChatManager/getConversation.html) 接口时，若将参数 `createIfNeed` 设为 `true`(默认值)，即时通讯 IM 会在会话不存在时自动创建该会话。  
 
 #### 会话 ID
 
@@ -31,7 +31,7 @@
 
 ## 会话管理
 
-环信即时通讯 IM SDK 提供 [EMChatManager](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMChatManager-class.html) 类和 [EMConversation](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/EMConversation-class.html) 类进行会话和消息管理：
+环信即时通讯 IM SDK 提供 [ChatManager](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/ChatManager-class.html) 类和 [ChatConversation](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/ChatConversation-class.html) 类进行会话和消息管理：
 
 - 会话管理：[获取会话列表](conversation_list.html#从服务器分页获取会话列表)、[会话已读回执](conversation_receipt.html)、[会话未读数管理](conversation_receipt.html#会话已读回执和消息未读数)、[置顶会话](conversation_pin.html)、[添加会话标记](conversation_mark.html)、[删除会话](conversation_delete.html)。
 
@@ -39,7 +39,7 @@
 
 ## 会话类
 
-环信即时通讯 IM 提供会话类 `EMConversation`。该类定义了以下内容：
+环信即时通讯 IM 提供会话类 `ChatConversation`。该类定义了以下内容：
 
 | 方法  | 描述         |
 | :--------- | :------- |
@@ -68,15 +68,15 @@
 
 ## 会话事件
 
-`EMConversationListener` 中提供会话事件的监听接口。开发者可以通过设置此监听，获取会话事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`ChatEventHandler` 中提供会话事件的监听接口。开发者可以通过设置此监听，获取会话事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 
 ```dart
 
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
       sdkEventKey,
-      EMChatEventHandler(
+      ChatEventHandler(
       // 收到会话已读的事件。该事件在以下场景中触发：
        // 1. 当消息接收放调用 `sendConversationReadAck` 方法，SDK 会执行此回调，
        // 并将本地数据库中 `Message` 的 `hasReadAck` 置为 `true`.

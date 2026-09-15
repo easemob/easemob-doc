@@ -33,7 +33,7 @@
     try {
     // notifierName: 对应平台在环信控制台的推送证书名称
     // deviceToken: 推送token
-    EMClient.getInstance.pushManager.bindDeviceToken(
+    ChatClient.getInstance.pushManager.bindDeviceToken(
         notifierName: notifierName,
         deviceToken: deviceToken,
     );

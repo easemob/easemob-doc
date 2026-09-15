@@ -3,7 +3,7 @@
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题和推送内容。
 
 ```dart
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: 'receiveId',
   content: 'content',
 );
@@ -18,8 +18,8 @@ msg.attributes = {
 };
 
 try {
-  await EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 ```
 
 自定义显示字段的数据结构如下：

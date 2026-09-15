@@ -21,14 +21,14 @@
 
 ```dart
 
-final msg = EMMessage.createTxtSendMessage(
+final msg = ChatMessage.createTxtSendMessage(
   targetId: targetId,
   content: 'content',
   chatType: ChatType.GroupChat,
 );
 // 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `null`，则消息发送给群组或聊天室的所有成员。
 msg.receiverList = ['userId1', 'userId2'];
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 
 ```
 接收群定向消息与接收普通消息的操作相同，详见 [接收文本消息](message_receive.html#接收文本消息)。

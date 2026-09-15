@@ -6,12 +6,12 @@
 
 ```dart
 try {
-  final msg = EMMessage.createTxtSendMessage(
+  final msg = ChatMessage.createTxtSendMessage(
     targetId: targetId,
     content: 'content',
   );
 
   msg.attributes = {'k': 'v'};
-  EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMError catch (e) {}
+  ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 ```

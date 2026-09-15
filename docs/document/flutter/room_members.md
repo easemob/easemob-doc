@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMChatRoom`、`EMRoomManager` 和 `EMChatRoomEventHandler` 类，支持对聊天室成员的管理，包括添加和移出聊天室成员等，主要方法如下：
+环信即时通讯 IM Flutter SDK 提供 `ChatRoom`、`ChatRoomManager` 和 `ChatRoomEventHandler` 类，支持对聊天室成员的管理，包括添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
 - 退出聊天室
@@ -30,7 +30,7 @@
 
 ### 获取聊天室成员列表
 
-所有聊天室成员均可调用 `EMChatRoomManager#fetchChatRoomMembers` 方法获取当前聊天室成员列表。
+所有聊天室成员均可调用 `ChatRoomManager#fetchChatRoomMembers` 方法获取当前聊天室成员列表。
 
 服务器不对成员进行排序，因此，返回的成员列表不保证有序。
 
@@ -40,12 +40,12 @@
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
 try {
-  await EMClient.getInstance.chatRoomManager.fetchChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.fetchChatRoomMembers(
     roomId,
     pageSize: pageSize,
     cursor: cursor,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -53,23 +53,23 @@ try {
 
 #### 主动退出
 
-聊天室所有成员均可以调用 `EMChatRoomEventHandler#leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExitedFromChatRoom` 回调。
+聊天室所有成员均可以调用 `ChatRoomEventHandler#leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExitedFromChatRoom` 回调。
 
 示例代码如下：
 
 ```dart
 try {
-   await EMClient.getInstance.chatRoomManager.leaveChatRoom(roomId);
-} on EMError catch (e) {
+   await ChatClient.getInstance.chatRoomManager.leaveChatRoom(roomId);
+} on ChatError catch (e) {
 }
 ```
 
-退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#deleteMessagesAsExitChatRoom` 设置为 `false`。
+退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `ChatOptions#deleteMessagesAsExitChatRoom` 设置为 `false`。
 
 示例代码如下：
 
 ```dart
-EMOptions options = EMOptions(
+ChatOptions options = ChatOptions(
       appKey: APPKEY,
       deleteMessagesAsExitChatRoom: false,
     );
@@ -79,8 +79,8 @@ EMOptions options = EMOptions(
 
 #### 被移出
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
-被移出后，该成员收到 `EMChatRoomEventHandler#onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomEventHandler#onMemberExitedFromChatRoom` 回调。
+仅聊天室所有者和管理员可调用 `ChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
+被移出后，该成员收到 `ChatRoomEventHandler#onRemovedFromChatRoom` 回调，其他成员收到 `ChatRoomEventHandler#onMemberExitedFromChatRoom` 回调。
 
 被移出的成员可以重新进入聊天室。
 
@@ -88,11 +88,11 @@ EMOptions options = EMOptions(
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.removeChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.removeChatRoomMembers(
     roomId,
     members,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -111,9 +111,9 @@ try {
 
 #### 将成员加入聊天室黑名单
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#blockChatRoomMembers` 方法将指定成员添加至黑名单。
+仅聊天室所有者和管理员可调用 `ChatRoomManager#blockChatRoomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `EMChatRoomEventHandler#onRemovedFromChatRoom` 事件。默认情况下，其他成员不会收到事件通知。如需该事件，请联系商务开通。
+被加入黑名单后，该成员收到 `ChatRoomEventHandler#onRemovedFromChatRoom` 事件。默认情况下，其他成员不会收到事件通知。如需该事件，请联系商务开通。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单。
 
@@ -121,44 +121,44 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.blockChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.blockChatRoomMembers(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 将成员移出聊天室黑名单
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unBlockChatRoomMembers` 方法将成员移出聊天室黑名单。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unBlockChatRoomMembers` 方法将成员移出聊天室黑名单。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.unBlockChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.unBlockChatRoomMembers(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 获取聊天室黑名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#fetchChatRoomBlockList` 方法获取当前聊天室黑名单。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#fetchChatRoomBlockList` 方法获取当前聊天室黑名单。
 
 示例代码如下：
 
 ```dart
 try {
-  List<String>? list= await EMClient.getInstance.chatRoomManager.fetchChatRoomBlockList(
+  List<String>? list= await ChatClient.getInstance.chatRoomManager.fetchChatRoomBlockList(
     roomId,
     pageNum: pageNum,
     pageSize: pageSize,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -168,44 +168,44 @@ try {
 
 #### 添加成员至聊天室白名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#addMembersToChatRoomAllowList` 方法将指定成员添加至聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListAddedFromChatRoom` 事件。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#addMembersToChatRoomAllowList` 方法将指定成员添加至聊天室白名单。被添加后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventHandler#onAllowListAddedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.addMembersToChatRoomAllowList(
+  await ChatClient.getInstance.chatRoomManager.addMembersToChatRoomAllowList(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 将成员移出聊天室白名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#removeMembersFromChatRoomAllowList` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onAllowListRemovedFromChatRoom` 事件。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#removeMembersFromChatRoomAllowList` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventHandler#onAllowListRemovedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.removeMembersFromChatRoomAllowList(
+  await ChatClient.getInstance.chatRoomManager.removeMembersFromChatRoomAllowList(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 检查自己是否在聊天室白名单中
 
-所有聊天室成员可以调用 `EMChatRoomManager#isMemberInChatRoomAllowList` 方法检查自己是否在白名单中，示例代码如下：
+所有聊天室成员可以调用 `ChatRoomManager#isMemberInChatRoomAllowList` 方法检查自己是否在白名单中，示例代码如下：
 
 ```dart
 try {
-  bool isInAllowList = await EMClient.getInstance.chatRoomManager.isMemberInChatRoomAllowList(roomId);
-} on EMError catch (e) {
+  bool isInAllowList = await ChatClient.getInstance.chatRoomManager.isMemberInChatRoomAllowList(roomId);
+} on ChatError catch (e) {
 }
 ```
 
@@ -213,7 +213,7 @@ try {
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListAddedFromChatRoom` 事件。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventHandler#onMuteListAddedFromChatRoom` 事件。
 
 :::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
@@ -224,17 +224,17 @@ try {
 ```dart
 // duration：禁言时间。若传 -1，表示永久禁言。
 try {
-  await EMClient.getInstance.chatRoomManager.muteChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.muteChatRoomMembers(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomEventHandler#onMuteListRemovedFromChatRoom` 事件。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomEventHandler#onMuteListRemovedFromChatRoom` 事件。
 
 :::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
@@ -244,29 +244,29 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.unMuteChatRoomMembers(
+  await ChatClient.getInstance.chatRoomManager.unMuteChatRoomMembers(
     roomId,
     members
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 获取聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#fetchChatRoomMuteList` 方法获取当前聊天室的禁言列表。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#fetchChatRoomMuteList` 方法获取当前聊天室的禁言列表。
 
 示例代码如下：
 
 ```dart
 try {
   List<String>? list =
-      await EMClient.getInstance.chatRoomManager.fetchChatRoomMuteList(
+      await ChatClient.getInstance.chatRoomManager.fetchChatRoomMuteList(
     roomId,
     pageNum: pageNum,
     pageSize: pageSize,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -276,29 +276,29 @@ try {
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMChatRoomManager#unMuteAllChatRoomMembers` 方法解除全员禁言。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `ChatRoomManager#unMuteAllChatRoomMembers` 方法解除全员禁言。
 
-全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `ChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.muteAllChatRoomMembers();
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatRoomManager.muteAllChatRoomMembers();
+} on ChatError catch (e) {
 }
 ```
 
 #### 关闭聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteAllChatRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unMuteAllChatRoomMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `ChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.unMuteAllChatRoomMembers();
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatRoomManager.unMuteAllChatRoomMembers();
+} on ChatError catch (e) {
 }
 ```
 
@@ -306,49 +306,49 @@ try {
 
 #### 变更聊天室所有者
 
-仅聊天室所有者可以调用 `EMChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `EMChatRoomEventHandler#onOwnerChangedFromChatRoom` 事件。
+仅聊天室所有者可以调用 `ChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `ChatRoomEventHandler#onOwnerChangedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.changeOwner(
+  await ChatClient.getInstance.chatRoomManager.changeOwner(
     roomId,
     newOwner,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 添加聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminAddedFromChatRoom` 事件。
+仅聊天室所有者可以调用 `ChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `ChatRoomEventHandler#onAdminAddedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.addChatRoomAdmin(
+  await ChatClient.getInstance.chatRoomManager.addChatRoomAdmin(
     roomId,
     memberId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 移除聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `EMChatRoomEventHandler#onAdminRemovedFromChatRoom` 事件。
+仅聊天室所有者可以调用 `ChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `ChatRoomEventHandler#onAdminRemovedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.removeChatRoomAdmin(
+  await ChatClient.getInstance.chatRoomManager.removeChatRoomAdmin(
     roomId,
     adminId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 

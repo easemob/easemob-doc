@@ -42,14 +42,14 @@ void textChange() {
 }
 
 void _sendBeginTyping() async {
-  var msg = EMMessage.createCmdSendMessage(
+  var msg = ChatMessage.createCmdSendMessage(
     targetId: conversationId,
     action: msgTypingBegin,
     // 将该透传消息只发送给在线用户
     deliverOnlineOnly: true,
   );
   msg.chatType = ChatType.Chat;
-  EMClient.getInstance.chatManager.sendMessage(msg);
+  ChatClient.getInstance.chatManager.sendMessage(msg);
 }
 
 ```
@@ -62,12 +62,12 @@ void _sendBeginTyping() async {
 final int typingTime = 10;
 Timer? _timer;
 
-void onCmdMessagesReceived(List<EMMessage> list) {
+void onCmdMessagesReceived(List<ChatMessage> list) {
   for (var msg in list) {
     if (msg.conversationId != currentConversationId) {
       continue;
     }
-    EMCmdMessageBody body = msg.body as EMCmdMessageBody;
+    ChatCmdMessageBody body = msg.body as ChatCmdMessageBody;
     if (body.action == msgTypingBegin) {
       // 这里需更新 UI，显示“对方正在输入”
       beginTimer();

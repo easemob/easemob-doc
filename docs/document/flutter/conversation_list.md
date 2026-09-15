@@ -17,8 +17,8 @@
 
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
-- `EMChatManager#fetchConversationsByOptions`：从服务器获取会话列表。
-- `EMChatManager#loadAllConversations`：获取本地所有会话。
+- `ChatManager#fetchConversationsByOptions`：从服务器获取会话列表。
+- `ChatManager#loadAllConversations`：获取本地所有会话。
 
 ## 实现方法
 
@@ -26,7 +26,7 @@
 
 你可以调用 `fetchConversationsByOptions` 方法从服务端分页获取会话列表，包含单聊和群组聊天会话，不包含聊天室会话。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
-对于每个终端用户，服务器默认保存最新的 100 条会话。超过此数量限制时，新创建的会话将自动覆盖最早的旧会话。当某个会话中的所有消息记录过期后，该会话即被视为 [空会话](conversation_overview.html#空会话)。默认情况下，从服务端拉取会话列表时不包含空会话。如需要拉取空会话，需在 SDK 初始化时设置 `EMOptions#enableEmptyConversation` 为 `true`。注意，空会话将占用会话拉取名额。若希望拉取会话时不包含空会话，同时避免其占用会话名额，请联系商务开通相关配置。
+对于每个终端用户，服务器默认保存最新的 100 条会话。超过此数量限制时，新创建的会话将自动覆盖最早的旧会话。当某个会话中的所有消息记录过期后，该会话即被视为 [空会话](conversation_overview.html#空会话)。默认情况下，从服务端拉取会话列表时不包含空会话。如需要拉取空会话，需在 SDK 初始化时设置 `ChatOptions#enableEmptyConversation` 为 `true`。注意，空会话将占用会话拉取名额。若希望拉取会话时不包含空会话，同时避免其占用会话名额，请联系商务开通相关配置。
 
 :::tip
 1. **若使用该功能，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) ，并将 SDK 升级至 V4.5.0 或以上版本。只有开通该功能，你才能使用置顶会话功能。** 
@@ -37,22 +37,22 @@
 示例代码如下：
 
 ```dart
-EMClient.getInstance.chatManager.fetchConversationsByOptions(
+ChatClient.getInstance.chatManager.fetchConversationsByOptions(
       options: ConversationFetchOptions(),
     );
 ```
 
 ### 获取本地所有会话
 
-你可以调用 `loadAllConversations` 方法获取本地所有会话。本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `EMOptions#deleteMessagesAsExitChatRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
+你可以调用 `loadAllConversations` 方法获取本地所有会话。本地会话列表包含单聊和群组聊天会话，至于是否包含聊天室会话，取决于在 SDK 初始化时 `ChatOptions#deleteMessagesAsExitChatRoom` 参数的设置。若设置为 `true`，即离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。若设置为 `false`，即保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。
 
-若在初始化时，将 `EMOptions#enableEmptyConversation` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
+若在初始化时，将 `ChatOptions#enableEmptyConversation` 设置为 `true` 允许返回空会话，则会话列表中会包含空会话，否则不包含。
 
 ```dart
 try {
-  List<EMConversation> lists =
-      await EMClient.getInstance.chatManager.loadAllConversations();
+  List<ChatConversation> lists =
+      await ChatClient.getInstance.chatManager.loadAllConversations();
   // 成功加载会话。
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```

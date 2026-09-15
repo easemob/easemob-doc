@@ -18,14 +18,14 @@
 
 环信即时通讯 IM 支持会话置顶，主要方法如下：
 
-- `EMChatManager#pinConversation`：置顶/取消置顶会话。
-- `EMChatManager#fetchPinnedConversations`：分页获取服务器保存的置顶会话列表。
+- `ChatManager#pinConversation`：置顶/取消置顶会话。
+- `ChatManager#fetchPinnedConversations`：分页获取服务器保存的置顶会话列表。
 
 ## 实现方法
 
 ### 置顶/取消置顶会话
 
-你可以调用 `pinConversation` 方法设置是否置顶会话。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMMultiDevicesEvent.CONVERSATION_PINNED` 和 `EMMultiDevicesEvent.CONVERSATION_UNPINNED` 事件。
+你可以调用 `pinConversation` 方法设置是否置顶会话。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `ChatMultiDevicesEvent.CONVERSATION_PINNED` 和 `ChatMultiDevicesEvent.CONVERSATION_UNPINNED` 事件。
 
 你最多可以置顶 50 个会话。
 
@@ -37,14 +37,14 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.pinConversation(
+  await ChatClient.getInstance.chatManager.pinConversation(
     conversationId: conversationId,
     isPinned: true,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
-你可以通过 `EMConversation` 对象的 `isPinned` 字段检查会话是否为置顶状态，或者调用 `getPinnedTime` 方法获取会话置顶时间。
+你可以通过 `ChatConversation` 对象的 `isPinned` 字段检查会话是否为置顶状态，或者调用 `getPinnedTime` 方法获取会话置顶时间。
 
 ## 获取服务端的置顶会话列表
 
@@ -58,7 +58,7 @@ try {
 示例代码如下： 
 
 ```dart
-EMCursorResult<EMConversation> result = await EMClient.getInstance.chatManager.fetchConversationsByOptions(
+ChatCursorResult<ChatConversation> result = await ChatClient.getInstance.chatManager.fetchConversationsByOptions(
       options: ConversationFetchOptions.pinned(),
     )
 ```

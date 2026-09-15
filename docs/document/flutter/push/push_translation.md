@@ -9,11 +9,11 @@
 ```dart
 // 设置离线推送的首选语言。
 try {
-  await EMClient.getInstance.pushManager.setPreferredNotificationLanguage('en');
-} on EMClient catch (e) {}
+  await ChatClient.getInstance.pushManager.setPreferredNotificationLanguage('en');
+} on ChatClient catch (e) {}
 
 // 获取设置的离线推送的首选语言。
 try {
-  String? language = await EMClient.getInstance.pushManager.fetchPreferredNotificationLanguage();
-} on EMClient catch (e) {}
+  String? language = await ChatClient.getInstance.pushManager.fetchPreferredNotificationLanguage();
+} on ChatClient catch (e) {}
 ```

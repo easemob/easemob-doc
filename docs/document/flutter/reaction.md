@@ -64,29 +64,29 @@ ChatClient.getInstance()
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.addReaction(
+  await ChatClient.getInstance.chatManager.addReaction(
     messageId: messageId,
     reaction: reaction,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 获取消息的 Reaction 列表
 
 调用 `getReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容、添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的前三个用户的用户 ID。
-对应消息 `EMMessage` 有便捷的访问方式 `reactionList`。
+对应消息 `ChatMessage` 有便捷的访问方式 `reactionList`。
 示例代码如下：
 
 ```dart
 try {
-  Map<String, List<EMMessageReaction>> map =
-      await EMClient.getInstance.chatManager.fetchReactionList(
+  Map<String, List<ChatMessageReaction>> map =
+      await ChatClient.getInstance.chatManager.fetchReactionList(
     messageIds: messageIds,
     chatType: ChatType.GroupChat,
     groupId: groupId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -94,8 +94,8 @@ try {
 
 ```dart
 try {
-    List<EMMessageReaction> reactions = await msg.reactionList();
-}on EMError catch (e) {
+    List<ChatMessageReaction> reactions = await msg.reactionList();
+}on ChatError catch (e) {
 }
 ```
 
@@ -105,12 +105,12 @@ try {
 
 ```dart
 try {
-  EMCursorResult<EMMessageReaction> result =
-      await EMClient.getInstance.chatManager.fetchReactionDetail(
+  ChatCursorResult<ChatMessageReaction> result =
+      await ChatClient.getInstance.chatManager.fetchReactionDetail(
     messageId: messageId,
     reaction: reaction,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -118,11 +118,11 @@ try {
 
 ```dart
 // 添加监听
-    EMClient.getInstance.chatManager.addEventHandler(
+    ChatClient.getInstance.chatManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(onMessageReactionDidChange: (events) {}),
+  ChatEventHandler(onMessageReactionDidChange: (events) {}),
 );
 
 // 移除监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

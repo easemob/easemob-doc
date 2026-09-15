@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `EMMessage` 类支持只将消息投递给在线用户：
+环信即时通讯 IM 通过 `ChatMessage` 类支持只将消息投递给在线用户：
 
 - `deliverOnlineOnly`：设置消息是否只投递给在线用户。
 
@@ -23,13 +23,13 @@
 
 ## 实现方法
 
-要将消息只投递给在线用户，你需要在发送消息时将 `EMMessage#deliverOnlineOnly` 设置为 `true`。
+要将消息只投递给在线用户，你需要在发送消息时将 `ChatMessage#deliverOnlineOnly` 设置为 `true`。
 
 下面以发送文本消息为例进行说明：
 
 ```dart
 // 创建一条文本消息。
-final msg = EMMessage.createTxtSendMessage(
+final msg = ChatMessage.createTxtSendMessage(
   // `targetId` 为接收方，单聊为对端用户 ID、群聊为群组 ID。
   targetId: conversationId,
   // `content` 为消息文字内容。
@@ -41,6 +41,6 @@ final msg = EMMessage.createTxtSendMessage(
 msg.deliverOnlineOnly = true;
 
 // 发送消息。
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 

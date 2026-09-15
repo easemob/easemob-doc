@@ -6,13 +6,13 @@
 
 ## 技术原理
 
-使用环信即时通讯 IM Flutter SDK 可以通过 `EMChatManager` 类单向删除服务端和本地的历史消息，主要方法如下：
+使用环信即时通讯 IM Flutter SDK 可以通过 `ChatManager` 类单向删除服务端和本地的历史消息，主要方法如下：
 
-- `EMChatManager#deleteAllMessageAndConversation`：清空当前用户的聊天记录，包括单聊、群聊和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
-- `EMChatManager#deleteRemoteMessagesBefore`/`EMChatManager#deleteRemoteMessagesWithIds`：根据消息时间或消息 ID 单向删除服务端的历史消息。
-- `EMConversation#deleteAllMessages`：删除本地指定会话的所有消息。
-- `EMConversation#deleteMessagesWithTs`：删除指定时间段的本地消息。
-- `EMConversation#deleteMessage`：删除本地单个会话的指定消息。
+- `ChatManager#deleteAllMessageAndConversation`：清空当前用户的聊天记录，包括单聊、群聊和聊天室的消息和会话，同时可以选择是否单向清除服务端的聊天记录。
+- `ChatManager#deleteRemoteMessagesBefore`/`ChatManager#deleteRemoteMessagesWithIds`：根据消息时间或消息 ID 单向删除服务端的历史消息。
+- `ChatConversation#deleteAllMessages`：删除本地指定会话的所有消息。
+- `ChatConversation#deleteMessagesWithTs`：删除指定时间段的本地消息。
+- `ChatConversation#deleteMessage`：删除本地单个会话的指定消息。
 
 ## 前提条件
 
@@ -25,7 +25,7 @@
 
 ### 清空聊天记录
 
-你可以调用 `EMChatManager#deleteAllMessageAndConversation` 方法清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受影响。
+你可以调用 `ChatManager#deleteAllMessageAndConversation` 方法清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受影响。
 
 :::tip
 若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
@@ -33,8 +33,8 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.deleteAllMessageAndConversation(clearServerData: true);
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatManager.deleteAllMessageAndConversation(clearServerData: true);
+} on ChatError catch (e) {
   debugPrint("deleteAllMessageAndConversation error: ${e.code}, ${e.description}");
 }
 ```
@@ -47,7 +47,7 @@ try {
 - 按消息 ID 删除：每次最多可删除 50 条消息。
 
 删除后，该用户无法从服务端拉取到该消息。不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
-多设备情况下，登录该账号的其他设备会收到 `EMMultiDeviceEventHandler` 中的 `onRemoteMessagesRemoved` 回调，已删除的消息自动从设备本地移除。
+多设备情况下，登录该账号的其他设备会收到 `ChatMultiDeviceEventHandler` 中的 `onRemoteMessagesRemoved` 回调，已删除的消息自动从设备本地移除。
 
 :::tip
 1. 若使用该功能，需将 SDK 升级至 4.0.0 或以上版本。
@@ -56,20 +56,20 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.deleteRemoteMessagesBefore(
+  await ChatClient.getInstance.chatManager.deleteRemoteMessagesBefore(
     conversationId: conversationId,
     type: convType,
     timestamp: timestamp,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 
 try {
-  await EMClient.getInstance.chatManager.deleteRemoteMessagesWithIds(
+  await ChatClient.getInstance.chatManager.deleteRemoteMessagesWithIds(
     conversationId: conversationId,
     type: convType,
     msgIds: msgIds,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ### 删除本地指定会话的所有消息
@@ -77,7 +77,7 @@ try {
 你可以删除本地指定会话的所有消息，示例代码如下：
 
 ```dart
-EMConversation? conversation = await EMClient.getInstance.chatManager
+ChatConversation? conversation = await ChatClient.getInstance.chatManager
     .getConversation(conversationId);
 await conversation?.deleteAllMessages();
 ```
@@ -87,7 +87,7 @@ await conversation?.deleteAllMessages();
 你可以删除本地指定会话在一段时间内的本地消息，示例代码如下：
 
 ```dart
-EMConversation? conversation = await EMClient.getInstance.chatManager
+ChatConversation? conversation = await ChatClient.getInstance.chatManager
     .getConversation(conversationId);
 await conversation?.deleteMessagesWithTs(startTs, endTs);
 ```
@@ -97,7 +97,7 @@ await conversation?.deleteMessagesWithTs(startTs, endTs);
 你可以删除本地单个会话的指定消息，示例代码如下：
 
 ```dart
-EMConversation? conversation = await EMClient.getInstance.chatManager
+ChatConversation? conversation = await ChatClient.getInstance.chatManager
     .getConversation(conversationId);
 await conversation?.deleteMessage(messageId);
 ```

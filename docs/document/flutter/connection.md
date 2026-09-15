@@ -10,9 +10,9 @@
 
 ```dart
 // 添加监听
-EMClient.getInstance.addConnectionEventHandler(
+ChatClient.getInstance.addConnectionEventHandler(
   'Identifier',
-  EMConnectionEventHandler(
+  ConnectionEventHandler(
     onConnected: () {},
     onDisconnected: () {},
     onTokenDidExpire: () {},
@@ -31,7 +31,7 @@ EMClient.getInstance.addConnectionEventHandler(
 );
 
 // 移除监听
-EMClient.getInstance.removeConnectionEventHandler('Identifier');
+ChatClient.getInstance.removeConnectionEventHandler('Identifier');
 ```
 
 ## 自动重连

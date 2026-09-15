@@ -6,10 +6,10 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
+环信即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatConversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
 
-- `EMChatManager#importMessages`：批量导入消息到数据库。
-- `EMConversation#insertMessage`：在本地会话中加入一条消息。
+- `ChatManager#importMessages`：批量导入消息到数据库。
+- `ChatConversation#insertMessage`：在本地会话中加入一条消息。
 
 ## 前提条件
 
@@ -22,7 +22,7 @@
 
 ### 批量导入消息到数据库
 
-如果你需要使用批量导入方式在本地会话中插入消息，可以使用下面的接口，构造 `EMMessage` 对象，将消息导入本地数据库。
+如果你需要使用批量导入方式在本地会话中插入消息，可以使用下面的接口，构造 `ChatMessage` 对象，将消息导入本地数据库。
 
 当前用户只能导入自己发送或接收的消息。导入后，消息按照其包含的时间戳添加到对应的会话中。
 
@@ -32,7 +32,7 @@
 
 ```dart
 // messages: 需要导入的消息。
-await EMClient.getInstance.chatManager.importMessages(messages);
+await ChatClient.getInstance.chatManager.importMessages(messages);
 ```
 
 ### 插入消息
@@ -47,12 +47,12 @@ await EMClient.getInstance.chatManager.importMessages(messages);
 
 ```dart
 // 将消息插入到指定会话中。
-    EMConversation? conversation =
-        await EMClient.getInstance.chatManager.getConversation(
+    ChatConversation? conversation =
+        await ChatClient.getInstance.chatManager.getConversation(
       username,
     );
     conversation?.insertMessage(message);
 
     // 直接插入消息。
-    await EMClient.getInstance.chatManager.importMessages(messages);
+    await ChatClient.getInstance.chatManager.importMessages(messages);
 ```

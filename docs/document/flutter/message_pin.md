@@ -17,14 +17,14 @@
 
 环信即时通讯 IM 支持消息置顶，主要方法和类如下：
 
-- `EMChatManager#pinMessage`：置顶消息。
-- `EMChatManager#unpinMessage`：取消置顶消息。
-- `EMChatManager#fetchPinnedMessages`：从服务端获取单个会话的置顶消息列表。
+- `ChatManager#pinMessage`：置顶消息。
+- `ChatManager#unpinMessage`：取消置顶消息。
+- `ChatManager#fetchPinnedMessages`：从服务端获取单个会话的置顶消息列表。
 - `MessagePinInfo`：消息的置顶或取消置顶详情。
 
 ## 置顶消息
 
-你可以调用 `EMChatManager#pinMessage` 方法置顶消息。消息置顶状态变化后，会话中的其他用户会收到 `EMChatEventHandler#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatEventHandler#onMessagePinChanged` 事件。
+你可以调用 `ChatManager#pinMessage` 方法置顶消息。消息置顶状态变化后，会话中的其他用户会收到 `ChatEventHandler#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `ChatEventHandler#onMessagePinChanged` 事件。
 
 在会话中，支持多个用户置顶同一条消息，最新的消息置顶信息会覆盖较早的信息，即 `MessagePinInfo` 的置顶消息的操作者的用户 ID 和置顶时间为最新置顶操作的相关信息。
 
@@ -34,29 +34,29 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.pinMessage(messageId: 'messageId');
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatManager.pinMessage(messageId: 'messageId');
+} on ChatError catch (e) {
   debugPrint("pinMessage error: ${e.code}, ${e.description}");
 }
 ```
 
 ## 取消置顶消息
 
-你可以调用 `EMChatManager#unpinMessage` 方法取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他用户会收到 `EMChatEventHandler#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `EMChatEventHandler#onMessagePinChanged` 事件。
+你可以调用 `ChatManager#unpinMessage` 方法取消置顶消息。与置顶消息相同，取消置顶消息后，会话中的其他用户会收到 `ChatEventHandler#onMessagePinChanged` 事件。多设备登录情况下，更新的置顶状态会同步到其他登录设备，其他设备分别会收到 `ChatEventHandler#onMessagePinChanged` 事件。
 
-会话中的所有用户均可取消置顶消息，不论该消息由哪个用户置顶。取消置顶消息后，`EMMessage#pinInfo` 获取到的信息为空，该会话的置顶消息列表中也不再包含该消息。
+会话中的所有用户均可取消置顶消息，不论该消息由哪个用户置顶。取消置顶消息后，`ChatMessage#pinInfo` 获取到的信息为空，该会话的置顶消息列表中也不再包含该消息。
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.unpinMessage(messageId: 'messageId');
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatManager.unpinMessage(messageId: 'messageId');
+} on ChatError catch (e) {
   debugPrint("pinMessage error: ${e.code}, ${e.description}");
 }
 ```
 
 ## 获取单个会话中的置顶消息
 
-你可以调用 `EMChatManager#fetchPinnedMessages` 方法从服务端获取单个会话中的置顶消息。SDK 按照消息置顶时间的倒序返回。
+你可以调用 `ChatManager#fetchPinnedMessages` 方法从服务端获取单个会话中的置顶消息。SDK 按照消息置顶时间的倒序返回。
 
 :::tip
 1. 若消息置顶后，消息在服务端过期或用户从服务端单向删除了该消息，当前用户拉漫游消息时拉不到该消息，但当前用户和其他用户均可以在置顶消息列表中拉取到该消息。
@@ -65,10 +65,10 @@ try {
 
 ```java
 try {
-  List<EMMessage> pinnedMessages = await EMClient.getInstance.chatManager.fetchPinnedMessages(
+  List<ChatMessage> pinnedMessages = await ChatClient.getInstance.chatManager.fetchPinnedMessages(
     conversationId: conversationId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint("fetchPinnedMessages error: ${e.code}, ${e.description}");
 }
 ```
@@ -87,7 +87,7 @@ try {
     debugPrint("pinTime: ${pinInfo.pinTime}");
     debugPrint("operatorId: ${pinInfo.operatorId}");
   }
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint("pinInfo error: ${e.code}, ${e.description}");
 }
 ```
@@ -95,15 +95,15 @@ try {
 ## 监听消息置顶事件
 
 ```dart
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   'UNIQUE_HANDLER_ID',
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagePinChanged: (messageId, conversationId, pinOperation, pinInfo) {},
   ),
 );
 
 // ...
-EMClient.getInstance.chatManager.removeEventHandler(
+ChatClient.getInstance.chatManager.removeEventHandler(
   'UNIQUE_HANDLER_ID',
 );
 

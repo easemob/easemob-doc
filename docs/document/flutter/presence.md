@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信 IM SDK 提供 `EMPresence`、`EMPresenceManager` 和 `EMPresenceEventHandler` 类，用于管理在线状态订阅，包含如下核心方法：
+环信 IM SDK 提供 `ChatPresence`、`ChatPresenceManager` 和 `ChatPresenceEventHandler` 类，用于管理在线状态订阅，包含如下核心方法：
 
 - `publishPresence`：发布自定义在线状态；
 - `subscribe`：订阅用户的在线状态；
@@ -47,7 +47,7 @@
 
 ### 订阅指定用户的在线状态
 
-默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `EMPresenceManager#subscribe` 方法订阅指定用户的在线状态，示例代码如下：
+默认情况下，你不关注任何其他用户的在线状态。你可以通过调用 `ChatPresenceManager#subscribe` 方法订阅指定用户的在线状态，示例代码如下：
 
 ```dart
 // members: 要订阅的用户列表
@@ -55,17 +55,17 @@ List<String> members = [];
 // expiry: 过期时长，单位为秒
 int expiry = 100;
 try {
-  List<EMPresence> list =
-      await EMClient.getInstance.presenceManager.subscribe(
+  List<ChatPresence> list =
+      await ChatClient.getInstance.presenceManager.subscribe(
     members: members,
     expiry: expiry,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
   // subscribe failed, code: e.code, reason: e.description
 }
 ```
 
-在线状态变更时，订阅者会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 回调。
+在线状态变更时，订阅者会收到 `ChatPresenceEventHandler#onPresenceStatusChanged` 回调。
 
 :::tip
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。
@@ -76,17 +76,17 @@ try {
 
 ### 发布自定义在线状态
 
-用户在线时，可调用 `EMPresenceManager#publishPresence` 方法发布自定义在线状态：
+用户在线时，可调用 `ChatPresenceManager#publishPresence` 方法发布自定义在线状态：
 
 ```dart
 try {
   // description: 状态描述
-  await EMClient.getInstance.presenceManager.publishPresence(description);
-} on EMError catch (e) {
+  await ChatClient.getInstance.presenceManager.publishPresence(description);
+} on ChatError catch (e) {
 }
 ```
 
-在线状态发布后，发布者和订阅者均会收到 `EMPresenceEventHandler#onPresenceStatusChanged` 事件。
+在线状态发布后，发布者和订阅者均会收到 `ChatPresenceEventHandler#onPresenceStatusChanged` 事件。
 
 ### 添加在线状态监听器
 
@@ -94,51 +94,51 @@ try {
 
 ```dart
     // 添加状态变化监听
-    EMClient.getInstance.presenceManager.addEventHandler(
+    ChatClient.getInstance.presenceManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-  EMPresenceEventHandler(),
+  ChatPresenceEventHandler(),
 );
 
     // 移除状态变化监听
-    EMClient.getInstance.presenceManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.presenceManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 取消订阅指定用户的在线状态
 
-若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unsubscribe` 方法，示例代码如下：
+若取消指定用户的在线状态订阅，可调用 `ChatPresenceManager#unsubscribe` 方法，示例代码如下：
 
 ```dart
 // members: 将要取消订阅的用户列表
 try {
-  await EMClient.getInstance.presenceManager.unsubscribe(
+  await ChatClient.getInstance.presenceManager.unsubscribe(
     members: members,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 查询被订阅用户列表
 
-为方便用户管理订阅关系，SDK 提供 `EMPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
+为方便用户管理订阅关系，SDK 提供 `ChatPresenceManager#fetchSubscribedMembers` 方法，可使用户分页查询自己订阅的用户列表，示例代码如下：
 
 ```dart
 try {
   List<String> subMembers =
-      await EMClient.getInstance.presenceManager.fetchSubscribedMembers();
-} on EMError catch (e) {
+      await ChatClient.getInstance.presenceManager.fetchSubscribedMembers();
+} on ChatError catch (e) {
   // fetch subscribed members failed, code: e.code, reason: e.description
 }
 ```
 
 ### 获取用户的当前在线状态
 
-如果不关注用户的在线状态变更，你可以调用 `EMPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
+如果不关注用户的在线状态变更，你可以调用 `ChatPresenceManager#fetchPresenceStatus` 获取用户当前的在线状态，而无需订阅状态。示例代码如下：
 
 ```dart
 // memberIds: 要查询状态的用户 ID，每次最多可传 100 个用户 ID。
 try {
-  List<EMPresence> list = await EMClient.getInstance.presenceManager
+  List<ChatPresence> list = await ChatClient.getInstance.presenceManager
       .fetchPresenceStatus(members: memberIds);
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
