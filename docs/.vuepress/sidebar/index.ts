@@ -116,6 +116,13 @@ export const zhSidebar = sidebar({
                 { text: "Chat Room Management", link: "console/operation_chatroom.html" },
               ],
             },
+            {
+              text: "Analytics",
+              collapsible: true,
+              children: [
+                { text: "Message Statistics", link: "console/operation_message_statistics.html" }
+              ],
+            },
           ],
         },
       ],
