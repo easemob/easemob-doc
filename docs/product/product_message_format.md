@@ -140,7 +140,7 @@
 | `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，环信服务器返回的缩略图的 UUID。 |
 | `length`       | Int    | 视频时长。单位为秒。   |
 | `secret`       | String | 视频文件的访问密钥，即成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。  |
-| `file_length`  | Long   | 否      | 视频文件大小，单位为字节。  |
+| `file_length`  | Long   | 视频文件大小，单位为字节。  |
 | `thumb_secret` | String | 缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。 |
 | `url`          | String | 视频文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从[文件上传](/document/server-side/message_upload_file.html)的响应 body 中获取。 |
 

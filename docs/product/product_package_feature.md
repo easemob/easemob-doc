@@ -904,7 +904,7 @@
 </td>
 </tr>
 <tr>
-<td rowspan="2" width="216">
+<td width="216">
 <p>网络</p>
 </td>
 <td width="224">

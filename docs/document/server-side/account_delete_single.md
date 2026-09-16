@@ -19,7 +19,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 
 | 参数     | 类型   | 是否必需 | 描述                                                         |
 | :------- | :----- | :------- | :----------------------------------------------------------- |
-| `username`  | Int    | 是       | 要删除的用户。     |
+| `username`  | String | 是       | 要删除的用户。     |
 
 关于请求 URL 中的参数说明，详见 [请求 URL 参数介绍](overview.html#请求-url)。
 

@@ -124,6 +124,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups'  \
 | 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或在 [环信控制台上调用户可加入群组数上限](/product/console/basic_conversation_group_chatroom.html#单个用户可加入群组数上限)。 |
 | 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见 详见 [IM 套餐包功能详情](/product/product_package_feature.html)。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
-| 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 |
+| 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建群组时添加的用户不存在。 | 请添加存在的用户。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

@@ -73,7 +73,7 @@
 | [App 下所有的聊天室](/document/server-side/chatroom_obtain_total.html) | 获取 App 下所有的聊天室列表。                 |
 | [用户加入的聊天室](/document/server-side/chatroom_obtain_joined.html) | 获取 App 下指定用户 ID 加入的聊天室列表。     |
 | [聊天室管理员列表](/document/server-side/chatroom_admin_list_get.html) | 获取 App 下指定聊天室 ID 的聊天室管理员列表。 |
-| [聊天室成员列表](/document/server-side/chatroom_member_list_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
+| [聊天室成员列表](/document/server-side/chatroom_member_list_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室成员列表。   |
 | [聊天室禁言列表](/document/server-side/chatroom_member_mutelist_obtain.html) | 获取 App 下指定聊天室 ID 的聊天室禁言列表。   |
 
 #### 获取历史消息记录

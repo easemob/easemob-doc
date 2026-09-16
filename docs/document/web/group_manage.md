@@ -396,7 +396,7 @@ client.groupManager.addEventHandler('group-events', {
     console.log('onAllowListRemoved', event);
   },
 
-  // 群组禁用状态变更。群组所有成员会收到该回调。
+  // 群组全员禁用状态变更。群组所有成员会收到该回调。
   onAllMemberMuteStateChanged: event => {
     console.log('onAllMemberMuteStateChanged', event);
   },

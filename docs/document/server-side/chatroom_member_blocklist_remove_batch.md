@@ -75,8 +75,8 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1%2Cuser2
 | :---------------- | :----- | :-------------- |
 | `data`          | JSON Array | 响应数据。 |
 |  - `result`     | Bool   | 是否成功将用户移出聊天室黑名单：<br/> - `true`：是；<br/> - `false`：否。 失败原因查请看 `reason`。                 |
-|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将用户移出聊天室白名单。 |
-|  - `user`       | String | 移除聊天室白名单的用户 ID。    |
+|  - `action`     | String | 执行的操作。在该响应中，该字段的值为 `remove_blocks`，表示将用户移出聊天室黑名单。 |
+|  - `user`       | String | 移出聊天室黑名单的用户 ID。    |
 |  - `chatroomid` | String | 聊天室 ID。                                                                                |
 
 响应体中的其他参数说明如下表所示：

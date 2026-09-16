@@ -311,7 +311,7 @@
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
 | `ext`          | JSON  | 消息扩展字段。                                       |
-| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `filename`：String，图片名称。<br/> - `size`，JSON，图片尺寸，单位为像素，包含以下字段：`height` 为图片高度；`width` 为图片宽度。 <br/> - `file_length`：String，图片文件大小。<br/> - `secret`：String，图片的访问密钥，即成功上传图片后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。 <br/> - `thumbFilename`：String，缩略图大小。<br/> - `type`：文件类型，`img` 表示图片消息。 <br/> - `url`: String，图片 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
+| `bodies`         | JSON Array   | 编辑消息的具体内容：<br/> - `filename`：String，语音文件名称。<br/> - `length`：Int，语音时长，单位为秒。<br/> - `file_length`：Long，语音文件大小，单位为字节。<br/> - `secret`：String，语音文件的访问密钥，即成功上传语音文件后，从 [文件上传](/document/server-side/message_upload_file.html) 的响应 body 中获取的 `share-secret`。<br/> - `type`：String，消息类型，语音消息为 `audio`。<br/> - `url`：String，语音文件的 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_upload_file.html) 的响应 body 中获取。 |
 | `meta.edit_msg`            | JSON   | 消息编辑详情。                                               |
 | `meta.edit_msg.chat_type`            | String   | 会话类型。     |
 | `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |

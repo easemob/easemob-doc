@@ -70,7 +70,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 | 209 | `USER_UPDATEINFO_FAILED` | 更新推送配置错误：例如，用户更新推送昵称或设置免打扰配置时失败。 | 检查报错的 API，延迟一段时间后，重新调用。 |
 | 210 | `USER_PERMISSION_DENIED` | 用户无权限：例如，如果用户被添加到黑名单后，发送消息时会提示该错误。其他报错情况包括用户修改其他用户发出的消息、修改其他用户设置的群成员属性以及普通群成员试图解散消息话题（仅消息话题所在群组的群主和群管理员有权解散消息话题）。 | 检查用户是否有操作权限。 |
 | 211 | `USER_BINDDEVICETOKEN_FAILED` | 绑定设备 token 失败。 | 检查调用绑定设备推送 token 的接口中传入的 token 是否为空。 |
-| 212 | `USER_UNBIND_DEVICETOKEN_FAILED` | 解绑设备 token 失败。 | 调用 `EMClient#logout`` 时出现错误 `USER_UNBIND_DEVICETOKEN_FAILED`，可以再次尝试调用 `EMClient#logout`。如果为了保证退出操作，可以调用 `EMClient#logout`，且参数设置为`false`（不解绑）。 |
+| 212 | `USER_UNBIND_DEVICETOKEN_FAILED` | 解绑设备 token 失败。 | 调用 `EMClient#logout` 时出现错误 `USER_UNBIND_DEVICETOKEN_FAILED`，可以再次尝试调用 `EMClient#logout`。如果为了保证退出操作，可以调用 `EMClient#logout`，且参数设置为`false`（不解绑）。 |
 | 213 | `USER_BIND_ANOTHER_DEVICE` | 用户已在其他设备登录：在单设备登录场景中，默认情况下，后登录的设备会踢掉当前设备的登录。若设置为先登录的设备优先，则后登录设备登录失败并提示该错误。 | 可修改为多设备登录，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
 | 214 | `USER_LOGIN_TOO_MANY_DEVICES` | 用户登录设备数超过限制。 | 可增加同时在线的设备数量，或先使用 `EMClient#kickDeviceWithToken` 踢掉其他设备再登录。 |
 | 215 | `USER_MUTED` | 用户在群组或聊天室中被禁言：用户被禁言后发送消息时提示该错误。 | 用户在群组/聊天室内被禁言情况下，不能发送消息，可在 UI 上限制。 |

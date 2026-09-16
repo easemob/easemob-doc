@@ -13,7 +13,7 @@ const message = client.chatManager.createTextMessage({
   conversationType: 'singleChat',
   content: 'message content',
   ext: {
-    // 设置否强制推送。
+    // 设置是否强制推送。
     // `YES` 表示强制推送；不传或传 `NO` 表示按普通推送规则处理。
     em_force_notification: 'YES',
   },
