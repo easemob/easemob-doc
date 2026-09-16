@@ -93,6 +93,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms' \
 | 403     | exceed_limit | appKey:XX#XX has create too many chatrooms! | appKey 创建聊天室达到上限。 | 删除不用的聊天室或联系商务调整上限。 |
 | 403     | exceed_limit | user XX has joined too many chatrooms! | 用户加入的聊天室达到上限。 | 退出不用的聊天室组或联系商务调整上限。 |
 | 403     | exceed_limit | members size is greater than max user size ! | 创建聊天室加入的人超过最大限制（取值范围为 [1,10,000]）。 | 可联系商务提升该限制。 |
-| 404     |  resource_not_found  | username XXXX doesn't exist!       | 创建聊天室时添加的用户不存在。 |
+| 404     | resource_not_found | username XXXX doesn't exist! | 创建聊天室时添加的用户不存在。 | 使用已注册的用户 ID。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

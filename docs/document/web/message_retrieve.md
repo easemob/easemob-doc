@@ -54,7 +54,7 @@ const result = await client.chatManager.getHistoryMessages({
   startTime: 1700000000000,    // 起始时间戳，单位为毫秒
   endTime: 1700100000000,      // 结束时间戳，单位为毫秒
   },
-});
+);
 ```
 
 ## 接口列表

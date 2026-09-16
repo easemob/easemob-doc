@@ -38,7 +38,7 @@
 
 | 规则模式 | 参数 | 类型 | 描述 | 生效范围 |
 | :--- | :--- | :--- | :--- | :--- |
-| `INTERVAL` | `startTime` 和 `endTime` | Object | 每日循环生效的免打扰时段，采用 24 小时制，精确到分钟，格式为 `{ hours, minutes }`。取值范围：小时 0–23，分钟 0–59。<br/> - **每日定时触发**：设置后，每天在指定时段自动进入免打扰模式。、<br/> - **跨天支持**：若结束时间早于开始时间，则时段跨天生效（从当日开始时间延续至次日结束时间）。例如，设置为 10:00–8:00 表示当日 10:00 至次日 8:00 免打扰。<br/> - **全天与关闭**：开始与结束时间相同时，视为全天生效；设置为 0:00–0:00 用于关闭免打扰模式。<br/> - **单时段限制**：仅支持设置一个每日免打扰时段，新配置覆盖旧配置。<br/> - **生效时机**：设置后立即生效。例如，当日 11:00 设置 8:00–12:00，则当天从 11:00 起生效至 12:00，此后每日按 8:00–12:00 执行。 | 仅 App 全局。 |
+| `INTERVAL` | `startTime` 和 `endTime` | Object | 每日循环生效的免打扰时段，采用 24 小时制，精确到分钟，格式为 `{ hours, minutes }`。取值范围：小时 0–23，分钟 0–59。<br/> - **每日定时触发**：设置后，每天在指定时段自动进入免打扰模式。<br/> - **跨天支持**：若结束时间早于开始时间，则时段跨天生效（从当日开始时间延续至次日结束时间）。例如，设置为 10:00–8:00 表示当日 10:00 至次日 8:00 免打扰。<br/> - **全天与关闭**：开始与结束时间相同时，视为全天生效；设置为 0:00–0:00 用于关闭免打扰模式。<br/> - **单时段限制**：仅支持设置一个每日免打扰时段，新配置覆盖旧配置。<br/> - **生效时机**：设置后立即生效。例如，当日 11:00 设置 8:00–12:00，则当天从 11:00 起生效至 12:00，此后每日按 8:00–12:00 执行。 | 仅 App 全局。 |
 | `DURATION` | `duration` | Int | 一次性生效的免打扰持续时长，单位为分钟。取值范围：`0`–`10080`（即 0 到 7 天），其中 `0` 表示该参数无效。<br/> - **一次有效**：与每日循环的“免打扰时间段”不同，本参数为单次生效，设置后立即开始计时。<br/> - **生效示例**：上午 8:00 设置 `duration = 240`（4 小时），则 App 在当天 8:00–12:00 处于免打扰模式。 | App 全局或指定单聊、群聊会话。 |
 
 **`INTERVAL` 和 `DURATION` 同时设置时的叠加规则**
@@ -132,7 +132,7 @@ const result = await client.pushManager.getConversationListByRemindType({
 ```typescript
 const result = await client.pushManager.clearConversationRemindType({
   conversationId: '12345', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-  conversationType: 'groupChat', // 会话类型：singleChat（单聊）、groupChat（群聊）或 chatRoom（聊天室）。
+  conversationType: 'groupChat', // 会话类型：singleChat（单聊），groupChat（群聊）。
 });
 ```
 
@@ -146,7 +146,7 @@ SDK 当前仅支持 `singleChat` 和 `groupChat` 两类会话，不支持 `chatR
 // 设置会话的推送通知方式
 await client.pushManager.setConversationSilentMode({
   conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-  conversationType: 'singleChat', // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
+  conversationType: 'singleChat', // 会话类型：singleChat（单聊），groupChat（群聊）。
   rule: {
     mode: 'REMIND_TYPE', // 推送通知方式。
     remindType: 'ALL', // 可设置为 `ALL`、`AT` 或 `NONE`。
@@ -186,7 +186,7 @@ await client.pushManager.setConversationSilentMode({
 ```typescript
 const result = await client.pushManager.getConversationSilentMode({
   conversationId: 'test', // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-  conversationType: 'singleChat', // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
+  conversationType: 'singleChat', // 会话类型：singleChat（单聊），groupChat（群聊）。
 });
 ```
 
@@ -206,7 +206,7 @@ const result = await client.pushManager.getConversationSilentModes({
   conversationList: [
     {
       conversationId: 'test',  // 会话 ID：单聊为对方用户 ID，群聊为群组 ID，聊天室会话为聊天室 ID。
-      conversationType: 'singleChat',  // 会话类型：singleChat（单聊）、groupChat（群聊）和 chatRoom（聊天室）。
+      conversationType: 'singleChat',  // 会话类型：singleChat（单聊），groupChat（群聊）。
     },
     {
       conversationId: '1234',

@@ -106,15 +106,24 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX2tB'  \
       "type": "user",
       "created": 1542361376245,
       "modified": 1542361376245,
-      "username": "XXXX",
+      "username": "user3",
       "activated": true,
-      "nickname": "testuser"
+      "nickname": "user3"
+    },
+    {
+      "uuid": "08990f10-XXXX-XXXX-a3dd-497e1c489abc",
+      "type": "user",
+      "created": 1542361387000,
+      "modified": 1542361387000,
+      "username": "user4",
+      "activated": true,
+      "nickname": "user4"
     }
   ],
   "timestamp": 1542559337702,
   "cursor": "LTgzXXXX2tB",
   "duration": 2,
-  "count": 1
+  "count": 2
 }
 ```
 

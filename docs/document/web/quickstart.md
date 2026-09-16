@@ -29,7 +29,7 @@ Easemob_quickstart<br>
 - 有效的 [环信即时通讯 IM 开发者账号](/product/console/account_register.html#注册账号)；
 - 在环信控制台[创建应用](/product/console/app_create.html) 并 [获取 App Key](/product/console/app_manage.html#管理应用)；
 - 已安装 [npm](https://www.npmjs.com/get-npm)；
-- SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
+- 使用现代浏览器，如 Chrome、Firefox、Safari，或使用这些浏览器引擎的其他浏览器（例如 Microsoft Edge），不支持 Internet Explorer (IE)。
 
 ## 实现流程
 

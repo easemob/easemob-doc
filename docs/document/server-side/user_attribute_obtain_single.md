@@ -60,8 +60,8 @@ curl -X GET 'https://XXXX/XXXX/XXXX/metadata/user/user1'    \
 | :----- | :----- | :------------------------------------------------------------------------------------ |
 | `data` | Object | 用户属性键值对。<br/>如果 `data` 为空，请确认用户 ID 是否存在或该用户是否有用户属性。 |
 | - `ext`  | String      | 扩展字段。    |
-| - `nickname`  | 用户昵称。长度在 64 个字符内。      |
-| - `avatarurl` | 用户头像 URL 地址。长度在 256 个字符内。    |
+| - `nickname`  | String | 用户昵称。长度在 64 个字符内。      |
+| - `avatarurl` | String | 用户头像 URL 地址。长度在 256 个字符内。    |
 | `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
 | `duration`        | Int    | 从发送请求到响应的时长，单位为毫秒。                                           |
 
@@ -73,6 +73,6 @@ curl -X GET 'https://XXXX/XXXX/XXXX/metadata/user/user1'    \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | 鉴权失败。例如，使用的 token 与路径参数 `username` 不匹配。   | 使用正确的 token。     |
 | 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
-| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  | 
+| 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  |  | 
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

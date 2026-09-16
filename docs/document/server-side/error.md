@@ -78,8 +78,8 @@
 
 调用 REST API 时，若相关服务未开通，提示 400 或 403 错误码，如下表所示：
 
-| HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 
-| :---------- | :---------- | :--------- | :----------- |
+| HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议 | 
+| :---------- | :---------- | :--------- | :----------- | :----------- |
 | 403     | group_error | thread not open. | 消息话题功能未开通。 | 请在环信控制台开通消息话题服务。 |
 | 403      | forbidden_op | message broadcast service is unopened  | 未开通发送聊天室广播消息的功能配置。| 联系商务开通。 |
 | 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系商务开通。  |

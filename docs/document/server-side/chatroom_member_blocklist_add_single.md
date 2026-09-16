@@ -69,8 +69,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users/user1'  \
 | :------ | :----- | :--------- |
 | `data` | JSON | 响应数据。 |
 | - `result` | Boolean | 用户是否成功添加至聊天室黑名单。<br/> - `true`：是 <br/> - `false`：否 |
-| - `action` | String | 执行的操作。`remove_blocks` 表示将用户从聊天室黑名单中移掉。  |
-| - `user`   | String   | 该用户 ID 已从聊天室黑名单中删除。|
+| - `action` | String | 执行的操作。`add_blocks` 表示将用户添加至聊天室黑名单。  |
+| - `user`   | String   | 已添加至聊天室黑名单的用户 ID。|
 | - `chatroomid`   | String   | 聊天室 ID。|
 
 响应体中的其他参数说明如下表所示：

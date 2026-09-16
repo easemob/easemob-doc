@@ -105,6 +105,6 @@ curl -X POST https://XXXX/XXXX/XXXX/chatgroups/10XXXX85/mute   \
 | 403     | forbidden_op | users [XX] are not members of this group! | 要禁言的用户 ID 不在群组中。 | 传入群组中的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 400     | invalid_parameter | userNames size is more than max limit : 100 | 批量禁言指定群成员数量超过 100 | 控制禁言指定群成员数量在 100 以内。 |
-| 403    | forbidden_op   | "forbidden operation on group owner!"   | 无法对群主禁言。  |
+| 403    | forbidden_op   | "forbidden operation on group owner!"   | 无法对群主禁言。  | 不能对群主禁言。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
