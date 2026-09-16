@@ -165,7 +165,6 @@ ChatClient.getInstance().chatManager.addMessageListener({
 
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `ChatGroupManager#getGroupNamecard` 仅查询本地内存，不会主动从服务端获取最新数据。
-- `ChatGroupManager#fetchMemberInfoListFromServer` 返回的群成员信息会自动更新本地内存。只有 [开启用户信息自动管理功能](userinfo_provider.html) 后，该接口返回的信息才包含群名片、昵称和头像地址。
 - `ChatGroupEventListener#onUserGroupNamecardChanged` 的群成员名片变更通知仅投递给在线用户。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化时将 `ChatOptions#enableUserInfo` 设为 `true`。
 - 开启 [用户信息自动管理](userinfo_provider.html#通过消息获取发送方信息) 后，群成员名片的自动更新依赖消息触发；若业务需要主动获取最新数据，仍应调用服务端接口。

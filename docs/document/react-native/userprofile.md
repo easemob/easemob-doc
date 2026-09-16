@@ -148,9 +148,9 @@ try {
 }
 ```
 
-:::tip
+开启[用户信息自动管理功能](userinfo_provider.html)后，接收方收到携带发送方用户信息的消息时，如果消息中的用户属性更新时间晚于本地缓存，SDK 会自动从服务端获取最新用户属性并更新本地缓存，该机制不受双方好友关系影响。
+
 若需要 SDK 在登录成功后自动同步好友列表及好友信息，应在初始化时将 `ChatOptions#enableAutoSyncContacts` 设为 `true`。若还需在 `ChatContact#userInfo` 中自动管理好友用户属性，应同时将 `ChatOptions#enableUserInfo` 设为 `true`。同步完成后，可调用 `ChatContactManager#getAllContacts()` 或 `getContact(userId)` 读取本地好友对象。详见 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)。
-:::
 
 ## 订阅非好友用户的属性变更
 
@@ -232,7 +232,7 @@ React Native SDK 通过 `ChatUserInfoEventListener` 提供以下用户属性事�
 
 其他用户的属性更新可能由以下场景触发：
 
-1. **主动拉取更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，若服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
+1. **主动拉取更新**：主动调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，若服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
 2. **消息携带更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户的属性并触发 `onUserInfoUpdate`。该机制对好友和非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：已订阅的非好友用户属性发生变化时，SDK 会触发 `onUserInfoUpdate`。
 

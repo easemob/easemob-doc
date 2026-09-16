@@ -16,8 +16,8 @@
 2. 群成员名片发生变化并同步到本地内存后，SDK 会通过 `GroupListener#onUserGroupNamecardUpdated` 通知业务层。
 3. SDK 支持通过 `GroupManager#fetchGroupMemberDetails` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地内存。返回的 `GroupMember` 包含成员 ID、群名片、昵称、头像、角色和入群时间等信息。
 4. SDK 支持通过 `GroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。
-5. 开启 [用户信息自动管理功能](userinfo_provider.html) 后，发送消息时会携带发送方信息。接收方可通过 `ChatMessage#getSenderInfo` 获取发送方的用户 ID、昵称、头像、群名片和联系人备注。接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。本地内存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
-
+5. 开启 [用户信息自动管理功能](userinfo_provider.html) 后，发送消息时会自动携带发送方信息信息更新时间。接收方可通过 `ChatMessage#getSenderInfo` 获取发送方的用户 ID、昵称、头像、群名片和联系人备注。接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。
+ 
 内存更新流程如下图所示：
 
 ![img](/images/harmonyos/memory_update_groupcard.png)
@@ -77,7 +77,16 @@ groupManager.updateGroupNamecard('groupId', 'new_namecard')
 
 ## 从服务端获取群成员名片
 
-调用 `GroupManager#fetchGroupMemberDetails` 从服务端分页获取群成员信息。如果需要获取群成员的群名片、昵称和头像，应在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)，否则返回的 `GroupMember` 不包含 `namecard`、`nickname` 和 `avatarUrl`。获取成功后，返回的群成员信息会同步到本地内存。
+调用 `GroupManager#fetchGroupMemberDetails` 从服务端分页获取群成员信息。获取成功后，返回的群成员信息（包括群成员名片）会同步到本地内存。
+
+`GroupMember` 提供以下常用属性：
+
+- `memberId`：群成员用户 ID。
+- `namecard`：成员在当前群组中的群成员名片。
+- `nickname`：成员的用户昵称。
+- `avatarUrl`：成员头像 URL。
+- `joinTime`：成员入群时间。
+- `role`：成员在群组中的角色。
 
 ```typescript
 // `pageSize` 的取值范围为 1-50。
@@ -106,15 +115,6 @@ groupManager.fetchGroupMemberDetails('groupId', 20)
   });
 ```
 
-`GroupMember` 提供以下常用属性：
-
-- `memberId`：群成员用户 ID。
-- `namecard`：成员在当前群组中的群成员名片。
-- `nickname`：成员的用户昵称。
-- `avatarUrl`：成员头像 URL。
-- `joinTime`：成员入群时间。
-- `role`：成员在群组中的角色。
-
 ## 从本地内存获取群成员名片
 
 调用 `GroupManager#getGroupNamecard` 可从本地内存读取指定成员在指定群组中的群成员名片。该方法为同步方法，不会发起网络请求；如果 SDK 未初始化群组管理器或本地内存中没有对应数据，返回空字符串。
@@ -129,7 +129,7 @@ if (groupManager) {
 
 ## 通过消息自动同步群成员名片
 
-如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。
+如果希望在发送消息时自动携带群成员名片更新时间，并在接收消息时自动更新本地内存，需要在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。
 
 ```typescript
 const options = new ChatOptions({ appKey: 'your-org#your-app' });
@@ -167,7 +167,6 @@ if (senderInfo) {
 
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `GroupManager#getGroupNamecard` 仅查询本地内存，不会主动从服务端获取最新数据。
-- 需在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。开启后，`GroupManager#fetchGroupMemberDetails` 返回的群成员信息才包含群名片、昵称和头像，并会将成功获取的数据同步到本地内存；消息中的 `ChatMessage#getSenderInfo` 也可用于获取发送方信息。未开启该功能时，`getSenderInfo` 可能返回 `undefined`，通过服务端获取的用户信息也不会写入本地内存。需要注意的是，群成员名片的自动更新依赖消息触发；如果业务需要主动获取最新数据，仍应调用 `fetchGroupMemberDetails` 等服务端接口。
 
 ## 常见问题
 

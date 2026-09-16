@@ -173,9 +173,9 @@ Future<void> getLocalUsersInfo() async {
 }
 ```
 
-:::tip
+开启[用户信息自动管理功能](userinfo_provider.html)后，接收方收到携带发送方用户信息的消息时，如果消息中的用户属性更新时间晚于本地缓存，SDK 会自动从服务端获取最新用户属性并更新本地缓存，该机制不受双方好友关系影响。
+
 如需 SDK 在登录成功后自动同步好友列表及好友信息，需在初始化前设置 `ChatOptions.withAppKey` 的 `enableAutoSyncContacts: true`。同步完成后，可通过 `ChatContactManager#getAllContacts`、`getContact` 或 `getAllContactIds` 读取本地好友数据。详见 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)。
-:::
 
 ## 订阅非好友用户的属性变更
 
@@ -269,7 +269,7 @@ Future<void> fetchSubscribedUsers() async {
 
 其他用户的属性可能在以下场景中更新：
 
-1. **主动获取更新**：调用 [从服务端获取用户属性](#从服务端获取用户的属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，若服务端数据较新，原生 SDK 更新本地数据并触发事件。
+1. **主动获取更新**：主动调用 [从服务端获取用户属性](#从服务端获取用户的属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，若服务端数据较新，原生 SDK 更新本地数据并触发事件。
 2. **消息携带更新**：初始化 SDK 时启用 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理) 后，收到消息时若发送方属性较新，原生 SDK 自动获取最新数据并触发事件。该机制对好友与非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：已调用 `subscribeUsersInfo` 的非好友用户属性发生变化时触发事件。
 

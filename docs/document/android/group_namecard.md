@@ -75,7 +75,7 @@ EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_n
 
 ## 从服务端获取群成员名片
 
-调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务器分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前调用 `EMOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)；否则，返回的 `EMGroupMemberInfo` 不包含 `namecard`、`nickname` 和 `avatarUrl`。获取成功后，相关数据会自动更新至本地内存。
+调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务器分页获取群成员信息，包括群成员名片。获取成功后，相关数据会自动更新至本地内存。
 
 ```java
 // 异步方法。
@@ -141,7 +141,7 @@ EMClient.getInstance().init(context, options);
 
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `EMGroupManager#getGroupNamecard` 仅查询本地内存，不会主动从服务端获取最新数据。
-- `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。只有 [开启用户信息自动管理功能](userinfo_provider.html) 后，该接口返回的信息才包含群名片、昵称和头像。
+- 主动调用 `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。
 - `EMGroupChangeListener#onUserGroupNamecardUpdated` 仅对在线用户投递。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化前调用 `EMOptions#setEnableUserInfo(true)`。
 - 开启 `EMOptions#setEnableUserInfo(true)` 后，群成员名片的自动更新依赖消息触发；若业务需要主动获取最新数据，仍应调用服务端接口。

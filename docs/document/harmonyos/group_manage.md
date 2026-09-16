@@ -157,7 +157,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMembers(groupId, pageSize, cu
 });
 ```
 
-- 获取群成员详细信息。该方法返回用户 ID、加入时间、角色等信息；如需同时获取群名片、昵称和头像 URL，除使用 HarmonyOS SDK 1.13.0 或以上版本外，还需在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)。获取成功后，返回的数据会同步到本地内存。
+- 获取群成员详细信息。该方法返回用户 ID、加入时间、角色等信息。获取成功后，返回的数据会同步到本地内存。
   
 ```typescript
 ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSize, cursor).then((data) => {

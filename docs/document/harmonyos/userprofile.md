@@ -19,26 +19,6 @@
 - 单个 app 的全部用户属性数据最大不超过 10 GB。
 - 调用设置或获取用户属性的相关接口超过频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
-## 开启用户信息自动管理功能
-
-如果需要使用用户属性本地缓存、消息发送方信息以及登录后自动同步当前用户信息，需在调用 `ChatClient#init` 前开启 [用户信息自动管理功能](userinfo_provider.html)：
-
-```typescript
-const options = new ChatOptions({ appKey: 'your_app_key' });
-options.setEnableUserInfo(true);
-
-// 使用 options 初始化 SDK。
-ChatClient.getInstance().init(context, options);
-```
-
-`ChatOptions#setEnableUserInfo` 默认为 `false`。未开启时，仍可调用服务端用户属性接口，但存在以下限制：
-
-- SDK 不会自动同步消息发送方最新的群成员名片和用户属性；
-- 从服务端获取的用户属性不会写入本地缓存；
-- `UserInfoManager#getUserInfoById` 和 `getUserInfoWithUserId` 无法从本地读取相应数据；
-- `ChatMessage#getSenderInfo()` 返回 `undefined`；
-- 登录成功后，SDK 不会自动同步当前用户信息。
-
 ## 设置当前用户的属性
 
 ### 设置当前用户的所有属性
@@ -108,8 +88,6 @@ ChatClient.getInstance().userInfoManager()
 
 你可以调用 `UserInfoManager#fetchUserInfoById(userId)`，从服务端获取一个或多个用户的全部属性。`userId` 可以是单个用户 ID，也可以是用户 ID 数组。成功时返回 `Promise<Map<string, UserInfo>>`，其中键为用户 ID，值为对应的用户属性。
 
-自 v1.13.0 开始，开启 `ChatOptions#setEnableUserInfo(true)` 后，如果服务端返回的用户属性比本地缓存更新，SDK 会更新本地数据，并可能触发 `UserInfoListener#onUserInfoUpdate` 回调。
-
 ```typescript
 const userIds: string[] = ['user1', 'user2'];
 
@@ -125,8 +103,6 @@ ChatClient.getInstance().userInfoManager()?.fetchUserInfoById(userIds)
 ### 从服务端获取用户的指定属性
 
 你可以给 `fetchUserInfoById` 传入第二个参数，只获取一个或多个指定属性。第二个参数可以是单个 `UserInfoType`，也可以是 `UserInfoType` 数组。省略第二个参数，或传入空的属性数组，均表示获取全部用户属性。
-
-自 v1.13.0 开始，开启 `ChatOptions#setEnableUserInfo(true)` 后，如果服务端返回的用户属性比本地缓存更新，SDK 会更新本地数据，并可能触发 `UserInfoListener#onUserInfoUpdate` 回调。
 
 ```typescript
 const userIds: string[] = [
@@ -150,35 +126,42 @@ ChatClient.getInstance().userInfoManager()
 
 ### 从本地缓存读取用户属性
 
-如需从 SDK 本地缓存批量读取用户属性，可以调用 `UserInfoManager#getUserInfoById(userId)`。该方法不会发起网络请求，并通过 `Promise` 返回用户 ID 与 `UserInfo` 的映射；本地不存在的用户不会包含在结果中。
+SDK 提供以下两种本地用户属性读取方式，均不会发起网络请求：
 
-若只需同步读取单个用户的属性，可以调用 `UserInfoManager#getUserInfoWithUserId(userId)`。本地缓存中不存在该用户、用户 ID 为空或读取失败时，该方法返回 `undefined`。
+- 调用 `UserInfoManager#getUserInfoById(userIds)` 异步批量读取，通过 `Promise` 返回用户 ID 与 `UserInfo` 的映射；本地缓存中不存在的用户不会包含在结果中。
+- 调用 `UserInfoManager#getUserInfoWithUserId(userId)` 同步读取单个用户；用户 ID 为空、本地无对应数据或读取失败时，返回 `undefined`。
 
 ```typescript
 const manager = ChatClient.getInstance().userInfoManager();
 const userIds: string[] = ['user1', 'user2'];
 
+// 异步批量读取。
 manager?.getUserInfoById(userIds)
   .then((userInfoMap: Map<string, UserInfo>) => {
     userInfoMap.forEach((info: UserInfo, userId: string) => {
-      console.info(`userId=${userId}, nickname=${info.nickname}, avatarUrl=${info.avatarUrl}`);
+      console.info(
+        `userId=${userId}, nickname=${info.nickname}, avatarUrl=${info.avatarUrl}`
+      );
     });
   })
   .catch((error: ChatError) => {
-    console.error(`读取本地用户属性失败：${error.errorCode}, ${error.description}`);
+    console.error(
+      `读取本地用户属性失败：${error.errorCode}, ${error.description}`
+    );
   });
 
-const localInfo: UserInfo | undefined = manager?.getUserInfoWithUserId('user1');
+// 同步读取单个用户。
+const localInfo: UserInfo | undefined =
+  manager?.getUserInfoWithUserId('user1');
+
 if (localInfo) {
   console.info(`nickname=${localInfo.nickname}`);
 }
 ```
 
-:::tip
-本地用户属性缓存依赖用户信息功能。请在初始化 SDK 前调用 `ChatOptions#setEnableUserInfo(true)` [开启用户信息自动管理功能](#开启用户信息自动管理功能)。
+开启[用户信息自动管理功能](userinfo_provider.html)后，接收方收到携带发送方用户信息的消息时，如果消息中的用户属性更新时间晚于本地缓存，SDK 会自动从服务端获取最新用户属性并更新本地缓存，该机制不受双方好友关系影响。
 
-若还需要 SDK 在登录成功后自动同步好友列表和好友信息，请在初始化前调用 `ChatOptions#setEnableAutoSyncContacts(true)`。同步完成后，可调用 `ContactManager#getContactsFromLocal()` 获取本地好友列表，并通过每个 `Contact` 对象的 `getUserInfo()` 读取其本地用户属性。关于初始化配置，详见 [初始化文档](initialization.html)。
-:::
+如需在登录成功后自动同步好友列表和好友信息，还需在初始化 SDK 前调用 `ChatOptions#setEnableAutoSyncContacts(true)`。同步完成后，可以调用 `ContactManager#getContactsFromLocal()` 获取本地好友列表，并通过 `Contact#getUserInfo()` 读取好友的本地用户属性。相关配置详见[初始化文档](initialization.html)。
 
 ## 订阅非好友用户的属性变更
 
@@ -254,7 +237,7 @@ ChatClient.getInstance().userInfoManager()?.fetchSubscribedUsers()
 
 其他用户的属性更新可能由以下场景触发：
 
-1. **主动拉取更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 的接口时，如果服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
+1. **主动拉取更新**：主动调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 的接口时，如果服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
 2. **消息携带更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户的属性并触发 `onUserInfoUpdate`。该机制对好友和非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：已订阅的非好友用户属性发生变化时，SDK 会触发 `onUserInfoUpdate`。
 

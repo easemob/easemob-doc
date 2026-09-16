@@ -103,7 +103,7 @@ print("群成员名片：\(namecard ?? "")")
 
 ## 通过消息自动同步群成员名片
 
-如果希望在发送消息时自动携带群成员名片信息，并在接收消息时自动更新本地内存，需要开启用户信息自动管理功能，即将 `EMOptions#enableUserInfo` 设置为 `true`。
+如果希望在发送消息时自动携带群成员名片更新时间，并在接收消息时自动更新本地内存，需要开启用户信息自动管理功能，即将 `EMOptions#enableUserInfo` 设置为 `true`。
 
 ```swift
 let options = EMOptions(appkey: "your_appkey")

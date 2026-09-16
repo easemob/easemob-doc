@@ -6,7 +6,7 @@
 
 例如，在企业群组中，成员可将在群组中的名片设置为“部门-姓名”或“岗位-姓名”的格式，便于群内成员快速识别和沟通。
 
-即时通讯 IM Flutter SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
+即时通讯 IM Flutter SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。
 
 **本功能从 Flutter SDK 4.22.0 版本开始支持。**
 
@@ -102,7 +102,7 @@ Future<void> updateMyGroupNamecard() async {
 
 ## 从服务端获取群成员名片
 
-调用 `ChatGroupManager#fetchGroupMembersInfo` 从服务端分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前将 `ChatOptions#enableUserInfo` 设置为 `true`，开启 [用户信息自动管理功能](userinfo_provider.html)；否则返回的 `GroupMemberInfo` 不包含 `namecard`、`nickname` 和 `avatarUrl`。
+调用 `ChatGroupManager#fetchGroupMembersInfo` 从服务端分页获取群成员信息，包括群成员名片。
 
 获取成功后，相关数据会自动更新至原生 SDK 的本地内存。
 

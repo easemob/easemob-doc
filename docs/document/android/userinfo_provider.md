@@ -97,9 +97,9 @@ EMClient.getInstance()
 
 ## 通过消息获取发送方信息
 
-开启用户信息自动管理后，如果发送方在发送消息时携带了自己的用户信息，则无论发送方与接收方是否为好友关系，当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性，并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
+开启用户信息自动管理后，发送消息时，SDK 会自动携带发送方用户属性的更新时间；发送群聊消息时，还会携带发送方在当前群中的群成员名片更新时间。应用无需手动将这些信息或完整用户属性添加到消息扩展中。当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会从服务端拉取该用户属性，并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
 
-你可以通过 `EMMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
+你可以通过 `EMMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。如果接收方已为该发送方设置好友备注，还可调用 `EMSenderInfo#getRemark()` 获取该备注。好友备注属于接收方的私有好友数据，由接收方 SDK 从本地好友信息中读取，不会由消息发送方随消息发送，也不会传递给对方。
 
 ```java
 public void onMessageReceived(List<EMMessage> messages) {
