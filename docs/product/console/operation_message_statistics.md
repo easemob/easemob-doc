@@ -64,16 +64,16 @@ In the **Message Trend** section, you can view the overall trends for uplink mes
 
 In the **Upstream Message Type Trend**, **Downstream Message Type Trend**, and **Offline Message Type Trend** sections, you can view trends for the following message types:
 
-- Text messages
-- Image messages
-- Video messages
-- Voice messages
-- Command messages
-- Location messages
-- File messages
-- Custom messages
-- Combined messages
-- Empty messages
+- Text message
+- Image message
+- Video message
+- Voice message
+- Command message
+- Location message
+- File message
+- Custom message
+- Combined message
+- Empty message
 
 ![img](/images/console/operation_data_message_statistics_single_uplink.png)
 ![img](/images/console/operation_data_message_statistics_single_downlink.png)
