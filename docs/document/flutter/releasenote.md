@@ -5,9 +5,9 @@
 #### 重大变更
 
 - **公开 API 命名统一**：所有公开 API 的类、枚举等统一由 `EM` 更名为 `Chat` 前缀。
-  - 主要变更示例：`ChatClient` → `ChatClient`，`ChatOptions` → `ChatOptions`，`ChatMessage` → `ChatMessage`。
+  - 主要变更示例：`EMClient` → `ChatClient`，`EMOptions` → `ChatOptions`，`EMMessage` → `ChatMessage`。
   - 兼容处理：在 `em_compat.dart` 中通过 `@Deprecated` 标记的 `typedef` 保留了旧名称，现有代码无需修改即可继续编译运行。建议开发者逐步迁移至新命名，旧名称将在未来大版本中移除。
-  - 不兼容变更：少量因语法限制无法通过 `typedef` 兼容的名称直接更名，包括 `ChatLog` → `ChatLog`、`ChatTools` → `ChatTools`、`ChatGroupPermissionTypeExtension` → `ChatGroupPermissionTypeExtension`。
+  - 不兼容变更：少量因语法限制无法通过 `typedef` 兼容的名称直接更名，包括 `EMLog` → `ChatLog`、`EMTools` → `ChatTools`、`EMGroupPermissionTypeExtension` → `ChatGroupPermissionTypeExtension`。
   - 导入路径调整：深层路径导入（如 `package:im_flutter_sdk/src/models/em_options.dart`）将不再兼容，请统一从包入口 `package:im_flutter_sdk/im_flutter_sdk.dart` 导入。
 - **iOS 最低版本提升**：iOS 平台最低支持版本提升至 13.0。
 

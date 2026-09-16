@@ -107,12 +107,6 @@ function removeUserInfoListener(): void {
 | `groupNameCard` | `string \| undefined` | 消息发送方在当前群组中的群成员名片。 |
 
 ```typescript
-import { ChatClient } from 'react-native-chat-sdk';
-import type {
-  ChatMessage,
-  ChatMessageEventListener,
-} from 'react-native-chat-sdk';
-
 const messageListener: ChatMessageEventListener = {
   onMessagesReceived(messages: ChatMessage[]) {
     for (const message of messages) {

@@ -241,13 +241,6 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 创建和发送单聊视频消息的示例代码如下：
 
 ```typescript
-import {
-  ChatClient,
-  ChatMessage,
-  ChatMessageChatType,
-} from 'react-native-chat-sdk';
-import type { ChatMessageStatusCallback } from 'react-native-chat-sdk';
-
 const videoPath = '<local_video_path>';
 const thumbnailPath = '<local_thumbnail_path>';
 

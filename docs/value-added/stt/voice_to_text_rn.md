@@ -61,19 +61,9 @@ React Native SDK 对 Android 和 iOS 原生 SDK 的语音转文字能力进行�
 
 调用 `ChatManager#voiceMessageToText` 将单条语音消息转换为文本。该方法返回 `Promise<string>`；转换成功时返回文本，失败时抛出 `ChatError`。
 
-// TODO：需要这一段吗？
-该方法不会直接修改调用时传入的 JavaScript `ChatMessage` 对象。若需读取原生 SDK 已持久化的结果，应根据消息 ID 重新获取消息，详见 [读取语音消息的转换结果](#读取语音消息的转换结果)。
-
 为获得更优性能，**推荐优先使用标准的 `MP3` 格式语音消息**。
 
 ```typescript
-import {
-  ChatClient,
-  ChatError,
-  ChatMessageType,
-} from 'react-native-chat-sdk';
-import type { ChatMessage } from 'react-native-chat-sdk';
-
 async function convertVoiceMessage(voiceMessage: ChatMessage) {
   if (voiceMessage.body.type !== ChatMessageType.VOICE) {
     console.error('传入的消息不是语音消息');
@@ -122,13 +112,6 @@ async function convertVoiceMessage(voiceMessage: ChatMessage) {
 下面示例以本地 `PCM` 文件为例，展示如何配置 `voiceParam` 并发起转换：
 
 ```typescript
-import {
-  ChatClient,
-  ChatError,
-  ChatVoiceFormat,
-  ChatVoiceParam,
-} from 'react-native-chat-sdk';
-
 const filePath = '/path/to/voice.pcm';
 const voiceParam = new ChatVoiceParam({
   format: ChatVoiceFormat.PCM,
@@ -195,30 +178,6 @@ const text = await ChatClient.getInstance()
 ```
 
 `ChatVoiceMessageBody` 还包含可选字段 `text?: string`。该字段由原生 SDK 返回的消息数据反序列化得到；消息尚未转换或当前消息数据不包含转换结果时，其值为 `undefined`。
-
-// TODO：下面一段话移掉？
-
-调用 `voiceMessageToText` 后，传入的 JavaScript 消息对象不会被原地更新。如果需要检查本地数据库中的消息数据，可以根据消息 ID 重新获取消息，再读取 `text`：
-
-```typescript
-import {
-  ChatClient,
-  ChatMessageType,
-} from 'react-native-chat-sdk';
-import type { ChatVoiceMessageBody } from 'react-native-chat-sdk';
-
-const reloadedMessage = await ChatClient.getInstance()
-  .chatManager.getMessage(voiceMessage.msgId);
-
-if (reloadedMessage?.body.type === ChatMessageType.VOICE) {
-  const voiceBody = reloadedMessage.body as ChatVoiceMessageBody;
-  console.log('已持久化的转换文本：', voiceBody.text);
-}
-```
-
-:::tip
-请勿通过手动修改 `ChatVoiceMessageBody.text` 的方式保存识别结果。应以 `voiceMessageToText` 的返回值，以及从 SDK 本地数据库重新获取或由 SDK 下发的消息数据为准。
-:::
 
 ## 注意事项
 

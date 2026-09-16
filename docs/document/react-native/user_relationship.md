@@ -139,8 +139,6 @@ try {
 `deleteContact` 的第二个参数 `keepConversation` 用于表示是否保留与该好友相关的本地单聊会话及消息，默认值为 `false`：
 
 ```typescript
-import { ChatClient } from 'react-native-chat-sdk';
-
 try {
   await ChatClient.getInstance().contactManager.deleteContact(
     'userId',
@@ -151,8 +149,6 @@ try {
   console.error('好友删除失败：', error);
 }
 ```
-
-// TODO：需要保留吗？
 
 :::warning
 React Native SDK 1.18.0 的 Android 原生桥接层调用不带 `keepConversation` 参数的异步删除接口，因此该参数在 Android 平台不会传递给原生 SDK，无法用它保证保留本地会话和消息。Android 平台会采用原生异步删除接口的默认行为。iOS 平台会将该参数传递给原生 SDK。
@@ -194,8 +190,6 @@ React Native SDK 使用 `ChatContact` 表示好友对象。自 SDK 1.18.0 版本
 若要自动管理好友的 `userInfo` 用户属性，需同时将 `ChatOptions#enableUserInfo` 设置为 `true`：
 
 ```typescript
-import { ChatClient, ChatOptions } from 'react-native-chat-sdk';
-
 const options = ChatOptions.withAppKey({
   appKey: 'your-org#your-app',
   enableAutoSyncContacts: true,
@@ -359,8 +353,6 @@ try {
 若需屏蔽某个用户的消息，可调用 `ChatContactManager#addUserToBlockList` 将其加入黑名单。该操作适用于任何用户，无论是否为好友。被加入黑名单后，该用户将无法向你发送消息或好友申请；若该用户是好友，其好友关系仍会保留在好友列表中。
 
 ```typescript
-import { ChatClient } from 'react-native-chat-sdk';
-
 try {
   await ChatClient.getInstance()
     .contactManager.addUserToBlockList('userId');

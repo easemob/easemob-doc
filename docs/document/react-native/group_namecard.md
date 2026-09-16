@@ -116,8 +116,6 @@ try {
 调用 `ChatGroupManager#getGroupNamecard` 可从本地内存读取指定成员在指定群组中的群成员名片。该接口不会发起网络请求，适用于本地展示场景；本地不存在对应数据或群名片已清除时，返回 `undefined`。
 
 ```typescript
-import { ChatClient } from 'react-native-chat-sdk';
-
 try {
   const namecard = await ChatClient.getInstance()
     .groupManager.getGroupNamecard('groupId', 'userId');

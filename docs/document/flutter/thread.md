@@ -111,7 +111,7 @@ try {
 
 消息话题成员均可以主动调用 `ChatThreadManager#leaveChatThread` 方法退出消息话题，退出消息话题后，该成员将不会再收到消息话题中的消息。
 
-多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_LEAVE`。
+多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_LEAVE`。
 
 示例代码如下：
 
@@ -130,7 +130,7 @@ try {
 
 仅群主和群管理员可以调用 `ChatThreadManager#removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出消息话题，被踢出消息话题的成员将不再接收到消息话题中的消息。
 
-被踢出消息话题的成员会收到 `ChatThreadEventHandler#onUserKickOutOfChatThread` 事件；多设备登录时，执行踢人操作的成员的其他设备会同时收到 `ChatMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_KICK`。
+被踢出消息话题的成员会收到 `ChatThreadEventHandler#onUserKickOutOfChatThread` 事件；多设备登录时，执行踢人操作的成员的其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_KICK`。
 
 示例代码如下：
 
@@ -151,7 +151,7 @@ try {
 
 仅群主和群管理员以及消息话题的创建者可以调用 `ChatThreadManager#updateChatThreadName` 方法修改消息话题名称。
 
-单设备登录时，消息话题所属群组的所有成员会收到 `ChatThreadEventHandler#onChatThreadUpdate` 事件；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_UPDATE`。
+单设备登录时，消息话题所属群组的所有成员会收到 `ChatThreadEventHandler#onChatThreadUpdate` 事件；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_UPDATE`。
 
 示例代码如下：
 

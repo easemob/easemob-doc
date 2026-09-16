@@ -19,7 +19,7 @@ React Native SDK 通过 `ChatUserInfoManager` 管理用户属性，并使用 `Ch
 
 - 单个用户的全部属性最大不超过 2 KB。
 - 单个 app 的全部用户属性数据最大不超过 10 GB。
-- 调用设置或获取用户属性的相关接口超过频率限制时，会抛出 `ChatError`，其中 `code` 为 `4`。React Native SDK 的 `ChatError` 公开类型只定义数值属性 `code: number` 和描述属性 `description: string`，未公开 `EXCEED_SERVICE_LIMIT` 形式的错误码枚举。// TODO：需要删除最后一句话？
+- 调用设置或获取用户属性的相关接口超过频率限制时，会抛出 `ChatError`，其中 `code` 为 `4`。
 
 ## 设置当前用户的属性
 
@@ -244,11 +244,6 @@ React Native SDK 通过 `ChatUserInfoEventListener` 提供以下用户属性事�
 建议在 SDK 初始化成功后、登录前注册监听器；不再需要监听时，应移除同一个监听器对象。
 
 ```typescript
-import type {
-  ChatUserInfo,
-  ChatUserInfoEventListener,
-} from 'react-native-chat-sdk';
-
 const userInfoListener: ChatUserInfoEventListener = {
   onSelfUserInfoUpdate(userInfo: ChatUserInfo) {
     console.log('当前用户属性更新：', userInfo);
@@ -285,8 +280,6 @@ function removeUserInfoListener(): void {
 
 ### 为什么只更新一个字段也会请求服务端？
 
-// TODO：这个常见问题需要吗？
-
 `updateOwnUserInfo` 的公开参数允许只传一个字段，但 React Native SDK 1.18.0 的实现会先调用 `fetchUserInfoById` 获取当前用户已有的完整属性，再合并本次传入的字段并提交更新。这可以保留未传入字段的原值，也意味着单字段更新同样包含一次服务端查询。
 
 ### 为什么 Map 中没有请求的某个用户？
@@ -309,12 +302,6 @@ function removeUserInfoListener(): void {
 如果业务中需要发送名片消息，可以使用自定义消息，在 `params` 中添加用户 ID、昵称和头像等展示字段。`ChatMessage.createCustomMessage` 的 `params` 类型为 `Record<string, string>`。
 
 ```typescript
-import {
-  ChatClient,
-  ChatMessage,
-  ChatMessageChatType,
-} from 'react-native-chat-sdk';
-
 const message = ChatMessage.createCustomMessage(
   'targetUserId',
   'userCard',
