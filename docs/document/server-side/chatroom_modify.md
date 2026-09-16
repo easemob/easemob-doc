@@ -88,6 +88,6 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/662XXXX13'  \
 | 403     | exceed_limit | title cannot exceed to XXXX| 聊天室名称超限。 | 传入长度在范围以内的聊天室名称。 |
 | 403     | exceed_limit | desc cannot exceed to XXXX | 聊天室描述超限。 | 传入长度在范围以内的聊天室描述。 |
 | 403     | exceed_limit | maxUsers cannot exceed XXXX | 聊天室最大成员数超限。 | 传入正确的最大成员数。 |
-| 400     | invalid_parameter  | "some of [chatroom_id] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `chatroom_id`。仅支持修改聊天室名称、聊天室描述和聊天室最大成员数。| 
+| 400     | invalid_parameter  | "some of [chatroom_id] are not valid fields"  | 修改聊天室信息时，传入的参数不支持，例如修改 `chatroom_id`。仅支持修改聊天室名称、聊天室描述和聊天室最大成员数。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

@@ -187,10 +187,6 @@ client.chatManager.addEventHandler('single-message-listener', {
 | 群规模   | 200 人 | 该能力当前最多支持 200 人群组。当群人数超过上限时，群消息可能无法继续产生有效的已读回执统计；服务端返回 `limit send group ack msg` 时，SDK 可能返回错误码 `4`，Key 为 `SERVICE_LIMIT_EXCEEDED`。 |
 | 查看已读人数   | 消息发送方 | 默认情况下，仅消息发送方可查看某条群消息的已读人数（已读回执数量）或已读成员列表。如需所有群成员均可查看，需联系商务开通。 |
 
-:::tip
-消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 
-:::
-
 #### 步骤 1：发送需要已读回执的群聊消息
 
 发送群消息时，若需要群成员阅读后回送已读回执，创建消息时设置 `needReadReceipt: true`。

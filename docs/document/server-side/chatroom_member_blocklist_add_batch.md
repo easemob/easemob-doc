@@ -116,7 +116,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/XXXX/blocks/users'  \
 
 | HTTP 状态码 | 错误类型           | 错误提示        | 可能原因                              | 处理建议                     |
 | :---------- | :---------- | :---------------------------------------- | :------------------------------------ | :--------------------------- |
-| 400         | invalid_parameter  | userNames is more than max limit : 100     | 批量添加的用户数超过了上限 100。       | 调整要添加的数量在限制以下。 |
+| 400         | invalid_parameter  | userNames is more than max limit : 60      | 批量添加的用户数超过了上限 60。        | 调整要添加的用户数量至 60 个以内。 |
 | 401         | unauthorized       | Unable to authenticate (OAuth)            | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。        |
 | 403         | forbidden_op       | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在聊天室中。    | 使用聊天室成员的用户 ID。      |
 | 404         | resource_not_found | grpID XX does not exist!                  | 聊天室不存在。                          | 使用合法的聊天室 ID。            |

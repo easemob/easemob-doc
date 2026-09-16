@@ -122,7 +122,7 @@ EMClient.getInstance.chatManager.addEventHandler(
 
 ### 群聊消息已读回执
 
-对于群聊，群成员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员阅读消息后，应该调用`EMChatManager#sendGroupMessageReadAck` 方法发送已读回执，阅读该消息的群成员数量即为已读回执的数量。
+对于群聊，群成员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员阅读消息后，应该调用 `EMChatManager#sendGroupMessageReadAck` 方法发送已读回执，阅读该消息的群成员数量即为已读回执的数量。
 
 群消息已读回执特性的使用限制如下表所示：
 

@@ -86,4 +86,4 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 |:---------| :--- | :------------- |:-----------------------------------|:---------------------|
 | 401      | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。       |
 | 404      | service_resource_not_found | Service resource not found | 获取好友列表的用户 ID 不存在。   | 检查获取好友列表的用户 ID 是否存在。 |
-| 400      | illegal_argument | getContacts | page size more than max limit : 50 | 传入的每页好友数 `limit` 超过 50。 | 下调 `limit` 参数的值。 | 
+| 400      | illegal_argument | getContacts \| page size more than max limit : 50 | 传入的每页好友数 `limit` 超过 50。 | 下调 `limit` 参数的值。 | 

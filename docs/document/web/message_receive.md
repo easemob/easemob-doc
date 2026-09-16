@@ -540,7 +540,7 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | :--- | :--- | :--- | :--- | :--- |
 | `title` | String | 必填 | 概览展示 | 合并消息标题。 |
 | `summary` | String | 必填 | 概览展示 | 合并消息摘要。仅适合做概览展示；若要展示原始聊天记录，应进一步调用 `downloadAndParseCombineMessage()`。 |
-| `compatibleText` | String | 必填 | 兼容展示 | 不支持完整合并展示时的兼容文案。 | // 要删除吗？
+| `compatibleText` | String | 必填 | 兼容展示 | 不支持完整合并展示时的兼容文案。 | 
 | `url` | String | 可选 | 下载详情 | 合并消息详情下载地址。 |
 | `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
 | `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |

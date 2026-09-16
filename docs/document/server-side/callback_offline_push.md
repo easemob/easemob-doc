@@ -51,7 +51,7 @@
 
 | 字段   | 字段是否一定存在 | 类型   | 描述          |
 | :----- | :------- | :---------- | :----------- |
-| `callId`    | String   | 回调请求的唯一标识，格式为 `App Key_离线消息的消息 ID`。 |
+| `callId`  | 是  | String   | 回调请求的唯一标识，格式为 `App Key_离线消息的消息 ID`。 |
 | `appkey`        | 是               | String | 应用的唯一标识，由 Orgname 和 Appname 组成。      |
 | `channel`       | 否               | String | 推送通道，APNS、ANDROID、XIAOMI、HUAWEI、MEIZU、OPPO、VIVO。该参数关联推送证书平台。   |
 | `chat_type`     | 是               | String | 聊天类型，单聊和群聊分别为 `chat` 和 `groupchat` 。     |

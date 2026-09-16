@@ -34,7 +34,7 @@
 
 调用 `addReaction` 在消息上添加 Reaction。对于单聊和群聊会话，会话内成员都会收到 `onReactionChanged` 事件。该事件中的信息包括消息 ID、会话 ID、会话类型、消息发送方、消息接收方、当前消息上的完整 Reaction 列表和更新时间戳。业务侧可据此实时刷新消息上的 Reaction 展示。
 
-对于同一条消息上的同一个 Reaction，当前用户只能添加一次。重复添加时，SDK 返回的典型错误为错误码 `1301`，错误 Key 为 `reaction_already_operated`。业务侧可统一按“该 Reaction 已添加过”处理。
+对于同一条消息上的同一个 Reaction，当前用户只能添加一次。重复添加时，SDK 返回的典型错误为错误码 `1301`，错误 Key 为 `REACTION_ALREADY_OPERATED`。业务侧可统一按“该 Reaction 已添加过”处理。 已改
 
 示例代码如下：
 

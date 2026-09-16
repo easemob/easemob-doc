@@ -97,6 +97,6 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85/blocks/users/user1'   \
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | forbidden_op | users [XX] are not members of this group! | 要添加黑名单的用户 ID 不在群组中。 | 使用群组成员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
-| 403    | forbidden_op   | forbidden operation on group owner!   | 无法将群主加入群组黑名单。  |
+| 403    | forbidden_op   | forbidden operation on group owner!   | 无法将群主加入群组黑名单。  | 群主不能加入群组黑名单。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。

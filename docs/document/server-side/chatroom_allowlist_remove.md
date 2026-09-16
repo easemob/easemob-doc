@@ -98,7 +98,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/{66XXXX33}/white/users/{usernam
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | invalid_parameter | removeWhitelist size is more than max limit : 60 | 批量移除白名单超过上限（60）。 | 调整要移除的数量在限制（60）以下。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 400     | forbidden_op | users [XX] are not members of this group! | 要加入白名单的用户 ID 不在聊天室中。 | 传入聊天室成员的用户 ID。 |
+| 400     | forbidden_op | users [XX] are not members of this group! | 要移出白名单的用户 ID 不在聊天室中。 | 传入聊天室成员的用户 ID。 |
 | 404     | resource_not_found | grpID XX does not exist! | 聊天室不存在。 | 使用合法的聊天室 ID。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
