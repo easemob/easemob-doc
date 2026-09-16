@@ -27,7 +27,7 @@ In the **Message Trend** section, you can view trends for uplink messages, downl
 
 ![img](/images/console/operation_data_message_statistics_app_trend.png)
 
-### Trends by Uplink, Downlink, and Offline Message Type
+### Uplink, Downlink, and Offline Message Trend
 
 The uplink, downlink, and offline message trend charts show trends for the following message types:
 
