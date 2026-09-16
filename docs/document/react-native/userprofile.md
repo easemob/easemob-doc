@@ -267,22 +267,22 @@ function removeUserInfoListener(): void {
 
 ## 常见问题
 
-### 设置了用户昵称，为什么获取不到？
+#### 设置了用户昵称，为什么获取不到？
 
 如果已通过客户端或 RESTful API 设置用户昵称，但后续未能正确获取，通常需要检查以下两点：
 
 - 调用 RESTful 接口设置用户昵称时，请求中必须使用 `nickname` 键名，否则客户端无法正确读取该属性。
 - RESTful API [获取用户详情](/document/server-side/account_detail_obtain_single.html) 和 [删除用户账户](/document/server-side/account_delete_single.html) 返回的 `nickname` 表示推送昵称，即离线推送通知中显示的昵称，与用户属性中的昵称不同。建议两者保持一致；修改其中一个昵称时，也同步更新另一个昵称。React Native SDK 可调用 `ChatPushManager#updatePushNickname(nickname)` 更新推送昵称，详见 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
 
-### 为什么会返回错误码 4？
+#### 为什么会返回错误码 4？
 
 设置和获取用户属性的相关接口超过调用频率限制时，会抛出 `ChatError`。可通过 `error.code` 读取数值错误码；当值为 `4` 时表示超过服务限制。
 
-### 为什么只更新一个字段也会请求服务端？
+#### 为什么只更新一个字段也会请求服务端？
 
 `updateOwnUserInfo` 的公开参数允许只传一个字段，但 React Native SDK 1.18.0 的实现会先调用 `fetchUserInfoById` 获取当前用户已有的完整属性，再合并本次传入的字段并提交更新。这可以保留未传入字段的原值，也意味着单字段更新同样包含一次服务端查询。
 
-### 为什么 Map 中没有请求的某个用户？
+#### 为什么 Map 中没有请求的某个用户？
 
 `fetchUserInfoById` 和 `getLocalUserInfoByIds` 都使用 `Map<string, ChatUserInfo>` 返回实际获取到的结果。如果服务端或本地数据中不存在某个用户，该用户 ID 可能不会出现在 Map 中。读取结果时应使用 `Map#get` 并处理 `undefined`。
 

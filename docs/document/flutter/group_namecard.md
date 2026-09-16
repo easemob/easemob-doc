@@ -142,7 +142,7 @@ Future<String?> fetchGroupMemberNamecards({String? cursor}) async {
 | :--- | :--- | :---: | :--- |
 | `groupId` | String | 是 | 群组 ID。 |
 | `cursor` | String | 否 | 分页游标。首次调用传 `null` 或省略，后续传入上一次返回的 `ChatCursorResult#cursor`。 |
-| `limit` | int | 否 | 每页获取的成员数量，默认值为 `20`，取值范围取决于 [服务端获取群成员列表接口](/document/server-side/group_member_list_obtain.html#请求 URL)。 |
+| `limit` | int | 否 | 每页获取的成员数量，默认值为 `20`，取值范围取决于 [服务端获取群成员列表接口](/document/server-side/group_member_list_obtain.html#请求-url)。 |
 
 `GroupMemberInfo` 的主要字段如下：
 

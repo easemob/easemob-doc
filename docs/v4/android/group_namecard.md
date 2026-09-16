@@ -16,7 +16,7 @@
 2. 当群成员名片发生变更并同步到本地内存后，SDK 会通过 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件通知业务层。
 3. SDK 支持通过 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地内存。
 4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。
-5. 若同时开启 `EMOptions#setEnableUserInfo(true)`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。本地内存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
+5. 若同时开启 `EMOptions#setEnableUserInfo(true)`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。
 
 内存更新流程如下图所示：
 

@@ -79,7 +79,7 @@ await ChatClient.getInstance().groupManager.updateGroupNamecard('groupId');
 
 ## 从服务端获取群成员名片
 
-调用 `ChatGroupManager#fetchMemberInfoListFromServer` 从服务器分页获取群成员信息。若需获取群成员的群名片、昵称和头像地址，应在初始化 SDK 时将 `ChatOptions#enableUserInfo` 设为 `true`；否则，返回的 `ChatGroupMember` 不包含 `namecard`、`nickname` 和 `avatarUrl`。
+调用 `ChatGroupManager#fetchMemberInfoListFromServer` 从服务器分页获取群成员信息，包含群成员名片。
 
 获取成功后，相关群成员信息会自动更新至本地内存。有关该接口的更多说明，详见 [管理群成员](group_members.html#获取群成员列表)。
 

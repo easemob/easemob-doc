@@ -103,7 +103,7 @@ function removeUserInfoListener(): void {
 | `userId` | `string \| undefined` | 消息发送方的用户 ID。 |
 | `nickname` | `string \| undefined` | 消息发送方的昵称。 |
 | `avatarUrl` | `string \| undefined` | 消息发送方的头像 URL。 |
-| `remark` | `string \| undefined` | 当前用户为该消息发送方设置的好友备注。 |
+| `remark` | `string \| undefined` | 当前用户为该消息发送方设置的好友备注。<br/>好友备注属于接收方的私有好友数据，由接收方 SDK 从本地好友信息中读取，不会由消息发送方随消息发送，也不会传递给对方。 |
 | `groupNameCard` | `string \| undefined` | 消息发送方在当前群组中的群成员名片。 |
 
 ```typescript

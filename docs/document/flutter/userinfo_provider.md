@@ -119,7 +119,7 @@ Future<void> subscribeUserInfo(List<String> userIds) async {
 
 开启用户信息自动管理后，无论发送方与接收方是否为好友，当接收方收到消息且消息中携带的发送方用户属性更新时间晚于本地内存时，原生 SDK 都会获取最新用户属性、更新本地内存，并通过 `ChatUserInfoEventHandler#onUserInfoUpdate` 通知业务层。
 
-在消息接收回调中，可以通过 `ChatMessage#senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。
+在消息接收回调中，可以通过 `ChatMessage#senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。如果接收方已为该发送方设置好友备注，还可通过 `senderInfo.remark` 获取该备注。好友备注属于接收方的私有好友数据，由接收方 SDK 从本地好友信息中读取，不会由消息发送方随消息发送，也不会传递给对方。
 
 ```dart
 const String messageHandlerId = 'message_sender_info_handler';
@@ -161,11 +161,11 @@ void unregisterMessageEventHandler() {
 
 | 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
-| `userId` | `String?` | 消息发送方的用户 ID。 |
-| `nickname` | `String?` | 消息发送方的昵称。 |
-| `avatarUrl` | `String?` | 消息发送方的头像 URL。 |
-| `remark` | `String?` | 当前用户为消息发送方设置的好友备注。 |
-| `groupNameCard` | `String?` | 消息发送方在当前群组中的群成员名片。 |
+| `userId` | `String` | 消息发送方的用户 ID。 |
+| `nickname` | `String` | 消息发送方的昵称。 |
+| `avatarUrl` | `String` | 消息发送方的头像 URL。 |
+| `remark` | `String` | 当前用户为消息发送方设置的好友备注。 |
+| `groupNameCard` | `String` | 消息发送方在当前群组中的群成员名片。 |
 
 :::tip
 `senderInfo` 是当前本地可用的发送方信息，不会在后续用户属性更新事件收到时自动改写现有 `ChatMessage` 对象。收到更新事件后，应刷新界面数据；如需读取当前本地用户属性，可调用 `getLocalUserInfoByIds`。
@@ -209,14 +209,14 @@ Future<void> getLocalUserInfo() async {
 | 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
 | `userId` | `String` | 用户 ID。 |
-| `nickName` | `String?` | 用户昵称。注意字段名中的 `N` 为大写。 |
-| `avatarUrl` | `String?` | 用户头像 URL。 |
-| `mail` | `String?` | 用户邮箱。 |
-| `phone` | `String?` | 用户手机号。 |
+| `nickName` | `String` | 用户昵称。注意字段名中的 `N` 为大写。 |
+| `avatarUrl` | `String` | 用户头像 URL。 |
+| `mail` | `String` | 用户邮箱。 |
+| `phone` | `String` | 用户手机号。 |
 | `gender` | `int` | 用户性别：`0` 为未知，`1` 为男，`2` 为女。 |
-| `sign` | `String?` | 用户签名。 |
-| `birth` | `String?` | 用户生日。 |
-| `ext` | `String?` | 用户自定义属性。 |
+| `sign` | `String` | 用户签名。 |
+| `birth` | `String` | 用户生日。 |
+| `ext` | `String` | 用户自定义属性。 |
 
 :::tip
 `getLocalUserInfoByIds` 只读取原生 SDK 的本地数据。如需主动获取用户属性，可调用 `ChatUserInfoManager#fetchUserInfoById`。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
@@ -229,7 +229,7 @@ Future<void> getLocalUserInfo() async {
 - `ChatMessage.senderInfo` 表示当前本地可用的发送方信息，不保证一定是刚收到消息时的最终最新值。
 - `ChatUserInfo.nickName` 使用大写字母 `N`，而 `ChatMessageSenderInfo.nickname` 使用小写字母 `n`，两者不可混用。
 - `ChatMessageSenderInfo.groupNameCard` 使用大写字母 `C`；群成员模型 `GroupMemberInfo.namecard` 使用小写字母 `c`。
-- Flutter SDK 4.22.0 的公开 API 使用 `Chat*` 命名；新代码不要使用已弃用的旧名称。
+- Flutter SDK 4.22.0 的所有公开 API 的类、枚举等统一由 `EM` 更名为 `Chat` 前缀。
 
 ## 常见问题
 
