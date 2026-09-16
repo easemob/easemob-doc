@@ -4,7 +4,7 @@ EasyIM collects message volume statistics for an app and for one-to-one chats, g
 
 ## How Message Metrics Are Calculated
 
-Unless otherwise specified, the following calculation rules apply to app, one-to-one chat, and group chat statistics.
+Unless otherwise specified, the following calculation rules apply to app, one-to-one chat, group chat and chat room statistics.
 
 | Metric | Definition |
 | :--- | :--- |
