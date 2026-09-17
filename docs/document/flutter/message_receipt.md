@@ -16,21 +16,21 @@
 
 - 单聊消息送达回执的逻辑如下：
 
-  1. 你可以通过设置 `EMOptions#requireDeliveryAck` 为 `true` 开启送达回执功能。
+  1. 你可以通过设置 `ChatOptions#requireDeliveryAck` 为 `true` 开启送达回执功能。
   2. 消息接收方收到消息后，SDK 自动向发送方触发送达回执。
-  3. 消息发送方通过监听 `EMChatEventHandler#onMessagesDelivered` 回调接收消息送达回执。
+  3. 消息发送方通过监听 `ChatEventHandler#onMessagesDelivered` 回调接收消息送达回执。
 
 - 单聊消息已读回执的逻辑如下：
 
-  1. 你可以通过设置 `EMOptions#requireAck` 为 `true` 开启已读回执功能。
-  2. 消息接收方收到消息后，调用 `EMChatManager#sendMessageReadAck` 方法发送消息已读回执。
-  3. 消息发送方通过监听 `EMMessageListener#onMessagesRead` 回调接收消息已读回执。
+  1. 你可以通过设置 `ChatOptions#requireAck` 为 `true` 开启已读回执功能。
+  2. 消息接收方收到消息后，调用 `ChatManager#sendMessageReadAck` 方法发送消息已读回执。
+  3. 消息发送方通过监听 `ChatEventHandler#onMessagesRead` 回调接收消息已读回执。
 
 - 群聊消息已读回执的逻辑如下：
 
-  1. 你可以通过设置 `EMOptions#requireAck` 为 `true` 开启消息已读回执功能。
-  2. 发送方在群组中发送消息时设置 `EMMessage#needGroupAck` 为 `true` 要求接收方返回消息已读回执。
-  3. 接收方收到或阅读消息后通过 `EMChatManager#sendGroupMessageReadAck` 方法发送群组消息的已读回执。
+  1. 你可以通过设置 `ChatOptions#requireAck` 为 `true` 开启消息已读回执功能。
+  2. 发送方在群组中发送消息时设置 `ChatMessage#needGroupAck` 为 `true` 要求接收方返回消息已读回执。
+  3. 接收方收到或阅读消息后通过 `ChatManager#sendGroupMessageReadAck` 方法发送群组消息的已读回执。
 
 ## 前提条件
 
@@ -44,11 +44,11 @@
 
 ### 单聊消息送达回执
 
-1. 开启消息送达功能，即 SDK 初始化时将 `EMOptions#requireDeliveryAck` 设置为 `true`。
+1. 开启消息送达功能，即 SDK 初始化时将 `ChatOptions#requireDeliveryAck` 设置为 `true`。
 
 ```dart
 // 设置是否需要接收方送达确认，默认 `false` 即不需要。
-    final options = EMOptions(
+    final options = ChatOptions(
       appKey: appKey,
       requireDeliveryAck: true,
     );
@@ -56,12 +56,12 @@
 
 2. 接收方收到消息后，SDK 自动向发送方触发送达回执。
 
-3. 发送方监听 `EMChatEventHandler#onMessagesDelivered` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
+3. 发送方监听 `ChatEventHandler#onMessagesDelivered` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
 
 ```dart
-    EMClient.getInstance.chatManager.addEventHandler(
+    ChatClient.getInstance.chatManager.addEventHandler(
       'identifier',
-      EMChatEventHandler(
+      ChatEventHandler(
         onMessagesDelivered: (messages) {},
       ),
     );
@@ -75,10 +75,10 @@
 
 参考如下步骤在单聊中实现消息已读回执。
 
-1. App 开启已读回执功能，即 SDK 初始化时将 `EMOptions#requireAck` 设置为 `true`。
+1. App 开启已读回执功能，即 SDK 初始化时将 `ChatOptions#requireAck` 设置为 `true`。
 
 ```dart
-    final options = EMOptions(
+    final options = ChatOptions(
       appKey: appKey,
       requireAck: true,
     );
@@ -90,9 +90,9 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager
+  await ChatClient.getInstance.chatManager
       .sendConversationReadAck(conversationId);
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint(e.toString());
 }
 ```
@@ -101,20 +101,20 @@ try {
 
 ```dart
 try {
-    EMClient.getInstance.chatManager.sendMessageReadAck(message);
-} on EMError catch (e) {
+    ChatClient.getInstance.chatManager.sendMessageReadAck(message);
+} on ChatError catch (e) {
     debugPrint('Failed to send message read ack: ${e.description}');
 }
 ```
 
 3. 消息发送方监听消息已读回调。
 
-消息发送方可以通过 `EMChatEventHandler#onMessagesRead` 事件监听指定消息是否已读，示例代码如下：
+消息发送方可以通过 `ChatEventHandler#onMessagesRead` 事件监听指定消息是否已读，示例代码如下：
 
 ```dart
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   'identifier',
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagesRead: (messages) {},
   ),
 );
@@ -122,7 +122,7 @@ EMClient.getInstance.chatManager.addEventHandler(
 
 ### 群聊消息已读回执
 
-对于群聊，群成员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员阅读消息后，应该调用 `EMChatManager#sendGroupMessageReadAck` 方法发送已读回执，阅读该消息的群成员数量即为已读回执的数量。
+对于群聊，群成员发送消息时，可以设置该消息是否需要已读回执。若需要，每个群成员阅读消息后，应该调用`ChatManager#sendGroupMessageReadAck` 方法发送已读回执，阅读该消息的群成员数量即为已读回执的数量。
 
 群消息已读回执特性的使用限制如下表所示：
 
@@ -136,23 +136,23 @@ EMClient.getInstance.chatManager.addEventHandler(
 
 你可以按以下步骤实现群消息已读回执特性：
 
-1. 开启已读回执功能，即 SDK 初始化时将 `EMOptions#requireAck` 设置为 `true`。
+1. 开启已读回执功能，即 SDK 初始化时将 `ChatOptions#requireAck` 设置为 `true`。
 
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
 ```dart
-    final options = EMOptions(
+    final options = ChatOptions(
       appKey: appKey,
       requireAck: true,
     );
 ```
 
-2. 发送方发送消息时设置 `EMMessage#needGroupAck` 属性为 `true`。
+2. 发送方发送消息时设置 `ChatMessage#needGroupAck` 属性为 `true`。
 
 与单聊消息的 app 层级设置已读回执功能不同，群聊消息是在发送消息时设置指定消息是否需要已读回执。
 
 ```dart
-EMMessage message = EMMessage.createTxtSendMessage(
+ChatMessage message = ChatMessage.createTxtSendMessage(
   targetId: targetId,
   content: 'content',
 );
@@ -162,11 +162,11 @@ message.needGroupAck = true;
 3. 发送群组消息的已读回执。
 
 ```dart
-void sendGroupReadAck(EMMessage message) async  {
+void sendGroupReadAck(ChatMessage message) async  {
   if (message.needGroupAck != true) return;
   try {
-    await EMClient.getInstance.chatManager.sendGroupMessageReadAck(message.msgId, message.conversationId!);
-  } on EMError catch (e) {
+    await ChatClient.getInstance.chatManager.sendGroupMessageReadAck(message.msgId, message.conversationId!);
+  } on ChatError catch (e) {
     debugPrint('Failed to send group read ack: ${e.description}');
   }
 }
@@ -174,14 +174,14 @@ void sendGroupReadAck(EMMessage message) async  {
 
 4. 消息发送方监听群组消息已读回调。
 
-群消息已读回调在 `EMMessageListener#onGroupMessageRead` 中实现。
+群消息已读回调在 `ChatEventHandler#onGroupMessageRead` 中实现。
 
-发送方接收到群组消息已读回执后，调用 `EMMessage#groupAckCount()` 方法会得到最新的已读数量
+发送方接收到群组消息已读回执后，调用 `ChatMessage#groupAckCount()` 方法会得到最新的已读数量
 
 ```dart
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   'identifier',
-  EMChatEventHandler(
+  ChatEventHandler(
     onGroupMessageRead: (groupMessageAcks) {
     },
   ),
@@ -190,40 +190,40 @@ EMClient.getInstance.chatManager.addEventHandler(
 
 5. 消息发送方获取群组消息的已读回执详情。
 
-你可以调用 `EMChatManager#fetchGroupAcks` 方法从服务器获取单条消息的已读回执的详情。
+你可以调用 `ChatManager#fetchGroupAcks` 方法从服务器获取单条消息的已读回执的详情。
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.fetchGroupAcks('msgId', 'groupId');
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatManager.fetchGroupAcks('msgId', 'groupId');
+} on ChatError catch (e) {
   debugPrint('Failed to fetch group acks: ${e.description}');
 }
 ```
 
 ### 查看消息送达和已读状态
 
-对于单聊消息，本地通过 `EMMessage#hasDeliverAck` 字段存储消息送达状态。
+对于单聊消息，本地通过 `ChatMessage#hasDeliverAck` 字段存储消息送达状态。
 
 对于单聊消息，本地通过以下字段存储消息已读状态：
 
 | 字段       | 描述   | 
 | :--------- | :----- | 
-| `EMMessage#hasRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。| 
-| `EMMessage#hasReadAck`      | 是否（消息接收方）已发送或（消息发送方）已收到消息已读回执。如果是自己发送的消息，记录的是对方是否已读。如果是对方的消息，则记录的是自己是否发送过已读回执。 | 
+| `ChatMessage#hasRead` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。| 
+| `ChatMessage#hasReadAck`      | 是否（消息接收方）已发送或（消息发送方）已收到消息已读回执。如果是自己发送的消息，记录的是对方是否已读。如果是对方的消息，则记录的是自己是否发送过已读回执。 | 
 
 对于群聊消息，本地数据库通过以下字段存储消息已读状态：
 
 | 字段       | 描述   | 
 | :--------- | :----- | 
-| `EMMessage#hasReadAck` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。| 
+| `ChatMessage#hasReadAck` | 用户是否已读了该消息。如果是自己发送的消息，该字段的值固定为 `true`。| 
 
-通过方法 `EMMessage#groupAckCount`  查询已阅读消息的群成员数量。
+通过方法 `ChatMessage#groupAckCount`  查询已阅读消息的群成员数量。
 
 ### 已读回执与未读消息数
 
-- 会话已读回执发送后，开发者需要调用 `EMConversation#markAllMessagesAsRead` 方法将该会话的所有消息置为已读，即会话的未读消息数清零。
+- 会话已读回执发送后，开发者需要调用 `ChatConversation#markAllMessagesAsRead` 方法将该会话的所有消息置为已读，即会话的未读消息数清零。
 
-- 消息已读回执发送后，开发者需要调用 `EMConversation#markMessageAsRead` 方法将该条消息置为已读，否则则消息未读数不会有变化。
+- 消息已读回执发送后，开发者需要调用 `ChatConversation#markMessageAsRead` 方法将该条消息置为已读，否则则消息未读数不会有变化。
 
 
 

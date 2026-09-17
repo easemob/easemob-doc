@@ -15,7 +15,7 @@
 
 ## 发送文本消息
 
-1. 发送方调用 `ChatMessage#createTextSendMessage` 类构造一条消息。
+1. 发送方调用 `ChatMessage#createTextSendMessage` 方法创建一条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
@@ -44,7 +44,7 @@ let callback: ChatCallback = {
     // 发送消息失败
   },
   onProgress: (progress: number): void => {
-    // 附件消息附件的上传进度
+    // 附件上传进度
   }
 }
 message.setMessageStatusCallback(callback);
@@ -59,7 +59,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 附件消息的发送过程如下：
 
 1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
-2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
+2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载图片附件（原图或发送方上传的大图）、视频和文件，需调用 `downloadAttachment` 方法。
 
 消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
@@ -82,26 +82,56 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 ### 发送图片消息
 
-1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+图片消息通常涉及以下三类图片资源：
 
-**目前，HarmonyOS SDK 尚不支持压缩原图后发给接收方。**
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 自 1.14.0 版本起支持大图功能。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+发送图片消息的流程如下：
+
+1. 获取图片的本地路径或 URI。
+2. 调用 `ChatMessage#createImageSendMessage` 创建图片消息。
    
+   创建消息时，需要传入图片的本地路径或 URI 以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+3. 根据需要调用 `ImageMessageBody#setSendOriginalImage` 设置发送的图片资源类型：`true` 表示发送原图，`false` 表示发送大图。该方法需要在发送消息前调用。
+4. 调用 `ChatManager#sendMessage` 发送消息。
+   
+   当开启 `ChatOptions#setAutoTransferMessageAttachments(true)` 时，SDK 会自动上传图片附件；发送非原图图片时，SDK 会先生成大图再上传，服务器自动生成缩略图。
+
+创建和发送图片消息的示例代码如下所示：
+
 ```typescript
-// `imageFilePathOrUri` 为图片本地路径或者Uri。
-let message = ChatMessage.createImageSendMessage(toChatUsername, imageFilePathOrUri);
+// `filePath` 为图片的本地路径或 URI。
+let message = ChatMessage.createImageSendMessage(to, filePath);
+if (!message) {
+    return;
+}
+
+// 设置是否发送原图：true 表示发送原图，false 表示发送压缩后的大图。
+let imageBody = message.getBody() as ImageMessageBody;
+imageBody.setSendOriginalImage(false);
+
 // 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 message.setChatType(ChatType.GroupChat);
-// 发送消息
+// 发送消息。
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
+
+`createImageSendMessage` 和 `setSendOriginalImage` 中的关键参数如下表所示：
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `to` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 图片的本地路径或 URI。 |
+| `isGif` | `boolean` | 可选 | 是否为 GIF 图片，默认为 `false`。GIF 图片不进行压缩，始终按原图发送。 |
+| `sendOriginalImage` | `boolean` | 必填 | 通过 `ImageMessageBody#setSendOriginalImage` 设置。`true` 表示发送原图，`false` 表示发送大图。 |
 
 ### 发送 GIF 图片消息
 
 - 自 HarmonyOS SDK 1.7.0 开始，支持发送 GIF 图片消息。
 - GIF 图片缩略图的生成和下载与普通图片消息相同，详见 [发送](#发送图片消息) 和 [接收图片消息](message_receive.html#接收图片消息)。
-
-**目前，HarmonyOS SDK 尚不支持压缩原图后发给接收方。**
 
 发送 GIF 图片消息的过程如下：
 
@@ -112,6 +142,9 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 // `imageUri` 为图片本地资源标志符
 let isGif = true; // 是否为 GIF 图片，默认为 false。
 let message = ChatMessage.createImageSendMessage(this.to, this.imageUri, isGif);
+if (!message) {
+    return;
+}
 // 设置会话类型，即`ChatMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 // message.setChatType(ChatType.GroupChat);
 // 发送消息
@@ -120,22 +153,60 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 ### 发送视频消息
 
-1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `ChatMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、视频文件的本地路径、视频时长以及缩略图的本地存储路径。
-3. 发送方调用 `ChatManager#sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
+发送视频消息前，需要准备视频文件、视频时长以及可选的视频首帧缩略图。其中，视频时长和缩略图主要用于消息展示。
+
+发送视频消息的流程如下：
+
+1. 在应用层完成视频文件的选取或录制，并准备视频文件的本地路径或 URI、视频时长和缩略图路径。
+
+2. 调用 `ChatMessage#createVideoSendMessage` 创建视频消息。
+   
+   创建消息时，需要传入视频文件的本地路径或 URI、视频时长以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。缩略图路径为可选参数；如果需要显示视频缩略图，建议在应用层获取视频首帧，并将对应路径作为 `imageThumbPath` 参数传入。
+
+3. 调用 `ChatManager#sendMessage` 发送消息。
+   
+   当开启 `ChatOptions#setAutoTransferMessageAttachments(true)` 时，SDK 会自动上传视频附件；如果传入了本地缩略图，SDK 会读取缩略图尺寸并写入消息体。你可以通过 `ChatMessage#setMessageStatusCallback` 监听附件上传进度和消息发送结果。
+
+创建和发送视频消息的示例代码如下所示：
 
 ```typescript
-// 在应用层获取视频首帧
-let thumbPath = this.getThumbPath(videoPath);
-let message = ChatMessage.createVideoSendMessage(toChatUsername, videoPath, videoLength, thumbPath);
+// 在应用层获取视频首帧，你需要自行实现 getThumbPath 方法。
+let thumbPath = this.getThumbPath(filePath);
+let message = ChatMessage.createVideoSendMessage(
+    to,
+    filePath,
+    duration,
+    thumbPath
+);
 if (!message) {
     return;
 }
 // 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 message.setChatType(ChatType.GroupChat);
-// 发送消息
+// 可选：监听视频上传进度和发送结果。
+message.setMessageStatusCallback({
+    onSuccess: (): void => {
+        // 视频消息发送成功
+    },
+    onError: (code: number, error: string): void => {
+        // 视频消息发送失败
+    },
+    onProgress: (progress: number): void => {
+        // 视频附件上传进度
+    }
+});
+// 发送消息。
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
+
+`createVideoSendMessage` 的关键参数如下表所示：
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `to` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 视频文件的本地路径或 URI。 |
+| `duration` | `number` | 必填 | 视频时长，单位为秒。 |
+| `imageThumbPath` | `string` | 可选 | 视频首帧缩略图的本地路径。建议由应用层生成，用于消息展示。 |
 
 ### 发送文件消息
 
@@ -377,7 +448,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 - 设置发送方收到内容审核替换后的内容
 
-默认情况下，内容审核替换后的内容仅下发至接收方。发送方如需同步接收替换内容，需 **联系环信商务开通权限**，并在初始化 SDK 时将 `EMOptions#setUseReplacedMessageContents` 参数设为 `true`。开启后，发送方将在消息被审核替换时收到新内容；若开关关闭（默认状态），则发送方仍保留原始发送内容，不会感知替换结果。
+默认情况下，内容审核替换后的内容仅下发至接收方。发送方如需同步接收替换内容，需 **联系环信商务开通权限**，并在初始化 SDK 时调用 `ChatOptions#setUseReplacedMessageContents(true)`。开启后，发送方将在消息被审核替换时收到新内容；若开关关闭（默认状态），则发送方仍保留原始发送内容，不会感知替换结果。
 
 ### 消息大小和存储限制
 

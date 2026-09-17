@@ -8,7 +8,7 @@
 
 ```dart
 // 本示例以文本消息为例，图片和文件等消息类型的设置方法相同。
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: 'receiveId',
   content: 'content',
 );
@@ -23,8 +23,8 @@ msg.attributes = {
 };
 
 try {
-  await EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 
 ```
 
@@ -53,7 +53,7 @@ try {
 
 ```dart
 // 本示例以文本消息为例，图片和文件等消息类型的设置方法相同。
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: 'receiveId',
   content: 'content',
 );
@@ -62,8 +62,8 @@ msg.attributes = {
 };
 
 try {
-  await EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMtError catch (e) {}
+  await ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 
 ```
 
@@ -75,7 +75,7 @@ try {
 
 ```dart
 // 本示例以文本消息为例，图片和文件等消息类型的设置方法相同。
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: 'receiveId',
   content: 'content',
 );
@@ -84,7 +84,7 @@ msg.attributes = {
 };
 
 try {
-  await EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 
 ```

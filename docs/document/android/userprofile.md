@@ -80,7 +80,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 ### 从服务端获取用户的所有属性
 
-你可以调用 `fetchUserInfoByUserId` 从服务端获取一个或多个用户的全部属性。开启 [用户信息自动管理功能](userinfo_provider.html) 后，若返回的用户属性更新时间戳大于本地数据的更新时间戳，SDK 会更新本地数据并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
+你可以调用 `fetchUserInfoByUserId` 从服务端获取一个或多个用户的全部属性。
 
 ```java
 // 每次传入的用户 ID 数量不超过 100 个。
@@ -100,7 +100,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMVal
 
 ### 从服务端获取用户的指定属性
 
-你可以调用 `fetchUserInfoByAttribute`从服务端获取一个或多个用户的指定属性。开启 [用户信息自动管理功能](userinfo_provider.html) 后，若返回的用户属性更新时间戳大于本地数据的更新时间戳，SDK 会更新本地数据并触发 `EMUserInfoManagerListener#onUserInfoUpdate` 事件。
+你可以调用 `fetchUserInfoByAttribute`从服务端获取一个或多个用户的指定属性。
 
 ```java
 String[] userId = new String[1];
@@ -122,9 +122,10 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 ### 从本地内存读取用户属性
 
-如需从本地内存批量读取多个用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserIds`。该方法不会发起网络请求，并通过回调返回用户 ID 与 `EMUserInfo` 的映射。本地内存中不存在的用户不会包含在返回结果中。
+SDK 提供以下两种本地用户属性读取方式，均不会发起网络请求：
 
-若只需同步读取单个用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId`。本地内存中不存在该用户时，该方法返回 `null`；调用失败时会抛出 `HyphenateException`。
+- 调用 `EMUserInfoManager#getUserInfoWithUserIds` 从本地内存批量读取多个用户的属性，并通过回调返回用户 ID 与 `EMUserInfo` 的映射。本地内存中不存在的用户不会包含在返回结果中。
+- 调用 `EMUserInfoManager#getUserInfoWithUserId` 读取单个用户的属性。本地内存中不存在该用户时，该方法返回 `null`；调用失败时会抛出 `HyphenateException`。
 
 ```java
 String[] userIds = {"userId1", "userId2"};
@@ -163,11 +164,11 @@ EMClient.getInstance()
                                         + errorMessage);
                     }
                 });
-```                
+```   
 
-:::tip
+开启[用户信息自动管理功能](userinfo_provider.html)后，接收方收到携带发送方用户信息的消息时，如果消息中的用户属性更新时间晚于本地缓存，SDK 会自动从服务端获取最新用户属性并更新本地缓存，该机制不受双方好友关系影响。
+
 若需要 SDK 在登录成功后自动同步好友列表及好友信息，需在初始化 SDK 前通过 `EMOptions#setDataSyncType` 配置 `EMOptions#EMDataSyncType.CONTACTS`。同步完成后，可调用 `EMClient.getInstance().contactManager().getContactsFromLocal()` 读取本地好友列表，并调用 `fetchContactFromLocal` 获取本地好友信息。关于登录成功后自动同步数据，详见 [初始化文档](initialization.html)。
-:::
 
 ## 订阅非好友用户的属性变更
 
@@ -241,16 +242,20 @@ EMClient.getInstance().userInfoManager().fetchSubscribedUsers(new EMValueCallBac
 
 ## 监听用户属性变更
 
-好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `EMUserInfoManagerListener#onUserInfoUpdate` 事件：
+Android SDK 通过 `EMUserInfoManagerListener` 提供以下用户属性事件：
+- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新后触发。
+- `onUserInfoUpdate`：其他用户的属性更新并写入本地数据后触发。
 
-1. **主动拉取更新**：调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
+其他用户的属性更新可能由以下场景触发：
+
+1. **主动拉取更新**：主动调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
 2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
 3. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
 **特殊说明**
 
 - **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
-- **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
+- **好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
 
 通过 `addUserInfoManagerListener` 注册监听器，不再需要监听时通过 `removeUserInfoManagerListener` 移除：
 

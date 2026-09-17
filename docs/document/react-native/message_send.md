@@ -101,24 +101,90 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 ### 发送图片消息
 
-1. 发送方调用 `createImageMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
-2. 发送方调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+图片消息包含以下三类图片资源，其中大图资源自 React Native SDK 1.18.0 版本开始支持：
+
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：默认由服务器根据上传的图片附件生成。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
+
+#### 发送流程
+
+发送图片消息的流程如下：
+
+1. 获取 Android 或 iOS 原生层可访问的图片本地文件路径。 
+
+2. 调用 `ChatMessage#createImageMessage` 创建图片消息。
+   
+   传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息。
+
+   通过 `sendOriginalImage` 控制上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+
+3. 调用 `ChatManager#sendMessage` 发送消息。
+
+   `ChatOptions#serverTransfer` 的默认值为 `true`，SDK 会自动上传图片附件，服务器会自动生成缩略图。可以通过 `ChatMessageStatusCallback#onProgress` 获取上传进度，并通过 `onSuccess` 或 `onError` 获取最终发送结果。若关闭自动上传，需由应用自行处理附件，详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
+
+创建和发送单聊图片消息的示例代码如下：
 
 ```typescript
-// 构建图片消息
-// 需要图片的本地地址，长宽，和界面用来显示的名称
-// 传入的图片路径时，不需要添加 file://。
-const filePath = "/data/.../image.jpg";
-const width = 100;
-const height = 100;
-const displayName = "test.jpg";
-const msg = ChatMessage.createImageMessage(targetId, filePath, chatType, {
-  displayName,
-  width,
-  height,
-});
-EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
+// 图片选择完成后，将 URI 归一化为原生层可访问且不带 file:// 的本地路径。
+const imagePath = '<local_image_path>';
+
+if (imagePath.length === 0) {
+  throw new Error('图片路径不能为空');
+}
+
+const imageMessage = ChatMessage.createImageMessage(
+  'targetUserId',
+  imagePath,
+  ChatMessageChatType.PeerChat,
+  {
+    displayName: 'image.jpg',
+    sendOriginalImage: false, // false 发送大图；true 发送原图。
+    width: 1920,
+    height: 1080,
+  }
+);
+
+const imageCallback: ChatMessageStatusCallback = {
+  onProgress(localMsgId, progress) {
+    console.log('图片上传进度：', localMsgId, progress);
+  },
+  onError(localMsgId, error) {
+    console.error('图片消息发送失败：', localMsgId, error);
+  },
+  onSuccess(message) {
+    console.log('图片消息发送成功：', message.msgId);
+  },
+};
+
+try {
+  await ChatClient.getInstance().chatManager.sendMessage(
+    imageMessage,
+    imageCallback
+  );
+} catch (error) {
+  console.error('图片消息发送调用失败：', error);
+}
 ```
+
+#### 关键参数
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :---: | :--- |
+| `targetId` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 图片的本地文件路径。应确保 Android 或 iOS 原生层可以访问，建议传入不带 `file://` 前缀的真实本地路径。Android 选择器返回 `content://` URI 时，应先将文件复制到应用缓存等可访问目录，再传入复制后的本地路径。 |
+| `chatType` | `ChatMessageChatType` | 可选 | 会话类型，默认值为 `ChatMessageChatType.PeerChat`。群聊和聊天室分别使用 `GroupChat` 和 `ChatRoom`。 |
+| `displayName` | `string` | 可选 | 图片显示名称，建议包含文件扩展名。 |
+| `sendOriginalImage` | `boolean` | 可选 | 是否发送原图，默认值为 `false`。`true` 上传原图，`false` 上传大图。 |
+| `thumbnailLocalPath` | `string` | 可选 | 自定义缩略图的本地路径。通常无需设置，服务端会自动生成缩略图。 |
+| `width` | `number` | 可选 | 图片宽度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `height` | `number` | 可选 | 图片高度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `fileSize` | `number` | 可选 | 图片文件大小，单位为字节。 |
+| `isGif` | `boolean` | 可选 | 是否为 GIF 图片，默认值为 `false`。GIF 图片的发送方法详见 [发送 GIF 图片消息](#发送-gif-图片消息)。 |
+
+:::tip
+`sendOriginalImage` 是创建发送消息时使用的选项。`ChatImageMessageBody#isOriginalImage`、`bigImageLocalPath`、`bigImageRemotePath` 和 `bigImageDownloadStatus` 用于描述转换后的消息体或大图资源状态，不是 `createImageMessage` 的传入参数。
+:::
 
 ### 发送 GIF 图片消息
 
@@ -156,30 +222,81 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 
 ### 发送视频消息
 
-1. 发送视频消息前，在应用层完成视频文件的选取或者录制。
-2. 发送方调用 `createVideoMessage` 方法传入视频文件的本地资源标志符、缩略图的本地存储路径、视频时长以及接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）。
-3. 发送方调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoMessage` 方法。
+发送视频消息前，需要在应用层选取或录制视频，并准备视频文件的本地路径和时长。为确保 Android 和 iOS 均能稳定展示视频缩略图，建议应用生成视频首帧缩略图并传入其本地路径。
+
+#### 发送流程
+
+发送视频消息的流程如下：
+
+1. 在应用层选取或录制视频，获取原生层可访问且不带 `file://` 前缀的视频本地路径。
+2. 按需生成视频首帧缩略图，并将其保存到原生层可访问的本地路径。
+3. 调用 `ChatMessage#createVideoMessage` 创建视频消息。
+
+   传入目标会话 ID、视频本地路径和会话类型，并通过可选参数设置显示名称、缩略图路径、视频时长（单位为秒）、缩略图尺寸和文件大小。
+
+4. 调用 `ChatManager#sendMessage` 发送消息。
+
+   当 `ChatOptions#serverTransfer` 为默认值 `true` 时，SDK 会自动上传视频附件；如果提供了缩略图，SDK 会一并处理缩略图，然后发送消息。可以通过 `ChatMessageStatusCallback` 获取上传进度和最终发送结果。
+
+创建和发送单聊视频消息的示例代码如下：
 
 ```typescript
-// 构建视频消息
-// 视频消息相当于包含 2 个附件的消息，主要由视频和视频缩略图组成。视频参数包括视频本地地址、视频长宽值，显示名称，播放时间长度；
-// 如果设置缩略图，需指定缩略图的本地地址。
-// 传入的视频文件的路径和视频缩略图的路径时，不需要添加 file://。
-const filePath = "data/.../foo.mp4";
-const width = 100;
-const height = 100;
-const displayName = "bar.mp4";
-const thumbnailLocalPath = "data/.../zoo.jpg";
-const duration = 5;
-const msg = ChatMessage.createVideoMessage(targetId, filePath, chatType, {
-  displayName,
-  thumbnailLocalPath,
-  duration,
-  width,
-  height,
-});
-EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
+const videoPath = '<local_video_path>';
+const thumbnailPath = '<local_thumbnail_path>';
+
+if (videoPath.length === 0) {
+  throw new Error('视频路径不能为空');
+}
+
+const videoMessage = ChatMessage.createVideoMessage(
+  'targetUserId',
+  videoPath,
+  ChatMessageChatType.PeerChat,
+  {
+    displayName: 'video.mp4',
+    thumbnailLocalPath: thumbnailPath,
+    duration: 30,
+    // RN 原生桥接将 width 和 height 设置为视频缩略图尺寸。
+    width: 320,
+    height: 180,
+  }
+);
+
+const videoCallback: ChatMessageStatusCallback = {
+  onProgress(localMsgId, progress) {
+    console.log('视频上传进度：', localMsgId, progress);
+  },
+  onError(localMsgId, error) {
+    console.error('视频消息发送失败：', localMsgId, error);
+  },
+  onSuccess(message) {
+    console.log('视频消息发送成功：', message.msgId);
+  },
+};
+
+try {
+  await ChatClient.getInstance().chatManager.sendMessage(
+    videoMessage,
+    videoCallback
+  );
+} catch (error) {
+  console.error('视频消息发送调用失败：', error);
+}
 ```
+
+#### 关键参数
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :---: | :--- |
+| `targetId` | `string` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `filePath` | `string` | 必填 | 视频的本地文件路径。应确保 Android 或 iOS 原生层可以访问，建议不带 `file://` 前缀。 |
+| `chatType` | `ChatMessageChatType` | 可选 | 会话类型，默认值为 `ChatMessageChatType.PeerChat`。群聊和聊天室分别使用 `GroupChat` 和 `ChatRoom`。 |
+| `displayName` | `string` | 可选 | 视频附件的显示名称，建议包含文件扩展名。 |
+| `thumbnailLocalPath` | `string` | 可选 | 视频缩略图的本地路径。为保证跨平台展示一致，建议传入应用生成的缩略图路径。 |
+| `duration` | `number` | 可选 | 视频时长，单位为秒；未传入时消息体中的默认值为 `0`。业务展示视频时建议传入准确值。 |
+| `width` | `number` | 可选 | 视频缩略图宽度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `height` | `number` | 可选 | 视频缩略图高度，单位为像素；未传入时消息体中的默认值为 `0`。 |
+| `fileSize` | `number` | 可选 | 视频文件大小，单位为字节。 |
 
 ### 发送文件消息
 

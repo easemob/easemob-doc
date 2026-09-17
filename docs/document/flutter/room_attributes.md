@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMChatRoom`、`EMRoomManager` 和 `EMChatRoomEventHandler` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Flutter SDK 提供 `ChatRoom`、`ChatRoomManager` 和 `ChatRoomEventHandler` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
@@ -29,69 +29,69 @@
 
 ### 管理聊天室基本属性
 
-对于聊天室名称和描述，你可以调用 `EMChatManager#fetchChatRoomInfoFromServer` 方法[获取聊天室详情](room_manage.html#获取聊天室详情)时查看。
+对于聊天室名称和描述，你可以调用 `ChatManager#fetchChatRoomInfoFromServer` 方法[获取聊天室详情](room_manage.html#获取聊天室详情)时查看。
 
 #### 获取聊天室公告
 
-聊天室所有成员均可调用 `EMChatRoomManager#fetchChatRoomAnnouncement` 方法获取聊天室公告。
+聊天室所有成员均可调用 `ChatRoomManager#fetchChatRoomAnnouncement` 方法获取聊天室公告。
 
 示例代码如下：
 
 ```dart
 try {
   String? announcement =
-      await EMClient.getInstance.chatRoomManager.fetchChatRoomAnnouncement(
+      await ChatClient.getInstance.chatRoomManager.fetchChatRoomAnnouncement(
     roomId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 更新聊天室公告
 
-仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `EMChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 事件。
+仅聊天室所有者和聊天室管理员可以调用 `ChatRoomManager#updateChatRoomAnnouncement` 方法设置和更新聊天室公告，聊天室公告的长度限制为 512 个字符。公告更新后，其他聊天室成员收到 `ChatRoomEventHandler#onAnnouncementChangedFromChatRoom` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.updateChatRoomAnnouncement(
+  await ChatClient.getInstance.chatRoomManager.updateChatRoomAnnouncement(
     roomId,
     newAnnouncement,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 修改聊天室名称
 
-仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#changeChatRoomName` 方法设置和修改聊天室名称，聊天室名称的长度限制为 128 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `ChatRoomManager#changeChatRoomName` 方法设置和修改聊天室名称，聊天室名称的长度限制为 128 个字符。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.changeChatRoomName(
+  await ChatClient.getInstance.chatRoomManager.changeChatRoomName(
     roomId,
     newName,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 修改聊天室描述
 
-仅聊天室所有者和聊天室管理员可以调用 `EMChatRoomManager#changeChatRoomDescription` 方法设置和修改聊天室描述，聊天室描述的长度限制为 512 个字符。
+仅聊天室所有者和聊天室管理员可以调用 `ChatRoomManager#changeChatRoomDescription` 方法设置和修改聊天室描述，聊天室描述的长度限制为 512 个字符。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.chatRoomManager.changeChatRoomDescription(
+  await ChatClient.getInstance.chatRoomManager.changeChatRoomDescription(
     roomId,
     newDesc,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -107,20 +107,20 @@ try {
 /// Param [roomId]                                聊天室 ID。
 /// Param [keys]                                  聊天室自定义属性的 Key 列表。传 `null` 或空字符串时返回所有自定义属性。
 /// **Return** Map<String,String> attributes      结果回调。
-/// **Throws**                                    发生错误时会抛出 EMError 错误。
+/// **Throws**                                    发生错误时会抛出 ChatError 错误。
 
 try {
   Map<String, String>? attributes =
-      await EMClient.getInstance.chatRoomManager.fetchChatRoomAttributes(
+      await ChatClient.getInstance.chatRoomManager.fetchChatRoomAttributes(
     roomId,
     keys,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 #### 设置/更新聊天室自定义属性
 
-所有聊天室成员均可调用 `addAttributes` 方法设置或更新一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到 `EMChatRoomEventHandler#onAttributesUpdated` 回调。
+所有聊天室成员均可调用 `addAttributes` 方法设置或更新一个或多个聊天室自定义属性。利用该方法可设置新属性，也可以修改自己或其他成员设置的现有属性。设置后，其他聊天室成员收到 `ChatRoomEventHandler#onAttributesUpdated` 回调。
 
 示例代码如下：
 
@@ -135,22 +135,22 @@ try {
 ///       - `true`：是；
 ///       - （默认）`false`：否。
 /// **Return** Map<String,int> failInfo       设置失败的 key 以及错误原因。
-/// **Throws**                                发生错误时会抛出 EMError 错误。
+/// **Throws**                                发生错误时会抛出 ChatError 错误。
 
 try {
   Map<String, int>? failInfo =
-      await EMClient.getInstance.chatRoomManager.addAttributes(
+      await ChatClient.getInstance.chatRoomManager.addAttributes(
     roomId,
     attributes: attributes,
     deleteWhenLeft: true,
     overwrite: true,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 #### 删除聊天室自定义属性
 
-所有聊天室成员均可以调用 `removeAttributes` 方法删除一个或多个聊天室自定义属性。利用该方法可删除自己和其他成员设置的自定义属性。删除后，聊天室其他成员收到 `EMChatRoomEventHandler#onAttributesRemoved` 回调。
+所有聊天室成员均可以调用 `removeAttributes` 方法删除一个或多个聊天室自定义属性。利用该方法可删除自己和其他成员设置的自定义属性。删除后，聊天室其他成员收到 `ChatRoomEventHandler#onAttributesRemoved` 回调。
 
 示例代码如下：
 
@@ -164,12 +164,12 @@ try {
 /// **Throws**  
 try {
   Map<String, int>? failInfo =
-      await EMClient.getInstance.chatRoomManager.removeAttributes(
+      await ChatClient.getInstance.chatRoomManager.removeAttributes(
     roomId,
     keys: keys,
     force: true,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ### 监听聊天室事件

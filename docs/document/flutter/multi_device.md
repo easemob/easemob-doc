@@ -63,29 +63,29 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 
 ```dart
 try {
-  List<String> ids = await EMClient.getInstance.contactManager.getSelfIdsOnOtherPlatform();
+  List<String> ids = await ChatClient.getInstance.contactManager.getSelfIdsOnOtherPlatform();
   if (ids.isNotEmpty) {
-    final msg = EMMessage.createTxtSendMessage(
+    final msg = ChatMessage.createTxtSendMessage(
         targetId: ids.first, content: 'content');
-    EMClient.getInstance.chatManager.sendMessage(msg);
+    ChatClient.getInstance.chatManager.sendMessage(msg);
   }
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint('$e');
 }
 ```
 
 ### 获取指定账号的在线登录设备列表  
 
-你可以调用 `fetchLoggedInDevices` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `deviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
+你可以调用 `fetchLoggedInDevices` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`ChatDeviceInfo` 中的 `deviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
 ```dart
 try {
-  List<EMDeviceInfo> deviceInfos = await EMClient.getInstance.fetchLoggedInDevices(
+  List<ChatDeviceInfo> deviceInfos = await ChatClient.getInstance.fetchLoggedInDevices(
     userId: 'userId',
     pwdOrToken: 'password',
     isPwd: true,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint('$e');
 }
 ```
@@ -94,19 +94,19 @@ try {
 
 即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
 
-初始化 SDK 时，你可以调用 `EMOptions#deviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
+初始化 SDK 时，你可以调用 `ChatOptions#deviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `ConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```dart
-final options = EMOptions(appKey: appKey, deviceName: '你自定义的设备名称');
-EMClient.getInstance.init(options);
+final options = ChatOptions(appKey: appKey, deviceName: '你自定义的设备名称');
+ChatClient.getInstance.init(options);
 
-EMClient.getInstance.addConnectionEventHandler(
+ChatClient.getInstance.addConnectionEventHandler(
   'identifier',
-  EMConnectionEventHandler(
+  ConnectionEventHandler(
     onUserDidLoginFromOtherDevice: (deviceName) {
       debugPrint('onUserDidLoginFromOtherDevice: $deviceName');
     },
@@ -126,22 +126,22 @@ EMClient.getInstance.addConnectionEventHandler(
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，调用 `EMOptions#osType` 方法自定义设置登录设备的平台。确保该方法中的 `osType` 参数的值与环信控制台的 **添加自定义平台** 对话框中设置的 **设备平台** 的值相同。
+2. 初始化 SDK 时，调用 `ChatOptions#osType` 方法自定义设置登录设备的平台。确保该方法中的 `osType` 参数的值与环信控制台的 **添加自定义平台** 对话框中设置的 **设备平台** 的值相同。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```dart
-final options = EMOptions(appKey: appKey, osType: 1);
-EMClient.getInstance.init(options);
+final options = ChatOptions(appKey: appKey, osType: 1);
+ChatClient.getInstance.init(options);
 ```
 
 ### 设置登录设备的扩展信息
 
 即时通讯 IM 自 4.8.1 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
 
-初始化 SDK 时，你可以调用 `EMOptions.loginExtension` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（例如 Android 平台提示 `206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+初始化 SDK 时，你可以调用 `ChatOptions.loginExtension` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（例如 Android 平台提示 `206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `ConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
@@ -149,12 +149,12 @@ EMClient.getInstance.init(options);
 
 ```dart
 // 设置登录设备的扩展信息
-final options = EMOptions(appKey: appKey, loginExtension: "extension");
+final options = ChatOptions(appKey: appKey, loginExtension: "extension");
 
 // 添加连接事件监听   
-EMClient.getInstance.addConnectionEventHandler(
+ChatClient.getInstance.addConnectionEventHandler(
   "identifier",
-  EMConnectionEventHandler(
+  ConnectionEventHandler(
     onUserDidLoginFromOtherDevice: (info) {
       debugPrint(info.deviceName);
       debugPrint(info.ext);
@@ -166,7 +166,7 @@ EMClient.getInstance.addConnectionEventHandler(
 ... 
 
 // 移除连接事件监听
-EMClient.getInstance.removeConnectionEventHandler("identifier");
+ChatClient.getInstance.removeConnectionEventHandler("identifier");
 ...
 
 
@@ -174,7 +174,7 @@ EMClient.getInstance.removeConnectionEventHandler("identifier");
 
 ### 强制指定账号从单个设备下线
 
-你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。被踢设备会收到 `onUserKickedByOtherDevice` 回调。调用该方法前，你需要首先通过 `EMClient#fetchLoggedInDevices` 方法获取设备 ID。
+你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。被踢设备会收到 `onUserKickedByOtherDevice` 回调。调用该方法前，你需要首先通过 `ChatClient#fetchLoggedInDevices` 方法获取设备 ID。
 
 :::tip
 不登录也可以使用该接口。
@@ -183,21 +183,21 @@ EMClient.getInstance.removeConnectionEventHandler("identifier");
 ```dart
 try {
   // 获取已登录设备列表
-  List<EMDeviceInfo> deviceInfos =
-      await EMClient.getInstance.fetchLoggedInDevices(
+  List<ChatDeviceInfo> deviceInfos =
+      await ChatClient.getInstance.fetchLoggedInDevices(
     userId: 'userId',
     pwdOrToken: 'password',
     isPwd: true,
   );
 
   // 踢出指定设备
-  await EMClient.getInstance.kickDevice(
+  await ChatClient.getInstance.kickDevice(
     userId: 'userId',
     pwdOrToken: 'password',
     isPwd: true,
     resource: deviceInfos.first.resource ?? '',
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint('$e');
 }
 ```
@@ -212,12 +212,12 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.kickAllDevices(
+  await ChatClient.getInstance.kickAllDevices(
     userId: 'userId',
     pwdOrToken: 'password',
     isPwd: true,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint('$e');
 }
 ```
@@ -226,66 +226,66 @@ try {
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
-可以通过 `EMMultiDeviceEventHandler` 类监听其他设备上的操作。
+可以通过 `ChatMultiDeviceEventHandler` 类监听其他设备上的操作。
 
 :::tip
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
 ```dart
-//实现 `EMMultiDeviceEventHandler` 监听其他设备上的操作。
-final multiDeviceEventHandler = EMMultiDeviceEventHandler(
-  onChatThreadEvent: (EMMultiDevicesEvent event, String chatThreadId,
+//实现 `ChatMultiDeviceEventHandler` 监听其他设备上的操作。
+final multiDeviceEventHandler = ChatMultiDeviceEventHandler(
+  onChatThreadEvent: (ChatMultiDevicesEvent event, String chatThreadId,
       List<String> userIds) {
     switch (event) {
       // 当前用户在其他设备上创建消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_CREATE:
+      case ChatMultiDevicesEvent.CHAT_THREAD_CREATE:
         debugPrint('chat thread create: $chatThreadId');
         break;
       // 当前用户在其他设备上销毁消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_DESTROY:
+      case ChatMultiDevicesEvent.CHAT_THREAD_DESTROY:
         debugPrint('chat thread destroy: $chatThreadId');
         break;
       // 当前用户在其他设备上加入消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_JOIN:
+      case ChatMultiDevicesEvent.CHAT_THREAD_JOIN:
         debugPrint('chat thread join: $chatThreadId');
         break;
       // 当前用户在其他设备上离开消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_LEAVE:
+      case ChatMultiDevicesEvent.CHAT_THREAD_LEAVE:
         debugPrint('chat thread leave: $chatThreadId');
         break;
       // 当前用户在其他设备上更新消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_UPDATE:
+      case ChatMultiDevicesEvent.CHAT_THREAD_UPDATE:
         debugPrint('chat thread update: $chatThreadId');
         break;
       // 当前用户在其他设备上将成员踢出消息话题。
-      case EMMultiDevicesEvent.CHAT_THREAD_KICK:
+      case ChatMultiDevicesEvent.CHAT_THREAD_KICK:
         debugPrint('chat thread kick: $chatThreadId');
         break;
       default:
         break;
     }
   },
-  onContactEvent: (EMMultiDevicesEvent event, String userId, String? ext) {
+  onContactEvent: (ChatMultiDevicesEvent event, String userId, String? ext) {
     switch (event) {
       // 当前用户在其他设备上接受好友请求。
-      case EMMultiDevicesEvent.CONTACT_ACCEPT:
+      case ChatMultiDevicesEvent.CONTACT_ACCEPT:
         debugPrint('contact accept: $userId');
         break;
       // 当前用户在其他设备上将好友加入黑名单。 
-      case EMMultiDevicesEvent.CONTACT_BAN:
+      case ChatMultiDevicesEvent.CONTACT_BAN:
         debugPrint('contact ban: $userId');
         break;
       // 当前用户在其他设备上将好友移出黑名单。 
-      case EMMultiDevicesEvent.CONTACT_ALLOW:
+      case ChatMultiDevicesEvent.CONTACT_ALLOW:
         debugPrint('contact allow: $userId');
         break;
       // 当前用户在其他设备上拒绝好友请求。  
-      case EMMultiDevicesEvent.CONTACT_DECLINE:
+      case ChatMultiDevicesEvent.CONTACT_DECLINE:
         debugPrint('contact decline: $userId');
         break;
       //当前用户在其他设备上删除好友。
-      case EMMultiDevicesEvent.CONTACT_REMOVE:
+      case ChatMultiDevicesEvent.CONTACT_REMOVE:
         debugPrint('contact remove: $userId');
         break;
       default:
@@ -293,94 +293,94 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
     }
   },
   onGroupEvent:
-      (EMMultiDevicesEvent event, String groupId, List<String>? userIds) {
+      (ChatMultiDevicesEvent event, String groupId, List<String>? userIds) {
     switch (event) {
       // 当前用户在其他设备上创建群组。
-      case EMMultiDevicesEvent.GROUP_CREATE:
+      case ChatMultiDevicesEvent.GROUP_CREATE:
         debugPrint('group create: $groupId');
         break;
       // 当前用户在其他设备上解散群组。
-      case EMMultiDevicesEvent.GROUP_DESTROY:
+      case ChatMultiDevicesEvent.GROUP_DESTROY:
         debugPrint('group destroy: $groupId');
         break;
       // 当前用户在其他设备上加入群组。
-      case EMMultiDevicesEvent.GROUP_JOIN:
+      case ChatMultiDevicesEvent.GROUP_JOIN:
         debugPrint('group join: $groupId');
         break;
       // 当前用户在其他设备离开群组。
-      case EMMultiDevicesEvent.GROUP_LEAVE:
+      case ChatMultiDevicesEvent.GROUP_LEAVE:
         debugPrint('group leave: $groupId');
         break;
       // 当前用户在其他设备上申请加入群组。
-      case EMMultiDevicesEvent.GROUP_APPLY:
+      case ChatMultiDevicesEvent.GROUP_APPLY:
         debugPrint('group apply: $groupId');
         break;
       // 当前用户在其他设备接受入群申请。
-      case EMMultiDevicesEvent.GROUP_APPLY_ACCEPT:
+      case ChatMultiDevicesEvent.GROUP_APPLY_ACCEPT:
         debugPrint('group apply accept: $groupId');
         break;
       // 当前用户在其他设备上拒绝入群申请。
-      case EMMultiDevicesEvent.GROUP_APPLY_DECLINE:
+      case ChatMultiDevicesEvent.GROUP_APPLY_DECLINE:
         debugPrint('group apply decline: $groupId');
         break;
       // 当前用户在其他设备上接受了入群邀请。
-      case EMMultiDevicesEvent.GROUP_INVITE_ACCEPT:
+      case ChatMultiDevicesEvent.GROUP_INVITE_ACCEPT:
         debugPrint('group invite accept: $groupId');
         break;
       // 当前用户在其他设备上拒绝了入群邀请。
-      case EMMultiDevicesEvent.GROUP_INVITE_DECLINE:
+      case ChatMultiDevicesEvent.GROUP_INVITE_DECLINE:
         debugPrint('group invite decline: $groupId');
         break;
       // 当前用户在其他设备上将成员踢出群。
-      case EMMultiDevicesEvent.GROUP_KICK:
+      case ChatMultiDevicesEvent.GROUP_KICK:
         debugPrint('group kick: $groupId');
         break;
       // 当前用户在其他设备上将成员移除群组黑名单。
-      case EMMultiDevicesEvent.GROUP_BAN:
+      case ChatMultiDevicesEvent.GROUP_BAN:
         debugPrint('group ban: $groupId');
         break;
       // 当前用户在其他设备上屏蔽群组。
-      case EMMultiDevicesEvent.GROUP_ALLOW:
+      case ChatMultiDevicesEvent.GROUP_ALLOW:
         debugPrint('group allow: $groupId');
         break;
       // 当前用户在其他设备上屏蔽群组。
-      case EMMultiDevicesEvent.GROUP_BLOCK:
+      case ChatMultiDevicesEvent.GROUP_BLOCK:
         debugPrint('group block: $groupId');
         break;
       // 当前用户在其他设备上取消群组屏蔽。
-      case EMMultiDevicesEvent.GROUP_UNBLOCK:
+      case ChatMultiDevicesEvent.GROUP_UNBLOCK:
         debugPrint('group unblock: $groupId');
         break;
       // 当前用户在其他设备上转移群组所有权。
-      case EMMultiDevicesEvent.GROUP_ASSIGN_OWNER:
+      case ChatMultiDevicesEvent.GROUP_ASSIGN_OWNER:
         debugPrint('group assign owner: $groupId');
         break;
       // 当前用户在其他设备上添加管理员。
-      case EMMultiDevicesEvent.GROUP_ADD_ADMIN:
+      case ChatMultiDevicesEvent.GROUP_ADD_ADMIN:
         debugPrint('group add admin: $groupId');
         break;
       // 当前用户在其他设备上移除管理员。
-      case EMMultiDevicesEvent.GROUP_REMOVE_ADMIN:
+      case ChatMultiDevicesEvent.GROUP_REMOVE_ADMIN:
         debugPrint('group remove admin: $groupId');
         break;
       // 当前用户在其他设备上禁言成员。
-      case EMMultiDevicesEvent.GROUP_ADD_MUTE:
+      case ChatMultiDevicesEvent.GROUP_ADD_MUTE:
         debugPrint('group add mute: $groupId');
         break;
       // 当前用户在其他设备上解除禁言。
-      case EMMultiDevicesEvent.GROUP_REMOVE_MUTE:
+      case ChatMultiDevicesEvent.GROUP_REMOVE_MUTE:
         debugPrint('group remove mute: $groupId');
         break;
       // 当前用户在其他设备将其他用户加入到群组白名单。
-      case EMMultiDevicesEvent.GROUP_ADD_USER_ALLOW_LIST:
+      case ChatMultiDevicesEvent.GROUP_ADD_USER_ALLOW_LIST:
         debugPrint('group add user allow list: $groupId');
         break;
       // 当前用户在其他设备将其他用户移除群组白名单。
-      case EMMultiDevicesEvent.GROUP_REMOVE_USER_ALLOW_LIST:
+      case ChatMultiDevicesEvent.GROUP_REMOVE_USER_ALLOW_LIST:
         debugPrint('group remove user allow list: $groupId');
         break;
       // 当前用户在其他设备上修改群组成员属性。
-      case EMMultiDevicesEvent.GROUP_MEMBER_ATTRIBUTES_CHANGED:
+      case ChatMultiDevicesEvent.GROUP_MEMBER_ATTRIBUTES_CHANGED:
         debugPrint('group member attributes changed: $groupId');
         break;
       default:
@@ -388,19 +388,19 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
     }
   },
   // 开启多设备后单个会话操作的多设备事件回调。
-  onConversationEvent: (EMMultiDevicesEvent event, String conversationId,
-      EMConversationType type) {
+  onConversationEvent: (ChatMultiDevicesEvent event, String conversationId,
+      ChatConversationType type) {
     switch (event) {
       // 当前用户在其他设备上置顶会话。
-      case EMMultiDevicesEvent.CONVERSATION_PINNED:
+      case ChatMultiDevicesEvent.CONVERSATION_PINNED:
         debugPrint('conversation update: $conversationId');
         break;
       // 当前用户在其他设备上取消会话置顶。
-      case EMMultiDevicesEvent.CONVERSATION_UNPINNED:
+      case ChatMultiDevicesEvent.CONVERSATION_UNPINNED:
         debugPrint('conversation update: $conversationId');
         break;
       // 当前用户在其他设备上删除了服务端的会话。
-      case EMMultiDevicesEvent.CONVERSATION_DELETE:
+      case ChatMultiDevicesEvent.CONVERSATION_DELETE:
         debugPrint('conversation update: $conversationId');
         break;
       default:
@@ -414,13 +414,13 @@ final multiDeviceEventHandler = EMMultiDeviceEventHandler(
 );
 
 // 添加多设备监听
-EMClient.getInstance.addMultiDeviceEventHandler(
+ChatClient.getInstance.addMultiDeviceEventHandler(
   'UNIQUE_HANDLER_ID',
   multiDeviceEventHandler,
 );
 
 // 移除多设备监听
-EMClient.getInstance.removeMultiDeviceEventHandler('UNIQUE_HANDLER_ID');
+ChatClient.getInstance.removeMultiDeviceEventHandler('UNIQUE_HANDLER_ID');
 
 ```
 
@@ -430,6 +430,6 @@ EMClient.getInstance.removeMultiDeviceEventHandler('UNIQUE_HANDLER_ID');
 
 ```dart
 try {
-  List<String> ids = await EMClient.getInstance.contactManager.getSelfIdsOnOtherPlatform();
-} on EMError catch (e) {}
+  List<String> ids = await ChatClient.getInstance.contactManager.getSelfIdsOnOtherPlatform();
+} on ChatError catch (e) {}
 ```

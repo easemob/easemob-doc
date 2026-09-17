@@ -15,8 +15,8 @@
 
 环信即时通讯 IM 支持从服务器和本地删除单个会话及其历史消息，主要方法如下：
 
-- `EMChatManager#deleteRemoteConversation`：单向删除服务端会话及其历史消息。
-- `EMChatManager#deleteConversation`：删除本地单个会话及其历史消息。
+- `ChatManager#deleteRemoteConversation`：单向删除服务端会话及其历史消息。
+- `ChatManager#deleteConversation`：删除本地单个会话及其历史消息。
 
 ## 实现方法
 
@@ -29,8 +29,8 @@
 String conversationId = "conversationId";
 // 删除会话时是否同时删除服务端和本地的历史消息。
 bool deleteMessage = true;
-EMConversationType conversationType = EMConversationType.Chat;
-await EMClient.getInstance.chatManager.deleteRemoteConversation(
+ChatConversationType conversationType = ChatConversationType.Chat;
+await ChatClient.getInstance.chatManager.deleteRemoteConversation(
   conversationId,
   conversationType: conversationType,
   isDeleteMessage: deleteMessage,
@@ -46,15 +46,15 @@ await EMClient.getInstance.chatManager.deleteRemoteConversation(
 String conversationId = "conversationId";
 // 删除会话时是否同时删除本地的历史消息
 bool deleteMessage = true;
-await EMClient.getInstance.chatManager
+await ChatClient.getInstance.chatManager
     .deleteConversation(conversationId, deleteMessage);
 ```
 
 - 删除本地指定会话中的指定消息。
 
 ```dart
-EMConversation? conversation =
-    await EMClient.getInstance.chatManager.getConversation(
+ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
   conversationId,
 );
 conversation?.deleteMessage(messageId);

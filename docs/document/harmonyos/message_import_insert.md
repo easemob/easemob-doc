@@ -22,13 +22,25 @@
 
 ### 批量导入消息到数据库
 
-如果你需要使用批量导入方式在本地会话中插入消息，可以调用 `importMessages` 方法，构造 `ChatMessage` 对象，将消息导入本地数据库。
+如需在本地会话中批量插入消息，可以构造 `ChatMessage` 对象并调用 `ChatManager#importMessages`。当前登录用户只能导入自己发送或接收的消息；导入后，SDK 会按照消息中的时间戳将其添加到对应会话。建议每次导入不超过 1,000 条消息。
 
-当前用户只能导入自己发送或接收的消息。导入后，消息按照其包含的时间戳添加到对应的会话中。
+自 HarmonyOS SDK 1.14.0 起，可以通过 `ChatOptions#setRegardImportedMsgAsRead` 配置是否将导入的消息视为已读。该配置默认为 `false`，设置为 `true` 时，导入的消息将被视为已读。该配置仅在初始化 SDK 前设置有效，可以调用 `ChatOptions#regardImportedMsgAsRead` 获取当前配置。
 
-推荐一次导入 1,000 条以内的数据。
+```typescript
+const options = new ChatOptions({
+  appKey: 'your-org#your-app'
+});
 
-示例代码如下：
+// 将导入的消息视为已读。
+options.setRegardImportedMsgAsRead(true);
+
+// 获取当前配置。
+const regardImportedMsgAsRead = options.regardImportedMsgAsRead();
+
+ChatClient.getInstance().init(context, options);
+```
+
+初始化 SDK 后，调用以下方法批量导入消息：
 
 ```typescript
 ChatClient.getInstance().chatManager()?.importMessages(msgs);

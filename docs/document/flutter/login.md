@@ -29,8 +29,8 @@
 
 ```dart
 try {
-  await EMClient.getInstance.loginWithToken(userId, token);
-} on EMError catch (e) {
+  await ChatClient.getInstance.loginWithToken(userId, token);
+} on ChatError catch (e) {
   debugPrint("loginWithToken error: ${e.code} ${e.description}");
 }
 ```
@@ -39,15 +39,15 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.loginWithPassword(userId, password);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.loginWithPassword(userId, password);
+} on ChatError catch (e) {}
 ```
 
 `login(userId, password)` 方法已废弃，请使用 `loginWithPassword(userId, password)` 或更安全的 `loginWithToken(userId, token)`。
 
 ## 自动登录
 
-初始化时，你可以设置 `EMOptions#autoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
+初始化时，你可以设置 `ChatOptions#autoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
 
 自动登录期限默认为 30 天，即设置自动登录后，用户 30 天内可自动登录。若调整改期限，可联系环信商务。
 
@@ -55,20 +55,20 @@ try {
 
 ## 获取当前登录的用户
 
-你可以调用 `EMClient#currentUserId` 方法获取当前登录用户的用户 ID。
+你可以调用 `ChatClient#currentUserId` 方法获取当前登录用户的用户 ID。
 
 ## 获取登录状态
 
-你可以调用 `EMClient#isLoginBefore` 方法获取当前用户的登录状态。
+你可以调用 `ChatClient#isLoginBefore` 方法获取当前用户的登录状态。
 
 ## 退出登录
 
-你可以调用 `EMClient#logout` 方法退出登录。退出登录后，你不会再收到其他用户发送的消息。
+你可以调用 `ChatClient#logout` 方法退出登录。退出登录后，你不会再收到其他用户发送的消息。
 
 ```dart
 try {
-  await EMClient.getInstance.logout();
-} on EMError catch (e) {
+  await ChatClient.getInstance.logout();
+} on ChatError catch (e) {
   debugPrint("logout error: ${e.code} ${e.description}");
 }
 ```

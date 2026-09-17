@@ -13,13 +13,13 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
+环信即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
-- `EMChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
-- `EMConversation#unreadCount`：获取本地指定会话的未读消息数。
-- `EMChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
-- `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
-- `EMConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
+- `ChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
+- `ChatConversation#unreadCount`：获取本地指定会话的未读消息数。
+- `ChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
+- `ChatConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
+- `ChatConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
 
 ## 实现方法
 
@@ -29,7 +29,7 @@
 
 ```dart
 int unreadCount =
-        await EMClient.getInstance.chatManager.getUnreadMessageCount();
+        await ChatClient.getInstance.chatManager.getUnreadMessageCount();
 ```
 
 ### 获取指定会话的未读消息数
@@ -38,7 +38,7 @@ int unreadCount =
 
 ```dart
 // type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
-EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
+ChatConversation? conversation = await ChatClient.getInstance.chatManager.getConversation("convId", type: ChatConversationType.Chat);
 int unreadCount = await conversation.unreadCount();
 ```
 
@@ -47,7 +47,7 @@ int unreadCount = await conversation.unreadCount();
 你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零。示例代码如下：
 
 ```dart
-await EMClient.getInstance.chatManager.markAllConversationsAsRead();
+await ChatClient.getInstance.chatManager.markAllConversationsAsRead();
 ```
 
 ### 指定会话的未读消息数清零
@@ -56,7 +56,7 @@ await EMClient.getInstance.chatManager.markAllConversationsAsRead();
 
 ```dart
 // type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
-EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
+ChatConversation? conversation = await ChatClient.getInstance.chatManager.getConversation("convId", type: ChatConversationType.Chat);
 await conversation.markAllMessagesAsRead();
 ```
 
@@ -66,6 +66,6 @@ await conversation.markAllMessagesAsRead();
 
 ```dart
 // type 为会话类型：单聊为 `Chat`，群聊为 `GroupChat`, 聊天室为 `ChatRoom`，默认为单聊。
-EMConversation? conversation = await EMClient.getInstance.chatManager.getConversation("convId", type: EMConversationType.Chat);
+ChatConversation? conversation = await ChatClient.getInstance.chatManager.getConversation("convId", type: ChatConversationType.Chat);
 await conversation.markMessageAsRead(message.msgId);
 ```

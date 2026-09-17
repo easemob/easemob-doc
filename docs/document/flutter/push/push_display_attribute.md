@@ -6,14 +6,14 @@
 
 ```dart
 try {
-  EMClient.getInstance.pushManager.updatePushNickname('nickname');
-} on EMError catch (e) {}
+  ChatClient.getInstance.pushManager.updatePushNickname('nickname');
+} on ChatError catch (e) {}
 ```
 
 ```dart
 try {
-  EMClient.getInstance.pushManager.updatePushDisplayStyle(DisplayStyle.Simple);
-} on EMError catch (e) {}
+  ChatClient.getInstance.pushManager.updatePushDisplayStyle(DisplayStyle.Simple);
+} on ChatError catch (e) {}
 ```
 
 若要在通知栏中显示消息内容，需要设置通知显示样式 `DisplayStyle`。该参数有如下两种设置：
@@ -39,10 +39,10 @@ try {
 
 ```dart
 try {
-  EMPushConfigs configs = await EMClient.getInstance.pushManager.fetchPushConfigsFromServer();
+  ChatPushConfigs configs = await ChatClient.getInstance.pushManager.fetchPushConfigsFromServer();
   // 获取推送显示昵称。
   String? pushNickname = configs.displayName;
   // 获取推送通知的显示样式。
   DisplayStyle pushDisplayStyle = configs.displayStyle;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```

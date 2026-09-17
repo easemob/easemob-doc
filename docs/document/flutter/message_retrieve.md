@@ -10,17 +10,17 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地消息的管理，其中核心方法如下：
+环信即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对本地消息的管理，其中核心方法如下：
 
-- `EMChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
-- `EMChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息。
-- `EMConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息。
-- `EMChatManager#getConversation`：读取本地指定会话的消息。
-- `EMChatManager#loadMessagesWithIds`：根据消息 ID 获取单个本地会话的单条或多条消息。
-- `EMChatManager#loadMessage`：根据消息 ID 获取消息。
-- `EMConversation#loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
-- `EMConversation#loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息。
-- `EMChatManager#loadConversationMessagesWithKeyword`：根据关键字获取指定会话中的消息。
+- `ChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
+- `ChatManager#doAsyncFetchHistoryMessages`：从服务器获取指定群成员发送的消息。
+- `ChatConversation#asyncSearchMsgFromDB`：从本地获取指定群成员发送的消息。
+- `ChatManager#getConversation`：读取本地指定会话的消息。
+- `ChatManager#loadMessagesWithIds`：根据消息 ID 获取单个本地会话的单条或多条消息。
+- `ChatManager#loadMessage`：根据消息 ID 获取消息。
+- `ChatConversation#loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
+- `ChatConversation#loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息。
+- `ChatManager#loadConversationMessagesWithKeyword`：根据关键字获取指定会话中的消息。
 
 ## 前提条件
 
@@ -71,8 +71,8 @@
     // options: 查询条件。
     // cursor: 分页查询时的游标， 首次可以传 null 或不传，如果是分页查询，传上一次查询结果的游标 result.cursor。
     // pageSize: 每页查询的消息数量。
-    EMCursorResult<EMMessage> result =
-        await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+    ChatCursorResult<ChatMessage> result =
+        await ChatClient.getInstance.chatManager.fetchHistoryMessagesByOption(
       conversationId,
       type,
       options: options,
@@ -90,19 +90,19 @@ try {
   // 会话 ID
   String convId = "convId";
   // 会话类型：Chat 为单聊；GroupChat 为群聊；ChatRoom 为聊天室。
-  EMConversationType convType = EMConversationType.Chat;
+  ChatConversationType convType = ChatConversationType.Chat;
   // 获取的最大消息数
   int pageSize = 10;
   // 搜索的起始消息 ID
   String startMsgId = "";
-  EMCursorResult<EMMessage?> cursor =
-      await EMClient.getInstance.chatManager.fetchHistoryMessages(
+  ChatCursorResult<ChatMessage?> cursor =
+      await ChatClient.getInstance.chatManager.fetchHistoryMessages(
     conversationId: convId,
     type: convType,
     pageSize: pageSize,
     startMsgId: startMsgId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -111,10 +111,10 @@ try {
 自 4.15.0 版本开始，对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
 ```dart
-  EMCursorResult<EMMessage> result =
-      await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+  ChatCursorResult<ChatMessage> result =
+      await ChatClient.getInstance.chatManager.fetchHistoryMessagesByOption(
     'conversationId',
-    EMConversationType.GroupChat,
+    ChatConversationType.GroupChat,
     options: const FetchMessageOptions(senders: ['senderA', 'senderB']),
   );
 ```
@@ -124,7 +124,7 @@ try {
 自 4.15.0 版本开始，对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
 ```dart
-List<EMMessage> list = conversation.loadMessagesWithKeyword(
+List<ChatMessage> list = conversation.loadMessagesWithKeyword(
   keywords: keywords,
   senders: ['senderA, senderB'],
 );
@@ -139,16 +139,16 @@ List<EMMessage> list = conversation.loadMessagesWithKeyword(
 String convId = "convId";
 // 如果会话不存在是否创建。设置为 `true`，则会返回会话对象。
 bool createIfNeed = true;
-// 会话类型。详见 `EMConversationType` 枚举类型。
-EMConversationType conversationType = EMConversationType.Chat;
+// 会话类型。详见 `ChatConversationType` 枚举类型。
+ChatConversationType conversationType = ChatConversationType.Chat;
 // 执行操作。
-EMConversation? conversation =
-    await EMClient.getInstance.chatManager.getConversation(
+ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
   convId,
   conversationType,
   true,
 );
-List<EMMessage>? list = await conversation?.loadMessages();
+List<ChatMessage>? list = await conversation?.loadMessages();
 ```
 
 ### 根据消息 ID 获取本地消息
@@ -159,7 +159,7 @@ List<EMMessage>? list = await conversation?.loadMessages();
 
 ```dart
 // messageIdList：消息 ID 列表。每次最多可传入 20 个消息 ID。
-List<EMMessage> messages = await EMClient.getInstance.chatManager.loadMessagesWithIds(messageIdList, conversationId);
+List<ChatMessage> messages = await ChatClient.getInstance.chatManager.loadMessagesWithIds(messageIdList, conversationId);
 ```
 
 ### 根据消息 ID 获取消息
@@ -168,7 +168,7 @@ List<EMMessage> messages = await EMClient.getInstance.chatManager.loadMessagesWi
 
 ```dart
 // msgId：要获取消息的消息 ID。
-EMMessage? msg = await EMClient.getInstance.chatManager.loadMessage("msgId");
+ChatMessage? msg = await ChatClient.getInstance.chatManager.loadMessage("msgId");
 ```
 
 ### 获取指定会话中特定类型的消息
@@ -178,15 +178,15 @@ EMMessage? msg = await EMClient.getInstance.chatManager.loadMessage("msgId");
 每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```dart
-EMConversation? conv =
-        await EMClient.getInstance.chatManager.getConversation("convId");
-    List<EMMessage>? list = await conv?.loadMessagesWithMsgType(
+ChatConversation? conv =
+        await ChatClient.getInstance.chatManager.getConversation("convId");
+    List<ChatMessage>? list = await conv?.loadMessagesWithMsgType(
       // 消息类型。
       type: MessageType.TXT,
       // 每次获取的消息数量。取值范围为 [1,400]。
       count: 50,
       // 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-      direction: EMSearchDirection.Up,
+      direction: ChatSearchDirection.Up,
     );
 ```
 
@@ -197,9 +197,9 @@ EMConversation? conv =
 每次最多可获取 400 条消息。
 
 ```dart
-EMConversation? conv =
-        await EMClient.getInstance.chatManager.getConversation("convId");
-    List<EMMessage>? list = await conv?.loadMessagesFromTime(
+ChatConversation? conv =
+        await ChatClient.getInstance.chatManager.getConversation("convId");
+    List<ChatMessage>? list = await conv?.loadMessagesFromTime(
       // 查询的起始时间戳，单位为毫秒。
       startTime: startTime,
       // 查询的结束时间戳，单位为毫秒。
@@ -215,13 +215,13 @@ EMConversation? conv =
 
 ```dart
 Map<String, List<String>> result = 
-          await EMClient.getInstance.chatManager.loadConversationMessagesWithKeyword(
+          await ChatClient.getInstance.chatManager.loadConversationMessagesWithKeyword(
         keyword: "hello",  // 搜索包含 "hello" 的消息
         timestamp: -1,
         sender: null,
-        direction: EMSearchDirection.Up,
+        direction: ChatSearchDirection.Up,
         scope: MessageSearchScope.All,
       );
 ```
 
-调用上述 API 获取到会话 ID 和对应的消息列表后，如果需要使用获取的会话 ID 调用`EMChatManager#getConversation` 进一步操作，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`）。 原因是上述 API 获取到的会话 ID 从消息中得到的，因此并不能证明该会话是存在的 (有可能已被删除)。所以，你在调用 `EMChatManager#getConversation` 时传入了获取的会话 ID，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`），同时还需对 `getConversation` 进行是否为空的判断，避免创建会话错误。例如: 调用 `loadConversationMessagesWithKeyword` 获取了群组会话 ID（即群组 ID）且该会话已删除，将该群组 ID 传入了 `EMChatManager#getConversation`，该 API 中的 `createIfNeed` 设置为 `true`，`type` 设置为 `Chat`，则 SDK 会创建单聊会话。
+调用上述 API 获取到会话 ID 和对应的消息列表后，如果需要使用获取的会话 ID 调用`ChatManager#getConversation` 进一步操作，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`）。 原因是上述 API 获取到的会话 ID 从消息中得到的，因此并不能证明该会话是存在的 (有可能已被删除)。所以，你在调用 `ChatManager#getConversation` 时传入了获取的会话 ID，则需将 `createIfNeed` 参数设置为 `false`（默认为 `true`），同时还需对 `getConversation` 进行是否为空的判断，避免创建会话错误。例如: 调用 `loadConversationMessagesWithKeyword` 获取了群组会话 ID（即群组 ID）且该会话已删除，将该群组 ID 传入了 `ChatManager#getConversation`，该 API 中的 `createIfNeed` 设置为 `true`，`type` 设置为 `Chat`，则 SDK 会创建单聊会话。

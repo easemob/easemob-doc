@@ -1,5 +1,45 @@
 # HarmonyOS IM SDK 更新日志
 
+## v1.14.1 Dev 2026-9-4（开发版）
+
+1. 修复退出登录或切换账号后，未完成的群组或聊天室 REST 请求仍根据返回结果更新本地状态的问题。
+2. 修复鸿蒙平台将非 Token 过期导致的 HTTP 401 错误误判为 Token 过期，并触发相应回调的问题。
+
+## v1.14.0 Dev 2026-8-26（开发版）
+
+#### 新增特性
+
+- 支持图片消息分层资源管理及相关处理逻辑优化：
+  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 支持登录后自动同步好友列表：
+  - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
+  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
+  - 增强好友对象能力：[从服务端主动获取好友列表](user_relationship.html#从服务端主动获取好友列表) 和 [从本地读取好友列表](user_relationship.html#从本地读取好友列表) 时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持消息附件下载进度回调及 Promise 结果：`ChatManager` 的 `downloadAttachment`、`downloadThumbnail` 和新增的 `downloadBigImage` 方法均返回 `Promise<void>`，并支持可选的 `onProgress` 进度回调；新增附件下载类型枚举 `AttachmentDownloadType`，包含原始附件（`ORIGINAL`）、大图（`BIG`）和缩略图（`THUMBNAIL`）。
+- 支持配置数据同步第二通道的 WebSocket 服务器地址和端口。
+- 增强 `ChatOptions` 配置能力：
+  - 支持配置是否启用 DNS 配置：新增 `setEnableDnsConfig` 和 `getEnableDnsConfig` 方法。
+  - 支持配置是否将导入的消息视为已读：新增 `setRegardImportedMsgAsRead` 和 `regardImportedMsgAsRead` 方法。
+   
+#### 优化
+
+获取 DNS 失败时的错误码由 `305` 调整为 `304`。
+
+#### 修复
+
+1. 修复 `checkDns` 递归调用可能导致死锁的问题。
+2. 修复离线消息同步过程中并发访问同步队列可能导致崩溃的问题。
+3. 修复离线消息同步完成回调在持有同步队列锁时触发，可能导致锁等待和卡顿的问题。
+
+#### 注意
+
+升级至 1.14.0 版本后，如果使用私有云服务，需要主动调用 `ChatOptions#setEnableDnsConfig(false)`，关闭 SDK 的 DNS 地址配置。
+
+此前该配置由 SDK 内部自动处理；从 1.14.0 版本开始改为由用户显式设置，以与其他平台保持一致。
+
 ## v1.13.0 Dev 2026-6-24（开发版）
 
 #### 新增特性
@@ -18,7 +58,7 @@
   - `ChatMessage#getSenderInfo()`：获取消息发送方信息，包括用户昵称、头像、群名片和好友备注等信息。
   - `UserInfoListener`：监听用户信息更新事件。
 
-- [获取群成员列表](/document/harmonyos/group_manage.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
+- [获取群成员列表](group_manage.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
 
 #### 修复
 
@@ -188,7 +228,7 @@
 
 #### 优化
 
-- 发送后修改消息接口 [ContactManager#modifyMessage](message_modify.html) 支持修改各类消息：
+- 发送后修改消息接口 [ChatManager#modifyMessage](message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
@@ -200,7 +240,7 @@
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地获取好友列表) 方法，用于获取本地单个好友的信息。
+- 新增 [ContactManager#getContact](user_relationship.html#从本地读取好友列表) 方法，用于获取本地单个好友的信息。
 
 #### 优化
 
@@ -240,7 +280,7 @@
   5. 当前用户被禁言截止时间戳：新增 `Chatroom#muteExpireTimestamp` 方法获取。
 
 - 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
-  - `ChatOptions#setCustomOSPlatform` 和 `ChatOptions#getCustomDeviceName`，用于设置和获取当前设备自定义平台代号；
+  - `ChatOptions#setCustomOSPlatform` 和 `ChatOptions#getCustomOSPlatform`，用于设置和获取当前设备自定义平台代号；
   - `ChatOptions#setCustomDeviceName` 和 `ChatOptions#getCustomDeviceName`，用于设置和获取当前设备自定义设备名称。
 - 新增 `ChatManager#getDBMsgsCount` 方法，用于获取数据库中的消息总数。
 - 新增[两个错误码](error.html)：
@@ -421,7 +461,7 @@
 - 支持[用户关系管理](user_relationship.html)特性：
   - [添加、删除好友](user_relationship.html#添加好友)；
   - [设置好友备注](user_relationship.html#设置好友备注)；
-  - [获取好友列表](user_relationship.html#从服务端获取好友列表)；
+  - [获取好友列表](user_relationship.html#从服务端主动获取好友列表)；
   - [好友黑名单管理](user_relationship.html#添加用户到黑名单)。
 - 支持群组管理特性：
   - [创建和管理群组](group_manage.html)：创建/解散群组、获取群组详情、获取群成员列表、获取群组列表、查询当前用户已加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。

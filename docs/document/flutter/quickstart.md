@@ -232,13 +232,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```dart
 void _initSDK() async {
-    EMOptions options = EMOptions.withAppKey(
+    ChatOptions options = ChatOptions.withAppKey(
       "<#Your AppKey#>",
       autoLogin: false,
     );
-    await EMClient.getInstance.init(options);
-    // 通知 SDK UI 已准备好。该方法执行后才会收到 `EMChatRoomEventHandler`、`EMContactEventHandler` 和 `EMGroupEventHandler` 回调。
-    await EMClient.getInstance.startCallback();
+    await ChatClient.getInstance.init(options);
+    // 通知 SDK UI 已准备好。该方法执行后才会收到 `ChatRoomEventHandler`、`ChatContactEventHandler` 和 `ChatGroupEventHandler` 回调。
+    await ChatClient.getInstance.startCallback();
 }
 ```
 
@@ -261,9 +261,9 @@ void _signIn() async {
     }
 
     try {
-        await EMClient.getInstance.loginWithToken(_username, _token);
+        await ChatClient.getInstance.loginWithToken(_username, _token);
         _addLogToConsole("sign in succeed, username: $_username");
-    } on EMError catch (e) {
+    } on ChatError catch (e) {
         _addLogToConsole("sign in failed, e: ${e.code} , ${e.description}");
     }
 }
@@ -276,9 +276,9 @@ void _signIn() async {
 ```dart
 void _signOut() async {
     try {
-        await EMClient.getInstance.logout(true);
+        await ChatClient.getInstance.logout(true);
         _addLogToConsole("sign out succeed");
-    } on EMError catch (e) {
+    } on ChatError catch (e) {
         _addLogToConsole(
             "sign out failed, code: ${e.code}, desc: ${e.description}");
     }
@@ -296,12 +296,12 @@ void _sendMessage() async {
     return;
   }
 
-  var msg = EMMessage.createTxtSendMessage(
+  var msg = ChatMessage.createTxtSendMessage(
     targetId: _chatId,
     content: _messageContent,
   );
 
-  EMClient.getInstance.chatManager.sendMessage(msg);
+  ChatClient.getInstance.chatManager.sendMessage(msg);
 }
 ```
 
@@ -313,7 +313,7 @@ void _sendMessage() async {
 void _addChatListener() {
 
   // 添加消息状态变更监听
-  EMClient.getInstance.chatManager.addMessageEvent(
+  ChatClient.getInstance.chatManager.addMessageEvent(
       // ChatMessageEvent 对应的 key。
         "UNIQUE_HANDLER_ID",
         ChatMessageEvent(
@@ -332,16 +332,16 @@ void _addChatListener() {
 
 
   // 添加收消息监听
-  EMClient.getInstance.chatManager.addEventHandler(
-    // EMChatEventHandler 对应的 key。
+  ChatClient.getInstance.chatManager.addEventHandler(
+    // ChatEventHandler 对应的 key。
     "UNIQUE_HANDLER_ID",
-    EMChatEventHandler(
+    ChatEventHandler(
       onMessagesReceived: (messages) {
         for (var msg in messages) {
           switch (msg.body.type) {
             case MessageType.TXT:
               {
-                EMTextMessageBody body = msg.body as EMTextMessageBody;
+                ChatTextMessageBody body = msg.body as ChatTextMessageBody;
                 _addLogToConsole(
                   "receive text message: ${body.content}, from: ${msg.from}",
                 );
@@ -398,7 +398,7 @@ void _addChatListener() {
               break;  
             case MessageType.CMD:
               {
-                // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `EMChatEventHandler#onCmdMessagesReceived` 回调接收
+                // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `ChatEventHandler#onCmdMessagesReceived` 回调接收
               }
               break;
           }
@@ -417,9 +417,9 @@ void _addChatListener() {
 @override
 void dispose() {
   // 移除消息状态监听
-  EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
+  ChatClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
-  EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+  ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
   super.dispose();
 }
 ```

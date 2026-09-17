@@ -6,7 +6,7 @@
 
 例如，在企业群组中，成员可将在群组中的名片设置为“部门-姓名”或“岗位-姓名”的格式，便于群内成员快速识别和沟通。
 
-环信即时通讯 IM Android SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
+自 **Android SDK 4.20.0 版本开始** 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
 
 ## 技术原理
 
@@ -16,7 +16,7 @@
 2. 当群成员名片发生变更并同步到本地内存后，SDK 会通过 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件通知业务层。
 3. SDK 支持通过 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务端批量获取群成员信息，并将返回的群成员名片写入本地内存。
 4. SDK 支持通过 `EMGroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。
-5. 若同时开启 `EMOptions#setEnableUserInfo(true)`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。本地内存中的群成员名片数据来源于服务端主动获取和消息触发自动同步两种方式。
+5. 若同时开启 `EMOptions#setEnableUserInfo(true)`，发送消息时会自动附带发送方群成员名片更新时间；接收方在检测到消息中的更新时间晚于本地内存时，会自动从服务端拉取最新群成员名片、更新本地内存，并触发事件通知业务层。
 
 内存更新流程如下图所示：
 
@@ -26,6 +26,7 @@
 
 开始接入前，请确保满足以下条件：
 
+- 已将 Android SDK 升级至 v4.20.0 或以上版本。
 - 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
@@ -74,7 +75,7 @@ EMClient.getInstance().groupManager().asyncUpdateGroupNamecard("groupId", "new_n
 
 ## 从服务端获取群成员名片
 
-调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务器分页获取群成员信息。若需获取群成员的群名片、昵称和头像，应在初始化 SDK 前调用 `EMOptions#setEnableUserInfo(true)` 开启 [用户信息自动管理功能](userinfo_provider.html)；否则，返回的 `EMGroupMemberInfo` 不包含 `namecard`、`nickname` 和 `avatarUrl`。获取成功后，相关数据会自动更新至本地内存。
+调用 `EMGroupManager#asyncFetchGroupMembersInfo` 从服务器分页获取群成员信息，包括群成员名片。获取成功后，相关数据会自动更新至本地内存。
 
 ```java
 // 异步方法。
@@ -140,7 +141,7 @@ EMClient.getInstance().init(context, options);
 
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `EMGroupManager#getGroupNamecard` 仅查询本地内存，不会主动从服务端获取最新数据。
-- `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。只有 [开启用户信息自动管理功能](userinfo_provider.html) 后，该接口返回的信息才包含群名片、昵称和头像。
+- 主动调用 `EMGroupManager#asyncFetchGroupMembersInfo` 返回的群成员信息会自动更新本地内存。
 - `EMGroupChangeListener#onUserGroupNamecardUpdated` 仅对在线用户投递。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化前调用 `EMOptions#setEnableUserInfo(true)`。
 - 开启 `EMOptions#setEnableUserInfo(true)` 后，群成员名片的自动更新依赖消息触发；若业务需要主动获取最新数据，仍应调用服务端接口。

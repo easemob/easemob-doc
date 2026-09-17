@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMGroup`、`EMGroupManager` 和 `EMGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Flutter SDK 提供 `ChatGroup`、`ChatGroupManager` 和 `ChatGroupEventHandler` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 修改群组名称、描述
 - 获取、设置和修改群头像
@@ -28,33 +28,33 @@
 
 ### 修改群组名称
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupName` 方法设置和修改群组名称，群名称的长度限制为 255 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
+仅群主和群管理员可以调用 `ChatGroupManager#updateGroupName` 方法设置和修改群组名称，群名称的长度限制为 255 个字符, 其他成员会收到 `ChatGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupName(
+  await ChatClient.getInstance.groupManager.updateGroupName(
     groupId,
     newName,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 修改群组描述
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupDesc` 方法设置和修改群组描述，群描述的长度限制为 2048 个字符, 其他成员会收到 `EMGroupEventHandler#onSpecificationDidUpdate` 回调。
+仅群主和群管理员可以调用 `ChatGroupManager#updateGroupDesc` 方法设置和修改群组描述，群描述的长度限制为 2048 个字符, 其他成员会收到 `ChatGroupEventHandler#onSpecificationDidUpdate` 回调。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupDesc(
+  await ChatClient.getInstance.groupManager.updateGroupDesc(
     groupId,
     newDesc,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -68,11 +68,11 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.createGroup(
+  await ChatClient.getInstance.groupManager.createGroup(
     groupName: "groupName",
     avatarUrl: "avatarUrl",
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -80,23 +80,23 @@ try {
 
 #### 修改群组头像
 
-创建群组完成后，群主或管理员可调用 `EMGroupManager#updateGroupAvatarUrl` 设置或修改群组头像：
+创建群组完成后，群主或管理员可调用 `ChatGroupManager#updateGroupAvatarUrl` 设置或修改群组头像：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupAvatarUrl(
+  await ChatClient.getInstance.groupManager.updateGroupAvatarUrl(
     groupId: 'groupId',
     avatarUrl: 'avatarUrl',
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
-群组头像被修改后，其他群成员会收到 `  EMGroupEventHandler#onSpecificationDidUpdate` 回调：
+群组头像被修改后，其他群成员会收到 `  ChatGroupEventHandler#onSpecificationDidUpdate` 回调：
 
 ```dart
-EMClient.getInstance.groupManager.addEventHandler(
+ChatClient.getInstance.groupManager.addEventHandler(
   'UNIQUE_HANDLER_ID',
-  EMGroupEventHandler(
+  ChatGroupEventHandler(
     onSpecificationDidUpdate: (group) {},
   ),
 );
@@ -104,47 +104,47 @@ EMClient.getInstance.groupManager.addEventHandler(
 
 #### 获取群组头像
 
-群成员可以通过获取群详情的方法 `EMGroupManager#fetchGroupInfoFromServer`，获取群组头像：
+群成员可以通过获取群详情的方法 `ChatGroupManager#fetchGroupInfoFromServer`，获取群组头像：
 
 ```dart
 try {
-  EMGroup group =
-      await EMClient.getInstance.groupManager.fetchGroupInfoFromServer(
+  ChatGroup group =
+      await ChatClient.getInstance.groupManager.fetchGroupInfoFromServer(
     'groupId',
   );
   String? avatarUrl = group.avatarUrl;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ### 更新群公告
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `EMGroupEventHandler#onAnnouncementChangedFromGroup` 事件。
+仅群主和群管理员可以调用 `ChatGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `ChatGroupEventHandler#onAnnouncementChangedFromGroup` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupAnnouncement(
+  await ChatClient.getInstance.groupManager.updateGroupAnnouncement(
     groupId,
     newAnnouncement,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 获取群公告
 
-所有群成员均可以调用 `EMGroupManager#fetchAnnouncementFromServer` 方法从服务器获取群公告。
+所有群成员均可以调用 `ChatGroupManager#fetchAnnouncementFromServer` 方法从服务器获取群公告。
 
 示例代码如下：
 
 ```dart
 try {
   String? announcement =
-      await EMClient.getInstance.groupManager.fetchAnnouncementFromServer(
+      await ChatClient.getInstance.groupManager.fetchAnnouncementFromServer(
     groupId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -152,17 +152,17 @@ try {
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `EMGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileAddedFromGroup` 事件。
+所有群组成员均可以调用 `ChatGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `ChatGroupEventHandler#onSharedFileAddedFromGroup` 事件。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.uploadGroupSharedFile(
+  await ChatClient.getInstance.groupManager.uploadGroupSharedFile(
     groupId,
     filePath,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -173,28 +173,28 @@ try {
 ```dart
 try {
   // 获取文件列表
-  List<EMGroupSharedFile> list =
-      await EMClient.getInstance.groupManager.fetchGroupFileListFromServer(
+  List<ChatGroupSharedFile> list =
+      await ChatClient.getInstance.groupManager.fetchGroupFileListFromServer(
     groupId,
     pageNum: 1,
     pageSize: 10,
   );
 
   if (list.isNotEmpty) {
-    await EMClient.getInstance.groupManager.downloadGroupSharedFile(
+    await ChatClient.getInstance.groupManager.downloadGroupSharedFile(
       groupId: groupId,
       fileId: list.first.fileId!,
       savePath: savePath,
     );
   }
-} on EMError catch (e) {
+} on ChatError catch (e) {
   debugPrint('$e');
 }
 ```
 
 #### 删除共享文件
 
-所有群成员均可以调用 `EMGroupManager#removeGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `EMGroupEventHandler#onSharedFileDeletedFromGroup` 事件。
+所有群成员均可以调用 `ChatGroupManager#removeGroupSharedFile` 方法删除群共享文件。删除共享文件后，其他群成员收到 `ChatGroupEventHandler#onSharedFileDeletedFromGroup` 事件。
 
 群主和群管理员可删除全部的群共享文件，群成员只能删除自己上传的群文件。
 
@@ -202,45 +202,45 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.removeGroupSharedFile(
+  await ChatClient.getInstance.groupManager.removeGroupSharedFile(
     groupId,
     fileId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 #### 从服务器获取共享文件
 
-所有群成员均可以调用 `EMGroupManager#fetchGroupFileListFromServer` 方法从服务器获取群组的共享文件列表。
+所有群成员均可以调用 `ChatGroupManager#fetchGroupFileListFromServer` 方法从服务器获取群组的共享文件列表。
 
 示例代码如下：
 
 ```dart
 try {
-  List<EMGroupSharedFile> list =
-      await EMClient.getInstance.groupManager.fetchGroupFileListFromServer(
+  List<ChatGroupSharedFile> list =
+      await ChatClient.getInstance.groupManager.fetchGroupFileListFromServer(
     groupId,
     pageNum: pageNum,
     pageSize: pageSize,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 更新群扩展字段
 
-仅群主和群管理员可以调用 `EMGroupManager#updateGroupExtension` 方法更新群组的扩展字段，群组扩展字段设置 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
+仅群主和群管理员可以调用 `ChatGroupManager#updateGroupExtension` 方法更新群组的扩展字段，群组扩展字段设置 JSON 格式的数据，用于自定义更多群组信息。群扩展字段的长度限制为 8 KB。
 
 示例代码如下：
 
 ```dart
 try {
-  await EMClient.getInstance.groupManager.updateGroupExtension(
+  await ChatClient.getInstance.groupManager.updateGroupExtension(
     groupId,
     extension,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 

@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMMessage` 和 `EMChatThread` 类，用于管理消息话题中的消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取消息话题中的消息。
+即时通讯 IM Flutter SDK 提供 `ChatThreadManager`、`ChatMessage` 和 `ChatThread` 类，用于管理消息话题中的消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取消息话题中的消息。
 
 消息收发流程如下：
 
@@ -39,7 +39,7 @@
 ```dart
 // `chatThreadId` 为消息话题 ID
 
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: threadId,
   content: content,
   // `chatType` 设置为 `GroupChat`，即群聊
@@ -47,76 +47,76 @@ EMMessage msg = EMMessage.createTxtSendMessage(
 );
 // isChatThreadMessage: 是否是消息话题中的消息，这里设置为 `true`，即是消息话题中的消息。
 msg.isChatThreadMessage = true;
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ### 接收消息话题中的消息
 
 接收消息的具体逻辑，请参考 [接收消息](message_receive.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-消息话题有新增消息时，消息话题所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，消息话题成员收到 `EMChatEventHandler#onMessagesReceived` 事件。
+消息话题有新增消息时，消息话题所属群组的所有成员收到 `ChatThreadEventHandler#onChatThreadUpdated` 事件，消息话题成员收到 `ChatEventHandler#onMessagesReceived` 事件。
 
 示例代码如下：
 
 ```dart
 // 注册消息话题监听
-EMClient.getInstance.chatThreadManager.addEventHandler(
+ChatClient.getInstance.chatThreadManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-  EMChatThreadEventHandler(
+  ChatThreadEventHandler(
     onChatThreadUpdate: (event) {},
       ),
     );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagesReceived: (messages) {},
       ),
     );
 
 // 移除消息话题监听
-EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
     // 移除消息监听
-    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 撤回消息话题中的消息
 
 接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍消息话题中的消息和其他消息的区别。
 
-消息话题有消息撤回时，消息话题所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，消息话题成员收到 `EMChatEventHandler#onMessagesRecalledInfo` 事件。
+消息话题有消息撤回时，消息话题所属群组的所有成员收到 `ChatThreadEventHandler#onChatThreadUpdated` 事件，消息话题成员收到 `ChatEventHandler#onMessagesRecalledInfo` 事件。
 
 示例代码如下：
 
 ```dart
 // 注册消息话题监听
-EMClient.getInstance.chatThreadManager.addEventHandler(
+ChatClient.getInstance.chatThreadManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatThreadEventHandler(
+  ChatThreadEventHandler(
     onChatThreadUpdate: (event) {},
   ),
 );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagesRecalledInfo: (messages) {},
   ),
 );
 
 // 移除消息话题监听
-EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
 // 移除消息监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 获取消息话题中的消息
 
 从服务器还是本地数据库获取消息话题中的消息取决于你的生产环境。
 
-你可以通过 `EMConversation#isChatThread()` 判断当前会话是否为消息话题会话。
+你可以通过 `ChatConversation#isChatThread()` 判断当前会话是否为消息话题会话。
 
 #### 从服务器获取单个消息话题的消息 (消息漫游)
 
@@ -127,38 +127,38 @@ try {
   // 消息话题 ID。
   String threadId = "threadId";
   // 会话类型，设置为群聊，即 `GroupChat`。
-  EMConversationType convType = EMConversationType.GroupChat;
+  ChatConversationType convType = ChatConversationType.GroupChat;
   // 每页期望获取的消息数量。
   int pageSize = 10;
   // 搜索的起始消息 ID。
   String startMsgId = "";
-  EMCursorResult<EMMessage> result =
-      await EMClient.getInstance.chatManager.fetchHistoryMessages(
+  ChatCursorResult<ChatMessage> result =
+      await ChatClient.getInstance.chatManager.fetchHistoryMessages(
     conversationId: threadId,
     type: convType,
     startMsgId: startMsgId,
     pageSize: pageSize,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 #### 从本地获取单个消息话题的消息
 
-调用 `EMChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个消息话题的消息：
+调用 `ChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个消息话题的消息：
 
 ```dart
 try {
   // 消息话题 ID。
   String threadId = "threadId";
   // 会话类型，即群聊 `GroupChat`。
-  EMConversationType convType = EMConversationType.GroupChat;
-  EMConversation? converrsation =
-        await EMClient.getInstance.chatManager.getThreadConversation(threadId);
+  ChatConversationType convType = ChatConversationType.GroupChat;
+  ChatConversation? converrsation =
+        await ChatClient.getInstance.chatManager.getThreadConversation(threadId);
   // 搜索的起始消息 ID。
   String startMsgId = "startMsgId";
   // 每页期望获取的消息数量。
   int pageSize = 10;
-  List<EMMessage>? list = await conversation?.loadMessages(
+  List<ChatMessage>? list = await conversation?.loadMessages(
       startMsgId: startMsgId, loadCount: pageSize);
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```

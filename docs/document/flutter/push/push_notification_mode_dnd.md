@@ -25,15 +25,15 @@
 
 ### 从服务器获取所有会话的推送通知方式设置
 
-你可以调用 `EMPushManager#syncConversationsSilentMode` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`EMConversation#remindType` 查询当前会话的推送通知方式。
+你可以调用 `ChatPushManager#syncConversationsSilentMode` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`ChatConversation#remindType` 查询当前会话的推送通知方式。
 
 ```dart
 //同步会话的推送通知方式
-await EMClient.getInstance.pushManager.syncConversationsSilentMode();
+await ChatClient.getInstance.pushManager.syncConversationsSilentMode();
 
 //查询会话的推送通知方式
-    EMConversation? conversation =
-        await EMClient.getInstance.chatManager.getConversation(
+    ChatConversation? conversation =
+        await ChatClient.getInstance.chatManager.getConversation(
       conversationId,
     );
     ChatPushRemindType? remindType = await conversation?.remindType();
@@ -42,11 +42,11 @@ await EMClient.getInstance.pushManager.syncConversationsSilentMode();
 
 ### 设置推送通知方式
 
-在本机上调用 `EMPushManager#setConversationSilentMode` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
+在本机上调用 `ChatPushManager#setConversationSilentMode` 设置会话的推送通知方式，在多设备事件 `ChatMultiDeviceEventHandler#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `ChatMultiDeviceEventHandler#CONVERSATION_MUTE_INFO_CHANGED`。
 
 ```dart
   //对会话设置推送通知方式
-  await EMClient.getInstance.pushManager.setConversationSilentMode(
+  await ChatClient.getInstance.pushManager.setConversationSilentMode(
     conversationId: conversationId,
     type: type,
     param: ChatSilentModeParam.remindType(
@@ -55,7 +55,7 @@ await EMClient.getInstance.pushManager.syncConversationsSilentMode();
   );
 
   //多设备事件
-  EMClient.getInstance.addMultiDeviceEventHandler('Identifier', EMMultiDeviceEventHandler(
+  ChatClient.getInstance.addMultiDeviceEventHandler('Identifier', ChatMultiDeviceEventHandler(
     onConversationEvent: (event, conversationId, type) {
     },
   ));
@@ -102,8 +102,8 @@ ChatSilentModeParam param = ChatSilentModeParam.silentModeInterval(
 
 try {
   //设置 app 的离线推送通知。
-  await EMClient.getInstance.pushManager.setSilentModeForAll(param: param);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.pushManager.setSilentModeForAll(param: param);
+} on ChatError catch (e) {}
 ```
 
 ## 获取 app 的推送通知设置
@@ -113,7 +113,7 @@ try {
 ```dart
 try {
   ChatSilentModeResult result =
-      await EMClient.getInstance.pushManager.fetchSilentModeForAll();
+      await ChatClient.getInstance.pushManager.fetchSilentModeForAll();
   // 获取 app 的推送通知方式的设置。
   ChatPushRemindType? remindType = result.remindType;
 
@@ -133,7 +133,7 @@ try {
   endTime?.hour;
   // 免打扰时间段的结束时间中的分钟数。
   endTime?.minute;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ## 设置单个会话的推送通知
@@ -149,12 +149,12 @@ ChatSilentModeParam param = ChatSilentModeParam.silentDuration(15);
 
 try {
   //设置会话的离线推送免打扰模式。目前，暂不支持设置会话免打扰时间段。
-  EMClient.getInstance.pushManager.setConversationSilentMode(
+  ChatClient.getInstance.pushManager.setConversationSilentMode(
     conversationId: conversationId,
     type: conversationType,
     param: param,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ## 获取单个会话的推送通知设置
@@ -165,7 +165,7 @@ try {
 try {
   //设置会话的离线推送免打扰模式。目前，暂不支持设置会话免打扰时间段。
   ChatSilentModeResult result =
-      await EMClient.getInstance.pushManager.fetchConversationSilentMode(
+      await ChatClient.getInstance.pushManager.fetchConversationSilentMode(
     conversationId: conversationId,
     type: conversationType,
   );
@@ -175,7 +175,7 @@ try {
 
   // 获取会话的离线推送免打扰过期 Unix 时间戳。
   result.expireTimestamp;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ## 获取多个会话的推送通知设置
@@ -188,8 +188,8 @@ try {
 
 ```dart
 try {
-  Map<String, ChatSilentModeResult> map = await EMClient.getInstance.pushManager.fetchSilentModeForConversations(conversationList);
-} on EMError catch (e) {}
+  Map<String, ChatSilentModeResult> map = await ChatClient.getInstance.pushManager.fetchSilentModeForConversations(conversationList);
+} on ChatError catch (e) {}
 ```
 
 ## 清除单个会话的推送通知方式的设置
@@ -200,6 +200,6 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.pushManager.removeConversationSilentMode(conversationId: conversationId, type: conversationType);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.pushManager.removeConversationSilentMode(conversationId: conversationId, type: conversationType);
+} on ChatError catch (e) {}
 ```

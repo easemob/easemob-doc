@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Flutter SDK 支持更新本地数据库中的消息，其中包含如下主要方法：
 
-- `EMChatManager#updateMessage`：更新消息到本地数据库。
+- `ChatManager#updateMessage`：更新消息到本地数据库。
 
 ## 前提条件
 
@@ -23,17 +23,17 @@
 
 你可以通过以下方式更新本地数据库中的消息：
 
-- 直接调用 `EMChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
+- 直接调用 `ChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
 
 ```dart 
-await EMClient.getInstance.chatManager.updateMessage(message);
+await ChatClient.getInstance.chatManager.updateMessage(message);
 ```
 
-- 若正在使用 `EMConversation` 类，可以先获取会话，再调用 `EMConversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
+- 若正在使用 `ChatConversation` 类，可以先获取会话，再调用 `ChatConversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
 
 ```dart
-EMConversation? conversation =
-        await EMClient.getInstance.chatManager.getConversation(
+ChatConversation? conversation =
+        await ChatClient.getInstance.chatManager.getConversation(
       conversationId,
     );
     conversation?.updateMessage(message);

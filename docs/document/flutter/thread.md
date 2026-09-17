@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMChatThread`、`EMChatThreadEventHandler` 和 `EMChatThreadEvent` 类，用于管理消息话题，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM Flutter SDK 提供 `ChatThreadManager`、`ChatThread`、`ChatThreadEventHandler` 和 `ChatThreadEvent` 类，用于管理消息话题，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散消息话题
 - 加入、退出消息话题
@@ -35,9 +35,9 @@
 
 ### 创建消息话题
 
-所有群成员均可以调用 `EMChatThreadManager#createChatThread` 方法，基于一条群组消息新建消息话题。
+所有群成员均可以调用 `ChatThreadManager#createChatThread` 方法，基于一条群组消息新建消息话题。
 
-单设备登录时，消息话题所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadCreate` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_CREATE`。
+单设备登录时，消息话题所属群组的所有成员均会收到 `ChatThreadEventHandler#onChatThreadCreate` 事件；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_CREATE`。
 
 示例代码如下：
 
@@ -46,22 +46,22 @@
 // messageId: 消息话题的父消息 ID
 // parentId: 消息话题的父节点，通常是群组 ID
 try {
-  EMChatThread chatThread =
-      await EMClient.getInstance.chatThreadManager.createChatThread(
+  ChatThread chatThread =
+      await ChatClient.getInstance.chatThreadManager.createChatThread(
     name: name,
     messageId: messageId,
     parentId: parentId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 解散消息话题
 
-仅消息话题所在群组的群主和群管理员可以调用 `EMChatThreadManager#destroyChatThread` 方法解散消息话题。
+仅消息话题所在群组的群主和群管理员可以调用 `ChatThreadManager#destroyChatThread` 方法解散消息话题。
 
-单设备登录时，消息话题所属群组的所有成员均会收到 `EMChatThreadEventHandler#onChatThreadDestroy` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_DESTROY`。
+单设备登录时，消息话题所属群组的所有成员均会收到 `ChatThreadEventHandler#onChatThreadDestroy` 事件；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_DESTROY`。
 
 :::tip
 解散消息话题或解散消息话题所在的群组后，将删除本地数据库及内存中关于该消息话题的全部数据，需谨慎操作。
@@ -73,64 +73,64 @@ try {
 // chatThreadId: 消息话题 ID
 // 执行消息话题销毁，请谨慎使用。
 try {
-  await EMClient.getInstance.chatThreadManager.destroyChatThread(
+  await ChatClient.getInstance.chatThreadManager.destroyChatThread(
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 加入消息话题
 
-消息话题所在群组的所有成员均可以调用 `EMChatThreadManager#joinChatThread` 方法加入群组，
+消息话题所在群组的所有成员均可以调用 `ChatThreadManager#joinChatThread` 方法加入群组，
 
 加入消息话题的具体步骤如下：
 
-1. 收到 `EMChatThreadManagerEventHandler#onChatThreadCreate` 事件或 `EMChatThreadManagerEventHandler#onChatThreadUpdate` 事件，或调用 `fetchChatThreadWithParentId` 方法从服务器获取指定群组的消息话题列表，从中获取到想要加入的消息话题 ID。
+1. 收到 `ChatThreadEventHandler#onChatThreadCreate` 事件或 `ChatThreadEventHandler#onChatThreadUpdate` 事件，或调用 `fetchChatThreadWithParentId` 方法从服务器获取指定群组的消息话题列表，从中获取到想要加入的消息话题 ID。
 2. 调用 `joinChatThread` 传入消息话题 ID 加入对应消息话题。
 
 
-多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_JOIN`。
+多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_JOIN`。
 
 示例代码如下：
 
 ```dart
 // chatThreadId: 消息话题 ID
 try {
-  EMChatThread chatThead =
-      await EMClient.getInstance.chatThreadManager.joinChatThread(
+  ChatThread chatThead =
+      await ChatClient.getInstance.chatThreadManager.joinChatThread(
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 退出消息话题
 
-消息话题成员均可以主动调用 `EMChatThreadManager#leaveChatThread` 方法退出消息话题，退出消息话题后，该成员将不会再收到消息话题中的消息。
+消息话题成员均可以主动调用 `ChatThreadManager#leaveChatThread` 方法退出消息话题，退出消息话题后，该成员将不会再收到消息话题中的消息。
 
-多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_LEAVE`。
+多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_LEAVE`。
 
 示例代码如下：
 
 ```dart
 // chatThreadId: 消息话题 ID
 try {
-  await EMClient.getInstance.chatThreadManager.leaveChatThread(
+  await ChatClient.getInstance.chatThreadManager.leaveChatThread(
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 从消息话题移出成员
 
-仅群主和群管理员可以调用 `EMChatThreadManager#removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出消息话题，被踢出消息话题的成员将不再接收到消息话题中的消息。
+仅群主和群管理员可以调用 `ChatThreadManager#removeMemberFromChatThread` 方法将指定成员 (群管理员或普通成员) 踢出消息话题，被踢出消息话题的成员将不再接收到消息话题中的消息。
 
-被踢出消息话题的成员会收到 `EMChatThreadEventHandler#onUserKickOutOfChatThread` 事件；多设备登录时，执行踢人操作的成员的其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_KICK`。
+被踢出消息话题的成员会收到 `ChatThreadEventHandler#onUserKickOutOfChatThread` 事件；多设备登录时，执行踢人操作的成员的其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_KICK`。
 
 示例代码如下：
 
@@ -138,20 +138,20 @@ try {
 // chatThreadId: 消息话题 ID
 // memberId: 消息话题成员的用户 ID
 try {
-  await EMClient.getInstance.chatThreadManager.removeMemberFromChatThread(
+  await ChatClient.getInstance.chatThreadManager.removeMemberFromChatThread(
     memberId: memberId,
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 修改消息话题名称
 
-仅群主和群管理员以及消息话题的创建者可以调用 `EMChatThreadManager#updateChatThreadName` 方法修改消息话题名称。
+仅群主和群管理员以及消息话题的创建者可以调用 `ChatThreadManager#updateChatThreadName` 方法修改消息话题名称。
 
-单设备登录时，消息话题所属群组的所有成员会收到 `EMChatThreadManagerEventHandler#onChatThreadUpdate` 事件；多设备登录时，其他设备会同时收到 `EMMultiDeviceEventHandler#onThreadEvent` 事件，回调事件为 `EMMultiDevicesEvent#CHAT_THREAD_UPDATE`。
+单设备登录时，消息话题所属群组的所有成员会收到 `ChatThreadEventHandler#onChatThreadUpdate` 事件；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventHandler#onChatThreadEvent` 事件，回调事件为 `ChatMultiDevicesEvent#CHAT_THREAD_UPDATE`。
 
 示例代码如下：
 
@@ -159,36 +159,36 @@ try {
 // chatThreadId: 消息话题 ID
 // name: 修改的消息话题名称，长度不超过 64 个字符
 try {
-  await EMClient.getInstance.chatThreadManager.updateChatThreadName(
+  await ChatClient.getInstance.chatThreadManager.updateChatThreadName(
     newName: name,
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 获取消息话题详情
 
-消息话题所属群组的所有成员均可以调用 `EMChatThreadManager#fetchChatThread` 从服务器获取消息话题详情。
+消息话题所属群组的所有成员均可以调用 `ChatThreadManager#fetchChatThread` 从服务器获取消息话题详情。
 
 示例代码如下：
 
 ```dart
 // chatThreadId: 消息话题 ID
 try {
-  EMChatThread? chatThread =
-      await EMClient.getInstance.chatThreadManager.fetchChatThread(
+  ChatThread? chatThread =
+      await ChatClient.getInstance.chatThreadManager.fetchChatThread(
     chatThreadId: chatThreadId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 获取消息话题成员列表
 
-消息话题所属群组的所有成员均可以调用 `EMChatThreadManager#fetchChatThreadMember` 方法从服务器分页获取消息话题成员列表。
+消息话题所属群组的所有成员均可以调用 `ChatThreadManager#fetchChatThreadMember` 方法从服务器分页获取消息话题成员列表。
 
 ```dart
 // chatThreadId: 消息话题 ID
@@ -196,103 +196,103 @@ try {
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 try {
   List<String> members =
-      await EMClient.getInstance.chatThreadManager.fetchChatThreadMember(
+      await ChatClient.getInstance.chatThreadManager.fetchChatThreadMember(
     chatThreadId: chatThreadId,
     limit: limit,
     cursor: cursor,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 获取消息话题列表
 
-1. 用户可以调用 `EMChatThreadManager#fetchJoinedChatThreads` 方法从服务器分页获取自己加入和创建的消息话题列表：
+1. 用户可以调用 `ChatThreadManager#fetchJoinedChatThreads` 方法从服务器分页获取自己加入和创建的消息话题列表：
 
 ```dart
 // limit: 单次请求返回的消息话题数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 try {
-  EMCursorResult<EMChatThread> chatThreads =
-      await EMClient.getInstance.chatThreadManager.fetchJoinedChatThreads(
+  ChatCursorResult<ChatThread> chatThreads =
+      await ChatClient.getInstance.chatThreadManager.fetchJoinedChatThreads(
     limit: limit,
     cursor: cursor,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
-2. 用户可以调用 `EMChatThreadManager#fetchChatThreadsWithParentId` 方法从服务器分页获取指定群组的消息话题列表：
+2. 用户可以调用 `ChatThreadManager#fetchChatThreadsWithParentId` 方法从服务器分页获取指定群组的消息话题列表：
 
 ```dart
 // parentId: 群组 ID
 // limit: 单次请求返回的消息话题数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 try {
-  EMCursorResult<EMChatThread> chatThreads = await EMClient
+  ChatCursorResult<ChatThread> chatThreads = await ChatClient
       .getInstance.chatThreadManager
       .fetchChatThreadsWithParentId(
     parentId: parentId,
     limit: limit,
     cursor: cursor,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
-3. 用户还可以调用 `EMChatThreadManager#fetchJoinedChatThreadsWithParentId` 方法从服务器分页获取指定群组的消息话题列表：
+3. 用户还可以调用 `ChatThreadManager#fetchJoinedChatThreadsWithParentId` 方法从服务器分页获取指定群组的消息话题列表：
 
 ```dart
 // parentId: 群组 ID
 // limit: 单次请求返回的消息话题数，取值范围为 [1, 50]
 // cursor: 开始获取数据的游标位置，首次调用方法时传 `null` 或空字符串
 try {
-  EMCursorResult<EMChatThread> chatThreads = await EMClient
+  ChatCursorResult<ChatThread> chatThreads = await ChatClient
       .getInstance.chatThreadManager
       .fetchJoinedChatThreadsWithParentId(
     parentId: parentId,
     limit: limit,
     cursor: cursor,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 批量获取消息话题中的最新一条消息
 
-用户可以调用 `EMChatThreadManager#fetchLatestMessageWithChatThreads` 方法从服务器批量获取消息话题中的最新一条消息。
+用户可以调用 `ChatThreadManager#fetchLatestMessageWithChatThreads` 方法从服务器批量获取消息话题中的最新一条消息。
 
 示例代码如下：
 
 ```dart
 // chatThreadIds: 要查询的消息话题 ID 列表，每次最多可传入 20 个消息话题 ID
 try {
-  Map<String, EMMessage> map = await EMClient.getInstance.chatThreadManager
+  Map<String, ChatMessage> map = await ChatClient.getInstance.chatThreadManager
       .fetchLatestMessageWithChatThreads(
     chatThreadIds: chatThreadIds,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```
 
 ### 监听消息话题事件
 
-`EMChatThreadManager` 类中提供消息话题事件的监听接口。开发者可以通过设置此监听，获取消息话题中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`ChatThreadManager` 类中提供消息话题事件的监听接口。开发者可以通过设置此监听，获取消息话题中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 
 ```dart
 // 注册监听
-    EMClient.getInstance.chatThreadManager.addEventHandler(
+    ChatClient.getInstance.chatThreadManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMChatThreadEventHandler(),
+      ChatThreadEventHandler(),
     );
 
 // 移除监听
-    EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

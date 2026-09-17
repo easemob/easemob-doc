@@ -29,12 +29,12 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.reportMessage(
+  await ChatClient.getInstance.chatManager.reportMessage(
     messageId: messageId,
     tag: tag,
     reason: reason,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 
 }
 ```

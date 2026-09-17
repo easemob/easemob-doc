@@ -1,6 +1,6 @@
 # 接收消息
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatEventHandler` 类实现文本、图片、音频、视频和文件等类型的消息的接收。
+环信即时通讯 IM Flutter SDK 通过 `ChatEventHandler` 类实现文本、图片、音频、视频和文件等类型的消息的接收。
 
 ## 前提条件
 
@@ -11,19 +11,19 @@
 
 ## 接收文本消息
 
-- 你可以添加 `EMChatEventHandler` 监听器接收消息。`EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
+- 你可以添加 `ChatEventHandler` 监听器接收消息。`ChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
 - 在新消息到来时，你会收到 `onMessagesReceived` 事件，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
 ```dart
-// 继承并实现 EMChatEventHandler
+// 继承并实现 ChatEventHandler
 class _ChatMessagesPageState extends State<ChatMessagesPage> {
   @override
   void initState() {
     super.initState();
     // 添加监听器
-    EMClient.getInstance.chatManager.addEventHandler(
+    ChatClient.getInstance.chatManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMChatEventHandler(
+      ChatEventHandler(
         onMessagesReceived: (list) => {},
       ),
     );
@@ -37,7 +37,7 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
   @override
   void dispose() {
     // 移除监听器
-    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
     super.dispose();
   }
 }
@@ -55,11 +55,11 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
 ### 接收语音消息
 
 1. 接收方收到语音消息时，自动下载语音文件。
-2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+2. 接收方收到 [ChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```dart
 if(msg.body.type == MessageType.VOICE) {
-  EMVoiceMessageBody body = msg.body as EMVoiceMessageBody;
+  ChatVoiceMessageBody body = msg.body as ChatVoiceMessageBody;
   body.duration; // 语音时长
   body.localPath; // 本地语音文件路径
   body.remotePath; // 远程语音文件路径
@@ -69,46 +69,105 @@ if(msg.body.type == MessageType.VOICE) {
 
 ### 接收图片消息
 
-1. 接收方收到图片消息，自动下载图片缩略图。
-   
-- 默认情况下，SDK 自动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `true`。
-- 若设置为手动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `false`，需调用 `EMChatManager#downloadThumbnail` 下载。
+一条图片消息通常包含三类图片资源：
 
-2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+- 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
-```dart
-EMClient.getInstance.chatManager.addMessageEvent(
-  'UNIQUE_HANDLER_ID',
-  ChatMessageEvent(
-    onSuccess: (msgId, msg) {
-      // 下载成功
-    },
-    onProgress: (msgId, progress) {
-      // 下载进度
-    },
-    onError: (msgId, msg, error) {
-      // 下载失败
-    },
-  ),
-);
+收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或原图。
 
-// 下载附件
-EMClient.getInstance.chatManager.downloadAttachment(msg);
-```
+接收图片消息的流程如下：
 
-3. 下载成功后获取图片消息的缩略图和附件。
+1. 接收图片消息时，SDK 根据 `ChatOptions#isAutoDownloadThumbnail` 决定是否自动下载缩略图。
+   - 默认自动下载，即该参数默认为 `true`。
+   - 如果初始化时将该参数设置为 `false`，需要调用 `ChatManager#downloadThumbnail(message)` 手动下载缩略图。初始化后还可以调用 `ChatClient#updateAutoDownloadAttachmentThumbnailSetting` 更新该设置。
+
+2. 在 [`ChatEventHandler#onMessagesReceived`](#接收文本消息) 回调中识别图片消息，并根据业务需求下载对应资源：
+
+   - 调用 `ChatManager#downloadAttachment(message)` 下载原图附件。
+   - 调用 `ChatManager#downloadBigImage(message)` 下载大图。
+
+   如果 `ChatImageMessageBody` 中已有对应的本地路径，建议直接复用本地文件，避免重复下载。
+
+示例代码如下所示：
 
 ```dart
-EMImageMessageBody body = msg.body as EMImageMessageBody;
-// 本地大图路径
-body.localPath;
-// 本地缩略图路径
-body.thumbnailLocalPath;
-// 服务器大图路径。
-body.remotePath;
-// 服务器缩略图路径。
-body.thumbnailRemotePath;
+onMessagesReceived: (List<ChatMessage> messages) async {
+  for (final ChatMessage message in messages) {
+    if (message.body is! ChatImageMessageBody) {
+      continue;
+    }
+
+    try {
+      // 手动下载缩略图。
+      // SDK 已开启缩略图自动下载时，通常无需再次调用。
+      await ChatClient.getInstance.chatManager
+          .downloadThumbnail(message);
+
+      // 下载原图。
+      await ChatClient.getInstance.chatManager
+          .downloadAttachment(message);
+
+      // 下载大图。
+      await ChatClient.getInstance.chatManager
+          .downloadBigImage(message);
+    } on ChatError catch (error) {
+      debugPrint(
+        'Failed to download image: '
+        'code=${error.code}, description=${error.description}',
+      );
+    }
+  }
+},
 ```
+
+上述三个下载接口仅用于展示不同图片资源的下载方式。实际使用时，应根据业务需要选择相应接口，无需同时下载全部资源。如果消息体中已经存在对应的本地路径，建议直接使用本地文件，避免重复下载。
+
+Flutter 的下载接口不直接接收回调。如需监听下载进度以及成功或失败结果，可以通过 `ChatManager.addMessageEvent` 注册 `ChatMessageEvent`。
+
+3. 收到图片消息后，可以通过 `ChatImageMessageBody` 分别获取原图、大图和缩略图的服务端地址：
+
+```dart
+final ChatImageMessageBody imageBody =
+    message.body as ChatImageMessageBody;
+
+// 获取原图的服务端地址。
+final String? originalRemotePath = imageBody.remotePath;
+
+// 获取大图的服务端地址。
+final String? bigImageRemotePath = imageBody.bigImageRemotePath;
+
+// 获取缩略图的服务端地址。
+final String? thumbnailRemotePath = imageBody.thumbnailRemotePath;
+```
+
+也可以从消息体中获取已下载图片的本地路径：
+
+```dart
+// 获取原图的本地路径。
+final String originalLocalPath = imageBody.localPath;
+
+// 获取大图的本地路径。
+final String? bigImageLocalPath = imageBody.bigImageLocalPath;
+
+// 获取缩略图的本地路径。
+final String? thumbnailLocalPath = imageBody.thumbnailLocalPath;
+```
+
+各类图片资源对应的属性如下：
+
+| 图片资源 | 服务端地址 | 本地路径 | 下载状态 |
+| :--- | :--- | :--- | :--- |
+| 原图 | `remotePath` | `localPath` | `fileStatus` |
+| 大图 | `bigImageRemotePath` | `bigImageLocalPath` | `bigImageDownloadStatus` |
+| 缩略图 | `thumbnailRemotePath` | `thumbnailLocalPath` | `thumbnailStatus` |
+
+此外，还可以通过 `ChatImageMessageBody` 获取以下信息：
+
+- `sendOriginalImage`：发送方是否选择发送原图。
+- `width` 和 `height`：图片的宽度和高度，类型均为 `double?`，单位为像素。
+- `isGif`：图片是否为 GIF 格式。
 
 ### 接收 GIF 图片消息
 
@@ -117,10 +176,10 @@ body.thumbnailRemotePath;
 与普通消息相同，接收 GIF 图片消息时，接收方会收到 `onMessageReceived` 回调方法。接收方判断为图片消息后，读取消息体的 `isGif` 属性，若值是 `YES`， 则为 GIF 图片消息。
 
 ```java
-public void onMessageReceived(List<EMMessage> messages) {
-    for(EMMessage message : messages) {
+public void onMessageReceived(List<ChatMessage> messages) {
+    for(ChatMessage message : messages) {
         if (message.getType() == Type.IMAGE && ) {
-            EMImageMessageBody body = (EMImageMessageBody) msg.getBody();
+            ChatImageMessageBody body = (ChatImageMessageBody) msg.getBody();
             if(body.isGif()) {
                 // 根据业务情况处理 gif message, 例如下载展示该消息
             }
@@ -133,11 +192,11 @@ public void onMessageReceived(List<EMMessage> messages) {
 ### 接收视频消息
 
 1. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见 [设置图片缩略图自动下载](#接收图片消息)。
-2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载视频文件。
+2. 接收方收到 [ChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载视频文件。
 
 ```dart
 
-EMClient.getInstance.chatManager.addMessageEvent(
+ChatClient.getInstance.chatManager.addMessageEvent(
   'UNIQUE_HANDLER_ID',
   ChatMessageEvent(
     onSuccess: (msgId, msg) {
@@ -153,14 +212,14 @@ EMClient.getInstance.chatManager.addMessageEvent(
 );
 
 // 下载附件
-EMClient.getInstance.chatManager.downloadAttachment(msg);
+ChatClient.getInstance.chatManager.downloadAttachment(msg);
 
 ```
 
 3. 获取视频缩略图和视频原文件。
 
 ```dart
-EMVideoMessageBody body = msg.body as EMVideoMessageBody;
+ChatVideoMessageBody body = msg.body as ChatVideoMessageBody;
 // 本地视频路径
 body.localPath;
 // 本地缩略图
@@ -173,10 +232,10 @@ body.thumbnailRemotePath;
 
 ### 接收文件消息
 
-1. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载文件。
+1. 接收方收到 [ChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载文件。
 
 ```dart
-EMClient.getInstance.chatManager.addMessageEvent(
+ChatClient.getInstance.chatManager.addMessageEvent(
   'UNIQUE_HANDLER_ID',
   ChatMessageEvent(
     onSuccess: (msgId, msg) {
@@ -192,13 +251,13 @@ EMClient.getInstance.chatManager.addMessageEvent(
 );
 
 // 下载附件
-EMClient.getInstance.chatManager.downloadAttachment(msg);
+ChatClient.getInstance.chatManager.downloadAttachment(msg);
 ```
 
 2. 调用以下方法从服务器或本地获取文件附件：
 
 ```dart
-EMFileMessageBody body = msg.body as EMFileMessageBody;
+ChatFileMessageBody body = msg.body as ChatFileMessageBody;
 // 文件的本地路径
 body.localPath;
 // 文件的服务器路径
@@ -225,12 +284,12 @@ body.remotePath;
 :::
 
 ```dart
-final handler = EMChatEventHandler(
+final handler = ChatEventHandler(
   onCmdMessagesReceived: (messages) {},
 );
 
 // 添加监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
   handler,
 );
@@ -238,7 +297,7 @@ EMClient.getInstance.chatManager.addEventHandler(
 // ...
 
 // 移除监听
-EMClient.getInstance.chatManager.removeEventHandler(
+ChatClient.getInstance.chatManager.removeEventHandler(
   "UNIQUE_HANDLER_ID",
 );
 ```
@@ -253,7 +312,7 @@ EMClient.getInstance.chatManager.removeEventHandler(
 
 接收合并消息与接收普通消息的操作相同，详见 [接收文本消息](#接收文本消息)。
 - 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
-- 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `EMChatManager#fetchCombineMessageDetail` 方法下载合并消息附件并解析出原始消息列表。
+- 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `ChatManager#fetchCombineMessageDetail` 方法下载合并消息附件并解析出原始消息列表。
 - 对于一条合并消息，首次调用该方法会下载和解析合并消息附件，然后返回原始消息列表，而后续调用会存在以下情况：
   - 若附件已存在，该方法会直接解析附件并返回原始消息列表。
   - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
@@ -261,11 +320,11 @@ EMClient.getInstance.chatManager.removeEventHandler(
 ```dart
 
 try {
-  List<EMMessage> msgList =
-      await EMClient.getInstance.chatManager.fetchCombineMessageDetail(
+  List<ChatMessage> msgList =
+      await ChatClient.getInstance.chatManager.fetchCombineMessageDetail(
     message: combineMsg,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 
 ```
 
@@ -277,7 +336,7 @@ try {
 
 ### 判断消息是否为聊天室广播消息
 
-自 4.2.0 版本开始，对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
+自 4.2.0 版本开始，对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为 [通过 REST API 发送的聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 ### 消息附件下载鉴权
 

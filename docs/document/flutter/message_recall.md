@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `EMChatManager` 和 `EMMessage` 类支持你撤回一条发送成功的消息：
+环信即时通讯 IM 通过 `ChatManager` 和 `ChatMessage` 类支持你撤回一条发送成功的消息：
 
 - `recallMessage`：撤回一条发送成功的消息。
 
@@ -31,8 +31,8 @@
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.recallMessage(msgId, ext: 'ext');
-} on EMError catch (e) {
+  await ChatClient.getInstance.chatManager.recallMessage(msgId, ext: 'ext');
+} on ChatError catch (e) {
 }
 ```
 
@@ -41,7 +41,7 @@ try {
 你可以设置消息撤回监听，通过 `onMessagesRecalledInfo` 事件监听发送方对已接收的消息的撤回。
 
 - 若用户在线接收了消息，消息撤回时，该事件中的 `RecallMessageInfo` 中的 `recallMessage` 为撤回的消息的内容，`recallMessageId` 属性返回撤回的消息的 ID。
-- 若消息发送和撤回时接收方离线，该事件中的 `EMRecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
+- 若消息发送和撤回时接收方离线，该事件中的 `RecallMessageInfo` 中的 `recallMessage` 为空，`recallMessageId` 属性返回撤回的消息的 ID。
 
 ```dart
 void onMessagesRecalledInfo(List<RecallMessageInfo> infos) {}
