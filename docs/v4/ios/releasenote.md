@@ -1,5 +1,30 @@
 # iOS IM SDK 更新日志
 
+## v4.25.0 Dev 2026-9-16（开发版）
+
+### 新增特性
+
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话) 功能。
+- [发送](message_send.html) 和 [接收](message_receive.html) 聊天室消息时，支持选择是否创建本地聊天室会话。
+
+### 优化
+
+- 开启 NTP 对时后，使用 NTP 校准后的时间判断用户 Token 是否过期，避免因设备本地时间偏差导致判断不准确。
+- 本地数据库支持 WAL 模式，提升数据库并发读写性能。
+
+### 接口调整
+
+- 移除用于配置第二通道（数据同步 WebSocket）的 `syncDataWSHost` 和 `syncDataWSPort` 属性。
+
+### 修复
+
+- 修复群组消息回调与群组事件回调顺序异常的问题。
+- 修复遍历 DNS 配置时可能发生 Crash 的问题。
+- 修复私有部署场景下无法多次设置服务域名的问题。
+- 修复网络异常情况下偶现的不再重连服务器的问题。
+- 修复订阅用户信息后，调用 `fetchSubscribedUsers` 返回空数组的问题。
+- 修复关闭 `EMOptions#isAutoTransferMessageAttachments` 后，附件消息的 `remotePath` 为空时，发送消息没有回调的问题。
+
 ## v4.24.0 Dev 2026-7-10（开发版）
 
 #### 新增功能

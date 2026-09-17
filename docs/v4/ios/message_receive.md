@@ -4,6 +4,10 @@
 
 环信即时通讯 IM iOS SDK 通过 `EMChatManagerDelegate` 类实现文本、图片、音频、视频和文件等类型的消息的接收。
 
+:::tip
+接收聊天室消息时，是否创建对应的本地聊天室会话由 `EMOptions#enableChatroomConversation` 控制。该配置默认为 `NO`，即默认不创建本地聊天室会话，但不影响消息接收。如需创建，请在 SDK 初始化前将该配置设为 `YES`。详见 [初始化时设置会话相关选项](conversation_list.html#初始化时设置会话相关选项)。
+:::
+
 ## 前提条件
 
 开始前，请确保满足以下条件：
