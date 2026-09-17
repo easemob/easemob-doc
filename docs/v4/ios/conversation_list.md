@@ -18,6 +18,7 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
+- `IEMChatManager#filterConversationsFromDB`：分页获取本地会话
 - `IEMChatManager#filterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
 - `cleanConversationsMemoryCache`：清除内存中的会话。
