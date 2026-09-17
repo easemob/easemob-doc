@@ -137,7 +137,6 @@ const result = await client.chatManager.getHistoryMessages({
 console.log('Message list:', result.items);
 console.log('Next cursor:', result.cursor);
 console.log('Has more:', result.hasMore);
-$([Environment]::NewLine)
 ```
 
 ## 接口列表

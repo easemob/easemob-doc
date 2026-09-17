@@ -250,7 +250,7 @@ await client.groupManager.getGroup('groupId').uploadSharedFile({
 
 调用 `downloadSharedFile` 可下载当前群组中的指定共享文件。下载完成后，SDK 通过 `onFileDownloadComplete` 回调返回文件数据。
 
-若调用 [服务端上传群组共享文件接口](/document/server-side/group_shared_file_download.html) 时，设置了访问限制，则客户端下载共享文件时，需传入 `secret` 参数。
+若调用 [服务端上传群组共享文件接口](/document/server-side/group_shared_file_upload.html) 时，设置了访问限制，则客户端下载共享文件时，需传入 `secret` 参数。
 
 ```typescript
 await client.groupManager.getGroup('groupId').downloadSharedFile({

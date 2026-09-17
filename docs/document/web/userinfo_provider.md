@@ -35,7 +35,7 @@
 开始接入前，请确保满足以下条件：
 
 - 已完成 SDK 初始化。详见 [快速开始](quickstart.html)。
-- SDK 初始化注册 `ChatClient`、`UserInfoManager`、`GroupManager`、`ChatManager` 和 `ContactManager`。
+- SDK 初始化时已注册 `UserInfoManager` 和 `GroupManager`。如需监听好友属性更新或消息事件，还需分别注册 `ContactManager` 或 `ChatManager`。`ChatClient` 是 SDK 客户端入口，无需作为 Manager 注册。
 - 已了解即时通讯 IM 的相关使用限制。详见 [使用限制](/product/limitation.html)。
 
 ## 开启用户信息自动管理

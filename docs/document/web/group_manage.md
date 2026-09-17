@@ -274,8 +274,8 @@ const group = client.groupManager.getGroup('groupId');
 | [关闭全员禁言](group_members.html#关闭全员禁言) | `group.unmuteAllMembers()` | 关闭当前群组的全员禁言。 |
 | [查询当前用户是否被禁言](group_members.html#查询当前用户是否被禁言) | `group.checkIfInMuteList()` | 查询当前登录用户是否在该群组的禁言列表中。 |
 | [获取群黑名单](group_members.html#获取黑名单列表) | `group.getBlocklist({ pageNum, pageSize })` | 分页获取当前群组的黑名单列表。 |
-| [加入群黑名单](group_members.html#添加成员到白名单) | `group.blockMembers({ userIds })` | 将指定成员加入群黑名单。 |
-| [移出群黑名单](group_members.html#从白名单移除成员) | `group.unblockMembers({ userIds })` | 将指定成员移出群黑名单。 |
+| [加入群黑名单](group_members.html#添加成员到黑名单) | `group.blockMembers({ userIds })` | 将指定成员加入群黑名单。 |
+| [移出群黑名单](group_members.html#从黑名单移除成员) | `group.unblockMembers({ userIds })` | 将指定成员移出群黑名单。 |
 | [获取群白名单](group_members.html#获取白名单列表) | `group.getAllowlist()` | 获取当前群组的白名单列表。 |
 | [加入群白名单](group_members.html#添加成员到白名单) | `group.addUsersToAllowlist({ userIds })` | 将指定成员加入群白名单。 |
 | [移出群白名单](group_members.html#从白名单移除成员) | `group.removeUsersFromAllowlist({ userIds })` | 将指定成员移出群白名单。 |
@@ -396,7 +396,7 @@ client.groupManager.addEventHandler('group-events', {
     console.log('onAllowListRemoved', event);
   },
 
-  // 群组全员禁用状态变更。群组所有成员会收到该回调。
+  // 群组全员禁言状态变更。群组所有成员会收到该回调。
   onAllMemberMuteStateChanged: event => {
     console.log('onAllMemberMuteStateChanged', event);
   },

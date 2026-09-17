@@ -128,7 +128,7 @@ await client.presenceManager.unsubscribePresence({
 
 ```typescript
 const result = await client.presenceManager.getSubscribedPresenceList({
-  // 当前页码，从 1 开始。
+  // 当前页码，从 0 开始。
   pageNum: 0,
   // 每页返回的用户数量。取值范围为 [1,100]，默认值为 1。
   pageSize: 50,
