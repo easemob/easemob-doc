@@ -128,8 +128,8 @@
 
 #### 新增特性
 
-1. 支持 [查询当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数)。
-2. 支持 [屏蔽群消息](group_manage.html#屏蔽群消息)、[解除屏蔽群消息](group_manage.html#解除屏蔽群消息)和 [检查当前用户是否已屏蔽群消息](group_manage.html#检查当前用户是否已屏蔽群消息)。
+1. 支持 [查询当前用户已加入的群组数量](/v4/web/group_manage.html#查询当前用户已加入的群组数)。
+2. 支持 [屏蔽群消息](/v4/web/group_manage.html#屏蔽群消息)、[解除屏蔽群消息](/v4/web/group_manage.html#解除屏蔽群消息)和 [检查当前用户是否已屏蔽群消息](/v4/web/group_manage.html#检查当前用户是否已屏蔽群消息)。
 
 #### 修复
 
@@ -139,7 +139,7 @@
 
 #### 新增特性
 
-- 支持获取 [群组](group_manage.html#获取群成员列表)/[聊天室成员列表](room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
+- 支持获取 [群组](/v4/web/group_manage.html#获取群成员列表)/[聊天室成员列表](/v4/web/room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
 - [撤回消息](message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
@@ -148,7 +148,7 @@
 
 - 修改 [Token 即将过期事件 `onTokenWillExpire`](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo_react.html#快速跑通-demo-源码)。
-- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](group_manage.html#获取群成员列表) 代替。
+- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](group_members.html#获取群成员列表) 代替。
 - 废弃获取聊天室成员列表的原方法 `listChatRoomMembers`。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 代替。
 
 ## v4.14.0 2025-4-21
@@ -157,7 +157,7 @@
 
 - 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持 [消息附件鉴权功能](/v4/web/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
 
 #### 优化
@@ -290,7 +290,7 @@
 
 - [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
 - [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
-- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](log.html#输出信息到日志文件)。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](log.html)。
 
 #### 修复
 
@@ -543,7 +543,7 @@
 
 #### 优化
 
-- [IM SDK] 支持批量查询群组详情 [getGroupInfo](group_manage.html#获取群组详情信息)。
+- [IM SDK] 支持批量查询群组详情 [getGroupInfo](group_attributes.html#获取群组详情)。
 - [IM SDK] 优化黑名单和白名单相关的方法名。
   - 白名单相关的方法名中的 `Whitelist` 修改为 `Allowlist`，如 `getGroupWhitelist` 修改为 `getGroupAllowlist`；
   - 黑名单相关的方法名中的 `Blacklist` 修改为 `Blocklist`，如 `getGroupBlacklist` 修改为 `getGroupBlocklist`。

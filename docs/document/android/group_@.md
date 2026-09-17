@@ -39,7 +39,7 @@ UI 实现示例图如下：
 - @ 单个或多个群成员：值为用户 ID 数组，例如 `["user1", "user2"]`。
 - @ 群内所有成员：值为字符串 `ALL`。
 
-::tip
+:::tip
 被 @ 成员的用户 ID 不包含“@”前缀。发送方与接收方应统一约定字段名、字段值类型，以及 `ALL` 的含义。
 :::
 
@@ -199,7 +199,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
    A：设置 `ext` 时，若 @ 单个、多个群成员，字段的值为要 @ 的用户的用户 ID 数组；@ 所有人时，字段值为 `ALL` 字符串。
 
-3. Q：Q：SDK 是否会自动显示“有人 @ 我”提示？
+3. Q：SDK 是否会自动显示“有人 @ 我”提示？
 
    A：不会。SDK 负责传输消息及其扩展字段。应用需要在 `EMMessageListener#onMessageReceived(List<EMMessage>)` 回调中读取 `EMMessage` 的扩展字段，并自行更新会话列表或消息页面的 UI。 
 

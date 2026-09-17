@@ -101,7 +101,7 @@ int pageSize,String cursor,
 
 ```java
 String conversationId = " ";
-EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
+EMConversation.EMConversationType type = EMConversation.EMConversationType.GroupChat;
 EMFetchMessageOption option = new EMFetchMessageOption();
 //例如，设置获取的消息保存到数据库。
 //option.setIsSave(true);

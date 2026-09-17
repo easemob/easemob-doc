@@ -489,10 +489,10 @@ client.chatManager.addEventHandler('custom-message-listener', {
 
 接收合并消息与接收普通消息的方式相同。应用可在 `onMessage` 回调中根据 `message.type === 'combine'` 识别合并消息。
 
-合并消息包含标题、摘要、兼容文本以及合并消息附件信息。收到合并消息后，可直接从消息体中读取 `title`、`summary` 和 `compatibleText`；如需获取合并消息中的原始消息列表，可调用 `downloadAndParseCombineMessage` 下载并解析合并消息附件。首次调用该方法时，SDK 会根据合并消息中的附件信息下载并解析附件，然后返回原始消息列表。后续调用时，若附件数据已可用，SDK 可直接解析并返回原始消息列表。
+合并消息包含标题、摘要以及合并消息附件信息。收到合并消息后，可直接从消息体中读取 `title` 和 `summary`；如需获取合并消息中的原始消息列表，可调用 `downloadAndParseCombineMessage` 下载并解析合并消息附件。首次调用该方法时，SDK 会根据合并消息中的附件信息下载并解析附件，然后返回原始消息列表。后续调用时，若附件数据已可用，SDK 可直接解析并返回原始消息列表。
 
 :::tip
-对于不支持合并转发消息的 SDK 版本，该类消息会按兼容文本展示；当前 SDK 接收到合并消息时，`message.body` 中不包含 `compatibleText` 字段。
+`compatibleText` 是创建合并消息时的可选参数，用于不支持合并转发消息的旧版本客户端进行兼容展示。当前 SDK 接收合并消息时，`message.body` 中不包含 `compatibleText` 字段。
 :::
 
 示例代码如下所示：
@@ -510,9 +510,6 @@ client.chatManager.addEventHandler('combine-message-listener', {
     console.log('标题:', message.body.title);
     // 读取合并消息摘要。
     console.log('摘要:', message.body.summary);
-    // 读取兼容文案。
-    console.log('兼容文案:', message.body.compatibleText);
-
     // 下载并解析原始子消息列表。
     const subMessages = await client.chatManager.downloadAndParseCombineMessage({
       message,
@@ -540,7 +537,6 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | :--- | :--- | :--- | :--- | :--- |
 | `title` | String | 必填 | 概览展示 | 合并消息标题。 |
 | `summary` | String | 必填 | 概览展示 | 合并消息摘要。仅适合做概览展示；若要展示原始聊天记录，应进一步调用 `downloadAndParseCombineMessage()`。 |
-| `compatibleText` | String | 必填 | 兼容展示 | 不支持完整合并展示时的兼容文案。 | 
 | `url` | String | 可选 | 下载详情 | 合并消息详情下载地址。 |
 | `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
 | `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |

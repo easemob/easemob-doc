@@ -174,7 +174,6 @@ Map<String, EMConversation> conversationMap = EMClient.getInstance()
 
 - 单聊会话：分别为对端用户的昵称和头像。
 - 群聊会话：分别为群名称和群头像。
-- 聊天室会话：通常为聊天室名称和头像。
 - 相关数据尚未同步时，这两个方法可能返回空字符串。
 
 ```java

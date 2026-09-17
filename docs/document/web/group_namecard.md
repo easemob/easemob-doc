@@ -67,7 +67,7 @@ client.groupManager.addEventHandler('group-namecard-listener', {
 
 ## 设置群成员名片
 
-你可以先调用 `getGroup` 获取单群对象，再调用 `setMemberAttributes` 设置自己在该群中的名片，传空字符传可以删除群名片。群成员名片属于群成员属性，需通过 `memberAttributes` 传入，属性 key 建议统一使用 `groupNamecard`。
+你可以先调用 `getGroup` 获取单群对象，再调用 `setMemberAttributes` 设置自己在该群中的名片，传空字符串可以删除群名片。群成员名片属于群成员属性，需通过 `memberAttributes` 传入，属性 key 建议统一使用 `groupNamecard`。
 
 ```typescript
 await client.groupManager.getGroup('groupId').setMemberAttributes({
