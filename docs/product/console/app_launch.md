@@ -18,7 +18,11 @@ Before applying to launch an app, make sure that all of the following conditions
 
 ![img](/images/console/app_launch_apply.png)
 
-3. In the **Launch** dialog box, select a launch method based on your business requirements. We recommend that you first review the [Launch Considerations](#launch-considerations) table before selecting a method.
+3. (Optional) If the app uses the free plan, select the IM plan and click **Free Trial** on the **Activation Service Plan** page that appears.
+
+![img](/images/console/app_launch_plan.png)
+
+4. In the **Launch** dialog box, select an launch method based on your business requirements. We recommend that you first review the [Launch Considerations](#launch-considerations) table before selecting a method.
 
 | Launch method | Use case |
 | :--- | :--- |
@@ -30,7 +34,7 @@ After selecting a method, enter the production version app information as needed
 | Item | Create a new production app | Upgrade this development app to production |
 | :--- | :--- | :--- |
 | Development app information | Confirm the app name, app key, and data center of the development version app. | Confirm the app name, app key, and data center. |
-| Production app information | Enter the app name and confirm the app key and data center of the production version app.<br/> - For field descriptions, see [App Creation](app_create.html#procedure). | No information is required. |
+| Production app information | **Enter the app name** and confirm the app key and data center of the production version app.<br/> - For field descriptions, see [App Creation](app_create.html#procedure). | No information is required. |
 | Fees | Confirm the fees to be paid after launch. | Confirm the fees to be paid after launch. |
 
 After confirming or entering the production version app information, click **Release**.
@@ -47,11 +51,9 @@ After confirming or entering the production version app information, click **Rel
 
 ![img](/images/console/app_launch_prompt.png)
 
-// TODO：第 5 步和第 6 步尚未验证
+1. Click **OK** in the **Release request submitted** dialog box.
 
-5. When the system indicates that the **launch application has been submitted**, click **Got It**.
-
-   You will receive SMS and email notifications after the launch succeeds. Wait until you receive the notifications before performing subsequent operations.
+   You will receive an SMS and email notification after the launch succeeds. Wait until you receive the notifications before performing subsequent operations.
 
 ![img](/images/console/app_launch_commit.png)
 
