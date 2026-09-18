@@ -6,6 +6,8 @@
     "enabled": true
   },
   "assets": {
-    "directory": "docs/.vuepress/dist"
+    "directory": "docs/.vuepress/dist",
+    // VuePress 是 SSG：未匹配路由应返回 404.html，而不是空 body 的 404
+    "not_found_handling": "404-page"
   }
 }
