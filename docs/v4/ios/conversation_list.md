@@ -18,10 +18,10 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
-- `IEMChatManager#filterConversationsFromDB`：分页获取本地会话
+- `IEMChatManager#getConversationsFromDBWithCursor`：分页获取本地会话
 - `IEMChatManager#filterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
-- `cleanConversationsMemoryCache`：清除内存中的会话。
+- `IEMChatManager#cleanConversationsMemoryCache`：清除内存中的会话。
 
 ## 实现方法
 
@@ -165,7 +165,7 @@ option.autoLoadConversations = false
               //case4: 是否置顶会话
              //case5: 是否全部消息已读会话
              //case6: 会话中最后一条消息时间戳
-        })
+        // })
 //step 3：当监控到内存较高时（该逻辑开发者自己去实现），调用以下方法释放内存。
 EMClient.shared().chatManager?.cleanConversationsMemoryCache()
 
