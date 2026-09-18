@@ -357,7 +357,7 @@ const options = computed<PlatformOptionGroup[]>(() => {
   .platform-version-switch {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.625rem;
     width: 100%;
   }
 
@@ -392,22 +392,31 @@ const options = computed<PlatformOptionGroup[]>(() => {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
+    box-sizing: border-box;
     height: 2.125rem;
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: var(--text-color);
-    font-size: 0.875rem;
-    font-weight: 500;
+    padding: 0 0.625rem;
+    border: 1px solid rgb(0 157 255 / 35%);
+    border-radius: 0.375rem;
+    background: rgb(0 157 255 / 10%);
+    color: var(--theme-color);
+    font-size: 0.9375rem;
+    font-weight: 700;
     line-height: 1;
     cursor: pointer;
 
     &:hover {
       color: var(--theme-color);
+      background: rgb(0 157 255 / 16%);
+      border-color: rgb(0 157 255 / 55%);
 
       .version-trigger-arrow {
         background-color: var(--theme-color);
       }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-color);
+      outline-offset: 2px;
     }
   }
 
@@ -421,11 +430,19 @@ const options = computed<PlatformOptionGroup[]>(() => {
   }
 
   .version-fixed {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
     flex: 0 0 auto;
-    color: var(--text-color);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 2.125rem;
+    height: 2.125rem;
+    padding: 0 0.625rem;
+    border: 1px solid rgb(0 157 255 / 35%);
+    border-radius: 0.375rem;
+    background: rgb(0 157 255 / 10%);
+    color: var(--theme-color);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1;
   }
 
   .platform-select.el-select {

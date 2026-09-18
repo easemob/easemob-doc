@@ -59,7 +59,7 @@
     else if(pagePath.indexOf('/uikit/') == 0) title.value = 'UIKit'
     else if(pagePath.indexOf('/callkit/') == 0) title.value = 'CallKit'
     else if(pagePath.indexOf('/document/server-side/') == 0) title.value = ''
-    else if(pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) title.value = 'SDK'
+    else if(pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) title.value = 'IM SDK'
     else if(pagePath.indexOf('/value-added/') == 0) title.value = ''
     isNull.value = title.value ? false : true
 
@@ -70,7 +70,10 @@
 <template>
   <Sidebar>
     <template #top>
-      <div class="sidebar-header" :class="{'pt20':isNull}">
+      <div
+        class="sidebar-header"
+        :class="{ 'pt20': isNull, 'sdk-header': showPlatformSwitch }"
+      >
         <span class="sidebar-title">{{title}}</span>
         <div v-show="showPlatformSwitch" class="platform-switch">
           <ClientOnly>
@@ -118,6 +121,34 @@
     .platform-switch {
       flex: 1 1 auto;
       min-width: 0;
+    }
+
+    &.sdk-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: .75rem;
+      margin: .75rem .75rem -2rem;
+      padding: .875rem .875rem 1rem;
+      border: 1px solid #d9e7f0;
+      border-radius: .625rem;
+      background: linear-gradient(180deg, #fff 0%, #f7fbfe 100%);
+      box-shadow: 0 2px 8px rgb(0 80 120 / 6%);
+
+      .sidebar-title {
+        display: flex;
+        align-items: center;
+        gap: .625rem;
+        margin: 0;
+        color: #252b31;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: .01em;
+        line-height: 1.4;
+      }
+
+      .platform-switch {
+        width: 100%;
+      }
     }
 
     &.pt20 {
