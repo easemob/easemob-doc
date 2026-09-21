@@ -319,6 +319,36 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 修复更新群组属性时影响群组头像问题。
 - 修复多线程场景下通过 `messagebody` 获取 `content` 时引起的崩溃问题。
 
+### v4.16.4 2026-08-14
+
+#### 优化
+
+- 调整 SDK 底层默认服务器域名配置。
+
+#### 修复
+
+- 修复私有部署场景下，第二次调用 `EMOptions#setRestServer` 设置 REST 服务器地址不生效的问题。
+
+### v4.16.3 2026-06-16
+
+#### 优化
+
+- `EMImageMessageBody#setSize(int, int)` 方法访问权限调整为 public，支持设置图片消息的图片宽高。
+- 更新 AOSL 库版本为 1.3.10。
+
+#### 修复
+
+- 修复多线程场景下对会话列表排序时，并发修改会话属性（如置顶状态、收发消息）可能导致的崩溃问题。
+- 修复离线消息同步过程中并发访问会话同步队列可能导致的崩溃问题。
+- 修复离线消息同步完成事件 `EMConnectionListener#onOfflineMessageSyncFinish` 回调中嵌套调用 SDK 接口可能导致的死锁问题。
+
+### v4.16.2 2026-01-28
+
+#### 修复
+
+- 修复查询当前用户是否在群组禁言名单（`EMGroupManager#asyncCheckIfInMuteList`）或群组白名单（`EMGroupManager#checkIfInGroupWhiteList`）时，本地无对应群组缓存可能导致的崩溃问题。
+- 修复查询当前用户是否在聊天室禁言名单或白名单（`EMChatRoomManager#checkIfInWhiteList`）时，本地无对应聊天室缓存可能导致的崩溃问题。
+
 ## v4.16.1 2025-11-12
 
 #### 新增特性
