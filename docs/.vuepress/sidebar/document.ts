@@ -946,7 +946,7 @@ const documentV5Sidebar = [
   },
   { type: "separator", only: ['server-side']} as any,
   {
-    text: 'Server SDK',
+    text: '服务端 SDK',
     collapsible: true,
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
@@ -961,7 +961,6 @@ const documentV5Sidebar = [
     children: [
       { text: 'Java Server SDK 2.0', link: 'apireference_java_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'apireference_java_1.0.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },

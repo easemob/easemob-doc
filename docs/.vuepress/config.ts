@@ -211,6 +211,11 @@ export default defineUserConfig({
     )
   },
   alias: {
+    '@theme-hope-original/components/BreadCrumb': path.resolve(
+      __dirname,
+      '../../node_modules/vuepress-theme-hope/lib/client/components/BreadCrumb.js'
+    ),
+
     '@theme-hope/components/HomePage': path.resolve(
       __dirname,
       './components/HomePage.vue'
@@ -221,6 +226,11 @@ export default defineUserConfig({
       './components/Sidebar.vue'
     ),
 
+    '@theme-hope/modules/sidebar/components/SidebarLinks': path.resolve(
+      __dirname,
+      './components/SidebarLinks.ts'
+    ),
+
     '@theme-hope/modules/navbar/components/Navbar': path.resolve(
       __dirname,
       './components/Navbar.vue'
@@ -229,6 +239,16 @@ export default defineUserConfig({
     '@theme-hope/components/MarkdownContent': path.resolve(
       __dirname,
       './components/MarkdownContent.vue'
+    ),
+
+    '@theme-hope/components/PageTitle': path.resolve(
+      __dirname,
+      './components/PageTitle.vue'
+    ),
+
+    '@theme-hope/components/BreadCrumb': path.resolve(
+      __dirname,
+      './components/BreadCrumb.vue'
     ),
 
     '@theme-hope/components/PageNav': path.resolve(

@@ -172,7 +172,7 @@
 ### 设置消息翻译
 
 - `Appearance.chat.enableTranslation = value`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
-- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信控制台](https://console.easemob.com/user/login)开通翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `Appearance.chat.receiveTranslationColor = value`：消息接收方翻译文本颜色。
 - `Appearance.chat.sendTranslationColor = value`：消息发送方翻译文本颜色。
 

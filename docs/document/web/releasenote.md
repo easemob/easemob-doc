@@ -1,4 +1,4 @@
-﻿# Web/小程序 IM SDK 更新日志
+# Web/小程序 IM SDK 更新日志
 
 ## v5.1.0 Dev 2026-8-21
 
@@ -70,16 +70,16 @@
 
 ####  新增功能
 
-支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/web/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 
 ## v4.22.0 Dev 2026-6-5（开发版）
 
 #### 新增特性
 
 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
+  - 新增 [“大图”资源类型](/v4/web/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/v4/web/message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](/v4/web/message_receive.html#接收图片消息)。
 
 ## v4.21.0 Dev 2026-4-28（开发版）
 
@@ -95,7 +95,7 @@
 
 #### 新增特性
 
-支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+支持 [接收服务端发送的流式消息](/v4/web/message_stream_receive.html)。
 
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
@@ -121,8 +121,8 @@
 
 #### 新增特性
 
-1. [获取服务端会话列表时可获取空会话](conversation_list.html#从服务器分页获取会话列表)。
-2. [获取服务端的置顶会话列表时可获取空会话](conversation_pin.html#获取服务端的置顶会话列表)。
+1. [获取服务端会话列表时可获取空会话](/v4/web/conversation_list.html#从服务器分页获取会话列表)。
+2. [获取服务端的置顶会话列表时可获取空会话](/v4/web/conversation_pin.html#获取服务端的置顶会话列表)。
 
 ## v4.15.1 2025-6-9
 
@@ -140,35 +140,35 @@
 #### 新增特性
 
 - 支持获取 [群组](/v4/web/group_manage.html#获取群成员列表)/[聊天室成员列表](/v4/web/room_members.html#获取聊天室成员列表) 时，列明成员的用户 ID 和角色。
-- [撤回消息](message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
+- [撤回消息](/v4/web/message_recall.html) 时，支持群组中群主/管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [membersPresence](group_manage.html#监听群组事件) 和 [membersAbsence](group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。 
+  - 新增群成员进出事件 [membersPresence](/v4/web/group_manage.html#监听群组事件) 和 [membersAbsence](/v4/web/group_manage.html#监听群组事件)。原事件 `memberPresence` 和 `membersAbsence` 仍有效。
    
 #### 优化
 
-- 修改 [Token 即将过期事件 `onTokenWillExpire`](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
-- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo_react.html#快速跑通-demo-源码)。
-- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](group_members.html#获取群成员列表) 代替。
-- 废弃获取聊天室成员列表的原方法 `listChatRoomMembers`。使用 [getChatRoomMembers](room_members.html#获取聊天室成员列表) 代替。
+- 修改 [Token 即将过期事件 `onTokenWillExpire`](/v4/web/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/v4/web/demo_react.html#快速跑通-demo-源码)。
+- 废弃获取群组成员列表的原方法 `listGroupMembers`。使用 [getGroupMembers](/v4/web/group_manage.html#获取群成员列表) 代替。
+- 废弃获取聊天室成员列表的原方法 `listChatRoomMembers`。使用 [getChatRoomMembers](/v4/web/room_members.html#获取聊天室成员列表) 代替。
 
 ## v4.14.0 2025-4-21
 
 #### 新增特性
 
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
+- 支持 [发送](/v4/web/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/v4/web/message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](/v4/web/group_attributes.html#管理群组头像)。
 - 支持 [消息附件鉴权功能](/v4/web/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持 [自定义设备平台](multi_device.html#设置登录设备的平台)。
+- 支持 [自定义设备平台](/v4/web/multi_device.html#设置登录设备的平台)。
 
 #### 优化
 
-- 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](group_manage.html#创建群组) 方法代替。
+- 原创建群组方法 `createGroup` 方法废弃，使用 [createGroupVNext](/v4/web/group_manage.html#创建群组) 方法代替。
 
 ## v4.13.0 2025-3-12
 
 #### 新增特性
 
-- [IM SDK] 发送后编辑消息接口 [modifyMessage](message_modify.html) 支持编辑各类消息：
+- [IM SDK] 发送后编辑消息接口 [modifyMessage](/v4/web/message_modify.html) 支持编辑各类消息：
   - 文本消息：支持编辑 `msg` 和 `ext` 字段。
   - 自定义消息：支持编辑 `customEvent` 、`customExts` 和 `ext` 字段。
   - 图片/语音/视频/文件/位置/合并消息：仅支持编辑 `ext` 字段。
@@ -200,7 +200,7 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+- [IM SDK] 新增[拉取服务器漫游消息](/v4/web/message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
 - [IM SDK] 聊天室禁言回调 `muteMember` 新增 `muteTimestamp` 参数，表示禁言过期时间。
 - [IM SDK] 群组/聊天室禁言事件 `muteMember` 新增 `userId` 字段，表示被禁言的成员。
 
@@ -217,7 +217,7 @@
 #### 新增特性
 
 - 聊天室公告修改事件中增加公告内容：`updateAnnouncement` 事件中增加 `announcement` 字段，表示更新的公告。
-- 新增两个[错误码](error.html)：
+- 新增两个[错误码](/v4/web/error.html)：
   - `WEBIM_USER_ALREADY_LOGIN` 208：用户已登录。单设备登录时，若调用 open 方法用户已经登录，会提示该错误。
   - `MESSAGE_SEND_TIMEOUT` 512：发送消息超时。例如，发消息时连接断开，会提示该错误。
    
@@ -229,7 +229,7 @@
 
 #### 新增特性
 
-- [IM SDK] `removeHistoryMessages` 方法[支持单向删除服务端的聊天室消息](message_delete.html#单向删除服务端的历史消息)。
+- [IM SDK] `removeHistoryMessages` 方法[支持单向删除服务端的聊天室消息](/v4/web/message_delete.html#单向删除服务端的历史消息)。
 
 ## v4.9.1 Dev 2024-09-06（开发版）
 
@@ -242,11 +242,11 @@
 #### 新增特性
 
 - [IM SDK] 新增 `getSilentModeRemindTypeConversations` 方法，用于分页获取所有设置了推送通知方式的会话。
-- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
-- [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/v4/web/connection.html#监听连接状态): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
+- [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](/v4/web/message_pin.html)。接口无变化。
 - [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 
-  - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。
-  - `removeSilentModeForConversation`：若你调用了 `clearRemindTypeForConversation` API [清除指定会话的推送通知方式的设置](/document/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)，其他设备会收到该事件。
+  - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/v4/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。
+  - `removeSilentModeForConversation`：若你调用了 `clearRemindTypeForConversation` API [清除指定会话的推送通知方式的设置](/v4/web/push/push_notification_mode_dnd.html#清除单个会话的推送通知方式的设置)，其他设备会收到该事件。
 - [IM SDK] SDK `message` 对象中新增 `getFileUrl` 方法。目前，SDK 的 `utils` 对象和 `message` 对象中均包含 `getFileUrl` 方法。 
 
 #### 优化
@@ -263,34 +263,34 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[日志上报](log.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+- [IM SDK] 新增[日志上报](/v4/web/log.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
 
 ## v4.8.0 Dev 2024-07-01
 
 #### 新增特性
 
-- [IM SDK] [`onDisconnected` 事件](connection.html)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
-- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
+- [IM SDK] [`onDisconnected` 事件](/v4/web/connection.html)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](/v4/web/multi_device.html#设置登录设备的扩展信息)：
   - `setLoginInfoCustomExt`：设置登录设备的扩展信息。
   - `onDisconnected`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
-- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](/v4/web/room_manage.html#加入聊天室)：
   - `joinChatRoom` 方法新增 `ext` 和 `leaveOtherRooms` 参数，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - `ChatroomEvent` 新增 `ext` 扩展字段，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
-- [IM SDK] `destroyChatRoom` 方法[支持聊天室所有者解散聊天室](room_manage.html#解散聊天室)。
+- [IM SDK] 新增 `ConnectionParameters#isFixedDeviceId` 初始化参数，默认为 `true`，[使用固定的设备 ID](/v4/web/multi_device.html)。之前，每个 SDK 实例连接时，SDK 默认均使用不同的随机字符串作为设备标识。
+- [IM SDK] `destroyChatRoom` 方法[支持聊天室所有者解散聊天室](/v4/web/room_manage.html#解散聊天室)。
 
 #### 修复
 
 - [IM SDK] 修复 SDK 在 uniapp Vue3 平台无法自动重连的问题。
-- [IM SDK] 将[数据库操作失败错误码](error.html) `LOCAL_DB_OPERATION_FAILED` 为 从 `55` 修改为 `800`。
+- [IM SDK] 将[数据库操作失败错误码](/v4/web/error.html) `LOCAL_DB_OPERATION_FAILED` 为 从 `55` 修改为 `800`。
 
 ## v4.7.0 Dev 2024-04-30
 
 #### 新增特性
 
-- [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
-- [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
-- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](log.html)。
+- [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](/v4/web/room_manage.html#获取当前用户加入的聊天室列表)。
+- [IM SDK] [撤回消息](/v4/web/message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](/v4/web/log.html)。
 
 #### 修复
 
@@ -300,13 +300,13 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+- [IM SDK] 新增[置顶消息功能](/v4/web/message_pin.html)。
   - `pinMessage`: 置顶消息。
   - `unpinMessage`: 取消置顶消息。
   - `getServerPinnedMessages`：从服务器获取指定会话的置顶消息。
   - `onMessagePinEvent`: 当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - [IM SDK] 消息编辑回调 `onModifiedMessage` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
-- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+- [IM SDK] 支持[获取聊天室漫游消息](/v4/web/message_retrieve.html#从服务器获取指定会话的消息)。
 
 #### 优化
 
@@ -326,10 +326,10 @@
 
 #### 新增特性
 
-- [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](room_manage.html#实时更新聊天室成员人数)。
-- [IM SDK] 新增 [deleteAllMessagesAndConversations](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话。
-- [IM SDK] 新增 [getSelfIdsOnOtherPlatform](multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法，可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
-- [IM SDK] 新增 [useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] [聊天室和群组成员进出事件增加成员人数 `memberCount` 字段](/v4/web/room_manage.html#实时更新聊天室成员人数)。
+- [IM SDK] 新增 [deleteAllMessagesAndConversations](/v4/web/message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话。
+- [IM SDK] 新增 [getSelfIdsOnOtherPlatform](/v4/web/multi_device.html#获取当前用户的其他登录设备的登录-id-列表) 方法，可以获取当前用户其他登录设备的登录 ID 列表，实现对指定设备发送消息。
+- [IM SDK] 新增 [useReplacedMessageContents](/v4/web/message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
 
 #### 优化
 
@@ -347,11 +347,11 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[会话标记功能](conversation_mark.html)。
-  - `addConversationMark`：[标记会话](conversation_mark.html#标记会话)。
-  - `removeConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
-  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
-  - `onMultiDeviceEvent#markConversation/unMarkConversation`：[多设备场景下的会话标记事件](multi_device.html#实现方法)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- [IM SDK] 新增[会话标记功能](/v4/web/conversation_mark.html)。
+  - `addConversationMark`：[标记会话](/v4/web/conversation_mark.html#标记会话)。
+  - `removeConversationMark`：[取消标记会话](/v4/web/conversation_mark.html#取消标记会话)。
+  - `getServerConversationsByFilter`：[根据会话标记从服务器分页查询会话列表](/v4/web/conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+  - `onMultiDeviceEvent#markConversation/unMarkConversation`：[多设备场景下的会话标记事件](/v4/web/multi_device.html#实现方法)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
 - [IM SDK] 增加 `onMessage` 回调。在收到文本、图片、视频、语音、地理位置和文件等消息时，批量将消息回调给应用。
 - [IM SDK] 视频类型消息增加视频首帧缩略图, 通过 `videoMessage.thumb` 访问。
 
@@ -365,7 +365,7 @@
 
 #### 新增特性
 
-- [IM SDK] [发送消息方法 `Send`](message_send.html) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
+- [IM SDK] [发送消息方法 `Send`](/v4/web/message_send.html) 的成功回调参数 `SendMsgResult` 中新增 `message` 字段，用于返回成功发送的消息对象。
 - [IM SDK] MiniCore SDK 增加 logger 实例。
 
 #### 优化
@@ -380,8 +380,8 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- [IM SDK] 新增 `getAllContacts` 和 `getContactsWithCursor` 方法分别用于[从服务器一次性和分页获取好友列表](user_relationship.html#获取好友列表)，其中每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增[设置好友备注功能](/v4/web/user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `getAllContacts` 和 `getContactsWithCursor` 方法分别用于[从服务器一次性和分页获取好友列表](/v4/web/user_relationship.html#获取好友列表)，其中每个好友对象包含好友的用户 ID 和好友备注。
 - [IM SDK] 消息结构新增 `broadcast` 字段, 用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 
 #### 优化
@@ -396,15 +396,15 @@
 
 #### 新增特性
 
-- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](conversation_local.html)。
+- [IM SDK] 新增 `LocalCache` 模块[实现本地会话数据管理](/v4/web/conversation_local.html)。
 - [IM SDK] 用户申请加群被拒绝的回调 `joinPublicGroupDeclined` 中增加申请人的用户 ID。
 
 ## v4.2.0 Dev 2023-07-27
 
 #### 新增特性
 
-- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)。
-- [IM SDK] 新增[消息编辑功能](message_modify.html)。
+- [IM SDK] 新增 [发送](/v4/web/message_send.html#发送合并消息) 和 [接收合并转发消息功能](/v4/web/message_receive.html#接收合并消息)。
+- [IM SDK] 新增[消息编辑功能](/v4/web/message_modify.html)。
 
 #### 修复
 
@@ -414,16 +414,16 @@
 
 #### 新增特性
 
-1. 新增 `pinConversation` 方法实现 [会话置顶和取消置顶](conversation_pin.html#置顶-取消置顶会话)。
-2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](conversation_pin.html#获取服务端的置顶会话列表)。
-3. 新增 `getServerConversations` 方法 [分页获取排序后的服务端会话列表](conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
-4. 新增[在群组或聊天室会话中发送定向消息](message_target.html)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
+1. 新增 `pinConversation` 方法实现 [会话置顶和取消置顶](/v4/web/conversation_pin.html#置顶-取消置顶会话)。
+2. 新增 `getServerPinnedConversations` 方法[分页获取服务器端的置顶会话列表](/v4/web/conversation_pin.html#获取服务端的置顶会话列表)。
+3. 新增 `getServerConversations` 方法 [分页获取排序后的服务端会话列表](/v4/web/conversation_list.html#从服务器分页获取会话列表)。原接口 `getConversationlist` 已废弃。
+4. 新增[在群组或聊天室会话中发送定向消息](/v4/web/message_target.html)。通过在构建消息的方法 `create` 中添加 `receiverList` 参数实现该特性。
 5. 在从服务器获取历史消息的方法 `getHistoryMessages` 的返回数据中新增 `isLast` 字段表示返回的是否为最后一页数据。
-6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](message_send.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
+6. 在构建图片消息的方法 `create` 中新增 [`thumbnailWidth` 和 `thumbnailHeight`](/v4/web/message_send.html#发送图片消息) 参数用于设置缩略图的宽度和高度。
 7. 新增以下 SDK 登录失败原因，在控制台上提示：
- - [错误码 50，MAX_LIMIT](error.html)：新增应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）超限错误提示。
- - [错误码 2， WEBIM_CONNCTION_AUTH_ERROR](error.html) ：新增 Token 无效提示。
-8. 以下[好友管理方法](user_relationship.html)增加执行成功和失败的回调（Promise）：
+ - [错误码 50，MAX_LIMIT](/v4/web/error.html)：新增应用的日活跃用户数（DAU）超限、在线用户数量超限和月活跃用户数（MAU）超限错误提示。
+ - [错误码 2， WEBIM_CONNCTION_AUTH_ERROR](/v4/web/error.html) ：新增 Token 无效提示。
+8. 以下[好友管理方法](/v4/web/user_relationship.html)增加执行成功和失败的回调（Promise）：
  - addContact：添加好友。
  - deleteContact：删除好友。
  - acceptContactInvite：接受好友邀请。
@@ -435,14 +435,14 @@
 
 #### 新增特性
 
-- [IM SDK] 新增 `searchOptions` 参数对象（包含 `from`、`msgTypes`、`startTime` 和 `endTime` 参数），允许用户调用 `getHistoryMessages` 方法时[按消息发送方、消息类型或时间段从服务端拉取历史消息](message_retrieve.html#从服务器获取指定会话的消息)。
-- [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](message_overview.html#消息类型)时提示用户。
+- [IM SDK] 新增 `searchOptions` 参数对象（包含 `from`、`msgTypes`、`startTime` 和 `endTime` 参数），允许用户调用 `getHistoryMessages` 方法时[按消息发送方、消息类型或时间段从服务端拉取历史消息](/v4/web/message_retrieve.html#从服务器获取指定会话的消息)。
+- [IM SDK] 新增错误码 511，即 MESSAGE_SIZE_LIMIT，若[消息体大小超过限制](/v4/web/message_overview.html#消息类型)时提示用户。
 
 ## v4.1.4 Dev 2023-03-16
 
 #### 新增特性
 
-- [IM SDK] 新增 [群成员自定义属性功能](group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
+- [IM SDK] 新增 [群成员自定义属性功能](/v4/web/group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](/v4/web/group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 在消息创建参数中新增 `deliverOnlineOnly` 字段实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
 - [IM Demo] 新增群成员昵称修改与展示功能。 
 
@@ -459,8 +459,8 @@
 
 #### 新增特性
 
-- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
-- [IM SDK] 新增[群组创建事件 `create`](group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
+- [IM SDK] 在 `getConversationlist` 方法中新增分页参数 `pageNum` 和 `pageSize`，支持[分页方法获取会话列表](/v4/web/conversation_list.html#从服务器分页获取会话列表)。
+- [IM SDK] 新增[群组创建事件 `create`](/v4/web/group_manage.html#监听群组事件)。群组创建后，群主的其他设备会收到该事件。
 
 #### 优化
 
@@ -477,10 +477,10 @@
 
 #### 新增特性
 
-- [IM SDK] [创建群组方法 `createGroup`](group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
-- [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](group_manage.html#监听群组事件)。
-- [IM SDK] 新增[聊天室消息优先级](message_send.html#聊天室消息优先级与消息丢弃逻辑)。
-- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](group_members.html#管理群组禁言)。
+- [IM SDK] [创建群组方法 `createGroup`](/v4/web/group_manage.html#创建群组) 和[修改群信息方法 `modifyGroup`](/v4/web/group_attributes.html#修改群组信息) 新增 `ext` 字段支持群扩展信息。
+- [IM SDK] 群组通知事件增加[群组信息修改事件 `updateInfo`](/v4/web/group_manage.html#监听群组事件)。
+- [IM SDK] 新增[聊天室消息优先级](/v4/web/message_send.html#聊天室消息优先级与消息丢弃逻辑)。
+- [IM SDK] 支持同时[对多个群组成员禁言和解除禁言](/v4/web/group_members.html#管理群组禁言)。
 
 #### 优化
 
@@ -494,7 +494,7 @@
 
 #### 优化
 
-- [IM SDK] [miniCore](import_sdk_minicore.html) 支持配置私有化配置。
+- [IM SDK] [miniCore](/v4/web/import_sdk_minicore.html) 支持配置私有化配置。
 - 优化重连逻辑。
 
 #### 修复
@@ -506,7 +506,7 @@
 
 #### 新增特性
 
-- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增[聊天室自定义属性功能](/v4/web/room_attributes.html)。
 - [IM SDK] 新增 `onLog` 方法，实现用户日志回调。
 - [IM SDK] `getJoinedGroups` 方法中新增 `needAffiliations` 和 `needRole` 参数支持获取群组成员数和用户自己的角色。
 
@@ -538,12 +538,12 @@
 #### 新增特性
 
 - [IM SDK] 新增群组事件回调 [onGroupEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onGroupEvent) 和聊天室事件回调 [onChatroomEvent](https://doc.easemob.com/jsdoc/interfaces/Types.EventHandlerType.EventHandlerType.html#onChatroomEvent)。原回调可继续使用；
-- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](error.html)
+- [IM SDK] 新增群聊消息限流错误码 [MESSAGE_CURRENT_LIMITING](/v4/web/error.html)
 - [IM SDK] 邀请加入群聊回调 onGroupChange 返回中新增 群名称 参数值。
 
 #### 优化
 
-- [IM SDK] 支持批量查询群组详情 [getGroupInfo](group_attributes.html#获取群组详情)。
+- [IM SDK] 支持批量查询群组详情 [getGroupInfo](/v4/web/group_manage.html#获取群组详情信息)。
 - [IM SDK] 优化黑名单和白名单相关的方法名。
   - 白名单相关的方法名中的 `Whitelist` 修改为 `Allowlist`，如 `getGroupWhitelist` 修改为 `getGroupAllowlist`；
   - 黑名单相关的方法名中的 `Blacklist` 修改为 `Blocklist`，如 `getGroupBlacklist` 修改为 `getGroupBlocklist`。
@@ -553,7 +553,7 @@
 #### 新增特性:
 
 - [IM SDK] 新增消息消息话题（message thread）功能；
-- [IM SDK] 新增 [getConversationlist](conversation_list.html#从服务器分页获取会话列表) 方法解析会话中的最新一条消息；
+- [IM SDK] 新增 [getConversationlist](/v4/web/conversation_list.html#从服务器分页获取会话列表) 方法解析会话中的最新一条消息；
 
 #### 优化：
 
@@ -563,8 +563,8 @@
 
 #### 新增特性:
 
-- [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核；
+- [IM SDK] 新增 [消息 Reaction](/v4/web/reaction.html) 功能，可以对消息进行不同的响应；
+- [IM SDK] 新增 [举报 API](/v4/web/moderation.html) 用于内容审核；
 - [IM SDK] 新增推送设置 API，支持不同的推送配置；
 - [IM SDK] 增加数据上报功能；
 
@@ -586,7 +586,7 @@
 
 #### 新增特性:
 
-- [IM SDK] 增加 [用户在线状态(Presence)](presence.html) 订阅功能。
+- [IM SDK] 增加 [用户在线状态(Presence)](/v4/web/presence.html) 订阅功能。
 - [IM SDK] [翻译功能](/value-added/translation/message_translation_web.html)：增加自动翻译接口。实现用户按需翻译和发消息自动翻译。
 
 #### 优化：

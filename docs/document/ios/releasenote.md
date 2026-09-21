@@ -1,4 +1,4 @@
-﻿# iOS IM SDK 更新日志
+# iOS IM SDK 更新日志
 
 ## v5.0.0 Dev 2026-8-12
 
@@ -125,11 +125,11 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 
 #### 新增特性
 
-支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/ios/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 
 #### 优化
 
-- 新增 [登录失败相关错误码](error.html)：
+- 新增 [登录失败相关错误码](/v4/ios/error.html)：
   - `350`：`EMErrorConnectionTimeout`：连接服务器超时。
   - `351`：`EMErrorConnectionDNSError`：连接服务器时发生 DNS 错误。
   - `352`：`EMErrorConnectionIOError`：连接服务器时发生 IO 错误。
@@ -146,19 +146,19 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 #### 新增特性
 
 - 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片消息的原图、大图和缩略图路径处理逻辑](message_receive.html#接收图片消息)。
+  - 新增 [“大图”资源类型](/v4/ios/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/v4/ios/message_send.html#发送图片消息)。
+  - 优化 [图片消息的原图、大图和缩略图路径处理逻辑](/v4/ios/message_receive.html#接收图片消息)。
 - 支持好友列表自动同步：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
-  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+  - 新增 [好友列表自动同步配置功能](/v4/ios/user_relationship.html#开启自动同步)。
+  - 新增 [好友列表及好友信息同步状态回调](/v4/ios/user_relationship.html#监听同步状态和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](/v4/ios/user_relationship.html#从服务端获取好友列表) 和 [本地获取好友列表](/v4/ios/user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](/v4/ios/userprofile.html#订阅非好友用户的属性变更)。
 - 新增同步数据 WebSocket 服务地址和端口配置接口。
 
 #### 优化
 
-- 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 [initWithLocalPath:displayName:](message_send.html#发送图片消息) 替代。
+- 废弃创建图片消息体的方法 `EMImageMessageBody#initWithData:thumbnailData:`，使用 [initWithLocalPath:displayName:](/v4/ios/message_send.html#发送图片消息) 替代。
 - 废弃初始化好友对象的方法 `EMContact#initWithUserId:remark:`，使用 `EMContact#initWithUserId:remark:createAt:` 替代。
 
 ## v4.21.0 Dev 2026-4-28（开发版）
@@ -180,9 +180,9 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 
 #### 新增特性
 
-1. 新增 [用户信息自动管理功能](userinfo_provider.html)。
+1. 新增 [用户信息自动管理功能](/v4/ios/userinfo_provider.html)。
 
-  用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+  用户信息指用于业务展示的用户相关信息，包括 [用户属性](/v4/ios/userprofile.html)、[好友备注](/v4/ios/user_relationship.html#设置好友备注) 和 [群成员名片](/v4/ios/group_namecard.html)。
    
    开启 `EMOptions#enableUserInfo` 后，SDK 支持自动同步、缓存和更新用户信息与群成员名片信息。主要功能如下：
    - 用户登录成功后自动同步当前登录用户信息。
@@ -194,7 +194,7 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
    - `EMUserInfoManagerDelegate`：监听用户信息更新事件。
    - `EMUserInfoManager#getUserInfoByIds`：从本地内存查询用户信息。
 
-2. 新增 [群成员名片管理功能](group_namecard.html)。
+2. 新增 [群成员名片管理功能](/v4/ios/group_namecard.html)。
    
    支持群成员名片的设置、本地查询、服务端获取（写入本地内存）、通过消息自动同步以及变更监听。新增如下接口或回调：
    - 新增 `EMGroupManager#updateGroupNamecard`，支持更新当前用户在指定群组中的群名片。
@@ -211,7 +211,7 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 
 #### 新增特性
 
-支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+支持 [接收服务端发送的流式消息](/v4/ios/message_stream_receive.html)。
 
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
@@ -326,42 +326,42 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性 
 
-1. [根据关键字从本地数据库中获取会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+1. [根据关键字从本地数据库中获取会话的消息](/v4/ios/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+2. [根据消息 ID 从本地数据库获取单个或多个消息](/v4/ios/message_retrieve.html#根据消息-id-获取本地消息)。
 
 #### 修复
 
 1. 修复当修改文本和自定义消息之外的消息时，`EMChatManagerDelegate#onMessageContentChanged` 回调中不返回修改的信息的问题。
-2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchServerMessagesOption#isSave` 设置为 `false`）时，也会生成新的本地会话的问题。
+2. 修复 [拉取漫游消息](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchServerMessagesOption#isSave` 设置为 `false`）时，也会生成新的本地会话的问题。
 
 ## v4.15.0 Dev 2025-5-21（开发版）
 
 #### 新增特性
 
-- [撤回消息](message_recall.html)时，支持群组中群主/管理员撤回其他用户发送的消息。
+- [撤回消息](/v4/ios/message_recall.html)时，支持群组中群主/管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+  - 新增群成员进出事件 [onMembersJoined](/v4/ios/group_manage.html#监听群组事件) 和 [onMembersExited](/v4/ios/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。
    
 #### 优化
 
-- 修改 Token 即将过期事件 [tokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
-- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](demo.html#快速跑通-demo-源码)。
+- 修改 Token 即将过期事件 [tokenWillExpire](/v4/ios/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/v4/ios/demo.html#快速跑通-demo-源码)。
 
 ## v4.14.0 Dev 2025-4-21（开发版）
 
 #### 新增特性
 
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和[接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
-- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [发送](/v4/ios/message_send.html#发送-gif-图片消息) 和[接收 GIF 图片消息](/v4/ios/message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](/v4/ios/group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](/v4/ios/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/v4/ios/message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](/v4/ios/message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [获取群成员列表](/v4/ios/group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
 
 #### 优化
 
 - 日志文件中增加设备时区偏移，方便排查问题。
-- 调用方法 [EMChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
+- 调用方法 [EMChatManager#fetchMessagesFromServerBy:conversationType:cursor:pageSize:option:completion:](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 
 #### 修复
@@ -372,7 +372,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 优化
 
-- [IM SDK] 发送后编辑消息接口 [EMChatManager#modifyMessage](message_modify.html) 支持编辑各类消息：
+- [IM SDK] 发送后编辑消息接口 [EMChatManager#modifyMessage](/v4/ios/message_modify.html) 支持编辑各类消息：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
   - 透传消息：不支持编辑。
@@ -382,7 +382,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 - [EaseIM App (Demo)] 增加反诈提示 UI。
 
 #### 修复
-- [IM SDK]修复调用 [EMChatManager#getConversationsFromServerWithCursor](conversation_list.html#从服务器分页获取会话列表) 方法拉取到的会话最新一条消息不包含reactions和翻译信息的问题。
+- [IM SDK]修复调用 [EMChatManager#getConversationsFromServerWithCursor](/v4/ios/conversation_list.html#从服务器分页获取会话列表) 方法拉取到的会话最新一条消息不包含reactions和翻译信息的问题。
 
 ## v4.12.0 2025-1-10
 
@@ -409,7 +409,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。 
+- [IM SDK] 新增[拉取服务器漫游消息](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
 - [IM SDK] 聊天室成员禁言回调：
   - 新增聊天室禁言回调 `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:`，在回调中使用 `(NSDictionary<NSString *,NSNumber*> *)aMutes` 参数表示禁言到期时间戳。
   - 废弃原来的回调 `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`。
@@ -425,14 +425,14 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 注意
 
-由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现报错。详见 [iOS 快速开始中的集成问题说明](quickstart.html#集成问题)。
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现报错。详见 [iOS 快速开始中的集成问题说明](/v4/ios/quickstart.html#sdk-依赖的-crash-上报库冲突)。
 
 
 ## v4.10.2 2024-11-22
 
 #### 修复
 
-修复调用 [EMPushManager#getSilentModeForConversations:completion:](/document/ios/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+修复调用 [EMPushManager#getSilentModeForConversations:completion:](/v4/ios/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 
 ## v4.10.1 2024-10-28
 
@@ -446,14 +446,14 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 新增特性
 
 - [IM SDK] 新增 `EMChatManager#getMessageCountWithCompletion:` 方法，用于获取数据库中的消息总数。 
-- [IM SDK] 新增[两个错误码](error.html)：
+- [IM SDK] 新增[两个错误码](/v4/ios/error.html)：
   - `EMErrorGroupUserInBlockList`（613）：该用户在群组黑名单中。例如，群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
   - `EMErrorChatroomUserInBlockList`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
   
 #### 优化
  
-- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](/document/android/message_extension.html)，会同步到发送方。
-- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](/v4/ios/message_extension.html)，会同步到发送方。
+- [IM SDK] 调用[删除服务端会话 API](/v4/ios/conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - [IM SDK] 群组和聊天室操作的默认错误码提示由 `EMErrorGroupMembersFull`（604）和 `EMErrorChatroomMembersFull`（704）调整为 `EMErrorGroupPermissionDenied`（603）和 `EMErrorChatroomPermissionDeniedD`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 
 #### 修复
@@ -461,7 +461,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 - [IM SDK] 修复发送图片消息时指定缩略图尺寸未生效的问题。
 - [IM SDK] 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 
-#### [EaseCallKIt](easecallkit.html)
+#### [EaseCallKIt](/callkit/ios/easecallkit.html)
 
 - 升级依赖的 `AgoraRtcEngine` 版本，防止因为旧版本包含 Bitcode 无法上传 App Store。
 
@@ -469,10 +469,10 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `EMClientDelegate#onOfflineMessageSyncStart` 和`EMClientDelegate#onOfflineMessageSyncFinish`。
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/v4/ios/connection.html#监听连接状态): `EMClientDelegate#onOfflineMessageSyncStart` 和`EMClientDelegate#onOfflineMessageSyncFinish`。
 - [IM SDK] 新增 `IEMGroupManager#isMemberInMuteListFromServerWithGroupId:completion:` 接口，可以查看当前用户是否在群组禁言名单中。
-- [IM SDK] 原消息置顶接口 `IEMChatManager#pinMessage` 和 `IEMChatManager#unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口参数无变化。
-- [IM SDK] 新增 `EMRecallMessageInfo#conversationId` 属性，在撤回消息的 `messagesInfoDidRecall` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)
+- [IM SDK] 原消息置顶接口 `IEMChatManager#pinMessage` 和 `IEMChatManager#unpinMessage` [增加对单聊会话中置顶消息的支持](/v4/ios/message_pin.html)。接口参数无变化。
+- [IM SDK] 新增 `EMRecallMessageInfo#conversationId` 属性，在撤回消息的 `messagesInfoDidRecall` 事件中[返回被撤回的消息所属的会话 ID](/v4/ios/message_recall.html#设置消息撤回监听)
 
 #### 优化
 
@@ -496,18 +496,18 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 新增特性
 
 - [IM SDK] 支持 AUT 协议，优化弱网环境下的服务连接成功率。
-- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](/v4/ios/room_manage.html#加入聊天室)：
   - 新增 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- [IM SDK] 支持[会话推送通知方式的本地存储](/document/ios/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)。
+- [IM SDK] 支持[会话推送通知方式的本地存储](/v4/ios/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)。
   - 新增 `EMPushManager#syncSilentModeConversationsFromServerCompletion:` 方法，支持从服务器获取所有会话的推送通知方式的设置。
   - 新增 `EMConversation#disturbType` 属性，用于本地存储会话的推送通知方式。
   - 若用户在一台设备上变更会话推送通知方式，其他设备会收到 `EMMultiDevicesDelegate#multiDevicesConversationEvent:conversationId:conversationType:` 事件。
-- 新增 `EMConversation#getMessageCountStart:to:` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增 `EMConversation#getMessageCountStart:to:` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](/v4/ios/message_retrieve.html#获取会话在一定时间内的消息数)。
 
 #### 优化
 
-- [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](userprofile.html#从服务端获取用户的所有属性)和[获取指定用户的指定用户属性](userprofile.html#从服务端获取用户的指定属性)，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
+- [IM SDK] 设置和获取用户属性的接口，包括[设置当前用户的属性](/v4/ios/userprofile.html#设置当前用户的所有属性)、[获取单个或多个用户的用户属性](/v4/ios/userprofile.html#从服务端获取用户的所有属性)和[获取指定用户的指定用户属性](/v4/ios/userprofile.html#从服务端获取用户的指定属性)，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
 
 #### 修复
 
@@ -518,14 +518,14 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](/v4/ios/multi_device.html#设置登录设备的扩展信息)。
   - `EMLoginExtensionInfo.extensionInfo`：设备的扩展信息。
   - `EMOptions#loginExtensionInfo`：设置登录时携带的扩展信息。
   - `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo.EMLoginExtensionInfo`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  - `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
-  - `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` [根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
-- [IM SDK] 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
+  - `EMChatManager#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](/v4/ios/message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMessages:withTypes:timestamp:count:fromuser:searchDirection:completion:` [根据单个或多个消息类型，搜索本地数据库中单个会话的消息](/v4/ios/message_search_local.html#根据消息类型搜索当前会话中的消息)。
+- [IM SDK] 支持[从服务端单向删除聊天室漫游消息](/v4/ios/message_delete.html#单向删除服务端的历史消息)。
 
 #### 优化
 
@@ -551,11 +551,11 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增 `filterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](conversation_list.html#获取本地所有或筛选的会话)。
-- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](conversation_list.html#清除内存中的会话)释放内存。
-- [IM SDK] 新增 `EMOptions#autoLoadConversations` 方法，[设置是否在登录成功后将数据库中的所有会话自动加载到缓存](conversation_list.html#一次性获取本地所有会话)。
-- [IM SDK] 新增 `recallMessageWithMessageId:ext:completion:` 方法，[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
-- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增 `recallMessageId` 属性，[支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
+- [IM SDK] 新增 `filterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](/v4/ios/conversation_list.html#获取本地所有或筛选的会话)。
+- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](/v4/ios/conversation_list.html#清除内存中的会话)释放内存。
+- [IM SDK] 新增 `EMOptions#autoLoadConversations` 方法，[设置是否在登录成功后将数据库中的所有会话自动加载到缓存](/v4/ios/conversation_list.html#一次性获取本地所有会话)。
+- [IM SDK] 新增 `recallMessageWithMessageId:ext:completion:` 方法，[支持消息撤回时携带自定义信息](/v4/ios/message_recall.html#实现方法)。
+- [IM SDK] 消息撤回事件 `messagesInfoDidRecall` 的 `EMRecallMessageInfo` 对象中新增 `recallMessageId` 属性，[支持离线期间撤回的消息通知给接收方](/v4/ios/message_recall.html#设置消息撤回监听)。
 
 #### 修复
 
@@ -571,7 +571,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+- [IM SDK] 新增[置顶消息功能](/v4/ios/message_pin.html)。
   - 新增 `EMChatManager#pinMessage:completion:` 方法，用于置顶消息。
   - 新增 `EMChatManager#unpinMessage:completion:` 方法，用于取消置顶消息。
   - 新增 `EMChatManager#getPinnedMessagesFromServer:completion:` 方法，用于从服务器获取指定会话的置顶消息。
@@ -579,15 +579,15 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
   - 新增 `EMMessagePinInfo` 类，包含消息置顶的操作者以及置顶时间。
   - 新增 `EMChatMessage#pinnedInfo` 属性，展示消息的置顶详情。
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。 
-- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
-- [IM SDK] 新增 `EMChatManager#markAllConversationsAsRead` 方法[将所有会话的未读消息设为已读](conversation_unread.html#将所有会话的未读消息数清零)。
+- [IM SDK] 支持[获取聊天室漫游消息](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息)。
+- [IM SDK] 新增 `EMChatManager#markAllConversationsAsRead` 方法[将所有会话的未读消息设为已读](/v4/ios/conversation_unread.html#将所有会话的未读消息数清零)。
 - [IM SDK] 消息编辑回调 `EMChatManagerDelegate#onMessageContentChanged:operatorId:operationTime` 中支持[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
 
 #### 优化
 
-- [IM SDK] 支持使用消息 body 完成[单条转发](message_forward.html#转发单条消息)，附件消息无需重新上传附件。
+- [IM SDK] 支持使用消息 body 完成[单条转发](/v4/ios/message_forward.html#转发单条消息)，附件消息无需重新上传附件。
 - [IM SDK] 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
-- [IM SDK] [在聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
+- [IM SDK] [在聊天室成员进出时更新聊天室成员人数](/v4/ios/room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
 - [IM SDK] 优化 token 登录时的错误提示信息，使错误提示更精细。
 - [IM SDK] 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。
 - [IM SDK] 优化聊天室进出的超时时间。
@@ -608,11 +608,11 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增 [EMChatManager#deleteAllMessagesAndConversations:completion:](message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](message_search_local.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-- [IM SDK] 新增 [EMOptions#useReplacedMessageContents](message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
-- [IM SDK] 新增 [EMOptions#includeSendMessageInMessageListener](message_send.html#发送文本消息) 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
-- [IM SDK] 新增 [EMOptions#regardImportMessagesAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import_single.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
+- [IM SDK] 新增 [EMChatManager#deleteAllMessagesAndConversations:completion:](/v4/ios/message_delete.html#清空聊天记录) 方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- [IM SDK] 新增 [EMChatManager#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](/v4/ios/message_search_local.html#根据搜索范围搜索所有会话中的消息) 和[EMConversation#loadMessagesWithKeyword:timestamp:count:fromUser:searchDirection:scope:completion:](/v4/ios/message_search_local.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- [IM SDK] 新增 [EMOptions#useReplacedMessageContents](/v4/ios/message_send.html#发送消息前的内容审核) 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以获取替换后的内容。
+- [IM SDK] 新增 [EMOptions#includeSendMessageInMessageListener](/v4/ios/message_send.html#发送文本消息) 开关。开启后，在 `messagesDidReceive` 回调里增加发送成功的消息。
+- [IM SDK] 新增 [EMOptions#regardImportMessagesAsRead](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import_single.html)导入的消息，客户端上通过[漫游拉取](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量 `EMConversation#unreadMessagesCount` 不发生变化。若该开关为关闭状态，`EMConversation#unreadMessagesCount` 的数量会增加。
 
 #### 优化
 
@@ -631,12 +631,12 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-[IM SDK] 支持[会话标记功能](conversation_mark.html)。
-- `EMChatManager#addConversationMark:completion`：[标记会话](conversation_mark.html#标记会话)。
-- `EMChatManager#removeConversationMark:completion`：[取消标记会话](conversation_mark.html#取消标记会话)。
-- `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
-- `EMConversation#marks`：[获取本地单个会话的所有标记](conversation_mark.html#获取本地单个会话的所有标记)。
-- `multiDevicesConversationEvent#EMMultiDevicesEventConversationUpdateMark`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+[IM SDK] 支持[会话标记功能](/v4/ios/conversation_mark.html)。
+- `EMChatManager#addConversationMark:completion`：[标记会话](/v4/ios/conversation_mark.html#标记会话)。
+- `EMChatManager#removeConversationMark:completion`：[取消标记会话](/v4/ios/conversation_mark.html#取消标记会话)。
+- `EMChatManager#getConversationsFromServerWithCursor:filter:completion`：[根据会话标记从服务器分页查询会话列表](/v4/ios/conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+- `EMConversation#marks`：[获取本地单个会话的所有标记](/v4/ios/conversation_mark.html#获取本地单个会话的所有标记)。
+- `multiDevicesConversationEvent#EMMultiDevicesEventConversationUpdateMark`：[多设备场景下的会话标记事件](/v4/ios/multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
 
 #### 优化
 
@@ -648,13 +648,13 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- [IM SDK] 新增 `getAllContactsFromServerWithCompletion` 和 `getContactsFromServerWithCursor` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
-- [IM SDK] 新增 `getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- [IM SDK] 新增 `getAllContacts` 方法[从本地分页获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增[设置好友备注功能](/v4/ios/user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `getAllContactsFromServerWithCompletion` 和 `getContactsFromServerWithCursor` 方法分别[从服务器一次性和分页获取好友列表](/v4/ios/user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增 `getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](/v4/ios/user_relationship.html#从本地获取好友列表)。
+- [IM SDK] 新增 `getAllContacts` 方法[从本地分页获取好友列表](/v4/ios/user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - [IM SDK] 新增 `EMChatMessage#broadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
-- [IM SDK] 新增 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
-- [IM SDK] 新增[错误码 706](error.html) `EMErrorChatroomOwnerNotAllowLeave`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#canChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示该错误。
+- [IM SDK] 新增 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于[从服务器获取当前用户已加入的群组数量](/v4/ios/group_manage.html#查询当前用户已加入的群组数量)。
+- [IM SDK] 新增[错误码 706](/v4/ios/error.html) `EMErrorChatroomOwnerNotAllowLeave`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#canChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示该错误。
 - [IM SDK] 新增 `EMOptions#loadEmptyConversations` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
 - [IM SDK] 申请入群被拒绝的回调 `EMGroupManagerDelegate#joinGroupRequestDidDecline:reason:decliner:applicant:` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。  
 - [IM Demo] 好友详情页面可添加和修改好友备注。
@@ -679,14 +679,14 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增 [发送](message_send_.html#发送合并消息)和 [接收合并转发消息](message_receive.html#接收合并消息) 功能：
+- [IM SDK] 新增 [发送](/v4/ios/message_send.html#发送合并消息)和 [接收合并转发消息](/v4/ios/message_receive.html#接收合并消息) 功能：
     - 新增合并消息类型 `EMMessageBodyTypeCombine`；
     - 新增消息体类 `EMCombineMessageBody` ；
     - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法，用于下载并解析合并消息。
-- [IM SDK] 新增[消息编辑功能](message_modify.html)：
+- [IM SDK] 新增[消息编辑功能](/v4/ios/message_modify.html)：
     - 新增 `EMChatManager#modifyMessage` 方法，用于编辑消息；
     - 新增 `EMChatManagerDelegate#onMessageContentChanged` 回调。消息编辑后，接收方会收到该回调。
-- [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)。
+- [IM SDK] 新增[自定义设备的平台和名称功能](/v4/ios/multi_device.html#设置登录设备的名称)。
     - 新增 `EMOptions#customOSType` 属性，用于设置自定义平台代号；
     - 新增 `EMOptions#customDeviceName` 属性，用于设置当前设备的自定义设备名称。
 - [IM SDK] 新增 `EMClientDelegate#userAccountDidLoginFromOtherDevice:(NSString*)deviceName` 回调。<br/>
@@ -715,12 +715,12 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](conversation_list.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
+- [IM SDK] 新增 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion:` 方法，实现[从服务器拉取会话](/v4/ios/conversation_list.html#从服务器分页获取会话列表)的功能，原接口 `getConversationsFromServer` 和 `getConversationsFromServerByPage:pageSize:completion:` 标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
-    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶-取消置顶会话)：
-    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](conversation_list.html#获取本地会话)。
-- [IM SDK] 新增在群组或聊天室中 [发送定向消息](message_target.html) 功能。
+    - 新增 `IEMChatManager#pinConversation:completionBlock:` 方法，实现[置顶或取消置顶服务器会话](/v4/ios/conversation_pin.html#置顶-取消置顶会话)：
+    - 新增 `IEMChatManager#getPinnedConversationsFromServerWithCursor:pageSize:completion` 方法，实现[获取置顶的服务器会话](/v4/ios/conversation_pin.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `IEMChatManager#getAllConversations:` 方法，实现[从本地获取排序后的会话列表](/v4/ios/conversation_list.html#获取本地所有或筛选的会话)。
+- [IM SDK] 新增在群组或聊天室中 [发送定向消息](/v4/ios/message_target.html) 功能。
 
 #### 优化
 
@@ -736,16 +736,16 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 新增特性
 
 - [IM SDK] 新增 Reaction 回调操作类型。
-- [IM SDK] 新增 `EMChatManager#fetchMessagesFromServerBy` 方法，[根据消息拉取参数配置接口（`EMFetchServerMessagesOption`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`EMFetchServerMessagesOption` 接口中包括起始时间戳、消息类型和消息发送方等参数。
+- [IM SDK] 新增 `EMChatManager#fetchMessagesFromServerBy` 方法，[根据消息拉取参数配置接口（`EMFetchServerMessagesOption`）从服务器分页获取指定会话的历史消息](/v4/ios/message_retrieve.html#从服务器获取指定会话的消息)。`EMFetchServerMessagesOption` 接口中包括起始时间戳、消息类型和消息发送方等参数。
 - [IM SDK] 新增 `EMConversation#removeMessagesStart` 方法，实现从本地数据库中删除指定时间段内的消息。
-- [IM SDK] 新增[错误码 510 `EMErrorMessageSizeLimit`](error.html)，发送消息时若消息体大小超过上限时提示错误。
-- [IM SDK] 新增[错误码 8 `EMAppActiveNumbersReachLimitation`](error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
+- [IM SDK] 新增[错误码 510 `EMErrorMessageSizeLimit`](/v4/ios/error.html)，发送消息时若消息体大小超过上限时提示错误。
+- [IM SDK] 新增[错误码 8 `EMAppActiveNumbersReachLimitation`](/v4/ios/error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
 - [IM Demo] 新增群组聊天时可提及某些用户，对其发送消息。
 
 
 #### 优化
 
-- [IM SDK] [聊天室详情更新回调 chatroomSpecificationDidUpdate](room_manage.html#监听聊天室事件) 返回更新的信息。
+- [IM SDK] [聊天室详情更新回调 chatroomSpecificationDidUpdate](/v4/ios/room_manage.html#监听聊天室事件) 返回更新的信息。
 - [IM SDK] 优化 `loadMessagesWithKeyword` 方法实现按关键字全局搜索消息支持搜索自定义消息。
 - [IM SDK] 优化日志回调逻辑。
 - [IM SDK] 移除代码中使用的 ECB 加密。
@@ -754,7 +754,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-- [IM SDK] 新增[群成员自定义属性功能](group_members.html#管理群成员自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
+- [IM SDK] 新增[群成员自定义属性功能](/v4/ios/group_members.html#管理群成员的自定义属性)并增加[自定义属性更新事件](/v4/ios/group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 新增 `EMChatMessage#deliverOnlineOnly` 属性实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
 - [IM Demo] 新增群成员昵称修改与展示功能。
 
@@ -766,11 +766,11 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
+[IM SDK] [新增 `EMChatManager#getConversationsFromServerByPage:pageSize:completion` 方法实现从服务端分页获取会话列表](/v4/ios/conversation_list.html#从服务器分页获取会话列表)。
 
 #### 优化
 
-- [IM Demo] [优化登录方式，修改为手机号+验证码](demo.html)。
+- [IM Demo] [优化登录方式，修改为手机号+验证码](/v4/ios/demo.html)。
 - [IM CallKit] 升级 RTC 版本至 4.1.1 版本。
 
 ## v3.9.9 Dev 2022-11-29

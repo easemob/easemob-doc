@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { getLandingSidebarRoot } from './breadcrumbSidebarContext'
+import { MENU_PAGE } from './sidebarBreadcrumb'
 
 const PLATFORM_ICON_MAP = {
   android: {
@@ -97,11 +99,17 @@ const platformIcon = computed(
 );
 const route = useRoute();
 const router = useRouter();
+const getCurrentPath = () =>
+  getLandingSidebarRoot(route.path, route.query.sidebar) ??
+  (route.path === MENU_PAGE && typeof route.query.sidebar === 'string'
+    ? route.query.sidebar
+    : route.path)
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
-    if (route.path.indexOf("/uikit") == 0) {
-      const splitRoute = route.path.split("/");
+    const currentPath = getCurrentPath()
+    if (currentPath.indexOf("/uikit/") == 0) {
+      const splitRoute = currentPath.split("/");
       kitType.value = splitRoute[2];
       platform.value = splitRoute[3];
     }
@@ -119,7 +127,8 @@ const onChange = (platform) => {
     )
     .map((item) => item.path);
 
-  let newPath = route.path.split("/");
+  const currentPath = getCurrentPath()
+  let newPath = currentPath.split("/");
   newPath[3] = platform;
   const nextPathPath = newPath.join("/");
 
