@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getLandingSidebarRoot } from './breadcrumbSidebarContext'
+import { MENU_PAGE } from './sidebarBreadcrumb'
 
 type PlatformKey =
   | 'android'
@@ -124,6 +126,11 @@ const versionLabel = computed(() =>
 )
 const route = useRoute()
 const router = useRouter()
+const getCurrentPath = (): string =>
+  getLandingSidebarRoot(route.path, route.query.sidebar) ??
+  (route.path === MENU_PAGE && typeof route.query.sidebar === 'string'
+    ? route.query.sidebar
+    : route.path)
 
 const normalizeHomePath = (home: string): string => home.replace(/\/$/, '')
 
@@ -154,8 +161,9 @@ const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): strin
 }
 
 const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
-  // /v4 开头优先判定为 4.x；默认 /document 为 5.x
-  if (path.startsWith('/v4/')) {
+  // These platforms keep their V4 docs under /document/.
+  if (path.startsWith('/v4/') ||
+    /^\/document\/(?:harmonyos|flutter|react-native|unity|windows)\//.test(path)) {
     return '4.x'
   }
 
@@ -203,7 +211,7 @@ const navigateToPlatformDoc = (
     .filter((path) => path.indexOf(`${documentRoot}/${platformName}/`) === 0)
     .map(normalizeRoutePath)
 
-  let newPath = route.path.split('/')
+  let newPath = getCurrentPath().split('/')
   newPath[1] = documentRoot.slice(1)
   newPath[2] = platformName
   const nextPathPath = newPath.join('/')
@@ -221,13 +229,14 @@ const navigateToPlatformDoc = (
 }
 
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
-    const nextPlatform = parsePlatform(route.path)
+    const currentPath = getCurrentPath()
+    const nextPlatform = parsePlatform(currentPath)
     if (!nextPlatform) return
 
     platform.value = nextPlatform
-    version.value = resolveVersion(route.path, nextPlatform)
+    version.value = resolveVersion(currentPath, nextPlatform)
   },
   { immediate: true }
 )
@@ -242,10 +251,7 @@ const onChange = (nextPlatform: PlatformKey): void => {
 
   if (isSwitchablePlatform(nextPlatform)) {
     // V4 的 Web 与小程序是两个独立平台，互相切换时保持在 V4。
-    const targetVersion = route.path.startsWith('/v4/')
-      ? '4.x'
-      : version.value
-    navigateToPlatformDoc(nextPlatform, targetVersion)
+    navigateToPlatformDoc(nextPlatform, version.value)
     return
   }
   navigateToPlatformDoc(nextPlatform)

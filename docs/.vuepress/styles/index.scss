@@ -1,5 +1,10 @@
 // place your custom styles here
 
+/* 所有面包屑（包括主题默认面包屑）统一使用 > 作为层级分隔符。 */
+.theme-container .breadcrumb li + li::before {
+  content: " > ";
+}
+
 html, body {
   background-color: #FAFDFF;
 }
@@ -786,6 +791,13 @@ button {
   .theme-hope-content {
     display: none;
   }
+}
+
+/* 面包屑目录页没有侧边栏：正文可见，并与标题保持相同宽度。 */
+.no-sidebar.breadcrumb-landing .theme-hope-content:not(.custom) {
+  display: block;
+  width: auto;
+  max-width: var(--content-width);
 }
 
 @media (min-width: 1680px) {

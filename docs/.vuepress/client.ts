@@ -14,6 +14,8 @@ import BiliBiliPlayer from "./components/BiliBili.vue";
 import ImageHotspot from "./components/ImageHotspot.vue";
 import DemoCard from "./components/DemoCard.vue";
 import Step from "./components/Step.vue";
+import SidebarMenuPage from "./components/SidebarMenuPage.vue";
+import SidebarOverviewPage from "./components/SidebarOverviewPage.vue";
 import FeedBack from "./components/Feedback.vue";
 import { embedChatbot } from "./embed";
 
@@ -30,6 +32,8 @@ export default defineClientConfig({
     app.use(InstantSearch);
     app.component("DemoCard", DemoCard);
     app.component("Step", Step);
+    app.component("SidebarMenuPage", SidebarMenuPage);
+    app.component("SidebarOverviewPage", SidebarOverviewPage);
     
     if (typeof window !== "undefined") {
       embedChatbot();
