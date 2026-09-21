@@ -1,13 +1,37 @@
 <script setup>
   import Sidebar from "vuepress-theme-hope/modules/sidebar/components/Sidebar.js";
+  import SidebarLinks from './SidebarLinks'
   import PlatformSwitch from './PlatformSwitch.vue'
   import PrivateSwitch from './PrivateSwitch.vue'
   import UIKitSwitch from './UIKitSwitch.vue'
   import CallKitSwitch from './CallKitSwitch.vue'
   import { usePageData } from '@vuepress/client'
-  import { nextTick, ref, onMounted, watch} from 'vue'
+  import { useRoute } from 'vue-router'
+  import { useThemeLocaleData } from 'vuepress-theme-hope/composables'
+  import { useSidebarItems } from 'vuepress-theme-hope/sidebar/composables/index.js'
+  import { resolveArraySidebarItems } from 'vuepress-theme-hope/sidebar/composables/resolveConfig.js'
+  import { getLandingSidebarRoot } from './breadcrumbSidebarContext'
+  import { MENU_PAGE, findSidebarRoot } from './sidebarBreadcrumb'
+  import { computed, nextTick, ref, onMounted, watch} from 'vue'
 
   const pageData = usePageData()
+  const route = useRoute()
+  const themeLocale = useThemeLocaleData()
+  const defaultSidebarItems = useSidebarItems()
+  const hasHydrated = ref(false)
+  const landingSidebarRoot = computed(() =>
+    route.path === MENU_PAGE && typeof route.query.sidebar === 'string'
+      ? findSidebarRoot(themeLocale.value.sidebar, route.query.sidebar)
+      : getLandingSidebarRoot(route.path, hasHydrated.value ? route.query.sidebar : undefined)
+  )
+  const visibleSidebarItems = computed(() => {
+    const root = landingSidebarRoot.value
+    if (!root) return defaultSidebarItems.value
+    const config = themeLocale.value.sidebar?.[root]
+    return config
+      ? resolveArraySidebarItems(config, themeLocale.value.headerDepth ?? 2, root)
+      : defaultSidebarItems.value
+  })
   const showPlatformSwitch = ref(false)
   const showPrivateSwitch = ref(false)
   const showUIKitSwitch = ref(false)
@@ -42,20 +66,32 @@
   }
 
   onMounted(() => {
+    hasHydrated.value = true
     initSubheading()
   })
 
-  watch(pageData, ()=> {
+  watch([pageData, () => route.fullPath], ()=> {
     const pagePath = pageData.value.path
     const isSdkDocPath =
       (pagePath.indexOf('/document/') == 0 || pagePath.indexOf('/v4/') == 0) &&
       pagePath.indexOf('/document/server-side/') < 0
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
-    showPlatformSwitch.value = isSdkDocPath
-    showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
-    showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0
+    const menuRoot = pagePath === MENU_PAGE && typeof route.query.sidebar === 'string'
+      ? route.query.sidebar
+      : ''
+    const isServerMenu = menuRoot.indexOf('/document/server-side/') == 0
+    showPlatformSwitch.value = isSdkDocPath || pagePath.indexOf('/sdk/') == 0 ||
+      ((!isServerMenu && menuRoot.indexOf('/document/') == 0) ||
+        menuRoot.indexOf('/v4/') == 0)
+    showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0 || menuRoot.indexOf('/uikit/') == 0
+    showCallKitSwitch.value = pagePath.indexOf('/callkit/') == 0 || menuRoot.indexOf('/callkit/') == 0
 
-    if(pagePath.indexOf('/product/') == 0) title.value = ''
+    if((menuRoot.indexOf('/document/') == 0 && !isServerMenu) || menuRoot.indexOf('/v4/') == 0) title.value = 'SDK'
+    else if(menuRoot.indexOf('/uikit/') == 0) title.value = 'UIKit'
+    else if(menuRoot.indexOf('/callkit/') == 0) title.value = 'CallKit'
+    else if(isServerMenu) title.value = ''
+    else if(pagePath.indexOf('/sdk/') == 0) title.value = 'SDK'
+    else if(pagePath.indexOf('/product/') == 0) title.value = ''
     else if(pagePath.indexOf('/uikit/') == 0) title.value = 'UIKit'
     else if(pagePath.indexOf('/callkit/') == 0) title.value = 'CallKit'
     else if(pagePath.indexOf('/document/server-side/') == 0) title.value = ''
@@ -69,6 +105,9 @@
 </script>
 <template>
   <Sidebar>
+    <template #default>
+      <SidebarLinks :config="visibleSidebarItems" />
+    </template>
     <template #top>
       <div class="sidebar-header" :class="{'pt20':isNull}">
         <span class="sidebar-title">{{title}}</span>

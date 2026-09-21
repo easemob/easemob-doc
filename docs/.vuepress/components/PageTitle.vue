@@ -22,6 +22,7 @@ const v4DocumentLinks: Record<string, string> = {
 }
 
 const pageData = usePageData()
+const isSidebarMenuPage = computed(() => pageData.value.path === '/breadcrumb/menu.html')
 const versionBanner = ref<HTMLElement | null>(null)
 const versionBannerWidth = ref('100%')
 const isReady = ref(false)
@@ -158,7 +159,7 @@ const openV4Document = (event: MouseEvent) => {
     </aside>
   </div>
 
-  <ThemePageTitle />
+  <ThemePageTitle v-if="!isSidebarMenuPage" />
 </template>
 
 <style scoped>

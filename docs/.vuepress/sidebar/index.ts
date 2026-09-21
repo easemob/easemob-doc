@@ -10,7 +10,42 @@ import { TRANSLATION_SIDEBAR } from "./translation";
 import { STT_SIDEBAR } from "./stt";
 import { SEARCH_SIDEBAR } from "./search";
 
+const prefixSidebarLinks = (items, prefix) => items.map((item) => {
+  if (Array.isArray(item.children)) {
+    return { ...item, children: prefixSidebarLinks(item.children, prefix) }
+  }
+  if (typeof item.link === 'string' && !item.link.startsWith('/')) {
+    return { ...item, link: `${prefix}${item.link}` }
+  }
+  return item
+})
+
+// 注册增值服务总览侧栏，使主题在 /value-added/ 路由上挂载左侧栏；
+// 进入具体服务后，Sidebar.vue 会根据面包屑携带的 sidebar 参数切换到对应服务侧栏。
+const VALUE_ADDED_FALLBACK_SIDEBAR = prefixSidebarLinks(
+  PUSH_SIDEBAR,
+  '/value-added/push/'
+)
+
 export const zhSidebar = sidebar({
+  "/breadcrumb/menu.html": [
+    { text: "菜单", link: "/breadcrumb/menu.html" },
+  ],
+  // Direct visits use a real platform's sidebar; breadcrumb navigation can
+  // replace this fallback with the originating platform's full sidebar.
+  "/sdk/": DOC_V5_SIDEBAR["/document/android/"],
+  "/sdk/v5.html": DOC_V5_SIDEBAR["/document/android/"],
+  "/sdk/v4.html": DOC_SIDEBAR["/v4/android/"],
+  "/uikit/": CHAT_UIKIT_SIDEBAR["/uikit/chatuikit/android/"],
+  "/uikit/chatuikit/": CHAT_UIKIT_SIDEBAR["/uikit/chatuikit/android/"],
+  "/uikit/chatuikit/v4.html": CHAT_UIKIT_SIDEBAR["/uikit/chatuikit/android/"],
+  "/uikit/chatuikit/v2.html": CHAT_UIKIT_SIDEBAR["/uikit/chatuikit/flutter/"],
+  "/uikit/chatuikit/v1.html": CHAT_UIKIT_SIDEBAR["/uikit/chatuikit/harmonyos/"],
+  "/uikit/chatroomuikit/": CHATROOM_UIKIT_SIDEBAR["/uikit/chatroomuikit/android/"],
+  "/callkit/": CALL_KIT_SIDEBAR["/callkit/android/"],
+  "/callkit/v4.html": CALL_KIT_SIDEBAR["/callkit/android/"],
+  "/callkit/v2.html": CALL_KIT_SIDEBAR["/callkit/web/"],
+  "/value-added/": VALUE_ADDED_FALLBACK_SIDEBAR,
   "/product/": [
     { text: "产品动态", link: "product_dynamics.html" },
     { text: "产品简介", link: "introduction.html" },
