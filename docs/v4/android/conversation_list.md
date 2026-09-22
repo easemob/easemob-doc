@@ -2,9 +2,7 @@
 
 <Toc />
 
-对于单聊和群组聊天，用户发送消息时，SDK 会自动创建会话并将会话添加至用户的会话列表。对于聊天室，收发消息时是否创建本地聊天室会话由 `EMOptions#setEnableChatroomConversation` 控制，默认为 `false`，即不创建。
-
-环信服务器和本地均存储会话，你可以获取会话列表。 
+对于单聊、群聊和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表；默认情况下，本地会话列表的返回结果不包含聊天室会话。
 
 ## 前提条件
 
@@ -23,9 +21,7 @@
 - `EMChatManager#getAllConversationsBySort`：一次性获取本地所有会话。
 - `EMChatManager#cleanConversationsMemoryCache`：清除内存中的会话。
 
-## 实现方法
-
-### 从服务器分页获取会话列表
+## 从服务器分页获取会话列表
 
 你可以调用 `asyncFetchConversationsFromServer` 方法从服务端分页获取会话列表，包含单聊和群组聊天会话，不包含聊天室会话。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
@@ -59,6 +55,22 @@ EMClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, cu
     }
 });
 ```
+
+## 从本地获取会话列表
+
+SDK 提供以下方式获取本地会话列表： 
+
+- [分页获取本地会话](#分页获取本地会话)
+- [获取本地所有或筛选的会话](#获取本地所有或筛选的会话)
+- [一次性获取本地所有会话](#一次性获取本地所有会话)
+ 
+初始化时你可以设置以下会话选项：
+
+| 选项 | 描述    | 
+ | :--------- | :----- |
+ | `EMOptions#setEnableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+ | `EMOptions#setDeleteMessagesAsExitChatRoom`   | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。|
+ |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
 
 ### 分页获取本地会话
 
@@ -134,14 +146,6 @@ EMClient.getInstance().chatManager().asyncFilterConversationsFromDB(new EMCustom
     }
 });
 ```
-
-#### 初始化时设置会话相关选项
-
- | 选项 | 描述    | 
- | :--------- | :----- |
- | `EMOptions#setEnableChatroomConversation` | 设置收发聊天室消息时是否创建本地聊天室会话。该配置不影响聊天室消息的正常收发。<br/> - `true`：创建本地聊天室会话。<br/> -（默认）`false`：不创建本地聊天室会话。必须在初始化 SDK 前设置。 |
- | `EMOptions#setDeleteMessagesAsExitChatRoom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `true`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `false`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
- |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
 
 ### 一次性获取本地所有会话
 
