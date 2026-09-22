@@ -57,8 +57,6 @@ NSString *cursor = @"";
 
 ```objectivec
 // 首次查询时，cursor 传 nil 或 @""，表示从第一页开始获取。
-// 获取下一页时，必须传入上一页结果返回的 result.cursor。
-// 若 result.cursor 为 @""，表示已获取到最后一页，无需继续请求。
 NSString *cursor = @"";
 
 // pageSize 表示每页期望返回的会话数量，取值范围为 [1,100]。
@@ -79,7 +77,7 @@ NSInteger pageSize = 20;
     if (nextCursor.length > 0) {
         // 保存 nextCursor，并在获取下一页时将其作为 cursor 参数传入。
     } else {
-        // nextCursor 为空字符串，表示当前页为最后一页。
+        // nextCursor 为空字符串，表示当前页为最后一页，无需继续请求。
     }
 }];
 ```
