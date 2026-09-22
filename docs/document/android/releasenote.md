@@ -92,7 +92,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 默认情况下，收发聊天室消息不再自动创建对应本地会话。
 - 如需收发消息自动创建本地会话，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。
-- 参考文档：[初始化](initialization.html)、[发送](message_send.html) 和 [接收](message_receive.html)。
+- 参考文档：[初始化](/v4/android/initialization.html)、[发送](/v4/android/message_send.html) 和 [接收](/v4/android/message_receive.html)。
   
 **2. 移除第二通道（数据同步 WebSocket）配置属性**
 
@@ -104,7 +104,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 #### 新增功能
 
-- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话) 功能。
+- 支持 [分页获取本地会话列表](/v4/android/conversation_list.html#分页获取本地会话) 功能。
 - 新增默认服务域名切换接口，用于在 IM 官方域名与私有部署域名之间切换：
   - `EMOptions#setUseAgoraChatDomain(boolean)`：设置是否使用 IM 官方默认域名。
   - `EMOptions#getUseAgoraChatDomain()`：查询当前设置。

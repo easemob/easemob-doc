@@ -4,10 +4,6 @@
 
 环信即时通讯 IM Android SDK 通过 `EMMessageListener` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息监听回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。
 
-:::tip
-接收聊天室消息时，是否创建对应的本地聊天室会话由 `EMOptions#setEnableChatroomConversation` 控制。该配置默认为 `false`，即默认不创建本地聊天室会话，但不影响消息接收。如需创建，请在 SDK 初始化前将该配置设为 `true`。详见[初始化](initialization.html#初始化-sdk)。
-:::
-
 ## 前提条件
 
 开始前，请确保满足以下条件：

@@ -53,7 +53,7 @@ SDK 通过会话类型和会话 ID 标识会话：
 
 - 单聊消息：根据对端用户 ID 创建或更新单聊会话。
 - 群聊消息：根据群组 ID 创建或更新群聊会话。
-- 聊天室消息：是否根据聊天室 ID 创建或更新本地聊天室会话由 `EMOptions#setEnableChatroomConversation` 控制，默认为 `false`，即不创建。该配置不影响聊天室消息的正常收发。
+- 聊天室消息：根据聊天室 ID 创建或更新聊天室会话。
 
 收到在线消息后，SDK 会更新会话的最近一条消息、排序和未读数等本地状态。
 
@@ -95,7 +95,6 @@ SDK 提供以下本地会话列表读取方式：
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversationsBySort()` | 返回置顶会话优先的列表；置顶和非置顶会话内部均按最后一条消息的时间戳倒序排列。 |
 | 会话映射 | `getAllConversations()` | 返回以会话 ID 为键的 `Map<String, EMConversation>`。 |
-| 数据库分页 | `asyncGetConversationsFromDB(...)` | 从本地数据库分页获取会话列表。调用前需在初始化 SDK 时将 `EMOptions#setAutoLoadAllConversations(false)`。 |
 | 数据库筛选 | `asyncFilterConversationsFromDB(...)` | 从本地数据库加载全部会话或按自定义条件筛选会话。 |
 
 空会话是没有消息的会话。例如，会话中的全部消息过期、被清除或被撤回后，该会话可能成为空会话。
@@ -149,7 +148,7 @@ EMClient.getInstance()
 
 | 功能 | 主要 API | 说明 |
 | :--- | :--- | :--- |
-| 会话列表 | `getAllConversationsBySort`、`getAllConversations`、`asyncGetConversationsFromDB`、`asyncFilterConversationsFromDB` | 从本地内存或数据库读取会话列表，详见[会话列表](conversation_list.html)。 |
+| 会话列表 | `getAllConversationsBySort`、`getAllConversations`、`asyncFilterConversationsFromDB` | 从本地内存或数据库读取会话列表，详见[会话列表](conversation_list.html)。 |
 | 会话未读数 | `getUnreadMessageCount`、`getUnreadMsgCount`、`asyncClearConversationUnreadMessageCount`、`asyncClearAllConversationUnreadMessageCount` | 获取或清零会话未读数，详见[会话未读数](conversation_unread.html)。 |
 | 会话删除 | `deleteConversation`、`asyncDeleteConversations`、`deleteConversationFromServer`、`asyncDeleteAllMsgsAndConversations` | 删除本地或服务端会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `asyncPinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |
@@ -222,9 +221,7 @@ EMClient.getInstance()
 | [`init`](#通过服务端同步更新会话列表) | `EMClient` | 使用指定配置初始化 SDK。 |
 | [`getAllConversationsBySort`](#会话列表与空会话) | `EMChatManager` | 获取置顶优先排序的本地会话列表。 |
 | [`getAllConversations`](#会话列表与空会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
-| [`asyncGetConversationsFromDB`](#会话列表与空会话) | `EMChatManager` | 从本地数据库分页获取会话列表。 |
 | [`asyncFilterConversationsFromDB`](#会话列表与空会话) | `EMChatManager` | 从本地数据库加载全部会话或筛选会话。 |
-| [`setEnableChatroomConversation`](#通过消息创建或更新会话) | `EMOptions` | 设置收发聊天室消息时是否创建本地聊天室会话。 |
 | [`setLoadEmptyConversations`](#会话列表与空会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`asyncClearConversationUnreadMessageCount`](#当前会话与未读数) | `EMChatManager` | 清零指定会话的本地未读消息数。 |
 | [`asyncClearAllConversationUnreadMessageCount`](#当前会话与未读数) | `EMChatManager` | 清零所有会话的本地未读消息数。 |

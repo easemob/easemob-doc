@@ -8,10 +8,6 @@
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 - 关于消息发送控制，详见 [单聊](/product/message_single_chat.html#单聊消息发送控制)、[群组聊天](/product/message_group.html#群组消息发送控制) 和 [聊天室](/product/message_chatroom.html#聊天室消息发送控制) 的 相关文档。
 
-:::tip
-发送聊天室消息时，是否创建对应的本地聊天室会话由 `EMOptions#setEnableChatroomConversation` 控制。该配置默认为 `false`，即默认不创建本地聊天室会话，但不影响消息发送。如需创建，请在 SDK 初始化前将该配置设为 `true`。详见[初始化](initialization.html#初始化-sdk)。
-:::
-
 ## 前提条件
 
 开始前，请确保满足以下条件：
