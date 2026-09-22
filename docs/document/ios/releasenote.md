@@ -98,11 +98,10 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 
 #### 重大变更
 
-**1. 聊天室会话不再默认自动创建**
+**1. 本地会话列表默认不包含聊天室会话**
 
-默认情况下，收发聊天室消息不再自动创建对应本地会话。
-- 如需收发消息自动创建本地会话，需在 SDK 初始化前将 `EMOptions#enableChatroomConversation` 设置为 `YES`。
-- 参考文档：[初始化](/v4/ios/initialization.html)、[发送](/v4/ios/message_send.html) 和 [接收](/v4/ios/message_receive.html)。
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前将 `EMOptions#enableChatroomConversation` 设置为 `YES`。你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](/v4/ios/conversation_list.html#从本地获取会话列表) 文档。
 
 **2. 移除第二通道（数据同步 WebSocket）配置属性**
 
