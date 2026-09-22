@@ -217,6 +217,14 @@ conn.getGroupInfo({ groupId: 'groupId' }).then((res) => {
 
 SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通过设置此监听，获取群组中的事件。
 
+自 Web SDK 4.24.3 起，以下群组事件返回的 payload 中新增 `userId` 字段，用于标识被操作用户的 ID。不同 `operation` 下 `userId` 的含义如下：
+
+- `removeAdmin`：被移除管理员权限的用户
+- `changeOwner`：新群主
+- `unblockMember`：被移出群黑名单的用户
+- `removeMember`：被移出群组的用户
+- `inviteToJoin`：受邀用户
+
 示例代码如下：
 
 ```javascript
@@ -262,13 +270,17 @@ conn.addEventHandler("eventName", {
       case "muteMember":
         break;
       // 有管理员被移出管理员列表。群主、被移除的管理员和其他管理员会收到该回调。
+      // msg.userId 表示被移除管理员权限的用户 ID。
       case "removeAdmin":
+        console.log("被移除管理员权限的用户 ID：", msg.userId);
         break;
       // 设置管理员。群主、新管理员和其他管理员会收到该回调。
       case "setAdmin":
         break;
-      // 转让群组。新群主会收到该回调。
+      // 转让群组。原群主和新群主会收到该回调。
+      // msg.userId 表示新群主的用户 ID。
       case "changeOwner":
+        console.log("新群主的用户 ID：", msg.userId);
         break;
       // 群组所有者和管理员拉用户进群时，无需用户确认时会触发该回调。被拉进群的用户会收到该回调。
       case "directJoined":
@@ -279,6 +291,11 @@ conn.addEventHandler("eventName", {
       // 群成员（单个或多个）退群。除退群成员外，其他群成员会收到该回调。
       case "membersAbsence":
         break;
+      // 有成员被移出群黑名单。被移出的成员会收到该回调。
+      // msg.userId 表示被移出群黑名单的用户 ID。
+      case "unblockMember":
+        console.log("被移出群黑名单的用户 ID：", msg.userId);
+        break;
       // 用户（单个）加群。除新成员外，其他群成员会收到该回调。
       case "memberPresence":
         break;
@@ -286,7 +303,9 @@ conn.addEventHandler("eventName", {
       case "membersPresence":
         break; 
       // 用户被移出群组。被踢出群组的成员会收到该回调。
+      // msg.userId 表示被移出群组的用户 ID。
       case "removeMember":
+        console.log("被移出群组的用户 ID：", msg.userId);
         break;
       // 当前用户的入群邀请被拒绝。邀请人会收到该回调。例如，用户 B 拒绝了用户 A 的入群邀请，用户 A 会收到该回调。
       case "rejectInvite":
@@ -295,7 +314,9 @@ conn.addEventHandler("eventName", {
       case "acceptInvite":
         break;
       // 当前用户收到了入群邀请。受邀用户会收到该回调。例如，用户 B 邀请用户 A 入群，则用户 A 会收到该回调。
+      // msg.userId 表示受邀用户的用户 ID。
       case "inviteToJoin":
+        console.log("受邀用户的用户 ID：", msg.userId);
         break;
       // 当前用户的入群申请被拒绝。申请人会收到该回调。例如，用户 B 拒绝用户 A 的入群申请后，用户 A 会收到该回调。
       case "joinPublicGroupDeclined":

@@ -58,9 +58,23 @@
 - `sendMessageReadReceipts` 只表示指定消息已读，不会推进会话级已读位置，也不会直接清零本地会话未读数；如需清零未读数，请调用会话未读数清零接口。
 - 从旧版 Web SDK 升级时，应重点检查初始化入口、Manager 注册、登录参数、消息创建、事件监听、返回值读取和已移除 API。
 
+## v4.24.3 Dev 2026-9-20（开发版）
+
+### 新增特性
+
+以下群组事件通过 `onGroupEvent` 回调返回的 payload 中新增 `userId` 字段，用于标识事件的目标用户。不同 `operation` 下 `userId` 的含义如下：
+
+- `removeAdmin`：被移除管理员权限的用户
+- `changeOwner`：新群主
+- `unblockMember`：被移出群黑名单的用户
+- `removeMember`：被移出群组的用户
+- `inviteToJoin`：被邀请加入群组的用户
+
+请参见 [群组事件文档](/v4/web/group_manage.html#监听群组事件)。
+
 ## v4.24.1 Dev 2026-7-10（开发版）
 
-#### 新增功能
+#### 新增特性
 
 支持 [服务端消息搜索](/value-added/search/message_search_web.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 
@@ -68,7 +82,7 @@
 
 ## v4.23.0 Dev 2026-6-10（开发版）
 
-####  新增功能
+####  新增特性
 
 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/web/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 
