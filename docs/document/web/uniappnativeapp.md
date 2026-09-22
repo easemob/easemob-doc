@@ -34,7 +34,12 @@ uni-app 原生 App 中，SDK 通过平台适配层调用 `uni.request`、`uni.co
 5. 注册连接和消息事件；
 6. 使用用户 ID 和 Token 登录；
 7. 在真机上验证消息收发和附件上传；
-8. 使用 HBuilderX 进行云打包或离线打包。
+8. 如需原生离线推送，按 [uni-app 原生离线推送集成](push/uniapp_push.html) 配置推送插件，并在自定义基座或正式包中验证 Token 绑定、退出解绑和通知接收；
+9. 使用 HBuilderX 进行云打包或离线打包。
+
+:::tip
+uni-app 原生离线推送使用 `easemob-push` UTS 插件和 `PushManager.setNativePush()`。标准运行基座不包含插件原生代码，需使用自定义基座或云打包进行验证。
+:::
 
 ## 运行配套 Demo
 
@@ -235,7 +240,7 @@ HBuilderX 支持云打包和离线打包两种方式。
 - 生产环境 `appKey`、REST、消息 WebSocket，以及按需使用的数据同步地址；
 - Android 与 iOS 网络安全策略允许访问 `https://`、`wss://` 服务；
 - Token 由业务服务端获取，前端包内不包含 App Secret；
-- 真机已验证登录、断网重连、前后台切换、消息收发和附件上传。
+- 真机已验证登录、断网重连、前后台切换、消息收发和附件上传；如接入原生离线推送，还应验证 Token 绑定、退出解绑和通知接收。
 
 ### 云打包
 

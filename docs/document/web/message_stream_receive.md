@@ -236,7 +236,7 @@ UI 使用建议如下：
 | [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
 | [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
-| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 | 
+| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
 | [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
 | [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
 | [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
@@ -247,10 +247,10 @@ UI 使用建议如下：
 | [消息编辑](message_modify.html) | 支持 | 编辑已发送消息内容。 |
 | [消息搜索](message_search.html) | 不支持 | 在本地或会话中搜索消息。 |
 | [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
-| 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 | 
-| [离线推送](/document/web/push/push_overview.html) | 不支持 | 用户离线时进行消息推送提醒。Web 端本身不支持离线推送，只支持对移动端离线推送进行配置。 |
+| 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
+| [离线推送](/document/web/push/push_overview.html) | 部分支持 | 浏览器 Web 端不提供原生离线推送；自 SDK 5.1.2 起，uni-app App 可通过 uni-app 原生推送插件接入离线推送，详见[uni-app 原生离线推送集成](/push/uniapp_push.html)。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
-| [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 | 
+| [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 |
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |

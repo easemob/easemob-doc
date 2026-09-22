@@ -1,5 +1,27 @@
 # 离线打包集成 FCM
 
+FCM 是 uni-app 原生离线推送支持的 Android 通道之一。完成本页的 Firebase 和离线打包配置后，在 Web SDK 中将环信控制台中的 FCM 证书名称配置到 `PushManager.setNativePush()` 的 `certificates.fcm`。SDK 会通过 `easemob-push` UTS 插件获取并更新 FCM Token，并在登录后自动完成 Token 绑定；退出登录时自动解绑。
+
+```typescript
+import { ChatClient, PushManager } from 'easemob-websdk';
+import { onRegister, unRegister } from '@/uni_modules/easemob-push';
+
+const pushManager = new PushManager();
+pushManager.setNativePush({
+  plugin: { onRegister, unRegister },
+  certificates: {
+    fcm: 'FCM_CERTIFICATE_NAME',
+  },
+});
+
+const client = ChatClient.init({
+  appKey: 'org#app',
+  managers: [pushManager],
+});
+```
+
+完成登录后，SDK 会按插件回调的 Token 自动绑定或更新；如需手动停用当前设备推送，可调用 `await client.pushManager.removePushToken()`，再次调用 `setNativePush()` 才会重新启用。
+
 ## 配置权限
 
 Android 应用接收通知需要配置以下权限，修改 `AndroidManifest.xml` 文件：

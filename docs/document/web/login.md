@@ -43,15 +43,22 @@ const client = ChatClient.init({
   appKey: 'easemob-demo#chatdemoui',
 });
 
-await client.login({
-  userId: 'username',
-  token: 'token',
-});
+await client.login(
+  {
+    userId: 'username',
+    token: 'token',
+  },
+  {
+    // 可选，默认总超时时间为 30000 毫秒
+    timeoutMs: 60000,
+  }
+);
 ```
 
 登录时需注意以下事项：
 
 - `userId` 和 `token` 均为必填参数。
+- 自 SDK 5.1.2 起，登录超时时间默认为 30 秒，覆盖服务发现、建立连接、重试以及等待登录响应等阶段；可通过 `timeoutMs` 自定义，取值范围为 5000-120000 毫秒。该配置仅影响本次首次登录，不影响登录成功后的断线重连。
 - 建议在调用 `login` 前注册连接事件监听，以便接收连接成功、连接断开以及 Token 生命周期相关事件。
 - 若 SDK 已处于连接中或已连接状态，再次调用 `login` 会失败。
 - 如需切换登录用户，请先调用 `logout` 登出当前用户，再使用新的用户 ID 和 Token 登录。

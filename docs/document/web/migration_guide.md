@@ -641,13 +641,15 @@ await client.chatManager.sendMessage(msg, {
 
 ### 变更说明
 
-推送相关 API 从 `conn.xxx` 迁移到 `client.pushManager.xxx`。新版 SDK 中推送通知方式、免打扰、会话级推送规则和推送语言均由 `PushManager` 管理。
+推送相关 API 从 `conn.xxx` 迁移到 `client.pushManager.xxx`。新版 SDK 中推送通知方式、免打扰、会话级推送规则和推送语言均由 `PushManager` 管理。自 SDK 5.1.2 起，`PushManager` 还支持通过 uni-app 原生推送插件自动管理设备 Push Token。
 
 ### API 对照
 
 | 旧 SDK | 新 SDK | 说明 |
 | :--- | :--- | :--- |
 | `conn.uploadPushToken(params)` | `pushManager.uploadPushToken(params)` | 上传推送 Token。 |
+| - | `pushManager.setNativePush(options)` | 配置 uni-app 原生推送插件，并在登录后自动绑定或更新设备 Push Token。自 SDK 5.1.2 起支持。 |
+| - | `pushManager.removePushToken()` | 停用并解绑当前设备的原生推送 Token；如需恢复，重新调用 `setNativePush()`。自 SDK 5.1.2 起支持。 |
 | `conn.setSilentModeForAll(params)` | `pushManager.setGlobalSilentMode(params)` | 设置全局推送接收规则或免打扰规则。 |
 | `conn.getSilentModeForAll()` | `pushManager.getGlobalSilentMode()` | 获取全局推送配置。 |
 | `conn.setSilentModeForConversation(params)` | `pushManager.setConversationSilentMode(params)` | 设置会话级推送接收规则或免打扰规则。 |

@@ -29,44 +29,52 @@ const chatRoom = client.chatRoomManager.getChatRoom('chatroomId');
 
 你可以通过 `ChatRoom` 单聊天室对象获取聊天室详情：
 
-- `getInfo`：获取当前聊天室详情。
-- `refresh`：刷新并返回当前聊天室详情，相当于 `getInfo`。
+- `getInfo()`：获取当前聊天室详情。
+- `refresh()`：重新请求并返回最新聊天室详情，使用方式与 `getInfo()` 相同。
 
 ```typescript
 const chatRoom = client.chatRoomManager.getChatRoom('chatroomId');
 
+// 获取聊天室详情。
+// 如需重新请求最新详情，也可以调用 chatRoom.refresh()。
 const detail = await chatRoom.getInfo();
-console.log(detail);
 
-const latestDetail = await chatRoom.refresh();
-console.log(latestDetail);
+const announcement = await chatRoom.getAnnouncement();
+const muteStatus = await chatRoom.checkIfInMuteList();
+const isInAllowList = await chatRoom.checkIfInAllowList();
+
+console.log('聊天室详情:', detail);
+console.log('聊天室公告:', announcement.announcement);
+console.log('是否全员禁言:', detail.muteAllMembers);
+console.log('当前用户权限:', detail.permissionType);
+console.log('当前用户禁言状态:', muteStatus);
+console.log('当前用户是否在白名单:', isInAllowList);
 ```
 
 聊天室详情结果为 `ChatRoomDetail`，主要字段如下：
 
-| 分组 | 字段 | 类型 | 描述 |
+| 分组             | 字段             | 类型     | 描述                                                         |
 | :--- | :--- | :--- | :--- |
-| 基础资料 | `chatRoomId` | String | 聊天室 ID。 |
-| 基础资料 | `name` | String | 聊天室名称。 |
-| 基础资料 | `description` | String | 聊天室描述。 |
-| 基础资料 | `owner` | UserInfo | 聊天室所有者资料。 |
-| 基础资料 | `ext` | String | 聊天室扩展信息。 |
-| 基础资料 | `announcement` | String | 聊天室公告。 | 
-| 基础资料 | `createdAt` | Number | 聊天室创建时间戳，具体单位以服务端返回为准。 |
-| 配置 | `maxMembers` | Number | 聊天室最大成员数。 |
-| 配置 | `disabled` | Boolean | 聊天室是否被禁用。 |
-| 基础统计 | `memberCount` | Number | 当前成员数量。 |
-| 当前用户相关信息 | `permissionType` | String | 当前用户在聊天室中的权限类型，可能为 `owner`、`admin`、`member` 或 `none`。 |
-| 当前用户相关信息 | `currentUserStatus` | Object | 当前用户在聊天室中的状态快照，例如是否在白名单中、是否被禁言等。 |
+| 基础资料         | `chatRoomId`     | String   | 聊天室 ID。                                                  |
+| 基础资料         | `name`           | String   | 聊天室名称。                                                 |
+| 基础资料         | `description`    | String   | 聊天室描述。                                                 |
+| 基础资料         | `owner`          | UserInfo | 聊天室所有者资料。                                           |
+| 基础资料         | `ext`            | String   | 聊天室扩展信息。                                             |
+| 基础资料         | `createdAt`      | Number   | 聊天室创建时间戳，具体单位以服务端返回为准。                 |
+| 配置             | `maxMembers`     | Number   | 聊天室最大成员数。                                           |
+| 配置             | `disabled`       | Boolean  | 聊天室是否被禁用。                                           |
+| 配置             | `muteAllMembers` | Boolean  | 是否开启聊天室全员禁言。                                     |
+| 基础统计         | `memberCount`    | Number   | 当前成员数量。                                               |
+| 当前用户相关信息 | `permissionType` | String   | 当前用户在聊天室中的权限类型，可能为 `owner`、`admin`、`member` 或 `none`。 |
 
-`currentUserStatus` 包含如下主要字段：
+在 v5.1.2 及以上版本中，聊天室详情不再返回公告，也不再通过 `currentUserStatus` 返回当前用户的单独禁言状态、白名单状态或禁言到期时间：
 
-| 字段 | 类型 | 描述 |
-| :--- | :--- | :--- |
-| `inAllowlist` | Boolean | 当前用户是否在白名单中。 |
-| `muted` | Boolean | 当前用户是否处于禁言状态。 |
-| `muteExpireAt` | Number | 当前用户禁言到期时间。 |
-| `permissionType` | String | 当前用户在聊天室中的权限类型。 |
+- 获取聊天室公告，请调用 `chatRoom.getAnnouncement()`，详见[获取聊天室公告](room_attributes.html#获取聊天室公告)。
+- 查询当前用户是否在白名单中，请调用 `chatRoom.checkIfInAllowList()`，详见[查询当前用户是否在白名单中](room_members.html#查询当前用户是否在白名单中)。
+- 查询当前用户是否被单独禁言，请调用 `chatRoom.checkIfInMuteList()`，详见[查询当前用户是否被禁言](room_members.html#查询当前用户是否被禁言)。
+- 当前用户的聊天室权限仍通过 `permissionType` 获取。
+- 聊天室是否开启全员禁言通过 `muteAllMembers` 获取。
+- `ChatRoomCurrentUserStatus` 类型随 `currentUserStatus` 字段一并移除。
 
 ### 修改聊天室信息
 
