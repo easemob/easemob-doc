@@ -91,7 +91,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 **1. 聊天室会话不再默认自动创建**
 
 默认情况下，收发聊天室消息不再自动创建对应本地会话。
-- 如需收发消息自动创建本地会话，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。
+- 如需收发消息自动创建本地会话，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前是否允许在收发聊天室消息时创建本地聊天室会话。
 - 参考文档：[初始化](/v4/android/initialization.html)、[发送](/v4/android/message_send.html) 和 [接收](/v4/android/message_receive.html)。
   
 **2. 移除第二通道（数据同步 WebSocket）配置属性**
