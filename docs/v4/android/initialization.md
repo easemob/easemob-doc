@@ -32,7 +32,7 @@ EMClient.getInstance().init(context, options);
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
 | `setAutoAcceptGroupInvitation(boolean value)`                | 设置是否自动接受加群邀请。<br/>`value` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
 | `setAcceptInvitationAlways(boolean value)`                   | 设置是否自动接受加好友邀请。 <br/>`value` 参数表示是否自动接受加好友邀请。 <br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
-| `setEnableChatroomConversation(boolean enable)`              | 设置收发聊天室消息时是否创建本地聊天室会话。该配置不影响聊天室消息的正常收发。<br/> - `true`：创建本地聊天室会话。<br/> -（默认）`false`：不创建本地聊天室会话。 |
+| `setEnableChatroomConversation(boolean enable)`              | 设置收发聊天室消息时是否创建本地聊天室会话。该配置不影响聊天室消息的正常收发。<br/> - `true`：创建本地聊天室会话。<br/> -（默认）`false`：不创建本地聊天室会话。<br/> 你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前是否允许在收发聊天室消息时创建本地聊天室会话。|
 | `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置退出(主动和被动退出)聊天室时是否删除聊天消息。<br/> `delete` 参数表示退出(主动和被动退出)聊天室时是否删除聊天消息： <br/> -（默认）`true`：删除。 <br/> -  `false`：保留。 |
 | `setDeleteMessagesAsExitGroup(boolean delete)`               | 设置退出(主动和被动退出)群组时是否删除聊天消息。<br/>`delete` 参数表示退出群组时是否删除聊天消息： <br/> -（默认）`true`: 退出群组时删除群组消息。 <br/> -  `false`: 退出群组时不删除群组消息。 |
 | `allowChatroomOwnerLeave(boolean allowed)`                   | 设置是否允许聊天室所有者离开并删除会话记录。<br/>`allowed` 参数表示是否允许聊天室所有者离开。<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
