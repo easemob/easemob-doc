@@ -22,11 +22,11 @@
 
 **调整聊天室详情接口的字段**：[聊天室详情接口](room_attributes.html#获取聊天室详情) 不再返回聊天室公告，也不再通过 `currentUserStatus` 返回当前用户是否被单独禁言、是否在白名单中及禁言到期时间：
 - 获取聊天室公告时，请使用 [聊天室公告查询接口](room_attributes.html#获取聊天室公告)。
-  - 查询当前用户是否在白名单中，请参见 [查询当前用户是否在白名单中](room_members.html#查询当前用户是否在白名单中)。
-  - 查询当前用户是否被单独禁言，请参见 [查询当前用户是否被禁言](room_members.html#查询当前用户是否被禁言)。
-  - 当前用户在聊天室中的权限类型仍可通过 `permissionType` 获取。
-  - 聊天室是否开启全员禁言可通过新增的 `muteAllMembers` 获取。
-  - `ChatRoomCurrentUserStatus` 类型随 `currentUserStatus` 字段一并移除。
+- 查询当前用户是否在白名单中，请参见 [查询当前用户是否在白名单中](room_members.html#查询当前用户是否在白名单中)。
+- 查询当前用户是否被单独禁言，请参见 [查询当前用户是否被禁言](room_members.html#查询当前用户是否被禁言)。
+- 当前用户在聊天室中的权限类型仍可通过 `permissionType` 获取。
+- 聊天室是否开启全员禁言可通过新增的 `muteAllMembers` 获取。
+- `ChatRoomCurrentUserStatus` 类型随 `currentUserStatus` 字段一并移除。
 
 ## v5.1.0 Dev 2026-8-21
 
