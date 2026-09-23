@@ -64,7 +64,7 @@ EMClient.getInstance().init(context, options);
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-options.setDnsUrl("https://private-dns.example.com");
+options.setDnsUrl("https://private-dns.example.com/server.json");
 options.enableDNSConfig(true); // 默认值为 true。
 
 EMClient.getInstance().init(context, options);

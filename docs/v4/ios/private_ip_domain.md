@@ -21,7 +21,6 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
 
 // 设置私有云 REST 地址。SDK 根据该地址自动确定数据同步 WebSocket 地址。
 options.restServer = @"https://private-rest.example.com";
-options.usingHttpsOnly = YES; // REST 请求仅使用 HTTPS。
 
 // 设置用于收发 IM 消息的 TCP 长连接地址和端口。
 options.chatServer = @"private-im.example.com";
@@ -41,7 +40,6 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
 
 // 设置私有云 REST 地址。SDK 根据该地址自动确定数据同步 WebSocket 地址。
 options.restServer = @"https://private-rest.example.com";
-options.usingHttpsOnly = YES; // REST 请求仅使用 HTTPS。
 
 // 设置用于收发 IM 消息的 WebSocket 长连接地址和端口。
 options.webSocketServer = @"private-im.example.com";
@@ -61,7 +59,7 @@ options.enableDnsConfig = NO;
 
 ```objectivec
 EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
-options.dnsURL = @"https://private-dns.example.com";
+options.dnsURL = @"https://private-dns.example.com/server.json"
 options.enableDnsConfig = YES; // 默认值为 YES。
 options.usingHttpsOnly = YES; // REST 请求仅使用 HTTPS。
 
