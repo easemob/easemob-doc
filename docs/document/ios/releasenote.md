@@ -94,6 +94,39 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 - 修复发送文件、图片等附件消息时，若未设置 `displayName`，上传附件可能会有 2 MB 大小限制的问题。SDK 会自动使用本地文件名作为显示名。
 - 修复账号在其他设备登录、被服务端移除或被禁用时，本地客户端状态未完整登出的问题。
 
+## v4.25.0 Dev 2026-9-16（开发版）
+
+#### 重大变更
+
+**1. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前将 `EMOptions#enableChatroomConversation` 设置为 `YES`。你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](/v4/ios/conversation_list.html#从本地获取会话列表) 文档。
+
+**2. 移除第二通道（数据同步 WebSocket）配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再支持单独配置。移除以下属性：
+- `syncDataWSHost`
+- `syncDataWSPort`
+
+#### 新增特性
+
+支持 [分页获取本地会话列表](/v4/ios/conversation_list.html#分页获取本地会话) 功能。
+
+#### 优化
+
+- 开启 NTP 对时后，使用 NTP 校准后的时间判断用户 Token 是否过期，避免因设备本地时间偏差导致判断不准确。
+- 本地数据库支持 WAL 模式，提升数据库并发读写性能。
+
+#### 修复
+
+- 修复群组消息回调与群组事件回调顺序异常的问题。
+- 修复遍历 DNS 配置时可能发生 Crash 的问题。
+- 修复私有部署场景下无法多次设置服务域名的问题。
+- 修复网络异常情况下偶现的不再重连服务器的问题。
+- 修复订阅用户信息后，调用 `fetchSubscribedUsers` 返回空数组的问题。
+- 修复关闭 `EMOptions#isAutoTransferMessageAttachments` 后，附件消息的 `remotePath` 为空时，发送消息没有回调的问题。
+
 ## v4.24.1 Dev 2026-9-2（开发版）
 
 #### 优化
@@ -201,6 +234,13 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
    - 新增 `EMGroupManager#getGroupNamecard`，支持从本地内存获取群成员名片。
    - `EMGroupManager#fetchGroupMemberInfoListFromServer` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupManagerDelegate#onUserGroupNamecardChanged`，支持监听群名片变更。
+
+## v4.19.4 Dev 2026-9-22（开发版）
+
+- 修复多设备免打扰信息变更时，SDK 因通知解析异常导致免打扰类型错误的问题。
+- 修复 DNS 链路重建时 `resetLinkVector()` 崩溃的问题。
+- 修复获取并排序会话列表时，因置顶、取消置顶或收到消息引发的 `sort` 崩溃问题。
+- 修复离线消息同步时 `mTrackQueues` 并发访问导致的崩溃问题。
 
 ## v4.19.1 Dev 2026-2-27（开发版）
 

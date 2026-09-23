@@ -2,9 +2,7 @@
 
 <Toc />
 
-对于单聊、群组聊天和聊天室会话，用户发消息时 SDK 会自动创建会话并将会话添加至用户的会话列表。
-
-环信服务器和本地均存储会话，你可以获取会话列表。 
+对于单聊、群组聊天和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表；默认情况下，本地会话列表的返回结果不包含聊天室会话。
 
 ## 前提条件
 
@@ -18,13 +16,12 @@
 环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion`：从服务器获取会话列表。
+- `IEMChatManager#getConversationsFromDBWithCursor`：分页获取本地会话
 - `IEMChatManager#filterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
 - `IEMChatManager#getAllConversations:`：一次性获取本地所有会话。
-- `cleanConversationsMemoryCache`：清除内存中的会话。
+- `IEMChatManager#cleanConversationsMemoryCache`：清除内存中的会话。
 
-## 实现方法
-
-### 从服务器分页获取会话列表
+## 从服务器分页获取会话列表
 
 你可以调用 `IEMChatManager#getConversationsFromServerWithCursor:pageSize:completion` 方法从服务端分页获取会话列表，包含单聊和群组聊天会话，不包含聊天室会话。SDK 按照会话活跃时间（会话的最新一条消息的时间戳）的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
 
@@ -46,6 +43,58 @@ NSString *cursor = @"";
 }];
 ```
 
+## 从本地获取会话列表
+
+SDK 提供以下方式获取本地会话列表：
+
+- [分页获取本地会话](#分页获取本地会话)
+- [获取本地所有或筛选的会话](#获取本地所有或筛选的会话)
+- [一次性获取本地所有会话](#一次性获取本地所有会话)
+
+初始化时你可以设置以下会话选项：
+
+| 选项 | 描述 |
+| :--------- | :----- |
+| `EMOptions#enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。<br/> - `YES`：本地会话列表中包含聊天室会话。<br/> -（默认）`NO`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `EMOptions#deleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`YES`：删除本地消息。<br/> - `NO`：保留本地消息。 |
+| `EMOptions#loadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `YES`：返回空会话。<br/> - `NO`：不包含空会话。 |
+
+### 分页获取本地会话
+
+你可以调用 `IEMChatManager#getConversationsFromDBWithCursor:pageSize:completion` 方法，从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
+
+调用该方法前，需在 SDK 初始化时将 `EMOptions#autoLoadConversations` 设置为 `NO`，关闭本地会话的自动全量加载。否则，SDK 会在登录后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
+
+示例代码如下：
+
+```objectivec
+// 首次查询时，cursor 传 nil 或 @""，表示从第一页开始获取。
+NSString *cursor = @"";
+
+// pageSize 表示每页期望返回的会话数量，取值范围为 [1,100]。
+NSInteger pageSize = 20;
+
+[EMClient.sharedClient.chatManager getConversationsFromDBWithCursor:cursor
+                                                            pageSize:pageSize
+                                                          completion:^(EMCursorResult<EMConversation *> * _Nullable result,
+                                                                       EMError * _Nullable error) {
+    if (error) {
+        // cursor 无效时，error.code 为 EMErrorInvalidParam。
+        return;
+    }
+
+    NSArray<EMConversation *> *conversations = result.list;
+    NSString *nextCursor = result.cursor;
+
+    if (nextCursor.length > 0) {
+        // 保存 nextCursor，并在获取下一页时将其作为 cursor 参数传入。
+    } else {
+        // nextCursor 为空字符串，表示当前页为最后一页，无需继续请求。
+    }
+}];
+```
+
+
 ### 获取本地所有或筛选的会话
 
 你可以调用 `IEMChatManager#filterConversationsFromDB` 方法，获取本地所有会话（`filter` 参数为 `nil`）或实现筛选器闭包根据闭包中的会话对象返回对应的 Boolean 值。
@@ -64,13 +113,6 @@ NSString *cursor = @"";
              //case6: 会话中最后一条消息时间戳
         })
  ```
-
-下表为初始化时设置的会话相关选项：
-
-| 选项 | 描述    | 
- | :--------- | :----- |
- | `EMOptions#deleteMessagesOnLeaveChatroom`   | 通过该选项确定获取本地会话时是否返回聊天室会话。默认情况下，只包含单聊和群组聊天会话。<br/> - `YES`：离开聊天室时删除该聊天室的所有本地消息，则本地会话列表中不包含聊天室会话。<br/> - `NO`：离开聊天室时保留该聊天室的所有本地消息，则本地会话列表中包含聊天室会话。| 
- |`EMOptions#loadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `YES`：返回空会话。<br/> - `NO`：不包含空会话。| 
 
 ### 一次性获取本地所有会话
 
@@ -125,7 +167,7 @@ option.autoLoadConversations = false
               //case4: 是否置顶会话
              //case5: 是否全部消息已读会话
              //case6: 会话中最后一条消息时间戳
-        })
+        // })
 //step 3：当监控到内存较高时（该逻辑开发者自己去实现），调用以下方法释放内存。
 EMClient.shared().chatManager?.cleanConversationsMemoryCache()
 
