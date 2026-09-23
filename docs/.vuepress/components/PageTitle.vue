@@ -15,10 +15,7 @@ const DISMISSED_KEY = 'easemob:v5-sdk-banner-dismissed'
 const v4DocumentLinks: Record<string, string> = {
   android: 'https://doc.easemob.com/v4/android/beginner_guide.html',
   ios: 'https://doc.easemob.com/v4/ios/beginner_guide.html',
-  web: 'https://doc.easemob.com/v4/web/beginner_guide.html',
-  flutter: 'https://doc.easemob.com/v4/flutter/beginner_guide.html',
-  'react-native': 'https://doc.easemob.com/v4/react-native/beginner_guide.html',
-  harmonyos: 'https://doc.easemob.com/v4/harmonyos/beginner_guide.html'
+  web: 'https://doc.easemob.com/v4/web/beginner_guide.html'
 }
 
 const pageData = usePageData()
@@ -32,7 +29,7 @@ let bannerResizeTimer = 0
 
 const currentPlatform = computed(() => {
   const match = pageData.value.path.match(
-    /^\/document\/(android|ios|web|flutter|react-native|harmonyos)(?:\/|$)/
+    /^\/document\/(android|ios|web)(?:\/|$)/
   )
 
   return match?.[1] ?? ''
@@ -138,12 +135,28 @@ const openV4Document = (event: MouseEvent) => {
       :style="{ width: versionBannerWidth }"
     >
       <div class="version-banner-content">
-        <strong class="version-banner-primary">V5 SDK</strong> 架构焕新，集成更轻松，数据管理更高效；<span class="version-banner-secondary">V4.x 仍在维护，<a
+        <p class="version-banner-intro">
+          <strong class="version-banner-primary">V5 SDK 架构焕新</strong>，集成更轻松、数据管理更高效；<span class="version-banner-secondary">V4.x 持续维护中，<a
             class="version-banner-link"
             :href="v4DocumentLink"
             target="_self"
             @click="openV4Document"
           >查看 V4.x 文档</a>。</span>
+        </p>
+        <p class="version-banner-notice">
+          <span class="version-banner-icon" aria-hidden="true">ℹ️</span>
+          <span>V5 SDK 依赖新版数据同步通道，使用前请确认应用所在数据中心/集群是否已支持：</span>
+        </p>
+        <ul class="version-banner-status-list">
+          <li class="version-banner-status">
+            <span class="version-banner-icon" aria-hidden="true">✅</span>
+            <span><strong>已支持：</strong>国内 1 区、国内 2 区、国内 VIP 区、新加坡 1 区</span>
+          </li>
+          <li class="version-banner-status">
+            <span class="version-banner-icon" aria-hidden="true">🕒</span>
+            <span><strong>即将支持：</strong>德国 2 区、美国 1 区（急需上线建议用 V4.x SDK，V5 SDK 支持具体时间请咨询商务）</span>
+          </li>
+        </ul>
       </div>
       <button
         class="version-banner-close"
@@ -172,11 +185,11 @@ const openV4Document = (event: MouseEvent) => {
 
 .version-banner {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   box-sizing: border-box;
   width: 100%;
   min-height: 42px;
-  padding: 9px 10px 9px 16px;
+  padding: 12px 10px 12px 16px;
   color: #253858;
   font-size: 16px;
   line-height: 24px;
@@ -189,7 +202,39 @@ const openV4Document = (event: MouseEvent) => {
 .version-banner-content {
   flex: 1;
   min-width: 0;
-  white-space: nowrap;
+}
+
+.version-banner-intro,
+.version-banner-notice {
+  margin: 0;
+}
+
+.version-banner-notice {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.version-banner-status-list {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.version-banner-status {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+.version-banner-icon {
+  flex: 0 0 20px;
+  width: 20px;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+  font-size: 15px;
+  line-height: 24px;
+  text-align: center;
 }
 
 .version-banner-primary {
@@ -262,12 +307,7 @@ const openV4Document = (event: MouseEvent) => {
 
 @media (max-width: 960px) {
   .version-banner {
-    align-items: flex-start;
     padding-left: 12px;
-  }
-
-  .version-banner-content {
-    white-space: normal;
   }
 
   .version-banner-close {
