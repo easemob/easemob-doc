@@ -1,3 +1,7 @@
+---
+containerClass: product-dynamics-page
+---
+
 # 产品动态
 
 ## 2026-09
