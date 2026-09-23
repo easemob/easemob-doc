@@ -57,6 +57,40 @@ button {
   color: var(--text-color);
 }
 
+/* 产品动态的发版表格：压缩时间列，将空间留给动态描述。 */
+.theme-container.product-dynamics-page .theme-hope-content
+  table:has(> thead > tr > th:nth-child(4):last-child) {
+  th:nth-child(1) {
+    width: 20%;
+  }
+
+  th:nth-child(2) {
+    width: 42%;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 7.5rem;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+
+  th:nth-child(4) {
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-container.product-dynamics-page .theme-hope-content
+    table:has(> thead > tr > th:nth-child(4):last-child) {
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 6rem;
+    }
+  }
+}
+
 /* header */
 .navbar {
   .navbar-start {

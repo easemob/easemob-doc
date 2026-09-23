@@ -1,4 +1,23 @@
+---
+containerClass: product-dynamics-page
+---
+
 # 产品动态
+
+## 2026-09
+
+#### 环信 Web SDK v5.1.2/4.24.3 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Web SDK 5.1.2 开发版发布   | - **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过回调接收经过脱敏处理的结构化 SDK 日志。请参见 [SDK 日志](/document/web/log.html) 文档。<br/> - **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/document/web/push/uniapp_push.html) 和 [离线打包集成 FCM](/document/web/push/uniapp_push_fcm.html) 文档。<br/> -  **支持查询聊天室全员禁言状态**：获取聊天室详情可以判断聊天室是否已开启全员禁言。请参见 [获取聊天室详情](/document/web/room_attributes.html#获取聊天室详情) 文档。<br/> -  **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](/document/web/login.html#登录) 文档。   | 2026-9-20 | [Web SDK 5.1.2 更新日志](/document/web/releasenote.html#v5-1-2-dev-2026-9-20-开发版) |
+| Web SDK 4.24.3 开发版发布   | [群组操作触发的群组事件中标识事件的目标用户](/v4/web/group_manage.html#监听群组事件)，包括管理员权限撤销事件、群组转让事件、成员移出群组和群黑名单事件以及邀请用户加入群组事件。   | 2026-9-20     | [Web SDK 4.24.3 更新日志](/document/web/releasenote.html#v4-24-3-dev-2026-9-20-开发版)   |
+
+#### 环信 Android SDK v4.25.0/iOS SDK v4.25.1 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.25.0/iOS SDK v4.25.1 开发版发布   | - 支持 [分页获取本地会话列表](/v4/android/conversation_list.html#分页获取本地会话) 功能。<br/> - [本地会话列表默认不包含聊天室会话](/v4/android/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性。<br/> - Android 新增默认服务域名切换接口，用于在 IM 官方域名与私有部署域名之间切换。 | 2026-9-18     | - [Android SDK 4.25.0 更新日志](/document/android/releasenote.html#v4-25-1-dev-2026-9-18-开发版) <br/> - [iOS SDK 4.25.1 更新日志](/document/ios/releasenote.html#v4-25-0-dev-2026-9-16-开发版)  |
 
 ## 2026-08
 

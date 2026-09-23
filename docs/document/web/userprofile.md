@@ -75,28 +75,30 @@ console.log(profile.avatarUrl);
 
 ### 从服务端获取用户的所有属性
 
-你可以调用 `getUserInfoByUserId` 从服务端获取一个或多个用户的全部属性。每次调用最多可获取 100 个用户的用户属性。调用成功后，SDK 会将返回的用户属性写入本地缓存，并将结果直接返回给调用方。如需在调用后立即刷新界面，建议直接使用该接口的返回值更新 UI。
+你可以调用 `getUserInfoByUserId` 从服务端获取一个或多个用户的全部属性。每次调用最多可获取 100 个用户的用户属性。自 SDK 5.1.2 起，返回结果按照请求中 `userIds` 的顺序排列；未查询到资料的用户也会返回仅包含 `userId` 的对象。调用成功后，SDK 会将返回的用户属性写入本地缓存，并将结果直接返回给调用方。如需在调用后立即刷新界面，建议直接使用该接口的返回值更新 UI。
 
 ```typescript
 // 每次传入的用户 ID 数量不超过 100 个。
 const users = await client.userInfoManager.getUserInfoByUserId({
-  userIds: ['user1', 'user2'],
+  userIds: ['user1', 'unknown-user', 'user2'],
 });
 
+// 返回顺序与请求一致；未命中用户返回 { userId: 'unknown-user' }。
 console.log(users);
 ```
 
 ### 从服务端获取用户的指定属性
 
-你可以调用 `getUserInfoByAttribute` 获取指定用户的一个或多个属性。调用成功后，SDK 会将返回的用户属性写入本地缓存，并将结果直接返回给调用方。如需在调用后立即刷新界面，建议直接使用接口返回值更新 UI。
+你可以调用 `getUserInfoByAttribute` 获取指定用户的一个或多个属性。自 SDK 5.1.2 起，返回结果按照请求中 `userIds` 的顺序排列；未查询到资料的用户也会返回仅包含 `userId` 的对象。调用成功后，SDK 会将返回的用户属性写入本地缓存，并将结果直接返回给调用方。如需在调用后立即刷新界面，建议直接使用接口返回值更新 UI。
 
 ```typescript
 const users = await client.userInfoManager.getUserInfoByAttribute({
-  userIds: ['user1'],
+  userIds: ['user1', 'unknown-user'],
   attributes: ['nickname', 'avatarUrl'],
 });
 
 console.log(users[0]?.nickname, users[0]?.avatarUrl);
+console.log(users[1]); // { userId: 'unknown-user' }
 ```
 
 ## 从本地内存读取用户属性
