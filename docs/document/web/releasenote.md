@@ -4,10 +4,10 @@
 
 ### 新增特性
 
-- **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过 `onLog` 回调接收经过脱敏处理的结构化 SDK 日志，便于业务侧统一收集和处理。关闭控制台输出不会影响日志回调。请参见 [SDK 日志](log.html) 文档。
-- **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/push/uniapp_push.html) 和 [离线打包集成 FCM](/push/uniapp_push_fcm.html) 文档。
+- **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过 `onLog` 回调接收经过脱敏处理的结构化 SDK 日志，便于业务侧统一收集和处理。关闭控制台输出不会影响日志回调。请参见 [SDK 日志](log.html#控制台输出和日志回调) 文档。
+- **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/document/web/push/uniapp_push.html) 和 [离线打包集成 FCM](/document/web/push/uniapp_push_fcm.html) 文档。
 - **支持查询聊天室全员禁言状态**：聊天室详情新增 `muteAllMembers` 字段，用于判断聊天室是否已开启全员禁言。请参见 [获取聊天室详情](room_attributes.html#获取聊天室详情) 文档。
-- **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](login.html#登录) 文档。
+- **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](login.html#登录-1) 文档。
 
 ### 优化
 
@@ -22,11 +22,11 @@
 
 **调整聊天室详情接口的字段**：[聊天室详情接口](room_attributes.html#获取聊天室详情) 不再返回聊天室公告，也不再通过 `currentUserStatus` 返回当前用户是否被单独禁言、是否在白名单中及禁言到期时间：
 - 获取聊天室公告时，请使用 [聊天室公告查询接口](room_attributes.html#获取聊天室公告)。
-  - 查询当前用户是否在白名单中，请参见 [查询当前用户是否在白名单中](room_members.html#查询当前用户是否在白名单中)。
-  - 查询当前用户是否被单独禁言，请参见 [查询当前用户是否被禁言](room_members.html#查询当前用户是否被禁言)。
-  - 当前用户在聊天室中的权限类型仍可通过 `permissionType` 获取。
-  - 聊天室是否开启全员禁言可通过新增的 `muteAllMembers` 获取。
-  - `ChatRoomCurrentUserStatus` 类型随 `currentUserStatus` 字段一并移除。
+- 查询当前用户是否在白名单中，请参见 [查询当前用户是否在白名单中](room_members.html#查询当前用户是否在白名单中)。
+- 查询当前用户是否被单独禁言，请参见 [查询当前用户是否被禁言](room_members.html#查询当前用户是否被禁言)。
+- 当前用户在聊天室中的权限类型仍可通过 `permissionType` 获取。
+- 聊天室是否开启全员禁言可通过新增的 `muteAllMembers` 获取。
+- `ChatRoomCurrentUserStatus` 类型随 `currentUserStatus` 字段一并移除。
 
 ## v5.1.0 Dev 2026-8-21
 

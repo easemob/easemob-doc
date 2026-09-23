@@ -28,7 +28,7 @@ EMClient.shared().initializeSDK(with: options)
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
 | `autoAcceptGroupInvitation`   可             | 是否自动接受加群邀请。<br/> -（默认）`YES`：自动接受加群申请。 <br/> -  `NO`: 不自动接受加群申请。 |
 | `autoAcceptFriendInvitation`   可     | 设置是否自动接受加好友邀请。 <br/> -（默认）`YES`：自动接受好友邀请。 <br/> -  `NO`：不自动接收好友邀请。 |
-| `enableChatroomConversation`            | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。<br/> - `YES`：本地会话列表中包含聊天室会话。<br/> -（默认）`NO`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `enableChatroomConversation`            | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.0 起支持。<br/> - `YES`：本地会话列表中包含聊天室会话。<br/> -（默认）`NO`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
 | `deleteMessagesOnLeaveChatroom`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`YES`：删除本地消息。 <br/> - `NO`：保留本地消息。 |
 | `deleteMessagesOnLeaveGroup`               | 退出(主动和被动退出)群组时是否删除聊天消息。<br/> -（默认）`YES`: 退出群组时删除群组消息。 <br/> -  `NO`: 退出群组时不删除群组消息。 |
 | `canChatroomOwnerLeave`                   | 是否允许聊天室所有者离开并删除会话记录。<br/> - （默认） `YES`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `NO`：不允许。 |
