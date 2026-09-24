@@ -64,19 +64,20 @@ SDK 提供以下方式获取本地会话列表：
 - [获取本地所有或筛选的会话](#获取本地所有或筛选的会话)
 - [一次性获取本地所有会话](#一次性获取本地所有会话)
  
-初始化时你可以设置以下会话选项：
+初始化时你可以设置 `EMOptions` 中的以下会话选项：
 
 | 选项 | 描述    | 
  | :--------- | :----- |
- | `EMOptions#setEnableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.1 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
- | `EMOptions#setDeleteMessagesAsExitChatRoom`   | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。|
- |`EMOptions#setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - `false`：不包含空会话。| 
+ | `setEnableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.1 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+ | `setDeleteMessagesAsExitChatRoom`   | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。|
+ |`setLoadEmptyConversations` | 获取本地会话时是否包含空会话：<br/> - `true`：返回空会话。<br/> - （默认）`false`：不包含空会话。| 
+ |`setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存：<br/> - （默认）`true`：自动加载全部会话。。<br/> - `false`：不自动加载全部会话。| 
 
 ### 分页获取本地会话
 
 自 SDK 4.25.1 起，你可以调用 `EMChatManager#asyncGetConversationsFromDB` 从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
 
-调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
+调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载，默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
 
 ```java
 // SDK 初始化前关闭自动加载全部本地会话。
