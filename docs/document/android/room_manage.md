@@ -37,12 +37,17 @@
 
 ## 加入聊天室
 
+获取聊天室 ID 后，你可以根据业务需求选择以下方式加入聊天室：
+
+- **普通加入**：仅需加入指定聊天室时，调用基础 `joinChatRoom` 方法。
+- **携带扩展信息加入**：需要在加入聊天室时传递自定义业务信息，或控制是否退出已加入的其他聊天室时，调用 `EMChatRoomManager#joinChatRoom` 重载方法。
+
 用户申请加入聊天室的步骤如下：
 
-1. 调用 `asyncFetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
+1. 调用 `asyncFetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询要加入的聊天室 ID。
+2. 调用基础 `joinChatRoom` 方法并传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室后，其他成员会收到 `onMemberJoined` 回调。
 
-示例代码如下：
+以下示例演示如何获取聊天室列表并通过基础方法加入聊天室：
 
 ```java
 // 获取应用的聊天室列表。
@@ -75,7 +80,18 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-同时，你可以调用 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+### 携带扩展信息加入聊天室
+
+如果需要在加入聊天室时传递自定义业务信息，请调用 `EMChatRoomManager#joinChatRoom` 重载方法。该方法还支持控制用户加入当前聊天室时，是否退出已加入的其他聊天室。
+
+该重载方法包含以下两个重要参数：
+
+- `ext`：加入聊天室时携带的自定义扩展信息。
+- `leaveOtherRooms`：指定加入当前聊天室时是否退出已加入的其他聊天室。
+
+用户成功加入聊天室后，聊天室内的其他成员会收到 `EMChatRoomChangeListener#onMemberJoined` 回调。如果加入聊天室时传入了扩展信息，其他成员可以通过该回调的 `ext` 参数获取。
+
+以下示例演示如何携带扩展信息加入聊天室，并获取其他成员加入聊天室时携带的扩展信息：
 
 ```java
 String ext= "your ext info";
