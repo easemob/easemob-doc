@@ -91,6 +91,26 @@ button {
   }
 }
 
+/* OPPO 推送证书参数表：压缩类型和是否必需列，将空间留给描述。 */
+.theme-container.oppo-push-page .theme-hope-content
+  table:has(> thead > tr > th:nth-child(4):last-child) {
+  th:nth-child(1) {
+    width: 18%;
+  }
+
+  th:nth-child(2) {
+    width: 10%;
+  }
+
+  th:nth-child(3) {
+    width: 12%;
+  }
+
+  th:nth-child(4) {
+    width: 60%;
+  }
+}
+
 /* header */
 .navbar {
   .navbar-start {
