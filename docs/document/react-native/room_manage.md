@@ -67,9 +67,12 @@ ChatClient.getInstance()
 用户申请加入聊天室的步骤如下：
 
 1. 调用 `fetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `joinChatRoomEx` 方法传入聊天室 ID，申请加入对应聊天室。该接口支持加入时设置扩展信息，决定是否退出所有聊天室。加入后，聊天室中的其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。
+2. 调用 `joinChatRoomEx` 方法传入聊天室 ID，申请加入对应聊天室。该接口支持设置加入时携带的自定义扩展信息，并控制用户加入当前聊天室时，是否退出已加入的其他聊天室。加入后，聊天室中的其他成员会收到 `ChatRoomEventListener#onMemberJoined` 事件。
 
-示例代码如下：
+- `ext`：加入聊天室时携带的自定义扩展信息。
+- `exitOtherRoom`：指定加入当前聊天室时是否退出已加入的其他聊天室。
+
+以下示例演示如何携带扩展信息加入聊天室：
 
 ```typescript
 ChatClient.getInstance()

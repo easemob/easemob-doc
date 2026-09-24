@@ -42,7 +42,7 @@ await ChatClient.getInstance.pushManager.syncConversationsSilentMode();
 
 ### 设置推送通知方式
 
-在本机上调用 `ChatPushManager#setConversationSilentMode` 设置会话的推送通知方式，在多设备事件 `ChatMultiDeviceEventHandler#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `ChatMultiDeviceEventHandler#CONVERSATION_MUTE_INFO_CHANGED`。
+在本机上调用 `ChatPushManager#setConversationSilentMode` 设置会话的推送通知方式后，该操作会通过多设备事件`ChatMultiDeviceEventHandler#onConversationEvent` 回调。此时参数 `event` 的值为 `CONVERSATION_MUTE_INFO_CHANGED`，该事件定义在 `ChatMultiDeviceEventHandler` 中。
 
 ```dart
   //对会话设置推送通知方式
