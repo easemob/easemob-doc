@@ -1,3 +1,7 @@
+---
+containerClass: oppo-push-page
+---
+
 # 在即时通讯 IM 中集成 OPPO 推送
 
 环信即时通讯 IM SDK 已集成 OPPO 推送能力。接入 OPPO 推送前，你需要在 OPPO 开发者后台创建应用、在环信控制台配置推送证书，并在 Android 项目中完成推送 SDK 的集成与初始化。
@@ -30,7 +34,7 @@ OPPO 推送分为测试推送和正式推送，两种推送类型的每日推送
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :------- | :--- |
 | `证书名称` | String | 是 | OPPO AppKey。 |
-| `推送密钥` | String | 是 | OPPO MasterSecret。该字段对应 OPPO 应用信息中的 `appserversecret` 字段，而不是客户端 SDK 使用的 AppSecret。 |
+| `推送密钥` | String | 是 | OPPO MasterSecret。<br/>该字段对应 OPPO 应用信息中的 `appserversecret` 字段，而不是客户端 SDK 使用的 AppSecret。 |
 | `应用包名` | String | 是 | 在 OPPO 推送平台注册的 Android 应用包名。 |
 | `Channel ID` | String | 否 | OPPO 通知通道 ID。该参数仅对离线推送有效。 |
 | `Activity` | String | 否 | 用户点击通知后跳转的 Activity。该参数仅对离线推送有效。 |
