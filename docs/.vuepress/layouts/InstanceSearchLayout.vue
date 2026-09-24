@@ -6,7 +6,7 @@
       <template #fallback>
         <div class="search-loading">
           <div class="search-loading-spinner"></div>
-          <p>搜索加载中...</p>
+          <p>Loading search...</p>
         </div>
       </template>
     </Suspense>

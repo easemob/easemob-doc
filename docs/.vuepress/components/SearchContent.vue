@@ -1,6 +1,6 @@
 <template>
   <ais-instant-search
-    index-name="im-beta-easemob"
+    index-name="easyim-doc"
     :search-client="searchClient"
     :initial-ui-state="initialUiState"
   >
@@ -21,7 +21,7 @@
         <div class="search-box">
           <ais-search-box
             autofocus
-            placeholder="热门搜索: 登录、消息扩展"
+            placeholder="Popular searches: login, message extension"
             show-loading-indicator
           />
           <ais-powered-by class="powered-by" />
@@ -101,7 +101,7 @@
             </el-tabs>
 
             <div v-if="nbHits === 0" class="no-results">
-              <p>抱歉，对于搜索词"{{ query }}"，我们没有找到任何结果。</p>
+              <p>Sorry, no results found for "{{ query }}".</p>
             </div>
           </template>
         </ais-state-results>
@@ -115,49 +115,29 @@
 import { liteClient as algoliasearch } from "algoliasearch/lite";
 
 const sdkCategoryMap = {
+  Android: "Android",
   "Android 集成文档": "Android",
+  iOS: "iOS",
   "iOS 集成文档": "iOS",
+  Web: "Web",
   "Web 集成文档": "Web",
-  "HarmonyOS 集成文档": "HarmonyOS",
-  小程序集成文档: "小程序",
-  "Flutter 集成文档": "Flutter",
-  "React Native 集成文档": "React Native",
-  "Windows 集成文档": "Windows",
-  "Unity 集成文档": "Unity",
-  "REST API": "REST API"
-};
-
-const uikitCategoryMap = {
-  "UIKit-Android 集成文档": "Android",
-  "UIKit-iOS 集成文档": "iOS",
-  "UIKit-Web 集成文档": "Web",
-  "UIKit-HarmonyOS 集成文档": "HarmonyOS",
-  "UIKit-Flutter 集成文档": "Flutter",
-  "UIKit-React Native 集成文档": "React Native",
-  "UIKit-uniapp": "Uniapp"
+  rest: "REST API"
 };
 
 const productCategoryMap = {
-  产品介绍: "产品功能",
-  内容审核: "内容审核",
-  常见方案: "常见方案",
-  即时推送: "即时推送",
-  "使用 MCP 集成": "使用 MCP 集成"
+  Product: "Product",
+  产品介绍: "Product",
+  console: "Console"
 };
 
 const apiReferenceCategoryMap = {
-  "Android API参考": "Android",
-  "IOS API参考": "IOS",
-  "Web API参考": "Web",
-  "Harmony API参考": "Harmony",
-  "Flutter API参考": "Flutter",
-  "React Native API参考": "React Native",
-  "Unity and Windows API参考": "Unity and Windows"
+  "Android API Reference": "Android",
+  "iOS API Reference": "iOS",
+  "Web API Reference": "Web"
 };
 
 const categoryMap = {
   ...sdkCategoryMap,
-  ...uikitCategoryMap,
   ...productCategoryMap,
   ...apiReferenceCategoryMap
 };
@@ -168,20 +148,17 @@ function buildFilter(map) {
 
 const productFilters = buildFilter(productCategoryMap);
 const sdkFilters = buildFilter(sdkCategoryMap);
-const uikitFilters = buildFilter(uikitCategoryMap);
 const apiReferenceFilters = buildFilter(apiReferenceCategoryMap);
 
 const filtersMap = {
   product: productFilters,
   sdk: sdkFilters,
-  uikit: uikitFilters,
   "api-reference": apiReferenceFilters
 };
 
 const categoriesMap = {
   product: Object.keys(productCategoryMap),
   sdk: Object.keys(sdkCategoryMap),
-  uikit: Object.keys(uikitCategoryMap),
   "api-reference": Object.keys(apiReferenceCategoryMap)
 };
 
@@ -204,10 +181,10 @@ export default {
       categoryMap,
       searchClient: algoliasearch(
         "5K8UTB3JVE",
-        "df9e938d06f6531ce8dd8de71f907f0d"
+        "704ce0264ed7d6fd61300b1fddf0e14a"
       ),
       initialUiState: {
-        ["im-beta-easemob"]: {
+        ["easyim-doc"]: {
           query: queryParam,
           refinementList: {
             type: ["content"],
@@ -219,10 +196,9 @@ export default {
       activeCategoryType: "product",
       hierarchyLevels: ["lvl0", "lvl1", "lvl2", "lvl3", "lvl4", "lvl5"],
       tabs: [
-        { name: "product", label: "产品介绍" },
-        { name: "sdk", label: "SDK & REST 集成" },
-        { name: "uikit", label: "UIKit 集成" },
-        { name: "api-reference", label: "API参考" }
+        { name: "product", label: "Product" },
+        { name: "sdk", label: "SDK & REST" },
+        { name: "api-reference", label: "API Reference" }
       ]
     };
   },

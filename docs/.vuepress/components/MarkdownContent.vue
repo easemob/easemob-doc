@@ -13,21 +13,21 @@ const frontmatter = pageData.value.frontmatter
 const redirectUri = frontmatter.pageUri
 
 const nameMap = {
-  android: 'Android 集成文档',
-  ios: 'iOS 集成文档',
-  web: 'Web 集成文档',
-  applet: '小程序集成文档',
-  harmonyos: 'HarmonyOS 集成文档',
-  flutter: 'Flutter 集成文档',
-  'react-native': 'React Native 集成文档',
-  unity: 'Unity 集成文档',
-  windows: 'Windows 集成文档',
+  android: 'Android',
+  ios: 'iOS',
+  web: 'Web',
+  applet: 'Mini Program',
+  harmonyos: 'HarmonyOS',
+  flutter: 'Flutter',
+  'react-native': 'React Native',
+  unity: 'Unity',
+  windows: 'Windows',
   'server-side': 'REST API',
-  product: '产品介绍',
-  push: '即时推送',
-  moderation: '内容审核',
-  aigc: '使用 MCP 集成',
-  solution_common: '常见方案',
+  product: 'Product',
+  push: 'Push',
+  moderation: 'Moderation',
+  aigc: 'MCP',
+  solution_common: 'Solution',
 }
 
 const getCategoryFromPath = () => {
