@@ -6,7 +6,7 @@ import { useThemeLocaleData } from "vuepress-theme-hope/composables/index";
 
 const themeData = useThemeLocaleData();
 const extraNavList = computed(() => themeData.value.extra_nav || []);
-const showDocumentSearch = false;
+const showDocumentSearch = true;
 
 const SESSION_COOKIE_NAME = "u_session_name";
 const SESSION_COOKIE_DOMAINS = [".easyim.ai", ".easemob.com"];
@@ -49,7 +49,7 @@ const syncUserSession = () => {
 };
 
 const handleSearch = () => {
-  const keyword = document.getElementById("meta-category")?.innerText;
+  const keyword = document.getElementById("meta-category")?.innerText?.trim();
   const url = keyword
     ? `/form/search.html?s=${encodeURIComponent(keyword)}`
     : "/form/search.html";
@@ -127,7 +127,7 @@ const handleRegister = () => {
       <div v-if="showDocumentSearch" class="search-box" @click="handleSearch">
         <div class="search-input-wrapper">
           <div class="search-icon"></div>
-          <div class="search-input">搜索关键词</div>
+          <div class="search-input">Search</div>
         </div>
       </div>
 

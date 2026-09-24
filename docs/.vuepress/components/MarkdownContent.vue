@@ -4,6 +4,7 @@ import { usePageData } from '@vuepress/client'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import pages from '@temp/pages'
+import { pathSegmentToCategory } from '../utils/docCategory.js'
 
 const redirectPageKey = ref('')
 const dialogVisible = ref(false)
@@ -12,23 +13,7 @@ const router = useRouter()
 const frontmatter = pageData.value.frontmatter
 const redirectUri = frontmatter.pageUri
 
-const nameMap = {
-  android: 'Android',
-  ios: 'iOS',
-  web: 'Web',
-  applet: 'Mini Program',
-  harmonyos: 'HarmonyOS',
-  flutter: 'Flutter',
-  'react-native': 'React Native',
-  unity: 'Unity',
-  windows: 'Windows',
-  'server-side': 'REST API',
-  product: 'Product',
-  push: 'Push',
-  moderation: 'Moderation',
-  aigc: 'MCP',
-  solution_common: 'Solution',
-}
+const nameMap = pathSegmentToCategory
 
 const getCategoryFromPath = () => {
   const pathSegments = pageData.value.path.split('/')

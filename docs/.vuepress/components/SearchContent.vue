@@ -113,20 +113,17 @@
 
 <script>
 import { liteClient as algoliasearch } from "algoliasearch/lite";
+import { getTabBySParam, isValidSParam } from "../utils/docCategory.js";
 
 const sdkCategoryMap = {
   Android: "Android",
-  "Android 集成文档": "Android",
   iOS: "iOS",
-  "iOS 集成文档": "iOS",
   Web: "Web",
-  "Web 集成文档": "Web",
   rest: "REST API"
 };
 
 const productCategoryMap = {
   Product: "Product",
-  产品介绍: "Product",
   console: "Console"
 };
 
@@ -175,7 +172,9 @@ export default {
   data() {
     const route = this.$route;
     const queryParam = route.query.query || "";
-    const categoryParam = route.query.s;
+    const categoryParam = Array.isArray(route.query.s)
+      ? route.query.s[0]
+      : route.query.s || "";
 
     return {
       categoryMap,
@@ -188,7 +187,7 @@ export default {
           query: queryParam,
           refinementList: {
             type: ["content"],
-            category: categoryMap[categoryParam] ? [categoryParam] : []
+            category: isValidSParam(categoryParam) ? [categoryParam] : []
           }
         }
       },
@@ -204,7 +203,9 @@ export default {
   },
   created() {
     this.activeCategoryType = this.getCategoryTypeByCategoryItem(
-      this.$route.query.s
+      Array.isArray(this.$route.query.s)
+        ? this.$route.query.s[0]
+        : this.$route.query.s
     );
   },
   methods: {
@@ -225,10 +226,7 @@ export default {
       });
     },
     getCategoryTypeByCategoryItem(categoryItem) {
-      for (const [type, categories] of Object.entries(categoriesMap)) {
-        if (categories.includes(categoryItem)) return type;
-      }
-      return "product";
+      return getTabBySParam(categoryItem);
     }
   }
 };
