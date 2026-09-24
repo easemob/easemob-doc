@@ -51,6 +51,11 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 303    |      SERVER_UNKNOWN_ERROR       | 服务请求的通用错误码：当请求服务器未成功时的默认错误，该错误发生情况较多，需要根据日志进一步排查。 |
 | 304    |    SERVER_GET_DNSLIST_FAILED    | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 |
 | 305    |    SERVER_SERVICE_RESTRICTED    | 当前 app 被禁用：若在 app 被禁用时调用 API 会返回该错误。 |
+| 350    |       CONNECTION_TIMEOUT        | 连接服务器超时。 该错误码自 SDK v1.15.0 起支持。 |
+| 351    |      CONNECTION_DNS_ERROR       | 连接服务器时发生 DNS 错误。该错误码自 SDK v1.15.0 起支持。 |
+| 352    |       CONNECTION_IO_ERROR       | 连接服务器时发生 IO 错误。该错误码自 SDK v1.15.0 起支持。 |
+| 353    |   CONNECTION_STREAM_CLOSED     | 连接服务器时流被关闭。该错误码自 SDK v1.15.0 起支持。 |
+| 354    | CONNECTION_PROVISION_TIMEOUT   | 连接服务器时认证超时。该错误码自 SDK v1.15.0 起支持。 |
 | 400    |         FILE_NOT_FOUND          | 文件未找到：例如，用户获取不到日志文件，或者下载附件失败时提示该错误。 |
 | 401    |          FILE_INVALID           | 文件异常：例如，当上传消息附件或者群组共享文件时可能会提示该错误。 |
 | 402    |       FILE_UPLOAD_FAILED        | 上传文件错误：例如，上传消息附件失败时提示该错误。         |
@@ -101,10 +106,10 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 1002   |    CONTACT_REACH_LIMIT_PEER     | 受邀者的好友数量已达到上限。                   |
 | 1100   |  PRESENCE_PARAM_LENGTH_EXCEED   | 参数长度超出限制：调用 Presence 相关方法时参数长度超出限制。 |
 | 1101   | PRESENCE_CANNOT_SUBSCRIBE_YOURSELF | 不能订阅你自己的状态。                    |
-| 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。                        |
-| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。 |
-| 1112   |      TRANSLATE_USAGE_LIMIT      | 翻译用量达到上限。     |
-| 1113   |     TRANSLATE_MESSAGE_FAIL      | 消息翻译失败。 |
+| 1110   |     TRANSLATE_PARAM_INVALID     | 翻译参数错误。该错误码自 SDK v1.15.0 起支持。                       |
+| 1111   |  TRANSLATE_SERVICE_NOT_ENABLE   | 翻译服务未启用。该错误码自 SDK v1.15.0 起支持。<br/> 使用翻译服务前，应在[环信控制台](https://console.easemob.com/user/login)开启该服务。 |
+| 1112   |      TRANSLATE_USAGE_LIMIT      | 翻译用量达到上限。该错误码自 SDK v1.15.0 起支持。    |
+| 1113   |     TRANSLATE_MESSAGE_FAIL      | 消息翻译失败。该错误码自 SDK v1.15.0 起支持。 |
 | 1200   |     MODERATION_FAILED           | 第三方内容审核服务的消息审核结果为“拒绝”。 |
 | 1299   |     THIRD_SERVER_FAILED         | 除第三方内容审核服务的其他服务的消息审核结果为“拒绝”。 |
 | 1300   |      REACTION_REACH_LIMIT       | 该消息的 Reaction 数量已达到限制。      |

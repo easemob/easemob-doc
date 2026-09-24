@@ -1,9 +1,56 @@
 # HarmonyOS IM SDK 更新日志
 
+## v1.15.0 Dev 2026-9-24（开发版）
+
+#### 重大变更
+
+**1. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 详见 [获取本地会话列表](https://doc.easemob.com/v4/android/conversation_list.html#从本地获取会话列表) 文档。
+
+**2. 移除数据同步 WebSocket 配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再单独配置。移除`ChatOptions` 的 `setSyncDataWebSocketServer`、`getSyncDataWebSocketServer`、`setSyncDataWebSocketPort` 和 `getSyncDataWebSocketPort`。
+
+#### 新增特性
+
+- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/android/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+- 支持 [服务端消息搜索](/value-added/search/message_search_android.html)，可按单个/多个关键字或消息类型搜索。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
+- 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.md)。
+- 支持 [分页从本地数据库获取会话](conversation_list.html#分页获取本地会话)。
+- 支持 [控制登录成功后是否自动将全部会话加载到内存](conversation_list.html#分页获取本地会话)。
+- 支持 SDK 初始化前配置自定义 NTP 服务器：`ChatOptions` 新增 `setNtpServers`  和 `getNtpServers` 两个 API。
+- 新增以下连接和翻译相关的错误码。详情请参见 [错误码](error.html)
+  - `CONNECTION_TIMEOUT` (350)：连接服务器超时。
+  - `CONNECTION_DNS_ERROR` (351)：连接服务器时发生 DNS 错误。
+  - `CONNECTION_IO_ERROR` (352)：连接服务器时发生 IO 错误。
+  - `CONNECTION_STREAM_CLOSED` (353)：连接服务器时流被关闭。
+  - `CONNECTION_PROVISION_TIMEOUT` (354)：连接服务器时认证超时。
+  - `TRANSLATE_PARAM_INVALID` (1110)：翻译参数错误。
+  - `TRANSLATE_SERVICE_NOT_ENABLE` (1111)：翻译服务未启用。使用翻译服务前，应在 [环信控制台](https://console.easemob.com/user/login) 开启该服务。
+  - `TRANSLATE_USAGE_LIMIT` (1112)：翻译用量达到上限。
+  - `TRANSLATE_MESSAGE_FAIL` (1113)：消息翻译失败。
+
+#### 优化
+
+- `changeAppkey` 和 `changeAppId` 的参数为空时，返回 `INVALID_PARAM` 错误码。
+- 优化推送 token 上传策略：主动登录时，即使推送 token 未发生变化也会重新上传；自动登录时，若当前设备不是新设备且推送 token 未发生变化，则跳过上传。若上传失败，SDK 会清除本地缓存的推送 token。
+- 使用经 NTP 校准后的时间判断 token 是否过期，提升设备系统时间不准确时的判断准确性。
+- 优化底层连接、登录、DNS 及 REST 请求的超时策略，延长弱网环境下的请求等待时间。
+
+#### 修复
+
+- 修复更新或拉取群名片时，服务端未返回 `name_card` 字段或返回空群名片会被判定为操作失败的问题。
+- 修复修改消息时可能复用协议层 `meta ID`，导致请求标识重复的问题。
+- 修复附件秒传的 MD5 预检未遵循服务端开关的问题，并为 HTTP 请求补充 `Content-Type` 和 `X-Request-Id` 请求头。
+- 修复并发访问 DNS 链路优先级时可能出现异常的问题。
+- 修复在线状态时间字段未设置默认值的问题。
+- 修复关闭聊天室会话展示后，SDK 不再维护内部聊天室会话的问题。关闭展示后，SDK 仍会在内部维护聊天室会话，但不会在会话列表及本地分页查询结果中展示。
+
 ## v1.14.1 Dev 2026-9-4（开发版）
 
-1. 修复退出登录或切换账号后，未完成的群组或聊天室 REST 请求仍根据返回结果更新本地状态的问题。
-2. 修复鸿蒙平台将非 Token 过期导致的 HTTP 401 错误误判为 Token 过期，并触发相应回调的问题。
+- 修复退出登录或切换账号后，未完成的群组或聊天室 REST 请求仍根据返回结果更新本地状态的问题。
+- 修复鸿蒙平台将非 Token 过期导致的 HTTP 401 错误误判为 Token 过期，并触发相应回调的问题。
 
 ## v1.14.0 Dev 2026-8-26（开发版）
 
@@ -30,9 +77,9 @@
 
 #### 修复
 
-1. 修复 `checkDns` 递归调用可能导致死锁的问题。
-2. 修复离线消息同步过程中并发访问同步队列可能导致崩溃的问题。
-3. 修复离线消息同步完成回调在持有同步队列锁时触发，可能导致锁等待和卡顿的问题。
+- 修复 `checkDns` 递归调用可能导致死锁的问题。
+- 修复离线消息同步过程中并发访问同步队列可能导致崩溃的问题。
+- 修复离线消息同步完成回调在持有同步队列锁时触发，可能导致锁等待和卡顿的问题。
 
 #### 注意
 
