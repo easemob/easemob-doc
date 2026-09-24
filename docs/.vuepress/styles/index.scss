@@ -37,12 +37,12 @@ h2,h3,h4 {
   }
 }
 
-/* Keep inline code tokens intact. If a token does not fit at the end of a
- * line, move the whole token to the next line instead of splitting it. */
+/* Keep short inline code tokens intact, while allowing long API signatures
+ * and other oversized tokens to wrap instead of distorting nearby prose. */
 :not(pre) > code {
-  white-space: nowrap;
+  white-space: normal;
   word-break: normal;
-  overflow-wrap: normal;
+  overflow-wrap: break-word;
 }
 /* 强制按钮等表单元素继承父级容器（最终是 body）的字体设置 */
 button {
