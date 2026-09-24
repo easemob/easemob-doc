@@ -10,7 +10,7 @@
 
 - [H5](https://uniapp-h5.easemob.com/)；
 - [Android](https://www.pgyer.com/unggU6xu)；
-- [iOS](https://www.pgyer.com/LvuQvWCN)；
+- [iOS](https://testflight.apple.com/join/sKxYtFDv)；
 
 ## UIKit 基本项目结构
 
