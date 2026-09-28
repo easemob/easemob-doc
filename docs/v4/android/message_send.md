@@ -90,25 +90,56 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 发送图片消息的流程如下：
 
-1. 获取图片的本地 URI。
+1. 获取图片的本地文件路径或 URI。
 2. 调用 `EMMessage#createImageSendMessage` 创建图片消息。
    
-   创建消息时，需要传入图片的本地 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+   创建消息时，需要传入图片的本地文件路径或 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
 
    `sendOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+
+   自 SDK v4.19.4 起，发消息时支持手动指定图片消息的宽高。你可以调用 `EMImageMessageBody#setSize(int width, int height)` 设置，单位为像素。开启自动附件上传时，SDK 会在发送前根据实际上传的图片资源自动获取并设置图片宽高，因此手动设置的值可能会被覆盖。若需要确保手动设置的宽高生效，请关闭自动附件上传，并由业务自行上传图片后设置远程 URL。
 
 3. 调用 `EMChatManager#sendMessage` 发送消息。
    
    如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
 
 ```java
-// `imageUri` 为图片本地资源标识符，`false` 为发送大图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
-EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
-// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
-// message.setChatType(ChatType.GroupChat);
-// 发送消息
+// `imagePath` 为图片的本地文件路径或 URI。
+String imagePath = selectedImagePath;
+if (imagePath == null || imagePath.isEmpty()) {
+    throw new IllegalArgumentException("图片路径不能为空");
+}
+
+// `false` 表示发送大图；若需要发送原图，传入 `true`。
+EMMessage message = EMMessage.createImageSendMessage(imagePath, false, conversationId);
+if (message == null) {
+    throw new IllegalArgumentException("图片文件不存在或不可读取");
+}
+
+// 仅在需要手动指定图片宽高时设置，单位为像素。
+// 以下为示例值，实际使用时请替换为从图片元数据中获取的宽高。
+int width = 1920;
+int height = 1080;
+EMImageMessageBody imageBody = (EMImageMessageBody) message.getBody();
+imageBody.setSize(width, height);
+
+// 单聊默认为 Chat；发送群聊或聊天室消息时，设置为 GroupChat 或 ChatRoom。
+// message.setChatType(EMMessage.ChatType.GroupChat);
+// message.setChatType(EMMessage.ChatType.ChatRoom);
+
+// 发送消息。
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
+
+**关键参数**
+
+| 参数 | 类型 | 必填/可选 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `imagePath` | `String` | 必填 | 图片的本地文件路径或 URI。 |
+| `sendOriginalImage` | `boolean` | 必填 | 是否发送原图。`true` 表示上传原图，`false` 表示上传大图。 |
+| `conversationId` | `String` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `width` | `int` | 可选 | 图片宽度，单位为像素。仅在需要手动指定图片尺寸时设置。开启自动附件上传时，SDK 可能根据实际上传资源重新设置该值。 |
+| `height` | `int` | 可选 | 图片高度，单位为像素。仅在需要手动指定图片尺寸时设置。开启自动附件上传时，SDK 可能根据实际上传资源重新设置该值。 |
 
 ### 发送 GIF 图片消息
 
