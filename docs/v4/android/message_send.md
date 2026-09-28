@@ -90,16 +90,17 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 发送图片消息的流程如下：
 
-1. 获取图片的本地 URI。
+1. 获取图片的本地文件路径或 URI。
+
 2. 调用 `EMMessage#createImageSendMessage` 创建图片消息。
-   
-   创建消息时，需要传入图片的本地 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
 
-   `sendOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+   创建消息时，需要传入图片的本地文件路径或 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
 
-3. 调用 `EMChatManager#sendMessage` 发送消息。
-   
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+    `sendOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
+
+3. 调用 `EMChatManager#sendMessage` 发送图片消息。
+
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件，服务器会自动生成缩略图。如果关闭了自动上传，需要业务自行上传图片，并设置图片远程 URL 后再发送消息。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ```java
 // `imageUri` 为图片本地资源标识符，`false` 为发送大图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
