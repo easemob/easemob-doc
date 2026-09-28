@@ -1,5 +1,40 @@
 # iOS IM SDK 更新日志
 
+## v5.1.0 Dev 2026-9-24
+
+## 重大变更  
+
+**1. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用 `EMOptions#enableChatroomConversation(YES)`。你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+
+详见 [获取会话列表](/v4/android/conversation_list.html#获取会话列表) 文档。
+
+**2. 移除数据同步 WebSocket 配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再需要单独配置。以下属性已移除：
+- `syncDataWSHost`
+- `syncDataWSPort` 
+
+#### 新增特性
+
+支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
+
+#### 优化
+
+- 开启 NTP 对时后，使用 NTP 校准后的时间判断用户 Token 是否过期，避免因设备本地时间偏差导致判断不准确。
+- 本地数据库支持 WAL 模式，提升数据库并发读写性能。
+
+#### 修复
+
+- 修复群组消息回调与群组事件回调顺序异常的问题。
+- 修复遍历 DNS 配置时可能发生崩溃的问题。
+- 修复私有部署场景下无法多次设置服务域名的问题。
+- 修复网络异常情况下偶现的无法重新连接服务器的问题。
+- 修复订阅用户信息后，调用 `fetchSubscribedUsers` 返回空数组的问题。
+- 修复关闭 `EMOptions#isAutoTransferMessageAttachments` 后，附件消息的 `remotePath` 为空时，发送消息没有回调的问题。
+- 修复多设备设置免打扰后，因多设备同步解析出错导致会话免打扰信息不准确的问题。
+
 ## v5.0.0 Dev 2026-8-12
 
 本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM iOS SDK 4.x 到 5.x 迁移指南](migration_guide.html)。

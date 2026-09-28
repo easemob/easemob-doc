@@ -1,5 +1,67 @@
 # Android IM SDK 更新日志
 
+## v5.1.0 Dev 2026-09-24
+
+## 重大变更
+
+**1. 登录后默认自动同步会话**
+
+`EMOptions#setDataSyncType` 的默认值由 `NONE` 调整为 `CONVERSATIONS`，即登录后默认自动同步会话列表。
+
+**2. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+
+详见 [获取会话列表](conversation_list.html#获取会话列表) 文档。
+
+**3. 移除数据同步 WebSocket 配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再需要单独配置。以下接口已移除：
+- `EMOptions#setSyncDataWebSocketServer(String)`
+- `EMOptions#getSyncDataWebSocketServer()`
+- `EMOptions#setSyncDataWebSocketPort(int)`
+- `EMOptions#getSyncDataWebSocketPort()`
+
+## 新增特性
+
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
+- 支持[查询群组邀请确认配置](group_manage.html#邀请用户入群)：新增 `EMGroup#isInviteNeedConfirm()`，用于获取群组“邀请成员是否需要被邀请人确认”的配置。
+- 新增多设备登录场景下的 [群组信息更新事件](multi_device.html#监听多设备事件) `GROUP_UPDATE`（事件码 `34`）。
+
+## 优化
+
+- **本地数据库性能优化**
+   - SQLCipher 数据库默认启用 WAL 模式，已移除开关，始终开启；
+   - 单读连接升级为有界读连接池（容量 3），无过滤条件的会话加载走读连接池，提升并发读性能；
+   - 群成员名片（remark）缓存改为懒加载；
+   - 会话/群组同步时间戳读取适配 WAL，并优化 `performMigrationToVersion51` 迁移流程。
+
+- **网络超时调优**
+   - TCP/WebSocket 单次连接超时：5s 调整为 20s；
+   - 非附件类 HTTP 请求超时：10s 调整为 20s；
+   - 整体登录超时：30s 调整为 70s；
+   - `sendMessage` 内部重连等待与 DNS 列表获取超时统一为 20s。
+
+- **Token 过期判断使用 NTP 校准时间**，避免设备本地时间不准导致 token 过期误判。
+- **安全与合规**：
+   - `libcipherdb.so` 按 NDK 29 重新编译；
+   - DoH 分片上传启用证书校验。
+
+## 修复
+
+1. 修复推送 token 上传与登出并发时的 NPE 崩溃，以及过期上传任务污染本地 token 状态的问题。
+2. 修复拉取漫游消息后未更新会话最后一条消息的问题。
+3. 修复收到空 `msgid` 消息导致的崩溃。
+4. 修复未登录状态下调用 `asyncDeleteAllMsgsAndConversations` 导致的崩溃。
+5. 修复附件远端路径非法时 `sendMessage` 无回调的问题。
+6. 消息内容为空时不再入库、不再回调上层；数据库读写路径拒绝空 body 消息，修复相关异常。
+7. 修复更新用户属性（`userinfo`）时的崩溃，以及 `userinfo` 回调中的 JNI 局部引用泄漏。
+8. 修复信号量/定时器生命周期问题导致的重连卡死与偶发死锁（`EMSemaphoreTracker`/`EMTimer`/连接等待被替换后的时序问题）。
+9. 修复自己退群/群被销毁时本地清理与回调线程的时序崩溃；修复 MUC/ROSTER 事件先于消息落盘分发导致的消息乱序。
+10. 修复第二次设置私有 REST 服务器地址不生效的问题。
+11. 修复 `resetLinkVector()` 崩溃；修复 [Presence](presence.md) 时间戳未初始化及 `pageSize` 未校验的问题。
+12. 修复附件上传 HTTP 超时单位换算错误（秒未换算为毫秒导致超时设置偏小）。
+
 ## v5.0.0 Dev 2026-8-12
 
 本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Android SDK 4.x 到 5.x 迁移指南](migration_guide.html)。

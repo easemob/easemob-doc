@@ -185,6 +185,29 @@ EMClient.getInstance()
 
 邀请被接受后，邀请人会收到 `EMGroupChangeListener#onInvitationAccepted` 回调；邀请被拒绝后，邀请人会收到 `EMGroupChangeListener#onInvitationDeclined` 回调。
 
+自 SDK v5.1.0 起，你可以通过 `EMGroup#isInviteNeedConfirm()` 查询已获取的群组当前是否要求受邀用户确认：
+
+- 返回 `true`：邀请用户入群需要对方确认。
+- 返回 `false`：受邀用户无需确认即可加入群组。
+
+```java
+EMClient.getInstance()
+        .groupManager()
+        .asyncGetGroupFromServer(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                        boolean inviteNeedConfirm = group.isInviteNeedConfirm();
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        // 获取群组详情失败。
+                    }
+                });
+```
+
 :::tip
 如需由用户手动处理群组邀请，应在 SDK 初始化前调用 `EMOptions#setAutoAcceptGroupInvitation(false)` 关闭自动接受群组邀请。该配置默认值为 `true`。开启时，SDK 会自动接受收到的群组邀请；关闭后，应用可在 `EMGroupChangeListener#onInvitationReceived` 回调中调用接受或拒绝邀请的接口进行处理。
 :::
@@ -696,5 +719,6 @@ EMClient.getInstance()
 | [`getAllGroups`](#获取当前用户加入的群组列表) | `EMGroupManager` | 从本地获取当前用户已加入的群组列表。 |
 | [`asyncGetJoinedGroupsCountFromServer`](#查询当前用户已加入的群组数量) | `EMGroupManager` | 从服务器获取当前用户已加入的群组数量。 |
 | [`asyncGetGroupFromServer`](#检查当前用户是否已屏蔽群消息) | `EMGroupManager` | 从服务器获取群组详情。 |
+| [`isInviteNeedConfirm`](#邀请用户入群) | `EMGroup` | 获取群组配置中邀请用户入群是否需要对方确认。 |
 | [`isMsgBlocked`](#检查当前用户是否已屏蔽群消息) | `EMGroup` | 判断当前用户是否已屏蔽指定群组消息。 |
 | [`asyncBlockGroupMessage`](#屏蔽群消息) / [`asyncUnblockGroupMessage`](#解除屏蔽群消息) | `EMGroupManager` | 屏蔽或解除屏蔽群消息。 |

@@ -1,22 +1,36 @@
 # 私有云 SDK IP 地址/域名配置
 
+SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。
+
+:::tip
+Android SDK v5.1.0 及以上版本中，数据同步 WebSocket 地址由 SDK 根据配置的私有云 REST 地址自动确定，无需单独配置。
+
+Android SDK v5.1.0 起，以下数据同步 WebSocket 配置接口已移除：`EMOptions#setSyncDataWebSocketServer(String)`、`EMOptions#getSyncDataWebSocketServer()`、`EMOptions#setSyncDataWebSocketPort(int)` 和 `EMOptions#getSyncDataWebSocketPort()`。
+
+`EMOptions#setWebSocketServer` 和 `EMOptions#setWebSocketPort` 用于配置 IM 长连接 WebSocket，并非数据同步 WebSocket。
+:::
+
 ## 静态配置 IP 地址/域名
 
-SDK 默认连接公有云服务。使用私有云时，应在初始化 SDK 前通过 `EMOptions` 配置私有云的 REST 和 IM 服务地址。静态配置私有云地址时，需要调用 `enableDNSConfig(false)` 关闭 SDK 的 DNS 地址配置。
+静态配置时，需要关闭 DNS 动态配置，并根据 IM 长连接方式设置对应地址。
+
+以下地址和端口仅为示例，请替换为私有云部署提供的实际配置。若 REST 服务使用 HTTPS，应在地址中显式添加 `https://`；未指定协议时，SDK 按 HTTP 处理。
 
 ### 方式一：TCP 连接
 
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// REST 服务地址。根据私有云部署配置填写域名或 IP 及端口。
-options.setRestServer("https://rest.example.com:443");
-// IM 服务地址和 TCP 端口。
-options.setIMServer("im.example.com");
-options.setImPort(443);
-// 是否为 IM 连接启用 TLS。
-options.setEnableTLSConnection(true);
-// 使用静态私有云地址时，关闭 SDK 的 DNS 地址配置。
+
+// 设置私有云 REST 地址。
+options.setRestServer("https://private-rest.example.com");
+
+// 设置用于收发 IM 消息的 TCP 长连接地址和端口。
+options.setIMServer("private-im.example.com");
+options.setImPort(6717);
+options.setEnableTLSConnection(true); // 使用 TLS 加密 TCP 连接。
+
+// 使用上述静态地址，不从 DNS 配置服务获取地址。
 options.enableDNSConfig(false);
 
 EMClient.getInstance().init(context, options);
@@ -27,35 +41,31 @@ EMClient.getInstance().init(context, options);
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// REST 服务地址。使用 HTTPS 时需包含 https:// 前缀。
-options.setRestServer("https://rest.example.com:443");
-// WebSocket 服务地址和端口。
-options.setWebSocketServer("ws.example.com");
+
+// 设置私有云 REST 地址。
+options.setRestServer("https://private-rest.example.com");
+
+// 设置用于收发 IM 消息的 WebSocket 长连接地址和端口。
+options.setWebSocketServer("private-im.example.com");
 options.setWebSocketPort(443);
-// 是否为 WebSocket 连接启用 TLS。启用后使用 WSS。
-options.setEnableTLSConnection(true);
-// 使用静态私有云地址时，关闭 SDK 的 DNS 地址配置。
+options.setEnableTLSConnection(true); // 使用 WSS 加密连接。
+
+// 使用上述静态地址，不从 DNS 配置服务获取地址。
 options.enableDNSConfig(false);
 
 EMClient.getInstance().init(context, options);
 ```
 
-:::tip
-REST 服务使用 HTTPS 时，REST 地址需包含 `https://` 前缀。`setEnableTLSConnection(true)` 用于设置 IM TCP 或 WebSocket 连接是否启用 TLS，不会自动为 REST 地址补充 HTTPS 协议。
-:::
-
-```java
-options.setRestServer("https://10.10.10.10:443");
-```
-
 ## 动态配置地址
 
-若私有云部署了用于下发服务地址的 DNS 服务，可在 SDK 初始化前设置 DNS 服务地址。SDK 默认启用 DNS 地址配置；使用动态地址配置时无需调用 `enableDNSConfig(false)`。
+1. 在私有云服务器端配置 DNS 地址表，其中包括 REST 和 IM 长连接地址。
+2. 初始化 SDK 前，通过 `EMOptions#setDnsUrl` 设置 DNS 配置服务地址。
 
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// 配置用于下发服务地址的 DNS 服务地址。
-options.setDnsUrl("https://dns.example.com");
+options.setDnsUrl("https://private-dns.example.com/server.json");
+options.enableDNSConfig(true); // 默认值为 true。
+
 EMClient.getInstance().init(context, options);
 ```

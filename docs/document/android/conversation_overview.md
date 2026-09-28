@@ -4,7 +4,7 @@
 
 会话是单聊、群聊或聊天室中的消息集合。SDK 通过 `EMConversation` 表示本地会话，应用可以读取会话 ID、会话类型、最近一条消息、未读数、置顶状态、会话标记和本地扩展字段等数据。
 
-SDK 可在 [登录成功后自动同步服务端会话数据并写入本地](initialization.html#设置登录后自动同步数据)。应用在同步完成后，通过本地接口读取和展示会话列表。
+自 SDK v5.1.0 起，SDK 默认在 [登录成功后自动同步服务端会话数据并写入本地](initialization.html#设置登录后自动同步数据)，并在同步完成后通过本地接口读取和展示会话列表。
 
 ## 前提条件
 
@@ -53,7 +53,7 @@ SDK 通过会话类型和会话 ID 标识会话：
 
 - 单聊消息：根据对端用户 ID 创建或更新单聊会话。
 - 群聊消息：根据群组 ID 创建或更新群聊会话。
-- 聊天室消息：根据聊天室 ID 创建或更新聊天室会话。
+- 聊天室消息：聊天室消息：根据聊天室 ID 创建或更新聊天室会话。
 
 收到在线消息后，SDK 会更新会话的最近一条消息、排序和未读数等本地状态。
 
@@ -74,7 +74,7 @@ EMConversation conversation = EMClient.getInstance()
 
 ### 通过服务端同步更新会话列表
 
-在调用 `EMClient#init` 前，通过 `EMOptions#setDataSyncType` 配置 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。
+自 SDK v5.1.0 起，`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。你也可以在调用 `EMClient#init` 前显式配置该方法，以指定需要自动同步的数据类型；如传入 `EMDataSyncType.NONE`，则关闭自动数据同步。
 
 ```java
 EMOptions options = new EMOptions();
@@ -203,7 +203,7 @@ EMClient.getInstance()
 
 ## 最佳实践
 
-- 初始化 SDK 前配置 `EMDataSyncType.CONVERSATIONS`，并在会话数据同步成功后读取本地会话列表。
+- 使用默认配置或在初始化 SDK 前配置 `EMDataSyncType.CONVERSATIONS`，并在会话数据同步成功后读取本地会话列表；如需关闭自动同步，显式配置 `EMDataSyncType.NONE`。
 - 展示会话列表时优先使用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先排序结果。
 - 注册 `EMConversationListener`；收到 `onConversationUpdate` 后重新读取会话列表并刷新界面。
 - 页面或组件销毁时移除 `EMConversationListener`、`EMConnectionListener` 和 `EMMultiDeviceListener`，避免重复回调和内存泄漏。

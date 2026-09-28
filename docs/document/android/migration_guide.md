@@ -64,7 +64,7 @@ Android SDK v5.0.0 新增登录后自动数据同步机制。应用可在初始�
 | `EMConnectionListener` | `onDataSyncStart(EMDataSyncType type)` / `onDataSyncFinish(EMDataSyncType type, int errorCode)` | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `EMError#EM_NO_ERROR` 时表示同步成功。 |
 
 :::tip
-`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、好友或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地好友查询接口可能返回空数据。 
+`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、好友或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地好友查询接口可能返回空数据。 自 SDK v5.1.0 起，`EMOptions#dataSyncType` 默认包含 `CONVERSATIONS`，登录后会自动同步会话数据。
 :::
 
 典型配置如下：
