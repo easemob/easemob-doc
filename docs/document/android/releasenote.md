@@ -265,10 +265,6 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
    - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
 
-## v4.19.2 Dev 2026-4-15（开发版）
-
-修复 Flutter 集成场景下，发送大图片消息失败的问题。
-
 ## v4.19.4 Dev 2026-9-22（开发版）
 
 #### 新增特性
@@ -286,6 +282,10 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 ## v4.19.3 Dev 2026-5-27（开发版）
 
 修复发送图片或视频消息时，缩略图缺失或拷贝失败导致整条消息发送失败的问题。缩略图处理失败不再影响消息正常发送。
+
+## v4.19.2 Dev 2026-4-15（开发版）
+
+修复 Flutter 集成场景下，发送大图片消息失败的问题。
 
 ## v4.19.1 Dev 2026-2-27（开发版）
 
