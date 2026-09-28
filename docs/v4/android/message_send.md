@@ -103,46 +103,13 @@ EMClient.getInstance().chatManager().sendMessage(message);
    如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件，服务器会自动生成缩略图。如果关闭了自动上传，需要业务自行上传图片，并设置图片远程 URL 后再发送消息。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ```java
-// `selectedImagePath` 为业务获取的图片本地文件路径或 URI。
-String imagePath = selectedImagePath;
-
-if (imagePath == null || imagePath.isEmpty()) {
-    throw new IllegalArgumentException("图片路径不能为空");
-}
-
-// `false` 表示发送大图；若需要发送原图，设置为 `true`。
-boolean sendOriginalImage = false;
-// `conversationId` 为目标会话 ID：单聊为对端用户 ID，
-// 群聊为群组 ID，聊天室为聊天室 ID。
-EMMessage message = EMMessage.createImageSendMessage(
-        imagePath,
-        sendOriginalImage,
-        conversationId
-);
-
-if (message == null) {
-    throw new IllegalArgumentException("图片文件不存在或不可读取");
-}
-
-// 单聊默认为 Chat。
-// 发送群聊或聊天室消息时，设置为 GroupChat 或 ChatRoom。
-// message.setChatType(EMMessage.ChatType.GroupChat);
-// message.setChatType(EMMessage.ChatType.ChatRoom);
-
-// 发送图片消息。
-// 开启自动附件上传时，SDK 会自动上传图片附件。
-EMClient.getInstance()
-        .chatManager()
-        .sendMessage(message);
+// `imageUri` 为图片本地资源标识符，`false` 为发送大图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
+EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
+// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+// message.setChatType(ChatType.GroupChat);
+// 发送消息
+EMClient.getInstance().chatManager().sendMessage(message);
 ```
-
-**关键参数**
-
-| 参数                | 类型      | 必填/可选 | 说明                                                         |
-| ------------------- | --------- | --------- | ------------------------------------------------------------ |
-| `imagePath`         | `String`  | 必填      | 图片的本地文件路径或 URI。                                   |
-| `sendOriginalImage` | `boolean` | 必填      | 是否发送原图。`true` 表示上传原图，`false` 表示上传大图。    |
-| `conversationId`    | `String`  | 必填      | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
 
 ### 发送 GIF 图片消息
 
