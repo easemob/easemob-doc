@@ -456,7 +456,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 #### 发消息时设置回调路由
 
-自 SDK v15.0 起，支持发消息时为消息配置回调环境标识，使消息可按指定路由触发发送前回调和发送后回调。
+自 HarmonyOS SDK 1.15.0 起，支持发消息时为消息配置回调环境标识，使消息可按指定路由触发发送前回调和发送后回调。
 
 回调路由允许你在同一个 App Key 下，将不同消息按回调环境分别投递到不同的回调地址。发送消息时，可以在消息中携带回调环境标识，环信服务器根据该标识匹配控制台中配置的[回调路由规则](/product/console/basic_webhook.html#配置消息回调规则)，并将消息回调至对应的[发送前回调](/document/server-side/callback_presending.html)或[发送后回调](/document/server-side/callback_postsending.html)地址。
 
@@ -495,7 +495,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 | 参数 |类型 | 是否必需 | 说明 |
 | :--- | :--- |  :--- | :--- |
-| `webhookEnv` | String | 否 | 回调环境值。回调环境仅支持字母和数字，长度不超过 8 个字符。服务器根据该值匹配控制台中的回调地址。建议与控制台中配置的回调环境保持一致，例如 `dev`、`test`、`prod`。<br/> 未设置回调环境标识时，消息使用 `default` 环境；设置了标识但未命中有效路由时，不触发回调。 |
+| `webhookEnv` | `string` | 否 | 回调环境值。回调环境仅支持字母和数字，长度不超过 8 个字符。服务器根据该值匹配控制台中的回调地址。建议与控制台中配置的回调环境保持一致，例如 `dev`、`test`、`prod`。<br/> 未设置回调环境标识时，消息使用 `default` 环境；设置了标识但未命中有效路由时，不触发回调。 |
 
 调用 `setWebhookEnv` 设置回调环境：
 

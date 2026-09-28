@@ -6,7 +6,8 @@
 
 **1. 本地会话列表默认不包含聊天室会话**
 
-默认情况下，获取本地会话列表时不包含聊天室会话。HarmonyOS SDK 当前没有提供 Android `EMOptions#setEnableChatroomConversation` 对应的公开配置接口；如需展示聊天室会话，应通过 `ChatManager#getConversation` 按会话 ID 获取并自行维护展示列表。详见 [从本地获取会话列表](conversation_list.html#从本地获取会话列表) 文档。
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `ChatOptions#setEnableChatroomConversation(true)`。你可以通过 `ChatOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](conversation_list.html#从本地获取会话列表) 文档。
 
 **2. 移除数据同步 WebSocket 配置属性**
 
@@ -14,7 +15,7 @@
 
 #### 新增特性
 
-- 支持 [分页获取本地会话列表](/v4/android/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
 - 支持 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)，可按单个/多个关键字或消息类型搜索。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。
 - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。

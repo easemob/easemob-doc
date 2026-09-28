@@ -62,11 +62,11 @@ HarmonyOS SDK 提供以下方式获取本地会话：
 
 初始化时可以设置 `ChatOptions` 中的以下会话选项：
 
-| 选项 | 描述    | 
+| 选项 | 描述    |
 | :--------- | :----- |
 | `enableChatroomConversation` | 设置会话列表中是否包含聊天室会话。该配置仅控制聊天室会话是否出现在内存会话列表、会话列表更新回调和本地数据库分页结果中；不控制 SDK 在底层创建或持久化聊天室会话，也不影响聊天室消息的正常收发。<br/> - `true`：会话列表和本地数据库分页结果中包含聊天室会话。<br/> -（默认）`false`：会话列表、会话列表更新回调和本地数据库分页结果中不包含聊天室会话。<br/> 该配置必须在初始化 SDK 前设置。使用 `ChatOptions` 对象初始化时，可调用 `setEnableChatroomConversation()` 设置；使用字面量参数初始化时，可设置 `enableChatroomConversation`。你可以通过 `isEnableChatroomConversation()` 查询当前配置。 |
 | `setDeleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。<br/>该配置只控制退出聊天室时是否删除本地消息，不决定本地会话列表是否返回聊天室会话。 |
-|`setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存：<br/> - （默认）`true`：自动加载全部会话。。<br/> - `false`：不自动加载全部会话。| 
+| `setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存：<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话。|
 
 ### 分页获取本地会话
 
@@ -74,7 +74,7 @@ HarmonyOS SDK 提供以下方式获取本地会话：
 
 调用该方法前，需在初始化 SDK 前调用 `ChatOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载，默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
 
-```
+```typescript
 // SDK 初始化前关闭自动加载全部本地会话。
 let options = new ChatOptions({
   appKey: 'your-org#your-app'

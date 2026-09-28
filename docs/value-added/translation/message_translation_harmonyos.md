@@ -19,7 +19,7 @@
 
 开始前，请确保：
 
-1. 已完成 HarmonyOS SDK 1.15.0 或以上版本的 [初始化](/document/harmonyos/quickstart.html)并登录成功。
+1. 已完成 HarmonyOS SDK 1.15.0 或以上版本的[初始化](/document/harmonyos/initialization.html)并登录成功。
 2. [已开通翻译功能， 了解翻译服务的使用限制](#功能开通)。
 3. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 4. 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。

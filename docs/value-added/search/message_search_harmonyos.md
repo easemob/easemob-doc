@@ -14,7 +14,7 @@ HarmonyOS SDK 提供 `ChatManager#searchMessagesFromServer` 方法进行服务�
 
 ## 功能开通
 
-使用前需联系环信商务开通消息搜索服务，详见[开通说明](/product/console/purchase_value_added.html#消息搜索)。消息扩展字段（`ext`）搜索默认不开启，如需使用，请在开通时一并申请。
+使用前需联系环信商务开通消息搜索服务，详见[开通说明](/product/console/purchase_value_added.html#消息搜索)。消息扩展字段（`ext`）搜索默认不开启，如需使用，可在开通时一并申请或后续联系商务单独开通。
 
 **关于扩展字段搜索**：开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
 
@@ -26,7 +26,7 @@ HarmonyOS SDK 提供 `ChatManager#searchMessagesFromServer` 方法进行服务�
 
 开始前，请确保：
 
-- 已完成 HarmonyOS SDK 1.15.0 或以上版本的[初始化](/document/harmonyos/initialization.html) 并 [登录](/document/android/login.html) 成功。
+- 已完成 HarmonyOS SDK 1.15.0 或以上版本的[初始化](/document/harmonyos/initialization.html)并[登录](/document/harmonyos/login.html)成功。
 - 当前应用已开通消息搜索服务。
 - 已了解消息搜索服务的使用限制和接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
@@ -68,7 +68,7 @@ option.setKeywordList(['hello']);
 // 多关键词之间默认使用 OR 关系。
 option.setKeywordMatchType(KeywordListMatchType.OR);
 
-// 可选。单聊传对方用户 ID，群聊传群组 ID。
+// 可选。单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID；无需额外传入会话类型。
 option.setConversationId('groupId');
 
 // 可选。服务端消息搜索不支持自定义消息、语音消息和透传消息。
@@ -112,8 +112,8 @@ ChatClient.getInstance().chatManager()?.searchMessagesFromServer(
 | 方法 | 参数类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
 | `setKeywordList` | `string \| string[]` | 是 | 设置关键词。每个关键词长度为 1-120 个字符，所有关键词总长度不超过 120 个字符，最多 5 个关键词。 |
-| `setKeywordMatchType` | `KeywordListMatchType` | 否 | 设置多关键词匹配关系。`OR` 表示匹配任一关键词，`AND` 表示同时匹配全部关键词，默认值为 `OR`。HarmonyOS SDK 不需要额外传入会话类型。 |
-| `setConversationId` | `string` | 否 | 设置会话 ID。单聊传对方用户 ID，群聊传群组 ID；不设置或传空字符串表示搜索全部可见会话。 |
+| `setKeywordMatchType` | `KeywordListMatchType` | 否 | 设置多关键词匹配关系。`OR` 表示匹配任一关键词，`AND` 表示同时匹配全部关键词，默认值为 `OR`。 |
+| `setConversationId` | `string` | 否 | 设置会话 ID。单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID；无需额外传入会话类型。不设置或传空字符串表示搜索全部可见会话。 |
 | `setMsgTypes` | `ContentType \| ContentType[]` | 否 | 按消息类型过滤。支持 `TXT`、`IMAGE`、`VIDEO`、`LOCATION`、`FILE` 和 `COMBINE`；不支持 `CUSTOM`、`VOICE` 和 `CMD`。 |
 | `setStartTime` | `number` | 否 | 设置开始时间，Unix 时间戳，单位为毫秒。需与 `setEndTime` 同时设置。 |
 | `setEndTime` | `number` | 否 | 设置结束时间，Unix 时间戳，单位为毫秒。结束时间需与 `setStartTime` 同时设置，而且不应早于开始时间。 |
@@ -128,7 +128,7 @@ ChatClient.getInstance().chatManager()?.searchMessagesFromServer(
 | 方法 | 返回类型 | 描述 |
 | :--- | :--- | :--- |
 | `getResult()` / `getData()` | `Array<SearchServerMessageResult>` | 获取当前页的搜索结果列表。两个方法返回相同的结果。 |
-| `getCount()` / `getPageCount()` | `number` | 获取服务端返回的分页计数。两个方法返回相同的值；当该值小于请求的 `pageSize` 时，表示服务端没有更多搜索结果。 |
+| `getCount()` / `getPageCount()` | `number` | 获取符合搜索条件的结果总数。两个方法返回相同的值；可结合 `pageNum`、`pageSize` 和该总数判断是否还有下一页。 |
 
 `SearchServerMessageResult` 为搜索摘要对象，不是完整的 `ChatMessage`。你可以从结果对象中获取消息 ID、消息体、扩展字段、发送方、接收方、会话 ID、会话类型、消息时间戳以及服务端返回的高亮文本列表。
 
