@@ -71,7 +71,7 @@ option.setKeywordMatchType(EMKeywordListMatchType.OR);
 // 可选。单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID。
 option.setConversationId("groupId");
 
-// 可选。服务端消息搜索不支持语音消息和透传消息。
+// 可选。服务端消息搜索不支持自定义消息、语音消息和透传消息。
 option.setMsgTypes(Arrays.asList(EMMessage.Type.TXT, EMMessage.Type.IMAGE));
 
 // 可选。起止时间必须同时设置，单位为毫秒。
@@ -122,8 +122,8 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 | `setKeywordMatchType` | `EMKeywordListMatchType` | 否 | 设置多关键词匹配关系。`OR` 表示匹配任一关键词，`AND` 表示同时匹配全部关键词。默认值为 `OR`；传入 `null` 时也使用 `OR`。 |
 | `setConversationId` | String | 否 | 设置会话 ID。单聊传对方用户 ID；群聊传群组 ID；聊天室传聊天室 ID。为空表示搜索所有会话。Android SDK 不需要额外传入会话类型。 |
 | `setMsgTypes` | `List<EMMessage.Type>` | 否 | 设置消息类型过滤条件。可使用 `TXT`、`IMAGE`、`VIDEO`、`LOCATION`、`FILE` 和 `COMBINE`。不支持 `CUSTOM`、`VOICE` 和 `CMD`。 |
-| `setStartTime` | Long | 否 | 设置查询开始时间，Unix 时间戳，单位为毫秒。需与结束时间同时设置。 |
-| `setEndTime` | Long | 否 | 设置查询结束时间，Unix 时间戳，单位为毫秒。结束时间需与开始时间同时设置，而且不应早于开始时间。|
+| `setStartTime` | Number | 否 | 设置查询开始时间，Unix 时间戳，单位为毫秒。需与结束时间同时设置。 |
+| `setEndTime` | Number | 否 | 设置查询结束时间，Unix 时间戳，单位为毫秒。结束时间需与开始时间同时设置，而且不应早于开始时间。|
 | `setSearchScope` | `EMConversation.EMMessageSearchScope` | 否 | 设置搜索范围。`CONTENT` 表示仅搜索消息内容，`EXT` 表示仅搜索消息扩展字段，`ALL` 表示搜索消息内容和扩展字段。默认值为 `CONTENT`；传入 `null` 时也使用 `CONTENT`。 |
 
 #### 返回结果

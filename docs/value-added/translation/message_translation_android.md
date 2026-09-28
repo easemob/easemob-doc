@@ -5,7 +5,7 @@
 为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对 **文本消息** 进行按需翻译或自动翻译：
 
 - 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
-- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。  
+- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
 
 ## 功能开通
 
@@ -38,9 +38,8 @@ SDK 支持你通过调用 [EMChatManager](https://sdkdocs.easemob.com/apidoc/and
 
 ![img](/images/ios/translation.png)
 
-## 实现方法
 
-### 获取翻译服务支持的语言
+## 获取翻译服务支持的语言
 
 无论是按需翻译还是自动翻译，都需先调用 `fetchSupportLanguages` 获取支持的翻译语言。获取支持的翻译语言的示例代码如下：
 
@@ -49,7 +48,7 @@ SDK 支持你通过调用 [EMChatManager](https://sdkdocs.easemob.com/apidoc/and
 EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<List<EMLanguage>>{});
 ```
 
-### 按需翻译
+## 按需翻译
 
 接收方调用 `translateMessage` 对收到的文本消息进行翻译。翻译调用过程如下：
 
@@ -70,7 +69,7 @@ EMTextMessageBody body = (EMTextMessageBody)message.getBody();
 List<EMTranslationInfo> infoList = body.getTranslations();
 ```
 
-### 设置自动翻译
+## 设置自动翻译
 
 创建消息时，发送方设置 `MessageBody` 中的 `setTargetLanguages` 字段为译文语言，设置过程如下：
 

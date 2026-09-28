@@ -69,7 +69,7 @@ option.keywordMatchType = EMKeywordListMatchTypeOR;
 // 可选。单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID。
 option.conversationId = @"groupId";
 
-// 可选。服务端消息搜索不支持语音消息和透传消息。
+// 可选。服务端消息搜索不支持自定义消息、语音消息和透传消息。
 option.msgTypes = @[@(EMMessageBodyTypeText), @(EMMessageBodyTypeImage)];
 
 // 可选。起止时间必须同时设置，单位为毫秒。

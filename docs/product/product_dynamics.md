@@ -19,6 +19,12 @@ containerClass: product-dynamics-page
 | :----- | :------- | :---------------- | :---------------- |
 | Android SDK 4.25.1/iOS SDK v4.25.0 开发版发布   | - 支持 [分页获取本地会话列表](/v4/android/conversation_list.html#分页获取本地会话) 功能。<br/> - [本地会话列表默认不包含聊天室会话](/v4/android/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性。<br/> - Android 新增默认服务域名切换接口，用于在 IM 官方域名与私有部署域名之间切换。 | 2026-9-18     | - [Android SDK 4.25.1 更新日志](/document/android/releasenote.html#v4-25-1-dev-2026-9-18-开发版) <br/> - [iOS SDK 4.25.0 更新日志](/document/ios/releasenote.html#v4-25-0-dev-2026-9-16-开发版)  |
 
+#### 环信 HarmonyOS SDK v1.15.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK v1.15.0 开发版发布   | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/harmonyos/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性，数据同步 WebSocket 地址根据 REST 服务器配置自动获取。<br/> **新增特性**：支持 [分页获取本地会话列表](/document/harmonyos/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)，可按单个或多个关键词、消息类型搜索。<br/> - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。<br/> - 支持 [为消息配置回调路由标识](/document/harmonyos/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。<br/> - 新增连接和翻译相关的错误码。 | 2026-9-24     | [HarmonyOS SDK 1.15.0 更新日志](/document/harmonyos/releasenote.html#v1-15-0-dev-2026-9-24-开发版) |
+
 ## 2026-08
 
 #### 环信 Android/iOS SDK v5.0.0 发版
