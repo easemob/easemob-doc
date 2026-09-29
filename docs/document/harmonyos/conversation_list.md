@@ -177,4 +177,6 @@ let conversation = ChatClient.getInstance()
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取排序后的全部会话。 |
 | [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取本地当前所有无序会话。 |
 | [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取指定会话。 |
-| `setDeleteMessagesOnLeaveChatroom` | `ChatOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
+| [`setDeleteMessagesOnLeaveChatroom`](#从本地获取会话列表) | `ChatOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。默认退出聊天室时删除本地消息。 |
+| [`enableChatroomConversation`](#从本地获取会话列表) | `ChatOptions` | 设置会话列表中是否包含聊天室会话。默认情况下，会话列表、会话列表更新回调和本地数据库分页结果中不包含聊天室会话。 |
+| `setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存。默认自动加载全部会话。|
