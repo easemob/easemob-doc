@@ -6,8 +6,8 @@
 
 **本地会话列表默认不包含聊天室会话**
 
-默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `EMOptions#enableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
-详见 [获取本地会话列表](conversation_list.html#从本地获取会话列表) 文档。
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前将 `ChatOptions#enableChatroomConversation` 设置为 `true`。你可以通过 `ChatOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](conversation_list.html#获取本地所有会话) 文档。
 
 #### 新增特性
 
