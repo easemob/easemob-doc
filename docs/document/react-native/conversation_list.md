@@ -37,7 +37,7 @@
 示例代码如下：
 
 ```typescript
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// pageSize: 每页返回的会话数。取值范围为 [1,20]，默认为 `10`。
 // cursor: 开始获取数据的游标位置。如果为空字符串或传 `undefined`，SDK 从最新活跃的会话开始获取。
 ChatClient.getInstance()
   .chatManager.fetchConversationsFromServerWithCursor(cursor, pageSize)
