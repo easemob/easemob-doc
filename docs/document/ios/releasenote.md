@@ -4,19 +4,13 @@
 
 #### 重大变更  
 
-**1. 登录后默认自动同步会话**
-
-`EMOptions#dataSyncType` 的默认值由 `none` 调整为 `conversations`，即登录后默认自动同步会话列表。
-
-详见 [登录后自动同步会话列表](conversation_list.html#登录后自动同步会话列表) 文档。
-
-**2. 本地会话列表默认不包含聊天室会话**
+**1. 本地会话列表默认不包含聊天室会话**
 
 默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用`EMOptions#enableChatroomConversation` 设置为 `true`。读取该属性可以查询当前配置。
 
 详见 [会话相关选项](conversation_list.html#会话相关选项)文档。
 
-**3. 移除数据同步 WebSocket 配置属性**
+**2. 移除数据同步 WebSocket 配置属性**
 
 数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再需要单独配置。以下属性已移除：
 - `syncDataWSHost`

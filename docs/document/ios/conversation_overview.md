@@ -91,7 +91,7 @@ let conversation = EMClient.shared().chatManager?.getConversation(
 
 ### 通过服务端同步更新会话列表
 
-自 SDK v5.1.0 起，`EMOptions#dataSyncType` 默认包含 `.conversations`。用户登录成功后，SDK 自动同步服务端会话数据并写入本地。应用应等待同步完成，再读取本地数据；如需指定同步范围，可以在初始化 SDK 前配置该属性。
+`EMOptions#dataSyncType` 默认包含 `.conversations`。用户登录成功后，SDK 自动同步服务端会话数据并写入本地。应用应等待同步完成，再读取本地数据；如需指定同步范围，可以在初始化 SDK 前配置该属性。
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")
@@ -268,7 +268,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## 最佳实践
 
-- 使用自 SDK v5.1.0 起默认的 `.conversations` 配置，或在初始化 SDK 前显式配置该类型，并在会话数据同步成功后读取本地列表。
+- 使用 `EMOptions#dataSyncType` 默认的 `.conversations` 配置，或在初始化 SDK 前显式配置该类型，并在会话数据同步成功后读取本地列表。
 - 展示会话列表时优先调用 `getAllConversations` 并将 `isSort` 传 `true`，直接使用 SDK 返回的置顶优先排序结果。
 - 仅查询本地会话时，将 `getConversation` 的 `createIfNotExist` 传 `false`，避免意外创建空会话。
 - 注册 `EMConversationDelegate`；收到 `conversationListDidUpdate` 后刷新会话列表。
@@ -284,7 +284,6 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | [`marks`](#会话对象) / [`ext`](#会话对象) | `EMConversation` | 获取会话标记和本地扩展属性。 |
 | [`conversationName`](#会话对象) / [`conversationAvatar`](#会话对象) | `EMConversation` | 获取会话显示名称和头像。 |
 | [`getConversation`](#通过接口创建本地会话) | `IEMChatManager` | 查找本地会话，并可按参数在会话不存在时创建。 |
-| [`enableChatroomConversation`](#通过消息创建或更新会话) | `EMOptions` | 设置收发聊天室消息时是否创建本地聊天室会话。 |
 | [`dataSyncType`](#通过服务端同步更新会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`initializeSDKWithOptions`](#通过服务端同步更新会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
 | [`getAllConversations`](#会话列表与空会话) / [`getAllConversations`](#会话列表与空会话) | `IEMChatManager` | 获取本地会话数组。 |
