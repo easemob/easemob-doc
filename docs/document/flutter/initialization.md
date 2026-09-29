@@ -58,6 +58,8 @@ await ChatClient.getInstance.init(options);
 | `isChatRoomOwnerLeaveAllowed` | `bool` | `true` | 是否允许聊天室所有者离开聊天室：<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
 | `enableUserInfo` | `bool` | `false` | 是否开启用户信息自动管理功能。 |
 | `enableAutoSyncContacts` | `bool` | `false` | 是否在登录后自动从服务器同步联系人列表。 |
+| `apnsCertName` | `String?` | `null` | APNs 推送证书名称，仅对 iOS 生效。必须在 SDK 初始化时设置，运行期间不可修改。自 Flutter SDK 4.25.0 起支持。 |
+| `pushKitCertName` | `String?` | `null` | PushKit 推送证书名称，用于 iOS VoIP 推送，仅对 iOS 生效。必须在 SDK 初始化时设置，运行期间不可修改。自 Flutter SDK 4.25.0 起支持。 |
 
 ## 初始化后设置监听
 
@@ -132,3 +134,5 @@ await ChatClient.getInstance.init(options);
 | [`removeEventHandler`](#初始化后设置监听) | `ChatManager` | 移除消息事件处理器。 |
 | [`enableAutoSyncContacts`](#设置登录后自动同步好友数据) | `ChatOptions` | 登录后自动同步好友数据的初始化配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | 用户属性自动管理的初始化配置。 |
+| [`apnsCertName`](#配置-ios-推送证书名称) | `ChatOptions` | iOS APNs 推送证书名称的初始化配置。 |
+| [`pushKitCertName`](#配置-ios-推送证书名称) | `ChatOptions` | iOS PushKit 推送证书名称的初始化配置。 |
