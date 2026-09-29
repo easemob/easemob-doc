@@ -33,6 +33,7 @@
 示例代码如下：
 
 ```dart
+// pageSize：每页查询的会话数量, 取值范围为 [1,20], 默认为 10。
 try {
   final ChatCursorResult<ChatConversation> result =
       await ChatClient.getInstance.chatManager.fetchConversationsByOptions(

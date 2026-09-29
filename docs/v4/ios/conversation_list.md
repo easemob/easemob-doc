@@ -36,7 +36,7 @@
 示例代码如下：
 
 ```objectivec
-// pageSize: 每页返回的会话数。取值范围为 [1,50]。
+// pageSize: 每页返回的会话数。取值范围为 [1,20]。
 // cursor：查询的开始位置。若传入 `nil` 或 `@""`，SDK 从最新活跃的会话开始获取。
 NSString *cursor = @"";
 [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor pageSize:20 completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {

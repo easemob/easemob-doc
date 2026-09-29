@@ -75,7 +75,7 @@ const option: EasemobChat.MessageSearchOption = {
   conversationId: 'groupId',
   conversationType: 'groupChat',
 
-  // 可选。服务端消息搜索不支持语音消息和透传消息。
+  // 可选。服务端消息搜索不支持自定义消息、语音消息和透传消息。
   msgTypes: ['txt', 'img'],
 
   // 可选。起止时间必须同时设置，单位为毫秒。
