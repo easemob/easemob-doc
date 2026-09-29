@@ -1,5 +1,27 @@
 # Flutter IM SDK 更新日志
 
+## 4.25.0 2026-9-24
+
+#### 重大变更
+
+**本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `EMOptions#enableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](conversation_list.html#从本地获取会话列表) 文档。
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级：
+  - iOS SDK 升级至 4.25.0；
+  - Android SDK 升级至 4.25.1。
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
+- 支持 [服务端消息搜索](/value-added/search/message_search_flutter.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
+  消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
+- 支持初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称：`ChatOptions` 新增 `apnsCertName`、`pushKitCertName` 配置项。
+- 新增 iOS PushKit（VoIP 推送）接口： `ChatPushManager#bindPushKitToken` 与 `ChatPushManager#unbindPushKitToken`，仅 iOS 生效，其他平台调用不做任何处理；
+- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+- 支持 SDK 初始化前配置自定义 NTP 服务器： `ChatOptions` 新增 `ntpServers` 配置项。
+
 ## v4.22.0 2026-8-28
 
 #### 重大变更
