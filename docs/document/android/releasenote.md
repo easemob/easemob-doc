@@ -8,6 +8,8 @@
 
 `EMOptions#setDataSyncType` 的默认值由 `NONE` 调整为 `CONVERSATIONS`，即登录后默认自动同步会话列表。
 
+详见 [登录后自动同步会话列表](conversation_list.html#登录后自动同步会话列表) 文档。
+
 **2. 本地会话列表默认不包含聊天室会话**
 
 默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
