@@ -355,7 +355,7 @@ EMClient.getInstance()
 | [`setAppKey`](#登录后自动同步会话列表) | `EMOptions` | 设置应用的 App Key。 |
 | [`setDataSyncType`](#登录后自动同步会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`setEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置获取本地会话列表时是否包含聊天室会话。 |
-| [`isEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 查询当前配置下是否创建聊天室会话。 |
+| [`isEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
 | [`setLoadEmptyConversations`](#获取本地所有或筛选的会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`setDeleteMessagesAsExitChatRoom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
 | [`setAutoLoadAllConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
