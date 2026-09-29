@@ -68,7 +68,7 @@ if let conversation {
 
 置顶状态会随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表。
 
-初始化 SDK 前，将 `EMOptions#dataSyncType` 配置为包含 `.conversations`：
+自 SDK v5.1.0 起，`EMOptions#dataSyncType` 默认包含 `.conversations`。如需显式指定同步范围，可以在初始化 SDK 前进行配置：
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")

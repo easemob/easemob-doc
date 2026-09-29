@@ -12,15 +12,17 @@
 
 **2. 本地会话列表默认不包含聊天室会话**
 
-默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用 `EMOptions#enableChatroomConversation(YES)`。你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用`EMOptions#enableChatroomConversation` 设置为 `true`。读取该属性可以查询当前配置。
 
-详见 [获取会话列表](/v4/android/conversation_list.html#获取会话列表) 文档。
+详见 [会话相关选项](conversation_list.html#会话相关选项)文档。
 
 **3. 移除数据同步 WebSocket 配置属性**
 
 数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再需要单独配置。以下属性已移除：
 - `syncDataWSHost`
 - `syncDataWSPort` 
+
+详见[私有云 SDK IP 地址/域名配置](private_ip_domain.html)文档。
 
 #### 新增特性
 

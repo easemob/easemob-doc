@@ -95,6 +95,7 @@ SDK 提供以下本地会话列表读取方式：
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversationsBySort()` | 返回置顶会话优先的列表；置顶和非置顶会话内部均按最后一条消息的时间戳倒序排列。 |
 | 会话映射 | `getAllConversations()` | 返回以会话 ID 为键的 `Map<String, EMConversation>`。 |
+| 数据库分页 | `asyncGetConversationsFromDB` | 自 SDK v5.1.0 起支持。初始化前需关闭本地会话自动全量加载，详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | 数据库筛选 | `asyncFilterConversationsFromDB(...)` | 从本地数据库加载全部会话或按自定义条件筛选会话。 |
 
 空会话是没有消息的会话。例如，会话中的全部消息过期、被清除或被撤回后，该会话可能成为空会话。

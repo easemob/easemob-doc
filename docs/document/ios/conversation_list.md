@@ -2,9 +2,9 @@
 
 ## 功能说明
 
-- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表缓存中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。
+- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表缓存中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。**自 SDK v5.1.0 起，默认情况下，本地会话列表不包含聊天室会话。**
 - **服务端与本地数据：** 环信服务器和 SDK 本地均可维护会话列表数据：服务端保存当前用户的会话状态，SDK 本地缓存用于客户端快速读取和展示会话列表。完成 SDK 初始化并成功登录后，SDK 会自动维护本地会话列表；会话同步、主动刷新、收发消息、删除会话、清空未读数、设置或取消置顶、添加或移除会话标记等操作均可能更新本地列表。
-- **同步与变更通知：** 若需获取服务端维护的最新会话数据，应在初始化 SDK 前配置会话数据自动同步，并在登录后等待同步完成，再读取本地会话列表。当本地会话列表发生变化时，SDK 会通过会话列表更新事件通知应用；同一账号在其他设备上设置或取消会话置顶时，当前设备也可通过多设备事件感知该变更。
+- **同步与变更通知：** 自 SDK v5.1.0 起，登录后默认自动同步服务端会话数据。因此，登录后应等待会话同步完成，再读取本地会话列表。当本地会话列表发生变化时，SDK 会通过会话列表更新事件通知应用；同一账号在其他设备上设置或取消会话置顶时，当前设备也可通过多设备事件感知该变更。
 
 ## 功能开通
 
@@ -19,11 +19,22 @@
 
 ## 获取会话列表
 
-应用应按照初始化前配置自动同步、监听同步完成、读取本地会话列表的流程获取最新会话数据。
+应用应按照登录后自动同步、监听同步完成和读取本地会话列表的流程获取最新会话数据。
+
+### 会话相关选项
+
+初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
+
+| 选项 | 描述 |
+| :--- | :--- |
+| `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 读取 `EMOptions#enableChatroomConversation` 属性可以查询当前配置。 |
+| `deleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。 |
+| `loadEmptyConversations` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
+| `autoLoadConversations` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 ### 登录后自动同步会话列表
 
-在调用 `initializeSDK(with:)` 前，将 `EMOptions#dataSyncType` 配置为包含 `.conversations`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。
+自 SDK v5.1.0 起，`EMOptions#dataSyncType` 的默认值为 `.conversations`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")
@@ -40,7 +51,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 options.dataSyncType = [.conversations, .contacts, .joinedGroups]
 ```
 
-`EMDataSyncType` 是位选项。为保证行为明确且不受版本默认值差异影响，建议显式设置 `dataSyncType`。关于登录后自动同步数据，详见 [SDK 初始化文档](initialization.html#设置登录后自动同步数据)。
+`EMDataSyncType` 是位选项。如需关闭登录后的自动数据同步，将 `dataSyncType` 设置为 `.none`。关于登录后自动同步数据，详见 [SDK 初始化文档](initialization.html#设置登录后自动同步数据)。
 
 ### 监听会话列表同步状态
 
@@ -78,6 +89,43 @@ EMClient.shared().removeDelegate(syncListener)
 
 `syncDataFinished(_:type:)` 在同步成功、失败、超时或断连结束时均会触发。只有 `error == nil` 时，才表示本次同步成功。
 
+### 分页获取本地会话
+
+自 SDK v5.1.0 起，你可以调用 `IEMChatManager#getConversationsFromDBWithCursor:pageSize:completion:` 方法，从本地数据库分页获取会话列表。SDK 优先返回置顶会话；对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
+
+调用该方法前，需在 SDK 初始化时将 `EMOptions#autoLoadConversations` 设置为 `NO`，关闭本地会话的自动全量加载。该属性默认值为 `YES`。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
+
+```objectivec
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+// SDK 初始化前关闭自动加载全部本地会话。
+options.autoLoadConversations = NO;
+[[EMClient sharedClient] initializeSDKWithOptions:options];
+
+// 首次查询时，cursor 传 nil 或 @""，表示从第一页开始获取。
+NSString *cursor = @"";
+// pageSize 表示每页期望返回的会话数量，取值范围为 [1,100]。
+NSInteger pageSize = 20;
+
+[EMClient.sharedClient.chatManager getConversationsFromDBWithCursor:cursor
+                                                            pageSize:pageSize
+                                                          completion:^(EMCursorResult<EMConversation *> * _Nullable result,
+                                                                       EMError * _Nullable error) {
+    if (error) {
+        // cursor 无效时，error.code 为 EMErrorInvalidParam。
+        return;
+    }
+
+    NSArray<EMConversation *> *conversations = result.list;
+    NSString *nextCursor = result.cursor;
+
+    if (nextCursor.length > 0) {
+        // 保存 nextCursor，并在获取下一页时将其作为 cursor 参数传入。
+    } else {
+        // nextCursor 为空字符串，表示当前页为最后一页，无需继续请求。
+    }
+}];
+```
+
 ### 获取本地所有或筛选的会话
 
 调用 `filterConversationsFromDB`，可以从本地数据库获取全部会话或按条件筛选会话。该接口必须在登录成功后调用，并同步返回 `[EMConversation]?`。
@@ -112,13 +160,7 @@ let unreadConversations = EMClient.shared().chatManager?
 
 筛选闭包还可以根据 `conversationId`、`type`、`ext`、`isPinned`、`latestMessage` 或 `marks` 等会话属性决定是否保留会话。
 
-下表列出初始化时可设置的会话相关选项：
-
-| 选项 | 描述 |
-| :--- | :--- |
-| `EMOptions#deleteMessagesOnLeaveChatroom` | 设置退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除，本地会话列表通常不再包含该聊天室会话。<br/> - `false`：保留，聊天室会话可继续保留在本地会话列表中。 |
-| `EMOptions#loadEmptyConversations` | 设置从本地加载会话时是否包含空会话。<br/> - `true`：包含。<br/> -（默认）`false`：不包含。应在初始化前设置。 |
-| `EMOptions#autoLoadConversations` | 设置登录成功后是否自动将本地数据库中的会话加载到内存。<br/> -（默认）`true`：自动加载。<br/> - `false`：不自动加载，可降低内存占用。 |
+关于设置收发聊天室消息时是否创建本地会话或是否加载空会话，详见[会话相关选项](#会话相关选项)。
 
 ### 一次性获取本地所有会话
 
@@ -264,7 +306,8 @@ EMClient.shared().chatManager?.removeConversation(delegate: listListener)
 
 | 场景 | 推荐做法 |
 | :--- | :--- |
-| 获取服务端维护的最新会话数据 | 初始化前将 `dataSyncType` 配置为包含 `.conversations`，登录后等待同步成功，再读取本地数据。 |
+| 获取服务端维护的最新会话数据 | 使用自 SDK v5.1.0 起默认的 `.conversations` 配置，或在初始化前显式配置该类型；登录后等待同步成功，再读取本地数据。 |
+| 分页加载本地会话 | 初始化前将 `autoLoadConversations` 设置为 `false`，再调用 `getConversationsFromDBWithCursor` 按游标加载。 |
 | 展示已排序的会话列表 | 调用 `getAllConversations(true)`，使用置顶优先、按最后消息时间倒序的会话数组。 |
 | 按条件加载数据库会话 | 调用 `filterConversationsFromDB`；需要全部会话时将 `filter` 传 `nil`。 |
 | 响应会话变化 | 注册 `EMConversationDelegate`；收到 `conversationListDidUpdate` 后使用回调列表或重新读取排序列表刷新 UI。 |
@@ -276,9 +319,12 @@ EMClient.shared().chatManager?.removeConversation(delegate: listListener)
 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
-| [`loadEmptyConversations`](#获取本地所有或筛选的会话) | `EMOptions` | 设置从本地加载会话时是否包含空会话。 |
-| [`deleteMessagesOnLeaveChatroom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
-| [`autoLoadConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录后是否自动将本地会话加载到内存。 |
+| [`dataSyncType`](#登录后自动同步会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
+| [`enableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置收发聊天室消息时是否创建本地聊天室会话，也可读取该属性查询当前配置。 |
+| [`loadEmptyConversations`](#会话相关选项) | `EMOptions` | 设置从本地加载会话时是否包含空会话。 |
+| [`deleteMessagesOnLeaveChatroom`](#会话相关选项) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
+| [`autoLoadConversations`](#分页获取本地会话) | `EMOptions` | 设置登录后是否自动将本地会话加载到内存。 |
+| [`getConversationsFromDBWithCursor`](#分页获取本地会话) | `IEMChatManager` | 从本地数据库分页获取会话列表。 |
 | [`filterConversationsFromDB`](#获取本地所有或筛选的会话) | `IEMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `IEMChatManager` | 获取本地会话数组，并按参数决定是否排序。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `IEMChatManager` | 获取未要求排序的本地会话数组。 |

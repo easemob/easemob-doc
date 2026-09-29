@@ -91,9 +91,7 @@ let conversation = EMClient.shared().chatManager?.getConversation(
 
 ### 通过服务端同步更新会话列表
 
-若要服务端同步更新会话列表，需要初始化前配置自动同步，登录后等待同步完成，再读取本地数据。
-
-在调用 `initializeSDKWithOptions` 前，将 `EMOptions#dataSyncType` 配置为包含 `.conversations`。用户登录成功后，SDK 自动同步服务端会话数据并写入本地。
+自 SDK v5.1.0 起，`EMOptions#dataSyncType` 默认包含 `.conversations`。用户登录成功后，SDK 自动同步服务端会话数据并写入本地。应用应等待同步完成，再读取本地数据；如需指定同步范围，可以在初始化 SDK 前配置该属性。
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")
@@ -134,6 +132,7 @@ iOS SDK 提供以下本地会话列表读取方式：
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversations` | `isSort` 传 `true` 时，置顶会话优先；置顶和非置顶会话内部均按最新消息时间倒序排列。 |
 | 未指定排序的列表 | `getAllConversations` | 等同于 `getAllConversations(false)`，返回本地会话数组。 |
+| 数据库分页 | `getConversationsFromDBWithCursor` | 自 SDK v5.1.0 起支持。初始化前需关闭本地会话自动全量加载，详见[分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | 数据库筛选 | `filterConversationsFromDB` | 从本地数据库加载全部会话或按闭包条件筛选会话，可选择先清理会话内存缓存。 |
 
 ```swift
@@ -193,7 +192,7 @@ EMClient.shared().chatManager?.clearConversationUnreadMessageCount(
 
 | 功能 | 主要 API | 说明 |
 | :--- | :--- | :--- |
-| 会话列表 | `getAllConversations`、`getAllConversations`、`filterConversationsFromDB` | 从本地内存或数据库读取会话列表，详见[会话列表](conversation_list.html)。 |
+| 会话列表 | `getAllConversations`、`getConversationsFromDBWithCursor`、`filterConversationsFromDB` | 从本地内存或数据库一次性、分页或按条件读取会话列表，详见[会话列表](conversation_list.html)。 |
 | 会话未读数 | `unreadMessagesCount`、`clearConversationUnreadMessageCount`、`clearAllConversationUnreadMessageCount` | 获取或清零会话未读数，详见[会话未读数](conversation_unread.html)。 |
 | 会话删除 | `deleteConversation`、`deleteServerConversation`、`deleteAllMessagesAndConversations` | 删除本地会话及消息，或删除当前用户服务端的会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `pinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |
@@ -269,7 +268,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## 最佳实践
 
-- 初始化 SDK 前将 `EMOptions#dataSyncType` 配置为包含 `.conversations`，并在会话数据同步成功后读取本地列表。
+- 使用自 SDK v5.1.0 起默认的 `.conversations` 配置，或在初始化 SDK 前显式配置该类型，并在会话数据同步成功后读取本地列表。
 - 展示会话列表时优先调用 `getAllConversations` 并将 `isSort` 传 `true`，直接使用 SDK 返回的置顶优先排序结果。
 - 仅查询本地会话时，将 `getConversation` 的 `createIfNotExist` 传 `false`，避免意外创建空会话。
 - 注册 `EMConversationDelegate`；收到 `conversationListDidUpdate` 后刷新会话列表。
@@ -285,9 +284,11 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | [`marks`](#会话对象) / [`ext`](#会话对象) | `EMConversation` | 获取会话标记和本地扩展属性。 |
 | [`conversationName`](#会话对象) / [`conversationAvatar`](#会话对象) | `EMConversation` | 获取会话显示名称和头像。 |
 | [`getConversation`](#通过接口创建本地会话) | `IEMChatManager` | 查找本地会话，并可按参数在会话不存在时创建。 |
+| [`enableChatroomConversation`](#通过消息创建或更新会话) | `EMOptions` | 设置收发聊天室消息时是否创建本地聊天室会话。 |
 | [`dataSyncType`](#通过服务端同步更新会话列表) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`initializeSDKWithOptions`](#通过服务端同步更新会话列表) | `EMClient` | 使用指定配置初始化 iOS SDK。 |
 | [`getAllConversations`](#会话列表与空会话) / [`getAllConversations`](#会话列表与空会话) | `IEMChatManager` | 获取本地会话数组。 |
+| [`getConversationsFromDBWithCursor`](conversation_list.html#分页获取本地会话) | `IEMChatManager` | 自 SDK v5.1.0 起，从本地数据库分页获取会话列表。 |
 | [`filterConversationsFromDB`](#会话列表与空会话) | `IEMChatManager` | 从本地数据库加载全部会话或筛选会话。 |
 | [`loadEmptyConversations`](#会话列表与空会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`clearConversationUnreadMessageCount`](#当前会话与未读数) | `IEMChatManager` | 清零指定会话的本地未读数。 |
