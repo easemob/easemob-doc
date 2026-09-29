@@ -134,5 +134,5 @@ await ChatClient.getInstance.init(options);
 | [`removeEventHandler`](#初始化后设置监听) | `ChatManager` | 移除消息事件处理器。 |
 | [`enableAutoSyncContacts`](#设置登录后自动同步好友数据) | `ChatOptions` | 登录后自动同步好友数据的初始化配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | 用户属性自动管理的初始化配置。 |
-| [`apnsCertName`](#配置-ios-推送证书名称) | `ChatOptions` | iOS APNs 推送证书名称的初始化配置。 |
-| [`pushKitCertName`](#配置-ios-推送证书名称) | `ChatOptions` | iOS PushKit 推送证书名称的初始化配置。 |
+| [`apnsCertName`](#常用初始化配置) | `ChatOptions` | iOS APNs 推送证书名称的初始化配置。 |
+| [`pushKitCertName`](#常用初始化配置) | `ChatOptions` | iOS PushKit 推送证书名称的初始化配置。 |

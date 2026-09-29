@@ -356,11 +356,12 @@ EMClient.getInstance()
 | [`setDataSyncType`](#登录后自动同步会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`setEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置获取本地会话列表时是否包含聊天室会话。 |
 | [`isEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
-| [`setLoadEmptyConversations`](#获取本地所有或筛选的会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
-| [`setDeleteMessagesAsExitChatRoom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
-| [`setAutoLoadAllConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
+| [`setLoadEmptyConversations`](#会话相关选项) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
+| [`setDeleteMessagesAsExitChatRoom`](#会话相关选项) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
+| [`setAutoLoadAllConversations`](#会话相关选项) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
 | [`init`](#登录后自动同步会话列表) | `EMClient` | 使用指定配置初始化 Android SDK。 |
 | [`asyncFilterConversationsFromDB`](#获取本地所有或筛选的会话) | `EMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
+| [`asyncGetConversationsFromDB`](#分页获取本地会话) | `EMChatManager` | 从本地数据库分页获取会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `EMChatManager` | 获取置顶优先并按最后消息时间倒序排列的本地会话列表。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
 | [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `EMConversation` | 获取单聊或群聊会话的显示名称和头像。 |

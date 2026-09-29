@@ -4,7 +4,7 @@
 
 本文介绍环信即时通讯 IM React Native SDK 如何搜索本地消息。
 
-自 React Native SDK 1.21.0 起可调用服务端消息搜索 API。若要搜索服务端保存的历史消息，需联系环信商务开通消息搜索服务，详见 [搜索服务端消息](/value-added/search/message_search_react-native.html)。
+自 React Native SDK 1.21.0 起可调用服务端消息搜索 API。若要搜索服务端保存的历史消息，需联系环信商务开通消息搜索服务，详见 [搜索服务端消息](/value-added/search/message_search_rn.html)。
 
 ## 技术原理
 

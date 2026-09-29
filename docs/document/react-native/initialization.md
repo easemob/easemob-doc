@@ -103,6 +103,9 @@ ChatClient.getInstance().chatManager.addMessageListener({
 | [`init`](#初始化-sdk) | `ChatClient` | `Promise<void>` | 使用指定配置初始化 React Native SDK。 |
 | [`apnsCertName`](push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |
 | [`pushKitCertName`](push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS PushKit 证书名称。 |
+| [`enableChatroomConversation`](conversation_list.html#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话列表时是否包含聊天室会话。 |
+| [`enableEmptyConversation`](conversation_list.html#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话时是否包含空会话。 |
+| [`autoLoadConversations`](conversation_list.html#分页获取本地会话) | `ChatOptions` | `boolean` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
 | [`enableAutoSyncContacts`](#设置登录后自动同步好友数据) | `ChatOptions` | `boolean` | 登录后自动同步好友数据的初始化配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | `boolean` | 用户信息自动管理的初始化配置。 |
 | [`addConnectionListener`](#初始化后设置监听) | `ChatClient` | `void` | 添加连接状态监听器。 |

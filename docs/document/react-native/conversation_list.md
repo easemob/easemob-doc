@@ -134,7 +134,7 @@ try {
 | [`fetchConversationsFromServerWithCursor`](#从服务器分页获取会话列表) | `ChatManager` | `Promise<ChatCursorResult<ChatConversation>>` | 从服务器分页获取会话列表。 |
 | [`fetchConversationsFromDB`](#分页获取本地会话) | `ChatManager` | `Promise<ChatCursorResult<ChatConversation>>` | 从本地数据库分页获取会话列表。 |
 | [`getAllConversations`](#获取本地所有会话) | `ChatManager` | `Promise<ChatConversation[]>` | 一次性获取本地所有会话。 |
-| [`enableChatroomConversation`](#从本地获取会话列表) | 设置获取本地会话列表时是否包含聊天室会话，默认不包括聊天室会话。自 React Native SDK 1.21.0 起支持。 |
-| `deleteMessagesAsExitChatRoom`(#从本地获取会话列表) | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。默认删除本地消息。 |
-| [`enableEmptyConversation`](#从本地获取会话列表) | 设置获取本地会话时是否包含空会话。默认不包含空会话。 |
-| [`autoLoadConversations`](#分页获取本地会话) | 设置登录成功后是否自动将全部本地会话加载到内存。默认自动加载全部会话。|
+| [`enableChatroomConversation`](#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话列表时是否包含聊天室会话，默认不包含聊天室会话。自 React Native SDK 1.21.0 起支持。 |
+| [`deleteMessagesAsExitChatRoom`](#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。默认删除本地消息。 |
+| [`enableEmptyConversation`](#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话时是否包含空会话。默认不包含空会话。 |
+| [`autoLoadConversations`](#分页获取本地会话) | `ChatOptions` | `boolean` | 设置登录成功后是否自动将全部本地会话加载到内存。默认自动加载全部会话。 |

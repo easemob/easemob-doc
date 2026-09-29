@@ -51,7 +51,7 @@
 8. APNs 推送服务器将消息发送给用户 B。
 
 :::tip
-自 Flutter SDK 4.25.0 起，Flutter iOS 端还支持 PushKit（VoIP 推送）。PushKit 用于 VoIP 场景，不属于普通离线消息推送。证书配置及 token 绑定方式，详见 [上传推送证书及绑定推送信息](push_easemob_console.html#配置-ios-推送证书名称)。
+自 Flutter SDK 4.25.0 起，Flutter iOS 端还支持 PushKit（VoIP 推送）。PushKit 用于 VoIP 场景，不属于普通离线消息推送。证书名称配置详见 [配置 iOS 推送证书名称](push_easemob_console.html#配置-ios-推送证书名称)，token 绑定详见 [绑定 PushKit Token](push_easemob_console.html#绑定-pushkit-token)。
 :::
 
 ## 推送高级功能

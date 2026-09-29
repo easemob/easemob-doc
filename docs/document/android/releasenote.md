@@ -2,7 +2,7 @@
 
 ## v5.1.0 Dev 2026-09-24
 
-## 重大变更
+#### 重大变更
 
 **1. 登录后默认自动同步会话**
 
@@ -24,18 +24,18 @@
 - `EMOptions#setSyncDataWebSocketPort(int)`
 - `EMOptions#getSyncDataWebSocketPort()`
 
-## 新增特性
+#### 新增特性
 
 - 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
-- 支持[查询群组邀请确认配置](group_manage.html#邀请用户入群)：新增 `EMGroup#isInviteNeedConfirm()`，用于获取群组“邀请成员是否需要被邀请人确认”的配置。
+- 支持 [查询群组邀请确认配置](group_manage.html#邀请用户入群)：新增 `EMGroup#isInviteNeedConfirm()`，用于获取群组“邀请成员是否需要被邀请人确认”的配置。
 - 新增多设备登录场景下的 [群组信息更新事件](multi_device.html#监听多设备事件) `GROUP_UPDATE`（事件码 `34`）。
 
-## 优化
+#### 优化
 
 - **本地数据库性能优化**
    - SQLCipher 数据库默认启用 WAL 模式，已移除开关，始终开启；
    - 单读连接升级为有界读连接池（容量 3），无过滤条件的会话加载走读连接池，提升并发读性能；
-   - 群成员名片（remark）缓存改为懒加载；
+   - 好友备注（remark）缓存改为懒加载；
    - 会话/群组同步时间戳读取适配 WAL，并优化 `performMigrationToVersion51` 迁移流程。
 
 - **网络超时调优**
@@ -49,7 +49,7 @@
    - `libcipherdb.so` 按 NDK 29 重新编译；
    - DoH 分片上传启用证书校验。
 
-## 修复
+#### 修复
 
 1. 修复推送 token 上传与登出并发时的 NPE 崩溃，以及过期上传任务污染本地 token 状态的问题。
 2. 修复拉取漫游消息后未更新会话最后一条消息的问题。
