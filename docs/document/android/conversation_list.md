@@ -8,7 +8,7 @@
 
 ## 功能开通
 
-使用前，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
+如需将服务端会话列表同步到本地，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
@@ -226,7 +226,7 @@ Map<String, EMConversation> conversationMap = EMClient.getInstance()
 
 - 单聊会话：分别为对端用户的昵称和头像。
 - 群聊会话：分别为群名称和群头像。
-- 相关数据尚未同步时，这两个方法可能返回空字符串。
+- 相关用户或群组数据尚未同步时，这两个方法可能返回空字符串。
 
 ```java
 String conversationName = conversation.getConversationName();

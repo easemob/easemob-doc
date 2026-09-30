@@ -112,7 +112,7 @@ options.enableDeliveryAck = YES;
 
 ## 单聊和群聊消息已读回执
 
-单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，但发送方仍需在发送消息前设置 `isNeedReadReceipt(YES)`。单聊消消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
 群消息已读回执功能使用前存在以下使用限制：
 
@@ -206,7 +206,7 @@ NSArray<EMChatMessage *> *messages = @[message];
 
 ### 批量获取多条群消息的回执汇总
 
-调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一会话。
+调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
 
 ```objectivec
 // messages 中最多包含 20 条、且属于同一群会话的消息。
