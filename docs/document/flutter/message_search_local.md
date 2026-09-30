@@ -4,8 +4,6 @@
 
 本文介绍环信即时通讯 IM Flutter SDK 如何搜索本地消息。
 
-自 Flutter SDK 4.25.0 起可调用服务端消息搜索 API。该功能需联系环信商务开通，详见 [服务端消息搜索文档](/value-added/search/message_search_flutter.html)。
-
 ## 技术原理
 
 环信即时通讯 IM Flutter SDK 支持搜索用户设备上存储的消息数据，其中包含如下主要方法：

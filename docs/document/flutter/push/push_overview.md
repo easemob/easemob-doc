@@ -32,7 +32,7 @@
 
 :::tip
 1. 开发者通过[环信控制台](https://console.easemob.com/user/login)配置 App 的推送证书，需填写证书名称（或者 App Key）。该步骤须在登录环信 IM SDK 成功后进行。证书名称是环信服务器用于判断目标设备使用哪种推送通道的唯一条件，因此必须确保与 Android 终端设备上传的证书名称一致。
-2. 关于推送 token，详见[管理推送 Token](push_easemob_console.html#管理推送-token)。
+2. 关于推送 token，详见[绑定推送信息页面相关描述](push_easemob_console.html#绑定推送信息)。
 :::
 
 ### iOS 平台离线推送
@@ -49,10 +49,6 @@
 6. 若用户 B 离线，环信服务器判断该用户是否使用了 APNs 推送。
 7. 环信服务器将消息发送给 APNs 推送服务器。
 8. APNs 推送服务器将消息发送给用户 B。
-
-:::tip
-自 Flutter SDK 4.25.0 起，Flutter iOS 端还支持 PushKit（VoIP 推送）。PushKit 用于 VoIP 场景，不属于普通离线消息推送。证书名称配置详见 [配置 iOS 推送证书名称](push_easemob_console.html#配置-ios-推送证书名称)，token 绑定详见 [绑定 PushKit Token](push_easemob_console.html#绑定-pushkit-token)。
-:::
 
 ## 推送高级功能
 
@@ -114,7 +110,6 @@
 3. 若使用[推送模板](#推送模板)，需在 [环信控制台](https://console.easemob.com/user/login)上激活。
 4. 各推送使用的条件：
   - APNs：在苹果设备上可用；
-  - PushKit（VoIP）：仅在苹果设备的 VoIP 推送场景中可用；
   - Google FCM：设备启用了 Google Play 服务且可连接至 Google 服务器；
   - 小米推送：在小米设备上可用；
   - 华为推送：在华为设备上可用；

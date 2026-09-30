@@ -55,15 +55,8 @@
 8. APNs 推送服务器将消息发送给用户 B。
 
 :::tip
-1. iOS 支持在初始化 SDK 时[配置 APNs 与 PushKit 推送证书名称](push_easemob_console.html#配置-ios-推送证书名称)，对应属性为 `ChatOptions.apnsCertName` 和 `ChatOptions.pushKitCertName`。证书名称应与环信控制台中的配置一致，且只能在初始化 SDK 时设置。
-2. 关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。
+关于获取和发送推送 token（device token），详见[获取或更新推送 token](push_get_device_token.html)和[发送推送 token 到服务器端](push_send_token_to_server.html)。 
 :::
-
-#### PushKit（VoIP 推送）
-
-React Native SDK 1.21.0 支持在 iOS 平台使用 PushKit 实现 VoIP 推送。使用该功能时，需要在初始化 SDK 时设置 `ChatOptions#pushKitCertName`，并调用 `ChatClient#bindPushKitToken` 绑定 `PKPushRegistry` 上报的 PushKit token。
-
-配置证书名称详见 [配置 iOS 推送证书名称](push_easemob_console.html#配置-ios-推送证书名称)，token 的绑定与解绑详见 [绑定和解绑 PushKit token](push_send_token_to_server.html#绑定和解绑-pushkit-token)。
 
 ## 推送高级功能
 
