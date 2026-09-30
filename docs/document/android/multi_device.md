@@ -350,6 +350,9 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
             //当前⽤户在其他设备设置了群成员自定义属性。
             case GROUP_METADATA_CHANGED:
                 break;    
+            //当前用户在其他设备更新了群组信息。自 SDK v5.1.0 起支持该事件。
+            case GROUP_UPDATE:
+                break;
             default:
                 break;
         }

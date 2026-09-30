@@ -75,7 +75,7 @@ if (conversation != null) {
 
 置顶状态随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表。
 
-初始化 SDK 前，通过 `EMOptions#setDataSyncType` 配置 `EMDataSyncType.CONVERSATIONS`：
+自 SDK v5.1.0 起，`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`。
 
 ```java
 EMOptions options = new EMOptions();

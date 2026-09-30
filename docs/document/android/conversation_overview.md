@@ -4,7 +4,7 @@
 
 会话是单聊、群聊或聊天室中的消息集合。SDK 通过 `EMConversation` 表示本地会话，应用可以读取会话 ID、会话类型、最近一条消息、未读数、置顶状态、会话标记和本地扩展字段等数据。
 
-SDK 可在 [登录成功后自动同步服务端会话数据并写入本地](initialization.html#设置登录后自动同步数据)。应用在同步完成后，通过本地接口读取和展示会话列表。
+自 SDK v5.1.0 起，SDK 默认在 [登录成功后自动同步服务端会话数据并写入本地](initialization.html#设置登录后自动同步数据)。应用可在同步完成后通过本地接口读取和展示会话列表。
 
 ## 前提条件
 
@@ -74,7 +74,7 @@ EMConversation conversation = EMClient.getInstance()
 
 ### 通过服务端同步更新会话列表
 
-在调用 `EMClient#init` 前，通过 `EMOptions#setDataSyncType` 配置 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。
+自 SDK v5.1.0 起，`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。你也可以在调用 `EMClient#init` 前显式配置该方法，以指定需要自动同步的数据类型；如传入 `EMDataSyncType.NONE`，则关闭自动数据同步。
 
 ```java
 EMOptions options = new EMOptions();
@@ -95,6 +95,7 @@ SDK 提供以下本地会话列表读取方式：
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversationsBySort()` | 返回置顶会话优先的列表；置顶和非置顶会话内部均按最后一条消息的时间戳倒序排列。 |
 | 会话映射 | `getAllConversations()` | 返回以会话 ID 为键的 `Map<String, EMConversation>`。 |
+| 数据库分页 | `asyncGetConversationsFromDB` | 自 SDK v5.1.0 起支持。初始化前需关闭本地会话自动全量加载，详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | 数据库筛选 | `asyncFilterConversationsFromDB(...)` | 从本地数据库加载全部会话或按自定义条件筛选会话。 |
 
 空会话是没有消息的会话。例如，会话中的全部消息过期、被清除或被撤回后，该会话可能成为空会话。
@@ -203,7 +204,7 @@ EMClient.getInstance()
 
 ## 最佳实践
 
-- 初始化 SDK 前配置 `EMDataSyncType.CONVERSATIONS`，并在会话数据同步成功后读取本地会话列表。
+- 使用默认配置或在初始化 SDK 前配置 `EMDataSyncType.CONVERSATIONS`，并在会话数据同步成功后读取本地会话列表；如需关闭自动同步，显式配置 `EMDataSyncType.NONE`。
 - 展示会话列表时优先使用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先排序结果。
 - 注册 `EMConversationListener`；收到 `onConversationUpdate` 后重新读取会话列表并刷新界面。
 - 页面或组件销毁时移除 `EMConversationListener`、`EMConnectionListener` 和 `EMMultiDeviceListener`，避免重复回调和内存泄漏。

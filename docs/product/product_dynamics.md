@@ -6,6 +6,12 @@ containerClass: product-dynamics-page
 
 ## 2026-09
 
+#### 环信 Android/iOS SDK v5.1.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK 5.1.0 开发版发布   | **重大变更**：<br/> - Android [登录后默认自动同步会话列表](/document/android/conversation_list.html#登录后自动同步会话列表)。<br/> - Android 和 iOS 的本地会话列表默认不包含聊天室会话，详见 [Android 文档](/document/android/conversation_list.html#获取会话列表) 和 [iOS 文档](/document/ios/conversation_list.html#获取会话列表)。<br/> - Android 和 iOS 移除数据同步 WebSocket 配置接口，数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - Android 和 iOS 支持分页获取本地会话列表，详见 [Android 文档](/document/android/conversation_list.html#分页获取本地会话) 和 [iOS 文档](/document/ios/conversation_list.html#分页获取本地会话)。<br/> - Android 支持通过 `EMGroup#isInviteNeedConfirm()` [查询群组邀请是否需要被邀请方确认](/document/android/group_manage.html#邀请用户入群)。<br/> - Android 新增 [多设备登录场景下的群组信息更新事件](/document/android/multi_device.html)。 | 2026-9-24     | - [Android SDK 5.1.0 更新日志](/document/android/releasenote.html#v5-1-0-dev-2026-9-24) <br/> - [iOS SDK 5.1.0 更新日志](/document/ios/releasenote.html#v5-1-0-dev-2026-9-24)  |
+
 #### 环信 Web SDK v5.1.2/4.24.3 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |

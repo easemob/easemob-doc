@@ -34,7 +34,7 @@ let markMapping: [EMMarkType: String] = [
 
 调用 `addConversationMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记，单次最多传入 20 个会话 ID。
 
-添加会话标记后，SDK 会同时更新服务端和本地的标记数据。初始化 SDK 前，将 `EMOptions#dataSyncType` 配置为包含 `EMDataSyncTypeConversations`。登录后，当 `syncDataFinished` 通知会话数据同步成功时，可通过本地会话列表接口获取 `EMConversation` 对象，并通过 `EMConversation#marks` 获取该会话的全部标记。
+登录后，SDK 会自动同步会话列表及其标记并写入本地。添加会话标记后，标记数据会同时更新至服务端和本地。同步完成后，可通过本地会话列表接口获取 `EMConversation` 对象，再调用 `EMConversation#marks` 获取该会话的全部标记。
 
 若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话，对应标记也可能不再随服务端会话列表同步到本地。
 
@@ -94,7 +94,7 @@ EMClient.shared().chatManager?.removeConversationMark(
 
 ## 按标记筛选会话列表
 
-应用应在初始化 SDK 前将 `EMOptions#dataSyncType` 配置为包含 `.conversations`，登录后等待会话数据同步完成，再通过本地 `EMConversation#marks` 筛选会话。
+`EMOptions#dataSyncType` 默认包含 `.conversations`。应用登录后应等待会话数据同步完成，再通过本地 `EMConversation#marks` 筛选会话。如需显式指定同步范围，可以在初始化 SDK 前配置该属性。
 
 初始化 SDK 前配置会话同步：
 

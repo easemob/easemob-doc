@@ -34,7 +34,10 @@ EMClient.getInstance().init(getApplicationContext(), options);
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/>- `false`：保留。 |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | 设置主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `allowChatroomOwnerLeave(boolean allowed)` | 设置是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；离开后所有者仍保留聊天室权限，但不再接收聊天室消息。<br/> - `false`：不允许。 |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。必须在 `init` 前设置。 |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。必须在 `init` 前设置。自 SDK v5.1.0 起，默认值为 `CONVERSATIONS`。 |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
@@ -81,7 +84,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
 ### 同步的数据
 
-SDK 支持在初始化前通过 `EMOptions.setDataSyncType` 配置登录后自动同步的数据类型。用户登录成功后，SDK 按配置同步服务端数据并更新本地缓存或数据库。
+SDK 支持在初始化前通过 `EMOptions#setDataSyncType` 配置登录后自动同步的数据类型。用户登录成功后，SDK 按配置同步服务端数据并更新本地缓存或数据库。自 SDK v5.1.0 起，该配置默认包含 `EMDataSyncType.CONVERSATIONS`，即默认自动同步会话列表。
 
 当前支持同步会话列表、好友列表以及当前用户已加入的群组列表。各数据类型的配置项、本地读取方式如下：
 
@@ -99,7 +102,7 @@ SDK 支持在初始化前通过 `EMOptions.setDataSyncType` 配置登录后自�
 
 配置规则如下：
 
-- 未调用 `setDataSyncType` 时，默认不自动同步数据，即 `EMDataSyncType.NONE`。
+- 自 Android SDK v5.1.0 起，未调用 `setDataSyncType` 时，默认自动同步会话数据，即 `EMDataSyncType.CONVERSATIONS`。
 - 需要同步一种或多种数据时，使用 `EnumSet.of(...)` 显式传入对应枚举值。
 - 传入 `EnumSet.of(EMDataSyncType.NONE)`、`null` 或空集合表示不自动同步。
 

@@ -135,7 +135,7 @@ EMClient.getInstance().chatManager().asyncSearchMessagesFromServer(
 | 方法 | 返回类型 | 描述 |
 | --- | --- | --- |
 | `getData()` | `List<EMSearchServerMessageResult>` | 获取当前页的搜索结果列表。 |
-| `getPageCount()` | `int` | 获取服务端返回的分页页数信息。获取服务端返回的分页计数。当该值小于请求的 `pageSize` 时，表示服务端没有更多搜索结果。 |
+| `getPageCount()` | `int` | 获取服务端返回的分页计数。当该值小于请求的 `pageSize` 时，表示服务端没有更多搜索结果。 |
 
 搜索结果为 `EMSearchServerMessageResult` 对象列表。你可以从结果对象中获取消息 ID、消息体、扩展字段、发送方、接收方、会话 ID、会话类型、消息时间戳以及服务端返回的高亮文本列表。
 

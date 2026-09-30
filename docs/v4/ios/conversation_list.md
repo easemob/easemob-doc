@@ -2,7 +2,7 @@
 
 <Toc />
 
-对于单聊、群组聊天和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表；默认情况下，本地会话列表的返回结果不包含聊天室会话。
+对于单聊、群组聊天和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。**自 SDK v4.25.0 起，默认情况下，本地会话列表不包含聊天室会话。**
 
 ## 前提条件
 
@@ -36,7 +36,7 @@
 示例代码如下：
 
 ```objectivec
-// pageSize: 每页返回的会话数。取值范围为 [1,20]。
+// pageSize: 每页返回的会话数。取值范围为 [1,20]，默认为 `10`。
 // cursor：查询的开始位置。若传入 `nil` 或 `@""`，SDK 从最新活跃的会话开始获取。
 NSString *cursor = @"";
 [EMClient.sharedClient.chatManager getConversationsFromServerWithCursor:cursor pageSize:20 completion:^(EMCursorResult<EMConversation *> * _Nullable result, EMError * _Nullable error) {
