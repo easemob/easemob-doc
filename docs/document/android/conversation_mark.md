@@ -33,7 +33,7 @@ markMapping.put(EMConversation.EMMarkType.MARK_2, "customer");
 
 调用 `EMChatManager#asyncAddConversationMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记。单次最多可传入 20 个会话 ID。
 
-自 SDK v5.1.0 起，SDK 会自动同步会话列表并写入本地。添加会话标记后，标记数据会同时更新至服务端和本地。会话标记会随会话数据在登录后自动同步并写入本地。同步完成后，可通过本地会话列表接口获取 `EMConversation` 对象，再调用 `EMConversation#marks` 获取该会话的全部标记。
+自 SDK v5.1.0 起，SDK 会在登录后自动同步会话列表及其标记并写入本地。添加会话标记后，标记数据会同时更新至服务端和本地。同步完成后，可通过本地会话列表接口获取 `EMConversation` 对象，再调用 `EMConversation#marks` 获取该会话的全部标记。
 
 若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话。对应会话的标记也可能不再随服务端会话列表同步到本地。
 

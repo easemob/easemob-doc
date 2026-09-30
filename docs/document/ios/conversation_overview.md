@@ -132,7 +132,7 @@ iOS SDK 提供以下本地会话列表读取方式：
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversations` | `isSort` 传 `true` 时，置顶会话优先；置顶和非置顶会话内部均按最新消息时间倒序排列。 |
 | 未指定排序的列表 | `getAllConversations` | 等同于 `getAllConversations(false)`，返回本地会话数组。 |
-| 数据库分页 | `getConversationsFromDBWithCursor` | 自 SDK v5.1.0 起支持。初始化前需关闭本地会话自动全量加载，详见[分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
+| 数据库分页 | `getConversationsFromDBWithCursor` | 自 SDK v5.1.0 起支持。初始化前需关闭本地会话自动全量加载，详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | 数据库筛选 | `filterConversationsFromDB` | 从本地数据库加载全部会话或按闭包条件筛选会话，可选择先清理会话内存缓存。 |
 
 ```swift
@@ -192,7 +192,7 @@ EMClient.shared().chatManager?.clearConversationUnreadMessageCount(
 
 | 功能 | 主要 API | 说明 |
 | :--- | :--- | :--- |
-| 会话列表 | `getAllConversations`、`getConversationsFromDBWithCursor`、`filterConversationsFromDB` | 从本地内存或数据库一次性、分页或按条件读取会话列表，详见[会话列表](conversation_list.html)。 |
+| 会话列表 | `getAllConversations`、`getConversationsFromDBWithCursor`、`filterConversationsFromDB` | 从本地内存或数据库一次性、分页或按条件读取会话列表，详见 [会话列表](conversation_list.html)。 |
 | 会话未读数 | `unreadMessagesCount`、`clearConversationUnreadMessageCount`、`clearAllConversationUnreadMessageCount` | 获取或清零会话未读数，详见[会话未读数](conversation_unread.html)。 |
 | 会话删除 | `deleteConversation`、`deleteServerConversation`、`deleteAllMessagesAndConversations` | 删除本地会话及消息，或删除当前用户服务端的会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `pinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |

@@ -320,7 +320,7 @@ EMClient.shared().chatManager?.removeConversation(delegate: listListener)
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
 | [`dataSyncType`](#登录后自动同步会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
-| [`enableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置收发聊天室消息时是否创建本地聊天室会话，也可读取该属性查询当前配置。 |
+| [`enableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置获取本地会话列表时是否包含聊天室会话，也可读取该属性查询当前配置。 |
 | [`loadEmptyConversations`](#会话相关选项) | `EMOptions` | 设置从本地加载会话时是否包含空会话。 |
 | [`deleteMessagesOnLeaveChatroom`](#会话相关选项) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
 | [`autoLoadConversations`](#分页获取本地会话) | `EMOptions` | 设置登录后是否自动将本地会话加载到内存。 |

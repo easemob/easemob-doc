@@ -97,7 +97,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 自 SDK v5.1.0 起，你可以调用 `EMChatManager#asyncGetConversationsFromDB` 从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
 
-调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载，默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
+调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载。该选项默认为 `true`，即默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
 
 ```java
 // SDK 初始化前关闭自动加载全部本地会话。

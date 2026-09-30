@@ -10,13 +10,7 @@ containerClass: product-dynamics-page
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 5.1.0 开发版发布   | **重大变更**：<br/> - Android [登录后默认自动同步会话列表](/document/android/conversation_list.html#登录后自动同步会话列表)。<br/> - Android 和 iOS 的 [本地会话列表默认不包含聊天室会话](/document/android/conversation_list.html#获取会话列表)。<br/> - Android 和 iOS 移除数据同步 WebSocket 配置接口，数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - Android 和 iOS 支持 [分页获取本地会话列表](/document/android/conversation_list.html#分页获取本地会话)。<br/> - Android 支持通过 `EMGroup#isInviteNeedConfirm()` [查询群组邀请是否需要被邀请方确认](/document/android/group_manage.html#邀请用户入群)。<br/> - Android 新增 [多设备登录场景下的群组信息更新事件](/document/android/multi_device.html)。 | 2026-9-24     | - [Android SDK 5.1.0 更新日志](/document/android/releasenote.html#v5-1-0-dev-2026-9-24) <br/> - [iOS SDK 5.1.0 更新日志](/document/ios/releasenote.html#v5-1-0-dev-2026-9-24)  |
-
-#### 环信 HarmonyOS SDK v1.15.0 发版
-
-| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
-| :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS SDK 1.15.0 开发版发布   | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/harmonyos/conversation_list.htmlconversation_list.html#从本地获取会话列表)。<br/> - 移除数据同步 WebSocket 配置属性。<br/> **新增特性**：<br/> - 支持 [分页获取本地会话列表](/document/harmonyos/conversation_list.html#分页获取本地会话)。<br/> - 支持通过 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)。<br/> - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。 <br/> - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。<br/> - 新增连接和翻译相关的错误码。详情请参见 [错误码](error.html)| 2026-9-24     | [HarmonyOS SDK 1.15.0 更新日志](/document/harmonyos/releasenote.html#v1-15-0-dev-2026-9-24-开发版)  |
+| Android/iOS SDK 5.1.0 开发版发布   | **重大变更**：<br/> - Android [登录后默认自动同步会话列表](/document/android/conversation_list.html#登录后自动同步会话列表)。<br/> - Android 和 iOS 的本地会话列表默认不包含聊天室会话，详见 [Android 文档](/document/android/conversation_list.html#获取会话列表) 和 [iOS 文档](/document/ios/conversation_list.html#获取会话列表)。<br/> - Android 和 iOS 移除数据同步 WebSocket 配置接口，数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - Android 和 iOS 支持分页获取本地会话列表，详见 [Android 文档](/document/android/conversation_list.html#分页获取本地会话) 和 [iOS 文档](/document/ios/conversation_list.html#分页获取本地会话)。<br/> - Android 支持通过 `EMGroup#isInviteNeedConfirm()` [查询群组邀请是否需要被邀请方确认](/document/android/group_manage.html#邀请用户入群)。<br/> - Android 新增 [多设备登录场景下的群组信息更新事件](/document/android/multi_device.html)。 | 2026-9-24     | - [Android SDK 5.1.0 更新日志](/document/android/releasenote.html#v5-1-0-dev-2026-9-24) <br/> - [iOS SDK 5.1.0 更新日志](/document/ios/releasenote.html#v5-1-0-dev-2026-9-24)  |
 
 #### 环信 Web SDK v5.1.2/4.24.3 发版
 
