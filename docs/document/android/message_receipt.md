@@ -114,9 +114,9 @@ EMClient.getInstance()
 
 ## 单聊和群聊消息已读回执
 
-单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，但发送方仍需在发送消息前调用 `EMMessage#setIsNeedReadReceipt(true)`。单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
-群消息已读回执功能使用前存在以下使用限制：
+群消息已读回执功能存在以下使用限制：
 
 | 使用限制       | 默认设置   | 说明                                                         |
 | :--------- | :----- | :------- | 
@@ -214,7 +214,7 @@ EMClient.getInstance()
 
 ### 批量获取多条群消息的回执汇总
 
-调用 `asyncGetGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一会话。
+调用 `asyncGetGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
 
 ```java
 // 异步方法。
@@ -237,7 +237,7 @@ EMClient.getInstance()
 
 ### 获取单条群消息的回执成员详情
 
-调用 `asyncFetchGroupMessageReadReceipts` 分页获取单条群消息的已读回执详情。目标消息必须是需要已读回执的群聊消息；`pageSize` 的取值范围为 `[1, 50]`。
+调用 `asyncFetchGroupMessageReadReceipts` 分页获取单条群消息的已读回执成员详情。目标消息必须是需要已读回执的群聊消息；`pageSize` 的取值范围为 `[1, 50]`。
 
 首次调用时将 `startAckId` 传入 `null` 或空字符串。后续调用时，将上一次结果中的 `cursor` 作为新的 `startAckId`。
 

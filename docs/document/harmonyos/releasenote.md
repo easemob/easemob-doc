@@ -1,5 +1,85 @@
 # HarmonyOS IM SDK 更新日志
 
+## v5.0.0 Dev 2026-9-18（开发版）
+
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 HarmonyOS IM SDK 4.x 到 5.x 迁移指南。
+
+#### 重要变更
+
+**登录与鉴权**
+
+- 登录统一使用 Token 鉴权，保留 `ChatClient.loginWithToken(userId, token)`。
+- 移除密码登录 `ChatClient.login` 和客户端注册 `ChatClient.createAccount`，账号注册应由业务服务器实现。
+- 移除自动登录：删除 `ChatClient.isAutoLogin`、`ChatOptions.setAutoLogin` 和 `ChatOptions.isAutoLogin`，SDK 初始化后不再读取持久化凭据并自动登录。
+- 主动登录时，即使推送 Token 未变化也会重新上传，上传失败会清除本地 Token。
+
+**数据同步与本地数据访问**
+
+SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，并通过统一的同步状态回调监听同步进度。数据库打开和服务端数据同步分别对应不同阶段：
+
+1. **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`，建议在调用 `ChatClient.init` 前显式设置。
+2. **读取本地数据**：`ConnectionListener.onDatabaseOpened(username)` 回调表示当前账号的本地数据库已打开，收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。也可通过 `ChatClient.isDatabaseOpened()` 查询数据库状态；注意 `init` 后即使未登录成功，本地数据库也可能已打开。
+3. **监听服务端数据同步**：通过 `ConnectionListener.onDataSyncStart(type)` 和 `onDataSyncFinish(type, errorCode)` 监听指定类型的数据同步开始和结束，`errorCode` 为 0 表示成功。
+4. **读取最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 回调成功后，再读取本地数据并刷新界面。
+
+列表数据来源同步调整，服务端列表拉取接口已移除，改由数据同步写入本地数据库：
+
+- 移除 `ChatManager` 的 `fetchConversationsFromServer` 和 `fetchConversationsFromServerWithFilter`。
+- 移除 `ContactManager` 的 `fetchAllContactsIDFromServer`、`fetchAllContactsFromServer` 和 `fetchAllContactsFromServerByPage`。
+- 移除 `GroupManager` 的 `fetchJoinedGroupsFromServer` 和 `fetchPublicGroupsFromServer`。
+- 移除 `ChatOptions` 的 `setEnableAutoSyncContacts` 和 `isEnableAutoSyncContacts`，以及 `ContactListener` 的联系人同步回调，改由 `ConnectionListener.onDataSyncStart/Finish` 通知同步状态。
+
+**消息已读回执**
+
+消息已读回执统一调整为批量处理方式，单聊和群聊共用一套回执体系：
+
+- 已读回执改为批量发送，是否发送由每条消息的 `ChatMessage.setIsNeedReadReceipt(true)` 单独控制，移除 `ChatOptions.setRequireReadAck` 全局开关。
+- 单聊和群聊统一通过 `ChatManager.sendMessageReadReceipts(messages: ChatMessage | ChatMessage[])` 发送，并由 `ChatMessageListener.onMessageReadReceipts(receipts)` 接收。
+- 群聊支持批量查询消息已读回执：
+  - `ChatManager.getGroupMessageReadReceipts(messages)` 查询回执汇总。
+  - `ChatManager.fetchGroupMessageReadReceipts(messageId, pageSize, startReceiptId)` 分页拉取回执明细。
+- 回执模型统一：
+  - 新增 `ChatMessageReadReceipt`，提供 `getMessageId()`、`getConversationId()`、`isPeerReceipt()` 和 `getReadCount()`。
+  - `GroupReadAck` 更名为 `GroupReadReceipt`，`getFrom()` 返回 `GroupMember | undefined`，并移除 `getContent()`。
+- 回执字段统一：`ChatMessage` 的 `isUnread` 更名为 `isRead`，`isReceiverRead` 更名为 `isPeerRead`，`isNeedGroupAck` / `setIsNeedGroupAck` 更名为 `isNeedReadReceipt` / `setIsNeedReadReceipt`，`groupAckCount` 更名为 `readReceiptCount`。
+- 移除旧回执接口：`ChatManager` 的 `ackMessageRead`、`ackGroupMessageRead`、`fetchGroupReadAcks`，旧回调 `onMessageRead`、`onGroupMessageRead`、`onReadAckForGroupMessageUpdated`，以及 `ConversationListener` 的 `onConversationRead`。
+- `ChatMessage.createReceiveMessage(...)` 创建的接收消息默认标记为已读。
+
+**会话未读数管理**
+
+- 清除指定会话或全部会话的本地未读数统一走 `ChatManager.clearConversationUnreadMessageCount(conversationId)` 和 `clearAllConversationUnreadMessageCount()`。
+- 移除 `Conversation` 的 `markMessageAsRead` 和 `markAllMessagesAsRead`，以及 `ChatManager` 的 `ackConversationRead` 和 `markAllConversationsAsRead`。
+- 清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。多设备事件新增 `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（65）和 `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（66），其他设备清理会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
+
+**会话能力**
+
+- 新增会话展示信息接口：`Conversation.getConversationName()` 和 `Conversation.getConversationAvatar()`，未同步时可返回空字符串，方便列表展示。
+- 支持批量删除会话：`ChatManager.deleteConversations(conversationIds: string | string[], deleteMessages: boolean)`，可按需同时删除会话消息。
+
+**群组能力**
+
+- 新增群组配置模型 `GroupConfigs`，包含 `maxUsers`、`isPublic`、`joinApprovalRequired`、`allowInvites`、`inviteNeedConfirm` 和 `extField`；`GroupConfigsType` 用于标记需要更新的配置项。
+- 新增 `GroupManager.updateGroupConfigs(groupId, types, configs)`，建群后可按需更新指定配置。
+- `GroupOptions` 移除 `style`（`GroupStyle` 已删除），新增 `isPublic`、`joinApprovalRequired` 和 `allowInvites`，与 `maxUsers`、`inviteNeedConfirm`、`extField` 等字段平铺组合用于建群。
+- `Group` 新增 `isJoinApprovalRequired()` 和 `getUsers()`，移除 `canJoinDirectly()`。
+- 群成员加入、退出事件统一使用 `GroupListener.onMembersJoined` 和 `onMembersExited`，移除单成员回调。
+- `GroupListener.onRequestToJoinDeclined` 的参数顺序调整为 `(groupId, groupName, decliner, reason, applicant)`。
+
+**聊天室监听调整**
+
+- `ChatroomListener.onMutelistAdded` 改为 `(roomId, mutes: Map<string, number>)`，统一表示成员及禁言到期时间，并移除 `onMuteMapAdded`。
+- `ChatroomListener.onRemovedFromChatroom` 改为 `(reason, roomId, roomName, participant)`，新增 `participant` 参数。
+
+**其他新增能力**
+
+- 新增 SDK 日志监听：`ChatClient.addLogListener` / `removeLogListener`，通过 `ChatLogListener.onLog` 回调日志内容。
+- 新增日志压缩：`ChatClient.compressLogs(): Promise<string>`，返回压缩日志文件的本地路径，无需登录。
+- `ChatOptions.setNtpServers` 支持传入单个服务器地址或地址数组。
+
+#### 修复
+
+- 修复部分新增 Promise 接口在参数无效或内部对象未初始化时返回 `undefined` 的问题，统一通过 rejected Promise 返回错误。
+
 ## v1.15.0 Dev 2026-9-24（开发版）
 
 #### 重大变更
