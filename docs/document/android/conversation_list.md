@@ -21,17 +21,6 @@
 
 应用应按照登录后自动同步、监听同步完成和读取本地会话列表的流程获取最新会话数据。
 
-### 会话相关选项
-
-初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
-
-| 选项                                                         | 描述                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
-| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> - （默认）`true`：删除本地消息。 <br/> - `false`：保留本地消息。 |
-| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
-| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
-
 ### 登录后自动同步会话列表
 
 自 SDK v5.1.0 起，`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步会话列表并写入本地。如需显式指定同步范围，可在调用 `EMClient#init` 初始化 SDK 前配置该方法。
@@ -92,6 +81,17 @@ EMClient.getInstance().addConnectionListener(connectionListener);
 // 不再需要监听时移除。
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
+
+### 会话相关选项
+
+初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
+
+| 选项                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> - （默认）`true`：删除本地消息。 <br/> - `false`：保留本地消息。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 ### 分页获取本地会话
 

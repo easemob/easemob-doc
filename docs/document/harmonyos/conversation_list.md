@@ -6,7 +6,7 @@
 
 - **服务端与本地数据：** 环信服务器和 SDK 本地均可维护会话列表数据。服务端保存当前用户的会话状态，本地数据用于客户端快速读取和展示会话列表。登录后，SDK 根据数据同步配置将服务端会话数据同步至本地。收发消息、删除会话、清空未读数、设置或取消置顶、添加或移除会话标记等操作也可能更新本地会话列表。
 
-- **同步与变更通知：** 登录后默认自动同步服务端会话数据。应用应等待会话数据同步完成后，再读取本地会话列表。本地会话列表发生变化时，SDK 会通知应用；同一账号在其他设备上设置或取消会话置顶时，当前设备也可通过多设备事件感知该变更。
+- **同步与变更通知：** 默认同步配置包含会话数据。应用应等待会话数据同步完成后，再读取本地会话列表。本地会话列表发生变化时，SDK 会通知应用；同一账号在其他设备上变更会话状态时，当前设备也可通过多设备事件感知该变更。
 
 ## 功能开通
 
@@ -25,7 +25,7 @@
 
 ### 登录后自动同步会话列表
 
- `ChatOptions#setDataSyncType` 默认包含 `DataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动从服务端同步会话列表并写入本地。
+`ChatOptions#setDataSyncType` 默认包含 `DataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动从服务端同步会话列表并写入本地。
 
 ```typescript
 let options = new ChatOptions({ appKey: "your-org#your-app" });
@@ -89,6 +89,14 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 也可以通过 `ChatClient#isDatabaseOpened()` 主动查询本地数据库是否已经打开。该方法同样不能代替登录状态或数据同步完成状态。
 
+### 会话相关选项
+
+初始化 SDK 时，可以在 `ChatOptions` 中设置以下会话相关选项：
+
+| 选项 | 描述 |
+| :--- | :--- |
+| `setDeleteMessagesOnLeaveChatroom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/>- （默认）`true`：删除本地消息。<br/>- `false`：保留本地消息。可通过 `isDeleteMessagesOnLeaveChatroom()` 查询当前设置。 |
+
 ### 一次性获取本地所有会话
 
 调用 `getAllConversationsBySort` 可以从本地数据库获取排序后的全部会话，返回 `Array<Conversation>`。排序规则如下：
@@ -110,6 +118,22 @@ let conversations: Array<Conversation> = ChatClient.getInstance()
     ?.getConversations() ?? [];
 ```
 
+### 获取指定会话
+
+调用 `getConversation(conversationId, type, createIfNotExist)` 可以根据会话 ID 和会话类型获取指定的本地会话：
+
+- 单聊会话的会话 ID 为对端用户 ID；
+- 群聊会话的会话 ID 为群组 ID；
+- 聊天室会话的会话 ID 为聊天室 ID。
+
+`createIfNotExist` 默认为 `false`，表示本地不存在指定会话时返回 `undefined`；设为 `true` 时，SDK 会创建该会话。
+
+```typescript
+let conversation: Conversation | undefined = ChatClient.getInstance()
+    .chatManager()
+    ?.getConversation(conversationId, ConversationType.GroupChat, false);
+```
+
 ## 获取会话名称和头像
 
 调用 `Conversation#getConversationName()` 和 `Conversation#getConversationAvatar()` 可获取会话的显示名称和头像：
@@ -123,6 +147,15 @@ let conversationName: string = conversation.getConversationName();
 let conversationAvatar: string = conversation.getConversationAvatar();
 ```
 
+还可以获取会话的最后一条消息、未读消息数、置顶状态和会话标记：
+
+```typescript
+let latestMessage: ChatMessage | undefined = conversation.getLatestMessage();
+let unreadCount: number = conversation.getUnreadMsgCount();
+let isPinned: boolean = conversation.isPinned();
+let marks: Set<MarkType> = conversation.marks();
+```
+
 ## 会话列表数据更新场景
 
 | 场景 | 是否影响服务端数据 | 是否影响本地会话列表 |
@@ -132,7 +165,7 @@ let conversationAvatar: string = conversation.getConversationAvatar();
 | 设置或取消会话置顶<br/>方法：`pinConversation` | 是 | 是 |
 | 添加或移除会话标记<br/>方法：`addConversationMark` / `removeConversationMark` | 是 | 是 |
 | 删除一个或多个本地会话，由 `deleteMessages` 决定是否同时删除本地历史消息<br/>方法：`deleteConversations` | 否 | 是 |
-| 删除服务端会话，由 `isDeleteServerMessages` 决定是否同时删除服务端历史消息<br/>方法：`deleteConversationFromServer` | 是 | 是 |
+| 删除服务端和本地的指定会话，由 `isDeleteServerMessages` 决定是否同时删除服务端历史消息<br/>方法：`deleteConversationFromServer` | 是 | 是 |
 | 清空指定会话的本地未读消息数并同步当前账号的其他设备<br/>方法：`clearConversationUnreadMessageCount` | 是 | 是 |
 | 清空全部会话的本地未读消息数并同步当前账号的其他设备<br/>方法：`clearAllConversationUnreadMessageCount` | 是 | 是 |
 
@@ -181,15 +214,17 @@ ChatClient.getInstance()
 | [`init`](#登录后自动同步会话列表) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK。 |
 | [`addConnectionListener`](#监听会话列表同步状态) / [`removeConnectionListener`](#监听会话列表同步状态) | `ChatClient` | 添加或移除连接及数据同步监听器。 |
 | [`isDatabaseOpened`](#监听会话列表同步状态) | `ChatClient` | 查询当前用户的本地数据库是否已经打开。 |
-| [`getConversations`](#获取本地所有或筛选的会话) | `ChatManager` | 获取当前加载到本地的会话数组。 |
-| [`getConversation`](#获取本地所有或筛选的会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
-| [`getUnreadMsgCount`](#获取本地所有或筛选的会话) | `Conversation` | 获取指定会话的未读消息数。 |
+| [`setDeleteMessagesOnLeaveChatroom`](#会话相关选项) / [`isDeleteMessagesOnLeaveChatroom`](#会话相关选项) | `ChatOptions` | 设置或查询退出聊天室时是否删除该聊天室的本地消息。 |
+| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前加载到本地的会话数组。 |
+| [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取置顶优先并按最后消息时间倒序排列的全部会话。 |
-| [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
+| [`getConversationName`](#获取会话展示信息) / [`getConversationAvatar`](#获取会话展示信息) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
+| [`getLatestMessage`](#获取会话展示信息) / [`getUnreadMsgCount`](#获取会话展示信息) | `Conversation` | 获取会话的最后一条消息或未读消息数。 |
+| [`isPinned`](#获取会话展示信息) / [`marks`](#获取会话展示信息) | `Conversation` | 获取会话的置顶状态或会话标记。 |
 | [`pinConversation`](#会话列表数据更新场景) | `ChatManager` | 设置或取消会话置顶。 |
 | [`addConversationMark`](#会话列表数据更新场景) / [`removeConversationMark`](#会话列表数据更新场景) | `ChatManager` | 添加或移除会话标记。 |
 | [`deleteConversations`](#会话列表数据更新场景) | `ChatManager` | 删除一个或多个本地会话，并按参数决定是否删除本地历史消息。 |
-| [`deleteConversationFromServer`](#会话列表数据更新场景) | `ChatManager` | 删除服务端会话，并按参数决定是否删除服务端历史消息。 |
+| [`deleteConversationFromServer`](#会话列表数据更新场景) | `ChatManager` | 删除服务端和本地的指定会话，并按参数决定是否删除服务端历史消息。 |
 | [`clearConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空指定会话的本地未读消息数并同步当前账号的其他设备。 |
 | [`clearAllConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空全部会话的本地未读消息数并同步当前账号的其他设备。 |
 | [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |
