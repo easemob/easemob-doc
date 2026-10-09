@@ -6,7 +6,7 @@
 
 ## 当前登录用户信息
 
-用户调用 `ChatUIKitClient.login` 方法登录时需要传入一个 `ChatUIKitProfile` 对象，包含 `id`、`name` 和 `avatar` 三个属性。`id` 为必填参数，`name` 和 `avatar` 用于展示当前用户昵称和头像。发送消息时，将 `name` 和 `avatar` 属性设置到消息的 `ext` 中，方便其他用户进行展示。
+用户调用 `ChatUIKitClient.login` 方法登录时需要传入一个 `ChatUIKitProfile` 对象，包含 `id`、`name`、`avatar` 和 `remark` 四个属性。`id` 为必填参数，`name` 和 `avatar` 用于展示当前用户昵称和头像，`remark` 为用户在群组内的群昵称（群名片），群聊场景下展示时优先使用。发送消息时，将 `name` 和 `avatar` 属性设置到消息的 `ext` 中，方便其他用户进行展示。
 
 如果登录时没有传入 `name` 和 `avatar` 属性，可以在登录后，调用 `ChatUIKitClient.updateCurrentUser` 方法对当前用户的信息进行更新。
 
@@ -84,7 +84,7 @@ interface ChatUIKitGroupProfileProvider {
 ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
     override fun getGroup(id: String?): ChatUIKitGroupProfile? {
         ChatClient.getInstance().groupManager().getGroup(id)?.let {
-            return ChatUIKitGroupProfile(it.groupId, it.groupName, it.extension)
+            return ChatUIKitGroupProfile(it.groupId, it.groupName, it.groupAvatar)
         }
         return null
     }
@@ -107,7 +107,7 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
  ChatUIKitClient.setUserProfileProvider(object : ChatUIKitUserProfileProvider {
      override fun getUser(userId: String?): ChatUIKitProfile? {
          // 返回对应 userId 的本地用户属性
-         return DemoHelper.getInstance().getDataModel().getAllContacts()[userId]?.toProfile()
+         return getLocalUserInfo(userId)
      }
 
      override fun fetchUsers(
@@ -123,7 +123,7 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
 
     override fun getGroup(id: String?): ChatUIKitGroupProfile? {
         ChatClient.getInstance().groupManager().getGroup(id)?.let {
-            return ChatUIKitGroupProfile(it.groupId, it.groupName, it.extension)
+            return ChatUIKitGroupProfile(it.groupId, it.groupName, it.groupAvatar)
         }
         return null
     }
@@ -158,4 +158,6 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
 ChatUIKitClient.updateCurrentUser(currentUserProfile)
 // 更新单聊用户/群成员信息
 ChatUIKitClient.updateUsersInfo(userProfileList)
+// 更新群组信息
+ChatUIKitClient.updateGroupInfo(groupProfileList)
 ```

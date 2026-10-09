@@ -102,11 +102,7 @@
 
 ## 消息举报
 
-消息举报功能会对用户发送的内容进行审核，判断其是否违反平台的社区准则、服务条款及相关法律法规。如发现不合规内容，终端用户可进行举报。
-
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/uniapp/message_report.png" title="消息审核" />
-</ImageGallery>
+v5.0.0 起移除消息举报功能，请通过业务服务器实现。
 
 ## 本地搜索
 
@@ -167,6 +163,6 @@ UIKit 提供封装的 `ChatUIKitSearchActivity` 搜索页面，用户根据 `Cha
 示例代码如下：
 
 ```kotlin
-    ChatUIKitClient.getConfig()?.chatConfig?.enableMention == false
+    ChatUIKitClient.getConfig()?.chatConfig?.enableMention = false
 ```
 

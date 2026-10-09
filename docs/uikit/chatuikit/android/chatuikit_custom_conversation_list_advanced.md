@@ -14,7 +14,7 @@
     binding?.listConversation?.let{
         it.setItemBackGround()      //设置会话条目的背景。
         it.setItemHeight()          //设置会话条目的高度。
-        it.setAvatarDefaultSrc()    //设置会话条目的默认头像。
+        it.setAvatarDefaultSrc()    //设置会话条目的默认头像。当前版本该方法对会话列表不生效，默认头像请通过资源同名覆盖实现（见下文“设置默认头像”）。
         it.setAvatarSize()          //设置会话头像的大小。
         it.setAvatarShapeType()     //设置会话头像的样式，分为默认 ImageView 样式，圆形和矩形三种样式。
         it.setAvatarRadius()        //设置会话头像的圆角半径，样式设置为矩形时有效。
@@ -62,8 +62,8 @@
 ## 设置会话标题样式
 
 会话条目的标题通常显示会话名称，规则如下：
-- 单聊会话：优先显示 `UserProfileProvider` 提供的好友备注/昵称（`remark/name`），否则显示对端 `userId`。
-- 群聊会话：优先显示 `GroupProfileProvider` 提供的群名称（`name`），其次查找本地群组信息，若存在则显示群名称，否则显示群组 ID。
+- 单聊会话：优先显示 `ChatUIKitUserProfileProvider` 提供的好友备注/昵称（`remark/name`），其次显示 SDK 会话名称（`getConversationName()`）或最新一条消息携带的发送方昵称，均不存在时显示对端 `userId`。
+- 群聊会话：优先显示 `ChatUIKitGroupProfileProvider` 提供的群名称（`name`），其次显示 SDK 会话名称（`getConversationName()`）或本地群组信息中的群名称，否则显示群组 ID。
 
 你可通过以下方法调整标题样式：
 - `setNameTextSize(textSizePx: Int)`：设置标题文字大小，单位为 px。
@@ -94,7 +94,7 @@ binding?.listConversation?.let {
 
 ```kotlin
 val msgSizePx = resources.getDimensionPixelSize(R.dimen.ease_text_size_14)
-val msgColor = ContextCompat.getColor(requireContext(), R.color.ease_color_on_background_medium)
+val msgColor = ContextCompat.getColor(requireContext(), R.color.ease_conv_item_content_color)
 
 binding?.listConversation?.let {
     it.setMessageTextSize(msgSizePx)
@@ -237,11 +237,14 @@ override fun setData(item: ChatUIKitConversation?, position: Int) {
 菜单项文字颜色通过 `ChatUIKitMenuItem.titleColor` 属性控制。你可以在菜单显示前（`setOnMenuPreShowListener`）修改默认的菜单项颜色，或在添加菜单项时直接指定。
 
 ```kotlin
-// 例：在菜单显示前，把“删除”菜单文字改成红色
-binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
-    menuHelper.findItem(R.id.ease_action_conv_menu_delete)?.titleColor =
-        ContextCompat.getColor(requireContext(), R.color.ease_color_error)
-}
+// 例：在菜单显示前，把“置顶”菜单文字改成红色
+// （“删除”菜单项默认已显示为红色，无需重复设置）
+binding?.listConversation?.setOnMenuPreShowListener(object : OnMenuPreShowListener {
+    override fun onMenuPreShow(menuHelper: ChatUIKitMenuHelper?, position: Int) {
+        menuHelper?.findItem(R.id.ease_action_conv_menu_pin)?.titleColor =
+            ContextCompat.getColor(requireContext(), R.color.ease_color_error)
+    }
+})
 ```
 
 - 设置菜单项文字大小
@@ -253,7 +256,7 @@ binding?.listConversation?.setOnMenuPreShowListener { menuHelper, _ ->
 
 - 设置菜单内相关颜色
 
-菜单列表、顶部区域、取消按钮背景均引用 `@color/ease_dialog_menu_bg_color`（定义于 `uikit_dialog_menu.xml`）。
+菜单列表、顶部区域、取消按钮背景均引用 `@color/ease_dialog_menu_bg_color`（该颜色定义于 `ease-im-kit/src/main/res/values/uikit_common_color.xml`，经 `uikit_conversation_styles.xml` 中的样式作用于 `uikit_dialog_menu.xml` 布局）。
 
 建议在 App 工程中通过**同名覆盖**以下颜色资源：
     - `ease_dialog_menu_bg_color`：菜单背景色
@@ -323,12 +326,12 @@ binding?.listConversation?.apply {
 
 ```xml
 <!-- res/values/colors.xml（App 工程） -->
-<color name="uikit_conv_item_unread_dot_bg">##1100ff</color>
+<color name="uikit_conv_item_unread_dot_bg">#ff002b</color>
 ```
 
 - **使用自定义 drawable 背景**：直接同名覆盖 `uikit_conv_item_unread_dot_bg.xml` 或 `uikit_conv_item_unread_count_bg.xml`，定义为你需要的 shape、selector 或图片即可。
 
-- **注意（免打扰会话）**：当会话处于免打扰状态时，SDK 默认会将未读数字样式降级显示为红点（相关逻辑位于 `ChatUIKitConvItemConfigBinding#showUnreadCount`）。
+- **注意（免打扰会话）**：当会话处于免打扰状态时，UIKit 默认会将未读数字样式降级显示为圆点（相关逻辑位于 `ChatUIKitConvItemConfigBinding.kt` 中的 `showUnreadCount` 扩展函数）。
 
 #### 隐藏未读图标
 
@@ -397,6 +400,9 @@ class MySingleChatViewHolder( private val viewBinding: MySingleChatItemViewBindi
     init {
         // 这里可以进行一些初始化操作
         // 比如设置特定的样式或配置
+        // 注意：bindView 为 UikitItemConversationListBinding 的扩展函数，
+        // 仅当自定义条目布局同名覆盖 uikit_item_conversation_list.xml 时可用；
+        // 使用完全自定义的布局时，请自行完成样式绑定
         config?.bindView(viewBinding)
     }
 
@@ -464,11 +470,13 @@ ChatUIKitConversationListFragment.Builder()
 例如，在 Fragment 的 `onViewCreated` 或 `initListener` 方法中设置：
 
 ```kotlin
-binding?.listConversation?.setOnMenuPreShowListener { menuHelper, position ->
-    // 例：在显示菜单前，动态调整菜单项
-    // menuHelper?.addItemMenu(...)
-    // menuHelper?.findItemVisible(...)
-}
+binding?.listConversation?.setOnMenuPreShowListener(object : OnMenuPreShowListener {
+    override fun onMenuPreShow(menuHelper: ChatUIKitMenuHelper?, position: Int) {
+        // 例：在显示菜单前，动态调整菜单项
+        // menuHelper?.addItemMenu(...)
+        // menuHelper?.findItemVisible(...)
+    }
+})
 
 binding?.listConversation?.setLoadConversationListener(object : OnLoadConversationListener {
     override fun loadConversationListSuccess(userList: List<ChatUIKitConversation>) {
@@ -625,7 +633,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_silent</p>
 </td>
 <td>
-<p>免打扰菜单项图标</p>
+<p>免打扰菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -633,7 +641,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_unsilent</p>
 </td>
 <td>
-<p>取消免打扰菜单项图标</p>
+<p>取消免打扰菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -641,7 +649,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_pin</p>
 </td>
 <td>
-<p>置顶菜单项图标</p>
+<p>置顶菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -649,7 +657,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_unpin</p>
 </td>
 <td>
-<p>取消置顶菜单项图标</p>
+<p>取消置顶菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -657,7 +665,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_read</p>
 </td>
 <td>
-<p>标记已读菜单项图标</p>
+<p>标记已读菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -665,7 +673,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_conv_menu_item_delete</p>
 </td>
 <td>
-<p>删除菜单项图标</p>
+<p>删除菜单项文字</p>
 </td>
 </tr>
 <tr>
@@ -673,7 +681,7 @@ binding?.listConversation?.setLoadConversationListener(object : OnLoadConversati
 <p>uikit_cancel</p>
 </td>
 <td>
-<p>菜单弹窗的"取消"按钮图标或文本</p>
+<p>菜单弹窗的"取消"按钮文本</p>
 </td>
 </tr>
 <tr>
