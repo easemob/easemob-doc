@@ -134,6 +134,13 @@ EMClient.getInstance().chatroomManager().asyncChangeChatroomDescription(
 
 ## 管理聊天室自定义属性（key-value）
 
+聊天室自定义属性以字符串键值对形式存储。每个聊天室最多可有 100 个自定义属性；每个 key 最多包含 128 个字符，仅支持大小写英文字母、数字以及 `_`、`-`、`.`；每个 value 最多包含 4096 个字符。批量设置时，每次最多可传入 10 个键值对。
+
+`EMChatRoomManager#asyncSetChatroomAttributes` 和 `EMChatRoomManager#asyncRemoveChatRoomAttributesFromServer` 均通过 `EMResultCallBack<Map<String, Integer>>` 返回操作结果：
+
+- `code` 为 `EMError.EM_NO_ERROR` 时，表示全部属性操作成功。
+- `code` 为 `EMError.PARTIAL_SUCCESS` 时，表示部分属性操作成功；回调返回的 `Map<String, Integer>` 中包含操作失败的属性 key 及对应错误码。
+
 ### 获取聊天室指定自定义属性
 
 聊天室所有成员均可调用 `asyncFetchChatroomAttributesFromServer` 方法获取聊天室指定自定义属性。

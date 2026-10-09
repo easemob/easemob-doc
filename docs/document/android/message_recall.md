@@ -23,7 +23,7 @@
 
 - 消息撤回后，服务端保存的该条消息会被移除，包括历史消息、离线消息和漫游消息。
 - 同时，消息发送方和接收方本地内存及数据库中的该条消息也会被移除。
-- 对于附件类消息，例如图片、音频、视频和文件消息，消息被撤回后，对应的消息附件也会一并删除。
+- 对于附件类消息，例如图片、语音、视频和文件消息，消息被撤回后，对应的消息附件也会一并删除。
 
 ## 前提条件
 
@@ -39,10 +39,9 @@
 调用成功后，服务端以及消息发送方和接收方本地保存的消息（历史消息，离线消息或漫游消息）会被移除，相关用户通过 `EMMessageListener#onMessageRecalledWithExt` 收到消息撤回事件。
 
 :::tip
-1. 撤回时还可以通过 `ext` 参数携带自定义字符串，供收到撤回事件的客户端进行业务处理。
-2. 附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
+1. 撤回时可以通过 `ext` 参数携带自定义字符串，供收到撤回事件的客户端进行业务处理。该参数的默认值为空字符串。
+2. 对于图片、语音、视频和文件等附件消息，撤回消息后，对应的消息附件也会被删除。
 :::
-
 
 ```java
 String recallExt = "撤回了一条消息";
@@ -127,5 +126,10 @@ EMClient.getInstance()
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`asyncRecallMessage`](#撤回消息) | `EMChatManager` | 异步撤回一条已发送成功的消息，并可携带扩展字符串。 |
-| [`recallMessage`](#撤回消息) | `EMChatManager` | 同步撤回一条已发送成功的消息，并可携带扩展字符串。 |
+| [`asyncRecallMessage`](#撤回消息)         | `EMChatManager`       | 异步撤回一条已发送成功的消息，并可携带扩展字符串。     |
+| [`recallMessage`](#撤回消息)              | `EMChatManager`       | 同步撤回一条已发送成功的消息，并可携带扩展字符串。     |
+| [`getRecallBy`](#设置消息撤回监听)        | `EMRecallMessageInfo` | 获取撤回者的用户 ID。                                  |
+| [`getRecallMessageId`](#设置消息撤回监听) | `EMRecallMessageInfo` | 获取被撤回消息的消息 ID。                              |
+| [`getExt`](#设置消息撤回监听)             | `EMRecallMessageInfo` | 获取撤回消息时携带的扩展字符串。                       |
+| [`getConversationId`](#设置消息撤回监听)  | `EMRecallMessageInfo` | 获取被撤回消息所属的会话 ID。                          |
+| [`getRecallMessage`](#设置消息撤回监听)   | `EMRecallMessageInfo` | 获取被撤回的消息对象；离线场景下可能返回 `undefined`。 |

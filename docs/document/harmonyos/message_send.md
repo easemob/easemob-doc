@@ -154,7 +154,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 1. 获取图片的本地文件路径。
 2. 调用 `ChatMessage#createImageSendMessage(to, filePath, false)` 创建普通图片消息。
 3. 从消息中获取 `ImageMessageBody`，调用 `setSendOriginalImage` 选择上传原图或大图。
-4. 调用 `ChatManager#sendMessage` 发送消息。默认情况下 SDK 自动上传图片附件，服务端生成缩略图。
+4. 调用 `ChatManager#sendMessage` 发送消息。默认情况下 SDK 自动上传图片附件，服务端生成缩略图。关于图片的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 ```typescript
 let message = ChatMessage.createImageSendMessage(conversationId, imagePath, false);
@@ -169,6 +169,7 @@ body.setSendOriginalImage(false);
 // 设置会话类型：单聊、群聊和聊天室分别为 ChatType.Chat、ChatType.GroupChat 和 ChatType.ChatRoom。
 // 默认为单聊。
 message.setChatType(ChatType.Chat);
+// 发送图片消息。默认情况下，SDK 会自动上传图片附件。
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
 
@@ -188,7 +189,7 @@ GIF 图片消息是一种特殊的图片消息。GIF 发送时必须保留原始
 #### 发送流程
 
 1. 调用 `ChatMessage#createImageSendMessage(to, filePath, true)` 创建 GIF 图片消息。
-2. 调用 `ChatManager#sendMessage` 发送消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+2. 调用 `ChatManager#sendMessage` 发送消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。关于 GIF 图片的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 ```typescript
 let message = ChatMessage.createImageSendMessage(to, gifPath, true);
@@ -214,8 +215,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 #### 发送流程
 
 1. 在应用层录制语音文件。
-2. 调用 `ChatMessage#createVoiceSendMessage`，依次传入目标会话 ID、语音文件路径和语音时长，创建语音消息。
-3. 调用 `ChatManager#sendMessage` 发送消息。SDK 默认将语音文件上传至环信服务器。
+2. 调用 `ChatMessage#createVoiceSendMessage`，依次传入目标会话 ID（单聊为接收方的用户 ID、群聊或聊天室分别为群组 ID 或聊天室 ID）、语音文件路径和语音时长，创建语音消息。
+3. 调用 `ChatManager#sendMessage` 发送消息。SDK 默认将语音文件上传至环信服务器。关于语音文件的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 ```typescript
 let message = ChatMessage.createVoiceSendMessage(to, voicePath, duration);
@@ -246,7 +247,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 2. 调用 `ChatMessage#createVideoSendMessage(to, filePath, duration, imageThumbPath)` 创建视频消息。缩略图路径可省略；如需显示缩略图，应由应用层生成。
    
    创建消息时，需要传入视频文件的本地路径、缩略图的本地路径、视频时长以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
-3. 调用 `ChatManager#sendMessage` 发送消息。默认情况下，SDK 先上传附件，再发送消息。
+   如果需要显示视频缩略图，你需要在应用层自行获取视频首帧，并将对应路径作为 `thumbPath` 参数传入。
+3. 调用 `ChatManager#sendMessage` 发送消息。默认情况下，SDK 先上传附件，再发送消息。关于视频文件的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 ```typescript
 // getThumbPath 由应用层实现。
@@ -280,7 +282,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 #### 发送流程
 
 1. 调用 `ChatMessage#createFileSendMessage`，依次传入目标会话 ID 和文件的本地路径。
-2. 调用 `ChatManager#sendMessage` 发送消息。SDK 默认将文件上传至环信服务器。
+2. 调用 `ChatManager#sendMessage` 发送消息。SDK 默认将文件上传至环信服务器。关于文件上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 ```typescript
 let message = ChatMessage.createFileSendMessage(to, filePath);
@@ -556,7 +558,10 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 #### 语聊房麦位管理
 
-你可以基于 [聊天室自定义属性](room_attributes.html) 实现语聊房麦位状态管理和多端同步。聊天室自定义属性采用 `Map<string, string>` 格式，因此结构化麦位信息需要先序列化为字符串，或将每个麦位保存为独立属性。
+你可以基于 [聊天室自定义属性](room_attributes.html) 实现语聊房麦位状态管理和多端同步，例如记录麦位用户、麦位状态和音量状态等信息。
+
+
+聊天室自定义属性采用 `Map<string, string>` 格式，因此结构化麦位信息需要先序列化为字符串，或将每个麦位保存为独立属性。
 
 ```typescript
 let attributes = new Map<string, string>();

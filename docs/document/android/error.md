@@ -2,7 +2,7 @@
 
 本文介绍环信即时通讯 Android SDK 中接口调用或回调返回的错误码。开发者可以根据错误码判断失败原因，并参考对应的解决方法进行处理。
 
-Android SDK 的错误码定义在 [`EMError`](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 类中。例如，注册用户时可通过 `EMError.USER_ALREADY_EXIST` 判断用户是否已存在。
+Android SDK 的错误码定义在 `EMError` 类中。例如，注册用户时可通过 `EMError.USER_ALREADY_EXIST` 判断用户是否已存在。
 
 示例：
 
@@ -44,7 +44,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 
 | 错误码 | 错误信息 | 描述和可能原因 | 解决方法 |
 | :--- | :--- | :--- | :--- |
-| 100 | `INVALID_APP_KEY` | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看 App Key。 | 使用正确的 App Key 进行初始化。 |
+| 100 | `INVALID_APP_KEY` | App Key 不合法：用户的 App Key 格式不正确。可在[环信控制台](https://console.easemob.com/user/login)的 **应用列表** 页面查看 App Key。 | 使用正确的 App Key 进行初始化。 |
 | 101 | `INVALID_USER_NAME` | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错的 API 中传入的用户 ID 参数是否为空。 |
 | 102 | `INVALID_PASSWORD` | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查调用的 API 中传入的密码参数是否正确。 |
 | 103 | `INVALID_URL` | URL 不正确。 | 检查调用 API 时传入的参数是否正确。 |

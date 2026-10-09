@@ -56,14 +56,19 @@ chatManager?.removeMessageListener(messageListener);
 let messageListener: ChatMessageListener = {
   onMessageReceived: (messages: Array<ChatMessage>): void => {
     messages.forEach((message: ChatMessage): void => {
+      // 过滤非文本消息。
       if (message.getType() !== ContentType.TXT) {
         return;
       }
 
+      // 获取文本消息体。
       let textBody = message.getBody() as TextMessageBody;
+      // 获取文本内容。
       let text = textBody.getContent();
 
+      // 获取消息中的全部扩展字段。
       let ext = message.ext();
+      // 按业务字段名读取扩展字段。
       let businessValue = ext.get('businessKey');
 
       // 根据 text 和 businessValue 更新界面或执行业务逻辑。
@@ -71,6 +76,7 @@ let messageListener: ChatMessageListener = {
   }
 };
 
+// 注册消息监听器。
 ChatClient.getInstance()
   .chatManager()
   ?.addMessageListener(messageListener);
@@ -93,6 +99,7 @@ ChatClient.getInstance()
 2. 接收方收到 `onMessageReceived` 回调后，通过 `VoiceMessageBody#getRemoteUrl` 或 `getLocalPath` 获取语音附件的服务器地址或本地路径。
 
 ```typescript
+// 获取语音消息体。
 let voiceBody = message.getBody() as VoiceMessageBody;
 
 // 语音附件的服务器地址。
@@ -108,8 +115,8 @@ let duration = voiceBody.getDuration();
 一条图片消息通常包含三类图片资源：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
-- 大图：发送非原图且图片不是 GIF 时，发送端 SDK 生成的压缩图。若图片短边大于 720 像素，SDK 将其等比压缩至短边为 720 像素，并按 85% 的质量编码；短边不超过 720 像素时不放大。大图通常用于聊天详情页展示。HarmonyOS SDK 自 1.14.0 起支持大图资源。
-- 缩略图：服务端根据上传的图片生成的缩略资源。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)，通常用于会话列表、聊天列表等轻量展示场景。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
+- 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 收到图片消息后，SDK 会根据配置自动下载缩略图。若业务需要显示更清晰的图片，可再按需下载大图或图片附件。
 
@@ -117,7 +124,7 @@ let duration = voiceBody.getDuration();
 
 1. SDK 根据初始化配置决定是否自动下载缩略图：
 
-   - `ChatOptions#setAutoDownloadThumbnail` 默认为 `true`，SDK 自动下载图片和视频缩略图。
+   - `ChatOptions#setAutoDownloadThumbnail` 默认为 `true`，SDK 自动下载图片缩略图。
    - 设置为 `false` 后，应用需调用 `ChatManager#downloadThumbnail` 手动下载缩略图。
 
 2. 在 `onMessageReceived` 中识别图片消息，并根据业务需要下载资源：
@@ -140,6 +147,7 @@ function downloadImage(message: ChatMessage, useBigImage: boolean): void {
 
   let downloadTask: Promise<void>;
   if (useBigImage) {
+    // 下载大图。
     downloadTask = chatManager.downloadBigImage(
       message,
       (progress: number): void => {
@@ -147,6 +155,7 @@ function downloadImage(message: ChatMessage, useBigImage: boolean): void {
       }
     );
   } else {
+    // 下载图片附件。
     downloadTask = chatManager.downloadAttachment(
       message,
       (progress: number): void => {
@@ -166,31 +175,35 @@ function downloadImage(message: ChatMessage, useBigImage: boolean): void {
 3. 通过 `ImageMessageBody` 获取图片附件、大图和缩略图的服务器地址、本地路径和状态：
 
 ```typescript
+// 获取图片消息体。
 let imageBody = message.getBody() as ImageMessageBody;
 
 // true 表示图片附件为原图；false 表示为发送方压缩后的大图。
 let isOriginal = imageBody.isOriginalImage();
 
+// 获取图片附件的服务器地址和本地路径。
 let imageRemoteUrl = imageBody.getRemoteUrl();
 let imageLocalPath = imageBody.getLocalPath();
 
+// 获取大图的服务器地址和本地路径。
 let bigImageRemoteUrl = imageBody.getBigImageRemoteUrl();
 let bigImageLocalPath = imageBody.getBigImageLocalPath();
 
+// 获取缩略图的服务器地址和本地路径。
 let thumbnailRemoteUrl = imageBody.getThumbnailRemoteUrl();
 let thumbnailLocalPath = imageBody.getThumbnailLocalPath();
 
+// 获取图片附件、大图和缩略图的下载状态。
 let attachmentStatus = imageBody.getDownloadStatus();
 let bigImageStatus = imageBody.getBigImageDownloadStatus();
 let thumbnailStatus = imageBody.getThumbnailDownloadStatus();
 
+// 获取图片宽高。
 let width = imageBody.getWidth();
 let height = imageBody.getHeight();
 ```
 
 ### 接收 GIF 图片消息
-
-HarmonyOS SDK 自 1.7.0 起支持接收 GIF 图片消息。
 
 GIF 图片缩略图的下载方式与普通图片消息相同，详见 [接收图片消息](#接收图片消息)。
 
@@ -200,11 +213,14 @@ GIF 图片缩略图的下载方式与普通图片消息相同，详见 [接收�
 let messageListener: ChatMessageListener = {
   onMessageReceived: (messages: Array<ChatMessage>): void => {
     messages.forEach((message: ChatMessage): void => {
+      // 过滤非图片消息。
       if (message.getType() !== ContentType.IMAGE) {
         return;
       }
 
+      // 获取图片消息体。
       let body = message.getBody() as ImageMessageBody;
+      // 判断是否为 GIF 图片。
       if (body.isGif()) {
         // 根据业务需要下载并展示 GIF 图片。
       }
@@ -230,6 +246,7 @@ function downloadVideo(message: ChatMessage): void {
     return;
   }
 
+  // 下载视频原文件。
   chatManager.downloadAttachment(
     message,
     (progress: number): void => {
@@ -246,14 +263,18 @@ function downloadVideo(message: ChatMessage): void {
 4. 通过 `VideoMessageBody` 获取视频原文件和缩略图的服务器地址或本地路径：
 
 ```typescript
+// 获取视频消息体。
 let videoBody = message.getBody() as VideoMessageBody;
 
+// 获取视频原文件的服务器地址和本地路径。
 let videoRemoteUrl = videoBody.getRemoteUrl();
 let videoLocalPath = videoBody.getLocalPath();
 
+// 获取视频缩略图的服务器地址和本地路径。
 let thumbnailRemoteUrl = videoBody.getThumbnailRemoteUrl();
 let thumbnailLocalPath = videoBody.getThumbnailLocalPath();
 
+// 获取视频时长、视频原文件下载状态和缩略图下载状态。
 let duration = videoBody.getDuration();
 let attachmentStatus = videoBody.getDownloadStatus();
 let thumbnailStatus = videoBody.getThumbnailDownloadStatus();
@@ -272,6 +293,7 @@ function downloadFile(message: ChatMessage): void {
     return;
   }
 
+  // 下载文件附件。
   chatManager.downloadAttachment(
     message,
     (progress: number): void => {
@@ -288,12 +310,16 @@ function downloadFile(message: ChatMessage): void {
 2. 通过 `FileMessageBody` 获取文件的服务器地址、本地路径和其他属性：
 
 ```typescript
+// 获取文件消息体。
 let fileBody = message.getBody() as FileMessageBody;
 
+// 获取文件的服务器地址和本地路径。
 let fileRemoteUrl = fileBody.getRemoteUrl();
 let fileLocalPath = fileBody.getLocalPath();
+// 获取文件名和文件大小。
 let fileName = fileBody.getFileName();
 let fileLength = fileBody.getFileLength();
+// 获取文件下载状态。
 let downloadStatus = fileBody.getDownloadStatus();
 ```
 
@@ -304,17 +330,22 @@ let downloadStatus = fileBody.getDownloadStatus();
 应用将消息体转换为 `LocationMessageBody`，通过 `getLatitude()`、`getLongitude()`、`getAddress()` 和 `getBuildingName()` 获取位置数据，再使用第三方地图服务展示位置。
 
 ```typescript
+// 获取位置消息体。
 let locationBody = message.getBody() as LocationMessageBody;
 
+// 获取纬度和经度。
 let latitude = locationBody.getLatitude();
 let longitude = locationBody.getLongitude();
+// 获取地址和建筑物名称。
 let address = locationBody.getAddress();
 let buildingName = locationBody.getBuildingName();
 ```
 
 ## 接收透传消息
 
-透传消息也称命令消息，可用于通知接收方执行自定义操作。`action` 不能以 `em_` 或 `easemob::` 开头，这两个前缀为内部保留字段。
+可将透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。
+
+具体功能可以根据自身业务需求自定义。另外，`action` 不能以 `em_` 或 `easemob::` 开头，这两个前缀为内部保留字段。
 
 :::tip
 - 透传消息发送后不支持撤回。
@@ -329,8 +360,11 @@ let messageListener: ChatMessageListener = {
     // 接收普通消息。
   },
   onCmdMessageReceived: (messages: Array<ChatMessage>): void => {
+    // 接收透传消息。
     messages.forEach((message: ChatMessage): void => {
+      // 获取透传消息体。
       let body = message.getBody() as CmdMessageBody;
+      // 获取命令动作。
       let action = body.action();
       // 根据 action 执行业务逻辑。
     });
@@ -340,12 +374,18 @@ let messageListener: ChatMessageListener = {
 
 ## 接收自定义类型消息
 
-应用在 `onMessageReceived` 中识别 `ContentType.CUSTOM` 消息，将消息体转换为 `CustomMessageBody`，再通过 `event()` 获取自定义事件，通过 `getParams()` 获取自定义参数。
+你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
+
+接收自定义消息与其他类型消息一致，应用在 `onMessageReceived` 中识别 `ContentType.CUSTOM` 消息，将消息体转换为 `CustomMessageBody`，再通过 `event()` 获取自定义事件，通过 `getParams()` 获取自定义参数。
 
 ```typescript
+// 判断是否为自定义消息。
 if (message.getType() === ContentType.CUSTOM) {
+  // 获取自定义消息体。
   let customBody = message.getBody() as CustomMessageBody;
+  // 获取自定义事件。
   let event = customBody.event();
+  // 获取自定义参数。
   let params = customBody.getParams();
 
   // 根据 event 和 params 执行业务逻辑。
@@ -357,18 +397,25 @@ if (message.getType() === ContentType.CUSTOM) {
 接收合并消息与接收普通消息的流程相同，应用在 `onMessageReceived` 中识别 `ContentType.COMBINE` 消息。
 
 - 对于不支持合并消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText`，其他字段会被忽略。
-- 合并消息是一种附件消息。调用 `ChatManager#downloadAndParseCombineMessage` 可下载并解析合并消息附件，获取原始消息列表。
-- 如果附件已存在，该方法直接解析并返回消息列表；如果附件不存在，该方法先下载附件，再解析并返回消息列表。
+- 合并消息实际上是一种附件消息。收到合并消息后，可以调用 `ChatManager#downloadAndParseCombineMessage` 下载并解析合并消息附件，获取原始消息列表。
+- 首次调用该方法时，SDK 会下载并解析合并消息附件，然后返回其中包含的原始消息列表。
+- 后续调用该方法时：
+  - 若本地附件已存在，SDK 会直接解析附件并返回原始消息列表。
+  - 若本地附件不存在，SDK 会重新下载附件，解析后返回原始消息列表。
 
 通过 `CombineMessageBody` 还可以读取合并消息的标题、摘要和兼容文本。
 
 ```typescript
+// 判断是否为合并消息。
 if (message.getType() === ContentType.COMBINE) {
+  // 获取合并消息体。
   let body = message.getBody() as CombineMessageBody;
+  // 获取合并消息的标题、摘要和兼容文本。
   let title = body.getTitle();
   let summary = body.getSummary();
   let compatibleText = body.getCompatibleText();
 
+  // 下载并解析合并消息附件。
   ChatClient.getInstance()
     .chatManager()
     ?.downloadAndParseCombineMessage(message)
