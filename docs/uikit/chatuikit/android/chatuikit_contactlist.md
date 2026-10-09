@@ -13,12 +13,14 @@
 ```kotlin
 ChatUIKitContactsListFragment.Builder()
   .useTitleBar(true)
+  .useTitleBarToReplaceActionBar(true)
   .setTitleBarTitle("title")
   .enableTitleBarPressBack(true)
   .setTitleBarBackPressListener(onBackPressListener)
+  .setDefaultMenuVisible(true)
   .useSearchBar(false)
   .setSearchType(ChatUIKitSearchType.USER)
-  .setListViewType(ChatUIKitListViewType.VIEW_TYPE_LIST_CONTACT)
+  .setListViewType(ChatUIKitListViewType.LIST_CONTACT)
   .setSideBarVisible(true)
   .setHeaderItemVisible(true)
   .setHeaderItemList(mutableListOf<ChatUIKitCustomHeaderItem>())
@@ -26,7 +28,7 @@ ChatUIKitContactsListFragment.Builder()
   .setOnUserListItemClickListener(OnUserListItemClickListener)
   .setOnItemLongClickListener(onItemLongClickListener)
   .setOnContactSelectedListener(OnContactSelectedListener)
-  .setEmptyLayout(R.layout.layout_conversation_empty)
+  .setEmptyLayout(R.layout.custom_empty_layout)
   .setCustomAdapter(customAdapter)
   .setCustomFragment(myContactsListFragment)
   .build()
@@ -37,12 +39,14 @@ ChatUIKitContactsListFragment.Builder()
 | 方法                               | 描述                                                                                            |
 |----------------------------------|-----------------------------------------------------------------------------------------------|
 | useTitleBar()                    | 是否使用默认的标题栏（ChatUIKitTitleBar）。<br/> - `true`：是。 <br/> - (默认) `false`: 否。                               |
+| useTitleBarToReplaceActionBar()  | 设置是否使用默认标题栏替换 ActionBar。当 Activity 为 AppCompatActivity 时，设置为 `true` 会调用 `setSupportActionBar`。<br/> - (默认) `false`: 否。 |
 | setTitleBarTitle()               | 设置标题栏的标题。                                                                                     |
 | enableTitleBarPressBack()        | 设置是否支持显示返回按钮，默认为不显示返回按钮。<br/> - `true`：是。<br/> - (默认) `false`: 否。                                |
 | setTitleBarBackPressListener()   | 设置点击标题栏返回按钮的监听器。                                                                              |
+| setDefaultMenuVisible()          | 设置是否显示标题栏默认菜单（添加好友入口）。<br/> - (默认) `true`：显示。 <br/> - `false`：不显示。                          |
 | useSearchBar()                   | 设置是否使用搜索栏。<br/> - `true`：是。 <br/> - (默认) `false`: 否。                                     |
-| setSearchType()                  | 设置搜索类型 ChatUIKitSearchType。<br/> - `USER` <br/> - `SELECT_USER` <br/> - `CONVERSATION`                              |
-| setListViewType()                | 设置列表类型 ChatUIKitListViewType。<br/> - `LIST_CONTACT`：默认好友列表，不带复选框；<br/> - `LIST_SELECT_CONTACT`：带复选框的好友列表。 |
+| setSearchType()                  | 设置搜索类型 ChatUIKitSearchType。<br/> - `USER` <br/> - `SELECT_USER` <br/> - `CONVERSATION` <br/> - `MESSAGE` <br/> - `BLOCK_USER` |
+| setListViewType()                | 设置列表类型 ChatUIKitListViewType。<br/> - `LIST_CONTACT`：默认好友列表，不带复选框；<br/> - `LIST_SELECT_CONTACT`：带复选框的好友列表；<br/> - `LIST_GROUP_MEMBER`：带复选框的群成员列表。 |
 | setSideBarVisible()              | 设置是否显示首字母索引工具栏。<br/> - (默认) `true`：是。 <br/> - `false`: 否。                             |
 | setHeaderItemVisible()           | 设置是否显示列表头部布局。                                                                                 |
 | setHeaderItemList()              | 设置列表头部 Item 数据对象列表。                                                                             |
@@ -50,9 +54,9 @@ ChatUIKitContactsListFragment.Builder()
 | setOnUserListItemClickListener() | 设置列表条目点击事件。                                                                                   |
 | setOnItemLongClickListener()     | 设置条目长按事件监听器。                                                                                  |
 | setOnContactSelectedListener()   | 设置条目选中事件监听器。                                                                                  |
-| setEmptyLayout()                 | 设置会话列表的空白页面。                                                                                  |
+| setEmptyLayout()                 | 设置好友列表的空白页面，需传入开发者自定义的布局。                                                                            |
 | setCustomAdapter()               | 设置自定义的适配器，默认为 `ChatUIKitContactListAdapter`。                                                    |
-| setCustomFragment()              | 设置自定义聊天 Fragment，需要继承自 `ChatUIKitContactsListFragment`。                                          |
+| setCustomFragment()              | 设置自定义通讯录 Fragment，需要继承自 `ChatUIKitContactsListFragment`。                                          |
 
 ## 设置标题栏
 
@@ -70,11 +74,12 @@ ChatUIKitContactsListFragment.Builder()
      
      ChatUIKitContactsListFragment.Builder().setHeaderItemList(mutableListOf(
         ChatUIKitCustomHeaderItem(
-            headerId = "",              //唯一 itemId
+            headerId = R.id.my_header_item,  //唯一 itemId，需传 Int 类型
             order = 0,                  //排列次序
             headerIconRes = -1,         //图标资源
             headerTitle = "",           //标题
             headerContent = "",         //内容
+            headerUnReadCount = 0,      //未读数，默认为 0
             headerEndIconRes = -1,      //尾部图标资源
             headerItemDivider = true,   //是否显示分割线
             headerItemShowArrow = false //是否显示尾部图标
@@ -120,7 +125,7 @@ class CustomContactListAdapter : ChatUIKitContactListAdapter() {
 2. 添加 `CustomContactListAdapter` 到 `ChatUIKitContactsListFragment#Builder`。
 
 ```kotlin
-builder.setCustomAdapter(CustomContactListAdapter)
+builder.setCustomAdapter(CustomContactListAdapter())
 ```
 
 <ImageGallery>
@@ -184,13 +189,19 @@ ChatUIKitContactsListFragment.Builder()
 
 ### 获取好友请求未读数
 
+SDK 5.0 中本地创建的系统消息默认已读，系统会话的 `unreadMsgCount` 恒为 `0`，好友申请未读数改由会话游标计算，需要在协程中调用 `ChatUIKitNotificationMsgManager` 的挂起方法 `getRequestUnreadCount()` 获取：
+
 ```kotlin
-val systemConversation = ChatUIKitNotificationMsgManager.getInstance().getConversation() 
-systemConversation.let { cv->
-    newRequestCount = cv.unreadMsgCount
+import androidx.lifecycle.lifecycleScope
+import com.hyphenate.easeui.feature.invitation.helper.ChatUIKitNotificationMsgManager
+import kotlinx.coroutines.launch
+
+lifecycleScope.launch {
+    val newRequestCount = ChatUIKitNotificationMsgManager
+        .getInstance()
+        .getRequestUnreadCount()
+    // 使用 newRequestCount 更新 UI
 }
 ```
-
-
 
 

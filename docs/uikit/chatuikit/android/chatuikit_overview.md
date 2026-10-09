@@ -13,38 +13,56 @@
 
 ```
 └── easeui
-    ├── ChatUIKitClient                                   // UIKit SDK 入口
-    ├── ChatUIKitConfig                             // UIKit SDK 配置类
-    ├── feature                                  // UIKit 功能模块
-    │   ├── chat                                   // 聊天功能模块
-    │   │   ├── activities                            // 聊天功能模块的 Activity 文件夹
-    │   │   │   └── UIKitChatActivity                    // UIKit 内置的聊天界面
-    │   │   ├── adapter                               // 聊天功能模块的适配器文件夹
-    │   │   │   └── ChatUIKitMessagesAdapter                 // 聊天功能模块的消息列表适配器
-    │   │   ├── reply                                 // 聊天功能模块的回复功能相关
-    │   │   ├── report                                // 聊天功能模块的举报消息功能相关
-    │   │   ├── viewholders                           // 聊天功能模块的消息类型 ViewHolder
-    │   │   ├── widgets                               // 聊天功能模块的自定义 View
-    │   │   └── UIKitChatFragment                      // UIKit 内提供的聊天 Fragment
-    │   ├── conversation                           // 会话列表功能模块
-    │   │   ├── adapter                               // 会话列表功能模块的适配器文件夹
-    │   │   │   └── ChatUIKitConversationListAdapter         // 会话列表功能模块的会话列表适配器
-    │   │   ├── viewholders                           // 会话列表功能模块的会话类型 ViewHolder
-    │   │   ├── widgets                               // 会话列表功能模块的自定义 View
-    │   │   └── ChatUIKitConversationListFragment          // UIKit 内提供的会话列表 Fragment
-    │   ├── contact                                // 好友列表功能模块
-    │   │   ├── adapter                               // 好友列表功能模块的适配器文件夹
-    │   │   │   └── ChatUIKitContactListAdapter              // 好友列表功能模块的好友列表适配器
-    │   │   ├── viewholders                           // 好友列表功能模块的好友相关 ViewHolder
-    │   │   ├── widgets                               // 好友列表功能模块的自定义 View
-    │   │   └── ChatUIKitContactsListFragment              // UIKit 内提供的好友列表 Fragment
-    │   └── group                                  // 群组功能模块
-    ├── repository                               // UIKit SDK 数据仓库
-    ├── viewmodel                                // UIKit SDK ViewModel
-    ├── provider                                 // UIKit SDK Provider
-    ├── common                                   // UIKit SDK 公共类
-    ├── interfaces                               // UIKit SDK 接口类
-    └── widget                                   // UIKit SDK 自定义 View
+    ├── ChatUIKitClient                                 // UIKit SDK 入口
+    ├── ChatUIKitConfig                                 // UIKit SDK 配置类
+    ├── base                                            // UIKit SDK 基类
+    ├── common                                          // UIKit SDK 公共类
+    ├── configs                                         // UIKit SDK 配置相关类
+    ├── feature                                         // UIKit 功能模块
+    │   ├── chat                                        // 聊天功能模块
+    │   │   ├── activities                              // 聊天功能模块的 Activity 文件夹
+    │   │   │   └── UIKitChatActivity                   // UIKit 内置的聊天界面
+    │   │   ├── adapter                                 // 聊天功能模块的适配器文件夹
+    │   │   │   └── ChatUIKitMessagesAdapter            // 聊天功能模块的消息列表适配器
+    │   │   ├── chathistory                             // 聊天功能模块的聊天记录相关
+    │   │   ├── config                                  // 聊天功能模块的配置相关
+    │   │   ├── controllers                             // 聊天功能模块的控制器相关
+    │   │   ├── enums                                   // 聊天功能模块的枚举相关
+    │   │   ├── forward                                 // 聊天功能模块的消息转发相关
+    │   │   ├── interfaces                              // 聊天功能模块的接口相关
+    │   │   ├── internal                                // 聊天功能模块的内部实现相关
+    │   │   ├── pin                                     // 聊天功能模块的消息置顶相关
+    │   │   ├── reaction                                // 聊天功能模块的表情回复相关
+    │   │   ├── reply                                   // 聊天功能模块的回复功能相关
+    │   │   ├── search                                  // 聊天功能模块的消息搜索相关
+    │   │   ├── translation                             // 聊天功能模块的消息翻译相关
+    │   │   ├── urlpreview                              // 聊天功能模块的 URL 预览相关
+    │   │   ├── viewholders                             // 聊天功能模块的消息类型 ViewHolder
+    │   │   ├── widgets                                 // 聊天功能模块的自定义 View
+    │   │   └── UIKitChatFragment                       // UIKit 内提供的聊天 Fragment
+    │   ├── contact                                     // 好友列表功能模块
+    │   │   ├── adapter                                 // 好友列表功能模块的适配器文件夹
+    │   │   │   └── ChatUIKitContactListAdapter         // 好友列表功能模块的好友列表适配器
+    │   │   ├── viewholders                             // 好友列表功能模块的好友相关 ViewHolder
+    │   │   ├── widgets                                 // 好友列表功能模块的自定义 View
+    │   │   └── ChatUIKitContactsListFragment           // UIKit 内提供的好友列表 Fragment
+    │   ├── conversation                                // 会话列表功能模块
+    │   │   ├── adapter                                 // 会话列表功能模块的适配器文件夹
+    │   │   │   └── ChatUIKitConversationListAdapter    // 会话列表功能模块的会话列表适配器
+    │   │   ├── viewholders                             // 会话列表功能模块的会话类型 ViewHolder
+    │   │   ├── widgets                                 // 会话列表功能模块的自定义 View
+    │   │   └── ChatUIKitConversationListFragment       // UIKit 内提供的会话列表 Fragment
+    │   ├── group                                       // 群组功能模块
+    │   ├── invitation                                  // 邀请申请功能模块
+    │   ├── search                                      // 搜索功能模块
+    │   └── thread                                      // 话题功能模块
+    ├── interfaces                                      // UIKit SDK 接口类
+    ├── menu                                            // UIKit SDK 菜单相关类
+    ├── model                                           // UIKit SDK 数据模型类
+    ├── provider                                        // UIKit SDK Provider
+    ├── repository                                      // UIKit SDK 数据仓库
+    ├── viewmodel                                       // UIKit SDK ViewModel
+    └── widget                                          // UIKit SDK 自定义 View
 ```
 
 ## 功能介绍
