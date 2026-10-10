@@ -51,12 +51,12 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - 移除 `Conversation` 的 `markMessageAsRead` 和 `markAllMessagesAsRead`，以及 `ChatManager` 的 `ackConversationRead` 和 `markAllConversationsAsRead`。
 - 清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。多设备事件新增 `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（65）和 `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（66），其他设备清理会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
 
-**会话能力**
+**会话功能**
 
 - 新增会话展示信息接口：`Conversation.getConversationName()` 和 `Conversation.getConversationAvatar()`，未同步时可返回空字符串，方便列表展示。
 - 支持批量删除会话：`ChatManager.deleteConversations(conversationIds: string | string[], deleteMessages: boolean)`，可按需同时删除会话消息。
 
-**群组能力**
+**群组功能**
 
 - 新增群组配置模型 `GroupConfigs`，包含 `maxUsers`、`isPublic`、`joinApprovalRequired`、`allowInvites`、`inviteNeedConfirm` 和 `extField`；`GroupConfigsType` 用于标记需要更新的配置项。
 - 新增 `GroupManager.updateGroupConfigs(groupId, types, configs)`，建群后可按需更新指定配置。
@@ -70,7 +70,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - `ChatroomListener.onMutelistAdded` 改为 `(roomId, mutes: Map<string, number>)`，统一表示成员及禁言到期时间，并移除 `onMuteMapAdded`。
 - `ChatroomListener.onRemovedFromChatroom` 改为 `(reason, roomId, roomName, participant)`，新增 `participant` 参数。
 
-**其他新增能力**
+**其他新增功能**
 
 - 新增 SDK 日志监听：`ChatClient.addLogListener` / `removeLogListener`，通过 `ChatLogListener.onLog` 回调日志内容。
 - 新增日志压缩：`ChatClient.compressLogs(): Promise<string>`，返回压缩日志文件的本地路径，无需登录。
@@ -78,16 +78,16 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 修复
 
-- 修复部分新增 Promise 接口在参数无效或内部对象未初始化时返回 `undefined` 的问题，统一通过 rejected Promise 返回错误。
+修复部分新增 Promise 接口在参数无效或内部对象未初始化时返回 `undefined` 的问题，统一通过 rejected Promise 返回错误。
 
 ## v1.15.0 Dev 2026-9-24（开发版）
 
-#### 重大变更
+#### 重要变更
 
 **1. 本地会话列表默认不包含聊天室会话**
 
 默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `ChatOptions#setEnableChatroomConversation(true)`。你可以通过 `ChatOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
-详见 [获取本地会话列表](conversation_list.html#获取会话列表) 文档。
+详见 [获取本地会话列表](/v4/harmonyos/conversation_list.html#从本地获取会话列表) 文档。
 
 **2. 移除数据同步 WebSocket 配置属性**
 
@@ -95,12 +95,12 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 支持 [分页获取本地会话列表](conversation_list.html#获取会话列表) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
+- 支持 [分页获取本地会话列表](/v4/harmonyos/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
 - 支持 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)，可按单个/多个关键字或消息类型搜索。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。
-- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/harmonyos/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 - 支持 SDK 初始化前配置自定义 NTP 服务器：`ChatOptions` 新增 `setNtpServers`  和 `getNtpServers` 两个 API。
-- 新增以下连接和翻译相关的错误码。详情请参见 [错误码](error.html)
+- 新增以下连接和翻译相关的错误码。详情请参见 [错误码](/v4/harmonyos/error.html)
   - `CONNECTION_TIMEOUT` (350)：连接服务器超时。
   - `CONNECTION_DNS_ERROR` (351)：连接服务器时发生 DNS 错误。
   - `CONNECTION_IO_ERROR` (352)：连接服务器时发生 IO 错误。
@@ -137,14 +137,14 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 #### 新增特性
 
 - 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+  - 新增 [“大图”资源类型](/v4/harmonyos/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/v4/harmonyos/message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](/v4/harmonyos/message_receive.html#接收图片消息)。
+- 支持 [非好友用户的属性变更订阅功能](/v4/harmonyos/userprofile.html#订阅非好友用户的属性变更)。
 - 支持登录后自动同步好友列表：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
-  - 增强好友对象能力：[从服务端主动获取好友列表](user_relationship.html#从服务端主动获取好友列表) 和 [从本地读取好友列表](user_relationship.html#从本地读取好友列表) 时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+  - 新增 [好友列表自动同步配置功能](/v4/harmonyos/user_relationship.html#登录后自动同步好友列表)。
+  - 新增 [好友列表及好友信息同步状态回调](/v4/harmonyos/user_relationship.html#监听好友关系和好友信息变更)。
+  - 增强好友对象能力：[从服务端主动获取好友列表](/v4/harmonyos/user_relationship.html#从服务端主动获取好友列表) 和 [从本地读取好友列表](/v4/harmonyos/user_relationship.html#从本地读取好友列表) 时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
 - 支持消息附件下载进度回调及 Promise 结果：`ChatManager` 的 `downloadAttachment`、`downloadThumbnail` 和新增的 `downloadBigImage` 方法均返回 `Promise<void>`，并支持可选的 `onProgress` 进度回调；新增附件下载类型枚举 `AttachmentDownloadType`，包含原始附件（`ORIGINAL`）、大图（`BIG`）和缩略图（`THUMBNAIL`）。
 - 支持配置数据同步第二通道的 WebSocket 服务器地址和端口。
 - 增强 `ChatOptions` 配置能力：
@@ -172,9 +172,9 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 #### 新增特性
 
 - 新增 [语音转文字功能](/value-added/stt/voice_to_text_harmonyos.html)。
-- 新增 [群成员名片管理功能](group_namecard.html)。
-- 新增 [用户信息自动管理功能](userinfo_provider.html)。
-  用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。  
+- 新增 [群成员名片管理功能](/v4/harmonyos/group_namecard.html)。
+- 新增 [用户信息自动管理功能](/v4/harmonyos/userinfo_provider.html)。
+  用户信息指用于业务展示的用户相关信息，包括 [用户属性](/v4/harmonyos/userprofile.html)、[好友备注](/v4/harmonyos/user_relationship.html#设置好友备注) 和 [群成员名片](/v4/harmonyos/group_namecard.html)。
   可通过 `ChatOptions#setEnableUserInfo` 和 `ChatOptions#isEnableUserInfo` 开启该功能以及查询该功能是否开启。
   该特性开启后，SDK 支持自动同步、缓存和更新用户信息。主要功能如下：
    - 用户登录成功后自动同步当前登录用户信息。
@@ -185,7 +185,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
   - `ChatMessage#getSenderInfo()`：获取消息发送方信息，包括用户昵称、头像、群名片和好友备注等信息。
   - `UserInfoListener`：监听用户信息更新事件。
 
-- [获取群成员列表](group_members.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
+- [获取群成员列表](/v4/harmonyos/group_manage.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
 
 #### 修复
 
@@ -215,7 +215,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+- 支持 [接收服务端发送的流式消息](/v4/harmonyos/message_stream_receive.html)。
 
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
@@ -242,7 +242,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 #### 优化
 
 - 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
-- `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](message_extension.html)。详见 [消息扩展升级指南](message_extension_optimize.html)。
+- `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](/v4/harmonyos/message_extension.html)。详见 [消息扩展升级指南](/v4/harmonyos/message_extension_optimize.html)。
  
 ## v1.10.0 Dev 2026-1-26（开发版）
 
@@ -291,17 +291,17 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 #### 新增特性
 
 - 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
-- 支持 [根据关键字从本地数据库中获取本地会话中的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
+- 支持 [根据关键字从本地数据库中获取本地会话中的消息](/v4/harmonyos/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](/v4/harmonyos/message_retrieve.html#根据消息-id-列表获取本地消息)。
 
 #### 优化
 
-优化 [获取加入群组接口](group_manage.html#获取当前用户加入的群组列表) 的响应速度。
+优化 [获取加入群组接口](/v4/harmonyos/group_manage.html#获取群组列表) 的响应速度。
 
 #### 修复
 
 1. 修复当修改文本和自定义消息之外的消息时，`ChatMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
-2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，当设置为不保存消息（`FetchMessageOption#setIsSave` 设置为 `false`）仍会生成新的本地会话的问题。
+2. 修复 [拉取漫游消息](/v4/harmonyos/message_retrieve.html#从服务器获取指定会话的消息) 时，当设置为不保存消息（`FetchMessageOption#setIsSave` 设置为 `false`）仍会生成新的本地会话的问题。
 3. 修复群组或聊天室解散后，成员收到回调后，仍然会从服务器获取群组或聊天室详情的问题。
 
 ## v1.8.1 2025-11-6
@@ -318,48 +318,48 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- [撤回消息](message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- [撤回消息](/v4/harmonyos/message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
-- 支持 [获取群成员信息列表](group_members.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
+  - 新增群成员进出事件 [onMembersJoined](/v4/harmonyos/group_manage.html#监听群组事件) 和 [onMembersExited](/v4/harmonyos/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。
+- 支持 [获取群成员信息列表](/v4/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
   
 #### 优化
 
-- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接变化) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
-- 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](initialization.html)。
-- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search_local.html) 增加默认参数，方便用户调用。
+- 修改 Token 即将过期事件 [onTokenWillExpire](/v4/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
+- 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](/v4/harmonyos/initialization.html)。
+- 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](/v4/harmonyos/message_search_local.html) 增加默认参数，方便用户调用。
 
 ## v1.7.0 2025-5-15
 
 #### 新增特性
 
-- 支持 [发送](message_send.html#发送-gif-图片) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
-- 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定会话的消息)。
-- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [根据搜索范围搜索所有会话中的消息](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- 支持 [发送](/v4/harmonyos/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/v4/harmonyos/message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](/v4/harmonyos/group_attributes.html#管理群组头像)。
+- 支持 [消息附件下载鉴权功能](/v4/harmonyos/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](/v4/harmonyos/message_retrieve.html#从服务器获取指定会话的消息)。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](/v4/harmonyos/message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [根据搜索范围搜索所有会话中的消息](/v4/harmonyos/message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [单个会话中的消息](/v4/harmonyos/message_search_local.html#根据搜索范围搜索当前会话中的消息)：可以根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
 
 #### 优化
 
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 - 日志文件中增加设备时区偏移，方便排查问题。
-- 调用方法 [ChatManager#fetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `CursorResult#getNextCursor` 由字符串 `undefined` 改为空字符串。
+- 调用方法 [ChatManager#fetchHistoryMessages](/v4/harmonyos/message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `CursorResult#getNextCursor` 由字符串 `undefined` 改为空字符串。
 
 #### 修复
 
 - 修复删除本地会话时缓存中的消息未删除的问题。
-- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。详见 [消息扩展升级指南](message_extension_optimize.html)。
+- 修复消息扩展属性 `ext` 判断字符串为 JSON 类型时转换有误的问题。详见 [消息扩展升级指南](/v4/harmonyos/message_extension_optimize.html)。
 
 ## v1.6.0 2025-4-9
 
 #### 优化
 
-- 发送后修改消息接口 [ChatManager#modifyMessage](message_modify.html) 支持修改各类消息：
+- 发送后修改消息接口 [ChatManager#modifyMessage](/v4/harmonyos/message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持修改消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持修改消息扩展 `ext`。
   - 命令消息：不支持修改。
-- [ChatMessage.setExt](message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](message_extension_optimize.html)。
+- [ChatMessage.setExt](/v4/harmonyos/message_extension.html)支持 object 类型的扩展字段。详见 [消息扩展升级指南](/v4/harmonyos/message_extension_optimize.html)。
 - SDK 优化切换到前台后的重连逻辑。
 - 优化重连逻辑，默认切换重连的地址。
 
@@ -367,7 +367,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增 [ContactManager#getContact](user_relationship.html#从本地读取好友列表) 方法，用于获取本地单个好友的信息。
+- 新增 [ContactManager#getContact](/v4/harmonyos/user_relationship.html#从本地读取好友列表) 方法，用于获取本地单个好友的信息。
 
 #### 优化
 
@@ -378,7 +378,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](message_delete.html#单向清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](/v4/harmonyos/message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增 `ChatClient#isConnected` 方法，用于检查 SDK 是否连接到环信服务器。自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected` 接口判断 SDK 与服务器的连接状态。
 
 #### 修复
@@ -406,30 +406,30 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
   4. 当前用户是否在聊天室白名单中：新增 `Chatroom#isInWhitelist` 方法获取。
   5. 当前用户被禁言截止时间戳：新增 `Chatroom#muteExpireTimestamp` 方法获取。
 
-- 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
+- 新增[自定义设备的平台和名称功能](/v4/harmonyos/multi_device.html#设置登录设备的名称)：
   - `ChatOptions#setCustomOSPlatform` 和 `ChatOptions#getCustomOSPlatform`，用于设置和获取当前设备自定义平台代号；
   - `ChatOptions#setCustomDeviceName` 和 `ChatOptions#getCustomDeviceName`，用于设置和获取当前设备自定义设备名称。
 - 新增 `ChatManager#getDBMsgsCount` 方法，用于获取数据库中的消息总数。
-- 新增[两个错误码](error.html)：
+- 新增[两个错误码](/v4/harmonyos/error.html)：
   - `ChatError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
   - `ChatError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
 - 聊天室成员禁言回调：
-  - 新增聊天室禁言回调 [ChatroomListener#onMuteMapAdded](room_manage.html#监听聊天室事件)，参数 Map 的 key 表示被禁言的用户 ID ，value 表示禁言到期时间戳；
+  - 新增聊天室禁言回调 [ChatroomListener#onMuteMapAdded](/v4/harmonyos/room_manage.html#监听聊天室事件)，参数 Map 的 key 表示被禁言的用户 ID ，value 表示禁言到期时间戳；
   - 废弃原来的回调 `ChatroomListener#onMutelistAdded`。
-- 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+- 新增[拉取服务器漫游消息](/v4/harmonyos/message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
 
 #### 优化
 
-- 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
-- [发送前回调](/document/server-side/callback_presending.html)时修改的 [消息扩展字段](message_extension.html)，会同步到发送方。
-- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](/v4/harmonyos/initialization.html#初始化) 的构造方法。
+- [发送前回调](/document/server-side/callback_presending.html)时修改的 [消息扩展字段](/v4/harmonyos/message_extension.html)，会同步到发送方。
+- 调用[删除服务端会话 API](/v4/harmonyos/conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 优化部分数据库操作。
 
 #### 修复
 
 - 修复置顶的单聊消息被撤回后，该消息未能及时地从置顶消息缓存（`Conversation#getPinnedMessages`）中移除的问题。
-- 修复调用 [PushManager#getSilentModeForConversations](/document/harmonyos/push/push_notification_mode_dnd.html#批量获取会话的推送接收规则) 方法获取会话的免打扰状态失败的问题。
+- 修复调用 [PushManager#getSilentModeForConversations](/v4/harmonyos/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复极端情况下因网络异常导致的 Crash。
 - 修复多次设置 `ChatMessage#setMessageStatusCallback` 时导致崩溃的问题。
 
@@ -437,7 +437,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 优化
 
-- 优化 [ChatManager#fetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 中自动下载缩略图的逻辑。
+- 优化 [ChatManager#fetchHistoryMessages](/v4/harmonyos/message_retrieve.html#从服务器获取指定会话的消息) 中自动下载缩略图的逻辑。
 
 #### 修复
 
@@ -461,50 +461,50 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增[置顶消息功能](message_pin.html#消息置顶)。
-- 新增根据多个消息类型[搜索本地消息](message_search_local.html)功能。
-  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
-  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
+- 新增[置顶消息功能](/v4/harmonyos/message_pin.html#置顶消息)。
+- 新增根据多个消息类型[搜索本地消息](/v4/harmonyos/message_search_local.html)功能。
+  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](/v4/harmonyos/message_search_local.html#根据消息类型搜索会话消息)。
+  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](/v4/harmonyos/message_search_local.html#根据消息类型搜索会话消息)。
 - 新增 `ChatOptions#setEnableTLSConnection` 选项，支持私有部署时设置是否开启 TLS 连接。
-- 支持 [会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#获取所有会话的推送通知方式设置)：
+- 支持[会话推送通知方式的本地存储](/v4/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置):
   - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。
   - 新增 `Conversation#pushRemindType` 属性，用于获取本地存储会话的推送通知方式。
-  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDevicesListener#onConversationEvent` 事件。
-- 新增 `Conversation#getMsgCountInRange` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
-- 新增[设备登录时允许携带自定义信息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
+  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDeviceListener#onConversationEvent` 事件。
+- 新增 `Conversation#getMsgCountInRange` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](/v4/harmonyos/message_retrieve.html#获取会话在一定时间内的消息数)。
+- 新增[设备登录时允许携带自定义信息，并将其传递给被踢的设备](/v4/harmonyos/multi_device.html#设置登录设备的扩展信息)：
   - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；
   - `ChatOptions#getLoginCustomExt`：获取设备的扩展信息。
   - `ConnectionListener#onLogout(errorCode: number, info: LoginExtInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
-- 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接变化): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
-- 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](group_members.html#查询当前用户是否被禁言)。
-- 新增 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。
-- 在撤回消息的 `ChatMessageListener#onMessageRecalled` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
-- 支持[加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+- 新增[从服务器拉取离线消息的开始和结束的事件回调](/v4/harmonyos/connection.html#监听连接状态): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
+- 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](/v4/harmonyos/group_members.html#检查自己是否在禁言列表中)。
+- 新增 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](/v4/harmonyos/error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。
+- 在撤回消息的 `ChatMessageListener#onMessageRecalled` 事件中[返回被撤回的消息所属的会话 ID](/v4/harmonyos/message_recall.html#设置消息撤回监听)。
+- 支持[加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](/v4/harmonyos/room_manage.html#加入聊天室)：
   - 新增 `ChatroomManager#joinChatroom(roomId: string, leaveOtherRooms?: boolean, ext?: string)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `ChatroomListener#onMemberJoined(roomId: string, userId: string, ext?: string)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 - 支持 AUT 协议，优化弱网环境下的服务连接成功率。
 - 支持文件分片上传。
-- 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
+- 支持[从服务端单向删除聊天室漫游消息](/v4/harmonyos/message_delete.html#单向删除服务端的历史消息)。
 
 #### 优化
 
 - 支持 x86_64 架构。
 - 从服务端拉取群组时，不再先清除本地群组，而是将拉取的群组与本地对比，将本地现有群组进行更新，将新增部分在本地插入。若要清除本地群组信息，可以调用 `GroupManager#clearAllLocalGroups` 方法。
 - 构建附件消息时，SDK 内部会读取文件长度，并设置给 `fileLength` 参数。
-- 设置和获取用户属性的接口，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性](userprofile.html)，超过调用频率限制时，会上报错误码 `4` (`ChatError#EXCEED_SERVICE_LIMIT`)。
+- 设置和获取用户属性的接口，包括[设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性](/v4/harmonyos/userprofile.html)，超过调用频率限制时，会上报错误码 `4` (`ChatError#EXCEED_SERVICE_LIMIT`)。
 
 ## v1.3.0 Dev 2024-09-10（开发版）
 
 #### 新增特性
 
-- 新增[群成员自定义属性](group_members.html#管理群成员自定义属性)功能：
+- 新增[群成员自定义属性](/v4/harmonyos/group_members.html#管理群成员的自定义属性)功能：
   - `setMemberAttributes`：设置群成员自定义属性。
   - `fetchMemberAttributes`：获取单个群成员的所有自定义属性。
   - `fetchMembersAttributes`：根据属性 key 获取多个群成员的自定义属性。
   - `GroupListener#onGroupMemberAttributeChanged`：群组成员自定义属性变化的回调。
-- 新增[设置推送通知的显示内容](/document/harmonyos/push/push_display_attribute.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。
-- 新增[在线状态订阅](presence.html)功能。
-- 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性（key-value）)功能。
+- 新增[设置推送通知的显示内容](/v4/harmonyos/push/push_display_attribute.html) 、[推送通知方式和免打扰模式功能](/v4/harmonyos/push/push_notification_mode_dnd.html)。
+- 新增[在线状态订阅](/v4/harmonyos/presence.html)功能。
+- 新增[聊天室自定义属性](/v4/harmonyos/room_attributes.html#管理聊天室自定义属性-key-value)功能。
   - `fetchChatroomAttributes`：获取聊天室自定义属性。
   - `setChatroomAttributes`：设置聊天室自定义属性。
   - `removeChatroomAttributes`：删除聊天室自定义属性。
@@ -524,29 +524,29 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - 修复枚举 `LEAVE_REASON` 没有导出的问题；
 - 修复发送图片时获取图片宽高失败的问题。
 
-**注意**：SDK V1.3.0 采用官方推荐的字节码构建方式，使用之后版本需要 DevEco Studio 升级到 5.0.3.502 及以上，并需要工程支持该构建模式。详见[快速开始](quickstart.html)。
+**注意**：SDK V1.3.0 采用官方推荐的字节码构建方式，使用之后版本需要 DevEco Studio 升级到 5.0.3.502 及以上，并需要工程支持该构建模式。详见[快速开始](/v4/harmonyos/quickstart.html)。
 
 ## v1.2.0 Dev 2024-07-11（开发版）
 
 #### 新增特性
 
-- 新增 `getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#一次性获取本地所有会话)。 
-- 新增[表情回复 Reaction](reaction.html) 功能：
+- 新增 `getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](/v4/harmonyos/conversation_list.html#一次性获取本地所有会话)。
+- 新增[表情回复 Reaction](/v4/harmonyos/reaction.html) 功能：
   - `addReaction`：在消息上添加 Reaction。
   - `removeReaction`：删除消息的 Reaction。
   - `fetchReactions`：获取消息的 Reaction 列表。
   - `fetchReactionDetail`：获取 Reaction 详情。
   - `ChatMessage.getReactions()`：从 `ChatMessage` 对象获取 Reaction 列表。
-- 新增[会话标记](conversation_mark.html)功能：
+- 新增[会话标记](/v4/harmonyos/conversation_mark.html)功能：
   - `ChatManager#addConversationMark`：标记会话。
   - `ChatManager#removeConversationMark`：取消标记会话。
   - `ChatManager#fetchConversationsFromServerWithFilter`：根据会话标记从服务器分页查询会话列表。
   - `Conversation#marks`：获取本地单个会话的所有标记。
-  - `onConversationEvent#MultiDevicesEvent.CONVERSATION_MARK_UPDATE`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
-- 新增[会话置顶](conversation_pin.html)功能。
+  - `onConversationEvent#MultiDevicesEvent.CONVERSATION_MARK_UPDATE`：[多设备场景下的会话标记事件](/v4/harmonyos/multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+- 新增[会话置顶](/v4/harmonyos/conversation_pin.html)功能。
   - `ChatManager#pinConversation`：设置置顶或取消置顶会话。
   - `fetchPinnedConversationsFromServer`：从服务端分页获取置顶会话列表。
-- 新增[用户属性](userprofile.html)功能。
+- 新增[用户属性](/v4/harmonyos/userprofile.html)功能。
   - `UserInfoManager#updateUserInfo`：设置和修改当前用户自己的属性信息。
   - `UserInfoManager#fetchUserInfoById`：获取指定用户的属性信息。
 
@@ -554,10 +554,10 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增[修改消息](message_modify.html)功能。
-- 新增 [发送](message_send.html#发送自定义类型消息) 和 [接收自定义消息](message_receive.html#接收自定义类型消息)功能。
-- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能。
-- 支持 [HarmonyOS 推送](/document/harmonyos/push/push_overview.html)能力。
+- 新增[修改消息](/v4/harmonyos/message_modify.html)功能。
+- 新增 [发送](/v4/harmonyos/message_send.html#发送自定义类型消息) 和 [接收自定义消息](/v4/harmonyos/message_receive.html#接收自定义类型消息)功能。
+- 新增 [发送](/v4/harmonyos/message_send.html#发送合并消息) 和 [接收合并转发消息](/v4/harmonyos/message_receive.html#接收合并消息) 功能。
+- 支持 [HarmonyOS 推送](/v4/harmonyos/push/push_overview.html)能力。
 
 #### 优化
 
@@ -571,34 +571,34 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 环信即时通讯 HarmonyOS SDK 支持单聊、群组聊天和聊天室聊天场景，实现了以下特性：
 
 - 支持消息特性：
-  - [发送消息](message_send.html)；
-  - [接收消息](message_receive.html)；
-  - [获取历史消息](message_retrieve.html)；
-  - [撤回消息](message_recall.html)；
-  - [消息回执](message_receipt.html)；
-  - [转发消息](message_forward.html)；
-  - [导入和插入消息](message_import_insert.html)；
-  - [更新消息](message_update.html)；
-  - [删除消息](message_delete.html)；
-  - [只投在线用户](message_deliver_only_online.html)。
+  - [发送消息](/v4/harmonyos/message_send.html)；
+  - [接收消息](/v4/harmonyos/message_receive.html)；
+  - [获取历史消息](/v4/harmonyos/message_retrieve.html)；
+  - [撤回消息](/v4/harmonyos/message_recall.html)；
+  - [消息回执](/v4/harmonyos/message_receipt.html)；
+  - [转发消息](/v4/harmonyos/message_forward.html)；
+  - [导入和插入消息](/v4/harmonyos/message_import_insert.html)；
+  - [更新消息](/v4/harmonyos/message_update.html)；
+  - [删除消息](/v4/harmonyos/message_delete.html)；
+  - [只投在线用户](/v4/harmonyos/message_deliver_only_online.html)。
 - 支持会话特性：
-  - [会话列表](conversation_list.html)；
-  - [会话未读数](conversation_unread.html)；
-  - [删除会话](conversation_delete.html)。
-- 支持[用户关系管理](user_relationship.html)特性：
-  - [添加、删除好友](user_relationship.html#添加好友)；
-  - [设置好友备注](user_relationship.html#设置好友备注)；
-  - [获取好友列表](user_relationship.html#从服务端主动获取好友列表)；
-  - [好友黑名单管理](user_relationship.html#添加用户到黑名单)。
+  - [会话列表](/v4/harmonyos/conversation_list.html)；
+  - [会话未读数](/v4/harmonyos/conversation_unread.html)；
+  - [删除会话](/v4/harmonyos/conversation_delete.html)。
+- 支持[用户关系管理](/v4/harmonyos/user_relationship.html)特性：
+  - [添加、删除好友](/v4/harmonyos/user_relationship.html#添加好友)；
+  - [设置好友备注](/v4/harmonyos/user_relationship.html#设置好友备注)；
+  - [获取好友列表](/v4/harmonyos/user_relationship.html#从服务端主动获取好友列表)；
+  - [好友黑名单管理](/v4/harmonyos/user_relationship.html#添加用户到黑名单)。
 - 支持群组管理特性：
-  - [创建和管理群组](group_manage.html)：创建/解散群组、获取群组详情、获取群成员列表、获取群组列表、查询当前用户已加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。
-  - [管理群成员](group_members.html)：更换群主、添加、移除和获取群管理员、群组白名单和黑名单、群组禁言等。
-  - [管理群组属性](group_attributes.html)：修改群组名称和群组描述、获取群公告、更新群扩展字段。 
+  - [创建和管理群组](/v4/harmonyos/group_manage.html)：创建/解散群组、获取群组详情、获取群成员列表、获取群组列表、查询当前用户已加入的群组数量、屏蔽和解除屏蔽群消息以及监听群组事件。
+  - [管理群成员](/v4/harmonyos/group_members.html)：更换群主、添加、移除和获取群管理员、群组白名单和黑名单、群组禁言等。
+  - [管理群组属性](/v4/harmonyos/group_attributes.html)：修改群组名称和群组描述、获取群公告、更新群扩展字段。
 - 支持聊天室管理特性：
-  - [创建和管理聊天室](room_manage.html)：创建、加入和退出聊天室和监听聊天室事件。
-  - [管理聊天室成员](room_members.html)：更换聊天室所有者、添加、移除和获取聊天室管理员、聊天室白名单和黑名单、聊天室禁言等。
-  - [管理聊天室属性](room_attributes.html)：修改聊天室名称和描述、获取和更新聊天室公告。 
-- 支持[多设备登录](multi_device.html)特性。  
+  - [创建和管理聊天室](/v4/harmonyos/room_manage.html)：创建、加入和退出聊天室和监听聊天室事件。
+  - [管理聊天室成员](/v4/harmonyos/room_members.html)：更换聊天室所有者、添加、移除和获取聊天室管理员、聊天室白名单和黑名单、聊天室禁言等。
+  - [管理聊天室属性](/v4/harmonyos/room_attributes.html)：修改聊天室名称和描述、获取和更新聊天室公告。
+- 支持[多设备登录](/v4/harmonyos/multi_device.html)特性。
 
 
 
