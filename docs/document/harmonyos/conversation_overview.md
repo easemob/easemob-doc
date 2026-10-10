@@ -132,7 +132,7 @@ if (chatManager) {
 | 会话删除 | `deleteConversation`、`deleteConversations`、`deleteConversationFromServer`、`deleteAllConversationsAndMessages` | 删除本地或服务端会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `pinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |
 | 会话标记 | `addConversationMark`、`removeConversationMark` | 为一个或多个会话添加或移除标记，详见[会话标记](conversation_mark.html)。 |
-| 会话免打扰 | `PushManager` 的会话免打扰接口 | 设置或查询单聊、群聊会话的免打扰规则，详见[设置单个会话的推送通知](push/push_notification_mode_dnd.html#设置单个会话的推送通知)。 |
+| 会话推送通知方式 | `PushManager` 的会话推送接口 | 设置或查询单聊、群聊会话的推送通知方式，详见 [设置指定会话的推送接收规则](push/push_notification_mode_dnd.html#设置指定会话的推送接收规则)。 |
 | 会话内消息 | `loadMoreMessagesFromDB`、`searchMessagesFromDB`、`removeMessage`、`clearAllMessages` | 获取、搜索或删除本地会话消息，详见[获取本地历史消息](message_retrieve.html)和[删除本地消息](message_delete.html)。 |
 | 会话内置顶消息 | `pinMessage`、`unpinMessage`、`fetchPinnedMessagesFromServer` | 置顶、取消置顶或从服务器获取会话中的置顶消息，详见[置顶消息](message_pin.html)。 |
 
