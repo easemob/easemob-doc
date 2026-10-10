@@ -1,182 +1,230 @@
 # 会话列表
 
+## 功能说明
 
-对于单聊、群聊和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。默认情况下，本地会话列表的返回结果不包含聊天室会话。
+- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。默认情况下，本地会话列表不包含聊天室会话。
+
+- **服务端与本地数据：** 环信服务器和 SDK 本地均可维护会话列表数据。服务端保存当前用户的会话状态，本地数据用于客户端快速读取和展示会话列表。登录后，SDK 根据数据同步配置将服务端会话数据同步至本地。收发消息、删除会话、清空未读数、设置或取消置顶、添加或移除会话标记等操作也可能更新本地会话列表。
+
+- **同步与变更通知：** 默认同步配置包含会话数据。应用应等待会话数据同步完成后，再读取本地会话列表。本地会话列表发生变化时，SDK 会通知应用；同一账号在其他设备上变更会话状态时，当前设备也可通过多设备事件感知该变更。
+
+## 功能开通
+
+如需将服务端会话列表同步到本地，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 已完成 SDK 初始化并成功登录，详见[快速开始](quickstart.html)。
+- 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 技术原理
+## 获取会话列表
 
-环信即时通讯 IM HarmonyOS SDK 通过 `ChatManager` 和 `Conversation` 类支持从服务器和本地获取会话列表，主要方法如下：
+应用应按照“登录后自动同步、监听同步完成、读取本地会话列表”的流程获取最新会话数据。
 
-- `ChatManager#fetchConversationsFromServer`：从服务器分页获取会话列表。
-- `ChatManager#getAllConversationsBySort`：从本地数据库获取排序后的全部会话。
-- `ChatManager#getConversationsFromDB`：从本地数据库分页获取会话列表。
-- `ChatManager#getConversations`：获取本地当前所有会话。
-- `ChatManager#getConversation`：根据会话 ID 和会话类型获取指定会话。
+### 登录后自动同步会话列表
 
-## 从服务器分页获取会话列表
-
-你可以调用 `fetchConversationsFromServer` 方法从服务端分页获取会话列表。返回结果包含单聊和群聊会话，不包含聊天室会话。SDK 按照会话活跃时间，即会话中最新一条消息的时间戳，倒序返回会话列表。每个 `Conversation` 对象中包含会话 ID、会话类型、置顶状态、会话标记和最新一条消息等数据。从服务端拉取会话列表后，SDK 会更新本地会话列表。
-
-对于每个终端用户，服务器默认保存最新的 100 条会话。超过数量限制时，新创建的会话会覆盖最早的不活跃会话。如需提升会话数量上限，请联系环信商务。当某个会话中的所有消息记录过期后，该会话即被视为空会话。默认情况下，从服务端拉取的会话列表中不包含空会话。
-
-:::tip
-1. 使用服务端会话列表前，需 [在环信控制台开通](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)。只有开通该功能后，才能使用会话置顶和会话标记功能。
-2. 建议仅在首次安装、卸载后重装等本地数据库无会话数据的场景下，从服务端拉取会话列表。其他场景可调用 `getAllConversationsBySort` 或 `getConversations` 获取本地会话。
-3. 通过 RESTful API 发送的消息默认不创建或写入会话。若需将通过 RESTful API 发送的消息写入会话列表，请 [在环信控制台开通相应功能](/product/console/basic_conversation_group_chatroom.html#rest-发消息写会话列表)。
-:::
-
-示例代码如下：
+`ChatOptions#setDataSyncType` 默认包含 `DataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动从服务端同步会话列表并写入本地。
 
 ```typescript
-// limit：每页返回的会话数，取值范围为 [1, 20]，默认为 `10`。
-// cursor：查询游标。首次查询时传空字符串，从最新活跃的会话开始获取。
-let limit = 20;
-let cursor = '';
+let options = new ChatOptions({ appKey: "your-org#your-app" });
+options.setDataSyncType(DataSyncType.CONVERSATIONS);
 
-ChatClient.getInstance().chatManager()?.fetchConversationsFromServer(limit, cursor)
-  .then((result) => {
-    // 当前页的会话列表。
-    let conversations = result.getResult();
-    // 下一页的查询游标；返回空字符串表示没有更多数据。
-    let nextCursor = result.getNextCursor();
-  })
-  .catch((error: ChatError) => {
-    // 根据 error.errorCode 和 error.description 处理失败结果。
-  });
-```
-
-## 从本地获取会话列表
-
-HarmonyOS SDK 提供以下方式获取本地会话：
-
-- [分页获取本地会话](#分页获取本地会话)
-- [一次性获取本地所有会话](#一次性获取本地所有会话)
-- [获取指定会话](#获取指定会话)
-
-初始化时可以设置 `ChatOptions` 中的以下会话选项：
-
-| 选项 | 描述    |
-| :--------- | :----- |
-| `enableChatroomConversation` | 设置会话列表中是否包含聊天室会话。该配置仅控制聊天室会话是否出现在内存会话列表、会话列表更新回调和本地数据库分页结果中；不控制 SDK 在底层创建或持久化聊天室会话，也不影响聊天室消息的正常收发。<br/> - `true`：会话列表和本地数据库分页结果中包含聊天室会话。<br/> -（默认）`false`：会话列表、会话列表更新回调和本地数据库分页结果中不包含聊天室会话。<br/> 该配置必须在初始化 SDK 前设置。使用 `ChatOptions` 对象初始化时，可调用 `setEnableChatroomConversation()` 设置；使用字面量参数初始化时，可设置 `enableChatroomConversation`。你可以通过 `isEnableChatroomConversation()` 查询当前配置。 |
-| `setDeleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。<br/>该配置只控制退出聊天室时是否删除本地消息，不决定本地会话列表是否返回聊天室会话。 |
-| `setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存：<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话。|
-
-### 分页获取本地会话
-
-自 HarmonyOS SDK 1.15.0 起，你可以调用 `ChatManager#getConversationsFromDB` 从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
-
-调用该方法前，需在初始化 SDK 前调用 `ChatOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载，默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
-
-```typescript
-// SDK 初始化前关闭自动加载全部本地会话。
-let options = new ChatOptions({
-  appKey: 'your-org#your-app'
-});
-options.setAutoLoadAllConversations(false);
 ChatClient.getInstance().init(context, options);
-
-// 首次查询时，cursor 传空字符串，表示从第一页开始获取。
-let cursor = '';
-
-// pageSize 的取值范围为 1-100 ，默认为 50。
-let pageSize = 20;
-
-ChatClient.getInstance()
-  .chatManager()
-  ?.getConversationsFromDB(cursor, pageSize)
-  .then((result) => {
-    // 获取当前页的会话列表。
-    let conversations = result.getResult();
-
-    // 获取下一页的游标。
-    let nextCursor = result.getNextCursor();
-
-    if (nextCursor.length > 0) {
-      // 保存 nextCursor；获取下一页时将其作为 cursor 传入。
-    } else {
-      // nextCursor 为空字符串，表示当前页为最后一页。
-    }
-  })
-  .catch((error: ChatError) => {
-    if (error.errorCode === ChatError.INVALID_PARAM) {
-      // cursor 无效。
-    }
-  });
 ```
 
-`getConversationsFromDB` 返回 `Promise<CursorResult<Conversation>>`：
+若还需要同步好友列表或已加入的群组列表，应在调用 `init` 前将 `setDataSyncType` 调用替换为数组形式：
 
-- 调用 `CursorResult#getResult()` 获取当前页的会话列表。
-- 调用 `CursorResult#getNextCursor()` 获取下一页游标。
-- 下一页游标为空字符串时，表示已经获取到最后一页。
-- 传入无效的 `cursor` 时，Promise 以 `ChatError.INVALID_PARAM` 拒绝。
+```typescript
+options.setDataSyncType([
+    DataSyncType.CONVERSATIONS,
+    DataSyncType.CONTACTS,
+    DataSyncType.JOINED_GROUPS
+]);
+```
+
+关于登录后自动同步数据，详见 [SDK 初始化文档](initialization.html)。
+
+### 监听会话列表同步状态
+
+通过 `ConnectionListener` 监听会话列表同步状态。建议在调用 `loginWithToken` 前注册监听器，以免遗漏同步事件。当 `type` 为 `DataSyncType.CONVERSATIONS` 时，表示当前同步的是会话列表。
+
+`onDatabaseOpened` 只表示本地数据库已经可以读取，不表示登录成功或服务端会话同步完成。如需展示本次登录后从服务端同步的最新会话数据，应等待 `onDataSyncFinish(DataSyncType.CONVERSATIONS, errorCode)` 成功后再读取本地列表。
+
+```typescript
+let connectionListener: ConnectionListener = {
+    onConnected: (): void => {
+        // SDK 已成功连接到 IM 服务器。
+    },
+    onDisconnected: (errorCode: number): void => {
+        // SDK 与 IM 服务器断开连接，可根据 errorCode 判断原因。
+    },
+    onDatabaseOpened: (username: string): void => {
+        // username 对应的本地数据库已打开，可以读取本地数据。
+    },
+    onDataSyncStart: (type: DataSyncType): void => {
+        if (type === DataSyncType.CONVERSATIONS) {
+            // 会话列表开始同步。
+        }
+    },
+    onDataSyncFinish: (type: DataSyncType, errorCode: number): void => {
+        if (type !== DataSyncType.CONVERSATIONS) {
+            return;
+        }
+
+        if (errorCode === ChatError.EM_NO_ERROR) {
+            // 会话列表同步成功，可以读取本地会话列表。
+        } else {
+            // 会话列表同步失败，根据 errorCode 处理错误。
+        }
+    }
+};
+
+ChatClient.getInstance().addConnectionListener(connectionListener);
+
+// 不再需要监听时移除。
+ChatClient.getInstance().removeConnectionListener(connectionListener);
+```
+
+也可以通过 `ChatClient#isDatabaseOpened()` 主动查询本地数据库是否已经打开。该方法同样不能代替登录状态或数据同步完成状态。
+
+### 会话相关选项
+
+初始化 SDK 时，可以在 `ChatOptions` 中设置以下会话相关选项：
+
+| 选项 | 描述 |
+| :--- | :--- |
+| `setDeleteMessagesOnLeaveChatroom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/>- （默认）`true`：删除本地消息。<br/>- `false`：保留本地消息。可通过 `isDeleteMessagesOnLeaveChatroom()` 查询当前设置。 |
 
 ### 一次性获取本地所有会话
 
-- 调用 `getAllConversationsBySort` 可以从本地数据库获取排序后的全部会话，返回值为 `Array<Conversation>`。SDK 按照以下规则排序：
+调用 `getAllConversationsBySort` 可以从本地数据库获取排序后的全部会话，返回 `Array<Conversation>`。排序规则如下：
 
-1. 置顶会话排在非置顶会话之前。
-2. 置顶状态相同的会话按照最新一条消息的时间戳倒序排列。
-
-默认情况下，该方法的返回结果不包含聊天室会话。
+- 置顶会话排在非置顶会话之前。
+- 置顶和非置顶会话内部均按照最后一条消息的时间戳倒序排列。
 
 ```typescript
-let conversations = ChatClient.getInstance()
-  .chatManager()
-  ?.getAllConversationsBySort();
+let conversations: Array<Conversation> = ChatClient.getInstance()
+    .chatManager()
+    ?.getAllConversationsBySort() ?? [];
 ```
 
-
-- 调用 `getConversations` 可以获取本地当前所有会话，返回值为无序的 `Array<Conversation>`：
+如果不需要 SDK 返回排序后的数据库会话列表，可以调用 `getConversations` 获取当前加载到本地的会话数组。该方法不提供排序、分页或筛选参数。
 
 ```typescript
-let conversations = ChatClient.getInstance()
-  .chatManager()
-  ?.getConversations();
+let conversations: Array<Conversation> = ChatClient.getInstance()
+    .chatManager()
+    ?.getConversations() ?? [];
 ```
-
-该方法不会提供分页、筛选或排序参数。如需获取按置顶状态和最新消息时间排序的全部本地会话，请调用 `getAllConversationsBySort`。
 
 ### 获取指定会话
 
-调用 `getConversation` 可以根据会话 ID 和会话类型获取指定会话。`createIfNotExist` 用于设置本地不存在该会话时是否创建新会话。
+调用 `getConversation(conversationId, type, createIfNotExist)` 可以根据会话 ID 和会话类型获取指定的本地会话：
+
+- 单聊会话的会话 ID 为对端用户 ID；
+- 群聊会话的会话 ID 为群组 ID；
+- 聊天室会话的会话 ID 为聊天室 ID。
+
+`createIfNotExist` 默认为 `false`，表示本地不存在指定会话时返回 `undefined`；设为 `true` 时，SDK 会创建该会话。
 
 ```typescript
-let conversationId = 'conversationId';
-let conversationType = ConversationType.Chat;
-let createIfNotExist = false;
-
-let conversation = ChatClient.getInstance()
-  .chatManager()
-  ?.getConversation(conversationId, conversationType, createIfNotExist);
+let conversation: Conversation | undefined = ChatClient.getInstance()
+    .chatManager()
+    ?.getConversation(conversationId, ConversationType.GroupChat, false);
 ```
 
-参数说明如下：
+## 获取会话名称和头像
 
-| 参数 | 类型 | 是否必需 | 描述 |
-| :--- | :--- | :--- | :--- |
-| `conversationId` | `string` | 是 | 会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
-| `type` | `ConversationType` | 否 | 会话类型，默认为 `ConversationType.Chat`。群聊和聊天室分别使用 `ConversationType.GroupChat` 和 `ConversationType.ChatRoom`。 |
-| `createIfNotExist` | `boolean` | 否 | 本地不存在指定会话时是否创建新会话，默认为 `false`。 |
+调用 `Conversation#getConversationName()` 和 `Conversation#getConversationAvatar()` 可获取会话的显示名称和头像：
 
-默认本地会话列表不返回聊天室会话。如需访问已知聊天室的本地会话，可以将会话类型设置为 `ConversationType.ChatRoom`，通过 `getConversation` 单独获取。
+- 单聊会话：分别为对端用户的昵称和头像。
+- 群聊会话：分别为群名称和群头像。
+- 相关用户或群组数据尚未同步时，这两个方法可能返回空字符串。
+
+```typescript
+let conversationName: string = conversation.getConversationName();
+let conversationAvatar: string = conversation.getConversationAvatar();
+```
+
+还可以获取会话的最后一条消息、未读消息数、置顶状态和会话标记：
+
+```typescript
+let latestMessage: ChatMessage | undefined = conversation.getLatestMessage();
+let unreadCount: number = conversation.getUnreadMsgCount();
+let isPinned: boolean = conversation.isPinned();
+let marks: Set<MarkType> = conversation.marks();
+```
+
+## 会话列表数据更新场景
+
+| 场景 | 是否影响服务端数据 | 是否影响本地会话列表 |
+| :--- | :--- | :--- |
+| 登录后从服务端同步会话数据并写入本地，不修改服务端会话状态 | 否 | 是 |
+| 收发消息时，SDK 创建或更新会话的最后一条消息、排序和未读数 | 视服务端配置而定 | 是 |
+| 设置或取消会话置顶<br/>方法：`pinConversation` | 是 | 是 |
+| 添加或移除会话标记<br/>方法：`addConversationMark` / `removeConversationMark` | 是 | 是 |
+| 删除一个或多个本地会话，由 `deleteMessages` 决定是否同时删除本地历史消息<br/>方法：`deleteConversations` | 否 | 是 |
+| 删除服务端和本地的指定会话，由 `isDeleteServerMessages` 决定是否同时删除服务端历史消息<br/>方法：`deleteConversationFromServer` | 是 | 是 |
+| 清空指定会话的本地未读消息数并同步当前账号的其他设备<br/>方法：`clearConversationUnreadMessageCount` | 是 | 是 |
+| 清空全部会话的本地未读消息数并同步当前账号的其他设备<br/>方法：`clearAllConversationUnreadMessageCount` | 是 | 是 |
+
+## 监听会话列表更新
+
+当本地会话发生变化时，SDK 会触发 `ConversationListener#onConversationUpdate`。该回调不直接返回完整会话列表，应用应重新调用 `getAllConversationsBySort` 获取最新排序结果并刷新 UI。
+
+```typescript
+let conversationListener: ConversationListener = {
+    onConversationUpdate: (): void => {
+        let conversations: Array<Conversation> = ChatClient.getInstance()
+            .chatManager()
+            ?.getAllConversationsBySort() ?? [];
+        // 使用最新会话列表刷新 UI。
+    }
+};
+
+ChatClient.getInstance()
+    .chatManager()
+    ?.addConversationListener(conversationListener);
+
+// 不再需要监听时移除。
+ChatClient.getInstance()
+    .chatManager()
+    ?.removeConversationListener(conversationListener);
+```
+
+同一账号在其他设备上置顶、取消置顶、删除服务端会话、变更会话标记、修改免打扰状态或清除未读数时，本端可通过 `MultiDevicesListener#onConversationEvent` 收到相应事件。收到事件后，应重新读取本地会话列表并刷新界面。
+
+## 接口最佳实践
+
+| 场景 | 推荐做法 |
+| :--- | :--- |
+| 获取最新会话列表 | 使用默认的 `DataSyncType.CONVERSATIONS` 配置，在会话同步成功后读取本地数据。 |
+| 首屏快速展示 | 收到 `onDatabaseOpened` 或确认 `isDatabaseOpened()` 为 `true` 后读取已有本地数据；收到会话同步成功事件后再次读取并刷新。 |
+| 展示会话列表 | 优先调用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先、按最后消息时间倒序的列表。 |
+| 应用层筛选 | 调用 `getConversations` 或 `getAllConversationsBySort` 后，根据 `Conversation` 属性在应用层筛选。 |
+| 响应会话变化 | 注册 `ConversationListener`；收到 `onConversationUpdate` 后重新读取本地会话列表并刷新 UI。多设备会话事件也应触发重新读取。 |
+| 管理监听器 | 页面或组件销毁时移除 `ConnectionListener` 和 `ConversationListener`，避免重复回调和资源泄漏。 |
 
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`fetchConversationsFromServer`](#从服务器分页获取会话列表) | `ChatManager` | 从服务端分页获取会话列表。 |
-| [`getConversationsFromDB`](#分页获取本地会话) | `ChatManager` | 从本地分页获取会话列表。 |
-| [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取排序后的全部会话。 |
-| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取本地当前所有无序会话。 |
-| [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取指定会话。 |
-| [`setDeleteMessagesOnLeaveChatroom`](#从本地获取会话列表) | `ChatOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。默认退出聊天室时删除本地消息。 |
-| [`enableChatroomConversation`](#从本地获取会话列表) | `ChatOptions` | 设置会话列表中是否包含聊天室会话。默认情况下，会话列表、会话列表更新回调和本地数据库分页结果中不包含聊天室会话。 |
-| `setAutoLoadAllConversations` | 控制登录成功后是否自动将全部会话加载到内存。默认自动加载全部会话。|
+| [`setDataSyncType`](#登录后自动同步会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
+| [`init`](#登录后自动同步会话列表) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK。 |
+| [`addConnectionListener`](#监听会话列表同步状态) / [`removeConnectionListener`](#监听会话列表同步状态) | `ChatClient` | 添加或移除连接及数据同步监听器。 |
+| [`isDatabaseOpened`](#监听会话列表同步状态) | `ChatClient` | 查询当前用户的本地数据库是否已经打开。 |
+| [`setDeleteMessagesOnLeaveChatroom`](#会话相关选项) / [`isDeleteMessagesOnLeaveChatroom`](#会话相关选项) | `ChatOptions` | 设置或查询退出聊天室时是否删除该聊天室的本地消息。 |
+| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前加载到本地的会话数组。 |
+| [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
+| [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取置顶优先并按最后消息时间倒序排列的全部会话。 |
+| [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
+| [`getLatestMessage`](#获取会话名称和头像) / [`getUnreadMsgCount`](#获取会话名称和头像) | `Conversation` | 获取会话的最后一条消息或未读消息数。 |
+| [`isPinned`](#获取会话名称和头像) / [`marks`](#获取会话名称和头像) | `Conversation` | 获取会话的置顶状态或会话标记。 |
+| [`pinConversation`](#会话列表数据更新场景) | `ChatManager` | 设置或取消会话置顶。 |
+| [`addConversationMark`](#会话列表数据更新场景) / [`removeConversationMark`](#会话列表数据更新场景) | `ChatManager` | 添加或移除会话标记。 |
+| [`deleteConversations`](#会话列表数据更新场景) | `ChatManager` | 删除一个或多个本地会话，并按参数决定是否删除本地历史消息。 |
+| [`deleteConversationFromServer`](#会话列表数据更新场景) | `ChatManager` | 删除服务端和本地的指定会话，并按参数决定是否删除服务端历史消息。 |
+| [`clearConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空指定会话的本地未读消息数并同步当前账号的其他设备。 |
+| [`clearAllConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空全部会话的本地未读消息数并同步当前账号的其他设备。 |
+| [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |

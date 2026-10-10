@@ -8,7 +8,7 @@
 
 ## 功能开通
 
-使用前，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
+如需将服务端会话列表同步到本地，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
@@ -20,17 +20,6 @@
 ## 获取会话列表
 
 应用应按照登录后自动同步、监听同步完成和读取本地会话列表的流程获取最新会话数据。
-
-### 会话相关选项
-
-初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
-
-| 选项                                                         | 描述                                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
-| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> - （默认）`true`：删除本地消息。 <br/> - `false`：保留本地消息。 |
-| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
-| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 ### 登录后自动同步会话列表
 
@@ -92,6 +81,17 @@ EMClient.getInstance().addConnectionListener(connectionListener);
 // 不再需要监听时移除。
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
+
+### 会话相关选项
+
+初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
+
+| 选项                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> - （默认）`true`：删除本地消息。 <br/> - `false`：保留本地消息。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 ### 分页获取本地会话
 
@@ -226,7 +226,7 @@ Map<String, EMConversation> conversationMap = EMClient.getInstance()
 
 - 单聊会话：分别为对端用户的昵称和头像。
 - 群聊会话：分别为群名称和群头像。
-- 相关数据尚未同步时，这两个方法可能返回空字符串。
+- 相关用户或群组数据尚未同步时，这两个方法可能返回空字符串。
 
 ```java
 String conversationName = conversation.getConversationName();

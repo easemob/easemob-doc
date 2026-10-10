@@ -237,9 +237,9 @@ EMClient.getInstance()
 
 ### 添加群管理员
 
-仅群主可以调用 `asyncAddGroupAdmin` 添加群管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 回调。
+仅群主可以调用 `asyncAddGroupAdmin` 添加群管理员。添加成功后，新管理员、群主及其他管理员会收到 `onAdminAdded` 回调。
 
-管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分管理权限。
 
 ```java
 // 异步方法。
@@ -263,7 +263,7 @@ EMClient.getInstance()
 
 ### 移除群管理员
 
-仅群主可以调用 `asyncRemoveGroupAdmin` 移除群管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 回调。
+仅群主可以调用 `asyncRemoveGroupAdmin` 移除群管理员。移除成功后，被移除的管理员、群主及其他管理员会收到 `onAdminRemoved` 回调。
 
 群管理员被移除群管理权限后将只拥有普通群成员的权限。
 

@@ -113,7 +113,7 @@ EMClient.getInstance()
 
 会话标记随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表，并通过 `EMConversation#marks` 筛选带有指定标记的会话。
 
-初始化 SDK 前，通过 `EMOptions#setDataSyncType` 配置 `EMDataSyncType.CONVERSATIONS`：
+`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`，也可以初始化前进行配置：
 
 ```java
 EMOptions options = new EMOptions();

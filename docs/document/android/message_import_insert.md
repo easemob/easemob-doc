@@ -22,26 +22,29 @@ Android SDK 提供以下方式：
 
 ## 批量导入消息到数据库
 
-如果你需要使用批量导入方式在本地会话中插入消息，可以调用 `importMessages` 方法，构造 `EMMessage` 对象，将消息导入本地数据库。
+如需在本地会话中批量导入消息，应先将待导入数据转换为 `EMMessage` 对象列表，再调用 `EMChatManager#importMessages(List<EMMessage>)`。
 
-当前用户只能导入自己发送或接收的消息。导入后，消息按照其包含的时间戳添加到对应的会话中。
+当前用户只能导入自己发送或接收的消息。导入后，SDK 会按照消息中的时间戳将消息添加到对应会话。建议每次导入不超过 1,000 条消息。
 
-推荐一次导入 1,000 条以内的数据。
-
-示例代码如下：
+`importMessages` 是同步方法，无返回值，也不提供结果回调。 调用前，应确保 SDK 已初始化，并且当前用户的本地数据库已经打开。
 
 ```java
+// messages 为已准备好的消息列表，类型为 List<EMMessage>。
 EMClient.getInstance()
         .chatManager()
         .importMessages(messages);
 ```
+
+:::tip 
+`EMOptions#setRegardImportedMsgAsRead` 不用于设置通过 `EMChatManager#importMessages` 导入的本地消息是否已读。该配置适用于通过[服务端消息导入接口](/document/server-side/message_import_single.html)导入、之后由客户端从服务器拉取的历史消息。
+:::
 
 ## 插入消息
 
 如果需要在本地会话中加入一条无需发送、仅用于本地展示的消息，例如“XXX 撤回一条消息”“XXX 入群”或“对方正在输入”等，可以使用以下两种方式：
 
 - 调用 `EMConversation#insertMessage`，将消息插入指定的已有会话。消息会按照其中的 Unix 时间戳插入本地数据库，SDK 同时更新会话的 `latestMessage` 等属性。调用前应确保消息的会话 ID 与目标会话 ID 一致。
-- 调用 `EMChatManager#saveMessage`，将消息保存到内存和本地数据库。SDK 会根据消息的会话类型和收发方向确定会话；若对应会话不存在，SDK 会自动创建会话。命令消息不会保存到本地。
+- 调用 `EMChatManager#saveMessage`，将消息保存到内存和本地数据库。SDK 会根据消息的会话类型和收发方向确定会话；若对应会话不存在，SDK 会自动创建会话。透传消息（命令消息）不会保存到本地。
 
 以上两个接口仅更新当前设备的本地数据，不会将消息发送到服务器或会话对端，也不会同步到当前账号的其他设备。
 

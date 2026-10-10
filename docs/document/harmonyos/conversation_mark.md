@@ -1,130 +1,214 @@
 # 会话标记
 
-<Toc />
+## 功能说明
 
-某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯云 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。
+会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。SDK 支持为单聊、群聊和聊天室会话添加或移除标记。
 
-**如果要使用会话标记功能，你需要确保开通了[会话列表服务](conversation_list.html#从服务器分页获取会话列表)。**
-
-你需要自行维护会话标记与具体业务含义（比如 `MARK_0` 为重要会话）之间的映射关系。例如：
+SDK 提供 `MARK_0` 至 `MARK_19` 共 20 个标记，单个会话最多可同时包含 20 个标记。各标记的业务含义由应用自行定义和维护。
 
 ```typescript
-let mapping = new HashMap<MarkType, string>();
-mapping.set(MarkType.MARK_0,"important");
-mapping.set(MarkType.MARK_1,"normal");
-mapping.set(MarkType.MARK_2,"unimportant");
-mapping.set(MarkType.MARK_3,"boys");
-mapping.set(MarkType.MARK_4,"girls");
-……
+let markMapping = new Map<MarkType, string>();
+markMapping.set(MarkType.MARK_0, "important");
+markMapping.set(MarkType.MARK_1, "pending");
+markMapping.set(MarkType.MARK_2, "customer");
 ```
 
-## 技术原理
+:::tip
+会话标记只用于会话分类和筛选，不会影响会话未读数、消息收发、置顶状态或消息已读状态。
+:::
 
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
+## 功能开通
 
-- `ChatManager#addConversationMark`：标记会话。
-- `ChatManager#removeConversationMark`：取消标记会话。
-- `ChatManager#fetchConversationsFromServerWithFilter`：根据会话标记从服务器分页查询会话列表。
-- 根据会话标记从本地查询会话列表：调用 `getConversations` 方法获取本地所有会话后自己进行会话过滤。
-- `Conversation#marks`：获取本地单个会话的所有标记。
+会话标记属于服务端会话列表功能的一部分。使用前，需要在 [环信控制台](/product/console/basic_conversation_group_chatroom.html#服务端会话列表) 开通服务端会话列表功能。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- **[开通服务端会话列表功能](conversation_list.html#从服务器分页获取会话列表)**。
+- 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
+- 已开通 [服务端会话列表功能](/product/console/basic_conversation_group_chatroom.html#服务端会话列表)。
+- 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 添加会话标记
 
-### 标记会话
+调用 `ChatManager#addConversationMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记。单次最多可传入 20 个会话 ID。
 
-你可以调用 `addConversationMark` 方法标记会话。每次最多可为 20 个会话添加标记。调用该方法会同时为本地和服务器端的会话添加标记。
+SDK 默认在登录后自动同步会话列表及其标记并写入本地。同步完成后，可通过本地会话列表接口获取 `Conversation` 对象，再调用 `Conversation#marks` 获取该会话的全部标记。
 
-添加会话标记后，若调用 `fetchConversationsFromServer` 接口从服务器分页获取会话列表，返回的会话对象中包含会话标记，你需要通过 `Conversation#marks` 方法获取。若你已经达到了服务端会话列表长度限制（默认 100 个会话），服务端会根据会话的活跃度（最新一条消息的时间戳）删除不活跃会话，这些会话的会话标记也随之删除。
-
-:::tip
-对会话添加标记，例如会话标星，并不影响会话的其他逻辑，例如会话的未读消息数。
-:::
+若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话。对应会话的标记也可能不再随服务端会话列表同步到本地。
 
 ```typescript
-let conversationId = "huanhuan";
-let ids = new Array<string>();
-ids.push(conversationId);
-ChatClient.getInstance().chatManager()?.addConversationMark(ids, MarkType.MARK_0).then(()=> {
-  // success logic
-}).catch((e: ChatError) => {
-  // failure logic
-});
-```
+let conversationIds: Array<string> = ["user2", "group1"];
+let chatManager = ChatClient.getInstance().chatManager();
 
-### 取消标记会话
-
-你可以调用 `removeConversationMark` 方法删除会话标记。每次最多可移除 20 个会话的标记。
-
-调用该方法会同时移除本地和服务器端会话的标记。
-
-```typescript
-let conversationId = "huanhuan";
-let ids = new Array<string>();
-ids.push(conversationId);
-ChatClient.getInstance().chatManager()?.removeConversationMark(ids, MarkType.MARK_0).then(()=> {
-  // success logic
-}).catch((e: ChatError) => {
-  // failed logic
-});
-```
-
-### 根据会话标记从服务器分页查询会话列表
-
-你可以调用 `fetchConversationsFromServerWithFilter` 方法根据会话标记从服务器分页获取会话列表。SDK 会按会话标记的时间的倒序返回会话列表，每个会话对象中包含会话 ID、会话类型、是否为置顶状态、置顶时间（对于未置顶的会话，值为 `0`）、会话标记以及最新一条消息。从服务端拉取会话列表后会更新本地会话列表。
-
-```typescript
-// filter：会话查询选项，包括会话标记和每页获取的会话条数（最多可获取 10 条）。下面的代码以查询服务端所有标记了 `MarkType.MARK_0` 的会话为例。
-let filter: ConversationFilter = {markType: MarkType.MARK_0, pageSize: 10};
-ChatClient.getInstance().chatManager()?.fetchConversationsFromServerWithFilter(filter).then(result => {
-  // success logic
-}).catch((e: ChatError) => {
-  // failure logic
-});
-```
-
-### 根据会话标记从本地查询会话列表
-
-对于本地会话，你可以调用 `getConversations` 方法获取本地所有会话后自己进行会话过滤。下面以查询标记了 `MarkType.MARK_0` 的所有本地会话为例。
-
-```typescript
-//最终的查询结果全部放入 result 中。
-let result = new Array<Conversation>();
-let conversations = ChatClient.getInstance().chatManager()?.getConversations();
-if(conversations && conversations.length > 0){
-  conversations.forEach(conversation => {
-    let marks = conversation.marks();
-    if (marks && marks.size > 0) {
-      marks.forEach(mark => {
-        if (mark === MarkType.MARK_0) {
-          result.push(conversation);
-        }
-      })
-    }
-  })
+if (chatManager) {
+    chatManager.addConversationMark(conversationIds, MarkType.MARK_0)
+        .then(() => {
+            // 会话标记添加成功。
+        })
+        .catch((error: ChatError) => {
+            // 根据 error.errorCode 和 error.description 处理错误。
+        });
 }
 ```
 
-### 获取本地单个会话的所有标记
+参数说明如下：
 
-你可以调用 `Conversation#marks` 方法获取本地单个会话的所有标记，示例代码如下：
+| 参数 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `conversationIds` | `string \| Array<string>` | 会话 ID 或会话 ID 数组，不能为空；单次最多传入 20 个会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `mark` | `MarkType` | 要添加的标记，取值为 `MARK_0` 至 `MARK_19`。 |
+
+## 移除会话标记
+
+调用 `ChatManager#removeConversationMark` 从一个或多个会话中移除指定标记。该操作会同时更新服务端和本地的会话标记。单次最多可传入 20 个会话 ID。
 
 ```typescript
-let conversation = ChatClient.getInstance().chatManager()?.getConversation("conversationId");
-let marks = conversation?.marks();
+let conversationIds: Array<string> = ["user2", "group1"];
+let chatManager = ChatClient.getInstance().chatManager();
+
+if (chatManager) {
+    chatManager.removeConversationMark(conversationIds, MarkType.MARK_0)
+        .then(() => {
+            // 会话标记移除成功。
+        })
+        .catch((error: ChatError) => {
+            // 根据 error.errorCode 和 error.description 处理错误。
+        });
+}
 ```
 
+`removeConversationMark` 的参数规则与 `addConversationMark` 相同。
 
+## 按标记筛选会话列表
 
+会话标记随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表，再通过 `Conversation#marks` 筛选带有指定标记的会话。
 
+`ChatOptions#setDataSyncType` 默认包含 `DataSyncType.CONVERSATIONS`。也可以在调用 `ChatClient#init` 前显式配置：
 
+```typescript
+let options = new ChatOptions({ appKey: "your-org#your-app" });
+options.setDataSyncType(DataSyncType.CONVERSATIONS);
 
+ChatClient.getInstance().init(context, options);
+```
 
+当 `ConnectionListener#onDataSyncFinish` 回调中的 `type` 为 `DataSyncType.CONVERSATIONS` 且 `errorCode` 为 `ChatError.EM_NO_ERROR` 时，可以读取本地会话列表并按标记筛选。关于同步状态监听，详见[会话列表](conversation_list.html#监听会话列表同步状态)。
 
+```typescript
+let conversations: Array<Conversation> = ChatClient.getInstance()
+    .chatManager()
+    ?.getAllConversationsBySort() ?? [];
+
+let markedConversations: Array<Conversation> = [];
+conversations.forEach((conversation: Conversation): void => {
+    let marks: Set<MarkType> = conversation.marks();
+    if (marks.has(MarkType.MARK_0)) {
+        markedConversations.push(conversation);
+    }
+});
+```
+
+如需获取单个本地会话的全部标记，可以先调用 `getConversation` 获取会话对象，再调用 `marks`：
+
+```typescript
+let conversation: Conversation | undefined = ChatClient.getInstance()
+    .chatManager()
+    ?.getConversation(conversationId, conversationType, false);
+
+let marks: Set<MarkType> = conversation?.marks() ?? new Set<MarkType>();
+```
+
+:::tip
+`getAllConversationsBySort` 和 `getConversation` 只读取本地会话，不会主动向服务器请求数据。若需要最新的服务端标记状态，应先等待会话数据同步完成。
+:::
+
+## 监听会话列表更新
+
+本地会话发生变化时，SDK 会触发 `ConversationListener#onConversationUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。
+
+```typescript
+let conversationListener: ConversationListener = {
+    onConversationUpdate: (): void => {
+        let conversations: Array<Conversation> = ChatClient.getInstance()
+            .chatManager()
+            ?.getAllConversationsBySort() ?? [];
+        // 重新筛选带有目标标记的会话并刷新界面。
+    }
+};
+
+ChatClient.getInstance()
+    .chatManager()
+    ?.addConversationListener(conversationListener);
+
+// 不再需要监听时移除监听器。
+ChatClient.getInstance()
+    .chatManager()
+    ?.removeConversationListener(conversationListener);
+```
+
+同一用户在其他设备上更新会话标记时，当前设备可通过 `MultiDevicesListener#onConversationEvent` 接收 `MultiDevicesEvent#CONVERSATION_MARK_UPDATE` 事件。收到事件后，应重新读取本地会话列表并刷新界面。
+
+```typescript
+let multiDevicesListener: MultiDevicesListener = {
+    // 以下三个回调为 MultiDevicesListener 的必填回调。
+    onContactEvent: (
+        event: MultiDevicesEvent,
+        target: string,
+        ext: string
+    ): void => {
+    },
+    onGroupEvent: (
+        event: MultiDevicesEvent,
+        target: string,
+        userIds: Array<string>
+    ): void => {
+    },
+    onMessageRemoved: (conversationId: string, deviceId: string): void => {
+    },
+    onConversationEvent: (
+        event: MultiDevicesEvent,
+        conversationId: string,
+        type: ConversationType
+    ): void => {
+        if (event === MultiDevicesEvent.CONVERSATION_MARK_UPDATE) {
+            let conversations: Array<Conversation> = ChatClient.getInstance()
+                .chatManager()
+                ?.getAllConversationsBySort() ?? [];
+            // 其他设备更新了会话标记，重新筛选并刷新界面。
+        }
+    }
+};
+
+ChatClient.getInstance().addMultiDevicesListener(multiDevicesListener);
+
+// 不再需要监听时移除监听器。
+ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
+```
+
+## 注意事项
+
+- 会话标记支持单聊、群聊和聊天室会话。
+- 会话标记取值为 `MARK_0` 至 `MARK_19`，各标记的业务含义由应用维护。
+- 单个会话最多可以同时包含 20 个标记。
+- `addConversationMark` 和 `removeConversationMark` 可同时操作多个会话，单次最多传入 20 个会话 ID。
+- 会话 ID 或会话 ID 数组不能为空；调用失败时，应根据回调中的错误码和错误信息处理。
+- 会话标记会同时更新服务端和本地会话数据，并同步到当前用户的其他设备。
+- 会话标记不影响会话未读数、消息已读状态、消息收发或会话置顶状态。
+- 应在会话数据同步完成后，通过本地接口读取并筛选会话。
+- 若服务端会话列表达到数量限制，不活跃会话可能被移出服务端会话列表，对应标记也可能不再随会话列表返回。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addConversationMark`](#添加会话标记) | `ChatManager` | 为一个或多个会话添加指定标记。 |
+| [`removeConversationMark`](#移除会话标记) | `ChatManager` | 从一个或多个会话中移除指定标记。 |
+| [`setDataSyncType`](#按标记筛选会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
+| [`init`](#按标记筛选会话列表) | `ChatClient` | 使用指定配置初始化 SDK。 |
+| [`onDataSyncFinish`](#按标记筛选会话列表) | `ConnectionListener` | 监听登录后的数据自动同步完成事件。 |
+| [`getAllConversationsBySort`](#按标记筛选会话列表) | `ChatManager` | 获取置顶优先排序的本地会话列表。 |
+| [`getConversation`](#按标记筛选会话列表) | `ChatManager` | 获取指定的本地会话对象。 |
+| [`marks`](#按标记筛选会话列表) | `Conversation` | 获取会话的全部标记。 |
+| [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |
+| [`addMultiDevicesListener`](#监听会话列表更新) / [`removeMultiDevicesListener`](#监听会话列表更新) | `ChatClient` | 添加或移除多设备监听器。 |

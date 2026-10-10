@@ -17,6 +17,10 @@ Android SDK 使用 `EMGroupConfigs` 的多个字段定义群组类型：
 | 公开群，申请需审批         | `isPublic = true`、`joinApprovalRequired = true`  | 用户提交入群申请后，等待群主或管理员审批。 |
 | 公开群，可直接加入         | `isPublic = true`、`joinApprovalRequired = false` | 用户可直接加入群组。                       |
 
+:::tip
+`joinApprovalRequired` 仅对公开群有效，`allowInvites` 仅对私有群有效。
+:::
+
 ### 群组成员角色
 
 群组包含以下角色：
@@ -176,86 +180,81 @@ EMClient.getInstance()
                 });
 ```
 
-受邀用户的处理流程由创建群组时的 `EMGroupConfigs#inviteNeedConfirm` 决定：
+邀请处理流程由创建群组时的 `EMGroupConfigs#inviteNeedConfirm` 和受邀用户客户端的 `EMOptions#setAutoAcceptGroupInvitation` 共同决定：
 
-- `false`：受邀用户无需确认即可加入群组，并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调。
-- `true`：受邀用户收到 `EMGroupChangeListener#onInvitationReceived` 回调，并选择是否加入群组：
-  - 接受邀请：调用 `asyncAcceptInvitation`。
-  - 拒绝邀请：调用 `asyncDeclineInvitation`。
+- `inviteNeedConfirm = false`：受邀用户无需确认，直接加入群组，并收到 `EMGroupChangeListener#onAutoAcceptInvitationFromGroup` 回调。此时，受邀用户是否开启自动接受群组邀请不影响结果。
+- `inviteNeedConfirm = true` 且受邀用户开启自动接受群组邀请：SDK 自动接受邀请，受邀用户收到 `onAutoAcceptInvitationFromGroup` 回调。
+- `inviteNeedConfirm = true` 且受邀用户关闭自动接受群组邀请：受邀用户收到 `onInvitationReceived` 回调，可调用 `asyncAcceptInvitation` 或 `asyncDeclineInvitation` 接受或拒绝邀请。
 
-邀请被接受后，邀请人会收到 `EMGroupChangeListener#onInvitationAccepted` 回调；邀请被拒绝后，邀请人会收到 `EMGroupChangeListener#onInvitationDeclined` 回调。
-
-自 SDK v5.1.0 起，你可以通过 `EMGroup#isInviteNeedConfirm()` 查询已获取的群组当前是否要求受邀用户确认：
-
-- 返回 `true`：邀请用户入群需要对方确认。
-- 返回 `false`：受邀用户无需确认即可加入群组。
+`setAutoAcceptGroupInvitation` 默认为 `true`。如需由用户手动处理群组邀请，应在 SDK 初始化前将其设置为 `false`：
 
 ```java
-EMClient.getInstance()
-        .groupManager()
-        .asyncGetGroupFromServer(
-                groupId,
-                new EMValueCallBack<EMGroup>() {
-                    @Override
-                    public void onSuccess(EMGroup group) {
-                        boolean inviteNeedConfirm = group.isInviteNeedConfirm();
-                    }
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setAutoAcceptGroupInvitation(false);
 
-                    @Override
-                    public void onError(int errorCode, String errorMessage) {
-                        // 获取群组详情失败。
-                    }
-                });
+EMClient.getInstance().init(context, options);
 ```
 
-:::tip
-如需由用户手动处理群组邀请，应在 SDK 初始化前调用 `EMOptions#setAutoAcceptGroupInvitation(false)` 关闭自动接受群组邀请。该配置默认值为 `true`。开启时，SDK 会自动接受收到的群组邀请；关闭后，应用可在 `EMGroupChangeListener#onInvitationReceived` 回调中调用接受或拒绝邀请的接口进行处理。
-:::
+自 SDK v5.1.0 起，受邀用户可以通过 `EMGroup#isInviteNeedConfirm()` 查询当前群组是否要求受邀用户确认。为确保配置为最新值，可先调用 `asyncGetGroupFromServer` 从服务器获取群组详情：
+
+```java
+EMClient.getInstance().groupManager().asyncGetGroupFromServer(
+        groupId,
+        new EMValueCallBack<EMGroup>() {
+            @Override
+            public void onSuccess(EMGroup group) {
+                boolean inviteNeedConfirm = group.isInviteNeedConfirm();
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // 获取群组详情失败。
+            }
+        }
+);
+```
+
+手动接受或拒绝邀请时，需传入 `onInvitationReceived` 回调返回的群组 ID 和邀请者 ID。示例如下：
 
 ```java
 // 接受群组邀请。
-EMClient.getInstance()
-        .groupManager()
-        .asyncAcceptInvitation(
-                groupId,
-                inviter,
-                new EMValueCallBack<EMGroup>() {
-                    @Override
-                    public void onSuccess(EMGroup group) {
-                        // 已接受邀请并加入群组。
-                    }
+EMClient.getInstance().groupManager().asyncAcceptInvitation(
+        groupId,
+        inviter,
+        new EMValueCallBack<EMGroup>() {
+            @Override
+            public void onSuccess(EMGroup group) {
+                // 已接受邀请并加入群组。
+            }
 
-                    @Override
-                    public void onError(
-                            int errorCode,
-                            String errorMessage) {
-                        // 接受邀请失败。
-                    }
-                });
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // 接受邀请失败。
+            }
+        }
+);
 
 // 拒绝群组邀请。
-EMClient.getInstance()
-        .groupManager()
-        .asyncDeclineInvitation(
-                groupId,
-                inviter,
-                "No, thanks",
-                new EMCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        // 已拒绝邀请。
-                    }
+EMClient.getInstance().groupManager().asyncDeclineInvitation(
+        groupId,
+        inviter,
+        "No, thanks",
+        new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                // 已拒绝邀请。
+            }
 
-                    @Override
-                    public void onError(
-                            int errorCode,
-                            String errorMessage) {
-                        // 拒绝邀请失败。
-                    }
-                });
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // 拒绝邀请失败。
+            }
+        }
+);
 ```
 
-用户成功加入群组后，即可在该群组中收发消息。
+邀请被接受后，邀请人会收到 `onInvitationAccepted` 回调；邀请被拒绝后，邀请人会收到 `onInvitationDeclined` 回调。用户成功加入群组后，即可在该群组中收发消息。
 
 ### 用户申请入群
 
@@ -659,7 +658,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
             String announcement) {
     }
 
-    // 有成员通过调用 RESTful API 上传了群共享文件。群组所有成员收到该回调。
+    // 有成员上传了群共享文件。群组所有成员收到该回调。
     @Override
     public void onSharedFileAdded(String groupId,
             EMMucSharedFile sharedFile) {
