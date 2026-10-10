@@ -8,19 +8,19 @@
 
 **登录与鉴权**
 
-- 登录统一使用 Token 鉴权，保留 `ChatClient.loginWithToken(userId, token)`。
+- 登录统一使用 Token 鉴权，保留 `ChatClient.loginWithToken(userId, token)`。详见 [登录](login.html) 文档。
 - 移除密码登录 `ChatClient.login` 和客户端注册 `ChatClient.createAccount`，账号注册应由业务服务器实现。
 - 移除自动登录：删除 `ChatClient.isAutoLogin`、`ChatOptions.setAutoLogin` 和 `ChatOptions.isAutoLogin`，SDK 初始化后不再读取持久化凭据并自动登录。
-- 主动登录时，即使推送 Token 未变化也会重新上传，上传失败会清除本地 Token。
+- 主动登录时，即使推送 Token 未变化也会重新上传，上传失败会清除本地 Token。详见 [监听 Push Token 上传结果文档](/document/harmonyos/push/push_harmony.html#步骤四-监听-push-token-上传结果)。
 
 **数据同步与本地数据访问**
 
 SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，并通过统一的同步状态回调监听同步进度。数据库打开和服务端数据同步分别对应不同阶段：
 
-1. **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`，建议在调用 `ChatClient.init` 前显式设置。
-2. **读取本地数据**：`ConnectionListener.onDatabaseOpened(username)` 回调表示当前账号的本地数据库已打开，收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。也可通过 `ChatClient.isDatabaseOpened()` 查询数据库状态；注意 `init` 后即使未登录成功，本地数据库也可能已打开。
-3. **监听服务端数据同步**：通过 `ConnectionListener.onDataSyncStart(type)` 和 `onDataSyncFinish(type, errorCode)` 监听指定类型的数据同步开始和结束，`errorCode` 为 0 表示成功。
-4. **读取最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 回调成功后，再读取本地数据并刷新界面。
+- **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，包括会话、好友、已加入群组和不同步数据等（`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`）。多个数据类型可按位组合，建议在调用 `ChatClient.init` 前显式设置。
+- **读取本地数据**：`ConnectionListener.onDatabaseOpened(username)` 回调表示当前账号的本地数据库已打开，收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。也可通过 `ChatClient.isDatabaseOpened()` 查询数据库状态；注意 `init` 后即使未登录成功，本地数据库也可能已打开。
+- **监听服务端数据同步**：通过 `ConnectionListener.onDataSyncStart(type)` 和 `onDataSyncFinish(type, errorCode)` 监听指定类型的数据同步开始和结束。
+- **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 回调成功后，再读取本地数据并刷新界面。
 
 列表数据来源同步调整，服务端列表拉取接口已移除，改由数据同步写入本地数据库：
 
@@ -47,7 +47,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 **会话未读数管理**
 
-- 清除指定会话或全部会话的本地未读数统一走 `ChatManager.clearConversationUnreadMessageCount(conversationId)` 和 `clearAllConversationUnreadMessageCount()`。
+- 清除指定会话或全部会话的本地未读数统一使用 `ChatManager.clearConversationUnreadMessageCount(conversationId)` 和 `clearAllConversationUnreadMessageCount()`。
 - 移除 `Conversation` 的 `markMessageAsRead` 和 `markAllMessagesAsRead`，以及 `ChatManager` 的 `ackConversationRead` 和 `markAllConversationsAsRead`。
 - 清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。多设备事件新增 `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（65）和 `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（66），其他设备清理会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
 
@@ -87,7 +87,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 **1. 本地会话列表默认不包含聊天室会话**
 
 默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `ChatOptions#setEnableChatroomConversation(true)`。你可以通过 `ChatOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
-详见 [获取本地会话列表](conversation_list.html#从本地获取会话列表) 文档。
+详见 [获取本地会话列表](conversation_list.html#获取会话列表) 文档。
 
 **2. 移除数据同步 WebSocket 配置属性**
 
@@ -95,7 +95,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
+- 支持 [分页获取本地会话列表](conversation_list.html#获取会话列表) 功能，并可控制登录成功后是否自动将全部会话加载到内存。
 - 支持 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)，可按单个/多个关键字或消息类型搜索。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
 - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。
 - 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
@@ -185,7 +185,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
   - `ChatMessage#getSenderInfo()`：获取消息发送方信息，包括用户昵称、头像、群名片和好友备注等信息。
   - `UserInfoListener`：监听用户信息更新事件。
 
-- [获取群成员列表](group_manage.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
+- [获取群成员列表](group_members.html#获取群成员列表) 时返回的群成员信息新增群成员的名片、用户昵称和头像 URL。
 
 #### 修复
 
@@ -292,11 +292,11 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 - 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
 - 支持 [根据关键字从本地数据库中获取本地会话中的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
 
 #### 优化
 
-优化 [获取加入群组接口](group_manage.html#获取群组列表) 的响应速度。
+优化 [获取加入群组接口](group_manage.html#获取当前用户加入的群组列表) 的响应速度。
 
 #### 修复
 
@@ -321,11 +321,11 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - [撤回消息](message_recall.html) 时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
-- 支持 [获取群成员信息列表](group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
+- 支持 [获取群成员信息列表](group_members.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
   
 #### 优化
 
-- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
+- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接变化) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。
 - 支持用户通过字面量的方式设置初始化时的条件。详见 [初始化文档](initialization.html)。
 - 对 `ChatManager` 和 `Conversation` 中 [本地搜索消息接口](message_search_local.html) 增加默认参数，方便用户调用。
 
@@ -333,7 +333,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
+- 支持 [发送](message_send.html#发送-gif-图片) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
 - 支持 [群组头像功能](group_attributes.html#管理群组头像)。 
 - 支持 [消息附件下载鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
 - 支持拉取漫游消息时，[只拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定会话的消息)。
@@ -378,7 +378,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增 `ChatManager#deleteAllConversationsAndMessages` 方法，用于[清空当前用户的聊天记录](message_delete.html#单向清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
 - 新增 `ChatClient#isConnected` 方法，用于检查 SDK 是否连接到环信服务器。自动登录的场景下，登录状态变为已登录时，可能 SDK 未成功连接至服务端，这种情况下与服务器交互的操作会失败，比如发消息。此时，可调用 `isConnected` 接口判断 SDK 与服务器的连接状态。
 
 #### 修复
@@ -422,7 +422,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 - 废弃 `ChatOptions` 传入字符串的构造函数，新增传入 [AppParam](initialization.html#初始化) 的构造方法。
 - [发送前回调](/document/server-side/callback_presending.html)时修改的 [消息扩展字段](message_extension.html)，会同步到发送方。
-- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及其历史消息)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - 优化部分数据库操作。
 
@@ -463,8 +463,8 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 - 新增[置顶消息功能](message_pin.html#消息置顶)。
 - 新增根据多个消息类型[搜索本地消息](message_search_local.html)功能。
-  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索会话消息)。
-  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索会话消息)。
+  - `ChatManager#searchMessagesFromDB`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `Conversation#searchMessagesByType`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
 - 新增 `ChatOptions#setEnableTLSConnection` 选项，支持私有部署时设置是否开启 TLS 连接。
 - 支持 [会话推送通知方式的本地存储](/document/harmonyos/push/push_notification_mode_dnd.html#获取所有会话的推送通知方式设置)：
   - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。
@@ -475,8 +475,8 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
   - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；
   - `ChatOptions#getLoginCustomExt`：获取设备的扩展信息。
   - `ConnectionListener#onLogout(errorCode: number, info: LoginExtInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
-- 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
-- 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](group_members.html#检查自己是否在禁言列表中)。
+- 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接变化): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
+- 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](group_members.html#查询当前用户是否被禁言)。
 - 新增 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。
 - 在撤回消息的 `ChatMessageListener#onMessageRecalled` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
 - 支持[加入聊天室时携带扩展信息，并指定是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
@@ -497,14 +497,14 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 #### 新增特性
 
-- 新增[群成员自定义属性](group_members.html#管理群成员的自定义属性)功能：
+- 新增[群成员自定义属性](group_members.html#管理群成员自定义属性)功能：
   - `setMemberAttributes`：设置群成员自定义属性。
   - `fetchMemberAttributes`：获取单个群成员的所有自定义属性。
   - `fetchMembersAttributes`：根据属性 key 获取多个群成员的自定义属性。
   - `GroupListener#onGroupMemberAttributeChanged`：群组成员自定义属性变化的回调。
 - 新增[设置推送通知的显示内容](/document/harmonyos/push/push_display_attribute.html) 、[推送通知方式和免打扰模式功能](/document/harmonyos/push/push_notification_mode_dnd.html)。
 - 新增[在线状态订阅](presence.html)功能。
-- 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性-key-value)功能。
+- 新增[聊天室自定义属性](room_attributes.html#管理聊天室自定义属性（key-value）)功能。
   - `fetchChatroomAttributes`：获取聊天室自定义属性。
   - `setChatroomAttributes`：设置聊天室自定义属性。
   - `removeChatroomAttributes`：删除聊天室自定义属性。

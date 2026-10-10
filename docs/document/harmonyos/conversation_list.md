@@ -218,9 +218,9 @@ ChatClient.getInstance()
 | [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前加载到本地的会话数组。 |
 | [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取置顶优先并按最后消息时间倒序排列的全部会话。 |
-| [`getConversationName`](#获取会话展示信息) / [`getConversationAvatar`](#获取会话展示信息) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
-| [`getLatestMessage`](#获取会话展示信息) / [`getUnreadMsgCount`](#获取会话展示信息) | `Conversation` | 获取会话的最后一条消息或未读消息数。 |
-| [`isPinned`](#获取会话展示信息) / [`marks`](#获取会话展示信息) | `Conversation` | 获取会话的置顶状态或会话标记。 |
+| [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
+| [`getLatestMessage`](#获取会话名称和头像) / [`getUnreadMsgCount`](#获取会话名称和头像) | `Conversation` | 获取会话的最后一条消息或未读消息数。 |
+| [`isPinned`](#获取会话名称和头像) / [`marks`](#获取会话名称和头像) | `Conversation` | 获取会话的置顶状态或会话标记。 |
 | [`pinConversation`](#会话列表数据更新场景) | `ChatManager` | 设置或取消会话置顶。 |
 | [`addConversationMark`](#会话列表数据更新场景) / [`removeConversationMark`](#会话列表数据更新场景) | `ChatManager` | 添加或移除会话标记。 |
 | [`deleteConversations`](#会话列表数据更新场景) | `ChatManager` | 删除一个或多个本地会话，并按参数决定是否删除本地历史消息。 |

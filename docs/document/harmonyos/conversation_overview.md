@@ -4,7 +4,7 @@
 
 会话是单聊、群聊或聊天室中的消息集合。SDK 通过 `Conversation` 表示本地会话，应用可以读取会话 ID、会话类型、名称、头像、最新一条消息、未读数、置顶状态、会话标记和本地扩展字段等数据。
 
-HarmonyOS SDK 5.0.0 默认在登录成功后自动同步服务端会话数据并写入本地。应用可在同步完成后通过本地接口读取和展示会话列表。
+HarmonyOS SDK 5.x 默认在登录成功后自动同步服务端会话数据并写入本地。应用可在同步完成后通过本地接口读取和展示会话列表。
 
 ## 前提条件
 
@@ -120,7 +120,7 @@ if (chatManager) {
 ```
 
 :::tip
-清零会话未读数不会向消息发送方发送消息已读回执。若需通知原消息发送方消息已读，应调用 `sendMessageReadReceipts`，详见[消息已读回执](message_receipt.html#消息已读回执与会话未读数清零)。
+清零会话未读数不会向消息发送方发送消息已读回执。若需通知原消息发送方消息已读，应调用 `sendMessageReadReceipts`，详见 [消息已读回执](message_receipt.html#消息已读回执与会话未读数清零)。
 :::
 
 ## 会话功能列表
@@ -132,7 +132,7 @@ if (chatManager) {
 | 会话删除 | `deleteConversation`、`deleteConversations`、`deleteConversationFromServer`、`deleteAllConversationsAndMessages` | 删除本地或服务端会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `pinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |
 | 会话标记 | `addConversationMark`、`removeConversationMark` | 为一个或多个会话添加或移除标记，详见[会话标记](conversation_mark.html)。 |
-| 会话推送通知方式 | `PushManager` 的会话推送接口 | 设置或查询单聊、群聊会话的推送通知方式，详见 [设置指定会话的推送接收规则](push/push_notification_mode_dnd.html#设置指定会话的推送接收规则)。 |
+| 会话推送通知方式 | `PushManager` 的会话推送接口 | 设置或查询单聊、群聊会话的推送通知方式，详见 [设置指定会话的推送接收规则](/document/harmonyos/push/push_notification_mode_dnd.html#设置指定会话的推送接收规则)。 |
 | 会话内消息 | `loadMoreMessagesFromDB`、`searchMessagesFromDB`、`removeMessage`、`clearAllMessages` | 获取、搜索或删除本地会话消息，详见[获取本地历史消息](message_retrieve.html)和[删除本地消息](message_delete.html)。 |
 | 会话内置顶消息 | `pinMessage`、`unpinMessage`、`fetchPinnedMessagesFromServer` | 置顶、取消置顶或从服务器获取会话中的置顶消息，详见[置顶消息](message_pin.html)。 |
 
