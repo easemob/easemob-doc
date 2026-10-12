@@ -6,7 +6,7 @@
 
 - 依赖的原生 SDK 升级：
   - `iOS` 升级至 4.25.0。
-  - `Android` 升级至 4.25.0。
+  - `Android` 升级至 4.25.1。
 - 默认情况下，[本地会话列表不包含聊天室会话](conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。
 - 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。
 - 支持 [服务端消息搜索](/value-added/search/message_search_react-native.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
