@@ -19,6 +19,13 @@ containerClass: product-dynamics-page
 | Web SDK 5.1.2 开发版发布   | - **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过回调接收经过脱敏处理的结构化 SDK 日志。请参见 [SDK 日志](/document/web/log.html#控制台输出和日志回调) 文档。<br/> - **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/document/web/push/uniapp_push.html) 和 [离线打包集成 FCM](/document/web/push/uniapp_push_fcm.html) 文档。<br/> -  **支持查询聊天室全员禁言状态**：获取聊天室详情可以判断聊天室是否已开启全员禁言。请参见 [获取聊天室详情](/document/web/room_attributes.html#获取聊天室详情) 文档。<br/> -  **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](/document/web/login.html#登录-1) 文档。   | 2026-9-20 | [Web SDK 5.1.2 更新日志](/document/web/releasenote.html#v5-1-2-dev-2026-9-20-开发版) |
 | Web SDK 4.24.3 开发版发布   | [群组操作触发的群组事件中标识事件的目标用户](/v4/web/group_manage.html#监听群组事件)，包括管理员权限撤销事件、群组转让事件、成员移出群组和群黑名单事件以及邀请用户加入群组事件。   | 2026-9-20     | [Web SDK 4.24.3 更新日志](/document/web/releasenote.html#v4-24-3-dev-2026-9-20-开发版)   |
 
+#### 环信 Android SDK v4.24.2/v4.24.3 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.24.3 开发版发布   | **新增特性**：<br/> - 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。开启该开关且推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。该开关适用于所有厂商推送通道，详见[离线推送过程](/v4/android/push/push_overview.html#离线推送过程)。<br/> - 4.24.3 起，FCM 场景下应用进入后台后自动断连的行为默认关闭。依赖原有行为的应用需显式开启后台断连开关，断连等待时间由 3 分钟缩短为约 10 秒。 | 2026-9-23 | [Android SDK 4.24.3 更新日志](/document/android/releasenote.html#v4-24-3-dev-2026-9-23-开发版) |
+| Android SDK 4.24.2 开发版发布   | **优化**：<br/> - 调整 TCP/WebSocket 单次连接、非附件类 HTTP 请求、整体登录、`sendMessage` 内部重连等待以及 DNS 地址列表获取的超时时间，详见 [网络超时](/v4/android/connection.html#网络超时)。<br/> - 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验：当 `pageSize <= 0` 时直接返回参数错误，不再发起请求，详见[查询被订阅用户列表](/v4/android/presence.html#查询被订阅用户列表)。 | 2026-9-3 | [Android SDK 4.24.2 更新日志](/document/android/releasenote.html#v4-24-2-dev-2026-9-3-开发版) |
+
 #### 环信 Android SDK v4.25.1/iOS SDK v4.25.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
