@@ -273,7 +273,7 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
    - `EMGroupManager#fetchGroupMemberInfoListFromServer` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupManagerDelegate#onUserGroupNamecardChanged`，支持监听群名片变更。
 
-## v4.19.4 Dev 2026-9-22（开发版）
+## v4.19.4 2026-9-22
 
 - 修复多设备免打扰信息变更时，SDK 因通知解析异常导致免打扰类型错误的问题。
 - 修复 DNS 链路重建时 `resetLinkVector()` 崩溃的问题。
