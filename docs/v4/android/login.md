@@ -66,6 +66,10 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 });
 ```
 
+:::tip
+自 SDK 4.24.2 起，整体登录超时时间由 30 秒调整为 70 秒。若业务层设置了额外的登录等待或超时逻辑，应避免在 SDK 返回登录回调前过早判定登录失败。其他网络超时时间详见[网络超时](connection.html#网络超时)。
+:::
+
 ## 自动登录
 
 即时通讯 IM 默认自动登录，即 `EMOptions#setAutoLogin` 选项默认为 `true`。自动登录模式下，首次登录成功之后，后续初始化 SDK 时均会自动登录。
