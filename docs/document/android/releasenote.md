@@ -204,16 +204,19 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
   - 需在调用 `EMClient#init` 初始化 SDK 前设置。
   - 在 4.24.2 及之前版本中，FCM 场景下应用进入后台约 3 分钟后会自动断开长连接；从 4.24.3 起，该行为默认关闭。依赖原有行为的 FCM 集成需显式调用 `setUsePushInBackground(true)`，断连等待时间同时由 3 分钟缩短为约 10 秒。
 
+详见 [推送概述文档](/v4/android/push/push_overview.html#离线推送过程)。
+
 ## v4.24.2 Dev 2026-9-3（开发版）
 
 #### 优化
 
-- 网络超时调优
+- 网络超时调优：
   - TCP/WebSocket 单次连接超时：5s 调整为 20s；
   - 非附件类 HTTP 请求超时：10s 调整为 20s；
   - 整体登录超时：30s 调整为 70s；
   - `sendMessage` 内部重连等待与 DNS 列表获取超时统一为 20s。
-- 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验逻辑：当 `pageSize <= 0` 时直接回调 `EMError.INVALID_PARAM`，不再发起请求。
+  - 详见 [连接文档](/v4/android/connection.html#网络超时)。
+- 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验逻辑：当 `pageSize <= 0` 时直接回调 `EMError.INVALID_PARAM`，不再发起请求。详见 [用户状态订阅文档](/v4/android/presence.html#查询被订阅用户列表)。
 
 #### 修复
 
