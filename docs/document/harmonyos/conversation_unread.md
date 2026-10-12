@@ -22,12 +22,12 @@
 会话未读数清零的基本步骤如下：
 
 1. 用户进入会话页面后，应用记录当前会话 ID，并根据业务需要调用 `clearConversationUnreadMessageCount(conversationId)` 清零该会话的未读数。
-2. SDK 先将本地目标会话的未读数更新为 `0`，再将清零结果同步给当前用户登录的其他设备。
+2. 调用成功后，目标会话的本地未读数会清零，清零状态会同步给当前用户登录的其他设备。
 3. 本地会话数据发生变化时，`ConversationListener#onConversationUpdate` 会收到回调。应用应重新读取会话数据并刷新会话列表 UI。
 4. 清零操作不会通知会话对端，也不会触发消息已读回执；仅会同步给当前用户的其他设备。
 5. 如需清零所有会话的未读数，可调用 `clearAllConversationUnreadMessageCount()`。该操作会清零本地全部会话的未读数，并同步给当前用户的其他设备。
 
-如果指定会话的本地未读数已经清零，但同步时出现服务端确认超时或连接断开，本地清零结果会保留，不会回滚。
+如果清零操作失败，Promise 会返回 `ChatError`。应用应根据错误信息处理，并重新读取本地会话数据确认当前未读数。
 
 :::tip
 清零会话未读数不会向会话对端发送通知，也不会触发消息已读回执。如需让消息发送方感知消息已读，请使用消息已读回执功能。
@@ -70,7 +70,7 @@ let unreadCount: number = conversation?.getUnreadMsgCount() ?? 0;
 
 调用 `clearAllConversationUnreadMessageCount` 将本地全部会话（包括聊天室会话）的未读消息数清零。清零状态会同步到当前账号的其他设备，但不会向消息发送方发送已读回执。
 
-其他登录设备会通过 `MultiDevicesListener#onConversationEvent` 收到 `MultiDevicesEvent#ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED` 事件。清空全部会话时，回调中的 `conversationId` 和 `type` 不表示某个具体会话。
+其他登录设备会通过 `MultiDevicesListener#onConversationEvent` 收到 `MultiDevicesEvent#ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED` 事件，其中`conversationId` 和 `type` 不表示某个具体会话，处理该事件时应忽略这两个参数，重新读取全部本地会话并刷新未读总数。
 
 ```typescript
 let chatManager = ChatClient.getInstance().chatManager();

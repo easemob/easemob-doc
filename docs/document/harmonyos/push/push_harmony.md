@@ -35,7 +35,26 @@ HarmonyOS 推送服务端通过服务账号密钥生成鉴权令牌。请先登�
 | Category | - | 否      | 通知消息类别。详见 [HarmonyOS NEXT 官网相关文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-apply-right-V5#section16708911111611)。 |
 | Action        | - | 否  | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。 |
 
-## 步骤三 在 SDK 初始化时配置应用的推送 Client ID
+## 步骤三 在项目中配置推送 Client ID
+
+在应用模块的 `src/main/module.json5`（例如 `entry/src/main/module.json5`）中，将 `client_id` 添加到 `module.metadata`。其值必须与环信控制台中的推送证书名称一致。
+
+```json
+{
+  "module": {
+    "metadata": [
+      {
+        "name": "client_id",
+        "value": "your-client-id"
+      }
+    ]
+  }
+}
+```
+
+如果 `module.metadata` 已存在，请将 `client_id` 配置项合并到现有数组中，不要覆盖其他配置项。
+
+## 步骤四 在 SDK 初始化时配置应用的推送 Client ID
 
 ```typescript
 import { ChatClient, ChatOptions } from '@easemob/chatsdk';
@@ -50,7 +69,7 @@ options.setAppIDForPush('your-client-id');
 ChatClient.getInstance().init(context, options);
 ```
 
-## 步骤四 监听 Push Token 上传结果
+## 步骤五 监听 Push Token 上传结果
 
 SDK 初始化完成后、调用 `ChatClient#loginWithToken` 登录前，注册 `PushListener` 监听 Push Token 的获取和绑定结果。登录成功后，SDK 会自动从 HarmonyOS Push Kit 获取 Push Token，并将 Token 与初始化时配置的 Client ID 上传至环信服务器，应用无需自行判断 Token 是否需要上传。
 

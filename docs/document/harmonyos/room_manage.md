@@ -87,7 +87,7 @@ ChatClient.getInstance().chatroomManager()?.fetchPublicChatroomsFromServer(
 });
 ```
 
-### 携带扩展信息加入聊天室
+#### 携带扩展信息加入聊天室
 
 需要在加入聊天室时传递自定义业务信息，或控制是否退出已加入的其他聊天室时，可传入 `leaveOtherRooms` 和 `ext` 参数。
 
@@ -141,8 +141,9 @@ ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatroomId)
 聊天室所有者默认可以退出聊天室，重新加入后仍为该聊天室的所有者。若在初始化前调用 `ChatOptions#allowChatroomOwnerLeave(false)`，所有者调用 `leaveChatroom` 时会返回错误码 `706`（`ChatError.CHATROOM_OWNER_NOT_ALLOW_LEAVE`）。
 
 ```typescript
-let options: ChatOptions = new ChatOptions();
-options.setAppKey("your-appkey");
+let options: ChatOptions = new ChatOptions({
+    appKey: "your-org#your-app",
+});
 
 // 退出聊天室时保留本地消息。
 options.setDeleteMessagesOnLeaveChatroom(false);
@@ -181,7 +182,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(
 - 聊天室白名单成员。聊天室所有者和管理员默认在白名单中。
 - [调用 RESTful API 创建聊天室](/document/server-side/chatroom_create.html) 时预先加入、但从未登录过的用户。
 
-若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到收到聊天室的消息，需要登录后手动调用 `joinChatroom` 加入聊天室。
+若开启了聊天室多端多设备功能，聊天室白名单中的成员在一台设备上离线重连后，无法收到聊天室的消息。若使该设备收到聊天室的消息，需要登录后手动调用 `joinChatroom` 加入聊天室。
 
 ## 获取聊天室列表
 
@@ -221,6 +222,10 @@ ChatClient.getInstance().chatroomManager()?.fetchPublicChatroomsFromServer(
 
 `ChatroomListener` 提供聊天室成员、角色、禁言、白名单、基本属性和自定义属性等变更事件。通过 `ChatroomManager#addListener` 添加监听器；不再使用时，应调用 `removeListener` 移除同一个监听器对象。
 
+// TODO：这一点需要写明吗？
+
+HarmonyOS SDK 5.0.0 的 `onMemberExited` 回调当前固定将 `roomName` 传为字符串 `"roomname"`，该参数不是真实的聊天室名称。业务应使用 `roomId` 标识聊天室；如需展示真实名称，可保存 `joinChatroom` 或聊天室列表返回的 `Chatroom` 信息。
+
 ```typescript
 let listener: ChatroomListener = {
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
@@ -237,6 +242,8 @@ let listener: ChatroomListener = {
         roomName: string,
         userId: string
     ): void => {
+        // HarmonyOS SDK 5.0.0 当前固定将 roomName 传为 "roomname"，
+        // 不应将其作为真实聊天室名称使用。
     },
 
     // 当前用户被移出、因离线被移出或聊天室被解散时触发。被移出的成员收到该事件。
@@ -371,6 +378,7 @@ let listener: ChatroomListener = {
         roomName: string,
         userId: string
     ): void => {
+        // roomName 当前固定为 "roomname"；聊天室身份判断应使用 roomId。
         if (currentChatroom && currentChatroom.chatroomId() === roomId) {
             memberCount = currentChatroom.memberCount();
             // 使用最新 memberCount 刷新界面。

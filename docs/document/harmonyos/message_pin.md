@@ -80,12 +80,12 @@ ChatClient.getInstance().chatManager()?.fetchPinnedMessagesFromServer(conversati
   });
 ```
 
-你也可以调用 `Conversation#getPinnedMessages` 读取本地缓存的置顶消息列表。`ChatManager#getConversation` 在本地不存在指定会话时返回 `undefined`。
+你也可以调用 `Conversation#getPinnedMessages` 读取本地缓存的置顶消息列表。调用 `ChatManager#getConversation` 时应传入正确的会话类型；本地不存在指定会话时返回 `undefined`。
 
 ```typescript
 const conversation: Conversation | undefined = ChatClient.getInstance()
   .chatManager()
-  ?.getConversation(conversationId);
+  ?.getConversation(conversationId, conversationType, false);
 
 conversation?.getPinnedMessages()
   .then((pinnedMessages: Array<ChatMessage>): void => {

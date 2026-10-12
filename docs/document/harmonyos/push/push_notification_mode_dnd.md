@@ -251,8 +251,8 @@ if (pushManager) {
 SDK 支持通过 `PushManager#setSilentModeForConversation` 设置指定单聊或群聊会话的推送通知方式，不支持设置会话级免打扰时间段或一次性免打扰时长。
 
 ```typescript
-const conversationId: string = 'user-id';
-const conversationType: ConversationType = ConversationType.Chat;
+const conversationId: string = 'group-id';
+const conversationType: ConversationType = ConversationType.GroupChat;
 const pushManager = ChatClient.getInstance().pushManager();
 
 if (pushManager) {

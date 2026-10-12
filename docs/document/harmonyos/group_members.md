@@ -84,7 +84,7 @@ ChatClient.getInstance().groupManager()?.fetchGroupMembers(
 
 ### 从本地群组对象获取成员 ID
 
-如已获取 `Group` 对象，可调用 `Group#getUsers` 获取该对象中包含的全部成员用户 ID。该方法按群主、管理员和普通成员的顺序合并本地数据，返回列表中可能包含重复的用户 ID，业务侧可按需去重：
+如已获取 `Group` 对象，可调用 `Group#getUsers` 获取该对象中包含的全部成员用户 ID。返回列表依次包含群主、管理员和普通成员：
 
 ```typescript
 let userIds: string[] = group.getUsers();

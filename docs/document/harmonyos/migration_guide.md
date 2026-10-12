@@ -70,7 +70,7 @@ SDK 5.0.0 新增登录后自动数据同步机制。应用可在初始化时通�
 | :------------------- | :----- | :-------------------------------------------- |
 | `ChatOptions`        | `DataSyncType`                                                                                | 数据同步类型枚举：`NONE(0)`、`CONVERSATIONS(1)`、`CONTACTS(2)` 和 `JOINED_GROUPS(4)`。多个类型可以组合使用。 |
 | `ChatOptions`        | `setDataSyncType(types: DataSyncType \| DataSyncType[])/getDataSyncType(): DataSyncType[]` | 设置或获取登录后需要自动同步的数据类型。该配置应在调用 `ChatClient#init` 前完成。单个值或数组均可。                          |
-| `ConnectionListener` | `onDataSyncStart(type)` / `onDataSyncFinish(type, errorCode)`                                 | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `EMError#EM_NO_ERROR` 时表示同步成功。                      |
+| `ConnectionListener` | `onDataSyncStart(type)` / `onDataSyncFinish(type, errorCode)`                                 | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `ChatError.EM_NO_ERROR` 时表示同步成功。                      |
 
 :::tip
 `dataSyncType` **默认为** `[DataSyncType.CONVERSATIONS]`，即登录后自动同步会话数据。好友和已加入群组数据需显式配置 `CONTACTS`、`JOINED_GROUPS` 才会自动同步，否则 `getAllGroups()` 和本地好友查询接口可能返回空数据。这一点与 1.x 不同：1.x 中依赖登录后主动拉取的数据，升级后按同步类型自动到位，未配置的类型需要业务服务自行维护。
@@ -79,8 +79,9 @@ SDK 5.0.0 新增登录后自动数据同步机制。应用可在初始化时通�
 典型配置如下：
 
 ```typescript
-let options: ChatOptions = new ChatOptions();
-options.setAppKey("your-appkey");
+let options: ChatOptions = new ChatOptions({
+    appKey: "your-org#your-app",
+});
 options.setDataSyncType([
     DataSyncType.CONVERSATIONS,
     DataSyncType.CONTACTS,
@@ -99,7 +100,7 @@ ChatClient.getInstance().init(context, options);
 | `ChatManager`    | `fetchPinnedConversationsFromServer(limit, cursor)`                                                                   | 置顶会话随会话数据同步落地，读本地置顶状态：`getConversations()` 过滤 `Conversation#isPinned()`。                         |
 | `GroupManager`   | `fetchJoinedGroupsFromServer(pageNum, pageSize)`                                                                      | `getAllGroups()`（本地）+ `onDataSyncFinish(JOINED_GROUPS, ...)`                                     |
 | `GroupManager`   | `fetchPublicGroupsFromServer(pageSize, cursor?)`                                                                      | 无直接替代。公开群组目录需由业务服务维护。                                                                            |
-| `ContactManager` | `fetchAllContactsIDFromServer()`、`fetchAllContactsFromServer()`、`fetchAllContactsFromServerByPage(pageSize, cursor?)` | `fetchAllContactsFromLocal()` + `onDataSyncFinish(CONTACTS, ...)`。**5.0.0 已无任何从服务器拉取好友列表的入口**    |
+| `ContactManager` | `fetchAllContactsIDFromServer()`、`fetchAllContactsFromServer()`、`fetchAllContactsFromServerByPage(pageSize, cursor?)` | `getContactsFromLocal()` + `onDataSyncFinish(CONTACTS, ...)`。**5.0.0 已无任何从服务器拉取好友列表的入口**    |
 | `ChatOptions`    | `setEnableAutoSyncContacts(boolean)` / `isEnableAutoSyncContacts()`                                                   | 并入 `setDataSyncType(...)` 的 `CONTACTS` 位                                                         |
 
 相应地，`ContactListener#onContactSyncStart()` 和 `onContactSyncFinishWithError(errorCode, error)` 已删除。请改用 `ConnectionListener#onDataSyncStart(DataSyncType.CONTACTS)` 和 `onDataSyncFinish(DataSyncType.CONTACTS, errorCode)` 监听好友数据同步状态。详见 [监听器回调变化汇总](#监听器回调变化汇总)。
@@ -211,7 +212,10 @@ let option: GroupOptions = {
     inviteNeedConfirm: false,
     extField: "custom ext",
 };
-let group: Group = await ChatClient.getInstance().groupManager().createGroup(option);
+const groupManager = ChatClient.getInstance().groupManager();
+if (groupManager) {
+    let group: Group = await groupManager.createGroup(option);
+}
 ```
 
 `GroupOptions` 配置字段的默认值：`maxUsers = 200`、`isPublic = false`、`joinApprovalRequired = false`、`allowInvites = false`、`inviteNeedConfirm = true`、`extField` 为空。原 `style?: GroupStyle` 字段已删除。
@@ -253,8 +257,8 @@ SDK 5.0.0 新增建群后按配置类型更新群组属性的能力：
 | 1.x API      | 5.0.0 API       | 说明         |
 | :---------------- | :----- | :------- |
 | 单个会话删除接口循环调用 | `deleteConversations(conversationIds: string \| string[], deleteMessages)` | 支持传入单个会话 ID 或 ID 数组批量删除本地会话。`deleteMessages` 决定是否同时删除本地历史消息。空数组返回 `INVALID_PARAM`。 |
-| 无            | `Conversation#getConversationName(): string`                              | 获取会话显示名称。单聊返回对方用户信息，群聊返回群组信息；相关数据尚未同步时返回空字符串。  |
-| 无            | `Conversation#getConversationAvatar(): string`                            | 获取会话头像。数据尚未同步时返回空字符串。        |
+| 无            | `Conversation#getConversationName(): string`                              | 获取会话显示名称。单聊返回对方用户昵称，群聊返回群组名称；相关数据尚未同步时返回空字符串。  |
+| 无            | `Conversation#getConversationAvatar(): string`                            | 获取会话头像。单聊返回对方用户头像，群聊返回群组头像；相关数据尚未同步时返回空字符串。        |
 
 ## 监听器回调变化汇总
 

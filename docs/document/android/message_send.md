@@ -35,7 +35,7 @@ Android SDK 通过 `EMMessage` 的不同静态方法创建各类消息。不同�
 | 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`             | 必需             | 所有消息         | 参数随消息类型而不同，例如文本内容、附件 URI、位置坐标、透传命令或自定义事件。 |
 | 会话类型         | `EMMessage#setChatType`                                      | 群聊和聊天室必需 | 所有消息         | 单聊、群聊和聊天室分别设置为 `EMMessage.ChatType.Chat`、`GroupChat` 和 `ChatRoom`。默认值为 `Chat`。 |
 | 扩展字段         | `EMMessage#setAttribute`                                     | 可选             | 所有消息         | 添加业务自定义信息。支持字符串、布尔值、数值、JSON 对象和 JSON 数组等类型；扩展字段会计入消息大小限制。 |
-| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息         | 设置为 `true` 时，消息仅投递给在线用户，不进行离线存储。适用于输入状态、瞬时控制信息等场景。 |
+| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息单聊和群聊的各类消息         | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。适用于输入状态、瞬时控制信息等场景。|
 | 回调路由环境     | `EMMessage#setWebhookEnv`                                    | 可选             | 所有消息         | 设置 Webhook 回调环境标识，服务端根据该值匹配回调路由。      |
 | 聊天室消息优先级 | `EMMessage#setPriority`                                      | 可选             | 聊天室消息       | 设置聊天室消息的优先级，可选 `PriorityHigh`、`PriorityNormal` 和 `PriorityLow`，默认值为 `PriorityNormal`。 |
 | 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。是否可用还受相应服务端功能配置和使用限制约束。 |

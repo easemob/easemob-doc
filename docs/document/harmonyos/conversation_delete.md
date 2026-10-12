@@ -73,7 +73,16 @@ if (chatManager) {
 
 ## 删除本地会话
 
-调用 `deleteConversation` 可以删除单个指定的本地会话。
+`ChatManager` 提供以下两种删除本地会话的方法：
+
+- `deleteConversation`：删除单个本地会话。
+- `deleteConversations`：批量删除多个本地会话。
+
+这两个方法只删除本地数据，不会删除服务端会话或服务端漫游消息。后续再次收发消息时，SDK 会重新创建对应的本地会话。
+
+### 删除单个本地会话
+
+调用 `deleteConversation` 删除单个指定的本地会话。如果未找到对应的本地会话，该方法返回 `false`。
 
 `isRemoveMessages` 参数控制是否同时删除该会话的本地历史消息：
 
@@ -83,7 +92,7 @@ if (chatManager) {
 ```typescript
 let chatManager = ChatClient.getInstance().chatManager();
 if (chatManager) {
-    // 删除本地会话，同时删除该会话的本地历史消息。
+    // 删除单个本地会话及其本地历史消息。
     let deleted: boolean = chatManager.deleteConversation(conversationId, true);
     if (!deleted) {
         // 未找到对应的本地会话。
@@ -91,18 +100,16 @@ if (chatManager) {
 }
 ```
 
-:::tip
-`deleteConversation` 和 `deleteConversations` 只删除本地数据，不会删除服务端会话或服务端漫游消息。后续再次收发消息时，SDK 会重新创建对应的本地会话。
-:::
-
 ### 批量删除本地会话
 
-调用 `deleteConversations` 可以删除一个或多个本地会话。该方法既可以传入单个会话 ID，也可以传入会话 ID 数组；传入空数组时，Promise 会返回 `ChatError.INVALID_PARAM` 错误。
+调用 `deleteConversations` 可以删除一个或多个本地会话。`conversationIds` 既可以传入单个会话 ID，也可以传入会话 ID 数组；传入空数组时，Promise 会返回 `ChatError.INVALID_PARAM` 错误。
 
 `deleteMessages` 参数控制是否同时删除各会话中的本地消息：
 
 - `true`：删除本地会话及其中的本地消息。
 - `false`：仅删除本地会话，保留本地消息。
+
+以下示例批量删除多个本地会话及其中的本地消息：
 
 ```typescript
 let conversationIds: Array<string> = [conversationId1, conversationId2];
@@ -193,8 +200,8 @@ if (contactManager) {
 | [`setDeleteMessagesOnLeaveGroup`](#功能说明) | `ChatOptions` | 设置主动或被动退出群组时是否删除本地群聊消息。 |
 | [`setDeleteMessagesOnLeaveChatroom`](#功能说明) | `ChatOptions` | 设置主动或被动退出聊天室时是否删除本地聊天室消息。 |
 | [`deleteConversationFromServer`](#单向删除服务端会话) | `ChatManager` | 删除当前用户服务端和本地的指定会话，并可设置是否同时删除历史消息。 |
-| [`deleteConversation`](#删除本地会话) | `ChatManager` | 删除指定的本地会话，并可设置是否同时删除本地历史消息。 |
-| [`deleteConversations`](#批量删除本地会话) | `ChatManager` | 删除一个或多个本地会话，并可设置是否同时删除本地消息。 |
+| [`deleteConversation`](#删除单个本地会话) | `ChatManager` | 删除单个指定的本地会话，并可设置是否同时删除本地历史消息。 |
+| [`deleteConversations`](#批量删除本地会话) | `ChatManager` | 批量删除多个本地会话，并可设置是否同时删除本地消息。 |
 | [`deleteAllConversationsAndMessages`](#删除全部会话及消息) | `ChatManager` | 清空全部本地会话和消息，并可选择是否同时清空当前用户的服务端数据。 |
 | [`getConversation`](#删除会话中的指定本地消息) | `ChatManager` | 获取指定的本地会话。 |
 | [`removeMessage`](#删除会话中的指定本地消息) | `Conversation` | 删除会话中的指定本地消息。 |

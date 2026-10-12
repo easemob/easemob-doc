@@ -95,7 +95,7 @@ SDK 提供以下本地会话列表读取方式：
 | 方式 | API | 说明 |
 | :--- | :--- | :--- |
 | 排序列表 | `getAllConversationsBySort()` | 从本地数据库读取全部会话。置顶会话优先；置顶和非置顶会话内部均按最新一条消息的时间戳倒序排列。 |
-| 本地列表 | `getConversations()` | 获取当前加载到本地的会话数组。 |
+| 本地列表 | `getConversations()` | 获取 SDK 当前维护的本地会话数组，不保证返回顺序。 |
 
 ## 当前会话与未读数
 
@@ -203,7 +203,7 @@ ChatClient.getInstance()
 | [`clearConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零所有会话的本地未读消息数。 |
 | [`sendMessageReadReceipts`](#当前会话与未读数) | `ChatManager` | 为单聊或群聊消息发送已读回执。 |
-| [`deleteConversation`](#会话功能列表) / [`deleteConversations`](#会话功能列表) | `ChatManager` | 删除一个或多个本地会话，并按参数决定是否删除本地历史消息。 |
+| [`deleteConversation`](#会话功能列表) / [`deleteConversations`](#会话功能列表) | `ChatManager` | 删除一个或多个本地会话，并按参数决定是否删除本地历史消息。`deleteConversation` 当前用于单聊会话；群聊和聊天室会话使用 `deleteConversations`。 |
 | [`deleteConversationFromServer`](#会话功能列表) / [`deleteAllConversationsAndMessages`](#会话功能列表) | `ChatManager` | 删除服务端和本地的会话及消息。 |
 | [`pinConversation`](#会话功能列表) | `ChatManager` | 设置或取消会话置顶。 |
 | [`addConversationMark`](#会话功能列表) / [`removeConversationMark`](#会话功能列表) | `ChatManager` | 为会话添加或移除标记。 |

@@ -2,7 +2,7 @@
 
 ## v5.0.0 Dev 2026-9-18（开发版）
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 HarmonyOS IM SDK 4.x 到 5.x 迁移指南。
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [HarmonyOS IM SDK 1.x 到 5.0.0 迁移指南](migration_guide.html)。
 
 #### 重要变更
 
@@ -17,7 +17,7 @@
 
 SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，并通过统一的同步状态回调监听同步进度。数据库打开和服务端数据同步分别对应不同阶段：
 
-- **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，包括会话、好友、已加入群组和不同步数据等（`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`）。多个数据类型可按位组合，建议在调用 `ChatClient.init` 前显式设置。
+- **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，包括会话、好友、已加入群组和不同步数据等（`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`）。需要同步多种数据时应传入对应枚举值数组，建议在调用 `ChatClient.init` 前显式设置。
 - **读取本地数据**：`ConnectionListener.onDatabaseOpened(username)` 回调表示当前账号的本地数据库已打开，收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。也可通过 `ChatClient.isDatabaseOpened()` 查询数据库状态；注意 `init` 后即使未登录成功，本地数据库也可能已打开。
 - **监听服务端数据同步**：通过 `ConnectionListener.onDataSyncStart(type)` 和 `onDataSyncFinish(type, errorCode)` 监听指定类型的数据同步开始和结束。
 - **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 回调成功后，再读取本地数据并刷新界面。
@@ -469,7 +469,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - 支持[会话推送通知方式的本地存储](/v4/harmonyos/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置):
   - 新增 `PushManager#syncConversationsSilentModeFromServer` 方法，支持从服务器同步所有会话的推送通知方式设置。
   - 新增 `Conversation#pushRemindType` 属性，用于获取本地存储会话的推送通知方式。
-  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDeviceListener#onConversationEvent` 事件。
+  - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `MultiDevicesListener#onConversationEvent` 事件。
 - 新增 `Conversation#getMsgCountInRange` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](/v4/harmonyos/message_retrieve.html#获取会话在一定时间内的消息数)。
 - 新增[设备登录时允许携带自定义信息，并将其传递给被踢的设备](/v4/harmonyos/multi_device.html#设置登录设备的扩展信息)：
   - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；

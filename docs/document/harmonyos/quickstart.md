@@ -4,7 +4,6 @@
 
 本文介绍如何快速集成环信即时通讯 IM HarmonyOS SDK 实现单聊。
 
-
 ## 实现原理
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
@@ -64,7 +63,7 @@
 - 工程包含多个 product 时，应在实际参与构建的各个 product 中设置该选项。
 :::
 
-### 2. 集成 SDK
+### 3. 集成 SDK
 
 打开 [SDK 下载](https://www.easemob.com/download/im#HarmonyOS) 页面，下载环信即时通讯 IM HarmonyOS SDK 5.x，得到 HAR 文件。
 
@@ -88,7 +87,7 @@
 
 最后单击 **File > Sync and Refresh Project** 按钮，直到同步完成。
 
-### 3. 添加项目权限
+### 4. 添加项目权限
 
 在模块的 `module.json5`（例如 `HelloWorld` 工程中 `entry` 模块的 `module.json5`）中声明 SDK 所需的网络权限：
 

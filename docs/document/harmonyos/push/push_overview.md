@@ -13,7 +13,7 @@
 
 ### 前置配置要求
 
-除满足用户离线条件外，使用第三方离线推送服务还需在 [环信控制台](https://console.easemob.com/user/login) 完成推送证书信息的配置。以华为推送为例，需配置 **证书名称** 和 **推送密钥**，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
+除满足用户离线条件外，使用第三方离线推送服务还需在 [环信控制台](https://console.easemob.com/user/login) 完成推送证书信息的配置。HarmonyOS 推送需配置 **证书名称** 并上传服务账号密钥 JSON 文件。客户端完成推送 Client ID 配置后，HarmonyOS SDK 会在用户登录成功时自动获取并向环信服务器上传 Push Token。
 
 ### 不触发离线推送的场景
 
@@ -33,12 +33,12 @@
 3. 用户 A 向 用户 B 发送消息。
 4. 环信服务器检查用户 B 是否在线。若在线，环信服务器直接将消息发送给用户 B。
 5. 若用户 B 离线，环信服务器判断该用户的设备使用的推送服务类型。
-6. 环信服务器将将消息发送给华为 Auth 服务端。
-7. 华为 Auth 服务端将消息发送给用户 B。
+6. 环信服务器使用服务账号密钥完成推送接口鉴权，并向 HarmonyOS Push Kit 服务端提交推送请求。
+7. HarmonyOS Push Kit 将推送通知下发到用户 B 的设备。
 
 ## 推送证书与推送 Token
 
-**推送证书**：使用 HarmonyOS 离线推送前，需先开通 HarmonyOS Push Kit 服务并申请服务账号密钥，然后在 [环信控制台](https://console.easemob.com/user/login) 中选择应用，进入 **即时通讯 > 功能配置 > 消息推送 > 证书管理**，添加 HarmonyOS 推送证书。证书名称应填写应用的 Client ID，并上传服务账号密钥 JSON 文件。证书名称是环信服务器判断目标设备所用推送通道的唯一依据，因此必须与客户端配置并上传的证书名称一致。初始化 IM SDK 前，还需通过 `ChatOptions#setAppIDForPush` 设置相同的 Client ID。
+**推送证书**：使用 HarmonyOS 离线推送前，需先开通 HarmonyOS Push Kit 服务并申请服务账号密钥，然后在 [环信控制台](https://console.easemob.com/user/login) 中选择应用，进入 **即时通讯 > 推送配置 > 证书配置**，添加 HarmonyOS 推送证书。证书名称应填写应用的 Client ID，并上传服务账号密钥 JSON 文件。证书名称是环信服务器判断目标设备所用推送通道的唯一依据，因此必须与客户端配置并上传的证书名称一致。初始化 IM SDK 前，还需通过 `ChatOptions#setAppIDForPush` 设置相同的 Client ID。
 
 **推送 Token（Device Token）**：推送 Token 是 HarmonyOS Push Kit 为应用实例生成的唯一标识，用于将推送消息投递至对应设备上的应用。HarmonyOS IM SDK 已集成 Push Token 的获取与上传逻辑：成功登录后，SDK 会通过 Push Kit 获取 Token，并将 Token 与初始化时配置的 Client ID 上传至环信服务器。应用通常无需自行判断 Token 是否发生变化或是否需要重新上传，可通过 `PushListener` 监听 Token 的绑定结果。
 
@@ -57,7 +57,7 @@
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 选择页面上方的 **应用管理**。在应用列表中，单击测试应用或正式版应用的 App Key。
-3. 选择 **增值服务 > 消息推送 > 离线推送**。
+3. 选择 **即时通讯 > 推送配置 > 离线推送配置**。
 4. 点击 **免费开通**。
 
 ![image](/images/android/push/push_advanced_feature_enable.png)
@@ -93,7 +93,7 @@
 
 ## 多设备离线推送策略
 
-多设备登录时，可在 [环信控制台](https://console.easemob.com/user/login)的 **证书管理** 页面配置推送策略，该策略配置对所有推送通道生效：
+多设备登录时，可在 [环信控制台](https://console.easemob.com/user/login) 的 **证书配置** 页面配置推送策略，该策略配置对所有推送通道生效：
 
 - 所有设备均离线时，才发送推送消息。
 - 任一设备离线时，即发送推送消息。
@@ -106,8 +106,7 @@
 
 - 已开通环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/console/app_create.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 确保已经在 [AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html) 网站开通开通推送服务。
-- 检查并提醒用户允许接收通知消息，并将设备的推送证书上传到[环信控制台](https://console.easemob.com/user/login)。
-- 若使用[推送模板](#推送模板)，需在[环信控制台](https://console.easemob.com/user/login)上激活。
-
+- 确保已经在 [AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html) 网站开通推送服务。
+- 检查并提醒用户允许接收通知消息，并确认已将 HarmonyOS 推送证书上传到 [环信控制台](https://console.easemob.com/user/login)。
+- 若使用 [推送模板](#推送模板)，需在 [环信控制台](https://console.easemob.com/user/login)上激活。
 

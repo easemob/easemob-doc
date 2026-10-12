@@ -196,6 +196,11 @@ ChatClient.getInstance().groupManager()?.declineInvitation(groupId, "No, thanks"
 
 邀请被接受后，邀请人会收到 `onInvitationAccepted` 事件；邀请被拒绝后，邀请人会收到 `onInvitationDeclined` 事件。用户成功加入群组后，即可在该群组中收发消息。
 
+// TODO：需要添加吗？
+:::tip
+HarmonyOS V5 底层的邀请接受事件不返回接受理由，因此 `onInvitationAccepted` 的 `reason` 参数固定为空字符串。
+:::
+
 ### 用户申请入群
 
 公开群支持用户主动申请加入，私有群不支持用户主动申请加入。
@@ -235,6 +240,9 @@ ChatClient.getInstance().groupManager()?.applyJoinToGroup(
 
 - 申请被同意后，申请人、群主和管理员（除操作者外）会收到 `onRequestToJoinAccepted` 事件。
 - 申请被拒绝后，申请人、群主和管理员（除操作者外）会收到 `onRequestToJoinDeclined` 事件。
+
+// TODO：需要写这么细吗？
+HarmonyOS V5 在 `onRequestToJoinAccepted` 中使用回调群组对象的群主 ID 填充 `accepter`。`onRequestToJoinDeclined` 的 `groupName` 从本地群组缓存读取；本地不存在该群组时，该参数为空字符串。
 
 ```typescript
 // 群主或群管理员同意入群申请。
@@ -419,17 +427,18 @@ let groupListener: GroupListener = {
     },
 
     // 入群申请被同意。申请人、群主和管理员（除操作者外）收到该事件。
+    // accepter 为回调群组对象中的群主 ID。
     onRequestToJoinAccepted: (groupId: string, groupName: string,
         accepter: string): void => {
     },
 
-    // 入群申请被拒绝。注意 reason 位于 applicant 之前。
-     // 申请人、群主和管理员（除操作者外）收到该回调。
+    // 入群申请被拒绝。注意 reason 位于 applicant 之前；本地无群组缓存时 groupName 为空字符串。
+    // 申请人、群主和管理员（除操作者外）收到该回调。
     onRequestToJoinDeclined: (groupId: string, groupName: string,
         decliner: string, reason: string, applicant: string): void => {
     },
 
-    // 用户接受入群邀请，邀请人收到该事件。
+    // 用户接受入群邀请，邀请人收到该事件；reason 固定为空字符串。
     onInvitationAccepted: (groupId: string, invitee: string,
         reason: string): void => {
     },
@@ -546,7 +555,7 @@ ChatClient.getInstance().groupManager()?.removeListener(groupListener);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createGroup`](#创建群组) | `GroupManager` | 创建群组。 |
-| [`updateGroupConfigs`](#创建群组) | `GroupManager` | 按指定配置类型更新群组配置。 |
+| [`updateGroupConfigs`](group_attributes.html#修改群组配置) | `GroupManager` | 按指定配置类型更新群组配置。 |
 | [`destroyGroup`](#解散群组) | `GroupManager` | 解散群组。 |
 | [`addUsersToGroup`](#邀请用户入群) / [`inviteUsers`](#邀请用户入群) | `GroupManager` | 添加或邀请用户加入群组。 |
 | [`acceptInvitation`](#邀请用户入群) / [`declineInvitation`](#邀请用户入群) | `GroupManager` | 接受或拒绝群组邀请。 |

@@ -35,7 +35,7 @@ HarmonyOS SDK 通过 `ChatMessage` 的不同静态方法创建各类消息。不
 | 消息内容 | 各消息创建方法的内容参数，或 `ChatMessage#setBody` | 必需 | 所有消息 | 参数随消息类型而不同，例如文本内容、附件路径、位置坐标、透传命令或自定义事件。 |
 | 会话类型 | `ChatMessage#setChatType` | 群聊和聊天室必需 | 所有消息 | 单聊、群聊和聊天室分别设置为 `ChatType.Chat`、`ChatType.GroupChat` 和 `ChatType.ChatRoom`。默认值为 `ChatType.Chat`。 |
 | 扩展字段 | `ChatMessage#setExt` | 可选 | 所有消息 | 传入 `Map<string, MessageExtType>`。字段值支持字符串、布尔值、数值、对象和数组；对象和数组由 SDK 序列化为 JSON 字符串。扩展字段会计入消息大小限制。 |
-| 仅在线投递 | `ChatMessage#deliverOnlineOnly` | 可选 | 所有消息 | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。 |
+| 仅在线投递 | `ChatMessage#deliverOnlineOnly` | 可选 | 单聊和群聊的各类消息 | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。 |
 | 回调路由环境 | `ChatMessage#setWebhookEnv` | 可选 | 所有消息 | 设置 Webhook 回调环境标识，服务端根据该值匹配回调路由。 |
 | 聊天室消息优先级 | `ChatMessage#setPriority` | 可选 | 聊天室消息 | 可选 `PriorityHigh`、`PriorityNormal` 和 `PriorityLow`，默认值为 `PriorityNormal`。 |
 | 定向接收成员 | `ChatMessage#setReceiverList` | 可选 | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。是否可用还受相应服务端功能配置和使用限制约束。 |
@@ -58,6 +58,7 @@ HarmonyOS SDK 通过 `ChatMessage` 的不同静态方法创建各类消息。不
    - `ChatMessage#setReceiverList` 仅适用于群聊和聊天室定向消息。
    - `ChatMessage#setPriority` 仅适用于聊天室消息。
    - `ChatMessage#setIsNeedReadReceipt` 适用于单聊和群聊消息，不支持聊天室。
+   - `ChatMessage#deliverOnlineOnly` 适用于单聊和群聊消息，不支持聊天室。
    - 群聊和聊天室消息需要通过 `ChatMessage#setChatType` 设置对应的会话类型。
 
 2. 调用 `ChatManager#sendMessage` 发送文本消息。
@@ -99,7 +100,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 | 会话类型 | `ChatType` | `setChatType` | 群聊和聊天室必填 | 所有会话类型 | 分别为 `Chat`、`GroupChat` 和 `ChatRoom`，默认值为 `Chat`。 |
 | 目标翻译语言 | `string \| Array<string>` | `TextMessageBody#setTargetLanguages` | 可选 | 文本消息 | 从消息中获取 `TextMessageBody` 后设置目标语言代码。 |
 | 扩展字段 | `Map<string, MessageExtType>` | `setExt` | 可选 | 业务扩展信息 | 用于携带业务附加信息，会计入消息大小限制。 |
-| 仅在线投递 | `boolean` | `deliverOnlineOnly` | 可选 | 瞬时消息、状态通知 | 设置为 `true` 时仅投递给在线用户。 |
+| 仅在线投递 | `boolean` | `deliverOnlineOnly` | 可选 | 单聊、群聊的瞬时消息或状态通知 | 设置为 `true` 时仅投递给在线用户；不支持聊天室。 |
 | 回调路由环境 | `string` | `setWebhookEnv` | 可选 | 多环境回调路由 | 设置 Webhook 回调环境标识。 |
 | 定向接收成员 | `Array<string>` | `setReceiverList` | 可选 | 群聊、聊天室定向消息 | 指定群聊或聊天室消息的接收成员。 |
 | 是否需要已读回执 | `boolean` | `setIsNeedReadReceipt` | 可选 | 单聊、群聊 | 标记消息是否需要已读回执；聊天室不支持。 |

@@ -110,7 +110,7 @@ let conversations: Array<Conversation> = ChatClient.getInstance()
     ?.getAllConversationsBySort() ?? [];
 ```
 
-如果不需要 SDK 返回排序后的数据库会话列表，可以调用 `getConversations` 获取当前加载到本地的会话数组。该方法不提供排序、分页或筛选参数。
+如果不需要 SDK 返回排序后的数据库会话列表，可以调用 `getConversations` 获取 SDK 当前维护的本地会话数组。该方法不提供排序、分页或筛选参数，也不保证返回顺序。
 
 ```typescript
 let conversations: Array<Conversation> = ChatClient.getInstance()
@@ -215,7 +215,7 @@ ChatClient.getInstance()
 | [`addConnectionListener`](#监听会话列表同步状态) / [`removeConnectionListener`](#监听会话列表同步状态) | `ChatClient` | 添加或移除连接及数据同步监听器。 |
 | [`isDatabaseOpened`](#监听会话列表同步状态) | `ChatClient` | 查询当前用户的本地数据库是否已经打开。 |
 | [`setDeleteMessagesOnLeaveChatroom`](#会话相关选项) / [`isDeleteMessagesOnLeaveChatroom`](#会话相关选项) | `ChatOptions` | 设置或查询退出聊天室时是否删除该聊天室的本地消息。 |
-| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前加载到本地的会话数组。 |
+| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取 SDK 当前维护的本地会话数组，不保证返回顺序。 |
 | [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取置顶优先并按最后消息时间倒序排列的全部会话。 |
 | [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
