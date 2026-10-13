@@ -38,6 +38,18 @@ containerClass: product-dynamics-page
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK v1.15.0 开发版发布   | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/harmonyos/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性，数据同步 WebSocket 地址根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - 支持 [分页获取本地会话列表](/document/harmonyos/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_harmonyos.html)，可按单个或多个关键词、消息类型搜索。<br/> - 支持 [文本消息翻译](/value-added/translation/message_translation_harmonyos.html)。<br/> - 支持 [为消息配置回调路由标识](/document/harmonyos/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。<br/> - 新增连接和翻译相关的错误码。 | 2026-9-24     | [HarmonyOS SDK 1.15.0 更新日志](/document/harmonyos/releasenote.html#v1-15-0-dev-2026-9-24-开发版) |
 
+#### 环信 Flutter SDK v4.25.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Flutter SDK 4.25.0 发布 | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/flutter/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`，也可读取该属性查询当前配置。<br/> **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 支持 [分页获取本地会话列表](/document/flutter/conversation_list.html#分页获取本地会话)。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_flutter.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。<br/> - 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/document/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定](/document/flutter/push/push_easemob_console.html#绑定-pushkit-token) 和 [解绑](/document/flutter/push/push_easemob_console.html#解绑-pushkit-token) 苹果 PushKit token，仅 iOS 生效，其他平台调用不做任何处理。<br/> - 支持 [为消息配置回调路由标识](/document/flutter/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [Flutter SDK 4.25.0 更新日志](/document/flutter/releasenote.html#v4-25-0-2026-9-24) |
+
+#### 环信 React Native SDK v1.21.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native SDK 1.21.0 发布 | **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 默认情况下，[本地会话列表不包含聊天室会话](/document/react-native/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。<br/> - 支持 [分页获取本地会话列表](/document/react-native/conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_rn.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。<br/> - iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定和解绑苹果 PushKit token](/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)。其他平台调用这两个方法不会执行任何操作。<br/> - 支持 [为消息配置回调路由标识](/document/react-native/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [React Native SDK 1.21.0 更新日志](/document/react-native/releasenote.html#v1-21-0-2026-09-24) |
+
 ## 2026-08
 
 #### 环信 Android/iOS SDK v5.0.0 发版

@@ -56,7 +56,7 @@ SDK 通过 `ChatUserInfoEventHandler` 监听用户属性更新事件：
 - `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入原生 SDK 本地内存后触发。
 - `onUserInfoUpdate`：其他用户的属性更新并写入原生 SDK 本地内存后触发，包括以下场景：
   - 开启用户信息自动管理后，收到消息时发现发送方的用户属性已更新。
-  - 主动 [从服务器获取用户属性](userprofile.html#从服务端获取用户的所有属性)。
+  - 主动 [从服务器获取用户属性](userprofile.html#从服务端获取用户的属性)。
   - 主动 [从服务器获取群成员信息](group_manage.html#获取群成员列表)。
   - 已通过 `ChatUserInfoManager#subscribeUsersInfo` 订阅的用户属性发生变更。
 
@@ -219,7 +219,7 @@ Future<void> getLocalUserInfo() async {
 | `ext` | `String` | 用户自定义属性。 |
 
 :::tip
-`getLocalUserInfoByIds` 只读取原生 SDK 的本地数据。如需主动获取用户属性，可调用 `ChatUserInfoManager#fetchUserInfoById`。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
+`getLocalUserInfoByIds` 只读取原生 SDK 的本地数据。如需主动获取用户属性，可调用 `ChatUserInfoManager#fetchUserInfoById`。详见 [管理用户属性](userprofile.html#从服务端获取用户的属性)。
 :::
 
 ## 注意事项
