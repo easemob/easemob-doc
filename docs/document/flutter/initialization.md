@@ -58,6 +58,9 @@ await ChatClient.getInstance.init(options);
 | `isChatRoomOwnerLeaveAllowed` | `bool` | `true` | 是否允许聊天室所有者离开聊天室：<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
 | `enableUserInfo` | `bool` | `false` | 是否开启用户信息自动管理功能。 |
 | `enableAutoSyncContacts` | `bool` | `false` | 是否在登录后自动从服务器同步联系人列表。 |
+| `enableEmptyConversation` | 设置从本地数据库加载会话时是否包含空会话，必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
+| `autoLoadConversations` | 设置初始化时是否自动将本地数据库中的全部会话加载到内存。该功能自 Flutter SDK 4.25.0 起支持，必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过 `fetchConversationsFromDB` 按页加载。 |
+| `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。自 Flutter SDK 4.25.0 起支持。<br/>- `true`：本地会话列表中包含聊天室会话。<br/>-（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。 |
 | `apnsCertName` | `String?` | `null` | APNs 推送证书名称，仅对 iOS 生效。必须在 SDK 初始化时设置，运行期间不可修改。自 Flutter SDK 4.25.0 起支持。 |
 | `pushKitCertName` | `String?` | `null` | PushKit 推送证书名称，用于 iOS VoIP 推送，仅对 iOS 生效。必须在 SDK 初始化时设置，运行期间不可修改。自 Flutter SDK 4.25.0 起支持。 |
 
@@ -136,3 +139,6 @@ await ChatClient.getInstance.init(options);
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | 用户属性自动管理的初始化配置。 |
 | [`apnsCertName`](#常用初始化配置) | `ChatOptions` | iOS APNs 推送证书名称的初始化配置。 |
 | [`pushKitCertName`](#常用初始化配置) | `ChatOptions` | iOS PushKit 推送证书名称的初始化配置。 |
+| [`enableChatroomConversation`](#常用初始化配置) | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。自 Flutter SDK 4.25.0 起支持。 |
+| [`enableEmptyConversation`](#常用初始化配置) | 设置从本地数据库加载会话时是否包含空会话，必须在初始化 SDK 前设置。 |
+| [`autoLoadConversations`](#常用初始化配置) | 设置初始化时是否自动将本地数据库中的全部会话加载到内存。该功能自 Flutter SDK 4.25.0 起支持，必须在初始化 SDK 前设置。 |

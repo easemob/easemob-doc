@@ -1,7 +1,6 @@
 # 会话列表
 
-对于单聊和群聊，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。自 Flutter SDK 4.25.0 起，聊天室消息是否创建会话由 `ChatOptions.enableChatroomConversation` 控制，该选项默认为 `false`，因此本地会话列表默认不包含聊天室会话。
-
+对于单聊和群聊，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。自 Flutter SDK 4.25.0 起，本地会话列表默认不包含聊天室会话由 `ChatOptions.enableChatroomConversation` 控制，该选项默认为 `false`，因此本地会话列表默认不包含聊天室会话。
 
 环信服务器和本地均存储会话，你可以获取会话列表。 **服务器默认存储 100 条会话，若提升该上限，需联系环信商务。** 如果你的会话条数超过了上限，新会话会覆盖之前的不活跃会话。
 
@@ -19,7 +18,6 @@
 - `ChatManager#fetchConversationsByOptions`：从服务器获取会话列表。
 - `ChatManager#fetchConversationsFromDB`：分页获取本地会话。
 - `ChatManager#loadAllConversations`：获取本地所有会话。
-
 
 ## 从服务器分页获取会话列表
 
@@ -136,7 +134,7 @@ try {
 | [`fetchConversationsByOptions`](#从服务器分页获取会话列表) | `ChatManager` | 从服务端分页获取会话列表。 |
 | [`fetchConversationsFromDB`](#分页获取本地会话) | `ChatManager` | 从本地数据库分页获取会话列表。 |
 | [`loadAllConversations`](#获取本地所有会话) | `ChatManager` | 获取本地所有会话；优先读取内存，内存中无会话时读取本地数据库。 |
-| [`enableChatroomConversation`](#从本地获取会话列表) | `ChatOptions` | 设置收发聊天室消息时是否创建会话。 |
+| [`enableChatroomConversation`](#从本地获取会话列表) | `ChatOptions` | 设置获取本地会话列表时是否包含聊天室会话。 |
 | [`deleteMessagesAsExitChatRoom`](#从本地获取会话列表) | `ChatOptions` | 设置退出聊天室时是否删除本地消息。 |
 | [`enableEmptyConversation`](#从本地获取会话列表) | `ChatOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`autoLoadConversations`](#从本地获取会话列表) | `ChatOptions` | 设置初始化时是否自动加载全部本地会话。 |

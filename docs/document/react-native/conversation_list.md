@@ -2,7 +2,7 @@
 
 <Toc />
 
-对于单聊、群聊和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。自 React Native SDK 1.21.0 起，默认情况下，本地会话列表不包含聊天室会话。
+对于单聊、群聊和聊天室，SDK 会在用户收发消息时创建或更新对应的本地会话。你可以从服务端或本地获取会话列表。自 自 React Native SDK 1.21.0 起，本地会话列表默认不包含聊天室会话由 `ChatOptions.enableChatroomConversation` 控制，该选项默认为 `false`，因此本地会话列表默认不包含聊天室会话。
 
 ## 前提条件
 
@@ -63,7 +63,7 @@ SDK 提供以下方式获取本地会话列表：
 | `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。自 React Native SDK 1.21.0 起支持。<br/>- `true`：本地会话列表中包含聊天室会话。<br/>-（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。 |
 | `deleteMessagesAsExitChatRoom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/>-（默认）`true`：删除本地消息。<br/>- `false`：保留本地消息。 |
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/>- `true`：包含空会话。<br/>-（默认）`false`：不包含空会话。 |
-| `autoLoadConversations` | 设置登录成功后是否自动将全部本地会话加载到内存。<br/>-（默认）`true`：自动加载全部会话。<br/>- `false`：不自动加载全部会话，可使用 `fetchConversationsFromDB` 分页加载。 |
+| `autoLoadConversations` | 设置初始化时是否自动将全部本地会话加载到内存。<br/>-（默认）`true`：自动加载全部会话。<br/>- `false`：不自动加载全部会话，可使用 `fetchConversationsFromDB` 分页加载。 |
 
 ### 分页获取本地会话
 
