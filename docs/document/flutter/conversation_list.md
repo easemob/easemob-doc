@@ -59,7 +59,7 @@ SDK 提供以下方式获取本地会话列表：
 
 | 选项 | 描述 |
 | :--- | :--- |
-| `enableChatroomConversation` | 设置收发聊天室消息时是否创建对应的会话。该功能自 Flutter SDK 4.25.0 起支持，必须在初始化 SDK 前设置。<br/> - `true`：创建聊天室会话，本地会话列表可包含聊天室会话。<br/> -（默认）`false`：不创建聊天室会话，本地会话列表不包含聊天室会话。<br/> 可读取 `ChatOptions.enableChatroomConversation` 查询当前配置。 |
+| `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 可读取 `ChatOptions.enableChatroomConversation` 查询当前配置。 |
 | `deleteMessagesAsExitChatRoom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。 |
 | `enableEmptyConversation` | 设置从本地数据库加载会话时是否包含空会话，必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 | `autoLoadConversations` | 设置初始化时是否自动将本地数据库中的全部会话加载到内存。该功能自 Flutter SDK 4.25.0 起支持，必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过 `fetchConversationsFromDB` 按页加载。 |
