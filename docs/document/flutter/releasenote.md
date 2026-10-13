@@ -374,9 +374,9 @@
 #### 新增特性
 
 - 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- 新增 `ChatContactManager#fetchContacts` 和 `ChatContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
-- 新增 `ChatContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- 新增 `ChatContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
+- 新增 `ChatContactManager#fetchContacts` 和 `ChatContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#主动从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
+- 新增 `ChatContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地读取好友列表)。
+- 新增 `ChatContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地读取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
 - 新增 `ChatMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 - 新增 `ChatGroupManager#fetchJoinedGroupCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
 - 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `ChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
