@@ -46,7 +46,7 @@ ChatClient.getInstance()
 | `isChatRoomOwnerLeaveAllowed` | 是否允许聊天室所有者离开并删除会话记录。<br/>-（默认）`true`：允许；<br/>- `false`：不允许。 |
 | `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。自 React Native SDK 1.21.0 起支持。<br/>- `true`：本地会话列表中包含聊天室会话。<br/>-（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。 |
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/>- `true`：包含空会话。<br/>-（默认）`false`：不包含空会话。 |
-| `autoLoadConversations` | 设置登录成功后是否自动将全部本地会话加载到内存。<br/>-（默认）`true`：自动加载全部会话。<br/>- `false`：不自动加载全部会话，可使用 `fetchConversationsFromDB` 分页加载。 |
+| `autoLoadConversations` | 设置初始化 SDK 时是否自动将全部本地会话加载到内存。<br/>-（默认）`true`：自动加载全部会话。<br/>- `false`：不自动加载全部会话，可使用 `fetchConversationsFromDB` 分页加载。 |
 
 ## 设置登录后自动同步好友数据
 
