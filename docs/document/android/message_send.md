@@ -177,7 +177,7 @@ EMClient.getInstance()
 
 3. 调用 `EMChatManager#sendMessage` 发送消息。
    
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。关于图片的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 创建和发送图片消息的示例代码如下所示： 
 
@@ -422,7 +422,7 @@ Android SDK 只负责封装和发送位置消息，不提供地图定位或地�
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
 
-具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
+具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 `action` 为内部保留字段，注意不要使用。
 
 :::tip
 - 透传消息发送后，不支持撤回。
@@ -548,7 +548,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :-------------- | :-------------------- | :-------------------- |
 | `title`  | String    | 合并消息的标题。    |
 | `summary` | String       | 合并消息的概要。   |
-| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
+| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
 | `messageIdList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 | `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 消息话题会话：消息话题 ID；<br/> - 聊天室聊天：聊天室 ID。|
 

@@ -15,9 +15,7 @@ SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
-
-### 从服务器获取指定会话的消息
+## 从服务器获取指定会话的消息
 
 你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。
 
@@ -81,8 +79,7 @@ int pageSize,String cursor,
 }
 ```
 
-
-### 从服务器获取指定群成员发送的消息
+## 从服务器获取指定群成员发送的消息
 
 对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
@@ -145,7 +142,7 @@ int pageSize,String cursor,
 
 ```
 
-### 根据关键字获取本地会话中的消息
+## 根据关键字获取本地会话中的消息
 
 你可通过设置关键词获取本地数据库中会话的某些消息。SDK 返回会话 ID 及消息 ID 列表的映射关系，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
@@ -176,7 +173,7 @@ EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(ke
 
 ```
 
-### 根据消息 ID 获取本地消息
+## 根据消息 ID 获取本地消息
 
 你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
@@ -203,7 +200,7 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
     });
 ```
 
-### 从本地获取指定群成员发送的消息
+## 从本地获取指定群成员发送的消息
 
 对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
@@ -256,7 +253,7 @@ if (conversation != null) {
 }
 ```
 
-### 从本地读取指定会话的消息
+## 从本地读取指定会话的消息
 
 你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
 
