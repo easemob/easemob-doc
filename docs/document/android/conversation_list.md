@@ -342,7 +342,7 @@ EMClient.getInstance()
 
 | 场景 | 推荐做法 |
 | :--- | :--- |
-| 获取最新会话列表 | 使用默认的 `EMDataSyncType.CONVERSATIONS` 配置，或在初始化 SDK 前显式配置该类型；在会话同步成功后读取本地数据。不要调用 V5 已移除的服务端会话列表拉取接口。 |
+| 获取最新会话列表 | 使用默认的 `EMDataSyncType.CONVERSATIONS` 配置，或在初始化 SDK 前显式配置该类型；在会话同步成功后读取本地数据。 |
 | 展示会话列表 | 优先调用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先、按最后消息时间倒序的列表。 |
 | 响应会话变化 | 注册 `EMConversationListener`；收到 `onConversationUpdate` 后重新读取本地会话列表并刷新 UI。 |
 | 管理监听器 | 页面或组件销毁时移除 `EMConnectionListener` 和 `EMConversationListener`，避免重复回调和内存泄漏。 |

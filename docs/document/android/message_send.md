@@ -118,7 +118,9 @@ EMClient.getInstance()
 
 #### 带群消息已读回执和扩展字段的示例
 
-对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。群聊场景下，如需统计群成员的消息已读情况，可调用 `EMMessage#setIsNeedReadReceipt(true)`。
+对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。
+
+若需要单聊或群聊消息的已读回执，必须在发送前调用 `EMMessage#setIsNeedReadReceipt(true)`。
 
 ```java
 // 创建群聊文本消息，groupId 为群组 ID。
