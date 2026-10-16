@@ -216,11 +216,11 @@ Android SDK 支持同一账号在多个设备上登录。多设备登录的设�
 
 Android SDK 可以通过以下 `EMOptions` 接口配置当前登录设备的信息：
 
-| API                   | 参数类型 | 说明                                                         |
-| :--- | :--- | :--- |
-| `setCustomOSPlatform` | `number`    | 设置登录设备的自定义平台编号，取值范围为 1–100。必须在初始化 SDK 前设置。 |
-| `setCustomDeviceName` | `String` | 设置当前设备的自定义名称，用于在多设备登录场景中区分设备。必须在初始化 SDK 前设置；未设置时默认使用设备型号。 |
-| `setLoginCustomExt`   | `String` | 设置当前设备的登录扩展信息，最大长度为 1024 个字符且不能为 `null`。SDK 初始化前设置时对后续登录生效；SDK 已初始化时，应在下一次调用 `loginWithToken` 前设置。 |
+| API                   | 说明                                                         |
+| :--- |  :--- |
+| `setCustomOSPlatform` | 设置登录设备的自定义平台编号，取值范围为 1–100。必须在初始化 SDK 前设置。 |
+| `setCustomDeviceName` | 设置当前设备的自定义名称，用于在多设备登录场景中区分设备。必须在初始化 SDK 前设置；未设置时默认使用设备型号。 |
+| `setLoginCustomExt`   | 设置当前设备的登录扩展信息，最大长度为 1024 个字符且不能为 `null`。SDK 初始化前设置时对后续登录生效；SDK 已初始化时，应在下一次调用 `loginWithToken` 前设置。 |
 
 示例代码如下：
 
