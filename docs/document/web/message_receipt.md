@@ -108,7 +108,7 @@ await client.chatManager.sendMessage(message);
 单聊消息已读回执用于通知消息发送方：指定单聊消息已被接收方阅读。
 
 :::tip
-消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 
+单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。 
 :::
 
 #### 步骤 1：发送方注册已读回执监听

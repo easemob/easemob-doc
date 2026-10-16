@@ -10,10 +10,12 @@
 
 例如，SDK 在 2024 年 1 月 1 日上午 8:00:00 记录日志时会生成 `easemob.log` 文件，若在 8:30:00 将 `easemob.log` 文件写满则会将其重命名为 `easemob_2024-01-01_08-30-00.log` 文件，随后在 9:30:30 和 10:30:30 分别生成了 `easemob_2024-01-01_09-30-30.log` 和 `easemob_2024-01-01_10-30-30.log` 文件，则此时 `easemob_2024-01-01_08-30-00.log` 文件会被移除。
 
-SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误），如果只需输出错误日志，需要关闭调试模式。
+SDK 默认输出调试信息（所有日志，包括调试信息、警告和错误）。如果只需输出错误日志，在初始化 SDK 前通过 `ChatOptions` 将日志级别设置为 `ERROR_LEVEL`。
 
 ```typescript
-ChatLog.setLogLevel(ChatLogLevel.ERROR_LEVEL);
+const options = new ChatOptions({ appKey: "your_org#your_app" });
+options.setLogLevel(ChatLogLevel.ERROR_LEVEL);
+ChatClient.getInstance().init(context, options);
 ```
 
 ## 获取本地日志
@@ -21,7 +23,7 @@ ChatLog.setLogLevel(ChatLogLevel.ERROR_LEVEL);
 打开以下目录，获取本地日志。
 
 ```
-hdc file recv /data/app/el2/100/base/{应用包名}/{App Key}/core_log
+hdc file recv "/data/app/el2/100/base/{应用包名}/haps/{模块名}/{应用标识}/core_log"
 ```
 
-获取本地日志，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 需要替换为应用的环信 App Key。
+获取本地日志时，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{模块名}` 替换为应用的模块名，例如 `entry`；`{应用标识}` 根据初始化 SDK 时使用的应用标识，替换为环信 App Key 或 App ID。

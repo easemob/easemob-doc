@@ -91,7 +91,7 @@ const PLATFORM_ICON_MAP: Record<PlatformKey, PlatformIcon> = {
 
 /** 版本切换配置：平台、默认版本、各版本按平台的 homePath 均可在此调整 */
 const VERSION_CONFIG: VersionConfig = {
-  switchablePlatforms: ['android', 'ios', 'web'],
+  switchablePlatforms: ['android', 'ios', 'web', 'harmonyos'],
   fixedVersionLabel: '4.x',
   defaultVersion: '5.x',
   versions: [
@@ -102,6 +102,7 @@ const VERSION_CONFIG: VersionConfig = {
         android: '/v4/android/quickstart.html',
         ios: '/v4/ios/quickstart.html',
         web: '/v4/web/quickstart.html',
+        harmonyos: '/v4/harmonyos/quickstart.html',
         applet: '/v4/applet/beginner_guide.html',
       },
     },
@@ -112,6 +113,7 @@ const VERSION_CONFIG: VersionConfig = {
         android: '/document/android/quickstart.html',
         ios: '/document/ios/quickstart.html',
         web: '/document/web/quickstart.html',
+        harmonyos: '/document/harmonyos/quickstart.html',
       },
     },
   ],
@@ -163,7 +165,7 @@ const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): strin
 const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
   // These platforms keep their V4 docs under /document/.
   if (path.startsWith('/v4/') ||
-    /^\/document\/(?:harmonyos|flutter|react-native|unity|windows)\//.test(path)) {
+    /^\/document\/(?:flutter|react-native|unity|windows)\//.test(path)) {
     return '4.x'
   }
 

@@ -23,7 +23,7 @@
 2. 调用成功后，SDK 会将本地缓存中目标会话的未读数更新为 `0`，并同步给当前用户登录的其他设备。
 3. 会话数据发生变化时，注册的 `onConversationUpdate()` 会收到回调，应用可据此刷新会话列表 UI。
 4. 多设备登录时，清零操作不会通知会话对端，也不会触发对端的消息已读回执；仅会同步给当前用户的其他在线设备。
-5. 如需清零所有会话的未读数，可调用：asyncClearAllConversationUnreadMessageCount 接口
+5. 如需清零所有会话的未读数，可调用：`asyncClearAllConversationUnreadMessageCount` 接口
    该操作会清零当前设备本地缓存中的全部会话未读数，并同步给当前用户的其他在线设备。
 
 :::tip
@@ -235,7 +235,7 @@ public final class ConversationListActivity extends AppCompatActivity {
 关于消息的已读回执和已读状态，详见 [消息回执文档](message_receipt.html)。
 
 :::tip
-发送消息已读回执与清零会话未读数是两个独立操作：<br> - `asyncSendMessageReadReceipts`：向消息发送方发送已读回执，仅支持单聊和群聊。<br> - `asyncClearConversationUnreadMessageCount`：将指定会话的本地未读数清零，并同步当前账号的其他设备，但不向消息发送方发送已读回执。
+发送消息已读回执与清零会话未读数是两个独立操作：<br/> - `asyncSendMessageReadReceipts`：向消息发送方发送已读回执，仅支持单聊和群聊。<br/> - `asyncClearConversationUnreadMessageCount`：将指定会话的本地未读数清零，并同步当前账号的其他设备，但不向消息发送方发送已读回执。
 :::
 
 ## 接口列表

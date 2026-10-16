@@ -35,7 +35,7 @@ Android SDK 通过 `EMMessage` 的不同静态方法创建各类消息。不同�
 | 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`             | 必需             | 所有消息         | 参数随消息类型而不同，例如文本内容、附件 URI、位置坐标、透传命令或自定义事件。 |
 | 会话类型         | `EMMessage#setChatType`                                      | 群聊和聊天室必需 | 所有消息         | 单聊、群聊和聊天室分别设置为 `EMMessage.ChatType.Chat`、`GroupChat` 和 `ChatRoom`。默认值为 `Chat`。 |
 | 扩展字段         | `EMMessage#setAttribute`                                     | 可选             | 所有消息         | 添加业务自定义信息。支持字符串、布尔值、数值、JSON 对象和 JSON 数组等类型；扩展字段会计入消息大小限制。 |
-| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息         | 设置为 `true` 时，消息仅投递给在线用户，不进行离线存储。适用于输入状态、瞬时控制信息等场景。 |
+| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息单聊和群聊的各类消息         | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。适用于输入状态、瞬时控制信息等场景。|
 | 回调路由环境     | `EMMessage#setWebhookEnv`                                    | 可选             | 所有消息         | 设置 Webhook 回调环境标识，服务端根据该值匹配回调路由。      |
 | 聊天室消息优先级 | `EMMessage#setPriority`                                      | 可选             | 聊天室消息       | 设置聊天室消息的优先级，可选 `PriorityHigh`、`PriorityNormal` 和 `PriorityLow`，默认值为 `PriorityNormal`。 |
 | 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。是否可用还受相应服务端功能配置和使用限制约束。 |
@@ -118,7 +118,9 @@ EMClient.getInstance()
 
 #### 带群消息已读回执和扩展字段的示例
 
-对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。群聊场景下，如需统计群成员的消息已读情况，可调用 `EMMessage#setIsNeedReadReceipt(true)`。
+对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。
+
+若需要单聊或群聊消息的已读回执，必须在发送前调用 `EMMessage#setIsNeedReadReceipt(true)`。
 
 ```java
 // 创建群聊文本消息，groupId 为群组 ID。
@@ -161,7 +163,7 @@ EMClient.getInstance()
 图片消息通常涉及以下三类图片资源：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
-- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
 - 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。缩略图的压缩方式和尺寸可在 [控制台进行配置](/product/console/basic_message.html#图片消息缩略图)。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 #### 发送流程
@@ -177,7 +179,7 @@ EMClient.getInstance()
 
 3. 调用 `EMChatManager#sendMessage` 发送消息。
    
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。关于图片的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 创建和发送图片消息的示例代码如下所示： 
 
@@ -422,11 +424,11 @@ Android SDK 只负责封装和发送位置消息，不提供地图定位或地�
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
 
-具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
+具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 `action` 为内部保留字段，注意不要使用。
 
 :::tip
 - 透传消息发送后，不支持撤回。
-- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息不会存入本地数据库，也不会创建本地会话，因此通常不在 UI 中显示。
 :::
 
 #### 发送流程
@@ -548,7 +550,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :-------------- | :-------------------- | :-------------------- |
 | `title`  | String    | 合并消息的标题。    |
 | `summary` | String       | 合并消息的概要。   |
-| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
+| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
 | `messageIdList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 | `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 消息话题会话：消息话题 ID；<br/> - 聊天室聊天：聊天室 ID。|
 
@@ -558,6 +560,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `EMOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 3. 对于转发合并消息，例如，用户 A 向用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见 [转发单条消息](message_forward.html#转发单条消息)。
+4. 合并消息不支持搜索。
 :::
 
 #### 使用建议

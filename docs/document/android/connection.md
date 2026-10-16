@@ -20,7 +20,7 @@
 
 Android SDK 的连接生命周期通常包括以下阶段：
 
-1. 调用 `EMClient#init` 初始化 SDK。
+1. 调用 `EMClient#init` 初始化 SDK。SDK 5.x 初始化后不会自动登录。
 2. 调用 `addConnectionListener` 注册连接监听器，建议在登录前完成注册。
 3. 调用 `loginWithToken` 登录 SDK 并建立长连接。
 4. 用户本地数据库打开后触发 `onDatabaseOpened`；该回调仅表示本地数据库可用，不表示在线连接成功。

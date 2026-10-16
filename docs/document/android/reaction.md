@@ -15,6 +15,7 @@ Reaction 场景示例如下，分别展示如何添加 Reaction，群聊中 Reac
 ## 使用限制
 
 - Reaction 仅适用于单聊和群聊，聊天室暂不支持。
+- 同一用户对同一条消息上的同一个 Reaction 只能添加一次。
 - Reaction 的计数规则和存储时间、用户添加限制、每条消息可添加的 Reaction 数量，以及表情 ID 规范，详见 [使用限制文档](limitation.html)。
 
 ## 前提条件

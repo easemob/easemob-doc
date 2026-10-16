@@ -9,7 +9,7 @@ const platformList = getSubDirectories(DOC_PATH)
 /** V5 独立侧栏配置，可与 V4（document-v4.ts）分叉演进 */
 const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
-  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
+  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web', 'harmonyos'] },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: "使用 Skills 集成", link: "integrate_with_agent_skills.html", only: ['web']},
   { text: 'React Demo 体验', link: 'demo_react.html', only: ['web'] },
@@ -76,7 +76,7 @@ const documentV5Sidebar = [
       { text: '会话介绍', link: 'conversation_overview.html' },
       { text: '会话列表', link: 'conversation_list.html' },
       { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter', 'harmonyos','react-native','unity','windows'] },
+      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter','react-native','unity','windows'] },
       { text: '会话未读数', link: 'conversation_unread.html'},
       { text: '置顶会话', link: 'conversation_pin.html' },
       { text: '会话标记', link: 'conversation_mark.html' },
@@ -173,7 +173,7 @@ const documentV5Sidebar = [
     text: '常见问题',
     collapsible: true,
     children: [
-      { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
+      { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web', 'harmonyos'] },
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: '配置服务器域名', link: 'serverconfig.html', only: ['web'] },

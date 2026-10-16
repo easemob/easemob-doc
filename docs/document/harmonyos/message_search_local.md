@@ -1,188 +1,190 @@
 # 搜索消息
 
-<Toc />
+本文介绍环信即时通讯 IM HarmonyOS SDK 如何按照关键词、搜索范围、消息类型、发送方和时间戳等条件搜索本地消息。本文中的接口仅查询当前用户设备上的本地数据库，不会向服务端发起搜索请求。由于透传消息不会保存到本地数据库，因此无法通过这些接口搜索透传消息。
 
-本文介绍环信即时通讯 IM HarmonyOS SDK 如何搜索本地消息。调用本文中的消息搜索方法可以搜索本地数据库中除透传消息之外的所有类型的消息，因为透传消息不在本地数据库中存储。
+消息搜索使用消息创建时间还是服务器接收时间，取决于 `ChatOptions#setSortMessageByServerTime` 的配置。该配置默认为 `true`，即使用服务器接收消息的时间；设置为 `false` 时使用消息的本地创建时间。
 
-## 技术原理
-
-环信即时通讯 IM HarmonyOS SDK 通过 `ChatManager` 和 `Conversation` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
-
-- `Conversation#loadMoreMessagesFromDB`：从指定消息 ID 开始分页加载数据库中的消息；
-- `ChatManager#searchMessagesFromDB(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)`：根据关键字搜索本地数据库中指定用户发送的消息；
-- `Conversation#searchMessagesByKeywords`：根据关键字搜索本地数据库中单个会话中指定用户发送的消息；
-- `ChatManager#searchMessagesFromDB`：根据搜索范围搜索所有会话中的消息；
-- `Conversation#searchMessagesByKeywords`：根据搜索范围搜索当前会话中的消息；
-- `ChatManager#searchMessagesFromDB(contentType: ContentType | Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)`：根据消息类型搜索本地数据库中所有会话的消息；
-- `Conversation#searchMessagesByType`：根据消息类型搜索本地数据库中指定会话的消息；
-- `Conversation#searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)`：根据时间戳搜索当前会话中的消息；
-- `Conversation#searchMessagesBetweenTime`：根据时间段搜索当前会话中的消息。
+:::tip
+若要搜索服务端消息，需要联系环信商务开通服务端消息搜索功能，详见 [服务端消息搜索文档](/value-added/search/message_search_harmonyos.html)。
+:::
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
+- 已完成 SDK 初始化，并确认当前用户的本地数据库已经打开，详见 [获取连接状态](connection.html#获取连接状态) 和 [快速开始](quickstart.html)。本地消息搜索不要求客户端保持服务器连接。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
-### 从指定消息 ID 开始搜索会话消息
-
-你可以调用 `Conversation#loadMoreMessagesFromDB` 方法从指定消息 ID 开始分页加载数据库中的消息，示例代码如下：
-
-```typescript
-// conversationId：会话 ID。
-const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-// startMsgId: 查询的起始消息 ID。该参数设置后，SDK 从指定的消息 ID 开始按消息检索方向加载。如果传入消息的 ID 为空，SDK 忽略该参数。
-// pageSize: 每页要加载的消息数。取值范围为 [1,400]。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = conversation?.loadMoreMessagesFromDB(startMsgId, pageSize, direction);
-```
+除必填的关键词或消息类型外，以下搜索接口的常用参数均有默认值：
+- `timestamp` 默认为 `-1`，表示从当前时间开始；
+- `maxCount` 默认为 `20`；
+- `from` 默认为空字符串，表示不限制发送方；
+- `direction` 默认为 `SearchDirection.UP`，表示按时间戳倒序搜索；
+- 关键词搜索的 `searchScope` 默认为 `MessageSearchScope.ALL`。
 
 ### 根据关键字搜索会话中的用户发送的消息
 
-你可以调用 `ChatManager#searchMessagesFromDB(keywords: string, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)` 方法根据关键字搜索本地数据库中指定用户发送的消息，示例代码如下：
+你可以调用 `Conversation#searchMessagesByKeywords`，按照关键词搜索指定会话中某个用户发送的消息。
+
+`timestamp` 为搜索起始时间戳，设为负数时从当前时间开始搜索；返回结果不包含时间戳与 `timestamp` 相同的消息。`maxCount` 的取值范围为 `[1,400]`。
 
 ```typescript
-// keywords：搜索关键字；
-// timestamp：搜索的起始时间戳；
-// maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// from: 单聊或群聊中的消息发送方的用户 ID。若设置为空字符串，SDK 将在整个会话中搜索消息。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = ChatClient.getInstance().chatManager()?.searchMessagesFromDB(keywords, timestamp, maxCount, from, direction);
-```
+const conversation: Conversation | undefined = ChatClient.getInstance()
+  .chatManager()
+  ?.getConversation(conversationId, conversationType);
 
-你可以调用 `Conversation#searchMessagesByKeywords` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
-
-```typescript
-// conversationId：会话 ID。
-const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-// keywords：搜索关键字；
-// timestamp：搜索的起始时间戳；
-// maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// from: 单聊或群聊中的消息发送方的用户 ID。若设置为空字符串，SDK 将在整个会话中搜索消息。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = conversation?.searchMessagesByKeywords(keywords, timestamp, maxCount, from, direction);
+if (conversation) {
+  conversation.searchMessagesByKeywords(  
+    keywords,
+    timestamp,
+   // maxCount 取值范围为 1–400。
+    maxCount,
+    senderId,
+    // UP 表示按时间戳倒序搜索。
+    SearchDirection.UP,
+    MessageSearchScope.CONTENT
+  )
+    .then((messages: Array<ChatMessage>): void => {
+      // messages 为符合条件的本地消息，按时间戳倒序排列。
+    })
+    .catch((error: ChatError): void => {
+      // 搜索失败。
+    });
+}
 ```
 
 ### 根据搜索范围搜索所有会话中的消息
 
-自 SDK 1.7.0 版本开始，你可以调用 `ChatManager#searchMessagesFromDB` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。 
+你可以调用 `ChatManager#searchMessagesFromDB`，按照关键词、起始时间戳、最大返回数量、发送方、搜索方向和搜索范围，在全部本地会话中搜索消息。
+
+`MessageSearchScope.CONTENT` 表示仅搜索消息内容，`MessageSearchScope.EXT` 表示仅搜索消息扩展字段，`MessageSearchScope.ALL` 表示同时搜索两者。
 
 ```typescript
-// MessageSearchScope.ALL: 同时搜索消息内容以及扩展属性内容
-// MessageSearchScope.CONTENT：只搜索消息内容
-// MessageSearchScope.EXT：只搜索扩展属性内容
-let searchScope = MessageSearchScope.ALL;
-ChatClient.getInstance().chatManager()?.searchMessagesFromDB(this.keywords, this.timestamp, this.maxCount, this.from, this.direction, searchScope)
-.then(messages => {
-  // success logic
-}).catch((e: ChatError) => {
-  // failure logic
-});
+const keyword: string = '123';
+
+ChatClient.getInstance().chatManager()?.searchMessagesFromDB(
+  keyword,
+  -1,
+  200,
+  '',
+  SearchDirection.UP,
+  MessageSearchScope.ALL
+)
+  .then((messages: Array<ChatMessage>): void => {
+    // messages 为全部本地会话中符合条件的消息。
+  })
+  .catch((error: ChatError): void => {
+    // 搜索失败。
+  });
 ```
 
 ### 根据搜索范围搜索当前会话中的消息
 
-自 SDK 1.7.0 版本开始，你可以调用 `Conversation#searchMessagesByKeywords` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+你可以调用 `Conversation#searchMessagesByKeywords`，按照关键词、起始时间戳、最大返回数量、一个或多个发送方、搜索方向及搜索范围，搜索当前会话中的消息。
+
+参数 `from` 可以传入单个用户 ID 或用户 ID 数组。用户 ID 数组最多包含 10 个用户 ID；传入空字符串或空数组时，不限制消息发送方。
 
 ```typescript
-let conversation = ChatClient.getInstance().chatManager()?.getConversation(this.conversationId);
+const conversation: Conversation | undefined = ChatClient.getInstance()
+  .chatManager()
+  ?.getConversation(conversationId, conversationType);
+
 if (conversation) {
-  // MessageSearchScope.ALL: 同时搜索消息内容以及扩展属性内容
-  // MessageSearchScope.CONTENT：只搜索消息内容
-  // MessageSearchScope.EXT：只搜索扩展属性内容
-  let searchScope = MessageSearchScope.ALL;
-  conversation.searchMessagesByKeywords(this.keywords, this.timestamp, this.maxCount, this.froms, this.direction, searchScope)
-    .then(messages => {
-      // success logic
-    }).catch((e: ChatError) => {
-      // failure logic
-  });
+  const senders: Array<string> = ['user1', 'user2'];
+
+  conversation.searchMessagesByKeywords(
+    '123',
+    -1,
+    200,
+    senders,
+    SearchDirection.UP,
+    MessageSearchScope.ALL
+  )
+    .then((messages: Array<ChatMessage>): void => {
+      // messages 为当前会话中符合条件的本地消息。
+    })
+    .catch((error: ChatError): void => {
+      // 搜索失败。
+    });
 }
 ```
 
-### 根据消息类型搜索会话消息
+### 根据消息类型搜索所有会话中的消息
 
-你可以调用 `ChatManager#searchMessagesFromDB(contentType: ContentType | Array<ContentType>, timestamp: number, maxCount: number, from?: string, direction?: SearchDirection)` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
-
-:::tip
-使用设置多个消息类型搜索消息的功能，需将 SDK 升级至 V1.4.0 或以上版本。
-:::
+你可以调用 `ChatManager#searchMessagesFromDB`，按照一种或多种消息类型、起始时间戳、最大返回数量、发送方和搜索方向，在全部本地会话中搜索消息。消息类型数组不能为空。
 
 ```typescript
-const types = [ContentType.TXT, ContentType.IMAGE];
-// timestamp：查询的起始消息 Unix 时间戳，单位为毫秒。该参数设置后，SDK 从指定时间戳的消息开始，按消息搜索方向获取。如果该参数设置为负数，SDK 从当前时间开始搜索。
-// maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// from: 单聊或群聊中的消息发送方的用户 ID。若设置为空字符串，SDK 将在整个会话中搜索消息。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = ChatClient.getInstance().chatManager()?.searchMessagesFromDB(types, timestamp, maxCount, from, direction);
-``` 
+const types: Array<ContentType> = [ContentType.TXT, ContentType.VOICE];
 
-你可以调用 `Conversation#searchMessagesByType` 方法通过设置单个或多个消息类型搜索本地数据库中指定会话的消息，示例代码如下：
+ChatClient.getInstance().chatManager()?.searchMessagesFromDB(
+  types,
+  -1,
+  400,
+  'xu',
+  SearchDirection.UP
+)
+  .then((messages: Array<ChatMessage>): void => {
+    // messages 为全部本地会话中符合类型和发送方条件的消息。
+  })
+  .catch((error: ChatError): void => {
+    // 搜索失败。
+  });
+```
 
-```typescript
-// conversationId：会话 ID。
-const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-const types = [ContentType.TXT, ContentType.IMAGE];
-// timestamp：查询的起始消息 Unix 时间戳，单位为毫秒。该参数设置后，SDK 从指定时间戳的消息开始，按消息搜索方向获取。如果该参数设置为负数，SDK 从当前时间开始搜索。
-// maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// from: 单聊或群聊中的消息发送方的用户 ID。若设置为空字符串，SDK 将在整个会话中搜索消息。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = conversation?.searchMessagesByType(types, timestamp, maxCount, from, direction);
-``` 
+### 根据消息类型搜索当前会话中的消息
 
-### 根据时间戳搜索当前会话中的消息
-
-你可以调用 `Conversation#searchMessagesFromDB(timestamp: number, maxCount: number, direction?: SearchDirection)` 方法设置消息时间戳、消息数量和搜索方向等条件搜索当前会话中的消息。
+你可以调用 `Conversation#searchMessagesByType`，按照一种或多种消息类型、起始时间戳、最大返回数量、发送方和搜索方向，在指定会话中搜索消息。消息类型数组不能为空。
 
 ```typescript
-// conversationId：会话 ID。
-const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-// timestamp：查询的起始消息 Unix 时间戳，单位为毫秒。该参数设置后，SDK 从指定时间戳的消息开始，按消息搜索方向获取。如果该参数设置为负数，SDK 从当前时间开始搜索。
-// maxCount：每次获取的消息数量，取值范围为 [1,400]。
-// direction：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-const messages = conversation?.searchMessagesFromDB(timestamp, maxCount, direction);
-```         
+const conversation: Conversation | undefined = ChatClient.getInstance()
+  .chatManager()
+  ?.getConversation(conversationId, conversationType);
 
-### 根据时间段搜索当前会话中的消息
+if (conversation) {
+  const types: Array<ContentType> = [ContentType.TXT, ContentType.VOICE];
 
-你可以调用 `Conversation#searchMessagesBetweenTime` 方法设置消息起始时间戳、结束时间戳和消息数量等条件搜索当前会话中的消息。
-
-```typescript
-// conversationId：会话 ID。
-const conversation = ChatClient.getInstance().chatManager()?.getConversation(conversationId);
-// startTimestamp: 搜索的起始时间戳。单位为毫秒。
-// endTimestamp: 搜索的结束时间戳。单位为毫秒。
-// maxCount: 每次要获取的消息数量。取值范围为 [1,400]。
-const messages = conversation?.searchMessagesBetweenTime(startTimestamp, endTimestamp, maxCount);
-```  
+  conversation.searchMessagesByType(
+    types,
+    -1,
+    400,
+    'xu',
+    SearchDirection.UP
+  )
+    .then((messages: Array<ChatMessage>): void => {
+      // messages 为当前会话中符合类型和发送方条件的消息。
+    })
+    .catch((error: ChatError): void => {
+      // 搜索失败。
+    });
+}
+```
 
 ## 关键字搜索规则
 
 调用以下消息搜索 API 搜索不同类型的消息时，其中的 `keywords` 参数对应不同的内容。
 
-- [根据关键字搜索本地数据库中单个会话中指定用户发送的消息](#根据关键字搜索会话中的用户发送的消息)。
-- [根据关键字搜索消息时，可以选择搜索范围在所有会话中进行消息搜索](#根据搜索范围搜索所有会话中的消息)。
-- [根据关键字搜索消息时，可以选择搜索范围在当前会话中进行消息搜索](#根据搜索范围搜索当前会话中的消息)。
+- [根据关键字搜索会话中的用户发送的消息](#根据关键字搜索会话中的用户发送的消息)。
+- [根据搜索范围搜索所有会话中的消息](#根据搜索范围搜索所有会话中的消息)。
+- [根据搜索范围搜索当前会话中的消息](#根据搜索范围搜索当前会话中的消息)。
 
 ### 只搜索消息内容
 
-|消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
-| :-------------- | :----- |:----- |
-|文本消息  |  `TextMessageBody.getContent`     | 文本消息的实际内容“你好世界”。|
-|图片消息  |  `ImageMessageBody.getFileName`     | 图片文件名“photo.jpg”|
-|语音消息  |   `VoiceMessageBody.getFileName`    | 语音文件名“audio.amr”|
-|视频消息  |   `VideoMessageBody.getFileName`     | 视频文件名“video.mp4”|
-|文件消息  | `FileMessageBody.getFileName`       |文件名“report.pdf”|
-|位置消息  |   `LocationMessageBody.getAddress` + `LocationMessageBody.getBuildingName`     | 地址\建筑物名称“北京市朝阳区\国贸大厦”|
-|自定义消息|    `CustomMessageBody.event`    | 自定义事件名“gift”|
-|合并消息  |`CombineMessageBody.getTitle` + `ChatCombineMessageBody.getSummary`    | 标题\摘要“聊天记录\包含5条消息”|
+| 消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
+| :--- | :--- | :--- |
+| 文本消息 | `TextMessageBody#getContent` | 文本消息的实际内容，例如“你好世界”。 |
+| 图片消息 | `ImageMessageBody#getFileName` | 图片文件名，例如“photo.jpg”。 |
+| 语音消息 | `VoiceMessageBody#getFileName` | 语音文件名，例如“audio.amr”。 |
+| 视频消息 | `VideoMessageBody#getFileName` | 视频文件名，例如“video.mp4”。 |
+| 文件消息 | `FileMessageBody#getFileName` | 文件名，例如“report.pdf”。 |
+| 位置消息 | `LocationMessageBody#getAddress` 和 `LocationMessageBody#getBuildingName` | 地址或建筑物名称，例如“北京市朝阳区”或“国贸大厦”。 |
+| 自定义消息 | `CustomMessageBody#event` | 自定义事件名，例如“gift”。 |
+| 合并消息 | `CombineMessageBody#getTitle` 和 `CombineMessageBody#getSummary` | 标题或摘要，例如“聊天记录”或“包含 5 条消息”。 |
 
 ### 只搜索扩展信息
 
-若只搜索消息的扩展属性（`ext`）JSON 字符串，`keywords` 字段匹配用户自定义添加的扩展属性，例如：
+若只搜索消息的扩展字段 `ext`，`keywords` 匹配扩展字段序列化后的 JSON 字符串。例如：
 
 ```json
 {"key1":"value1", "key2":"value2"}
@@ -190,4 +192,16 @@ const messages = conversation?.searchMessagesBetweenTime(startTimestamp, endTime
 
 ### 全搜索
 
-同时搜索消息内容和扩展信息，任一匹配即返回。
+同时搜索消息内容和扩展字段，任一匹配即返回。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`setSortMessageByServerTime`](#搜索消息) | `ChatOptions` | 设置本地消息排序和搜索使用服务器时间还是本地创建时间。 |
+| [`getConversation`](#根据关键字搜索会话中的用户发送的消息) | `ChatManager` | 获取指定 ID 和类型的本地会话；未找到时返回 `undefined`。 |
+| [`searchMessagesByKeywords`](#根据关键字搜索会话中的用户发送的消息) | `Conversation` | 按照关键词搜索指定会话中某个用户发送的本地消息。 |
+| [`searchMessagesFromDB`](#根据搜索范围搜索所有会话中的消息) | `ChatManager` | 按照关键词和搜索范围，在全部本地会话中搜索消息。 |
+| [`searchMessagesByKeywords`](#根据搜索范围搜索当前会话中的消息) | `Conversation` | 按照关键词、发送方列表及搜索范围，搜索指定会话中的消息。 |
+| [`searchMessagesFromDB`](#根据消息类型搜索所有会话中的消息) | `ChatManager` | 按照一种或多种消息类型，在全部本地会话中搜索消息。 |
+| [`searchMessagesByType`](#根据消息类型搜索当前会话中的消息) | `Conversation` | 按照一种或多种消息类型，在指定会话中搜索消息。 |

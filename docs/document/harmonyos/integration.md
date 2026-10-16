@@ -6,52 +6,54 @@
 
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
-- HarmonyOS NEXT.0.0.71 或以上版本的设备。
+- HarmonyOS 5.0.0（API 12）或以上版本的真机或模拟器。
 
 ## 导入 SDK
 
 ### 远程依赖
 
-在项目根目录下执行如下命令：
-
-```shell
-ohpm install @easemob/chatsdk
-```
-
-默认情况下，`ohpm install @easemob/chatsdk` 将会安装最新版本的SDK，您可以通过以下方式指定安装的版本：
+在需要使用 SDK 的模块目录（例如 `entry`）下执行如下命令，安装指定版本的 SDK。请将 `x.y.z` 替换为实际的 SDK 版本号：
 
 ```shell
 ohpm install @easemob/chatsdk@x.y.z
 ```
 
+该命令会将依赖添加到当前模块的 `oh-package.json5` 中。若要安装当前可获取的最新版本，可不指定版本号：
+
+```shell
+ohpm install @easemob/chatsdk
+```
+
 :::tip
-- SDK 1.8.0 版本及以后才支持远程依赖方式；
-- 上面的命令在根目录执行，会将 SDK 依赖添加到项目级别；如果要将 SDK 依赖到 Module 级别，需要在对应的 Module 目录下执行上面的命令。
+- HarmonyOS SDK v5.x 支持通过 OHPM 添加远程依赖。
+- 安装后，请确认实际使用 SDK 的模块已在 `oh-package.json5` 的 `dependencies` 中声明 `@easemob/chatsdk`。
 :::
 
 ### 本地依赖
 
-打开 [SDK 下载](https://www.easemob.com/download/im#HarmonyOS)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://www.easemob.com/download/im#HarmonyOS) 页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 HAR 文件。
 
-将 SDK 文件，拷贝到 `entry` 模块或者其他需要的模块下的 `libs` 目录。
+将 SDK 文件复制到 `entry` 模块或其他需要使用 SDK 的模块下的 `libs` 目录。
 
 修改模块目录的 `oh-package.json5` 文件，在 `dependencies` 节点增加依赖声明。
 
-```json
+```json5
 {
   "dependencies": {
-    "@easemob/chatsdk": "file:./libs/chatsdk-x.x.x.har"
+    "@easemob/chatsdk": "file:./libs/chatsdk-x.y.z.har"
   }
 }
 ```
+
+请将 `x.y.z` 替换为实际的 SDK 版本号，并确保依赖路径中的文件名与 `libs` 目录下的 HAR 文件名一致。
 
 最后单击 **File > Sync and Refresh Project** 按钮，直到同步完成。
 
 ### 添加项目权限
 
-在模块的 `module.json5` ，例如：`entry` 模块的 `module.json5` 中，配置示例如下：
+在模块的 `module.json5`（例如 `entry` 模块的 `module.json5`）中声明 SDK 所需的网络权限：
 
-```json
+```json5
 {
   module: {
     requestPermissions: [
@@ -66,11 +68,13 @@ ohpm install @easemob/chatsdk@x.y.z
 }
 ```
 
+若应用还使用录音、读取媒体文件等功能，需根据实际功能另行声明并申请对应权限。
+
 ### 设置支持字节码 HAR 包
 
 修改工程级 `build-profile.json5` 文件，在 `products` 节点下设置 `useNormalizedOHMUrl` 为 `true`。
 
-```json
+```json5
 {
   "app": {
     "products": [
@@ -84,9 +88,9 @@ ohpm install @easemob/chatsdk@x.y.z
     ]
   }
 }
-````
+```
 
 :::tip
-- 此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本。
-- SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 `true`。
+- HarmonyOS SDK v5.x 采用字节码 HAR 方式打包，必须将 `useNormalizedOHMUrl` 设置为 `true`。
+- 工程包含多个 product 时，应在实际参与构建的各个 product 中设置该选项。
 :::

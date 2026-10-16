@@ -17,7 +17,7 @@ HarmonyOS IM SDK 提供用户关系管理功能，包括好友管理和黑名单
 
 ### 监听好友关系和好友信息变更
 
-通过 `ContactListener` 监听好友申请、接受、拒绝、添加、删除、好友同步以及好友信息变更事件。使用 `ContactManager.addContactListener` 注册监听器，不再需要时使用 `removeContactListener` 移除同一个监听器实例。
+通过 `ContactListener` 监听好友申请、接受、拒绝、添加、删除以及好友信息变更事件。使用 `ContactManager#addContactListener` 注册监听器，不再需要时使用 `removeContactListener` 移除同一个监听器实例。
 
 ```typescript
 const contactListener: ContactListener = {
@@ -41,17 +41,6 @@ const contactListener: ContactListener = {
   onContactAdded: (userId: string): void => {
   },
 
-  // 登录后的好友自动同步开始。
-  onContactSyncStart: (): void => {
-  },
-
-  // 联系人自动同步结束。errorCode 为 ChatError.EM_NO_ERROR 时表示成功。
-  onContactSyncFinishWithError: (errorCode: number, error: string): void => {
-    if (errorCode === ChatError.EM_NO_ERROR) {
-      // 可以从本地读取好友列表和好友信息。
-    }
-  },
-
   // 好友信息发生变更。
   onContactInfoUpdate: (contact: Contact): void => {
     const userId = contact.userId();
@@ -66,6 +55,8 @@ contactManager?.addContactListener(contactListener);
 // 页面或组件销毁时移除同一个监听器实例。
 contactManager?.removeContactListener(contactListener);
 ```
+
+好友数据的自动同步状态不通过 `ContactListener` 通知。请通过 `ConnectionListener#onDataSyncStart` 和 `onDataSyncFinish` 监听，详见 [登录后自动同步好友列表](#登录后自动同步好友列表)。
 
 ### 添加好友
 
@@ -124,7 +115,7 @@ ChatClient.getInstance().contactManager()?.declineInvitation(userId)
 
 ### 删除好友
 
-调用 `ContactManager#deleteContact(userId, keepConversation)` 删除好友。删除成功后，双方的好友关系都会解除，对方会收到 `onContactDeleted`。该操作无需对方确认，建议在应用侧增加二次确认。
+调用 `ContactManager#deleteContact(userId, keepConversation)` 删除好友。删除成功后，对方好友列表中的该用户也会被移除，双方的好友关系都会解除，对方会收到 `onContactDeleted`。该操作无需对方确认，建议在应用侧增加二次确认。
 
 `keepConversation` 用于控制是否保留本地单聊会话及消息：
 
@@ -166,20 +157,59 @@ ChatClient.getInstance().contactManager()
 
 #### 登录后自动同步好友列表
 
-HarmonyOS SDK 1.14.0 可以在用户登录成功后自动从服务器同步好友列表，并写入本地缓存。该功能默认关闭，你需要在初始化 SDK 前通过 `ChatOptions#setEnableAutoSyncContacts(true)` 开启。
+SDK 支持在登录成功后自动从服务器同步好友列表和好友信息，并将同步结果写入本地。HarmonyOS SDK 5.0.0 默认仅同步会话数据，因此必须在调用 `ChatClient#init` 前，通过 `ChatOptions#setDataSyncType` 将 `DataSyncType.CONTACTS` 加入同步类型。
 
 如果还需要通过 `Contact#getUserInfo()` 读取好友昵称、头像等用户属性，应同时通过 `ChatOptions#setEnableUserInfo(true)` 开启用户信息管理功能。
 
 ```typescript
 const options = new ChatOptions({ appKey: 'your-org#your-app' });
-options.setEnableAutoSyncContacts(true);
+// 在保留默认会话同步的同时，开启好友数据同步。
+options.setDataSyncType([
+  DataSyncType.CONVERSATIONS,
+  DataSyncType.CONTACTS
+]);
 options.setEnableUserInfo(true);
 
 // 使用 options 调用 ChatClient.init 初始化 SDK。
 ChatClient.getInstance().init(context, options);
 ```
 
-自动同步开始时触发 `ContactListener#onContactSyncStart`。同步结束时触发 `ContactListener#onContactSyncFinishWithError(errorCode, error)`；`errorCode === ChatError.EM_NO_ERROR` 表示同步成功，此时可以通过本地接口读取好友列表和好友信息。
+通过 `ConnectionListener#onDataSyncStart` 和 `onDataSyncFinish` 监听好友数据的同步状态。建议在登录前注册监听器，以免遗漏同步事件：
+
+```typescript
+const connectionListener: ConnectionListener = {
+  onConnected: (): void => {
+  },
+
+  onDisconnected: (errorCode: number): void => {
+  },
+
+  onDataSyncStart: (type: DataSyncType): void => {
+    if (type === DataSyncType.CONTACTS) {
+      // 好友数据开始同步。
+    }
+  },
+
+  onDataSyncFinish: (type: DataSyncType, errorCode: number): void => {
+    if (type !== DataSyncType.CONTACTS) {
+      return;
+    }
+
+    if (errorCode === ChatError.EM_NO_ERROR) {
+      // 好友数据同步成功，可以从本地读取好友列表和好友信息。
+    } else {
+      // 好友数据同步失败，根据 errorCode 处理错误。
+    }
+  }
+};
+
+ChatClient.getInstance().addConnectionListener(connectionListener);
+
+// 不再需要监听时，移除同一个监听器实例。
+ChatClient.getInstance().removeConnectionListener(connectionListener);
+```
+
+收到 `onDataSyncFinish`，且 `type === DataSyncType.CONTACTS`、`errorCode === ChatError.EM_NO_ERROR` 后，可以通过本地接口读取好友列表和好友信息。完整的数据同步配置说明，详见 [初始化文档](initialization.html#设置登录后自动同步数据)。
 
 :::tip
 好友关系和好友信息的其他变化也通过 `ContactListener` 通知。关于用户属性回调，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
@@ -249,25 +279,9 @@ ChatClient.getInstance().contactManager()?.allContacts()
 
 #### 从服务端主动获取好友列表
 
-如果未开启登录后自动同步，或业务需要主动刷新好友数据，可以调用以下接口：
+HarmonyOS SDK 5.0.0 不再提供主动从服务端获取好友列表的接口，服务端好友列表统一通过登录后的数据同步写入本地。
 
-- `fetchAllContactsIDFromServer()`：从服务端获取全部好友用户 ID，返回 `Promise<string[]>`。
-- `fetchAllContactsFromServer()`：从服务端获取全部 `Contact` 对象，返回 `Promise<Contact[]>`。
-- `fetchAllContactsFromServerByPage(pageSize, cursor)`：分页获取 `Contact` 对象。
-
-```typescript
-// `pageSize` 取值范围为 1 到 50；
-// 首次调用可省略 `cursor`，后续传入上次结果的 `getNextCursor()`。
-ChatClient.getInstance().contactManager()
-  ?.fetchAllContactsFromServerByPage(50)
-  .then((result: CursorResult<Contact>) => {
-    const contacts: Contact[] = result.getResult();
-    const nextCursor: string = result.getNextCursor();
-  })
-  .catch((error: ChatError) => {
-    // 获取失败。
-  });
-```
+如需获取服务端最新好友数据，请在初始化 SDK 前通过 `ChatOptions#setDataSyncType` 配置 `DataSyncType.CONTACTS`，登录后等待 `ConnectionListener#onDataSyncFinish` 通知好友数据同步成功，再通过 `getContactsFromLocal()`、`getContact(userId)` 或 `allContacts()` 读取本地同步结果。HarmonyOS SDK 5.0.0 不支持在当前登录会话中通过旧接口主动刷新好友列表。
 
 #### 从本地缓存获取单个用户属性
 
@@ -371,13 +385,12 @@ ChatClient.getInstance().contactManager()?.blockList()
 | [`deleteContact`](#删除好友) | `ContactManager` | 删除好友，并通过 `keepConversation` 控制是否保留本地会话和消息。 |
 | [`setContactRemark`](#设置好友备注) | `ContactManager` | 设置或清空好友备注。 |
 | [`addContactListener`](#监听好友关系和好友信息变更) / [`removeContactListener`](#监听好友关系和好友信息变更) | `ContactManager` | 添加或移除联系人监听器。 |
-| [`setEnableAutoSyncContacts`](#登录后自动同步好友列表) / [`isEnableAutoSyncContacts`](#登录后自动同步好友列表) | `ChatOptions` | 设置或查询登录后自动同步好友列表的开关。 |
+| [`setDataSyncType`](#登录后自动同步好友列表) / [`getDataSyncType`](#登录后自动同步好友列表) | `ChatOptions` | 设置或查询登录后自动同步的数据类型。 |
+| [`onDataSyncStart`](#登录后自动同步好友列表) / [`onDataSyncFinish`](#登录后自动同步好友列表) | `ConnectionListener` | 监听好友数据同步的开始和结束。 |
+| [`setEnableUserInfo`](#登录后自动同步好友列表) | `ChatOptions` | 开启用户信息管理功能。 |
 | [`getContactsFromLocal`](#从本地读取好友列表) | `ContactManager` | 获取本地全部好友对象。 |
 | [`getContact`](#从本地读取好友列表) | `ContactManager` | 获取本地指定好友对象。 |
 | [`allContacts`](#从本地读取好友列表) | `ContactManager` | 获取缓存中的全部好友用户 ID。 |
-| [`fetchAllContactsIDFromServer`](#从服务端主动获取好友列表) | `ContactManager` | 从服务端获取全部好友用户 ID。 |
-| [`fetchAllContactsFromServer`](#从服务端主动获取好友列表) | `ContactManager` | 从服务端获取全部好友对象。 |
-| [`fetchAllContactsFromServerByPage`](#从服务端主动获取好友列表) | `ContactManager` | 从服务端分页获取好友对象。 |
 | [`getUserInfoWithUserId`](#从本地缓存获取单个用户属性) | `UserInfoManager` | 从本地用户属性缓存同步读取单个用户属性。 |
 | [`addUsersToBlocklist`](#添加用户到黑名单) | `ContactManager` | 将一个或多个用户加入黑名单。 |
 | [`removeUserFromBlockList`](#将用户从黑名单移除) | `ContactManager` | 将指定用户移出黑名单。 |
