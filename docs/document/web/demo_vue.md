@@ -103,7 +103,9 @@ VITE_APP_KEY="你的orgName#你的appName"
 
    ![单聊消息发送成功](/images/demo/web_vue3_1v1_chat.png)
 
-> 使用自己的 App Key 时，请按环信用户 ID 添加好友。按手机号添加好友需要 App Server 提供手机号与环信用户 ID 的映射查询服务，不能仅通过更换 App Key 实现。
+:::tip
+使用自己的 App Key 时，请按环信用户 ID 添加好友。按手机号添加好友需要 App Server 提供手机号与环信用户 ID 的映射查询服务，不能仅通过更换 App Key 实现。
+:::
 
 ### 收发群聊消息
 
