@@ -31,7 +31,7 @@
   - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
   - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
   - 增强好友对象能力：从 [服务器](user_relationship.html#主动从服务器获取好友列表) 和 [本地](user_relationship.html#从本地读取好友列表) 获取好友列表时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
 - 支持 [用户信息自动管理功能](userinfo_provider.html)。
 用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 

@@ -62,6 +62,10 @@ SDK 通过 `ChatUserInfoEventHandler` 监听用户属性更新事件：
 
 **建议在业务初始化阶段注册事件处理器，以便及时接收登录后的初始同步、消息触发或主动获取等场景产生的事件。** 关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
+:::tip
+如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更，你需要先联系环信商务开通相应功能。详见 [监听用户属性变更](userprofile.html#监听用户属性变更) 和 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
+:::
+
 ```dart
 const String userInfoHandlerId = 'user_info_handler';
 

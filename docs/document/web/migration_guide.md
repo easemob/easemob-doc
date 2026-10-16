@@ -496,7 +496,7 @@ await client.chatManager.sendMessage(msg, {
 
 ### 变更说明
 
-用户属性相关 API 从 `conn.xxx` 迁移到 `client.userInfoManager.xxx`。新版 SDK 支持按用户 ID 或属性查询用户属性，也支持订阅用户属性变更。
+用户属性相关 API 从 `conn.xxx` 迁移到 `client.userInfoManager.xxx`。新版 SDK 支持按用户 ID 或属性查询用户属性，也支持订阅非好友用户的属性变更。使用该订阅功能前，你需要联系环信商务开通。详见 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
 
 ### API 对照
 

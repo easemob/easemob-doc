@@ -19,6 +19,10 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 通过 `EMContactListener` 监听好友申请、接受、拒绝、添加、删除及好友信息变更事件。
 
+:::tip
+如需通过 `onContactInfoUpdate` 接收好友的用户属性变更通知，你需要先联系环信商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```java
 EMContactListener contactListener = new EMContactListener() {
     // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。

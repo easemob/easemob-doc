@@ -20,6 +20,10 @@ React Native SDK 通过 `ChatContactManager` 提供用户关系管理 API，并�
 
 通过 `ChatContactEventListener` 监听好友申请、接受、拒绝、添加、删除、好友同步状态及好友信息变更。建议在 SDK 初始化成功后、登录前注册监听器，以免遗漏登录后自动同步事件；不再需要监听时，应移除同一个监听器对象。
 
+:::tip
+如需通过 `onContactInfoUpdate` 接收好友的用户属性变更通知，你需要先联系环信商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```typescript
 const contactListener: ChatContactEventListener = {
   // 双方建立好友关系后，双方都会收到该事件。

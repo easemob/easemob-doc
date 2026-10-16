@@ -56,6 +56,10 @@ SDK 提供 `ChatUserInfoEventListener`，用于监听用户属性更新事件，
 
 **建议在 SDK 初始化成功后、登录前完成监听注册，以便及时接收登录后的初始同步、消息触发或主动拉取产生的事件。** 不再需要监听时，应移除同一个监听器对象。关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
+:::tip
+如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更，你需要先联系环信商务开通相应功能。详见 [监听用户属性变更](userprofile.html#监听用户属性变更) 和 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
+:::
+
 ```typescript
 const userInfoListener: ChatUserInfoEventListener = {
   onSelfUserInfoUpdate(userInfo: ChatUserInfo) {

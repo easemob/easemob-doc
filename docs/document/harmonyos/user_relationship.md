@@ -19,6 +19,10 @@ HarmonyOS IM SDK 提供用户关系管理功能，包括好友管理和黑名单
 
 通过 `ContactListener` 监听好友申请、接受、拒绝、添加、删除、好友同步以及好友信息变更事件。使用 `ContactManager.addContactListener` 注册监听器，不再需要时使用 `removeContactListener` 移除同一个监听器实例。
 
+:::tip
+如需通过 `onContactInfoUpdate` 接收好友的用户属性变更通知，你需要先联系环信商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```typescript
 const contactListener: ContactListener = {
   // 对方接受了当前用户发出的好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
