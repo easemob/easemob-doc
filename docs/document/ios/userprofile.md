@@ -210,7 +210,7 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
  - **当前用户**：当前用户的属性变更通过 `onSelfUserInfoUpdate` 单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
  - **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录后自动拉取并更新本地好友数据。好友属性变更时，会触发 `onFriendInfoChanged` 事件；该事件为好友关系特有，与 `onUserInfoUpdate` 区分。
- - 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更事件 ，你需要联系环信商务开通该功能后方可使用。
+ -如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系环信商务开通该功能后方可使用。
 
 通过 `addDelegate` 注册监听器，不再需要时通过 `removeDelegate` 移除：
 

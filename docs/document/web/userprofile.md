@@ -190,7 +190,7 @@ console.log(users.map(user => user.userId));
 
 - **当前用户**：当前用户的属性变更，通过 `onOwnInfoUpdated` 回调单独通知，不适用 `onUserInfoUpdated` 逻辑。
 - **好友用户**：由好友列表同步或好友资料变更触发的好友属性更新，会触发 `client.contactManager.addEventHandler` 中注册的 `onContactInfoUpdated` 回调。该事件属于好友事件，不属于 `userInfoManager` 事件。
-- 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更事件 ，你需要联系环信商务开通该功能后方可使用。
+-如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系环信商务开通该功能后方可使用。
 - **主动拉取用户属性**：主动调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 接口后，若返回结果中包含更新后的用户属性，建议直接使用接口返回值刷新 UI，而不要依赖 `onUserInfoUpdated` 回调。
 
 ```typescript
