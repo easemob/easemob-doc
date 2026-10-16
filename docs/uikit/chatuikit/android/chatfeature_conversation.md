@@ -8,7 +8,7 @@
 
 会话已读是指显示用户是否已阅读过含有未读消息的特定会话。
 
-在单群聊 UIKit 中，用户可以通过长按会话的操作触发会话拓展功能菜单，选择会话已读选项，指定会话将会被置为已读。
+在单群聊 UIKit 中，用户可以通过长按会话的操作触发会话拓展功能菜单，选择会话已读选项，清除该会话的未读消息数。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/conversation/conversation_read_android.png" title="会话已读" />
