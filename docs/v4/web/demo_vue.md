@@ -6,7 +6,7 @@
 
 ## 在线体验
 
-在运行源码前，可以先访问 [在线 Demo](https://webim-vue3.easemob.com/login)，体验单聊、群聊和联系人管理等功能，并了解 UIKit 的配置效果。
+在本地运行 Demo 前，可以先访问 [在线 Demo](https://webim-vue3.easemob.com/login)，体验单聊、群聊和联系人管理等功能，并了解 UIKit 的配置效果。
 
 ![在线 Demo 界面](/images/demo/web_vue3_home.png)
 
