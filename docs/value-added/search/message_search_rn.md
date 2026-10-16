@@ -46,7 +46,24 @@ React Native SDK 自 1.21.0 起提供 `ChatManager.searchMessagesFromServer` 方
 | 会话 | 支持搜索全部会话，也可以指定单聊、群聊或聊天室会话。单聊传对方用户 ID，群聊或聊天室传对应的群组 ID 或聊天室 ID。 | `conversationId` |
 | 消息类型 | 支持搜索文本、图片、视频、位置、文件和合并消息，不支持搜索自定义消息、语音消息和透传消息。 | `msgTypes` |
 | 时间范围 | 支持按消息发送时间范围搜索。开始时间和结束时间必须同时设置。 | `startTime`、`endTime` |
-| 搜索内容 | 支持仅搜索消息内容、仅搜索消息扩展字段（`ext`），或同时搜索两者。消息内容包括文本消息内容以及自动翻译后的文本内容。 | `searchScope` |
+| 搜索内容 | 支持仅搜索消息内容、仅搜索消息扩展字段（`ext`），或同时搜索两者。各消息类型的匹配字段详见 [关键字匹配的消息内容](#关键字匹配的消息内容)；文本消息还支持匹配自动翻译后的文本内容。 | `searchScope` |
+
+#### 关键字匹配的消息内容
+
+当将 `searchScope` 设置为 `ChatMessageSearchScope.Content`（仅搜索消息内容，默认值）时，服务端会在下表列出的消息内容中匹配关键字。表中的消息体属性用于标识相应的消息内容，搜索关键字通过 `keywordList` 设置。文本消息还支持匹配自动翻译后的文本内容。
+
+| 消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
+| :--- | :--- | :--- |
+| 文本消息 | `ChatTextMessageBody.content` | 文本消息的实际内容“你好世界”。 |
+| 图片消息 | `ChatFileMessageBody.displayName` | 图片文件名“photo.jpg”。 |
+| 视频消息 | `ChatFileMessageBody.displayName` | 视频文件名“video.mp4”。 |
+| 文件消息 | `ChatFileMessageBody.displayName` | 文件名“report.pdf”。 |
+| 位置消息 | `ChatLocationMessageBody.address` | 地址，例如“北京市朝阳区”。 |
+| 合并消息 | `ChatCombineMessageBody.title` 和 `ChatCombineMessageBody.summary` | 标题或摘要，例如“聊天记录”或“包含 5 条消息”。 |
+
+:::tip
+将 `searchScope` 设置为 `ChatMessageSearchScope.All` 时，可同时搜索表中列出的消息内容和消息扩展字段（`ext`）。`ext` 搜索需联系环信商务单独开通，并配置可搜索字段白名单；只有白名单内的 `ext` 字段参与匹配。
+:::
 
 #### 消息可见范围
 
