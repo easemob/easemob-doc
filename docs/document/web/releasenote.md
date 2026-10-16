@@ -45,7 +45,7 @@
 - **支持统一的消息已读回执能力**：可通过 `sendMessageReadReceipts` 批量发送单聊或群聊消息已读回执，发送方通过 `onMessageReadReceipts` 接收回执；群聊还支持通过 `getGroupMessageReadUsers` 查询单条群消息已读成员列表，并通过 `getGroupMessageReadReceipts` 批量查询群消息已读数量。
 - **支持会话列表本地缓存与自动同步**：登录后可通过 `enableSyncData` 配置自动同步会话、好友和已加入群组数据，并通过 `onSyncDataStart`、`onSyncDataFinished` 监听同步状态；会话列表变化通过 `onConversationListUpdate` 通知业务层。
 - **完善会话管理**：支持会话置顶、会话标记、会话删除和会话未读数清零能力，并提供 `clearConversationUnreadMessageCount` 和 `clearAllConversationUnreadMessageCount` 清除指定会话或全部会话未读数。
-- **支持用户属性订阅和用户信息自动管理**：可通过 `subscribeUsersInfo` 订阅用户信息变更；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
+- **支持用户属性订阅和用户信息自动管理**：可通过 `subscribeUsersInfo` 订阅非好友用户的属性变更，使用该订阅功能前需要联系环信商务开通；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
 - **支持消息能力**：包括消息撤回、消息编辑、消息置顶、引用消息、Reaction、历史消息拉取、服务端消息搜索、消息翻译、合并消息解析和流式消息接收。
 - **多场景能力统一**：支持群组、聊天室、消息话题、在线状态和推送通知相关能力，并提供 Group、ChatRoom 和 ChatThread 实体对象风格 API，便于围绕单个实体连续操作。
 - **支持跨平台运行时适配层**：可在 Web、微信小程序、uni-app、React Native 和 Electron 等环境中适配请求、上传、WebSocket 和本地存储等基础能力。

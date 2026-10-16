@@ -163,6 +163,8 @@ try {
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
+使用非好友用户属性变更订阅功能前，你需要联系环信商务开通该功能。
+
 该订阅功能只适用于非好友用户。当前用户、非好友用户和好友的属性变更通知方式不同，详见 [监听用户属性变更](#监听用户属性变更)。
 :::
 
@@ -240,6 +242,7 @@ React Native SDK 通过 `ChatUserInfoEventListener` 提供以下用户属性事�
 
 - **当前用户**：当前登录用户的属性变更通过 `onSelfUserInfoUpdate` 单独回调。
 - **好友用户**：若已开启 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)，好友信息发生变更时还会触发 `ChatContactEventListener#onContactInfoUpdate(contact: ChatContact)`。该事件属于好友关系模块，与 `ChatUserInfoEventListener#onUserInfoUpdate` 区分。
+-如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系环信商务开通该功能后方可使用。
 
 建议在 SDK 初始化成功后、登录前注册监听器；不再需要监听时，应移除同一个监听器对象。
 

@@ -181,6 +181,8 @@ SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用�
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
+使用非好友用户属性变更订阅功能前，你需要联系环信商务开通该功能。
+
 本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知详情，请参见 [用户属性变更事件](#监听用户属性变更)。
 :::
 
@@ -256,6 +258,7 @@ Android SDK 通过 `EMUserInfoManagerListener` 提供以下用户属性事件：
 
 - **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
 - **好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
+- 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更，你需要联系环信商务开通该功能后方可使用。
 
 通过 `addUserInfoManagerListener` 注册监听器，不再需要监听时通过 `removeUserInfoManagerListener` 移除：
 

@@ -188,6 +188,8 @@ SDK 从 4.22.0 版本开始支持订阅非好友用户的属性变更。订阅�
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
+使用非好友用户属性变更订阅功能前，你需要联系环信商务开通该功能。
+
 本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知，详见 [监听用户属性变更](#监听用户属性变更)。
 :::
 
@@ -277,6 +279,7 @@ Future<void> fetchSubscribedUsers() async {
 
 - **当前用户**：当前用户的属性变更通过 `onSelfUserInfoUpdate` 单独回调。
 - **好友信息**：如果启用了 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)，好友信息发生变化时还会触发 `ChatContactEventHandler#onContactInfoUpdate(ChatContact contact)`。该事件属于好友关系管理，与 `onUserInfoUpdate` 区分。
+- 如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系环信商务开通该功能后方可使用。
 
 调用 `ChatUserInfoManager.addEventHandler` 注册事件处理器。不再需要监听时，使用相同的处理器 ID 调用 `removeEventHandler`。
 
