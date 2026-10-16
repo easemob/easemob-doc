@@ -242,7 +242,7 @@ React Native SDK 通过 `ChatUserInfoEventListener` 提供以下用户属性事�
 
 - **当前用户**：当前登录用户的属性变更通过 `onSelfUserInfoUpdate` 单独回调。
 - **好友用户**：若已开启 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)，好友信息发生变更时还会触发 `ChatContactEventListener#onContactInfoUpdate(contact: ChatContact)`。该事件属于好友关系模块，与 `ChatUserInfoEventListener#onUserInfoUpdate` 区分。
-- 对于好友的用户属性变更，以及已订阅的非好友用户属性变更，你需要联系环信商务开通该功能后方可使用。
+- 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更事件 ，你需要联系环信商务开通该功能后方可使用。
 
 建议在 SDK 初始化成功后、登录前注册监听器；不再需要监听时，应移除同一个监听器对象。
 
