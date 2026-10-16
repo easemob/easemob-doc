@@ -279,7 +279,7 @@ Future<void> fetchSubscribedUsers() async {
 
 - **当前用户**：当前用户的属性变更通过 `onSelfUserInfoUpdate` 单独回调。
 - **好友信息**：如果启用了 [登录后自动同步好友列表](user_relationship.html#登录后自动同步好友列表)，好友信息发生变化时还会触发 `ChatContactEventHandler#onContactInfoUpdate(ChatContact contact)`。该事件属于好友关系管理，与 `onUserInfoUpdate` 区分。
-- 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更事件，你需要联系环信商务开通该功能后方可使用。
+- 如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系环信商务开通该功能后方可使用。
 
 调用 `ChatUserInfoManager.addEventHandler` 注册事件处理器。不再需要监听时，使用相同的处理器 ID 调用 `removeEventHandler`。
 
