@@ -38,7 +38,7 @@ Android SDK 通过 `EMMessage` 的不同静态方法创建各类消息。不同�
 | 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息单聊和群聊的各类消息         | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。适用于输入状态、瞬时控制信息等场景。|
 | 回调路由环境     | `EMMessage#setWebhookEnv`                                    | 可选             | 所有消息         | 设置 Webhook 回调环境标识，服务端根据该值匹配回调路由。      |
 | 聊天室消息优先级 | `EMMessage#setPriority`                                      | 可选             | 聊天室消息       | 设置聊天室消息的优先级，可选 `PriorityHigh`、`PriorityNormal` 和 `PriorityLow`，默认值为 `PriorityNormal`。 |
-| 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。是否可用还受相应服务端功能配置和使用限制约束。 |
+| 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。 |
 | 是否需要已读回执 | `EMMessage#setIsNeedReadReceipt`                             | 可选             | 单聊和群聊消息   | 标记该消息是否需要已读回执。接收方发送已读回执前，消息的该属性必须为 `true`；聊天室不支持消息已读回执。 |
 
 ## 接口频率限制
@@ -157,6 +157,8 @@ EMClient.getInstance()
 #### 资源处理说明
 
 默认情况下，调用 `EMChatManager#sendMessage` 后，SDK 会自动将本地附件上传至环信服务器；接收方也可由 SDK 自动下载附件。你可以通过 `EMOptions#setAutoTransferMessageAttachments` 控制附件是否由 SDK 自动传输。消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
+
+由 SDK 自动传输附件时，请确保传入的本地文件路径或 URI 在消息发送结果回调返回前仍可访问，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证其访问权限和生命周期，建议先复制到应用可控的本地目录再发送。
 
 ### 发送图片消息
 
