@@ -37,6 +37,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "19b85beee242a1266c87ab84c6c3883d",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1418038712905770616",
         "ext": {
@@ -76,6 +77,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -105,6 +107,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "36583253ca0d3a718388f1134b180baf",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415008466669405936",
         "ext": {
@@ -146,6 +149,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。         |
@@ -178,6 +182,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "78708dd54808525a8a4c0e51bacec2c2",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1414988420945545172",
         "ext": {
@@ -225,6 +230,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -255,6 +261,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "d2575840b44fb1b67f2911bd69a56473",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415000223524062680",
         "ext": {
@@ -299,6 +306,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -329,6 +337,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "9cf75f2e2dec09ab70df4ced8caa2148",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009139259606640",
         "ext": {
@@ -375,6 +384,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -405,6 +415,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "8ae190480ff8f4206eece47665e1eb49",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009594568083068",
         "ext": {
@@ -447,6 +458,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -477,6 +489,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "3539b3b166e2f3401076664629d98ef1",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415001054172415464",
         "ext": {
@@ -524,6 +537,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
@@ -554,6 +568,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "989b921d92b411d3c30364ccda87aad4",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415010541239273084",
         "ext": {
@@ -602,6 +617,7 @@
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |

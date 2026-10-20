@@ -25,6 +25,7 @@
     "callId": "XXXX#XXXX_968665325555943556",
     "channel_channel": "XXXX#XXXX_2222@conference.easemob.com",
     "security": "bd63d5fa8f72823e6d33e09a43aa4239",
+    "os": "ios",
     "payload": {
         "ext": {},
         "ack_message_id": "968665323572037776",
@@ -48,6 +49,7 @@
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_回执消息的消息 ID”。 | 
 | `channel_channel` | String   | 单聊消息的已读回执，格式为 `App Key_接收已读回执用户 ID@conference.easemob.com`，例如，示例中的 `easemob-demo#wang_277721224642561@conference.easemob.com`。|
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
+| `os` | String | 发送单聊消息已读回执的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |

@@ -28,6 +28,7 @@
 | `payload`         | object | 事件内容，与通过 REST API 发送的消息内容一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。      |
 | `securityVersion` | String | 安全校验版本，当前为 `1.0.0`。请忽略此参数，以后会改成 Console 后台做设置。                   |
 | `security`        | String | 签名，格式为 `MD5（callId+secret+timestamp）`。 `Secret` 见控制台 [回调规则配置](/product/console/basic_webhook.html#配置消息回调规则)。     |
+| `os` | String | 发送消息的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String | 你在环信控制台注册的应用唯一标识。        |
 | `host`            | String | 服务器名称。              |
 | `content_type`            | String | 消息类型：<br/> - `chat:user:*`：单聊消息  <br/> - `chat:group:*`：群组消息   <br/> - `chat:room:*`：聊天室消息  <br/>  各类消息对应的具体参数值，详见[发送单聊消息](#发送单聊消息)、[发送群组消息](#发送群组消息)和[发送聊天室消息](#发送聊天室消息)章节。   |
@@ -372,7 +373,8 @@
         // 具体的消息内容
     },
     "securityVersion":"1.0.0",
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
+    "security":"2ca02c394bef9e7abc83958bcc3156d3",
+    "os":"ios"
  }
 ```
 
@@ -423,7 +425,8 @@
         // 具体的消息内容，与对应类型的单聊消息相同
     },
     "securityVersion":"1.0.0",
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
+    "security":"2ca02c394bef9e7abc83958bcc3156d3",
+    "os":"ios"
 }
 ```
 
