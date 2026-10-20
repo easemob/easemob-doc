@@ -71,6 +71,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -84,8 +86,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | Long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `bodies`         | JSON Array   | 编辑消息的具体内容。与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
@@ -98,6 +104,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 位置消息
 
@@ -143,6 +151,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -156,8 +166,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -172,6 +186,8 @@
 | `meta.edit_msg.count`            | JSON   | 消息编辑次数。                                               |
 | `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `type`   | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 
 ### 图片消息
@@ -224,6 +240,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -237,8 +255,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -252,6 +274,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 语音消息
 
@@ -300,6 +324,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -313,8 +339,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -328,6 +358,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 视频消息
 
@@ -378,6 +410,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -391,8 +425,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -406,6 +444,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 文件消息
 
@@ -452,6 +492,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -465,8 +507,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -480,6 +526,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 合并消息
 
@@ -531,6 +579,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -544,8 +594,12 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -559,6 +613,8 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 
 ### 自定义消息
 
@@ -611,6 +667,8 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
@@ -624,7 +682,11 @@
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
@@ -639,4 +701,6 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 

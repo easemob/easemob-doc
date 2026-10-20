@@ -43,6 +43,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
@@ -58,3 +60,5 @@
 | `eventType`       | String | `chat`：表示上行消息。                      |
 | `timestamp` | long     | 环信 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。                  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |
+
+</div>

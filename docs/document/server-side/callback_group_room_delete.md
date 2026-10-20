@@ -35,6 +35,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | 回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -45,4 +47,6 @@
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
 | `operation`    | String | 操作。群组/聊天室删除的操作为 `DELETE`。 |
 | `operator`     | String | 操作人。                               | 
-| `timestamp`    | Long   | 操作完成的时间戳。                      | 
+| `timestamp`    | Long   | 操作完成的时间戳。                      |
+
+</div>

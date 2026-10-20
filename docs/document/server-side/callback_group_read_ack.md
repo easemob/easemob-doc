@@ -49,6 +49,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_回执消息的消息 ID`。 | 
@@ -63,3 +65,5 @@
 | `to`        | String   | 群组 ID。  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |
 | `timestamp` | long     | 环信 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。  |
+
+</div>

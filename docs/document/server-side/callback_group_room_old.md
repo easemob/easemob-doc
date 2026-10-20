@@ -45,6 +45,8 @@
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
@@ -55,12 +57,18 @@ payload 字段含义：
 | `description` | String   | 创建群组失败的原因描述。                             |
 | `error_code`  | String   | 创建失败对应的错误码。                                       |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组创建事件的消息 ID”。 | 
 | `msg_id`    | String   | 群组创建事件的消息 ID。 | 
+
+</div>
 
 创建群组回调请求示例：
 
@@ -94,6 +102,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -103,12 +113,18 @@ payload 字段含义：
 | `description` | String   | 解散群组或聊天室失败的原因描述。                             |
 | `error_code`  | String   | 操作失败对应的错误码。                                       |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组解散事件的消息 ID”。 | 
 | `msg_id`    | String   | 群组解散事件的消息 ID。 | 
+
+</div>
 
 解散群组回调请求示例：
 
@@ -142,10 +158,14 @@ payload 之外的字段如下表所示：
 
 payload 之外的字段如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_聊天室解散事件的消息 ID”。 | 
 | `msg_id`    | String   | 聊天室解散事件的消息 ID。 | 
+
+</div>
 
 ```json
 { 
@@ -176,6 +196,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
@@ -186,12 +208,18 @@ payload 字段含义：
 | `description` | String   | 申请加入群组失败的原因描述。                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户申请入群事件的消息 ID”。 | 
 | `msg_id`    | String   | 用户申请入群事件的消息 ID。 | 
+
+</div>
 
 回调请求示例：
 
@@ -225,6 +253,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -235,12 +265,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户同意入群事件的消息 ID”。 | 
 | `msg_id`    | String   | 用户同意入群事件的消息 ID。 | 
+
+</div>
 
 回调请求示例：
 
@@ -273,6 +309,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -283,12 +321,18 @@ payload 字段含义：
 | `description` | String   | 邀请新用户加入群组失败的原因描述。                           |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_邀请新用户入群事件的消息 ID”。 | 
 | `msg_id`    | String   | 邀请新用户入群事件的消息 ID。 | 
+
+</div>
 
 回调请求示例：
 
@@ -322,6 +366,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -332,12 +378,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_受邀用户同意入群事件的消息 ID”。 | 
 | `msg_id`    | String   | 受邀用户同意入群事件的消息 ID。 | 
+
+</div>
 
 回调示例：
 
@@ -371,6 +423,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -381,12 +435,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_受邀用户拒绝入群事件的消息 ID”。 | 
 | `msg_id`    | String   | 受邀用户拒绝入群事件的消息 ID。 | 
+
+</div>
 
 回调请求示例：
 
@@ -420,6 +480,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义         |
 | :------------ | :------- | :---------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -429,12 +491,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。  |
 | `error_code`  | String   | 失败对应的错误码。  |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被踢出群/聊天室事件的消息 ID”。 | 
 | `msg_id`    | String   | 用户被踢出群/聊天室事件的消息 ID。 | 
+
+</div>
 
 踢出群回调请求示例：
 
@@ -494,6 +562,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -504,12 +574,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被添加至群黑名单事件的消息 ID”。 | 
 | `msg_id`    | String   | 用户被添加至群黑名单事件的消息 ID。 | 
+
+</div>
 
 封禁群成员，即将群成员添加到黑名单的回调请求示例：
 
@@ -543,6 +619,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -553,12 +631,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_用户被移出群黑名单事件的消息 ID”。 | 
 | `msg_id`    | String   | 用户被移出群黑名单事件的消息 ID。 | 
+
+</div>
 
 回调示例如下所示：
 
@@ -592,6 +676,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -602,12 +688,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群/聊天室信息修改事件的消息 ID”。 | 
 | `msg_id`    | String   | 群/聊天室信息修改事件的消息 ID。 | 
+
+</div>
 
 群信息修改回调请求示例：
 
@@ -667,6 +759,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -677,12 +771,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组屏蔽事件的消息 ID”。 | 
 | `msg_id`    | String   | 群组屏蔽事件的消息 ID。 | 
+
+</div>
 
 用户屏蔽群回调请求示例：
 
@@ -716,6 +816,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -726,12 +828,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除屏蔽群组事件的消息 ID”。 | 
 | `msg_id`    | String   | 解除屏蔽群组事件的消息 ID。 | 
+
+</div>
 
 请求示例：
 
@@ -765,13 +873,19 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `operation`   | String   | `presence`：成员进群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -779,6 +893,8 @@ payload 之外的字段如下表所示：
 | `msg_id`    | String   | 新成员加入群组或聊天室事件的消息 ID。 | 
 | `from`    | String   | 格式为：新成员的用户 ID*@easemob.com。 | 
 | `to`    | String   | 群组 ID 或聊天室 ID。 | 
+
+</div>
 
 有新成员加入了群组时，即时通讯 IM 服务会向你的应用服务器发送用户加入了群组的通知。回调请求示例：
 
@@ -830,13 +946,19 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
 | `operation`   | String   | `absence`：成员离开群/聊天室。                                |
 | `is_chatroom` | Bool     | 是否是聊天室。<br/> - `true`：是；<br/> - `false`：否。                |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -844,6 +966,8 @@ payload 之外的字段如下表所示：
 | `msg_id`    | String   | 有成员离开了群组或聊天室事件的消息 ID。 | 
 | `from`    | String   | 格式为：离开的成员的用户 ID*@easemob.com。 | 
 | `to`    | String   | 群组 ID 或聊天室 ID。 | 
+
+</div>
 
 有新成员主动离开了群组或被移出时，即时通讯 IM 服务会向你的应用服务器发送用户离开了群组的通知。回调请求示例：
 
@@ -895,6 +1019,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -904,12 +1030,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_有成员退出了群组或聊天室事件的消息 ID”。 | 
 | `msg_id`    | String   | 有成员退出了群组或聊天室事件的消息 ID。 | 
+
+</div>
 
 成员主动退出群回调请求示例：
 
@@ -969,6 +1101,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群}@conference.easemob.com`。 |
@@ -978,12 +1112,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群组转让事件的消息 ID”。 | 
 | `msg_id`    | String   | 群组转让事件的消息 ID。 | 
+
+</div>
 
 转让群回调请求示例：
 
@@ -1016,6 +1156,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1026,12 +1168,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_添加群/聊天室管理员事件的消息 ID”。 | 
 | `msg_id`    | String   | 添加群/聊天室管理员事件的消息 ID。 | 
+
+</div>
 
 添加群管理员回调请求示例：
 
@@ -1091,6 +1239,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1101,12 +1251,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群/聊天室管理员事件的消息 ID”。 | 
 | `msg_id`    | String   | 删除群/聊天室管理员事件的消息 ID。 | 
+
+</div>
 
 删除群管理员回调请求示例：
 
@@ -1166,6 +1322,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1176,12 +1334,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_禁言群/聊天室成员事件的消息 ID”。 | 
 | `msg_id`    | String   | 禁言群/聊天室成员事件的消息 ID。 | 
+
+</div>
 
 将群成员禁言回调示例：
 
@@ -1242,6 +1406,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1252,12 +1418,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除禁言群/聊天室成员事件的消息 ID”。 | 
 | `msg_id`    | String   | 解除禁言群/聊天室成员事件的消息 ID。 | 
+
+</div>
 
 将群成员解除禁言回调请求示例：
 
@@ -1317,6 +1489,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1327,12 +1501,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_更新群/聊天室公告事件的消息 ID”。 | 
 | `msg_id`    | String   | 更新群/聊天室公告事件的消息 ID。 | 
+
+</div>
 
 更新群公告示例：
 
@@ -1394,6 +1574,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1404,12 +1586,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群/聊天室公告事件的消息 ID”。 | 
 | `msg_id`    | String   | 删除群/聊天室公告事件的消息 ID。 | 
+
+</div>
 
 删除群公告回调请求示例：
 
@@ -1471,6 +1659,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -1486,12 +1676,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_上传群共享文件事件的消息 ID”。 | 
 | `msg_id`    | String   | 上传群共享文件事件的消息 ID。 | 
+
+</div>
 
 上传群共享文件回调请求示例：
 
@@ -1533,6 +1729,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群 ID}@conference.easemob.com`。 |
@@ -1543,12 +1741,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_删除群共享文件事件的消息 ID”。 | 
 | `msg_id`    | String   | 删除群共享文件事件的消息 ID。 | 
+
+</div>
 
 删除群共享文件回调请求示例：
 
@@ -1582,6 +1786,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1591,12 +1797,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_添加用户进群/聊天室白名单事件的消息 ID”。 | 
 | `msg_id`    | String   | 添加用户进群/聊天室白名单事件的消息 ID。 | 
+
+</div>
 
 添加用户进群白名单回调请求示例：
 
@@ -1656,6 +1868,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1665,12 +1879,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_将用户移出群/聊天室白名单事件的消息 ID”。 | 
 | `msg_id`    | String   | 将用户移出群/聊天室白名单事件的消息 ID。 | 
+
+</div>
 
 将用户移出群白名单回调请求示例：
 
@@ -1730,6 +1950,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1739,12 +1961,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_群/聊天室全局禁言事件的消息 ID”。 | 
 | `msg_id`    | String   | 群/聊天室全局禁言事件的消息 ID。 | 
+
+</div>
 
 群全局禁言回调请求示例：
 
@@ -1804,6 +2032,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在群组/聊天室在服务器的唯一标识，`{appkey}_{群/聊天室 ID}@conference.easemob.com`。 |
@@ -1813,12 +2043,18 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。                                         |
 | `error_code`  | String   | 失败对应的错误码。                                           |
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_解除群/聊天室全局禁言事件的消息 ID”。 | 
 | `msg_id`    | String   | 解除群/聊天室全局禁言事件的消息 ID。 | 
+
+</div>
 
 解除群全局禁言回调请求示例：
 
@@ -1878,6 +2114,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
@@ -1889,7 +2127,11 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -1897,6 +2139,8 @@ payload 之外的字段如下表所示：
 | `msg_id`    | String   | 设置/更新聊天室自定义属性事件的消息 ID。 | 
 | `from`    | String   | 聊天室 ID。 | 
 | `to`    | String   | 聊天室中成员的用户 ID。 | 
+
+</div>
 
 设置/更新聊天室自定义属性回调请求示例：
 
@@ -1933,6 +2177,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{聊天室 ID}@conference.easemob.com`。 |
@@ -1944,7 +2190,11 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -1952,6 +2202,8 @@ payload 之外的字段如下表所示：
 | `msg_id`    | String   | 删除聊天室自定义属性事件的消息 ID。 | 
 | `from`    | String   | 聊天室 ID。 | 
 | `to`    | String   | 聊天室中成员的用户 ID。 | 
+
+</div>
 
 删除聊天室自定义属性回调请求示例：
 
@@ -1988,6 +2240,8 @@ payload 之外的字段如下表所示：
 
 payload 字段含义：
 
+<div class="callback-request-fields">
+
 | 字段          | 数据类型 | 含义                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
 | `muc_id`      | String   | 该回调事件所在聊天室在服务器的唯一标识，`{appkey}_{群组 ID}@conference.easemob.com`。 |
@@ -1999,7 +2253,11 @@ payload 字段含义：
 | `description` | String   | 操作失败的原因描述。|
 | `error_code`  | String   | 失败对应的错误码。|
 
+</div>
+
 payload 之外的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -2007,6 +2265,8 @@ payload 之外的字段如下表所示：
 | `msg_id`    | String   | 设置群成员的自定义属性事件的消息 ID。 | 
 | `from`    | String   | 群组 ID。 | 
 | `to`    | String   | 群组成员的用户 ID。 | 
+
+</div>
 
 设置群成员的自定义属性的回调请求示例：
 

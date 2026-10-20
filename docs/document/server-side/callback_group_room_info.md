@@ -71,6 +71,8 @@
 
 以下以创建群组的事件为例进行字段介绍：
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -85,6 +87,8 @@
 | `operation`    | String | 操作。修改群组信息的操作为 `UPDATE`。 |
 | `operator`     | String | 操作人。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
+
+</div>
 
 :::tip
 群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。

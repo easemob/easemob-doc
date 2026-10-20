@@ -43,6 +43,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_该撤回事件消息的 ID”。 |
@@ -60,3 +62,5 @@
 | `os` | String | 发起本次消息撤回操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                           |
 | `host`            | String   | 服务器名称。                                                 |
+
+</div>
