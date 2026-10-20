@@ -111,6 +111,85 @@ button {
   }
 }
 
+/* 回调请求参数表：压缩字段名和类型列，将剩余宽度留给描述。 */
+.theme-container .theme-hope-content .callback-request-fields > table {
+  th {
+    box-sizing: border-box;
+  }
+
+  th:nth-child(1) {
+    width: 22%;
+  }
+
+  th:nth-child(2) {
+    width: 5.5rem;
+  }
+
+  th:last-child {
+    width: auto;
+  }
+
+  th:nth-child(-n + 2),
+  td:nth-child(-n + 2) {
+    padding-inline: 8px;
+  }
+}
+
+/* 离线推送请求表的类型位于第三列。 */
+.theme-container .theme-hope-content .callback-request-fields--presence > table {
+  th:nth-child(2) {
+    width: 14%;
+  }
+
+  th:nth-child(3) {
+    width: 5.5rem;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    padding-inline: 8px;
+  }
+}
+
+.theme-container .theme-hope-content .callback-request-fields--required > table {
+  th:nth-child(3) {
+    width: 12%;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-container .theme-hope-content .callback-request-fields > table {
+    th:nth-child(1) {
+      width: 26%;
+    }
+
+    th:nth-child(2) {
+      width: 4.5rem;
+    }
+
+    th:last-child {
+      width: auto;
+    }
+  }
+
+  .theme-container .theme-hope-content .callback-request-fields--presence > table {
+    th:nth-child(2) {
+      width: 14%;
+    }
+
+    th:nth-child(3) {
+      width: 4.5rem;
+    }
+  }
+}
+
+/* 发送前回调的两列表格中，第二列实际为字段说明。 */
+.theme-container .theme-hope-content .callback-request-fields--two-columns > table {
+  th:nth-child(2) {
+    width: auto;
+  }
+}
+
 /* header */
 .navbar {
   .navbar-start {

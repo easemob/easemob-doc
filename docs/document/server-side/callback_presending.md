@@ -50,6 +50,8 @@
 }
 ```
 
+<div class="callback-request-fields callback-request-fields--two-columns">
+
 | 参数              | 类型    |
 | :---------------- | :--------------------------------------- |
 | `callId`          | `callId` 为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成，作为每条回调的唯一标识。  |
@@ -61,6 +63,8 @@
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。     |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见 [环信控制台](https://console.easemob.com/user/login)[回调规则](/product/console/basic_webhook.html#配置消息回调规则)。 |
+
+</div>
 
 ### 请求字段说明
 

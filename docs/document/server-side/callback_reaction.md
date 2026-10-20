@@ -81,6 +81,8 @@ Reaction 回调请求中，`reactions` 数组包含了消息当前所有的 Reac
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段             | 数据类型   | 含义             |
 |:---------------|:-------|:---------------|
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了消息话题（message thread）和表情回复（Reaction）的回调，需要结合 `payload` 中的 `type` 字段确定具体类型。|
@@ -109,4 +111,6 @@ Reaction 回调请求中，`reactions` 数组包含了消息当前所有的 Reac
 | `payload.data.reactions.op.count`  | List | 表情操作人数。 |
 | `payload.data.reactions.op.reactionType`  | String | Reaction 当前操作类型。`create` 为添加 Reaction。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 |
+
+</div>
 

@@ -125,11 +125,15 @@ curl -X POST 'https://XXXX/XXXX/XXXX/callbacks/storage/retry' \
 
 ### 请求 body 参数
 
+<div class="callback-request-fields callback-request-fields--required">
+
 | 参数 | 类型 | 是否必需 | 说明 |
 | :--- | :--- | :--- | :--- |
 | `date` | String | 是 | 待补发数据集合对应的 date key，key 为一个 10 分钟时间片的起始时间。 |
 | `retry` | Int | 否 | 当前补发请求对应的重试次数。考虑到补发仍可能失败，建议由业务侧结合实际情况维护并控制该值。初始值为 `0`。 |
 | `targetUrl` | String | 否 | 本次补发的目标回调地址。若不传或为空，则使用原回调规则中配置的回调地址。 |
+
+</div>
 
 ### 响应示例
 

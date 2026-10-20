@@ -42,6 +42,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | 回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -56,6 +58,8 @@
 | `operation`    | String | 操作。群组共享文件上传的操作为 `SHARE_FILE`。 |
 | `operator`     | String | 操作人。若 app 管理员上传了共享文件，该参数的值固定为 `@ppAdmin`。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。            | 
+
+</div>
 
 ## 群组共享文件删除事件
 
@@ -90,6 +94,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                 |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -104,6 +110,8 @@
 | `operation`    | String | 操作。群组共享文件删除的操作为 `UPDATE`。 |
 | `operator`     | String | 操作人。若 app 管理员删除了共享文件，该参数的值固定为 `@ppAdmin`。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。            | 
+
+</div>
 
 ## 其他说明
 

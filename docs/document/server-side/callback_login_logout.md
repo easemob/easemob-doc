@@ -135,6 +135,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 `App Key_UUID`。              |
@@ -149,3 +151,5 @@
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | Long     | 请求到达 IM 服务器的 UNIX 时间戳，单位为毫秒。               |
 | `status`    | String   | 变更后的状态，取值：`online`（在线）或 `offline`（离线）。   |
+
+</div>

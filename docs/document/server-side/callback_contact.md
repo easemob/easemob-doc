@@ -49,6 +49,8 @@
 
 请求字段说明如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_添加好友事件的消息 ID”。 | 
@@ -64,6 +66,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。                   |
 | `msg_id`    | String   | 添加好友事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 ## 同意好友申请
 
@@ -98,6 +102,8 @@
 
 请求字段说明如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_同意好友申请事件的消息 ID”。 | 
@@ -113,6 +119,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 同意好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 #### 接受方收到事件
 
@@ -143,6 +151,8 @@
 
 请求字段说明如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_同意好友申请事件的消息 ID”。 | 
@@ -158,6 +168,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 同意好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 
 ## 拒绝好友申请
@@ -195,6 +207,8 @@
 
 请求字段说明如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_拒绝好友申请事件的消息 ID”。 | 
@@ -210,6 +224,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 拒绝好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 
 #### 拒绝方收到该事件
@@ -239,6 +255,8 @@
 
 请求字段说明如下表所示：
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为回调请求的唯一标识，格式为 “App Key_拒绝好友申请事件的消息 ID”。 | 
@@ -254,6 +272,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 拒绝好友申请事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 ## 删除好友
 
@@ -286,6 +306,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_删除好友事件的消息 ID”。 | 
@@ -301,6 +323,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。        |
 | `msg_id`    | String   | 删除好友事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 ## 拉黑用户
 
@@ -335,6 +359,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_拉黑用户事件的消息 ID”。 | 
@@ -351,6 +377,8 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 拉黑用户事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
 
 ## 解除拉黑用户
@@ -386,6 +414,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识，格式为 “App Key_解除拉黑用户事件的消息 ID”。 | 
@@ -402,4 +432,6 @@
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 解除拉黑用户事件的消息 ID。 | 
 | `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+</div>
 
