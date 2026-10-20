@@ -18,6 +18,10 @@ SDK 还支持清除本地指定会话的全部消息，以及删除本地指定�
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
+:::warning
+删除前应确认目标账号、会话和消息范围。删除服务端数据后，当前用户不能再通过消息漫游恢复这些数据；不要通过反复重试扩大删除范围。
+:::
+
 ## 单向清空聊天记录
 
 你可以调用 `EMChatManager#asyncDeleteAllMsgsAndConversations` 清空当前用户的全部本地会话及其消息，包括单聊、群聊和聊天室会话。通过 `clearServerData` 参数可以决定是否同时单向清空当前用户在服务端的会话及消息：
