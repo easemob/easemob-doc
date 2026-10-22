@@ -116,7 +116,7 @@ for (EMConversation conversation : conversations) {
 
 ## 监听本地会话列表更新
 
-本地会话发生变化时，SDK 会触发 `EMConversationListener#onConversationUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。
+本地会话发生变化时，SDK 会触发 `EMConversationListener#onConversationUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。本端设置或取消置顶后，也应在操作成功时重新读取列表。
 
 ```java
 EMConversationListener conversationListener =

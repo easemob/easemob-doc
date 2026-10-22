@@ -358,7 +358,7 @@ EMClient.getInstance()
 
 ### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，用户发送消息等行为将恢复。
+你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，该用户发送消息或好友申请等行为将恢复。
 
 ```java
 // 异步方法。

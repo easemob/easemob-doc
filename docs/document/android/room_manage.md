@@ -122,6 +122,17 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ## 退出聊天室
 
+用户退出聊天室时分为两三种情况：主动退出、被聊天室所有者或管理员移出、以及离线后自动退出。
+
+用户退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+
+示例代码如下：
+
+```java
+EMOptions options = new EMOptions();
+options.setDeleteMessagesAsExitChatRoom(false);
+```
+
 ### 主动退出
 
 聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。
@@ -131,15 +142,6 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 ```java
 // 异步方法。
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
-```
-
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
-
-示例代码如下：
-
-```java
-EMOptions options = new EMOptions();
-options.setDeleteMessagesAsExitChatRoom(false);
 ```
 
 与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。

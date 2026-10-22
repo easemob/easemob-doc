@@ -99,7 +99,7 @@ EMClient.getInstance()
 仅群主可以调用 `asyncDestroyGroup` 解散群组。群组解散后，其他成员会收到 `EMGroupChangeListener#onGroupDestroyed` 回调并被移出群组。
 
 :::warning
-解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组，SDK 也会移除内存中该群组对应的会话。执行该操作前，建议在应用侧进行二次确认。
+解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组。
 :::
 
 ```java
@@ -117,6 +117,15 @@ EMClient.getInstance()
             }
         });
 ```
+
+#### 本地消息处理
+
+成员因群组解散而退出群组时，本地群组消息的处理取决于各客户端的 `EMOptions#setDeleteMessagesAsExitGroup(boolean delete)` 配置：
+
+- （默认）`true`：删除本地群组消息。
+- `false`：保留本地群组消息。
+
+该配置用于客户端初始化，应在初始化 SDK 时设置。
 
 ## 加入群组
 
@@ -352,6 +361,12 @@ EMClient.getInstance()
 ```
 
 ## 退出群组
+
+用户退出群组可分为两种情况：主动退出，以及被群主或管理员移出。
+
+退出群组时，用户的本地会话和消息的处理取决于初始化方法 `ChatOptions#setDeleteMessagesAsExitChatRoom(boolean delete)`：
+- （默认值） `true`：删除本地会话及消息。
+- `false`：保留本地会话及消息。
 
 ### 主动退出
 
