@@ -33,13 +33,13 @@
 
 ### 会话列表
 
-会话列表组件 `ChatUlKitConversationListLayout` 按最新消息时间倒序排列，置顶会话始终显示在顶部。列表包含以下类型的会话：
+会话列表组件 `ChatUIKitConversationListLayout` 按最新消息时间倒序排列，置顶会话始终显示在顶部。列表包含以下类型的会话：
 
 - 通过标题栏加号创建的本地会话。
 - 发送消息后自动生成的单聊会话。
 - 群组内发送消息后生成的群聊会话。
 
-**首次加载建议**：在应用首次安装或卸载重装后，建议从服务端拉取历史会话列表，以填充本地数据库。
+**首次加载建议**：会话列表默认只读取本地数据库中的会话。自 v5.0.0 起，单群聊 UIKit 不再在首次进入会话列表时自动从服务端分页拉取会话，会话数据依赖登录后由 SDK 自动同步，可通过 `EMOptions#setDataSyncType` 配置需要同步的数据（如会话、好友、已加入的群组）。在应用首次安装或卸载重装后，若本地数据库为空，建议开发者自行从服务端拉取历史会话列表，以填充本地数据库。
 
 会话条目组件 `UikitItemConversationListBinding` 实现单条会话展示，每个会话条目展示以下信息：
 
@@ -63,7 +63,7 @@
 单群聊 UIKit 提供 `ChatUIKitConversationListFragment`，添加到 Activity 中即可使用。
 
 ```kotlin
-class ConversationListActivity: AppCompactActivity() {
+class ConversationListActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversation_list)

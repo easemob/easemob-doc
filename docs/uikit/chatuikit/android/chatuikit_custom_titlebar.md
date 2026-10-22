@@ -72,7 +72,7 @@ val fragment = ChatUIKitContactsListFragment.Builder()
 ```kotlin
 
 //是否使用默认的标题栏（ChatUIKitTitleBar）：true：是；(默认) false: 否。
-ChatUIKitConversationListFragment.Builder().useTitleBar()
+ChatUIKitConversationListFragment.Builder().useTitleBar(true)
 ```
 
 ## 设置标题栏背景色
@@ -135,7 +135,9 @@ titleBar.setSubtitle(R.string.online_status)
 
 一般情况下，右侧会支持设置多个图标。UIKit 采用设置菜单的方式进行设置。
 
-例如，`ChatUIKitConversationListFragment` 提供 `defaultMenu()` 方法添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的菜单，重写 `defaultMenu()` 方法。   
+注意，`defaultMenu()` 和 `setMenuItemClick(item: MenuItem): Boolean` 不是 `ChatUIKitTitleBar` 的方法，而是 `ChatUIKitConversationListFragment`、`ChatUIKitContactsListFragment` 等 Fragment 的 open 方法，需要自定义 Fragment 继承相应页面的 Fragment 并重写这两个方法才能使用，不能通过 titleBar 对象调用。
+
+例如，自定义会话列表 Fragment 重写 `defaultMenu()` 方法添加默认的 menu 菜单。若默认菜单不满足需求，可以替换为自己的菜单；菜单项的点击事件通过重写 `setMenuItemClick(item: MenuItem): Boolean` 方法处理。
 
 ```kotlin
     // 添加 menu
@@ -155,12 +157,12 @@ titleBar.setSubtitle(R.string.online_status)
         }
     }
 
-    // 支持通过 tint 属性设置 menu icon 颜色
-    setMenuIconTint(@ColorInt colorInt: Int)
-    // 支持设置 menu 文本颜色
-    setMenuTitleColor(@ColorInt colorInt: Int)
-    // 支持设置隐藏/显示指定 menu 项
-    setMenuIconVisible(id:Int,visible:Boolean)
+    // 支持通过 tint 属性设置 menu icon 颜色（ChatUIKitTitleBar 方法）
+    binding?.titleConversations?.setMenuIconTint(colorInt)
+    // 支持设置 menu 文本颜色（ChatUIKitTitleBar 方法）
+    binding?.titleConversations?.setMenuTitleColor(colorInt)
+    // 支持设置隐藏/显示指定 menu 项（ChatUIKitTitleBar 方法）
+    binding?.titleConversations?.setMenuIconVisible(id, visible)
 
 ```
 
@@ -170,9 +172,9 @@ titleBar.setSubtitle(R.string.online_status)
 
 ```kotlin
 //设置是否支持显示返回按钮：true：是；(默认) false: 否。   
-ChatUIKitConversationListFragment.Builder().enableTitleBarPressBack()
+ChatUIKitConversationListFragment.Builder().enableTitleBarPressBack(true)
 //设置点击标题栏返回按钮的监听器。 
-ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener()   
+ChatUIKitConversationListFragment.Builder().setTitleBarBackPressListener { view -> /* 处理返回事件 */ }
 ```
 
 ## 常见问题
@@ -242,6 +244,5 @@ override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return super.onOptionsItemSelected(item)
 }
 ```
-
 
 

@@ -8,9 +8,9 @@
 
 开始前，请确保你的开发环境满足以下条件：
 
-- Android Studio 4.0 或以上
+- Android Studio Ladybug 2024.2.2 或以上
 - Android SDK API 21 或以上
-- JDK 11 或以上
+- JDK 17 或以上
 - 有效的环信即时通讯 IM 开发者账号和 App key，详见 [环信控制台文档](/product/console/app_manage.html#管理应用)。
 
 ## 项目准备
@@ -60,7 +60,7 @@ dependencyResolutionManagement {
 ```kotlin
 dependencies {
     ...
-    implementation("io.hyphenate:ease-chat-kit:4.13.0")
+    implementation("io.hyphenate:ease-chat-kit:5.1.0")
 }
 ```
 若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
@@ -72,9 +72,11 @@ dependencies {
 - 在 Project 工程根目录下的 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
-include(":ease-im-kit")
-project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
+include(":ease-chat-kit")
+project(":ease-chat-kit").projectDir = File("../easemob-uikit-android/ease-im-kit")
 ```
+
+其中 `:ease-chat-kit` 为 UIKit 源码模块 `ease-im-kit` 在你工程中的别名，`../easemob-uikit-android/ease-im-kit` 为 UIKit 源码在本地的相对路径，请根据实际存放位置调整。
 
 - 在 app(module) 目录的 `build.gradle.kts` 文件中添加如下代码：
 
@@ -82,7 +84,7 @@ project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
 dependencies {
     ...
     //chatuikit-android
-    implementation(project(mapOf("path" to ":ease-im-kit")))
+    implementation(project(mapOf("path" to ":ease-chat-kit")))
 }
 ```
 
@@ -155,11 +157,11 @@ android.enableJetifier=true
         android:hint="UserId"/>
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_token"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
-        android:hint="Password"/>
+        android:hint="Token"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -202,38 +204,42 @@ android.enableJetifier=true
 2. 实现登录和退出页面。
 
 :::tip
-若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
+若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。单群聊 UIKit 使用用户 Token 登录，用户 Token 的获取方式参见即时通讯 IM 文档 [用户注册与登录](/document/android/login.html)。
 :::
 
-你需要在环信控制台 [创建用户](/product/console/operation_user.html#创建用户)，登录时传入用户 ID 和密码。
+你需要在环信控制台 [创建用户](/product/console/operation_user.html#创建用户)，登录时传入用户 ID 和用户 Token。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
 
 完整实现示例代码：
 
-打开 `MainActivity` 文件，并替换为如下代码。
+打开 `MainActivity` 文件，并替换为如下代码。注意将代码中的 `presetUsername` 和 `presetToken` 替换为你在环信控制台创建的用户 ID 和用户 Token，它们会作为页面上输入框的默认内容展示，方便你直接点击 **Login** 登录。
 
 ```kotlin
 package com.easemob.quickstart
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.easemob.quickstart.databinding.ActivityMainBinding
+import com.hyphenate.chat.EMOptions.EMDataSyncType
 import com.hyphenate.easeui.ChatUIKitClient
+import com.hyphenate.easeui.common.ChatLoginExtensionInfo
 import com.hyphenate.easeui.common.ChatLog
 import com.hyphenate.easeui.common.ChatOptions
+import com.hyphenate.easeui.common.extensions.showToast
 import com.hyphenate.easeui.feature.chat.enums.ChatUIKitType
 import com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
 import com.hyphenate.easeui.interfaces.ChatUIKitConnectionListener
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.hyphenate.easeui.model.ChatUIKitProfile
+import java.util.EnumSet
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    // 预填的用户 ID 和用户 Token，会作为输入框的默认展示内容。只能使用临时测试凭证，不应该提交源码或用于生产环境
+    private val presetUsername = ""
+    private val presetToken = ""
 
     private val connectListener by lazy {
         object : ChatUIKitConnectionListener() {
@@ -241,7 +247,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDisconnected(errorCode: Int) {}
 
-            override fun onLogout(errorCode: Int, info: String?) {
+            override fun onLogout(errorCode: Int, info: ChatLoginExtensionInfo?) {
                 super.onLogout(errorCode, info)
                 showToast("You have been logged out, please log in again!")
                 ChatLog.e(TAG, "")
@@ -251,6 +257,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        // 将预填的用户 ID 和用户 Token 展示到输入框
+        binding.etUserId.setText(presetUsername)
+        binding.etToken.setText(presetToken)
         initSDK()
         initListener()
     }
@@ -265,10 +274,18 @@ class MainActivity : AppCompatActivity() {
         ChatOptions().apply {
             // 设置你自己的 app key
             this.appKey = appkey
-            // 设置为手动登录
-            this.autoLogin = false
-            // 设置是否需要接收方发送已达回执。默认为 `false`，即不需要。
+            // 设置是否需要接收方发送已送达回执。默认为 `false`，即不需要。
             this.requireDeliveryAck = true
+            // 开启 SDK 用户信息托管：消息携带发送者资料、登录后自动同步用户属性等。UIKit 展示用户昵称和头像依赖该配置。
+            setEnableUserInfo(true)
+            // 设置登录后自动同步的数据类型：会话、联系人和已加入的群组。默认仅同步会话数据。
+            setDataSyncType(
+                EnumSet.of(
+                    EMDataSyncType.CONVERSATIONS,
+                    EMDataSyncType.CONTACTS,
+                    EMDataSyncType.JOINED_GROUPS,
+                )
+            )
         }.let {
             ChatUIKitClient.init(applicationContext, it)
         }
@@ -280,18 +297,19 @@ class MainActivity : AppCompatActivity() {
 
     fun login(view: View) {
         val username = binding.etUserId.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        if (username.isEmpty() || password.isEmpty()) {
-            showToast("Username or password cannot be empty!")
-            ChatLog.e(TAG, "Username or password cannot be empty!")
+        val token = binding.etToken.text.toString().trim()
+        if (username.isEmpty() || token.isEmpty()) {
+            showToast("Username or token cannot be empty!")
+            ChatLog.e(TAG, "Username or token cannot be empty!")
             return
         }
+        // 请从你的应用服务器获取 Token，不要在客户端内置用户密码或 Token。
         if (!ChatUIKitClient.isInited()) {
             showToast("Please init first!")
             ChatLog.e(TAG, "Please init first!")
             return
         }
-        ChatUIKitClient.login(username, password
+        ChatUIKitClient.login(ChatUIKitProfile(username), token
             , onSuccess = {
                 showToast("Login successfully!")
                 ChatLog.e(TAG, "Login successfully!")
@@ -342,12 +360,6 @@ class MainActivity : AppCompatActivity() {
         private const val TAG = "MainActivity"
     }
 }
-
-fun Context.showToast(msg: String) {
-    CoroutineScope(Dispatchers.Main).launch {
-        Toast.makeText(this@showToast, msg, Toast.LENGTH_SHORT).show()
-    }
-}
 ```
 
 3. 点击 `Sync Project with Gradle Files` 同步工程。现在可以测试你的应用了。
@@ -364,7 +376,7 @@ fun Context.showToast(msg: String) {
 
 1. 在 Android Studio 中，点击 `Run ‘app’` 按钮，将应用运行到你的设备或者模拟器上。
 
-2. 输入用户 ID 和密码，点击 `Login` 按钮进行登录，登录成功或者失败有 `Toast` 提示，或者通过 Logcat 查看。
+2. 输入用户 ID 和用户 Token（若已在示例代码的 `presetUsername` 和 `presetToken` 中预填，则无需重复输入），点击 `Login` 按钮进行登录，登录成功或者失败有 `Toast` 提示，或者通过 Logcat 查看。
 
 3. 在另一台设备或者模拟器上登录另一个账号。
 

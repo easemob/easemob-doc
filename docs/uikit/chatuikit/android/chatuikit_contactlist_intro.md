@@ -17,7 +17,7 @@
 示例如下：
 
 ```kotlin
-class ContactListActivity: AppCompactActivity() {
+class ContactListActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
