@@ -25,7 +25,7 @@ Android SDK 的连接生命周期通常包括以下阶段：
 3. 调用 `loginWithToken` 登录 SDK 并建立长连接。
 4. 用户本地数据库打开后触发 `onDatabaseOpened`；该回调仅表示本地数据库可用，不表示在线连接成功。
 5. 成功连接服务器后触发 `onConnected`，SDK 随后按初始化配置同步离线消息和业务数据。
-6. 连接中断后，SDK 根据断开原因自动重连，或通过 `onLogout` 通知应用处理不可恢复的异常登出。
+6. 连接中断后，SDK 根据断开原因自动重连，或通过 `onLogout` 通知应用处理不可恢复的异常登出。Token 过期通过 `EMConnectionListener#onTokenExpired` 通知。
 7. 调用 `logout` 主动登出并关闭当前连接。
 
 ```java
@@ -77,7 +77,7 @@ boolean loggedIn = EMClient.getInstance().isLoggedIn();
 | API | 说明 |
 | :--- | :--- |
 | `isConnected()` | 返回是否已连接到服务器。 |
-| `isLoggedIn()` | 返回当前用户是否已登录 Chat 服务。 |
+| `isLoggedIn()` | 返回当前用户是否已连接到服务器。 |
 
 :::tip
 连接状态与登录状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。业务 UI 应结合监听器回调处理状态变化，不要只依赖一次状态查询。
@@ -88,6 +88,8 @@ boolean loggedIn = EMClient.getInstance().isLoggedIn();
 通过 `EMClient#addConnectionListener` 注册 `EMConnectionListener`。建议在调用 `loginWithToken` 前注册，以免遗漏登录建连和后续同步状态。
 
 ### 回调说明
+
+以下回调均属于 `EMConnectionListener`：
 
 | 回调 | 触发时机 | 说明 |
 | :--- | :--- | :--- |
@@ -181,7 +183,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 登录成功后，如果因网络信号弱、网络切换或其他可恢复原因导致连接中断，SDK 会自动尝试重连，无需应用手动调用登录接口。
 
-连接断开时触发 `onDisconnected`；重连成功后触发 `onConnected`。Android SDK V5 不提供独立的 `onConnecting` 或 `onReconnectFailed` 回调，应用应结合这两个回调、`isConnected()` 以及网络状态展示连接状态。
+连接断开时触发 `onDisconnected`；重连成功后触发 `onConnected`。Android SDK 5.x 不提供独立的 `onConnecting` 或 `onReconnectFailed` 回调，应用应结合这两个回调、`isConnected()` 以及网络状态展示连接状态。
 
 以下情况不会仅靠自动重连恢复，应用需要根据回调错误码处理账号、Token、设备或服务限制：
 

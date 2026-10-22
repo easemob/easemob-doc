@@ -269,7 +269,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
   - 新增 [好友列表自动同步配置功能](/v4/android/user_relationship.html#开启自动同步)。
   - 新增 [好友列表及好友信息同步状态回调](/v4/android/user_relationship.html#监听同步状态和好友信息变更)。
   - 增强好友对象能力：从 [服务器](/v4/android/user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](/v4/android/user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](/v4/android/userprofile.html#订阅非好友用户的属性变更)。
+- 支持 [非好友用户的属性变更订阅功能](/v4/android/userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
 - 新增同步数据 WebSocket 服务地址和端口配置接口。
 
 #### 优化
