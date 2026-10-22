@@ -19,14 +19,6 @@
           <li>
             <a href="/v4/android/quickstart.html">v4.x 持续维护</a>：各端 V4.x 文档仍在正常维护中，现有客户可安心使用。
           </li>
-          <li>
-            <a
-              href="https://docs-im.easemob.com/start/start"
-            >v2</a>
-            /
-            <a href="https://docs-im.easemob.com/ccim/intro">v3</a>
-            已停止维护：旧版本文档已归档，不再更新。
-          </li>
         </ul>
       </div>
       <img src="/hero_chat.png" alt="Documentation icon" class="hero-img" />
