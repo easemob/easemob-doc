@@ -192,6 +192,28 @@ List<EMGroup> joinedGroups =
         EMClient.getInstance().groupManager().getAllGroups();
 ```
 
+## 开启用户信息自动管理
+
+Android SDK 支持通过 `EMOptions#setEnableUserInfo(boolean enableUserInfo)` 配置用户信息自动管理功能。该参数默认为 `false`；设置为 `true` 后，SDK 会在用户登录成功时自动同步当前登录用户的用户属性。其他用户的用户属性会在接收相关消息、主动从服务端获取用户属性等场景下更新。该配置须在初始化 SDK 前设置。
+
+用户信息自动管理与联系人自动同步相互独立。Android v5.x 通过 `EMOptions#setDataSyncType` 配置登录后自动同步的数据类型，其中 `EMOptions.EMDataSyncType.CONTACTS` 表示同步联系人数据。开启用户信息自动管理不会在登录时自动获取所有好友的昵称和头像。用户属性更新事件、本地读取与主动获取方式，详见 [用户信息自动管理](userinfo_provider.html)。
+
+如果两项功能都需要，可在同一次初始化中配置。以下示例同时保留默认的会话数据同步：
+
+```java
+import java.util.EnumSet;
+
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS
+));
+options.setEnableUserInfo(true);
+
+EMClient.getInstance().init(context.getApplicationContext(), options);
+```
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |

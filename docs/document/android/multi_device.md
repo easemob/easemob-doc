@@ -43,6 +43,10 @@ Android SDK 在登录时会为当前设备生成登录资源标识，并将设�
 
 该接口适用于多设备登录场景，用于查询当前账号在其他设备上的登录状态。返回结果中会自动排除当前设备，通常可用于展示已登录设备列表、识别异常登录、进行多端登录提醒，或配合服务端接口对指定设备执行下线等管理操作。
 
+:::tip
+登录成功后才能调用该接口。
+:::
+
 ```java
 // 异步方法。
 EMClient.getInstance().contactManager().asyncGetSelfIdsOnOtherPlatform(new EMValueCallBack<List<String>>() {
@@ -247,7 +251,9 @@ EMClient.getInstance().fetchLoggedInDevicesFromServerWithToken(
 若当前设备因同端设备数量达到上限而被踢下线，SDK 会通过 `EMConnectionListener#onLogout` 回调通知；当前设备在其他设备上的好友、群组、消息话题和会话操作，则通过 `EMMultiDeviceListener` 的对应回调通知。聊天室不产生会话管理类多设备事件，但聊天室消息仍会同步。
 
 :::tip
-多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+1. 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
+
+2. 登录成功后才能接收多设备事件。
 :::
 
 ```java
