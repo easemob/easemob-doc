@@ -132,8 +132,14 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 
 ## 获取 Reaction 详情
 
-调用 `asyncGetReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息，包括 Reaction 内容、当前添加该 Reaction 的用户数量，以及当前添加该 Reaction 的全部用户 ID。
-接口返回 `EMCursorResult<EMMessageReaction>`，其中包含当前页数据和分页游标；当仍有后续数据时，业务侧可使用游标继续查询下一页。
+调用 `EMChatManager#asyncGetReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息。返回的 `EMMessageReaction` 可通过以下方法读取相关信息：
+
+- `getReaction()`：获取 Reaction 内容。
+- `getUserCount()`：获取当前添加该 Reaction 的用户总数。
+- `isAddedBySelf()`：获取当前用户是否已添加该 Reaction，`true` 表示已添加，`false` 表示未添加。
+- `getUserList()`：获取本次分页查询返回的用户 ID 列表。
+
+接口通过 `EMValueCallBack<EMCursorResult<EMMessageReaction>>` 回调返回查询结果，其中包含当前页数据和分页游标。可通过 `getData()` 获取 Reaction 列表，读取其中的第一个 `EMMessageReaction`，并通过 `getCursor()` 获取分页游标。如需获取添加该 Reaction 的全部用户 ID，可使用返回的游标继续查询，直至游标为空。
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
