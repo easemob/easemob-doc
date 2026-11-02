@@ -196,11 +196,6 @@ ChatClient.getInstance().groupManager()?.declineInvitation(groupId, "No, thanks"
 
 邀请被接受后，邀请人会收到 `onInvitationAccepted` 事件；邀请被拒绝后，邀请人会收到 `onInvitationDeclined` 事件。用户成功加入群组后，即可在该群组中收发消息。
 
-// TODO：需要添加吗？
-:::tip
-HarmonyOS V5 底层的邀请接受事件不返回接受理由，因此 `onInvitationAccepted` 的 `reason` 参数固定为空字符串。
-:::
-
 ### 用户申请入群
 
 公开群支持用户主动申请加入，私有群不支持用户主动申请加入。
@@ -240,9 +235,6 @@ ChatClient.getInstance().groupManager()?.applyJoinToGroup(
 
 - 申请被同意后，申请人、群主和管理员（除操作者外）会收到 `onRequestToJoinAccepted` 事件。
 - 申请被拒绝后，申请人、群主和管理员（除操作者外）会收到 `onRequestToJoinDeclined` 事件。
-
-// TODO：需要写这么细吗？
-HarmonyOS V5 在 `onRequestToJoinAccepted` 中使用回调群组对象的群主 ID 填充 `accepter`。`onRequestToJoinDeclined` 的 `groupName` 从本地群组缓存读取；本地不存在该群组时，该参数为空字符串。
 
 ```typescript
 // 群主或群管理员同意入群申请。

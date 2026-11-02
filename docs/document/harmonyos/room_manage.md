@@ -222,10 +222,6 @@ ChatClient.getInstance().chatroomManager()?.fetchPublicChatroomsFromServer(
 
 `ChatroomListener` 提供聊天室成员、角色、禁言、白名单、基本属性和自定义属性等变更事件。通过 `ChatroomManager#addListener` 添加监听器；不再使用时，应调用 `removeListener` 移除同一个监听器对象。
 
-// TODO：这一点需要写明吗？
-
-HarmonyOS SDK 5.0.0 的 `onMemberExited` 回调当前固定将 `roomName` 传为字符串 `"roomname"`，该参数不是真实的聊天室名称。业务应使用 `roomId` 标识聊天室；如需展示真实名称，可保存 `joinChatroom` 或聊天室列表返回的 `Chatroom` 信息。
-
 ```typescript
 let listener: ChatroomListener = {
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
