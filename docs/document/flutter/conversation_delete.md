@@ -6,7 +6,7 @@ Flutter SDK 中，删除好友、退出群组或退出聊天室时，本地会�
 
 | 删除项 | 默认情况 | 保留本地会话和消息的设置 |
 | :--- | :--- | :--- |
-| 删除好友 | 删除该好友对应的本地单聊会话及其中的本地消息。 | 调用 `ChatContactManager#deleteContact`，并将 `keepConversation` 设置为 `true`。 |
+| 删除好友 | 按 Dart API 定义及 Android 行为，默认删除该好友对应的本地单聊会话及其中的本地消息。 | 按 Dart API 定义，将 `keepConversation` 设置为 `true` 可保留；当前 iOS 桥接存在行为差异，详见 [删除好友](user_relationship.html#删除好友)。 |
 | 退出群组 | 保留本地群聊会话并移除其内存缓存；默认删除本地群聊消息。 | 本地群聊会话默认保留。若需保留本地消息，在初始化前将 `ChatOptions.deleteMessagesAsExitGroup` 设置为 `false`。 |
 | 退出聊天室 | 默认删除本地聊天室会话及其中的本地消息。 | 在初始化前将 `ChatOptions.deleteMessagesAsExitChatRoom` 设置为 `false`。 |
 
@@ -173,9 +173,9 @@ if (conversation != null) {
 
 ### 删除好友时处理会话
 
-调用 `ChatContactManager#deleteContact` 删除好友时，`keepConversation` 默认为 `false`，SDK 同时删除与该好友对应的本地单聊会话及其中的本地消息。
+调用 `ChatContactManager#deleteContact` 删除好友时，可通过 `keepConversation` 控制是否保留与该好友对应的本地单聊会话及其中的本地消息。按照 Dart API 定义及 Android 行为，该参数默认为 `false`，表示删除本地会话及消息；设为 `true` 表示保留。
 
-如需在删除好友时保留本地会话及消息，将 `keepConversation` 传入 `true`。
+当前 iOS 桥接存在行为差异，不能将下方示例视为两端删除本地会话的统一保证。详见 [删除好友](user_relationship.html#删除好友) 中的平台差异说明。
 
 ```dart
 try {
@@ -183,7 +183,8 @@ try {
     'contactUserId',
     keepConversation: false,
   );
-  // 已删除好友，以及对应的本地单聊会话和消息。
+  // 已删除好友；按 Dart API 定义及 Android 行为，同时删除本地会话和消息。
+  // 当前 iOS 桥接差异见上方说明。
 } on ChatError catch (e) {
   // 处理删除好友失败。
 }
@@ -199,4 +200,4 @@ try {
 | [`deleteAllMessageAndConversation`](#删除全部会话及消息) | `ChatManager` | 异步清空全部本地会话和消息，并可选择是否同时清空当前用户的服务端数据。 |
 | [`getConversation`](#删除会话中的指定本地消息) | `ChatManager` | 获取指定的本地会话。 |
 | [`deleteMessage`](#删除会话中的指定本地消息) | `ChatConversation` | 删除会话中的指定本地消息。 |
-| [`deleteContact`](#删除好友时处理会话) | `ChatContactManager` | 删除好友，并通过 `keepConversation` 参数设置是否保留对应的本地会话和消息。 |
+| [`deleteContact`](#删除好友时处理会话) | `ChatContactManager` | 删除好友，并通过 `keepConversation` 参数设置是否保留对应的本地会话和消息；当前 iOS 桥接差异见对应章节。 |

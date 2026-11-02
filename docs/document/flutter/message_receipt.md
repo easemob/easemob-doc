@@ -56,7 +56,7 @@ Flutter SDK 使用 `ChatManager#sendMessageReadReceipts` 统一发送单聊和�
 对于群聊消息，应用可以通过以下接口获取已读情况：
 
 - `ChatMessageReadReceipt#readCount` 或 `ChatMessage#groupReadReceiptCount`：获取群消息的已读人数。
-- `ChatManager#getGroupMessageReadReceipts`：批量获取多条群消息的已读回执详情，单次最多传入 20 条属于同一会话的消息。
+- `ChatManager#getGroupMessageReadReceipts`：批量获取多条群消息的已读回执汇总，单次最多传入 20 条属于同一会话的消息。
 - `ChatManager#fetchGroupMessageReadReceipts`：分页获取单条群消息的已读回执成员详情。
 
 :::tip
@@ -199,13 +199,13 @@ ChatClient.getInstance.chatManager.removeEventHandler(handlerId);
 
 ### 批量获取多条群消息的回执汇总
 
-调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
+调用 `getGroupMessageReadReceipts` 从服务器批量获取多条群消息的已读回执汇总。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
 
 ```dart
 try {
   final receipts = await ChatClient.getInstance.chatManager
       .getGroupMessageReadReceipts(messages);
-  // receipts 为各消息的已读回执详情。
+  // receipts 为各消息的已读回执汇总。
 } on ChatError catch (e) {
   debugPrint(
     'getGroupMessageReadReceipts error: ${e.code}, ${e.description}',

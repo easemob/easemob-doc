@@ -142,7 +142,7 @@ final String? currentUser =
     await ChatClient.getInstance.getCurrentUserId();
 ```
 
-也可以读取同步缓存属性 `ChatClient.currentUserId`。该属性只在 SDK 初始化、`loginWithToken` 成功时刷新，在主动调用 `logout` 后清空。** `currentUserId` 为 Dart 侧缓存，不应仅凭其是否为空判断登录状态。请结合登录、退出结果及连接事件维护业务侧登录状态。**
+也可以读取同步缓存属性 `ChatClient.currentUserId`。SDK 初始化、`loginWithToken` 成功以及主动调用 `getCurrentUserId` 获取结果时，都会刷新该缓存；`logout` 成功后清空。**`currentUserId` 为 Dart 侧缓存，不应仅凭其是否为空判断登录状态。请结合登录、退出结果及连接事件维护业务侧登录状态。**
 
 ## 退出登录
 

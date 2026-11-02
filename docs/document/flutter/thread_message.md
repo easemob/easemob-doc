@@ -32,6 +32,8 @@
 
 发送消息话题中的消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send.html)。唯一不同的是，发送消息话题中的消息需要将 `isChatThreadMessage` 标记设置为 `true`。
 
+发送前应按 [发送消息统一流程](message_send.html#发送消息统一流程) 注册消息状态监听。`sendMessage` 返回表示发送任务已提交，最终发送成功或失败通过 `ChatMessageEvent` 的 `onSuccess` 或 `onError` 通知。
+
 示例代码如下：
 
 ```dart
@@ -48,11 +50,11 @@ final ChatMessage message = ChatMessage.createTxtSendMessage(
 message.isChatThreadMessage = true;
 
 try {
-  // 发送消息。方法返回成功发送后的消息对象。
-  final ChatMessage sentMessage =
+  // 提交发送任务。最终发送结果通过 ChatMessageEvent 的 onSuccess / onError 获取。
+  final ChatMessage submittedMessage =
       await ChatClient.getInstance.chatManager.sendMessage(message);
 } on ChatError catch (error) {
-  // 发送失败，可根据错误信息更新消息的显示状态。
+  // 提交发送任务时发生错误，根据错误信息处理。
 }
 ```
 
