@@ -1226,7 +1226,7 @@ projects:
           - text: 多设备管理
             link: /document/server-side/callback_login_logout.html 
           - text: 用户全局禁言
-            link: /document/server-side/user_global_mute_overview.html                                      
+            link: /document/android/multi_device.html                                      
   - title: UIKit
     features:
       - title: 单/群聊

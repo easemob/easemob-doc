@@ -22,12 +22,16 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - **监听服务端数据同步**：通过 `ConnectionListener.onDataSyncStart(type)` 和 `onDataSyncFinish(type, errorCode)` 监听指定类型的数据同步开始和结束。
 - **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 回调成功后，再读取本地数据并刷新界面。
 
+详见 [设置登录后自动同步数据](initialization.html#设置登录后自动同步数据) 和 [登录完成前使用本地数据库](login.html#登录完成前使用本地数据库)。
+
 列表数据来源同步调整，服务端列表拉取接口已移除，改由数据同步写入本地数据库：
 
 - 移除 `ChatManager` 的 `fetchConversationsFromServer` 和 `fetchConversationsFromServerWithFilter`。
 - 移除 `ContactManager` 的 `fetchAllContactsIDFromServer`、`fetchAllContactsFromServer` 和 `fetchAllContactsFromServerByPage`。
 - 移除 `GroupManager` 的 `fetchJoinedGroupsFromServer` 和 `fetchPublicGroupsFromServer`。
 - 移除 `ChatOptions` 的 `setEnableAutoSyncContacts` 和 `isEnableAutoSyncContacts`，以及 `ContactListener` 的联系人同步回调，改由 `ConnectionListener.onDataSyncStart/Finish` 通知同步状态。
+
+列表数据的读取方式详见 [本地会话列表](conversation_list.html#一次性获取本地所有会话)、[本地好友列表](user_relationship.html#从本地读取好友列表) 和 [当前用户加入的群组列表](group_manage.html#获取当前用户加入的群组列表)。
 
 **消息已读回执**
 
@@ -45,16 +49,22 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - 移除旧回执接口：`ChatManager` 的 `ackMessageRead`、`ackGroupMessageRead`、`fetchGroupReadAcks`，旧回调 `onMessageRead`、`onGroupMessageRead`、`onReadAckForGroupMessageUpdated`，以及 `ConversationListener` 的 `onConversationRead`。
 - `ChatMessage.createReceiveMessage(...)` 创建的接收消息默认标记为已读。
 
+详见 [单聊和群聊消息已读回执](message_receipt.html#单聊和群聊消息已读回执)。
+
 **会话未读数管理**
 
 - 清除指定会话或全部会话的本地未读数统一使用 `ChatManager.clearConversationUnreadMessageCount(conversationId)` 和 `clearAllConversationUnreadMessageCount()`。
 - 移除 `Conversation` 的 `markMessageAsRead` 和 `markAllMessagesAsRead`，以及 `ChatManager` 的 `ackConversationRead` 和 `markAllConversationsAsRead`。
 - 清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。多设备事件新增 `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（65）和 `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（66），其他设备清理会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
 
+详见 [会话未读数](conversation_unread.html) 和 [监听多设备上的未读数变化](conversation_unread.html#监听多设备上的未读数变化)。
+
 **会话功能**
 
 - 新增会话展示信息接口：`Conversation.getConversationName()` 和 `Conversation.getConversationAvatar()`，未同步时可返回空字符串，方便列表展示。
 - 支持批量删除会话：`ChatManager.deleteConversations(conversationIds: string | string[], deleteMessages: boolean)`，可按需同时删除会话消息。
+
+详见 [会话对象](conversation_overview.html#会话对象) 和 [批量删除本地会话](conversation_delete.html#批量删除本地会话)。
 
 **群组功能**
 
@@ -65,15 +75,19 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 - 群成员加入、退出事件统一使用 `GroupListener.onMembersJoined` 和 `onMembersExited`，移除单成员回调。
 - `GroupListener.onRequestToJoinDeclined` 的参数顺序调整为 `(groupId, groupName, decliner, reason, applicant)`。
 
+详见 [创建群组](group_manage.html#创建群组)、[修改群组配置](group_attributes.html#修改群组配置) 和 [监听群组事件](group_manage.html#监听群组事件)。
+
 **聊天室监听调整**
 
 - `ChatroomListener.onMutelistAdded` 改为 `(roomId, mutes: Map<string, number>)`，统一表示成员及禁言到期时间，并移除 `onMuteMapAdded`。
 - `ChatroomListener.onRemovedFromChatroom` 改为 `(reason, roomId, roomName, participant)`，新增 `participant` 参数。
 
+详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。
+
 **其他新增功能**
 
 - 新增 SDK 日志监听：`ChatClient.addLogListener` / `removeLogListener`，通过 `ChatLogListener.onLog` 回调日志内容。
-- 新增日志压缩：`ChatClient.compressLogs(): Promise<string>`，返回压缩日志文件的本地路径，无需登录。
+- 新增日志压缩：`ChatClient.compressLogs(): Promise<string>`，返回压缩日志文件的本地路径，无需登录。详见 [日志能力迁移说明](migration_guide.html#日志能力补齐)。
 - `ChatOptions.setNtpServers` 支持传入单个服务器地址或地址数组。
 
 #### 修复

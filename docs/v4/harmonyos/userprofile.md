@@ -275,7 +275,7 @@ manager?.removeListener(userInfoListener);
 - 如果期望从本地缓存读取，请确认已在 SDK 初始化前调用 `ChatOptions#setEnableUserInfo(true)`，并已通过服务端拉取、登录同步、消息或订阅等方式将该用户的信息写入缓存。
 - RESTful API [获取用户详情](/document/server-side/account_detail_obtain_single.html) 和 [删除用户账户](/document/server-side/account_delete_single.html) 返回的 `nickname` 表示推送昵称，即离线推送通知中显示的昵称，与用户属性中的昵称不同。建议两者保持一致；修改用户属性昵称时，也同步更新推送昵称。
 
-例如，HarmonyOS 侧可调用 [updatePushNickname](/document/harmonyos/push/push_display_attribute.html#设置推送昵称) 更新推送昵称。RESTful API 可参考 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
+例如，HarmonyOS 侧可调用 [updatePushNickname](/v4/harmonyos/push/push_display_attribute.html#设置推送昵称) 更新推送昵称。RESTful API 可参考 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
 
 ### 为什么会返回错误码 4？
 
@@ -333,7 +333,7 @@ function sendUserCard(to: string, user: UserInfo): void {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`setEnableUserInfo`](#开启用户信息自动管理功能) | `ChatOptions` | 在 SDK 初始化前开启用户信息、本地缓存和消息发送方信息能力。 |
+| [`setEnableUserInfo`](userinfo_provider.html#开启用户信息自动管理) | `ChatOptions` | 在 SDK 初始化前开启用户信息、本地缓存和消息发送方信息能力。 |
 | [`updateUserInfo(userInfo)`](#设置当前用户的所有属性) | `UserInfoManager` | 设置或更新当前用户的多个属性。 |
 | [`updateUserInfo(userInfoType, value)`](#设置当前用户的单个属性) | `UserInfoManager` | 设置、更新或删除当前用户的单个属性。 |
 | [`fetchUserInfoById(userId)`](#从服务端获取用户的所有属性) | `UserInfoManager` | 从服务端获取一个或多个用户的全部属性。 |
