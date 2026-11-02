@@ -7,7 +7,7 @@ React Native IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要
 1. **版本号与原生 SDK 对齐**
    自 5.0.0 起，React Native SDK 的版本号与底层原生 SDK 保持一致（iOS 5.0.0 和 Android 5.0.0），不再单独维护 `1.x` 版本序列。
 2. **iOS 集成方式变化**
-   iOS 侧推荐使用 Swift Package Manager（SPM）集成（4.x 已可选，5.0.0 起改为推荐/默认），CocoaPods 继续支持。`ChatSdk.podspec` 根据宿主应用环境自动选择集成方式。
+   iOS 侧推荐使用 Swift Package Manager（SPM）集成。启用该路径需要宿主环境提供 `spm_dependency`，并使用 `USE_FRAMEWORKS=dynamic pod install`。其他情况，包括默认 `pod install` 和静态链接，继续通过 CocoaPods 集成原生 SDK。
 3. **数据同步机制调整**
    登录后，SDK 可自动同步会话、好友和已加入的群组数据，并将数据保存到本地数据库，替代原先由应用主动调用服务端拉取接口。
 4. **消息已读回执机制重构**
@@ -23,14 +23,14 @@ React Native IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要
 
 ### 版本号与原生依赖对齐
 
-本指南以 4.x 的最后一个版本 `1.20.0`（原生 SDK 4.24.1）为基线。更早的 4.x 版本（例如 npm 上的 `1.18.0`，对应原生 SDK 4.22.1）同样适用，只需注意其原生依赖版本不同。
+本指南选取 `1.20.0`（原生 SDK 4.24.1）作为主要比较基线。基于原生 SDK 4.x 的 React Native SDK 还包括 `1.21.0`，从该版本升级时，应结合该版本已经提供的功能核对差异。更早的版本（例如 npm 上的 `1.18.0`，对应原生 SDK 4.22.1）同样适用，只需注意其原生依赖版本不同。
 
 | 项目 | 4.x（以 `1.20.0` 为例） | 5.0.0 |
 | :--- | :--- | :--- |
 | React Native SDK 版本号 | `1.x`（如 `1.20.0`） | `5.0.0`，与原生 SDK 同步 |
 | iOS 原生 SDK（`HyphenateChat`） | `~> 4.24.1` | `~> 5.0.0` |
 | Android 原生 SDK（`io.hyphenate:hyphenate-chat`） | `4.24.1` | `5.0.0` |
-| iOS 集成方式 | CocoaPods 为默认，SPM 已可选（`USE_FRAMEWORKS=dynamic`） | SPM 推荐/默认，CocoaPods 继续支持 |
+| iOS 集成方式 | CocoaPods 为默认，SPM 已可选（`USE_FRAMEWORKS=dynamic`） | SPM 为推荐方式，需要满足动态链接等启用条件；默认 `pod install` 继续使用 CocoaPods。 |
 
 ### iOS 集成方式选择
 
@@ -38,7 +38,7 @@ React Native IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要
 
 | 条件 | 集成方式 |
 | :--- | :--- |
-| React Native >= 0.75 且使用 `USE_FRAMEWORKS=dynamic pod install` | Swift Package Manager（**推荐/默认**） |
+| 宿主环境提供 `spm_dependency`（React Native >= 0.75）且使用 `USE_FRAMEWORKS=dynamic pod install` | Swift Package Manager（推荐，满足左侧条件时启用） |
 | 其他情况（React Native < 0.75、静态链接、默认 `pod install`） | CocoaPods（继续支持） |
 
 使用 SPM 集成时执行：
@@ -538,9 +538,9 @@ try {
 
 VoIP 推送使用独立的 PushKit 证书与 PushKit token，与上面的普通推送（APNs / 厂商推送）不是同一套配置：`bindDeviceToken` 只处理普通推送 token，VoIP 推送需要下面这几个 **iOS 专用**入口。
 
-4.x 的 React Native SDK 未暴露 PushKit 能力（`ChatOptions` 与 `ChatClient` 都没有对应入口），5.0.0 新增：
+相对本文选用的 `1.20.0` 基线，5.0.0 提供以下 iOS 推送证书配置及 PushKit Token 管理入口。`1.21.0` 已提供这些入口，从该版本升级时可继续按对应用途使用，不应将其视为 5.0.0 才首次提供的能力。
 
-| 新增 API | 接口说明 |
+| API | 接口说明 |
 | :--- | :--- |
 | `ChatOptions.pushKitCertName` | 控制台配置的 **PushKit 证书名**（不是 APNs 证书名）。与 `apnsCertName` 一样，仅初始化时生效、运行时不可修改。 |
 | `ChatClient#bindPushKitToken({ deviceToken })` | 绑定 PushKit token；`deviceToken` 传 `PKPushRegistry` 回调返回的十六进制 token。内部调用原生异步接口 `registerPushKitToken:completion:`。 |
@@ -628,6 +628,8 @@ async function unbindVoipToken(): Promise<void> {
 | `ChatClient#updatePushConfig(config)` | `ChatClient#bindDeviceToken({ deviceToken, notifierName? })` | 上报设备推送 Token。 | 方法改名并调整参数：原 `deviceId` 在 iOS 上是 APNs 证书名（改用初始化配置 `ChatOptions.apnsCertName`）、在 Android 上是厂商推送凭据（改用 `notifierName`）；原 `deviceToken` 名称不变。详见[推送与设备 Token](#推送与设备-token)。 |
 
 ## 主要新增 API
+
+下表以本文选取的 `1.20.0` 为主要比较基线。其中，APNs / PushKit 证书配置及 PushKit Token 绑定、解绑入口在 `1.21.0` 中已提供，并非 5.0.0 首次新增。
 
 | 所属类 | 新增 API | 接口说明 |
 | :--- | :--- | :--- |
