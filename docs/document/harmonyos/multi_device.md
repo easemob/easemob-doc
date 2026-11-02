@@ -140,7 +140,7 @@ ChatClient.getInstance().init(this.context, options);
 设置后，若当前设备因其他设备登录而被挤下线，`ConnectionListener#onLogout` 回调中的 `LoginExtInfo#deviceExt` 为新登录设备的自定义扩展信息。其他错误码场景下，`deviceExt` 为空字符串。
 
 :::tip
-未初始化 SDK 时，应在调用 `ChatClient#init` 前设置该信息；SDK 已初始化且使用手动登录时，应在下一次调用 `login` 或 `loginWithToken` 前设置。登录成功后，SDK 才会将该设置发送到服务器。
+未初始化 SDK 时，应在调用 `ChatClient#init` 前设置该信息；SDK 已初始化时，应在下一次调用 `loginWithToken` 前设置。登录成功后，SDK 才会将该设置发送到服务器。
 :::
 
 ```typescript

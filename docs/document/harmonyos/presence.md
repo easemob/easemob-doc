@@ -128,8 +128,8 @@ ChatClient.getInstance().presenceManager()?.unsubscribePresences(members)
 为方便管理订阅关系，可调用 `PresenceManager#fetchSubscribedMembers` 分页查询当前用户订阅的用户列表。
 
 ```typescript
-// pageNum：当前页码，从 1 开始。
-// pageSize：每页返回的用户数量。取值范围为 [1,100]，默认值为 1。
+// pageNumber：当前页码，从 1 开始。
+// pageSize：每页期望返回的用户数量。取值范围为 [1,100]
 const pageNumber: number = 1;
 const pageSize: number = 20;
 

@@ -11,7 +11,7 @@
 - 登录统一使用 Token 鉴权，保留 `ChatClient.loginWithToken(userId, token)`。详见 [登录](login.html) 文档。
 - 移除密码登录 `ChatClient.login` 和客户端注册 `ChatClient.createAccount`，账号注册应由业务服务器实现。
 - 移除自动登录：删除 `ChatClient.isAutoLogin`、`ChatOptions.setAutoLogin` 和 `ChatOptions.isAutoLogin`，SDK 初始化后不再读取持久化凭据并自动登录。
-- 主动登录时，即使推送 Token 未变化也会重新上传，上传失败会清除本地 Token。详见 [监听 Push Token 上传结果文档](/document/harmonyos/push/push_harmony.html#步骤四-监听-push-token-上传结果)。
+- 主动登录时，即使推送 Token 未变化也会重新上传，上传失败会清除本地 Token。详见 [监听 Push Token 上传结果文档](/document/harmonyos/push/push_harmony.html#步骤五-监听-push-token-上传结果)。
 
 **数据同步与本地数据访问**
 

@@ -483,7 +483,6 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 1. 合并转发支持嵌套，最多支持 10 层，每层最多包含 300 条消息。
 2. 无论 `ChatOptions#setAutoTransferMessageAttachments` 设置为 `false` 还是 `true`，SDK 都会将合并消息附件上传至环信服务器。
 3. 转发一条已收到的合并消息时，应使用转发单条消息的接口，详见 [转发单条消息](message_forward.html#转发单条消息)。
-4. 合并消息不支持搜索。
 :::
 
 #### 使用建议
