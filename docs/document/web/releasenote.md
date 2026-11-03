@@ -2,23 +2,23 @@
 
 ## v5.1.2 Dev 2026-9-20（开发版）
 
-### 新增特性
+#### 新增特性
 
 - **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过 `onLog` 回调接收经过脱敏处理的结构化 SDK 日志，便于业务侧统一收集和处理。关闭控制台输出不会影响日志回调。请参见 [SDK 日志](log.html#控制台输出和日志回调) 文档。
 - **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/document/web/push/uniapp_push.html) 和 [离线打包集成 FCM](/document/web/push/uniapp_push_fcm.html) 文档。
 - **支持查询聊天室全员禁言状态**：聊天室详情新增 `muteAllMembers` 字段，用于判断聊天室是否已开启全员禁言。请参见 [获取聊天室详情](room_attributes.html#获取聊天室详情) 文档。
 - **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](login.html#登录-1) 文档。
 
-### 优化
+#### 优化
 
 - **优化用户资料批量查询结果**：`getUserInfoByUserId()` 和 `getUserInfoByAttribute()` 现在按照请求中的用户顺序返回完整结果。未查询到资料的用户也会返回 `{ userId }`，方便调用方直接对应请求与返回结果，无需额外补齐或重新排序。
 - **优化退出后的重连行为**：用户被踢下线等正常退出后，Demo 页面会显示对应状态；此后页面恢复或网络恢复等场景不再触发自动重连。
 
-### 修复
+#### 修复
 
 修复合并消息的编码和解码问题。
 
-### 兼容性变更
+#### 兼容性变更
 
 **调整聊天室详情接口的字段**：[聊天室详情接口](room_attributes.html#获取聊天室详情) 不再返回聊天室公告，也不再通过 `currentUserStatus` 返回当前用户是否被单独禁言、是否在白名单中及禁言到期时间：
 - 获取聊天室公告时，请使用 [聊天室公告查询接口](room_attributes.html#获取聊天室公告)。
@@ -45,7 +45,7 @@
 - **支持统一的消息已读回执能力**：可通过 `sendMessageReadReceipts` 批量发送单聊或群聊消息已读回执，发送方通过 `onMessageReadReceipts` 接收回执；群聊还支持通过 `getGroupMessageReadUsers` 查询单条群消息已读成员列表，并通过 `getGroupMessageReadReceipts` 批量查询群消息已读数量。
 - **支持会话列表本地缓存与自动同步**：登录后可通过 `enableSyncData` 配置自动同步会话、好友和已加入群组数据，并通过 `onSyncDataStart`、`onSyncDataFinished` 监听同步状态；会话列表变化通过 `onConversationListUpdate` 通知业务层。
 - **完善会话管理**：支持会话置顶、会话标记、会话删除和会话未读数清零能力，并提供 `clearConversationUnreadMessageCount` 和 `clearAllConversationUnreadMessageCount` 清除指定会话或全部会话未读数。
-- **支持用户属性订阅和用户信息自动管理**：可通过 `subscribeUsersInfo` 订阅用户信息变更；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
+- **支持用户属性订阅和用户信息自动管理**：可通过 `subscribeUsersInfo` 订阅非好友用户的属性变更，使用该订阅功能前需要联系环信商务开通；开启 `enableUserInfoSync` 后，SDK 可在消息收发过程中自动同步用户属性和群成员名片更新时间。
 - **支持消息能力**：包括消息撤回、消息编辑、消息置顶、引用消息、Reaction、历史消息拉取、服务端消息搜索、消息翻译、合并消息解析和流式消息接收。
 - **多场景能力统一**：支持群组、聊天室、消息话题、在线状态和推送通知相关能力，并提供 Group、ChatRoom 和 ChatThread 实体对象风格 API，便于围绕单个实体连续操作。
 - **支持跨平台运行时适配层**：可在 Web、微信小程序、uni-app、React Native 和 Electron 等环境中适配请求、上传、WebSocket 和本地存储等基础能力。
@@ -88,7 +88,7 @@
 
 ## v4.24.3 Dev 2026-9-20（开发版）
 
-### 新增特性
+#### 新增特性
 
 以下群组事件通过 `onGroupEvent` 回调返回的 payload 中新增 `userId` 字段，用于标识事件的目标用户。不同 `operation` 下 `userId` 的含义如下：
 
@@ -123,7 +123,7 @@
   - 优化 [非原图发送场景下的图片处理逻辑](/v4/web/message_send.html#发送图片消息)。
   - 优化 [图片消息的缩略图及附件路径处理逻辑](/v4/web/message_receive.html#接收图片消息)。
 
-## v4.21.0 Dev 2026-4-28（开发版）
+## v4.21.0 2026-4-28
 
 #### 新增特性
 

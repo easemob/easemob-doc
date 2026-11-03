@@ -53,6 +53,20 @@ EMClient.getInstance().addConnectionListener(connectionListener);
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
 
+## 网络超时
+
+自 SDK 4.24.2 起，SDK 对网络请求和连接过程的超时时间进行了以下调整：
+
+| 场景 | 超时时间 |
+| :--- | :--- |
+| TCP/WebSocket 单次连接 | 5 秒调整为 20 秒 |
+| 非附件类 HTTP 请求 | 10 秒调整为 20 秒 |
+| 整体登录过程 | 30 秒调整为 70 秒 |
+| `sendMessage` 内部等待重连 | 20 秒 |
+| 获取 DNS 地址列表 | 20 秒 |
+
+以上为 SDK 内部超时时间。附件上传和下载请求不适用上述非附件类 HTTP 请求的 20 秒超时时间。
+
 ## 自动重连
 
 登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。重连成功或者失败时分别会收到 `onConnected` 和 `onDisconnected` 通知。

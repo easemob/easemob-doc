@@ -47,6 +47,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 参数          | 类型   | 描述                                             |
 | :------------ | :----- | :----------------------------------------------- |
 | `callId` | String| 回调的标识。格式为 {appkey}_{uuid}，其中 UUID 为随机生成，作为每条回调的唯一标识。|
@@ -64,3 +66,5 @@
 | `msg`      | String | 文本消息的内容。该参数仅在 `messageType` 为 `txt` 时存在。|
 | `url`      | String | 音频消息、视频消息、图片消息中附件 URL。该参数仅在 `messageType` 为 `img`、`audio` 或 `video` 时存在。 |
 | `timestamp`      | Long | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。   |
+
+</div>

@@ -18,6 +18,67 @@ import SidebarMenuPage from "./components/SidebarMenuPage.vue";
 import SidebarOverviewPage from "./components/SidebarOverviewPage.vue";
 import FeedBack from "./components/Feedback.vue";
 import { embedChatbot } from "./embed";
+import { onBeforeUnmount, onMounted } from "vue";
+
+const DROPDOWN_SCROLL_SELECTOR = ".platform-select-dropdown, .nav-dropdown";
+
+const findScrollableDropdownContent = (
+  target: Element,
+  dropdown: Element
+): HTMLElement | null => {
+  let element: Element | null = target;
+
+  while (element && dropdown.contains(element)) {
+    if (element instanceof HTMLElement) {
+      const { overflowY } = window.getComputedStyle(element);
+      const canOverflow = /auto|scroll|overlay/.test(overflowY);
+
+      if (canOverflow && element.scrollHeight > element.clientHeight) {
+        return element;
+      }
+    }
+    element = element.parentElement;
+  }
+
+  return null;
+};
+
+const canScrollInWheelDirection = (
+  element: HTMLElement,
+  deltaY: number
+): boolean => {
+  if (deltaY < 0) return element.scrollTop > 0;
+  if (deltaY > 0) {
+    return element.scrollTop + element.clientHeight < element.scrollHeight - 1;
+  }
+  return false;
+};
+
+const installDropdownScrollGuard = (): (() => void) => {
+  const handleWheel = (event: WheelEvent): void => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const dropdown = target.closest(DROPDOWN_SCROLL_SELECTOR);
+    if (!dropdown) return;
+
+    const scrollableContent = findScrollableDropdownContent(target, dropdown);
+    if (
+      scrollableContent &&
+      canScrollInWheelDirection(scrollableContent, event.deltaY)
+    ) {
+      return;
+    }
+
+    // Do not let a wheel gesture at a dropdown boundary scroll the document.
+    // Element Plus poppers follow document scroll, which otherwise looks like
+    // the platform dropdown is jumping.
+    event.preventDefault();
+  };
+
+  document.addEventListener("wheel", handleWheel, { passive: false });
+  return () => document.removeEventListener("wheel", handleWheel);
+};
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
@@ -64,7 +125,16 @@ export default defineClientConfig({
       });
     }
   },
-  setup() {},
+  setup() {
+    let removeDropdownScrollGuard: (() => void) | undefined;
+
+    onMounted(() => {
+      removeDropdownScrollGuard = installDropdownScrollGuard();
+    });
+    onBeforeUnmount(() => {
+      removeDropdownScrollGuard?.();
+    });
+  },
   layouts: {
     WjxLayout,
     InstanceSearchLayout,

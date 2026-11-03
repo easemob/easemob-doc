@@ -49,6 +49,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields callback-request-fields--presence">
+
 | 字段   | 字段是否一定存在 | 类型   | 描述          |
 | :----- | :------- | :---------- | :----------- |
 | `callId`  | 是  | String   | 回调请求的唯一标识，格式为 `App Key_离线消息的消息 ID`。 |
@@ -68,6 +70,8 @@
 | `from`          | 是               | String | 发送方的用户 ID。  |
 | `group_id`      | 否               | String | 群组 ID，消息类型是群聊消息时才出现。 |
 | `payload`       | 是    | Object | 消息负载，携带离线消息负载内容。  |
+
+</div>
 
 ### 常见失败示例
 

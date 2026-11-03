@@ -2,7 +2,7 @@
 
 环信即时通讯 IM SDK 通过 `react-native-push-collection` 获取推送 token。本文介绍如何将推送 token 发送到环信服务器。
 
-## 实现流程
+## 普通推送 Token 实现流程
 
 ### 步骤一 添加即时通讯 SDK 依赖
 
@@ -49,16 +49,18 @@ const pushType = React.useMemo(() => {
 
 
 ```typescript
+const options = ChatOptions.withAppKey({
+  appKey: "<your app key>",
+  // 仅 iOS APNs 推送需要设置；名称应与环信控制台中的证书名称一致。
+  apnsCertName: pushType === "apns" ? pushId : undefined,
+  pushConfig: new ChatPushConfig({
+    deviceId: pushId,
+    deviceToken: undefined,
+  }),
+});
+
 ChatClient.getInstance()
-  .init(
-    new ChatOptions({
-      appKey: "<your app key>",
-      pushConfig: new ChatPushConfig({
-        deviceId: pushId,
-        deviceToken: undefined,
-      }),
-    })
-  )
+  .init(options)
   .then(() => {
     onLog("chat:init:success");
   })
@@ -115,6 +117,64 @@ ChatClient.getInstance()
   });
 ```
 
+## 绑定和解绑 PushKit token
+
+自 React Native SDK 1.21.0 起支持在 iOS 平台绑定和解绑苹果 PushKit token，用于 VoIP 推送。该功能对应的方法属于 `ChatClient`：
+
+- `bindPushKitToken({ deviceToken })`：绑定 `PKPushRegistry` 上报的 PushKit token。
+- `unbindPushKitToken()`：解绑当前用户的 PushKit token。
+
+:::tip
+1. 这两个方法仅在 iOS 平台生效，在 Android 等其他平台调用不会执行任何操作。
+2. 初始化 SDK 时必须设置 `ChatOptions.pushKitCertName`，且证书名称应与环信控制台中的 PushKit 证书名称一致。该配置在 App 运行期间不可修改。
+3. `deviceToken` 必须是 `PKPushRegistry` 上报的 token 转换成的十六进制字符串。
+:::
+
+初始化时配置 PushKit 证书名称：
+
+```typescript
+const options = ChatOptions.withAppKey({
+  appKey: 'your-org#your-app',
+  pushKitCertName: '<your_pushkit_certificate_name>',
+});
+
+await ChatClient.getInstance().init(options);
+```
+
+登录成功并获取 PushKit token 后进行绑定：
+
+```typescript
+try {
+  await ChatClient.getInstance().bindPushKitToken({
+    deviceToken: pushKitToken,
+  });
+  console.log('PushKit token 绑定成功');
+} catch (error) {
+  const chatError = error as ChatError;
+  console.error(
+    `PushKit token 绑定失败：${chatError.code}, ${chatError.description}`
+  );
+}
+```
+
+如果用户尚未登录，原生 SDK 会先缓存该 token，本次调用会抛出 `ChatError`，并在用户下次登录成功后自动绑定。
+
+如需在保持当前用户登录状态的同时解绑 PushKit token，调用：
+
+```typescript
+try {
+  await ChatClient.getInstance().unbindPushKitToken();
+  console.log('PushKit token 解绑成功');
+} catch (error) {
+  const chatError = error as ChatError;
+  console.error(
+    `PushKit token 解绑失败：${chatError.code}, ${chatError.description}`
+  );
+}
+```
+
+调用 `ChatClient.logout(true)` 退出登录时已经会解绑普通推送 token 和 PushKit token，因此无需再单独调用 `unbindPushKitToken`。
+
 ## 运行示例项目
 
 启动项目后，界面如下图所示。
@@ -140,3 +200,13 @@ ChatClient.getInstance()
 **注意：接收离线消息，需要杀死当前登录的应用，否则服务端将按照在线推送消息，不推送离线消息。**
 
 ![img](/images/android/push/push_displayattribute_1.png)
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 返回类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| [`updatePushConfig`](#步骤五-更新服务端的推送-token) | `ChatClient` | `Promise<void>` | 将普通离线推送 token 更新至环信服务器。 |
+| [`bindPushKitToken`](#绑定和解绑-pushkit-token) | `ChatClient` | `Promise<void>` | 在 iOS 平台绑定 PushKit token。 |
+| [`unbindPushKitToken`](#绑定和解绑-pushkit-token) | `ChatClient` | `Promise<void>` | 在 iOS 平台解绑 PushKit token。 |
+| [`apnsCertName`](push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |
+| [`pushKitCertName`](push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS PushKit 证书名称。 |
