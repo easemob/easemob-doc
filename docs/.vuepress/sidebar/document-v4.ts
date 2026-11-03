@@ -165,6 +165,7 @@ const documentSidebar = [
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
+      { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
     ],
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },

@@ -91,6 +91,88 @@ button {
   }
 }
 
+/* HarmonyOS 错误码表：缩窄错误码列，让描述和解决方法平分剩余空间。 */
+.theme-container.harmonyos-error-page .theme-hope-content
+  table:has(> thead > tr > th:nth-child(4):last-child) {
+  th:nth-child(1),
+  td:nth-child(1) {
+    box-sizing: border-box;
+    width: 4.5rem;
+    padding-inline: 8px;
+    white-space: nowrap;
+  }
+
+  th:nth-child(2) {
+    width: 22%;
+  }
+
+  th:nth-child(3),
+  th:nth-child(4) {
+    width: auto;
+  }
+}
+
+/* HarmonyOS 互踢策略表：缩窄登录方式列，将空间留给策略说明。 */
+.theme-container.harmonyos-multi-device-page .theme-hope-content
+  #互踢策略 + p + table {
+  th:first-child,
+  td:first-child {
+    box-sizing: border-box;
+    width: 8rem;
+    padding-inline: 8px;
+    white-space: nowrap;
+  }
+
+  th:nth-child(2) {
+    width: auto;
+  }
+}
+
+/* HarmonyOS 接口列表：缩窄所属模块/类列，其余列分配剩余空间。 */
+.theme-container .theme-hope-content .harmonyos-api-list-table > table {
+  th:nth-child(2) {
+    width: 18%;
+  }
+}
+
+/* HarmonyOS 入门指引：将更多空间留给集成步骤描述。 */
+.theme-container .theme-hope-content .harmonyos-integration-steps-table > table {
+  th:first-child {
+    width: 22%;
+  }
+}
+
+/* HarmonyOS 连接状态：将更多空间留给 API 说明。 */
+.theme-container .theme-hope-content .harmonyos-connection-status-table > table {
+  th:first-child {
+    width: 30%;
+  }
+}
+
+/* HarmonyOS 默认推送模板：缩窄参数和类型列，将剩余空间留给描述。 */
+.theme-container .theme-hope-content .harmonyos-default-push-template-table > table {
+  th:nth-child(1),
+  td:nth-child(1),
+  th:nth-child(2),
+  td:nth-child(2) {
+    box-sizing: border-box;
+    padding-inline: 8px;
+    white-space: nowrap;
+  }
+
+  th:nth-child(1) {
+    width: 6.5rem;
+  }
+
+  th:nth-child(2) {
+    width: 4.5rem;
+  }
+
+  th:nth-child(3) {
+    width: auto;
+  }
+}
+
 /* OPPO 推送证书参数表：压缩类型和是否必需列，将空间留给描述。 */
 .theme-container.oppo-push-page .theme-hope-content
   table:has(> thead > tr > th:nth-child(4):last-child) {

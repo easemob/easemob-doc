@@ -56,7 +56,7 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 
 成功订阅指定用户的在线状态后，SDK 通过 `onSuccess` 回调返回被订阅用户的在线状态。
 
-在线状态变更时，订阅者会收到 `EMPresenceListener#onPresenceUpdated` 回调。
+被订阅用户的在线状态发生变化时，订阅者会收到 `EMPresenceListener#onPresenceUpdated` 回调。
 
 :::tip
 - 订阅时长最长为 30 天，过期需重新订阅。如果未过期的情况下重复订阅，新设置的有效期会覆盖之前的有效期。

@@ -20,7 +20,11 @@
 
 ## 转发单条消息
 
-转发单条消息时，需要创建一条与原消息类型相同的新消息，并调用 `EMMessage#setBody` 设置原消息的消息体。如果还需保留原消息的扩展信息，可以调用 `EMMessage#setAttribute`，将原消息中受支持类型的扩展字段逐一复制到新消息。完成目标会话及会话类型设置后，调用 `EMChatManager#sendMessage` 发送新消息。
+1. 调用 `EMChatManager#getMessage` 获取原消息。如果返回 `null`，应先获取原消息，确认消息及其消息体存在后再继续转发。
+2. 调用 `EMMessage#createSendMessage`，传入原消息的消息类型，创建新的发送消息，再调用 `EMMessage#setBody` 设置原消息的消息体。不要直接复用原消息对象，以免沿用其消息 ID 或发送状态。
+3. 调用 `EMMessage#setTo` 设置目标 ID，并调用 `EMMessage#setChatType` 设置目标会话类型。转发至消息话题时，将目标 ID 设置为话题 ID，会话类型设置为 `EMMessage.ChatType.GroupChat`，并调用 `EMMessage#setIsChatThreadMessage(true)`。
+4. 如需保留业务扩展字段，调用 `EMMessage#setAttribute`，将原消息中受支持类型的扩展字段逐一复制到新消息。只保留适用于目标会话的业务数据。
+5. 调用 `EMMessage#setMessageStatusCallback` 设置发送状态回调，再调用 `EMChatManager#sendMessage` 发送新消息，通过回调观察发送结果。
 
 单条消息可以转发至单聊、群聊、聊天室或消息话题，支持文本、图片、音频、视频、文件、位置、自定义和合并消息等消息类型。
 

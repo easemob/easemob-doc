@@ -23,7 +23,7 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-下表列出初始化时常用的 `EMOptions` 方法。`EMOptions` 的全部方法详见 [API 参考](https://doc.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html)。
+下表列出初始化时常用的 `EMOptions` 方法，请在初始化 SDK 前完成调用。
 
 | 方法名称 | 描述 |
 | :--- | :--- |
@@ -34,10 +34,10 @@ EMClient.getInstance().init(getApplicationContext(), options);
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/>- `false`：保留。 |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | 设置主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `allowChatroomOwnerLeave(boolean allowed)` | 设置是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；离开后所有者仍保留聊天室权限，但不再接收聊天室消息。<br/> - `false`：不允许。 |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。必须在 `init` 前设置。自 SDK v5.1.0 起，默认值为 `CONVERSATIONS`。 |
-| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
-| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
-| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。自 SDK v5.1.0 起，默认值为 `CONVERSATIONS`。 |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
@@ -190,6 +190,28 @@ try {
 
 List<EMGroup> joinedGroups =
         EMClient.getInstance().groupManager().getAllGroups();
+```
+
+## 开启用户信息自动管理
+
+Android SDK 支持通过 `EMOptions#setEnableUserInfo(boolean enableUserInfo)` 配置用户信息自动管理功能。该参数默认为 `false`；设置为 `true` 后，SDK 会在用户登录成功时自动同步当前登录用户的用户属性。其他用户的用户属性会在接收相关消息、主动从服务端获取用户属性等场景下更新。该配置须在初始化 SDK 前设置。
+
+用户信息自动管理与联系人自动同步相互独立。Android v5.x 通过 `EMOptions#setDataSyncType` 配置登录后自动同步的数据类型，其中 `EMOptions.EMDataSyncType.CONTACTS` 表示同步联系人数据。开启用户信息自动管理不会在登录时自动获取所有好友的昵称和头像。用户属性更新事件、本地读取与主动获取方式，详见 [用户信息自动管理](userinfo_provider.html)。
+
+如果两项功能都需要，可在同一次初始化中配置。以下示例同时保留默认的会话数据同步：
+
+```java
+import java.util.EnumSet;
+
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS
+));
+options.setEnableUserInfo(true);
+
+EMClient.getInstance().init(context.getApplicationContext(), options);
 ```
 
 ## 接口列表

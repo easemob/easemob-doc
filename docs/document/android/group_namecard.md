@@ -6,7 +6,7 @@
 
 例如，在企业群组中，成员可将在群组中的名片设置为“部门-姓名”或“岗位-姓名”的格式，便于群内成员快速识别和沟通。
 
-自 **Android SDK 4.20.0 版本开始** 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
+Android SDK 支持群成员名片的设置、本地查询、服务端获取和变更监听。开启 [用户信息自动管理功能](userinfo_provider.html) 后，SDK 还支持通过消息自动同步群成员名片更新。
 
 ## 技术原理
 
@@ -26,7 +26,6 @@
 
 开始接入前，请确保满足以下条件：
 
-- 已将 Android SDK 升级至 v4.20.0 或以上版本。
 - 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见[使用限制](/product/limitation.html)。
 
@@ -37,10 +36,9 @@ SDK 提供 `EMGroupChangeListener`，用于监听群成员名片更新事件。�
 当群成员名片发生变更并同步到本地内存后，SDK 会触发 `EMGroupChangeListener#onUserGroupNamecardUpdated` 事件。该事件适用于以下场景：
 
 - 当前登录用户更新群成员名片后，群内其他 **在线成员** 收到变更通知。
-- 调用服务端接口获取到最新群成员信息并更新本地内存后。
 - 开启 `EMOptions#setEnableUserInfo(true)` 后，接收方因接收消息触发自动同步并更新本地内存后。
 
-- 添加监听：
+添加监听：
 
 ```java
 EMClient.getInstance().groupManager().addGroupChangeListener(new EMGroupChangeListener() {

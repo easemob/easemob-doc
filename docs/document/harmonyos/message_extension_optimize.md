@@ -57,31 +57,38 @@ message.setJsonAttribute(...)
 **旧代码（v1.5.0 及之前）：**
 
 ```typescript
+interface UserInfo {
+  nickname: string;
+  userId: string;
+}
+
 // 方式 1：传入 JSON 字符串
 message.setJsonAttribute("userInfo", '{"nickname":"张三","userId":"123"}');
 
 // 方式 2：需要手动序列化对象
-let userInfo：UserInfo = { nickname: "张三", userId: "123" };
+let userInfo: UserInfo = { nickname: "张三", userId: "123" };
 message.setJsonAttribute("userInfo", JSON.stringify(userInfo));
 ```
 
 **新代码（v1.6.0+，推荐使用 setExt）：**
 
 ```typescript
-// 推荐方式：使用 setExt，传入对象时需要使用类型断言
+interface UserInfo {
+  nickname: string;
+  userId: string;
+}
+
+// 推荐方式：使用 setExt
 let ext = new Map<string, MessageExtType>();
-ext.set("userInfo", { nickname: "张三", userId: "123" } as UserInfo);
+let userInfo: UserInfo = { nickname: "张三", userId: "123" };
+ext.set("userInfo", userInfo);
 ext.set("priority", "high");
 message.setExt(ext);
 
-// 或者先定义变量再使用
-let userInfo: UserInfo = { nickname: "张三", userId: "123" };
-ext.set("userInfo", userInfo);
+// 如需单独设置一个 JSON 属性，也可以使用 setJsonAttribute
+message.setJsonAttribute("userInfo", userInfo);
 
-// 单独设置 JSON 属性（v1.6.0+）：必须使用类型断言
-message.setJsonAttribute("userInfo", { nickname: "张三", userId: "123" } as UserInfo);
-
-// v1.11.0+：setJsonAttribute 只支持对象类型，必须使用类型断言
+// v1.11.0+：setJsonAttribute 只支持对象类型
 message.setJsonAttribute("userInfo", { nickname: "张三", userId: "123" } as UserInfo);
 ```
 
@@ -118,32 +125,39 @@ if (typeof userInfo === 'object') {
 ```typescript
 import { ChatMessage, MessageExtType } from '@easemob/chatsdk';
 
+interface UserInfo {
+  nickname: string;
+  userId: string;
+}
+
 // 创建消息
 let message = ChatMessage.createTextSendMessage("user123", "Hello");
 
-// 设置扩展属性 - 推荐方式
-let ext = new Map<string, MessageExtType>();
+if (message) {
+  // 设置扩展属性 - 推荐方式
+  let ext = new Map<string, MessageExtType>();
 
-ext.set("userInfo", { nickname: "张三", userId: "123" } as UserInfo);
-ext.set("messageType", "order");
-ext.set("priority", 1);
-ext.set("isImportant", true);
-ext.set("description", "这是一条重要消息");
+  ext.set("userInfo", { nickname: "张三", userId: "123" } as UserInfo);
+  ext.set("messageType", "order");
+  ext.set("priority", 1);
+  ext.set("isImportant", true);
+  ext.set("description", "这是一条重要消息");
 
-message.setExt(ext);
+  message.setExt(ext);
 
-// 读取扩展属性
-let messageExt = message.ext();
-let userInfo = messageExt.get("userInfo");
-if (typeof userInfo === 'object') {
-  // 注意：需要将 object 类型转换为具体类型才能访问属性
-  let userInfoObj = userInfo as UserInfo;
-  console.log(`用户：${userInfoObj.nickname}，id：${userInfoObj.userId}`);
-}
+  // 读取扩展属性
+  let messageExt = message.ext();
+  let userInfo = messageExt.get("userInfo");
+  if (typeof userInfo === 'object' && userInfo !== null) {
+    // 注意：需要将 object 类型转换为具体类型才能访问属性
+    let userInfoObj = userInfo as UserInfo;
+    console.log(`用户：${userInfoObj.nickname}，id：${userInfoObj.userId}`);
+  }
 
-let priority = messageExt.get("priority");
-if (typeof priority === 'number') {
-  console.log(`优先级：${priority}`);
+  let priority = messageExt.get("priority");
+  if (typeof priority === 'number') {
+    console.log(`优先级：${priority}`);
+  }
 }
 ```
 
@@ -179,13 +193,13 @@ if (typeof priority === 'number') {
 
 ## 常见问题
 
- **1. 为何不建议使用 `setJsonAttribute`？**
+ **1. 如何选择 `setExt` 和 `setJsonAttribute`？**
 
-`setExt` 方法已经支持对象类型，功能更强大且使用更方便。`setJsonAttribute` 保留是为了向后兼容，但推荐使用 `setExt`。
+`setExt` 已支持对象类型，并且可以一次设置多个扩展属性，因此设置多个扩展属性时推荐使用 `setExt`。如果只需设置一个对象类型的 JSON 扩展属性，也可以使用 `setJsonAttribute`。
 
 **2. v1.11.0+ 中 `setJsonAttribute` 可否传字符串？**
 
-不能。v1.11.0+ 版本中 `setJsonAttribute` 只支持 `object` 类型参数。如果需要设置 JSON 字符串，请使用 `setExt` 方法。
+不能。v1.11.0+ 版本中 `setJsonAttribute` 只支持 `object` 类型参数。如果需要将 JSON 字符串作为普通字符串扩展属性保存，请使用 `setExt`；如果希望 SDK 在读取时自动解析为对象，应直接传入对象。
 
 **3. 如何判断读取到的扩展属性是对象或字符串？**
 

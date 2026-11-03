@@ -73,7 +73,7 @@ func renderConversation(_ conversation: EMConversation) {
 - 群聊消息：根据群组 ID 创建或更新群聊会话。
 - 聊天室消息：根据聊天室 ID 创建或更新聊天室会话。
 
-收到在线消息后，SDK 会更新会话的最近一条消息（`EMConversation#latestMessage`）、列表排序和未读数（`EMConversation#unreadMessagesCount`）等本地状态。
+收到在线消息后，SDK 会更新会话的最近一条消息（`EMConversation#latestMessage`）、列表排序和未读数（`EMConversation#unreadMessagesCount`）等本地状态。命令消息（透传消息）不会保存到 SDK 的本地数据库或内存消息缓存中。发送命令消息时，SDK 也不会为其创建本地会话。该限制不影响命令消息通过 `EMCmdMessageBody` 和命令消息回调正常发送与接收。
 
 ### 通过接口创建本地会话
 

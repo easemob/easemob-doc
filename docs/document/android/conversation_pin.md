@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话置顶用于将重要的单聊、群聊或聊天室会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话。置顶状态会保存到服务端，并同步到当前用户的其他设备和本地会话数据。
+会话置顶用于将重要的单聊、群聊会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话；不支持聊天室会话。置顶状态会保存到服务端，并同步到当前用户的其他设备和本地会话数据。
 
 ## 功能开通
 
@@ -30,7 +30,7 @@ boolean isPinned = true;
 EMClient.getInstance()
         .chatManager()
         .asyncPinConversation(
-                // 单聊传入对端用户 ID，群聊传入群组 ID，聊天室传入聊天室 ID
+                // 单聊传入对端用户 ID，群聊传入群组 ID；聊天室会话不支持置顶。
                 conversationId,
                 // 为 `true` 时置顶，为 `false` 时取消置顶。
                 isPinned,
@@ -53,7 +53,7 @@ EMClient.getInstance()
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `conversationId` | String | 会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `conversationId` | String | 会话 ID。单聊为对端用户 ID，群聊为群组 ID；不支持聊天室会话。 |
 | `isPinned` | Boolean | 是否置顶：`true` 表示置顶，`false` 表示取消置顶。 |
 | `callback` | `EMCallBack` | 操作结果回调。 |
 
@@ -116,7 +116,7 @@ for (EMConversation conversation : conversations) {
 
 ## 监听本地会话列表更新
 
-本地会话发生变化时，SDK 会触发 `EMConversationListener#onConversationUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。
+本地会话发生变化时，SDK 会触发 `EMConversationListener#onConversationUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。本端设置或取消置顶后，也应在操作成功时重新读取列表。
 
 ```java
 EMConversationListener conversationListener =
@@ -218,7 +218,7 @@ sortedConversations.addAll(unpinnedConversations);
 
 ## 注意事项
 
-- 会话置顶支持单聊、群聊和聊天室会话。
+- 会话置顶支持单聊和群聊会话；不支持聊天室会话。
 - `conversationId` 不能为空；调用失败时，应根据回调中的错误码和错误信息处理。
 - 最多可以置顶 50 个会话。
 - 会话置顶状态保存在服务端，并同步到当前用户的其他设备。

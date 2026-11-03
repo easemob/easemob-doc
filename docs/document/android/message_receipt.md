@@ -114,13 +114,13 @@ EMClient.getInstance()
 
 ## 单聊和群聊消息已读回执
 
-单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，但发送方仍需在发送消息前调用 `EMMessage#setIsNeedReadReceipt(true)`。单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
 
-群消息已读回执功能使用前存在以下使用限制：
+群消息已读回执功能存在以下使用限制：
 
 | 使用限制       | 默认设置   | 说明                                                         |
 | :--------- | :----- | :------- | 
-| 功能开通       | 关闭       | 使用前需在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯** > **基础功能** > **消息** 页面开通 **群聊消息已读回执**。|
+| 功能开通       | 关闭       | 使用前需在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯** > **基础功能** > **消息与会话** 页面开通 **群聊消息已读回执**。|
 | 使用权限       | 所有群成员 | 默认情况下，所有群成员发送消息时均可要求已读回执。若只允许群主和群管理员要求已读回执，请联系商务调整配置。 |
 | 已读回执有效期 | 3 天       | 群消息已读回执的有效期为 3 天。消息发送时间超过 3 天后，服务器不再记录阅读该消息的群成员，也不会再发送该消息的已读回执。 |
 | 群规模         | 200 人     | 该功能最多支持 200 人的群组。群成员数量超过 200 后，群消息不会返回已读回执，该上限目前无法提升。 |
@@ -214,7 +214,14 @@ EMClient.getInstance()
 
 ### 批量获取多条群消息的回执汇总
 
-调用 `asyncGetGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一会话。
+调用 `asyncGetGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
+
+该接口通过 `EMValueCallBack<List<EMMessageReadReceipt>>` 回调返回消息已读回执详情列表。每个 `EMMessageReadReceipt` 包含以下信息：
+
+- `getMessageId()`：获取消息 ID。
+- `getConversationId()`：获取会话 ID，群聊场景下为群组 ID。
+- `getReadCount()`：获取群聊消息的已读人数。
+- `isPeerReceipt()`：获取单聊消息接收方是否已发送已读回执。`true` 表示已发送，`false` 表示未发送。该信息用于单聊场景，群聊场景应读取 `getReadCount()`。
 
 ```java
 // 异步方法。
@@ -237,7 +244,7 @@ EMClient.getInstance()
 
 ### 获取单条群消息的回执成员详情
 
-调用 `asyncFetchGroupMessageReadReceipts` 分页获取单条群消息的已读回执详情。目标消息必须是需要已读回执的群聊消息；`pageSize` 的取值范围为 `[1, 50]`。
+调用 `asyncFetchGroupMessageReadReceipts` 分页获取单条群消息的已读回执成员详情。目标消息必须是需要已读回执的群聊消息；`pageSize` 的取值范围为 `[1, 50]`。
 
 首次调用时将 `startAckId` 传入 `null` 或空字符串。后续调用时，将上一次结果中的 `cursor` 作为新的 `startAckId`。
 
@@ -295,7 +302,7 @@ EMClient.getInstance()
 
 发送消息已读回执和清零会话未读数是两个独立操作：
 
-| 操作 | 作用 | 是否通知消息发送方 | 是否改变会话未读数 |
+| 操作 | 作用 | 是否通知原消息发送方 | 是否改变会话未读数 |
 | :--- | :--- | :--- | :--- |
 | `asyncSendMessageReadReceipts` | 为指定消息发送已读回执。 | 是 | 否 |
 | `asyncClearConversationUnreadMessageCount` | 清除指定会话的本地未读数，并同步当前账号的其他设备。 | 否 | 是 |

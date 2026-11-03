@@ -15,24 +15,20 @@ SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
+## 从服务器获取指定会话的消息
 
-### 从服务器获取指定会话的消息
-
-你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。分页查询时，若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。
+你可以调用 `asyncFetchHistoryMessages` 方法基于 `EMFetchMessageOption` 类从服务端分页拉取单聊和群组聊天的历史消息。为确保数据可靠，我们建议你每次获取 20 条消息，最大不超过 50。
 
 参数说明如下：
 
 | 参数名 | 类型 | 描述 |
 | :--- | :--- | :--- |
-| `conversationId` | `String` | 会话 ID。单聊传对端用户 ID，群聊传群组 ID。 |
-| `type` | `EMConversation.EMConversationType` | 会话类型。单聊传 `Chat`，群聊传 `GroupChat`。 |
-| `pageSize` | `int` | 每页拉取的消息数。建议为 20，最大不超过 50。 |
+| `conversationId` | `String` | 会话 ID。单聊传对端用户 ID，群聊传群组 ID，聊天室传聊天室 ID。 |
+| `type` | `EMConversation.EMConversationType` | 会话类型。单聊传 `Chat`，群聊传 `GroupChat`，聊天室传 `ChatRoom`。 |
+| `pageSize` | `int` | 每页拉取的消息数。建议为 20，最大不超过 50。若满足查询条件的消息总数大于 `pageSize` 的数量，则返回 `pageSize` 数量的消息，若小于 `pageSize` 的数量，返回实际条数。消息查询完毕时，返回的消息条数小于 `pageSize` 的数量。 |
 | `cursor` | `String` | 分页游标。首次拉取传空字符串，后续传入上一次回调中 `EMCursorResult#getCursor()` 返回的游标。 |
 | `option` | `EMFetchMessageOption` | 拉取选项，可设置以下条件：<br/> - 消息发送方；<br/> - 消息类型；<br/> - 消息时间段；<br/> - 消息搜索方向；<br/> - 是否将拉取的消息保存到数据库；<br/> - 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。 |
 | `callBack` | `EMValueCallBack<EMCursorResult<EMMessage>>` | 拉取结果回调。成功时通过 `EMCursorResult` 获取消息列表和下一页游标。 |
-
-若你在初始化时打开了 `EMOptions#setRegardImportedMsgAsRead` 开关，调用该接口获取的 [通过服务端接口](/document/server-side/message_import_single.html)导入的消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
 
 :::tip
 1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
@@ -83,8 +79,7 @@ int pageSize,String cursor,
 }
 ```
 
-
-### 从服务器获取指定群成员发送的消息
+## 从服务器获取指定群成员发送的消息
 
 对于单个群组会话，你可以从服务器获取指定成员（而非全部成员）发送的消息。
 
@@ -94,7 +89,7 @@ int pageSize,String cursor,
 | :--- | :--- | :--- |
 | `conversationId` | `String` | 群组 ID。 |
 | `type` | `EMConversation.EMConversationType` | 会话类型。获取群聊消息时传 `GroupChat`。 |
-| `pageSize` | `int` | 每页拉取的消息数。建议为 20，最大不超过 50。 |
+| `pageSize` | `Number` | 每页拉取的消息数。建议为 20，最大不超过 50。 |
 | `cursor` | `String` | 分页游标。首次拉取传空字符串，后续传入上一次回调返回的游标。 |
 | `option` | `EMFetchMessageOption` | 拉取选项。通过 `setFromIds(List<String>)` 设置要查询的群成员 ID，最多可设置 10 个。 |
 | `callBack` | `EMValueCallBack<EMCursorResult<EMMessage>>` | 拉取结果回调。 |
@@ -147,7 +142,7 @@ int pageSize,String cursor,
 
 ```
 
-### 根据关键字获取本地会话中的消息
+## 根据关键字获取本地会话中的消息
 
 你可通过设置关键词获取本地数据库中会话的某些消息。SDK 返回会话 ID 及消息 ID 列表的映射关系，消息 ID 根据你设置的 `direction` 参数按照消息时间戳的正序或倒序列明。
 
@@ -178,7 +173,7 @@ EMClient.getInstance().chatManager().asyncLoadConversationMessagesWithKeyword(ke
 
 ```
 
-### 根据消息 ID 获取本地消息
+## 根据消息 ID 获取本地消息
 
 你可以传入单个或多个消息 ID 获取单个本地会话中的消息。
 
@@ -205,7 +200,7 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
     });
 ```
 
-### 从本地获取指定群成员发送的消息
+## 从本地获取指定群成员发送的消息
 
 对于单个群组会话，你可以从本地获取指定成员（而非全部成员）发送的消息。
 
@@ -214,8 +209,8 @@ EMClient.getInstance().chatManager().asyncLoadMessages(messageIds, conversationI
 | 参数名 | 类型 | 描述 |
 | :--- | :--- | :--- |
 | `keywords` | `String` | 要搜索的关键词。 |
-| `timeStamp` | `long` | 搜索起始时间戳，单位为毫秒。传负数表示从当前时间开始搜索。 |
-| `maxCount` | `int` | 每次最多返回的消息数，取值范围为 `[1,400]`。 |
+| `timeStamp` | `number` | 搜索起始时间戳，单位为毫秒。传负数表示从当前时间开始搜索。 |
+| `maxCount` | `number` | 每次最多返回的消息数，取值范围为 `[1,400]`。 |
 | `senders` | `List<String>` | 要筛选的发送方用户 ID 列表，最多 10 个；传 `null` 或空列表表示不限制发送方。 |
 | `direction` | `EMConversation.EMSearchDirection` | 搜索方向：`UP` 为按消息时间戳逆序搜索，`DOWN` 为正序搜索。 |
 | `searchScope` | `EMConversation.EMMessageSearchScope` | 搜索范围，例如 `CONTENT` 表示搜索消息内容。 |
@@ -258,7 +253,7 @@ if (conversation != null) {
 }
 ```
 
-### 从本地读取指定会话的消息
+## 从本地读取指定会话的消息
 
 你可以调用 `getAllMessages` 方法获取指定会话在内存中的所有消息。如果内存中为空，SDK 再从本地数据库中加载最近一条消息。
 
@@ -270,7 +265,7 @@ if (conversation != null) {
 | :--- | :--- | :--- |
 | `username` | `String` | 会话 ID。单聊传对端用户 ID，群聊传群组 ID，聊天室传聊天室 ID。 |
 | `startMsgId` | `String` | 分页查询的起始消息 ID。传 `null` 或空字符串时，从最新消息开始加载。 |
-| `pageSize` | `int` | 每页加载的消息数，取值范围为 `[1,400]`。 |
+| `pageSize` | `number` | 每页加载的消息数，取值范围为 `[1,400]`。 |
 
 ```java
 EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
@@ -331,9 +326,9 @@ List<EMMessage> emMessages = conversation.searchMsgFromDB(EMMessage.Type.TXT, Sy
 | 参数名 | 类型 | 描述 |
 | :--- | :--- | :--- |
 | `conversationId` | `String` | 要搜索的会话 ID。 |
-| `startTimeStamp` | `long` | 搜索起始时间戳，单位为毫秒。 |
-| `endTimeStamp` | `long` | 搜索结束时间戳，单位为毫秒。 |
-| `maxCount` | `int` | 每次获取的消息数，取值范围为 `[1,400]`。 |
+| `startTimeStamp` | `number` | 搜索起始时间戳，单位为毫秒。 |
+| `endTimeStamp` | `number` | 搜索结束时间戳，单位为毫秒。 |
+| `maxCount` | `number` | 每次获取的消息数，取值范围为 `[1,400]`。 |
 
 ```java
 //conversationId：会话 ID

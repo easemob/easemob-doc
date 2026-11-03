@@ -229,7 +229,7 @@ void readSenderGroupNamecard(ChatMessage message) {
 - 群成员名片是用户在特定群组中的显示信息，不同群组之间互不影响。
 - `ChatGroupManager.updateGroupNamecard` 只能设置、更新或移除当前登录用户自己的群成员名片。
 - `ChatGroupManager.getGroupNamecard` 只查询原生 SDK 的本地内存，不会主动从服务端获取最新数据。
-- `ChatGroupManager.fetchGroupMembersInfo` 返回的数据会更新原生 SDK 的本地内存。只有开启用户信息自动管理后，返回信息才会包含可用的群名片、昵称和头像数据。
+- `ChatGroupManager.fetchGroupMembersInfo` 返回的数据会更新原生 SDK 的本地内存。
 - `ChatGroupEventHandler.onUserGroupNamecardChanged` 的 `namecard` 参数类型为 `String?`；群成员名片被移除时可能为 `null`。
 - 群成员名片变更通知只投递给在线用户。离线期间未收到通知时，应在需要最新数据的场景主动调用 `fetchGroupMembersInfo`。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化前配置 `enableUserInfo: true`。

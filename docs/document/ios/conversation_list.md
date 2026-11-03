@@ -21,17 +21,6 @@
 
 应用应按照登录后自动同步、监听同步完成和读取本地会话列表的流程获取最新会话数据。
 
-### 会话相关选项
-
-初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
-
-| 选项 | 描述 |
-| :--- | :--- |
-| `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 读取 `EMOptions#enableChatroomConversation` 属性可以查询当前配置。 |
-| `deleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。 |
-| `loadEmptyConversations` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
-| `autoLoadConversations` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
-
 ### 登录后自动同步会话列表
 
 `EMOptions#dataSyncType` 的默认值为 `.conversations`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。
@@ -88,6 +77,17 @@ EMClient.shared().removeDelegate(syncListener)
 ```
 
 `syncDataFinished(_:type:)` 在同步成功、失败、超时或断连结束时均会触发。只有 `error == nil` 时，才表示本次同步成功。
+
+### 会话相关选项
+
+初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
+
+| 选项 | 描述 |
+| :--- | :--- |
+| `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 读取 `EMOptions#enableChatroomConversation` 属性可以查询当前配置。 |
+| `deleteMessagesOnLeaveChatroom` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除本地消息。<br/> - `false`：保留本地消息。 |
+| `loadEmptyConversations` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
+| `autoLoadConversations` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 ### 分页获取本地会话
 

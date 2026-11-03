@@ -8,6 +8,8 @@ Android SDK 通过 `EMMessage#setAttribute` 设置消息扩展字段，支持 `B
 
 ## 示例代码
 
+以下示例创建并发送携带扩展字段的文本消息，同时演示接收后读取字段。执行前应已完成 SDK 初始化和登录。
+
 ```java
 EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 增加自定义属性。

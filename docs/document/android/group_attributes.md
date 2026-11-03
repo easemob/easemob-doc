@@ -16,10 +16,12 @@
 
 调用 `EMGroupManager#getGroup` 可以根据群组 ID 从本地内存获取群组详情，该接口不会发起网络请求。调用 `asyncGetGroupFromServer` 可以从服务器获取最新群组详情，并更新本地缓存。
 
-`asyncGetGroupFromServer` 不返回群成员列表。如果需要群成员列表，需调用 `asyncFetchGroupMembersInfo` 或 `asyncFetchGroupMembers`，详见 [获取群成员列表](group_members.html#获取群成员列表)。
+若要在登录后从本地读取最新的已加入群组数据，需在 SDK 初始化时启用已加入群组数据同步，并等待同步完成，详见 [获取当前用户加入的群组列表](group_manage.html#获取当前用户加入的群组列表)。
+
+`fetchGroupFromServer` 不返回群成员列表。如果需要群成员列表，需调用 `fetchGroupMemberDetails` 或 `fetchGroupMembers`，详见 [获取群成员列表](group_members.html#获取群成员列表)。
 
 :::tip
-对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
+对于公开群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
 
 ```java
@@ -297,7 +299,7 @@ EMClient.getInstance()
 
 ## 管理共享文件
 
-群成员可以下载、获取和删除群共享文件。普通成员只能删除自己上传的文件，群主和群管理员可以删除群组中的任意共享文件。
+群成员可以上传、下载、获取和删除群共享文件。普通成员只能删除自己上传的文件，群主和群管理员可以删除群组中的任意共享文件。
 
 ### 上传共享文件
 
