@@ -1,6 +1,6 @@
 # React-Native IM SDK 更新日志
 
-## v5.0.0 Dev 2026-10-16
+## v5.0.0 Dev 2026-10-14
 
 本次为大版本升级，包含不兼容变更。自本版本起，React Native SDK 版本号与依赖的原生 SDK 版本号保持同步，iOS 和 Android 原生 SDK 均升级至 5.0.0。
 

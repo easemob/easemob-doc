@@ -1,6 +1,6 @@
 # Flutter IM SDK 更新日志
 
-## 5.0.0 Dev 2026-10-16
+## 5.0.0 Dev 2026-10-14
 
 将 iOS/Android 原生 SDK 依赖升级至 5.0.0。
 
