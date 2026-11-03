@@ -115,7 +115,7 @@ ChatClient.getInstance().groupManager()?.destroyGroup(groupId)
 
 邀请流程如下：
 
-![](/images/harmonyos/goup_member_invite.png)
+![](/images/android/goup_member_invite.png)
 
 ```typescript
 let userIds: string[] = ["user1", "user2"];
@@ -200,7 +200,7 @@ ChatClient.getInstance().groupManager()?.declineInvitation(groupId, "No, thanks"
 
 公开群支持用户主动申请加入，私有群不支持用户主动申请加入。
 
-![](/images/harmonyos/group_member_apply.png)
+![](/images/android/group_member_apply.png)
 
 具体调用方式由 `joinApprovalRequired` 决定：
 
@@ -544,6 +544,8 @@ ChatClient.getInstance().groupManager()?.removeListener(groupListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createGroup`](#创建群组) | `GroupManager` | 创建群组。 |
@@ -563,3 +565,5 @@ ChatClient.getInstance().groupManager()?.removeListener(groupListener);
 | [`isMsgBlocked`](#检查当前用户是否已屏蔽群消息) | `Group` | 判断当前用户是否已屏蔽指定群组消息。 |
 | [`blockGroupMessage`](#屏蔽群消息) / [`unblockGroupMessage`](#解除屏蔽群消息) | `GroupManager` | 屏蔽或解除屏蔽群消息。 |
 | [`addListener`](#监听群组事件) / [`removeListener`](#监听群组事件) | `GroupManager` | 添加或移除群组事件监听器。 |
+
+</div>

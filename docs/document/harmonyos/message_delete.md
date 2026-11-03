@@ -149,6 +149,8 @@ if (conversation) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`deleteAllConversationsAndMessages`](#单向清空聊天记录) | `ChatManager` | 清空本地所有会话及消息，并按参数决定是否同时单向清空服务端数据。 |
@@ -157,3 +159,5 @@ if (conversation) {
 | [`clearAllMessages`](#删除本地指定会话的所有消息) | `Conversation` | 清除指定会话在本地数据库中的全部消息。 |
 | [`searchMessagesBetweenTime`](#删除本地会话指定时间段的消息) | `Conversation` | 查询指定时间段内的本地会话消息。 |
 | [`removeMessage`](#删除本地会话的指定消息) | `Conversation` | 根据消息对象或消息 ID 删除本地消息。 |
+
+</div>

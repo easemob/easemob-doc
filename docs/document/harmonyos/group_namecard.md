@@ -20,7 +20,7 @@ HarmonyOS SDK 提供群成员名片管理功能，支持群成员名片的设置
 
 内存更新流程如下图所示：
 
-![img](/images/harmonyos/memory_update_groupcard.png)
+![img](/images/android/memory_update_groupcard.png)
 
 ## 前提条件
 
@@ -210,6 +210,8 @@ if (senderInfo) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`updateGroupNamecard`](#设置群成员名片) | `GroupManager` | 设置、更新或清除当前用户在指定群组中的群成员名片。 |
@@ -218,3 +220,5 @@ if (senderInfo) {
 | [`onUserGroupNamecardUpdated`](#监听群成员名片更新) | `GroupListener` | 监听群成员名片更新事件。 |
 | [`setEnableUserInfo`](#通过消息自动同步群成员名片) | `ChatOptions` | 开启用户信息和消息发送方信息能力。 |
 | [`getSenderInfo`](#通过消息自动同步群成员名片) | `ChatMessage` | 获取消息发送方信息，包括群成员名片。 |
+
+</div>

@@ -457,6 +457,8 @@ ChatClient.getInstance().groupManager()?.unmuteAllMembers(groupId)
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`fetchGroupMemberDetails`](#分页获取群成员信息) | `GroupManager` | 分页获取包含角色、入群时间和资料的群成员信息。 |
@@ -476,3 +478,5 @@ ChatClient.getInstance().groupManager()?.unmuteAllMembers(groupId)
 | [`muteGroupMembers`](#禁言指定成员) / [`unmuteGroupMembers`](#解除指定成员禁言) | `GroupManager` | 禁言或解除禁言指定成员。 |
 | [`checkIfInGroupMutelist`](#查询当前用户是否被禁言) / [`fetchGroupMutelist`](#获取禁言列表) | `GroupManager` | 查询当前用户是否被禁言或分页获取禁言列表。 |
 | [`muteAllMembers`](#开启全员禁言) / [`unmuteAllMembers`](#关闭全员禁言) | `GroupManager` | 开启或关闭全员禁言。 |
+
+</div>

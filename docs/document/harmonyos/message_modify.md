@@ -140,6 +140,8 @@ chatManager?.removeMessageListener(messageListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`modifyMessage`](#编辑消息) | `ChatManager` | 编辑服务端及本地消息的消息体或扩展字段。 |
@@ -147,3 +149,5 @@ chatManager?.removeMessageListener(messageListener);
 | [`operatorId`](#编辑消息) | `ChatMessageBody` | 获取最后一次编辑消息的用户 ID。 |
 | [`operationTime`](#编辑消息) | `ChatMessageBody` | 获取最后一次编辑消息的时间戳。 |
 | [`ext`](#编辑消息) | `ChatMessage` | 获取编辑后的消息扩展字段。 |
+
+</div>

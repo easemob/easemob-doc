@@ -1,3 +1,7 @@
+---
+containerClass: harmonyos-error-page
+---
+
 # 错误码
 
 本文介绍环信即时通讯 HarmonyOS SDK 中接口调用或事件返回的错误码。开发者可以根据错误码判断失败原因，并参考对应的解决方法进行处理。
@@ -181,7 +185,7 @@ ChatClient.getInstance().loginWithToken(userId, token)
 | 1200 | `MODERATION_FAILED` | 第三方内容审核服务的消息审核结果为“拒绝”。 | 在 [环信控制台](https://console.easemob.com/user/login) 查看内容审核配置和记录。 |
 | 1299 | `THIRD_SERVER_FAILED` | 除第三方内容审核之外的其他审核服务的消息审核结果为“拒绝”。 | 在 [环信控制台](https://console.easemob.com/user/login) 查看内容审核配置和记录。 |
 
-## 消息表情回复（Reaction）
+## 消息表情回复
 
 | 错误码 | 错误信息 | 描述和可能原因 | 解决方法 |
 | :--- | :--- | :--- | :--- |

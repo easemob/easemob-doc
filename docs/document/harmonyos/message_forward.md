@@ -78,6 +78,8 @@ function forwardMessage(messageId: string, to: string, chatType: ChatType): void
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`getMessage`](#转发单条消息) | `ChatManager` | 根据消息 ID 获取本地消息；未找到时返回 `undefined`。 |
@@ -87,3 +89,5 @@ function forwardMessage(messageId: string, to: string, chatType: ChatType): void
 | [`setExt`](#转发单条消息) | `ChatMessage` | 设置新消息的扩展字段。 |
 | [`sendMessage`](#转发单条消息) | `ChatManager` | 发送转发消息。 |
 | [`downloadAndParseCombineMessage`](#注意事项) | `ChatManager` | 下载并解析合并消息附件。 |
+
+</div>

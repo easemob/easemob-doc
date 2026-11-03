@@ -200,6 +200,8 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`addConversationMark`](#添加会话标记) | `ChatManager` | 为一个或多个会话添加指定标记。 |
@@ -212,3 +214,5 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
 | [`marks`](#按标记筛选会话列表) | `Conversation` | 获取会话的全部标记。 |
 | [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |
 | [`addMultiDevicesListener`](#监听会话列表更新) / [`removeMultiDevicesListener`](#监听会话列表更新) | `ChatClient` | 添加或移除多设备监听器。 |
+
+</div>

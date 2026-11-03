@@ -386,6 +386,8 @@ if (pushManager && conversations.length > 0) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`syncConversationsSilentModeFromServer`](#获取所有会话的推送通知方式设置) | `PushManager` | 从服务器同步所有会话的推送通知方式并保存到本地数据库。 |
@@ -395,3 +397,5 @@ if (pushManager && conversations.length > 0) {
 | [`getSilentModeForAll`](#获取全局推送接收规则) | `PushManager` | 获取 App 全局推送接收规则。 |
 | [`getSilentModeForConversations`](#批量获取会话的推送接收规则) | `PushManager` | 批量获取单聊和群聊会话的推送接收规则。 |
 | [`clearRemindTypeForConversation`](#清除指定会话的推送通知方式设置) | `PushManager` | 清除指定会话的推送通知方式，使其继承 App 全局设置。 |
+
+</div>

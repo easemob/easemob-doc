@@ -294,6 +294,8 @@ chatManager.fetchGroupMessageReadReceipts(messageId, 20, startReceiptId)
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setRequireDeliveryAck`](#步骤-1-开启送达回执) | `ChatOptions` | 设置是否需要单聊消息送达回执。 |
@@ -310,3 +312,5 @@ chatManager.fetchGroupMessageReadReceipts(messageId, 20, startReceiptId)
 | [`readReceiptCount`](#查看消息送达和已读状态) / [`isRead`](#查看消息送达和已读状态) / [`isNeedReadReceipt`](#查看消息送达和已读状态) | `ChatMessage` | 查询消息的已读人数、本地已读状态和是否需要已读回执。 |
 | [`clearConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `ChatManager` | 清除指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#消息已读回执与会话未读数清零) | `ChatManager` | 清除所有本地会话的未读消息数。 |
+
+</div>

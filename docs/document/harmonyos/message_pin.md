@@ -151,6 +151,8 @@ chatManager?.removeMessageListener(messageListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`pinMessage`](#置顶消息) | `ChatManager` | 置顶指定消息。 |
@@ -160,3 +162,5 @@ chatManager?.removeMessageListener(messageListener);
 | [`getPinnedInfo`](#获取单条消息的置顶详情) | `ChatMessage` | 获取单条消息的置顶详情；未置顶时返回 `undefined`。 |
 | [`pinTime`](#获取单条消息的置顶详情) | `ChatMessagePinInfo` | 获取最近一次置顶操作的时间。 |
 | [`operatorId`](#获取单条消息的置顶详情) | `ChatMessagePinInfo` | 获取最近一次置顶操作的操作者用户 ID。 |
+
+</div>

@@ -143,6 +143,8 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(messageListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送消息) | `ChatMessage` | 创建待发送的文本消息。 |
@@ -151,3 +153,5 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(messageListener);
 | [`sendMessage`](#发送消息) | `ChatManager` | 发送群组消息。 |
 | [`getCurrentUser`](#接收消息) | `ChatClient` | 获取当前登录用户的用户 ID。 |
 | [`addMessageListener`](#接收消息) / [`removeMessageListener`](#接收消息) | `ChatManager` | 注册或移除消息监听器。 |
+
+</div>

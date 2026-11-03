@@ -333,6 +333,8 @@ function sendUserCard(to: string, user: UserInfo): void {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setEnableUserInfo`](userinfo_provider.html#开启用户信息自动管理) | `ChatOptions` | 在 SDK 初始化前开启用户信息、本地缓存和消息发送方信息能力。 |
@@ -347,3 +349,5 @@ function sendUserCard(to: string, user: UserInfo): void {
 | [`fetchSubscribedUsers`](#获取已被订阅用户属性变更事件的用户列表) | `UserInfoManager` | 获取已订阅属性变更事件的非好友用户列表。 |
 | [`addListener`](#监听用户属性变更) | `UserInfoManager` | 添加 `UserInfoListener`。 |
 | [`removeListener`](#监听用户属性变更) | `UserInfoManager` | 移除 `UserInfoListener`。 |
+
+</div>

@@ -698,6 +698,8 @@ let webhookEnv = message.getWebhookEnv();
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送文本消息) | `ChatMessage` | 创建文本消息。 |
@@ -713,3 +715,5 @@ let webhookEnv = message.getWebhookEnv();
 | [`downloadAndParseCombineMessage`](#发送合并消息) | `ChatManager` | 下载并解析合并消息附件。 |
 | [`setAutoTransferMessageAttachments`](#上传消息附件至自有服务器) | `ChatOptions` | 设置 SDK 是否自动上传和下载消息附件。 |
 | [`setUseReplacedMessageContents`](#发送消息前的内容审核) | `ChatOptions` | 设置发送方是否接收内容审核替换后的消息内容。 |
+
+</div>

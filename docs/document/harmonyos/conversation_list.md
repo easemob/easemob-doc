@@ -208,6 +208,8 @@ ChatClient.getInstance()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setDataSyncType`](#登录后自动同步会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
@@ -228,3 +230,5 @@ ChatClient.getInstance()
 | [`clearConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空指定会话的本地未读消息数并同步当前账号的其他设备。 |
 | [`clearAllConversationUnreadMessageCount`](#会话列表数据更新场景) | `ChatManager` | 清空全部会话的本地未读消息数并同步当前账号的其他设备。 |
 | [`addConversationListener`](#监听会话列表更新) / [`removeConversationListener`](#监听会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |
+
+</div>

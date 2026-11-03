@@ -228,6 +228,8 @@ let sortedConversations: Array<Conversation> = pinnedConversations.concat(
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`pinConversation`](#设置或取消置顶会话) | `ChatManager` | 设置或取消指定会话的置顶状态。 |
@@ -240,3 +242,5 @@ let sortedConversations: Array<Conversation> = pinnedConversations.concat(
 | [`isPinned`](#获取置顶会话列表) / [`getPinnedTime`](#获取置顶会话列表) | `Conversation` | 获取会话置顶状态和置顶时间。 |
 | [`addConversationListener`](#监听本地会话列表更新) / [`removeConversationListener`](#监听本地会话列表更新) | `ChatManager` | 添加或移除会话更新监听器。 |
 | [`addMultiDevicesListener`](#监听多设备会话置顶事件) / [`removeMultiDevicesListener`](#监听多设备会话置顶事件) | `ChatClient` | 添加或移除多设备监听器。 |
+
+</div>

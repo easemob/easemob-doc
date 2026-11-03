@@ -50,8 +50,12 @@ if (conversation) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`updateMessage`](#更新消息到本地数据库) | `ChatManager` | 更新当前设备本地数据库中的消息。 |
 | [`getConversation`](#更新消息到本地数据库) | `ChatManager` | 根据会话 ID 和会话类型获取本地会话对象。 |
 | [`updateMessage`](#更新消息到本地数据库) | `Conversation` | 更新指定会话在本地数据库中的消息。 |
+
+</div>

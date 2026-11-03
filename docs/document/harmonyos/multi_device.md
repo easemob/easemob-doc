@@ -1,3 +1,7 @@
+---
+containerClass: harmonyos-multi-device-page
+---
+
 # 多设备登录
 
 ## 功能说明
@@ -360,6 +364,8 @@ contactManager?.getSelfIdsOnOtherPlatform()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`getSelfIdsOnOtherPlatform`](#获取当前用户的其他登录设备的登录-id-列表) | `ContactManager` | 获取当前用户在其他设备上的登录 ID 列表。 |
@@ -370,3 +376,5 @@ contactManager?.getSelfIdsOnOtherPlatform()
 | [`removeConnectionListener`](#设置登录设备的名称) | `ChatClient` | 移除连接状态监听器。 |
 | [`addMultiDevicesListener`](#监听多设备事件) | `ChatClient` | 添加多设备事件监听器。 |
 | [`removeMultiDevicesListener`](#监听多设备事件) | `ChatClient` | 移除多设备事件监听器。 |
+
+</div>

@@ -46,9 +46,13 @@ if (message) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#发送定向消息) | `ChatMessage` | 创建文本消息。 |
 | [`setChatType`](#发送定向消息) | `ChatMessage` | 设置消息所属的会话类型。 |
 | [`setReceiverList`](#发送定向消息) | `ChatMessage` | 设置定向消息的接收方列表。 |
 | [`sendMessage`](#发送定向消息) | `ChatManager` | 发送定向消息。 |
+
+</div>

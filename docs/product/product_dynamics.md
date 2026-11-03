@@ -25,6 +25,12 @@ containerClass: product-dynamics-page
 | :----- | :------- | :---------------- | :---------------- |
 | Android SDK 4.25.1/iOS SDK v4.25.0 开发版发布   | - 支持 [分页获取本地会话列表](/v4/android/conversation_list.html#分页获取本地会话) 功能。<br/> - [本地会话列表默认不包含聊天室会话](/v4/android/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性。<br/> - Android 新增默认服务域名切换接口，用于在 IM 官方域名与私有部署域名之间切换。 | 2026-9-18     | - [Android SDK 4.25.1 更新日志](/document/android/releasenote.html#v4-25-1-dev-2026-9-18-开发版) <br/> - [iOS SDK 4.25.0 更新日志](/document/ios/releasenote.html#v4-25-0-dev-2026-9-16-开发版)  |
 
+#### 环信 HarmonyOS SDK v5.0.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK 5.0.0 开发版发布   | - [登录统一使用 Token 鉴权](/document/harmonyos/login.html)，移除密码登录、客户端注册和自动登录；主动登录时会重新上传推送 Token。<br/> - 提供统一的数据同步配置和状态回调，支持 [配置登录后自动同步会话、好友和已加入群组数据](/document/harmonyos/initialization.html#设置登录后自动同步数据)，并在 [本地数据库打开后提前读取本地数据](/document/harmonyos/login.html#登录完成前使用本地数据库)；同步完成后可读取最新本地数据并刷新界面。<br/> - [消息已读回执支持批量处理](/document/harmonyos/message_receipt.html#单聊和群聊消息已读回执)，单聊和群聊采用统一的回执体系，每条消息可单独设置是否需要回执；群聊支持批量查询回执汇总和分页获取成员已读详情。<br/> - [会话未读数清零与消息已读回执分别处理](/document/harmonyos/conversation_unread.html)，支持清零指定会话或全部会话的本地未读数，并将清零状态同步至当前账号的其他设备。<br/> - 支持获取 [会话显示名称和头像](/document/harmonyos/conversation_overview.html#会话对象)，以及 [批量删除本地会话](/document/harmonyos/conversation_delete.html#批量删除本地会话)，可按需同时删除本地消息。<br/> - [群组配置拆分为多个独立字段](/document/harmonyos/group_manage.html#创建群组)，建群时通过 `GroupOptions` 组合配置，建群后通过 `GroupConfigs` 和 `GroupConfigsType` [更新指定配置项](/document/harmonyos/group_attributes.html#修改群组配置)；支持从群组对象读取成员信息，成员加入和退出通过批量成员事件通知。<br/> - [聊天室事件](/document/harmonyos/room_manage.html#监听聊天室事件) 补充成员信息，禁言事件提供成员及各自的禁言到期时间，移出事件提供被移出成员信息。<br/> - 支持 [监听和压缩 SDK 日志](/document/harmonyos/migration_guide.html#日志能力补齐)，压缩日志无需登录。<br/> - 自定义 NTP 服务器配置支持单个地址或多个地址。 | 2026-9-24     | [HarmonyOS SDK 5.0.0 更新日志](/document/harmonyos/releasenote.html#v5-0-0-dev-2026-9-24-开发版) |
+
 #### 环信 HarmonyOS SDK v1.15.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
@@ -37,7 +43,7 @@ containerClass: product-dynamics-page
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[好友](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 <br/> - | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev-2026-8-12) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev-2026-8-12)  |
+| Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[好友](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev-2026-8-12) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev-2026-8-12)  |
 
 #### 环信 Web SDK v5.0.0 发版
 

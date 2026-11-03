@@ -356,6 +356,8 @@ if (conversation) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`fetchHistoryMessages`](#从服务器获取指定会话的消息) | `ChatManager` | 从服务器分页获取指定会话的历史消息。 |
@@ -370,3 +372,5 @@ if (conversation) {
 | [`searchMessagesByType`](#获取本地会话中特定类型的消息) | `Conversation` | 按消息类型、时间和发送方搜索本地消息。 |
 | [`searchMessagesBetweenTime`](#获取一定时间内本地会话的消息) | `Conversation` | 按时间范围搜索本地会话消息。 |
 | [`getMsgCountInRange`](#获取会话在一定时间内的消息数) | `Conversation` | 统计指定时间范围内的本地消息数。 |
+
+</div>

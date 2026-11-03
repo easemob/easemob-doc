@@ -378,6 +378,8 @@ ChatClient.getInstance().contactManager()?.blockList()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`addContact`](#添加好友) | `ContactManager` | 发起好友申请。 |
@@ -396,3 +398,5 @@ ChatClient.getInstance().contactManager()?.blockList()
 | [`removeUserFromBlockList`](#将用户从黑名单移除) | `ContactManager` | 将指定用户移出黑名单。 |
 | [`getBlockListFromServer`](#从服务器获取黑名单列表) | `ContactManager` | 从服务器获取黑名单列表。 |
 | [`blockList`](#从本地数据库获取黑名单列表) | `ContactManager` | 从本地缓存读取黑名单列表。 |
+
+</div>

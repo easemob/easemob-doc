@@ -196,6 +196,8 @@ if (conversation) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setSortMessageByServerTime`](#搜索消息) | `ChatOptions` | 设置本地消息排序和搜索使用服务器时间还是本地创建时间。 |
@@ -205,3 +207,5 @@ if (conversation) {
 | [`searchMessagesByKeywords`](#根据搜索范围搜索当前会话中的消息) | `Conversation` | 按照关键词、发送方列表及搜索范围，搜索指定会话中的消息。 |
 | [`searchMessagesFromDB`](#根据消息类型搜索所有会话中的消息) | `ChatManager` | 按照一种或多种消息类型，在全部本地会话中搜索消息。 |
 | [`searchMessagesByType`](#根据消息类型搜索当前会话中的消息) | `Conversation` | 按照一种或多种消息类型，在指定会话中搜索消息。 |
+
+</div>

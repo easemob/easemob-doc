@@ -161,6 +161,8 @@ ChatClient.getInstance().chatManager()?.fetchReactionDetail(params)
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`addReaction`](#在消息上添加-reaction) | `ChatManager` | 为指定消息添加 Reaction。 |
@@ -179,3 +181,5 @@ ChatClient.getInstance().chatManager()?.fetchReactionDetail(params)
 | [`isAddedBySelf`](#获取消息的-reaction-列表) | `ChatMessageReaction` | 获取当前用户是否添加过指定 Reaction。 |
 | [`userId`](#在消息上添加-reaction) | `ChatMessageReactionOperation` | 获取 Reaction 操作者的用户 ID。 |
 | [`operation`](#在消息上添加-reaction) | `ChatMessageReactionOperation` | 获取 Reaction 操作类型。 |
+
+</div>

@@ -195,6 +195,8 @@ if (contactManager) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setDeleteMessagesOnLeaveGroup`](#功能说明) | `ChatOptions` | 设置主动或被动退出群组时是否删除本地群聊会话及消息。 |
@@ -206,3 +208,5 @@ if (contactManager) {
 | [`getConversation`](#删除会话中的指定本地消息) | `ChatManager` | 获取指定的本地会话。 |
 | [`removeMessage`](#删除会话中的指定本地消息) | `Conversation` | 删除会话中的指定本地消息。 |
 | [`deleteContact`](#删除好友时处理会话) | `ContactManager` | 删除好友，并通过 `keepConversation` 参数控制是否保留对应的本地会话和消息。 |
+
+</div>

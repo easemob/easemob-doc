@@ -351,6 +351,8 @@ ChatClient.getInstance().groupManager()?.updateGroupExtension(
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`getGroup`](#获取群组详情) | `GroupManager` | 从本地内存获取群组详情。 |
@@ -368,3 +370,5 @@ ChatClient.getInstance().groupManager()?.updateGroupExtension(
 | [`uploadGroupSharedFile`](#上传共享文件) / [`downloadGroupSharedFile`](#下载共享文件) | `GroupManager` | 上传或下载群共享文件。 |
 | [`deleteGroupSharedFile`](#删除共享文件) / [`fetchGroupSharedFileList`](#从服务器获取共享文件) | `GroupManager` | 删除或分页获取群共享文件。 |
 | [`updateGroupExtension`](#更新群扩展字段) | `GroupManager` | 更新群扩展字段。 |
+
+</div>

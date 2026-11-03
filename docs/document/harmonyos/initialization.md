@@ -215,6 +215,8 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK 单例。 |
@@ -223,3 +225,5 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 | [`getContactsFromLocal`](#登录后读取同步结果) | `ContactManager` | 从本地数据库读取好友列表和好友信息。 |
 | [`getAllGroups`](#登录后读取同步结果) | `GroupManager` | 读取本地已加入群组列表。 |
 | [`getDataSyncType`](#同步的数据) | `ChatOptions` | 获取当前配置的登录后自动同步数据类型。 |
+
+</div>

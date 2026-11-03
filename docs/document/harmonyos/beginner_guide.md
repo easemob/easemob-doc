@@ -10,6 +10,8 @@
 
 ## 集成步骤
 
+<div class="harmonyos-integration-steps-table">
+
 | 步骤            | 描述 | 
 | :-------------- | :----- | 
 | [注册账号](/product/console/account_register.html#注册账号)  | 使用环信产品前，你首先需要在 [环信控制台注册账号](https://console.easemob.com/user/register)。<br/>环信账号是开发者在环信控制台的唯一身份标识，开发者利用账号登录控制台，对应用进行配置和管理。开发者在将自身应用与环信即时通讯 IM 对接时，需注册 IM 账号与自身应用中的账号映射。 |
@@ -20,4 +22,6 @@
 | [初始化 SDK](initialization.html)         | 使用 IM 的各项功能前，必须先初始化。传入你应用的 App Key 进行 [初始化](initialization.html)。初始化时，可配置登录后数据同步、好友邀请和群组邀请处理等特性。|
 | [登录 IM](login.html)       | 使用用户 ID 和 Token [登录](login.html#登录-1) IM。HarmonyOS SDK 5.x 初始化后不会自动登录；登录成功后，你可以使用需要访问服务器的 IM 功能。 |
 | 集成特性         | 集成主要特性：<br/> - [消息管理](message_send.html) <br/> - [会话管理](conversation_overview.html)<br/> - [群组管理](group_overview.html) <br/> - [聊天室管理](room_overview.html) <br/> - [用户管理](user_relationship.html)<br/> - [离线推送](/document/harmonyos/push/push_overview.html)|
+
+</div>
 

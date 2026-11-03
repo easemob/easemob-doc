@@ -350,6 +350,8 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomAdmin(
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`fetchChatroomMembers`](#获取聊天室成员列表) | `ChatroomManager` | 分页获取聊天室成员用户 ID。 |
@@ -369,3 +371,5 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomAdmin(
 | [`changeChatroomOwner`](#变更聊天室所有者) | `ChatroomManager` | 变更聊天室所有者。 |
 | [`addChatroomAdmin`](#添加聊天室管理员) | `ChatroomManager` | 添加聊天室管理员。 |
 | [`removeChatroomAdmin`](#移除聊天室管理员) | `ChatroomManager` | 移除聊天室管理员。 |
+
+</div>

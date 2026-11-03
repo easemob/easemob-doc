@@ -444,6 +444,8 @@ if (message.getType() === ContentType.COMBINE) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`addMessageListener`](#监听消息事件) | `ChatManager` | 注册消息监听器。 |
@@ -454,3 +456,5 @@ if (message.getType() === ContentType.COMBINE) {
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `ChatManager` | 下载并解析合并消息。 |
 | [`getThumbnailLocalPath`](#接收图片消息) | `ImageMessageBody` | 获取图片缩略图的本地路径。 |
 | [`getBigImageLocalPath`](#接收图片消息) | `ImageMessageBody` | 获取图片大图的本地路径。 |
+
+</div>

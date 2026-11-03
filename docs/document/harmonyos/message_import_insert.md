@@ -95,6 +95,8 @@ chatManager?.saveMessage(message);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`setRegardImportedMsgAsRead`](#批量导入消息到数据库) | `ChatOptions` | 设置是否将导入的消息视为已读。 |
@@ -103,3 +105,5 @@ chatManager?.saveMessage(message);
 | [`getConversation`](#插入消息) | `ChatManager` | 获取指定 ID 和类型的本地会话；未找到时返回 `undefined`。 |
 | [`insertMessage`](#插入消息) | `Conversation` | 按消息中的 Unix 时间戳将消息插入指定本地会话。 |
 | [`saveMessage`](#插入消息) | `ChatManager` | 将消息保存到本地数据库；必要时自动创建会话。 |
+
+</div>

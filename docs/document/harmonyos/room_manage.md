@@ -400,6 +400,8 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId)
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`fetchPublicChatroomsFromServer`](#获取聊天室列表) | `ChatroomManager` | 分页获取当前应用下的公开聊天室列表。 |
@@ -411,3 +413,5 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId)
 | [`addListener`](#监听聊天室事件) | `ChatroomManager` | 添加聊天室事件监听器。 |
 | [`removeListener`](#监听聊天室事件) | `ChatroomManager` | 移除聊天室事件监听器。 |
 | [`memberCount`](#实时更新聊天室成员人数) | `Chatroom` | 获取聊天室当前在线成员数。 |
+
+</div>

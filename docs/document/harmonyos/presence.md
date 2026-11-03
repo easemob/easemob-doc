@@ -168,6 +168,8 @@ ChatClient.getInstance().presenceManager()?.fetchPresenceStatus(members)
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`subscribePresences`](#订阅指定用户的在线状态) | `PresenceManager` | 订阅指定用户的在线状态。 |
@@ -183,3 +185,5 @@ ChatClient.getInstance().presenceManager()?.fetchPresenceStatus(members)
 | [`getExt`](#发布自定义在线状态) | `Presence` | 获取自定义在线状态。 |
 | [`getLatestTime`](#获取用户的当前在线状态) | `Presence` | 获取状态更新时间。 |
 | [`getExpiryTime`](#订阅指定用户的在线状态) | `Presence` | 获取在线状态订阅到期时间。 |
+
+</div>

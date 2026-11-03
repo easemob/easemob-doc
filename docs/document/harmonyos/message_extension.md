@@ -57,9 +57,13 @@ function handleReceivedMessage(receivedMessage: ChatMessage): void {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#示例代码) | `ChatMessage` | 创建待发送的文本消息。 |
 | [`setExt`](#示例代码) | `ChatMessage` | 设置消息扩展字段。 |
 | [`ext`](#示例代码) | `ChatMessage` | 获取消息中的全部扩展字段。 |
 | [`sendMessage`](#示例代码) | `ChatManager` | 发送携带扩展字段的消息。 |
+
+</div>

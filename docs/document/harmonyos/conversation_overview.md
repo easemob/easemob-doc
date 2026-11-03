@@ -188,6 +188,8 @@ ChatClient.getInstance()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`conversationId`](#会话对象) / [`getType`](#会话对象) | `Conversation` | 获取会话 ID 和会话类型。 |
@@ -213,3 +215,5 @@ ChatClient.getInstance()
 | [`fetchPinnedMessagesFromServer`](#会话功能列表) | `ChatManager` | 从服务器获取会话中的置顶消息。 |
 | [`addConversationListener`](#会话列表事件) / [`removeConversationListener`](#会话列表事件) | `ChatManager` | 添加或移除会话更新监听器。 |
 | [`addMultiDevicesListener`](#多设备会话事件) / [`removeMultiDevicesListener`](#多设备会话事件) | `ChatClient` | 添加或移除多设备监听器。 |
+
+</div>

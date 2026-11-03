@@ -194,6 +194,8 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 是否支持聊天室 | 说明 |
 | :--- | :--- | :--- | :--- |
 | [`getAllConversationsBySort`](#获取所有会话的未读消息数) | `ChatManager` | 视本地列表而定 | 获取本地会话列表，应用可遍历列表计算未读消息总数。 |
@@ -204,3 +206,5 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
 | [`addMultiDevicesListener`](#监听多设备上的未读数变化) / [`removeMultiDevicesListener`](#监听多设备上的未读数变化) | `ChatClient` | 是 | 添加或移除多设备监听器。 |
 | [`isRead`](#单条消息的已读状态和已读回执) | `ChatMessage` | 是 | 查询单条消息的本地已读状态。 |
 | [`sendMessageReadReceipts`](#单条消息的已读状态和已读回执) | `ChatManager` | 否 | 为单聊或群聊消息发送已读回执。 |
+
+</div>

@@ -70,11 +70,15 @@ let loggedIn: boolean = ChatClient.getInstance().isLoggedIn();
 let databaseOpened: boolean = ChatClient.getInstance().isDatabaseOpened();
 ```
 
+<div class="harmonyos-connection-status-table">
+
 | API | 说明 |
 | :--- | :--- |
 | `isConnected()` | 返回 SDK 当前是否已连接到服务器。 |
 | `isLoggedIn()` | 返回当前用户是否已登录 Chat 服务。 |
 | `isDatabaseOpened()` | 返回当前用户的本地数据库是否已经打开。该状态不表示用户已登录或已连接服务器。 |
+
+</div>
 
 :::tip
 连接状态、登录状态和数据库打开状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。业务 UI 应结合监听器回调处理状态变化，不要只依赖一次状态查询。
@@ -223,6 +227,8 @@ ChatClient.getInstance()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#连接生命周期) | `ChatClient` | 初始化 HarmonyOS SDK。 |
@@ -234,3 +240,5 @@ ChatClient.getInstance()
 | [`isDatabaseOpened`](#获取连接状态) | `ChatClient` | 查询当前用户的本地数据库是否已经打开。 |
 | [`renewToken`](#token-生命周期) | `ChatClient` | 更新当前登录用户的 Token。 |
 | [`setDataSyncType`](#离线消息和业务数据同步) | `ChatOptions` | 设置登录后自动同步的数据类型。 |
+
+</div>

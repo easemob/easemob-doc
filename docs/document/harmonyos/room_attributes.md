@@ -391,6 +391,8 @@ ChatClient.getInstance().chatroomManager()?.removeListener(listener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`joinChatroom`](#获取聊天室详情) | `ChatroomManager` | 加入聊天室；成功时返回 `Chatroom` 对象。HarmonyOS SDK 5.0.0 暂无单独获取聊天室详情的公开接口。 |
@@ -403,3 +405,5 @@ ChatClient.getInstance().chatroomManager()?.removeListener(listener);
 | [`removeChatroomAttributes`](#删除单个聊天室自定义属性) | `ChatroomManager` | 删除一个或多个聊天室自定义属性；通过 `isForced` 控制是否强制删除。 |
 | [`addListener`](#监听聊天室事件) | `ChatroomManager` | 添加聊天室事件监听器。 |
 | [`removeListener`](#监听聊天室事件) | `ChatroomManager` | 移除聊天室事件监听器。 |
+
+</div>

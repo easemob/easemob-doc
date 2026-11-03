@@ -62,7 +62,11 @@ if (pushManager) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`updatePushNickname`](#设置推送昵称) | `PushManager` | 设置当前用户的推送显示昵称。 |
 | [`updatePushDisplayStyle`](#设置推送标题和推送内容) | `PushManager` | 设置推送通知的显示样式。 |
+
+</div>

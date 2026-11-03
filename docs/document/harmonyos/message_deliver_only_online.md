@@ -41,8 +41,12 @@ if (message) {
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`createTextSendMessage`](#仅向在线用户投递消息) | `ChatMessage` | 创建待发送的文本消息。 |
 | [`deliverOnlineOnly`](#仅向在线用户投递消息) | `ChatMessage` | 设置消息是否只投递给在线用户。 |
 | [`sendMessage`](#仅向在线用户投递消息) | `ChatManager` | 发送消息。 |
+
+</div>

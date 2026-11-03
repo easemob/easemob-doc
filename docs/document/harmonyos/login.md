@@ -330,6 +330,8 @@ ChatClient.getInstance()
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
@@ -346,3 +348,5 @@ ChatClient.getInstance()
 | [`init`](#多设备登录) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK。 |
 | [`getOptions`](#多设备登录) | `ChatClient` | 获取当前 SDK 的初始化配置。 |
 | [`getSelfIdsOnOtherPlatform`](#多设备登录) | `ContactManager` | 获取当前账号在其他设备上的登录 ID。 |
+
+</div>

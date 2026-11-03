@@ -101,6 +101,8 @@ chatManager?.removeMessageListener(messageListener);
 
 ## 接口列表
 
+<div class="harmonyos-api-list-table">
+
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`recallMessage`](#撤回消息) | `ChatManager` | 异步撤回一条已发送成功的消息，并可携带扩展字符串。 |
@@ -109,3 +111,5 @@ chatManager?.removeMessageListener(messageListener);
 | [`getExt`](#设置消息撤回监听) | `RecallMessageInfo` | 获取撤回消息时携带的扩展字符串。 |
 | [`getConversationId`](#设置消息撤回监听) | `RecallMessageInfo` | 获取被撤回消息所属的会话 ID。 |
 | [`getRecallMessage`](#设置消息撤回监听) | `RecallMessageInfo` | 获取被撤回的消息对象；离线场景下可能返回 `undefined`。 |
+
+</div>
