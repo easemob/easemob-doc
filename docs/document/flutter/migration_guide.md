@@ -157,7 +157,7 @@ await ChatClient.getInstance.init(options);
 :::
 
 :::warning
-`dataSyncType` 在 Flutter 侧是可空字段，未设置时不在桥接层补默认值，两端原生默认值并不一致：iOS 默认同步会话（等价于 `ChatDataSyncType.conversations`），Android 默认不同步任何类型（等价于 `ChatDataSyncType.none`）。**需要一致行为的应用必须显式配置 `dataSyncType`**，不要依赖平台默认值。
+`dataSyncType` 在 Flutter 侧是可空字段，未设置时不在桥接层补默认值。Flutter SDK 5.0.0 所依赖的原生 SDK 5.0.0 默认值不同：iOS 默认同步会话（等价于 `ChatDataSyncType.conversations`），Android 默认不同步任何类型（等价于 `ChatDataSyncType.none`）。Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。**建议显式配置 `dataSyncType`**，避免同步范围随原生依赖版本变化。
 :::
 
 同步完成事件按 “位掩码” 判断当前同步完成的数据类型：
@@ -348,7 +348,7 @@ Flutter SDK 5.0.0 将群组可见性、入群审批和成员邀请权限从 `Cha
 
 - `configs`、`isJoinApprovalRequired`、`isMemberAllowToInvite` 在 iOS 上依赖原生 `settings`，未拉取群详情时可能整体缺失（Dart 侧为 `null`）；Android 上总有值。读取前请先调 `fetchGroupInfoFromServer(groupId)`。
 - `maxUserCount` 与 `extension`（群扩展）在 iOS 上**不再下发**，恒为 `null`（4.x 在 `settings` 非空时会下发）；Android 正常。iOS 侧需要这两个值时改读 `group.configs?.maxCount` 与 `group.configs?.ext`。
-- `configs.inviteNeedConfirm` 在 Android 上固定回传 `false`（原生 `EMGroup` 未提供该 getter），不要用它判断真实配置；该字段仅在创建 / 更新时作为入参有效。
+- `configs.inviteNeedConfirm` 在 Android 上由 Flutter 桥接固定回传 `false`，不要用它判断真实配置。Android SDK 5.1.0 已提供 `EMGroup.isInviteNeedConfirm()`，但当前 Flutter 桥接未调用该方法；该字段在 Flutter 中仅在创建 / 更新时作为入参有效。
 :::
 
 建群示例：
@@ -565,7 +565,7 @@ ChatClient.getInstance.addConnectionEventHandler(
 :::
 
 :::warning
-厂商推送的**工程侧集成由业务侧负责**：应用需在 Android/iOS 原生工程中完成厂商推送 SDK 集成、平台能力和工程配置，以及设备 Token 获取；推送证书上传和推送通道凭据配置需在环信控制台完成。Flutter 侧通过 `ChatOptions` 配置 iOS 证书名称，并在获取 `deviceToken` 且登录成功后调用 `bindDeviceToken`。`enableVivoPush(agreePrivacyStatement)` 这类“隐私声明同意”参数在 5.0.0 没有对应入口，需由业务侧按厂商 SDK 要求处理。
+厂商推送的**工程侧集成由业务侧负责**：应用需在 Android/iOS 原生工程中完成厂商推送 SDK 集成、平台能力和工程配置，以及设备 Token 获取；推送证书上传和推送通道凭据配置需在环信控制台完成。Flutter 侧通过 `ChatOptions` 配置 iOS 证书名称，并在获取 `deviceToken` 且登录成功后调用 `bindDeviceToken`。`enableVivoPush(agreePrivacyStatement)` 这类“隐私声明同意”参数在 Flutter SDK 5.x 中没有对应入口，需由业务侧按厂商 SDK 要求处理。
 :::
 
 ```dart

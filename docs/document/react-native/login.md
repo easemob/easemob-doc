@@ -192,7 +192,7 @@ try {
 :::
 
 :::notice
-React Native SDK 5.0.0 的 iOS 端在未配置 `ChatOptions#apnsCertName` 时，会按不解绑推送 Token 的方式退出，即使 `unbindDeviceToken` 为 `true`。若仅集成 PushKit 推送且需要解绑 Token，应在退出前调用 `ChatClient#unbindPushKitToken`，并处理解绑结果。
+React Native SDK 5.x 的 iOS 端在未配置 `ChatOptions#apnsCertName` 时，会按不解绑推送 Token 的方式退出，即使 `unbindDeviceToken` 为 `true`。若仅集成 PushKit 推送且需要解绑 Token，应在退出前调用 `ChatClient#unbindPushKitToken`，并处理解绑结果。
 :::
 
 ## 账号切换

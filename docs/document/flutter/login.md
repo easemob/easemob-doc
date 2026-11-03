@@ -288,7 +288,7 @@ ChatClient.getInstance.addConnectionEventHandler(
 | 登录设备发生变化 | `220` / `USER_DEVICE_CHANGED` | 应根据业务场景提示用户并重新登录。 |
 
 :::tip
-在 Flutter SDK 5.0.0 的 iOS 端，其他设备登录和登录设备发生变化这两类场景共用原生回调，Flutter 侧统一收到 `ChatDisconnectErrorCode.USER_LOGIN_ANOTHER_DEVICE（206）`，无法通过该原因码进一步区分。收到此通知后，应按登录状态已失效处理。
+在 Flutter SDK 5.x 的 iOS 端，其他设备登录和登录设备发生变化这两类场景共用原生回调，Flutter 侧统一收到 `ChatDisconnectErrorCode.USER_LOGIN_ANOTHER_DEVICE（206）`，无法通过该原因码进一步区分。收到此通知后，应按登录状态已失效处理。
 :::
 
 **获取其他设备的登录 ID**

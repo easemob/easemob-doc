@@ -92,7 +92,7 @@ try {
 群成员会通过 `ChatGroupEventListener#onDetailChanged` 收到群组详情更新回调。回调中的 `ChatGroup` 表示更新后的群组信息。为确保获取完整且最新的配置，建议在回调中调用 `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer` 从服务器获取群组详情。
 
 :::notice
-React Native SDK 5.0.0 的 Android 端返回的群对象未包含 `configs.inviteNeedConfirm`，该字段会被填充为 `false`，不能将其作为服务端实际配置。详情变更回调中的对象也不能据此判断该配置。
+React Native SDK 5.x 的 Android 端返回的群对象未包含 `configs.inviteNeedConfirm`，该字段会被填充为 `false`，不能将其作为服务端实际配置。详情变更回调中的对象也不能据此判断该配置。
 :::
 
 ## 修改群组名称

@@ -211,7 +211,7 @@ React Native SDK 5.0.0 新增登录后自动数据同步机制。应用应在初
 | `ChatConnectEventListener` | `onDatabaseOpened(username, errorCode)` | 通知指定账号的本地数据库已经打开；该事件不表示任何服务端数据已经同步完成。`errorCode` 为 `0` 表示成功；**Android 原生回调不带错误码，桥接层固定回填 `0`**，只有 iOS 会返回真实的打开失败错误码。 |
 
 :::tip
-`ChatOptions.dataSyncType` 不设置时，React Native SDK 不会下发该字段，由原生 SDK 使用自身默认值决定同步范围：iOS 默认同步会话（`Conversations`），Android 默认不自动同步（`None`）。为保证双端行为一致，建议显式设置 `dataSyncType`。
+在 React Native SDK 5.0.0 中，`ChatOptions.dataSyncType` 不设置时，SDK 不会下发该字段，由原生 SDK 使用自身默认值决定同步范围：iOS 5.0.0 默认同步会话（`Conversations`），Android 5.0.0 默认不自动同步（`None`）。为保证双端行为一致，建议显式设置 `dataSyncType`。
 :::
 
 典型配置如下：
@@ -556,7 +556,7 @@ VoIP 推送使用独立的 PushKit 证书与 PushKit token，与上面的普通�
 在 iOS 端，已配置 `ChatOptions.apnsCertName` 且普通推送 Token 解绑成功时，`ChatClient#logout(true)` 会继续解绑 PushKit Token。`logout` 的 `unbindDeviceToken` 默认为 `true`；传 `false` 表示登出时不解绑。
 
 :::notice
-React Native SDK 5.0.0 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
+React Native SDK 5.x 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::
 
 ```typescript

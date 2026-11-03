@@ -341,7 +341,7 @@ try {
 ```
 
 :::notice
-React Native SDK 5.0.0 的 Android 桥接会将 `isGif` 显式传给底层 SDK；iOS 桥接通过本地文件创建图片消息体，不单独传递该标记。请确保 iOS 侧传入的文件本身是有效的 GIF 文件，并在双端验证动画展示效果。
+React Native SDK 5.x 的 Android 桥接会将 `isGif` 显式传给底层 SDK；iOS 桥接通过本地文件创建图片消息体，不单独传递该标记。请确保 iOS 侧传入的文件本身是有效的 GIF 文件，并在双端验证动画展示效果。
 :::
 
 #### 关键参数

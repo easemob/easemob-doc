@@ -90,7 +90,7 @@ await ChatClient.getInstance.init(options);
 应用可通过 `ConnectionEventHandler#onDataSyncStart` 和 `onDataSyncFinish` 监听会话数据同步状态。当 `type` 包含 `ChatDataSyncType.conversations` 且 `error` 为 `null` 时，可以从本地读取最新会话列表。
 
 :::tip
-Flutter 5.0.0 的 Android 和 iOS 原生默认同步范围不同。需要跨平台一致行为时必须显式设置 `dataSyncType`。
+Flutter SDK 5.0.0 所依赖的 Android SDK 5.0.0 默认不同步任何数据，iOS SDK 5.0.0 默认同步会话。Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。未设置 `dataSyncType` 时，Flutter 层使用所依赖原生 SDK 的默认值，建议显式配置同步范围。
 :::
 
 ## 会话列表与空会话

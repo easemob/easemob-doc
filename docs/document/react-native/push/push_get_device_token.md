@@ -166,7 +166,7 @@ HUAWEI_PUSH_APPID=your_huawei_app_id
 4. 按目标 Android 版本和厂商要求配置通知权限、通知渠道及 Manifest。Token 获取成功不等于应用已获得通知展示权限。
 
 :::notice
-React Native SDK 5.0.0 不再通过 `ChatOptions.pushConfig` 配置厂商推送。Android 厂商推送依赖、Manifest 和原生 `EMPushConfig` 初始化需在原生工程侧完成。此插件负责获取厂商 Token，不会替代 IM SDK 所需的原生推送配置；仅获取和绑定 Token 不能代替完整集成。
+React Native SDK 5.x 不再通过 `ChatOptions.pushConfig` 配置厂商推送。Android 厂商推送依赖、Manifest 和原生 `EMPushConfig` 初始化需在原生工程侧完成。此插件负责获取厂商 Token，不会替代 IM SDK 所需的原生推送配置；仅获取和绑定 Token 不能代替完整集成。
 :::
 
 #### 步骤三 添加应用生命周期代码

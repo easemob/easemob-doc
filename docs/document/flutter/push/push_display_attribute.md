@@ -99,7 +99,7 @@ Future<void> fetchPushDisplayAttributes() async {
 ```
 
 :::warning
-Flutter SDK 5.0.0 在 Android 端获取推送显示配置时，存在将简单样式错误解析为 `DisplayStyle.Summary` 的已知问题。该问题不影响显示样式的设置，请勿仅根据查询结果判断设置是否生效，应结合设备实际收到的离线通知验证。
+Flutter SDK 5.x 在 Android 端获取推送显示配置时，桥接层与 Dart 层的字段类型不一致，存在将简单样式错误解析为 `DisplayStyle.Summary` 的已知问题。该问题不影响显示样式的设置，请勿仅根据查询结果判断设置是否生效，应结合设备实际收到的离线通知验证。
 :::
 
 ## 接口列表

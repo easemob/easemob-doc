@@ -48,7 +48,7 @@ android {
 ```
 
 :::tip
-Android 原生 SDK 5.0.0 新增的 AndroidX 传递依赖要求应用模块使用 Android API 34 或以上版本编译。较新的 Flutter 项目通常已满足该要求；旧项目需将 `compileSdkVersion` 升级至 34 或以上。
+Android 原生 SDK 5.x 的 AndroidX 传递依赖要求应用模块使用 Android API 34 或以上版本编译。较新的 Flutter 项目通常已满足该要求；旧项目需将 `compileSdkVersion` 升级至 34 或以上。
 :::
 
 2. Flutter 插件的 `AndroidManifest.xml` 已声明以下权限，构建时会自动合并到应用清单，通常无需在应用的 `AndroidManifest.xml` 中重复添加：
@@ -92,5 +92,5 @@ flutter pub get
 ```
 
 :::tip
-如果项目从 Flutter SDK 4.x 升级至 5.0.0，更新依赖后必须重新执行 `flutter pub get` 并重新编译。iOS 使用 CocoaPods 集成时，还需在 `ios` 目录中显式执行一次 `pod install`，避免继续链接旧版本的原生 SDK。
+如果项目从 Flutter SDK 4.x 升级至 5.x，更新依赖后必须重新执行 `flutter pub get` 并重新编译。iOS 使用 CocoaPods 集成时，还需在 `ios` 目录中显式执行一次 `pod install`，避免继续链接旧版本的原生 SDK。
 :::

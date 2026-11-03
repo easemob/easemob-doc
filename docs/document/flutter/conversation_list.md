@@ -37,7 +37,7 @@ await ChatClient.getInstance.init(options);
 若还需要同步好友列表或已加入的群组列表，可以使用按位或运算符增加 `ChatDataSyncType.contacts` 或 `ChatDataSyncType.joinedGroups`。关于登录后自动同步数据，详见 [SDK 初始化文档](initialization.html)。
 
 :::tip
-Flutter SDK 5.0.0 基于原生 SDK 5.0.0。未配置 `dataSyncType` 时，Android 端默认不同步任何数据类型，iOS 端默认同步会话列表。
+Flutter SDK 5.0.0 基于原生 SDK 5.0.0。未配置 `dataSyncType` 时，Android 端默认不同步任何数据类型，iOS 端默认同步会话列表。该默认差异仅适用于上述原生版本；Android SDK 自 5.1.0 起默认同步会话列表，与 iOS SDK 一致。Flutter 层沿用所依赖原生 SDK 的默认值，建议显式配置同步范围。
 :::
 
 ### 监听会话列表同步状态

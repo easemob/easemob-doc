@@ -288,7 +288,7 @@ async function kickAllDevices(userId: string, token: string): Promise<void> {
 :::
 
 :::notice
-React Native SDK 5.0.0 的 iOS 桥接层因回调方法名与原生协议不匹配，未能将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`。请勿依赖该回调刷新 iOS 消息话题界面，可按需重新查询消息话题列表或详情，详见 [管理消息话题](thread.html)。Android 端可正常使用该回调。
+React Native SDK 5.x 的 iOS 桥接层因回调方法名与原生协议不匹配，未能将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`。请勿依赖该回调刷新 iOS 消息话题界面，可按需重新查询消息话题列表或详情，详见 [管理消息话题](thread.html)。Android 端可正常使用该回调。
 :::
 
 回调的参数均为可选参数，应按实际返回值处理。`onContactEvent` 的 `target` 为好友的用户 ID，`ext` 为事件扩展信息；`onGroupEvent` 的 `target` 为群组 ID；`onThreadEvent` 的 `target` 为消息话题 ID，不能按群组 ID 使用。`onGroupEvent` 和 `onThreadEvent` 的第三个参数 `usernames` 为与操作相关的用户 ID 列表。`onConversationEvent` 的 `convId` 和 `convType` 分别为会话 ID 和会话类型。

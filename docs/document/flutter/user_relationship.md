@@ -226,7 +226,7 @@ Future<void> initializeChatSdk() async {
 ```
 
 :::tip
-必须在调用 `ChatClient.getInstance.init(options)` 前配置 `dataSyncType`。Flutter 层未设置时使用原生默认值，Android 5.0.0 与 iOS 5.0.0 的默认同步范围不同，因此应显式配置。`loginWithToken` 返回成功不代表好友数据已同步完成，应等待包含 `ChatDataSyncType.contacts` 的同步完成事件后读取最新本地数据。
+必须在调用 `ChatClient.getInstance.init(options)` 前配置 `dataSyncType`。Flutter 层未设置时使用所依赖原生 SDK 的默认值。Flutter SDK 5.0.0 所依赖的 Android SDK 5.0.0 默认不同步任何数据，iOS SDK 5.0.0 默认同步会话；Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。两端均不默认同步好友列表，如需登录后自动同步好友，应显式包含 `ChatDataSyncType.contacts`。`loginWithToken` 返回成功不代表好友数据已同步完成，应等待包含 `ChatDataSyncType.contacts` 的同步完成事件后读取最新本地数据。
 :::
 
 #### 监听同步状态
