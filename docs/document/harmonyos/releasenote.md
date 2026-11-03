@@ -15,7 +15,9 @@
 
 **数据同步与本地数据访问**
 
-SDK 新增统一的数据同步机制。应用可配置登录后需要自动同步的数据类型，并通过统一的同步状态回调监听同步进度。数据库打开和服务端数据同步分别对应不同阶段：
+SDK 新增统一的数据同步机制。原先通过主动调用服务端拉取接口并在回调中刷新数据的方式，统一调整为 **配置数据同步范围，登录后自动同步，读取本地数据，并在 `onDataSyncFinish` 回调中刷新 UI**。
+
+应用可配置登录后需要自动同步的数据类型，并通过统一的同步状态回调监听同步进度。数据库打开和服务端数据同步分别对应不同阶段：
 
 - **配置同步范围**：通过 `ChatOptions.setDataSyncType(types: DataSyncType | DataSyncType[])` 配置登录后自动同步的数据类型，包括会话、好友、已加入群组和不同步数据等（`DataSyncType` 包含 `NONE`、`CONVERSATIONS`、`CONTACTS` 和 `JOINED_GROUPS`）。需要同步多种数据时应传入对应枚举值数组，建议在调用 `ChatClient.init` 前显式设置。
 - **读取本地数据**：`ConnectionListener.onDatabaseOpened(username)` 回调表示当前账号的本地数据库已打开，收到该回调后即可读取本地数据，不必等待登录后同步完成，有助于加快冷启动时的首屏展示。也可通过 `ChatClient.isDatabaseOpened()` 查询数据库状态；注意 `init` 后即使未登录成功，本地数据库也可能已打开。
@@ -24,71 +26,63 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 详见 [设置登录后自动同步数据](initialization.html#设置登录后自动同步数据) 和 [登录完成前使用本地数据库](login.html#登录完成前使用本地数据库)。
 
-列表数据来源同步调整，服务端列表拉取接口已移除，改由数据同步写入本地数据库：
-
-- 移除 `ChatManager` 的 `fetchConversationsFromServer` 和 `fetchConversationsFromServerWithFilter`。
-- 移除 `ContactManager` 的 `fetchAllContactsIDFromServer`、`fetchAllContactsFromServer` 和 `fetchAllContactsFromServerByPage`。
-- 移除 `GroupManager` 的 `fetchJoinedGroupsFromServer` 和 `fetchPublicGroupsFromServer`。
-- 移除 `ChatOptions` 的 `setEnableAutoSyncContacts` 和 `isEnableAutoSyncContacts`，以及 `ContactListener` 的联系人同步回调，改由 `ConnectionListener.onDataSyncStart/Finish` 通知同步状态。
+列表数据来源同步调整，服务端列表拉取接口已移除，改由数据同步写入本地数据库。API 的变更详见 [迁移指南](migration_guide.html#服务端拉取-api-迁移)。
 
 列表数据的读取方式详见 [本地会话列表](conversation_list.html#一次性获取本地所有会话)、[本地好友列表](user_relationship.html#从本地读取好友列表) 和 [当前用户加入的群组列表](group_manage.html#获取当前用户加入的群组列表)。
 
 **消息已读回执**
 
-消息已读回执统一调整为批量处理方式，单聊和群聊共用一套回执体系：
+消息已读回执支持批量处理，单聊和群聊共用一套回执体系：
 
-- 已读回执改为批量发送，是否发送由每条消息的 `ChatMessage.setIsNeedReadReceipt(true)` 单独控制，移除 `ChatOptions.setRequireReadAck` 全局开关。
-- 单聊和群聊统一通过 `ChatManager.sendMessageReadReceipts(messages: ChatMessage | ChatMessage[])` 发送，并由 `ChatMessageListener.onMessageReadReceipts(receipts)` 接收。
-- 群聊支持批量查询消息已读回执：
-  - `ChatManager.getGroupMessageReadReceipts(messages)` 查询回执汇总。
-  - `ChatManager.fetchGroupMessageReadReceipts(messageId, pageSize, startReceiptId)` 分页拉取回执明细。
-- 回执模型统一：
-  - 新增 `ChatMessageReadReceipt`，提供 `getMessageId()`、`getConversationId()`、`isPeerReceipt()` 和 `getReadCount()`。
-  - `GroupReadAck` 更名为 `GroupReadReceipt`，`getFrom()` 返回 `GroupMember | undefined`，并移除 `getContent()`。
-- 回执字段统一：`ChatMessage` 的 `isUnread` 更名为 `isRead`，`isReceiverRead` 更名为 `isPeerRead`，`isNeedGroupAck` / `setIsNeedGroupAck` 更名为 `isNeedReadReceipt` / `setIsNeedReadReceipt`，`groupAckCount` 更名为 `readReceiptCount`。
-- 移除旧回执接口：`ChatManager` 的 `ackMessageRead`、`ackGroupMessageRead`、`fetchGroupReadAcks`，旧回调 `onMessageRead`、`onGroupMessageRead`、`onReadAckForGroupMessageUpdated`，以及 `ConversationListener` 的 `onConversationRead`。
-- `ChatMessage.createReceiveMessage(...)` 创建的接收消息默认标记为已读。
+- 支持批量发送消息已读回执。
+- 是否需要已读回执，由每条消息单独设置。
+- 单聊和群聊通过统一的消息已读回执事件通知发送方，方便应用更新消息已读状态。
+- 群聊支持批量查询多条消息的已读回执汇总，以及分页获取单条消息的成员已读详情。
 
 详见 [单聊和群聊消息已读回执](message_receipt.html#单聊和群聊消息已读回执)。
 
 **会话未读数管理**
 
-- 清除指定会话或全部会话的本地未读数统一使用 `ChatManager.clearConversationUnreadMessageCount(conversationId)` 和 `clearAllConversationUnreadMessageCount()`。
-- 移除 `Conversation` 的 `markMessageAsRead` 和 `markAllMessagesAsRead`，以及 `ChatManager` 的 `ackConversationRead` 和 `markAllConversationsAsRead`。
-- 清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。多设备事件新增 `CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（65）和 `ALL_CONVERSATION_UNREAD_MESSAGECOUNT_CLEARED`（66），其他设备清理会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
+会话未读数清零与消息已读回执分别处理：
+
+- 支持清零指定会话或全部会话的本地未读消息数。
+- 清零状态会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。
+- 当其他设备清零会话未读数时，本端会收到多设备会话事件，应用可据此重新读取本地会话并刷新界面。
 
 详见 [会话未读数](conversation_unread.html) 和 [监听多设备上的未读数变化](conversation_unread.html#监听多设备上的未读数变化)。
 
 **会话功能**
 
-- 新增会话展示信息接口：`Conversation.getConversationName()` 和 `Conversation.getConversationAvatar()`，未同步时可返回空字符串，方便列表展示。
-- 支持批量删除会话：`ChatManager.deleteConversations(conversationIds: string | string[], deleteMessages: boolean)`，可按需同时删除会话消息。
+SDK 补充会话展示信息和批量管理能力：
+
+- 支持获取会话显示名称和头像，方便列表展示；相关数据尚未同步时，名称和头像可能为空。
+- 支持批量删除本地会话，并可按需同时删除会话中的本地消息。
 
 详见 [会话对象](conversation_overview.html#会话对象) 和 [批量删除本地会话](conversation_delete.html#批量删除本地会话)。
 
-**群组功能**
+**群组配置模型重构**
 
-- 新增群组配置模型 `GroupConfigs`，包含 `maxUsers`、`isPublic`、`joinApprovalRequired`、`allowInvites`、`inviteNeedConfirm` 和 `extField`；`GroupConfigsType` 用于标记需要更新的配置项。
-- 新增 `GroupManager.updateGroupConfigs(groupId, types, configs)`，建群后可按需更新指定配置。
-- `GroupOptions` 移除 `style`（`GroupStyle` 已删除），新增 `isPublic`、`joinApprovalRequired` 和 `allowInvites`，与 `maxUsers`、`inviteNeedConfirm`、`extField` 等字段平铺组合用于建群。
-- `Group` 新增 `isJoinApprovalRequired()` 和 `getUsers()`，移除 `canJoinDirectly()`。
-- 群成员加入、退出事件统一使用 `GroupListener.onMembersJoined` 和 `onMembersExited`，移除单成员回调。
-- `GroupListener.onRequestToJoinDeclined` 的参数顺序调整为 `(groupId, groupName, decliner, reason, applicant)`。
+群组配置从单一样式枚举改为多个独立字段，支持组合设置，建群后也可以按需更新指定配置：
+
+- 创建群组时，通过 `GroupOptions` 分别配置公开或私有、入群审批、成员邀请权限、最大成员数、邀请确认和扩展信息。
+- 建群后，通过 `GroupConfigs` 保存待更新的配置值，包括 `isPublic`、`joinApprovalRequired`、`allowInvites`、`maxUsers`、`inviteNeedConfirm` 和 `extField`；通过 `GroupConfigsType` 指定需要更新的配置项，未指定的配置保持不变。
+- 支持直接从群组对象中读取成员信息。
+- 群成员加入和退出统一通过支持批量成员信息的事件通知应用。
 
 详见 [创建群组](group_manage.html#创建群组)、[修改群组配置](group_attributes.html#修改群组配置) 和 [监听群组事件](group_manage.html#监听群组事件)。
 
-**聊天室监听调整**
+**聊天室事件通知**
 
-- `ChatroomListener.onMutelistAdded` 改为 `(roomId, mutes: Map<string, number>)`，统一表示成员及禁言到期时间，并移除 `onMuteMapAdded`。
-- `ChatroomListener.onRemovedFromChatroom` 改为 `(reason, roomId, roomName, participant)`，新增 `participant` 参数。
+- 成员禁言事件统一提供被禁言成员及各自的禁言到期时间，方便应用维护成员禁言状态。
+- 成员被移出聊天室的事件提供被移出成员信息，方便应用识别相关成员并更新界面。
 
 详见 [监听聊天室事件](room_manage.html#监听聊天室事件)。
 
 **其他新增功能**
 
-- 新增 SDK 日志监听：`ChatClient.addLogListener` / `removeLogListener`，通过 `ChatLogListener.onLog` 回调日志内容。
-- 新增日志压缩：`ChatClient.compressLogs(): Promise<string>`，返回压缩日志文件的本地路径，无需登录。详见 [日志能力迁移说明](migration_guide.html#日志能力补齐)。
-- `ChatOptions.setNtpServers` 支持传入单个服务器地址或地址数组。
+- 支持监听 SDK 日志，方便应用采集和上报日志。
+- 支持将 SDK 日志压缩为单个文件，并获取压缩文件的本地路径，无需登录。详见 [日志能力迁移说明](migration_guide.html#日志能力补齐)。
+- 自定义 NTP 服务器配置支持单个地址或多个地址。 
 
 #### 修复
 

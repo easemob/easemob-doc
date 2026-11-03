@@ -33,22 +33,22 @@ let localGroup: Group | undefined = ChatClient.getInstance()
 // 从服务器获取最新群组详情，并更新本地缓存。
 ChatClient.getInstance().groupManager()?.fetchGroupFromServer(groupId)
     .then((group: Group): void => {
-        // 获取群组 ID。
+        // 群组 ID。
         let id: string = group.groupId();
 
-        // 获取群组名称。
+        // 群组名称。
         let name: string = group.groupName();
 
-        // 获取群组描述。
+        // 群组描述。
         let description: string = group.description();
 
-        // 获取群头像 URL。
+        // 群头像 URL。
         let avatar: string = group.groupAvatar();
 
-        // 获取群主的用户 ID。
+        // 群主的用户 ID。
         let owner: string = group.owner();
 
-        // 获取群管理员的用户 ID 列表。
+        // 群管理员的用户 ID 列表。
         let admins: string[] = group.adminList();
 
         // 判断当前用户是否已屏蔽该群组的消息。
