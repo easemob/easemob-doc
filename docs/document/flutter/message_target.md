@@ -1,34 +1,52 @@
 # 定向消息
 
-发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
+## 功能说明
 
-该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
+发送定向消息是指向群组或聊天室的单个或多个指定成员发送消息，其他成员不会收到该消息。
 
-:::tip
-1. 仅 SDK 4.1.0 及以上版本支持。
-2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
-3. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
-4. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
-:::
+## 使用限制
 
-发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：
+- **支持消息类型：** 适用于文本、图片、语音、视频等各类消息。
+- **接收人数限制：** 每条定向消息最多可指定群组或聊天室中的 20 名成员接收。
+- **会话列表与未读数：** 定向消息不会写入服务端会话列表，也不计入服务端会话的未读消息数。
+- **群组消息漫游：** 群组定向消息默认不支持漫游。如需使用，需联系环信商务开通。
+- **聊天室消息漫游：** 聊天室定向消息默认不支持漫游。如需使用，需联系环信商务同时开通聊天室消息漫游和定向消息漫游功能。
+
+## 发送定向消息
+
+发送定向消息的流程与发送普通消息相似，唯一区别在于发送前需要通过 `ChatMessage#receiverList` 设置定向接收方列表。具体操作如下：
 
 1. 创建一条群组或聊天室消息。
-2. 设置消息的接收方。 
+2. 设置消息的定向接收方列表。
 3. 发送定向消息。
 
-下面以文本消息为例介绍如何发送定向消息，示例代码如下：
+下面以群组文本消息为例介绍如何发送定向消息：
 
 ```dart
-
-final msg = ChatMessage.createTxtSendMessage(
-  targetId: targetId,
-  content: 'content',
+// 创建一条群组文本消息。
+final ChatMessage message = ChatMessage.createTxtSendMessage(
+  targetId: groupId,
+  content: '这条消息只有指定的成员能看到',
+  // 群聊和聊天室分别设置为 GroupChat 和 ChatRoom。
   chatType: ChatType.GroupChat,
 );
-// 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `null`，则消息发送给群组或聊天室的所有成员。
-msg.receiverList = ['userId1', 'userId2'];
-ChatClient.getInstance.chatManager.sendMessage(msg);
 
+// 设置定向接收方列表，最多可传入 20 个成员的用户 ID。
+// 若传入 null，则消息发送给群组或聊天室的所有成员。
+message.receiverList = <String>['user1', 'user2'];
+
+try {
+  await ChatClient.getInstance.chatManager.sendMessage(message);
+} on ChatError catch (e) {
+  // 发送失败，根据错误码和错误信息处理。
+}
 ```
-接收群定向消息与接收普通消息的操作相同，详见 [接收文本消息](message_receive.html#接收文本消息)。
+
+接收定向消息与接收普通消息的操作相同，详见 [接收消息](message_receive.html)。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`createTxtSendMessage`](#发送定向消息) | `ChatMessage` | 创建文本消息。 |
+| [`sendMessage`](#发送定向消息) | `ChatManager` | 发送定向消息。 |

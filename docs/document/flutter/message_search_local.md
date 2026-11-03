@@ -1,154 +1,169 @@
 # 搜索消息
 
-<Toc />
+本文介绍环信即时通讯 IM Flutter SDK 如何按照关键词、搜索范围、消息类型、发送方和时间戳等条件搜索本地消息。本文中的接口仅查询当前用户设备上的本地数据库，不会向服务端发起搜索请求。由于透传消息不会保存到本地数据库，因此无法通过这些接口搜索透传消息。
 
-本文介绍环信即时通讯 IM Flutter SDK 如何搜索本地消息。
-
-自 Flutter SDK 4.25.0 起可调用服务端消息搜索 API。该功能需联系环信商务开通，详见 [服务端消息搜索文档](/value-added/search/message_search_flutter.html)。
-
-## 技术原理
-
-环信即时通讯 IM Flutter SDK 支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
-
-- `ChatManager.searchMsgFromDB`：根据关键字搜索会话中的用户发送的消息。
-- `ChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
-- `ChatConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
-- `ChatManager#searchMsgsByOptions`：根据单个或多个消息类型，搜索本地数据库中所有会话的消息。
-- `ChatConversation#searchMsgsByOptions` 根据单个或多个消息类型，搜索本地数据库中单个会话的消息。
+:::tip
+若要搜索服务端的消息，请联系商务开通。详见 [服务端消息搜索文档](/value-added/search/message_search_flutter.html)。
+:::
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 已完成 SDK 初始化，并已 [打开当前用户的本地数据库](login.html#登录完成前使用本地数据库)，详见 [快速开始](quickstart.html)。本地消息搜索不要求客户端保持服务器连接。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
 ### 根据关键字搜索会话中的用户发送的消息
 
-你可以调用 `loadMessagesWithKeyword` 方法根据关键字搜索本地数据库中单个会话中指定用户发送的消息，示例代码如下：
+你可以调用 `ChatConversation#loadMessagesWithKeyword`，按照关键词搜索指定会话中一个或多个用户发送的消息。
 
+`timestamp` 为搜索起始时间戳，设为负数时从当前时间开始搜索；返回结果不包含时间戳与 `timestamp` 相同的消息。
 
 ```dart
-ChatConversation? conv =
-        await ChatClient.getInstance.chatManager.getConversation("convId");
-        
-    List<ChatMessage>? msgs = await conv?.loadMessagesWithKeyword(
-      // 搜索关键字。
-      "key",
-      // 消息发送方。
-      sender: "tom",
-      // 搜索开始的 Unix 时间戳，单位为毫秒。
-      timestamp: 1653971593000,
-      // 要获取的消息条数。
-      count: 10,
-      // 消息的搜索方向：消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-      direction: ChatSearchDirection.Up,
-    );
+final ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
+  conversationId,
+  type: conversationType,
+  createIfNeed: false,
+);
+
+if (conversation != null) {
+  // count 取值范围为 1–400；Up 表示按时间戳倒序搜索。
+  // senders 最多可包含 10 个用户 ID；传入 null 或空列表时，
+  // 不限制消息发送方。
+  final List<ChatMessage> messages =
+      await conversation.loadMessagesWithKeyword(
+    keywords,
+    timestamp: timestamp,
+    count: maxCount,
+    senders: <String>[senderId],
+    direction: ChatSearchDirection.Up,
+  );
+}
 ```
 
 ### 根据搜索范围搜索所有会话中的消息
 
-你可以调用 `ChatManager#loadMessagesWithKeyword` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+你可以调用 `ChatManager#loadMessagesWithKeyword`，按照关键词、起始时间戳、最大返回数量、发送方和搜索方向，在全部本地会话中搜索消息。
 
-:::tip
-若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
-:::
+通过 `searchScope` 还可以指定仅搜索消息内容、仅搜索消息扩展字段，或同时搜索二者。
 
 ```dart
-try {
-  await ChatClient.getInstance.chatManager.loadMessagesWithKeyword(
-    keywords,
-    sender: sender,
-    timestamp: timestamp,
-    count: 20,
-    direction: ChatSearchDirection.Up,
-    searchScope: MessageSearchScope.All,
-  );
-} on ChatError catch (e) {
-  debugPrint("loadMessagesWithKeyword error: ${e.code}, ${e.description}");
-}
+const String keyword = '123';
+
+final List<ChatMessage> messages =
+    await ChatClient.getInstance.chatManager.loadMessagesWithKeyword(
+  keyword,
+  timestamp: -1,
+  count: 200,
+  sender: null,
+  direction: ChatSearchDirection.Up,
+  searchScope: MessageSearchScope.All,
+);
 ```
 
 ### 根据搜索范围搜索当前会话中的消息
 
-你可以调用 `ChatConversation#loadMessagesWithKeyword` 方法除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
-:::
+你可以调用 `ChatConversation#loadMessagesWithKeyword`，按照关键词、起始时间戳、最大返回数量、一个或多个发送方、搜索方向及搜索范围，异步搜索当前会话中的消息。
 
 ```dart
-ChatConversation? conversation = await ChatClient.getInstance.chatManager.getConversation(userId);
-try {
-  await conversation?.loadMessagesWithKeyword(
-    keywords,
-    sender: sender,
-    timestamp: timestamp,
-    count: 20,
-    direction: ChatSearchDirection.Up,
-    searchScope: MessageSearchScope.All,
-  );
-} on ChatError catch (e) {
-  debugPrint("loadMessagesWithKeyword error: ${e.code}, ${e.description}");
-}
+const String keyword = '123';
+const String conversationId = 'jack';
 
+final ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
+  conversationId,
+  type: conversationType,
+  createIfNeed: false,
+);
+
+if (conversation != null) {
+  try {
+    final List<String> senders = <String>['user1', 'user2'];
+    // senders 最多可包含 10 个用户 ID；传入 null 或空列表时，
+    // 不限制消息发送方。
+    final List<ChatMessage> messages =
+        await conversation.loadMessagesWithKeyword(
+      keyword,
+      timestamp: -1,
+      count: 200,
+      senders: senders,
+      direction: ChatSearchDirection.Up,
+      searchScope: MessageSearchScope.All,
+    );
+    // messages 为当前会话中符合条件的本地消息。
+  } on ChatError catch (e) {
+    // 搜索失败，根据错误码和错误信息处理。
+  }
+}
 ```
 
 ### 根据消息类型搜索所有会话中的消息
 
-你可以调用 `ChatManager#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
-:::
+你可以调用 `ChatManager#searchMsgsByOptions`，按照一种或多种消息类型、起始时间戳、最大返回数量、发送方和搜索方向，在全部本地会话中搜索消息。
 
 ```dart
-// from：会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 // count：要查询的消息条数。取值范围为 [1,400]。
-try {
-  const searchOptions = MessageSearchOptions(
-    types: [MessageType.TXT, MessageType.IMAGE],
-    from: fromUser,
-    ts: startTime,
-    direction: ChatSearchDirection.Up,
-    count: 50
-  );
-  List<ChatMessage> msgs =
-      await ChatClient.getInstance.chatManager.searchMsgsByOptions(
-    searchOptions,
-  );
-} on ChatError catch (e) {
-  debugPrint("error code: ${e.code}, desc: ${e.description}");
+// from：会话中发送方的用户 ID。若不设置，搜索对发送方不限制。
+const MessageSearchOptions options = MessageSearchOptions(
+  types: <MessageType>[MessageType.TXT, MessageType.VOICE],
+  ts: -1,
+  count: 400,
+  from: 'xu',
+  direction: ChatSearchDirection.Up,
+);
+
+final List<ChatMessage> messages =
+    await ChatClient.getInstance.chatManager.searchMsgsByOptions(options);
+
+for (final ChatMessage message in messages) {
+  if (message.body is ChatTextMessageBody) {
+    final ChatTextMessageBody body = message.body as ChatTextMessageBody;
+    debugPrint('message: ${body.content}, time: ${message.serverTime}');
+  } else {
+    debugPrint('message: ${message.body}, time: ${message.serverTime}');
+  }
 }
 ```
 
 ### 根据消息类型搜索当前会话中的消息
 
-你可以调用 `ChatConversation#searchMsgsByOptions` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V4.8.1 或以上版本。
-:::
+你可以调用 `ChatConversation#searchMsgsByOptions`，按照一种或多种消息类型、起始时间戳、最大返回数量、发送方和搜索方向，在指定会话中搜索消息。
 
 ```dart
-// from：当前会话中发送方的用户 ID。若传空字符串，搜索对发送方不限制。
 // count：要查询的消息条数。取值范围为 [1,400]。
-  try {
-    const searchOptions = MessageSearchOptions(
-        types: [MessageType.TXT, MessageType.IMAGE],
-        from: fromUser,
-        ts: startTime,
-        direction: ChatSearchDirection.Up,
-        count: 50);
-    conversation.searchMsgsByOptions(
-      searchOptions,
-    );
-  } on ChatError catch (e) {
-    debugPrint("error code: ${e.code}, desc: ${e.description}");
+// from：当前会话中发送方的用户 ID。若不设置，搜索对发送方不限制。
+const MessageSearchOptions options = MessageSearchOptions(
+  types: <MessageType>[MessageType.TXT, MessageType.VOICE],
+  ts: -1,
+  count: 400,
+  from: 'xu',
+  direction: ChatSearchDirection.Up,
+);
+
+final ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
+  'xu',
+  type: conversationType,
+  createIfNeed: false,
+);
+
+if (conversation != null) {
+  final List<ChatMessage> messages =
+      await conversation.searchMsgsByOptions(options);
+
+  for (final ChatMessage message in messages) {
+    if (message.body is ChatTextMessageBody) {
+      final ChatTextMessageBody body = message.body as ChatTextMessageBody;
+      debugPrint('message: ${body.content}, time: ${message.serverTime}');
+    } else {
+      debugPrint('message: ${message.body}, time: ${message.serverTime}');
+    }
   }
-```     
+}
+```
 
 ## 关键字搜索规则
 
@@ -160,16 +175,16 @@ try {
 
 ### 只搜索消息内容
 
-|消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
-| :-------------- | :----- |:----- |
-|文本消息  | `ChatTextMessageBody.content`      | 文本消息的实际内容“你好世界”。|
-|图片消息  | `ChatImageMessageBody.displayName`     | 图片文件名“photo.jpg”|
-|语音消息  | `ChatVoiceMessageBody.displayName`    | 语音文件名“audio.amr”|
-|视频消息  | `ChatVideoMessageBody.displayName`     | 视频文件名“video.mp4”|
-|文件消息  | `ChatFileMessageBody.displayName`       |文件名“report.pdf”|
-|位置消息  | `ChatLocationMessageBody.address`     | 地址\建筑物名称“北京市朝阳区\国贸大厦”|
-|自定义消息| `ChatCustomMessageBody.event`    | 自定义事件名“gift”|
-|合并消息  | `CombineMessageBody.title` + `CombineMessageBody.summary`    | 标题\摘要“聊天记录\包含5条消息”|
+| 消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
+| :--- | :--- | :--- |
+| 文本消息 | `ChatTextMessageBody.content` | 文本消息的实际内容“你好世界”。 |
+| 图片消息 | `ChatImageMessageBody.displayName` | 图片文件名“photo.jpg”。 |
+| 语音消息 | `ChatVoiceMessageBody.displayName` | 语音文件名“audio.amr”。 |
+| 视频消息 | `ChatVideoMessageBody.displayName` | 视频文件名“video.mp4”。 |
+| 文件消息 | `ChatFileMessageBody.displayName` | 文件名“report.pdf”。 |
+| 位置消息 | `ChatLocationMessageBody.address` 和 `ChatLocationMessageBody.buildingName` | 地址或建筑物名称，例如“北京市朝阳区”或“国贸大厦”。 |
+| 自定义消息 | `ChatCustomMessageBody.event` | 自定义事件名“gift”。 |
+| 合并消息 | `CombineMessageBody.title` 和 `CombineMessageBody.summary` | 标题或摘要，例如“聊天记录”或“包含 5 条消息”。 |
 
 ### 只搜索扩展信息
 
@@ -183,3 +198,13 @@ try {
 
 同时搜索消息内容和扩展信息，任一匹配即返回。
 
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getConversation`](#根据关键字搜索会话中的用户发送的消息) | `ChatManager` | 获取指定 ID 的本地会话；未找到时返回 `null`。 |
+| [`loadMessagesWithKeyword`](#根据关键字搜索会话中的用户发送的消息) | `ChatConversation` | 按照关键词搜索指定会话中一个或多个用户发送的本地消息。 |
+| [`loadMessagesWithKeyword`](#根据搜索范围搜索所有会话中的消息) | `ChatManager` | 按照关键词和搜索范围，在全部本地会话中搜索消息。 |
+| [`loadMessagesWithKeyword`](#根据搜索范围搜索当前会话中的消息) | `ChatConversation` | 按照关键词、发送方列表及搜索范围，异步搜索指定会话中的消息。 |
+| [`searchMsgsByOptions`](#根据消息类型搜索所有会话中的消息) | `ChatManager` | 按照一种或多种消息类型，在全部本地会话中搜索消息。 |
+| [`searchMsgsByOptions`](#根据消息类型搜索当前会话中的消息) | `ChatConversation` | 按照一种或多种消息类型，在指定会话中搜索消息。 |

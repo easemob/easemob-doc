@@ -30,8 +30,6 @@
 ## 前提条件
 
 开始前，请确保满足以下条件：
-
-- 已升级 SDK 至 v4.19.0 或以上版本。
 - 已完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 已了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
 
@@ -77,6 +75,16 @@ void addChatListener() {
 }
 ```
 
+不再需要接收消息事件时，应使用与注册时相同的事件监听 ID 移除监听器：
+
+```dart
+void removeChatListener() {
+  ChatClient.getInstance.chatManager.removeEventHandler(
+    'UNIQUE_HANDLER_ID',
+  );
+}
+```
+
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `msgId` 更新同一条消息的展示内容。
 
 ```dart
@@ -103,7 +111,7 @@ void handleStreamChunk(ChatMessage msg) {
   // 自定义类型，例如 text / markdown
   final String? customType = chunk.customType;
 
-  // 错误码与完成原因
+  // 错误码仅在 ERROR 状态下有效；完成原因由业务服务器设置
   final int errorCode = chunk.errorCode;
   final int finishReason = chunk.finishReason;
   // 建议业务侧按 msgId 更新同一条消息的展示内容
@@ -116,15 +124,16 @@ void handleStreamChunk(ChatMessage msg) {
 
 ### 当前分片信息
 
-通过 `msg.streamChunk` 获取 `StreamChunk` 对象。该对象表示当前收到的分片信息。
+通过 `msg.streamChunk` 获取 `ChatStreamChunk` 对象。该对象表示当前收到的分片信息。
 
-| 属性 | 类型 | 说明 |
+| 属性或判断项     | 类型    | 说明   |
 | :--- | :--- | :--- |
-| `chunk` | String | 当前分片的文本内容。 |
-| `status` | ChatStreamStatus | 当前分片对应的流式消息传输状态。 |
-| `errorCode` | Int | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason` | Int | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
-| `customType` | String? | 自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
+| `chunk`                                     | String           | 当前分片的文本内容。                                         |
+| `status`                                    | ChatStreamStatus | 当前分片对应的流式消息传输状态。                             |
+| `errorCode`                                 | int              | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
+| `finishReason`                              | int              | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。      |
+| `customType`                                | String?          | 自定义透传类型，例如，用于标识文本格式的 `"markdown"`。      |
+| 流式消息是否已结束（业务计算，非 SDK 属性） | bool             | 根据 `status` 判断流式消息是否已结束。<br/> 当 `status` 为 `ChatStreamStatus.COMPLETE`、`ChatStreamStatus.START_AND_COMPLETE` 或 `ChatStreamStatus.ERROR` 中任意一种状态时，判定为已结束。其中，`ERROR` 表示异常结束，不代表成功完成。 |
 
 ```dart
 void handleStreamChunk(ChatMessage msg) {
@@ -246,3 +255,24 @@ UI 使用建议如下：
 #### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI，避免将同一条流式消息误显示为多条消息。
+
+## 接口列表
+
+以下列表包含接收流式消息所使用的方法、回调和属性。
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addEventHandler`](#示例代码) | `ChatManager` | 注册消息事件监听器。 |
+| [`removeEventHandler`](#示例代码) | `ChatManager` | 使用注册时的同一标识移除消息事件监听器。 |
+| [`onStreamMessagesReceived`](#示例代码) | `ChatEventHandler` | 接收流式消息分片回调，返回包含当前分片信息的消息列表。 |
+| [`msgId`](#接入流程) | `ChatMessage` | 获取整条流式消息的唯一 ID，用于更新同一条消息的展示内容。 |
+| [`streamChunk`](#当前分片信息) | `ChatMessage` | 获取当前分片信息，类型为 `ChatStreamChunk?`；读取前需判断是否为 `null`。 |
+| [`chunk`](#当前分片信息) | `ChatStreamChunk` | 获取当前分片的文本内容。 |
+| [`status`](#传输状态与错误处理) | `ChatStreamChunk` | 获取当前分片对应的流式消息传输状态，并据此判断消息是否已结束。 |
+| [`customType`](#当前分片信息) | `ChatStreamChunk` | 获取分片的自定义透传类型。 |
+| [`errorCode`](#传输状态与错误处理) | `ChatStreamChunk` | 获取流式消息异常结束时的错误码。 |
+| [`finishReason`](#传输状态与错误处理) | `ChatStreamChunk` | 获取业务服务器设置的完成原因码。 |
+| [`content`](#累计合并内容) | `ChatTextMessageBody` | 获取从首个分片到当前分片的累计合并文本内容。 |
+| [`attributes`](#扩展字段) | `ChatMessage` | 获取消息扩展字段，最终持久化结果以首个分片中的扩展字段为准。 |
+
+Flutter SDK 未提供 Android 的 `isCompleted()` 方法。判断流式消息是否已结束时，应检查 `status` 是否为 `ChatStreamStatus.COMPLETE`、`ChatStreamStatus.START_AND_COMPLETE` 或 `ChatStreamStatus.ERROR`，其中 `ERROR` 表示异常结束。

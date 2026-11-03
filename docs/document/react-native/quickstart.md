@@ -12,30 +12,28 @@
 
 ## 前提条件
 
-集成前请确认 app 的开发和运行环境满足以下要求：
+集成前请确认 app 的开发和运行环境满足以下要求。以下以本文使用的 React Native 0.83.2 为基准，需使用新架构；这些要求不代表 SDK 在所有 React Native 版本下的最低环境要求。
 
 对于 iOS 平台：
 
-- MacOS 10.15.7 或以上版本
-- Xcode 12.4 或以上版本，包括命令行工具
-- React Native 0.66.5 或以上版本
-- NodeJs 16 或以上版本，包含 npm 包管理工具
-- CocoaPods 包管理工具
+- macOS、Xcode 及命令行工具，版本满足 React Native 0.83.2 的构建要求
+- React Native 0.83.2，使用新架构
+- 推荐 Node.js 24 LTS，包含 npm 包管理工具
+- Ruby、Bundler 和 CocoaPods 包管理工具
 - Yarn 编译运行工具
 - Watchman 调试工具
-- 运行环境真机或模拟器 iOS 10.0 或以上版本
+- 运行环境真机或模拟器 iOS 15.1 或以上版本
 
 对于 Android 平台：
 
-- MacOS 10.15.7 或以上版本，Windows 10 或以上版本
-- Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本
-- React Native 0.66.5 或以上版本
-- 如果用 Macos 系统开发，需要 CocoaPods 包管理工具
+- macOS 或 Windows，版本满足 React Native 0.83.2 的构建要求
+- Android Studio 及 Android SDK、NDK、CMake 构建工具，版本与 React Native 0.83.2 工程匹配；JDK 17 或以上版本
+- React Native 0.83.2，使用新架构
 - 如果用 Windows 开发，需要 Powershell 5.1 或以上版本
-- NodeJs 16 或以上版本，包含 npm 包管理工具
+- 推荐 Node.js 24 LTS，包含 npm 包管理工具
 - Yarn 编译运行工具
-- Watchman 调试工具
-- 运行环境真机或模拟器 Android 6.0 或以上版本
+- Watchman 调试工具（macOS 下可选）
+- 运行环境真机或模拟器 Android 7.0（API 24）或以上版本
 
 配置开发或者运行环境如果遇到问题，请参考 [React Native 官网](https://reactnative.dev/)。
 
@@ -74,10 +72,11 @@ yarn add react-native-chat-sdk
 
 4. native 部分初始化
 
-iOS 平台需要使用 `cocoapods` 进行初始化。
+iOS 平台需要使用 `cocoapods` 进行初始化。以下命令通过 CocoaPods 安装原生依赖，该方式在 SDK 5.x 中仍受支持；如需使用推荐的 SPM 方式，请参见 [添加依赖](integration.html#ios-原生依赖)。
 
 ```sh
-cd ios && pod install && cd ..
+bundle install
+cd ios && bundle exec pod install && cd ..
 ```
 
 ## 创建用户
@@ -88,7 +87,9 @@ cd ios && pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
-建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
+建议使用 `visual studio code` 打开文件夹 `simple_demo`，将默认生成的 `App.tsx` 重命名为 `App.js`（已有 `App.js` 时直接使用），删除全部内容，并添加如下内容:
+
+等待日志显示 `init success` 后再登录，显示 `onConnected` 后再发送消息。发送是否成功以 `onSuccess` 或 `onError` 回调为准，`ChatManager#sendMessage` 返回的 Promise 正常结束不表示消息已发送成功。Token 即将过期时，需从业务服务器获取新 Token 并调用 `ChatClient#renewToken`；Token 已过期时，需获取有效 Token 后重新登录，详见 [登录](login.html)。
 
 ```javascript
 
@@ -107,7 +108,6 @@ import {
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-  ChatConnectEventListener,
 } from 'react-native-chat-sdk';
 
 // Defines the App object.
@@ -156,57 +156,53 @@ const App = () => {
   };
 
   useEffect(() => {
+    let active = true;
     // Registers listeners for messaging.
-    const setMessageListener = () => {
-      let msgListener = {
-        onMessagesReceived(messages) {
-          for (let index = 0; index < messages.length; index++) {
-            rollLog('received msgId: ' + messages[index].msgId);
-          }
-        },
-        onCmdMessagesReceived: messages => {},
-        onMessagesRead: messages => {},
-        onGroupMessageRead: groupMessageAcks => {},
-        onMessagesDelivered: messages => {},
-        onMessagesRecalled: messages => {},
-        onConversationsUpdate: () => {},
-        onConversationRead: (from, to) => {},
-      };
+    const msgListener = {
+      onMessagesReceived(messages) {
+        for (let index = 0; index < messages.length; index++) {
+          rollLog('received msgId: ' + messages[index].msgId);
+        }
+      },
+      onCmdMessagesReceived: messages => {},
+      onMessageReadReceipts: receipts => {},
+      onMessagesDelivered: messages => {},
+      onMessagesRecalledInfo: messages => {},
+      onConversationsUpdate: () => {},
+    };
 
-      chatManager.removeAllMessageListener();
-      chatManager.addMessageListener(msgListener);
+    const listener = {
+      onTokenWillExpire() {
+        rollLog('token will expire; renew it with a new token.');
+      },
+      onTokenDidExpire() {
+        rollLog('token did expire; log in again with a valid token.');
+      },
+      onConnected() {
+        rollLog('onConnected');
+      },
+      onDisconnected(errorCode) {
+        rollLog('onDisconnected:' + (errorCode ?? 'unknown'));
+      },
     };
 
     // Initializes the SDK.
-    // Initializes any interface before calling it.
+    // 先初始化 SDK，再调用登录等接口
     const init = () => {
       let o = ChatOptions.withAppKey({
-        autoLogin: false,
         appKey: appKey,
       });
-      chatClient.removeAllConnectionListener();
       chatClient
         .init(o)
         .then(() => {
+          if (!active) return;
           rollLog('init success');
-          let listener = {
-            onTokenWillExpire() {
-              rollLog('token expire.');
-            },
-            onTokenDidExpire() {
-              rollLog('token did expire');
-            },
-            onConnected() {
-              rollLog('onConnected');
-              setMessageListener();
-            },
-            onDisconnected() {
-              rollLog('onDisconnected:' + errorCode);
-            },
-          } as ChatConnectEventListener;
+          // 初始化完成后注册一次监听器，重连时不重复注册
+          chatManager.addMessageListener(msgListener);
           chatClient.addConnectionListener(listener);
         })
         .catch(error => {
+          if (!active) return;
           rollLog(
             'init fail: ' +
               (error instanceof Object ? JSON.stringify(error) : error),
@@ -215,6 +211,12 @@ const App = () => {
     };
 
     init();
+    return () => {
+      active = false;
+      // 组件卸载时移除同一个监听器，不影响其他模块
+      chatManager.removeMessageListener(msgListener);
+      chatClient.removeConnectionListener(listener);
+    };
   }, [chatClient, chatManager, appKey]);
 
   // Logs in with an account ID and a token.
@@ -265,7 +267,7 @@ const App = () => {
     chatClient.chatManager
       .sendMessage(msg, callback)
       .then(() => {
-        rollLog('send message: ' + msg.localMsgId);
+        rollLog('send request submitted: ' + msg.localMsgId);
       })
       .catch(reason => {
         rollLog('send fail: ' + JSON.stringify(reason));
@@ -442,13 +444,13 @@ yarn run start
 
 ## 测试你的 app
 
-参考以下代码测试注册账号，登录，发送和接收消息。
+使用已在环信控制台创建的账号，参考以上示例测试登录、发送和接收消息。
 
-1. 输入用户名和 token，点击 **登录**。
+1. 日志显示 `init success` 后，输入用户名和 token，点击 **SIGN IN**；显示 `onConnected` 后即可发送消息。
 2. 在另外设备可以登录另外一个用户。
-3. 第一个用户，编辑消息并点击 **发送**，第二个用户将接收消息。
+3. 第一个用户，填写接收方用户 ID、编辑消息并点击 **SEND TEXT**，第二个用户将接收消息。
 
-_同时，你可以在下方查看日志，检查注册，登录，发送消息是否成功。_
+_同时，你可以在下方查看日志，检查登录、发送和接收消息是否成功。_
 
 ## 更多操作
 

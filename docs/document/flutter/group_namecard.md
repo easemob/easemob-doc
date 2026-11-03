@@ -8,7 +8,6 @@
 
 即时通讯 IM Flutter SDK 提供群成员名片管理功能，支持群成员名片的设置、本地查询、服务端获取和变更监听。
 
-**本功能从 Flutter SDK 4.22.0 版本开始支持。**
 
 ## 技术原理
 
@@ -21,7 +20,6 @@ Flutter SDK 对 Android 和 iOS 平台的群成员名片能力进行了统一封
 
 开始接入前，请确保满足以下条件：
 
-- 已将 Flutter SDK 升级至 v4.22.0 或以上版本。
 - 已完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制，详见 [使用限制](/product/limitation.html)。
 
@@ -98,7 +96,7 @@ Future<void> updateMyGroupNamecard() async {
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :---: | :--- |
 | `groupId` | String | 是 | 群组 ID。 |
-| `namecard` | String | 否 | 新的群成员名片。传 `null` 或省略时移除自己的群成员名片。 |
+| `namecard` | `String?` | 否 | 新的群成员名片。传 `null` 或省略时移除自己的群成员名片。 |
 
 ## 从服务端获取群成员名片
 
@@ -141,7 +139,7 @@ Future<String?> fetchGroupMemberNamecards({String? cursor}) async {
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :---: | :--- |
 | `groupId` | String | 是 | 群组 ID。 |
-| `cursor` | String | 否 | 分页游标。首次调用传 `null` 或省略，后续传入上一次返回的 `ChatCursorResult#cursor`。 |
+| `cursor` | `String?` | 否 | 分页游标。首次调用传 `null` 或省略，后续传入上一次返回的 `ChatCursorResult#cursor`。 |
 | `limit` | int | 否 | 每页获取的成员数量，默认值为 `20`，取值范围取决于 [服务端获取群成员列表接口](/document/server-side/group_member_list_obtain.html#请求-url)。 |
 
 `GroupMemberInfo` 的主要字段如下：
@@ -151,9 +149,9 @@ Future<String?> fetchGroupMemberNamecards({String? cursor}) async {
 | `userId` | String | 群成员用户 ID。 |
 | `joinedTs` | int | 用户加入群组的时间戳。 |
 | `role` | `ChatGroupPermissionType` | 群成员角色。 |
-| `namecard` | String | 群成员名片。 |
-| `nickname` | String | 群成员昵称。 |
-| `avatarUrl` | String | 群成员头像 URL。 |
+| `namecard` | `String?` | 群成员名片。 |
+| `nickname` | `String?` | 群成员昵称。 |
+| `avatarUrl` | `String?` | 群成员头像 URL。 |
 
 ## 从本地内存获取群成员名片
 
@@ -234,7 +232,6 @@ void readSenderGroupNamecard(ChatMessage message) {
 - 群成员名片变更通知只投递给在线用户。离线期间未收到通知时，应在需要最新数据的场景主动调用 `fetchGroupMembersInfo`。
 - 若需通过消息自动同步群成员名片，必须在 SDK 初始化前配置 `enableUserInfo: true`。
 - 通过消息自动更新依赖消息触发。若业务需要立即获得最新数据，仍应调用 `fetchGroupMembersInfo` 主动从服务端获取。
-- Flutter 4.22.0 的公开 API 统一使用 `Chat*` 命名；不要在新代码中使用已弃用的旧名称。
 
 ## 常见问题
 

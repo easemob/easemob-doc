@@ -1,156 +1,157 @@
 # 删除消息
 
-<Toc />
+## 功能说明
 
-本文介绍用户如何单向删除服务端以及删除本地的历史消息。
+SDK 支持单向删除服务端的消息：
 
-## 技术原理
+- 单向清空服务端聊天记录：清空当前用户的会话及消息，包括单聊、群聊和聊天室，并清除当前设备的本地会话及消息缓存。
+- 单向删除服务端历史消息：按消息 ID 或时间戳删除当前用户在服务端保存的历史消息。同一会话中的其他用户不受影响。
 
-环信即时通讯 IM React Native SDK 通过 `ChatManager` 类实现单向删除服务端以及本地的历史消息，主要方法如下：
-
-- `ChatManager#deleteAllMessageAndConversation`：清空聊天记录；
-- `ChatManager#removeMessagesFromServerWithTimestamp`/`removeMessagesFromServerWithMsgIds` ：单向删除服务端的历史消息；
-- `ChatManager#deleteAllMessages`：删除本地指定会话的所有消息；
-- `ChatManager#deleteMessagesWithTimestamp`：删除本地单个会话在指定时间段的消息；
-- `ChatManager#deleteMessage`：删除本地单个会话的指定消息；
+单向清空或删除后，当前用户无法再从服务端获取相应数据。SDK 还支持删除本地指定会话的全部消息、指定时间段的消息或单条消息。本地删除不影响服务端和其他用户的数据。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
+- 完成 SDK 初始化，且当前用户的本地数据库已打开，详见 [快速开始](quickstart.html)。
+- 删除服务端数据时，当前用户已登录并连接到服务器。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
-## 实现方法
-
-### 清空聊天记录
-
-你可以调用 `ChatManager#deleteAllMessageAndConversation` 方法清空当前用户的聊天记录，包括单聊、群组聊天和聊天室的消息和会话。同时你也可以选择是否清除服务端的聊天记录。若你清除了服务端的聊天记录，你无法从服务端拉取到会话和消息，而其他用户不受影响。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
+:::warning
+删除前应确认目标账号、会话和消息范围。删除服务端数据后，当前用户不能再通过消息漫游恢复这些数据；不要通过反复重试扩大删除范围。
 :::
 
+## 单向清空聊天记录
+
+调用 `ChatManager#deleteAllMessageAndConversation(clearServerData)` 清空当前用户的全部本地会话及消息，包括单聊、群聊和聊天室会话。通过 `clearServerData` 参数可以决定是否同时单向清空当前用户在服务端的会话及消息：
+
+- `true`：同时单向清空当前用户服务端的全部会话及消息。清空后，当前用户无法再从服务端获取这些数据，其他用户不受影响。
+- （默认）`false`：仅清空当前设备的本地会话及消息，保留服务端数据。
+
+该方法返回 `Promise<void>`。成功后应重新读取本地会话列表并刷新界面；也可通过 `ChatMessageEventListener#onConversationsUpdate` 监听会话列表变化。
+
 ```typescript
-ChatClient.getInstance()
-  .chatManager.deleteAllMessageAndConversation(clearServerData)
-  .then(() => {
-    // todo: 操作成功
-  })
-  .catch((error) => {
-    // todo: 发生错误
-  });
+// 仅在用户确认后调用；传 true 会同时清除当前用户服务端数据
+ChatClient.getInstance().chatManager
+  .deleteAllMessageAndConversation(true)
+  .then(() => console.log('聊天记录已清空，请刷新会话列表'))
+  .catch((error: unknown) => console.error('清空聊天记录失败：', error));
 ```
 
-### 单向删除服务端的历史消息
+## 单向删除服务端的历史消息
 
-你可以调用 `removeMessagesFromServerWithTimestamp` 或 `removeMessagesFromServerWithMsgIds` 方法按消息时间或消息 ID 删除你在服务器和本地的消息。
+通过以下两个 `ChatManager` 方法按消息 ID 或时间戳删除当前用户在服务端保存的历史消息。该操作仅对当前用户生效：删除后，当前用户无法再从服务端漫游获取这些消息；同一单聊、群聊或聊天室中的其他用户不受影响，仍可按照漫游策略获取这些消息。
 
-- 按时间删除：删除指定时间及之前的历史消息。
-- 按消息 ID 删除：每次最多可删除 50 条消息。
+- 按消息 ID 删除：`removeMessagesFromServerWithMsgIds`：`msgIds` 参数为非空 `string[]`，每次最多 50 条消息 ID。
+- 按时间删除：`removeMessagesFromServerWithTimestamp`：删除服务器接收时间早于指定时间戳的历史消息，`timestamp` 参数为大于 0 的 Unix 时间戳，单位为毫秒。
 
-删除后，该用户无法从服务端拉取到该消息，不过，与该用户的单聊、群聊和聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
-多设备情况下，登录该账号的其他设备会收到 `EMMultiDevicesDelegate` 中的 `multiDevicesMessageBeRemoved` 回调，已删除的消息自动从设备本地移除。
+`convId` 为会话 ID，`convType` 为 `ChatConversationType`。两种方式都返回 `Promise<void>`，也都可通过第四个参数 `isChatThread` 指定是否操作消息话题，默认为 `false`。
+
+多设备登录时，当前账号的其他在线设备通过 `ChatMultiDeviceEventListener#onMessageRemoved(convId?, deviceId?)` 接收删除通知。
 
 :::tip
-1. 若使用该功能，需将 SDK 升级至 V1.1.0 或以上版本。
-2. 聊天室漫游消息默认关闭。若要使用该功能需，需将 SDK 升级至 1.4.0 或以上版本并联系环信商务开通。 
+1. 删除成功后应刷新业务消息列表，不要继续使用删除前的消息数组。底层 SDK 负责其支持范围内的本地缓存处理，业务侧不应假定所有已加载消息对象会自动失效。
+2. 聊天室消息漫游默认关闭，如需使用，需联系环信商务开通。
 :::
 
-示例代码如下：
+以下为两种独立的删除方式，按业务需求选择，不要为同一操作重复调用：
 
 ```typescript
-// 按消息 ID 删除
-ChatClient.getInstance()
-  .chatManager.removeMessagesFromServerWithMsgIds(convId, convType, msgIds)
-  .then((result) => {
-    console.log("test:success:", result);
-  })
-  .catch((error) => {
-    console.warn("test:error:", error);
-  });
-// 按时间戳删除
-ChatClient.getInstance()
-  .chatManager.removeMessagesFromServerWithTimestamp(
-    convId,
-    convType,
-    timestamp
-  )
-  .then((result) => {
-    console.log("test:success:", result);
-  })
-  .catch((error) => {
-    console.warn("test:error:", error);
-  });
+const manager = ChatClient.getInstance().chatManager;
+const convId = '<target_user_id>';
+const convType = ChatConversationType.PeerChat;
+
+async function deleteServerMessagesByIds(msgIds: string[]): Promise<void> {
+  if (msgIds.length === 0 || msgIds.length > 50) {
+    console.warn('每次应传入 1 至 50 个消息 ID');
+    return;
+  }
+  try {
+    await manager.removeMessagesFromServerWithMsgIds(convId, convType, msgIds);
+    console.log('删除成功，请刷新消息列表');
+  } catch (error: unknown) {
+    console.error('按消息 ID 删除服务端消息失败：', error);
+  }
+}
+
+async function deleteServerMessagesBefore(timestamp: number): Promise<void> {
+  if (timestamp <= 0) {
+    console.warn('时间戳必须大于 0');
+    return;
+  }
+  try {
+    await manager.removeMessagesFromServerWithTimestamp(
+      convId, convType, timestamp
+    );
+    console.log('删除成功，请刷新消息列表');
+  } catch (error: unknown) {
+    console.error('按时间删除服务端消息失败：', error);
+  }
+}
 ```
 
-### 删除本地指定会话的所有消息
+## 删除本地指定会话的所有消息
 
-你可以调用 `deleteAllMessages` 方法删除指定会话的所有消息。
+调用 `ChatManager#deleteConversationAllMessages`，或异步获取会话后调用 `ChatConversation#deleteAllMessages`，删除指定会话在本地数据库和内存缓存中的全部消息。不删除服务端消息。
 
 ```typescript
-// convId：会话 ID
-// convType：会话类型
-ChatClient.getInstance()
-  .chatManager.deleteAllMessages(convId, convType)
-  .then(() => {
-    console.log("delete message success");
-  })
-  .catch((reason) => {
-    console.log("delete message fail.", reason);
-  });
+ChatClient.getInstance().chatManager.deleteConversationAllMessages(
+  '<target_user_id>',
+  ChatConversationType.PeerChat
+).then(() => {
+  console.log('本地会话消息已清空');
+}).catch((error: unknown) => {
+  console.error('清空本地会话消息失败：', error);
+});
 ```
 
-### 删除本地单个会话在指定时间段的消息
+## 删除本地会话指定时间段的消息
 
-你可以调用 `deleteMessagesWithTimestamp` 方法删除指定时间段的本地消息。
+调用 `ChatManager#deleteMessagesWithTimestamp(convId, convType, { startTs, endTs })` 删除指定时间段的本地消息。
+
+会话对象的对应方法为 `deleteMessagesWithTimestamp({ startTs, endTs })`。
 
 ```typescript
-// startTs: 开始点的时间戳
-// endTs: 结束点的时间戳
-ChatClient.getInstance()
-  .chatManager.deleteMessagesWithTimestamp({ convId, convType, startTs, endTs })
-  .then(() => {
-    console.log("delete message success");
-  })
-  .catch((reason) => {
-    console.log("delete message fail.", reason);
-  });
+// `startTs` 和 `endTs` 的单位均为毫秒，开始时间应不晚于结束时间。
+const endTs = Date.now();
+const startTs = endTs - 24 * 60 * 60 * 1000;
+ChatClient.getInstance().chatManager.deleteMessagesWithTimestamp(
+  '<target_user_id>',
+  ChatConversationType.PeerChat,
+  { startTs, endTs }
+).then(() => {
+  console.log('指定时间段的本地消息已删除');
+}).catch((error: unknown) => {
+  console.error('删除指定时间段消息失败：', error);
+});
 ```
 
-### 删除本地会话的指定消息
+## 删除本地会话的指定消息
 
-你可以调用 `deleteMessage` 方法删除本地单个会话的指定消息。
+调用 `ChatManager#deleteMessage(convId, convType, msgId)`，或会话对象的 `deleteMessage(msgId)`，从本地数据库和该会话的内存缓存中删除指定消息，不会删除服务端消息。
 
 ```typescript
-// convId：会话 ID
-// convType: 会话类型
-// msgId：消息 ID
-ChatClient.getInstance()
-  .chatManager.deleteMessage(convId, convType, msgId)
-  .then(() => {
-    console.log("delete message success");
-  })
-  .catch((reason) => {
-    console.log("delete message fail.", reason);
-  });
+ChatClient.getInstance().chatManager.deleteMessage(
+  '<target_user_id>',
+  ChatConversationType.PeerChat,
+  '<message_id>'
+).then(() => {
+  console.log('指定本地消息已删除');
+}).catch((error: unknown) => {
+  console.error('删除本地消息失败：', error);
+});
 ```
 
-### 单向删除服务器端的聊天室消息
+上述本地删除接口均返回 `Promise<void>`。删除失败时应检查会话 ID、会话类型、消息 ID 和本地数据库状态；调用成功后仍需刷新应用维护的消息列表。
 
-你可以调用 `ChatManager#removeMessagesWithTimestamp` 方法删除服务端的聊天室消息。删除后，该用户无法从服务端拉取到该消息，不过，聊天室会话中的其它用户的服务器消息不受影响，可以漫游获取。
+## 接口列表
 
-```typescript
-ChatClient.getInstance()
-  .chatManager.removeMessagesWithTimestamp({
-    convId: "foo",
-    convType: 0,
-    timestamp: 1725009277205,
-  })
-  .then(() => {
-    console.log("success");
-  })
-  .catch((e) => {
-    console.warn("fail:", e);
-  });
-```
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`deleteAllMessageAndConversation`](#单向清空聊天记录) | `ChatManager` | 清空本地会话及消息，可同时单向清空服务端数据。 |
+| [`removeMessagesFromServerWithMsgIds`](#单向删除服务端的历史消息) | `ChatManager` / `ChatConversation` | 按消息 ID 单向删除服务端历史消息。 |
+| [`removeMessagesFromServerWithTimestamp`](#单向删除服务端的历史消息) | `ChatManager` / `ChatConversation` | 按时间戳单向删除服务端历史消息。 |
+| [`deleteConversationAllMessages`](#删除本地指定会话的所有消息) | `ChatManager` | 删除指定会话的所有本地消息。 |
+| [`deleteAllMessages`](#删除本地指定会话的所有消息) | `ChatConversation` | 删除当前会话的所有本地消息。 |
+| [`deleteMessagesWithTimestamp`](#删除本地会话指定时间段的消息) | `ChatManager` / `ChatConversation` | 删除指定时间段内的本地消息。 |
+| [`deleteMessage`](#删除本地会话的指定消息) | `ChatManager` / `ChatConversation` | 删除指定本地消息。 |

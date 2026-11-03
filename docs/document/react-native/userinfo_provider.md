@@ -6,37 +6,50 @@
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、好友备注和群成员名片的场景。
 
-自 React Native SDK 1.18.0 版本开始支持该功能。**本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
+**本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
 
 ## 技术原理
 
 用户信息自动管理功能由 `ChatOptions#enableUserInfo` 控制。开启该功能后，SDK 会在登录成功后自动同步当前登录用户的用户属性；发送消息时自动附带发送方用户属性的更新时间；对于群聊消息，还会附带发送方在当前群组中的群成员名片更新时间。
 
-接收消息后，原生 SDK 会自动将消息中携带的更新时间与本地缓存中的对应时间戳进行比较。当检测到数据已更新或本地缺少相关缓存时，SDK 会从服务端拉取最新的用户属性或群成员名片并更新本地缓存，然后通过相应事件通知 React Native 业务层刷新界面。业务层无需解析或比较这些内部时间戳。
+接收消息后，原生 SDK 会自动将消息中携带的更新时间与本地缓存中的对应时间戳进行比较。消息携带有效的更新时间，且该时间晚于本地缓存或本地缺少相关缓存时，SDK 会从服务端拉取最新的用户属性或群成员名片并更新本地缓存，通过相应事件通知 React Native 业务层刷新界面。业务层无需解析或比较这些内部时间戳。好友备注从接收方本地好友数据中读取，不随消息发送，也不通过上述更新时间比较机制同步。详见 [通过消息获取发送方信息](#通过消息获取发送方信息)。
 
-在通过消息获取发送方信息的过程中，SDK 会自动完成用户信息同步、本地缓存更新及事件通知，处理流程详见原生平台文档：
-- [Android 处理流程](/document/android/userinfo_provider.html#技术原理)
-- [iOS 处理流程](/document/ios/userinfo_provider.html#技术原理)
+在通过消息获取发送方信息的过程中，SDK 会自动完成用户信息的同步、本地缓存更新及事件通知。业务层可根据通知刷新 UI。处理流程如下：
+
+1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地缓存。
+2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间；对于群聊消息，还会携带发送方在当前群组中的群成员名片更新时间。
+3. 接收方收到消息后，SDK 会解析消息中携带的用户属性更新时间；对于群聊消息，还会解析群成员名片更新时间。
+4. SDK 会将消息中的更新时间与本地缓存中的对应时间戳进行比较。
+5. 如果消息携带有效的更新时间，且该时间晚于本地缓存中的对应时间戳，或本地缺少对应数据，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从服务端获取群成员名片)。其中，群成员名片仅适用于群聊消息。
+6. 拉取成功后，SDK 会自动更新本地缓存。
+7. SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
+
+刷新界面时，请使用回调中的最新信息，或重新查询消息后读取发送方信息。先前持有的 JavaScript 消息对象不会自动更新。
+
+![img](/images/android/memory_update_userinfo_mgmt.png)
 
 ## 前提条件
 
 开始接入前，请确保满足以下条件：
 
-- 使用 React Native SDK 1.18.0 或以上版本。
-- 已完成 SDK 初始化。详见 [初始化](initialization.html)。
+- 已完成 SDK 初始化和登录。详见[快速开始](quickstart.html)。
 - 已了解即时通讯 IM 的相关使用限制。详见 [使用限制](/product/limitation.html)。
 
 ## 开启用户信息自动管理
 
-在初始化 SDK 时，将 `ChatOptions#enableUserInfo` 设为 `true`：
+在初始化 SDK 时，将 `ChatOptions.enableUserInfo` 设为 `true`：
 
 ```typescript
-const options = ChatOptions.withAppKey({
-  appKey: 'your-org#your-app',
-  enableUserInfo: true,
-});
-
-await ChatClient.getInstance().init(options);
+try {
+  const options = ChatOptions.withAppKey({
+    appKey: 'your-org#your-app',
+    // 开启用户信息自动管理
+    enableUserInfo: true,
+  });
+  await ChatClient.getInstance().init(options);
+} catch (error: unknown) {
+  console.error('初始化 SDK 失败：', error);
+}
 ```
 
 :::tip
@@ -47,10 +60,10 @@ await ChatClient.getInstance().init(options);
 
 SDK 提供 `ChatUserInfoEventListener`，用于监听用户属性更新事件，主要包括：
 
-- `onSelfUserInfoUpdate(userInfo: ChatUserInfo)`：当前登录用户的属性同步或更新并写入本地缓存后触发。
-- `onUserInfoUpdate(userInfos: ChatUserInfo[])`：其他用户的属性更新并写入本地缓存后触发。
-  - 已订阅用户的属性发生变化时会触发该事件；
-  - 开启用户信息自动管理后，收到消息触发用户属性同步时也会通过该事件通知业务层。
+- `ChatUserInfoEventListener#onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地缓存后触发该事件。
+- `ChatUserInfoEventListener#onUserInfoUpdate`：其他用户属性更新并写入本地缓存后触发，包括以下场景：
+  - 已订阅用户的属性发生变化。
+  - 开启 [用户信息自动管理](userinfo_provider.html) 后，收到消息触发用户属性同步时也会通过该事件通知业务层。
   - 主动 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_members.html#获取群成员列表)。
 
@@ -62,6 +75,7 @@ SDK 提供 `ChatUserInfoEventListener`，用于监听用户属性更新事件，
 
 ```typescript
 const userInfoListener: ChatUserInfoEventListener = {
+  // 当前登录用户的属性同步或更新
   onSelfUserInfoUpdate(userInfo: ChatUserInfo) {
     console.log('当前登录用户属性更新：', {
       userId: userInfo.userId,
@@ -70,6 +84,7 @@ const userInfoListener: ChatUserInfoEventListener = {
     });
   },
 
+  // 其他用户的属性更新
   onUserInfoUpdate(userInfos: ChatUserInfo[]) {
     for (const userInfo of userInfos) {
       console.log('用户属性更新：', {
@@ -82,6 +97,7 @@ const userInfoListener: ChatUserInfoEventListener = {
 };
 
 const userManager = ChatClient.getInstance().userManager;
+// 注册用户属性监听器
 userManager.addUserInfoListener(userInfoListener);
 
 // 在页面或组件卸载时调用，移除同一个监听器对象。
@@ -98,7 +114,11 @@ function removeUserInfoListener(): void {
 
 ## 通过消息获取发送方信息
 
-开启用户信息自动管理后，如果发送方在消息中携带了自己的用户信息，则无论双方是否为好友，接收方均可通过 `ChatMessage#senderInfo` 读取当前本地可用的发送方展示信息。如果消息中的用户属性更新时间晚于本地缓存，SDK 会自动拉取该用户的最新属性，并触发 `ChatUserInfoEventListener#onUserInfoUpdate`。
+开启用户信息自动管理后，发送消息时，SDK 会自动携带发送方用户属性的更新时间；发送群聊消息时，还会携带发送方在当前群中的群成员名片更新时间。应用无需手动将这些信息或完整用户属性添加到消息扩展中。当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会从服务端拉取该用户属性，并触发 `ChatUserInfoEventListener#onUserInfoUpdate` 事件。该机制不受双方好友关系影响。
+
+你可以通过 `ChatMessage.senderInfo` 读取当前消息对象中的发送方信息，包括昵称、头像、好友备注和群成员名片。
+
+好友备注属于好友数据，不属于发送方的用户属性，也不通过消息携带的用户属性更新时间来同步。开启用户信息自动管理功能后，接收方 SDK 在组装 `ChatMessage.senderInfo` 时，会从本地好友信息中读取当前用户为消息发送方设置的好友备注，并填入 `remark`，方便业务层统一展示。该备注不会随消息发送，也不会传递给对方。
 
 `senderInfo` 的类型为 `ChatMessageSenderInfo | undefined`，其中的字段均为可选字段：
 
@@ -115,7 +135,8 @@ const messageListener: ChatMessageEventListener = {
   onMessagesReceived(messages: ChatMessage[]) {
     for (const message of messages) {
       const senderInfo = message.senderInfo;
-      if (senderInfo !== undefined) {
+      if (senderInfo) {
+        // 读取当前消息对象中的发送方展示信息
         console.log('发送方信息：', {
           userId: senderInfo.userId,
           nickname: senderInfo.nickname,
@@ -128,14 +149,17 @@ const messageListener: ChatMessageEventListener = {
   },
 };
 
+// 注册消息监听器
 ChatClient.getInstance().chatManager.addMessageListener(messageListener);
 
-// 不再需要监听时，移除同一个监听器对象。
-ChatClient.getInstance().chatManager.removeMessageListener(messageListener);
+function removeMessageListener(): void {
+  // 不再需要监听时，移除同一个监听器对象
+  ChatClient.getInstance().chatManager.removeMessageListener(messageListener);
+}
 ```
 
 :::tip
-`ChatMessage#senderInfo` 及其字段均为可选值，表示当前本地可用的信息，不保证为最终最新值，使用前应判空。若消息触发用户信息更新，SDK 更新本地缓存后会通过 `onUserInfoUpdate` 或群成员名片事件通知业务层。
+`ChatMessage#senderInfo` 及其字段均为可选值，不保证为最终最新值，使用前应判空。若消息触发用户信息更新，可通过 `ChatUserInfoEventListener#onUserInfoUpdate` 或 `ChatGroupEventListener#onUserGroupNamecardChanged` 获取更新通知。刷新界面时请使用回调中的最新信息，或重新查询消息；先前持有的 JavaScript 消息对象不会自动更新。
 :::
 
 ## 从本地读取用户属性
@@ -144,6 +168,7 @@ ChatClient.getInstance().chatManager.removeMessageListener(messageListener);
 
 ```typescript
 try {
+  // 从本地批量读取用户属性，不发起网络请求
   const userInfoMap: Map<string, ChatUserInfo> =
     await ChatClient.getInstance().userManager.getLocalUserInfoByIds([
       'userId1',
@@ -174,7 +199,8 @@ try {
 
 - `ChatOptions#enableUserInfo` 的默认值为 `false`，必须在 SDK 初始化时设置为 `true`。
 - 建议在 SDK 初始化成功后、登录前注册 `ChatUserInfoEventListener`，并在不再需要时移除同一个监听器对象。
-- 当消息中的更新时间晚于本地缓存或本地缺少相应数据时，SDK 会自动从服务端拉取最新数据并更新本地缓存。
+- `ChatMessage#senderInfo` 表示当前消息对象中的发送方信息，不保证为最新值；先前持有的 JavaScript 消息对象不会随本地缓存更新而自动更新。
+- 消息携带有效的更新时间，且该时间晚于本地缓存或本地缺少相应数据时，SDK 会自动从服务端拉取最新数据并更新本地缓存。
 - `ChatUserInfoManager#getLocalUserInfoByIds` 仅查询本地数据，不会主动从服务端拉取最新数据。
 - `ChatUserInfo` 的昵称字段为 `nickName`，而 `ChatMessageSenderInfo` 的昵称字段为 `nickname`，大小写不同。
 - `ChatMessageSenderInfo` 的群成员名片字段为 `groupNameCard`，而 `ChatGroupMember` 的对应字段为 `namecard`，大小写不同。
@@ -183,15 +209,15 @@ try {
 
 #### 何时开启用户信息自动管理？
 
-必须在调用 `ChatClient#getInstance().init(options)` 时通过 `ChatOptions` 传入 `enableUserInfo: true`。SDK 初始化完成后再修改原配置对象不会生效。
+必须在调用 `ChatClient#init` 时通过 `ChatOptions` 传入 `enableUserInfo: true`。SDK 初始化完成后再修改原配置对象不会生效。
 
 #### 功能开启后，SDK 会自动执行哪些操作？
 
-开启 `ChatOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户的信息；发送消息时自动附带发送方信息及更新时间；接收消息后自动比较消息中的更新时间与本地缓存；检测到数据更新或本地缺少数据时，自动从服务端拉取最新信息、更新本地缓存并通过事件通知业务层。
+开启 `ChatOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户的信息；发送消息时自动附带发送方用户属性的更新时间，群聊消息还会附带群成员名片更新时间；接收消息后自动比较消息中的更新时间与本地缓存。消息携带有效的更新时间，且该时间晚于本地缓存或本地缺少数据时，SDK 会自动从服务端拉取最新信息、更新本地缓存并通过事件通知业务层。
 
-#### ChatMessage#senderInfo 一定是最新的吗？
+#### ChatMessage#senderInfo 一定最新？
 
-不一定。`ChatMessage#senderInfo` 返回当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会从服务端拉取最新数据并更新本地缓存，随后通过 `ChatUserInfoEventListener#onUserInfoUpdate` 或群成员名片事件通知业务层刷新界面。
+不一定。`ChatMessage#senderInfo` 是该 JavaScript 消息对象创建时解码的发送方信息。如果消息触发了用户信息更新，请使用相关回调中的最新信息或重新查询消息后刷新界面，先前持有的 JavaScript 消息对象不会自动更新。
 
 #### 为何建议尽早注册监听？
 
@@ -218,7 +244,7 @@ try {
 
 ### 通过消息同步的发送方信息
 
-开启用户信息自动管理后，接收到的消息可通过 `ChatMessage#senderInfo` 提供发送方当前可用的用户 ID、昵称、头像、好友备注和群成员名片。
+开启用户信息自动管理后，接收到的消息可通过 `ChatMessage.senderInfo` 提供发送方当前可用的用户 ID、昵称、头像、好友备注和群成员名片。
 
 ## 接口列表
 

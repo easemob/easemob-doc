@@ -1,5 +1,121 @@
 # React-Native IM SDK 更新日志
 
+## v5.0.0 Dev 2026-10-16
+
+本次为大版本升级，包含不兼容变更。自本版本起，React Native SDK 版本号与依赖的原生 SDK 版本号保持同步，iOS 和 Android 原生 SDK 均升级至 5.0.0。
+
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [React Native SDK 4.x 到 5.0.0 迁移指南](migration_guide.html)。
+
+#### 重要变更
+
+**数据同步与本地数据访问**
+
+SDK 新增统一的数据同步机制。应用可配置登录后自动同步的数据类型，包括会话、好友和已加入群组，并通过统一的同步事件监听同步状态。列表数据的获取方式由主动调用历史服务端拉取接口，调整为读取同步后的本地数据。
+
+数据库打开和服务端数据同步分别对应不同阶段，应用可按以下步骤处理：
+
+1. **配置同步范围**：在初始化前，通过 `ChatOptions#dataSyncType` 配置登录后自动同步的数据类型，包括会话、好友和已加入群组，可通过按位或运算组合。未配置时沿用原生 SDK 的默认设置，建议显式配置。
+2. **读取本地数据**：通过 `ChatConnectEventListener#onDatabaseOpened` 确认当前账号的本地数据库已成功打开（`username` 为当前用户 ID，且 `errorCode === 0`）后，即可读取本地数据，不必等待服务端同步完成，有助于加快冷启动时的首屏展示。
+3. **监听服务端数据同步**：通过 `ChatConnectEventListener#onDataSyncStart` 和 `ChatConnectEventListener#onDataSyncFinish` 监听指定类型的数据同步开始和结束。回调中的 `type` 表示本次同步的数据类型。
+4. **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `ChatConnectEventListener#onDataSyncFinish` 回调成功（`errorCode === 0`）后，再读取本地会话、好友或已加入群组数据并刷新界面。
+
+详见 [数据同步文档](initialization.html#设置登录后自动同步数据)。
+
+**群组配置模型重构**
+
+群组配置从单一样式枚举改为多个独立字段，建群后也可以按需更新指定配置。
+
+- `ChatGroupConfigs` 用于保存群组配置值，包含 `isPublic`、`joinApprovalRequired`、`allowInvites`、`maxCount`、`inviteNeedConfirm` 和 `ext` 等字段。
+- `ChatGroupConfigsType` 用于标记需要更新的配置项，支持按位或组合多个配置项。
+- 建群和群组配置更新统一使用新的配置模型，分别通过 `ChatGroupManager#createGroupEx` 和 `ChatGroupManager#updateGroupConfigs` 设置。
+
+默认建群类型调整为私有群，且不允许普通成员邀请其他用户。升级时请显式配置，避免影响现有业务。
+
+详见 [创建群组](group_manage.html#创建群组) 和 [群组配置迁移说明](migration_guide.html#群组配置模型重构)。
+
+**消息已读回执与未读数管理**
+
+消息已读回执改为批量处理，单聊和群聊共用一套回执体系；清除会话未读数与发送消息已读回执分别处理。
+
+1. 消息已读回执
+
+- 支持批量发送已读回执，单聊和群聊统一处理。
+- 是否需要已读回执改为按消息控制，在发送前显示开启，默认不请求回执。
+- 单聊和群聊的消息已读回执统一通过 `ChatMessageEventListener#onMessageReadReceipts` 接收。
+- 群聊支持批量查询消息已读回执汇总，以及分页获取指定消息的已读成员详情；成员信息包含角色、入群时间等，方便展示成员详情。
+- 消息已读状态和群消息已读人数由 SDK 维护，应用不能再直接修改。
+
+详见 [消息已读回执文档](message_receipt.html)。
+
+2. 会话未读数管理
+
+- 调整本地会话未读消息总数的统计规则，仅统计推送通知方式为“所有消息”（`ChatPushRemindType.ALL`）的普通单聊和群聊会话；不统计聊天室、消息话题，以及仅提醒提及消息或不提醒的会话（`ChatPushRemindType.MENTION_ONLY` 或 `ChatPushRemindType.NONE`）。
+- 清除指定会话或全部会话的本地未读数后，清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。
+- 当其他设备清除会话未读数时，应用可通过多设备通知重新读取本地会话并刷新界面。
+
+详见 [会话未读数文档](conversation_unread.html)。
+
+**会话展示与批量管理**
+
+SDK 补充会话展示信息和批量删除会话能力：
+
+- 会话对象新增显示名称和头像信息，方便会话列表展示。
+- 支持批量删除本地会话，并可选择是否同时删除会话中的本地消息；不存在的会话 ID 会被忽略。
+- 补充 iOS 端当前账号在其他设备上更新群组信息的多设备事件通知，方便应用及时刷新群组展示信息。
+
+详见 [会话对象文档](conversation_overview.html#会话对象)、[删除会话](conversation_delete.html)、[群消息已读回执详情](message_receipt.html#获取单条群消息的回执成员详情) 和 [多设备登录](multi_device.html)。
+
+#### 优化
+
+**登录、鉴权与连接事件**
+
+- 登录和设备管理统一使用 Token 鉴权，不再支持密码鉴权。
+- SDK 不再支持自动登录，应用应管理登录凭证，并在启动后主动发起 Token 登录。
+- 好友自动同步配置并入统一的数据同步配置。
+- 连接中断和账号被服务端强制下线等场景统一通过 `onDisconnected` 通知，应用应根据断开原因区分连接中断和登录状态失效。Token 过期仍通过 `onTokenDidExpire` 单独通知。登录状态与连接状态不同，不能仅根据是否连接到服务器判断用户是否已登录。
+
+详见 [登录](login.html)、[连接](connection.html) 和 [好友数据同步](user_relationship.html) 文档。
+
+**历史能力与接口整理**
+
+- 客户端账号注册、消息举报、聊天室创建和解散等能力改由业务服务器处理。
+- 移除公开群列表拉取能力；会话、好友和已加入群组列表统一通过数据同步机制更新后读取本地数据。
+- 清理已废弃的消息查询、消息编辑、历史消息获取、群组详情获取及聊天室加入等接口，相关功能统一使用保留的推荐方式。
+- 群成员加入和退出通知调整为批量处理，并统一聊天室禁言名单变更的通知形式。
+
+详见 [迁移指南](migration_guide.html#其他删除的-api)、[群组管理](group_manage.html) 和 [聊天室管理](room_manage.html) 文档。
+
+**推送配置与设备 Token**
+
+- 推送配置调整为初始化配置与运行时设备 Token 绑定相分离，应用负责接入厂商推送服务并获取设备 Token。
+- Android 厂商推送的依赖、配置和初始化需在原生工程侧完成；向环信服务器绑定设备 Token 时，需提供对应厂商的推送凭据。
+- iOS 的 APNs 和 PushKit 推送证书名称在 SDK 初始化时设置，运行期间不可修改；普通推送和 VoIP 推送使用独立的证书与 Token，分别绑定。
+- iOS 端支持单独绑定和解绑 PushKit Token，无需登出即可解除绑定。
+
+详见 [上传推送证书](/document/react-native/push/push_easemob_console.html) 和 [绑定推送 Token](/document/react-native/push/push_send_token_to_server.html) 文档。
+
+**平台与集成**
+
+- React Native SDK 5.x 仅支持 React Native 新架构，升级前需确认宿主工程已启用新架构。
+- iOS 推荐使用 Swift Package Manager（SPM）集成，CocoaPods 继续支持，具体方式根据宿主工程配置选择。
+- 升级后需要重新安装依赖并编译 iOS 和 Android 原生工程，仅更新 JavaScript 包不能完成升级。
+
+详见 [集成文档](integration.html) 和 [SDK 集成与版本要求](migration_guide.html#sdk-集成与版本要求)。
+
+#### 修复
+
+- 修复 Android 本地关键字搜索未指定发送方时始终返回空结果的问题。
+- 修复 iOS 未读消息总数的统计问题，与 Android 的统计范围保持一致。
+- 修复部分群管理员变更、群组和聊天室全员禁言、iOS 入群申请被拒绝及消息撤回通知中的信息缺失问题。
+- 修复账号被服务端强制断开后，本地登录状态可能未及时清理的问题。
+- 修复 Android 切换账号登录时可能复用上一账号数据库缓存的问题。
+- 修复 Android 修改消息时可能出现的响应匹配异常，以及部分场景下群成员名片无法清空的问题。
+- 修复 Android 关闭附件 MD5 校验后，上传附件仍可能执行预校验的问题。
+- 修复 Android 网络传输、任务队列和数据库缓存中的若干并发安全问题。
+- 修复 iOS 发送附件消息未设置显示文件名时，附件上传可能受 2 MB 大小限制的问题，SDK 会自动使用本地文件名作为显示名。
+
+相关功能详见 [本地消息搜索](message_search_local.html)、[会话未读数](conversation_unread.html)、[消息发送](message_send.html) 和 [迁移指南](migration_guide.html)。
+
 ## v1.21.0 2026-09-24
 
 #### 新增特性

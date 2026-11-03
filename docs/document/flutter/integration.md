@@ -10,65 +10,87 @@ environment:
   flutter: '>=3.3.0'
 ```
 
+平台最低版本要求如下：
+
+- Android：`minSdkVersion` 21，`compileSdkVersion` 34 或以上
+- iOS：iOS 13.0
+
 ### 使用命令创建项目
 
-```dart
+```shell
 flutter create quick_start
 ```
 
 ### 设置 Android
 
-1. 打开文件 `quick_start/android/app/build.gradle` 在文件最后添加：
+1. 打开文件 `quick_start/android/app/build.gradle`，设置 `compileSdkVersion` 和 `minSdkVersion`：
 
-```dart
+```gradle
 android {
+    compileSdkVersion 34
+
     defaultConfig {
         minSdkVersion 21
     }
 }
 ```
 
-2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `<manifest>` 节点下、`<application>` 节点外添加以下权限：
+如果项目使用 Kotlin DSL，文件名为 `quick_start/android/app/build.gradle.kts`，对应配置如下：
+
+```kotlin
+android {
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 21
+    }
+}
+```
+
+:::tip
+Android 原生 SDK 5.0.0 新增的 AndroidX 传递依赖要求应用模块使用 Android API 34 或以上版本编译。较新的 Flutter 项目通常已满足该要求；旧项目需将 `compileSdkVersion` 升级至 34 或以上。
+:::
+
+2. Flutter 插件的 `AndroidManifest.xml` 已声明以下权限，构建时会自动合并到应用清单，通常无需在应用的 `AndroidManifest.xml` 中重复添加：
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+```
+
+3. 在 `quick_start/android/app/proguard-rules.pro` 文件中添加以下规则，防止发布版本混淆 SDK 代码：
+
+```proguard
+-keep class com.hyphenate.** {*;}
+-dontwarn com.hyphenate.**
 ```
 
 ### 设置 iOS
 
-iOS 需要 iOS 12.0 以上版本。
+iOS 需要 iOS 13.0 或以上版本。
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 设置 iOS 版本为 12.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > Runner > General > Deployment Info**，将 iOS Deployment Target 设置为 13.0。
+
+Flutter SDK 的 iOS 插件同时支持 CocoaPods 和 Swift Package Manager，项目可根据当前 Flutter 工程配置选择对应方式，无需手动添加原生 IM SDK 依赖。
 
 ### 添加依赖
 
+在项目的 `pubspec.yaml` 文件中添加 Flutter SDK 5.0.0 依赖：
+
+```yaml
+dependencies:
+  im_flutter_sdk: ^5.0.0
+```
+
+然后执行：
+
 ```shell
 cd quick_start
-flutter pub add im_flutter_sdk
 flutter pub get
 ```
 
-#### 鸿蒙平台支持
-
-自 SDK 4.13.0 开始支持鸿蒙。若要在鸿蒙平台使用，需进行以下配置：
-
-1. 使用支持鸿蒙的 Flutter，详情请参见[相关文档](https://gitee.com/harmonycommando_flutter/flutter)。
-
-2. 添加鸿蒙插件依赖。在项目 `pubspec.yaml` 文件中添加：
-
-```yaml
-  im_flutter_sdk: 4.13.0
-  im_flutter_sdk_ohos:
-    git:
-      url: "https://github.com/easemob/im_flutter_sdk_oh.git"
-      ref: 1.5.3
-
-dependency_overrides:
-  im_flutter_sdk_interface: 4.13.0
-  im_flutter_sdk_ios: 4.13.0
-  im_flutter_sdk_android: 4.13.0
-```
-
-3. 执行 `flutter pub get`。
+:::tip
+如果项目从 Flutter SDK 4.x 升级至 5.0.0，更新依赖后必须重新执行 `flutter pub get` 并重新编译。iOS 使用 CocoaPods 集成时，还需在 `ios` 目录中显式执行一次 `pod install`，避免继续链接旧版本的原生 SDK。
+:::

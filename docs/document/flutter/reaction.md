@@ -1,128 +1,159 @@
-# 消息表情回复
+# 消息表情回复 Reaction
 
-<Toc />
+## 功能说明
 
-环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
+环信即时通讯 IM 提供消息表情回复功能。用户可以在单聊和群聊中对消息添加或删除表情。表情可以直观表达情绪；在群聊场景下，也可以结合不同表情的数量实现轻量投票、反馈收集等互动能力。
 
-:::tip
-1. 要使用 Reaction 功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通。详见 [环信控制台文档](/product/console/basic_message.html#消息表情回复)。
-2. 目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
-:::
+Reaction 场景示例如下，分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
 
-## 技术原理
+![img](/images/android/reactions.png)
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
+## 功能开通
 
-- `addReaction` 在消息上添加 Reaction；
-- `removeReaction` 删除消息的 Reaction；
-- `fetchReactionList` 获取消息的 Reaction 列表；
-- `fetchReactionDetail` 获取 Reaction 详情；
+使用 Reaction 前，需在[环信控制台](https://console.easemob.com/user/login)开通该功能，具体操作请参见[环信控制台文档](/product/console/basic_message.html#消息表情回复)。
 
-Reaction 场景示例如下：
+## 使用限制
 
-![](/images/ios/reactions.png)
-
-分别展示如何添加 Reaction，群聊中 Reaction 的效果，以及查看 Reaction 列表。
+- Reaction 仅适用于单聊和群聊，聊天室暂不支持。
+- 同一用户对同一条消息上的同一个 Reaction 只能添加一次。
+- Reaction 的计数规则和存储时间、用户添加限制、每条消息可添加的 Reaction 数量，以及表情 ID 规范，详见 [使用限制文档](limitation.html)。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-1. 完成 `1.0.5 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
+1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已在 [环信控制台](https://console.easemob.com/user/login) 开通 Reaction 功能。
 
-## 实现方法
+## 在消息上添加 Reaction
 
-### 在消息上添加 Reaction
+调用 `addReaction` 可为消息添加 Reaction。对于单聊，会话对端用户会收到 `onMessageReactionDidChange` 回调；对于群聊，除操作者外的其他群成员会收到该回调。回调信息包括会话 ID、消息 ID、当前消息的 Reaction 列表以及 Reaction 操作列表。操作列表会记录操作者用户 ID、发生变化的 Reaction 和操作类型，业务侧可据此实时更新消息上的 Reaction 展示。
 
-调用 `addReaction` 在消息上添加 Reaction。对于单聊会话，对端用户会收到 `onMessageReactionDidChange` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表、Reaction 操作列表（列明添加者的用户 ID、添加的 Reaction 的 ID 以及明确该操作为添加操作）。
-
-对于同一条 Reaction，一个用户只能添加一次，重复添加会报错误 1301。
+同一用户对同一条消息上的同一个 Reaction 只能添加一次。重复添加时，SDK 会返回错误码 `1301`，业务侧可统一按“该 Reaction 已添加过”进行处理。
 
 示例代码如下：
 
 ```dart
-// reaction: Reaction ID
-// msgId: 消息 ID
-// 在指定消息上添加 Reaction
-ChatClient.getInstance()
-  .chatManager.addReaction(reaction, msgId)
-  .then((result) => {
-    console.log("success: ", result);
-  })
-  .catch((error) => {
-    console.log("fail: ", error);
-  });
-```
-
-### 删除消息的 Reaction
-
-调用 `removeReaction` 删除消息的 Reaction。对于单聊会话，对端用户会收到 `onMessageReactionDidChange` 事件，而群聊会话中，除操作者之外的其他群组成员均会收到该事件。该事件中的信息包括会话 ID、消息 ID，该消息的 Reaction 列表和 Reaction 操作列表（列明删除者的用户 ID、删除的 Reaction 的 ID 以及明确该操作为删除操作）。
-
-示例代码如下：
-
-```dart
+// 添加 Reaction。
 try {
   await ChatClient.getInstance.chatManager.addReaction(
-    messageId: messageId,
+    messageId: message.msgId,
     reaction: reaction,
   );
-} on ChatError catch (e) {
+} on ChatError catch (error) {
+  // 添加失败。
 }
+
+// 监听 Reaction 更新。
+const String reactionHandlerId = 'REACTION_HANDLER_ID';
+ChatClient.getInstance.chatManager.addEventHandler(
+  reactionHandlerId,
+  ChatEventHandler(
+    onMessageReactionDidChange: (
+      List<ChatMessageReactionEvent> events,
+    ) {
+      // 处理 Reaction 更新逻辑。
+    },
+  ),
+);
 ```
 
-### 获取消息的 Reaction 列表
+## 删除消息的 Reaction
 
-调用 `getReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容、添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的前三个用户的用户 ID。
-对应消息 `ChatMessage` 有便捷的访问方式 `reactionList`。
+调用 `removeReaction` 删除当前用户为消息添加的 Reaction。删除成功后，单聊中的对端用户以及群聊中除操作者外的其他成员会收到 `onMessageReactionDidChange` 回调。回调信息包括会话 ID、消息 ID、当前消息的 Reaction 列表和 Reaction 操作列表；操作列表会记录操作者用户 ID、被删除的 Reaction 以及操作类型。业务侧可据此实时更新消息上的 Reaction 展示。
+
+执行删除操作的一方可通过等待 `removeReaction` 执行完成并捕获 `ChatError` 获取操作结果，在成功后更新当前界面。
+
 示例代码如下：
 
 ```dart
+// 删除 Reaction。
 try {
-  Map<String, List<ChatMessageReaction>> map =
+  await ChatClient.getInstance.chatManager.removeReaction(
+    messageId: message.msgId,
+    reaction: reaction,
+  );
+} on ChatError catch (error) {
+  // 删除失败。
+}
+
+// 监听 Reaction 更新。
+const String reactionHandlerId = 'REACTION_HANDLER_ID';
+ChatClient.getInstance.chatManager.addEventHandler(
+  reactionHandlerId,
+  ChatEventHandler(
+    onMessageReactionDidChange: (
+      List<ChatMessageReactionEvent> events,
+    ) {
+      // 处理 Reaction 更新逻辑。
+    },
+  ),
+);
+```
+
+## 获取消息的 Reaction 列表
+
+调用 `fetchReactionList` 可从服务器获取一条或多条指定消息的 Reaction 概览。
+
+每条 Reaction 概览包含 Reaction 内容、添加该 Reaction 的用户数量，以及最早添加 Reaction 的三个用户的用户 ID。该用户列表仅用于概览展示，并不代表全部用户。若需要获取完整用户列表，可调用 `fetchReactionDetail` 分页查询。对于已获取并缓存的消息，也可以通过 `ChatMessage.reactionList()` 读取消息中的 Reaction 列表。
+
+示例代码如下：
+
+```dart
+// chatType 仅支持单聊 ChatType.Chat 和群聊 ChatType.GroupChat。
+// 在群聊场景下，还需传入对应的 groupId。
+try {
+  final Map<String, List<ChatMessageReaction>> reactionMap =
       await ChatClient.getInstance.chatManager.fetchReactionList(
     messageIds: messageIds,
-    chatType: ChatType.GroupChat,
+    chatType: chatType,
     groupId: groupId,
   );
-} on ChatError catch (e) {
+} on ChatError catch (error) {
+  // 获取失败。
 }
 ```
 
-消息的快捷访问方式。示例如下：
+对于已获取并缓存的消息，可以通过以下方式读取 Reaction 列表：
 
 ```dart
 try {
-    List<ChatMessageReaction> reactions = await msg.reactionList();
-}on ChatError catch (e) {
+  final List<ChatMessageReaction> reactions =
+      await message.reactionList();
+} on ChatError catch (error) {
+  // 获取失败。
 }
 ```
 
-### 获取 Reaction 详情
+## 获取 Reaction 详情
 
-调用 `fetchReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容、添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
+调用 `fetchReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息，包括 Reaction 内容、当前添加该 Reaction 的用户数量，以及当前添加该 Reaction 的全部用户 ID。
+接口返回 `ChatCursorResult<ChatMessageReaction>`，其中包含当前页数据和分页游标；当仍有后续数据时，业务侧可使用游标继续查询下一页。
 
 ```dart
 try {
-  ChatCursorResult<ChatMessageReaction> result =
+  final ChatCursorResult<ChatMessageReaction> result =
       await ChatClient.getInstance.chatManager.fetchReactionDetail(
     messageId: messageId,
     reaction: reaction,
+    cursor: cursor,
+    pageSize: 30,
   );
-} on ChatError catch (e) {
+} on ChatError catch (error) {
+  // 获取失败。
 }
 ```
 
-### 管理 Reaction 监听
+## 接口列表
 
-```dart
-// 添加监听
-    ChatClient.getInstance.chatManager.addEventHandler(
-      "UNIQUE_HANDLER_ID",
-  ChatEventHandler(onMessageReactionDidChange: (events) {}),
-);
-
-// 移除监听
-ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
-```
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addReaction`](#在消息上添加-reaction) | `ChatManager` | 添加消息 Reaction。 |
+| [`removeReaction`](#删除消息的-reaction) | `ChatManager` | 删除消息 Reaction。 |
+| [`fetchReactionList`](#获取消息的-reaction-列表) | `ChatManager` | 获取多条消息的 Reaction 概览。 |
+| [`fetchReactionDetail`](#获取-reaction-详情) | `ChatManager` | 分页获取指定 Reaction 的详情。 |
+| [`conversationId`](#在消息上添加-reaction) | `ChatMessageReactionEvent` | 获取会话 ID。 |
+| [`messageId`](#在消息上添加-reaction) | `ChatMessageReactionEvent` | 获取消息 ID。 |
+| [`reactions`](#在消息上添加-reaction) | `ChatMessageReactionEvent` | 获取消息 Reaction 列表。 |
+| [`operations`](#在消息上添加-reaction) | `ChatMessageReactionEvent` | 获取 Reaction 操作列表。 |

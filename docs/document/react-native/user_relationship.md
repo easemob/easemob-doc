@@ -5,11 +5,12 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 - 好友管理：添加好友、处理好友申请、删除好友、设置好友备注、获取好友列表，以及在登录成功后自动同步好友列表和好友信息。
 - 黑名单管理：获取黑名单列表，以及添加和移除黑名单用户。使用该功能前，你需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
 
-React Native SDK 通过 `ChatContactManager` 提供用户关系管理 API，并通过 `ChatContactEventListener` 通知好友关系、好友同步状态及好友信息变更。
+React Native SDK 通过 `ChatContactManager` 提供用户关系管理 API，通过 `ChatContactEventListener` 通知好友关系及好友信息变更，通过 `ChatConnectEventListener` 通知数据同步状态。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
+
 - 完成 SDK 初始化并成功登录，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 已在 [环信控制台](https://console.easemob.com/user/login) 开通黑名单功能。详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
@@ -18,7 +19,7 @@ React Native SDK 通过 `ChatContactManager` 提供用户关系管理 API，并�
 
 ### 监听好友关系和好友信息变更
 
-通过 `ChatContactEventListener` 监听好友申请、接受、拒绝、添加、删除、好友同步状态及好友信息变更。建议在 SDK 初始化成功后、登录前注册监听器，以免遗漏登录后自动同步事件；不再需要监听时，应移除同一个监听器对象。
+通过 `ChatContactEventListener` 监听好友申请、接受、拒绝、添加、删除及好友信息变更事件。不再需要监听时，应移除同一个监听器对象。
 
 :::tip
 如需通过 `onContactInfoUpdate` 接收好友的用户属性变更通知，你需要先联系环信商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
@@ -51,20 +52,6 @@ const contactListener: ChatContactEventListener = {
     console.log('好友申请已拒绝：', userName);
   },
 
-  // SDK 开始从服务器自动同步好友数据。
-  onContactSyncStart() {
-    console.log('好友数据开始同步');
-  },
-
-  // error 为 undefined 表示自动同步成功。
-  onContactSyncFinish(error) {
-    if (error === undefined) {
-      console.log('好友数据同步成功');
-    } else {
-      console.error('好友数据同步失败：', error.code, error.description);
-    }
-  },
-
   // 好友信息发生变更，contact 为更新后的好友对象。
   onContactInfoUpdate(contact) {
     console.log('好友信息已更新：', contact);
@@ -92,8 +79,11 @@ function removeContactListener(): void {
 
 调用 `addContact` 发起好友申请：
 
+`reason` 为可选的申请理由，默认为空字符串。
+
 ```typescript
 try {
+  // 发起好友申请
   await ChatClient.getInstance().contactManager.addContact(
     'userId',
     'Request to add a friend.'
@@ -113,6 +103,7 @@ try {
 
 ```typescript
 try {
+  // 接受好友申请
   await ChatClient.getInstance().contactManager.acceptInvitation('userId');
   console.log('已接受好友申请');
 } catch (error) {
@@ -124,6 +115,7 @@ try {
 
 ```typescript
 try {
+  // 拒绝好友申请
   await ChatClient.getInstance().contactManager.declineInvitation('userId');
   console.log('已拒绝好友申请');
 } catch (error) {
@@ -140,23 +132,23 @@ try {
 
 调用 `ChatContactManager#deleteContact` 删除好友。删除好友后，对方好友列表中的该用户也会被移除，双方的好友关系都会解除，对方会收到 `onContactDeleted` 事件。该操作无需对方确认，建议在应用侧增加二次确认。
 
-`deleteContact` 的第二个参数 `keepConversation` 用于表示是否保留与该好友相关的本地单聊会话及消息，默认值为 `false`：
+`deleteContact` 的第二个参数 `keepConversation` 的公开含义为是否保留本地会话，默认值为 `false`，但当前版本存在以下平台差异：
+
+:::notice
+React Native SDK 5.x 的 Android 端不使用 `keepConversation` 参数，删除好友时会同时删除对应的本地单聊会话及消息。iOS 端将该参数用于控制是否删除会话：`true` 表示删除，`false` 表示保留，与公开的保留语义相反。因此，不能通过该参数实现双端一致的会话保留行为。
+:::
+
+以下示例仅展示删除好友，本地会话和消息的处理见上述平台说明：
 
 ```typescript
 try {
-  await ChatClient.getInstance().contactManager.deleteContact(
-    'userId',
-    true
-  );
+  // 删除指定好友
+  await ChatClient.getInstance().contactManager.deleteContact('userId');
   console.log('好友删除成功');
 } catch (error) {
   console.error('好友删除失败：', error);
 }
 ```
-
-:::warning
-React Native SDK 1.18.0 的 Android 原生桥接层调用不带 `keepConversation` 参数的异步删除接口，因此该参数在 Android 平台不会传递给原生 SDK，无法用它保证保留本地会话和消息。Android 平台会采用原生异步删除接口的默认行为。iOS 平台会将该参数传递给原生 SDK。
-:::
 
 ### 设置好友备注
 
@@ -169,6 +161,7 @@ try {
     userId: 'userId',
     remark: '项目负责人',
   });
+  // 设置好友备注
   await ChatClient.getInstance().contactManager.setContactRemark(contact);
   console.log('好友备注设置成功');
 } catch (error) {
@@ -178,120 +171,97 @@ try {
 
 ### 获取好友列表和好友信息
 
-React Native SDK 使用 `ChatContact` 表示好友对象。自 SDK 1.18.0 版本开始，该对象除用户 ID 和好友备注外，还可以包含好友用户属性及添加好友时间。
+React Native SDK 使用 `ChatContact` 表示好友对象，该对象包含用户 ID、好友备注、好友用户属性及添加好友时间。
 
 | 字段 | 类型 | 描述 |
 | :--- | :--- | :--- |
 | `userId` | `string` | 好友的用户 ID。 |
-| `remark` | `string` | 好友备注；未设置备注时通常为空字符串。 |
+| `remark` | `string` | 好友备注；原生返回值中可能缺少该字段，展示时请兼容空值。 |
 | `userInfo` | `ChatUserInfo \| undefined` | 好友的用户属性；本地没有相关属性时为 `undefined`。 |
-| `addTimestamp` | `number \| undefined` | 添加好友的毫秒级 Unix 时间戳；当前对象不包含该信息时为 `undefined`。 |
+| `addTimestamp` | `number \| undefined` | 添加好友的毫秒级 Unix 时间戳；原生没有该时间信息时通常为 `0`，字段缺失时为 `undefined`。 |
 
 #### 登录后自动同步好友列表
 
-自 SDK 1.18.0 版本开始，可在初始化 SDK 时将 `ChatOptions#enableAutoSyncContacts` 设置为 `true`。用户登录成功后，SDK 会自动从服务器同步好友列表，并更新原生 SDK 的本地数据。
+SDK 通过自动同步获取最新好友数据。你需要在初始化 SDK 前配置 `ChatOptions.dataSyncType`，使其包含 `ChatDataSyncType.Contacts`。用户登录成功后，SDK 会自动从服务器同步好友列表及好友信息并写入本地。当 `ChatConnectEventListener#onDataSyncFinish` 回调中的 `type` 包含 `ChatDataSyncType.Contacts` 且 `errorCode` 为 `0` 时，表示好友数据同步成功，此时可以通过本地接口读取好友列表和好友信息。
 
-若要自动管理好友的 `userInfo` 用户属性，需同时将 `ChatOptions#enableUserInfo` 设置为 `true`：
+**开启好友数据自动同步**
 
-```typescript
-const options = ChatOptions.withAppKey({
-  appKey: 'your-org#your-app',
-  enableAutoSyncContacts: true,
-  enableUserInfo: true,
-});
-
-await ChatClient.getInstance().init(options);
-```
-
-:::tip
-- `enableAutoSyncContacts` 和 `enableUserInfo` 的默认值均为 `false`。
-- 必须在调用 `ChatClient#getInstance().init(options)` 时传入上述配置。初始化完成后再修改原选项对象，不会重新配置已初始化的原生 SDK。
-- 建议在 SDK 初始化成功后、调用登录接口前注册 `ChatContactEventListener`，以接收本次登录触发的同步事件。
-:::
-
-自动同步状态通过 `ChatContactEventListener` 的以下回调通知：
-
-- `onContactSyncStart()`：SDK 开始从服务器同步好友数据时触发。
-- `onContactSyncFinish(error?)`：同步结束时触发；`error === undefined` 表示成功，否则可通过 `error.code` 和 `error.description` 获取失败信息。
-- `onContactInfoUpdate(contact)`：好友信息发生变更时触发，参数为更新后的 `ChatContact`。
-
-完整监听示例见 [监听好友关系和好友信息变更](#监听好友关系和好友信息变更)。
-
-#### 主动从服务器获取好友列表
-
-除登录后自动同步外，还可以按业务需要主动从服务器获取好友列表：
-
-- `fetchAllContacts`：一次性获取全部 `ChatContact` 对象，返回 `Promise<ChatContact[]>`。
-- `fetchContacts`：分页获取 `ChatContact` 对象，返回 `Promise<ChatCursorResult<ChatContact>>`。
-- `getAllContactsFromServer`：一次性获取全部好友的用户 ID，返回 `Promise<string[]>`。
-
-一次性获取全部好友对象：
+在调用 `ChatClient#init` 初始化 SDK 前，通过 `ChatOptions.dataSyncType` 配置 `ChatDataSyncType.Contacts`。用户登录成功后，SDK 会自动同步好友列表及好友信息并写入本地。
 
 ```typescript
 try {
-  const contacts = await ChatClient.getInstance()
-    .contactManager.fetchAllContacts();
-
-  for (const contact of contacts) {
-    console.log('好友信息：', {
-      userId: contact.userId,
-      remark: contact.remark,
-      userInfo: contact.userInfo,
-      addTimestamp: contact.addTimestamp,
-    });
-  }
-} catch (error) {
-  console.error('获取好友列表失败：', error);
+  const options = ChatOptions.withAppKey({
+    appKey: 'your-org#your-app',
+    // 登录后自动同步好友列表及好友信息
+    dataSyncType: ChatDataSyncType.Contacts,
+    // 开启用户属性和群成员名片的自动管理
+    enableUserInfo: true,
+  });
+  await ChatClient.getInstance().init(options);
+} catch (error: unknown) {
+  console.error('初始化 SDK 失败：', error);
 }
 ```
 
-分页获取好友对象：
+`dataSyncType` 为可选的位掩码配置；省略时 SDK 使用原生平台的默认同步范围，并不保证同步好友数据，因此请显式设置。若还需同步会话或已加入群组，可与 `ChatDataSyncType.Conversations`、`ChatDataSyncType.JoinedGroups` 按位或组合。`enableUserInfo` 默认为 `false`，控制 [用户信息自动管理](userinfo_provider.html)，不替代好友列表同步配置。初始化完成后再修改原配置对象，不会重新配置已初始化的 SDK。
+
+**监听好友数据同步状态**
+
+开启自动同步后，通过 `ChatConnectEventListener` 监听好友数据同步的开始和完成。建议在 SDK 初始化成功后、登录前注册监听器。
+
+- `onDataSyncStart(type)`：某类数据开始同步时触发；`type` 包含 `ChatDataSyncType.Contacts` 时表示好友数据开始同步。
+- `onDataSyncFinish(type, errorCode)`：某类数据同步完成时触发；`type` 包含 `ChatDataSyncType.Contacts` 时表示好友数据同步结束，`errorCode === 0` 表示成功。
+- 好友关系及好友信息变更由 `ChatContactEventListener` 监听，详见 [监听好友关系和好友信息变更](#监听好友关系和好友信息变更)。
+- 关于不同场景下好友的用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```typescript
-try {
-  const result = await ChatClient.getInstance()
-    .contactManager.fetchContacts({
-      // 首次调用可省略 cursor 或传入空字符串。
-      cursor: undefined,
-      // 默认值为 20，取值范围为 1-50。
-      pageSize: 20,
-    });
+const connectionListener: ChatConnectEventListener = {
+  onDataSyncStart(type: ChatDataSyncType): void {
+    if ((type & ChatDataSyncType.Contacts) !== 0) {
+      // 好友数据开始同步
+      console.log('好友数据开始同步');
+    }
+  },
+  onDataSyncFinish(type: ChatDataSyncType, errorCode: number): void {
+    if ((type & ChatDataSyncType.Contacts) === 0) {
+      return;
+    }
+    if (errorCode === 0) {
+      // 好友数据同步成功，可以从本地读取好友列表和好友信息
+      console.log('好友数据同步成功');
+    } else {
+      // 好友数据同步失败，根据 errorCode 处理错误
+      console.error('好友数据同步失败：', errorCode);
+    }
+  },
+};
 
-  for (const contact of result.list ?? []) {
-    console.log('好友：', contact);
-  }
+// 注册数据同步状态监听器
+ChatClient.getInstance().addConnectionListener(connectionListener);
 
-  // 获取下一页时，将 result.cursor 作为 cursor 传入。
-  console.log('下一页游标：', result.cursor);
-} catch (error) {
-  console.error('分页获取好友列表失败：', error);
+function removeConnectionListener(): void {
+  // 不再需要监听时，移除同一个监听器对象
+  ChatClient.getInstance().removeConnectionListener(connectionListener);
 }
-```
-
-仅获取全部好友用户 ID：
-
-```typescript
-const userIds = await ChatClient.getInstance()
-  .contactManager.getAllContactsFromServer();
-console.log('好友用户 ID：', userIds);
 ```
 
 #### 从本地读取好友列表
 
-好友数据自动同步成功或主动从服务器获取好友数据后，可以调用以下接口读取原生 SDK 的本地数据：
+好友数据同步成功后，可以调用以下接口读取本地数据：
 
-- `getAllContacts`：获取本地全部好友对象，返回 `Promise<ChatContact[]>`。
-- `getContact`：获取本地指定好友对象，返回 `Promise<ChatContact | undefined>`；本地不存在该好友时返回 `undefined`。
-- `getAllContactsFromDB`：获取本地全部好友用户 ID，返回 `Promise<string[]>`。
+- `ChatContactManager#getAllContacts`：获取本地全部好友对象，返回 `Promise<ChatContact[]>`。
+- `ChatContactManager#getContact`：获取指定好友对象，返回 `Promise<ChatContact | undefined>`；本地不存在该好友时返回 `undefined`。
+- `ChatContactManager#getAllContactsFromDB`：获取本地全部好友的用户 ID，返回 `Promise<string[]>`。
 
 获取本地全部好友对象：
 
 ```typescript
 try {
+  // 获取本地好友对象列表
   const contacts = await ChatClient.getInstance()
     .contactManager.getAllContacts();
   console.log('本地好友列表：', contacts);
-} catch (error) {
+} catch (error: unknown) {
   console.error('读取本地好友列表失败：', error);
 }
 ```
@@ -302,47 +272,37 @@ try {
 try {
   const contact = await ChatClient.getInstance()
     .contactManager.getContact('userId');
-
-  if (contact !== undefined) {
-    console.log('本地好友信息：', {
-      userId: contact.userId,
-      remark: contact.remark,
-      userInfo: contact.userInfo,
-      addTimestamp: contact.addTimestamp,
-    });
+  if (contact) {
+    // 读取好友的用户 ID、备注、用户属性和添加时间
+    const userId = contact.userId;
+    const remark = contact.remark;
+    const userInfo = contact.userInfo;
+    const addTimestamp = contact.addTimestamp;
+    console.log('本地好友信息：', { userId, remark, userInfo, addTimestamp });
   }
-} catch (error) {
+} catch (error: unknown) {
   console.error('读取本地好友信息失败：', error);
 }
 ```
 
-获取本地全部好友用户 ID：
+获取本地全部好友的用户 ID：
 
 ```typescript
-const userIds = await ChatClient.getInstance()
-  .contactManager.getAllContactsFromDB();
-console.log('本地好友用户 ID：', userIds);
+try {
+  // 获取本地全部好友的用户 ID
+  const userIds = await ChatClient.getInstance()
+    .contactManager.getAllContactsFromDB();
+  console.log('本地好友用户 ID：', userIds);
+} catch (error: unknown) {
+  console.error('读取本地好友用户 ID 失败：', error);
+}
 ```
 
 #### 从本地获取用户属性
 
-如果需要直接从原生 SDK 的本地数据中读取一个或多个用户的属性，可以调用 `ChatUserInfoManager#getLocalUserInfoByIds`。该接口返回 `Promise<Map<string, ChatUserInfo>>`，Map 的键为用户 ID、值为对应的 `ChatUserInfo`，返回的不是 `ChatContact`。
+如果需要直接从本地读取指定用户的属性，可以调用 `ChatUserInfoManager#getLocalUserInfoByIds`。关于该接口的说明，详见 [从本地读取用户属性](userinfo_provider.html#从本地读取用户属性)。
 
-该接口不会发起网络请求，可作为好友列表读取之外的补充资料读取方式。若本地没有某个用户的属性，返回的 Map 中不会包含该用户。
-
-```typescript
-try {
-  const userInfoMap = await ChatClient.getInstance()
-    .userManager.getLocalUserInfoByIds(['userId1', 'userId2']);
-
-  const userInfo = userInfoMap.get('userId1');
-  console.log('本地用户属性：', userInfo);
-} catch (error) {
-  console.error('读取本地用户属性失败：', error);
-}
-```
-
-有关用户属性的更多说明，详见 [管理用户属性](userprofile.html)。
+该接口返回 `Promise<Map<string, ChatUserInfo>>`，不是 `ChatContact`。它不会发起网络请求，可作为好友列表读取之外的补充资料读取方式。本地不存在的用户不会包含在返回结果中。
 
 ### 设置仅给好友发消息
 
@@ -358,6 +318,7 @@ try {
 
 ```typescript
 try {
+  // 将指定用户加入黑名单
   await ChatClient.getInstance()
     .contactManager.addUserToBlockList('userId');
   console.log('用户已加入黑名单');
@@ -372,6 +333,7 @@ try {
 
 ```typescript
 try {
+  // 将指定用户移出黑名单
   await ChatClient.getInstance()
     .contactManager.removeUserFromBlockList('userId');
   console.log('用户已移出黑名单');
@@ -386,6 +348,7 @@ try {
 
 ```typescript
 try {
+  // 获取服务端黑名单列表
   const blockedUserIds = await ChatClient.getInstance()
     .contactManager.getBlockListFromServer();
   console.log('服务端黑名单：', blockedUserIds);
@@ -400,6 +363,7 @@ try {
 
 ```typescript
 try {
+  // 读取本地黑名单列表
   const blockedUserIds = await ChatClient.getInstance()
     .contactManager.getBlockListFromDB();
   console.log('本地黑名单：', blockedUserIds);
@@ -410,27 +374,21 @@ try {
 
 ## 接口列表
 
-| API 名称 | 所属模块/类 | 返回类型 | 说明 |
-| :--- | :--- | :--- | :--- |
-| [`addContactListener`](#监听好友关系和好友信息变更) | `ChatContactManager` | `void` | 添加好友关系、同步状态及好友信息监听器。 |
-| [`removeContactListener`](#监听好友关系和好友信息变更) | `ChatContactManager` | `void` | 移除指定的联系人监听器。 |
-| [`addContact`](#添加好友) | `ChatContactManager` | `Promise<void>` | 发起好友申请。 |
-| [`acceptInvitation`](#添加好友) / [`declineInvitation`](#添加好友) | `ChatContactManager` | `Promise<void>` | 接受或拒绝好友申请。 |
-| [`deleteContact`](#删除好友) | `ChatContactManager` | `Promise<void>` | 删除好友；`keepConversation` 在 Android 平台存在不透传限制。 |
-| [`setContactRemark`](#设置好友备注) | `ChatContactManager` | `Promise<void>` | 设置或清空好友备注。 |
-| [`withAppKey`](#登录后自动同步好友列表) | `ChatOptions` | `ChatOptions` | 创建 SDK 配置，并通过 `enableAutoSyncContacts` 开启登录后自动同步好友数据。 |
-| [`init`](#登录后自动同步好友列表) | `ChatClient` | `Promise<void>` | 使用指定配置初始化 SDK。 |
-| [`fetchAllContacts`](#主动从服务器获取好友列表) | `ChatContactManager` | `Promise<ChatContact[]>` | 从服务器一次性获取全部好友对象。 |
-| [`fetchContacts`](#主动从服务器获取好友列表) | `ChatContactManager` | `Promise<ChatCursorResult<ChatContact>>` | 从服务器分页获取好友对象。 |
-| [`getAllContactsFromServer`](#主动从服务器获取好友列表) | `ChatContactManager` | `Promise<string[]>` | 从服务器获取全部好友用户 ID。 |
-| [`getAllContacts`](#从本地读取好友列表) | `ChatContactManager` | `Promise<ChatContact[]>` | 获取本地全部好友对象。 |
-| [`getContact`](#从本地读取好友列表) | `ChatContactManager` | `Promise<ChatContact \| undefined>` | 获取本地指定好友对象。 |
-| [`getAllContactsFromDB`](#从本地读取好友列表) | `ChatContactManager` | `Promise<string[]>` | 获取本地全部好友用户 ID。 |
-| [`getLocalUserInfoByIds`](#从本地获取用户属性) | `ChatUserInfoManager` | `Promise<Map<string, ChatUserInfo>>` | 从本地读取一个或多个用户的用户属性。 |
-| [`addUserToBlockList`](#添加用户到黑名单) | `ChatContactManager` | `Promise<void>` | 将用户加入黑名单。 |
-| [`removeUserFromBlockList`](#将用户从黑名单移除) | `ChatContactManager` | `Promise<void>` | 将用户移出黑名单。 |
-| [`getBlockListFromServer`](#从服务器获取黑名单列表) | `ChatContactManager` | `Promise<string[]>` | 从服务器获取黑名单用户 ID。 |
-| [`getBlockListFromDB`](#从本地数据库获取黑名单列表) | `ChatContactManager` | `Promise<string[]>` | 从本地数据库获取黑名单用户 ID。 |
-| [`onContactSyncStart`](#登录后自动同步好友列表) | `ChatContactEventListener` | `void` | 好友数据同步开始回调。 |
-| [`onContactSyncFinish`](#登录后自动同步好友列表) | `ChatContactEventListener` | `void` | 好友数据同步完成回调；`error` 为 `undefined` 表示成功。 |
-| [`onContactInfoUpdate`](#监听好友关系和好友信息变更) | `ChatContactEventListener` | `void` | 好友信息变更回调。 |
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addContactListener`](#监听好友关系和好友信息变更) / [`removeContactListener`](#监听好友关系和好友信息变更) | `ChatContactManager` | 注册或移除好友关系和好友信息监听器。 |
+| [`addContact`](#添加好友) | `ChatContactManager` | 发起好友申请。 |
+| [`acceptInvitation`](#添加好友) / [`declineInvitation`](#添加好友) | `ChatContactManager` | 接受或拒绝好友申请。 |
+| [`deleteContact`](#删除好友) | `ChatContactManager` | 删除好友；本地会话处理存在平台差异，详见正文。 |
+| [`setContactRemark`](#设置好友备注) | `ChatContactManager` | 设置好友备注。 |
+| [`dataSyncType`](#登录后自动同步好友列表) | `ChatOptions` | 登录后自动同步的数据类型配置。 |
+| [`addConnectionListener`](#登录后自动同步好友列表) / [`removeConnectionListener`](#登录后自动同步好友列表) | `ChatClient` | 注册或移除连接及数据同步状态监听器。 |
+| [`onDataSyncStart`](#登录后自动同步好友列表) / [`onDataSyncFinish`](#登录后自动同步好友列表) | `ChatConnectEventListener` | 数据同步开始和结束回调。 |
+| [`getAllContacts`](#从本地读取好友列表) | `ChatContactManager` | 获取本地全部好友对象。 |
+| [`getContact`](#从本地读取好友列表) / [`getAllContactsFromDB`](#从本地读取好友列表) | `ChatContactManager` | 读取本地好友信息或用户 ID 列表。 |
+| [`getLocalUserInfoByIds`](#从本地获取用户属性) | `ChatUserInfoManager` | 从本地读取一个或多个用户的属性。 |
+| [`addUserToBlockList`](#添加用户到黑名单) | `ChatContactManager` | 将用户加入黑名单。 |
+| [`removeUserFromBlockList`](#将用户从黑名单移除) | `ChatContactManager` | 将用户移出黑名单。 |
+| [`getBlockListFromServer`](#从服务器获取黑名单列表) | `ChatContactManager` | 从服务器获取黑名单列表。 |
+| [`getBlockListFromDB`](#从本地数据库获取黑名单列表) | `ChatContactManager` | 从本地数据库读取黑名单列表。 |
+| [`onContactInfoUpdate`](#监听好友关系和好友信息变更) | `ChatContactEventListener` | 好友信息变更回调。 |

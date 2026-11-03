@@ -1,219 +1,287 @@
 # 设置推送通知方式和免打扰模式
 
-为优化用户在处理大量推送通知时的体验，环信即时通讯 IM 在 app 和会话层面提供了推送通知方式和免打扰模式的细粒度选项。 
+为优化用户在处理大量推送通知时的体验，SDK 在全局和会话层面提供了推送通知方式和免打扰模式的细粒度配置功能。你可以基于推送通知方式、指定免打扰时长或每日时间段，对离线推送进行统一控制。
+
+本文中的全局设置指当前登录用户在 App 内的推送接收规则，不是修改 App Key 下所有用户的配置。调用接口前，需完成 SDK 初始化并成功登录；设备推送配置和 Token 绑定详见 [离线推送概述](push_overview.html)。
 
 ## 开通功能
 
 [推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推送高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的 **操作** 栏中的 **管理**。
-3. 选择 **增值服务 > 消息推送 > 离线推送**。
+2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的测试版或正式版应用的 App Key。
+3. 选择 **即时通讯 > 推送配置 > 离线推送配置**。
 4. 点击 **免费开通**。
 
-![image](/images/android/push/push_advanced_feature_enable.png)
+![开通推送高级功能](/images/android/push/push_advanced_feature_enable.png)
 
 ## 推送通知方式
 
-推送通知方式 `remindType` 包含三种类型，如下表所示。其中，会话级别的 `remindType` 设置优先于 app 级别的设置，未设置推送通知方式的会话默认采用 app 的设置。例如，假设 app 的推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+推送通知方式 `ChatPushRemindType` 包含三种类型，如下表所示。该设置适用于 App 全局以及单聊和群聊具体会话。**会话级别的推送通知方式设置优先于全局级别设置**，未设置推送通知方式的会话默认继承全局设置。
 
-<table>
-<tbody>
-<tr>
-<td width="184">
-<p><strong>推送通知方式参数</strong></p>
-</td>
-<td width="420">
-<p><strong>描述</strong></p>
-</td>
-<td width="321">
-<p><strong>应用范围</strong></p>
-</td>
-</tr>
-<tr>
-<td width="184">
-<p>ALL</p>
-</td>
-<td width="420">
-<p>接收所有离线消息的推送通知。</p>
-</td>
-<td rowspan="3" width="321">
-<p>&nbsp;</p>
-<p>App 或单聊/群聊会话</p>
-</td>
-</tr>
-<tr>
-<td width="184">
-<p>MENTION_ONLY</p>
-</td>
-<td width="420">
-<p>仅接收提及某些用户的消息的推送通知。</p>
-<p>该参数推荐在群聊中使用。若提及一个或多个用户，需在创建消息时对 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。</p>
-</td>
-</tr>
-<tr>
-<td width="184">
-<p>NONE</p>
-</td>
-<td width="420">
-<p>不接收离线消息的推送通知。</p>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
+例如，假设全局推送方式设置为 `MENTION_ONLY`，而指定会话的推送方式设置为 `ALL`。你会收到来自该会话的所有推送通知，而对于其他会话来说，你只会收到提及你的消息的推送通知。
+
+| 推送通知方式 | 描述 |
+| :---- | :------------- |
+| `ChatPushRemindType.ALL` | 接收所有离线消息的推送通知。 |
+| `ChatPushRemindType.MENTION_ONLY` | 仅接收提及当前用户的消息推送通知。该参数通常适合群聊场景。若消息需要提及一个或多个用户，可在发消息时通过 `ChatMessage.attributes` 设置 `em_at_list: ['user1', 'user2']`；若提及所有人，则设置 `em_at_list: 'all'`。SDK 的 `attributes` 对应服务端消息 JSON 的 `ext`，无需再嵌套 `ext`。 |
+| `ChatPushRemindType.NONE` | 不接收离线消息的推送通知。 |
+
+### 清除指定会话的推送通知方式设置
+
+调用 `ChatPushManager#removeSilentModeForConversation` 清除指定会话单独设置的推送通知方式。清除后，该会话继承当前登录用户的全局推送通知方式。该接口仅清除会话的推送通知方式设置，不是清除所有免打扰规则的通用接口，也不应将其视为取消一次性免打扰时长的接口。
+
+```typescript
+async function clearConversationRemindType(
+  convId: string,
+  convType: ChatConversationType
+): Promise<void> {
+  try {
+    // 清除会话单独设置的推送通知方式，恢复继承全局推送通知方式
+    await ChatClient.getInstance().pushManager.removeSilentModeForConversation({
+      convId,
+      convType,
+    });
+    console.log('会话推送通知方式设置已清除');
+  } catch (error: unknown) {
+    // 处理清除失败
+    console.error('清除会话推送通知方式失败：', error);
+  }
+}
+```
+
+另外，你可以设置和获取指定会话的推送通知方式：
+
+- 调用 `ChatPushManager#setSilentModeForConversation` 设置指定单聊或群聊会话的推送通知方式。详见 [设置指定会话的推送接收规则](#设置指定会话的推送接收规则)。
+- 调用 `ChatPushManager#fetchSilentModeForConversation` 获取指定单聊或群聊会话的推送通知方式。详见 [获取指定会话的推送通知方式](#获取指定会话的推送接收规则)。
 
 ## 免打扰模式
 
-完成 SDK 初始化和成功登录 app 后，你可以对 app 以及各类型的会话开启离线推送功能以及通过设置免打扰模式关闭推送。
-- 你可以通过 `startTime` 和 `endTime` 参数开启全天免打扰和关闭免打扰模式：若开始时间和结束时间相同，免打扰模式则全天生效；若设置为  `0:0`-`0:0`，则关闭免打扰模式。
-- 你可以在 app 级别指定免打扰时间段和免打扰时长，环信 IM 在这两个时间段内不发送离线推送通知。若既设置了免打扰时间段，又设置了免打扰时长，免打扰模式的生效时间为这两个时间段的累加。
+完成 SDK 初始化并成功登录后，你可以为 App 全局或指定单聊、群聊会话设置免打扰模式。免打扰模式生效期间，环信 IM 不会向对应范围内的离线用户发送推送通知。
+
+SDK 通过 `ChatSilentModeParam` 配置免打扰规则，支持以下两种模式，分别对应 `ChatSilentModeParamType` 中的枚举值：
+
+- `SILENT_MODE_DURATION`（一次性免打扰）：通过 `ChatSilentModeParam#constructorWithDuration` 设置，立即生效，到期后自动恢复，适用于临时不希望被打扰的场景。
+- `SILENT_MODE_INTERVAL`（每日循环免打扰）：通过 `ChatSilentModeParam#constructorWithPeriod` 设置一个每日循环生效的时间段，例如从 `23:00` 到次日 `07:00`，适用于固定的休息时间。
 
 免打扰时间参数的说明如下表所示：
 
-| 免打扰时间参数       | 类型 |描述           | 应用范围           |
-| :------------------- | :--------------------------- | :--------------------------- | :------------------- |
-| `startTime` - `endTime` | Int |每天定时触发离线推送免打扰的时间段，采用 24 小时制，精确到分钟，格式为 H:M-H:M，例如 8:30-10:0，开始时间和结束时间中的小时数和分钟数的取值范围分别为 [0,23] 和 [0,59]。免打扰时间段的设置说明如下：<br/> - 开始时间和结束时间设置后，免打扰模式每天定时触发。例如，若该时间段设置为 `8:0`-`10:0`，免打扰模式在每天的 8:00-10:00 内生效。若你在 11:00 设置开始时间为 `8:0`，结束时间为 `12:0`，则免打扰模式在当天的 11:00-12:00 生效，以后每天均在 8:00-12:00 生效。<br/> - 若开始时间和结束时间相同，免打扰模式则全天生效。不过，若设置为 `0:0`-`0:0`，则关闭免打扰模式。<br/> - 若结束时间早于开始时间，则免打扰模式在每天的开始时间到次日的结束时间内生效。例如，开始时间为 `10:0`，结束时间为 `8:0`，则免打扰模式的在当天的 10:00 到次日的 8:00 生效。<br/> - 目前仅支持在每天的一个指定时间段内开启免打扰模式，不支持多个免打扰时间段，新的设置会覆盖之前的设置。<br/> - 若该参数和免打扰时长 `expireTimestamp` 均设置，免打扰模式当日在这两个时间段均生效，例如，上午 8:00 将免打扰的时间段设置为 8:0-10:0，免打扰时长设置为 240 分钟（4 个小时），则 app 在当天 8:00-12:00 和以后每天 8:00-10:00 处于免打扰模式。 | 仅针对 app 生效，对单聊或群聊不生效。 |
-| `expireTimestamp` | Int |免打扰时长，单位为毫秒。免打扰时长最长不超过 7 天。<br/> 与免打扰时间段（`startTime` - `endTime`）的设置每天生效不同，该参数为一次有效。设置后立即生效，例如，上午 8:00 将 app 层级的免打扰时长设置为 4 个小时，则 app 在当天 8:00-12:00 处于免打扰模式。<br/> - 若该参数和免打扰时间段均设置，免打扰模式当日在这两个时间段均生效，例如，上午 8:00 将 app 级的免打扰时间段设置为 8:00-10:00，免打扰时长设置为 4 个小时，则 app 在当前 8:00-12:00 和以后每天 8:00-10:00 处于免打扰模式。    | App 或单聊/群聊会话。|
+| 规则模式               | 配置方法                                    | 类型               | 描述                                                         | 生效范围                       |
+| :--------------------- | :------------------------------------------ | :----------------- | :----------------------------------------------------------- | :----------------------------- |
+| `SILENT_MODE_INTERVAL` | `ChatSilentModeParam#constructorWithPeriod({ startTime, endTime })` | `ChatSilentModeTime` | 每日循环生效的免打扰时段，采用 24 小时制，精确到分钟。`startTime` 和 `endTime` 的小时取值范围为 `0`–`23`，分钟取值范围为 `0`–`59`。<br/> - **每日定时触发**：设置后，每天在指定时段自动进入免打扰模式。<br/> - **跨天支持**：若结束时间早于开始时间，则时段跨天生效。例如，设置为 `10:00`–`08:00`，表示当日 `10:00` 至次日 `08:00` 免打扰。<br/> - **全天与关闭**：开始和结束时间相同时，视为全天免打扰；设置为 `00:00`–`00:00` 时，关闭每日循环免打扰时段。<br/> - **单时段限制**：每天仅支持设置一个免打扰时段；新配置会覆盖旧配置。<br/> - **生效时机**：设置后立即生效。例如，当日 `11:00` 设置 `08:00`–`12:00`，则当天从 `11:00` 起生效至 `12:00`，此后每天按 `08:00`–`12:00` 执行。 | 仅 App 全局。                  |
+| `SILENT_MODE_DURATION` | `ChatSilentModeParam#constructorWithDuration(duration)` | `number` | 一次性生效的免打扰持续时长，单位为分钟，应传入整数，取值范围为 `0`–`10080`（0 至 7 天）。其中，`0` 表示该参数无效。<br/> - **一次有效**：该模式设置后立即开始计时，不会按天重复触发。<br/> - **生效示例**：上午 `08:00` 设置 `duration = 240`，则当天 `08:00`–`12:00` 处于免打扰模式。 | App 全局或指定单聊、群聊会话。 |
 
-若在免打扰时段或时长生效期间需要对指定用户推送消息，需设置[强制推送](push_extension.html#强制推送)。
+表中的 `duration` 是传给构造方法的分钟数，对应 `ChatSilentModeParam.duration` 属性；`startTime`、`endTime` 需传入 `ChatSilentModeTime` 对象，而不是时间字符串或整数。TypeScript 构造方法没有检查上述取值范围，业务侧应传入有效的非空参数，并处理设置失败。
 
-**推送通知方式与免打扰时间设置之间的关系**
+**`SILENT_MODE_INTERVAL` 和 `SILENT_MODE_DURATION` 同时设置时的叠加规则**
 
-对于 app 和 app 中的所有会话，免打扰模式的设置优先于推送通知方式的设置。例如，假设在 app 级别指定了免打扰时间段，并将指定会话的推送通知方式设置为 `ALL`。App 在指定的时间段内进入免打扰模式，你不会收到任何推送通知。
+- 两者按各自的生效范围和时间 **叠加生效**，重叠时段不重复计时。
+- 自次日起，只有每日循环免打扰时段继续生效；一次性免打扰时长不会重复触发。
 
-或者，假设为会话指定了免打扰时间段，而 app 没有任何免打扰设置并且其推送通知方式设置为 `ALL`。在指定的免打扰时间段内，你不会收到来自该会话的任何推送通知，而所有其他会话的推送保持不变。  
+**示例**：上午 `08:00` 设置每日免打扰时段为 `08:00`–`10:00`，同时设置 `duration = 240`（4 小时）：
 
-## 设置 app 的推送通知
+- **当日**：`08:00`–`12:00` 免打扰。
+- **次日起**：每天 `08:00`–`10:00` 免打扰。
 
-你可以调用 `setSilentModeForAll` 设置 app 级别的推送通知，并通过指定 `ChatSilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
+每次设置只应指定一种规则模式；若需设置多种规则，应分别创建 `ChatSilentModeParam` 参数并调用设置接口，不要在一个参数对象中混合设置时段和时长。
 
-```typescript
-// convId：会话 ID。
-// convType：会话类型。
-// 将推送通知方式设置为 `MENTION_ONLY`。
-const option = ChatSilentModeParam.constructorWithNotification(
-  ChatPushRemindType.MENTION_ONLY
-);
-// 将免打扰时长设置为 10 分钟。
-const option = ChatSilentModeParam.constructorWithDuration(10);
-// 将免打扰时间段设置为 10:10-11:00。
-const option = ChatSilentModeParam.constructorWithPeriod({
-  startTime: new ChatSilentModeTime({ hour: 10, minute: 10 }),
-  endTime: new ChatSilentModeTime({ hour: 11, minute: 10 }),
-});
-// 设置 app 的离线推送通知。
-ChatClient.getInstance()
-  .pushManager.setSilentModeForAll(option)
-  .then(() => {
-    console.log("Succeeded in setting the push notification.");
-  })
-  .catch((reason) => {
-    console.log("Failed to set the push notification.", reason);
-  });
-```
+**推送通知方式与免打扰模式的关系**
 
-## 获取 app 的推送通知设置
+免打扰模式的优先级高于推送通知方式。例如，某个会话的推送通知方式设置为 `ALL`，但该会话当前命中免打扰时长，或 App 全局当前命中免打扰时段，则免打扰生效期间不会收到该会话的离线推送通知。
 
-你可以调用 `fetchSilentModeForAll` 获取 app 级别的推送通知设置，如以下代码示例所示：
+如果仅为某个会话设置一次性免打扰，而 App 全局未设置免打扰，则只有该会话在免打扰生效期间不发送离线推送通知；其他会话仍按照各自的推送通知方式或继承的全局设置发送推送通知。会话级别不支持每日循环免打扰时段，不能将全局时段设置直接套用于会话。
+
+:::tip
+若需在免打扰生效期间仍向指定用户发送离线推送通知，可设置 [强制推送](1_push_extension.html#强制推送)。
+:::
+
+## 设置全局推送接收规则
+
+调用 `ChatPushManager#setSilentModeForAll` 设置当前登录用户的全局推送接收规则。通过 `ChatSilentModeParam` 选择本次要设置的推送通知方式、免打扰时长或每日免打扰时段。`option` 参数必填，无默认值；该方法返回 `Promise<void>`。
 
 ```typescript
-ChatClient.getInstance()
-  .pushManager.fetchSilentModeForAll()
-  .then((result) => {
-    console.log("Succeeded in getting the push notification settings of the app.", result);
-  })
-  .catch((reason) => {
-    console.log("Failed to get the push notification settings of the app.", reason);
+async function setGlobalPushRule(): Promise<void> {
+  // 设置推送通知方式为 MENTION_ONLY
+  const remindParam = ChatSilentModeParam.constructorWithNotification(
+    ChatPushRemindType.MENTION_ONLY
+  );
+
+  // 设置离线推送免打扰时长为 15 分钟
+  const durationParam = ChatSilentModeParam.constructorWithDuration(15);
+
+  // 设置每日免打扰时段为 08:30 至 15:00，仅支持 App 全局
+  const intervalParam = ChatSilentModeParam.constructorWithPeriod({
+    startTime: new ChatSilentModeTime({ hour: 8, minute: 30 }),
+    endTime: new ChatSilentModeTime({ hour: 15, minute: 0 }),
   });
+
+  // 三种参数按需选用一个；本次选择免打扰时长
+  // 如需设置其他规则，改为 remindParam 或 intervalParam
+  const option = durationParam;
+
+  try {
+    // 设置全局推送接收规则；await 正常返回表示设置成功
+    await ChatClient.getInstance().pushManager.setSilentModeForAll(option);
+    console.log('全局推送接收规则已更新');
+  } catch (error: unknown) {
+    // 处理设置失败
+    console.error('设置全局推送接收规则失败：', error);
+  }
+}
 ```
 
-## 设置单个会话的推送通知
+## 获取全局推送接收规则
 
-你可以调用 `setSilentModeForConversation` 方法设置指定会话的推送通知，并通过指定 `ChatSilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
+调用 `ChatPushManager#fetchSilentModeForAll` 获取当前登录用户的全局推送接收规则。该方法返回 `Promise<ChatSilentModeResult>`，通过 `await` 获取结果。
 
 ```typescript
-// convId：会话 ID。
-// convType：会话类型。
-// 将推送通知方式设置为 `MENTION_ONLY`。
-const option = ChatSilentModeParam.constructorWithNotification(
-  ChatPushRemindType.MENTION_ONLY
-);
-// 将免打扰时长设置为 10 分钟。
-const option = ChatSilentModeParam.constructorWithDuration(10);
-// 设置指定会话的推送通知。
-ChatClient.getInstance()
-  .pushManager.setSilentModeForConversation({
-    convId,
-    convType,
-    option,
-  })
-  .then(() => {
-    console.log("Succeeded in getting the push notification settings of the conversation.");
-  })
-  .catch((reason) => {
-    console.log("Failed to get the push notification settings of the conversation.", reason);
-  });
+async function fetchGlobalPushRule(): Promise<void> {
+  try {
+    // 从服务器获取当前登录用户的全局推送接收规则
+    const result = await ChatClient.getInstance().pushManager
+      .fetchSilentModeForAll();
+
+    // 读取全局推送通知方式
+    const remindType = result.remindType;
+    // 读取一次性免打扰的到期 Unix 时间戳，单位为毫秒，不是剩余分钟数
+    const expireTimestamp = result.expireTimestamp;
+
+    // 读取每日免打扰时段的开始时间
+    const startTime = result.startTime;
+    // 读取开始时间的小时数和分钟数，兼容未返回时段的情况
+    const startHour = startTime?.hour;
+    const startMinute = startTime?.minute;
+
+    // 读取每日免打扰时段的结束时间
+    const endTime = result.endTime;
+    // 读取结束时间的小时数和分钟数
+    const endHour = endTime?.hour;
+    const endMinute = endTime?.minute;
+
+    console.log('全局推送通知方式及免打扰到期时间：', remindType, expireTimestamp);
+    console.log('每日免打扰时段：', startHour, startMinute, endHour, endMinute);
+  } catch (error: unknown) {
+    // 处理查询失败
+    console.error('获取全局推送接收规则失败：', error);
+  }
+}
 ```
 
-## 获取单个会话的推送通知
+// TODO：研发确认，需要下面的吗？
 
-你可以调用 `fetchSilentModeForConversation` 方法获取指定会话的推送通知设置，如以下代码示例所示：
+:::notice
+`remindType`、`expireTimestamp`、`startTime` 和 `endTime` 均为可选字段，读取时应兼容 `undefined`。Android 端不返回值为 `0` 的 `expireTimestamp`；iOS 端可返回 `0`。不要将缺少字段直接解释为指定规则已启用，也不要用全局查询结果中的会话字段定位具体会话。
+
+该说明同样适用于下方单个和批量会话查询。批量查询时应使用返回 Map 的键匹配会话。
+:::
+
+## 设置指定会话的推送接收规则
+
+调用 `ChatPushManager#setSilentModeForConversation` 设置指定单聊或群聊会话的推送接收规则。通过必填的 `option` 参数传入 `ChatSilentModeParam`，选择推送通知方式或一次性免打扰时长；该参数无默认值。目前不支持设置会话的每日免打扰时段。
 
 ```typescript
-// convId：会话 ID。
-// convType：会话类型。
-ChatClient.getInstance()
-  .pushManager.fetchSilentModeForConversation({
-    convId,
-    convType,
-  })
-  .then(() => {
-    console.log("Succeeded in getting the push notification settings of the conversation.");
-  })
-  .catch((reason) => {
-    console.log("Failed to get the push notification settings of the conversation.", reason);
-  });
+async function setConversationPushRule(
+  convId: string,
+  convType: ChatConversationType
+): Promise<void> {
+  // 设置推送通知方式为 MENTION_ONLY
+  const remindParam = ChatSilentModeParam.constructorWithNotification(
+    ChatPushRemindType.MENTION_ONLY
+  );
+
+  // 设置一次性离线推送免打扰时长为 15 分钟
+  const durationParam = ChatSilentModeParam.constructorWithDuration(15);
+
+  // 两种参数按需选用一个；如需设置推送通知方式，改为 remindParam
+  const option = durationParam;
+
+  try {
+    // 设置指定会话的规则；convType 为 ChatConversationType
+    await ChatClient.getInstance().pushManager.setSilentModeForConversation({
+      convId,
+      convType,
+      option,
+    });
+    // 返回类型为 Promise<void>，不返回规则对象
+    console.log('会话推送接收规则已更新');
+  } catch (error: unknown) {
+    // 处理设置失败
+    console.error('设置会话推送接收规则失败：', error);
+  }
+}
 ```
 
-## 获取多个会话的推送通知设置
+## 获取指定会话的推送接收规则
 
-1. 你可以在每次调用中最多获取 20 个会话的推送通知设置。
+调用 `ChatPushManager#fetchSilentModeForConversation` 获取指定会话的推送接收规则，返回 `Promise<ChatSilentModeResult>`。
 
-2. 如果会话使用了 app 设置或其推送通知设置已过期，则返回的字典不包含此会话。
-
-你可以调用 `fetchSilentModeForConversations` 方法获取多个会话的推送通知设置，如以下示例代码所示：
+// TODO：研发确认，需要下面的吗？
+`ChatSilentModeResult` 未提供会话是否单独设置推送通知方式的标记。不能凭 `result.remindType` 是否非空判断会话是否单独设置了推送通知方式，也不能用它区分显式设置与继承全局设置。
 
 ```typescript
-// conversations：会话列表。
-ChatClient.getInstance()
-  .pushManager.fetchSilentModeForConversations(conversations)
-  .then(() => {
-    console.log("Succeeded in getting the conversation list.");
-  })
-  .catch((reason) => {
-    console.log("Failed to get the conversation list.", reason);
-  });
+async function fetchConversationPushRule(
+  convId: string,
+  convType: ChatConversationType
+): Promise<void> {
+  try {
+    // 从服务器获取指定会话的推送接收规则
+    const result = await ChatClient.getInstance().pushManager
+      .fetchSilentModeForConversation({ convId, convType });
+
+    // 读取返回的推送通知方式；不能据此判断是否为会话单独设置的值
+    const remindType = result.remindType;
+    // 读取该会话一次性免打扰的到期 Unix 时间戳，单位为毫秒
+    const expireTimestamp = result.expireTimestamp;
+    console.log('会话推送通知方式：', remindType);
+    console.log('会话免打扰到期时间：', expireTimestamp);
+  } catch (error: unknown) {
+    // 处理查询失败
+    console.error('获取会话推送接收规则失败：', error);
+  }
+}
 ```
 
-## 清除单个会话的推送通知方式的设置
+## 批量获取会话的推送接收规则
 
-你可以调用 `removeSilentModeForConversation` 方法清除指定会话的推送通知方式的设置。清除后，默认情况下，该会话会使用 app 的设置。
+1. 每次调用最多获取 20 个会话的设置。
+2. 如果会话继承了全局设置或其推送通知设置已过期，则返回的字典不包含此会话。不要把返回字典缺少某个会话解释为该会话一定处于免打扰状态。
 
-以下代码示例显示了如何清除会话的推送通知方式：
+调用 `ChatPushManager#fetchSilentModeForConversations` 获取多个会话的推送接收规则。参数为必填的 `ChatConversation[]`，无默认值，不是会话 ID 字符串列表；返回 `Promise<Map<string, ChatSilentModeResult>>`，Map 的键为会话 ID，值为该会话的规则对象。输入列表中的会话 ID 不应重复。
 
 ```typescript
-// convId：会话 ID。
-// convType：会话类型。
-ChatClient.getInstance()
-  .pushManager.removeSilentModeForConversation({
-    convId,
-    convType,
-  })
-  .then(() => {
-    console.log("Succeeded in deleting the push notification settings of the conversation.");
-  })
-  .catch((reason) => {
-    console.log("Failed to delete the push notification settings of the conversation.", reason);
-  });
+async function fetchConversationPushRules(
+  conversationList: ChatConversation[]
+): Promise<void> {
+  // 业务侧检查单次批量查询数量，并提前准备已有的单聊或群聊会话对象
+  if (conversationList.length === 0 || conversationList.length > 20) {
+    console.warn('每次请传入 1 至 20 个会话');
+    return;
+  }
+
+  try {
+    // 批量从服务器获取规则；按返回 Map 的会话 ID 匹配本地会话
+    const results = await ChatClient.getInstance().pushManager
+      .fetchSilentModeForConversations(conversationList);
+    for (const [conversationId, rule] of results) {
+      // Map 的键为本条结果对应的会话 ID，值为该会话的推送接收规则
+      console.log('会话推送接收规则：', conversationId,
+        rule.remindType, rule.expireTimestamp);
+    }
+  } catch (error: unknown) {
+    // 处理批量查询失败
+    console.error('批量获取会话推送接收规则失败：', error);
+  }
+}
 ```
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`getAllConversations`](#获取所有会话的推送通知方式设置) | `ChatManager` | 获取本地会话列表，读取各会话的 `remindType` 属性；不主动从服务器同步推送规则。 |
+| [`setSilentModeForConversation`](#设置指定会话的推送通知方式) | `ChatPushManager` | 设置指定会话的推送通知方式或一次性免打扰时长，返回 `Promise<void>`。 |
+| [`fetchSilentModeForConversation`](#获取指定会话的推送接收规则) | `ChatPushManager` | 获取指定会话的推送接收规则，返回 `Promise<ChatSilentModeResult>`。 |
+| [`setSilentModeForAll`](#设置全局推送接收规则) | `ChatPushManager` | 设置当前登录用户的全局推送接收规则，返回 `Promise<void>`。 |
+| [`fetchSilentModeForAll`](#获取全局推送接收规则) | `ChatPushManager` | 获取全局推送接收规则，返回 `Promise<ChatSilentModeResult>`。 |
+| [`fetchSilentModeForConversations`](#批量获取会话的推送接收规则) | `ChatPushManager` | 批量获取最多 20 个会话的推送接收规则，返回 `Promise<Map<string, ChatSilentModeResult>>`。 |
+| [`removeSilentModeForConversation`](#清除指定会话的推送通知方式设置) | `ChatPushManager` | 清除会话单独设置的推送通知方式，恢复继承全局推送通知方式。 |
