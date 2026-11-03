@@ -63,7 +63,7 @@ async function bindPushToken(
 退出 IM 登录时，可通过 `ChatClient#logout` 的可选位置参数 `unbindDeviceToken` 控制是否解绑设备 Token，默认为 `true`：
 
 - `ChatClient.getInstance().logout()` 或 `ChatClient.getInstance().logout(true)`：退出登录并解绑设备 Token。iOS 的配置限制见下方注意事项。
-- `ChatClient.getInstance().logout(false)`：退出登录但不解绑设备 Token。在推送证书和 Token 有效且满足离线推送条件时，用户仍可收到离线推送通知，详见 [离线推送概述](1_push_overview.html)。
+- `ChatClient.getInstance().logout(false)`：退出登录但不解绑设备 Token。在推送证书和 Token 有效且满足离线推送条件时，用户仍可收到离线推送通知，详见 [离线推送概述](push_overview.html)。
 
 ```typescript
 try {
@@ -76,9 +76,8 @@ try {
 
 在 iOS 端，当前用户已登录且初始化时已配置 `ChatOptions.apnsCertName` 的情况下，调用 `ChatClient#logout(true)` 会依次解绑普通推送 Token 和 PushKit Token，然后退出登录。任一步解绑失败，都会中断后续登出流程。
 
-// TODO：研发确认
 :::notice
-React Native SDK 5.x 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
+React Native SDK 5.0.0 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::
 
 ### 绑定 PushKit Token
@@ -124,7 +123,7 @@ try {
 
 ## 验证绑定结果
 
-绑定接口成功只表示 Token 绑定完成，不保证所有场景都会展示通知。验证时，使用另一账号发送消息，确保接收方满足 [离线推送条件](1_push_overview.html)，并检查设备通知权限、通知渠道、推送通知方式及免打扰设置。不要将杀死应用作为接收离线推送的唯一前提。
+绑定接口成功只表示 Token 绑定完成，不保证所有场景都会展示通知。验证时，使用另一账号发送消息，确保接收方满足 [离线推送条件](push_overview.html)，并检查设备通知权限、通知渠道、推送通知方式及免打扰设置。不要将杀死应用作为接收离线推送的唯一前提。
 
 若绑定失败，先检查初始化和登录状态、Token 来源及格式、Android 的厂商凭据或 iOS 的证书名称。若绑定成功但未收到通知，再核对控制台证书、包名或 Bundle ID、推送环境、设备推送服务和网络状态。
 

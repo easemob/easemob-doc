@@ -211,7 +211,7 @@ UI 使用建议如下：
 | [消息搜索](message_search_local.html) | 支持 | 在本地或会话中搜索消息。 |
 | [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
-| [离线推送](/document/flutter/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
+| [离线推送](/v4/flutter/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
 | [消息翻译](/value-added/translation/message_translation_flutter.html) | 支持 | 对消息内容进行翻译。 |
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |

@@ -223,8 +223,6 @@ await ChatClient.getInstance.chatManager.sendMessage(message);
 
 #### 关键参数
 
-// TODO：`fileSize` 这个参数先不写，是吗？
-
 | 参数 | 类型 | 必填/可选 | 说明 |
 | :--- | :--- | :--- | :--- |
 | `targetId` | `String` | 必填 | 目标会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |

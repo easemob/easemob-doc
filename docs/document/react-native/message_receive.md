@@ -224,7 +224,6 @@ function readImagePaths(message: ChatMessage): void {
 
 GIF 消息仍为 `ChatMessageType.IMAGE`，缩略图和附件下载方法与普通图片相同，详见 [接收图片消息](#接收图片消息)。
 
-// TODO：研发确认
 :::notice
 虽然 `ChatImageMessageBody` 声明了可选属性 `isGif`，React Native SDK 5.0.0 的 Android 和 iOS 图片消息序列化都未将原生 GIF 标记回传给 JavaScript；缺失时模型默认设为 `false`。因此不能仅凭 `body.isGif === false` 判断消息不是 GIF。
 :::

@@ -248,7 +248,6 @@ try {
 - `readCount`：已读人数。
 - `timestamp`：已读回执时间戳。
 
-// TODO：是这样吗？
 :::tip
 `fetchGroupMessageReadReceipts` 返回结果中的 `totalCount` 仅在 iOS 平台有值，Android 平台为 `null`。
 :::

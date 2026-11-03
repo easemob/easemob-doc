@@ -101,8 +101,8 @@ ChatClient.getInstance().chatManager.addMessageListener({
 | :--- | :--- | :--- | :--- |
 | [`withAppKey`](#初始化-sdk) / [`withAppId`](#初始化-sdk) | `ChatOptions` | `ChatOptions` | 使用 App Key 或 App ID 创建初始化配置。 |
 | [`init`](#初始化-sdk) | `ChatClient` | `Promise<void>` | 使用指定配置初始化 React Native SDK。 |
-| [`apnsCertName`](push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |
-| [`pushKitCertName`](push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS PushKit 证书名称。 |
+| [`apnsCertName`](/v4/react-native/push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |
+| [`pushKitCertName`](/v4/react-native/push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS PushKit 证书名称。 |
 | [`enableChatroomConversation`](conversation_list.html#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话列表时是否包含聊天室会话。 |
 | [`enableEmptyConversation`](conversation_list.html#从本地获取会话列表) | `ChatOptions` | `boolean` | 设置获取本地会话时是否包含空会话。 |
 | [`autoLoadConversations`](conversation_list.html#分页获取本地会话) | `ChatOptions` | `boolean` | 设置初始化 SDK 时是否自动将全部本地会话加载到内存。 |

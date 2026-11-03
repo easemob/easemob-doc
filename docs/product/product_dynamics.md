@@ -6,6 +6,18 @@ containerClass: product-dynamics-page
 
 ## 2026-11
 
+#### 环信 Flutter SDK v5.0.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Flutter SDK 5.0.0 开发版发布 | - iOS 和 Android 原生 SDK 均升级至 5.0.0，提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话、好友和已加入群组数据](/document/flutter/initialization.html#设置登录后自动同步数据)，在本地数据库打开后提前读取本地数据，同步完成后读取最新数据并刷新界面。<br/> - [群组配置](/document/flutter/group_manage.html#创建群组) 拆分为多个独立字段，建群和更新群组配置统一使用 `ChatGroupConfigs`，并通过 `ChatGroupConfigsType` 指定需要更新的配置项。<br/> - [消息已读回执支持批量处理](/document/flutter/message_receipt.html#单聊和群聊消息已读回执)，单聊和群聊采用统一的回执体系，每条消息可单独设置是否需要回执；群聊支持批量查询回执汇总和分页获取成员已读详情。<br/> - [清除会话未读数与发送消息已读回执分别处理](/document/flutter/conversation_unread.html)，清除结果可同步至当前账号的其他设备；未读消息总数仅统计通知方式为 `ALL` 的普通单聊和群聊会话，不统计聊天室和消息话题会话。<br/> - 支持读取 [会话显示名称和头像](/document/flutter/conversation_overview.html#会话对象)，以及 [批量删除本地会话](/document/flutter/conversation_delete.html#批量删除本地会话)，可按需同时删除本地消息；iOS 补充群组信息更新的多设备事件。<br/> - [登录和设备管理统一使用 Token 鉴权](/document/flutter/login.html)，移除密码鉴权，不再支持自动登录。连接中断和账号强制退出统一通过 `onDisconnected` 通知，应用需根据原因码区分连接中断和登录状态失效；Token 过期仍通过 `onTokenDidExpire` 单独通知。<br/> - [推送配置与运行时设备 Token 绑定分离](/document/flutter/push/push_easemob_console.html)，厂商推送 SDK 接入、通知权限申请和 Token 获取由应用完成。Android 绑定 Token 时需提供对应厂商的推送凭据；iOS 在初始化时配置 APNs 和 PushKit 证书名称，运行期间不可修改，普通推送与 VoIP 推送分别绑定各自的 Token，并支持单独解绑 PushKit Token。 | 2026-10-14 | - [Flutter SDK 5.0.0 更新日志](/document/flutter/releasenote.html#_5-0-0-dev-2026-10-14)<br/> - [迁移指南](/document/flutter/migration_guide.html) |
+
+#### 环信 React Native SDK v5.0.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native SDK 5.0.0 开发版发布 | - SDK 版本号自本版本起与原生 SDK 保持同步，iOS 和 Android 原生 SDK 均升级至 5.0.0。提供统一的数据同步配置和状态回调，支持 [配置登录后自动同步会话、好友和已加入群组数据](/document/react-native/initialization.html#设置登录后自动同步数据)，并在本地数据库打开后提前读取本地数据，同步完成后读取最新数据并刷新界面。<br/> - [群组配置](/document/react-native/group_manage.html#创建群组) 拆分为多个独立字段，建群和更新群组配置统一使用 `ChatGroupConfigs`，并通过 `ChatGroupConfigsType` 指定需要更新的配置项；默认创建不允许普通成员邀请用户的私有群，升级时应显式配置。<br/> - [消息已读回执支持批量处理](/document/react-native/message_receipt.html#单聊和群聊消息已读回执)，单聊和群聊采用统一的回执体系，发送前可按消息开启回执；群聊支持批量查询回执汇总和分页获取成员已读详情，消息已读状态和群消息已读人数由 SDK 维护。<br/> - [清除会话未读数与发送消息已读回执分别处理](/document/react-native/conversation_unread.html)，清除结果可同步至当前账号的其他设备；未读消息总数仅统计通知方式为 `ALL` 的普通单聊和群聊会话，不统计聊天室和消息话题会话。<br/> - 支持读取 [会话显示名称和头像](/document/react-native/conversation_overview.html#会话对象)，以及 [批量删除本地会话](/document/react-native/conversation_delete.html#批量删除本地会话)，可按需同时删除本地消息；iOS 补充群组信息更新的多设备事件。<br/> - [登录和设备管理统一使用 Token 鉴权](/document/react-native/login.html)，移除密码鉴权，不再支持自动登录，应用应管理凭证并主动登录。连接中断和账号被强制下线统一通过 `onDisconnected` 通知，需根据原因区分连接中断和登录状态失效；Token 过期仍通过 `onTokenDidExpire` 单独通知。<br/> - [推送初始化配置](/document/react-native/push/push_easemob_console.html) 与 [运行时设备 Token 绑定](/document/react-native/push/push_send_token_to_server.html) 分离。Android 厂商推送的依赖、配置和初始化需在原生工程中完成，绑定 Token 时需提供对应厂商的推送凭据；iOS 在初始化时配置 APNs 和 PushKit 证书名称，运行期间不可修改，普通推送与 VoIP 推送分别绑定各自的 Token，并支持无需登出单独解绑 PushKit Token。 | 2026-10-14 | - [React Native SDK 5.0.0 更新日志](/document/react-native/releasenote.html#v5-0-0-dev-2026-10-14)<br/> - [迁移指南](/document/react-native/migration_guide.html) |
+
 
 
 ## 2026-09

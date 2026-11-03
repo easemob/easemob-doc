@@ -14,8 +14,8 @@
 
 Flutter SDK 对 Android 和 iOS 平台的群成员名片能力进行了统一封装。具体技术原理请参见对应平台文档：
 
-- [Android 群成员名片技术原理](/document/android/group_namecard.html#技术原理)
-- [iOS 群成员名片技术原理](/document/ios/group_namecard.html#技术原理)
+- [Android 群成员名片技术原理](/v4/android/group_namecard.html#技术原理)
+- [iOS 群成员名片技术原理](/v4/ios/group_namecard.html#技术原理)
 
 ## 前提条件
 

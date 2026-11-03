@@ -114,7 +114,7 @@ Flutter SDK 中，群主和管理员可调用 `ChatGroupManager#addMembers` 将�
 
 邀请流程如下：
 
-![](/images/flutter/goup_member_invite.png)
+![](/images/android/goup_member_invite.png)
 
 群主和群管理员可以调用 `addMembers` 添加一个或多个用户；允许邀请的私有群普通成员可以调用 `inviterUser` 发出邀请。
 
@@ -179,7 +179,7 @@ try {
 
 公开群支持用户主动申请加入，私有群不支持用户主动申请加入。
 
-![](/images/flutter/group_member_apply.png)
+![](/images/android/group_member_apply.png)
 
 具体调用方式由 `ChatGroupConfigs.joinApprovalRequired` 决定：
 

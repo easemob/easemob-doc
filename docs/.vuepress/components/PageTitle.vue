@@ -15,7 +15,10 @@ const DISMISSED_KEY = 'easemob:v5-sdk-banner-dismissed'
 const v4DocumentLinks: Record<string, string> = {
   android: 'https://doc.easemob.com/v4/android/beginner_guide.html',
   ios: 'https://doc.easemob.com/v4/ios/beginner_guide.html',
-  web: 'https://doc.easemob.com/v4/web/beginner_guide.html'
+  web: 'https://doc.easemob.com/v4/web/beginner_guide.html',
+  flutter: 'https://doc.easemob.com/v4/flutter/beginner_guide.html',
+  'react-native': 'https://doc.easemob.com/v4/react-native/beginner_guide.html',
+  harmonyos: 'https://doc.easemob.com/v4/harmonyos/beginner_guide.html'
 }
 
 const pageData = usePageData()
@@ -29,7 +32,7 @@ let bannerResizeTimer = 0
 
 const currentPlatform = computed(() => {
   const match = pageData.value.path.match(
-    /^\/document\/(android|ios|web)(?:\/|$)/
+    /^\/document\/(android|ios|web|flutter|react-native|harmonyos)(?:\/|$)/
   )
 
   return match?.[1] ?? ''

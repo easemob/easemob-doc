@@ -209,8 +209,6 @@ try {
 
 设置 `ChatMessageSearchScope.Content` 时，匹配内容如下：
 
-// TODO：研发确认：自定义消息中还支持搜索  `params` 中的字符串值？
-
 | 消息类型 | 关键字匹配的消息内容 | 关键字搜索内容示例 |
 | :--- | :--- | :--- |
 | 文本消息 | `ChatTextMessageBody.content` | 文本消息的实际内容“你好世界”。 |

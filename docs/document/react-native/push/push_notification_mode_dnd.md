@@ -92,7 +92,7 @@ SDK 通过 `ChatSilentModeParam` 配置免打扰规则，支持以下两种模�
 如果仅为某个会话设置一次性免打扰，而 App 全局未设置免打扰，则只有该会话在免打扰生效期间不发送离线推送通知；其他会话仍按照各自的推送通知方式或继承的全局设置发送推送通知。会话级别不支持每日循环免打扰时段，不能将全局时段设置直接套用于会话。
 
 :::tip
-若需在免打扰生效期间仍向指定用户发送离线推送通知，可设置 [强制推送](1_push_extension.html#强制推送)。
+若需在免打扰生效期间仍向指定用户发送离线推送通知，可设置 [强制推送](push_extension.html#强制推送)。
 :::
 
 ## 设置全局推送接收规则
@@ -167,8 +167,6 @@ async function fetchGlobalPushRule(): Promise<void> {
 }
 ```
 
-// TODO：研发确认，需要下面的吗？
-
 :::notice
 `remindType`、`expireTimestamp`、`startTime` 和 `endTime` 均为可选字段，读取时应兼容 `undefined`。Android 端不返回值为 `0` 的 `expireTimestamp`；iOS 端可返回 `0`。不要将缺少字段直接解释为指定规则已启用，也不要用全局查询结果中的会话字段定位具体会话。
 
@@ -215,7 +213,6 @@ async function setConversationPushRule(
 
 调用 `ChatPushManager#fetchSilentModeForConversation` 获取指定会话的推送接收规则，返回 `Promise<ChatSilentModeResult>`。
 
-// TODO：研发确认，需要下面的吗？
 `ChatSilentModeResult` 未提供会话是否单独设置推送通知方式的标记。不能凭 `result.remindType` 是否非空判断会话是否单独设置了推送通知方式，也不能用它区分显式设置与继承全局设置。
 
 ```typescript
@@ -278,8 +275,8 @@ async function fetchConversationPushRules(
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`getAllConversations`](#获取所有会话的推送通知方式设置) | `ChatManager` | 获取本地会话列表，读取各会话的 `remindType` 属性；不主动从服务器同步推送规则。 |
-| [`setSilentModeForConversation`](#设置指定会话的推送通知方式) | `ChatPushManager` | 设置指定会话的推送通知方式或一次性免打扰时长，返回 `Promise<void>`。 |
+| [`getAllConversations`](#推送通知方式) | `ChatManager` | 获取本地会话列表，读取各会话的 `remindType` 属性；不主动从服务器同步推送规则。 |
+| [`setSilentModeForConversation`](#设置指定会话的推送接收规则) | `ChatPushManager` | 设置指定会话的推送通知方式或一次性免打扰时长，返回 `Promise<void>`。 |
 | [`fetchSilentModeForConversation`](#获取指定会话的推送接收规则) | `ChatPushManager` | 获取指定会话的推送接收规则，返回 `Promise<ChatSilentModeResult>`。 |
 | [`setSilentModeForAll`](#设置全局推送接收规则) | `ChatPushManager` | 设置当前登录用户的全局推送接收规则，返回 `Promise<void>`。 |
 | [`fetchSilentModeForAll`](#获取全局推送接收规则) | `ChatPushManager` | 获取全局推送接收规则，返回 `Promise<ChatSilentModeResult>`。 |

@@ -284,7 +284,7 @@ final options = ChatOptions.withAppKey(
 );
 await ChatClient.getInstance.init(options);
 ```
-// TODO
+
 :::warning
 对于 Flutter SDK 5.0.0，Flutter 层未设置 `dataSyncType` 时会使用原生平台默认值，而 Android SDK 5.0.0 与 iOS SDK 5.0.0 的默认值不同。若需要跨平台一致的同步行为，请显式配置该字段。`loginWithToken` 返回成功也不表示业务数据已经同步完成；应结合 `onDatabaseOpened` 展示本地缓存，并在 `onDataSyncFinish` 成功后刷新最新数据。
 :::

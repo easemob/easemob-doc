@@ -15,8 +15,8 @@
 接收消息后，原生 SDK 会自动将消息中携带的更新时间与本地缓存中的对应时间戳进行比较。当检测到数据已更新或本地缺少相关缓存时，SDK 会从服务端拉取最新的用户属性或群成员名片并更新本地缓存，然后通过相应事件通知 React Native 业务层刷新界面。业务层无需解析或比较这些内部时间戳。
 
 在通过消息获取发送方信息的过程中，SDK 会自动完成用户信息同步、本地缓存更新及事件通知，处理流程详见原生平台文档：
-- [Android 处理流程](/document/android/userinfo_provider.html#技术原理)
-- [iOS 处理流程](/document/ios/userinfo_provider.html#技术原理)
+- [Android 处理流程](/v4/android/userinfo_provider.html#技术原理)
+- [iOS 处理流程](/v4/ios/userinfo_provider.html#技术原理)
 
 ## 前提条件
 

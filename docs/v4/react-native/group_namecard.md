@@ -14,8 +14,8 @@ React Native SDK 基于 Android 和 iOS 原生 SDK，对群成员名片相关能
 
 具体的内存更新流程请参见对应的原生平台文档：
 
-- [Android 处理流程](/document/android/group_namecard.html#技术原理)
-- [iOS 处理流程](/document/ios/group_namecard.html#技术原理)
+- [Android 处理流程](/v4/android/group_namecard.html#技术原理)
+- [iOS 处理流程](/v4/ios/group_namecard.html#技术原理)
 
 ## 前提条件
 

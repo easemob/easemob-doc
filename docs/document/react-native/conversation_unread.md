@@ -21,9 +21,8 @@
 
 1. 用户进入会话页面后，在应用层记录当前会话 ID，并根据需要调用 `ChatManager#clearConversationUnreadMessageCount(convId)` 清零该会话的未读数。
 2. SDK 会先将本地缓存中目标会话的未读数更新为 `0`，再尝试同步到当前用户登录的其他设备。
-3. 应用应在操作成功后重新读取会话数据并刷新会话列表 UI。`ChatMessageEventListener#onConversationsUpdate` 仅通知会话新增或删除，不保证在每次未读数变化时触发。// TODO：研发确认。AI 的回答：描述与当前调用链一致。不应依赖 onConversationsUpdate 覆盖每次未读数变化，操作成功后主动重新读取数据是合理的。
-4. 多设备登录时，清零操作不会通知会话对端，也不会触发对端的消息已读回执；同步请求仅面向当前用户的其他在线设备。
-5. 如需清零所有会话的未读数，可调用 `ChatManager#clearAllConversationUnreadMessageCount` 接口。该操作会清零当前设备本地缓存中的全部会话未读数，并尝试同步到当前用户的其他在线设备。
+3. 应用应在操作成功后重新读取会话数据并刷新会话列表 UI。`ChatMessageEventListener#onConversationsUpdate` 仅通知会话新增或删除，不保证在每次未读数变化时触发。
+4. 如需清零所有会话的未读数，可调用 `ChatManager#clearAllConversationUnreadMessageCount` 接口。该操作会清零当前设备本地缓存中的全部会话未读数，并尝试同步到当前用户的其他在线设备。
 
 :::tip
 清零会话未读数不会向会话对端发送通知，也不会触发对端的消息已读回执。如需让消息发送方感知消息已读，请使用消息已读回执功能。

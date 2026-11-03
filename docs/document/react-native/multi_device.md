@@ -110,7 +110,7 @@ async function getLoggedInDevices(userId: string, token: string): Promise<void> 
 
 环信即时通讯 IM 支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢设备就能知道是被哪个设备挤下线的。
 
-初始化 SDK 时，你可以通过 `ChatOptions#customDeviceName` 设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`ChatDisconnectErrorCode.USER_LOGIN_FROM_OTHER_DEVICE`），被踢设备可从 `ChatConnectEventListener#onDisconnected` 回调的 `info.deviceName` 中读取导致该设备被踢下线的新登录设备的自定义设备名称。`info` 或 `deviceName` 可能缺失，应用应兼容未提供设备名称的情况。// TODO：研发确认本段的最后一句话，是否需要添加？
+初始化 SDK 时，你可以通过 `ChatOptions#customDeviceName` 设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`ChatDisconnectErrorCode.USER_LOGIN_FROM_OTHER_DEVICE`），被踢设备可从 `ChatConnectEventListener#onDisconnected` 回调的 `info.deviceName` 中读取导致该设备被踢下线的新登录设备的自定义设备名称。`info` 或 `deviceName` 可能缺失，应用应兼容未提供设备名称的情况。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
@@ -184,7 +184,7 @@ async function initializeWithCustomPlatform(): Promise<void> {
 
 环信即时通讯 IM 支持为登录设备设置自定义扩展信息。在多设备登录场景下，该能力可用于传递当前登录设备的附加标识信息，便于业务侧进行设备识别和管理，例如，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
 
-初始化 SDK 时，你可以通过 `ChatOptions.loginExtraInfo` 设置登录设备的自定义扩展信息（最大长度为 1024 个字符）。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`ChatDisconnectErrorCode.USER_LOGIN_FROM_OTHER_DEVICE`），被踢设备可从 `ChatConnectEventListener#onDisconnected` 回调的 `info.ext` 中读取导致该设备被踢下线的新登录设备的自定义扩展信息。`info` 或 `ext` 可能缺失，应用应兼容未提供扩展信息的情况。// TODO：研发确认本段的最后一句话，是否需要添加？
+初始化 SDK 时，你可以通过 `ChatOptions.loginExtraInfo` 设置登录设备的自定义扩展信息（最大长度为 1024 个字符）。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`ChatDisconnectErrorCode.USER_LOGIN_FROM_OTHER_DEVICE`），被踢设备可从 `ChatConnectEventListener#onDisconnected` 回调的 `info.ext` 中读取导致该设备被踢下线的新登录设备的自定义扩展信息。`info` 或 `ext` 可能缺失，应用应兼容未提供扩展信息的情况。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
@@ -287,10 +287,8 @@ async function kickAllDevices(userId: string, token: string): Promise<void> {
 2. 登录成功后才能接收多设备事件。
 :::
 
-// TODO：研发确认下面的需要添加吗？
-
 :::notice
-React Native SDK 5.0.0 的 iOS 端无法正常将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`，请勿依赖该回调刷新消息话题界面。应用可按需重新查询消息话题列表或详情，详见 [管理消息话题](thread.html)。Android 端可使用该回调。
+React Native SDK 5.0.0 的 iOS 桥接层因回调方法名与原生协议不匹配，未能将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`。请勿依赖该回调刷新 iOS 消息话题界面，可按需重新查询消息话题列表或详情，详见 [管理消息话题](thread.html)。Android 端可正常使用该回调。
 :::
 
 回调的参数均为可选参数，应按实际返回值处理。`onContactEvent` 的 `target` 为好友的用户 ID，`ext` 为事件扩展信息；`onGroupEvent` 的 `target` 为群组 ID；`onThreadEvent` 的 `target` 为消息话题 ID，不能按群组 ID 使用。`onGroupEvent` 和 `onThreadEvent` 的第三个参数 `usernames` 为与操作相关的用户 ID 列表。`onConversationEvent` 的 `convId` 和 `convType` 分别为会话 ID 和会话类型。

@@ -80,7 +80,6 @@ try {
 
 群成员会通过 `ChatGroupEventHandler#onSpecificationDidUpdate` 收到群组详情更新回调。回调中的 `ChatGroup` 表示更新后的群组信息。为确保获取完整且最新的配置，建议在回调中调用 `fetchGroupInfoFromServer` 从服务器获取群组详情。
 
-// TODO：需要添加吗？
 :::warning
 从 `ChatGroup` 读取配置时存在平台差异：iOS 上 `configs` 可能为 `null`，`maxUserCount` 和 `extension` 不下发，应改读 `configs?.maxCount` 和 `configs?.ext`；Android 上 `configs.inviteNeedConfirm` 固定返回 `false`，该字段只应作为创建或更新群组时的入参使用。
 :::

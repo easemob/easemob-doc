@@ -34,7 +34,7 @@ const documentSidebar = [
     children: [
       { text: '用户关系', link: 'user_relationship.html' },
       { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos']},
+      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos', 'flutter', 'react-native']},
       { text: '在线状态订阅', link: 'presence.html' },
     ],
     except: ['server-side', 'applet']
@@ -46,7 +46,7 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native', 'flutter'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索本地消息', link: 'message_search_local.html', except: ['web']}, 
@@ -88,7 +88,7 @@ const documentSidebar = [
       { text: '群组概述', link: 'group_overview.html' },
       { text: '创建和管理群组', link: 'group_manage.html' },
       { text: '管理群组成员', link: 'group_members.html' },
-      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos'] },
+      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos', 'flutter', 'react-native'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
       { text: '管理消息话题', link: 'thread.html', except: ['harmonyos'] },
       { text: '管理消息话题中的消息', link: 'thread_message.html', except: ['harmonyos'] }

@@ -17,8 +17,8 @@
 接收消息后，原生 SDK 会比较消息中携带的更新时间与本地内存中的对应时间戳。如果消息中的数据较新或本地缺少相关数据，原生 SDK 会从服务器获取最新的用户属性或群成员名片，更新本地内存，并通过 Flutter SDK 的事件处理器通知业务层刷新 UI。
 
 Flutter SDK 对 Android 和 iOS 平台的用户信息自动管理能力进行了统一封装。有关各平台的具体实现原理，请参见：
-- [Android 用户信息自动管理技术原理](/document/android/userinfo_provider.html#技术原理)
-- [iOS 用户信息自动管理技术原理](/document/ios/userinfo_provider.html#技术原理)
+- [Android 用户信息自动管理技术原理](/v4/android/userinfo_provider.html#技术原理)
+- [iOS 用户信息自动管理技术原理](/v4/ios/userinfo_provider.html#技术原理)
 
 
 

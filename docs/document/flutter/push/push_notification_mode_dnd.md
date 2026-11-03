@@ -201,8 +201,6 @@ Future<void> fetchGlobalPushRule() async {
 }
 ```
 
-// TODO：研发确认，需要下面的吗？
-
 :::warning
 当前 `ChatSilentModeResult` 的 `remindType`、`startTime`、`endTime` 等公开字段虽声明为可空，但 `fromJson` 仍直接读取并解析 `startTime`、`endTime`、`remindType`、`convId`、`conversationType` 等字段。原生返回数据缺少这些字段时，可能在 Dart 解析阶段抛出 `TypeError` 等非 `ChatError` 异常。Android 桥接会省略值为空的会话、时段或通知方式字段；iOS 返回数据也可能缺少空的会话 ID 或时段字段。
 
@@ -249,8 +247,6 @@ Future<void> setConversationPushRule(
 ## 获取指定会话的推送接收规则
 
 调用 `ChatPushManager.fetchConversationSilentMode` 获取指定会话的推送接收规则，返回 `Future<ChatSilentModeResult>`。
-
-// TODO：研发确认，需要下面的吗？
 
 Flutter 的 `ChatSilentModeResult` 没有 Android 的 `isConversationRemindTypeEnabled()` 对应接口，当前双端桥接也未透传该标记。不能凭 `result.remindType` 是否非空判断会话是否单独设置了推送通知方式，也不能用它区分显式设置与继承全局设置。
 
@@ -327,7 +323,7 @@ Future<void> fetchConversationPushRules(
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`syncConversationsSilentMode`](#获取所有会话的推送通知方式设置) | `ChatPushManager` | 异步同步服务端保存的会话推送通知方式，返回 `Future<void>`。 |
-| [`setConversationSilentMode`](#设置指定会话的推送通知方式) | `ChatPushManager` | 设置指定会话的推送通知方式或一次性免打扰时长，返回 `Future<void>`。 |
+| [`setConversationSilentMode`](#设置指定会话的推送接收规则) | `ChatPushManager` | 设置指定会话的推送通知方式或一次性免打扰时长，返回 `Future<void>`。 |
 | [`fetchConversationSilentMode`](#获取指定会话的推送接收规则) | `ChatPushManager` | 获取指定会话的推送接收规则，返回 `Future<ChatSilentModeResult>`。 |
 | [`setSilentModeForAll`](#设置全局推送接收规则) | `ChatPushManager` | 设置当前登录用户的全局推送接收规则，返回 `Future<void>`。 |
 | [`fetchSilentModeForAll`](#获取全局推送接收规则) | `ChatPushManager` | 获取全局推送接收规则，返回 `Future<ChatSilentModeResult>`。 |

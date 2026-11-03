@@ -253,6 +253,9 @@ projects:
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_stream_receive.html    
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_stream_receive.html
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
@@ -883,6 +886,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_namecard.html         
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/group_namecard.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/group_namecard.html
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -1117,6 +1126,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userinfo_provider.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/userinfo_provider.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/userinfo_provider.html
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
@@ -1198,6 +1213,9 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/push/push_overview.html
               - icon: /sdk/react.svg
                 text: React Native
                 link: /document/react-native/push/push_overview.html  

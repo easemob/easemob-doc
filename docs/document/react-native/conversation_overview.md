@@ -43,7 +43,7 @@ SDK 通过会话类型和会话 ID 标识会话：
 | `marks` | 会话标记数组，类型为 `ChatConversationMarkType[] \| undefined`。 |
 | `ext` | 会话的本地扩展字段。 |
 
-设置本地扩展字段时，使用 `ChatManager#setConversationExtension`，传入会话 ID、会话类型和扩展对象。扩展对象的值支持 `string`、`number` 或 `boolean`。当前 `ChatConversation#setConversationExtension` 未将传入的新值正确转发给管理器，应使用管理器接口保存，并在成功后重新读取会话。// TODO：研发确认。AI 的回答：ChatConversation#setConversationExtension 确实把旧的 this.ext 传给管理器，没有正确转发新参数；使用管理器接口的建议正确。
+设置本地扩展字段时，使用 `ChatManager#setConversationExtension`，传入会话 ID、会话类型和扩展对象。扩展对象的值支持 `string`、`number` 或 `boolean`。当前 `ChatConversation#setConversationExtension` 未将传入的新值正确转发给管理器，应使用管理器接口保存，并在成功后重新读取会话。
 
 :::tip
 `ChatConversation` 主要包含本地会话及消息相关数据，不等同于完整的用户属性、群组详情或聊天室详情。如需展示名称和头像等完整信息，应按会话类型调用用户属性、群组或聊天室相关接口。

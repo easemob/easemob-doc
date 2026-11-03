@@ -47,7 +47,7 @@
 离线推送模板开通后，**离线推送配置** 页面默认添加两个模板，`default` 和 `detail`。若发送方未指定模板、接收方也未选择自定义模板，消息推送时按显示样式使用默认模板，创建消息时无需传入模板名称。
 
 - `default`：默认情况下，推送标题为 **您有一条新消息**，推送内容为 **请点击查看**。若调用 `ChatPushManager#updatePushDisplayStyle` 将显示样式设置为 `ChatPushDisplayStyle.Simple`，则对应默认模板 `default`。
-- `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为消息发送方的推送昵称和消息内容。若调用 `ChatPushManager#updatePushDisplayStyle` 将显示样式设置为 `ChatPushDisplayStyle.Summary`，则对应默认模板 `detail`。推送昵称未设置时的展示规则，详见 [设置推送通知的显示属性](1_push_display_attribute.html#设置推送通知的显示属性)。
+- `detail`：默认情况下，推送标题为 **您有一条新消息**，推送内容为消息发送方的推送昵称和消息内容。若调用 `ChatPushManager#updatePushDisplayStyle` 将显示样式设置为 `ChatPushDisplayStyle.Summary`，则对应默认模板 `detail`。推送昵称未设置时的展示规则，详见 [设置推送通知的显示属性](push_display_attribute.html#设置推送通知的显示属性)。
 
 调用 `updatePushDisplayStyle` 时，显示样式参数的默认值为 `ChatPushDisplayStyle.Simple`。
 

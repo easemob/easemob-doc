@@ -139,7 +139,6 @@ try {
 }
 ```
 
-// TODO：研发确认
 :::notice
 React Native SDK 5.0.0 的 Android 端，白名单变更回调中的 `members` 字段可能缺失。可将 `ChatRoomEventListener#onAllowListAdded` 和 `ChatRoomEventListener#onAllowListRemoved` 作为变更通知，再查询白名单或自身白名单状态。
 :::

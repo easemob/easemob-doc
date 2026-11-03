@@ -111,19 +111,19 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前将 `ChatOptions#enableChatroomConversation` 设置为 `true`。你可以读取 `ChatOptions#enableChatroomConversation` 查询当前配置。
 
-详见 [从本地获取会话列表](conversation_list.html#从本地获取会话列表) 文档。
+详见 [从本地获取会话列表](/v4/flutter/conversation_list.html#从本地获取会话列表) 文档。
 
 #### 新增特性
 
 - 依赖的原生 SDK 升级：
   - iOS SDK 升级至 4.25.0；
   - Android SDK 升级至 4.25.1。
-- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
+- 支持 [分页获取本地会话列表](/v4/flutter/conversation_list.html#分页获取本地会话)。
 - 支持 [服务端消息搜索](/value-added/search/message_search_flutter.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。
   消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
-- 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/document/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)：`ChatOptions` 新增 `apnsCertName`、`pushKitCertName` 配置项。
-- iOS 支持 [绑定](/document/flutter/push/push_easemob_console.html#绑定-pushkit-token)和[解绑](/document/flutter/push/push_easemob_console.html#解绑-pushkit-token)苹果 PushKit token：新增 `ChatPushManager#bindPushKitToken` 与 `ChatPushManager#unbindPushKitToken`，仅 iOS 生效，其他平台调用不做任何处理。
-- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+- 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/v4/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)：`ChatOptions` 新增 `apnsCertName`、`pushKitCertName` 配置项。
+- iOS 支持 [绑定](/v4/flutter/push/push_easemob_console.html#绑定-pushkit-token)和[解绑](/v4/flutter/push/push_easemob_console.html#解绑-pushkit-token)苹果 PushKit token：新增 `ChatPushManager#bindPushKitToken` 与 `ChatPushManager#unbindPushKitToken`，仅 iOS 生效，其他平台调用不做任何处理。
+- 支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/v4/flutter/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 - 支持 SDK 初始化前配置自定义 NTP 服务器：`ChatOptions` 新增 `ntpServers` 配置项。
 
 ## v4.22.0 2026-8-28
@@ -145,17 +145,17 @@ SDK 补充会话展示信息和批量删除会话能力：
 - iOS 支持 Swift Package Manager（SPM）集成，与 CocoaPods 方式并存；SPM 方式下原生 SDK 通过 Swift 包 `HyphenateChat_iOS`（4.22.2）依赖。
 - 支持 [语音转文字功能](/value-added/stt/voice_to_text_flutter.html)。
 - 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片消息的缩略图及附件路径处理逻辑](message_receive.html#接收图片消息)。
-- 支持 [群成员名片管理功能](group_namecard.html)。
+  - 新增 [“大图”资源类型](/v4/flutter/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/v4/flutter/message_send.html#发送图片消息)。
+  - 优化 [图片消息的缩略图及附件路径处理逻辑](/v4/flutter/message_receive.html#接收图片消息)。
+- 支持 [群成员名片管理功能](/v4/flutter/group_namecard.html)。
 - 支持登录后自动同步好友列表：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
-  - 增强好友对象能力：从 [服务器](user_relationship.html#主动从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地读取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
-- 支持 [用户信息自动管理功能](userinfo_provider.html)。
-用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+  - 新增 [好友列表自动同步配置功能](/v4/flutter/user_relationship.html#登录后自动同步好友列表)。
+  - 新增 [好友列表及好友信息同步状态回调](/v4/flutter/user_relationship.html#监听好友关系和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](/v4/flutter/user_relationship.html#主动从服务器获取好友列表) 和 [本地获取好友列表](/v4/flutter/user_relationship.html#从本地读取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](/v4/flutter/userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
+- 支持 [用户信息自动管理功能](/v4/flutter/userinfo_provider.html)。
+用户信息指用于业务展示的用户相关信息，包括 [用户属性](/v4/flutter/userprofile.html)、[好友备注](/v4/flutter/user_relationship.html#设置好友备注) 和 [群成员名片](/v4/flutter/group_namecard.html)。
 
 ## v4.19.3 2026-8-18
 
@@ -178,7 +178,7 @@ SDK 补充会话展示信息和批量删除会话能力：
 - 升级依赖的原生 SDK:
   - iOS SDK 升级至 4.19.1。
   - Android SDK 升级至 4.19.1。
-- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+- 支持 [接收服务端发送的流式消息](/v4/flutter/message_stream_receive.html)。
   
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
@@ -186,7 +186,7 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 修复下面两个方法未暴露在 `ChatManager` 中的问题：
 
-- `loadConversationMessagesWithKeyword`：[根据关键字获取会话中的消息](message_retrieve.html#根据关键字获取会话中的消息)。
+- `loadConversationMessagesWithKeyword`：[根据关键字获取会话中的消息](/v4/flutter/message_retrieve.html#根据关键字获取会话中的消息)。
 - `getAllMessageCount`：[获取本地数据库中的消息总数](https://doc.easemob.com/apidoc/flutter/im_flutter_sdk/ChatManager/getAllMessageCount.html) 。
 
 ## v4.18.1 2026-3-5
@@ -220,7 +220,7 @@ SDK 补充会话展示信息和批量删除会话能力：
 - 依赖的原生 `SDK` 升级:
   - `iOS` 升级至 4.16.2
   - `Android` 升级至 4.16.1
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
+- 支持 [根据消息 ID 列表获取本地消息](/v4/flutter/message_retrieve.html#根据消息-id-获取本地消息)。
 - 支持私有部署时设置 IPv6 格式的 REST 地址。
 
 #### 优化
@@ -230,10 +230,10 @@ SDK 补充会话展示信息和批量删除会话能力：
 #### 修复
 
 - 修复 Thread 消息话题会加入到会话列表的问题。
-- 修复当 [修改文本和自定义消息之外的消息](message_modify.html) 时，`EEMChatEventHandler#onMessageContentChanged` 回调中不返回修改的信息的问题。
-- 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息 `FetchMessageOptions#needSave` 设置为 `false`，也会生成新的本地会话的问题。
-- 修复群组或聊天室解散后，成员收到 [事件](group_manage.html#解散群组) 后，仍然会从服务器获取群组或聊天室详情的问题。
-- 修复更新 [群组属性](group_attributes.html) 时影响群组头像问题。
+- 修复当 [修改文本和自定义消息之外的消息](/v4/flutter/message_modify.html) 时，`EEMChatEventHandler#onMessageContentChanged` 回调中不返回修改的信息的问题。
+- 修复 [拉取漫游消息](/v4/flutter/message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息 `FetchMessageOptions#needSave` 设置为 `false`，也会生成新的本地会话的问题。
+- 修复群组或聊天室解散后，成员收到 [事件](/v4/flutter/group_manage.html#解散群组) 后，仍然会从服务器获取群组或聊天室详情的问题。
+- 修复更新 [群组属性](/v4/flutter/group_attributes.html) 时影响群组头像问题。
 
 ## v4.15.2 2025-11-7
 
@@ -244,7 +244,7 @@ SDK 补充会话展示信息和批量删除会话能力：
 #### 新增特性
 
 - 新增 `getCurrentDeviceId` 方法获取你当前设备的设备 ID。
-- 支持 [根据关键字获取单个会话中的消息](message_retrieve.html#根据关键字获取会话中的消息)。
+- 支持 [根据关键字获取单个会话中的消息](/v4/flutter/message_retrieve.html#根据关键字获取会话中的消息)。
 
 #### 修复
 
@@ -272,19 +272,19 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 - Android 依赖 SDK 升级到 4.15.0。
 - iOS 依赖 SDK 升级到 4.15.0。
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和[接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
-- 支持加载本地会话消息时，只 [加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [获取群成员信息](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [发送](/v4/flutter/message_send.html#发送-gif-图片消息) 和[接收 GIF 图片消息](/v4/flutter/message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](/v4/flutter/group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](/v4/flutter/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/v4/flutter/message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，只 [加载指定群成员发送的消息](/v4/flutter/message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [获取群成员信息](/v4/flutter/group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增 `onMembersJoinedFromGroup` 和 `onMembersExitedFromGroup` 回调，`onMembersJoinedFromGroup` 和 `onMemberExitedFromGroup` 标记过期。
   - 新增 `ChatGroupManager#updateGroupName` 和 `ChatGroupManager#updateGroupDesc` 方法，标记 `ChatGroupManager#changeGroupName` 和 `ChatGroupManager#changeGroupDescription` 方法过期。
 
 #### 优化
 
-- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/document/flutter/demo.html)。
+- [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。Demo 跑通详情，请参见 [Demo 跑通文档](/v4/flutter/demo.html)。
 
 #### 修复
 
@@ -299,12 +299,12 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- [支持修改各类发送成功后的消息](message_modify.html) ：
+- [支持修改各类发送成功后的消息](/v4/flutter/message_modify.html) ：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `attributes`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `attributes`。
   - 透传消息：不支持修改。
-- 支持[控制 iOS 后台的行为和使用方式](initialization.html#初始化)。
-- 支持[鸿蒙平台](integration.html#鸿蒙平台支持)。
+- 支持[控制 iOS 后台的行为和使用方式](/v4/flutter/initialization.html#初始化)。
+- 支持[鸿蒙平台](/v4/flutter/integration.html#鸿蒙平台支持)。
 
 #### 优化
 
@@ -338,7 +338,7 @@ SDK 补充会话展示信息和批量删除会话能力：
   - `iOS` 升级至 4.10.2
   - `Android` 升级至 4.10.3
 
-- 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+- 修复 [fetchSilentModeForConversations](/v4/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
 
 ## v4.8.2+1
@@ -365,19 +365,19 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+- 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](/v4/flutter/room_manage.html#加入聊天室)：
   - 新增 `ChatRoomManager.joinChatRoom(String roomId, {bool leaveOtherRooms = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `ChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- 新增 `ChatPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/document/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
-- 新增 [ChatPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/document/flutter/push/push_easemob_console.html#绑定普通推送-token)。
+- 新增 `ChatPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/v4/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
+- 新增 [ChatPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/v4/flutter/push/push_easemob_console.html#绑定普通推送-token)。
 - 新增 `ChatConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
-- 新增 `ChatConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取一定时间内本地会话的消息)。
-- 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
+- 新增 `ChatConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](/v4/flutter/message_retrieve.html#获取一定时间内本地会话的消息)。
+- 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](/v4/flutter/multi_device.html#设置登录设备的扩展信息)：
   - 新增 `LoginExtensionInfo` 类接收用户设备扩展信息。
   - 新增 `ChatOptions.loginExtension` 设置登录时携带的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  - `ChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
-  - `ChatConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
+  - `ChatManager#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](/v4/flutter/message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `ChatConversation#searchMsgsByOptions`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](/v4/flutter/message_search_local.html#根据消息类型搜索当前会话中的消息)。
 
 #### 优化
 
@@ -399,8 +399,8 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](message_recall.html#撤回消息)。
-- 新增消息撤回事件 `ChatEventHandler#onMessagesRecalledInfo`, [支持离线期间撤回的消息通知给接收方](message_recall.html#设置消息撤回监听)。
+- 撤回消息方法 `recallMessage` 中增加了 `ext` 参数（字符串类型），[支持消息撤回时携带自定义信息](/v4/flutter/message_recall.html#撤回消息)。
+- 新增消息撤回事件 `ChatEventHandler#onMessagesRecalledInfo`, [支持离线期间撤回的消息通知给接收方](/v4/flutter/message_recall.html#设置消息撤回监听)。
 
 #### 修复
 
@@ -417,21 +417,21 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
+- 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](/v4/flutter/message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增[根据搜索范围搜索消息](/v4/flutter/message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `MessageSearchScope` 中的搜索范围。
   - `MessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#loadMessagesWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `ChatConversation#loadMessagesWithKeyword`：根据搜索范围搜索当前会话中的消息。
-- 支持[会话标记](conversation_mark.html)功能。
+- 支持[会话标记](/v4/flutter/conversation_mark.html)功能。
   - `ConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
   - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
   - `ChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
   - `ChatManager#fetchConversationsByOptions`：根据 `ConversationFetchOptions` 选项从服务器分页查询会话列表。
   - `ChatConversation#marks`：获取本地单个会话的所有标记。
   - `ChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
-- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+- 支持[聊天室漫游消息](/v4/flutter/message_retrieve.html#从服务器获取指定会话的消息)。
 - 新增 `ChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
-- 新增[置顶消息](message_pin.html)功能。
+- 新增[置顶消息](/v4/flutter/message_pin.html)功能。
   - 新增 `ChatManager#pinMessage` 方法，用于置顶消息。
   - 新增 `ChatManager#unpinMessage` 方法，用于取消置顶消息。
   - 新增 `ChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
@@ -445,9 +445,9 @@ SDK 补充会话展示信息和批量删除会话能力：
 #### 优化
 
 - `ChatManager#fetchConversation` 和 `ChatManager#fetchPinnedConversations` 方法废弃，使用 `ChatManager#fetchConversationsByOptions` 方法替代。
-- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
+- 支持使用消息 body 完成[单条转发](/v4/flutter/message_forward.html)，无需重新上传附件。
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
-- 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
+- 在[聊天室成员进出时更新聊天室成员人数](/v4/flutter/room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。   
 - 优化 token 登录时的错误提示信息，使错误提示更精细。   
 - 优化将所有会话置为已读的时间。    
 - 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。   
@@ -476,13 +476,13 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- 新增 `ChatContactManager#fetchContacts` 和 `ChatContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
-- 新增 `ChatContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- 新增 `ChatContactManager#getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
+- 新增[设置好友备注功能](/v4/flutter/user_relationship.html#设置好友备注)。
+- 新增 `ChatContactManager#fetchContacts` 和 `ChatContactManager#fetchAllContacts` 方法分别[从服务器一次性和分页获取好友列表](/v4/flutter/user_relationship.html#主动从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。从服务器一次性获取好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromServer` 已废弃，由 `fetchAllContactIds` 替换。
+- 新增 `ChatContactManager#getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](/v4/flutter/user_relationship.html#从本地读取好友列表)。
+- 新增 `ChatContactManager#getAllContacts` 方法[从本地一次性获取好友列表](/v4/flutter/user_relationship.html#从本地读取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。一次性获取本地好友列表（只包含好友的用户 ID）的原接口 `getAllContactsFromDB` 已废弃，由 `getAllContactIds` 替换。
 - 新增 `ChatMessage#isBroadcast` 属性用于判断该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
-- 新增 `ChatGroupManager#fetchJoinedGroupCount` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。
-- 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `ChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
+- 新增 `ChatGroupManager#fetchJoinedGroupCount` 方法用于[从服务器获取当前用户已加入的群组数量](/v4/flutter/group_manage.html#查询当前用户已加入的群组数量)。
+- 新增[错误码 706](/v4/flutter/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 false，聊天室所有者调用 `ChatRoomManager#leaveChatroom` 方法离开聊天室时会提示该错误。
 - 新增 `ChatOptions#enableEmptyConversation` 属性用于在初始化时配置获取会话列表时是否允许返回空会话。
 - 申请入群被拒绝的回调 `ChatGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 decliner 和 applicant 参数表示申请者和拒绝者的用户 ID。
 
@@ -515,23 +515,23 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)；
+- 新增[自定义设备的平台和名称功能](/v4/flutter/multi_device.html#设置登录设备的名称)；
   - 新增 `ChatOptions#osType` 属性和 `ChatOptions#deviceName` 属性，用户设置设备类型和设备名称。
-- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息功能](message_receive.html#接收合并消息)：
+- 新增 [发送](/v4/flutter/message_send.html#发送合并消息) 和 [接收合并转发消息功能](/v4/flutter/message_receive.html#接收合并消息)：
   - 新增 `Combine` 消息类型，用于合并转发消息；
   - 新增 `ChatManager#fetchCombineMessageDetail` 方法，获取合并消息中的原始消息列表;
-- 新增[消息编辑功能](message_modify.html)：
+- 新增[消息编辑功能](/v4/flutter/message_modify.html)：
   - 新增 `ChatManager#modifyMessage` 方法用户编辑已发送的消息，目前只支持文本消息;
   - 新增 `ChatEventHandler#onMessageContentChanged` 回调，用户监听消息编辑实现；
-- 新增[会话置顶功能](conversation_pin.html#置顶-取消置顶会话)：
+- 新增[会话置顶功能](/v4/flutter/conversation_pin.html#置顶-取消置顶会话)：
   - 新增 `ChatManager#pinConversation` 方法，实现在服务器会话列表中置顶/取消置顶会话；
   - 新增 `ChatManager#fetchPinnedConversations` 方法，从服务器获取已置顶会话；
-- [以下方法新增支持用户 token](multi_device.html#获取指定账号的在线登录设备列表)：  
+- [以下方法新增支持用户 token](/v4/flutter/multi_device.html#获取指定账号的在线登录设备列表)：  
   - 新增 `ChatClient#fetchLoggedInDevices` 方法，可使用 token 获取已登录的设备列表；
   - 新增 `ChatClient#kickDevice` 方法，可以使用 token 踢掉指定设备；
   - 新增 `ChatClient#kickAllDevices` 方法，可以使用 token 踢掉所有已登录设备；
-- 新增 `ChatManager#fetchConversation` 方法，[获取服务器会话列表](conversation_list.html#从服务器分页获取会话列表)，原方法 `ChatManager#getConversationsFromServer` 作废；
-- 新增 `ChatMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](message_target.html)；
+- 新增 `ChatManager#fetchConversation` 方法，[获取服务器会话列表](/v4/flutter/conversation_list.html#从服务器分页获取会话列表)，原方法 `ChatManager#getConversationsFromServer` 作废；
+- 新增 `ChatMessage#receiverList` 属性，用于在群组/聊天室中[发送定向消息](/v4/flutter/message_target.html)；
 
 #### 优化
 
@@ -547,11 +547,11 @@ SDK 补充会话展示信息和批量删除会话能力：
 
 #### 新增特性
 
-- [新增管理群成员属性功能](group_members.html#管理群成员的自定义属性)：
+- [新增管理群成员属性功能](/v4/flutter/group_members.html#管理群成员的自定义属性)：
     - 新增 `GroupManager#setMemberAttributes` 方法，用于设置群成员属性；
     - 新增 `GroupManager#fetchMemberAttributes` 和 `GroupManager#fetchMembersAttributes` 方法用于用户获取群成员属性；
     - 新增 `GroupEventHandler#onAttributesChangedOfGroupMember` 群成员属性变更回调;
-- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
+- 新增 `ChatManager#fetchHistoryMessagesByOption` 方法，用于[根据消息拉取参数配置类（`FetchMessageOptions`）从服务器分页获取指定会话的历史消息](/v4/flutter/message_retrieve.html#从服务器获取指定会话的消息)。`FetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数；
 - 新增 `Conversation#deleteMessagesWithTs` 方法，用于从本地数据库中删除指定时间段内的消息；
 - 新增 `Message#deliverOnlineOnly` 属性用于设置只向在线用户投递消息；
 

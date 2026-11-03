@@ -317,8 +317,6 @@ function removeRoomListener(): void {
 }
 ```
 
-// TODO：研发确认
-
 :::notice
 React Native SDK 5.0.0 的以下事件字段存在使用限制：
 

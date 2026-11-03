@@ -363,7 +363,7 @@ React Native SDK 5.0.0 将单聊和群聊的实时已读回执统一通过 `Chat
 `fetchGroupMessageReadReceipts` 存在平台差异：`groupId` 参数在 Android 侧被忽略；返回结果的 `totalCount` 字段（`ChatCursorResult` 在 5.0.0 新增）**仅 iOS 提供**，Android 为 `undefined`，业务代码需按可选字段处理。
 :::
 
-// TODO：研发确认
+
 :::warning
 已知问题：React Native SDK 5.0.0 的 Android 端给 `fetchGroupMessageReadReceipts` 传入本地不存在的 `msgId` 会导致原生崩溃（`NullPointerException`）。调用前请通过 `ChatManager#getMessage` 确认目标消息在本地存在，并避免在请求完成前删除该消息。iOS 使用消息 ID 和群组 ID 发起服务端查询，不保证本地缺少消息时一定返回空结果。
 :::
@@ -555,7 +555,6 @@ VoIP 推送使用独立的 PushKit 证书与 PushKit token，与上面的普通�
 
 在 iOS 端，已配置 `ChatOptions.apnsCertName` 且普通推送 Token 解绑成功时，`ChatClient#logout(true)` 会继续解绑 PushKit Token。`logout` 的 `unbindDeviceToken` 默认为 `true`；传 `false` 表示登出时不解绑。
 
-// TODO：研发确认：
 :::notice
 React Native SDK 5.0.0 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::

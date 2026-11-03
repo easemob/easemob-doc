@@ -546,7 +546,7 @@ function removeGroupListener(): void {
   ChatClient.getInstance().groupManager.removeGroupListener(groupListener);
 }
 ```
-// TODO：研发确认：
+
 :::notice
 - React Native SDK 5.0.0 的 Android 端白名单变更事件未提供 `members` 字段。请将回调作为变更通知，按需重新查询白名单。
 - `ChatGroupEventListener#onSharedFileAdded` 的 `sharedFile` 声明为 `string`，但双端实际返回文件信息对象。请通过 [共享文件列表接口](group_attributes.html#从服务器获取共享文件) 获取文件信息，不将该字段直接作为文件 ID。
