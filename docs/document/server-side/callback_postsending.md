@@ -112,6 +112,8 @@
 
 #### 请求参数说明
 
+<div class="callback-request-fields">
+
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
 | `callId` | String | 回调唯一标识，格式为 `{appkey}_{uuid}`，其中 `uuid` 为随机生成的唯一值。 |
@@ -125,6 +127,8 @@
 | `payload` | Object | 消息内容，与通过 RESTful API 发送时的消息体结构一致，详见 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | String | 安全校验版本，当前固定为 `1.0.0`。该字段当前可忽略。 |
 | `security` | String | 请求签名，计算方式为 `MD5(callId + Secret + timestamp)`。其中 `Secret` 的配置方式详见 [规则配置说明](/product/console/basic_webhook.html#配置消息回调规则)。 |
+
+</div>
 
 ### 回调响应
 

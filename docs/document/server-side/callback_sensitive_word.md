@@ -88,6 +88,8 @@
 
 ## 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -103,4 +105,6 @@
 | `contentType`  |  String |  内容类型，目前为 `message`，表示为消息。 |  
 | `timestamp`  | Long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。 | 
 | `chatType`  | String  | 会话类型，默认全选：<br/> - `chat`：单聊回调；<br/> - `groupchat`：群聊回调包含了群组和聊天室的消息回调；<br/> - `notify`：通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 `type` 字段确定具体类型。  | 
-| `status`  | String  | 对敏感词或消息的处理动作。<br/> - `pass`：敏感词为合规内容，包含敏感词的消息通过审核。<br/> - `refuse`：敏感词为违规词，对包含敏感词的消息进行拦截，不下发。<br/> - `replace`：敏感词为违规词，由 `***` 替换。  | 
+| `status`  | String  | 对敏感词或消息的处理动作。<br/> - `pass`：敏感词为合规内容，包含敏感词的消息通过审核。<br/> - `refuse`：敏感词为违规词，对包含敏感词的消息进行拦截，不下发。<br/> - `replace`：敏感词为违规词，由 `***` 替换。  |
+
+</div>

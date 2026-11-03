@@ -37,6 +37,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "19b85beee242a1266c87ab84c6c3883d",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1418038712905770616",
         "ext": {
@@ -70,20 +71,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | Long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `bodies`         | JSON Array   | 编辑消息的具体内容。与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
@@ -97,6 +105,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 位置消息
 
 ```json
@@ -105,6 +115,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "36583253ca0d3a718388f1134b180baf",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415008466669405936",
         "ext": {
@@ -140,20 +151,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。         |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -169,6 +187,8 @@
 | `meta.edit_msg.operator`          | String   | 编辑消息的用户。`easemob_rest_app_admin` 表示 app 管理员。    |
 | `type`   | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 
 ### 图片消息
 
@@ -178,6 +198,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "78708dd54808525a8a4c0e51bacec2c2",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1414988420945545172",
         "ext": {
@@ -219,20 +240,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -247,6 +275,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 语音消息
 
 ```json
@@ -255,6 +285,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "d2575840b44fb1b67f2911bd69a56473",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415000223524062680",
         "ext": {
@@ -293,20 +324,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -321,6 +359,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 视频消息
 
 ```json
@@ -329,6 +369,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "9cf75f2e2dec09ab70df4ced8caa2148",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009139259606640",
         "ext": {
@@ -369,20 +410,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -397,6 +445,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 文件消息
 
 ```json
@@ -405,6 +455,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "8ae190480ff8f4206eece47665e1eb49",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009594568083068",
         "ext": {
@@ -441,20 +492,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -469,6 +527,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 合并消息
 
 ```json
@@ -477,6 +537,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "3539b3b166e2f3401076664629d98ef1",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415001054172415464",
         "ext": {
@@ -518,20 +579,27 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
   
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `edit_message_id`  | String   | 被编辑的原消息 ID。                                       |
@@ -546,6 +614,8 @@
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
 
+</div>
+
 ### 自定义消息
 
 ```json
@@ -554,6 +624,7 @@
     "eventType": "chat",
     "chat_type": "edit",
     "security": "989b921d92b411d3c30364ccda87aad4",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415010541239273084",
         "ext": {
@@ -596,19 +667,26 @@
 
 回调请求包体字段描述：
 
+<div class="callback-request-fields">
+
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
 | `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String | `chat` 上行消息、`chat_offline` 离线消息。                      |
 | `chat_type`       | String   | `edit`，表示编辑消息。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [配置环信控制台回调规则](callback_postsending.html#回调规则)。 |
+| `os` | String | 发起本次消息编辑操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/document/android/multi_device.html#设置登录设备的平台)。 |
 | `appkey`          | String   | 你在环信控制台注册的应用唯一标识。                         |
 | `from`            | String   | 消息发送方的用户 ID。                                     | 
 | `to`              | String   | 消息接收方。<br/> - 单聊为接收方用户 ID；<br/> - 群聊为群组 ID；<br/> - 聊天室聊天为聊天室 ID。   |
 | `msg_id`          | String   | 该消息编辑事件消息的 ID。                                       |
 | `timestamp`       | long     | 环信服务器接收到此消息的 Unix 时间戳，单位为毫秒 ms。        |
 
+</div>
+
 `payload` 为事件内容，其中的字段如下表所示：
+
+<div class="callback-request-fields">
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
@@ -623,4 +701,6 @@
 | `meta.edit_msg.send_time`          | Long   | 原消息的发送时间。                                      |
 | `meta.edit_msg.sender`          | String   | 原消息的发送方。                                      |
 | `type`            | String   | 消息编辑事件，值为 `edit`。       |
+
+</div>
 

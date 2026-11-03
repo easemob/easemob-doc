@@ -37,6 +37,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -51,6 +53,8 @@
 | `operation`    | String | 操作。群组封禁或解禁的操作为 `UPDATE`。 |
 | `operator`     | String | 操作人。                     | 
 | `timestamp`    | Long   | 操作完成的时间戳。                | 
+
+</div>
 
 ## 其他说明
 

@@ -193,6 +193,37 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - 修复推送 Token 上传偶现崩溃的问题。
 - 增强异常消息防护：接收到消息体为空的消息时，不再解析、写入数据库或向上层回调；读取会话及历史消息时跳过无效消息，避免产生空消息对象或引发崩溃。
 
+## v4.24.3 Dev 2026-9-23（开发版）
+
+#### 新增特性
+
+- 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。
+  - 该开关默认为 `false`，即应用进入后台后继续保持长连接。
+  - 开启该开关且推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息改由厂商推送通道下发。
+  - 该开关适用于所有厂商推送通道，不再仅限于 FCM。
+  - 需在调用 `EMClient#init` 初始化 SDK 前设置。
+  - 在 4.24.2 及之前版本中，FCM 场景下应用进入后台约 3 分钟后会自动断开长连接；从 4.24.3 起，该行为默认关闭。依赖原有行为的 FCM 集成需显式调用 `setUsePushInBackground(true)`，断连等待时间同时由 3 分钟缩短为约 10 秒。
+
+详见 [推送概述文档](/v4/android/push/push_overview.html#离线推送过程)。
+
+## v4.24.2 Dev 2026-9-3（开发版）
+
+#### 优化
+
+- 网络超时调优：
+  - TCP/WebSocket 单次连接超时：5s 调整为 20s；
+  - 非附件类 HTTP 请求超时：10s 调整为 20s；
+  - 整体登录超时：30s 调整为 70s；
+  - `sendMessage` 内部重连等待与 DNS 列表获取超时统一为 20s。
+  - 详见 [连接文档](/v4/android/connection.html#网络超时)。
+- 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验逻辑：当 `pageSize <= 0` 时直接回调 `EMError.INVALID_PARAM`，不再发起请求。详见 [用户状态订阅文档](/v4/android/presence.html#查询被订阅用户列表)。
+
+#### 修复
+
+- 修复附件上传/下载超时单位换算错误（秒未换算为毫秒导致超时设置偏小）。
+- 修复多线程场景下 DNS 链路排序因并发访问导致崩溃的问题。
+- 修复 Presence 时间戳未初始化可能返回脏数据的问题。
+
 ## v4.24.1 Dev 2026-9-2（开发版）
 
 #### 优化
@@ -329,7 +360,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
    - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
 
-## v4.19.4 Dev 2026-9-22（开发版）
+## v4.19.4 2026-9-22
 
 该版本进行了如下修复：
 
@@ -442,7 +473,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 修复更新群组属性时影响群组头像问题。
 - 修复多线程场景下通过 `messagebody` 获取 `content` 时引起的崩溃问题。
 
-### v4.16.4 2026-08-14
+## v4.16.4 2026-08-14
 
 #### 优化
 
@@ -452,7 +483,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - 修复私有部署场景下，第二次调用 `EMOptions#setRestServer` 设置 REST 服务器地址不生效的问题。
 
-### v4.16.3 2026-06-16
+## v4.16.3 2026-06-16
 
 #### 优化
 
@@ -465,7 +496,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 修复离线消息同步过程中并发访问会话同步队列可能导致的崩溃问题。
 - 修复离线消息同步完成事件 `EMConnectionListener#onOfflineMessageSyncFinish` 回调中嵌套调用 SDK 接口可能导致的死锁问题。
 
-### v4.16.2 2026-01-28
+## v4.16.2 2026-01-28
 
 #### 修复
 

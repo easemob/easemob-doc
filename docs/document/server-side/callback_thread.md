@@ -79,6 +79,8 @@
 
 ### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段                 | 数据类型 | 含义                              |
 | :------------------- | :------- | :-------------------------------- |
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了消息话题（Thread）和表情回复（Reaction） 的回调，需要结合 `payload` 中的 `type` 字段确定具体类型。 |
@@ -115,4 +117,6 @@
 | `payload.data.last_message.payload.from` | String  | 消息操作者传入的 `from` 字段的值。  |
 | `payload.data.last_message.payload.to`   | String    | Thread 中最新一条消息的接收方，即 Thread ID。  |
 | `payload.data.last_message.payload.type`   | String  | 群聊，固定为 `groupchat`。 |
+
+</div>
 

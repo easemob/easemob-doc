@@ -30,6 +30,7 @@ EMClient.getInstance().init(context, options);
 | `setAppKey(String appkey)`                                   | 设置 App Key。<br/>`appkey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
 | `setAutoLogin(boolean autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
+| `setUsePushInBackground(boolean usePushInBackground)`        | 设置应用进入后台后是否断开长连接并使用厂商推送。该功能自 SDK 4.24.3 起支持，且必须在初始化 SDK 前设置。<br/> - `true`：推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。<br/> -（默认）`false`：应用进入后台后继续保持长连接。详见[离线推送过程](/v4/android/push/push_overview.html#离线推送过程)。 |
 | `setAutoAcceptGroupInvitation(boolean value)`                | 设置是否自动接受加群邀请。<br/>`value` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
 | `setAcceptInvitationAlways(boolean value)`                   | 设置是否自动接受加好友邀请。 <br/>`value` 参数表示是否自动接受加好友邀请。 <br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
 | `setEnableChatroomConversation(boolean enable)`                    | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.1 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |

@@ -54,6 +54,10 @@ message.setMessageStatusCallback(new EMCallBack() {
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
+:::tip
+自 SDK 4.24.2 起，调用 `sendMessage` 时，SDK 内部等待重连的超时时间为 20 秒。在弱网或连接恢复过程中，消息发送结果可能会在重连等待结束后返回，请以 `EMCallBack` 的回调结果更新消息状态。其他网络超时时间详见 [网络超时](connection.html#网络超时)。
+:::
+
 ## 发送附件消息
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。

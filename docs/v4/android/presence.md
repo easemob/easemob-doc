@@ -133,7 +133,7 @@ EMClient.getInstance().presenceManager().unsubscribePresences(contactsFromServer
 
 ```java
 // pageNum	当前页码，从 1 开始。
-// pageSize	每页的订阅用户的数量。
+// pageSize	每页的订阅用户的数量。自 4.24.2 起，当 `pageSize <= 0` 时直接回调 `EMError.INVALID_PARAM`，不再发起请求。
 EMClient.getInstance().presenceManager().fetchSubscribedMembers(pageNum, pageSize, new EMValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> subscribedMembers) {

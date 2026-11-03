@@ -45,6 +45,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -59,6 +61,8 @@
 | `operation`    | String | 操作。添加群组/聊天室管理员的操作为 `ADMIN`。 |
 | `operator`     | String | 操作人。若 app 管理员添加了管理员，该参数的值固定为 `@ppAdmin`。        |
 | `timestamp`    | Long   | 操作完成的时间戳。      | 
+
+</div>
 
 
 ## 删除管理员
@@ -96,6 +100,8 @@
 
 #### 请求字段说明
 
+<div class="callback-request-fields">
+
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
@@ -110,6 +116,8 @@
 | `operation`    | String | 操作。移除群组/聊天室管理员的操作为 `ADMIN`。 |
 | `operator`     | String | 操作人。若 app 管理员移除了管理员，该参数的值固定为 `@ppAdmin`。         |
 | `timestamp`    | Long   | 操作完成的时间戳。      | 
+
+</div>
 
 ## 其他说明
 

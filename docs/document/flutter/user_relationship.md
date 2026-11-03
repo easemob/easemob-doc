@@ -21,6 +21,10 @@ Flutter SDK 通过 `ChatContactManager` 提供相关 API，并通过 `ChatContac
 
 通过 `ChatContactEventHandler` 监听好友申请、接受、拒绝、添加、删除、好友同步状态及好友信息变更。调用 `ChatContactManager.addEventHandler` 时需要传入唯一的处理器 ID；不再需要监听时，使用相同 ID 调用 `removeEventHandler`。
 
+:::tip
+如需接收好友的用户属性变更通知，你需要先联系环信商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```dart
 const String contactHandlerId = 'contact_handler';
 

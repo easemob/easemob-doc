@@ -1,5 +1,19 @@
 # React-Native IM SDK 更新日志
 
+## v1.21.0 2026-09-24
+
+#### 新增特性
+
+- 依赖的原生 SDK 升级：
+  - `iOS` 升级至 4.25.0。
+  - `Android` 升级至 4.25.1。
+- 默认情况下，[本地会话列表不包含聊天室会话](conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。
+- 支持 [服务端消息搜索](/value-added/search/message_search_rn.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
+- iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)，对应属性为 `ChatOptions.apnsCertName` 和 `ChatOptions.pushKitCertName`。
+- iOS 支持 [绑定和解绑苹果 PushKit token](/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)，对应方法为 `ChatClient.bindPushKitToken` 和 `ChatClient.unbindPushKitToken`。其他平台调用这两个方法不会执行任何操作。
+- 支持 [为消息配置回调路由标识](message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。
+
 ## v1.18.0 2026-08-06
 
 #### 新增特性
@@ -17,7 +31,7 @@
   - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
   - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
   - 增强好友对象能力：从 [服务器](user_relationship.html#主动从服务器获取好友列表) 和 [本地](user_relationship.html#从本地读取好友列表) 获取好友列表时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
 - 支持 [用户信息自动管理功能](userinfo_provider.html)。
 用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 
