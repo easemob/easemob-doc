@@ -8,9 +8,13 @@
 
 Android SDK 提供以下方式：
 
-- 批量导入消息：调用 `EMChatManager#importMessages`，将当前用户发送或接收的多条消息导入本地数据库。
-- 向指定会话插入消息：调用 `EMConversation#insertMessage`，按照消息中的 Unix 时间戳将消息插入指定会话。
+- 批量导入消息：调用 `EMChatManager#importMessages`，将当前用户发送或接收的多条消息导入本地数据库，但不会更新对应会话的最新消息等会话信息。
+- 向指定会话插入消息：调用 `EMConversation#insertMessage`，按照消息中的 Unix 时间戳将消息插入指定会话，并更新会话的最新消息等会话信息。消息的会话 ID 必须与目标会话 ID 一致。
 - 直接保存消息：调用 `EMChatManager#saveMessage`，将消息保存到内存和本地数据库；若对应会话不存在，SDK 会自动创建会话。
+
+批量导入消息时，如果对应会话尚无最新消息记录，从本地数据库加载会话且过滤空会话时，该会话会被过滤，不会出现在返回的会话列表中。`EMOptions#setLoadEmptyConversations` 默认设置为 `false`，即不加载空会话。
+
+因此，建议按会话划分待导入的消息，将每个会话中按消息时间排序的最新一条消息预留出来，其余消息通过 `EMChatManager#importMessages` 批量导入，待批量导入完成后，再通过对应会话的 `EMConversation#insertMessage` 插入预留的消息，以更新会话信息。插入前应获取或创建对应会话。“最新”以 SDK 当前消息排序配置使用的时间戳为准。例如，同一个会话有 10:00、10:01 和 10:02 三条待导入的消息，可先通过 `EMChatManager#importMessages` 导入前两条，再通过 `EMConversation#insertMessage` 插入 10:02 的消息。不要先将三条消息全部批量导入，再重复插入 10:02 的消息，否则 SDK 会因消息已存在而直接返回，不会更新会话信息。
 
 ## 前提条件
 
@@ -24,7 +28,7 @@ Android SDK 提供以下方式：
 
 如需在本地会话中批量导入消息，应先将待导入数据转换为 `EMMessage` 对象列表，再调用 `EMChatManager#importMessages(List<EMMessage>)`。
 
-当前用户只能导入自己发送或接收的消息。导入后，SDK 会按照消息中的时间戳将消息添加到对应会话。建议每次导入不超过 1,000 条消息。
+当前用户只能导入自己发送或接收的消息。导入后，消息保存在本地数据库中，但不会更新对应会话的最新消息等会话信息。建议每次导入不超过 1,000 条消息。
 
 `importMessages` 是同步方法，无返回值，也不提供结果回调。 调用前，应确保 SDK 已初始化，并且当前用户的本地数据库已经打开。
 
