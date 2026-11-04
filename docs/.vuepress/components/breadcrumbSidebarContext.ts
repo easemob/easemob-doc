@@ -1,7 +1,7 @@
 /** Keep the originating platform's documentation sidebar on breadcrumb landing pages. */
-const sdkV5 = ['android', 'ios', 'web']
-const sdkV4 = ['android', 'ios', 'web', 'applet']
-const sdkLegacy = ['harmonyos', 'flutter', 'react-native', 'unity', 'windows']
+const sdkV5 = ['android', 'ios', 'web', 'harmonyos', 'flutter', 'react-native']
+const sdkV4 = ['android', 'ios', 'web', 'harmonyos', 'applet', 'flutter', 'react-native']
+const sdkLegacy = ['unity', 'windows']
 const chatV4 = ['android', 'ios', 'web']
 const chatV2 = ['flutter', 'react-native']
 const chatV1 = ['harmonyos', 'uniapp']

@@ -1,623 +1,452 @@
-# 管理群组成员
+# 群组成员管理
 
-<Toc />
+## 功能说明
 
-群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM React Native SDK 在实时互动 app 中实现群组成员管理相关功能。
-
-## 技术原理
-
-环信即时通讯 IM React Native SDK 提供 `ChatGroupManager` 类和 `ChatGroup` 类用于群组管理，支持你通过调用 API 在项目中实现如下功能：
-
-- 群组加人、踢人
-- 管理群组成员属性
-- 管理群主及群管理员
-- 管理群组黑名单
-- 管理群组禁言列表
-- 开启、关闭群组全员禁言
-- 管理群组白名单
-- 获取群组成员
+群组是支持多人实时沟通的即时通讯场景。本文介绍如何使用 React Native SDK 管理群组成员，包括查询成员列表、管理成员自定义属性、群主和管理员、白名单、黑名单及禁言等功能。用户入群、退出和移出群组的操作详见 [创建和管理群组](group_manage.html#加入群组)。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [初始化](initialization.html)及[快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 了解群成员角色，详见 [群组概述](group_overview.html)；
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 已完成 [SDK 初始化](initialization.html) 并 [登录成功](login.html)。
+- 已了解群成员角色及其权限，详见 [群组概述](group_overview.html)。
+- 已了解群成员数量、接口调用频率和群成员属性大小等限制，详见[使用限制](/product/limitation.html)。
 
-## 实现方法
+## 获取群成员列表
 
-本节介绍如何使用环信即时通讯 IM React Native SDK 提供的 API 实现上述功能。
+可通过三种方式获取群成员列表：
 
-### 加入群组
+- 分页获取群成员信息：通过 `ChatGroupManager#fetchMemberInfoListFromServer` 从服务器分页获取成员详情。
+- 分页获取群成员 ID：通过 `ChatGroupManager#fetchMemberListFromServer` 从服务器分页获取成员 ID。
+- 从本地群组对象获取成员 ID：通过已获取的 `ChatGroup` 对象中的 `owner`、`adminList` 和 `memberList` 读取本地已知的成员 ID。
 
-用户进群分为两种方式：主动申请入群和群成员邀请入群。
+### 分页获取群成员信息
 
-公开群和私有群在两种入群方式方面存在差别：
+调用 `ChatGroupManager#fetchMemberInfoListFromServer` 分页获取群成员信息，返回的成员信息包括群成员的用户 ID、角色、入群时间和群名片。
 
-| 入群方式<div style="width: 240px;"></div> | 公开群                                                                                           | 私有群                                                                                           |
-| :---------------------------------------- | :----------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
-| 是否支持用户申请入群                      | 支持 <br/>任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式 `ChatGroupStyle` 的设置。 | 不支持 <br/>                                                                                     |
-| 是否支持群成员邀请用户入群                | 支持 <br/>只能由群主和管理员邀请。                                                               | 支持 <br/>除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群样式 `ChatGroupStyle` 的设置。 |
+`nickname` 和 `avatarUrl` 为可选字段。获取群成员基本信息和群成员名片本身不要求开启用户信息自动管理。
 
-#### 用户申请入群
-
-只有公开群组支持用户以申请方式入群，私有群不支持。用户可获取公开群列表，选择相应的群组 ID，然后调用相应方法加入该群组。
-
-任何用户均可申请入群，是否需要群主和群管理员审批，取决于群样式（`ChatGroupStyle`）的设置：
-
-- `ChatGroupStyle` 为 `PublicJoinNeedApproval` 时，群主和群管理员审批后，用户才能加入群组；
-- `ChatGroupStyle` 为 `PublicOpenJoin` 时，用户可直接加入群组，无需群主和群管理员审批。
-
-若申请加入公开群，申请人需执行以下步骤：
-
-1. 调用 `fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
+开启用户信息自动管理（`ChatOptions.enableUserInfo = true`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```typescript
-// 通过分页的方式获取公开群组的列表。
-// 每页期望返回的群组数。
-const pageSize = 10;
-// 获取数据的起始位置。首次调用可为空，后续由服务器返回。
-const cursor = "";
-ChatClient.getInstance()
-  .groupManager.fetchPublicGroupsFromServer(pageSize, cursor)
-  .then(() => {
-    console.log("get group list success.");
-  })
-  .catch((reason) => {
-    console.log("get group list fail.", reason);
-  });
+try {
+  // cursor：首次请求传空字符串；后续传入上一次结果中的游标
+  // 当返回的游标为空时，表示已到最后一页
+  const cursor = '';
+  // limit：每页期望返回的群成员数量，默认 200，上限取决于服务端，详见 [获取群成员列表](/document/server-side/group_member_list_obtain.html#请求-url)。
+  const result = await ChatClient.getInstance().groupManager
+    .fetchMemberInfoListFromServer(groupId, cursor, 50);
+  const members = result.list ?? [];
+  const nextCursor = result.cursor;
+
+  for (const member of members) {
+    const userId = member.memberId;
+    const joinedAt = member.joinedTimestamp;
+    const role = member.role;
+    const namecard = member.namecard;
+    const nickname = member.nickname;
+    const avatarUrl = member.avatarUrl;
+  }
+} catch (error: unknown) {
+  console.error('获取群成员信息失败：', error);
+}
 ```
 
-2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+`ChatGroupMember` 的主要属性如下：
 
-   1. 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicOpenJoin`。
-      申请人不会收到任何回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
+| 属性 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `memberId` | `string` | 群成员的用户 ID。 |
+| `joinedTimestamp` | `number` | 入群时间，Unix 时间戳，单位为毫秒。 |
+| `role` | `ChatGroupPermissionType` | 成员角色：`Owner`、`Admin`、`Member` 或 `None`。 |
+| `namecard` | `string \| undefined` | 群成员名片。 |
+| `nickname` | `string \| undefined` | 群成员昵称。 |
+| `avatarUrl` | `string \| undefined` | 群成员头像 URL。 |
 
-   示例代码如下：
+### 分页获取群成员 ID
 
-   ```typescript
-   // groupId: 群组 ID
-   ChatClient.getInstance()
-     .groupManager.joinPublicGroup(groupId)
-     .then(() => {
-       console.log("join group operation success.");
-     })
-     .catch((reason) => {
-       console.log("join group operation fail.", reason);
-     });
-   ```
-
-   2. 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公共群组，即 `ChatGroupStyle` 设置为 `PublicJoinNeedApproval`。示例代码如下：
-
-   ```typescript
-   // 申请加入指定群组。
-   const groupId = "100";
-   const reason = "study typescript";
-   ChatClient.getInstance()
-     .groupManager.requestToJoinPublicGroup(groupId, reason)
-     .then(() => {
-       console.log("request send success.");
-     })
-     .catch((reason) => {
-       console.log("request send fail.", reason);
-     });
-   ```
-
-   群主或群管理员收到 `ChatGroupEventListener#onRequestToJoinReceived` 回调：
-
-   - 若同意加入群组，需要调用 `acceptJoinApplication` 方法。
-
-   申请人会收到 `ChatGroupEventListener#onRequestToJoinAccepted` 回调，其他群成员会收到 `ChatGroupEventListener#onMemberJoined` 回调。
-
-   示例代码如下：
-
-   ```typescript
-   // groupId: 群组 ID
-   // username：用户 ID
-   ChatClient.getInstance()
-     .groupManager.acceptJoinApplication(groupId, username)
-     .then(() => {
-       console.log("accept join request operation success.");
-     })
-     .catch((reason) => {
-       console.log("accept join request operation fail.", reason);
-     });
-   ```
-
-   - 若群主或群管理员拒绝申请人入群，需要调用 `declineJoinApplication` 方法。申请人会收到 `ChatGroupEventListener#onRequestToJoinDeclined` 回调。
-
-   示例代码如下：
-
-   ```typescript
-   // groupId: 群组 ID
-   // username：用户 ID
-   // reason：拒绝的理由
-   ChatClient.getInstance()
-     .groupManager.declineJoinApplication(groupId, username, reason)
-     .then(() => {
-       console.log("decline join request operation success.");
-     })
-     .catch((reason) => {
-       console.log("decline join request operation fail.", reason);
-     });
-   ```
-
-#### 邀请用户入群
-
-邀请方式见 [邀请用户入群的配置](group_manage.html#创建群组)。
-
-邀请用户加群流程如下：
-
-1. 群成员邀请用户入群。
-
-   - 群主或群管理员加人，需要调用 `addMembers` 方法：
-
-   ```typescript
-   // 群主或者管理员添加群成员
-   const groupId = "100";
-   // 群成员列表
-   const members = ["Tom", "Json"];
-   // 欢迎消息
-   const welcome = "Welcome to you";
-   ChatClient.getInstance()
-     .groupManager.addMembers(groupId, members, welcome)
-     .then(() => {
-       console.log("add members success.");
-     })
-     .catch((reason) => {
-       console.log("add members fail.", reason);
-     });
-   ```
-
-   - 普通成员邀请人入群，需要调用 `inviteUser` 方法：
-
-   `EMGroupStyle` 设置为 `PrivateMemberCanInvite` 时，所有群成员均可以邀请人进群。
-
-   ```typescript
-   // groupId: 群组 ID
-   // members：受邀用户列表
-   // reason：邀请的原因
-   ChatClient.getInstance()
-     .groupManager.inviteUser(groupId, members, reason)
-     .then(() => {
-       console.log("invite members operation success.");
-     })
-     .catch((reason) => {
-       console.log("invite members operation fail.", reason);
-     });
-   ```
-
-2. 受邀用户自动进群或确认是否加入群组：
-
-   - 受邀用户同意加入群组，需要调用 `acceptInvitation` 方法。
-
-   ```typescript
-   // groupId: 群组 ID
-   // inviter：邀请人的 ID
-   ChatClient.getInstance()
-     .groupManager.acceptInvitation(groupId, inviter)
-     .then(() => {
-       console.log("accept invitation operation success.");
-     })
-     .catch((reason) => {
-       console.log("accept invitation operation fail.", reason);
-     });
-   ```
-
-   - 受邀人拒绝入群组，需要调用 `declineInvitation` 方法。
-
-   ```typescript
-   // groupId: 群组 ID
-   // inviter：邀请人的 ID
-   // reason：拒绝的理由
-   ChatClient.getInstance()
-     .groupManager.declineInvitation(groupId, inviter, reason)
-     .then(() => {
-       console.log("decline invitation operation success.");
-     })
-     .catch((reason) => {
-       console.log("decline invitation operation fail.", reason);
-     });
-   ```
-
-### 退出群组
-
-仅群主和群管理员可以调用 `removeMembers` 方法将单个或多个成员移出群组。被移出群组后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调，其他群成员收到 `ChatGroupEventListener#onMemberExited` 回调。被移出群组后，该用户还可以再次加入群组。
-
-示例代码如下：
+如果只需要群成员用户 ID，也可以调用 `ChatGroupManager#fetchMemberListFromServer` 分页获取。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.removeMembers(groupId, members)
-  .then(() => {
-    console.log("remove members success.");
-  })
-  .catch((reason) => {
-    console.log("remove members fail.", reason);
-  });
+try {
+  // cursor：首次请求传空字符串；后续传入上一次结果中的游标
+  // 当返回的游标为空时，表示已到最后一页
+  // pageSize：每页获取的群成员 ID 数量，默认为 200。
+  const result = await ChatClient.getInstance().groupManager
+    .fetchMemberListFromServer(groupId, 50, '');
+  const userIds = result.list ?? [];
+  const nextCursor = result.cursor;
+} catch (error: unknown) {
+  console.error('获取群成员 ID 失败：', error);
+}
 ```
 
-### 管理群组成员属性
+### 从本地群组对象获取成员 ID
 
-群成员可设置自定义属性（key-value），例如在群组中的昵称和头像等。
-
-- 单个群成员的自定义属性总长度不能超过 4 KB。对于单个自定义属性，属性 key 不能超过 16 字节，value 不能超过 512 个字节，否则会报错。
-- 群主可修改所有群成员的自定义属性，其他群成员只能修改自己的自定义属性。
-
-#### 设置群组成员自定义属性
-
-你可以调用 `setMemberAttribute` 方法设置指定群成员的自定义属性。自定义属性为 key-value 格式，key 表示属性名称，value 表示属性值，若 value 设置为空字符串即删除该自定义属性。设置后，群内其他成员会收到 `ChatGroupEventListener#onMemberAttributesChanged` 事件。
+如已获取 `ChatGroup` 对象，可通过 `owner`、`adminList` 和 `memberList` 分别读取群主、管理员和普通成员的用户 ID。需要完整名单时应使用 [服务端分页接口](#分页获取群成员-id)。
 
 ```typescript
-// groupId：群组 ID。
-// member：群组成员的用户 ID。
-// attributes：需要设置的群成员属性。
-ChatClient.getInstance()
-  .groupManager.setMemberAttribute(groupId, member, attributes)
-  .then(() => {
-    console.log("set group members attributes success.");
-  })
-  .catch((reason) => {
-    console.log("set group members attributes fail.", reason);
-  });
+// group 为已获取的 ChatGroup 对象，以下字段仅表示本地已知的数据
+const ownerId = group.owner;
+const adminIds = group.adminList;
+const memberIds = group.memberList;
 ```
 
-#### 获取单个群成员的所有自定义属性
+## 管理群成员自定义属性
 
-你可以调用 `fetchMemberAttributes` 方法获取单个群成员的所有自定义属性。
+群成员自定义属性是群组维度的成员信息，适用于业务标签等场景，采用字符串 key-value 结构。
+
+- 单个群成员的自定义属性总长度不能超过 4 KB。
+- 单个属性的 key 不能超过 16 字节，value 不能超过 512 字节。
+- 群主可以修改所有群成员的属性，其他群成员只能修改自己的属性。
+
+### 设置群成员的自定义属性
+
+调用 `ChatGroupManager#setMemberAttribute` 设置指定成员的属性。将某个 key 对应的 value 设置为空字符串表示删除该属性。设置成功后，群内其他成员会收到 `ChatGroupEventListener#onMemberAttributesChanged` 回调。
 
 ```typescript
-// groupId：群组 ID。
-// member：群组成员的用户 ID。
-ChatClient.getInstance()
-  .groupManager.fetchMemberAttributes(groupId, member)
-  .then((attributes: Record<string, string> | undefined) => {
-    console.log("get group members attributes success.", attributes);
-  })
-  .catch((reason) => {
-    console.log("get group members attributes fail.", reason);
-  });
+const attributes: Record<string, string> = {
+  department: 'product',
+  roleTag: 'speaker',
+};
+
+try {
+  // 设置指定群成员的自定义属性
+  await ChatClient.getInstance().groupManager
+    .setMemberAttribute(groupId, userId, attributes);
+} catch (error: unknown) {
+  console.error('设置群成员属性失败：', error);
+}
 ```
 
-#### 根据属性 key 获取多个群成员的自定义属性
+### 获取单个群成员的自定义属性
 
-你可以调用 `fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
+调用 `ChatGroupManager#fetchMemberAttributes` 获取指定群成员的全部自定义属性。成功时，返回 `Record<string, string> | undefined`，即该成员的属性键值对，不包含成员用户 ID 外层。
+
+若该成员未设置自定义属性，返回结果可能为 `undefined` 或空对象；业务侧应按需判空处理。
+
+```typescript
+try {
+  // 获取指定群成员的全部自定义属性
+  const attributes = await ChatClient.getInstance().groupManager
+    .fetchMemberAttributes(groupId, userId);
+} catch (error: unknown) {
+  console.error('获取群成员属性失败：', error);
+}
+```
+
+### 根据属性 key 获取群成员自定义属性
+
+调用 `ChatGroupManager#fetchMembersAttributes` 可以按属性 key 批量获取多个群成员的属性。`attributeKeys` 省略或为空数组时，返回这些成员的全部属性。返回结果为 `Map<string, Record<string, string>>`，通过 `result.get(userId)` 读取指定成员的属性。
 
 :::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 
 ```typescript
-// groupId：群组 ID
-// members：群成员的用户 ID，数组类型。
-// attributeKeys: 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
-ChatClient.getInstance()
-  .groupManager.fetchMembersAttributes(groupId, members, attributeKeys)
-  .then((result: Map<string, Record<string, string>>) => {
-    console.log("get group members attributes success.", result);
-  })
-  .catch((reason) => {
-    console.log("get group members attributes fail.", reason);
-  });
+const userIds = ['user1', 'user2'];
+const attributeKeys = ['department', 'roleTag'];
+
+try {
+  // attributeKeys：要获取自定义属性的 key 的数组，传空数组或省略则获取这些成员的所有属性
+  const result = await ChatClient.getInstance().groupManager
+    .fetchMembersAttributes(groupId, userIds, attributeKeys);
+} catch (error: unknown) {
+  console.error('批量获取群成员属性失败：', error);
+}
 ```
 
-### 管理群主和群管理员
+## 管理群主和群管理员
 
-#### 变更群主
+### 变更群主
 
-仅群主可以调用 `changeOwner` 方法将权限移交给群组中指定成员。成功移交后，原群主变为普通成员，新群主收到 `ChatGroupEventListener#onOwnerChanged` 回调。
-
-示例代码如下：
+仅群主可以调用 `ChatGroupManager#changeOwner` 将群所有权转让给指定群成员。转让成功后，原群主变为普通成员，新群主拥有群主权限，群成员会收到 `onOwnerChanged` 回调。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.changeOwner(groupId, newOwner)
-  .then(() => {
-    console.log("change owner success.");
-  })
-  .catch((reason) => {
-    console.log("change owner fail.", reason);
-  });
+try {
+  // 将群所有权转让给指定群成员
+  await ChatClient.getInstance().groupManager
+    .changeOwner(groupId, newOwner);
+} catch (error: unknown) {
+  console.error('转让群主失败：', error);
+}
 ```
 
-#### 添加群组管理员
+### 添加群管理员
 
-仅群主可以调用 `addAdmin` 方法添加群管理员。成功添加后，新管理员及其他管理员收到 `ChatGroupEventListener#onAdminAdded` 回调。管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
+仅群主可以调用 `ChatGroupManager#addAdmin` 添加群管理员。添加成功后，新管理员、群主及其他管理员会收到 `onAdminAdded` 回调。
 
-示例代码如下：
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分管理权限。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.addAdmin(groupId, memberId)
-  .then(() => {
-    console.log("add admin success.");
-  })
-  .catch((reason) => {
-    console.log("add admin fail.", reason);
-  });
+try {
+  // 添加群管理员
+  await ChatClient.getInstance().groupManager
+    .addAdmin(groupId, userId);
+} catch (error: unknown) {
+  console.error('添加群管理员失败：', error);
+}
 ```
 
-#### 移除群组管理员权限
+### 移除群管理员
 
-仅群主可以调用 `removeAdmin` 方法移除群管理员的管理权限。成功移除后，被移除的管理员及其他管理员收到 `ChatGroupEventListener#onAdminRemoved` 回调。群组管理员的管理权限被移除后，将只拥有群成员的权限。
+仅群主可以调用 `ChatGroupManager#removeAdmin` 移除群管理员。移除成功后，被移除的管理员、群主及其他管理员会收到 `onAdminRemoved` 回调。
 
-示例代码如下：
+群管理员被移除群管理权限后将只拥有普通群成员的权限。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.removeAdmin(groupId, memberId)
-  .then(() => {
-    console.log("remove admin success.");
-  })
-  .catch((reason) => {
-    console.log("remove admin fail.", reason);
-  });
+try {
+  // 移除群管理员
+  await ChatClient.getInstance().groupManager
+    .removeAdmin(groupId, userId);
+} catch (error: unknown) {
+  console.error('移除群管理员失败：', error);
+}
 ```
 
-### 管理群组黑名单
+### 获取群管理员列表
 
-群主及群管理员可以将群组中的指定群成员加入或者移出群黑名单。群成员被加入黑名单后将无法收发群消息。
-
-#### 将群成员拉入群组黑名单
-
-仅群主和群管理员可以调用 `blockMembers` 方法将指定成员添加至黑名单。被加入黑名单后，该成员收到 `ChatGroupEventListener#onUserRemoved` 回调。其他群成员会收到该成员退出群组的回调，如需该回调，请联系商务开通。被加入黑名单后，该成员无法再收发群组消息并被移出群组，黑名单中的成员如想再次加入群组，群主或群管理员必须先将其移除黑名单。
-
-示例代码如下：
+通过 `ChatGroup.adminList` 获取群组管理员列表。若需要最新数据，应先调用 [获取群组详情的方法 `ChatGroupManager#fetchGroupInfoWithoutMembersFromServer`](group_attributes.html#获取群组详情) 刷新群详情。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.blockMembers(groupId, members)
-  .then(() => {
-    console.log("block members success.");
-  })
-  .catch((reason) => {
-    console.log("block members fail.", reason);
-  });
+// 获取内存中管理员列表
+const adminList = group.adminList;
 ```
 
-#### 将成员移出群组黑名单
+## 管理群组白名单
 
-仅群主和群管理员可以调用 `unblockMembers` 方法将成员移出群组黑名单。指定用户被群主或者群管理员移出群黑名单后，可以再次申请加入群组。
+群组白名单用于控制全员禁言场景下仍可发言的成员。群主和群管理员默认属于白名单。
 
-示例代码如下：
+:::tip
+全员禁言和单独禁言相互独立。全员禁言时，白名单成员仍可发送群消息；如果该成员同时被单独禁言，则单独禁言优先，该成员仍不能发送群消息。
+:::
+
+### 添加成员到白名单
+
+仅群主或群管理员可以调用 `ChatGroupManager#addAllowList` 将指定成员加入群白名单。添加成功后，该成员以及群主和群管理员（除操作者外）会收到 `ChatGroupEventListener#onAllowListAdded` 回调。
+即使开启了全员禁言，白名单中的成员仍可发送群消息；但如果某个成员同时在禁言列表中，则无法发送群消息。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.unblockMembers(groupId, members)
-  .then(() => {
-    console.log("unblock members success.");
-  })
-  .catch((reason) => {
-    console.log("unblock members fail.", reason);
-  });
+const members = ['user1', 'user2'];
+
+try {
+  // 将指定成员加入群白名单
+  await ChatClient.getInstance().groupManager
+    .addAllowList(groupId, members);
+} catch (error: unknown) {
+  console.error('添加白名单失败：', error);
+}
 ```
 
-#### 获取群组的黑名单用户列表
+### 从白名单移除成员
 
-仅群主和群管理员可以调用 `fetchBlockListFromServer` 方法获取当前群组的黑名单。默认最多取 200 个。
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#removeAllowList` 将指定成员移出群白名单。群成员被移除群白名单后，该群成员及其他未操作的群管理员和群主将会收到 `ChatGroupEventListener#onAllowListRemoved` 回调。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.fetchBlockListFromServer(groupId, pageSize, pageNum)
-  .then((list) => {
-    console.log("get block members success: ", list);
-  })
-  .catch((reason) => {
-    console.log("get block members fail.", reason);
-  });
+try {
+  // 将指定成员移出群白名单
+  await ChatClient.getInstance().groupManager
+    .removeAllowList(groupId, members);
+} catch (error: unknown) {
+  console.error('移除白名单失败：', error);
+}
 ```
 
-### 管理群组禁言列表
+:::tip
+React Native SDK 5.x 在 Android 端的白名单变更回调中无法正确返回 `members`。请将 `ChatGroupEventListener#onAllowListAdded` 和 `ChatGroupEventListener#onAllowListRemoved` 作为变更通知，按需重新查询白名单；iOS 端可正常读取该字段。
+:::
 
-为了方便管理群组，环信即时通讯 IM SDK 提供了针对成员和群组的禁言操作。
+### 查询当前用户是否在白名单中
 
-#### 将成员加入群组禁言列表
-
-仅群主和群管理员可以调用 `muteMembers` 方法将指定成员添加至群组禁言列表。被禁言后，该成员和其他未操作的管理员或者群主收到 `ChatGroupEventListener#onMuteListAdded` 回调。群成员被加入群禁言列表后，不能在该群组中发言，即使被加入群白名单也不能发言。
-
-示例代码如下：
+所有群成员均可调用 `ChatGroupManager#isMemberInAllowListFromServer` 查询当前登录用户是否在群白名单中。
 
 ```typescript
-// groupId：群组 ID
-// members：将要被禁言的成员列表
-// duration：禁言时间。若传 -1，表示永久禁言。
-ChatClient.getInstance()
-  .groupManager.muteMembers(groupId, members, duration)
-  .then(() => {
-    console.log("mute members operation success.");
-  })
-  .catch((reason) => {
-    console.log("mute members operation fail.", reason);
-  });
+try {
+  // 查询当前登录用户是否在群白名单中
+  const inAllowList = await ChatClient.getInstance().groupManager
+    .isMemberInAllowListFromServer(groupId);
+} catch (error: unknown) {
+  console.error('查询白名单状态失败：', error);
+}
 ```
 
-#### 将成员移出群组禁言列表
+### 获取白名单列表
 
-仅群主和群管理员可以调用 `unMuteMembers` 方法将指定成员移出群组禁言列表。被解除禁言后，该成员和其他未做操作的群管理员或者群主收到 `ChatGroupEventListener#onMuteListRemoved` 回调。
-
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#fetchAllowListFromServer` 方法从服务器获取当前群组的白名单。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.unMuteMembers(groupId, members)
-  .then(() => {
-    console.log("unMute members success.");
-  })
-  .catch((reason) => {
-    console.log("unMute members fail.", reason);
-  });
+try {
+  // 从服务器获取当前群组的白名单
+  const members = await ChatClient.getInstance().groupManager
+    .fetchAllowListFromServer(groupId);
+} catch (error: unknown) {
+  console.error('获取白名单失败：', error);
+}
 ```
 
-#### 获取群组禁言列表
+## 管理群组黑名单
 
-仅群主和群管理员可以调用 `fetchMuteListFromServer` 方法从服务器分页获取当前群组的禁言列表。
+群组黑名单用于禁止指定用户加入或继续留在群组。成员被加入黑名单后会被移出群组，无法继续收发该群消息；只有先从黑名单中移除，才可再次申请或被邀请加入。
 
-示例代码如下：
+### 添加成员到黑名单
+
+仅群主或群管理员可以调用 `ChatGroupManager#blockMembers` 将一个或多个成员加入群黑名单。被加入黑名单的成员会收到 `ChatGroupEventListener#onMemberRemoved` 回调。默认情况下，其他群成员不会收到事件通知。如需该事件，请联系商务开通。
+
+黑名单中的成员会被移出群组，无法再收发群消息，只有先被移出黑名单才能重新加入群组。
 
 ```typescript
-// groupId：群组 ID
-// pageSize：期望获取的最大数量
-// pageNum：请求第几页，从 1 开始
-ChatClient.getInstance()
-  .groupManager.fetchMuteListFromServer(groupId, pageSize, pageNum)
-  .then((list) => {
-    console.log("get mute list success: ", list);
-  })
-  .catch((reason) => {
-    console.log("get mute list fail.", reason);
-  });
+const members = ['user1', 'user2'];
+
+try {
+  // 将指定成员加入群黑名单
+  await ChatClient.getInstance().groupManager
+    .blockMembers(groupId, members);
+} catch (error: unknown) {
+  console.error('添加黑名单失败：', error);
+}
 ```
 
-### 开启和关闭全员禁言
+### 从黑名单移除成员
 
-为了快捷管理群成员发言，群主和群成员可以开启和关闭群组全员禁言。
-
-#### 开启全员禁言
-
-仅群主和群管理员可以调用 `muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unMuteAllMembers` 方法解除全员禁言。
-
-群组全员禁言开启后，所有成员收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调，除了在白名单中的群成员，其他成员不能发言。
-
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#unblockMembers` 将一个或多个用户移出群黑名单。移除后，用户可以再次申请或被邀请加入群组。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.muteAllMembers(groupId)
-  .then(() => {
-    console.log("mute all members success.");
-  })
-  .catch((reason) => {
-    console.log("mute all members fail.", reason);
-  });
+try {
+  // 将指定用户移出群黑名单
+  await ChatClient.getInstance().groupManager
+    .unblockMembers(groupId, members);
+} catch (error: unknown) {
+  console.error('移除黑名单失败：', error);
+}
 ```
 
-#### 关闭全员禁言
+### 获取黑名单列表
 
-仅群主和群管理员可以调用 `unMuteAllMembers` 方法取消全员禁言。所有成员收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调。
-
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#fetchBlockListFromServer` 分页获取黑名单成员列表。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.unMuteAllMembers(groupId)
-  .then(() => {
-    console.log("unMute all members success.");
-  })
-  .catch((reason) => {
-    console.log("unMute all members fail.", reason);
-  });
+try {
+  // pageSize 为每页黑名单用户数量，默认为 200；pageNum 从 1 开始。
+  const members = await ChatClient.getInstance().groupManager
+    .fetchBlockListFromServer(groupId, 20, 1);
+} catch (error: unknown) {
+  console.error('获取黑名单失败：', error);
+}
 ```
 
-### 管理群组白名单
+## 管理群组禁言
 
-群主和群组中的管理员默认会被加入群组白名单。
+群主和管理员可以对群成员单独禁言，也可以对全员禁言。这两种禁言方式相互独立，互不影响：
+- 单独禁言：将指定用户加入禁言列表。被禁言成员不能发送群消息。禁言时长的单位为毫秒。
+- 全员禁言：一键禁言群组所有成员。白名单成员可发言；若成员同时被单独禁言，则单独禁言优先，禁止发言。
+- 开启或关闭全员禁言不会影响单个成员的禁言列表。
 
-#### 将成员加入群组白名单
+### 禁言指定成员
 
-仅群主和群管理员可以调用 `addAllowList` 方法将指定群成员加入群白名单。白名单用户不受全员禁言的限制，但是如果白名单用户在群禁言列表中，则该用户不能发言。被加入白名单的成员及管理员和群主收到 `ChatGroupEventListener#onAllowListAdded` 回调。
-
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#muteMembers` 禁言指定成员。`duration` 默认为 `-1`，表示永久禁言。加入禁言列表后，被禁言成员、群管理员和群主（除操作者外）会收到 `onMuteListAdded` 回调。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.addAllowList(groupId, members)
-  .then(() => {
-    console.log("add allowlist success.");
-  })
-  .catch((reason) => {
-    console.log("add allowlist fail.", reason);
-  });
+const members = ['user1', 'user2'];
+// duration 的单位为毫秒，传入 -1 表示永久禁言
+const duration = 60 * 60 * 1000;
+
+try {
+  // 禁言指定成员
+  await ChatClient.getInstance().groupManager
+    .muteMembers(groupId, members, duration);
+} catch (error: unknown) {
+  console.error('禁言成员失败：', error);
+}
 ```
 
-#### 将成员移出白名单
+### 解除指定成员禁言
 
-仅群主和群管理员可以调用 `removeWhiteList` 方法将指定群成员移出群白名单。
-
-当发生该事件时，被移出白名单的成员及管理员和群主收到 `ChatGroupEventListener#onAllowListRemoved` 回调。
-
-示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#unMuteMembers` 解除指定成员禁言。解除禁言后，被解除禁言的成员、群管理员和群主（除操作者外）会收到 `onMuteListRemoved` 回调。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.removeAllowList(groupId, members)
-  .then(() => {
-    console.log("remove allowlist success.");
-  })
-  .catch((reason) => {
-    console.log("remove allowlist fail.", reason);
-  });
+try {
+  // 解除指定成员禁言
+  await ChatClient.getInstance().groupManager
+    .unMuteMembers(groupId, members);
+} catch (error: unknown) {
+  console.error('解除禁言失败：', error);
+}
 ```
 
-#### 检查当前用户是否在白名单中
+### 获取禁言列表
 
-所有群成员可以调用 `isMemberInAllowListFromServer` 方法检查自己是否在群白名单中，示例代码如下：
+仅群主或群管理员可以调用 `ChatGroupManager#fetchMuteListFromServer` 分页获取禁言列表。返回成员 ID 数组，不包含禁言时长或到期时间。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.isMemberInAllowListFromServer(groupId)
-  .then((isMember) => {
-    console.log("is member success: ", isMember);
-  })
-  .catch((reason) => {
-    console.log("is member fail.", reason);
-  });
+try {
+  // pageSize 为每页禁言用户的数量，默认为 200；pageNum 从 1 开始
+  const muteList = await ChatClient.getInstance().groupManager
+    .fetchMuteListFromServer(groupId, 20, 1);
+} catch (error: unknown) {
+  console.error('获取禁言列表失败：', error);
+}
 ```
 
-#### 获取群组白名单
+### 开启全员禁言
 
-仅群主和群管理员可以调用 `fetchAllowListFromServer` 方法从服务器获取当前群组的白名单。
+仅群主或群管理员可以调用 `ChatGroupManager#muteAllMembers` 开启全员禁言。开启后，群成员会收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调。除白名单成员外，其他成员将无法发送群消息。
 
-示例代码如下：
+全员禁言不会自动到期，如要关闭需主动调用关闭接口。
 
 ```typescript
-ChatClient.getInstance()
-  .groupManager.fetchAllowListFromServer(groupId)
-  .then(() => {
-    console.log("get allowlist success.");
-  })
-  .catch((reason) => {
-    console.log("get allowlist fail.", reason);
-  });
+try {
+  // 开启全员禁言
+  await ChatClient.getInstance().groupManager
+    .muteAllMembers(groupId);
+} catch (error: unknown) {
+  console.error('开启全员禁言失败：', error);
+}
 ```
 
-### 获取群成员列表
+### 关闭全员禁言
 
-- 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
+仅群主或群管理员可以调用 `ChatGroupManager#unMuteAllMembers` 关闭全员禁言。关闭后，群成员会收到 `ChatGroupEventListener#onAllGroupMemberMuteStateChanged` 回调。
 
 ```typescript
-const groupId = '<YOUR_GROUP_ID>';
-const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
-const limit = 200; // 每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
-ChatClient.getInstance()
-  .groupManager.fetchMemberInfoListFromServer(groupId, cursor, limit)
-  .then((result) => {
-    console.log('Fetch member info list result:', result);
-  })
-  .catch((error) => {
-    console.error('Error fetching member info list:', error);
-  });
+try {
+  // 关闭全员禁言
+  await ChatClient.getInstance().groupManager
+    .unMuteAllMembers(groupId);
+} catch (error: unknown) {
+  console.error('关闭全员禁言失败：', error);
+}
 ```
 
-- 你也可以首先调用 `fetchMemberListFromServer` 方法获取群成员的用户 ID 列表。
+## 监听群组成员事件
 
-```typescript
-// groupId：群组 ID
-// pageSize：每页期望返回的群成员数量，取值范围为 [1,1000]。
-// cursor：开始分页的位置，第一页为空，后续页面请使用第一页返回的结果
-ChatClient.getInstance()
-// pageSize：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
-  .groupManager.fetchMemberListFromServer(groupId, pageSize, cursor)
-  .then(() => {
-    console.log("get group members success.");
-  })
-  .catch((reason) => {
-    console.log("get group members fail.", reason);
-  });
-```
+群组成员相关操作成功后，SDK 会触发对应的 `ChatGroupEventListener` 回调。监听器的注册、移除及完整事件说明详见 [监听群组事件](group_manage.html#监听群组事件)。
 
-### 监听群组事件
+## 注意事项
 
-详见 [监听群组事件](group_manage.html#监听群组事件)。
+- `groupId`、`userId` 和成员列表不能为空；参数无效时，SDK 会通过 Promise 返回错误。
+- `ChatGroupManager#fetchMemberInfoListFromServer` 和 `ChatGroupManager#fetchMemberListFromServer` 使用游标分页；禁言列表和黑名单使用页码分页，页码从 `1` 开始。
+- `ChatGroupManager#muteMembers` 的禁言时长单位为毫秒，`-1` 表示永久禁言。
+- `ChatGroupManager#isMemberInAllowListFromServer` 仅查询当前登录用户自身的状态，不能指定其他用户。
+- 管理员、白名单、黑名单和禁言操作要求当前用户具备相应权限。
+
+## 接口列表
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`ChatGroupManager#fetchMemberInfoListFromServer`](#分页获取群成员信息) | `ChatGroupManager` | 分页获取包含角色、入群时间和资料的群成员信息。 |
+| [`ChatGroupManager#fetchMemberListFromServer`](#分页获取群成员-id) | `ChatGroupManager` | 分页获取群成员用户 ID。 |
+| [`owner`](#从本地群组对象获取成员-id) / [`adminList`](#从本地群组对象获取成员-id) / [`memberList`](#从本地群组对象获取成员-id) | `ChatGroup` | 本地已知的群主、管理员和普通成员用户 ID。 |
+| [`ChatGroupManager#setMemberAttribute`](#设置群成员的自定义属性) | `ChatGroupManager` | 设置群成员自定义属性。 |
+| [`ChatGroupManager#fetchMemberAttributes`](#获取单个群成员的自定义属性) | `ChatGroupManager` | 获取单个群成员的全部自定义属性。 |
+| [`ChatGroupManager#fetchMembersAttributes`](#根据属性-key-获取群成员自定义属性) | `ChatGroupManager` | 获取多个群成员的指定或全部自定义属性。 |
+| [`ChatGroupManager#changeOwner`](#变更群主) | `ChatGroupManager` | 转让群主权限。 |
+| [`ChatGroupManager#addAdmin`](#添加群管理员) / [`ChatGroupManager#removeAdmin`](#移除群管理员) | `ChatGroupManager` | 添加或移除群管理员。 |
+| [`ChatGroupManager#fetchGroupInfoWithoutMembersFromServer`](#获取群管理员列表) | `ChatGroupManager` | 从服务器获取最新群详情。 |
+| [`adminList`](#获取群管理员列表) | `ChatGroup` | 群管理员用户 ID 列表。 |
+| [`ChatGroupManager#addAllowList`](#添加成员到白名单) / [`ChatGroupManager#removeAllowList`](#从白名单移除成员) | `ChatGroupManager` | 添加或移除群白名单成员。 |
+| [`ChatGroupManager#isMemberInAllowListFromServer`](#查询当前用户是否在白名单中) / [`ChatGroupManager#fetchAllowListFromServer`](#获取白名单列表) | `ChatGroupManager` | 查询当前用户是否在白名单中或获取白名单。 |
+| [`ChatGroupManager#blockMembers`](#添加成员到黑名单) / [`ChatGroupManager#unblockMembers`](#从黑名单移除成员) | `ChatGroupManager` | 添加或移除群黑名单成员。 |
+| [`ChatGroupManager#fetchBlockListFromServer`](#获取黑名单列表) | `ChatGroupManager` | 分页获取群黑名单。 |
+| [`ChatGroupManager#muteMembers`](#禁言指定成员) / [`ChatGroupManager#unMuteMembers`](#解除指定成员禁言) | `ChatGroupManager` | 禁言或解除禁言指定成员。 |
+| [`ChatGroupManager#fetchMuteListFromServer`](#获取禁言列表) | `ChatGroupManager` | 分页获取禁言列表。 |
+| [`ChatGroupManager#muteAllMembers`](#开启全员禁言) / [`ChatGroupManager#unMuteAllMembers`](#关闭全员禁言) | `ChatGroupManager` | 开启或关闭全员禁言。 |

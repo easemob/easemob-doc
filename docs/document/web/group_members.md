@@ -24,6 +24,8 @@ SDK 提供 `GroupManager` 管理器和 `Group` 单群对象用于管理群组成
 
 先调用 `getGroup` 获取单群对象，再调用 `getMembers` 分页获取群成员列表。返回结果中包含成员用户信息、成员角色和加入群组时间等信息。
 
+调用 `Group#getMembers` 时，SDK 会优先使用本地用户属性缓存（包括用户属性摘要）；缺少缓存时，会按需从服务端补拉用户属性。已有缓存时，不会通过本次查询主动检查服务端属性是否有更新。该补拉不要求开启 `enableUserInfoSync`；开启该配置后，补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```typescript
 const group = client.groupManager.getGroup('groupId');
 

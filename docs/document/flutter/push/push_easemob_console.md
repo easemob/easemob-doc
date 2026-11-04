@@ -1,8 +1,8 @@
 # 上传推送证书及绑定推送信息
 
-1. 除了满足用户离线条件外，要使用第三方离线推送，你还需在[环信控制台](https://console.easemob.com/user/login)配置推送证书信息，例如，对于 FCM 推送，需配置 **证书类型** 和 **证书名称**，上传证书，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
+1. 在 [环信控制台](https://console.easemob.com/user/login) 为应用配置推送证书或厂商凭据，并确保与客户端使用的推送项目、应用及环境一致。控制台配置可以在客户端初始化和登录前完成。
 
-2. 从第三方服务获取推送 token 后，将你的用户 ID 与推送证书和推送 token `deviceToken` 进行绑定。
+2. 完成客户端推送配置并获取第三方服务的推送 Token 后，在 IM 登录成功后调用绑定接口，将当前用户与推送证书和设备 Token 进行绑定。iOS 的推送证书名称需在 SDK 初始化时配置，Android 的厂商推送凭据在绑定时传入。
 
 ## 上传推送证书
 
@@ -26,7 +26,7 @@
 
 ## 配置 iOS 推送证书名称
 
-自 Flutter SDK 4.25.0 起，你可以在初始化 SDK 时配置 iOS 的 APNs 与 PushKit 推送证书名称：
+你可以在初始化 SDK 时配置 iOS 的 APNs 与 PushKit 推送证书名称：
 
 ```dart
 final ChatOptions options = ChatOptions.withAppKey(
@@ -47,15 +47,36 @@ await ChatClient.getInstance.init(options);
 
 ### 绑定普通推送 Token
 
-调用 `bindDeviceToken` 方法将你的用户 ID 与推送证书和推送 token `deviceToken` 进行绑定。绑定推送信息前，你需要自行实现如何从第三方服务获取推送 token。
+在 IM 登录成功且取得推送 Token 后，调用 `ChatPushManager.bindDeviceToken` 将当前用户与推送证书和推送 Token `deviceToken` 进行绑定。绑定推送信息前，你需要自行实现如何从第三方服务获取推送 Token。
 
-推送 token `deviceToken` 是第三方推送服务提供的推送 token。例如，对于 FCM 推送来说，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。该 token 用于标识每台设备上的每个应用，FCM 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `await FirebaseMessaging.instance.getToken()` 方法获得 token。另外，如果退出即时通讯 IM 登录时不解绑 device token（调用 `logout` 方法时将 `unbindDeviceToken` 参数传 `false`），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
+推送 Token（Device Token）是第三方推送服务为应用实例生成的标识，用于将通知投递至目标设备上的应用。它与 `loginWithToken` 使用的 IM 用户登录 Token 不同，不能混用。Flutter IM SDK 不提供推送 Token 的获取接口，需由应用接入对应推送服务并获取：
 
-在 iOS 上，`notifierName` 表示 APNs 证书名称。传入非空值时，该值的优先级高于初始化时设置的 `ChatOptions.apnsCertName`。在 Android 上，`notifierName` 表示对应厂商的推送凭据，不能为空。
+- Android：获取所用厂商推送服务返回的 Token。以 FCM 为例，应用初次启动时，FCM SDK 会生成注册令牌（registration token）；若已集成 `firebase_messaging` 插件，可通过 `await FirebaseMessaging.instance.getToken()` 获取 FCM Token。
+- iOS：普通 APNs 推送应获取 APNs Device Token，不能用 FCM 注册令牌或 PushKit Token 代替。
+
+Token 获取及原生工程配置可参考 [Android FCM 推送集成文档](/document/android/push/push_fcm.html#步骤四-fcm-推送集成) 和 [iOS APNs 推送集成文档](/document/ios/push/push_apns.html)。Flutter V5 的证书配置与 Token 绑定调用以本文为准。
+
+绑定时，`notifierName` 的传入要求如下：
+
+- Android：`notifierName` 必须传入对应厂商的推送凭据，不能为空，也不能传入任意证书别名、`"fcm"` 或 `"huawei"` 等厂商标识字符串。取值见下表。
+- iOS：`notifierName` 被忽略，绑定普通 APNs Token 时无需传入。SDK 使用初始化时通过 `ChatOptions.apnsCertName` 配置的证书名称，详见 [配置 iOS 推送证书名称](#配置-ios-推送证书名称)。
+
+Android 各推送服务的 `notifierName` 取值如下：
+
+| 推送服务 | `notifierName` 取值 |
+| :--- | :--- |
+| Google FCM | Sender ID。 |
+| 华为 HMS | App ID。 |
+| 荣耀 | App ID。 |
+| 小米 | App ID。 |
+| OPPO | App Key。 |
+| VIVO | `App ID` 与 `App Key` 以 `#` 连接，即 `appId#appKey`。 |
+| 魅族 | App ID。 |
 
 ```dart
 try {
   await ChatClient.getInstance.pushManager.bindDeviceToken(
+    // Android：传入上表中对应厂商的推送凭据；iOS：省略此参数。
     notifierName: notifierName,
     deviceToken: deviceToken,
   );
@@ -64,9 +85,18 @@ try {
 }
 ```
 
+若在 IM 登录前已获取推送 Token，可先保存该 Token，在登录成功后再调用 `bindDeviceToken`。Token 发生变化后，应在用户已登录的状态下重新调用该接口绑定最新 Token。
+
+退出 IM 登录时，可通过 `ChatClient.logout` 的可选位置参数 `unbindDeviceToken` 控制是否解绑设备 Token，该参数不是命名参数：
+
+- `ChatClient.getInstance.logout()` 或 `ChatClient.getInstance.logout(true)`：解绑设备 Token，默认行为。
+- `ChatClient.getInstance.logout(false)`：不解绑设备 Token。在推送证书和 Token 有效且满足离线推送条件时，用户仍可收到离线推送通知，详见 [离线推送概述](push_overview.html)。
+
 ### 绑定 PushKit Token
 
-自 Flutter SDK 4.25.0 起，支持调用 `bindPushKitToken` 将当前用户与 PushKit token 绑定，用于 iOS VoIP 推送。该方法仅在 iOS 上生效，其他平台调用时不做任何处理。
+Flutter SDK 自 5.0.0 起支持调用 `bindPushKitToken` 将当前用户与 PushKit Token 绑定，用于 iOS VoIP 推送。该方法仅在 iOS 上生效，其他平台调用时不做任何处理。
+
+VoIP 推送使用独立于普通 APNs 推送的证书和 Token；`bindDeviceToken` 不用于绑定 PushKit Token。
 
 调用该方法前，需完成以下操作：
 
@@ -87,7 +117,7 @@ try {
 
 ### 解绑 PushKit Token
 
-自 Flutter SDK 4.25.0 起，支持调用 `unbindPushKitToken` 单独解绑当前用户的 PushKit token。该方法仅在 iOS 上生效，其他平台调用时不做任何处理。
+Flutter SDK 支持调用 `unbindPushKitToken` 单独解绑当前用户的 PushKit token。该方法仅在 iOS 上生效，其他平台调用时不做任何处理。
 
 ```dart
 try {

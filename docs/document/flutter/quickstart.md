@@ -1,7 +1,5 @@
 # 快速开始
 
-<Toc />
-
 通过本文可以实现一个集成聊天 SDK 的简单 app。
 
 ## 实现原理
@@ -21,10 +19,10 @@
 
 开始前，请确保你的开发环境满足如下要求：
 
-- iOS 12 或以上版本;
-- Android SDK API 等级 21 或以上版本；
-- Flutter 3.3.0 或以上版本;
-- Dart 3.3.0 或以上版本;
+- iOS 13.0 或以上版本；
+- Android `minSdkVersion` 21，`compileSdkVersion` 34 或以上；
+- Flutter 3.3.0 或以上版本；
+- Dart 3.3.0 或以上、4.0.0 以下版本；
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
@@ -42,47 +40,65 @@ flutter create quick_start
 
 ### 设置 Android
 
-1. 打开文件 `quick_start/android/app/build.gradle`，在 `defaultConfig` 中设置 `minSdkVersion`：
+1. 打开文件 `quick_start/android/app/build.gradle`，设置 `compileSdkVersion` 和 `minSdkVersion`：
 
 ```gradle
 android {
+    compileSdkVersion 34
+
     defaultConfig {
         minSdkVersion 21
     }
 }
 ```
 
-如果你的工程使用 Kotlin DSL，则打开 `quick_start/android/app/build.gradle.kts`，在 `defaultConfig` 中设置 `minSdk`：
+如果你的工程使用 Kotlin DSL，则打开 `quick_start/android/app/build.gradle.kts`，设置 `compileSdk` 和 `minSdk`：
 
-```gradle
+```kotlin
 android {
+    compileSdk = 34
+
     defaultConfig {
         minSdk = 21
     }
 }
 ```
 
-2. 打开文件 `quick_start/android/app/src/main/AndroidManifest.xml`，在 `<manifest>` 节点下、`<application>` 节点外添加以下权限：
+2. Flutter 插件的 `AndroidManifest.xml` 已声明以下权限，构建时会自动合并到应用清单，通常无需在应用的 `AndroidManifest.xml` 中重复添加：
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.WAKE_LOCK" />
+<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+```
+
+3. 在 `quick_start/android/app/proguard-rules.pro` 文件中添加以下规则，防止发布版本混淆 SDK 代码：
+
+```proguard
+-keep class com.hyphenate.** {*;}
+-dontwarn com.hyphenate.**
 ```
 
 ### 设置 iOS
 
-iOS 需要 iOS 12.0 以上版本，
+iOS 需要 iOS 13.0 或以上版本。
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 12.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > Runner > General > Deployment Info**，将 iOS Deployment Target 设置为 13.0。
 
 ### 集成 SDK
 
-在终端命令行，输入命令添加依赖：
+在项目的 `pubspec.yaml` 文件中添加 Flutter SDK 5.x 依赖：
 
-```bash
+```yaml
+dependencies:
+  im_flutter_sdk: ^5.0.0
+```
+
+然后执行：
+
+```shell
 cd quick_start
-flutter pub add im_flutter_sdk
 flutter pub get
 ```
 
@@ -100,18 +116,18 @@ import 'package:im_flutter_sdk/im_flutter_sdk.dart';
 ```dart
 class _MyHomePageState extends State<MyHomePage> {
 
-  ScrollController scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   String _username = "";
   String _token = "";
   String _messageContent = "";
   String _chatId = "";
   final List<String> _logText = [];
+  bool _isSdkReady = false;
 
   @override
   void initState() {
     super.initState();
-    _initSDK();
-    _addChatListener();
+    _initialize();
   }
 
   @override
@@ -141,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Expanded(
                   flex: 1,
                   child: TextButton(
-                    onPressed: _signIn,
+                    onPressed: _isSdkReady ? _signIn : null,
                     child: const Text("SIGN IN"),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -153,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextButton(
-                    onPressed: _signOut,
+                    onPressed: _isSdkReady ? _signOut : null,
                     child: const Text("SIGN OUT"),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -176,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10),
             TextButton(
-              onPressed: _sendMessage,
+              onPressed: _isSdkReady ? _sendMessage : null,
               child: const Text("SEND TEXT"),
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -198,25 +214,33 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _initSDK() async {
+  Future<void> _initialize() async {
+  }
+
+  Future<void> _initSDK() async {
   }
 
   void _addChatListener() {
   }
 
-  void _signIn() async {
+  Future<void> _signIn() async {
   }
 
-  void _signOut() async {
+  Future<void> _signOut() async {
   }
 
-  void _sendMessage() async {
+  Future<void> _sendMessage() async {
   }
 
   void _addLogToConsole(String log) {
-    _logText.add(_timeString + ": " + log);
+    if (!mounted) return;
     setState(() {
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      _logText.add("$_timeString: $log");
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && scrollController.hasClients) {
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      }
     });
   }
 
@@ -228,17 +252,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ### 初始化 SDK
 
-在 `_initSDK` 方法中添加 SDK 初始化：
+初始化 SDK，等待初始化和 `startCallback` 完成后再添加监听并启用登录、退出和发送按钮：
 
 ```dart
-void _initSDK() async {
-    ChatOptions options = ChatOptions.withAppKey(
-      "<#Your AppKey#>",
-      autoLogin: false,
+Future<void> _initialize() async {
+  try {
+    await _initSDK();
+    _addChatListener();
+    if (!mounted) return;
+    setState(() {
+      _isSdkReady = true;
+    });
+  } on ChatError catch (e) {
+    _addLogToConsole(
+      "init SDK failed, code: ${e.code}, desc: ${e.description}",
     );
-    await ChatClient.getInstance.init(options);
-    // 通知 SDK UI 已准备好。该方法执行后才会收到 `ChatRoomEventHandler`、`ChatContactEventHandler` 和 `ChatGroupEventHandler` 回调。
-    await ChatClient.getInstance.startCallback();
+  }
+}
+
+Future<void> _initSDK() async {
+  final ChatOptions options = ChatOptions.withAppKey(
+    "<#Your AppKey#>",
+  );
+  await ChatClient.getInstance.init(options);
+  // 通知 SDK UI 已准备好。该方法执行后才会收到 `ChatRoomEventHandler`、`ChatContactEventHandler` 和 `ChatGroupEventHandler` 回调。
+  await ChatClient.getInstance.startCallback();
 }
 ```
 
@@ -254,18 +292,18 @@ void _initSDK() async {
 在 `_signIn` 方法中添加登录代码。
 
 ```dart
-void _signIn() async {
-    if (_username.isEmpty || _token.isEmpty) {
-        _addLogToConsole("username or token is null");
-        return;
-    }
+Future<void> _signIn() async {
+  if (_username.isEmpty || _token.isEmpty) {
+    _addLogToConsole("username or token is null");
+    return;
+  }
 
-    try {
-        await ChatClient.getInstance.loginWithToken(_username, _token);
-        _addLogToConsole("sign in succeed, username: $_username");
-    } on ChatError catch (e) {
-        _addLogToConsole("sign in failed, e: ${e.code} , ${e.description}");
-    }
+  try {
+    await ChatClient.getInstance.loginWithToken(_username, _token);
+    _addLogToConsole("sign in succeed, username: $_username");
+  } on ChatError catch (e) {
+    _addLogToConsole("sign in failed, e: ${e.code}, ${e.description}");
+  }
 }
 ```
 
@@ -274,14 +312,15 @@ void _signIn() async {
 在 `_signOut` 方法中添加退出代码。
 
 ```dart
-void _signOut() async {
-    try {
-        await ChatClient.getInstance.logout(true);
-        _addLogToConsole("sign out succeed");
-    } on ChatError catch (e) {
-        _addLogToConsole(
-            "sign out failed, code: ${e.code}, desc: ${e.description}");
-    }
+Future<void> _signOut() async {
+  try {
+    await ChatClient.getInstance.logout(true);
+    _addLogToConsole("sign out succeed");
+  } on ChatError catch (e) {
+    _addLogToConsole(
+      "sign out failed, code: ${e.code}, desc: ${e.description}",
+    );
+  }
 }
 ```
 
@@ -290,7 +329,7 @@ void _signOut() async {
 在 `_sendMessage` 方法中添加发消息代码。
 
 ```dart
-void _sendMessage() async {
+Future<void> _sendMessage() async {
   if (_chatId.isEmpty || _messageContent.isEmpty) {
     _addLogToConsole("single chat id or message content is null");
     return;
@@ -301,7 +340,13 @@ void _sendMessage() async {
     content: _messageContent,
   );
 
-  ChatClient.getInstance.chatManager.sendMessage(msg);
+  try {
+    await ChatClient.getInstance.chatManager.sendMessage(msg);
+  } on ChatError catch (e) {
+    _addLogToConsole(
+      "send message failed, code: ${e.code}, desc: ${e.description}",
+    );
+  }
 }
 ```
 
@@ -321,7 +366,7 @@ void _addChatListener() {
             _addLogToConsole("send message succeed");
           },
           onProgress: (msgId, progress) {
-            _addLogToConsole("send message succeed");
+            _addLogToConsole("send message progress: $progress");
           },
           onError: (msgId, msg, error) {
             _addLogToConsole(
@@ -378,7 +423,7 @@ void _addChatListener() {
             case MessageType.FILE:
               {
                 _addLogToConsole(
-                  "receive image message, from: ${msg.from}",
+                  "receive file message, from: ${msg.from}",
                 );
               }
               break;
@@ -395,7 +440,7 @@ void _addChatListener() {
                   "receive combine message, from: ${msg.from}",
                 );
               }
-              break;  
+              break;
             case MessageType.CMD:
               {
                 // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `ChatEventHandler#onCmdMessagesReceived` 回调接收
@@ -420,6 +465,7 @@ void dispose() {
   ChatClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
   ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+  scrollController.dispose();
   super.dispose();
 }
 ```

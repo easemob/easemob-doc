@@ -24,6 +24,8 @@
 
 调用 `GroupManager#fetchGroupMemberDetails` 分页获取群成员信息，返回的成员信息包括群成员的用户 ID、角色、入群时间、群名片、昵称和头像。
 
+开启 `ChatOptions#setEnableUserInfo(true)` 后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```typescript
 // 首次请求时 cursor 可传空字符串或省略；后续请求传入上一次结果中的游标。
 let cursor: string = "";

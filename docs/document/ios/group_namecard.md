@@ -20,7 +20,7 @@
 
 内存更新流程如下图所示：
 
-![img](/images/ios/memory_update_groupcard.png)
+![img](/images/android/memory_update_groupcard.png)
 
 ## 前提条件
 

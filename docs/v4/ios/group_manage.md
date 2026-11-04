@@ -151,6 +151,8 @@ NSArray *admins = aGroup.adminList;
 
 1. 自 4.14.0 版本开始，获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、群成员角色和入群时间。自 4.20.0 版本起，该方法新增支持获取 [群成员名片](group_namecard.html)。
 
+自 SDK 4.20.0 开始，开启用户信息自动管理（`EMOptions.enableUserInfo = YES`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```objectivec
 // limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://doc.easemob.com/document/server-side/group_member_list_obtain.html#请求-url。
 NSString* cursor = nil;

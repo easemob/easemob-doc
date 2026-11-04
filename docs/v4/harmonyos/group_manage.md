@@ -191,6 +191,8 @@ ChatClient.getInstance().groupManager()?.fetchGroupMemberDetails(groupId, pageSi
 - `joinTime`：成员入群时间。
 - `role`：成员在群组中的角色。
 
+开启 `ChatOptions#setEnableUserInfo(true)` 后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ### 获取群组列表
 
 用户可以调用 `fetchJoinedGroupsFromServer` 方法从服务器获取自己加入和创建的群组列表。

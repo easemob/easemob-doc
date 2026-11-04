@@ -114,7 +114,7 @@ EMClient.shared().groupManager?.destroyGroup(
 
 邀请流程如下：
 
-![](/images/ios/goup_member_invite.png)
+![](/images/android/goup_member_invite.png)
 
 调用 `addMembers` 发起邀请：
 
@@ -194,7 +194,7 @@ final class GroupInvitationDelegate: NSObject, EMGroupManagerDelegate {
 
 用户申请加入公开群的流程如下：
 
-![](/images/ios/group_member_apply.png)
+![](/images/android/group_member_apply.png)
 
 具体调用方式由 `joinApprovalRequired` 决定：
 

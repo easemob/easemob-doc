@@ -253,6 +253,9 @@ projects:
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /document/flutter/message_stream_receive.html    
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/message_stream_receive.html
           - text: 获取消息
             desc: 从环信消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
@@ -350,7 +353,7 @@ projects:
                 text: REST
                 link: /document/server-side/message_modify.html       
           - text: 消息回执
-            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
+            desc: 单聊会话支持消息送达回执和消息已读回执。群聊会话只支持消息已读回执。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -883,6 +886,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/group_namecard.html         
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/group_namecard.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/group_namecard.html
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -1117,6 +1126,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/userinfo_provider.html   
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/userinfo_provider.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /document/react-native/userinfo_provider.html
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
@@ -1198,6 +1213,9 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
                 link: /document/harmonyos/push/push_overview.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /document/flutter/push/push_overview.html
               - icon: /sdk/react.svg
                 text: React Native
                 link: /document/react-native/push/push_overview.html  
@@ -1224,9 +1242,9 @@ projects:
           - text: 回调
             link: /document/server-side/callback_presending.html
           - text: 多设备管理
-            link: /document/server-side/callback_login_logout.html 
+            link: /document/android/multi_device.html 
           - text: 用户全局禁言
-            link: /document/android/multi_device.html                                      
+            link: /document/server-side/user_global_mute_overview.html                                    
   - title: UIKit
     features:
       - title: 单/群聊

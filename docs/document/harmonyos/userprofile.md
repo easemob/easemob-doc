@@ -90,6 +90,14 @@ ChatClient.getInstance().userInfoManager()
 
 你可以调用 `UserInfoManager#fetchUserInfoById(userId)`，从服务端获取一个或多个用户的全部属性。`userId` 可以是单个用户 ID，也可以是用户 ID 数组。成功时返回 `Promise<Map<string, UserInfo>>`，其中键为用户 ID，值为对应的用户属性。
 
+获取成功并不一定触发用户属性更新事件。SDK 会比较服务端返回的用户属性更新时间与本地缓存：
+
+- 其他用户的属性解析成功，且服务端更新时间晚于本地缓存时，触发 `UserInfoListener#onUserInfoUpdate`。
+- 当前登录用户自己的属性满足上述更新条件时，触发 `UserInfoListener#onSelfUserInfoUpdate`，而非 `onUserInfoUpdate`。
+- 服务端更新时间不晚于本地缓存，或未返回有效的用户属性更新时间时，不会因本次查询触发更新事件。
+
+上述主动查询及其更新事件不要求开启 `ChatOptions#setEnableUserInfo(true)`。业务侧可直接使用 Promise 成功回调返回的属性刷新界面，无需等待更新事件。监听方式详见 [监听用户属性变更](#监听用户属性变更)。
+
 ```typescript
 const userIds: string[] = ['user1', 'user2'];
 
@@ -241,9 +249,10 @@ HarmonyOS SDK 通过 `UserInfoListener` 提供以下用户属性事件：
 
 其他用户的属性更新可能由以下场景触发：
 
-1. **主动拉取更新**：主动调用 [从服务端获取用户属性](#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 的接口时，如果服务端返回的用户属性更新时间晚于本地数据，原生 SDK 会更新本地数据并触发 `onUserInfoUpdate`。
-2. **消息携带更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户的属性并触发 `onUserInfoUpdate`。该机制对好友和非好友发送方均生效。
-3. **订阅用户变更（仅限非好友）**：已订阅的非好友用户属性发生变化时，SDK 会触发 `onUserInfoUpdate`。
+1. **主动获取用户属性**：调用 [`UserInfoManager#fetchUserInfoById`](#从服务端获取用户的所有属性) 时，如果服务端返回的其他用户属性解析成功，且更新时间晚于本地缓存，则触发 `onUserInfoUpdate`。该主动查询不要求开启用户信息自动管理。
+2. **获取群成员信息时补拉用户属性**：调用 [`GroupManager#fetchGroupMemberDetails`](group_members.html#分页获取群成员信息) 时，只有开启用户信息自动管理，且本地没有成员属性缓存或昵称、头像都为空，SDK 才补拉用户属性。补拉结果满足上述更新条件时，触发 `onUserInfoUpdate`；已有昵称或头像时直接使用缓存，不会检查服务端属性是否有更新。
+3. **消息携带更新**：如果已开启 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户的属性并触发 `onUserInfoUpdate`。该机制对好友和非好友发送方均生效。
+4. **订阅用户变更（仅限非好友）**：已订阅的非好友用户属性发生变化时，SDK 会触发 `onUserInfoUpdate`。
 
 **特殊说明**
 

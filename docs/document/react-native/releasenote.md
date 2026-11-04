@@ -1,5 +1,121 @@
 # React-Native IM SDK 更新日志
 
+## v5.0.0 Dev 2026-10-14
+
+本次为大版本升级，包含不兼容变更。自本版本起，React Native SDK 版本号与依赖的原生 SDK 版本号保持同步，iOS 和 Android 原生 SDK 均升级至 5.0.0。
+
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [React Native SDK 4.x 到 5.0.0 迁移指南](migration_guide.html)。
+
+#### 重要变更
+
+**数据同步与本地数据访问**
+
+SDK 新增统一的数据同步机制。应用可配置登录后自动同步的数据类型，包括会话、好友和已加入群组，并通过统一的同步事件监听同步状态。列表数据的获取方式由主动调用历史服务端拉取接口，调整为读取同步后的本地数据。
+
+数据库打开和服务端数据同步分别对应不同阶段，应用可按以下步骤处理：
+
+1. **配置同步范围**：在初始化前，通过 `ChatOptions#dataSyncType` 配置登录后自动同步的数据类型，包括会话、好友和已加入群组，可通过按位或运算组合。未配置时沿用原生 SDK 的默认设置，建议显式配置。
+2. **读取本地数据**：通过 `ChatConnectEventListener#onDatabaseOpened` 确认当前账号的本地数据库已成功打开（`username` 为当前用户 ID，且 `errorCode === 0`）后，即可读取本地数据，不必等待服务端同步完成，有助于加快冷启动时的首屏展示。
+3. **监听服务端数据同步**：通过 `ChatConnectEventListener#onDataSyncStart` 和 `ChatConnectEventListener#onDataSyncFinish` 监听指定类型的数据同步开始和结束。回调中的 `type` 表示本次同步的数据类型。
+4. **读取本次同步后的最新数据**：如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `ChatConnectEventListener#onDataSyncFinish` 回调成功（`errorCode === 0`）后，再读取本地会话、好友或已加入群组数据并刷新界面。
+
+详见 [数据同步文档](initialization.html#设置登录后自动同步数据)。
+
+**群组配置模型重构**
+
+群组配置从单一样式枚举改为多个独立字段，建群后也可以按需更新指定配置。
+
+- `ChatGroupConfigs` 用于保存群组配置值，包含 `isPublic`、`joinApprovalRequired`、`allowInvites`、`maxCount`、`inviteNeedConfirm` 和 `ext` 等字段。
+- `ChatGroupConfigsType` 用于标记需要更新的配置项，支持按位或组合多个配置项。
+- 建群和群组配置更新统一使用新的配置模型，分别通过 `ChatGroupManager#createGroupEx` 和 `ChatGroupManager#updateGroupConfigs` 设置。
+
+默认建群类型调整为私有群，且不允许普通成员邀请其他用户。升级时请显式配置，避免影响现有业务。
+
+详见 [创建群组](group_manage.html#创建群组) 和 [群组配置迁移说明](migration_guide.html#群组配置模型重构)。
+
+**消息已读回执与未读数管理**
+
+消息已读回执改为批量处理，单聊和群聊共用一套回执体系；清除会话未读数与发送消息已读回执分别处理。
+
+1. 消息已读回执
+
+- 支持批量发送已读回执，单聊和群聊统一处理。
+- 是否需要已读回执改为按消息控制，在发送前显示开启，默认不请求回执。
+- 单聊和群聊的消息已读回执统一通过 `ChatMessageEventListener#onMessageReadReceipts` 接收。
+- 群聊支持批量查询消息已读回执汇总，以及分页获取指定消息的已读成员详情；成员信息包含角色、入群时间等，方便展示成员详情。
+- 消息已读状态和群消息已读人数由 SDK 维护，应用不能再直接修改。
+
+详见 [消息已读回执文档](message_receipt.html)。
+
+2. 会话未读数管理
+
+- 调整本地会话未读消息总数的统计规则，仅统计推送通知方式为“所有消息”（`ChatPushRemindType.ALL`）的普通单聊和群聊会话；不统计聊天室、消息话题，以及仅提醒提及消息或不提醒的会话（`ChatPushRemindType.MENTION_ONLY` 或 `ChatPushRemindType.NONE`）。
+- 清除指定会话或全部会话的本地未读数后，清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。
+- 当其他设备清除会话未读数时，应用可通过多设备通知重新读取本地会话并刷新界面。
+
+详见 [会话未读数文档](conversation_unread.html)。
+
+**会话展示与批量管理**
+
+SDK 补充会话展示信息和批量删除会话能力：
+
+- 会话对象新增显示名称和头像信息，方便会话列表展示。
+- 支持批量删除本地会话，并可选择是否同时删除会话中的本地消息；不存在的会话 ID 会被忽略。
+- 补充 iOS 端当前账号在其他设备上更新群组信息的多设备事件通知，方便应用及时刷新群组展示信息。
+
+详见 [会话对象文档](conversation_overview.html#会话对象)、[删除会话](conversation_delete.html)、[群消息已读回执详情](message_receipt.html#获取单条群消息的回执成员详情) 和 [多设备登录](multi_device.html)。
+
+#### 优化
+
+**登录、鉴权与连接事件**
+
+- 登录和设备管理统一使用 Token 鉴权，不再支持密码鉴权。
+- SDK 不再支持自动登录，应用应管理登录凭证，并在启动后主动发起 Token 登录。
+- 好友自动同步配置并入统一的数据同步配置。
+- 连接中断和账号被服务端强制下线等场景统一通过 `onDisconnected` 通知，应用应根据断开原因区分连接中断和登录状态失效。Token 过期仍通过 `onTokenDidExpire` 单独通知。登录状态与连接状态不同，不能仅根据是否连接到服务器判断用户是否已登录。
+
+详见 [登录](login.html)、[连接](connection.html) 和 [好友数据同步](user_relationship.html) 文档。
+
+**历史能力与接口整理**
+
+- 客户端账号注册、消息举报、聊天室创建和解散等能力改由业务服务器处理。
+- 移除公开群列表拉取能力；会话、好友和已加入群组列表统一通过数据同步机制更新后读取本地数据。
+- 清理已废弃的消息查询、消息编辑、历史消息获取、群组详情获取及聊天室加入等接口，相关功能统一使用保留的推荐方式。
+- 群成员加入和退出通知调整为批量处理，并统一聊天室禁言名单变更的通知形式。
+
+详见 [迁移指南](migration_guide.html#其他删除的-api)、[群组管理](group_manage.html) 和 [聊天室管理](room_manage.html) 文档。
+
+**推送配置与设备 Token**
+
+- 推送配置调整为初始化配置与运行时设备 Token 绑定相分离，应用负责接入厂商推送服务并获取设备 Token。
+- Android 厂商推送的依赖、配置和初始化需在原生工程侧完成；向环信服务器绑定设备 Token 时，需提供对应厂商的推送凭据。
+- iOS 的 APNs 和 PushKit 推送证书名称在 SDK 初始化时设置，运行期间不可修改；普通推送和 VoIP 推送使用独立的证书与 Token，分别绑定。
+- iOS 端支持单独绑定和解绑 PushKit Token，无需登出即可解除绑定。
+
+详见 [上传推送证书](/document/react-native/push/push_easemob_console.html) 和 [绑定推送 Token](/document/react-native/push/push_send_token_to_server.html) 文档。
+
+**平台与集成**
+
+- React Native SDK 5.x 仅支持 React Native 新架构，升级前需确认宿主工程已启用新架构。
+- iOS 推荐使用 Swift Package Manager（SPM）集成，CocoaPods 继续支持，具体方式根据宿主工程配置选择。
+- 升级后需要重新安装依赖并编译 iOS 和 Android 原生工程，仅更新 JavaScript 包不能完成升级。
+
+详见 [集成文档](integration.html) 和 [SDK 集成与版本要求](migration_guide.html#sdk-集成与版本要求)。
+
+#### 修复
+
+- 修复 Android 本地关键字搜索未指定发送方时始终返回空结果的问题。
+- 修复 iOS 未读消息总数的统计问题，与 Android 的统计范围保持一致。
+- 修复部分群管理员变更、群组和聊天室全员禁言、iOS 入群申请被拒绝及消息撤回通知中的信息缺失问题。
+- 修复账号被服务端强制断开后，本地登录状态可能未及时清理的问题。
+- 修复 Android 切换账号登录时可能复用上一账号数据库缓存的问题。
+- 修复 Android 修改消息时可能出现的响应匹配异常，以及部分场景下群成员名片无法清空的问题。
+- 修复 Android 关闭附件 MD5 校验后，上传附件仍可能执行预校验的问题。
+- 修复 Android 网络传输、任务队列和数据库缓存中的若干并发安全问题。
+- 修复 iOS 发送附件消息未设置显示文件名时，附件上传可能受 2 MB 大小限制的问题，SDK 会自动使用本地文件名作为显示名。
+
+相关功能详见 [本地消息搜索](message_search_local.html)、[会话未读数](conversation_unread.html)、[消息发送](message_send.html) 和 [迁移指南](migration_guide.html)。
+
 ## v1.21.0 2026-09-24
 
 #### 新增特性
@@ -7,12 +123,12 @@
 - 依赖的原生 SDK 升级：
   - `iOS` 升级至 4.25.0。
   - `Android` 升级至 4.25.1。
-- 默认情况下，[本地会话列表不包含聊天室会话](conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。
-- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。
+- 默认情况下，[本地会话列表不包含聊天室会话](/v4/react-native/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。
+- 支持 [分页获取本地会话列表](/v4/react-native/conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。
 - 支持 [服务端消息搜索](/value-added/search/message_search_rn.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通后方可使用，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。
-- iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)，对应属性为 `ChatOptions.apnsCertName` 和 `ChatOptions.pushKitCertName`。
-- iOS 支持 [绑定和解绑苹果 PushKit token](/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)，对应方法为 `ChatClient.bindPushKitToken` 和 `ChatClient.unbindPushKitToken`。其他平台调用这两个方法不会执行任何操作。
-- 支持 [为消息配置回调路由标识](message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。
+- iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/v4/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)，对应属性为 `ChatOptions.apnsCertName` 和 `ChatOptions.pushKitCertName`。
+- iOS 支持 [绑定和解绑苹果 PushKit token](/v4/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)，对应方法为 `ChatClient.bindPushKitToken` 和 `ChatClient.unbindPushKitToken`。其他平台调用这两个方法不会执行任何操作。
+- 支持 [为消息配置回调路由标识](/v4/react-native/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。
 
 ## v1.18.0 2026-08-06
 
@@ -23,17 +139,17 @@
   - `Android` 升级至 4.22.0
 - 支持 [语音转文字功能](/value-added/stt/voice_to_text_rn.html)。
 - 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片](message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](message_receive.html#接收视频消息)。
-- 支持 [群成员名片管理功能](group_namecard.html)。
+  - 新增 [“大图”资源类型](/v4/react-native/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/v4/react-native/message_send.html#发送图片消息)。
+  - 优化 [图片](/v4/react-native/message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](/v4/react-native/message_receive.html#接收视频消息)。
+- 支持 [群成员名片管理功能](/v4/react-native/group_namecard.html)。
 - 支持好友列表自动同步：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#登录后自动同步好友列表)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听好友关系和好友信息变更)。
-  - 增强好友对象能力：从 [服务器](user_relationship.html#主动从服务器获取好友列表) 和 [本地](user_relationship.html#从本地读取好友列表) 获取好友列表时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
-- 支持 [用户信息自动管理功能](userinfo_provider.html)。
-用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+  - 新增 [好友列表自动同步配置功能](/v4/react-native/user_relationship.html#登录后自动同步好友列表)。
+  - 新增 [好友列表及好友信息同步状态回调](/v4/react-native/user_relationship.html#监听好友关系和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](/v4/react-native/user_relationship.html#主动从服务器获取好友列表) 和 [本地](/v4/react-native/user_relationship.html#从本地读取好友列表) 获取好友列表时，支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](/v4/react-native/userprofile.html#订阅非好友用户的属性变更)，使用前需要联系环信商务开通。
+- 支持 [用户信息自动管理功能](/v4/react-native/userinfo_provider.html)。
+用户信息指用于业务展示的用户相关信息，包括 [用户属性](/v4/react-native/userprofile.html)、[好友备注](/v4/react-native/user_relationship.html#设置好友备注) 和 [群成员名片](/v4/react-native/group_namecard.html)。
 
 ## v1.15.3 2026-07-07
 
@@ -59,7 +175,7 @@
 - 依赖的原生 SDK 升级：
   - `iOS` 升级至 4.19.1
   - `Android` 升级至 4.19.2
-- 支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+- 支持 [接收服务端发送的流式消息](/v4/react-native/message_stream_receive.html)。
 
 ## v1.14.0 2026-02-04
 
@@ -101,7 +217,7 @@
 
 ## v1.11.3 2025-7-15
 
-[支持用户查看自己是否在聊天室禁言列表上](room_members.html#查看当前用户是否在聊天室禁言列表)。
+[支持用户查看自己是否在聊天室禁言列表上](/v4/react-native/room_members.html#查看当前用户是否在聊天室禁言列表)。
 
 ## v1.11.2 2025-6-15
 
@@ -121,27 +237,27 @@
 
 **消息相关**
 
-- 更新 [编辑消息](message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以编辑消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持编辑扩展信息。
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
-- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [根据关键字从本地数据库中获取会话的消息 ID 列表](message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
-- 支持 [根据消息 ID 列表获取本地消息](message_retrieve.html#根据消息-id-获取本地消息)。
-- 更新 [根据搜索范围搜索当前会话中的消息](message_search_local.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
-- [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- 更新 [编辑消息](/v4/react-native/message_modify.html)：作废 `modifyMessageBody`，新增 `modifyMsgBody`，文本、自定义消息可以编辑消息体和扩展信息，文件、视频、音频、图片、位置、合并转发支持编辑扩展信息。
+- 支持 [发送](/v4/react-native/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/v4/react-native/message_receive.html#接收-gif-图片消息)。
+- 支持 [消息附件鉴权功能](/v4/react-native/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/v4/react-native/message_retrieve.html#从服务器获取指定群成员发送的消息)。详见 `fetchHistoryMessagesByOptions` 接口的 `ChatFetchMessageOptions` 参数。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](/v4/react-native/message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [根据关键字从本地数据库中获取会话的消息 ID 列表](/v4/react-native/message_retrieve.html#根据关键字获取本地会话的消息-id)，SDK 返回会话 ID 及消息 ID 列表。
+- 支持 [根据消息 ID 列表获取本地消息](/v4/react-native/message_retrieve.html#根据消息-id-获取本地消息)。
+- 更新 [根据搜索范围搜索当前会话中的消息](/v4/react-native/message_search_local.html#根据搜索范围搜索当前会话中的消息) 接口 `getConvMsgsWithKeyword`, 新增 `senders` 参数，替换原来的 `sender` 参数。
+- [撤回消息](/v4/react-native/message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 
 **群组相关**
 
-- 支持 [创建群组时设置群头像](group_manage.html#创建群组)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
-- 支持 [修改群组头像](group_attributes.html#修改群头像)。
-- 支持 [获取群成员列表](group_members.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [创建群组时设置群头像](/v4/react-native/group_manage.html#创建群组)。新增创建群组接口 `createGroupEx`，作废原接口 `createGroup`。
+- 支持 [修改群组头像](/v4/react-native/group_attributes.html#修改群头像)。
+- 支持 [获取群成员列表](/v4/react-native/group_members.html#获取群成员列表) 时包括成员角色和入群时间。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+  - 新增群成员进出事件 [onMembersJoined](/v4/react-native/group_manage.html#监听群组事件) 和 [onMembersExited](/v4/react-native/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
 
 #### 优化
 
-修改 Token 即将过期事件 [ChatConnectEventListener#onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+修改 Token 即将过期事件 [ChatConnectEventListener#onTokenWillExpire](/v4/react-native/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 
 ## v1.8.2 2025-3-15
 
@@ -149,7 +265,7 @@
 
 ## v1.8.1 2025-2-15
 
-- 使用接口 [fetchGroupInfoWithoutMembersFromServer](group_manage.html#获取群组详情) 替换 `fetchGroupInfoFromServer`。
+- 使用接口 [fetchGroupInfoWithoutMembersFromServer](/v4/react-native/group_manage.html#获取群组详情) 替换 `fetchGroupInfoFromServer`。
 
 ## v1.8.0 2025-1-17
 
@@ -169,7 +285,7 @@
 - 依赖的原生 SDK 升级到版本：
   - iOS 升级至 4.11.0
   - Android 升级至 4.11.0
-- 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](connection.html)。
+- 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](/v4/react-native/connection.html)。
 - 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
   
 #### 优化
@@ -190,20 +306,20 @@
 - 依赖的原生 SDK 升级到版本：
   - iOS 升级至 4.8.1
   - Android 升级至 4.8.2
-- 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
-- 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
-- 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](message_delete.html#单向删除服务器端的聊天室消息)。
-- 新增 `ChatRoomManager.joinChatRoomEx` 方法，支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)。用户加入聊天室后，聊天室内其他成员收到 `ChatRoomEventListener.onMemberJoined` 事件获取到扩展信息。
-- 新增 `ChatManager.getMessageCountWithTimestamp` 方法，支持[从数据库中获取指定会话指定时间段的消息数量](message_retrieve.html#获取本地会话指定时间段的消息数量)。
-- 新增 `ChatOptions.loginExtraInfo` 选项，支持[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)。被踢设备收到 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 事件中会携带新设备的扩展信息。
-- 原生平台新增[错误码 407](/document/android/error.html)。
+- 新增 `ChatManager.searchMessages` 方法，支持[一次搜索所有会话的多种类型的消息](/v4/react-native/message_search_local.html#根据消息类型搜索所有会话中的消息)。
+- 新增 `ChatManager.searchMessagesInConversation` 方法，支持[一次搜索指定会话的多种类型的消息](/v4/react-native/message_search_local.html#根据消息类型搜索当前会话中的消息)。
+- 新增 `ChatManager.removeMessagesWithTimestamp` 方法，支持[只删除服务器端的聊天室消息](/v4/react-native/message_delete.html#单向删除服务器端的聊天室消息)。
+- 新增 `ChatRoomManager.joinChatRoomEx` 方法，支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](/v4/react-native/room_manage.html#加入聊天室)。用户加入聊天室后，聊天室内其他成员收到 `ChatRoomEventListener.onMemberJoined` 事件获取到扩展信息。
+- 新增 `ChatManager.getMessageCountWithTimestamp` 方法，支持[从数据库中获取指定会话指定时间段的消息数量](/v4/react-native/message_retrieve.html#获取本地会话指定时间段的消息数量)。
+- 新增 `ChatOptions.loginExtraInfo` 选项，支持[设备登录时允许携带自定义消息，并将其传递给被踢的设备](/v4/react-native/multi_device.html#设置登录设备的扩展信息)。被踢设备收到 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 事件中会携带新设备的扩展信息。
+- 原生平台新增[错误码 407](/v4/react-native/error.html)。
 
 #### 优化
 
 - 原生平台优化弱网服务器连接成功率。
-- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](connection.html) 替代。
-- 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](message_retrieve.html#从服务器获取指定会话的消息) 替代。
-- 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](room_manage.html#加入聊天室) 替代。
+- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](/v4/react-native/connection.html) 替代。
+- 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](/v4/react-native/message_retrieve.html#从服务器获取指定会话的消息) 替代。
+- 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](/v4/react-native/room_manage.html#加入聊天室) 替代。
 
 #### 修复
 
@@ -227,8 +343,8 @@
 
 #### 新增特性
 
-- 撤回消息的方法 `recallMessage` 中新增扩展参数，[支持消息撤回时携带自定义信息](message_recall.html#实现方法)。
-- 添加[消息撤回事件](message_recall.html#设置消息撤回监听)  `onMessagesRecalledInfo`，作废原来的事件 `onMessagesRecalled`。
+- 撤回消息的方法 `recallMessage` 中新增扩展参数，[支持消息撤回时携带自定义信息](/v4/react-native/message_recall.html#实现方法)。
+- 添加[消息撤回事件](/v4/react-native/message_recall.html#设置消息撤回监听)  `onMessagesRecalledInfo`，作废原来的事件 `onMessagesRecalled`。
 
 #### 修复
 
@@ -241,22 +357,22 @@
 
 #### 新增特性
 
-- 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- 新增[根据搜索范围搜索消息](message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
+- 新增 `ChatManager#deleteAllMessageAndConversation` 方法，用于[清空当前用户的聊天记录](/v4/react-native/message_delete.html#清空聊天记录)，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- 新增[根据搜索范围搜索消息](/v4/react-native/message_search_local.html#根据搜索范围搜索所有会话中的消息)：根据关键字搜索消息时，可以选择 `ChatMessageSearchScope` 中的搜索范围。
   - `ChatMessageSearchScope`：包含三个消息搜索范围，即搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
   - `ChatManager#getMsgsWithKeyword`：根据搜索范围搜索所有会话中的消息。
   - `ChatManager#getConvMsgsWithKeyword`：根据搜索范围搜索当前会话中的消息。
-- 支持[会话标记](conversation_mark.html)功能。
+- 支持[会话标记](/v4/react-native/conversation_mark.html)功能。
   - `ChatConversationFetchOptions` 从服务器获取会话的选项，可以用来回去置顶会话或者是标记后的会话。
   - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
   - `ChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
   - `ChatManager#fetchConversationsByOptions`：根据 `ChatConversationFetchOptions` 选项从服务器分页查询会话列表。
   - `ChatConversation#marks`：获取本地单个会话的所有标记。
   - `ChatMultiDevicesEvent#CONVERSATION_UPDATE_MARK`：多设备场景下的会话标记事件。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
-- 新增[错误码 706](/document/android/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
-- 支持[聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
+- 新增[错误码 706](/v4/react-native/error.html)，表示聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#isChatRoomOwnerLeaveAllowed` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
+- 支持[聊天室漫游消息](/v4/react-native/message_retrieve.html#从服务器获取指定会话的消息)。
 - 新增 `ChatOptions#useReplacedMessageContents` 开关。开启后，发送消息时如果被内容审核进行了内容替换，发送方可以收到替换后的内容。
-- 新增[置顶消息](message_pin.html)功能。
+- 新增[置顶消息](/v4/react-native/message_pin.html)功能。
   - 新增 `ChatManager#pinMessage` 方法，用于置顶消息。
   - 新增 `ChatManager#unpinMessage` 方法，用于取消置顶消息。
   - 新增 `ChatManager#fetchPinnedMessages` 方法，从服务器获取指定会话的置顶消息。
@@ -269,9 +385,9 @@
 
 #### 优化
 
-- 支持使用消息 body 完成[单条转发](message_forward.html)，无需重新上传附件。
+- 支持使用消息 body 完成[单条转发](/v4/react-native/message_forward.html)，无需重新上传附件。
 - 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
-- 在[聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
+- 在[聊天室成员进出时更新聊天室成员人数](/v4/react-native/room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
 - 优化 token 登录时的错误提示信息，使错误提示更精细。
 - 优化将所有会话置为已读的时间。 
 - 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。
@@ -309,13 +425,13 @@
 - 依赖的原生 SDK 升级到版本，添加原生 SDK 提供的新功能。
   - `iOS` 升级至 4.2.0
   - `Android` 升级至 4.2.1
-- 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](user_relationship.html#主动从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
-- 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地读取好友列表)。
-- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](user_relationship.html#从本地读取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增[设置好友备注功能](/v4/react-native/user_relationship.html#设置好友备注)。
+- 新增 `ChatContactManager.fetchAllContacts` 和 `ChatContactManager.fetchContacts` 方法分别[从服务器一次性和分页获取好友列表](/v4/react-native/user_relationship.html#主动从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- 新增 `ChatContactManager.getContact` 方法[从本地获取单个好友的用户 ID 和好友备注](/v4/react-native/user_relationship.html#从本地读取好友列表)。
+- 新增 `ChatContactManager.getAllContacts` 方法[从本地一次性获取好友列表](/v4/react-native/user_relationship.html#从本地读取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - 新增 `ChatMessage.isBroadcast` 属性用于判断通该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
 - 新增 `ChatGroupManager.fetchJoinedGroupCount` 方法用于从服务器获取当前用户已加入的群组数量。
-- [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
+- [申请入群被拒绝的回调](/v4/react-native/group_manage.html#监听群组事件) `EMGroupEventHandler#onRequestToJoinDeclinedFromGroup` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
 
 ## v1.2.1 2023-8-16
 
@@ -329,19 +445,19 @@
 
 - React-Native 从 0.66.5 升级到 0.71.11。
 - 依赖的原生 SDK（iOS 和 Android）升级到版本 4.1.1。添加原生 SDK 提供的新功能。
-- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法 [从服务器分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
-- 新增[置顶服务器会话的功能](conversation_pin.html#获取服务端的置顶会话列表)：
+- 新增 `ChatManager.fetchConversationsFromServerWithCursor` 方法 [从服务器分页获取会话列表](/v4/react-native/conversation_list.html#从服务器分页获取会话列表)。
+- 新增[置顶服务器会话的功能](/v4/react-native/conversation_pin.html#获取服务端的置顶会话列表)：
   - 新增 `ChatManager.pinConversation` 方法，实现置顶或取消置顶服务器会话；
   - 新增 `ChatManager.fetchPinnedConversationsFromServerWithCursor` 从服务器分页获取置顶会话列表。
 - 新增 `ChatManager.modifyMessageBody` 方法，用于修改本地消息或服务器端消息。
-- 新增 [发送](message_send.html#发送合并消息) 和 [接收合并消息](message_receive.html#接收合并消息)：
+- 新增 [发送](/v4/react-native/message_send.html#发送合并消息) 和 [接收合并消息](/v4/react-native/message_receive.html#接收合并消息)：
   - 新增 `ChatMessage.createCombineMessage` 方法构建合并消息。
   - 新增 `ChatManager.fetchCombineMessageDetail` 方法获取合并消息的信息。
-- 新增[自定义登录设备的名称和平台的功能](multi_device.html#设置登录设备的名称)。  
+- 新增[自定义登录设备的名称和平台的功能](/v4/react-native/multi_device.html#设置登录设备的名称)。  
 - 新增 `ChatPushManager.selectPushTemplate` 方法基于自定义推送模板进行离线推送。
 - 新增 `ChatPushManager.fetchSelectedPushTemplate` 获取选定的推送模板以进行离线推送。
 - 在 `ChatClient.getLoggedInDevicesFromServer` 方法中添加 token 参数可使用用户 token 获取在线设备列表。
-- [在 `ChatClient.kickDevice` 和 `ChatClient.kickAllDevices` 方法中添加 token 参数可使用用户 token 将指定用户的某个或全部的登录设备踢下线](multi_device.html#强制指定账号从单个设备下线)。
+- [在 `ChatClient.kickDevice` 和 `ChatClient.kickAllDevices` 方法中添加 token 参数可使用用户 token 将指定用户的某个或全部的登录设备踢下线](/v4/react-native/multi_device.html#强制指定账号从单个设备下线)。
 - 更新监听器：
   - `ChatEvents.ChatConnectEventListener.onUserDidLoginFromOtherDevice`：添加 `deviceName` 参数。
   - `ChatEvents.ChatConnectEventListener`：添加 `onUserDidRemoveFromServer`、`onUserDidForbidByServer`、`onUserDidChangePassword`、`onUserDidLoginTooManyDevice`、`onUserKickedByOtherDevice` 和 `onUserAuthenticationFailed` 事件通知。
@@ -385,11 +501,11 @@
   - iOS 升级至 4.16.2
   - Android 升级至 4.16.1
 - 新增 `ChatClient.version` 属性用于获取当前 SDK 的版本号。
-- 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](group_members.html#设置群组成员自定义属性)。
-- 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](group_members.html#根据属性-key-获取多个群成员的自定义属性)。
-- 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
-- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](message_delete.html#删除本地单个会话在指定时间段的消息)。
-- 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
+- 新增 `ChatGroupManager.setMemberAttribute` 方法用于[设置单个群组成员的属性](/v4/react-native/group_members.html#设置群组成员自定义属性)。
+- 新增 `ChatGroupManager.fetchMemberAttributes` 方法用于[从服务器获取单个群成员的所有自定义属性](/v4/react-native/group_members.html#获取单个群成员的所有自定义属性)以及[根据属性 key 获取多个群成员的自定义属性](/v4/react-native/group_members.html#根据属性-key-获取多个群成员的自定义属性)。
+- 添加 `ChatManager.fetchHistoryMessagesByOptions` [根据消息拉取参数配置类（`ChatFetchMessageOptions`）从服务器分页获取指定会话的历史消息](/v4/react-native/message_retrieve.html#从服务器获取指定会话的消息)。`ChatFetchMessageOptions` 类中包括起始时间戳、消息类型和消息发送方等参数。
+- 新增 `ChatManager.deleteMessagesWithTimestamp` 方法实现[删除指定时间段内的本地消息](/v4/react-native/message_delete.html#删除本地单个会话在指定时间段的消息)。
+- 新增 [`ChatGroupEventListener.onMemberAttributesChanged` 事件](/v4/react-native/group_manage.html#监听群组事件)，在单个群成员的属性发生变更时，群内其他成员会收到该事件。
 - 新增 `ChatConnectEventListener.onAppActiveNumberReachLimit` 事件，在应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时触发该事件。
 - 新增日志回调接口 `handler`。
 
@@ -562,11 +678,11 @@
 具体集成请参考以下文档：
 
 - [创建应用](/product/console/app_create.html)
-- [环信即时通讯 IM React-Native 快速开始](quickstart.html)
-- [消息管理 React Native](message_overview.html)
-- [群组](group_overview.html)
-- [聊天室](room_overview.html)
-- [用户在线状态订阅 Presence](presence.html)
-- [消息表情回复](reaction.html)
-- [消息话题管理](thread.html)
-- [API Reference](apireference.html)
+- [环信即时通讯 IM React-Native 快速开始](/v4/react-native/quickstart.html)
+- [消息管理 React Native](/v4/react-native/message_overview.html)
+- [群组](/v4/react-native/group_overview.html)
+- [聊天室](/v4/react-native/room_overview.html)
+- [用户在线状态订阅 Presence](/v4/react-native/presence.html)
+- [消息表情回复](/v4/react-native/reaction.html)
+- [消息话题管理](/v4/react-native/thread.html)
+- [API Reference](/v4/react-native/apireference.html)

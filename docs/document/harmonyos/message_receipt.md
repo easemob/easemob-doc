@@ -23,7 +23,7 @@
 
 实现单聊消息送达回执的流程如下：
 
-![单聊消息送达回执流程](/images/harmonyos/message_delivery_receipt.png)
+![单聊消息送达回执流程](/images/android/message_delivery_receipt.png)
 
 实现该功能的基本步骤如下：
 
@@ -42,7 +42,7 @@ HarmonyOS SDK 使用 `ChatManager#sendMessageReadReceipts` 统一发送单聊和
 
 实现消息已读回执的基本流程如下：
 
-![消息已读回执流程](/images/harmonyos/message_read_receipt.png)
+![消息已读回执流程](/images/android/message_read_receipt.png)
 
 实现该功能的基本步骤如下：
 
