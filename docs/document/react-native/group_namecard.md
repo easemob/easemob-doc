@@ -10,13 +10,13 @@ React Native SDK 提供群成员名片管理功能，支持群成员名片的设
 
 ## 技术原理
 
-群成员名片管理功能主要由 `ChatGroupManager` 和 `ChatGroupEventListener` 提供。SDK 通过“主动设置或拉取、本地内存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
+群成员名片管理功能主要由 `ChatGroupManager` 和 `ChatGroupEventHandler` 提供。SDK 通过“主动设置或拉取、本地内存存储、事件通知、消息触发自动同步”的机制管理群成员名片，具体如下：
 
-1. 当前登录用户可通过 `ChatGroupManager#updateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
-2. SDK 收到群成员名片变更通知，或通过消息自动同步群成员名片并更新本地内存后，会通过 `ChatGroupEventListener#onUserGroupNamecardChanged` 事件通知业务层。
-3. SDK 支持通过 `ChatGroupManager#fetchMemberInfoListFromServer` 从服务端分页获取群成员信息，并将返回的群成员名片写入本地内存。
-4. SDK 支持通过 `ChatGroupManager#getGroupNamecard` 从本地内存读取指定成员在指定群组中的群成员名片。
-5. 若在初始化 SDK 时将 `ChatOptions#enableUserInfo` 设为 `true`（默认为 `false`），发送群聊消息时会自动附带发送方群成员名片更新时间；接收方开启该功能后，若检测到消息中的更新时间晚于本地内存中的更新时间，或本地尚无对应名片缓存，会自动从服务端拉取最新群成员名片，获取成功后更新本地内存，并触发事件通知业务层。
+1. 当前登录用户可通过 `ChatGroupManager.updateGroupNamecard` 设置或更新自己在指定群组中的群成员名片。
+2. SDK 收到群成员名片变更通知，或通过消息自动同步群成员名片并更新本地内存后，会通过 `ChatGroupEventHandler.onUserGroupNamecardChanged` 事件通知 Flutter 业务层。
+3. SDK 支持通过 `ChatGroupManager.fetchGroupMembersInfo` 从服务端分页获取群成员信息，并将返回的群成员名片写入原生 SDK 本地内存。
+4. SDK 支持通过 `ChatGroupManager.getGroupNamecard` 从原生 SDK 本地内存读取指定成员在指定群组中的群成员名片。该方法返回 `Future<String?>`，不会主动请求服务端。
+5. 若在初始化 SDK 时将 `ChatOptions.enableUserInfo` 设为 `true`（默认为 `false`），发送群聊消息时会自动附带发送方群成员名片的更新时间；接收方开启该功能后，若消息携带有效的更新时间，且该时间晚于本地内存中的对应时间戳，或本地尚无对应名片缓存，SDK 会自动从服务端拉取最新群成员名片，获取成功后更新原生 SDK 本地内存，并通过 `onUserGroupNamecardChanged` 事件通知 Flutter 业务层。
 
 内存更新流程如下图所示：
 

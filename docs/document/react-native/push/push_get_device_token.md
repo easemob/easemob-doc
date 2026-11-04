@@ -6,7 +6,7 @@ React Native SDK 不提供获取推送 Token 的接口。应用需接入对应�
 
 本文以独立的可选插件 `react-native-push-collection` 为例，介绍如何获取或更新推送 Token。该插件不是 IM SDK 的内置依赖；如果项目已经集成其他推送方案，可直接使用该方案获取 Token，无需重复安装此插件。
 
-:::notice
+:::tip
 本文插件示例依据 `react-native-push-collection` 1.0.1 的接口编写。插件与 IM SDK 的版本相互独立，集成前需确认其与项目 React Native 版本、原生构建工具和其他推送依赖的兼容性。添加插件后需重新编译原生工程，仅刷新 JavaScript 代码不能完成集成。
 :::
 
@@ -165,7 +165,7 @@ HUAWEI_PUSH_APPID=your_huawei_app_id
 
 4. 按目标 Android 版本和厂商要求配置通知权限、通知渠道及 Manifest。Token 获取成功不等于应用已获得通知展示权限。
 
-:::notice
+:::tip
 React Native SDK 5.x 不再通过 `ChatOptions.pushConfig` 配置厂商推送。Android 厂商推送依赖、Manifest 和原生 `EMPushConfig` 初始化需在原生工程侧完成。此插件负责获取厂商 Token，不会替代 IM SDK 所需的原生推送配置；仅获取和绑定 Token 不能代替完整集成。
 :::
 

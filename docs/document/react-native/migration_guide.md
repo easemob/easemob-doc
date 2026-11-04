@@ -555,7 +555,7 @@ VoIP 推送使用独立的 PushKit 证书与 PushKit token，与上面的普通�
 
 在 iOS 端，已配置 `ChatOptions.apnsCertName` 且普通推送 Token 解绑成功时，`ChatClient#logout(true)` 会继续解绑 PushKit Token。`logout` 的 `unbindDeviceToken` 默认为 `true`；传 `false` 表示登出时不解绑。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::
 

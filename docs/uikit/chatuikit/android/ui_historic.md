@@ -34,7 +34,7 @@ EaseIMKit 支持 Gradle 接入和 Module 源码集成
 
 #### Gradle 接入集成
 
-:::notice 重大变动
+:::tip 重大变动
 远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 “io.hyphenate”，详见 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 :::
 
@@ -615,7 +615,7 @@ public class ChatTxtNewAdapterDelegate extends EaseMessageAdapterDelegate <EMMes
 }
 ```
 
-:::notice
+:::tip
 （1）相同的消息类型（比如例子中消息类型是 EMMessage.Type.TXT）且通过标记判断类型时，在第 5 步注册对话类型时，应将该对话类型注册于基类的对话类型之前（即 ChatTxtNewAdapterDelegate 注册应在 EaseTextAdapterDelegate 之前）。
 
 （2）对于 `item.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_TXT_NEW, false)` 可以理解为一种标记，在发送消息时设置，如下；

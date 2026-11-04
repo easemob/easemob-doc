@@ -61,7 +61,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCall
 | `birth`     | String | 用户生日。长度不超过 64 字符。                                                                    |
 | `ext`       | String | 扩展字段。                                                                                        |
 
-:::notice
+:::tip
 更新请求中未包含的属性保留原值。需要注意，调用 `EMUserInfoManager#updateOwnInfo()` 时，SDK 始终提交 `gender`；如果传入的 `EMUserInfo` 未设置性别，该值为 `0`，可能覆盖原有性别。若只需修改单个属性，可调用 `EMUserInfoManager#updateOwnInfoByAttribute()`。
 :::
 

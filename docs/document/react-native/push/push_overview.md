@@ -70,20 +70,28 @@ iOS 端通过 APNs 接收普通离线推送通知，流程如下图所示：
 
 **推送证书**：推送证书及其配置的凭据用于环信服务器识别推送通道，并向对应推送服务进行鉴权。在发送推送通知前，需在 [环信控制台](https://console.easemob.com/user/login) 为应用配置推送证书或厂商凭据，并确保与客户端使用的推送项目、应用及环境一致。各平台的证书配置要求，详见 [上传推送证书](push_easemob_console.html)；Android 绑定时的 `notifierName` 取值，参见下文 [配置推送接口](#配置推送接口)。
 
-**推送 Token（Device Token）**：推送 Token 是第三方推送服务为应用实例生成的标识。以 FCM 推送为例，应用初次启动时，FCM SDK 会为客户端应用实例生成一个注册令牌（registration token），FCM 据此将通知准确投递至目标设备上的应用。在 Android 端接入 FCM 推送后，应用通过所用推送插件或原生推送 SDK 获取 FCM Token；iOS 普通 APNs 推送应获取 APNs Device Token。React Native IM SDK 不提供这些 Token 的获取接口。推送 Token 与 `ChatClient#loginWithToken` 使用的用户登录 Token 不同，不能混用。
+**推送 Token（Device Token）**：推送 Token 是第三方推送服务为应用实例生成的标识。以 FCM 推送为例，应用初次启动时，FCM SDK 会为客户端应用实例生成一个注册令牌（registration token），FCM 据此将通知投递至目标设备上的应用。在 Android 端接入 FCM 推送后，应用通过所用推送插件或原生推送 SDK 获取 FCM Token；iOS 普通 APNs 推送应获取 APNs Device Token。React Native IM SDK 不提供这些 Token 的获取接口。推送 Token 与 `ChatClient#loginWithToken` 使用的用户登录 Token 不同，不能混用。
 
-推送 Token 发生变化后，应在用户已登录的状态下重新调用 `ChatClient#bindDeviceToken` 绑定最新 Token。若退出即时通讯 IM 登录时选择不解绑 Device Token，可调用 `ChatClient.getInstance().logout(false)`；在推送证书和 Token 有效且满足推送条件时，用户仍可收到离线推送通知。`ChatClient#logout` 的 `unbindDeviceToken` 为可选的位置参数，默认为 `true`，表示登出时请求解绑 Device Token；传入 `false` 表示不解绑。
+推送 Token 发生变化后，应在用户已登录的状态下重新调用 `ChatClient#bindDeviceToken` 绑定最新 Token。
+
+`ChatClient#logout` 的 `unbindDeviceToken` 为可选的位置参数，默认为 `true`，表示登出时请求解绑 Device Token；传入 `false` 表示不解绑。若退出即时通讯 IM 登录时选择不解绑 Device Token，可调用 `ChatClient.getInstance().logout(false)`；在推送证书和 Token 有效且满足推送条件时，用户仍可收到离线推送通知。
 
 关于推送证书上传和 Token 获取，可参考 [上传推送证书](push_easemob_console.html)、[Android FCM 推送集成文档](/document/android/push/push_fcm.html#步骤四-fcm-推送集成) 和 [iOS APNs 推送集成文档](/document/ios/push/push_apns.html)。原生文档中的工程配置可作为参考，React Native SDK 5.x 的客户端配置与 Token 绑定调用以本文为准。
 
-:::tip
-React Native SDK 5.x 支持 iOS PushKit 接口。VoIP 推送使用独立的证书和 Token：初始化时通过 `ChatOptions.pushKitCertName` 配置证书名称，获取 `PKPushRegistry` 回调返回的十六进制 Token 后调用 `ChatClient#bindPushKitToken`。`ChatClient#bindDeviceToken` 不用于绑定 PushKit Token。
+**iOS PushKit 推送**
 
-`ChatClient#bindPushKitToken` 和 `ChatClient#unbindPushKitToken` 仅在 iOS 生效，其他平台调用不做任何处理。需要在保持登录状态下单独解绑 PushKit Token 时，调用 `ChatClient#unbindPushKitToken`。
-:::
+React Native SDK 5.x 支持 iOS PushKit 接口。VoIP 推送使用独立的证书和 Token，配置与绑定流程如下：
 
-:::notice
-iOS 端未配置 `ChatOptions.apnsCertName` 时，登出不会执行推送 Token 解绑。若仅使用 PushKit 推送并需要在登出时解除绑定，请先调用 `ChatClient#unbindPushKitToken`，成功后再登出，不要仅依赖 `logout(true)`。
+1. 初始化时，通过 `ChatOptions.pushKitCertName` 配置 PushKit 证书名称。
+2. 通过 `PKPushRegistry` 的回调获取 Token，并转换为十六进制字符串。
+3. 调用 `ChatClient#bindPushKitToken` 绑定 PushKit Token。`ChatClient#bindDeviceToken` 不用于绑定 PushKit Token。
+
+需要在保持登录状态下单独解绑 PushKit Token 时，调用 `ChatClient#unbindPushKitToken`。
+
+`ChatClient#bindPushKitToken` 和 `ChatClient#unbindPushKitToken` 仅在 iOS 生效，其他平台调用不做任何处理。
+
+:::tip 
+iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过推送 Token 解绑。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再登出，不要仅依赖 `logout(true)`。
 :::
 
 ## 推送高级功能

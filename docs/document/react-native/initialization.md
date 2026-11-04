@@ -45,7 +45,7 @@ ChatClient.getInstance()
 | `isChatRoomOwnerLeaveAllowed` | 是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；<br/> - `false`：不允许。消息是否删除由 `deleteMessagesAsExitChatRoom` 控制。 |
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 
-React Native SDK 5.0.0 不支持自动登录。初始化完成后，应用需主动调用 `ChatClient#loginWithToken` 登录，详见 [登录](login.html)。
+React Native SDK 5.x 不支持自动登录。初始化完成后，应用需主动调用 `ChatClient#loginWithToken` 登录，详见 [登录](login.html)。
 
 ## 初始化后设置监听
 
@@ -108,7 +108,7 @@ SDK 支持在初始化前通过 `ChatOptions#dataSyncType` 配置登录后自动
 
 配置规则如下：
 
-- React Native SDK 5.0.0 未设置 `dataSyncType` 时，沿用原生 SDK 默认值：Android 端默认不自动同步，iOS 端默认同步会话列表。为保证双端行为一致，建议显式配置。
+- React Native SDK 5.0.0 未设置 `dataSyncType` 时，沿用原生 SDK 默认值：Android 5.0.0 默认不自动同步，iOS 5.0.0 默认同步会话列表。为保证双端行为一致，建议显式配置。
 - 需要同步一种数据时，传入对应的 `ChatDataSyncType` 枚举值。
 - 需要同步多种数据时，通过按位或运算符 `|` 组合对应的枚举值。
 - 设置为 `ChatDataSyncType.None` 表示不自动同步。

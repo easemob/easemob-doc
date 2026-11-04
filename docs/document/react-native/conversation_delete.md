@@ -185,7 +185,7 @@ async function deleteLocalMessage(convId: string, msgId: string): Promise<void> 
 
 调用 `ChatContactManager#deleteContact` 删除好友时，可选参数 `keepConversation` 的公开语义为是否保留会话，默认为 `false`。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 Android 端不使用 `keepConversation` 参数，删除好友时会同时删除对应的本地单聊会话及消息。iOS 端将该参数用于控制是否删除会话，与公开的保留语义相反。因此，不能通过该参数实现双端一致的会话保留行为；如需保留历史数据，应在使用前确认目标版本的实际支持情况。
 :::
 

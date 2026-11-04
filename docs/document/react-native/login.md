@@ -183,17 +183,19 @@ try {
 }
 ```
 
-:::tip
-1. 如果应用集成了 FCM 等第三方推送，退出登录时建议将 `logout` 方法的 `unbindDeviceToken` 参数设置为 `true`，使 SDK 同时解绑当前设备的推送 Token。否则，退出登录后仍可能收到当前账号的离线推送通知。
+**推送 Token 解绑**
+
+如果应用集成了 FCM 等第三方推送，退出登录时建议将 `logout` 方法的 `unbindDeviceToken` 参数设置为 `true`，使 SDK 同时解绑当前设备的推送 Token。否则，退出登录后仍可能收到当前账号的离线推送通知。
 
 如果因网络异常导致推送 Token 解绑失败，`logout` 会返回失败。应用可以提示用户解绑失败及继续退出后可能仍收到推送的风险。若用户确认继续退出，可以将 `unbindDeviceToken` 设置为 `false`，再次调用 `logout`，仅退出 IM 账号而不解绑推送 Token。网络恢复后，应在适当时机处理遗留的推送 Token 解绑问题，不建议通过后台线程无限重试。
 
-2. 调用 `ChatClient#logout` 时，应等待 Promise 成功完成后，再调用 `ChatClient#loginWithToken` 登录其他账号或执行依赖退出完成的操作。若 Promise 拒绝，表示退出或推送 Token 解绑失败，应用应根据错误信息和业务场景进行处理。
+:::tip 
+React Native SDK 5.x 的 iOS 端在未配置 `ChatOptions#apnsCertName` 时，会按不解绑推送 Token 的方式退出，即使 `unbindDeviceToken` 为 `true`。若仅集成 PushKit 推送且需要解绑 Token，应在退出前调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::
 
-:::notice
-React Native SDK 5.x 的 iOS 端在未配置 `ChatOptions#apnsCertName` 时，会按不解绑推送 Token 的方式退出，即使 `unbindDeviceToken` 为 `true`。若仅集成 PushKit 推送且需要解绑 Token，应在退出前调用 `ChatClient#unbindPushKitToken`，并处理解绑结果。
-:::
+**退出结果处理**
+
+调用 `ChatClient#logout` 时，应等待 Promise 成功完成后，再调用 `ChatClient#loginWithToken` 登录其他账号或执行依赖退出完成的操作。若 Promise 拒绝，表示退出或推送 Token 解绑失败，应用应根据错误信息和业务场景进行处理。
 
 ## 账号切换
 

@@ -250,7 +250,7 @@ try {
 }
 ```
 
-:::notice
+:::tip
 React Native SDK 5.x 在 Android 端的白名单变更回调中无法正确返回 `members`。请将 `ChatGroupEventListener#onAllowListAdded` 和 `ChatGroupEventListener#onAllowListRemoved` 作为变更通知，按需重新查询白名单；iOS 端可正常读取该字段。
 :::
 

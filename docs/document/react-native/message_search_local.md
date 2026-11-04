@@ -131,7 +131,7 @@ try {
 | `from` | `string` | 否 | 发送方用户 ID，不是消息 ID；不限发送方时显式传空字符串。 |
 | `direction` | `ChatSearchDirection` | 否 | 默认 `UP`，可设为 `DOWN`。 |
 
-:::notice
+:::tip
 调用按消息类型搜索的接口时，请显式传入 `from`。不限制发送方时传入空字符串，避免 Android 端因缺少该字段而调用失败。
 :::
 

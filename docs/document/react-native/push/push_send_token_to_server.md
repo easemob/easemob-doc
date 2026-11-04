@@ -76,7 +76,7 @@ try {
 
 在 iOS 端，当前用户已登录且初始化时已配置 `ChatOptions.apnsCertName` 的情况下，调用 `ChatClient#logout(true)` 会依次解绑普通推送 Token 和 PushKit Token，然后退出登录。任一步解绑失败，都会中断后续登出流程。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 iOS 端未配置 `ChatOptions.apnsCertName` 时，登出会跳过 Token 解绑，即使 `unbindDeviceToken` 为 `true`。若仅使用 PushKit 推送且需要在登出时解绑，请先调用 `ChatClient#unbindPushKitToken`，确认成功后再退出登录。
 :::
 

@@ -317,7 +317,7 @@ function removeRoomListener(): void {
 }
 ```
 
-:::notice
+:::tip
 React Native SDK 5.x 的以下事件字段存在使用限制：
 
 - `ChatRoomEventListener#onMemberRemoved` 的 `reason` 声明为可选字符串，但原生端实际传入数值，SDK 未导出对应原因枚举，不应按字符串或其他平台枚举判断。

@@ -68,7 +68,7 @@ async function insertLocalNotice(groupId: string): Promise<void> {
 }
 ```
 
-:::notice
+:::tip
 应避免重复插入已有 `msgId` 或 `localMsgId` 的消息。当前 Android 桥接未将底层 `insertMessage` 的布尔返回值传回 JavaScript，因此 Promise 正常完成不能单独证明消息已写入；关键迁移流程应在插入后通过 `getMessage` 查询核对结果，并刷新业务界面。
 :::
 

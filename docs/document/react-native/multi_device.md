@@ -277,17 +277,16 @@ async function kickAllDevices(userId: string, token: string): Promise<void> {
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
-你需要先实现 `ChatMultiDeviceEventListener` 接口监听其他设备上的操作，然后调用 `ChatClient#addMultiDeviceListener` 方法添加多设备监听。
+你需要先实现 `ChatMultiDeviceEventListener` 接口监听其他设备上的操作，然后调用 `ChatClient#addMultiDeviceListener` 方法添加多设备监听。**登录成功后才能接收多设备事件。**
 
-若当前设备因同端设备数量达到上限而被踢下线，SDK 会通过 `ChatConnectEventListener#onDisconnected` 回调通知；当前账号在其他设备上的好友、群组、消息话题和会话操作，则通过 `ChatMultiDeviceEventListener` 的对应回调通知。聊天室不产生会话管理类多设备事件，但聊天室消息仍会同步。
+不同类型的通知通过以下回调接收：
+
+- 当前设备因同端设备数量达到上限而被踢下线时，通过 `ChatConnectEventListener#onDisconnected` 接收通知。
+- 当前账号在其他设备上进行好友、群组、消息话题和会话操作时，通过 `ChatMultiDeviceEventListener` 的对应回调接收通知。
+
+多设备事件不包含聊天室操作相关事件，仅支持聊天室中发送和接收消息的同步。
 
 :::tip
-1. 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
-
-2. 登录成功后才能接收多设备事件。
-:::
-
-:::notice
 React Native SDK 5.x 的 iOS 桥接层因回调方法名与原生协议不匹配，未能将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`。请勿依赖该回调刷新 iOS 消息话题界面，可按需重新查询消息话题列表或详情，详见 [管理消息话题](thread.html)。Android 端可正常使用该回调。
 :::
 

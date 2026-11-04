@@ -134,7 +134,7 @@ try {
 
 `deleteContact` 的第二个参数 `keepConversation` 的公开含义为是否保留本地会话，默认值为 `false`，但当前版本存在以下平台差异：
 
-:::notice
+:::tip
 React Native SDK 5.x 的 Android 端不使用 `keepConversation` 参数，删除好友时会同时删除对应的本地单聊会话及消息。iOS 端将该参数用于控制是否删除会话：`true` 表示删除，`false` 表示保留，与公开的保留语义相反。因此，不能通过该参数实现双端一致的会话保留行为。
 :::
 

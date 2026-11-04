@@ -21,7 +21,7 @@
 
 单设备登录时，消息话题所属群组的所有成员均会收到 `ChatMessageEventListener#onChatMessageThreadCreated` 回调；Android 端多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventListener#onThreadEvent` 回调，回调事件为 `ChatMultiDeviceEvent.THREAD_CREATE`。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 iOS 端无法正常将消息话题多设备事件转发至 `ChatMultiDeviceEventListener#onThreadEvent`，请勿依赖该回调刷新消息话题界面。应用可按需重新查询消息话题列表或详情。此限制不影响 `ChatMessageEventListener` 中的消息话题事件回调。
 :::
 
@@ -131,7 +131,7 @@ try {
 
 被踢出消息话题的成员会收到 `ChatMessageEventListener#onChatMessageThreadUserRemoved` 回调。Android 端多设备登录时，执行踢人操作的成员的其他设备会同时收到 `ChatMultiDeviceEventListener#onThreadEvent` 回调，回调事件为 `ChatMultiDeviceEvent.THREAD_KICK`。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 iOS 端未正确传递消息话题 ID 和成员用户 ID，不能按该接口的公开参数顺序正常完成移除操作。当前版本的 iOS 应用可通过业务服务器调用 [移出消息话题成员接口](/document/server-side/group_thread_member_remove.html) 完成操作。不要通过交换公开接口参数规避该问题。
 :::
 

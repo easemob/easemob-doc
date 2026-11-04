@@ -151,24 +151,27 @@ final String? currentUser =
 - （默认）`true`：解绑设备推送 Token。
 - `false`：不解绑设备推送 Token。
 
-通过异步方法的返回结果获取退出结果：
+示例代码如下：
 
 ```dart
 try {
   await ChatClient.getInstance.logout(true);
   // 退出成功。
 } on ChatError catch (e) {
-  // 退出失败。
+  // 退出失败，根据错误码和错误信息处理。
 }
 ```
 
 :::tip
-1. 如果应用集成了 FCM 等第三方推送，退出登录时建议将 `logout` 方法的 `unbindDeviceToken` 参数设置为 `true`，使 SDK 同时解绑当前设备的推送 Token。否则，退出登录后仍可能收到当前账号的离线推送通知。
-
-如果因网络异常导致推送 Token 解绑失败，`logout` 会抛出 `ChatError`。应用可以提示用户解绑失败及继续退出后可能仍收到推送的风险。若用户确认继续退出，可以将 `unbindDeviceToken` 设置为 `false`，再次调用 `logout`，仅退出 IM 账号而不解绑推送 Token。网络恢复后，应在适当时机处理遗留的推送 Token 解绑问题，不建议通过后台任务无限重试。
-
-2. 调用异步退出方法 `logout` 时，应等待该方法正常返回后，再调用 `loginWithToken` 登录其他账号或执行依赖退出完成的操作。若抛出 `ChatError`，表示退出或推送 Token 解绑失败，应用应根据错误码和业务场景进行处理。
+- 建议退出时解绑设备推送 Token，否则退出后仍可能收到当前账号的离线推送通知。
+- 请等待 `logout` 正常返回后，再登录其他账号或执行依赖退出完成的操作。
 :::
+
+**推送 Token 解绑失败处理**
+
+若因网络异常导致推送 Token 解绑失败，`logout` 会抛出 `ChatError`。应用应提示用户失败原因，并说明继续退出后仍可能收到当前账号的离线推送通知。
+
+若用户选择继续退出，可调用 `logout(false)`，仅退出 IM 账号而不解绑推送 Token。后续应结合网络恢复情况和账号登录状态，处理遗留的 Token 解绑问题。其他退出错误应根据错误码和业务场景处理。
 
 ## 账号切换
 

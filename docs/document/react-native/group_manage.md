@@ -177,7 +177,7 @@ try {
 
 React Native SDK 5.0.0 可通过 `ChatGroup.configs` 读取群配置，但 Android 端返回的群对象不包含 `inviteNeedConfirm`，该字段会被填充为 `false`，不能据此判断服务端实际配置。
 
-:::notice
+:::tip
 React Native SDK 5.x 的 Android 端调用 `ChatGroupManager#declineInvitation` 时，邀请者 ID 未传递至原生接口。使用手动拒绝邀请流程前，请验证目标版本能否正确拒绝邀请并通知邀请人。
 :::
 
@@ -547,7 +547,7 @@ function removeGroupListener(): void {
 }
 ```
 
-:::notice
+:::tip
 - React Native SDK 5.x 的 Android 端白名单变更事件未提供 `members` 字段。请将回调作为变更通知，按需重新查询白名单。
 - `ChatGroupEventListener#onSharedFileAdded` 的 `sharedFile` 声明为 `string`，但双端实际返回文件信息对象。请通过 [共享文件列表接口](group_attributes.html#从服务器获取共享文件) 获取文件信息，不将该字段直接作为文件 ID。
 - iOS 端邀请事件的 `reason`、自动入群事件的 `inviteMessage` 可能缺失；`onRequestToJoinAccepted` 的 `accepter` 为群主 ID，不应据此判断实际审批人。

@@ -167,7 +167,7 @@ async function fetchGlobalPushRule(): Promise<void> {
 }
 ```
 
-:::notice
+:::tip
 `remindType`、`expireTimestamp`、`startTime` 和 `endTime` 均为可选字段，读取时应兼容 `undefined`。Android 端不返回值为 `0` 的 `expireTimestamp`；iOS 端可返回 `0`。不要将缺少字段直接解释为指定规则已启用，也不要用全局查询结果中的会话字段定位具体会话。
 
 该说明同样适用于下方单个和批量会话查询。批量查询时应使用返回 Map 的键匹配会话。

@@ -223,7 +223,7 @@ await sendMessageWithCallback(groupMessage);
 
 默认情况下，调用 `ChatManager#sendMessage` 后，SDK 会自动将本地附件上传至环信服务器；接收方也可由 SDK 自动下载附件。你可以通过 `ChatOptions#serverTransfer` 控制附件是否由 SDK 自动传输，默认值为 `true`。消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
-:::notice
+:::tip
 附件路径必须在消息发送完成前持续可被原生层访问。对于相册、文件选择器或临时目录返回的资源，应确认访问权限和文件生命周期；不要把仅能在 JavaScript 层解析的资源标识直接作为附件路径。
 :::
 
@@ -340,7 +340,7 @@ try {
 }
 ```
 
-:::notice
+:::tip
 React Native SDK 5.x 的 Android 桥接会将 `isGif` 显式传给底层 SDK；iOS 桥接通过本地文件创建图片消息体，不单独传递该标记。请确保 iOS 侧传入的文件本身是有效的 GIF 文件，并在双端验证动画展示效果。
 :::
 
