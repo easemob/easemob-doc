@@ -1,6 +1,6 @@
 # HarmonyOS IM SDK 更新日志
 
-## v5.0.0 Dev 2026-9-24（开发版）
+## v5.0.0 Dev 2026-10-22（开发版）
 
 本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [HarmonyOS IM SDK 1.x 到 5.0.0 迁移指南](migration_guide.html)。
 
