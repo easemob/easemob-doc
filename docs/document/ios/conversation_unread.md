@@ -17,7 +17,7 @@
 
 会话未读数清零的核心流程如下：
 
-![](/images/ios/conversation_unread_count_clear.png)
+![](/images/android/conversation_unread_count_clear.png)
 
 会话未读数清零的基本步骤如下：
 

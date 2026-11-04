@@ -23,7 +23,7 @@
 
 单聊消息送达回执的实现流程如下：
 
-![img](/images/ios/message_delivery_receipt.png)
+![img](/images/android/message_delivery_receipt.png)
 
 实现该功能的基本步骤如下：
 
@@ -42,7 +42,7 @@ iOS SDK 使用 `sendMessageReadReceipts` 统一发送单聊和群聊消息的已
 
 消息已读回执的实现流程如下：
 
-![img](/images/ios/message_read_receipt.png)
+![img](/images/android/message_read_receipt.png)
 
 实现该功能的基本步骤如下：
 

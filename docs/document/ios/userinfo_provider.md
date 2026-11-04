@@ -28,7 +28,7 @@
 
 内存更新流程如下：
 
-![img](/images/ios/memory_update_userinfo_mgmt.png)
+![img](/images/android/memory_update_userinfo_mgmt.png)
 
 ## 前提条件
 
