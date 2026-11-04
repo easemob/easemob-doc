@@ -142,7 +142,13 @@ Future<void> fetchUsersInfo() async {
 }
 ```
 
-开启 [用户信息自动管理功能](userinfo_provider.html) 后，如果原生 SDK 获取到的用户属性更新时间戳晚于本地数据，会更新原生 SDK 本地数据并通过 `ChatUserInfoEventHandler#onUserInfoUpdate` 通知业务层。
+以下用户属性更新事件自 SDK 4.22.0 开始支持。获取成功并不一定触发用户属性更新事件。SDK 只会将未命中 Dart 缓存或缓存已过期的用户 ID 传给原生 SDK；命中有效 Dart 缓存的读取不会因本次读取触发原生属性更新事件。对于实际请求到服务端的用户，原生 SDK 会比较服务端返回的用户属性更新时间与本地缓存：
+
+- 其他用户的属性解析成功，且服务端更新时间晚于本地缓存时，触发 `ChatUserInfoEventHandler#onUserInfoUpdate`。
+- 当前登录用户自己的属性满足上述更新条件时，触发 `ChatUserInfoEventHandler#onSelfUserInfoUpdate`。
+- 服务端更新时间不晚于本地缓存，或未返回有效的用户属性更新时间时，不会因本次查询触发更新事件。
+
+上述主动查询及其更新事件不要求开启 `ChatOptions.enableUserInfo: true`。业务侧可直接使用 Future 成功返回的结果刷新界面，无需等待更新事件。监听方式详见 [监听用户属性变更](#监听用户属性变更)。
 
 ### 从本地内存读取用户属性
 
@@ -271,9 +277,10 @@ Future<void> fetchSubscribedUsers() async {
 
 其他用户的属性可能在以下场景中更新：
 
-1. **主动获取更新**：主动调用 [从服务端获取用户属性](#从服务端获取用户的属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 的接口时，若服务端数据较新，原生 SDK 更新本地数据并触发事件。
-2. **消息携带更新**：初始化 SDK 时启用 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理) 后，收到消息时若发送方属性较新，原生 SDK 自动获取最新数据并触发事件。该机制对好友与非好友发送方均生效。
-3. **订阅用户变更（仅限非好友）**：已调用 `subscribeUsersInfo` 的非好友用户属性发生变化时触发事件。
+1. **主动获取用户属性**：自 SDK 4.22.0 开始，调用 [`ChatUserInfoManager#fetchUserInfoById`](#从服务端获取用户的属性) 时，若请求实际到达原生 SDK，且其他用户的属性解析成功、服务端更新时间晚于本地缓存，则触发 `onUserInfoUpdate`。该主动查询不要求开启用户信息自动管理。命中有效 Dart 缓存的读取不会因本次读取触发该事件。
+2. **获取群成员信息时补拉用户属性**：自 SDK 4.22.0 开始，调用 [`ChatGroupManager#fetchGroupMembersInfo`](group_manage.html#获取群成员列表) 时，只有开启用户信息自动管理，且本地没有成员属性缓存或昵称、头像都为空，SDK 才补拉用户属性。补拉结果满足上述更新条件时，触发 `onUserInfoUpdate`；已有昵称或头像时直接使用缓存，不会检查服务端属性是否有更新。
+3. **消息携带更新**：初始化 SDK 时启用 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理) 后，收到消息时若发送方属性较新，原生 SDK 自动获取最新数据并触发事件。该机制对好友与非好友发送方均生效。
+4. **订阅用户变更（仅限非好友）**：已调用 `subscribeUsersInfo` 的非好友用户属性发生变化时触发事件。
 
 **特殊说明**
 

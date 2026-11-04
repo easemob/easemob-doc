@@ -587,6 +587,8 @@ ChatClient.getInstance()
 
 - 自 1.11.0 版本开始，你可调用 `fetchMemberInfoListFromServer` 方法从服务器获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、加群时间和成员角色。
 
+自 SDK 1.18.0 开始，开启用户信息自动管理（`ChatOptions.enableUserInfo = true`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```typescript
 const groupId = '<YOUR_GROUP_ID>';
 const cursor = ''; // 开始分页的位置，第一页为空，后续页面请使用第一页返回的结果

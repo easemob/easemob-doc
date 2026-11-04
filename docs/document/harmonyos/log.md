@@ -23,7 +23,8 @@ ChatClient.getInstance().init(context, options);
 打开以下目录，获取本地日志。
 
 ```
-hdc file recv "/data/app/el2/100/base/{应用包名}/haps/{模块名}/{应用标识}/core_log"
+hdc file recv /data/app/el2/100/base/{应用包名}/{App Key}/core_log
+
 ```
 
-获取本地日志时，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{模块名}` 替换为应用的模块名，例如 `entry`；`{应用标识}` 根据初始化 SDK 时使用的应用标识，替换为环信 App Key 或 App ID。
+获取本地日志时，需要将 `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`；`{App Key}` 根据初始化 SDK 时使用的应用标识，替换为环信 App Key 或 App ID。

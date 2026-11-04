@@ -187,6 +187,8 @@ try {
 
 - 自 SDK 4.22.0 开始，获取群成员列表时除了成员的用户 ID、成员角色和加入群组的时间等字段，还包括 [群成员名片](group_namecard.html)。
 
+自 SDK 4.22.0 开始，开启用户信息自动管理（`ChatOptions.enableUserInfo: true`）后，原生 SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```dart
 try {
   final ChatCursorResult<GroupMemberInfo> result =

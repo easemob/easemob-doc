@@ -21,6 +21,8 @@
 
 调用 `fetchGroupMemberInfoListFromServerWithGroupId` 分页获取群成员信息。返回的成员信息为 `EMGroupMemberInfo`，包含用户 ID、入群时间、角色、群名片、昵称和头像 URL。
 
+开启用户信息自动管理（`EMOptions.enableUserInfo = YES`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```swift
 EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(
     withGroupId: "groupId",
