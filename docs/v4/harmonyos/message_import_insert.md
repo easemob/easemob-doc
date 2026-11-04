@@ -2,14 +2,21 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM HarmonyOS SDK 如何在本地导入和插入消息。
+本文介绍环信即时通讯 IM HarmonyOS SDK 如何将消息导入本地数据库，以及如何在本地会话中插入消息。
+
+这些操作仅更新当前设备上的本地消息和会话数据，不会将消息发送给会话对端，也不会向服务器上传消息或同步到当前账号的其他设备。常见使用场景包括迁移历史消息、恢复本地消息记录，以及插入撤回提示、入群通知等仅用于本地展示的消息。
 
 ## 技术原理
 
-环信即时通讯 IM HarmonyOS SDK 支持提供 `ChatManager` 类和 `Conversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
+HarmonyOS SDK 提供以下方式：
 
-- `ChatManager#importMessages`：批量导入消息到数据库；
-- `Conversation#insertMessage`：在本地指定会话中插入一条消息。
+- 批量导入消息：调用 `ChatManager#importMessages`，将当前用户发送或接收的多条消息导入本地数据库，但不会更新对应会话的最新消息等会话信息。
+- 向指定会话插入消息：调用 `Conversation#insertMessage`，按照消息中的 Unix 时间戳将消息插入指定会话，并更新会话的最新消息等会话信息。消息的会话 ID 必须与目标会话 ID 一致。
+- 直接保存消息：调用 `ChatManager#saveMessage`，将消息保存到本地数据库；若对应会话不存在，SDK 会自动创建会话。
+
+批量导入消息时，如果对应会话尚无最新消息记录，从本地数据库加载会话且过滤空会话时，该会话会被过滤，不会出现在返回的会话列表中。SDK 默认不加载空会话。
+
+因此，建议按会话划分待导入的消息，将每个会话中按消息时间排序的最新一条消息预留出来，其余消息通过 `ChatManager#importMessages` 批量导入，待批量导入完成后，再通过对应会话的 `Conversation#insertMessage` 插入预留的消息，以更新会话信息。插入前应获取或创建对应会话。“最新”以 SDK 当前消息排序配置使用的时间戳为准。例如，同一个会话有 10:00、10:01 和 10:02 三条待导入的消息，可先通过 `ChatManager#importMessages` 导入前两条，再通过 `Conversation#insertMessage` 插入 10:02 的消息。不要先将三条消息全部批量导入，再重复插入 10:02 的消息，否则 SDK 会因消息已存在而直接返回，不会更新会话信息。
 
 ## 前提条件
 
@@ -22,7 +29,7 @@
 
 ### 批量导入消息到数据库
 
-如需在本地会话中批量插入消息，可以构造 `ChatMessage` 对象并调用 `ChatManager#importMessages`。当前登录用户只能导入自己发送或接收的消息；导入后，SDK 会按照消息中的时间戳将其添加到对应会话。建议每次导入不超过 1,000 条消息。
+如需在本地会话中批量插入消息，可以构造 `ChatMessage` 对象并调用 `ChatManager#importMessages`。当前登录用户只能导入自己发送或接收的消息；导入后，消息保存在本地数据库中，但不会更新对应会话的最新消息等会话信息。建议每次导入不超过 1,000 条消息。
 
 自 HarmonyOS SDK 1.14.0 起，可以通过 `ChatOptions#setRegardImportedMsgAsRead` 配置是否将导入的消息视为已读。该配置默认为 `false`，设置为 `true` 时，导入的消息将被视为已读。该配置仅在初始化 SDK 前设置有效，可以调用 `ChatOptions#regardImportedMsgAsRead` 获取当前配置。
 
