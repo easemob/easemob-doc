@@ -353,7 +353,7 @@ projects:
                 text: REST
                 link: /document/server-side/message_modify.html       
           - text: 消息回执
-            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
+            desc: 单聊会话支持消息送达回执和消息已读回执。群聊会话只支持消息已读回执。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -1242,9 +1242,9 @@ projects:
           - text: 回调
             link: /document/server-side/callback_presending.html
           - text: 多设备管理
-            link: /document/server-side/callback_login_logout.html 
+            link: /document/android/multi_device.html 
           - text: 用户全局禁言
-            link: /document/android/multi_device.html                                      
+            link: /document/server-side/user_global_mute_overview.html                                    
   - title: UIKit
     features:
       - title: 单/群聊
