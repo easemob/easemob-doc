@@ -8,7 +8,7 @@
 
 1. 登录 [环信控制台](https://console.easemob.com/user/login)。
 2. 选择页面上方的 **应用管理**。在弹出的应用列表页面，单击你的应用的测试版或正式版的 App Key。
-3. 选择 **增值服务 > 消息推送 > 离线推送**。
+3. 选择 **即时通讯 > 推送配置 > 离线推送配置**。
 4. 点击 **免费开通**。
 
 ![image](/images/android/push/push_advanced_feature_enable.png)

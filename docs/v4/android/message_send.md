@@ -69,6 +69,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
 
+由 SDK 自动传输附件时，请确保本地文件或 URI 在通过 `EMMessage.setMessageStatusCallback` 设置的 `EMCallBack` 的 `onSuccess` 或 `onError` 回调返回前持续可读，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证读取权限和文件生命周期，建议先复制到应用私有目录，再使用复制后的本地文件发送。
+
 ### 发送语音消息
 
 1. 发送语音消息前，在应用层录制语音文件。

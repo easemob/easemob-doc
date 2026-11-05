@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与原生 SDK 本地内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与原生 SDK 本地缓存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
 该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、好友备注和群成员名片的场景。
 
@@ -32,7 +32,7 @@
 
 开始接入前，请确保满足以下条件：
 
-- 已集成 Flutter SDK 5.0.0，详见 [快速开始](quickstart.html)。请在初始化时开启本功能，在登录后读取用户属性或进行订阅。
+- 已集成 Flutter SDK，详见 [快速开始](quickstart.html)。请在初始化时开启本功能，在登录后读取用户属性或进行订阅。
 - 已了解即时通讯 IM 的相关使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 开启用户信息自动管理
@@ -58,7 +58,7 @@ Future<void> initializeChatSdk() async {
 
 SDK 通过 `ChatUserInfoEventHandler` 监听用户属性更新事件：
 
-- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入原生 SDK 本地内存后触发。
+- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入原生 SDK 本地缓存后触发。
 - `onUserInfoUpdate`：其他用户的属性更新并写入原生 SDK 本地数据后触发，参数类型为 `List<ChatUserInfo>`。可能触发更新的场景包括：
   - 开启用户信息自动管理后，收到消息时发现发送方的用户属性已更新。
   - 主动 [从服务器获取用户属性](userprofile.html#从服务端获取用户的属性)，请求实际到达原生 SDK，且获取到较新的属性数据。若命中 Dart 层缓存，本次读取不会触发新的原生属性更新事件。
@@ -192,7 +192,7 @@ void unregisterMessageEventHandler() {
 `senderInfo` 是原生消息转换为 Dart 对象时的发送方信息快照，可能为 `null`，其中各字段也可能为空。后续用户属性或群成员名片更新事件不会自动改写已有 `ChatMessage` 对象。收到更新事件后，应使用事件数据刷新界面；如需读取当前本地用户属性，可调用 `getLocalUserInfoByIds`，群成员名片则通过 `ChatGroupManager.getGroupNamecard` 读取，详见 [管理群成员名片](group_namecard.html)。
 :::
 
-## 从本地内存读取用户属性
+## 从本地缓存读取用户属性
 
 调用 `ChatUserInfoManager.getLocalUserInfoByIds` 从原生 SDK 的本地数据读取一个或多个用户的属性。该方法接收 `List<String>`，返回 `Future<Map<String, ChatUserInfo>>`；Map 的键为用户 ID，值为对应的用户属性。本地没有某个用户的数据时，返回的 Map 中可能不包含该用户 ID。该方法不会发起网络请求，也不会读取或更新 `fetchUserInfoById` 使用的 Dart 层缓存。
 
@@ -263,7 +263,7 @@ Future<void> getLocalUserInfo() async {
 
 #### 功能开启后，SDK 会自动执行哪些操作？
 
-开启后，原生 SDK 会在登录成功后同步当前登录用户的用户属性；发送消息时携带发送方信息的更新时间；接收消息时比较消息与本地内存中的时间戳；检测到数据较新或本地缺少数据时，自动从服务器获取最新信息、更新本地内存并通知 Flutter 业务层。
+开启后，原生 SDK 会在登录成功后同步当前登录用户的用户属性；发送消息时携带发送方信息的更新时间；接收消息时比较消息与本地缓存中的时间戳；检测到数据较新或本地缺少数据时，自动从服务器获取最新信息、更新本地缓存并通知 Flutter 业务层。
 
 #### ChatMessage#senderInfo 一定是最新数据吗？
 
@@ -277,9 +277,9 @@ Future<void> getLocalUserInfo() async {
 
 `getLocalUserInfoByIds` 只查询原生 SDK 的本地数据，不发起网络请求，也不更新 Dart 用户属性缓存。`fetchUserInfoById` 会先检查 Dart 层缓存是否在 `expireTime` 指定的有效期内；缓存缺失或过期时才通过原生层获取用户属性。用户属性更新事件不会自动刷新这份 Dart 缓存；如需绕过已有缓存主动获取服务端数据，应先调用 `clearUserInfoCache()`。
 
-#### 功能开启后需要自己维护原生 SDK 的本地内存吗？
+#### 功能开启后需要自己维护原生 SDK 的本地缓存吗？
 
-通常不需要。开启 `enableUserInfo` 后，原生 SDK 会负责用户信息同步、更新时间比较、本地内存更新和事件通知。Flutter 业务层仍需要维护自己的 UI 状态，并在事件到达时刷新展示数据。如果业务还使用 `fetchUserInfoById` 的 Dart 缓存，需要另外处理该缓存的有效期和清理，不能将原生自动管理等同于 Dart 缓存自动更新。
+通常不需要。开启 `enableUserInfo` 后，原生 SDK 会负责用户信息同步、更新时间比较、本地缓存更新和事件通知。Flutter 业务层仍需要维护自己的 UI 状态，并在事件到达时刷新展示数据。如果业务还使用 `fetchUserInfoById` 的 Dart 缓存，需要另外处理该缓存的有效期和清理，不能将原生自动管理等同于 Dart 缓存自动更新。
 
 ## 相关功能
 
@@ -309,7 +309,7 @@ Future<void> getLocalUserInfo() async {
 | [`subscribeUsersInfo`](#监听用户属性更新) | `ChatUserInfoManager` | `Future<void>` | 订阅指定非好友用户的属性更新。 |
 | [`unsubscribeUsersInfo`](#监听用户属性更新) | `ChatUserInfoManager` | `Future<void>` | 取消订阅指定非好友用户的属性更新。 |
 | [`senderInfo`](#通过消息获取发送方信息) | `ChatMessage` | `ChatMessageSenderInfo?` | 获取收到消息转换为 Dart 对象时的发送方信息快照。 |
-| [`getLocalUserInfoByIds`](#从本地内存读取用户属性) | `ChatUserInfoManager` | `Future<Map<String, ChatUserInfo>>` | 从原生 SDK 本地读取用户属性，不请求网络，也不更新 Dart 缓存。 |
-| [`fetchUserInfoById`](#从本地内存读取用户属性) | `ChatUserInfoManager` | `Future<Map<String, ChatUserInfo>>` | 优先复用有效 Dart 缓存，缓存缺失或过期时通过原生接口获取用户属性。 |
-| [`clearUserInfoCache`](#从本地内存读取用户属性) | `ChatUserInfoManager` | `void` | 清理 Dart 层用户属性缓存，不删除原生 SDK 本地数据。 |
+| [`getLocalUserInfoByIds`](#从本地缓存读取用户属性) | `ChatUserInfoManager` | `Future<Map<String, ChatUserInfo>>` | 从原生 SDK 本地读取用户属性，不请求网络，也不更新 Dart 缓存。 |
+| [`fetchUserInfoById`](#从本地缓存读取用户属性) | `ChatUserInfoManager` | `Future<Map<String, ChatUserInfo>>` | 优先复用有效 Dart 缓存，缓存缺失或过期时通过原生接口获取用户属性。 |
+| [`clearUserInfoCache`](#从本地缓存读取用户属性) | `ChatUserInfoManager` | `void` | 清理 Dart 层用户属性缓存，不删除原生 SDK 本地数据。 |
 | [`updateUserInfo`](#用户属性与用户信息) | `ChatUserInfoManager` | `Future<ChatUserInfo>` | 更新当前登录用户的多个用户属性。 |

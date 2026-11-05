@@ -4,7 +4,7 @@
 
 环信即时通讯 IM HarmonyOS SDK 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与本地缓存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
-该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片的场景。
+该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、好友备注、群成员名片的场景。
 
 **本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
 
@@ -103,6 +103,16 @@ ChatClient.getInstance().userInfoManager()?.removeListener(listener);
 
 接收方收到该消息后，可以通过 `ChatMessage#getSenderInfo()` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。如果接收方已为该发送方设置好友备注，还可通过 `senderInfo.remark` 获取该备注。好友备注属于接收方的私有好友数据，由接收方 SDK 从本地好友信息中读取，不会由消息发送方随消息发送，也不会传递给对方。
 
+`ChatMessage#getSenderInfo()` 可能返回 `undefined`；获取到 `ChatSenderInfo` 后可读取以下字符串属性。
+
+| 属性 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `userId` | `string` | 消息发送方的用户 ID。 |
+| `nickname` | `string` | 发送方的昵称。 |
+| `avatarUrl` | `string` | 发送方的头像 URL。 |
+| `remark` | `string` | 当前用户为发送方设置的私有好友备注，不会随消息发送给对方。 |
+| `namecard` | `string` | 发送方在当前群组中的群成员名片。 |
+
 ```typescript
 function handleReceivedMessages(messages: Array<ChatMessage>): void {
   messages.forEach((message: ChatMessage) => {
@@ -121,7 +131,7 @@ function handleReceivedMessages(messages: Array<ChatMessage>): void {
 `ChatMessage#getSenderInfo()` 返回的是当前本地可用的发送方信息；消息中没有可用的发送方信息时返回 `undefined`。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地缓存更新后，通过 `UserInfoListener` 的相关事件通知业务层。
 :::
 
-## 从本地内存读取用户属性
+## 从本地缓存读取用户属性
 
 你可以调用 `UserInfoManager#getUserInfoById` 从 SDK 本地数据库缓存读取一个或多个用户的属性。该方法接受单个用户 ID 或用户 ID 数组，异步返回以用户 ID 为键、`UserInfo` 为值的 `Map`，不会发起网络请求。传入空字符串或空数组时，Promise 会被拒绝，并返回 `ChatError.USER_ILLEGAL_ARGUMENT`。
 
@@ -180,7 +190,7 @@ const userInfo: UserInfo | undefined = ChatClient.getInstance()
 
 `UserInfoManager#getUserInfoById` 和 `getUserInfoWithUserId` 仅查询本地缓存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用 `UserInfoManager#fetchUserInfoById` 主动从服务端获取。
 
-#### 功能开启后需自己维护内存吗？
+#### 功能开启后需自己维护缓存吗？
 
 通常不需要。开启 `ChatOptions#setEnableUserInfo(true)` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地缓存更新和事件通知。业务层通常只需读取本地缓存，并在相关事件中刷新界面。
 

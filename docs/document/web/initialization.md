@@ -159,6 +159,10 @@ console.log(contacts);
 console.log(joinedGroups);
 ```
 
+## 开启用户信息自动管理
+
+用户信息自动管理与联系人自动同步相互独立。`enableUserInfoSync` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |

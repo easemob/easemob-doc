@@ -37,7 +37,6 @@ SDK 提供 `EMGroupManagerDelegate`，用于监听群成员名片更新事件。
 当群成员名片发生变更并同步到本地内存后，SDK 会触发 `EMGroupManagerDelegate#onUserGroupNamecardChanged` 事件。该事件适用于以下场景：
 
 - 当前登录用户更新群成员名片后，群内其他 **在线成员** 收到变更通知。
-- 调用服务端接口获取到最新群成员信息并更新本地内存后。
 - 开启 `EMOptions#enableUserInfo` 后，接收方因接收消息触发自动同步并更新本地内存后。
 
 - 添加监听：

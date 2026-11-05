@@ -118,7 +118,7 @@ client.chatManager.addEventHandler('message-listener', {
 `message.sender` 返回的是当前本地可用的发送方信息，不保证一定是当时的最新信息。若初始化 SDK 时开启了 `enableUserInfoSync`，且该消息触发了用户信息同步更新，最新数据会在 SDK 完成缓存更新后，通过 `onUserInfoUpdated` 等相关事件通知业务层。
 :::
 
-## 从本地内存读取用户属性
+## 从本地缓存读取用户属性
 
 如果你的业务场景是读取当前内存中的好友属性，可调用 `contactManager.getContacts` 获取当前好友列表视图：
 
@@ -194,6 +194,6 @@ contacts.forEach(contact => {
 | API 名称                                         | 所属模块/类       | 说明                                                         |
 | ------------------------------------------------ | ----------------- | ------------------------------------------------------------ |
 | [`init`](#开启用户信息自动管理)                  | `ChatClient`      | 初始化 SDK，并通过 `enableUserInfoSync` 开启用户信息自动管理。 |
-| [`getContacts`](#从本地内存读取用户属性)         | `ContactManager`  | 读取当前内存中的好友列表及其用户属性视图。                   |
-| [`getUserInfoByUserId`](#从本地内存读取用户属性) | `UserInfoManager` | 从服务端获取指定用户的最新用户属性。                         |
+| [`getContacts`](#从本地缓存读取用户属性)         | `ContactManager`  | 读取当前内存中的好友列表及其用户属性视图。                   |
+| [`getUserInfoByUserId`](#从本地缓存读取用户属性) | `UserInfoManager` | 从服务端获取指定用户的最新用户属性。                         |
 | [`updateOwnInfo`](#用户属性与用户信息)           | `UserInfoManager` | 更新当前登录用户的用户属性。                                 |

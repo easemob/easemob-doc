@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。iOS SDK 支持为单聊、群聊和聊天室会话添加或移除标记。
+会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。iOS SDK 支持为单聊和群聊会话添加或移除标记；不支持聊天室会话。
 
 SDK 提供 `EMMarkType0` 至 `EMMarkType19` 共 20 个标记，单个会话最多可同时包含 20 个标记。各标记与业务含义之间的映射由应用自行定义和维护。在 Swift 中，对应枚举值为 `.markType0` 至 `.markType19`。
 
@@ -60,7 +60,7 @@ EMClient.shared().chatManager?.addConversationMark(
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `conversationIds` | `[String]` | 会话 ID 数组，不能为空，单次最多传入 20 个。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> - 聊天室：聊天室 ID。 |
+| `conversationIds` | `[String]` | 会话 ID 数组，不能为空，单次最多传入 20 个。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> 不支持聊天室会话。 |
 | `mark` | `EMMarkType` | 要添加的标记，取值为 `.markType0` 至 `.markType19`。 |
 | `completion` | `(EMError?) -> Void` | 异步操作结果。`error == nil` 表示成功，否则可通过 `EMError#code` 和 `EMError#errorDescription` 处理失败。 |
 
@@ -221,7 +221,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## 注意事项
 
-- 会话标记支持单聊、群聊和聊天室会话。
+- 会话标记支持单聊和群聊会话；不支持聊天室会话。
 - Objective-C 标记值为 `EMMarkType0` 至 `EMMarkType19`，Swift 对应 `.markType0` 至 `.markType19`；具体业务含义由应用维护。
 - 单个会话最多可以同时包含 20 个标记。
 - `addConversationMark` 和 `removeConversationMark` 可同时操作多个会话，单次最多传入 20 个会话 ID。

@@ -29,25 +29,7 @@ HarmonyOS SDK 提供以下方式：
 
 推荐每次导入不超过 1,000 条消息。
 
-你可以通过 `ChatOptions#setRegardImportedMsgAsRead` 设置是否将导入的消息视为已读。该配置默认为 `false`；设置为 `true` 时，导入的消息将被视为已读。可以通过 `ChatOptions#regardImportedMsgAsRead` 查询当前配置。
-
-如需修改该配置，可以在初始化 SDK 时进行设置：
-
-```typescript
-const options: ChatOptions = new ChatOptions({
-  appKey: 'your-org#your-app'
-});
-
-// 将导入的消息视为已读。
-options.setRegardImportedMsgAsRead(true);
-
-// 获取当前配置。
-const regardImportedMsgAsRead: boolean = options.regardImportedMsgAsRead();
-
-ChatClient.getInstance().init(context, options);
-```
-
-初始化 SDK 且当前用户的本地数据库打开后，调用以下方法批量导入消息：
+调用前，应确保 SDK 已初始化，且当前用户的本地数据库已打开。示例代码如下：
 
 ```typescript
 ChatClient.getInstance().chatManager()?.importMessages(messages)
@@ -61,6 +43,24 @@ ChatClient.getInstance().chatManager()?.importMessages(messages)
   .catch((error: ChatError): void => {
     // 消息导入失败。
   });
+```
+
+对于通过 [服务端消息导入接口](/document/server-side/message_import_single.html) 导入、之后由客户端从服务器拉取的历史消息，可以通过 `ChatOptions#setRegardImportedMsgAsRead` 设置是否将其视为已读。该配置默认为 `false`；设置为 `true` 时，SDK 会将这类消息视为已读。可以通过 `ChatOptions#regardImportedMsgAsRead` 查询当前配置。**该配置不影响上述 `ChatManager#importMessages` 本地导入消息的已读状态。**
+
+以下示例在初始化 SDK 时设置该配置：
+
+```typescript
+const options: ChatOptions = new ChatOptions({
+  appKey: 'your-org#your-app'
+});
+
+// 将服务端导入后由客户端拉取的消息视为已读。
+options.setRegardImportedMsgAsRead(true);
+
+// 获取当前配置。
+const regardImportedMsgAsRead: boolean = options.regardImportedMsgAsRead();
+
+ChatClient.getInstance().init(context, options);
 ```
 
 ## 插入消息
