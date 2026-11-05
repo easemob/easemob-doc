@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。SDK 支持为单聊、群聊和聊天室会话添加或移除标记。
+会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。SDK 支持为单聊和群聊会话添加或移除标记；不支持聊天室会话。
 
 SDK 提供 `ChatConversationMarkType.Type0` 至 `ChatConversationMarkType.Type19` 共 20 个标记，单个会话最多可同时包含 20 个标记。各标记的业务含义由应用自行定义和维护。
 
@@ -61,7 +61,7 @@ async function addConversationMark(): Promise<void> {
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `convIds` | `string[]` | 会话 ID 列表，不能为空；单次最多传入 20 个会话 ID。单聊为对端用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
+| `convIds` | `string[]` | 会话 ID 列表，不能为空；单次最多传入 20 个会话 ID。单聊为对端用户 ID，群聊为群组 ID；不支持聊天室会话。 |
 | `mark` | `ChatConversationMarkType` | 添加的标记，取值为 `Type0` 至 `Type19`。 |
 
 操作结果通过 `Promise<void>` 返回，失败时通过 Promise 报错。操作成功后，应重新读取本地会话获取最新标记。
@@ -186,7 +186,7 @@ client.addMultiDeviceListener(multiDeviceListener);
 
 ## 注意事项
 
-- 会话标记支持单聊、群聊和聊天室会话。
+- 会话标记支持单聊和群聊会话；不支持聊天室会话。
 - 会话标记取值为 `Type0` 至 `Type19`，各标记的业务含义由应用维护。
 - 单个会话最多可以同时包含 20 个标记。
 - `ChatManager#addRemoteAndLocalConversationsMark` 和 `ChatManager#deleteRemoteAndLocalConversationsMark` 可同时操作多个会话，单次最多传入 20 个会话 ID。

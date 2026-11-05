@@ -170,9 +170,9 @@ EMClient.shared().groupManager?.updateGroupOwner(
 
 ### 添加群管理员
 
-仅群主可调用 `addAdmin` 添加管理员。成功后，新管理员和其他管理员会接收到群组事件回调会收到 `groupAdminListDidUpdate` 回调。
+仅群主可调用 `addAdmin` 添加管理员。成功后，新管理员、群主及其他管理员会收到 `groupAdminListDidUpdate` 回调。
 
-管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分管理权限。
 
 ```swift
 EMClient.shared().groupManager?.addAdmin(
@@ -187,7 +187,7 @@ EMClient.shared().groupManager?.addAdmin(
 
 ### 移除群管理员
 
-仅群主可调用 `removeAdmin` 移除管理员。成功后，被移除的管理员及其他管理员会收到 `groupAdminListDidUpdate` 回调。
+仅群主可调用 `removeAdmin` 移除管理员。成功后，被移除的管理员、群主及其他管理员会收到 `groupAdminListDidUpdate` 回调。
 
 群管理员被移除群管理权限后将只拥有普通群成员的权限。
 

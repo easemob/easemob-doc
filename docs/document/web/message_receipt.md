@@ -181,7 +181,7 @@ client.chatManager.addEventHandler('single-message-listener', {
 
 | 使用限制       | 默认       | 说明                                                         |
 | :------- | :------- | :-------------- |
-| 功能开通       | 关闭       | 若要使用该功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯** > **基础功能** > **消息** 页签下开通 **群聊消息已读回执**。若未开通，SDK 返回错误码 `505`，Key 为 `SERVICE_NOT_ENABLED`。 |
+| 功能开通       | 关闭       | 若要使用该功能，你需要在 [环信控制台](https://console.easemob.com/user/login) 的 **即时通讯** > **基础功能** > **消息与会话** 页签下开通 **群聊消息已读回执**。若未开通，SDK 返回错误码 `505`，Key 为 `SERVICE_NOT_ENABLED`。 |
 | 使用权限       | 所有群成员 | 默认情况下，所有群成员发送消息时均可请求群消息已读回执。如果调整为仅群主和群管理员可使用，可联系商务修改，此时普通成员发送需要群消息已读回执的消息时，SDK 返回错误码 `603`，Key 为 `GROUP_PERMISSION_DENIED`。    |
 | 已读回执有效期 | 3 天       | 群聊消息已读回执的有效期默认为 3 天。超过有效期后，服务端不再记录该消息的新增已读状态，SDK 返回错误码 `506`，Key 为 `MESSAGE_EXPIRED`。 |
 | 群规模   | 200 人 | 该能力当前最多支持 200 人群组。当群人数超过上限时，群消息可能无法继续产生有效的已读回执统计；服务端返回 `limit send group ack msg` 时，SDK 可能返回错误码 `4`，Key 为 `SERVICE_LIMIT_EXCEEDED`。 |

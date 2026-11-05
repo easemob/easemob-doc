@@ -8,6 +8,8 @@ SDK 支持在创建各类消息时传入 `ext` 字段。该字段为可选字段
 
 ## 示例代码
 
+以下示例创建并发送携带扩展字段的文本消息，同时演示接收后读取字段。执行前应已完成 SDK 初始化和登录。
+
 ```typescript
 async function sendTextMessage() {
   const message = client.chatManager.createTextMessage({

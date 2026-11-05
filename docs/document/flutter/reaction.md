@@ -128,7 +128,7 @@ try {
 
 ## 获取 Reaction 详情
 
-调用 `fetchReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息，包括 Reaction 内容、当前添加该 Reaction 的用户数量，以及当前添加该 Reaction 的全部用户 ID。
+调用 `fetchReactionDetail` 可从服务器分页获取指定消息中指定 Reaction 的详细信息，包括 Reaction 内容、当前添加该 Reaction 的用户总数，以及当前页的用户 ID 列表。
 接口返回 `ChatCursorResult<ChatMessageReaction>`，其中包含当前页数据和分页游标；当仍有后续数据时，业务侧可使用游标继续查询下一页。
 
 ```dart

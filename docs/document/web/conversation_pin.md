@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话置顶用于将重要的单聊、群聊或聊天室会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话。置顶状态会写入服务端会话列表功能，同时 SDK 会在本地会话列表缓存中同步更新该会话的置顶状态，便于前端直接刷新会话列表 UI。
+会话置顶用于将重要的单聊、群聊会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话；不支持聊天室会话。置顶状态会写入服务端会话列表功能，同时 SDK 会在本地会话列表缓存中同步更新该会话的置顶状态，便于前端直接刷新会话列表 UI。
 
 ## 功能开通
 
@@ -48,8 +48,8 @@ console.log(unpinnedResult);
 
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `conversationId` | String | 是 | 会话 ID。单聊为对方用户 ID，群聊为群组 ID，聊天室为聊天室 ID。 |
-| `conversationType` | String | 是 | 会话类型，取值为 `singleChat`、`groupChat` 或 `chatRoom`。 |
+| `conversationId` | String | 是 | 会话 ID。单聊为对方用户 ID，群聊为群组 ID；不支持聊天室会话。 |
+| `conversationType` | String | 是 | 会话类型，可用于本操作的取值为 `singleChat` 或 `groupChat`；不支持 `chatRoom`。 |
 | `pinned` | Boolean | 是 | 是否置顶。`true` 表示置顶，`false` 表示取消置顶。 |
 
 返回结果为 `ConversationMutationResult`，主要字段如下：

@@ -17,6 +17,10 @@ iOS SDK 使用 `EMGroupConfigs` 的多个字段定义群组类型：
 | 公开群，申请需审批 | `isPublic = true`、`joinApprovalRequired = true` | 用户提交入群申请后，等待群主审批。 |
 | 公开群，可直接加入 | `isPublic = true`、`joinApprovalRequired = false` | 用户可直接加入群组。 |
 
+:::tip
+`joinApprovalRequired` 仅对公开群有效，`allowInvites` 仅对私有群有效。
+:::
+
 ### 群组成员角色
 
 群组包含以下角色：
@@ -85,7 +89,7 @@ EMClient.shared().groupManager?.createGroup(
 仅群主可以调用 `destroyGroup` 解散群组。解散成功后，群成员会收到 `didLeaveGroup` 回调，离开原因为 `.destroyed`。
 
 :::warning
-解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组，SDK 也会移除内存中该群组对应的会话。执行该操作前，建议在应用侧进行二次确认。
+解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组。
 :::
 
 ```swift
@@ -100,6 +104,15 @@ EMClient.shared().groupManager?.destroyGroup(
     print("群组已解散")
 }
 ```
+
+### 本地消息处理
+
+成员因群组解散而退出群组时，本地群组消息的处理取决于各客户端的 `EMOptions#deleteMessagesOnLeaveGroup` 配置：
+
+- （默认）`true`：删除本地群组消息。
+- `false`：保留本地群组消息。
+
+该配置用于客户端初始化，应在初始化 SDK 时设置。
 
 ## 加入群组
 
@@ -133,12 +146,11 @@ EMClient.shared().groupManager?.addMembers(
 }
 ```
 
-受邀用户的处理流程由创建群组时的 `isInviteNeedConfirm` 决定：
+邀请处理流程由建群时的 `isInviteNeedConfirm` 与受邀用户客户端的 `EMOptions#autoAcceptGroupInvitation` 共同决定：
 
-- `false`：受邀用户无需确认即可加入群组，并收到 `didJoinGroup` 回调。
-- `true`：受邀用户收到 `groupInvitationDidReceive` 回调，并选择是否加入群组：
-  - 接受邀请：调用 `acceptInvitationFromGroup`。
-  - 拒绝邀请：调用 `declineGroupInvitation`。
+- `isInviteNeedConfirm = false`：受邀用户直接加入群组，并收到 `didJoinGroup` 回调；客户端是否自动接受邀请不影响结果。
+- `isInviteNeedConfirm = true` 且 `autoAcceptGroupInvitation = true`：SDK 自动接受邀请，受邀用户收到 `didJoinGroup` 回调。
+- `isInviteNeedConfirm = true` 且 `autoAcceptGroupInvitation = false`：受邀用户收到 `groupInvitationDidReceive` 回调，可调用 `acceptInvitationFromGroup` 或 `declineGroupInvitation` 接受或拒绝邀请。
 
 邀请被接受后，邀请人会收到 `groupInvitationDidAccept` 回调；邀请被拒绝后，邀请人会收到 `groupInvitationDidDecline` 回调。
 
@@ -274,7 +286,7 @@ EMClient.shared().groupManager?.leaveGroup(
 }
 ```
 
-退出群组后，本地群聊会话不会自动删除；`EMOptions#deleteMessagesOnLeaveGroup` 控制是否删除该群组的本地消息，默认值为 `true`。
+退出群组时，`EMOptions#deleteMessagesOnLeaveGroup` 控制是否删除该群组的本地消息：默认 `true` 删除，`false` 保留。该配置应在 SDK 初始化时设置。
 
 ### 移出成员
 

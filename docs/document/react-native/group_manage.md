@@ -95,7 +95,7 @@ try {
 仅群主可以调用 `ChatGroupManager#destroyGroup` 解散群组。群组解散后，其他成员会收到 `ChatGroupEventListener#onDestroyed` 回调并被移出群组。
 
 :::warning
-解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组。本地会话和消息的处理取决于初始化选项 `ChatOptions.deleteMessagesAsExitGroup`：默认值为 `true`，删除本地会话及消息；设置为 `false` 时保留。执行该操作前，建议在应用侧进行二次确认。
+解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组。
 :::
 
 ```typescript
@@ -108,6 +108,15 @@ try {
   console.error('解散群组失败：', error);
 }
 ```
+
+#### 本地消息处理
+
+成员因群组解散而退出群组时，本地群组消息的处理取决于各客户端的 `ChatOptions#deleteMessagesAsExitGroup` 配置：
+
+- （默认）`true`：删除本地群组消息。
+- `false`：保留本地群组消息。
+
+该配置用于客户端初始化，应在初始化 SDK 时设置。
 
 ## 加入群组
 

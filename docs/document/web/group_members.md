@@ -140,7 +140,7 @@ await client.groupManager.getGroup('groupId').changeOwner({
 
 ### 添加群管理员
 
-仅群主可以调用 `addAdmin` 添加群管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 事件。
+仅群主可以调用 `addAdmin` 添加群管理员。添加成功后，新管理员、群主及其他管理员会收到 `onAdminAdded` 事件。
 
 群管理员除不能解散群组等少数限制外，拥有群组的大部分管理权限。
 
@@ -152,7 +152,7 @@ await client.groupManager.getGroup('groupId').addAdmin({
 
 ### 移除群管理员
 
-仅群主可以调用 `removeAdmin` 移除群管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 事件。
+仅群主可以调用 `removeAdmin` 移除群管理员。移除成功后，被移除的管理员、群主及其他管理员会收到 `onAdminRemoved` 事件。
 
 管理员被移出群管理员列表后，仅保留普通群成员权限。
 

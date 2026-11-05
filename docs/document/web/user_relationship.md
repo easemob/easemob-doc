@@ -166,7 +166,7 @@ contacts.forEach(contact => {
 
 #### 从本地内存获取单个用户属性
 
-如果你需要读取当前内存中的单个好友的用户属性，可从 `client.contactManager.getContacts` 返回的好友列表中选择目标好友。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
+如果你需要读取当前内存中的单个好友的用户属性，可从 `client.contactManager.getContacts` 返回的好友列表中选择目标好友。关于该接口的说明，详见 [从本地缓存读取用户属性](userinfo_provider.html#从本地缓存读取用户属性)。
 
 如果你需要获取最新的用户属性，应调用 [client.userInfoManager.getUserInfoByUserId](userprofile.html#从服务端获取用户的所有属性) 从服务端查询。
 
@@ -260,7 +260,7 @@ console.log(result.succeeded, result.failed);
 
 ### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlocklist` 将一个或多个用户从黑名单中移除。移除后，用户发送消息等行为将恢复。
+你可以调用 `removeUserFromBlocklist` 将一个或多个用户从黑名单中移除。移除后，该用户发送消息或好友申请等行为将恢复。
 
 ```typescript
 await client.contactManager.removeUserFromBlocklist({

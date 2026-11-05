@@ -61,7 +61,7 @@ result.forEach((item) => {
 });
 ```
 
-在线状态变更时，订阅者会收到 `onPresenceStatusChange` 事件回调。
+被订阅用户的在线状态发生变化时，订阅者会收到 `onPresenceStatusChange` 事件回调。
 
 :::tip
 - 订阅时长最长为 30 天，过期后如需继续关注，需重新订阅。

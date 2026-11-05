@@ -376,14 +376,14 @@ await client.chatManager.sendMessage(message);
 
 ## 发送附件消息
 
-#### 基本说明
-
 图片、语音、视频和文件消息都属于附件消息。发送附件消息时，SDK 会根据传入的资源类型，完成消息创建、附件上传和消息发送等流程。
 
 附件消息通常有两种构造方式：
 
 - `data`：传入本地文件对象，由 SDK 负责上传附件。
 - `originalUrl`：传入远程文件地址，适用于附件已上传到业务服务器或 CDN 的场景。此时 SDK 直接使用该地址构造消息，不再执行本地上传。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。 
+
+由 SDK 自动上传附件时，请确保传入的 `File` 或 `Blob` 在 `onFileUploadComplete` 或 `onFileUploadError` 回调返回前持续可读。如果附件读取流程依赖通过 `URL.createObjectURL()` 创建的 Blob URL，请勿提前调用 `URL.revokeObjectURL()` 撤销该 URL。对于文件选择器、拖拽、剪贴板或临时链接提供的资源，建议先获取完整的 `File` 或 `Blob` 数据，再将其作为附件传入 SDK 发送。
 
 #### 发送流程
 

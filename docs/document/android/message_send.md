@@ -158,7 +158,7 @@ EMClient.getInstance()
 
 默认情况下，调用 `EMChatManager#sendMessage` 后，SDK 会自动将本地附件上传至环信服务器；接收方也可由 SDK 自动下载附件。你可以通过 `EMOptions#setAutoTransferMessageAttachments` 控制附件是否由 SDK 自动传输。消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
-由 SDK 自动传输附件时，请确保传入的本地文件路径或 URI 在消息发送结果回调返回前仍可访问，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证其访问权限和生命周期，建议先复制到应用可控的本地目录再发送。
+由 SDK 自动传输附件时，请确保本地文件或 URI 在通过 `EMMessage.setMessageStatusCallback` 设置的 `EMCallBack` 的 `onSuccess` 或 `onError` 回调返回前持续可读，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证读取权限和文件生命周期，建议先复制到应用私有目录，再使用复制后的本地文件发送。
 
 ### 发送图片消息
 

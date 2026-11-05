@@ -48,7 +48,7 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 
 | 错误码 | 错误信息      | 描述和可能原因                 | 解决方法    |
 | :----- | :------------ | :--------------------------- | :--------------------------- |
-| 100    |        `EMErrorInvalidAppkey`         | App Key 不合法：用户的 App Key 格式不正确。可在 [环信控制台](https://console.easemob.com/user/login)的 **应用概览** 页面查看 App Key。   | 使用正确的 App Key 进行初始化。 |
+| 100    |        `EMErrorInvalidAppkey`         | App Key 不合法：用户的 App Key 格式不正确。可在 [环信控制台](https://console.easemob.com/user/login)的 **应用列表** 页面查看 App Key。   | 使用正确的 App Key 进行初始化。 |
 | 101    |       `EMErrorInvalidUsername`        | 用户 ID 不正确：一般情况下，用户 ID 为空时提示该错误，例如，邀请好友时 username 参数为空字符。 | 检查报错API 中传入的用户 ID 参数是否为空。 |
 | 102    |       `EMErrorInvalidPassword`        | 用户密码不正确：登录时提供的密码为空或不正确。 | 检查调用的 API 中传的密码参数是否正确。 |
 | 103    |          `EMErrorInvalidURL`          | URL 不正确。   | 检查调用 API 时传入的参数是否正确。    |

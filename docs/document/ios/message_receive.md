@@ -287,7 +287,7 @@ NSString *address = locationBody.address;
 
 :::tip
 - 透传消息发送后，不支持撤回。
-- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息不会存入本地数据库，也不会创建本地会话，因此通常不在 UI 中显示。
 :::
 
 接收方通过 `cmdMessagesDidReceive` 回调接收透传消息，方便用户进行不同的处理。

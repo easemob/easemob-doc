@@ -34,6 +34,10 @@ iOS SDK 提供以下方式：
 }];
 ```
 
+:::tip
+`EMOptions#regardImportMessagesAsRead` 不控制本地批量导入消息的已读状态。该配置适用于通过 [服务端消息导入接口](/document/server-side/message_import_single.html) 导入、之后由客户端从服务器拉取的历史消息。调用本地导入接口前，应确保 SDK 已初始化，且当前用户的本地数据库已打开。
+:::
+
 ## 插入消息
 
 如果需要在本地会话中加入一条无需发送、仅用于本地展示的消息，例如“XXX 撤回一条消息”“XXX 入群”或“对方正在输入”等，可以调用 `insertMessage`，将消息插入指定的本地会话。

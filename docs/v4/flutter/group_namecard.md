@@ -32,7 +32,6 @@ SDK 通过 `ChatGroupEventHandler#onUserGroupNamecardChanged` 监听群成员名
 当群成员名片发生变更并同步到原生 SDK 的本地内存后，可能触发该事件，常见场景包括：
 
 - 当前登录用户更新群成员名片后，群内其他 **在线成员** 收到变更通知。
-- 调用服务端接口获取到最新群成员信息并更新本地内存后。
 - 开启 `ChatOptions#enableUserInfo` 后，接收方因收到消息触发自动同步并更新本地内存后。
 
 添加和移除事件处理器的示例代码如下所示：

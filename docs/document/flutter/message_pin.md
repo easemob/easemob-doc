@@ -140,6 +140,8 @@ ChatClient.getInstance.chatManager.addEventHandler(
 ChatClient.getInstance.chatManager.removeEventHandler(handlerId);
 ```
 
+置顶失败时应检查功能是否开通、消息是否仍在服务端、会话置顶数量及参数是否正确。事件通知不会自动更新应用自行维护的消息数组。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |

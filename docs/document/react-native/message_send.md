@@ -212,6 +212,8 @@ await sendMessageWithCallback(groupMessage);
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
 
+由 SDK 自动传输附件时，请确保本地文件在`ChatMessageStatusCallback` 的 `onSuccess` 或 `onError` 回调返回前持续可访问，不要提前删除源文件。对于相册、系统文件选择器或临时目录返回的资源，如无法保证访问权限和生命周期，建议先复制到应用可控的本地目录再发送。
+
 #### 发送流程
 
 发送附件消息分为以下两步：

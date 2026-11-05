@@ -10,6 +10,8 @@ HarmonyOS SDK 通过 `ChatMessage#setExt` 设置消息扩展字段。扩展字�
 
 ## 示例代码
 
+以下示例创建并发送携带扩展字段的文本消息，同时演示接收后读取字段。执行前应已完成 SDK 初始化和登录。
+
 ```typescript
 interface ReplyInfo {
   messageId: string;

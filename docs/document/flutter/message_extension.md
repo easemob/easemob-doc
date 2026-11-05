@@ -8,6 +8,8 @@ Flutter SDK 通过 `ChatMessage#attributes` 设置消息扩展字段，支持 `b
 
 ## 示例代码
 
+以下示例创建并发送携带扩展字段的文本消息，同时演示接收后读取字段。执行前应已完成 SDK 初始化和登录。
+
 ```dart
 final message = ChatMessage.createTxtSendMessage(
   targetId: targetId,

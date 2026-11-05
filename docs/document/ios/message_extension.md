@@ -10,6 +10,8 @@ iOS SDK 通过 `EMChatMessage#ext` 设置和获取消息扩展字段。`ext` 为
 
 ## 示例代码
 
+以下示例创建并发送携带扩展字段的文本消息，同时演示接收后读取字段。执行前应已完成 SDK 初始化和登录。
+
 ```objectivec
 // 创建文本消息体。content 为要发送的文本内容。
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];

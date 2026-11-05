@@ -213,6 +213,10 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 
 如果只需优先展示设备上的已有数据，可在收到 `ConnectionListener#onDatabaseOpened` 后读取本地数据；如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 成功后再次读取并刷新界面。
 
+## 开启用户信息自动管理
+
+用户信息自动管理与联系人自动同步相互独立。`ChatOptions#setEnableUserInfo` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
+
 ## 接口列表
 
 <div class="harmonyos-api-list-table">

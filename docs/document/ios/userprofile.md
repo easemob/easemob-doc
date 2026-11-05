@@ -62,6 +62,10 @@ userInfo.gender = 1;
 | `birth` | `NSString *` | 用户生日，长度不超过 64 字符。 |
 | `ext` | `NSString *` | 扩展字段。 |
 
+:::notice
+更新请求中未包含的属性保留原值。调用 `updateOwnUserInfo` 并传入 `EMUserInfo` 时，SDK 始终提交 `gender`；如果未设置性别，默认值 `0` 可能覆盖原有性别。只修改单个属性时，可使用接受属性值及 `EMUserInfoType` 的重载方法。
+:::
+
 ### 设置当前用户的单个属性
 
 调用 `updateOwnUserInfo` 设置当前用户的单个属性。例如，修改头像：
