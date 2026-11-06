@@ -9,7 +9,7 @@
 | 功能         | 描述                                    |
 | :----------- | :--------------------------------------- |
 | 消息收发 | 收发文本、表情、图片、语音、视频、文件、名片等消息。 |
-| 消息操作 | 复制、引用、撤回、删除、编辑、重发、举报。 |
+| 消息操作 | 复制、引用、撤回、删除、编辑、重发（通过点击发送失败的状态图标触发）。 |
 | 消息管理 | 本地消息清除、消息搜索、消息多选。         |
 | 互动增强 | 表情回应、消息置顶、消息翻译、转发。       |
 
@@ -30,9 +30,9 @@
 消息列表 `ChatUIKitMessageListLayout` 用于展示发送和接收的消息，以及对消息进行操作：
 
 - **发送和接收消息**：包括文本、表情、图片、语音、视频、文件和名片等消息。
-- **消息操作**：对消息进行复制、引用、撤回、删除、编辑、重新发送、举报、翻译、转发、多选、置顶操作。
+- **消息操作**：对消息进行复制、引用、撤回、删除、编辑、重新发送（通过点击发送失败的状态图标触发）、翻译、转发、多选、置顶操作。
 
-消息条目 `ChatUlKitRow` 实现单条消息展示，包括展示消息内容的消息气泡、对端用户头像或群头像、消息时间等。
+消息条目 `ChatUIKitRow` 实现单条消息展示，包括展示消息内容的消息气泡、对端用户头像或群头像、消息时间等。
 
 ### 消息输入区
 
@@ -59,7 +59,7 @@ UIKitChatActivity.actionStart(mContext, conversationId, chatType)
 开发者也可以使用单群聊 UIKit 提供的 `UIKitChatFragment` 创建聊天页面，示例代码如下：
 
 ```kotlin
-class ChatActivity: AppCompactActivity() {
+class ChatActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)

@@ -2,7 +2,7 @@
 
 <Toc />
 
-EaseChatUIKit 内置浅色和深色主题，默认为浅色主题。
+单群聊 UIKit 内置浅色和深色主题，默认跟随系统的明暗设置（系统为深色模式时展示深色主题）。
 
 - 浅色主题
 
@@ -24,12 +24,12 @@ Android 利用自己的平台特性，可以在 `res` 目录下创建 `values-ni
 
 ## 切换为内置主题 
 
-若从当前的主题切换到 EaseChatUIKit 内置的浅色或深色主题，可使用以下方法：
+若从当前的主题切换到单群聊 UIKit 内置的浅色或深色主题，可使用以下方法：
 
 ```kotlin
  // 在 sp 中存入一个 Boolean 类型变量，记录当前是浅色还是深色主题。
  val isBlack = ChatUIKitPreferenceManager.getInstance().getBoolean("isBlack")
  // 调用系统 API 切换模式。
- AppCompactDelegate.setDefaultNightMode(if (isBlack) AppCompactDelegate.MODE_NIGHT_NO else AppCompactDelegate.MODE_NIGHT_YES)
+ AppCompatDelegate.setDefaultNightMode(if (isBlack) AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES)
  ChatUIKitPreferenceManager.getInstance().putBoolean("isBlack", !isBlack)
 ```

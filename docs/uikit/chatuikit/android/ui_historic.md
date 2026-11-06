@@ -4,6 +4,10 @@
 
 在您阅读此文档时，我们假定您已经具备了基础的 Android 应用开发经验，并能够理解相关基础概念。此文档是针对导入 EaseIMKit 库的快速集成文档，如果只是导入 SDK 集成使用，请参考 [环信即时通讯 IM Android 快速开始](/document/android/quickstart.html)。
 
+:::notice
+本文档适用于 EaseIMKit 4.5.0 及更早的历史版本；5.x 版本请参考当前 [单群聊 UIKit 快速开始](chatuikit_quickstart.html) 文档。
+:::
+
 ## 简介
 
 EaseIMKit 是什么？
@@ -651,7 +655,7 @@ private void registerConversationType() {
 }
 ```
 
-需要开发者注意的是，自定义的消息类型需要注册到 EaseMessageTypeSetManager 中，具体用法可以参考环信 App 中的 [DemoHelper](https://github.com/easemob/chat-android/blob/master/app/src/main/java/com/hyphenate/chatdemo/DemoHelper.java) 类中的 `registerConversationType()` 方法，并在初始化时调用 `registerConversationType()` 方法。
+需要开发者注意的是，自定义的消息类型需要注册到 EaseMessageTypeSetManager 中，具体用法可以参考环信 App 中的 `DemoHelper` 类中的 `registerConversationType()` 方法，并在初始化时调用 `registerConversationType()` 方法。
 
 开发者在注册消息类型时，一定要在最后设置默认项（即调用 `setDefaultConversionType()`），并建议将 `EaseTextAdapterDelegate` 设置默认项。如果没有符合的消息类型，EaseIMKit 会选择默认的消息类型进行展示(注：需要展示的消息类型也需要符合默认消息的消息类型，否则会造成 EMMessageBody 强转时报错)。
 

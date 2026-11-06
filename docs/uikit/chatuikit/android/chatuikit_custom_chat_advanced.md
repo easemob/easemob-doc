@@ -30,7 +30,7 @@ val chatMessageListLayout:ChatUIKitMessageListLayout? = binding?.layoutChat?.cha
 | `setAvatarShapeType()`        | 设置头像的样式，分为默认样式，圆形和矩形三种样式。           |
 | `showNickname()`              | 是否展示消息条目的昵称，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `setItemSenderBackground()`   | 设置发送方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
-| `etItemReceiverBackground()` | 设置接收方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
+| `setItemReceiverBackground()` | 设置接收方的背景，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
 | `setItemTextSize()`           | 设置文本消息的字体大小。                                     |
 | `setItemTextColor()`          | 设置文本消息的字体颜色。                                     |
 | `setTimeTextSize()`           | 设置时间线文本的字体大小，`UIKitChatFragment#Builder` 也提供了此功能的设置方法。 |
@@ -163,25 +163,28 @@ chatMessageListLayout?.let{
 
 #### 图标显示规则
 
-消息已送达和已读图标的显示行为与 SDK 初始化的 `ChatOptions` 配置有关：
+消息已送达和已读图标的显示行为如下：
 
-- 已送达图标：当 `requireDeliveryAck = true` 且消息收到送达回执时显示。
-- 已读图标：当 `requireAck = true` 且消息收到已读回执时显示。
+- 已送达图标：当 SDK 初始化的 `ChatOptions` 中 `requireDeliveryAck = true` 且消息收到送达回执时显示。
+- 已读图标：单聊消息发送时默认请求已读回执（UIKit 内部自动调用 `setIsNeedReadReceipt(true)`），当对方已读（`isPeerRead`）时显示。
 
 ```kotlin
 // SDK 初始化时设置（示例：参考 DemoHelper#initChatOptions）
 val options = ChatOptions().apply {
-    // 是否需要已读回执
-    requireAck = true
     // 是否需要送达回执
     requireDeliveryAck = true
 }
 ChatUIKitClient.init(context, options)
 ```
 
+:::tip
+5.0 起 SDK 已移除全局已读回执开关 `requireAck`，单聊消息的已读回执由 UIKit 在发送时自动请求；群聊消息的已读回执请使用 SDK 的批量已读回执接口。
+:::
+
 #### 隐藏状态图标
 
-- **仅隐藏已读/已送达图标**：将 `requireAck` 或 `requireDeliveryAck` 设为 `false`，则对应状态图标不会显示，但发送成功后仍显示已发送图标。
+- **仅隐藏已送达图标**：将 `requireDeliveryAck` 设为 `false`，则已送达状态图标不会显示，但发送成功后仍显示已发送图标。
+- **隐藏已读图标**：发送消息前对消息调用 `setIsNeedReadReceipt(false)`（不请求已读回执），或在 App 工程中同名覆盖发送消息的 Row 布局并移除 `tv_ack` 视图。
 - **完全隐藏所有发送状态图标（含已发送）**：需要自定义发送消息的 Row 布局/Row（例如，在 App 工程中同名覆盖各类 `uikit_row_sent_*.xml` 并移除 `tv_delivered`/`tv_ack`），或提供自定义 Row/ViewHolder 实现。
 
 ## 设置长按消息菜单
@@ -210,7 +213,7 @@ ChatUIKitClient.init(context, options)
 
 ```kotlin
 binding?.let {
-    it.layoutChat.addItemMenu(menuId, menuOrder, menuTile)
+    it.layoutChat.addItemMenu(menuId, menuOrder, menuTitle)
 }
 ```
 
@@ -335,8 +338,11 @@ class CustomTypeChatRow(
             this)
     }
 
+    // 自定义布局中的文本控件，需与 layout_row_received_custom_type / layout_row_sent_custom_type 中的 id 对应。
+    private val contentView: TextView by lazy { findViewById(R.id.tv_content) }
+
     override fun onSetUpView() {
-        (message?.getMessage()?.body as? ChatTextMessageBody)?.let { txtBody ->
+        (message?.body as? ChatTextMessageBody)?.let { txtBody ->
             contentView.text = txtBody.message
         }
     }
@@ -350,7 +356,7 @@ class CustomChatTypeViewViewHolder(
     itemView: View
 ): ChatUIKitRowViewHolder(itemView) {
 
-    override fun onBubbleClick(message: EaseMessage?) {
+    override fun onBubbleClick(message: ChatMessage?) {
         super.onBubbleClick(message)
         // Add click event
     }
@@ -364,7 +370,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 
     override fun getItemNotEmptyViewType(position: Int): Int {
         // 根据消息类型设置自己的 itemViewType。
-        mData?.get(position)?.getMessage()?.let { msg ->
+        mData?.get(position)?.let { msg ->
             msg.getStringAttribute("type", null)?.let { type ->
                 if (type == CUSTOM_TYPE) {
                     return if (msg.direct() == ChatMessageDirection.SEND) {
@@ -379,7 +385,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
         return super.getItemNotEmptyViewType(position)
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatMessage> {
         // 根据返回的 viewType 返回对应的 ViewHolder。
         if (viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME || viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER) {
             CustomChatTypeViewViewHolder(
@@ -846,7 +852,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 </td>
 </tr>
 <tr>
-<td rowspan="11">
+<td rowspan="10">
 <p>菜单项默认图标</p>
 </td>
 <td width="348">
@@ -886,14 +892,6 @@ builder.setCustomAdapter(CustomMessageAdapter())
 </td>
 <td width="81">
 <p>删除菜单图标</p>
-</td>
-</tr>
-<tr>
-<td width="348">
-<p>uikit_chat_item_menu_report</p>
-</td>
-<td width="81">
-<p>举报菜单图标</p>
 </td>
 </tr>
 <tr>

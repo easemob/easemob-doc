@@ -66,7 +66,7 @@ ChatUIKitConversationListFragment.Builder()
 | :-------------- | :----- | 
 | 会话免打扰       | - `makeSilentForConversation`：设置会话免打扰。<br/> - `cancelSilentForConversation` ：取消会话免打扰。   |
 | 会话置顶            | - `pinConversation`：置顶会话。<br/> - `unpinConversation`：取消置顶。     |
-| 会话标记已读           | `makeConversationRead`：标记会话为已读状态。    |
+| 会话标记已读           | `makeConversionRead`：标记会话为已读状态。    |
 | 会话删除            | `deleteConversation`：删除会话。   |
 
 <ImageGallery>
