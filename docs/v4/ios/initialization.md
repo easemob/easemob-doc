@@ -24,8 +24,9 @@ EMClient.shared().initializeSDK(with: options)
 | :----------------- | :---------------- |
 | `appkey`                                   | `appkey` 属性为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
 | `isAutoLogin`   | 是否自动登录。<br/> -（默认）`YES`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `NO`：不自动登录。 |
+| `disconnectNotifyThreshold` | 断线通知宽限时间，单位为秒，默认值为 `10`，自 SDK 4.26.0 起支持。成功建立连接后，发生可恢复断线时，宽限期内重连成功则不触发断开连接回调；到期仍未恢复才触发。设置为小于或等于 `0` 时不启用宽限期。首次连接失败、token 过期或被踢下线等情况仍按原有机制通知。宽限期仅影响断开连接回调的时机，不延迟连接状态变化。详见 [配置断线通知宽限期](connection.html#配置断线通知宽限期)。 |
 | `pushKitCertName`   | PushKit 的证书名称。 |
-| `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
+| `apnsCertName` | APNs 推送证书名称，需与环信控制台配置的证书名称一致。在 SDK 初始化时设置，具体步骤见 [将证书名称传递给 SDK](/push/push_apns.html#步骤二-将证书名称传递给-sdk)。 |
 | `autoAcceptGroupInvitation`   可             | 是否自动接受加群邀请。<br/> -（默认）`YES`：自动接受加群申请。 <br/> -  `NO`: 不自动接受加群申请。 |
 | `autoAcceptFriendInvitation`   可     | 设置是否自动接受加好友邀请。 <br/> -（默认）`YES`：自动接受好友邀请。 <br/> -  `NO`：不自动接收好友邀请。 |
 | `enableChatroomConversation`            | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.0 起支持。<br/> - `YES`：本地会话列表中包含聊天室会话。<br/> -（默认）`NO`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |

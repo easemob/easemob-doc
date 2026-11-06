@@ -4,9 +4,38 @@
 
 你调用 `login` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
 
+## 查询连接状态
+
+自 SDK 4.26.0 起，你可以通过 `[EMClient sharedClient].connectionState` 查询 SDK 当前连接到聊天服务器的状态，便于展示连接进度或根据当前状态处理业务。
+
+`connectionState` 为只读属性，返回 `EMConnectionState`，包含以下状态：
+
+| 枚举值 | 说明 |
+| :--- | :--- |
+| `EMConnectionDisconnected` | 未连接到聊天服务器。SDK 尚未初始化时也返回此状态。 |
+| `EMConnectionConnecting` | 正在连接聊天服务器。 |
+| `EMConnectionConnected` | 已连接到聊天服务器。 |
+
+```objectivec
+EMConnectionState state = [EMClient sharedClient].connectionState;
+switch (state) {
+    case EMConnectionDisconnected:
+        // 展示未连接状态。
+        break;
+    case EMConnectionConnecting:
+        // 展示正在连接状态。
+        break;
+    case EMConnectionConnected:
+        // 展示已连接状态。
+        break;
+}
+```
+
+`isConnected` 属性自 SDK 4.26.0 起标记为废弃，现有调用仍可使用。建议改用 `connectionState`，以区分未连接、连接中和已连接三种状态。
+
 ## 监听连接状态
 
-你可以通过注册连接监听确认连接状态。
+你可以通过注册连接监听接收已连接或断开连接的通知。需要了解连接中的状态时，请查询 `connectionState` 属性。断开连接回调的触发时机还受到 [断线通知宽限期](#配置断线通知宽限期) 的影响。
 
 ```swift
 override func viewDidLoad() {
@@ -48,9 +77,19 @@ extension ViewController: EMClientDelegate {
 
 ```
 
+## 配置断线通知宽限期
+
+SDK 4.26.0 新增 `EMOptions.disconnectNotifyThreshold` 属性，用于设置或查询断线通知时间阈值，单位为秒，默认值为 `10`。
+
+:::tip
+在 iOS SDK 4.26.0 中，发生网络中断等情况时，SDK 会通过 `connectionStateDidChange:` 通知应用连接已断开。设置 `disconnectNotifyThreshold` 不会延迟该通知，也不会因短暂断线后快速重连成功而取消断开通知。
+:::
+
+该属性不影响实际连接状态、自动重连行为或 APNs 的发送时间。需要判断当前连接状态时，请查询 `connectionState`。token 过期、账号被踢下线等情况，SDK 仍通过对应的回调通知应用。
+
 ## 自动重连
 
-登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。重连成功或者失败时会收到 `connectionStateDidChange` 通知。
+登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。你可以结合 `connectionState` 查询和 `connectionStateDidChange` 回调了解连接情况。SDK 4.26.0 的 iOS 普通断线回调不会因设置 `disconnectNotifyThreshold` 而延迟；重连成功后，SDK 会通知已连接状态。
 
 不过，SDK 在以下情况下会停止自动重连。你需要调用 `login` 方法登录。
 

@@ -65,6 +65,7 @@
 | updateMessageChange    | 更新 SDK 本地数据库的消息。      |
 | markMessageAsReadWithId    | 将 SDK 本地数据库中的指定消息设置为已读。     |
 | markAllMessagesAsRead    | 将 SDK 本地数据库所有未读消息设置为已读。    |
+| markMessagesAsReadWithTimestamp:completion: | 自 SDK 4.26.0 起支持。将当前会话的本地数据库中指定时间点及以前的未读接收消息标记为已读，并更新会话未读数。时间戳单位为毫秒；该操作不发送已读回执。详见 [按时间点批量标记消息已读](conversation_unread.html#按时间点批量标记消息已读)。 |
 | loadMessageWithId    | 从 SDK 本地数据库获取指定 ID 的消息。     |
 | loadMessagesStartFromId    | 从 SDK 本地数据库获取指定数量的消息。     |
 | loadMessagesWithType    | 从本地数据库中获取会话中指定用户发送的一定数量的特定类型的消息。     |

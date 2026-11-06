@@ -52,6 +52,7 @@
 | getUnreadMsgCount   | 获取会话中未读的消息数量。       |     
 | markAllMessagesAsRead   | 将所有未读消息设置为已读。       |    
 | markMessageAsRead      | 设置指定消息为已读。       |   
+| markMessagesAsReadWithTimestamp(long timestamp) | 将指定时间点及以前的未读接收消息在本地批量标记为已读，并更新会话未读数，不发送已读回执。自 SDK 4.26.0 起支持，详见 [按时间点批量标记消息已读](conversation_unread.html#按时间点批量标记消息已读)。 |
 | getAllMsgCount      | 获取 SDK 本地数据库中会话的全部消息数。       |   
 | loadMoreMsgFromDB(String startMsgId, int pageSize)    | 从 SDK 本地数据库中分页加载消息。加载的消息会基于消息中的时间戳放入当前会话的缓存中，调用 `getAllMessages` 时会返回所有加载的消息。        |     
 | loadMoreMsgFromDB(String startMsgId, int pageSize, EMSearchDirection direction)       | 从指定消息 ID 开始分页加载数据库中的消息。加载到的消息会加入到当前会话的消息中。       |      
