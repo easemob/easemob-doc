@@ -60,6 +60,20 @@ function getRegisterClickReferrer() {
   }
 }
 
+function markRtcimPageVisit() {
+  var path = window.location.pathname.replace(/\/+$/, '');
+  if (path !== '/product/rtcim' && path !== '/product/rtcim.html') {
+    return;
+  }
+  var rootDomain = getRootDomain(document.domain);
+  var existingCookieObj = JSON.parse(getCookieByName("utmParameters") || '{}') || {};
+  if (existingCookieObj.rtcim) {
+    return;
+  }
+  existingCookieObj.rtcim = true;
+  setCookie("utmParameters", JSON.stringify(existingCookieObj), 30, rootDomain);
+}
+
 function getRootDomain(domain) {
   var parts = domain.split(".");
   var rootDomain = parts.slice(-2).join(".");
@@ -91,6 +105,7 @@ function setCookie(name, value, days, domain) {
 
 getUTMParametersAndSetCookie();
 getRegisterClickReferrer();
+markRtcimPageVisit();
 window.addEventListener('load', getBrowserInfoAndSetCookie);
 
 (() => {
@@ -105,4 +120,5 @@ window.addEventListener('load', getBrowserInfoAndSetCookie);
 
 window.addEventListener('locationchange', function () {
   getRegisterClickReferrer()
+  markRtcimPageVisit()
 });
