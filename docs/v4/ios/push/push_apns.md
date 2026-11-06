@@ -208,7 +208,7 @@ SDK 的绑定完成回调返回本次向环信服务器绑定 token 的结果。
 
 SDK 的后台断连不以 token 绑定成功为前提。验证后台推送前，应先完成 APNs 证书配置和 token 绑定，并确认通知权限及推送设置允许展示本次通知。若用户已退出登录或被强制下线，返回前台后需按业务流程重新登录。
 
-调用 `applicationDidEnterBackground:` 主动断连时不会等待断线通知宽限期。后台断连、前台重连及其与宽限期的关系见 [应用前后台切换](push_overview.html#应用前后台切换)。
+SDK 初始化且用户已登录时，调用 `applicationDidEnterBackground:` 会主动断开 IM 长连接。后台断连和返回前台后的连接处理见 [应用前后台切换](push_overview.html#应用前后台切换)。
 
 ## **测试 APNs 推送**
 
@@ -240,26 +240,14 @@ SDK 的后台断连不以 token 绑定成功为前提。验证后台推送前，
 
 ### **故障排除**
 
-1. 检查在即时通讯 IM 中是否正确集成或启用了 APNs 推送。
-   
-   在左侧导航栏中选择 **运营管理** > **运营操作** > **用户管理**。在 **用户管理** 页面中，在对应用户 ID 的**操作** 栏中选择 **查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
+1. 核对环信服务器上的 token 绑定结果。在环信控制台的 **运营管理** > **运营操作** > **用户管理** 中，选择对应用户的 **操作** > **查看IM用户绑定推送证书**，检查证书名称及 device token；也可以调用 [获取用户详情的 RESTful 接口](/document/server-side/account_detail_obtain_single.html) 检查。若未绑定或信息不匹配，返回 [步骤三](#步骤三-获取-device-token-并传递给-sdk)，检查 token 注册与绑定回调中的错误。
 
-2. 检查是否在 [环信控制台](https://console.easemob.com/user/login) 上传了正确的 APNs 证书且设置了正确的证书环境。
-   
+2. 检查是否在 [环信控制台](https://console.easemob.com/user/login) 上传了正确的 APNs 证书，并确认客户端设置的证书名称与控制台一致、推送环境与安装包匹配。
+
 3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
-   
-4. 检查发送消息时是否设置了只发在线(`EMChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。
 
-### **故障排除**
-
-1. 按 [前提条件](#前提条件) 核对服务器端的 token 绑定结果。若未绑定或信息不匹配，返回 [步骤三](#步骤三-获取-device-token-并传递给-sdk) 检查 token 注册与绑定回调中的错误。
-
-2. 检查是否在 [环信控制台](https://console.easemob.com/user/login) 上传了正确的 APNs 证书且设置了正确的证书环境。
-   
-3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
-   
-4. 检查发送消息时是否设置了只发在线(`EMChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。
+4. 检查发送消息时是否设置了 `EMChatMessage.deliverOnlineOnly = YES`。只向在线用户投递的消息不触发离线推送。
 
 5. 检查设备通知设置、应用的 [推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是否屏蔽本次通知。token 绑定成功不代表设备一定会展示通知。
 
-6. 若正常切后台后没有通知，检查前后台生命周期事件是否正确传递给 SDK，并检查服务端在线状态。SDK 4.26.0 及以上可结合 [连接状态查询](/v4/ios/connection.html#查询连接状态) 排查当前是否仍保持 IM 长连接；多设备登录时，还需检查控制台配置的推送策略。
+6. 若正常切后台后没有通知，检查 [前后台生命周期事件](#步骤四-处理应用前后台切换) 是否正确传递给 SDK，并检查服务端在线状态。SDK 4.26.0 及以上可结合 [连接状态查询](/v4/ios/connection.html#查询连接状态) 排查当前是否仍保持 IM 长连接；多设备登录时，还需检查控制台配置的 [推送策略](push_overview.html#多设备离线推送策略)。

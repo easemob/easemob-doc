@@ -84,7 +84,7 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 
 自 SDK 4.26.0 起，你可以调用 `markMessagesAsReadWithTimestamp:completion:`，将会话中指定时间点及以前的未读接收消息标记为已读，便于按用户实际阅读进度更新已读状态。SDK 按实际标记的消息条数扣减该会话的未读消息数。
 
-- 时间戳单位为毫秒，必须大于 `0`，处理范围包含指定时间点。
+- 时间戳单位为毫秒，必须大于 `0`，处理范围包含指定时间点。截止时间应与 `EMOptions.sortMessageByServerTime` 的配置一致：默认 `YES` 时使用消息的 `timestamp`（服务器时间）；配置为 `NO` 时使用消息的 `localTime`（本地时间）。
 - 仅处理接收方向的未读消息，不影响指定时间点之后的消息。
 - 该操作只修改本地已读状态，不向服务器发送已读回执。如需向发送方发送已读回执，请参见 [消息已读回执](message_receipt.html)。
 - 该方法异步执行，传入的 `completion` 在主线程回调；成功时 `error` 为 `nil`。
@@ -93,8 +93,9 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId
                                                                               type:type
                                                                   createIfNotExist:YES];
-// 以用户已阅读到的消息时间戳作为截止时间，单位为毫秒。
-long long timestamp = lastReadMessage.timestamp;
+// 根据当前消息排序配置，选择用户已阅读到的消息的对应时间，单位为毫秒。
+BOOL sortByServerTime = [EMClient sharedClient].options.sortMessageByServerTime;
+long long timestamp = sortByServerTime ? lastReadMessage.timestamp : lastReadMessage.localTime;
 [conversation markMessagesAsReadWithTimestamp:timestamp completion:^(EMError *error) {
     if (error) {
         // 处理失败，可通过 error.code 和 error.errorDescription 获取错误信息。

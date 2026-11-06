@@ -161,7 +161,7 @@ EMPushHelper.getInstance().setPushListener(new PushListener() {
 });
 ```
 
-SDK 4.26.0 支持通过 `EMOptions#setUsePushInBackground(boolean)` 配置 FCM 后台断连行为，默认关闭。如需后台断连并使用推送，请在初始化前将该开关设为 `true`；推送通道有效时，应用进入后台约 10 秒后断开长连接。可通过 `EMOptions#isUsePushInBackground()` 查询当前开关值，详见[配置后台消息接收策略](push_overview.html#配置后台消息接收策略)。
+SDK 4.26.0 支持通过 `EMOptions#setUsePushInBackground(boolean)` 配置 FCM 后台断连行为，默认关闭。如需后台断连并使用推送，请在初始化前将该开关设为 `true`。切入后台时通道有效，SDK 会在约 10 秒后断开长连接；回到前台则取消尚未执行的任务。若在后台连接成功，且开关已开启、通道有效，SDK 会直接断连，不再等待约 10 秒。可通过 `EMOptions#isUsePushInBackground()` 查询当前开关值，详见 [配置后台消息接收策略](push_overview.html#配置后台消息接收策略)。
 
 4. 环信即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
 
@@ -230,7 +230,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 
 ### **测试步骤**
 
-1. 在设备上登录应用，并确认 device token 绑定成功。SDK 4.26.0 支持通过 `EMPushHelper.getInstance().isPushTokenBound()` 查询，详见[查询推送通道是否有效](push_overview.html#查询推送通道是否有效)。
+1. 在设备上登录应用，并确认 device token 绑定成功。SDK 4.26.0 支持通过 `EMPushHelper.getInstance().isPushTokenBound()` 查询，详见 [确认推送通道有效](push_overview.html#确认推送通道有效)。
    可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/document/server-side/account_detail_obtain_single.html)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
 2. 开启应用通知栏权限。
 3. 杀掉应用进程。

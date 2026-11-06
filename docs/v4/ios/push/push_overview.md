@@ -88,7 +88,7 @@ SDK 4.26.0 提供的 `EMOptions.disconnectNotifyThreshold` 只影响相关断线
 | 进入后台 | `-[EMClient applicationDidEnterBackground:]` | 已登录时，SDK 在收到后台生命周期调用后主动断开 IM 长连接，并通知未连接状态。服务端判定用户离线且满足推送条件后，通过 APNs 下发通知。 |
 | 回到前台 | `-[EMClient applicationWillEnterForeground:]` | 已登录时，SDK 在收到前台生命周期调用后检查连接或尝试重连，连接恢复后接收离线期间的消息。若已退出登录或被强制下线，需要按业务流程重新登录。 |
 
-后台主动断连不会等待断线通知宽限期，也不会以 token 是否绑定成功作为断连前提。因此，应先完成证书配置和 token 绑定，再验证后台接收通知的效果。
+SDK 在收到后台生命周期调用后，已登录时直接执行断连，不以 token 是否绑定成功作为前提。验证后台接收通知前，应先完成证书配置和 token 绑定。
 
 具体接口调用和生命周期接入示例见 [处理应用前后台切换](push_apns.html#步骤四-处理应用前后台切换)。
 

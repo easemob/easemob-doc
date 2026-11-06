@@ -79,35 +79,17 @@ extension ViewController: EMClientDelegate {
 
 ## 配置断线通知宽限期
 
-自 SDK 4.26.0 起，你可以通过 `EMOptions.disconnectNotifyThreshold` 设置或查询断线通知宽限时间，单位为秒，默认值为 `10`。
+SDK 4.26.0 新增 `EMOptions.disconnectNotifyThreshold` 属性，用于设置或查询断线通知时间阈值，单位为秒，默认值为 `10`。
 
-成功建立连接后，发生网络异常等可恢复断线时，SDK 会暂缓向应用发送断开连接回调，减少短暂网络波动引起的断线提示。具体规则如下：
+:::tip
+在 iOS SDK 4.26.0 中，发生网络中断等情况时，SDK 会通过 `connectionStateDidChange:` 通知应用连接已断开。设置 `disconnectNotifyThreshold` 不会延迟该通知，也不会因短暂断线后快速重连成功而取消断开通知。
+:::
 
-- 宽限期内重连成功，不触发断开连接回调。
-- 宽限期到期仍未恢复连接，才触发断开连接回调。
-- 设置为小于或等于 `0` 时，不启用宽限期，直接通知。
-- 首次连接失败、token 过期或被踢下线等情况不受宽限期影响，仍按原有机制通知。例如，token 过期仍通过 `tokenDidExpire:` 通知。
-
-在 [初始化 SDK](initialization.html#初始化-sdk) 前，通过 `EMOptions` 配置宽限期：
-
-```objectivec
-EMOptions *options = [EMOptions optionsWithAppkey:@"Your appkey"];
-// 设置断线通知宽限期为 10 秒。设置为 0 或负数可关闭宽限期。
-options.disconnectNotifyThreshold = 10;
-// 读取当前配置的宽限时间，单位为秒。
-NSInteger threshold = options.disconnectNotifyThreshold;
-
-EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
-if (error) {
-    // 处理初始化失败。
-}
-```
-
-宽限期仅影响断开连接回调的时机，不延迟连接状态的变化。即使尚未收到断开连接回调，通过 `connectionState` 查询的结果也可能已经是未连接或连接中。需要判断当前状态时，请读取该属性。
+该属性不影响实际连接状态、自动重连行为或 APNs 的发送时间。需要判断当前连接状态时，请查询 `connectionState`。token 过期、账号被踢下线等情况，SDK 仍通过对应的回调通知应用。
 
 ## 自动重连
 
-登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。你可以结合 `connectionState` 查询和 `connectionStateDidChange` 回调了解连接情况。自 SDK 4.26.0 起，可恢复断线的通知受 [断线通知宽限期](#配置断线通知宽限期) 影响，短暂断线后在宽限期内重连成功时，不会收到断开连接回调。
+登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。你可以结合 `connectionState` 查询和 `connectionStateDidChange` 回调了解连接情况。SDK 4.26.0 的 iOS 普通断线回调不会因设置 `disconnectNotifyThreshold` 而延迟；重连成功后，SDK 会通知已连接状态。
 
 不过，SDK 在以下情况下会停止自动重连。你需要调用 `login` 方法登录。
 

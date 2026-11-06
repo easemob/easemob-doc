@@ -37,6 +37,8 @@ switch (state) {
 
 你可以注册 `EMConnectionListener` 监听连接成功和断开通知。
 
+调用 `EMClient#addConnectionListener` 后，SDK 会在工作线程检查当前状态，并向该监听器补发通知：已连接时调用 `onConnected()`；未连接但仍处于已登录状态时，调用 `onDisconnected(EMError.NETWORK_ERROR)`。这类注册时的状态通知不受断线通知宽限期控制，因此，在宽限期内新增或重新注册监听器，仍可能收到断开回调。
+
 `onConnected()` 和 `onDisconnected(int errorCode)` 均在工作线程中调用。请勿直接在回调中更新 UI 或执行耗时操作；需要更新界面时，请切换到主线程。
 
 ```java
@@ -91,11 +93,11 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 宽限期的行为如下：
 
-- 仅在本次登录已成功触发过 `onConnected()` 后生效。首次连接失败时立即触发 `onDisconnected(int errorCode)`。
-- 对于网络异常、服务器不可达等可恢复断线，SDK 自动重连。宽限期内重连成功则不触发断开回调；到期仍未恢复则触发一次断开回调。
-- 同一宽限期内再次断线不重新计时，回调使用最后一次断线的错误码。
-- token 失效、被踢下线等不可恢复错误不受宽限期影响，立即触发断开回调。
-- `seconds` 小于或等于 `0` 时关闭延迟，断线时立即触发回调。
+- 仅在本次登录已成功建立连接后生效。首次连接失败不受宽限期影响；手动登录失败应通过登录接口的 `EMCallBack#onError(int code, String error)` 处理，不保证触发 `onDisconnected(int errorCode)`。
+- 对于网络异常、服务器不可达等可恢复断线，SDK 自动重连。宽限期内重连成功，则取消本次暂缓的断开通知；到期仍未恢复，则触发一次断开回调。注册监听器时补发的状态通知不受此规则限制，详见 [监听连接状态](#监听连接状态)。
+- 宽限期启用期间，再次处理可恢复断线错误不重新计时，回调使用最后一次断线的错误码。
+- 被踢下线等不可恢复断线的通知不受宽限期延迟。Token 过期有专门的处理路径，通过 `onTokenExpired()` 通知，不应统一按 `onDisconnected(int errorCode)` 处理。
+- `seconds` 小于或等于 `0` 时关闭延迟，可恢复断线通知不再等待宽限期。
 - 宽限期仅延迟断开回调，不会延迟真实连接状态的变化。应用可通过 `getConnectionState()` 查询当前状态。
 
 在 SDK 初始化前配置：
@@ -111,12 +113,12 @@ EMClient.getInstance().init(context, options);
 
 ```java
 EMOptions options = EMClient.getInstance().getOptions();
-// 设置为 0 可恢复断线后立即通知的行为。
+// 设置为 0，关闭可恢复断线通知的延迟。
 options.setDisconnectNotifyThreshold(0);
 int seconds = options.getDisconnectNotifyThreshold();
 ```
 
-修改后的值从下一次断线开始生效，不影响正在进行中的宽限期。
+修改配置不会直接重设已启动的计时器。改为其他正值时，当前宽限期仍使用原来的截止时间；改为小于或等于 `0` 后，若当前宽限期内再次处理可恢复断线错误，SDK 会立即触发断开通知并取消当前宽限期。后续新启动的宽限期使用最新配置。
 
 ## 网络超时
 
