@@ -30,7 +30,8 @@ EMClient.getInstance().init(context, options);
 | `setAppKey(String appkey)`                                   | 设置 App Key。<br/>`appkey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
 | `setAutoLogin(boolean autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
-| `setUsePushInBackground(boolean usePushInBackground)`        | 设置应用进入后台后是否断开长连接并使用厂商推送。该功能自 SDK 4.24.3 起支持，且必须在初始化 SDK 前设置。<br/> - `true`：推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。<br/> -（默认）`false`：应用进入后台后继续保持长连接。详见[离线推送过程](/v4/android/push/push_overview.html#离线推送过程)。 |
+| `setUsePushInBackground(boolean usePushInBackground)`        | 设置应用进入后台后是否断开长连接并使用厂商推送。该功能自 SDK 4.26.0 起支持，且必须在初始化 SDK 前设置。<br/> - `true`：推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。<br/> -（默认）`false`：应用进入后台后继续保持长连接。通过 `isUsePushInBackground()` 查询当前配置。详见 [配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)。 |
+| `setDisconnectNotifyThreshold(int seconds)` | 设置可恢复断线的通知宽限期，单位为秒，默认 `10`；小于或等于 `0` 时立即触发断开回调。自 SDK 4.26.0 起支持，初始化前后均可设置。通过 `getDisconnectNotifyThreshold()` 查询。详见 [配置断线通知宽限期](connection.html#配置断线通知宽限期)。 |
 | `setAutoAcceptGroupInvitation(boolean value)`                | 设置是否自动接受加群邀请。<br/>`value` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
 | `setAcceptInvitationAlways(boolean value)`                   | 设置是否自动接受加好友邀请。 <br/>`value` 参数表示是否自动接受加好友邀请。 <br/> -（默认）`true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
 | `setEnableChatroomConversation(boolean enable)`                    | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.1 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
@@ -42,7 +43,7 @@ EMClient.getInstance().init(context, options);
 
 ## 初始化后设置监听
 
-初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。
+初始化后，你可以设置所需的监听，例如，连接监听和接收消息的监听，及时知晓长连接的建立和消息的收发。自 SDK 4.26.0 起，可恢复断线的通知受 [断线通知宽限期](connection.html#配置断线通知宽限期) 控制；查询当前实际连接状态请使用 `EMClient#getConnectionState()`，详见 [查询连接状态](connection.html#查询连接状态)。
 
 ```java
 EMConnectionListener connectionListener = new EMConnectionListener() {
@@ -52,7 +53,7 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     }
     @Override
     public void onDisconnected(int errorCode) {
-    // SDK 与 IM 服务器断开连接时触发。
+    // SDK 触发断开通知时调用，可恢复断线可能延迟通知。
     }
 };
 // 注册连接状态监听

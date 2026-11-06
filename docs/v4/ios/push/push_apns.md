@@ -24,7 +24,7 @@
 
 ### **步骤二 创建 App ID**
 
-1. 生成 App ID。如果已经有 App ID 可以跳至[步骤三](#步骤三-创建-app-的-aps-证书)。
+1. 生成 App ID。如果已经有 App ID 可以跳至[步骤三](#步骤三-创建-app-的-apns-证书)。
 
 ![image](/images/ios/push/push_ios_5_create_app_id.jpeg)
 
@@ -72,7 +72,7 @@
 
 ### **步骤四 生成推送证书**
 
-1. 导入证书：双击[步骤三](#步骤三-创建-app-的-aps-证书)下载的文件（**aps_development.cer** 和 **aps.cer**）将其安装到电脑，在 **Keychain Access** 中，可以看到导入的证书。
+1. 导入证书：双击[步骤三](#步骤三-创建-app-的-apns-证书)下载的文件（**aps_development.cer** 和 **aps.cer**）将其安装到电脑，在 **Keychain Access** 中，可以看到导入的证书。
 
 ![image](/images/ios/push/push_ios_16_keychain_access_apple_develop.jpeg)
 
@@ -134,7 +134,7 @@
 
 ### **步骤一 在 app 中开启推送权限**
 
-打开 Xcode，选择 **TARGETS** > **Signing & Capabilities** > **Push Notifications** 开启消息推送权限。
+打开 Xcode，选择 **TARGETS** > **Signing & Capabilities** > **Push Notifications** 开启消息推送能力。若需展示横幅、声音或角标，还应向用户申请相应的通知授权；测试时确认系统设置中已允许该应用发送通知。
 
 ![image](/images/ios/push/push_ios_26_xcode_enable_push_notifi.jpeg)
 
@@ -160,22 +160,55 @@
 
 ### **步骤三 获取 device token 并传递给 SDK**
 
-DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给你，你需要把 DeviceToken 传给 SDK。
+APNs 注册成功后，iOS 会通过 `application:didRegisterForRemoteNotificationsWithDeviceToken:` 返回 device token。这只表示已获取 APNs token，不代表已完成环信服务器绑定。完成 SDK 初始化并设置 `apnsCertName` 后，将该 token 传递给 SDK，并处理异步绑定结果。
 
 ```objectivec
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  // 异步方法
-  [EMClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(EMError *aError) {
-      if (aError) {
-          NSLog(@"bind deviceToken error: %@", aError.errorDescription);
-      }
-  }];
-  }
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-  NSLog(@"Register Remote Notifications Failed");
-  }
-  
+- (void)application:(UIApplication *)application
+        didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[EMClient sharedClient] registerForRemoteNotificationsWithDeviceToken:deviceToken
+        completion:^(EMError *aError) {
+            if (aError) {
+                if (aError.code == EMErrorUserNotLogin) {
+                    // 当前尚未登录，SDK 会在登录成功后尝试上传已保存的 token。
+                    // 登录后需再次确认服务器端的绑定结果。
+                } else {
+                    // 处理绑定失败，可通过 aError.code 和 aError.errorDescription 获取原因。
+                }
+                return;
+            }
+            // 本次 token 绑定成功，随后结合后台场景进行真机推送测试。
+        }];
+}
+
+- (void)application:(UIApplication *)application
+        didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    // 处理 APNs token 注册失败，检查网络、签名和推送能力配置。
+}
 ```
+
+SDK 的绑定完成回调返回本次向环信服务器绑定 token 的结果。首次传入 token 时若尚未登录，SDK 会在登录成功后尝试上传已保存的 token，应在登录后确认服务器端的绑定结果。绑定结果检查和实际通知验证见下文 [测试 APNs 推送](#测试-apns-推送)。
+
+### 步骤四 处理应用前后台切换
+
+完成 SDK 初始化后，在应用实际进入后台和回到前台时，将对应的生命周期事件传递给 SDK。生命周期转发无需等待 device token 绑定完成。以下示例适用于由 `AppDelegate` 管理应用生命周期的项目：
+
+```objectivec
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // 已登录时，SDK 主动断开 IM 长连接。
+    [[EMClient sharedClient] applicationDidEnterBackground:application];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // 已登录时，SDK 检查连接或尝试重连。
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
+}
+```
+
+使用 `SceneDelegate` 管理场景生命周期的项目，应按应用整体的前后台状态统一转发上述两个 SDK 调用，并传入 `UIApplication` 实例。多窗口应用应避免仅因某个场景进入后台就断开其他活跃场景仍需使用的 IM 连接，也应避免重复转发同一次状态变化。
+
+SDK 的后台断连不以 token 绑定成功为前提。验证后台推送前，应先完成 APNs 证书配置和 token 绑定，并确认通知权限及推送设置允许展示本次通知。若用户已退出登录或被强制下线，返回前台后需按业务流程重新登录。
+
+调用 `applicationDidEnterBackground:` 主动断连时不会等待断线通知宽限期。后台断连、前台重连及其与宽限期的关系见 [应用前后台切换](push_overview.html#应用前后台切换)。
 
 ## **测试 APNs 推送**
 
@@ -216,3 +249,17 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
    
 4. 检查发送消息时是否设置了只发在线(`EMChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。
+
+### **故障排除**
+
+1. 按 [前提条件](#前提条件) 核对服务器端的 token 绑定结果。若未绑定或信息不匹配，返回 [步骤三](#步骤三-获取-device-token-并传递给-sdk) 检查 token 注册与绑定回调中的错误。
+
+2. 检查是否在 [环信控制台](https://console.easemob.com/user/login) 上传了正确的 APNs 证书且设置了正确的证书环境。
+   
+3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
+   
+4. 检查发送消息时是否设置了只发在线(`EMChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。
+
+5. 检查设备通知设置、应用的 [推送通知方式](push_notification_mode_dnd.html#推送通知方式) 和 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 是否屏蔽本次通知。token 绑定成功不代表设备一定会展示通知。
+
+6. 若正常切后台后没有通知，检查前后台生命周期事件是否正确传递给 SDK，并检查服务端在线状态。SDK 4.26.0 及以上可结合 [连接状态查询](/v4/ios/connection.html#查询连接状态) 排查当前是否仍保持 IM 长连接；多设备登录时，还需检查控制台配置的推送策略。

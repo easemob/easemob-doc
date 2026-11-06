@@ -152,16 +152,16 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 #### 新增特性
 
-- **支持按时间点批量标记消息已读**：通过 `EMConversation.markMessagesAsReadWithTimestamp(long timestamp)`，可将会话中指定时间点及以前的未读接收消息标记为已读，并相应更新会话未读数。
-- **支持查询完整的连接状态**：通过 `EMClient.getConnectionState()` 获取 `EMConnectionState`，可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`EMClient.isConnected()` 标记为废弃，现有调用仍可使用，建议改用新接口。
-- **支持配置断线通知宽限期**：通过 `EMOptions.setDisconnectNotifyThreshold(int seconds)` 设置宽限时间，单位为秒，默认为 10 秒，通过 `getDisconnectNotifyThreshold()` 查询。成功建立连接后，发生网络异常等可恢复断线时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。宽限期内重连成功则不触发断开回调，到期仍未恢复才触发；设置为小于或等于 0 时立即回调。首次连接失败、token 失效或被踢下线等情况仍立即通知。宽限期仅影响回调时机，连接状态会即时变化。
-- **支持配置后台消息接收策略**：通过 `EMOptions.setUsePushInBackground(boolean usePushInBackground)` 设置后台推送开关，通过 `isUsePushInBackground()` 查询。应用可选择在进入后台后断开 IM 长连接，改由有效的推送通道接收离线消息。该开关默认关闭（`false`）；在 SDK 初始化前设置为 `true` 后，若推送 token 已成功绑定到服务器，SDK 会在应用进入后台约 10 秒后主动断开长连接。
-- **支持查询推送通道是否有效**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
+- **[支持按时间点批量标记消息已读](/v4/android/conversation_unread.html#按时间点批量标记消息已读)**：通过 `EMConversation.markMessagesAsReadWithTimestamp(long timestamp)`，可将会话中指定时间点及以前的未读接收消息标记为已读，并相应更新会话未读数。
+- **[支持查询完整的连接状态](/v4/android/connection.html#查询连接状态)**：通过 `EMClient.getConnectionState()` 获取 `EMConnectionState`，可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`EMClient.isConnected()` 标记为废弃，现有调用仍可使用，建议改用新接口。
+- **[支持配置断线通知宽限期](/v4/android/connection.html#配置断线通知宽限期)**：通过 `EMOptions.setDisconnectNotifyThreshold(int seconds)` 设置宽限时间，单位为秒，默认为 10 秒，通过 `getDisconnectNotifyThreshold()` 查询。成功建立连接后，发生网络异常等可恢复断线时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。宽限期内重连成功则不触发断开回调，到期仍未恢复才触发；设置为小于或等于 0 时立即回调。首次连接失败、token 失效或被踢下线等情况仍立即通知。宽限期仅影响回调时机，连接状态会即时变化。
+- **[支持配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)**：通过 `EMOptions.setUsePushInBackground(boolean usePushInBackground)` 设置后台推送开关，通过 `isUsePushInBackground()` 查询。应用可选择在进入后台后断开 IM 长连接，改由有效的推送通道接收离线消息。该开关默认关闭（`false`）；在 SDK 初始化前设置为 `true` 后，若推送 token 已成功绑定到服务器，SDK 会在应用进入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/v4/android/push/push_overview.html#查询推送通道是否有效)**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
 
 #### 优化
 
-- **调整 FCM 后台连接策略**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
-- **调整流式消息扩展字段的更新逻辑**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
+- **[调整 FCM 后台连接策略](/v4/android/push/push_overview.html#fcm-后台连接策略变化)**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
+- **[调整流式消息扩展字段的更新逻辑](/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
 
 #### 修复
 

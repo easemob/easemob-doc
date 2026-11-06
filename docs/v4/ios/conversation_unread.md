@@ -2,7 +2,7 @@
 
 <Toc />
 
-你可以查看本地所有会话或指定会话的未读消息数，并针对会话的未读消息数清零。
+你可以查看本地所有会话或指定会话的未读消息数，将全部或单条消息标记为已读，也可以按时间点批量标记消息已读，以更新会话未读数。
 
 ## 前提条件
 
@@ -20,6 +20,7 @@
 - `EMChatManager#markAllConversationsAsRead`：将所有会话的未读消息数清零。
 - `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
 - `EMConversation#markMessageAsReadWithId`：将指定会话的单条未读消息置为已读。
+- `EMConversation#markMessagesAsReadWithTimestamp:completion:`：将指定会话中指定时间点及以前的未读接收消息标记为已读，并按实际标记条数更新未读数。
 
 ## 实现方法
 
@@ -78,3 +79,30 @@ EMConversation *conversation = [[EMClient sharedClient].chatManager getConversat
 EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId type:type createIfNotExist:YES];
 [conversation markMessageAsReadWithId:messageId error:nil];
 ```
+
+### 按时间点批量标记消息已读
+
+自 SDK 4.26.0 起，你可以调用 `markMessagesAsReadWithTimestamp:completion:`，将会话中指定时间点及以前的未读接收消息标记为已读，便于按用户实际阅读进度更新已读状态。SDK 按实际标记的消息条数扣减该会话的未读消息数。
+
+- 时间戳单位为毫秒，必须大于 `0`，处理范围包含指定时间点。
+- 仅处理接收方向的未读消息，不影响指定时间点之后的消息。
+- 该操作只修改本地已读状态，不向服务器发送已读回执。如需向发送方发送已读回执，请参见 [消息已读回执](message_receipt.html)。
+- 该方法异步执行，传入的 `completion` 在主线程回调；成功时 `error` 为 `nil`。
+
+```objectivec
+EMConversation *conversation = [[EMClient sharedClient].chatManager getConversation:conversationId
+                                                                              type:type
+                                                                  createIfNotExist:YES];
+// 以用户已阅读到的消息时间戳作为截止时间，单位为毫秒。
+long long timestamp = lastReadMessage.timestamp;
+[conversation markMessagesAsReadWithTimestamp:timestamp completion:^(EMError *error) {
+    if (error) {
+        // 处理失败，可通过 error.code 和 error.errorDescription 获取错误信息。
+        return;
+    }
+    // 当前回调位于主线程，可读取更新后的未读数并刷新界面。
+    NSInteger unreadCount = conversation.unreadMessagesCount;
+}];
+```
+
+时间戳小于或等于 `0` 时返回 `EMErrorInvalidParam`，未登录时返回 `EMErrorUserNotLogin`，底层会话不存在或数据库操作失败时返回 `EMErrorDatabaseOperationFailed`。
