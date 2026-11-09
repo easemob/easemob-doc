@@ -136,9 +136,9 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 
 #### 新增特性
 
-- **[支持按时间点批量标记消息已读](/v4/ios/conversation_unread.html#按时间点批量标记消息已读)**：通过 `-[EMConversation markMessagesAsReadWithTimestamp:completion:]`，可将会话中指定时间点及以前的未读接收消息标记为已读，并按实际标记条数更新会话未读数。时间戳单位为毫秒，操作结果通过主线程回调返回。该操作仅作用于本地，不向服务器发送已读回执。
-- **[支持查询完整的连接状态](/v4/ios/connection.html#查询连接状态)**：通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`，可区分未连接、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
-- **[新增断线通知宽限期配置](/v4/ios/connection.html#配置断线通知宽限期)**：通过 `EMOptions.disconnectNotifyThreshold` 设置或查询宽限时间，单位为秒，默认为 10 秒。成功建立连接后，发生网络异常等可恢复断线时，SDK 会暂缓向应用发送断开连接回调，减少短暂网络波动引起的断线提示。宽限期内重连成功则不触发断开回调，到期仍未恢复才触发；设置为小于或等于 0 时不启用宽限期，直接通知。首次连接失败、token 过期或被踢下线等情况不受宽限期影响，仍按原有机制通知。宽限期仅影响断开连接回调的时机，通过 `EMClient.connectionState` 查询的结果仍反映当前连接状态。
+- **[支持按时间点批量标记消息已读](/v4/ios/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `[EMConversation markMessagesAsReadWithTimestamp:completion:]` 接口，操作结果通过主线程回调返回。
+- **[支持查询完整的连接状态](/v4/ios/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
+- **[新增断线通知宽限期配置](/v4/ios/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions.disconnectNotifyThreshold` 设置或查询宽限时间，单位为秒，默认为 10 秒。
 
 #### 优化
 
