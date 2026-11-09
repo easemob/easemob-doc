@@ -148,6 +148,26 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - 修复关闭附件 MD5 校验后，上传附件仍可能执行 MD5 预校验的问题。
 - 修复网络传输、任务队列和数据库缓存中的若干并发安全问题。
 
+## v4.26.0 Dev 2026-10-29（开发版）
+
+#### 新增特性
+
+- **[支持按时间点批量标记消息已读](/v4/android/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `EMConversation.markMessagesAsReadWithTimestamp(long timestamp)` 接口。
+- **[支持查询完整的连接状态](/v4/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持配置断线通知宽限期](/v4/android/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
+- **[支持配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/v4/android/push/push_overview.html#查询推送通道是否有效)**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
+
+#### 优化
+
+- **[调整 FCM 后台连接策略](/v4/android/push/push_overview.html#fcm-后台连接策略变化)**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
+- **[调整流式消息扩展字段的更新逻辑](/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
+
+#### 修复
+
+- 修复其他设备修改会话免打扰设置后，本机虽收到通知但本地状态未同步的问题，同时支持正确处理取消免打扰的通知。
+- 修复退出聊天室失败后的重试请求与重新加入操作并发时，旧退出请求可能误清除重新加入后的聊天室状态的问题。
+
 ## v4.25.1 Dev 2026-9-18（开发版）
 
 #### 重大变更
