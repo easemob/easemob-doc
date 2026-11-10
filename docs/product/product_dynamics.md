@@ -16,7 +16,7 @@ containerClass: product-dynamics-page
 
 | 动态名称 | 动态描述 | 发布时间 | 相关文档 |
 | :----- | :------- | :------- | :------- |
-| Web SDK 5.2.0 开发版发布 | **新增特性**：<br/> - **[支持复合消息](/document/web/message_send.html#发送复合消息)**：单条消息可按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，支持 2–20 段，可用于构建图文混排、多图等消息展示。支持 [接收及下载附件](/document/web/message_receive.html#接收复合消息)，以及将复合消息作为子消息进行合并转发。<br/> - **[完善文本消息翻译](/document/web/message_translation.html)**：支持普通文本消息在发送或编辑前自动翻译，同时保留原文和译文，接收方可获取并展示译文；翻译失败时，不发送消息或编辑请求。仍支持按需翻译已有文本消息，复合消息中的文本分段不支持自动翻译。<br/> - **[扩展消息编辑能力](/document/web/message_modify.html#支持范围)**：在文本和自定义消息编辑的基础上，新增图片、语音、视频、文件、位置和合并消息的扩展字段编辑能力。命令消息和复合消息不支持编辑。<br/> - **[支持查询 SDK 版本号](/document/web/initialization.html#获取-sdk-版本号)**：应用可获取当前集成的 SDK 版本号，便于确认集成版本和排查版本相关问题。 | 2026-11-5 | [Web SDK 5.2.0 更新日志](/document/web/releasenote.html#_5-2-0-dev-2026-11-5) |
+| Web SDK 5.2.0 开发版发布 | **新增特性**：<br/> - **[支持复合消息](/document/web/message_send.html#发送复合消息)**：单条消息可按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，支持 2–20 段，可用于构建图文混排、多图等消息展示。支持 [接收及下载附件](/document/web/message_receive.html#接收复合消息)，以及将复合消息作为子消息进行合并转发。<br/> - **[支持查询 SDK 版本号](/document/web/initialization.html#获取-sdk-版本号)**：应用可获取当前集成的 SDK 版本号，便于确认集成版本和排查版本相关问题。 | 2026-11-5 | [Web SDK 5.2.0 更新日志](/document/web/releasenote.html#_5-2-0-dev-2026-11-5) |
 
 ## 2026-10
 
