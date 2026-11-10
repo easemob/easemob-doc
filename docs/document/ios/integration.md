@@ -14,12 +14,25 @@
 
 :::tip
 
-1. CocoaPods 集成和手动集成二选一；不要同时使用两种方式。
+1. Swift Package Manager（SPM）、CocoaPods 和手动集成只需选择一种，避免重复引入 SDK。
 2. SDK 最新版本号请参见 [发版说明](releasenote.html)。
 
 :::
 
-### 方法一：使用 CocoaPods 集成
+### （推荐）方法一：使用 Swift Package Manager 集成
+
+请选用支持 SPM 的 SDK 5.x 发布版本。
+
+1. 在 Xcode 中打开项目，选择 **File > Add Package Dependencies…**。
+2. 在搜索框中输入仓库地址：[https://github.com/easemob/HyphenateChat_iOS](https://github.com/easemob/HyphenateChat_iOS)。
+3. 在 **Dependency Rule** 中选择 **Exact Version**，填入支持 SPM 的发布版本号，例如 `5.2.0`，然后点击 **Add Package**。如需使用其他版本，请先确认对应版本标签包含 `Package.swift`。
+4. 在包产品选择页面，将 **HyphenateChat** 添加到你的 App Target，然后点击 **Add Package**。等待 Xcode 完成依赖解析和下载。
+
+SDK `5.2.0` 的 SPM 包最低要求为 iOS 10.0。使用其他版本时，请以所选版本 `Package.swift` 中的系统要求为准，并相应设置 App Target 的最低部署版本。
+
+### 方法二：使用 CocoaPods 集成（即将废弃）
+
+CocoaPods 集成方式即将废弃，建议优先使用 SPM。
 
 1. 在 Terminal 中进入项目根目录，运行 `pod init`。该命令会在项目根目录生成 `Podfile`。
 2. 打开 `Podfile`，配置 iOS 部署目标、App Target 和 SDK 依赖：
@@ -37,7 +50,7 @@ end
 
 如需更新已安装的 SDK 版本，可运行 `pod update HyphenateChat`，随后重新使用 `.xcworkspace` 打开项目。
 
-### 方法二：手动导入 SDK
+### 方法三：手动导入 SDK
 
 1. 打开 [SDK 下载页面](https://www.easemob.com/download/im#IOS)，下载并解压最新版环信即时通讯 IM iOS SDK。
 2. 将 SDK 包内的 `HyphenateChat.xcframework` 和 `aosl.xcframework` 拖入 Xcode 项目。

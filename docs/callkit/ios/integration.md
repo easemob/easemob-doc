@@ -12,7 +12,7 @@
 - Xcode 16.0 或以上版本 
 - 最低支持系统版本：iOS 15.0
 - 已为你的项目设置有效的开发者签名
-- CocoaPods v1.14.3 或以上版本
+- CocoaPods v1.14.3 或以上版本（仅使用 CocoaPods 集成时需要）
 
 ## 前提条件  
 
@@ -27,11 +27,22 @@
 
 ### 步骤 1： 添加依赖
 
-你可以使用 CocoaPods 安装环信 CallKit 作为 Xcode 项目的依赖项。
+推荐使用 Swift Package Manager（SPM）安装 EaseCallUIKit。以下集成方式只需选择一种，避免重复引入依赖。
 
-CocoaPods 是 iOS 和 macOS 项目的依赖管理工具。它允许你轻松地将第三方库集成到您的项目中，并自动处理依赖关系。安装方法请自行询问 AI 或者搜索引擎。
+#### （推荐）方式一：通过 Swift Package Manager 集成
 
-#### 方式一：通过 CocoaPods 远程安装
+EaseCallUIKit 自 4.26.1 起提供 SPM 集成方式。请选用支持 SPM 的发布版本。
+
+1. 在 Xcode 中打开项目，选择 **File > Add Package Dependencies…**。
+2. 在搜索框中输入仓库地址：[https://github.com/easemob/easemob-callkit-iOS](https://github.com/easemob/easemob-callkit-iOS)。
+3. 在 **Dependency Rule** 中选择 **Exact Version**，填入支持 SPM 的发布版本号，例如 `4.26.1`，然后点击 **Add Package**。如需使用其他版本，请先确认对应版本标签包含 `Package.swift`。
+4. 在包产品选择页面，将 **EaseCallUIKit** 添加到你的 App Target，然后点击 **Add Package**。等待 Xcode 完成依赖解析和下载。
+
+SPM 会根据所选版本的包配置解析 IM SDK 和 RTC SDK 依赖。若项目已集成这些 SDK，请确认版本与 CallKit 的依赖要求兼容，并避免通过不同方式重复引入。
+
+#### 方式二：通过 CocoaPods 远程安装（即将废弃）
+
+CocoaPods 集成方式即将废弃，建议优先使用 SPM。
 
 1. 使用 `pod init` 命令创建 `podfile` 文件,在 `podfile` 中添加如下依赖：
 
@@ -58,7 +69,7 @@ end
 pod install
 ```
 
-#### 方式二：本地源码集成
+#### 方式三：本地源码集成（基于 CocoaPods，即将废弃）
 
 如需基于源码进行调试，可将 CallKit 源码克隆到本地，并修改 `Podfile` 中的依赖路径。
 
