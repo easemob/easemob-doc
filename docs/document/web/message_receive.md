@@ -533,8 +533,6 @@ client.chatManager.addEventHandler('multi-body-listener', {
 普通附件消息返回单个 `MessageAttachmentDownloadResult`，复合消息返回结果数组。数组顺序与可下载分段一致，不包含被跳过的分段，不能直接使用完整 `body` 数组的索引对应下载结果。共用下载逻辑时，应先区分单个结果和数组。
 
 ```typescript
-import type { Message } from 'easemob-websdk';
-
 async function downloadMultiBodyAttachments(message: Message): Promise<void> {
   if (message.type !== 'multi_body') return;
   try {
