@@ -28,7 +28,7 @@
 3. 在 **Dependency Rule** 中选择 **Exact Version**，填入支持 SPM 的发布版本号，例如 `5.2.0`，然后点击 **Add Package**。如需使用其他版本，请先确认对应版本标签包含 `Package.swift`。
 4. 在包产品选择页面，将 **HyphenateChat** 添加到你的 App Target，然后点击 **Add Package**。等待 Xcode 完成依赖解析和下载。
 
-SDK `5.2.0` 的 SPM 包最低要求为 iOS 12.0。使用其他版本时，请以所选版本 `Package.swift` 中的系统要求为准，并相应设置 App Target 的最低部署版本。
+SDK `5.2.0` 的 SPM 包最低要求为 iOS 10.0。使用其他版本时，请以所选版本 `Package.swift` 中的系统要求为准，并相应设置 App Target 的最低部署版本。
 
 ### 方法二：使用 CocoaPods 集成（即将废弃）
 
