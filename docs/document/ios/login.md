@@ -47,7 +47,7 @@ SDK 通过用户 ID 和 IM Token 登录。调用 `loginWithUsername` 时，需�
 ```
 
 :::tip
-应用可以通过 `isLoggedIn` 和 `isConnected` 分别判断登录状态和服务器连接状态，但不能依赖 SDK 自动发起登录。每次应用启动或需要 IM 会话时，应由业务层保存凭证并显式调用 `loginWithUsername`。
+应用可以通过 `isLoggedIn` 查询登录状态，通过 `connectionState` 区分未连接、连接中和已连接状态，但不能依赖 SDK 自动发起登录。每次应用启动或需要 IM 会话时，应由业务层保存凭证并显式调用 `loginWithUsername`。
 :::
 
 ## 登录完成前使用本地数据库
@@ -150,11 +150,12 @@ NSString *currentUser = [EMClient sharedClient].currentUsername;
 
 ## 获取登录状态
 
-调用 `isLoggedIn` 判断当前用户是否已登录，调用 `isConnected` 判断 SDK 是否已连接到 IM 服务器。登录状态与连接状态含义不同，例如网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。
+调用 `isLoggedIn` 判断当前用户是否已登录。自 SDK 5.2.0 起，建议通过 `connectionState` 查询未连接、连接中或已连接状态；`isConnected` 已标记为废弃，现有调用仍可使用。登录状态与连接状态含义不同，例如网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。详见 [查询连接状态](connection.html#获取连接状态)。
 
 ```objectivec
 BOOL loggedIn = [EMClient sharedClient].isLoggedIn;
-BOOL connected = [EMClient sharedClient].isConnected;
+EMConnectionState state = [EMClient sharedClient].connectionState;
+BOOL connected = (state == EMConnectionConnected);
 ```
 
 ## 退出登录
@@ -308,7 +309,8 @@ options.loginExtensionInfo = @"login from iOS";
 | [`renewToken`](#token-续期) | `EMClient` | 异步更新当前登录使用的 Token。 |
 | [`currentUsername`](#获取当前登录的用户) | `EMClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `EMClient` | 判断当前用户是否已登录。 |
-| [`isConnected`](#获取登录状态) | `EMClient` | 判断 SDK 是否已连接到 IM 服务器。 |
+| [`connectionState`](#获取登录状态) | `EMClient` | 查询未连接、连接中或已连接状态。 |
+| [`isConnected`](#获取登录状态) | `EMClient` | 已废弃，建议改用 `connectionState`。 |
 | [`logout`](#退出登录) | `EMClient` | 异步退出当前账号，并按参数决定是否解绑设备推送 Token。 |
 | [`customOSType`](#多设备登录) | `EMOptions` | 设置登录设备的自定义系统类型。 |
 | [`customDeviceName`](#多设备登录) | `EMOptions` | 设置当前设备的自定义名称。 |

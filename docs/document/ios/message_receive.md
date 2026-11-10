@@ -1,7 +1,7 @@
 # 接收消息
 
 ## 功能说明
-环信即时通讯 IM iOS SDK 通过 `EMChatManagerDelegate` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息代理回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。
+环信即时通讯 IM iOS SDK 通过 `EMChatManagerDelegate` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息代理回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。自 SDK 5.2.0 起，还支持通过完整消息体列表接收和展示 [复合消息](#接收复合消息)。
 
 ## 前提条件
 
@@ -40,8 +40,9 @@
 | `from` | 消息发送者的用户 ID。 |
 | `to` | 消息目标 ID。 |
 | `chatType` | 单聊、群聊或聊天室。 |
-| `body.type` | 文本、图片、语音、视频、文件等消息类型。 |
-| `body` | 获取并转换为对应的 `EMMessageBody` 子类。 |
+| `contentType` | 整条消息的内容类型；复合消息返回 `EMMessageBodyTypeMultiBody`。 |
+| `body` | 首个消息体。复合消息中仅使用此属性会遗漏后续消息体。 |
+| `bodies` | 完整的有序消息体列表，适用于单消息体和复合消息。 |
 | `ext` | 读取发送方携带的业务扩展字段。 |
 
 ## 接收文本消息
@@ -51,7 +52,7 @@
 ```objectivec
 - (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
     for (EMChatMessage *message in messages) {
-        if (message.body.type == EMMessageBodyTypeText) {
+        if (message.contentType == EMMessageBodyTypeText) {
             // 将消息体转换为文本消息体。
             EMTextMessageBody *textBody = (EMTextMessageBody *)message.body;
             NSString *content = textBody.text;
@@ -70,6 +71,20 @@
 
 1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、大图、视频和文件，需调用对应下载接口。
 2. 获取附件的服务器地址和本地路径。
+
+#### 附件下载接口与回调
+
+根据所需资源调用以下 `IEMChatManager` 下载接口，并通过 `progress` 和 `completion` 获取下载进度和结果。
+
+| 接口 | 主要用途 | 进度回调 |
+| :--- | :--- | :--- |
+| `downloadMessageAttachment:progress:completion:` | 下载原始附件，如原图、语音、视频或文件。 | 通过 `progress` 返回 0–100 的下载进度。 |
+| `downloadBigImageAttachment:progress:completion:` | 下载图片大图。 | 通过 `progress` 返回 0–100 的下载进度。 |
+| `downloadMessageThumbnail:progress:completion:` | 下载图片或视频缩略图。 | 不触发 `progress`。 |
+
+每次下载请求通过 `completion` 返回一次最终结果：`error` 为 `nil` 表示成功，否则表示失败。下载成功后，从完成回调返回的消息对象中读取对应资源的本地路径和下载状态，更新展示。`progress` 和 `completion` 在主线程回调。
+
+自 SDK 5.2.0 起，上述接口也支持传入整条复合消息，无需逐个消息体调用。消息体筛选、消息级进度及整体下载结果的规则请参见 [下载复合消息附件](#下载复合消息附件)。
 
 ### 接收语音消息
 
@@ -111,7 +126,7 @@ NSString *voiceLocalPath = voiceBody.localPath;
 ```objectivec
 - (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
     for (EMChatMessage *message in messages) {
-        if (message.body.type != EMMessageBodyTypeImage) {
+        if (message.contentType != EMMessageBodyTypeImage) {
             continue;
         }
 
@@ -181,7 +196,7 @@ GIF 图片缩略图的下载与普通图片消息相同，详见 [接收图片�
   // 收到消息，遍历消息列表。
   for (EMChatMessage *message in aMessages) {
     // 消息解析和展示。
-    if (message.body.type == EMMessageBodyTypeImage) {
+    if (message.contentType == EMMessageBodyTypeImage) {
         EMImageMessageBody *body = (EMImageMessageBody *)message.body;
         if (body.isGif) {
             // 是 GIF 图片消息
@@ -339,7 +354,7 @@ NSDictionary<NSString *, NSString *> *customExt = customBody.customExt;
 {
 
     for (EMChatMessage* msg in aMessages) {
-        if (msg.body.type == EMMessageBodyTypeCombine) {
+        if (msg.contentType == EMMessageBodyTypeCombine) {
             // 合并消息类型，解析合并消息
             [EMClient.sharedClient.chatManager downloadAndParseCombineMessage:msg completion:^(NSArray<EMChatMessage *> * _Nullable messages, EMError * _Nullable error) {
 
@@ -348,6 +363,104 @@ NSDictionary<NSString *, NSString *> *customExt = customBody.customExt;
     }
 }
 ```
+
+## 接收复合消息
+
+自 SDK 5.2.0 起，复合消息沿用 `EMChatManagerDelegate` 的 `messagesDidReceive:` 回调接收，无需注册额外的消息代理。代理注册方式见 [监听消息事件](#监听消息事件)。
+
+处理时，先通过 `EMChatMessage.contentType` 判断整条消息是否为 `EMMessageBodyTypeMultiBody`，再读取完整的有序 `bodies` 列表，最后根据每个消息体的 `type` 读取内容。`contentType` 表示整条消息的内容类型，`EMMessageBody.type` 表示当前消息体的类型，二者用途不同。
+
+`body` 仍可使用，但仅返回首个消息体。原有逻辑若只判断 `message.body.type`，应增加复合消息分支，避免只展示第一段文本或第一张图片；单消息体消息可继续通过 `contentType` 判断其具体类型。
+
+以下示例以“文本＋图片”为例，展示类型判断和按消息体顺序处理内容的方式：
+
+```objectivec
+- (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
+    for (EMChatMessage *message in messages) {
+        if (message.contentType != EMMessageBodyTypeMultiBody) {
+            // 按原有逻辑处理单消息体消息。
+            continue;
+        }
+        for (EMMessageBody *body in message.bodies) {
+            switch (body.type) {
+                case EMMessageBodyTypeText: {
+                    EMTextMessageBody *textBody = (EMTextMessageBody *)body;
+                    NSString *text = textBody.text;
+                    // 将文本加入当前消息的展示内容。
+                    break;
+                }
+                case EMMessageBodyTypeImage: {
+                    EMImageMessageBody *imageBody = (EMImageMessageBody *)body;
+                    // 将图片加入当前位置，按需下载附件后更新展示。
+                    break;
+                }
+                default:
+                    // 按实际类型处理视频、语音、文件、位置或自定义消息体。
+                    break;
+            }
+        }
+    }
+}
+```
+
+其余消息体的字段读取与展示方式见 [视频](#接收视频消息)、[语音](#接收语音消息)、[文件](#接收文件消息)、[位置](#接收位置消息) 和 [自定义消息](#接收自定义类型消息)。复用对应示例时，应读取当前遍历到的 `body`，不要再次通过 `message.body` 获取首个消息体。
+
+#### 下载复合消息附件
+
+调用下载接口时传入整条 `EMChatMessage`，无需逐个消息体发起请求。接口用途与基本回调说明见 [附件下载接口与回调](#附件下载接口与回调)。
+
+SDK 按以下规则筛选复合消息中的消息体：
+
+| 消息体类型 | 原文件下载 | 大图下载 | 缩略图下载 |
+| :--- | :--- | :--- | :--- |
+| 图片 | 原图 | 大图 | 图片缩略图 |
+| 视频 | 原始视频 | 跳过 | 视频缩略图 |
+| 语音 | 语音原文件 | 语音原文件 | 语音原文件 |
+| 文件 | 原文件 | 跳过 | 跳过 |
+| 文本、位置、自定义 | 跳过 | 跳过 | 跳过 |
+
+不适用的消息体自动跳过，不视为失败，也不参与进度计算。若整条复合消息中没有适用的消息体，则回调成功，但不下载任何内容；适用附件缺失或下载失败仍会返回错误。
+
+原文件和大图下载通过 `progress` 上报按各附件原始文件大小加权的消息级总进度，范围为 0–100，不单独上报每个附件的进度；缩略图下载不触发进度回调。每次请求仅调用一次 `completion`：所有适用附件下载成功时，`error` 为 `nil`；任一适用附件下载失败时终止剩余下载并返回错误。
+
+以下示例下载复合消息中的原始附件：
+
+```objectivec
+[[EMClient sharedClient].chatManager downloadMessageAttachment:message
+    progress:^(int progress) {
+        // 消息级总下载进度，范围为 0–100。
+        // 使用 downloadMessageThumbnail 时不触发进度回调。
+    }
+    completion:^(EMChatMessage *downloadedMessage, EMError *error) {
+        if (error) {
+            // 本次请求失败，后续尚未下载的附件不再继续下载。
+            return;
+        }
+        for (EMMessageBody *body in downloadedMessage.bodies) {
+            if ([body isKindOfClass:[EMFileMessageBody class]]) {
+                EMFileMessageBody *fileBody = (EMFileMessageBody *)body;
+                NSString *localPath = fileBody.localPath;
+                // 根据各附件的本地路径和下载状态更新展示。
+            }
+        }
+    }];
+```
+
+下载完成后，遍历完成回调返回的消息对象的 `bodies`，读取相应附件消息体的 `localPath` 和下载状态，更新原消息中的附件展示。
+
+:::tip
+上述按消息体类型跳过的规则适用于复合消息。单消息体消息保持原有下载行为，例如对单条视频消息调用 `downloadBigImageAttachment:progress:completion:` 时仍下载原始视频；不支持的下载类型会返回错误。仍建议按实际资源类型选择接口。
+:::
+
+#### 注意事项
+
+- **发送端内容准备**：发送方应先创建全部消息体，再按阅读顺序初始化消息；接收方按 `bodies` 的原始顺序展示。消息体列表的增删或替换应在发送前完成，需要上传的本地附件应在发送完成前保持可读。具体流程见 [发送复合消息](message_send.html#发送复合消息)。
+- **附件复用与重发**：如需复用已上传附件，应按 [转发单条消息](message_forward.html#转发单条消息) 的说明保留其服务端信息，避免重复上传。重发同一条失败消息时使用原消息对象，见 [重新发送失败消息](message_send.html#重新发送失败消息)。
+- **回调队列与界面更新**：注册消息代理时，`delegateQueue` 为 `nil` 则在主队列回调；传入自定义队列时，更新 UI 前应切换到主线程。附件下载的 `progress` 和 `completion` 在主线程回调，不要在其中执行耗时的同步操作。
+- **消息体状态**：SDK 可能在附件下载过程中更新消息体的路径和下载状态，应用应根据下载后的消息体刷新附件展示，并保留原有排列顺序。
+- **会话摘要**：通过 `EMConversation.latestMessage` 获取最后一条消息后，若其 `contentType` 为 `EMMessageBodyTypeMultiBody`，应结合完整的 `bodies` 生成摘要。会话读取方式见 [会话列表](conversation_list.html)。
+- **转发处理**：转发复合消息时保留完整的有序消息体列表，不要只复制 `body`。创建转发消息的方法见 [转发单条消息](message_forward.html#转发单条消息)。
+- **功能限制**：复合消息不支持编辑或翻译，创建和发送规则见 [发送复合消息](message_send.html#发送复合消息)。
 
 ## 更多
 
@@ -369,8 +482,10 @@ NSDictionary<NSString *, NSString *> *customExt = customBody.customExt;
 | :--- | :--- | :--- |
 | [`addDelegate`](#接收文本消息) | `IEMChatManager` | 注册消息代理。 |
 | [`removeDelegate`](#接收文本消息) | `IEMChatManager` | 移除消息代理。 |
-| [`downloadMessageThumbnail`](#接收图片消息) | `IEMChatManager` | 下载图片或视频缩略图。 |
-| [`downloadBigImageAttachment`](#接收图片消息) | `IEMChatManager` | 下载图片大图。 |
-| [`downloadMessageAttachment`](#接收附件消息) | `IEMChatManager` | 下载原图、视频或文件附件。 |
+| [`contentType`](#接收复合消息) | `EMChatMessage` | 获取整条消息的内容类型，识别复合消息。 |
+| [`bodies`](#接收复合消息) | `EMChatMessage` | 获取完整有序消息体列表。 |
+| [`downloadMessageThumbnail`](#附件下载接口与回调) | `IEMChatManager` | 下载适用的缩略图或语音原文件，不上报进度。 |
+| [`downloadBigImageAttachment`](#附件下载接口与回调) | `IEMChatManager` | 下载大图等适用附件，上报消息级进度。 |
+| [`downloadMessageAttachment`](#附件下载接口与回调) | `IEMChatManager` | 下载原始附件，上报消息级进度。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `IEMChatManager` | 下载并解析合并消息。 |
 

@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-环信即时通讯 IM SDK 可以实现文本、图片、音频、视频和文件等类型的消息的接收。
+环信即时通讯 IM SDK 支持接收文本、图片、语音、视频、文件及复合消息等类型的消息。
 
 ## 前提条件
 
@@ -45,7 +45,7 @@ client.chatManager.addEventHandler(CHAT_HANDLER_ID, {
 | `conversationId` | String | 所属会话 ID。 |
 | `conversationType` | `'singleChat' \| 'groupChat' \| 'chatRoom'` | 会话类型。 |
 | `type` | MessageType | 消息类型。 |
-| `body` | MessageBody | 消息体。不同消息类型的结构不同。 |
+| `body` | MessageBody | 消息体。复合消息直接为分段数组，其他消息按各自类型读取正文。 |
 | `ext` | `Record<string, unknown>` | 扩展字段。 |
 | `timestamp` | Number | 消息时间戳，单位为毫秒。 |
 | `direct` | `'SEND' \| 'RECEIVE'` | 消息方向。 |
@@ -77,6 +77,9 @@ client.chatManager.addEventHandler('message-listener', {
 | 字段 | 类型 | 必填/可选 | 适用场景 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
 | `content` | String | 必填 | 普通聊天、通知正文、说明文本 | 文本消息核心内容。 |
+| `translations` | `Record<string, string>` | 可选 | 展示译文 | 语言代码到译文的映射，可按当前用户语言读取。 |
+
+发送方启用自动翻译时，接收消息中可同时包含原文和 `body.translations`。接收方如需主动翻译，可调用 `translateMessage()`；详见 [文本消息翻译](message_translation.html)。
 
 ## 接收图片消息
 
@@ -150,7 +153,9 @@ client.chatManager.addEventHandler('image-download-listener', {
     console.log('原图地址:', originalImageUrl);
 
     // 下载原图附件。
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
 
     console.log('下载文件名:', attachment.filename);
     console.log('下载地址:', attachment.downloadUrl);
@@ -244,7 +249,9 @@ client.chatManager.addEventHandler('voice-message-listener', {
     console.log('文件名:', message.body.filename);
 
     // 下载语音附件。
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('下载地址:', attachment.downloadUrl);
   },
 });
@@ -294,7 +301,9 @@ client.chatManager.addEventHandler('video-message-listener', {
     console.log('视频尺寸:', message.body.width, message.body.height);
 
     // 下载视频附件。
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('下载地址:', attachment.downloadUrl);
   },
 });
@@ -346,7 +355,9 @@ client.chatManager.addEventHandler('file-message-listener', {
     console.log('文件大小:', message.body.fileSize ?? message.body.fileLength);
 
     // 下载文件附件。
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('下载地址:', attachment.downloadUrl);
   },
 });
@@ -529,7 +540,7 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 });
 ```
 
-`downloadAndParseCombineMessage()` 支持两种入参：`{ message }` 和 `{ url, secret }`。
+`downloadAndParseCombineMessage()` 支持两种入参：`{ message }` 和 `{ url, secret }`。解析出的子消息可能为 `multi_body`，其 `body` 为分段数组，需按 [接收复合消息](#接收复合消息) 的方式展示。
 
 #### 关键字段
 
@@ -541,6 +552,76 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
 | `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |
 | `combineLevel` | Number | 必填 | 嵌套层级判断 | 当前合并消息层级。 |
+
+## 接收复合消息
+
+自 SDK 5.2.0 起，复合消息沿用 `ChatManager` 的 `onMessage` 事件接收，无需额外建立接收机制。通过 `addEventHandler` 注册监听的方式见 [监听消息事件](#监听消息事件)。
+
+处理时，先通过 `message.type === 'multi_body'` 判断整条消息是否为复合消息，再遍历其完整的有序 `body` 数组，最后根据每个分段的 `type` 读取内容。`message.type` 表示整条消息的类型，`segment.type` 表示当前分段的类型，例如 `text` 或 `image`。
+
+复合消息的 `body` 本身就是分段数组，不能像普通文本消息一样读取 `message.body.content`，也不能将其整体作为普通图片或文件消息体处理。
+
+以下示例以“文本＋图片”为例，展示类型判断和按分段顺序处理内容的方式。示例使用日志表示处理入口，实际应用应按遍历顺序组织同一条消息的展示内容：
+
+```typescript
+client.chatManager.addEventHandler('multi-body-listener', {
+  onMessage: message => {
+    if (message.type !== 'multi_body' || !Array.isArray(message.body)) return;
+    for (const segment of message.body) {
+      switch (segment.type) {
+        case 'text':
+          console.log('文本:', segment.content);
+          break;
+        case 'image':
+          // 按需使用缩略图、大图或原图地址。
+          console.log('图片:', segment.thumbnailUrl ?? segment.bigImageUrl ?? segment.originalImageUrl);
+          break;
+        default:
+          // 按类型处理视频、语音、文件、位置或自定义分段。
+          console.log('分段:', segment.type, segment);
+      }
+    }
+  },
+});
+```
+
+其余分段的字段读取与展示方式见 [视频](#接收视频消息)、[语音](#接收语音消息)、[文件](#接收文件消息)、[位置](#接收位置消息) 和 [自定义消息](#接收自定义类型消息)。复用对应示例时，应读取当前 `segment` 的字段，不要将整条复合消息的 `body` 当作普通消息对象读取。
+
+#### 下载复合消息附件
+
+调用 `downloadAttachment({ message })` 时传入整条复合消息，SDK 按顺序下载其中的图片、语音、视频和文件附件，跳过文本、位置和自定义分段。图片优先使用原图地址，未提供时依次使用大图或缩略图地址；其他附件使用分段中的 `url`。
+
+普通附件消息返回单个 `MessageAttachmentDownloadResult`，复合消息返回结果数组。数组顺序与可下载分段一致，不包含被跳过的分段，不能直接使用完整 `body` 数组的索引对应下载结果。共用下载逻辑时，应先区分单个结果和数组。
+
+```typescript
+async function downloadMultiBodyAttachments(message: Message): Promise<void> {
+  if (message.type !== 'multi_body') return;
+  try {
+    const result = await client.chatManager.downloadAttachment({ message });
+    // API 的返回类型同时兼容普通消息的单个结果和复合消息的结果数组。
+    const attachments = 'data' in result ? [result] : result;
+    for (const attachment of attachments) {
+      console.log(attachment.filename, attachment.mimeType, attachment.data);
+    }
+  } catch (error) {
+    console.error('下载复合消息附件失败:', error);
+  }
+}
+```
+
+每个结果的 `data` 为 `Uint8Array` 二进制数据，不是可直接赋给图片或视频元素的 URL。在浏览器中展示时，可根据 `mimeType` 创建 `Blob`，再通过 `URL.createObjectURL()` 生成临时 URL；资源不再使用时调用 `URL.revokeObjectURL()` 释放。其他运行环境应使用对应平台的文件或媒体展示能力。
+
+此接口不提供下载进度回调。没有可下载附件或缺少远端地址时，错误码为 `401`；任一附件下载失败则整体失败，不返回部分成功数组，应通过 `try/catch` 处理失败结果。
+
+#### 注意事项
+
+- **发送端内容准备**：发送方应先通过分段创建方法准备全部内容，再调用 `createMultiBodyMessage()`，并按阅读顺序排列 `bodies`。带本地文件的分段必须原样传入，不能在组装前复制、展开或重建对象。具体流程见 [发送复合消息](message_send.html#发送复合消息)。
+- **本地文件分段复用**：成功组装后，如需将本地附件用于另一条新消息，应重新创建文件分段；重发同一条失败消息应按 [重新发送失败消息](message_send.html#重新发送失败消息) 处理，不要直接重新组装已消耗本地文件关联的分段。
+- **已有远程附件**：发送方可直接使用 `originalUrl` 提供已有远程资源，避免重复上传；接收方按实际需要展示远程地址或调用下载接口。
+- **界面更新**：保持分段的原始顺序；异步下载完成后更新对应消息中的附件展示。在浏览器主线程处理事件时，避免执行耗时的同步操作。
+- **会话摘要**：最后一条消息为复合消息时，`lastMessage.type` 为 `multi_body`，`lastMessage.body` 为分段数组，应按分段生成摘要，不要读取 `body.content`。示例见 [展示复合消息摘要](conversation_list.html#展示最后一条消息摘要)。
+- **合并转发**：`downloadAndParseCombineMessage()` 解析出的子消息可能为复合消息，应继续按子消息的 `type` 和 `body` 分段展示。解析流程见 [接收合并消息](#接收合并消息)。
+- **功能限制**：复合消息不支持编辑或自动翻译。创建与发送方式见 [发送复合消息](message_send.html#发送复合消息)。
 
 ## 离线消息同步事件
 
@@ -618,5 +699,5 @@ client.chatManager.addEventHandler('chatroom-broadcast-listener', {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`downloadAttachment`](#接收图片消息) | `ChatManager` | 下载图片、语音、视频、文件等附件消息的二进制数据。 |
+| [`downloadAttachment`](#下载复合消息附件) | `ChatManager` | 下载普通消息的单个附件，或复合消息的全部附件。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |

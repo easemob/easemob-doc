@@ -1,31 +1,59 @@
-# **离线推送概述**
+# 离线推送概述
 
-即时通讯 IM 支持集成 APNs 消息推送服务，为 iOS 开发者提供低延时、高送达率、高并发且不侵犯用户个人数据的离线消息推送服务。
+<Toc />
 
-要体验离线推送功能，请在 [环信官网](https://www.easemob.com/download/demo) 下载即时通讯 IM 的 demo。
+## 功能说明
 
-## 离线推送流程
+环信即时通讯 IM 支持通过 Apple Push Notification service（APNs）向 iOS 离线用户发送消息通知。用户重新上线并恢复 IM 连接后，SDK 会拉取离线期间的消息，应用可以据此更新会话和消息界面。
 
-### 触发条件与消息下发机制
+推送通知与 IM 消息同步是两个过程，收到推送通知不代表 SDK 已收到对应的完整消息。通知角标中的离线消息数也不等同于会话的实际未读消息数。
 
-当客户端断开连接或应用进程被系统关闭导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备发送消息通知。待用户重新上线后，服务器会将离线期间的全部消息下发给用户（此处角标显示的是离线消息数量，而非实际未读消息数）。例如，当你离线期间收到其他用户发送的消息，手机通知中心会弹出相应的消息提醒；当你再次打开应用并成功登录后，即时通讯 IM SDK 会自动拉取离线期间的全部消息。
+你可以在 [环信官网](https://www.easemob.com/download/demo) 下载即时通讯 IM Demo，体验离线推送功能。
 
-### 前置配置要求
+## 前提条件
 
-除满足用户离线条件外，使用第三方离线推送服务还需在 [环信控制台](https://console.easemob.com/user/login) 完成推送证书信息的配置，例如，需配置 APNs 的 **证书名称** 和 **推送密钥**，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
+开始接入前，请确认以下条件：
 
-### 不触发离线推送的场景
+### SDK 与运行环境
 
-在以下两种情况下，即时通讯 IM 不会发送离线推送通知：
+- 已 [开启和配置即时通讯服务](/product/console/app_create.html)，获取有效的 App Key，并完成 [iOS SDK 导入](/document/ios/integration.html)。
+- 开发环境满足 [iOS SDK 的要求](/document/ios/integration.html#开发环境要求)，并已了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+- 准备 iOS 真机，用于验证实际推送效果，详见 [测试 APNs 推送](push_apns.html#测试-apns-推送)。
 
-1. 应用在后台运行时，用户仍处于在线状态，即时通讯 IM 不会推送消息通知。
-2. 应用处于后台运行或手机锁屏等状态时，若客户端与服务器的连接未断开，即时通讯 IM 也不会触发离线推送通知。
+### APNs 与控制台配置
 
-## 推送原理
+准备具备推送配置权限的 Apple 开发者账号，为应用配置 APNs 推送，并在 [环信控制台](https://console.easemob.com/user/login) 上传和配置对应的推送证书。确认 Bundle ID、签名及描述文件中的推送配置与应用一致，控制台配置的推送环境与安装包匹配。具体步骤见 [创建推送证书](push_apns.html#创建推送证书) 和 [上传推送证书](push_apns.html#上传推送证书)。
 
-![image](/images/ios/push/push_ios_1_understand.png)
+控制台的推送证书配置属于接入准备工作。客户端需在 SDK 初始化时通过 `EMOptions.apnsCertName` 设置控制台配置的证书名称，并将获取的 device token 传递给 SDK。若传入 token 时尚未登录，SDK 会在登录成功后尝试上传已保存的 token，应在登录后确认服务器端的绑定结果；收到新的 token 后，需及时传递给 SDK。具体步骤见 [将证书名称传递给 SDK](push_apns.html#步骤二-将证书名称传递给-sdk) 和 [获取 device token 并传递给 SDK](push_apns.html#步骤三-获取-device-token-并传递给-sdk)。
 
-消息推送流程如下：
+完整客户端接入步骤见 [在客户端集成 APNs](push_apns.html#在客户端集成-apns)。完成接入后，按 [测试 APNs 推送](push_apns.html#测试-apns-推送) 验证；未收到通知时，可按 [故障排除](push_apns.html#故障排除) 检查。
+
+### 系统通知权限
+
+在 Xcode 中为应用开启 **Push Notifications** 能力。如需展示横幅、声音或角标，还应向用户申请相应的通知授权，并确认系统设置中已允许该应用展示对应通知。具体配置见 [在 app 中开启推送权限](push_apns.html#步骤一-在-app-中开启推送权限)。
+
+获取 APNs device token、将 token 绑定到环信服务器和获得通知展示权限是不同环节。获取 token 或完成绑定，不代表系统已允许应用展示通知。
+
+推送通知方式、免打扰模式和推送模板属于可选的高级功能，其开通要求详见 [开通功能](#开通功能)。
+
+## 工作原理
+
+### 推送证书与 device token
+
+APNs 推送依赖推送证书和 device token：
+
+| 内容 | 作用 |
+| :--- | :--- |
+| 推送证书 | 用于环信服务器向 APNs 发起推送请求。需要在环信控制台上传并配置，客户端设置的证书名称应与控制台保持一致。 |
+| device token | APNs 为设备上的应用提供的推送标识，用于确定通知的目标设备和应用。客户端获取后，需通过 SDK 将其绑定到环信服务器。 |
+
+证书创建、上传及 token 绑定的具体步骤见 [APNs 推送集成](push_apns.html)。
+
+### 消息推送流程
+
+![APNs 离线消息推送流程](/images/ios/push/push_ios_1_understand.png)
+
+以用户 A 向用户 B 发送消息为例：
 
 1. 用户 B 向 APNs 推送服务注册，获取推送 token。
 2. APNs 返回推送 token。
@@ -36,13 +64,52 @@
 7. 环信服务器将消息发送给 APNs 推送服务器。
 8. APNs 推送服务器将消息发送给用户 B。
 
-## 推送证书和推送 Token
+## 推送触发条件
 
-**推送证书**：集成 APNs 离线推送时，需要上传 APNs 推送证书。关于创建和上传 APNs 推送证书，详见 [APNs 推送集成文档](push_apns.html)。
+### 用户离线与连接状态
 
-**推送 Token**：推送 token（device token）是 APNs 推送提供的推送 token，即初次启动你的应用时，APNs SDK 为客户端应用实例生成的推送 token。该 token 用于标识每台设备上的每个应用，APNs 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `registerForRemoteNotifications` 方法获得 token。另外，如果退出即时通讯 IM 登录时不解绑 device token（调用 `logout` 方法时对 `aIsUnbindDeviceToken` 参数传 `NO` 表示不解绑 device token，传 `YES` 表示解绑 token），用户在推送证书有效期和 token 有效期内仍会接收到离线推送通知。
+环信服务器根据接收方的在线状态、证书和 token 绑定、多设备推送策略、推送通知方式及免打扰等配置，决定是否发送离线推送，不以客户端是否收到断开回调为依据。应用进入后台、设备锁屏或应用进程未运行，都应结合实际连接情况和服务端状态判断，不能仅根据应用界面状态认定用户已离线。
 
-关于如何获取推送 Token 并上传至环信服务器，详见 [APNs 推送服务的集成文档](push_apns.html#步骤三-获取-device-token-并传递给-sdk)。
+如果设备仍保持 IM 长连接，且服务器仍将用户判定为在线，则不会向该设备发送离线推送通知。多设备登录时，还需结合下文的 [多设备离线推送策略](#多设备离线推送策略) 判断。
+
+聊天室不支持离线消息推送；设置 `EMChatMessage.deliverOnlineOnly = YES` 的消息仅向在线用户投递，不触发离线推送。
+
+:::tip
+SDK 5.2.0 提供的 `EMOptions.disconnectNotifyThreshold` 只影响相关断线回调的通知时机，不延迟实际连接状态的变化，也不控制 APNs 的发送时间。具体配置见 [断线通知宽限期](/document/ios/connection.html#配置断线通知宽限期)；当前连接状态的判断详见 [查询连接状态](/document/ios/connection.html#获取连接状态)。
+:::
+
+### 应用前后台切换
+
+完成 SDK 初始化后，需要将应用的前后台生命周期事件传递给 SDK，使后台断连、前台重连与 APNs 推送配合工作。
+
+| 应用状态变化 | 调用的 SDK 接口 | SDK 行为及推送关系 |
+| :--- | :--- | :--- |
+| 进入后台 | `-[EMClient applicationDidEnterBackground:]` | 已登录时，SDK 在收到后台生命周期调用后主动断开 IM 长连接，并通知未连接状态。服务端判定用户离线且满足推送条件后，通过 APNs 下发通知。 |
+| 回到前台 | `-[EMClient applicationWillEnterForeground:]` | 已登录时，SDK 在收到前台生命周期调用后检查连接或尝试重连，连接恢复后接收离线期间的消息。若已退出登录或被强制下线，需要按业务流程重新登录。 |
+
+SDK 在收到后台生命周期调用后，已登录时直接执行断连，不以 token 是否绑定成功作为前提。验证后台接收通知前，应先完成证书配置和 token 绑定。
+
+应用应根据整体前后台状态统一转发上述两个 SDK 调用，并传入 `UIApplication` 实例。使用 `SceneDelegate` 管理场景生命周期时，多窗口应用应避免仅因某个场景进入后台就断开其他活跃场景仍需使用的 IM 连接，也应避免重复转发同一次状态变化。
+
+### 多设备离线推送策略
+
+同一账号在多台设备登录时，可以在 [环信控制台](https://console.easemob.com/user/login) 的 **证书管理** 页面配置推送策略。该配置对所有推送通道生效：
+
+- 所有设备离线时，才发送推送消息。
+- 任一设备离线时，都发送推送消息。
+
+**多端登录时，若某台设备被踢下线，即使该设备已接入 IM 离线推送，也收不到该账号的离线推送消息。**
+
+![多设备离线推送策略](/images/android/push/push_multidevice_policy.png)
+
+### 退出登录后的推送
+
+主动退出 IM 登录时，是否解除账号与 device token 的绑定，会影响该设备后续是否接收该账号的离线推送。调用 `logout:completion:` 时，通过 `aIsUnbindDeviceToken` 参数控制：
+
+| 参数值 | 行为 |
+| :--- | :--- |
+| `YES` | 解除绑定。成功解绑后，该设备不再收到该账号的离线推送；若解绑失败，应处理完成回调返回的错误。 |
+| `NO` | 保留绑定。在证书和 token 有效且满足推送条件时，该设备仍可收到该账号的离线推送。 |
 
 ## 推送高级功能
 
@@ -50,12 +117,12 @@
 
 [推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](push_template.html) 是推送的高级功能。使用前，你需要在 [环信控制台](https://console.easemob.com/user/login) 免费开通。**激活后，如需关闭推送高级功能，必须联系商务，因为该操作会删除高级功能相关的所有配置。**
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在应用列表中，单击测试应用或正式版应用的 App Key。
+1. 登录环信控制台，选择页面上方的 **应用管理**。
+2. 在应用列表中，点击目标应用 **操作** 栏中的 **管理**。
 3. 选择 **增值服务 > 消息推送 > 离线推送**。
 4. 点击 **免费开通**。
 
-![image](/images/android/push/push_advanced_feature_enable.png)
+![开通推送高级功能](/images/android/push/push_advanced_feature_enable.png)
 
 ### 推送通知方式
 
@@ -71,36 +138,18 @@
 
 ### 免打扰模式
 
-完成 SDK 初始化和成功登录 app 后，你可以对 app 以及各类型的会话设置免打扰模式，即关闭离线推送。
+完成 SDK 初始化并登录后，可以在应用级别或单聊、群聊会话级别设置免打扰，关闭相应范围内的离线推送通知，支持以下配置：
 
-- 支持设置免打扰时间段（例如，8:0-10:0）和免打扰时长（例如，30 分钟）。
-- 支持设置 app 级别和单聊/群聊的免打扰模式。
-- 开启全天免打扰和关闭免打扰模式。
-- 若在免打扰模式下需要对指定用户推送消息，需设置强制推送。
+- 设置免打扰时间段，例如 08:00 至 10:00。
+- 设置免打扰时长，例如 30 分钟。
+- 开启全天免打扰，或关闭免打扰模式。
 
-更多详情，请参见 [免打扰模式介绍](push_notification_mode_dnd.html#免打扰模式)。
+若需在免打扰模式下向指定用户推送消息，需配置强制推送，详见 [强制推送](push_extension.html#强制推送)。
+
+具体规则和配置见 [免打扰模式](push_notification_mode_dnd.html#免打扰模式)。
 
 ### 推送模板
 
 推送模板主要用于服务器提供的默认离线推送配置不满足你的需求时，设置全局范围的推送标题和推送内容。推送模板包括默认推送模板 `default`、`detail` 和自定义推送模板。你可以在 [环信控制台](https://console.easemob.com/user/login) 配置推送模板。
 
-推送模板的配置和使用，详见 [相关文档介绍](push_template.html)。
-
-## 多设备离线推送策略
-
-多设备登录时，可在 [环信控制台](https://console.easemob.com/user/login)的 **证书管理** 页面配置推送策略，该策略配置对所有推送通道生效：
-
-- 所有设备离线时，才发送推送消息；
-- 任一设备离线时，都发送推送消息。
-
-**多端登录时若有设备被踢下线，即使接入了 IM 离线推送，也收不到离线推送消息。**
-
-![image](/images/android/push/push_multidevice_policy.png)
-
-## 前提条件
-
-使用 APNs 推送前，确保满足以下条件：
-
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](/document/ios/quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 若使用[推送高级功能](#推送高级功能)，需在[环信即时通讯控制台](https://console.easemob.com/user/login)上激活。
+支持 [发送消息时指定推送模板](push_template.html#发送消息时使用推送模板)，也支持 [接收方配置所用模板](push_template.html#消息接收方使用推送模板)。具体配置见 [推送模板](push_template.html)。

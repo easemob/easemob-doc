@@ -163,10 +163,22 @@ console.log(joinedGroups);
 
 用户信息自动管理与联系人自动同步相互独立。`enableUserInfoSync` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
 
+## 获取 SDK 版本号
+
+从 5.2.0 开始，可调用 `client.getVersion()` 获取当前集成的 SDK 版本号，用于确认版本或排查问题。该方法同步返回版本号字符串，无需注册 Manager，也无需登录。
+
+```typescript
+const version = client.getVersion();
+console.log('SDK 版本:', version); // 例如 '5.2.0'
+```
+
+其中 `client` 为通过 `ChatClient.init()` 创建的 SDK 实例。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`getVersion`](#获取-sdk-版本号) | `ChatClient` | 获取 SDK 版本号。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 SDK 单例实例。 |
 | [`getConversationList`](#登录后读取同步结果) | `ChatManager` | 从本地缓存读取当前会话列表。 |
 | [`getContacts`](#登录后读取同步结果) | `ContactManager` | 从本地快照读取当前好友列表视图。 |

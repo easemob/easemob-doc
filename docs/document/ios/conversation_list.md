@@ -211,6 +211,60 @@ let conversationName = conversation.conversationName()
 let conversationAvatar = conversation.conversationAvatar()
 ```
 
+## 展示最后一条消息摘要
+
+会话列表通常展示最后一条消息的简短摘要。SDK 提供消息数据，应用需根据消息类型生成展示文案，并按界面需要截断文本。下表中的文案仅为示例，不是 SDK 的固定返回值。
+
+| 消息类型 | 建议的摘要内容 |
+| :--- | :--- |
+| 文本 | 展示文本内容。 |
+| 图片（含 GIF） | 展示“[图片]”；如需区分 GIF，可由应用调整文案。 |
+| 语音 | 展示“[语音]”，可附加语音时长。 |
+| 视频 | 展示“[视频]”。 |
+| 文件 | 展示“[文件]”，可附加文件名。 |
+| 位置 | 展示“[位置]”，可附加地点名称或地址。 |
+| 自定义 | 根据自定义事件和业务参数生成摘要，无法识别时使用兜底文案。 |
+| 合并 | 使用消息体提供的标题或摘要，也可统一展示“[聊天记录]”。 |
+| 复合 | 展示“[复合消息]”，或按消息体顺序组合文本与类型标签，例如“你好 [图片]”。 |
+
+透传消息用于业务指令，不作为普通会话摘要展示。
+
+通过 `EMConversation.latestMessage` 获取最后一条消息，并使用 `EMChatMessage.contentType` 判断整条消息的类型。没有最后一条消息或消息体为空时，可将摘要设为空字符串。以下示例使用固定标签展示非文本消息，并优先使用合并消息自带的摘要：
+
+```objectivec
+EMChatMessage *lastMessage = conversation.latestMessage;
+NSString *summary = @"";
+if (lastMessage != nil && lastMessage.bodies.count > 0) {
+    switch (lastMessage.contentType) {
+        case EMMessageBodyTypeText:
+            summary = ((EMTextMessageBody *)lastMessage.body).text;
+            break;
+        case EMMessageBodyTypeImage: summary = @"[图片]"; break;
+        case EMMessageBodyTypeVoice: summary = @"[语音]"; break;
+        case EMMessageBodyTypeVideo: summary = @"[视频]"; break;
+        case EMMessageBodyTypeFile: summary = @"[文件]"; break;
+        case EMMessageBodyTypeLocation: summary = @"[位置]"; break;
+        case EMMessageBodyTypeCustom: summary = @"[自定义消息]"; break;
+        case EMMessageBodyTypeCombine: {
+            NSString *combinedSummary =
+                ((EMCombineMessageBody *)lastMessage.body).summary;
+            summary = combinedSummary.length > 0 ? combinedSummary : @"[聊天记录]";
+            break;
+        }
+        case EMMessageBodyTypeMultiBody: summary = @"[复合消息]"; break;
+        case EMMessageBodyTypeCmd: break;
+        default: summary = @"[消息]"; break;
+    }
+}
+// 使用 summary 更新当前会话的摘要。
+```
+
+:::tip
+自 SDK 5.2.0 起，复合消息的 `contentType` 为 `EMMessageBodyTypeMultiBody`。如需组合各消息体的摘要，应先识别该类型，再通过 `bodies` 按顺序读取完整消息体列表。`body` 仅返回首个消息体，不能仅凭 `body.type` 判断整条消息的类型或获取全部内容。各消息体的读取方式请参见 [接收复合消息](message_receive.html#接收复合消息)。
+:::
+
+会话列表更新后，应重新读取最后一条消息并生成摘要，监听方式请参见 [监听会话列表更新](#监听会话列表更新)。
+
 ## 清除内存中的会话
 
 调用 `cleanConversationsMemoryCache` 清除内存中的全部会话，以释放内存。该操作清理的是内存缓存，不删除本地数据库中的会话和消息。

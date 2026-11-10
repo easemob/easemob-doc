@@ -11,7 +11,7 @@
 - 文本消息：支持编辑消息体中的 `body.content` 和扩展字段 `ext`。
 - 自定义消息：支持编辑消息体中的 `body.event`、`body.params` 和扩展字段 `ext`。
 - 图片/语音/视频/文件/位置/合并消息：仅支持编辑扩展字段 `ext`。
-- 透传消息：不支持编辑。
+- 透传（命令）消息和复合消息：不支持编辑消息体或扩展字段 `ext`。
 
 ### 消息编辑流程
 
@@ -48,7 +48,7 @@
 
 你可以调用 `modifyMessage` 方法编辑已发送成功的消息。编辑时可更新消息体内容及消息扩展属性 `ext`，但消息 ID、发送方、接收方以及会话信息等标识性字段不会变化。
 
-消息编辑成功后，会触发 `onMessageUpdated` 事件。对于单聊、群聊和聊天室，会话中的相关成员都可以收到该事件。该事件会携带消息 ID、会话信息、编辑后的消息内容及 `modifiedInfo` 等数据。`modifiedInfo` 可用于查看本次编辑信息，例如编辑时间 `operationTime`、编辑操作者 `operatorId` 和编辑次数 `operationCount`。
+消息编辑成功后，除当前操作设备外，会话成员及编辑者的其他设备会收到 `onMessageUpdated` 事件；当前操作设备通过 `modifyMessage()` 返回的 Promise 处理编辑结果。该事件会携带消息 ID、会话信息、编辑后的消息内容及 `modifiedInfo` 等数据。`modifiedInfo` 可用于查看本次编辑信息，例如编辑时间 `operationTime`、编辑操作者 `operatorId` 和编辑次数 `operationCount`。
 
 :::tip
 一条消息默认最多可编辑 10 次。

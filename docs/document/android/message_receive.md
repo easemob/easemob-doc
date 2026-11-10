@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-环信即时通讯 IM Android SDK 通过 `EMMessageListener` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息监听回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。
+环信即时通讯 IM Android SDK 通过 `EMMessageListener` 接收文本、图片、语音、视频、文件、位置、透传、自定义和合并等类型的消息。应用在消息监听回调中识别消息类型，读取对应消息体并根据业务需要展示或处理消息。自 SDK 5.2.1 起，还支持通过完整消息体列表接收和展示 [复合消息](#接收复合消息)。
 
 ## 前提条件
 
@@ -43,8 +43,9 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 | 发送方 | `EMMessage#getFrom` | 消息发送者的用户 ID。 |
 | 接收方 | `EMMessage#getTo` | 消息目标 ID。 |
 | 会话类型 | `EMMessage#getChatType` | 单聊、群聊或聊天室。 |
-| 消息类型 | `EMMessage#getType` | 文本、图片、语音、视频、文件等类型。 |
-| 消息体 | `EMMessage#getBody` | 获取并转换为对应的 `EMMessageBody` 子类。 |
+| 消息类型 | `EMMessage#getType` / `getContentType` | 单消息体消息返回其具体类型；复合消息返回 `EMMessage.Type.MULTIBODY`。 |
+| 首个消息体 | `EMMessage#getBody` | 返回第一个消息体。复合消息中仅使用此方法会遗漏后续消息体。 |
+| 完整消息体列表 | `EMMessage#getBodies` | 返回有序、结构只读的消息体列表，适用于单消息体和复合消息。 |
 | 扩展字段 | `EMMessage#getStringAttribute` 等 | 读取发送方通过 `setAttribute` 设置的业务字段。 |
 
 ## 接收文本消息
@@ -96,6 +97,20 @@ EMClient.getInstance()
 
 1. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、大图、视频和文件，需调用对应下载接口。
 2. 获取附件的服务器地址和本地路径。
+
+#### 附件下载接口与回调
+
+根据所需资源调用以下 `EMChatManager` 下载接口，并通过 `EMCallBack` 获取下载进度和结果。
+
+| 接口 | 主要用途 | 进度回调 |
+| :--- | :--- | :--- |
+| `downloadAttachment(message, callback)` | 下载原始附件，如原图、语音、视频或文件。 | 通过 `onProgress` 返回 0–100 的下载进度。 |
+| `downloadBigImage(message, callback)` | 下载图片大图。 | 通过 `onProgress` 返回 0–100 的下载进度。 |
+| `downloadThumbnail(message, callback)` | 下载图片或视频缩略图。 | 不触发 `onProgress`。 |
+
+每次下载请求通过 `onSuccess()` 或 `onError(int code, String error)` 返回一次最终结果。下载成功后，从消息体读取对应资源的本地路径和下载状态，更新展示。
+
+自 SDK 5.2.1 起，上述接口也支持传入整条复合消息，无需逐个消息体调用。消息体筛选、消息级进度及整体下载结果的规则请参见 [下载复合消息附件](#下载复合消息附件)。
 
 ### 接收语音消息
 
@@ -390,6 +405,100 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 });
 ```
 
+## 接收复合消息
+
+自 SDK 5.2.1 起，复合消息沿用 `EMMessageListener#onMessageReceived` 接收，无需注册额外监听器。接入消息监听的方式见 [监听消息事件](#监听消息事件)。
+
+处理时，先通过 `getContentType()` 或 `getType()` 判断整条消息是否为 `EMMessage.Type.MULTIBODY`，再通过 `getBodies()` 获取完整的有序消息体列表，最后根据每个消息体的实际子类读取内容。整条消息的 `MULTIBODY` 类型表示它包含多个消息体，不代表列表中的每个消息体都是复合类型。
+
+`getBody()` 仍可使用，但仅返回首个消息体。原有逻辑若只处理 `TXT`、`IMAGE` 等整条消息类型，应增加 `MULTIBODY` 分支，避免遗漏整条复合消息或后续消息体。
+
+以下示例以“文本＋图片”为例，展示类型判断和按消息体顺序处理内容的方式：
+
+```java
+EMMessageListener messageListener = new EMMessageListener() {
+    @Override
+    public void onMessageReceived(List<EMMessage> messages) {
+        for (EMMessage message : messages) {
+            if (message.getContentType() != EMMessage.Type.MULTIBODY) {
+                // 按原有逻辑处理单消息体消息。
+                continue;
+            }
+            for (EMMessageBody body : message.getBodies()) {
+                if (body instanceof EMTextMessageBody) {
+                    String text = ((EMTextMessageBody) body).getMessage();
+                    // 将文本加入当前消息的展示内容。
+                } else if (body instanceof EMImageMessageBody) {
+                    EMImageMessageBody imageBody = (EMImageMessageBody) body;
+                    // 将图片加入当前位置，按需下载附件后更新展示。
+                } else {
+                    // 按实际子类处理视频、语音、文件、位置或自定义消息体。
+                }
+            }
+        }
+    }
+};
+EMClient.getInstance().chatManager().addMessageListener(messageListener);
+```
+
+其余消息体的字段读取与展示方式见 [视频](#接收视频消息)、[语音](#接收语音消息)、[文件](#接收文件消息)、[位置](#接收位置消息) 和 [自定义消息](#接收自定义类型消息)。复用对应示例时，应读取当前遍历到的 `body`，不要再次调用 `message.getBody()` 获取首个消息体。
+
+#### 下载复合消息附件
+
+调用下载接口时传入整条 `EMMessage`，无需逐个消息体发起请求。接口用途与基本回调说明见 [附件下载接口与回调](#附件下载接口与回调)。
+
+SDK 按以下规则筛选复合消息中的消息体：
+
+| 消息体类型 | 原文件下载 | 大图下载 | 缩略图下载 |
+| :--- | :--- | :--- | :--- |
+| 图片 | 原图 | 大图 | 图片缩略图 |
+| 视频 | 原始视频 | 跳过 | 视频缩略图 |
+| 语音 | 语音原文件 | 语音原文件 | 语音原文件 |
+| 文件 | 原文件 | 跳过 | 跳过 |
+| 文本、位置、自定义 | 跳过 | 跳过 | 跳过 |
+
+不适用的消息体自动跳过，不计为失败，也不参与进度计算。若整条复合消息中没有适用的消息体，则触发 `onSuccess()`，但不下载任何内容；该规则不表示适用附件缺失或下载失败时也返回成功。
+
+原文件和大图下载通过 `onProgress(int progress, String status)` 上报按各附件原始文件大小加权的消息级总进度，范围为 0–100，不单独上报每个附件的进度；缩略图下载不触发进度回调。每次请求只返回一次最终结果：所有适用附件下载成功后触发 `onSuccess()`；任一适用附件下载失败时终止剩余下载，并触发 `onError(int code, String error)`。
+
+以下示例下载复合消息中的原始附件：
+
+```java
+EMCallBack downloadCallback = new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        // 本次请求的所有适用附件下载成功；根据消息体中的本地路径更新展示。
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        // 本次请求失败，后续尚未下载的附件不再继续下载。
+    }
+
+    @Override
+    public void onProgress(int progress, String status) {
+        // 原文件或大图下载的消息级总进度，范围为 0–100。
+        // 使用 downloadThumbnail 时不触发此回调。
+    }
+};
+EMClient.getInstance().chatManager().downloadAttachment(message, downloadCallback);
+```
+
+下载完成后，重新遍历 `message.getBodies()`，读取相应附件消息体的 `getLocalUri()` 和下载状态，更新原消息中的附件展示。
+
+:::tip
+上述适用性筛选规则仅用于复合消息。单消息体消息保持历史行为：例如，单视频消息调用 `downloadBigImage` 时下载原始视频文件；不支持的资源或下载类型会通过 `onError` 返回失败，不会按“无适用消息体”返回成功。仍建议根据实际资源类型选择相应的下载接口。
+:::
+
+#### 注意事项
+
+- **发送端内容准备**：发送方应先创建全部消息体，再按阅读顺序组装消息；接收方按 `getBodies()` 的原始顺序展示。消息体列表的增删或替换应在发送前完成，需要上传的本地附件应在发送完成前保持可读。具体流程见 [发送复合消息](message_send.html#发送复合消息)。
+- **附件复用与重发**：如需复用已上传附件，应按 [转发单条消息](message_forward.html#转发单条消息) 的说明保留其服务端信息，避免重复上传。重发同一条失败消息时使用原消息对象，见 [重新发送失败消息](message_send.html#重新发送失败消息)。
+- **消息体列表与界面更新**：`getBodies()` 返回的列表结构只读，SDK 可能更新其中消息体的附件路径和下载状态。消息接收回调在 SDK 工作线程执行，更新 Android UI 时应切换到主线程；不要在回调中执行耗时的同步操作。
+- **会话摘要**：通过 `EMConversation#getLastMessage()` 获取最后一条消息后，若其类型为 `MULTIBODY`，应结合完整消息体列表生成摘要，避免只展示首个消息体。会话读取方式见 [会话列表](conversation_list.html)。
+- **转发处理**：转发复合消息时保留完整的有序消息体列表，不要只复制 `getBody()`。创建转发消息的方法见 [转发单条消息](message_forward.html#转发单条消息)。
+- **功能限制**：复合消息不支持编辑或翻译，创建和发送规则见 [发送复合消息](message_send.html#发送复合消息)。
+
 ## 更多
 
 ### 消息接收回调返回发送成功的消息
@@ -408,8 +517,10 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| [`downloadThumbnail`](#接收图片消息) | `EMChatManager` | 下载图片或视频缩略图。 |
-| [`downloadBigImage`](#接收图片消息) | `EMChatManager` | 下载图片大图。 |
-| [`downloadAttachment`](#接收附件消息) | `EMChatManager` | 下载原图、视频或文件附件。 |
+| [`getContentType`](#接收复合消息) | `EMMessage` | 识别复合消息，返回 `MULTIBODY`。 |
+| [`getBodies`](#接收复合消息) | `EMMessage` | 获取完整有序消息体列表。 |
+| [`downloadThumbnail`](#附件下载接口与回调) | `EMChatManager` | 下载适用的缩略图或语音原文件，不提供进度回调。 |
+| [`downloadBigImage`](#附件下载接口与回调) | `EMChatManager` | 下载大图等适用附件，提供消息级进度。 |
+| [`downloadAttachment`](#附件下载接口与回调) | `EMChatManager` | 下载原始附件，提供消息级进度。 |
 | [`downloadAndParseCombineMessage`](#接收合并消息) | `EMChatManager` | 下载并解析合并消息。 |
 | [`thumbnailLocalUri`](#接收图片消息) | `EMImageMessageBody` | 获取图片缩略图本地 URI。 |

@@ -38,7 +38,7 @@ EMConnectionListener connectionListener =
 
             @Override
             public void onDisconnected(int errorCode) {
-                // SDK 与服务器断开连接。
+                // 收到断开通知；可恢复断开可能延迟通知，请通过 getConnectionState() 查询当前状态。
             }
         };
 
@@ -62,30 +62,48 @@ EMClient.getInstance().loginWithToken(
 
 ## 获取连接状态
 
-调用 `EMClient#isConnected` 查询 SDK 当前是否已连接到服务器：
+自 SDK 5.2.1 起，可调用 `EMClient#getConnectionState()` 查询当前实际连接状态，返回值为 `EMConnectionState` 枚举：
+
+| 状态 | 说明 |
+| :--- | :--- |
+| `DISCONNECTED` | 未连接或已断开，包括 SDK 未初始化、用户已登出的情况。 |
+| `CONNECTING` | SDK 正在建立连接。 |
+| `CONNECTED` | 已连接到 IM 服务器。 |
 
 ```java
-boolean connected = EMClient.getInstance().isConnected();
+EMConnectionState state = EMClient.getInstance().getConnectionState();
+switch (state) {
+    case DISCONNECTED:
+        // 显示未连接状态。
+        break;
+    case CONNECTING:
+        // 显示正在连接状态。
+        break;
+    case CONNECTED:
+        // 显示已连接状态。
+        break;
+}
 ```
 
-调用 `EMClient#isLoggedIn` 查询当前用户是否处于登录状态：
+`getConnectionState` 返回查询时的状态，不会注册状态监听。在 [断线通知宽限期](#配置断线通知宽限期) 内，连接状态仍会即时变化；尚未开始重新建立连接时返回 `DISCONNECTED`，正在建立连接时返回 `CONNECTING`，连接成功后返回 `CONNECTED`。
+
+自 SDK 5.2.1 起，`EMClient#isConnected()` 标记为废弃，现有调用仍可使用。该方法只能区分已连接与未连接，建议改用 `getConnectionState()` 展示和判断当前连接状态。
+
+调用 `EMClient#isLoggedIn()` 查询当前用户是否处于登录状态：
 
 ```java
 boolean loggedIn = EMClient.getInstance().isLoggedIn();
 ```
 
-| API | 说明 |
-| :--- | :--- |
-| `isConnected()` | 返回是否已连接到服务器。 |
-| `isLoggedIn()` | 返回当前用户是否已连接到服务器。 |
-
 :::tip
-连接状态与登录状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。业务 UI 应结合监听器回调处理状态变化，不要只依赖一次状态查询。
+连接状态与登录状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。应用应结合状态查询、连接回调及网络状态更新界面，不能仅凭是否收到断开回调判断当前是否连接。
 :::
 
 ## 监听连接变化
 
 通过 `EMClient#addConnectionListener` 注册 `EMConnectionListener`。建议在调用 `loginWithToken` 前注册，以免遗漏登录建连和后续同步状态。
+
+注册后，SDK 会在工作线程检查当前状态，并向该监听器补发通知：已连接时调用 `onConnected()`；未连接但仍处于已登录状态时，调用 `onDisconnected(EMError.NETWORK_ERROR)`。注册时补发的状态通知不受断开通知宽限时间控制，因此，在宽限时间内新增或重新注册监听器，仍可能收到断开回调。
 
 ### 回调说明
 
@@ -94,7 +112,7 @@ boolean loggedIn = EMClient.getInstance().isLoggedIn();
 | 回调 | 触发时机 | 说明 |
 | :--- | :--- | :--- |
 | `onConnected()` | SDK 成功连接到服务器时触发。 | 首次登录连接成功或自动重连成功后均可能触发。 |
-| `onDisconnected(int)` | SDK 与服务器断开连接时触发。 | `errorCode` 表示断开原因；断开不一定表示 SDK 已登出。可恢复场景由 SDK 自动重连。 |
+| `onDisconnected(int)` | SDK 发送断开通知时触发。 | `errorCode` 表示断开原因；可恢复断开的回调时机受 [断开通知宽限时间](#配置断线通知宽限期) 控制，收到回调的时间可能晚于实际断开时间。断开不一定表示 SDK 已登出。 |
 | `onDatabaseOpened(String)` | 指定用户的本地数据库打开成功时触发。 | 表示本地数据库接口可以使用，不表示在线登录成功，也不能替代 `onConnected`。 |
 | `onLogout(int, EMLoginExtensionInfo)` | SDK 因账号、设备或服务限制等原因退出登录时触发。 | 可通过错误码及登录扩展信息处理异常登出。 |
 | `onTokenWillExpire()` | Token 即将过期时触发。 | 建议获取新 Token，并调用 `renewToken` 续期。 |
@@ -116,7 +134,7 @@ EMConnectionListener connectionListener =
 
             @Override
             public void onDisconnected(int errorCode) {
-                // 连接断开。可恢复的网络问题由 SDK 自动重连。
+                // 可恢复断开的通知可能延迟；SDK 会自动重连。
             }
 
             @Override
@@ -177,13 +195,48 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 `EMConnectionListener` 的连接回调运行在工作线程。不要直接在回调中更新 UI，也不要执行大量耗时操作；如需更新界面，应切换到主线程。
 :::
 
+## 配置断线通知宽限期
+
+自 SDK 5.2.1 起，可以通过 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 设置可恢复断线通知宽限期，减少短暂网络波动引起的断线提示。`seconds` 的单位为秒，默认值为 `10`；通过 `getDisconnectNotifyThreshold()` 查询当前配置。
+
+宽限期的适用规则如下：
+
+- 仅在本次登录已成功建立连接后生效。首次连接失败不等待宽限期；调用 `loginWithToken` 登录失败时，应通过登录回调的 `EMCallBack#onError` 处理，不保证触发 `onDisconnected`。
+- 因网络异常、服务器暂时不可达等原因发生可恢复断开时，SDK 自动重连。宽限期内重连成功，则取消暂缓的断开通知；到期仍未恢复，则触发一次 `onDisconnected(int errorCode)`。注册监听器时补发的状态通知不受此规则限制，详见 [监听连接变化](#监听连接变化)。
+- 同一宽限期内再次处理可恢复断开错误，不重新计时，回调中的错误码以最后一次断开为准。
+- 被踢下线等不可恢复异常不受宽限时间延迟，应用应通过 `onLogout` 等相应回调处理；Token 过期通过 `onTokenExpired()` 通知，不应统一按 `onDisconnected` 处理。
+- 设置为小于或等于 `0` 时，关闭可恢复断开通知的延迟。
+- 宽限期只影响回调时机，不会延迟实际连接状态的变化，也不会延迟 SDK 自动重连。
+
+在初始化前配置：
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDisconnectNotifyThreshold(10);
+EMClient.getInstance().init(getApplicationContext(), options);
+```
+
+初始化后也可通过 SDK 当前使用的 `EMOptions` 修改或查询配置：
+
+```java
+EMOptions options = EMClient.getInstance().getOptions();
+// 关闭可恢复断开通知的延迟。
+options.setDisconnectNotifyThreshold(0);
+int seconds = options.getDisconnectNotifyThreshold();
+```
+
+修改配置不会直接重设已启动的计时器。改为其他正值时，当前宽限时间仍使用原截止时间；改为小于或等于 `0` 后，若当前宽限时间内再次处理可恢复断开错误，SDK 会立即通知并取消当前计时。后续新启动的宽限时间使用最新配置。
+
 ## 连接恢复与异常处理
 
 ### 自动重连
 
 登录成功后，如果因网络信号弱、网络切换或其他可恢复原因导致连接中断，SDK 会自动尝试重连，无需应用手动调用登录接口。
 
-连接断开时触发 `onDisconnected`；重连成功后触发 `onConnected`。Android SDK 5.x 不提供独立的 `onConnecting` 或 `onReconnectFailed` 回调，应用应结合这两个回调、`isConnected()` 以及网络状态展示连接状态。
+SDK 按退避策略继续尝试恢复连接；重连成功后触发 `onConnected()`。`onDisconnected(int errorCode)` 的通知时机遵循 [断开通知宽限时间](#配置断线通知宽限期) 的规则，并非每次连接中断或重连失败都会立即触发。
+
+Android SDK 5.x 不提供独立的 `onConnecting` 或 `onReconnectFailed` 回调。应用可通过 `getConnectionState()` 查询连接中、已连接或已断开状态，并结合连接回调及网络状态更新界面。
 
 以下情况不会仅靠自动重连恢复，应用需要根据回调错误码处理账号、Token、设备或服务限制：
 
@@ -250,8 +303,8 @@ EMClient.getInstance().renewToken(
 
 - 在调用 `loginWithToken` 前注册 `EMConnectionListener`，避免遗漏连接、Token 和同步状态回调。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
-- 使用 `isConnected()` 查询当前连接状态，使用 `isLoggedIn()` 查询登录状态，并优先以监听器回调驱动 UI 更新。
-  **注意**：`isConnected()` 通常用于 UI 连接状态提示。调用发送消息或加入群组或聊天室等 API 前 **无需** 手动判断连接状态，SDK 内部会自动处理连接校验，并在连接成功后重试未完成的操作。
+- 使用 `getConnectionState()` 查询当前连接状态，使用 `isLoggedIn()` 查询登录状态。断开通知可能受宽限时间影响，不能仅凭回调判断连接是否可用。
+  **注意**：调用发送消息或加入群组、聊天室等 API 前 **无需** 手动判断连接状态，SDK 内部会处理连接校验，并通过相应接口的回调返回操作结果。
 - 收到 `onTokenWillExpire` 后尽快续期 Token；收到 `onTokenExpired` 后重新登录。
 - 使用 `onLogout` 处理账号、设备和服务限制等不可恢复的异常登出，并根据错误码给出明确提示。
 - 不再需要监听时调用 `removeConnectionListener`，避免重复回调和内存泄漏。
@@ -264,6 +317,9 @@ EMClient.getInstance().renewToken(
 | [`init`](#连接生命周期) | `EMClient` | 初始化 Android SDK。 |
 | [`loginWithToken`](#连接生命周期) | `EMClient` | 使用用户 ID 和 Token 登录并建立连接。 |
 | [`logout`](#连接生命周期) | `EMClient` | 主动登出并关闭当前连接。 |
-| [`isConnected`](#获取连接状态) | `EMClient` | 查询 SDK 当前是否已连接到服务器。 |
+| [`getConnectionState`](#获取连接状态) | `EMClient` | 查询完整连接状态，返回 `EMConnectionState`。自 SDK 5.2.1 起支持。 |
+| [`isConnected`](#获取连接状态) | `EMClient` | 查询是否已连接，自 SDK 5.2.1 起废弃，建议改用 `getConnectionState()`。 |
+| [`setDisconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 设置可恢复断开的通知宽限时间，单位为秒，默认 `10`。 |
+| [`getDisconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 查询当前断开通知宽限时间。 |
 | [`isLoggedIn`](#获取连接状态) | `EMClient` | 查询当前用户是否已登录 Chat 服务。 |
 | [`renewToken`](#token-生命周期) | `EMClient` | 更新当前登录用户的 Token。 |

@@ -1,5 +1,26 @@
 # Web/小程序 IM SDK 更新日志
 
+## 5.2.0 Dev 2026-11-5
+
+### 新增特性
+
+- **[支持复合消息](message_send.html#发送复合消息)**：支持在一条消息中按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，可用于构建图文混排、多图等消息展示。支持复合消息的收发、附件下载，以及将复合消息作为子消息进行合并转发。
+
+  新增 `ChatManager.createTextMessageBody()` 等分段创建方法，以及 `createMultiBodyMessage()`，支持组装 2-20 段内容。通过 `sendMessage()` 发送，通过 `downloadAttachment()` 下载其中的全部附件。
+
+- **[支持查询 SDK 版本号](initialization.html#获取-sdk-版本号)**：便于确认当前集成的 SDK 版本和排查版本相关问题。 新增 `client.getVersion()`，返回当前 SDK 的版本号字符串。
+
+### 修复
+
+- 修复文本消息翻译流程不完整的问题：确保普通文本消息在发送或编辑前自动翻译，并保留原文和译文，接收方可获取并展示译文。翻译失败时，不发送消息或编辑请求。
+- 修复部分消息类型无法编辑扩展字段的问题：修复图片、语音、视频、文件、位置和合并消息的扩展字段编辑问题。
+- 修复 uni-app Android 平台在无法获取文件 MD5 时，附件发送被中断的问题。
+- 修复微信小程序发送合并消息失败及合并内容文件写入异常的问题，并在上传成功后清理临时合并文件。
+
+## 5.1.3 Dev 2026-10-15
+
+修复会话列表最后消息发送者丢失及错置。
+
 ## v5.1.2 Dev 2026-9-20（开发版）
 
 #### 新增特性
@@ -1082,7 +1103,7 @@
 - [demo] 好友之间可以通过 webrtc 进行视频聊(仅支持 https + Webkit 浏览器)
 - [demo] 支持同一账号最多 8 个标签页登录 isMultiLoginSessions:true
 - [demo] http 访问加入 ip 策略功能,防止 DNS 劫持 isHttpDNS:true
-- [sdk] 新增两种安装引用方式（具体引用方式，请参考 [集成方式](https://docs-im.easemob.com/im/web/intro/integration)）
+- [sdk] 新增两种安装引用方式（具体引用方式，请参考 [集成方式](/v4/web/integration.html)）
   - 添加 `<script>` 标签，并通过 WebIM 命名空间访问 websdk
   - NPM（websdk 已经发布到 NPM），先 require，再访问 WebIM
 

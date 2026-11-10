@@ -1,5 +1,41 @@
 # Android IM SDK 更新日志
 
+## v5.2.1 Dev 2026-11-5
+
+#### 新增特性
+
+- **[支持复合消息](message_send.html#发送复合消息)**：单条消息可按顺序携带多个消息体，最多支持 20 个，便于组合发送和展示多种内容。新增 `EMMessage#createMultiBodySendMessage(...)`、`getBodies()`、`setBodies(...)` 和 `appendBody(...)`，用于创建、读取和修改消息体列表；新增 `getContentType()` 和 `EMMessage.Type.MULTIBODY`，用于识别复合消息。`EMClient#isConnected()` 标记为废弃。
+- **[支持查询完整连接状态](connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持配置断开通知宽限时间](connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
+- **[支持配置后台消息接收策略](/document/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/document/android/push/push_overview.html#确认推送通道有效)**：应用可判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。新增 `EMPushHelper#isPushTokenBound()`，用于查询当前推送 Token 的绑定状态。
+
+#### 优化
+
+- **[调整流式消息扩展字段的更新逻辑](/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
+- **[优化复合消息的附件传输进度和下载结果回调](message_receive.html#附件下载接口与回调)**：[附件上传](message_send.html#获取发送附件消息的进度)、原文件下载及大图下载的进度按文件大小加权，汇总为消息级 0–100 总进度；缩略图下载不提供进度回调。每次下载请求仅返回一次最终结果，任一适用附件下载失败时，终止剩余下载。
+
+#### API 与行为变更
+
+- 复合消息的 [`getType()` 和 `getContentType()`](message_send.html#发送复合消息) 返回 `EMMessage.Type.MULTIBODY`；`getBody()` 返回首个消息体，完整消息体列表请通过 `getBodies()` 获取。`setBody()` 会替换整个消息体列表，`addBody()` 和 `appendBody()` 为追加操作。
+- `EMClient#isConnected()` 标记为废弃，现有调用仍可使用，建议改用 [`EMClient#getConnectionState()`](connection.html#获取连接状态)。
+- [可恢复断开的 `onDisconnected(int errorCode)` 回调](connection.html#配置断线通知宽限期)默认延迟 10 秒；宽限时间内重连成功则不触发断开回调，到期仍未恢复才触发。将宽限时间设置为小于或等于 0 时，立即回调。首次连接失败、Token 失效或被踢下线等情况仍立即通知。宽限时间仅影响回调时机，连接状态会即时变化。
+- [`usePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) 默认为 `false`，SDK 不会因应用进入后台而主动断开长连接，连接能否持续保持仍受系统后台限制和应用保活策略影响。如需启用后台推送策略，请在调用 `EMClient#init(Context, EMOptions)` 前设置为 `true`。若连接成功时应用已处于后台，且开关已开启、推送通道有效，SDK 会直接断开连接，不再等待约 10 秒。
+- [下载复合消息附件](message_receive.html#附件下载接口与回调) 时，不适用的消息体会自动跳过；若没有适用的消息体，则回调成功，但不下载任何内容。语音消息体通过大图或缩略图下载接口下载时，均下载语音原文件。单消息体的其他下载行为保持与历史版本一致。
+
+#### 修复
+
+- 修复自动重连在遍历完服务器地址列表后停止、可能导致登录状态异常的问题。现在会 [按退避策略继续尝试连接](connection.html#自动重连)，提升弱网及服务异常场景下的连接恢复能力。
+- 修复 [单消息体附件下载行为](message_receive.html#附件下载接口与回调) 与历史版本不一致的问题：单视频消息调用大图下载接口时，恢复为下载原始视频文件；对于不支持的资源或下载类型，返回下载失败。复合消息的适用性筛选规则保持不变。
+- 修复消息经 Parcel 反序列化后消息体缓存未同步的问题，避免消息体为空以及消息发送、附件下载异常。
+- 修复 [重发消息时缺少发送前校验](message_send.html#重新发送失败消息) 的问题。消息体为空、数量超限或复合消息附件缺失时，SDK 会拒绝发送，避免异常发送或崩溃。
+- 修复流式消息后续分片或完整消息更新时，[扩展字段未正确覆盖并持久化](message_stream_receive.html#扩展字段) 的问题。最新处理的更新中的扩展字段会整体替换本地旧值；若新扩展字段为空，则清空原值。
+- 修复退出聊天室后重新加入时，旧退出请求的重试可能导致聊天室加入状态异常的问题。
+- 修复多设备场景下，其他设备可能收不到群组或聊天室白名单添加、全员禁言及解除全员禁言事件的问题。
+- 修复群成员名片长度超限时返回的错误码不准确的问题，现返回 `EMError.INVALID_PARAM`。
+- 修复单独修改群组公开状态、入群审批或邀请权限时，请求连带提交其他群属性、可能导致配置被误改的问题。
+- 恢复 [`EMChatManager#downloadBigImage(...)` 的大图下载进度回调](message_receive.html#附件下载接口与回调)；缩略图下载仍不提供进度回调。
+
 ## v5.1.0 Dev 2026-9-24
 
 #### 重大变更
@@ -61,7 +97,7 @@
 8. 修复信号量/定时器生命周期问题导致的重连卡死与偶发死锁（`EMSemaphoreTracker`/`EMTimer`/连接等待被替换后的时序问题）。
 9. 修复自己退群/群被销毁时本地清理与回调线程的时序崩溃；修复 MUC/ROSTER 事件先于消息落盘分发导致的消息乱序。
 10. 修复第二次设置私有 REST 服务器地址不生效的问题。
-11. 修复 `resetLinkVector()` 崩溃；修复 [Presence](presence.md) 时间戳未初始化及 `pageSize` 未校验的问题。
+11. 修复 `resetLinkVector()` 崩溃；修复 [Presence](presence.html) 时间戳未初始化及 `pageSize` 未校验的问题。
 12. 修复附件上传 HTTP 超时单位换算错误（秒未换算为毫秒导致超时设置偏小）。
 
 ## v5.0.0 Dev 2026-8-12
@@ -156,11 +192,11 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - **[支持查询完整的连接状态](/v4/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
 - **[支持配置断线通知宽限期](/v4/android/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
 - **[支持配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
-- **[支持查询推送通道是否有效](/v4/android/push/push_overview.html#查询推送通道是否有效)**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
+- **[支持查询推送通道是否有效](/v4/android/push/push_overview.html#确认推送通道有效)**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
 
 #### 优化
 
-- **[调整 FCM 后台连接策略](/v4/android/push/push_overview.html#fcm-后台连接策略变化)**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
+- **[调整 FCM 后台连接策略](/v4/android/push/push_overview.html#配置后台消息接收策略)**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
 - **[调整流式消息扩展字段的更新逻辑](/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
 
 #### 修复
@@ -224,7 +260,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
   - 需在调用 `EMClient#init` 初始化 SDK 前设置。
   - 在 4.24.2 及之前版本中，FCM 场景下应用进入后台约 3 分钟后会自动断开长连接；从 4.24.3 起，该行为默认关闭。依赖原有行为的 FCM 集成需显式调用 `setUsePushInBackground(true)`，断连等待时间同时由 3 分钟缩短为约 10 秒。
 
-详见 [推送概述文档](/v4/android/push/push_overview.html#离线推送过程)。
+详见 [推送概述文档](/v4/android/push/push_overview.html#配置后台消息接收策略)。
 
 ## v4.24.2 Dev 2026-9-3（开发版）
 
@@ -379,6 +415,14 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
    - 新增 `EMGroupManager#getGroupNamecard`，支持从本地内存获取群成员名片。
    - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
+
+## v4.19.5 2026-11-9
+
+#### 修复
+
+- **优化 Token 过期提醒的准确性**：修复设备系统时间不准确、被修改或设备休眠导致 Token 过期倒计时出现偏差的问题。SDK 现在结合服务端时间与单调时钟计算倒计时，使 `EMConnectionListener#onTokenWillExpire()` 和 `onTokenExpired()` 的触发时机更准确；登录及调用 `EMClient#renewToken()` 更新 Token 后均生效。
+
+- **修复连接地址耗尽后停止重连的问题**：修复自动登录或已登录状态下，所有长连接地址均尝试失败后 SDK 停止重连并清除登录状态的问题。现在 SDK 会重新遍历连接地址，按需刷新 DNS 配置并进行退避重试。登录过程中无可用连接地址时，返回 `EMError#SERVER_NOT_REACHABLE`，不再直接退出登录。
 
 ## v4.19.4 2026-9-22
 
@@ -1105,7 +1149,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](/v4/android/message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 #### 修复
 
@@ -1198,7 +1242,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
-- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback_presending.html#响应-body) code 信息）。
+- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback_presending.html#响应字段说明) code 信息）。
 - [IM SDK] 在 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
 #### 优化：
@@ -1249,7 +1293,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应；
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
+- [IM SDK] 新增 [举报 API](/v4/android/moderation.html) 用于内容审核。
 
 #### 优化：
 
@@ -1297,7 +1341,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 新增特性
 
 - [IM SDK] [EaseIMKIt] 增加 [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_chat_manager.html#a345e81b9caf2658c8796855fe63fe752)；
-- [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](https://docs-im.easemob.com/push/apppush/androidsdk)；
+- [IM SDK] Push 平台增加推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，见 [Android 推送集成](/value-added/push/push_integration_process_android.html)；
 - [IM SDK] 增加非好友不能发送消息错误码 [221 USER_NOT_ON_ROSTER]；
 - [IM SDK] [EaseIMKIt] 增加通过 REST 接口撤回消息功能。
 
@@ -1404,7 +1448,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - [IM SDK] 移除对 FCM 11.4.0 版本的依赖，将 FCM 的逻辑移到应用层。
 - [IM SDK] 如果设置了 EMOptions#setAutoTransferMessageAttachments(false)，SDK 发送消息时不再检查附件是否存在。
 - [EaseIMKit] 在 EaseChatFragment 中暴露消息发送成功的回调 onChatSuccess。
-- [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](https://docs-im.easemob.com/im/android/push/thirdpartypush#sdk_385_版本之后集成方式)。
+- [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](/v4/android/push/push_fcm.html#步骤四-fcm-推送集成)。
 
 #### 修复
 
@@ -1490,13 +1534,13 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 更新(2021-05-08)：
 
-- [EaseCallkit] 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`，参见[EaseCallKit 使用指南](easecallkit.html);
+- [EaseCallkit] 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`，参见[EaseCallKit 使用指南](/callkit/android/easecallkit.html);
 
 ```
 **重大变动：**
 ```
 
-远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 `“io.hyphenate”`，详见 [Android SDK 介绍及导入](https://docs-im.easemob.com/im/android/sdk/import)。
+远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 `“io.hyphenate”`，详见 [Android SDK 介绍及导入](/v4/android/integration.html)。
 
 ## v3.8.0 2021-02-27
 
@@ -1521,7 +1565,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 注意
 
 - **为提供更好的服务，从 3.8.0 开始 SDK 中不再提供音视频功能，而是在 EaseCallKit 中基于声网的 SDK 给出了音视频功能的参考实现。该方案呼叫功能不能与之前版本之间互通，请根据情况选择使用新方案或者继续使用之前的版本**
-- EaseCallKit 除了可以远程库外，也公布了源码，详情请见：[EaseCallKit 使用指南](https://docs-im.easemob.com/im/android/other/easecallkit);
+- EaseCallKit 除了可以远程库外，也公布了源码，详情请见：[EaseCallKit 使用指南](/callkit/android/easecallkit.html);
 
 ## v3.7.6 2021-09-17
 
@@ -1538,7 +1582,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [IM SDK] 修复个别场景下长时间在前台可能会离线的 bug；
 
-`**注意：**`此版本只能从 `MavenCentral` 拉取，依赖库的域名由 “com.hyphenate” 修改为`“io.hyphenate”`，详见 [Android SDK 介绍及导入](https://docs-im.easemob.com/im/android/sdk/import)。
+`**注意：**`此版本只能从 `MavenCentral` 拉取，依赖库的域名由 “com.hyphenate” 修改为`“io.hyphenate”`，详见 [Android SDK 介绍及导入](/v4/android/integration.html)。
 
 ## v3.7.4 2021-02-04
 
@@ -1574,7 +1618,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新功能：
 
-- [EaseIMKit] EaseUI 的升级版 EaseIMKit 正式发布远程依赖库了，版本号与 IM SDK 一致，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/android/other/easeimkit)；
+- [EaseIMKit] EaseUI 的升级版 EaseIMKit 正式发布远程依赖库了，版本号与 IM SDK 一致，详情请见：[EaseIMKit 使用指南](/uikit/chatuikit/android/ui_historic.html)；
 
 #### 更新：
 
@@ -1590,7 +1634,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 **注意：**
 
-1. EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/android/other/easeimkit)；
+1. EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](/uikit/chatuikit/android/ui_historic.html)；
 2. 新版 App（EaseIM App）采用了新的 Appkey，不可用之前的账号进行登录，需要重新进行注册。
 
 ## v3.7.2 2020-10-30
@@ -1677,7 +1721,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 更新：
 
-- 适配 AndroidQ(支持上传附件通过 Uri，具体用法请参考[发送消息](https://docs-im.easemob.com/im/android/basics/message))；
+- 适配 AndroidQ(支持上传附件通过 Uri，具体用法请参考[发送消息](/v4/android/message_send.html))；
 - 移除 apache jar 包；
 
 修复：
@@ -1848,11 +1892,11 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 新功能：
 
-- 支持 Oppo、Vivo、魅族推送，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 支持 Oppo、Vivo、魅族推送，详情请见[第三方推送集成](/v4/android/push/push_overview.html)文档；
 
 优化：
 
-- 优化三方推送的集成使用接口，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 优化三方推送的集成使用接口，详情请见[第三方推送集成](/v4/android/push/push_overview.html)文档；
 - 优化一些错误码返回值，错误原因更加具体；
 
 修复：
@@ -2026,14 +2070,14 @@ EaseUI:
 
 新功能：
 
-1. 将华为推送的集成从 sdk 中转移到应用层，SDK 提供上传华为推送 token 的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1 华为推送修改文档](https://docs-im.easemob.com/im/android/push/thirdpartypush#华为hms推送集成)
+1. 将华为推送的集成从 sdk 中转移到应用层，SDK 提供上传华为推送 token 的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1 华为推送修改文档](/v4/android/push/push_huawei.html#步骤三-集成华为推送-sdk)
 
 ## v3.4.0 2018-04-04
 
 新功能：
 
 1. 增加是否使用 FCM 推送的接口 通过`EMOptions`的`setUserFCM()`方法设置
-2. 添加语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+2. 添加语音会议功能 多人音视频会议（历史文档已下线）
 
 修复：
 
@@ -2070,11 +2114,11 @@ EaseUI:
 
 新功能：
 
-1. 新增 API 请查看[3.3.6 API 变化](https://docs-im.easemob.com/im/android/sdk/3.3.6apichange)
+1. 新增 API 请查看3.3.6 API 变化（历史文档已下线）
 2. 使用外接音频输入源进行音视频通话时，设置音频源
 3. 提供是否自己处理附件的上传和下载设置项
 4. 提供是否自动下载附件类消息附件设置项（缩略图，语音文件）
-5. 多人音视频会议功能，详细参考集成文档 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+5. 多人音视频会议功能，详细参考集成文档 多人音视频会议（历史文档已下线）
 
 优化：
 
@@ -2120,7 +2164,7 @@ EaseUI:
 
 新功能
 
-1. 新增加 API 请查看链接[3.3.4api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.4apichange)
+1. 新增加 API 请查看链接3.3.4api 修改（历史文档已下线）
 2. 增加接口支持获取历史消息(消息漫游)（`此功能需要联系商务开通`）;
 3. 新增 PC 与移动端互发消息和文件的功能；
 4. 增加消息撤回的接口和回调（`此功能需要联系商务开通`）;
@@ -2130,7 +2174,7 @@ EaseUI:
 
 新功能
 
-1. 新增加 API 请查看链接[3.3.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.3apichange)
+1. 新增加 API 请查看链接3.3.3api 修改（历史文档已下线）
 2. 支持在多个设备登录同一个账号，多个设备间可以同步消息，好友及群组的操作(多设备登录属于增值服务，需要联系商务开通)；
 3. 添加群共享文件的大小属性；
 4. 增加获取同一账号登录的设备列表的接口，并可以选择踢掉某个设备上的登录；
@@ -2178,7 +2222,7 @@ EaseUI:
 
 新功能：
 
-1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加 API 请查看链接[3.3.0api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.0apichange)
+1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加 API 请查看链接3.3.0api 修改（历史文档已下线）
 2. 优化 dns 劫持时的处理
 3. 增加 EMConversation.latestMessageFromOthers,表示收到对方的最后一条消息
 4. 增加 EMClient.compressLogs，压缩 log，Demo 中增加通过邮件发送 log 的示例
@@ -2198,9 +2242,9 @@ bug 修订:
 
 新功能/优化：
 
-1. sdk 提供 aar 及 gradle 方式集成，具体方法查看[gradle 方式导入 aar](https://docs-im.easemob.com/im/android/sdk/import#手动复制jar包及so导入)
+1. sdk 提供 aar 及 gradle 方式集成，具体方法查看[gradle 方式导入 aar](/v4/android/integration.html#方法一-使用-mavencentral-自动集成)
 2. 增加离线推送设置的相关接口，具体方法可查看 EMPushManager API 文档
-3. 为了使 sdk 更简洁易用，修改一些 api，并将一些 api 标记为“已过时”，具体修改查看[3.2.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.2.3apichange)，另外，已过时的 api 后续 3-5 个版本会进行删除
+3. 为了使 sdk 更简洁易用，修改一些 api，并将一些 api 标记为“已过时”，具体修改查看3.2.3api 修改（历史文档已下线），另外，已过时的 api 后续 3-5 个版本会进行删除
 4. 优化 loadAllConversationsFromDB()方法，从联表查询改为从两个表分别查询，解决在个别乐视手机上执行很慢的问题
 5. 优化登录模块，减少登录失败的概率
 6. 鉴于市面上的手机基本都是 armeabi-v7a 及以上的架构，从这版本开始不再提供普通的 armeabi 架构的 so，减少打包时 app 的体积
@@ -2293,7 +2337,7 @@ Bug fix:
 
 ## v3.1.5 2016-8-26
 
-1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看[3.1.5api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.1.5apichange)
+1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看3.1.5api 修改（历史文档已下线）
 2. 优化读取好友的速度；
 3. 修复在 logout 方法的回调里立刻调用 login 方法不能登录的 bug；
 4. 修复 https 安全漏洞，提高安全性；

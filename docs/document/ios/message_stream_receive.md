@@ -160,12 +160,18 @@ UI 使用建议如下：
 
 ### 扩展字段
 
-流式消息支持 `ext` 扩展字段，但仅首个分片中的 `ext` 会作为最终持久化结果保存到本地数据库。后续分片中的扩展字段不应作为最终消息扩展信息依赖。
+流式消息支持 `ext` 扩展字段。自 SDK 5.2.0 起，SDK 会使用最新处理的分片或完整消息更新中的 `ext`，整体替换本地已保存的扩展字段，并写入数据库。
+
+- 分片按顺序处理，以最新处理分片中的 `ext` 为准，而非按网络到达顺序直接覆盖。
+- 扩展字段采用整体替换方式，不会按字段合并；新 `ext` 中未携带的旧字段不会保留。
+- 若新 `ext` 为空，则清空本地原有扩展字段。
+
+例如，本地 `ext` 为 `{"requestId":"123","status":"generating"}`，后续处理的分片携带 `{"status":"complete"}`，更新后的本地 `ext` 为 `{"status":"complete"}`，不再保留 `requestId`。
+
+SDK 5.2.0 之前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。
 
 :::tip
-`ext` 使用建议如下：
-- 与整条消息强相关的扩展信息放在首个分片中传递。
-- 不要依赖后续分片动态修改 `ext` 来驱动最终业务逻辑。
+如果业务需要持续保留某些字段，业务服务端应在后续分片或完整消息更新中继续携带这些字段。升级至 SDK 5.2.0 时，请检查服务端的 `ext` 下发逻辑，避免仅在首个分片中携带需要持续保留的信息。
 :::
 
 ### 传输状态与错误处理
@@ -190,18 +196,18 @@ UI 使用建议如下：
 | :--- | :--- | :--- |
 | [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
-| [消息漫游](/document/ios/message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
-| [消息扩展](/document/ios/message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
-| [定向发送](/document/ios/message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
-| [消息已读回执](/document/ios/message_receipt.html) | 不支持 | 接收方回传已读状态。 |
+| [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
+| [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
+| [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
+| [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
 | [消息输入状态](typing_indication.html) | 不支持 | 通知对方“正在输入”状态。 |
-| [消息表情回复（Reaction）](/document/ios/reaction.html) | 支持 | 对消息添加回复表情。 |
-| [消息置顶](/document/ios/message_pin.html) | 支持 | 将消息置顶到会话中。 |
-| [消息撤回](/document/ios/message_recall.html) | 支持 | 撤回已发送消息。 |
-| [消息单向删除](/document/ios/message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
-| [消息编辑](/document/ios/message_modify.html) | 支持 | 编辑已发送消息内容。 |
-| [消息搜索](/document/ios/message_search_local.html) | 支持 | 在本地或会话中搜索消息。 |
-| [会话未读数](/document/ios/conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
+| [消息表情回复（Reaction）](reaction.html) | 支持 | 对消息添加回复表情。 |
+| [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
+| [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
+| [消息单向删除](message_delete.html#单向删除服务端的历史消息) | 支持 | 仅删除当前用户侧的消息记录。 |
+| [消息编辑](message_modify.html) | 支持 | 编辑已发送消息内容。 |
+| [消息搜索](message_search_local.html) | 支持 | 在本地或会话中搜索消息。 |
+| [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
 | [离线推送](/document/ios/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
@@ -232,9 +238,9 @@ UI 使用建议如下：
 - `status` 为 `startAndComplete`
 - `status` 为 `error`
 
-#### 4. 为什么后续分片 `ext` 不生效？
+#### 4. 后续分片中的 `ext` 是否会更新到本地？
 
-因为最终持久化仅以首个分片中的 `ext` 为准。后续分片不应用于更新最终消息扩展字段。
+自 SDK 5.2.0 起会更新。本地扩展字段以最新处理的分片或完整消息更新为准，整体替换旧值；新 `ext` 为空时清空原值，不会与旧字段合并。此前版本保留消息首次入库时的扩展字段。详见 [扩展字段](#扩展字段)。
 
 #### 5. 是否需自行合并分片？
 
