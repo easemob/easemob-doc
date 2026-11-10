@@ -14,7 +14,7 @@
 
 :::tip
 
-1. SPM、CocoaPods 和手动集成只需选择一种，避免重复引入 SDK。
+1. Swift Package Manager（SPM）、CocoaPods 和手动集成只需选择一种，避免重复引入 SDK。
 2. 请点击查看 [发版说明](releasenote.html) 获得最新版本号。
 
 :::
