@@ -9,8 +9,8 @@
 开始前，确保你的开发环境满足如下条件：
 
 - Xcode：推荐最新版本。
-- 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。
-- CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
+- 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。使用 EaseChatUIKit 4.26.0 的 SPM 包时，最低要求为 iOS 15.0；其他版本请以对应 `Package.swift` 为准。
+- 已选择 UIKit 集成方式：推荐使用 Swift Package Manager（SPM）；CocoaPods 集成方式即将废弃，仅选择该方式时需安装 CocoaPods 1.14.3 及以上版本。详见 [集成单群聊 UIKit](chatuikit_integrated.html)。
 - 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#管理应用)。
 - 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
 
@@ -27,7 +27,7 @@
 
 ### 第二步 添加 UIKit 依赖
 
-请参见[添加 UIKit 依赖](chatuikit_integrated.md)文档。
+请参见 [添加 UIKit 依赖](chatuikit_integrated.html) 文档，推荐优先使用 SPM。
 
 ### 第三步 初始化
 
