@@ -129,6 +129,68 @@ conversations.forEach(conversation => {
 
 如果需要先从服务端刷新会话列表，可调用 [`refreshSessionList`](#从服务端获取会话列表)。
 
+## 展示最后一条消息摘要
+
+会话列表通常展示最后一条消息的简短摘要。SDK 提供消息数据，应用需根据消息类型生成展示文案，并按界面需要截断文本。下表中的文案仅为示例，不是 SDK 的固定返回值。
+
+| 消息类型 | 建议的摘要内容 |
+| :--- | :--- |
+| 文本 | 展示文本内容。 |
+| 图片（含 GIF） | 展示“[图片]”；如需区分 GIF，可由应用调整文案。 |
+| 语音 | 展示“[语音]”，可附加语音时长。 |
+| 视频 | 展示“[视频]”。 |
+| 文件 | 展示“[文件]”，可附加文件名。 |
+| 位置 | 展示“[位置]”，可附加地点名称或地址。 |
+| 自定义 | 根据自定义事件和业务参数生成摘要，无法识别时使用兜底文案。 |
+| 合并 | 使用消息体提供的标题或摘要，也可统一展示“[聊天记录]”。 |
+| 复合 | 展示“[复合消息]”，或按消息体顺序组合文本与类型标签，例如“你好 [图片]”。 |
+
+透传消息用于业务指令，不作为普通会话摘要展示。
+
+`ConversationItem.lastMessage` 提供最后一条消息的结构化摘要数据，并非可直接展示的字符串。通过 `lastMessage.type` 判断消息类型；普通消息的 `body` 为对象，复合消息的 `body` 为分段数组。`lastMessage` 为 `null` 时，可将展示摘要设为空字符串。以下示例使用固定标签展示非文本消息，并优先使用合并消息自带的摘要：
+
+```typescript
+for (const conversation of client.chatManager.getConversationList()) {
+  const lastMessage = conversation.lastMessage;
+  let summary = '';
+  if (lastMessage) {
+    const body = lastMessage.body;
+    // 复合消息使用分段数组，不能按普通消息直接读取 body.content。
+    if (lastMessage.type === 'multi_body' && Array.isArray(body)) {
+      summary = '[复合消息]';
+    } else if (!Array.isArray(body)) {
+      const singleBody = body as Record<string, unknown>;
+      switch (lastMessage.type) {
+        case 'text':
+          summary = typeof singleBody.content === 'string' ? singleBody.content : '';
+          break;
+        case 'image': summary = '[图片]'; break;
+        case 'voice': summary = '[语音]'; break;
+        case 'video': summary = '[视频]'; break;
+        case 'file': summary = '[文件]'; break;
+        case 'location': summary = '[位置]'; break;
+        case 'custom': summary = '[自定义消息]'; break;
+        case 'combine':
+          summary = typeof singleBody.summary === 'string' && singleBody.summary
+            ? singleBody.summary : '[聊天记录]';
+          break;
+        case 'cmd': break;
+        default: summary = '[消息]'; break;
+      }
+    } else {
+      summary = '[消息]';
+    }
+  }
+  // 使用 summary 更新当前会话的摘要。
+}
+```
+
+:::tip
+自 SDK 5.2.0 起，复合消息的 `lastMessage.type` 为 `multi_body`，`lastMessage.body` 直接为分段数组。如需组合各分段的摘要，应按数组顺序读取每个分段的 `type` 及其内容，不要直接读取 `lastMessage.body.content`。各分段字段与读取方式请参见 [接收复合消息](message_receive.html#接收复合消息)。
+:::
+
+会话列表更新后，应使用最新会话列表项中的 `lastMessage` 重新生成摘要，监听方式请参见 [监听会话列表更新](#监听会话列表更新)。
+
 ## 会话列表数据更新场景
 
 | 场景 | 是否影响服务端会话列表 | 是否影响本地会话列表 | 说明 |

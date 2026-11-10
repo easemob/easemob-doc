@@ -59,13 +59,34 @@ EMClient.shared().login(
 }
 ```
 
-## 获取连接状态
+## 查询连接状态
 
-通过 `EMClient.isConnected` 查询 SDK 当前是否已连接到服务器：
+自 SDK 5.2.0 起，通过 `EMClient.connectionState` 查询 SDK 当前与聊天服务器的连接状态。该只读属性返回 `EMConnectionState`，可区分以下三种状态：
+
+| Swift 枚举值 | Objective-C 枚举值 | 说明 |
+| :--- | :--- | :--- |
+| `.disconnected` | `EMConnectionDisconnected` | 未连接到聊天服务器。SDK 尚未初始化时也返回此状态。 |
+| `.connecting` | `EMConnectionConnecting` | 正在连接聊天服务器。 |
+| `.connected` | `EMConnectionConnected` | 已连接到聊天服务器。 |
 
 ```swift
-let connected = EMClient.shared().isConnected
+let state = EMClient.shared().connectionState
+switch state {
+case .disconnected:
+    // 展示未连接状态。
+    break
+case .connecting:
+    // 展示正在连接状态。
+    break
+case .connected:
+    // 展示已连接状态。
+    break
+@unknown default:
+    break
+}
 ```
+
+`isConnected` 属性自 SDK 5.2.0 起标记为废弃，现有调用仍可使用。建议改用 `connectionState`，以区分未连接、连接中和已连接三种状态。
 
 通过 `EMClient.isLoggedIn` 查询当前用户是否处于登录状态：
 
@@ -73,18 +94,13 @@ let connected = EMClient.shared().isConnected
 let loggedIn = EMClient.shared().isLoggedIn
 ```
 
-| API | 说明 |
-| :--- | :--- |
-| `isConnected` | 当前是否已连接到聊天服务器。 |
-| `isLoggedIn` | 当前用户是否已登录聊天服务器。 |
-
 :::tip
-连接状态与登录状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。业务 UI 应结合代理回调处理状态变化，不要只依赖一次属性查询。
+连接状态与登录状态含义不同。弱网或切换网络时，用户可能仍处于登录状态，但长连接暂时断开并由 SDK 自动重连。应用可结合 `connectionState` 查询和连接回调更新界面；宽限期内即使尚未收到断开回调，实际连接状态也可能已变化。
 :::
 
 ## 监听连接变化
 
-通过 `EMClient.add(_:delegateQueue:)` 注册 `EMClientDelegate`。建议在调用登录接口前注册，以免遗漏登录建连及后续同步状态。
+通过 `EMClient.add(_:delegateQueue:)` 注册 `EMClientDelegate`。建议在调用登录接口前注册，以免遗漏登录建连及后续同步状态。连接监听通知已连接或断开连接；需要了解连接中的状态时，请查询 `connectionState`。断开回调的触发时机还受到 [断线通知宽限期](#配置断线通知宽限期) 的影响。
 
 `delegateQueue` 传 `nil` 时，iOS SDK 的当前实现会将代理回调分发到主队列；传入自定义队列时，回调在指定队列执行。
 
@@ -92,7 +108,7 @@ let loggedIn = EMClient.shared().isLoggedIn
 
 | Swift 回调 | 触发时机 | 说明 |
 | :--- | :--- | :--- |
-| `connectionStateDidChange(_:)` | SDK 与服务器的连接状态发生变化时触发。 | 参数为 `.connected` 或 `.disconnected`。首次登录连接成功、连接断开及自动重连成功时均可能触发。 |
+| `connectionStateDidChange(_:)` | SDK 通知应用已连接或已断开时触发。 | 参数为 `.connected` 或 `.disconnected`。可恢复断线的通知时机受宽限期影响；连接中状态请通过 `connectionState` 查询。 |
 | `onDatabaseOpened(_:username:)` | 登录后的本地数据库打开流程结束时触发。 | `error == nil` 表示数据库打开成功；失败、超时或断连结束时也会触发。该回调不能替代连接成功回调。 |
 | `userAccountDidLoginFromOtherDevice(with:)` | 当前账号在其他设备登录，或出现设备变更时触发。 | `EMLoginExtensionInfo?` 可包含新登录设备的名称和扩展信息。当前实现随后会清理本地登录信息。 |
 | `userAccountDidRemoveFromServer()` | 当前账号被服务端删除时触发。 | 当前实现会登出并清理本地登录信息。 |
@@ -112,8 +128,8 @@ final class ConnectionListener: NSObject, EMClientDelegate {
     func connectionStateDidChange(_ connectionState: EMConnectionState) {
         if connectionState == .connected {
             // 连接成功或自动重连成功。
-        } else {
-            // 连接断开。可恢复的网络问题由 SDK 自动重连。
+        } else if connectionState == .disconnected {
+            // SDK 通知连接已断开；可恢复的网络问题由 SDK 自动重连。
         }
     }
 
@@ -184,13 +200,40 @@ EMClient.shared().removeDelegate(connectionListener)
 请持有监听对象，直到调用 `removeDelegate(_:)`。如果将自定义队列传给 `delegateQueue`，请切换到主线程后再更新 UI，也不要在回调中执行大量耗时操作。
 :::
 
+## 配置断线通知宽限期
+
+自 SDK 5.2.0 起，通过 `EMOptions.disconnectNotifyThreshold` 设置或查询断线通知宽限时间，单位为秒，默认值为 `10`。成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓向应用发送断开通知，减少短暂网络波动引起的断线提示。
+
+- 宽限期内重连成功，则不触发本次断开连接回调。
+- 宽限期结束时仍未恢复连接，才触发 `connectionStateDidChange(_:)`，状态为 `.disconnected`。
+- 设置为小于或等于 `0` 时不启用宽限期，发生断开时立即通知。
+- 首次连接失败、Token 失效或被踢下线等情况仍通过相应的完成回调或专用回调及时通知，不等待可恢复断线的宽限期。
+
+以下示例在 SDK 初始化前完成配置：
+
+```swift
+let options = EMOptions(appkey: "your-org#your-app")
+options.disconnectNotifyThreshold = 10
+
+if let error = EMClient.shared().initializeSDK(with: options) {
+    print("SDK 初始化失败：\(error.errorDescription)")
+}
+
+// 读取当前配置，单位为秒。
+let threshold = options.disconnectNotifyThreshold
+```
+
+:::tip
+宽限期仅影响相关断开回调的通知时机，不延迟实际连接状态的变化，也不控制自动重连或 APNs 的发送时间。判断当前客户端连接状态时，请查询 `connectionState`，不要只依据是否收到断开回调。
+:::
+
 ## 连接恢复与异常处理
 
 ### 自动重连
 
 登录成功后，如果因网络信号弱、网络切换或其他可恢复原因导致连接中断，SDK 会自动尝试重连，无需应用重复调用登录接口。
 
-连接断开时，`connectionStateDidChange(_:)` 返回 `.disconnected`；重连成功后返回 `.connected`。iOS SDK 仅公开“已连接”和“未连接”两种 `EMConnectionState`，不提供独立的“正在连接”或“重连失败”状态。应用应结合该回调、`isConnected` 和系统网络状态展示连接状态。
+发生可恢复断线时，SDK 按 [断线通知宽限期](#配置断线通知宽限期) 决定是否通知 `.disconnected`；重连成功后通知 `.connected`。应用可通过 `connectionState` 查询未连接、连接中和已连接状态；SDK 不提供独立的“重连失败”状态。
 
 以下情况不能仅靠自动重连恢复，应用需要根据专用回调处理账号、Token、设备或服务限制：
 
@@ -252,8 +295,8 @@ EMClient.shared().renewToken("newToken") { error in
 - 在调用 Token 登录接口前注册 `EMClientDelegate`，避免遗漏连接、Token 和同步状态回调。
 - iOS SDK 不再依赖自动登录；应用启动或需要建立 IM 会话时应显式登录。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
-- 使用 `isConnected` 查询当前连接状态，使用 `isLoggedIn` 查询登录状态，并优先以代理回调驱动 UI 更新。
-  **注意**：`isConnected()` 通常用于 UI 连接状态提示。调用发送消息或加入群组或聊天室等 API 前 **无需** 手动判断连接状态，SDK 内部会自动处理连接校验，并在连接成功后重试未完成的操作。
+- 使用 `connectionState` 查询当前连接状态，使用 `isLoggedIn` 查询登录状态，并结合代理回调更新 UI。宽限期内请勿因未收到断开回调而认定连接仍然可用。
+  **注意**：连接状态查询主要用于 UI 展示及业务判断。调用发送消息或加入群组、聊天室等 API 前，无需统一增加连接状态检查；应通过各接口的完成回调处理操作结果。
 - 收到 `tokenWillExpire(_:)` 后尽快续期 Token；收到 `tokenDidExpire(_:)` 后获取新 Token 并重新登录。
 - 使用账号异常回调处理设备、账号和服务限制，并根据 `EMError.code` 给出明确提示。
 - 不再需要监听时调用 `removeDelegate(_:)`，避免重复回调。
@@ -266,6 +309,8 @@ EMClient.shared().renewToken("newToken") { error in
 | [`initializeSDKWithOptions`](#连接生命周期) | `EMClient` | 初始化 iOS SDK，Swift 调用为 `initializeSDK(with:)`。 |
 | [`loginWithUsername`](#连接生命周期) | `EMClient` | 使用用户 ID 和 Token 显式登录并建立连接。 |
 | [`logout`](#连接生命周期) | `EMClient` | 主动登出并关闭当前连接。 |
-| [`isConnected`](#获取连接状态) | `EMClient` | 查询 SDK 当前是否已连接到服务器。 |
-| [`isLoggedIn`](#获取连接状态) | `EMClient` | 查询当前用户是否已登录聊天服务器。 |
+| [`connectionState`](#查询连接状态) | `EMClient` | 查询未连接、连接中或已连接状态。 |
+| [`isConnected`](#查询连接状态) | `EMClient` | 已废弃，建议改用 `connectionState`。 |
+| [`isLoggedIn`](#查询连接状态) | `EMClient` | 查询当前用户是否已登录聊天服务器。 |
+| [`disconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 设置或查询断线通知宽限时间，单位为秒，默认 `10`。 |
 | [`renewToken`](#token-生命周期) | `EMClient` | 异步更新当前登录用户的 Token。 |

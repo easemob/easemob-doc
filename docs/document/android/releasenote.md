@@ -1,5 +1,40 @@
 # Android IM SDK 更新日志
 
+## v5.2.1 Dev 2026-11-5
+
+#### 新增特性
+
+- **[支持复合消息](/document/android/message_send.html#发送复合消息)**：单条消息可按顺序携带多个消息体，最多支持 20 个，便于组合发送和展示多种内容。新增 `EMMessage#createMultiBodySendMessage(...)`、`getBodies()`、`setBodies(...)` 和 `appendBody(...)`，用于创建、读取和修改消息体列表；新增 `getContentType()` 和 `EMMessage.Type.MULTIBODY`，用于识别复合消息。`EMClient#isConnected()` 标记为废弃。
+- **[支持查询完整连接状态](/document/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持配置断开通知宽限时间](/document/android/connection.html#配置断开通知宽限时间)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
+- **[支持配置后台消息接收策略](/document/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/document/android/push/push_overview.html#查询推送通道是否有效)**：应用可判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。新增 `EMPushHelper#isPushTokenBound()`，用于查询当前推送 Token 的绑定状态。
+
+#### 优化
+
+- **[优化复合消息的附件传输进度和下载结果回调](/document/android/message_receive.html#附件下载接口与回调)**：[附件上传](/document/android/message_send.html#获取发送附件消息的进度)、原文件下载及大图下载的进度按文件大小加权，汇总为消息级 0–100 总进度；缩略图下载不提供进度回调。每次下载请求仅返回一次最终结果，任一适用附件下载失败时，终止剩余下载。
+
+#### API 与行为变更
+
+- 复合消息的 [`getType()` 和 `getContentType()`](/document/android/message_send.html#操作消息体列表) 返回 `EMMessage.Type.MULTIBODY`；`getBody()` 返回首个消息体，完整消息体列表请通过 `getBodies()` 获取。`setBody()` 会替换整个消息体列表，`addBody()` 和 `appendBody()` 为追加操作。
+- `EMClient#isConnected()` 标记为废弃，现有调用仍可使用，建议改用 [`EMClient#getConnectionState()`](/document/android/connection.html#查询连接状态)。
+- [可恢复断开的 `onDisconnected(int errorCode)` 回调](/document/android/connection.html#配置断开通知宽限时间)默认延迟 10 秒；宽限时间内重连成功则不触发断开回调，到期仍未恢复才触发。将宽限时间设置为小于或等于 0 时，立即回调。首次连接失败、Token 失效或被踢下线等情况仍立即通知。宽限时间仅影响回调时机，连接状态会即时变化。
+- [`usePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) 默认为 `false`，SDK 不会因应用进入后台而主动断开长连接，连接能否持续保持仍受系统后台限制和应用保活策略影响。如需启用后台推送策略，请在调用 `EMClient#init(Context, EMOptions)` 前设置为 `true`。若连接成功时应用已处于后台，且开关已开启、推送通道有效，SDK 会直接断开连接，不再等待约 10 秒。
+- [下载复合消息附件](/document/android/message_receive.html#附件下载接口与回调) 时，不适用的消息体会自动跳过；若没有适用的消息体，则回调成功，但不下载任何内容。语音消息体通过大图或缩略图下载接口下载时，均下载语音原文件。单消息体的其他下载行为保持与历史版本一致。
+
+#### 修复
+
+- 修复自动重连在遍历完服务器地址列表后停止、可能导致登录状态异常的问题。现在会 [按退避策略继续尝试连接](/document/android/connection.html#自动重连)，提升弱网及服务异常场景下的连接恢复能力。
+- 修复 [单消息体附件下载行为](/document/android/message_receive.html#附件下载接口与回调) 与历史版本不一致的问题：单视频消息调用大图下载接口时，恢复为下载原始视频文件；对于不支持的资源或下载类型，返回下载失败。复合消息的适用性筛选规则保持不变。
+- 修复消息经 Parcel 反序列化后消息体缓存未同步的问题，避免消息体为空以及消息发送、附件下载异常。
+- 修复 [重发消息时缺少发送前校验](/document/android/message_send.html#重新发送失败消息) 的问题。消息体为空、数量超限或复合消息附件缺失时，SDK 会拒绝发送，避免异常发送或崩溃。
+- 修复流式消息后续分片或完整消息更新时，[扩展字段未正确覆盖并持久化](/document/android/message_stream_receive.html#扩展字段) 的问题。最新处理的更新中的扩展字段会整体替换本地旧值；若新扩展字段为空，则清空原值。
+- 修复退出聊天室后重新加入时，旧退出请求的重试可能导致聊天室加入状态异常的问题。
+- 修复多设备场景下，其他设备可能收不到群组或聊天室白名单添加、全员禁言及解除全员禁言事件的问题。
+- 修复群成员名片长度超限时返回的错误码不准确的问题，现返回 `EMError.INVALID_PARAM`。
+- 修复单独修改群组公开状态、入群审批或邀请权限时，请求连带提交其他群属性、可能导致配置被误改的问题。
+- 恢复 [`EMChatManager#downloadBigImage(...)` 的大图下载进度回调](/document/android/message_receive.html#附件下载接口与回调)；缩略图下载仍不提供进度回调。
+
 ## v5.1.0 Dev 2026-9-24
 
 #### 重大变更

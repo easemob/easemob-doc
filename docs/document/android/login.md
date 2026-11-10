@@ -45,7 +45,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 ```
 
 :::tip
-应用可以通过 `EMClient#isLoggedIn()` 和 `EMClient#isConnected()` 分别判断登录状态和服务器连接状态，但不能依赖 SDK 自动发起登录。
+应用可以通过 `EMClient#isLoggedIn()` 判断登录状态；自 SDK 5.2.1 起，建议通过 `EMClient#getConnectionState()` 查询完整的服务器连接状态，详见 [查询连接状态](connection.html#查询连接状态)。SDK 不会自动发起登录。
 :::
 
 ## 登录完成前使用本地数据库
@@ -165,11 +165,12 @@ String currentUser = EMClient.getInstance().getCurrentUser();
 
 ## 获取登录状态
 
-调用 `EMClient#isLoggedIn` 判断当前用户是否已登录，调用 `EMClient#isConnected` 判断 SDK 是否已连接到 IM 服务器。登录状态与连接状态含义不同，例如，网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。
+调用 `EMClient#isLoggedIn()` 判断当前用户是否已登录。自 SDK 5.2.1 起，调用 `EMClient#getConnectionState()` 查询当前连接状态，可区分已断开、连接中和已连接；原 `isConnected()` 已标记为废弃。登录状态与连接状态含义不同，例如，网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。
 
 ```java
 boolean loggedIn = EMClient.getInstance().isLoggedIn();
-boolean connected = EMClient.getInstance().isConnected();
+EMConnectionState state = EMClient.getInstance().getConnectionState();
+boolean connected = state == EMConnectionState.CONNECTED;
 ```
 
 ## 退出登录

@@ -29,7 +29,7 @@ Android SDK v5 不再在 `EMClient#init` 过程中自动登录。应用冷启动
 | 删除的 API      | 替代方式  | 接口说明                      |
 | :------------------- | :----- | :------------ |
 | `EMOptions#setAutoLogin(boolean)` / `getAutoLogin()` | 无直接替代。应用启动后主动调用 `loginWithToken(...)`。       | 配置或获取 SDK 是否自动登录。 |
-| `EMClient#isLoggedInBefore()`                        | 根据业务需求使用以下方法：<br/> - `isLoggedIn()`：当前登录态<br/> - `isConnected()`：连接状态 <br/> - `isDatabaseOpened()`：本地库就绪。 | 判断之前是否存在登录记录。    |
+| `EMClient#isLoggedInBefore()`                        | 根据业务需求使用以下方法：<br/> - `isLoggedIn()`：当前登录态<br/> - `getConnectionState()`：连接状态（自 SDK 5.2.1 起推荐使用）；此前可用 `isConnected()` <br/> - `isDatabaseOpened()`：本地库就绪。 | 判断之前是否存在登录记录。    |
 
 ### 密码登录下线
 

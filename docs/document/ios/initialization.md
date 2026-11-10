@@ -42,6 +42,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 | `deleteMessagesOnLeaveChatroom` | 主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `deleteMessagesOnLeaveGroup` | 主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `canChatroomOwnerLeave` | 是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许。<br/> - `false`：不允许。 |
+| `disconnectNotifyThreshold` | 设置或查询断线通知宽限时间，单位为秒，默认值为 `10`，自 SDK 5.2.0 起支持。成功建立连接后，发生可恢复断线时，宽限期内重连成功则不触发断开回调；到期仍未恢复才触发。设置为小于或等于 `0` 时不启用宽限期。首次连接失败、Token 失效或被踢下线等情况仍按原有机制通知。宽限期不延迟实际连接状态变化，也不控制 APNs 的发送时间。详见 [配置断线通知宽限期](connection.html#配置断线通知宽限期)。 |
 | `dataSyncType` | 配置登录后自动同步的数据类型。该属性是 `EMDataSyncType` 位选项，可组合配置会话、好友和已加入群组，默认值为 `.conversations`。 |
 | `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 读取 `EMOptions#enableChatroomConversation` 属性可以查询当前配置。 |
 | `loadEmptyConversations` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
@@ -72,8 +73,8 @@ final class ChatListener: NSObject, EMClientDelegate, EMChatManagerDelegate {
     func connectionStateDidChange(_ connectionState: EMConnectionState) {
         if connectionState == .connected {
             // SDK 已连接到 IM 服务器。
-        } else {
-            // SDK 与 IM 服务器断开连接。
+        } else if connectionState == .disconnected {
+            // SDK 通知与 IM 服务器已断开；可恢复断线的通知时机受宽限期影响。
         }
     }
 
@@ -83,7 +84,7 @@ final class ChatListener: NSObject, EMClientDelegate, EMChatManagerDelegate {
 }
 ```
 
-弱网导致连接断开后，SDK 会自动重连，无需手动重连。若为监听指定了非主队列，请切换到主线程后再更新 UI。
+弱网导致连接断开后，SDK 会自动重连，无需手动重连。需要区分未连接、连接中和已连接状态时，请查询 `EMClient.connectionState`，详见 [查询连接状态](connection.html#查询连接状态)。断开回调的通知时机受 [断线通知宽限期](connection.html#配置断线通知宽限期) 影响。若为监听指定了非主队列，请切换到主线程后再更新 UI。
 
 :::tip
 1. 登录后自动同步数据的开始和结束状态由 `EMClientDelegate` 回调，详见[监听同步状态](#监听同步状态)。

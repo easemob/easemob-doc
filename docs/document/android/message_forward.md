@@ -6,7 +6,7 @@
 
 环信即时通讯 IM Android SDK 支持以下转发方式：
 
-- **转发单条消息**：基于原消息对象创建一条新消息，复用原消息的消息体和扩展字段，再将其发送至目标单聊、群聊、聊天室或消息话题。该方式支持文本、图片、语音、视频、文件、位置、透传、自定义及合并消息等消息类型。
+- **转发单条消息**：基于原消息对象创建一条新消息，复用原消息的消息体和扩展字段，再将其发送至目标单聊、群聊、聊天室或消息话题。该方式支持文本、图片、语音、视频、文件、位置、透传、自定义及合并消息等消息类型；自 SDK 5.2.1 起，转发复合消息时需保留完整的有序消息体列表。
 - **转发多条消息**：将多条消息合并为一条合并消息，再发送至目标会话。接收方可以展开合并消息，查看其中包含的消息内容。详见 [发送合并消息](message_send.html#发送合并消息)。
 
 转发操作会生成并发送一条新消息，新消息拥有独立的消息 ID、发送方、接收方和发送时间，不会改变原消息及其所在会话的数据。对于附件消息，SDK 可以复用原消息中的服务端附件地址，无需重新上传附件；若原附件已因超过存储期限而从服务器删除，接收方将无法下载该附件。
@@ -21,7 +21,7 @@
 ## 转发单条消息
 
 1. 调用 `EMChatManager#getMessage` 获取原消息。如果返回 `null`，应先获取原消息，确认消息及其消息体存在后再继续转发。
-2. 调用 `EMMessage#createSendMessage`，传入原消息的消息类型，创建新的发送消息，再调用 `EMMessage#setBody` 设置原消息的消息体。不要直接复用原消息对象，以免沿用其消息 ID 或发送状态。
+2. 创建新的发送消息：单消息体消息可调用 `EMMessage#createSendMessage` 并通过 `setBody` 设置消息体；自 SDK 5.2.1 起，复合消息应调用 `createMultiBodySendMessage`，传入原消息的完整 `getBodies()` 列表。不要只复制 `getBody()`，也不要直接复用原消息对象，以免遗漏内容或沿用原消息的 ID、发送状态。
 3. 调用 `EMMessage#setTo` 设置目标 ID，并调用 `EMMessage#setChatType` 设置目标会话类型。转发至消息话题时，将目标 ID 设置为话题 ID，会话类型设置为 `EMMessage.ChatType.GroupChat`，并调用 `EMMessage#setIsChatThreadMessage(true)`。
 4. 如需保留业务扩展字段，调用 `EMMessage#setAttribute`，将原消息中受支持类型的扩展字段逐一复制到新消息。只保留适用于目标会话的业务数据。
 5. 调用 `EMMessage#setMessageStatusCallback` 设置发送状态回调，再调用 `EMChatManager#sendMessage` 发送新消息，通过回调观察发送结果。
@@ -48,20 +48,24 @@ if (targetMessage == null) {
 // 单聊传入对端用户 ID，群聊传入群组 ID，聊天室传入聊天室 ID。
 String to = "conversationId";
 
-// 创建一条与原消息类型相同的新消息。
-EMMessage newMessage = EMMessage.createSendMessage(
-        targetMessage.getType());
-newMessage.setTo(to);
+// 创建新消息。复合消息需复制完整列表，不能只使用 getBody()。
+EMMessage newMessage;
+if (targetMessage.getType() == EMMessage.Type.MULTIBODY) {
+    newMessage = EMMessage.createMultiBodySendMessage(to, targetMessage.getBodies());
+} else {
+    newMessage = EMMessage.createSendMessage(targetMessage.getType());
+    newMessage.setTo(to);
+    newMessage.setBody(targetMessage.getBody());
+}
+if (newMessage == null) {
+    return;
+}
 
 // 默认为单聊。转发到群聊或聊天室时，分别设置为 GroupChat 或 ChatRoom。
 newMessage.setChatType(EMMessage.ChatType.GroupChat);
 
 // 转发到消息话题时，将 to 设置为话题 ID，并标记为话题消息。
 // newMessage.setIsChatThreadMessage(true);
-
-// 复用原消息的消息体。
-EMMessageBody targetMessageBody = targetMessage.getBody();
-newMessage.setBody(targetMessageBody);
 
 // 将原消息中 SDK 支持类型的扩展字段复制到新消息。
 Map<String, Object> ext = targetMessage.ext();
@@ -114,5 +118,7 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`getMessage`](#转发单条消息) | `EMChatManager` | 根据消息 ID 获取本地消息。 |
 | [`createSendMessage`](#转发单条消息) | `EMMessage` | 创建指定类型的发送消息。 |
+| [`createMultiBodySendMessage`](#转发单条消息) | `EMMessage` | 按完整有序消息体列表创建复合转发消息。 |
+| [`getBodies`](#转发单条消息) | `EMMessage` | 获取原消息的全部有序消息体。 |
 | [`ext`](#转发单条消息) | `EMMessage` | 获取原消息的扩展字段。 |
 | [`sendMessage`](#转发单条消息) | `EMChatManager` | 发送转发消息。 |

@@ -23,12 +23,14 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-下表列出初始化时常用的 `EMOptions` 方法，请在初始化 SDK 前完成调用。
+下表列出常用的 `EMOptions` 方法。除明确支持初始化后修改的配置外，请在初始化 SDK 前完成设置。
 
 | 方法名称 | 描述 |
 | :--- | :--- |
 | `setAppKey(String appkey)` | 设置 App Key。`appkey` 是在环信控制台创建应用后获得的唯一标识，格式通常为 `orgName#appName`。 |
 | `setPushConfig(EMPushConfig pushConfig)` | 设置离线推送配置。应在 `init` 前传入已构建的 `EMPushConfig`；未设置时，SDK 会创建默认推送配置。 |
+| `setUsePushInBackground(boolean usePushInBackground)` | 自 SDK 5.2.1 起，设置应用进入后台后是否断开长连接并使用厂商推送。该开关必须在初始化前调用。默认 `false`，SDK 不会因应用进入后台而主动断连；设置为 `true` 且切入后台时推送通道有效，SDK 会安排约 10 秒后断连。通过 `isUsePushInBackground()` 查询。完整条件和时机见 [配置后台消息接收策略](push/push_overview.html#配置后台消息接收策略)。 |
+| `setDisconnectNotifyThreshold(int seconds)` | 自 SDK 5.2.1 起，配置可恢复断线的通知宽限时间，单位为秒，默认 `10`，小于或等于 `0` 时不延迟。初始化前后均可设置，通过 `getDisconnectNotifyThreshold()` 查询。详见 [配置断开通知宽限时间](connection.html#配置断线通知宽限期)。 |
 | `setAutoAcceptGroupInvitation(boolean value)` | 设置是否自动接受群组邀请。<br/> -（默认）`true`：自动接受群组邀请。<br/> - `false`：不自动接受群组邀请。 |
 | `setAcceptInvitationAlways(boolean value)` | 设置是否自动接受好友邀请。<br/> -（默认）`true`：自动接受好友邀请。<br/> - `false`：不自动接受好友邀请。 |
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/>- `false`：保留。 |
@@ -45,6 +47,8 @@ EMClient.getInstance().init(getApplicationContext(), options);
 
 初始化完成后，可以注册连接状态监听和消息监听，以感知 SDK 与 IM 服务器的连接变化及新消息。连接监听回调运行在工作线程，不要直接更新 UI，也不要执行耗时操作；弱网断开后 SDK 会自动重连，无需手动重连。
 
+自 SDK 5.2.1 起，网络异常等可恢复断开的通知受 [断线通知宽限期](connection.html#配置断线通知宽限期) 控制。未收到 `onDisconnected` 不代表长连接仍然可用；查询当前连接状态请使用 `EMClient#getConnectionState()`。
+
 ```java
 private final EMConnectionListener connectionListener = new EMConnectionListener() {
     @Override
@@ -54,7 +58,7 @@ private final EMConnectionListener connectionListener = new EMConnectionListener
 
     @Override
     public void onDisconnected(int errorCode) {
-        // SDK 与 IM 服务器断开连接，可根据 errorCode 区分原因。
+        // 收到断开通知；可恢复断开的通知可能延迟，请通过 getConnectionState() 查询当前状态。
     }
 };
 
@@ -219,6 +223,10 @@ EMClient.getInstance().init(context.getApplicationContext(), options);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `EMClient` | 初始化 Android SDK 单例。 |
+| [`setUsePushInBackground`](push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 设置后台推送开关，须在初始化前调用。 |
+| [`isUsePushInBackground`](push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 查询后台推送开关值。 |
+| [`setDisconnectNotifyThreshold`](connection.html#配置断开通知宽限时间) | `EMOptions` | 配置可恢复断开的通知宽限时间，初始化前后均可设置。 |
+| [`getDisconnectNotifyThreshold`](connection.html#配置断开通知宽限时间) | `EMOptions` | 查询断开通知宽限时间。 |
 | [`setDataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversations`](#登录后读取同步结果) | `EMChatManager` | 读取本地会话列表。 |
 | [`getContactsFromLocal`](#登录后读取同步结果) | `EMContactManager` | 从本地数据库读取好友列表。 |

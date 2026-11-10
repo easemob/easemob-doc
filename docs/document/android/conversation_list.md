@@ -233,6 +233,60 @@ String conversationName = conversation.getConversationName();
 String conversationAvatar = conversation.getConversationAvatar();
 ```
 
+## 展示最后一条消息摘要
+
+会话列表通常展示最后一条消息的简短摘要。SDK 提供消息数据，应用需根据消息类型生成展示文案，并按界面需要截断文本。下表中的文案仅为示例，不是 SDK 的固定返回值。
+
+| 消息类型 | 建议的摘要内容 |
+| :--- | :--- |
+| 文本 | 展示文本内容。 |
+| 图片（含 GIF） | 展示“[图片]”；如需区分 GIF，可由应用调整文案。 |
+| 语音 | 展示“[语音]”，可附加语音时长。 |
+| 视频 | 展示“[视频]”。 |
+| 文件 | 展示“[文件]”，可附加文件名。 |
+| 位置 | 展示“[位置]”，可附加地点名称或地址。 |
+| 自定义 | 根据自定义事件和业务参数生成摘要，无法识别时使用兜底文案。 |
+| 合并 | 使用消息体提供的标题或摘要，也可统一展示“[聊天记录]”。 |
+| 复合 | 展示“[复合消息]”，或按消息体顺序组合文本与类型标签，例如“你好 [图片]”。 |
+
+透传消息用于业务指令，不作为普通会话摘要展示。
+
+调用 `EMConversation#getLastMessage()` 获取最后一条消息，通过 `getContentType()` 或 `getType()` 判断整条消息的类型。没有最后一条消息或消息体为空时，可将摘要设为空字符串。以下示例使用固定标签展示非文本消息，并优先使用合并消息自带的摘要：
+
+```java
+EMMessage lastMessage = conversation.getLastMessage();
+String summary = "";
+if (lastMessage != null && !lastMessage.getBodies().isEmpty()) {
+    switch (lastMessage.getContentType()) {
+        case TXT:
+            summary = ((EMTextMessageBody) lastMessage.getBody()).getMessage();
+            break;
+        case IMAGE: summary = "[图片]"; break;
+        case VOICE: summary = "[语音]"; break;
+        case VIDEO: summary = "[视频]"; break;
+        case FILE: summary = "[文件]"; break;
+        case LOCATION: summary = "[位置]"; break;
+        case CUSTOM: summary = "[自定义消息]"; break;
+        case COMBINE:
+            String combinedSummary =
+                    ((EMCombineMessageBody) lastMessage.getBody()).getSummary();
+            summary = combinedSummary == null || combinedSummary.isEmpty()
+                    ? "[聊天记录]" : combinedSummary;
+            break;
+        case MULTIBODY: summary = "[复合消息]"; break;
+        case CMD: break;
+        default: summary = "[消息]"; break;
+    }
+}
+// 使用 summary 更新当前会话的摘要。
+```
+
+:::tip
+自 SDK 5.2.1 起，复合消息的 `getContentType()` 和 `getType()` 返回 `EMMessage.Type.MULTIBODY`。如需组合各消息体的摘要，应先识别该类型，再通过 `getBodies()` 按顺序读取完整消息体列表。`getBody()` 仅返回首个消息体，不能据此判断整条消息的类型或获取全部内容。各消息体的读取方式请参见 [接收复合消息](message_receive.html#接收复合消息)。
+:::
+
+会话列表更新后，应重新读取最后一条消息并生成摘要，监听方式请参见 [监听会话列表更新](#监听会话列表更新)。
+
 ## 清除内存中的会话
 
 你可以调用 `cleanConversationsMemoryCache` 清除内存中的全部会话以释放内存。清理后，`getAllConversations` 和 `getAllConversationsBySort` 返回的会话可能为空，`getUnreadMessageCount` 返回的未读消息总数可能为 `0`。

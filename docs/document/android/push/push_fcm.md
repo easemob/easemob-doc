@@ -2,6 +2,14 @@
 
 环信即时通讯 IM SDK 中已集成 FCM 推送相关逻辑，你还需要完成以下步骤。
 
+## 后台连接策略
+
+自 SDK 5.2.1 起，FCM 与其他厂商推送通道统一使用 `usePushInBackground` 开关控制后台断连，不再默认于应用进入后台 3 分钟后断开长连接。该开关默认为 `false`；如需后台断连，请在 SDK 初始化前设置 `EMOptions#setUsePushInBackground(true)`。
+
+自 SDK 5.2.1 起支持通过 `EMOptions#setUsePushInBackground(boolean)` 配置后台断连行为，FCM 与其他厂商推送通道采用同一策略。该开关默认为 `false`，SDK 不会因应用进入后台而主动断开 IM 长连接。如需启用，请在 SDK 初始化前将其设为 `true`。开启后，若应用切入后台时推送通道有效，SDK 会安排约 10 秒后断开长连接；应用回到前台时，会取消尚未执行的断连任务。若连接成功时应用已处于后台，且开关已开启、推送通道有效，SDK 会直接断连，不再等待约 10 秒。连接断开后，满足服务端离线推送条件的消息将通过推送通道发送通知。
+
+可通过 `EMOptions#isUsePushInBackground()` 查询当前开关值，详见 [配置后台消息接收策略](push_overview.html#配置后台消息接收策略)。
+
 ## FCM 推送集成
 
 ### 步骤一 在 [Firebase 控制台](https://console.firebase.google.com/)添加 Firebase
@@ -138,12 +146,16 @@ EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
 builder.enableFCM("Your FCM sender id");
 // 将 pushconfig 设置到 EMOptions 中
 options.setPushConfig(builder.build());
+// 可选：启用后台推送策略，默认 false，必须在 init 前设置。
+options.setUsePushInBackground(true);
 // 初始化即时通讯 IM SDK
 EMClient.getInstance().init(this, options);
 // 即时通讯 IM SDK 初始化后
 EMPushHelper.getInstance().setPushListener(new PushListener() {
     @Override
     public void onBindTokenSuccess(EMPushType pushType, String pushToken) {
+        // 绑定成功后，可查询当前推送通道是否有效。
+        boolean pushTokenBound = EMPushHelper.getInstance().isPushTokenBound();
         EMLog.e("PushClient", "Push client bind token to easemob server success: " + pushType + " - " + pushToken);
     }
    @Override
@@ -259,5 +271,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 | [`init`](#步骤四-fcm-推送集成) | `EMClient` | 初始化 Android SDK。 |
 | [`sendFCMTokenToServer`](#步骤四-fcm-推送集成) | `EMClient` | 将 FCM Token 上传至环信服务器。 |
 | [`setFCMPushToken`](#步骤四-fcm-推送集成) | `EMPushHelper` | 保存当前设备的 FCM Token。 |
+| [`isPushTokenBound`](push_overview.html#查询推送通道是否有效) | `EMPushHelper` | 查询当前厂商推送通道是否有效。 |
+| [`setUsePushInBackground`](#后台连接策略) | `EMOptions` | 在 SDK 初始化前设置后台推送开关。 |
 | [`isSdkInited`](#步骤四-fcm-推送集成) | `EMClient` | 判断 SDK 是否已初始化。 |
 | [`isLoggedIn`](#步骤四-fcm-推送集成) | `EMClient` | 判断当前用户是否已登录。 |

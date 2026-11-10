@@ -1,33 +1,87 @@
 # 离线推送概述
 
-即时通讯 IM 支持集成第三方离线消息推送服务，为 Android 开发者提供低延时、高送达率、高并发且不侵犯用户个人数据的离线消息推送服务。目前支持的手机厂商推送服务包括：Google FCM、华为、荣耀、小米、OPPO、VIVO 和魅族。
+<Toc />
 
-如需体验离线推送功能，请前往 [环信官网](https://www.easemob.com/download/demo) 下载即时通讯 IM 的 Demo 应用。
+## 功能说明
 
-## 离线推送流程
+即时通讯 IM 支持通过第三方推送服务，在用户离线时向设备发送消息通知。目前支持 Google FCM、华为、荣耀、小米、OPPO、vivo 和魅族推送。
 
-### 触发条件与消息下发机制
+离线推送通知用于提醒用户有新消息。用户重新打开应用并登录成功后，SDK 会拉取离线期间的消息。推送通知与 IM 消息同步是两个过程，收到推送通知不等于 SDK 已收到对应的完整消息。推送中的离线消息数也不等同于会话实际未读数。
 
-当客户端断开连接或应用进程被系统关闭导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备发送消息通知。待用户重新上线后，服务器会将离线期间的全部消息下发给用户（此处角标显示的是离线消息数量，而非实际未读消息数）。例如，当你离线期间收到其他用户发送的消息，手机通知中心会弹出相应的消息提醒；当你再次打开应用并成功登录后，即时通讯 IM SDK 会自动拉取离线期间的全部消息。
+要体验离线推送功能，请在 [环信官网](https://www.easemob.com/download/demo) 下载即时通讯 IM 的 Demo。
 
-### 前置配置要求
+## 前提条件
 
-除满足用户离线条件外，使用第三方离线推送服务还需在 [环信控制台](https://console.easemob.com/user/login) 完成推送证书信息的配置。以华为推送为例，需配置 **证书名称** 和 **推送密钥**，并调用客户端 SDK 提供的 API 向环信服务器上传 device token。
+### SDK 与运行环境
 
-### 不触发离线推送的场景
+- 已 [开启和配置即时通讯服务](/product/console/app_create.html)，获取有效的 App Key，并完成 [Android SDK 接入](/document/android/integration.html)。
+- 已了解即时通讯 IM 的 [使用限制](/product/limitation.html)。
+- 设备满足所选厂商推送的使用条件：
 
-在以下两种情况下，即时通讯 IM 不会发送离线推送通知：
+| 推送通道 | 设备与运行环境要求 |
+| :--- | :--- |
+| Google FCM | 设备支持并启用 Google Play 服务，且可以连接 Google 服务器。 |
+| 小米 | 使用支持小米推送的小米设备。 |
+| 华为 | 使用支持华为推送的华为设备。 |
+| 魅族 | 使用支持魅族推送的魅族设备。 |
+| OPPO | 使用支持 OPPO 推送的 OPPO 设备。 |
+| vivo | 使用支持 vivo 推送的 vivo 设备。 |
+| 荣耀 | 使用支持荣耀推送的荣耀设备。 |
 
-1. 应用在后台运行时，用户仍处于在线状态，即时通讯 IM 不会推送消息通知。
-2. 应用处于后台运行或手机锁屏等状态时，若客户端与服务器的连接未断开，即时通讯 IM 也不会触发离线推送通知。
+### 厂商推送与控制台配置
 
-## 推送原理
+在对应的厂商开发者平台注册应用并开通推送服务，获取所需的应用标识、密钥或证书，然后在 [环信控制台](https://console.easemob.com/user/login) 配置对应的推送证书信息。
 
-![image](/images/android/push/push_android_understand.png)
+控制台的推送证书配置属于接入准备工作；客户端 Token 与 IM 账号的绑定在 SDK 初始化并登录成功后完成，Token 更新后需及时同步。例如，FCM 的配置和绑定要求见 [上传推送证书](push_fcm.html#步骤三-上传推送证书) 和 [FCM 推送集成](push_fcm.html#步骤四-fcm-推送集成)。其他厂商见 [厂商集成文档入口](#厂商集成文档入口)。
 
-消息推送的完整流程如下：
+### 系统通知权限
 
-1. 用户 B（消息接收者）检测设备支持的推送渠道，即应用已配置的第三方推送服务类型及其使用条件。
+确保应用已按 Android 系统版本和目标 SDK 版本配置、申请所需的通知权限，并确认系统设置中已允许应用及对应通知渠道展示通知。Android 13 及以上版本需按系统要求处理通知运行时权限。
+
+设备已获取 Token 或完成 Token 绑定，不代表通知展示权限已开启。
+
+### 厂商集成文档入口
+
+根据目标设备及业务覆盖区域选择推送通道，依照对应文档完成厂商项目注册、证书配置、推送 SDK 依赖及清单配置、客户端初始化和 Token 绑定。
+
+| 推送通道 | 集成文档 |
+| :--- | :--- |
+| Google FCM | [集成 FCM 推送](push_fcm.html) |
+| 小米 | [集成小米推送](push_xiaomi.html) |
+| 华为 | [集成华为 HMS 推送](push_huawei.html) |
+| 魅族 | [集成魅族推送](push_meizu.html) |
+| OPPO | [集成 OPPO 推送](push_oppo.html) |
+| vivo | [集成 vivo 推送](push_vivo.html) |
+| 荣耀 | [集成荣耀推送](push_honor.html) |
+
+如果应用有海外使用场景，建议接入 FCM；若需覆盖多个品牌设备，建议按业务需要集成多个厂商通道。
+
+在 SDK 初始化前，通过 `EMPushConfig.Builder` 启用所需通道，并调用 `EMOptions#setPushConfig(EMPushConfig)` 设置推送配置。通用初始化要求见 [初始化 SDK](/document/android/initialization.html#初始化-sdk)，各通道的配置示例见上表中的厂商集成文档。
+
+若项目开启代码混淆，通用规则见 [防止代码混淆](/document/android/integration.html#防止代码混淆)，并按厂商集成文档补充对应推送 SDK 的规则。
+
+推送通知方式、免打扰模式和推送模板属于可选的高级功能，其开通要求详见 [开通功能](#开通功能)。
+
+## 工作原理
+
+### 推送证书与推送 Token
+
+| 概念 | 作用 |
+| :--- | :--- |
+| 推送证书 | 环信服务器调用厂商推送服务所需的配置。不同厂商可能要求应用标识、密钥或证书文件等信息；客户端配置或上传的证书名称需与环信控制台中的配置一致。 |
+| 推送 Token（device token） | 厂商推送服务为设备上的应用实例生成的标识，用于确定通知的目标。客户端需将 Token 上传至环信服务器，并与 IM 登录账号绑定。 |
+
+### 推送通道选择
+
+SDK 默认按 FCM、小米、华为、魅族、OPPO、vivo、荣耀的顺序，检查已启用且设备支持的通道，并选择首个满足条件的通道。未配置厂商推送或没有可用通道时，SDK 会通过保活机制尽可能维持 IM 长连接；这不等于已接入厂商离线推送。
+
+### 消息推送流程
+
+![Android 离线推送流程](/images/android/push/push_android_understand.png)
+
+以用户 A 向用户 B 发送消息为例：
+
+1. 用户 B（消息接收者）根据已配置的推送通道和设备支持情况，选择可用的厂商推送服务。
 2. 用户 B 通过已配置的第三方推送 SDK 向第三方推送服务器请求获取推送 token。
 3. 第三方推送服务器向用户 B 返回推送 token。
 4. 用户 B 向环信服务器上传推送证书名称及推送 token。
@@ -37,119 +91,103 @@
 8. 环信服务器将消息转发至第三方推送服务器。
 9. 第三方推送服务器将消息最终投递至用户 B 的设备。
 
-## 推送证书与推送 Token
+## 推送触发条件与消息接收策略
 
-**推送证书**：推送证书是环信服务器判断目标设备使用何种推送通道的唯一依据。在发送推送通知前，需在 [环信控制台](https://console.easemob.com/user/login) 为应用配置推送证书，填写证书名称（或 App Key），并确保该名称与 Android 终端设备上传的证书名称一致。此配置操作必须在登录环信 IM SDK 成功后执行。
+### 在线状态与应用前后台状态
 
-**推送 Token（Device Token）**：推送 token 是第三方推送服务为应用实例生成的唯一标识。以 FCM 推送为例，应用初次启动时，FCM SDK 会为客户端应用实例生成一个注册令牌（registration token）。该 token 用于唯一标识每台设备上的每个应用，FCM 据此将消息准确投递至目标设备，设备再通知应用程序。你可通过调用 `FirebaseMessaging.getInstance().getToken()` 方法获取该 token。此外，若在退出即时通讯 IM 登录时选择不解绑 device token（调用 `logout` 方法时将 `unbindToken` 参数设为 `false`；设为 `true` 则表示解绑 token），用户在推送证书和 token 有效期内仍可收到离线推送通知。
+应用进入后台或手机锁屏本身并不表示用户已离线。若客户端与服务器仍保持 IM 长连接，用户仍为在线状态，不会仅因应用进入后台而触发离线推送。
 
-关于如何获取推送 Token 并上传至环信服务器的详细步骤，请参阅各推送服务的集成文档。例如，FCM 推送的相关说明请参考 [FCM 推送集成文档](/document/android/push/push_fcm.html#步骤四-fcm-推送集成)。
+是否发送离线推送，由环信服务器根据用户在线状态、多设备推送策略、推送通知方式及免打扰等配置决定，不以客户端是否收到断开回调为依据。聊天室不支持离线消息推送。
+
+### 配置后台消息接收策略
+
+自 SDK 5.2.1 起，支持通过 `EMOptions#setUsePushInBackground(boolean usePushInBackground)` 配置应用进入后台后的消息接收策略，通过 `EMOptions#isUsePushInBackground()` 查询开关值。该开关必须在调用 `EMClient#init` 初始化 SDK 前设置。
+
+| `usePushInBackground` | 行为 |
+| :--- | :--- |
+| `false`（默认） | SDK 不会因应用进入后台而主动断开 IM 长连接。后台连接能否持续保持，还受系统后台限制和应用保活策略影响。 |
+| `true` | 切入后台时，若推送 Token 已成功绑定、厂商推送通道有效，SDK 会在约 10 秒后断开 IM 长连接。持续处于后台且连接仍可用时，执行断连；后续消息满足服务端离线推送条件时，通过推送通道发送通知。切入后台时通道条件不满足，则不安排该断连任务。 |
+
+该策略统一适用于 FCM、华为、荣耀、小米、OPPO、vivo 和魅族等厂商推送通道。
+
+应用回到前台时，SDK 会取消尚未执行的后台断连任务。如果应用已处于后台，连接成功时该开关已开启且通道有效，SDK 会直接断开连接，不再等待约 10 秒。因此，约 10 秒并非所有后台连接都能保持的时长。
+
+该开关只控制后台连接策略，不会自动完成厂商推送集成或 Token 绑定。推送配置和 SDK 初始化要求见 [初始化 SDK](/document/android/initialization.html#初始化-sdk) 及对应的 [厂商集成文档](#厂商集成文档入口)。后台断连所需的通道条件见 [确认推送通道有效](#确认推送通道有效)。
+
+### 确认推送通道有效
+
+自 SDK 5.2.1 起，支持通过 `EMPushHelper#isPushTokenBound()` 查询当前是否已建立有效的厂商推送通道。该方法无参数，返回 `boolean`：
+
+- `true`：当前推送类型非空、非 `EMPushType.NORMAL`，且本地保存的对应 Token 非空，SDK 据此判断通道有效。
+- `false`：不满足上述条件，SDK 尚未确认有效的厂商推送通道。
+
+Token 绑定是异步过程，登录成功后立即查询可能返回 `false`。可在 `PushListener#onBindTokenSuccess(EMPushType type, String token)` 回调后查询；监听设置及 Token 上传方式见 [FCM 推送集成](push_fcm.html#步骤四-fcm-推送集成) 和其他厂商集成文档。
+
+该方法根据 SDK 当前推送类型和本地保存的 Token 判断，不会实时请求服务器，也不表示每条通知都能送达。仅开启 `usePushInBackground` 不代表通道已有效。
+
+### 后台断连与断线通知宽限期
+
+自 SDK 5.2.1 起，后台断连等待时间与断线通知宽限期是两项独立机制：
+
+| 机制 | 作用与配置 |
+| :--- | :--- |
+| 后台断连等待时间 | 切入后台时，若 `usePushInBackground` 已开启且通道有效，SDK 安排约 10 秒后断连；回到前台则取消尚未执行的任务。后台连接成功且满足上述条件时，会直接断连。详见 [配置后台消息接收策略](#配置后台消息接收策略)。 |
+| 断线通知宽限期 | 本次登录已成功建立连接后，发生网络异常等可恢复断线时，SDK 可暂缓触发 `onDisconnected(int errorCode)`。默认 10 秒，可通过 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 配置。 |
+
+断线通知宽限期只影响断开回调的触发时机，不会延迟实际连接状态的变化。未收到 `onDisconnected` 不代表长连接仍然可用；如需查询客户端当前连接状态，请使用 `EMClient#getConnectionState()`，详见 [查看连接状态](/document/android/connection.html#查询连接状态)。
+
+断线通知宽限期不是离线推送的额外等待时间，不能将其与后台断连等待时间简单相加来推算推送触发或送达时间。宽限期的适用范围及完整规则，详见 [配置断线通知宽限期](/document/android/connection.html#配置断线通知宽限期)。
+
+### 多设备离线推送策略
+
+同一账号登录多个设备时，可在 [环信控制台](https://console.easemob.com/user/login) 的 **证书管理** 页面配置以下推送策略。该配置对所有推送通道生效：
+
+- 所有设备离线时，才发送推送消息。
+- 任一设备离线时，都发送推送消息。
+
+因此，多设备场景下，判断某台设备是否会收到推送，还需结合账号的多设备推送策略，不能仅查看其中一个客户端的连接状态。
+
+多端登录时，被踢下线的设备即使已接入离线推送，也不会再收到该账号的离线推送通知。
+
+![多设备离线推送策略配置](/images/android/push/push_multidevice_policy.png)
+
+### 退出登录与 Token 解绑
+
+调用 `EMClient#logout` 退出 IM 登录时，`unbindToken` 参数控制是否解绑推送 Token，接口用法见 [退出登录](/document/android/login.html#退出登录)：
+
+| `unbindToken` | 行为 |
+| :--- | :--- |
+| `true` | 退出登录时解绑推送 Token，解绑成功后不再通过该绑定接收此账号的离线推送通知。 |
+| `false` | 退出登录时保留推送 Token 绑定；推送证书和 Token 有效且满足推送条件时，设备仍可收到该账号的离线推送通知。 |
+
+退出登录与被踢下线是不同场景，不能直接套用相同的推送行为。
 
 ## 推送高级功能
 
-### 功能开通
+### 开通功能
 
-[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](push_template.html) 属于推送的高级功能。使用前，你需在 [环信控制台](https://console.easemob.com/user/login)免费开通相关服务。**激活后如需关闭推送高级功能，必须联系环信商务处理，因为该操作会删除高级功能相关的全部配置。**
+[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式) 和 [推送模板](push_template.html) 属于推送的高级功能。使用前需在 [环信控制台](https://console.easemob.com/user/login) 免费开通。
 
-开通步骤如下：
+开通入口及操作步骤见 [开通推送高级功能](push_notification_mode_dnd.html#开通功能)。
 
-1. 登录 [环信控制台](https://console.easemob.com/user/login)。
-2. 选择页面上方的 **应用管理**。在应用列表中，单击测试应用或正式版应用的 App Key。
-3. 选择 **增值服务 > 消息推送 > 离线推送**。
-4. 点击 **免费开通**。
-
-![image](/images/android/push/push_advanced_feature_enable.png)
+**激活后，如需关闭推送高级功能，必须联系商务；关闭操作会删除高级功能相关的所有配置。**
 
 ### 推送通知方式
 
-推送通知方式提供以下三种类型：
+支持接收所有离线消息的通知、仅接收提及用户的消息通知，或不接收通知。可在应用级别和单聊、群聊会话级别设置，会话级别设置优先于应用级别设置。
 
-- 接收所有离线消息的推送通知。
-- 仅接收提及特定用户的消息的推送通知。
-- 不接收任何离线消息的推送通知。
-
-你可以为应用级别或单聊/群聊会话级别分别设置推送通知方式，会话级别的配置优先级高于应用级别的配置。
-
-更多详情，请参见[推送通知方式介绍](push_notification_mode_dnd.html#推送通知方式)。
+详见 [推送通知方式](push_notification_mode_dnd.html#推送通知方式)。
 
 ### 免打扰模式
 
-完成 SDK 初始化并成功登录应用后，你可以为应用及各类型的会话设置免打扰模式，即关闭离线推送功能。该模式提供以下能力：
+完成 SDK 初始化并成功登录应用后，你可以设置应用级别和单聊、群聊会话级别的免打扰功能，可配置免打扰时间段、时长或全天免打扰。业务需要在免打扰期间通知指定用户时，可使用强制推送。
 
-- 支持设置免打扰时间段（例如，8:00-10:00）或免打扰时长（例如，30 分钟）。
-- 支持应用级别及单聊/群聊会话级别的免打扰模式配置。
-- 支持开启全天免打扰或完全关闭免打扰模式。
-- 若在免打扰模式下需要向指定用户推送消息，可设置强制推送。
-
-更多详情，请参见[免打扰模式介绍](push_notification_mode_dnd.html#免打扰模式)。
+详见 [免打扰模式](push_notification_mode_dnd.html#免打扰模式) 和 [强制推送](push_extension.html#强制推送)。
 
 ### 推送模板
 
-当服务器提供的默认离线推送配置无法满足业务需求时，可通过推送模板设置全局范围的推送标题和推送内容。推送模板包括默认模板 `default`、`detail` 以及自定义模板，你可在 [环信控制台](https://console.easemob.com/user/login) 进行配置。
+当服务器提供的默认离线推送配置无法满足业务需求时，可通过推送模板设置全局范围的推送标题和推送内容。
 
-推送模板的具体配置方法和使用说明，请参见 [相关文档介绍](push_template.html)。
+支持默认模板 `default`、`detail` 及自定义模板，用于配置推送标题和内容。可在环信控制台配置模板，并在消息发送或接收侧按需使用。
 
-## 多设备离线推送策略
-
-在多设备登录场景下，你可在 [环信控制台](https://console.easemob.com/user/login)的 **证书管理** 页面配置推送策略，该策略对所有推送通道统一生效：
-
-- 所有设备均离线时，才发送推送消息。
-- 任一设备离线时，即发送推送消息。
-
-**多端登录时，若有设备被踢下线，即使已接入 IM 离线推送，也不会收到离线推送消息。**
-
-![image](/images/android/push/push_multidevice_policy.png)
-
-## 前提条件
-
-1. 已开通环信即时通讯服务，详见 [开启和配置即时通讯服务](/product/console/app_create.html)。
-2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-3. 若需使用推送模板，须先在 [环信控制台](https://console.easemob.com/user/login) 完成激活。
-4. 各推送服务的适用条件如下：
-   - Google FCM：设备启用 Google Play 服务且可连接至 Google 服务器。
-   - 小米推送：仅限小米设备。
-   - 华为推送：仅限华为设备。
-   - 魅族推送：仅限魅族设备。
-   - OPPO 推送：仅限 OPPO 设备。
-   - VIVO 推送：仅限 VIVO 设备。
-   - 荣耀推送：仅限荣耀设备。
-
-SDK 内部将按上述顺序检测设备的推送支持情况。若未配置第三方推送或不满足使用条件，环信 IM SDK 会通过保活机制尽可能维持与环信服务器的长连接，确保消息的及时送达。
-
-**如你的应用有海外使用场景，建议开启 FCM 推送。由于各推送服务的适用条件不同，建议尽可能同时集成多家厂商推送服务。**
-
-1. 使用消息推送前，需在对应厂商推送服务平台完成项目注册，并将设备的推送证书上传至 [环信控制台](https://console.easemob.com/user/login)。
-
-## 配置推送接口
-
-你需要在 SDK 初始化阶段完成推送接口的配置，示例代码如下：
-
-```java
-EMOptions options = new EMOptions();
-
-// 使用 Application Context 创建推送配置。
-EMPushConfig pushConfig = new EMPushConfig.Builder(getApplicationContext())
-        // 启用小米推送。appId 和 appKey 均不能为空。
-        .enableMiPush(miAppId, miAppKey)
-        // 启用华为推送。需预先在 AndroidManifest.xml 配置
-        // com.huawei.hms.client.appid，或在项目中配置 agconnect-services.json。
-        .enableHWPush()
-        .build();
-
-// 将推送配置设置到初始化选项中，并在初始化 SDK 前完成配置。
-options.setPushConfig(pushConfig);
-
-// 初始化即时通讯 IM SDK。
-EMClient.getInstance().init(getApplicationContext(), options);
-```
-
-## 混淆配置
-
-如果你在项目中开启了代码混淆功能，请将以下规则添加到混淆配置文件中：
-
-```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
-```
-
-此外，你还需要根据各厂商开发者平台文档的指引，添加相应第三方推送服务的混淆规则。
+详见 [推送模板](push_template.html)。
