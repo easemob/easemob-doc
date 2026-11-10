@@ -12,6 +12,7 @@
 
 #### 优化
 
+- **[调整流式消息扩展字段的更新逻辑](/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
 - **[优化复合消息的附件传输进度和下载结果回调](message_receive.html#附件下载接口与回调)**：[附件上传](message_send.html#获取发送附件消息的进度)、原文件下载及大图下载的进度按文件大小加权，汇总为消息级 0–100 总进度；缩略图下载不提供进度回调。每次下载请求仅返回一次最终结果，任一适用附件下载失败时，终止剩余下载。
 
 #### API 与行为变更
@@ -414,6 +415,14 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
    - 新增 `EMGroupManager#getGroupNamecard`，支持从本地内存获取群成员名片。
    - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
+
+## v4.19.5 2026-11-9
+
+#### 修复
+
+- **优化 Token 过期提醒的准确性**：修复设备系统时间不准确、被修改或设备休眠导致 Token 过期倒计时出现偏差的问题。SDK 现在结合服务端时间与单调时钟计算倒计时，使 `EMConnectionListener#onTokenWillExpire()` 和 `onTokenExpired()` 的触发时机更准确；登录及调用 `EMClient#renewToken()` 更新 Token 后均生效。
+
+- **修复连接地址耗尽后停止重连的问题**：修复自动登录或已登录状态下，所有长连接地址均尝试失败后 SDK 停止重连并清除登录状态的问题。现在 SDK 会重新遍历连接地址，按需刷新 DNS 配置并进行退避重试。登录过程中无可用连接地址时，返回 `EMError#SERVER_NOT_REACHABLE`，不再直接退出登录。
 
 ## v4.19.4 2026-9-22
 
