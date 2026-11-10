@@ -67,8 +67,8 @@
 | 证书名称       | String | 是   | FCM 的发送者 ID。<br/> - v1 证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn) 的 **项目设置** > **云消息传递** 页面的 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。<br/> - 旧版证书：在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面的 **Cloud Messaging API（旧版）** 区域中获取发送者 ID，如下图所示。 |
 | 推送密钥     | String | 是   | FCM 服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/) 的 **项目设置** > **云消息传递**页面的 **云消息传递 API（旧版）** 区域中获取服务器密钥，如下图所示。此参数仅对旧版证书有效。|
 | 通道 ID         | String | 否     | FCM 通道 ID。该参数仅对离线推送有效。       |
-| 推送优先级设置  |      | 否    | 消息传递优先级。请参见 [设置消息优先级](https://firebase.google.cn/docs/cloud-messaging/concept-options#setting-the-priority-of-a-message)。<br/> 该参数仅对离线推送有效。|
-| 推送消息类型 |      | 否    | 通过 FCM 发送给客户端的消息类型：<br/> - **数据**：数据消息，由客户端应用程序处理。<br/> - **通知**：通知消息，由 FCM SDK 自动处理。**数据+通知**：通知消息和数据消息都可以通过 FCM 客户端发送。 <br/>请参见 FCM 的 [消息类型介绍](https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages)。<br/> 该参数仅对离线推送有效。|
+| 推送优先级设置  |      | 否    | 消息传递优先级。请参见 [设置消息优先级](https://firebase.google.com/docs/cloud-messaging/android-message-priority)。<br/> 该参数仅对离线推送有效。|
+| 推送消息类型 |      | 否    | 通过 FCM 发送给客户端的消息类型：<br/> - **数据**：数据消息，由客户端应用程序处理。<br/> - **通知**：通知消息，由 FCM SDK 自动处理。**数据+通知**：通知消息和数据消息都可以通过 FCM 客户端发送。 <br/>请参见 FCM 的 [消息类型介绍](https://firebase.google.com/docs/cloud-messaging/customize-messages/set-message-type)。<br/> 该参数仅对离线推送有效。|
 | APNs跨平台推送支持 | String | 否 | 是否开启 APNs 跨平台推送支持。非跨平台应用建议不要启用。该参数仅对离线推送有效。|
 
 - 获取 V1 版证书名称
@@ -246,7 +246,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 ### **测试步骤**
 
 1. 在设备上登录应用，并确认 device token 绑定成功。
-   可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/document/server-side/account_detail_obtain_single.html)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
+   可以查看日志或调用[获取用户详情的 RESTful 接口](/document/server-side/account_detail_obtain_single.html)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
 2. 开启应用通知栏权限。
 3. 杀掉应用进程。
 4. 在[环信控制台](https://console.easemob.com/user/login)发送测试消息。
@@ -271,7 +271,7 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 | [`init`](#步骤四-fcm-推送集成) | `EMClient` | 初始化 Android SDK。 |
 | [`sendFCMTokenToServer`](#步骤四-fcm-推送集成) | `EMClient` | 将 FCM Token 上传至环信服务器。 |
 | [`setFCMPushToken`](#步骤四-fcm-推送集成) | `EMPushHelper` | 保存当前设备的 FCM Token。 |
-| [`isPushTokenBound`](push_overview.html#查询推送通道是否有效) | `EMPushHelper` | 查询当前厂商推送通道是否有效。 |
+| [`isPushTokenBound`](push_overview.html#确认推送通道有效) | `EMPushHelper` | 查询当前厂商推送通道是否有效。 |
 | [`setUsePushInBackground`](#后台连接策略) | `EMOptions` | 在 SDK 初始化前设置后台推送开关。 |
 | [`isSdkInited`](#步骤四-fcm-推送集成) | `EMClient` | 判断 SDK 是否已初始化。 |
 | [`isLoggedIn`](#步骤四-fcm-推送集成) | `EMClient` | 判断当前用户是否已登录。 |

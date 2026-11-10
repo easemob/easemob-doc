@@ -29,7 +29,7 @@ EMClient.getInstance().init(getApplicationContext(), options);
 | :--- | :--- |
 | `setAppKey(String appkey)` | 设置 App Key。`appkey` 是在环信控制台创建应用后获得的唯一标识，格式通常为 `orgName#appName`。 |
 | `setPushConfig(EMPushConfig pushConfig)` | 设置离线推送配置。应在 `init` 前传入已构建的 `EMPushConfig`；未设置时，SDK 会创建默认推送配置。 |
-| `setUsePushInBackground(boolean usePushInBackground)` | 自 SDK 5.2.1 起，设置应用进入后台后是否断开长连接并使用厂商推送。该开关必须在初始化前调用。默认 `false`，SDK 不会因应用进入后台而主动断连；设置为 `true` 且切入后台时推送通道有效，SDK 会安排约 10 秒后断连。通过 `isUsePushInBackground()` 查询。完整条件和时机见 [配置后台消息接收策略](push/push_overview.html#配置后台消息接收策略)。 |
+| `setUsePushInBackground(boolean usePushInBackground)` | 自 SDK 5.2.1 起，设置应用进入后台后是否断开长连接并使用厂商推送。该开关必须在初始化前调用。默认 `false`，SDK 不会因应用进入后台而主动断连；设置为 `true` 且切入后台时推送通道有效，SDK 会安排约 10 秒后断连。通过 `isUsePushInBackground()` 查询。完整条件和时机见 [配置后台消息接收策略](/document/android/push/push_overview.html#配置后台消息接收策略)。 |
 | `setDisconnectNotifyThreshold(int seconds)` | 自 SDK 5.2.1 起，配置可恢复断线的通知宽限时间，单位为秒，默认 `10`，小于或等于 `0` 时不延迟。初始化前后均可设置，通过 `getDisconnectNotifyThreshold()` 查询。详见 [配置断开通知宽限时间](connection.html#配置断线通知宽限期)。 |
 | `setAutoAcceptGroupInvitation(boolean value)` | 设置是否自动接受群组邀请。<br/> -（默认）`true`：自动接受群组邀请。<br/> - `false`：不自动接受群组邀请。 |
 | `setAcceptInvitationAlways(boolean value)` | 设置是否自动接受好友邀请。<br/> -（默认）`true`：自动接受好友邀请。<br/> - `false`：不自动接受好友邀请。 |
@@ -223,10 +223,10 @@ EMClient.getInstance().init(context.getApplicationContext(), options);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `EMClient` | 初始化 Android SDK 单例。 |
-| [`setUsePushInBackground`](push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 设置后台推送开关，须在初始化前调用。 |
-| [`isUsePushInBackground`](push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 查询后台推送开关值。 |
-| [`setDisconnectNotifyThreshold`](connection.html#配置断开通知宽限时间) | `EMOptions` | 配置可恢复断开的通知宽限时间，初始化前后均可设置。 |
-| [`getDisconnectNotifyThreshold`](connection.html#配置断开通知宽限时间) | `EMOptions` | 查询断开通知宽限时间。 |
+| [`setUsePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 设置后台推送开关，须在初始化前调用。 |
+| [`isUsePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 查询后台推送开关值。 |
+| [`setDisconnectNotifyThreshold`](connection.html#配置断线通知宽限期) | `EMOptions` | 配置可恢复断开的通知宽限时间，初始化前后均可设置。 |
+| [`getDisconnectNotifyThreshold`](connection.html#配置断线通知宽限期) | `EMOptions` | 查询断开通知宽限时间。 |
 | [`setDataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversations`](#登录后读取同步结果) | `EMChatManager` | 读取本地会话列表。 |
 | [`getContactsFromLocal`](#登录后读取同步结果) | `EMContactManager` | 从本地数据库读取好友列表。 |

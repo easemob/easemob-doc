@@ -157,7 +157,7 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 #### 新增特性
 
 - **[支持按时间点批量标记消息已读](/v4/ios/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `[EMConversation markMessagesAsReadWithTimestamp:completion:]` 接口，操作结果通过主线程回调返回。
-- **[支持查询完整的连接状态](/v4/ios/connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
+- **[支持查询完整的连接状态](/v4/ios/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
 - **[新增断线通知宽限期配置](/v4/ios/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions.disconnectNotifyThreshold` 设置或查询宽限时间，单位为秒，默认为 10 秒。
 
 #### 优化
@@ -592,7 +592,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 修复
 
 - [IM SDK] 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
-- [IM SDK] 修复调用 [REST API](/document/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
+- [IM SDK] 修复调用 [REST API](/document/server-side/group_owner_transfer.html) 转让群主后，SDK 上原群主离开群失败的问题。
 - [IM SDK] 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
 
 ## v4.8.1 2024-07-26
@@ -674,7 +674,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 重大变更
 
 从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
-- [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
+- [UIKit 文档](/uikit/chatuikit/ios/chatuikit_overview.html)
 - [GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo) 上的 Demo 源码
 
 ## v4.5.0 Dev 2024-04-03
@@ -887,7 +887,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 #### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](/v4/ios/message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 #### 修复
 
@@ -1004,7 +1004,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 ##### 新增特性:
 
 - [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应。
-- [IM SDK] 新增 [举报 API](moderation.html) 用于内容审核。
+- [IM SDK] 新增 [举报 API](/v4/ios/moderation.html) 用于内容审核。
 
 ##### 优化：
 
@@ -1050,9 +1050,9 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 ##### 新增特性：
 
-- [IM SDK] [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chat_manager-p.html#a4ac87045ad781e99c59acc271f9af433)；
+- [IM SDK] [单向删除服务端会话 API](/v4/ios/conversation_delete.html#单向删除服务端会话及本地会话)；
 - [IM SDK] 免打扰事件的多设备间同步；
-- [IM SDK] Push 平台推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，具体见：[iOS 推送集成](https://docs-im.easemob.com/push/apppush/iossdk)；
+- [IM SDK] Push 平台推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，具体见：[iOS 推送集成](/value-added/push/push_integration_process_ios.html)；
 - [IM SDK] 发送图片支持 PNG 格式；
 - [IM SDK] 非好友不能发送消息错误码 [221 EMErrorUserNotOnRoster]；
 
@@ -1287,7 +1287,7 @@ EaseIMKit：
 
 EaseCallKit（2021-05-07）：
 
-- 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit 使用指南](easecallkit.html)
+- 修改加入声网频道的方式，改为使用数字 uid 加入，增加与小程序的互通，`与之前版本不互通`,参见[EaseCallKit 使用指南](/callkit/ios/easecallkit.html)
 
 ## v3.8.0 2021-02-27
 
@@ -1316,8 +1316,8 @@ EaseIMKit：
 注意:
 
 - **为提供更好的服务，从 3.8.0 开始 SDK 中不再提供音视频功能，而是在 EaseCallKit 中基于声网的 SDK 给出了音视频功能的参考实现。该方案呼叫功能不能与之前版本之间互通，请根据情况选择使用新方案或者继续使用之前的版本**
-- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/ios/other/easeimkit);
-- EaseCallKit 初版发布，详情请见[EaseCallKit 使用指南](https://docs-im.easemob.com/im/ios/other/easecallkit)
+- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](/uikit/chatuikit/ios/ui_historic.html);
+- EaseCallKit 初版发布，详情请见[EaseCallKit 使用指南](/callkit/ios/easecallkit.html)
 
 ## v3.7.4 2021-02-04
 
@@ -1347,7 +1347,7 @@ EaseIMKit：
 
 注意:
 
-- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/ios/other/easeimkit);
+- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](/uikit/chatuikit/ios/ui_historic.html);
 
 ## v3.7.3 2020-12-31
 
@@ -1365,7 +1365,7 @@ EaseIMKit：
 
 注意:
 
-- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](https://docs-im.easemob.com/im/ios/other/easeimkit);
+- EaseIMKit 除了可以远程库外，也公布了源码，详情请见：[EaseIMKit 使用指南](/uikit/chatuikit/ios/ui_historic.html);
 - 新版 App（EaseIM App）采用了新的 appkey，不可用之前的账号进行登录，需要重新进行注册。
 
 ## v3.7.2 2020-10-30
@@ -1694,7 +1694,7 @@ IM_DEMO 修改：
 
 新功能：
 
-- 实现不同模式的实时语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/ios/basics/multiuserconference)
+- 实现不同模式的实时语音会议功能 多人音视频会议（历史文档已下线）
 - 添加动态更换对方实时视频显示页面的功能[IEMConferenceManager updateConference:streamId:remoteVideoView:completion:]
 
 ## v3.3.9 2018-02-11
@@ -1812,8 +1812,8 @@ IM_DEMO 修改：
 
 新功能：
 
-- 新增：修改获取群公告，上传下载删除群共享文件，修改群扩展信息接口（接口详情请查看文档[群组管理](https://docs-im.easemob.com/im/ios/basics/group)）
-- 新增：修改获取聊天室公告（接口详情请查看文档[聊天室管理](https://docs-im.easemob.com/im/ios/basics/chatroom)）
+- 新增：修改获取群公告，上传下载删除群共享文件，修改群扩展信息接口（接口详情请查看文档[群组管理](/v4/ios/group_manage.html)）
+- 新增：修改获取聊天室公告（接口详情请查看文档[聊天室管理](/v4/ios/room_manage.html)）
 - 新增：批量设置群组免打扰接口
 
 修复:
@@ -1844,7 +1844,7 @@ IM_DEMO 修改：
 
 新功能：
 
-- 新增：群组改造,增加一系列新接口，具体查看[iOS 3.3.0 api 修改](https://docs-im.easemob.com/im/300iosclientintegration/3.3.0apichange)
+- 新增：群组改造,增加一系列新接口，具体查看iOS 3.3.0 api 修改（历史文档已下线）
 - 新增：获取 SDK 日志路径接口，将日志文件压缩成.gz 文件，返回 gz 文件路径，[EMClient getLogFilesPath:]
 - 更新：使用视频通话录制功能时，必须在开始通话之前调用[EMVideoRecorderPlugin initGlobalConfig]
 
@@ -1865,7 +1865,7 @@ IM_DEMO 修改：
 
 - 新增：实时 1v1 音视频，设置了对方不在线发送离线推送的前提下，当对方不在线时返回回调，以便于用户自定义离线消息推送
 - 更新：SDK 支持 bitcode
-- 更新：SDK 使用动态库(为了方便集成开发,sdk 支持 i386,x86_64,armv7,arm64，当使用动态库上传 appstore 时，需要删除 i386,x86_64)，[动态库集成方式](https://docs-im.easemob.com/im/ios/sdk/import)
+- 更新：SDK 使用动态库(为了方便集成开发,sdk 支持 i386,x86_64,armv7,arm64，当使用动态库上传 appstore 时，需要删除 i386,x86_64)，[动态库集成方式](/v4/ios/integration.html#方法二-手动复制-sdk-文件)
 - 为了使 SDK 更简洁易用,过时的 API 会在后续 3~5 个版本进行删除
 
 红包相关:

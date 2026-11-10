@@ -32,7 +32,7 @@ iOS SDK 通过不同的 `EMMessageBody` 子类创建各类消息体，再使用�
 | 参数或属性 | 类型 | 设置方式 | 是否必需 | 适用场景 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 目标会话 ID | `NSString *` | `initWithConversationID` | 必需 | 所有消息 | 单聊传对端用户 ID；群聊传群组 ID；聊天室传聊天室 ID。 |
-| 消息内容 | `EMMessageBody *` 或 `NSArray<EMMessageBody *> *` | 消息初始化方法、`body` 或 `bodies` | 必需 | 所有消息 | 单消息体消息使用 `body`；复合消息通过 `bodies` 设置完整有序列表，或通过 `appendBody:` 追加。将 `body` 替换为另一个消息体会移除原列表中的其他消息体。详见 [操作消息体列表](#操作消息体列表)。 |
+| 消息内容 | `EMMessageBody *` 或 `NSArray<EMMessageBody *> *` | 消息初始化方法、`body` 或 `bodies` | 必需 | 所有消息 | 单消息体消息使用 `body`；复合消息通过 `bodies` 设置完整有序列表，或通过 `appendBody:` 追加。将 `body` 替换为另一个消息体会移除原列表中的其他消息体。详见 [操作消息体列表](#发送复合消息)。 |
 | 会话类型 | `EMChatType` | `chatType` | 群聊和聊天室必需 | 所有消息 | 单聊、群聊和聊天室分别设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`。 |
 | 扩展字段 | `NSDictionary *` | `ext` | 可选 | 所有消息 | 携带业务自定义信息；扩展字段会计入消息大小限制。 |
 | 仅在线投递 | `BOOL` | `deliverOnlineOnly` | 可选 | 所有消息 | 设置为 `YES` 时仅投递给在线用户，不进行离线存储。 |
@@ -969,24 +969,36 @@ EMClient.shared().chatManager?.send(
 
 #### 发送流程
 
-调用 `-[EMChatMessage initWithConversationID:bodies:ext:]` 创建消息。`aConversationId` 为用户、群组或聊天室 ID，同时用作接收方；`aBodies` 为完整的有序消息体列表；`aExt` 为可选扩展字典。发送方为当前用户，消息体列表校验失败时返回 `nil`。
+发送复合消息时，请按以下流程执行：
 
-传入一个消息体时，仍按单消息体消息处理。新消息默认为单聊消息；发送至群聊或聊天室时，需设置对应的 `chatType`。
+1. 创建各个消息体。
+   使用文本、图片、文件、语音、视频、位置或自定义消息体的初始化方法准备内容。先创建全部消息体，再按阅读顺序放入列表；本地附件需保持可读。
+2. 创建复合消息。
+   调用 `-[EMChatMessage initWithConversationID:bodies:ext:]` 创建消息。`aConversationId` 为用户、群组或聊天室 ID，同时用作接收方；`aBodies` 为完整的有序消息体列表；`aExt` 为可选扩展字典。发送方为当前用户，消息体列表校验失败时返回 `nil`。
 
-以下示例按“文本、图片”的顺序创建并发送复合消息：
+   传入一个消息体时，仍按单消息体消息处理。新消息默认为单聊消息；发送至群聊或聊天室时，需设置对应的 `chatType`。
+3. 发送复合消息。
+   调用 `sendMessage:progress:completion:`。需要由 SDK 上传的本地附件先完成上传，再发送整条消息；通过 `progress` 和 `completion` 处理总进度和最终结果。
+4. 接收与展示。
+   接收方在 `messagesDidReceive:` 中遍历完整消息体列表，按顺序展示，需要时再下载附件。详见 [接收复合消息](message_receive.html#接收复合消息)。
+
+以下示例按“文本、本地图片、本地文件”的顺序创建并发送复合消息：
 
 ```objectivec
 NSString *conversationId = @"conversationId";
-// 替换为应用可读取的本地图片路径。
+// 替换为应用可读取的本地图片和文件路径。
 NSString *imagePath = @"/path/to/image.jpg";
+NSString *filePath = @"/path/to/spec.pdf";
 
 EMTextMessageBody *textBody = [[EMTextMessageBody alloc] initWithText:@"图片说明"];
 EMImageMessageBody *imageBody = [[EMImageMessageBody alloc]
     initWithLocalPath:imagePath displayName:@"image.jpg"];
+EMFileMessageBody *fileBody = [[EMFileMessageBody alloc]
+    initWithLocalPath:filePath displayName:@"spec.pdf"];
 
 EMChatMessage *message = [[EMChatMessage alloc]
     initWithConversationID:conversationId
-    bodies:@[textBody, imageBody]
+    bodies:@[textBody, imageBody, fileBody]
     ext:nil];
 if (!message) {
     return;
@@ -1008,6 +1020,29 @@ message.chatType = EMChatTypeChat;
     }];
 ```
 
+#### 关键参数
+
+`initWithConversationID:bodies:ext:` 使用接收方和完整消息体列表初始化消息。其他通用设置见 [通用消息创建参数](#通用消息创建参数)。
+
+| 参数或属性 | 类型 | 是否必需 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `aConversationId` | `NSString *` | 必需 | 会话 ID，同时用作接收方；单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID。 |
+| `aBodies` | `NSArray<EMMessageBody *> *` | 必需 | 完整的有序消息体列表，复合消息包含 2–20 个消息体；传入一个消息体时仍按单消息体消息处理。 |
+| `aExt` | `NSDictionary *` | 可选 | 整条消息的业务扩展字段，可传 `nil`。 |
+| `chatType` | `EMChatType` | 群聊、聊天室必需 | 默认为 `EMChatTypeChat`，群聊和聊天室分别设置为 `EMChatTypeGroupChat`、`EMChatTypeChatRoom`。 |
+
+**消息体创建方式**
+
+| 消息体 | 类型及创建说明 |
+| :--- | :--- |
+| 文本 | `EMTextMessageBody`，见 [发送文本消息](#发送文本消息)。 |
+| 图片 | `EMImageMessageBody`，见 [发送图片消息](#发送图片消息)。 |
+| 文件 | `EMFileMessageBody`，见 [发送文件消息](#发送文件消息)。 |
+| 语音 | `EMVoiceMessageBody`，见 [发送语音消息](#发送语音消息)。 |
+| 视频 | `EMVideoMessageBody`，见 [发送视频消息](#发送视频消息)。 |
+| 位置 | `EMLocationMessageBody`，见 [发送位置消息](#发送位置消息)。 |
+| 自定义 | `EMCustomMessageBody`，见 [发送自定义类型消息](#发送自定义类型消息)。 |
+
 **操作消息体列表**
 
 | API | 行为 |
@@ -1027,6 +1062,12 @@ message.chatType = EMChatTypeChat;
 - `completion`：整条消息发送完成后调用。`error` 为 `nil` 表示发送成功；不为 `nil` 表示附件上传或消息发送失败，应根据错误信息处理。
 
 `progress` 和 `completion` 在主线程回调。附件上传完成不等于整条消息发送成功，应以 `completion` 的结果为准。
+
+#### 逻辑说明
+
+- **创建与发送校验**：消息体列表校验失败时，初始化返回 `nil`；多个消息体中包含不支持的类型时，也会在初始化或列表写入时拒绝。消息体数量超过 20 个时，发送前校验返回 `EMErrorMessageInvalid`。初始化成功不代表已通过全部发送校验。
+- **本地附件与重发**：先准备好全部消息体，再初始化消息；发送完成前保持本地附件可读。重发同一条失败消息时使用原消息对象，处理方式见 [重新发送失败消息](#重新发送失败消息)。
+- **已有服务器附件**：如需复用已上传的附件，应保留相应消息体的服务端附件信息；具体方式见 [转发单条消息](message_forward.html#转发单条消息) 和 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ## 重新发送失败消息
 
@@ -1305,9 +1346,9 @@ func sendTextMessage(
 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
-| [`initWithConversationID:bodies:ext:`](#创建和发送) | `EMChatMessage` | 自 SDK 5.2.0 起，按完整有序消息体列表创建消息。 |
-| [`bodies`](#操作消息体列表) | `EMChatMessage` | 读取或替换完整的有序消息体列表。 |
-| [`body`](#操作消息体列表) | `EMChatMessage` | 读取首个消息体，或替换为一个新的消息体。 |
-| [`appendBody:`](#操作消息体列表) | `EMChatMessage` | 在有序列表末尾追加消息体。 |
-| [`contentType`](#操作消息体列表) | `EMChatMessage` | 获取整条消息的内容类型。 |
+| [`initWithConversationID:bodies:ext:`](#发送复合消息) | `EMChatMessage` | 自 SDK 5.2.0 起，按完整有序消息体列表创建消息。 |
+| [`bodies`](#发送复合消息) | `EMChatMessage` | 读取或替换完整的有序消息体列表。 |
+| [`body`](#发送复合消息) | `EMChatMessage` | 读取首个消息体，或替换为一个新的消息体。 |
+| [`appendBody:`](#发送复合消息) | `EMChatMessage` | 在有序列表末尾追加消息体。 |
+| [`contentType`](#发送复合消息) | `EMChatMessage` | 获取整条消息的内容类型。 |
 | [`sendMessage:progress:completion:`](#发送过程回调) | `IEMChatManager` | 发送消息并获取总上传进度和发送结果。 |

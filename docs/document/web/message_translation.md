@@ -125,7 +125,7 @@ async function translateTextMessage(message: Message): Promise<void> {
 
 - 自动翻译失败会阻止发送或编辑，请处理 Promise 异常并提供重试等交互。
 - 复合消息中的文本分段即使设置 `targetLanguages` 也不生效；`translateMessage()` 仅接受普通文本消息。
-- 离线推送展示语言请参见 [设置推送翻译](push/push_translation.html)。
+- 离线推送展示语言请参见 [设置推送翻译](/document/web/push/push_translation.html)。
 
 ## 接口列表
 

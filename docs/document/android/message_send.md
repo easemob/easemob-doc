@@ -32,7 +32,7 @@ Android SDK 通过 `EMMessage` 的不同静态方法创建各类消息。不同�
 | 参数或属性       | Android 设置方式                                             | 是否必需         | 适用场景         | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ | ---------------- | ---------------- | ------------------------------------------------------------ |
 | 目标会话 ID      | 各 `create*SendMessage()` 方法的接收方参数，或 `EMMessage#setTo` | 必需             | 所有消息         | 单聊时传入对端用户 ID，群聊时传入群组 ID，聊天室时传入聊天室 ID。 |
-| 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`、`setBodies` | 必需             | 所有消息         | 参数随消息类型而不同。`setBody()` 用单个消息体替换全部消息体；复合消息通过 `setBodies()` 设置完整列表，或通过 `addBody()`、`appendBody()` 追加。详见 [操作消息体列表](#操作消息体列表)。 |
+| 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`、`setBodies` | 必需             | 所有消息         | 参数随消息类型而不同。`setBody()` 用单个消息体替换全部消息体；复合消息通过 `setBodies()` 设置完整列表，或通过 `addBody()`、`appendBody()` 追加。详见 [操作消息体列表](#发送复合消息)。 |
 | 会话类型         | `EMMessage#setChatType`                                      | 群聊和聊天室必需 | 所有消息         | 单聊、群聊和聊天室分别设置为 `EMMessage.ChatType.Chat`、`GroupChat` 和 `ChatRoom`。默认值为 `Chat`。 |
 | 扩展字段         | `EMMessage#setAttribute`                                     | 可选             | 所有消息         | 添加业务自定义信息。支持字符串、布尔值、数值、JSON 对象和 JSON 数组等类型；扩展字段会计入消息大小限制。 |
 | 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息单聊和群聊的各类消息         | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。适用于输入状态、瞬时控制信息等场景。|
@@ -584,17 +584,25 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 #### 发送流程
 
-调用 `EMMessage#createMultiBodySendMessage(String to, List<EMMessageBody> bodies)` 创建消息。`to` 为用户、群组或聊天室 ID，`bodies` 为有序消息体列表。列表为空或包含无效消息体时返回 `null`；数量上限和类型组合限制在发送时校验。
+发送复合消息时，请按以下流程执行：
 
-传入一个消息体时，仍按单消息体消息处理。新消息默认为单聊消息；发送至群聊或聊天室时，需设置对应的 `ChatType`。
+1. 创建各个消息体。
+   使用文本、图片、文件、语音、视频、位置或自定义消息体的构造方法准备内容。先创建全部消息体，再按阅读顺序放入列表；本地附件需具备读取权限。
+2. 创建复合消息。
+   调用 `EMMessage#createMultiBodySendMessage(String to, List<EMMessageBody> bodies)` 创建消息。`to` 为用户、群组或聊天室 ID，`bodies` 为有序消息体列表。列表为空或包含无效消息体时返回 `null`；数量上限和类型组合限制在发送时校验。
 
-以下示例按“文本、图片”的顺序创建并发送复合消息：
+   传入一个消息体时，仍按单消息体消息处理。新消息默认为单聊消息；发送至群聊或聊天室时，需设置对应的 `ChatType`。
+3. 发送复合消息。
+   先通过 `setMessageStatusCallback` 注册回调，再调用 `EMClient.getInstance().chatManager().sendMessage(message)`。需要由 SDK 上传的本地附件先完成上传，再发送整条消息；通过回调处理总进度和最终结果。
+
+以下示例按“文本、本地图片、本地文件”的顺序创建并发送复合消息：
 
 ```java
-// imageUri 为应用具有读取权限的图片 URI。
+// imageUri、fileUri 为应用具有读取权限的本地图片和文件 URI。
 List<EMMessageBody> bodies = new ArrayList<>();
 bodies.add(new EMTextMessageBody("图片说明"));
 bodies.add(new EMImageMessageBody(imageUri));
+bodies.add(new EMNormalFileMessageBody(fileUri));
 
 EMMessage message = EMMessage.createMultiBodySendMessage(conversationId, bodies);
 if (message != null) {
@@ -620,6 +628,29 @@ if (message != null) {
 }
 ```
 
+#### 关键参数
+
+`createMultiBodySendMessage` 使用接收方和完整消息体列表创建消息。其他通用设置见 [通用消息创建参数](#通用消息创建参数)。
+
+| 参数或属性 | 类型 | 是否必需 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `to` | `String` | 必需 | 单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID。 |
+| `bodies` | `List<EMMessageBody>` | 必需 | 完整的有序消息体列表，复合消息包含 2–20 个消息体；传入一个消息体时仍按单消息体消息处理。 |
+| `ChatType` | `EMMessage.ChatType` | 群聊、聊天室必需 | 默认为 `Chat`，群聊和聊天室分别设置为 `GroupChat`、`ChatRoom`。 |
+| 扩展字段 | `String`、`boolean`、数值等 | 可选 | 通过 `setAttribute(...)` 设置在整条消息上，不分别设置在各个消息体中。 |
+
+**消息体创建方式**
+
+| 消息体 | 类型及创建说明 |
+| :--- | :--- |
+| 文本 | `EMTextMessageBody`，见 [发送文本消息](#发送文本消息)。 |
+| 图片 | `EMImageMessageBody`，见 [发送图片消息](#发送图片消息)。 |
+| 文件 | `EMNormalFileMessageBody`，见 [发送文件消息](#发送文件消息)。 |
+| 语音 | `EMVoiceMessageBody`，见 [发送语音消息](#发送语音消息)。 |
+| 视频 | `EMVideoMessageBody`，见 [发送视频消息](#发送视频消息)。 |
+| 位置 | `EMLocationMessageBody`，见 [发送位置消息](#发送位置消息)。 |
+| 自定义 | `EMCustomMessageBody`，见 [发送自定义类型消息](#发送自定义类型消息)。 |
+
 **操作消息体列表**
 
 | API | 行为 |
@@ -642,6 +673,12 @@ if (message != null) {
 - `onError(int code, String error)`：附件上传或消息发送失败，返回错误码和错误信息。
 
 附件上传完成不等于整条消息发送成功，应以 `onSuccess()` 或 `onError(...)` 判断最终发送结果。通用回调说明见 [发送过程回调](#发送过程回调)。
+
+#### 逻辑说明
+
+- **创建与发送校验**：列表为空或包含无效消息体时，创建返回 `null`；数量上限和类型组合在发送时校验。超过 20 个消息体时发送失败，错误码为 `EMError.MESSAGE_INVALID`。创建消息成功不代表已通过全部发送校验。
+- **本地附件与重发**：先准备好全部消息体，再创建消息；发送完成前保持本地附件可读。重发同一条失败消息时使用原消息对象，处理方式见 [重新发送失败消息](#重新发送失败消息)。
+- **已有服务器附件**：如需复用已上传的附件，应保留相应消息体的服务端附件信息；具体方式见 [转发单条消息](message_forward.html#转发单条消息) 和 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ## 重新发送失败消息
 
@@ -947,11 +984,11 @@ String webhookEnv = message.getWebhookEnv();
 | [`createLocationSendMessage`](#发送位置消息) | `EMMessage` | 创建位置消息。 |
 | [`createSendMessage`](#发送透传消息) | `EMMessage` | 创建指定类型的待发送消息。 |
 | [`createCombinedSendMessage`](#发送合并消息) | `EMMessage` | 创建合并消息。 |
-| [`createMultiBodySendMessage`](#创建和发送) | `EMMessage` | 自 SDK 5.2.1 起，按有序消息体列表创建待发送消息。 |
-| [`getBodies`](#操作消息体列表) | `EMMessage` | 获取完整有序消息体列表。 |
-| [`setBodies`](#操作消息体列表) | `EMMessage` | 替换全部消息体。 |
-| [`appendBody`](#操作消息体列表) | `EMMessage` | 在末尾追加消息体。 |
-| [`getContentType`](#操作消息体列表) | `EMMessage` | 获取消息内容类型，复合消息返回 `MULTIBODY`。 |
+| [`createMultiBodySendMessage`](#发送复合消息) | `EMMessage` | 自 SDK 5.2.1 起，按有序消息体列表创建待发送消息。 |
+| [`getBodies`](#发送复合消息) | `EMMessage` | 获取完整有序消息体列表。 |
+| [`setBodies`](#发送复合消息) | `EMMessage` | 替换全部消息体。 |
+| [`appendBody`](#发送复合消息) | `EMMessage` | 在末尾追加消息体。 |
+| [`getContentType`](#发送复合消息) | `EMMessage` | 获取消息内容类型，复合消息返回 `MULTIBODY`。 |
 | [`deliverOnlineOnly`](#通用消息创建参数) | `EMMessage` | 设置消息是否仅投递给在线用户。 |
 | [`sendMessage`](#发送消息统一流程) | `EMChatManager` | 发送消息。 |
 | [`downloadAndParseCombineMessage`](#发送合并消息) | `EMChatManager` | 下载并解析合并消息附件。 |

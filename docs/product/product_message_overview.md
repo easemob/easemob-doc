@@ -52,15 +52,15 @@
 
 ## 各类会话的消息
 
-关于单聊、群聊和聊天室会话的消息应用场景、消息能力、发送控制方式和发送频率控制，详见 [单聊消息](/product/message_single_chat.html)、[群组消息](/product/message_group.html) 和 [聊天室消息](/product/message_chatroom.html)。
+关于单聊、群聊和聊天室会话的消息应用场景、消息能力、发送控制方式和发送频率控制，详见 [单聊消息](message_single_chat.html)、[群组消息](message_group.html) 和 [聊天室消息](message_chatroom.html)。
 
 ## 消息存储
 
-消息存储分为本地存储和服务器存储，详见 [消息存储介绍](/product/message_store.html)。
+消息存储分为本地存储和服务器存储，详见 [消息存储介绍](message_store.html)。
 
 ## 消息格式
 
-关于各类型消息格式以及离线推送的消息扩展字段，详见 [消息格式文档](/product/product_message_format.html)。
+关于各类型消息格式以及离线推送的消息扩展字段，详见 [消息格式文档](product_message_format.html)。
 
 
 

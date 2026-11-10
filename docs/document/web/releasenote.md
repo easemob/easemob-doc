@@ -10,7 +10,7 @@
 
   **接入说明**：复合消息类型为 `multi_body`，消息正文及对应会话摘要的 `body` 为分段数组；调用 `downloadAttachment()` 下载复合消息附件时返回结果数组，展示和下载处理逻辑需相应适配。
 
-  请参见 [发送复合消息](message_send.html#发送复合消息)、[接收复合消息及下载附件](message_receive.html#接收复合消息) 和 [展示复合消息摘要](conversation_list.html#展示复合消息摘要)。
+  请参见 [发送复合消息](message_send.html#发送复合消息)、[接收复合消息及下载附件](message_receive.html#接收复合消息) 和 [展示复合消息摘要](conversation_list.html#展示最后一条消息摘要)。
 
 - **完善文本消息翻译**：支持普通文本消息在发送或编辑前自动翻译，同时保留原文和译文；接收方可获取并展示译文。翻译失败时，不发送消息或编辑请求。
 
@@ -18,7 +18,7 @@
 
 - **扩展消息编辑能力**：在文本和自定义消息编辑的基础上，新增图片、语音、视频、文件、位置和合并消息的扩展字段编辑能力。命令消息和复合消息不支持编辑。
 
-  通过 `ChatManager.modifyMessage()` 编辑。文本消息可修改正文和 `ext`，自定义消息可修改 `event`、`params` 和 `ext`；其余支持编辑的消息类型仅可修改 `ext`。请参见 [编辑消息](message_modify.html#支持范围) 和 [编辑前自动翻译](message_modify.html#编辑前自动翻译)。
+  通过 `ChatManager.modifyMessage()` 编辑。文本消息可修改正文和 `ext`，自定义消息可修改 `event`、`params` 和 `ext`；其余支持编辑的消息类型仅可修改 `ext`。请参见 [编辑消息](message_modify.html#支持范围) 和 [编辑前自动翻译](message_translation.html#编辑前自动翻译)。
 
 - **支持查询 SDK 版本号**：便于确认当前集成的 SDK 版本和排查版本相关问题。 新增 `client.getVersion()`，返回当前 SDK 的版本号字符串。请参见 [获取 SDK 版本号](initialization.html#获取-sdk-版本号)。
 
@@ -1114,7 +1114,7 @@
 - [demo] 好友之间可以通过 webrtc 进行视频聊(仅支持 https + Webkit 浏览器)
 - [demo] 支持同一账号最多 8 个标签页登录 isMultiLoginSessions:true
 - [demo] http 访问加入 ip 策略功能,防止 DNS 劫持 isHttpDNS:true
-- [sdk] 新增两种安装引用方式（具体引用方式，请参考 [集成方式](https://docs-im.easemob.com/im/web/intro/integration)）
+- [sdk] 新增两种安装引用方式（具体引用方式，请参考 [集成方式](/v4/web/integration.html)）
   - 添加 `<script>` 标签，并通过 WebIM 命名空间访问 websdk
   - NPM（websdk 已经发布到 NPM），先 require，再访问 WebIM
 

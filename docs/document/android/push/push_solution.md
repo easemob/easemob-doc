@@ -4,7 +4,7 @@
 
 **A**：你可以按照以下顺序排查：
 
-1. 确认接收方是否满足离线推送条件。应用进入后台或手机锁屏并不表示用户已离线；后台连接策略详见 [配置后台消息接收策略](push_overview.html#配置后台消息接收策略)。自 SDK 5.2.1 起，可恢复断开的 `onDisconnected` 回调可能延迟，不能仅凭是否收到回调判断当前连接状态，请通过 `EMClient#getConnectionState()` 查询。可同时使用 `EMPushHelper#isPushTokenBound()` 确认 SDK 本地的推送 Token 绑定状态，详见 [查询推送通道是否有效](push_overview.html#查询推送通道是否有效)。
+1. 确认接收方是否满足离线推送条件。应用进入后台或手机锁屏并不表示用户已离线；后台连接策略详见 [配置后台消息接收策略](push_overview.html#配置后台消息接收策略)。自 SDK 5.2.1 起，可恢复断开的 `onDisconnected` 回调可能延迟，不能仅凭是否收到回调判断当前连接状态，请通过 `EMClient#getConnectionState()` 查询。可同时使用 `EMPushHelper#isPushTokenBound()` 确认 SDK 本地的推送 Token 绑定状态，详见 [查询推送通道是否有效](push_overview.html#确认推送通道有效)。
 
 2. 查看 Android 端通知权限是否打开，即通道通知权限是否打开。
 

@@ -112,7 +112,7 @@ boolean loggedIn = EMClient.getInstance().isLoggedIn();
 | 回调 | 触发时机 | 说明 |
 | :--- | :--- | :--- |
 | `onConnected()` | SDK 成功连接到服务器时触发。 | 首次登录连接成功或自动重连成功后均可能触发。 |
-| `onDisconnected(int)` | SDK 发送断开通知时触发。 | `errorCode` 表示断开原因；可恢复断开的回调时机受 [断开通知宽限时间](#配置断开通知宽限时间) 控制，收到回调的时间可能晚于实际断开时间。断开不一定表示 SDK 已登出。 |
+| `onDisconnected(int)` | SDK 发送断开通知时触发。 | `errorCode` 表示断开原因；可恢复断开的回调时机受 [断开通知宽限时间](#配置断线通知宽限期) 控制，收到回调的时间可能晚于实际断开时间。断开不一定表示 SDK 已登出。 |
 | `onDatabaseOpened(String)` | 指定用户的本地数据库打开成功时触发。 | 表示本地数据库接口可以使用，不表示在线登录成功，也不能替代 `onConnected`。 |
 | `onLogout(int, EMLoginExtensionInfo)` | SDK 因账号、设备或服务限制等原因退出登录时触发。 | 可通过错误码及登录扩展信息处理异常登出。 |
 | `onTokenWillExpire()` | Token 即将过期时触发。 | 建议获取新 Token，并调用 `renewToken` 续期。 |
@@ -234,7 +234,7 @@ int seconds = options.getDisconnectNotifyThreshold();
 
 登录成功后，如果因网络信号弱、网络切换或其他可恢复原因导致连接中断，SDK 会自动尝试重连，无需应用手动调用登录接口。
 
-SDK 按退避策略继续尝试恢复连接；重连成功后触发 `onConnected()`。`onDisconnected(int errorCode)` 的通知时机遵循 [断开通知宽限时间](#配置线通知宽限期) 的规则，并非每次连接中断或重连失败都会立即触发。
+SDK 按退避策略继续尝试恢复连接；重连成功后触发 `onConnected()`。`onDisconnected(int errorCode)` 的通知时机遵循 [断开通知宽限时间](#配置断线通知宽限期) 的规则，并非每次连接中断或重连失败都会立即触发。
 
 Android SDK 5.x 不提供独立的 `onConnecting` 或 `onReconnectFailed` 回调。应用可通过 `getConnectionState()` 查询连接中、已连接或已断开状态，并结合连接回调及网络状态更新界面。
 

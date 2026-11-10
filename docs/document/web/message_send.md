@@ -1216,20 +1216,26 @@ const items = await client.chatManager.downloadAndParseCombineMessage({
 
 #### 发送流程
 
-1. 使用分段创建方法准备内容。
-2. 调用 `createMultiBodyMessage()`，传入会话信息和 `bodies`，创建复合消息。
-3. 调用 `sendMessage()` 发送，并处理附件上传进度和整条消息的发送结果。
+发送复合消息时，请按以下流程执行：
 
-`createMultiBodyMessage()` 的 `conversationId`、`conversationType` 和 `bodies` 必填，其他参数沿用 [通用消息创建参数](#通用消息创建参数)。`bodies` 类型为 `ReadonlyArray<MultiBodySegment>`，必须为 2-20 段；顺序即接收方的展示顺序。不符合段数或分段要求时，创建失败，错误码为 `110`。
+1. 创建各个分段。
+   使用分段创建方法准备文本、图片、文件、语音、视频、位置或自定义内容。先创建全部分段，再按阅读顺序放入列表；带本地文件时，必须保留创建方法返回的同一个对象。
+2. 创建复合消息。
+   调用 `createMultiBodyMessage()`，传入会话信息和 `bodies`。
 
-以下示例发送文本、图片和文件三个分段。远程附件使用 `originalUrl`，本地附件使用 `data`。
+   `createMultiBodyMessage()` 的 `conversationId`、`conversationType` 和 `bodies` 必填，其他参数沿用 [通用消息创建参数](#通用消息创建参数)。`bodies` 类型为 `ReadonlyArray<MultiBodySegment>`，必须为 2-20 段；顺序即接收方的展示顺序。不符合段数或分段要求时，创建失败，错误码为 `110`。
+3. 发送复合消息。
+   调用 `sendMessage()`，处理附件上传进度和整条消息的发送结果。含本地文件的分段先上传，全部需要上传的分段成功后才发送整条消息；只传远程地址、不含本地文件的分段不会再次上传。
+
+以下示例发送文本、本地图片和远程文件三个分段。远程附件使用 `originalUrl`，本地附件使用 `data`。
 
 ```typescript
+// imageFile 为从文件选择器获取的 File；其他平台的本地文件格式见“跨平台消息示例”。
 const text = client.chatManager.createTextMessageBody({
   content: '请查看图片和资料',
 });
 const image = client.chatManager.createImageMessageBody({
-  originalUrl: 'https://example.com/photo.jpg',
+  data: imageFile,
   filename: 'photo.jpg',
 });
 const file = client.chatManager.createFileMessageBody({
@@ -1240,6 +1246,7 @@ const file = client.chatManager.createFileMessageBody({
 const message = client.chatManager.createMultiBodyMessage({
   conversationId: 'user2',
   conversationType: 'singleChat',
+  // 使用分段创建方法返回的同一个对象，顺序即接收方的展示顺序。
   bodies: [text, image, file],
   ext: { bizType: 'materials' },
 });
@@ -1251,6 +1258,16 @@ await client.chatManager.sendMessage(message, {
   },
 });
 ```
+
+#### 关键参数
+
+`createMultiBodyMessage()` 在通用消息参数之外，通过 `bodies` 描述全部分段。
+
+| 参数 | 类型 | 必填/可选 | 适用场景 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| `bodies` | `ReadonlyArray<MultiBodySegment>` | 必填 | 一条消息携带多段内容 | 由分段创建方法返回的对象组成，必须为 2–20 段，顺序即接收方的展示顺序。不符合段数或分段要求时，创建失败，错误码为 `110`。 |
+
+`conversationId`、`conversationType` 必填；`ext`、`receiverList`、`priority`、`needReadReceipt`、`deliverOnlineOnly` 等按业务需要设置在整条消息上，不分别设置在各个分段中。具体取值和适用范围见 [通用消息创建参数](#通用消息创建参数)。
 
 **分段创建方法**
 
@@ -1271,20 +1288,25 @@ await client.chatManager.sendMessage(message, {
 - 本地附件的 `data` 与普通附件消息一致：Web 使用 `File`，小程序和 uni-app 使用 `{ path, name?, type?, size? }`，React Native 使用 `{ uri, name?, type?, size? }`。资源获取方式请参见 [跨平台消息示例](#跨平台消息示例)。
 - 带本地文件时，必须将分段工厂返回的同一个对象放入 `bodies`。不要复制、展开或重建对象，否则会丢失内部关联的本地文件。成功组装后，如需用于另一条消息，应重新创建文件分段。
 
-复合消息可以作为子消息放入合并消息。请使用已成功发送或接收的复合消息进行合并转发。
-
-**接入说明**：复合消息类型为 `multi_body`，消息正文及对应会话摘要的 `body` 直接为分段数组。通过 `downloadAttachment()` 下载复合消息附件时返回结果数组；展示和下载逻辑需分别适配。详见 [接收复合消息](message_receive.html#接收复合消息)。
-
 #### 发送进度与结果处理
 
 调用 `sendMessage()` 时，可通过 `onFileUploadProgress` 获取整条消息的附件上传进度，并通过返回的 Promise 处理发送结果：
 
-- `onFileUploadProgress`：进度按整条消息的全部附件大小合计，`percent` 表示 0–100 的总上传进度，回调不携带分段序号。
+- `onFileUploadProgress`：进度按整条消息的全部附件大小合计，`loaded`、`total` 表示累计完成字节数和总字节数，`percent` 表示 0–100 的总上传进度，回调不携带分段序号。
 - 只传远程地址、不含本地文件的附件分段不会再次上传。
 - 本地附件按段上传，全部成功后才发送整条消息；任一附件上传失败，整条消息不发送。
+- `onFileUploadComplete`、`onFileUploadError`：返回实际附件上传的完成或错误信息，均不带分段序号；这些回调不能替代整条消息的发送结果。
 - Promise 成功完成表示整条消息发送成功；上传或发送失败时 Promise 会拒绝，可使用 `try...catch` 或 `.catch()` 处理。
 
 附件上传完成不等于整条消息发送成功，应以 `sendMessage()` 返回的 Promise 结果为准。
+
+#### 逻辑说明
+
+- **创建校验**：`bodies` 少于 2 段、超过 20 段，或包含空、无效分段及不支持的类型组合时，`createMultiBodyMessage()` 抛出校验错误，错误码为 `110`。校验失败不会创建消息，也不会消耗已关联的本地文件。
+- **本地分段复用**：成功组装后，带本地文件的分段不能直接再用于另一条新消息；需要创建另一条消息时，应重新创建文件分段。重发同一条失败消息时，应优先使用 `onFailed` 返回的消息对象，保留已上传附件的信息；若未触发该回调，则使用当次传入的原消息对象。详见 [重新发送失败消息](#重新发送失败消息)。
+- **上传失败与重试**：本地附件按段处理，任一附件上传失败时整条消息不发送。重发时，已有有效远端地址的附件会跳过上传，并计入已完成进度；尚需上传的本地文件仍应可读取。
+- **合并转发**：复合消息不能再嵌套其他复合消息，但可作为子消息放入合并消息。请使用已成功发送或接收的复合消息进行合并转发；下载解析后，该子消息仍为 `multi_body`，保留全部分段。详见 [发送合并消息](#发送合并消息)。
+**接入说明**：复合消息类型为 `multi_body`，消息正文及对应会话摘要的 `body` 直接为分段数组。通过 `downloadAttachment()` 下载复合消息附件时返回结果数组；展示和下载逻辑需分别适配。详见 [接收复合消息](message_receive.html#接收复合消息)。
 
 ## 重新发送失败消息
 
@@ -1620,10 +1642,10 @@ await client.chatManager.sendMessage(message);
 | [`createVideoMessage`](#发送视频消息) | `ChatManager` | 创建视频消息。 |
 | [`createFileMessage`](#发送文件消息) | `ChatManager` | 创建文件消息。 |
 | [`createLocationMessage`](#发送位置消息) | `ChatManager` | 创建位置消息。 |
-| [`createCmdMessage`](#发送命令消息) | `ChatManager` | 创建命令消息。 |
+| [`createCmdMessage`](#发送透传消息) | `ChatManager` | 创建命令消息。 |
 | [`createCustomMessage`](#发送自定义类型消息) | `ChatManager` | 创建自定义消息。 |
 | [`createMultiBodyMessage`](#发送复合消息) | `ChatManager` | 组装复合消息。 |
-| [`createTextMessageBody` 等分段创建方法](#分段创建方法) | `ChatManager` | 创建复合消息分段。 |
+| [`createTextMessageBody` 等分段创建方法](#发送复合消息) | `ChatManager` | 创建复合消息分段。 |
 | [`createCombineMessage`](#发送合并消息) | `ChatManager` | 创建合并消息。 |
 | [`downloadAndParseCombineMessage`](#接收端解析合并消息) | `ChatManager` | 下载并解析合并消息中的原始消息列表。 |
 | [`sendMessage`](#发送过程回调) | `ChatManager` | 发送已创建的消息，并支持发送过程回调。 |

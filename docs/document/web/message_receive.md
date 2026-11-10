@@ -492,6 +492,67 @@ client.chatManager.addEventHandler('custom-message-listener', {
 | `event` | String | 必填 | 业务事件分发 | 自定义消息事件名。 |
 | `params` | `Record<string, String>` | 可选 | 业务参数读取 | 自定义业务参数。 |
 
+## 接收合并消息
+
+合并消息用于“聊天记录转发”或“多条消息打包转发”。接收方收到的是一条外层合并消息，若需查看其中的原始消息，还需进一步下载并解析合并消息详情。
+
+#### 接收流程
+
+接收合并消息与接收普通消息的方式相同。应用可在 `onMessage` 回调中根据 `message.type === 'combine'` 识别合并消息。
+
+合并消息包含标题、摘要以及合并消息附件信息。收到合并消息后，可直接从消息体中读取 `title` 和 `summary`；如需获取合并消息中的原始消息列表，可调用 `downloadAndParseCombineMessage` 下载并解析合并消息附件。首次调用该方法时，SDK 会根据合并消息中的附件信息下载并解析附件，然后返回原始消息列表。后续调用时，若附件数据已可用，SDK 可直接解析并返回原始消息列表。
+
+:::tip
+`compatibleText` 是创建合并消息时的可选参数，用于不支持合并转发消息的旧版本客户端进行兼容展示。当前 SDK 接收合并消息时，`message.body` 中不包含 `compatibleText` 字段。
+:::
+
+示例代码如下所示：
+
+```typescript
+client.chatManager.addEventHandler('combine-message-listener', {
+  // 接收合并消息。
+  onMessage: async message => {
+    // 判断是否为合并消息。
+    if (message.type !== 'combine') {
+      return;
+    }
+
+    // 读取合并消息标题。
+    console.log('标题:', message.body.title);
+    // 读取合并消息摘要。
+    console.log('摘要:', message.body.summary);
+    // 下载并解析原始子消息列表。
+    const subMessages = await client.chatManager.downloadAndParseCombineMessage({
+      message,
+    });
+
+    console.log('子消息列表:', subMessages);
+  },
+});
+```
+
+也可以直接传入合并消息体中的最小下载参数：
+
+```typescript
+const subMessages = await client.chatManager.downloadAndParseCombineMessage({
+  url: combineMessage.body.url!,
+  secret: combineMessage.body.secret,
+});
+```
+
+`downloadAndParseCombineMessage()` 支持两种入参：`{ message }` 和 `{ url, secret }`。解析出的子消息可能为 `multi_body`，其 `body` 为分段数组，需按 [接收复合消息](#接收复合消息) 的方式展示。
+
+#### 关键字段
+
+| 字段 | 类型 | 必填/可选 | 适用场景 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| `title` | String | 必填 | 概览展示 | 合并消息标题。 |
+| `summary` | String | 必填 | 概览展示 | 合并消息摘要。仅适合做概览展示；若要展示原始聊天记录，应进一步调用 `downloadAndParseCombineMessage()`。 |
+| `url` | String | 可选 | 下载详情 | 合并消息详情下载地址。 |
+| `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
+| `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |
+| `combineLevel` | Number | 必填 | 嵌套层级判断 | 当前合并消息层级。 |
+
 ## 接收复合消息
 
 自 SDK 5.2.0 起，复合消息沿用 `ChatManager` 的 `onMessage` 事件接收，无需额外建立接收机制。通过 `addEventHandler` 注册监听的方式见 [监听消息事件](#监听消息事件)。
@@ -554,71 +615,13 @@ async function downloadMultiBodyAttachments(message: Message): Promise<void> {
 
 #### 注意事项
 
+- **发送端内容准备**：发送方应先通过分段创建方法准备全部内容，再调用 `createMultiBodyMessage()`，并按阅读顺序排列 `bodies`。带本地文件的分段必须原样传入，不能在组装前复制、展开或重建对象。具体流程见 [发送复合消息](message_send.html#发送复合消息)。
+- **本地文件分段复用**：成功组装后，如需将本地附件用于另一条新消息，应重新创建文件分段；重发同一条失败消息应按 [重新发送失败消息](message_send.html#重新发送失败消息) 处理，不要直接重新组装已消耗本地文件关联的分段。
+- **已有远程附件**：发送方可直接使用 `originalUrl` 提供已有远程资源，避免重复上传；接收方按实际需要展示远程地址或调用下载接口。
 - **界面更新**：保持分段的原始顺序；异步下载完成后更新对应消息中的附件展示。在浏览器主线程处理事件时，避免执行耗时的同步操作。
-- **会话摘要**：最后一条消息为复合消息时，`lastMessage.type` 为 `multi_body`，`lastMessage.body` 为分段数组，应按分段生成摘要，不要读取 `body.content`。示例见 [展示复合消息摘要](conversation_list.html#展示复合消息摘要)。
+- **会话摘要**：最后一条消息为复合消息时，`lastMessage.type` 为 `multi_body`，`lastMessage.body` 为分段数组，应按分段生成摘要，不要读取 `body.content`。示例见 [展示复合消息摘要](conversation_list.html#展示最后一条消息摘要)。
 - **合并转发**：`downloadAndParseCombineMessage()` 解析出的子消息可能为复合消息，应继续按子消息的 `type` 和 `body` 分段展示。解析流程见 [接收合并消息](#接收合并消息)。
 - **功能限制**：复合消息不支持编辑或自动翻译。创建与发送方式见 [发送复合消息](message_send.html#发送复合消息)。
-
-## 接收合并消息
-
-合并消息用于“聊天记录转发”或“多条消息打包转发”。接收方收到的是一条外层合并消息，若需查看其中的原始消息，还需进一步下载并解析合并消息详情。
-
-#### 接收流程
-
-接收合并消息与接收普通消息的方式相同。应用可在 `onMessage` 回调中根据 `message.type === 'combine'` 识别合并消息。
-
-合并消息包含标题、摘要以及合并消息附件信息。收到合并消息后，可直接从消息体中读取 `title` 和 `summary`；如需获取合并消息中的原始消息列表，可调用 `downloadAndParseCombineMessage` 下载并解析合并消息附件。首次调用该方法时，SDK 会根据合并消息中的附件信息下载并解析附件，然后返回原始消息列表。后续调用时，若附件数据已可用，SDK 可直接解析并返回原始消息列表。
-
-:::tip
-`compatibleText` 是创建合并消息时的可选参数，用于不支持合并转发消息的旧版本客户端进行兼容展示。当前 SDK 接收合并消息时，`message.body` 中不包含 `compatibleText` 字段。
-:::
-
-示例代码如下所示：
-
-```typescript
-client.chatManager.addEventHandler('combine-message-listener', {
-  // 接收合并消息。
-  onMessage: async message => {
-    // 判断是否为合并消息。
-    if (message.type !== 'combine') {
-      return;
-    }
-
-    // 读取合并消息标题。
-    console.log('标题:', message.body.title);
-    // 读取合并消息摘要。
-    console.log('摘要:', message.body.summary);
-    // 下载并解析原始子消息列表。
-    const subMessages = await client.chatManager.downloadAndParseCombineMessage({
-      message,
-    });
-
-    console.log('子消息列表:', subMessages);
-  },
-});
-```
-
-也可以直接传入合并消息体中的最小下载参数：
-
-```typescript
-const subMessages = await client.chatManager.downloadAndParseCombineMessage({
-  url: combineMessage.body.url!,
-  secret: combineMessage.body.secret,
-});
-```
-
-`downloadAndParseCombineMessage()` 支持两种入参：`{ message }` 和 `{ url, secret }`。解析出的子消息可能为 `multi_body`，其 `body` 为分段数组，需按 [接收复合消息](#接收复合消息) 的方式展示。
-
-#### 关键字段
-
-| 字段 | 类型 | 必填/可选 | 适用场景 | 说明 |
-| :--- | :--- | :--- | :--- | :--- |
-| `title` | String | 必填 | 概览展示 | 合并消息标题。 |
-| `summary` | String | 必填 | 概览展示 | 合并消息摘要。仅适合做概览展示；若要展示原始聊天记录，应进一步调用 `downloadAndParseCombineMessage()`。 |
-| `url` | String | 可选 | 下载详情 | 合并消息详情下载地址。 |
-| `secret` | String | 可选 | 下载鉴权 | 合并消息详情下载密钥。 |
-| `messageList` | `ReadonlyArray<Message>` | 可选 | 解析后详情展示 | 仅在发送场景或详情解析后可能出现。 |
-| `combineLevel` | Number | 必填 | 嵌套层级判断 | 当前合并消息层级。 |
 
 ## 离线消息同步事件
 

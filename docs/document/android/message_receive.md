@@ -492,9 +492,12 @@ EMClient.getInstance().chatManager().downloadAttachment(message, downloadCallbac
 
 #### 注意事项
 
+- **发送端内容准备**：发送方应先创建全部消息体，再按阅读顺序组装消息；接收方按 `getBodies()` 的原始顺序展示。消息体列表的增删或替换应在发送前完成，需要上传的本地附件应在发送完成前保持可读。具体流程见 [发送复合消息](message_send.html#发送复合消息)。
+- **附件复用与重发**：如需复用已上传附件，应按 [转发单条消息](message_forward.html#转发单条消息) 的说明保留其服务端信息，避免重复上传。重发同一条失败消息时使用原消息对象，见 [重新发送失败消息](message_send.html#重新发送失败消息)。
 - **消息体列表与界面更新**：`getBodies()` 返回的列表结构只读，SDK 可能更新其中消息体的附件路径和下载状态。消息接收回调在 SDK 工作线程执行，更新 Android UI 时应切换到主线程；不要在回调中执行耗时的同步操作。
 - **会话摘要**：通过 `EMConversation#getLastMessage()` 获取最后一条消息后，若其类型为 `MULTIBODY`，应结合完整消息体列表生成摘要，避免只展示首个消息体。会话读取方式见 [会话列表](conversation_list.html)。
 - **转发处理**：转发复合消息时保留完整的有序消息体列表，不要只复制 `getBody()`。创建转发消息的方法见 [转发单条消息](message_forward.html#转发单条消息)。
+- **功能限制**：复合消息不支持编辑或翻译，创建和发送规则见 [发送复合消息](message_send.html#发送复合消息)。
 
 ## 更多
 
