@@ -75,7 +75,7 @@ APNs 推送依赖推送证书和 device token：
 聊天室不支持离线消息推送；设置 `EMChatMessage.deliverOnlineOnly = YES` 的消息仅向在线用户投递，不触发离线推送。
 
 :::tip
-SDK 5.2.0 提供的 `EMOptions.disconnectNotifyThreshold` 只影响相关断线回调的通知时机，不延迟实际连接状态的变化，也不控制 APNs 的发送时间。具体配置见 [断线通知宽限期](/document/ios/connection.html#配置断线通知宽限期)；当前连接状态的判断见 [查询连接状态](/document/ios/connection.html#查询连接状态)。
+SDK 5.2.0 提供的 `EMOptions.disconnectNotifyThreshold` 只影响相关断线回调的通知时机，不延迟实际连接状态的变化，也不控制 APNs 的发送时间。具体配置见 [断线通知宽限期](/document/ios/connection.html#配置断线通知宽限期)；当前连接状态的判断详见 [查询连接状态](/document/ios/connection.html#获取连接状态)。
 :::
 
 ### 应用前后台切换

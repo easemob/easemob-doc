@@ -45,7 +45,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 ```
 
 :::tip
-应用可以通过 `EMClient#isLoggedIn()` 判断登录状态；自 SDK 5.2.1 起，建议通过 `EMClient#getConnectionState()` 查询完整的服务器连接状态，详见 [查询连接状态](connection.html#查询连接状态)。SDK 不会自动发起登录。
+应用可以通过 `EMClient#isLoggedIn()` 判断登录状态；自 SDK 5.2.1 起，建议通过 `EMClient#getConnectionState()` 查询完整的服务器连接状态，详见 [获取连接状态](connection.html#获取连接状态)。SDK 不会自动发起登录。
 :::
 
 ## 登录完成前使用本地数据库

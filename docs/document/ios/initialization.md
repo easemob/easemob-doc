@@ -84,7 +84,7 @@ final class ChatListener: NSObject, EMClientDelegate, EMChatManagerDelegate {
 }
 ```
 
-弱网导致连接断开后，SDK 会自动重连，无需手动重连。需要区分未连接、连接中和已连接状态时，请查询 `EMClient.connectionState`，详见 [查询连接状态](connection.html#查询连接状态)。断开回调的通知时机受 [断线通知宽限期](connection.html#配置断线通知宽限期) 影响。若为监听指定了非主队列，请切换到主线程后再更新 UI。
+弱网导致连接断开后，SDK 会自动重连，无需手动重连。需要区分未连接、连接中和已连接状态时，请查询 `EMClient.connectionState`，详见 [查询连接状态](connection.html#获取连接状态)。断开回调的通知时机受 [断线通知宽限期](connection.html#配置断线通知宽限期) 影响。若为监听指定了非主队列，请切换到主线程后再更新 UI。
 
 :::tip
 1. 登录后自动同步数据的开始和结束状态由 `EMClientDelegate` 回调，详见[监听同步状态](#监听同步状态)。

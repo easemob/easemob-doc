@@ -60,7 +60,7 @@ EMClient.getInstance().loginWithToken(
         });
 ```
 
-## 查询连接状态
+## 获取连接状态
 
 自 SDK 5.2.1 起，可调用 `EMClient#getConnectionState()` 查询当前实际连接状态，返回值为 `EMConnectionState` 枚举：
 
@@ -317,9 +317,9 @@ EMClient.getInstance().renewToken(
 | [`init`](#连接生命周期) | `EMClient` | 初始化 Android SDK。 |
 | [`loginWithToken`](#连接生命周期) | `EMClient` | 使用用户 ID 和 Token 登录并建立连接。 |
 | [`logout`](#连接生命周期) | `EMClient` | 主动登出并关闭当前连接。 |
-| [`getConnectionState`](#查询连接状态) | `EMClient` | 查询完整连接状态，返回 `EMConnectionState`。自 SDK 5.2.1 起支持。 |
-| [`isConnected`](#查询连接状态) | `EMClient` | 查询是否已连接，自 SDK 5.2.1 起废弃，建议改用 `getConnectionState()`。 |
+| [`getConnectionState`](#获取连接状态) | `EMClient` | 查询完整连接状态，返回 `EMConnectionState`。自 SDK 5.2.1 起支持。 |
+| [`isConnected`](#获取连接状态) | `EMClient` | 查询是否已连接，自 SDK 5.2.1 起废弃，建议改用 `getConnectionState()`。 |
 | [`setDisconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 设置可恢复断开的通知宽限时间，单位为秒，默认 `10`。 |
 | [`getDisconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 查询当前断开通知宽限时间。 |
-| [`isLoggedIn`](#查询连接状态) | `EMClient` | 查询当前用户是否已登录 Chat 服务。 |
+| [`isLoggedIn`](#获取连接状态) | `EMClient` | 查询当前用户是否已登录 Chat 服务。 |
 | [`renewToken`](#token-生命周期) | `EMClient` | 更新当前登录用户的 Token。 |

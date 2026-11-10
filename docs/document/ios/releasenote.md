@@ -5,7 +5,7 @@
 #### 新增特性
 
 - **[支持复合消息](message_send.html#发送复合消息)**：一条消息可按顺序包含多个文本、图片、视频、语音、文件、位置或自定义消息体，便于应用构建图文混排、多图等消息内容。新增 `-[EMChatMessage initWithConversationID:bodies:ext:]` 初始化方法，通过 `bodies` 属性设置或读取完整的有序消息体列表，通过 `appendBody:` 追加消息体，并通过 `contentType` 判断消息内容类型。每条消息最多支持 20 个消息体。
-- **[支持查询完整的连接状态](connection.html#查询连接状态)**：通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`，可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
+- **[支持查询完整的连接状态](connection.html#获取连接状态)**：通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`，可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
 - **[新增断线通知宽限期配置](connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions.disconnectNotifyThreshold` 设置或查询宽限时间，单位为秒，默认为 10 秒。
 
 #### 优化
@@ -157,7 +157,7 @@ SDK 补充会话列表监听、会话展示信息、批量删除会话和本地�
 #### 新增特性
 
 - **[支持按时间点批量标记消息已读](/v4/ios/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `[EMConversation markMessagesAsReadWithTimestamp:completion:]` 接口，操作结果通过主线程回调返回。
-- **[支持查询完整的连接状态](/v4/ios/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
+- **[支持查询完整的连接状态](/v4/ios/connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
 - **[新增断线通知宽限期配置](/v4/ios/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions.disconnectNotifyThreshold` 设置或查询宽限时间，单位为秒，默认为 10 秒。
 
 #### 优化

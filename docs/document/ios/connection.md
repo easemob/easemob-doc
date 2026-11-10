@@ -59,7 +59,7 @@ EMClient.shared().login(
 }
 ```
 
-## 查询连接状态
+## 获取连接状态
 
 自 SDK 5.2.0 起，通过 `EMClient.connectionState` 查询 SDK 当前与聊天服务器的连接状态。该只读属性返回 `EMConnectionState`，可区分以下三种状态：
 
@@ -309,8 +309,8 @@ EMClient.shared().renewToken("newToken") { error in
 | [`initializeSDKWithOptions`](#连接生命周期) | `EMClient` | 初始化 iOS SDK，Swift 调用为 `initializeSDK(with:)`。 |
 | [`loginWithUsername`](#连接生命周期) | `EMClient` | 使用用户 ID 和 Token 显式登录并建立连接。 |
 | [`logout`](#连接生命周期) | `EMClient` | 主动登出并关闭当前连接。 |
-| [`connectionState`](#查询连接状态) | `EMClient` | 查询未连接、连接中或已连接状态。 |
-| [`isConnected`](#查询连接状态) | `EMClient` | 已废弃，建议改用 `connectionState`。 |
-| [`isLoggedIn`](#查询连接状态) | `EMClient` | 查询当前用户是否已登录聊天服务器。 |
+| [`connectionState`](#获取连接状态) | `EMClient` | 查询未连接、连接中或已连接状态。 |
+| [`isConnected`](#获取连接状态) | `EMClient` | 已废弃，建议改用 `connectionState`。 |
+| [`isLoggedIn`](#获取连接状态) | `EMClient` | 查询当前用户是否已登录聊天服务器。 |
 | [`disconnectNotifyThreshold`](#配置断线通知宽限期) | `EMOptions` | 设置或查询断线通知宽限时间，单位为秒，默认 `10`。 |
 | [`renewToken`](#token-生命周期) | `EMClient` | 异步更新当前登录用户的 Token。 |

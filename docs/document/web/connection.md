@@ -54,7 +54,7 @@ await client.login({
 `client.login` 成功后 Promise resolve，不携带返回值。若当前 SDK 已处于连接中或已连接状态，再次调用 `login` 会失败；如需切换登录用户，请先调用 `logout`。
 :::
 
-## 查询连接状态
+## 获取连接状态
 
 你可以调用 `getConnectionState` 获取当前连接状态：
 
@@ -232,6 +232,6 @@ client.addEventHandler('offline-message-sync-listener', {
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`login`](#连接生命周期) | `ChatClient` | 登录 SDK，并建立到消息服务的连接。 |
-| [`getConnectionState`](#查询连接状态) | `ChatClient` | 获取当前连接状态。 |
+| [`getConnectionState`](#获取连接状态) | `ChatClient` | 获取当前连接状态。 |
 | [`renewToken`](#连接恢复与异常处理) | `ChatClient` | 在 Token 即将过期或已过期时续期当前登录会话。 |
 | [`logout`](#连接生命周期) | `ChatClient` | 登出 SDK，并关闭当前连接。 |

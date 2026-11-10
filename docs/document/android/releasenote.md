@@ -5,7 +5,7 @@
 #### 新增特性
 
 - **[支持复合消息](/document/android/message_send.html#发送复合消息)**：单条消息可按顺序携带多个消息体，最多支持 20 个，便于组合发送和展示多种内容。新增 `EMMessage#createMultiBodySendMessage(...)`、`getBodies()`、`setBodies(...)` 和 `appendBody(...)`，用于创建、读取和修改消息体列表；新增 `getContentType()` 和 `EMMessage.Type.MULTIBODY`，用于识别复合消息。`EMClient#isConnected()` 标记为废弃。
-- **[支持查询完整连接状态](/document/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持查询完整连接状态](/document/android/connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
 - **[支持配置断开通知宽限时间](/document/android/connection.html#配置断开通知宽限时间)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
 - **[支持配置后台消息接收策略](/document/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
 - **[支持查询推送通道是否有效](/document/android/push/push_overview.html#查询推送通道是否有效)**：应用可判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。新增 `EMPushHelper#isPushTokenBound()`，用于查询当前推送 Token 的绑定状态。
@@ -17,7 +17,7 @@
 #### API 与行为变更
 
 - 复合消息的 [`getType()` 和 `getContentType()`](/document/android/message_send.html#操作消息体列表) 返回 `EMMessage.Type.MULTIBODY`；`getBody()` 返回首个消息体，完整消息体列表请通过 `getBodies()` 获取。`setBody()` 会替换整个消息体列表，`addBody()` 和 `appendBody()` 为追加操作。
-- `EMClient#isConnected()` 标记为废弃，现有调用仍可使用，建议改用 [`EMClient#getConnectionState()`](/document/android/connection.html#查询连接状态)。
+- `EMClient#isConnected()` 标记为废弃，现有调用仍可使用，建议改用 [`EMClient#getConnectionState()`](/document/android/connection.html#获取连接状态)。
 - [可恢复断开的 `onDisconnected(int errorCode)` 回调](/document/android/connection.html#配置断开通知宽限时间)默认延迟 10 秒；宽限时间内重连成功则不触发断开回调，到期仍未恢复才触发。将宽限时间设置为小于或等于 0 时，立即回调。首次连接失败、Token 失效或被踢下线等情况仍立即通知。宽限时间仅影响回调时机，连接状态会即时变化。
 - [`usePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) 默认为 `false`，SDK 不会因应用进入后台而主动断开长连接，连接能否持续保持仍受系统后台限制和应用保活策略影响。如需启用后台推送策略，请在调用 `EMClient#init(Context, EMOptions)` 前设置为 `true`。若连接成功时应用已处于后台，且开关已开启、推送通道有效，SDK 会直接断开连接，不再等待约 10 秒。
 - [下载复合消息附件](/document/android/message_receive.html#附件下载接口与回调) 时，不适用的消息体会自动跳过；若没有适用的消息体，则回调成功，但不下载任何内容。语音消息体通过大图或缩略图下载接口下载时，均下载语音原文件。单消息体的其他下载行为保持与历史版本一致。
@@ -188,7 +188,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 #### 新增特性
 
 - **[支持按时间点批量标记消息已读](/v4/android/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `EMConversation.markMessagesAsReadWithTimestamp(long timestamp)` 接口。
-- **[支持查询完整的连接状态](/v4/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持查询完整的连接状态](/v4/android/connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
 - **[支持配置断线通知宽限期](/v4/android/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
 - **[支持配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
 - **[支持查询推送通道是否有效](/v4/android/push/push_overview.html#查询推送通道是否有效)**：通过 `EMPushHelper.isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。

@@ -150,7 +150,7 @@ NSString *currentUser = [EMClient sharedClient].currentUsername;
 
 ## 获取登录状态
 
-调用 `isLoggedIn` 判断当前用户是否已登录。自 SDK 5.2.0 起，建议通过 `connectionState` 查询未连接、连接中或已连接状态；`isConnected` 已标记为废弃，现有调用仍可使用。登录状态与连接状态含义不同，例如网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。详见 [查询连接状态](connection.html#查询连接状态)。
+调用 `isLoggedIn` 判断当前用户是否已登录。自 SDK 5.2.0 起，建议通过 `connectionState` 查询未连接、连接中或已连接状态；`isConnected` 已标记为废弃，现有调用仍可使用。登录状态与连接状态含义不同，例如网络断开时，用户可能仍处于登录状态，但当前未连接到服务器。详见 [查询连接状态](connection.html#获取连接状态)。
 
 ```objectivec
 BOOL loggedIn = [EMClient sharedClient].isLoggedIn;

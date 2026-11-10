@@ -134,7 +134,7 @@ Token 绑定是异步过程，登录成功后立即查询可能返回 `false`。
 | 后台断连等待时间 | 切入后台时，若 `usePushInBackground` 已开启且通道有效，SDK 安排约 10 秒后断连；回到前台则取消尚未执行的任务。后台连接成功且满足上述条件时，会直接断连。详见 [配置后台消息接收策略](#配置后台消息接收策略)。 |
 | 断线通知宽限期 | 本次登录已成功建立连接后，发生网络异常等可恢复断线时，SDK 可暂缓触发 `onDisconnected(int errorCode)`。默认 10 秒，可通过 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 配置。 |
 
-断线通知宽限期只影响断开回调的触发时机，不会延迟实际连接状态的变化。未收到 `onDisconnected` 不代表长连接仍然可用；如需查询客户端当前连接状态，请使用 `EMClient#getConnectionState()`，详见 [查看连接状态](/document/android/connection.html#查询连接状态)。
+断线通知宽限期只影响断开回调的触发时机，不会延迟实际连接状态的变化。未收到 `onDisconnected` 不代表长连接仍然可用；如需查询客户端当前连接状态，请使用 `EMClient#getConnectionState()`，详见 [查看连接状态](/document/android/connection.html#获取连接状态)。
 
 断线通知宽限期不是离线推送的额外等待时间，不能将其与后台断连等待时间简单相加来推算推送触发或送达时间。宽限期的适用范围及完整规则，详见 [配置断线通知宽限期](/document/android/connection.html#配置断线通知宽限期)。
 
