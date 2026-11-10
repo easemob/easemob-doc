@@ -4,15 +4,11 @@
 
 ### 新增特性
 
-- **支持复合消息**：支持在一条消息中按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，可用于构建图文混排、多图等消息展示。支持复合消息的收发、附件下载，以及将复合消息作为子消息进行合并转发。
+- **[支持复合消息](message_send.html#发送复合消息)**：支持在一条消息中按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，可用于构建图文混排、多图等消息展示。支持复合消息的收发、附件下载，以及将复合消息作为子消息进行合并转发。
 
   新增 `ChatManager.createTextMessageBody()` 等分段创建方法，以及 `createMultiBodyMessage()`，支持组装 2-20 段内容。通过 `sendMessage()` 发送，通过 `downloadAttachment()` 下载其中的全部附件。
 
-  **接入说明**：复合消息类型为 `multi_body`，消息正文及对应会话摘要的 `body` 为分段数组；调用 `downloadAttachment()` 下载复合消息附件时返回结果数组，展示和下载处理逻辑需相应适配。
-
-  请参见 [发送复合消息](message_send.html#发送复合消息)、[接收复合消息及下载附件](message_receive.html#接收复合消息) 和 [展示复合消息摘要](conversation_list.html#展示最后一条消息摘要)。
-
-- **支持查询 SDK 版本号**：便于确认当前集成的 SDK 版本和排查版本相关问题。 新增 `client.getVersion()`，返回当前 SDK 的版本号字符串。请参见 [获取 SDK 版本号](initialization.html#获取-sdk-版本号)。
+- **[支持查询 SDK 版本号](initialization.html#获取-sdk-版本号)**：便于确认当前集成的 SDK 版本和排查版本相关问题。 新增 `client.getVersion()`，返回当前 SDK 的版本号字符串。
 
 ### 修复
 
