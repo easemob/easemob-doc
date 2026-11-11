@@ -9,7 +9,7 @@
 
 如下为按需翻译示例：
 
-![img](/images/ios/translation.png)
+<img src="/images/ios/translation.png" width="600" >
 
 ## 功能开通
 
