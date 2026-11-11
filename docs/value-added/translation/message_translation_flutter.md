@@ -23,8 +23,8 @@
 
 ## 前提条件
 
-- 消息翻译功能自 Flutter SDK 1.0.5 起提供。
-- 较早版本使用 `EM*` 类型；已采用 `Chat*` 命名的 4.220 之后的 4.x 版本和 V5.x 使用 `Chat*` 类型。请按所集成 SDK 的实际类型名称选择下方示例。V5.x 保留的 `EM*` 弃用兼容别名不作为新接入代码的首选。
+- 消息翻译功能自 Flutter SDK v1.0.5 起提供。
+- 较早版本使用 `EM*` 类型；已采用 `Chat*` 命名的 4.220 之后的 v4.x 版本和 v5.x 使用 `Chat*` 类型。请按所集成 SDK 的实际类型名称选择下方示例。v5.x 保留的 `EM*` 弃用兼容别名不作为新接入代码的首选。
 - 已完成 [初始化](/document/flutter/initialization.html) 并登录成功。
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
@@ -50,7 +50,7 @@ try {
 }
 ```
 
-@tab Chat* 类型（含 V5.x）
+@tab Chat* 类型（含 v5.x）
 
 ```dart
 try {
@@ -95,7 +95,7 @@ try {
 }
 ```
 
-@tab Chat* 类型（含 V5.x）
+@tab Chat* 类型（含 v5.x）
 
 ```dart
 // receivedMessage 为收到且仍保存在本地数据库中的普通文本消息。
@@ -136,7 +136,7 @@ try {
 }
 ```
 
-@tab Chat* 类型（含 V5.x）
+@tab Chat* 类型（含 v5.x）
 
 ```dart
 final message = ChatMessage.createTxtSendMessage(
@@ -167,7 +167,7 @@ final body = receivedMessage.body as EMTextMessageBody;
 debugPrint(body.translations?['en'] ?? body.content);
 ```
 
-@tab Chat* 类型（含 V5.x）
+@tab Chat* 类型（含 v5.x）
 
 ```dart
 // receivedMessage 为消息接收回调中的普通文本消息。
@@ -189,7 +189,7 @@ debugPrint(body.translations?['en'] ?? body.content);
 
 - 按需翻译会根据消息 ID 查找本地消息。不要直接传入尚未发送、尚未入库的新建消息。
 - 请处理 `EMError`/`ChatError`，并在翻译成功后读取返回消息中的译文。
-- 本页两组代码的区别在于 SDK 类型名称，不能简单将所有 V4.x 归为 `EM*`。
+- 本页两组代码的区别在于 SDK 类型名称，不能简单将所有 v4.x 归为 `EM*`。
 
 ## 接口列表
 

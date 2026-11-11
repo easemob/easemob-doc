@@ -23,7 +23,7 @@
 
 ## 前提条件
 
-- 本文示例适用于使用以下接口的 React Native SDK V1.x 和 V5.x。
+- 本文示例适用于使用以下接口的 React Native SDK v1.x 和 v5.x。
 - 已完成 [初始化](/document/react-native/initialization.html) 并登录成功。
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。

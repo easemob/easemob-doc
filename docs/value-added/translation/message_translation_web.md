@@ -23,8 +23,8 @@
 
 ## 前提条件
 
-- Web V4.x：使用 4.0.4 或以上版本；示例中的 `conn` 为 SDK 实例，`WebIM` 为所用 SDK 入口。确保使用该功能前，已完成 [初始化](/v4/web/initialization.html) 并登录成功。
-- Web V5.x：本页自动翻译和编辑前翻译示例以 5.2.0 或以上版本为准；示例中的 `client` 已注册 `ChatManager`，通过 `client.chatManager` 调用消息接口。确保使用该功能前，已完成 [初始化](/document/web/initialization.html) 并登录成功。
+- Web v4.x：使用 4.0.4 或以上版本；示例中的 `conn` 为 SDK 实例，`WebIM` 为所用 SDK 入口。确保使用该功能前，已完成 [初始化](/v4/web/initialization.html) 并登录成功。
+- Web v5.x：本页自动翻译和编辑前翻译示例以 5.2.0 或以上版本为准；示例中的 `client` 已注册 `ChatManager`，通过 `client.chatManager` 调用消息接口。确保使用该功能前，已完成 [初始化](/document/web/initialization.html) 并登录成功。
 - 
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
@@ -37,12 +37,12 @@
 
 ::: tabs#code
 
-@tab V4.x
+@tab v4.x
 
 调用 `conn.getSupportedLanguages()` 查询支持的语言。
 
 ```javascript
-// conn 为已初始化并登录的 Web V4.x 实例。
+// conn 为已初始化并登录的 Web v4.x 实例。
 try {
   const result = await conn.getSupportedLanguages();
   for (const language of result.data || []) {
@@ -61,12 +61,12 @@ try {
 | `name` | `string` | 语言名称。 |
 | `nativeName` | `string` | 该语言的本地显示名称。 |
 
-@tab V5.x
+@tab v5.x
 
 调用 `client.chatManager.getSupportedTranslationLanguages()` 查询支持的语言。
 
 ```typescript
-// client 为已初始化、注册 ChatManager 并登录的 Web V5.x 实例。
+// client 为已初始化、注册 ChatManager 并登录的 Web v5.x 实例。
 const languages = await client.chatManager.getSupportedTranslationLanguages();
 for (const language of languages) {
   console.log(language.code, language.name, language.nativeName);
@@ -89,7 +89,7 @@ for (const language of languages) {
 
 ::: tabs#code
 
-@tab V4.x
+@tab v4.x
 
 调用 `conn.translateMessage({ text, languages })`，传入待翻译文本和目标语言。以下 `receivedMessage` 为收到的文本消息；方法返回结果，不会自动更新页面展示。
 
@@ -114,7 +114,7 @@ try {
 | `translations` | `Array<{ to: string; text: string }>` | 译文条目数组；to 为目标语言编码，text 为译文。 |
 | `detectedLanguage` | `{ language: string; score: number }` | 识别出的原文语言及置信度，以服务实际返回为准。 |
 
-@tab V5.x
+@tab v5.x
 
 调用 `translateMessage({ message, targetLanguages })`，传入普通文本消息。该方法可用于发送前或收到后的主动翻译；只返回结果，不修改输入消息，也不更新业务消息缓存。
 
@@ -151,7 +151,7 @@ async function translateTextMessage(message: Message): Promise<void> {
 
 ::: tabs#code
 
-@tab V4.x
+@tab v4.x
 
 创建文本消息时，通过 `msgConfig.languages` 设置目标语言：
 
@@ -166,7 +166,7 @@ const message = WebIM.message.create({
 conn.send(message);
 ```
 
-@tab V5.x
+@tab v5.x
 
 创建普通文本消息时设置 `targetLanguages`。不传或传空数组时，不调用翻译服务。译文位于发送结果及相关回调消息的 `body.translations`；原文保留，译文不会回填到调用方传入的原消息对象。
 
@@ -189,7 +189,7 @@ try {
 }
 ```
 
-**编辑前自动翻译（V5.2.0）**：编辑普通文本消息时，在 `message.body.targetLanguages` 中设置目标语言；翻译成功后再提交编辑。不传或传空数组时不翻译。
+**编辑前自动翻译（v5.2.0）**：编辑普通文本消息时，在 `message.body.targetLanguages` 中设置目标语言；翻译成功后再提交编辑。不传或传空数组时不翻译。
 
 ```typescript
 try {
@@ -222,7 +222,7 @@ try {
 
 ::: tabs#code
 
-@tab V4.x
+@tab v4.x
 
 在 `onTextMessage` 中读取实时文本消息顶层的 `translations` 数组：
 
@@ -245,7 +245,7 @@ conn.addEventHandler('translation-listener', {
 
 这里描述的是实时消息接收回调。历史消息接口可能使用不同的译文包装，应按相应接口的返回结构读取。
 
-@tab V5.x
+@tab v5.x
 
 在 `onMessage` 中读取普通文本消息的 `body.translations`；其他设备收到编辑通知时，可在 `onMessageUpdated` 中更新展示。当前操作设备通过 `modifyMessage()` 的 Promise 处理编辑结果。
 
@@ -280,19 +280,19 @@ client.chatManager.addEventHandler('translation-listener', {
 
 ## 注意事项
 
-- 消息翻译适用于普通文本消息。Web V5.x 的 [复合消息](/document/web/message_send.html#发送复合消息) 不支持按需翻译，也不会自动翻译其中的文本分段。
-- Web V5.x 按需翻译结果由业务侧保存和展示；自动翻译的译文从发送结果、接收消息或编辑结果中获取。
-- Web V5.x 自动翻译失败会阻止发送或编辑，请处理 Promise 异常并提供重试等交互。
+- 消息翻译适用于普通文本消息。Web v5.x 的 [复合消息](/document/web/message_send.html#发送复合消息) 不支持按需翻译，也不会自动翻译其中的文本分段。
+- Web v5.x 按需翻译结果由业务侧保存和展示；自动翻译的译文从发送结果、接收消息或编辑结果中获取。
+- Web v5.x 自动翻译失败会阻止发送或编辑，请处理 Promise 异常并提供重试等交互。
 - 如需设置离线推送的展示语言，参见 [设置推送翻译](/document/web/push/push_translation.html) 。
 
 ## 接口列表
 
 | API | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
-| `getSupportedLanguages` | `V4.x conn` | 查询支持的语言。 |
-| `translateMessage` | `V4.x conn` | 传入 text、languages，按需翻译文本。 |
-| `WebIM.message.create / conn.send` | `V4.x WebIM / conn` | 创建和发送消息，通过 msgConfig.languages 开启自动翻译。 |
-| `getSupportedTranslationLanguages` | `V5.x ChatManager` | 查询支持的语言。 |
-| `translateMessage` | `V5.x ChatManager` | 传入 message、targetLanguages，按需翻译普通文本消息。 |
-| `createTextMessage / sendMessage` | `V5.x ChatManager` | 创建和发送消息，通过 targetLanguages 开启自动翻译。 |
-| `modifyMessage` | `V5.x ChatManager` | 编辑普通文本消息，可在 body.targetLanguages 中设置目标语言。 |
+| `getSupportedLanguages` | `v4.x conn` | 查询支持的语言。 |
+| `translateMessage` | `v4.x conn` | 传入 text、languages，按需翻译文本。 |
+| `WebIM.message.create / conn.send` | `v4.x WebIM / conn` | 创建和发送消息，通过 msgConfig.languages 开启自动翻译。 |
+| `getSupportedTranslationLanguages` | `v5.x ChatManager` | 查询支持的语言。 |
+| `translateMessage` | `v5.x ChatManager` | 传入 message、targetLanguages，按需翻译普通文本消息。 |
+| `createTextMessage / sendMessage` | `v5.x ChatManager` | 创建和发送消息，通过 targetLanguages 开启自动翻译。 |
+| `modifyMessage` | `v5.x ChatManager` | 编辑普通文本消息，可在 body.targetLanguages 中设置目标语言。 |

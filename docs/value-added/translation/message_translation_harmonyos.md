@@ -23,7 +23,7 @@
 
 ## 前提条件
 
-- 消息翻译功能自 HarmonyOS SDK 1.15.0 起提供；以下接口也适用于 V5.x。
+- 消息翻译功能自 HarmonyOS SDK v1.15.0 起提供；以下接口也适用于 v5.x。
 - 已完成 [初始化](/document/harmonyos/initialization.html) 并登录成功。
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
