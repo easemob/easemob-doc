@@ -191,6 +191,19 @@ debugPrint(body.translations?['en'] ?? body.content);
 - 请处理 `EMError`/`ChatError`，并在翻译成功后读取返回消息中的译文。
 - 本页两组代码的区别在于 SDK 类型名称，不能简单将所有 v4.x 归为 `EM*`。
 
+## 常见错误
+
+v4.x 和 v5.x 在 Android、iOS 平台的以下翻译错误码一致；同一数值在两个平台上的错误名称不同。通过 `EMError / ChatError` 的 `code` 和 `description` 获取实际错误码和错误描述。表中错误名称来自底层 Android、iOS 错误码文档，不代表封装层导出了同名常量。
+
+更多错误参见 [v4.x 错误码](/v4/flutter/error.html) 和 [v5.x 错误码](/document/flutter/error.html) 中链接的 Android、iOS 错误码文档。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1110 | Android：`TRANSLATE_PARAM_INVALID`<br/>iOS：`EMErrorTranslateParamError` | 翻译参数错误。 | 传入的翻译参数不符合接口要求。 | 结合错误描述和 SDK 日志检查翻译接口的参数；目标语言应使用查询接口返回的有效语言编码。 |
+| 1111 | Android：`TRANSLATE_SERVICE_NOT_ENABLE`<br/>iOS：`EMErrorTranslateServiceNotEnabled` | 翻译服务未启用。 | 当前应用尚未开通翻译服务。 | 在 [环信控制台](https://console.easemob.com/user/login) 开通翻译服务后重试。 |
+| 1112 | Android：`TRANSLATE_USAGE_LIMIT`<br/>iOS：`EMErrorTranslateUsageLimit` | 翻译用量达到上限。 | 当前应用的翻译额度已用尽。 | 联系环信商务续费或增加翻译用量后重试。 |
+| 1113 | Android：`TRANSLATE_MESSAGE_FAIL`<br/>iOS：`EMErrorTranslateServiceFail` | 消息翻译失败。 | 具体原因需结合错误描述和 SDK 日志确认。 | 保留错误码、错误描述和 SDK 日志，排查失败原因；若持续失败，联系技术支持。 |
+
 ## 接口列表
 
 | API | 所属模块/类 | 说明 |

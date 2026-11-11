@@ -119,6 +119,17 @@ console.info(translation?.translationText ?? body.getContent());
 - 请处理 Promise 返回的 `ChatError`，错误码参见 [错误码](/document/harmonyos/error.html) 。
 - `setTargetLanguages()` 只设置目标语言，不会立即发起翻译；发送消息时执行自动翻译。
 
+## 常见错误
+
+v4.x 和 v5.x 的以下翻译错误码一致，错误名称以对应平台的错误码文档为准。更多错误参见 [v4.x 错误码](/v4/harmonyos/error.html) 和 [v5.x 错误码](/document/harmonyos/error.html) 。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1110 | `TRANSLATE_PARAM_INVALID` | 翻译参数错误。 | 传入的翻译参数不符合接口要求。 | 结合错误描述和 SDK 日志检查翻译接口的参数；目标语言应使用查询接口返回的有效语言编码。 |
+| 1111 | `TRANSLATE_SERVICE_NOT_ENABLE` | 翻译服务未启用。 | 当前应用尚未开通翻译服务。 | 在 [环信控制台](https://console.easemob.com/user/login) 开通翻译服务后重试。 |
+| 1112 | `TRANSLATE_USAGE_LIMIT` | 翻译用量达到上限。 | 当前应用的翻译额度已用尽。 | 联系环信商务续费或增加翻译用量后重试。 |
+| 1113 | `TRANSLATE_MESSAGE_FAIL` | 消息翻译失败。 | 具体原因需结合错误描述和 SDK 日志确认。 | 保留错误码、错误描述和 SDK 日志，排查失败原因；若持续失败，联系技术支持。 |
+
 ## 接口列表
 
 | API | 所属模块/类 | 说明 |

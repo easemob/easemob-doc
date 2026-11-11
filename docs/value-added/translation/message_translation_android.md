@@ -24,7 +24,7 @@
 ## 前提条件
 
 - 本文示例适用于 Android SDK v4.x 和 v5.x；消息翻译功能自 v3.9.1 起提供。
-- 已完成 [初始化](/document/android/initialization.html) 并登录成功。
+- 已完成 [Unity 初始化](/document/android/initialization.html) 或 [Windows 初始化](/document/android/initialization.html)并登录成功。
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
 
@@ -125,6 +125,17 @@ for (EMTextMessageBody.EMTranslationInfo item : body.getTranslations()) {
 - 翻译仅适用于普通文本消息。v5.x 的 [复合消息](/document/android/message_send.html#发送复合消息) 不支持按需翻译，也不会自动翻译其中的文本消息体。
 - 翻译失败时，通过 `EMValueCallBack.onError()` 或消息发送回调获取错误；按需翻译应在 `onSuccess()` 中读取结果。
 - 如需设置离线推送的展示语言，参见 [设置推送翻译](/document/android/push/push_translation.html) 。
+
+## 常见错误
+
+v4.x 和 v5.x 的以下翻译错误码一致，错误名称以对应平台的错误码文档为准。更多错误参见 [v4.x 错误码](/v4/android/error.html) 和 [v5.x 错误码](/document/android/error.html) 。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1110 | `TRANSLATE_PARAM_INVALID` | 翻译参数错误。 | 传入的翻译参数不符合接口要求。 | 结合错误描述和 SDK 日志检查翻译接口的参数；目标语言应使用查询接口返回的有效语言编码。 |
+| 1111 | `TRANSLATE_SERVICE_NOT_ENABLE` | 翻译服务未启用。 | 当前应用尚未开通翻译服务。 | 在 [环信控制台](https://console.easemob.com/user/login) 开通翻译服务后重试。 |
+| 1112 | `TRANSLATE_USAGE_LIMIT` | 翻译用量达到上限。 | 当前应用的翻译额度已用尽。 | 联系环信商务续费或增加翻译用量后重试。 |
+| 1113 | `TRANSLATE_MESSAGE_FAIL` | 消息翻译失败。 | 具体原因需结合错误描述和 SDK 日志确认。 | 保留错误码、错误描述和 SDK 日志，排查失败原因；若持续失败，联系技术支持。 |
 
 ## 接口列表
 

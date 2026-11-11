@@ -130,6 +130,17 @@ Debug.Log(displayText);
 - 翻译和发送失败时，请在回调的 `onError` 中处理错误。
 - 本页使用 `AgoraChat` 命名空间中的类型。示例所需集合类型来自 `System.Collections.Generic`，日志使用 `UnityEngine.Debug`。
 
+## 常见错误
+
+[Unity 错误码](/document/unity/error.html) 和 [Windows 错误码](/document/windows/error.html)一致，两端的常见翻译错误如下表所示：
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1110 | `TRANSLATE_PARAM_INVALID` | 翻译参数错误。 | 传入的翻译参数不符合接口要求。 | 结合错误描述和 SDK 日志检查翻译接口的参数；目标语言应使用查询接口返回的有效语言编码。 |
+| 1111 | `TRANSLATE_SERVICE_NOT_ENABLE` | 翻译服务未启用。 | 当前应用尚未开通翻译服务。 | 在 [环信控制台](https://console.easemob.com/user/login) 开通翻译服务后重试。 |
+| 1112 | `TRANSLATE_USAGE_LIMIT` | 翻译用量达到上限。 | 当前应用的翻译额度已用尽。 | 联系环信商务续费或增加翻译用量后重试。 |
+| 1113 | `TRANSLATE_MESSAGE_FAIL` | 消息翻译失败。 | 具体原因需结合错误描述和 SDK 日志确认。 | 保留错误码、错误描述和 SDK 日志，排查失败原因；若持续失败，联系技术支持。 |
+
 ## 接口列表
 
 | API | 所属模块/类 | 说明 |
