@@ -55,6 +55,7 @@ const documentV5Sidebar = [
       { text: '搜索本地消息', link: 'message_search_local.html', except: ['web'] },
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
+      { text: '消息翻译', link: 'message_translation.html'},
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '转发消息', link: 'message_forward.html'},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
