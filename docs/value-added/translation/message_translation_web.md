@@ -1,88 +1,324 @@
-# 翻译
+# 消息翻译
 
-<Toc />
+## 功能说明
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对 **文本消息** 进行按需翻译或自动翻译：
-- 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
-- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
+为方便用户在聊天过程中 **翻译文本消息**，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持以下两种方式：
 
-:::tip
-消息翻译仅支持单消息体的文本消息，不支持 [复合消息](/document/web/message_send.html#发送复合消息)，也不会自动翻译复合消息中的文本消息体。
-:::
+- 按需翻译：接收方收到文本消息后，将消息内容翻译为目标语言。
+- 自动翻译：发送方设置目标语言后，SDK 在发送消息前翻译文本，将原文和译文一起发送给接收方。
+
+如下为按需翻译示例：
+
+<img src="/images/ios/translation.png" width="600" >
 
 ## 功能开通
 
-文本翻译为增值服务，如需使用请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译)。
+消息翻译为增值服务，使用前请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译) 。
 
-单次翻译请求最多支持 10,000 字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 字符翻译为 4 种语言，则计费字符数为 2000 字符。
+单次翻译请求最多支持 10,000 个字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 个字符翻译为 4 种语言，计费字符数为 2,000。
 
-若传入的文本超过上限，则上报错误 400，错误提示为 “The input text is too long”。
-
-该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译)。
+该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译) 。
 
 ## 前提条件
 
-开始前，请确保满足以下条件：
+- Web v4.x：使用 4.0.4 或以上版本；示例中的 `conn` 为 SDK 实例，`WebIM` 为所用 SDK 入口。确保使用该功能前，已完成 [初始化](/v4/web/initialization.html) 并登录成功。
+- Web v5.x：本页自动翻译和编辑前翻译示例以 5.2.0 或以上版本为准；示例中的 `client` 已注册 `ChatManager`，通过 `client.chatManager` 调用消息接口。确保使用该功能前，已完成 [初始化](/document/web/initialization.html) 并登录成功。
+- 
+- 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
+- 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
 
-1. 完成 4.0.4 或以上版本 SDK 初始化，详见 [快速开始](/document/web/quickstart.html)。
-2. [已开通翻译功能， 了解翻译服务的使用限制](#功能开通)。
-3. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-4. 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+## 获取翻译服务支持的语言
 
-## 技术原理
+你可以查询翻译服务支持的语言，并从返回结果中选取目标语言编码。无论是按需翻译还是自动翻译，都需要在翻译前确认目标语言受支持。
 
-SDK 支持你通过调用 API 在项目中实现如下功能：
+已知有效语言编码时，无需在每次翻译前重复查询。
 
-- `getSupportedLanguages`：获取支持的翻译语言；
-- 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
-- 自动翻译：发送方发送消息之前设置 `languages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
+::: tabs#code
 
-## 实现方法
+@tab v4.x
 
-### 获取翻译服务支持的语言
-
-无论是按需翻译还是自动翻译，都需先调用 `getSupportLanguages` 获取支持的翻译语言。示例代码如下：
+调用 `conn.getSupportedLanguages()` 查询支持的语言。
 
 ```javascript
-conn.getSupportedLanguages().then(res => console.log(res))
-```
-
-### 按需翻译
-
-接收方调用 `translateMessage` 将接收到的消息翻译成目标语言。示例代码如下：
-
-```javascript
-conn.translateMessage({text: 'hello', languages: ['zh-Hans']})
-```
-
-### 自动翻译
-
-设置自动翻译的目标语言后，在发送消息时 SDK 会自动将文本翻译为目标语言，并将目标语言一并发送出去。
-
-示例代码如下：
-
-```javascript
-// 发送消息。
-let option = {
-    chatType: 'singleChat',
-    type: 'txt',
-    to: 'userId',
-    msg: 'hello',
-    msgConfig:{ languages: ['zh-Hans'] } // 设置目标语言。
+// conn 为已初始化并登录的 Web v4.x 实例。
+try {
+  const result = await conn.getSupportedLanguages();
+  for (const language of result.data || []) {
+    console.log(language.code, language.name, language.nativeName);
+  }
+} catch (error) {
+  console.error('查询语言失败:', error);
 }
-let msg = WebIM.message.create(option);
-conn.send(msg)
-
-// 接收消息。
-conn.addEventHandler('MESSAGE', {
-    onTextMessage: (message) => {
-        console.log('message', message.translations)
-    }
-})
 ```
 
-## 参考
+语言条目包含以下字段，列表位于 `getSupportedLanguages()` 返回结果的 `data` 中。
 
-### 设置和获取推送的目标语言
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `code` | `string` | 语言编码，例如 `zh-Hans`。 |
+| `name` | `string` | 语言名称。 |
+| `nativeName` | `string` | 该语言的本地显示名称。 |
 
-设置推送的目标语言，设置后收到的离线推送为目标语言。如果目标语言在消息里不存在，只推送原文，详见[设置推送翻译](/document/web/push/push_translation.html)。
+@tab v5.x
+
+调用 `client.chatManager.getSupportedTranslationLanguages()` 查询支持的语言。
+
+```typescript
+// client 为已初始化、注册 ChatManager 并登录的 Web v5.x 实例。
+const languages = await client.chatManager.getSupportedTranslationLanguages();
+for (const language of languages) {
+  console.log(language.code, language.name, language.nativeName);
+}
+```
+
+`getSupportedTranslationLanguages()` 直接返回 `ReadonlyArray<TranslationLanguage>`，每项字段如下：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `code` | `string` | 语言编码，例如 `zh-Hans`。 |
+| `name` | `string` | 语言名称。 |
+| `nativeName` | `string` | 该语言的本地显示名称。 |
+
+:::
+
+## 按需翻译
+
+收到文本消息后，可按需将原文翻译为目标语言，并使用结果更新展示。
+
+::: tabs#code
+
+@tab v4.x
+
+调用 `conn.translateMessage({ text, languages })`，传入待翻译文本和目标语言。以下 `receivedMessage` 为收到的文本消息；方法返回结果，不会自动更新页面展示。
+
+```javascript
+try {
+  const result = await conn.translateMessage({
+    text: receivedMessage.msg,
+    languages: ['zh-Hans'],
+  });
+  const translations = result.data?.[0]?.translations || [];
+  const translation = translations.find(item => item.to === 'zh-Hans');
+  console.log('译文:', translation?.text ?? receivedMessage.msg);
+} catch (error) {
+  console.error('翻译失败:', error);
+}
+```
+
+**按需翻译结果**：本页示例从 `result.data[0]` 读取翻译结果。
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `translations` | `Array<{ to: string; text: string }>` | 译文条目数组；to 为目标语言编码，text 为译文。 |
+| `detectedLanguage` | `{ language: string; score: number }` | 识别出的原文语言及置信度，以服务实际返回为准。 |
+
+@tab v5.x
+
+调用 `translateMessage({ message, targetLanguages })`，传入普通文本消息。该方法可用于发送前或收到后的主动翻译；只返回结果，不修改输入消息，也不更新业务消息缓存。
+
+```typescript
+import type { Message } from 'easemob-websdk';
+
+async function translateTextMessage(message: Message): Promise<void> {
+  if (message.type !== 'text') return;
+  try {
+    const result = await client.chatManager.translateMessage({
+      message,
+      targetLanguages: ['zh-Hans'],
+    });
+    const translation = result.translations.find(item => item.to === 'zh-Hans');
+    console.log('译文:', translation?.text);
+  } catch (error) {
+    console.error('翻译失败:', error);
+  }
+}
+```
+
+**按需翻译结果**：`translateMessage()` 返回 `MessageTranslationResult`：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `translations` | `ReadonlyArray<{ to: string; text: string }>` | 译文条目数组。 |
+| `detectedLanguage` | `{ language: string; score: number }（可选）` | 识别出的原文语言及置信度。 |
+
+:::
+
+## 设置自动翻译
+
+创建文本消息时设置目标语言，再发送消息。SDK 会先翻译，再将原文与译文一起发送。
+
+::: tabs#code
+
+@tab v4.x
+
+创建文本消息时，通过 `msgConfig.languages` 设置目标语言：
+
+```javascript
+const message = WebIM.message.create({
+  chatType: 'singleChat',
+  type: 'txt',
+  to: 'user2',
+  msg: 'Hello!',
+  msgConfig: { languages: ['zh-Hans', 'ja'] },
+});
+conn.send(message);
+```
+
+@tab v5.x
+
+创建普通文本消息时设置 `targetLanguages`。不传或传空数组时，不调用翻译服务。译文位于发送结果及相关回调消息的 `body.translations`；原文保留，译文不会回填到调用方传入的原消息对象。
+
+```typescript
+import type { TextMessageBody } from 'easemob-websdk';
+
+const message = client.chatManager.createTextMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  content: 'Hello!',
+  targetLanguages: ['zh-Hans', 'ja'],
+});
+try {
+  const sent = await client.chatManager.sendMessage(message);
+  const body = sent.body as TextMessageBody;
+  console.log('原文:', body.content);
+  console.log('中文译文:', body.translations?.['zh-Hans']);
+} catch (error) {
+  console.error('翻译或发送失败:', error);
+}
+```
+
+**编辑前自动翻译（v5.2.0）**：编辑普通文本消息时，在 `message.body.targetLanguages` 中设置目标语言；翻译成功后再提交编辑。不传或传空数组时不翻译。
+
+```typescript
+try {
+  const updated = await client.chatManager.modifyMessage({
+    conversationId: 'user2',
+    conversationType: 'singleChat',
+    messageId: '已发送文本消息的服务端 ID',
+    message: {
+      type: 'text',
+      body: {
+        content: 'Updated text',
+        targetLanguages: ['zh-Hans'],
+      },
+      ext: { edited: true },
+    },
+  });
+  console.log('编辑结果:', updated);
+} catch (error) {
+  console.error('翻译或编辑失败:', error);
+}
+```
+
+自动翻译失败时，不发送消息或编辑请求。发送失败通过 Promise 拒绝以及已配置的 `onFailed` 回调报告；编辑失败通过 Promise 拒绝报告。
+
+:::
+
+## 接收并展示译文
+
+接收方收到文本消息后，可以读取译文并选择展示语言。没有所需语言的译文时，可回退展示原文。
+
+::: tabs#code
+
+@tab v4.x
+
+在 `onTextMessage` 中读取实时文本消息顶层的 `translations` 数组：
+
+```javascript
+conn.addEventHandler('translation-listener', {
+  onTextMessage: message => {
+    const translations = message.translations || [];
+    const translation = translations.find(item => item.code === 'zh-Hans');
+    console.log('展示内容:', translation?.text ?? message.msg);
+  },
+});
+```
+
+**实时文本消息的译文**：`onTextMessage` 中的 `message.translations` 为 `{ code, text }` 条目数组：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `code` | `string` | 译文的语言编码。 |
+| `text` | `string` | 译文文本。 |
+
+这里描述的是实时消息接收回调。历史消息接口可能使用不同的译文包装，应按相应接口的返回结构读取。
+
+@tab v5.x
+
+在 `onMessage` 中读取普通文本消息的 `body.translations`；其他设备收到编辑通知时，可在 `onMessageUpdated` 中更新展示。当前操作设备通过 `modifyMessage()` 的 Promise 处理编辑结果。
+
+```typescript
+import type { TextMessageBody } from 'easemob-websdk';
+
+client.chatManager.addEventHandler('translation-listener', {
+  onMessage: message => {
+    if (message.type !== 'text') return;
+    const body = message.body as TextMessageBody;
+    console.log('展示内容:', body.translations?.['zh-Hans'] ?? body.content);
+  },
+  onMessageUpdated: event => {
+    if (event.message.type !== 'text') return;
+    const body = event.message.body as TextMessageBody;
+    console.log('编辑后展示内容:', body.translations?.['zh-Hans'] ?? body.content);
+  },
+});
+```
+
+**自动翻译消息的译文**：普通文本消息的 `body` 包含以下字段：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `content` | `string` | 原文。 |
+| `targetLanguages` | `string[]（可选）` | 目标语言编码列表。 |
+| `translations` | `Record<string, string>（可选）` | 语言编码到译文的映射，例如 `{ "zh-Hans": "你好" }`。 |
+
+按需翻译返回的数组与消息携带的译文映射是两种不同结构，不应混用。
+
+:::
+
+## 注意事项
+
+- 消息翻译适用于普通文本消息。Web v5.x 的 [复合消息](/document/web/message_send.html#发送复合消息) 不支持按需翻译，也不会自动翻译其中的文本分段。
+- Web v5.x 按需翻译结果由业务侧保存和展示；自动翻译的译文从发送结果、接收消息或编辑结果中获取。
+- Web v5.x 自动翻译失败会阻止发送或编辑，请处理 Promise 异常并提供重试等交互。
+- 如需设置离线推送的展示语言，参见 [设置推送翻译](/document/web/push/push_translation.html) 。
+
+## 常见错误
+
+Web v4.x 与 v5.x 的翻译错误码不同，请按实际集成版本处理，不要直接复用另一版本的错误码判断逻辑。小程序使用对应 Web SDK 版本的错误码。
+
+### v4.x
+
+以下列出与翻译相关的常见错误，更多错误参见 [v4.x 错误码](/v4/web/error.html) 。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 505 | `SERVICE_NOT_ENABLED` | 相关服务未开启。 | 当前应用未开通所调用的服务；调用翻译接口时，应检查翻译服务是否已开通。 | 根据错误描述确认未开通的服务，在环信控制台开通后重试。 |
+| 50 | `MAX_LIMIT` | 服务用量达到上限。 | 翻译用量或其他服务用量达到上限；该错误码并非翻译专用。 | 根据错误描述确认是否为翻译额度不足；若是，联系环信商务续费或增加翻译用量。 |
+| 1200 | `TRANSLATION_NOT_VALID` | 目标语言编码不合法。 | 传入的语言编码不正确或不受翻译服务支持。 | 调用 getSupportedLanguages() 查询支持的语言，使用返回的有效语言编码。 |
+| 1201 | `TRANSLATION_TEXT_TOO_LONG` | 待翻译文本过长。 | 文本长度超过单次翻译请求上限。 | 缩短或拆分待翻译文本，确保单次请求不超过 10,000 个字符。 |
+| 1204 | `TRANSLATION_FAILED` | 获取翻译服务失败。 | 翻译服务调用未成功，具体原因需结合返回信息确认。 | 检查返回的错误信息，稍后重试；若持续失败，保留日志并联系技术支持。 |
+
+### v5.x
+
+以下列出与翻译相关的常见错误，更多错误参见 [v5.x 错误码](/document/web/error.html) 。服务未开通时，可能返回通用错误码 `505` 或翻译专用错误码 `1111`，应结合 `error.code` 和 `error.message` 判断。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 505 | `SERVICE_NOT_ENABLED` | 相关服务未开通。 | 当前应用未开通所调用的服务；调用翻译接口时，应检查翻译服务是否已开通。 | 根据 error.message 确认未开通的服务，在环信控制台开通后重试。 |
+| 1110 | `TRANSLATE_PARAM_INVALID` | 翻译参数无效。 | 目标语言不合法、待翻译文本为空，或消息类型不支持翻译。 | 查询并使用有效的目标语言编码，检查文本内容，仅对普通文本消息调用翻译接口。 |
+| 1111 | `TRANSLATE_SERVICE_NOT_ENABLED` | 翻译服务未开通。 | 当前应用尚未开通翻译服务。 | 在环信控制台开通翻译服务后重试。 |
+| 1112 | `TRANSLATE_USAGE_LIMIT` | 翻译服务用量达到上限。 | 当前应用的翻译额度已用尽。 | 等待额度恢复，或联系环信商务提升配额后重试。 |
+| 1113 | `TRANSLATE_FAILED` | 翻译服务异常或翻译失败。 | 翻译服务异常或请求处理失败，具体原因需结合返回信息确认。 | 稍后重试；若持续失败，保留错误码、error.message 和 SDK 日志，联系技术支持。 |
+
+## 接口列表
+
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| `getSupportedLanguages` | `v4.x conn` | 查询支持的语言。 |
+| `translateMessage` | `v4.x conn` | 传入 text、languages，按需翻译文本。 |
+| `WebIM.message.create / conn.send` | `v4.x WebIM / conn` | 创建和发送消息，通过 msgConfig.languages 开启自动翻译。 |
+| `getSupportedTranslationLanguages` | `v5.x ChatManager` | 查询支持的语言。 |
+| `translateMessage` | `v5.x ChatManager` | 传入 message、targetLanguages，按需翻译普通文本消息。 |
+| `createTextMessage / sendMessage` | `v5.x ChatManager` | 创建和发送消息，通过 targetLanguages 开启自动翻译。 |
+| `modifyMessage` | `v5.x ChatManager` | 编辑普通文本消息，可在 body.targetLanguages 中设置目标语言。 |

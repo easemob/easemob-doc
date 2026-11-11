@@ -1,114 +1,143 @@
-# 翻译
+# 消息翻译
 
-<Toc />
+## 功能说明
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对 **文本消息** 进行按需翻译或自动翻译：
+为方便用户在聊天过程中 **翻译文本消息**，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持以下两种方式：
 
-- 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
-
-- 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
+- 按需翻译：接收方收到文本消息后，将消息内容翻译为目标语言。
+- 自动翻译：发送方设置目标语言后，SDK 在发送消息前翻译文本，将原文和译文一起发送给接收方。
 
 如下为按需翻译示例：
 
-![img](/images/ios/translation.png)
-
-:::tip
-消息翻译仅支持单消息体的文本消息，不支持 [复合消息](/document/ios/message_send.html#发送复合消息)，也不会自动翻译复合消息中的文本消息体。
-:::
+<img src="/images/ios/translation.png" width="600" >
 
 ## 功能开通
 
-文本翻译为增值服务，如需使用请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译)。
+消息翻译为增值服务，使用前请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译) 。
 
-单次翻译请求最多支持 10,000 字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 字符翻译为 4 种语言，则计费字符数为 2000 字符。
+单次翻译请求最多支持 10,000 个字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 个字符翻译为 4 种语言，计费字符数为 2,000。
 
-若传入的文本超过上限，则上报错误 400，错误提示为 “The input text is too long”。
-
-该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译)。
+该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译) 。
 
 ## 前提条件
 
-开始前，请确保满足以下条件：
+- 本文示例适用于 iOS SDK v4.x 和 v5.x；消息翻译功能自 v3.9.1 起提供。
+- 已完成 [初始化](/document/ios/initialization.html) 并登录成功。
+- 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
+- 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
 
-1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](/document/ios/quickstart.html)。
-2. [已开通翻译功能， 了解翻译服务的使用限制](#功能开通)。
-3. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-4. 了解翻译服务支持的目标语言：翻译服务由 Microsoft Azure Translation API 提供。关于翻译服务支持的目标语言，详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
+## 获取翻译服务支持的语言
 
-## 技术原理
+你可以调用 `fetchSupportedLanguages:` 查询翻译服务支持的语言，并从返回结果中选取目标语言编码。无论是按需翻译还是自动翻译，都需要在翻译前确认目标语言受支持。
 
-iOS SDK 支持你通过调用 API 在项目中实现如下功能：
-
-- `fetchSupportedLanguages`：获取支持的翻译语言；
-- 按需翻译：接收方在收到文本消息后调用 `translateMessage` 进行翻译；
-- 自动翻译：发送方发送消息之前设置 `EMTextMessageBody` 中的 `targetLanguages` 字段为目标语言，然后发送消息，接收方会收到消息原文和译文。
-
-## 实现方法
-
-### 获取翻译服务支持的语言
-
-SDK 支持所有微软翻译服务支持的语言，你可以使用 EMChatManager 模块的如下接口获取翻译功能支持的目标语言。
+已知有效语言编码时，无需在每次翻译前重复查询。
 
 ```objectivec
-/**
- *  获取翻译服务支持的语言。
- *  @param aCompletionBlock 完成的回调。
- *
- */
-- (void)fetchSupportedLanguages:(void(^_Nullable)(NSArray<EMTranslateLanguage*>* _Nullable languages,EMError* _Nullable error))aCompletionBlock
-```
-
-使用过程如下:
-
-```objectivec
-// 异步方法
-[[[EMClient sharedClient] chatManager] fetchSupportedLanguages:^(NSArray<EMTranslateLanguage *> * _Nullable languages, EMError * _Nullable error) {
-
+[[EMClient sharedClient].chatManager fetchSupportedLanguages:^(NSArray<EMTranslateLanguage *> *languages, EMError *error) {
+    if (error) {
+        NSLog(@"查询语言失败：%@", error.errorDescription);
+        return;
+    }
+    for (EMTranslateLanguage *language in languages) {
+        NSLog(@"%@：%@", language.languageCode, language.languageName);
+    }
 }];
 ```
 
-### 翻译文本消息
+`fetchSupportedLanguages:` 的成功回调返回 `NSArray<EMTranslateLanguage *> *`：
 
-#### 点击文本翻译
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `languageCode` | `NSString *` | 语言编码，例如 `zh-Hans`。 |
+| `languageName` | `NSString *` | 语言名称。 |
+| `languageNativeName` | `NSString *` | 该语言的原生名称。 |
 
-用户可以在收到文本消息后调用消息翻译接口进行翻译。接口定义如下：
+## 按需翻译
 
-```objectivec
-/**
- *  翻译消息，异步方法。
- *
- *  @param aMessage         消息对象。
- *  @param aLanguages       要翻译的目标语言 code，EMTranslateLanguage 类中的 languageCode 数组。
- *  @param aCompletionBlock 该方法完成调用的回调。如果该方法调用失败，会包含调用失败的原因。
- */
-- (void)translateMessage:(EMChatMessage *)aMessage
-         targetLanguages:(NSArray<NSString*>*)aLanguageCodes
-              completion:(void (^)(EMChatMessage *message, EMError *error))aCompletionBlock;
-```
+接收方调用 `translateMessage:targetLanguages:completion:` 翻译收到的文本消息。翻译成功后，从回调返回消息的文本消息体中读取译文。按需翻译不会将译文自动发送给对端。
 
-调用过程如下：
+以下 `receivedMessage` 为收到的普通文本消息：
 
 ```objectivec
-// 消息必须为文本消息。
-[[[EMClient sharedClient] chatManager] translateMessage:msg targetLanguages:@[@"en",@"ja"] completion:^(EMChatMessage *message, EMError *error) {
-    // 翻译后的译文信息获取。
-    EMTextMessageBody* body = (EMTextMessageBody*)message.body;
-    NSDictionary* translations = body.translations;
-}];
+[[EMClient sharedClient].chatManager translateMessage:receivedMessage
+    targetLanguages:@[@"en", @"ja"]
+    completion:^(EMChatMessage *message, EMError *error) {
+        if (error) {
+            NSLog(@"翻译失败：%@", error.errorDescription);
+            return;
+        }
+        EMTextMessageBody *body = (EMTextMessageBody *)message.body;
+        NSLog(@"英文译文：%@", body.translations[@"en"]);
+    }];
 ```
 
-### 设置自动翻译
+## 设置自动翻译
 
-用户可以在发送文本消息时，设置消息的目标语言，消息将在翻译后进行发送，接收方收到的消息将包含译文信息。使用过程如下：
+创建文本消息时设置目标语言，再发送消息。SDK 会先翻译，再将原文与译文一起发送。
+
+通过文本消息体的 `targetLanguages` 属性设置目标语言。以下为单聊示例：
 
 ```objectivec
-EMTextMessageBody* msgBody = [[EMTextMessageBody alloc] initWithText:@"你好"];
-msgBody.targetLanguages = @[@"en",@"ja"];
-EMMessage*message = [[EMMessage alloc] initWithConversationID:@"to" from:@"from" to:@"to" body:msgBody ext:nil];
-[[[EMClient sharedClient] chatManager] sendMessage:message progress:nil completion:nil];
+EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"你好"];
+body.targetLanguages = @[@"en", @"ja"];
+EMChatMessage *message = [[EMChatMessage alloc]
+    initWithConversationID:@"user2"
+    from:[EMClient sharedClient].currentUsername
+    to:@"user2"
+    body:body
+    ext:nil];
+[[EMClient sharedClient].chatManager sendMessage:message
+    progress:nil
+    completion:^(EMChatMessage *sentMessage, EMError *error) {
+        if (error) {
+            NSLog(@"发送失败：%@", error.errorDescription);
+        }
+    }];
 ```
-## 参考
 
-### 设置和获取推送的目标语言
+## 接收并展示译文
 
-设置推送的目标语言，设置后收到的离线推送为目标语言。如果目标语言在消息里不存在，只推送原文，详见[设置推送翻译](/document/ios/push/push_translation.html)。
+接收方收到文本消息后，可以读取译文并选择展示语言。没有所需语言的译文时，可回退展示原文。
+
+在消息接收回调中，读取普通文本消息体的 `translations`。以下 `receivedMessage` 为收到的普通文本消息：
+
+```objectivec
+EMTextMessageBody *body = (EMTextMessageBody *)receivedMessage.body;
+NSString *displayText = body.translations[@"en"] ?: body.text;
+NSLog(@"展示内容：%@", displayText);
+```
+
+`EMTextMessageBody.translations` 为可空的 `NSDictionary<NSString *, NSString *> *`：
+
+| 项目 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| 键 | `NSString *` | 译文的语言编码，例如 `en`。 |
+| 值 | `NSString *` | 对应语言的译文。 |
+
+`body.text` 保留原文；`body.targetLanguages` 为可空的目标语言编码数组 `NSArray<NSString *> *`。
+
+## 注意事项
+
+- 翻译仅适用于普通文本消息。v5.x 的 [复合消息](/document/ios/message_send.html#发送复合消息) 不支持按需翻译，也不会自动翻译其中的文本消息体。
+- 请先判断回调中的 `error`，再读取翻译或发送结果。
+- 如需设置离线推送的展示语言，参见 [设置推送翻译](/document/ios/push/push_translation.html) 。
+
+## 常见错误
+
+v4.x 和 v5.x 的以下翻译错误码一致，错误名称以对应平台的错误码文档为准。更多错误参见 [v4.x 错误码](/v4/ios/error.html) 和 [v5.x 错误码](/document/ios/error.html) 。
+
+| 错误码 | 错误信息 | 描述 | 可能原因 | 解决方法 |
+| :--- | :--- | :--- | :--- | :--- |
+| 1110 | `EMErrorTranslateParamError` | 翻译参数错误。 | 传入的翻译参数不符合接口要求。 | 结合错误描述和 SDK 日志检查翻译接口的参数；目标语言应使用查询接口返回的有效语言编码。 |
+| 1111 | `EMErrorTranslateServiceNotEnabled` | 翻译服务未启用。 | 当前应用尚未开通翻译服务。 | 在 [环信控制台](https://console.easemob.com/user/login) 开通翻译服务后重试。 |
+| 1112 | `EMErrorTranslateUsageLimit` | 翻译用量达到上限。 | 当前应用的翻译额度已用尽。 | 联系环信商务续费或增加翻译用量后重试。 |
+| 1113 | `EMErrorTranslateServiceFail` | 消息翻译失败。 | 具体原因需结合错误描述和 SDK 日志确认。 | 保留错误码、错误描述和 SDK 日志，排查失败原因；若持续失败，联系技术支持。 |
+
+## 接口列表
+
+| API | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| `fetchSupportedLanguages:` | `EMChatManager` | 查询支持的语言。 |
+| `translateMessage:targetLanguages:completion:` | `EMChatManager` | 按需翻译普通文本消息。 |
+| `targetLanguages` | `EMTextMessageBody` | 设置/获取目标语言。 |
+| `translations` | `EMTextMessageBody` | 获取译文映射。 |
