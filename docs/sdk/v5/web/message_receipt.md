@@ -187,10 +187,6 @@ The following table lists the limitations of group message read receipts:
 | Group size   | 200 members | This feature currently supports groups with up to 200 members. If the group size exceeds this limit, group messages may no longer produce valid read receipt statistics. If the server returns `limit send group ack msg`, the SDK may return error code `4` with the key `SERVICE_LIMIT_EXCEEDED`. |
 | Who can view the read count   | Message sender | By default, only the sender can view the read count or list of members who have read a group message. To allow all group members to view this information, contact the EasyIM business manager to enable the option. |
 
-:::tip
-A message's read receipt remains valid for as long as the message is stored on the server. Read receipts can be sent throughout the server-side storage period. The storage period depends on your plan. For details, see [EasyIM Plan Features](/product/product_package_feature.html). 
-:::
-
 #### Step 1: Send a group message that requires read receipts
 
 When sending a group message, set `needReadReceipt: true` during message creation to request read receipts after group members read it.
