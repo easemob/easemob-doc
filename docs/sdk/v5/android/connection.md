@@ -249,6 +249,9 @@ Monitor the automatic synchronization state after login for conversations, frien
 - Register `EMConnectionListener` before calling `loginWithToken` to avoid missing connection, token, and synchronization state callbacks.
 - Do not immediately call the login API again after a weak-network disconnection. The SDK automatically reconnects in recoverable scenarios.
 - Use `isConnected()` to query the current connection state and `isLoggedIn()` to query the login state. Prefer listener callbacks to drive UI updates.
+  
+  **Note**: `isConnected()` is generally used for UI connection status indicators. There is **no need** to manually verify the connection status before calling APIs like sending messages or joining groups/chat rooms, as the SDK handles connection checks internally and automatically retries unfinished operations after reconnecting.
+  
 - Renew the token promptly after receiving `onTokenWillExpire`. Log in again after receiving `onTokenExpired`.
 - Use `onLogout` to handle unrecoverable abnormal logouts caused by account, device, or service restrictions, and display a specific notification based on the error code.
 - Call `removeConnectionListener` when monitoring is no longer needed to avoid duplicate callbacks and memory leaks.
