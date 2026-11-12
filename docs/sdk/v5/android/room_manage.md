@@ -40,9 +40,9 @@ To destroy a chat room, call the server-side REST API for [destroying a chat roo
 To join a chat room, follow these steps:
 
 1. Call the `asyncFetchPublicChatRoomsFromServer` method to retrieve the chat room list from the server and find the ID of the chat room you want to join.
-2. Call the `joinChatRoom` method and pass the chat room ID to apply to join the chat room. When a new member joins, the other members receive the `onMemberJoined` callback.
+2. Call the `joinChatRoom` method and pass the chat room ID to apply to join the chat room. After a new member joins, the other members receive the `onMemberJoined` callback.
 
-Example code:
+The following example shows how to retrieve the chat room list and join a chat room:
 
 ```java
 // Retrieve the app's chat room list.
@@ -75,7 +75,18 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-You can also call the `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` method to include extension information when joining a chat room and specify whether to leave all other chat rooms. After this method is called, other members in the chat room receive the `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` callback. If the user includes extension information when joining the chat room, the other members can obtain it from the callback.
+#### Join a chat room with extension information
+
+To pass custom business information when joining a chat room or specify whether to leave other chat rooms the user has joined, call the `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` overload.
+
+The overload includes the following two key parameters:
+
+- `ext`: Custom extension information passed when joining the chat room.
+- `leaveOtherRooms`: Whether to leave other chat rooms the user has joined when joining the current chat room.
+
+After a user successfully joins the chat room, the other members receive the `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` callback. If extension information was passed when joining, the other members can obtain it from the callback's `ext` parameter.
+
+The following example shows how to join a chat room with extension information and obtain the extension information passed by other members when they join:
 
 ```java
 String ext= "your ext info";
