@@ -29,17 +29,26 @@ The following examples use a `ChatRoom` object for a single chat room where poss
 
 You can retrieve chat room details through a `ChatRoom` object:
 
-- `getInfo`: Retrieves details of the current chat room.
-- `refresh`: Refreshes and returns details of the current chat room. This is equivalent to `getInfo`.
+- `getInfo()`: Retrieves details of the current chat room.
+- `refresh()`: Requests and returns the latest chat room details. Use it in the same way as `getInfo()`.
 
 ```typescript
 const chatRoom = client.chatRoomManager.getChatRoom('chatroomId');
 
+// Retrieve chat room details.
+// To request the latest details again, you can also call chatRoom.refresh().
 const detail = await chatRoom.getInfo();
-console.log(detail);
 
-const latestDetail = await chatRoom.refresh();
-console.log(latestDetail);
+const announcement = await chatRoom.getAnnouncement();
+const muteStatus = await chatRoom.checkIfInMuteList();
+const isInAllowList = await chatRoom.checkIfInAllowList();
+
+console.log('Chat room details:', detail);
+console.log('Chat room announcement:', announcement.announcement);
+console.log('All-member mute enabled:', detail.muteAllMembers);
+console.log('Current user permission:', detail.permissionType);
+console.log('Current user mute status:', muteStatus);
+console.log('Current user on the allowlist:', isInAllowList);
 ```
 
 The chat room details are returned as `ChatRoomDetail`, whose main fields are as follows:
@@ -51,22 +60,21 @@ The chat room details are returned as `ChatRoomDetail`, whose main fields are as
 | Basic information | `description` | String | Chat room description. |
 | Basic information | `owner` | UserInfo | Information about the chat room owner. |
 | Basic information | `ext` | String | Chat room extension information. |
-| Basic information | `announcement` | String | Chat room announcement. | 
 | Basic information | `createdAt` | Number | Chat room creation timestamp. The specific unit is determined by the server response. |
 | Configuration | `maxMembers` | Number | Maximum number of chat room members. |
 | Configuration | `disabled` | Boolean | Whether the chat room is disabled. |
+| Configuration | `muteAllMembers` | Boolean | Whether all-member mute is enabled for the chat room. |
 | Basic statistics | `memberCount` | Number | Current number of members. |
 | Current-user information | `permissionType` | String | Permission type of the current user in the chat room. Possible values are `owner`, `admin`, `member`, and `none`. |
-| Current-user information | `currentUserStatus` | Object | Snapshot of the current user's status in the chat room, such as whether the user is on the allowlist or muted. |
 
-`currentUserStatus` contains the following main fields:
+In SDK v5.1.2 and later, chat room details no longer include the announcement or return the current user's individual mute status, allowlist status, or mute expiration time through `currentUserStatus`:
 
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `inAllowlist` | Boolean | Whether the current user is on the allowlist. |
-| `muted` | Boolean | Whether the current user is muted. |
-| `muteExpireAt` | Number | Time when the current user's mute expires. |
-| `permissionType` | String | Permission type of the current user in the chat room. |
+- To retrieve the announcement, call `chatRoom.getAnnouncement`. See [Retrieve the chat room announcement](#retrieve-the-chat-room-announcement).
+- To check whether the current user is on the allowlist, call `chatRoom.checkIfInAllowList`. See [Check whether the current user is on the chat room allowlist](room_members.html#check-whether-the-current-user-is-on-the-chat-room-allowlist).
+- To check whether the current user is individually muted, call `chatRoom.checkIfInMuteList`. See [Check whether the current user is muted](room_members.html#check-whether-the-current-user-is-muted).
+- The current user's chat room permission is still available through `permissionType`.
+- Use `muteAllMembers` to determine whether all-member mute is enabled.
+- The `ChatRoomCurrentUserStatus` type is removed together with the `currentUserStatus` field.
 
 ### Update chat room information
 

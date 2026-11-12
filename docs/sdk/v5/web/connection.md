@@ -161,11 +161,11 @@ client.addEventHandler('connection-listener', {
 
 ### Automatic reconnection
 
-After a successful login, the SDK maintains the persistent connection and attempts to reconnect automatically in recoverable scenarios, such as when the network recovers, a heartbeat fails, or the connection closes abnormally.
+After a successful login, the SDK maintains the persistent connection and attempts to reconnect automatically only in recoverable scenarios, such as when the network recovers, a heartbeat fails, or the connection closes abnormally.
 
 During automatic reconnection, the SDK triggers events such as `onConnecting`, `onDisconnected`, and `onConnected`. If automatic reconnection reaches the maximum number of attempts, the SDK triggers `onReconnectFailed`. After `onReconnectFailed` is triggered, the SDK stops automatically reconnecting. Your app can prompt the user to check the network or log in again according to its business strategy.
 
-Not all disconnection scenarios should rely on automatic reconnection. For scenarios such as token expiration, authentication failure, account-state changes, device limits, or service quota limits, your app must handle the error information in the connection event.
+Not all disconnection scenarios should rely on automatic reconnection. For scenarios such as token expiration, authentication failure, account-state changes, device limits, or service quota limits, your app must handle the error information in the connection event. Starting from SDK 5.1.2, after a user logs out normally or is kicked offline, the Demo page displays the corresponding status. The SDK no longer triggers automatic reconnection when the page or network recovers; you can log in again to continue using the service.
 
 ### Disconnection reasons and handling
 
@@ -184,7 +184,7 @@ When the SDK disconnects because of authentication failure, token expiration, an
 | The account is bound to another device, or the login resource changes | `213` / `AUTH_BIND_ANOTHER_DEVICE`, or `220` / `USER_DEVICE_CHANGED` | Handle according to your business strategy. | Generally, log in again or direct the user to resolve the device state. |
 | The DAU, MAU, or number of online users reaches the limit | `4` / `SERVICE_LIMIT_EXCEEDED` | No. Resolve the quota limit first. | Logging in again cannot resolve this issue. Check the app quota or contact the EasyIM business manager. |
 | Automatic reconnection reaches the maximum number of attempts | No fixed business error code. The state is `reconnectFailed`, and the reason may be `limit`. | You may log in again according to your business strategy. | We recommend checking the network and authentication state first. |
-| The current runtime environment is offline | No fixed error code. The reason is generally `offline`. | You do not need to log in again immediately. | The SDK pauses reconnection and attempts to restore the connection after the network recovers. |
+| The current runtime environment is offline | No fixed error code. The reason is generally `offline`. | You do not need to log in again immediately. | For conversations that are still recoverable, the SDK pauses reconnection and continues trying after the network recovers. Sessions that have ended are not reconnected. |
 | The user calls `logout` | No error code | Log in again to continue using the SDK. | After an active logout, the SDK does not automatically restore the current connection. |
 
 ### Token lifecycle
@@ -219,7 +219,7 @@ Offline-message synchronization events are connection events. Register their lis
 
 - We recommend registering a connection event listener before calling `login` to avoid missing connection-establishment, automatic-reconnection, offline-message synchronization, or token-lifecycle events.
 - Your app can use `getConnectionState` to determine the current connection state, but connection events are recommended for driving UI updates.
-- After the network disconnects, the SDK pauses reconnection. When the network recovers, the SDK attempts to restore the connection according to the current login state.
+- After the network disconnects, the SDK pauses reconnection. Starting from SDK 5.1.2, after a user logs out normally or is kicked offline, the Demo page displays the corresponding status. The SDK no longer triggers automatic reconnection when the page or network recovers; you can log in again to continue using the service.
 - Do not call `login` again while the SDK is connected or connecting. To switch users, call `logout` first.
 - Renew the token as soon as possible after receiving `onTokenWillExpire`. Log in again after receiving `onTokenExpired`.
 

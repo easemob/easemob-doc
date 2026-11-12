@@ -76,28 +76,30 @@ console.log(profile.avatarUrl);
 
 ### Retrieve all user attributes from the server
 
-Call `getUserInfoByUserId` to retrieve all attributes of one or more users from the server. Each call can retrieve the user attributes of up to 100 users. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+Call `getUserInfoByUserId` to retrieve all attributes of one or more users from the server. Each call can retrieve the user attributes of up to 100 users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
 
 ```typescript
 // Pass no more than 100 user IDs per call.
 const users = await client.userInfoManager.getUserInfoByUserId({
-  userIds: ['user1', 'user2'],
+  userIds: ['user1', 'unknown-user', 'user2'],
 });
 
+// Results follow the request order. A missing profile returns { userId: 'unknown-user' }.
 console.log(users);
 ```
 
 ### Retrieve specified user attributes from the server
 
-Call `getUserInfoByAttribute` to retrieve one or more attributes of specified users. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+Call `getUserInfoByAttribute` to retrieve one or more attributes of specified users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
 
 ```typescript
 const users = await client.userInfoManager.getUserInfoByAttribute({
-  userIds: ['user1'],
+  userIds: ['user1', 'unknown-user'],
   attributes: ['nickname', 'avatarUrl'],
 });
 
 console.log(users[0]?.nickname, users[0]?.avatarUrl);
+console.log(users[1]); // { userId: 'unknown-user' }
 ```
 
 ## Read user attributes from local memory

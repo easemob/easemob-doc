@@ -1,5 +1,13 @@
 # Product Dynamics
 
+## 2026-09
+
+#### EasyIM Web SDK v5.1.2 release
+
+| Update | Description | Release date | Related documentation |
+| :--- | :--- | :--- | :--- |
+| Web SDK v5.1.2 release | - **Enhanced log management**: Disable SDK console logs separately and receive sanitized structured SDK logs through callbacks. See [SDK Logs](/sdk/v5/web/log.html).<br/> - **Query all-member mute status for a chat room**: Chat room details indicate whether all-member mute is enabled. See [Retrieve chat room details](/sdk/v5/web/room_attributes.html#retrieve-chat-room-details).<br/> - **Customize the login timeout**: The default total login timeout is 30 seconds. You can customize it when calling `login`. See [Login](/sdk/v5/web/login.html#login). | 2026-9-20 | [Web SDK v5.1.2 release notes](/sdk/v5/web/releasenote.html#v5-1-2-dev-2026-9-20-development) |
+
 ## 2026-08
 
 #### EasyIM Android/iOS/Web SDK v5.0.0 release
