@@ -35,7 +35,7 @@ The cache update process is as follows:
 Before you begin, ensure that the following requirements are met:
 
 - You have initialized the SDK. For details, see [Quickstart](quickstart.html).
-- You registered `ChatClient`, `UserInfoManager`, `GroupManager`, `ChatManager`, and `ContactManager` during SDK initialization.
+- You registered `UserInfoManager` and `GroupManager` during SDK initialization. To monitor friend attribute updates or message events, also register `ContactManager` or `ChatManager`, respectively. `ChatClient` is the SDK client entry point and does not need to be registered as a Manager.
 - You understand the relevant EasyIM limitations. For details, see [Limitations](/product/limitation.html).
 
 ## Enable automatic user information management

@@ -162,7 +162,6 @@ Call `EMConversation#conversationName` and `EMConversation#conversationAvatar` t
 
 - One-to-one conversation: Usually the peer user's nickname and avatar.
 - Group conversation: Usually the chat group name and avatar.
-- Chat room conversation: Usually the chat room name and avatar.
 - If the related user or chat group information has not been synchronized or loaded, or is unavailable, the properties may be empty strings.
 
 ```swift

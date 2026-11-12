@@ -128,7 +128,7 @@ To manage the current user's subscriptions, call `getSubscribedPresenceList` to 
 
 ```typescript
 const result = await client.presenceManager.getSubscribedPresenceList({
-  // Current page number, starting from 1.
+  // Current page number, starting from 0.
   pageNum: 0,
   // Number of users returned per page. The value range is [1,100], and the default is 1.
   pageSize: 50,

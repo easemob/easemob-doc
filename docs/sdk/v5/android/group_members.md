@@ -641,7 +641,7 @@ After a group member operation succeeds, the SDK triggers the corresponding `EMG
 | [`getUsers`](#retrieve-member-ids-from-a-local-chat-group-object) | `EMGroup` | Retrieve the user IDs of the group owner, admins, and regular members contained in the chat group object. |
 | [`asyncSetGroupMemberAttributes`](#set-custom-group-member-attributes) | `EMGroupManager` | Set custom group member attributes. |
 | [`asyncFetchGroupMemberAllAttributes`](#retrieve-a-group-members-custom-attributes) | `EMGroupManager` | Retrieve all custom attributes of a single group member. |
-| [`asyncFetchGroupMembersAttributes`](#retrieve-a-single-group-members-custom-attributes) | `EMGroupManager` | Retrieve specified or all custom attributes of multiple group members. |
+| [`asyncFetchGroupMembersAttributes`](#retrieve-custom-group-member-attributes-by-attribute-key) | `EMGroupManager` | Retrieve specified or all custom attributes of multiple group members. |
 | [`asyncChangeOwner`](#transfer-chat-group-ownership) | `EMGroupManager` | Transfer chat group ownership. |
 | [`asyncAddGroupAdmin`](#add-a-group-admin) / [`asyncRemoveGroupAdmin`](#remove-a-group-admin) | `EMGroupManager` | Add or remove a group admin. |
 | [`asyncGetGroupFromServer`](#retrieve-the-group-admin-list) | `EMGroupManager` | Retrieve the latest chat group details from the server. |

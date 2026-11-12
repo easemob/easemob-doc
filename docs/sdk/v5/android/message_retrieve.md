@@ -99,7 +99,7 @@ The parameters are described below:
 
 ```java
 String conversationId = " ";
-EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
+EMConversation.EMConversationType type = EMConversation.EMConversationType.GroupChat;
 EMFetchMessageOption option = new EMFetchMessageOption();
 // For example, save the retrieved messages to the database.
 //option.setIsSave(true);

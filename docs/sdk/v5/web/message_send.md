@@ -1186,7 +1186,7 @@ await client.chatManager.sendMessage(message);
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`addEventHandler`](#api-list) | `ChatClient` | Registers an event listener. |
+| [`addEventHandler`](message_receive.html#monitor-message-events) | `ChatClient` | Registers an event listener. |
 | [`createTextMessage`](#send-text-messages) | `ChatManager` | Creates a text message. |
 | [`createImageMessage`](#send-image-messages) | `ChatManager` | Creates an image message. GIF images are also created through this API. |
 | [`createVoiceMessage`](#send-voice-messages) | `ChatManager` | Creates a voice message. |

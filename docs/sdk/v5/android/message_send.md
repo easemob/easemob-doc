@@ -168,10 +168,10 @@ An image message typically involves the following three image resources:
 
 The process for sending an image message is as follows:
 
-1. Obtain the local URI of the image.
+1. Obtain the local file path of the image.
 2. Call `EMMessage#createImageSendMessage` to create an image message.
    
-   When creating the message, pass the image's local URI, a flag indicating whether to send the original image, and the recipient's user ID. For a group or chat room message, pass the group ID or chat room ID, respectively.
+   When creating the message, pass the image's local file path, a flag indicating whether to send the original image, and the recipient's user ID. For a group or chat room message, pass the group ID or chat room ID, respectively.
 
    The `sendOriginalImage` parameter controls the image resource that is actually uploaded. `true` means the SDK uploads the original image, while `false` means it uploads the large image.
 
@@ -210,7 +210,7 @@ EMClient.getInstance()
 
 | Parameter                | Type      | Required | Description                                                         |
 | ------------------- | --------- | --------- | ------------------------------------------------------------ |
-| `imagePath`          | `Uri`     | Yes      | The local URI of the image, typically obtained through the system gallery or file picker.           |
+| `imagePath`          | `String`  | Yes      | The local file path of the image. |
 | `sendOriginalImage` | `boolean` | Yes      | Whether to send the original image. `true` uploads the original image, and `false` uploads the large image. Set this value based on image quality and upload traffic requirements. |
 | `conversationId`    | `String`  | Yes      | Target conversation ID. The peer user ID for one-to-one chat, group ID for group chat, or chat room ID for a chat room. |
 

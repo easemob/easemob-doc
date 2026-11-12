@@ -174,7 +174,6 @@ Call `EMConversation#getConversationName()` and `EMConversation#getConversationA
 
 - One-to-one conversation: The peer user's nickname and avatar.
 - Group conversation: The chat group name and avatar.
-- Chat room conversation: Usually the chat room name and avatar.
 - If the relevant data has not yet been synchronized, these methods may return an empty string.
 
 ```java
