@@ -37,6 +37,7 @@ The following table describes the editable content supported by each message typ
     "eventType": "chat",
     "chat_type": "edit",
     "security": "19b85beee242a1266c87ab84c6c3883d",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1418038712905770616",
         "ext": {
@@ -76,6 +77,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -105,6 +107,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "36583253ca0d3a718388f1134b180baf",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415008466669405936",
         "ext": {
@@ -146,6 +149,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.         |
@@ -178,6 +182,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "78708dd54808525a8a4c0e51bacec2c2",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1414988420945545172",
         "ext": {
@@ -225,6 +230,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -255,6 +261,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "d2575840b44fb1b67f2911bd69a56473",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415000223524062680",
         "ext": {
@@ -299,6 +306,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -329,6 +337,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "9cf75f2e2dec09ab70df4ced8caa2148",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009139259606640",
         "ext": {
@@ -375,6 +384,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -405,6 +415,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "8ae190480ff8f4206eece47665e1eb49",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415009594568083068",
         "ext": {
@@ -447,6 +458,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -477,6 +489,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "3539b3b166e2f3401076664629d98ef1",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415001054172415464",
         "ext": {
@@ -524,6 +537,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |
@@ -554,6 +568,7 @@ Webhook request body fields:
     "eventType": "chat",
     "chat_type": "edit",
     "security": "989b921d92b411d3c30364ccda87aad4",
+    "os": "ios",
     "payload": {
         "edit_message_id": "1415010541239273084",
         "ext": {
@@ -602,6 +617,7 @@ Webhook request body fields:
 | `eventType`       | String | `chat`: Uplink message; `chat_offline`: Offline message.                      |
 | `chat_type`       | String   | `edit`, indicating message editing. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Configure webhook rules in the EasyIM Console](callback_postsending.html#webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message editing operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                         |
 | `from`            | String   | User ID of the message sender.                                     |
 | `to`              | String   | Message recipient.<br/> - For a one-to-one chat, the recipient user ID;<br/> - For a group chat, the chat group ID;<br/> - For a chat room, the chat room ID.   |

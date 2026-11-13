@@ -27,6 +27,7 @@ The following example shows a request generated when a group message read receip
     "channel_user": "XXXX#XXXX_tst@easemob.com",
     "chat_type": "read_ack",
     "security": "bc392b82e70e24cc1ea29e08aa41765d",
+    "os": "ios",
     "content_type": "chat:ack:read",
     "payload": {
         "ext": {},
@@ -54,6 +55,7 @@ The following example shows a request generated when a group message read receip
 | `channel_channel` | String   | Read receipt for a group message, in the format `App Key_group ID@conference.easemob.com`, such as `easemob-demo#wang_277721224642561@conference.easemob.com` in the example.|
 | `eventType`       | String | `chat`: An uplink message.                      |
 | `security`  | String   | Signature in the format `MD5（callId+secret+timestamp）`. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that sends the group message read receipt. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `payload`   | object   | Contains:<br/> - `ext`: Message extension field<br/> - `ack_message_id`: Message ID<br/> - `msg_config.allow_group_ack`: Whether a group message read receipt is required <br/> - `type`: `read_ack` indicates a message read receipt.|
 | `host`      | String   | Server name.                                                 |
 | `appkey`    | String   | Unique identifier of the app registered in the EasyIM Console.                         |
