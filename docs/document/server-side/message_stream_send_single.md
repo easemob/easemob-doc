@@ -127,7 +127,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/stream_message/user' \
 | `from` | String | 是   | 消息发送方的用户 ID。默认为 `admin`。<Container type="tip" title="提示"><br/>- 服务器不会校验该用户 ID 是否存在。即使传入不存在的 ID，消息仍会正常下发。<br/>- 服务器不会检查接收方是否已将发送方加入黑名单，也不会校验发送方是否被禁言。<br/>- 若传入空字符串 ("")，请求将失败。</Container> |
 | `to`   | String | 是   | 消息接收方的用户 ID。<br/><Container type="tip" title="提示">服务器不会校验该用户 ID 是否存在。即使传入不存在的 ID，消息仍会正常下发。</Container> |
 | `body` | JSON   | 是   | 消息内容。字段说明请见下方 `body` 参数详情。                        |
-| `ext`  | JSON   | 否   | 消息扩展字段，可用于传递自定义数据。不允许为 `null`。服务端会以 **首个分片** 的 `ext` 为准，后续分片的该字段会被透传。|
+| `ext`  | JSON   | 否   | 消息扩展字段，用于传递自定义数据。传入时应为 JSON 对象，无自定义数据可传 `{}`。每个分片可携带各自的 `ext`，服务端会将其随当前分片透传。|
 
 请求体中的 `body` 字段说明详见下表。
 
