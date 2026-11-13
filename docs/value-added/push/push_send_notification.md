@@ -10,6 +10,8 @@
 - [向指定标签下的用户群推送通知](#按标签推送用户群)
 - [向全量用户发送推送通知](#全量推送)
 
+以上接口均可通过 `pushMessage.vivo.addBadge` 配置 vivo 数字角标，仅在通知实际通过 vivo 厂商通道下发时生效。使用条件及参数说明详见 [vivo 推送说明](push_notification_config.html#vivo-推送说明)，请求示例见 [异步批量推送多用户](#异步批量推送多用户)。
+
 **推送任务说明**
 
 调用 [全量推送](#全量推送) 和 [按标签推送](#按标签推送用户群)  接口以及在 [环信控制台创建推送任务](/value-added/push/push_task_create.html) 时，均会创建推送任务，受以下限制：
@@ -312,6 +314,8 @@ POST https://{host}/{org_name}/{app_name}/push/single
 
 #### 请求示例
 
+以下示例通过 `vivo.addBadge: true` 开启 vivo 数字角标，通知经 vivo 厂商通道到达设备后，角标数字自动加 1。其他接口也可在 `pushMessage.vivo` 中添加相同配置；例如，`strategy: 3` 时，仅通过 vivo 通道下发的通知使用该配置，在线通过环信通道下发时不使用该配置。
+
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
@@ -326,7 +330,7 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
         "subTitle": "Hello",
         "content": "Hello",
         "vivo": {
- 
+            "addBadge": true
         }
     }
 }'
@@ -487,8 +491,7 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task' \
     "pushMessage": {
         "title": "Hello1234",
         "subTitle": "Hello",
-        "content": "Hello",
-        "vivo": {}
+        "content": "Hello"
     }
 }'
 ```

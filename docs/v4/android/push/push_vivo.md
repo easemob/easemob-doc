@@ -27,6 +27,7 @@
 | 应用包名     | String | 是     | VIVO App package name。该参数仅对离线推送有效。   |
 | Activity| String | 否     | 点击通知后的动作。 该参数仅对离线推送有效。 |
 | 推送类型     | String |  否    |可选择 **运营消息** 或 **系统消息**。该参数仅对离线推送有效。 |
+| 角标数字 | Boolean | 否 | 设置通知到达设备后是否使应用图标的数字角标自动加 1，**仅对 IM 离线推送有效**：<br/>  - **自动加1**：对应 `addBadge: true`，角标数字自动加 1。<br/>  - **不变**（默认）：对应 `addBadge: false`，该条通知不改变角标数字，不表示清零。历史证书默认保持原有行为。  <br/>使用前，需在 vivo 侧开通数字角标能力，并按 [vivo 桌面角标设置方法](https://dev.vivo.com.cn/documentCenter/doc/788) 完成应用的系统角标 API 对接，确保设备允许显示数字角标。  若使用 **即时推送**服务通过 vivo 厂商通道发送通知，请另行配置 [`pushMessage.vivo.addBadge`](/value-added/push/push_notification_config.html#vivo-推送说明)。|
 
 ## **步骤三 集成 VIVO 推送 SDK**
 
