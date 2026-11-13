@@ -21,17 +21,6 @@ Before you begin, ensure that the following requirements are met:
 
 To retrieve the latest conversation data, your app should automatically synchronize it after login, monitor synchronization completion, and then read the local conversation list.
 
-### Conversation-related options
-
-During initialization, you can set the following conversation-related options in `EMOptions`:
-
-| Option | Description |
-| :--- | :--- |
-| `enableChatroomConversation` | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Read the `EMOptions#enableChatroomConversation` property to query the current configuration. |
-| `deleteMessagesOnLeaveChatroom` | Sets whether to delete a chat room's local messages when the user actively or passively leaves the chat room.<br/> - (Default) `true`: Deletes local messages.<br/> - `false`: Retains local messages. |
-| `loadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
-| `autoLoadConversations` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
-
 ### Automatically synchronize the conversation list after login
 
 The default value of `EMOptions#dataSyncType` is `.conversations`. After the user logs in successfully, the SDK automatically synchronizes server-side conversation data and writes it locally.
@@ -88,6 +77,17 @@ EMClient.shared().removeDelegate(syncListener)
 ```
 
 `syncDataFinished(_:type:)` is triggered when synchronization succeeds, fails, times out, or ends because of a disconnection. Only `error == nil` indicates that the synchronization succeeded.
+
+### Conversation-related options
+
+During initialization, you can set the following conversation-related options in `EMOptions`:
+
+| Option | Description |
+| :--- | :--- |
+| `enableChatroomConversation` | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Read the `EMOptions#enableChatroomConversation` property to query the current configuration. |
+| `deleteMessagesOnLeaveChatroom` | Sets whether to delete a chat room's local messages when the user actively or passively leaves the chat room.<br/> - (Default) `true`: Deletes local messages.<br/> - `false`: Retains local messages. |
+| `loadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `autoLoadConversations` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
 ### Retrieve local conversations by page
 

@@ -117,24 +117,26 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ## Leave a chat room
 
-### Leave voluntarily
-
-All chat room members can call the `leaveChatRoom` method to leave the current chat room. When a member leaves, the other members receive the `onMemberExited` callback.
-
-Example code:
-
-```java
-// Asynchronous method.
-EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
-```
+A user can leave a chat room in three ways: voluntarily, by being removed by the chat room owner or an admin, or automatically after going offline.
 
 When a user leaves a chat room, the SDK deletes all local messages in the chat room by default. To retain these messages, set `EMOptions#setDeleteMessagesAsExitChatRoom` to `false` during SDK initialization.
 
-Example code:
+The following is sample code:
 
 ```java
 EMOptions options = new EMOptions();
 options.setDeleteMessagesAsExitChatRoom(false);
+```
+
+### Leave voluntarily
+
+All chat room members can call the `leaveChatRoom` method to leave the current chat room. When a member leaves, the other members receive the `onMemberExited` callback.
+
+The following is sample code:
+
+```java
+// Asynchronous method.
+EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
 Unlike a chat group owner, who cannot leave a chat group, a chat room owner can leave the chat room and remains its owner after rejoining. If the `EMOptions#allowChatroomOwnerLeave` parameter is set to `true` during initialization, the chat room owner can leave the chat room. If this parameter is set to `false`, calling the `leaveChatRoom` method as the chat room owner reports error 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`.

@@ -4,6 +4,8 @@
 
 A chat room is an instant messaging system that supports multi-user communication and is suitable for live streaming interactions, open discussions, message broadcasting, and other real-time multi-user scenarios. This document describes how to use the SDK to manage chat room members, including querying the member list and managing admins, the allowlist, blocklist, and mute list.
 
+For joining, leaving, and removing members from chat rooms, see [Create and Manage Chat Rooms](room_manage.html).
+
 ## Prerequisite
 
 Before you begin, ensure that the following requirements are met:
@@ -37,6 +39,8 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomMembers(
 ```
 
 ## Manage the chat room blocklist
+
+Members on the chat room blocklist cannot join the chat room or send and receive messages in it.
 
 ### Add members to the chat room blocklist
 
@@ -110,9 +114,9 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomBlackList(
 
 ## Manage the chat room allowlist
 
-The chat room owner and admins are added to the chat room allowlist by default.
+The chat room owner and admins are added to the chat room allowlist by default. Messages sent in a chat room by members on the allowlist have a high priority and are delivered first, but delivery is not guaranteed. Under high load, the server discards low-priority messages first. If the load remains high, the server also discards high-priority messages.
 
-Messages sent in a chat room by members on the allowlist have a high priority and are delivered first, but delivery is not guaranteed. Under high load, the server discards low-priority messages first. If the load remains high, the server also discards high-priority messages.
+When mute all is enabled, the chat room owner, admins, and allowlisted members can still send messages. If a member is also individually muted, the member still cannot send messages.
 
 ### Retrieve the chat room allowlist
 
@@ -186,6 +190,8 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 ```
 
 ## Manage the chat room mute list
+
+Individually muted members cannot send messages in the chat room. Individual muting still takes effect even if the member is also on the allowlist.
 
 ### Add members to the chat room mute list
 

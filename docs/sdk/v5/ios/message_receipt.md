@@ -112,9 +112,7 @@ The sender receives delivery receipts through `messagesDidDeliver` and can call 
 
 ## One-to-one and group message read receipts
 
-Both one-to-one and group messages support read receipts. 
-
-One-to-one message read receipts:  One-to-one message read receipts are enabled by default. The message read receipt validity period is the same as the message's server-side retention period. A read receipt can be sent while the message is stored on the server. The retention period depends on your subscribed plan. See [EasyIM Plan Features](/product/product_package_feature.html).
+Both one-to-one and group messages support read receipts. One-to-one message read receipts are enabled by default, but the sender must still set `isNeedReadReceipt` to `YES` before sending a message. The validity period of one-to-one message read receipts is the same as the message's server-side retention period. A read receipt can be sent while the message is stored on the server. The retention period depends on your subscribed plan. See [EasyIM Plan Features](/product/product_package_feature.html).
 
 Group message read receipts: Note the following limitations before using group message read receipts:
 
@@ -208,7 +206,7 @@ The sender monitors both one-to-one and group message read receipts through `onM
 
 ### Retrieve receipt summaries for multiple group messages
 
-Call `getGroupMessageReadReceipts` to retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same conversation.
+Call `getGroupMessageReadReceipts` to retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same group conversation.
 
 ```objectivec
 // messages contains up to 20 messages, all from the same group conversation.

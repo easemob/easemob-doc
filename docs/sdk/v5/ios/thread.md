@@ -90,7 +90,7 @@ The following is sample code:
 
 ## Leave a message thread
 
-#### Leave voluntarily
+### Leave voluntarily
 
 Message thread members can call `leaveChatThread` to leave voluntarily. After leaving, the member no longer receives messages in the message thread.
 

@@ -36,10 +36,9 @@ The SDK provides `EMGroupChangeListener` for monitoring group member name card u
 After a name card change is synchronized to local memory, the SDK triggers `EMGroupChangeListener#onUserGroupNamecardUpdated` in the following scenarios:
 
 - Other **online members** receive a notification after the current user updates a name card.
-- The latest group member information is retrieved through a server-side API and local memory is updated.
 - With `EMOptions#setEnableUserInfo(true)`, a recipient triggers automatic synchronization by receiving a message and local memory is updated.
 
-- Add a listener:
+Add a listener:
 
 ```java
 EMClient.getInstance().groupManager().addGroupChangeListener(new EMGroupChangeListener() {

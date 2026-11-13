@@ -23,7 +23,7 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-The following table lists common `EMOptions` methods used during initialization. For all `EMOptions` methods, see the [API reference](https://doc.easyim.ai/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html).
+The following table lists common `EMOptions` methods used during initialization. Complete these calls before initializing the SDK.
 
 | Method | Description |
 | :--- | :--- |
@@ -34,10 +34,10 @@ The following table lists common `EMOptions` methods used during initialization.
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | Sets whether to delete a chat room's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/>- `false`: Retains them. |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | Sets whether to delete a chat group's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `allowChatroomOwnerLeave(boolean allowed)` | Sets whether to allow the chat room owner to leave the chat room.<br/> - (Default) `true`: Allows the owner to leave. After leaving, the owner retains chat room privileges but no longer receives chat room messages.<br/> - `false`: Does not allow the owner to leave. |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. This method must be called before `init`. Starting from SDK v5.1.0, the default value is `CONVERSATIONS`. |
-| `setEnableChatroomConversation(boolean enable)`              | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Call `isEnableChatroomConversation()` to query whether the current configuration includes chat room conversations when retrieving the local conversation list. |
-| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
-| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. Starting from SDK v5.1.0, the default value is `CONVERSATIONS`. |
+| `setEnableChatroomConversation(boolean enable)`              | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list.<br/> Call `isEnableChatroomConversation()` to query whether the current configuration includes chat room conversations when retrieving the local conversation list. |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
 For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
 
@@ -190,6 +190,28 @@ try {
 
 List<EMGroup> joinedGroups =
         EMClient.getInstance().groupManager().getAllGroups();
+```
+
+## Enable automatic user information management
+
+The Android SDK supports configuring automatic user information management through `EMOptions#setEnableUserInfo(boolean enableUserInfo)`. This parameter defaults to `false`. When it is set to `true`, the SDK automatically synchronizes the current user's attributes after login succeeds. Other users' attributes are updated when relevant messages are received, user attributes are actively retrieved from the server, or in other applicable scenarios. Set this configuration before initializing the SDK.
+
+Automatic user information management and automatic contact synchronization are independent. Android SDK 5.x uses `EMOptions#setDataSyncType` to configure the data types automatically synchronized after login. `EMOptions.EMDataSyncType.CONTACTS` synchronizes contact data. Enabling automatic user information management does not automatically retrieve all friends' nicknames and avatars at login. For user attribute update events, local reading, and active retrieval, see [Automatic User Information Management](userinfo_provider.html).
+
+If you need both features, configure them during the same initialization. The following example also retains the default conversation data synchronization:
+
+```java
+import java.util.EnumSet;
+
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS
+));
+options.setEnableUserInfo(true);
+
+EMClient.getInstance().init(context.getApplicationContext(), options);
 ```
 
 ## API list

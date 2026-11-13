@@ -22,19 +22,22 @@ Before you begin, ensure that the following requirements are met:
 
 ## Import messages into the database
 
-To insert messages into local conversations through a bulk import, construct `EMMessage` objects and call `importMessages` to import them into the local database.
+To import messages into local conversations in bulk, first convert the data to import into a list of `EMMessage` objects, and then call `EMChatManager#importMessages(List<EMMessage>)`.
 
-The current user can import only messages that they sent or received. After import, the messages are added to the corresponding conversations based on their timestamps.
+The current user can import only messages that they sent or received. After import, the SDK adds the messages to the corresponding conversations based on their timestamps. We recommend importing no more than 1,000 messages at a time.
 
-We recommend importing no more than 1,000 messages at a time.
-
-Example code:
+`importMessages` is synchronous, returns no value, and provides no result callback. Before calling it, ensure that the SDK is initialized and the current user's local database is open.
 
 ```java
+// messages is a prepared message list of type List<EMMessage>.
 EMClient.getInstance()
         .chatManager()
         .importMessages(messages);
 ```
+
+:::tip
+`EMOptions#setRegardImportedMsgAsRead` does not control whether local messages imported through `EMChatManager#importMessages` are marked as read. This configuration applies to historical messages imported through the [server-side message import API](/rest/message_import_single.html) and subsequently retrieved from the server by the client.
+:::
 
 ## Insert messages
 

@@ -309,7 +309,7 @@ try {
 
 #### Retrieve a single user's attributes from local memory
 
-To read a specified user's attributes directly from local memory, call `EMUserInfoManager#getUserInfoWithUserId(String)`. For details, see [Read user attributes from local memory](userinfo_provider.html#read-user-attributes-from-local-memory).
+To read a specified user's attributes directly from local memory, call `EMUserInfoManager#getUserInfoWithUserId(String)`. For details, see [Read user attributes from the local cache](userinfo_provider.html#read-user-attributes-from-the-local-cache).
 
 This API returns an `EMUserInfo` for a single user, not an `EMContact`. It does not initiate a network request and can supplement friend-list reads.
 
@@ -357,7 +357,7 @@ EMClient.getInstance()
 
 ### Remove a user from the blocklist
 
-Call `removeUserFromBlackList` to remove a user from the blocklist. After removal, the user can send messages and perform other actions again.
+Call `removeUserFromBlackList` to remove a user from the blocklist. After removal, the user can send messages, send friend requests, and perform other actions again.
 
 ```java
 // Asynchronous method.

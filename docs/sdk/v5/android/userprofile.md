@@ -48,6 +48,8 @@ EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCall
 
 The client uses the following keys to store user attributes by default. When [setting](/rest/user_attribute_set.html) or [deleting user attributes](/rest/user_attribute_delete.html) through a RESTful API, keep the keys consistent so that the client can read the attributes correctly.
 
+The following table lists the keys used to store user attributes on the server. The Android SDK reads and sets these attributes through `EMUserInfo` getter/setter methods. For example, `getNickname()`/`setNickname()` correspond to `nickname`, and `getAvatarUrl()`/`setAvatarUrl()` correspond to `avatarurl`.
+
 | Field | Type | Description |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
 | `nickname` | String | User nickname. The maximum length is 64 characters. |
@@ -58,6 +60,10 @@ The client uses the following keys to store user attributes by default. When [se
 | `sign` | String | User signature. The maximum length is 256 characters. |
 | `birth` | String | User birthday. The maximum length is 64 characters. |
 | `ext` | String | Extension field. |
+
+:::notice
+Attributes omitted from an update request retain their original values. Note that when `EMUserInfoManager#updateOwnInfo()` is called, the SDK always submits `gender`. If gender is not set in the passed `EMUserInfo`, its value is `0`, which may overwrite the original gender. To update only one attribute, call `EMUserInfoManager#updateOwnInfoByAttribute()`.
+:::
 
 ### Set a single attribute of the current user
 
@@ -80,7 +86,9 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 ### Retrieve all user attributes from the server
 
-Call `fetchUserInfoByUserId` to retrieve all attributes of one or more users from the server. After [automatic user information management](userinfo_provider.html) is enabled, if the update timestamp of the returned user attributes is later than that of local data, the SDK updates local data and triggers `EMUserInfoManagerListener#onUserInfoUpdate`.
+Call `fetchUserInfoByUserId` to retrieve all attributes of one or more users from the server.
+
+If the user attribute update time returned by the server is later than that of local data, the SDK updates local data and notifies the business layer through `EMUserInfoManagerListener`. Current user attribute updates trigger `onSelfUserInfoUpdate(EMUserInfo userInfo)`, and other user attribute updates trigger `onUserInfoUpdate(List<EMUserInfo> userInfoList)`.
 
 ```java
 // Pass no more than 100 user IDs per call.
@@ -180,7 +188,7 @@ This feature applies to the following scenarios:
 - Maintaining the latest attributes of specified strangers when displaying chat group members.
 
 :::tip
-This feature applies only to strangers. For details about user attribute change notifications for the current user, strangers, and friends, see [User attribute change events](#monitor-user-attribute-changes).
+This subscription feature applies only to strangers. Attribute change notifications differ for the current user, strangers, and friends. For details, see [Monitor user attribute changes](#monitor-user-attribute-changes).
 :::
 
 ### Subscribe to stranger attribute change events

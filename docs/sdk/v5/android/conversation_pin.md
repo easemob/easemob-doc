@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation pinning keeps important one-to-one, group, or chat room conversations near the top of the conversation list so users can quickly find frequent or high-priority conversations. The pin status is stored on the server and synchronized to the current user's other devices and local conversation data.
+Conversation pinning keeps important one-to-one and group conversations near the top of the conversation list so users can quickly find frequent or high-priority conversations. Chat room conversations are not supported. The pin status is stored on the server and synchronized to the current user's other devices and local conversation data.
 
 ## Feature activation
 
@@ -30,7 +30,7 @@ boolean isPinned = true;
 EMClient.getInstance()
         .chatManager()
         .asyncPinConversation(
-                // For a one-to-one chat, pass the peer user ID; for a group chat, pass the chat group ID; for a chat room, pass the chat room ID.
+                // For a one-to-one chat, pass the peer user ID; for a group chat, pass the chat group ID. Chat room conversations do not support pinning.
                 conversationId,
                 // Set to `true` to pin the conversation or `false` to unpin it.
                 isPinned,
@@ -53,7 +53,7 @@ The parameters are as follows:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationId` | String | Conversation ID. For a one-to-one chat, specify the peer user ID; for a group chat, specify the chat group ID; for a chat room, specify the chat room ID. |
+| `conversationId` | String | Conversation ID. For a one-to-one chat, specify the peer user ID; for a group chat, specify the chat group ID. Chat room conversations are not supported. |
 | `isPinned` | Boolean | Whether to pin the conversation: `true` pins it and `false` unpins it. |
 | `callback` | `EMCallBack` | Operation result callback. |
 
@@ -116,7 +116,7 @@ To load empty conversations from the local database, call `EMOptions#setLoadEmpt
 
 ## Monitor local conversation list updates
 
-When a local conversation changes, the SDK triggers `EMConversationListener#onConversationUpdate`. This callback does not return the complete conversation list. Your app should read the local conversation list again and refresh the UI.
+When a local conversation changes, the SDK triggers `EMConversationListener#onConversationUpdate`. This callback does not return the complete conversation list. Your app should read the local conversation list again and refresh the UI. After pinning or unpinning a conversation on the current device, also read the list again when the operation succeeds.
 
 ```java
 EMConversationListener conversationListener =
@@ -218,7 +218,7 @@ sortedConversations.addAll(unpinnedConversations);
 
 ## Considerations
 
-- Conversation pinning is supported for one-to-one, group, and chat room conversations.
+- Conversation pinning is supported for one-to-one and group conversations. Chat room conversations are not supported.
 - `conversationId` cannot be empty. If the call fails, handle the error based on the error code and error message in the callback.
 - You can pin up to 50 conversations.
 - Conversation pin status is stored on the server and synchronized to the current user's other devices.

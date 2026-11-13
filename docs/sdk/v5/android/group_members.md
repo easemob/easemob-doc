@@ -237,9 +237,9 @@ EMClient.getInstance()
 
 ### Add a group admin
 
-Only the group owner can call `asyncAddGroupAdmin` to add a group admin. After the operation succeeds, the new admin and other admins receive `onAdminAdded`.
+Only the group owner can call `asyncAddGroupAdmin` to add a group admin. After the operation succeeds, the group owner, the new admin, and other admins receive `onAdminAdded`.
 
-An admin has most chat group permissions except for a few permissions such as destroying the chat group.
+An admin has most chat group management permissions except for a few permissions such as destroying the chat group.
 
 ```java
 // Asynchronous method.
@@ -263,7 +263,7 @@ EMClient.getInstance()
 
 ### Remove a group admin
 
-Only the group owner can call `asyncRemoveGroupAdmin` to remove a group admin. After the operation succeeds, the removed admin and other admins receive `onAdminRemoved`.
+Only the group owner can call `asyncRemoveGroupAdmin` to remove a group admin. After the operation succeeds, the group owner, the removed admin, and other admins receive `onAdminRemoved`.
 
 After an admin's group management permissions are removed, the user has only regular member permissions.
 

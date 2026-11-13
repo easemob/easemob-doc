@@ -108,7 +108,7 @@ After receiving the one-to-one message, the recipient's SDK automatically sends 
 A one-to-one message read receipt notifies the sender that the recipient has read a specified one-to-one message.
 
 :::tip
-A message's read receipt remains valid for as long as the message is stored on the server. Read receipts can be sent throughout the server-side storage period. The storage period depends on your plan. For details, see [EasyIM Plan Features](/product/product_package_feature.html). 
+A one-to-one message's read receipt remains valid for as long as the message is stored on the server. Read receipts can be sent throughout the server-side storage period. The storage period depends on your plan. For details, see [EasyIM Plan Features](/product/product_package_feature.html).
 :::
 
 #### Step 1: Register a read-receipt listener on the sender

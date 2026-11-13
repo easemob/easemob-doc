@@ -4,6 +4,8 @@
 
 The EasyIM Android SDK supports updating existing messages in local memory and the local database on the current device. Your app can update the local state or content of a message as required and refresh the message displayed in the conversation.
 A local message update takes effect only on the current device. It does not modify the message stored on the server or synchronize the change to the recipient or the current account's other devices.
+To edit a successfully sent server-side message, see [Edit Messages](message_modify.html).
+
 ## Prerequisite
 
 Before you begin, ensure that the following requirements are met:

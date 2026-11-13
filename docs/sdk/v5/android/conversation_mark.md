@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customer. The SDK supports adding tags to or removing them from one-to-one, group, and chat room conversations.
+Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customer. The SDK supports adding tags to or removing them from one-to-one and group conversations. Chat room conversations are not supported.
 
 The SDK provides 20 tags, from `MARK_0` through `MARK_19`. A conversation can have up to 20 tags at the same time. Your app defines and maintains the business meaning of each tag.
 
@@ -73,7 +73,7 @@ The parameters are as follows:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationIds` | `List<String>` | List of conversation IDs. It cannot be empty, and a single call accepts up to 20 conversation IDs. For a one-to-one chat, specify the peer user ID; for a group chat, specify the chat group ID; for a chat room, specify the chat room ID. |
+| `conversationIds` | `List<String>` | List of conversation IDs. It cannot be empty, and a single call accepts up to 20 conversation IDs. For a one-to-one chat, specify the peer user ID; for a group chat, specify the chat group ID. Chat room conversations are not supported. |
 | `mark` | `EMConversation.EMMarkType` | Tag to add. Possible values range from `MARK_0` through `MARK_19`. |
 | `callback` | `EMCallBack` | Operation result callback. `onSuccess` is triggered on success, and `onError` is triggered on failure. |
 
@@ -113,7 +113,7 @@ The parameter rules for `asyncRemoveConversationMark` are the same as those for 
 
 After login, conversation tags are automatically synchronized with the conversation data and written locally. Your app should read the local conversation list after synchronization is complete and use `EMConversation#marks` to filter conversations that have a specified tag.
 
-Before initializing the SDK, configure `EMDataSyncType.CONVERSATIONS` through `EMOptions#setDataSyncType`:
+`EMOptions#setDataSyncType` includes `EMDataSyncType.CONVERSATIONS` by default. You can also configure it before initialization:
 
 ```java
 EMOptions options = new EMOptions();
@@ -206,7 +206,7 @@ EMClient.getInstance().removeMultiDeviceListener(multiDeviceListener);
 
 ## Considerations
 
-- Conversation tags are supported for one-to-one, group, and chat room conversations.
+- Conversation tags are supported for one-to-one and group conversations. Chat room conversations are not supported.
 - Conversation tag values range from `MARK_0` through `MARK_19`. Your app maintains the business meaning of each tag.
 - A conversation can have up to 20 tags at the same time.
 - `asyncAddConversationMark` and `asyncRemoveConversationMark` can operate on multiple conversations at once, with up to 20 conversation IDs in a single call.

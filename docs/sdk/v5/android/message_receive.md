@@ -115,7 +115,7 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 An image message typically contains three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
-- Large image: An image proportionally compressed by the server from the original. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This image is typically displayed on the chat details page.
+- Large image: An image proportionally compressed from the original and uploaded by the SDK client. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This image is typically displayed on the chat details page.
 - Thumbnail: An image proportionally compressed by the server from the original. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message_conversation.html#image-message-thumbnails). Thumbnails are typically used for lightweight displays such as conversation and chat lists.
 
 
@@ -329,7 +329,7 @@ Customize the specific behavior according to your business requirements. Actions
 
 :::tip
 - A command message cannot be recalled after it is sent.
-- Command messages are not stored in the local database and therefore are not displayed in the UI.
+- Command messages are not stored in the local database and do not create local conversations, so they are usually not displayed in the UI.
 :::
 
 The recipient receives command messages through both `onMessageReceived` and `onCmdMessageReceived` for different processing. Command messages are typically received through `onCmdMessageReceived`.
@@ -370,9 +370,10 @@ Receiving a combined message is the same as receiving a regular message. Your ap
 
 - In SDK versions that do not support combined messages, the message is parsed as a text message whose content is the value of `compatibleText`. Other fields are ignored.
 - A combined message is an attachment message. After receiving it, call `EMChatManager#downloadAndParseCombineMessage` to download and parse the combined message attachment and retrieve the original message list:
-- The first call to this method downloads and parses the combined message attachment and returns the original message list:
-  - If the attachment exists, the method directly parses it and returns the original message list.
-  - If the attachment does not exist, the method downloads it first, parses it, and returns the original message list.
+- On the first call to this method, the SDK downloads and parses the combined message attachment and returns the original message list through the callback.
+- On subsequent calls:
+  - If the combined message attachment exists, the SDK directly parses it and returns the original message list.
+  - If the combined message attachment does not exist, the SDK downloads it first, parses it, and returns the original message list.
 
 After casting the message body to `EMCombineMessageBody`, you can read the combined message title, summary, and compatibility text.
 

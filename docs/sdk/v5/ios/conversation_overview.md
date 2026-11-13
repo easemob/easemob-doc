@@ -73,7 +73,7 @@ When messages are sent or received, the SDK creates or updates the local convers
 - Group message: Creates or updates the group conversation based on the chat group ID.
 - Chat room message: Creates or updates the chat room conversation based on the chat room ID.
 
-After receiving an online message, the SDK updates local status such as the latest message in the conversation (`EMConversation#latestMessage`), list sorting, and unread count (`EMConversation#unreadMessagesCount`).
+After receiving an online message, the SDK updates local status such as the latest message in the conversation (`EMConversation#latestMessage`), list sorting, and unread count (`EMConversation#unreadMessagesCount`). Command messages are not saved in the SDK's local database or in-memory message cache. When sending a command message, the SDK does not create a local conversation for it. This restriction does not affect normal command message sending and receiving through `EMCmdMessageBody` and command message callbacks.
 
 ### Create a local conversation through an API
 

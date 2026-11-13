@@ -15,6 +15,7 @@ Before using Reactions, activate the feature in [EasyIM Console](https://console
 ## Limitations
 
 - Reactions apply only to one-to-one and group chats. Chat rooms are not currently supported.
+- The same user can add the same Reaction to the same message only once.
 - For Reaction counting rules, storage duration, per-user addition limits, the number of Reactions allowed per message, and emoji ID requirements, see [Feature Limitations](limitation.html).
 
 ## Prerequisite
@@ -131,8 +132,14 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 
 ## Retrieve Reaction details
 
-Call `asyncGetReactionDetail` to retrieve details of a specified Reaction on a specified message from the server by page. The details include the Reaction content, the current number of users who added the Reaction, and the user IDs of all users who currently added it.
-The API returns `EMCursorResult<EMMessageReaction>`, which contains the current page of data and a pagination cursor. If more data remains, use the cursor to query the next page.
+Call `EMChatManager#asyncGetReactionDetail` to retrieve details of a specified Reaction on a specified message from the server by page. Read the returned `EMMessageReaction` through the following methods:
+
+- `getReaction()`: Retrieves the Reaction content.
+- `getUserCount()`: Retrieves the total number of users who currently have added the Reaction.
+- `isAddedBySelf()`: Retrieves whether the current user has added the Reaction. `true` indicates that it has been added, and `false` indicates that it has not.
+- `getUserList()`: Retrieves the user ID list returned in the current page of query results.
+
+The API returns the query result through `EMValueCallBack<EMCursorResult<EMMessageReaction>>`, including the current page of data and a pagination cursor. Call `getData()` to retrieve the Reaction list and read its first `EMMessageReaction`, and call `getCursor()` to retrieve the pagination cursor. To retrieve all user IDs for the Reaction, continue querying with the returned cursor until the cursor is empty.
 
 ```java
 EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,

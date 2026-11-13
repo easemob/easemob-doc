@@ -34,6 +34,8 @@ Each item in the conversation list is an `EMConversation`. Common APIs are as fo
 | :--- | :--- |
 | `conversationId()` | Retrieves the conversation ID. |
 | `getType()` | Retrieves the conversation type. |
+| `getConversationName()` | Retrieves the conversation name. This API applies to one-to-one and group conversations. |
+| `getConversationAvatar()` | Retrieves the conversation avatar. This API applies to one-to-one and group conversations. |
 | `getUnreadMsgCount()` | Retrieves the local unread message count of the conversation. |
 | `getLastMessage()` | Retrieves the latest message in the conversation. |
 | `isPinned()` | Retrieves whether the conversation is pinned. |
@@ -55,7 +57,7 @@ When messages are sent or received, the SDK creates or updates the local convers
 - Group message: Creates or updates a group conversation based on the chat group ID.
 - Chat room message: Creates or updates a chat room conversation based on the chat room ID.
 
-After receiving an online message, the SDK updates local state such as the conversation's latest message, order, and unread count.
+After receiving an online message, the SDK updates local state such as the conversation's latest message, order, and unread count. Command messages are not saved in the SDK's local database or in-memory message cache. When sending a command message, the SDK does not create a local conversation for it. This restriction does not affect normal command message sending and receiving through `EMCmdMessageBody` and command message callbacks.
 
 ### Create a local conversation through an API
 

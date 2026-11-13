@@ -115,10 +115,9 @@ EMClient.getInstance()
 ## One-to-one and group message read receipts
 
 Both one-to-one and group messages support read receipts. 
+One-to-one message read receipts are enabled by default, but the sender must still call `EMMessage#setIsNeedReadReceipt(true)` before sending a message. The validity period of one-to-one message read receipts is the same as the message's server-side retention period. A read receipt can be sent while the message is stored on the server. The retention period depends on your subscribed plan. See [EasyIM Plan Features](/product/product_package_feature.html).
 
-One-to-one message read receipts:  One-to-one message read receipts are enabled by default. The message read receipt validity period is the same as the message's server-side retention period. A read receipt can be sent while the message is stored on the server. The retention period depends on your subscribed plan. See [EasyIM Plan Features](/product/product_package_feature.html).
-
-Group message read receipts: Note the following limitations before using group message read receipts:
+Group message read receipts have the following limitations:
 
 | Limitation       | Default setting   | Description                                                         |
 | :--------- | :----- | :------- | 
@@ -216,7 +215,14 @@ EMClient.getInstance()
 
 ### Retrieve receipt summaries for multiple group messages
 
-Call `asyncGetGroupMessageReadReceipts` to retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same conversation.
+Call `asyncGetGroupMessageReadReceipts` to retrieve message read receipt details from the server. You can pass up to 20 messages in each call, and all messages must belong to the same group conversation.
+
+This API returns a list of message read receipt details through `EMValueCallBack<List<EMMessageReadReceipt>>`. Each `EMMessageReadReceipt` contains the following information:
+
+- `getMessageId()`: Retrieves the message ID.
+- `getConversationId()`: Retrieves the conversation ID, which is the group ID in a group chat.
+- `getReadCount()`: Retrieves the number of users who have read the group message.
+- `isPeerReceipt()`: Retrieves whether the one-to-one message recipient has sent a read receipt. `true` indicates that the receipt has been sent, and `false` indicates that it has not. This information applies to one-to-one chats. In group chats, read `getReadCount()`.
 
 ```java
 // Asynchronous method.
@@ -239,7 +245,7 @@ EMClient.getInstance()
 
 ### Retrieve receipt member details for a group message
 
-Call `asyncFetchGroupMessageReadReceipts` to retrieve read receipt details for a group message by page. The target message must be a group message that requires read receipts. The value range of `pageSize` is `[1, 50]`.
+Call `asyncFetchGroupMessageReadReceipts` to retrieve read receipt member details for a group message by page. The target message must be a group message that requires read receipts. The value range of `pageSize` is `[1, 50]`.
 
 Pass `null` or an empty string for `startAckId` in the first call. In subsequent calls, use the `cursor` from the previous result as the new `startAckId`.
 
@@ -297,7 +303,7 @@ EMClient.getInstance()
 
 Sending message read receipts and clearing conversation unread counts are independent operations:
 
-| Operation | Effect | Notifies the message sender | Changes the conversation unread count |
+| Operation | Effect | Notifies the original message sender | Changes the conversation unread count |
 | :--- | :--- | :--- | :--- |
 | `asyncSendMessageReadReceipts` | Send read receipts for specified messages. | Yes | No |
 | `asyncClearConversationUnreadMessageCount` | Clear the local unread count for a specified conversation and synchronize the current account's other devices. | No | Yes |

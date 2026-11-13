@@ -20,12 +20,12 @@ Before you begin, ensure that the following requirements are met:
 
 The Android SDK connection lifecycle generally includes these stages:
 
-1. Call `EMClient#init` to initialize the SDK.
+1. Call `EMClient#init` to initialize the SDK. SDK 5.x does not support automatic login in after initialization.
 2. Call `addConnectionListener` to register a connection listener. We recommend registering it before login.
 3. Call `loginWithToken` to log in to the SDK and establish a persistent connection.
 4. `onDatabaseOpened` is triggered after the user's local database is opened. This callback indicates only that the local database is available, not that the online connection succeeded.
 5. `onConnected` is triggered after the SDK successfully connects to the server. The SDK then synchronizes offline messages and business data according to the initialization configuration.
-6. After the connection is interrupted, the SDK automatically reconnects according to the cause, or notifies the app through `onLogout` to handle an unrecoverable abnormal logout.
+6. After the connection is interrupted, the SDK automatically reconnects according to the cause, or notifies the app through `onLogout` to handle an unrecoverable abnormal logout. Token expiration is reported through `EMConnectionListener#onTokenExpired`.
 7. Call `logout` to explicitly log out and close the current connection.
 
 ```java
@@ -88,6 +88,8 @@ Connection state and login state have different meanings. On a weak network or d
 Register `EMConnectionListener` through `EMClient#addConnectionListener`. We recommend registering it before calling `loginWithToken` to avoid missing the login connection process and subsequent synchronization states.
 
 ### Callback descriptions
+
+The following callbacks all belong to `EMConnectionListener`:
 
 | Callback | Trigger conditions | Description |
 | :--- | :--- | :--- |
@@ -181,7 +183,7 @@ The connection callbacks of `EMConnectionListener` run on a worker thread. Do no
 
 After login succeeds, if the connection is interrupted by a weak network signal, network switching, or another recoverable cause, the SDK automatically attempts to reconnect. The app does not need to call the login API manually.
 
-`onDisconnected` is triggered when the connection is interrupted, and `onConnected` is triggered after reconnection succeeds. Android SDK V5 does not provide separate `onConnecting` or `onReconnectFailed` callbacks. Display the connection state using these two callbacks together with `isConnected()` and the network state.
+`onDisconnected` is triggered when the connection is interrupted, and `onConnected` is triggered after reconnection succeeds. Android SDK 5.x does not provide separate `onConnecting` or `onReconnectFailed` callbacks. Display the connection state using these two callbacks together with `isConnected()` and the network state.
 
 The following situations cannot be recovered through automatic reconnection alone. Handle account, token, device, or service restrictions based on the callback error code:
 
