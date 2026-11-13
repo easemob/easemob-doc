@@ -376,13 +376,7 @@ FCM 通道推送通知示例如下：
 | `notifyId`        | Int    | 通知 ID，即通知的唯一标识。若多个消息的通知 ID 相同，到达设备的新消息会覆盖旧消息显示在设备通知栏中。取值范围为：1-2147483647。 |
 | `profileId` | String| 关联终端设备登录用户标识，最大长度为 64 字符。|
 | `sendOnline` | Bool| 是否在线直推，设置为 `true` 表示是在线直推，`false` 表示非直推。在线直推功能推送时在设备在线下发一次，设备离线直接丢弃。|
-| `addBadge` | Boolean | 是否在 vivo 通知到达设备时使应用图标的数字角标自动加 1。<br/> - `true`：自动加 1。<br/> - `false` 或不传：该条推送不改变角标数字，保持历史默认行为。<br/> 该参数仅控制自动加 1，不支持设置任意角标数或清零。 |
-
-使用数字角标前，需在 vivo 侧开通该能力，并按 [vivo 桌面角标设置方法](https://dev.vivo.com.cn/documentCenter/doc/788) 完成应用的系统角标 API 对接，确保设备允许显示数字角标。
-
-独立 Push 服务通过 vivo 厂商通道发送通知时，将 `addBadge` 放在请求的 `pushMessage.vivo` 中，并使用 JSON 布尔值 `true` 或 `false`。通用的 `config.badge.addNum`、`config.badge.setNum` 以及环信通道的 `easemob.badge` 不能替代 `vivo.addBadge`；在线通过环信通道展示的角标也不会自动应用到 vivo 厂商通知。仅配置 IM 离线推送证书中的 **角标数字**，不会为独立 Push 请求补充该字段。
-
-若使用即时通讯 IM 的离线消息推送，请通过 [vivo 推送证书中的 **角标数字** 选项](push_certificate_config.html#vivo-推送证书) 配置。该功能不需要修改 Android IM SDK 的初始化代码。
+| `addBadge` | Boolean | 是否在 vivo 通知到达设备时使应用图标的数字角标自动加 1。<br/> - `true`：自动加 1。<br/> - `false` 或不传：该条通知不改变角标数字，保持历史默认行为。<br/> 该参数仅支持自动加 1，不支持设置任意角标数或清零。使用前，需在 vivo 侧开通数字角标能力，并按 [vivo 桌面角标设置方法](https://dev.vivo.com.cn/documentCenter/doc/788) 完成应用的系统角标 API 对接，确保设备允许显示数字角标。<br/> 使用 **即时推送** 服务通过 vivo 厂商通道发送通知时，需在请求的 `pushMessage.vivo` 中设置该字段，取值为 JSON 布尔值 `true` 或 `false`。通用角标配置 `config.badge.addNum`、`config.badge.setNum` 及环信通道的 `easemob.badge` 均不能替代此字段；环信在线通道的角标配置也不会自动应用到 vivo 厂商通知。<br/> IM 离线推送需通过 [vivo 推送证书中的 **角标数字** 选项](/document/android/push/push_vivo.html#步骤二-上传推送证书) 配置，无需修改 Android IM SDK 初始化代码。该证书选项不会为即时推送服务的请求自动补充 `addBadge` 字段。 |
 
 #### vivo 推送回调
 
