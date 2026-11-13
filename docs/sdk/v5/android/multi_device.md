@@ -350,6 +350,9 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
             // The current user sets custom chat group member attributes on another device.
             case GROUP_METADATA_CHANGED:
                 break;    
+            // The current user updates chat group information on another device. This event is supported starting from SDK v5.1.0.
+            case GROUP_UPDATE:
+                break;
             default:
                 break;
         }

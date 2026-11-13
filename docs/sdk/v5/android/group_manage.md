@@ -185,6 +185,29 @@ How an invited user handles the invitation is determined by `EMGroupConfigs#invi
 
 After the invitation is accepted, the inviter receives `EMGroupChangeListener#onInvitationAccepted`. After it is declined, the inviter receives `EMGroupChangeListener#onInvitationDeclined`.
 
+Starting from SDK v5.1.0, you can call `EMGroup#isInviteNeedConfirm()` to check whether a retrieved chat group currently requires invited users to confirm invitations:
+
+- Returns `true`: Inviting a user to join the chat group requires the invited user to confirm.
+- Returns `false`: The invited user can join the chat group without confirmation.
+
+```java
+EMClient.getInstance()
+        .groupManager()
+        .asyncGetGroupFromServer(
+                groupId,
+                new EMValueCallBack<EMGroup>() {
+                    @Override
+                    public void onSuccess(EMGroup group) {
+                        boolean inviteNeedConfirm = group.isInviteNeedConfirm();
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        // Failed to retrieve chat group details.
+                    }
+                });
+```
+
 :::tip
 To let users manually handle chat group invitations, call `EMOptions#setAutoAcceptGroupInvitation(false)` before SDK initialization to disable automatic acceptance. The default value of this configuration is `true`. When enabled, the SDK automatically accepts incoming group invitations. When disabled, the app can call the API for accepting or declining an invitation in `EMGroupChangeListener#onInvitationReceived`.
 :::
@@ -696,5 +719,6 @@ EMClient.getInstance()
 | [`getAllGroups`](#retrieve-the-groups-joined-by-the-current-user) | `EMGroupManager` | Retrieve from local storage the groups joined by the current user. |
 | [`asyncGetJoinedGroupsCountFromServer`](#query-the-number-of-groups-joined-by-the-current-user) | `EMGroupManager` | Retrieve from the server the number of groups joined by the current user. |
 | [`asyncGetGroupFromServer`](#check-whether-the-current-user-has-blocked-group-messages) | `EMGroupManager` | Retrieve chat group details from the server. |
+| [`isInviteNeedConfirm`](#invite-users-to-join-a-chat-group) | `EMGroup` | Retrieves whether the chat group configuration requires invited users to confirm invitations. |
 | [`isMsgBlocked`](#check-whether-the-current-user-has-blocked-group-messages) | `EMGroup` | Determine whether the current user has blocked messages from a specified group. |
 | [`asyncBlockGroupMessage`](#block-group-messages) / [`asyncUnblockGroupMessage`](#unblock-group-messages) | `EMGroupManager` | Block or unblock group messages. |

@@ -33,7 +33,7 @@ Before you begin, ensure that the following requirements are met:
 
 Call `EMChatManager#asyncAddConversationMark` to add a specified tag to one or more conversations. This operation updates the conversation tags on both the server and the local device. You can pass up to 20 conversation IDs in a single call.
 
-After a conversation tag is added, the tag data is updated on both the server and the local device. After login, conversation tags are automatically synchronized with the conversation data and written locally. When synchronization is complete, retrieve the `EMConversation` object through the local conversation list API, and then call `EMConversation#marks` to retrieve all tags for the conversation.
+Starting from SDK v5.1.0, the SDK automatically synchronizes the conversation list and its tags after login and writes them locally. After a conversation tag is added, the tag data is updated on both the server and the local device. When synchronization is complete, retrieve the `EMConversation` object through the local conversation list API, and then call `EMConversation#marks` to retrieve all tags for the conversation.
 
 If the server-side conversation list reaches its limit, which is 100 conversations by default, the server may remove inactive conversations based on conversation activity. The tags for those conversations may also no longer be synchronized locally with the server-side conversation list.
 

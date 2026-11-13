@@ -75,7 +75,7 @@ if (conversation != null) {
 
 After login, the pin status is automatically synchronized with the conversation data and written locally. Your app should read the local conversation list after synchronization is complete.
 
-Before initializing the SDK, configure `EMDataSyncType.CONVERSATIONS` through `EMOptions#setDataSyncType`:
+Starting from SDK v5.1.0, `EMOptions#setDataSyncType` includes `EMDataSyncType.CONVERSATIONS` by default.
 
 ```java
 EMOptions options = new EMOptions();

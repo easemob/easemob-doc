@@ -34,7 +34,10 @@ The following table lists common `EMOptions` methods used during initialization.
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | Sets whether to delete a chat room's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/>- `false`: Retains them. |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | Sets whether to delete a chat group's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `allowChatroomOwnerLeave(boolean allowed)` | Sets whether to allow the chat room owner to leave the chat room.<br/> - (Default) `true`: Allows the owner to leave. After leaving, the owner retains chat room privileges but no longer receives chat room messages.<br/> - `false`: Does not allow the owner to leave. |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. This method must be called before `init`. |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. This method must be called before `init`. Starting from SDK v5.1.0, the default value is `CONVERSATIONS`. |
+| `setEnableChatroomConversation(boolean enable)`              | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Call `isEnableChatroomConversation()` to query whether the current configuration includes chat room conversations when retrieving the local conversation list. |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
 For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
 
@@ -81,7 +84,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
 ### Synchronized data
 
-Before initialization, configure the data types automatically synchronized after login through `EMOptions.setDataSyncType`. After login succeeds, the SDK synchronizes server-side data according to the configuration and updates the local cache or database.
+The SDK supports configuring the data types automatically synchronized after login through `EMOptions#setDataSyncType` before initialization. After login succeeds, the SDK synchronizes server-side data according to the configuration and updates the local cache or database. Starting from SDK v5.1.0, this configuration includes `EMDataSyncType.CONVERSATIONS` by default, which automatically synchronizes the conversation list.
 
 The SDK currently supports synchronizing the conversation list, friend list, and list of chat groups that the current user has joined. The configuration and local read method for each data type are as follows:
 
@@ -99,7 +102,7 @@ Call `setDataSyncType` before `EMClient.init`. Changes made after SDK initializa
 
 The configuration rules are as follows:
 
-- If `setDataSyncType` is not called, data is not automatically synchronized by default, which is `EMDataSyncType.NONE`.
+- Starting from Android SDK v5.1.0, if `setDataSyncType` is not called, conversation data is automatically synchronized by default, which is `EMDataSyncType.CONVERSATIONS`.
 - To synchronize one or more data types, explicitly pass the corresponding enum values using `EnumSet.of(...)`.
 - Pass `EnumSet.of(EMDataSyncType.NONE)`, `null`, or an empty set to disable automatic synchronization.
 

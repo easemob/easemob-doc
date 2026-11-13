@@ -42,7 +42,10 @@ The following table lists commonly used `EMOptions` properties for initializatio
 | `deleteMessagesOnLeaveChatroom` | Whether to delete a chat room's local messages when the user actively or passively leaves the chat room.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `deleteMessagesOnLeaveGroup` | Whether to delete a chat group's local messages when the user actively or passively leaves the chat group.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `canChatroomOwnerLeave` | Whether to allow the chat room owner to leave the chat room.<br/> - (Default) `true`: Allows the owner to leave.<br/> - `false`: Does not allow the owner to leave. |
-| `dataSyncType` | Configures the data types automatically synchronized after login. This property is an `EMDataSyncType` bit option and can combine conversations, friends, and joined chat groups. We recommend explicitly setting it before initialization instead of relying on the default value. |
+| `dataSyncType` | Configures the data types automatically synchronized after login. This property is an `EMDataSyncType` bit option and can combine conversations, friends, and joined chat groups. The default value is `.conversations`. |
+| `enableChatroomConversation` | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Read the `EMOptions#enableChatroomConversation` property to query the current configuration. |
+| `loadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `autoLoadConversations` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
 For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
 
@@ -91,7 +94,7 @@ The SDK automatically reconnects after a weak-network disconnection, so manual r
 
 ### Synchronized data
 
-The iOS SDK supports configuring the data types automatically synchronized after login through `EMOptions.dataSyncType` before initialization. After a user logs in successfully, the SDK synchronizes server-side data according to the configuration and updates the local cache or database.
+The iOS SDK supports configuring the data types automatically synchronized after login through `EMOptions.dataSyncType` before initialization. After a user logs in successfully, the SDK synchronizes server-side data according to the configuration and updates the local cache or database. This property includes `.conversations` by default, which automatically synchronizes the conversation list.
 
 `EMDataSyncType` is a bit option. You can use an array literal to combine multiple values. Currently, the SDK supports synchronizing the conversation list, friend list, and list of chat groups that the current user has joined.
 
@@ -105,6 +108,12 @@ The iOS SDK supports configuring the data types automatically synchronized after
 ### Configuration method
 
 You must set `dataSyncType` before calling `initializeSDK(with:)`. Changing it after SDK initialization is complete does not change the initialization configuration of the current SDK instance.
+
+The configuration rules are as follows:
+
+- If `dataSyncType` is not set, conversation data is automatically synchronized by default, which is `.conversations`.
+- To synchronize one or more data types, explicitly combine the corresponding options using an array literal.
+- Set `.none` to disable automatic synchronization of conversations, friends, and joined chat groups.
 
 The following example automatically synchronizes conversations, friends, and joined chat groups after login succeeds:
 
@@ -130,7 +139,7 @@ options.dataSyncType = .none
 ```
 
 :::tip
-When the current iOS 5.0.0 implementation creates `EMOptions`, it initializes `dataSyncType` to synchronize conversations, but the public header comments and change notes document the default value as `.none`. To ensure explicit behavior that is not affected by version differences, we recommend always setting this property explicitly.
+`dataSyncType` only controls the data types automatically synchronized from the server after login. It does not control whether all conversations from the local database are automatically loaded into memory. The latter is controlled by `EMOptions#autoLoadConversations`.
 :::
 
 ### Monitor synchronization status
