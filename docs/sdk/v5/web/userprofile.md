@@ -78,6 +78,8 @@ console.log(profile.avatarUrl);
 
 Call `getUserInfoByUserId` to retrieve all attributes of one or more users from the server. Each call can retrieve the user attributes of up to 100 users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
 
+Calling `getUserInfoByUserId` or `getUserInfoByAttribute` does not require enabling `enableUserInfoSync`.
+
 ```typescript
 // Pass no more than 100 user IDs per call.
 const users = await client.userInfoManager.getUserInfoByUserId({
@@ -91,6 +93,8 @@ console.log(users);
 ### Retrieve specified user attributes from the server
 
 Call `getUserInfoByAttribute` to retrieve one or more attributes of specified users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+
+A call to this API does not trigger the user attribute update event `onUserInfoUpdated` or `onOwnInfoUpdated`.
 
 ```typescript
 const users = await client.userInfoManager.getUserInfoByAttribute({
@@ -184,7 +188,7 @@ The `onUserInfoUpdated` event reports other users' attribute updates triggered b
 
 1. **A message carries an update time**: If `enableUserInfoSync` was enabled during SDK initialization, when a received message carries a sender user-attribute update time later than that in the local cache, the SDK automatically retrieves the latest user attributes, updates the local data, and then triggers `onUserInfoUpdated`. This mechanism may apply to both friend and stranger senders.
 2. **A subscribed user changes (strangers only)**: If your app subscribed to attribute-change events for strangers, the SDK triggers `onUserInfoUpdated` when one of these users' attributes changes.
-3. **User attributes are fetched during a group member query**: When you call `Group#getMembers`, the SDK first uses locally cached user attributes and fetches user attributes if they are missing from the cache. If `enableUserInfoSync` is enabled and the query fetches other users' attributes, the SDK triggers `onUserInfoUpdated`. The currently logged-in user's attributes are reported through `onOwnInfoUpdated`. If the attributes are already cached, the query does not proactively check for updates.
+3. **User attributes are fetched during a group member query**: When you call [`Group#getMembers`](group_members.html#retrieve-the-group-member-list), the SDK first uses locally cached user attributes and fetches user attributes if they are missing from the cache. If `enableUserInfoSync` is enabled and the query fetches other users' attributes, the SDK triggers `onUserInfoUpdated`. The currently logged-in user's attributes are reported through `onOwnInfoUpdated`. If the attributes are already cached, the query does not proactively check for updates.
 
 **Special notes**
 

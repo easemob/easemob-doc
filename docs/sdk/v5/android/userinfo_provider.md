@@ -12,9 +12,9 @@ This feature applies to scenarios such as conversation lists, message lists, and
 
 Automatic user information management is controlled by `EMOptions#setEnableUserInfo(true)`. After it is enabled, the SDK automatically synchronizes the currently logged-in user's attributes after login succeeds. When sending a message, it automatically includes the update time of the sender's user attributes. For a group message, it also includes the update time of the sender's group member name card in the current chat group.
 
-After receiving a message, the SDK automatically compares the update times carried in the message with the corresponding timestamps in the local cache. If it detects updated data or missing local cache data, it automatically retrieves the latest user attributes or group member name card from the server, updates the local cache, and notifies the business layer through the relevant event to refresh the UI. Friend remarks are read from the recipient's local friend data. They are not sent with messages or synchronized through the update-time comparison mechanism described above. For details, see [Obtain sender information through a message](#obtain-sender-information-through-a-message).
+Friend remarks are read from the recipient's local friend data. They are not sent with messages or synchronized through the update-time comparison mechanism described above. For details, see [Obtain sender information through a message](#obtain-sender-information-through-a-message).
 
-When sender information is obtained through a message, the SDK automatically synchronizes user information, updates the cache, and refreshes related display data as follows:
+After the recipient receives a message, the SDK uses the update times carried in the message to synchronize user attributes and group member name cards as needed, update the local cache, and notify the business layer through events to refresh the UI. The process is as follows:
 
 1. After login succeeds, the SDK automatically retrieves the currently logged-in user's information from the server and writes it to the local cache.
 2. After the user updates their information, subsequent messages carry the corresponding information update time. Group messages also carry the update time of the sender's member name card in the current group.

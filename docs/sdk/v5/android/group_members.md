@@ -24,6 +24,8 @@ You can retrieve the group member list in the following three ways:
 
 Call `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member information with pagination. The returned information includes each member's user ID, role, join time, name card, nickname, and avatar.
 
+After automatic user information management is enabled (`EMOptions#setEnableUserInfo(true)`), the SDK first uses the nickname and avatar in the local cache. If the corresponding cache is missing, or both the nickname and avatar are empty, the SDK fetches user attributes from the server as needed. This API does not proactively refresh an existing nickname or avatar in the local cache. Fetching missing attributes may trigger user attribute update events. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+
 ```java
 // Asynchronous method.
 // cursor: Pass `null` or an empty string for `cursor` in the first request. In subsequent requests, pass the cursor from the previous result. An empty returned cursor indicates the last page.

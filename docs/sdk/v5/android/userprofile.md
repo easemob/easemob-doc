@@ -61,7 +61,7 @@ The following table lists the keys used to store user attributes on the server. 
 | `birth` | String | User birthday. The maximum length is 64 characters. |
 | `ext` | String | Extension field. |
 
-:::notice
+:::tip
 Attributes omitted from an update request retain their original values. Note that when `EMUserInfoManager#updateOwnInfo()` is called, the SDK always submits `gender`. If gender is not set in the passed `EMUserInfo`, its value is `0`, which may overwrite the original gender. To update only one attribute, call `EMUserInfoManager#updateOwnInfoByAttribute()`.
 :::
 
@@ -88,7 +88,13 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 Call `fetchUserInfoByUserId` to retrieve all attributes of one or more users from the server.
 
-If the user attribute update time returned by the server is later than that of local data, the SDK updates local data and notifies the business layer through `EMUserInfoManagerListener`. Current user attribute updates trigger `onSelfUserInfoUpdate(EMUserInfo userInfo)`, and other user attribute updates trigger `onUserInfoUpdate(List<EMUserInfo> userInfoList)`.
+Successful retrieval does not necessarily trigger user attribute update events. The SDK compares the user attribute update time returned by the server with the local cache:
+
+- If another user's attributes are parsed successfully and the server update time is later than that in the local cache, the SDK triggers `EMUserInfoManagerListener#onUserInfoUpdate`.
+- If the currently logged-in user's own attributes meet the same update conditions, the SDK triggers `EMUserInfoManagerListener#onSelfUserInfoUpdate`.
+- If the server update time is not later than that in the local cache, or no valid user attribute update time is returned, this query does not trigger update events.
+
+These explicit queries and their update events do not require enabling automatic user information management (`EMOptions#setEnableUserInfo(true)`). Your app can use the attributes in the success callback to refresh the UI directly, without waiting for update events. For details, see [Monitor user attribute changes](#monitor-user-attribute-changes).
 
 ```java
 // Pass no more than 100 user IDs per call.
@@ -108,7 +114,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMVal
 
 ### Retrieve specified user attributes from the server
 
-Call `fetchUserInfoByAttribute` to retrieve specified attributes of one or more users from the server. After [automatic user information management](userinfo_provider.html) is enabled, if the update timestamp of the returned user attributes is later than that of local data, the SDK updates local data and triggers `EMUserInfoManagerListener#onUserInfoUpdate`.
+Call `fetchUserInfoByAttribute` to retrieve specified attributes of one or more users from the server. The conditions for triggering user attribute update events are the same as those for [retrieving all user attributes](#retrieve-all-user-attributes-from-the-server).
 
 ```java
 String[] userId = new String[1];
@@ -253,9 +259,10 @@ If stranger attribute changes are not subscribed to, the app generally needs to 
 
 Updates to friend and stranger attributes can trigger `EMUserInfoManagerListener#onUserInfoUpdate` in the following ways:
 
-1. **Explicit retrieval update**: When [retrieving user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or [retrieving chat group member information from the server](group_members.html#retrieve-the-group-member-list), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates local data and triggers the event.
-2. **Message-carried update**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a received message carries a sender user attribute update time later than the local cache, the SDK retrieves those user attributes again and triggers the event. This applies to both friend and stranger senders.
-3. **Subscribed user change (strangers only)**: If stranger attribute change events are subscribed to, the SDK also triggers the event when those subscribed strangers' attributes change.
+1. **Explicit user attribute retrieval**: When you call [`EMUserInfoManager#fetchUserInfoByUserId`](#retrieve-all-user-attributes-from-the-server), if another user's attributes are parsed successfully and the server update time is later than that in the local cache, the SDK triggers `onUserInfoUpdate`. This explicit query does not require enabling automatic user information management.
+2. **Fetching missing user attributes during a group member query**: When you call [`EMGroupManager#asyncFetchGroupMembersInfo`](group_members.html#retrieve-group-member-information-with-pagination), the SDK fetches user attributes only if automatic user information management is enabled and either the member's attributes are missing from the local cache or both the nickname and avatar are empty. If the fetched attributes meet the update conditions above, the SDK triggers `onUserInfoUpdate`. If a nickname or avatar is already cached, the SDK uses the cache directly without checking for attribute updates on the server.
+3. **Message-carried update**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a received message carries a sender user attribute update time later than the local cache, the SDK retrieves those user attributes again and triggers the event. This applies to both friend and stranger senders.
+4. **Subscribed user change (strangers only)**: If stranger attribute change events are subscribed to, the SDK also triggers the event when those subscribed strangers' attributes change.
 
 **Special notes**
 

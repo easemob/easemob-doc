@@ -10,7 +10,11 @@ This feature applies to scenarios such as conversation lists, message lists, and
 
 ## Understand the tech
 
-Automatic user information management is controlled by `EMOptions#enableUserInfo`. After it is enabled, the SDK synchronizes user information and updates local memory as follows:
+Automatic user information management is controlled by the `enableUserInfo` property of `EMOptions` and is disabled by default. After it is set to `YES`, the SDK automatically synchronizes the currently logged-in user's attributes when login succeeds and includes the update time of the sender's user attributes when sending a message. For group messages, it also includes the update time of the sender's group member name card in the current chat group.
+
+Friend remarks are read from the recipient's local friend data. They are not sent with messages or synchronized through the update-time comparison mechanism described above. For details, see [Obtain sender information through a message](#obtain-sender-information-through-a-message).
+
+After the recipient receives a message, the SDK uses the update times carried in the message to synchronize user attributes and group member name cards as needed, update the local cache, and notify the business layer through delegate callbacks to refresh the UI. The process is as follows:
 
 1. After login succeeds, the SDK automatically retrieves the currently logged-in user's information from the server and writes it to local memory.
 2. After the user updates their information, subsequent messages carry the corresponding information update time.

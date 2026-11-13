@@ -8,9 +8,13 @@ These operations update only local message and conversation data on the current 
 
 The Android SDK provides the following methods:
 
-- Import messages in bulk: Call `EMChatManager#importMessages` to import multiple messages sent or received by the current user into the local database.
+- Import messages in bulk: Call `EMChatManager#importMessages` to import multiple messages sent or received by the current user into the local database, without updating the corresponding conversation information, such as the latest message.
 - Insert a message into a specified conversation: Call `EMConversation#insertMessage` to insert a message into a specified conversation based on the message's Unix timestamp.
 - Save a message directly: Call `EMChatManager#saveMessage` to save a message to memory and the local database. If the corresponding conversation does not exist, the SDK automatically creates it.
+
+When messages are imported in bulk, if the corresponding conversation has no latest message record, it is filtered out when conversations are loaded from the local database with empty conversations excluded. It does not appear in the returned conversation list. `EMOptions#setLoadEmptyConversations` defaults to `false`, which means that empty conversations are not loaded.
+
+Therefore, we recommend grouping the messages to import by conversation, sorting each conversation's messages by message time, and setting aside the latest message in each conversation. Import the remaining messages in bulk through `EMChatManager#importMessages`. After the bulk import is complete, call `EMConversation#insertMessage` on the corresponding conversation to insert the reserved message and update the conversation information. Retrieve or create the corresponding conversation before inserting the message. "Latest" is determined by the timestamp used by the SDK's current message sorting configuration. For example, if a conversation has three messages to import at 10:00, 10:01, and 10:02, first import the first two through `EMChatManager#importMessages`, and then insert the 10:02 message through `EMConversation#insertMessage`. Do not first import all three messages in bulk and then insert the 10:02 message again. Otherwise, the SDK returns immediately because the message already exists and does not update the conversation information.
 
 ## Prerequisite
 
@@ -24,7 +28,7 @@ Before you begin, ensure that the following requirements are met:
 
 To import messages into local conversations in bulk, first convert the data to import into a list of `EMMessage` objects, and then call `EMChatManager#importMessages(List<EMMessage>)`.
 
-The current user can import only messages that they sent or received. After import, the SDK adds the messages to the corresponding conversations based on their timestamps. We recommend importing no more than 1,000 messages at a time.
+The current user can import only messages that they sent or received. After import, the messages are stored in the local database, but the corresponding conversation information, such as the latest message, is not updated. We recommend importing no more than 1,000 messages at a time.
 
 `importMessages` is synchronous, returns no value, and provides no result callback. Before calling it, ensure that the SDK is initialized and the current user's local database is open.
 
