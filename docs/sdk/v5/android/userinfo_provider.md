@@ -62,6 +62,10 @@ The SDK provides `EMUserInfoManagerListener` to monitor user attribute update ev
 
 **We recommend registering the listener during business initialization so that the app promptly receives events and refreshes the UI during initial synchronization after login, message-triggered updates, or explicit retrieval.** For user attribute change notifications in other scenarios, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
 
+:::tip
+To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes) and [Subscribe to stranger attribute changes](userprofile.html#subscribe-to-stranger-attribute-changes).
+:::
+
 - Add a listener:
 
 ```java

@@ -66,6 +66,10 @@ The SDK provides events for monitoring changes to the current user's, other user
 
 **We recommend registering the listeners during app initialization so that you can receive events and refresh the UI promptly during initial synchronization after login, message-triggered updates, and subscription updates.** For user-attribute change notifications in other scenarios, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
 
+:::tip
+To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes) and [Subscribe to attribute changes for strangers](userprofile.html#subscribe-to-attribute-changes-for-strangers).
+:::
+
 The following example adds listeners:
 
 ```typescript

@@ -145,6 +145,8 @@ This feature applies to the following scenarios:
  - Maintain the latest attributes of specified strangers when displaying group members and in similar scenarios.
 
 :::tip
+Before subscribing to attribute changes for strangers, contact the EasyIM business manager to enable this feature.
+
 This feature applies only to strangers. For details about user attribute change notifications for the current user, strangers, and friends, see [User attribute change events](#monitor-user-attribute-changes).
 :::
 
@@ -208,6 +210,7 @@ Attribute updates of both friends and strangers can trigger the SDK's `onUserInf
 
  - **Current user**: Attribute changes of the current user are returned separately through `onSelfUserInfoUpdate` and do not use the `onUserInfoUpdate` logic described above.
  - **Friend users only**: If [automatic friend list synchronization after login](user_relationship.html#automatically-synchronize-the-friend-list-after-login) is enabled, the SDK automatically retrieves and updates local friend data after login. When a friend's attributes change, the `onFriendInfoChanged` event is triggered. This event is specific to friend relationships and is distinct from `onUserInfoUpdate`.
+ - To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature.
 
 Register the delegate through `addDelegate` and remove it through `removeDelegate` when it is no longer needed:
 

@@ -188,6 +188,8 @@ This feature applies to the following scenarios:
 - Maintaining the latest attributes of specified strangers when displaying chat group members.
 
 :::tip
+Before subscribing to attribute changes for strangers, contact the EasyIM business manager to enable this feature.
+
 This subscription feature applies only to strangers. Attribute change notifications differ for the current user, strangers, and friends. For details, see [Monitor user attribute changes](#monitor-user-attribute-changes).
 :::
 
@@ -259,6 +261,7 @@ Updates to friend and stranger attributes can trigger `EMUserInfoManagerListener
 
 - **Current user**: Changes to the current user's attributes are separately reported through `EMUserInfoManagerListener#onSelfUserInfoUpdate` and do not use the `onUserInfoUpdate` logic above.
 - **Friends only**: If [automatic friend-list synchronization after login](user_relationship.html#automatically-synchronize-the-friend-list-after-login) is enabled, the SDK automatically retrieves and updates local friend data after login is complete. When a friend's attributes change, `EMContactListener#onContactInfoUpdate(EMContact contact)` is triggered. This event is specific to friend relationships and differs from `onUserInfoUpdate`.
+- To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature.
 
 Register the listener through `addUserInfoManagerListener` and remove it through `removeUserInfoManagerListener` when it is no longer needed:
 

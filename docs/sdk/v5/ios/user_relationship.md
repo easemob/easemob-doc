@@ -21,6 +21,10 @@ Before you begin, ensure that the following requirements are met:
 
 Use `EMContactManagerDelegate` to monitor friend request, acceptance, rejection, addition, deletion, and friend information change events.
 
+:::tip
+To receive notifications of changes to friends' user attributes through `onFriendInfoChanged`, first contact the EasyIM business manager to enable this feature. For details about user attribute change notifications, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+:::
+
 ```objectivec
 @interface ContactViewController () <EMContactManagerDelegate>
 @end

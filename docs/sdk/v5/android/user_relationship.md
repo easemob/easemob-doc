@@ -19,6 +19,10 @@ Before you begin, ensure that the following requirements are met:
 
 Use `EMContactListener` to monitor friend request, acceptance, rejection, addition, deletion, and friend information change events.
 
+:::tip
+To receive notifications of changes to friends' user attributes through `onContactInfoUpdate`, first contact the EasyIM business manager to enable this feature. For details about user attribute change notifications, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+:::
+
 ```java
 EMContactListener contactListener = new EMContactListener() {
     // The peer accepts a friend request. User A sends user B a friend request. After user B accepts it, user A receives this event.
