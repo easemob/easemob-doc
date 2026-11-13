@@ -44,7 +44,8 @@
     },
     "vivo": {
         "classification": 1,
-        "category": "IM"
+        "category": "IM",
+        "addBadge": true
     },
     "apns": {
         "contentAvailable": true,
@@ -84,7 +85,7 @@ FCM 通道推送通知示例如下：
 | `ext`                | Object | 推送自定义扩展信息，为自定义 key-value 键值对。键值对个数不能超过 10 且长度不能超过 1024 个字符。 | iOS & Android | 否       |
 | `config`             | Object | 与用户点击通知相关的操作。以及角标的配置，包含 `clickAction` 和 `badge` 字段。 | iOS & Android | 否       |
 | `config.clickAction` | Object | 在通知栏中点击触发的动作，均为字符串类型：<br/> - `url`：打开自定义的 URL；<br/> - `action`：打开应用的指定页面；<br/> - `activity`：打开应用包名或 Activity 组件路径。若不传该字段，默认打开应用的首页。<br/><Container type="notice" title="注意">环信 iOS 推送通道只支持设置为 `url`。</Container> | Android       | 否       |
-| `config.badge`       | Object | 推送角标，包含以下三个字段：<br/> - `addNum`：整型，表示推送通知到达设备时，角标数字累加的值。<br/> - `setNum`：整型，表示推送通知到达设备时，角标数字显示的值。<br/> - `activity`：字符串类型，入口类（华为角标需要配置）。 | Android       | 否       |
+| `config.badge`       | Object | 推送角标，包含以下三个字段：<br/> - `addNum`：整型，表示推送通知到达设备时，角标数字累加的值。<br/> - `setNum`：整型，表示推送通知到达设备时，角标数字显示的值。<br/> - `activity`：字符串类型，入口类（华为角标需要配置）。<br/> 上述配置不适用于 vivo 厂商通道。通过该通道发送通知时，需使用 [`vivo.addBadge`](#vivo-推送说明) 单独控制角标是否自动加 1。 | Android       | 否       |
 
 ## 各厂商推送配置
 
@@ -340,11 +341,12 @@ FCM 通道推送通知示例如下：
 
 ### vivo 推送说明
 
-系统消息，回执和打开网页。
+以下为 `pushMessage.vivo` 的配置示例，包含系统消息、回执、打开网页以及数字角标自动加 1：
 
 ```json
 {
     "classification": 1,
+    "addBadge": true,
     "extra": {
       "callback": "http://www.easemob.com/callback",
       "callbackParam": "test push callback"
@@ -374,6 +376,7 @@ FCM 通道推送通知示例如下：
 | `notifyId`        | Int    | 通知 ID，即通知的唯一标识。若多个消息的通知 ID 相同，到达设备的新消息会覆盖旧消息显示在设备通知栏中。取值范围为：1-2147483647。 |
 | `profileId` | String| 关联终端设备登录用户标识，最大长度为 64 字符。|
 | `sendOnline` | Bool| 是否在线直推，设置为 `true` 表示是在线直推，`false` 表示非直推。在线直推功能推送时在设备在线下发一次，设备离线直接丢弃。|
+| `addBadge` | Boolean | 是否在 vivo 通知到达设备时使应用图标的数字角标自动加 1。<br/> - `true`：自动加 1。<br/> - `false` 或不传：该条通知不改变角标数字，保持历史默认行为。<br/> 该参数仅支持自动加 1，不支持设置任意角标数或清零。使用前，需在 vivo 侧开通数字角标能力，并按 [vivo 桌面角标设置方法](https://dev.vivo.com.cn/documentCenter/doc/788) 完成应用的系统角标 API 对接，确保设备允许显示数字角标。<br/> 使用 **即时推送** 服务通过 vivo 厂商通道发送通知时，需在请求的 `pushMessage.vivo` 中设置该字段，取值为 JSON 布尔值 `true` 或 `false`。通用角标配置 `config.badge.addNum`、`config.badge.setNum` 及环信通道的 `easemob.badge` 均不能替代此字段；环信在线通道的角标配置也不会自动应用到 vivo 厂商通知。<br/> IM 离线推送需通过 [vivo 推送证书中的 **角标数字** 选项](/document/android/push/push_vivo.html#步骤二-上传推送证书) 配置，无需修改 Android IM SDK 初始化代码。该证书选项不会为即时推送服务的请求自动补充 `addBadge` 字段。 |
 
 #### vivo 推送回调
 

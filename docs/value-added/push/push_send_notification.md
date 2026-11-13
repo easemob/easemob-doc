@@ -324,10 +324,7 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/single' \
     "pushMessage": {
         "title": "Hello",
         "subTitle": "Hello",
-        "content": "Hello",
-        "vivo": {
- 
-        }
+        "content": "Hello"
     }
 }'
 ```
@@ -486,9 +483,7 @@ curl -X POST 'http://localhost:8099/easemob-demo/testy/push/task' \
 -d '{
     "pushMessage": {
         "title": "Hello1234",
-        "subTitle": "Hello",
-        "content": "Hello",
-        "vivo": {}
+        "content": "Hello"
     }
 }'
 ```
