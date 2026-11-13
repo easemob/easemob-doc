@@ -8,8 +8,12 @@ These operations update only local messages and conversation data on the current
 
 The iOS SDK provides the following methods:
 
-- Import messages: Call `importMessages` to asynchronously import multiple messages sent or received by the current user into the local database.
+- Import messages: Call `importMessages` to asynchronously import multiple messages sent or received by the current user into the local database, without updating properties of the corresponding conversation, such as `latestMessage`.
 - Insert a message into a specified conversation: Call `insertMessage` to insert a message into the specified conversation according to its Unix timestamp and update properties such as `latestMessage`.
+
+When messages are imported in bulk, if the corresponding conversation has no latest message record, it is filtered out when conversations are loaded from the local database with empty conversations excluded. It does not appear in the returned conversation list. `EMOptions.loadEmptyConversations` defaults to `NO`, which means that empty conversations are not loaded.
+
+Therefore, we recommend grouping the messages to import by conversation, sorting each conversation's messages by message time, and setting aside the latest message in each conversation. Import the remaining messages in bulk through `importMessages`. After the bulk import is complete, call `insertMessage` on the corresponding conversation to insert the reserved message and update the conversation information. Retrieve or create the corresponding conversation before inserting the message. "Latest" is determined by the timestamp used by the SDK's current message sorting configuration. For example, if a conversation has three messages to import at 10:00, 10:01, and 10:02, first import the first two through `importMessages`, and then insert the 10:02 message through `insertMessage`. Do not first import all three messages in bulk and then insert the 10:02 message again. Otherwise, the SDK returns immediately because the message already exists and does not update the conversation information.
 
 ## Prerequisite
 
@@ -20,7 +24,7 @@ The iOS SDK provides the following methods:
 
 To batch import messages into local conversations, call `importMessages`, create `EMChatMessage` objects, and import the messages into the local database.
 
-The current user can import only messages they sent or received. After import, messages are added to the corresponding conversations according to their timestamps.
+The current user can import only messages they sent or received. After import, the messages are stored in the local database, but properties of the corresponding conversation, such as `latestMessage`, are not updated.
 
 We recommend importing no more than 1,000 messages at a time.
 

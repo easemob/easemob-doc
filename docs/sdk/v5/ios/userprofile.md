@@ -86,7 +86,13 @@ NSString *avatarUrl = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloa
 
 Call `fetchUserInfoById` to asynchronously retrieve all attributes of one or more users from the server. You can pass no more than 100 user IDs each time.
 
-When the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK updates the local data and triggers the `onUserInfoUpdate` callback.
+Successful retrieval does not necessarily trigger user attribute update events. The SDK compares the user attribute update time returned by the server with the local cache:
+
+- If another user's attributes are parsed successfully and the server update time is later than that in the local cache, the SDK triggers `EMUserInfoManagerDelegate#onUserInfoUpdate`.
+- If the currently logged-in user's own attributes meet the same update conditions, the SDK triggers `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`.
+- If the server update time is not later than that in the local cache, or no valid user attribute update time is returned, this query does not trigger update events.
+
+These explicit queries and their update events do not require enabling automatic user information management (`EMOptions.enableUserInfo = YES`). Your app can use the attributes in the completion callback to refresh the UI directly, without waiting for update events. For details, see [Monitor user attribute changes](#monitor-user-attribute-changes).
 
 ```objectivec
 // You can pass no more than 100 user IDs each time.
@@ -105,7 +111,7 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 ### Retrieve specified user attributes from the server
 
-Call `fetchUserInfoById` to asynchronously retrieve one or more specified attributes of specified users from the server. If the returned user attribute update timestamp is later than the locally stored timestamp, the SDK updates the local data and triggers the `onUserInfoUpdate` callback.
+Call `fetchUserInfoById` to asynchronously retrieve one or more specified attributes of specified users from the server. The conditions for triggering user attribute update events are the same as those for [retrieving all user attributes](#retrieve-all-user-attributes-from-the-server).
 
 ```objectivec
 NSArray<NSString *> *userIds = @[@"user1", @"user2"];
@@ -145,6 +151,8 @@ This feature applies to the following scenarios:
  - Maintain the latest attributes of specified strangers when displaying group members and in similar scenarios.
 
 :::tip
+Before subscribing to attribute changes for strangers, contact the EasyIM business manager to enable this feature.
+
 This feature applies only to strangers. For details about user attribute change notifications for the current user, strangers, and friends, see [User attribute change events](#monitor-user-attribute-changes).
 :::
 
@@ -200,14 +208,16 @@ If you do not subscribe to attribute changes of strangers, the app generally nee
 
 Attribute updates of both friends and strangers can trigger the SDK's `onUserInfoUpdate` event in the following ways:
 
-1. **Explicit update retrieval**: When the app calls an API to [retrieve user attributes from the server](#retrieve-all-user-attributes-from-the-server) or [retrieve group member information from the server](group_members.html#retrieve-the-chat-group-member-list), if the user attribute update timestamp returned by the server is later than the locally stored timestamp, the SDK automatically updates the local data and triggers this event.
-2. **Updates carried in messages**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a message is received and the sender's user attribute update time carried in the message is later than the local cache, the SDK retrieves the user attributes again and triggers this event. This mechanism applies to both friend and stranger senders.
-3. **Subscribed user changes (strangers only)**: If the app has [subscribed to attribute change events of strangers](#subscribe-to-attribute-change-events-of-strangers), the SDK also triggers this event when the attributes of these subscribed strangers change.
+1. **Explicit user attribute retrieval**: When you call [`IEMUserInfoManager#fetchUserInfoById`](#retrieve-all-user-attributes-from-the-server), if another user's attributes are parsed successfully and the server update time is later than that in the local cache, the SDK triggers `onUserInfoUpdate`. This explicit query does not require enabling automatic user information management.
+2. **Fetching missing user attributes during a group member query**: When you call [`IEMGroupManager#fetchGroupMemberInfoListFromServerWithGroupId`](group_members.html#retrieve-chat-group-member-details-by-page), the SDK fetches user attributes only if automatic user information management is enabled and either the member's attributes are missing from the local cache or both the nickname and avatar are empty. If the fetched attributes meet the update conditions above, the SDK triggers `onUserInfoUpdate`. If a nickname or avatar is already cached, the SDK uses the cache directly without checking for attribute updates on the server.
+3. **Updates carried in messages**: If [automatic user information management](userinfo_provider.html#enable-automatic-user-information-management) is enabled, when a message is received and the sender's user attribute update time carried in the message is later than the local cache, the SDK retrieves the user attributes again and triggers this event. This mechanism applies to both friend and stranger senders.
+4. **Subscribed user changes (strangers only)**: If the app has [subscribed to attribute change events of strangers](#subscribe-to-attribute-change-events-of-strangers), the SDK also triggers this event when the attributes of these subscribed strangers change.
 
 **Special notes**
 
  - **Current user**: Attribute changes of the current user are returned separately through `onSelfUserInfoUpdate` and do not use the `onUserInfoUpdate` logic described above.
  - **Friend users only**: If [automatic friend list synchronization after login](user_relationship.html#automatically-synchronize-the-friend-list-after-login) is enabled, the SDK automatically retrieves and updates local friend data after login. When a friend's attributes change, the `onFriendInfoChanged` event is triggered. This event is specific to friend relationships and is distinct from `onUserInfoUpdate`.
+ - To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature.
 
 Register the delegate through `addDelegate` and remove it through `removeDelegate` when it is no longer needed:
 

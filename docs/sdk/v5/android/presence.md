@@ -56,7 +56,7 @@ EMClient.getInstance().presenceManager().subscribePresences(contactsFromServer, 
 
 After the subscription succeeds, the SDK returns the subscribed users' presence through the `onSuccess` callback.
 
-When presence changes, subscribers receive the `EMPresenceListener#onPresenceUpdated` callback.
+When a subscribed user's presence changes, subscribers receive the `EMPresenceListener#onPresenceUpdated` callback.
 
 :::tip
 - The maximum subscription duration is 30 days. Subscribe again after it expires. If you subscribe again before expiration, the newly specified validity period replaces the previous one.

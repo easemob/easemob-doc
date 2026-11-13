@@ -34,7 +34,7 @@ Before you begin, ensure that the following requirements are met:
 
 Call `addConversationMark` to add a specified tag to one or more conversations. This operation updates the server-side and local conversation tags at the same time. You can pass up to 20 conversation IDs in a single call.
 
-After a conversation tag is added, the SDK updates the server-side and local tag data at the same time. Before initializing the SDK, configure `EMOptions#dataSyncType` to include `EMDataSyncTypeConversations`. After login, when `syncDataFinished` reports that conversation data synchronization has succeeded, you can retrieve an `EMConversation` object through a local conversation list API and retrieve all tags of the conversation through `EMConversation#marks`.
+After login, the SDK automatically synchronizes the conversation list and its tags and writes them locally. After a conversation tag is added, the tag data is updated on both the server and the local device. When synchronization is complete, retrieve the `EMConversation` object through the local conversation list API, and then call `EMConversation#marks` to retrieve all tags for the conversation.
 
 If the server-side conversation list reaches its quantity limit, which is 100 conversations by default, the server may remove inactive conversations based on conversation activity. Their tags might also no longer be synchronized to the local device with the server-side conversation list.
 
@@ -94,7 +94,7 @@ The parameter rules for `removeConversationMark` are the same as those for [addi
 
 ## Filter the conversation list by tag
 
-Before initializing the SDK, configure `EMOptions#dataSyncType` to include `.conversations`. After login, wait for conversation data synchronization to finish and then filter conversations by the local `EMConversation#marks` property.
+`EMOptions#dataSyncType` includes `.conversations` by default. After login, wait for conversation data synchronization to finish and then filter conversations by the local `EMConversation#marks` property. To explicitly specify the synchronization scope, configure this property before initializing the SDK.
 
 Configure conversation synchronization before initializing the SDK:
 

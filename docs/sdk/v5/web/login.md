@@ -43,15 +43,22 @@ const client = ChatClient.init({
   appKey: 'easemob-demo#chatdemoui',
 });
 
-await client.login({
-  userId: 'username',
-  token: 'token',
-});
+await client.login(
+  {
+    userId: 'username',
+    token: 'token',
+  },
+  {
+    // Optional. The default total timeout is 30000 milliseconds.
+    timeoutMs: 60000,
+  }
+);
 ```
 
 Note the following when logging in:
 
 - `userId` and `token` are required.
+- Starting with SDK v5.1.2, the default total login timeout is 30 seconds, covering service discovery, connection establishment, retries, and waiting for the login response. To customize it, set `timeoutMs` to a value from 5000 to 120000 milliseconds. This setting applies only to the current initial login attempt and does not affect reconnection after login succeeds.
 - You are advised to register a connection event listener before calling `login` so that you can receive connection-success, disconnection, and token-lifecycle events.
 - If the SDK is connecting or already connected, another call to `login` fails.
 - To switch users, call `logout` to log out the current user before logging in with the new user ID and token.

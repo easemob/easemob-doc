@@ -489,10 +489,10 @@ Combined messages are used to forward chat history or package and forward multip
 
 Receive a combined message in the same way as a regular message. In the `onMessage` callback, identify it using `message.type === 'combine'`.
 
-A combined message contains a title, summary, compatibility text, and combined-message attachment information. After receiving one, read `title`, `summary`, and `compatibleText` directly from the message body. To retrieve the list of original messages in it, call `downloadAndParseCombineMessage` to download and parse the combined-message attachment. On the first call, the SDK downloads and parses the attachment based on its information in the combined message and returns the original message list. On subsequent calls, if the attachment data is available, the SDK can parse it directly and return the original message list.
+A combined message contains a title, summary, and combined-message attachment information. After receiving one, read `title` and `summary` directly from the message body. To retrieve the list of original messages in it, call `downloadAndParseCombineMessage` to download and parse the combined-message attachment. On the first call, the SDK downloads and parses the attachment based on its information in the combined message and returns the original message list. On subsequent calls, if the attachment data is available, the SDK can parse it directly and return the original message list.
 
 :::tip
-SDK versions that do not support combined forwarded messages display the compatibility text. When the current SDK receives a combined message, `message.body` does not contain the `compatibleText` field.
+`compatibleText` is an optional parameter when creating a combined message. It provides compatibility text for older clients that do not support combined forwarded messages. When the current SDK receives a combined message, `message.body` does not contain the `compatibleText` field.
 :::
 
 Example code:
@@ -510,9 +510,6 @@ client.chatManager.addEventHandler('combine-message-listener', {
     console.log('Title:', message.body.title);
     // Read the combined message summary.
     console.log('Summary:', message.body.summary);
-    // Read the compatibility text.
-    console.log('Compatibility text:', message.body.compatibleText);
-
     // Download and parse the original child message list.
     const subMessages = await client.chatManager.downloadAndParseCombineMessage({
       message,
@@ -540,7 +537,6 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | :--- | :--- | :--- | :--- | :--- |
 | `title` | String | Required | Overview display | Combined message title. |
 | `summary` | String | Required | Overview display | Combined message summary. Use it only for an overview. To display the original chat history, call `downloadAndParseCombineMessage()`. |
-| `compatibleText` | String | Required | Compatibility display | Compatibility text displayed when complete combined-message rendering is not supported. |
 | `url` | String | Optional | Download details | Download URL for combined message details. |
 | `secret` | String | Optional | Download authentication | Download key for combined message details. |
 | `messageList` | `ReadonlyArray<Message>` | Optional | Display parsed details | May appear only when sending a message or after parsing its details. |

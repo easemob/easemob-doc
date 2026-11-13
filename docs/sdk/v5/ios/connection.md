@@ -253,6 +253,9 @@ Use `syncDataStart(with:)` and `syncDataFinished(_:type:)` to monitor the post-l
 - The iOS SDK no longer relies on automatic login. The app should explicitly log in when it starts or needs to establish an EasyIM session.
 - Do not immediately call the login API repeatedly after a weak-network disconnection. The SDK automatically reconnects in recoverable scenarios.
 - Use `isConnected` to query the current connection state and `isLoggedIn` to query the login state, and preferentially drive UI updates through delegate callbacks.
+  
+  **Note**: `isConnected()` is generally used for UI connection status indicators. There is **no need** to manually verify the connection status before calling APIs like sending messages or joining groups/chat rooms, as the SDK handles connection checks internally and automatically retries unfinished operations after reconnecting.
+  
 - Renew the Token as soon as possible after receiving `tokenWillExpire(_:)`. After receiving `tokenDidExpire(_:)`, obtain a new Token and log in again.
 - Use abnormal account callbacks to handle device, account, and service restrictions, and provide a clear prompt based on `EMError.code`.
 - Call `removeDelegate(_:)` when monitoring is no longer required to avoid duplicate callbacks.

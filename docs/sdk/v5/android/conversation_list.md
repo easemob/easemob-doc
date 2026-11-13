@@ -2,13 +2,13 @@
 
 ## Feature overview
 
-- **Local conversation list:** For one-to-one, group, and chat room conversations, the SDK creates or updates a local conversation when a user sends or receives messages and maintains it in the local conversation list cache. The app can read the list from local memory or the database to display names, avatars, latest messages, unread counts, pin states, and conversation tags.
+- **Local conversation list:** For one-to-one, group, and chat room conversations, the SDK creates or updates a local conversation when a user sends or receives messages and maintains it in the local conversation list cache. The app can read the list from local memory or the database to display names, avatars, latest messages, unread counts, pin states, and conversation tags. **Starting from SDK v5.1.0, the local conversation list excludes chat room conversations by default.**
 - **Server-side and local data:** Both the EasyIM server and the local SDK maintain conversation list data. The server stores the current user's conversation state, while the local cache enables quick client-side reading and display. After SDK initialization and login, the SDK automatically maintains the local list. Synchronization, explicit refreshes, message sending or receiving, deletion, unread-count clearing, pinning or unpinning, and adding or removing tags may update it.
-- **Synchronization and change notifications:** To obtain the latest server-maintained data, configure automatic conversation data synchronization before initializing the SDK, wait for synchronization after login, and then read the local list. The SDK notifies the app through a conversation list update event when the local list changes. The current device can also detect conversation pin changes made by the same account on another device through multi-device events.
+- **Synchronization and change notifications:** Starting from SDK v5.1.0, server-side conversation data is automatically synchronized after login by default. Therefore, after login, wait for synchronization to finish before reading the local conversation list. The SDK notifies the app through a conversation list update event when the local list changes. The current device can also detect conversation pin changes made by the same account on another device through multi-device events.
 
 ## Feature activation
 
-Before use, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
+To synchronize the server-side conversation list locally, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Prerequisite
 
@@ -23,7 +23,7 @@ To retrieve the latest conversation data, your app should automatically synchron
 
 ### Automatically synchronize the conversation list after login
 
-Before calling `EMClient#init` to initialize the SDK, configure `EMDataSyncType.CONVERSATIONS` through `EMOptions#setDataSyncType`. After login succeeds, the SDK automatically synchronizes the conversation list and writes it locally.
+Starting from SDK v5.1.0, `EMOptions#setDataSyncType` includes `EMDataSyncType.CONVERSATIONS` by default. After login succeeds, the SDK automatically synchronizes the conversation list and writes it locally. To explicitly specify the synchronization scope, configure this method before calling `EMClient#init` to initialize the SDK.
 
 ```java
 EMOptions options = new EMOptions();
@@ -82,6 +82,63 @@ EMClient.getInstance().addConnectionListener(connectionListener);
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
 
+### Conversation-related options
+
+During initialization, you can set the following conversation-related options in `EMOptions`:
+
+| Option                                                         | Description                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `setEnableChatroomConversation(boolean enable)`              | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Call `isEnableChatroomConversation()` to query whether the current configuration includes chat room conversations when retrieving the local conversation list. |
+| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | Sets whether to delete a chat room's local messages when the user actively or passively leaves the chat room.<br/> - (Default) `true`: Deletes local messages.<br/> - `false`: Retains local messages. |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
+
+### Retrieve local conversations by page
+
+Starting from SDK v5.1.0, you can call `EMChatManager#asyncGetConversationsFromDB` to retrieve the conversation list from the local database by page. The SDK returns pinned conversations first. Conversations with the same pin status are sorted by the server timestamp of the latest message in descending order. If the timestamps are also the same, conversations are sorted case-insensitively by conversation ID in descending order.
+.
+
+Before calling this method, call `EMOptions#setAutoLoadAllConversations(false)` during SDK initialization to disable automatic loading of all local conversations. This option defaults to `true`, which enables automatic loading of all conversations. Otherwise, the SDK loads all conversations from the database into memory after login succeeds, preventing pagination from reducing the initial loading volume and memory usage.
+
+```java
+// Disable automatic loading of all local conversations before initializing the SDK.
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setAutoLoadAllConversations(false);
+EMClient.getInstance().init(getApplicationContext(), options);
+
+// For the first query, pass null or an empty string for cursor to start from the first page.
+String cursor = "";
+// The value range of pageSize is [1,100].
+int pageSize = 20;
+
+EMClient.getInstance()
+        .chatManager()
+        .asyncGetConversationsFromDB(
+                cursor,
+                pageSize,
+                new EMValueCallBack<EMCursorResult<EMConversation>>() {
+                    @Override
+                    public void onSuccess(EMCursorResult<EMConversation> result) {
+                        List<EMConversation> conversations = result.getData();
+                        String nextCursor = result.getCursor();
+
+                        if (nextCursor != null && !nextCursor.isEmpty()) {
+                            // Save nextCursor and pass it as cursor when retrieving the next page.
+                        } else {
+                            // An empty nextCursor string indicates that the current page is the last page.
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        if (errorCode == EMError.INVALID_PARAM) {
+                            // The cursor is invalid.
+                        }
+                    }
+                });
+```
+
 ### Retrieve all or filtered local conversations
 
 Call `asyncFilterConversationsFromDB` to retrieve all conversations from the local database or filter them by criteria:
@@ -123,12 +180,8 @@ EMClient.getInstance()
                 });
 ```
 
-The following table lists conversation-related options that can be set during initialization:
+For details about setting whether the local conversation list includes chat room conversations or empty conversations, see [Conversation-related options](#conversation-related-options).
 
-| Option | Description |
-| ------------------------------------------- | ------------------------------------------------------------ |
-| `EMOptions#setDeleteMessagesAsExitChatRoom` | Sets whether to delete a chat room's local messages when leaving it. <br/> - (Default) `true`: Deletes local messages. <br/> - `false`: Retains local messages. |
-| `EMOptions#setLoadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database.<br/> -  `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. This option must be set before initializing the SDK. |
 
 ### Retrieve all local conversations at once
 
@@ -174,8 +227,7 @@ Call `EMConversation#getConversationName()` and `EMConversation#getConversationA
 
 - One-to-one conversation: The peer user's nickname and avatar.
 - Group conversation: The chat group name and avatar.
-- Chat room conversation: Usually the chat room name and avatar.
-- If the relevant data has not yet been synchronized, these methods may return an empty string.
+- If the relevant user or chat group data has not yet been synchronized, these methods may return an empty string.
 
 ```java
 String conversationName = conversation.getConversationName();
@@ -291,7 +343,7 @@ EMClient.getInstance()
 
 | Scenario | Recommendation |
 | :--- | :--- |
-| Retrieve the latest conversation list | Configure `EMDataSyncType.CONVERSATIONS` before initializing the SDK, and read local data after conversation synchronization succeeds. Do not call the server-side conversation list retrieval API removed in V5. |
+| Retrieve the latest conversation list | Use the default `EMDataSyncType.CONVERSATIONS` configuration or explicitly configure this type before initializing the SDK, and read local data after conversation synchronization succeeds. |
 | Display the conversation list | Prefer `getAllConversationsBySort` and directly use the SDK's pinned-first list sorted by latest message time in descending order. |
 | Respond to conversation changes | Register `EMConversationListener`. After receiving `onConversationUpdate`, read the local conversation list again and refresh the UI. |
 | Manage listeners | Remove `EMConnectionListener` and `EMConversationListener` when the page or component is destroyed to avoid duplicate callbacks and memory leaks. |
@@ -303,11 +355,14 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`setAppKey`](#automatically-synchronize-the-conversation-list-after-login) | `EMOptions` | Sets the App Key of the app. |
 | [`setDataSyncType`](#automatically-synchronize-the-conversation-list-after-login) | `EMOptions` | Sets the data types automatically synchronized after login succeeds. |
-| [`setLoadEmptyConversations`](#retrieve-all-or-filtered-local-conversations) | `EMOptions` | Sets whether to include empty conversations when loading from the local database. |
-| [`setDeleteMessagesAsExitChatRoom`](#retrieve-all-or-filtered-local-conversations) | `EMOptions` | Sets whether to delete a chat room's local messages when leaving it. |
-| [`setAutoLoadAllConversations`](#retrieve-all-local-conversations-at-once) | `EMOptions` | Sets whether to automatically load all local conversations into memory after login succeeds. |
+| [`setEnableChatroomConversation`](#conversation-related-options) | `EMOptions` | Sets whether to include chat room conversations when retrieving the local conversation list. |
+| [`isEnableChatroomConversation`](#conversation-related-options) | `EMOptions` | Queries whether the current configuration includes chat room conversations when retrieving the local conversation list. |
+| [`setLoadEmptyConversations`](#conversation-related-options) | `EMOptions` | Sets whether to include empty conversations when loading from the local database. |
+| [`setDeleteMessagesAsExitChatRoom`](#conversation-related-options) | `EMOptions` | Sets whether to delete a chat room's local messages when leaving it. |
+| [`setAutoLoadAllConversations`](#conversation-related-options) | `EMOptions` | Sets whether to automatically load all local conversations into memory after login succeeds. |
 | [`init`](#automatically-synchronize-the-conversation-list-after-login) | `EMClient` | Initializes the Android SDK with the specified configuration. |
 | [`asyncFilterConversationsFromDB`](#retrieve-all-or-filtered-local-conversations) | `EMChatManager` | Retrieves all conversations from the local database or filters them by criteria. |
+| [`asyncGetConversationsFromDB`](#retrieve-local-conversations-by-page) | `EMChatManager` | Retrieves conversations from the local database by page. |
 | [`getAllConversationsBySort`](#retrieve-all-local-conversations-at-once) | `EMChatManager` | Retrieves the pinned-first local conversation list sorted by latest message time in descending order. |
 | [`getAllConversations`](#retrieve-all-local-conversations-at-once) | `EMChatManager` | Retrieves the local conversation map keyed by conversation ID. |
 | [`getConversationName`](#retrieve-the-conversation-name-and-avatar) / [`getConversationAvatar`](#retrieve-the-conversation-name-and-avatar) | `EMConversation` | Retrieves the display name and avatar of a one-to-one or group conversation. |

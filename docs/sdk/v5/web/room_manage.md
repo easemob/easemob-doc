@@ -39,9 +39,39 @@ To destroy a chat room, call the server-side REST API for [destroying a chat roo
 ## Join a chat room
 
 1. Call the `getChatRoomList` method to retrieve the chat room list from the server and find the ID of the chat room you want to join. For details, see [Retrieve the chat room list](#retrieve-the-chat-room-list).
-2. Call the `joinChatRoom` method to join the specified chat room. Members in the chat room receive the `onMembersJoined` event.
-  - You can pass extension information in `ext` when joining. Chat room members can obtain this extension information from the event.
-  - You can specify whether to leave all other chat rooms when joining.
+2. Call the `joinChatRoom` method to join the specified chat room. The other members in the chat room receive the `onMembersJoined` event.
+
+```typescript
+try {
+  // 1. Get the first page of chat rooms
+  const result = await client.chatRoomManager.getChatRoomList({
+    pageNum: 1,
+    pageSize: 20,
+  });
+
+  // 2. Select the first chat room for this example.
+  // In your app, let the user choose a chat room.
+  const chatRoom = result.items[0];
+  if (chatRoom) {
+    await client.chatRoomManager.joinChatRoom({
+      chatRoomId: chatRoom.chatRoomId,
+    });
+    console.log('Successfully joined chat room:', chatRoom.chatRoomId);
+  } else {
+    console.log('No chat rooms found on the current page');
+  }
+} catch (error) {
+  console.error('Failed to get the chat room list or join a chat room:', error);
+}
+```
+
+#### Join a chat room with extension information
+
+To pass custom business information when joining a chat room or specify whether to leave other chat rooms the user has joined, set the `ext` and `leaveOtherRooms` parameters as needed when calling `joinChatRoom`. These parameters are described in the table below.
+
+After a user successfully joins the chat room, the other members receive the `onMembersJoined` event. If extension information was passed when joining, the other members can obtain it from this event.
+
+The following example shows how to join a chat room with extension information:
 
 ```typescript
 await client.chatRoomManager.joinChatRoom({

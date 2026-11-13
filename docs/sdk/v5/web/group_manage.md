@@ -269,8 +269,8 @@ const group = client.groupManager.getGroup('groupId');
 | [Unmute all members](group_members.html#unmute-all-members) | `group.unmuteAllMembers()` | Unmute all members in the current group. |
 | [Check whether the current user is muted](group_members.html#check-whether-the-current-user-is-muted) | `group.checkIfInMuteList()` | Check whether the current user is on the mute list. |
 | [Retrieve the group blocklist](group_members.html#retrieve-the-blocklist) | `group.getBlocklist({ pageNum, pageSize })` | Retrieve the blocklist by page. |
-| [Add members to the group blocklist](group_members.html#add-members-to-the-allowlist) | `group.blockMembers({ userIds })` | Add specified members to the group blocklist. |
-| [Remove members from the group blocklist](group_members.html#remove-members-from-the-allowlist) | `group.unblockMembers({ userIds })` | Remove specified members from the blocklist. |
+| [Add members to the group blocklist](group_members.html#add-members-to-the-blocklist) | `group.blockMembers({ userIds })` | Add specified members to the group blocklist. |
+| [Remove members from the group blocklist](group_members.html#remove-members-from-the-blocklist) | `group.unblockMembers({ userIds })` | Remove specified members from the blocklist. |
 | [Retrieve the group allowlist](group_members.html#retrieve-the-allowlist) | `group.getAllowlist()` | Retrieve the group allowlist. |
 | [Add members to the group allowlist](group_members.html#add-members-to-the-allowlist) | `group.addUsersToAllowlist({ userIds })` | Add specified members to the allowlist. |
 | [Remove members from the group allowlist](group_members.html#remove-members-from-the-allowlist) | `group.removeUsersFromAllowlist({ userIds })` | Remove specified members from the allowlist. |

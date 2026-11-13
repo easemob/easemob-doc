@@ -35,10 +35,10 @@ The Android SDK creates different message types through different static methods
 | Message content         | The content parameter of each message creation method, or `EMMessage#setBody`             | Yes             | All messages         | The parameter varies by message type, such as text content, attachment URI, location coordinates, command, or custom event. |
 | Conversation type         | `EMMessage#setChatType`                                      | Required for group chat and chat rooms | All messages         | Set it to `EMMessage.ChatType.Chat`, `GroupChat`, or `ChatRoom` for one-to-one chat, group chat, or a chat room, respectively. The default is `Chat`. |
 | Extension         | `EMMessage#setAttribute`                                     | No             | All messages         | Add custom business information. String, Boolean, numeric, JSON object, JSON array, and other types are supported. Extensions count toward the message size limit. |
-| Online-only delivery       | `EMMessage#deliverOnlineOnly`                                | No             | All messages         | When set to `true`, the message is delivered only to online users and is not stored offline. This is suitable for typing indicators, transient control information, and similar scenarios. |
+| Online-only delivery       | `EMMessage#deliverOnlineOnly`                                | No             | All message types in one-to-one and group chats | When set to `true`, the message is delivered only to online users. If the recipient is offline, the message is discarded. This feature does not apply to chat rooms. It is suitable for typing indicators, transient control information, and similar scenarios. |
 | Callback routing environment     | `EMMessage#setWebhookEnv`                                    | No             | All messages         | Set a Webhook callback environment identifier, which the server uses to match a callback route.      |
 | Chat room message priority | `EMMessage#setPriority`                                      | No             | Chat room messages       | Set the chat room message priority to `PriorityHigh`, `PriorityNormal`, or `PriorityLow`. The default is `PriorityNormal`. |
-| Target recipients     | `EMMessage#setReceiverList`                                  | No             | Group and chat room messages | Set the specified recipients of a group or chat room message. Availability is also subject to the corresponding server-side feature configurations and usage restrictions. |
+| Target recipients     | `EMMessage#setReceiverList`                                  | No             | Group and chat room messages | Set the specified recipients of a group or chat room message. |
 | Read receipt required | `EMMessage#setIsNeedReadReceipt`                             | No             | One-to-one and group messages   | Mark whether the message requires a read receipt. This attribute must be `true` before the recipient sends a read receipt. Chat rooms do not support message read receipts. |
 
 ## API call frequency limit
@@ -118,7 +118,9 @@ EMClient.getInstance()
 
 #### Example with group message read receipts and extensions
 
-For a text message with business attributes, call `EMMessage#setAttribute` to add extensions. In a group chat, call `EMMessage#setIsNeedReadReceipt(true)` to collect message read information from group members.
+For a text message with business attributes, call `EMMessage#setAttribute` to add extensions.
+
+To require a read receipt for a one-to-one or group message, call `EMMessage#setIsNeedReadReceipt(true)` before sending it.
 
 ```java
 // Create a group text message. groupId is the chat group ID.
@@ -156,6 +158,8 @@ Sending an attachment message consists of the following two steps:
 
 By default, after `EMChatManager#sendMessage` is called, the SDK automatically uploads local attachments to the EasyIM server, and the recipient SDK can automatically download them. Use `EMOptions#setAutoTransferMessageAttachments` to control whether the SDK automatically transfers attachments. For message attachment size and storage limits, see [Message Attachment Limitations](/product/limitation.html#message-storage).
 
+When the SDK automatically transfers attachments, ensure that the local file path or URI remains accessible until the message sending result callback returns. Do not delete the source file or revoke URI read permission beforehand. For resources returned by a photo album, system file picker, or temporary directory, if their access permissions and lifetime cannot be guaranteed, we recommend copying them to a local directory controlled by your app before sending.
+
 ### Send image messages
 
 An image message typically involves the following three image resources:
@@ -168,16 +172,16 @@ An image message typically involves the following three image resources:
 
 The process for sending an image message is as follows:
 
-1. Obtain the local URI of the image.
+1. Obtain the local file path of the image.
 2. Call `EMMessage#createImageSendMessage` to create an image message.
    
-   When creating the message, pass the image's local URI, a flag indicating whether to send the original image, and the recipient's user ID. For a group or chat room message, pass the group ID or chat room ID, respectively.
+   When creating the message, pass the image's local file path, a flag indicating whether to send the original image, and the recipient's user ID. For a group or chat room message, pass the group ID or chat room ID, respectively.
 
    The `sendOriginalImage` parameter controls the image resource that is actually uploaded. `true` means the SDK uploads the original image, while `false` means it uploads the large image.
 
 3. Call `EMChatManager#sendMessage` to send the message.
    
-   If `EMOptions#setAutoTransferMessageAttachments(boolean)` is enabled, the SDK automatically uploads the image attachment, and the server automatically generates a thumbnail.
+   If `EMOptions#setAutoTransferMessageAttachments(boolean)` is enabled, the SDK automatically uploads the image attachment, and the server automatically generates a thumbnail. For image upload progress, see [Retrieve the attachment message sending progress](#retrieve-the-attachment-message-sending-progress).
 
 The following sample code creates and sends an image message: 
 
@@ -210,7 +214,7 @@ EMClient.getInstance()
 
 | Parameter                | Type      | Required | Description                                                         |
 | ------------------- | --------- | --------- | ------------------------------------------------------------ |
-| `imagePath`          | `Uri`     | Yes      | The local URI of the image, typically obtained through the system gallery or file picker.           |
+| `imagePath`          | `String`  | Yes      | The local file path of the image. |
 | `sendOriginalImage` | `boolean` | Yes      | Whether to send the original image. `true` uploads the original image, and `false` uploads the large image. Set this value based on image quality and upload traffic requirements. |
 | `conversationId`    | `String`  | Yes      | Target conversation ID. The peer user ID for one-to-one chat, group ID for group chat, or chat room ID for a chat room. |
 
@@ -422,11 +426,11 @@ The Android SDK only encapsulates and sends location messages. It does not provi
 
 A command message can be considered an instruction sent to the peer to notify it of an operation to perform. The recipient can customize how the message is processed.
 
-Customize its specific behavior according to your business requirements, such as updating avatars or nicknames. Actions beginning with `em_` or `easemob::` are reserved internal fields and must not be used.
+Customize its specific behavior according to your business requirements, such as updating avatars or nicknames. `action` values beginning with `em_` or `easemob::` are reserved internal fields and must not be used.
 
 :::tip
 - A command message cannot be recalled after it is sent.
-- Command messages are not stored in the local database and therefore are not displayed in the UI.
+- Command messages are not stored in the local database and do not create local conversations, so they are usually not displayed in the UI.
 :::
 
 #### Sending process
@@ -558,6 +562,7 @@ Set the following parameters when creating a combined message:
 1. Combined-message forwarding can be nested up to 10 levels, with up to 300 messages at each level.
 2. Regardless of whether `EMOptions#setAutoTransferMessageAttachments` is set to `false` or `true`, the SDK uploads combined message attachments to the EasyIM server.
 3. To forward a combined message, for example, when user A sends a combined message to user B and user B forwards it to user C, call the API for forwarding a single combined message. See [Forward a single message](message_forward.html#forward-a-single-message).
+4. Combined messages do not support searching.
 :::
 
 #### Recommendations

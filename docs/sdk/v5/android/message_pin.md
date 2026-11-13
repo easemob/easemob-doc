@@ -6,7 +6,7 @@ Pinning messages marks important messages in a conversation so conversation memb
 
 **One-to-one chats, group chats, and chat rooms all support this feature.** The pinned state is stored on the server and synchronized among relevant users in the same conversation.
 
-Multiple messages can be pinned in the same conversation. Your app can retrieve the pinned message list for a specified conversation from the server and promptly update the page through pinned-message events. For a single message, the app can also read details such as the operator and pinning time.
+Multiple messages can be pinned in the same conversation. Your app can retrieve the pinned message list for a specified conversation from the server and promptly update the page through pinned-message events. For a single message, the app can also read the operator and pinning time of its latest pin operation.
 
 ## Feature activation
 
@@ -27,6 +27,7 @@ Call `EMChatManager#asyncPinMessage` and pass a non-empty message ID to pin a sp
 The same message can be pinned repeatedly by multiple users, but only information about the latest pin operation is retained. Therefore, the operator user ID and pinning time obtained through `EMMessagePinInfo` correspond to the latest pin operation.
 
 Only messages still stored on the server can be pinned. If a message exists only locally and has been deleted from the server after its retention period expired, pinning fails.
+
 **By default, up to 20 messages can be pinned in a conversation. To increase the limit, contact the EasyIM business manager. The maximum supported limit is 100.**
 
 ```java
@@ -129,7 +130,7 @@ EMClient.getInstance()
 Call `EMMessage#pinnedInfo` to retrieve pin details for a message:
 
 - If the message is pinned, the returned `EMMessagePinInfo` contains the operator user ID and pinning time of the latest pin operation.
-- If the message is not pinned, this method returns `null`.
+- If the message does not exist or is not pinned, this method returns `null`.
 
 ```java
 EMMessagePinInfo pinInfo = message.pinnedInfo();
@@ -176,6 +177,8 @@ EMClient.getInstance()
         .chatManager()
         .removeMessageListener(messageListener);
 ```
+
+If pinning fails, check whether the feature is enabled, the message is still on the server, the conversation's pinned message count is within the limit, and the parameters are correct. Event notifications do not automatically update message arrays maintained by your app.
 
 ## API list
 

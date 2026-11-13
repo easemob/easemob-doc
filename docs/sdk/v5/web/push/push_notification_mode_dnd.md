@@ -76,7 +76,7 @@ await client.pushManager.setGlobalSilentMode({
 await client.pushManager.setGlobalSilentMode({
   rule: {
     mode: 'DURATION',
-    duration: 7200, // One-time DND duration.
+    duration: 7200, // One-time DND duration in the unit of minute.
   },
 });
 
@@ -131,8 +131,8 @@ Example code:
 
 ```typescript
 const result = await client.pushManager.clearConversationRemindType({
-  conversationId: '12345', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'groupChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
+  conversationId: '12345', // Conversation ID: peer user ID for a one-to-one chat or group ID for a group chat.
+  conversationType: 'groupChat', // Conversation type: singleChat (one-to-one chat) or groupChat (group chat).
 });
 ```
 
@@ -145,8 +145,8 @@ The SDK currently supports only `singleChat` and `groupChat` conversations, not 
 ```typescript
 // Set the push notification mode for a conversation
 await client.pushManager.setConversationSilentMode({
-  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
+  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat or group ID for a group chat.
+  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat) or groupChat (group chat).
   rule: {
     mode: 'REMIND_TYPE', // Push notification mode.
     remindType: 'ALL', // Can be set to `ALL`, `AT`, or `NONE`.
@@ -185,8 +185,8 @@ Call `client.pushManager.getConversationSilentMode` to retrieve the push notific
 
 ```typescript
 const result = await client.pushManager.getConversationSilentMode({
-  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
+  conversationId: 'test', // Conversation ID: peer user ID for a one-to-one chat or group ID for a group chat.
+  conversationType: 'singleChat', // Conversation type: singleChat (one-to-one chat) or groupChat (group chat).
 });
 ```
 
@@ -205,8 +205,8 @@ Example code:
 const result = await client.pushManager.getConversationSilentModes({
   conversationList: [
     {
-      conversationId: 'test',  // Conversation ID: peer user ID for a one-to-one chat, group ID for a group chat, or chat room ID for a chat room.
-      conversationType: 'singleChat',  // Conversation type: singleChat (one-to-one chat), groupChat (group chat), or chatRoom (chat room).
+      conversationId: 'test',  // Conversation ID: peer user ID for a one-to-one chat or group ID for a group chat.
+      conversationType: 'singleChat',  // Conversation type: singleChat (one-to-one chat) or groupChat (group chat).
     },
     {
       conversationId: '1234',

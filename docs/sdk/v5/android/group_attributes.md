@@ -16,6 +16,8 @@ Before you begin, ensure that the following requirements are met:
 
 Call `EMGroupManager#getGroup` to retrieve chat group details by group ID from local memory. This API does not initiate a network request. Call `asyncGetGroupFromServer` to retrieve the latest chat group details from the server and update the local cache.
 
+To read the latest joined group data locally after login, enable joined group data synchronization during SDK initialization and wait for synchronization to finish. See [Retrieve the groups joined by the current user](group_manage.html#retrieve-the-groups-joined-by-the-current-user).
+
 `asyncGetGroupFromServer` does not return the group member list. To retrieve the member list, call `asyncFetchGroupMembersInfo` or `asyncFetchGroupMembers`. See [Retrieve the group member list](group_members.html#retrieve-the-group-member-list).
 
 :::tip
@@ -297,7 +299,7 @@ EMClient.getInstance()
 
 ## Manage shared chat group files
 
-Group members can download, retrieve, and delete shared chat group files. Regular members can delete only files they uploaded, whereas the group owner and group admins can delete any shared file in the group.
+Group members can upload, download, retrieve, and delete shared chat group files. Regular members can delete only files they uploaded, whereas the group owner and group admins can delete any shared file in the group.
 
 ### Upload a shared chat group file
 

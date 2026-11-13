@@ -1,4 +1,44 @@
-# v5.0.0 2026-8-28
+# iOS IM SDK Release Notes
+
+## v5.1.0 Dev 2026-9-24
+
+#### Major changes
+
+**1. Exclude chat room conversations from the local conversation list by default**
+
+By default, chat room conversations are excluded when retrieving the local conversation list. To include them, set `EMOptions#enableChatroomConversation` to `true` before initializing the SDK. Read this property to query the current configuration.
+
+For details, see [Conversation-related options](conversation_list.html#conversation-related-options).
+
+**2. Remove data synchronization WebSocket configuration properties**
+
+The data synchronization WebSocket address is now automatically obtained from the REST server configuration and no longer requires separate configuration. The following properties are removed:
+
+- `syncDataWSHost`
+- `syncDataWSPort`
+
+For details, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
+
+#### New features
+
+Support [retrieving the local conversation list by page](conversation_list.html#retrieve-local-conversations-by-page).
+
+#### Improvements
+
+- After NTP time synchronization is enabled, use NTP-calibrated time to determine whether the user token has expired, avoiding inaccurate decisions caused by device time differences.
+- Support WAL mode for the local database to improve concurrent database read/write performance.
+
+#### Fixes
+
+- Fix incorrect ordering of chat group message callbacks and chat group event callbacks.
+- Fix a potential crash when iterating through DNS configurations.
+- Fix an issue where service domains cannot be set multiple times in private deployments.
+- Fix an occasional failure to reconnect to the server under abnormal network conditions.
+- Fix an issue where `fetchSubscribedUsers` returns an empty array after subscribing to user information.
+- Fix an issue where sending an attachment message does not trigger a callback when `EMOptions#isAutoTransferMessageAttachments` is disabled and the message has an empty `remotePath`.
+- Fix inaccurate conversation Do Not Disturb information caused by parsing errors during multi-device synchronization after Do Not Disturb is set.
+
+## v5.0.0 2026-8-28
 
 The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 

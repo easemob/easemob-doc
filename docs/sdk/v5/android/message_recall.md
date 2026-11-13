@@ -39,7 +39,7 @@ Call `EMChatManager#asyncRecallMessage` to recall a successfully sent message.
 After the call succeeds, the message stored on the server and the local copies stored by the sender and recipient, including historical, offline, and roaming copies, are removed. Relevant users receive the recall event through `EMMessageListener#onMessageRecalledWithExt`.
 
 :::tip
-1. When recalling a message, you can use the `ext` parameter to carry a custom string for business processing by clients that receive the recall event.
+1. When recalling a message, you can use the `ext` parameter to carry a custom string for business processing by clients that receive the recall event. This parameter defaults to an empty string.
 2. For attachment messages, including image, audio, video, and file messages, the attachment is also deleted after the message is recalled.
 :::
 
@@ -129,3 +129,8 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`asyncRecallMessage`](#recall-a-message) | `EMChatManager` | Asynchronously recall a successfully sent message and optionally include an extension string. |
 | [`recallMessage`](#recall-a-message) | `EMChatManager` | Synchronously recall a successfully sent message and optionally include an extension string. |
+| [`getRecallBy`](#monitor-message-recalls) | `EMRecallMessageInfo` | Retrieve the recaller's user ID. |
+| [`getRecallMessageId`](#monitor-message-recalls) | `EMRecallMessageInfo` | Retrieve the ID of the recalled message. |
+| [`getExt`](#monitor-message-recalls) | `EMRecallMessageInfo` | Retrieve the extension string carried when recalling the message. |
+| [`getConversationId`](#monitor-message-recalls) | `EMRecallMessageInfo` | Retrieve the ID of the conversation containing the recalled message. |
+| [`getRecallMessage`](#monitor-message-recalls) | `EMRecallMessageInfo` | Retrieve the recalled message object. It may return `null` in offline scenarios. |

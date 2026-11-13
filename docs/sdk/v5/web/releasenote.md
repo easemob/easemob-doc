@@ -1,3 +1,31 @@
+# v5.1.2 Dev 2026-9-20 (Development)
+
+## New features
+
+- **Enhanced log management**: Disable SDK console logs separately and receive sanitized structured SDK logs through `onLog` callbacks for collection and processing in your app. Disabling console output does not affect log callbacks. See [SDK Logs](log.html).
+- **Query all-member mute status for a chat room**: Chat room details include the new `muteAllMembers` field, which indicates whether all-member mute is enabled. See [Retrieve chat room details](room_attributes.html#retrieve-chat-room-details).
+- **Customize the login timeout**: The default total login timeout is 30 seconds. You can customize the timeout when calling `login`. See [Login](login.html#login).
+
+## Improvements
+
+- **Batch user-profile query results**: `getUserInfoByUserId` and `getUserInfoByAttribute` return complete results in the request order. Users whose profiles are not found are represented by `{ userId }`, so you can match results to the request without filling in missing entries or reordering results.
+- **Reconnection after a session ends**: After a session ends, for example because the user is kicked offline, the demo page displays the corresponding state. Restoring the page or network no longer triggers automatic reconnection.
+
+## Fixes
+
+Fixed issues with encoding and decoding combined messages.
+
+## Compatibility changes
+
+**Chat room detail fields**: [Chat room details](room_attributes.html#retrieve-chat-room-details) no longer include the announcement or return the current user's individual mute status, allowlist status, or mute expiration time through `currentUserStatus`:
+
+- To retrieve the announcement, use [the announcement query API](room_attributes.html#retrieve-the-chat-room-announcement).
+- To check whether the current user is on the allowlist, see [Check whether the current user is on the chat room allowlist](room_members.html#check-whether-the-current-user-is-on-the-chat-room-allowlist).
+- To check whether the current user is individually muted, see [Check whether the current user is muted](room_members.html#check-whether-the-current-user-is-muted).
+- The current user's chat room permission is still available through `permissionType`.
+- Use the new `muteAllMembers` field to determine whether all-member mute is enabled.
+- The `ChatRoomCurrentUserStatus` type is removed together with the `currentUserStatus` field.
+
 # v5.0.0 2026-8-28
 
 The Instant Messaging (IM) SDK v5.0.0 provides the following features:
@@ -21,7 +49,7 @@ The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 4. **User-related features**:
 
 - [**User relationships**](user_relationship.html): Add and delete friends, set friend remarks, retrieve the friend list, and manage the friend blocklist, among other operations.
-- [**User attributes**](userprofile.html): User attributes are information about users who interact through real-time messages, such as user nickname, avatar, email address, phone number, gender, signature, and birthday. This feature includes setting and retrieving friend attributes, among other operations.
+- [**User attributes**](userprofile.html): User attributes are information about users who interact through real-time messages, such as user nickname, avatar, email address, phone number, gender, signature, and birthday. This feature includes setting and retrieving friend attributes, among other operations. To subscribe to attribute changes for strangers through `subscribeUsersInfo`, first contact the EasyIM business manager to enable this feature.
 - [**Automatic user information management**](userinfo_provider.html): The SDK automatically synchronizes user information and updates it in memory, reducing the work required for developers to manually retrieve, store, and update user information.
 - [**Presence**](presence.html): Subscribe to and unsubscribe from user presence, publish custom presence states, and query the list of subscribed users.
 

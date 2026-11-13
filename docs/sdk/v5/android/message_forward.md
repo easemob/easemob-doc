@@ -20,7 +20,11 @@ Before you begin, ensure that the following requirements are met:
 
 ## Forward a single message
 
-To forward a single message, create a new message of the same type as the original and call `EMMessage#setBody` to set the original message body. To retain the original message's extensions, call `EMMessage#setAttribute` to copy each supported extension type to the new message. After setting the target conversation and conversation type, call `EMChatManager#sendMessage` to send the new message.
+1. Call `EMChatManager#getMessage` to retrieve the original message. If it returns `null`, retrieve the original message first and confirm that the message and its body exist before proceeding.
+2. Call `EMMessage#createSendMessage` with the original message type to create a new outgoing message, and then call `EMMessage#setBody` to set the original message body. Do not reuse the original message object directly, to avoid retaining its message ID or sending state.
+3. Call `EMMessage#setTo` to set the target ID, and call `EMMessage#setChatType` to set the target conversation type. When forwarding to a message thread, set the target ID to the thread ID, set the conversation type to `EMMessage.ChatType.GroupChat`, and call `EMMessage#setIsChatThreadMessage(true)`.
+4. To retain business extensions, call `EMMessage#setAttribute` to copy each supported extension field from the original message to the new message. Retain only business data applicable to the target conversation.
+5. Call `EMMessage#setMessageStatusCallback` to set the sending status callback, and then call `EMChatManager#sendMessage` to send the new message. Observe the sending result through the callback.
 
 A single message can be forwarded to a one-to-one chat, group chat, chat room, or message thread. Text, image, audio, video, file, location, custom, combined, and other message types are supported.
 

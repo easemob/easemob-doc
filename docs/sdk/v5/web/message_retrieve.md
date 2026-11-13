@@ -53,7 +53,6 @@ const result = await client.chatManager.getHistoryMessages({
   messageTypes: ['text'],      // Filter by message type.
   startTime: 1700000000000,    // Start timestamp in milliseconds.
   endTime: 1700100000000,      // End timestamp in milliseconds.
-  },
 });
 ```
 

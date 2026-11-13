@@ -7,8 +7,9 @@ The SDK supports deleting server-side messages for the current user only:
 - Clear server-side chat history for the current user: Clear the current user's server-side chat history, including messages and conversations in one-to-one chats, group chats, and chat rooms. After the operation succeeds, the SDK also clears locally cached conversation and message data and updates the local conversation list cache.
 - Delete server-side historical messages for the current user: Delete historical messages stored for the current user on the server by message ID or timestamp. This operation does not automatically delete the local message cache on the current device. If your app has stored or displayed these messages locally, update the local message list after the API call succeeds.
 
-After you clear server-side chat history or delete historical messages for the current user, you cannot retrieve the conversations or messages from the server. Other users are not affected.
+After server-side data is cleared or deleted for the current user, the current user can no longer retrieve the corresponding conversations and messages from the server. Other users in the same conversation are not affected.
 
+The SDK also supports clearing all messages in a specified local conversation and deleting specified local messages.
 
 ## Prerequisite
 
@@ -16,6 +17,10 @@ Before you begin, ensure that the following requirements are met:
 
 - Initialize the SDK and connect to the server. See [Quickstart](quickstart.html).
 - Understand the EasyIM API usage restrictions. See [Limitations](/product/limitation.html).
+
+:::warning
+Before deletion, confirm the target account, conversations, and message scope. After server-side data is deleted, the current user cannot recover it through message roaming. Do not expand the deletion scope through repeated retries.
+:::
 
 ## Clear chat history for the current user
 

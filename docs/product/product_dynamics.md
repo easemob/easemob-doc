@@ -1,5 +1,19 @@
 # Product Dynamics
 
+## 2026-09
+
+#### EasyIM Android/iOS SDK v5.1.0 release
+
+| Update   | Description | Release date       | Related documentation          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android/iOS SDK v5.1.0 development release   | **Major changes**:<br/> - Android [automatically synchronizes the conversation list after login by default](/sdk/v5/android/conversation_list.html#automatically-synchronize-the-conversation-list-after-login).<br/> - The local conversation list on Android and iOS excludes chat room conversations by default. <br/> - Android and iOS remove the data synchronization WebSocket configuration APIs. The data synchronization WebSocket address is now automatically obtained from the REST server configuration.<br/> **New features**:<br/> - Android and iOS support retrieving the local conversation list by page. <br/> - Android supports [querying whether a chat group invitation requires confirmation by the invited user](/sdk/v5/android/group_manage.html#invite-users-to-join-a-chat-group).<br/> - Android adds the [chat group information update event for multi-device login scenarios](/sdk/v5/android/multi_device.html). | 2026-9-24     | - [Android SDK v5.1.0 release notes](/sdk/v5/android/releasenote.html#v5-1-0-dev-2026-9-24) <br/> - [iOS SDK v5.1.0 release notes](/sdk/v5/ios/releasenote.html#v5-1-0-dev-2026-9-24)  |
+
+#### EasyIM Web SDK v5.1.2 release
+
+| Update | Description | Release date | Related documentation |
+| :--- | :--- | :--- | :--- |
+| Web SDK v5.1.2 release | - **Enhanced log management**: Disable SDK console logs separately and receive sanitized structured SDK logs through callbacks. See [SDK Logs](/sdk/v5/web/log.html).<br/> - **Query all-member mute status for a chat room**: Chat room details indicate whether all-member mute is enabled. See [Retrieve chat room details](/sdk/v5/web/room_attributes.html#retrieve-chat-room-details).<br/> - **Customize the login timeout**: The default total login timeout is 30 seconds. You can customize it when calling `login`. See [Login](/sdk/v5/web/login.html#login). | 2026-9-20 | [Web SDK v5.1.2 release notes](/sdk/v5/web/releasenote.html#v5-1-2-dev-2026-9-20-development) |
+
 ## 2026-08
 
 #### EasyIM Android/iOS/Web SDK v5.0.0 release

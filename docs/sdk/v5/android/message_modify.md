@@ -14,7 +14,7 @@ This feature applies to one-to-one chats, group chats, and chat rooms as follows
 
 ### Message editing process
 
-1. The app calls the message editing API and passes the message to edit and the updated content.  
+1. The app calls the message editing API and passes the ID of the message to edit, the updated message body, and/or message extensions.
 2. The SDK sends the edit request to the server. After updating the message, the server returns the edited message to the SDK.  
 3. The SDK updates the corresponding message in the local database and returns the updated message to the app through the edit result callback.  
 4. After other members of the conversation receive the message edit event, they can retrieve the edited message through the message listener and update the UI.

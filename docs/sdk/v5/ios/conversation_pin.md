@@ -68,7 +68,7 @@ if let conversation {
 
 The pin status is automatically synchronized with conversation data after login and written locally. Your application should read the local conversation list after synchronization is complete.
 
-Before initializing the SDK, configure `EMOptions#dataSyncType` to include `.conversations`:
+To explicitly configure conversation synchronization, use the following settings before initializing the SDK:
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")

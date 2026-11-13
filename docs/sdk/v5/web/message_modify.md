@@ -46,13 +46,12 @@ Before you begin, ensure that the following requirements are met:
 
 ## Edit a message
 
-Call `modifyMessage` to edit a successfully sent message. Currently, only text and custom messages can be edited. You can update the message body content and message extension `ext`, but identifying fields such as the message ID, sender, recipient, and conversation information do not change.
+Call `modifyMessage` to edit a successfully sent message. You can update the message body content and message extension `ext`, but identifying fields such as the message ID, sender, recipient, and conversation information do not change.
 
 After a message is edited, the `onMessageUpdated` event is triggered. Relevant members in a one-to-one chat, group chat, or chat room receive this event. The event carries the message ID, conversation information, edited message content, `modifiedInfo`, and other data. Use `modifiedInfo` to view information about the edit, including the edit time `operationTime`, editor `operatorId`, and edit count `operationCount`.
 
 :::tip
-1. By default, a message can be edited up to 10 times.
-2. Currently, only text and custom messages can be edited.
+By default, a message can be edited up to 10 times.
 :::
 
 Example code:

@@ -4,7 +4,7 @@
 
 A conversation is a collection of messages in a one-to-one chat, group chat, or chat room. The SDK represents a local conversation with `EMConversation`. Your app can read data such as the conversation ID, conversation type, latest message, unread count, pin status, conversation tags, and local extension field.
 
-The SDK can [automatically synchronize server-side conversation data after login and write it locally](initialization.html#set-automatic-data-synchronization-after-login). After synchronization is complete, your app reads and displays the conversation list through local APIs.
+Starting from SDK v5.1.0, the SDK [automatically synchronizes server-side conversation data after login and writes it locally](initialization.html#set-auto-data-synchronization-after-login) by default. After synchronization is complete, your app can read and display the conversation list through local APIs.
 
 ## Prerequisite
 
@@ -34,6 +34,8 @@ Each item in the conversation list is an `EMConversation`. Common APIs are as fo
 | :--- | :--- |
 | `conversationId()` | Retrieves the conversation ID. |
 | `getType()` | Retrieves the conversation type. |
+| `getConversationName()` | Retrieves the conversation name. This API applies to one-to-one and group conversations. |
+| `getConversationAvatar()` | Retrieves the conversation avatar. This API applies to one-to-one and group conversations. |
 | `getUnreadMsgCount()` | Retrieves the local unread message count of the conversation. |
 | `getLastMessage()` | Retrieves the latest message in the conversation. |
 | `isPinned()` | Retrieves whether the conversation is pinned. |
@@ -55,7 +57,7 @@ When messages are sent or received, the SDK creates or updates the local convers
 - Group message: Creates or updates a group conversation based on the chat group ID.
 - Chat room message: Creates or updates a chat room conversation based on the chat room ID.
 
-After receiving an online message, the SDK updates local state such as the conversation's latest message, order, and unread count.
+After receiving an online message, the SDK updates local state such as the conversation's latest message, order, and unread count. Command messages are not saved in the SDK's local database or in-memory message cache. When sending a command message, the SDK does not create a local conversation for it. This restriction does not affect normal command message sending and receiving through `EMCmdMessageBody` and command message callbacks.
 
 ### Create a local conversation through an API
 
@@ -74,7 +76,7 @@ EMConversation conversation = EMClient.getInstance()
 
 ### Update the conversation list through server synchronization
 
-Before calling `EMClient#init`, configure `EMDataSyncType.CONVERSATIONS` through `EMOptions#setDataSyncType`. After login succeeds, the SDK automatically synchronizes server-side conversation data and writes it locally.
+Starting from SDK v5.1.0, `EMOptions#setDataSyncType` includes `EMDataSyncType.CONVERSATIONS` by default. After login succeeds, the SDK automatically synchronizes server-side conversation data and writes it locally. You can also explicitly configure this method before calling `EMClient#init` to specify the data types to synchronize automatically. Pass `EMDataSyncType.NONE` to disable automatic data synchronization.
 
 ```java
 EMOptions options = new EMOptions();
@@ -95,6 +97,7 @@ The SDK provides the following ways to read the local conversation list:
 | :--- | :--- | :--- |
 | Sorted list | `getAllConversationsBySort()` | Returns a list with pinned conversations first. Within the pinned and unpinned sections, conversations are sorted by the timestamp of the latest message in descending order. |
 | Conversation map | `getAllConversations()` | Returns a `Map<String, EMConversation>` keyed by conversation ID. |
+| Database pagination | `asyncGetConversationsFromDB` | Supported starting from SDK v5.1.0. Disable automatic loading of all local conversations before initialization. For details, see [Retrieve local conversations by page](conversation_list.html#retrieve-local-conversations-by-page). |
 | Database filter | `asyncFilterConversationsFromDB(...)` | Loads all conversations from the local database or filters them using custom criteria. |
 
 An empty conversation contains no messages. For example, a conversation may become empty after all its messages expire, are cleared, or are recalled.
@@ -203,7 +206,7 @@ When monitoring is no longer needed, call `EMClient#removeMultiDeviceListener` t
 
 ## Best practices
 
-- Configure `EMDataSyncType.CONVERSATIONS` before initializing the SDK, and read the local conversation list after conversation data synchronization succeeds.
+- Use the default configuration or configure `EMDataSyncType.CONVERSATIONS` before initializing the SDK, and read the local conversation list after conversation data synchronization succeeds. To disable automatic synchronization, explicitly configure `EMDataSyncType.NONE`.
 - Prefer `getAllConversationsBySort` when displaying the conversation list, and directly use the pinned-first order returned by the SDK.
 - Register `EMConversationListener`. After receiving `onConversationUpdate`, read the conversation list again and refresh the UI.
 - Remove `EMConversationListener`, `EMConnectionListener`, and `EMMultiDeviceListener` when the page or component is destroyed to avoid duplicate callbacks and memory leaks.

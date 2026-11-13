@@ -134,6 +134,13 @@ EMClient.getInstance().chatroomManager().asyncChangeChatroomDescription(
 
 ## Manage chat room custom attributes (key-value)
 
+Chat room custom attributes are stored as string key-value pairs. Each chat room can have up to 100 custom attributes. Each key can contain up to 128 characters and supports only uppercase and lowercase English letters, digits, `_`, `-`, and `.`. Each value can contain up to 4096 characters. When setting attributes in bulk, you can pass up to 10 key-value pairs in each call.
+
+Both `EMChatRoomManager#asyncSetChatroomAttributes` and `EMChatRoomManager#asyncRemoveChatRoomAttributesFromServer` return operation results through `EMResultCallBack<Map<String, Integer>>`:
+
+- If `code` is `EMError.EM_NO_ERROR`, all attribute operations succeeded.
+- If `code` is `EMError.PARTIAL_SUCCESS`, some attribute operations succeeded. The `Map<String, Integer>` returned by the callback contains the keys of attributes whose operations failed and the corresponding error codes.
+
 ### Retrieve specified chat room custom attributes
 
 All chat room members can call the `asyncFetchChatroomAttributesFromServer` method to retrieve specified custom attributes of a chat room.

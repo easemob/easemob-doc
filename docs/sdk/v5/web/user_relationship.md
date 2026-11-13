@@ -21,6 +21,10 @@ Before you begin, ensure that the following requirements are met:
 
 To receive friend-addition, friend-deletion, and friend-request state-change events, add a friend-event listener.
 
+:::tip
+To receive notifications of changes to friends' user attributes through `onContactInfoUpdated`, first contact the EasyIM business manager to enable this feature. For details about user attribute change notifications, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+:::
+
 ```typescript
 client.contactManager.addEventHandler('contact-listener', {
   // The other user accepted the friend request. User A receives this event after User A sends a friend request to User B and User B accepts it.

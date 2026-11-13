@@ -43,6 +43,10 @@ Call `asyncGetSelfIdsOnOtherPlatform` to retrieve login IDs for other logged-in 
 
 This API is used in multi-device login scenarios to query the current account's login state on other devices. The result automatically excludes the current device and can generally be used to display logged-in devices, identify abnormal logins, provide multi-device login notifications, or manage a specified device together with server-side logout APIs.
 
+:::tip
+Call this API only after login succeeds.
+:::
+
 ```java
 // Asynchronous method.
 EMClient.getInstance().contactManager().asyncGetSelfIdsOnOtherPlatform(new EMValueCallBack<List<String>>() {
@@ -247,7 +251,9 @@ First implement `EMMultiDeviceListener` to monitor operations on other devices, 
 If the current device is logged out because the device count on the same platform reaches the limit, the SDK reports it through `EMConnectionListener#onLogout`. Friend, chat group, message thread, and conversation operations performed by the current account on other devices are reported through the corresponding `EMMultiDeviceListener` callbacks. Chat rooms do not generate conversation-management multi-device events, but chat room messages are still synchronized.
 
 :::tip
-Multi-device login has no chat room operation events. It supports only synchronization of messages sent and received in chat rooms.
+1. Multi-device login has no chat room operation events. It supports only synchronization of messages sent and received in chat rooms.
+
+2. Multi-device events can be received only after login succeeds.
 :::
 
 ```java
@@ -350,6 +356,9 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
             // The current user sets custom chat group member attributes on another device.
             case GROUP_METADATA_CHANGED:
                 break;    
+            // The current user updates chat group information on another device. This event is supported starting from SDK v5.1.0.
+            case GROUP_UPDATE:
+                break;
             default:
                 break;
         }

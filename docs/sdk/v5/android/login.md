@@ -199,7 +199,7 @@ If the app integrates FCM, we recommend setting `unbindToken` in `logout` to `tr
 
 `unbindToken` indicates whether to unbind the device push token during logout:
 
-- `true`: Unbinds the device push token.
+- (Default) `true`: Unbinds the device push token.
 - `false`: Does not unbind the device push token.
 
 If push token unbinding fails because of a network exception, `logout` returns a failure. The app can inform the user that unbinding failed and that push notifications might still be received after continuing to log out. If the user confirms, set `unbindToken` to `false` and call `logout` again to log out only of the EasyIM account without unbinding the push token. After the network recovers, handle the remaining push token unbinding at an appropriate time. Do not retry indefinitely on a background thread.
@@ -220,11 +220,11 @@ The Android SDK allows the same account to log in on multiple devices. The numbe
 
 Use the following `EMOptions` APIs to configure information about the current login device:
 
-| API | Parameter type | Description |
-| --------------------- | -------- | ------------------------------------------------------------ |
-| `setCustomOSPlatform` | `int` | Sets the custom platform number of the login device. The range is 1–100. Call it before SDK initialization. |
-| `setCustomDeviceName` | `String` | Sets the current device's custom name for distinguishing devices in multi-device login. Call it before SDK initialization. If it is not set, the device model is used by default. |
-| `setLoginCustomExt` | `String` | Sets the current device's login extension information. The maximum length is 1024 characters, and it cannot be `null`. If set before SDK initialization, it takes effect for subsequent logins. If the SDK is already initialized, set it before the next call to `loginWithToken`. |
+| API | Description |
+| :--- | :--- |
+| `setCustomOSPlatform` | Sets the custom platform number of the login device. The range is 1–100. Call it before SDK initialization. |
+| `setCustomDeviceName` | Sets the current device's custom name for distinguishing devices in multi-device login. Call it before SDK initialization. If it is not set, the device model is used by default. |
+| `setLoginCustomExt` | Sets the current device's login extension information. The maximum length is 1024 characters, and it cannot be `null`. If set before SDK initialization, it takes effect for subsequent logins. If the SDK is already initialized, set it before the next call to `loginWithToken`. |
 
 The following is sample code:
 
