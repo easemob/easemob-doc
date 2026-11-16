@@ -21,6 +21,8 @@ You can retrieve the chat group member list in the following two ways:
 
 Call `fetchGroupMemberInfoListFromServerWithGroupId` to retrieve chat group member details by page. The returned `EMGroupMemberInfo` contains the user ID, join time, role, name card, nickname, and avatar URL.
 
+After automatic user information management is enabled (`EMOptions.enableUserInfo = YES`), the SDK first uses the nickname and avatar in the local cache. If the corresponding cache is missing, or both the nickname and avatar are empty, the SDK fetches user attributes from the server as needed. This API does not proactively refresh an existing nickname or avatar in the local cache. Fetching missing attributes may trigger user attribute update events. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+
 ```swift
 EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(
     withGroupId: "groupId",
@@ -168,7 +170,7 @@ EMClient.shared().groupManager?.updateGroupOwner(
 
 ### Add a chat group admin
 
-Only the chat group owner can call `addAdmin` to add an admin. After a successful operation, the new admin and the other admins receive the `groupAdminListDidUpdate` callback.
+Only the chat group owner can call `addAdmin` to add an admin. After a successful operation, the group owner, the new admin, and the other admins receive the `groupAdminListDidUpdate` callback.
 
 Except for a few permissions, such as destroying the chat group, an admin has most chat group management permissions.
 
@@ -185,7 +187,7 @@ EMClient.shared().groupManager?.addAdmin(
 
 ### Remove a chat group admin
 
-Only the chat group owner can call `removeAdmin` to remove an admin. After a successful operation, the removed admin and the other admins receive the `groupAdminListDidUpdate` callback.
+Only the chat group owner can call `removeAdmin` to remove an admin. After a successful operation, the group owner, the removed admin, and the other admins receive the `groupAdminListDidUpdate` callback.
 
 After an admin loses chat group management permissions, they have only regular member permissions.
 

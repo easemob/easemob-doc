@@ -76,6 +76,10 @@ After an extension is added, the message cannot exceed the size limit of the ori
 
 A message type customized by the developer, such as a red packet message or a rock-paper-scissors message.
 
+### Multi-body message
+
+A message that combines multiple bodies in order within one message, up to 20 bodies, for content such as mixed text and images or multiple images. Each body retains its own type, such as text or image. This differs from a combined message, which packages and forwards multiple existing messages. Editing or translation is currently unsupported. For supported versions and integration, see [Multi-body messages](product_message_overview.html#message-types).
+
 ### Reaction
 
 Add or delete Reactions to messages in one-to-one chats and group chats. Reactions provide an intuitive way to express emotions and improve the user experience. In a chat group, you can also use Reactions to initiate a poll and determine the result based on the number of each Reaction added.

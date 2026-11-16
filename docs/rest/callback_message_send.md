@@ -28,6 +28,7 @@ The following table describes the common parameters in webhook requests for mess
 | `payload`         | object | Event content, in the same format as content sent through the REST API. See [Historical message content](message_historical.html#historical-message-content).      |
 | `securityVersion` | String | Security verification version, currently `1.0.0`. Ignore this parameter. It will be configured in the EasyIM Console in the future.                   |
 | `security`        | String | Signature in the format `MD5（callId+secret+timestamp）`. For the `Secret`, see [Webhook rule configuration](/product/console/basic_webhook.html#configure-webhook-rules) in the EasyIM Console.     |
+| `os` | String | The IM SDK platform identifier used by the client that sends the message. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String | Unique identifier of the app registered in the EasyIM Console.        |
 | `host`            | String | Server name.              |
 | `content_type`            | String | Message type:<br/> - `chat:user:*`: One-to-one message  <br/> - `chat:group:*`: Chat group message   <br/> - `chat:room:*`: Chat room message  <br/>  For the specific parameter values of each message type, see [Send one-to-one messages](#send-one-to-one-messages), [Send chat group messages](#send-chat-group-messages), and [Send chat room messages](#send-chat-room-messages).   |
@@ -372,7 +373,8 @@ This section provides an example webhook request body sent by the EasyIM server 
         // Specific message content
     },
     "securityVersion":"1.0.0",
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
+    "security":"2ca02c394bef9e7abc83958bcc3156d3",
+    "os":"ios"
  }
 ```
 
@@ -423,7 +425,8 @@ This section provides an example webhook request body sent by the EasyIM server 
         // Specific message content, the same as the corresponding one-to-one message type
     },
     "securityVersion":"1.0.0",
-    "security":"2ca02c394bef9e7abc83958bcc3156d3"
+    "security":"2ca02c394bef9e7abc83958bcc3156d3",
+    "os":"ios"
 }
 ```
 

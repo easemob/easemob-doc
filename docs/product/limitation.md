@@ -39,6 +39,12 @@ By default, message attachments, such as images, audio, video, and other files, 
 - **Offline messages**: For one-to-one chats and group chats, offline messages are stored for 7 days by default. For each end user, all one-to-one conversations can store 500 offline messages, and all group chat conversations can store 200 offline messages. If either the storage period or message count limit is exceeded, the newest offline messages replace the oldest ones. To increase these limits, contact the EasyIM business manager.
 - **Event notifications**: Event notifications have the same storage period as messages.
 
+### Multi-body messages
+
+- Combine 2–20 bodies in order within one message.
+- Text, image, voice, video, file, location, and custom bodies are supported. Command, combined, streaming, and other multi-body messages cannot be combined as bodies.
+- Editing the body or extension fields and translating the message are unsupported. Text bodies within a multi-body message do not trigger automatic translation.
+
 ### Streaming messages
 
 When sending **one text streaming message**, you must comply with the following rules:
@@ -76,7 +82,7 @@ This feature applies to one-to-one chats, group chats, and chat rooms and has th
 
 - Text and custom messages: The message body and extension fields can be edited.
 - File, video, voice, image, location, and combined forwarded messages: Only extension fields can be edited; the message body cannot be edited.
-- Command messages: Editing is not supported.
+- Command and multi-body messages: Editing the body or extension fields is unsupported.
 
 By default, a message can be edited up to 10 times.
 

@@ -23,24 +23,31 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-The following table lists common `EMOptions` methods used during initialization. For all `EMOptions` methods, see the [API reference](https://doc.easyim.ai/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_options.html).
+The following table lists common `EMOptions` methods. Complete the settings before SDK initialization unless a setting explicitly supports changes after initialization.
 
 | Method | Description |
 | :--- | :--- |
 | `setAppKey(String appkey)` | Sets the App Key. `appkey` is the unique identifier obtained after creating an app in EasyIM Console. Its format is generally `orgName#appName`. |
 | `setPushConfig(EMPushConfig pushConfig)` | Sets the offline push configuration. Pass a constructed `EMPushConfig` before `init`. If it is not set, the SDK creates a default push configuration. |
+| `setUsePushInBackground(boolean usePushInBackground)` | Starting from SDK 5.2.1, sets whether to disconnect the persistent connection and use vendor push after the app enters the background. Set this before initialization. The default is `false`: the SDK does not actively disconnect because the app enters the background. If `true` and the push channel is valid when the app enters the background, the SDK schedules disconnection after approximately 10 seconds. Query with `isUsePushInBackground()`. For complete conditions and timing, see [Configure background message reception](push/push_overview.html#configure-background-message-reception). |
+| `setDisconnectNotifyThreshold(int seconds)` | Starting from SDK 5.2.1, sets the recoverable disconnection notification grace period in seconds. Defaults to `10`; values less than or equal to `0` disable the delay. Can be set before or after initialization. Query with `getDisconnectNotifyThreshold()`. See [Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). |
 | `setAutoAcceptGroupInvitation(boolean value)` | Sets whether to automatically accept chat group invitations.<br/> - (Default) `true`: Automatically accepts chat group invitations.<br/> - `false`: Does not automatically accept chat group invitations. |
 | `setAcceptInvitationAlways(boolean value)` | Sets whether to automatically accept friend invitations.<br/> - (Default) `true`: Automatically accepts friend invitations.<br/> - `false`: Does not automatically accept friend invitations. |
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | Sets whether to delete a chat room's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/>- `false`: Retains them. |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | Sets whether to delete a chat group's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `allowChatroomOwnerLeave(boolean allowed)` | Sets whether to allow the chat room owner to leave the chat room.<br/> - (Default) `true`: Allows the owner to leave. After leaving, the owner retains chat room privileges but no longer receives chat room messages.<br/> - `false`: Does not allow the owner to leave. |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. This method must be called before `init`. |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | Sets the data types automatically synchronized after login. Possible values are `CONVERSATIONS`, `CONTACTS`, and `JOINED_GROUPS`. Pass `NONE`, `null`, or an empty set to disable synchronization. Starting from SDK v5.1.0, the default value is `CONVERSATIONS`. |
+| `setEnableChatroomConversation(boolean enable)`              | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list.<br/> Call `isEnableChatroomConversation()` to query whether the current configuration includes chat room conversations when retrieving the local conversation list. |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
 For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
 
 ## Set listeners after initialization
 
 After initialization is complete, register connection-state and message listeners to detect connection changes between the SDK and the EasyIM server and receive new messages. Connection listener callbacks run on a worker thread. Do not directly update the UI or perform time-consuming operations in them. The SDK automatically reconnects after a weak-network disconnection, so manual reconnection is unnecessary.
+
+Starting from SDK 5.2.1, notifications for recoverable disconnections such as network exceptions follow the [disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). Not receiving `onDisconnected` does not mean the persistent connection is still available. Query the current state with `EMClient#getConnectionState()`.
 
 ```java
 private final EMConnectionListener connectionListener = new EMConnectionListener() {
@@ -51,7 +58,7 @@ private final EMConnectionListener connectionListener = new EMConnectionListener
 
     @Override
     public void onDisconnected(int errorCode) {
-        // The SDK is disconnected from the EasyIM server. Determine the cause based on errorCode.
+        // Disconnection notification received. Recoverable notifications may be delayed; query the current state with getConnectionState().
     }
 };
 
@@ -81,7 +88,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
 ### Synchronized data
 
-Before initialization, configure the data types automatically synchronized after login through `EMOptions.setDataSyncType`. After login succeeds, the SDK synchronizes server-side data according to the configuration and updates the local cache or database.
+The SDK supports configuring the data types automatically synchronized after login through `EMOptions#setDataSyncType` before initialization. After login succeeds, the SDK synchronizes server-side data according to the configuration and updates the local cache or database. Starting from SDK v5.1.0, this configuration includes `EMDataSyncType.CONVERSATIONS` by default, which automatically synchronizes the conversation list.
 
 The SDK currently supports synchronizing the conversation list, friend list, and list of chat groups that the current user has joined. The configuration and local read method for each data type are as follows:
 
@@ -99,7 +106,7 @@ Call `setDataSyncType` before `EMClient.init`. Changes made after SDK initializa
 
 The configuration rules are as follows:
 
-- If `setDataSyncType` is not called, data is not automatically synchronized by default, which is `EMDataSyncType.NONE`.
+- Starting from Android SDK v5.1.0, if `setDataSyncType` is not called, conversation data is automatically synchronized by default, which is `EMDataSyncType.CONVERSATIONS`.
 - To synchronize one or more data types, explicitly pass the corresponding enum values using `EnumSet.of(...)`.
 - Pass `EnumSet.of(EMDataSyncType.NONE)`, `null`, or an empty set to disable automatic synchronization.
 
@@ -189,11 +196,37 @@ List<EMGroup> joinedGroups =
         EMClient.getInstance().groupManager().getAllGroups();
 ```
 
+## Enable automatic user information management
+
+The Android SDK supports configuring automatic user information management through `EMOptions#setEnableUserInfo(boolean enableUserInfo)`. This parameter defaults to `false`. When it is set to `true`, the SDK automatically synchronizes the current user's attributes after login succeeds. Other users' attributes are updated when relevant messages are received, user attributes are actively retrieved from the server, or in other applicable scenarios. Set this configuration before initializing the SDK.
+
+Automatic user information management and automatic contact synchronization are independent. Android SDK 5.x uses `EMOptions#setDataSyncType` to configure the data types automatically synchronized after login. `EMOptions.EMDataSyncType.CONTACTS` synchronizes contact data. Enabling automatic user information management does not automatically retrieve all friends' nicknames and avatars at login. For user attribute update events, local reading, and active retrieval, see [Automatic User Information Management](userinfo_provider.html).
+
+If you need both features, configure them during the same initialization. The following example also retains the default conversation data synchronization:
+
+```java
+import java.util.EnumSet;
+
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS
+));
+options.setEnableUserInfo(true);
+
+EMClient.getInstance().init(context.getApplicationContext(), options);
+```
+
 ## API list
 
 | API | Module/Class | Description |
 | :--- | :--- | :--- |
 | [`init`](#initialize-the-sdk) | `EMClient` | Initializes the Android SDK singleton. |
+| [`setUsePushInBackground`](push/push_overview.html#configure-background-message-reception) | `EMOptions` | Sets the background push switch before initialization. |
+| [`isUsePushInBackground`](push/push_overview.html#configure-background-message-reception) | `EMOptions` | Queries the background push switch. |
+| [`setDisconnectNotifyThreshold`](connection.html#configure-the-disconnection-notification-grace-period) | `EMOptions` | Sets the recoverable disconnection notification grace period before or after initialization. |
+| [`getDisconnectNotifyThreshold`](connection.html#configure-the-disconnection-notification-grace-period) | `EMOptions` | Queries the disconnection notification grace period. |
 | [`setDataSyncType`](#configuration-method) | `EMOptions` | Sets the data types automatically synchronized after login. |
 | [`getAllConversations`](#read-synchronization-results-after-login) | `EMChatManager` | Reads the local conversation list. |
 | [`getContactsFromLocal`](#read-synchronization-results-after-login) | `EMContactManager` | Reads the friend list from the local database. |

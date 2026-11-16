@@ -12,15 +12,22 @@ A targeted message is sent to one or more specified members of a chat group or c
 - **Group message roaming:** Roaming is not supported for targeted group messages by default. To use it, contact the EasyIM business manager.
 - **Chat room message roaming:** Roaming is not supported for targeted chat room messages by default. To use it, contact the EasyIM business manager to enable both chat room message roaming and targeted message roaming.
 
+## Prerequisite
+
+Before you begin, ensure that the following requirements are met:
+
+- Initialize the SDK. See [Initialization](initialization.html).
+- Understand the EasyIM usage restrictions. See [Limitations](/product/limitation.html).
+
 ## Send a targeted message
 
 The process for sending a targeted message is similar to that for sending a regular message. The only difference is that you must call `EMMessage#setReceiverList` before sending to set the targeted recipient list:
 
 1. Create a group or chat room message.
-2. Set the message recipient list.
+2. Set the targeted recipient list.
 3. Send the targeted message.
 
-The following example shows how to send a targeted text message:
+The following example shows how to send a targeted group text message:
 
 ```java
 // Create a group text message.

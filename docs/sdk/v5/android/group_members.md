@@ -24,6 +24,8 @@ You can retrieve the group member list in the following three ways:
 
 Call `EMGroupManager#asyncFetchGroupMembersInfo` to retrieve group member information with pagination. The returned information includes each member's user ID, role, join time, name card, nickname, and avatar.
 
+After automatic user information management is enabled (`EMOptions#setEnableUserInfo(true)`), the SDK first uses the nickname and avatar in the local cache. If the corresponding cache is missing, or both the nickname and avatar are empty, the SDK fetches user attributes from the server as needed. This API does not proactively refresh an existing nickname or avatar in the local cache. Fetching missing attributes may trigger user attribute update events. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+
 ```java
 // Asynchronous method.
 // cursor: Pass `null` or an empty string for `cursor` in the first request. In subsequent requests, pass the cursor from the previous result. An empty returned cursor indicates the last page.
@@ -237,9 +239,9 @@ EMClient.getInstance()
 
 ### Add a group admin
 
-Only the group owner can call `asyncAddGroupAdmin` to add a group admin. After the operation succeeds, the new admin and other admins receive `onAdminAdded`.
+Only the group owner can call `asyncAddGroupAdmin` to add a group admin. After the operation succeeds, the group owner, the new admin, and other admins receive `onAdminAdded`.
 
-An admin has most chat group permissions except for a few permissions such as destroying the chat group.
+An admin has most chat group management permissions except for a few permissions such as destroying the chat group.
 
 ```java
 // Asynchronous method.
@@ -263,7 +265,7 @@ EMClient.getInstance()
 
 ### Remove a group admin
 
-Only the group owner can call `asyncRemoveGroupAdmin` to remove a group admin. After the operation succeeds, the removed admin and other admins receive `onAdminRemoved`.
+Only the group owner can call `asyncRemoveGroupAdmin` to remove a group admin. After the operation succeeds, the group owner, the removed admin, and other admins receive `onAdminRemoved`.
 
 After an admin's group management permissions are removed, the user has only regular member permissions.
 
@@ -641,7 +643,7 @@ After a group member operation succeeds, the SDK triggers the corresponding `EMG
 | [`getUsers`](#retrieve-member-ids-from-a-local-chat-group-object) | `EMGroup` | Retrieve the user IDs of the group owner, admins, and regular members contained in the chat group object. |
 | [`asyncSetGroupMemberAttributes`](#set-custom-group-member-attributes) | `EMGroupManager` | Set custom group member attributes. |
 | [`asyncFetchGroupMemberAllAttributes`](#retrieve-a-group-members-custom-attributes) | `EMGroupManager` | Retrieve all custom attributes of a single group member. |
-| [`asyncFetchGroupMembersAttributes`](#retrieve-a-single-group-members-custom-attributes) | `EMGroupManager` | Retrieve specified or all custom attributes of multiple group members. |
+| [`asyncFetchGroupMembersAttributes`](#retrieve-custom-group-member-attributes-by-attribute-key) | `EMGroupManager` | Retrieve specified or all custom attributes of multiple group members. |
 | [`asyncChangeOwner`](#transfer-chat-group-ownership) | `EMGroupManager` | Transfer chat group ownership. |
 | [`asyncAddGroupAdmin`](#add-a-group-admin) / [`asyncRemoveGroupAdmin`](#remove-a-group-admin) | `EMGroupManager` | Add or remove a group admin. |
 | [`asyncGetGroupFromServer`](#retrieve-the-group-admin-list) | `EMGroupManager` | Retrieve the latest chat group details from the server. |

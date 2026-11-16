@@ -57,7 +57,7 @@ NSTimeInterval expiry = 7 * 24 * 3600;
 
 After the subscription to specified users' presence succeeds, the SDK returns the subscribed users' current presence through the completion.
 
-When presence changes, the subscriber receives the `presenceStatusDidChanged` callback.
+When a subscribed user's presence changes, the subscriber receives the `presenceStatusDidChanged` callback.
 
 :::tip
  - The maximum subscription duration is 30 days. Subscribe again after it expires. If you subscribe again before expiration, the newly specified validity period replaces the previous one.

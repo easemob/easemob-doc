@@ -2,7 +2,7 @@
 
 The EasyIM Web SDK supports managing user attributes.
 
-User attributes are information about users who interact through real-time messages, such as the user nickname, avatar, email address, phone number, gender, signature, and birthday. For example, in a recruiting scenario, user attributes can store gender, email address, user type (candidate), and position type (Web development).
+User attributes are information about users who interact through real-time messages, such as the user nickname, avatar, email address, phone number, gender, signature, and birthday. For example, in a recruiting scenario, user attributes can store gender, email address, user type (candidate), and position type (Web developer).
 
 This document describes how to set, update, retrieve, monitor, and subscribe to user attributes.
 
@@ -16,6 +16,7 @@ Before you begin, ensure that the following requirements are met:
 
 - You have initialized the SDK. For details, see [Quickstart](quickstart.html).
 - You registered `UserInfoManager`, `ContactManager`, and `ChatManager` during SDK initialization.
+- To receive friend attribute-change notifications or subscribe to attribute-change notifications for strangers, contact the EasyIM business manager to enable the feature.
 - You understand the EasyIM limitations. For details, see [Limitations](/product/limitation.html).
 
 ## Limitations
@@ -75,28 +76,34 @@ console.log(profile.avatarUrl);
 
 ### Retrieve all user attributes from the server
 
-Call `getUserInfoByUserId` to retrieve all attributes of one or more users from the server. Each call can retrieve the user attributes of up to 100 users. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+Call `getUserInfoByUserId` to retrieve all attributes of one or more users from the server. Each call can retrieve the user attributes of up to 100 users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+
+Calling `getUserInfoByUserId` or `getUserInfoByAttribute` does not require enabling `enableUserInfoSync`.
 
 ```typescript
 // Pass no more than 100 user IDs per call.
 const users = await client.userInfoManager.getUserInfoByUserId({
-  userIds: ['user1', 'user2'],
+  userIds: ['user1', 'unknown-user', 'user2'],
 });
 
+// Results follow the request order. A missing profile returns { userId: 'unknown-user' }.
 console.log(users);
 ```
 
 ### Retrieve specified user attributes from the server
 
-Call `getUserInfoByAttribute` to retrieve one or more attributes of specified users. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+Call `getUserInfoByAttribute` to retrieve one or more attributes of specified users. Starting with SDK v5.1.2, results are returned in the order of `userIds` in the request. Users whose profiles are not found are represented by objects containing only `userId`. After the call succeeds, the SDK writes the returned user attributes to the local cache and directly returns the result to the caller. To immediately refresh the UI after the call, we recommend updating it directly with the API return value.
+
+A call to this API does not trigger the user attribute update event `onUserInfoUpdated` or `onOwnInfoUpdated`.
 
 ```typescript
 const users = await client.userInfoManager.getUserInfoByAttribute({
-  userIds: ['user1'],
+  userIds: ['user1', 'unknown-user'],
   attributes: ['nickname', 'avatarUrl'],
 });
 
 console.log(users[0]?.nickname, users[0]?.avatarUrl);
+console.log(users[1]); // { userId: 'unknown-user' }
 ```
 
 ## Read user attributes from local memory
@@ -177,16 +184,17 @@ The current SDK internally maintains a user-attribute cache. To reduce repeated 
 
 ## Monitor user attribute changes
 
-Receive attribute updates for friend and strangers through the `onUserInfoUpdated` event registered with `client.userInfoManager.addEventHandler`. This primarily includes the following scenarios:
+The `onUserInfoUpdated` event reports other users' attribute updates triggered by message synchronization or by fetching missing user attributes during group member queries, as well as attribute updates for subscribed strangers. Friend attribute updates triggered by friend-list synchronization or friend profile changes are reported through `onContactInfoUpdated`. The specific scenarios are as follows:
 
 1. **A message carries an update time**: If `enableUserInfoSync` was enabled during SDK initialization, when a received message carries a sender user-attribute update time later than that in the local cache, the SDK automatically retrieves the latest user attributes, updates the local data, and then triggers `onUserInfoUpdated`. This mechanism may apply to both friend and stranger senders.
 2. **A subscribed user changes (strangers only)**: If your app subscribed to attribute-change events for strangers, the SDK triggers `onUserInfoUpdated` when one of these users' attributes changes.
+3. **User attributes are fetched during a group member query**: When you call [`Group#getMembers`](group_members.html#retrieve-the-group-member-list), the SDK first uses locally cached user attributes and fetches user attributes if they are missing from the cache. If `enableUserInfoSync` is enabled and the query fetches other users' attributes, the SDK triggers `onUserInfoUpdated`. The currently logged-in user's attributes are reported through `onOwnInfoUpdated`. If the attributes are already cached, the query does not proactively check for updates.
 
 **Special notes**
 
 - **Current user**: Attribute changes for the current user are reported separately through `onOwnInfoUpdated` and do not follow the `onUserInfoUpdated` logic.
-- **Friend users**: When a friend's attributes change, the SDK triggers `onContactInfoUpdated`, registered through `client.contactManager.addEventHandler`. This is a friend event, not a `userInfoManager` event.
-- **Active user-attribute retrieval**: After calling the API to [retrieve user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server), if the return value contains updated user attributes, we recommend using the return value to refresh the UI directly instead of relying on `onUserInfoUpdated`.
+- **Friend users**: Friend attribute updates triggered by friend-list synchronization or friend profile changes trigger `onContactInfoUpdated`, registered through `client.contactManager.addEventHandler`. This is a friend event, not a `userInfoManager` event.
+- **Active user-attribute retrieval**: Calling [getUserInfoByUserId](#retrieve-all-user-attributes-from-the-server) or [getUserInfoByAttribute](#retrieve-specified-user-attributes-from-the-server) updates the local cache and returns user attributes, but does not trigger `onUserInfoUpdated` or `onOwnInfoUpdated` as a result of the query. Use the return value to refresh the UI directly.
 
 ```typescript
 client.userInfoManager.addEventHandler('profile-listener', {

@@ -17,6 +17,10 @@ The Android SDK uses multiple fields in `EMGroupConfigs` to define the chat grou
 | Public group that requires approval         | `isPublic = true`, `joinApprovalRequired = true`  | After submitting a join request, a user waits for approval from the group owner or a group admin. |
 | Public group that users can join directly         | `isPublic = true`, `joinApprovalRequired = false` | Users can join the chat group directly.                       |
 
+:::tip
+`joinApprovalRequired` applies only to public groups, and `allowInvites` applies only to private groups.
+:::
+
 ### Chat group member roles
 
 A chat group contains the following roles:
@@ -95,7 +99,7 @@ EMClient.getInstance()
 Only the group owner can call `asyncDestroyGroup` to destroy a chat group. After the group is destroyed, other members receive `EMGroupChangeListener#onGroupDestroyed` and are removed from the group.
 
 :::warning
-Destroying a chat group cannot be undone. After the group is successfully destroyed, it no longer exists, all members are removed, and the SDK also removes the corresponding conversation from memory. We recommend requesting confirmation in your app before performing this operation.
+Destroying a chat group cannot be undone. After the group is successfully destroyed, it no longer exists, and all members are removed.
 :::
 
 ```java
@@ -113,6 +117,15 @@ EMClient.getInstance()
             }
         });
 ```
+
+#### Local message handling
+
+When members leave a group because it is destroyed, the handling of local group messages depends on the `EMOptions#setDeleteMessagesAsExitGroup(boolean delete)` configuration on each client:
+
+- (Default) `true`: Deletes local group messages.
+- `false`: Retains local group messages.
+
+This is a client initialization configuration. Set it when initializing the SDK.
 
 ## Join a chat group
 
@@ -176,63 +189,81 @@ EMClient.getInstance()
                 });
 ```
 
-How an invited user handles the invitation is determined by `EMGroupConfigs#inviteNeedConfirm`, which is set when the chat group is created:
+The invitation process is determined jointly by `EMGroupConfigs#inviteNeedConfirm`, which is set when the chat group is created, and `EMOptions#setAutoAcceptGroupInvitation` on the invited user's client:
 
-- `false`: The invited user joins the chat group without confirmation and receives `EMGroupChangeListener#onAutoAcceptInvitationFromGroup`.
-- `true`: The invited user receives `EMGroupChangeListener#onInvitationReceived` and chooses whether to join the group:
-  - To accept the invitation, call `asyncAcceptInvitation`.
-  - To decline the invitation, call `asyncDeclineInvitation`.
+- `inviteNeedConfirm = false`: The invited user joins the group directly without confirmation and receives `EMGroupChangeListener#onAutoAcceptInvitationFromGroup`. Whether automatic acceptance of group invitations is enabled on the invited user's client does not affect the result.
+- `inviteNeedConfirm = true` and automatic acceptance is enabled on the invited user's client: The SDK automatically accepts the invitation, and the invited user receives `onAutoAcceptInvitationFromGroup`.
+- `inviteNeedConfirm = true` and automatic acceptance is disabled on the invited user's client: The invited user receives `onInvitationReceived` and can call `asyncAcceptInvitation` or `asyncDeclineInvitation` to accept or decline the invitation.
 
-After the invitation is accepted, the inviter receives `EMGroupChangeListener#onInvitationAccepted`. After it is declined, the inviter receives `EMGroupChangeListener#onInvitationDeclined`.
+`setAutoAcceptGroupInvitation` defaults to `true`. To let users handle group invitations manually, set it to `false` before SDK initialization:
 
-:::tip
-To let users manually handle chat group invitations, call `EMOptions#setAutoAcceptGroupInvitation(false)` before SDK initialization to disable automatic acceptance. The default value of this configuration is `true`. When enabled, the SDK automatically accepts incoming group invitations. When disabled, the app can call the API for accepting or declining an invitation in `EMGroupChangeListener#onInvitationReceived`.
-:::
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setAutoAcceptGroupInvitation(false);
+
+EMClient.getInstance().init(context, options);
+```
+
+Starting from SDK v5.1.0, an invited user can call `EMGroup#isInviteNeedConfirm()` to check whether the current group requires invited users to confirm invitations. To ensure that the configuration is up to date, first call `asyncGetGroupFromServer` to retrieve group details from the server:
+
+```java
+EMClient.getInstance().groupManager().asyncGetGroupFromServer(
+        groupId,
+        new EMValueCallBack<EMGroup>() {
+            @Override
+            public void onSuccess(EMGroup group) {
+                boolean inviteNeedConfirm = group.isInviteNeedConfirm();
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // Failed to retrieve chat group details.
+            }
+        }
+);
+```
+
+To accept or decline an invitation manually, pass the group ID and inviter ID returned by `onInvitationReceived`. For example:
 
 ```java
 // Accept a chat group invitation.
-EMClient.getInstance()
-        .groupManager()
-        .asyncAcceptInvitation(
-                groupId,
-                inviter,
-                new EMValueCallBack<EMGroup>() {
-                    @Override
-                    public void onSuccess(EMGroup group) {
-                        // The invitation has been accepted and the user has joined the chat group.
-                    }
+EMClient.getInstance().groupManager().asyncAcceptInvitation(
+        groupId,
+        inviter,
+        new EMValueCallBack<EMGroup>() {
+            @Override
+            public void onSuccess(EMGroup group) {
+                // The invitation has been accepted and the user has joined the chat group.
+            }
 
-                    @Override
-                    public void onError(
-                            int errorCode,
-                            String errorMessage) {
-                        // Failed to accept the invitation.
-                    }
-                });
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // Failed to accept the invitation.
+            }
+        }
+);
 
 // Decline a chat group invitation.
-EMClient.getInstance()
-        .groupManager()
-        .asyncDeclineInvitation(
-                groupId,
-                inviter,
-                "No, thanks",
-                new EMCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        // The invitation has been declined.
-                    }
+EMClient.getInstance().groupManager().asyncDeclineInvitation(
+        groupId,
+        inviter,
+        "No, thanks",
+        new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                // The invitation has been declined.
+            }
 
-                    @Override
-                    public void onError(
-                            int errorCode,
-                            String errorMessage) {
-                        // Failed to decline the invitation.
-                    }
-                });
+            @Override
+            public void onError(int errorCode, String errorMessage) {
+                // Failed to decline the invitation.
+            }
+        }
+);
 ```
 
-After a user successfully joins a chat group, the user can send and receive messages in that group.
+After the invitation is accepted, the inviter receives `onInvitationAccepted`. After it is declined, the inviter receives `onInvitationDeclined`. After a user successfully joins a chat group, the user can send and receive messages in that group.
 
 ### Apply to join a chat group
 
@@ -331,6 +362,13 @@ EMClient.getInstance()
 
 ## Leave a chat group
 
+A user can leave a group in two ways: voluntarily or by being removed by the group owner or an admin.
+
+When a user leaves a group, the handling of local group messages depends on the initialization configuration `EMOptions#setDeleteMessagesAsExitGroup(boolean delete)`:
+
+- (Default) `true`: Deletes local group messages.
+- `false`: Retains local group messages.
+
 ### Leave voluntarily
 
 A group member can call `asyncLeaveGroup` to leave a chat group voluntarily. After leaving, the user no longer receives group messages, and other members receive `onMembersExited`.
@@ -352,7 +390,7 @@ EMClient.getInstance()
         });
 ```
 
-After a user leaves a chat group, the SDK does not automatically delete the group conversation or its local messages from the local database, but removes the in-memory cache for the conversation.
+After a user leaves a chat group, the SDK retains the group conversation in the local database and removes its in-memory cache. Local messages are handled according to `EMOptions#setDeleteMessagesAsExitGroup`.
 
 ### Remove members
 
@@ -636,7 +674,7 @@ EMGroupChangeListener groupListener = new EMGroupChangeListener() {
             String announcement) {
     }
 
-    // A member uploads a shared chat group file by calling the RESTful API. All group members receive this callback.
+    // A member uploads a shared chat group file. All group members receive this callback.
     @Override
     public void onSharedFileAdded(String groupId,
             EMMucSharedFile sharedFile) {
@@ -696,5 +734,6 @@ EMClient.getInstance()
 | [`getAllGroups`](#retrieve-the-groups-joined-by-the-current-user) | `EMGroupManager` | Retrieve from local storage the groups joined by the current user. |
 | [`asyncGetJoinedGroupsCountFromServer`](#query-the-number-of-groups-joined-by-the-current-user) | `EMGroupManager` | Retrieve from the server the number of groups joined by the current user. |
 | [`asyncGetGroupFromServer`](#check-whether-the-current-user-has-blocked-group-messages) | `EMGroupManager` | Retrieve chat group details from the server. |
+| [`isInviteNeedConfirm`](#invite-users-to-join-a-chat-group) | `EMGroup` | Retrieves whether the chat group configuration requires invited users to confirm invitations. |
 | [`isMsgBlocked`](#check-whether-the-current-user-has-blocked-group-messages) | `EMGroup` | Determine whether the current user has blocked messages from a specified group. |
 | [`asyncBlockGroupMessage`](#block-group-messages) / [`asyncUnblockGroupMessage`](#unblock-group-messages) | `EMGroupManager` | Block or unblock group messages. |

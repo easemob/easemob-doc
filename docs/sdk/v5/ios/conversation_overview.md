@@ -73,7 +73,7 @@ When messages are sent or received, the SDK creates or updates the local convers
 - Group message: Creates or updates the group conversation based on the chat group ID.
 - Chat room message: Creates or updates the chat room conversation based on the chat room ID.
 
-After receiving an online message, the SDK updates local status such as the latest message in the conversation (`EMConversation#latestMessage`), list sorting, and unread count (`EMConversation#unreadMessagesCount`).
+After receiving an online message, the SDK updates local status such as the latest message in the conversation (`EMConversation#latestMessage`), list sorting, and unread count (`EMConversation#unreadMessagesCount`). Command messages are not saved in the SDK's local database or in-memory message cache. When sending a command message, the SDK does not create a local conversation for it. This restriction does not affect normal command message sending and receiving through `EMCmdMessageBody` and command message callbacks.
 
 ### Create a local conversation through an API
 
@@ -91,9 +91,7 @@ Pass the correct conversation type when creating or querying a conversation. Thi
 
 ### Update the conversation list through server synchronization
 
-To update the conversation list through server synchronization, configure automatic synchronization before initialization, wait for synchronization to finish after login, and then read the local data.
-
-Before calling `initializeSDKWithOptions`, configure `EMOptions#dataSyncType` to include `.conversations`. After the user logs in successfully, the SDK automatically synchronizes server-side conversation data and writes it locally.
+`EMOptions#dataSyncType` includes `.conversations` by default. After the user logs in successfully, the SDK automatically synchronizes server-side conversation data and writes it locally. Wait for synchronization to finish before reading local data. To specify the synchronization scope, configure this property before initializing the SDK.
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")
@@ -134,6 +132,7 @@ The iOS SDK provides the following methods for reading the local conversation li
 | :--- | :--- | :--- |
 | Sorted list | `getAllConversations` | When `true` is passed for `isSort`, pinned conversations take precedence. Within the pinned and unpinned conversation groups, conversations are sorted by the latest message time in descending order. |
 | List without specified sorting | `getAllConversations` | Equivalent to `getAllConversations(false)` and returns the local conversation array. |
+| Database pagination | `getConversationsFromDBWithCursor` | Supported starting from SDK v5.1.0. Disable automatic loading of all local conversations before initialization. For details, see [Retrieve local conversations by page](conversation_list.html#retrieve-local-conversations-by-page). |
 | Database filtering | `filterConversationsFromDB` | Loads all conversations from the local database or filters conversations based on a closure. The conversation memory cache can optionally be cleared first. |
 
 ```swift
@@ -193,7 +192,7 @@ Clearing a conversation unread count does not send a read receipt to the message
 
 | Feature | Main API | Description |
 | :--- | :--- | :--- |
-| Conversation list | `getAllConversations`, `getAllConversations`, `filterConversationsFromDB` | Reads the conversation list from local memory or the database. For details, see [Conversation List](conversation_list.html). |
+| Conversation list | `getAllConversations`, `getConversationsFromDBWithCursor`, `filterConversationsFromDB` | Reads the conversation list from local memory or the database all at once, by page, or by criteria. For details, see [Conversation List](conversation_list.html). |
 | Conversation unread counts | `unreadMessagesCount`, `clearConversationUnreadMessageCount`, `clearAllConversationUnreadMessageCount` | Retrieves or clears conversation unread counts. For details, see [Conversation Unread Counts](conversation_unread.html). |
 | Conversation deletion | `deleteConversation`, `deleteServerConversation`, `deleteAllMessagesAndConversations` | Deletes local conversations and messages or the current user's server-side conversations and messages. For details, see [Delete Conversations](conversation_delete.html). |
 | Conversation pinning | `pinConversation` | Pins or unpins a conversation. For details, see [Pin Conversations](conversation_pin.html). |
@@ -269,7 +268,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## Best practices
 
-- Before initializing the SDK, configure `EMOptions#dataSyncType` to include `.conversations`, and read the local list after conversation data synchronization succeeds.
+- Use the default `.conversations` configuration of `EMOptions#dataSyncType` or explicitly configure this type before initializing the SDK, and read the local list after conversation data synchronization succeeds.
 - When displaying the conversation list, preferentially call `getAllConversations` and pass `true` for `isSort` to directly use the SDK's sorting result with pinned conversations first.
 - When querying only local conversations, pass `false` for `createIfNotExist` in `getConversation` to avoid accidentally creating empty conversations.
 - Register `EMConversationDelegate` and refresh the conversation list after receiving `conversationListDidUpdate`.
@@ -288,6 +287,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 | [`dataSyncType`](#update-the-conversation-list-through-server-synchronization) | `EMOptions` | Sets the data types that are automatically synchronized after login. |
 | [`initializeSDKWithOptions`](#update-the-conversation-list-through-server-synchronization) | `EMClient` | Initializes the iOS SDK with the specified configuration. |
 | [`getAllConversations`](#conversation-lists-and-empty-conversations) / [`getAllConversations`](#conversation-lists-and-empty-conversations) | `IEMChatManager` | Retrieves the local conversation array. |
+| [`getConversationsFromDBWithCursor`](conversation_list.html#retrieve-local-conversations-by-page) | `IEMChatManager` | Retrieves the conversation list from the local database by page starting from SDK v5.1.0. |
 | [`filterConversationsFromDB`](#conversation-lists-and-empty-conversations) | `IEMChatManager` | Loads all conversations from the local database or filters conversations. |
 | [`loadEmptyConversations`](#conversation-lists-and-empty-conversations) | `EMOptions` | Sets whether to include empty conversations when loading conversations from the local database. |
 | [`clearConversationUnreadMessageCount`](#current-conversation-and-unread-counts) | `IEMChatManager` | Clears the local unread count of a specified conversation. |

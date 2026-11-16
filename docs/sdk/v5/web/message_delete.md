@@ -16,6 +16,10 @@ Before you begin, ensure that the following requirements are met:
 - You have initialized the SDK and connected to the server. For details, see [Quickstart](quickstart.html).
 - You registered `ChatManager` during SDK initialization and can call message- and conversation-deletion APIs through `client.chatManager`.
 
+:::warning
+Before deleting data, confirm the target account, conversation, and message scope. After server-side data is deleted, the current user cannot recover it through message roaming. Do not expand the deletion scope through repeated retries.
+:::
+
 ## Clear chat history for the current user
 
 Call `clearAllMessagesAndConversations` to clear the current user's server-side chat history, including messages and conversations for one-to-one chats, group chats, and chat rooms. After you clear the chat history, you can no longer retrieve those conversations and messages from the server. Other users are not affected.

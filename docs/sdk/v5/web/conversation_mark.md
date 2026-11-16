@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation tags classify conversations for business purposes, such as starred, pending, or important-customer conversations. The Web SDK supports adding tags to or removing them from one-to-one, group, and chat room conversations. A conversation supports up to 20 tags, and you define and maintain the business meaning of each tag.
+Conversation tags classify conversations for business purposes, such as starred, pending, or important-customer conversations. The Web SDK supports adding tags to or removing them from one-to-one and group conversations. Chat room conversations are not supported. A conversation supports up to 20 tags, and you define and maintain the business meaning of each tag.
 
 :::tip
 Conversation tags are used only for classification and filtering. They do not affect the unread count, message sending or receiving, pin status, or message read status.
@@ -59,8 +59,8 @@ The parameters are as follows:
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `conversationId` | String | Conditionally required | Conversation ID. Pass it for a single-conversation operation. For one-to-one chat, it is the peer user ID; for group chat, the chat group ID; and for chat room chat, the chat room ID. |
-| `conversationType` | String | Conditionally required | Conversation type. Pass it for a single-conversation operation. Possible values are `singleChat`, `groupChat`, and `chatRoom`. |
+| `conversationId` | String | Conditionally required | Conversation ID. Pass it for a single-conversation operation. For one-to-one chat, it is the peer user ID; for group chat, the chat group ID. Chat room conversations are not supported. |
+| `conversationType` | String | Conditionally required | Conversation type. Pass it for a single-conversation operation. The values supported for this operation are `singleChat` and `groupChat`; `chatRoom` is not supported. |
 | `conversations` | Array | Conditionally required | Conversation list. Pass it for a bulk operation. The array cannot be empty. |
 | `mark` | Number | Yes | Conversation tag to add. The value range is an integer from `0` through `19`. |
 

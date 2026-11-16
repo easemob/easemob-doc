@@ -18,6 +18,24 @@ The following example configures the log level:
 setLogLevel('WARN');
 ```
 
+## Console output and log callbacks
+
+Starting with SDK v5.1.2, call `setConsoleLogEnabled` to control whether the SDK outputs logs to the runtime console. You can also receive assembled and sanitized structured logs through the `onLog` event. Each entry contains `timestamp`, `level`, `message`, and `args`. Disabling console output does not affect `onLog` callbacks or log reporting.
+
+In the following example, `applicationLogger` represents your app's logging service:
+
+```typescript
+// Disable SDK console logs without affecting onLog or log reporting.
+setConsoleLogEnabled(false);
+
+client.addEventHandler('log-listener', {
+  onLog: entry => {
+    // The SDK has sanitized the entry. Collect and process it in your app.
+    applicationLogger.write(entry);
+  },
+});
+```
+
 ## Log reporting
 
 The Web SDK supports reporting logs to the EasyIM server. This feature is disabled by default. To enable it, contact the EasyIM business manager.

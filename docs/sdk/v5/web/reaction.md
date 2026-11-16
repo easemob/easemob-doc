@@ -18,6 +18,7 @@ To use the Reaction feature, enable it in the [EasyIM Console](https://console.e
 
 ## Limitations
 
+- The same user can add the same Reaction to the same message only once.
 - Reactions currently apply only to one-to-one and group chats. Chat rooms are not supported.
 - For Reaction counting rules, storage period, per-user addition limits, the number of Reactions that can be added to each message, and Reaction ID requirements, see [Limitations](limitation.html).
 
@@ -34,7 +35,7 @@ Before you begin, ensure that the following requirements are met:
 
 Call `addReaction` to add a Reaction to a message. For one-to-one and group chats, conversation members receive the `onReactionChanged` event. The event contains the message ID, conversation ID, conversation type, message sender, message recipient, complete Reaction list on the current message, and update timestamp. Use this information to update the message's Reaction display in real time.
 
-The current user can add the same Reaction to the same message only once. If the user adds it again, the SDK typically returns error code `1301` with the error key `reaction_already_operated`. Your app can handle this uniformly as “This Reaction has already been added.”
+The current user can add the same Reaction to the same message only once. If the user adds it again, the SDK typically returns error code `1301` (`REACTION_ALREADY_OPERATED`). Your app can handle this uniformly as “This Reaction has already been added.”
 
 Example code:
 

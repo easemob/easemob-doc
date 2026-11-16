@@ -43,7 +43,7 @@ In a production environment, you are advised to integrate the [app token retriev
 ```
 
 :::tip
-The app can use `isLoggedIn` and `isConnected` to determine the login state and server connection state, respectively, but it cannot rely on the SDK to initiate login automatically. Each time the app starts or requires an EasyIM session, the business layer must save the credentials and explicitly call `loginWithUsername`.
+The app can query the login state through `isLoggedIn` and distinguish disconnected, connecting, and connected states through `connectionState`, but it cannot rely on the SDK to initiate login automatically. Each time the app starts or requires an EasyIM session, the business layer must save the credentials and explicitly call `loginWithUsername`.
 :::
 
 ## Use the local database before login is complete
@@ -146,11 +146,12 @@ NSString *currentUser = [EMClient sharedClient].currentUsername;
 
 ## Retrieve the login state
 
-Call `isLoggedIn` to determine whether the current user is logged in, and call `isConnected` to determine whether the SDK is connected to the EasyIM server. The login state and connection state have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently be connected to the server.
+Call `isLoggedIn` to determine whether the current user is logged in. Starting from SDK 5.2.0, we recommend querying disconnected, connecting, or connected state through `connectionState`. `isConnected` is deprecated, but existing calls remain usable. Login and connection states have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently connected to the server. See [Retrieve the connection state](connection.html#retrieve-the-connection-state).
 
 ```objectivec
 BOOL loggedIn = [EMClient sharedClient].isLoggedIn;
-BOOL connected = [EMClient sharedClient].isConnected;
+EMConnectionState state = [EMClient sharedClient].connectionState;
+BOOL connected = (state == EMConnectionConnected);
 ```
 
 ## Logout
@@ -306,7 +307,8 @@ If the currently logged-in user account is disabled by the server, the SDK trigg
 | [`renewToken`](#token-renewal) | `EMClient` | Asynchronously update the token used for the current login. |
 | [`currentUsername`](#retrieve-the-currently-logged-in-user) | `EMClient` | Retrieve the user ID of the currently logged-in user. |
 | [`isLoggedIn`](#retrieve-the-login-state) | `EMClient` | Determine whether the current user is logged in. |
-| [`isConnected`](#retrieve-the-login-state) | `EMClient` | Determine whether the SDK is connected to the EasyIM server. |
+| [`connectionState`](#retrieve-the-login-state) | `EMClient` | Queries disconnected, connecting, or connected state. |
+| [`isConnected`](#retrieve-the-login-state) | `EMClient` | Deprecated. Use `connectionState`. |
 | [`logout`](#logout) | `EMClient` | Asynchronously log out of the current account and determine whether to unbind the device push token based on the parameter. |
 | [`customOSType`](#multi-device-login) | `EMOptions` | Set the custom system type of the login device. |
 | [`customDeviceName`](#multi-device-login) | `EMOptions` | Set a custom name for the current device. |

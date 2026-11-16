@@ -19,6 +19,10 @@ Before you begin, ensure that the following requirements are met:
 
 Use `EMContactListener` to monitor friend request, acceptance, rejection, addition, deletion, and friend information change events.
 
+:::tip
+To receive notifications of changes to friends' user attributes through `onContactInfoUpdate`, first contact the EasyIM business manager to enable this feature. For details about user attribute change notifications, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+:::
+
 ```java
 EMContactListener contactListener = new EMContactListener() {
     // The peer accepts a friend request. User A sends user B a friend request. After user B accepts it, user A receives this event.
@@ -309,7 +313,7 @@ try {
 
 #### Retrieve a single user's attributes from local memory
 
-To read a specified user's attributes directly from local memory, call `EMUserInfoManager#getUserInfoWithUserId(String)`. For details, see [Read user attributes from local memory](userinfo_provider.html#read-user-attributes-from-local-memory).
+To read a specified user's attributes directly from local memory, call `EMUserInfoManager#getUserInfoWithUserId(String)`. For details, see [Read user attributes from the local cache](userinfo_provider.html#read-user-attributes-from-the-local-cache).
 
 This API returns an `EMUserInfo` for a single user, not an `EMContact`. It does not initiate a network request and can supplement friend-list reads.
 
@@ -357,7 +361,7 @@ EMClient.getInstance()
 
 ### Remove a user from the blocklist
 
-Call `removeUserFromBlackList` to remove a user from the blocklist. After removal, the user can send messages and perform other actions again.
+Call `removeUserFromBlackList` to remove a user from the blocklist. After removal, the user can send messages, send friend requests, and perform other actions again.
 
 ```java
 // Asynchronous method.

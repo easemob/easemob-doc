@@ -1,141 +1,169 @@
 # Offline Push Overview
 
-EasyIM supports integration with Google Firebase Cloud Messaging (FCM) to provide the offline message push service that offer low latency, a high delivery rate, high concurrency, and no violation of users' personal data. 
+<Toc />
 
-## Offline push flow
+## Feature overview
 
-### Trigger conditions and message delivery mechanism
+EasyIM uses third-party push services to send message notifications to devices while users are offline. Google Firebase Cloud Messaging (FCM) is supported.
 
-When the client disconnects or the app process is closed by the system, causing the user to go offline, EasyIM sends a message notification to the offline user's device through Google FCM. After the user gets online again, the server delivers all messages sent during the offline period to the user. Here, the badge shows the number of offline messages, not the actual number of unread messages. For example, when you receive messages from other users while offline, the phone notification center displays corresponding message alerts. When you open the app again and log in successfully, the EasyIM SDK automatically pulls all messages sent during the offline period.
+Offline push notifications alert users to new messages. After the user reopens the app and logs in successfully, the SDK retrieves messages from the offline period. Push notifications and IM message synchronization are separate processes. Receiving a notification does not mean the SDK has received the corresponding complete message. The offline message count in a push notification also differs from the actual conversation unread count.
 
-### Prerequisite configuration
+## Prerequisites
 
-In addition to meeting the user offline condition, using a third-party offline push service also requires completing push certificate information configuration in [EasyIM Console](https://console.easyim.ai/user/login). Taking Huawei Push as an example, you need to configure the **certificate name** and **push key**, and call the API provided by the client SDK to upload the device token to the EasyIM server.
+### SDK and runtime
 
-### Scenarios where offline push is not triggered
+- [Enable and configure EasyIM](/product/console/app_create.html), obtain a valid App Key, and complete [Android SDK integration](/docs/sdk/v5/android/integration.html).
+- Understand the EasyIM [limitations](/product/limitation.html).
+- Ensure that the device supports and enables Google Play services and can connect to Google servers.
 
-In the following two cases, EasyIM does not send offline push notifications:
+### Push service and Console configuration
 
-1. When the app runs in the background and the user is still online, EasyIM does not push message notifications.
-2. When the app runs in the background or the phone is locked, if the connection between the client and the server is not disconnected, EasyIM also does not trigger offline push notifications.
+Register your app and enable push services on the vendor's developer platform. Obtain the required app identifiers, keys, or certificates, then configure the corresponding push certificate in [EasyIM Console](https://console.easyim.io/user/login).
 
-## Push principles
+Console certificate configuration is an integration prerequisite. The client token is bound to the IM account after SDK initialization and successful login. Synchronize updated tokens promptly. For FCM configuration and binding requirements, see [Upload the push certificate](push_fcm.html#step-3-upload-the-push-certificate) and [Integrate FCM push](push_fcm.html#step-4-integrate-fcm-push).
 
-![image](/images/android/push/push_android_understand.png)
+### System notification permissions
 
-The complete message push flow is as follows:
+Configure and request the notification permissions required by the Android version and target SDK version. Confirm that system settings allow the app and its notification channel to display notifications. Android 13 and later require handling notification runtime permissions according to system requirements.
 
-1. User B, the message recipient, detects the push channels supported by the device, that is, the configured third-party push service types and their usage conditions.
+Obtaining or binding a token does not mean notification display permissions are enabled.
+
+### Push integration documentation
+
+Complete vendor project registration, certificate configuration, push SDK dependencies and manifest settings, client initialization, and token binding as described in [Integrate FCM into EasyIM](push_fcm.html).
+
+Before SDK initialization, enable the required channel through `EMPushConfig.Builder`, then set the push configuration with `EMOptions#setPushConfig(EMPushConfig)`. For general initialization requirements, see [Initialize the SDK](/docs/sdk/v5/android/initialization.html#initialize-the-sdk). For channel configuration examples, see the FCM integration guide above.
+
+If code obfuscation is enabled, follow the [general obfuscation rules](/docs/sdk/v5/android/integration.html#prevent-code-obfuscation) and add the push SDK rules required by the vendor integration guide.
+
+Push notification modes, Do Not Disturb mode, and push templates are optional advanced features. For activation requirements, see [Feature activation](#feature-activation).
+
+## Understand the tech
+
+### Push certificates and push tokens
+
+| Concept | Purpose |
+| :--- | :--- |
+| Push certificate | Configuration used by the IM server to call the vendor push service. A vendor may require app identifiers, keys, or certificate files. The certificate name configured or uploaded by the client must match EasyIM Console. |
+| Push token (device token) | An identifier generated by the vendor push service for an app instance on a device, identifying the notification target. The client uploads the token to the IM server and binds it to the IM login account. |
+
+### Push channel selection
+
+The SDK checks enabled channels supported by the device in the default order of FCM, Xiaomi, Huawei, Meizu, OPPO, vivo, and HONOR, selecting the first eligible channel. If no vendor push is configured or no channel is available, the SDK uses keep-alive mechanisms to maintain the IM persistent connection as far as possible. This does not mean vendor offline push has been integrated.
+
+### Message push flow
+
+![Android offline push flow](/images/android/push/push_android_understand.png)
+
+For example, when user A sends a message to user B:
+
+1. User B, the recipient, selects an available vendor push service based on configured channels and device support.
 2. User B requests a push token from the third-party push server through the configured third-party push SDK.
 3. The third-party push server returns a push token to user B.
-4. User B uploads the push certificate name and push token to the EasyIM server.
+4. User B uploads the push certificate name and push token to the IM server.
 5. User A sends a message to user B.
-6. The EasyIM server checks the presence of user B. If user B is online, the server directly delivers the message to user B.
-7. If user B is offline, the EasyIM server determines the push service type used by the user's device.
-8. The EasyIM server forwards the message to the third-party push server.
-9. The third-party push server finally delivers the message to user B's device.
+6. The IM server checks whether user B is online. If online, it delivers the message directly to user B.
+7. If user B is offline, the IM server determines the push service type used by the device.
+8. The IM server forwards the message to the third-party push server.
+9. The third-party push server delivers the message to user B's device.
 
-## Push certificate and push token
+## Push trigger conditions and message reception strategy
 
-**Push certificate**: A push certificate is the only basis for the EasyIM server to determine which push channel the target device uses. Before sending push notifications, you need to configure a push certificate for the app in [EasyIM Console](https://console.easyim.ai/user/login), enter the certificate name or App Key, and ensure that this name is the same as the certificate name uploaded by the Android terminal device. This configuration must be completed after the login to the EasyIM SDK succeeds.
+### Online state and app foreground/background state
 
-**Push token (Device Token)**: A push token is a unique identifier generated by a third-party push service for an app instance. Take Google FCM as an example. When the app starts for the first time, the FCM SDK generates a registration token for the client app instance. This token uniquely identifies each app on each device. FCM uses it to accurately deliver messages to the target device, and the device then notifies the app. You can call `FirebaseMessaging.getInstance().getToken()` to get the token. In addition, if you choose not to unbind the device token when logging out of EasyIM by setting the `unbindToken` parameter of the `logout` method to `false`, while `true` indicates unbinding the token, the user can still receive offline push notifications while the push certificate and token are valid.
+Entering the background or locking the screen does not itself mean the user is offline. If the client retains its IM persistent connection to the server, the user remains online. Offline push is not triggered solely because the app enters the background.
 
-For detailed steps on how to get a push token and upload it to the EasyIM server, see the integration guide for each push service. For example, for FCM push, see [FCM push integration guide](/sdk/v5/android/push/push_fcm.html#step-4-integrate-fcm-push).
+The IM server determines offline push according to the user's online state, multi-device push policy, push notification mode, Do Not Disturb settings, and other configurations, rather than whether the client has received a disconnection callback. Chat rooms do not support offline message push.
+
+### Configure background message reception
+
+Starting from SDK 5.2.1, use `EMOptions#setUsePushInBackground(boolean usePushInBackground)` to configure message reception after the app enters the background, and `EMOptions#isUsePushInBackground()` to query the switch. Set it before calling `EMClient#init`.
+
+| `usePushInBackground` | Behavior |
+| :--- | :--- |
+| `false` (default) | The SDK does not actively disconnect the IM persistent connection because the app enters the background. Whether the background connection can remain active also depends on system background restrictions and the app's keep-alive policy. |
+| `true` | If the push token is successfully bound and the vendor channel is valid when the app enters the background, the SDK schedules disconnection after approximately 10 seconds. It disconnects if the app remains in the background and the connection is still available. Subsequent messages meeting server-side offline push conditions generate notifications through the push channel. If channel conditions are not met when entering the background, no disconnection task is scheduled. |
+
+This strategy applies uniformly to vendor channels such as FCM, Huawei, HONOR, Xiaomi, OPPO, vivo, and Meizu.
+
+When the app returns to the foreground, the SDK cancels a pending background disconnection task. If a connection succeeds while the app is already in the background, with the switch enabled and the channel valid, the SDK disconnects immediately without waiting approximately 10 seconds. Therefore, approximately 10 seconds is not a guaranteed duration for every background connection.
+
+The switch controls only the background connection strategy. It does not integrate vendor push or bind tokens automatically. For push configuration and SDK initialization, see [Initialize the SDK](/docs/sdk/v5/android/initialization.html#initialize-the-sdk) and the [push integration guide](#push-integration-documentation). For channel conditions required for background disconnection, see [Confirm push channel validity](#confirm-push-channel-validity).
+
+### Confirm push channel validity
+
+Starting from SDK 5.2.1, `EMPushHelper#isPushTokenBound()` queries whether a valid vendor push channel has been established. It takes no parameters and returns `boolean`:
+
+- `true`: The current push type is non-null and is not `EMPushType.NORMAL`, and its locally saved token is nonempty. The SDK uses these conditions to determine channel validity.
+- `false`: These conditions are not met; the SDK has not confirmed a valid vendor push channel.
+
+Token binding is asynchronous. A query immediately after login succeeds may return `false`. Query after `PushListener#onBindTokenSuccess(EMPushType type, String token)`. For listener registration and token uploading, see [Integrate FCM push](push_fcm.html#step-4-integrate-fcm-push).
+
+This method checks the SDK's current push type and locally saved token. It neither queries the server in real time nor guarantees delivery of every notification. Enabling `usePushInBackground` alone does not mean the channel is valid.
+
+### Background disconnection and the disconnection notification grace period
+
+Starting from SDK 5.2.1, the background disconnection delay and disconnection notification grace period are independent mechanisms:
+
+| Mechanism | Purpose and configuration |
+| :--- | :--- |
+| Background disconnection delay | When the app enters the background with `usePushInBackground` enabled and a valid channel, the SDK schedules disconnection after approximately 10 seconds. Returning to the foreground cancels a pending task. A connection established in the background under these conditions disconnects immediately. See [Configure background message reception](#configure-background-message-reception). |
+| Disconnection notification grace period | After a connection has been established successfully during the current login, notifications for recoverable disconnections such as network exceptions can be deferred. The default is 10 seconds, configurable through `EMOptions#setDisconnectNotifyThreshold(int seconds)`. |
+
+The grace period affects only disconnection callback timing, without delaying actual connection state changes. Not receiving `onDisconnected` does not mean the persistent connection is still available. Query the current client state through `EMClient#getConnectionState()`. See [Retrieve the connection state](/docs/sdk/v5/android/connection.html#retrieve-the-connection-state).
+
+The grace period is not an additional offline push delay. Do not simply add it to the background disconnection delay to calculate when push is triggered or delivered. For the scope and complete rules, see [Configure the disconnection notification grace period](/docs/sdk/v5/android/connection.html#configure-the-disconnection-notification-grace-period).
+
+### Multi-device offline push policy
+
+For the same account logged in on multiple devices, configure these policies on the **Certificates** page in [EasyIM Console](https://console.easyim.io/user/login). The setting applies to all push channels:
+
+- Send push messages only when all devices are offline.
+- Send push messages when any device is offline.
+
+To determine whether a particular device will receive push in a multi-device scenario, also consider the account's multi-device push policy, rather than checking only one client's connection state.
+
+During multi-device login, a device kicked offline no longer receives that account's offline push notifications even if offline push is integrated.
+
+![Multi-device offline push policy](/images/android/push/push_multidevice_policy.png)
+
+### Logout and token unbinding
+
+When calling `EMClient#logout`, `unbindToken` controls whether to unbind the push token. See [Logout](/docs/sdk/v5/android/login.html#logout).
+
+| `unbindToken` | Behavior |
+| :--- | :--- |
+| `true` | Unbinds the push token during logout. After successful unbinding, this binding no longer receives offline push notifications for the account. |
+| `false` | Retains the push token binding during logout. The device can still receive offline push notifications for the account if the certificate and token remain valid and push conditions are met. |
+
+Logout and being kicked offline are different scenarios. Do not directly apply the same push behavior to both.
 
 ## Advanced push features
 
 ### Feature activation
 
-[Push notification mode](push_notification_mode_dnd.html#push-notification-mode), [Do Not Disturb mode](push_notification_mode_dnd.html#dnd), and [push templates](push_template.html) are advanced push features. Before using them, you need to enable the related services for free in [EasyIM Console](https://console.easyim.ai/user/login). **After activation, if you need to disable advanced push features, you must contact the EasyIM business manager, because this operation deletes all configurations related to advanced features.**
+[Push notification mode](push_notification_mode_dnd.html#push-notification-mode), [Do Not Disturb mode](push_notification_mode_dnd.html#dnd), and [push templates](push_template.html) are advanced push features. Enable them for free in [EasyIM Console](https://console.easyim.io/user/login) before use.
 
-Follow these steps:
+For the entry and steps, see [Activate advanced push features](push_notification_mode_dnd.html#feature-activation).
 
-1. Log in to [EasyIM Console](https://console.easyim.ai/user/login). 
-2. On the **Applications** page, click the App Key of the app of the development or production environment.
-3. Select **Push** in the left navigation pane and click the **Offline Push** tab.
-4. Click **Enable Free**.
-
-![image](/images/android/push/push_advanced_feature_enable.png)
+**After activation, contact the EasyIM business manager to disable advanced push features. Disabling them deletes all related configurations.**
 
 ### Push notification mode
 
-Push notification mode provides the following three types:
+Receive notifications for all offline messages, only messages mentioning users, or no messages. Configure this at the app level or for one-to-one and group conversations. Conversation-level settings take precedence over app-level settings.
 
-- Receive push notifications for all offline messages.
-- Receive push notifications only for messages that mention specific users.
-- Do not receive push notifications for any offline messages.
-
-You can set the push notification mode separately at the app level or at the one-to-one/group chat conversation level. Conversation-level configurations take precedence over app-level configurations.
-
-For more details, see [Introduction to push notification mode](push_notification_mode_dnd.html#push-notification-mode).
+See [Push notification mode](push_notification_mode_dnd.html#push-notification-mode).
 
 ### Do Not Disturb mode
 
-After SDK initialization is completed and the app is successfully logged in, you can set Do Not Disturb mode for the app and various types of conversations, that is, disable offline push. This mode provides the following capabilities:
+After initializing the SDK and successfully logging in, configure Do Not Disturb at the app level or for one-to-one and group conversations. Set a DND period, duration, or all-day DND. Use forced push if your business needs to notify specified users during DND.
 
-- Supports setting a Do Not Disturb time period, such as 8:00-10:00, or a Do Not Disturb duration, such as 30 minutes.
-- Supports Do Not Disturb mode configuration at the app level and at the one-to-one/group chat conversation level.
-- Supports enabling all-day Do Not Disturb or completely disabling Do Not Disturb mode.
-- If you need to push messages to specified users in Do Not Disturb mode, you can set force push.
-
-For more details, see [Introduction to Do Not Disturb mode](push_notification_mode_dnd.html#dnd).
+See [DND](push_notification_mode_dnd.html#dnd) and [Forced push](push_extension.html#force-push).
 
 ### Push templates
 
-When the default offline push configuration provided by the server cannot meet your business requirements, you can use push templates to set the push title and push content globally. Push templates include the default templates `default` and `detail`, as well as custom templates, which you can configure in [EasyIM Console](https://console.easyim.ai/user/login).
+Use push templates to set global push titles and content when the server's default offline push configuration does not meet your requirements.
 
-For the specific configuration method and usage instructions of push templates, see [Push templates](push_template.html).
+The default templates `default` and `detail` and custom templates are supported. Configure templates in EasyIM Console and use them on the sender or recipient as needed.
 
-## Multi-device offline push policy
-
-In multi-device login scenarios, you can configure the push policy on the **Certificates** page in [EasyIM Console](https://console.easyim.ai/user/login). This policy takes effect uniformly for all push channels:
-
-- Send push messages only when all devices are offline.
-- Send push messages when any device is offline.
-
-**During multi-device login, if any device is kicked offline, it does not receive offline push messages even if IM offline push is integrated.**
-
-![image](/images/android/push/push_multidevice_policy.png)
-
-## Prerequisites
-
-1. EasyIM has been enabled. For details, see [Enable and configure EasyIM](/product/console/app_create.html).
-2. You understand the usage limitations of EasyIM. For details, see [Usage limitations](/product/limitation.html).
-3. If you need to use push templates, you must first complete activation in [EasyIM Console](https://console.easyim.ai/user/login).
-
-4. Before using message push, you need to complete project registration on the [Firebase console](https://console.firebase.google.com/) and upload the device push certificate to [EasyIM Console](https://console.easyim.ai/user/login).
-
-## Configure push APIs
-
-You need to configure push APIs during SDK initialization. The sample code is as follows:
-
-```java
-EMOptions options = new EMOptions();
-
-// Use Application Context to create the push configuration.
-EMPushConfig pushConfig = new EMPushConfig.Builder(getApplicationContext())
-        // Enable Xiaomi Push. appId and appKey cannot be empty.
-        .enableMiPush(miAppId, miAppKey)
-        // Enable Huawei Push. You need to preconfigure
-        // com.huawei.hms.client.appid in AndroidManifest.xml or configure agconnect-services.json in the project.
-        .enableHWPush()
-        .build();
-
-// Set the push configuration to the initialization options, and complete the configuration before initializing the SDK.
-options.setPushConfig(pushConfig);
-
-// Initialize the EasyIM SDK.
-EMClient.getInstance().init(getApplicationContext(), options);
-```
-
-## Obfuscation configuration
-
-If code obfuscation is enabled in your project, add the following rules to the obfuscation configuration file:
-
-```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
-```
-
-In addition, you also need to add the corresponding obfuscation rules for Google FCM according to the instructions in the vendor's developer platform documentation.
+See [Push Templates](push_template.html).

@@ -2,7 +2,7 @@
 
 ## Subscribe to or upgrade a plan
 
-- **Development app**: The Free EasyIM plan is enabled by default after the app is created. You can upgrade it to the Professional or Flagship plan. **No fees are charged before the app is launched as a production version. Billing starts on the day the app is launched as a production version.**
+- **Development app**: You can try the Professional or Flagship plan free of charge. No fees are charged during the trial. **Billing starts on the day the app is launched as a production version.**
 - **Production app**: You can upgrade from the Professional to the Flagship plan. Billing starts on the day the subscription succeeds.
 
 You can subscribe to or upgrade a plan in either of the following ways.

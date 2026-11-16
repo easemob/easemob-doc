@@ -6,6 +6,8 @@ The EasyIM iOS SDK supports updating existing messages in local memory and the l
 
 Local message updates apply only to the current device. They do not modify messages stored on the server or synchronize changes to the recipient or other devices under the current account.
 
+To edit a successfully sent message on the server, see [Edit a Sent Message](message_modify.html).
+
 ## Prerequisite
 
 Before you start, make sure that the following requirements are met:

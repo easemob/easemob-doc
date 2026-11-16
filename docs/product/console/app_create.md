@@ -17,7 +17,7 @@ Before creating an app, [register an account](account_register.html) in [EasyIM 
 
 2. In the **Create App** dialog box, enter the **App Name**, **Description**, **Appname**, **Data Residency**, and **Registration Mode**, and then click **Create**.
 
-   A new app uses the Free plan by default.
+   Development apps can try the Professional or Flagship plan free of charge. No fees are charged during the trial.
 
 ![img](/images/console/app_create.png)
 

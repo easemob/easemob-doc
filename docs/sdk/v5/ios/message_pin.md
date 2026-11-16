@@ -133,6 +133,8 @@ Register `EMChatManagerDelegate` and use `onMessagePinChanged` to monitor pin st
 [[EMClient sharedClient].chatManager removeDelegate:self];
 ```
 
+If pinning fails, check whether the feature is enabled, whether the message is still stored on the server, the number of pinned messages in the conversation, and whether the parameters are correct. Event notifications do not automatically update message arrays maintained by your app.
+
 ## API list
 
 | API name | Module/Type | Description |

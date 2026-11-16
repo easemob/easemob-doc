@@ -8,7 +8,7 @@
 
 ## Feature activation
 
-Before use, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
+To synchronize the server-side conversation list to the local client, first activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Prerequisite
 
@@ -128,6 +128,68 @@ conversations.forEach(conversation => {
 ```
 
 To refresh the list from the server first, call [`refreshSessionList`](#retrieve-the-conversation-list-from-the-server).
+
+## Display a summary of the last message
+
+Conversation lists typically display a short summary of the last message. The SDK provides message data; your app generates display text according to the message type and truncates it to fit the UI. The text below is illustrative and is not a fixed SDK return value.
+
+| Message type | Suggested summary |
+| :--- | :--- |
+| Text | Display the text content. |
+| Image (including GIF) | Display "[Image]". Adjust the label in your app if GIFs need to be distinguished. |
+| Voice | Display "[Voice]", optionally with the duration. |
+| Video | Display "[Video]". |
+| File | Display "[File]", optionally with the filename. |
+| Location | Display "[Location]", optionally with the place name or address. |
+| Custom | Generate a summary from the custom event and business parameters, using fallback text for unrecognized content. |
+| Combined | Use the body's title or summary, or display "[Chat history]" for all combined messages. |
+| Multi-body | Display "[Multi-body message]", or combine text and type labels in body order, such as "Hello [Image]". |
+
+Command messages carry business instructions and are not displayed as regular conversation summaries.
+
+`ConversationItem.lastMessage` provides structured summary data for the last message, rather than a directly displayable string. Identify its type through `lastMessage.type`. A regular message has an object `body`; a multi-body message has a segment array. If `lastMessage` is `null`, set the display summary to an empty string. This example uses fixed labels for non-text messages and prefers the summary provided by a combined message:
+
+```typescript
+for (const conversation of client.chatManager.getConversationList()) {
+  const lastMessage = conversation.lastMessage;
+  let summary = '';
+  if (lastMessage) {
+    const body = lastMessage.body;
+    // Multi-body messages use a segment array. Do not read body.content as for a regular message.
+    if (lastMessage.type === 'multi_body' && Array.isArray(body)) {
+      summary = '[Multi-body message]';
+    } else if (!Array.isArray(body)) {
+      const singleBody = body as Record<string, unknown>;
+      switch (lastMessage.type) {
+        case 'text':
+          summary = typeof singleBody.content === 'string' ? singleBody.content : '';
+          break;
+        case 'image': summary = '[Image]'; break;
+        case 'voice': summary = '[Voice]'; break;
+        case 'video': summary = '[Video]'; break;
+        case 'file': summary = '[File]'; break;
+        case 'location': summary = '[Location]'; break;
+        case 'custom': summary = '[Custom message]'; break;
+        case 'combine':
+          summary = typeof singleBody.summary === 'string' && singleBody.summary
+            ? singleBody.summary : '[Chat history]';
+          break;
+        case 'cmd': break;
+        default: summary = '[Message]'; break;
+      }
+    } else {
+      summary = '[Message]';
+    }
+  }
+  // Use summary to update the current conversation summary.
+}
+```
+
+:::tip
+Starting from SDK 5.2.0, a multi-body message has `lastMessage.type` equal to `multi_body`, and `lastMessage.body` is directly a segment array. To combine segment summaries, read each segment's `type` and content in array order. Do not read `lastMessage.body.content` directly. See [Receive multi-body messages](message_receive.html#receive-multi-body-messages).
+:::
+
+After the conversation list is updated, regenerate the summary from `lastMessage` in the latest conversation list item. For monitoring, see [Monitor conversation list updates](#monitor-conversation-list-updates).
 
 ## Conversation list update scenarios
 

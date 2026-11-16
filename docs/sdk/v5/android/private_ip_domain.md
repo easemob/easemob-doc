@@ -1,22 +1,36 @@
 # Private Cloud SDK IP Address/Domain Configuration
 
+The SDK connects to public cloud services by default. When using a private cloud, configure the private-cloud REST address and IM persistent connection address before initializing the SDK.
+
+:::tip
+In Android SDK v5.1.0 and later, the SDK automatically determines the data synchronization WebSocket address from the configured private-cloud REST address. No separate configuration is required.
+
+Starting from Android SDK v5.1.0, the following data synchronization WebSocket configuration APIs are removed: `EMOptions#setSyncDataWebSocketServer(String)`, `EMOptions#getSyncDataWebSocketServer()`, `EMOptions#setSyncDataWebSocketPort(int)`, and `EMOptions#getSyncDataWebSocketPort()`.
+
+`EMOptions#setWebSocketServer` and `EMOptions#setWebSocketPort` configure the IM persistent WebSocket connection, rather than the data synchronization WebSocket.
+:::
+
 ## Statically configure an IP address/domain
 
-The SDK connects to public cloud services by default. When using a private cloud, configure the private-cloud REST and EasyIM service addresses through `EMOptions` before initializing the SDK. When statically configuring private-cloud addresses, call `enableDNSConfig(false)` to disable SDK DNS address configuration.
+For static configuration, disable dynamic DNS configuration and set the corresponding addresses for the IM persistent connection method.
+
+The following addresses and ports are examples. Replace them with the actual configuration provided by your private-cloud deployment. If the REST service uses HTTPS, explicitly include `https://` in the address. If no protocol is specified, the SDK uses HTTP.
 
 ### Method 1: TCP connection
 
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// REST service address. Enter the domain or IP address and port based on the private-cloud deployment configuration.
-options.setRestServer("https://rest.example.com:443");
-// EasyIM service address and TCP port.
-options.setIMServer("im.example.com");
-options.setImPort(443);
-// Whether to enable TLS for the EasyIM connection.
-options.setEnableTLSConnection(true);
-// Disable SDK DNS address configuration when using static private-cloud addresses.
+
+// Set the private-cloud REST address.
+options.setRestServer("https://private-rest.example.com");
+
+// Set the TCP persistent connection address and port for sending and receiving IM messages.
+options.setIMServer("private-im.example.com");
+options.setImPort(6717);
+options.setEnableTLSConnection(true); // Use TLS to encrypt the TCP connection.
+
+// Use the static addresses above instead of retrieving addresses from the DNS configuration service.
 options.enableDNSConfig(false);
 
 EMClient.getInstance().init(context, options);
@@ -27,35 +41,31 @@ EMClient.getInstance().init(context, options);
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// REST service address. Include the https:// prefix when using HTTPS.
-options.setRestServer("https://rest.example.com:443");
-// WebSocket service address and port.
-options.setWebSocketServer("ws.example.com");
+
+// Set the private-cloud REST address.
+options.setRestServer("https://private-rest.example.com");
+
+// Set the WebSocket persistent connection address and port for sending and receiving IM messages.
+options.setWebSocketServer("private-im.example.com");
 options.setWebSocketPort(443);
-// Whether to enable TLS for the WebSocket connection. WSS is used when TLS is enabled.
-options.setEnableTLSConnection(true);
-// Disable SDK DNS address configuration when using static private-cloud addresses.
+options.setEnableTLSConnection(true); // Use an encrypted WSS connection.
+
+// Use the static addresses above instead of retrieving addresses from the DNS configuration service.
 options.enableDNSConfig(false);
 
 EMClient.getInstance().init(context, options);
 ```
 
-:::tip
-When the REST service uses HTTPS, the REST address must include the `https://` prefix. `setEnableTLSConnection(true)` controls whether TLS is enabled for an EasyIM TCP or WebSocket connection; it does not automatically add HTTPS to the REST address.
-:::
-
-```java
-options.setRestServer("https://10.10.10.10:443");
-```
-
 ## Dynamically configure addresses
 
-If the private cloud has a DNS service that provides service addresses, set the DNS service address before SDK initialization. SDK DNS address configuration is enabled by default. When using dynamic address configuration, you do not need to call `enableDNSConfig(false)`.
+1. Configure a DNS address table on the private-cloud server, including REST and IM persistent connection addresses.
+2. Before initializing the SDK, set the DNS configuration service address through `EMOptions#setDnsUrl`.
 
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
-// Configure the DNS service address that provides service addresses.
-options.setDnsUrl("https://dns.example.com");
+options.setDnsUrl("https://private-dns.example.com/server.json");
+options.enableDNSConfig(true); // The default value is true.
+
 EMClient.getInstance().init(context, options);
 ```

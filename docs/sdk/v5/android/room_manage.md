@@ -40,9 +40,9 @@ To destroy a chat room, call the server-side REST API for [destroying a chat roo
 To join a chat room, follow these steps:
 
 1. Call the `asyncFetchPublicChatRoomsFromServer` method to retrieve the chat room list from the server and find the ID of the chat room you want to join.
-2. Call the `joinChatRoom` method and pass the chat room ID to apply to join the chat room. When a new member joins, the other members receive the `onMemberJoined` callback.
+2. Call the `joinChatRoom` method and pass the chat room ID to apply to join the chat room. After a new member joins, the other members receive the `onMemberJoined` callback.
 
-Example code:
+The following example shows how to retrieve the chat room list and join a chat room:
 
 ```java
 // Retrieve the app's chat room list.
@@ -75,7 +75,18 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-You can also call the `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` method to include extension information when joining a chat room and specify whether to leave all other chat rooms. After this method is called, other members in the chat room receive the `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` callback. If the user includes extension information when joining the chat room, the other members can obtain it from the callback.
+#### Join a chat room with extension information
+
+To pass custom business information when joining a chat room or specify whether to leave other chat rooms the user has joined, call the `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` overload.
+
+The overload includes the following two key parameters:
+
+- `ext`: Custom extension information passed when joining the chat room.
+- `leaveOtherRooms`: Whether to leave other chat rooms the user has joined when joining the current chat room.
+
+After a user successfully joins the chat room, the other members receive the `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` callback. If extension information was passed when joining, the other members can obtain it from the callback's `ext` parameter.
+
+The following example shows how to join a chat room with extension information and obtain the extension information passed by other members when they join:
 
 ```java
 String ext= "your ext info";
@@ -106,24 +117,26 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ## Leave a chat room
 
-### Leave voluntarily
-
-All chat room members can call the `leaveChatRoom` method to leave the current chat room. When a member leaves, the other members receive the `onMemberExited` callback.
-
-Example code:
-
-```java
-// Asynchronous method.
-EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
-```
+A user can leave a chat room in three ways: voluntarily, by being removed by the chat room owner or an admin, or automatically after going offline.
 
 When a user leaves a chat room, the SDK deletes all local messages in the chat room by default. To retain these messages, set `EMOptions#setDeleteMessagesAsExitChatRoom` to `false` during SDK initialization.
 
-Example code:
+The following is sample code:
 
 ```java
 EMOptions options = new EMOptions();
 options.setDeleteMessagesAsExitChatRoom(false);
+```
+
+### Leave voluntarily
+
+All chat room members can call the `leaveChatRoom` method to leave the current chat room. When a member leaves, the other members receive the `onMemberExited` callback.
+
+The following is sample code:
+
+```java
+// Asynchronous method.
+EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
 Unlike a chat group owner, who cannot leave a chat group, a chat room owner can leave the chat room and remains its owner after rejoining. If the `EMOptions#allowChatroomOwnerLeave` parameter is set to `true` during initialization, the chat room owner can leave the chat room. If this parameter is set to `false`, calling the `leaveChatRoom` method as the chat room owner reports error 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`.

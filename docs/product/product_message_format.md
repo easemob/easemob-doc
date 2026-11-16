@@ -1,6 +1,6 @@
 # Message Format 
 
-EasyIM currently supports the following message `type` values:
+The following table lists EasyIM message body content types `type`. A multi-body message contains multiple bodies, each retaining its own type:
 
 | Parameter   | Type   |
 | :----- | :----- |
@@ -222,6 +222,12 @@ Example custom message format:
  }
 ]
 ```
+
+### Multi-body messages
+
+Multi-body messages use an ordered body list to carry different content in one message, combining text, image, voice, video, file, location, and custom bodies. A multi-body message contains 2–20 bodies. Each body's content fields follow its corresponding type definition.
+
+SDKs differ in multi-body type identifiers and body list access. Use the corresponding SDK's creation and reading APIs to avoid losing subsequent content by parsing only the first body. Editing or translation is currently unsupported. For supported versions and integration, see [Multi-body messages](product_message_overview.html#message-types).
 
 ## Offline push extension fields
 

@@ -85,7 +85,7 @@ EMClient.shared().groupManager?.createGroup(
 Only the chat group owner can call `destroyGroup` to destroy the chat group. After a successful destruction, chat group members receive the `didLeaveGroup` callback with `.destroyed` as the reason for leaving.
 
 :::warning
-Destroying a chat group cannot be undone. After the operation succeeds, the chat group no longer exists, all members are removed, and the SDK removes the corresponding conversation from memory. We recommend asking for confirmation in the app before performing this operation.
+Destroying a chat group cannot be undone. After the operation succeeds, the chat group no longer exists and all members are removed.
 :::
 
 ```swift
@@ -100,6 +100,15 @@ EMClient.shared().groupManager?.destroyGroup(
     print("Group destroyed")
 }
 ```
+
+#### Local message handling
+
+When members leave a chat group because it is destroyed, the handling of local group messages depends on each client's `EMOptions#deleteMessagesOnLeaveGroup` configuration:
+
+- (Default) `true`: Deletes local group messages.
+- `false`: Retains local group messages.
+
+This option is a client initialization setting and must be set when initializing the SDK.
 
 ## Join a chat group
 
@@ -133,12 +142,11 @@ EMClient.shared().groupManager?.addMembers(
 }
 ```
 
-The invitee's process is determined by `isInviteNeedConfirm` when the chat group is created:
+The invitation process is determined jointly by `isInviteNeedConfirm`, set when creating the chat group, and `EMOptions#autoAcceptGroupInvitation` on the invitee's client:
 
-- `false`: The invitee joins without confirmation and receives the `didJoinGroup` callback.
-- `true`: The invitee receives the `groupInvitationDidReceive` callback and chooses whether to join:
-  - Accept the invitation: Call `acceptInvitationFromGroup`.
-  - Decline the invitation: Call `declineGroupInvitation`.
+- `isInviteNeedConfirm = false`: The invitee joins directly and receives the `didJoinGroup` callback. Whether the client automatically accepts invitations does not affect the result.
+- `isInviteNeedConfirm = true` and `autoAcceptGroupInvitation = true`: The SDK automatically accepts the invitation, and the invitee receives the `didJoinGroup` callback.
+- `isInviteNeedConfirm = true` and `autoAcceptGroupInvitation = false`: The invitee receives the `groupInvitationDidReceive` callback and can call `acceptInvitationFromGroup` or `declineGroupInvitation` to accept or decline the invitation.
 
 After an invitation is accepted, the inviter receives `groupInvitationDidAccept`. After an invitation is declined, the inviter receives `groupInvitationDidDecline`.
 
@@ -275,7 +283,7 @@ EMClient.shared().groupManager?.leaveGroup(
 }
 ```
 
-After a user leaves, the local chat group conversation is not deleted automatically. `EMOptions#deleteMessagesOnLeaveGroup` controls whether local messages in the chat group are deleted; the default is `true`.
+When leaving a chat group, `EMOptions#deleteMessagesOnLeaveGroup` controls whether to delete its local messages: The default value, `true`, deletes them, and `false` retains them. Set this option during SDK initialization.
 
 ### Remove members
 

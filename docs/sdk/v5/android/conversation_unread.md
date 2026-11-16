@@ -23,7 +23,7 @@ The basic steps are as follows:
 2. After the call succeeds, the SDK updates the target conversation's unread count in the local cache to `0` and synchronizes the change to the current user's other logged-in devices.
 3. When conversation data changes, the registered `onConversationUpdate()` receives a callback, which the app can use to refresh the conversation list UI.
 4. With multi-device login, clearing an unread count neither notifies the peer nor triggers a message read receipt for the peer. The change is synchronized only to the current user's other online devices.
-5. To clear the unread counts of all conversations, call the asyncClearAllConversationUnreadMessageCount API.
+5. To clear the unread counts of all conversations, call the `asyncClearAllConversationUnreadMessageCount` API.
    This operation clears all conversation unread counts in the current device's local cache and synchronizes the change to the current user's other online devices.
 
 :::tip
@@ -235,7 +235,7 @@ To notify the message sender that messages have been read, call `asyncSendMessag
 For details about message read receipts and read status, see [Message Receipts](message_receipt.html).
 
 :::tip
-Sending message read receipts and clearing a conversation unread count are independent operations:<br> - `asyncSendMessageReadReceipts`: Sends read receipts to the message sender. It supports only one-to-one and group chats.<br> - `asyncClearConversationUnreadMessageCount`: Clears the local unread count of a specified conversation and synchronizes the change to the current account's other devices, but does not send read receipts to the message sender.
+Sending message read receipts and clearing a conversation unread count are independent operations:<br/> - `asyncSendMessageReadReceipts`: Sends read receipts to the message sender. It supports only one-to-one and group chats.<br/> - `asyncClearConversationUnreadMessageCount`: Clears the local unread count of a specified conversation and synchronizes the change to the current account's other devices, but does not send read receipts to the message sender.
 :::
 
 ## API list

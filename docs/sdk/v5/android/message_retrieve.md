@@ -17,20 +17,18 @@ Before you begin, ensure that the following requirements are met:
 
 ## Retrieve messages in a conversation from the server
 
-Call `asyncFetchHistoryMessages` with the `EMFetchMessageOption` class to retrieve historical messages in one-to-one and group chats from the server by page. For reliability, we recommend retrieving 20 messages per page and no more than 50. If the total number of matching messages is greater than `pageSize`, a paginated query returns `pageSize` messages. If it is less than `pageSize`, the actual number is returned. When all messages have been retrieved, the number returned is less than `pageSize`.
+Call `asyncFetchHistoryMessages` with the `EMFetchMessageOption` class to retrieve historical messages in one-to-one and group chats from the server by page. For reliability, we recommend retrieving 20 messages per page and no more than 50.
 
 The parameters are described below:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationId` | `String` | Conversation ID. Pass the peer user ID for one-to-one chat or the group ID for group chat. |
-| `type` | `EMConversation.EMConversationType` | Conversation type. Pass `Chat` for one-to-one chat or `GroupChat` for group chat. |
-| `pageSize` | `int` | The number of messages to retrieve per page. The recommended value is 20, and the maximum is 50. |
+| `conversationId` | `String` | Conversation ID. Pass the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for a chat room. |
+| `type` | `EMConversation.EMConversationType` | Conversation type. Pass `Chat` for one-to-one chat, `GroupChat` for group chat, or `ChatRoom` for a chat room. |
+| `pageSize` | `int` | The number of messages to retrieve per page. The recommended value is 20, and the maximum is 50. If the total number of matching messages is greater than `pageSize`, a paginated query returns `pageSize` messages. If it is less than `pageSize`, the actual number is returned. When all messages have been retrieved, the number returned is less than `pageSize`. |
 | `cursor` | `String` | Pagination cursor. Pass an empty string for the first retrieval and the cursor returned by `EMCursorResult#getCursor()` in the previous callback for subsequent retrievals. |
 | `option` | `EMFetchMessageOption` | Retrieval options. You can set the following conditions:<br/> - Message sender;<br/> - Message type;<br/> - Message time range;<br/> - Message search direction;<br/> - Whether to save retrieved messages to the database;<br/> - For a group chat, set the `from` parameter to retrieve historical messages sent by a single group member. |
 | `callBack` | `EMValueCallBack<EMCursorResult<EMMessage>>` | Result callback. On success, obtain the message list and next-page cursor through `EMCursorResult`. |
-
-If `EMOptions#setRegardImportedMsgAsRead` was enabled during initialization, messages imported [through a server-side API](/rest/message_import_single.html) and retrieved through this API are marked as read, and the conversation unread message count returned by `EMConversation#getUnreadMsgCount` does not change. If this setting is disabled, the value returned by `EMConversation#getUnreadMsgCount` increases.
 
 :::tip
 1. **By default, you can retrieve historical messages from one-to-one and group chats. To retrieve chat room historical messages, contact the EasyIM business manager.**
@@ -99,7 +97,7 @@ The parameters are described below:
 
 ```java
 String conversationId = " ";
-EMConversation.EMConversationType type = EMConversation.EMConversationType.Chat;
+EMConversation.EMConversationType type = EMConversation.EMConversationType.GroupChat;
 EMFetchMessageOption option = new EMFetchMessageOption();
 // For example, save the retrieved messages to the database.
 //option.setIsSave(true);

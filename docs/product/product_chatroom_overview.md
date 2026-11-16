@@ -52,7 +52,7 @@ For details, see [Chat group overview](product_group_overview.html).
 | Feature               | Description                                                         |
 | :----------------- | :----------------------------------------------------------- |
 | Change the chat room name | Requires chat room owner permissions.                   |
-| Retrieve or update the chat room announcement     | Only the chat room owner can update or delete the announcement.<br/>Announcement updates are synchronized to all members through event listeners. |
+| Retrieve or update the chat room announcement     | The chat room owner and admins can update or delete the announcement.<br/>Announcement updates are synchronized to all members through event listeners. |
 | Manage chat room custom attributes (key-value)     | Set, retrieve, delete, force-set, and force-delete chat room custom attributes. |
 
 ### Monitor chat room events

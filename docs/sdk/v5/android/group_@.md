@@ -39,7 +39,7 @@ The data format of `em_at_list` is as follows:
 - To @ mention one or more group members, use an array of user IDs, such as `["user1", "user2"]`.
 - To @ mention all group members, use the string `ALL`.
 
-::tip
+:::tip
 The user IDs of @ mentioned members do not include the “@” prefix. The sender and recipient must use the same field name and value type and agree on the meaning of `ALL`.
 :::
 
@@ -199,7 +199,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
    A: When setting `ext`, use an array containing the user IDs of the members to mention for one or multiple group members. To @ mention everyone, use the string `ALL` as the field value.
 
-3. Q: Q: Does the SDK automatically display a “Somebody @ mentioned me” prompt?
+3. Q: Does the SDK automatically display a “Somebody @ mentioned me” prompt?
 
    A: No. The SDK transmits the message and its extensions. Your app must read the extensions of `EMMessage` in the `EMMessageListener#onMessageReceived(List<EMMessage>)` callback and update the conversation list or message page UI itself. 
 

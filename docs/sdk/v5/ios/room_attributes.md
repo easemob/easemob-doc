@@ -94,6 +94,10 @@ Example code:
 
 ## Manage custom chat room attributes (key-value)
 
+Custom chat room attributes are stored as string key-value pairs. Each chat room supports up to 100 custom attributes. Each key can contain up to 128 characters and supports only uppercase and lowercase English letters, digits, `_`, `-`, and `.`. Each value can contain up to 4096 characters. A batch set operation accepts up to 10 key-value pairs per call.
+
+When setting or deleting custom attributes in bulk, check both the overall error in the completion callback and `failureKeys`. `failureKeys` is of type `NSDictionary<NSString *, EMError *> *` and contains the keys of attributes whose operations failed and their corresponding `EMError` values. If any items failed, the operation cannot be considered entirely successful.
+
 ### Retrieve specified custom chat room attributes
 
 All chat room members can call `fetchChatroomAttributes` to retrieve specified custom chat room attributes.

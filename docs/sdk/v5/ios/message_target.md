@@ -12,6 +12,13 @@ A targeted message is sent to one or more specified members in a chat group or c
 - **Chat group message roaming:** Roaming is not supported for targeted chat group messages by default. To use it, contact the EasyIM business manager to enable it.
 - **Chat room message roaming:** Roaming is not supported for targeted chat room messages by default. To use it, contact the EasyIM business manager to enable both chat room message roaming and targeted message roaming.
 
+## Prerequisite
+
+Before you start, ensure that the following requirements are met:
+
+- Initialize the SDK. See [Initialization](initialization.html).
+- Understand the usage limits of EasyIM. See [Limitations](/product/limitation.html).
+
 ## Send a targeted message
 
 Sending a targeted message is similar to sending a regular message. The only difference is that you must set the recipients through `receiverList` before sending. The steps are as follows:

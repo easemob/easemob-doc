@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM iOS SDK receives text, image, voice, video, file, location, command, custom, combined, and other message types through `EMChatManagerDelegate`. In message delegate callbacks, the app identifies the message type, reads the corresponding message body, and displays or processes the message as required by the business.
+The EasyIM iOS SDK receives text, image, voice, video, file, location, command, custom, combined, and other message types through `EMChatManagerDelegate`. In message delegate callbacks, the app identifies the message type, reads the corresponding message body, and displays or processes the message as required by the business. Starting from SDK 5.2.0, you can also receive and display [multi-body messages](#receive-multi-body-messages) through the complete body list.
 
 ## Prerequisite
 
@@ -41,8 +41,9 @@ After receiving a message, you can read common message information through the f
 | `from` | The message sender's user ID. |
 | `to` | The message target ID. |
 | `chatType` | One-to-one chat, group chat, or chat room. |
-| `body.type` | The message type, such as text, image, voice, video, or file. |
-| `body` | Retrieve and cast the body to the corresponding `EMMessageBody` subclass. |
+| `contentType` | The content type of the whole message. Returns `EMMessageBodyTypeMultiBody` for multi-body messages. |
+| `body` | The first body. Using only this property for multi-body messages misses subsequent bodies. |
+| `bodies` | The complete ordered body list, for both single-body and multi-body messages. |
 | `ext` | Read business extension fields set by the sender. |
 
 ## Receive text messages
@@ -52,7 +53,7 @@ After receiving the `messagesDidReceive` callback, iterate through the message l
 ```objectivec
 - (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
     for (EMChatMessage *message in messages) {
-        if (message.body.type == EMMessageBodyTypeText) {
+        if (message.contentType == EMMessageBodyTypeText) {
             // Cast the message body to a text message body.
             EMTextMessageBody *textBody = (EMTextMessageBody *)message.body;
             NSString *content = textBody.text;
@@ -71,6 +72,20 @@ The process for receiving an attachment message is as follows:
 
 1. Receive the attachment message. The SDK automatically downloads voice messages and, by default, image and video thumbnails. To download an original image, large image, video, or file, call the corresponding download API.
 2. Retrieve the server URL and local path of the attachment.
+
+#### Attachment download APIs and callbacks
+
+Call the following `IEMChatManager` download APIs for the required resource, and obtain progress and results through `progress` and `completion`.
+
+| API | Main purpose | Progress callback |
+| :--- | :--- | :--- |
+| `downloadMessageAttachment:progress:completion:` | Downloads original attachments such as images, voice, video, or files. | `progress` reports download progress from 0–100. |
+| `downloadBigImageAttachment:progress:completion:` | Downloads large images. | `progress` reports download progress from 0–100. |
+| `downloadMessageThumbnail:progress:completion:` | Downloads image or video thumbnails. | Does not trigger `progress`. |
+
+Each request returns one final result through `completion`: a `nil` `error` indicates success; otherwise it indicates failure. After success, read the resource's local path and download status from the message object returned by the completion callback to update its display. `progress` and `completion` run on the main thread.
+
+Starting from SDK 5.2.0, these APIs also accept a whole multi-body message, without separate calls for each body. For body selection, message-level progress, and overall results, see [Download multi-body message attachments](#download-multi-body-message-attachments).
 
 ### Receive voice messages
 
@@ -112,7 +127,7 @@ Example code:
 ```objectivec
 - (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
     for (EMChatMessage *message in messages) {
-        if (message.body.type != EMMessageBodyTypeImage) {
+        if (message.contentType != EMMessageBodyTypeImage) {
             continue;
         }
 
@@ -182,7 +197,7 @@ As with a regular message, the recipient receives the `messagesDidReceive` callb
   // A message is received. Iterate through the message list.
   for (EMChatMessage *message in aMessages) {
     // Parse and display the message.
-    if (message.body.type == EMMessageBodyTypeImage) {
+    if (message.contentType == EMMessageBodyTypeImage) {
         EMImageMessageBody *body = (EMImageMessageBody *)message.body;
         if (body.isGif) {
             // This is a GIF image message.
@@ -288,7 +303,7 @@ Customize the specific behavior according to your business requirements. In addi
 
 :::tip
 - A command message cannot be recalled after it is sent.
-- Command messages are not stored in the local database and therefore are not displayed in the UI.
+- Command messages are not stored in the local database, do not create local conversations, and are usually not displayed in the UI.
 :::
 
 The recipient receives command messages through the `cmdMessagesDidReceive` callback and can process them as needed.
@@ -340,7 +355,7 @@ After casting the message body to `EMCombineMessageBody`, you can read the combi
 {
 
     for (EMChatMessage* msg in aMessages) {
-        if (msg.body.type == EMMessageBodyTypeCombine) {
+        if (msg.contentType == EMMessageBodyTypeCombine) {
             // This is a combined message. Parse the combined message.
             [EMClient.sharedClient.chatManager downloadAndParseCombineMessage:msg completion:^(NSArray<EMChatMessage *> * _Nullable messages, EMError * _Nullable error) {
 
@@ -349,6 +364,104 @@ After casting the message body to `EMCombineMessageBody`, you can read the combi
     }
 }
 ```
+
+## Receive multi-body messages
+
+Starting from SDK 5.2.0, multi-body messages use the existing `messagesDidReceive:` callback of `EMChatManagerDelegate`. No additional message delegate is required. For registration, see [Monitor message events](#monitor-message-events).
+
+First use `EMChatMessage.contentType` to determine whether the whole message is `EMMessageBodyTypeMultiBody`, then read the complete ordered `bodies` list, and read content according to each body's `type`. `contentType` is the content type of the whole message, while `EMMessageBody.type` is the current body's type. They serve different purposes.
+
+`body` remains available but returns only the first body. If existing logic checks only `message.body.type`, add a multi-body branch to avoid displaying only the first text segment or image. Single-body messages can continue using `contentType` to identify their specific type.
+
+This text-and-image example shows how to identify the type and process content in body order:
+
+```objectivec
+- (void)messagesDidReceive:(NSArray<EMChatMessage *> *)messages {
+    for (EMChatMessage *message in messages) {
+        if (message.contentType != EMMessageBodyTypeMultiBody) {
+            // Process single-body messages with the existing logic.
+            continue;
+        }
+        for (EMMessageBody *body in message.bodies) {
+            switch (body.type) {
+                case EMMessageBodyTypeText: {
+                    EMTextMessageBody *textBody = (EMTextMessageBody *)body;
+                    NSString *text = textBody.text;
+                    // Add the text to the current message display.
+                    break;
+                }
+                case EMMessageBodyTypeImage: {
+                    EMImageMessageBody *imageBody = (EMImageMessageBody *)body;
+                    // Add the image at the current position. Download its attachment as needed, then update the display.
+                    break;
+                }
+                default:
+                    // Handle video, voice, file, location, or custom bodies by their actual type.
+                    break;
+            }
+        }
+    }
+}
+```
+
+For other body fields and display methods, see [video](#receive-video-messages), [voice](#receive-voice-messages), [file](#receive-file-messages), [location](#receive-location-messages), and [custom messages](#receive-custom-messages). When reusing these examples, read the current `body` in the iteration rather than obtaining the first body again through `message.body`.
+
+#### Download multi-body message attachments
+
+Pass the whole `EMChatMessage` to the download API. You do not need to request each body separately. For API purposes and basic callbacks, see [Attachment download APIs and callbacks](#attachment-download-apis-and-callbacks).
+
+The SDK selects bodies in multi-body messages according to these rules:
+
+| Body type | Original file download | Large image download | Thumbnail download |
+| :--- | :--- | :--- | :--- |
+| Image | Original image | Large image | Image thumbnail |
+| Video | Original video | Skip | Video thumbnail |
+| Voice | Original voice file | Original voice file | Original voice file |
+| File | Original file | Skip | Skip |
+| Text, location, custom | Skip | Skip | Skip |
+
+Inapplicable bodies are skipped automatically. They are neither treated as failures nor included in progress calculations. If no bodies in the whole message are applicable, the callback reports success without downloading anything. Missing applicable attachments or download failures still return errors.
+
+Original file and large image downloads report message-level overall progress through `progress`, weighted by each attachment's original file size, from 0–100. Individual attachment progress is not reported separately. Thumbnail downloads do not trigger progress callbacks. Each request calls `completion` once: `error` is `nil` if all applicable attachments download successfully. If any applicable attachment fails, remaining downloads stop and an error is returned.
+
+The following example downloads the original attachments in a multi-body message:
+
+```objectivec
+[[EMClient sharedClient].chatManager downloadMessageAttachment:message
+    progress:^(int progress) {
+        // Message-level overall download progress, from 0–100.
+        // Progress callbacks are not triggered with downloadMessageThumbnail.
+    }
+    completion:^(EMChatMessage *downloadedMessage, EMError *error) {
+        if (error) {
+            // This request failed. Remaining attachments will not be downloaded.
+            return;
+        }
+        for (EMMessageBody *body in downloadedMessage.bodies) {
+            if ([body isKindOfClass:[EMFileMessageBody class]]) {
+                EMFileMessageBody *fileBody = (EMFileMessageBody *)body;
+                NSString *localPath = fileBody.localPath;
+                // Update the display using each attachment's local path and download status.
+            }
+        }
+    }];
+```
+
+After downloading, iterate through `bodies` in the message object returned by the completion callback. Read `localPath` and the download status of each corresponding attachment body to update its display in the original message.
+
+:::tip
+The body-type skipping rules above apply to multi-body messages. Single-body messages retain their existing download behavior. For example, `downloadBigImageAttachment:progress:completion:` still downloads the original video for a single video message; unsupported download types return errors. We still recommend choosing the API according to the actual resource type.
+:::
+
+#### Considerations
+
+- **Sender content preparation**: The sender creates all bodies before initializing the message in reading order. The recipient displays them in the original `bodies` order. Add, remove, or replace bodies before sending, and keep local attachments requiring upload readable until sending completes. See [Send multi-body messages](message_send.html#send-multi-body-messages).
+- **Attachment reuse and retries**: Retain server information for uploaded attachments as described in [Forward a single message](message_forward.html#forward-a-single-message) to avoid uploading again. Use the original message object to resend the same failed message. See [Resend failed messages](message_send.html#resend-failed-messages).
+- **Callback queues and UI updates**: When registering the message delegate, a `nil` `delegateQueue` dispatches callbacks on the main queue. For a custom queue, switch to the main thread before updating the UI. Attachment download `progress` and `completion` callbacks run on the main thread. Avoid time-consuming synchronous operations in them.
+- **Body state**: The SDK may update body paths and download states during attachment downloading. Refresh attachment displays from the downloaded bodies while retaining their original order.
+- **Conversation summaries**: After retrieving the last message with `EMConversation.latestMessage`, if its `contentType` is `EMMessageBodyTypeMultiBody`, generate its summary from the complete `bodies` list. See [Conversation List](conversation_list.html).
+- **Forwarding**: Retain the complete ordered body list when forwarding a multi-body message, rather than copying only `body`. See [Forward a single message](message_forward.html#forward-a-single-message).
+- **Feature restrictions**: Multi-body messages do not support editing or translation. For creation and sending rules, see [Send multi-body messages](message_send.html#send-multi-body-messages).
 
 ## More information
 
@@ -370,7 +483,9 @@ EasyIM supports message attachment download authentication. This feature is disa
 | :--- | :--- | :--- |
 | [`addDelegate`](#receive-text-messages) | `IEMChatManager` | Register a message delegate. |
 | [`removeDelegate`](#receive-text-messages) | `IEMChatManager` | Remove a message delegate. |
-| [`downloadMessageThumbnail`](#receive-image-messages) | `IEMChatManager` | Download an image or video thumbnail. |
-| [`downloadBigImageAttachment`](#receive-image-messages) | `IEMChatManager` | Download a large image. |
-| [`downloadMessageAttachment`](#receive-attachment-messages) | `IEMChatManager` | Download an original image, video, or file attachment. |
+| [`contentType`](#receive-multi-body-messages) | `EMChatMessage` | Retrieves the content type of the whole message to identify multi-body messages. |
+| [`bodies`](#receive-multi-body-messages) | `EMChatMessage` | Retrieves the complete ordered body list. |
+| [`downloadMessageThumbnail`](#attachment-download-apis-and-callbacks) | `IEMChatManager` | Downloads applicable thumbnails or original voice files, without progress reports. |
+| [`downloadBigImageAttachment`](#attachment-download-apis-and-callbacks) | `IEMChatManager` | Downloads applicable attachments such as large images, with message-level progress. |
+| [`downloadMessageAttachment`](#attachment-download-apis-and-callbacks) | `IEMChatManager` | Downloads original attachments, with message-level progress. |
 | [`downloadAndParseCombineMessage`](#receive-combined-messages) | `IEMChatManager` | Download and parse a combined message. |

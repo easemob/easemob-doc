@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customers. The iOS SDK supports adding tags to or removing tags from one-to-one, group, and chat room conversations.
+Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customers. The iOS SDK supports adding tags to or removing tags from one-to-one and group conversations. Chat room conversations are not supported.
 
 The SDK provides 20 tags, from `EMMarkType0` through `EMMarkType19`. A conversation can contain up to 20 tags at the same time. Your application defines and maintains the mapping between each tag and its business meaning. In Swift, the corresponding enum values are `.markType0` through `.markType19`.
 
@@ -34,7 +34,7 @@ Before you begin, ensure that the following requirements are met:
 
 Call `addConversationMark` to add a specified tag to one or more conversations. This operation updates the server-side and local conversation tags at the same time. You can pass up to 20 conversation IDs in a single call.
 
-After a conversation tag is added, the SDK updates the server-side and local tag data at the same time. Before initializing the SDK, configure `EMOptions#dataSyncType` to include `EMDataSyncTypeConversations`. After login, when `syncDataFinished` reports that conversation data synchronization has succeeded, you can retrieve an `EMConversation` object through a local conversation list API and retrieve all tags of the conversation through `EMConversation#marks`.
+After login, the SDK automatically synchronizes the conversation list and its tags and writes them locally. After a conversation tag is added, the tag data is updated on both the server and the local device. When synchronization is complete, retrieve the `EMConversation` object through the local conversation list API, and then call `EMConversation#marks` to retrieve all tags for the conversation.
 
 If the server-side conversation list reaches its quantity limit, which is 100 conversations by default, the server may remove inactive conversations based on conversation activity. Their tags might also no longer be synchronized to the local device with the server-side conversation list.
 
@@ -60,7 +60,7 @@ The parameters are described as follows:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationIds` | `[String]` | The array of conversation IDs. It cannot be empty and can contain up to 20 IDs in a single call.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> - Chat room: The chat room ID. |
+| `conversationIds` | `[String]` | The array of conversation IDs. It cannot be empty and can contain up to 20 IDs in a single call.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> Chat room conversations are not supported. |
 | `mark` | `EMMarkType` | The tag to add. The value ranges from `.markType0` through `.markType19`. |
 | `completion` | `(EMError?) -> Void` | The result of the asynchronous operation. `error == nil` indicates success. Otherwise, handle the failure based on `EMError#code` and `EMError#errorDescription`. |
 
@@ -94,7 +94,7 @@ The parameter rules for `removeConversationMark` are the same as those for [addi
 
 ## Filter the conversation list by tag
 
-Before initializing the SDK, configure `EMOptions#dataSyncType` to include `.conversations`. After login, wait for conversation data synchronization to finish and then filter conversations by the local `EMConversation#marks` property.
+`EMOptions#dataSyncType` includes `.conversations` by default. After login, wait for conversation data synchronization to finish and then filter conversations by the local `EMConversation#marks` property. To explicitly specify the synchronization scope, configure this property before initializing the SDK.
 
 Configure conversation synchronization before initializing the SDK:
 
@@ -221,7 +221,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## Notes
 
-- Conversation tags support one-to-one, group, and chat room conversations.
+- Conversation tags support one-to-one and group conversations. Chat room conversations are not supported.
 - The Objective-C tag values range from `EMMarkType0` through `EMMarkType19`, and the corresponding Swift values range from `.markType0` through `.markType19`. Your application maintains their specific business meanings.
 - A single conversation can contain up to 20 tags at the same time.
 - `addConversationMark` and `removeConversationMark` can operate on multiple conversations at the same time. You can pass up to 20 conversation IDs in a single call.

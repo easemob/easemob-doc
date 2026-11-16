@@ -8,6 +8,8 @@ The Android SDK uses `EMMessage#setAttribute` to set message extensions and supp
 
 ## Example code
 
+The following example creates and sends a text message with extensions and shows how to read the fields after receiving it. Initialize the SDK and log in before running the example.
+
 ```java
 EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // Add custom attributes.

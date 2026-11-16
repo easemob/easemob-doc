@@ -23,6 +23,7 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
     "chat_type":"recall",
     "callId":"XXXX#XXXX_966475585536657404",
     "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
+    "os":"ios",
     "payload":{
         "ext":{},
         "ack_message_id":"966475220900644860",
@@ -55,5 +56,6 @@ After a message is recalled successfully, the EasyIM server sends a webhook requ
 | `payload`         | object   | For a message recall, the `bodies` and `ext` fields are empty.<br/> `ack_message_id` indicates the original message ID. |
 | `securityVersion` | String   | Security verification version, currently 1.0.0. Ignore this field. It will be configured in the EasyIM Console in the future. |
 | `security`        | String   | Signature in the format MD5（callId+secret+timestamp）. For the Secret, see [Webhook rules in the EasyIM Console](/product/console/basic_webhook.html#configure-webhook-rules). |
+| `os` | String | The IM SDK platform identifier used by the client that initiates this message recall operation. Common values are:<br/> - `android`: Android. Applies to clients using the Android IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on Android.<br/> - `ios`: iOS. Applies to clients using the iOS IM SDK and clients using cross-platform IM SDKs such as Flutter, React Native, or Unity that run on iOS.<br/> - `webim`: Web SDK. Applies to clients using the Web IM SDK.<br/> - `harmony`: HarmonyOS.<br/> - `win`: Windows.<br/> - `custom`: Custom platform. EasyIM supports custom device platforms so you can manage login devices more precisely. For details, see [Set a login device platform](/sdk/v5/android/multi_device.html#set-a-login-device-platform). |
 | `appkey`          | String   | Unique identifier of the app registered in the EasyIM Console.                           |
 | `host`            | String   | Server name.                                                 |

@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM Android SDK receives text, image, voice, video, file, location, command, custom, combined, and other message types through `EMMessageListener`. In a message listener callback, your app identifies the message type, reads the corresponding message body, and displays or processes the message as required.
+The EasyIM Android SDK receives text, image, voice, video, file, location, command, custom, combined, and other message types through `EMMessageListener`. In a message listener callback, your app identifies the message type, reads the corresponding message body, and displays or processes the message as required. Starting from SDK 5.2.1, you can also receive and display [multi-body messages](#receive-multi-body-messages) through the complete body list.
 
 ## Prerequisite
 
@@ -43,8 +43,9 @@ After receiving a message, use the following `EMMessage` methods to read common 
 | Sender | `EMMessage#getFrom` | The message sender's user ID. |
 | Recipient | `EMMessage#getTo` | The message target ID. |
 | Conversation type | `EMMessage#getChatType` | One-to-one chat, group chat, or chat room. |
-| Message type | `EMMessage#getType` | Text, image, voice, video, file, or another type. |
-| Message body | `EMMessage#getBody` | Retrieve and cast the body to the corresponding `EMMessageBody` subclass. |
+| Message type | `EMMessage#getType` / `getContentType` | Returns the specific type for single-body messages, or `EMMessage.Type.MULTIBODY` for multi-body messages. |
+| First body | `EMMessage#getBody` | Returns the first body. Using only this method for multi-body messages misses subsequent bodies. |
+| Complete body list | `EMMessage#getBodies` | Returns an ordered body list with a read-only structure, for both single-body and multi-body messages. |
 | Extension | `EMMessage#getStringAttribute`, etc. | Read business fields set by the sender through `setAttribute`. |
 
 ## Receive text messages
@@ -97,6 +98,20 @@ The process for receiving an attachment message is as follows:
 1. Receive the attachment message. The SDK automatically downloads voice messages and, by default, image and video thumbnails. To download the original image, large image, video, or file, call the corresponding download API.
 2. Retrieve the server URL and local path of the attachment.
 
+#### Attachment download APIs and callbacks
+
+Call the following `EMChatManager` download APIs for the required resource, and obtain progress and results through `EMCallBack`.
+
+| API | Main purpose | Progress callback |
+| :--- | :--- | :--- |
+| `downloadAttachment(message, callback)` | Downloads original attachments such as images, voice, video, or files. | `onProgress` reports download progress from 0–100. |
+| `downloadBigImage(message, callback)` | Downloads large images. | `onProgress` reports download progress from 0–100. |
+| `downloadThumbnail(message, callback)` | Downloads image or video thumbnails. | Does not trigger `onProgress`. |
+
+Each request returns one final result through `onSuccess()` or `onError(int code, String error)`. After success, read the resource's local path and download status from the body to update its display.
+
+Starting from SDK 5.2.1, these APIs also accept a whole multi-body message, without separate calls for each body. For body selection, message-level progress, and overall results, see [Download multi-body message attachments](#download-multi-body-message-attachments).
+
 ### Receive voice messages
 
 1. When the recipient receives a voice message, the voice file is downloaded automatically.
@@ -115,7 +130,7 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
 An image message typically contains three image resources:
 
 - Original image: The original image file selected locally by the sender, typically used for viewing or saving the original image.
-- Large image: An image proportionally compressed by the server from the original. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This image is typically displayed on the chat details page.
+- Large image: An image proportionally compressed from the original and uploaded by the SDK client. If the shorter side is greater than 720 pixels, it is proportionally compressed to 720 pixels. If the shorter side is less than or equal to 720 pixels, the original dimensions are retained without upscaling. This image is typically displayed on the chat details page.
 - Thumbnail: An image proportionally compressed by the server from the original. By default, if the shorter side is greater than 170 pixels, it is proportionally compressed to 170 pixels. If the shorter side is less than or equal to 170 pixels, the original dimensions are retained without upscaling. You can configure the thumbnail compression method and dimensions in the [EasyIM Console](/product/console/basic_message_conversation.html#image-message-thumbnails). Thumbnails are typically used for lightweight displays such as conversation and chat lists.
 
 
@@ -329,7 +344,7 @@ Customize the specific behavior according to your business requirements. Actions
 
 :::tip
 - A command message cannot be recalled after it is sent.
-- Command messages are not stored in the local database and therefore are not displayed in the UI.
+- Command messages are not stored in the local database and do not create local conversations, so they are usually not displayed in the UI.
 :::
 
 The recipient receives command messages through both `onMessageReceived` and `onCmdMessageReceived` for different processing. Command messages are typically received through `onCmdMessageReceived`.
@@ -370,9 +385,10 @@ Receiving a combined message is the same as receiving a regular message. Your ap
 
 - In SDK versions that do not support combined messages, the message is parsed as a text message whose content is the value of `compatibleText`. Other fields are ignored.
 - A combined message is an attachment message. After receiving it, call `EMChatManager#downloadAndParseCombineMessage` to download and parse the combined message attachment and retrieve the original message list:
-- The first call to this method downloads and parses the combined message attachment and returns the original message list:
-  - If the attachment exists, the method directly parses it and returns the original message list.
-  - If the attachment does not exist, the method downloads it first, parses it, and returns the original message list.
+- On the first call to this method, the SDK downloads and parses the combined message attachment and returns the original message list through the callback.
+- On subsequent calls:
+  - If the combined message attachment exists, the SDK directly parses it and returns the original message list.
+  - If the combined message attachment does not exist, the SDK downloads it first, parses it, and returns the original message list.
 
 After casting the message body to `EMCombineMessageBody`, you can read the combined message title, summary, and compatibility text.
 
@@ -389,6 +405,100 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
     }
 });
 ```
+
+## Receive multi-body messages
+
+Starting from SDK 5.2.1, multi-body messages use the existing `EMMessageListener#onMessageReceived` callback. No additional listener is required. For registration, see [Monitor message events](#monitor-message-events).
+
+First use `getContentType()` or `getType()` to determine whether the whole message is `EMMessage.Type.MULTIBODY`, then obtain the complete ordered list with `getBodies()`, and read content based on each body's actual subclass. The whole message's `MULTIBODY` type indicates multiple bodies; it does not mean that each body in the list has a multi-body type.
+
+`getBody()` remains available but returns only the first body. If existing logic handles only whole-message types such as `TXT` and `IMAGE`, add a `MULTIBODY` branch to avoid missing the whole multi-body message or subsequent bodies.
+
+This text-and-image example shows how to identify the type and process content in body order:
+
+```java
+EMMessageListener messageListener = new EMMessageListener() {
+    @Override
+    public void onMessageReceived(List<EMMessage> messages) {
+        for (EMMessage message : messages) {
+            if (message.getContentType() != EMMessage.Type.MULTIBODY) {
+                // Process single-body messages with the existing logic.
+                continue;
+            }
+            for (EMMessageBody body : message.getBodies()) {
+                if (body instanceof EMTextMessageBody) {
+                    String text = ((EMTextMessageBody) body).getMessage();
+                    // Add the text to the current message display.
+                } else if (body instanceof EMImageMessageBody) {
+                    EMImageMessageBody imageBody = (EMImageMessageBody) body;
+                    // Add the image at the current position. Download its attachment as needed, then update the display.
+                } else {
+                    // Handle video, voice, file, location, or custom bodies by their actual subclass.
+                }
+            }
+        }
+    }
+};
+EMClient.getInstance().chatManager().addMessageListener(messageListener);
+```
+
+For other body fields and display methods, see [video](#receive-video-messages), [voice](#receive-voice-messages), [file](#receive-file-messages), [location](#receive-location-messages), and [custom messages](#receive-custom-messages). When reusing these examples, read the current `body` in the iteration rather than calling `message.getBody()` again to obtain the first body.
+
+#### Download multi-body message attachments
+
+Pass the whole `EMMessage` to the download API. You do not need to request each body separately. For API purposes and basic callbacks, see [Attachment download APIs and callbacks](#attachment-download-apis-and-callbacks).
+
+The SDK selects bodies in multi-body messages according to these rules:
+
+| Body type | Original file download | Large image download | Thumbnail download |
+| :--- | :--- | :--- | :--- |
+| Image | Original image | Large image | Image thumbnail |
+| Video | Original video | Skip | Video thumbnail |
+| Voice | Original voice file | Original voice file | Original voice file |
+| File | Original file | Skip | Skip |
+| Text, location, custom | Skip | Skip | Skip |
+
+Inapplicable bodies are skipped automatically. They are neither counted as failures nor included in progress calculations. If no bodies in the whole message are applicable, `onSuccess()` is triggered without downloading anything. This rule does not mean that missing applicable attachments or download failures also return success.
+
+Original file and large image downloads report message-level overall progress through `onProgress(int progress, String status)`, weighted by each attachment's original file size, from 0–100. Individual attachment progress is not reported separately. Thumbnail downloads do not trigger progress callbacks. Each request returns one final result: `onSuccess()` after all applicable attachments download successfully, or `onError(int code, String error)` if any applicable attachment fails, stopping remaining downloads.
+
+The following example downloads the original attachments in a multi-body message:
+
+```java
+EMCallBack downloadCallback = new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        // All applicable attachments in this request downloaded successfully. Update the display using local paths in the bodies.
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        // This request failed. Remaining attachments will not be downloaded.
+    }
+
+    @Override
+    public void onProgress(int progress, String status) {
+        // Message-level overall progress for original file or large image downloads, from 0–100.
+        // This callback is not triggered with downloadThumbnail.
+    }
+};
+EMClient.getInstance().chatManager().downloadAttachment(message, downloadCallback);
+```
+
+After downloading, iterate through `message.getBodies()` again. Read `getLocalUri()` and the download status of each corresponding attachment body to update its display in the original message.
+
+:::tip
+The selection rules above apply only to multi-body messages. Single-body messages retain historical behavior: for example, `downloadBigImage` downloads the original video for a single video message. Unsupported resources or download types fail through `onError`, rather than succeeding as having no applicable bodies. We still recommend choosing the download API according to the actual resource type.
+:::
+
+#### Considerations
+
+- **Sender content preparation**: The sender creates all bodies before assembling the message in reading order. The recipient displays them in the original `getBodies()` order. Add, remove, or replace bodies before sending, and keep local attachments requiring upload readable until sending completes. See [Send multi-body messages](message_send.html#send-multi-body-messages).
+- **Attachment reuse and retries**: Retain server information for uploaded attachments as described in [Forward a single message](message_forward.html#forward-a-single-message) to avoid uploading again. Use the original message object to resend the same failed message. See [Resend failed messages](message_send.html#resend-failed-messages).
+- **Body list and UI updates**: The list structure returned by `getBodies()` is read-only. The SDK may update attachment paths and download states in its bodies. Message receiving callbacks run on an SDK worker thread. Switch to the main thread before updating the Android UI, and avoid time-consuming synchronous operations in callbacks.
+- **Conversation summaries**: After retrieving the last message with `EMConversation#getLastMessage()`, if its type is `MULTIBODY`, generate its summary from the complete body list to avoid displaying only the first body. See [Conversation List](conversation_list.html).
+- **Forwarding**: Retain the complete ordered body list when forwarding a multi-body message, rather than copying only `getBody()`. See [Forward a single message](message_forward.html#forward-a-single-message).
+- **Feature restrictions**: Multi-body messages do not support editing or translation. For creation and sending rules, see [Send multi-body messages](message_send.html#send-multi-body-messages).
 
 ## More
 
@@ -408,8 +518,10 @@ EasyIM supports message attachment download authentication. This feature is disa
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`downloadThumbnail`](#receive-image-messages) | `EMChatManager` | Download an image or video thumbnail. |
-| [`downloadBigImage`](#receive-image-messages) | `EMChatManager` | Download a large image. |
-| [`downloadAttachment`](#receive-attachment-messages) | `EMChatManager` | Download an original image, video, or file attachment. |
+| [`getContentType`](#receive-multi-body-messages) | `EMMessage` | Identifies multi-body messages, returning `MULTIBODY`. |
+| [`getBodies`](#receive-multi-body-messages) | `EMMessage` | Retrieves the complete ordered body list. |
+| [`downloadThumbnail`](#attachment-download-apis-and-callbacks) | `EMChatManager` | Downloads applicable thumbnails or original voice files, without progress callbacks. |
+| [`downloadBigImage`](#attachment-download-apis-and-callbacks) | `EMChatManager` | Downloads applicable attachments such as large images, with message-level progress. |
+| [`downloadAttachment`](#attachment-download-apis-and-callbacks) | `EMChatManager` | Downloads original attachments, with message-level progress. |
 | [`downloadAndParseCombineMessage`](#receive-combined-messages) | `EMChatManager` | Download and parse a combined message. |
 | [`thumbnailLocalUri`](#receive-image-messages) | `EMImageMessageBody` | Retrieve the local URI of an image thumbnail. |

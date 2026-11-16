@@ -45,7 +45,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 ```
 
 :::tip
-The app can use `EMClient#isLoggedIn()` and `EMClient#isConnected()` to determine the login and server connection states, respectively, but it cannot rely on the SDK to initiate login automatically.
+Use `EMClient#isLoggedIn()` to determine the login state. Starting from SDK 5.2.1, we recommend querying the complete server connection state through `EMClient#getConnectionState()`. See [Retrieve the connection state](connection.html#retrieve-the-connection-state). The SDK does not initiate login automatically.
 :::
 
 ## Use the local database before login is complete
@@ -165,11 +165,12 @@ String currentUser = EMClient.getInstance().getCurrentUser();
 
 ## Retrieve the login state
 
-Call `EMClient#isLoggedIn` to determine whether the current user is logged in and `EMClient#isConnected` to determine whether the SDK is connected to the EasyIM server. Login and connection states have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently connected to the server.
+Call `EMClient#isLoggedIn()` to determine whether the current user is logged in. Starting from SDK 5.2.1, call `EMClient#getConnectionState()` to distinguish disconnected, connecting, and connected states. The original `isConnected()` is deprecated. Login and connection states have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently connected to the server.
 
 ```java
 boolean loggedIn = EMClient.getInstance().isLoggedIn();
-boolean connected = EMClient.getInstance().isConnected();
+EMConnectionState state = EMClient.getInstance().getConnectionState();
+boolean connected = state == EMConnectionState.CONNECTED;
 ```
 
 ## Logout
@@ -199,7 +200,7 @@ If the app integrates FCM, we recommend setting `unbindToken` in `logout` to `tr
 
 `unbindToken` indicates whether to unbind the device push token during logout:
 
-- `true`: Unbinds the device push token.
+- (Default) `true`: Unbinds the device push token.
 - `false`: Does not unbind the device push token.
 
 If push token unbinding fails because of a network exception, `logout` returns a failure. The app can inform the user that unbinding failed and that push notifications might still be received after continuing to log out. If the user confirms, set `unbindToken` to `false` and call `logout` again to log out only of the EasyIM account without unbinding the push token. After the network recovers, handle the remaining push token unbinding at an appropriate time. Do not retry indefinitely on a background thread.
@@ -220,11 +221,11 @@ The Android SDK allows the same account to log in on multiple devices. The numbe
 
 Use the following `EMOptions` APIs to configure information about the current login device:
 
-| API | Parameter type | Description |
-| --------------------- | -------- | ------------------------------------------------------------ |
-| `setCustomOSPlatform` | `int` | Sets the custom platform number of the login device. The range is 1–100. Call it before SDK initialization. |
-| `setCustomDeviceName` | `String` | Sets the current device's custom name for distinguishing devices in multi-device login. Call it before SDK initialization. If it is not set, the device model is used by default. |
-| `setLoginCustomExt` | `String` | Sets the current device's login extension information. The maximum length is 1024 characters, and it cannot be `null`. If set before SDK initialization, it takes effect for subsequent logins. If the SDK is already initialized, set it before the next call to `loginWithToken`. |
+| API | Description |
+| :--- | :--- |
+| `setCustomOSPlatform` | Sets the custom platform number of the login device. The range is 1–100. Call it before SDK initialization. |
+| `setCustomDeviceName` | Sets the current device's custom name for distinguishing devices in multi-device login. Call it before SDK initialization. If it is not set, the device model is used by default. |
+| `setLoginCustomExt` | Sets the current device's login extension information. The maximum length is 1024 characters, and it cannot be `null`. If set before SDK initialization, it takes effect for subsequent logins. If the SDK is already initialized, set it before the next call to `loginWithToken`. |
 
 The following is sample code:
 

@@ -127,7 +127,7 @@ For details about the `Content-Type`, `Accept`, and `Authorization` fields, see 
 | `from` | String | Yes   | User ID of the message sender. The default is `admin`.<Container type="tip" title="Note"><br/>- The server does not verify whether this user ID exists. Even if you specify a nonexistent ID, the message is still delivered normally.<br/>- The server does not check whether the recipient has added the sender to the blocklist or whether the sender is muted.<br/>- If you pass an empty string (""), the request fails.</Container> |
 | `to`   | String | Yes   | User ID of the message recipient.<br/><Container type="tip" title="Note">The server does not verify whether this user ID exists. Even if you specify a nonexistent ID, the message is still delivered normally.</Container> |
 | `body` | JSON   | Yes   | Message content. See the `body` parameter details below.                        |
-| `ext`  | JSON   | No   | Message extension field for passing custom data. It cannot be `null`. The server uses the `ext` value from the **first chunk** and passes this field through for subsequent chunks.|
+| `ext`  | JSON   | No   | Message extension field for passing custom data. If provided, it must be a JSON object. You can pass `{}` when there is no custom data. The server passes each chunk's `ext` through with that chunk. The extension fields of the complete message are taken from the `ext` of the **last chunk**. To retain extension fields in the complete message, include all of those fields in the last chunk.|
 
 The fields in `body` in the request body are described below.
 

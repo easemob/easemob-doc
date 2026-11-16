@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation pinning keeps important one-to-one, group, or chat room conversations near the top of the conversation list so users can quickly find frequently used or important conversations. The pin state is written to the server-side conversation list, and the SDK synchronously updates it in the local conversation list cache so the frontend can refresh the UI directly.
+Conversation pinning keeps important one-to-one and group conversations near the top of the conversation list so users can quickly find frequently used or important conversations. Chat room conversations are not supported. The pin state is written to the server-side conversation list, and the SDK synchronously updates it in the local conversation list cache so the frontend can refresh the UI directly.
 
 ## Feature activation
 
@@ -48,8 +48,8 @@ The parameters are as follows:
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `conversationId` | String | Yes | Conversation ID. For one-to-one chat, it is the peer user ID; for group chat, the chat group ID; and for chat room chat, the chat room ID. |
-| `conversationType` | String | Yes | Conversation type. Possible values are `singleChat`, `groupChat`, and `chatRoom`. |
+| `conversationId` | String | Yes | Conversation ID. For one-to-one chat, it is the peer user ID; for group chat, the chat group ID. Chat room conversations are not supported. |
+| `conversationType` | String | Yes | Conversation type. The values supported for this operation are `singleChat` and `groupChat`; `chatRoom` is not supported. |
 | `pinned` | Boolean | Yes | Whether to pin the conversation. `true` pins it and `false` unpins it. |
 
 The result is returned as `ConversationMutationResult` with the following main fields:

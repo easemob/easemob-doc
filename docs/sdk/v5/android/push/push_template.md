@@ -12,7 +12,7 @@ Push templates have the following characteristics:
 
 1. Push templates have a higher priority than [calling the API to set push content in the notification bar](push_display_attribute.html).
 2. Customizing the server-side default push content through EasyIM Console or the [server-side REST API](/rest/push_template_create.html) is supported.
-3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users.
+3. For group messages, you can use targeted templates to push offline notifications that are different from those received by other users to certain users. For the data structure of targeted templates, see [Push extension fields](/rest/push_extension.html).
 4. The recipient can configure a push template: If the sender uses a push template when sending a message, the display content in the push notification bar follows the sender's push template.
 5. Priority of push template usage:
    - Custom templates have a higher priority than default templates.
@@ -38,11 +38,11 @@ You can set offline push templates in the following two ways:
 - [Call the REST API to configure them](/rest/push_template_overview.html).
 - Set push templates in [EasyIM Console](https://console.easyim.ai/user/login).
 
-For the data structure related to push templates, see [Push extension fields](/rest/push_extension.html). The following describes how to set offline push templates in EasyIM Console.
+For the data structure related to push templates, see [Push extension fields](/rest/push_extension.html). The following describes how to configure offline push templates in EasyIM Console.
 
 ### Edit the default push template
 
-After offline push templates are enabled, two templates, `default` and `detail`, are added to the **Template Management** page by default. If no custom push template is configured, the default template is automatically used when a message is pushed, and you do not need to pass in a template name when creating a message.
+After offline push templates are enabled, two templates, `default` and `detail`, are added to the **Offline Push** page by default. If no custom push template is configured, the default template is automatically used when a message is pushed, and you do not need to pass in a template name when creating a message.
 
  - `default`: By default, the push title is **You've got a new message**, and the push content is **Please click to view**. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `SimpleBanner`, the default push template is `default`.
  - `detail`: By default, the push title is **You've got a new message**, and the push content is the push nickname of the message sender and the message content. If the `updatePushDisplayStyle` method is called to set `DisplayStyle` to `MessageSummary`, the default push template is `detail`.
@@ -57,7 +57,7 @@ You can choose **More > Edit** in the **Actions** column to modify the push titl
 | :-------------- | :----- | :----- |
 | Title/content | Array | The parameters can be set in the following ways:<br/> - Enter fixed content. For example, set the title to **Hello** and the content to **You've got a new message**. <br/> - Built-in parameter filling: 1. `{$dynamicFrom}`: Fills friend remarks, group nickname (group messages only), and push nickname in descending priority order. 2. `{$fromNickname}`: Push nickname. 3. `{$msg}`: Message content.<br/> - Custom parameter filling: Enter array index placeholders in the template. The format is: {0} {1} {2} ... {n} |
 
-For the push title and content, the first two setting methods do not require this parameter to be passed in when creating a message. The third setting method requires the parameter to be passed in through the extension field.
+For the push title and content, the first two methods do not require parameter arrays when creating a message. The third method requires arrays corresponding to the index placeholders to be passed through extension fields. Use `title_args` for the title and `content_args` for the content, passing each as needed.
 
 Push template parameters are in the message extension `ext.em_push_template`. The JSON structure of push template parameters is as follows:
 
@@ -103,24 +103,34 @@ On the **Offline Push** page, click **Add push template** to create a custom pus
 | Template name | String | The push template name, which can contain up to 64 characters and supports the following character sets:<br/> - 26 lowercase English letters a-z <br/> - 26 uppercase English letters A-Z <br/> - 10 digits 0-9 |
 | Title/content | Array | For details, see [Configuration in the default push template](#edit-the-default-push-template). |
 
-**When creating a message, you need to pass in the template name, push title, and push content by using extension fields**. The push title and content in the notification bar use the formats in the template respectively. For details, see [Parameters of the default push template in message extensions](#edit-the-default-push-template).
+When the sender uses a custom template, pass the name of the created template in the message extension field `em_push_template.name` and pass any parameter arrays required by the template content. For details, see [Use a push template when sending a message](#use-a-push-template-when-sending-a-message).
 
 ![img](/images/console/push_template_add.png)
 
 ## Use a push template when sending a message
 
-You can select a push template when sending a message. Push templates can be set in three ways.
+You can select a push template when sending a message. The following three usage methods depend on the template content.
 
 :::tip
-1. If the default template **default** or **detail** is used, the default template is automatically used when the message is pushed, and you do not need to pass in the template name when creating the message.
-2. When a custom template is used, the **push title** and **push content** parameters must be passed in through extension fields when creating a message, regardless of which method is used to set them.
+1. When using the default template `default` or `detail`, you do not need to pass the default template name when creating a message.
+2. When using a custom template, specify its name through `em_push_template.name`. Pass title and content parameter arrays according to the following table.
 :::
+
+When the sender specifies a custom template, follow these parameter rules:
+
+| Template content | Content to pass in the message extension |
+| :--- | :--- |
+| Fixed content | Template name `name`. No `title_args` or `content_args` is required. |
+| Built-in parameters | Template name `name`. No built-in parameter values need to be passed through `title_args` or `content_args`. |
+| Index placeholders | Template name `name`. Pass `title_args` if the title contains index placeholders and `content_args` if the content contains index placeholders. |
+
+All these fields are in the message extension `em_push_template`. Determine separately whether the title and content require parameter arrays. You do not have to pass both arrays. The values and order in each array must match the index placeholders in the corresponding template. The notification title and content are generated from the template format and corresponding parameters. You do not need to pass the complete title or content text separately.
 
 ### Use a push template with fixed content
 
 For a push template with fixed content, specify the push template name through the `ext` extension field.
 
-In this case, you do not need to pass in the `titleArgs` or `contentArgs` parameter when creating a message.
+In this case, you do not need to pass in the `title_args` or `content_args` parameter when creating a message.
 
 ```java
 // This example uses a text message. Other message types are configured in the same way.
@@ -172,7 +182,7 @@ The sample code for this method is the same as [Use a push template with fixed c
 
 ### Use a push template that contains custom parameters
 
-Use a custom push template where the push title and push content are custom parameters:
+When using a custom push template, pass the values for index placeholders in the title and content through `title_args` and `content_args`, respectively.
 
 For example, the push template is set as shown below:
 

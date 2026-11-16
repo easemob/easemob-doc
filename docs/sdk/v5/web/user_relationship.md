@@ -21,6 +21,10 @@ Before you begin, ensure that the following requirements are met:
 
 To receive friend-addition, friend-deletion, and friend-request state-change events, add a friend-event listener.
 
+:::tip
+To receive notifications of changes to friends' user attributes through `onContactInfoUpdated`, first contact the EasyIM business manager to enable this feature. For details about user attribute change notifications, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+:::
+
 ```typescript
 client.contactManager.addEventHandler('contact-listener', {
   // The other user accepted the friend request. User A receives this event after User A sends a friend request to User B and User B accepts it.
@@ -162,7 +166,7 @@ contacts.forEach(contact => {
 
 #### Retrieve an individual user's attributes from local memory
 
-To read an individual friend's user attributes from memory, select the target friend from the friend list returned by `client.contactManager.getContacts`. For details about this API, see [Read user attributes from local memory](userinfo_provider.html#read-user-attributes-from-local-memory).
+To read an individual friend's user attributes from memory, select the target friend from the friend list returned by `client.contactManager.getContacts`. For details about this API, see [Read user attributes from local cache](userinfo_provider.html#read-user-attributes-from-local-cache).
 
 To retrieve the latest user attributes, call [client.userInfoManager.getUserInfoByUserId](userprofile.html#retrieve-all-user-attributes-from-the-server) to query the server.
 
@@ -256,7 +260,7 @@ console.log(result.succeeded, result.failed);
 
 ### Remove users from the blocklist
 
-Call `removeUserFromBlocklist` to remove one or more users from the blocklist. After removal, the users can send messages and perform other actions again.
+Call `removeUserFromBlocklist` to remove one or more users from the blocklist. After removal, the users can send messages or friend requests again.
 
 ```typescript
 await client.contactManager.removeUserFromBlocklist({

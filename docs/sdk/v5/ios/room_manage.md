@@ -38,9 +38,9 @@ To destroy a chat room, call the server-side REST API described in [Destroy a ch
 To join a chat room, perform the following steps:
 
 1. Call `getChatroomsFromServerWithPage` to retrieve the chat room list from the server and find the ID of the chat room you want to join.
-2. Call `joinChatroom` and pass the chat room ID to join the chat room. When a new member joins, the other members receive the `userDidJoinChatroom` callback.
+2. Call the `joinChatroom` and pass the chat room ID to join the chat room. When a new member joins, the other members receive the `userDidJoinChatroom` callback.
 
-Example code:
+The following example shows how to retrieve the chat room list and join a chat room:
 
 ```objectivec
 [[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1
@@ -56,7 +56,16 @@ Example code:
 }];
 ```
 
-You can also call `joinChatroom` to include extension information when joining the chat room and specify whether to leave all other chat rooms. After this method is called, other chat room members receive the `userDidJoinChatroom` callback. If the user includes extension information when joining, the other members can retrieve it from this callback.
+#### Join a chat room with extension information
+
+To pass custom business information when joining a chat room or specify whether to leave other chat rooms the user has joined, call `joinChatroom` with the following two key parameters:
+
+- `ext`: Custom extension information passed when joining the chat room.
+- `leaveOtherRooms`: Whether to leave other chat rooms the user has joined when joining the current chat room.
+
+After a user successfully joins the chat room, the other members receive the `userDidJoinChatroom` callback. If extension information was passed when joining, the other members can obtain it from this callback.
+
+The following example shows how to join a chat room with extension information:
 
 ```objectivec
 [[EMClient sharedClient].roomManager joinChatroom:chatroomId

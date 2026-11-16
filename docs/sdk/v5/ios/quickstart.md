@@ -12,7 +12,7 @@ The following figure shows the workflow for sending and receiving one-to-one tex
 
 - Xcode (the latest version is recommended).
 - An iOS simulator or Apple device running iOS 10.0 or later.
-- CocoaPods [1.10.1 or later](https://cocoapods.org/).
+- CocoaPods [1.10.1 or later](https://cocoapods.org/) (required only when integrating with CocoaPods).
 - A valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_manage.html#manage-apps).
 - If your network environment has a firewall deployed, contact EasyIM technical support to configure an allowlist.
 
@@ -29,9 +29,22 @@ Create an app for the iOS platform in Xcode by following these steps, with the f
 
 ## 2. Integrate the SDK
 
-The SDK supports integration using **CocoaPods** or **manual integration**.
+The SDK supports **Swift Package Manager**, **CocoaPods**, and **manual integration**. Choose only one method to avoid importing the SDK more than once.
 
-### Method 1: Integrate the SDK using CocoaPods
+### (Recommended) Method 1: Integrate using Swift Package Manager
+
+Choose an SDK 5.x release that supports SPM.
+
+1. Open your project in Xcode and select **File > Add Package Dependencies…**.
+2. Enter the repository URL in the search field: [https://github.com/easemob/HyphenateChat_iOS](https://github.com/easemob/HyphenateChat_iOS).
+3. Under **Dependency Rule**, select **Exact Version**, enter a release version that supports SPM, such as `5.2.0`, and click **Add Package**. To use another version, first confirm that its version tag contains `Package.swift`.
+4. On the package product selection page, add **HyphenateChat** to your App Target and click **Add Package**. Wait for Xcode to finish resolving and downloading dependencies.
+
+The SPM package for SDK `5.2.0` requires iOS 10.0 or later. For other versions, follow the system requirements in the selected version's `Package.swift` and set your App Target's minimum deployment version accordingly.
+
+### Method 2: Integrate the SDK using CocoaPods (to be deprecated)
+
+CocoaPods integration will be deprecated. We recommend using SPM instead.
 
 1. In **Terminal**, go to the project root directory and run `pod init`. A **Podfile** text file is generated in the project folder.
 2. Open the **Podfile** and change its contents as follows:
@@ -49,7 +62,7 @@ The SDK supports integration using **CocoaPods** or **manual integration**.
 
 If developers in China encounter network issues that prevent pod commands from running, they can use a mirror in China, such as the [Gitee mirror](https://gitee.com/mirrors/CocoaPods-Specs) or [TUNA mirror](https://mirrors.tuna.tsinghua.edu.cn/help/CocoaPods/).
 
-### Method 2: Manually import the SDK
+### Method 3: Manually import the SDK
 
 1. Open the [SDK download page](http://easyim.ai/sdk#iOS), download the latest EasyIM SDK, and decompress it.
 2. Drag `HyphenateChat.xcframework` and `aosl.xcframework` from the SDK package into your project.

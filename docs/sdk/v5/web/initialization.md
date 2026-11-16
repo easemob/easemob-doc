@@ -159,10 +159,26 @@ console.log(contacts);
 console.log(joinedGroups);
 ```
 
+## Enable automatic user information management
+
+Automatic user information management and automatic contact synchronization are independent. `enableUserInfoSync` is disabled by default. When enabled, it synchronizes the current user's attributes after login succeeds, but does not automatically retrieve all friends' nicknames and avatars at login. Other users' attributes are updated through message-triggered synchronization, explicit retrieval, and other mechanisms. For details, see [Automatic User Information Management](userinfo_provider.html).
+
+## Retrieve the SDK version
+
+Starting from SDK 5.2.0, call `client.getVersion()` to retrieve the integrated SDK version for version confirmation or troubleshooting. It synchronously returns a version string and requires neither Manager registration nor login.
+
+```typescript
+const version = client.getVersion();
+console.log('SDK version:', version); // For example, '5.2.0'
+```
+
+`client` is the SDK instance created through `ChatClient.init()`.
+
 ## API list
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
+| [`getVersion`](#retrieve-the-sdk-version) | `ChatClient` | Retrieves the SDK version. |
 | [`init`](#initialize-the-sdk) | `ChatClient` | Initializes the singleton SDK instance. |
 | [`getConversationList`](#read-synchronized-data-after-login) | `ChatManager` | Reads the current conversation list from the local cache. |
 | [`getContacts`](#read-synchronized-data-after-login) | `ContactManager` | Reads the current friend-list view from the local snapshot. |

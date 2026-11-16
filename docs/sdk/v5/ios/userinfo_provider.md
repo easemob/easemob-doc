@@ -2,27 +2,31 @@
 
 ## Feature overview
 
-EasyIM provides automatic user information management. After this feature is enabled, the SDK automatically maintains user information synchronization and in-memory updates, reducing the work required to manually retrieve, store, and update user information.
+EasyIM provides automatic user information management. After this feature is enabled, the SDK automatically maintains user information synchronization and cache updates, reducing the work required to manually retrieve, store, and update user information.
 
-This feature applies to scenarios such as conversation lists, message lists, and group chat pages that display user nicknames, avatars, remarks, or group member name cards.
+This feature applies to scenarios such as conversation lists, message lists, and group chat pages that display user nicknames, avatars, friend remarks, or group member name cards.
 
 **User information on this page refers to user-related information displayed by your app, including [user attributes](userprofile.html), [friend remarks](user_relationship.html#set-friend-remarks), and [group member name cards](group_namecard.html).**
 
 ## Understand the tech
 
-Automatic user information management is controlled by `EMOptions#enableUserInfo`. After it is enabled, the SDK synchronizes user information and updates local memory as follows:
+Automatic user information management is controlled by the `enableUserInfo` property of `EMOptions` and is disabled by default. After it is set to `YES`, the SDK automatically synchronizes the currently logged-in user's attributes when login succeeds and includes the update time of the sender's user attributes when sending a message. For group messages, it also includes the update time of the sender's group member name card in the current chat group.
 
-1. After login succeeds, the SDK automatically retrieves the currently logged-in user's information from the server and writes it to local memory.
+Friend remarks are read from the recipient's local friend data. They are not sent with messages or synchronized through the update-time comparison mechanism described above. For details, see [Obtain sender information through a message](#obtain-sender-information-through-a-message).
+
+After the recipient receives a message, the SDK uses the update times carried in the message to synchronize user attributes and group member name cards as needed, update the local cache, and notify the business layer through delegate callbacks to refresh the UI. The process is as follows:
+
+1. After login succeeds, the SDK automatically retrieves the currently logged-in user's information from the server and writes it to local cache.
 2. After the user updates their information, subsequent messages carry the corresponding information update time.
 3. After the recipient receives a message, the SDK parses the sender information and update time in it.
-4. The SDK compares the update time in the message with the timestamp in local memory.
-5. If the update time in the message is later than the timestamp in local memory, the SDK automatically [retrieves the latest user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or the [group member name card](group_namecard.html#retrieve-a-chat-group-member-name-card-from-local-memory).
-6. After retrieval succeeds, the SDK automatically updates local memory.
-7. After local memory is updated, the SDK notifies the upper-layer app through an event, which the business layer can use to refresh the UI.
+4. The SDK compares the update time in the message with the timestamp in local cache.
+5. If the message carries a valid update time and either that time is later than the corresponding timestamp in the local cache or the corresponding local data is missing, the SDK automatically [retrieves the latest user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server) or the [group member name card](group_namecard.html#retrieve-chat-group-member-name-cards-from-the-server).
+6. After retrieval succeeds, the SDK automatically updates local cache.
+7. After local cache is updated, the SDK notifies the upper-layer app through an event, which the business layer can use to refresh the UI.
 
-**The core of this feature is that the SDK automatically retrieves user information, detects updates, updates local memory, and sends change notifications.**
+**The core of this feature is that the SDK automatically retrieves user information, detects updates, updates local cache, and sends change notifications.**
 
-The memory update process is as follows:
+The cache update process is as follows:
 
 ![img](/images/ios/memory_update_userinfo_mgmt.png)
 
@@ -51,13 +55,17 @@ You must set `EMOptions#enableUserInfo` before calling `initializeSDK` to initia
 ## Monitor user attribute updates
 
 The SDK provides `EMUserInfoManagerDelegate` to monitor user attribute update events, primarily including:
-- `onSelfUserInfoUpdate`: Triggered after the currently logged-in user's attributes are synchronized or updated and written to local memory.
-- `onUserInfoUpdate`: Triggered after another user's attributes are updated and written to local memory, including the following scenarios:
-  - A message is received from another user, and the sender's nickname or avatar in the message has changed. To receive user attribute update events in this scenario, enable automatic user information management.
+- `onSelfUserInfoUpdate`: Triggered after the currently logged-in user's attributes are synchronized or updated and written to local cache.
+- `onUserInfoUpdate`: Triggered after another user's attributes are updated and written to local cache, including the following scenarios:
+  - After automatic user information management is enabled, a message is received from another user and carries a valid update time for the sender's user attributes. If that time is later than the timestamp in the local cache, or the corresponding local data is missing, the SDK automatically retrieves the user attributes and updates the local cache.
   - Your app explicitly [retrieves user attributes from the server](userprofile.html#retrieve-all-user-attributes-from-the-server).
   - Your app explicitly [retrieves group member information from the server](group_members.html#retrieve-the-chat-group-member-list).
 
 **We recommend registering the delegate during business initialization so that the app promptly receives events and refreshes the UI during initial synchronization after login, message-triggered updates, or explicit retrieval.** For user attribute change notifications in other scenarios, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+
+:::tip
+To receive notifications of changes to friends' user attributes or subscribe to attribute-change notifications for strangers, first contact the EasyIM business manager to enable the corresponding feature. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes) and [Subscribe to attribute changes of strangers](userprofile.html#subscribe-to-attribute-changes-of-strangers).
+:::
 
 - Add a delegate:
 
@@ -85,6 +93,16 @@ extension YourViewController: EMUserInfoManagerDelegate {
 
 ## Obtain sender information through a message
 
+`senderInfo` may be `nil`, and all of its string properties are optional.
+
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `userId` | `NSString * _Nullable` | The message sender's user ID. |
+| `nickname` | `NSString * _Nullable` | The sender's nickname. |
+| `avatarUrl` | `NSString * _Nullable` | The sender's avatar URL. |
+| `remark` | `NSString * _Nullable` | The private friend remarks that the current user sets for the sender. They are not sent to the other party with messages. |
+| `groupNameCard` | `NSString * _Nullable` | The sender's group member name card in the current chat group. |
+
 After automatic user information management is enabled, if a sender includes their user information when sending a message, the SDK retrieves those user attributes again and triggers `onUserInfoUpdate` when the recipient receives the message and the sender's user attribute update time carried in the message is later than the local cache. This applies regardless of whether the sender and recipient are friends.
 
 You can retrieve the currently available sender information through `senderInfo`, including the nickname, avatar, remarks, and group member name card.
@@ -104,12 +122,12 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 ```
 
 :::tip
-`senderInfo` returns the currently available local sender information. If the message triggers a user information update, the SDK notifies the business layer through the relevant event after it finishes updating local memory with the latest data.
+`senderInfo` returns the currently available local sender information. If the message triggers a user information update, the SDK notifies the business layer through the relevant event after it finishes updating local cache with the latest data.
 :::
 
-## Read user attributes from local memory
+## Read user attributes from local cache
 
-To read user attributes directly from local memory, call `getUserInfoByIds`. This API does not initiate a network request and is suitable for local display.
+To read user attributes directly from local cache, call `getUserInfoByIds`. This API does not initiate a network request and is suitable for local display.
 
 ```swift
 let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
@@ -121,16 +139,16 @@ if let userInfoMap = result {
 ```
 
 :::tip
-This API returns only data in local memory. To explicitly retrieve the latest user attributes from the server, call `fetchUserInfoById`. For details, see [Manage User Attributes](userprofile.html#retrieve-all-user-attributes-from-the-server).
+This API returns only data in local cache. To explicitly retrieve the latest user attributes from the server, call `fetchUserInfoById`. For details, see [Manage User Attributes](userprofile.html#retrieve-all-user-attributes-from-the-server).
 :::
 
 ## Considerations
 
 - `EMOptions#enableUserInfo` must be set before SDK initialization.
-- Prefer registering `EMUserInfoManagerDelegate` early so that your business UI can be refreshed promptly after local memory is updated.
+- Prefer registering `EMUserInfoManagerDelegate` early so that your business UI can be refreshed promptly after local cache is updated.
 - `senderInfo` represents the currently available local sender information and is not guaranteed to be the final latest value immediately after a message is received.
-- When the update time in a message is later than that in local memory, the SDK automatically retrieves the latest data from the server and updates local memory.
-- `getUserInfoByIds` queries only local memory and does not explicitly retrieve the latest data from the server.
+- When the update time in a message is later than that in local cache, the SDK automatically retrieves the latest data from the server and updates local cache.
+- `getUserInfoByIds` queries only local cache and does not explicitly retrieve the latest data from the server.
 
 ## FAQ
 
@@ -140,11 +158,11 @@ Set it before calling `initializeSDK` to initialize the SDK. If it is set after 
 
 #### What does the SDK do automatically after the feature is enabled?
 
-After automatic user information management is enabled with `EMOptions#enableUserInfo`, the SDK automatically synchronizes the currently logged-in user's information after login succeeds; includes sender information and its update time when sending messages; compares the update time in a received message with local memory; retrieves the latest information from the server and updates local memory when it detects updated data; and notifies the business layer through an event.
+After automatic user information management is enabled with `EMOptions#enableUserInfo`, the SDK automatically synchronizes the currently logged-in user's information after login succeeds; includes sender information and its update time when sending messages; compares the update time in a received message with local cache; retrieves the latest information from the server and updates local cache when it detects updated data; and notifies the business layer through an event.
 
 #### Is EMChatMessage#senderInfo always up to date?
 
-No. `senderInfo` returns the currently available local sender information. If the message triggers a user information update, the SDK first retrieves the latest data from the server and updates local memory, and then notifies the business layer through the relevant event to refresh the UI.
+No. `senderInfo` returns the currently available local sender information. If the message triggers a user information update, the SDK first retrieves the latest data from the server and updates local cache, and then notifies the business layer through the relevant event to refresh the UI.
 
 #### Why should the delegate be registered early?
 
@@ -152,11 +170,11 @@ After [automatic user information management is enabled](#enable-automatic-user-
 
 #### What is the difference between reading locally and retrieving from the server?
 
-`getUserInfoByIds` queries only local memory and does not initiate a network request, making it suitable for local display. To obtain the latest user attributes, explicitly call the corresponding [API](userprofile.html#retrieve-all-user-attributes-from-the-server).
+`getUserInfoByIds` queries only local cache and does not initiate a network request, making it suitable for local display. To obtain the latest user attributes, explicitly call the corresponding [API](userprofile.html#retrieve-all-user-attributes-from-the-server).
 
-#### Must the app maintain memory after the feature is enabled?
+#### Must the app maintain cache after the feature is enabled?
 
-Generally, no. After `EMOptions#enableUserInfo` is enabled, the SDK automatically synchronizes user information, compares update times, updates local memory, and sends event notifications. The business layer generally only needs to read data from local memory and refresh the UI in the relevant events.
+Generally, no. After `EMOptions#enableUserInfo` is enabled, the SDK automatically synchronizes user information, compares update times, updates local cache, and sends event notifications. The business layer generally only needs to read data from local cache and refresh the UI in the relevant events.
 
 ## Related features
 
@@ -179,6 +197,6 @@ After automatic user information management is enabled, received messages contai
 | :--- | :--- | :--- |
 | [`enableUserInfo`](#understand-the-tech) | `EMOptions` | Enable the user information service. |
 | [`updateOwnUserInfo:completion:`](#user-attributes-and-user-information) | `IEMUserInfoManager` | Update the current user's information. |
-| [`fetchUserInfoById:completion:`](#read-user-attributes-from-local-memory) | `IEMUserInfoManager` | Retrieve user information from the server. |
-| [`getUserInfoByIds:`](#read-user-attributes-from-local-memory) | `IEMUserInfoManager` | Retrieve local user information. |
+| [`fetchUserInfoById:completion:`](#read-user-attributes-from-local-cache) | `IEMUserInfoManager` | Retrieve user information from the server. |
+| [`getUserInfoByIds:`](#read-user-attributes-from-local-cache) | `IEMUserInfoManager` | Retrieve local user information. |
 | [`senderInfo`](#obtain-sender-information-through-a-message) | `EMChatMessage` | Retrieve the message sender's information. |

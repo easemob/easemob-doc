@@ -24,6 +24,8 @@ Before you begin, ensure that the following requirements are met:
 
 First, call `getGroup` to retrieve a chat group object, and then call `getMembers` to retrieve the group member list by page. The result contains members' user information, roles, and the times when they joined the group.
 
+When you call `Group#getMembers`, the SDK first uses the local user attribute cache, including user attribute summaries. If the cache is missing, it fetches user attributes from the server as needed. If the attributes are already cached, this query does not proactively check for attribute updates on the server. Fetching missing attributes does not require enabling `enableUserInfoSync`. When this option is enabled, fetching missing attributes may trigger user attribute update events. For details, see [Monitor user attribute changes](userprofile.html#monitor-user-attribute-changes).
+
 ```typescript
 const group = client.groupManager.getGroup('groupId');
 
@@ -138,7 +140,7 @@ await client.groupManager.getGroup('groupId').changeOwner({
 
 ### Add a group admin
 
-Only the group owner can call `addAdmin` to add a group admin. After the admin is added, the new admin and other admins receive the `onAdminAdded` event.
+Only the group owner can call `addAdmin` to add a group admin. After the admin is added, the group owner, the new admin, and other admins receive the `onAdminAdded` event.
 
 A group admin has most chat group management permissions, except for a few operations such as destroying the group.
 
@@ -150,7 +152,7 @@ await client.groupManager.getGroup('groupId').addAdmin({
 
 ### Remove a group admin
 
-Only the group owner can call `removeAdmin` to remove a group admin. After the admin is removed, the removed admin and other admins receive the `onAdminRemoved` event.
+Only the group owner can call `removeAdmin` to remove a group admin. After the admin is removed, the group owner, the removed admin, and other admins receive the `onAdminRemoved` event.
 
 After being removed from the group admin list, the admin retains only regular group member permissions.
 

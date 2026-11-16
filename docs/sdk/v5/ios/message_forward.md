@@ -6,7 +6,7 @@ Forwarding a message means forwarding a successfully sent or received message fr
 
 The EasyIM iOS SDK supports the following forwarding methods:
 
-- **Forward a single message:** Create a new message from the original message object, reuse the original message body and extension fields, and send it to a target one-to-one chat, group chat, chat room, or message thread. This method supports text, image, audio, video, file, location, command, custom, and combined messages.
+- **Forward a single message:** Create a new message from the original message object, reuse the original message body and extension fields, and send it to a target one-to-one chat, group chat, chat room, or message thread. This method supports text, image, audio, video, file, location, command, custom, and combined messages. Starting from SDK 5.2.0, forwarding multi-body messages requires retaining the complete ordered body list.
 - **Forward multiple messages:** Combine multiple messages into one combined message and send it to the target conversation. The recipient can expand the combined message to view its contents. For details, see [Send combined messages](message_send.html#send-combined-messages).
 
 Forwarding creates and sends a new message. The new message has its own message ID, sender, recipient, and send time and does not change the original message or its conversation. For attachment messages, the SDK can reuse the server-side attachment URL in the original message and does not need to upload the attachment again. If the original attachment has been deleted from the server because its storage period expired, the recipient cannot download it.
@@ -20,9 +20,9 @@ Before you start, make sure that the following requirements are met:
 
 ## Forward a single message
 
-To forward a single message, create a new message of the same type as the original and reuse its `body` and `ext`. After setting the target conversation and conversation type, call `sendMessage` to send the new message.
+To forward a single message, create a new message with `initWithConversationID:bodies:ext:`, reusing the original message's complete ordered `bodies` list and `ext`. This applies to both single-body and multi-body messages. Do not copy only `body`, to avoid losing subsequent bodies in a multi-body message. After setting the target conversation and conversation type, call `sendMessage` to send the new message.
 
-A single message can be forwarded to a one-to-one chat, group chat, chat room, or message thread. Supported types include text, image, audio, video, file, location, custom, and combined messages.
+A single message can be forwarded to a one-to-one chat, group chat, chat room, or message thread. Supported types include text, image, audio, video, file, location, custom, combined, and multi-body messages. For creating multi-body messages, see [Send multi-body messages](message_send.html#send-multi-body-messages).
 
 When forwarding an attachment message, the SDK can reuse the original server-side attachment URL and does not need to upload the attachment again. If the attachment has been deleted from the server because its storage period expired, the forwarded message can still contain the original URL, but the recipient cannot download the attachment.
 
@@ -41,10 +41,13 @@ if (!sourceMessage) {
 // Pass the other party's user ID for a one-to-one chat, the chat group ID for a group chat, or the chat room ID for a chat room.
 NSString *conversationId = @"conversationId";
 
-// Create a new message with the original message's body and ext. The new message has an independent message ID.
+// Create a new message with the original message's complete body list and ext.
 EMChatMessage *forwardMessage = [[EMChatMessage alloc] initWithConversationID:conversationId
-                                                                          body:sourceMessage.body
+                                                                        bodies:sourceMessage.bodies
                                                                            ext:sourceMessage.ext];
+if (!forwardMessage) {
+    return;
+}
 
 // One-to-one chat by default. Set this to EMChatTypeGroupChat or EMChatTypeChatRoom when forwarding to a group chat or chat room.
 forwardMessage.chatType = EMChatTypeGroupChat;
@@ -80,7 +83,8 @@ For multiple messages, EasyIM supports combining them into one message before fo
 | API name | Module/Type | Description |
 | :--- | :--- | :--- |
 | [`getMessageWithMessageId`](#forward-a-single-message) | `IEMChatManager` | Retrieves a local message by message ID. |
-| [`initWithConversationID`](#forward-a-single-message) | `EMChatMessage` | Creates a message to send with the same type as the original. |
+| [`initWithConversationID:bodies:ext:`](#forward-a-single-message) | `EMChatMessage` | Creates a message to forward from the complete ordered body list. |
+| [`bodies`](#forward-a-single-message) | `EMChatMessage` | Retrieves the original message's complete ordered body list. |
 | [`ext`](#forward-a-single-message) | `EMChatMessage` | Retrieves the original message's extension fields. |
 | [`chatType`](#forward-a-single-message) | `EMChatMessage` | Sets the conversation type of the new message. |
 | [`sendMessage`](#forward-a-single-message) | `IEMChatManager` | Sends a forwarded message. |

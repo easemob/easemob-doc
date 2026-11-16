@@ -8,6 +8,8 @@ The SDK supports passing `ext` when creating any type of message. This optional 
 
 ## Example code
 
+The following example creates and sends a text message with extension fields and demonstrates how to read the fields after receiving the message. Before running it, initialize the SDK and log in.
+
 ```typescript
 async function sendTextMessage() {
   const message = client.chatManager.createTextMessage({

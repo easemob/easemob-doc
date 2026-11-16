@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM SDK can receive text, image, voice, video, file, and other message types.
+The EasyIM SDK supports receiving text, image, voice, video, file, multi-body, and other message types.
 
 ## Prerequisite
 
@@ -45,7 +45,7 @@ The `onMessage` callback returns a standardized `Message` object. The following 
 | `conversationId` | String | ID of the conversation to which the message belongs. |
 | `conversationType` | `'singleChat' \| 'groupChat' \| 'chatRoom'` | Conversation type. |
 | `type` | MessageType | Message type. |
-| `body` | MessageBody | Message body. Its structure varies by message type. |
+| `body` | MessageBody | Message body. A multi-body message directly contains a segment array; read other messages according to their respective types. |
 | `ext` | `Record<string, unknown>` | Extension. |
 | `timestamp` | Number | Message timestamp in milliseconds. |
 | `direct` | `'SEND' \| 'RECEIVE'` | Message direction. |
@@ -77,6 +77,9 @@ client.chatManager.addEventHandler('message-listener', {
 | Field | Type | Required/Optional | Use case | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | `content` | String | Required | Regular chats, notification content, and explanatory text | Core text message content. |
+| `translations` | `Record<string, string>` | Optional | Display translations | Maps language codes to translations. Read according to the current user's language. |
+
+When the sender enables automatic translation, the received message can contain both the original text and `body.translations`. To translate actively on the recipient, call `translateMessage()`.
 
 ## Receive image messages
 
@@ -150,7 +153,9 @@ client.chatManager.addEventHandler('image-download-listener', {
     console.log('Original image URL:', originalImageUrl);
 
     // Download the original image attachment.
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
 
     console.log('Downloaded filename:', attachment.filename);
     console.log('Download URL:', attachment.downloadUrl);
@@ -244,7 +249,9 @@ client.chatManager.addEventHandler('voice-message-listener', {
     console.log('Filename:', message.body.filename);
 
     // Download the voice attachment.
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('Download URL:', attachment.downloadUrl);
   },
 });
@@ -294,7 +301,9 @@ client.chatManager.addEventHandler('video-message-listener', {
     console.log('Video dimensions:', message.body.width, message.body.height);
 
     // Download the video attachment.
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('Download URL:', attachment.downloadUrl);
   },
 });
@@ -346,7 +355,9 @@ client.chatManager.addEventHandler('file-message-listener', {
     console.log('File size:', message.body.fileSize ?? message.body.fileLength);
 
     // Download the file attachment.
-    const attachment = await client.chatManager.downloadAttachment({ message });
+    const result = await client.chatManager.downloadAttachment({ message });
+    const attachment = "data" in result ? result : result[0];
+    if (!attachment) return;
     console.log('Download URL:', attachment.downloadUrl);
   },
 });
@@ -489,10 +500,10 @@ Combined messages are used to forward chat history or package and forward multip
 
 Receive a combined message in the same way as a regular message. In the `onMessage` callback, identify it using `message.type === 'combine'`.
 
-A combined message contains a title, summary, compatibility text, and combined-message attachment information. After receiving one, read `title`, `summary`, and `compatibleText` directly from the message body. To retrieve the list of original messages in it, call `downloadAndParseCombineMessage` to download and parse the combined-message attachment. On the first call, the SDK downloads and parses the attachment based on its information in the combined message and returns the original message list. On subsequent calls, if the attachment data is available, the SDK can parse it directly and return the original message list.
+A combined message contains a title, summary, and combined-message attachment information. After receiving one, read `title` and `summary` directly from the message body. To retrieve the list of original messages in it, call `downloadAndParseCombineMessage` to download and parse the combined-message attachment. On the first call, the SDK downloads and parses the attachment based on its information in the combined message and returns the original message list. On subsequent calls, if the attachment data is available, the SDK can parse it directly and return the original message list.
 
 :::tip
-SDK versions that do not support combined forwarded messages display the compatibility text. When the current SDK receives a combined message, `message.body` does not contain the `compatibleText` field.
+`compatibleText` is an optional parameter when creating a combined message. It provides compatibility text for older clients that do not support combined forwarded messages. When the current SDK receives a combined message, `message.body` does not contain the `compatibleText` field.
 :::
 
 Example code:
@@ -510,9 +521,6 @@ client.chatManager.addEventHandler('combine-message-listener', {
     console.log('Title:', message.body.title);
     // Read the combined message summary.
     console.log('Summary:', message.body.summary);
-    // Read the compatibility text.
-    console.log('Compatibility text:', message.body.compatibleText);
-
     // Download and parse the original child message list.
     const subMessages = await client.chatManager.downloadAndParseCombineMessage({
       message,
@@ -532,7 +540,7 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 });
 ```
 
-`downloadAndParseCombineMessage()` supports two parameter forms: `{ message }` and `{ url, secret }`.
+`downloadAndParseCombineMessage()` supports two parameter forms: `{ message }` and `{ url, secret }`. Parsed child messages may be `multi_body`, with a segment array in `body`. Display them as described in [Receive multi-body messages](#receive-multi-body-messages).
 
 #### Key fields
 
@@ -540,11 +548,80 @@ const subMessages = await client.chatManager.downloadAndParseCombineMessage({
 | :--- | :--- | :--- | :--- | :--- |
 | `title` | String | Required | Overview display | Combined message title. |
 | `summary` | String | Required | Overview display | Combined message summary. Use it only for an overview. To display the original chat history, call `downloadAndParseCombineMessage()`. |
-| `compatibleText` | String | Required | Compatibility display | Compatibility text displayed when complete combined-message rendering is not supported. |
 | `url` | String | Optional | Download details | Download URL for combined message details. |
 | `secret` | String | Optional | Download authentication | Download key for combined message details. |
 | `messageList` | `ReadonlyArray<Message>` | Optional | Display parsed details | May appear only when sending a message or after parsing its details. |
 | `combineLevel` | Number | Required | Determine nesting level | Current combined message nesting level. |
+
+## Receive multi-body messages
+
+Starting from SDK 5.2.0, multi-body messages use the existing `ChatManager` `onMessage` event. No additional receiving mechanism is required. For registration through `addEventHandler`, see [Monitor message events](#monitor-message-events).
+
+First check `message.type === 'multi_body'`, then iterate through its complete ordered `body` array, and read content according to each segment's `type`. `message.type` is the type of the whole message; `segment.type` is the current segment's type, such as `text` or `image`.
+
+The `body` of a multi-body message is itself a segment array. Do not read `message.body.content` as for a regular text message, or treat the whole array as a regular image or file body.
+
+This text-and-image example shows how to identify the type and process content in segment order. Logs indicate where processing occurs. In your app, organize the display content of the same message in iteration order:
+
+```typescript
+client.chatManager.addEventHandler('multi-body-listener', {
+  onMessage: message => {
+    if (message.type !== 'multi_body' || !Array.isArray(message.body)) return;
+    for (const segment of message.body) {
+      switch (segment.type) {
+        case 'text':
+          console.log('Text:', segment.content);
+          break;
+        case 'image':
+          // Use the thumbnail, large image, or original image URL as needed.
+          console.log('Image:', segment.thumbnailUrl ?? segment.bigImageUrl ?? segment.originalImageUrl);
+          break;
+        default:
+          // Handle video, voice, file, location, or custom segments by type.
+          console.log('Segment:', segment.type, segment);
+      }
+    }
+  },
+});
+```
+
+For other segment fields and display methods, see [video](#receive-video-messages), [voice](#receive-voice-messages), [file](#receive-file-messages), [location](#receive-location-messages), and [custom messages](#receive-custom-messages). When reusing these examples, read the current `segment` fields rather than treating the whole multi-body message's `body` as a regular message object.
+
+#### Download multi-body message attachments
+
+Pass the whole multi-body message to `downloadAttachment({ message })`. The SDK downloads image, voice, video, and file attachments in order, skipping text, location, and custom segments. Images use the original image URL first, falling back to the large image and then thumbnail URL if unavailable. Other attachments use the segment's `url`.
+
+A regular attachment message returns one `MessageAttachmentDownloadResult`; a multi-body message returns an array of results. The array follows the order of downloadable segments and excludes skipped segments. Do not map download results directly to the indices of the complete `body` array. Shared download logic must distinguish a single result from an array.
+
+```typescript
+async function downloadMultiBodyAttachments(message: Message): Promise<void> {
+  if (message.type !== 'multi_body') return;
+  try {
+    const result = await client.chatManager.downloadAttachment({ message });
+    // The return type supports both a single result for regular messages and a result array for multi-body messages.
+    const attachments = 'data' in result ? [result] : result;
+    for (const attachment of attachments) {
+      console.log(attachment.filename, attachment.mimeType, attachment.data);
+    }
+  } catch (error) {
+    console.error('Failed to download multi-body attachments:', error);
+  }
+}
+```
+
+Each result's `data` is `Uint8Array` binary data, rather than a URL assignable directly to an image or video element. To display it in a browser, create a `Blob` using `mimeType`, then generate a temporary URL with `URL.createObjectURL()`. Release it with `URL.revokeObjectURL()` when no longer needed. Other runtimes should use the corresponding platform's file or media display capabilities.
+
+This API does not provide download progress callbacks. No downloadable attachments or a missing remote URL result in error code `401`. If any attachment download fails, the whole operation fails without returning an array of partial successes. Handle failures with `try/catch`.
+
+#### Considerations
+
+- **Sender content preparation**: The sender prepares all content with segment creation methods before calling `createMultiBodyMessage()`, arranging `bodies` in reading order. Pass segments containing local files unchanged; do not copy, spread, or reconstruct them before assembly. See [Send multi-body messages](message_send.html#send-multi-body-messages).
+- **Reusing local file segments**: After successful assembly, recreate the file segment to use a local attachment in another new message. Follow [Resend failed messages](message_send.html#resend-failed-messages) for the same failed message. Do not directly reassemble segments whose local file associations have been consumed.
+- **Existing remote attachments**: The sender can provide existing remote resources through `originalUrl` to avoid uploading again. The recipient can display remote URLs or call the download API as needed.
+- **UI updates**: Retain the original segment order. After asynchronous downloads complete, update the corresponding attachments in the message display. Avoid time-consuming synchronous operations when handling events on the browser's main thread.
+- **Conversation summaries**: If the last message is multi-body, `lastMessage.type` is `multi_body` and `lastMessage.body` is a segment array. Generate the summary from segments rather than reading `body.content`. See [Display a summary of the last message](conversation_list.html#display-a-summary-of-the-last-message).
+- **Combined forwarding**: Child messages parsed by `downloadAndParseCombineMessage()` may be multi-body messages. Continue displaying their segments according to each child's `type` and `body`. See [Receive combined messages](#receive-combined-messages).
+- **Feature restrictions**: Multi-body messages do not support editing or automatic translation. See [Send multi-body messages](message_send.html#send-multi-body-messages).
 
 ## Offline message synchronization events
 
@@ -622,5 +699,5 @@ For information about implementing message delivery receipts and read receipts, 
 
 | API name | Module/Class | Description |
 | :--- | :--- | :--- |
-| [`downloadAttachment`](#receive-image-messages) | `ChatManager` | Downloads the binary data of image, voice, video, file, and other attachment messages. |
+| [`downloadAttachment`](#download-multi-body-message-attachments) | `ChatManager` | Downloads a single attachment from a regular message, or all attachments from a multi-body message. |
 | [`downloadAndParseCombineMessage`](#receive-combined-messages) | `ChatManager` | Downloads and parses the original message list in a combined message. |

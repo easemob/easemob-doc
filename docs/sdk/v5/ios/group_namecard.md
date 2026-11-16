@@ -37,7 +37,6 @@ The SDK provides `EMGroupManagerDelegate` for monitoring chat group member name 
 When a name card changes and is synchronized to local memory, the SDK triggers the `onUserGroupNamecardChanged` event. This event applies in the following scenarios:
 
 - After the current logged-in user updates a name card, other **online members** in the chat group receive the update notification.
-- After the latest chat group member details are retrieved from the server and written to local memory.
 - After automatic synchronization is triggered by a received message and the data is written to local memory when `EMOptions#enableUserInfo` is enabled.
 
 1. Add the delegate:

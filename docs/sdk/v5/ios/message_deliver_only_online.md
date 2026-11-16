@@ -2,14 +2,14 @@
 
 ## Feature overview
 
-EasyIM supports delivering messages only to online users. If the recipient is offline, they cannot receive the message. This feature is useful when an app needs to display information only to online users, such as using command messages to update group poll counts in real time. Only online users need to follow the real-time changes; offline users can retrieve the final state after they get online again.
+EasyIM supports delivering messages only to online users. If the recipient is offline, they cannot receive the message. This feature is useful when an app needs to display information only to online users, such as using command messages to update group poll counts in real time. Only online users need to follow the real-time changes; offline users can retrieve the final state through your app's business logic after they get online again.
 
 ## Usage limits
 
 - **Applicable conversation types:** Supported only in one-to-one chats and chat groups, and **not supported in chat rooms**.
 - **Supported message types:** All message types support this feature and are delivered only to online users.
 - **Offline storage:** **Offline storage is not supported.** If the recipient is offline when a message is sent, they cannot receive it, even after logging in again. Regular messages are delivered in real time when the recipient is online. When the recipient is offline, offline push is triggered, and the EasyIM server delivers messages accumulated during the offline period after the recipient gets online again.
-- **Roaming storage:** Roaming storage is not supported by default. Sent messages are not stored on the EasyIM message server by default, so users cannot retrieve them on another device. **To enable roaming storage for online-only messages, contact the EasyIM business manager.**
+- **Roaming storage:** Roaming storage is not supported by default. Users cannot retrieve these messages on another device. **To enable roaming storage for online-only messages, contact the EasyIM business manager.**
 
 ## Prerequisite
 

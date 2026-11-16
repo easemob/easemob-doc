@@ -16,6 +16,10 @@ Before you start, make sure that the following requirements are met:
 - Initialize the SDK and connect to the server. For details, see [Quickstart](quickstart.html).
 - Understand the API usage limits of EasyIM. For details, see [IM feature limits](/product/limitation.html).
 
+:::warning
+Before deleting data, confirm the target account, conversation, and message scope. After server-side data is deleted, the current user cannot recover it through message roaming. Do not expand the deletion scope through repeated retries.
+:::
+
 ## Clear chat history one way
 
 Call `deleteAllMessagesAndConversations` to clear all local conversations and their messages for the current user, including one-to-one, group, and chat room conversations. The `clearServerData` parameter determines whether to also clear the current user's server-side conversations and messages one way:
