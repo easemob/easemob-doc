@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM SDK supports sending text, image, voice, video, file, location, command, custom, and combined messages.
+The EasyIM SDK supports sending text, image, voice, video, file, location, command, custom, combined, and multi-body messages.
 
 - `ChatManager` provides a unified message-sending feature. The standard process is to create a message object and then call `sendMessage` to send it.
 - By default, users who are not friends can send one-to-one messages to each other. If your app allows one-to-one messages only between friends, [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check) in the EasyIM Console.
@@ -170,7 +170,7 @@ await client.chatManager.sendMessage(message);
 | Parameter                   | Type                    | Required/Optional | Use case                     | Description                                                                                                             |
 | :--------------------- | :---------------------- | :-------- | :--------------------------- | :--------------------------------------------------------------------------------------------------------------- |
 | `content`              | String                  | Required      | Regular chats, notification content, and explanatory text | Core text message content.                                                                                             |
-| `targetLanguages`      | String[]                | Optional      | Translate on sending                   | Target translation languages included when sending, for text messages that require immediate translation.                                                       |
+| `targetLanguages` | String[] | Optional | Translate on sending | Target languages for automatic translation before sending. Omitted or empty arrays disable translation. If translation fails, the message is not sent. |
 | `ext`                  | Record<string, unknown> | Optional      | Business extension information                 | Carries additional JSON-serializable business fields. Store additional business data here instead of writing complex business structures directly in the text content. |
 | `deliverOnlineOnly`    | Boolean                 | Optional      | Transient messages and state notifications           | Whether to deliver the message only to online users.                                                                                           |
 | `webhookEnv`           | String                  | Optional      | Multi-environment callback routing               | Distinguishes different Webhook callback environments.                                                                                  |
@@ -857,7 +857,7 @@ await client.chatManager.sendMessage(message);
 
 #### Logic
 
-- `messageList` is required and must be a list of message objects that can be combined.
+- `messageList` is required and must be a list of message objects that can be combined. It can include sent or received multi-body messages. After downloading and parsing, the child message remains `multi_body`, with all segments retained in `body`.
 - A combined message can contain up to 300 messages.
 - Combined messages can be nested to a maximum of 10 levels. The SDK automatically calculates the current combination level from child messages and rejects creation if the limit is exceeded.
 - Only messages with valid, encodable structures can be combined successfully.
@@ -890,6 +890,146 @@ const items = await client.chatManager.downloadAndParseCombineMessage({
 - Combine and forward only messages that have been successfully sent or received to ensure stable display and parsing results.
 - Use user-friendly text for `title` and `summary` to improve readability in conversation and message lists.
 - To support clients that cannot fully display combined messages, explicitly pass `compatibleText`.
+
+## Send multi-body messages
+
+Starting from SDK 5.2.0, you can combine text, image, file, voice, video, location, and custom content in order within one message, for displays such as mixed text and images or multiple images. A multi-body message contains multiple content segments of the same message; a combined message forwards multiple existing messages.
+
+#### Usage restrictions
+
+- A multi-body message contains 2–20 message bodies, stored and displayed in the supplied order. The body list cannot be empty or contain null or invalid bodies.
+- You can combine text, image, voice, video, file, location, and custom bodies. Command, combined, streaming, and other multi-body messages cannot be used as bodies.
+- Do not add, remove, replace, or reorder bodies during sending. Local attachments that require uploading must remain readable until sending completes.
+- Editing the body or extension fields `ext` of a multi-body message is currently unsupported. Translating multi-body messages is also unsupported; text bodies within them do not trigger automatic translation.
+
+#### Sending process
+
+Follow these steps to send a multi-body message:
+
+1. Create each segment.
+   Use the segment creation methods to prepare text, image, file, voice, video, location, or custom content. Create all segments first, then place them in reading order in the list. For a segment with a local file, retain the same object returned by the creation method.
+2. Create the multi-body message.
+   Call `createMultiBodyMessage()` with the conversation information and `bodies`.
+
+   `conversationId`, `conversationType`, and `bodies` are required. Other parameters follow [Common message creation parameters](#common-message-creation-parameters). `bodies` is a `ReadonlyArray<MultiBodySegment>` containing 2–20 segments in the recipient's display order. Invalid segment counts or segments cause creation to fail with error code `110`.
+3. Send the multi-body message.
+   Call `sendMessage()` and handle attachment upload progress and the sending result for the whole message. Segments with local files are uploaded first; the whole message is sent only after all required uploads succeed. Segments containing only remote URLs and no local files are not uploaded again.
+
+The following example sends three segments: text, a local image, and a remote file. Remote attachments use `originalUrl`, and local attachments use `data`.
+
+```typescript
+// imageFile is a File obtained from a file picker. For local file formats on other platforms, see Cross-platform message examples.
+const text = client.chatManager.createTextMessageBody({
+  content: 'Please see the image and materials',
+});
+const image = client.chatManager.createImageMessageBody({
+  data: imageFile,
+  filename: 'photo.jpg',
+});
+const file = client.chatManager.createFileMessageBody({
+  originalUrl: 'https://example.com/spec.pdf',
+  filename: 'spec.pdf',
+});
+
+const message = client.chatManager.createMultiBodyMessage({
+  conversationId: 'user2',
+  conversationType: 'singleChat',
+  // Use the same objects returned by segment creation methods, in the recipient's display order.
+  bodies: [text, image, file],
+  ext: { bizType: 'materials' },
+});
+
+await client.chatManager.sendMessage(message, {
+  onFileUploadProgress: progress => {
+    // Progress aggregates the sizes of all attachments in the whole message, without a segment index.
+    console.log('Attachment upload progress:', progress.percent);
+  },
+});
+```
+
+#### Key parameters
+
+In addition to common message parameters, `createMultiBodyMessage()` uses `bodies` to describe all segments.
+
+| Parameter | Type | Required | Use case | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `bodies` | `ReadonlyArray<MultiBodySegment>` | Yes | Multiple content segments in one message | Objects returned by segment creation methods. Must contain 2–20 segments in the recipient's display order. Invalid segment counts or segments cause creation to fail with error code `110`. |
+
+`conversationId` and `conversationType` are required. Set `ext`, `receiverList`, `priority`, `needReadReceipt`, `deliverOnlineOnly`, and other parameters on the whole message as needed, rather than on individual segments. For their values and supported scope, see [Common message creation parameters](#common-message-creation-parameters).
+
+**Segment creation methods**
+
+All methods below belong to `ChatManager` and return `MultiBodySegment`. Conversation information and `ext` are set when creating the whole message, rather than on each segment.
+
+| Segment | Creation method | Required parameters | Common optional parameters |
+| :--- | :--- | :--- | :--- |
+| Text | `createTextMessageBody()` | Nonempty `content` | `targetLanguages` does not trigger translation in multi-body messages. |
+| Image | `createImageMessageBody()` | At least one of `data` or `originalUrl` | `filename`, `filetype`, `width`, `height`, `isGif`, `isOriginalImage`, `fileLength`, `thumbnailUrl`. |
+| File | `createFileMessageBody()` | At least one of `data` or `originalUrl` | `filename`, `filetype`, `fileSize`, `fileLength`. |
+| Voice | `createVoiceMessageBody()` | `duration`, and either `data` or `originalUrl` | `filename`, `filetype`, `fileLength`. Duration is in seconds and must be greater than 0. |
+| Video | `createVideoMessageBody()` | `duration`, and either `data` or `originalUrl` | `filename`, `filetype`, `width`, `height`, `fileLength`, `thumbnailUrl`. Duration is in seconds and must be greater than 0. |
+| Location | `createLocationMessageBody()` | `latitude`, `longitude` | `address`, `buildingName`. |
+| Custom | `createCustomMessageBody()` | Nonempty `event` | `params`, of type `Record<string, string>`. |
+
+**Local attachment requirements**
+
+- Local attachment `data` uses the same format as regular attachment messages: `File` on Web, or `{ uri, name?, type?, size? }` on React Native. For obtaining resources, see [Cross-platform message examples](#cross-platform-message-examples).
+- For a local file, place the same object returned by the segment factory into `bodies`. Do not copy, spread, or reconstruct it, because this loses the internally associated local file. After successful assembly, recreate the file segment to use it in another message.
+
+#### Handle sending progress and results
+
+When calling `sendMessage()`, use `onFileUploadProgress` for attachment upload progress for the whole message and the returned Promise for the sending result:
+
+- `onFileUploadProgress`: Progress is aggregated by the sizes of all attachments in the whole message. `loaded` and `total` are the cumulative completed bytes and total bytes; `percent` is overall upload progress from 0–100. The callback does not include a segment index.
+- Attachment segments containing only remote URLs and no local files are not uploaded again.
+- Local attachments are uploaded segment by segment. The whole message is sent only after all uploads succeed. If any attachment upload fails, the whole message is not sent.
+- `onFileUploadComplete` and `onFileUploadError`: Return completion or error information for actual attachment uploads, without a segment index. These callbacks do not replace the sending result for the whole message.
+- A resolved Promise indicates successful sending of the whole message. Upload or sending failures reject the Promise; handle them with `try...catch` or `.catch()`.
+
+Completed attachment uploads do not mean that the whole message was sent successfully. Use the Promise returned by `sendMessage()` to determine the result.
+
+#### Logic
+
+- **Creation validation**: If `bodies` contains fewer than 2 or more than 20 segments, null or invalid segments, or unsupported type combinations, `createMultiBodyMessage()` throws a validation error with code `110`. Validation failure neither creates a message nor consumes associated local files.
+- **Reusing local segments**: After successful assembly, a segment with a local file cannot be directly reused in another new message. Recreate the file segment for a new message. To resend the same failed message, prefer the message object returned by `onFailed` to retain uploaded attachment information. If the callback was not triggered, use the original object passed to that send call. See [Resend failed messages](#resend-failed-messages).
+- **Upload failures and retries**: Local attachments are processed segment by segment. If any upload fails, the whole message is not sent. On retry, attachments with valid remote URLs skip uploading and count toward completed progress; local files still requiring upload must remain readable.
+- **Combined forwarding**: A multi-body message cannot nest other multi-body messages, but it can be a child message in a combined message. Use successfully sent or received multi-body messages for combined forwarding. After downloading and parsing, the child message remains `multi_body` and retains all segments. See [Send combined messages](#send-combined-messages).
+
+**Integration note**: A multi-body message has type `multi_body`. The `body` in both the message and its corresponding conversation summary is directly a segment array. `downloadAttachment()` returns an array of results for multi-body attachments. Adapt display and download logic separately. See [Receive multi-body messages](message_receive.html#receive-multi-body-messages).
+
+## Resend failed messages
+
+After resolving the cause of a sending failure, call `client.chatManager.sendMessage(message, options)` again. Before resending, confirm that the connection has recovered, the conversation information and message content are valid, and local attachments still requiring upload are readable. Do not regenerate `msgLocalId` to resend the same failed message, because this can lose the local attachment associations.
+
+If `onFailed` was triggered, prefer saving and using its returned message object. For image, voice, video, file, and corresponding multi-body attachments, this object can retain successfully uploaded attachment URLs. On retry, the SDK skips uploading those attachments and continues with unfinished ones. Do not determine upload results solely by whether the initially created message object contains server attachment URLs.
+
+In this example, `failedMessage` is the previously saved failed message. If the previous failure did not trigger `onFailed`, use the original message object passed to that send call:
+
+```typescript
+let messageToRetry = failedMessage;
+try {
+  const sentMessage = await client.chatManager.sendMessage(messageToRetry, {
+    onFailed: current => {
+      // Save the returned failed message to reuse uploaded attachments on the next retry.
+      messageToRetry = current;
+    },
+    onFileUploadProgress: progress => {
+      console.log('Resending, attachment upload progress:', progress.percent);
+    },
+  });
+  // The message was sent successfully. Update its sending state in the message list.
+  console.log('Resending succeeded:', sentMessage.msgServerId);
+} catch (error) {
+  // Sending failed again. Save messageToRetry for another retry after the user resolves the cause.
+  console.error('Resending failed:', error);
+}
+```
+
+Even when using `onFailed`, handle rejection of the Promise returned by `sendMessage()`, because some validation or connection errors can be returned before that callback. See [Message sending callbacks](#message-sending-callbacks).
+
+:::tip
+Local attachment associations are stored in memory in the current runtime. After a page refresh or app restart, restoring only the message JSON cannot restore file associations for local attachments that have not been uploaded. Obtain the files again and rebuild the content with the corresponding message or body creation APIs. For local attachment requirements, see [Send multi-body messages](#send-multi-body-messages).
+:::
 
 ## Message sending callbacks
 
@@ -1195,6 +1335,8 @@ await client.chatManager.sendMessage(message);
 | [`createLocationMessage`](#send-location-messages) | `ChatManager` | Creates a location message. |
 | [`createCmdMessage`](#send-command-messages) | `ChatManager` | Creates a command message. |
 | [`createCustomMessage`](#send-custom-messages) | `ChatManager` | Creates a custom message. |
+| [`createMultiBodyMessage`](#send-multi-body-messages) | `ChatManager` | Assembles a multi-body message. |
+| [Segment creation methods such as `createTextMessageBody`](#send-multi-body-messages) | `ChatManager` | Creates multi-body message segments. |
 | [`createCombineMessage`](#send-combined-messages) | `ChatManager` | Creates a combined message. |
 | [`downloadAndParseCombineMessage`](#parse-combined-messages-on-the-recipient) | `ChatManager` | Downloads and parses the original message list in a combined message. |
 | [`sendMessage`](#message-sending-callbacks) | `ChatManager` | Sends a created message and supports sending-process callbacks. |

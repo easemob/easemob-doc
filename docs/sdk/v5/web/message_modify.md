@@ -11,7 +11,7 @@ This feature applies to one-to-one chats, group chats, and chat rooms and suppor
 - Text messages: You can edit `body.content` in the message body and the extension `ext`.
 - Custom messages: You can edit `body.event` and `body.params` in the message body and the extension `ext`.
 - Image, voice, video, file, location, and combined messages: You can edit only the extension `ext`.
-- Command messages: Editing is not supported.
+- Command and multi-body messages: Editing the message body or extension fields `ext` is not supported.
 
 ### Message editing process
 
@@ -48,7 +48,7 @@ Before you begin, ensure that the following requirements are met:
 
 Call `modifyMessage` to edit a successfully sent message. You can update the message body content and message extension `ext`, but identifying fields such as the message ID, sender, recipient, and conversation information do not change.
 
-After a message is edited, the `onMessageUpdated` event is triggered. Relevant members in a one-to-one chat, group chat, or chat room receive this event. The event carries the message ID, conversation information, edited message content, `modifiedInfo`, and other data. Use `modifiedInfo` to view information about the edit, including the edit time `operationTime`, editor `operatorId`, and edit count `operationCount`.
+After a message is successfully edited, conversation members and the editor's other devices receive `onMessageUpdated`, except for the device performing the edit. The current device handles the edit result through the Promise returned by `modifyMessage()`. The event carries the message ID, conversation information, edited message content, `modifiedInfo`, and other data. Use `modifiedInfo` to view information about the edit, including the edit time `operationTime`, editor `operatorId`, and edit count `operationCount`.
 
 :::tip
 By default, a message can be edited up to 10 times.

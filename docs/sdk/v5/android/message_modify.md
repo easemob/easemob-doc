@@ -10,7 +10,7 @@ This feature applies to one-to-one chats, group chats, and chat rooms as follows
 
 - Text and custom messages: Both the message body `body` and extension `ext` can be edited.
 - File, video, audio, image, location, and combined messages: Only the extension `ext` can be edited. The message body cannot be edited.
-- Command messages: Editing is not supported.
+- Command and multi-body messages: Editing the message body or extension fields `ext` is not supported.
 
 ### Message editing process
 

@@ -1,5 +1,41 @@
 # Android IM SDK Release Notes
 
+## v5.2.1 Dev 2026-11-5
+
+#### New features
+
+- **[Multi-body messages](message_send.html#send-multi-body-messages)**: Carry up to 20 bodies in order within one message to send and display different content together. Adds `EMMessage#createMultiBodySendMessage(...)`, `getBodies()`, `setBodies(...)`, and `appendBody(...)` to create, read, and modify body lists; adds `getContentType()` and `EMMessage.Type.MULTIBODY` to identify multi-body messages. `EMClient#isConnected()` is deprecated.
+- **[Query complete connection state](connection.html#retrieve-the-connection-state)**: Distinguish disconnected, connecting, and connected states to display connection progress and determine the current state. Adds `EMClient#getConnectionState()`, returning `DISCONNECTED`, `CONNECTING`, or `CONNECTED` from `EMConnectionState`.
+- **[Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period)**: After a connection has been established successfully, the SDK can defer notifications for recoverable disconnections such as network exceptions, reducing prompts caused by brief network fluctuations. Adds `EMOptions#setDisconnectNotifyThreshold(int seconds)` and `getDisconnectNotifyThreshold()` to set and query the period, defaulting to 10 seconds.
+- **[Configure background message reception](push/push_overview.html#configure-background-message-reception)**: Choose to disconnect the IM persistent connection after entering the background and receive offline notifications through a valid push channel. Adds `EMOptions#setUsePushInBackground(boolean)` and `isUsePushInBackground()` to set and query the background push switch. If enabled and the push channel is valid, the SDK actively disconnects approximately 10 seconds after the app enters the background.
+- **[Query push channel validity](push/push_overview.html#confirm-push-channel-validity)**: Determine whether a valid vendor push channel has been established to help choose a background message reception strategy. Adds `EMPushHelper#isPushTokenBound()` to query current push token binding state.
+
+#### Improvements
+
+- **[Streaming message extension updates](message_stream_receive.html#extension)**: Previously, the local message retained the extension fields from when it was first stored in the database; subsequent chunks or complete message updates did not synchronize them. Now, extension fields from the latest processed chunk or complete message update replace all old local values. An empty new extension clears the original local fields.
+- **[Multi-body attachment transfer progress and download result callbacks](message_receive.html#attachment-download-apis-and-callbacks)**: [Attachment uploads](message_send.html#retrieve-the-attachment-message-sending-progress), original file downloads, and large image downloads aggregate progress weighted by file size into message-level overall progress from 0–100. Thumbnail downloads do not provide progress callbacks. Each download request returns one final result. If any applicable attachment fails, remaining downloads stop.
+
+#### API and behavior changes
+
+- [`getType()` and `getContentType()`](message_send.html#send-multi-body-messages) return `EMMessage.Type.MULTIBODY` for multi-body messages. `getBody()` returns the first body; use `getBodies()` for the complete list. `setBody()` replaces the entire list; `addBody()` and `appendBody()` append bodies.
+- `EMClient#isConnected()` is deprecated, but existing calls remain usable. Use [`EMClient#getConnectionState()`](connection.html#retrieve-the-connection-state).
+- [Recoverable `onDisconnected(int errorCode)` notifications](connection.html#configure-the-disconnection-notification-grace-period) are delayed by 10 seconds by default. Successful reconnection within the grace period suppresses the callback; it is triggered only if the connection has not recovered by the deadline. Values less than or equal to 0 notify immediately. Initial connection failure, invalid tokens, being kicked offline, and similar situations still notify immediately. The grace period affects only callback timing; connection state changes immediately.
+- [`usePushInBackground`](push/push_overview.html#configure-background-message-reception) defaults to `false`. The SDK does not actively disconnect because the app enters the background. Whether the connection can remain active still depends on system background restrictions and the app's keep-alive policy. To enable background push, set `true` before calling `EMClient#init(Context, EMOptions)`. If a connection succeeds while the app is already in the background with the switch enabled and a valid channel, the SDK disconnects immediately without waiting approximately 10 seconds.
+- When [downloading multi-body attachments](message_receive.html#attachment-download-apis-and-callbacks), inapplicable bodies are skipped automatically. If no bodies are applicable, the callback reports success without downloading anything. Large image and thumbnail download APIs both download original voice files for voice bodies. Other single-body download behaviors retain their historical behavior.
+
+#### Fixes
+
+- Fixed automatic reconnection stopping after exhausting the server address list, which could cause an abnormal login state. The SDK now [continues connection attempts with backoff](connection.html#automatic-reconnection), improving recovery on weak networks and during service exceptions.
+- Fixed [single-body attachment downloading](message_receive.html#attachment-download-apis-and-callbacks) differing from historical versions: large image downloading for a single video message again downloads the original video. Unsupported resources or download types return download failure. Multi-body applicability filtering is unchanged.
+- Fixed the body cache not being synchronized after Parcel deserialization, avoiding empty bodies and message sending or attachment download exceptions.
+- Fixed missing pre-send validation when [resending messages](message_send.html#resend-failed-messages). The SDK rejects messages with empty bodies, excessive body counts, or missing multi-body attachments to avoid abnormal sends or crashes.
+- Fixed streaming message extensions not being [replaced and persisted correctly](message_stream_receive.html#extension) on subsequent chunks or complete message updates. Extension fields from the latest processed update replace all old local values; an empty new extension clears the original value.
+- Fixed retries of an old leave request potentially causing abnormal chat room joining state after leaving and rejoining.
+- Fixed other devices potentially missing chat group or chat room allowlist additions, all-member mute, and all-member unmute events in multi-device scenarios.
+- Fixed inaccurate error codes for excessive group member namecard length. The SDK now returns `EMError.INVALID_PARAM`.
+- Fixed requests to change only group public visibility, join approval, or invitation permissions also submitting other group attributes and potentially altering unintended settings.
+- Restored [large image download progress callbacks for `EMChatManager#downloadBigImage(...)`](message_receive.html#attachment-download-apis-and-callbacks). Thumbnail downloads still do not provide progress callbacks.
+
 ## v5.1.0 Dev 2026-9-24
 
 #### Major changes
@@ -64,7 +100,7 @@ The data synchronization WebSocket address is now automatically obtained from th
 11. Fix a crash in `resetLinkVector()`. Fix uninitialized [Presence](presence.md) timestamps and missing `pageSize` validation.
 12. Fix an HTTP timeout unit conversion error for attachment uploads (seconds were not converted to milliseconds, resulting in an excessively short timeout).
 
-## v5.0.0 2026-8-28
+## v5.0.0 Dev 2026-8-28
 
 The EasyIM SDK v5.0.0 provides the following features:
 

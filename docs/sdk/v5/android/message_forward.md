@@ -6,7 +6,7 @@ Forwarding a message means sending a successfully sent or received message in th
 
 The EasyIM Android SDK supports the following forwarding methods:
 
-- **Forward a single message**: Create a new message based on the original message object, reuse the original message body and extensions, and send it to a target one-to-one chat, group chat, chat room, or message thread. This method supports text, image, voice, video, file, location, command, custom, combined, and other message types.
+- **Forward a single message**: Create a new message based on the original message object, reuse the original message body and extensions, and send it to a target one-to-one chat, group chat, chat room, or message thread. This method supports text, image, voice, video, file, location, command, custom, combined, and other message types. Starting from SDK 5.2.1, forwarding multi-body messages requires retaining the complete ordered body list.
 - **Forward multiple messages**: Combine multiple messages into a combined message and send it to the target conversation. The recipient can expand the combined message to view its contents. See [Send combined messages](message_send.html#send-combined-messages).
 
 Forwarding creates and sends a new message with its own message ID, sender, recipient, and sending time. It does not change the original message or its conversation data. For an attachment message, the SDK can reuse the server-side attachment URL in the original message without uploading the attachment again. If the original attachment has been deleted from the server after its storage period expires, the recipient cannot download it.
@@ -21,7 +21,7 @@ Before you begin, ensure that the following requirements are met:
 ## Forward a single message
 
 1. Call `EMChatManager#getMessage` to retrieve the original message. If it returns `null`, retrieve the original message first and confirm that the message and its body exist before proceeding.
-2. Call `EMMessage#createSendMessage` with the original message type to create a new outgoing message, and then call `EMMessage#setBody` to set the original message body. Do not reuse the original message object directly, to avoid retaining its message ID or sending state.
+2. Create a new outgoing message: for single-body messages, call `EMMessage#createSendMessage` and set the body with `setBody`. Starting from SDK 5.2.1, use `createMultiBodySendMessage` for multi-body messages, passing the original message's complete `getBodies()` list. Do not copy only `getBody()` or directly reuse the original message object, to avoid missing content or retaining its ID and sending state.
 3. Call `EMMessage#setTo` to set the target ID, and call `EMMessage#setChatType` to set the target conversation type. When forwarding to a message thread, set the target ID to the thread ID, set the conversation type to `EMMessage.ChatType.GroupChat`, and call `EMMessage#setIsChatThreadMessage(true)`.
 4. To retain business extensions, call `EMMessage#setAttribute` to copy each supported extension field from the original message to the new message. Retain only business data applicable to the target conversation.
 5. Call `EMMessage#setMessageStatusCallback` to set the sending status callback, and then call `EMChatManager#sendMessage` to send the new message. Observe the sending result through the callback.
@@ -48,20 +48,24 @@ if (targetMessage == null) {
 // Pass the peer user ID for one-to-one chat, group ID for group chat, or chat room ID for a chat room.
 String to = "conversationId";
 
-// Create a new message of the same type as the original message.
-EMMessage newMessage = EMMessage.createSendMessage(
-        targetMessage.getType());
-newMessage.setTo(to);
+// Create a new message. Copy the complete list for multi-body messages, rather than only getBody().
+EMMessage newMessage;
+if (targetMessage.getType() == EMMessage.Type.MULTIBODY) {
+    newMessage = EMMessage.createMultiBodySendMessage(to, targetMessage.getBodies());
+} else {
+    newMessage = EMMessage.createSendMessage(targetMessage.getType());
+    newMessage.setTo(to);
+    newMessage.setBody(targetMessage.getBody());
+}
+if (newMessage == null) {
+    return;
+}
 
 // The default is one-to-one chat. For a group chat or chat room, set the type to GroupChat or ChatRoom, respectively.
 newMessage.setChatType(EMMessage.ChatType.GroupChat);
 
 // To forward to a message thread, set to to the thread ID and mark the message as a thread message.
 // newMessage.setIsChatThreadMessage(true);
-
-// Reuse the original message body.
-EMMessageBody targetMessageBody = targetMessage.getBody();
-newMessage.setBody(targetMessageBody);
 
 // Copy extension fields of SDK-supported types from the original message to the new message.
 Map<String, Object> ext = targetMessage.ext();
@@ -114,5 +118,7 @@ To forward multiple messages, EasyIM supports combining them into a single combi
 | :--- | :--- | :--- |
 | [`getMessage`](#forward-a-single-message) | `EMChatManager` | Retrieve a local message by message ID. |
 | [`createSendMessage`](#forward-a-single-message) | `EMMessage` | Create a message of a specified type to send. |
+| [`createMultiBodySendMessage`](#forward-a-single-message) | `EMMessage` | Creates a multi-body forwarding message from the complete ordered body list. |
+| [`getBodies`](#forward-a-single-message) | `EMMessage` | Retrieves all ordered bodies of the original message. |
 | [`ext`](#forward-a-single-message) | `EMMessage` | Retrieve the original message's extensions. |
 | [`sendMessage`](#forward-a-single-message) | `EMChatManager` | Send a forwarded message. |

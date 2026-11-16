@@ -1,5 +1,25 @@
 # iOS IM SDK Release Notes
 
+## v5.2.0 Dev 2026-11-5
+
+#### New features
+
+- **[Multi-body messages](message_send.html#send-multi-body-messages)**: A message can contain multiple text, image, video, voice, file, location, or custom bodies in order for mixed text and images or multiple-image content. Adds `-[EMChatMessage initWithConversationID:bodies:ext:]`, the `bodies` property to set or read the complete ordered body list, `appendBody:` to append bodies, and `contentType` to identify the content type. Each message supports up to 20 bodies.
+- **[Query complete connection state](connection.html#retrieve-the-connection-state)**: `[EMClient sharedClient].connectionState` returns `EMConnectionState`, distinguishing disconnected, connecting, and connected states to display connection progress and determine the current state. `isConnected` is deprecated, but existing calls remain usable. Use the new property.
+- **[Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period)**: After a connection has been established successfully, the SDK can defer notifications for recoverable disconnections such as network exceptions, reducing prompts caused by brief network fluctuations. Adds `EMOptions.disconnectNotifyThreshold` to set or query the period in seconds, defaulting to 10 seconds.
+
+#### Improvements
+
+- **[Streaming message extension updates](message_stream_receive.html#extension)**: Previously, the local message retained the extension fields from when it was first stored in the database; subsequent chunks or complete message updates did not synchronize them. Now, extension fields (`ext`) from the latest processed chunk or complete message update replace all old local values and are saved to the database. An empty new extension clears the original local fields.
+- **[Multi-body attachment transfer](message_receive.html#attachment-download-apis-and-callbacks)**: Handles multiple attachments in a message, aggregating progress weighted by file size through existing progress callbacks to report overall upload or download progress for the whole message. Thumbnail downloads report only completion, without progress.
+
+#### Fixes
+
+- Fixed a potential crash when parsing error information after an attachment download failed with an empty server error response.
+- Fixed the SDK potentially stopping automatic reconnection after exhausting available server addresses during a network exception.
+- Fixed attachment download callbacks potentially overwriting sending callbacks for the same message, causing sending and download results to interfere with each other.
+- Fixed message state potentially remaining in the sending state after pre-send validation failed.
+
 ## v5.1.0 Dev 2026-9-24
 
 #### Major changes
@@ -38,7 +58,7 @@ Support [retrieving the local conversation list by page](conversation_list.html#
 - Fix an issue where sending an attachment message does not trigger a callback when `EMOptions#isAutoTransferMessageAttachments` is disabled and the message has an empty `remotePath`.
 - Fix inaccurate conversation Do Not Disturb information caused by parsing errors during multi-device synchronization after Do Not Disturb is set.
 
-## v5.0.0 2026-8-28
+## v5.0.0 Dev 2026-8-28
 
 The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 

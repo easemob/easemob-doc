@@ -45,7 +45,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 ```
 
 :::tip
-The app can use `EMClient#isLoggedIn()` and `EMClient#isConnected()` to determine the login and server connection states, respectively, but it cannot rely on the SDK to initiate login automatically.
+Use `EMClient#isLoggedIn()` to determine the login state. Starting from SDK 5.2.1, we recommend querying the complete server connection state through `EMClient#getConnectionState()`. See [Retrieve the connection state](connection.html#retrieve-the-connection-state). The SDK does not initiate login automatically.
 :::
 
 ## Use the local database before login is complete
@@ -165,11 +165,12 @@ String currentUser = EMClient.getInstance().getCurrentUser();
 
 ## Retrieve the login state
 
-Call `EMClient#isLoggedIn` to determine whether the current user is logged in and `EMClient#isConnected` to determine whether the SDK is connected to the EasyIM server. Login and connection states have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently connected to the server.
+Call `EMClient#isLoggedIn()` to determine whether the current user is logged in. Starting from SDK 5.2.1, call `EMClient#getConnectionState()` to distinguish disconnected, connecting, and connected states. The original `isConnected()` is deprecated. Login and connection states have different meanings. For example, when the network is disconnected, the user might remain logged in but not currently connected to the server.
 
 ```java
 boolean loggedIn = EMClient.getInstance().isLoggedIn();
-boolean connected = EMClient.getInstance().isConnected();
+EMConnectionState state = EMClient.getInstance().getConnectionState();
+boolean connected = state == EMConnectionState.CONNECTED;
 ```
 
 ## Logout

@@ -2,6 +2,14 @@
 
 The EasyIM SDK has integrated FCM push-related logic. You still need to complete the following steps.
 
+## Background connection strategy
+
+Starting from SDK 5.2.1, FCM and other vendor push channels use `usePushInBackground` to control background disconnection. The SDK no longer disconnects the persistent connection by default three minutes after the app enters the background. The switch defaults to `false`. To enable background disconnection, set `EMOptions#setUsePushInBackground(true)` before SDK initialization.
+
+Starting from SDK 5.2.1, configure background disconnection through `EMOptions#setUsePushInBackground(boolean)`. FCM and other vendor channels follow the same strategy. With the default `false`, the SDK does not actively disconnect the IM persistent connection because the app enters the background. To enable it, set `true` before initialization. If the push channel is valid when the app enters the background, the SDK schedules disconnection after approximately 10 seconds. Returning to the foreground cancels a pending task. If a connection succeeds while the app is already in the background, with the switch enabled and a valid channel, the SDK disconnects immediately without waiting approximately 10 seconds. After disconnection, messages meeting server-side offline push conditions generate notifications through the push channel.
+
+Query the switch with `EMOptions#isUsePushInBackground()`. See [Configure background message reception](push_overview.html#configure-background-message-reception).
+
 ## FCM push integration
 
 ### Step 1: Add Firebase in the [Firebase console](https://console.firebase.google.com/)
@@ -123,12 +131,16 @@ EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
 builder.enableFCM("Your FCM sender id");
 // Set pushconfig to EMOptions.
 options.setPushConfig(builder.build());
+// Optional: Enable background push. Defaults to false; set before init.
+options.setUsePushInBackground(true);
 // Initialize the EasyIM SDK.
 EMClient.getInstance().init(this, options);
 // After EasyIM SDK initialization.
 EMPushHelper.getInstance().setPushListener(new PushListener() {
     @Override
     public void onBindTokenSuccess(EMPushType pushType, String pushToken) {
+        // After binding succeeds, query whether the current push channel is valid.
+        boolean pushTokenBound = EMPushHelper.getInstance().isPushTokenBound();
         EMLog.e("PushClient", "Push client bind token to easemob server success: " + pushType + " - " + pushToken);
     }
    @Override
@@ -244,5 +256,7 @@ To ensure reliable test results, avoid using an emulator.
 | [`init`](#step-4-integrate-fcm-push) | `EMClient` | Initializes the Android SDK. |
 | [`sendFCMTokenToServer`](#step-4-integrate-fcm-push) | `EMClient` | Uploads the FCM Token to the EasyIM server. |
 | [`setFCMPushToken`](#step-4-integrate-fcm-push) | `EMPushHelper` | Saves the FCM Token of the current device. |
+| [`isPushTokenBound`](push_overview.html#confirm-push-channel-validity) | `EMPushHelper` | Queries whether the current vendor push channel is valid. |
+| [`setUsePushInBackground`](#background-connection-strategy) | `EMOptions` | Sets the background push switch before SDK initialization. |
 | [`isSdkInited`](#step-4-integrate-fcm-push) | `EMClient` | Checks whether the SDK has been initialized. |
 | [`isLoggedIn`](#step-4-integrate-fcm-push) | `EMClient` | Checks whether the current user has logged in. |

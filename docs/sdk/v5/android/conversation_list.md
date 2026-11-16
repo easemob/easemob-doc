@@ -234,6 +234,60 @@ String conversationName = conversation.getConversationName();
 String conversationAvatar = conversation.getConversationAvatar();
 ```
 
+## Display a summary of the last message
+
+Conversation lists typically display a short summary of the last message. The SDK provides message data; your app generates display text according to the message type and truncates it to fit the UI. The text below is illustrative and is not a fixed SDK return value.
+
+| Message type | Suggested summary |
+| :--- | :--- |
+| Text | Display the text content. |
+| Image (including GIF) | Display "[Image]". Adjust the label in your app if GIFs need to be distinguished. |
+| Voice | Display "[Voice]", optionally with the duration. |
+| Video | Display "[Video]". |
+| File | Display "[File]", optionally with the filename. |
+| Location | Display "[Location]", optionally with the place name or address. |
+| Custom | Generate a summary from the custom event and business parameters, using fallback text for unrecognized content. |
+| Combined | Use the body's title or summary, or display "[Chat history]" for all combined messages. |
+| Multi-body | Display "[Multi-body message]", or combine text and type labels in body order, such as "Hello [Image]". |
+
+Command messages carry business instructions and are not displayed as regular conversation summaries.
+
+Call `EMConversation#getLastMessage()` to retrieve the last message, and use `getContentType()` or `getType()` to identify the whole message type. If there is no last message or the body is empty, set the summary to an empty string. This example uses fixed labels for non-text messages and prefers the summary provided by a combined message:
+
+```java
+EMMessage lastMessage = conversation.getLastMessage();
+String summary = "";
+if (lastMessage != null && !lastMessage.getBodies().isEmpty()) {
+    switch (lastMessage.getContentType()) {
+        case TXT:
+            summary = ((EMTextMessageBody) lastMessage.getBody()).getMessage();
+            break;
+        case IMAGE: summary = "[Image]"; break;
+        case VOICE: summary = "[Voice]"; break;
+        case VIDEO: summary = "[Video]"; break;
+        case FILE: summary = "[File]"; break;
+        case LOCATION: summary = "[Location]"; break;
+        case CUSTOM: summary = "[Custom message]"; break;
+        case COMBINE:
+            String combinedSummary =
+                    ((EMCombineMessageBody) lastMessage.getBody()).getSummary();
+            summary = combinedSummary == null || combinedSummary.isEmpty()
+                    ? "[Chat history]" : combinedSummary;
+            break;
+        case MULTIBODY: summary = "[Multi-body message]"; break;
+        case CMD: break;
+        default: summary = "[Message]"; break;
+    }
+}
+// Use summary to update the current conversation summary.
+```
+
+:::tip
+Starting from SDK 5.2.1, both `getContentType()` and `getType()` return `EMMessage.Type.MULTIBODY` for a multi-body message. To combine summaries of its bodies, identify this type first, then read the complete body list in order with `getBodies()`. `getBody()` returns only the first body and cannot be used alone to identify the whole message type or obtain all content. See [Receive multi-body messages](message_receive.html#receive-multi-body-messages).
+:::
+
+After the conversation list is updated, read the last message again and regenerate its summary. For monitoring, see [Monitor conversation list updates](#monitor-conversation-list-updates).
+
 ## Clear conversations from memory
 
 Call `cleanConversationsMemoryCache` to clear all conversations from memory and release memory. After clearing, `getAllConversations` and `getAllConversationsBySort` may return no conversations, and `getUnreadMessageCount` may return a total unread message count of `0`.

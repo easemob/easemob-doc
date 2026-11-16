@@ -51,6 +51,7 @@ You can perform the following user account operations by calling RESTful APIs:
 | Command message       | Send a command to notify the recipient of an operation to perform. After receiving the message, the recipient's system can process it as needed.<br/> Command messages are not displayed in the UI or stored in the local database. |
 | Custom message     | A custom message type, such as a red packet message or template message. |
 | Combined message       | Combine multiple messages into one. A combined message can contain up to 300 original messages.|
+| Multi-body message | Combines text, image, voice, video, file, location, or custom bodies in order in one message, up to 20 bodies. Editing or translation is currently unsupported. |
 | Streaming message       | A message transmission method that splits a complete message into multiple chunks and sends and receives them incrementally in sequence.|
 
 :::tip
@@ -62,7 +63,7 @@ You can perform the following user account operations by calling RESTful APIs:
 
 | Feature           | Description           |
 | :------------- | :---------------------- |
-| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
+| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, combined, and multi-body messages. |
 | Send and receive streaming messages | Send and receive streaming messages. Streaming messages can be sent through a server-side API, while the SDK supports only receiving them.  |
 | Local storage       | Store received messages locally.         |
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
@@ -247,7 +248,7 @@ Use the EasyIM [content moderation service](/value-added/moderation/moderation_o
 
 | Feature           | Description                           |
 | :------------- | :---------------------- |
-| Text message translation   | Translate text messages only.           |
+| Text message translation | Supports only single-body text messages. Multi-body messages are unsupported. |
 | Specify the source language | Pass the source language code for translation.   |
 | Multiple target languages | Translate a message into multiple target languages at once.   |
 | Translation results   | Return the translation result for each target language. |

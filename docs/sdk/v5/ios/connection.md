@@ -61,11 +61,32 @@ EMClient.shared().login(
 
 ## Retrieve the connection state
 
-Use `EMClient.isConnected` to query whether the SDK is currently connected to the server:
+Starting from SDK 5.2.0, use `EMClient.connectionState` to query the SDK's current connection state with the chat server. This read-only property returns `EMConnectionState`, distinguishing three states:
+
+| Swift enum value | Objective-C enum value | Description |
+| :--- | :--- | :--- |
+| `.disconnected` | `EMConnectionDisconnected` | Not connected to the chat server. Also returned before SDK initialization. |
+| `.connecting` | `EMConnectionConnecting` | Connecting to the chat server. |
+| `.connected` | `EMConnectionConnected` | Connected to the chat server. |
 
 ```swift
-let connected = EMClient.shared().isConnected
+let state = EMClient.shared().connectionState
+switch state {
+case .disconnected:
+    // Display the disconnected state.
+    break
+case .connecting:
+    // Display the connecting state.
+    break
+case .connected:
+    // Display the connected state.
+    break
+@unknown default:
+    break
+}
 ```
+
+`isConnected` is deprecated starting from SDK 5.2.0, but existing calls remain usable. Use `connectionState` to distinguish disconnected, connecting, and connected states.
 
 Use `EMClient.isLoggedIn` to query whether the current user is logged in:
 
@@ -73,18 +94,13 @@ Use `EMClient.isLoggedIn` to query whether the current user is logged in:
 let loggedIn = EMClient.shared().isLoggedIn
 ```
 
-| API | Description |
-| :--- | :--- |
-| `isConnected` | Whether the SDK is currently connected to the chat server. |
-| `isLoggedIn` | Whether the current user is logged in to the chat server. |
-
 :::tip
-Connection state and login state have different meanings. On a weak network or when switching networks, the user might remain logged in while the persistent connection is temporarily disconnected and the SDK automatically reconnects. The business UI should process state changes based on delegate callbacks instead of relying only on a single property query.
+Connection state and login state have different meanings. On a weak network or when switching networks, the user might remain logged in while the persistent connection is temporarily interrupted and automatically reconnected by the SDK. Update the UI using `connectionState` queries and connection callbacks. During the grace period, the actual state may have changed even if no disconnection callback has been received.
 :::
 
 ## Monitor connection changes
 
-Register `EMClientDelegate` through `EMClient.add(_:delegateQueue:)`. We recommend registering it before calling the login API to avoid missing login connection establishment and subsequent synchronization states.
+Register `EMClientDelegate` through `EMClient.add(_:delegateQueue:)`. We recommend registering it before calling the login API to avoid missing login connection establishment and subsequent synchronization states. Connection listeners report connected or disconnected states. Query `connectionState` for the connecting state. Disconnection callback timing also follows the [disconnection notification grace period](#configure-the-disconnection-notification-grace-period).
 
 When `nil` is passed to `delegateQueue`, the current iOS SDK implementation dispatches delegate callbacks to the main queue. If you pass a custom queue, callbacks run on the specified queue.
 
@@ -92,7 +108,7 @@ When `nil` is passed to `delegateQueue`, the current iOS SDK implementation disp
 
 | Swift callback | Trigger condition | Description |
 | :--- | :--- | :--- |
-| `connectionStateDidChange(_:)` | Triggered when the connection state between the SDK and server changes. | The parameter is `.connected` or `.disconnected`. It can be triggered when the first login connection succeeds, the connection is disconnected, and automatic reconnection succeeds. |
+| `connectionStateDidChange(_:)` | Triggered when the SDK notifies the app of a connected or disconnected state. | The parameter is `.connected` or `.disconnected`. Recoverable disconnection notification timing follows the grace period. Query `connectionState` for the connecting state. |
 | `onDatabaseOpened(_:username:)` | Triggered when the local database opening process after login ends. | `error == nil` indicates that the database was opened successfully. It is also triggered when opening fails, times out, or ends because of a disconnection. This callback cannot replace the successful connection callback. |
 | `userAccountDidLoginFromOtherDevice(with:)` | Triggered when the current account logs in on another device or a device change occurs. | `EMLoginExtensionInfo?` can contain the newly logged-in device's name and extension information. The current implementation subsequently clears the local login information. |
 | `userAccountDidRemoveFromServer()` | Triggered when the current account is deleted from the server. | The current implementation logs out and clears the local login information. |
@@ -112,8 +128,8 @@ final class ConnectionListener: NSObject, EMClientDelegate {
     func connectionStateDidChange(_ connectionState: EMConnectionState) {
         if connectionState == .connected {
             // The connection or automatic reconnection succeeded.
-        } else {
-            // The connection is disconnected. The SDK automatically reconnects after recoverable network issues.
+        } else if connectionState == .disconnected {
+            // The SDK reports disconnection. It automatically reconnects for recoverable network problems.
         }
     }
 
@@ -184,13 +200,40 @@ EMClient.shared().removeDelegate(connectionListener)
 Retain the listener object until you call `removeDelegate(_:)`. If you pass a custom queue to `delegateQueue`, switch to the main thread before updating the UI, and do not perform large amounts of time-consuming work in callbacks.
 :::
 
+## Configure the disconnection notification grace period
+
+Starting from SDK 5.2.0, use `EMOptions.disconnectNotifyThreshold` to set or query the disconnection notification grace period in seconds. The default is `10`. After a connection has been established successfully, the SDK can defer notifications for recoverable disconnections such as network exceptions, reducing prompts caused by brief network fluctuations.
+
+- Successful reconnection within the grace period suppresses the disconnection callback for that interruption.
+- If the connection has not recovered when the grace period ends, `connectionStateDidChange(_:)` is triggered with `.disconnected`.
+- A value less than or equal to `0` disables the grace period and notifies the app immediately on disconnection.
+- Initial connection failure, invalid tokens, being kicked offline, and similar situations are still reported promptly through the corresponding completion or dedicated callbacks, without waiting for the recoverable disconnection grace period.
+
+This example configures it before SDK initialization:
+
+```swift
+let options = EMOptions(appkey: "your-org#your-app")
+options.disconnectNotifyThreshold = 10
+
+if let error = EMClient.shared().initializeSDK(with: options) {
+    print("SDK initialization failed: \(error.errorDescription)")
+}
+
+// Read the current setting in seconds.
+let threshold = options.disconnectNotifyThreshold
+```
+
+:::tip
+The grace period affects only notification timing for the relevant disconnection callbacks. It does not delay actual connection state changes or control automatic reconnection or APNs sending time. Query `connectionState` to determine the current client connection state, rather than relying solely on whether a disconnection callback has been received.
+:::
+
 ## Connection recovery and exception handling
 
 ### Automatic reconnection
 
 After login succeeds, if the connection is interrupted because of a weak network signal, network switching, or another recoverable cause, the SDK automatically attempts to reconnect. The app does not need to repeatedly call the login API.
 
-When the connection is disconnected, `connectionStateDidChange(_:)` returns `.disconnected`. After reconnection succeeds, it returns `.connected`. The iOS SDK exposes only two `EMConnectionState` values, connected and disconnected, and does not provide separate connecting or reconnection-failed states. The app should display the connection state based on this callback, `isConnected`, and the system network state.
+For recoverable disconnections, the SDK follows the [disconnection notification grace period](#configure-the-disconnection-notification-grace-period) to determine whether to report `.disconnected`. After successful reconnection, it reports `.connected`. Query disconnected, connecting, and connected states through `connectionState`. The SDK does not provide a separate reconnection-failed state.
 
 The following conditions cannot be recovered through automatic reconnection alone. The app must handle account, Token, device, or service restrictions based on dedicated callbacks:
 
@@ -252,10 +295,8 @@ Use `syncDataStart(with:)` and `syncDataFinished(_:type:)` to monitor the post-l
 - Register `EMClientDelegate` before calling the Token-based login API to avoid missing connection, Token, and synchronization state callbacks.
 - The iOS SDK no longer relies on automatic login. The app should explicitly log in when it starts or needs to establish an EasyIM session.
 - Do not immediately call the login API repeatedly after a weak-network disconnection. The SDK automatically reconnects in recoverable scenarios.
-- Use `isConnected` to query the current connection state and `isLoggedIn` to query the login state, and preferentially drive UI updates through delegate callbacks.
-  
-  **Note**: `isConnected()` is generally used for UI connection status indicators. There is **no need** to manually verify the connection status before calling APIs like sending messages or joining groups/chat rooms, as the SDK handles connection checks internally and automatically retries unfinished operations after reconnecting.
-  
+- Use `connectionState` to query the current connection state and `isLoggedIn` to query the login state, together with delegate callbacks to update the UI. During the grace period, do not assume the connection remains available because no disconnection callback has been received.
+  **Note**: Connection queries are mainly for UI display and business decisions. You do not need to add a connection check uniformly before APIs to send messages or join chat groups or chat rooms. Handle operation results through each API's completion callback.
 - Renew the Token as soon as possible after receiving `tokenWillExpire(_:)`. After receiving `tokenDidExpire(_:)`, obtain a new Token and log in again.
 - Use abnormal account callbacks to handle device, account, and service restrictions, and provide a clear prompt based on `EMError.code`.
 - Call `removeDelegate(_:)` when monitoring is no longer required to avoid duplicate callbacks.
@@ -268,6 +309,8 @@ Use `syncDataStart(with:)` and `syncDataFinished(_:type:)` to monitor the post-l
 | [`initializeSDKWithOptions`](#connection-lifecycle) | `EMClient` | Initializes the iOS SDK. The Swift call is `initializeSDK(with:)`. |
 | [`loginWithUsername`](#connection-lifecycle) | `EMClient` | Explicitly logs in using a user ID and Token and establishes a connection. |
 | [`logout`](#connection-lifecycle) | `EMClient` | Actively logs out and closes the current connection. |
-| [`isConnected`](#retrieve-the-connection-state) | `EMClient` | Queries whether the SDK is currently connected to the server. |
+| [`connectionState`](#retrieve-the-connection-state) | `EMClient` | Queries disconnected, connecting, or connected state. |
+| [`isConnected`](#retrieve-the-connection-state) | `EMClient` | Deprecated. Use `connectionState`. |
 | [`isLoggedIn`](#retrieve-the-connection-state) | `EMClient` | Queries whether the current user is logged in to the chat server. |
+| [`disconnectNotifyThreshold`](#configure-the-disconnection-notification-grace-period) | `EMOptions` | Sets or queries the disconnection notification grace period in seconds. Defaults to `10`. |
 | [`renewToken`](#token-lifecycle) | `EMClient` | Asynchronously updates the Token of the currently logged-in user. |

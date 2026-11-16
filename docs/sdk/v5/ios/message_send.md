@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM iOS SDK creates message bodies through the corresponding subclasses of `EMMessageBody`, wraps messages in `EMChatMessage`, and sends them through `IEMChatManager`. The SDK supports text, image, GIF, voice, video, file, location, command, custom, and combined messages in one-to-one chats, group chats, and chat rooms.
+The EasyIM iOS SDK creates message bodies through the corresponding subclasses of `EMMessageBody`, wraps messages in `EMChatMessage`, and sends them through `IEMChatManager`. The SDK supports text, image, GIF, voice, video, file, location, command, custom, and combined messages in one-to-one chats, group chats, and chat rooms. Starting from SDK 5.2.0, you can also combine multiple bodies in order in one [multi-body message](#send-multi-body-messages).
 
 - For one-to-one chat, EasyIM supports messaging between strangers by default, which means users can chat without adding each other as friends. To allow one-to-one messages only between friends, [enable friend relationship check](/product/console/basic_user.html#friend-relationship-check).
 - For group chats and chat rooms, a user can send a message to only one group or chat room to which the user belongs at a time.
@@ -32,7 +32,7 @@ The iOS SDK creates message bodies through different `EMMessageBody` subclasses 
 | Parameter or property | Type | Configuration | Required | Use case | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Target conversation ID | `NSString *` | `initWithConversationID` | Required | All messages | Pass the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for a chat room. |
-| Message content | `EMMessageBody *` | Message body initialization parameter | Required | All messages | Set text, an attachment path, location coordinates, a command, or a custom event according to the message type. |
+| Message content | `EMMessageBody *` or `NSArray<EMMessageBody *> *` | Message initializer, `body`, or `bodies` | Required | All messages | Use `body` for single-body messages. Use `bodies` for a complete ordered multi-body list, or `appendBody:` to append. Replacing `body` with another body removes all other bodies from the original list. See [Manage the body list](#send-multi-body-messages). |
 | Conversation type | `EMChatType` | `chatType` | Required for group chats and chat rooms | All messages | Set it to `EMChatTypeChat`, `EMChatTypeGroupChat`, or `EMChatTypeChatRoom` for one-to-one chat, group chat, or a chat room, respectively. |
 | Extension fields | `NSDictionary *` | `ext` | Optional | All messages | Carry custom business information. Extension fields count toward the message size limit. |
 | Online-only delivery | `BOOL` | `deliverOnlineOnly` | Optional | All messages | When set to `YES`, the message is delivered only to online users and is not stored offline. |
@@ -954,6 +954,147 @@ Before creating a combined message, we recommend checking the following:
 - `title` and `summary` should clearly describe the combined message content.
 - We recommend always setting `compatibleText` so that earlier clients that do not support combined messages can display fallback text.
 
+## Send multi-body messages
+
+Starting from SDK 5.2.0, a message can carry multiple text, image, video, voice, file, location, or custom bodies in order, for content such as mixed text and images or multiple images. For multiple bodies, `EMChatMessage.contentType` returns `EMMessageBodyTypeMultiBody`; each body retains its own `type`.
+
+A multi-body message combines multiple bodies in one message. A [combined message](#send-combined-messages) packages multiple existing messages for forwarding chat history.
+
+#### Usage restrictions
+
+- A multi-body message contains 2–20 message bodies, stored and displayed in the supplied order. The body list cannot be empty or contain null or invalid bodies.
+- You can combine text, image, voice, video, file, location, and custom bodies. Command, combined, streaming, and other multi-body messages cannot be used as bodies.
+- Do not add, remove, replace, or reorder bodies during sending. Local attachments that require uploading must remain readable until sending completes.
+- Editing the body or extension fields `ext` of a multi-body message is currently unsupported. Translating multi-body messages is also unsupported; text bodies within them do not trigger automatic translation.
+
+#### Sending process
+
+Follow these steps to send a multi-body message:
+
+1. Create each message body.
+   Prepare the content with the initializers for text, image, file, voice, video, location, or custom bodies. Create all bodies first, then place them in reading order in the list. Local attachments must remain readable.
+2. Create the multi-body message.
+   Call `-[EMChatMessage initWithConversationID:bodies:ext:]`. `aConversationId` is a user, chat group, or chat room ID and also serves as the recipient; `aBodies` is the complete ordered body list; `aExt` is an optional extension dictionary. The sender is the current user. Initialization returns `nil` if body list validation fails.
+
+   A list containing one body is still treated as a single-body message. New messages default to one-to-one chat. For a chat group or chat room, set the corresponding `chatType`.
+3. Send the multi-body message.
+   Call `sendMessage:progress:completion:`. Local attachments that require SDK uploading are uploaded before the whole message is sent. Use `progress` and `completion` to handle overall progress and the final result.
+4. Receive and display the message.
+   The recipient iterates through the complete body list in `messagesDidReceive:`, displays the bodies in order, and downloads attachments as needed. See [Receive multi-body messages](message_receive.html#receive-multi-body-messages).
+
+The following example creates and sends a multi-body message in the order of text, a local image, and a local file:
+
+```objectivec
+NSString *conversationId = @"conversationId";
+// Replace with local image and file paths that the app can read.
+NSString *imagePath = @"/path/to/image.jpg";
+NSString *filePath = @"/path/to/spec.pdf";
+
+EMTextMessageBody *textBody = [[EMTextMessageBody alloc] initWithText:@"Image description"];
+EMImageMessageBody *imageBody = [[EMImageMessageBody alloc]
+    initWithLocalPath:imagePath displayName:@"image.jpg"];
+EMFileMessageBody *fileBody = [[EMFileMessageBody alloc]
+    initWithLocalPath:filePath displayName:@"spec.pdf"];
+
+EMChatMessage *message = [[EMChatMessage alloc]
+    initWithConversationID:conversationId
+    bodies:@[textBody, imageBody, fileBody]
+    ext:nil];
+if (!message) {
+    return;
+}
+
+// Defaults to one-to-one chat. Set EMChatTypeGroupChat or EMChatTypeChatRoom for a chat group or chat room.
+message.chatType = EMChatTypeChat;
+
+[[EMClient sharedClient].chatManager sendMessage:message
+    progress:^(int progress) {
+        // Overall upload progress for all attachments, weighted by original file size, from 0–100.
+    }
+    completion:^(EMChatMessage *sentMessage, EMError *error) {
+        if (error) {
+            // Sending the whole message failed. Handle the error information.
+            return;
+        }
+        // The whole message was sent successfully.
+    }];
+```
+
+#### Key parameters
+
+`initWithConversationID:bodies:ext:` initializes a message with the recipient and complete body list. For other common settings, see [Common message creation parameters](#common-message-creation-parameters).
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `aConversationId` | `NSString *` | Yes | The conversation ID, also used as the recipient. Pass the other user's ID for one-to-one chat, the chat group ID for group chat, or the chat room ID for chat rooms. |
+| `aBodies` | `NSArray<EMMessageBody *> *` | Yes | The complete ordered body list. A multi-body message contains 2–20 bodies; a list containing one body is still treated as a single-body message. |
+| `aExt` | `NSDictionary *` | No | Business extension fields for the whole message. Can be `nil`. |
+| `chatType` | `EMChatType` | For chat groups and chat rooms | Defaults to `EMChatTypeChat`. Set `EMChatTypeGroupChat` for chat groups or `EMChatTypeChatRoom` for chat rooms. |
+
+**Create message bodies**
+
+| Body | Type and creation instructions |
+| :--- | :--- |
+| Text | `EMTextMessageBody`. See [Send text messages](#send-text-messages). |
+| Image | `EMImageMessageBody`. See [Send image messages](#send-image-messages). |
+| File | `EMFileMessageBody`. See [Send file messages](#send-file-messages). |
+| Voice | `EMVoiceMessageBody`. See [Send voice messages](#send-voice-messages). |
+| Video | `EMVideoMessageBody`. See [Send video messages](#send-video-messages). |
+| Location | `EMLocationMessageBody`. See [Send location messages](#send-location-messages). |
+| Custom | `EMCustomMessageBody`. See [Send custom messages](#send-custom-messages). |
+
+**Manage the body list**
+
+| API | Behavior |
+| :--- | :--- |
+| `bodies` | Reads the complete ordered body list. Assign this property to replace all bodies. |
+| `body` | Returns the first body, referencing the same data as the first element of `bodies`. Replacing it with another valid body leaves only that body in the list. |
+| `appendBody:` | Appends a body to the list and validates the entire resulting list. |
+| `contentType` | Returns `EMMessageBodyTypeMultiBody` for multiple bodies, the body's type for one body, or `EMMessageBodyTypeText` for no bodies. |
+
+Both assignment to `bodies` and `appendBody:` validate the entire list. If the list is empty, contains invalid elements, or has an unsupported type combination, the original list is unchanged and a log is recorded. More than 20 bodies result in `EMErrorMessageInvalid` during pre-send validation. Complete body list changes before sending.
+
+#### Handle sending progress and results
+
+Use `progress` and `completion` in `sendMessage:progress:completion:` to handle the upload progress and sending result for the whole message:
+
+- `progress`: Upload progress is weighted by each attachment's original file size and aggregated into message-level overall progress from 0–100. Individual body upload progress is not reported separately.
+- `completion`: Called when sending the whole message completes. A `nil` `error` indicates success; a non-`nil` value indicates attachment upload or message sending failure. Handle it based on the error information.
+
+`progress` and `completion` run on the main thread. Completed attachment uploads do not mean that the whole message was sent successfully. Use the `completion` result to determine success.
+
+#### Logic
+
+- **Creation and sending validation**: Initialization returns `nil` if body list validation fails. Unsupported types among multiple bodies are also rejected during initialization or list assignment. More than 20 bodies result in `EMErrorMessageInvalid` during pre-send validation. Successful initialization does not mean all sending validation has passed.
+- **Local attachments and retries**: Prepare all bodies before initializing the message, and keep local attachments readable until sending completes. Use the original message object to resend the same failed message. See [Resend failed messages](#resend-failed-messages).
+- **Existing server attachments**: To reuse uploaded attachments, retain the server attachment information of the corresponding bodies. See [Forward a single message](message_forward.html#forward-a-single-message) and [Upload message attachments to your own server](#upload-message-attachments-to-your-own-server).
+
+## Resend failed messages
+
+After resolving the cause of a sending failure, pass the original message object to `IEMChatManager#sendMessage:progress:completion:` again. Resending also performs pre-send validation: an empty body list, invalid bodies, unsupported type combinations, or more than 20 bodies return `EMErrorMessageInvalid`. Missing or invalid local attachments that require SDK uploading in a multi-body message return the corresponding attachment error.
+
+Before resending, confirm that the message content is valid and that local attachments requiring upload are still readable. If the message already contains a reusable, valid server attachment URL, the SDK can reuse it without uploading the corresponding attachment again. In this example, `failedMessage` is the `EMChatMessage` object whose previous send failed:
+
+```objectivec
+[[EMClient sharedClient].chatManager
+    sendMessage:failedMessage
+    progress:^(int progress) {
+        // Update attachment upload progress for the whole message.
+        NSLog(@"Resending, upload progress: %d%%", progress);
+    }
+    completion:^(EMChatMessage *message, EMError *error) {
+        if (error) {
+            // Sending failed again. Retain the message for another retry after the user resolves the cause.
+            NSLog(@"Resending failed: %@", error.errorDescription);
+            return;
+        }
+        // The message was sent successfully. Update its sending state in the message list.
+        NSLog(@"Resending succeeded, message ID: %@", message.messageId);
+    }];
+```
+
+For descriptions of progress and completion callbacks, see [Message sending callbacks](#message-sending-callbacks).
+
 ## Message sending callbacks
 
 #### Usage
@@ -992,7 +1133,7 @@ EMClient.shared().chatManager?.send(
 
 | Callback or parameter | Type | Description |
 | ------------- | ------------------------------------ | ------------------------------------------------------------ |
-| `progress` | `(Int32) -> Void` | Triggered when an attachment is uploaded. The parameter indicates the upload progress percentage, ranging from `0～100`. |
+| `progress` | `(Int32) -> Void` | Triggered during attachment upload. Returns message-level overall progress from 0–100, weighted by each attachment's original file size for multi-body messages. |
 | `completion` | `(EMChatMessage?, EMError?) -> Void` | Triggered when message sending is complete. It returns the sent message object and error information. |
 | `sentMessage` | `EMChatMessage?` | The sent message object. After the message is sent successfully, you can read information such as the message ID and sending state. |
 | `error` | `EMError?` | Error information. `nil` indicates that the message was sent successfully, while a non-`nil` value indicates that sending failed. |
@@ -1079,7 +1220,7 @@ For implementation details and permission requirements, see [Custom Chat Room At
 
 When sending an attachment message such as an image, voice, video, or file message, you can retrieve the attachment upload progress through the `progress` callback of `IEMChatManager#sendMessage:progress:completion:`.
 
-The value range of `progress` is `0-100`, indicating the attachment upload percentage. You can retrieve the message sending result through the `completion` callback:
+`progress` ranges from `0-100` and represents the attachment upload percentage for the whole message. Multiple attachments in a multi-body message are weighted by their original file sizes, without separate progress reports for each attachment. Use `completion` to obtain the sending result for the whole message:
 
 - A `nil` `error`: The message was sent successfully.
 - A non-`nil` `error`: Failed to send the message. The error contains an error code and error description.
@@ -1199,3 +1340,14 @@ func sendTextMessage(
 | An environment value is included but does not match a valid route | **No callback is triggered.** The `default` fallback configuration in the EasyIM Console **does not take effect** in this scenario. |
 | No environment value is included | Automatically route to the callback URL for the `default` environment. |
 | The same message needs to trigger both pre-delivery and post-delivery callbacks | Both stages must use the **same environment value**. For example, if pre-delivery is configured as `test -> url1` and post-delivery as `test -> url2`, including `test` in the message enables it for both stages. |
+
+## API list
+
+| API name | Module/Type | Description |
+| :--- | :--- | :--- |
+| [`initWithConversationID:bodies:ext:`](#send-multi-body-messages) | `EMChatMessage` | Creates a message from the complete ordered body list, starting from SDK 5.2.0. |
+| [`bodies`](#send-multi-body-messages) | `EMChatMessage` | Reads or replaces the complete ordered body list. |
+| [`body`](#send-multi-body-messages) | `EMChatMessage` | Reads the first body or replaces it with a new body. |
+| [`appendBody:`](#send-multi-body-messages) | `EMChatMessage` | Appends a body to the ordered list. |
+| [`contentType`](#send-multi-body-messages) | `EMChatMessage` | Retrieves the content type of the whole message. |
+| [`sendMessage:progress:completion:`](#message-sending-callbacks) | `IEMChatManager` | Sends a message and reports overall upload progress and the sending result. |

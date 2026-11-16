@@ -160,12 +160,18 @@ UI recommendations:
 
 ### Extension
 
-Stream messages support the `ext` extension, but only the `ext` in the first chunk is persisted to the local database as the final value. Extensions in subsequent chunks are passed through by the server and must not be treated as the final message extensions.
+Streaming messages support extension fields `ext`. Starting from SDK 5.2.0, the SDK uses `ext` from the latest processed chunk or complete message update to replace all locally saved extension fields and writes them to the database.
+
+- Chunks are processed in order. The extension fields follow the latest processed chunk, rather than being overwritten directly in network arrival order.
+- Extension fields are replaced as a whole, without field-by-field merging. Old fields absent from the new `ext` are not retained.
+- An empty new `ext` clears the original local extension fields.
+
+For example, if the local `ext` is `{"requestId":"123","status":"generating"}` and a subsequently processed chunk contains `{"status":"complete"}`, the updated local `ext` is `{"status":"complete"}`, without `requestId`.
+
+Before SDK 5.2.0, the local message retained the extension fields from when it was first stored in the database. Subsequent chunks or complete message updates did not synchronize these fields.
 
 :::tip
-UI recommendations:
-- Put extension information that applies to the entire message in the first chunk.
-- Do not rely on dynamically updating `ext` in subsequent chunks to drive final business logic.
+If your business needs to retain certain fields, the app server must continue including them in subsequent chunks or complete message updates. When upgrading to SDK 5.2.0, check the server's `ext` delivery logic. If information must be retained, do not include it only in the first chunk.
 :::
 
 ### Transmission states and error handling
@@ -233,9 +239,9 @@ Use any of the following methods:
 - `status` is `startAndComplete`.
 - `status` is `error`.
 
-#### 4. Why does `ext` in subsequent chunks not take effect?
+#### 4. Does `ext` in subsequent chunks update the local message?
 
-Because only the `ext` in the first chunk is persisted as the final value. Subsequent chunks must not be used to update the final message extensions.
+Yes, starting from SDK 5.2.0. Local extension fields follow the latest processed chunk or complete message update and replace the old values as a whole. An empty new `ext` clears the original value; fields are not merged. Earlier versions retain the extension fields from when the message was first stored in the database. See [Extension](#extension).
 
 #### 5. Do I need to merge chunks myself?
 

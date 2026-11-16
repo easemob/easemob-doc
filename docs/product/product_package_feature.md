@@ -250,7 +250,7 @@ EasyIM offers **Free**, **Professional**, and **Flagship** plans for different s
 </tr>
 <tr>
 <td width="224">
-<p>All message types<br />(including text, emoji, voice, video, image, location, command, and custom messages)</p>
+<p>All message types<br />(including text, emoji, voice, video, image, location, command, custom, and multi-body messages)</p>
 </td>
 <td width="224">
 <p>✓</p>

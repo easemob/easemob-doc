@@ -10,7 +10,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 
 | Feature           | Description           |
 | :------------- | :---------------------- |
-| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
+| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, combined, and multi-body messages. |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
@@ -23,7 +23,7 @@ A one-to-one conversation is a chat between two users. By default, EasyIM allows
 | Forward messages  | Forward a successfully sent or received message from the current conversation to another conversation.   |
 | Delete messages  | Delete server-side and local historical messages only for the current user, or clear chat history.     |
 | Pin messages  | Pin and unpin messages and retrieve pinned messages.    |
-| Translate messages | Translate text messages on demand or automatically.    |
+| Translate messages | Translate single-body text messages on demand or automatically. |
 | Deliver only to online users  | Deliver messages only to online users.    |
 | Import and insert messages  | Import and insert messages locally.    |
 | Update messages  | Update existing messages in the local memory and database of the current device.  |
@@ -59,7 +59,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 
 | Feature           | Description           |
 | :------------- | :---------------------- |
-| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
+| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, combined, and multi-body messages. |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Local storage       | Store received messages locally.         |
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product Pricing](http://easyim.ai/pricing). |
@@ -67,7 +67,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Search for messages  | Search for all message types in local conversations by keyword.     |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can [set the message recall period in the EasyIM Console](/product/basic_message_conversation.html#message-recall), up to 7 days. |
 | Message receipts  | Send delivery receipts and message read receipts.    |
-| Edit messages  | Edit successfully sent messages.    |
+| Edit messages | Edit successfully sent messages. Multi-body messages do not support editing. |
 | Reactions  | Add or delete Reactions on messages.   |
 | Targeted messages  | Send a message to one or more specified chat group members. Other members do not receive it.|
 | Forward messages  | Forward a successfully sent or received message from the current conversation to another conversation.   |
@@ -75,7 +75,7 @@ A chat group is an instant messaging system that supports multi-user communicati
 | Import and insert messages  | Import and insert messages locally.    |
 | Delete messages  | Delete server-side and local historical messages only for the current user, or clear chat history.     |
 | Pin messages  | Pin and unpin messages and retrieve pinned messages.    |
-| Translate messages | Translate text messages on demand or automatically.     |
+| Translate messages | Translate single-body text messages on demand or automatically. Multi-body messages are unsupported. |
 | Deliver only to online users  | Deliver messages only to online users.    |
 | Import and insert messages  | Import and insert messages locally.    |
 | Update messages  | Update existing messages in the local memory and database of the current device.  |
@@ -175,16 +175,16 @@ By default, a chat room supports up to 10,000 members, including the owner. To a
 
 | Feature           | Description           |
 | :------------- | :---------------------- |
-| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, and combined messages.  |
+| Send and receive messages | Send and receive all message types, including text, image, audio, video, file, location, command, custom, combined, and multi-body messages. |
 | Send and receive streaming messages | The server side supports sending streaming messages, and the SDK supports receiving them.  |
 | Historical messages       | The EasyIM server can store messages. The storage period depends on your product plan. For details, see [Product pricing](http://easyim.ai/pricing). To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature. |
 | Recall messages       | Recall a successfully sent message. By default, a message can be recalled within 2 minutes after it is sent. You can set the message recall period in the EasyIM Console, up to 7 days. |
-| Edit messages  | Edit successfully sent messages.    |
+| Edit messages | Edit successfully sent messages. Multi-body messages do not support editing. |
 | Targeted messages  | Send a message to one or more specified chat room members. Other members do not receive it.|
 | Combined messages  | Combine multiple messages and forward them together.    |
 | Delete messages  | Delete server-side historical messages only for the current user, or clear chat history.     |
 | Pin messages  | Pin and unpin messages and retrieve pinned messages. To retrieve historical chat room messages from the server, upgrade the SDK to the specified version and contact the EasyIM business manager to activate the feature.    |
-| Translate messages | Translate text messages on demand or automatically.    |
+| Translate messages | Translate single-body text messages on demand or automatically. Multi-body messages are unsupported. |
 | Import and insert messages  | Import and insert messages locally.    |
 | Update messages  | Update existing messages in the local memory and database of the current device.  |
 

@@ -1,21 +1,42 @@
-# v5.1.2 Dev 2026-9-20 (Development)
+# EasyIM Web SDK Release Notes
 
-## New features
+## v5.2.0 Dev 2026-11-5
+
+#### New features
+
+- **[Multi-body messages](message_send.html#send-multi-body-messages)**: Combine text, image, file, voice, video, location, and custom content in order in one message for displays such as mixed text and images or multiple images. Supports sending, receiving, attachment downloading, and combined forwarding with multi-body messages as children.
+
+  Adds segment creation methods such as `ChatManager.createTextMessageBody()` and `createMultiBodyMessage()` to assemble 2–20 content segments. Send through `sendMessage()` and download all attachments through `downloadAttachment()`.
+
+- **[Query the SDK version](initialization.html#retrieve-the-sdk-version)**: Confirm the integrated SDK version and troubleshoot version-related issues. Adds `client.getVersion()`, returning the current SDK version string.
+
+#### Fixes
+
+- Fixed an incomplete text message translation flow: regular text messages are translated automatically before sending or editing, retaining both the original text and translations for recipients to obtain and display. Translation failure prevents the send or edit request.
+- Fixed extension editing for image, voice, video, file, location, and combined messages.
+
+## v5.1.3 Dev 2026-10-15
+
+Fixed missing or incorrectly assigned last-message senders in the conversation list.
+
+## v5.1.2 Dev 2026-9-20
+
+#### New features
 
 - **Enhanced log management**: Disable SDK console logs separately and receive sanitized structured SDK logs through `onLog` callbacks for collection and processing in your app. Disabling console output does not affect log callbacks. See [SDK Logs](log.html).
 - **Query all-member mute status for a chat room**: Chat room details include the new `muteAllMembers` field, which indicates whether all-member mute is enabled. See [Retrieve chat room details](room_attributes.html#retrieve-chat-room-details).
 - **Customize the login timeout**: The default total login timeout is 30 seconds. You can customize the timeout when calling `login`. See [Login](login.html#login).
 
-## Improvements
+#### Improvements
 
 - **Batch user-profile query results**: `getUserInfoByUserId` and `getUserInfoByAttribute` return complete results in the request order. Users whose profiles are not found are represented by `{ userId }`, so you can match results to the request without filling in missing entries or reordering results.
 - **Reconnection after a session ends**: After a session ends, for example because the user is kicked offline, the demo page displays the corresponding state. Restoring the page or network no longer triggers automatic reconnection.
 
-## Fixes
+#### Fixes
 
 Fixed issues with encoding and decoding combined messages.
 
-## Compatibility changes
+#### Compatibility changes
 
 **Chat room detail fields**: [Chat room details](room_attributes.html#retrieve-chat-room-details) no longer include the announcement or return the current user's individual mute status, allowlist status, or mute expiration time through `currentUserStatus`:
 
@@ -26,7 +47,7 @@ Fixed issues with encoding and decoding combined messages.
 - Use the new `muteAllMembers` field to determine whether all-member mute is enabled.
 - The `ChatRoomCurrentUserStatus` type is removed together with the `currentUserStatus` field.
 
-# v5.0.0 2026-8-28
+## v5.0.0 Dev 2026-8-28
 
 The Instant Messaging (IM) SDK v5.0.0 provides the following features:
 

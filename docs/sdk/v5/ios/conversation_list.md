@@ -212,6 +212,60 @@ let conversationName = conversation.conversationName()
 let conversationAvatar = conversation.conversationAvatar()
 ```
 
+## Display a summary of the last message
+
+Conversation lists typically display a short summary of the last message. The SDK provides message data; your app generates display text according to the message type and truncates it to fit the UI. The text below is illustrative and is not a fixed SDK return value.
+
+| Message type | Suggested summary |
+| :--- | :--- |
+| Text | Display the text content. |
+| Image (including GIF) | Display "[Image]". Adjust the label in your app if GIFs need to be distinguished. |
+| Voice | Display "[Voice]", optionally with the duration. |
+| Video | Display "[Video]". |
+| File | Display "[File]", optionally with the filename. |
+| Location | Display "[Location]", optionally with the place name or address. |
+| Custom | Generate a summary from the custom event and business parameters, using fallback text for unrecognized content. |
+| Combined | Use the body's title or summary, or display "[Chat history]" for all combined messages. |
+| Multi-body | Display "[Multi-body message]", or combine text and type labels in body order, such as "Hello [Image]". |
+
+Command messages carry business instructions and are not displayed as regular conversation summaries.
+
+Retrieve the last message with `EMConversation.latestMessage`, and use `EMChatMessage.contentType` to identify the whole message type. If there is no last message or the body is empty, set the summary to an empty string. This example uses fixed labels for non-text messages and prefers the summary provided by a combined message:
+
+```objectivec
+EMChatMessage *lastMessage = conversation.latestMessage;
+NSString *summary = @"";
+if (lastMessage != nil && lastMessage.bodies.count > 0) {
+    switch (lastMessage.contentType) {
+        case EMMessageBodyTypeText:
+            summary = ((EMTextMessageBody *)lastMessage.body).text;
+            break;
+        case EMMessageBodyTypeImage: summary = @"[Image]"; break;
+        case EMMessageBodyTypeVoice: summary = @"[Voice]"; break;
+        case EMMessageBodyTypeVideo: summary = @"[Video]"; break;
+        case EMMessageBodyTypeFile: summary = @"[File]"; break;
+        case EMMessageBodyTypeLocation: summary = @"[Location]"; break;
+        case EMMessageBodyTypeCustom: summary = @"[Custom message]"; break;
+        case EMMessageBodyTypeCombine: {
+            NSString *combinedSummary =
+                ((EMCombineMessageBody *)lastMessage.body).summary;
+            summary = combinedSummary.length > 0 ? combinedSummary : @"[Chat history]";
+            break;
+        }
+        case EMMessageBodyTypeMultiBody: summary = @"[Multi-body message]"; break;
+        case EMMessageBodyTypeCmd: break;
+        default: summary = @"[Message]"; break;
+    }
+}
+// Use summary to update the current conversation summary.
+```
+
+:::tip
+Starting from SDK 5.2.0, a multi-body message has `contentType` equal to `EMMessageBodyTypeMultiBody`. To combine summaries of its bodies, identify this type first, then read the complete body list in order through `bodies`. `body` returns only the first body. Do not use only `body.type` to identify the whole message type or obtain all content. See [Receive multi-body messages](message_receive.html#receive-multi-body-messages).
+:::
+
+After the conversation list is updated, read the last message again and regenerate its summary. For monitoring, see [Monitor conversation list updates](#monitor-conversation-list-updates).
+
 ## Clear conversations from memory
 
 Call `cleanConversationsMemoryCache` to clear all conversations from memory and release memory. This operation clears the memory cache and does not delete conversations or messages from the local database.

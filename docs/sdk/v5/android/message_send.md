@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-The EasyIM Android SDK creates messages through `EMMessage` and sends them through `EMChatManager`. The SDK supports text, image, GIF, voice, video, file, location, command, custom, and combined messages in one-to-one chats, group chats, and chat rooms.
+The EasyIM Android SDK creates messages through `EMMessage` and sends them through `EMChatManager`. The SDK supports text, image, GIF, voice, video, file, location, command, custom, and combined messages in one-to-one chats, group chats, and chat rooms. Starting from SDK 5.2.1, you can also combine multiple bodies in order in one [multi-body message](#send-multi-body-messages).
 
 - By default, EasyIM allows strangers to send one-to-one messages without adding each other as friends. To allow only friends to exchange one-to-one messages, [enable friend relationship checks](/product/console/basic_user.html#friend-relationship-check).
 - For chat groups and chat rooms, a user can send a message to only one group or chat room at a time, and the user must belong to that group or chat room.
@@ -32,7 +32,7 @@ The Android SDK creates different message types through different static methods
 | Parameter or attribute       | Android configuration                                             | Required         | Use case         | Description                                                         |
 | ---------------- | ------------------------------------------------------------ | ---------------- | ---------------- | ------------------------------------------------------------ |
 | Target conversation ID      | The recipient parameter of each `create*SendMessage()` method, or `EMMessage#setTo` | Yes             | All messages         | Pass the peer user ID for one-to-one chat, the group ID for group chat, or the chat room ID for a chat room. |
-| Message content         | The content parameter of each message creation method, or `EMMessage#setBody`             | Yes             | All messages         | The parameter varies by message type, such as text content, attachment URI, location coordinates, command, or custom event. |
+| Message content | The content parameter of each creation method, or `EMMessage#setBody`, `setBodies` | Yes | All messages | Parameters vary by message type. `setBody()` replaces all bodies with one body. For multi-body messages, use `setBodies()` for the complete list, or `addBody()` and `appendBody()` to append. See [Manage the body list](#send-multi-body-messages). |
 | Conversation type         | `EMMessage#setChatType`                                      | Required for group chat and chat rooms | All messages         | Set it to `EMMessage.ChatType.Chat`, `GroupChat`, or `ChatRoom` for one-to-one chat, group chat, or a chat room, respectively. The default is `Chat`. |
 | Extension         | `EMMessage#setAttribute`                                     | No             | All messages         | Add custom business information. String, Boolean, numeric, JSON object, JSON array, and other types are supported. Extensions count toward the message size limit. |
 | Online-only delivery       | `EMMessage#deliverOnlineOnly`                                | No             | All message types in one-to-one and group chats | When set to `true`, the message is delivered only to online users. If the recipient is offline, the message is discarded. This feature does not apply to chat rooms. It is suitable for typing indicators, transient control information, and similar scenarios. |
@@ -569,6 +569,123 @@ Set the following parameters when creating a combined message:
 
 Combined messages are suitable for forwarding chat history and similar scenarios. Before creating one, confirm that the original message ID list is not empty and contains no more than 300 items. When displaying it, use `title`, `summary`, and `compatibleText` to provide a clear summary and compatibility prompt for older versions.
 
+## Send multi-body messages
+
+Starting from SDK 5.2.1, a message can carry multiple bodies in order, allowing text, images, and other content to be sent and displayed as one message. When a message contains multiple bodies, both `getType()` and `getContentType()` return `EMMessage.Type.MULTIBODY`.
+
+A multi-body message combines multiple bodies in one message. A [combined message](#send-combined-messages) packages multiple existing messages for forwarding chat history.
+
+#### Usage restrictions
+
+- A multi-body message contains 2–20 message bodies, stored and displayed in the supplied order. The body list cannot be empty or contain null or invalid bodies.
+- You can combine text, image, voice, video, file, location, and custom bodies. Command, combined, streaming, and other multi-body messages cannot be used as bodies.
+- Do not add, remove, replace, or reorder bodies during sending. Local attachments that require uploading must remain readable until sending completes.
+- Editing the body or extension fields `ext` of a multi-body message is currently unsupported. Translating multi-body messages is also unsupported; text bodies within them do not trigger automatic translation.
+
+#### Sending process
+
+Follow these steps to send a multi-body message:
+
+1. Create each message body.
+   Prepare the content with the constructors for text, image, file, voice, video, location, or custom bodies. Create all bodies first, then place them in reading order in the list. Read permission is required for local attachments.
+2. Create the multi-body message.
+   Call `EMMessage#createMultiBodySendMessage(String to, List<EMMessageBody> bodies)`. `to` is a user, chat group, or chat room ID, and `bodies` is the ordered body list. The method returns `null` if the list is empty or contains invalid bodies. The count limit and type combinations are validated when sending.
+
+   A list containing one body is still treated as a single-body message. New messages default to one-to-one chat. For a chat group or chat room, set the corresponding `ChatType`.
+3. Send the multi-body message.
+   Register callbacks with `setMessageStatusCallback` before calling `EMClient.getInstance().chatManager().sendMessage(message)`. Local attachments that require SDK uploading are uploaded before the whole message is sent. Use the callbacks to handle overall progress and the final result.
+
+The following example creates and sends a multi-body message in the order of text, a local image, and a local file:
+
+```java
+// imageUri and fileUri are local image and file URIs that the app has permission to read.
+List<EMMessageBody> bodies = new ArrayList<>();
+bodies.add(new EMTextMessageBody("Image description"));
+bodies.add(new EMImageMessageBody(imageUri));
+bodies.add(new EMNormalFileMessageBody(fileUri));
+
+EMMessage message = EMMessage.createMultiBodySendMessage(conversationId, bodies);
+if (message != null) {
+    // Defaults to one-to-one chat. Set GroupChat or ChatRoom for a chat group or chat room.
+    message.setChatType(EMMessage.ChatType.Chat);
+    message.setMessageStatusCallback(new EMCallBack() {
+        @Override
+        public void onSuccess() {
+            // The whole message was sent successfully.
+        }
+
+        @Override
+        public void onError(int code, String error) {
+            // Handle the sending failure based on the error code.
+        }
+
+        @Override
+        public void onProgress(int progress, String status) {
+            // Overall upload progress for all attachments, weighted by original file size, from 0–100.
+        }
+    });
+    EMClient.getInstance().chatManager().sendMessage(message);
+}
+```
+
+#### Key parameters
+
+`createMultiBodySendMessage` creates a message with the recipient and complete body list. For other common settings, see [Common message creation parameters](#common-message-creation-parameters).
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `to` | `String` | Yes | The other user's ID for one-to-one chat, the chat group ID for group chat, or the chat room ID for chat rooms. |
+| `bodies` | `List<EMMessageBody>` | Yes | The complete ordered body list. A multi-body message contains 2–20 bodies; a list containing one body is still treated as a single-body message. |
+| `ChatType` | `EMMessage.ChatType` | For chat groups and chat rooms | Defaults to `Chat`. Set `GroupChat` for chat groups or `ChatRoom` for chat rooms. |
+| Extension fields | `String`, `boolean`, numeric types, and others | No | Set on the whole message with `setAttribute(...)`, rather than on individual bodies. |
+
+**Create message bodies**
+
+| Body | Type and creation instructions |
+| :--- | :--- |
+| Text | `EMTextMessageBody`. See [Send text messages](#send-text-messages). |
+| Image | `EMImageMessageBody`. See [Send image messages](#send-image-messages). |
+| File | `EMNormalFileMessageBody`. See [Send file messages](#send-file-messages). |
+| Voice | `EMVoiceMessageBody`. See [Send voice messages](#send-voice-messages). |
+| Video | `EMVideoMessageBody`. See [Send video messages](#send-video-messages). |
+| Location | `EMLocationMessageBody`. See [Send location messages](#send-location-messages). |
+| Custom | `EMCustomMessageBody`. See [Send custom messages](#send-custom-messages). |
+
+**Manage the body list**
+
+| API | Behavior |
+| :--- | :--- |
+| `getBodies()` | Returns the complete ordered body list. The list structure is read-only; each body retains its own type. |
+| `getBody()` | Returns the first body, referencing the same object as the first element of `getBodies()`. It does not return all bodies. |
+| `setBodies(List<EMMessageBody>)` | Replaces all bodies in the supplied order. An empty list or invalid elements leave the original message unchanged. |
+| `setBody(EMMessageBody)` | Replaces all bodies with one body. Other bodies in the original list are not retained. |
+| `addBody(EMMessageBody)` / `appendBody(EMMessageBody)` | Appends a body to the list without replacing existing content. |
+| `getType()` / `getContentType()` | Returns `MULTIBODY` for multiple bodies, the body's type for one body, or `TXT` for no bodies. |
+
+If a body being set or appended is null or invalid, the SDK retains the original list and writes a warning log. Complete body list changes before sending.
+
+#### Handle sending progress and results
+
+Monitor the sending state of the whole message with `EMMessage#setMessageStatusCallback(EMCallBack)`:
+
+- `onProgress(int progress, String status)`: Attachment upload progress. Progress is weighted by each attachment's original file size and aggregated into message-level overall progress from 0–100. Individual body upload progress is not reported separately.
+- `onSuccess()`: The whole message was sent successfully.
+- `onError(int code, String error)`: Attachment upload or message sending failed. The error code and error information are returned.
+
+Completed attachment uploads do not mean that the whole message was sent successfully. Use `onSuccess()` or `onError(...)` to determine the final result. For common callback descriptions, see [Message sending callbacks](#message-sending-callbacks).
+
+#### Logic
+
+- **Creation and sending validation**: Creation returns `null` for an empty list or invalid bodies. The count limit and type combinations are validated when sending. Sending more than 20 bodies fails with `EMError.MESSAGE_INVALID`. Successful message creation does not mean all sending validation has passed.
+- **Local attachments and retries**: Prepare all bodies before creating the message, and keep local attachments readable until sending completes. Use the original message object to resend the same failed message. See [Resend failed messages](#resend-failed-messages).
+- **Existing server attachments**: To reuse uploaded attachments, retain the server attachment information of the corresponding bodies. See [Forward a single message](message_forward.html#forward-a-single-message) and [Upload message attachments to your own server](#upload-message-attachments-to-your-own-server).
+
+## Resend failed messages
+
+After resolving the cause of a sending failure, call `EMChatManager#sendMessage(message)` again. Resending also performs pre-send validation: an empty body list, invalid bodies, unsupported type combinations, or more than 20 bodies return `EMError.MESSAGE_INVALID`. Missing or invalid local attachments that require SDK uploading in a multi-body message return the corresponding attachment error.
+
+Before resending, confirm that the message content is valid and that attachment files and URIs are still readable. If the message already contains a reusable, valid server attachment URL, the SDK can reuse it without uploading the corresponding attachment again.
+
 ## Message sending callbacks
 
 #### Usage
@@ -604,7 +721,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :--- | :--- |
 | `onSuccess()` | Triggered when the message is sent successfully. |
 | `onError(int, String)` | Triggered when message sending fails. Returns an error code and error message. |
-| `onProgress(int, String)` | Triggered when an attachment is uploaded. `progress` is the upload percentage. Messages without attachments, such as text messages, typically do not produce meaningful upload progress. |
+| `onProgress(int, String)` | Triggered during attachment upload. `progress` is message-level upload progress from 0–100, weighted by each attachment's original file size for multi-body messages. Messages without attachments, such as text messages, typically do not trigger it. |
 
 #### Logic
 
@@ -731,7 +848,7 @@ Register the listener through `EMClient.getInstance().chatroomManager().addChatR
 
 When sending an attachment message such as an image, voice, video, or file, obtain the attachment upload progress through `onProgress` in `EMMessage#setMessageStatusCallback(EMCallBack)`.
 
-The value range of `progress` is `0-100`, representing the attachment upload percentage. Use `onSuccess` and `onError` to obtain the message sending result:
+`progress` ranges from `0-100` and represents the message-level attachment upload percentage. Multiple attachments in a multi-body message are weighted by their original file sizes and aggregated into one overall progress value, without separate progress callbacks for each attachment. Use `onSuccess` and `onError` to obtain the sending result for the whole message:
 
 - `onSuccess`: The message was sent successfully.
 - `onError`: Message sending failed. The callback contains the error code and description.
@@ -869,6 +986,11 @@ String webhookEnv = message.getWebhookEnv();
 | [`createLocationSendMessage`](#send-location-messages) | `EMMessage` | Create a location message. |
 | [`createSendMessage`](#send-command-messages) | `EMMessage` | Create a message of a specified type to send. |
 | [`createCombinedSendMessage`](#send-combined-messages) | `EMMessage` | Create a combined message. |
+| [`createMultiBodySendMessage`](#send-multi-body-messages) | `EMMessage` | Creates a message from an ordered body list, starting from SDK 5.2.1. |
+| [`getBodies`](#send-multi-body-messages) | `EMMessage` | Retrieves the complete ordered body list. |
+| [`setBodies`](#send-multi-body-messages) | `EMMessage` | Replaces all bodies. |
+| [`appendBody`](#send-multi-body-messages) | `EMMessage` | Appends a body to the list. |
+| [`getContentType`](#send-multi-body-messages) | `EMMessage` | Retrieves the content type, returning `MULTIBODY` for multi-body messages. |
 | [`deliverOnlineOnly`](#common-message-creation-parameters) | `EMMessage` | Set whether to deliver the message only to online users. |
 | [`sendMessage`](#unified-message-sending-process) | `EMChatManager` | Send a message. |
 | [`downloadAndParseCombineMessage`](#send-combined-messages) | `EMChatManager` | Download and parse a combined message attachment. |

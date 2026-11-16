@@ -23,12 +23,14 @@ options.setAppKey("your-org#your-app");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-The following table lists common `EMOptions` methods used during initialization. Complete these calls before initializing the SDK.
+The following table lists common `EMOptions` methods. Complete the settings before SDK initialization unless a setting explicitly supports changes after initialization.
 
 | Method | Description |
 | :--- | :--- |
 | `setAppKey(String appkey)` | Sets the App Key. `appkey` is the unique identifier obtained after creating an app in EasyIM Console. Its format is generally `orgName#appName`. |
 | `setPushConfig(EMPushConfig pushConfig)` | Sets the offline push configuration. Pass a constructed `EMPushConfig` before `init`. If it is not set, the SDK creates a default push configuration. |
+| `setUsePushInBackground(boolean usePushInBackground)` | Starting from SDK 5.2.1, sets whether to disconnect the persistent connection and use vendor push after the app enters the background. Set this before initialization. The default is `false`: the SDK does not actively disconnect because the app enters the background. If `true` and the push channel is valid when the app enters the background, the SDK schedules disconnection after approximately 10 seconds. Query with `isUsePushInBackground()`. For complete conditions and timing, see [Configure background message reception](push/push_overview.html#configure-background-message-reception). |
+| `setDisconnectNotifyThreshold(int seconds)` | Starting from SDK 5.2.1, sets the recoverable disconnection notification grace period in seconds. Defaults to `10`; values less than or equal to `0` disable the delay. Can be set before or after initialization. Query with `getDisconnectNotifyThreshold()`. See [Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). |
 | `setAutoAcceptGroupInvitation(boolean value)` | Sets whether to automatically accept chat group invitations.<br/> - (Default) `true`: Automatically accepts chat group invitations.<br/> - `false`: Does not automatically accept chat group invitations. |
 | `setAcceptInvitationAlways(boolean value)` | Sets whether to automatically accept friend invitations.<br/> - (Default) `true`: Automatically accepts friend invitations.<br/> - `false`: Does not automatically accept friend invitations. |
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | Sets whether to delete a chat room's local messages when the user actively or passively leaves it.<br/> - (Default) `true`: Deletes them.<br/>- `false`: Retains them. |
@@ -45,6 +47,8 @@ For details about configuring an IP address or domain for the private-cloud SDK,
 
 After initialization is complete, register connection-state and message listeners to detect connection changes between the SDK and the EasyIM server and receive new messages. Connection listener callbacks run on a worker thread. Do not directly update the UI or perform time-consuming operations in them. The SDK automatically reconnects after a weak-network disconnection, so manual reconnection is unnecessary.
 
+Starting from SDK 5.2.1, notifications for recoverable disconnections such as network exceptions follow the [disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). Not receiving `onDisconnected` does not mean the persistent connection is still available. Query the current state with `EMClient#getConnectionState()`.
+
 ```java
 private final EMConnectionListener connectionListener = new EMConnectionListener() {
     @Override
@@ -54,7 +58,7 @@ private final EMConnectionListener connectionListener = new EMConnectionListener
 
     @Override
     public void onDisconnected(int errorCode) {
-        // The SDK is disconnected from the EasyIM server. Determine the cause based on errorCode.
+        // Disconnection notification received. Recoverable notifications may be delayed; query the current state with getConnectionState().
     }
 };
 
@@ -219,6 +223,10 @@ EMClient.getInstance().init(context.getApplicationContext(), options);
 | API | Module/Class | Description |
 | :--- | :--- | :--- |
 | [`init`](#initialize-the-sdk) | `EMClient` | Initializes the Android SDK singleton. |
+| [`setUsePushInBackground`](push/push_overview.html#configure-background-message-reception) | `EMOptions` | Sets the background push switch before initialization. |
+| [`isUsePushInBackground`](push/push_overview.html#configure-background-message-reception) | `EMOptions` | Queries the background push switch. |
+| [`setDisconnectNotifyThreshold`](connection.html#configure-the-disconnection-notification-grace-period) | `EMOptions` | Sets the recoverable disconnection notification grace period before or after initialization. |
+| [`getDisconnectNotifyThreshold`](connection.html#configure-the-disconnection-notification-grace-period) | `EMOptions` | Queries the disconnection notification grace period. |
 | [`setDataSyncType`](#configuration-method) | `EMOptions` | Sets the data types automatically synchronized after login. |
 | [`getAllConversations`](#read-synchronization-results-after-login) | `EMChatManager` | Reads the local conversation list. |
 | [`getContactsFromLocal`](#read-synchronization-results-after-login) | `EMContactManager` | Reads the friend list from the local database. |

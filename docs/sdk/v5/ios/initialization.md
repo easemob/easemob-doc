@@ -42,6 +42,7 @@ The following table lists commonly used `EMOptions` properties for initializatio
 | `deleteMessagesOnLeaveChatroom` | Whether to delete a chat room's local messages when the user actively or passively leaves the chat room.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `deleteMessagesOnLeaveGroup` | Whether to delete a chat group's local messages when the user actively or passively leaves the chat group.<br/> - (Default) `true`: Deletes them.<br/> - `false`: Retains them. |
 | `canChatroomOwnerLeave` | Whether to allow the chat room owner to leave the chat room.<br/> - (Default) `true`: Allows the owner to leave.<br/> - `false`: Does not allow the owner to leave. |
+| `disconnectNotifyThreshold` | Sets or queries the disconnection notification grace period in seconds. Defaults to `10`. Supported starting from SDK 5.2.0. After a connection has been established successfully, recoverable disconnections do not trigger a disconnection callback if reconnection succeeds within the grace period; the callback is triggered only if the connection has not recovered by the deadline. A value less than or equal to `0` disables the grace period. Initial connection failure, invalid tokens, and being kicked offline still use the existing notification mechanisms. The grace period does not delay actual connection state changes or control APNs sending time. See [Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). |
 | `dataSyncType` | Configures the data types automatically synchronized after login. This property is an `EMDataSyncType` bit option and can combine conversations, friends, and joined chat groups. The default value is `.conversations`. |
 | `enableChatroomConversation` | Sets whether to include chat room conversations when retrieving the local conversation list. This configuration does not control the creation or storage of chat room conversations and does not affect the normal sending or receiving of chat room messages. This feature is supported starting from SDK v5.1.0.<br/> - `true`: Includes chat room conversations in the local conversation list.<br/> - (Default) `false`: Excludes chat room conversations from the local conversation list. Set this option before initializing the SDK.<br/> Read the `EMOptions#enableChatroomConversation` property to query the current configuration. |
 | `loadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
@@ -72,8 +73,8 @@ final class ChatListener: NSObject, EMClientDelegate, EMChatManagerDelegate {
     func connectionStateDidChange(_ connectionState: EMConnectionState) {
         if connectionState == .connected {
             // The SDK is connected to the EasyIM server.
-        } else {
-            // The SDK is disconnected from the EasyIM server.
+        } else if connectionState == .disconnected {
+            // The SDK reports disconnection from the IM server. Recoverable notification timing follows the grace period.
         }
     }
 
@@ -83,7 +84,7 @@ final class ChatListener: NSObject, EMClientDelegate, EMChatManagerDelegate {
 }
 ```
 
-The SDK automatically reconnects after a weak-network disconnection, so manual reconnection is unnecessary. If a non-main queue is specified for a listener, switch to the main thread before updating the UI.
+The SDK automatically reconnects after a weak-network disconnection, so manual reconnection is unnecessary. To distinguish disconnected, connecting, and connected states, query `EMClient.connectionState`. See [Retrieve the connection state](connection.html#retrieve-the-connection-state). Disconnection callback timing follows the [disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). If a non-main queue is specified for a listener, switch to the main thread before updating the UI.
 
 :::tip
 1. The start and completion states of automatic data synchronization after login are returned through `EMClientDelegate` callbacks. For details, see [Monitor synchronization status](#monitor-synchronization-status).

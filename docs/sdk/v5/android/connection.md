@@ -38,7 +38,7 @@ EMConnectionListener connectionListener =
 
             @Override
             public void onDisconnected(int errorCode) {
-                // The SDK is disconnected from the server.
+                // Disconnection notification received. Recoverable notifications may be delayed; query the current state with getConnectionState().
             }
         };
 
@@ -62,30 +62,48 @@ EMClient.getInstance().loginWithToken(
 
 ## Retrieve the connection state
 
-Call `EMClient#isConnected` to query whether the SDK is currently connected to the server:
+Starting from SDK 5.2.1, call `EMClient#getConnectionState()` to query the actual current connection state. It returns an `EMConnectionState` enum:
+
+| State | Description |
+| :--- | :--- |
+| `DISCONNECTED` | Not connected or disconnected, including when the SDK is not initialized or the user has logged out. |
+| `CONNECTING` | The SDK is establishing a connection. |
+| `CONNECTED` | Connected to the IM server. |
 
 ```java
-boolean connected = EMClient.getInstance().isConnected();
+EMConnectionState state = EMClient.getInstance().getConnectionState();
+switch (state) {
+    case DISCONNECTED:
+        // Display the disconnected state.
+        break;
+    case CONNECTING:
+        // Display the connecting state.
+        break;
+    case CONNECTED:
+        // Display the connected state.
+        break;
+}
 ```
 
-Call `EMClient#isLoggedIn` to query whether the current user is logged in:
+`getConnectionState` returns the state at query time and does not register a state listener. Connection state still changes immediately during the [disconnection notification grace period](#configure-the-disconnection-notification-grace-period): `DISCONNECTED` before a new connection attempt starts, `CONNECTING` while establishing a connection, and `CONNECTED` after it succeeds.
+
+Starting from SDK 5.2.1, `EMClient#isConnected()` is deprecated, but existing calls remain usable. It distinguishes only connected from not connected. Use `getConnectionState()` to display and determine the current connection state.
+
+Call `EMClient#isLoggedIn()` to query whether the current user is logged in:
 
 ```java
 boolean loggedIn = EMClient.getInstance().isLoggedIn();
 ```
 
-| API | Description |
-| :--- | :--- |
-| `isConnected()` | Returns whether the SDK is connected to the server. |
-| `isLoggedIn()` | Returns whether the current user is logged in to the Chat service. |
-
 :::tip
-Connection state and login state have different meanings. On a weak network or during a network switch, the user might remain logged in while the persistent connection is temporarily interrupted and automatically reconnected by the SDK. Handle state changes in the business UI using listener callbacks instead of relying only on a one-time state query.
+Connection state and login state have different meanings. On a weak network or during a network switch, the user might remain logged in while the persistent connection is temporarily interrupted and automatically reconnected by the SDK. Update the UI using state queries, connection callbacks, and network state. Do not determine whether the client is connected solely from whether a disconnection callback has been received.
 :::
 
 ## Monitor connection changes
 
 Register `EMConnectionListener` through `EMClient#addConnectionListener`. We recommend registering it before calling `loginWithToken` to avoid missing the login connection process and subsequent synchronization states.
+
+After registration, the SDK checks the current state on a worker thread and sends a state notification to that listener: `onConnected()` if connected, or `onDisconnected(EMError.NETWORK_ERROR)` if not connected but still logged in. This registration-time notification is not controlled by the disconnection notification grace period. Adding or re-registering a listener during the grace period can therefore still result in a disconnection callback.
 
 ### Callback descriptions
 
@@ -94,7 +112,7 @@ The following callbacks all belong to `EMConnectionListener`:
 | Callback | Trigger conditions | Description |
 | :--- | :--- | :--- |
 | `onConnected()` | Triggered when the SDK successfully connects to the server. | It can be triggered after either the initial login connection or automatic reconnection succeeds. |
-| `onDisconnected(int)` | Triggered when the SDK disconnects from the server. | `errorCode` indicates the cause. Disconnection does not necessarily mean that the SDK has logged out. The SDK automatically reconnects in recoverable scenarios. |
+| `onDisconnected(int)` | Triggered when the SDK sends a disconnection notification. | `errorCode` indicates the cause. Recoverable notifications follow the [disconnection notification grace period](#configure-the-disconnection-notification-grace-period), so the callback may arrive later than the actual disconnection. Disconnection does not necessarily mean that the SDK has logged out. |
 | `onDatabaseOpened(String)` | Triggered when the specified user's local database is opened successfully. | Indicates that local database APIs are available. It does not indicate successful online login and cannot replace `onConnected`. |
 | `onLogout(int, EMLoginExtensionInfo)` | Triggered when the SDK logs out because of an account, device, or service restriction. | Handle abnormal logout using the error code and login extension information. |
 | `onTokenWillExpire()` | Triggered when the token is about to expire. | We recommend obtaining a new token and calling `renewToken` to renew it. |
@@ -116,7 +134,7 @@ EMConnectionListener connectionListener =
 
             @Override
             public void onDisconnected(int errorCode) {
-                // The connection is interrupted. The SDK automatically reconnects after recoverable network issues.
+                // Recoverable disconnection notifications may be delayed. The SDK automatically reconnects.
             }
 
             @Override
@@ -177,13 +195,48 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 The connection callbacks of `EMConnectionListener` run on a worker thread. Do not directly update the UI or perform time-consuming operations in a callback. Switch to the main thread to update the UI.
 :::
 
+## Configure the disconnection notification grace period
+
+Starting from SDK 5.2.1, use `EMOptions#setDisconnectNotifyThreshold(int seconds)` to configure a grace period for recoverable disconnection notifications, reducing disconnection prompts caused by brief network fluctuations. `seconds` is in seconds and defaults to `10`. Query the current setting with `getDisconnectNotifyThreshold()`.
+
+The grace period follows these rules:
+
+- It applies only after a connection has been established successfully during the current login. Initial connection failure does not wait for the grace period. Handle `loginWithToken` failures through `EMCallBack#onError`; `onDisconnected` is not guaranteed.
+- For recoverable disconnections caused by network exceptions or temporarily unreachable servers, the SDK reconnects automatically. Successful reconnection within the grace period cancels the pending disconnection notification. If the connection has not recovered by the deadline, `onDisconnected(int errorCode)` is triggered once. Registration-time state notifications are exempt; see [Monitor connection changes](#monitor-connection-changes).
+- Handling another recoverable disconnection error within the same grace period does not restart the timer. The callback uses the last disconnection's error code.
+- Unrecoverable exceptions, such as being kicked offline, are not delayed by the grace period. Handle them through the corresponding callbacks, such as `onLogout`. Token expiration is reported through `onTokenExpired()` and should not be handled uniformly through `onDisconnected`.
+- A value less than or equal to `0` disables the delay for recoverable disconnection notifications.
+- The grace period affects only callback timing. It does not delay actual connection state changes or automatic reconnection.
+
+Configure it before initialization:
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setDisconnectNotifyThreshold(10);
+EMClient.getInstance().init(getApplicationContext(), options);
+```
+
+After initialization, you can also modify or query the setting through the `EMOptions` currently used by the SDK:
+
+```java
+EMOptions options = EMClient.getInstance().getOptions();
+// Disable the delay for recoverable disconnection notifications.
+options.setDisconnectNotifyThreshold(0);
+int seconds = options.getDisconnectNotifyThreshold();
+```
+
+Changing the setting does not directly reset a running timer. Another positive value leaves the current deadline unchanged. After changing it to a value less than or equal to `0`, handling another recoverable disconnection error within the current grace period immediately sends a notification and cancels the timer. Subsequent new grace periods use the latest setting.
+
 ## Connection recovery and exception handling
 
 ### Automatic reconnection
 
 After login succeeds, if the connection is interrupted by a weak network signal, network switching, or another recoverable cause, the SDK automatically attempts to reconnect. The app does not need to call the login API manually.
 
-`onDisconnected` is triggered when the connection is interrupted, and `onConnected` is triggered after reconnection succeeds. Android SDK 5.x does not provide separate `onConnecting` or `onReconnectFailed` callbacks. Display the connection state using these two callbacks together with `isConnected()` and the network state.
+The SDK continues reconnection attempts with a backoff policy. `onConnected()` is triggered after reconnection succeeds. `onDisconnected(int errorCode)` follows the [disconnection notification grace period](#configure-the-disconnection-notification-grace-period); it is not triggered immediately for every interruption or failed reconnection.
+
+Android SDK 5.x does not provide separate `onConnecting` or `onReconnectFailed` callbacks. Query disconnected, connecting, or connected state through `getConnectionState()`, and update the UI using connection callbacks and network state.
 
 The following situations cannot be recovered through automatic reconnection alone. Handle account, token, device, or service restrictions based on the callback error code:
 
@@ -250,10 +303,8 @@ Monitor the automatic synchronization state after login for conversations, frien
 
 - Register `EMConnectionListener` before calling `loginWithToken` to avoid missing connection, token, and synchronization state callbacks.
 - Do not immediately call the login API again after a weak-network disconnection. The SDK automatically reconnects in recoverable scenarios.
-- Use `isConnected()` to query the current connection state and `isLoggedIn()` to query the login state. Prefer listener callbacks to drive UI updates.
-  
-  **Note**: `isConnected()` is generally used for UI connection status indicators. There is **no need** to manually verify the connection status before calling APIs like sending messages or joining groups/chat rooms, as the SDK handles connection checks internally and automatically retries unfinished operations after reconnecting.
-  
+- Use `getConnectionState()` to query the current connection state and `isLoggedIn()` to query the login state. Disconnection notifications may be delayed by the grace period, so do not determine connection availability solely from callbacks.
+  **Note**: You do not need to manually check the connection state before calling APIs to send messages or join chat groups or chat rooms. The SDK handles connection validation internally and returns operation results through the corresponding API callbacks.
 - Renew the token promptly after receiving `onTokenWillExpire`. Log in again after receiving `onTokenExpired`.
 - Use `onLogout` to handle unrecoverable abnormal logouts caused by account, device, or service restrictions, and display a specific notification based on the error code.
 - Call `removeConnectionListener` when monitoring is no longer needed to avoid duplicate callbacks and memory leaks.
@@ -266,6 +317,9 @@ Monitor the automatic synchronization state after login for conversations, frien
 | [`init`](#connection-lifecycle) | `EMClient` | Initializes the Android SDK. |
 | [`loginWithToken`](#connection-lifecycle) | `EMClient` | Logs in with a user ID and token and establishes a connection. |
 | [`logout`](#connection-lifecycle) | `EMClient` | Explicitly logs out and closes the current connection. |
-| [`isConnected`](#retrieve-the-connection-state) | `EMClient` | Queries whether the SDK is currently connected to the server. |
+| [`getConnectionState`](#retrieve-the-connection-state) | `EMClient` | Queries the complete connection state, returning `EMConnectionState`. Supported starting from SDK 5.2.1. |
+| [`isConnected`](#retrieve-the-connection-state) | `EMClient` | Queries whether connected. Deprecated starting from SDK 5.2.1; use `getConnectionState()`. |
+| [`setDisconnectNotifyThreshold`](#configure-the-disconnection-notification-grace-period) | `EMOptions` | Sets the recoverable disconnection notification grace period in seconds. Defaults to `10`. |
+| [`getDisconnectNotifyThreshold`](#configure-the-disconnection-notification-grace-period) | `EMOptions` | Queries the current disconnection notification grace period. |
 | [`isLoggedIn`](#retrieve-the-connection-state) | `EMClient` | Queries whether the current user is logged in to the Chat service. |
 | [`renewToken`](#token-lifecycle) | `EMClient` | Updates the token for the currently logged-in user. |

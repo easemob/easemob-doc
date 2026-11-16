@@ -23,7 +23,7 @@ When creating an app in the EasyIM Console, you must select a data center. Your 
 
 ### One-to-one chats
 
-A one-to-one chat is a conversation between two users. It supports text, image, location, voice, video, custom messages such as red packets, and combined messages, as well as offline messages, message roaming, message receipts, message recall, editing, searching, Reactions, translation, message pinning, content moderation, and other features. For details, see [One-to-one messages](/product/message_single_chat.html).
+A one-to-one chat is a conversation between two users. It supports text, image, location, voice, video, custom messages such as red packets, combined messages, and multi-body messages, as well as offline messages, message roaming, message receipts, message recall, editing, searching, Reactions, translation, message pinning, content moderation, and other features. For details, see [One-to-one messages](/product/message_single_chat.html).
 
 ### Group chats
 
