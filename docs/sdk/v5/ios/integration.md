@@ -19,7 +19,7 @@ Choose one of the following methods to import the EasyIM SDK into the project.
 
 :::
 
-### (recommended) Method 1: Integrate using Swift Package Manager
+### (Recommended) Method 1: Integrate using Swift Package Manager
 
 Choose an SDK 5.x release that supports SPM.
 
