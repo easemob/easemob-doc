@@ -6,6 +6,14 @@ Initialization is required before using the SDK and must be completed before you
 
 You have a valid EasyIM developer account and App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
+## Configure fixed service domains
+
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+Pass both `serviceConfig.serverUrls.restApiUrl` and `serviceConfig.serverUrls.wsUrl` to `ChatClient.init`, using the full URLs from Console. Fixed-address mode requires `appKey` and cannot be combined with `appId` or `serviceConfig.dnsConfigUrls`. If fixed addresses are omitted, the SDK defaults to DNSConfig discovery. Data synchronization reuses the REST URL and derives its WebSocket URL from this address.
+
+The addresses in the examples are placeholders. Replace them with the values for your app before running the code.
+
 ## Initialize the SDK
 
 Pass the configuration to `ChatClient.init` to create the singleton SDK instance.
@@ -15,11 +23,18 @@ import { ChatClient } from 'easemob-websdk';
 
 const client = ChatClient.init({
   appKey: 'your-org#your-app',
+  serviceConfig: {
+    serverUrls: {
+      restApiUrl: 'https://rest.example.com',
+      wsUrl: 'wss://ws.example.com',
+    },
+  },
 });
 ```
 
 :::tip
 - In the examples in this document, `client` is the SDK instance created through `ChatClient.init`.
+- Feature-specific initialization examples in the SDK documentation omit these common connection settings. Include the fixed service addresses before initializing the SDK.
 - To use chat, friend, chat group, and other features, register the corresponding managers through the `managers` parameter during initialization or through the `use` method afterward.
 :::
 
@@ -28,6 +43,8 @@ The following table describes some of the parameters for SDK initialization.
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `appKey` | String | Yes | Unique app identifier in the format `org#app`. |
+| `serviceConfig.serverUrls.restApiUrl` | String | Yes for EasyIM | Fixed REST API base URL for the app. Also used for data synchronization. |
+| `serviceConfig.serverUrls.wsUrl` | String | Yes for EasyIM | Fixed messaging WebSocket URL for the app. |
 | `enableDeliveryReceipt` | Boolean | No | Whether to enable delivery receipts. When enabled, after receiving a one-to-one message, the SDK automatically sends a delivery receipt to the sender. The default value is `false`. |
 | `useFixedDeviceId` | Boolean | No | Whether to reuse a fixed device identifier in the same browser. The default value is `true`. If set to `false`, each SDK instance uses a random device ID. |
 | `deviceId` | String | No | Custom device identifier. If omitted, the SDK default is used. |

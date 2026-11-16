@@ -130,7 +130,9 @@ This section describes how to implement one-to-one chat.
 
 ### 1. Initialize the SDK
 
-Initialize the SDK in the **main process**:
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+Initialize the SDK in the **main process** with the fixed service addresses. The addresses in the examples are placeholders. Replace them with the values for your app before running the code. For address formats and ports, see [Configure fixed service domains](initialization.html#configure-fixed-service-domains).
 
 ```java
 // Import packages.
@@ -139,7 +141,12 @@ import com.hyphenate.chat.EMOptions;
 
 EMOptions options = new EMOptions();
 options.setAppKey("Your appkey");
-......// Other EMOptions configurations.
+options.enableDNSConfig(false);
+options.setRestServer("https://rest.example.com");
+options.setWebSocketServer("ws.example.com");
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
+// Configure other EMOptions settings as needed.
 // context is the context. You can replace it with this in an Application or Activity.
 EMClient.getInstance().init(context, options);
 ```

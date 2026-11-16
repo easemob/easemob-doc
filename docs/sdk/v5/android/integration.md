@@ -2,6 +2,8 @@
 
 This page describes how to integrate the EasyIM SDK into your Android project.
 
+**EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery). See [Configure fixed service domains](initialization.html#configure-fixed-service-domains).**
+
 ## Development environment requirements
 
 - Android Studio Meerkat | 2024.3.1 Patch 2 or later is recommended.

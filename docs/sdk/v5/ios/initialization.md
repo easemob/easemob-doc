@@ -12,12 +12,27 @@ Initialize the SDK in the app's main process. After initialization succeeds, reg
 
 Register a valid EasyIM developer account, create an app, and obtain the app's App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
+## Configure fixed service domains
+
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+Disable DNSConfig with `EMOptions#enableDnsConfig = NO` (`false` in Swift) and set the REST address, messaging WebSocket host, port, and TLS option before initialization. DNSConfig defaults to enabled. For the REST setting, use the full HTTPS URL; for the native WebSocket setting, use only the host name, without a scheme or path, and set the port separately.
+
+These connection properties are declared in `EMOptions+PrivateDeploy.h`. Import `<HyphenateChat/EMOptions+PrivateDeploy.h>` in Objective-C; for Swift, make the header available through the SDK module or your target's Objective-C bridging header.
+
+The example below uses WSS on port `443`. Use your app's actual endpoint and port. The addresses in the examples are placeholders. Replace them with the values for your app before running the code.
+
 ## Initialize the SDK
 
 Create `EMOptions` with the App Key, complete other configuration according to your business requirements, and pass it to `EMClient.initializeSDK(with:)`.
 
 ```swift
 let options = EMOptions(appkey: "your-org#your-app")
+options.enableDnsConfig = false
+options.restServer = "https://rest.example.com"
+options.webSocketServer = "ws.example.com"
+options.webSocketPort = 443
+options.enableTLSConnection = true
 
 // Continue setting other EMOptions configurations according to your business requirements.
 options.enableConsoleLog = true
@@ -34,6 +49,11 @@ The following table lists commonly used `EMOptions` properties for initializatio
 | Property | Description |
 | :--- | :--- |
 | `appkey` | The unique identifier of the app, passed through `EMOptions(appkey:)`. Its format is generally `appName`. This property is read-only. |
+| `enableDnsConfig` | Controls DNSConfig endpoint discovery. Defaults to `YES`; set to `NO` (`false` in Swift) before initialization. |
+| `restServer` | The app's full REST API URL, such as `https://rest.example.com`. |
+| `webSocketServer` | The messaging WebSocket host name, without a scheme or path. |
+| `webSocketPort` | The messaging WebSocket port. Use `443` for the WSS example. |
+| `enableTLSConnection` | Enables TLS for the persistent connection. Set to `YES` (`true` in Swift) for WSS. |
 | `enableConsoleLog` | Whether to output logs to the console.<br/> - `true`: Outputs logs.<br/> - (Default) `false`: Does not output logs. |
 | `apnsCertName` | The APNs push certificate name. It must be set before initialization and cannot be changed at runtime. |
 | `pushKitCertName` | The PushKit certificate name. It must be set before initialization and cannot be changed at runtime. |
@@ -48,7 +68,7 @@ The following table lists commonly used `EMOptions` properties for initializatio
 | `loadEmptyConversations` | Sets whether to include empty conversations when loading conversations from the local database. Set this option before initializing the SDK.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
 | `autoLoadConversations` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. Set this option before initializing the SDK.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
-For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
+Feature-specific initialization examples in the SDK documentation omit these common connection settings. Include the fixed-domain configuration above before initializing the SDK.
 
 ## Set listeners after initialization
 

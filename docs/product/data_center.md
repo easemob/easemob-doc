@@ -10,7 +10,11 @@ When creating an app in the [EasyIM Console](https://console.easyim.ai/user/logi
 
 You can view the app's data center and server domain on the **Overview** page of the EasyIM Console.
 
-When integrating an SDK, use the WebSocket address and RESTful API address corresponding to the app's data center.
+When integrating an SDK, use the WebSocket address and RESTful API address corresponding to the app's data center. EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints.
+
+Copy the addresses for the app you are integrating from the **Domain Configuration** area on the **Overview** page. Fixed domains still need to be resolved to IP addresses; they do not require fixed IP addresses.
+
+Configure the addresses before initializing the SDK: [Android](/sdk/v5/android/initialization.html#configure-fixed-service-domains), [iOS](/sdk/v5/ios/initialization.html#configure-fixed-service-domains), or [Web](/sdk/v5/web/initialization.html#configure-fixed-service-domains).
 
 ![img](/images/product/data_center.png)
 
