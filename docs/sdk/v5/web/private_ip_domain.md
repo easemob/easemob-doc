@@ -12,10 +12,7 @@ Configure fixed addresses through `serviceConfig.serverUrls`. You must provide a
 - `restApiUrl`
 - `wsUrl`
 
-To also support automatic synchronization of conversations and friend data after login, we recommend providing:
-
-- `syncRestApiUrl`
-- `syncWsUrl`
+Data synchronization REST requests use `restApiUrl`. The SDK derives the synchronization WebSocket URL from this address. For example, `https://rest.example.com` becomes `wss://rest.example.com/ws`. Separate `syncRestApiUrl` and `syncWsUrl` settings are no longer supported.
 
 After you configure `serverUrls`, the SDK connects directly to these addresses and no longer requests DNS configuration.
 
@@ -39,8 +36,6 @@ const client = ChatClient.init({
     serverUrls: {
       restApiUrl: 'https://rest.example.com',
       wsUrl: 'wss://ws.example.com',
-      syncRestApiUrl: 'https://sync-rest.example.com',
-      syncWsUrl: 'wss://sync-ws.example.com',
     },
   },
 });

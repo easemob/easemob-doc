@@ -9,6 +9,10 @@ The following diagram shows how a client sends and receives one-to-one text mess
 
 ![](/images/android/sendandreceivemsg.png)
 
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+The addresses in the examples are placeholders. Replace them with the values for your app before running the code. Use App Key authentication with the fixed service addresses shown below. See [Configure fixed service domains](initialization.html#configure-fixed-service-domains).
+
 ## Environment setup
 
 
@@ -139,6 +143,12 @@ const appendLog = (text) => {
 // Initialize the SDK and register ChatManager. For parameter configuration, see the initialization document.
 const client = ChatClient.init({
     appKey,
+    serviceConfig: {
+      serverUrls: {
+        restApiUrl: 'https://rest.example.com',
+        wsUrl: 'wss://ws.example.com',
+      },
+    },
     managers: [ChatManager],
 });
 

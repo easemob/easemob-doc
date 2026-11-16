@@ -73,10 +73,15 @@ After they are added, the project automatically links the required system librar
 
 ## 3. Initialize the SDK
 
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+The addresses in the examples are placeholders. Replace them with the values for your app before running the code. The example uses a WebSocket host name without a scheme or path and WSS on port `443`. For details, see [Configure fixed service domains](initialization.html#configure-fixed-service-domains).
+
 Import the SDK header file.
 
 ```
 #import <HyphenateChat/HyphenateChat.h>
+#import <HyphenateChat/EMOptions+PrivateDeploy.h>
 ```
 
 In the following method in the project's AppDelegate, call the corresponding SDK method.
@@ -86,6 +91,11 @@ In the following method in the project's AppDelegate, call the corresponding SDK
 {
     // Replace appkey with the App Key of the app registered in EasyIM Console.
     EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
+    options.enableDnsConfig = NO;
+    options.restServer = @"https://rest.example.com";
+    options.webSocketServer = @"ws.example.com";
+    options.webSocketPort = 443;
+    options.enableTLSConnection = YES;
     // apnsCertName is the certificate name. You can pass nil for now and provide the certificate name later when configuring APNs push.
     options.apnsCertName = nil;
     [[EMClient sharedClient] initializeSDKWithOptions:options];

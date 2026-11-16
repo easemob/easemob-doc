@@ -2,6 +2,8 @@
 
 This document describes how to integrate the EasyIM Web SDK into your Web project.
 
+**EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Before initializing the SDK, obtain the app's service URLs and apply the [fixed-domain configuration](initialization.html#configure-fixed-service-domains).**
+
 ## Development environment requirements
 
 - A modern browser such as Chrome, Firefox, Safari, or another browser that uses one of these browser engines, such as Microsoft Edge, is supported.
@@ -70,12 +72,18 @@ import { GroupManager } from "easemob-websdk/managers/group";
 
 ##### 3. Register modules with the SDK instance
 
-Register feature managers through the `managers` parameter during initialization or through the chained `.use()` method after initialization.
+Register feature managers through the `managers` parameter during initialization or through the chained `.use()` method after initialization. The addresses in the examples are placeholders. Replace them with the values for your app before running the code.
 
 ```typescript
 // Method one: Register the managers during initialization.
 const client = ChatClient.init({
   appKey: "your appKey",
+  serviceConfig: {
+    serverUrls: {
+      restApiUrl: 'https://rest.example.com',
+      wsUrl: 'wss://ws.example.com',
+    },
+  },
   managers: [ChatManager, ContactManager, GroupManager],
 });
 ```
@@ -84,6 +92,12 @@ const client = ChatClient.init({
 // Method two: Register the managers through the chained use method.
 const client = ChatClient.init({
   appKey: "your appKey",
+  serviceConfig: {
+    serverUrls: {
+      restApiUrl: 'https://rest.example.com',
+      wsUrl: 'wss://ws.example.com',
+    },
+  },
 })
   .use(ChatManager)
   .use(ContactManager)
@@ -110,9 +124,11 @@ const contacts = await client.contactManager.getContacts();
 
 ##### SDK modules that support on-demand importing
 
+In the table, `serviceConfig` represents the fixed service address configuration shown above. The addresses in the examples are placeholders. Replace them with the values for your app before running the code.
+
 | Feature | Import statement | Usage |
 | :--- | :--- | :--- |
-| SDK initialization and connection management | `import { ChatClient } from "easemob-websdk";` | `ChatClient.init({ appKey: "your appKey" });` |
+| SDK initialization and connection management | `import { ChatClient } from "easemob-websdk";` | `ChatClient.init({ appKey: "your appKey", serviceConfig });` |
 | Message and conversation management | `import { ChatManager } from "easemob-websdk";` or `import { ChatManager } from "easemob-websdk/managers/chat";` | Register it through the `managers` parameter or `.use(ChatManager)`, and then call `client.chatManager`. |
 | Friend management | `import { ContactManager } from "easemob-websdk";` or `import { ContactManager } from "easemob-websdk/managers/contact";` | Register it through the `managers` parameter or `.use(ContactManager)`, and then call `client.contactManager`. |
 | Chat group management | `import { GroupManager } from "easemob-websdk";` or `import { GroupManager } from "easemob-websdk/managers/group";` | Register it through the `managers` parameter or `.use(GroupManager)`, and then call `client.groupManager`. |
@@ -137,6 +153,12 @@ If your project does not use an npm package manager, download the browser script
 
   const client = ChatClient.init({
     appKey: "your appKey",
+    serviceConfig: {
+      serverUrls: {
+        restApiUrl: 'https://rest.example.com',
+        wsUrl: 'wss://ws.example.com',
+      },
+    },
     managers: [ChatManager],
   });
 </script>
@@ -158,6 +180,12 @@ export default {
     import("easemob-websdk").then(({ ChatClient, ChatManager }) => {
       const client = ChatClient.init({
         appKey: "your appKey",
+        serviceConfig: {
+          serverUrls: {
+            restApiUrl: 'https://rest.example.com',
+            wsUrl: 'wss://ws.example.com',
+          },
+        },
         managers: [ChatManager],
       });
 
@@ -179,6 +207,12 @@ export default function Home() {
     import("easemob-websdk").then(({ ChatClient, ChatManager }) => {
       const client = ChatClient.init({
         appKey: "your appKey",
+        serviceConfig: {
+          serverUrls: {
+            restApiUrl: 'https://rest.example.com',
+            wsUrl: 'wss://ws.example.com',
+          },
+        },
         managers: [ChatManager],
       });
 

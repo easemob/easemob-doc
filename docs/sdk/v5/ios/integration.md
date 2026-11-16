@@ -2,6 +2,8 @@
 
 This page describes how to integrate the EasyIM iOS SDK into an iOS project.
 
+**EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery). See [Configure fixed service domains](initialization.html#configure-fixed-service-domains).**
+
 ## Development environment requirements
 
 - Xcode: The latest version is recommended.

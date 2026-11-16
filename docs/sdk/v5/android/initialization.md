@@ -12,6 +12,14 @@ Initialize the SDK in the app's main process and pass the Application Context to
 
 Register a valid EasyIM developer account, create an app, and obtain its App Key. For details, see the [EasyIM Console documentation](/product/console/app_create.html).
 
+## Configure fixed service domains
+
+EasyIM requires fixed service domains. Do not use HTTP DNS (DNSConfig service discovery) to obtain service endpoints. Obtain the **REST API** and **WebSocket** URLs for your app from **Overview > Domain Configuration** in EasyIM Console. For details, see [Data centers](/product/data_center.html#data-center).
+
+Disable DNSConfig with `EMOptions#enableDNSConfig(false)` and set the REST address, messaging WebSocket host, port, and TLS option before initialization. DNSConfig defaults to enabled. For the REST setting, use the full HTTPS URL; for the native WebSocket setting, use only the host name, without a scheme or path, and set the port separately.
+
+The example below uses WSS on port `443`. Use your app's actual endpoint and port. The addresses in the examples are placeholders. Replace them with the values for your app before running the code.
+
 ## Initialize the SDK
 
 Create `EMOptions`, call `setAppKey` to set the App Key, complete the remaining initialization configuration, and then pass the `Context` and `EMOptions` to `EMClient.init`.
@@ -19,6 +27,11 @@ Create `EMOptions`, call `setAppKey` to set the App Key, complete the remaining 
 ```java
 EMOptions options = new EMOptions();
 options.setAppKey("your-org#your-app");
+options.enableDNSConfig(false);
+options.setRestServer("https://rest.example.com");
+options.setWebSocketServer("ws.example.com");
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
 // Continue setting other EMOptions configurations according to your business requirements.
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
@@ -28,6 +41,11 @@ The following table lists common `EMOptions` methods. Complete the settings befo
 | Method | Description |
 | :--- | :--- |
 | `setAppKey(String appkey)` | Sets the App Key. `appkey` is the unique identifier obtained after creating an app in EasyIM Console. Its format is generally `orgName#appName`. |
+| `enableDNSConfig(boolean enable)` | Controls DNSConfig endpoint discovery. Defaults to `true`; set to `false` before initialization. |
+| `setRestServer(String restServer)` | Sets the app's full REST API URL, such as `https://rest.example.com`. |
+| `setWebSocketServer(String wsServer)` | Sets the messaging WebSocket host name, without a scheme or path. |
+| `setWebSocketPort(int port)` | Sets the messaging WebSocket port. Use `443` for the WSS example. |
+| `setEnableTLSConnection(boolean enable)` | Enables TLS for the persistent connection. Set to `true` for WSS. |
 | `setPushConfig(EMPushConfig pushConfig)` | Sets the offline push configuration. Pass a constructed `EMPushConfig` before `init`. If it is not set, the SDK creates a default push configuration. |
 | `setUsePushInBackground(boolean usePushInBackground)` | Starting from SDK 5.2.1, sets whether to disconnect the persistent connection and use vendor push after the app enters the background. Set this before initialization. The default is `false`: the SDK does not actively disconnect because the app enters the background. If `true` and the push channel is valid when the app enters the background, the SDK schedules disconnection after approximately 10 seconds. Query with `isUsePushInBackground()`. For complete conditions and timing, see [Configure background message reception](push/push_overview.html#configure-background-message-reception). |
 | `setDisconnectNotifyThreshold(int seconds)` | Starting from SDK 5.2.1, sets the recoverable disconnection notification grace period in seconds. Defaults to `10`; values less than or equal to `0` disable the delay. Can be set before or after initialization. Query with `getDisconnectNotifyThreshold()`. See [Configure the disconnection notification grace period](connection.html#configure-the-disconnection-notification-grace-period). |
@@ -41,7 +59,7 @@ The following table lists common `EMOptions` methods. Complete the settings befo
 | `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | Sets whether to include empty conversations when loading conversations from the local database.<br/> - `true`: Includes empty conversations.<br/> - (Default) `false`: Excludes empty conversations. |
 | `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | Sets whether to automatically load all conversations from the local database into memory after login succeeds. This feature is supported starting from SDK v5.1.0.<br/> - (Default) `true`: Automatically loads all conversations.<br/> - `false`: Does not automatically load all conversations. You can load them as needed through pagination or filtering APIs. |
 
-For details about configuring an IP address or domain for the private-cloud SDK, see [Private Cloud SDK IP Address/Domain Configuration](private_ip_domain.html).
+Feature-specific initialization examples in the SDK documentation omit these common connection settings. Include the fixed-domain configuration above before initializing the SDK.
 
 ## Set listeners after initialization
 
