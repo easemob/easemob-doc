@@ -18,6 +18,7 @@ To use the Reaction feature, enable it in the [EasyIM Console](https://console.e
 
 ## Limitations
 
+- The same user can add the same Reaction to the same message only once.
 - Reactions currently apply only to one-to-one and group chats. Chat rooms are not supported.
 - For Reaction counting rules, storage period, per-user addition limits, the number of Reactions that can be added to each message, and Reaction ID requirements, see [Limitations](limitation.html).
 

@@ -157,6 +157,8 @@ EMClient.shared().chatManager?.send(
 
 In addition to text messages, the SDK supports attachment messages, including voice, image, video, and file messages.
 
+When the SDK automatically transfers attachments, ensure that the local file remains accessible until the `completion` callback for sending the message returns. Do not delete the source file beforehand. For resources from a photo album, system file picker, or temporary directory, if their access permissions and lifetime cannot be guaranteed, we recommend copying them to a local directory controlled by your app before sending.
+
 #### Sending process
 
 Sending an attachment message consists of the following two steps:

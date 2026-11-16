@@ -288,7 +288,7 @@ Customize the specific behavior according to your business requirements. In addi
 
 :::tip
 - A command message cannot be recalled after it is sent.
-- Command messages are not stored in the local database and therefore are not displayed in the UI.
+- Command messages are not stored in the local database, do not create local conversations, and are usually not displayed in the UI.
 :::
 
 The recipient receives command messages through the `cmdMessagesDidReceive` callback and can process them as needed.

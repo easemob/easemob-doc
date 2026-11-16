@@ -61,7 +61,7 @@ result.forEach((item) => {
 });
 ```
 
-When presence changes, the subscriber receives the `onPresenceStatusChange` callback.
+When a subscribed user's presence changes, the subscriber receives the `onPresenceStatusChange` callback.
 
 :::tip
 - A subscription can be valid for up to 30 days. To continue following the user after it expires, subscribe again.

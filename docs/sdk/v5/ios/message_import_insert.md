@@ -34,6 +34,10 @@ We recommend importing no more than 1,000 messages at a time.
 }];
 ```
 
+:::tip
+`EMOptions#regardImportMessagesAsRead` does not control the read status of messages imported locally in bulk. This option applies to historical messages imported through the [server-side message import API](/rest/message_import_single.html) and subsequently retrieved by the client from the server. Before calling the local import API, ensure that the SDK is initialized and the current user's local database is open.
+:::
+
 ## Insert a message
 
 To add a message that does not need to be sent and is intended only for local display, such as “XXX recalled a message,” “XXX joined the group,” or “The other party is typing,” call `insertMessage` to insert it into a specified local conversation.

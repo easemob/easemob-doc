@@ -2,14 +2,14 @@
 
 ## Feature overview
 
-EasyIM supports delivering messages only to online users. If a recipient is offline, the recipient cannot receive the message. This feature is intended for scenarios in which an app needs to display information only to online users. For example, command messages can be used to show real-time changes in group voting results. Only online users need to see the changes in real time, while offline users can retrieve the final state when they get online again.
+EasyIM supports delivering messages only to online users. If a recipient is offline, the recipient cannot receive the message. This feature is intended for scenarios in which an app needs to display information only to online users. For example, command messages can be used to show real-time changes in group voting results. Only online users need to see the changes in real time, while offline users can retrieve the final state through your app's business logic when they get online again.
 
 ## Limitations
 
 - **Applicable conversation types**: Only one-to-one chats and group chats are supported. **Chat rooms are not supported**.
 - **Supported message types:** All message types support delivery to online users only.
 - **Offline storage limitation:** **Offline storage is not supported.** If a recipient is offline when the message is sent, the recipient cannot receive it, even after logging in again. Regular messages are delivered in real time when the recipient is online. When the recipient is offline, an offline push notification is triggered, and the EasyIM server delivers messages sent during the offline period after the recipient gets online again.
-- **Roaming storage limitation:** Roaming storage is not supported by default. By default, sent messages are not stored on the EasyIM server, so users cannot retrieve them on other devices. **To enable roaming storage for online-only messages, contact the EasyIM business manager.**
+- **Roaming storage limitation:** Roaming storage is not supported by default. Users cannot retrieve these messages on other devices. **To enable roaming storage for online-only messages, contact the EasyIM business manager.**
 
 ## Prerequisite
 

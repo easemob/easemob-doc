@@ -158,7 +158,7 @@ Sending an attachment message consists of the following two steps:
 
 By default, after `EMChatManager#sendMessage` is called, the SDK automatically uploads local attachments to the EasyIM server, and the recipient SDK can automatically download them. Use `EMOptions#setAutoTransferMessageAttachments` to control whether the SDK automatically transfers attachments. For message attachment size and storage limits, see [Message Attachment Limitations](/product/limitation.html#message-storage).
 
-When the SDK automatically transfers attachments, ensure that the local file path or URI remains accessible until the message sending result callback returns. Do not delete the source file or revoke URI read permission beforehand. For resources returned by a photo album, system file picker, or temporary directory, if their access permissions and lifetime cannot be guaranteed, we recommend copying them to a local directory controlled by your app before sending.
+When the SDK automatically transfers attachments, ensure that the local file or URI remains readable until the `onSuccess` or `onError` callback of the `EMCallBack` set through `EMMessage.setMessageStatusCallback` returns. Do not delete the source file or revoke URI read permission beforehand. For resources returned by a photo album, system file picker, or temporary directory, if their access permissions and lifetime cannot be guaranteed, we recommend copying them to the app's private directory and sending the copied file.
 
 ### Send image messages
 

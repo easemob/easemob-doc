@@ -159,6 +159,10 @@ console.log(contacts);
 console.log(joinedGroups);
 ```
 
+## Enable automatic user information management
+
+Automatic user information management and automatic contact synchronization are independent. `enableUserInfoSync` is disabled by default. When enabled, it synchronizes the current user's attributes after login succeeds, but does not automatically retrieve all friends' nicknames and avatars at login. Other users' attributes are updated through message-triggered synchronization, explicit retrieval, and other mechanisms. For details, see [Automatic User Information Management](userinfo_provider.html).
+
 ## API list
 
 | API name | Module/Class | Description |

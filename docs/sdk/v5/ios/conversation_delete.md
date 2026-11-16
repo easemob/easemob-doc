@@ -107,7 +107,7 @@ EMClient.shared().chatManager?.deleteConversation(
 ```
 
 :::tip
-After a conversation is deleted, the SDK recreates the corresponding local conversation if messages are subsequently sent or received. If `isDeleteMessages` is `false`, server-side roaming messages are not deleted with the conversation and can be retrieved as needed within their retention period. If `isDeleteMessages` is `true`, the server-side roaming messages of this conversation are also deleted and can no longer be retrieved through the SDK.
+When deleting a local conversation, `isDeleteMessages` controls whether its local messages are also deleted. If it is `false`, local messages are retained; if it is `true`, local messages are deleted. This operation does not delete the server-side conversation or roaming messages. If messages are subsequently sent or received, the SDK recreates the corresponding local conversation.
 :::
 
 ### Bulk delete local conversations

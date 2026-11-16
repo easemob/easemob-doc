@@ -140,7 +140,7 @@ await client.groupManager.getGroup('groupId').changeOwner({
 
 ### Add a group admin
 
-Only the group owner can call `addAdmin` to add a group admin. After the admin is added, the new admin and other admins receive the `onAdminAdded` event.
+Only the group owner can call `addAdmin` to add a group admin. After the admin is added, the group owner, the new admin, and other admins receive the `onAdminAdded` event.
 
 A group admin has most chat group management permissions, except for a few operations such as destroying the group.
 
@@ -152,7 +152,7 @@ await client.groupManager.getGroup('groupId').addAdmin({
 
 ### Remove a group admin
 
-Only the group owner can call `removeAdmin` to remove a group admin. After the admin is removed, the removed admin and other admins receive the `onAdminRemoved` event.
+Only the group owner can call `removeAdmin` to remove a group admin. After the admin is removed, the group owner, the removed admin, and other admins receive the `onAdminRemoved` event.
 
 After being removed from the group admin list, the admin retains only regular group member permissions.
 

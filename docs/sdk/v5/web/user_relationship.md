@@ -166,7 +166,7 @@ contacts.forEach(contact => {
 
 #### Retrieve an individual user's attributes from local memory
 
-To read an individual friend's user attributes from memory, select the target friend from the friend list returned by `client.contactManager.getContacts`. For details about this API, see [Read user attributes from local memory](userinfo_provider.html#read-user-attributes-from-local-memory).
+To read an individual friend's user attributes from memory, select the target friend from the friend list returned by `client.contactManager.getContacts`. For details about this API, see [Read user attributes from local cache](userinfo_provider.html#read-user-attributes-from-local-cache).
 
 To retrieve the latest user attributes, call [client.userInfoManager.getUserInfoByUserId](userprofile.html#retrieve-all-user-attributes-from-the-server) to query the server.
 
@@ -260,7 +260,7 @@ console.log(result.succeeded, result.failed);
 
 ### Remove users from the blocklist
 
-Call `removeUserFromBlocklist` to remove one or more users from the blocklist. After removal, the users can send messages and perform other actions again.
+Call `removeUserFromBlocklist` to remove one or more users from the blocklist. After removal, the users can send messages or friend requests again.
 
 ```typescript
 await client.contactManager.removeUserFromBlocklist({

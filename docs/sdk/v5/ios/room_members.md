@@ -135,6 +135,8 @@ Only the chat room owner and admins can call `removeWhiteListMembers` to remove 
 
 ## Manage the chat room mute list
 
+Individually muted members cannot send messages in the chat room, even if they are also on the allowlist. When mute all is enabled, the chat room owner, admins, and allowlisted members can still send messages, provided they have not been individually muted.
+
 ### Add members to the chat room mute list
 
 Only the chat room owner and admins can call `muteMembers` to add specified members to the chat room mute list. The muted members and the other chat room admins or owner who did not perform the operation receive the `chatroomMuteListDidUpdate` callback.

@@ -133,7 +133,9 @@ The main parameters are as follows:
 
 ## Manage chat room custom attributes
 
-Chat room custom attributes use a key-value structure, and both the key and value must be strings. You can use custom attributes to store business data such as mic positions, the room topic, and game status and synchronize the data with chat room members through events.
+Custom chat room attributes are stored as string key-value pairs. Each chat room supports up to 100 custom attributes. Each key can contain up to 128 characters and supports only uppercase and lowercase English letters, digits, `_`, `-`, and `.`. Each value can contain up to 4096 characters. A batch set operation accepts up to 10 key-value pairs per call.
+
+You can use custom attributes to store business data such as mic positions, the room topic, and game status and synchronize the data with chat room members through events.
 
 ### Retrieve chat room custom attributes
 

@@ -118,7 +118,7 @@ client.chatManager.addEventHandler('message-listener', {
 `message.sender` returns sender information currently available locally and is not guaranteed to be the latest information at that time. If `enableUserInfoSync` was enabled during SDK initialization and the message triggers user information synchronization, the latest data is reported to your app through `onUserInfoUpdated` and other relevant events after the SDK finishes updating the cache.
 :::
 
-## Read user attributes from local memory
+## Read user attributes from local cache
 
 If your app needs to read friend attributes from memory, call `contactManager.getContacts` to retrieve the current friend-list view:
 
@@ -194,6 +194,6 @@ After automatic user information management is enabled, received messages contai
 | API name                                         | Module/Class       | Description                                                         |
 | ------------------------------------------------ | ----------------- | ------------------------------------------------------------ |
 | [`init`](#enable-automatic-user-information-management)                  | `ChatClient`      | Initializes the SDK and enables automatic user information management through `enableUserInfoSync`. |
-| [`getContacts`](#read-user-attributes-from-local-memory)         | `ContactManager`  | Reads the current in-memory friend list and user-attribute view.                   |
-| [`getUserInfoByUserId`](#read-user-attributes-from-local-memory) | `UserInfoManager` | Retrieves the latest user attributes for specified users from the server.                         |
+| [`getContacts`](#read-user-attributes-from-local-cache)         | `ContactManager`  | Reads the current in-memory friend list and user-attribute view.                   |
+| [`getUserInfoByUserId`](#read-user-attributes-from-local-cache) | `UserInfoManager` | Retrieves the latest user attributes for specified users from the server.                         |
 | [`updateOwnInfo`](#user-attributes-and-user-information)           | `UserInfoManager` | Updates the currently logged-in user's attributes.                                 |

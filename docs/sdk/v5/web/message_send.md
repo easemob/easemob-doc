@@ -198,14 +198,14 @@ await client.chatManager.sendMessage(message);
 
 ## Send attachment messages
 
-#### Overview
-
 Image, voice, video, and file messages are attachment messages. When sending an attachment message, the SDK creates the message, uploads the attachment, and sends the message based on the resource type.
 
 There are generally two ways to construct an attachment message:
 
 - `data`: Pass a local file object and let the SDK upload the attachment.
 - `originalUrl`: Pass a remote file URL when the attachment has already been uploaded to your app server or CDN. The SDK uses this URL to construct the message without uploading a local file. For details, see [Upload message attachments to your own server](#upload-message-attachments-to-your-own-server). 
+
+When the SDK automatically uploads attachments, ensure that the `File` or `Blob` remains readable until the `onFileUploadComplete` or `onFileUploadError` callback returns. If attachment reading depends on a Blob URL created through `URL.createObjectURL()`, do not revoke the URL with `URL.revokeObjectURL()` beforehand. For resources from a file picker, drag-and-drop, the clipboard, or temporary URLs, we recommend obtaining the complete `File` or `Blob` data before passing it to the SDK as an attachment to send.
 
 #### Sending process
 

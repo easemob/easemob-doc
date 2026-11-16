@@ -62,6 +62,10 @@ The client uses the following keys to store user attributes by default. When [se
 | `birth` | `NSString *` | The user birthday, which cannot exceed 64 characters. |
 | `ext` | `NSString *` | The extension field. |
 
+:::notice
+Attributes omitted from an update request retain their original values. When `updateOwnUserInfo` is called with an `EMUserInfo` object, the SDK always submits `gender`. If gender is not set, the default value `0` may overwrite the existing gender. To update only one attribute, use the overload that accepts an attribute value and `EMUserInfoType`.
+:::
+
 ### Set an attribute of the current user
 
 Call `updateOwnUserInfo` to set an attribute of the current user. For example, change the avatar:

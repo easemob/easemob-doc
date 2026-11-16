@@ -170,7 +170,7 @@ EMClient.shared().groupManager?.updateGroupOwner(
 
 ### Add a chat group admin
 
-Only the chat group owner can call `addAdmin` to add an admin. After a successful operation, the new admin and the other admins receive the `groupAdminListDidUpdate` callback.
+Only the chat group owner can call `addAdmin` to add an admin. After a successful operation, the group owner, the new admin, and the other admins receive the `groupAdminListDidUpdate` callback.
 
 Except for a few permissions, such as destroying the chat group, an admin has most chat group management permissions.
 
@@ -187,7 +187,7 @@ EMClient.shared().groupManager?.addAdmin(
 
 ### Remove a chat group admin
 
-Only the chat group owner can call `removeAdmin` to remove an admin. After a successful operation, the removed admin and the other admins receive the `groupAdminListDidUpdate` callback.
+Only the chat group owner can call `removeAdmin` to remove an admin. After a successful operation, the group owner, the removed admin, and the other admins receive the `groupAdminListDidUpdate` callback.
 
 After an admin loses chat group management permissions, they have only regular member permissions.
 

@@ -95,3 +95,5 @@ client.addEventHandler('pin', {
   },
 });
 ```
+
+If pinning fails, check whether the feature is enabled, whether the message is still stored on the server, the number of pinned messages in the conversation, and whether the parameters are correct. Event notifications do not automatically update message arrays maintained by your app.

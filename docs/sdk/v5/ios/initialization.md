@@ -212,6 +212,10 @@ let contacts = EMClient.shared().contactManager?.getAllContacts() ?? []
 let joinedGroups = EMClient.shared().groupManager?.getJoinedGroups() ?? []
 ```
 
+## Enable automatic user information management
+
+Automatic user information management and automatic contact synchronization are independent. `EMOptions.enableUserInfo` is disabled by default. When enabled, it synchronizes the current user's attributes after login succeeds, but does not automatically retrieve all friends' nicknames and avatars at login. Other users' attributes are updated through message-triggered synchronization, explicit retrieval, and other mechanisms. For details, see [Automatic User Information Management](userinfo_provider.html).
+
 ## API list
 
 | API | Module/Type | Description |

@@ -8,7 +8,7 @@
 
 ## Feature activation
 
-Before using this feature, activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
+To synchronize the server-side conversation list to the local client, first activate the server-side conversation list feature in [EasyIM Console](/product/console/basic_message_conversation.html#server-side-conversation-list).
 
 ## Prerequisite
 

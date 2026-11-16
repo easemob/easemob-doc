@@ -10,6 +10,8 @@ After receiving a message, the recipient can use `message.ext` to retrieve all e
 
 ## Example code
 
+The following example creates and sends a text message with extension fields and demonstrates how to read the fields after receiving the message. Before running it, initialize the SDK and log in.
+
 ```objectivec
 // Create a text message body. content is the text to send.
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:content];

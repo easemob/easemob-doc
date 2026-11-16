@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation pinning places important one-to-one, group, or chat room conversations near the top of the conversation list, making it easier for users to quickly find frequently used or important conversations. The pin status is saved on the server and synchronized to the current user's other devices and local conversation data.
+Conversation pinning places important one-to-one and group conversations near the top of the conversation list, making it easier for users to quickly find frequently used or important conversations. Chat room conversations are not supported. The pin status is saved on the server and synchronized to the current user's other devices and local conversation data.
 
 ## Feature activation
 
@@ -44,7 +44,7 @@ The parameters are described as follows:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationId` | String | The conversation ID.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> - Chat room: The chat room ID. |
+| `conversationId` | String | The conversation ID.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> Chat room conversations are not supported. |
 | `isPinned` | Boolean | Whether to pin the conversation.<br/> - `true`: Pins the conversation.<br/> - `false`: Unpins the conversation. |
 | `completionBlock` | `(EMError?) -> Void` | The result of the asynchronous operation. `error == nil` indicates success. Otherwise, handle the failure based on `EMError#code` and `EMError#errorDescription`. |
 
@@ -225,7 +225,7 @@ let sortedConversations =
 
 ## Notes
 
-- Conversation pinning supports one-to-one, group, and chat room conversations.
+- Conversation pinning supports one-to-one and group conversations. Chat room conversations are not supported.
 - `conversationId` cannot be empty. If the call fails, handle the failure based on `EMError#code` and `EMError#errorDescription` in the completion.
 - You can pin up to 50 conversations.
 - The conversation pin status is stored on the server and synchronized to the current user's other devices and local conversation data.

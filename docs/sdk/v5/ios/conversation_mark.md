@@ -2,7 +2,7 @@
 
 ## Feature overview
 
-Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customers. The iOS SDK supports adding tags to or removing tags from one-to-one, group, and chat room conversations.
+Conversation tags are used to assign business categories to conversations, such as starred, pending, or important customers. The iOS SDK supports adding tags to or removing tags from one-to-one and group conversations. Chat room conversations are not supported.
 
 The SDK provides 20 tags, from `EMMarkType0` through `EMMarkType19`. A conversation can contain up to 20 tags at the same time. Your application defines and maintains the mapping between each tag and its business meaning. In Swift, the corresponding enum values are `.markType0` through `.markType19`.
 
@@ -60,7 +60,7 @@ The parameters are described as follows:
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `conversationIds` | `[String]` | The array of conversation IDs. It cannot be empty and can contain up to 20 IDs in a single call.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> - Chat room: The chat room ID. |
+| `conversationIds` | `[String]` | The array of conversation IDs. It cannot be empty and can contain up to 20 IDs in a single call.<br/> - One-to-one chat: The peer user ID.<br/> - Group chat: The chat group ID.<br/> Chat room conversations are not supported. |
 | `mark` | `EMMarkType` | The tag to add. The value ranges from `.markType0` through `.markType19`. |
 | `completion` | `(EMError?) -> Void` | The result of the asynchronous operation. `error == nil` indicates success. Otherwise, handle the failure based on `EMError#code` and `EMError#errorDescription`. |
 
@@ -221,7 +221,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## Notes
 
-- Conversation tags support one-to-one, group, and chat room conversations.
+- Conversation tags support one-to-one and group conversations. Chat room conversations are not supported.
 - The Objective-C tag values range from `EMMarkType0` through `EMMarkType19`, and the corresponding Swift values range from `.markType0` through `.markType19`. Your application maintains their specific business meanings.
 - A single conversation can contain up to 20 tags at the same time.
 - `addConversationMark` and `removeConversationMark` can operate on multiple conversations at the same time. You can pass up to 20 conversation IDs in a single call.
