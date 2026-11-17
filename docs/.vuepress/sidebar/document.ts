@@ -381,8 +381,16 @@ const documentV5Sidebar = [
         { text: '下载文件缩略图', link: 'message_download_thumbnail.html' },
         ],
       },
-      { text: '获取历史消息记录', link: 'message_historical.html' },
       { text: '设置消息附件存储方式', link: 'message_attachment_storage.html' },
+      {
+        text: '获取历史消息',
+        collapsible: true,
+        children: [
+          { text: '获取单聊漫游消息', link: 'message_roam_single_obtain.html' },
+          { text: '获取群聊漫游消息', link: 'message_roam_group_obtain.html' },
+          { text: '获取历史消息记录', link: 'message_historical.html' }, 
+        ],
+      },
       {
         text: '消息表情回复',
         collapsible: true,
