@@ -29,7 +29,7 @@ POST https://{host}/api/server/v6/{org_name}/{app_name}/roaming/chat
 
 ## 请求示例
 
-### 获取第一页消息
+#### 获取第一页消息
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -45,7 +45,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 }'
 ```
 
-### 按时间范围分页获取消息
+#### 按时间范围分页获取消息
 
 首次请求时，设置 `startTimestamp` 和 `endTimestamp`，省略 `cursor`。若响应表示还有下一页，后续请求示例如下：
 

@@ -24,7 +24,6 @@
 "chat_type": "channel_ack", 
 "security": "203e3cXXXX0ebdbd776d8aa9cc057b2d",
 "payload": {
-"ack_message_id": "1252106100258375636", 
 "type": "channel_ack" 
 },
 "host": "XXXX@hsb-XXXX-msync0",
@@ -47,7 +46,6 @@
 | `chat_type` | String    |  会话已读回执。           |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。关于 `Secret`，详见 [环信控制台配置回调规则的描述](/product/console/basic_webhook.html#配置消息回调规则)。 |
 | `payload`   | object   | 会话已读回执详情。 |
-| `payload.ack_message_id` | String     | 会话中消息的消息 ID。                  |
 | `payload.type` | String | 会话已读回执类型。       |                |
 | `host`      | String   | 服务器名称。                                                 |
 | `appkey`    | String   | 你在环信控制台注册的应用唯一标识。                         |

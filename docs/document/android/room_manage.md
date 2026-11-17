@@ -80,7 +80,7 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-### 携带扩展信息加入聊天室
+#### 携带扩展信息加入聊天室
 
 如果需要在加入聊天室时传递自定义业务信息，请调用 `EMChatRoomManager#joinChatRoom` 重载方法。该方法还支持控制用户加入当前聊天室时，是否退出已加入的其他聊天室。
 
