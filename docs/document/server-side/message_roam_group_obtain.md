@@ -11,7 +11,7 @@
 - [**消息保存期限**](/product/pricing_policy.html#扩展服务费用)：仅返回仍在服务端保存期限内的漫游消息。
 - [**消息删除**](message_delete_roam_group_room_msgid.html) **与** [**清空**](message_delete_roam_user.html)：对该用户已单向删除或清空的漫游消息，不会返回。
 - **入群前历史消息的查询限制**：能否查询入群前的历史消息取决于应用配置。若不允许查询，则仅返回本次入群后的消息；若允许查询，则可返回入群前仍保存在服务端、且对该用户可见的消息。
-- **定向消息可见性**：对于群定向消息，仅返回该用户发送的消息，或该用户作为定向接收者收到的消息。
+- **[定向消息](message_group.html#发送定向消息) 可见性**：对于群定向消息，仅返回该用户发送的消息，或该用户作为定向接收者收到的消息。
 
 如果需要按小时下载应用的历史消息记录文件，详见 [获取历史消息记录](message_historical.html)。
 
@@ -195,7 +195,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/group' \
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。
 
-### 错误码
+## 错误码
 
 响应体中的 `error` 为对象时，读取 `error.code` 和 `error.message`。为字符串时，`error` 表示错误类型，`error_description` 提供具体原因。
 
