@@ -1,8 +1,8 @@
-# 拉取单聊历史消息
+# 获取单聊漫游消息
 
 ## 功能说明
 
-通过该接口，你可以从环信服务器分页拉取指定用户在某个单聊会话中可见的历史消息。这里的历史消息指服务端保存的漫游消息。
+通过该接口，你可以从环信服务器分页获取指定用户在某个单聊会话中可见的漫游消息。
 
 接口采用游标分页方式，每次返回一页消息，可使用返回的游标继续查询下一页，直至查询完成。支持按指定时间范围查询，并选择从新到旧或从旧到新的查询方向。
 
@@ -13,7 +13,7 @@
 
 如果需要按小时下载应用的历史消息记录文件，详见 [获取历史消息记录](message_historical.html)。
 
-如果需要拉取群聊会话中的历史消息，详见 [拉取群聊历史消息](message_roam_group_obtain.html)。
+如果需要获取群聊会话中的漫游消息，详见 [获取群聊漫游消息](message_roam_group_obtain.html)。
 
 ## 功能开通
 
@@ -33,7 +33,7 @@ POST https://{host}/api/server/v6/{org_name}/{app_name}/roaming/chat
 
 ## 请求示例
 
-### 拉取第一页消息
+### 获取第一页消息
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -49,7 +49,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 }'
 ```
 
-### 按时间范围分页拉取消息
+### 按时间范围分页获取消息
 
 首次请求时，设置 `startTimestamp` 和 `endTimestamp`，省略 `cursor`。若响应表示还有下一页，后续请求示例如下：
 
@@ -83,9 +83,9 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 | ---------------- | ------ | -------- | ------------------------------------------------------------ |
 | `username`       | String | 是       | 要查询其漫游消息的用户 ID。该用户用于确定消息可见范围，不表示只查询该用户发送的消息。 |
 | `to` | String | 是 | 单聊会话中另一方的用户 ID。 |
-| `limit`          | Number | 是       | 每页拉取的消息数量，以十进制整数字符串传入，例如 `20`。取值范围为 1–20。 |
+| `limit`          | Number | 是       | 每页获取的消息数量，以十进制整数字符串传入，例如 `20`。取值范围为 1–20。 |
 | `order` | String | 否 | 查询方向，请使用小写值：<br/> - `up`：从旧到新查询，先取较早的消息。<br/> - （默认）`down`：从新到旧查询，先取较新的消息。 |
-| `cursor`         | String | 否       | 分页游标。首次请求时不传入，后续请求使用上一次响应返回的游标。具体用法详见 [分页拉取](#分页拉取)。 |
+| `cursor`         | String | 否       | 分页游标。首次请求时不传入，后续请求使用上一次响应返回的游标。具体用法详见 [分页获取](#分页获取)。 |
 | `startTimestamp` | Number | 否       | 查询的起始时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之后的消息，不包含该时间点。不传入时，不额外设置起始时间条件。 |
 | `endTimestamp`   | Number | 否       | 查询的结束时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之前的消息，不包含该时间点。不传入时，不额外设置结束时间条件。 |
 
@@ -95,9 +95,9 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 - 同时传入 `startTimestamp` 和 `endTimestamp` 时，应确保 `startTimestamp` 小于 `endTimestamp`。
 - 不使用的可选参数请直接省略，不要设置为空字符串或 `null`。
 
-#### 分页拉取
+#### 分页获取
 
-1. 首次请求时，不传入 `cursor`，并设置每页拉取数量 `limit`。如需限定时间范围或查询方向，同时设置相应参数。
+1. 首次请求时，不传入 `cursor`，并设置每页获取数量 `limit`。如需限定时间范围或查询方向，同时设置相应参数。
 2. 读取响应中的 `data.pagination.finished`。若为 `false`，将 `data.pagination.cursor` 原样传入下一次请求的 `cursor`，继续查询下一页。
 3. 翻页时，保持请求 URL、`username`、`to`、`order`、`startTimestamp` 和 `endTimestamp` 不变。
 4. 当 `data.pagination.finished` 为 `true` 时，结束本次查询。
@@ -173,7 +173,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 | `data` | JSON | 本次查询返回的数据。 |
 | `data.list` | Array | 本页的消息列表。 |
 | `data.pagination` | JSON | 分页信息。 |
-| `data.pagination.finished` | Boolean | 是否已完成查询：<br/> - `true`：没有下一页；<br/> - `false`：需要继续拉取下一页。 |
+| `data.pagination.finished` | Boolean | 是否已完成查询：<br/> - `true`：没有下一页；<br/> - `false`：需要继续获取下一页。 |
 | `data.pagination.cursor` | String | 查询下一页所需的游标。查询完成时，代码设置为 `null`；调用方无需继续使用该字段。 |
 | `data.list[].msg_id` | String | 消息 ID。 |
 | `data.list[].timestamp` | Number | 消息时间戳，单位为毫秒。 |
@@ -201,17 +201,17 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/chat' \
 
 #### 常见问题
 
-1. 删除好友后，还能拉取原单聊会话的漫游消息吗？
+1. 删除好友后，还能获取原单聊会话的漫游消息吗？
 
 可以。删除好友，服务端的漫游消息仍保留。此外，该接口不校验会话双方是否仍为好友，仅解除好友关系不会影响原单聊会话的漫游消息查询。
 
-查询结果仍受消息保存期限、用户删除或清空记录及请求条件等限制。如果业务在删除好友时同时删除或清空了服务端漫游消息，则无法再拉取相应消息。
+查询结果仍受消息保存期限、用户删除或清空记录及请求条件等限制。如果业务在删除好友时同时删除或清空了服务端漫游消息，则无法再获取相应消息。
 
-2. 拉取单聊漫游消息是否要求 `username` 和 `to` 为好友？
+2. 获取单聊漫游消息是否要求 `username` 和 `to` 为好友？
 
 不要求。该接口不校验双方是否为好友，查询结果取决于双方会话中是否存在对 `username` 可见的漫游消息：
 
-- **删除好友后**：仅解除好友关系不会影响查询，仍可拉取保留的漫游消息。
+- **删除好友后**：仅解除好友关系不会影响查询，仍可获取保留的漫游消息。
 - **双方不是好友，但有聊天记录**：只要对应的漫游消息仍保存在环信服务器上，且对 `username` 可见，就可以拉取，包括双方发送的消息。
 - **双方不是好友，也没有聊天记录**：服务端没有该会话的漫游消息时，查询成功后返回空消息列表。
 

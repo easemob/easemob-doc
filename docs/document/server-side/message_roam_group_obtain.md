@@ -1,8 +1,8 @@
-# 拉取群聊历史消息
+# 获取群聊漫游消息
 
 ## 功能说明
 
-通过该接口，你可以从环信服务器分页拉取指定用户在某个群组中可见的历史消息。这里的历史消息指服务端保存的漫游消息。
+通过该接口，你可以从环信服务器分页获取指定用户在某个群组中可见的漫游消息。
 
 接口采用游标分页方式，每次返回一页消息，可使用返回的游标继续查询下一页，直至查询完成。支持按指定时间范围查询，并选择从新到旧或从旧到新的查询方向。
 
@@ -15,7 +15,7 @@
 
 如果需要按小时下载应用的历史消息记录文件，详见 [获取历史消息记录](message_historical.html)。
 
-如果需要拉取单聊会话中的历史消息，详见 [拉取单聊历史消息](message_roam_single_obtain.html)。
+如果需要获取单聊会话中的历史消息，详见 [获取单聊漫游消息](message_roam_single_obtain.html)。
 
 ## 功能开通
 
@@ -35,7 +35,7 @@ POST https://{host}/api/server/v6/{org_name}/{app_name}/roaming/group
 
 ## 请求示例
 
-### 拉取第一页消息
+### 获取第一页消息
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -51,7 +51,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/group' \
 }'
 ```
 
-### 按时间范围分页拉取消息
+### 按时间范围分页获取消息
 
 首次请求时，设置 `startTimestamp` 和 `endTimestamp`，省略 `cursor`。若响应表示还有下一页，后续请求示例如下：
 
@@ -84,10 +84,10 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/group' \
 | 参数             | 类型   | 是否必需 | 描述                                                         |
 | ---------------- | ------ | -------- | ------------------------------------------------------------ |
 | `username`       | String | 是       | 要查询其漫游消息的用户 ID。该用户用于确定消息可见范围，不表示只查询该用户发送的消息。 |
-| `groupId`        | String | 是       | 要拉取历史消息的群组 ID。                                    |
-| `limit`          | Number | 是       | 每页拉取的消息数量，以十进制整数字符串传入，例如 `20`。取值范围为 1–20。 |
+| `groupId`        | String | 是       | 要获取历史消息的群组 ID。                                    |
+| `limit`          | Number | 是       | 每页获取的消息数量，以十进制整数字符串传入，例如 `20`。取值范围为 1–20。 |
 | `order`          | String | 否       | 查询方向，请使用小写值：<br/> - `up`：从旧到新查询，先取较早的消息。<br/> - （默认）`down`：从新到旧查询，先取较新的消息。 |
-| `cursor`         | String | 否       | 分页游标。首次请求时不传入，后续请求使用上一次响应返回的游标。具体用法详见 [分页拉取](#分页拉取)。 |
+| `cursor`         | String | 否       | 分页游标。首次请求时不传入，后续请求使用上一次响应返回的游标。具体用法详见 [分页获取](#分页获取)。 |
 | `startTimestamp` | Number | 否       | 查询的起始时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之后的消息，不包含该时间点。不传入时，不额外设置起始时间条件。 |
 | `endTimestamp`   | Number | 否       | 查询的结束时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之前的消息，不包含该时间点。不传入时，不额外设置结束时间条件。 |
 
@@ -97,9 +97,9 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/group' \
 - 同时传入 `startTimestamp` 和 `endTimestamp` 时，应确保 `startTimestamp` 小于 `endTimestamp`。
 - 不使用的可选参数请直接省略，不要设置为空字符串或 `null`。
 
-#### 分页拉取
+#### 分页获取
 
-1. 首次请求时，不传入 `cursor`，并设置每页拉取数量 `limit`。如需限定时间范围或查询方向，同时设置相应参数。
+1. 首次请求时，不传入 `cursor`，并设置每页获取数量 `limit`。如需限定时间范围或查询方向，同时设置相应参数。
 2. 读取响应中的 `data.pagination.finished`。若为 `false`，将 `data.pagination.cursor` 原样传入下一次请求的 `cursor`，继续查询下一页。
 3. 翻页时，保持请求 URL、`username`、`groupId`、`order`、`startTimestamp` 和 `endTimestamp` 不变。
 4. 当 `data.pagination.finished` 为 `true` 时，结束本次查询。
