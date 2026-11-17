@@ -53,6 +53,26 @@ ChatClient.getInstance().init(context, options);
 必须在调用 `ChatClient#init(context, options)` 初始化 SDK 前开启该功能。SDK 初始化完成后再修改配置，不会应用于本次已创建的 SDK 实例。
 :::
 
+调用 `ChatOptions#setEnableUserInfo(true)` 开启用户信息自动管理功能后，SDK 的相关行为如下：
+
+1. 发送消息时，会携带用户属性和群成员名片的更新时间，并根据本地缓存为消息生成 `ChatSenderInfo`。
+
+2. 接收消息时，SDK 会根据消息中携带的更新时间，按需自动同步发送方最新的用户属性和群成员名片，并更新本地缓存。
+
+3. 可通过 `ChatMessage#getSenderInfo()` 获取 SDK 组装的发送方信息，包括用户 ID，以及当前可用的昵称、头像、群成员名片和好友备注。具体内容取决于消息对象及本地缓存，不能保证所有字段均有值。好友备注从接收方的本地好友信息中读取，不随消息发送。
+
+4. 调用 `ChatManager#fetchGroupMessageReadReceipts(messageId, pageSize, startReceiptId)` 时，SDK 会为 `GroupReadReceipt#getFrom()` 返回的成员信息补充当前可用的昵称、头像和群成员名片（未获取到的字段可能为空）。关闭该功能时，SDK 不会自动补充这些信息。
+
+5. `GroupManager#fetchGroupMemberDetails(groupId, pageSize, cursor)` 返回的 `GroupMember` 中会补充当前可用的用户昵称（`nickname`）和头像（`avatarUrl`）；关闭时不补充。群成员名片（`namecard`）由服务端返回，不受该开关的影响。
+
+6. 登录成功后，SDK 会自动从服务器同步当前登录用户的属性。
+
+不受该开关的影响的功能：
+
+1. 手动调用 `UserInfoManager#fetchUserInfoById(userId, attribute)` 时，仍会按更新时间将拉取结果写入本地缓存。该行为不受此开关影响。
+
+2. `UserInfoManager#getUserInfoById(userId)` 可读取并返回本地已缓存的用户信息。该接口不会主动从服务器获取数据，能否获取到数据取决于本地是否存在缓存，不受该开关的影响。
+
 ## 监听用户属性更新
 
 SDK 提供 `UserInfoListener`，用于监听用户属性更新事件，主要包括：
