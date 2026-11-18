@@ -1,16 +1,23 @@
 ﻿# 环信 Web IM SDK 4.x 到 5.0.0 迁移指南
 
-本文档介绍如何从旧版 `easemob-websdk` 迁移到新版 Web SDK。新版 SDK 以 `ChatClient` 为统一入口，并按功能拆分为多个 Manager。迁移时，建议先完成初始化、登录、消息、事件和返回值处理等核心改造，再按业务使用范围迁移用户关系、群组、聊天室、会话、推送等模块。
+本文档介绍如何将使用 `easemob-websdk` 的应用从 Web IM SDK 4.x 迁移至 5.0.0。
 
-## 迁移说明
+## 升级总览
 
-新版 SDK 保留了即时通讯的核心业务能力，但 API 入口、模块组织、消息创建方式、事件模型、返回值结构和类型校验方式均有调整。迁移过程中需要重点关注以下变化：
+Web IM SDK 5.0.0 是一次重要的架构升级，围绕客户端入口、模块组织、消息 API、事件模型及返回值与错误处理进行了系统性优化与重构。通过统一的客户端入口、按需注册的功能模块和类型化消息接口，5.0.0 旨在为您提供更统一、高效的开发体验。
 
+本次升级涉及部分接口的移除与替换，以及默认行为的调整。从 4.x 升级至 5.0.0 时，请按照本文的迁移指引，检查并更新相关接口调用、配置和事件处理逻辑，确保业务功能正常运行。
+
+主要变化如下：
+
+- 初始化入口从 `new SDK.connection` 调整为 `ChatClient.init`，业务所需的 Manager 需通过初始化参数 `managers` 或 `.use()` 注册。
 - API 不再集中挂载在 `conn` 实例上，而是按业务能力拆分到 `ChatManager`、`ContactManager`、`GroupManager`、`ChatRoomManager`、`PushManager` 等 Manager。
+- **登录与登出接口调整**：登录从 `conn.open({ user, accessToken })` 调整为 `client.login({ userId, token })`，登出从 `conn.close()` 调整为 `await client.logout()`。应用需通过业务服务器获取用户 Token，并处理 Token 续期。
 - 消息不再通过 `WebIM.message.create({ type, ... })` 统一创建，而是通过 `client.chatManager.createXxxMessage` 按消息类型创建。
 - 会话标识从 `to` 和 `chatType` 调整为 `conversationId` 和 `conversationType`。
 - 多数异步 API 直接返回业务对象，不再通过 `AsyncResult<T>` 包装。
 - 事件监听仍使用 `addEventHandler` / `removeEventHandler`，但部分事件名和事件分发方式发生变化。
+- 全局 `onError` 事件已移除，异步调用错误需通过 `try...catch` 捕获，并结合 SDK 错误类型处理。
 
 ## 迁移前准备
 

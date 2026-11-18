@@ -60,7 +60,7 @@
 
 ## v5.0.0 Dev 2026-8-12
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM iOS SDK 4.x 到 5.x 迁移指南](migration_guide.html)。
+iOS IM SDK 5.0.0 是一次重要的架构升级。本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM iOS SDK 4.x 到 5.x 迁移指南](migration_guide.html)。
 
 #### 重要变更
 
