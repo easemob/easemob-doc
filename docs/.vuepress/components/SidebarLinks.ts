@@ -16,6 +16,11 @@ export default defineComponent({
   setup(props) {
     const route = useRoute()
     const openGroupIndex = ref(-1)
+    const defaultOpenGroups = ref(new Set<number>())
+    const containsCurrentPage = (item: any): boolean =>
+      item.type === 'group'
+        ? item.children.some(containsCurrentPage)
+        : item.type === 'page' && item.link?.split('#')[0] === route.path
 
     watch(
       [() => route.path, () => props.config],
@@ -24,9 +29,18 @@ export default defineComponent({
         // Their directory route is the reliable signal for keeping groups closed.
         const isLandingPage = route.path.endsWith('/') &&
           /^\/(?:document|v4|uikit|callkit|product|value-added)\//.test(route.path)
+        // Only explicitly marked groups start open together; other menus
+        // retain the existing accordion behavior.
+        defaultOpenGroups.value = new Set(props.config.flatMap((item: any, index) =>
+          item.defaultOpen ? [index] : []
+        ))
         openGroupIndex.value = isLandingPage
           ? -1
-          : props.config.findIndex((item: any) => isMatchedSidebarItem(route, item))
+          : props.config.findIndex((item: any) =>
+              route.path.startsWith('/uikit/chatuikit/web/')
+                ? containsCurrentPage(item)
+                : isMatchedSidebarItem(route, item)
+            )
       },
       { immediate: true, flush: 'post' }
     )
@@ -35,9 +49,18 @@ export default defineComponent({
       h('li', config.type === 'group'
         ? h(SidebarGroup, {
             config,
-            open: index === openGroupIndex.value,
+            open: config.defaultOpen
+              ? defaultOpenGroups.value.has(index)
+              : index === openGroupIndex.value,
             onToggle: () => {
-              openGroupIndex.value = index === openGroupIndex.value ? -1 : index
+              if (config.defaultOpen) {
+                const next = new Set(defaultOpenGroups.value)
+                if (next.has(index)) next.delete(index)
+                else next.add(index)
+                defaultOpenGroups.value = next
+              } else {
+                openGroupIndex.value = index === openGroupIndex.value ? -1 : index
+              }
             },
           })
         : h(SidebarChild, { config }))

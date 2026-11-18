@@ -79,68 +79,6 @@ const chatUikitSidebar = [
   { text: "全局配置", link: "chatuikit_config_item.html", only: ["ios"]},
   { text: "进阶用法", link: "chatuikit_advancedusage.html", only: ["ios"]},
   // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["ios"]},
-  { text: "使用 MCP 集成", link: "easemob_mcp_server.html", only: ["web"]},
-  { text: "产品概述", link: "chatuikit_overview.html", only: ["web"]},
-  {
-    text: "特性",
-    collapsible: true,
-    children: [
-      { text: "通用", link: "chatfeature_common.html" },
-      { text: "会话", link: "chatfeature_conversation.html" },
-      { text: "消息", link: "chatfeature_message.html" },
-    ],
-    only: ["web"],
-  },
-  { text: "快速开始", link: "chatuikit_quickstart.html", only: ["web"]},
-  { type: "separator", only: ['web']} as any,
-  { text: "React 集成单群聊 UIKit", link: "chatuikit_integrated_react.html", only: ["web"]},
-  { text: "用户信息提供", link: "chatuikit_provider.html", only: ["web"]},
-  { text: "全局上下文", link: "chatuikit_context.html", only: ["web"]},
-  { text: "登录", link: "chatuikit_login.html", only: ["web"]},
-  { text: "事件监听器", link: "chatuikit_listener.html", only: ["web"]},
-  { text: "页面标题栏", link: "chatuikit_custom_titlebar.html", only: ["web"]},
-  {
-      text: "会话列表",
-      collapsible: true,
-      children: [
-        { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
-        { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
-        {
-          text: "自定义会话列表",
-          collapsible: true,
-          children: [
-           { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
-            { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
-          ],
-        },
-      ],
-    only: ["web"],
-  },
-  {
-      text: "消息",
-      collapsible: true,
-      children: [
-        { text: "页面介绍", link: "chatuikit_chat_intro.html" },
-        { text: "自定义消息列表", link: "chatuikit_custom_chat.html" },
-        { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
-      ],
-    only: ["web"],
-  },
-  {
-      text: "通讯录",
-      collapsible: true,
-      children: [
-        { text: "页面介绍", link: "chatuikit_contactlist_intro.html" },
-        { text: "自定义页面", link: "chatuikit_contactlist.html" },
-      ],
-    only: ["web"],
-  },
-  { text: "rootStore", link: "chatuikit_store.html", only: ["web"]},
-  { text: "音视频通话", link: "chatuikit_video.html", only: ["web"]},
-  { text: "国际化", link: "chatuikit_internationalization.html", only: ["web"]},
-  { text: "主题", link: "chatuikit_theme.html", only: ["web"]},
-  { text: "组件文档", link: "chatuikit_storybook.html", only: ["web"]},
-  // { text: "设计指南", link: "chatuikit_design_guide.html", only: ["web"] },
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   { text: "产品概述", link: "chatuikit_overview.html", only: ["android", "harmonyos", "react-native", "flutter"]},
   {
@@ -288,6 +226,87 @@ const chatUikitSidebar = [
     only: ["react-native", "flutter"],
   },
 ];
+// Web has parallel React and native Vue 3 documentation trees.
+const webChatUikitSidebar = [
+  { text: "入门指引", link: "beginner_guide.html" },
+  { text: "体验 React Demo", link: "demo_react.html" },
+  { text: "体验 VUE Demo", link: "demo_vue.html" },
+  {
+    text: "React UIKit",
+    collapsible: true,
+    defaultOpen: true,
+    children: [
+      { text: "产品概述", link: "chatuikit_overview.html" },
+      { text: "快速开始", link: "chatuikit_quickstart.html" },
+      { text: "使用 MCP 集成", link: "easemob_mcp_server.html" },
+      { text: "React 集成单群聊 UIKit", link: "chatuikit_integrated_react.html" },
+      {
+        text: "特性",
+        collapsible: true,
+        children: [
+          { text: "通用", link: "chatfeature_common.html" },
+          { text: "会话", link: "chatfeature_conversation.html" },
+          { text: "消息", link: "chatfeature_message.html" },
+        ],
+      },
+      { text: "用户信息提供", link: "chatuikit_provider.html" },
+      { text: "全局上下文", link: "chatuikit_context.html" },
+      { text: "登录", link: "chatuikit_login.html" },
+      { text: "事件监听器", link: "chatuikit_listener.html" },
+      { text: "页面标题栏", link: "chatuikit_custom_titlebar.html" },
+      {
+        text: "会话列表",
+        collapsible: true,
+        children: [
+          { text: "页面介绍", link: "chatuikit_conversation_list_intro.html" },
+          { text: "自定义搜索栏", link: "chatuikit_custom_conversation_list_searchbar.html" },
+          {
+            text: "自定义会话列表",
+            collapsible: true,
+            children: [
+              { text: "基本设置", link: "chatuikit_custom_conversation_list_basic.html" },
+              { text: "高级设置", link: "chatuikit_custom_conversation_list_advanced.html" },
+            ],
+          },
+        ],
+      },
+      {
+        text: "消息",
+        collapsible: true,
+        children: [
+          { text: "页面介绍", link: "chatuikit_chat_intro.html" },
+          { text: "自定义消息列表", link: "chatuikit_custom_chat.html" },
+          { text: "自定义消息输入", link: "chatuikit_custom_chat_inputmenu.html" },
+        ],
+      },
+      {
+        text: "通讯录",
+        collapsible: true,
+        children: [
+          { text: "页面介绍", link: "chatuikit_contactlist_intro.html" },
+          { text: "自定义页面", link: "chatuikit_contactlist.html" },
+        ],
+      },
+      { text: "rootStore", link: "chatuikit_store.html" },
+      { text: "音视频通话", link: "chatuikit_video.html" },
+      { text: "国际化", link: "chatuikit_internationalization.html" },
+      { text: "主题", link: "chatuikit_theme.html" },
+      { text: "组件文档", link: "chatuikit_storybook.html" },
+      { text: "更新日志", link: "releasenote.html" },
+    ],
+  },
+  {
+    text: "Vue3 UIKit",
+    collapsible: true,
+    defaultOpen: true,
+    children: [
+      { text: "产品概述", link: "vue_overview.html" },
+      { text: "开发文档导航", link: "vue_guide.html" },
+    ],
+  },
+  { text: "设计指南", link: "chatuikit_design_guide.html" },
+];
+
 const chatroomUikitSidebar = [
   { text: "使用 MCP 集成", link: "easemob_mcp_server.html"},
   { text: "产品概述", link: "roomuikit_overview.html" },
@@ -320,7 +339,7 @@ function buildChatUikitSidebar() {
   const result = {};
   chatPlatformList.forEach((platform) => {
     const key = `/uikit/chatuikit/${platform}/`;
-    result[key] = chatUikitSidebar
+    result[key] = (platform === "web" ? webChatUikitSidebar : chatUikitSidebar)
       .map((sidebar) =>
         handleSidebarItem(platform, sidebar, CHAT_DOC_PATH, "chatuikit")
       )
