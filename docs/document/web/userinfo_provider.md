@@ -64,7 +64,7 @@ const client = ChatClient.init({
 
 4. 调用 `ChatManager#getGroupMessageReadUsers(params)` 时，SDK 会为返回结果 `users` 中的 `user` 补充当前可用的昵称、头像和群成员名片 `nameCard`（未获取到的字段可能为空）。关闭该功能时，SDK 不会自动补充这些信息。
 
-5. 调用 `groupManager.getGroup(groupId).getMembers(query)` 时，SDK 会将已缓存的群成员名片补充到返回成员的 `user.nameCard`；仅当用户属性和对应的群成员名片均未缓存时，才会同时补查名片。若用户属性已缓存，则不会单独补查缺失的名片，因此不保证每个成员都包含 `nameCard`。关闭该功能时，不会自动补充群成员名片。对于昵称（`nickname`）、头像（`avatarUrl`）等用户属性，SDK 会优先读取本地缓存，缓存未命中时向服务端查询，该行为不受此开关影响，字段是否存在取决于实际获取的用户资料。
+5. `groupManager.getGroup(groupId).getMembers(query)` 返回成员的 `user` 会根据本地缓存及服务端查询结果补充用户昵称（`nickname`）和头像（`avatarUrl`），不受 `enableUserInfoSync` 开关影响；开启该功能后，还会补充缓存中的群成员名片（`nameCard`），仅在用户属性与名片均未缓存时补查名片。
 
 6. 登录成功后，SDK 会自动从服务器同步当前登录用户的属性。
 
