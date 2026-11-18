@@ -95,8 +95,11 @@ starter:
         link: /uikit/chatuikit/ios/chatuikit_overview.html
         text: iOS 
       - icon: /sdk/web.svg
+        link: /uikit/chatuikit/web/vue_overview.html
+        text: Web（Vue）
+      - icon: /sdk/web.svg
         link: /uikit/chatuikit/web/chatuikit_overview.html
-        text: Web
+        text: Web（React）
       - icon: '/sdk/harmonyos.svg'
         link: /uikit/chatuikit/harmonyos/chatuikit_overview.html
         text: 'HarmonyOS'  
@@ -1260,7 +1263,10 @@ projects:
                 text: iOS
                 link: /uikit/chatuikit/ios/chatuikit_conversation_list_intro
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /uikit/chatuikit/web/vue_overview.html#会话列表
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /uikit/chatuikit/web/chatuikit_conversation_list_intro.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS 
@@ -1284,7 +1290,10 @@ projects:
                 text: iOS
                 link: /uikit/chatuikit/ios/chatuikit_chat_intro
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /uikit/chatuikit/web/vue_overview.html#聊天与消息
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /uikit/chatuikit/web/chatuikit_chat_intro
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -1308,7 +1317,10 @@ projects:
                 text: iOS
                 link: /uikit/chatuikit/ios/chatuikit_custom_contact_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /uikit/chatuikit/web/vue_overview.html#通讯录与好友
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /uikit/chatuikit/web/chatuikit_contactlist_intro.html
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
@@ -1343,6 +1355,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /uikit/chatuikit/ios/chatuikit_custom_group_details.html
+              - icon: /sdk/web.svg
+                text: Web（Vue）
+                link: /uikit/chatuikit/web/vue_overview.html#群组与群管理
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /uikit/chatuikit/flutter/chatuikit_custom_group_details.html
