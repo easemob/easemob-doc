@@ -2,7 +2,7 @@
 
 ## 5.0.0 Dev 2026-10-14
 
-将 iOS/Android 原生 SDK 依赖升级至 5.0.0。
+FLutter IM SDK 5.0.0 是一次重要的架构升级，已将 iOS/Android 原生 SDK 依赖升级至 5.0.0。
 
 本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Flutter SDK 4.x 到 5.0.0 迁移指南](migration_guide.html)。
 
