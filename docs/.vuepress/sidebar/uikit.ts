@@ -229,12 +229,32 @@ const chatUikitSidebar = [
 // Web has parallel React and native Vue 3 documentation trees.
 const webChatUikitSidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
+  { text: "体验 Vue Demo", link: "demo_vue.html" },
   { text: "体验 React Demo", link: "demo_react.html" },
-  { text: "体验 VUE Demo", link: "demo_vue.html" },
+  {
+    text: "Vue UIKit",
+    collapsible: true,
+    defaultOpen: true,
+    children: [
+      { text: "产品概述", link: "vue_overview.html" },
+      {
+        text: "开发文档导航",
+        collapsible: true,
+        defaultOpen: true,
+        children: [
+          { text: "导航概览", link: "vue_guide.html" },
+          { text: "开始接入", link: "vue_quickstart.html" },
+          { text: "开发指南", link: "vue_development.html" },
+          { text: "组件文档", link: "vue_components.html" },
+          { text: "API 参考", link: "vue_api.html" },
+          { text: "版本与资源", link: "vue_resources.html" },
+        ],
+      },
+    ],
+  },
   {
     text: "React UIKit",
     collapsible: true,
-    defaultOpen: true,
     children: [
       { text: "产品概述", link: "chatuikit_overview.html" },
       { text: "快速开始", link: "chatuikit_quickstart.html" },
@@ -293,15 +313,6 @@ const webChatUikitSidebar = [
       { text: "主题", link: "chatuikit_theme.html" },
       { text: "组件文档", link: "chatuikit_storybook.html" },
       { text: "更新日志", link: "releasenote.html" },
-    ],
-  },
-  {
-    text: "Vue3 UIKit",
-    collapsible: true,
-    defaultOpen: true,
-    children: [
-      { text: "产品概述", link: "vue_overview.html" },
-      { text: "开发文档导航", link: "vue_guide.html" },
     ],
   },
   { text: "设计指南", link: "chatuikit_design_guide.html" },

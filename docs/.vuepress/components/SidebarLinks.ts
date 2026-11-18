@@ -18,9 +18,8 @@ export default defineComponent({
     const openGroupIndex = ref(-1)
     const defaultOpenGroups = ref(new Set<number>())
     const containsCurrentPage = (item: any): boolean =>
-      item.type === 'group'
-        ? item.children.some(containsCurrentPage)
-        : item.type === 'page' && item.link?.split('#')[0] === route.path
+      item.link?.split('#')[0] === route.path ||
+      (item.type === 'group' && item.children.some(containsCurrentPage))
 
     watch(
       [() => route.path, () => props.config],
