@@ -90,6 +90,7 @@
    - [实时音视频](/callkit/android/product_purchase.html)
    - [内容审核](/value-added/moderation/moderation_billing_domestic.html)
    - [消息推送](/value-added/push/push_billing_domestic.html)
+   - [消息搜索](/product/console/purchase_value_added.html#消息搜索)：用于开通服务端消息搜索。费用详见 [国内计费说明](/value-added/search/message_search_billing_domestic.html) 和 [海外计费说明](/value-added/search/message_search_billing_overseas.html)。
    - 大模型开发平台：当前服务仅限灰度测试，如需使用请联系环信商务开通。
    - [消息翻译](/value-added/translation/message_translation_android.html)：如需使用请联系环信商务开通。
 
@@ -118,10 +119,10 @@
 
 ### 试用增值服务
 
-测试版应用可在实时音视频、内容审核、消息翻译和即时推送服务中，点击 **立即订阅** 或 **免费使用** 开通服务，享受 [免费额度](/product/pricing_policy.html#增值服务)，无需付费。
+测试版应用可试用实时音视频、内容审核、消息翻译、即时推送和消息搜索服务。关于各服务的试用期限与免费额度，详见 [增值服务计费说明](/product/pricing_policy.html#增值服务)。
 
-**内容审核/消息翻译服务/即时推送说明：**
-- 上线正式版前，若你暂不需要该服务，可点击 **关闭服务**。关闭后，应用转为正式版时不会产生相关费用。
+**内容审核/消息翻译服务/消息搜索/即时推送说明：**
+- 上线正式版前，若你暂不需要该服务，可点击 **关闭服务**。关闭后，应用转为正式版时不会产生相关费用。若测试版已开通，上线后继续生效，并按正式版规则计费。
 - 若关闭内容审核后再上线正式版，相关配置会丢失。
 
 ### 试用基础功能

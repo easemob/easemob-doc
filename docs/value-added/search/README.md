@@ -1,8 +1,8 @@
 ---
-title: 搜索服务端消息
+title: 服务端消息搜索
 containerClass: breadcrumb-landing
 ---
 
-# 搜索服务端消息
+# 服务端消息搜索
 
 <SidebarOverviewPage />

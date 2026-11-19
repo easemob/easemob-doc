@@ -40,6 +40,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 上传文件  |    POST  | /{org_name}/{app_name}/chatfiles       | 100 次/秒/App Key                                                 |  100 次/秒   | 
 | 下载文件      |  GET     | /{org_name}/{app_name}/chatfiles/{file_uuid}       | 100 次/秒/App Key       | 100 次/秒    | 
 | * 获取历史消息（聊天记录）文件   |  GET     | /{org_name}/{app_name}/chatmessages/${time}          | 10 次/分钟/App Key  | 20 次/分钟    | 
+| 服务端消息搜索 | POST | /{org_name}/{app_name}/users/{username}/messages/search/get | 100 次/秒/App Key |  |
 | * 设置指定消息附件的存储方式   |  POST     | /{org_name}/{app_name}/users/{username}/chatfiles/lifetime          | 100 次/秒/App Key     |     | 
 | * 撤回单条消息    |    POST  | /{org_name}/{app_name}/messages/recall        | 100 次/秒/App Key   | 100 次/秒    | 
 | * 批量撤回消息    |    POST  | /{org_name}/{app_name}/messages/batch_recall        | 100 次/秒/App Key  | 100 次/秒    | 

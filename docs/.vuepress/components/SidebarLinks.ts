@@ -36,7 +36,8 @@ export default defineComponent({
         openGroupIndex.value = isLandingPage
           ? -1
           : props.config.findIndex((item: any) =>
-              route.path.startsWith('/uikit/chatuikit/web/')
+              (route.path.startsWith('/uikit/chatuikit/web/') ||
+                route.path.startsWith('/value-added/search/'))
                 ? containsCurrentPage(item)
                 : isMatchedSidebarItem(route, item)
             )
@@ -48,11 +49,11 @@ export default defineComponent({
       h('li', config.type === 'group'
         ? h(SidebarGroup, {
             config,
-            open: config.defaultOpen
+            open: typeof config.defaultOpen === 'boolean'
               ? defaultOpenGroups.value.has(index)
               : index === openGroupIndex.value,
             onToggle: () => {
-              if (config.defaultOpen) {
+              if (typeof config.defaultOpen === 'boolean') {
                 const next = new Set(defaultOpenGroups.value)
                 if (next.has(index)) next.delete(index)
                 else next.add(index)
@@ -62,7 +63,12 @@ export default defineComponent({
               }
             },
           })
-        : h(SidebarChild, { config }))
+        : h(SidebarChild, {
+            // Search navigation lists documents; headings stay in the article TOC.
+            config: route.path.startsWith('/value-added/search/')
+              ? { ...config, children: [] }
+              : config,
+          }))
     ))
   },
 })

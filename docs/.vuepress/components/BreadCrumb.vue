@@ -62,7 +62,7 @@ const valueAddedServices: Record<string, { title: string; home: string }> = {
     home: '/value-added/stt/',
   },
   search: {
-    title: '搜索服务端消息',
+    title: '服务端消息搜索',
     home: '/value-added/search/',
   },
 }

@@ -109,13 +109,13 @@ Agora Realm 初始化所需的配置及对应方法如下：
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Flutter SDK 4.25.0 发布 | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/flutter/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`，也可读取该属性查询当前配置。<br/> **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 支持 [分页获取本地会话列表](/document/flutter/conversation_list.html#分页获取本地会话)。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_flutter.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。<br/> - 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/document/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定](/document/flutter/push/push_easemob_console.html#绑定-pushkit-token) 和 [解绑](/document/flutter/push/push_easemob_console.html#解绑-pushkit-token) 苹果 PushKit token，仅 iOS 生效，其他平台调用不做任何处理。<br/> - 支持 [为消息配置回调路由标识](/document/flutter/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [Flutter SDK 4.25.0 更新日志](/document/flutter/releasenote.html#v4-25-0-2026-9-24) |
+| Flutter SDK 4.25.0 发布 | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/document/flutter/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`，也可读取该属性查询当前配置。<br/> **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 支持 [分页获取本地会话列表](/document/flutter/conversation_list.html#分页获取本地会话)。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_flutter.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息扩展字段（`ext`）搜索默认不开启，如需使用，请联系环信商务单独开通并配置可搜索字段白名单。<br/> - 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/document/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定](/document/flutter/push/push_easemob_console.html#绑定-pushkit-token) 和 [解绑](/document/flutter/push/push_easemob_console.html#解绑-pushkit-token) 苹果 PushKit token，仅 iOS 生效，其他平台调用不做任何处理。<br/> - 支持 [为消息配置回调路由标识](/document/flutter/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [Flutter SDK 4.25.0 更新日志](/document/flutter/releasenote.html#v4-25-0-2026-9-24) |
 
 #### 环信 React Native SDK v1.21.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| React Native SDK 1.21.0 发布 | **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 默认情况下，[本地会话列表不包含聊天室会话](/document/react-native/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。<br/> - 支持 [分页获取本地会话列表](/document/react-native/conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_rn.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需联系环信商务开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系环信商务。<br/> - iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定和解绑苹果 PushKit token](/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)。其他平台调用这两个方法不会执行任何操作。<br/> - 支持 [为消息配置回调路由标识](/document/react-native/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [React Native SDK 1.21.0 更新日志](/document/react-native/releasenote.html#v1-21-0-2026-09-24) |
+| React Native SDK 1.21.0 发布 | **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 默认情况下，[本地会话列表不包含聊天室会话](/document/react-native/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。<br/> - 支持 [分页获取本地会话列表](/document/react-native/conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。<br/> - 支持 [服务端消息搜索](/value-added/search/message_search_rn.html)，可根据关键词组合、会话 ID、消息类型、时间范围及消息内容或扩展属性进行筛选。该功能需在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。消息扩展字段（`ext`）搜索默认不开启，如需使用，请联系环信商务单独开通并配置可搜索字段白名单。<br/> - iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定和解绑苹果 PushKit token](/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)。其他平台调用这两个方法不会执行任何操作。<br/> - 支持 [为消息配置回调路由标识](/document/react-native/message_send.html#发消息时设置回调路由)，使消息可按指定路由触发发送前回调和发送后回调。目前，该功能仅面向国内 1 区和国内 2 区开放。 | 2026-9-24 | [React Native SDK 1.21.0 更新日志](/document/react-native/releasenote.html#v1-21-0-2026-09-24) |
 
 ## 2026-08
 
@@ -140,7 +140,7 @@ Agora Realm 初始化所需的配置及对应方法如下：
 ## 2026-07
 
 :::tip
-目前，服务端消息搜索仅面向国内 2 区开放。
+服务端消息搜索面向国内 1 区、国内 2 区、新加坡集群的应用开放。
 :::
 
 #### 环信 Android/iOS SDK v4.24.0 发版
@@ -156,15 +156,15 @@ Agora Realm 初始化所需的配置及对应方法如下：
 | :----- | :------- | :---------------- | :---------------- |
 | Web/小程序 SDK v4.24.1 开发版发布   | [支持服务端消息搜索](/value-added/search/message_search_web.html)。   | 2026-7-10     | - [Web SDK 4.24.1 更新日志](/document/web/releasenote.html#v4-24-1-dev-2026-7-10-开发版) <br/> - [小程序 SDK 4.24.1 更新日志](/document/applet/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
 
-#### 服务端支持消息搜索
+#### 服务端消息搜索
 
-服务端支持根据关键词搜索历史消息。详见 [消息搜索文档](/value-added/search/message_search_rest.html)。
+通过服务端消息搜索 RESTful API，你可以按一个或多个关键词检索指定用户可见的历史消息，并按会话、消息类型和时间范围筛选结果，支持分页、排序和关键词高亮。详见 [服务端消息搜索接口文档](/value-added/search/message_search_rest.html)。
 
-消息搜索为增值服务，要使用该功能，需要在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。开通后，系统会为你的应用创建搜索索引资源并开始同步消息数据。
+服务端消息搜索为增值服务，使用前需在环信控制台开通，详见 [开通说明](/product/console/purchase_value_added.html#消息搜索)。开通后，系统会为应用创建搜索索引资源并开始同步消息数据。
 
-目前，仅国内二区集群支持该功能。
+该服务面向国内 1 区、国内 2 区、新加坡集群的应用开放。仅测试版应用可免费试用 7 天，费用说明详见 [服务端消息搜索计费](/product/pricing_policy.html#服务端消息搜索)。
 
-**关于扩展字段搜索**： 开通消息搜索服务后，消息扩展字段（`ext`）搜索默认不开启。如需使用该功能，可在开通时一并说明，或后续联系商务单独开通。
+**关于扩展字段搜索**：消息扩展字段（`ext`）搜索默认不开启。如需使用，请联系环信商务单独开通并配置可搜索字段白名单。
 
 ## 2026-06
 
