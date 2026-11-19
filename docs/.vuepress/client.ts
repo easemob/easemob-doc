@@ -17,7 +17,6 @@ import Step from "./components/Step.vue";
 import SidebarMenuPage from "./components/SidebarMenuPage.vue";
 import SidebarOverviewPage from "./components/SidebarOverviewPage.vue";
 import FeedBack from "./components/Feedback.vue";
-import { embedChatbot } from "./embed";
 import { onBeforeUnmount, onMounted } from "vue";
 
 const DROPDOWN_SCROLL_SELECTOR = ".platform-select-dropdown, .nav-dropdown";
@@ -97,8 +96,6 @@ export default defineClientConfig({
     app.component("SidebarOverviewPage", SidebarOverviewPage);
     
     if (typeof window !== "undefined") {
-      embedChatbot();
-
       // 发布后旧 hash chunk 被删，路由懒加载失败时整页跳到目标路径；同一路径只跳一次，避免死循环
       const chunkReloadKey = "vuepress:chunk-reload";
       const isChunkLoadError = (error: unknown) =>
