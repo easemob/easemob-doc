@@ -30,14 +30,6 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "HeroSection",
-  methods: {
-    openAi() {
-      const chatbotBtn = document.getElementById("dify-chatbot-bubble-button");
-      if (chatbotBtn) {
-        chatbotBtn.click();
-      }
-    },
-  },
 });
 </script>
 
