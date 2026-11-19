@@ -52,6 +52,18 @@ EMClient.shared().initializeSDK(with: options)
 You must set `EMOptions#enableUserInfo` before calling `initializeSDK` to initialize the SDK. Otherwise, the feature does not take effect.
 :::
 
+When automatic user information management is enabled by setting `EMOptions#enableUserInfo` to `true`, the SDK also behaves as follows:
+
+1. When you call `EMChatManager#asyncFetchGroupMessageReadUsersFromServer:groupId:readReceiptId:pageSize:completion:`, the SDK populates the member information returned by `EMGroupReadReceipt#from` with the currently available nickname, avatar, and group member name card. Fields that cannot be retrieved may be empty. When this feature is disabled, the SDK does not automatically populate this information.
+
+2. The `EMGroupMemberInfo` objects returned by `EMGroupManager#fetchGroupMemberInfoListFromServerWithGroupId:cursor:limit:completion:` are populated with the currently available user nickname (`nickname`) and avatar (`avatarUrl`). These fields are not populated when the feature is disabled. Group member name cards (`namecard`) are returned by the server and are not affected by this setting.
+
+The following operations are not affected by this setting:
+
+1. When you manually call `EMUserInfoManager#fetchUserInfoById:completion:` or `EMUserInfoManager#fetchUserInfoById:type:completion:`, the retrieved data is still written to the local cache based on its update time.
+
+2. `EMUserInfoManager#getUserInfoByIds:` can still read and return locally cached user information. It does not retrieve data from the server, and the availability of data depends on whether it is cached locally.
+
 ## Monitor user attribute updates
 
 The SDK provides `EMUserInfoManagerDelegate` to monitor user attribute update events, primarily including:
