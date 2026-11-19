@@ -21,14 +21,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.19</version>
+    <version>1.0.21</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:V1.0.19'
+implementation 'com.easemob.im:im-sdk-core:V1.0.21'
 ```
 
 ### 使用
@@ -36,7 +36,7 @@ implementation 'com.easemob.im:im-sdk-core:V1.0.19'
 在使用 Java Server SDK 前，需要进行初始化。以下为使用 Easemob App Credentials 的情况：
 
 ```java
-SDK 初始化建议写到配置类中，示例如下：
+// SDK 初始化建议写到配置类中，示例如下：
 @Configuration
 public class Config {
 
@@ -56,6 +56,31 @@ public class Config {
 
 }
 ```
+
+以下为使用 Agora App Credentials 的情况：
+
+```java
+// SDK 初始化建议写到配置类中，示例如下：
+@Configuration
+public class Config {
+
+    static {
+        try {
+            com.easemob.im.Configuration.setDefaultApiClient(ApiClient.builder()
+            //BasePath 对应的 RESTful API 域名。详见环信控制台的 “应用概览” 页面中的 “开发配置信息” 区域的 RESTful API 的服务器域名。
+                    .setBasePath("BasePath")
+                    .setRealm(ApiClient.Realm.AGORA_REALM)
+                    .setAppId("App ID")
+                    .setAppCert("App Cert")
+                    .build());
+        } catch (ApiException e) {
+            // exception handling
+        }
+    }
+
+}
+```
+
 
 根据业务资源，API 分为：
 
@@ -95,7 +120,7 @@ public class UserService {
       
         try {
             EMCreateUsersResult result = userApi.createUsers(emCreateUserList);
-        } catch (EMException e) {
+        } catch (ApiException e) {
             e.getMessage();
         }
 
@@ -186,6 +211,19 @@ try {
 ```
 
 ## 更新日志
+
+### V1.0.21 2026-11-18
+
+| 新增功能        | 描述     |
+| :------- | :----- |
+| 支持 Agora Realm 初始化与 Token 认证 | Agora 模式下，SDK 使用 App ID 和 App Certificate 生成 Agora App Token，并设置 Bearer 认证。详见 [ApiClient.Builder](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html)。 |
+
+Agora Realm 初始化所需的配置及对应方法如下：
+
+| 功能         | 对应文档        |
+| :------- | :----- |
+| 选择 Agora Realm     | 调用 [Builder.setRealm](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setRealm(com.easemob.im.ApiClient.Realm))，传入 [AGORA_REALM](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Realm.html#AGORA_REALM)。 |
+| 配置 Agora 凭证      | 调用 [setAppId](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppId(java.lang.String)) 和 [setAppCert](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppCert(java.lang.String))，设置 App ID 和 App Certificate。 |
 
 ### V1.0.19 2026-06-24
 

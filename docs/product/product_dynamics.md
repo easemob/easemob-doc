@@ -12,6 +12,23 @@ containerClass: product-dynamics-page
 | :----- | :------- | :------- | :------- |
 | 新增获取单聊和群聊历史消息 RESTful API | - 支持分页获取指定用户在单聊会话中可见的历史消息。<br/> - 支持分页获取指定用户在群组中可见的历史消息。<br/> - 两个接口均支持按指定时间范围查询，并选择从新到旧或从旧到新的查询方向。 | 2026-11 | - [获取单聊漫游消息 API](/document/server-side/message_roam_single_obtain.html)<br/> - [获取群聊漫游消息 API](/document/server-side/message_roam_group_obtain.html) |
 
+#### 环信 Server SDK 2.0 发版
+
+环信 Server SDK 2.0 的 v1.0.21 于 2026 年 11 月 18 日发版。
+
+本次版本新增以下功能：
+
+| 新增功能        | 描述     |
+| :------- | :----- |
+| 支持 Agora Realm 初始化与 Token 认证 | Agora 模式下，SDK 使用 App ID 和 App Certificate 生成 Agora App Token，并设置 Bearer 认证。详见 [ApiClient.Builder](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html)。 |
+
+Agora Realm 初始化所需的配置及对应方法如下：
+
+| 功能         | 对应文档        |
+| :------- | :----- |
+| 选择 Agora Realm     | 调用 [Builder.setRealm](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setRealm(com.easemob.im.ApiClient.Realm))，传入 [AGORA_REALM](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Realm.html#AGORA_REALM)。 |
+| 配置 Agora 凭证      | 调用 [setAppId](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppId(java.lang.String)) 和 [setAppCert](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppCert(java.lang.String))，设置 App ID 和 App Certificate。 |
+
 #### 环信 Android SDK v5.2.1 / iOS SDK v5.2.0 发版
 
 | 动态名称 | 动态描述 | 发布时间 | 相关文档 |
