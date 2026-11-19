@@ -79,7 +79,7 @@ public class Config {
     }
 
 }
-```java
+```
 
 
 根据业务资源，API 分为：
