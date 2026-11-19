@@ -12,6 +12,10 @@ containerClass: product-dynamics-page
 | :----- | :------- | :------- | :------- |
 | 新增获取单聊和群聊历史消息 RESTful API | - 支持分页获取指定用户在单聊会话中可见的历史消息。<br/> - 支持分页获取指定用户在群组中可见的历史消息。<br/> - 两个接口均支持按指定时间范围查询，并选择从新到旧或从旧到新的查询方向。 | 2026-11 | - [获取单聊漫游消息 API](/document/server-side/message_roam_single_obtain.html)<br/> - [获取群聊漫游消息 API](/document/server-side/message_roam_group_obtain.html) |
 
+:::tip
+目前，获取单聊和群聊历史消息 REST API 仅面向国内 2 区的应用开放。
+:::
+
 #### 环信 Server SDK 2.0 发版
 
 环信 Server SDK 2.0 的 v1.0.21 于 2026 年 11 月 18 日发版。
