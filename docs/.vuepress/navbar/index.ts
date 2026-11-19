@@ -257,7 +257,7 @@ export const zhNavbar = navbar([
         { text: '实时音视频', link: '/callkit/android/beginner_guide.html'},
         { text: '即时推送', link: '/value-added/push/push_overview.html'},
         { text: '消息翻译', link: '/value-added/translation/message_translation_android.html'},
-        { text: '搜索服务端消息', link: '/value-added/search/message_search_android.html'},
+        { text: '服务端消息搜索', link: '/value-added/search/message_search_overview.html'},
         { text: '语音转文字', link: '/value-added/stt/speech_to_text_billing.html'}
       ]
   },
