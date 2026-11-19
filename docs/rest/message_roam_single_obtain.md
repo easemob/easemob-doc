@@ -79,11 +79,11 @@ The request body is a JSON object.
 | :--- | :--- | :--- | :--- |
 | `username` | String | Yes | User ID whose roaming messages you want to query. This user determines message visibility; the query is not limited to messages sent by this user. |
 | `to` | String | Yes | User ID of the other participant in the one-to-one conversation. |
-| `limit` | Number | Yes | Number of messages to retrieve per page. Pass a decimal integer, such as `20`. The valid range is 1–20. |
+| `limit` | Number | Yes | Number of messages to retrieve per page. The valid range is 1–20. |
 | `order` | String | No | Query direction. Use lowercase values:<br/> - `up`: From oldest to newest, retrieving earlier messages first.<br/> - (Default) `down`: From newest to oldest, retrieving newer messages first. |
 | `cursor` | String | No | Pagination cursor. Omit it in the first request. For subsequent requests, use the cursor returned in the previous response. See [Pagination](#pagination). |
-| `startTimestamp` | Number | No | Start time of the query, expressed as a decimal integer Unix timestamp in milliseconds. Only messages after this time are returned; the boundary is excluded. If omitted, no additional start-time condition is applied. |
-| `endTimestamp` | Number | No | End time of the query, expressed as a decimal integer Unix timestamp in milliseconds. Only messages before this time are returned; the boundary is excluded. If omitted, no additional end-time condition is applied. |
+| `startTimestamp` | Number | No | Start time of the query, expressed as a Unix timestamp in milliseconds. Only messages after this time are returned; the boundary is excluded. If omitted, no additional start-time condition is applied. |
+| `endTimestamp` | Number | No | End time of the query, expressed as a Unix timestamp in milliseconds. Only messages before this time are returned; the boundary is excluded. If omitted, no additional end-time condition is applied. |
 
 When using these parameters, note the following:
 
