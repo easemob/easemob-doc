@@ -92,7 +92,7 @@
    - [消息推送](/value-added/push/push_billing_domestic.html)
    - [消息搜索](/product/console/purchase_value_added.html#消息搜索)：用于开通服务端消息搜索。费用详见 [国内计费说明](/value-added/search/message_search_billing_domestic.html) 和 [海外计费说明](/value-added/search/message_search_billing_overseas.html)。
    - 大模型开发平台：当前服务仅限灰度测试，如需使用请联系环信商务开通。
-   - [消息翻译](/value-added/translation/message_translation_android.html)：如需使用请联系环信商务开通。
+   - [消息翻译](/product/console/purchase_value_added.html#消息翻译)：如需使用请联系环信商务开通。费用详见 [国内计费说明](/value-added/translation/message_translation_billing_domestic.html) 和 [海外计费说明](/value-added/translation/message_translation_billing_overseas.html)。
 
 ## 测试版应用试用说明
 

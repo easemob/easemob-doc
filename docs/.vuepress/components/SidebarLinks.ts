@@ -28,16 +28,21 @@ export default defineComponent({
         // Their directory route is the reliable signal for keeping groups closed.
         const isLandingPage = route.path.endsWith('/') &&
           /^\/(?:document|v4|uikit|callkit|product|value-added)\//.test(route.path)
-        // Only explicitly marked groups start open together; other menus
-        // retain the existing accordion behavior.
+        const isServicePage = route.path.startsWith('/value-added/search/') ||
+          route.path.startsWith('/value-added/translation/')
+        // Keep service groups open while viewing their child pages.
+        // Other menus retain their configured defaults and accordion behavior.
         defaultOpenGroups.value = new Set(props.config.flatMap((item: any, index) =>
-          item.defaultOpen ? [index] : []
+          item.defaultOpen ||
+            (isServicePage && item.defaultOpen === false && containsCurrentPage(item))
+            ? [index] : []
         ))
         openGroupIndex.value = isLandingPage
           ? -1
           : props.config.findIndex((item: any) =>
               (route.path.startsWith('/uikit/chatuikit/web/') ||
-                route.path.startsWith('/value-added/search/'))
+                route.path.startsWith('/value-added/search/') ||
+                route.path.startsWith('/value-added/translation/'))
                 ? containsCurrentPage(item)
                 : isMatchedSidebarItem(route, item)
             )
@@ -64,8 +69,9 @@ export default defineComponent({
             },
           })
         : h(SidebarChild, {
-            // Search navigation lists documents; headings stay in the article TOC.
-            config: route.path.startsWith('/value-added/search/')
+            // Service navigation lists documents; headings stay in the article TOC.
+            config: (route.path.startsWith('/value-added/search/') ||
+              route.path.startsWith('/value-added/translation/'))
               ? { ...config, children: [] }
               : config,
           }))

@@ -213,7 +213,7 @@ UI 使用建议如下：
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
 | [离线推送](/v4/applet/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。|
 | [内容审核](/value-added/moderation/moderation_overview.html) | 不支持 | 对消息内容进行审核拦截。 |
-| [消息翻译](/value-added/translation/message_translation_applet.html) | 支持 | 对消息内容进行翻译。 |
+| [消息翻译](/value-added/translation/message_translation_web.html) | 支持 | 对消息内容进行翻译。 |
 | [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
 | [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |

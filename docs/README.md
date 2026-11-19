@@ -155,7 +155,7 @@ starter:
         link: /value-added/push/push_overview.html
         text: 即时推送
       - icon: /sdk/translation.svg
-        link: /value-added/translation/message_translation_android.html
+        link: /value-added/translation/message_translation_overview.html
         text: 消息翻译
       - icon: /sdk/check_texts.svg
         link: /value-added/search/message_search_overview.html

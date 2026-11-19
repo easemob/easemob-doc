@@ -1,5 +1,7 @@
 # 消息翻译
 
+本文适用于 Web 和小程序，两个平台共用以下翻译接口及示例。
+
 ## 功能说明
 
 为方便用户在聊天过程中 **翻译文本消息**，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持以下两种方式：
@@ -13,17 +15,16 @@
 
 ## 功能开通
 
-消息翻译为增值服务，使用前请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译) 。
+消息翻译为增值服务，使用前请先按 [开通说明](/product/console/purchase_value_added.html#消息翻译) 联系环信商务开通。
 
 单次翻译请求最多支持 10,000 个字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 个字符翻译为 4 种语言，计费字符数为 2,000。
 
-该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译) 。
+该服务的费用详见 [国内计费说明](/value-added/translation/message_translation_billing_domestic.html) 和 [海外计费说明](/value-added/translation/message_translation_billing_overseas.html)。
 
 ## 前提条件
 
 - Web v4.x：使用 4.0.4 或以上版本；示例中的 `conn` 为 SDK 实例，`WebIM` 为所用 SDK 入口。确保使用该功能前，已完成 [初始化](/v4/web/initialization.html) 并登录成功。
 - Web v5.x：本页自动翻译和编辑前翻译示例以 5.2.0 或以上版本为准；示例中的 `client` 已注册 `ChatManager`，通过 `client.chatManager` 调用消息接口。确保使用该功能前，已完成 [初始化](/document/web/initialization.html) 并登录成功。
-- 
 - 已 [开通消息翻译服务](#功能开通) ，并了解 IM API 的 [使用限制](/product/limitation.html) 。
 - 目标语言使用服务支持的语言编码，语言范围参见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support) 。
 

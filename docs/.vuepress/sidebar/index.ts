@@ -275,8 +275,7 @@ export const zhSidebar = sidebar({
     //   children: [
     //     { text: "Android", link: "message_translation_android.html" },
     //     { text: "iOS", link: "message_translation_ios.html" },
-    //     { text: "Web", link: "message_translation_web.html" },
-    //     { text: "小程序", link: "message_translation_applet.html" },
+    //     { text: "Web/小程序", link: "message_translation_web.html" },
     //     { text: "Flutter", link: "message_translation_flutter.html" },
     //     { text: "React Native", link: "message_translation_react-native.html" },
     //     { text: "Unity", link: "message_translation_unity.html" },

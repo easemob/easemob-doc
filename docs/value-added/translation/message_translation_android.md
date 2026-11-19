@@ -13,11 +13,11 @@
 
 ## 功能开通
 
-消息翻译为增值服务，使用前请先在 [环信控制台开通](/product/console/purchase_value_added.html#消息翻译)。
+消息翻译为增值服务，使用前请先按 [开通说明](/product/console/purchase_value_added.html#消息翻译) 联系环信商务开通。
 
 单次翻译请求最多支持 10,000 个字符。计费字符数按 **源文本字符数 × 目标语言数量** 计算。例如，将 500 个字符翻译为 4 种语言，计费字符数为 2,000。
 
-该服务的费用详见 [计费策略](/product/pricing_policy.html#消息翻译) 。
+该服务的费用详见 [国内计费说明](/value-added/translation/message_translation_billing_domestic.html) 和 [海外计费说明](/value-added/translation/message_translation_billing_overseas.html)。
 
 ## 前提条件
 
