@@ -261,7 +261,7 @@ projects:
                 link: /document/windows/message_retrieve.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /rest/message_historical.html
+                link: /rest/message_roam_single_obtain.html
           - text: Recall Messages
             desc: "Recall a successfully sent message, including a historical, offline, or roaming message."
             sdks:
