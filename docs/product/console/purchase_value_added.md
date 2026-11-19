@@ -58,7 +58,11 @@
 
 ## 消息翻译
 
-在左侧导航栏，选择 **增值服务** > **消息翻译**，点击 **立即订阅**，联系商务开通消息翻译服务。
+[消息翻译](/value-added/translation/message_translation_overview.html) 可将文本消息翻译为一种或多种目标语言，提供总计 50 万字符的免费试用额度。
+
+在左侧导航栏，选择 **增值服务** > **消息翻译**，点击 **立即订阅**，联系环信商务开通消息翻译服务。
+
+服务按套餐订阅费用和超量使用费用计费。收费标准详见 [国内计费说明](/value-added/translation/message_translation_billing_domestic.html) 和 [海外计费说明](/value-added/translation/message_translation_billing_overseas.html)。测试版应用上线时的服务保留与计费规则，详见 [测试版应用试用说明](#测试版应用试用说明)。
 
 ![img](/images/console/translation_activation.png)
 

@@ -37,7 +37,8 @@ export default defineComponent({
           ? -1
           : props.config.findIndex((item: any) =>
               (route.path.startsWith('/uikit/chatuikit/web/') ||
-                route.path.startsWith('/value-added/search/'))
+                route.path.startsWith('/value-added/search/') ||
+                route.path.startsWith('/value-added/translation/'))
                 ? containsCurrentPage(item)
                 : isMatchedSidebarItem(route, item)
             )
@@ -64,8 +65,9 @@ export default defineComponent({
             },
           })
         : h(SidebarChild, {
-            // Search navigation lists documents; headings stay in the article TOC.
-            config: route.path.startsWith('/value-added/search/')
+            // Service navigation lists documents; headings stay in the article TOC.
+            config: (route.path.startsWith('/value-added/search/') ||
+              route.path.startsWith('/value-added/translation/'))
               ? { ...config, children: [] }
               : config,
           }))

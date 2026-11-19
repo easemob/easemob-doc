@@ -3,11 +3,13 @@
 ## 功能说明
 
 - 检测要翻译的文本的源语言。
-- 该接口与 [翻译消息内容](/document/server-side/message_translation_text_rest.html) 接口的翻译共享翻译配额。
+- 该接口与 [翻译消息内容](message_translation_text_rest.html) 接口的翻译共享翻译配额。
 
 ## 功能开通
 
-文本消息翻译为增值服务，要使用该功能，你需要 **联系环信商务开通**。
+消息翻译为增值服务，使用前请先按 [开通说明](/product/console/purchase_value_added.html#消息翻译) 联系环信商务开通。
+
+该服务的费用详见 [国内计费说明](/value-added/translation/message_translation_billing_domestic.html) 和 [海外计费说明](/value-added/translation/message_translation_billing_overseas.html)。
 
 ## 调用频率上限
 
