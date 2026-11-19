@@ -132,8 +132,8 @@ By default, EasyIM supports sending one-to-one messages between non-friends, mea
 | Member list   | Visible to all members     | Visible to all members      |
 | Create   | Any app user can create a chat group     | Only a chat room superadmin can create a chat room on the client     |
 | Destroy   | Chat group owner     | Chat room owner     |
-| Apply to join         | Supported     | Supported    |
-| Join approval         | Supported     | Supported     |
+| Apply to join         | Supported     | Not supported    |
+| Join approval         | Supported     | Not supported     |
 | Invite to join         |  Supported    | Not supported   |
 | Owner leaves         | Not supported     | Supported     |
 | Appoint admins         | Supported      | Supported     |

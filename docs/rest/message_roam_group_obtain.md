@@ -31,7 +31,7 @@ For details about the parameters in the request URL, see [Request URL parameters
 
 ## Request example
 
-### Retrieve the first page
+#### Retrieve the first page
 
 ```bash
 # Replace <YourAppToken> with the app token generated on your server
@@ -47,7 +47,7 @@ curl -X POST 'https://XXXX/api/server/v6/XXXX/XXXX/roaming/group' \
 }'
 ```
 
-### Retrieve pages within a time range
+#### Retrieve pages within a time range
 
 For the first request, set `startTimestamp` and `endTimestamp` and omit `cursor`. If the response indicates that another page is available, use the following example for subsequent requests:
 
