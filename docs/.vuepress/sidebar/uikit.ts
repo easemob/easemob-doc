@@ -231,6 +231,7 @@ const webChatUikitSidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
   { text: "体验 Vue Demo", link: "demo_vue.html" },
   { text: "体验 React Demo", link: "demo_react.html" },
+  { type: "separator" } as any,
   {
     text: "Vue UIKit",
     collapsible: true,
@@ -315,6 +316,7 @@ const webChatUikitSidebar = [
       { text: "更新日志", link: "releasenote.html" },
     ],
   },
+  { type: "separator" } as any,
   { text: "设计指南", link: "chatuikit_design_guide.html" },
 ];
 
