@@ -18,13 +18,19 @@
 
 上图展示了应用从测试版创建到正式版上线的主要流程，分为测试、上线和上线后处理三个阶段：
 
-1. **测试阶段**：[创建测试版应用](app_create.html) 后，可按需选择 IM 服务并配置基础功能。同时，可免费试用 [内容审核](purchase_value_added.html#内容审核)、[消息翻译](purchase_value_added.html#消息翻译)、[即时推送](purchase_value_added.html#即时推送) 和 [实时音视频](purchase_value_added.html#实时音视频服务) 等增值服务。
+1. **测试阶段**：[创建测试版应用](app_create.html) 后，可按需选择 IM 服务并配置基础功能。同时，可免费试用 [内容审核](purchase_value_added.html#内容审核)、[消息翻译](purchase_value_added.html#消息翻译)、[即时推送](purchase_value_added.html#即时推送)、[消息搜索](purchase_value_added.html#消息搜索) 和 [实时音视频](purchase_value_added.html#实时音视频服务) 等增值服务。
    
    各服务在测试阶段的灵活性说明：
    
    - IM 服务、内容审核、消息翻译和即时推送服务：在测试阶段可自由变更或取消。详见 [测试版应用试用说明](/product/console/purchase_value_added.html#测试版应用试用说明)。
+   - 消息搜索：仅测试版应用可免费试用 7 天，详见 [消息搜索试用说明](purchase_value_added.html#测试版应用试用说明)。
    - 实时音视频：仅支持测试版试用，上线后需单独开通正式服务。
 
 2. **上线阶段**：完成测试后，可发起 [上线申请](app_launch.html)。上线前，需确认账号是否已完成 [实名认证](real_name_authentication.html)；若未完成，需先完成认证。认证通过后，支付已选 IM 服务及增值服务费用，应用即可上线为正式版。
+
+   消息搜索服务在上线时遵循以下规则，详见 [上线事项](app_launch.html#上线事项)：
+
+   - 上线正式版前，若你暂不需要消息搜索服务，可点击 **关闭服务**。关闭后，应用转为正式版时不会产生相关费用。
+   - 若测试版已开通消息搜索服务且上线前未关闭，上线后继续生效，并按正式版规则计费。
 
 3. **上线后处理**：应用上线后，若应用所在地为中国，需在一个月内完成 [应用备案](app_file.html)。其他注意事项详见 [应用上线说明](app_launch.html#上线事项)。

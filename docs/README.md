@@ -158,7 +158,7 @@ starter:
         link: /value-added/translation/message_translation_android.html
         text: 消息翻译
       - icon: /sdk/check_texts.svg
-        link: /value-added/moderation/moderation_overview.html
+        link: /value-added/search/message_search_overview.html
         text: 服务端消息搜索
       - icon: /sdk/instant.svg
         link: /value-added/search/message_search_android.html
