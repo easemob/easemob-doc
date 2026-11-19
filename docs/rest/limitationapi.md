@@ -56,8 +56,6 @@ Each add-on package costs $56/month.
 | Delete a Reaction     | DELETE | /{org_name}/{app_name}/reaction/user/{userId} | 100 calls/second/App Key  | 50 calls/second    |  
 | Retrieve Reaction Information by Message ID and Emoji ID | GET    | /{org_name}/{app_name}/reaction/user/{userId}/detail | 100 calls/second/App Key  | 25 calls/second    |  
 | Edit a Message | PUT  | /{org_name}/{app_name}/messages/rewrite/{msg_id} | 100 calls/second/App Key  | 50 messages/second    |  
-| Retrieve One-to-One Chat Roaming Messages | POST | /api/server/v6/{org_name}/{app_name}/roaming/chat | 100 calls/second/App Key | 200 calls/second |
-| Retrieve Group Chat Roaming Messages | POST | /api/server/v6/{org_name}/{app_name}/roaming/group | 100 calls/second/App Key | 200 calls/second |
 | Delete One-to-One Chat Roaming Messages for One User by Message ID  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 calls/second/App Key   | 50 calls/second    |  
 | Delete Group Chat Roaming Messages for One User by Message ID  | DELETE    | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 calls/second/App Key   |          |  
 | Delete All Roaming Messages for One User | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 calls/second/App Key  | 100 calls/second    |  

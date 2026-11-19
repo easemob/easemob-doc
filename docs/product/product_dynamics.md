@@ -2,12 +2,6 @@
 
 ## 2026-11
 
-#### Server APIs
-
-| Update | Description | Release date | Related documentation |
-| :--- | :--- | :--- | :--- |
-| New RESTful APIs for retrieving one-to-one and group chat historical messages | - Retrieves pages of historical messages visible to a specified user in a one-to-one conversation.<br/> - Retrieves pages of historical messages visible to a specified user in a chat group.<br/> - Both APIs support querying a specified time range and retrieving messages from newest to oldest or oldest to newest. | 2026-11 | [Retrieve One-to-One Chat Roaming Messages](/rest/message_roam_single_obtain.html)<br/>[Retrieve Group Chat Roaming Messages](/rest/message_roam_group_obtain.html) |
-
 #### EasyIM Android SDK v5.2.1 / iOS SDK v5.2.0 release
 
 | Update | Description | Release date | Related documentation |

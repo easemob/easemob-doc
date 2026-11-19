@@ -362,21 +362,7 @@ export const REST_SIDEBAR = [
       },
       {
         "text": "Retrieve History",
-        "collapsible": true,
-        "children": [
-          {
-            "text": "One-to-One Roaming Messages",
-            "link": "/rest/message_roam_single_obtain.html"
-          },
-          {
-            "text": "Group Roaming Messages",
-            "link": "/rest/message_roam_group_obtain.html"
-          },
-          {
-            "text": "Historical Message Records",
-            "link": "/rest/message_historical.html"
-          }
-        ]
+        "link": "/rest/message_historical.html"
       },
       {
         "text": "Configure Attachment Storage",
