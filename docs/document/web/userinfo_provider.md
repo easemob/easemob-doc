@@ -54,6 +54,26 @@ const client = ChatClient.init({
 必须在调用 `ChatClient.init` 初始化 SDK 时传入 `enableUserInfoSync: true`，并注册 `UserInfoManager` 和 `GroupManager`，否则该功能无法正常启用。
 :::
 
+在 `ChatClient.init` 中设置 `enableUserInfoSync: true` 开启用户信息自动管理功能后，SDK 的相关行为如下：
+
+1. 发送消息时，会携带发送方用户属性的更新时间；发送群聊消息时，还会携带发送方在当前群中的群成员名片更新时间。
+
+2. 接收消息时，SDK 会根据消息中携带的更新时间和本地缓存，按需自动同步发送方最新的用户属性和群成员名片，并更新本地缓存。
+
+3. 可通过 `message.sender` 获取 SDK 组装的发送方信息，包括用户 ID，以及当前可用的昵称和头像。具体内容取决于消息对象及本地缓存，不能保证所有字段均有值。群成员名片和好友备注不包含在 `message.sender` 中。
+
+4. 调用 `ChatManager#getGroupMessageReadUsers(params)` 时，SDK 会为返回结果 `users` 中的 `user` 补充当前可用的昵称、头像和群成员名片 `nameCard`（未获取到的字段可能为空）。关闭该功能时，SDK 不会自动补充这些信息。
+
+5. `groupManager.getGroup(groupId).getMembers(query)` 返回成员的 `user` 会优先从本地缓存补充用户昵称（`nickname`）和头像（`avatarUrl`），仅在开启 `enableUserInfoSync` 后补查未缓存的用户属性；群成员名片（`nameCard`）由服务端返回，不受该开关的影响。
+
+6. 登录成功后，SDK 会自动从服务器同步当前登录用户的属性。
+
+不受该开关的影响的功能：
+
+1. 手动调用 `UserInfoManager#getUserInfoByUserId(params)` 和 `UserInfoManager#getUserInfoByAttribute(params)` 时，仍会按更新时间将拉取结果写入本地缓存。该行为不受此开关影响。
+
+2. `ContactManager#getContacts()` 可读取并返回当前本地内存中的好友列表及其用户属性视图。该接口不会主动从服务器获取数据，能否获取到数据取决于本地是否存在缓存，不受该开关的影响。
+
 ## 监听用户属性更新
 
 SDK 提供用户属性更新相关事件，用于监听当前用户、其他用户以及好友的用户属性的变化，主要包括：

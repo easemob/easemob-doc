@@ -49,6 +49,18 @@ Future<void> initializeChatSdk() async {
 必须在调用 `ChatClient.getInstance.init(options)` 前配置 `enableUserInfo: true`。SDK 初始化后再修改局部配置变量不会重新配置原生 SDK，该功能也不会因此生效。
 :::
 
+在 `ChatOptions.withAppKey` 中设置 `enableUserInfo: true` 开启用户信息自动管理功能后，SDK 的相关行为如下：
+
+1. 发送消息时，消息体会携带发送方用户信息/群名片的更新时间戳，SDK 同时基于本地缓存为消息填充 `ChatMessageSenderInfo`（本地缓存缺失时，`ChatMessageSenderInfo` 可能为 `null`）。
+
+2. 接收消息时，SDK 会自动同步消息发送方最新的用户属性和群成员名片。
+
+3. 新接收的消息可通过 `ChatMessage#senderInfo` 获取发送方信息；接收时若开关关闭，则该条消息实例的 `ChatMessage#senderInfo` 返回 `null`。注意：从本地数据库加载的消息不受此开关影响，SDK 会基于本地缓存构建 `ChatMessageSenderInfo`。
+
+4. `ChatGroupManager#fetchGroupMembersInfo(groupId: groupId, cursor: cursor, limit: limit)` 返回的 `GroupMemberInfo` 中包含用户昵称（`nickname`）和头像（`avatarUrl`）；关闭时不包含。群成员名片（`namecard`）不受此开关影响，始终返回。
+
+5. 登录成功后，SDK 会自动从服务器同步当前用户的属性。
+
 ## 监听用户属性更新
 
 SDK 通过 `ChatUserInfoEventHandler` 监听用户属性更新事件：
