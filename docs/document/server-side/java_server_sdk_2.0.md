@@ -214,18 +214,16 @@ try {
 
 ### V1.0.21 2026-11-18
 
-| 新增功能                             | 描述                                                         |
-| ------------------------------------ | ------------------------------------------------------------ |
+| 新增功能        | 描述     |
+| :------- | :----- |
 | 支持 Agora Realm 初始化与 Token 认证 | Agora 模式下，SDK 使用 App ID 和 App Certificate 生成 Agora App Token，并设置 Bearer 认证。详见 [ApiClient.Builder](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html)。 |
 
-Agora Realm 初始化与 Token 认证涉及的配置和方法如下：
+Agora Realm 初始化所需的配置及对应方法如下：
 
-| 功能                 | 对应文档                                                     |
-| -------------------- | ------------------------------------------------------------ |
+| 功能         | 对应文档        |
+| :------- | :----- |
 | 选择 Agora Realm     | 调用 [Builder.setRealm](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setRealm(com.easemob.im.ApiClient.Realm))，传入 [AGORA_REALM](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Realm.html#AGORA_REALM)。 |
 | 配置 Agora 凭证      | 调用 [setAppId](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppId(java.lang.String)) 和 [setAppCert](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.Builder.html#setAppCert(java.lang.String))，设置 App ID 和 App Certificate。 |
-| 获取 Agora App Token | [ApiClient.getAppToken](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.html#getAppToken())。 |
-| 设置 Bearer 认证     | [ApiClient.setAuthorizationToken](https://easemob.github.io/easemob-im-server-sdk/com/easemob/im/ApiClient.html#setAuthorizationToken(java.lang.String))。 |
 
 ### V1.0.19 2026-06-24
 
