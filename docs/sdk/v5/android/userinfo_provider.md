@@ -50,6 +50,18 @@ EMClient.getInstance().init(context, options);
 Call `EMOptions#setEnableUserInfo(true)` before `EMClient.getInstance().init(context, options)` initializes the SDK. Otherwise, the feature does not take effect.
 :::
 
+When automatic user information management is enabled with `EMOptions#setEnableUserInfo(true)`, the SDK also behaves as follows:
+
+1. When you call `EMChatManager#asyncFetchGroupMessageReadReceipts(String, int, String, EMValueCallBack)`, the SDK populates the member information returned by `EMGroupReadReceipt#getFrom()` with the currently available nickname, avatar, and group member name card. Fields that cannot be retrieved may be empty. When this feature is disabled, the SDK does not automatically populate this information.
+
+2. The `EMGroupMemberInfo` objects returned by `EMGroupManager#asyncFetchGroupMembersInfo(String, String, int, EMValueCallBack)` are populated with the user's nickname (`nickname`) and avatar (`avatarUrl`) based on the server response and local cache. Group member name cards are returned by the server and are not affected by this setting.
+
+The following operations are not affected by this setting:
+
+1. When you manually call `EMUserInfoManager#fetchUserInfoByUserId(String[], EMValueCallBack)` or `EMUserInfoManager#fetchUserInfoByAttribute(String[], EMUserInfo.EMUserInfoType[], EMValueCallBack)`, the retrieved data is still written to the local cache based on its update time.
+
+2. `EMUserInfoManager#getUserInfoWithUserIds(String[], EMValueCallBack)` can still read and return locally cached user information. It does not retrieve data from the server, and the availability of data depends on whether it is cached locally.
+
 ## Monitor user attribute updates
 
 The SDK provides `EMUserInfoManagerListener` to monitor user attribute update events, primarily including:

@@ -54,6 +54,18 @@ const client = ChatClient.init({
 You must pass `enableUserInfoSync: true` when calling `ChatClient.init` to initialize the SDK and register `UserInfoManager` and `GroupManager`. Otherwise, this feature cannot be enabled correctly.
 :::
 
+When automatic user information management is enabled by setting `enableUserInfoSync: true` in `ChatClient.init`, the SDK also behaves as follows:
+
+1. When you call `ChatManager#getGroupMessageReadUsers(params)`, the SDK populates `user` in the returned `users` with the currently available nickname, avatar, and group member name card (`nameCard`). Fields that cannot be retrieved may be empty. When this feature is disabled, the SDK does not automatically populate this information.
+
+2. For members returned by `groupManager.getGroup(groupId).getMembers(query)`, the SDK first populates the user's nickname (`nickname`) and avatar (`avatarUrl`) in `user` from the local cache. It retrieves uncached user attributes only when `enableUserInfoSync` is enabled. Group member name cards (`nameCard`) are returned by the server and are not affected by this setting.
+
+The following operations are not affected by this setting:
+
+1. When you manually call `UserInfoManager#getUserInfoByUserId(params)` or `UserInfoManager#getUserInfoByAttribute(params)`, the retrieved data is still written to the local cache based on its update time.
+
+2. `ContactManager#getContacts()` can still read and return the current in-memory friend list and its user-attribute view. It does not retrieve data from the server, and the availability of data depends on whether it is cached locally.
+
 ## Monitor user attribute updates
 
 The SDK provides events for monitoring changes to the current user's, other users', and friends' user attributes. The main events are:
