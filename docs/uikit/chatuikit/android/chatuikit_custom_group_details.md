@@ -43,11 +43,11 @@
         item?.let {
             when(item.menuId){
                 R.id.contact_item_audio_call -> {
-                    CallKitManager.startSingleAudioCall(user?.userId)
+                    CallKitManager.startGroupCall(groupId)
                     return true
                 }
                 R.id.contact_item_video_call -> {
-                    CallKitManager.startSingleVideoCall(user?.userId)
+                    CallKitManager.startGroupCall(groupId)
                     return true
                 }
                 else -> {
@@ -60,3 +60,5 @@
 
 
 ```
+
+注：以上示例中的 `R.string.detail_item_audio`、`R.drawable.uikit_phone_pick`、`R.id.contact_item_audio_call` 等资源 ID 需要开发者自行定义（UIKit 自带 `uikit_detail_item_audio`、`uikit_detail_item_video` 字符串资源，可通过 `com.hyphenate.easeui.R.string.uikit_detail_item_audio` 引用）；`CallKitManager` 来自环信音视频通话 CallKit 的集成，具体调用方式以 CallKit 文档为准。群详情页中发起群组通话使用的是 `ChatUIKitGroupDetailActivity` 提供的 `groupId`。

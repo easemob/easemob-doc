@@ -7,6 +7,7 @@
 ```kotlin
 object LanguageUtil {
     fun changeLanguage(languageCode:String){
+        // 传入语言的 ISO 639-1 代码，例如 "en" 表示英语，"zh" 表示中文
         val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
         // 由于可能需要 Activity.restart()，在主线程上调用该方法。
         AppCompatDelegate.setApplicationLocales(appLocale)
@@ -35,5 +36,7 @@ res/
 2. 添加字符串资源。
    
 在每个 `strings.xml` 文件中，添加对应语言的字符串资源。
+
+单群聊 UIKit 自身的字符串资源位于 `values/uikit_strings.xml`，中文位于 `values-zh/uikit_strings.xml`。新增语言包时，你可以将 `uikit_strings.xml` 复制到新的语言资源文件夹中，并翻译其中同名的字符串资源。
 
 

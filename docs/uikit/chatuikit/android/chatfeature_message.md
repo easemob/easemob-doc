@@ -26,7 +26,7 @@
 
 消息撤回是指用户可以撤回一条已发送的消息。消息撤回可以帮助用户撤回错误发送的消息，或撤回不想让其他用户看到的消息。
 
-你可以通过 `ChatUIKitClient.getConfig()?.chatConfig?.timePeriodCanRecallMessage` 设置聊天页面消息撤回的有效时间，默认为 120 秒。
+你可以通过 `ChatUIKitClient.getConfig()?.chatConfig?.timePeriodCanRecallMessage` 设置聊天页面消息撤回的有效时间，单位为毫秒。该字段的默认值为 -1，此时生效的默认值为 120000 毫秒，即 120 秒，可通过覆盖整型资源 `ease_chat_message_recall_period` 修改。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/message/message_recall_android.png" title="消息撤回" />
@@ -83,7 +83,7 @@
 
 #### 如何使用
 
-使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 1. 开启消息翻译。
 
@@ -97,16 +97,19 @@
 
 2. 设置翻译目标语言。
 
-单群聊 UiKit 的 `UIKitChatFragment.Builder` 对象中提供了 `setTargetTranslation` 方法设置目标翻译语言。
+翻译的目标语言通过全局配置 `ChatUIKitConfig` 的 `chatConfig.targetTranslationLanguage` 设置，默认值为 `"zh"`（中文）。
+
+可选值见 `ChatUIKitTranslationLanguageType` 枚举：`Chinese("zh")`、`Chinese_traditional("zh-Hant")`、`English("en")`、`Russian("ru")`、`German("de")`、`French("fr")`、`Japanese("ja")`、`Korean("ko")`、`Auto("auto")`。
 
 如果未设置翻译的目标语言，则默认使用中文。
 
 更多翻译目标语言，请参考 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
+例如，设置翻译目标语言为英文，示例代码如下：
+
 ```kotlin
 
-   val builder = UIKitChatFragment.Builder
-   builder.setTargetTranslation(ChatUIKitTranslationLanguageType.English)
+   ChatUIKitClient.getConfig()?.chatConfig?.targetTranslationLanguage = ChatUIKitTranslationLanguageType.English.value
 
 ```
 
@@ -295,7 +298,7 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 - `ChatUIKitTitleBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
 - 输入状态相关回调和方法：
   - 输入状态投递为透传消息，接收到透传消息后，通过 `UIKitChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
-  - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `ChatUIKitLayout.ACTION_TYPING_BEGI` ｜ `ChatUIKitLayout.ACTION_TYPING_END`。
+  - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `ChatUIKitLayout.ACTION_TYPING_BEGIN` ｜ `ChatUIKitLayout.ACTION_TYPING_END`。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/feature/message/typing_indicator_enable_android.png" title="开启输入状态提示" />

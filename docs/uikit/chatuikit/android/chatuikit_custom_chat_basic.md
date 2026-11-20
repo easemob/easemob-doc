@@ -25,11 +25,10 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
         .setOnChatExtendMenuItemClickListener(onChatExtendMenuItemClickListener)
         .setOnChatInputChangeListener(onChatInputChangeListener)
         .setOnMessageItemClickListener(onMessageItemClickListener)
-        .setOnMessageSendCallBack(onMessageSendCallBack)
+        .setOnMessageSendCallback(onMessageSendCallback)
         .setOnWillSendMessageListener(willSendMessageListener)
         .setOnChatRecordTouchListener(onChatRecordTouchListener)
         .setOnModifyMessageListener(onModifyMessageListener)
-        .setOnReportMessageListener(onReportMessageListener)
         .setMsgTimeTextColor(msgTimeTextColor)
         .setMsgTimeTextSize(msgTimeTextSize)
         .setReceivedMsgBubbleBackground(receivedMsgBubbleBackground)
@@ -60,11 +59,10 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `setOnChatExtendMenuItemClickListener` | 设置聊天扩展菜单项点击监听器。       |
 | `setOnChatInputChangeListener`   | 设置聊天输入变化监听器。             |
 | `setOnMessageItemClickListener` | 设置消息项点击监听器。              |
-| `setOnMessageSendCallBack`           | 设置消息发送回调。                   |
+| `setOnMessageSendCallback`           | 设置消息发送回调。                   |
 | `setOnWillSendMessageListener`     | 设置即将发送消息的监听器。          |
 | `setOnChatRecordTouchListener`   | 设置聊天记录触摸监听器。             |
 | `setOnModifyMessageListener`       | 设置编辑消息监听器。                 |
-| `setOnReportMessageListener`       | 设置举报消息监听器。                 |
 | `setMsgTimeTextColor`                     | 设置消息时间文本颜色。               |
 | `setMsgTimeTextSize`                       | 设置消息时间文本大小。               |
 | `setReceivedMsgBubbleBackground` | 设置接收消息的气泡背景。             |
@@ -79,6 +77,13 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | `setEmptyLayout`                | 设置空布局。                         |
 | `setCustomAdapter`                           | 设置自定义适配器。                   |
 | `setCustomFragment`                         | 设置自定义Fragment。                 |
+| `turnOnTypingMonitor`                | 是否开启输入状态监测，默认跟随全局配置 `ChatUIKitConfig.enableChatTyping`（默认为 `true`）。 |
+| `setOnPeerTypingListener`         | 设置对方输入状态监听器（仅单聊，需先调用 `turnOnTypingMonitor` 开启）。 |
+| `setOnMessageForwardCallback`     | 设置消息转发回调。                   |
+| `setOnSendCombineMessageCallback` | 设置合并消息发送回调。               |
+| `setOnTranslationMessageListener` | 设置消息翻译监听器。                 |
+| `useTitleBarToReplaceActionBar`   | 设置是否用默认标题栏替换 Activity 的 ActionBar。默认 `false`。 |
+| `setSearchMessageId`              | 设置搜索的目标消息 ID。               |
 
 ## 设置消息列表背景
 
@@ -102,7 +107,7 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 ## 设置消息条目
 
-对于消息条目 `ChatUlKitRow`，你可以进行自定义设置，例如：
+对于消息条目 `ChatUIKitRow`，你可以进行自定义设置，例如：
 - 设置默认的头像和昵称及其样式
 - 设置消息气泡
 - 设置消息日期
@@ -266,7 +271,7 @@ ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 val fragment = UIKitChatFragment.Builder(conversationID, easeChatType)
-        .setOnMessageSendCallBack(onMessageSendCallBack) // 消息发送后回调。
+        .setOnMessageSendCallback(onMessageSendCallback) // 消息发送后回调。
         .setOnWillSendMessageListener(willSendMessageListener) // 消息发送前回调监听。 
         .build()
 fragment?.let { fragment ->
