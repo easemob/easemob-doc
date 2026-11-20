@@ -344,6 +344,7 @@ const documentV5Sidebar = [
     text: 'Token 鉴权',
     collapsible: true,
     children: [
+      { text: 'Token 概述', link: 'token_overview.html' },
       { text: 'App Token 鉴权', link: 'easemob_app_token.html' },
       { text: 'User Token 鉴权', link: 'easemob_user_token.html' },
     ],
