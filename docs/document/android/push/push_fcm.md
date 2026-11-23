@@ -230,6 +230,58 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 }
 ```
 
+## 设置角标
+
+通过 FCM V1 发送离线通知时，发送方可在消息扩展 `em_android_push_ext` 中设置 `fcm_notification_count`，指定这条通知代表的消息或事件数量。Android SDK V4.x、V5.x 均通过 `EMMessage.setAttribute(String, JSONObject)` 传递该配置，无需新增 SDK 初始化选项；接收方实际显示效果由 FCM SDK、设备系统和桌面决定。
+
+使用前，接收端需完成 [FCM 推送集成](#fcm-推送集成)，上传并绑定有效的 FCM Token，并使用 FCM V1 证书。在环信控制台的谷歌推送证书中，将 **推送消息类型** 设置为 **通知**（`NOTIFICATION`）或 **数据+通知**（`BOTH`）。纯 **数据**（`DATA`）消息不会通过此字段自动设置通知角标；应用自行创建通知时，需自行设置通知数量。
+
+角标参数如下：
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `em_android_push_ext.fcm_notification_count` | Integer | 否 | 非负整数，表示通知代表的数量，例如 `5` 表示该通知代表 5 条新消息。支持角标的桌面可能将其显示为角标数量。传入 `0` 或不传时使用系统默认行为，不表示清零。 |
+
+以下以发送单聊文本消息为例，将通知代表的数量设置为 `5`。示例需在 SDK 初始化、登录并连接成功后执行；请替换接收方用户 ID：
+
+```java
+EMMessage message = EMMessage.createTextSendMessage("你有 5 条新消息", "recipientUserId");
+JSONObject androidPushExt = new JSONObject();
+try {
+    androidPushExt.put("fcm_notification_count", 5);
+} catch (JSONException e) {
+    // 处理 JSON 构造失败，不继续发送。
+    return;
+}
+message.setAttribute("em_android_push_ext", androidPushExt);
+message.setMessageStatusCallback(new EMCallBack() {
+    @Override
+    public void onSuccess() {
+        // IM 消息发送成功，不代表接收端已显示推送或角标。
+    }
+
+    @Override
+    public void onError(int errorCode, String errorMessage) {
+        // 根据错误码处理消息发送失败。
+    }
+
+    @Override
+    public void onProgress(int progress, String status) {
+    }
+});
+EMClient.getInstance().chatManager().sendMessage(message);
+```
+
+示例使用 `org.json.JSONObject`、`org.json.JSONException`、`com.hyphenate.EMCallBack` 以及 `com.hyphenate.chat` 包中的 `EMMessage` 和 `EMClient`。
+
+使用时请注意：
+
+- 数量由业务侧确定；该字段不表示“在现有角标上增加多少”，也不会自动读取接收方的 IM 未读数。
+- 应用通知权限、通知渠道和桌面角标设置均需允许显示。若推送已收到但角标未显示，请先检查这些设置，并确认设备桌面支持角标；有些桌面只显示圆点。
+- 该字段与 `fcm_options` 同级，不放入 `em_push_ext.custom` 或 `fcm_options` 中。服务端将它转换为 FCM 的 `android.notification.notification_count`。REST 发送方式详见 [设置 FCM 离线推送角标](/document/server-side/push_extension.html#设置-fcm-离线推送角标)。
+
+字段语义详见 Firebase 官方的 [AndroidNotification.notificationCount](https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidnotification#androidnotificationnotificationcount)。
+
 ## **测试 FCM 推送**
 
 在即时通讯 IM 中集成并启用 FCM 后，可测试推送是否成功集成。
@@ -266,6 +318,9 @@ public class MyFCMMSGService extends FirebaseMessagingService {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`createTextSendMessage`](#设置角标) | `EMMessage` | 创建待发送的单聊文本消息。 |
+| [`setAttribute`](#设置角标) | `EMMessage` | 设置消息的 JSON 扩展属性。 |
+| [`setMessageStatusCallback`](#设置角标) | `EMMessage` | 设置消息发送状态回调。 |
 | [`enableFCM`](#步骤四-fcm-推送集成) | `EMPushConfig.Builder` | 启用 FCM 推送并设置 FCM Sender ID。 |
 | [`setPushConfig`](#步骤四-fcm-推送集成) | `EMOptions` | 设置 SDK 的推送配置。 |
 | [`init`](#步骤四-fcm-推送集成) | `EMClient` | 初始化 Android SDK。 |
