@@ -6,7 +6,7 @@
 
 User Token 可以由环信 REST API 签发，也可以在你的业务服务器生成动态 Token。动态 Token 是 User Token 的一种生成方式，不是另一种 App 管理权限。
 
-## Token 类型对比
+## Token 类型
 
 以下对比面向普通集群的 App 管理和客户端 IM 登录。具体接口和获取流程见表中的链接。
 
