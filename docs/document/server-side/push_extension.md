@@ -152,6 +152,22 @@ curl -X POST 'https://{host}/{org_name}/{app_name}/messages/users' \
 
 Android SDK 的写法见 [V5 设置 FCM 角标](/document/android/push/push_fcm.html#设置角标) 和 [V4 设置 FCM 角标](/v4/android/push/push_fcm.html#设置角标)。即时推送使用 `pushMessage.fcmV1.androidConfig.androidNotification.notificationCount`，与本文 IM 消息的扩展字段不同，详见 [即时推送角标配置](/value-added/push/push_notification_config.html#设置-fcm-角标)。FCM 原生字段语义见 [Firebase 官方说明](https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidnotification#androidnotificationnotificationcount)。
 
+## 设置 vivo 离线推送角标
+
+通过 REST 接口发送 IM 消息时，vivo 离线通知可使应用图标的数字角标自动加 1。该功能由接收端绑定的 vivo 推送证书配置控制，无需在消息的 `ext` 或 `em_android_push_ext` 中额外添加角标字段。
+
+使用前，完成以下配置：
+
+1. 在 vivo 侧开通数字角标能力，按 [vivo 桌面角标设置方法](https://dev.vivo.com.cn/documentCenter/doc/788) 完成应用的系统角标 API 对接，并在设备上开启应用通知及数字角标显示权限。
+2. 在环信控制台的 vivo 推送证书中，将 **角标数字** 设置为 **自动加1** 并保存，确保接收端已绑定该证书和有效的推送 Token。具体步骤见 [V5 vivo 角标配置](/document/android/push/push_vivo.html#设置角标) 或 [V4 vivo 角标配置](/v4/android/push/push_vivo.html#设置角标)。
+3. 正常调用 IM 消息发送接口。满足离线推送条件时，服务端会根据证书配置在发往 vivo 的通知中携带 `addBadge: true`；该字段由服务端组装，不需要加入 IM 消息请求 Body。
+
+使用时请注意：
+
+- **自动加1** 只控制通知到达后角标数字增加 1，不用于指定任意角标数字，例如直接设置为 `5`，也不用于清零。
+- **不变** 对应 `addBadge: false`，该条通知不改变角标数字，不表示清零。历史证书默认保持原有行为。
+- 上述证书选项仅用于 IM 离线推送。使用即时推送服务时，需在请求中单独设置 `pushMessage.vivo.addBadge`，详见 [vivo 即时推送配置](/value-added/push/push_notification_config.html#vivo-推送说明)，不能用 IM 消息扩展代替。
+
 ## 示例
 
 ### 离线推送相关的扩展字段
