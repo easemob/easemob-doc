@@ -85,7 +85,7 @@ FCM 通道推送通知示例如下：
 | `ext`                | Object | 推送自定义扩展信息，为自定义 key-value 键值对。键值对个数不能超过 10 且长度不能超过 1024 个字符。 | iOS & Android | 否       |
 | `config`             | Object | 与用户点击通知相关的操作。以及角标的配置，包含 `clickAction` 和 `badge` 字段。 | iOS & Android | 否       |
 | `config.clickAction` | Object | 在通知栏中点击触发的动作，均为字符串类型：<br/> - `url`：打开自定义的 URL；<br/> - `action`：打开应用的指定页面；<br/> - `activity`：打开应用包名或 Activity 组件路径。若不传该字段，默认打开应用的首页。<br/><Container type="notice" title="注意">环信 iOS 推送通道只支持设置为 `url`。</Container> | Android       | 否       |
-| `config.badge`       | Object | 推送角标，包含以下三个字段：<br/> - `addNum`：整型，表示推送通知到达设备时，角标数字累加的值。<br/> - `setNum`：整型，表示推送通知到达设备时，角标数字显示的值。<br/> - `activity`：字符串类型，入口类（华为角标需要配置）。<br/> 上述配置不适用于 vivo 厂商通道。通过该通道发送通知时，需使用 [`vivo.addBadge`](#vivo-推送说明) 单独控制角标是否自动加 1。 | Android       | 否       |
+| `config.badge`       | Object | 推送角标，包含以下三个字段：<br/> - `addNum`：整型，表示推送通知到达设备时，角标数字累加的值。<br/> - `setNum`：整型，表示推送通知到达设备时，角标数字显示的值。<br/> - `activity`：字符串类型，入口类（华为角标需要配置）。<br/> 上述配置不适用于 vivo 厂商通道。通过该通道发送通知时，需使用 [`vivo.addBadge`](#vivo-推送说明) 单独控制角标是否自动加 1。<br/> FCM V1 通道需使用 [`fcmV1.androidConfig.androidNotification.notificationCount`](#设置-fcm-角标)，不能用此处的 `addNum` 或 `setNum` 替代。 | Android       | 否       |
 
 ## 各厂商推送配置
 
@@ -274,6 +274,48 @@ FCM 通道推送通知示例如下：
 | `titleLocKey`  | String | 推送标题本地化参数。                             |
 | `titleLocArgs` | Array  | 推送标题本地化参数。                             |
 | `channelId`    | String | 通道 ID。                                        |
+| `notificationCount` | Integer | 可选，通知代表的数量，取值为非负整数。在支持角标的桌面上，可用作角标数量。`0` 或不传表示使用系统默认行为，不表示清零。详见 [设置 FCM 角标](#设置-fcm-角标)。 |
+
+#### 设置 FCM 角标
+
+通过 FCM V1 通道发送即时推送时，在请求的 `pushMessage.fcmV1.androidConfig.androidNotification` 中设置 `notificationCount`。该值表示这条通知代表的消息或事件数量，例如用一条通知代表 5 条新消息时传入 `5`。
+
+FCM 角标参数说明如下：
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `pushMessage.fcmV1.androidConfig.androidNotification.notificationCount` | Integer | 否 | 非负整数。在支持角标的桌面上，可显示为角标数量。传入 `0` 或不传时，系统按默认方式处理，通常在新通知到达时累加长按应用图标菜单中显示的数量；不用于清除角标。 |
+
+下面为 [发送推送通知](push_send_notification.html) 接口的请求 Body 示例，仅通过厂商通道推送，并将 FCM 通知代表的数量设为 `5`：
+
+```json
+{
+  "strategy": 2,
+  "pushMessage": {
+    "title": "新消息提醒",
+    "content": "你有 5 条新消息",
+    "fcmV1": {
+      "type": "NOTIFICATION",
+      "androidConfig": {
+        "androidNotification": {
+          "notificationCount": 5
+        }
+      }
+    }
+  }
+}
+```
+
+使用时请注意：
+
+- 使用可用的 FCM V1 证书，并确保通知权限、通知渠道和桌面的角标显示设置允许展示通知及角标。实际显示数字、圆点或不显示，由设备系统及桌面决定。
+- `notificationCount` 是通知代表的数量，不是“在原有角标上加多少”。服务端不会用该字段自动计算 IM 会话未读数；数量需由业务侧确定。
+- 通知消息由 FCM SDK 按应用状态处理；应用在前台自行创建通知或接收纯数据消息时，应在本地创建通知时设置数量。仅在自定义数据中传入同名字段，不会自动改变桌面角标。
+- `config.badge`、`easemob.badge` 和 `apns.badge` 属于其他推送配置，不能替代 FCM V1 的 `notificationCount`。本示例使用即时推送请求中的 `fcmV1` 对象，不是 IM 消息的 `ext`。
+
+字段语义及系统行为详见 Firebase 官方的 [AndroidNotification.notificationCount](https://firebase.google.com/docs/reference/admin/node/firebase-admin.messaging.androidnotification#androidnotificationnotificationcount)。
+
+IM 离线推送使用消息扩展 `ext.em_android_push_ext.fcm_notification_count`，无需构造即时推送的 `pushMessage` 对象。两种场景的字段不能混用，详见 [设置 FCM 离线推送角标](/document/server-side/push_extension.html#设置-fcm-离线推送角标)。
 
 #### Web 推送配置
 

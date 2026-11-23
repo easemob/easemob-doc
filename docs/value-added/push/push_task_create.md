@@ -101,7 +101,7 @@
 | 定时时间 | 推送通知的具体时间。  |
 | 离线消息保留时长 | 离线消息保留时长设置只适用厂商通道，环信通道离线消息保留时长默认 7 天。 |
 | 通道策略 |选择合适的推送发送策略：<br/> - （默认策略）环信通道优先，在线走环信，离线走厂商。 <br/> - 只通过第三方厂商推送（失败后直接丢弃）。 <br/> - 在线或者离线都通过环信通道推送。<br/> - 厂商通道优先，失败时走环信通道。|
-| 角标数字 | 该角标为环信通道角标设置：<br/> - 此处的厂商通道角标设置仅支持华为 EMUI4.1 以上。<br/> - vivo 厂商通道需通过 [发送推送通知 REST API](push_send_notification.html) 单独设置 `pushMessage.vivo.addBadge: true`，使角标自动加 1；使用条件及参数说明详见 [vivo 数字角标配置](push_notification_config.html#vivo-推送说明)。<br/> - APNs 仅支持不变和设置数字。 <br/> - 该参数选择 **不变** 时，不主动修改角标数字。小米设备的角标由系统管理，实际显示效果以设备系统行为为准。 |
+| 角标数字 | 该角标为环信通道角标设置：<br/> - 此处的厂商通道角标设置仅支持华为 EMUI4.1 以上。<br/> - FCM V1 厂商通道支持通过 [发送推送通知 REST API](push_send_notification.html) 的 `pushMessage.fcmV1.androidConfig.androidNotification.notificationCount` 设置通知代表的数量，详见 [设置 FCM 角标](push_notification_config.html#设置-fcm-角标)；此处控制台的角标选项不能替代该字段。<br/> - vivo 厂商通道需通过 [发送推送通知 REST API](push_send_notification.html) 单独设置 `pushMessage.vivo.addBadge: true`，使角标自动加 1；使用条件及参数说明详见 [vivo 数字角标配置](push_notification_config.html#vivo-推送说明)。<br/> - APNs 仅支持不变和设置数字。 <br/> - 该参数选择 **不变** 时，不主动修改角标数字。小米设备的角标由系统管理，实际显示效果以设备系统行为为准。 |
 | 消息提示 | 设置提醒方式，包含提示音和震动。 |
 
 2. 配置完成后，点击 **发送预览** 预览推送配置。
