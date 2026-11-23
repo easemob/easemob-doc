@@ -281,7 +281,7 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 | `list[].messageId` | Long | 消息 ID。 |
 | `list[].appKey` | String | 应用标识，格式为 `{org_name}#{app_name}`。 |
 | `list[].conversationType` | String | 会话类型：<br/> - `chat`：单聊。<br/> - `groupchat`：群聊。<br/> - `chatroom`：聊天室。 |
-| `list[].contentType` | String | 消息类型：<br/> - `text`：文本/合并消息（通过 `content.subtype` 为 `sub_combine` 区分）。<br/> - `image`：图片。<br/> - `video`：视频。<br/> - `file`：文件。<br/> - `location`：位置。|
+| `list[].contentType` | String | 消息类型：<br/> - `text`：文本。<br/> - `image`：图片。<br/> - `video`：视频。<br/> - `file`：文件。<br/> - `location`：位置。<br/> - `combine`：合并消息。|
 | `list[].sentTime` | Long | 消息发送时间，Unix 毫秒级时间戳。 |
 | `list[].senderId` | String | 发送者用户 ID。 |
 | `list[].receiverId` | String | 接收者 ID（单聊为对方用户 ID，群聊为群组 ID，聊天室为聊天室 ID）。 |
@@ -392,7 +392,7 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 }
 ```
 
-合并消息作为一种特殊的文本消息存储与返回，响应 body 中 `contentType` 为 `text`，通过 `content.subtype` 为 `sub_combine` 区分。其 `content` 中包含合并消息的标题（`title`）、摘要（`summary`）、合并层级（`combine_level`）以及文件信息（`filename`、`size`、`secret`、`url`）等字段。
+合并消息在响应 body 中的 `contentType` 为 `combine`，与请求参数 `contentType` 的取值保持一致。其 `content` 中包含合并消息的标题（`title`）、摘要（`summary`）、合并层级（`combine_level`）以及文件信息（`filename`、`size`、`secret`、`url`）等字段。
 
 ## 错误码
 
@@ -404,7 +404,7 @@ curl -X POST "https://XXXX/XXXX/XXXX/users/XXXX/messages/search/get" \
 | 400 | 4000006 | 搜索条件过于复杂 | 关键词过长，或搜索范围过宽，超出了单次搜索的处理上限。 | 请缩短关键词、减少关键词数量，或通过会话、消息类型、时间范围等过滤条件缩小搜索范围后重试。该错误为确定性错误，原样重试不会成功。 |
 | 401 | 4010101 | Token 不合法或已过期 | `Authorization` 中的 Token 无效或已过期。 | 重新获取有效的 App Token 后再发起请求。 |
 | 403 | 4030204 | 搜索服务未激活 | 当前应用未开通搜索服务，或搜索服务已关闭。 | 搜索为增值服务，请先联系环信商务开通后再调用。 |
-| 404 | 4040302 | 应用不存在 | 请求 URL 中的 `org_name` 或 `app_name` 不正确。 | 检查请求 URL 中的组织名和应用名是否正确。 |
+| 404 | 4040302 | 应用未在搜索服务中注册 | 搜索服务中不存在该应用的 App Key（`org_name#app_name`）：应用尚未开通搜索服务，或请求 URL 中的 `org_name`、`app_name` 不正确。该错误不表示应用在 IM 平台中不存在。 | 先检查请求 URL 中的组织名和应用名是否正确；确认无误后，请联系环信商务开通搜索服务。 |
 | 429 | 4290501 | API 调用频率超出限制 | 调用频率超过限制。 | 请降低调用频率，或联系环信商务提升频率上限。响应 `meta.retryAfter` 给出建议的重试等待秒数。 |
 | 500 | 5000701 | 服务器内部错误 | 服务端处理请求时发生异常。 | 请稍后重试，若持续出现请联系环信技术支持。 |
 | 502 | 5020801 | 下游服务暂时不可用 | 搜索服务依赖的下游服务（如群组成员校验服务）暂时不可用，或本次搜索仅取得部分结果而未能完整返回。 | 请稍后重试，若持续出现请联系环信技术支持。 |
