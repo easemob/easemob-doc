@@ -4,12 +4,12 @@
 
 ## 各端原生开发 Demo
 
-| 客户端           | 新 Demo   | 旧 Demo   | 
-| :------------- | :----- | :----- | 
-| Android | Kotlin Demo，v4.6.0 及以上： <br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-android)<br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-android ) | Java Demo，v4.5.0 及以下，环信不再维护该 Demo：<br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/chat-android) | 
-| iOS   | Swift Demo，v4.6.0 及以上：<br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-ios)<br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-ios)  | Objective-C Demo，4.5.0 及以下，环信不再维护该 Demo 源码：<br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-ios/tree/OCDemo) <br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-ios/tree/OCDemo)  | 
+| 客户端           | Demo   |
+| :------------- | :----- | 
+| Android | Kotlin Demo，v4.6.0 及以上： <br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-android)<br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-android ) | 
+| iOS   | Swift Demo，v4.6.0 及以上：<br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-ios)<br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-ios)  |
 | Web React | <br/> - 查看 [GitHub Demo 源码地址](https://github.com/easemob/easemob-demo-react/tree/dev_4.0)<br/> - 查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/easemob-demo-react/tree/dev_4.0) | |
-| Web Vue | Vue 3 Demo：<br/> - 可查看 [GitHub Demo 源码地址](https://github.com/Easemob-Community/easemob-demo-vue3)<br/> - 可查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/webim-vue-demo/tree/vue3-miniCore) | Vue 2 Demo，环信不再维护该 Demo 源码：<br/> -查看 [GitHub Demo 源码地址](https://github.com/easemob/webim-vue-demo/tree/dev-4.0)<br/> -查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/webim-vue-demo/tree/dev-4.0)|
+| Web Vue | Vue 3 Demo：<br/> - 可查看 [GitHub Demo 源码地址](https://github.com/Easemob-Community/easemob-demo-vue3)<br/> - 可查看 [Gitee Demo 源码地址](https://gitee.com/easemob-code/webim-vue-demo/tree/vue3-miniCore) |
 
 ## Uni-app Demo
 
