@@ -6,6 +6,18 @@ containerClass: product-dynamics-page
 
 ## 2026-11
 
+#### 推送角标设置
+
+| 动态名称 | 动态描述 | 发布时间 | 相关文档 |
+| :----- | :------- | :------- | :------- |
+| FCM 和 vivo 支持推送角标设置 | 离线推送和即时推送均支持设置 FCM、vivo 角标：FCM 可指定角标数量，vivo 可配置每次收到通知时角标加 1。角标显示效果取决于设备系统和桌面支持情况。 | 2026-11 | - 离线推送：[FCM](/document/android/push/push_fcm.html#设置角标)、[vivo](/document/android/push/push_vivo.html#设置角标)<br/> - 即时推送：[FCM](/value-added/push/push_notification_config.html#设置-fcm-角标)、[vivo](/value-added/push/push_notification_config.html#vivo-推送说明) |
+
+#### uni-app 推送支持 HarmonyOS 推送
+
+| 动态名称 | 动态描述 | 发布时间 | 相关文档 |
+| :----- | :------- | :------- | :------- |
+| uni-app 支持 HarmonyOS 离线推送 | `easemob-push` 0.2.0 及以上版本新增 HarmonyOS NEXT 的 Push Kit 支持，可获取推送 Token、处理通知授权和通知点击。配置鸿蒙证书并手动完成 Token 绑定后，可接收 IM 离线消息通知。 | 2026-11 | - [V5 uni-app 鸿蒙推送](/document/web/push/uniapp_push_harmony.html)<br/> - [V4 uni-app 鸿蒙推送](/v4/applet/push/uniapp_push_harmony.html) |
+
 #### 服务端 API
 
 | 动态名称 | 动态描述 | 发布时间 | 相关文档 |

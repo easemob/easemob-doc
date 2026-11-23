@@ -2,12 +2,12 @@
 
 自 SDK 5.1.2 起，即时通讯 IM 支持在 uni-app 原生 App 中接入 [`easemob-push` UTS 插件](https://ext.dcloud.net.cn/plugin?id=29622)。当用户离线时，即时通讯 IM 可通过已配置的第三方推送通道向用户设备发送消息通知。
 
-目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀推送。
+目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS 推送。`easemob-push` 0.2.0 及以上版本新增 HarmonyOS NEXT 的 Push Kit 支持。
 
-`easemob-push` 插件负责向厂商通道或 APNs 注册、获取设备 Push Token，并将用户点击系统通知的数据回传给应用；离线通知由环信服务端经第三方推送通道下发并显示，插件本身不负责生成或展示通知。SDK 中的 `PushManager` 负责调用插件、匹配环信证书、绑定和更新 Token，以及退出登录时的解绑。通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
+`easemob-push` 插件负责向厂商通道或 APNs 注册、获取设备 Push Token，并将用户点击系统通知的数据回传给应用；离线通知由环信服务端经第三方推送通道下发并显示，插件本身不负责生成或展示通知。Android 和 iOS 通过 SDK 中的 `PushManager.setNativePush()` 自动管理 Token；HarmonyOS 由应用获取 Token 后手动绑定和解绑，详见[接入 HarmonyOS 推送](uniapp_push_harmony.html)。通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
 
 :::tip
-本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件及 `uni.requireNativePlugin('EMPushUniPlugin')` 不再是推荐接入方式。该插件不支持 H5、小程序和 HarmonyOS NEXT。
+本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件及 `uni.requireNativePlugin('EMPushUniPlugin')` 不再是推荐接入方式。UTS 插件不支持 H5 和小程序。下方“实现流程”介绍 Android 和 iOS 的自动接入方式，HarmonyOS 请按[接入 HarmonyOS 推送](uniapp_push_harmony.html)操作。
 :::
 
 ## 前提条件
@@ -15,7 +15,7 @@
 1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，并[创建应用](/product/console/app_create.html)。
 2. 了解环信即时通讯 IM 的使用限制，详见[使用限制](/product/limitation.html)。
 3. 将 Web SDK 升级至 5.1.2 或以上版本。
-4. 安装 HBuilderX 3.97.0 或以上版本。
+4. Android 和 iOS 使用 HBuilderX 3.97.0 或以上版本；HarmonyOS 使用 HBuilderX 4.31.0 或以上版本、Vue 3 工程及 HarmonyOS 5.0.0（API 12）或以上版本的真机。
 5. 在第三方推送服务中创建应用，并准备相应的应用配置、签名或证书。
 6. 使用自定义基座或云打包版本在真机上运行。标准运行基座不包含该插件的原生代码。
 7. 若使用推送模板，需在环信控制台激活该功能。激活后如需关闭推送模板功能，请联系商务；关闭操作会删除推送模板的相关配置。
@@ -30,6 +30,7 @@
 - 荣耀推送：适用于使用 MagicOS 的新荣耀设备。
 - APNs：适用于 Apple 设备。
 - FCM：适用于安装了 Google Play 服务的 Android 设备，且必须使用离线打包。
+- HarmonyOS：适用于 HarmonyOS NEXT 设备，使用独立的 Push Kit 通道，与 Android 华为 HMS 推送通道不同。
 
 Android 插件只会为当前设备选择一条推送通道：优先使用已配置且具备 Firebase/GMS 依赖的 FCM；否则选择当前品牌对应的厂商通道；均不满足时回退到 `normal`。`normal` 不具备厂商离线推送能力。iOS 固定使用 APNs。
 
@@ -53,7 +54,7 @@ Android 插件只会为当前设备选择一条推送通道：优先使用已配
 
 :::tip
 1. 修改厂商参数、包名、证书、签名或原生依赖后，需要重新制作自定义基座。各厂商的应用信息、签名和系统能力配置要求，以对应厂商及 uni-app 的文档为准。
-2. 华为推送通道仅支持 Android，不支持 HarmonyOS NEXT。
+2. Android 华为 HMS 推送配置不能用于 HarmonyOS NEXT。鸿蒙设备需单独配置 HarmonyOS Push Kit。
 :::
 
 #### 配置 Android 厂商参数
@@ -167,7 +168,7 @@ await client.login({
 
 `PushManager` 只管理设备 Push Token 的生命周期，不处理通知点击、通知权限、角标或通知栏操作。应在 `App.vue` 的 `onLaunch` 中直接调用插件申请通知权限并注册点击监听，不要等待 `ChatClient` 初始化或登录。
 
-应用被杀死后，用户点击通知时原生层可能早于页面完成初始化。插件会缓存一次原生点击数据，应用仍应在 JS 层根据页面就绪状态暂存并消费点击事件，避免冷启动时丢失跳转信息。
+应用被杀死后，用户点击通知时原生层可能早于页面完成初始化。插件会缓存原生点击数据，应用仍应在 JS 层根据页面就绪状态暂存并消费点击事件，避免冷启动时丢失跳转信息。
 
 ```javascript
 import {
@@ -264,7 +265,7 @@ pushManager.setNativePush(nativePushOptions);
 
 #### `unRegister()` 和环信侧解绑有什么区别？
 
-`unRegister()` 只结束插件向厂商 SDK 注册和监听 Token，不会单独解除环信服务端的 Token 绑定。Web SDK 5.1.2 及以上版本中，显式调用 `client.logout()` 会自动尝试解绑；如需在保持登录的情况下关闭当前设备的离线推送，请调用 `pushManager.removePushToken()`。
+`unRegister()` 不会单独解除环信服务端的 Token 绑定。对于 Android 和 iOS 的 `setNativePush()` 自动接入，显式调用 `client.logout()` 会自动尝试解绑；保持登录时可调用 `pushManager.removePushToken()` 停用。HarmonyOS 的手动绑定需按[获取并绑定 Push Token](uniapp_push_harmony.html#获取并绑定-push-token)中的说明另行解绑。
 
 #### 为什么已经配置证书名称，仍然收不到推送？
 

@@ -2,7 +2,9 @@
 
 环信 uni-app 原生推送插件集成了第三方离线消息推送服务, 为开发者提供低延时、高送达、高并发、不侵犯用户个人数据的离线消息推送服务。当客户端断开连接或应用进程被关闭等原因导致用户离线时，即时通讯 IM 会通过第三方消息推送服务向该离线用户的设备推送消息通知。
 
-目前支持的手机厂商推送服务包括：华为、荣耀、小米、OPPO、vivo、魅族、APNs 和 FCM。
+目前支持的推送服务包括：华为、荣耀、小米、OPPO、vivo、魅族、APNs、FCM 和 HarmonyOS Push Kit。
+
+本文介绍 Android 和 iOS 的旧版 `EMPushUniPlugin` 接入。HarmonyOS NEXT 使用 `easemob-push` 0.2.0 及以上版本的 UTS 插件，配置和 Token 绑定方式见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)，不使用下方的旧版插件 ZIP 包。
 
 ## 前提条件
 
@@ -43,7 +45,7 @@
 
 :::tip
 1. 华为注册厂商推送服务时，包含 `agconnect-services.json` 文件。你需下载该文件，并将其放至你的 uni-app 应用根目录下的 `nativeplugins/EMPushUniPlugin/android/assets` 文件夹下。
-2. 针对华为推送，该插件仅支持 Android 平台，不支持 HarmonyOS NEXT 系统。
+2. 旧版 `EMPushUniPlugin` 中的华为推送仅适用于 Android。HarmonyOS NEXT 请使用 [鸿蒙接入方式](uniapp_push_harmony.html)。
 :::
 
 2. 配置 uni-app 项目支持推送。选择 **App模块配置**，勾选 **Push（消息推送）**。

@@ -14,7 +14,7 @@
 | -------------- | ---------------- | ------ |
 |  Android            | - Google FCM <br/> - 华为  <br/> - 荣耀 <br/> - OPPO  <br/> - VIVO  <br/> - 小米  <br/> - 魅族  | 各推送服务的集成以及推送设置，详见 [Android 推送文档](/document/android/push/push_overview.html)。                                    |
 |  iOS            | APNs         | APNs 推送服务的集成以及推送设置，详见 [APNs 推送文档](/document/ios/push/push_overview.html)。                                  |
-|  uni-app            | uni-app SDK 支持推送插件 `EMPushUniPlugin`。         | 推送插件相关描述，详见 [uni-app 推送插件](/document/applet/push/uniapp_push.html)                               |
+| uni-app | 支持 APNs、FCM、Android 厂商推送和 HarmonyOS Push Kit。HarmonyOS NEXT 使用 `easemob-push` 0.2.0 及以上版本的 UTS 插件。 | 详见 [V5 uni-app 推送插件](/document/web/push/uniapp_push.html)和 [V4 uni-app 推送插件](/v4/applet/push/uniapp_push.html)。 |
 |  React Native            | React Native SDK 支持离线推送配置。| 详见 [React Native 离线推送文档](/document/react-native/push/push_overview.html)。  |
 
 :::tip

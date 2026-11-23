@@ -7,6 +7,7 @@
 :::tip
 - uni-app SDK 目前支持Web、H5、微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
 - uni-app SDK 4.11.0 及以上版本支持鸿蒙系统。
+- uni-app 鸿蒙原生应用可通过 `easemob-push` UTS 插件接入 HarmonyOS Push Kit。环境要求、鸿蒙证书配置及 Token 绑定方式，详见 [接入 HarmonyOS 推送](push/uniapp_push_harmony.html)。
 :::
 
 ## 体验小程序

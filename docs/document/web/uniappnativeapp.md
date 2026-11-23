@@ -38,7 +38,7 @@ uni-app 原生 App 中，SDK 通过平台适配层调用 `uni.request`、`uni.co
 9. 使用 HBuilderX 进行云打包或离线打包。
 
 :::tip
-uni-app 原生离线推送使用 `easemob-push` UTS 插件和 `PushManager.setNativePush()`。标准运行基座不包含插件原生代码，需使用自定义基座或云打包进行验证。
+uni-app 原生离线推送使用 `easemob-push` UTS 插件，Android 和 iOS 通过 `PushManager.setNativePush()` 自动管理 Token。插件 0.2.0 及以上版本还支持 HarmonyOS NEXT 的 Push Kit，鸿蒙环境要求、证书配置和手动 Token 绑定方式见[接入 HarmonyOS 推送](push/uniapp_push_harmony.html)。标准运行基座不包含插件原生代码，需使用包含插件的构建包进行真机验证。
 :::
 
 ## 运行配套 Demo
