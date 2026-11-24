@@ -130,7 +130,7 @@ dependencies {
 
 ### 1. SDK 初始化
 
-在**主进程**中进行初始化：
+在**主进程**中进行初始化。应用已分配专属域名时，先按 [配置应用独立域名](initialization.html#配置应用独立域名) 设置 REST 和 WebSocket 地址，再调用 `init`：
 
 ```java
 // 导包
