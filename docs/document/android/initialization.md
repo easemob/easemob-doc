@@ -82,7 +82,7 @@ options.enableDNSConfig(false);
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-应用独立域名通过 WebSocket 建立消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。消息 WebSocket 与 [数据同步](设置登录后自动同步数据) 连接用途不同；自 Android SDK **5.1.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。使用 5.0.0 并启用自动同步时，需另行确认该版本的同步配置要求。
+应用独立域名通过 WebSocket 建立消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。消息 WebSocket 与 [数据同步](#设置登录后自动同步数据) 连接用途不同；自 Android SDK **5.1.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。使用 5.0.0 并启用自动同步时，需另行确认该版本的同步配置要求。
 
 #### 检查配置结果
 
