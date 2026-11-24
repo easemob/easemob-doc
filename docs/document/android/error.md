@@ -81,7 +81,7 @@ EMClient.getInstance().loginWithToken(userId, token, new EMCallBack() {
 | 220 | `USER_DEVICE_CHANGED` | 用户的登录设备与上次不一致。| 登录失败的设备会收到 `EMConnectionListener#onLogout` 事件。收到该事件时，需调用 `EMClient#logout` 方法，并回到登录页面。 |
 | 221 | `USER_NOT_ON_ROSTER` | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能** > **用户** 页面开启好友关系检查功能。 | 需要先调用 `EMContactManager#addContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
 | 300 | `SERVER_NOT_REACHABLE` | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 | 调用登录 API 返回该错误码时，可能是网络受限或域名被封禁，可尝试切换设备网络。使用默认集群域名且用户位于沙特、菲律宾等地区时，可联系商务确认并开启 TLS 加密配置。其他操作返回该错误时，一般可在切换网络或稍后重试。<br/>使用应用独立域名时，还应对照 [配置应用独立域名](initialization.html#配置应用独立域名) 检查 REST 地址、WebSocket 主机名、端口和 TLS，并确认配置在首次初始化前设置。 |
-| 301 | `SERVER_TIMEOUT` | 请求服务超时：服务器未在接口规定的超时时间内响应。 | 一般是网络问题，可在切换网络或稍后重新调用 API。使用应用独立域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
+| 301 | `SERVER_TIMEOUT` | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。 | 一般是网络问题，可在切换网络或稍后重新调用 API。使用应用独立域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
 | 304 | `SERVER_GET_DNSLIST_FAILED` | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 | 使用默认集群域名时，一般是登录过程中网络异常导致获取服务器配置失败，可检查网络后重试。若将 `EMOptions#enableDNSConfig` 设置为 `false` 并指定服务器地址，还应检查是否遗漏 REST 或 IM 长连接地址。<br/>使用应用独立域名时，IM 长连接应配置 WebSocket 地址；确认 App Key、REST 和 WebSocket 地址来自同一应用、同一环境，并按 [配置应用独立域名](initialization.html#配置应用独立域名) 检查初始化设置。 |
 | 305 | `SERVER_SERVICE_RESTRICTED` | 当前 app 被禁用：若在 app 被禁用时调用 API 会返回该错误。 | app 或账号的 IM 功能被禁用，需要到环信控制台开启或联系商务。 |
 | 350 | `CONNECTION_TIMEOUT` | 连接服务器超时。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
