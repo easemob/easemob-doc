@@ -5,7 +5,7 @@
 环信小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
 
 :::tip
-SDK 目前支持微信、QQ、百度小程序、抖音、uni-app 编译的原生 Android 以及 iOS。uni-app SDK 4.11.0 及以上版本还支持鸿蒙系统；鸿蒙原生应用的离线推送配置，详见 [接入 HarmonyOS 推送](push/uniapp_push_harmony.html)。
+SDK 目前支持微信、QQ、百度小程序、抖音、uni-app 编译的原生 Android 以及 iOS。uni-app SDK 4.11.0 及以上版本还支持鸿蒙系统；鸿蒙原生应用的离线推送配置，详见 [接入 HarmonyOS 推送](/v4/applet/push/uniapp_push_harmony.html)。
 :::
 
 ## 体验小程序

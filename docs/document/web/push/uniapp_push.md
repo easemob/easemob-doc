@@ -2,12 +2,14 @@
 
 自 SDK 5.1.2 起，即时通讯 IM 支持在 uni-app 原生 App 中接入 [`easemob-push` UTS 插件](https://ext.dcloud.net.cn/plugin?id=29622)。当用户离线时，即时通讯 IM 可通过已配置的第三方推送通道向用户设备发送消息通知。
 
-目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS 推送。本文以 `easemob-push` 0.2.1 为依据；插件自 0.2.0 起支持 HarmonyOS NEXT 的 Push Kit。
+目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS 推送。本文以 `easemob-push` 0.2.2 为依据；插件自 0.2.0 起支持 HarmonyOS NEXT 的 Push Kit。
 
-`easemob-push` 插件负责向厂商通道或 APNs 注册、获取设备 Push Token，并将用户点击系统通知的数据回传给应用；离线通知由环信服务端经第三方推送通道下发并显示，插件本身不负责生成或展示通知。Android 和 iOS 通过 SDK 中的 `PushManager.setNativePush()` 自动管理 Token；HarmonyOS 由应用获取 Token 后手动绑定和解绑，详见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)。通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
+Android、iOS 和 HarmonyOS 均通过 `easemob-push` 插件向相应推送服务注册并自动获取设备 Push Token。取得 Token 后，由环信 IM SDK 将 Token、设备标识和证书名称上传至环信服务器，与 IM 账号绑定。插件负责获取 Token，不负责上传绑定；三端均需完成这两个阶段，才能接收环信离线推送。
+
+离线通知由环信服务端经第三方推送通道下发并显示。插件还将用户点击系统通知的数据回传给应用；通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
 
 :::tip
-本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件及 `uni.requireNativePlugin('EMPushUniPlugin')` 不再是推荐接入方式。UTS 插件不支持 H5 和小程序。下方“实现流程”介绍 Android 和 iOS 的自动接入方式，HarmonyOS 请按 [接入 HarmonyOS 推送](uniapp_push_harmony.html) 操作。
+本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件已废弃并停止维护，请按 [从旧版插件迁移](#从旧版插件迁移) 更新项目。UTS 插件不支持 H5 和小程序。下方说明插件配置与 IM SDK 接入；HarmonyOS 的宿主配置和 SDK 上传 Token 示例见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)。
 :::
 
 ## 前提条件
@@ -270,6 +272,18 @@ pushManager.setNativePush(nativePushOptions);
 
 推荐按以下流程验证完整链路：接收方登录后确认 `onPushTokenBound` 回调成功，保持登录并终止应用进程，再由另一账号发送消息。退出登录后 Token 已解绑，不应继续用该状态验证离线推送。
 
+## 从旧版插件迁移
+
+旧版 `EMPushUniPlugin` 与 UTS 插件不能同时集成，否则可能重复注册推送通道。迁移时执行以下操作：
+
+1. 移除业务工程的 `nativeplugins/EMPushUniPlugin`，并取消 HBuilderX 中对应的旧原生插件配置。
+2. 从 DCloud 插件市场导入 `easemob-push` 至 `uni_modules`，将 `uni.requireNativePlugin()` 调用改为按需导入函数。
+3. 将 `onRegister`、`unRegister` 组装为 `setNativePush()` 接收的插件对象，证书名称仍与环信控制台保持一致。
+4. 将 Android 厂商参数迁移至业务工程根目录的 `AndroidManifest.xml`，华为配置文件放至 `nativeResources/android/assets/agconnect-services.json`；FCM 按 [离线打包集成 FCM](uniapp_push_fcm.html) 配置 Firebase 依赖。
+5. 重新制作包含 UTS 插件的基座或安装包，验证 Token 绑定、离线通知、通知点击和退出解绑。旧基座不能用于验证新插件。
+
+更多 API 对照和迁移说明，参见插件仓库的 [旧版插件迁移指南](https://github.com/easemob/uniapp-push/blob/dev/uni_modules/easemob-push/docs/migration-from-legacy.md)。
+
 ## 常见问题
 
 #### 即时通讯 IM 在哪些情况下不会发送离线推送通知？
@@ -285,7 +299,7 @@ pushManager.setNativePush(nativePushOptions);
 
 #### `unRegister()` 和环信侧解绑有什么区别？
 
-`unRegister()` 不会单独解除环信服务端的 Token 绑定。对于 Android 和 iOS 的 `setNativePush()` 自动接入，显式调用 `client.logout()` 会自动尝试解绑；保持登录时可调用 `pushManager.removePushToken()` 停用。HarmonyOS 的手动绑定需按 [获取并绑定 Push Token](uniapp_push_harmony.html#获取并绑定-push-token) 中的说明另行解绑。
+三端都需要区分插件侧注册与环信侧绑定：`unRegister()` 只处理插件或厂商侧状态，不会解除经 IM SDK 上传的 Token 绑定。使用本文 `setNativePush()` 接入时，显式调用 `client.logout()` 会自动尝试解绑；保持登录时可调用 `pushManager.removePushToken()` 停用。若通过 `uploadPushToken()` 上传，则需按绑定时的设备标识和证书名称解除绑定，详见 [解绑 Push Token](uniapp_push_harmony.html#解绑-push-token)。
 
 #### 为什么已经配置证书名称，仍然收不到推送？
 

@@ -4,7 +4,7 @@
 
 即时通讯 IM 支持集成第三方消息推送服务，为开发者提供低延时、高送达、高并发、不侵犯用户个人数据的离线消息推送服务。
 
-uni-app 原生应用支持通过推送插件接入离线推送，其中 HarmonyOS NEXT 使用 `easemob-push` 0.2.0 及以上版本的 UTS 插件接入 Push Kit，并由应用手动绑定和解绑 Token。详见[接入 HarmonyOS 推送](uniapp_push_harmony.html)。
+uni-app 的 Android、iOS 和 HarmonyOS 原生应用均通过 `easemob-push` UTS 插件自动获取推送 Token，再由 IM SDK 将 Token 上传至环信服务器，与 IM 账号绑定。HarmonyOS NEXT 自插件 0.2.0 起支持，宿主参数及 SDK 上传示例详见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)。
 
 ## 离线推送过程
 

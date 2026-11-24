@@ -2,9 +2,11 @@
 
 ## 功能说明
 
-环信 uni-app 原生应用可通过 `easemob-push` UTS 插件接入 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀推送。本文以插件 0.2.1 为依据；HarmonyOS NEXT 自插件 0.2.0 起支持，需按 [集成 HarmonyOS 推送](uniapp_push_harmony.html) 单独配置。
+环信 uni-app 原生应用可通过 `easemob-push` UTS 插件接入 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS Push Kit。本文以插件 0.2.2 为依据；鸿蒙推送自插件 0.2.0 起支持，宿主参数和 SDK 上传示例见 [集成 HarmonyOS 推送](uniapp_push_harmony.html)。
 
-UTS 插件通过函数接口获取厂商 Token，并回传通知点击。V4 SDK 在登录成功后调用插件、匹配证书并上传 Token；通知权限、通知点击、角标和通知栏清理由应用直接调用插件处理。本文替换旧版 ZIP 包、`nativeplugins` 目录及 `uni.requireNativePlugin('EMPushUniPlugin')` 的接入方式。
+Android、iOS 和 HarmonyOS 均通过 UTS 插件向相应推送服务注册并自动获取设备 Token，再由环信 IM SDK 将 Token、设备标识和证书名称上传至环信服务器，与 IM 账号绑定。插件负责获取 Token，不负责上传绑定；三端都需要完成这两个阶段。
+
+插件还回传通知点击；通知权限、通知点击、角标和通知栏清理由应用直接调用插件处理。旧版 `EMPushUniPlugin` 原生插件已废弃并停止维护，请使用本文的 UTS 接入方式，旧项目按 [从旧版插件迁移](#从旧版插件迁移) 更新。
 
 ## 技术原理
 
@@ -239,6 +241,18 @@ async function logoutWithPush() {
 4. 验证原账号解绑、退出及账号切换，确认不会沿用前一账号的 Token 绑定。
 
 不要退出 IM 并解绑后再验证离线通知。`initPushModule()` 的 `pushConfigTypes` 只用于检查宿主配置，不能作为 Token 注册或环信绑定成功的依据。
+
+## 从旧版插件迁移
+
+不要同时集成旧版 `EMPushUniPlugin` 与 `easemob-push` UTS 插件，避免重复注册厂商通道。
+
+1. 移除业务工程的 `nativeplugins/EMPushUniPlugin`，并取消 HBuilderX 中旧原生插件的配置。
+2. 从 DCloud 插件市场导入 `easemob-push` 至 `uni_modules`，将 `uni.requireNativePlugin()` 改为按需导入函数。
+3. 将 `onRegister` 组装为 `conn.usePlugin()` 的 `emPush` 对象，保留与环信控制台一致的证书名称。
+4. 将厂商参数迁移至业务工程根目录的 `AndroidManifest.xml`，华为配置文件放至 `nativeResources/android/assets/agconnect-services.json`；使用 FCM 时检查离线打包工程中的 Firebase/GMS 依赖。
+5. 重新制作包含 UTS 插件的基座或安装包，验证 Token 绑定、离线通知、通知点击及退出解绑。
+
+完整 API 对照见插件仓库的 [旧版插件迁移指南](https://github.com/easemob/uniapp-push/blob/dev/uni_modules/easemob-push/docs/migration-from-legacy.md)。
 
 ## 注意事项
 

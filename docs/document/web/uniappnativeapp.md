@@ -34,11 +34,11 @@ uni-app 原生 App 中，SDK 通过平台适配层调用 `uni.request`、`uni.co
 5. 注册连接和消息事件；
 6. 使用用户 ID 和 Token 登录；
 7. 在真机上验证消息收发和附件上传；
-8. 如需原生离线推送，按 [uni-app 原生离线推送集成](push/uniapp_push.html) 配置推送插件，并在自定义基座或正式包中验证 Token 绑定、退出解绑和通知接收；
+8. 如需原生离线推送，按 [uni-app 原生离线推送集成](/document/web/push/uniapp_push.html) 配置推送插件，并在自定义基座或正式包中验证 Token 绑定、退出解绑和通知接收；
 9. 使用 HBuilderX 进行云打包或离线打包。
 
 :::tip
-uni-app 原生离线推送使用 `easemob-push` UTS 插件，Android 和 iOS 通过 `PushManager.setNativePush()` 自动管理 Token。插件 0.2.0 及以上版本还支持 HarmonyOS NEXT 的 Push Kit，鸿蒙环境要求、证书配置和手动 Token 绑定方式见[接入 HarmonyOS 推送](push/uniapp_push_harmony.html)。标准运行基座不包含插件原生代码，需使用包含插件的构建包进行真机验证。
+uni-app 原生离线推送使用 `easemob-push` UTS 插件。Android、iOS 和 HarmonyOS 均由插件自动获取推送 Token，再由 IM SDK 上传并绑定至环信账号。HarmonyOS 的环境要求、证书配置和 SDK 上传示例见 [接入 HarmonyOS 推送](/document/web/push/uniapp_push_harmony.html)。标准运行基座不包含插件原生代码，需使用包含插件的构建包进行真机验证。
 :::
 
 ## 运行配套 Demo

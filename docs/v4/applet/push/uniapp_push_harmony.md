@@ -8,7 +8,9 @@ uni-app 原生应用可通过 `easemob-push` 0.2.0 及以上版本的 UTS 插件
 
 ## 技术原理
 
-应用通过插件获取 Push Kit Token，在 IM 登录成功后将 Token、当前设备资源标识和鸿蒙证书名称上传至环信服务器。用户离线后，环信服务端通过已绑定的鸿蒙通道下发通知；用户点击通知时，插件将点击数据回传给应用。Token 的绑定和解绑由业务侧管理。
+Android、iOS 和 HarmonyOS 的流程一致：插件向相应推送服务注册并自动获取 Token，IM SDK 负责将 Token、设备标识和证书名称上传至环信服务器，与 IM 账号绑定。插件自身不上传 Token。
+
+鸿蒙端由插件获取 Push Kit Token，登录后通过 SDK 完成上传绑定。用户离线后，环信服务端通过已绑定的鸿蒙通道下发通知；用户点击通知时，插件将点击数据回传给应用。具体上传和解绑方法见下文的接入步骤。
 
 ## 前提条件
 
@@ -16,7 +18,7 @@ uni-app 原生应用可通过 `easemob-push` 0.2.0 及以上版本的 UTS 插件
 - 使用 SDK 4.14.0 或以上版本，并完成 [SDK 初始化](/v4/applet/initialization.html) 和 [登录](/v4/applet/login.html) 集成。
 - 使用 HBuilderX 4.31.0 或以上版本和 Vue 3 工程。
 - 使用 HarmonyOS 5.0.0（API 12）或以上版本的真机。
-- 使用 `easemob-push` 0.2.1 或以上版本（鸿蒙能力自 0.2.0 引入），构建包含该插件的鸿蒙调试基座或正式安装包。标准运行基座、H5 和小程序不支持该插件。
+- 使用 `easemob-push` 0.2.0 或以上版本，推荐使用本文核对的 0.2.2 版本，构建包含该插件的鸿蒙调试基座或正式安装包。标准运行基座、H5 和小程序不支持该插件。
 
 ## 配置鸿蒙证书和应用
 
@@ -111,7 +113,7 @@ export default {
 
 ## 手动绑定和解绑 Push Token
 
-当前 V4 SDK 的 `usePlugin(..., 'push')` 自动通道映射不包含鸿蒙 `9`。本节直接获取 Push Kit Token 后调用 `conn.uploadPushToken()`，不添加虚构的鸿蒙证书配置，也不将 Token 映射为 Android 华为通道。仓库 Demo 的鸿蒙分支仅演示插件能力，完整 IM 绑定需由业务集成。
+三端均需将插件取得的 Token 交给 IM SDK 上传。当前 V4 SDK 的 `usePlugin(..., 'push')` 自动通道映射不包含鸿蒙 `9`，因此本节显式调用 `conn.uploadPushToken()` 完成 SDK 上传，不添加虚构的鸿蒙证书配置，也不将 Token 映射为 Android 华为通道。插件 0.2.2 的仓库 Demo 已通过“绑定 Token 到环信”入口演示这一调用链。
 
 `conn` 为已登录的连接实例。先等待 Token 获取，再等待上传结束，保存绑定信息后才能继续执行退出或账号切换。
 
@@ -199,13 +201,15 @@ clearAllNotification(); // 清理本应用的系统通知栏。
 
 ## 注意事项
 
-- 鸿蒙支持从插件 0.2.0 引入，本文按 0.2.1 核对。0.2.1 已移除调试接口 `debugPublishLocalNotification`，请使用真实的 IM 离线通知链路验证，不要依赖该调试接口。
+- 鸿蒙支持从插件 0.2.0 引入，本文按 0.2.2 核对。0.2.1 已移除调试接口 `debugPublishLocalNotification`，请使用真实的 IM 离线通知链路验证，不要依赖该调试接口。
 - `onRegister()` 与 `addDeviceTokenListener()` 共用同一个回调，后一次调用会覆盖前一次；不要并行注册或在账号切换过程中继续使用原账号的绑定任务。
 - `unRegister()` 不清除缓存 Token，不撤销通知授权，也不清理通知栏；解绑、授权、角标和通知清理应分别处理。
 
 ## 验证 HarmonyOS 离线推送
 
 在鸿蒙真机确认通知授权成功、回调 `push_type` 为 `9` 且 Token 上传成功。保持账号登录并终止应用进程，待用户离线后由另一账号发送消息，验证通知接收、点击冷启动和页面跳转；同时验证解绑、重新登录和账号切换。
+
+使用插件仓库的 [Demo](https://github.com/easemob/uniapp-push/tree/dev/demo) 时，在 `demo/utils/pushCertConfig.js` 中将 `HarmonyCertificateName` 设置为环信控制台中的鸿蒙证书名称。登录 IM 后，通过 `onRegister` 获取 Token，再点击 **绑定 Token 到环信**，确认 SDK 上传成功。`HarmonyCertificateName` 仅是 Demo 的业务配置，不代表 SDK 的 `usePlugin()` 已新增鸿蒙自动映射。
 
 ## 常见错误与排查
 
