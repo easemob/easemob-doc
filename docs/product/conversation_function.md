@@ -363,6 +363,8 @@
 
 环信即时通讯 IM 的 Android、iOS、uni-app 和 React Native SDK 支持离线推送，支持的手机厂商推送服务包括 APNs、Google FCM、华为、荣耀、小米、OPPO、VIVO 和魅族。
 
+uni-app 原生应用还可通过 `easemob-push` UTS 插件接入 HarmonyOS NEXT 的 Push Kit，详见 [V5 接入说明](/document/web/push/uniapp_push_harmony.html)和 [V4 接入说明](/v4/applet/push/uniapp_push_harmony.html)。
+
 | 功能               | 描述  |
 | :----------------- | :---------------------- |
 | 绑定和解绑推送信息 | 将设备与推送信息会进行绑定获解绑，包括设备 ID、推送证书和 device token。 |

@@ -290,7 +290,8 @@ const documentSidebar = [
           collapsible: true, 
           children: [
             { text: '使用推送插件', link: 'push/uniapp_push.html' },
-            { text: '集成 FCM', link: 'push/uniapp_push_fcm.html' },
+            { text: '集成 FCM 推送', link: 'push/uniapp_push_fcm.html' },
+            { text: '集成 HarmonyOS 推送', link: 'push/uniapp_push_harmony.html' },
           ],
         }
         ],

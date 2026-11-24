@@ -1,6 +1,6 @@
 # 离线推送概述
 
-即时通讯 IM 支持集成第三方消息推送服务，在用户离线时向移动端设备发送消息通知。Web SDK 提供推送 Token 管理、推送通知方式、免打扰模式、推送语言和推送模板等功能；uni-app 原生 App 还支持通过原生推送插件自动管理设备推送 Token。
+即时通讯 IM 支持集成第三方消息推送服务，在用户离线时向移动端设备发送消息通知。Web SDK 提供推送 Token 管理、推送通知方式、免打扰模式、推送语言和推送模板等功能。uni-app 的 Android、iOS 和 HarmonyOS 原生 App 均通过推送插件自动获取设备 Token，再由 IM SDK 将 Token 上传至环信服务器，与 IM 账号绑定。
 
 本文介绍离线推送流程、推送证书配置、Token 管理、推送通知设置以及多设备离线推送策略。
 
@@ -29,7 +29,9 @@ await client.pushManager.uploadPushToken({
 
 ## uni-app 原生离线推送
 
-自 SDK 5.1.2 起，支持 uni-app App 通过 [uni-app 原生离线推送集成](uniapp_push.html) 接入 APNs、FCM 以及华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。配置 `PushManager.setNativePush()` 后，SDK 会在登录后自动获取并绑定或更新设备的推送 Token，退出登录时自动尝试解绑；业务侧也可以调用 `removePushToken()` 手动停用当前设备推送，再次调用 `setNativePush()` 重新启用。
+自 SDK 5.1.2 起，支持 uni-app App 接入 `easemob-push` UTS 插件。插件支持 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道；自插件 0.2.0 起还支持 HarmonyOS NEXT 的 Push Kit。三端的流程一致：插件获取 Token，IM SDK 上传 Token 并绑定账号，用户离线后由环信服务端通过第三方通道发送通知。仅获取 Token、尚未完成上传绑定时，不能接收环信离线通知。
+
+插件配置、SDK 接入以及绑定、解绑的调用时机，详见 [uni-app 原生离线推送集成](uniapp_push.html)；HarmonyOS 的宿主参数和 SDK 上传示例，详见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)。
 
 浏览器 Web 端不具备原生设备 Token 获取能力，仍需由业务侧获取 Token 后调用 `uploadPushToken()`。
 
@@ -91,7 +93,7 @@ await client.pushManager.uploadPushToken({
 环信 IM SDK 根据运行环境支持以下移动端离线推送配置：
 
 - 上传推送 Token：
-- uni-app 原生 App 自动获取、绑定和更新推送 Token；
+- uni-app Android、iOS 和 HarmonyOS 原生 App 通过插件自动获取推送 Token，并通过 IM SDK 上传 Token、完成账号绑定；
 - 手动停用当前设备推送并在需要时重新启用；
 - 设置推送通知，包括推送通知方式和免打扰模式：
   - 设置全局推送通知；
