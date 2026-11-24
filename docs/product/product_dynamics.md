@@ -16,7 +16,7 @@ containerClass: product-dynamics-page
 
 | 动态名称 | 动态描述 | 发布时间 | 相关文档 |
 | :----- | :------- | :------- | :------- |
-| uni-app 支持 HarmonyOS 离线推送 | `easemob-push` 0.2.0 及以上版本新增 HarmonyOS NEXT 的 Push Kit 支持。与 Android、iOS 一样，由插件自动获取推送 Token，再通过 IM SDK 上传并绑定至环信账号，完成鸿蒙证书配置后可接收 IM 离线通知；同时支持通知授权和通知点击。 | 2026-11 | - [V5 uni-app 鸿蒙推送](/document/web/push/uniapp_push_harmony.html)<br/> - [V4 uni-app 鸿蒙推送](/v4/applet/push/uniapp_push_harmony.html) |
+| uni-app 支持 HarmonyOS 离线推送 | `easemob-push` 0.2.0 及以上版本新增 HarmonyOS NEXT 的 Push Kit 支持。鸿蒙平台采用与 Android、iOS 平台一致的推送机制：由插件自动获取推送 Token，再通过 IM SDK 上传并绑定至环信账号。完成鸿蒙推送证书配置后，即可接收 IM 离线通知；同时支持通知授权和通知点击处理。 | 2026-11 | - [V5 uni-app 鸿蒙推送](/document/web/push/uniapp_push_harmony.html)<br/> - [V4 uni-app 鸿蒙推送](/v4/applet/push/uniapp_push_harmony.html) |
 
 #### 服务端 API
 
