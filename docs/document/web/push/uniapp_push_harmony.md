@@ -13,15 +13,15 @@ uni-app 原生应用可通过 `easemob-push` 0.2.0 及以上版本的 UTS 插件
 ## 前提条件
 
 - 已在 [环信控制台](https://console.easemob.com/user/login) 创建应用，并了解 [使用限制](/product/limitation.html)。
-- 使用 Web SDK 5.1.2 或以上版本，并完成 [SDK 初始化](/document/web/initialization.html) 和 [登录](/document/web/login.html)集成。
+- 使用 Web SDK 5.1.2 或以上版本，并完成 [SDK 初始化](/document/web/initialization.html) 和 [登录](/document/web/login.html) 集成。
 - 使用 HBuilderX 4.31.0 或以上版本和 Vue 3 工程。
 - 使用 HarmonyOS 5.0.0（API 12）或以上版本的真机。
-- 使用 `easemob-push` 0.2.0 或以上版本，构建包含插件的鸿蒙调试基座或正式安装包。标准运行基座、H5 和小程序不支持该插件。
+- 使用 `easemob-push` 0.2.1 或以上版本（鸿蒙推送自 0.2.0 引入），构建包含插件的鸿蒙调试基座或正式安装包。标准运行基座、H5 和小程序不支持该插件。
 
 ## 配置推送证书和宿主工程
 
 1. 在华为开发者联盟控制台为应用开通 HarmonyOS Push Kit，并申请服务账号密钥。在环信控制台的 **即时通讯 > 推送配置 > 证书配置** 中添加 **鸿蒙** 推送证书，上传服务账号密钥 JSON 文件，证书名称填写应用的 HarmonyOS Client ID。详见 [鸿蒙推送证书](/value-added/push/push_certificate_config.html#鸿蒙推送证书)。
-2. 从 [DCloud 插件市场](https://ext.dcloud.net.cn/plugin?id=29622)导入插件，确认工程中存在 `uni_modules/easemob-push/utssdk/app-harmony`。
+2. 从 [DCloud 插件市场](https://ext.dcloud.net.cn/plugin?id=29622) 导入插件，确认工程中存在 `uni_modules/easemob-push/utssdk/app-harmony`。
 3. 在 `manifest.json` 的 `app-harmony.distribute` 中设置 `bundleName`，与华为控制台登记的应用包名一致：
 
    ```json
@@ -53,7 +53,9 @@ uni-app 原生应用可通过 `easemob-push` 0.2.0 及以上版本的 UTS 插件
 
 ## 初始化插件并处理通知点击
 
-在 `App.vue` 的 `onLaunch` 中初始化插件、申请权限并注册点击监听。鸿蒙使用 `APP-HARMONY` 条件编译；`APP-PLUS` 中的代码不会在鸿蒙端执行。
+在 `App.vue` 的 `onLaunch` 中初始化插件、申请权限并注册点击监听，不要等待 IM 登录或页面加载。鸿蒙使用 `APP-HARMONY` 条件编译，`APP-PLUS` 不包含鸿蒙端。
+
+`initPushModule()` 读取 `client_id` 并返回 `{ pushConfigTypes: [9] }`。即使缺少 `client_id`，当前实现仍会返回 `[9]` 并记录错误，因此不能将此回调视为配置校验通过或 Token 获取成功。
 
 ```javascript
 // #ifdef APP-HARMONY
@@ -65,75 +67,131 @@ import {
 // #endif
 
 export default {
+  globalData: {
+    pushClickPageReady: false,
+    pendingPushClicks: [],
+  },
   onLaunch() {
     // #ifdef APP-HARMONY
     initPushModule(ret => {
-      console.log('推送通道配置:', ret.pushConfigTypes); // 鸿蒙为 [9]。
+      console.log('推送通道类型:', ret.pushConfigTypes);
     });
     requestNotificationAuthorization(ret => {
       if (!ret.status) {
-        console.warn('请在系统设置中允许应用发送通知');
+        console.warn('应用尚未获得通知授权');
       }
     });
     addNotificationListener(payload => {
-      // 根据 payload 跳转到对应会话；冷启动时先暂存，页面就绪后处理。
-      // 此回调表示用户点击通知，不表示消息到达。
+      // 此回调表示通知被点击，不表示消息到达。
+      if (this.globalData.pushClickPageReady) {
+        uni.$emit('easemob-push-click', payload);
+      } else {
+        this.globalData.pendingPushClicks.push(payload);
+      }
     });
     // #endif
   },
 };
 ```
 
-冷启动点击事件的暂存与消费方式可参见[处理通知点击](uniapp_push.html#步骤-4-处理通知点击)，鸿蒙端需使用 `APP-HARMONY` 条件编译。
+页面就绪后注册业务监听、消费缓存，卸载时解除监听并重置就绪状态，参见 [处理通知点击](uniapp_push.html#步骤-4-处理通知点击) 中的页面示例。插件自身也会排队缓存尚未注册监听时的点击，并在 `addNotificationListener()` 注册后补发，但不会替应用判断页面或 IM 账号是否就绪。
 
-默认通知点击打开应用主 Ability。插件通过鸿蒙生命周期钩子接收点击数据，应用无需修改 `EntryAbility` 或额外配置通知跳转的 `skills`、URI。用户拒绝通知权限后，可在需要时调用插件的 `openSettingsForNotification()` 引导其进入系统设置。
+默认通知点击打开主 Ability。插件通过 `UTSHarmony.onAppAbilityCreate` 和 `onAppAbilityNewWant` 接收冷、热启动 Want，无需修改 `EntryAbility` 或额外配置通知跳转的 `skills`、URI。
+
+鸿蒙点击回调的数据结构如下：
+
+| 字段 | 类型 | 描述 |
+| :--- | :--- | :--- |
+| `to`、`from` | String | 接收方和发送方；读取 `t/f` 短键或 `to/from` 全名，缺失时为空字符串。 |
+| `msgId`、`groupId` | String | 消息 ID 和群组 ID；读取 `m/g` 短键或全名，缺失时为空字符串。 |
+| `ext` | Object 或其他 JSON 值或 String | 读取 `e/ext`；尝试解析 JSON，解析失败时保留字符串，缺失时为空字符串。 |
+| `raw` | Object | 原始 Want parameters，包含华为回传参数；序列化成功时提供。 |
+
+`requestNotificationAuthorization()` 的 `status` 表示授权状态。用户拒绝后，可在业务交互中调用 `openSettingsForNotification()` 打开设置页；该接口的 `status` 仅表示设置页是否打开成功，不能据此判断已获授权。用户返回 App 后需重新检查通知权限。
 
 ## 获取并绑定 Push Token
 
-目前 `setNativePush()` 的自动通道映射不包含 HarmonyOS，不能通过增加 `certificates.huawei` 等字段绑定鸿蒙 Token。应在每次 IM 登录成功后调用插件 `onRegister()`，将返回的 Token 通过 `uploadPushToken()` 手动上传。下面的 `client` 为已登录的 `ChatClient` 实例，函数需在 `APP-HARMONY` 条件编译范围内调用。
+当前 V5 SDK 的 `setNativePush()` 自动通道映射不包含鸿蒙 `9`，因此本节使用公开的 `uploadPushToken()` 手动绑定，不添加不存在的鸿蒙证书字段，也不复用 `certificates.huawei`。仓库 Demo 的鸿蒙分支仅演示插件能力，不包含完整的 IM 登录和绑定流程。
+
+下面的 `client` 是已注册 `PushManager` 并完成登录的 `ChatClient` 实例。先将插件回调转换为 Promise，再等待 Token 上传完成；不要在未等待绑定结果时退出登录或切换账号。
 
 ```javascript
 // #ifdef APP-HARMONY
-import { onRegister } from '@/uni_modules/easemob-push';
+import { onRegister, unRegister } from '@/uni_modules/easemob-push';
 
-function bindHarmonyPush(client) {
+function getHarmonyPushToken() {
+  return new Promise((resolve, reject) => {
+    onRegister(ret => {
+      // 当前仅获取一次 Token；鸿蒙 unRegister 不删除 Push Kit Token。
+      unRegister();
+      if (ret.code !== 200 || ret.push_type !== 9 || !ret.push_token) {
+        reject(new Error(`鸿蒙 Token 获取失败：${ret.code} ${ret.error}`));
+        return;
+      }
+      resolve(ret.push_token);
+    });
+  });
+}
+
+async function bindHarmonyPush(client) {
   const deviceId = client.getClientResource();
   if (!deviceId) {
     throw new Error('请先完成 IM 登录');
   }
-
-  onRegister(async ret => {
-    if (ret.code !== 200 || ret.push_type !== 9 || !ret.push_token) {
-      console.warn('鸿蒙 Push Token 获取失败:', ret.code, ret.error);
-      return;
-    }
-    try {
-      await client.pushManager.uploadPushToken({
-        deviceId,
-        deviceToken: ret.push_token,
-        notifierName: 'YOUR_HARMONY_CLIENT_ID',
-      });
-      console.log('鸿蒙 Push Token 绑定成功');
-    } catch (error) {
-      console.warn('鸿蒙 Push Token 绑定失败，请检查网络和证书配置');
-    }
-  });
+  const notifierName = 'YOUR_HARMONY_CLIENT_ID';
+  const deviceToken = await getHarmonyPushToken();
+  await client.pushManager.uploadPushToken({ deviceId, deviceToken, notifierName });
+  return { deviceId, notifierName };
 }
 
-// IM 登录成功后调用。
-bindHarmonyPush(client);
+// 在已完成 IM 登录的异步业务流程中调用，并保存绑定信息供解绑使用。
+let harmonyBinding;
+try {
+  harmonyBinding = await bindHarmonyPush(client);
+  console.log('鸿蒙 Push Token 绑定成功');
+} catch (error) {
+  console.warn('鸿蒙 Token 获取或绑定失败，请检查签名、网络和证书配置');
+}
 // #endif
 ```
 
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
-| `deviceId` | String | 是 | 登录后通过 `client.getClientResource()` 获取的当前设备资源标识。保存该值，用于后续解绑。 |
-| `deviceToken` | String | 是 | 插件 `onRegister()` 成功回调中的 `push_token`，不要输出到日志。鸿蒙的 `push_type` 为 `9`，Android HMS 为 `2`。 |
-| `notifierName` | String | 是 | 环信控制台中的鸿蒙证书名称，必须与 `client_id` 相同。 |
+| `deviceId` | String | 是 | 登录后的 `client.getClientResource()`，保存为解绑使用的设备资源标识。 |
+| `deviceToken` | String | 是 | `onRegister()` 的 `push_token`，仅在 `code=200`、`push_type=9` 且非空时上传，不要输出到日志。 |
+| `notifierName` | String | 是 | 环信控制台的鸿蒙证书名称，与宿主 `client_id` 相同。 |
 
-手动上传的 Token 不由 `setNativePush()` 的自动生命周期管理，绑定结果以 `uploadPushToken()` 的 Promise 为准，不触发 `onPushTokenBound`。获取或绑定失败时需由业务侧重试；Token 变化后需重新上传。
+手动绑定结果以 `uploadPushToken()` 的 Promise 为准，不触发 `onPushTokenBound`。获取或上传失败时由业务侧重试，并在成功后保存 `harmonyBinding`，不要把 IM 登录成功当作推送绑定成功。
 
-停用推送、退出登录或切换账号时，先停止新的绑定并等待正在进行的上传结束，再由业务服务端调用[绑定和解绑推送信息](/document/server-side/push_information_bind_unbind.html)，使用原账号、同一 `device_id` 和 `notifier_name`，将 `device_token` 设为空字符串以解除绑定，成功后再退出 IM 登录。App Token 仅保存在业务服务端。不要依赖 `removePushToken()` 或 `client.logout()` 自动解绑此处手动上传的 Token。插件的 `unRegister()` 只清除本地 Token 回调，不会解除环信侧绑定，也不会删除 Push Kit Token。
+鸿蒙插件在当前进程缓存 Token，重复调用 `onRegister()` 会立即回传缓存值；`addDeviceTokenListener()` 只是再次调用 `onRegister()`，不提供独立的 Token 更新订阅。重启进程后再次注册会重新请求 Push Kit，Token 是否变化由厂商决定；取得新 Token 后需重新上传。
+
+## 解绑 Push Token
+
+停用推送、退出登录或切换账号时，先停止新的绑定并等待正在进行的绑定流程结束，然后由业务服务端调用 [绑定和解绑推送信息](/document/server-side/push_information_bind_unbind.html)。使用原账号，以及 `harmonyBinding` 中保存的同一设备 ID、证书名称，将 `device_token` 设为空字符串。解绑成功后再退出 IM 登录。
+
+App Token 仅保存在业务服务端。手动上传的绑定不在 SDK 自动推送控制器的状态中，不能依赖 `removePushToken()` 或 `client.logout()` 自动解绑。鸿蒙插件的 `unRegister()` 只清除本地 Token 回调，既不解绑环信服务器，也不删除或清空缓存的 Push Kit Token。
+
+## 设置本地角标和清理通知
+
+鸿蒙端提供以下两个无返回值接口，直接调用插件即可，无需传给 IM SDK：
+
+```javascript
+// #ifdef APP-HARMONY
+import { setBadge, clearAllNotification } from '@/uni_modules/easemob-push';
+
+setBadge(5); // 将本地桌面角标设为 5。
+setBadge(0); // 清除本地桌面角标。
+clearAllNotification(); // 清理本应用的系统通知栏。
+// #endif
+```
+
+`setBadge()` 调用 `notificationManager.setBadgeNumber()`，`clearAllNotification()` 调用 `notificationManager.cancelAll()`。两者用途不同，清理通知栏不代表角标或 IM 未读数被清零，也不会修改后续离线推送的服务端配置。
+
+## 注意事项
+
+- 鸿蒙支持从插件 0.2.0 引入，本文按 0.2.1 核对。0.2.1 已移除调试接口 `debugPublishLocalNotification`，请使用真实的 IM 离线通知链路验证，不要依赖该调试接口。
+- `onRegister()` 与 `addDeviceTokenListener()` 共用同一个回调，后一次调用会覆盖前一次；不要并行注册或在账号切换过程中继续使用原账号的绑定任务。
+- `unRegister()` 不清除缓存 Token，不撤销通知授权，也不清理通知栏；解绑、授权、角标和通知清理应分别处理。
 
 ## 验证 HarmonyOS 离线推送
 
@@ -141,10 +199,21 @@ bindHarmonyPush(client);
 
 ## 常见错误与排查
 
+### 常见错误码
+
+下表同时列出 Push Kit 身份错误和安装签名错误；安装错误不会通过 `onRegister()` 的 Token 回调返回。
+
 | 错误码 | 常量 | 说明 | 常见原因 | 处理建议 |
 | :--- | :--- | :--- | :--- | :--- |
 | `1000900010` | — | `Illegal application identity` | 签名未关联华为控制台登记的应用。 | 检查包名、Client ID、Push Kit 开通状态及签名关联，重新构建安装包。 |
 | `9568332` | — | `sign info inconsistent` | 待安装包与设备上旧应用的签名不同。 | 确认签名正确后，卸载旧应用并重新安装。 |
 
-若 `client_id` 读取失败或没有通知，检查生成工程的 `module.metadata`、环信控制台的 **鸿蒙** 证书、运行时通知授权及手动绑定结果；仅 `initPushModule()` 返回 `[9]` 不代表 Token 获取和绑定成功。
+### 常见问题
 
+#### 为什么返回 [9] 但无法取得 Token？
+
+`[9]` 只表示插件的鸿蒙通道类型。检查生成工程中的 `module.metadata.client_id`、已开通 Push Kit 的华为应用、包名与签名关联，并以 `onRegister()` 的 `code` 和非空 `push_token` 判断获取结果。
+
+#### 为什么 Token 获取成功但没有离线通知？
+
+确认 IM 登录后已成功上传 Token，环信控制台配置的是 **鸿蒙** 证书，证书名称与宿主 `client_id` 一致，且系统通知权限已开启。保持账号登录并终止进程、等待接收方离线后，再由另一账号发送 IM 消息；不要在退出并解绑后验证离线推送。

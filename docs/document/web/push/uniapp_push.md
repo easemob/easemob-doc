@@ -2,20 +2,20 @@
 
 自 SDK 5.1.2 起，即时通讯 IM 支持在 uni-app 原生 App 中接入 [`easemob-push` UTS 插件](https://ext.dcloud.net.cn/plugin?id=29622)。当用户离线时，即时通讯 IM 可通过已配置的第三方推送通道向用户设备发送消息通知。
 
-目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS 推送。`easemob-push` 0.2.0 及以上版本新增 HarmonyOS NEXT 的 Push Kit 支持。
+目前支持 APNs、FCM、华为、小米、魅族、vivo、OPPO、荣耀和 HarmonyOS 推送。本文以 `easemob-push` 0.2.1 为依据；插件自 0.2.0 起支持 HarmonyOS NEXT 的 Push Kit。
 
-`easemob-push` 插件负责向厂商通道或 APNs 注册、获取设备 Push Token，并将用户点击系统通知的数据回传给应用；离线通知由环信服务端经第三方推送通道下发并显示，插件本身不负责生成或展示通知。Android 和 iOS 通过 SDK 中的 `PushManager.setNativePush()` 自动管理 Token；HarmonyOS 由应用获取 Token 后手动绑定和解绑，详见[接入 HarmonyOS 推送](uniapp_push_harmony.html)。通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
+`easemob-push` 插件负责向厂商通道或 APNs 注册、获取设备 Push Token，并将用户点击系统通知的数据回传给应用；离线通知由环信服务端经第三方推送通道下发并显示，插件本身不负责生成或展示通知。Android 和 iOS 通过 SDK 中的 `PushManager.setNativePush()` 自动管理 Token；HarmonyOS 由应用获取 Token 后手动绑定和解绑，详见 [接入 HarmonyOS 推送](uniapp_push_harmony.html)。通知点击、通知权限、角标和通知栏操作由应用直接调用插件处理。
 
 :::tip
-本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件及 `uni.requireNativePlugin('EMPushUniPlugin')` 不再是推荐接入方式。UTS 插件不支持 H5 和小程序。下方“实现流程”介绍 Android 和 iOS 的自动接入方式，HarmonyOS 请按[接入 HarmonyOS 推送](uniapp_push_harmony.html)操作。
+本文介绍通过 `uni_modules/easemob-push` 集成的 UTS 插件。旧版 `EMPushUniPlugin` 原生插件及 `uni.requireNativePlugin('EMPushUniPlugin')` 不再是推荐接入方式。UTS 插件不支持 H5 和小程序。下方“实现流程”介绍 Android 和 iOS 的自动接入方式，HarmonyOS 请按 [接入 HarmonyOS 推送](uniapp_push_harmony.html) 操作。
 :::
 
 ## 前提条件
 
-1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，并[创建应用](/product/console/app_create.html)。
-2. 了解环信即时通讯 IM 的使用限制，详见[使用限制](/product/limitation.html)。
+1. 在 [环信控制台](https://console.easemob.com/user/login) [注册账号](/product/console/account_register.html)，并 [创建应用](/product/console/app_create.html)。
+2. 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 3. 将 Web SDK 升级至 5.1.2 或以上版本。
-4. Android 和 iOS 使用 HBuilderX 3.97.0 或以上版本；HarmonyOS 使用 HBuilderX 4.31.0 或以上版本、Vue 3 工程及 HarmonyOS 5.0.0（API 12）或以上版本的真机。
+4. 使用 HBuilderX 4.31.0 或以上版本，符合当前插件包的版本要求。Android 最低支持 Android 5.0（API 21），iOS 最低支持 iOS 12；HarmonyOS 使用 Vue 3 工程及 HarmonyOS 5.0.0（API 12）或以上版本的真机。
 5. 在第三方推送服务中创建应用，并准备相应的应用配置、签名或证书。
 6. 使用自定义基座或云打包版本在真机上运行。标准运行基座不包含该插件的原生代码。
 7. 若使用推送模板，需在环信控制台激活该功能。激活后如需关闭推送模板功能，请联系商务；关闭操作会删除推送模板的相关配置。
@@ -42,7 +42,7 @@ Android 插件只会为当前设备选择一条推送通道：优先使用已配
 2. 在 [环信控制台](https://console.easemob.com/user/login) 上传对应的推送证书或配置通道参数，并记录证书名称。该名称需要与调用 `setNativePush()` 时配置的证书名称一致。
 
 :::tip
-更多详情，请参见 [Android 离线推送](/document/android/push/push_overview.html)和 [iOS 离线推送](/document/ios/push/push_overview.html)。
+更多详情，请参见 [Android 离线推送](/document/android/push/push_overview.html) 和 [iOS 离线推送](/document/ios/push/push_overview.html)。
 :::
 
 ### 步骤 2：配置 uni-app 应用
@@ -98,9 +98,11 @@ Android 插件只会为当前设备选择一条推送通道：优先使用已配
 
 UTS 插件以函数形式导出接口。应用只需将 `onRegister` 和 `unRegister` 组装为插件对象，并通过 `pushManager.setNativePush()` 配置插件和通道证书。不要将通知点击、权限、角标等其他插件接口传给 `PushManager`。
 
+请勿使用 `uni.requireNativePlugin('EMPushUniPlugin')` 或导入同名实例访问 UTS 插件。先调用 `initPushModule()` 读取宿主参数，再调用 `setNativePush()`。Android 依赖此步骤填充厂商通道配置；原生启动钩子不会代替它，`onRegister()` 也不会重新扫描配置。返回的 `pushConfigTypes` 仅表示宿主配置的通道，不代表当前设备选中的通道或 Token 绑定成功。实际绑定结果以 `onPushTokenBound` 为准。
+
 ```typescript
 import { ChatClient, PushManager } from 'easemob-websdk';
-import { onRegister, unRegister } from '@/uni_modules/easemob-push';
+import { initPushModule, onRegister, unRegister } from '@/uni_modules/easemob-push';
 
 const pushManager = new PushManager();
 
@@ -118,6 +120,9 @@ const nativePushOptions = {
   },
 };
 
+initPushModule(ret => {
+  console.log('已配置推送通道:', ret.pushConfigTypes);
+});
 pushManager.setNativePush(nativePushOptions);
 
 const client = ChatClient.init({
@@ -163,12 +168,22 @@ await client.login({
 - `certificates` 至少需要包含一个有效的通道证书名称。插件返回某一推送通道时，必须存在与该通道对应的证书配置。
 - 在启用状态下重复设置相同配置属于幂等操作。如需更换插件或证书，必须先成功调用 `removePushToken()`，再通过 `setNativePush()` 设置新配置。
 - 推送事件不会返回设备 Push Token 或 IM Token。请勿在业务日志中输出 `onRegister` 的完整返回值。
+- SDK 使用插件的 Token 回调时，不要再单独调用 `onRegister()` 或 `addDeviceTokenListener()`。iOS 会覆盖已有 Token 回调，Android 的 `addDeviceTokenListener()` 等同于重新调用 `onRegister()`，可能干扰 SDK 的绑定流程。
 
 ### 步骤 4：处理通知点击
 
 `PushManager` 只管理设备 Push Token 的生命周期，不处理通知点击、通知权限、角标或通知栏操作。应在 `App.vue` 的 `onLaunch` 中直接调用插件申请通知权限并注册点击监听，不要等待 `ChatClient` 初始化或登录。
 
 应用被杀死后，用户点击通知时原生层可能早于页面完成初始化。插件会缓存原生点击数据，应用仍应在 JS 层根据页面就绪状态暂存并消费点击事件，避免冷启动时丢失跳转信息。
+
+Android 端还需在环信控制台的推送证书中配置插件的通知点击入口，否则可能只能打开 App，无法收到点击回调：
+
+| 推送通道 | 证书配置项 | 值 |
+| :--- | :--- | :--- |
+| 华为、荣耀 | Action | `com.hyphenate.push.OnClickNotifyActivity` |
+| OPPO、vivo | Activity | `com.hyphenate.push.OnClickNotifyActivity` |
+
+Android 点击数据通常包含 `to`、`from`、`msgId`、`groupId` 和 `ext`，其中 `ext` 可能是对象或 JSON 字符串；iOS 返回 APNs 的 `userInfo` JSON，不能按 Android 的固定字段结构读取。
 
 ```javascript
 import {
@@ -189,35 +204,40 @@ export default {
 
     addNotificationListener(payload => {
       // 仅在用户点击系统通知后回调，不表示消息已经到达。
-      if (getApp().globalData.pushClickPageReady) {
+      if (this.globalData.pushClickPageReady) {
         uni.$emit('easemob-push-click', payload);
         return;
       }
-      getApp().globalData.pendingPushClicks.push(payload);
+      this.globalData.pendingPushClicks.push(payload);
     });
     // #endif
   },
 };
 ```
 
-需要处理通知跳转的页面在 `onLoad` 中注册业务监听，并消费冷启动期间暂存的点击数据：
+需要处理通知跳转的常驻入口页可按以下方式注册业务监听并消费缓存。页面卸载时移除监听并重置就绪状态，避免重复跳转或丢失后续通知点击：
 
 ```javascript
-onLoad() {
-  const handlePushClick = payload => {
-    console.log('通知点击数据:', payload);
-    // 根据 payload 跳转到对应会话或业务页面。
-  };
-
-  uni.$on('easemob-push-click', handlePushClick);
-
-  const pending = getApp().globalData.pendingPushClicks.splice(0);
-  pending.forEach(handlePushClick);
-  getApp().globalData.pushClickPageReady = true;
-}
+export default {
+  onLoad() {
+    this.handlePushClick = payload => {
+      // 校验 payload 和当前登录账号，再跳转到对应会话或业务页面。
+    };
+    uni.$on('easemob-push-click', this.handlePushClick);
+    const pending = getApp().globalData.pendingPushClicks.splice(0);
+    pending.forEach(this.handlePushClick);
+    getApp().globalData.pushClickPageReady = true;
+  },
+  onUnload() {
+    getApp().globalData.pushClickPageReady = false;
+    uni.$off('easemob-push-click', this.handlePushClick);
+  },
+};
 ```
 
 `addNotificationListener()` 只在用户点击系统通知后回调，不表示消息到达。Android 13 及以上系统需要用户授予通知权限；用户拒绝后，可通过插件的 `openSettingsForNotification()` 引导用户前往系统设置。角标设置和通知栏清理等功能也应由应用直接调用插件接口。
+
+`requestNotificationAuthorization()` 回调中的 `status` 表示通知授权状态；`openSettingsForNotification()` 的 `status` 仅表示是否成功打开设置页，不代表用户已开启通知。`setBadge()` 在 iOS 和 HarmonyOS 生效，Android 实现不修改本地角标。
 
 ### 步骤 5：停用或重新启用推送
 
@@ -258,14 +278,14 @@ pushManager.setNativePush(nativePushOptions);
 
 #### 即时通讯 IM 是否支持多设备离线推送？
 
-你可以在[环信控制台](https://console.easemob.com/user/login)的 **证书配置** 页面配置多设备推送策略。该策略对所有推送通道生效：
+你可以在 [环信控制台](https://console.easemob.com/user/login) 的 **证书配置** 页面配置多设备推送策略。该策略对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息。
 - 任一设备离线时，都发送推送消息。
 
 #### `unRegister()` 和环信侧解绑有什么区别？
 
-`unRegister()` 不会单独解除环信服务端的 Token 绑定。对于 Android 和 iOS 的 `setNativePush()` 自动接入，显式调用 `client.logout()` 会自动尝试解绑；保持登录时可调用 `pushManager.removePushToken()` 停用。HarmonyOS 的手动绑定需按[获取并绑定 Push Token](uniapp_push_harmony.html#获取并绑定-push-token)中的说明另行解绑。
+`unRegister()` 不会单独解除环信服务端的 Token 绑定。对于 Android 和 iOS 的 `setNativePush()` 自动接入，显式调用 `client.logout()` 会自动尝试解绑；保持登录时可调用 `pushManager.removePushToken()` 停用。HarmonyOS 的手动绑定需按 [获取并绑定 Push Token](uniapp_push_harmony.html#获取并绑定-push-token) 中的说明另行解绑。
 
 #### 为什么已经配置证书名称，仍然收不到推送？
 
