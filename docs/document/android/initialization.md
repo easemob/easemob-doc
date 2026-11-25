@@ -16,7 +16,7 @@
 
 创建 `EMOptions`，调用 `setAppKey` 设置 App Key，完成其他初始化配置后，将 `Context` 和 `EMOptions` 传入 `EMClient.init`。
 
-如果应用已分配专属域名，请先按 [配置应用独立域名](#配置应用独立域名) 设置服务地址，再调用初始化接口。
+如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 
 ```java
 EMOptions options = new EMOptions();
@@ -45,9 +45,9 @@ EMClient.getInstance().init(getApplicationContext(), options);
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
-## 配置应用独立域名
+## 配置应用专属域名
 
-Android SDK 自 **5.0.0** 起提供以下 REST 和 WebSocket 服务地址配置接口。应用已分配专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+Android SDK 自 **5.0.0** 起提供以下 REST 和 WebSocket 服务地址配置接口。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
 #### 初始化前配置地址
 
@@ -82,7 +82,7 @@ options.enableDNSConfig(false);
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-应用独立域名通过 WebSocket 建立消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。消息 WebSocket 与 [数据同步](#设置登录后自动同步数据) 连接用途不同；自 Android SDK **5.1.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。使用 5.0.0 并启用自动同步时，需另行确认该版本的同步配置要求。
+应用专属域名通过 WebSocket 建立消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。消息 WebSocket 与 [数据同步](#设置登录后自动同步数据) 连接用途不同；自 Android SDK **5.1.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。使用 5.0.0 并启用自动同步时，需另行确认该版本的同步配置要求。
 
 #### 检查配置结果
 

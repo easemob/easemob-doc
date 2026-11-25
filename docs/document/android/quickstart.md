@@ -1,4 +1,4 @@
-﻿# 快速开始
+# 快速开始
 
 本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
 
@@ -130,7 +130,7 @@ dependencies {
 
 ### 1. SDK 初始化
 
-在**主进程**中进行初始化。应用已分配专属域名时，先按 [配置应用独立域名](initialization.html#配置应用独立域名) 设置 REST 和 WebSocket 地址，再调用 `init`：
+在**主进程**中进行初始化。使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用 `init`：
 
 ```java
 // 导包
