@@ -82,14 +82,14 @@ ChatClient.getInstance().loginWithToken(userId, token)
 | 219 | `USER_MUTED_BY_ADMIN` | 当前用户被管理员全局禁言。 | 禁止当前用户发送消息，并在 UI 上提示。 |
 | 220 | `USER_DEVICE_CHANGED` | 当前登录设备与上次登录设备不一致。 | 根据 `ConnectionListener#onLogout` 返回的错误码处理异常登出，并按业务需要重新登录。 |
 | 221 | `USER_NOT_ON_ROSTER` | 已开启好友关系检查，当前用户与消息接收方不是好友。 | 先通过 `ContactManager#addContact` 发起好友申请，对方同意后再发送消息。好友关系检查配置详见 [环信控制台](/product/console/basic_user.html#好友关系检查)。 |
-| 300 | `SERVER_NOT_REACHABLE` | 服务器不可达。例如，SDK 与消息服务器未保持连接时发送或撤回消息，或者因网络不稳定导致群组、好友等请求失败。 | 检查设备网络及域名访问情况，切换网络或稍后重试。 |
-| 301 | `SERVER_TIMEOUT` | 等待服务器响应超时。 | 检查设备网络，切换网络或稍后重试。 |
-| 304 | `SERVER_GET_DNSLIST_FAILED` | 获取服务器配置信息失败。 | 检查网络和 DNS 配置。若关闭了 DNS 配置获取，还需确认已正确配置 IM 和 REST 服务器地址。 |
+| 300 | `SERVER_NOT_REACHABLE` | 服务器不可达。例如，SDK 与消息服务器未保持连接时发送或撤回消息，或者因网络不稳定导致群组、好友等请求失败。 | 检查设备网络及域名访问情况，切换网络或稍后重试。<br/>使用应用专属域名时，还应对照 [配置应用专属域名](initialization.html#配置应用专属域名) 检查 REST 地址、WebSocket 主机名、端口和 TLS，并确认配置在首次初始化前设置。 |
+| 301 | `SERVER_TIMEOUT` | 等待服务器响应超时。 | 检查设备网络，切换网络或稍后重试。<br/>使用应用专属域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
+| 304 | `SERVER_GET_DNSLIST_FAILED` | 获取服务器配置信息失败。 | 检查网络和 DNS 配置。若关闭了 DNS 配置获取，还需确认已正确配置 IM 和 REST 服务器地址。<br/>使用应用专属域名时，IM 长连接应配置 WebSocket 地址；确认 App Key、REST 和 WebSocket 地址来自同一应用、同一环境，并按 [配置应用专属域名](initialization.html#配置应用专属域名) 检查初始化设置。 |
 | 305 | `SERVER_SERVICE_RESTRICTED` | 当前应用或账号的 IM 服务被限制。 | 在环信控制台检查服务状态，或联系环信商务。 |
 | 306 | `SERVER_DECRYPTION_FAILED` | 服务端传输数据解密失败。 | 结合 SDK 日志排查；若持续出现，请联系环信技术支持。 |
 | 309 | `SERVER_RESPONSE_ILLEGAL` | 服务端返回的数据格式不合法。 | 结合 SDK 日志排查；若持续出现，请联系环信技术支持。 |
 | 350 | `CONNECTION_TIMEOUT` | 连接服务器超时。 | 检查设备网络；若网络正常，请稍后重新登录。 |
-| 351 | `CONNECTION_DNS_ERROR` | 连接服务器时发生 DNS 错误。 | 检查设备网络和 DNS 配置；若网络正常，请稍后重新登录。 |
+| 351 | `CONNECTION_DNS_ERROR` | 连接服务器时发生 DNS 错误。 | 检查设备网络和 DNS 配置；若网络正常，请稍后重新登录。<br/>使用应用专属域名时，还应核对控制台中的实际域名，确认 `setWebSocketServer` 只填写主机名，不包含 `wss://`、端口或路径。 |
 | 352 | `CONNECTION_IO_ERROR` | 连接服务器时发生 IO 错误。 | 检查设备网络；若网络正常，请稍后重新登录。 |
 | 353 | `CONNECTION_STREAM_CLOSED` | 连接服务器时数据流被关闭。 | 检查设备网络；若网络正常，请稍后重新登录。 |
 | 354 | `CONNECTION_PROVISION_TIMEOUT` | 连接服务器时认证超时。 | 检查设备网络；若网络正常，请稍后重新登录。 |

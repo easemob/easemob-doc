@@ -72,9 +72,9 @@ try {
 | 218 | `USER_ALREADY_LOGIN_ANOTHER` | 用户已在其他设备登录，当前登录策略不允许继续登录。 | 根据业务策略提示用户退出其他设备，或调整多设备配置。 |
 | 219 | `USER_MUTED_BY_ADMIN` | 用户被管理员全局禁言。 | 提示用户已被禁言，等待解禁或联系管理员。 |
 | 220 | `USER_DEVICE_CHANGED` | 当前登录设备与预期设备不一致，或设备标识发生变化。 | 检查自动登录、多设备策略和设备标识配置；必要时重新登录。 |
-| 300 | `CONNECTION_WEBSOCKET_ERROR` / `CONNECTION_CLOSED_BEFORE_READY` / `CONNECTION_PROVISION_CLOSED` / `MESSAGE_NOT_CONNECTED` | WebSocket 连接失败、连接尚未就绪即关闭，或发送消息时未连接。 | 等待连接成功后重试，并检查网络、连接状态和服务地址配置。 |
-| 301 | `CONNECTION_TIMEOUT` / `CONNECTION_PROVISION_TIMEOUT` / `MESSAGE_ACK_TIMEOUT` / `MESSAGE_ACK_MISSING` / `REST_TIMEOUT` / `UPLOAD_TIMEOUT` | 请求、连接鉴权、消息 ACK、REST 请求或上传超时。 | 检查网络环境后重试；若频繁出现，检查服务配置和客户端超时策略。 |
-| 304 | `CONNECTION_DNSLIST_FAILED` | 获取服务器地址配置失败。 | 检查网络、`appKey`、DNS 配置和服务可用性。 |
+| 300 | `CONNECTION_WEBSOCKET_ERROR` / `CONNECTION_CLOSED_BEFORE_READY` / `CONNECTION_PROVISION_CLOSED` / `MESSAGE_NOT_CONNECTED` | WebSocket 连接失败、连接尚未就绪即关闭，或发送消息时未连接。 | 等待连接成功后重试，并检查网络、连接状态和服务地址配置。<br/>使用应用专属域名时，还应对照 [配置应用专属域名](initialization.html#配置应用专属域名) 检查 REST 地址、WebSocket URL、端口和 WSS 协议，并确认配置在首次初始化前设置。 |
+| 301 | `CONNECTION_TIMEOUT` / `CONNECTION_PROVISION_TIMEOUT` / `MESSAGE_ACK_TIMEOUT` / `MESSAGE_ACK_MISSING` / `REST_TIMEOUT` / `UPLOAD_TIMEOUT` | 请求、连接鉴权、消息 ACK、REST 请求或上传超时。 | 检查网络环境后重试；若频繁出现，检查服务配置和客户端超时策略。<br/>使用应用专属域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
+| 304 | `CONNECTION_DNSLIST_FAILED` | 获取服务器地址配置失败。 | 检查网络、`appKey`、DNS 配置和服务可用性。<br/>使用应用专属域名时，IM 长连接应配置 WebSocket 地址；确认 App Key、REST 和 WebSocket 地址来自同一应用、同一环境，并按 [配置应用专属域名](initialization.html#配置应用专属域名) 检查初始化设置。 |
 | 305 | `SERVER_SERVING_DISABLED` | 服务被禁用或当前能力不可用。 | 检查是否已开通对应服务；如需使用该能力，请在控制台开通或联系商务。 |
 
 ## 消息

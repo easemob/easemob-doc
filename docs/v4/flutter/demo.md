@@ -35,8 +35,9 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-flutter) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-flutter) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开项目。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `main.dart` 文件。
-7. 编译运行项目。
-8. 使用注册的用户 ID 和密码登录。
+7. 使用应用专属域名时，以 [控制台展示的地址](/product/console/app_manage.html#查看应用服务器域名) 为准，并在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
+8. 编译运行项目。
+9. 使用注册的用户 ID 和密码登录。
 
 ### App Server
 

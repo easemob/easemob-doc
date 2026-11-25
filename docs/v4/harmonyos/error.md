@@ -45,14 +45,14 @@ HarmonyOS 中错误码的类为 `ChatError`。
 | 219    |       USER_MUTED_BY_ADMIN       | 用户被禁言：用户被全局禁言后发送消息时提示该错误。 |
 | 220    |       USER_DEVICE_CHANGED       | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
 | 221    |       USER_NOT_ON_ROSTER        | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能** > **用户** 页面开启好友关系检查功能。|
-| 300    |      SERVER_NOT_REACHABLE       | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。 |
-| 301    |         SERVER_TIMEOUT          | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。 |
+| 300    |      SERVER_NOT_REACHABLE       | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。<br/>排查建议：使用应用专属域名时，还应对照 [配置应用专属域名](initialization.html#配置应用专属域名) 检查 REST 地址、WebSocket 主机名、端口和 TLS，并确认配置在首次初始化前设置。 |
+| 301    |         SERVER_TIMEOUT          | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。<br/>排查建议：使用应用专属域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
 | 302    |           SERVER_BUSY           | 服务器忙碌：服务器当前忙碌会返回该错误，建议稍后再尝试请求。 |
 | 303    |      SERVER_UNKNOWN_ERROR       | 服务请求的通用错误码：当请求服务器未成功时的默认错误，该错误发生情况较多，需要根据日志进一步排查。 |
-| 304    |    SERVER_GET_DNSLIST_FAILED    | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 |
+| 304    |    SERVER_GET_DNSLIST_FAILED    | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。<br/>排查建议：使用应用专属域名时，IM 长连接应配置 WebSocket 地址；确认 App Key、REST 和 WebSocket 地址来自同一应用、同一环境，并按 [配置应用专属域名](initialization.html#配置应用专属域名) 检查初始化设置。 |
 | 305    |    SERVER_SERVICE_RESTRICTED    | 当前 app 被禁用：若在 app 被禁用时调用 API 会返回该错误。 |
 | 350    |       CONNECTION_TIMEOUT        | 连接服务器超时。 该错误码自 SDK v1.15.0 起支持。 |
-| 351    |      CONNECTION_DNS_ERROR       | 连接服务器时发生 DNS 错误。该错误码自 SDK v1.15.0 起支持。 |
+| 351    |      CONNECTION_DNS_ERROR       | 连接服务器时发生 DNS 错误。该错误码自 SDK v1.15.0 起支持。<br/>排查建议：使用应用专属域名时，还应核对控制台中的实际域名，确认 `setWebSocketServer` 只填写主机名，不包含 `wss://`、端口或路径。 |
 | 352    |       CONNECTION_IO_ERROR       | 连接服务器时发生 IO 错误。该错误码自 SDK v1.15.0 起支持。 |
 | 353    |   CONNECTION_STREAM_CLOSED     | 连接服务器时流被关闭。该错误码自 SDK v1.15.0 起支持。 |
 | 354    | CONNECTION_PROVISION_TIMEOUT   | 连接服务器时认证超时。该错误码自 SDK v1.15.0 起支持。 |

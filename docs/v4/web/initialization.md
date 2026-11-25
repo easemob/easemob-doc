@@ -8,6 +8,8 @@
 
 ## 初始化 SDK
 
+
+如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 初始化时通过传入 `appKey` 来获取 SDK 实例。
 
 ```javascript
@@ -29,6 +31,51 @@ const conn = new WebIM.connection({
 | `appKey`    | String         | 是                   | `appkey` 为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
 | `delivery`       | Boolean | 否   | 是否开启已送达回执。<br/> - `true`：开启。<br/> -（默认）`false`：关闭。           |
 | `isFixedDeviceId`       | Boolean | 否   | 是否使用固定的设备标识（`deviceId`）。<br/> -（默认）`true`：SDK 对设备生成一个设备标识并存入本地存储，即对一个浏览器来说，所有 SDK 实例的连接都被认为是同一设备。 <br/> - `false`：每一个 SDK 实例连接时，使用随机字符串作为设备标识，即每个实例采用的不同的设备连接。该参数会影响多端登录互踢的策略，详见 [多设备登录文档](multi_device.html)。   |
+
+## 配置应用专属域名
+
+Web SDK 自 **4.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `apiUrl` | string | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `url` | string | 是 | 完整 WSS URL，包含 `/websocket` 路径，例如 `wss://ws-your-app.example.com/websocket`。 |
+| `isHttpDNS` | boolean | 是 | 默认 `true`；本文设为 `false`，避免走默认服务地址发现流程。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。
+
+```javascript
+import WebIM from 'easemob-websdk';
+
+const conn = new WebIM.connection({
+  appKey: 'your-org#your-app',
+  apiUrl: 'https://api-your-app.example.com',
+  url: 'wss://ws-your-app.example.com/websocket',
+  isHttpDNS: false,
+});
+
+conn.addEventHandler('domain-connection', {
+  onConnected: () => console.log('消息连接已建立'),
+  onDisconnected: () => console.log('消息连接已断开'),
+});
+```
+
+控制台只给出 `wss://主机名` 时，在 `url` 中追加 `/websocket`；已有该路径时不要重复追加。小程序使用 V4.x 小程序构建包时，参数含义见 [小程序初始化](/v4/applet/initialization.html#配置应用专属域名)，并完成 [小程序合法域名配置](/v4/applet/serverconfig.html)。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 

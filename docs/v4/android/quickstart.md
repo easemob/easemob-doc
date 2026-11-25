@@ -132,6 +132,8 @@ dependencies {
 
 ### 1. SDK 初始化
 
+使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+
 在**主进程**中进行初始化：
 
 ```java

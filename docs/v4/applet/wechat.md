@@ -14,6 +14,8 @@
 
 ## 步骤 3 配置服务器域名
 
+以下集群域名仅适用于使用集群域名的应用。使用应用专属域名时，应从 [当前应用详情页](/product/console/app_manage.html#查看应用服务器域名) 获取地址，按 [配置服务器域名](serverconfig.html) 添加合法域名，并按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 SDK；不要直接使用下方的集群域名示例。
+
 小程序在发布前，需要配置合法域名。
 
 登录 [微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
@@ -62,6 +64,8 @@ import EasemobChat from "../sdk/Easemob-chat-4.x.x.js"; // 4.0 版本 SDK
 ```
 
 ## 步骤 6 实例化 SDK
+
+使用应用专属域名时，请将以下示例中的 App Key、`apiUrl` 和 `url` 按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置为当前应用的值。
 
 实例化 SDK，并挂载在全局对象下。
 

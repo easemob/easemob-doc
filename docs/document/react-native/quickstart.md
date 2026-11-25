@@ -87,6 +87,8 @@ cd ios && bundle exec pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
+使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，将默认生成的 `App.tsx` 重命名为 `App.js`（已有 `App.js` 时直接使用），删除全部内容，并添加如下内容:
 
 等待日志显示 `init success` 后再登录，显示 `onConnected` 后再发送消息。发送是否成功以 `onSuccess` 或 `onError` 回调为准，`ChatManager#sendMessage` 返回的 Promise 正常结束不表示消息已发送成功。Token 即将过期时，需从业务服务器获取新 Token 并调用 `ChatClient#renewToken`；Token 已过期时，需获取有效 Token 后重新登录，详见 [登录](login.html)。

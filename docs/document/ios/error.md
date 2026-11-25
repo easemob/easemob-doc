@@ -83,12 +83,12 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 219    |       `EMErrorUserMutedByAdmin`       | 用户被禁言：用户在群组/聊天室开启全员禁言时发送消息时提示该错误。  | 在群组/聊天室开启全员禁言的情况下，不能发送消息，可在 UI 上限制。 |
 | 220    |       `EMErrorUserDeviceChanged`       | 用户的登录设备与上次不一致。  | 登录失败的设备会收到 `EMClientDelegate#userAccountDidLoginFromOtherDevice` 事件。收到该事件时，需调用 `EMClient#logout` 方法，并回到登录页面。 |
 | 221    |      `EMErrorUserNotOnRoster`   | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信控制台](https://console.easemob.com/user/login)的 **功能配置 > 基础功能** > **用户** 开启好友关系检查功能。 | 需要先调用 `EMContactManager#addContact` 方法添加好友。对方同意好友请求后，才能发送消息。 |
-| 300    |      `EMErrorServerNotReachable`      | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。 |
-| 301    |        `EMErrorServerTimeout`         | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。| 一般是网络问题，可在切换网络或延迟一段时间后重新调用 API。 |
-| 304    |   `EMErrorServerGetDNSConfigFailed`   | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 | 如果设置了 `EMOptions#enableDnsConfig` 为`No`，可能是没设置访问的 IM/REST 服务器导致，否则一般为登录时的网络问题，导致请求 dnsConfig 失败。 |
+| 300    |      `EMErrorServerNotReachable`      | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误 | 调用登录 API 返回该错误码，可能是由于网络受限，或域名被封禁，可尝试切换设备网络。如果用户在沙特/菲律宾等地区，需要联系商务，开启 dnsconfig中 TLS 加密。其他操作返回该错误码，一般是网络问题，可在切换网络或延迟一段时间后重新调用。<br/>使用应用专属域名时，还应对照 [配置应用专属域名](initialization.html#配置应用专属域名) 检查 REST 地址、WebSocket 主机名、端口和 TLS，并确认配置在首次初始化前设置。 |
+| 301    |        `EMErrorServerTimeout`         | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。| 一般是网络问题，可在切换网络或延迟一段时间后重新调用 API。<br/>使用应用专属域名时，还应确认目标主机和端口可达，并分别检查 REST 请求和消息 WebSocket 连接。 |
+| 304    |   `EMErrorServerGetDNSConfigFailed`   | 获取服务器配置信息错误：SDK 获取当前应用的服务器配置时失败。 | 如果设置了 `EMOptions#enableDnsConfig` 为`No`，可能是没设置访问的 IM/REST 服务器导致，否则一般为登录时的网络问题，导致请求 dnsConfig 失败。<br/>使用应用专属域名时，IM 长连接应配置 WebSocket 地址；确认 App Key、REST 和 WebSocket 地址来自同一应用、同一环境，并按 [配置应用专属域名](initialization.html#配置应用专属域名) 检查初始化设置。 |
 | 305    |    `EMErrorServerServingForbidden`    | 当前 app 被禁用：app 因为某种原因被禁用。   | app 或账号的 IM 功能被禁用，需要到环信控制台开启或联系商务。 |
 | 350    | `EMErrorConnectionTimeout`     | 连接服务器超时。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
-| 351    | `EMErrorConnectionDNSError`     | 连接服务器时发生 DNS 错误。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。  |
+| 351    | `EMErrorConnectionDNSError`     | 连接服务器时发生 DNS 错误。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。<br/>使用应用专属域名时，还应核对控制台中的实际域名，确认 `webSocketServer` 只填写主机名，不包含 `wss://`、端口或路径。 |
 | 352    | `EMErrorConnectionIOError`     | 连接服务器时发生 IO 错误。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
 | 353    | `EMErrorConnectionStreamClosed`  | 连接服务器时流被关闭。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |
 | 354    | `EMErrorConnectionProvisionTimeout`  | 连接服务器时认证超时。 | 请先检查设备网络状态。若网络连通正常，建议稍等片刻后重新尝试登录。 |

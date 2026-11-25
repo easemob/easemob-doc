@@ -14,6 +14,8 @@ HarmonyOS SDK 5.0.0 初始化后不会自动登录。初始化完成后，应用
 
 ## 初始化 SDK
 
+
+如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 创建 `ChatOptions`，通过构造参数设置 App Key，完成其他初始化配置后，将上下文和 `ChatOptions` 传入 `ChatClient#init`。
 
 ```typescript
@@ -51,6 +53,52 @@ ChatClient.getInstance().init(context, {
 | `setEnableUserInfo(enableUserInfo: boolean)` | 设置是否开启用户信息自动管理。<br/>- `true`：开启。<br/>-（默认）`false`：关闭。必须在 `init` 前设置。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
+
+## 配置应用专属域名
+
+HarmonyOS SDK 自 **5.0.0** 起提供以下 REST 和 WebSocket 服务地址配置接口。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `setRestServer` 的地址 | string | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `setWebSocketServer` 的 `webSocketServer` | string | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `setWebSocketPort` 的 `webSocketPort` | number | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `setEnableTLSConnection` 的布尔值 | boolean | 是 | 设为 `true`，使用 WSS。 |
+| `setEnableDnsConfig` 的 `enableDnsConfig` | boolean | 是 | 默认 `true`；本文设为 `false`。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。`context` 为当前 Ability 上下文。
+
+```typescript
+import { ChatClient, ChatOptions } from '@easemob/chatsdk';
+
+const options = new ChatOptions({
+  appKey: 'your-org#your-app'
+});
+options.setRestServer('https://api-your-app.example.com');
+options.setWebSocketServer('ws-your-app.example.com');
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
+options.setEnableDnsConfig(false);
+
+ChatClient.getInstance().init(context, options);
+```
+
+WebSocket 地址只填写主机名，不包含 `wss://`、端口或路径；REST 地址保留 `https://`。TLS 开关不能替代 REST 的 HTTPS 协议，不使用 `setIMServer` 配置 TCP 地址。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 
@@ -223,6 +271,11 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`setRestServer`](#初始化前配置地址) | `ChatOptions` | 设置 REST API 基准地址。 |
+| [`setWebSocketServer`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 主机名。 |
+| [`setWebSocketPort`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 端口。 |
+| [`setEnableTLSConnection`](#初始化前配置地址) | `ChatOptions` | 设置消息长连接是否启用 TLS。 |
+| [`setEnableDnsConfig`](#初始化前配置地址) | `ChatOptions` | 配置服务地址的使用方式；使用指定地址时设为 `false`。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK 单例。 |
 | [`setDataSyncType`](#配置方式) | `ChatOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversationsBySort`](#登录后读取同步结果) | `ChatManager` | 从本地数据库读取排序后的会话列表。 |

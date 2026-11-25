@@ -2,7 +2,9 @@
 
 <Toc />
 
-SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。配置前，请引入 `EMOptions+PrivateDeploy.h`。
+SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。
+
+如果公有云应用使用环信控制台分配的应用专属域名，请参见 [配置应用专属域名](initialization.html#配置应用专属域名)。本页介绍私有云部署的服务器地址配置。
 
 :::tip
 iOS SDK 4.25.0 及以上版本中，数据同步 WebSocket 地址由 SDK 根据配置的私有云 REST 地址自动确定，无需单独配置。
@@ -11,6 +13,8 @@ iOS SDK 4.25.0 及以上版本中，数据同步 WebSocket 地址由 SDK 根据�
 :::
 
 ## 静态配置 IP 地址/域名
+
+配置前，请引入 `EMOptions+PrivateDeploy.h`。
 
 静态配置时，需要将 `EMOptions#enableDnsConfig` 设置为 `NO`，并根据 IM 长连接方式设置对应地址。以下地址和端口仅为示例，请替换为私有云部署提供的实际配置。
 

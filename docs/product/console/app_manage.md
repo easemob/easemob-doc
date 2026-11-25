@@ -60,7 +60,17 @@
 | REST API | SDK 的 HTTP 请求及服务端 RESTful API 请求。 | `https://api-your-app.example.com` |
 | Websocket | 收发 IM 消息的 WebSocket 长连接。 | `wss://ws-your-app.example.com` |
 
-请使用同一应用、同一环境页面中的 App Key 和两项地址。客户端接收地址的格式因平台而异：例如，Android 分别设置 WebSocket 主机名、端口及 TLS，详见 [Android V5 配置应用专属域名](/document/android/initialization.html#配置应用专属域名)。服务端调用 RESTful API 时，在 REST 基准地址后按具体 API 文档追加应用路径及接口路径。
+请使用同一应用、同一环境页面中的 App Key 和两项地址。客户端接收地址的格式因平台而异：例如，Android 分别设置 WebSocket 主机名、端口及 TLS，Web 使用完整 URL。各端配置方法见下表。服务端调用 RESTful API 时，在 REST 基准地址后按具体 API 文档追加应用路径及接口路径。
+
+| 客户端 | SDK V4 配置说明 | SDK V5 配置说明 |
+| :--- | :--- | :--- |
+| Android | [配置应用专属域名](/v4/android/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/android/initialization.html#配置应用专属域名) |
+| iOS | [配置应用专属域名](/v4/ios/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/ios/initialization.html#配置应用专属域名) |
+| HarmonyOS | [配置应用专属域名](/v4/harmonyos/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/harmonyos/initialization.html#配置应用专属域名) |
+| Flutter | [配置应用专属域名](/v4/flutter/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/flutter/initialization.html#配置应用专属域名) |
+| React Native | [配置应用专属域名](/v4/react-native/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/react-native/initialization.html#配置应用专属域名) |
+| Web | [配置应用专属域名](/v4/web/initialization.html#配置应用专属域名) | [配置应用专属域名](/document/web/initialization.html#配置应用专属域名) |
+| 小程序 | [配置应用专属域名](/v4/applet/initialization.html#配置应用专属域名) | [与 Web 共用配置](/document/web/initialization.html#配置应用专属域名) |
 
 选择 **创建新的正式版应用** 上线时，正式版是另一个应用；使用应用专属域名时，两者域名不同，应重新获取正式版 App Key 和两项地址。选择 **原测试版应用直接升级** 时沿用原应用。详见 [应用上线](app_launch.html#上线事项)。
 

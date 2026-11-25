@@ -10,6 +10,7 @@
 
 ## 初始化 SDK
 
+如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 使用 `ChatOptions.withAppKey` 创建初始化配置，传入 App Key，完成其他配置后，调用 `ChatClient.getInstance.init`。该方法返回 `Future<void>`，应使用 `await` 等待调用完成，再注册业务监听和执行后续操作。
 
 ```dart
@@ -72,6 +73,64 @@ await ChatClient.getInstance.init(options);
 :::tip
 该配置仅对 iOS 生效，只控制插件是否自动转发生命周期事件，不会禁用系统的前后台切换。通常建议保持默认行为，仅在业务需要自行接管原生 SDK 生命周期处理时关闭自动转发。
 :::
+
+## 配置应用专属域名
+
+Flutter SDK 自 **5.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `restServer` | String? | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `webSocketServer` | String? | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `webSocketPort` | int? | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `enableTLS` | bool | 是 | 默认 `false`；本文设为 `true`。 |
+| `usingHttpsOnly` | bool | 否 | 默认 `true`；示例显式保留。 |
+| `enableDNSConfig` | bool | 是 | 默认 `true`；本文设为 `false`。注意 `DNS` 的大小写。 |
+
+:::tip
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。
+
+```dart
+import 'package:flutter/widgets.dart';
+import 'package:im_flutter_sdk/im_flutter_sdk.dart';
+
+Future<void> initializeChatSdk() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final options = ChatOptions.withAppKey(
+    'your-org#your-app',
+    restServer: 'https://api-your-app.example.com',
+    webSocketServer: 'ws-your-app.example.com',
+    webSocketPort: 443,
+    enableTLS: true,
+    usingHttpsOnly: true,
+    enableDNSConfig: false,
+  );
+
+  try {
+    await ChatClient.getInstance.init(options);
+  } catch (error) {
+    debugPrint('SDK 初始化失败：$error');
+    rethrow;
+  }
+}
+```
+
+WebSocket 地址只填写主机名，端口单独设置，示例使用 `443`，通过 `enableTLS: true` 使用 WSS；REST 地址保留 `https://`，不使用 TCP 的 `imServer`。SDK 5.0.0 依赖 Android/iOS 原生 SDK 5.0.0，启用自动同步时需另行确认该版本的同步配置要求。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 
@@ -280,6 +339,11 @@ Future<void> readSynchronizedData(int type) async {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`restServer`](#初始化前配置地址) | `ChatOptions` | 设置 REST API 基准地址。 |
+| [`webSocketServer`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 主机名。 |
+| [`webSocketPort`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 端口。 |
+| [`enableTLS`](#初始化前配置地址) | `ChatOptions` | 设置消息长连接是否启用 TLS。 |
+| [`enableDNSConfig`](#初始化前配置地址) | `ChatOptions` | 配置服务地址的使用方式；使用指定地址时设为 `false`。 |
 | [`withAppKey`](#初始化-sdk) | `ChatOptions` | 使用 App Key 创建初始化配置。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 Flutter SDK，返回 `Future<void>`。 |
 | [`dataSyncType`](#配置方式) | `ChatOptions` | 配置登录后自动同步的数据类型，必须在初始化前设置。 |
