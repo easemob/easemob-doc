@@ -10,8 +10,6 @@
 
 ## 初始化 SDK 
 
-
-如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 初始化时，你需要通过 `appKey` 参数设置你的 App Key。
 
 ```typescript
@@ -40,6 +38,11 @@ ChatClient.getInstance().init(this.context, {
 | 方法名称           | 描述            |
 | :----------------- | :---------------- |
 | `setAppKey(appKey)`                                   | 设置 App Key。<br/>`appKey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
+| `setRestServer(restServer)` | 自 SDK 1.0.0 起支持。设置 REST API 基准地址。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(webSocketServer)` | 自 SDK 1.10.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(webSocketPort)` | 自 SDK 1.10.0 起支持。设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(enableTLSConnection)` | 自 SDK 1.4.0 起支持。设置消息长连接是否启用 TLS。使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `setEnableDnsConfig(enableDnsConfig)` | 自 SDK 1.14.0 起支持。默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setAutoLogin(autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setAppIDForPush(appId)`                     | 设置用于推送的 app ID。         |
 | `setAutoAcceptGroupInvitations(isAutoAcceptGroups)`                | 设置是否自动接受加群邀请。<br/>`isAutoAcceptGroups` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
@@ -54,7 +57,11 @@ ChatClient.getInstance().init(this.context, {
 
 ## 配置应用专属域名
 
-HarmonyOS SDK 自 **1.10.0** 起支持 WebSocket 地址配置；以下示例包含自 **1.14.0** 起新增的 `setEnableDnsConfig`，请使用 1.14.0 及以上版本。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持默认启用的动态地址配置即可，无需调用 `setEnableDnsConfig` 修改。
+
+使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。HarmonyOS SDK 自 **1.10.0** 起支持 WebSocket 地址配置；以下示例包含自 **1.14.0** 起新增的 `setEnableDnsConfig`，请使用 1.14.0 及以上版本。
 
 #### 初始化前配置地址
 

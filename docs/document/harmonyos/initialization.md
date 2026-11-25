@@ -14,8 +14,6 @@ HarmonyOS SDK 5.0.0 初始化后不会自动登录。初始化完成后，应用
 
 ## 初始化 SDK
 
-
-如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 创建 `ChatOptions`，通过构造参数设置 App Key，完成其他初始化配置后，将上下文和 `ChatOptions` 传入 `ChatClient#init`。
 
 ```typescript
@@ -43,6 +41,11 @@ ChatClient.getInstance().init(context, {
 | 方法名称 | 描述 |
 | :--- | :--- |
 | `setAppKey(appKey: string)` | 设置 App Key。`appKey` 是在环信控制台创建应用后获得的唯一标识，格式通常为 `orgName#appName`。也可在 `ChatOptions` 构造参数中设置。 |
+| `setRestServer(restServer: string)` | 设置 REST API 基准地址。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(webSocketServer: string)` | 设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(webSocketPort: number)` | 设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(enableTLSConnection: boolean)` | 设置消息长连接是否启用 TLS。使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `setEnableDnsConfig(enableDnsConfig: boolean)` | 默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setAppIDForPush(appId: string)` | 设置离线推送使用的 App ID。 |
 | `setAutoAcceptGroupInvitations(isAutoAcceptGroups: boolean)` | 设置是否自动接受群组邀请。<br/>-（默认）`true`：自动接受。<br/>- `false`：不自动接受。 |
 | `setAcceptInvitationAlways(isAutoAccept: boolean)` | 设置是否自动接受好友邀请。<br/>-（默认）`true`：自动接受。<br/>- `false`：不自动接受。 |
@@ -56,7 +59,11 @@ ChatClient.getInstance().init(context, {
 
 ## 配置应用专属域名
 
-HarmonyOS SDK 自 **5.0.0** 起提供以下 REST 和 WebSocket 服务地址配置接口。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持默认启用的动态地址配置即可，无需调用 `setEnableDnsConfig` 修改。
+
+使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。HarmonyOS SDK 自 **5.0.0** 起提供以下 REST 和 WebSocket 服务地址配置接口。
 
 #### 初始化前配置地址
 

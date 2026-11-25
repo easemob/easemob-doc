@@ -14,8 +14,6 @@ Android 应在应用主进程中初始化 SDK。
 
 ## 初始化 SDK
 
-
-如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 使用 `ChatOptions.withAppKey` 创建初始化配置，然后调用 `ChatClient.getInstance.init` 初始化 SDK：
 
 ```dart
@@ -50,6 +48,11 @@ await ChatClient.getInstance.init(options);
 | 参数 | 类型 | 默认值 | 描述 |
 | :--- | :--- | :---: | :--- |
 | `appKey` | `String` | 无 | 在环信控制台创建应用后获得的 App Key，必须传入。 |
+| `restServer` | `String?` | `null` | 自 SDK 4.0.0 起支持。设置 REST API 基准地址。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketServer` | `String?` | `null` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketPort` | `int?` | `null` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 端口。 |
+| `enableTLS` | `bool` | `false` | 自 SDK 4.5.0 起支持。设置消息长连接是否启用 TLS。使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig` | `bool` | `true` | 自 SDK 4.0.0 起支持。默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `autoLogin` | `bool` | `true` | 是否开启自动登录。开启后，用户首次成功登录且未主动退出时，SDK 可在后续启动时自动登录。 |
 | `acceptInvitationAlways` | `bool` | `false` | 是否自动接受好友邀请：<br/> - `true`：自动接受好友邀请。 <br/> -  `false`：不自动接收好友邀请。 |
 | `autoAcceptGroupInvitation` | `bool` | `false` | 是否自动接受群组邀请：<br/> - `true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
@@ -68,7 +71,11 @@ await ChatClient.getInstance.init(options);
 
 ## 配置应用专属域名
 
-Flutter SDK 自 **4.17.0** 起支持以下 REST 和 WebSocket 服务地址配置。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Flutter SDK 自 **4.17.0** 起支持以下 REST 和 WebSocket 服务地址配置。
 
 #### 初始化前配置地址
 

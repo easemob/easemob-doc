@@ -14,8 +14,6 @@
 
 ## 初始化 SDK 
 
-
-如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 初始化时，你需要通过 `EMOptions` 中封装的 `setAppKey` 设置你的 App Key。
 
 ```java
@@ -30,6 +28,11 @@ EMClient.getInstance().init(context, options);
 | 方法名称           | 描述            |
 | :----------------- | :---------------- |
 | `setAppKey(String appkey)`                                   | 设置 App Key。<br/>`appkey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
+| `setRestServer(String restServer)` | 自 SDK 4.0.0 起支持。设置 REST API 基准地址。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(String wsServer)` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(int wsPort)` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(boolean enableTLSConnection)` | 自 SDK 4.5.0 起支持。设置消息长连接是否启用 TLS。使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig(boolean enable)` | V4.x 系列自 SDK 4.0.0 起支持。默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setAutoLogin(boolean autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
 | `setUsePushInBackground(boolean usePushInBackground)`        | 设置应用进入后台后是否断开长连接并使用厂商推送。该功能自 SDK 4.26.0 起支持，且必须在初始化 SDK 前设置。<br/> - `true`：切入后台时推送通道有效，SDK 在约 10 秒后断开长连接；回到前台则取消尚未执行的任务。若在后台连接成功且开关已开启、通道有效，则直接断连，不再等待约 10 秒。后续消息满足服务端离线推送条件时，离线消息通过厂商推送通道下发。<br/> -（默认）`false`：应用进入后台后继续保持长连接。通过 `isUsePushInBackground()` 查询当前配置。详见 [配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)。 |
@@ -45,7 +48,11 @@ EMClient.getInstance().init(context, options);
 
 ## 配置应用专属域名
 
-Android SDK 自 **4.17.0** 起提供以下 REST 和 WebSocket 服务地址配置接口，建议使用包含 4.17.1 修复的版本。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Android SDK 自 **4.17.0** 起提供以下 REST 和 WebSocket 服务地址配置接口，建议使用包含 4.17.1 修复的版本。
 
 #### 初始化前配置地址
 

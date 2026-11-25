@@ -14,8 +14,6 @@
 
 ## 初始化 SDK
 
-
-如果使用应用专属域名，请先按 [配置应用专属域名](#配置应用专属域名) 设置服务地址，再调用初始化接口。
 初始化时，你需要通过 `ChatOptions#withAppKey` 创建包含 App Key 的初始化配置。
 
 ```typescript
@@ -38,6 +36,11 @@ ChatClient.getInstance()
 | 属性 | 描述 |
 | :----------------- | :---------------- |
 | `appKey` | App Key。`appKey` 参数为创建 App 时在环信控制台上注册的 App 唯一识别符。 |
+| `restServer` | 设置 REST API 基准地址。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketServer` | 设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketPort` | 设置消息 WebSocket 端口。 |
+| `enableTLS` | 设置消息长连接是否启用 TLS。使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig` | 默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `autoAcceptGroupInvitation` | 是否自动接受加群邀请。<br/> -（默认）`false`：不自动接受加群邀请；<br/> - `true`：自动接受加群邀请。 |
 | `acceptInvitationAlways` | 是否自动接受加好友邀请。<br/> -（默认）`false`：不自动接受好友邀请；<br/> - `true`：自动接受好友邀请。 |
 | `apnsCertName` | APNs 证书名称，用于 iOS 离线推送。该值应与环信控制台中配置的 APNs 证书名称一致，并且只能在初始化 SDK 时设置。 |
@@ -51,7 +54,11 @@ React Native SDK 5.x 不支持自动登录。初始化完成后，应用需主�
 
 ## 配置应用专属域名
 
-React Native SDK 自 **5.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。使用应用专属域名时，请使用当前应用的地址配置 SDK；域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。React Native SDK 自 **5.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。
 
 #### 初始化前配置地址
 
