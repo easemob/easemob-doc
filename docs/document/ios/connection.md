@@ -13,7 +13,7 @@
 开始前，请确保满足以下条件：
 
 - 已完成 SDK 初始化，详见 [初始化](initialization.html)。
-- 使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
+- 国内 2 区应用使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
 - 已从你的应用服务器获取有效的环信用户 ID 和用户 Token。
 - 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
@@ -293,7 +293,7 @@ EMClient.shared().renewToken("newToken") { error in
 
 ## 最佳实践
 
-- 使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket 主机名、端口及 TLS，再结合 [连接错误码](error.html#连接) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
+- 国内 2 区应用使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket 主机名、端口及 TLS，再结合 [连接错误码](error.html#连接) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
 - 在调用 Token 登录接口前注册 `EMClientDelegate`，避免遗漏连接、Token 和同步状态回调。
 - iOS SDK 不再依赖自动登录；应用启动或需要建立 IM 会话时应显式登录。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。

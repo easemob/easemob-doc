@@ -28,7 +28,7 @@ const client = ChatClient.init({
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
 | `appKey` | String | 是 | 应用唯一标识，格式为 `org#app`。 |
-| `serviceConfig.serverUrls` | ServerUrlsConfig | 按需 | 指定服务地址。仅配置 REST 和消息 WebSocket 两项地址的方案自 SDK 5.1.2 起支持。使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `serviceConfig.serverUrls` | ServerUrlsConfig | 按需 | 指定服务地址。仅配置 REST 和消息 WebSocket 两项地址的方案自 SDK 5.1.2 起支持。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
 | `serviceConfig.serverUrls.restApiUrl` | String | 按需 | 设置 REST API 基准地址，与 `wsUrl` 同时配置。 |
 | `serviceConfig.serverUrls.wsUrl` | String | 按需 | 设置完整消息 WSS URL，与 `restApiUrl` 同时配置。 |
 | `enableDeliveryReceipt` | Boolean | 否 | 是否开启送达回执。开启后，收到单聊消息时 SDK 会自动向发送方回送达回执。默认 `false`。 |
@@ -39,11 +39,11 @@ const client = ChatClient.init({
 
 ## 配置应用专属域名
 
-应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
 使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息 WebSocket 地址；保持默认配置，不传入 `serviceConfig.serverUrls` 即可。
 
-使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Web/小程序 SDK 自 **5.1.2** 起支持以下两项服务地址配置方案；更早的 V5 版本请先升级。
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Web/小程序 SDK 自 **5.1.2** 起支持以下两项服务地址配置方案；更早的 V5 版本请先升级。
 
 #### 初始化前配置地址
 

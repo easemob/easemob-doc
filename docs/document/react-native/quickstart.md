@@ -87,7 +87,7 @@ cd ios && bundle exec pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
-使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+国内 2 区应用使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，将默认生成的 `App.tsx` 重命名为 `App.js`（已有 `App.js` 时直接使用），删除全部内容，并添加如下内容:
 

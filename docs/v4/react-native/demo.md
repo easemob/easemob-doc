@@ -38,7 +38,7 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee](https://gitee.com/easemob-code/react-native-chat-library) 中下载即时通讯 IM Demo 项目源码。
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。
-7. 使用应用专属域名时，以 [控制台展示的地址](/product/console/app_manage.html#查看应用服务器域名) 为准，并在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
+7. 国内 2 区应用使用应用专属域名时，以 [控制台展示的地址](/product/console/app_manage.html#查看应用服务器域名) 为准，并在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
 8. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
    - Android 平台拷贝命令为 `cp -f templates/google-services.json.template examples/product-uikit-demo/android/app/google-services.json && cp -f templates/debug.keystore.template examples/product-uikit-demo/android/app/debug.keystore`。
    - iOS 平台拷贝命令为 `cp templates/GoogleService-Info.plist.template examples/product-uikit-demo/ios/productuikitdemo/GoogleService-Info.plist`。

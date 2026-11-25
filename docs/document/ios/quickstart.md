@@ -73,7 +73,7 @@ CocoaPods 集成方式即将废弃，建议优先使用 SPM。
 
 ## 3. 初始化 SDK
 
-使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+国内 2 区应用使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
 
 导入SDK头文件
 ```

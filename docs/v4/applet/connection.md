@@ -9,7 +9,7 @@
 开始前，请确保满足以下条件：
 
 - 已完成 SDK 初始化，详见 [初始化](initialization.html)。
-- 使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
+- 国内 2 区应用使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
 
 ## 监听连接状态
 
@@ -65,4 +65,4 @@ conn.addEventHandler("connectionListener", {
 
 ## 最佳实践
 
-- 使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket URL、端口及 WSS 协议，再结合 [连接错误码](error.html) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
+- 国内 2 区应用使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket URL、端口及 WSS 协议，再结合 [连接错误码](error.html) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
