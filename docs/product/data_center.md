@@ -46,7 +46,7 @@
 
 你可以在环信控制台的 **应用概览** 页面查看应用所在的数据中心及服务器域名。
 
-已分配应用专属域名时，控制台展示使用应用专属域名的 REST API 和 WebSocket 地址；未分配应用专属域名时，展示使用集群域名的地址。具体入口和展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+对于国内 2 区，已分配应用专属域名时，控制台展示使用应用专属域名的 REST API 和 WebSocket 地址；未分配应用专属域名时，展示使用集群域名的地址。具体入口和展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
 ![img](/images/product/data_center.png)
 
