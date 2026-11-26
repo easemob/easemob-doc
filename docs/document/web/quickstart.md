@@ -119,7 +119,7 @@ Easemob_quickstart<br>
 
 ### 步骤 4：实现消息收发
 
-国内 2 区应用使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+国内 2 区新建应用的域名使用要求见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。使用应用专属域名时，必须先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
 
 `index.js` 的内容如下。本文使用 `import` 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包。你需要将代码中的 `<Your app key>` 替换为你在环信控制台获取的 App Key。
 

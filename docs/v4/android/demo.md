@@ -37,7 +37,7 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 Android Studio，点击 **File > Open**，打开已下载到本地的 Demo (`easemob-demo-android`) 工程根目录即可。
 6. 将你的应用的 App Key 填入 Demo 工程根目录下的 `local.properties` 文件，格式为 `APPKEY = 你申请的appkey`。
-7. 国内 2 区应用使用应用专属域名时，以 [控制台展示的地址](/product/console/app_manage.html#查看应用服务器域名) 为准，并在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
+7. 国内 2 区新建应用的域名使用要求和实际地址见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。使用应用专属域名时，必须在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
 8. 编译运行项目。
 9. 使用注册的用户 ID 和密码登录。
 

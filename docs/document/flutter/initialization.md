@@ -82,6 +82,8 @@ await ChatClient.getInstance.init(options);
 
 目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
 使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
 
 国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Flutter SDK 自 **5.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。

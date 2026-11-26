@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ### 初始化 SDK
 
-国内 2 区应用使用应用专属域名时，先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
+国内 2 区新建应用的域名使用要求见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。使用应用专属域名时，必须先按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址，再调用初始化接口。
 
 在 `_initSDK` 方法中添加 SDK 初始化：
 
