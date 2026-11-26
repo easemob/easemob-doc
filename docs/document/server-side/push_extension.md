@@ -97,8 +97,8 @@
 | `vivo_click_activity`       | String  | vivo 点击跳转 activity，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **VIVO** 页面设置的 **Activity** 参数的配置。 |
 | `xiaomi_channel_id` | String  | 小米通道 ID，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Channel ID** 参数的配置。 |
 | `xiaomi_click_action`       | String  | 小米点击跳转 action，优先级高于在环信控制台的**即时通讯** > **功能配置** > **消息推送** > **证书管理** > **添加推送证书** > **小米** 页面设置的 **Action** 参数的配置。 |
-| `xiaomi_template_id`    | String | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `xiaomi_channel_id`。新版私信模板的标题包含变量时，必须保留不少于 2 个非空固定字符，例如 `应用名称·{$title$}`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。 |
-| `xiaomi_template_param` | Object | 小米推送模板参数采用 JSON 格式，例如 `{"keywords1": "k1"}`。<br/>必须同时满足以下三个条件：<br/> - **必须与模板预配置的格式和参数个数完全一致；**<br/> -  **参数值长度 1–128 字符，不可为纯空格；**<br/> - **不支持 emoji、\p{So} 及未分配 Unicode 字符。** |
+| `xiaomi_template_id` | String | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `xiaomi_channel_id`。标题包含变量时，须保留不少于 2 个非空固定字符；使用默认模板参数时，建议标题结构为 `应用名称·{$title$}`，内容结构为 `消息内容·{$content$}`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。 |
+| `xiaomi_template_param` | Object | 自定义小米推送模板参数，传入 JSON 对象，例如 `{"title":"消息提醒","content":"张三发来了一条消息"}`，不要传入 JSON 字符串。传入后，服务端使用该对象作为模板参数；未传入时，默认以推送标题和内容填充 `title`、`content`。详见 [小米私信模板参数](#小米私信模板参数)。<br/>必须满足以下条件：<br/> - **参数名称和数量须与小米模板中的变量一致**；<br/> - 参数值长度为 1–128 个字符，不可为纯空格；<br/> - **不支持 emoji、\p{So} 及未分配 Unicode 字符**。 |
 
 `em_harmony_push_ext` 结构如下：
 
@@ -109,6 +109,14 @@
 | `is_test_message` | Boolean | 是否是推送测试消息(beta 版仅支持测试)。 |
 | `notify_id`       | Integer | 通知 ID，相同的 ID 通知替换。             |
 | `receipt_id`      | String  | 回执 ID。                                |
+
+## 小米私信模板参数
+
+使用环信默认填充方式时，服务端将推送标题填入 `title`，将推送内容填入 `content`，对应小米模板中的 `{$title$}` 和 `{$content$}`。模板中的固定文案在小米平台配置，不需要放进参数名称中。
+
+使用其他变量名时，请在 `em_android_push_ext.xiaomi_template_param` 中显式传入对应的 JSON 对象。例如，模板包含 `{$name$}`、`{$code$}` 两个变量时，参数可为 `{"name":"张三","code":"123456"}`。SDK 发送消息时，应将该配置作为消息扩展中的嵌套对象传入。
+
+IM 离线推送的 `xiaomi_template_param` 与即时推送 REST API 的 [`xiaomi.templateParam`](/value-added/push/push_notification_config.html#小米私信模板参数) 类型不同：前者传 JSON 对象，后者传 JSON 字符串。
 
 ## 设置 FCM 离线推送角标
 

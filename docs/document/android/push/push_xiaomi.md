@@ -22,10 +22,10 @@
 | 推送密钥     | String | 是     | 小米 App Secret。|
 | 应用包名     | String | 是     | 小米 App package name。   |
 | Channel ID  | String | 是     |  Channel ID。该参数仅对离线推送有效。            |
-| 小米私信模板 ID  | String | 否     | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `Channel ID`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。<br/>**配置示例**：下图展示了在 [小米开放平台](https://dev.mi.com/platform) 使用私信模板配置推送标题和内容的示例。新版私信模板的标题包含变量时，须保留不少于 2 个非空固定字符，例如 `应用名称·{$title$}`。|
+| 小米私信模板 ID | String | 否 | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `Channel ID`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。<br/>使用环信默认填充方式时，建议标题结构为 `应用名称·{$title$}`，内容结构为 `消息内容·{$content$}`，变量名分别使用 `title` 和 `content`。固定文案可按业务调整，但标题包含变量时须保留不少于 2 个非空固定字符。使用自定义变量时，需通过消息扩展传入与模板匹配的参数，详见 [小米模板参数](/document/server-side/push_extension.html#小米私信模板参数)。 |
 | Action      | String | 否     | 点击通知后的动作。该参数仅对离线推送有效。           |
 
-下图展示了在 [小米开放平台](https://dev.mi.com/platform) 使用小米推送“私信模板”配置推送标题和内容的示例。标题示例 `应用名称·{$title$}` 包含变量，并保留了不少于 2 个非空固定字符。
+下图为小米私信模板的结构说明。模板结构、变量名称或变量数量与环信服务端下发的参数不一致时，小米可能拒绝推送。
 
 ![img](/images/android/push/template_private_xiaomi.png)
 
