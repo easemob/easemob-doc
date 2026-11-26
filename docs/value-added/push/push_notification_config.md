@@ -378,8 +378,22 @@ IM 离线推送使用消息扩展 `ext.em_android_push_ext.fcm_notification_coun
 | `connpt`                 | String | 特定的网络环境下才能接收到消息。目前仅支持指定 ”wifi”。      |
 | `onlySendOnce`           | String | 值为 `1`时表示消息仅在设备在线时发送一次，不缓存离线消息进行多次下发。 |
 | `channelId`              | String | [通知类别的 ID。](https://dev.mi.com/console/doc/detail?pId=1163#_11) |
-| `templateId`             | String | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `channelId`。新版私信模板的标题包含变量时，必须保留不少于 2 个非空固定字符，例如 `应用名称·{$title$}`。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。 |
-| `templateParam`          | Object | 小米推送模板参数采用 JSON 格式，例如 `{"keywords1": "k1"}`。<br/>必须同时满足以下三个条件：<br/> - **必须与模板预配置的格式和参数个数完全一致；**<br/> -  **参数值长度 1–128 字符，不可为纯空格；**<br/> - **不支持 emoji、\p{So} 及未分配 Unicode 字符。** |
+| `templateId` | String | 小米推送私信模板 ID，使用私信模板时必填，且须同时提供对应的 `channelId`。标题包含变量时，须保留不少于 2 个非空固定字符，例如 `应用名称·{$title$}`。内容结构可为 `消息内容·{$content$}`。变量名称和数量须与 `templateParam` 中的参数一致。详见 [小米推送模板接入指南](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=2314)。 |
+| `templateParam` | String | 小米推送模板参数，传入 JSON 字符串，详见 [小米私信模板参数](#小米私信模板参数)。使用私信模板时，需按实际模板提供参数，服务端不会自动根据推送标题和内容生成 `title`、`content` 参数。<br/>必须满足以下条件：<br/> - 参数名称和数量须与小米模板中的变量一致；<br/> - 参数值长度为 1–128 个字符，不可为纯空格；<br/> - 不支持 emoji、\p{So} 及未分配 Unicode 字符。 |
+
+#### 小米私信模板参数
+
+以下为 `pushMessage.xiaomi` 的配置示例，适用于标题结构为 `应用名称·{$title$}`、内容结构为 `消息内容·{$content$}` 的模板：
+
+```json
+{
+    "channelId": "your-channel-id",
+    "templateId": "your-template-id",
+    "templateParam": "{\"title\":\"消息提醒\",\"content\":\"张三发来了一条消息\"}"
+}
+```
+
+`templateParam` 是 JSON 字符串，需对内部双引号进行转义。使用其他变量名时，应将参数名替换为实际模板中的变量名；模板结构、变量名称或变量数量不一致时，小米可能拒绝推送。固定文案在小米平台配置，不需要重复放入变量值。
 
 ### vivo 推送说明
 
