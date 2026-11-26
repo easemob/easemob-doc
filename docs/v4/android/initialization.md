@@ -28,6 +28,11 @@ EMClient.getInstance().init(context, options);
 | 方法名称           | 描述            |
 | :----------------- | :---------------- |
 | `setAppKey(String appkey)`                                   | 设置 App Key。<br/>`appkey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
+| `setRestServer(String restServer)` | 自 SDK 4.0.0 起支持。设置 REST API 基准地址。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(String wsServer)` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(int wsPort)` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(boolean enableTLSConnection)` | 自 SDK 4.5.0 起支持。设置消息长连接是否启用 TLS。国内 2 区应用使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig(boolean enable)` | V4.x 系列自 SDK 4.0.0 起支持。默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。国内 2 区应用使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setAutoLogin(boolean autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
 | `setUsePushInBackground(boolean usePushInBackground)`        | 设置应用进入后台后是否断开长连接并使用厂商推送。该功能自 SDK 4.26.0 起支持，且必须在初始化 SDK 前设置。<br/> - `true`：切入后台时推送通道有效，SDK 在约 10 秒后断开长连接；回到前台则取消尚未执行的任务。若在后台连接成功且开关已开启、通道有效，则直接断连，不再等待约 10 秒。后续消息满足服务端离线推送条件时，离线消息通过厂商推送通道下发。<br/> -（默认）`false`：应用进入后台后继续保持长连接。通过 `isUsePushInBackground()` 查询当前配置。详见 [配置后台消息接收策略](/v4/android/push/push_overview.html#配置后台消息接收策略)。 |
@@ -40,6 +45,55 @@ EMClient.getInstance().init(context, options);
 | `allowChatroomOwnerLeave(boolean allowed)`                   | 设置是否允许聊天室所有者离开并删除会话记录。<br/>`allowed` 参数表示是否允许聊天室所有者离开。<br/> - （默认） `true`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `false`：不允许。 |
 
 关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Android SDK 自 **4.17.0** 起提供以下 REST 和 WebSocket 服务地址配置接口，建议使用包含 4.17.1 修复的版本。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `setRestServer` 的 `restServer` | String | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `setWebSocketServer` 的 `wsServer` | String | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `setWebSocketPort` 的 `wsPort` | int | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `setEnableTLSConnection` 的布尔值 | boolean | 是 | 设为 `true`，使用 WSS。 |
+| `enableDNSConfig` 的布尔值 | boolean | 是 | 默认 `true`；使用指定的服务连接地址时设为 `false`。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。请在应用主进程中执行。
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+options.setRestServer("https://api-your-app.example.com");
+options.setWebSocketServer("ws-your-app.example.com");
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
+options.enableDNSConfig(false);
+
+EMClient.getInstance().init(getApplicationContext(), options);
+```
+
+应用专属域名使用 WebSocket 消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。自 SDK **4.25.1** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 

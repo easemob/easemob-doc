@@ -4,6 +4,13 @@
 
 你调用 `open` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
 
+## 前提条件
+
+开始前，请确保满足以下条件：
+
+- 已完成 SDK 初始化，详见 [初始化](initialization.html)。
+- 国内 2 区应用使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
+
 ## 监听连接状态
 
 ```javascript
@@ -56,3 +63,6 @@ conn.addEventHandler("connectionListener", {
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
 - 开启多设备服务后，用户在其他设备上通过调用 API 或者环信控制台将当前设备登录的 ID 强制退出登录（错误码 217）。
 
+## 最佳实践
+
+- 国内 2 区应用使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket URL、端口及 WSS 协议，再结合 [连接错误码](error.html) 和 SDK 日志排查。REST 请求与消息连接应分别检查。

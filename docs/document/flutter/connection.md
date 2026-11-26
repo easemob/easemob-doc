@@ -13,6 +13,7 @@
 开始前，请确保满足以下条件：
 
 - 已完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 国内 2 区应用使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
 - 已获取有效的用户 ID 和用户 Token。
 - 已了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
@@ -291,6 +292,7 @@ Flutter SDK 5.0.0 所依赖的原生 SDK 5.0.0 默认同步范围不同：Androi
 
 ## 最佳实践
 
+- 国内 2 区应用使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket 主机名、端口及 TLS，再结合 [连接错误码](error.html) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
 - 在调用 `loginWithToken` 前注册 `ConnectionEventHandler`，避免遗漏连接、Token 和同步状态回调。
 - Flutter SDK 5.x 初始化后不会自动登录。应用应安全管理用户 ID 和 Token，并主动调用 `loginWithToken`。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。

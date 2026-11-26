@@ -28,11 +28,72 @@ const client = ChatClient.init({
 | 参数 | 类型 | 是否必需 | 描述 |
 | :--- | :--- | :--- | :--- |
 | `appKey` | String | 是 | 应用唯一标识，格式为 `org#app`。 |
+| `serviceConfig.serverUrls` | ServerUrlsConfig | 按需 | 指定服务地址。仅配置 REST 和消息 WebSocket 两项地址的方案自 SDK 5.1.2 起支持。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `serviceConfig.serverUrls.restApiUrl` | String | 按需 | 设置 REST API 基准地址，与 `wsUrl` 同时配置。 |
+| `serviceConfig.serverUrls.wsUrl` | String | 按需 | 设置完整消息 WSS URL，与 `restApiUrl` 同时配置。 |
 | `enableDeliveryReceipt` | Boolean | 否 | 是否开启送达回执。开启后，收到单聊消息时 SDK 会自动向发送方回送达回执。默认 `false`。 |
 | `useFixedDeviceId` | Boolean | 否 | 是否在同一浏览器内复用固定设备标识。默认 `true`；设为 `false` 时，每个 SDK 实例使用随机设备 ID。 |
 | `deviceId` | String | 否 | 自定义设备标识；未传时使用 SDK 默认值。 |
 | `enableSyncData` | `ReadonlyArray<'conversation' \| 'contact' \| 'group'>` | 否 | 登录后自动同步的数据类型；未传时默认 `['conversation']`。 |
 | `managers` | Array | 否 | 初始化时需要自动注册的管理器列表。 |
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息 WebSocket 地址；保持默认配置，不传入 `serviceConfig.serverUrls` 即可。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Web/小程序 SDK 自 **5.1.2** 起支持以下两项服务地址配置方案；更早的 V5 版本请先升级。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `serviceConfig.serverUrls` | ServerUrlsConfig | 是 | 选择固定服务地址模式。配置对象中需同时提供 REST 和 WebSocket 地址。 |
+| `restApiUrl` | string | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `wsUrl` | string | 是 | 完整 WSS URL，例如 `wss://ws-your-app.example.com`；未提供路径时 SDK 自动补齐 `/websocket`。 |
+| `managers` | Array | 按需 | 示例注册 `ChatManager`。实际业务所需的其他管理器仍需按功能文档注册。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。
+
+```typescript
+import { ChatClient, ChatManager } from 'easemob-websdk';
+
+const client = ChatClient.init({
+  appKey: 'your-org#your-app',
+  managers: [ChatManager],
+  serviceConfig: {
+    serverUrls: {
+      restApiUrl: 'https://api-your-app.example.com',
+      wsUrl: 'wss://ws-your-app.example.com',
+    },
+  },
+});
+
+client.addEventHandler('domain-connection', {
+  onConnected: () => console.log('消息连接已建立'),
+  onDisconnected: (event) => console.log('消息连接已断开', event.reason),
+});
+
+console.log('固定服务地址配置：', client.getServerUrlsConfig());
+```
+
+通过 `serviceConfig.serverUrls` 指定两项服务地址，不同时配置 `serviceConfig.dnsConfigUrls`。`wsUrl` 为完整 WSS URL，未提供路径时 SDK 自动补齐 `/websocket`；同步 REST 请求复用 `restApiUrl`，数据同步 WebSocket 地址根据 REST 地址自动确定，无需额外配置。小程序还需按 [配置服务器域名](serverconfig.html) 添加合法域名。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 
@@ -178,6 +239,7 @@ console.log('SDK 版本:', version); // 例如 '5.2.0'
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`serviceConfig`](#初始化前配置地址) | `ChatClient` | 配置 REST API 和消息 WebSocket 服务地址。 |
 | [`getVersion`](#获取-sdk-版本号) | `ChatClient` | 获取 SDK 版本号。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 SDK 单例实例。 |
 | [`getConversationList`](#登录后读取同步结果) | `ChatManager` | 从本地缓存读取当前会话列表。 |

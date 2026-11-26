@@ -1,8 +1,12 @@
 # 私有云 SDK IP 地址/域名配置
 
+SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。
+
+如果国内 2 区的公有云应用使用环信控制台分配的应用专属域名，请参见 [配置应用专属域名](initialization.html#配置应用专属域名)。本页介绍私有云部署的服务器地址配置。
+
 ## 静态配置 IP 地址/域名
 
-SDK 默认启用 DNS 地址配置并连接公有云服务。自 HarmonyOS SDK 1.14.0 起，静态配置私有云时，需要在调用 `ChatClient#init` 前主动调用 `ChatOptions#setEnableDnsConfig(false)` 关闭 DNS 地址配置，并设置私有云的 REST 服务器及 IM TCP 或 WebSocket 服务器地址。此前该开关由 SDK 内部自动处理；如果使用 DNS 服务动态下发服务器地址，则应保持 DNS 地址配置开启，详见[动态配置地址](#动态配置地址)。
+自 HarmonyOS SDK 1.14.0 起，静态配置私有云时，需要在调用 `ChatClient#init` 前主动调用 `ChatOptions#setEnableDnsConfig(false)` 关闭 DNS 地址配置，并设置私有云的 REST 服务器及 IM TCP 或 WebSocket 服务器地址。此前该开关由 SDK 内部自动处理；如果使用 DNS 服务动态下发服务器地址，则应保持 DNS 地址配置开启，详见[动态配置地址](#动态配置地址)。
 
 ### 方式一：TCP 连接
 

@@ -13,6 +13,7 @@
 开始前，请确保满足以下条件：
 
 - 已完成 SDK 初始化，详见[快速开始](quickstart.html)。
+- 国内 2 区应用使用应用专属域名时，已在初始化前 [配置应用专属域名](initialization.html#配置应用专属域名)。
 - 已获取有效的用户 ID 和用户 Token。
 - 已了解环信即时通讯 IM API 的使用限制，详见[使用限制](/product/limitation.html)。
 
@@ -217,6 +218,7 @@ ChatClient.getInstance()
 
 ## 最佳实践
 
+- 国内 2 区应用使用应用专属域名时，连接失败先对照 [初始化配置](initialization.html#配置应用专属域名) 核对 WebSocket 主机名、端口及 TLS，再结合 [连接错误码](error.html#连接) 和 SDK 日志排查。REST 请求与消息连接应分别检查。
 - 在调用 `loginWithToken` 前注册 `ConnectionListener`，避免遗漏连接、Token、数据库打开和数据同步状态回调。
 - 弱网断开后不要立即重复调用登录接口；可恢复场景由 SDK 自动重连。
 - 使用 `isConnected()` 查询当前连接状态，使用 `isLoggedIn()` 查询登录状态，使用 `isDatabaseOpened()` 查询本地数据库状态，并优先通过监听器回调驱动 UI 更新。

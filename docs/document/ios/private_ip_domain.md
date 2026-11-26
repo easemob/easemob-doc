@@ -1,6 +1,8 @@
 # 私有云 SDK IP 地址/域名配置
 
-SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。配置前，请引入 `EMOptions+PrivateDeploy.h`。
+SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK 前配置私有云的 REST 地址以及 IM 长连接地址。
+
+如果国内 2 区的公有云应用使用环信控制台分配的应用专属域名，请参见 [配置应用专属域名](initialization.html#配置应用专属域名)。本页介绍私有云部署的服务器地址配置。
 
 :::tip
 自 SDK v5.1.0 起，数据同步 WebSocket 地址由 SDK 根据配置的私有云 REST 地址自动确定，无需单独配置。`EMOptions#syncDataWSHost` 和 `EMOptions#syncDataWSPort` 已移除。
@@ -9,6 +11,8 @@ SDK 默认连接公有云服务。使用私有云时，需要在初始化 SDK �
 :::
 
 ## 静态配置 IP 地址/域名
+
+配置前，请引入 `EMOptions+PrivateDeploy.h`。
 
 静态配置时，需要将 `EMOptions#enableDnsConfig` 设置为 `NO`，并根据 IM 长连接方式设置对应地址。以下地址和端口仅为示例，请替换为私有云部署提供的实际配置。
 

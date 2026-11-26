@@ -23,6 +23,11 @@ EMClient.shared().initializeSDK(with: options)
 | 属性           | 描述            |
 | :----------------- | :---------------- |
 | `appkey`                                   | `appkey` 属性为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
+| `restServer` | 自 SDK 4.0.0 起支持。设置 REST API 基准地址。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketServer` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketPort` | 自 SDK 4.17.0 起支持。设置消息 WebSocket 端口。 |
+| `enableTLSConnection` | 自 SDK 4.5.0 起支持。设置消息长连接是否启用 TLS。国内 2 区应用使用应用专属域名时设为 `YES`，通过 WSS 连接。 |
+| `enableDnsConfig` | 自 SDK 4.0.0 起支持。默认 `YES`，SDK 自动获取服务地址，使用集群域名时无需修改。国内 2 区应用使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `isAutoLogin`   | 是否自动登录。<br/> -（默认）`YES`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `NO`：不自动登录。 |
 | `disconnectNotifyThreshold` | 断线通知宽限时间，单位为秒，默认值为 `10`，自 SDK 4.26.0 起支持。成功建立连接后，发生可恢复断线时，宽限期内重连成功则不触发断开连接回调；到期仍未恢复才触发。设置为小于或等于 `0` 时不启用宽限期。首次连接失败、token 过期或被踢下线等情况仍按原有机制通知。宽限期仅影响断开连接回调的时机，不延迟连接状态变化。详见 [配置断线通知宽限期](connection.html#配置断线通知宽限期)。 |
 | `pushKitCertName`   | PushKit 的证书名称。 |
@@ -35,6 +40,62 @@ EMClient.shared().initializeSDK(with: options)
 | `canChatroomOwnerLeave`                   | 是否允许聊天室所有者离开并删除会话记录。<br/> - （默认） `YES`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `NO`：不允许。 |
 
 关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDnsConfig` 的默认值 `YES` 即可。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。iOS SDK 自 **4.17.0** 起提供以下 REST 和 WebSocket 服务地址配置属性，建议使用包含 4.17.1 修复的版本。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `restServer` | NSString | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `webSocketServer` | NSString | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `webSocketPort` | int | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `enableTLSConnection` | BOOL | 是 | 默认 `NO`；本文设为 `YES`，使用 WSS。 |
+| `usingHttpsOnly` | BOOL | 否 | 示例显式设为 `YES`，REST 请求仅使用 HTTPS；不能替代 WebSocket 的 TLS 开关。 |
+| `enableDnsConfig` | BOOL | 是 | 默认 `YES`；本文设为 `NO`。必须在首次初始化前设置。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。以下为 Objective-C 示例，请引入 `EMOptions+PrivateDeploy.h` 后配置；Swift 项目使用对应的 `EMOptions` 属性完成相同设置。
+
+```objectivec
+#import <HyphenateChat/HyphenateChat.h>
+#import <HyphenateChat/EMOptions+PrivateDeploy.h>
+
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+options.restServer = @"https://api-your-app.example.com";
+options.webSocketServer = @"ws-your-app.example.com";
+options.webSocketPort = 443;
+options.enableTLSConnection = YES;
+options.usingHttpsOnly = YES;
+options.enableDnsConfig = NO;
+
+EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
+if (error != nil) {
+    NSLog(@"SDK 初始化失败：%@", error.errorDescription);
+}
+```
+
+WebSocket 地址只填写主机名，端口和 TLS 分别配置，不使用 TCP 的 `chatServer` 和 `chatPort`。自 SDK **4.25.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 

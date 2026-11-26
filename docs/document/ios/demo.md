@@ -37,8 +37,9 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-demo-ios) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios) 下载即时通讯 IM Demo 项目源码。
 5. 下载完毕，打开 `EaseChatDemo` 目录，运行 `pod install`。
 6. 打开 `EaseChatDemo/CustomConstants/PublicDefines.swift` 文件，修改文件中的占位符，`AppKey` 填入步骤 2 获取的 App Key，`ServerHost`可以填入空字符串。
-7. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
-8. 使用注册的用户 ID 和密码登录。
+7. 国内 2 区新建应用的域名使用要求和实际地址见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。使用应用专属域名时，必须在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
+8. 使用 XCode 打开 `EaseChatDemo.xcworkspace`，编译运行项目。
+9. 使用注册的用户 ID 和密码登录。
 
 ### App Server
 

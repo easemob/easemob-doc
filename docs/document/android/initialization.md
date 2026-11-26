@@ -28,6 +28,11 @@ EMClient.getInstance().init(getApplicationContext(), options);
 | 方法名称 | 描述 |
 | :--- | :--- |
 | `setAppKey(String appkey)` | 设置 App Key。`appkey` 是在环信控制台创建应用后获得的唯一标识，格式通常为 `orgName#appName`。 |
+| `setRestServer(String restServer)` | 设置 REST API 基准地址。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(String wsServer)` | 设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(int wsPort)` | 设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(boolean enableTLSConnection)` | 设置消息长连接是否启用 TLS。国内 2 区应用使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig(boolean enable)` | 默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。国内 2 区应用使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setPushConfig(EMPushConfig pushConfig)` | 设置离线推送配置。应在 `init` 前传入已构建的 `EMPushConfig`；未设置时，SDK 会创建默认推送配置。 |
 | `setUsePushInBackground(boolean usePushInBackground)` | 自 SDK 5.2.1 起，设置应用进入后台后是否断开长连接并使用厂商推送。该开关必须在初始化前调用。默认 `false`，SDK 不会因应用进入后台而主动断连；设置为 `true` 且切入后台时推送通道有效，SDK 会安排约 10 秒后断连。通过 `isUsePushInBackground()` 查询。完整条件和时机见 [配置后台消息接收策略](/document/android/push/push_overview.html#配置后台消息接收策略)。 |
 | `setDisconnectNotifyThreshold(int seconds)` | 自 SDK 5.2.1 起，配置可恢复断线的通知宽限时间，单位为秒，默认 `10`，小于或等于 `0` 时不延迟。初始化前后均可设置，通过 `getDisconnectNotifyThreshold()` 查询。详见 [配置断开通知宽限时间](connection.html#配置断线通知宽限期)。 |
@@ -42,6 +47,57 @@ EMClient.getInstance().init(getApplicationContext(), options);
 | `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。Android SDK 自 **5.0.0** 起提供以下服务地址配置接口。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `setRestServer` 的 `restServer` | String | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `setWebSocketServer` 的 `wsServer` | String | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `setWebSocketPort` 的 `wsPort` | int | 是 | WebSocket 端口。WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `setEnableTLSConnection` 的 `enableTLSConnection` | boolean | 是 | 设为 `true`，为消息 WebSocket 连接启用 TLS，即使用 WSS。该开关不能替代 REST 地址中的 `https://`。 |
+| `enableDNSConfig` 的 `enable` | boolean | 是 | 默认 `true`；使用指定的服务连接地址时设为 `false`。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请在应用主进程中执行，并沿用业务所需的其他 `EMOptions` 设置；不要在已经初始化后通过再次调用 `init` 切换地址。
+
+```java
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+// REST 地址保留 HTTPS 协议。
+options.setRestServer("https://api-your-app.example.com");
+// 消息 WebSocket 分别配置主机、端口和 TLS。
+options.setWebSocketServer("ws-your-app.example.com");
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
+// 使用指定的服务连接地址。
+options.enableDNSConfig(false);
+
+EMClient.getInstance().init(getApplicationContext(), options);
+```
+
+应用专属域名通过 WebSocket 建立消息长连接，不使用 `setIMServer` 和 `setImPort` 配置 TCP 地址。消息 WebSocket 与 [数据同步](#设置登录后自动同步数据) 连接用途不同；自 Android SDK **5.1.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。使用 5.0.0 并启用自动同步时，需另行确认该版本的同步配置要求。
+
+#### 检查配置结果
+
+地址设置方法和 `init` 不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。初始化完成或消息连接成功，不代表所有请求和数据同步均已成功；失败时请记录错误码，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
 
 ## 初始化后设置监听
 
@@ -223,6 +279,11 @@ EMClient.getInstance().init(context.getApplicationContext(), options);
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `EMClient` | 初始化 Android SDK 单例。 |
+| [`setRestServer`](#初始化前配置地址) | `EMOptions` | 设置 REST API 基准地址。 |
+| [`setWebSocketServer`](#初始化前配置地址) | `EMOptions` | 设置消息 WebSocket 主机名。 |
+| [`setWebSocketPort`](#初始化前配置地址) | `EMOptions` | 设置消息 WebSocket 端口。 |
+| [`setEnableTLSConnection`](#初始化前配置地址) | `EMOptions` | 设置消息长连接是否启用 TLS。 |
+| [`enableDNSConfig`](#初始化前配置地址) | `EMOptions` | 配置服务地址的使用方式；固定地址示例设为 `false`。 |
 | [`setUsePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 设置后台推送开关，须在初始化前调用。 |
 | [`isUsePushInBackground`](/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 查询后台推送开关值。 |
 | [`setDisconnectNotifyThreshold`](connection.html#配置断线通知宽限期) | `EMOptions` | 配置可恢复断开的通知宽限时间，初始化前后均可设置。 |

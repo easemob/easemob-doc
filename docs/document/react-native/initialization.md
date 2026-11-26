@@ -36,6 +36,11 @@ ChatClient.getInstance()
 | 属性 | 描述 |
 | :----------------- | :---------------- |
 | `appKey` | App Key。`appKey` 参数为创建 App 时在环信控制台上注册的 App 唯一识别符。 |
+| `restServer` | 设置 REST API 基准地址。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketServer` | 设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `webSocketPort` | 设置消息 WebSocket 端口。 |
+| `enableTLS` | 设置消息长连接是否启用 TLS。国内 2 区应用使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `enableDNSConfig` | 默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。国内 2 区应用使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `autoAcceptGroupInvitation` | 是否自动接受加群邀请。<br/> -（默认）`false`：不自动接受加群邀请；<br/> - `true`：自动接受加群邀请。 |
 | `acceptInvitationAlways` | 是否自动接受加好友邀请。<br/> -（默认）`false`：不自动接受好友邀请；<br/> - `true`：自动接受好友邀请。 |
 | `apnsCertName` | APNs 证书名称，用于 iOS 离线推送。该值应与环信控制台中配置的 APNs 证书名称一致，并且只能在初始化 SDK 时设置。 |
@@ -46,6 +51,67 @@ ChatClient.getInstance()
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 
 React Native SDK 5.x 不支持自动登录。初始化完成后，应用需主动调用 `ChatClient#loginWithToken` 登录，详见 [登录](login.html)。
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持 `enableDNSConfig` 的默认值 `true` 即可。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。React Native SDK 自 **5.0.0** 起支持以下 REST 和 WebSocket 服务地址配置。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `restServer` | string | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `webSocketServer` | string | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `webSocketPort` | number | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `enableTLS` | boolean | 是 | 默认 `false`；本文设为 `true`。 |
+| `usingHttpsOnly` | boolean | 否 | 默认 `true`；示例显式保留。 |
+| `enableDNSConfig` | boolean | 是 | 默认 `true`；本文设为 `false`。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。
+
+```typescript
+import { ChatClient, ChatOptions } from 'react-native-chat-sdk';
+
+async function initializeChatSdk(): Promise<void> {
+  const options = ChatOptions.withAppKey({
+    appKey: 'your-org#your-app',
+    restServer: 'https://api-your-app.example.com',
+    webSocketServer: 'ws-your-app.example.com',
+    webSocketPort: 443,
+    enableTLS: true,
+    usingHttpsOnly: true,
+    enableDNSConfig: false,
+  });
+
+  try {
+    await ChatClient.getInstance().init(options);
+  } catch (error: unknown) {
+    console.error('SDK 初始化失败：', error);
+    throw error;
+  }
+}
+```
+
+WebSocket 地址只填写主机名，端口单独设置，示例使用 `443`，通过 `enableTLS: true` 使用 WSS；REST 地址保留 `https://`，不使用 TCP 的 `imServer`。SDK 5.0.0 依赖 Android/iOS 原生 SDK 5.0.0，启用自动同步时需另行确认该版本的同步配置要求。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 
@@ -175,6 +241,11 @@ try {
 
 | API 名称 | 所属模块/类 | 返回类型 | 说明 |
 | :--- | :--- | :--- | :--- |
+| [`restServer`](#初始化前配置地址) | `ChatOptions` | 设置 REST API 基准地址。 |
+| [`webSocketServer`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 主机名。 |
+| [`webSocketPort`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 端口。 |
+| [`enableTLS`](#初始化前配置地址) | `ChatOptions` | 设置消息长连接是否启用 TLS。 |
+| [`enableDNSConfig`](#初始化前配置地址) | `ChatOptions` | 配置服务地址的使用方式；使用指定地址时设为 `false`。 |
 | [`withAppKey`](#初始化-sdk) / [`withAppId`](#初始化-sdk) | `ChatOptions` | `ChatOptions` | 使用 App Key 或 App ID 创建初始化配置。 |
 | [`init`](#初始化-sdk) | `ChatClient` | `Promise<void>` | 使用指定配置初始化 React Native SDK。 |
 | [`apnsCertName`](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |

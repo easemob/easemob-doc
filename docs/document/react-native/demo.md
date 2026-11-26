@@ -38,13 +38,14 @@
 4. 从 [GitHub](https://github.com/easemob/easemob-uikit-reactnative) 或 [Gitee](https://gitee.com/easemob-code/react-native-chat-library) 中下载即时通讯 IM Demo 项目源码。
 5. 进入工程根目录，执行 `yarn && yarn prepare` 安装依赖和创建本地配置文件。
 6. 更改配置文件(`examples/product-uikit-demo/src/env.ts`)内容, 设置 appKey 的值，其他字段有默认值。
-7. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
+7. 国内 2 区新建应用的域名使用要求和实际地址见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。使用应用专属域名时，必须在 Demo 的 SDK 初始化入口按 [配置应用专属域名](initialization.html#配置应用专属域名) 设置 REST 和 WebSocket 地址。
+8. 设置推送配置文件。如果没有，可以使用模板文件保证编译运行没有问题。如果有，则使用自己的配置文件。详见 [Firebase 相关文档](https://rnfirebase.io/)。
    - Android 平台拷贝命令为 `cp -f templates/google-services.json.template examples/product-uikit-demo/android/app/google-services.json && cp -f templates/debug.keystore.template examples/product-uikit-demo/android/app/debug.keystore`。
    - iOS 平台拷贝命令为 `cp templates/GoogleService-Info.plist.template examples/product-uikit-demo/ios/productuikitdemo/GoogleService-Info.plist`。
-8. 进入目录 `examples/product-uikit-demo`， 运行 `yarn android` 或 `yarn ios` 运行 Demo。
-9. 启动本地服务 `yarn run start`，默认端口 8081。
-10. 在登录页面连续点击 5 次以上版本号，将切换为用户 ID 和密码登录页面（再次连续点击返回手机号和验证码登录页面）。
-11. 使用注册的用户 ID 和密码登录。
+9. 进入目录 `examples/product-uikit-demo`， 运行 `yarn android` 或 `yarn ios` 运行 Demo。
+10. 启动本地服务 `yarn run start`，默认端口 8081。
+11. 在登录页面连续点击 5 次以上版本号，将切换为用户 ID 和密码登录页面（再次连续点击返回手机号和验证码登录页面）。
+12. 使用注册的用户 ID 和密码登录。
 
 ### App Server
 

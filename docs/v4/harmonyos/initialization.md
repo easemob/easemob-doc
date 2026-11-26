@@ -38,6 +38,11 @@ ChatClient.getInstance().init(this.context, {
 | 方法名称           | 描述            |
 | :----------------- | :---------------- |
 | `setAppKey(appKey)`                                   | 设置 App Key。<br/>`appKey` 参数为创建 app 时在环信控制台上注册的 app 唯一识别符。 |
+| `setRestServer(restServer)` | 自 SDK 1.0.0 起支持。设置 REST API 基准地址。国内 2 区应用使用应用专属域名时需要配置，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketServer(webSocketServer)` | 自 SDK 1.10.0 起支持。设置消息 WebSocket 主机名，与端口和 TLS 配置配合使用，详见 [配置应用专属域名](#配置应用专属域名)。 |
+| `setWebSocketPort(webSocketPort)` | 自 SDK 1.10.0 起支持。设置消息 WebSocket 端口。 |
+| `setEnableTLSConnection(enableTLSConnection)` | 自 SDK 1.4.0 起支持。设置消息长连接是否启用 TLS。国内 2 区应用使用应用专属域名时设为 `true`，通过 WSS 连接。 |
+| `setEnableDnsConfig(enableDnsConfig)` | 自 SDK 1.14.0 起支持。默认 `true`，SDK 自动获取服务地址，使用集群域名时无需修改。国内 2 区应用使用应用专属域名时的设置见 [配置应用专属域名](#配置应用专属域名)。 |
 | `setAutoLogin(autoLogin)`                            | 开启/关闭自动登录。<br/>`autoLogin` 参数表示是否开启自动登录： <br/> -（默认）`true`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `false`：不自动登录。 |
 | `setAppIDForPush(appId)`                     | 设置用于推送的 app ID。         |
 | `setAutoAcceptGroupInvitations(isAutoAcceptGroups)`                | 设置是否自动接受加群邀请。<br/>`isAutoAcceptGroups` 参数表示是否自动接受加群邀请。 <br/> -（默认）`true`：自动接受加群申请； <br/> -  `false`: 不自动接受加群申请。 |
@@ -49,6 +54,58 @@ ChatClient.getInstance().init(this.context, {
 | `setEnableUserInfo(enableUserInfo)` | 设置是否开启用户信息自动管理。<br/> - `true`：开启。<br/> -（默认）`false`：关闭。必须在 `init` 前设置。 |
 
 关于私有云 SDK 的 IP 地址/域名配置，详见 [配置文档](private_ip_domain.html)。
+
+## 配置应用专属域名
+
+目前仅国内 2 区支持应用专属域名。国内 2 区应用的服务器域名分为两类：**集群域名** 由同一集群内的应用共用，**应用专属域名** 按应用分配。其他数据中心使用集群域名。域名查看入口及展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
+**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
+
+使用集群域名时，SDK 默认自动获取服务地址，无需手动设置 REST 和消息长连接地址，保持默认启用的动态地址配置即可，无需调用 `setEnableDnsConfig` 修改。
+
+国内 2 区应用使用应用专属域名时，需要使用当前应用的 REST 和 WebSocket 地址配置 SDK。HarmonyOS SDK 自 **1.10.0** 起支持 WebSocket 地址配置；以下示例包含自 **1.14.0** 起新增的 `setEnableDnsConfig`，请使用 1.14.0 及以上版本。
+
+#### 初始化前配置地址
+
+在控制台进入目标应用的详情页，从 **开发配置信息 > 域名配置** 中复制 **REST API** 和 **Websocket** 地址，并使用同一页面的 App Key。请按以下格式填写 SDK 参数。
+
+| 参数 | 类型 | 是否必需 | 描述 |
+| :--- | :--- | :--- | :--- |
+| `setRestServer` 的地址 | string | 是 | REST API 基准地址，保留 `https://` 及实际端口，例如 `https://api-your-app.example.com`；不追加组织名、应用名或业务接口路径。 |
+| `setWebSocketServer` 的 `webSocketServer` | string | 是 | WebSocket 主机名，例如 `ws-your-app.example.com`；不包含 `wss://`、端口或路径。 |
+| `setWebSocketPort` 的 `webSocketPort` | number | 是 | WSS 默认端口为 `443`；若控制台明确提供其他端口，使用实际值。 |
+| `setEnableTLSConnection` 的布尔值 | boolean | 是 | 设为 `true`，使用 WSS。 |
+| `setEnableDnsConfig` 的 `enableDnsConfig` | boolean | 是 | 默认 `true`；本文设为 `false`。 |
+
+:::notice
+选择 **创建新的正式版应用** 上线时，正式版与测试版是两个应用，应从正式版详情页重新获取 App Key 和两项地址，不能只替换 App Key。详见 [应用上线](/product/console/app_launch.html#上线事项)。
+:::
+
+以下代码替换现有初始化入口中的配置。请沿用业务所需的其他初始化设置，不要在已经初始化后通过再次调用初始化接口切换地址。`context` 为当前 Ability 上下文。
+
+```typescript
+import { ChatClient, ChatOptions } from '@easemob/chatsdk';
+
+const options = new ChatOptions({
+  appKey: 'your-org#your-app'
+});
+options.setRestServer('https://api-your-app.example.com');
+options.setWebSocketServer('ws-your-app.example.com');
+options.setWebSocketPort(443);
+options.setEnableTLSConnection(true);
+options.setEnableDnsConfig(false);
+
+ChatClient.getInstance().init(context, options);
+```
+
+WebSocket 地址只填写主机名，不包含 `wss://`、端口或路径；REST 地址保留 `https://`。TLS 开关不能替代 REST 的 HTTPS 协议，不使用 `setIMServer` 配置 TCP 地址。自 SDK **1.15.0** 起，数据同步地址根据 REST 配置自动获取，无需单独设置。
+
+#### 检查配置结果
+
+地址设置方法和初始化接口不提供独立的“域名连接成功”回调。初始化完成后，按 [初始化后设置监听](#初始化后设置监听) 注册连接监听，再按 [登录](login.html) 文档登录。确认连接成功，并通过 SDK 日志检查实际连接的服务主机。
+
+分别验证消息收发、REST 请求和启用的自动同步功能。消息连接成功不代表所有请求和数据同步均已成功；失败时请记录错误信息，并对照 [错误码](error.html) 排查 App Key、域名、端口、TLS 和网络访问情况。
+
 
 ## 初始化后设置监听
 
@@ -105,6 +162,11 @@ ChatClient.getInstance().init(context, options);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`setRestServer`](#初始化前配置地址) | `ChatOptions` | 设置 REST API 基准地址。 |
+| [`setWebSocketServer`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 主机名。 |
+| [`setWebSocketPort`](#初始化前配置地址) | `ChatOptions` | 设置消息 WebSocket 端口。 |
+| [`setEnableTLSConnection`](#初始化前配置地址) | `ChatOptions` | 设置消息长连接是否启用 TLS。 |
+| [`setEnableDnsConfig`](#初始化前配置地址) | `ChatOptions` | 配置服务地址的使用方式；使用指定地址时设为 `false`。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK。 |
 | [`addConnectionListener`](#初始化后设置监听) | `ChatClient` | 添加连接状态监听器。 |
 | [`addMessageListener`](#初始化后设置监听) | `ChatManager` | 添加消息监听器。 |

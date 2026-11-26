@@ -46,6 +46,8 @@
 
 你可以在环信控制台的 **应用概览** 页面查看应用所在的数据中心及服务器域名。
 
+目前仅国内 2 区支持应用专属域名。对于国内 2 区，已分配应用专属域名时，控制台展示使用应用专属域名的 REST API 和 WebSocket 地址；未分配应用专属域名时，展示使用集群域名的地址。具体入口和展示规则见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
+
 ![img](/images/product/data_center.png)
 
 ## 国内数据中心
@@ -56,37 +58,16 @@
 
 ### 集成说明
 
-创建应用时，国内数据中心默认为 **国内二区**。
+创建应用时，国内数据中心默认为 **国内 2 区**。
 
-集成各端 SDK 时需要根据应用所在的数据中心使用对应的 WebSocket 地址、RESTful API 地址和小程序地址。
+应用使用的服务器域名分为两类：
 
-#### WebSocket 地址
+- **集群域名**：同一集群内的应用共用，适用于国内 2 区仍使用集群域名的历史应用，以及其他数据中心的应用。
+- **专属域名**：按应用分配，每个应用使用自己的域名。**自 2026 年 11 月 27 日起在国内 2 区创建的应用，必须使用为该应用分配的专属域名。**
 
-| 数据中心名称 | Socket 3.0 地址                                    | Socket 2.0（老版本）地址                     |
-| :----------- | :------------------------------------------------- | :------------------------------------------- |
-| 国内 1 区    | `im-api-v2.easemob.com` 或 `im-api-v2.easecdn.com` | `im-api.easemob.com` 或 `im-api.easecdn.com` |
-| 国内 2 区    | `ngi-im-api-wechat.easemob.com`                    | 无                                           |
-| 国内 VIP 区  | 请咨询你的商务经理                                 | 请咨询你的商务经理                           |
+国内 1 区和国内 VIP 区使用集群域名。各国内数据中心的具体 REST API 和 WebSocket 地址，请从当前应用的控制台页面获取，详见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。请以当前应用页面展示的地址为准，不要仅根据数据中心名称确定域名。
 
-#### RESTful API 地址
-
-不同数据中心的 RESTful API 请求地址不同，具体如下：
-
-| 数据中心名称 | RESTful API 请求地址                 |
-| :----------- | :----------------------------------- |
-| 国内 1 区    | `a1.easemob.com` 或 `a1.easecdn.com` |
-| 国内 2 区    | `ngi-a1.easemob.com`                 |
-| 国内 VIP 区  | 请咨询你的商务经理                   |
-
-#### 小程序地址
-
-不同数据中心下，微信小程序和支付宝小程序使用的地址如下：
-
-| 数据中心名称 | 微信小程序                                                 | 支付宝小程序                                               |
-| :----------- | :--------------------------------------------------------- | :--------------------------------------------------------- |
-| 国内 1 区    | `im-api-wechat.easemob.com` 或 `im-api-wechat.easecdn.com` | `im-api-alipay.easemob.com` 或 `im-api-alipay.easecdn.com` |
-| 国内 2 区    | `ngi-im-api-wechat.easemob.com`                            | `ngi-im-api-wechat.easemob.com`                            |
-| 国内 VIP 区  | 请咨询你的商务经理                                         | 请咨询你的商务经理                                         |
+[小程序还需在平台后台添加对应的合法域名](/document/web/serverconfig.html)。
 
 ## 海外数据中心
 
@@ -98,38 +79,9 @@
 
 海外数据中心默认为 **新加坡 1 区**。
 
-集成各端 SDK 时需要根据应用所在的数据中心使用对应的 WebSocket 地址、RESTful API 地址和小程序地址。
+海外数据中心使用集群域名。具体 REST API 和 WebSocket 地址，请从当前应用的控制台页面获取，详见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
-#### WebSocket 地址
-
-| 集群名称    | WebSocket 地址                                             |
-| :---------- | :--------------------------------------------------------- |
-| 新加坡 1 区 | `im-api-sgp-v2.easemob.com` 或 `im-api-sgp-v2.easecdn.com` |
-| 新加坡 2 区 | `msync-api-61.easemob.com` 或 `msync-api-61.easecdn.com`   |
-| 美东 1 区   | `msync-api-41.easemob.com` 或 `msync-api-41.easecdn.com`   |
-| 德国 2 区   | `msync-api-71.easemob.com` 或 `msync-api-71.easecdn.com`   |
-
-#### RESTful API 地址
-
-不同海外数据中心的 RESTful API 请求地址如下：
-
-| 集群名称    | RESTful API 请求地址                         |
-| :---------- | :------------------------------------------- |
-| 新加坡 1 区 | `a1-sgp.easemob.com` 或 `a1-sgp.easecdn.com` |
-| 新加坡 2 区 | `a61.easemob.com` 或 `a61.easecdn.com`       |
-| 美东 1 区   | `a41.easemob.com` 或 `a41.easecdn.com`       |
-| 德国 2 区   | `a71.easemob.com` 或 `a71.easecdn.com`       |
-
-#### 微信小程序地址
-
-不同海外集群下，微信小程序使用的地址如下：
-
-| 集群名称    | 微信小程序                                                   |
-| :---------- | :----------------------------------------------------------- |
-| 新加坡 1 区 | `im-api-wechat-sgp.easemob.com` 或 `im-api-wechat-sgp.easecdn.com` |
-| 新加坡 2 区 | `im-api-wechat-61.easemob.com` 或 `im-api-wechat-61.easecdn.com` |
-| 美东 1 区   | `im-api-wechat-41.easemob.com` 或 `im-api-wechat-41.easecdn.com` |
-| 德国 2 区   | `im-api-wechat-71.easemob.com` 或 `im-api-wechat-71.easecdn.com` |
+[小程序还需在平台后台添加对应的合法域名](/document/web/serverconfig.html)。
 
 :::tip
 根据海外数据隐私保护协议规定，选择新加坡 1 区、新加坡 2 区、美东 1 区或德国 2 区后，不可迁移至其他集群。
@@ -165,7 +117,7 @@
 
 ### 2. 如何确认应用使用的数据中心？
 
-你可以登录环信控制台，在 **应用概览** 页面查看应用所在数据中心及对应服务器域名。
+你可以登录环信控制台，在 **应用概览** 页面查看应用所在数据中心。具体服务器域名的查看方式见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
 
 ### 3. 国内 1 区和国内 2 区有什么区别？
 
@@ -185,6 +137,4 @@
 
 ### 7. 各端是否需按数据中心配置不同地址？
 
-需要。
-  
-不同数据中心对应的 WebSocket、RESTful API 和小程序接入地址不同。集成时请根据应用所在数据中心填写对应地址。
+请以当前应用的控制台页面展示值为准。国内 2 区应用使用应用专属域名时，各应用使用自己的域名，即使位于同一数据中心，域名也可能不同；使用集群域名时，同一集群内的应用共用域名。详见 [查看应用服务器域名](/product/console/app_manage.html#查看应用服务器域名)。
