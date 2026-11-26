@@ -22,9 +22,9 @@
 
 ## 调用频率上限
 
-1. 每 30 分钟限 1 次，不支持上调。超限上报 429 错误，即 "This request has reached api limit"。
+1. 每 30 分钟限 1 次，支持联系商务上调。超限上报 429 错误，即 "This request has reached api limit"。
 2. 每天限 3 次，支持联系商务上调。超限上报 403 错误，即 "broadcast message limit exceeded"。
-3. 每秒最多可向 1000 个用户发消息，不支持上调。
+3. 每秒最多可向 1000 个用户发消息，支持联系商务上调。
 
 ## 请求 URL
 

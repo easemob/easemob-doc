@@ -21,8 +21,8 @@
 
 ## 调用频率上限
 
-- 每分钟限 1 次，不支持上调，超限上报 429 错误，即 "This request has reached api limit"。
-- 每天限 50 次，支持上调，超限上报 403 错误，即 "online user broadcast limit exceeded"。
+- 每分钟限 1 次，支持联系商务上调，超限上报 429 错误，即 "This request has reached api limit"。
+- 每天限 50 次，支持联系商务上调，超限上报 403 错误，即 "online user broadcast limit exceeded"。
 
 ## 请求 URL
 
