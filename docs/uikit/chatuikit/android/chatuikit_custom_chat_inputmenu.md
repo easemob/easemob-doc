@@ -2,8 +2,8 @@
 
 消息输入区 `ChatUIKitInputMenu` 实现各类消息的输入和发送以及消息表情等功能，包括两部分：
 
-- 消息输入栏 `ChatUlKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
-- 消息扩展菜单 `ChatUlKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
+- 消息输入栏 `ChatUIKitPrimaryMenu`：负责文本与语音消息的输入、发送，支持表情添加及常用功能扩展。
+- 消息扩展菜单 `ChatUIKitExtendMenu`：提供附件类型消息的发送入口，支持发送图片、视频、文件，并可扩展至自定义消息类型（如名片消息等）。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/message_input_frame.png" title="消息输入区 ChatUIKitInputMenu" />
@@ -136,7 +136,7 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 - **表情分组**：对应 `ChatUIKitEmojiconGroupEntity` 对应表情菜单的一个分组（一个 Tab + 分页网格）。
 - **分组管理**：表情菜单的增删操作以分组为单位进行。
 
-：：：tip
+:::tip
 表情分组 Tab（组 icon）默认不展示。ChatUIKit 的默认样式 `ease_chat_emoji_scroll_tabbar_style` 将 TabBar 的 `visibility` 设为了 `gone`。因此，即使只有 1 个组或有多个组，运行时 Tab icon 也可能不可见。
 :::
 
@@ -153,7 +153,17 @@ val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 val emojiconMenu: IChatEmojiconMenu? = binding?.layoutChat?.chatInputMenu?.chatEmojiMenu
 
 // 1. 添加自定义表情组（组内包含多个 ChatUIKitEmojicon）
-val customGroup = EmojiconExampleGroupData.getData() // ChatUIKitEmojiconGroupEntity
+// ChatUIKitEmojiconGroupEntity 参数依次为：组 icon、表情列表、组名、组类型。
+val customGroup = ChatUIKitEmojiconGroupEntity(
+    icon = R.drawable.ic_your_group_icon,
+    emojiconList = listOf(
+        ChatUIKitEmojicon(
+            icon = R.drawable.ic_your_emoji,
+            emojiText = "your_emoji_text"
+        )
+    ),
+    name = "custom_group"
+)
 emojiconMenu?.addEmojiconGroup(customGroup)
 
 // （可选）显示表情分组 Tab
@@ -207,6 +217,13 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | `clear()`            | 清空所有扩展菜单项。   |
 | `setMenuOrder()`     | 设置指定菜单项的显示顺序。 |
 | `registerMenuItem()` | 添加新菜单项。         |
+
+其中 `registerMenuItem` 提供两个重载，`titleColor` 和 `resourceTintColor` 默认为 `-1`，即不设置：
+
+```kotlin
+fun registerMenuItem(name: String?, drawableRes: Int, itemId: Int, order: Int = 0, titleColor: Int = -1, resourceTintColor: Int = -1)
+fun registerMenuItem(nameRes: Int, drawableRes: Int, itemId: Int, order: Int = 0, titleColor: Int = -1, resourceTintColor: Int = -1)
+```
 
 使用示例如下：
 
@@ -290,9 +307,11 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 // easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
 UIKitChatFragment.Builder(conversationID, easeChatType)
         .setOnChatInputChangeListener(onChatInputChangeListener)   // 设置输入变化监听器
-        .setChatInputMenuListener()  // 设置输入菜单监听器
-        .setOnChatExtendMenuItemClickListener // 消息扩展菜单操作监听器
+        .setOnChatExtendMenuItemClickListener(onChatExtendMenuItemClickListener) // 消息扩展菜单操作监听器
         .build()
+
+// 如需设置输入菜单监听器，可通过 ChatUIKitInputMenu 设置：
+binding?.layoutChat?.chatInputMenu?.setChatInputMenuListener(listener)
 ```
 
 ## 自定义样式与资源
