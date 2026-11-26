@@ -38,9 +38,11 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 12.0 以上版本。
+iOS 需要 iOS 13.0 以上版本。
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 设置 iOS 版本为 12.0。
+使用 Xcode 打开 `quick_start/ios/Runner.xcodeproj`，选择 **TARGETS > General > Deployment info**, 将 iOS 部署版本设置为 13.0。
+
+iOS 支持 CocoaPods 与 Swift Package Manager 两种集成方式，可根据 Flutter 项目的配置选择，无需额外操作。
 
 ### 添加依赖
 
@@ -52,23 +54,30 @@ flutter pub get
 
 #### 鸿蒙平台支持
 
-自 SDK 4.13.0 开始支持鸿蒙。若要在鸿蒙平台使用，需进行以下配置：
+Flutter SDK 的鸿蒙（HarmonyOS）版本在 [im_flutter_sdk](https://github.com/easemob/im_flutter_sdk) 仓库的 `ohos` 分支中独立维护。由于鸿蒙版 Flutter 与官方 Flutter 存在兼容性差异，鸿蒙版本目前与 iOS/Android 的 `4.x` 主线分别维护和发布：
 
-1. 使用支持鸿蒙的 Flutter，详情请参见[相关文档](https://gitee.com/harmonycommando_flutter/flutter)。
+- **iOS/Android**：使用 pub.dev 发布的版本，通过 `flutter pub add im_flutter_sdk` 添加依赖。
+- **鸿蒙**：通过 Git tag 引入 `ohos` 分支发布的版本。版本号跟随鸿蒙原生 SDK `@easemob/chatsdk`，采用 `X.Y.Z-ohos` 格式，例如 `1.16.0-ohos`。
 
-2. 添加鸿蒙插件依赖。在项目 `pubspec.yaml` 文件中添加：
+在鸿蒙平台集成 SDK，请完成以下配置：
 
-```yaml
-  im_flutter_sdk: 4.13.0
-  im_flutter_sdk_ohos:
-    git:
-      url: "https://github.com/easemob/im_flutter_sdk_oh.git"
-      ref: 1.5.3
+1. 安装支持鸿蒙的 Flutter，详见 [鸿蒙 Flutter 文档](https://gitee.com/harmonycommando_flutter/flutter)。设备系统需为 HarmonyOS 5.0.0（API 12）或以上版本。
 
-dependency_overrides:
-  im_flutter_sdk_interface: 4.13.0
-  im_flutter_sdk_ios: 4.13.0
-  im_flutter_sdk_android: 4.13.0
-```
+2. 在项目的 `pubspec.yaml` 中通过 Git tag 添加依赖。以下以 `1.16.0-ohos` 为例，请以仓库实际发布的 tag 为准：
 
-3. 执行 `flutter pub get`。
+   ```
+   dependencies:
+     im_flutter_sdk:
+       git:
+         url: https://github.com/easemob/im_flutter_sdk.git
+         ref: 1.16.0-ohos
+         path: im_flutter_sdk
+   ```
+
+   主包会自动引入对应版本的鸿蒙实现包 `im_flutter_sdk_ohos` 和接口包 `im_flutter_sdk_interface`，无需手动添加。
+
+3. 使用鸿蒙版 Flutter 执行以下命令，获取依赖：
+
+   ```
+   flutter pub get
+   ```
