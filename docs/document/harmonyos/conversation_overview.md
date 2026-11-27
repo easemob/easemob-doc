@@ -94,8 +94,13 @@ SDK 提供以下本地会话列表读取方式：
 
 | 方式 | API | 说明 |
 | :--- | :--- | :--- |
-| 排序列表 | `getAllConversationsBySort()` | 从本地数据库读取全部会话。置顶会话优先；置顶和非置顶会话内部均按最新一条消息的时间戳倒序排列。 |
+| 分页列表 | `getConversationsFromDB(cursor, pageSize)` | 自 SDK v5.1.0 起支持，从本地数据库分页读取会话，并返回下一页游标。 |
+| 排序列表 | `getAllConversationsBySort()` | 获取已加载的排序会话列表；自动全量加载开启时可加载全部本地会话。自 SDK v5.1.0 起，按置顶状态、最新消息服务器时间、会话 ID 依次倒序排列，比较会话 ID 时不区分大小写。 |
 | 本地列表 | `getConversations()` | 获取 SDK 当前维护的本地会话数组，不保证返回顺序。 |
+
+自 SDK v5.1.0 起，本地会话列表默认不包含聊天室会话，但 SDK 仍会在内部维护聊天室会话。可在初始化前通过 `setEnableChatroomConversation(true)` 开启展示。使用分页加载时，建议通过 `setAutoLoadAllConversations(false)` 关闭自动全量加载；关闭后，上述两个非分页接口只返回当前已加载的会话。配置及分页示例详见 [会话列表](conversation_list.html#会话相关选项)。
+
+本地会话列表排序不受 `setSortMessageByServerTime(false)` 影响，完整规则详见 [本地会话排序规则](conversation_list.html#本地会话排序规则)。
 
 ## 当前会话与未读数
 
@@ -127,7 +132,7 @@ if (chatManager) {
 
 | 功能 | 主要 API | 说明 |
 | :--- | :--- | :--- |
-| 会话列表 | `getAllConversationsBySort`、`getConversations` | 从本地读取会话列表，详见[会话列表](conversation_list.html)。 |
+| 会话列表 | `getConversationsFromDB`、`getAllConversationsBySort`、`getConversations` | 从本地读取会话列表，详见[会话列表](conversation_list.html)。 |
 | 会话未读数 | `getUnreadMsgCount`、`clearConversationUnreadMessageCount`、`clearAllConversationUnreadMessageCount` | 获取或清零会话未读数，详见[会话未读数](conversation_unread.html)。 |
 | 会话删除 | `deleteConversation`、`deleteConversations`、`deleteConversationFromServer`、`deleteAllConversationsAndMessages` | 删除本地或服务端会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `pinConversation` | 设置或取消会话置顶，详见[置顶会话](conversation_pin.html)。 |
@@ -181,7 +186,7 @@ ChatClient.getInstance()
 ## 最佳实践
 
 - 使用默认配置或在初始化 SDK 前配置 `DataSyncType.CONVERSATIONS`，并在会话数据同步成功后读取本地会话列表；如需关闭自动同步，显式配置 `DataSyncType.NONE`。
-- 展示会话列表时优先使用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先排序结果。
+- 会话较多时，关闭自动全量加载并通过 `getConversationsFromDB` 分页展示；使用自动全量加载时，通过 `getAllConversationsBySort` 获取排序结果。
 - 注册 `ConversationListener`；收到 `onConversationUpdate` 后重新读取会话列表并刷新界面。
 - 页面或组件销毁时移除 `ConversationListener`、`ConnectionListener` 和 `MultiDevicesListener`，避免重复回调和资源泄漏。
 - 会话未读数清零与消息已读回执是两个独立功能：前者更新当前账号的会话未读状态，后者通知原消息发送方消息已读。
@@ -201,6 +206,7 @@ ChatClient.getInstance()
 | [`setDataSyncType`](#通过服务端同步更新会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#通过服务端同步更新会话列表) | `ChatClient` | 使用指定配置初始化 SDK。 |
 | [`onDataSyncStart`](#通过服务端同步更新会话列表) / [`onDataSyncFinish`](#通过服务端同步更新会话列表) | `ConnectionListener` | 监听登录后的数据自动同步状态。 |
+| [`getConversationsFromDB`](#会话列表与空会话) | `ChatManager` | 从本地数据库分页读取会话。 |
 | [`getAllConversationsBySort`](#会话列表与空会话) / [`getConversations`](#会话列表与空会话) | `ChatManager` | 获取本地会话列表。 |
 | [`clearConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零所有会话的本地未读消息数。 |

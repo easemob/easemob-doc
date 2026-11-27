@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。
+- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并在内部维护对应会话。自 SDK v5.1.0 起，本地会话列表默认不包含聊天室会话，可通过初始化配置按需展示。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。
 
 - **服务端与本地数据：** 环信服务器和 SDK 本地均可维护会话列表数据。服务端保存当前用户的会话状态，本地数据用于客户端快速读取和展示会话列表。登录后，SDK 根据数据同步配置将服务端会话数据同步至本地。收发消息、删除会话、清空未读数、设置或取消置顶、添加或移除会话标记等操作也可能更新本地会话列表。
 
@@ -95,14 +95,70 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 | 选项 | 描述 |
 | :--- | :--- |
+| `setEnableChatroomConversation(enable: boolean)` | 自 SDK v5.1.0 起支持，设置加载、上报及分页返回会话列表时是否包含聊天室会话。<br/> - （默认）`false`：不包含。<br/> - `true`：包含。该配置不影响聊天室消息收发，SDK 仍会在内部创建和维护聊天室会话。应在初始化 SDK 前设置，可通过 `isEnableChatroomConversation()` 查询当前配置。 |
+| `setAutoLoadAllConversations(autoLoad: boolean)` | 自 SDK v5.1.0 起支持，设置登录成功后是否自动将全部本地会话加载到内存。<br/> - （默认）`true`：自动加载。<br/> - `false`：不自动全量加载，可通过分页接口按需读取。应在初始化 SDK 前设置，可通过 `isAutoLoadAllConversations()` 查询当前配置；该选项与服务端数据同步配置相互独立。 |
 | `setDeleteMessagesOnLeaveChatroom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/>- （默认）`true`：删除本地消息。<br/>- `false`：保留本地消息。可通过 `isDeleteMessagesOnLeaveChatroom()` 查询当前设置。 |
+
+### 分页获取本地会话
+
+自 SDK v5.1.0 起，可以调用 `ChatManager#getConversationsFromDB` 从本地数据库分页获取会话，适合本地会话较多、需要按需加载的场景。返回结果为 `Promise<CursorResult<Conversation>>`，通过 `getResult()` 获取本页会话，通过 `getNextCursor()` 获取下一页游标。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
+
+建议在 SDK 初始化前调用 `ChatOptions#setAutoLoadAllConversations(false)`，关闭自动全量加载，以减少初始加载量和内存占用。保持默认值 `true` 时仍可调用分页接口，但其他会话列表读取路径可能触发全量加载。该配置只控制本地会话加载，不改变 `setDataSyncType` 指定的服务端数据同步范围。
+
+```typescript
+// 初始化前关闭自动加载全部本地会话。
+const options: ChatOptions = new ChatOptions({
+    appKey: 'your-org#your-app'
+});
+options.setAutoLoadAllConversations(false);
+ChatClient.getInstance().init(context, options);
+```
+
+确认当前用户的本地数据库已打开后，即可分页读取已有本地会话；如需读取本次登录后从服务端同步的最新数据，应等待会话数据同步成功。默认不返回聊天室会话，如需包含，详见 [会话相关选项](#会话相关选项)。
+
+```typescript
+// cursor：查询起点，默认空字符串，表示从第一页开始；获取后续页时，原样传入上一页 `getNextCursor()` 返回的游标。
+let cursor: string = '';
+let hasMore: boolean = true;
+
+// 先调用一次获取第一页；上一页请求完成后，可再次调用以获取下一页。
+function loadNextPage(): void {
+    if (!hasMore) {
+        return;
+    }
+    // pageSize：每页期望返回的会话数量，默认 `50`，取值范围为 `[1,100]`。小于 `1` 时按 `1` 处理，大于 `100` 时按 `100` 处理。
+    ChatClient.getInstance().chatManager()?.getConversationsFromDB(cursor, 50)
+        .then((result: CursorResult<Conversation>): void => {
+            const conversations: Array<Conversation> = result.getResult();
+            cursor = result.getNextCursor();
+            hasMore = cursor.length > 0;
+            // 将 conversations 追加到已展示的会话列表。
+            // hasMore 为 false 时，当前页为最后一页，不再继续请求。
+        })
+        .catch((error: ChatError): void => {
+            // 获取失败，根据 error.errorCode 和 error.description 处理。
+            // INVALID_PARAM 表示游标无效；本地数据库不可用等查询失败返回 DATABASE_ERROR。
+        });
+}
+
+loadNextPage();
+```
+
+分页读取会将本页会话加入内存缓存，但读取本身不触发 `onConversationUpdate`。应用应直接使用 Promise 返回的本页结果更新界面。
+
+### 本地会话排序规则
+
+自 SDK v5.1.0 起，`getConversationsFromDB` 和 `getAllConversationsBySort` 使用一致的排序规则，按以下优先级依次比较：
+
+1. 置顶状态倒序：置顶会话排在非置顶会话之前。
+2. 最新一条消息的服务器时间倒序：置顶状态相同时，时间较新的会话排在前面。
+3. 会话 ID 倒序：上述条件相同时，按照会话 ID 倒序排列，比较时不区分大小写。
+
+上述规则不按置顶时间排序。`ChatOptions#setSortMessageByServerTime(false)` 不再改变本地会话列表排序；该配置仍用于本地消息的排序和搜索，详见 [搜索消息](message_search_local.html)。
 
 ### 一次性获取本地所有会话
 
-调用 `getAllConversationsBySort` 可以从本地数据库获取排序后的全部会话，返回 `Array<Conversation>`。排序规则如下：
-
-- 置顶会话排在非置顶会话之前。
-- 置顶和非置顶会话内部均按照最后一条消息的时间戳倒序排列。
+保持默认的自动全量加载配置时，调用 `getAllConversationsBySort` 可以加载本地会话并获取排序后的会话数组，返回 `Array<Conversation>`。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
 
 ```typescript
 let conversations: Array<Conversation> = ChatClient.getInstance()
@@ -110,13 +166,15 @@ let conversations: Array<Conversation> = ChatClient.getInstance()
     ?.getAllConversationsBySort() ?? [];
 ```
 
-如果不需要 SDK 返回排序后的数据库会话列表，可以调用 `getConversations` 获取 SDK 当前维护的本地会话数组。该方法不提供排序、分页或筛选参数，也不保证返回顺序。
+如果不需要排序，可以调用 `getConversations` 获取 SDK 当前维护的本地会话数组。该方法不提供排序、分页或筛选参数，也不保证返回顺序。
 
 ```typescript
 let conversations: Array<Conversation> = ChatClient.getInstance()
     .chatManager()
     ?.getConversations() ?? [];
 ```
+
+关闭自动全量加载后，`getAllConversationsBySort` 和 `getConversations` 返回当前已加载到内存的会话，可能不包含数据库中的全部会话。需要遍历本地数据库时，应调用 [分页获取本地会话](#分页获取本地会话) 接口，持续使用返回的游标获取后续页。
 
 ### 获取指定会话
 
@@ -171,7 +229,7 @@ let marks: Set<MarkType> = conversation.marks();
 
 ## 监听会话列表更新
 
-当本地会话发生变化时，SDK 会触发 `ConversationListener#onConversationUpdate`。该回调不直接返回完整会话列表，应用应重新调用 `getAllConversationsBySort` 获取最新排序结果并刷新 UI。
+当本地会话发生变化时，SDK 会触发 `ConversationListener#onConversationUpdate`。该回调不直接返回完整会话列表。使用自动全量加载时，可按以下示例调用 `getAllConversationsBySort` 刷新 UI；采用分页展示时，应重置游标，从第一页重新读取并按需恢复已展示范围。
 
 ```typescript
 let conversationListener: ConversationListener = {
@@ -201,8 +259,8 @@ ChatClient.getInstance()
 | :--- | :--- |
 | 获取最新会话列表 | 使用默认的 `DataSyncType.CONVERSATIONS` 配置，在会话同步成功后读取本地数据。 |
 | 首屏快速展示 | 收到 `onDatabaseOpened` 或确认 `isDatabaseOpened()` 为 `true` 后读取已有本地数据；收到会话同步成功事件后再次读取并刷新。 |
-| 展示会话列表 | 优先调用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先、按最后消息时间倒序的列表。 |
-| 应用层筛选 | 调用 `getConversations` 或 `getAllConversationsBySort` 后，根据 `Conversation` 属性在应用层筛选。 |
+| 展示会话列表 | 自动全量加载时调用 `getAllConversationsBySort`；会话较多时，关闭自动全量加载并调用 `getConversationsFromDB` 分页读取。使用 SDK 返回的统一排序结果。 |
+| 应用层筛选 | 全量加载后按 `Conversation` 属性筛选；分页模式下可逐页筛选，需要完整筛选结果时应遍历到末页。 |
 | 响应会话变化 | 注册 `ConversationListener`；收到 `onConversationUpdate` 后重新读取本地会话列表并刷新 UI。多设备会话事件也应触发重新读取。 |
 | 管理监听器 | 页面或组件销毁时移除 `ConnectionListener` 和 `ConversationListener`，避免重复回调和资源泄漏。 |
 
@@ -217,9 +275,14 @@ ChatClient.getInstance()
 | [`addConnectionListener`](#监听会话列表同步状态) / [`removeConnectionListener`](#监听会话列表同步状态) | `ChatClient` | 添加或移除连接及数据同步监听器。 |
 | [`isDatabaseOpened`](#监听会话列表同步状态) | `ChatClient` | 查询当前用户的本地数据库是否已经打开。 |
 | [`setDeleteMessagesOnLeaveChatroom`](#会话相关选项) / [`isDeleteMessagesOnLeaveChatroom`](#会话相关选项) | `ChatOptions` | 设置或查询退出聊天室时是否删除该聊天室的本地消息。 |
-| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取 SDK 当前维护的本地会话数组，不保证返回顺序。 |
+| [`setEnableChatroomConversation`](#会话相关选项) / [`isEnableChatroomConversation`](#会话相关选项) | `ChatOptions` | 设置或查询会话列表是否包含聊天室会话，默认不包含。 |
+| [`setAutoLoadAllConversations`](#会话相关选项) / [`isAutoLoadAllConversations`](#会话相关选项) | `ChatOptions` | 设置或查询是否自动将全部本地会话加载到内存，默认开启。 |
+| [`getConversationsFromDB`](#分页获取本地会话) | `ChatManager` | 从本地数据库分页获取会话，并返回下一页游标。 |
+| [`getResult`](#分页获取本地会话) / [`getNextCursor`](#分页获取本地会话) | `CursorResult<Conversation>` | 获取本页会话或下一页游标。 |
+| [`setSortMessageByServerTime`](#本地会话排序规则) | `ChatOptions` | 设置本地消息排序和搜索的时间依据；不改变本地会话列表排序。 |
+| [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前已加载的本地会话数组，不保证返回顺序。 |
 | [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
-| [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 从本地数据库获取置顶优先并按最后消息时间倒序排列的全部会话。 |
+| [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 获取排序后的本地会话数组。自动全量加载关闭时，只返回当前已加载的会话。 |
 | [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `Conversation` | 获取单聊或群聊会话的显示名称和头像。 |
 | [`getLatestMessage`](#获取会话名称和头像) / [`getUnreadMsgCount`](#获取会话名称和头像) | `Conversation` | 获取会话的最后一条消息或未读消息数。 |
 | [`isPinned`](#获取会话名称和头像) / [`marks`](#获取会话名称和头像) | `Conversation` | 获取会话的置顶状态或会话标记。 |

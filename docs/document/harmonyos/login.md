@@ -96,10 +96,12 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 ## Token 续期
 
-使用 Token 登录后，SDK 会通过 `ConnectionListener#onTokenWillExpire` 和 `ConnectionListener#onTokenExpired` 通知 Token 状态：
+使用 Token 登录后，SDK 会通过 `ConnectionListener#onTokenWillExpire` 和 `ConnectionListener#onTokenExpired` 通知 Token 状态。自 SDK v5.1.0 起，SDK 使用 NTP 校准后的时间判断 Token 是否过期或即将过期，降低设备时钟偏差带来的影响；Token 临近过期时，会等待对时完成后再通知。校时对象不可用或调用异常时，回退到本机时间。
+
+应用可按以下方式处理回调：
 
 - `onTokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `ChatClient#renewToken` 更新。
-- `onTokenExpired`：Token 已过期时触发。SDK 会退出当前登录态，应用应从业务服务器获取新 Token，并重新调用 `loginWithToken` 登录。
+- `onTokenExpired`：Token 已过期时触发。SDK 会退出当前登录态；自 SDK v5.1.0 起，等待登出流程结束后再触发该回调。应用应从业务服务器获取新 Token，并重新调用 `loginWithToken` 登录。
 
 收到 `onTokenWillExpire` 回调后，应用应从自己的业务服务器获取新的 IM Token，并调用 `ChatClient#renewToken` 更新 Token。`renewToken` 返回 Promise：`Promise resolve` 表示更新成功；`Promise reject` 表示更新失败，可根据 `ChatError` 进行处理。
 
@@ -336,7 +338,7 @@ ChatClient.getInstance()
 | :--- | :--- | :--- |
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
 | [`isDatabaseOpened`](#登录完成前使用本地数据库) | `ChatClient` | 判断当前是否存在可用的本地数据库上下文。 |
-| [`getAllConversationsBySort`](#登录完成前使用本地数据库) | `ChatManager` | 获取置顶优先并按最后一条消息时间倒序排列的本地会话列表。 |
+| [`getAllConversationsBySort`](#登录完成前使用本地数据库) | `ChatManager` | 获取排序后的本地会话列表，排序依据为置顶状态、最新消息服务器时间和会话 ID。 |
 | [`renewToken`](#token-续期) | `ChatClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUser`](#获取当前登录的用户) | `ChatClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `ChatClient` | 判断当前用户是否已登录。 |

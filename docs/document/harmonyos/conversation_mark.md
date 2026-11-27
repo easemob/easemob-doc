@@ -109,6 +109,8 @@ conversations.forEach((conversation: Conversation): void => {
 });
 ```
 
+会话较多时，可使用 SDK v5.1.0 新增的 [分页获取本地会话](conversation_list.html#分页获取本地会话) 接口，逐页按 `marks()` 筛选。关闭自动全量加载后，`getAllConversationsBySort` 只返回已加载到内存的会话；需要完整筛选结果时，应持续使用游标读取至末页。
+
 如需获取单个本地会话的全部标记，可以先调用 `getConversation` 获取会话对象，再调用 `marks`：
 
 ```typescript

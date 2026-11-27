@@ -67,7 +67,7 @@ if (conversation != null) {
 
 置顶状态随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表。
 
-应在初始化前通过 `ChatOptions.dataSyncType` 显式配置会话同步：
+自 Flutter SDK 5.1.0 起，两端默认同步会话列表及置顶状态。也可在 SDK 初始化前，通过 `ChatOptions.dataSyncType` 显式包含 `ChatDataSyncType.conversations`：
 
 ```dart
 final ChatOptions options = ChatOptions.withAppKey(

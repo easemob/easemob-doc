@@ -32,7 +32,9 @@ ChatClient.getInstance().init(context, {
   appKey: 'your-org#your-app',
   isAutoAcceptGroupInvitations: true,
   isAcceptInvitationAlways: true,
-  dataSyncTypes: DataSyncType.CONVERSATIONS
+  dataSyncTypes: DataSyncType.CONVERSATIONS,
+  enableChatroomConversation: false,
+  autoLoadAllConversations: true
 });
 ```
 
@@ -48,6 +50,9 @@ ChatClient.getInstance().init(context, {
 | `setDeleteMessagesOnLeaveGroup(isDeleteMessagesOnLeaveGroup: boolean)` | 设置主动或被动退出群组时是否删除该群组的本地消息。<br/>-（默认）`true`：删除。<br/>- `false`：保留。 |
 | `allowChatroomOwnerLeave(isChatroomOwnerLeaveAllowed: boolean)` | 设置是否允许聊天室所有者离开聊天室。<br/>-（默认）`true`：允许；离开后所有者仍保留聊天室权限，但不再接收聊天室消息。<br/>- `false`：不允许。 |
 | `setDataSyncType(types: DataSyncType \| DataSyncType[])` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE` 或空数组表示不同步。必须在 `init` 前设置。默认值为 `CONVERSATIONS`。 |
+| `setEnableChatroomConversation(enable: boolean)` | 自 SDK v5.1.0 起支持，设置本地会话列表是否包含聊天室会话，默认为 `false`。也可通过 `ChatOptionsParam.enableChatroomConversation` 配置，通过 `isEnableChatroomConversation()` 查询。该配置不影响聊天室消息收发和内部会话维护，应在 `init` 前设置。 |
+| `setAutoLoadAllConversations(autoLoad: boolean)` | 自 SDK v5.1.0 起支持，设置登录后是否自动将全部本地会话加载到内存，默认为 `true`。也可通过 `ChatOptionsParam.autoLoadAllConversations` 配置，通过 `isAutoLoadAllConversations()` 查询。分页加载时建议设为 `false`，应在 `init` 前设置。详见 [会话相关选项](conversation_list.html#会话相关选项)。 |
+| `setSortMessageByServerTime(sortByServerTime: boolean)` | 设置本地消息排序和搜索使用服务器时间还是本地创建时间，默认为 `true`。自 SDK v5.1.0 起，该配置不改变本地会话列表排序，详见 [本地会话排序规则](conversation_list.html#本地会话排序规则)。 |
 | `setEnableUserInfo(enableUserInfo: boolean)` | 设置是否开启用户信息自动管理。<br/>- `true`：开启。<br/>-（默认）`false`：关闭。必须在 `init` 前设置。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
@@ -213,6 +218,8 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 
 如果只需优先展示设备上的已有数据，可在收到 `ConnectionListener#onDatabaseOpened` 后读取本地数据；如需展示本次登录后从服务端同步的最新数据，应等待对应类型的 `onDataSyncFinish` 成功后再次读取并刷新界面。
 
+上述会话读取示例适用于默认的自动全量加载配置。自 SDK v5.1.0 起，如已关闭自动全量加载，应使用 `ChatManager#getConversationsFromDB` 分页读取本地会话，详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。
+
 ## 开启用户信息自动管理
 
 用户信息自动管理与联系人自动同步相互独立。`ChatOptions#setEnableUserInfo` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
@@ -228,6 +235,9 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 | [`getAllConversationsBySort`](#登录后读取同步结果) | `ChatManager` | 从本地数据库读取排序后的会话列表。 |
 | [`getContactsFromLocal`](#登录后读取同步结果) | `ContactManager` | 从本地数据库读取好友列表和好友信息。 |
 | [`getAllGroups`](#登录后读取同步结果) | `GroupManager` | 读取本地已加入群组列表。 |
+| [`setEnableChatroomConversation`](#初始化-sdk) / [`isEnableChatroomConversation`](#初始化-sdk) | `ChatOptions` | 设置或查询本地会话列表是否包含聊天室会话。 |
+| [`setAutoLoadAllConversations`](#初始化-sdk) / [`isAutoLoadAllConversations`](#初始化-sdk) | `ChatOptions` | 设置或查询是否自动加载全部本地会话。 |
+| [`setSortMessageByServerTime`](#初始化-sdk) | `ChatOptions` | 设置消息排序和搜索的时间依据，不改变本地会话列表排序。 |
 | [`getDataSyncType`](#同步的数据) | `ChatOptions` | 获取当前配置的登录后自动同步数据类型。 |
 
 </div>

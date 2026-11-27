@@ -112,6 +112,8 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 ## Token 续期
 
+自 Android SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。如需指定自定义 NTP 服务器，可在 SDK 初始化前调用 `EMOptions#setNtpServers(List<String>)` 设置服务器列表。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+
 使用 Token 登录后，SDK 会通过 `EMConnectionListener#onTokenWillExpire` 和 `EMConnectionListener#onTokenExpired` 通知 Token 状态：
 
 - `onTokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `EMClient#renewToken` 更新。

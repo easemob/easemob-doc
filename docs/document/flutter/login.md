@@ -102,6 +102,8 @@ ChatClient.getInstance.removeConnectionEventHandler(handlerId);
 
 ## Token 续期
 
+自 Flutter SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。如需指定自定义 NTP 服务器，可在初始化前配置 `ChatOptions.ntpServers`，详见 [初始化 SDK](initialization.html#初始化-sdk)。该变化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+
 使用 Token 登录后，SDK 会通过 `ConnectionEventHandler.onTokenWillExpire` 和 `ConnectionEventHandler.onTokenDidExpire` 通知 Token 状态：
 
 - `onTokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `ChatClient.renewToken` 更新。

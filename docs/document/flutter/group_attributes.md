@@ -81,7 +81,7 @@ try {
 群成员会通过 `ChatGroupEventHandler#onSpecificationDidUpdate` 收到群组详情更新回调。回调中的 `ChatGroup` 表示更新后的群组信息。为确保获取完整且最新的配置，建议在回调中调用 `fetchGroupInfoFromServer` 从服务器获取群组详情。
 
 :::warning
-从 `ChatGroup` 读取配置时存在平台差异：iOS 上 `configs` 可能为 `null`，`maxUserCount` 和 `extension` 不下发，应改读 `configs?.maxCount` 和 `configs?.ext`；Android 上 `configs.inviteNeedConfirm` 固定返回 `false`，该字段只应作为创建或更新群组时的入参使用。
+从 `ChatGroup` 读取配置时，iOS 上 `configs` 可能为 `null`，`maxUserCount` 和 `extension` 不下发，应改读 `configs?.maxCount` 和 `configs?.ext`。自 Flutter SDK 5.1.0 起，Android 的 `configs.inviteNeedConfirm` 返回原生 SDK 的实际值，与 iOS 一致；不再固定为 `false`。需要最新配置时，先调用 `fetchGroupInfoFromServer`，并保留对 `configs` 为空的处理。
 :::
 
 ## 修改群组名称
@@ -238,28 +238,64 @@ try {
 
 ### 下载共享文件
 
-先调用 `fetchGroupFileListFromServer` 获取共享文件信息，再调用 `downloadGroupSharedFile` 下载指定文件。
+先调用 `fetchGroupFileListFromServer` 获取共享文件信息，再调用 `downloadGroupSharedFile` 下载指定文件。自 Flutter SDK 5.1.0 起，可在调用下载接口前设置 `ChatGroupManager.downloadCallback`，通过 `ChatDownloadCallback` 接收下载进度及最终结果。
+
+- `onProgress(String fileId, int progress)`：下载进度，范围为 0–100。
+- `onSuccess(String fileId, String path)`：下载完成，可使用 `path` 指向的本地文件。
+- `onError(String fileId, ChatError error)`：下载失败，可根据错误处理重试或提示。
+
+`downloadGroupSharedFile` 返回的 Future 在下载开始时完成，不能将 `await` 返回视为下载成功。最终成功或失败必须通过回调判断；发起请求阶段的异常仍需在调用处处理。
 
 ```dart
-try {
-  final List<ChatGroupSharedFile> sharedFiles =
-      await ChatClient.getInstance.groupManager.fetchGroupFileListFromServer(
-    groupId,
-    pageNum: 1,
-    pageSize: 20,
+Future<void> startGroupSharedFileDownload({
+  required String groupId,
+  required String savePath,
+}) async {
+  final ChatGroupManager groupManager = ChatClient.getInstance.groupManager;
+  // 在发起下载前设置回调；通过 fileId 区分不同下载任务。
+  groupManager.downloadCallback = ChatDownloadCallback(
+    onProgress: (String fileId, int progress) {
+      debugPrint('Download progress: $fileId, $progress%');
+    },
+    onSuccess: (String fileId, String path) {
+      // 此时才能打开或展示下载完成的文件。
+      debugPrint('Download completed: $fileId, $path');
+    },
+    onError: (String fileId, ChatError error) {
+      debugPrint('Download failed: $fileId, ${error.code}, '
+          '${error.description}');
+    },
   );
 
-  if (sharedFiles.isNotEmpty && sharedFiles.first.fileId != null) {
-    await ChatClient.getInstance.groupManager.downloadGroupSharedFile(
+  try {
+    final List<ChatGroupSharedFile> sharedFiles =
+        await groupManager.fetchGroupFileListFromServer(
+      groupId,
+      pageNum: 1,
+      pageSize: 20,
+    );
+    if (sharedFiles.isEmpty) {
+      return;
+    }
+    final String? fileId = sharedFiles.first.fileId;
+    if (fileId == null) {
+      return;
+    }
+    await groupManager.downloadGroupSharedFile(
       groupId: groupId,
-      fileId: sharedFiles.first.fileId!,
+      fileId: fileId,
       savePath: savePath,
     );
+    // 此处仅表示已发起下载，最终结果由上面的回调通知。
+  } on ChatError catch (error) {
+    // 处理获取列表或发起下载阶段的错误。
+    debugPrint('Failed to start download: ${error.code}, '
+        '${error.description}');
   }
-} on ChatError catch (e) {
-  // 获取或下载失败。
 }
 ```
+
+`savePath` 应为应用可写入的本地文件路径。`downloadCallback` 是 Manager 上的单个回调属性，再次赋值会替换原回调；多个下载任务应统一管理，并按 `fileId` 分发结果。确认所有任务结束且不再需要监听时，再将该属性置为 `null`，避免提前移除回调而遗漏最终结果。
 
 ### 删除共享文件
 
@@ -338,7 +374,8 @@ try {
 | [`updateGroupAnnouncement`](#更新群公告) | `ChatGroupManager` | 更新群公告。 |
 | [`fetchAnnouncementFromServer`](#获取群公告) | `ChatGroupManager` | 获取群公告。 |
 | [`uploadGroupSharedFile`](#上传共享文件) | `ChatGroupManager` | 上传群共享文件。 |
-| [`downloadGroupSharedFile`](#下载共享文件) | `ChatGroupManager` | 下载群共享文件。 |
+| [`downloadGroupSharedFile`](#下载共享文件) | `ChatGroupManager` | 发起群共享文件下载，返回不代表下载完成。 |
+| [`downloadCallback`](#下载共享文件) | `ChatGroupManager` | 设置 `ChatDownloadCallback`，接收下载进度及最终成功或失败事件。 |
 | [`removeGroupSharedFile`](#删除共享文件) | `ChatGroupManager` | 删除群共享文件。 |
 | [`fetchGroupFileListFromServer`](#从服务器获取共享文件) | `ChatGroupManager` | 分页获取群共享文件列表。 |
 | [`fileId`](#下载共享文件) | `ChatGroupSharedFile` | 获取群共享文件 ID。 |

@@ -20,7 +20,7 @@ Future<void> initializeChatSdk() async {
   // 使用控制台创建应用后获得的 App Key，替换示例值。
   final ChatOptions options = ChatOptions.withAppKey(
     'your-org#your-app',
-    // 显式启用登录后的会话列表同步，避免依赖两端不同的默认值。
+    // 5.1.0 两端均默认同步会话，也可显式指定同步范围。
     dataSyncType: ChatDataSyncType.conversations,
     // 根据业务需要继续设置其他初始化配置。
   );
@@ -41,6 +41,9 @@ Future<void> initializeChatSdk() async {
 | `deleteMessagesAsExitGroup` | 设置主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `isChatRoomOwnerLeaveAllowed` | 设置是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；离开后所有者仍保留聊天室权限，但不再接收聊天室消息。<br/> - `false`：不允许。 |
 | `dataSyncType` | 设置登录后自动同步的数据类型，类型为 `int?`。通过 `ChatDataSyncType.conversations`、`contacts`、`joinedGroups` 按位或组合；`ChatDataSyncType.none` 表示不同步。默认 `null`，详见 [配置方式](#配置方式)。 |
+| `autoLoadConversations` | 自 5.1.0 起支持。设置是否自动将全部本地会话加载到内存，默认 `true`。使用本地会话分页前必须设为 `false`；仅在初始化前设置生效。详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
+| `enableChatroomConversation` | 自 5.1.0 起支持。设置本地会话列表是否包含聊天室会话，默认 `false`；如需包含，设为 `true`。仅在初始化前设置生效。 |
+| `ntpServers` | 自定义 NTP 服务器列表，类型为 `List<String>?`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效，运行时不可修改。详见 [Token 续期](login.html#token-续期)。 |
 | `enableEmptyConversation` | 设置从本地数据库加载会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 | `requireDeliveryAck` | 设置是否发送消息送达回执，默认 `false`。|
 | `enableUserInfo` | 设置是否开启用户信息自动管理，默认 `false`。详见 [用户信息自动管理](userinfo_provider.html)。 |
@@ -48,6 +51,10 @@ Future<void> initializeChatSdk() async {
 | `pushKitCertName` | iOS PushKit 推送证书名称，类型为 `String?`，默认 `null`。配置 VoIP 推送时使用，必须在初始化前设置，运行期间不可修改。 |
 | `debugMode` | 设置是否开启调试日志，默认 `false`。 |
 | `extSettings` | 可选扩展配置，类型为 `Map<String, dynamic>?`。例如，通过 `ExtSettings.kDisableIosEnterBackground` 控制 iOS 插件的生命周期事件转发，见下文。 |
+
+:::tip
+`autoLoadConversations` 控制本地数据库中的会话是否全量加载到内存，`dataSyncType` 控制登录后服务端数据是否同步到本地，两者相互独立。使用分页时关闭前者，不会关闭会话同步；新增的 `autoLoadConversations` 和 `enableChatroomConversation` 都必须在初始化前确定，初始化后修改 Flutter 配置对象不会更新原生 SDK。
+:::
 
 **iOS 生命周期事件转发**
 
@@ -150,8 +157,8 @@ SDK 支持在初始化前通过 `ChatOptions.dataSyncType` 配置登录后自动
 
 配置规则如下：
 
-- 未设置 `dataSyncType` 或传入 `null` 时，Flutter 桥接不覆盖原生默认值。Flutter SDK 5.0.0 所依赖的 Android 原生 SDK 5.0.0 默认不同步任何数据类型，iOS 原生 SDK 5.0.0 默认同步会话列表。
-- 需要同步一种或多种数据时，使用 `ChatDataSyncType` 常量；多个类型通过按位或运算符 `|` 组合。为保证两端行为一致，建议显式配置所需类型。
+- 未设置 `dataSyncType` 或传入 `null` 时，Flutter 桥接不覆盖原生默认值。Flutter SDK 5.1.0 两端均默认同步会话列表。相较 5.0.0，Android 的默认值由不同步改为同步会话，iOS 默认值不变。
+- 需要显式指定同步范围时，使用 `ChatDataSyncType` 常量；多个类型通过按位或运算符 `|` 组合。好友和已加入群组不在默认同步范围内，需要同步时应显式包含对应类型。
 - 传入 `ChatDataSyncType.none`（值为 `0`）表示不自动同步。`null` 不等同于 `none`，也不能使用 Android 的空集合写法。
 
 以下示例表示登录成功后自动同步会话列表、好友列表和当前用户已加入的群组列表：
@@ -282,6 +289,9 @@ Future<void> readSynchronizedData(int type) async {
 | :--- | :--- | :--- |
 | [`withAppKey`](#初始化-sdk) | `ChatOptions` | 使用 App Key 创建初始化配置。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 Flutter SDK，返回 `Future<void>`。 |
+| [`autoLoadConversations`](#初始化-sdk) | `ChatOptions` | 控制是否自动全量加载本地会话，默认 `true`。 |
+| [`enableChatroomConversation`](#初始化-sdk) | `ChatOptions` | 控制本地会话列表是否包含聊天室会话，默认 `false`。 |
+| [`ntpServers`](#初始化-sdk) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`dataSyncType`](#配置方式) | `ChatOptions` | 配置登录后自动同步的数据类型，必须在初始化前设置。 |
 | [`options`](#同步的数据) | `ChatClient` | 获取 Flutter 侧保存的初始化配置，不是原生默认配置查询接口。 |
 | [`addConnectionEventHandler`](#初始化后设置监听) | `ChatClient` | 添加连接事件处理器，也可用于监听数据库打开和数据同步状态。 |

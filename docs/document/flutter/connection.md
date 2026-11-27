@@ -163,6 +163,18 @@ ChatClient.getInstance.removeConnectionEventHandler(connectionHandlerId);
 - 账号被删除、在其他设备登录或被强制退出。
 - 登录设备数、应用活跃用户数或服务配额达到限制。
 
+### 网络超时
+
+Flutter SDK 5.1.0 所依赖的 Android 原生 SDK 调整了以下超时时间，以改善弱网下的连接和请求处理：
+
+| 场景 | 5.0.0 | 5.1.0 |
+| :--- | :--- | :--- |
+| 整体登录 | 30 秒 | 70 秒 |
+| TCP/WebSocket 单次连接 | 5 秒 | 20 秒 |
+| 非附件类 HTTP 请求 | 10 秒 | 20 秒 |
+
+发送消息时内部等待重连、获取 DNS 列表的超时时间均为 20 秒。5.1.0 还修复了 Android 附件上传 HTTP 超时时间的单位换算错误。上述行为随原生依赖升级生效，Flutter 层未新增对应的超时设置 API；不要将非附件 HTTP 请求的 20 秒超时套用于附件上传。
+
 ### 连接断开和异常退出处理
 
 Flutter SDK 5.x 将断开回调统一为 `onDisconnected(int? errorCode, LoginExtensionInfo? info)`。`errorCode` 与原生 SDK 错误码一致并原样透传，未列出的原因码也可能收到。
@@ -286,7 +298,7 @@ await ChatClient.getInstance.init(options);
 ```
 
 :::warning
-Flutter SDK 5.0.0 所依赖的原生 SDK 5.0.0 默认同步范围不同：Android 端默认不同步任何数据，iOS 端默认同步会话。Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。Flutter 层未设置 `dataSyncType` 时使用所依赖原生 SDK 的默认值；建议显式配置该字段，避免同步行为随原生依赖版本变化。`loginWithToken` 返回成功也不表示业务数据已经同步完成；应结合 `onDatabaseOpened` 展示本地缓存，并在 `onDataSyncFinish` 成功后刷新最新数据。
+Flutter SDK 5.1.0 未设置 `dataSyncType` 时，Android 和 iOS 均默认同步会话列表。如需同步好友或已加入群组，应显式包含相应类型；如需关闭自动同步，应设置 `ChatDataSyncType.none`。`loginWithToken` 返回成功也不表示业务数据已经同步完成；应结合 `onDatabaseOpened` 展示本地缓存，并在 `onDataSyncFinish` 成功后刷新最新数据。
 :::
 
 ## 最佳实践

@@ -146,21 +146,17 @@ Future<void> declineContactInvitation(String userId) async {
 
 调用 `ChatContactManager#deleteContact` 删除好友。删除好友后，对方好友列表中的该用户也会被移除，双方的好友关系都会解除，对方会收到 `onContactDeleted` 事件。该操作无需对方确认，建议在应用侧增加二次确认。
 
-该接口通过 `keepConversation` 参数控制是否保留与该好友的本地会话。按照 Dart API 定义及 Android 端的实际行为：
+该接口通过 `keepConversation` 参数控制是否保留与该好友的本地会话：
 
 - `true`：保留本地会话及其消息。
 - `false`：不保留本地会话及其消息，默认值为 `false`。
-
-:::warning
-Flutter 的 iOS 实现中，`keepConversation` 的行为与 Android 相反：`true` 删除本地会话，`false` 保留本地会话。因此，以下示例不能直接用于 iOS 保留会话的场景。集成时请确认所用版本是否已修复，并使用测试账号验证。
-:::
 
 ```dart
 Future<void> deleteContact(String userId) async {
   try {
     await ChatClient.getInstance.contactManager.deleteContact(
       userId,
-      // 按 Dart API 定义保留会话；当前 iOS 桥接差异见上方警告。
+      // Android 和 iOS 均保留会话及其消息。
       keepConversation: true,
     );
     debugPrint('Contact deleted.');
@@ -226,7 +222,7 @@ Future<void> initializeChatSdk() async {
 ```
 
 :::tip
-必须在调用 `ChatClient.getInstance.init(options)` 前配置 `dataSyncType`。Flutter 层未设置时使用所依赖原生 SDK 的默认值。Flutter SDK 5.0.0 所依赖的 Android SDK 5.0.0 默认不同步任何数据，iOS SDK 5.0.0 默认同步会话；Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。两端均不默认同步好友列表，如需登录后自动同步好友，应显式包含 `ChatDataSyncType.contacts`。`loginWithToken` 返回成功不代表好友数据已同步完成，应等待包含 `ChatDataSyncType.contacts` 的同步完成事件后读取最新本地数据。
+必须在调用 `ChatClient.getInstance.init(options)` 前配置 `dataSyncType`。Flutter 层未设置时使用所依赖原生 SDK 的默认值。自 Flutter SDK 5.1.0 起，Android 和 iOS 均默认同步会话列表。两端均不默认同步好友列表，如需登录后自动同步好友，应显式包含 `ChatDataSyncType.contacts`。`loginWithToken` 返回成功不代表好友数据已同步完成，应等待包含 `ChatDataSyncType.contacts` 的同步完成事件后读取最新本地数据。
 :::
 
 #### 监听同步状态
@@ -455,7 +451,7 @@ Future<void> getLocalBlockIds() async {
 | [`removeEventHandler`](#监听好友关系和好友信息变更) | `ChatContactManager` | `void` | 按处理器 ID 移除联系人事件处理器。 |
 | [`addContact`](#添加好友) | `ChatContactManager` | `Future<void>` | 发起好友申请。 |
 | [`acceptInvitation`](#添加好友) / [`declineInvitation`](#添加好友) | `ChatContactManager` | `Future<void>` | 接受或拒绝好友申请。 |
-| [`deleteContact`](#删除好友) | `ChatContactManager` | `Future<void>` | 删除好友；`keepConversation` 的现有 iOS 桥接差异见对应章节。 |
+| [`deleteContact`](#删除好友) | `ChatContactManager` | `Future<void>` | 删除好友；`keepConversation` 为 `true` 时保留会话，默认为 `false`。 |
 | [`setContactRemark`](#设置好友备注) | `ChatContactManager` | `Future<void>` | 设置或清空好友备注。 |
 | [`withAppKey`](#登录后自动同步好友列表) | `ChatOptions` | `ChatOptions` | 创建 SDK 配置，在 `dataSyncType` 中包含 `ChatDataSyncType.contacts` 以开启好友数据同步。 |
 | [`dataSyncType`](#登录后自动同步好友列表) | `ChatOptions` | `int?`（属性） | 指定登录后自动同步的数据类型，多个类型使用按位或组合。 |
