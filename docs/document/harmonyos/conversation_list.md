@@ -146,16 +146,6 @@ loadNextPage();
 
 分页读取会将本页会话加入内存缓存，但读取本身不触发 `onConversationUpdate`。应用应直接使用 Promise 返回的本页结果更新界面。
 
-### 本地会话排序规则
-
-自 SDK v5.1.0 起，`getConversationsFromDB` 和 `getAllConversationsBySort` 使用一致的排序规则，按以下优先级依次比较：
-
-1. 置顶状态倒序：置顶会话排在非置顶会话之前。
-2. 最新一条消息的服务器时间倒序：置顶状态相同时，时间较新的会话排在前面。
-3. 会话 ID 倒序：上述条件相同时，按照会话 ID 倒序排列，比较时不区分大小写。
-
-上述规则不按置顶时间排序。`ChatOptions#setSortMessageByServerTime(false)` 不再改变本地会话列表排序；该配置仍用于本地消息的排序和搜索，详见 [搜索消息](message_search_local.html)。
-
 ### 一次性获取本地所有会话
 
 保持默认的自动全量加载配置时，调用 `getAllConversationsBySort` 可以加载本地会话并获取排序后的会话数组，返回 `Array<Conversation>`。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
@@ -175,6 +165,16 @@ let conversations: Array<Conversation> = ChatClient.getInstance()
 ```
 
 关闭自动全量加载后，`getAllConversationsBySort` 和 `getConversations` 返回当前已加载到内存的会话，可能不包含数据库中的全部会话。需要遍历本地数据库时，应调用 [分页获取本地会话](#分页获取本地会话) 接口，持续使用返回的游标获取后续页。
+
+### 本地会话排序规则
+
+自 SDK v5.1.0 起，`getConversationsFromDB` 和 `getAllConversationsBySort` 使用一致的排序规则，按以下优先级依次比较：
+
+1. 置顶状态倒序：置顶会话排在非置顶会话之前。
+2. 最新一条消息的服务器时间倒序：置顶状态相同时，时间较新的会话排在前面。
+3. 会话 ID 倒序：上述条件相同时，按照会话 ID 倒序排列，比较时不区分大小写。
+
+上述规则不按置顶时间排序。`ChatOptions#setSortMessageByServerTime(false)` 不再改变本地会话列表排序；该配置仍用于本地消息的排序和搜索，详见 [搜索消息](message_search_local.html)。
 
 ### 获取指定会话
 

@@ -96,7 +96,7 @@ ChatClient.getInstance.removeConnectionEventHandler(connectionHandlerId);
 
 自 Flutter SDK 5.1.0 起，可从本地数据库按需分页读取会话。调用 `ChatManager.getConversationsFromDB` 前，必须在初始化时将 `ChatOptions.autoLoadConversations` 设置为 `false`，关闭本地会话自动全量加载。
 
-SDK 优先返回置顶会话；置顶状态相同时，按最近一条消息的服务器时间戳降序排列；时间戳也相同时，按会话 ID 降序排列，比较会话 ID 时不区分大小写。
+排序规则详见 [本地会话排序规则](#本地会话排序规则)。
 
 先在应用统一的 SDK 初始化流程中配置：
 
@@ -150,7 +150,7 @@ Future<List<ChatConversation>> loadNextConversationPage({
 
 ### 一次性获取本地所有会话
 
-调用 `ChatManager#loadAllConversations` 可以获取本地会话列表。SDK 会优先从内存中获取；如果内存中没有会话，则从本地数据库加载。自 5.1.0 起，`isSort` 默认为 `true`，置顶会话优先，置顶和非置顶会话内部均按最近一条消息的时间戳倒序排列。传入 `isSort: false` 时不保证顺序。
+调用 `ChatManager#loadAllConversations` 可以获取本地会话列表。SDK 会优先从内存中获取；如果内存中没有会话，则从本地数据库加载。自 5.1.0 起，`isSort` 默认为 `true`，排序规则详见 [本地会话排序规则](#本地会话排序规则)。传入 `isSort: false` 时不保证顺序。
 
 ```dart
 final List<ChatConversation> conversations =
@@ -173,6 +173,17 @@ final List<ChatConversation> conversations =
 :::tip
 如果 `dataSyncType` 包含 `ChatDataSyncType.conversations`，应等待 `onDataSyncFinish` 成功后，再将 `loadAllConversations` 的结果视为本次登录后的最新服务端会话数据。
 :::
+
+### 本地会话排序规则
+
+`getConversationsFromDB` 和启用排序的 `loadAllConversations` 均按以下优先级排列会话：
+
+1. 置顶状态优先：置顶会话排在非置顶会话之前。
+2. 最近一条消息的时间戳倒序：置顶状态相同时，消息时间较新的会话排在前面。
+
+分页接口 `getConversationsFromDB` 使用最近一条消息的服务器时间戳；置顶状态和时间戳均相同时，继续按会话 ID 倒序排列，比较时不区分大小写。
+
+`loadAllConversations` 未约定时间戳相同时的会话 ID 顺序，不应依赖其结果与分页结果在这种情况下完全一致。该接口的 `isSort` 默认为 `true`；设为 `false` 时不保证返回顺序。
 
 ## 获取会话名称和头像
 
