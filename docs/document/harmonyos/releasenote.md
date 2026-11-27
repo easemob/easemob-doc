@@ -6,15 +6,15 @@
 
 **本地会话列表默认不包含聊天室会话**
 
-获取本地会话列表时，默认不再包含聊天室会话。应用可按需开启聊天室会话展示。该配置不影响聊天室消息的正常收发，SDK 仍会在内部创建和维护对应的聊天室会话。
+获取本地会话列表时，默认不再包含聊天室会话。如需展示，可在 SDK 初始化前调用 `ChatOptions#setEnableChatroomConversation(true)`，通过 `ChatOptions#isEnableChatroomConversation()` 查询当前配置。该配置不影响聊天室消息的正常收发，SDK 仍会在内部创建和维护对应的聊天室会话。
 
 详见 [会话相关选项](conversation_list.html#会话相关选项)。
 
 #### 新增特性
 
-- **[支持分页获取本地会话列表](conversation_list.html#分页获取本地会话)**：可按页读取本地数据库中的会话，通过返回的游标继续获取下一页，减少会话较多时的单次加载量。
-- **[支持配置本地会话加载方式](conversation_list.html#会话相关选项)**：可设置会话列表是否包含聊天室会话，以及登录成功后是否自动将全部本地会话加载到内存。使用分页加载时，建议关闭自动全量加载。
-- **[新增多设备群组信息更新通知](multi_device.html#监听多设备事件)**：当前用户在其他设备上更新群组信息时，本端可收到群组信息更新事件，便于应用刷新群组展示。
+- **[支持分页获取本地会话列表](conversation_list.html#分页获取本地会话)**：可按页读取本地数据库中的会话，减少会话较多时的单次加载量。新增 `ChatManager#getConversationsFromDB`，返回本页会话及下一页游标；游标为空字符串时，表示已到最后一页。
+- **[支持配置本地会话加载方式](conversation_list.html#会话相关选项)**：可控制登录成功后是否自动将全部本地会话加载到内存。新增 `ChatOptions#setAutoLoadAllConversations` 和 `isAutoLoadAllConversations`，用于设置或查询该配置，默认为 `true`；使用分页加载时建议设为 `false`。`ChatOptionsParam` 同时新增 `enableChatroomConversation` 和 `autoLoadAllConversations` 字段，支持通过初始化配置字面量设置聊天室会话展示和自动全量加载，默认值分别为 `false` 和 `true`。
+- **[新增多设备群组信息更新通知](multi_device.html#监听多设备事件)**：当前用户在其他设备上更新群组信息时，本端可收到通知，便于应用刷新群组展示。新增 `MultiDevicesEvent.GROUP_UPDATE`（事件码 `34`），通过 `MultiDevicesListener#onGroupEvent` 接收。
 
 #### 优化
 
@@ -42,16 +42,6 @@
 - 修复 `Chatroom#mutes()` 返回成员索引而非成员 ID 的问题。
 - 修复读取 `UserInfo.gender` 时，丢失 `0`、`1`、`2` 之外整数值的问题。
 - 修复 Token 过期时，`onTokenExpired` 在登出流程结束前回调，导致重新登录发生竞态并返回 `USER_ALREADY_LOGIN`（200）的问题。
-
-#### API 变更
-
-| 所属模块/类 | 新增 API 或配置 | 说明 |
-| :--- | :--- | :--- |
-| `ChatManager` | `getConversationsFromDB(cursor?: string, pageSize?: number): Promise<CursorResult<Conversation>>` | 分页获取本地会话。`cursor` 默认为空字符串，`pageSize` 默认为 `50`，取值范围为 `[1,100]`。返回结果中的游标为空字符串时，表示已到最后一页。 |
-| `ChatOptions` | `setEnableChatroomConversation(enableChatroomConversation: boolean): void` / `isEnableChatroomConversation(): boolean` | 设置或查询加载、上报及分页返回会话列表时是否包含聊天室会话，默认为 `false`。 |
-| `ChatOptions` | `setAutoLoadAllConversations(autoLoadAllConversations: boolean): void` / `isAutoLoadAllConversations(): boolean` | 设置或查询登录成功后是否自动将全部会话加载到内存，默认为 `true`。 |
-| `ChatOptionsParam` | `enableChatroomConversation?: boolean` / `autoLoadAllConversations?: boolean` | 支持在初始化配置字面量中设置上述选项，默认值分别为 `false` 和 `true`。 |
-| `MultiDevicesEvent` | `GROUP_UPDATE = 34` | 当前用户在其他设备上更新群组信息时，通过 `MultiDevicesListener#onGroupEvent` 通知本端。 |
 
 ## v5.0.0 Dev 2026-10-22（开发版）
 
