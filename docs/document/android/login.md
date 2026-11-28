@@ -112,7 +112,24 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 ## Token 续期
 
-自 Android SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。如需指定自定义 NTP 服务器，可在 SDK 初始化前调用 `EMOptions#setNtpServers(List<String>)` 设置服务器列表。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+自 Android SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+
+如需指定自定义 NTP 服务器，可在 SDK 初始化前调用 `EMOptions#setNtpServers(List<String>)` 设置服务器列表。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
+
+```java
+import java.util.Arrays;
+
+EMOptions options = new EMOptions();
+options.setAppKey("your-org#your-app");
+// 替换为实际可访问、支持 NTPv4 的服务器地址。
+options.setNtpServers(Arrays.asList(
+        "ntp.example.com",
+        "ntp-backup.example.com:123"
+));
+EMClient.getInstance().init(getApplicationContext(), options);
+```
+
+服务器地址格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置需在 SDK 初始化前设置。
 
 使用 Token 登录后，SDK 会通过 `EMConnectionListener#onTokenWillExpire` 和 `EMConnectionListener#onTokenExpired` 通知 Token 状态：
 
@@ -386,6 +403,7 @@ EMClient.getInstance()
 | [`loginWithToken`](#登录) | `EMClient` | 使用用户 ID 和 Token 登录。 |
 | [`isDatabaseOpened`](#登录完成前使用本地数据库) | `EMClient` | 判断当前是否存在可用的本地数据库上下文。 |
 | [`getAllConversationsBySort`](#登录完成前使用本地数据库) | `EMChatManager` | 获取置顶优先并按最后一条消息时间倒序排列的本地会话列表。 |
+| [`setNtpServers`](#token-续期) | `EMOptions` | 在初始化前配置自定义 NTP 服务器列表。 |
 | [`renewToken`](#token-续期) | `EMClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUser`](#获取当前登录的用户) | `EMClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `EMClient` | 判断当前用户是否已登录。 |

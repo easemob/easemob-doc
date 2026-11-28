@@ -295,8 +295,10 @@ const multiDevicesListener: MultiDevicesListener = {
         // 当前用户在其他设备解除群组全员禁言。
         break;
       case MultiDevicesEvent.GROUP_UPDATE:
-        // 自 SDK v5.1.0 起，当前用户在其他设备更新了群组信息。
-        // groupId 为发生变更的群组 ID，可按需获取最新群详情并刷新界面。
+        // 自 SDK v5.1.0 起支持此事件（事件码 34）。
+        // 同一账号在其他设备更新群组信息时，通过 MultiDevicesListener.onGroupEvent 接收此事件。
+        // 根据回调中的 groupId，调用 GroupManager.fetchGroupFromServer 获取最新详情并刷新界面。
+        // 群组详情变更通知通过 GroupListener.onSpecificationChanged 接收。
         break;
       default:
         break;

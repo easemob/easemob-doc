@@ -385,9 +385,11 @@ const multiDeviceListener: ChatMultiDeviceEventListener = {
       // 当前用户在其他设备设置了群成员自定义属性
       case ChatMultiDeviceEvent.GROUP_METADATA_CHANGED:
         break;
-      // 当前用户在其他设备更新了群组信息
-      // 自 5.1.0 起，Android 和 iOS 均支持，事件码为 34。
       case ChatMultiDeviceEvent.GROUP_UPDATE:
+        // 自 5.1.0 起，Android 和 iOS 均支持此事件（原生值 34）。
+        // 同一账号在其他设备更新群组信息时，通过 ChatMultiDeviceEventListener.onGroupEvent 接收此事件。
+        // 根据回调中的 groupId，调用 fetchGroupInfoWithoutMembersFromServer 获取最新详情并刷新界面。
+        // 群组详情变更通知通过 ChatGroupEventListener.onDetailChanged 接收。
         if (groupId) {
           void ChatClient.getInstance().groupManager
             .fetchGroupInfoWithoutMembersFromServer(groupId)
