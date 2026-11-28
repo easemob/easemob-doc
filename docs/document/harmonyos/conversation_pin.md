@@ -188,7 +188,7 @@ ChatClient.getInstance().removeMultiDevicesListener(multiDevicesListener);
 - 置顶会话位于非置顶会话之前。
 - 自 SDK v5.1.0 起，置顶状态相同的会话按最新一条消息的服务器时间倒序排列；时间相同时，再按会话 ID 倒序排列，比较时不区分大小写。
 
-该排序不受 `ChatOptions#setSortMessageByServerTime(false)` 影响，详见 [本地会话排序规则](conversation_list.html#本地会话排序规则)。
+该排序不受 `ChatOptions#setSortMessageByServerTime(false)` 影响，详见 [一次性获取本地所有会话](conversation_list.html#一次性获取本地所有会话)。
 
 展示会话列表时，建议直接使用 SDK 返回的顺序。如果业务需要按“最近置顶时间”排列多个置顶会话，可以使用 `Conversation#getPinnedTime()` 返回的时间戳对置顶会话进行倒序排列，使最近置顶的会话更靠前。
 

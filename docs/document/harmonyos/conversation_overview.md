@@ -100,7 +100,7 @@ SDK 提供以下本地会话列表读取方式：
 
 自 SDK v5.1.0 起，本地会话列表默认不包含聊天室会话，但 SDK 仍会在内部维护聊天室会话。可在初始化前通过 `setEnableChatroomConversation(true)` 开启展示。使用分页加载时，建议通过 `setAutoLoadAllConversations(false)` 关闭自动全量加载；关闭后，上述两个非分页接口只返回当前已加载的会话。配置及分页示例详见 [会话列表](conversation_list.html#会话相关选项)。
 
-本地会话列表排序不受 `setSortMessageByServerTime(false)` 影响，完整规则详见 [本地会话排序规则](conversation_list.html#本地会话排序规则)。
+本地会话列表排序不受 `setSortMessageByServerTime(false)` 影响，完整规则详见 [一次性获取本地所有会话](conversation_list.html#一次性获取本地所有会话)。
 
 ## 当前会话与未读数
 

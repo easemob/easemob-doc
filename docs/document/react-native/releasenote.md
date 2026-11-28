@@ -21,7 +21,7 @@ Android 登录后的默认数据同步范围由不同步改为同步会话列表
 #### 新增功能
 
 - **[支持分页获取本地会话](/document/react-native/conversation_list.html#分页获取本地会话)**：可按需加载数据库中的会话，减少首次加载的数据量。新增 `ChatManager.getConversationsFromDB`，返回会话列表及下一页游标；调用前必须在 SDK 初始化时设置 `ChatOptions.autoLoadConversations: false`。该选项默认为 `true`，仅在初始化时生效。
-- **[支持控制本地会话列表排序](/document/react-native/conversation_list.html#本地会话排序规则)**：可直接获取置顶优先、按最近一条消息时间倒序排列的列表，也可获取不保证顺序的列表。`ChatManager.getAllConversations` 新增 `isSort` 参数，默认为 `true`；传入 `false` 时不排序。
+- **[支持控制本地会话列表排序](/document/react-native/conversation_list.html#一次性获取本地所有会话)**：可直接获取置顶优先、按最近一条消息时间倒序排列的列表，也可获取不保证顺序的列表。`ChatManager.getAllConversations` 新增 `isSort` 参数，默认为 `true`；传入 `false` 时不排序。
 - **[支持查询群组邀请确认配置](/document/react-native/group_manage.html#邀请用户入群)**：Android 现在返回群组实际的邀请确认配置，与 iOS 一致。获取最新群组详情后，可通过 `ChatGroup.configs?.inviteNeedConfirm` 判断邀请用户入群是否需要对方确认，不再固定返回 `false`。
 - **[两端均支持群组信息更新的多设备事件](/document/react-native/multi_device.html#监听多设备事件)**：同一账号在其他设备更新群组信息时，Android 和 iOS 均可通过 `ChatMultiDeviceEventListener.onGroupEvent` 接收 `ChatMultiDeviceEvent.GROUP_UPDATE`（事件码 `34`），便于刷新群组信息。
 

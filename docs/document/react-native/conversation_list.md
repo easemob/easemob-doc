@@ -96,6 +96,12 @@ client.addConnectionListener(connectionListener);
 
 自 React Native SDK 5.1.0 起，可从本地数据库按需分页读取会话，减少首次加载的数据量。调用 `ChatManager#getConversationsFromDB` 前，必须在初始化时将 `ChatOptions.autoLoadConversations` 设置为 `false`，关闭本地会话自动全量加载。该配置与登录后自动同步服务端数据相互独立。
 
+会话按以下优先级依次排序：
+
+1. 置顶会话排在非置顶会话之前。
+2. 置顶状态相同时，按最新一条消息的服务器时间戳倒序排列。
+3. 置顶状态和时间戳均相同时，按会话 ID 倒序排列，比较时不区分大小写。
+
 先在应用统一的 SDK 初始化流程中配置，以下初始化示例与其他章节的初始化示例按需合并，不要重复初始化：
 
 ```typescript
@@ -155,11 +161,16 @@ async function loadNextConversationPage(
 | `ChatCursorResult.list` | 当前页的会话列表，类型为 `ChatConversation[] \| undefined`，可使用 `result.list ?? []` 读取。 |
 | `ChatCursorResult.cursor` | 下一页游标，类型为 `string`；返回空字符串表示已到最后一页。 |
 
-接口返回 `Promise<ChatCursorResult<ChatConversation>>`，失败时通过 `ChatError` 报错；无效游标对应原生错误码 `110`。不要依赖可选的 `totalCount` 判断是否还有下一页。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
+接口返回 `Promise<ChatCursorResult<ChatConversation>>`，失败时通过 `ChatError` 报错；无效游标对应原生错误码 `110`。不要依赖可选的 `totalCount` 判断是否还有下一页。
 
 ### 一次性获取本地所有会话
 
-调用 `ChatManager#getAllConversations` 可以获取本地会话列表。SDK 优先读取内存，内存中无会话时读取本地数据库。该接口返回 `Promise<ChatConversation[]>`，不会主动向服务器请求会话列表。自 5.1.0 起，`isSort` 默认为 `true`，两端均置顶优先，并按最近一条消息时间倒序排列；传入 `false` 时不保证顺序。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
+调用 `ChatManager#getAllConversations` 可以获取本地会话列表。SDK 优先读取内存，内存中无会话时读取本地数据库。该接口返回 `Promise<ChatConversation[]>`，不会主动向服务器请求会话列表。自 5.1.0 起，`isSort` 默认为 `true`，排序规则如下：
+
+- 置顶会话排在非置顶会话之前。
+- 置顶状态相同时，按最新一条消息的时间戳倒序排列。
+
+置顶状态和时间戳均相同的会话，不保证其排列顺序。
 
 ```typescript
 async function readAllConversations(): Promise<void> {
@@ -174,7 +185,7 @@ async function readAllConversations(): Promise<void> {
 }
 ```
 
-如需自行排序，可关闭 SDK 排序：
+如需自行排序，可传入 `false` 关闭 SDK 排序，此时不保证返回顺序：
 
 ```typescript
 const conversations = await ChatClient.getInstance().chatManager
@@ -182,17 +193,6 @@ const conversations = await ChatClient.getInstance().chatManager
 ```
 
 分页模式下，应使用 `getConversationsFromDB` 持续读取，避免调用全量接口抵消按需加载的效果。
-
-### 本地会话排序规则
-
-`getConversationsFromDB` 和启用排序的 `getAllConversations` 均按以下优先级排列会话：
-
-1. 置顶状态优先：置顶会话排在非置顶会话之前。
-2. 最近一条消息的时间戳倒序：置顶状态相同时，消息时间较新的会话排在前面。
-
-分页接口 `getConversationsFromDB` 使用最近一条消息的服务器时间戳；置顶状态和时间戳均相同时，继续按会话 ID 倒序排列，比较时不区分大小写。
-
-`getAllConversations` 未约定时间戳相同时的会话 ID 顺序，当多个会话的置顶状态和最新消息时间戳均相同时，`getAllConversations` 不保证这些会话的排列顺序与 `getConversationsFromDB` 的分页结果一致。`isSort` 默认为 `true`；设为 `false` 时，不保证返回顺序。
 
 ## 获取会话名称和头像
 

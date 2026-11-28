@@ -101,7 +101,13 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 ### 分页获取本地会话
 
-自 SDK v5.1.0 起，可以调用 `ChatManager#getConversationsFromDB` 从本地数据库分页获取会话，适合本地会话较多、需要按需加载的场景。返回结果为 `Promise<CursorResult<Conversation>>`，通过 `getResult()` 获取本页会话，通过 `getNextCursor()` 获取下一页游标。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
+自 SDK v5.1.0 起，可以调用 `ChatManager#getConversationsFromDB` 从本地数据库分页获取会话，适合本地会话较多、需要按需加载的场景。返回结果为 `Promise<CursorResult<Conversation>>`，通过 `getResult()` 获取本页会话，通过 `getNextCursor()` 获取下一页游标。
+
+会话按以下优先级依次排序：
+
+1. 置顶会话排在非置顶会话之前。
+2. 置顶状态相同时，按最新一条消息的服务器时间戳倒序排列。
+3. 置顶状态和时间戳均相同时，按会话 ID 倒序排列，比较时不区分大小写。
 
 建议在 SDK 初始化前调用 `ChatOptions#setAutoLoadAllConversations(false)`，关闭自动全量加载，以减少初始加载量和内存占用。保持默认值 `true` 时仍可调用分页接口，但其他会话列表读取路径可能触发全量加载。该配置只控制本地会话加载，不改变 `setDataSyncType` 指定的服务端数据同步范围。
 
@@ -148,7 +154,13 @@ loadNextPage();
 
 ### 一次性获取本地所有会话
 
-保持默认的自动全量加载配置时，调用 `getAllConversationsBySort` 可以加载本地会话并获取排序后的会话数组，返回 `Array<Conversation>`。排序规则详见 [本地会话排序规则](#本地会话排序规则)。
+保持默认的自动全量加载配置时，调用 `getAllConversationsBySort` 可以加载本地会话并获取排序后的会话数组，返回 `Array<Conversation>`。自 SDK v5.1.0 起，会话按以下优先级依次排序：
+
+1. 置顶会话排在非置顶会话之前。
+2. 置顶状态相同时，按最新一条消息的服务器时间戳倒序排列。
+3. 置顶状态和时间戳均相同时，按会话 ID 倒序排列，比较时不区分大小写。
+
+上述规则不按置顶时间排序。`ChatOptions#setSortMessageByServerTime(false)` 不改变本地会话列表排序；该配置仍用于本地消息的排序和搜索，详见 [搜索消息](message_search_local.html)。
 
 ```typescript
 let conversations: Array<Conversation> = ChatClient.getInstance()
@@ -165,16 +177,6 @@ let conversations: Array<Conversation> = ChatClient.getInstance()
 ```
 
 关闭自动全量加载后，`getAllConversationsBySort` 和 `getConversations` 返回当前已加载到内存的会话，可能不包含数据库中的全部会话。需要遍历本地数据库时，应调用 [分页获取本地会话](#分页获取本地会话) 接口，持续使用返回的游标获取后续页。
-
-### 本地会话排序规则
-
-自 SDK v5.1.0 起，`getConversationsFromDB` 和 `getAllConversationsBySort` 使用一致的排序规则，按以下优先级依次比较：
-
-1. 置顶状态倒序：置顶会话排在非置顶会话之前。
-2. 最新一条消息的服务器时间倒序：置顶状态相同时，时间较新的会话排在前面。
-3. 会话 ID 倒序：上述条件相同时，按照会话 ID 倒序排列，比较时不区分大小写。
-
-上述规则不按置顶时间排序。`ChatOptions#setSortMessageByServerTime(false)` 不再改变本地会话列表排序；该配置仍用于本地消息的排序和搜索，详见 [搜索消息](message_search_local.html)。
 
 ### 获取指定会话
 
@@ -279,7 +281,7 @@ ChatClient.getInstance()
 | [`setAutoLoadAllConversations`](#会话相关选项) / [`isAutoLoadAllConversations`](#会话相关选项) | `ChatOptions` | 设置或查询是否自动将全部本地会话加载到内存，默认开启。 |
 | [`getConversationsFromDB`](#分页获取本地会话) | `ChatManager` | 从本地数据库分页获取会话，并返回下一页游标。 |
 | [`getResult`](#分页获取本地会话) / [`getNextCursor`](#分页获取本地会话) | `CursorResult<Conversation>` | 获取本页会话或下一页游标。 |
-| [`setSortMessageByServerTime`](#本地会话排序规则) | `ChatOptions` | 设置本地消息排序和搜索的时间依据；不改变本地会话列表排序。 |
+| [`setSortMessageByServerTime`](#一次性获取本地所有会话) | `ChatOptions` | 设置本地消息排序和搜索的时间依据；不改变本地会话列表排序。 |
 | [`getConversations`](#一次性获取本地所有会话) | `ChatManager` | 获取当前已加载的本地会话数组，不保证返回顺序。 |
 | [`getConversation`](#获取指定会话) | `ChatManager` | 根据会话 ID 和类型获取或创建指定会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `ChatManager` | 获取排序后的本地会话数组。自动全量加载关闭时，只返回当前已加载的会话。 |
