@@ -65,7 +65,7 @@ const connectionListener: ChatConnectEventListener = {
       console.error('打开本地数据库失败：', username, errorCode);
       return;
     }
-    // username 对应的本地数据库已打开，读取本地会话
+    // username 对应的本地数据库已打开，读取本地会话（全量模式）
     void ChatClient.getInstance().chatManager.getAllConversations()
       .then((conversations) => {
         // 使用本地会话数据刷新页面
@@ -98,7 +98,24 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 `onDatabaseOpened` 返回成功只表示指定用户的本地数据库已经打开，不表示在线登录成功，也不能替代 `onConnected`。数据库打开后可以使用本地数据接口；调用需要访问服务器的接口前，仍需等待登录和连接成功。如果已配置登录后自动同步数据，应在相应的 `onDataSyncFinish` 回调返回成功后读取本次同步结果，详见 [离线消息和业务数据同步](connection.html#离线消息和业务数据同步)。
 :::
 
+分页模式（初始化时设置 `autoLoadConversations: false`）下，应将上述全量读取替换为 [分页获取本地会话](conversation_list.html#分页获取本地会话)。
+
 ## Token 续期
+
+自 React Native SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 以及应用处理续期、过期通知的流程。
+
+如需指定自定义 NTP 服务器，可在应用统一的 SDK 初始化流程中配置 `ChatOptions.ntpServers`：
+
+```typescript
+const options = ChatOptions.withAppKey({
+  appKey: 'your-org#your-app',
+  // 替换为实际可访问、支持 NTPv4 的服务器地址。
+  ntpServers: ['ntp.example.com', 'ntp-backup.example.com:123'],
+});
+await ChatClient.getInstance().init(options);
+```
+
+`ntpServers` 为可选的 `string[]`，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
 
 使用 Token 登录后，SDK 会通过 `ChatConnectEventListener#onTokenWillExpire` 和 `ChatConnectEventListener#onTokenDidExpire` 通知 Token 状态：
 
@@ -335,6 +352,7 @@ try {
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
 | [`onDatabaseOpened`](#登录完成前使用本地数据库) | `ChatConnectEventListener` | 通知本地数据库打开结果。 |
 | [`getAllConversations`](#登录完成前使用本地数据库) | `ChatManager` | 获取本地会话列表。 |
+| [`ntpServers`](#token-续期) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`renewToken`](#token-续期) | `ChatClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUsername`](#获取当前登录的用户) | `ChatClient` | 获取当前登录用户的用户 ID。 |
 | [`isConnected`](#获取登录状态) | `ChatClient` | 判断 SDK 是否已连接到 IM 服务器。 |

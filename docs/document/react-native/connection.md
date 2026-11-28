@@ -197,7 +197,7 @@ SDK 通过 JavaScript 回调通知连接状态，无需添加 Android 原生线�
 
 ### Token 生命周期
 
-SDK 会根据登录 Token 的有效期触发以下回调：
+自 5.1.0 起，原生 SDK 使用 NTP 校准后的时间判断 Token 是否过期，iOS 需开启 NTP 对时。自定义 NTP 服务器及续期流程详见 [Token 续期](login.html#token-续期)。SDK 会根据登录 Token 的有效期触发以下回调：
 
 - `ChatConnectEventListener#onTokenWillExpire`：Token 即将过期。SDK 通常在 Token 有效期达到约 80% 时触发该回调。
 - `ChatConnectEventListener#onTokenDidExpire`：Token 已过期，SDK 会退出登录。
@@ -223,9 +223,9 @@ try {
 
 会话、好友和已加入群组等数据的登录后自动同步状态，则通过 `ChatConnectEventListener#onDataSyncStart` 和 `ChatConnectEventListener#onDataSyncFinish` 监听。两类同步回调含义不同，不应混用。
 
-应用应在 `ChatClient#init` 前通过 `ChatOptions.dataSyncType` 显式配置需要自动同步的数据类型。`ChatDataSyncType` 为位掩码：`None`（0）表示不同步，`Conversations`（1）、`Contacts`（2）和 `JoinedGroups`（4）分别表示自动同步会话、好友和已加入群组，可通过按位或运算组合。
+React Native SDK 5.1.0 两端均默认在登录后同步会话列表。应用也可在 `ChatClient#init` 前通过 `ChatOptions.dataSyncType` 显式配置需要自动同步的数据类型。`ChatDataSyncType` 为位掩码：`None`（0）表示不同步，`Conversations`（1）、`Contacts`（2）和 `JoinedGroups`（4）分别表示自动同步会话、好友和已加入群组，可通过按位或运算组合。
 
-未设置 `dataSyncType` 时，SDK 不向原生层传入该字段，不能据此假定双端具有相同的默认同步范围。依赖自动同步的业务应显式配置；收到相应类型的 `onDataSyncFinish` 且 `errorCode === 0` 后，再从本地接口读取同步结果。本地数据库打开或登录 Promise 成功完成均不表示业务数据已经同步完成。
+未设置 `dataSyncType` 时，两端均使用原生 SDK 5.1.0 默认的会话同步配置。如需同步好友或已加入群组，应显式包含对应类型；如需关闭自动同步，应设置 `ChatDataSyncType.None`。收到相应类型的 `onDataSyncFinish` 且 `errorCode === 0` 后，再从本地接口读取同步结果。本地数据库打开或登录 Promise 成功完成均不表示业务数据已经同步完成。
 
 ## 最佳实践
 

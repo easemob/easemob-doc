@@ -163,18 +163,6 @@ ChatClient.getInstance.removeConnectionEventHandler(connectionHandlerId);
 - 账号被删除、在其他设备登录或被强制退出。
 - 登录设备数、应用活跃用户数或服务配额达到限制。
 
-### 网络超时
-
-Flutter SDK 5.1.0 所依赖的 Android 原生 SDK 调整了以下超时时间，以改善弱网下的连接和请求处理：
-
-| 场景 | 5.0.0 | 5.1.0 |
-| :--- | :--- | :--- |
-| 整体登录 | 30 秒 | 70 秒 |
-| TCP/WebSocket 单次连接 | 5 秒 | 20 秒 |
-| 非附件类 HTTP 请求 | 10 秒 | 20 秒 |
-
-发送消息时内部等待重连、获取 DNS 列表的超时时间均为 20 秒。5.1.0 还修复了 Android 附件上传 HTTP 超时时间的单位换算错误。上述行为随原生依赖升级生效，Flutter 层未新增对应的超时设置 API；不要将非附件 HTTP 请求的 20 秒超时套用于附件上传。
-
 ### 连接断开和异常退出处理
 
 Flutter SDK 5.x 将断开回调统一为 `onDisconnected(int? errorCode, LoginExtensionInfo? info)`。`errorCode` 与原生 SDK 错误码一致并原样透传，未列出的原因码也可能收到。

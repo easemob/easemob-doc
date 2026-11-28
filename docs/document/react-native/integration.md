@@ -36,7 +36,7 @@ SDK 通过 React Native 自动链接集成原生模块，无需手动复制 Andr
 
 ### Android 原生依赖
 
-SDK 已声明 `io.hyphenate:hyphenate-chat:5.0.0` 依赖。确保工程的依赖仓库包含 `google()` 和 `mavenCentral()`，由 Gradle 下载原生依赖，无需再次手动添加同一 IM SDK。
+SDK 已声明 `io.hyphenate:hyphenate-chat:5.1.0` 依赖。确保工程的依赖仓库包含 `google()` 和 `mavenCentral()`，由 Gradle 下载原生依赖，无需再次手动添加同一 IM SDK。
 
 确认 `android/gradle.properties` 中启用了新架构：
 
@@ -70,11 +70,11 @@ USE_FRAMEWORKS=dynamic bundle exec pod install
 cd ..
 ```
 
-`ChatSdk.podspec` 检测到 `spm_dependency` 和 `USE_FRAMEWORKS=dynamic` 后，会通过官方 SPM 包集成 `HyphenateChat`，版本约束为从 `5.0.0` 起的下一个次版本之前。首次安装需要联网下载包及二进制文件；安装后重新打开 `ios` 目录中的 `.xcworkspace`。
+`ChatSdk.podspec` 检测到 `spm_dependency` 和 `USE_FRAMEWORKS=dynamic` 后，会通过官方 SPM 包集成 `HyphenateChat`，版本约束为从 `5.1.0` 起的下一个次版本之前（`>= 5.1.0` 且 `< 5.2.0`）。首次安装需要联网下载包及二进制文件；安装后重新打开 `ios` 目录中的 `.xcworkspace`。
 
 **CocoaPods 方式**
 
-不使用动态框架，或宿主环境不满足 SPM 条件时，SDK 使用 CocoaPods 的 `HyphenateChat ~> 5.0.0` 依赖。在项目根目录执行：
+不使用动态框架，或宿主环境不满足 SPM 条件时，SDK 使用 CocoaPods 的 `HyphenateChat ~> 5.1.0` 依赖。在项目根目录执行：
 
 ```sh
 bundle install

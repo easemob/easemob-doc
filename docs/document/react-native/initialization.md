@@ -43,7 +43,15 @@ ChatClient.getInstance()
 | `deleteMessagesAsExitChatRoom` | 退出（主动和被动退出）聊天室时是否删除聊天消息。<br/> -（默认）`true`：删除；<br/> - `false`：保留。 |
 | `deleteMessagesAsExitGroup` | 退出（主动和被动退出）群组时是否删除聊天消息。<br/> -（默认）`true`：退出群组时删除群组消息；<br/> - `false`：退出群组时不删除群组消息。 |
 | `isChatRoomOwnerLeaveAllowed` | 是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；<br/> - `false`：不允许。消息是否删除由 `deleteMessagesAsExitChatRoom` 控制。 |
+| `dataSyncType` | 设置登录后自动同步的数据类型。未设置时，5.1.0 两端均默认同步会话列表；`ChatDataSyncType.None` 表示不同步。详见 [配置方式](#配置方式)。 |
+| `autoLoadConversations` | 自 5.1.0 起支持。设置是否自动将全部本地会话加载到内存，默认 `true`。使用本地会话分页前必须设为 `false`，仅在初始化时生效。详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
+| `enableChatroomConversation` | 自 5.1.0 起支持。设置本地会话列表是否包含聊天室会话，默认 `false`；如需包含，设为 `true`。仅在初始化时生效。 |
+| `ntpServers` | 自定义 NTP 服务器列表，类型为 `string[]`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效。详见 [Token 续期](login.html#token-续期)。 |
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
+
+:::tip
+`autoLoadConversations` 控制本地数据库中的会话是否全量加载到内存，`dataSyncType` 控制登录后服务端数据是否同步到本地，两者相互独立。分页模式下关闭自动全量加载，不会关闭会话同步。请在应用统一的初始化流程中确定这些配置；初始化后修改 JavaScript 配置对象不会更新原生 SDK。
+:::
 
 React Native SDK 5.x 不支持自动登录。初始化完成后，应用需主动调用 `ChatClient#loginWithToken` 登录，详见 [登录](login.html)。
 
@@ -94,7 +102,7 @@ SDK 支持在初始化前通过 `ChatOptions#dataSyncType` 配置登录后自动
 
 | 配置项                           | 登录后自动同步内容       | 本地读取方式                              | 说明                                                         |
 | -------------------------------- | ------------------------ | ----------------------------------------- | ------------------------------------------------------------ |
-| `ChatDataSyncType.Conversations` | 会话列表                 | `ChatManager#getAllConversations`         | 从本地读取会话列表，返回 `Promise<ChatConversation[]>`，不会主动向服务器请求会话列表。 |
+| `ChatDataSyncType.Conversations` | 会话列表 | `ChatManager#getAllConversations` 或 `ChatManager#getConversationsFromDB` | 分别用于全量读取或分页读取本地会话，不会主动向服务器请求会话列表；分页需在初始化时设置 `autoLoadConversations: false`。 |
 | `ChatDataSyncType.Contacts`      | 好友列表                 | `ChatContactManager#getAllContactsFromDB` | 从本地数据库读取好友 ID 列表，返回 `Promise<string[]>`。如需读取好友对象，可调用 `ChatContactManager#getAllContacts`。 |
 | `ChatDataSyncType.JoinedGroups`  | 当前用户已加入的群组列表 | `ChatGroupManager#getJoinedGroups`        | 从 SDK 本地数据中读取已加入的群组列表，返回 `Promise<ChatGroup[]>`。 |
 
@@ -108,7 +116,7 @@ SDK 支持在初始化前通过 `ChatOptions#dataSyncType` 配置登录后自动
 
 配置规则如下：
 
-- React Native SDK 5.0.0 未设置 `dataSyncType` 时，沿用原生 SDK 默认值：Android 5.0.0 默认不自动同步，iOS 5.0.0 默认同步会话列表。为保证双端行为一致，建议显式配置。
+- React Native SDK 5.1.0 未设置 `dataSyncType` 时，两端均默认同步会话列表。相较 5.0.0，Android 的默认值由不同步改为同步会话，iOS 默认值不变。好友和已加入群组不在默认同步范围内，需要同步时应显式包含对应类型。
 - 需要同步一种数据时，传入对应的 `ChatDataSyncType` 枚举值。
 - 需要同步多种数据时，通过按位或运算符 `|` 组合对应的枚举值。
 - 设置为 `ChatDataSyncType.None` 表示不自动同步。
@@ -180,6 +188,9 @@ try {
 | [`apnsCertName`](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS APNs 证书名称。 |
 | [`pushKitCertName`](/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称) | `ChatOptions` | `string \| undefined` | 设置 iOS PushKit 证书名称。 |
 | [`enableEmptyConversation`](conversation_list.html#会话相关选项) | `ChatOptions` | `boolean` | 设置获取本地会话时是否包含空会话。 |
+| [`autoLoadConversations`](#初始化-sdk) | `ChatOptions` | `boolean` | 控制是否自动全量加载本地会话，默认 `true`。 |
+| [`enableChatroomConversation`](#初始化-sdk) | `ChatOptions` | `boolean` | 设置本地会话列表是否包含聊天室会话，默认 `false`。 |
+| [`ntpServers`](#初始化-sdk) | `ChatOptions` | `string[] \| undefined` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`dataSyncType`](#设置登录后自动同步数据) | `ChatOptions` | `ChatDataSyncType \| undefined` | 登录后自动同步的数据类型配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | `boolean` | 用户信息自动管理的初始化配置。 |
 | [`addConnectionListener`](#初始化后设置监听) | `ChatClient` | `void` | 添加连接状态监听器。 |

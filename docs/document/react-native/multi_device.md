@@ -292,8 +292,6 @@ React Native SDK 5.x 的 iOS 桥接层因回调方法名与原生协议不匹配
 
 回调的参数均为可选参数，应按实际返回值处理。`onContactEvent` 的 `target` 为好友的用户 ID，`ext` 为事件扩展信息；`onGroupEvent` 的 `target` 为群组 ID；`onThreadEvent` 的 `target` 为消息话题 ID，不能按群组 ID 使用。`onGroupEvent` 和 `onThreadEvent` 的第三个参数 `usernames` 为与操作相关的用户 ID 列表。`onConversationEvent` 的 `convId` 和 `convType` 分别为会话 ID 和会话类型。
 
-`ChatMultiDeviceEvent.GROUP_UPDATE` 表示群组信息变更，`GROUP_METADATA_CHANGED` 表示群成员自定义属性变更，两者不应视为相同事件。
-
 ```typescript
 // 实现 ChatMultiDeviceEventListener 监听其他设备上的操作
 const multiDeviceListener: ChatMultiDeviceEventListener = {
@@ -376,6 +374,7 @@ const multiDeviceListener: ChatMultiDeviceEventListener = {
         break;
       // 当前用户在其他设备移除管理员
       case ChatMultiDeviceEvent.GROUP_REMOVE_ADMIN:
+
         break;
       // 当前用户在其他设备禁言用户
       case ChatMultiDeviceEvent.GROUP_ADD_MUTE:
@@ -387,7 +386,17 @@ const multiDeviceListener: ChatMultiDeviceEventListener = {
       case ChatMultiDeviceEvent.GROUP_METADATA_CHANGED:
         break;
       // 当前用户在其他设备更新了群组信息
+      // 自 5.1.0 起，Android 和 iOS 均支持，事件码为 34。
       case ChatMultiDeviceEvent.GROUP_UPDATE:
+        if (groupId) {
+          void ChatClient.getInstance().groupManager
+            .fetchGroupInfoWithoutMembersFromServer(groupId)
+            .then((group) => {
+              // 使用最新群组详情刷新界面。
+              console.log('最新群组信息：', group);
+            })
+            .catch((error: unknown) => console.error('获取群组详情失败：', error));
+        }
         break;
     }
   },
