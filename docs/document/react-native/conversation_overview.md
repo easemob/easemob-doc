@@ -57,7 +57,7 @@ SDK 通过会话类型和会话 ID 标识会话：
 
 - 单聊消息：根据对端用户 ID 创建或更新单聊会话。
 - 群聊消息：根据群组 ID 创建或更新群聊会话。
-- 聊天室消息：根据聊天室 ID 创建或更新聊天室会话。
+- 聊天室消息：根据聊天室 ID 创建或更新聊天室会话。自 5.1.0 起，本地会话列表默认不包含聊天室会话；如需包含，应在初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。
 
 收到在线消息后，SDK 会更新会话的最近一条消息、排序和未读数等本地状态。命令消息（透传消息）不会保存到 SDK 的本地数据库或内存消息缓存中。发送命令消息时，SDK 也不会为其创建本地会话。该限制不影响命令消息通过 `ChatCmdMessageBody` 和命令消息回调正常发送与接收。
 
@@ -81,7 +81,7 @@ React Native SDK 的 `convId` 和 `convType` 均为必需参数，`createIfNeed`
 
 ### 通过服务端同步更新会话列表
 
-在调用 `ChatClient#init` 前，设置 `ChatOptions.dataSyncType` 包含 `ChatDataSyncType.Conversations`。用户登录成功后，SDK 会自动同步服务端会话数据并写入本地。传入 `ChatDataSyncType.None` 可关闭自动数据同步。
+自 React Native SDK 5.1.0 起，两端均默认在登录后自动同步服务端会话数据并写入本地。也可在调用 `ChatClient#init` 前，通过 `ChatOptions.dataSyncType` 显式指定同步范围；传入 `ChatDataSyncType.None` 可关闭自动数据同步。
 
 ```typescript
 async function initializeConversationSync(): Promise<void> {
@@ -106,7 +106,10 @@ SDK 提供以下本地会话列表读取方式：
 
 | 方式 | API | 说明 |
 | :--- | :--- | :--- |
-| 本地列表 | `ChatManager#getAllConversations` | 返回 `Promise<ChatConversation[]>`，不返回以会话 ID 为键的 Map。React Native SDK 5.x 在两端的返回顺序如下：Android 返回置顶优先的排序结果；iOS 按最近一条消息的时间排序，不保证置顶优先。 |
+| 全量读取 | `ChatManager#getAllConversations(isSort = true)` | 返回 `Promise<ChatConversation[]>`。5.1.0 两端默认均置顶优先、按最近消息时间倒序排列；传入 `false` 时不保证顺序。 |
+| 分页读取 | `ChatManager#getConversationsFromDB({ cursor, pageSize })` | 返回 `Promise<ChatCursorResult<ChatConversation>>`。当前页通过 `list` 读取，`cursor` 为空字符串表示结束；调用前必须在初始化时设置 `autoLoadConversations: false`。 |
+
+分页参数、排序规则及完整示例详见 [会话列表](conversation_list.html)。关于本地会话列表是否包含聊天室会话以及是否包含空会话，详见 [会话相关选项](conversation_list.html#会话相关选项)。
 
 空会话是没有消息的会话。例如，会话中的全部消息过期、被清除或被撤回后，该会话可能成为空会话。
 
@@ -159,7 +162,7 @@ async function clearCurrentConversationUnread(convId: string): Promise<void> {
 
 | 功能 | 主要 API | 说明 |
 | :--- | :--- | :--- |
-| 会话列表 | `ChatManager#getAllConversations` | 从本地内存或数据库读取会话列表，详见 [会话列表](conversation_list.html)。 |
+| 会话列表 | `ChatManager#getAllConversations`、`ChatManager#getConversationsFromDB` | 全量或分页读取本地会话列表，详见 [会话列表](conversation_list.html)。 |
 | 会话未读数 | `ChatManager#getUnreadCount`、`ChatConversation#getUnreadCount`、`ChatManager#clearConversationUnreadMessageCount`、`ChatManager#clearAllConversationUnreadMessageCount` | 获取或清零会话未读数，详见 [会话未读数](conversation_unread.html)。 |
 | 会话删除 | `ChatManager#deleteConversation`、`ChatManager#deleteConversations`、`ChatManager#removeConversationFromServer`、`ChatManager#deleteAllMessageAndConversation` | 删除本地或服务端会话及消息，详见[删除会话](conversation_delete.html)。 |
 | 会话置顶 | `ChatManager#pinConversation` | 设置或取消会话置顶，详见 [置顶会话](conversation_pin.html)。 |
@@ -172,7 +175,7 @@ async function clearCurrentConversationUnread(convId: string): Promise<void> {
 
 #### 会话列表事件
 
-本地会话新增或删除时，SDK 会触发 `ChatMessageEventListener#onConversationsUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。
+本地会话新增或删除时，SDK 会触发 `ChatMessageEventListener#onConversationsUpdate`。该回调不返回完整会话列表，应用应按当前全量或分页模式重新读取并刷新界面；以下示例适用于全量模式，分页模式应重置游标并重新分页读取。
 
 ```typescript
 const manager = ChatClient.getInstance().chatManager;
@@ -210,7 +213,7 @@ manager.addMessageListener(conversationListener);
 
 ## 最佳实践
 
-- 在初始化 SDK 前配置 `ChatDataSyncType.Conversations`。当前账号的本地数据库成功打开后，即可读取已有的本地会话列表；如需本次从服务端同步的最新数据，应等待会话同步成功后再读取。如需关闭自动同步，显式配置 `ChatDataSyncType.None`。
+- 使用 5.1.0 默认会话同步配置，或在初始化前显式配置 `ChatDataSyncType.Conversations`。当前账号的本地数据库成功打开后，即可读取已有的本地会话列表；如需本次从服务端同步的最新数据，应等待会话同步成功后再读取。如需关闭自动同步，显式配置 `ChatDataSyncType.None`。
 - 注册 `ChatMessageEventListener`；收到 `ChatMessageEventListener#onConversationsUpdate` 后重新读取会话列表并刷新界面。
 - 页面或组件销毁时移除 `ChatMessageEventListener`、`ChatConnectEventListener` 和 `ChatMultiDeviceEventListener`，避免重复回调和内存泄漏。
 - 会话未读数清零与消息已读回执是两个独立功能：前者更新当前账号的会话未读状态，后者通知原消息发送方消息已读。
@@ -226,7 +229,9 @@ manager.addMessageListener(conversationListener);
 | [`withAppKey`](#通过服务端同步更新会话列表) | `ChatOptions` | 使用应用的 App Key 创建初始化配置。 |
 | [`dataSyncType`](#通过服务端同步更新会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#通过服务端同步更新会话列表) | `ChatClient` | 使用指定配置初始化 SDK。 |
-| [`getAllConversations`](#会话列表与空会话) | `ChatManager` | 获取本地会话列表。 |
+| [`getAllConversations`](#会话列表与空会话) | `ChatManager` | 全量读取本地会话，默认排序。 |
+| [`getConversationsFromDB`](conversation_list.html#分页获取本地会话) | `ChatManager` | 从本地数据库分页读取会话。 |
+| [`autoLoadConversations` / `enableChatroomConversation`](conversation_list.html#会话相关选项) | `ChatOptions` | 配置本地会话加载方式，以及本地会话列表是否包含聊天室会话。 |
 | [`enableEmptyConversation`](#会话列表与空会话) | `ChatOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`clearConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零所有会话的本地未读消息数。 |

@@ -95,7 +95,13 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 
 ### 分页获取本地会话
 
-自 SDK v5.1.0 起，你可以调用 `EMChatManager#asyncGetConversationsFromDB` 从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
+自 SDK v5.1.0 起，你可以调用 `EMChatManager#asyncGetConversationsFromDB` 从本地数据库分页获取会话列表。
+
+会话按以下优先级依次排序：
+
+1. 置顶会话排在非置顶会话之前。
+2. 置顶状态相同时，按最新一条消息的服务器时间戳倒序排列。
+3. 置顶状态和时间戳均相同时，按会话 ID 倒序排列，比较时不区分大小写。
 
 调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载。该选项默认为 `true`，即默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
 
@@ -187,7 +193,9 @@ EMClient.getInstance()
 调用 `getAllConversationsBySort` 可以获取经过排序的本地会话列表。该接口返回 `List<EMConversation>`，排序规则如下：
 
 - 置顶会话排在非置顶会话之前。
-- 置顶和非置顶会话内部均按照最后一条消息的时间戳倒序排列。
+- 置顶状态相同时，按最新一条消息的时间戳倒序排列。
+
+置顶状态和时间戳均相同的会话，不保证其排列顺序。
 
 ```java
 List<EMConversation> conversations = EMClient.getInstance()
@@ -195,7 +203,7 @@ List<EMConversation> conversations = EMClient.getInstance()
         .getAllConversationsBySort();
 ```
 
-如果不需要 SDK 返回排序后的列表，可以调用 `getAllConversations`，获取以会话 ID 为键的 `Map<String, EMConversation>`：
+如果不需要 SDK 返回排序后的列表，可以调用 `getAllConversations`，获取以会话 ID 为键的 `Map<String, EMConversation>`，不保证遍历顺序：
 
 ```java
 Map<String, EMConversation> conversationMap = EMClient.getInstance()

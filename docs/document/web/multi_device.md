@@ -125,6 +125,9 @@ client.addEventHandler('multiDevice', {
   },
   // 群组相关多设备事件
   onMultiDeviceGroup: event => {
+    // 同一账号在其他设备更新群组信息时，event.operation 为 'GROUP_UPDATED'。
+    // 根据 event.groupId，调用 client.groupManager.getGroupInfo({ groupId: event.groupId }) 获取最新详情并刷新界面。
+    // 使用 groupManager 前需在初始化时注册 GroupManager；群组详情变更通知通过 onGroupInfoChanged 接收。
     console.log('群组多设备操作:', event.operation);
     console.log('群组 ID:', event.groupId);
     console.log('相关用户 ID 列表:', event.userIds);

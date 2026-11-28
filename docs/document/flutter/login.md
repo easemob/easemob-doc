@@ -133,6 +133,8 @@ ChatClient.getInstance.addConnectionEventHandler(
 );
 ```
 
+自 Flutter SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该变化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
+
 ## 获取当前登录的用户
 
 调用 `ChatClient.getCurrentUserId` 获取 SDK 当前记录的用户 ID：

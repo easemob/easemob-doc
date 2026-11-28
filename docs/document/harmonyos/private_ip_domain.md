@@ -55,7 +55,7 @@ options.setRestServer('https://10.10.10.10:8080');
 
 可调用 `ChatOptions#getEnableDnsConfig()` 查询当前配置。返回 `false` 表示已关闭 SDK 的 DNS 地址配置，SDK 将使用业务设置的私有云服务器地址。
 
-自 SDK 1.15.0 起，数据同步 WebSocket 地址由 SDK 根据 REST 服务器配置自动获取，无需再单独设置服务器地址或端口。
+HarmonyOS SDK v5.1.0 及以上版本中，数据同步 WebSocket 地址根据当前 REST 地址自动派生，不再单独轮转，也无需单独设置服务器地址或端口。`setWebSocketServer` 和 `setWebSocketPort` 配置的是用于收发 IM 消息的长连接，不用于配置数据同步 WebSocket。
 
 ## 动态配置地址
 

@@ -180,7 +180,7 @@ chatClient.addConnectionListener(connectionListener);
 实现 `MultiDevicesListener`，然后调用 `ChatClient#addMultiDevicesListener` 添加监听器。该监听器提供以下回调：
 
 - `onContactEvent`：好友操作事件。
-- `onGroupEvent`：群组操作事件。
+- `onGroupEvent`：群组操作事件。自 SDK v5.1.0 起，新增 `MultiDevicesEvent.GROUP_UPDATE`（事件码 `34`），表示当前用户在其他设备上更新了群组信息。回调中的 `groupId` 为发生变更的群组 ID，应用可按需 [获取最新群组详情](group_attributes.html#获取群组详情) 并刷新界面。
 - `onConversationEvent`：会话操作事件。该回调为可选回调。
 - `onMessageRemoved`：其他设备单向删除服务端历史消息的事件。
 
@@ -294,6 +294,12 @@ const multiDevicesListener: MultiDevicesListener = {
       case MultiDevicesEvent.GROUP_REMOVE_ALL_BAN:
         // 当前用户在其他设备解除群组全员禁言。
         break;
+      case MultiDevicesEvent.GROUP_UPDATE:
+        // 自 SDK v5.1.0 起支持此事件（事件码 34）。
+        // 同一账号在其他设备更新群组信息时，通过 MultiDevicesListener.onGroupEvent 接收此事件。
+        // 根据回调中的 groupId，调用 GroupManager.fetchGroupFromServer 获取最新详情并刷新界面。
+        // 群组详情变更通知通过 GroupListener.onSpecificationChanged 接收。
+        break;
       default:
         break;
     }
@@ -344,7 +350,7 @@ chatClient.addMultiDevicesListener(multiDevicesListener);
 // chatClient.removeMultiDevicesListener(multiDevicesListener);
 ```
 
-收到会话事件后，可重新调用 `ChatManager#getConversations` 或 `ChatManager#getAllConversationsBySort` 读取本地会话列表并刷新界面。
+收到会话事件后，可重新读取本地会话列表并刷新界面。使用自动全量加载时，可调用 `ChatManager#getAllConversationsBySort`；使用分页展示时，应重置游标并重新 [分页获取本地会话](conversation_list.html#分页获取本地会话)。
 
 ## 典型示例
 
@@ -374,6 +380,7 @@ contactManager?.getSelfIdsOnOtherPlatform()
 | [`setLoginCustomExt`](#设置登录设备的扩展信息) | `ChatOptions` | 设置当前登录设备的扩展信息。 |
 | [`addConnectionListener`](#设置登录设备的名称) | `ChatClient` | 添加连接状态监听器，用于接收退出登录事件及设备信息。 |
 | [`removeConnectionListener`](#设置登录设备的名称) | `ChatClient` | 移除连接状态监听器。 |
+| [`GROUP_UPDATE`](#监听多设备事件) | `MultiDevicesEvent` | 当前用户在其他设备上更新群组信息，通过 `onGroupEvent` 通知本端。 |
 | [`addMultiDevicesListener`](#监听多设备事件) | `ChatClient` | 添加多设备事件监听器。 |
 | [`removeMultiDevicesListener`](#监听多设备事件) | `ChatClient` | 移除多设备事件监听器。 |
 

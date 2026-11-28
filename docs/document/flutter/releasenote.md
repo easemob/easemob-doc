@@ -1,5 +1,49 @@
 # Flutter IM SDK 更新日志
 
+## 5.1.0 Dev 2026-11-24 
+
+Flutter IM SDK 5.1.0 将 iOS 和 Android 原生 SDK 升级至 5.1.0，新增本地会话分页、会话排序控制和群共享文件下载回调，并统一两端的部分默认行为。
+
+#### 重要变更
+
+**本地会话列表默认不包含聊天室会话**
+
+获取本地会话列表时，默认不再包含聊天室会话。如需包含，请在 SDK 初始化前设置 `ChatOptions.enableChatroomConversation: true`。该配置仅在初始化时生效。
+
+详见 [会话相关选项](/document/flutter/conversation_list.html#会话相关选项)。
+
+**登录后默认自动同步会话列表**
+
+Android 登录后的默认数据同步范围由不同步改为同步会话列表，与 iOS 保持一致。未设置 `ChatOptions.dataSyncType` 或传入 `null` 时，两端均使用原生 SDK 5.1.0 默认的会话同步配置。如需关闭自动同步，应在初始化前显式设置 `ChatDataSyncType.none`；如需同时同步好友或已加入群组，应按位或组合相应类型。
+
+详见 [设置登录后自动同步数据](/document/flutter/initialization.html#设置登录后自动同步数据)。
+
+#### 新增功能
+
+- **[支持分页获取本地会话](/document/flutter/conversation_list.html#分页获取本地会话)**：可按需加载数据库中的会话，减少首次加载的数据量。新增 `ChatManager.getConversationsFromDB`，返回会话列表及下一页游标；调用前必须在 SDK 初始化时设置 `ChatOptions.autoLoadConversations: false`。该选项默认为 `true`，仅在初始化时生效。
+- **[支持控制本地会话列表排序](/document/flutter/conversation_list.html#一次性获取本地所有会话)**：可直接获取置顶优先、按最近一条消息时间倒序排列的列表，也可获取不保证顺序的列表。`ChatManager.loadAllConversations` 新增 `isSort` 参数，默认为 `true`；传入 `false` 时不排序。
+- **[支持查询群组邀请确认配置](/document/flutter/group_manage.html#邀请用户入群)**：Android 现在返回群组实际的邀请确认配置，与 iOS 一致。可通过 `ChatGroup.configs?.inviteNeedConfirm` 判断邀请用户入群是否需要对方确认，不再固定返回 `false`。
+- **[两端均支持群组信息更新的多设备事件](/document/flutter/multi_device.html#监听多设备事件)**：同一账号在其他设备更新群组信息时，Android 和 iOS 均可通过 `ChatMultiDeviceEventHandler.onGroupEvent` 接收 `ChatMultiDevicesEvent.GROUP_UPDATE`（原生事件码 `34`），便于刷新群组信息。
+- **[支持监听群共享文件下载进度和结果](/document/flutter/group_attributes.html#下载共享文件)**：新增 `ChatGroupManager.downloadCallback`，通过 `ChatDownloadCallback` 接收下载进度、成功和失败事件。调用 `downloadGroupSharedFile` 前需设置回调；该方法返回的 Future 在下载开始时完成，最终结果通过回调通知。
+
+#### 优化
+
+- **Token 过期判断更准确**：开启 NTP 对时后，两端均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。详见 [Token 续期](/document/flutter/login.html#token-续期)。
+- **提升本地数据库并发性能**：两端通过 WAL 模式改善数据库并发读写性能。
+- **优化 Android 网络超时设置**：整体登录超时从 30 秒延长至 70 秒，TCP/WebSocket 连接超时从 5 秒延长至 20 秒，非附件类 HTTP 请求超时从 10 秒延长至 20 秒；发送消息时的重连等待和 DNS 列表获取超时均为 20 秒。
+
+#### 修复
+
+- iOS：修复删除好友时保留会话选项的行为相反的问题。`ChatContactManager.deleteContact` 的 `keepConversation` 为 `true` 时保留会话，为 `false` 时删除会话，与 Android 和 API 定义一致。详见 [删除好友](/document/flutter/user_relationship.html#删除好友)。
+- 修复发送附件消息时不触发回调的问题：iOS 在关闭附件自动传输且 `remotePath` 为空时、Android 在附件远程路径无效时均能返回相应发送结果。详见 [上传消息附件至自有服务器](/document/flutter/message_send.html#上传消息附件至自有服务器)。
+- 修复消息事件和群组事件的顺序异常问题。
+- 修复私有化部署场景下重复配置服务器地址不生效的问题。
+- iOS：修复订阅用户信息后，调用 `fetchSubscribedUsers` 返回空数组的问题。
+- iOS：修复多设备同步后会话免打扰信息不正确的问题。
+- Android：修复从服务器获取历史消息后，会话最后一条消息未更新的问题。
+- Android：内容为空的消息不再存储，也不再通过消息接收回调通知应用。
+- Android：修复因秒到毫秒的换算错误，导致附件上传 HTTP 超时时间过短的问题。
+
 ## 5.0.0 Dev 2026-10-14
 
 FLutter IM SDK 5.0.0 是一次重要的架构升级，已将 iOS/Android 原生 SDK 依赖升级至 5.0.0。

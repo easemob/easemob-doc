@@ -35,7 +35,7 @@ const Map<ConversationMarkType, String> markMapping =
 
 调用 `ChatManager#addRemoteAndLocalConversationsMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记。单次最多可传入 20 个会话 ID。
 
-Flutter SDK 5.x 支持登录后自动同步会话列表及其标记并写入本地。应用应在初始化前通过 `ChatOptions.dataSyncType` 显式包含 `ChatDataSyncType.conversations`。同步完成后，可调用 `ChatManager#loadAllConversations` 获取本地会话列表，并通过 `ChatConversation.marks` 获取各会话的全部标记。
+自 Flutter SDK 5.1.0 起，两端默认在登录后自动同步会话列表及其标记并写入本地。也可在初始化前通过 `ChatOptions.dataSyncType` 显式包含 `ChatDataSyncType.conversations`；传入 `ChatDataSyncType.none` 则关闭自动同步。同步完成后，可调用 `ChatManager#loadAllConversations` 获取本地会话列表，并通过 `ChatConversation.marks` 获取各会话的全部标记。
 
 若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话。对应会话的标记也可能不再随服务端会话列表同步到本地。
 

@@ -184,7 +184,24 @@ try {
 }
 ```
 
-React Native SDK 5.0.0 可通过 `ChatGroup.configs` 读取群配置，但 Android 端返回的群对象不包含 `inviteNeedConfirm`，该字段会被填充为 `false`，不能据此判断服务端实际配置。
+自 React Native SDK 5.1.0 起，Android 和 iOS 均可读取群组实际的邀请确认配置。先获取最新群组详情，再通过 `group.configs?.inviteNeedConfirm` 判断是否需要被邀请人确认，不再使用 Android 5.0.0 固定返回的 `false`。群组或配置缺失时，应兼容 `undefined`，不要直接当作 `false`：
+
+```typescript
+async function readGroupInvitationConfig(groupId: string): Promise<void> {
+  try {
+    const group = await ChatClient.getInstance().groupManager
+      .fetchGroupInfoWithoutMembersFromServer(groupId);
+    const inviteNeedConfirm = group?.configs?.inviteNeedConfirm;
+    if (inviteNeedConfirm === undefined) {
+      console.log('未获取到群组邀请确认配置');
+      return;
+    }
+    console.log('邀请是否需要确认：', inviteNeedConfirm);
+  } catch (error: unknown) {
+    console.error('获取群组邀请确认配置失败：', error);
+  }
+}
+```
 
 :::tip
 React Native SDK 5.x 的 Android 端调用 `ChatGroupManager#declineInvitation` 时，邀请者 ID 未传递至原生接口。使用手动拒绝邀请流程前，请验证目标版本能否正确拒绝邀请并通知邀请人。
@@ -567,6 +584,7 @@ function removeGroupListener(): void {
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`inviteNeedConfirm`](#邀请用户入群) | `ChatGroupConfigs` | 从最新群组配置读取邀请用户入群是否需要确认。 |
 | [`ChatGroupManager#createGroupEx`](#创建群组) | `ChatGroupManager` | 异步创建群组。 |
 | [`ChatGroupManager#destroyGroup`](#解散群组) | `ChatGroupManager` | 解散群组。 |
 | [`ChatGroupManager#addMembers`](#邀请用户入群) / [`ChatGroupManager#inviteUser`](#邀请用户入群) | `ChatGroupManager` | 添加或邀请用户加入群组。 |

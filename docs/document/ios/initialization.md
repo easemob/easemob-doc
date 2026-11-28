@@ -47,6 +47,7 @@ if let error = EMClient.shared().initializeSDK(with: options) {
 | `enableChatroomConversation` | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 读取 `EMOptions#enableChatroomConversation` 属性可以查询当前配置。 |
 | `loadEmptyConversations` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 | `autoLoadConversations` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置。<br/> -（默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
+| `ntpServers` | 自定义 NTP 服务器列表，类型为 `NSArray<NSString *> *`。仅在初始化时生效，运行期间不可修改。地址格式及示例详见 [设置 NTP 服务器](#设置-ntp-服务器)。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
@@ -217,10 +218,29 @@ let joinedGroups = EMClient.shared().groupManager?.getJoinedGroups() ?? []
 
 用户信息自动管理与联系人自动同步相互独立。`EMOptions.enableUserInfo` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
 
+## 设置 NTP 服务器
+
+自 iOS SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+
+如需指定自定义 NTP 服务器，可通过 `EMOptions.ntpServers` 设置服务器列表，并在调用 `initializeSDKWithOptions:` 时传入。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
+
+```objectivec
+EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
+// 替换为实际可访问、支持 NTPv4 的服务器地址。
+options.ntpServers = @[@"ntp.example.com", @"ntp-backup.example.com:123"];
+EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
+if (error) {
+    NSLog(@"SDK 初始化失败：%@", error.errorDescription);
+}
+```
+
+`ntpServers` 为字符串数组，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
+| [`ntpServers`](#设置-ntp-服务器) | `EMOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`initializeSDKWithOptions`](#初始化-sdk) | `EMClient` | 初始化 iOS SDK 单例，Swift 调用为 `initializeSDK(with:)`。 |
 | [`dataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversations`](#登录后读取同步结果) | `IEMChatManager` | 读取本地会话列表。 |

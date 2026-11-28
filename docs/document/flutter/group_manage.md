@@ -155,6 +155,14 @@ try {
 - `inviteNeedConfirm = true` 且受邀用户开启自动接受群组邀请：SDK 自动接受邀请，受邀用户收到 `onAutoAcceptInvitationFromGroup` 回调。
 - `inviteNeedConfirm = true` 且受邀用户关闭自动接受群组邀请：受邀用户收到 `onInvitationReceivedFromGroup` 回调，可调用 `acceptInvitation` 或 `declineInvitation` 接受或拒绝邀请。
 
+自 Flutter SDK 5.1.0 起，Android 和 iOS 均可读取群组实际的邀请确认配置。获取最新群组详情后，通过 `group.configs?.inviteNeedConfirm` 判断是否需要被邀请人确认；配置缺失时不应将 `null` 直接视为 `false`：
+
+```dart
+final ChatGroup group = await ChatClient.getInstance.groupManager
+    .fetchGroupInfoFromServer(groupId);
+final bool? inviteNeedConfirm = group.configs?.inviteNeedConfirm;
+```
+
 `autoAcceptGroupInvitation` 默认为 `false`。如需自动接受群组邀请，应在 SDK 初始化前设置为 `true`：
 
 ```dart
@@ -468,6 +476,7 @@ ChatClient.getInstance.groupManager.removeEventHandler(handlerId);
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`inviteNeedConfirm`](#邀请用户入群) | `ChatGroupConfigs` | 从已获取的群组配置读取邀请用户入群是否需要确认。 |
 | [`createGroup`](#创建群组) | `ChatGroupManager` | 创建群组。 |
 | [`destroyGroup`](#解散群组) | `ChatGroupManager` | 解散群组。 |
 | [`addMembers`](#邀请用户入群) / [`inviterUser`](#邀请用户入群) | `ChatGroupManager` | 添加或邀请用户加入群组。 |

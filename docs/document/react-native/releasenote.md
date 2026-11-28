@@ -1,5 +1,55 @@
 # React-Native IM SDK 更新日志
 
+## v5.1.0 Dev
+
+React Native IM SDK 5.1.0 将 iOS 和 Android 原生 SDK 升级至 5.1.0，新增本地会话分页和排序控制，并统一两端的部分默认行为。
+
+#### 重要变更
+
+**本地会话列表默认不包含聊天室会话**
+
+获取本地会话列表时，默认不再包含聊天室会话。如需在本地会话列表中包含聊天室会话，请在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设为 `true`。该选项默认为 `false`，仅在初始化时生效。
+
+详见 [会话相关选项](/document/react-native/conversation_list.html#会话相关选项)。
+
+**登录后默认自动同步会话列表**
+
+Android 登录后的默认数据同步范围由不同步改为同步会话列表，与 iOS 保持一致。未设置 `ChatOptions.dataSyncType` 时，两端均使用原生 SDK 5.1.0 默认的会话同步配置。如需关闭自动同步，应在初始化前显式设置 `ChatDataSyncType.None`；如需同时同步好友或已加入群组，应按位或组合相应类型。
+
+详见 [设置登录后自动同步数据](/document/react-native/initialization.html#设置登录后自动同步数据)。
+
+#### 新增功能
+
+- **[支持分页获取本地会话](/document/react-native/conversation_list.html#分页获取本地会话)**：可按需加载数据库中的会话，减少首次加载的数据量。新增 `ChatManager.getConversationsFromDB`，返回会话列表及下一页游标；调用前必须在 SDK 初始化时设置 `ChatOptions.autoLoadConversations: false`。该选项默认为 `true`，仅在初始化时生效。
+- **[支持控制本地会话列表排序](/document/react-native/conversation_list.html#一次性获取本地所有会话)**：可直接获取置顶优先、按最近一条消息时间倒序排列的列表，也可获取不保证顺序的列表。`ChatManager.getAllConversations` 新增 `isSort` 参数，默认为 `true`；传入 `false` 时不排序。
+- **[支持查询群组邀请确认配置](/document/react-native/group_manage.html#邀请用户入群)**：Android 现在返回群组实际的邀请确认配置，与 iOS 一致。获取最新群组详情后，可通过 `ChatGroup.configs?.inviteNeedConfirm` 判断邀请用户入群是否需要对方确认，不再固定返回 `false`。
+- **[两端均支持群组信息更新的多设备事件](/document/react-native/multi_device.html#监听多设备事件)**：同一账号在其他设备更新群组信息时，Android 和 iOS 均可通过 `ChatMultiDeviceEventListener.onGroupEvent` 接收 `ChatMultiDeviceEvent.GROUP_UPDATE`（事件码 `34`），便于刷新群组信息。
+
+#### 优化
+
+- **Token 过期判断更准确**：使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。详见 [Token 续期](/document/react-native/login.html#token-续期)。
+- **提升本地数据库并发性能**：两端通过 WAL 模式改善数据库并发读写性能；Android 同时优化读连接池、好友备注按需加载及数据库迁移流程。
+- **优化 Android 网络超时设置**：整体登录超时从 30 秒延长至 70 秒，TCP/WebSocket 单次连接超时从 5 秒延长至 20 秒，非附件类 HTTP 请求超时从 10 秒延长至 20 秒；发送消息时的重连等待和 DNS 列表获取超时均为 20 秒。
+- **更新 Android 底层依赖和传输安全处理**：`libcipherdb.so` 使用 NDK 29 重新编译，DoH 分片上传启用证书校验。
+
+#### 修复
+
+- iOS：修复删除好友时保留会话选项的行为相反的问题。`ChatContactManager.deleteContact` 的 `keepConversation` 为 `true` 时保留会话，为 `false` 时删除会话。Android 端仍不使用该参数，详见 [删除好友](/document/react-native/user_relationship.html#删除好友)。
+- 修复群组消息与群组事件回调顺序异常，以及私有化部署场景下重复配置服务器地址不生效的问题。
+- 修复网络异常时可能无法重连的问题；Android 同时修复重连卡死及偶发死锁。
+- 修复发送附件消息时不触发回调的问题：iOS 在关闭附件自动上传且附件远端路径为空时、Android 在附件远端路径无效时均能返回相应发送结果。
+- Android：修复推送 Token 上传与登出并发时的崩溃，以及过期上传任务影响本地 Token 状态的问题。
+- Android：修复从服务器获取历史消息后，会话最后一条消息未更新的问题。
+- Android：修复收到空消息 ID 时的崩溃及空消息内容引发的数据库读写异常；内容为空的消息不再存储，也不再通过消息接收回调通知应用。
+- Android：修复未登录时调用 `ChatManager.deleteAllMessageAndConversation` 导致的崩溃。
+- Android：修复附件上传 HTTP 超时时间的单位换算错误。
+- Android：修复更新用户属性时的崩溃及用户属性回调中的 JNI 局部引用泄漏。
+- Android：修复退群或群组解散时本地清理与回调线程的时序崩溃，以及连接地址列表重置时的崩溃。
+- Android：修复 Presence 时间戳未初始化及分页大小未校验的问题。
+- iOS：修复遍历 DNS 配置时可能发生的崩溃。
+- iOS：修复订阅用户信息后，调用 `ChatUserInfoManager.fetchSubscribedUsers` 返回空数组的问题。
+- iOS：修复多设备同步后会话免打扰信息不正确的问题。
+
 ## v5.0.0 Dev 2026-10-14
 
 React Native IM SDK 5.0.0 是一次重要的架构升级。自本版本起，React Native SDK 版本号与依赖的原生 SDK 版本号保持同步，iOS 和 Android 原生 SDK 均升级至 5.0.0。

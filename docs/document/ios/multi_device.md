@@ -233,6 +233,9 @@ options.loginExtensionInfo = @"{\"source\":\"iPad\"}";
                                  groupId:(NSString *)groupId
                                      ext:(id)ext {
     // 处理群组创建、解散、加群、退群、邀请、禁言等事件。
+    // 同一账号在其他设备更新群组信息时，此回调收到 EMMultiDevicesEventGroupUpdate（事件码 34）。
+    // groupId 为群组 ID，可调用 getGroupSpecificationFromServerWithId:completion: 获取最新详情并刷新界面。
+    // 群组详情变更通知通过 EMGroupManagerDelegate 的 groupSpecificationDidUpdate: 接收。
 }
 
 - (void)multiDevicesChatThreadEventDidReceive:(EMMultiDevicesEvent)event

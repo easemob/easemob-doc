@@ -91,7 +91,13 @@ EMClient.shared().removeDelegate(syncListener)
 
 ### 分页获取本地会话
 
-自 SDK v5.1.0 起，你可以调用 `IEMChatManager#getConversationsFromDBWithCursor:pageSize:completion:` 方法，从本地数据库分页获取会话列表。SDK 优先返回置顶会话；对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
+自 SDK v5.1.0 起，你可以调用 `IEMChatManager#getConversationsFromDBWithCursor:pageSize:completion:` 方法，从本地数据库分页获取会话列表。
+
+会话按以下优先级依次排序：
+
+1. 置顶会话排在非置顶会话之前。
+2. 置顶状态相同时，按最新一条消息的服务器时间戳倒序排列。
+3. 置顶状态和时间戳均相同时，按会话 ID 倒序排列，比较时不区分大小写。
 
 调用该方法前，需在 SDK 初始化时将 `EMOptions#autoLoadConversations` 设置为 `NO`，关闭本地会话的自动全量加载。该属性默认值为 `YES`。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
 
@@ -164,18 +170,21 @@ let unreadConversations = EMClient.shared().chatManager?
 
 ### 一次性获取本地所有会话
 
-调用 `getAllConversations(_:)` 获取本地会话数组。传 `true` 时，SDK 返回排序后的会话列表：
+调用 `getAllConversations(_:)` 获取本地会话数组。传 `true` 时，SDK 返回排序后的会话列表，排序规则如下：
 
 - 置顶会话排在非置顶会话之前。
-- 置顶和非置顶会话内部均按最后一条消息的时间戳倒序排列。
-- 当前实现会过滤消息话题（thread）会话。
+- 置顶状态相同时，按最新一条消息的时间戳倒序排列。
+
+置顶状态和时间戳均相同的会话，不保证其排列顺序。
+
+当前实现会过滤消息话题（thread）会话。
 
 ```swift
 let conversations =
     EMClient.shared().chatManager?.getAllConversations(true) ?? []
 ```
 
-如果不需要 SDK 排序，可以调用无参数的 `getAllConversations()`。该方法在 iOS 实现中等同于 `getAllConversations(false)`：
+如果不需要 SDK 排序，可以调用无参数的 `getAllConversations()`，等同于 `getAllConversations(false)`，不保证返回顺序：
 
 ```swift
 let conversations =

@@ -1,5 +1,48 @@
 # HarmonyOS IM SDK 更新日志
 
+## v5.1.0 Dev 2026-11-25（开发版）
+
+#### 重大变更
+
+**本地会话列表默认不包含聊天室会话**
+
+获取本地会话列表时，默认不再包含聊天室会话。如需展示，可在 SDK 初始化前调用 `ChatOptions#setEnableChatroomConversation(true)`，通过 `ChatOptions#isEnableChatroomConversation()` 查询当前配置。该配置不影响聊天室消息的正常收发，SDK 仍会在内部创建和维护对应的聊天室会话。
+
+详见 [会话相关选项](conversation_list.html#会话相关选项)。
+
+#### 新增特性
+
+- **[支持分页获取本地会话列表](conversation_list.html#分页获取本地会话)**：可按页读取本地数据库中的会话，减少会话较多时的单次加载量。新增 `ChatManager#getConversationsFromDB`，返回本页会话及下一页游标；游标为空字符串时，表示已到最后一页。
+- **[支持配置本地会话加载方式](conversation_list.html#会话相关选项)**：可控制登录成功后是否自动将全部本地会话加载到内存。新增 `ChatOptions#setAutoLoadAllConversations` 和 `isAutoLoadAllConversations`，用于设置或查询该配置，默认为 `true`；使用分页加载时建议设为 `false`。`ChatOptionsParam` 同时新增 `enableChatroomConversation` 和 `autoLoadAllConversations` 字段，支持通过初始化配置字面量设置聊天室会话展示和自动全量加载，默认值分别为 `false` 和 `true`。
+- **[新增多设备群组信息更新通知](multi_device.html#监听多设备事件)**：当前用户在其他设备上更新群组信息时，本端可收到通知，便于应用刷新群组展示。新增 `MultiDevicesEvent.GROUP_UPDATE`（事件码 `34`），通过 `MultiDevicesListener#onGroupEvent` 接收。
+
+#### 优化
+
+- **[统一本地会话列表排序](conversation_list.html#一次性获取本地所有会话)**：依次按照置顶状态倒序、最新一条消息的服务器时间倒序、会话 ID 倒序排列，比较会话 ID 时不区分大小写。`ChatOptions#setSortMessageByServerTime(false)` 不再改变本地会话列表排序。
+- **[优化 Token 过期判断](login.html#token-续期)**：使用 NTP 校准后的时间判断登录 Token 是否过期或即将过期，降低设备时钟偏差导致的误判；Token 临近过期时，等待 NTP 对时完成后再通知应用。
+- **提升本地数据库并发读写性能**：数据库始终启用 WAL 模式，并使用容量为 3 的读连接池处理无过滤条件的会话加载。数据库升级到版本 51 时，补充会话最新消息的服务器时间，供会话排序和分页使用；已有对应字段时不再重复回填。
+- **调整网络超时时间**：TCP/WebSocket 单次连接超时由 5 秒调整为 20 秒，普通 HTTP 请求超时由 10 秒调整为 20 秒，整体登录超时由 30 秒调整为 70 秒；发送消息时的重连等待和 DNS 列表获取超时统一为 20 秒。
+- **[简化数据同步地址配置](private_ip_domain.html#静态配置-ip-地址-域名)**：数据同步 WebSocket 地址根据当前 REST 地址派生，不再单独轮转数据同步 WebSocket 地址。
+- **加强附件上传安全校验**：通过 DoH 进行分片上传时启用证书校验。
+
+#### 修复
+
+- 修复空消息体的消息写入本地数据库的问题，读取时丢弃消息体为空的历史记录。
+- 修复连接等待、信号量和定时器在取消或被新的连接尝试替换后复用，可能导致连接卡死的问题。
+- 修复当前用户退出群组或群组被销毁时，在错误线程清理本地数据的问题；分发群组或联系人事件前先处理积压的聊天消息，避免已删除的会话被旧消息重新创建。
+- 修复加密数据库在 WAL 模式下打开失败、重置连接链路时崩溃、未登录时删除全部消息崩溃，以及更新用户资料时崩溃的问题。
+- 修复附件远端路径无效时，发送消息没有返回结果的问题。
+- 修复重复设置私有 REST 服务地址不生效的问题。
+- 修复在线状态时间戳未初始化和分页大小未校验的问题。
+- 修复收到多设备免打扰变更后，本地会话免打扰状态未及时更新的问题。
+- 修复数据库升级到版本 51 时，已有 `latestmsgtime` 字段但缺少会话分页索引时，未补建索引的问题。
+- 修复修改消息扩展字段时，32 位范围内的整数被保存为 64 位整数，导致按 32 位整数读取失败的问题。
+- 修复登录认证失败后，`ChatClient#isDatabaseOpened()` 状态误报的问题。
+- 修复 Token 校时对象不可用或调用异常时未回退到本机时间的问题，以及无效 Token 过期时间和负有效期可能覆盖本地已保存状态的问题。
+- 修复 `Chatroom#mutes()` 返回成员索引而非成员 ID 的问题。
+- 修复读取 `UserInfo.gender` 时，丢失 `0`、`1`、`2` 之外整数值的问题。
+- 修复 Token 过期时，`onTokenExpired` 在登出流程结束前回调，导致重新登录发生竞态并返回 `USER_ALREADY_LOGIN`（200）的问题。
+
 ## v5.0.0 Dev 2026-10-22（开发版）
 
 HarmonyOS IM SDK 5.0.0 是一次重要的架构升级。本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [HarmonyOS IM SDK 1.x 到 5.0.0 迁移指南](migration_guide.html)。

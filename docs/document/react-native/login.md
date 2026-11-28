@@ -65,7 +65,7 @@ const connectionListener: ChatConnectEventListener = {
       console.error('打开本地数据库失败：', username, errorCode);
       return;
     }
-    // username 对应的本地数据库已打开，读取本地会话
+    // username 对应的本地数据库已打开，读取本地会话（全量模式）
     void ChatClient.getInstance().chatManager.getAllConversations()
       .then((conversations) => {
         // 使用本地会话数据刷新页面
@@ -97,6 +97,8 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 :::tip
 `onDatabaseOpened` 返回成功只表示指定用户的本地数据库已经打开，不表示在线登录成功，也不能替代 `onConnected`。数据库打开后可以使用本地数据接口；调用需要访问服务器的接口前，仍需等待登录和连接成功。如果已配置登录后自动同步数据，应在相应的 `onDataSyncFinish` 回调返回成功后读取本次同步结果，详见 [离线消息和业务数据同步](connection.html#离线消息和业务数据同步)。
 :::
+
+分页模式（初始化时设置 `autoLoadConversations: false`）下，应将上述全量读取替换为 [分页获取本地会话](conversation_list.html#分页获取本地会话)。
 
 ## Token 续期
 
@@ -130,6 +132,8 @@ const connectionListener: ChatConnectEventListener = {
 
 ChatClient.getInstance().addConnectionListener(connectionListener);
 ```
+
+自 React Native SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 以及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
 
 不再需要监听时，应使用 `ChatClient#removeConnectionListener` 移除同一个监听器对象。
 

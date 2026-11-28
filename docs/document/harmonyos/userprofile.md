@@ -55,7 +55,7 @@ ChatClient.getInstance().userInfoManager()?.updateUserInfo(userInfo)
 | `avatarurl` | String | 用户头像 URL。长度不超过 256 字符。                                                               |
 | `phone`     | String | 用户联系方式。长度不超过 32 字符。                                                                |
 | `mail`      | String | 用户邮箱。长度不超过 64 字符。                                                                    |
-| `gender`    | Int    | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 其他值无效。       |
+| `gender` | Int | 用户性别：<br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知。<br/> 其他整数值由业务侧自定义解释。 |
 | `sign`      | String | 用户签名。长度不超过 256 字符。                                                                   |
 | `birth`     | String | 用户生日。长度不超过 64 字符。                                                                    |
 | `ext`       | String | 扩展字段。                                                                                        |

@@ -132,11 +132,10 @@ try {
 
 调用 `ChatContactManager#deleteContact` 删除好友。删除好友后，对方好友列表中的该用户也会被移除，双方的好友关系都会解除，对方会收到 `onContactDeleted` 事件。该操作无需对方确认，建议在应用侧增加二次确认。
 
-`deleteContact` 的第二个参数 `keepConversation` 的公开含义为是否保留本地会话，默认值为 `false`，但当前版本存在以下平台差异：
+`deleteContact` 的第二个参数 `keepConversation` 表示是否保留本地会话，默认值为 `false`。5.1.0 及以上版本的实际平台行为如下：
 
-:::tip
-React Native SDK 5.x 的 Android 端不使用 `keepConversation` 参数，删除好友时会同时删除对应的本地单聊会话及消息。iOS 端将该参数用于控制是否删除会话：`true` 表示删除，`false` 表示保留，与公开的保留语义相反。因此，不能通过该参数实现双端一致的会话保留行为。
-:::
+- iOS：`true` 保留本地会话及其消息，`false` 删除本地会话及其消息。
+- Android：仍不使用该参数，删除好友时会同时删除对应的本地单聊会话及消息。
 
 以下示例仅展示删除好友，本地会话和消息的处理见上述平台说明：
 
@@ -203,7 +202,7 @@ try {
 }
 ```
 
-`dataSyncType` 为可选的位掩码配置；省略时 SDK 使用原生平台的默认同步范围，并不保证同步好友数据，因此请显式设置。若还需同步会话或已加入群组，可与 `ChatDataSyncType.Conversations`、`ChatDataSyncType.JoinedGroups` 按位或组合。`enableUserInfo` 默认为 `false`，控制 [用户信息自动管理](userinfo_provider.html)，不替代好友列表同步配置。初始化完成后再修改原配置对象，不会重新配置已初始化的 SDK。
+`dataSyncType` 为可选的位掩码配置；5.1.0 省略时两端均默认只同步会话列表，不默认同步好友，因此需显式包含 `ChatDataSyncType.Contacts`。若还需同步会话或已加入群组，可与 `ChatDataSyncType.Conversations`、`ChatDataSyncType.JoinedGroups` 按位或组合。`enableUserInfo` 默认为 `false`，控制 [用户信息自动管理](userinfo_provider.html)，不替代好友列表同步配置。初始化完成后再修改原配置对象，不会重新配置已初始化的 SDK。
 
 **监听好友数据同步状态**
 

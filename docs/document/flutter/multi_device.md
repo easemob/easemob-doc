@@ -391,8 +391,10 @@ final handler = ChatMultiDeviceEventHandler(
         debugPrint('其他设备更新群成员属性：$groupId');
         break;
       case ChatMultiDevicesEvent.GROUP_UPDATE:
-        // 该多设备事件当前仅 iOS 下发，跨端感知群信息变化时
-        // 应使用 ChatGroupEventHandler.onSpecificationDidUpdate。
+        // 自 5.1.0 起，Android 和 iOS 均支持此事件（原生值 34）。
+        // 收到后可重新获取群组详情并刷新界面。
+        // 同一账号在其他设备更新群组信息时，本端通过 ChatMultiDeviceEventHandler.onGroupEvent 接收 ChatMultiDevicesEvent.GROUP_UPDATE 事件。
+        // 应用可根据回调中的群组 ID，调用 fetchGroupInfoFromServer 获取最新详情并刷新界面。群组详情变更通知则通过 ChatGroupEventHandler.onSpecificationDidUpdate 接收。
         debugPrint('其他设备更新群信息：$groupId');
         break;
       case ChatMultiDevicesEvent.GROUP_DISABLED:
@@ -516,8 +518,6 @@ ChatClient.getInstance.addMultiDeviceEventHandler(
 // 不再需要监听时移除。
 ChatClient.getInstance.removeMultiDeviceEventHandler(multiDeviceHandlerId);
 ```
-
-`GROUP_UPDATE` 当前仅由 iOS 原生 SDK 下发。需要跨端感知群信息变化时，应监听 `ChatGroupEventHandler.onSpecificationDidUpdate`，不要依赖该多设备事件。
 
 `GROUP_DISABLED` 和 `GROUP_ABLE` 已在 `ChatMultiDevicesEvent` 中定义，但当前 Flutter V5 的原生事件值到 Dart 枚举的转换未映射这两个事件，示例仅保留其处理位置，不代表当前能够收到对应通知。无法识别的原生事件值会转换为 `UnKnow`，应做好兜底处理。
 

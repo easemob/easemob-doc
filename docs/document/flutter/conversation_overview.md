@@ -76,7 +76,7 @@ final ChatConversation? conversation =
 
 ### 通过服务端同步更新会话列表
 
-Flutter SDK 5.x 可通过 `ChatOptions.dataSyncType` 指定登录成功后自动同步的数据类型。应在调用 `ChatClient#init` 前显式包含 `ChatDataSyncType.conversations`；如设置为 `ChatDataSyncType.none`，则关闭自动数据同步。
+自 Flutter SDK 5.1.0 起，两端默认在登录成功后自动同步会话数据。也可在调用 `ChatClient#init` 前通过 `ChatOptions.dataSyncType` 显式指定同步范围；如设置为 `ChatDataSyncType.none`，则关闭自动数据同步。
 
 ```dart
 final ChatOptions options = ChatOptions.withAppKey(
@@ -90,7 +90,7 @@ await ChatClient.getInstance.init(options);
 应用可通过 `ConnectionEventHandler#onDataSyncStart` 和 `onDataSyncFinish` 监听会话数据同步状态。当 `type` 包含 `ChatDataSyncType.conversations` 且 `error` 为 `null` 时，可以从本地读取最新会话列表。
 
 :::tip
-Flutter SDK 5.0.0 所依赖的 Android SDK 5.0.0 默认不同步任何数据，iOS SDK 5.0.0 默认同步会话。Android SDK 自 5.1.0 起默认同步会话，与 iOS SDK 一致。未设置 `dataSyncType` 时，Flutter 层使用所依赖原生 SDK 的默认值，建议显式配置同步范围。
+Flutter SDK 5.1.0 未设置 `dataSyncType` 时，两端均默认同步会话列表；Android 5.0.0 原有的默认不同步行为已改变。如需同步好友或已加入群组，应显式包含相应的同步类型。
 :::
 
 ## 会话列表与空会话
@@ -99,8 +99,11 @@ SDK 提供以下本地会话读取方式：
 
 | 方式 | API | 说明 |
 | :--- | :--- | :--- |
-| 全部会话 | `loadAllConversations()` | 优先从内存中获取全部本地会话；内存中无会话时从本地数据库加载。 |
+| 全部会话 | `loadAllConversations({bool isSort = true})` | 优先读取内存，内存中无会话时读取本地数据库；默认置顶优先并按最近消息时间倒序排列，`isSort: false` 时不保证顺序。 |
+| 数据库分页 | `getConversationsFromDB(...)` | 自 5.1.0 起支持。需在初始化时设置 `autoLoadConversations: false`，详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | 单个会话 | `getConversation(...)` | 按会话 ID 和类型读取本地会话，并可通过 `createIfNeed` 控制不存在时是否创建。 |
+
+自 5.1.0 起，本地会话列表默认不包含聊天室会话。如需包含，应在初始化前设置 `ChatOptions.enableChatroomConversation: true`，详见 [会话相关选项](conversation_list.html#会话相关选项)。
 
 空会话是没有消息的会话。例如，会话中的全部消息过期、被清除或被撤回后，该会话可能成为空会话。
 
@@ -157,7 +160,7 @@ try {
 
 #### 会话列表事件
 
-本地会话发生变化时，SDK 会触发 `ChatEventHandler#onConversationsUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。
+本地会话发生变化时，SDK 会触发 `ChatEventHandler#onConversationsUpdate`。该回调不返回完整会话列表，应用应重新读取本地会话列表并刷新界面。以下示例适用于全量加载模式；分页模式下应重置游标并调用 `getConversationsFromDB` 重新加载。
 
 ```dart
 const String chatHandlerId = 'conversation_update_handler';
@@ -195,8 +198,8 @@ ChatClient.getInstance.chatManager.removeEventHandler(chatHandlerId);
 
 ## 最佳实践
 
-- 在初始化 SDK 前显式配置 `ChatDataSyncType.conversations`，并在会话数据同步成功后读取本地会话列表；如需关闭自动同步，配置 `ChatDataSyncType.none`。
-- 展示会话列表时调用 `loadAllConversations`；如需特定排序、分页或筛选，在应用层处理。
+- 使用 5.1.0 默认的会话同步配置，或在初始化前显式配置同步范围；在会话数据同步成功后读取最新本地会话。如需关闭自动同步，配置 `ChatDataSyncType.none`。
+- 全量展示时使用默认排序的 `loadAllConversations()`；按需分页时初始化设置 `autoLoadConversations: false`，再调用 `getConversationsFromDB`。分页模式收到列表更新事件后应重置游标并重新读取。
 - 注册 `ChatEventHandler`；收到 `onConversationsUpdate` 后重新读取会话列表并刷新界面。
 - 页面或组件销毁时移除 `ChatEventHandler`、`ConnectionEventHandler` 和 `ChatMultiDeviceEventHandler`，避免重复回调和内存泄漏。
 - 会话未读数清零与消息已读回执是两个独立功能：前者更新当前账号的会话未读状态，后者通知原消息发送方消息已读。
@@ -212,6 +215,9 @@ ChatClient.getInstance.chatManager.removeEventHandler(chatHandlerId);
 | [`dataSyncType`](#通过服务端同步更新会话列表) | `ChatOptions` | 设置登录成功后自动同步的数据类型。 |
 | [`init`](#通过服务端同步更新会话列表) | `ChatClient` | 使用指定配置初始化 SDK。 |
 | [`loadAllConversations`](#会话列表与空会话) | `ChatManager` | 获取本地全部会话。 |
+| [`getConversationsFromDB`](conversation_list.html#分页获取本地会话) | `ChatManager` | 从本地数据库分页获取会话。 |
+| [`autoLoadConversations`](conversation_list.html#会话相关选项) | `ChatOptions` | 控制本地会话自动全量加载，默认 `true`。 |
+| [`enableChatroomConversation`](#会话列表与空会话) | `ChatOptions` | 控制本地会话列表是否包含聊天室会话，默认 `false`。 |
 | [`enableEmptyConversation`](#会话列表与空会话) | `ChatOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
 | [`clearConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零指定会话的本地未读消息数。 |
 | [`clearAllConversationUnreadMessageCount`](#当前会话与未读数) | `ChatManager` | 清零所有会话的本地未读消息数。 |

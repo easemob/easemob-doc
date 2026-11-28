@@ -155,6 +155,8 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
 EMClient.getInstance().addConnectionListener(connectionListener);
 ```
 
+自 Android SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
+
 ## 获取当前登录的用户
 
 调用 `EMClient#getCurrentUser` 获取当前登录用户的用户 ID：
