@@ -43,7 +43,7 @@ Future<void> initializeChatSdk() async {
 | `dataSyncType` | 设置登录后自动同步的数据类型，类型为 `int?`。通过 `ChatDataSyncType.conversations`、`contacts`、`joinedGroups` 按位或组合；`ChatDataSyncType.none` 表示不同步。默认 `null`，详见 [配置方式](#配置方式)。 |
 | `autoLoadConversations` | 自 5.1.0 起支持。设置是否自动将全部本地会话加载到内存，默认 `true`。使用本地会话分页前必须设为 `false`；仅在初始化前设置生效。详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | `enableChatroomConversation` | 自 5.1.0 起支持。设置本地会话列表是否包含聊天室会话，默认 `false`；如需包含，设为 `true`。仅在初始化前设置生效。 |
-| `ntpServers` | 自定义 NTP 服务器列表，类型为 `List<String>?`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效，运行时不可修改。详见 [Token 续期](login.html#token-续期)。 |
+| `ntpServers` | 自定义 NTP 服务器列表，类型为 `List<String>?`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效，运行时不可修改。详见 [设置 NTP 服务器](#设置-ntp-服务器)。 |
 | `enableEmptyConversation` | 设置从本地数据库加载会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 | `requireDeliveryAck` | 设置是否发送消息送达回执，默认 `false`。|
 | `enableUserInfo` | 设置是否开启用户信息自动管理，默认 `false`。详见 [用户信息自动管理](userinfo_provider.html)。 |
@@ -283,6 +283,23 @@ Future<void> readSynchronizedData(int type) async {
 
 用户信息自动管理与联系人自动同步相互独立。`ChatOptions.enableUserInfo` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
 
+## 设置 NTP 服务器
+
+自 Flutter SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该变化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
+
+如需指定自定义 NTP 服务器，可在初始化前配置 `ChatOptions.ntpServers`。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
+
+```dart
+final ChatOptions options = ChatOptions.withAppKey(
+  'your-org#your-app',
+  // 替换为实际可访问、支持 NTPv4 的服务器地址。
+  ntpServers: ['ntp.example.com', 'ntp-backup.example.com:123'],
+);
+await ChatClient.getInstance.init(options);
+```
+
+`ntpServers` 为可选的 `List<String>`，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |
@@ -291,7 +308,7 @@ Future<void> readSynchronizedData(int type) async {
 | [`init`](#初始化-sdk) | `ChatClient` | 初始化 Flutter SDK，返回 `Future<void>`。 |
 | [`autoLoadConversations`](#初始化-sdk) | `ChatOptions` | 控制是否自动全量加载本地会话，默认 `true`。 |
 | [`enableChatroomConversation`](#初始化-sdk) | `ChatOptions` | 控制本地会话列表是否包含聊天室会话，默认 `false`。 |
-| [`ntpServers`](#初始化-sdk) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
+| [`ntpServers`](#设置-ntp-服务器) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`dataSyncType`](#配置方式) | `ChatOptions` | 配置登录后自动同步的数据类型，必须在初始化前设置。 |
 | [`options`](#同步的数据) | `ChatClient` | 获取 Flutter 侧保存的初始化配置，不是原生默认配置查询接口。 |
 | [`addConnectionEventHandler`](#初始化后设置监听) | `ChatClient` | 添加连接事件处理器，也可用于监听数据库打开和数据同步状态。 |

@@ -102,21 +102,6 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 ## Token 续期
 
-自 React Native SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 以及应用处理续期、过期通知的流程。
-
-如需指定自定义 NTP 服务器，可在应用统一的 SDK 初始化流程中配置 `ChatOptions.ntpServers`：
-
-```typescript
-const options = ChatOptions.withAppKey({
-  appKey: 'your-org#your-app',
-  // 替换为实际可访问、支持 NTPv4 的服务器地址。
-  ntpServers: ['ntp.example.com', 'ntp-backup.example.com:123'],
-});
-await ChatClient.getInstance().init(options);
-```
-
-`ntpServers` 为可选的 `string[]`，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
-
 使用 Token 登录后，SDK 会通过 `ChatConnectEventListener#onTokenWillExpire` 和 `ChatConnectEventListener#onTokenDidExpire` 通知 Token 状态：
 
 - `onTokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `ChatClient#renewToken` 更新。
@@ -147,6 +132,8 @@ const connectionListener: ChatConnectEventListener = {
 
 ChatClient.getInstance().addConnectionListener(connectionListener);
 ```
+
+自 React Native SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 以及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
 
 不再需要监听时，应使用 `ChatClient#removeConnectionListener` 移除同一个监听器对象。
 
@@ -352,7 +339,6 @@ try {
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
 | [`onDatabaseOpened`](#登录完成前使用本地数据库) | `ChatConnectEventListener` | 通知本地数据库打开结果。 |
 | [`getAllConversations`](#登录完成前使用本地数据库) | `ChatManager` | 获取本地会话列表。 |
-| [`ntpServers`](#token-续期) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`renewToken`](#token-续期) | `ChatClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUsername`](#获取当前登录的用户) | `ChatClient` | 获取当前登录用户的用户 ID。 |
 | [`isConnected`](#获取登录状态) | `ChatClient` | 判断 SDK 是否已连接到 IM 服务器。 |

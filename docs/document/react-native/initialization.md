@@ -46,7 +46,7 @@ ChatClient.getInstance()
 | `dataSyncType` | 设置登录后自动同步的数据类型。未设置时，5.1.0 两端均默认同步会话列表；`ChatDataSyncType.None` 表示不同步。详见 [配置方式](#配置方式)。 |
 | `autoLoadConversations` | 自 5.1.0 起支持。设置是否自动将全部本地会话加载到内存，默认 `true`。使用本地会话分页前必须设为 `false`，仅在初始化时生效。详见 [分页获取本地会话](conversation_list.html#分页获取本地会话)。 |
 | `enableChatroomConversation` | 自 5.1.0 起支持。设置本地会话列表是否包含聊天室会话，默认 `false`；如需包含，设为 `true`。仅在初始化时生效。 |
-| `ntpServers` | 自定义 NTP 服务器列表，类型为 `string[]`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效。详见 [Token 续期](login.html#token-续期)。 |
+| `ntpServers` | 自定义 NTP 服务器列表，类型为 `string[]`。元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需支持 NTPv4。仅在初始化时生效。详见 [设置 NTP 服务器](#设置-ntp-服务器)。 |
 | `enableEmptyConversation` | 设置获取本地会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> -（默认）`false`：不包含空会话。 |
 
 :::tip
@@ -179,6 +179,23 @@ try {
 }
 ```
 
+## 设置 NTP 服务器
+
+自 React Native SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 以及应用处理续期、过期通知的流程。
+
+如需指定自定义 NTP 服务器，可在应用统一的 SDK 初始化流程中配置 `ChatOptions.ntpServers`。请将以下配置合并到现有初始化流程中，不要重复初始化：
+
+```typescript
+const options = ChatOptions.withAppKey({
+  appKey: 'your-org#your-app',
+  // 替换为实际可访问、支持 NTPv4 的服务器地址。
+  ntpServers: ['ntp.example.com', 'ntp-backup.example.com:123'],
+});
+await ChatClient.getInstance().init(options);
+```
+
+`ntpServers` 为可选的 `string[]`，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 返回类型 | 说明 |
@@ -190,7 +207,7 @@ try {
 | [`enableEmptyConversation`](conversation_list.html#会话相关选项) | `ChatOptions` | `boolean` | 设置获取本地会话时是否包含空会话。 |
 | [`autoLoadConversations`](#初始化-sdk) | `ChatOptions` | `boolean` | 控制是否自动全量加载本地会话，默认 `true`。 |
 | [`enableChatroomConversation`](#初始化-sdk) | `ChatOptions` | `boolean` | 设置本地会话列表是否包含聊天室会话，默认 `false`。 |
-| [`ntpServers`](#初始化-sdk) | `ChatOptions` | `string[] \| undefined` | 在初始化时配置自定义 NTP 服务器列表。 |
+| [`ntpServers`](#设置-ntp-服务器) | `ChatOptions` | `string[] \| undefined` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`dataSyncType`](#设置登录后自动同步数据) | `ChatOptions` | `ChatDataSyncType \| undefined` | 登录后自动同步的数据类型配置。 |
 | [`enableUserInfo`](#开启用户信息自动管理) | `ChatOptions` | `boolean` | 用户信息自动管理的初始化配置。 |
 | [`addConnectionListener`](#初始化后设置监听) | `ChatClient` | `void` | 添加连接状态监听器。 |

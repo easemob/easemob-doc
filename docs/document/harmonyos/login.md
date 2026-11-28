@@ -96,20 +96,7 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 ## Token 续期
 
-使用 Token 登录后，SDK 会通过 `ConnectionListener#onTokenWillExpire` 和 `ConnectionListener#onTokenExpired` 通知 Token 状态。自 SDK v5.1.0 起，SDK 使用 NTP 校准后的时间判断 Token 是否过期或即将过期，降低设备时钟偏差带来的影响；Token 临近过期时，会等待对时完成后再通知。校时对象不可用或调用异常时，回退到本机时间。
-
-如需指定自定义 NTP 服务器，可在 SDK 初始化前调用 `ChatOptions#setNtpServers`。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
-
-```typescript
-const options: ChatOptions = new ChatOptions({
-  appKey: 'your-org#your-app'
-});
-// 替换为实际可访问的 NTP 服务器地址。
-options.setNtpServers(['ntp.example.com', 'ntp-backup.example.com']);
-ChatClient.getInstance().init(context, options);
-```
-
-`setNtpServers` 接受单个服务器地址（`string`）或地址列表（`string[]`），仅在 SDK 初始化前设置生效。不设置时使用 SDK 内置的 NTP 服务器。也可通过 `ChatOptionsParam.ntpServers` 在初始化配置中传入，使用 `getNtpServers()` 查询已配置的地址。
+使用 Token 登录后，SDK 会通过 `ConnectionListener#onTokenWillExpire` 和 `ConnectionListener#onTokenExpired` 通知 Token 状态。
 
 应用可按以下方式处理回调：
 
@@ -151,6 +138,8 @@ let connectionListener: ConnectionListener = {
 
 ChatClient.getInstance().addConnectionListener(connectionListener);
 ```
+
+自 HarmonyOS SDK v5.1.0 起，SDK 使用 NTP 校准后的时间判断 Token 是否过期或即将过期，降低设备时钟偏差带来的影响。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
 
 ## 获取当前登录的用户
 
@@ -352,7 +341,6 @@ ChatClient.getInstance()
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
 | [`isDatabaseOpened`](#登录完成前使用本地数据库) | `ChatClient` | 判断当前是否存在可用的本地数据库上下文。 |
 | [`getAllConversationsBySort`](#登录完成前使用本地数据库) | `ChatManager` | 获取排序后的本地会话列表，排序依据为置顶状态、最新消息服务器时间和会话 ID。 |
-| [`setNtpServers`](#token-续期) | `ChatOptions` | 在初始化前配置自定义 NTP 服务器地址或地址列表。 |
 | [`renewToken`](#token-续期) | `ChatClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUser`](#获取当前登录的用户) | `ChatClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `ChatClient` | 判断当前用户是否已登录。 |

@@ -114,22 +114,6 @@ iOS SDK V5 支持在在线登录完成前打开当前用户的本地数据库。
 
 ## Token 续期
 
-自 iOS SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
-
-如需指定自定义 NTP 服务器，可通过 `EMOptions.ntpServers` 设置服务器列表，并在调用 `initializeSDKWithOptions:` 时传入。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
-
-```objectivec
-EMOptions *options = [EMOptions optionsWithAppkey:@"your-org#your-app"];
-// 替换为实际可访问、支持 NTPv4 的服务器地址。
-options.ntpServers = @[@"ntp.example.com", @"ntp-backup.example.com:123"];
-EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
-if (error) {
-    NSLog(@"SDK 初始化失败：%@", error.errorDescription);
-}
-```
-
-`ntpServers` 为字符串数组，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。
-
 使用 Token 登录后，SDK 会通过 `tokenWillExpire` 和 `tokenDidExpire` 通知 Token 状态：
 
  - `tokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `renewToken` 更新。
@@ -155,6 +139,8 @@ if (error) {
     // Token 已过期。获取新 Token 后，必要时重新调用异步登录接口。
 }
 ```
+
+自 iOS SDK 5.1.0 起，启用 NTP 对时后，SDK 使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该优化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
 
 ## 获取当前登录的用户
 
@@ -322,7 +308,6 @@ options.loginExtensionInfo = @"login from iOS";
 | API 名称 | 所属模块/类型 | 说明 |
 | :--- | :--- | :--- |
 | [`loginWithUsername`](#登录) | `EMClient` | 使用用户 ID 和 Token 异步登录。 |
-| [`ntpServers`](#token-续期) | `EMOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`renewToken`](#token-续期) | `EMClient` | 异步更新当前登录使用的 Token。 |
 | [`currentUsername`](#获取当前登录的用户) | `EMClient` | 获取当前登录用户的用户 ID。 |
 | [`isLoggedIn`](#获取登录状态) | `EMClient` | 判断当前用户是否已登录。 |

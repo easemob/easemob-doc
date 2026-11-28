@@ -102,21 +102,6 @@ ChatClient.getInstance.removeConnectionEventHandler(handlerId);
 
 ## Token 续期
 
-自 Flutter SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该变化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。
-
-如需指定自定义 NTP 服务器，可在初始化前配置 `ChatOptions.ntpServers`。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
-
-```dart
-final ChatOptions options = ChatOptions.withAppKey(
-  'your-org#your-app',
-  // 替换为实际可访问、支持 NTPv4 的服务器地址。
-  ntpServers: ['ntp.example.com', 'ntp-backup.example.com:123'],
-);
-await ChatClient.getInstance.init(options);
-```
-
-`ntpServers` 为可选的 `List<String>`，元素格式为 `host` 或 `host:port`，默认端口为 123，服务器需符合 NTPv4（RFC 5905）。该配置仅在初始化时生效，不能在运行时修改。更多初始化配置详见 [初始化 SDK](initialization.html#初始化-sdk)。
-
 使用 Token 登录后，SDK 会通过 `ConnectionEventHandler.onTokenWillExpire` 和 `ConnectionEventHandler.onTokenDidExpire` 通知 Token 状态：
 
 - `onTokenWillExpire`：Token 即将过期时触发。应用应从业务服务器获取新 Token，并调用 `ChatClient.renewToken` 更新。
@@ -147,6 +132,8 @@ ChatClient.getInstance.addConnectionEventHandler(
   connectionEventHandler,
 );
 ```
+
+自 Flutter SDK 5.1.0 起，启用 NTP 对时后，Android 和 iOS 原生 SDK 均使用 NTP 校准后的时间判断用户 Token 是否过期，减少设备本地时间偏差造成的误判。该变化不改变业务服务器签发 Token 及应用处理续期、过期通知的流程。关于 NTP 服务器的设置，详见 [初始化文档](initialization.html#设置-ntp-服务器)。
 
 ## 获取当前登录的用户
 
@@ -344,7 +331,6 @@ try {
 | [`loginWithToken`](#登录) | `ChatClient` | 使用用户 ID 和 Token 登录。 |
 | [`onDatabaseOpened`](#登录完成前使用本地数据库) | `ConnectionEventHandler` | 通知指定用户的本地数据库已经打开。 |
 | [`loadAllConversations`](#登录完成前使用本地数据库) | `ChatManager` | 获取置顶优先并按最后一条消息时间倒序排列的本地会话列表。 |
-| [`ntpServers`](#token-续期) | `ChatOptions` | 在初始化时配置自定义 NTP 服务器列表。 |
 | [`renewToken`](#token-续期) | `ChatClient` | 更新当前登录使用的 Token。 |
 | [`getCurrentUserId`](#获取当前登录的用户) | `ChatClient` | 获取 SDK 当前记录的用户 ID。 |
 | [`currentUserId`](#获取当前登录的用户) | `ChatClient` | 获取 Dart 侧缓存的当前用户 ID。 |

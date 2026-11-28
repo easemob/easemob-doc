@@ -54,6 +54,7 @@ ChatClient.getInstance().init(context, {
 | `setAutoLoadAllConversations(autoLoad: boolean)` | 自 SDK v5.1.0 起支持，设置登录后是否自动将全部本地会话加载到内存，默认为 `true`。也可通过 `ChatOptionsParam.autoLoadAllConversations` 配置，通过 `isAutoLoadAllConversations()` 查询。分页加载时建议设为 `false`，应在 `init` 前设置。详见 [会话相关选项](conversation_list.html#会话相关选项)。 |
 | `setSortMessageByServerTime(sortByServerTime: boolean)` | 设置本地消息排序和搜索使用服务器时间还是本地创建时间，默认为 `true`。自 SDK v5.1.0 起，该配置不改变本地会话列表排序，详见 [一次性获取本地所有会话](conversation_list.html#一次性获取本地所有会话)。 |
 | `setEnableUserInfo(enableUserInfo: boolean)` | 设置是否开启用户信息自动管理。<br/>- `true`：开启。<br/>-（默认）`false`：关闭。必须在 `init` 前设置。 |
+| `setNtpServers(servers: string \| string[])` | 设置自定义 NTP 服务器地址或地址列表，须在 SDK 初始化前调用。也可通过 `ChatOptionsParam.ntpServers` 配置，详见 [设置 NTP 服务器](#设置-ntp-服务器)。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
@@ -224,12 +225,30 @@ ChatClient.getInstance().groupManager()?.getAllGroups()
 
 用户信息自动管理与联系人自动同步相互独立。`ChatOptions#setEnableUserInfo` 默认关闭；开启后会在登录成功时同步当前用户的属性，但不会在登录时自动获取所有好友的昵称和头像。其他用户属性通过消息触发、主动获取等方式更新，详见 [用户信息自动管理](userinfo_provider.html)。
 
+## 设置 NTP 服务器
+
+自 SDK v5.1.0 起，SDK 使用 NTP 校准后的时间判断 Token 是否过期或即将过期，降低设备时钟偏差带来的影响；Token 临近过期时，会等待对时完成后再通知。校时对象不可用或调用异常时，回退到本机时间。
+
+如需指定自定义 NTP 服务器，可在 SDK 初始化前调用 `ChatOptions#setNtpServers`。请将以下配置合并到应用统一的 SDK 初始化流程中，不要重复初始化。
+
+```typescript
+const options: ChatOptions = new ChatOptions({
+  appKey: 'your-org#your-app'
+});
+// 替换为实际可访问的 NTP 服务器地址。
+options.setNtpServers(['ntp.example.com', 'ntp-backup.example.com']);
+ChatClient.getInstance().init(context, options);
+```
+
+`setNtpServers` 接受单个服务器地址（`string`）或地址列表（`string[]`），仅在 SDK 初始化前设置生效。不设置时使用 SDK 内置的 NTP 服务器。也可通过 `ChatOptionsParam.ntpServers` 在初始化配置中传入，使用 `getNtpServers()` 查询已配置的地址。
+
 ## 接口列表
 
 <div class="harmonyos-api-list-table">
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
+| [`setNtpServers`](#设置-ntp-服务器) | `ChatOptions` | 在初始化前配置自定义 NTP 服务器地址或地址列表。 |
 | [`init`](#初始化-sdk) | `ChatClient` | 使用指定配置初始化 HarmonyOS SDK 单例。 |
 | [`setDataSyncType`](#配置方式) | `ChatOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversationsBySort`](#登录后读取同步结果) | `ChatManager` | 从本地数据库读取排序后的会话列表。 |
